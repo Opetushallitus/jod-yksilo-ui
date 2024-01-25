@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "deque-systems.vscode-axe-linter",
+    "ZixuanChen.vitest-explorer",
+    "ms-playwright.playwright",
+    "GitHub.vscode-github-actions",
+    "GitHub.vscode-pull-request-github",
+    "MS-vsliveshare.vsliveshare"
+  ]
+}
