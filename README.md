@@ -28,3 +28,24 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+## Accessibility testing
+
+## Axe
+
+Axe is used automatically when run in development mode.
+When starting the development server you can see findings of Axe, if any, on the console for e.g when missing `<main>-tag`:
+
+```
+New axe issues
+moderate: Document should have one main landmark https://dequeuniversity.com/rules/axe/4.8/landmark-one-main?application=axeAPI
+moderate: All page content should be contained by landmarks https://dequeuniversity.com/rules/axe/4.8/region?application=axeAPI
+```
+
+### Axe DevTools 
+
+Useful browser extension to use
+
+* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/axe-devtools/)
+* [Chromium](https://chromewebstore.google.com/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd)
