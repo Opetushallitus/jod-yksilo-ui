@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
 import App from './App.tsx';
+import './i18n/config';
 import './index.css';
 
 const router = createBrowserRouter([
@@ -15,27 +14,16 @@ const router = createBrowserRouter([
   },
 ]);
 
-i18n.use(initReactI18next).init({
-  resources: {
-    en: {
-      translation: {
-        'Welcome to React': 'Welcome to React and react-i18next',
-      },
-    },
-  },
-  lng: 'en',
-  fallbackLng: 'en',
-  interpolation: {
-    escapeValue: false,
-  },
-});
+const container = document.getElementById('root')!;
+const root = createRoot(container);
 
 if (process.env.NODE_ENV !== 'production') {
   import('@axe-core/react').then((axe) => {
-    axe.default(React, ReactDOM, 1000);
+    axe.default(React, root, 1000);
   });
 }
-ReactDOM.createRoot(document.getElementById('root')!).render(
+
+root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>,

@@ -3,6 +3,7 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "deque-systems.vscode-axe-linter",
+    "Lokalise.i18n-ally",
     "ZixuanChen.vitest-explorer",
     "ms-playwright.playwright",
     "GitHub.vscode-github-actions",
