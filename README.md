@@ -1,38 +1,37 @@
-# React + TypeScript + Vite
+# JOD Individual UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository is the UI for Jod Individual. JOD Individual is part of the Digital Service Ecosystem for Continuous Learning (JOD) project.
 
-Currently, two official plugins are available:
+The UI app is built using React, Vite, and TypeScript. React is a popular JavaScript library for building user interfaces, while Vite is a build tool that provides fast and efficient development experience. TypeScript is a superset of JavaScript that adds static type checking and other features to the language.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Together, these technologies provide a robust and efficient development environment for building modern web applications with a focus on user experience. The app is designed to be responsive and accessible.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-- Configure the top-level `parserOptions` property like this:
+1. First, ensure that you have [NVM](https://github.com/nvm-sh/nvm) installed on your machine.
+2. Clone this repository to your local machine.
+3. Open a terminal window and navigate to the root directory of the project.
+4. Run the following command to install Node.js & NPM and the dependencies:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-};
+```shell
+nvm install
+nvm use
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+6. Once the installation is complete, run the following command to start the development server:
 
+```shell
+npm run dev
+```
+
+7. The app should now be running on http://localhost:5173/.
 
 ## Accessibility testing
 
-## Axe
+### Axe
 
 Axe is used automatically when run in development mode.
 When starting the development server you can see findings of Axe, if any, on the console for e.g when missing `<main>-tag`:
@@ -43,9 +42,21 @@ moderate: Document should have one main landmark https://dequeuniversity.com/rul
 moderate: All page content should be contained by landmarks https://dequeuniversity.com/rules/axe/4.8/region?application=axeAPI
 ```
 
-### Axe DevTools 
+### Axe DevTools
 
 Useful browser extension to use
 
-* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/axe-devtools/)
-* [Chromium](https://chromewebstore.google.com/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/axe-devtools/)
+- [Chromium](https://chromewebstore.google.com/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd)
+- [Edge](https://microsoftedge.microsoft.com/addons/detail/axe-devtools-web-access/kcenlimkmjjkdfcaleembgmldmnnlfkn)
+
+### WAVE Browser Extensions
+
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/wave-accessibility-tool/)
+- [Chromium](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh)
+- [Edge](https://microsoftedge.microsoft.com/addons/detail/wave-evaluation-tool/khapceneeednkiopkkbgkibbdoajpkoj)
+
+### Google Lighthouse
+
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/google-lighthouse/)
+- [Chromium](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)
