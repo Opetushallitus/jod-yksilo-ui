@@ -14,7 +14,10 @@
     "format": "prettier . --write",
     "preview": "vite preview",
     "test:unit": "vitest --run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:storybook": "test-storybook",
+    "storybook": "BROWSER=none storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "i18next": "^23.7.18",
@@ -26,6 +29,15 @@
   "devDependencies": {
     "@axe-core/react": "^4.8.3",
     "@playwright/test": "^1.41.1",
+    "@storybook/addon-essentials": "^8.0.0-alpha.15",
+    "@storybook/addon-interactions": "^8.0.0-alpha.15",
+    "@storybook/addon-links": "^8.0.0-alpha.15",
+    "@storybook/addon-onboarding": "^1.0.11",
+    "@storybook/blocks": "^8.0.0-alpha.15",
+    "@storybook/react": "^8.0.0-alpha.15",
+    "@storybook/react-vite": "^8.0.0-alpha.15",
+    "@storybook/test": "^8.0.0-alpha.15",
+    "@storybook/test-runner": "^0.16.0",
     "@testing-library/react": "^14.1.2",
     "@types/node": "^20.11.6",
     "@types/react": "^18.2.43",
@@ -40,10 +52,15 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-storybook": "^0.6.15",
     "jsdom": "^24.0.0",
     "prettier": "3.2.4",
+    "storybook": "^8.0.0-alpha.15",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vitest": "^1.2.1"
+  },
+  "overrides": {
+    "@testing-library/user-event": "^14.5.2"
   }
 }
