@@ -1,6 +1,6 @@
-# JOD Individual UI
+# JOD Yksilö UI
 
-This repository is the UI for Jod Individual. JOD Individual is part of the Digital Service Ecosystem for Continuous Learning (JOD) project.
+This repository is the UI for JOD Yksilö. JOD Yksilö is part of the Digital Service Ecosystem for Continuous Learning (JOD) project.
 
 The UI app is built using React, Vite, and TypeScript. React is a popular JavaScript library for building user interfaces, while Vite is a build tool that provides fast and efficient development experience. TypeScript is a superset of JavaScript that adds static type checking and other features to the language.
 
