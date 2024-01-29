@@ -10,15 +10,26 @@ function App() {
 
   return (
     <main>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="flex items-center justify-evenly py-10">
+        <div>
+          <div className="rounded bg-white px-8">
+            <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
+              <img src={viteLogo} className="logo" alt="Vite logo" />
+            </a>
+          </div>
+          <span className="text-4xl">Vite</span>
+        </div>
+        <span className="px-4 text-4xl">+</span>
+        <div>
+          <div className="rounded bg-white px-8">
+            <a href="https://react.dev" target="_blank" rel="noreferrer">
+              <img src={reactLogo} className="logo react" alt="React logo" />
+            </a>
+          </div>
+          <span className="text-4xl">React</span>
+        </div>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Counter</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>
