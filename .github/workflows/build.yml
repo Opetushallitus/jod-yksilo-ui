@@ -1,0 +1,92 @@
+name: JOD Yksilö UI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/iron
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+
+      # Lint
+      - name: Run ESLint
+        run: npx eslint .
+      - name: Run Prettier
+        run: npx prettier . --check
+
+      # Unit tests
+      - name: Run Vitest unit tests
+        run: npx vitest --coverage.enabled true
+      - name: Upload Vitest report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 30
+
+      # Build
+      - name: Run build
+        run: npm run build
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      # E2E tests
+      # It's not recommended to cache browsers.
+      # See https://playwright.dev/docs/ci#caching-browsers
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Run Playwright e2e tests
+        run: npx playwright test
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+  deploy:
+    name: Deploy
+    if: github.ref == 'refs/heads/main'
+    environment: development
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.JOD_AWS_ROLE_ARN }}
+          aws-region: eu-west-1
+      - name: Copy files to S3
+        run: aws s3 sync . s3://${{ secrets.JOD_AWS_S3_ARN }} --delete
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.JOD_AWS_CLOUDFRONT_ID }} --paths '/*'
