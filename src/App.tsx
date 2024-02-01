@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
+import { Button } from './components/Button/Button';
 
 function App() {
   const { t } = useTranslation();
@@ -31,7 +32,10 @@ function App() {
       </div>
       <h1>Counter</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
+        <div className="flex flex-col">
+          <span>count is {count}</span>
+          <Button onClick={() => setCount((count) => count + 1)} label="Click me" />
+        </div>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
