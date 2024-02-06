@@ -1,3 +1,19 @@
 {
-  "Welcome to React": "Welcome to React and react-i18next"
+  "Welcome to React": "Welcome to React and react-i18next",
+  "slugs": {
+    "about-us": "about-us",
+    "terms-of-service": "terms-of-service",
+    "accessibility-statement": "accessibility-statement",
+    "privacy-policy": "privacy-policy",
+    "cookies": "cookies"
+  },
+  "header": "Header",
+  "footer": "Footer",
+  "about-us": "About Us",
+  "terms-of-service": "Terms of Service",
+  "accessibility-statement": "Accessibility Statement",
+  "privacy-policy": "Privacy Policy",
+  "cookies": "Cookies",
+  "home": "Home",
+  "no-match": "No Match"
 }

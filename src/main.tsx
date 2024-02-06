@@ -1,30 +1,21 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import App from './App.tsx';
 import './i18n/config';
-import './index.css';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-  },
-]);
+import App from './App.tsx';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 if (process.env.NODE_ENV !== 'production') {
+  /* eslint-disable @typescript-eslint/no-floating-promises */
   import('@axe-core/react').then((axe) => {
     axe.default(React, root, 1000);
   });
+  /* eslint-enable @typescript-eslint/no-floating-promises */
 }
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App />
   </React.StrictMode>,
 );
