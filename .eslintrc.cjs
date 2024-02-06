@@ -10,6 +10,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:storybook/recommended',
+    'plugin:sonarjs/recommended',
     'prettier', // must be last, override other configs
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
@@ -21,8 +22,10 @@ module.exports = {
   settings: {
     react: { version: 'detect' },
   },
-  plugins: ['react-refresh', 'jsx-a11y'],
+  plugins: ['react-refresh', 'jsx-a11y', 'sonarjs'],
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    'react/jsx-child-element-spacing': 'error',
+    'no-useless-rename': 'error',
   },
 };
