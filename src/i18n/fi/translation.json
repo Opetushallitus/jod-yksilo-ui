@@ -1,3 +1,19 @@
 {
-  "Welcome to React": "Tervetuloa Reactin ja react-i18nextin pariin."
+  "Welcome to React": "Tervetuloa Reactin ja react-i18nextin pariin.",
+  "slugs": {
+    "about-us": "tietoa-meista",
+    "terms-of-service": "kayttoehdot",
+    "accessibility-statement": "saavutettavuusseloste",
+    "privacy-policy": "tietosuojaseloste",
+    "cookies": "evasteet"
+  },
+  "header": "Ylätunniste",
+  "footer": "Alatunniste",
+  "about-us": "Tietoa meistä",
+  "terms-of-service": "Käyttöehdot",
+  "accessibility-statement": "Saavutettavuusseloste",
+  "privacy-policy": "Tietosuojaseloste",
+  "cookies": "Evästeet",
+  "home": "Koti",
+  "no-match": "Ei osumaa"
 }
