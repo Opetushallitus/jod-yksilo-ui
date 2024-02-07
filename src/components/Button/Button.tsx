@@ -17,10 +17,9 @@ export interface ButtonProps {
   variant?: ButtonVariant;
   /* Button disabled for any actions */
   disabled?: boolean;
-  // TODO: icon on end or start, conditionally
 }
 
-export const Button = ({ label: label, onClick, variant = 'base', disabled = false }: ButtonProps) => {
+export const Button = ({ label, onClick, variant = 'base', disabled = false }: ButtonProps) => {
   return (
     <button
       disabled={disabled}

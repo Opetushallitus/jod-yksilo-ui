@@ -50,6 +50,8 @@ export const Page: React.FC = () => {
           <a href="https://storybook.js.org/docs" target="_blank" rel="noopener noreferrer">
             docs
           </a>
+          {/*
+           */}
           .
         </p>
         <div className="tip-wrapper">
