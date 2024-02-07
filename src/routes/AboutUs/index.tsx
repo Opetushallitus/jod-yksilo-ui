@@ -4,25 +4,25 @@ import { Route, Routes } from 'react-router-dom';
 const TermsOfService = () => {
   const { t } = useTranslation();
 
-  return <div>{t('terms-of-service')}</div>;
+  return <h2>{t('terms-of-service')}</h2>;
 };
 
 const AccessibilityStatement = () => {
   const { t } = useTranslation();
 
-  return <div>{t('accessibility-statement')}</div>;
+  return <h2>{t('accessibility-statement')}</h2>;
 };
 
 const PrivacyPolicy = () => {
   const { t } = useTranslation();
 
-  return <div>{t('privacy-policy')}</div>;
+  return <h2>{t('privacy-policy')}</h2>;
 };
 
 const Cookies = () => {
   const { t } = useTranslation();
 
-  return <div>{t('cookies')}</div>;
+  return <h2>{t('cookies')}</h2>;
 };
 
 const AboutUs = () => {
