@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { Route, Routes, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Home from '../Home';
@@ -25,8 +26,17 @@ const Root = () => {
       <header className="bg-jod-primary p-3">
         <h1>{t('header')}</h1>
         <ul className="flex flex-wrap gap-3">
-          {links.map((link, index) => (
-            <li key={index}>
+          {['en', 'fi', 'sv'].map((lng) => (
+            <li key={lng}>
+              <NavLink to={`/${lng}`} className="block p-3">
+                {lng}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+        <ul className="flex flex-wrap gap-3">
+          {links.map((link) => (
+            <li key={link.text}>
               <NavLink to={link.to} className="block p-3">
                 {link.text}
               </NavLink>
