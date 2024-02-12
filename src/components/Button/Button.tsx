@@ -28,7 +28,7 @@ export const Button = ({ label, onClick, variant = 'base', disabled = false }: B
       className={classNames('jod-button', 'm-2 px-4 py-2 font-bold', {
         'bg-jod-base text-jod-white': variant === 'base',
         'bg-jod-primary text-jod-white': variant === 'primary',
-        'border-jod-black text-jod-black': variant === 'outlined',
+        'border border-jod-black text-jod-black': variant === 'outlined',
         'text-jod-black': variant === 'text',
         'cursor-not-allowed opacity-50': disabled,
       })}

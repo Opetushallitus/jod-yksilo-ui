@@ -97,7 +97,7 @@ exports[`Snapshot testing > Outlined button 1`] = `
     </div>
     <div>
       <button
-        class="jod-button m-2 px-4 py-2 font-bold border-jod-black text-jod-black"
+        class="jod-button m-2 px-4 py-2 font-bold border border-jod-black text-jod-black"
         type="button"
       >
         Outlined button
@@ -106,7 +106,7 @@ exports[`Snapshot testing > Outlined button 1`] = `
   </body>,
   "container": <div>
     <button
-      class="jod-button m-2 px-4 py-2 font-bold border-jod-black text-jod-black"
+      class="jod-button m-2 px-4 py-2 font-bold border border-jod-black text-jod-black"
       type="button"
     >
       Outlined button
@@ -271,7 +271,7 @@ exports[`Snapshot testing > Text button 1`] = `
     </div>
     <div>
       <button
-        class="jod-button m-2 px-4 py-2 font-bold border-jod-black text-jod-black"
+        class="jod-button m-2 px-4 py-2 font-bold border border-jod-black text-jod-black"
         type="button"
       >
         Outlined button
