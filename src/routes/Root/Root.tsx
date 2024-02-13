@@ -1,9 +1,9 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { Route, Routes, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import Home from '../Home';
-import AboutUs from '../AboutUs';
-import NoMatch from '../NoMatch';
+import Home from '@/routes/Home';
+import AboutUs from '@/routes/AboutUs';
+import NoMatch from '@/routes/NoMatch';
 import './Root.css';
 
 const Root = () => {
