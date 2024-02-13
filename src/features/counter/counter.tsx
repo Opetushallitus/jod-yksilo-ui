@@ -1,6 +1,6 @@
-import { Button } from '../../components';
-import { useAppSelector, useAppDispatch } from '../../state/hooks';
-import { increment, decrement, reset } from '../../features/counter/counterSlice';
+import { Button } from '@/components';
+import { useAppSelector, useAppDispatch } from '@/state/hooks';
+import { increment, decrement, reset } from '@/features/counter/counterSlice';
 
 export const Counter = () => {
   const count = useAppSelector((state) => state.counter.value);

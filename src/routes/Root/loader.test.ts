@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { redirect } from 'react-router-dom';
-import i18n from './../../i18n/config';
+import i18n from '@/i18n/config';
 import loader from './loader';
 
 describe('loader', () => {

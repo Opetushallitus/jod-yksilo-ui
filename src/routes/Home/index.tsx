@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Counter } from '../../features';
+import { Counter } from '@/features';
 
 const Home = () => {
   const { t } = useTranslation();
