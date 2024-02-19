@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { onCLS, onFCP, onFID, onLCP, onTTFB } from 'web-vitals';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { HelmetProvider } from 'react-helmet-async';
 import './i18n/config';
 import App from './App.tsx';
 import { store, persistor } from './state/store';
@@ -28,7 +29,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>,
