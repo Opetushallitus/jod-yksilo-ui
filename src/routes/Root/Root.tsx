@@ -1,6 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { Route, Routes, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 import Home from '@/routes/Home';
 import AboutUs from '@/routes/AboutUs';
 import NoMatch from '@/routes/NoMatch';
@@ -23,6 +24,9 @@ const Root = () => {
 
   return (
     <>
+      <Helmet>
+        <html lang={i18n.language} />
+      </Helmet>
       <header className="bg-jod-primary p-3">
         <h1>{t('header')}</h1>
         <ul className="flex flex-wrap gap-3">
