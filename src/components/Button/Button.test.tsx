@@ -6,23 +6,23 @@ import { Button } from './Button';
 
 describe('Snapshot testing', () => {
   test('Base button', () => {
-    const result = render(<Button label="Base button" variant="base" onClick={vi.fn()} />);
-    expect(result).toMatchSnapshot();
+    const { container } = render(<Button label="Base button" variant="base" onClick={vi.fn()} />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   test('Primary button', () => {
-    const result = render(<Button label="Primary button" variant="primary" onClick={vi.fn()} />);
-    expect(result).toMatchSnapshot();
+    const { container } = render(<Button label="Primary button" variant="primary" onClick={vi.fn()} />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   test('Outlined button', () => {
-    const result = render(<Button label="Outlined button" variant="outlined" onClick={vi.fn()} />);
-    expect(result).toMatchSnapshot();
+    const { container } = render(<Button label="Outlined button" variant="outlined" onClick={vi.fn()} />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   test('Text button', () => {
-    const result = render(<Button label="Text button" variant="text" onClick={vi.fn()} />);
-    expect(result).toMatchSnapshot();
+    const { container } = render(<Button label="Text button" variant="text" onClick={vi.fn()} />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
 
