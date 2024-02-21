@@ -87,6 +87,8 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.JOD_AWS_ACCOUNT_ID }}:role/${{ secrets.JOD_AWS_GITHUB_ROLE_NAME}}
           aws-region: eu-west-1
       - name: Copy files to S3
-        run: aws s3 sync . s3://${{ secrets.JOD_AWS_DIST_BUCKET }} --delete
-      - name: Invalidate CloudFront cache
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.JOD_AWS_CLOUDFRONT_ID }} --paths '/*'
+        run: |
+          aws s3 sync --delete --cache-control "public,max-age=31536000,immutable" assets/ s3://${{ secrets.JOD_AWS_DIST_BUCKET }}/assets
+          aws s3 sync --exclude "assets/*" --delete --cache-control "public,max-age=60" . s3://${{ secrets.JOD_AWS_DIST_BUCKET }}
+      - name: Invalidate cache for index.html on deploy
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.JOD_AWS_CLOUDFRONT_ID }} --paths '/index.html'
