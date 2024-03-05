@@ -12,7 +12,7 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, 'e2e'],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'html', 'clover', 'json', 'lcov'],
+      reporter: ['lcov'],
     },
   },
   resolve: {
