@@ -10,6 +10,10 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     exclude: [...configDefaults.exclude, 'e2e'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html', 'clover', 'json', 'lcov'],
+    },
   },
   resolve: {
     alias: [
