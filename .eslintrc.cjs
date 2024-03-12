@@ -9,7 +9,6 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
-    'plugin:storybook/recommended',
     'plugin:sonarjs/recommended',
     'prettier', // must be last, override other configs
   ],
