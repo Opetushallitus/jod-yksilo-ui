@@ -1,4 +1,4 @@
-import { Button } from '@/components';
+import { Button } from 'jod-design-system';
 import { useAppSelector, useAppDispatch } from '@/state/hooks';
 import { increment, decrement, reset } from '@/features/counter/counterSlice';
 
