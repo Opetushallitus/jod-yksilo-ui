@@ -8,7 +8,6 @@
     "ms-playwright.playwright",
     "GitHub.vscode-github-actions",
     "GitHub.vscode-pull-request-github",
-    "MS-vsliveshare.vsliveshare",
     "bradlc.vscode-tailwindcss"
   ]
 }
