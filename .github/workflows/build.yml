@@ -1,4 +1,4 @@
-name: JOD Yksilö UI
+name: Build and deploy JOD Yksilö UI
 on:
   workflow_dispatch:
   push:
@@ -15,22 +15,24 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+
       - uses: actions/setup-node@v4
         with:
           node-version: lts/iron
           cache: npm
+
       - name: Install dependencies
         run: npm ci
 
-      # Lint
       - name: Run ESLint
-        run: npx eslint .
+        run: npx eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0
+
       - name: Run Prettier
         run: npx prettier . --check
 
-      # Unit tests
       - name: Run Vitest unit tests
         run: npx vitest --coverage.enabled true
+
       - name: Upload Vitest report
         uses: actions/upload-artifact@v4
         if: always()
@@ -39,9 +41,9 @@ jobs:
           path: coverage/
           retention-days: 30
 
-      # Build
       - name: Run build
         run: npm run build
+
       - name: Upload dist artifact
         uses: actions/upload-artifact@v4
         with:
@@ -53,13 +55,16 @@ jobs:
       # See https://playwright.dev/docs/ci#caching-browsers
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
+
       - name: Download dist artifact
         uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist/
+
       - name: Run Playwright e2e tests
         run: npx playwright test
+
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
         if: always()
@@ -91,14 +96,17 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::${{ secrets.JOD_AWS_ACCOUNT_ID }}:role/${{ secrets.JOD_AWS_GITHUB_ROLE_NAME}}
           aws-region: eu-west-1
+
       - name: Copy files to S3
         run: |
           aws s3 sync --delete --cache-control "public,max-age=31536000,immutable" assets/ s3://${{ secrets.JOD_AWS_DIST_BUCKET }}/assets
           aws s3 sync --exclude "assets/*" --delete --cache-control "public,max-age=60" . s3://${{ secrets.JOD_AWS_DIST_BUCKET }}
+
       - name: Invalidate cache for index.html on deploy
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.JOD_AWS_CLOUDFRONT_ID }} --paths '/index.html'
