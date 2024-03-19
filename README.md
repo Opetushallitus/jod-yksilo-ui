@@ -21,6 +21,7 @@ nvm use
 npm install
 ```
 
+5. Take the steps in JOD Design System repository to get components of the design system work in hot reload mode.
 6. Once the installation is complete, run the following command to start the development server:
 
 ```shell
