@@ -1,19 +1,35 @@
 {
-  "Welcome to React": "Welcome to React and react-i18next",
+  "about-us": "About Us",
+  "accessibility-statement": "Accessibility Statement",
+  "competences": "Competences",
+  "cookies": "Cookies",
+  "footer": "Footer",
+  "goals": "Goals",
+  "header": "Header",
+  "home": "Home",
+  "instructions": "Instructions",
+  "interests": "Interests",
+  "no-match": "No Match",
+  "privacy-policy": "Privacy Policy",
+  "profile": "Profile",
+  "restrictions": "Restrictions",
+  "search": "Search",
   "slugs": {
     "about-us": "about-us",
-    "terms-of-service": "terms-of-service",
     "accessibility-statement": "accessibility-statement",
+    "cookies": "cookies",
     "privacy-policy": "privacy-policy",
-    "cookies": "cookies"
+    "profile": {
+      "competences": "competences",
+      "goals": "goals",
+      "index": "profile",
+      "instructions": "instructions",
+      "interests": "interests",
+      "restrictions": "restrictions",
+      "search": "search"
+    },
+    "terms-of-service": "terms-of-service"
   },
-  "header": "Header",
-  "footer": "Footer",
-  "about-us": "About Us",
   "terms-of-service": "Terms of Service",
-  "accessibility-statement": "Accessibility Statement",
-  "privacy-policy": "Privacy Policy",
-  "cookies": "Cookies",
-  "home": "Home",
-  "no-match": "No Match"
+  "Welcome to React": "Welcome to React and react-i18next"
 }

@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import Home from '@/routes/Home';
 import AboutUs from '@/routes/AboutUs';
 import NoMatch from '@/routes/NoMatch';
+import Profile from '@/routes/Profile';
 import './Root.css';
 
 const Root = () => {
@@ -12,6 +13,7 @@ const Root = () => {
 
   const links = [
     { to: `/${i18n.language}`, text: t('home') },
+    { to: `/${i18n.language}/${t('slugs.profile.index')}`, text: t('profile') },
     { to: `/${i18n.language}/${t('slugs.about-us')}`, text: t('about-us') },
     { to: `/${i18n.language}/${t('slugs.about-us')}/${t('slugs.terms-of-service')}`, text: t('terms-of-service') },
     {
@@ -51,6 +53,7 @@ const Root = () => {
       <main className="p-3">
         <Routes>
           <Route index element={<Home />} />
+          <Route path={`${t('slugs.profile.index')}/*`} element={<Profile />} />
           <Route path={`${t('slugs.about-us')}/*`} element={<AboutUs />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>

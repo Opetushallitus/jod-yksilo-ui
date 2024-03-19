@@ -1,19 +1,35 @@
 {
-  "Welcome to React": "Tervetuloa Reactin ja react-i18nextin pariin.",
+  "about-us": "Tietoa meistä",
+  "accessibility-statement": "Saavutettavuusseloste",
+  "competences": "Osaamiset",
+  "cookies": "Evästeet",
+  "footer": "Alatunniste",
+  "goals": "Tavoitteet",
+  "header": "Ylätunniste",
+  "home": "Koti",
+  "instructions": "Ohjeistus",
+  "interests": "Kiinnostukset",
+  "no-match": "Ei osumaa",
+  "privacy-policy": "Tietosuojaseloste",
+  "profile": "Profiili",
+  "restrictions": "Rajoitteet",
+  "search": "Haku",
   "slugs": {
     "about-us": "tietoa-meista",
-    "terms-of-service": "kayttoehdot",
     "accessibility-statement": "saavutettavuusseloste",
+    "cookies": "evasteet",
     "privacy-policy": "tietosuojaseloste",
-    "cookies": "evasteet"
+    "profile": {
+      "competences": "osaamiset",
+      "goals": "tavoitteet",
+      "index": "profiili",
+      "instructions": "ohjeistus",
+      "interests": "kiinnostukset",
+      "restrictions": "rajoitteet",
+      "search": "haku"
+    },
+    "terms-of-service": "kayttoehdot"
   },
-  "header": "Ylätunniste",
-  "footer": "Alatunniste",
-  "about-us": "Tietoa meistä",
   "terms-of-service": "Käyttöehdot",
-  "accessibility-statement": "Saavutettavuusseloste",
-  "privacy-policy": "Tietosuojaseloste",
-  "cookies": "Evästeet",
-  "home": "Koti",
-  "no-match": "Ei osumaa"
+  "Welcome to React": "Tervetuloa Reactin ja react-i18nextin pariin."
 }
