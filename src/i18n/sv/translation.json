@@ -2,18 +2,20 @@
   "Welcome to React": "Välkommen till React och react-i18next",
   "slugs": {
     "about-us": "om-oss",
-    "terms-of-service": "anvandningsvillkoren",
     "accessibility-statement": "tillganglighetsutlatande",
+    "cookies": "kakor",
     "privacy-policy": "integritetspolicy",
-    "cookies": "kakor"
+    "terms-of-service": "anvandningsvillkoren",
+    "user": "anvandare"
   },
-  "header": "Rubrik",
-  "footer": "Sidfot",
   "about-us": "Om Oss",
-  "terms-of-service": "Användningsvillkoren",
   "accessibility-statement": "Tillgänglighetsutlåtandet",
-  "privacy-policy": "Integritetspolicy",
   "cookies": "Kakor",
+  "footer": "Sidfot",
+  "header": "Rubrik",
   "home": "Hem",
-  "no-match": "Ingen matchning"
+  "no-match": "Ingen matchning",
+  "privacy-policy": "Integritetspolicy",
+  "terms-of-service": "Användningsvillkoren",
+  "user": "Användare"
 }
