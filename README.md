@@ -30,6 +30,14 @@ npm run dev
 
 7. The app should now be running on http://localhost:5173/.
 
+## Updating JOD Design System
+
+Run the following command to update the JOD Design System to the latest version:
+
+```shell
+npm update @jod/design-system
+```
+
 ## Accessibility testing
 
 ### Axe
