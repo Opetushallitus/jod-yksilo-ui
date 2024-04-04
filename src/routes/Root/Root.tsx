@@ -2,6 +2,7 @@
 import { Route, Routes, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
+import { NavigationBar } from '@jod/design-system';
 import Home from '@/routes/Home';
 import AboutUs from '@/routes/AboutUs';
 import NoMatch from '@/routes/NoMatch';
@@ -29,6 +30,21 @@ const Root = () => {
       <Helmet>
         <html lang={i18n.language} />
       </Helmet>
+      <header className="sticky top-0">
+        <NavigationBar
+          user={{
+            name: 'John Doe',
+            src: 'https://i.pravatar.cc/200?img=60',
+            component: ({ children, ...rootProps }) => {
+              return (
+                <NavLink to={`/${i18n.language}/${t('slugs.user')}`} {...rootProps}>
+                  {children}
+                </NavLink>
+              );
+            },
+          }}
+        />
+      </header>
       <header className="bg-jod-primary p-3">
         <h1>{t('header')}</h1>
         <ul className="flex flex-wrap gap-3">

@@ -28,8 +28,10 @@
       "restrictions": "restrictions",
       "search": "search"
     },
-    "terms-of-service": "terms-of-service"
+    "terms-of-service": "terms-of-service",
+    "user": "user"
   },
   "terms-of-service": "Terms of Service",
+  "user": "User",
   "Welcome to React": "Welcome to React and react-i18next"
 }
