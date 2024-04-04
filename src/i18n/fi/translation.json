@@ -28,8 +28,10 @@
       "restrictions": "rajoitteet",
       "search": "haku"
     },
-    "terms-of-service": "kayttoehdot"
+    "terms-of-service": "kayttoehdot",
+    "user": "kayttaja"
   },
   "terms-of-service": "Käyttöehdot",
+  "user": "Käyttäjä",
   "Welcome to React": "Tervetuloa Reactin ja react-i18nextin pariin."
 }

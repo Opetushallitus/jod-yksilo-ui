@@ -28,8 +28,10 @@
       "restrictions": "trammels",
       "search": "sok"
     },
-    "terms-of-service": "anvandningsvillkoren"
+    "terms-of-service": "anvandningsvillkoren",
+    "user": "anvandare"
   },
   "terms-of-service": "Användningsvillkoren",
+  "user": "Användare",
   "Welcome to React": "Välkommen till React och react-i18next"
 }
