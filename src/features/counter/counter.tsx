@@ -7,8 +7,8 @@ export const Counter = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="mx-auto flex max-w-sm flex-col items-center rounded-lg bg-jod-white p-6 shadow">
-      <span className="text-xl font-medium text-jod-black">{count}</span>
+    <div className="mx-auto flex max-w-sm flex-col items-center rounded-lg bg-[#ffffff] p-6 shadow">
+      <span className="text-xl font-medium text-[#000000]">{count}</span>
       <div className="counter-controls">
         <Button onClick={() => dispatch(decrement())} label="Decrease" />
         <Button onClick={() => dispatch(reset())} label="Reset" variant="outlined" />
