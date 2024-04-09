@@ -5,8 +5,15 @@
   "cookies": "Kakor",
   "footer": "Sidfot",
   "goals": "Mål",
-  "header": "Rubrik",
-  "home": "Hem",
+  "home": {
+    "card-1-action-content": "Prova vår tjänst",
+    "card-1-content": "Livet är en ständig förändring och förnyelse. Oavsett om det gäller att byta karriär, lära sig ny kompetens eller förbättra sin personliga livssituation, erbjuder vi dig den information och inspiration du behöver.",
+    "card-1-title": "Djärvt gå in i förändring! Undersök dina möjligheter, planera din väg och skapa din framtid.",
+    "card-2-title": "Hitta din passion och ditt syfte",
+    "card-3-title": "Lära sig att använda vår tjänst och skapa din egen framtid",
+    "card-4-title": "Skapa din profil och planera din väg",
+    "title": "Framsida"
+  },
   "instructions": "Instruktioner",
   "interests": "Intressen",
   "no-match": "Ingen matchning",
