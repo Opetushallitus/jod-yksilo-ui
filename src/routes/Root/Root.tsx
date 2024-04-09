@@ -37,7 +37,6 @@ const Root = () => {
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </main>
-      <footer className="bg-[#AFB3F3] p-3">{t('footer')}</footer>
     </>
   );
 };
