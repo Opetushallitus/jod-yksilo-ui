@@ -34,7 +34,6 @@ const Root = () => {
         <NavigationBar
           user={{
             name: 'John Doe',
-            src: 'https://i.pravatar.cc/200?img=60',
             component: ({ children, ...rootProps }) => {
               return (
                 <NavLink to={`/${i18n.language}/${t('slugs.user')}`} {...rootProps}>
@@ -45,7 +44,7 @@ const Root = () => {
           }}
         />
       </header>
-      <header className="bg-jod-primary p-3">
+      <header className="bg-[#f2a93b] p-3">
         <h1>{t('header')}</h1>
         <ul className="flex flex-wrap gap-3">
           {['en', 'fi', 'sv'].map((lng) => (
@@ -74,7 +73,7 @@ const Root = () => {
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </main>
-      <footer className="bg-jod-secondary p-3">{t('footer')}</footer>
+      <footer className="bg-[#AFB3F3] p-3">{t('footer')}</footer>
     </>
   );
 };
