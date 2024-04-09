@@ -5,8 +5,15 @@
   "cookies": "Evästeet",
   "footer": "Alatunniste",
   "goals": "Tavoitteet",
-  "header": "Ylätunniste",
-  "home": "Koti",
+  "home": {
+    "card-1-action-content": "Kokeile palvelua",
+    "card-1-content": "Elämä on jatkuvaa muutosta ja uudistumista. Olipa kyse uran vaihdosta, uuden osaamisen oppimisesta tai henkilökohtaisen elämäntilanteen parantamisesta, me tarjoamme sinulle tiedon ja inspiraation joita tarvitset.",
+    "card-1-title": "Astu rohkeasti muutokseen! Tutki mahdollisuuksiasi, suunnittele polkusi ja luo tulevaisuutesi.",
+    "card-2-title": "Tunnista osaamistasi ja tutki mahdollisuuksia",
+    "card-3-title": "Tutustu miten käytät palvelua ja luot oman tulevaisuutesi",
+    "card-4-title": "Luo oma profiili ja suunnittele polkusi",
+    "title": "Etusivu"
+  },
   "instructions": "Ohjeistus",
   "interests": "Kiinnostukset",
   "no-match": "Ei osumaa",

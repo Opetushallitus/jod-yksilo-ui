@@ -5,8 +5,15 @@
   "cookies": "Cookies",
   "footer": "Footer",
   "goals": "Goals",
-  "header": "Header",
-  "home": "Home",
+  "home": {
+    "card-1-action-content": "Get started",
+    "card-1-content": "Life is constantly changing and renewing. Whether you are considering a career change, learning new skills or improving your personal life situation, we provide you with the knowledge and inspiration you need.",
+    "card-1-title": "Step into the future. Explore your possibilities, plan your path and create your future.",
+    "card-2-title": "Find your strengths and explore opportunities",
+    "card-3-title": "Discover how to use the service and create your own future",
+    "card-4-title": "Create your own profile and plan your path",
+    "title": "Frontpage"
+  },
   "instructions": "Instructions",
   "interests": "Interests",
   "no-match": "No Match",
