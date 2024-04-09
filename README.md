@@ -69,3 +69,13 @@ Useful browser extension to use
 
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/google-lighthouse/)
 - [Chromium](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)
+
+## Starting the development server against a specific API base URL
+
+Run the following command to start the development server against a specific API base URL:
+
+```shell
+API_BASE_URL=https://d3ueds520zlfzu.cloudfront.net npm run dev
+```
+
+Default API base URL is `http://localhost:8080`.
