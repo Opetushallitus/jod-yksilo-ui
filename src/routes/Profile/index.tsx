@@ -11,18 +11,15 @@ import Interests from './interests';
 import Restrictions from './restrictions';
 import Search from './search';
 
-const MatchedLink = ({ link }: { link: { to: string; text: string } }) => {
+const MatchedLink = ({ link }: { link: { to: string; text: string; icon: string } }) => {
   const match = useMatch(link.to);
   const selected = match?.pathname == link.to;
   return (
     <RoundLinkButton
       label={link.text}
+      icon={link.icon}
       selected={selected}
-      component={({ children, ...rootProps }) => (
-        <Link to={link.to} {...rootProps}>
-          {children}
-        </Link>
-      )}
+      component={({ ...rootProps }) => <Link to={link.to} {...rootProps}></Link>}
     ></RoundLinkButton>
   );
 };
@@ -32,17 +29,35 @@ const Profile = () => {
 
   const profileIndexSlug = t('slugs.profile.index');
   const linksOnLeft = [
-    { to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.instructions')}`, text: t('instructions') },
-    { to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.goals')}`, text: t('goals') },
-    { to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.competences')}`, text: t('competences') },
-    { to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.interests')}`, text: t('interests') },
-    { to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.restrictions')}`, text: t('restrictions') },
+    {
+      to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.instructions')}`,
+      text: t('instructions'),
+      icon: 'menu_book',
+    },
+    { to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.goals')}`, text: t('goals'), icon: 'target' },
+    {
+      to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.competences')}`,
+      text: t('competences'),
+      icon: 'school',
+    },
+    {
+      to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.interests')}`,
+      text: t('interests'),
+      icon: 'interests',
+    },
+    {
+      to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.restrictions')}`,
+      text: t('restrictions'),
+      icon: 'block',
+    },
   ];
-  const linkOnRight = [{ to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.search')}`, text: t('search') }];
+  const linkOnRight = [
+    { to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.search')}`, text: t('search'), icon: 'search' },
+  ];
 
   return (
     <>
-      <Title value={t('profile')} />
+      <Title value={t('profile.title')} />
       <nav>
         <div className="flex justify-between">
           <ul className="m-0 space-x-[25px] p-0">

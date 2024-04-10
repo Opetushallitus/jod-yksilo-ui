@@ -3,6 +3,12 @@
   "accessibility-statement": "Tillgänglighetsutlåtandet",
   "competences": "Kompetens",
   "cookies": "Kakor",
+  "error": {
+    "network": {
+      "500": "Ett oväntat fel uppstod",
+      "title": "Nätverksfel"
+    }
+  },
   "goals": "Mål",
   "home": {
     "card-1-action-content": "Prova vår tjänst",
@@ -17,7 +23,14 @@
   "interests": "Intressen",
   "no-match": "Ingen matchning",
   "privacy-policy": "Integritetspolicy",
-  "profile": "Profil",
+  "profile": {
+    "competences": {
+      "field-description": "Skriv dina färdigheter i textrutan. Lägg till färdigheter genom att klicka på + -tecknet bredvid färdigheten. Ta bort en färdighet genom att klicka på krysset.",
+      "heading-1": "Vad jag kan",
+      "page-description": "Berätta för tjänsten om dina styrkor och färdigheter. Var stolt över dig själv, för du kan förmodligen mer än du tror. Tänk på din utbildning, arbetslivserfarenhet och hobbyer - all din kunskap och erfarenhet är viktig."
+    },
+    "title": "Profil"
+  },
   "restrictions": "Trammels",
   "search": "Sök",
   "slugs": {
