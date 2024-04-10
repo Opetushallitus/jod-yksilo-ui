@@ -3,6 +3,12 @@
   "accessibility-statement": "Accessibility Statement",
   "competences": "Competences",
   "cookies": "Cookies",
+  "error": {
+    "network": {
+      "500": "Unexpected error happened",
+      "title": "Network error"
+    }
+  },
   "goals": "Goals",
   "home": {
     "card-1-action-content": "Get started",
@@ -17,7 +23,14 @@
   "interests": "Interests",
   "no-match": "No Match",
   "privacy-policy": "Privacy Policy",
-  "profile": "Profile",
+  "profile": {
+    "competences": {
+      "field-description": "Write your skills in the text field. Add skills by clicking the + sign next to the skill. Remove a skill by clicking the cross.",
+      "heading-1": "What I can do",
+      "page-description": "Tell the service about your strengths and skills. Be proud of yourself, because you probably know more than you think. Think about your education, work experience and hobbies - all your knowledge and experience are important."
+    },
+    "title": "Profile"
+  },
   "restrictions": "Restrictions",
   "search": "Search",
   "slugs": {

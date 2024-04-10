@@ -7,6 +7,7 @@ import AboutUs from '@/routes/AboutUs';
 import NoMatch from '@/routes/NoMatch';
 import Profile from '@/routes/Profile';
 import './Root.css';
+import { ErrorNote } from '@/features';
 
 const Root = () => {
   const { t, i18n } = useTranslation();
@@ -28,8 +29,9 @@ const Root = () => {
             },
           }}
         />
+        <ErrorNote />
       </header>
-      <main className="p-3">
+      <main className="mx-auto w-[1092px] p-3">
         <Routes>
           <Route index element={<Home />} />
           <Route path={`${t('slugs.profile.index')}/*`} element={<Profile />} />

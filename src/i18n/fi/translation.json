@@ -3,6 +3,12 @@
   "accessibility-statement": "Saavutettavuusseloste",
   "competences": "Osaamiset",
   "cookies": "Evästeet",
+  "error": {
+    "network": {
+      "500": "Tapahtui odottamaton virhe. Yritä myöhemmin uudelleen.",
+      "title": "Verkkovirhe"
+    }
+  },
   "goals": "Tavoitteet",
   "home": {
     "card-1-action-content": "Kokeile palvelua",
@@ -17,7 +23,14 @@
   "interests": "Kiinnostukset",
   "no-match": "Ei osumaa",
   "privacy-policy": "Tietosuojaseloste",
-  "profile": "Profiili",
+  "profile": {
+    "competences": {
+      "field-description": "Kirjoita taitosi tekstikenttään. Lisää osaaminen klikkaamalla + -merkkiä osaamisen vieressä. Poista osaaminen klikkaamalla rastia.",
+      "heading-1": "Mitä minä osaan",
+      "page-description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi - kaikki tietosi ja kokemuksesi ovat tärkeitä."
+    },
+    "title": "Profiili"
+  },
   "restrictions": "Rajoitteet",
   "search": "Haku",
   "slugs": {
