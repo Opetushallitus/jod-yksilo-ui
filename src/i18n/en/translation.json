@@ -1,8 +1,13 @@
 {
   "about-us": "About Us",
+  "about-us-and-instructions": "About us and instructions",
   "accessibility-statement": "Accessibility Statement",
+  "basic-information": "Basic information",
   "competences": "Competences",
+  "cookie-policy": "Cookie Policy",
   "cookies": "Cookies",
+  "copyright": "© JOD 2024. All rights reserved.",
+  "data-sources": "Data sources",
   "error": {
     "network": {
       "500": "Unexpected error happened",
@@ -36,7 +41,10 @@
   "slugs": {
     "about-us": "about-us",
     "accessibility-statement": "accessibility-statement",
-    "cookies": "cookies",
+    "basic-information": "basic-information",
+    "cookie-policy": "cookie-policy",
+    "data-sources": "data-sources",
+    "instructions": "instructions",
     "privacy-policy": "privacy-policy",
     "profile": {
       "competences": "competences",

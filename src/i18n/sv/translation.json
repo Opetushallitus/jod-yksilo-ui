@@ -1,8 +1,13 @@
 {
   "about-us": "Om Oss",
+  "about-us-and-instructions": "Om oss och bruksanvisningar",
   "accessibility-statement": "Tillgänglighetsutlåtandet",
+  "basic-information": "Grundläggande information",
   "competences": "Kompetens",
+  "cookie-policy": "Policy för kakor",
   "cookies": "Kakor",
+  "copyright": "© JOD 2024. Alla rättigheter förbehålls.",
+  "data-sources": "datakällor",
   "error": {
     "network": {
       "500": "Ett oväntat fel uppstod",
@@ -36,7 +41,10 @@
   "slugs": {
     "about-us": "om-oss",
     "accessibility-statement": "tillganglighetsutlatande",
-    "cookies": "kakor",
+    "basic-information": "grundlaggande-information",
+    "cookie-policy": "policy-for-kakor",
+    "data-sources": "datakallor",
+    "instructions": "bruksanvisningar",
     "privacy-policy": "integritetspolicy",
     "profile": {
       "competences": "kompetens",

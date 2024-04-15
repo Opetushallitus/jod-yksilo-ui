@@ -1,8 +1,13 @@
 {
   "about-us": "Tietoa meistä",
+  "about-us-and-instructions": "Tietoa palvelua ja käyttöohjeet",
   "accessibility-statement": "Saavutettavuusseloste",
+  "basic-information": "Perustiedot",
   "competences": "Osaamiset",
+  "cookie-policy": "Evästekäytäntö",
   "cookies": "Evästeet",
+  "copyright": "© JOD 2024. Kaikki oikeudet pidätetään.",
+  "data-sources": "Datalähteet",
   "error": {
     "network": {
       "500": "Tapahtui odottamaton virhe. Yritä myöhemmin uudelleen.",
@@ -19,7 +24,7 @@
     "card-4-title": "Luo oma profiili ja suunnittele polkusi",
     "title": "Etusivu"
   },
-  "instructions": "Ohjeistus",
+  "instructions": "Ohjeet",
   "interests": "Kiinnostukset",
   "no-match": "Ei osumaa",
   "privacy-policy": "Tietosuojaseloste",
@@ -34,15 +39,18 @@
   "restrictions": "Rajoitteet",
   "search": "Haku",
   "slugs": {
-    "about-us": "tietoa-meista",
+    "about-us": "tietoa-palvelusta",
     "accessibility-statement": "saavutettavuusseloste",
-    "cookies": "evasteet",
+    "basic-information": "perustiedot",
+    "cookie-policy": "evastekaytanto",
+    "data-sources": "datalahteet",
+    "instructions": "ohjeet",
     "privacy-policy": "tietosuojaseloste",
     "profile": {
       "competences": "osaamiset",
       "goals": "tavoitteet",
       "index": "profiili",
-      "instructions": "ohjeistus",
+      "instructions": "ohjeet",
       "interests": "kiinnostukset",
       "restrictions": "rajoitteet",
       "search": "haku"
