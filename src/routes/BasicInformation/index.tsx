@@ -61,7 +61,7 @@ const BasicInformation = () => {
   const { t } = useTranslation();
 
   return (
-    <>
+    <main className="mx-auto max-w-[1140px] p-6">
       <Routes>
         <Route path={t('slugs.cookie-policy')} element={<CookiePolicy />} />
         <Route path={t('slugs.data-sources')} element={<DataSources />} />
@@ -69,7 +69,7 @@ const BasicInformation = () => {
         <Route path={t('slugs.accessibility-statement')} element={<AccessibilityStatement />} />
         <Route path={t('slugs.privacy-policy')} element={<PrivacyPolicy />} />
       </Routes>
-    </>
+    </main>
   );
 };
 

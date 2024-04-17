@@ -56,7 +56,7 @@ const Profile = () => {
   ];
 
   return (
-    <>
+    <main className="mx-auto max-w-[1140px] p-6">
       <Title value={t('profile.title')} />
       <nav>
         <div className="flex justify-between">
@@ -86,7 +86,7 @@ const Profile = () => {
         <Route path={`${t('slugs.profile.search')}/*`} element={<Search />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
-    </>
+    </main>
   );
 };
 

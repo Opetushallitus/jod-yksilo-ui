@@ -17,11 +17,11 @@ const Instructions = () => {
   const { t } = useTranslation();
 
   return (
-    <>
+    <main className="mx-auto max-w-[1140px] p-6">
       <Routes>
         <Route path={t('slugs.about-us')} element={<AboutUs />} />
       </Routes>
-    </>
+    </main>
   );
 };
 

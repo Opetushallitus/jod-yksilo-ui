@@ -59,15 +59,13 @@ const Root = () => {
         />
         <ErrorNote />
       </header>
-      <main className="mx-auto w-[1092px] p-3">
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path={`${t('slugs.profile.index')}/*`} element={<Profile />} />
-          <Route path={`${t('slugs.instructions')}/*`} element={<Instructions />} />
-          <Route path={`${t('slugs.basic-information')}/*`} element={<BasicInformation />} />
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
-      </main>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path={`${t('slugs.profile.index')}/*`} element={<Profile />} />
+        <Route path={`${t('slugs.instructions')}/*`} element={<Instructions />} />
+        <Route path={`${t('slugs.basic-information')}/*`} element={<BasicInformation />} />
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
       <Footer items={items} logos={logos} copyright={t('copyright')} />
     </>
   );
