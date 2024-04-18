@@ -8,7 +8,6 @@ import Instructions from '@/routes/Instructions';
 import BasicInformation from '@/routes/BasicInformation';
 import NoMatch from '@/routes/NoMatch';
 import Profile from '@/routes/Profile';
-import './Root.css';
 import { ErrorNote } from '@/features';
 
 const NavigationBarItem = (to: string, text: string) => ({
@@ -46,6 +45,13 @@ const Root = () => {
       </Helmet>
       <header className="sticky top-0 z-10">
         <NavigationBar
+          logo={
+            <NavLink to={`/${i18n.language}`} className="flex">
+              <div className="inline-flex select-none items-center gap-4 text-[24px] leading-[140%] text-accent">
+                <div className="h-8 w-8 bg-accent"></div>JOD
+              </div>
+            </NavLink>
+          }
           user={{
             name: 'John Doe',
             component: ({ children, ...rootProps }) => {

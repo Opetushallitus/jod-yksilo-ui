@@ -8,7 +8,7 @@ describe('loader', () => {
     const result = await loader({
       request: {} as Request,
       params: {
-        lng: 'en',
+        lng: 'fi',
       },
     });
 
@@ -37,7 +37,7 @@ describe('loader', () => {
       params: { lng: 'de' },
     });
 
-    expect(redirect).toHaveBeenCalledWith('/en');
+    expect(redirect).toHaveBeenCalledWith('/fi');
     expect(result).not.toBeNull();
   });
 });
