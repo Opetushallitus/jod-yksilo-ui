@@ -16,9 +16,9 @@ export const resources: Resource = {
   },
 };
 
-export const lng = 'en';
+export const lng = 'fi';
 
-export const fallbackLng = 'en';
+export const fallbackLng = 'fi';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 i18n.use(initReactI18next).init({
