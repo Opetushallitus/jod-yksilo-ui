@@ -5,6 +5,7 @@
   "accept-preferences": "Hyväksy asetukset",
   "accessibility-statement": "Saavutettavuusseloste",
   "basic-information": "Perustiedot",
+  "basic-information-about-the-service": "Palvelun perustiedot",
   "competences": "Osaamiset",
   "cookie-policy": "Evästekäytäntö",
   "cookies": "Evästeet",
@@ -27,6 +28,8 @@
     "card-4-title": "Luo oma profiili ja suunnittele polkusi",
     "title": "Etusivu"
   },
+  "how-do-i-give-feedback": "Miten annan palautetta?",
+  "how-do-i-use-the-service": "Kuinka käytän palvelua?",
   "instructions": "Ohjeet",
   "interests": "Kiinnostukset",
   "more-information": "Lisätietoa",
@@ -49,6 +52,8 @@
     "basic-information": "perustiedot",
     "cookie-policy": "evastekaytanto",
     "data-sources": "datalahteet",
+    "how-do-i-give-feedback": "miten-annan-palautetta",
+    "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
     "instructions": "ohjeet",
     "privacy-policy": "tietosuojaseloste",
     "profile": {
@@ -61,9 +66,17 @@
       "search": "haku"
     },
     "terms-of-service": "kayttoehdot",
-    "user": "kayttaja"
+    "user": "kayttaja",
+    "what-is-the-service": "mika-palvelu-on",
+    "where-can-i-get-more-help": "mista-saan-lisaa-apua",
+    "who-is-the-service-for": "kenelle-palvelu-on-tarkoitettu",
+    "who-provides-the-service": "kuka-palvelun-tarjoaa"
   },
   "terms-of-service": "Käyttöehdot",
   "updated": "Päivitetty",
-  "user": "Käyttäjä"
+  "user": "Käyttäjä",
+  "what-is-the-service": "Mikä palvelu on?",
+  "where-can-i-get-more-help": "Mistä saan lisää apua?",
+  "who-is-the-service-for": "Kenelle palvelu on tarkoitettu?",
+  "who-provides-the-service": "Kuka palvelun tarjoaa?"
 }
