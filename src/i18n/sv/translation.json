@@ -1,13 +1,16 @@
 {
   "about-us": "Om Oss",
   "about-us-and-instructions": "Om oss och bruksanvisningar",
+  "accept": "Acceptera",
+  "accept-preferences": "Acceptera inställningar",
   "accessibility-statement": "Tillgänglighetsutlåtandet",
   "basic-information": "Grundläggande information",
   "competences": "Kompetens",
   "cookie-policy": "Policy för kakor",
   "cookies": "Kakor",
   "copyright": "© JOD 2024. Alla rättigheter förbehålls.",
-  "data-sources": "datakällor",
+  "data-sources": "Datakällor",
+  "edit": "Redigera",
   "error": {
     "network": {
       "500": "Ett oväntat fel uppstod",
@@ -26,6 +29,7 @@
   },
   "instructions": "Instruktioner",
   "interests": "Intressen",
+  "more-information": "Mer information",
   "no-match": "Ingen matchning",
   "privacy-policy": "Integritetspolicy",
   "profile": {
@@ -36,6 +40,7 @@
     },
     "title": "Profil"
   },
+  "remove-approval": "Ta bort godkännande",
   "restrictions": "Trammels",
   "search": "Sök",
   "slugs": {
@@ -59,6 +64,6 @@
     "user": "anvandare"
   },
   "terms-of-service": "Användningsvillkoren",
-  "user": "Användare",
-  "Welcome to React": "Välkommen till React och react-i18next"
+  "updated": "Uppdaterad",
+  "user": "Användare"
 }

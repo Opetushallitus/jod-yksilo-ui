@@ -1,6 +1,8 @@
 {
   "about-us": "About Us",
   "about-us-and-instructions": "About us and instructions",
+  "accept": "Accept",
+  "accept-preferences": "Accept preferences",
   "accessibility-statement": "Accessibility Statement",
   "basic-information": "Basic information",
   "competences": "Competences",
@@ -8,6 +10,7 @@
   "cookies": "Cookies",
   "copyright": "© JOD 2024. All rights reserved.",
   "data-sources": "Data sources",
+  "edit": "Edit",
   "error": {
     "network": {
       "500": "Unexpected error happened",
@@ -26,6 +29,7 @@
   },
   "instructions": "Instructions",
   "interests": "Interests",
+  "more-information": "More information",
   "no-match": "No Match",
   "privacy-policy": "Privacy Policy",
   "profile": {
@@ -36,6 +40,7 @@
     },
     "title": "Profile"
   },
+  "remove-approval": "Remove approval",
   "restrictions": "Restrictions",
   "search": "Search",
   "slugs": {
@@ -59,6 +64,6 @@
     "user": "user"
   },
   "terms-of-service": "Terms of Service",
-  "user": "User",
-  "Welcome to React": "Welcome to React and react-i18next"
+  "updated": "Updated",
+  "user": "User"
 }

@@ -8,7 +8,7 @@ const Home = () => {
   const profileIndexLink = `/${i18n.language}/${t('slugs.profile.index')}`;
 
   return (
-    <main className="mx-auto max-w-screen-lg">
+    <main className="mx-auto w-full max-w-screen-lg">
       <Title value={t('home.title')} />
       <div className="mx-auto bg-[url('https://images.unsplash.com/photo-1523464862212-d6631d073194?q=80&w=2070')] bg-[top_-6rem_left_-5rem] py-11">
         <div className="mx-auto flex max-w-[1140px] flex-col gap-11 px-6">

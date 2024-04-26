@@ -1,6 +1,8 @@
 {
   "about-us": "Tietoa meistä",
   "about-us-and-instructions": "Tietoa palvelua ja käyttöohjeet",
+  "accept": "Hyväksy",
+  "accept-preferences": "Hyväksy asetukset",
   "accessibility-statement": "Saavutettavuusseloste",
   "basic-information": "Perustiedot",
   "competences": "Osaamiset",
@@ -8,6 +10,7 @@
   "cookies": "Evästeet",
   "copyright": "© JOD 2024. Kaikki oikeudet pidätetään.",
   "data-sources": "Datalähteet",
+  "edit": "Muokkaa",
   "error": {
     "network": {
       "500": "Tapahtui odottamaton virhe. Yritä myöhemmin uudelleen.",
@@ -26,6 +29,7 @@
   },
   "instructions": "Ohjeet",
   "interests": "Kiinnostukset",
+  "more-information": "Lisätietoa",
   "no-match": "Ei osumaa",
   "privacy-policy": "Tietosuojaseloste",
   "profile": {
@@ -36,6 +40,7 @@
     },
     "title": "Profiili"
   },
+  "remove-approval": "Hylkää hyväksyntä",
   "restrictions": "Rajoitteet",
   "search": "Haku",
   "slugs": {
@@ -59,6 +64,6 @@
     "user": "kayttaja"
   },
   "terms-of-service": "Käyttöehdot",
-  "user": "Käyttäjä",
-  "Welcome to React": "Tervetuloa Reactin ja react-i18nextin pariin."
+  "updated": "Päivitetty",
+  "user": "Käyttäjä"
 }
