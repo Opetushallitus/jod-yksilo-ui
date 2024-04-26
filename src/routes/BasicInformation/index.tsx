@@ -294,7 +294,7 @@ const BasicInformation = () => {
           <nav className="sticky top-[170px] rounded-[20px] border-[3px] border-solid border-secondary-gray bg-white px-[20px] py-6">
             <ul>
               <li>
-                <p className="truncate text-heading-4">Palvelun perustiedot</p>
+                <p className="truncate text-heading-4">{t('basic-information-about-the-service')}</p>
                 <ul className="flex flex-col gap-y-2 py-4">
                   {routes.map((route, index) => (
                     <li key={index} className="flex min-h-7 items-center">

@@ -5,6 +5,7 @@
   "accept-preferences": "Accept preferences",
   "accessibility-statement": "Accessibility Statement",
   "basic-information": "Basic information",
+  "basic-information-about-the-service": "Basic information",
   "competences": "Competences",
   "cookie-policy": "Cookie Policy",
   "cookies": "Cookies",
@@ -27,6 +28,8 @@
     "card-4-title": "Create your own profile and plan your path",
     "title": "Frontpage"
   },
+  "how-do-i-give-feedback": "How do I give feedback?",
+  "how-do-i-use-the-service": "How do I use the service?",
   "instructions": "Instructions",
   "interests": "Interests",
   "more-information": "More information",
@@ -49,6 +52,8 @@
     "basic-information": "basic-information",
     "cookie-policy": "cookie-policy",
     "data-sources": "data-sources",
+    "how-do-i-give-feedback": "how-do-I-give-feedback",
+    "how-do-i-use-the-service": "how-do-i-use-the-service",
     "instructions": "instructions",
     "privacy-policy": "privacy-policy",
     "profile": {
@@ -61,9 +66,17 @@
       "search": "search"
     },
     "terms-of-service": "terms-of-service",
-    "user": "user"
+    "user": "user",
+    "what-is-the-service": "what-is-the-service",
+    "where-can-i-get-more-help": "where-can-i-get-more-help",
+    "who-is-the-service-for": "who-is-the-service-for",
+    "who-provides-the-service": "who-provides-the-service"
   },
   "terms-of-service": "Terms of Service",
   "updated": "Updated",
-  "user": "User"
+  "user": "User",
+  "what-is-the-service": "What is the service?",
+  "where-can-i-get-more-help": "Where can I get more help?",
+  "who-is-the-service-for": "Who is the service for?",
+  "who-provides-the-service": "Who provides the service?"
 }

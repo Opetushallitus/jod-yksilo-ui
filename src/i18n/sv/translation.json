@@ -5,6 +5,7 @@
   "accept-preferences": "Acceptera inställningar",
   "accessibility-statement": "Tillgänglighetsutlåtandet",
   "basic-information": "Grundläggande information",
+  "basic-information-about-the-service": "Grundläggande information",
   "competences": "Kompetens",
   "cookie-policy": "Policy för kakor",
   "cookies": "Kakor",
@@ -27,6 +28,8 @@
     "card-4-title": "Skapa din profil och planera din väg",
     "title": "Framsida"
   },
+  "how-do-i-give-feedback": "Hur ger jag feedback?",
+  "how-do-i-use-the-service": "Hur använder jag tjänsten?",
   "instructions": "Instruktioner",
   "interests": "Intressen",
   "more-information": "Mer information",
@@ -49,6 +52,8 @@
     "basic-information": "grundlaggande-information",
     "cookie-policy": "policy-for-kakor",
     "data-sources": "datakallor",
+    "how-do-i-give-feedback": "hur-ger-jag-feedback",
+    "how-do-i-use-the-service": "hur-anvander-jag-tjansten",
     "instructions": "bruksanvisningar",
     "privacy-policy": "integritetspolicy",
     "profile": {
@@ -61,9 +66,17 @@
       "search": "sok"
     },
     "terms-of-service": "anvandningsvillkoren",
-    "user": "anvandare"
+    "user": "anvandare",
+    "what-is-the-service": "vad-ar-tjansten",
+    "where-can-i-get-more-help": "var-kan-jag-fa-mer-hjalp",
+    "who-is-the-service-for": "vem-ar-tjansten-for",
+    "who-provides-the-service": "vem-tillhandahaller-tjansten"
   },
   "terms-of-service": "Användningsvillkoren",
   "updated": "Uppdaterad",
-  "user": "Användare"
+  "user": "Användare",
+  "what-is-the-service": "Vad är tjänsten?",
+  "where-can-i-get-more-help": "Var kan jag få mer hjälp?",
+  "who-is-the-service-for": "Vem är tjänsten för?",
+  "who-provides-the-service": "Vem tillhandahåller tjänsten?"
 }

@@ -25,7 +25,7 @@ const Root = () => {
   const instructions = `/${i18n.language}/${t('slugs.instructions')}`;
   const basicInformation = `/${i18n.language}/${t('slugs.basic-information')}`;
   const items: ComponentProps<typeof Footer>['items'] = [
-    NavigationBarItem(`${instructions}/${t('slugs.about-us')}`, t('about-us-and-instructions')),
+    NavigationBarItem(`${instructions}/${t('slugs.what-is-the-service')}`, t('about-us-and-instructions')),
     NavigationBarItem(`${basicInformation}/${t('slugs.cookie-policy')}`, t('cookie-policy')),
     NavigationBarItem(`${basicInformation}/${t('slugs.data-sources')}`, t('data-sources')),
     NavigationBarItem(`${basicInformation}/${t('slugs.terms-of-service')}`, t('terms-of-service')),
