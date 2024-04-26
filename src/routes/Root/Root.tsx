@@ -1,14 +1,15 @@
-import type { ComponentProps } from 'react';
-import { Route, Routes, NavLink } from 'react-router-dom';
+import { useRef, type ComponentProps } from 'react';
+import { Route, Routes, NavLink, useLocation, matchPath } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
+import { ActionBarContext } from '@/hooks/useActionBar';
+import { ErrorNote } from '@/features';
 import { NavigationBar, Footer } from '@jod/design-system';
 import Home from '@/routes/Home';
 import Instructions from '@/routes/Instructions';
 import BasicInformation from '@/routes/BasicInformation';
 import NoMatch from '@/routes/NoMatch';
 import Profile from '@/routes/Profile';
-import { ErrorNote } from '@/features';
 
 const NavigationBarItem = (to: string, text: string) => ({
   component: ({ className }: { className: string }) => (
@@ -20,6 +21,7 @@ const NavigationBarItem = (to: string, text: string) => ({
 
 const Root = () => {
   const { t, i18n } = useTranslation();
+  const { pathname } = useLocation();
   const instructions = `/${i18n.language}/${t('slugs.instructions')}`;
   const basicInformation = `/${i18n.language}/${t('slugs.basic-information')}`;
   const items: ComponentProps<typeof Footer>['items'] = [
@@ -37,13 +39,17 @@ const Root = () => {
       </a>
     ),
   }));
+  // If homepage, use light variant, otherwise use dark variant
+  const variant: ComponentProps<typeof Footer>['variant'] = matchPath(`/${i18n.language}`, pathname) ? 'light' : 'dark';
+
+  const ref = useRef<HTMLDivElement>(null);
 
   return (
     <>
       <Helmet>
         <html lang={i18n.language} />
       </Helmet>
-      <header className="sticky top-0 z-10">
+      <header className="sticky top-0 z-10 print:hidden">
         <NavigationBar
           logo={
             <NavLink to={`/${i18n.language}`} className="flex">
@@ -65,14 +71,16 @@ const Root = () => {
         />
         <ErrorNote />
       </header>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path={`${t('slugs.profile.index')}/*`} element={<Profile />} />
-        <Route path={`${t('slugs.instructions')}/*`} element={<Instructions />} />
-        <Route path={`${t('slugs.basic-information')}/*`} element={<BasicInformation />} />
-        <Route path="*" element={<NoMatch />} />
-      </Routes>
-      <Footer items={items} logos={logos} copyright={t('copyright')} />
+      <ActionBarContext.Provider value={ref.current}>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path={`${t('slugs.profile.index')}/*`} element={<Profile />} />
+          <Route path={`${t('slugs.instructions')}/*`} element={<Instructions />} />
+          <Route path={`${t('slugs.basic-information')}/*`} element={<BasicInformation />} />
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
+      </ActionBarContext.Provider>
+      <Footer ref={ref} items={items} logos={logos} copyright={t('copyright')} variant={variant} />
     </>
   );
 };
