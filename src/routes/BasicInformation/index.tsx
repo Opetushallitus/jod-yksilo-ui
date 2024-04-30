@@ -1,9 +1,9 @@
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useRoutes, type RouteObject, matchPath, useLocation } from 'react-router-dom';
+import { useRoutes, type RouteObject, matchPath, useLocation } from 'react-router-dom';
 import { useActionBar } from '@/hooks/useActionBar';
-import { Button, useMediaQueries } from '@jod/design-system';
-import { Title } from '@/components';
+import { Button } from '@jod/design-system';
+import { Title, MainLayout, SimpleNavigationList } from '@/components';
 
 const removeApproval = 'remove-approval';
 const acceptPreferences = 'accept-preferences';
@@ -285,37 +285,8 @@ const BasicInformation = () => {
     active: !!matchPath(`${basicInformationPath}/${route.path}`, pathname),
   }));
   const element = useRoutes(routes);
-  const { sm } = useMediaQueries();
 
-  return (
-    <div className="mx-auto grid max-w-[1140px] grow grid-cols-6 gap-6 px-5 pb-6 pt-8 sm:px-6 print:p-0">
-      {sm && (
-        <aside className="order-last col-span-2 print:hidden">
-          <nav className="sticky top-[170px] rounded-[20px] border-[3px] border-solid border-secondary-gray bg-white px-[20px] py-6">
-            <ul>
-              <li>
-                <p className="truncate text-heading-4">{t('basic-information-about-the-service')}</p>
-                <ul className="flex flex-col gap-y-2 py-4">
-                  {routes.map((route, index) => (
-                    <li key={index} className="flex min-h-7 items-center">
-                      {route.active && <div className="mx-3 h-5 w-5 flex-none rounded-full bg-accent" aria-hidden />}
-                      <NavLink
-                        to={route.path!}
-                        className={`${!route.active ? 'ml-7' : ''} truncate text-button-md text-primary-gray hover:underline`.trim()}
-                      >
-                        {route.name}
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
-          </nav>
-        </aside>
-      )}
-      <main className="col-span-6 sm:col-span-4 print:col-span-6">{element}</main>
-    </div>
-  );
+  return <MainLayout navChildren={<SimpleNavigationList routes={routes} />}>{element}</MainLayout>;
 };
 
 export default BasicInformation;
