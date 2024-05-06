@@ -1,6 +1,6 @@
+import { useRoutes, matchPath, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useRoutes, type RouteObject, matchPath, useLocation } from 'react-router-dom';
-import { Title, MainLayout, SimpleNavigationList } from '@/components';
+import { Title, MainLayout, SimpleNavigationList, RoutesNavigationList } from '@/components';
 
 const WhatIsTheService = () => {
   const { t } = useTranslation();
@@ -125,10 +125,7 @@ const Instructions = () => {
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
   const basicInformationPath = `/${i18n.language}/${t('slugs.instructions')}`;
-  const routes: (RouteObject & {
-    name: string;
-    active: boolean;
-  })[] = [
+  const routes = [
     {
       name: t('what-is-the-service'),
       path: t('slugs.what-is-the-service'),
@@ -165,7 +162,17 @@ const Instructions = () => {
   }));
   const element = useRoutes(routes);
 
-  return <MainLayout navChildren={<SimpleNavigationList routes={routes} />}>{element}</MainLayout>;
+  return (
+    <MainLayout
+      navChildren={
+        <SimpleNavigationList title={t('instructions')}>
+          <RoutesNavigationList routes={routes} />
+        </SimpleNavigationList>
+      }
+    >
+      {element}
+    </MainLayout>
+  );
 };
 
 export default Instructions;
