@@ -1,9 +1,9 @@
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { useRoutes, type RouteObject, matchPath, useLocation } from 'react-router-dom';
+import { useRoutes, matchPath, useLocation } from 'react-router-dom';
 import { useActionBar } from '@/hooks/useActionBar';
 import { Button } from '@jod/design-system';
-import { Title, MainLayout, SimpleNavigationList } from '@/components';
+import { Title, MainLayout, SimpleNavigationList, RoutesNavigationList } from '@/components';
 
 const removeApproval = 'remove-approval';
 const acceptPreferences = 'accept-preferences';
@@ -251,10 +251,7 @@ const BasicInformation = () => {
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
   const basicInformationPath = `/${i18n.language}/${t('slugs.basic-information')}`;
-  const routes: (RouteObject & {
-    name: string;
-    active: boolean;
-  })[] = [
+  const routes = [
     {
       name: t('cookie-policy'),
       path: t('slugs.cookie-policy'),
@@ -286,7 +283,17 @@ const BasicInformation = () => {
   }));
   const element = useRoutes(routes);
 
-  return <MainLayout navChildren={<SimpleNavigationList routes={routes} />}>{element}</MainLayout>;
+  return (
+    <MainLayout
+      navChildren={
+        <SimpleNavigationList title={t('basic-information-about-the-service')}>
+          <RoutesNavigationList routes={routes} />
+        </SimpleNavigationList>
+      }
+    >
+      {element}
+    </MainLayout>
+  );
 };
 
 export default BasicInformation;

@@ -18,6 +18,8 @@
       "title": "Verkkovirhe"
     }
   },
+  "expand-less": "Näytä vähemmän",
+  "expand-more": "Näytä lisää",
   "goals": "Tavoitteet",
   "home": {
     "card-1-action-content": "Kokeile palvelua",
@@ -34,6 +36,16 @@
   "interests": "Kiinnostukset",
   "more-information": "Lisätietoa",
   "no-match": "Ei osumaa",
+  "personal-pages": {
+    "competences": "Osaamiseni",
+    "education-history": "Koulutukseni",
+    "favorites": "Suosikkini",
+    "free-time-activities": "Vapaa-ajan toimintoni",
+    "index": "Omat sivuni",
+    "preferences": "Asetukseni",
+    "something-else": "Jotain muuta",
+    "work-history": "Työpaikkani"
+  },
   "privacy-policy": "Tietosuojaseloste",
   "profile": {
     "competences": {
@@ -55,6 +67,16 @@
     "how-do-i-give-feedback": "miten-annan-palautetta",
     "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
     "instructions": "ohjeet",
+    "personal-pages": {
+      "competences": "osaamiseni",
+      "education-history": "koulutukseni",
+      "favorites": "suosikkini",
+      "free-time-activities": "vapaa-ajan-toimintoni",
+      "index": "omat-sivuni",
+      "preferences": "asetukseni",
+      "something-else": "jotain-muuta",
+      "work-history": "tyopaikkani"
+    },
     "privacy-policy": "tietosuojaseloste",
     "profile": {
       "competences": "osaamiset",
@@ -75,6 +97,7 @@
   "terms-of-service": "Käyttöehdot",
   "updated": "Päivitetty",
   "user": "Käyttäjä",
+  "welcome": "Hei {{name}} - tervetuloa",
   "what-is-the-service": "Mikä palvelu on?",
   "where-can-i-get-more-help": "Mistä saan lisää apua?",
   "who-is-the-service-for": "Kenelle palvelu on tarkoitettu?",

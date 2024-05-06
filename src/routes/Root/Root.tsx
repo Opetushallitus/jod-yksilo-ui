@@ -10,6 +10,7 @@ import Instructions from '@/routes/Instructions';
 import BasicInformation from '@/routes/BasicInformation';
 import NoMatch from '@/routes/NoMatch';
 import Profile from '@/routes/Profile';
+import PersonalPages from '@/routes/PersonalPages';
 
 const NavigationBarItem = (to: string, text: string) => ({
   component: ({ className }: { className: string }) => (
@@ -62,7 +63,10 @@ const Root = () => {
             name: 'John Doe',
             component: ({ children, ...rootProps }) => {
               return (
-                <NavLink to={`/${i18n.language}/${t('slugs.user')}`} {...rootProps}>
+                <NavLink
+                  to={`/${i18n.language}/${t('slugs.personal-pages.index')}/${t('slugs.personal-pages.preferences')}`}
+                  {...rootProps}
+                >
                   {children}
                 </NavLink>
               );
@@ -75,6 +79,7 @@ const Root = () => {
         <Routes>
           <Route index element={<Home />} />
           <Route path={`${t('slugs.profile.index')}/*`} element={<Profile />} />
+          <Route path={`${t('slugs.personal-pages.index')}/*`} element={<PersonalPages />} />
           <Route path={`${t('slugs.instructions')}/*`} element={<Instructions />} />
           <Route path={`${t('slugs.basic-information')}/*`} element={<BasicInformation />} />
           <Route path="*" element={<NoMatch />} />

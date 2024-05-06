@@ -18,6 +18,8 @@
       "title": "Network error"
     }
   },
+  "expand-less": "Expand less",
+  "expand-more": "Expand more",
   "goals": "Goals",
   "home": {
     "card-1-action-content": "Get started",
@@ -34,6 +36,16 @@
   "interests": "Interests",
   "more-information": "More information",
   "no-match": "No Match",
+  "personal-pages": {
+    "competences": "Competences",
+    "education-history": "Education history",
+    "favorites": "Favorites",
+    "free-time-activities": "Free time activities",
+    "index": "Personal pages",
+    "preferences": "Preferences",
+    "something-else": "Something else",
+    "work-history": "Work history"
+  },
   "privacy-policy": "Privacy Policy",
   "profile": {
     "competences": {
@@ -55,6 +67,16 @@
     "how-do-i-give-feedback": "how-do-I-give-feedback",
     "how-do-i-use-the-service": "how-do-i-use-the-service",
     "instructions": "instructions",
+    "personal-pages": {
+      "competences": "competences",
+      "education-history": "education-history",
+      "favorites": "favorites",
+      "free-time-activities": "free-time-activities",
+      "index": "personal-pages",
+      "preferences": "preferences",
+      "something-else": "something-else",
+      "work-history": "work-history"
+    },
     "privacy-policy": "privacy-policy",
     "profile": {
       "competences": "competences",
@@ -75,6 +97,7 @@
   "terms-of-service": "Terms of Service",
   "updated": "Updated",
   "user": "User",
+  "welcome": "Hey {{name}} - welcome",
   "what-is-the-service": "What is the service?",
   "where-can-i-get-more-help": "Where can I get more help?",
   "who-is-the-service-for": "Who is the service for?",

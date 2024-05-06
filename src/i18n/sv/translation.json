@@ -18,6 +18,8 @@
       "title": "Nätverksfel"
     }
   },
+  "expand-less": "Expandera mindre",
+  "expand-more": "Expandera mer",
   "goals": "Mål",
   "home": {
     "card-1-action-content": "Prova vår tjänst",
@@ -34,6 +36,16 @@
   "interests": "Intressen",
   "more-information": "Mer information",
   "no-match": "Ingen matchning",
+  "personal-pages": {
+    "competences": "Kompetens",
+    "education-history": "Utbildningshistoria",
+    "favorites": "Favoriter",
+    "free-time-activities": "Fritidsaktiviteter",
+    "index": "Personliga sidor",
+    "preferences": "Inställningar",
+    "something-else": "Något annat",
+    "work-history": "Arbetslivserfarenhet"
+  },
   "privacy-policy": "Integritetspolicy",
   "profile": {
     "competences": {
@@ -55,6 +67,16 @@
     "how-do-i-give-feedback": "hur-ger-jag-feedback",
     "how-do-i-use-the-service": "hur-anvander-jag-tjansten",
     "instructions": "bruksanvisningar",
+    "personal-pages": {
+      "competences": "kompetens",
+      "education-history": "utbildningshistoria",
+      "favorites": "favoriter",
+      "free-time-activities": "fritidsaktiviteter",
+      "index": "personliga-sidor",
+      "preferences": "inställningar",
+      "something-else": "nagot-annat",
+      "work-history": "arbetslivserfarenhet"
+    },
     "privacy-policy": "integritetspolicy",
     "profile": {
       "competences": "kompetens",
@@ -75,6 +97,7 @@
   "terms-of-service": "Användningsvillkoren",
   "updated": "Uppdaterad",
   "user": "Användare",
+  "welcome": "Hej {{name}} - välkommen",
   "what-is-the-service": "Vad är tjänsten?",
   "where-can-i-get-more-help": "Var kan jag få mer hjälp?",
   "who-is-the-service-for": "Vem är tjänsten för?",
