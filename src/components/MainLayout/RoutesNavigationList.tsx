@@ -10,8 +10,8 @@ export interface RoutesNavigationListProps {
 
 export const RoutesNavigationList = ({ routes }: RoutesNavigationListProps) => (
   <ul className="flex flex-col gap-y-2 py-4">
-    {routes.map((route, index) => (
-      <li key={index} className="flex min-h-7 items-center">
+    {routes.map((route) => (
+      <li key={route.path} className="flex min-h-7 items-center">
         {route.active && <div className="mx-3 h-5 w-5 flex-none rounded-full bg-accent" aria-hidden />}
         <NavLink
           to={route.path}
