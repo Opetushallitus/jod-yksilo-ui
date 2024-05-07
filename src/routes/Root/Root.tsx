@@ -1,5 +1,5 @@
 import { useRef, type ComponentProps } from 'react';
-import { Route, Routes, NavLink, useLocation, matchPath } from 'react-router-dom';
+import { Route, Routes, NavLink, useLocation, matchPath, ScrollRestoration } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { ActionBarContext } from '@/hooks/useActionBar';
@@ -42,11 +42,11 @@ const Root = () => {
   }));
   // If homepage, use light variant, otherwise use dark variant
   const variant: ComponentProps<typeof Footer>['variant'] = matchPath(`/${i18n.language}`, pathname) ? 'light' : 'dark';
-
   const ref = useRef<HTMLDivElement>(null);
 
   return (
     <>
+      <ScrollRestoration />
       <Helmet>
         <html lang={i18n.language} />
       </Helmet>
