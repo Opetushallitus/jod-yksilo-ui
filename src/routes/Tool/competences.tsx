@@ -66,10 +66,10 @@ const Competences = () => {
   return (
     <div className="flex">
       <div className="basis-2/3">
-        <h1 className="mb-5 mt-7 text-heading-1 text-primary-gray">{t('profile.competences.heading-1')}</h1>
+        <h1 className="mb-5 mt-7 text-heading-1 text-primary-gray">{t('tool.competences.heading-1')}</h1>
         <div className="pb-7">
-          <p className="mb-6 text-body-md text-primary-gray">{t('profile.competences.page-description')}</p>
-          <p className="text-body-md text-primary-gray">{t('profile.competences.field-description')}</p>
+          <p className="mb-6 text-body-md text-primary-gray">{t('tool.competences.page-description')}</p>
+          <p className="text-body-md text-primary-gray">{t('tool.competences.field-description')}</p>
         </div>
         <InputField label="Taitosi" value={skill} onChange={inputChangeHandler} />
         <div className="mt-7 min-h-[200px] rounded border p-4">

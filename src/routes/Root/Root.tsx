@@ -9,10 +9,11 @@ import Home from '@/routes/Home';
 import UserGuide from '@/routes/UserGuide';
 import BasicInformation from '@/routes/BasicInformation';
 import NoMatch from '@/routes/NoMatch';
-import Profile from '@/routes/Profile';
+import Tool from '@/routes/Tool';
 import PersonalPages from '@/routes/PersonalPages';
 
 const NavigationBarItem = (to: string, text: string) => ({
+  key: to,
   component: ({ className }: { className: string }) => (
     <NavLink to={to} className={className}>
       {text}
@@ -34,6 +35,7 @@ const Root = () => {
     NavigationBarItem(`${basicInformation}/${t('slugs.privacy-policy')}`, t('privacy-policy')),
   ];
   const logos: ComponentProps<typeof Footer>['logos'] = [1, 2, 3].map((item) => ({
+    key: item,
     component: ({ key, className }) => (
       <a key={key} href={`/logo${item}`} className={className}>
         Logo {item}
@@ -78,7 +80,7 @@ const Root = () => {
       <ActionBarContext.Provider value={ref.current}>
         <Routes>
           <Route index element={<Home />} />
-          <Route path={`${t('slugs.profile.index')}/*`} element={<Profile />} />
+          <Route path={`${t('slugs.tool.index')}/*`} element={<Tool />} />
           <Route path={`${t('slugs.personal-pages.index')}/*`} element={<PersonalPages />} />
           <Route path={`${t('slugs.user-guide')}/*`} element={<UserGuide />} />
           <Route path={`${t('slugs.basic-information')}/*`} element={<BasicInformation />} />
