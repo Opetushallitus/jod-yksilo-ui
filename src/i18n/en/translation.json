@@ -46,13 +46,13 @@
     "work-history": "Work History"
   },
   "privacy-policy": "Privacy Policy",
-  "profile": {
+  "tool": {
     "competences": {
       "field-description": "Write your skills in the text field. Add skills by clicking the + sign next to the skill. Remove a skill by clicking the cross.",
       "heading-1": "What I can do",
       "page-description": "Tell the service about your strengths and skills. Be proud of yourself, because you probably know more than you think. Think about your education, work experience and hobbies - all your knowledge and experience are important."
     },
-    "title": "Profile"
+    "title": "Tool"
   },
   "remove-approval": "Remove approval",
   "restrictions": "Restrictions",
@@ -76,10 +76,10 @@
       "work-history": "work-history"
     },
     "privacy-policy": "privacy-policy",
-    "profile": {
+    "tool": {
       "competences": "competences",
       "goals": "goals",
-      "index": "profile",
+      "index": "tool",
       "instructions": "instructions",
       "interests": "interests",
       "restrictions": "restrictions",

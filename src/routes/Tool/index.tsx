@@ -24,40 +24,40 @@ const MatchedLink = ({ link }: { link: { to: string; text: string; icon: string 
   );
 };
 
-const Profile = () => {
+const Tool = () => {
   const { t, i18n } = useTranslation();
 
-  const profileIndexSlug = t('slugs.profile.index');
+  const toolIndexSlug = t('slugs.tool.index');
   const linksOnLeft = [
     {
-      to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.instructions')}`,
+      to: `/${i18n.language}/${toolIndexSlug}/${t('slugs.tool.instructions')}`,
       text: t('instructions'),
       icon: 'menu_book',
     },
-    { to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.goals')}`, text: t('goals'), icon: 'target' },
+    { to: `/${i18n.language}/${toolIndexSlug}/${t('slugs.tool.goals')}`, text: t('goals'), icon: 'target' },
     {
-      to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.competences')}`,
+      to: `/${i18n.language}/${toolIndexSlug}/${t('slugs.tool.competences')}`,
       text: t('competences'),
       icon: 'school',
     },
     {
-      to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.interests')}`,
+      to: `/${i18n.language}/${toolIndexSlug}/${t('slugs.tool.interests')}`,
       text: t('interests'),
       icon: 'interests',
     },
     {
-      to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.restrictions')}`,
+      to: `/${i18n.language}/${toolIndexSlug}/${t('slugs.tool.restrictions')}`,
       text: t('restrictions'),
       icon: 'block',
     },
   ];
   const linkOnRight = [
-    { to: `/${i18n.language}/${profileIndexSlug}/${t('slugs.profile.search')}`, text: t('search'), icon: 'search' },
+    { to: `/${i18n.language}/${toolIndexSlug}/${t('slugs.tool.search')}`, text: t('search'), icon: 'search' },
   ];
 
   return (
     <main className="mx-auto max-w-[1140px] p-6">
-      <Title value={t('profile.title')} />
+      <Title value={t('tool.title')} />
       <nav>
         <div className="flex justify-between">
           <ul className="m-0 space-x-[25px] p-0">
@@ -77,17 +77,17 @@ const Profile = () => {
         </div>
       </nav>
       <Routes>
-        <Route index element={<Navigate to={`${t('slugs.profile.instructions')}`} />} />
-        <Route path={`${t('slugs.profile.instructions')}/*`} element={<Instructions />} />
-        <Route path={`${t('slugs.profile.goals')}/*`} element={<Goals />} />
-        <Route path={`${t('slugs.profile.competences')}/*`} element={<Competences />} />
-        <Route path={`${t('slugs.profile.interests')}/*`} element={<Interests />} />
-        <Route path={`${t('slugs.profile.restrictions')}/*`} element={<Restrictions />} />
-        <Route path={`${t('slugs.profile.search')}/*`} element={<Search />} />
+        <Route index element={<Navigate to={`${t('slugs.tool.instructions')}`} />} />
+        <Route path={`${t('slugs.tool.instructions')}/*`} element={<Instructions />} />
+        <Route path={`${t('slugs.tool.goals')}/*`} element={<Goals />} />
+        <Route path={`${t('slugs.tool.competences')}/*`} element={<Competences />} />
+        <Route path={`${t('slugs.tool.interests')}/*`} element={<Interests />} />
+        <Route path={`${t('slugs.tool.restrictions')}/*`} element={<Restrictions />} />
+        <Route path={`${t('slugs.tool.search')}/*`} element={<Search />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </main>
   );
 };
 
-export default Profile;
+export default Tool;

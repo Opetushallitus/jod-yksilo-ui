@@ -46,13 +46,13 @@
     "work-history": "Työpaikkani"
   },
   "privacy-policy": "Tietosuojaseloste",
-  "profile": {
+  "tool": {
     "competences": {
       "field-description": "Kirjoita taitosi tekstikenttään. Lisää osaaminen klikkaamalla + -merkkiä osaamisen vieressä. Poista osaaminen klikkaamalla rastia.",
       "heading-1": "Mitä minä osaan",
       "page-description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi - kaikki tietosi ja kokemuksesi ovat tärkeitä."
     },
-    "title": "Profiili"
+    "title": "Työkalu"
   },
   "remove-approval": "Hylkää hyväksyntä",
   "restrictions": "Rajoitteet",
@@ -76,10 +76,10 @@
       "work-history": "tyopaikkani"
     },
     "privacy-policy": "tietosuojaseloste",
-    "profile": {
+    "tool": {
       "competences": "osaamiset",
       "goals": "tavoitteet",
-      "index": "profiili",
+      "index": "tyokalu",
       "instructions": "ohjeet",
       "interests": "kiinnostukset",
       "restrictions": "rajoitteet",

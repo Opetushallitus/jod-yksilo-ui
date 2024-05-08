@@ -5,7 +5,7 @@ import { HeroCard } from '@jod/design-system';
 const Home = () => {
   const { t, i18n } = useTranslation();
 
-  const profileIndexLink = `/${i18n.language}/${t('slugs.profile.index')}`;
+  const toolIndexLink = `/${i18n.language}/${t('slugs.tool.index')}`;
 
   return (
     <main className="mx-auto w-full max-w-screen-lg">
@@ -18,13 +18,13 @@ const Home = () => {
               backgroundColor="#006DB3F2"
               content={t('home.card-1-content')}
               title={t('home.card-1-title')}
-              href={profileIndexLink}
+              href={toolIndexLink}
             />
           </div>
           <div className="grid grid-flow-row auto-rows-max grid-cols-1 gap-[32px] sm:grid-cols-3">
-            <HeroCard backgroundColor="#00A8B3F2" title={t('home.card-2-title')} href={profileIndexLink} />
-            <HeroCard backgroundColor="#EE7C45F2" title={t('home.card-3-title')} href={profileIndexLink} />
-            <HeroCard backgroundColor="#CD4EB3F2" title={t('home.card-4-title')} href={profileIndexLink} />
+            <HeroCard backgroundColor="#00A8B3F2" title={t('home.card-2-title')} href={toolIndexLink} />
+            <HeroCard backgroundColor="#EE7C45F2" title={t('home.card-3-title')} href={toolIndexLink} />
+            <HeroCard backgroundColor="#CD4EB3F2" title={t('home.card-4-title')} href={toolIndexLink} />
           </div>
         </div>
       </div>
