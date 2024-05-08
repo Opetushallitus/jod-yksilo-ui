@@ -286,7 +286,7 @@ const BasicInformation = () => {
   return (
     <MainLayout
       navChildren={
-        <SimpleNavigationList title={t('basic-information-about-the-service')}>
+        <SimpleNavigationList title={t('basic-information')}>
           <RoutesNavigationList routes={routes} />
         </SimpleNavigationList>
       }

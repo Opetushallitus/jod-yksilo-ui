@@ -121,10 +121,10 @@ const HowDoIGiveFeedback = () => {
   );
 };
 
-const Instructions = () => {
+const UserGuide = () => {
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
-  const basicInformationPath = `/${i18n.language}/${t('slugs.instructions')}`;
+  const basicInformationPath = `/${i18n.language}/${t('slugs.user-guide')}`;
   const routes = [
     {
       name: t('what-is-the-service'),
@@ -165,7 +165,7 @@ const Instructions = () => {
   return (
     <MainLayout
       navChildren={
-        <SimpleNavigationList title={t('instructions')}>
+        <SimpleNavigationList title={t('user-guide')}>
           <RoutesNavigationList routes={routes} />
         </SimpleNavigationList>
       }
@@ -175,4 +175,4 @@ const Instructions = () => {
   );
 };
 
-export default Instructions;
+export default UserGuide;
