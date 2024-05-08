@@ -1,16 +1,15 @@
 {
   "about-us": "About Us",
-  "about-us-and-instructions": "About us and instructions",
+  "about-us-and-user-guide": "About Us and User Guide",
   "accept": "Accept",
   "accept-preferences": "Accept preferences",
   "accessibility-statement": "Accessibility Statement",
-  "basic-information": "Basic information",
-  "basic-information-about-the-service": "Basic information",
+  "basic-information": "Basic Information",
   "competences": "Competences",
   "cookie-policy": "Cookie Policy",
   "cookies": "Cookies",
   "copyright": "© JOD 2024. All rights reserved.",
-  "data-sources": "Data sources",
+  "data-sources": "Data Sources",
   "edit": "Edit",
   "error": {
     "network": {
@@ -38,13 +37,13 @@
   "no-match": "No Match",
   "personal-pages": {
     "competences": "Competences",
-    "education-history": "Education history",
+    "education-history": "Education History",
     "favorites": "Favorites",
-    "free-time-activities": "Free time activities",
-    "index": "Personal pages",
+    "free-time-activities": "Free Time Activities",
+    "index": "Personal Pages",
     "preferences": "Preferences",
-    "something-else": "Something else",
-    "work-history": "Work history"
+    "something-else": "Something Else",
+    "work-history": "Work History"
   },
   "privacy-policy": "Privacy Policy",
   "profile": {
@@ -66,7 +65,6 @@
     "data-sources": "data-sources",
     "how-do-i-give-feedback": "how-do-I-give-feedback",
     "how-do-i-use-the-service": "how-do-i-use-the-service",
-    "instructions": "instructions",
     "personal-pages": {
       "competences": "competences",
       "education-history": "education-history",
@@ -89,6 +87,7 @@
     },
     "terms-of-service": "terms-of-service",
     "user": "user",
+    "user-guide": "user-guide",
     "what-is-the-service": "what-is-the-service",
     "where-can-i-get-more-help": "where-can-i-get-more-help",
     "who-is-the-service-for": "who-is-the-service-for",
@@ -97,7 +96,8 @@
   "terms-of-service": "Terms of Service",
   "updated": "Updated",
   "user": "User",
-  "welcome": "Hey {{name}} - welcome",
+  "user-guide": "User Guide",
+  "welcome": "Hello {{name}} - welcome",
   "what-is-the-service": "What is the service?",
   "where-can-i-get-more-help": "Where can I get more help?",
   "who-is-the-service-for": "Who is the service for?",

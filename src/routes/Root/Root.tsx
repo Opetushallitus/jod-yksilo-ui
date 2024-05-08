@@ -6,7 +6,7 @@ import { ActionBarContext } from '@/hooks/useActionBar';
 import { ErrorNote } from '@/features';
 import { NavigationBar, Footer } from '@jod/design-system';
 import Home from '@/routes/Home';
-import Instructions from '@/routes/Instructions';
+import UserGuide from '@/routes/UserGuide';
 import BasicInformation from '@/routes/BasicInformation';
 import NoMatch from '@/routes/NoMatch';
 import Profile from '@/routes/Profile';
@@ -23,10 +23,10 @@ const NavigationBarItem = (to: string, text: string) => ({
 const Root = () => {
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
-  const instructions = `/${i18n.language}/${t('slugs.instructions')}`;
+  const userGuide = `/${i18n.language}/${t('slugs.user-guide')}`;
   const basicInformation = `/${i18n.language}/${t('slugs.basic-information')}`;
   const items: ComponentProps<typeof Footer>['items'] = [
-    NavigationBarItem(`${instructions}/${t('slugs.what-is-the-service')}`, t('about-us-and-instructions')),
+    NavigationBarItem(`${userGuide}/${t('slugs.what-is-the-service')}`, t('about-us-and-user-guide')),
     NavigationBarItem(`${basicInformation}/${t('slugs.cookie-policy')}`, t('cookie-policy')),
     NavigationBarItem(`${basicInformation}/${t('slugs.data-sources')}`, t('data-sources')),
     NavigationBarItem(`${basicInformation}/${t('slugs.terms-of-service')}`, t('terms-of-service')),
@@ -80,7 +80,7 @@ const Root = () => {
           <Route index element={<Home />} />
           <Route path={`${t('slugs.profile.index')}/*`} element={<Profile />} />
           <Route path={`${t('slugs.personal-pages.index')}/*`} element={<PersonalPages />} />
-          <Route path={`${t('slugs.instructions')}/*`} element={<Instructions />} />
+          <Route path={`${t('slugs.user-guide')}/*`} element={<UserGuide />} />
           <Route path={`${t('slugs.basic-information')}/*`} element={<BasicInformation />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
