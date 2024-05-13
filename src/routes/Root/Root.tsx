@@ -1,16 +1,18 @@
 import { useRef, type ComponentProps } from 'react';
-import { Route, Routes, NavLink, useLocation, matchPath, ScrollRestoration } from 'react-router-dom';
+import { Route, Routes, NavLink, useLocation, matchPath, ScrollRestoration, useLoaderData } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { ErrorNote } from '@/features';
 import { NavigationBar, Footer, SkipLink } from '@jod/design-system';
+import { RootLoaderData } from './loader';
 import Home from '@/routes/Home';
 import UserGuide from '@/routes/UserGuide';
 import BasicInformation from '@/routes/BasicInformation';
-import NoMatch from '@/routes/NoMatch';
 import Tool from '@/routes/Tool';
 import PersonalPages from '@/routes/PersonalPages';
+import NoMatch from '@/routes/NoMatch';
+import { AuthContext } from '@/hooks/useAuth';
 
 const NavigationBarItem = (to: string, text: string) => ({
   key: to,
@@ -36,8 +38,8 @@ const Root = () => {
   ];
   const logos: ComponentProps<typeof Footer>['logos'] = [1, 2, 3].map((item) => ({
     key: item,
-    component: ({ key, className }) => (
-      <a key={key} href={`/logo${item}`} className={className}>
+    component: ({ className }) => (
+      <a href={`/logo${item}`} className={className}>
         Logo {item}
       </a>
     ),
@@ -46,13 +48,15 @@ const Root = () => {
   const variant: ComponentProps<typeof Footer>['variant'] = matchPath(`/${i18n.language}`, pathname) ? 'light' : 'dark';
   const ref = useRef<HTMLDivElement>(null);
 
+  const data = useLoaderData() as RootLoaderData;
+
   return (
-    <>
+    <AuthContext.Provider value={data}>
       <ScrollRestoration />
       <Helmet>
         <html lang={i18n.language} />
       </Helmet>
-      <header className="sticky top-0 z-10 print:hidden">
+      <header role="banner" className="sticky top-0 z-10 print:hidden">
         <SkipLink hash="#jod-main" label={t('skiplinks.main')} />
         <NavigationBar
           logo={
@@ -62,19 +66,22 @@ const Root = () => {
               </div>
             </NavLink>
           }
-          user={{
-            name: 'John Doe',
-            component: ({ children, ...rootProps }) => {
-              return (
-                <NavLink
-                  to={`/${i18n.language}/${t('slugs.personal-pages.index')}/${t('slugs.personal-pages.preferences')}`}
-                  {...rootProps}
-                >
-                  {children}
-                </NavLink>
-              );
-            },
-          }}
+          user={
+            data.csrf && {
+              name: 'Reetta Räppänä',
+              component: ({ children, ...rootProps }) => {
+                return (
+                  <NavLink
+                    to={`/${i18n.language}/${t('slugs.personal-pages.index')}/${t('slugs.personal-pages.preferences')}`}
+                    {...rootProps}
+                  >
+                    {children}
+                  </NavLink>
+                );
+              },
+            }
+          }
+          login={{ url: '/login', text: 'Login' }}
         />
         <ErrorNote />
       </header>
@@ -89,7 +96,7 @@ const Root = () => {
         </Routes>
       </ActionBarContext.Provider>
       <Footer ref={ref} items={items} logos={logos} copyright={t('copyright')} variant={variant} />
-    </>
+    </AuthContext.Provider>
   );
 };
 

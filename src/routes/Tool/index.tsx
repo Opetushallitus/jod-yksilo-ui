@@ -56,9 +56,9 @@ const Tool = () => {
   ];
 
   return (
-    <main className="mx-auto max-w-[1140px] p-6" id="jod-main">
+    <main role="main" className="mx-auto max-w-[1140px] p-6" id="jod-main">
       <Title value={t('tool.title')} />
-      <nav>
+      <nav role="navigation">
         <div className="flex justify-between">
           <ul className="m-0 space-x-[25px] p-0">
             {linksOnLeft.map((link) => (

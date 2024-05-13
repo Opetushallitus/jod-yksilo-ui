@@ -34,6 +34,10 @@
   "instructions": "Ohjeet",
   "interests": "Kiinnostukset",
   "more-information": "Lisätietoa",
+  "no-internet-access": {
+    "content": "Tämä palvelu vaatii internetyhteyden toimiakseen. Tarkista yhteys ja yritä uudelleen.",
+    "title": "Ei internetyhteyttä"
+  },
   "no-match": "Ei osumaa",
   "personal-pages": {
     "competences": "Osaamiseni",
@@ -46,14 +50,6 @@
     "work-history": "Työpaikkani"
   },
   "privacy-policy": "Tietosuojaseloste",
-  "tool": {
-    "competences": {
-      "field-description": "Kirjoita taitosi tekstikenttään. Lisää osaaminen klikkaamalla + -merkkiä osaamisen vieressä. Poista osaaminen klikkaamalla rastia.",
-      "heading-1": "Mitä minä osaan",
-      "page-description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi - kaikki tietosi ja kokemuksesi ovat tärkeitä."
-    },
-    "title": "Työkalu"
-  },
   "remove-approval": "Hylkää hyväksyntä",
   "restrictions": "Rajoitteet",
   "search": "Haku",
@@ -65,6 +61,7 @@
     "data-sources": "datalahteet",
     "how-do-i-give-feedback": "miten-annan-palautetta",
     "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
+    "no-internet-connection": "ei-internetyhteytta",
     "personal-pages": {
       "competences": "osaamiseni",
       "education-history": "koulutukseni",
@@ -76,6 +73,7 @@
       "work-history": "tyopaikkani"
     },
     "privacy-policy": "tietosuojaseloste",
+    "terms-of-service": "kayttoehdot",
     "tool": {
       "competences": "osaamiset",
       "goals": "tavoitteet",
@@ -85,7 +83,6 @@
       "restrictions": "rajoitteet",
       "search": "haku"
     },
-    "terms-of-service": "kayttoehdot",
     "user": "kayttaja",
     "user-guide": "ohjeet",
     "what-is-the-service": "mika-palvelu-on",
@@ -94,6 +91,14 @@
     "who-provides-the-service": "kuka-palvelun-tarjoaa"
   },
   "terms-of-service": "Käyttöehdot",
+  "tool": {
+    "competences": {
+      "field-description": "Kirjoita taitosi tekstikenttään. Lisää osaaminen klikkaamalla + -merkkiä osaamisen vieressä. Poista osaaminen klikkaamalla rastia.",
+      "heading-1": "Mitä minä osaan",
+      "page-description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi - kaikki tietosi ja kokemuksesi ovat tärkeitä."
+    },
+    "title": "Työkalu"
+  },
   "updated": "Päivitetty",
   "user": "Käyttäjä",
   "user-guide": "Ohjeet",
