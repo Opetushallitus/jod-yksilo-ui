@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { clearErrorNote, setErrorNote } from '@/features/errorNote/errorNoteSlice';
 import { InputField } from '@jod/design-system';
+import { useAuth } from '@/hooks/useAuth';
 
 interface Competence {
   id: number;
@@ -15,6 +16,7 @@ const Competences = () => {
   const [competences, setCompetences] = React.useState<Competence[]>([]);
   const [skill, setSkill] = React.useState('');
   const dispatch = useDispatch();
+  const { csrf } = useAuth();
 
   const debounce = <F extends (...args: never[]) => void>(func: F, waitFor = 800) => {
     let timeoutId: NodeJS.Timeout | null = null;
@@ -28,11 +30,15 @@ const Competences = () => {
 
   const fetchCompetences = React.useCallback(
     (newSkill: string) => {
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+      if (csrf) {
+        headers[csrf.headerName] = csrf.token;
+      }
       fetch('/api/ehdotus/osaamiset', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({ kuvaus: newSkill }),
       })
         .then((resp) => {
@@ -51,7 +57,7 @@ const Competences = () => {
           console.error('Error:', error);
         });
     },
-    [dispatch],
+    [dispatch, csrf],
   );
 
   const debouncedFetchCompetences = React.useMemo(() => {

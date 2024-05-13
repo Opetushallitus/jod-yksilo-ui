@@ -34,6 +34,10 @@
   "instructions": "Instruktioner",
   "interests": "Intressen",
   "more-information": "Mer information",
+  "no-internet-access": {
+    "content": "Kontrollera din internetanslutning och försök igen.",
+    "title": "Ingen internetanslutning"
+  },
   "no-match": "Ingen matchning",
   "personal-pages": {
     "competences": "Kompetens",
@@ -46,14 +50,6 @@
     "work-history": "Arbetslivserfarenhet"
   },
   "privacy-policy": "Integritetspolicy",
-  "tool": {
-    "competences": {
-      "field-description": "Skriv dina färdigheter i textrutan. Lägg till färdigheter genom att klicka på + -tecknet bredvid färdigheten. Ta bort en färdighet genom att klicka på krysset.",
-      "heading-1": "Vad jag kan",
-      "page-description": "Berätta för tjänsten om dina styrkor och färdigheter. Var stolt över dig själv, för du kan förmodligen mer än du tror. Tänk på din utbildning, arbetslivserfarenhet och hobbyer - all din kunskap och erfarenhet är viktig."
-    },
-    "title": "Verktyg"
-  },
   "remove-approval": "Ta bort godkännande",
   "restrictions": "Trammels",
   "search": "Sök",
@@ -65,6 +61,7 @@
     "data-sources": "datakallor",
     "how-do-i-give-feedback": "hur-ger-jag-feedback",
     "how-do-i-use-the-service": "hur-anvander-jag-tjansten",
+    "no-internet-connection": "ingen-internetanslutning",
     "personal-pages": {
       "competences": "kompetens",
       "education-history": "utbildningshistoria",
@@ -76,6 +73,7 @@
       "work-history": "arbetslivserfarenhet"
     },
     "privacy-policy": "integritetspolicy",
+    "terms-of-service": "anvandningsvillkoren",
     "tool": {
       "competences": "kompetens",
       "goals": "mål",
@@ -85,7 +83,6 @@
       "restrictions": "trammels",
       "search": "sok"
     },
-    "terms-of-service": "anvandningsvillkoren",
     "user": "anvandare",
     "user-guide": "bruksanvisningar",
     "what-is-the-service": "vad-ar-tjansten",
@@ -94,6 +91,14 @@
     "who-provides-the-service": "vem-tillhandahaller-tjansten"
   },
   "terms-of-service": "Användningsvillkoren",
+  "tool": {
+    "competences": {
+      "field-description": "Skriv dina färdigheter i textrutan. Lägg till färdigheter genom att klicka på + -tecknet bredvid färdigheten. Ta bort en färdighet genom att klicka på krysset.",
+      "heading-1": "Vad jag kan",
+      "page-description": "Berätta för tjänsten om dina styrkor och färdigheter. Var stolt över dig själv, för du kan förmodligen mer än du tror. Tänk på din utbildning, arbetslivserfarenhet och hobbyer - all din kunskap och erfarenhet är viktig."
+    },
+    "title": "Verktyg"
+  },
   "updated": "Uppdaterad",
   "user": "Användare",
   "user-guide": "Instruktioner",

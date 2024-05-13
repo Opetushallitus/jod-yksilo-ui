@@ -1,16 +1,26 @@
 import { LoaderFunction, redirect } from 'react-router-dom';
 import i18n, { resources, fallbackLng } from '@/i18n/config';
 
+export interface RootLoaderData {
+  csrf?: { headerName: string; parameterName: string; token: string };
+}
+
 export default (async ({ params }) => {
+  const data: RootLoaderData = {};
+
+  // Change language if it is different from the current language
   const lng = params.lng;
-
-  if (i18n.language === lng) {
-    return null;
-  }
-
-  if (lng && Object.keys(resources).includes(lng)) {
-    return i18n.changeLanguage(lng);
+  if (lng && lng !== i18n.language && Object.keys(resources).includes(lng)) {
+    await i18n.changeLanguage(lng);
   } else {
-    return redirect(`/${fallbackLng}`);
+    redirect(`/${fallbackLng}`);
   }
+
+  // Fetch CSRF token
+  const response = await fetch('/api/csrf');
+  if (response.ok) {
+    data.csrf = (await response.json()) as RootLoaderData['csrf'];
+  }
+
+  return data;
 }) satisfies LoaderFunction;

@@ -1,6 +1,7 @@
 import './index.css';
 import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom';
-import Root, { loader as rootLoader } from './routes/Root';
+import Root, { loader } from '@/routes/Root';
+import NoInternetAccess from '@/routes/NoInternetAccess';
 import { lng } from './i18n/config';
 
 const router = createBrowserRouter([
@@ -10,8 +11,9 @@ const router = createBrowserRouter([
   },
   {
     path: '/:lng/*',
-    loader: rootLoader,
+    loader,
     element: <Root />,
+    errorElement: <NoInternetAccess />,
   },
 ]);
 

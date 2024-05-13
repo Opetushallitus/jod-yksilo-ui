@@ -34,6 +34,10 @@
   "instructions": "Instructions",
   "interests": "Interests",
   "more-information": "More information",
+  "no-internet-access": {
+    "content": "Please check your internet connection and try again.",
+    "title": "No internet access"
+  },
   "no-match": "No Match",
   "personal-pages": {
     "competences": "Competences",
@@ -46,14 +50,6 @@
     "work-history": "Work History"
   },
   "privacy-policy": "Privacy Policy",
-  "tool": {
-    "competences": {
-      "field-description": "Write your skills in the text field. Add skills by clicking the + sign next to the skill. Remove a skill by clicking the cross.",
-      "heading-1": "What I can do",
-      "page-description": "Tell the service about your strengths and skills. Be proud of yourself, because you probably know more than you think. Think about your education, work experience and hobbies - all your knowledge and experience are important."
-    },
-    "title": "Tool"
-  },
   "remove-approval": "Remove approval",
   "restrictions": "Restrictions",
   "search": "Search",
@@ -68,6 +64,7 @@
     "data-sources": "data-sources",
     "how-do-i-give-feedback": "how-do-I-give-feedback",
     "how-do-i-use-the-service": "how-do-i-use-the-service",
+    "no-internet-connection": "no-internet-connection",
     "personal-pages": {
       "competences": "competences",
       "education-history": "education-history",
@@ -79,6 +76,7 @@
       "work-history": "work-history"
     },
     "privacy-policy": "privacy-policy",
+    "terms-of-service": "terms-of-service",
     "tool": {
       "competences": "competences",
       "goals": "goals",
@@ -88,7 +86,6 @@
       "restrictions": "restrictions",
       "search": "search"
     },
-    "terms-of-service": "terms-of-service",
     "user": "user",
     "user-guide": "user-guide",
     "what-is-the-service": "what-is-the-service",
@@ -97,6 +94,14 @@
     "who-provides-the-service": "who-provides-the-service"
   },
   "terms-of-service": "Terms of Service",
+  "tool": {
+    "competences": {
+      "field-description": "Write your skills in the text field. Add skills by clicking the + sign next to the skill. Remove a skill by clicking the cross.",
+      "heading-1": "What I can do",
+      "page-description": "Tell the service about your strengths and skills. Be proud of yourself, because you probably know more than you think. Think about your education, work experience and hobbies - all your knowledge and experience are important."
+    },
+    "title": "Tool"
+  },
   "updated": "Updated",
   "user": "User",
   "user-guide": "User Guide",
