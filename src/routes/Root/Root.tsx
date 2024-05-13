@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { ErrorNote } from '@/features';
-import { NavigationBar, Footer } from '@jod/design-system';
+import { NavigationBar, Footer, SkipLink } from '@jod/design-system';
 import Home from '@/routes/Home';
 import UserGuide from '@/routes/UserGuide';
 import BasicInformation from '@/routes/BasicInformation';
@@ -53,6 +53,7 @@ const Root = () => {
         <html lang={i18n.language} />
       </Helmet>
       <header className="sticky top-0 z-10 print:hidden">
+        <SkipLink hash="#jod-main" label={t('skiplinks.main')} />
         <NavigationBar
           logo={
             <NavLink to={`/${i18n.language}`} className="flex">

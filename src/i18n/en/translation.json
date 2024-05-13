@@ -57,6 +57,9 @@
   "remove-approval": "Remove approval",
   "restrictions": "Restrictions",
   "search": "Search",
+  "skiplinks": {
+    "main": "Go to maincontent"
+  },
   "slugs": {
     "about-us": "about-us",
     "accessibility-statement": "accessibility-statement",

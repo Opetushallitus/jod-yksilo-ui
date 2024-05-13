@@ -101,5 +101,8 @@
   "what-is-the-service": "Mikä palvelu on?",
   "where-can-i-get-more-help": "Mistä saan lisää apua?",
   "who-is-the-service-for": "Kenelle palvelu on tarkoitettu?",
-  "who-provides-the-service": "Kuka palvelun tarjoaa?"
+  "who-provides-the-service": "Kuka palvelun tarjoaa?",
+  "skiplinks": {
+    "main": "Siirry pääsisältöön"
+  }
 }

@@ -56,7 +56,7 @@ const Tool = () => {
   ];
 
   return (
-    <main className="mx-auto max-w-[1140px] p-6">
+    <main className="mx-auto max-w-[1140px] p-6" id="jod-main">
       <Title value={t('tool.title')} />
       <nav>
         <div className="flex justify-between">

@@ -15,7 +15,9 @@ export const MainLayout = ({ children, navChildren }: MainLayoutProps) => {
           <nav className="sticky top-0 pt-[96px]">{navChildren}</nav>
         </aside>
       )}
-      <main className="col-span-6 sm:col-span-4 print:col-span-6">{children}</main>
+      <main className="col-span-6 sm:col-span-4 print:col-span-6" id="jod-main">
+        {children}
+      </main>
     </div>
   );
 };
