@@ -101,5 +101,8 @@
   "what-is-the-service": "Vad är tjänsten?",
   "where-can-i-get-more-help": "Var kan jag få mer hjälp?",
   "who-is-the-service-for": "Vem är tjänsten för?",
-  "who-provides-the-service": "Vem tillhandahåller tjänsten?"
+  "who-provides-the-service": "Vem tillhandahåller tjänsten?",
+  "skiplinks": {
+    "main": "Gå till huvudinnehållet"
+  }
 }
