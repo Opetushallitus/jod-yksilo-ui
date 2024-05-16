@@ -10,8 +10,9 @@ import {
   SimpleNavigationList,
   type RoutesNavigationListProps,
   RoutesNavigationList,
+  Accordion,
 } from '@/components';
-import { RadioButtonGroup, RadioButton, Button } from '@jod/design-system';
+import { RadioButtonGroup, RadioButton, Button, Checkbox } from '@jod/design-system';
 
 const mapNavigationRoutes = (routes: RoutesNavigationListProps['routes']) =>
   routes.map((route) => ({ ...route, path: `../${route.path}` }));
@@ -138,6 +139,15 @@ const Competences = ({ routes }: RoutesNavigationListProps) => {
   const [value, setValue] = useState<string>('a');
   const navigationRoutes = useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
+  const [filter, setFilter] = useState({
+    tyopaikkaOsaamiset: true,
+    tietotekniikanTaikuri: true,
+    ihmeidenManeesi: true,
+    metsapuronPuutarha: true,
+    koulutusosaamiset: true,
+    vapaaAikaOsaamiset: true,
+    jotainMuuta: true,
+  });
 
   return (
     <MainLayout
@@ -146,7 +156,7 @@ const Competences = ({ routes }: RoutesNavigationListProps) => {
           <SimpleNavigationList title={t('personal-pages.index')} collapsible>
             <RoutesNavigationList routes={navigationRoutes} />
           </SimpleNavigationList>
-          <SimpleNavigationList title={t('personal-pages.index')} collapsible>
+          <SimpleNavigationList title="Järjestele" collapsible>
             <RadioButtonGroup
               label="Valitse, miten haluat ryhmitellä osaamisesi."
               value={value}
@@ -163,7 +173,98 @@ const Competences = ({ routes }: RoutesNavigationListProps) => {
               <p className="mb-5 text-body-xs text-secondary-gray">
                 Valitse osaamiset eri lähteistä. Käytämme valitsemiasi osaamisia mahdollisuuksien tunnistamiseen.
               </p>
-              TODO
+              <div className="flex flex-col gap-y-2">
+                <Accordion
+                  title={
+                    <Checkbox
+                      checked={filter.tyopaikkaOsaamiset}
+                      onChange={() => {
+                        setFilter({ ...filter, tyopaikkaOsaamiset: !filter.tyopaikkaOsaamiset });
+                      }}
+                      label={
+                        <>
+                          <div className="mx-3 h-5 w-5 flex-none rounded-full bg-secondary-1" aria-hidden />
+                          Työpaikka osaamiset
+                        </>
+                      }
+                      name="suodata"
+                      value="tyopaikka-osaamiset"
+                    />
+                  }
+                >
+                  <div className="ml-6 flex flex-col gap-y-2">
+                    <Checkbox
+                      checked={filter.tietotekniikanTaikuri}
+                      onChange={() => {
+                        setFilter({ ...filter, tietotekniikanTaikuri: !filter.tietotekniikanTaikuri });
+                      }}
+                      label="Tietotekniikan Taikuri"
+                      name="suodata"
+                      value="tyopaikka-osaamiset"
+                    />
+                    <Checkbox
+                      checked={filter.ihmeidenManeesi}
+                      onChange={() => {
+                        setFilter({ ...filter, ihmeidenManeesi: !filter.ihmeidenManeesi });
+                      }}
+                      label="Ihmeiden Maneesi"
+                      name="suodata"
+                      value="tyopaikka-osaamiset"
+                    />
+                    <Checkbox
+                      checked={filter.metsapuronPuutarha}
+                      onChange={() => {
+                        setFilter({ ...filter, metsapuronPuutarha: !filter.metsapuronPuutarha });
+                      }}
+                      label="Metsäpuron Puutarha"
+                      name="suodata"
+                      value="tyopaikka-osaamiset"
+                    />
+                  </div>
+                </Accordion>
+                <Checkbox
+                  checked={filter.koulutusosaamiset}
+                  onChange={() => {
+                    setFilter({ ...filter, koulutusosaamiset: !filter.koulutusosaamiset });
+                  }}
+                  label={
+                    <>
+                      <div className="mx-3 h-5 w-5 flex-none rounded-full bg-secondary-2" aria-hidden />
+                      Koulutusosaamiset
+                    </>
+                  }
+                  name="suodata"
+                  value="koulutusosaamiset"
+                />
+                <Checkbox
+                  checked={filter.vapaaAikaOsaamiset}
+                  onChange={() => {
+                    setFilter({ ...filter, vapaaAikaOsaamiset: !filter.vapaaAikaOsaamiset });
+                  }}
+                  label={
+                    <>
+                      <div className="mx-3 h-5 w-5 flex-none rounded-full bg-secondary-3" aria-hidden />
+                      Vapaa-ajan osaamiset
+                    </>
+                  }
+                  name="suodata"
+                  value="vapaa-ajan-osaamiset"
+                />
+                <Checkbox
+                  checked={filter.jotainMuuta}
+                  onChange={() => {
+                    setFilter({ ...filter, jotainMuuta: !filter.jotainMuuta });
+                  }}
+                  label={
+                    <>
+                      <div className="mx-3 h-5 w-5 flex-none rounded-full bg-secondary-4" aria-hidden />
+                      Jotain muuta
+                    </>
+                  }
+                  name="suodata"
+                  value="jotain-muuta"
+                />
+              </div>
             </div>
           </SimpleNavigationList>
         </div>
