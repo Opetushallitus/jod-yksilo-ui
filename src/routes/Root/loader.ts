@@ -17,7 +17,9 @@ export default (async ({ params }) => {
   }
 
   // Fetch CSRF token
-  const response = await fetch('/api/csrf');
+  const response = await fetch('/api/csrf', {
+    signal: AbortSignal.timeout(10000),
+  });
   if (response.ok) {
     data.csrf = (await response.json()) as RootLoaderData['csrf'];
   }
