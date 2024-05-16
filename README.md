@@ -38,6 +38,14 @@ Run the following command to update the JOD Design System to the latest version:
 npm update @jod/design-system
 ```
 
+## Generating TypeScript types from OpenAPI schema
+
+Start the JOD Yksilö locally and make sure it is running on http://localhost:8080/. Then run the following command to generate TypeScript types from the OpenAPI schema:
+
+```shell
+npx openapi-typescript http://localhost:8080/openapi/openapi.json -o src/api/schema.d.ts
+```
+
 ## Accessibility testing
 
 ### Axe

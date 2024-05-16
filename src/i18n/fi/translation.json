@@ -5,17 +5,25 @@
   "accept-preferences": "Hyväksy asetukset",
   "accessibility-statement": "Saavutettavuusseloste",
   "basic-information": "Perustiedot",
+  "cancel": "Peruuta",
   "competences": "Osaamiset",
   "cookie-policy": "Evästekäytäntö",
   "cookies": "Evästeet",
   "copyright": "© JOD 2024. Kaikki oikeudet pidätetään.",
   "data-sources": "Datalähteet",
+  "date-or-continues-placeholder": "vvvv-kk-pp tai jatkuu",
+  "date-placeholder": "vvvv-kk-pp",
+  "delete": "Poista",
   "edit": "Muokkaa",
   "error": {
     "network": {
       "500": "Tapahtui odottamaton virhe. Yritä myöhemmin uudelleen.",
       "title": "Verkkovirhe"
     }
+  },
+  "error-boundary": {
+    "description": "Tapahtui odottamaton virhe. Tämä voi johtua verkkoyhteyden katkeamisesta tai palvelun virheestä. Yritä myöhemmin uudelleen.",
+    "title": "Virhe"
   },
   "expand-less": "Näytä vähemmän",
   "expand-more": "Näytä lisää",
@@ -35,11 +43,13 @@
   "interests": "Kiinnostukset",
   "logout": "Kirjaudu ulos",
   "more-information": "Lisätietoa",
-  "no-internet-access": {
-    "content": "Tämä palvelu vaatii internetyhteyden toimiakseen. Tarkista yhteys ja yritä uudelleen.",
-    "title": "Ei internetyhteyttä"
+  "next": "Seuraava",
+  "no-match": {
+    "description": "Hakemaasi sivua ei löytynyt.",
+    "title": "Sivua ei löytynyt"
   },
-  "no-match": "Ei osumaa",
+  "previous": "Edellinen",
+  "privacy-policy": "Tietosuojaseloste",
   "profile": {
     "competences": "Osaamiseni",
     "education-history": "Koulutukseni",
@@ -50,10 +60,13 @@
     "something-else": "Jotain muuta",
     "work-history": "Työpaikkani"
   },
-  "privacy-policy": "Tietosuojaseloste",
   "remove-approval": "Hylkää hyväksyntä",
   "restrictions": "Rajoitteet",
+  "save": "Tallenna",
   "search": "Haku",
+  "skiplinks": {
+    "main": "Siirry pääsisältöön"
+  },
   "slugs": {
     "about-us": "tietoa-palvelusta",
     "accessibility-statement": "saavutettavuusseloste",
@@ -63,6 +76,7 @@
     "how-do-i-give-feedback": "miten-annan-palautetta",
     "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
     "no-internet-connection": "ei-internetyhteytta",
+    "privacy-policy": "tietosuojaseloste",
     "profile": {
       "competences": "osaamiseni",
       "education-history": "koulutukseni",
@@ -73,7 +87,6 @@
       "something-else": "jotain-muuta",
       "work-history": "tyopaikkani"
     },
-    "privacy-policy": "tietosuojaseloste",
     "terms-of-service": "kayttoehdot",
     "tool": {
       "competences": "osaamiset",
@@ -85,11 +98,15 @@
       "search": "haku"
     },
     "user": "kayttaja",
-    "user-guide": "ohjeet",
-    "what-is-the-service": "mika-palvelu-on",
-    "where-can-i-get-more-help": "mista-saan-lisaa-apua",
-    "who-is-the-service-for": "kenelle-palvelu-on-tarkoitettu",
-    "who-provides-the-service": "kuka-palvelun-tarjoaa"
+    "user-guide": {
+      "how-do-i-give-feedback": "miten-annan-palautetta",
+      "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
+      "index": "ohjeet",
+      "what-is-the-service": "mika-palvelu-on",
+      "where-can-i-get-more-help": "mista-saan-lisaa-apua",
+      "who-is-the-service-for": "kenelle-palvelu-on-tarkoitettu",
+      "who-provides-the-service": "kuka-palvelun-tarjoaa"
+    }
   },
   "terms-of-service": "Käyttöehdot",
   "tool": {
@@ -108,7 +125,25 @@
   "where-can-i-get-more-help": "Mistä saan lisää apua?",
   "who-is-the-service-for": "Kenelle palvelu on tarkoitettu?",
   "who-provides-the-service": "Kuka palvelun tarjoaa?",
-  "skiplinks": {
-    "main": "Siirry pääsisältöön"
+  "work-history": {
+    "add-new-job-description": "Lisää uusi toimenkuva",
+    "add-new-work-history": "Lisää uusi työpaikka",
+    "add-new-workplace": "Lisää uusi työpaikka",
+    "competences": "Osaamiset",
+    "competences-of-your-choice": "Valitsemasi osaamiset",
+    "count-competences": "{{count}} osaamista",
+    "delete-job-description": "Poista toimenkuva",
+    "edit-competences": "Muokkaa osaamisia",
+    "edit-job-description": "Muokkaa toimenkuvaa",
+    "edit-workplace": "Muokkaa työpaikkaa",
+    "employer": "Työnantaja",
+    "ended": "Loppui",
+    "identify-competences": "Tunnista osaamisia",
+    "job-description": "Toimenkuva",
+    "job-duties": "Työtehtävät",
+    "proposed-competences": "Ehdotetut osaamiset",
+    "started": "Alkoi",
+    "summary": "Yhteenveto",
+    "workplace-or-job-description": "Työpaikka / toimenkuva"
   }
 }
