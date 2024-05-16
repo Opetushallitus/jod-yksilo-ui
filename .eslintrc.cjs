@@ -12,7 +12,7 @@ module.exports = {
     'plugin:sonarjs/recommended',
     'prettier', // must be last, override other configs
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'src/api/schema.d.ts'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: ['./tsconfig.json', './tsconfig.node.json'],
@@ -26,5 +26,8 @@ module.exports = {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'react/jsx-child-element-spacing': 'error',
     'no-useless-rename': 'error',
+    '@typescript-eslint/consistent-indexed-object-style': 'warn',
+    '@typescript-eslint/no-misused-promises': 'warn',
+    '@typescript-eslint/no-floating-promises': 'warn',
   },
 };

@@ -84,8 +84,10 @@ const Competences = () => {
                           Työpaikka osaamiset
                         </span>
                       }
+                      ariaLabel="Työpaikka osaamiset"
                       name="suodata"
                       value="tyopaikka-osaamiset"
+                      className="min-h-7"
                     />
                   }
                 >
@@ -100,8 +102,10 @@ const Competences = () => {
                           Tietotekniikan Taikuri
                         </span>
                       }
+                      ariaLabel="Tietotekniikan Taikuri"
                       name="suodata"
                       value="tyopaikka-osaamiset"
+                      className="min-h-7"
                     />
                     <Checkbox
                       checked={filter.ihmeidenManeesi}
@@ -113,8 +117,10 @@ const Competences = () => {
                           Ihmeiden Maneesi
                         </span>
                       }
+                      ariaLabel="Ihmeiden Maneesi"
                       name="suodata"
                       value="tyopaikka-osaamiset"
+                      className="min-h-7"
                     />
                     <Checkbox
                       checked={filter.metsapuronPuutarha}
@@ -126,8 +132,10 @@ const Competences = () => {
                           Metsäpuron Puutarha
                         </span>
                       }
+                      ariaLabel="Metsäpuron Puutarha"
                       name="suodata"
                       value="tyopaikka-osaamiset"
+                      className="min-h-7"
                     />
                   </div>
                 </Accordion>
@@ -142,8 +150,10 @@ const Competences = () => {
                       Koulutusosaamiset
                     </span>
                   }
+                  ariaLabel="Koulutusosaamiset"
                   name="suodata"
                   value="koulutusosaamiset"
+                  className="min-h-7"
                 />
                 <Checkbox
                   checked={filter.vapaaAikaOsaamiset}
@@ -156,8 +166,10 @@ const Competences = () => {
                       Vapaa-ajan osaamiset
                     </span>
                   }
+                  ariaLabel="Vapaa-ajan osaamiset"
                   name="suodata"
                   value="vapaa-ajan-osaamiset"
+                  className="min-h-7"
                 />
                 <Checkbox
                   checked={filter.jotainMuuta}
@@ -170,8 +182,10 @@ const Competences = () => {
                       Jotain muuta
                     </span>
                   }
+                  ariaLabel="Jotain muuta"
                   name="suodata"
                   value="jotain-muuta"
+                  className="min-h-7"
                 />
               </div>
             </div>

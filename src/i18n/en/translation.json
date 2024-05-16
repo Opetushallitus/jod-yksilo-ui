@@ -5,17 +5,25 @@
   "accept-preferences": "Accept preferences",
   "accessibility-statement": "Accessibility Statement",
   "basic-information": "Basic Information",
+  "cancel": "Cancel",
   "competences": "Competences",
   "cookie-policy": "Cookie Policy",
   "cookies": "Cookies",
   "copyright": "© JOD 2024. All rights reserved.",
   "data-sources": "Data Sources",
+  "date-or-continues-placeholder": "yyyy-mm-dd or continues",
+  "date-placeholder": "yyyy-mm-dd",
+  "delete": "Delete",
   "edit": "Edit",
   "error": {
     "network": {
       "500": "Unexpected error happened",
       "title": "Network error"
     }
+  },
+  "error-boundary": {
+    "description": "An error occurred in the application and the page could not be loaded. Please try again later.",
+    "title": "Error"
   },
   "expand-less": "Expand less",
   "expand-more": "Expand more",
@@ -35,11 +43,13 @@
   "interests": "Interests",
   "logout": "Log out",
   "more-information": "More information",
-  "no-internet-access": {
-    "content": "Please check your internet connection and try again.",
-    "title": "No internet access"
+  "next": "Next",
+  "no-match": {
+    "description": "The page you are looking for does not exist.",
+    "title": "Page not found"
   },
-  "no-match": "No Match",
+  "previous": "Previous",
+  "privacy-policy": "Privacy Policy",
   "profile": {
     "competences": "Competences",
     "education-history": "Education History",
@@ -50,9 +60,9 @@
     "something-else": "Something Else",
     "work-history": "Work History"
   },
-  "privacy-policy": "Privacy Policy",
   "remove-approval": "Remove approval",
   "restrictions": "Restrictions",
+  "save": "Save",
   "search": "Search",
   "skiplinks": {
     "main": "Go to maincontent"
@@ -66,6 +76,7 @@
     "how-do-i-give-feedback": "how-do-I-give-feedback",
     "how-do-i-use-the-service": "how-do-i-use-the-service",
     "no-internet-connection": "no-internet-connection",
+    "privacy-policy": "privacy-policy",
     "profile": {
       "competences": "competences",
       "education-history": "education-history",
@@ -76,7 +87,6 @@
       "something-else": "something-else",
       "work-history": "work-history"
     },
-    "privacy-policy": "privacy-policy",
     "terms-of-service": "terms-of-service",
     "tool": {
       "competences": "competences",
@@ -88,11 +98,15 @@
       "search": "search"
     },
     "user": "user",
-    "user-guide": "user-guide",
-    "what-is-the-service": "what-is-the-service",
-    "where-can-i-get-more-help": "where-can-i-get-more-help",
-    "who-is-the-service-for": "who-is-the-service-for",
-    "who-provides-the-service": "who-provides-the-service"
+    "user-guide": {
+      "how-do-i-give-feedback": "how-do-I-give-feedback",
+      "how-do-i-use-the-service": "how-do-i-use-the-service",
+      "index": "user-guide",
+      "what-is-the-service": "what-is-the-service",
+      "where-can-i-get-more-help": "where-can-i-get-more-help",
+      "who-is-the-service-for": "who-is-the-service-for",
+      "who-provides-the-service": "who-provides-the-service"
+    }
   },
   "terms-of-service": "Terms of Service",
   "tool": {
@@ -110,5 +124,26 @@
   "what-is-the-service": "What is the service?",
   "where-can-i-get-more-help": "Where can I get more help?",
   "who-is-the-service-for": "Who is the service for?",
-  "who-provides-the-service": "Who provides the service?"
+  "who-provides-the-service": "Who provides the service?",
+  "work-history": {
+    "add-new-job-description": "Add new job description",
+    "add-new-work-history": "Add new work history",
+    "add-new-workplace": "Add new workplace",
+    "competences": "Competences",
+    "competences-of-your-choice": "Competences of your choice",
+    "count-competences": "{{count}} competences",
+    "delete-job-description": "Delete job description",
+    "edit-competences": "Edit competences",
+    "edit-job-description": "Edit job description",
+    "edit-workplace": "Edit workplace",
+    "employer": "Employer",
+    "ended": "Ended",
+    "identify-competences": "Identify competences",
+    "job-description": "Job description",
+    "job-duties": "Job duties",
+    "proposed-competences": "Proposed competences",
+    "started": "Started",
+    "summary": "Summary",
+    "workplace-or-job-description": "Workplace / job description"
+  }
 }

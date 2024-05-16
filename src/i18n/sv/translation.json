@@ -5,17 +5,25 @@
   "accept-preferences": "Acceptera inställningar",
   "accessibility-statement": "Tillgänglighetsutlåtandet",
   "basic-information": "Grundläggande information",
+  "cancel": "Avbryt",
   "competences": "Kompetens",
   "cookie-policy": "Policy för kakor",
   "cookies": "Kakor",
   "copyright": "© JOD 2024. Alla rättigheter förbehålls.",
   "data-sources": "Datakällor",
+  "date-or-continues-placeholder": "åååå-kk-dd eller fortsätter",
+  "date-placeholder": "åååå-kk-dd",
+  "delete": "Radera",
   "edit": "Redigera",
   "error": {
     "network": {
       "500": "Ett oväntat fel uppstod",
       "title": "Nätverksfel"
     }
+  },
+  "error-boundary": {
+    "description": "Något gick fel när sidan laddades. Försök igen genom att uppdatera sidan.",
+    "title": "Error"
   },
   "expand-less": "Expandera mindre",
   "expand-more": "Expandera mer",
@@ -35,11 +43,13 @@
   "interests": "Intressen",
   "logout": "Logga ut",
   "more-information": "Mer information",
-  "no-internet-access": {
-    "content": "Kontrollera din internetanslutning och försök igen.",
-    "title": "Ingen internetanslutning"
+  "next": "Nästa",
+  "no-match": {
+    "content": "Tyvärr hittades inte sidan du letade efter.",
+    "title": "Sidan hittades inte"
   },
-  "no-match": "Ingen matchning",
+  "previous": "Föregående",
+  "privacy-policy": "Integritetspolicy",
   "profile": {
     "competences": "Kompetens",
     "education-history": "Utbildningshistoria",
@@ -50,10 +60,13 @@
     "something-else": "Något annat",
     "work-history": "Arbetslivserfarenhet"
   },
-  "privacy-policy": "Integritetspolicy",
   "remove-approval": "Ta bort godkännande",
   "restrictions": "Trammels",
+  "save": "Spara",
   "search": "Sök",
+  "skiplinks": {
+    "main": "Gå till huvudinnehållet"
+  },
   "slugs": {
     "about-us": "om-oss",
     "accessibility-statement": "tillganglighetsutlatande",
@@ -63,6 +76,7 @@
     "how-do-i-give-feedback": "hur-ger-jag-feedback",
     "how-do-i-use-the-service": "hur-anvander-jag-tjansten",
     "no-internet-connection": "ingen-internetanslutning",
+    "privacy-policy": "integritetspolicy",
     "profile": {
       "competences": "kompetens",
       "education-history": "utbildningshistoria",
@@ -73,7 +87,6 @@
       "something-else": "nagot-annat",
       "work-history": "arbetslivserfarenhet"
     },
-    "privacy-policy": "integritetspolicy",
     "terms-of-service": "anvandningsvillkoren",
     "tool": {
       "competences": "kompetens",
@@ -85,11 +98,15 @@
       "search": "sok"
     },
     "user": "anvandare",
-    "user-guide": "bruksanvisningar",
-    "what-is-the-service": "vad-ar-tjansten",
-    "where-can-i-get-more-help": "var-kan-jag-fa-mer-hjalp",
-    "who-is-the-service-for": "vem-ar-tjansten-for",
-    "who-provides-the-service": "vem-tillhandahaller-tjansten"
+    "user-guide": {
+      "how-do-i-give-feedback": "hur-ger-jag-feedback",
+      "how-do-i-use-the-service": "hur-anvander-jag-tjansten",
+      "index": "bruksanvisningar",
+      "what-is-the-service": "vad-ar-tjansten",
+      "where-can-i-get-more-help": "var-kan-jag-fa-mer-hjalp",
+      "who-is-the-service-for": "vem-ar-tjansten-for",
+      "who-provides-the-service": "vem-tillhandahaller-tjansten"
+    }
   },
   "terms-of-service": "Användningsvillkoren",
   "tool": {
@@ -108,7 +125,25 @@
   "where-can-i-get-more-help": "Var kan jag få mer hjälp?",
   "who-is-the-service-for": "Vem är tjänsten för?",
   "who-provides-the-service": "Vem tillhandahåller tjänsten?",
-  "skiplinks": {
-    "main": "Gå till huvudinnehållet"
+  "work-history": {
+    "add-new-job-description": "Lägg till nytt jobbbeskrivning",
+    "add-new-work-history": "Lägg till ny arbetslivserfarenhet",
+    "competences": "Kompetens",
+    "competences-of-your-choice": "Dina valda kompetenser",
+    "count-competences": "{{count}} kompetens",
+    "delete-job-description": "Radera jobbeskrivning",
+    "edit-competences": "Redigera kompetenser",
+    "edit-job-description": "Redigera jobbeskrivning",
+    "edit-work-history": "Redigera arbetslivserfarenhet",
+    "edit-workplace": "Redigera arbetsplats",
+    "employer": "Arbetsgivare",
+    "ended": "Slutade",
+    "identify-competences": "Identifiera kompetenser",
+    "job-description": "Jobbeskrivning",
+    "job-duties": "Arbetsuppgifter",
+    "proposed-competences": "Föreslagna kompetenser",
+    "started": "Startade",
+    "summary": "Sammanfattning",
+    "workplace-or-job-description": "Arbetsplats / jobbeskrivning"
   }
 }

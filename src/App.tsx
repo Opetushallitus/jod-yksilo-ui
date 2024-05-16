@@ -17,11 +17,11 @@ import {
   Preferences,
   Favorites,
   Competences,
-  WorkHistory,
   EducationHistory,
   FreeTimeActivities,
   SomethingElse,
 } from '@/routes/Profile';
+import { WorkHistory, loader as workHistoryloader } from '@/routes/Profile/WorkHistory';
 import {
   UserGuide,
   WhatIsTheService,
@@ -114,6 +114,7 @@ const App = () => {
             },
             {
               path: t('slugs.profile.work-history'),
+              loader: workHistoryloader,
               element: <WorkHistory />,
             },
             {
