@@ -12,7 +12,7 @@ import {
   RoutesNavigationList,
   Accordion,
 } from '@/components';
-import { RadioButtonGroup, RadioButton, Button, Checkbox } from '@jod/design-system';
+import { RadioButtonGroup, RadioButton, Button, Checkbox, Tag } from '@jod/design-system';
 
 const mapNavigationRoutes = (routes: RoutesNavigationListProps['routes']) =>
   routes.map((route) => ({ ...route, path: `../${route.path}` }));
@@ -132,6 +132,21 @@ const Favorites = ({ routes }: RoutesNavigationListProps) => {
     </MainLayout>
   );
 };
+
+// TODO: Change to use data from backend
+const hardcodedCompetenceTags = [
+  'viestintätaidot',
+  'tiimityöskentelytaidot',
+  'ongelmanratkaisutaidot',
+  'ajanhallintataidot',
+  'itseohjautuvuus',
+  'kriittinen ajattelu',
+  'soveltava oppiminen',
+  'muutosvalmius',
+  'yleissivistäväkoulutus',
+  'digitaaliset taidot',
+  'kulttuurienvälinen kompetenssi',
+];
 
 const Competences = ({ routes }: RoutesNavigationListProps) => {
   const { t } = useTranslation();
@@ -277,6 +292,16 @@ const Competences = ({ routes }: RoutesNavigationListProps) => {
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
+      <h2 className="mb-6 text-heading-3">Osaamiseni lähteiden mukaan</h2>
+      <Accordion title={<span className="truncate text-heading-5 text-secondary-gray">Työpaikkojen mukaan</span>}>
+        <span className="mb-5 mt-3 flex border border-b-2 border-inactive-gray"></span>
+        <div className="flex flex-wrap gap-4">
+          {hardcodedCompetenceTags.map((val) => {
+            return <Tag label={val} key={val} variant="added" onClick={() => console.log('clicked:', val)} />;
+          })}
+        </div>
+      </Accordion>
+
       {actionBar &&
         createPortal(
           <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
