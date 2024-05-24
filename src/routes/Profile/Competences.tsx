@@ -9,9 +9,8 @@ import {
   SimpleNavigationList,
   type RoutesNavigationListProps,
   RoutesNavigationList,
-  Accordion,
 } from '@/components';
-import { RadioButtonGroup, RadioButton, Button, Checkbox, Tag } from '@jod/design-system';
+import { Accordion, RadioButtonGroup, RadioButton, Button, Checkbox, Tag } from '@jod/design-system';
 import { useOutletContext } from 'react-router-dom';
 
 // TODO: Change to use data from backend
@@ -90,6 +89,9 @@ const Competences = () => {
                       className="min-h-7"
                     />
                   }
+                  expandMoreText={t('expand-more')}
+                  expandLessText={t('expand-less')}
+                  lang={i18n.language}
                 >
                   <div className="ml-6 flex flex-col gap-y-2">
                     <Checkbox
@@ -201,7 +203,12 @@ const Competences = () => {
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
       <h2 className="mb-6 text-heading-3">Osaamiseni lähteiden mukaan</h2>
-      <Accordion title={<span className="truncate text-heading-5 text-secondary-gray">Työpaikkojen mukaan</span>}>
+      <Accordion
+        title={<span className="truncate text-heading-5 text-secondary-gray">Työpaikkojen mukaan</span>}
+        expandMoreText={t('expand-more')}
+        expandLessText={t('expand-less')}
+        lang={i18n.language}
+      >
         <span className="mb-5 mt-3 flex border border-b-2 border-inactive-gray"></span>
         <div className="flex flex-wrap gap-4">
           {hardcodedCompetenceTags.map((val) => {
