@@ -20,8 +20,7 @@ export const lng = 'fi';
 
 export const fallbackLng = 'fi';
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-i18n.use(initReactI18next).init({
+void i18n.use(initReactI18next).init({
   lng,
   fallbackLng,
   resources,

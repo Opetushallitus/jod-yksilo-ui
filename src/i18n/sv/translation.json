@@ -39,7 +39,7 @@
     "title": "Ingen internetanslutning"
   },
   "no-match": "Ingen matchning",
-  "personal-pages": {
+  "profile": {
     "competences": "Kompetens",
     "education-history": "Utbildningshistoria",
     "favorites": "Favoriter",
@@ -62,7 +62,7 @@
     "how-do-i-give-feedback": "hur-ger-jag-feedback",
     "how-do-i-use-the-service": "hur-anvander-jag-tjansten",
     "no-internet-connection": "ingen-internetanslutning",
-    "personal-pages": {
+    "profile": {
       "competences": "kompetens",
       "education-history": "utbildningshistoria",
       "favorites": "favoriter",

@@ -39,7 +39,7 @@
     "title": "Ei internetyhteyttä"
   },
   "no-match": "Ei osumaa",
-  "personal-pages": {
+  "profile": {
     "competences": "Osaamiseni",
     "education-history": "Koulutukseni",
     "favorites": "Suosikkini",
@@ -62,7 +62,7 @@
     "how-do-i-give-feedback": "miten-annan-palautetta",
     "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
     "no-internet-connection": "ei-internetyhteytta",
-    "personal-pages": {
+    "profile": {
       "competences": "osaamiseni",
       "education-history": "koulutukseni",
       "favorites": "suosikkini",

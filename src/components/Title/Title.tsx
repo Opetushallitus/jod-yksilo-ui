@@ -7,7 +7,7 @@ interface TitleProps {
 export const Title = ({ value }: TitleProps) => {
   return (
     <Helmet>
-      <title>{`${value} - JOD`}</title>
+      <title>{`${value} – JOD`}</title>
     </Helmet>
   );
 };
