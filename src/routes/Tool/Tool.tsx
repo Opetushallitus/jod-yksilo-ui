@@ -1,28 +1,7 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-import { Route, Routes, Link, useMatch, Navigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Title } from '@/components';
-import { RoundLinkButton } from '@jod/design-system';
-import Instructions from './instructions';
-import NoMatch from '../NoMatch';
-import Goals from './goals';
-import Competences from './competences';
-import Interests from './interests';
-import Restrictions from './restrictions';
-import Search from './search';
-
-const MatchedLink = ({ link }: { link: { to: string; text: string; icon: string } }) => {
-  const match = useMatch(link.to);
-  const selected = match?.pathname == link.to;
-  return (
-    <RoundLinkButton
-      label={link.text}
-      icon={link.icon}
-      selected={selected}
-      component={({ ...rootProps }) => <Link to={link.to} {...rootProps}></Link>}
-    ></RoundLinkButton>
-  );
-};
+import MatchedLink from './MatchedLink';
 
 const Tool = () => {
   const { t, i18n } = useTranslation();
@@ -76,16 +55,7 @@ const Tool = () => {
           </ul>
         </div>
       </nav>
-      <Routes>
-        <Route index element={<Navigate to={`${t('slugs.tool.instructions')}`} />} />
-        <Route path={`${t('slugs.tool.instructions')}/*`} element={<Instructions />} />
-        <Route path={`${t('slugs.tool.goals')}/*`} element={<Goals />} />
-        <Route path={`${t('slugs.tool.competences')}/*`} element={<Competences />} />
-        <Route path={`${t('slugs.tool.interests')}/*`} element={<Interests />} />
-        <Route path={`${t('slugs.tool.restrictions')}/*`} element={<Restrictions />} />
-        <Route path={`${t('slugs.tool.search')}/*`} element={<Search />} />
-        <Route path="*" element={<NoMatch />} />
-      </Routes>
+      <Outlet />
     </main>
   );
 };

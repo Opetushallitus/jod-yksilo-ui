@@ -5,18 +5,19 @@ export interface RootLoaderData {
   csrf?: { headerName: string; parameterName: string; token: string };
 }
 
-export default (async ({ params }) => {
-  const data: RootLoaderData = {};
+export default (async ({ params: { lng } }) => {
+  // Redirect if the language is not supported
+  if (lng && !Object.keys(resources).includes(lng)) {
+    return redirect(`/${fallbackLng}`);
+  }
 
   // Change language if it is different from the current language
-  const lng = params.lng;
   if (lng && lng !== i18n.language && Object.keys(resources).includes(lng)) {
     await i18n.changeLanguage(lng);
-  } else {
-    redirect(`/${fallbackLng}`);
   }
 
   // Fetch CSRF token
+  const data: RootLoaderData = {};
   const response = await fetch('/api/csrf', {
     signal: AbortSignal.timeout(10000),
   });

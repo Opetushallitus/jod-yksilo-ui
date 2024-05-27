@@ -15,6 +15,6 @@ test('document should have given title', async () => {
     </Wrapper>,
   );
   await waitFor(() => {
-    expect(document.title).toEqual('Given Title - JOD');
+    expect(document.title).toEqual('Given Title – JOD');
   });
 });

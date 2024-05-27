@@ -39,7 +39,7 @@
     "title": "No internet access"
   },
   "no-match": "No Match",
-  "personal-pages": {
+  "profile": {
     "competences": "Competences",
     "education-history": "Education History",
     "favorites": "Favorites",
@@ -65,12 +65,12 @@
     "how-do-i-give-feedback": "how-do-I-give-feedback",
     "how-do-i-use-the-service": "how-do-i-use-the-service",
     "no-internet-connection": "no-internet-connection",
-    "personal-pages": {
+    "profile": {
       "competences": "competences",
       "education-history": "education-history",
       "favorites": "favorites",
       "free-time-activities": "free-time-activities",
-      "index": "personal-pages",
+      "index": "profile",
       "preferences": "preferences",
       "something-else": "something-else",
       "work-history": "work-history"
