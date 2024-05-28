@@ -38,6 +38,11 @@ export default defineConfig({
         xfwd: true,
         changeOrigin: true,
       },
+      '/logout': {
+        target,
+        xfwd: true,
+        changeOrigin: true,
+      },
     },
   },
 });

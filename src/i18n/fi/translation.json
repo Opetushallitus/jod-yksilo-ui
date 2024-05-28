@@ -33,6 +33,7 @@
   "how-do-i-use-the-service": "Kuinka käytän palvelua?",
   "instructions": "Ohjeet",
   "interests": "Kiinnostukset",
+  "logout": "Kirjaudu ulos",
   "more-information": "Lisätietoa",
   "no-internet-access": {
     "content": "Tämä palvelu vaatii internetyhteyden toimiakseen. Tarkista yhteys ja yritä uudelleen.",
