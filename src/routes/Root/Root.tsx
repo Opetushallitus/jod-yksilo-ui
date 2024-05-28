@@ -38,7 +38,7 @@ const Root = () => {
   };
 
   const userMenuUrls = {
-    preferences: `/${i18n.language}/${t('slugs.personal-pages.index')}/${t('slugs.personal-pages.preferences')}`,
+    preferences: `/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`,
   };
 
   const logos: ComponentProps<typeof Footer>['logos'] = [1, 2, 3].map((item) => ({
