@@ -77,7 +77,7 @@ const Competences = () => {
           <p className="mb-6 text-body-md text-primary-gray">{t('tool.competences.page-description')}</p>
           <p className="text-body-md text-primary-gray">{t('tool.competences.field-description')}</p>
         </div>
-        <InputField label="Taitosi" value={skill} onChange={(event) => inputChangeHandler(event.target.value)} />
+        <InputField label="Taitosi" value={skill} onChange={(newValue) => inputChangeHandler(newValue)} />
         <div className="mt-7 min-h-[200px] rounded border p-4">
           <ul className="flex flex-col space-y-4">
             {competences.map((item) => (
