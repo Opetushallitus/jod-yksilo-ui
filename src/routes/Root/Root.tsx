@@ -1,12 +1,12 @@
-import { useRef, type ComponentProps } from 'react';
-import { NavLink, useLocation, matchPath, ScrollRestoration, useLoaderData, Outlet } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { Helmet } from 'react-helmet-async';
-import { ActionBarContext } from '@/hooks/useActionBar';
 import { ErrorNote } from '@/features';
-import { NavigationBar, Footer, SkipLink } from '@jod/design-system';
-import { RootLoaderData } from './loader';
+import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
+import { Footer, NavigationBar, PopupList, SkipLink } from '@jod/design-system';
+import { useRef, useState, type ComponentProps } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
+import { NavLink, Outlet, ScrollRestoration, matchPath, useLoaderData, useLocation } from 'react-router-dom';
+import { RootLoaderData } from './loader';
 
 const NavigationBarItem = (to: string, text: string) => ({
   key: to,
@@ -20,9 +20,11 @@ const NavigationBarItem = (to: string, text: string) => ({
 const Root = () => {
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userGuide = `/${i18n.language}/${t('slugs.user-guide.index')}`;
   const basicInformation = `/${i18n.language}/${t('slugs.basic-information')}`;
-  const items: ComponentProps<typeof Footer>['items'] = [
+  const isCurrentPageActive = (path: string) => path === pathname;
+  const footerItems: ComponentProps<typeof Footer>['items'] = [
     NavigationBarItem(`${userGuide}/${t('slugs.user-guide.what-is-the-service')}`, t('about-us-and-user-guide')),
     NavigationBarItem(`${basicInformation}/${t('slugs.cookie-policy')}`, t('cookie-policy')),
     NavigationBarItem(`${basicInformation}/${t('slugs.data-sources')}`, t('data-sources')),
@@ -30,6 +32,15 @@ const Root = () => {
     NavigationBarItem(`${basicInformation}/${t('slugs.accessibility-statement')}`, t('accessibility-statement')),
     NavigationBarItem(`${basicInformation}/${t('slugs.privacy-policy')}`, t('privacy-policy')),
   ];
+
+  const logout = () => {
+    window.location.href = '/logout';
+  };
+
+  const userMenuUrls = {
+    preferences: `/${i18n.language}/${t('slugs.personal-pages.index')}/${t('slugs.personal-pages.preferences')}`,
+  };
+
   const logos: ComponentProps<typeof Footer>['logos'] = [1, 2, 3].map((item) => ({
     key: item,
     component: ({ className }) => (
@@ -63,11 +74,31 @@ const Root = () => {
           user={
             data.csrf && {
               name: 'Reetta Räppänä',
-              component: ({ children, ...rootProps }) => {
+              component: ({ children, className }) => {
                 return (
-                  <NavLink to={`/${i18n.language}/${t('slugs.profile.index')}`} {...rootProps}>
-                    {children}
-                  </NavLink>
+                  <div className="relative">
+                    <button type="button" className={className} onClick={() => setUserMenuOpen(!userMenuOpen)}>
+                      {children}
+                    </button>
+                    {userMenuOpen && (
+                      <div className="absolute right-0 min-w-max translate-y-8 transform">
+                        <PopupList
+                          items={[
+                            {
+                              label: t('profile.index'),
+                              href: userMenuUrls.preferences,
+                              active: isCurrentPageActive(userMenuUrls.preferences),
+                            },
+                            {
+                              label: t('logout'),
+                              type: 'button',
+                              onClick: logout,
+                            },
+                          ]}
+                        />
+                      </div>
+                    )}
+                  </div>
                 );
               },
             }
@@ -79,7 +110,7 @@ const Root = () => {
       <ActionBarContext.Provider value={footerRef.current}>
         <Outlet />
       </ActionBarContext.Provider>
-      <Footer ref={footerRef} items={items} logos={logos} copyright={t('copyright')} variant={variant} />
+      <Footer ref={footerRef} items={footerItems} logos={logos} copyright={t('copyright')} variant={variant} />
     </AuthContext.Provider>
   );
 };
