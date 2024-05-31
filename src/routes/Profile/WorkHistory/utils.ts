@@ -16,25 +16,20 @@ export interface Tyopaikka {
 export const getWorkHistoryTableRows = (data: Tyopaikka[]): WorkHistoryTableRow[] =>
   data.reduce((rows: WorkHistoryTableRow[], row, key) => {
     const { toimenkuvat } = row;
+    const alkuPvm = Math.min(...toimenkuvat.map((t) => new Date(t.alkuPvm).getTime()));
+    const loppuPvm = Math.max(
+      ...toimenkuvat
+        .filter((t) => t.loppuPvm !== undefined)
+        .map((t) => new Date(t.loppuPvm as unknown as string).getTime()),
+    );
     rows.push({
       key: `${key}`,
       tyopaikkaId: row.id,
       toimenkuvatCount: toimenkuvat.length,
       checked: false,
       nimi: row.nimi,
-      alkuPvm: toimenkuvat.reduce(
-        (acc, cur) => (acc < new Date(cur.alkuPvm) ? acc : new Date(cur.alkuPvm)),
-        new Date(),
-      ),
-      loppuPvm: toimenkuvat.reduce(
-        (acc, cur) =>
-          acc > (cur.loppuPvm ? new Date(cur.loppuPvm) : new Date(1900, 0, 1))
-            ? acc
-            : cur.loppuPvm
-              ? new Date(cur.loppuPvm)
-              : new Date(1900, 0, 1),
-        new Date(1900, 0, 1),
-      ),
+      alkuPvm: new Date(alkuPvm),
+      loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
       osaamisetCount: toimenkuvat.reduce((acc, cur) => acc + (cur.osaamiset.length ?? 0), 0),
     });
     toimenkuvat
