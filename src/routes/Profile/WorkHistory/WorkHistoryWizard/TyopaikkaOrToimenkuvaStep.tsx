@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { useFormContext } from 'react-hook-form';
-import { InputField } from '@jod/design-system';
+import { useFormContext, Controller } from 'react-hook-form';
+import { InputField, Datepicker } from '@jod/design-system';
 import { WorkHistoryForm } from './utils';
 
 const TyopaikkaOrToimenkuvaStep = ({ type, toimenkuva }: { type: 'tyopaikka' | 'toimenkuva'; toimenkuva: number }) => {
   const { t } = useTranslation();
-  const { register, watch } = useFormContext<WorkHistoryForm>();
+  const { register, watch, control } = useFormContext<WorkHistoryForm>();
   const id = watch('id');
   const toimenkuvaId = watch(`toimenkuvat.${toimenkuva}.id`);
 
@@ -42,19 +42,31 @@ const TyopaikkaOrToimenkuvaStep = ({ type, toimenkuva }: { type: 'tyopaikka' | '
       </div>
       <div className="mb-6 flex grow gap-6">
         <div className="block w-full">
-          <InputField
-            label={t('work-history.started')}
-            {...register(`toimenkuvat.${toimenkuva}.alkuPvm` as const)}
-            placeholder={t('date-placeholder')}
-            help="Help text"
+          <Controller
+            control={control}
+            render={({ field }) => (
+              <Datepicker
+                label={t('work-history.started')}
+                {...field}
+                placeholder={t('date-placeholder')}
+                help="Help text"
+              />
+            )}
+            name={`toimenkuvat.${toimenkuva}.alkuPvm`}
           />
         </div>
         <div className="block w-full">
-          <InputField
-            label={t('work-history.ended')}
-            {...register(`toimenkuvat.${toimenkuva}.loppuPvm` as const)}
-            placeholder={t('date-or-continues-placeholder')}
-            help="Help text"
+          <Controller
+            control={control}
+            render={({ field }) => (
+              <Datepicker
+                label={t('work-history.ended')}
+                {...field}
+                placeholder={t('date-or-continues-placeholder')}
+                help="Help text"
+              />
+            )}
+            name={`toimenkuvat.${toimenkuva}.loppuPvm`}
           />
         </div>
       </div>

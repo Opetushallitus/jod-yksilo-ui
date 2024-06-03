@@ -36,22 +36,29 @@ const WorkHistoryWizard = ({
   const methods = useForm<WorkHistoryForm>({
     mode: 'onChange',
     resolver: zodResolver(
-      z.object({
-        nimi: z.string().min(1),
-        toimenkuvat: z
-          .object({
-            nimi: z.string().min(1),
-            alkuPvm: z.string().date(),
-            loppuPvm: z.string().date().optional().or(z.literal('')),
-            osaamiset: z.array(
-              z.object({
-                id: z.string().min(1),
-              }),
-            ),
-          })
-          .array()
-          .nonempty(),
-      }),
+      z
+        .object({
+          nimi: z.string().min(1),
+          toimenkuvat: z
+            .object({
+              nimi: z.string().min(1),
+              alkuPvm: z.string().date(),
+              loppuPvm: z.string().date().optional().or(z.literal('')),
+              osaamiset: z.array(
+                z.object({
+                  id: z.string().min(1),
+                }),
+              ),
+            })
+            .array()
+            .nonempty(),
+        })
+        .refine((data) => data.toimenkuvat.length > 0) // At least one toimenkuva
+        .refine((data) =>
+          data.toimenkuvat.every((toimenkuva) =>
+            toimenkuva.loppuPvm ? toimenkuva.alkuPvm <= toimenkuva.loppuPvm : true,
+          ),
+        ), // alkuPvm <= loppuPvm
     ),
     defaultValues: async () => {
       // Fetch osaamiset and toimenkuvat if the tyopaikka is defined

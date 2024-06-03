@@ -11,8 +11,8 @@
   "cookies": "Kakor",
   "copyright": "© JOD 2024. Alla rättigheter förbehålls.",
   "data-sources": "Datakällor",
-  "date-or-continues-placeholder": "åååå-kk-dd eller fortsätter",
-  "date-placeholder": "åååå-kk-dd",
+  "date-or-continues-placeholder": "dd.kk.åååå eller fortsätter",
+  "date-placeholder": "dd.kk.åååå",
   "delete": "Radera",
   "edit": "Redigera",
   "error": {
