@@ -11,8 +11,8 @@
   "cookies": "Cookies",
   "copyright": "© JOD 2024. All rights reserved.",
   "data-sources": "Data Sources",
-  "date-or-continues-placeholder": "yyyy-mm-dd or continues",
-  "date-placeholder": "yyyy-mm-dd",
+  "date-or-continues-placeholder": "dd.mm.yyyy or continues",
+  "date-placeholder": "dd.mm.yyyy",
   "delete": "Delete",
   "edit": "Edit",
   "error": {

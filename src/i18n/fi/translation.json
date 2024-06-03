@@ -11,8 +11,8 @@
   "cookies": "Evästeet",
   "copyright": "© JOD 2024. Kaikki oikeudet pidätetään.",
   "data-sources": "Datalähteet",
-  "date-or-continues-placeholder": "vvvv-kk-pp tai jatkuu",
-  "date-placeholder": "vvvv-kk-pp",
+  "date-or-continues-placeholder": "pp.kk.vvvv tai jatkuu",
+  "date-placeholder": "pp.kk.vvvv",
   "delete": "Poista",
   "edit": "Muokkaa",
   "error": {
