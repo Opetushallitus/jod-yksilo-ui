@@ -30,6 +30,10 @@ npm run dev
 
 7. The app should now be running on http://localhost:5173/.
 
+## Download third-party UI assets
+
+Third-party assets such as images, fonts, and icons are stored in S3 bucket. Guide to download assets is available in the infrastructure repository.
+
 ## Updating JOD Design System
 
 Run the following command to update the JOD Design System to the latest version:

@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+public/assets
+coverage
 *.local
 
 # Editor directories and files
@@ -28,5 +30,3 @@ dist-ssr
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-/coverage/
-/storybook-static/

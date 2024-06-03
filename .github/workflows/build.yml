@@ -87,15 +87,17 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - build
-    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
-      id-token: write
+      id-token: write # Needed to interact with GitHub's OIDC Token endpoint
       contents: read
     steps:
-      - name: Download dist artifact
-        uses: actions/download-artifact@v4
+      - uses: aws-actions/configure-aws-credentials@v4
         with:
-          name: dist
+          role-to-assume: arn:aws:iam::${{ secrets.JOD_UTIL_AWS_ACCOUNT_ID }}:role/${{ secrets.JOD_UTIL_AWS_GITHUB_ROLE_NAME}}
+          aws-region: eu-west-1
+
+      - name: Copy third party assets from S3
+        run: aws s3 sync --quiet s3://${{ secrets.JOD_UI_ASSETS }} ./assets
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
