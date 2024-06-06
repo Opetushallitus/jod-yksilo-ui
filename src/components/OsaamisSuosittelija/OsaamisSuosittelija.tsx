@@ -1,21 +1,30 @@
-import { useEffect, useId, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useFormContext, useFieldArray } from 'react-hook-form';
-import { useAuth } from '@/hooks/useAuth';
 import { client } from '@/api/client';
-import { Osaaminen, type WorkHistoryForm } from './utils';
+import { useAuth } from '@/hooks/useAuth';
+import { Osaaminen } from '@/routes/Profile/WorkHistory/WorkHistoryWizard/utils';
 import { type RootLoaderData } from '@/routes/Root/loader';
 import { Tag, useMediaQueries } from '@jod/design-system';
+import { useEffect, useId, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const ConnectCompetences = ({ tyotehtava, toimenkuva }: { tyotehtava: string; toimenkuva: number }) => {
+type OsaaminenValue = Pick<Osaaminen, 'id' | 'nimi'>;
+
+interface OsaamisSuosittelijaProps {
+  /** Description text that is used to search for competences */
+  description: string;
+  /** Callback that handles data on change */
+  onChange: (values: OsaaminenValue[]) => void;
+  /** Initial values */
+  value?: OsaaminenValue[];
+}
+export const OsaamisSuosittelija = ({ description, value = [], onChange }: OsaamisSuosittelijaProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
   const ehdotetutOsaamisetId = useId();
-  const valtisemasiOsaamisetId = useId();
-  const { control } = useFormContext<WorkHistoryForm>();
+  const valitsemasiOsaamisetId = useId();
   const { csrf } = useAuth() as { csrf: NonNullable<RootLoaderData['csrf']> };
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = useState<Osaaminen[]>([]);
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = useState<Osaaminen[]>([]);
+
   const abortController = useRef<AbortController>();
 
   useEffect(() => {
@@ -42,24 +51,18 @@ const ConnectCompetences = ({ tyotehtava, toimenkuva }: { tyotehtava: string; to
     };
 
     // Do not fetch if the input is empty
-    if (tyotehtava.length > 0) {
-      void fetchCompetences(tyotehtava);
+    if (description.length > 0) {
+      void fetchCompetences(description);
     } else {
       setEhdotetutOsaamiset([]);
     }
-  }, [tyotehtava, csrf]);
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: `toimenkuvat.${toimenkuva}.osaamiset` as 'toimenkuvat.0.osaamiset',
-    keyName: 'key',
-  });
+  }, [description, csrf]);
 
   useEffect(() => {
     setFilteredEhdotetutOsaamiset([
-      ...ehdotetutOsaamiset.filter((osaaminen) => fields.find((field) => field.id === osaaminen.id) === undefined),
+      ...ehdotetutOsaamiset.filter((osaaminen) => value.find((val) => val.id === osaaminen.id) === undefined),
     ]);
-  }, [ehdotetutOsaamiset, fields]);
+  }, [ehdotetutOsaamiset, value]);
 
   return (
     <div className={`mb-6 ${sm ? 'grid grid-cols-3 gap-x-5' : 'flex flex-col'}`}>
@@ -70,7 +73,7 @@ const ConnectCompetences = ({ tyotehtava, toimenkuva }: { tyotehtava: string; to
       </div>
       <div className={`${sm ? 'col-span-2' : 'order-3'} flex items-end`}>
         <label
-          htmlFor={valtisemasiOsaamisetId}
+          htmlFor={valitsemasiOsaamisetId}
           className="mb-4 inline-block align-top text-form-label text-primary-gray"
         >
           {t('work-history.competences-of-your-choice')}
@@ -85,7 +88,7 @@ const ConnectCompetences = ({ tyotehtava, toimenkuva }: { tyotehtava: string; to
               key={ehdotettuOsaaminen.id}
               label={ehdotettuOsaaminen.nimi ?? ''}
               onClick={() => {
-                append({ id: ehdotettuOsaaminen.id, nimi: ehdotettuOsaaminen.nimi });
+                onChange([...value, { id: ehdotettuOsaaminen.id, nimi: ehdotettuOsaaminen.nimi }]);
               }}
               variant="selectable"
             />
@@ -95,13 +98,13 @@ const ConnectCompetences = ({ tyotehtava, toimenkuva }: { tyotehtava: string; to
       <div
         className={`${sm ? 'col-span-2' : 'order-4'} h-[400px] overflow-y-auto rounded-[10px] border-[5px] border-solid border-border-gray p-5`}
       >
-        <div id={valtisemasiOsaamisetId} className="flex flex-wrap gap-3">
-          {fields.map((field, index) => (
+        <div id={valitsemasiOsaamisetId} className="flex flex-wrap gap-3">
+          {value.map((val) => (
             <Tag
-              key={field.key}
-              label={field.nimi ?? ''}
+              key={val.id}
+              label={val.nimi ?? ''}
               onClick={() => {
-                remove(index);
+                onChange(value.filter((selectedValue) => selectedValue.id !== val.id));
               }}
               variant="added"
             />
@@ -111,5 +114,3 @@ const ConnectCompetences = ({ tyotehtava, toimenkuva }: { tyotehtava: string; to
     </div>
   );
 };
-
-export default ConnectCompetences;

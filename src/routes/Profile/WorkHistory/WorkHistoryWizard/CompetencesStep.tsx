@@ -1,14 +1,14 @@
-import { ChangeEvent } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useFormContext } from 'react-hook-form';
+import { OsaamisSuosittelija } from '@/components';
 import { useDebounceState } from '@/hooks/useDebounceState';
-import { type WorkHistoryForm } from './utils';
 import { InputField } from '@jod/design-system';
-import ConnectCompetences from './ConnectCompetences';
+import { ChangeEvent } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { WorkHistoryForm } from './utils';
 
 const CompetencesStep = ({ toimenkuva }: { toimenkuva: number }) => {
   const { t } = useTranslation();
-  const { getValues, watch } = useFormContext<WorkHistoryForm>();
+  const { getValues, watch, control } = useFormContext<WorkHistoryForm>();
   const [debouncedTyotehtava, tyotehtava, setTyotehtava] = useDebounceState('', 500);
   const id = watch(`toimenkuvat.${toimenkuva}.id`);
 
@@ -34,7 +34,14 @@ const CompetencesStep = ({ toimenkuva }: { toimenkuva: number }) => {
           help="Help text"
         />
       </div>
-      <ConnectCompetences tyotehtava={debouncedTyotehtava} toimenkuva={toimenkuva} />
+
+      <Controller
+        control={control}
+        name={`toimenkuvat.${toimenkuva}.osaamiset`}
+        render={({ field: { onChange, value } }) => (
+          <OsaamisSuosittelija description={debouncedTyotehtava} onChange={onChange} value={value} />
+        )}
+      />
     </>
   );
 };
