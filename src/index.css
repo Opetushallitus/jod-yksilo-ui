@@ -1,3 +1,5 @@
+@import '../node_modules/@jod/design-system/dist/symbols.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
