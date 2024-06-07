@@ -91,6 +91,11 @@ jobs:
       id-token: write # Needed to interact with GitHub's OIDC Token endpoint
       contents: read
     steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::${{ secrets.JOD_UTIL_AWS_ACCOUNT_ID }}:role/${{ secrets.JOD_UTIL_AWS_GITHUB_ROLE_NAME}}
