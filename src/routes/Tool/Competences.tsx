@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { clearErrorNote, setErrorNote } from '@/features/errorNote/errorNoteSlice';
 import {
   Accordion,
   Button,
@@ -13,14 +11,9 @@ import {
   Slider,
   useMediaQueries,
 } from '@jod/design-system';
-import { useAuth } from '@/hooks/useAuth';
-import { SimpleNavigationList } from '@/components';
-
-interface Competence {
-  id: number;
-  nimi: string;
-  osuvuus: number;
-}
+import { OsaamisSuosittelija, SimpleNavigationList } from '@/components';
+import { useDebounceState } from '@/hooks/useDebounceState';
+import { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 
 const HelpingToolsContent = () => (
   <>
@@ -80,63 +73,7 @@ const Filters = ({
 
 const Competences = () => {
   const { t } = useTranslation();
-  const [competences, setCompetences] = React.useState<Competence[]>([]);
-  const [skill, setSkill] = React.useState('');
-  const dispatch = useDispatch();
-  const { csrf } = useAuth();
-
   const { sm } = useMediaQueries();
-
-  const debounce = <F extends (...args: never[]) => void>(func: F, waitFor = 800) => {
-    let timeoutId: NodeJS.Timeout | null = null;
-    return (...args: Parameters<F>): void => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      timeoutId = setTimeout(() => func(...args), waitFor);
-    };
-  };
-
-  const fetchCompetences = React.useCallback(
-    (newSkill: string) => {
-      const headers: Record<string, string> = {
-        'Content-Type': 'application/json',
-      };
-      if (csrf) {
-        headers[csrf.headerName] = csrf.token;
-      }
-      fetch('/api/ehdotus/osaamiset', {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({ kuvaus: newSkill }),
-      })
-        .then((resp) => {
-          if (!resp.ok) {
-            dispatch(setErrorNote({ title: 'error.network.title', description: 'error.network.500' }));
-
-            throw new Error('Network response was not ok');
-          }
-          dispatch(clearErrorNote());
-          return resp.json();
-        })
-        .then((data: Competence[]) => {
-          setCompetences(data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    },
-    [dispatch, csrf],
-  );
-
-  const debouncedFetchCompetences = React.useMemo(() => {
-    return debounce((newSkill: string) => fetchCompetences(newSkill));
-  }, [fetchCompetences]);
-
-  const inputChangeHandler = (newValue: string) => {
-    setSkill(newValue);
-    debouncedFetchCompetences(newValue);
-  };
 
   const [competencesMultiplier, setCompetencesMultiplier] = React.useState(50);
   const [interestMultiplier, setInterestMultiplier] = React.useState(50);
@@ -145,6 +82,14 @@ const Competences = () => {
   const [showFilters, setShowFilters] = React.useState(false);
   const [keyFigure, setKeyFigure] = React.useState('a');
   const [order, setOrder] = React.useState('descending');
+
+  const [debouncedTyotehtava, tyotehtava, setTyotehtava] = useDebounceState('', 500);
+
+  const [selectedCompetences, setSelectedCompentences] = React.useState<OsaaminenValue[]>([]);
+
+  const osaamisSuosittelijaHandler = (values: OsaaminenValue[]) => {
+    setSelectedCompentences(values);
+  };
 
   return (
     <div className="flex flex-col">
@@ -159,17 +104,19 @@ const Competences = () => {
         </div>
 
         <div className="order-3 col-span-2 sm:order-2 sm:col-span-4">
-          <InputField label="Taitosi" value={skill} onChange={(event) => inputChangeHandler(event.target.value)} />
-          <div className="mt-7 min-h-[200px] rounded border p-4">
-            <ul className="flex flex-col space-y-4">
-              {competences.map((item) => (
-                <li className="flex flex-row justify-between rounded border p-4" key={item.id}>
-                  <span>{item.nimi}</span>
-                  <span>{item.osuvuus}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="mb-5">
+            <InputField
+              label={t('work-history.job-duties')}
+              value={tyotehtava}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => setTyotehtava(event.target.value)}
+              placeholder="Lorem ipsum dolor sit amet"
+            />
           </div>
+          <OsaamisSuosittelija
+            description={debouncedTyotehtava}
+            onChange={osaamisSuosittelijaHandler}
+            value={selectedCompetences}
+          />
         </div>
         <div className="order-2 col-span-2 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0">
           {sm ? (

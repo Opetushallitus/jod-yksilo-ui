@@ -6,7 +6,7 @@ import { Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-type OsaaminenValue = Pick<Osaaminen, 'id' | 'nimi'>;
+export type OsaaminenValue = Pick<Osaaminen, 'id' | 'nimi'>;
 
 interface OsaamisSuosittelijaProps {
   /** Description text that is used to search for competences */
