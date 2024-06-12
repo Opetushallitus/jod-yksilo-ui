@@ -4,25 +4,26 @@ import { InputField } from '@jod/design-system';
 import { ChangeEvent } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { WorkHistoryForm } from './utils';
+import { EducationHistoryForm } from './utils';
 
 interface CompetencesStepProps {
-  toimenkuva: number;
+  tutkinto: number;
 }
 
-const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
+const CompetencesStep = ({ tutkinto }: CompetencesStepProps) => {
   const { t } = useTranslation();
-  const { getValues, watch, control } = useFormContext<WorkHistoryForm>();
+  const { getValues, watch, control } = useFormContext<EducationHistoryForm>();
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
-  const id = watch(`toimenkuvat.${toimenkuva}.id`);
+  const id = watch(`koulutukset.${tutkinto}.id`);
 
   return (
     <>
       <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">
-        {id ? t('work-history.edit-competences') : t('work-history.identify-competences')}
+        {id ? t('education-history.edit-competences') : t('education-history.identify-competences')}
       </h2>
       <h3 className="mb-4 text-heading-5 text-black sm:mb-5 sm:text-heading-3">
-        {getValues('nimi')} - {getValues(`toimenkuvat.${toimenkuva}.nimi`)}
+        {getValues('nimi') && `${getValues('nimi')} - `}
+        {getValues(`koulutukset.${tutkinto}.nimi`)}
       </h3>
       <p className="mb-7 text-body-sm text-primary-gray sm:mb-9">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
@@ -31,7 +32,7 @@ const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
       </p>
       <div className="mb-6">
         <InputField
-          label={t('work-history.job-duties')}
+          label={t('education-history.educational-content')}
           value={description}
           onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
           placeholder="Lorem ipsum dolor sit amet"
@@ -41,7 +42,7 @@ const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
 
       <Controller
         control={control}
-        name={`toimenkuvat.${toimenkuva}.osaamiset`}
+        name={`koulutukset.${tutkinto}.osaamiset`}
         render={({ field: { onChange, value } }) => (
           <OsaamisSuosittelija description={debouncedDescription} onChange={onChange} value={value} />
         )}

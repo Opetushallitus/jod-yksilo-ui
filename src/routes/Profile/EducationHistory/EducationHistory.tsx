@@ -3,6 +3,7 @@ import {
   MainLayout,
   RoutesNavigationList,
   SelectableTable,
+  SelectableTableRow,
   SimpleNavigationList,
   Title,
   type RoutesNavigationListProps,
@@ -16,39 +17,43 @@ import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useNavigate, useOutletContext } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
-import { WorkHistoryWizard } from './WorkHistoryWizard';
-import { Tyopaikka, getWorkHistoryTableRows } from './utils';
+import { EducationHistoryWizard } from './EducationHistoryWizard';
+import { Koulutus, getEducationHistoryTableRows } from './utils';
 
-const WorkHistory = () => {
+const EducationHistory = () => {
   const routes: RoutesNavigationListProps['routes'] = useOutletContext();
-  const tyopaikat = useLoaderData() as Tyopaikka[];
+  const koulutukset = useLoaderData() as Koulutus[];
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const title = t('profile.work-history');
+  const title = t('profile.education-history');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
   const [isOpen, setIsOpen] = React.useState(false);
-  const [rows, setRows] = React.useState(getWorkHistoryTableRows(tyopaikat));
+  const [rows, setRows] = React.useState<SelectableTableRow[]>(getEducationHistoryTableRows(koulutukset));
   const { csrf } = useAuth() as { csrf: NonNullable<RootLoaderData['csrf']> };
 
   const checkedRows = rows.filter((row) => row.checked);
 
   React.useEffect(() => {
-    setRows(getWorkHistoryTableRows(tyopaikat));
-  }, [tyopaikat]);
+    setRows(getEducationHistoryTableRows(koulutukset));
+  }, [koulutukset]);
 
-  const deleteTyopaikkat = async () => {
+  const deleteKoulutukset = async () => {
     await Promise.all(
       checkedRows
         .map((row) => row.key)
-        .map((id) =>
-          client.DELETE('/api/profiili/tyopaikat/{id}', {
-            headers: {
-              [csrf.headerName]: csrf.token,
-            },
-            params: { path: { id } },
-          }),
-        ),
+        .map((id) => {
+          const koulutus = koulutukset.filter((row) => row.kategoria).find((row) => row.kategoria?.id === id);
+          return (koulutus?.koulutukset.map((koulutus) => koulutus.id as unknown as string) ?? [id]).map((id) =>
+            client.DELETE('/api/profiili/koulutukset/{id}', {
+              headers: {
+                [csrf.headerName]: csrf.token,
+              },
+              params: { path: { id } },
+            }),
+          );
+        })
+        .flat(),
     );
     navigate('.', { replace: true });
   };
@@ -69,17 +74,17 @@ const WorkHistory = () => {
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
       <SelectableTable
-        selectableColumnHeader={t('work-history.workplace-or-job-description')}
+        selectableColumnHeader={t('education-history.education-or-degree')}
         rows={rows}
         setRows={setRows}
       />
-      {isOpen && <WorkHistoryWizard isOpen={isOpen} setIsOpen={setIsOpen} selectedRow={checkedRows[0]} />}
+      {isOpen && <EducationHistoryWizard isOpen={isOpen} setIsOpen={setIsOpen} selectedRow={checkedRows[0]} />}
       {actionBar &&
         createPortal(
           <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
             <Button
               variant="white"
-              label={t('work-history.add-new-workplace')}
+              label={t('education-history.add-new-education')}
               onClick={() => setIsOpen(true)}
               disabled={checkedRows.length !== 0}
             />
@@ -89,7 +94,6 @@ const WorkHistory = () => {
               onClick={() => {
                 alert('Hae tietoja...');
               }}
-              disabled={checkedRows.length !== 0}
             /> */}
             {/* <Button
               variant="white"
@@ -97,7 +101,6 @@ const WorkHistory = () => {
               onClick={() => {
                 alert('Tunnista osaamisia');
               }}
-              disabled={checkedRows.length === 0}
             /> */}
             <Button
               variant="white"
@@ -106,12 +109,12 @@ const WorkHistory = () => {
               disabled={checkedRows.length !== 1}
             />
             <ConfirmDialog
-              title={t('work-history.delete-selected-work-history')}
-              onConfirm={() => void deleteTyopaikkat()}
+              title={t('education-history.delete-selected-education-history')}
+              onConfirm={() => void deleteKoulutukset()}
               confirmText={t('delete')}
               cancelText={t('cancel')}
               variant="destructive"
-              description={t('work-history.confirm-delete-selected-work-history')}
+              description={t('education-history.confirm-delete-selected-education-history')}
             >
               {(showDialog: () => void) => (
                 <Button
@@ -129,4 +132,4 @@ const WorkHistory = () => {
   );
 };
 
-export default WorkHistory;
+export default EducationHistory;

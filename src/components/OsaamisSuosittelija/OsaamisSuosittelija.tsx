@@ -5,6 +5,13 @@ import { Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+export interface Osaaminen {
+  id: string;
+  nimi: string;
+  tyyppi: string;
+  osuvuus: number;
+}
+
 export type OsaaminenValue = Pick<Osaaminen, 'id' | 'nimi'>;
 
 interface OsaamisSuosittelijaProps {

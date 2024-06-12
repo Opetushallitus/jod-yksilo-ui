@@ -15,6 +15,22 @@
   "date-placeholder": "dd.mm.yyyy",
   "delete": "Delete",
   "edit": "Edit",
+  "education-history": {
+    "add-new-degree-or-course": "Add new degree or course",
+    "add-new-education": "Add new education",
+    "confirm-delete-selected-education-history": "Are you sure you want to delete the selected education history?",
+    "degree": "Degree",
+    "degree-or-course": "Degree or course",
+    "delete-degree-or-course": "Delete degree or course",
+    "delete-selected-education-history": "Delete selected education history",
+    "edit-competences": "Edit competences",
+    "edit-degree": "Edit degree",
+    "edit-education": "Edit education",
+    "education-or-degree": "Education / degree",
+    "educational-content": "Educational content",
+    "educational-institution": "Educational institution",
+    "identify-competences": "Identify competences"
+  },
   "error": {
     "network": {
       "500": "Unexpected error happened",
@@ -43,6 +59,10 @@
   "interests": "Interests",
   "logout": "Log out",
   "more-information": "More information",
+  "my-competences": {
+    "by-KOULUTUS": "By education",
+    "by-TOIMENKUVA": "By job description"
+  },
   "next": "Next",
   "no-match": {
     "description": "The page you are looking for does not exist.",
@@ -117,6 +137,12 @@
     },
     "title": "Tool"
   },
+  "types": {
+    "competence": {
+      "KOULUTUS": "Education",
+      "TOIMENKUVA": "Job description"
+    }
+  },
   "updated": "Updated",
   "user": "User",
   "user-guide": "User Guide",
@@ -127,12 +153,13 @@
   "who-provides-the-service": "Who provides the service?",
   "work-history": {
     "add-new-job-description": "Add new job description",
-    "add-new-work-history": "Add new work history",
     "add-new-workplace": "Add new workplace",
     "competences": "Competences",
     "competences-of-your-choice": "Competences of your choice",
+    "confirm-delete-selected-work-history": "Are you sure you want to delete the selected work history?",
     "count-competences": "{{count}} competences",
     "delete-job-description": "Delete job description",
+    "delete-selected-work-history": "Delete selected work history",
     "edit-competences": "Edit competences",
     "edit-job-description": "Edit job description",
     "edit-workplace": "Edit workplace",
@@ -145,15 +172,5 @@
     "started": "Started",
     "summary": "Summary",
     "workplace-or-job-description": "Workplace / job description"
-  },
-  "my-competences": {
-    "by-TOIMENKUVA": "By job description",
-    "by-KOULUTUS": "By education"
-  },
-  "types": {
-    "competence": {
-      "TOIMENKUVA": "Job description",
-      "KOULUTUS": "Education"
-    }
   }
 }

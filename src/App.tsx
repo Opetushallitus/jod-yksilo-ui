@@ -7,9 +7,10 @@ import {
   TermsOfService,
 } from '@/routes/BasicInformation';
 import { Home } from '@/routes/Home';
-import { EducationHistory, Favorites, FreeTimeActivities, Preferences, Profile, SomethingElse } from '@/routes/Profile';
+import { Favorites, FreeTimeActivities, Preferences, Profile, SomethingElse } from '@/routes/Profile';
 import { Competences, competencesLoader } from '@/routes/Profile/Competences';
-import { WorkHistory, loader as workHistoryloader } from '@/routes/Profile/WorkHistory';
+import { EducationHistory, loader as educationHistoryLoader } from '@/routes/Profile/EducationHistory';
+import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import { ErrorElement, NoMatch, Root, loader as rootLoader } from '@/routes/Root';
 import {
   Goals,
@@ -108,11 +109,12 @@ const App = () => {
             },
             {
               path: t('slugs.profile.work-history'),
-              loader: workHistoryloader,
+              loader: workHistoryLoader,
               element: <WorkHistory />,
             },
             {
               path: t('slugs.profile.education-history'),
+              loader: educationHistoryLoader,
               element: <EducationHistory />,
             },
             {

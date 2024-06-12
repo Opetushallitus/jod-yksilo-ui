@@ -1,6 +1,7 @@
-import { type WorkHistoryTableRow } from './WorkHistoryTable';
+import { type SelectableTableRow } from '@/components';
 
 export interface Toimenkuva {
+  id?: string;
   nimi: Record<string, string>;
   alkuPvm: string;
   loppuPvm?: string;
@@ -13,8 +14,8 @@ export interface Tyopaikka {
   toimenkuvat: Toimenkuva[];
 }
 
-export const getWorkHistoryTableRows = (data: Tyopaikka[]): WorkHistoryTableRow[] =>
-  data.reduce((rows: WorkHistoryTableRow[], row, key) => {
+export const getWorkHistoryTableRows = (data: Tyopaikka[]): SelectableTableRow[] =>
+  data.reduce((rows: SelectableTableRow[], row) => {
     const { toimenkuvat } = row;
     const alkuPvm = Math.min(...toimenkuvat.map((t) => new Date(t.alkuPvm).getTime()));
     const loppuPvm = toimenkuvat.some((toimenkuva) => !toimenkuva.loppuPvm)
@@ -25,9 +26,8 @@ export const getWorkHistoryTableRows = (data: Tyopaikka[]): WorkHistoryTableRow[
             .map((toimenkuva) => new Date(toimenkuva.loppuPvm as unknown as string).getTime()),
         );
     rows.push({
-      key: `${key}`,
-      tyopaikkaId: row.id,
-      toimenkuvatCount: toimenkuvat.length,
+      key: row.id ?? crypto.randomUUID(),
+      hideSubrowDetails: toimenkuvat.length <= 1,
       checked: false,
       nimi: row.nimi,
       alkuPvm: new Date(alkuPvm),
@@ -36,10 +36,10 @@ export const getWorkHistoryTableRows = (data: Tyopaikka[]): WorkHistoryTableRow[
     });
     toimenkuvat
       .sort((a, b) => a.alkuPvm.localeCompare(b.alkuPvm))
-      .forEach((toimenkuva, toimenkuvaKey) => {
+      .forEach((toimenkuva) => {
         rows.push({
-          key: `${key}-${toimenkuvaKey}`,
-          toimenkuvatCount: toimenkuvat.length,
+          key: toimenkuva.id ?? crypto.randomUUID(),
+          hideSubrowDetails: toimenkuvat.length <= 1,
           nimi: toimenkuva.nimi,
           alkuPvm: new Date(toimenkuva.alkuPvm),
           loppuPvm: toimenkuva.loppuPvm ? new Date(toimenkuva.loppuPvm) : undefined,

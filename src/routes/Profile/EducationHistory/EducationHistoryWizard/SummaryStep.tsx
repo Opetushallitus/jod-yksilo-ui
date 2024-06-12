@@ -2,30 +2,34 @@ import { SelectableTable, SelectableTableRow } from '@/components';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Toimenkuva, getWorkHistoryTableRows } from '../utils';
-import { type WorkHistoryForm } from './utils';
+import { Tutkinto, getEducationHistoryTableRows } from '../utils';
+import { type EducationHistoryForm } from './utils';
 
 const SummaryStep = () => {
   const { t } = useTranslation();
-  const { watch } = useFormContext<WorkHistoryForm>();
+  const { watch } = useFormContext<EducationHistoryForm>();
   const [rows, setRows] = React.useState<SelectableTableRow[]>([]);
 
   React.useEffect(() => {
-    const tyopaikka = watch();
+    const koulutus = watch();
     setRows(
-      getWorkHistoryTableRows([
+      getEducationHistoryTableRows([
         {
-          nimi: { fi: tyopaikka.nimi },
-          toimenkuvat: tyopaikka.toimenkuvat.map(
-            (toimenkuva) =>
+          kategoria: koulutus.nimi
+            ? {
+                nimi: { fi: koulutus.nimi },
+              }
+            : undefined,
+          koulutukset: koulutus.koulutukset.map(
+            (tutkinto) =>
               ({
                 nimi: {
-                  fi: toimenkuva.nimi,
+                  fi: tutkinto.nimi,
                 },
-                alkuPvm: toimenkuva.alkuPvm,
-                loppuPvm: toimenkuva.loppuPvm,
-                osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
-              }) as Toimenkuva,
+                alkuPvm: tutkinto.alkuPvm,
+                loppuPvm: tutkinto.loppuPvm,
+                osaamiset: tutkinto.osaamiset.map((osaaminen) => osaaminen.id),
+              }) as Tutkinto,
           ),
         },
       ]),
