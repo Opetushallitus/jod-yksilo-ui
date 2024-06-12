@@ -1,13 +1,11 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-/* eslint-disable sonarjs/cognitive-complexity */
+import { formatDate } from '@/utils';
 import { Checkbox, useMediaQueries } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
-import { formatDate } from '../utils';
 
-export interface WorkHistoryTableRow {
+export interface SelectableTableRow {
   key: string;
-  tyopaikkaId?: string;
-  toimenkuvatCount: number;
+  hideRowDetails?: boolean;
+  hideSubrowDetails?: boolean;
   checked?: boolean;
   nimi: Record<string, string>;
   alkuPvm: Date;
@@ -15,16 +13,17 @@ export interface WorkHistoryTableRow {
   osaamisetCount: number;
 }
 
-interface WorkHistoryTableProps {
-  rows: WorkHistoryTableRow[];
-  setRows?: (rows: WorkHistoryTableRow[]) => void;
+interface SelectableTableProps {
+  selectableColumnHeader: string;
+  rows: SelectableTableRow[];
+  setRows?: (rows: SelectableTableRow[]) => void;
 }
 
-export const WorkHistoryTable = ({ rows, setRows }: WorkHistoryTableProps) => {
+export const SelectableTable = ({ selectableColumnHeader, rows, setRows }: SelectableTableProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
   const setRow = setRows
-    ? (row: WorkHistoryTableRow) => {
+    ? (row: SelectableTableRow) => {
         setRows(
           rows.map((r) => {
             if (r.key === row.key) {
@@ -42,7 +41,7 @@ export const WorkHistoryTable = ({ rows, setRows }: WorkHistoryTableProps) => {
         <thead>
           <tr className="border-b-2 border-inactive-gray">
             <th scope="col" colSpan={2} className="py-3 pr-5 align-bottom text-heading-5 text-secondary-gray">
-              {t('work-history.workplace-or-job-description')}
+              {selectableColumnHeader}
             </th>
             {sm && (
               <>
@@ -61,7 +60,7 @@ export const WorkHistoryTable = ({ rows, setRows }: WorkHistoryTableProps) => {
         </thead>
         <tbody>
           {rows.map((row, index) => (
-            <WorkHistoryTableRow key={row.key} row={row} setRow={setRow} index={index} />
+            <SelectableTableRow key={row.key} row={row} setRow={setRow} index={index} />
           ))}
         </tbody>
       </table>
@@ -69,14 +68,14 @@ export const WorkHistoryTable = ({ rows, setRows }: WorkHistoryTableProps) => {
   );
 };
 
-const WorkHistoryTableRow = ({
+const SelectableTableRow = ({
   index,
   row,
   setRow,
 }: {
   index: number;
-  row: WorkHistoryTableRow;
-  setRow?: (rows: WorkHistoryTableRow) => void;
+  row: SelectableTableRow;
+  setRow?: (rows: SelectableTableRow) => void;
 }) => {
   const {
     t,
@@ -84,9 +83,11 @@ const WorkHistoryTableRow = ({
   } = useTranslation();
   const { sm } = useMediaQueries();
 
+  const countCompetences = 'work-history.count-competences';
+
   const osaamisetCountTotal =
     row.osaamisetCount > 0
-      ? t('work-history.count-competences', { count: row.osaamisetCount })
+      ? t(countCompetences, { count: row.osaamisetCount })
       : `(${t('work-history.identify-competences')})`;
 
   return (
@@ -110,9 +111,11 @@ const WorkHistoryTableRow = ({
                 />
                 {!sm && (
                   <div className="flex gap-5 pb-2 pl-8 pt-1 text-body-xs font-bold text-secondary-gray">
-                    <p>
-                      {formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
-                    </p>
+                    {!row.hideRowDetails && (
+                      <p>
+                        {formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
+                      </p>
+                    )}
                     <p>{osaamisetCountTotal}</p>
                   </div>
                 )}
@@ -133,9 +136,11 @@ const WorkHistoryTableRow = ({
           </td>
           {sm && (
             <>
-              <td className={`pr-5 pt-5 text-body-xs font-bold text-secondary-gray`}>{formatDate(row.alkuPvm)}</td>
+              <td className={`pr-5 pt-5 text-body-xs font-bold text-secondary-gray`}>
+                {!row.hideRowDetails && formatDate(row.alkuPvm)}
+              </td>
               <td className={`pr-7 pt-5 text-body-xs font-bold text-secondary-gray`}>
-                {row.loppuPvm && formatDate(row.loppuPvm)}
+                {!row.hideRowDetails && row.loppuPvm && formatDate(row.loppuPvm)}
               </td>
               <td className={`w-1/4 pt-5 text-body-xs font-bold text-secondary-gray`}>{osaamisetCountTotal}</td>
             </>
@@ -145,30 +150,28 @@ const WorkHistoryTableRow = ({
         <>
           <td
             colSpan={2}
-            className={`${setRow ? 'pl-8 sm:pl-[56px]' : ''} pr-5 pt-1 text-body-xs font-bold text-accent sm:pt-3`.trim()}
+            className={`${setRow ? 'pl-8 sm:pl-[56px]' : ''} pr-5 text-body-xs font-bold text-accent sm:pt-3`.trim()}
           >
-            {sm ? row.nimi[language] : <p className="pt-3">{row.nimi[language]}</p>}
-            {!sm && (
+            {sm ? row.nimi[language] : <p className={!row.hideSubrowDetails ? 'pt-3' : 'pt-2'}>{row.nimi[language]}</p>}
+            {!sm && !row.hideSubrowDetails && (
               <div className="flex gap-5 pt-1">
                 <p>
                   {formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
                 </p>
-                <p>{t('work-history.count-competences', { count: row.osaamisetCount })}</p>
+                <p>{t(countCompetences, { count: row.osaamisetCount })}</p>
               </div>
             )}
           </td>
           {sm && (
             <>
               <td className="pr-5 pt-3 text-body-xs font-bold text-secondary-gray">
-                {row.toimenkuvatCount > 1 ? formatDate(row.alkuPvm) : ''}
+                {!row.hideSubrowDetails && formatDate(row.alkuPvm)}
               </td>
               <td className="pr-7 pt-3 text-body-xs font-bold text-secondary-gray">
-                {row.toimenkuvatCount > 1 ? row.loppuPvm && formatDate(row.loppuPvm) : ''}
+                {!row.hideSubrowDetails && row.loppuPvm && formatDate(row.loppuPvm)}
               </td>
               <td className="pt-3 text-body-xs font-bold text-secondary-gray">
-                {row.toimenkuvatCount > 1 && row.osaamisetCount > 0
-                  ? t('work-history.count-competences', { count: row.osaamisetCount })
-                  : ''}
+                {!row.hideSubrowDetails && row.osaamisetCount > 0 && t(countCompetences, { count: row.osaamisetCount })}
               </td>
             </>
           )}

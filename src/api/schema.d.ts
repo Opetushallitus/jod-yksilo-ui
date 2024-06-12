@@ -18,22 +18,17 @@ export interface paths {
     delete: operations['yksilonOsaaminenDelete'];
   };
   '/api/profiili/koulutukset': {
+    /**
+     * Get all koulutukset and kategoriat of the user
+     * @description This endpoint can be used to get all koulutukset and kategoriat of the user.
+     */
     get: operations['koulutusFind'];
     /**
-     * Adds or replaces a Kategoria and its associated Koulutus
-     * @description This endpoint can be used to add a new Kategoria and its associated Koulutus or to
-     * update an existing Kategoria and its associated Koulutus. When updating, unlisted
-     * existing Koulutus will be removed from the Kategoria, unless the Kategoria is null.
+     * Adds a new set of koulutus and its associated kategoria
+     * @description This endpoint can be used to add a new Kategoria and its associated Koulutus.
+     * If kategoria is not present koulutus will be added without kategoria.
      */
-    post: operations['koulutusUpdate'];
-    delete: operations['koulutusDeleteAll'];
-    /**
-     * Updates a Kategoria and its associated Koulutus
-     * @description This endpoint can be used to add a new Kategoria and its associated Koulutus or to
-     * do a partial update. Unlike update, this endpoint will not remove unlisted existing
-     * Koulutus.
-     */
-    patch: operations['koulutusPartialUpdate'];
+    post: operations['koulutusCreate'];
   };
   '/api/ehdotus/tyomahdollisuudet': {
     post: operations['tyomahdollisuudetCreateEhdotus'];
@@ -51,9 +46,25 @@ export interface paths {
   };
   '/api/profiili/koulutukset/{id}': {
     get: operations['koulutusGet'];
+    /**
+     * Delete the koulutus by id
+     * @description This endpoint can be used to delete the koulutus by id
+     */
     delete: operations['koulutusDelete'];
+    /**
+     * Updates the koulutus by id
+     * @description This endpoint can be used to update Koulutus.
+     */
+    patch: operations['koulutusUpdateKoulutus'];
   };
-  '/api/profiili/koulutukset/kategoriat': {
+  '/api/profiili/kategoriat/{id}': {
+    /**
+     * Updates a Kategoria by id
+     * @description This endpoint can be used to update the kagoria by id.
+     */
+    patch: operations['koulutusUpdateKategoria'];
+  };
+  '/api/profiili/kategoriat': {
     get: operations['koulutusGetKategoriat'];
   };
   '/api/osaamiset': {
@@ -164,8 +175,8 @@ export interface components {
       lahde?: components['schemas']['OsaamisenLahdeDto'];
     };
     CsrfToken: {
-      headerName?: string;
       parameterName?: string;
+      headerName?: string;
       token?: string;
     };
   };
@@ -285,12 +296,11 @@ export interface operations {
       };
     };
   };
+  /**
+   * Get all koulutukset and kategoriat of the user
+   * @description This endpoint can be used to get all koulutukset and kategoriat of the user.
+   */
   koulutusFind: {
-    parameters: {
-      query?: {
-        kategoriaId?: string;
-      };
-    };
     responses: {
       /** @description OK */
       200: {
@@ -301,46 +311,11 @@ export interface operations {
     };
   };
   /**
-   * Adds or replaces a Kategoria and its associated Koulutus
-   * @description This endpoint can be used to add a new Kategoria and its associated Koulutus or to
-   * update an existing Kategoria and its associated Koulutus. When updating, unlisted
-   * existing Koulutus will be removed from the Kategoria, unless the Kategoria is null.
+   * Adds a new set of koulutus and its associated kategoria
+   * @description This endpoint can be used to add a new Kategoria and its associated Koulutus.
+   * If kategoria is not present koulutus will be added without kategoria.
    */
-  koulutusUpdate: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['KoulutusKategoriaDto'];
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          'application/json': components['schemas']['KoulutusUpdateResultDto'];
-        };
-      };
-    };
-  };
-  koulutusDeleteAll: {
-    parameters: {
-      query: {
-        koulutukset: string[];
-      };
-    };
-    responses: {
-      /** @description No Content */
-      204: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Updates a Kategoria and its associated Koulutus
-   * @description This endpoint can be used to add a new Kategoria and its associated Koulutus or to
-   * do a partial update. Unlike update, this endpoint will not remove unlisted existing
-   * Koulutus.
-   */
-  koulutusPartialUpdate: {
+  koulutusCreate: {
     requestBody: {
       content: {
         'application/json': components['schemas']['KoulutusKategoriaDto'];
@@ -456,14 +431,18 @@ export interface operations {
       };
     };
     responses: {
-      /** @description No Content */
-      204: {
+      /** @description OK */
+      200: {
         content: {
           'application/json': components['schemas']['KoulutusKategoriaDto'];
         };
       };
     };
   };
+  /**
+   * Delete the koulutus by id
+   * @description This endpoint can be used to delete the koulutus by id
+   */
   koulutusDelete: {
     parameters: {
       path: {
@@ -474,6 +453,54 @@ export interface operations {
       /** @description No Content */
       204: {
         content: never;
+      };
+    };
+  };
+  /**
+   * Updates the koulutus by id
+   * @description This endpoint can be used to update Koulutus.
+   */
+  koulutusUpdateKoulutus: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['KoulutusDto'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          'application/json': components['schemas']['KoulutusUpdateResultDto'];
+        };
+      };
+    };
+  };
+  /**
+   * Updates a Kategoria by id
+   * @description This endpoint can be used to update the kagoria by id.
+   */
+  koulutusUpdateKategoria: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['KategoriaDto'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          'application/json': components['schemas']['KoulutusUpdateResultDto'];
+        };
       };
     };
   };

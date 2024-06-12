@@ -15,6 +15,22 @@
   "date-placeholder": "dd.kk.åååå",
   "delete": "Radera",
   "edit": "Redigera",
+  "education-history": {
+    "add-new-degree-or-course": "Lägg till ny examen eller kurs",
+    "add-new-education": "Lägg till ny utbildning",
+    "confirm-delete-selected-education-history": "Är du säker på att du vill radera vald utbildningshistoria?",
+    "degree": "Examen",
+    "degree-or-course": "Examen eller kurs",
+    "delete-degree-or-course": "Radera examen eller kurs",
+    "delete-selected-education-history": "Radera vald utbildningshistoria",
+    "edit-competences": "Redigera kompetenser",
+    "edit-degree": "Redigera examen",
+    "edit-education": "Redigera utbildning",
+    "education-or-degree": "Utbildning / examen",
+    "educational-content": "Utbildningsinnehåll",
+    "educational-institution": "Utbildningsanstalt",
+    "identify-competences": "Identifiera kompetenser"
+  },
   "error": {
     "network": {
       "500": "Ett oväntat fel uppstod",
@@ -43,6 +59,10 @@
   "interests": "Intressen",
   "logout": "Logga ut",
   "more-information": "Mer information",
+  "my-competences": {
+    "by-KOULUTUS": "Med utbildning",
+    "by-TOIMENKUVA": "Med arbetsuppgifter"
+  },
   "next": "Nästa",
   "no-match": {
     "content": "Tyvärr hittades inte sidan du letade efter.",
@@ -117,6 +137,12 @@
     },
     "title": "Verktyg"
   },
+  "types": {
+    "competence": {
+      "KOULUTUS": "Utbildning",
+      "TOIMENKUVA": "Arbetsuppgifter"
+    }
+  },
   "updated": "Uppdaterad",
   "user": "Användare",
   "user-guide": "Instruktioner",
@@ -127,11 +153,13 @@
   "who-provides-the-service": "Vem tillhandahåller tjänsten?",
   "work-history": {
     "add-new-job-description": "Lägg till nytt jobbbeskrivning",
-    "add-new-work-history": "Lägg till ny arbetslivserfarenhet",
+    "add-new-workplace": "Lägg till ny arbetsplats",
     "competences": "Kompetens",
     "competences-of-your-choice": "Dina valda kompetenser",
+    "confirm-delete-selected-work-history": "Är du säker på att du vill radera vald arbetslivserfarenhet?",
     "count-competences": "{{count}} kompetens",
     "delete-job-description": "Radera jobbeskrivning",
+    "delete-selected-work-history": "Radera vald arbetslivserfarenhet",
     "edit-competences": "Redigera kompetenser",
     "edit-job-description": "Redigera jobbeskrivning",
     "edit-work-history": "Redigera arbetslivserfarenhet",
@@ -145,15 +173,5 @@
     "started": "Startade",
     "summary": "Sammanfattning",
     "workplace-or-job-description": "Arbetsplats / jobbeskrivning"
-  },
-  "my-competences": {
-    "by-TOIMENKUVA": "Med arbetsuppgifter",
-    "by-KOULUTUS": "Med utbildning"
-  },
-  "types": {
-    "competence": {
-      "TOIMENKUVA": "Arbetsuppgifter",
-      "KOULUTUS": "Utbildning"
-    }
   }
 }
