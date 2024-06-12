@@ -1,12 +1,12 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import React from 'react';
 
-export const ActionBarContext = createContext<HTMLDivElement | null>(null);
+export const ActionBarContext = React.createContext<HTMLDivElement | null>(null);
 
 export const useActionBar = () => {
-  const actionBar = useContext(ActionBarContext);
-  const [state, setState] = useState<Element | null>(null);
+  const actionBar = React.useContext(ActionBarContext);
+  const [state, setState] = React.useState<Element | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     // Create a new div element
     const element = document.createElement('div');
     element.className = 'sticky bottom-0 bg-bg-gray print:hidden';

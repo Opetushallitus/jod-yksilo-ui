@@ -2,7 +2,7 @@ import { ErrorNote } from '@/features';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
 import { Footer, NavigationBar, PopupList, SkipLink } from '@jod/design-system';
-import { useRef, useState, type ComponentProps } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Outlet, ScrollRestoration, matchPath, useLoaderData, useLocation } from 'react-router-dom';
@@ -20,11 +20,11 @@ const NavigationBarItem = (to: string, text: string) => ({
 const Root = () => {
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = React.useState(false);
   const userGuide = `/${i18n.language}/${t('slugs.user-guide.index')}`;
   const basicInformation = `/${i18n.language}/${t('slugs.basic-information')}`;
   const isCurrentPageActive = (path: string) => path === pathname;
-  const footerItems: ComponentProps<typeof Footer>['items'] = [
+  const footerItems: React.ComponentProps<typeof Footer>['items'] = [
     NavigationBarItem(`${userGuide}/${t('slugs.user-guide.what-is-the-service')}`, t('about-us-and-user-guide')),
     NavigationBarItem(`${basicInformation}/${t('slugs.cookie-policy')}`, t('cookie-policy')),
     NavigationBarItem(`${basicInformation}/${t('slugs.data-sources')}`, t('data-sources')),
@@ -41,7 +41,7 @@ const Root = () => {
     preferences: `/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`,
   };
 
-  const logos: ComponentProps<typeof Footer>['logos'] = [1, 2, 3].map((item) => ({
+  const logos: React.ComponentProps<typeof Footer>['logos'] = [1, 2, 3].map((item) => ({
     key: item,
     component: ({ className }) => (
       <a href={`/logo${item}`} className={className}>
@@ -50,8 +50,10 @@ const Root = () => {
     ),
   }));
   // If homepage, use light variant, otherwise use dark variant
-  const variant: ComponentProps<typeof Footer>['variant'] = matchPath(`/${i18n.language}`, pathname) ? 'light' : 'dark';
-  const footerRef = useRef<HTMLDivElement>(null);
+  const variant: React.ComponentProps<typeof Footer>['variant'] = matchPath(`/${i18n.language}`, pathname)
+    ? 'light'
+    : 'dark';
+  const footerRef = React.useRef<HTMLDivElement>(null);
 
   const data = useLoaderData() as RootLoaderData;
 

@@ -1,5 +1,5 @@
 /* eslint-disable sonarjs/cognitive-complexity */
-import { Dispatch, SetStateAction, useEffect, useId, useMemo, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useForm, useFormState, FormProvider, Form, FormSubmitHandler, useFieldArray } from 'react-hook-form';
@@ -21,7 +21,7 @@ const WorkHistoryWizard = ({
   tyopaikka,
 }: {
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   tyopaikka?: WorkHistoryTableRow;
 }) => {
   const {
@@ -32,7 +32,7 @@ const WorkHistoryWizard = ({
   const { csrf } = useAuth() as { csrf: NonNullable<RootLoaderData['csrf']> };
   const { sm } = useMediaQueries();
 
-  const formId = useId();
+  const formId = React.useId();
   const methods = useForm<WorkHistoryForm>({
     mode: 'onChange',
     resolver: zodResolver(
@@ -174,18 +174,18 @@ const WorkHistoryWizard = ({
     navigate('.', { replace: true });
   };
 
-  const [steps, setSteps] = useState(1);
-  useEffect(() => {
+  const [steps, setSteps] = React.useState(1);
+  React.useEffect(() => {
     setSteps(fields.length * 2 + 1);
   }, [fields.length]);
-  const [step, setStep] = useState(1);
-  const selectedToimeenkuva = useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
-  const isFirstStep = useMemo(() => step === 1, [step]);
-  const isTyopaikkaOrToimenkuvaStep = useMemo(() => step !== steps && (step + 1) % 2 === 0, [step, steps]);
-  const isCompetencesStep = useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
-  const isSummaryStep = useMemo(() => step === steps, [step, steps]);
+  const [step, setStep] = React.useState(1);
+  const selectedToimeenkuva = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
+  const isFirstStep = React.useMemo(() => step === 1, [step]);
+  const isTyopaikkaOrToimenkuvaStep = React.useMemo(() => step !== steps && (step + 1) % 2 === 0, [step, steps]);
+  const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
+  const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     void trigger();
   }, [trigger, fields]);
 

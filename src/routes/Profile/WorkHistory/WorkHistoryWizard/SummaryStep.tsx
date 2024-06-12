@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFormContext } from 'react-hook-form';
 import { type WorkHistoryForm } from './utils';
@@ -8,9 +8,9 @@ import { WorkHistoryTable, WorkHistoryTableRow } from '../WorkHistoryTable';
 const SummaryStep = () => {
   const { t } = useTranslation();
   const { watch } = useFormContext<WorkHistoryForm>();
-  const [rows, setRows] = useState<WorkHistoryTableRow[]>([]);
+  const [rows, setRows] = React.useState<WorkHistoryTableRow[]>([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const tyopaikka = watch();
     setRows(
       getWorkHistoryTableRows([

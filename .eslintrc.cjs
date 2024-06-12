@@ -21,7 +21,7 @@ module.exports = {
   settings: {
     react: { version: 'detect' },
   },
-  plugins: ['react-refresh', 'jsx-a11y', 'sonarjs'],
+  plugins: ['react-refresh', 'jsx-a11y', 'sonarjs', '@singlestore/react-hooks-disable-import'],
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'react/jsx-child-element-spacing': 'error',
@@ -29,5 +29,6 @@ module.exports = {
     '@typescript-eslint/consistent-indexed-object-style': 'warn',
     '@typescript-eslint/no-misused-promises': 'warn',
     '@typescript-eslint/no-floating-promises': 'warn',
+    '@singlestore/react-hooks-disable-import/react-hooks-disable-import': 'error',
   },
 };

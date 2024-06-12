@@ -1,10 +1,10 @@
 import { RootLoaderData } from '@/routes/Root/loader';
-import { createContext, useContext } from 'react';
+import React from 'react';
 
-export const AuthContext = createContext<RootLoaderData | undefined>(undefined);
+export const AuthContext = React.createContext<RootLoaderData | undefined>(undefined);
 
 export const useAuth = () => {
-  const context = useContext(AuthContext);
+  const context = React.useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within a RootProvider');
   }

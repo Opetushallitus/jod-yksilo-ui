@@ -3,7 +3,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { Osaaminen } from '@/routes/Profile/WorkHistory/WorkHistoryWizard/utils';
 import { type RootLoaderData } from '@/routes/Root/loader';
 import { Tag, useMediaQueries } from '@jod/design-system';
-import { useEffect, useId, useRef, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 type OsaaminenValue = Pick<Osaaminen, 'id' | 'nimi'>;
@@ -19,15 +19,15 @@ interface OsaamisSuosittelijaProps {
 export const OsaamisSuosittelija = ({ description, value = [], onChange }: OsaamisSuosittelijaProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
-  const ehdotetutOsaamisetId = useId();
-  const valitsemasiOsaamisetId = useId();
+  const ehdotetutOsaamisetId = React.useId();
+  const valitsemasiOsaamisetId = React.useId();
   const { csrf } = useAuth() as { csrf: NonNullable<RootLoaderData['csrf']> };
-  const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = useState<Osaaminen[]>([]);
-  const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = useState<Osaaminen[]>([]);
+  const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
+  const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
 
-  const abortController = useRef<AbortController>();
+  const abortController = React.useRef<AbortController>();
 
-  useEffect(() => {
+  React.useEffect(() => {
     abortController.current?.abort();
     abortController.current = new AbortController();
 
@@ -58,7 +58,7 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
     }
   }, [description, csrf]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setFilteredEhdotetutOsaamiset([
       ...ehdotetutOsaamiset.filter((osaaminen) => value.find((val) => val.id === osaaminen.id) === undefined),
     ]);
