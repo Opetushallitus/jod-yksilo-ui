@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 
 export const useDebounceState = <T>(initialValue: T, time: number): [T, T, React.Dispatch<T>] => {
-  const [value, setValue] = useState<T>(initialValue);
-  const [debouncedValue, setDebouncedValue] = useState<T>(initialValue);
+  const [value, setValue] = React.useState<T>(initialValue);
+  const [debouncedValue, setDebouncedValue] = React.useState<T>(initialValue);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedValue(value);
     }, time);

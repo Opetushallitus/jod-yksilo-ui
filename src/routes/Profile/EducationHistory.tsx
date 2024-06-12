@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useActionBar } from '@/hooks/useActionBar';
@@ -17,7 +17,7 @@ const EducationHistory = () => {
   const routes: RoutesNavigationListProps['routes'] = useOutletContext();
   const { t } = useTranslation();
   const title = t('profile.education-history');
-  const navigationRoutes = useMemo(() => mapNavigationRoutes(routes), [routes]);
+  const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
 
   return (

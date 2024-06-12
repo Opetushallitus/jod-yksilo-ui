@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import { useLoaderData, useNavigate, useOutletContext } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -25,15 +25,15 @@ const WorkHistory = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const title = t('profile.work-history');
-  const navigationRoutes = useMemo(() => mapNavigationRoutes(routes), [routes]);
+  const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
-  const [isOpen, setIsOpen] = useState(false);
-  const [rows, setRows] = useState(getWorkHistoryTableRows(tyopaikat));
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [rows, setRows] = React.useState(getWorkHistoryTableRows(tyopaikat));
   const { csrf } = useAuth() as { csrf: NonNullable<RootLoaderData['csrf']> };
 
   const checkedRows = rows.filter((row) => row.checked);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setRows(getWorkHistoryTableRows(tyopaikat));
   }, [tyopaikat]);
 

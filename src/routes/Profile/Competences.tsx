@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useActionBar } from '@/hooks/useActionBar';
@@ -32,10 +32,10 @@ const Competences = () => {
   const routes: RoutesNavigationListProps['routes'] = useOutletContext();
   const { t, i18n } = useTranslation();
   const title = t('profile.competences');
-  const [value, setValue] = useState<string>('a');
-  const navigationRoutes = useMemo(() => mapNavigationRoutes(routes), [routes]);
+  const [value, setValue] = React.useState<string>('a');
+  const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
-  const [filter, setFilter] = useState({
+  const [filter, setFilter] = React.useState({
     tyopaikkaOsaamiset: true,
     tietotekniikanTaikuri: true,
     ihmeidenManeesi: true,
