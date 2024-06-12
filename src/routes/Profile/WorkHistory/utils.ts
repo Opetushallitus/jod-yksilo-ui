@@ -17,9 +17,13 @@ export const getWorkHistoryTableRows = (data: Tyopaikka[]): WorkHistoryTableRow[
   data.reduce((rows: WorkHistoryTableRow[], row, key) => {
     const { toimenkuvat } = row;
     const alkuPvm = Math.min(...toimenkuvat.map((t) => new Date(t.alkuPvm).getTime()));
-    const loppuPvm = Math.max(
-      ...toimenkuvat.filter((t) => t.loppuPvm).map((t) => new Date(t.loppuPvm as unknown as string).getTime()),
-    );
+    const loppuPvm = toimenkuvat.some((toimenkuva) => !toimenkuva.loppuPvm)
+      ? 0
+      : Math.max(
+          ...toimenkuvat
+            .filter((toimenkuva) => toimenkuva.loppuPvm)
+            .map((toimenkuva) => new Date(toimenkuva.loppuPvm as unknown as string).getTime()),
+        );
     rows.push({
       key: `${key}`,
       tyopaikkaId: row.id,
