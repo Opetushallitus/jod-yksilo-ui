@@ -145,5 +145,15 @@
     "started": "Started",
     "summary": "Summary",
     "workplace-or-job-description": "Workplace / job description"
+  },
+  "my-competences": {
+    "by-TOIMENKUVA": "By job description",
+    "by-KOULUTUS": "By education"
+  },
+  "types": {
+    "competence": {
+      "TOIMENKUVA": "Job description",
+      "KOULUTUS": "Education"
+    }
   }
 }

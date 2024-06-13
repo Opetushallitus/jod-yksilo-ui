@@ -12,10 +12,3 @@ export interface WorkHistoryForm {
     }[];
   }[];
 }
-
-export interface Osaaminen {
-  id: string;
-  nimi: string;
-  tyyppi: string;
-  osuvuus: number;
-}

@@ -5,49 +5,65 @@
 
 export interface paths {
   '/api/profiili/tyopaikat': {
-    get: operations['getAll'];
-    post: operations['add'];
+    get: operations['tyopaikkaGetAll'];
+    post: operations['tyopaikkaAdd'];
   };
   '/api/profiili/tyopaikat/{id}/toimenkuvat': {
-    get: operations['getAll_1'];
-    post: operations['add_1'];
+    get: operations['toimenkuvaGetAll'];
+    post: operations['toimenkuvaAdd'];
   };
   '/api/profiili/osaamiset': {
-    get: operations['find'];
-    post: operations['add_2'];
-    delete: operations['delete_2'];
+    get: operations['yksilonOsaaminenFind'];
+    post: operations['yksilonOsaaminenAdd'];
+    delete: operations['yksilonOsaaminenDelete'];
   };
   '/api/profiili/koulutukset': {
-    get: operations['getAll_2'];
-    post: operations['add_3'];
+    get: operations['koulutusFind'];
+    /**
+     * Adds or replaces a Kategoria and its associated Koulutus
+     * @description This endpoint can be used to add a new Kategoria and its associated Koulutus or to
+     * update an existing Kategoria and its associated Koulutus. When updating, unlisted
+     * existing Koulutus will be removed from the Kategoria, unless the Kategoria is null.
+     */
+    post: operations['koulutusUpdate'];
+    delete: operations['koulutusDeleteAll'];
+    /**
+     * Updates a Kategoria and its associated Koulutus
+     * @description This endpoint can be used to add a new Kategoria and its associated Koulutus or to
+     * do a partial update. Unlike update, this endpoint will not remove unlisted existing
+     * Koulutus.
+     */
+    patch: operations['koulutusPartialUpdate'];
   };
   '/api/ehdotus/tyomahdollisuudet': {
-    post: operations['createEhdotus'];
+    post: operations['tyomahdollisuudetCreateEhdotus'];
   };
   '/api/ehdotus/osaamiset': {
-    post: operations['createEhdotus_1'];
+    post: operations['osaamisetEhdotusCreateEhdotus'];
   };
   '/api/profiili/tyopaikat/{id}': {
-    delete: operations['delete'];
-    patch: operations['update'];
+    delete: operations['tyopaikkaDelete'];
+    patch: operations['tyopaikkaUpdate'];
   };
   '/api/profiili/tyopaikat/{id}/toimenkuvat/{toimenkuvaId}': {
-    delete: operations['delete_1'];
-    patch: operations['update_1'];
+    delete: operations['toimenkuvaDelete'];
+    patch: operations['toimenkuvaUpdate'];
   };
   '/api/profiili/koulutukset/{id}': {
-    get: operations['get'];
-    delete: operations['delete_4'];
-    patch: operations['update_2'];
+    get: operations['koulutusGet'];
+    delete: operations['koulutusDelete'];
+  };
+  '/api/profiili/koulutukset/kategoriat': {
+    get: operations['koulutusGetKategoriat'];
   };
   '/api/osaamiset': {
-    get: operations['findAll'];
+    get: operations['osaaminenFindAll'];
   };
   '/api/csrf': {
-    get: operations['csrf'];
+    get: operations['csrfCsrf'];
   };
   '/api/profiili/osaamiset/{id}': {
-    delete: operations['delete_3'];
+    delete: operations['yksilonOsaaminenDelete'];
   };
 }
 
@@ -62,7 +78,8 @@ export interface components {
      * }
      */
     LokalisoituTeksti: {
-      [key: string]: string;
+      empty?: boolean;
+      [key: string]: string | undefined;
     };
     ToimenkuvaDto: {
       /** Format: uuid */
@@ -96,6 +113,12 @@ export interface components {
       osaamiset: string[];
       lahde: components['schemas']['OsaamisenLahdeDto'];
     };
+    KategoriaDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+    };
     KoulutusDto: {
       /** Format: uuid */
       id?: string;
@@ -105,11 +128,21 @@ export interface components {
       alkuPvm?: string;
       /** Format: date */
       loppuPvm?: string;
+      osaamiset?: string[];
+    };
+    KoulutusKategoriaDto: {
+      kategoria?: components['schemas']['KategoriaDto'];
+      koulutukset?: components['schemas']['KoulutusDto'][];
+    };
+    KoulutusUpdateResultDto: {
+      /** Format: uuid */
+      kategoria?: string;
+      koulutukset?: string[];
     };
     Taidot: {
       kuvaus: string;
     };
-    Osaaminen: {
+    Ehdotus: {
       /** Format: uri */
       id?: string;
       nimi?: string;
@@ -131,9 +164,9 @@ export interface components {
       lahde?: components['schemas']['OsaamisenLahdeDto'];
     };
     CsrfToken: {
-      token?: string;
       headerName?: string;
       parameterName?: string;
+      token?: string;
     };
   };
   responses: never;
@@ -148,7 +181,7 @@ export type $defs = Record<string, never>;
 export type external = Record<string, never>;
 
 export interface operations {
-  getAll: {
+  tyopaikkaGetAll: {
     responses: {
       /** @description OK */
       200: {
@@ -158,7 +191,7 @@ export interface operations {
       };
     };
   };
-  add: {
+  tyopaikkaAdd: {
     requestBody: {
       content: {
         'application/json': components['schemas']['TyopaikkaDto'];
@@ -173,7 +206,7 @@ export interface operations {
       };
     };
   };
-  getAll_1: {
+  toimenkuvaGetAll: {
     parameters: {
       path: {
         id: string;
@@ -188,7 +221,7 @@ export interface operations {
       };
     };
   };
-  add_1: {
+  toimenkuvaAdd: {
     parameters: {
       path: {
         id: string;
@@ -208,7 +241,7 @@ export interface operations {
       };
     };
   };
-  find: {
+  yksilonOsaaminenFind: {
     parameters: {
       query?: {
         tyyppi?: 'TOIMENKUVA' | 'KOULUTUS';
@@ -224,7 +257,7 @@ export interface operations {
       };
     };
   };
-  add_2: {
+  yksilonOsaaminenAdd: {
     requestBody: {
       content: {
         'application/json': components['schemas']['YksilonOsaaminenLisaysDto'];
@@ -239,10 +272,10 @@ export interface operations {
       };
     };
   };
-  delete_2: {
-    requestBody: {
-      content: {
-        'application/json': string[];
+  yksilonOsaaminenDelete: {
+    parameters: {
+      path: {
+        id: string;
       };
     };
     responses: {
@@ -252,32 +285,77 @@ export interface operations {
       };
     };
   };
-  getAll_2: {
+  koulutusFind: {
+    parameters: {
+      query?: {
+        kategoriaId?: string;
+      };
+    };
     responses: {
       /** @description OK */
       200: {
         content: {
-          'application/json': components['schemas']['KoulutusDto'][];
+          'application/json': components['schemas']['KoulutusKategoriaDto'][];
         };
       };
     };
   };
-  add_3: {
+  /**
+   * Adds or replaces a Kategoria and its associated Koulutus
+   * @description This endpoint can be used to add a new Kategoria and its associated Koulutus or to
+   * update an existing Kategoria and its associated Koulutus. When updating, unlisted
+   * existing Koulutus will be removed from the Kategoria, unless the Kategoria is null.
+   */
+  koulutusUpdate: {
     requestBody: {
       content: {
-        'application/json': components['schemas']['KoulutusDto'];
+        'application/json': components['schemas']['KoulutusKategoriaDto'];
       };
     };
     responses: {
-      /** @description Created */
-      201: {
+      /** @description OK */
+      200: {
         content: {
-          'application/json': components['schemas']['IdDtoUUID'];
+          'application/json': components['schemas']['KoulutusUpdateResultDto'];
         };
       };
     };
   };
-  createEhdotus: {
+  koulutusDeleteAll: {
+    parameters: {
+      query: {
+        koulutukset: string[];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Updates a Kategoria and its associated Koulutus
+   * @description This endpoint can be used to add a new Kategoria and its associated Koulutus or to
+   * do a partial update. Unlike update, this endpoint will not remove unlisted existing
+   * Koulutus.
+   */
+  koulutusPartialUpdate: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['KoulutusKategoriaDto'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          'application/json': components['schemas']['KoulutusUpdateResultDto'];
+        };
+      };
+    };
+  };
+  tyomahdollisuudetCreateEhdotus: {
     requestBody: {
       content: {
         'application/json': string[];
@@ -292,7 +370,7 @@ export interface operations {
       };
     };
   };
-  createEhdotus_1: {
+  osaamisetEhdotusCreateEhdotus: {
     requestBody: {
       content: {
         'application/json': components['schemas']['Taidot'];
@@ -302,12 +380,12 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          'application/json': components['schemas']['Osaaminen'][];
+          'application/json': components['schemas']['Ehdotus'][];
         };
       };
     };
   };
-  delete: {
+  tyopaikkaDelete: {
     parameters: {
       path: {
         id: string;
@@ -320,7 +398,7 @@ export interface operations {
       };
     };
   };
-  update: {
+  tyopaikkaUpdate: {
     parameters: {
       path: {
         id: string;
@@ -338,7 +416,7 @@ export interface operations {
       };
     };
   };
-  delete_1: {
+  toimenkuvaDelete: {
     parameters: {
       path: {
         id: string;
@@ -352,7 +430,7 @@ export interface operations {
       };
     };
   };
-  update_1: {
+  toimenkuvaUpdate: {
     parameters: {
       path: {
         id: string;
@@ -371,22 +449,22 @@ export interface operations {
       };
     };
   };
-  get: {
+  koulutusGet: {
     parameters: {
       path: {
         id: string;
       };
     };
     responses: {
-      /** @description OK */
-      200: {
+      /** @description No Content */
+      204: {
         content: {
-          'application/json': components['schemas']['KoulutusDto'];
+          'application/json': components['schemas']['KoulutusKategoriaDto'];
         };
       };
     };
   };
-  delete_4: {
+  koulutusDelete: {
     parameters: {
       path: {
         id: string;
@@ -399,25 +477,17 @@ export interface operations {
       };
     };
   };
-  update_2: {
-    parameters: {
-      path: {
-        id: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['KoulutusDto'];
-      };
-    };
+  koulutusGetKategoriat: {
     responses: {
-      /** @description No Content */
-      204: {
-        content: never;
+      /** @description OK */
+      200: {
+        content: {
+          'application/json': components['schemas']['KategoriaDto'][];
+        };
       };
     };
   };
-  findAll: {
+  osaaminenFindAll: {
     responses: {
       /** @description OK */
       200: {
@@ -427,26 +497,13 @@ export interface operations {
       };
     };
   };
-  csrf: {
+  csrfCsrf: {
     responses: {
       /** @description OK */
       200: {
         content: {
           'application/json': components['schemas']['CsrfToken'];
         };
-      };
-    };
-  };
-  delete_3: {
-    parameters: {
-      path: {
-        id: string;
-      };
-    };
-    responses: {
-      /** @description No Content */
-      204: {
-        content: never;
       };
     };
   };
