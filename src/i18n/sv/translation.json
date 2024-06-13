@@ -145,5 +145,15 @@
     "started": "Startade",
     "summary": "Sammanfattning",
     "workplace-or-job-description": "Arbetsplats / jobbeskrivning"
+  },
+  "my-competences": {
+    "by-TOIMENKUVA": "Med arbetsuppgifter",
+    "by-KOULUTUS": "Med utbildning"
+  },
+  "types": {
+    "competence": {
+      "TOIMENKUVA": "Arbetsuppgifter",
+      "KOULUTUS": "Utbildning"
+    }
   }
 }

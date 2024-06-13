@@ -145,5 +145,15 @@
     "started": "Alkoi",
     "summary": "Yhteenveto",
     "workplace-or-job-description": "Työpaikka / toimenkuva"
+  },
+  "my-competences": {
+    "by-TOIMENKUVA": "Toimenkuvan mukaan",
+    "by-KOULUTUS": "Koulutuksen mukaan"
+  },
+  "types": {
+    "competence": {
+      "TOIMENKUVA": "Toimenkuva",
+      "KOULUTUS": "Koulutus"
+    }
   }
 }

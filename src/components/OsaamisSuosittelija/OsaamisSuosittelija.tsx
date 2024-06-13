@@ -1,6 +1,5 @@
 import { client } from '@/api/client';
 import { useAuth } from '@/hooks/useAuth';
-import { Osaaminen } from '@/routes/Profile/WorkHistory/WorkHistoryWizard/utils';
 import { type RootLoaderData } from '@/routes/Root/loader';
 import { Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -51,7 +50,7 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
     };
 
     // Do not fetch if the input is empty
-    if (description.length > 0) {
+    if (description?.length > 0) {
       void fetchCompetences(description);
     } else {
       setEhdotetutOsaamiset([]);

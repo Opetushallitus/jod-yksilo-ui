@@ -7,15 +7,8 @@ import {
   TermsOfService,
 } from '@/routes/BasicInformation';
 import { Home } from '@/routes/Home';
-import {
-  Competences,
-  EducationHistory,
-  Favorites,
-  FreeTimeActivities,
-  Preferences,
-  Profile,
-  SomethingElse,
-} from '@/routes/Profile';
+import { EducationHistory, Favorites, FreeTimeActivities, Preferences, Profile, SomethingElse } from '@/routes/Profile';
+import { Competences, competencesLoader } from '@/routes/Profile/Competences';
 import { WorkHistory, loader as workHistoryloader } from '@/routes/Profile/WorkHistory';
 import { ErrorElement, NoMatch, Root, loader as rootLoader } from '@/routes/Root';
 import {
@@ -110,6 +103,7 @@ const App = () => {
             },
             {
               path: t('slugs.profile.competences'),
+              loader: competencesLoader,
               element: <Competences />,
             },
             {
