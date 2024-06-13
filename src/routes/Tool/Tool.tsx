@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { Title } from '@/components';
+import { useTranslation } from 'react-i18next';
+import { Outlet } from 'react-router-dom';
 import MatchedLink from './MatchedLink';
 
 const Tool = () => {

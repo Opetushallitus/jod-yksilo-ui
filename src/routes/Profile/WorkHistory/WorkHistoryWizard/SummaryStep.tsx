@@ -1,9 +1,9 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { useFormContext } from 'react-hook-form';
-import { type WorkHistoryForm } from './utils';
-import { Toimenkuva, getWorkHistoryTableRows } from '../utils';
+import { useTranslation } from 'react-i18next';
 import { WorkHistoryTable, WorkHistoryTableRow } from '../WorkHistoryTable';
+import { Toimenkuva, getWorkHistoryTableRows } from '../utils';
+import { type WorkHistoryForm } from './utils';
 
 const SummaryStep = () => {
   const { t } = useTranslation();

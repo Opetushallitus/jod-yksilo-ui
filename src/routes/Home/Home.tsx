@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { Title } from '@/components';
 import { HeroCard } from '@jod/design-system';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
   const { t, i18n } = useTranslation();

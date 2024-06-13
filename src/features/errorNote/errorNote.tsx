@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
-import { Note } from '@jod/design-system';
 import { useAppSelector } from '@/state/hooks';
+import { Note } from '@jod/design-system';
+import { useTranslation } from 'react-i18next';
 
 export const ErrorNote = () => {
   const { t } = useTranslation();

@@ -1,5 +1,5 @@
+import i18n, { fallbackLng, resources } from '@/i18n/config';
 import { LoaderFunction, redirect } from 'react-router-dom';
-import i18n, { resources, fallbackLng } from '@/i18n/config';
 
 export interface RootLoaderData {
   csrf?: { headerName: string; parameterName: string; token: string };

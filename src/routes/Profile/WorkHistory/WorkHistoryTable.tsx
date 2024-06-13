@@ -1,7 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable sonarjs/cognitive-complexity */
-import { useTranslation } from 'react-i18next';
 import { Checkbox, useMediaQueries } from '@jod/design-system';
+import { useTranslation } from 'react-i18next';
 import { formatDate } from '../utils';
 
 export interface WorkHistoryTableRow {

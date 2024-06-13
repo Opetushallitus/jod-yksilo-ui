@@ -1,17 +1,17 @@
+import HowDoIGiveFeedback from './HowDoIGiveFeedback';
+import HowDoIUseTheService from './HowDoIUseTheService';
 import UserGuide from './UserGuide';
 import WhatIsTheService from './WhatIsTheService';
-import WhoIsTheServiceFor from './WhoIsTheServiceFor';
-import HowDoIUseTheService from './HowDoIUseTheService';
 import WhereCanIGetMoreHelp from './WhereCanIGetMoreHelp';
+import WhoIsTheServiceFor from './WhoIsTheServiceFor';
 import WhoProvidesTheService from './WhoProvidesTheService';
-import HowDoIGiveFeedback from './HowDoIGiveFeedback';
 
 export {
+  HowDoIGiveFeedback,
+  HowDoIUseTheService,
   UserGuide,
   WhatIsTheService,
-  WhoIsTheServiceFor,
-  HowDoIUseTheService,
   WhereCanIGetMoreHelp,
+  WhoIsTheServiceFor,
   WhoProvidesTheService,
-  HowDoIGiveFeedback,
 };

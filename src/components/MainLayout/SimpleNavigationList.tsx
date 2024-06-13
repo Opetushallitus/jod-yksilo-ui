@@ -1,5 +1,5 @@
-import { useTranslation } from 'react-i18next';
 import { Accordion } from '@jod/design-system';
+import { useTranslation } from 'react-i18next';
 
 interface SimpleNavigationListProps {
   title: string;

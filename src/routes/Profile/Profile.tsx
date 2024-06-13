@@ -1,5 +1,5 @@
-import { Outlet, matchPath, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Outlet, matchPath, useLocation } from 'react-router-dom';
 
 const Profile = () => {
   const { t, i18n } = useTranslation();

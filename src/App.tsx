@@ -1,44 +1,44 @@
-import './index.css';
-import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { Root, ErrorElement, loader as rootLoader, NoMatch } from '@/routes/Root';
-import { Home } from '@/routes/Home';
 import {
-  Tool,
-  Instructions,
-  Goals,
-  Competences as ToolCompetences,
-  Interests,
-  Restrictions,
-  Search,
-} from '@/routes/Tool';
-import {
-  Profile,
-  Preferences,
-  Favorites,
-  Competences,
-  EducationHistory,
-  FreeTimeActivities,
-  SomethingElse,
-} from '@/routes/Profile';
-import { WorkHistory, loader as workHistoryloader } from '@/routes/Profile/WorkHistory';
-import {
-  UserGuide,
-  WhatIsTheService,
-  WhoIsTheServiceFor,
-  HowDoIUseTheService,
-  WhereCanIGetMoreHelp,
-  WhoProvidesTheService,
-  HowDoIGiveFeedback,
-} from '@/routes/UserGuide';
-import {
+  AccessibilityStatement,
   BasicInformation,
   CookiePolicy,
   DataSources,
-  TermsOfService,
-  AccessibilityStatement,
   PrivacyPolicy,
+  TermsOfService,
 } from '@/routes/BasicInformation';
+import { Home } from '@/routes/Home';
+import {
+  Competences,
+  EducationHistory,
+  Favorites,
+  FreeTimeActivities,
+  Preferences,
+  Profile,
+  SomethingElse,
+} from '@/routes/Profile';
+import { WorkHistory, loader as workHistoryloader } from '@/routes/Profile/WorkHistory';
+import { ErrorElement, NoMatch, Root, loader as rootLoader } from '@/routes/Root';
+import {
+  Goals,
+  Instructions,
+  Interests,
+  Restrictions,
+  Search,
+  Tool,
+  Competences as ToolCompetences,
+} from '@/routes/Tool';
+import {
+  HowDoIGiveFeedback,
+  HowDoIUseTheService,
+  UserGuide,
+  WhatIsTheService,
+  WhereCanIGetMoreHelp,
+  WhoIsTheServiceFor,
+  WhoProvidesTheService,
+} from '@/routes/UserGuide';
+import { useTranslation } from 'react-i18next';
+import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom';
+import './index.css';
 
 const App = () => {
   const { t, i18n } = useTranslation();

@@ -1,19 +1,18 @@
-/* eslint-disable sonarjs/cognitive-complexity */
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { useForm, useFormState, FormProvider, Form, FormSubmitHandler, useFieldArray } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useAuth } from '@/hooks/useAuth';
 import { client } from '@/api/client';
-import { type WorkHistoryForm } from './utils';
+import { useAuth } from '@/hooks/useAuth';
 import { type RootLoaderData } from '@/routes/Root/loader';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-system';
+import React from 'react';
+import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { z } from 'zod';
 import { WorkHistoryTableRow } from '../WorkHistoryTable';
-import TyopaikkaOrToimenkuvaStep from './TyopaikkaOrToimenkuvaStep';
-import { Modal, WizardProgress, Button, useMediaQueries } from '@jod/design-system';
 import CompetencesStep from './CompetencesStep';
 import SummaryStep from './SummaryStep';
+import TyopaikkaOrToimenkuvaStep from './TyopaikkaOrToimenkuvaStep';
+import { type WorkHistoryForm } from './utils';
 
 const WorkHistoryWizard = ({
   isOpen,
@@ -23,6 +22,7 @@ const WorkHistoryWizard = ({
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   tyopaikka?: WorkHistoryTableRow;
+  // eslint-disable-next-line sonarjs/cognitive-complexity
 }) => {
   const {
     t,

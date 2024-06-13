@@ -1,8 +1,8 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite';
-import { configDefaults } from 'vitest/config';
 import react from '@vitejs/plugin-react-swc';
 import { fileURLToPath } from 'node:url';
+import { defineConfig } from 'vite';
+import { configDefaults } from 'vitest/config';
 
 // The target API base URL
 const target = process.env.API_BASE_URL ?? 'http://localhost:8080';

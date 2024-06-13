@@ -1,6 +1,6 @@
+import { MainLayout, RoutesNavigationList, SimpleNavigationList } from '@/components';
 import { useTranslation } from 'react-i18next';
-import { matchPath, useLocation, Outlet } from 'react-router-dom';
-import { MainLayout, SimpleNavigationList, RoutesNavigationList } from '@/components';
+import { Outlet, matchPath, useLocation } from 'react-router-dom';
 
 const BasicInformation = () => {
   const { t, i18n } = useTranslation();

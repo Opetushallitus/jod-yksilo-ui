@@ -1,5 +1,6 @@
-import React, { ChangeEvent } from 'react';
-import { useTranslation } from 'react-i18next';
+import { OsaamisSuosittelija, SimpleNavigationList } from '@/components';
+import { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
+import { useDebounceState } from '@/hooks/useDebounceState';
 import {
   Accordion,
   Button,
@@ -11,9 +12,8 @@ import {
   Slider,
   useMediaQueries,
 } from '@jod/design-system';
-import { OsaamisSuosittelija, SimpleNavigationList } from '@/components';
-import { useDebounceState } from '@/hooks/useDebounceState';
-import { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const HelpingToolsContent = () => (
   <>
@@ -108,7 +108,7 @@ const Competences = () => {
             <InputField
               label={t('work-history.job-duties')}
               value={tyotehtava}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => setTyotehtava(event.target.value)}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTyotehtava(event.target.value)}
               placeholder="Lorem ipsum dolor sit amet"
             />
           </div>
