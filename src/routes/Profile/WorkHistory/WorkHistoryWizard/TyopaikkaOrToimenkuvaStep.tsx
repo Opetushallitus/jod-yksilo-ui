@@ -1,6 +1,6 @@
+import { Datepicker, InputField } from '@jod/design-system';
+import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useFormContext, Controller } from 'react-hook-form';
-import { InputField, Datepicker } from '@jod/design-system';
 import { WorkHistoryForm } from './utils';
 
 const TyopaikkaOrToimenkuvaStep = ({ type, toimenkuva }: { type: 'tyopaikka' | 'toimenkuva'; toimenkuva: number }) => {

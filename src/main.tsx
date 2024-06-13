@@ -1,12 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { onCLS, onFCP, onFID, onLCP, onTTFB } from 'web-vitals';
+import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { HelmetProvider } from 'react-helmet-async';
-import './i18n/config';
+import { onCLS, onFCP, onFID, onLCP, onTTFB } from 'web-vitals';
 import App from './App.tsx';
-import { store, persistor } from './state/store';
+import './i18n/config';
+import { persistor, store } from './state/store';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

@@ -1,8 +1,8 @@
-import { createPortal } from 'react-dom';
-import { useTranslation } from 'react-i18next';
+import { Title } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
 import { Button } from '@jod/design-system';
-import { Title } from '@/components';
+import { createPortal } from 'react-dom';
+import { useTranslation } from 'react-i18next';
 
 const PrivacyPolicy = () => {
   const { t } = useTranslation();

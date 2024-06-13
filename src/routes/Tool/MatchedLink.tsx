@@ -1,5 +1,5 @@
-import { Link, useMatch } from 'react-router-dom';
 import { RoundLinkButton } from '@jod/design-system';
+import { Link, useMatch } from 'react-router-dom';
 
 const MatchedLink = ({ link }: { link: { to: string; text: string; icon: string } }) => {
   const match = useMatch(link.to);

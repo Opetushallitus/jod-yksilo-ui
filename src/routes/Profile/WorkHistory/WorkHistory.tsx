@@ -1,23 +1,23 @@
+import { client } from '@/api/client';
+import {
+  MainLayout,
+  RoutesNavigationList,
+  SimpleNavigationList,
+  Title,
+  type RoutesNavigationListProps,
+} from '@/components';
+import { useActionBar } from '@/hooks/useActionBar';
+import { useAuth } from '@/hooks/useAuth';
+import { RootLoaderData } from '@/routes/Root/loader';
+import { Button } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { useLoaderData, useNavigate, useOutletContext } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useActionBar } from '@/hooks/useActionBar';
-import { client } from '@/api/client';
-import { useAuth } from '@/hooks/useAuth';
+import { useLoaderData, useNavigate, useOutletContext } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
-import { WorkHistoryWizard } from './WorkHistoryWizard';
 import { WorkHistoryTable } from './WorkHistoryTable';
+import { WorkHistoryWizard } from './WorkHistoryWizard';
 import { Tyopaikka, getWorkHistoryTableRows } from './utils';
-import {
-  Title,
-  MainLayout,
-  SimpleNavigationList,
-  type RoutesNavigationListProps,
-  RoutesNavigationList,
-} from '@/components';
-import { Button } from '@jod/design-system';
-import { RootLoaderData } from '@/routes/Root/loader';
 
 const WorkHistory = () => {
   const routes: RoutesNavigationListProps['routes'] = useOutletContext();

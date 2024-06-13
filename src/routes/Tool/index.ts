@@ -1,9 +1,9 @@
-import Tool from './Tool';
-import Instructions from './Instructions';
-import Goals from './Goals';
 import Competences from './Competences';
+import Goals from './Goals';
+import Instructions from './Instructions';
 import Interests from './Interests';
 import Restrictions from './Restrictions';
 import Search from './Search';
+import Tool from './Tool';
 
-export { Tool, Instructions, Goals, Competences, Interests, Restrictions, Search };
+export { Competences, Goals, Instructions, Interests, Restrictions, Search, Tool };

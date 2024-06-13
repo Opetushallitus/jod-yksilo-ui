@@ -1,8 +1,8 @@
-import { expect, test } from 'vitest';
 import { render, waitFor } from '@testing-library/react';
+import { expect, test } from 'vitest';
 
-import { Title } from './Title';
 import { HelmetProvider } from 'react-helmet-async';
+import { Title } from './Title';
 
 const Wrapper = ({ children }: React.PropsWithChildren) => {
   return <HelmetProvider>{children}</HelmetProvider>;

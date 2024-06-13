@@ -1,17 +1,17 @@
+import {
+  MainLayout,
+  RoutesNavigationList,
+  SimpleNavigationList,
+  Title,
+  type RoutesNavigationListProps,
+} from '@/components';
+import { useActionBar } from '@/hooks/useActionBar';
+import { Accordion, Button, Checkbox, RadioButton, RadioButtonGroup, Tag } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { useActionBar } from '@/hooks/useActionBar';
-import { mapNavigationRoutes } from './utils';
-import {
-  Title,
-  MainLayout,
-  SimpleNavigationList,
-  type RoutesNavigationListProps,
-  RoutesNavigationList,
-} from '@/components';
-import { Accordion, RadioButtonGroup, RadioButton, Button, Checkbox, Tag } from '@jod/design-system';
 import { useOutletContext } from 'react-router-dom';
+import { mapNavigationRoutes } from './utils';
 
 // TODO: Change to use data from backend
 const hardcodedCompetenceTags = [
