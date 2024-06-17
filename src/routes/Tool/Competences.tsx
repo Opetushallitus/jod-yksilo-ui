@@ -34,15 +34,17 @@ const Filters = ({
   setKeyFigure,
   order,
   setOrder,
+  isMobile,
 }: {
   keyFigure: string;
   setKeyFigure: (val: string) => void;
   order: string;
   setOrder: (val: string) => void;
+  isMobile: boolean;
 }) => {
   return (
-    <div className="flex flex-col gap-6 sm:gap-5">
-      <SimpleNavigationList title="Tunnusluvut" collapsible>
+    <div className="inline-flex flex-col gap-6 sm:gap-5 w-full">
+      <SimpleNavigationList title="Tunnusluvut" collapsible borderEnabled={isMobile} addPadding={isMobile}>
         <RadioButtonGroup
           label="Valitse näytettävä tunnusluku. Vaihtoehdot riippuvat hakutuloksistasi."
           value={keyFigure}
@@ -56,7 +58,7 @@ const Filters = ({
           <RadioButton label="Työttömyysprosentti" value="e" />
         </RadioButtonGroup>
       </SimpleNavigationList>
-      <SimpleNavigationList title="Järjestys" collapsible>
+      <SimpleNavigationList title="Järjestys" collapsible borderEnabled={isMobile} addPadding={isMobile}>
         <RadioButtonGroup
           label="Valitse järjestystapa. Tulokset järjestetään valitun tunnusluvun mukaan."
           value={order}
@@ -191,7 +193,13 @@ const Competences = () => {
                   open={showFilters}
                   onClose={() => setShowFilters(false)}
                   content={
-                    <Filters keyFigure={keyFigure} setKeyFigure={setKeyFigure} order={order} setOrder={setOrder} />
+                    <Filters
+                      keyFigure={keyFigure}
+                      setKeyFigure={setKeyFigure}
+                      order={order}
+                      setOrder={setOrder}
+                      isMobile={sm}
+                    />
                   }
                   footer={
                     <div className="flex flex-row justify-end gap-4">
@@ -210,7 +218,13 @@ const Competences = () => {
         </div>
         {sm && (
           <div className="col-span-2 sm:mt-8">
-            <Filters keyFigure={keyFigure} setKeyFigure={setKeyFigure} order={order} setOrder={setOrder} />
+            <Filters
+              keyFigure={keyFigure}
+              setKeyFigure={setKeyFigure}
+              order={order}
+              setOrder={setOrder}
+              isMobile={sm}
+            />
           </div>
         )}
       </div>
