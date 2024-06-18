@@ -172,5 +172,11 @@
     "started": "Alkoi",
     "summary": "Yhteenveto",
     "workplace-or-job-description": "Työpaikka / toimenkuva"
+  },
+  "free-time-activities": {
+    "add-new-free-time-activity": "Lisää uusi toiminto",
+    "delete-selected-free-time-activities": "Poista valitut vapaa-ajan toiminnot",
+    "confirm-delete-selected-free-time-activities": "Haluatko varmasti poistaa valitut toiminnot?",
+    "activity-or-profiency-description": "Toiminto / pätevyys"
   }
 }

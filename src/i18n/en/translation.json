@@ -172,5 +172,11 @@
     "started": "Started",
     "summary": "Summary",
     "workplace-or-job-description": "Workplace / job description"
+  },
+  "free-time-activities": {
+    "add-new-free-time-activity": "Add new activity",
+    "delete-selected-free-time-activities": "Delete selected activities",
+    "confirm-delete-selected-free-time-activities": "Are you sure to delete the selected activities?",
+    "activity-or-profiency-description": "Activity / profiency"
   }
 }

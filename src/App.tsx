@@ -7,9 +7,10 @@ import {
   TermsOfService,
 } from '@/routes/BasicInformation';
 import { Home } from '@/routes/Home';
-import { Favorites, FreeTimeActivities, Preferences, Profile, SomethingElse } from '@/routes/Profile';
+import { Favorites, Preferences, Profile, SomethingElse } from '@/routes/Profile';
 import { Competences, competencesLoader } from '@/routes/Profile/Competences';
 import { EducationHistory, loader as educationHistoryLoader } from '@/routes/Profile/EducationHistory';
+import { FreeTimeActivities, loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import { ErrorElement, NoMatch, Root, loader as rootLoader } from '@/routes/Root';
 import {
@@ -119,6 +120,7 @@ const App = () => {
             },
             {
               path: t('slugs.profile.free-time-activities'),
+              loader: freeTimeActivitiesLoader,
               element: <FreeTimeActivities />,
             },
             {
