@@ -4,6 +4,10 @@
  */
 
 export interface paths {
+  '/api/profiili/toiminnot/{id}': {
+    get: operations['toimintoGet'];
+    put: operations['toimintoUpdate'];
+  };
   '/api/profiili/tyopaikat': {
     get: operations['tyopaikkaGetAll'];
     post: operations['tyopaikkaAdd'];
@@ -11,6 +15,11 @@ export interface paths {
   '/api/profiili/tyopaikat/{id}/toimenkuvat': {
     get: operations['toimenkuvaGetAll'];
     post: operations['toimenkuvaAdd'];
+  };
+  '/api/profiili/toiminnot': {
+    get: operations['toimintoGetAll'];
+    post: operations['toimintoAdd'];
+    delete: operations['toimintoDelete'];
   };
   '/api/profiili/osaamiset': {
     get: operations['yksilonOsaaminenFind'];
@@ -92,6 +101,22 @@ export interface components {
       empty?: boolean;
       [key: string]: string | undefined;
     };
+    PatevyysDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      /** Format: date */
+      alkuPvm?: string;
+      /** Format: date */
+      loppuPvm?: string;
+      osaamiset?: string[];
+    };
+    ToimintoDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      patevyydet?: components['schemas']['PatevyysDto'][];
+    };
     ToimenkuvaDto: {
       /** Format: uuid */
       id?: string;
@@ -115,7 +140,7 @@ export interface components {
     };
     OsaamisenLahdeDto: {
       /** @enum {string} */
-      tyyppi: 'TOIMENKUVA' | 'KOULUTUS';
+      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS';
       /** Format: uuid */
       id: string;
     };
@@ -192,6 +217,39 @@ export type $defs = Record<string, never>;
 export type external = Record<string, never>;
 
 export interface operations {
+  toimintoGet: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          'application/json': components['schemas']['ToimintoDto'];
+        };
+      };
+    };
+  };
+  toimintoUpdate: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ToimintoDto'];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        content: never;
+      };
+    };
+  };
   tyopaikkaGetAll: {
     responses: {
       /** @description OK */
@@ -252,10 +310,48 @@ export interface operations {
       };
     };
   };
+  toimintoGetAll: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          'application/json': components['schemas']['ToimintoDto'][];
+        };
+      };
+    };
+  };
+  toimintoAdd: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ToimintoDto'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        content: {
+          'application/json': components['schemas']['IdDtoUUID'];
+        };
+      };
+    };
+  };
+  toimintoDelete: {
+    parameters: {
+      query: {
+        ids: string[];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        content: never;
+      };
+    };
+  };
   yksilonOsaaminenFind: {
     parameters: {
       query?: {
-        tyyppi?: 'TOIMENKUVA' | 'KOULUTUS';
+        tyyppi?: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS';
         id?: string;
       };
     };
