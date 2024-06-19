@@ -177,6 +177,19 @@
     "add-new-free-time-activity": "Lisää uusi toiminto",
     "delete-selected-free-time-activities": "Poista valitut vapaa-ajan toiminnot",
     "confirm-delete-selected-free-time-activities": "Haluatko varmasti poistaa valitut toiminnot?",
-    "activity-or-profiency-description": "Toiminto / pätevyys"
+    "activity-or-profiency-description": "Toiminto / pätevyys",
+    "add-new-activity": "Lisää uusi vapaa-ajan toiminto",
+    "edit-activity": "Muokkaa vapaa-ajan toimintoa",
+    "activity-name": "Toiminnon nimi",
+    "profiency": "Pätevyys",
+    "started": "Alkoi",
+    "ended": "Loppui",
+    "edit-proficiencies": "Muokkaa osaamisia",
+    "identify-proficiencies": "Tunnista osaamisia",
+    "activity-content": "Toiminnon sisältö",
+    "add-new-proficiency": "Lisää uusi pätevyys",
+    "delete-proficiency": "Poista pätevyys",
+    "add-new-profiency": "Lisää uusi pätevyys",
+    "edit-profiency": "Muokkaa pätevyyttä"
   }
 }
