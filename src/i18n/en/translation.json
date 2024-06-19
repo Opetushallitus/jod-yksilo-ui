@@ -177,6 +177,18 @@
     "add-new-free-time-activity": "Add new activity",
     "delete-selected-free-time-activities": "Delete selected activities",
     "confirm-delete-selected-free-time-activities": "Are you sure to delete the selected activities?",
-    "activity-or-profiency-description": "Activity / profiency"
+    "activity-or-profiency-description": "Activity / profiency",
+    "edit-activity": "Edit free time activity",
+    "add-new-activity": "Add new free time activity",
+    "started": "Started",
+    "ended": "Ended",
+    "profiency": "Profiency",
+    "edit-proficiencies": "Edit proficiencies",
+    "identify-proficiencies": "Identify proficiencies",
+    "activity-content": "Activity content",
+    "add-new-proficiency": "Add new proficiency",
+    "delete-proficiency": "Delete proficiency",
+    "add-new-profiency": "Add new proficiency",
+    "edit-profiency": "Edit proficiency"
   }
 }
