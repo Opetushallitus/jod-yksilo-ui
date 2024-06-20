@@ -4,99 +4,321 @@
  */
 
 export interface paths {
-  '/api/profiili/toiminnot/{id}': {
+  '/api/profiili/vapaa-ajan-toiminnot/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get vapaa-ajan toiminto by id
+     * @description This endpoint can be used to get vapaa-ajan toiminto by id.
+     *
+     */
     get: operations['toimintoGet'];
+    /**
+     * Updates the vapaa-ajan toiminto by id
+     * @description This endpoint can be used to update vapaa-ajan toiminto.
+     *
+     */
     put: operations['toimintoUpdate'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/vapaa-ajan-toiminnot': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get all vapaa-ajan toiminnot of the user
+     * @description This endpoint can be used to get all vapaa-ajan toiminnot of the user.
+     *
+     */
+    get: operations['toimintoGetAll'];
+    put?: never;
+    /**
+     * Adds a new vapaa-ajan toiminto
+     * @description This endpoint can be used to add a new vapaa-ajan toiminto.
+     *
+     */
+    post: operations['toimintoAdd'];
+    /**
+     * Delete the vapaa-ajan toiminto by id
+     * @description This endpoint can be used to delete the vapaa-ajan toiminto by id.
+     *
+     */
+    delete: operations['toimintoDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/profiili/tyopaikat': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: operations['tyopaikkaGetAll'];
+    put?: never;
     post: operations['tyopaikkaAdd'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/profiili/tyopaikat/{id}/toimenkuvat': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: operations['toimenkuvaGetAll'];
+    put?: never;
     post: operations['toimenkuvaAdd'];
-  };
-  '/api/profiili/toiminnot': {
-    get: operations['toimintoGetAll'];
-    post: operations['toimintoAdd'];
-    delete: operations['toimintoDelete'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/profiili/osaamiset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: operations['yksilonOsaaminenFind'];
+    put?: never;
     post: operations['yksilonOsaaminenAdd'];
     delete: operations['yksilonOsaaminenDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/profiili/koulutukset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     /**
      * Get all koulutukset and kategoriat of the user
      * @description This endpoint can be used to get all koulutukset and kategoriat of the user.
+     *
      */
     get: operations['koulutusFind'];
+    put?: never;
     /**
      * Adds a new set of koulutus and its associated kategoria
      * @description This endpoint can be used to add a new Kategoria and its associated Koulutus.
-     * If kategoria is not present koulutus will be added without kategoria.
+     *     If kategoria is not present koulutus will be added without kategoria.
+     *
      */
     post: operations['koulutusCreate'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/ehdotus/tyomahdollisuudet': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: operations['tyomahdollisuudetCreateEhdotus'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/ehdotus/osaamiset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: operations['osaamisetEhdotusCreateEhdotus'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/profiili/tyopaikat/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
     delete: operations['tyopaikkaDelete'];
+    options?: never;
+    head?: never;
     patch: operations['tyopaikkaUpdate'];
+    trace?: never;
   };
   '/api/profiili/tyopaikat/{id}/toimenkuvat/{toimenkuvaId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
     delete: operations['toimenkuvaDelete'];
+    options?: never;
+    head?: never;
     patch: operations['toimenkuvaUpdate'];
+    trace?: never;
   };
   '/api/profiili/koulutukset/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: operations['koulutusGet'];
+    put?: never;
+    post?: never;
     /**
      * Delete the koulutus by id
      * @description This endpoint can be used to delete the koulutus by id
+     *
      */
     delete: operations['koulutusDelete'];
+    options?: never;
+    head?: never;
     /**
      * Updates the koulutus by id
      * @description This endpoint can be used to update Koulutus.
+     *
      */
     patch: operations['koulutusUpdateKoulutus'];
+    trace?: never;
   };
   '/api/profiili/kategoriat/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
     /**
      * Updates a Kategoria by id
      * @description This endpoint can be used to update the kagoria by id.
+     *
      */
     patch: operations['koulutusUpdateKategoria'];
+    trace?: never;
   };
   '/api/profiili/kategoriat': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: operations['koulutusGetKategoriat'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/osaamiset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: operations['osaaminenFindAll'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/csrf': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: operations['csrfCsrf'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/profiili/osaamiset/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
     delete: operations['yksilonOsaaminenDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
 }
-
 export type webhooks = Record<string, never>;
-
 export interface components {
   schemas: {
-    /**
-     * @example {
-     *   "fi": "suomeksi",
-     *   "sv": "på svenska"
-     * }
-     */
+    /** @example {
+     *       "fi": "suomeksi",
+     *       "sv": "på svenska"
+     *     } */
     LokalisoituTeksti: {
       empty?: boolean;
       [key: string]: string | undefined;
@@ -117,6 +339,10 @@ export interface components {
       nimi: components['schemas']['LokalisoituTeksti'];
       patevyydet?: components['schemas']['PatevyysDto'][];
     };
+    IdDtoUUID: {
+      /** Format: uuid */
+      id?: string;
+    };
     ToimenkuvaDto: {
       /** Format: uuid */
       id?: string;
@@ -133,10 +359,6 @@ export interface components {
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
       toimenkuvat?: components['schemas']['ToimenkuvaDto'][];
-    };
-    IdDtoUUID: {
-      /** Format: uuid */
-      id?: string;
     };
     OsaamisenLahdeDto: {
       /** @enum {string} */
@@ -200,9 +422,9 @@ export interface components {
       lahde?: components['schemas']['OsaamisenLahdeDto'];
     };
     CsrfToken: {
-      parameterName?: string;
       headerName?: string;
       token?: string;
+      parameterName?: string;
     };
   };
   responses: never;
@@ -211,21 +433,24 @@ export interface components {
   headers: never;
   pathItems: never;
 }
-
 export type $defs = Record<string, never>;
-
-export type external = Record<string, never>;
-
 export interface operations {
   toimintoGet: {
     parameters: {
+      query?: never;
+      header?: never;
       path: {
         id: string;
       };
+      cookie?: never;
     };
+    requestBody?: never;
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['ToimintoDto'];
         };
@@ -234,9 +459,12 @@ export interface operations {
   };
   toimintoUpdate: {
     parameters: {
+      query?: never;
+      header?: never;
       path: {
         id: string;
       };
+      cookie?: never;
     };
     requestBody: {
       content: {
@@ -246,74 +474,27 @@ export interface operations {
     responses: {
       /** @description No Content */
       204: {
-        content: never;
-      };
-    };
-  };
-  tyopaikkaGetAll: {
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          'application/json': components['schemas']['TyopaikkaDto'][];
+        headers: {
+          [name: string]: unknown;
         };
-      };
-    };
-  };
-  tyopaikkaAdd: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['TyopaikkaDto'];
-      };
-    };
-    responses: {
-      /** @description Created */
-      201: {
-        content: {
-          'application/json': components['schemas']['IdDtoUUID'];
-        };
-      };
-    };
-  };
-  toimenkuvaGetAll: {
-    parameters: {
-      path: {
-        id: string;
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          'application/json': components['schemas']['ToimenkuvaDto'][];
-        };
-      };
-    };
-  };
-  toimenkuvaAdd: {
-    parameters: {
-      path: {
-        id: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['ToimenkuvaDto'];
-      };
-    };
-    responses: {
-      /** @description Created */
-      201: {
-        content: {
-          'application/json': components['schemas']['IdDtoUUID'];
-        };
+        content?: never;
       };
     };
   };
   toimintoGetAll: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['ToimintoDto'][];
         };
@@ -321,6 +502,12 @@ export interface operations {
     };
   };
   toimintoAdd: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     requestBody: {
       content: {
         'application/json': components['schemas']['ToimintoDto'];
@@ -329,6 +516,9 @@ export interface operations {
     responses: {
       /** @description Created */
       201: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['IdDtoUUID'];
         };
@@ -340,11 +530,110 @@ export interface operations {
       query: {
         ids: string[];
       };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    requestBody?: never;
     responses: {
       /** @description No Content */
       204: {
-        content: never;
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  tyopaikkaGetAll: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['TyopaikkaDto'][];
+        };
+      };
+    };
+  };
+  tyopaikkaAdd: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['TyopaikkaDto'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['IdDtoUUID'];
+        };
+      };
+    };
+  };
+  toimenkuvaGetAll: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ToimenkuvaDto'][];
+        };
+      };
+    };
+  };
+  toimenkuvaAdd: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ToimenkuvaDto'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['IdDtoUUID'];
+        };
       };
     };
   };
@@ -354,10 +643,17 @@ export interface operations {
         tyyppi?: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS';
         id?: string;
       };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    requestBody?: never;
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['YksilonOsaaminenDto'][];
         };
@@ -365,6 +661,12 @@ export interface operations {
     };
   };
   yksilonOsaaminenAdd: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     requestBody: {
       content: {
         'application/json': components['schemas']['YksilonOsaaminenLisaysDto'];
@@ -373,6 +675,9 @@ export interface operations {
     responses: {
       /** @description Created */
       201: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['IdDtoUUID'][];
         };
@@ -381,37 +686,51 @@ export interface operations {
   };
   yksilonOsaaminenDelete: {
     parameters: {
-      path: {
-        id: string;
+      query: {
+        ids: string[];
       };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    requestBody?: never;
     responses: {
       /** @description No Content */
       204: {
-        content: never;
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
-  /**
-   * Get all koulutukset and kategoriat of the user
-   * @description This endpoint can be used to get all koulutukset and kategoriat of the user.
-   */
   koulutusFind: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['KoulutusKategoriaDto'][];
         };
       };
     };
   };
-  /**
-   * Adds a new set of koulutus and its associated kategoria
-   * @description This endpoint can be used to add a new Kategoria and its associated Koulutus.
-   * If kategoria is not present koulutus will be added without kategoria.
-   */
   koulutusCreate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     requestBody: {
       content: {
         'application/json': components['schemas']['KoulutusKategoriaDto'];
@@ -420,6 +739,9 @@ export interface operations {
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['KoulutusUpdateResultDto'];
         };
@@ -427,6 +749,12 @@ export interface operations {
     };
   };
   tyomahdollisuudetCreateEhdotus: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     requestBody: {
       content: {
         'application/json': string[];
@@ -435,6 +763,9 @@ export interface operations {
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': unknown;
         };
@@ -442,6 +773,12 @@ export interface operations {
     };
   };
   osaamisetEhdotusCreateEhdotus: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     requestBody: {
       content: {
         'application/json': components['schemas']['Taidot'];
@@ -450,6 +787,9 @@ export interface operations {
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['Ehdotus'][];
         };
@@ -458,22 +798,32 @@ export interface operations {
   };
   tyopaikkaDelete: {
     parameters: {
+      query?: never;
+      header?: never;
       path: {
         id: string;
       };
+      cookie?: never;
     };
+    requestBody?: never;
     responses: {
       /** @description No Content */
       204: {
-        content: never;
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
   tyopaikkaUpdate: {
     parameters: {
+      query?: never;
+      header?: never;
       path: {
         id: string;
       };
+      cookie?: never;
     };
     requestBody: {
       content: {
@@ -483,30 +833,43 @@ export interface operations {
     responses: {
       /** @description No Content */
       204: {
-        content: never;
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
   toimenkuvaDelete: {
     parameters: {
+      query?: never;
+      header?: never;
       path: {
         id: string;
         toimenkuvaId: string;
       };
+      cookie?: never;
     };
+    requestBody?: never;
     responses: {
       /** @description No Content */
       204: {
-        content: never;
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
   toimenkuvaUpdate: {
     parameters: {
+      query?: never;
+      header?: never;
       path: {
         id: string;
         toimenkuvaId: string;
       };
+      cookie?: never;
     };
     requestBody: {
       content: {
@@ -516,51 +879,63 @@ export interface operations {
     responses: {
       /** @description No Content */
       204: {
-        content: never;
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
   koulutusGet: {
     parameters: {
+      query?: never;
+      header?: never;
       path: {
         id: string;
       };
+      cookie?: never;
     };
+    requestBody?: never;
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['KoulutusKategoriaDto'];
         };
       };
     };
   };
-  /**
-   * Delete the koulutus by id
-   * @description This endpoint can be used to delete the koulutus by id
-   */
   koulutusDelete: {
     parameters: {
+      query?: never;
+      header?: never;
       path: {
         id: string;
       };
+      cookie?: never;
     };
+    requestBody?: never;
     responses: {
       /** @description No Content */
       204: {
-        content: never;
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
-  /**
-   * Updates the koulutus by id
-   * @description This endpoint can be used to update Koulutus.
-   */
   koulutusUpdateKoulutus: {
     parameters: {
+      query?: never;
+      header?: never;
       path: {
         id: string;
       };
+      cookie?: never;
     };
     requestBody: {
       content: {
@@ -570,21 +945,23 @@ export interface operations {
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['KoulutusUpdateResultDto'];
         };
       };
     };
   };
-  /**
-   * Updates a Kategoria by id
-   * @description This endpoint can be used to update the kagoria by id.
-   */
   koulutusUpdateKategoria: {
     parameters: {
+      query?: never;
+      header?: never;
       path: {
         id: string;
       };
+      cookie?: never;
     };
     requestBody: {
       content: {
@@ -594,6 +971,9 @@ export interface operations {
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['KoulutusUpdateResultDto'];
         };
@@ -601,9 +981,19 @@ export interface operations {
     };
   };
   koulutusGetKategoriat: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['KategoriaDto'][];
         };
@@ -611,9 +1001,19 @@ export interface operations {
     };
   };
   osaaminenFindAll: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['OsaaminenDto'][];
         };
@@ -621,12 +1021,42 @@ export interface operations {
     };
   };
   csrfCsrf: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
           'application/json': components['schemas']['CsrfToken'];
         };
+      };
+    };
+  };
+  yksilonOsaaminenDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
