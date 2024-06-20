@@ -17,7 +17,6 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
   return !isLoading ? (
     <Modal
       open={isOpen}
-      onClose={() => void {}}
       content={
         <div>
           <h1>FreeTimeActivitiesWizard</h1>
