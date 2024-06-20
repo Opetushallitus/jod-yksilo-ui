@@ -81,7 +81,7 @@ const Competences = () => {
           'Content-Type': 'application/json',
           [csrf.headerName]: csrf.token,
         },
-        params: { path: { id } },
+        params: { query: { ids: [id] } },
       });
 
       setOsaamiset(osaamiset.filter((osaaminen) => osaaminen.id !== id));

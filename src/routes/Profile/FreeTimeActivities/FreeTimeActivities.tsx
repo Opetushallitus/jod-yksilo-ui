@@ -39,7 +39,7 @@ const FreeTimeActivities = () => {
 
   const deleteVapaaAjanToiminnat = async () => {
     await Promise.all([
-      client.DELETE('/api/profiili/toiminnot', {
+      client.DELETE('/api/profiili/vapaa-ajan-toiminnot', {
         headers: {
           [csrf.headerName]: csrf.token,
         },
