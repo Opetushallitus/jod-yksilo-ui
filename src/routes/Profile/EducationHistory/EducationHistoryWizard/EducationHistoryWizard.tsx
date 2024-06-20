@@ -218,7 +218,6 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
   return !isLoading ? (
     <Modal
       open={isOpen}
-      onClose={() => void {}}
       content={
         <FormProvider {...methods}>
           <Form

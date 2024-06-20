@@ -190,7 +190,6 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
   return !isLoading ? (
     <Modal
       open={isOpen}
-      onClose={() => void {}}
       content={
         <FormProvider {...methods}>
           <Form
