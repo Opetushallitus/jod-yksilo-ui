@@ -65,7 +65,7 @@
   },
   "next": "Nästa",
   "no-match": {
-    "content": "Tyvärr hittades inte sidan du letade efter.",
+    "description": "Tyvärr hittades inte sidan du letade efter.",
     "title": "Sidan hittades inte"
   },
   "previous": "Föregående",
