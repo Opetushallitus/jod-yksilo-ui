@@ -43,6 +43,25 @@
   },
   "expand-less": "Expand less",
   "expand-more": "Expand more",
+  "free-time-activities": {
+    "activity-content": "Activity content",
+    "activity-name": "Activity name",
+    "activity-or-profiency-description": "Activity / profiency",
+    "add-new-activity": "Add new free time activity",
+    "add-new-free-time-activity": "Add new activity",
+    "add-new-proficiency": "Add new proficiency",
+    "add-new-profiency": "Add new proficiency",
+    "confirm-delete-selected-free-time-activities": "Are you sure to delete the selected activities?",
+    "delete-proficiency": "Delete proficiency",
+    "delete-selected-free-time-activities": "Delete selected activities",
+    "edit-activity": "Edit free time activity",
+    "edit-proficiencies": "Edit proficiencies",
+    "edit-profiency": "Edit proficiency",
+    "ended": "Ended",
+    "identify-proficiencies": "Identify proficiencies",
+    "profiency": "Profiency",
+    "started": "Started"
+  },
   "goals": "Goals",
   "home": {
     "card-1-action-content": "Get started",
@@ -172,23 +191,5 @@
     "started": "Started",
     "summary": "Summary",
     "workplace-or-job-description": "Workplace / job description"
-  },
-  "free-time-activities": {
-    "add-new-free-time-activity": "Add new activity",
-    "delete-selected-free-time-activities": "Delete selected activities",
-    "confirm-delete-selected-free-time-activities": "Are you sure to delete the selected activities?",
-    "activity-or-profiency-description": "Activity / profiency",
-    "edit-activity": "Edit free time activity",
-    "add-new-activity": "Add new free time activity",
-    "started": "Started",
-    "ended": "Ended",
-    "profiency": "Profiency",
-    "edit-proficiencies": "Edit proficiencies",
-    "identify-proficiencies": "Identify proficiencies",
-    "activity-content": "Activity content",
-    "add-new-proficiency": "Add new proficiency",
-    "delete-proficiency": "Delete proficiency",
-    "add-new-profiency": "Add new proficiency",
-    "edit-profiency": "Edit proficiency"
   }
 }

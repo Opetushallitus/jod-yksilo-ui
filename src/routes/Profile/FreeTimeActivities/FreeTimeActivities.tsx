@@ -81,13 +81,13 @@ const FreeTimeActivities = () => {
               }}
               disabled={checkedRows.length !== 0}
             />
-            <Button
+            {/* <Button
               variant="white"
               label="Tunnista osaamisia"
               onClick={() => {
                 alert('Tunnista osaamisia');
               }}
-            />
+            /> */}
             <Button
               variant="white"
               label={t('edit')}

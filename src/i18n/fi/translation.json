@@ -43,6 +43,25 @@
   },
   "expand-less": "Näytä vähemmän",
   "expand-more": "Näytä lisää",
+  "free-time-activities": {
+    "activity-content": "Toiminnon sisältö",
+    "activity-name": "Toiminnon nimi",
+    "activity-or-profiency-description": "Toiminto / pätevyys",
+    "add-new-activity": "Lisää uusi vapaa-ajan toiminto",
+    "add-new-free-time-activity": "Lisää uusi toiminto",
+    "add-new-proficiency": "Lisää uusi pätevyys",
+    "add-new-profiency": "Lisää uusi pätevyys",
+    "confirm-delete-selected-free-time-activities": "Haluatko varmasti poistaa valitut toiminnot?",
+    "delete-proficiency": "Poista pätevyys",
+    "delete-selected-free-time-activities": "Poista valitut vapaa-ajan toiminnot",
+    "edit-activity": "Muokkaa vapaa-ajan toimintoa",
+    "edit-proficiencies": "Muokkaa osaamisia",
+    "edit-profiency": "Muokkaa pätevyyttä",
+    "ended": "Loppui",
+    "identify-proficiencies": "Tunnista osaamisia",
+    "profiency": "Pätevyys",
+    "started": "Alkoi"
+  },
   "goals": "Tavoitteet",
   "home": {
     "card-1-action-content": "Kokeile palvelua",
@@ -172,24 +191,5 @@
     "started": "Alkoi",
     "summary": "Yhteenveto",
     "workplace-or-job-description": "Työpaikka / toimenkuva"
-  },
-  "free-time-activities": {
-    "add-new-free-time-activity": "Lisää uusi toiminto",
-    "delete-selected-free-time-activities": "Poista valitut vapaa-ajan toiminnot",
-    "confirm-delete-selected-free-time-activities": "Haluatko varmasti poistaa valitut toiminnot?",
-    "activity-or-profiency-description": "Toiminto / pätevyys",
-    "add-new-activity": "Lisää uusi vapaa-ajan toiminto",
-    "edit-activity": "Muokkaa vapaa-ajan toimintoa",
-    "activity-name": "Toiminnon nimi",
-    "profiency": "Pätevyys",
-    "started": "Alkoi",
-    "ended": "Loppui",
-    "edit-proficiencies": "Muokkaa osaamisia",
-    "identify-proficiencies": "Tunnista osaamisia",
-    "activity-content": "Toiminnon sisältö",
-    "add-new-proficiency": "Lisää uusi pätevyys",
-    "delete-proficiency": "Poista pätevyys",
-    "add-new-profiency": "Lisää uusi pätevyys",
-    "edit-profiency": "Muokkaa pätevyyttä"
   }
 }
