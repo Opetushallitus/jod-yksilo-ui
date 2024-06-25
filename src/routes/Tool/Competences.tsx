@@ -1,4 +1,5 @@
 import { OsaamisSuosittelija, SimpleNavigationList } from '@/components';
+import { OpportunityCard } from '@/components/OpportunityCard/OpportunityCard';
 import { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import {
@@ -14,6 +15,35 @@ import {
 } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+const mockOpportunities = [
+  {
+    id: 'c67f7390-ded5-4188-9c48-bd85e27375e0',
+    nimi: 'Farmaseutti',
+    kuvaus:
+      'Farmaseutti on lääkkeiden ja lääkehoitojen asiantuntija. Farmaseutit työskentelevät yleensä apteekeissa asiantuntijoina ja asiakaspalvelijoina. Farmaseutilta edellytetään tietoa lääkeaineista ja niiden vaikutuksista. Ammatissa tarvitaan myös asiakaspalvelutaitoja, tarkkuutta ja huolellisuutta.',
+    sopivuus: 99,
+    tyyppi: 'työ',
+    kehitystrendi: 'kasvava',
+    Työllisyysnakyma: '4',
+    rajoitteita: false,
+    toimialanNimi: 'Lorem dolor ipsum ',
+    yleisinKoulutustausta: 'Lorem dolor ipsum ',
+  },
+  {
+    id: 'd72f5f3f-e816-4b96-bca8-e0a7559f0b70',
+    nimi: 'Farmaseutti / Koulutus',
+    kuvaus:
+      'Farmaseutti on lääkkeiden ja lääkehoitojen asiantuntija. Farmaseutit työskentelevät yleensä apteekeissa asiantuntijoina ja asiakaspalvelijoina. Farmaseutilta edellytetään tietoa lääkeaineista ja niiden vaikutuksista. Ammatissa tarvitaan myös asiakaspalvelutaitoja, tarkkuutta ja huolellisuutta.',
+    sopivuus: 97,
+    tyyppi: 'koulutus',
+    kehitystrendi: 'kasvava',
+    Työllisyysnakyma: '4',
+    rajoitteita: false,
+    toimialanNimi: 'Lorem ipsum dolor',
+    yleisinKoulutustausta: 'Lorem ipsum dolor',
+  },
+];
 
 const HelpingToolsContent = () => (
   <>
@@ -214,7 +244,20 @@ const Competences = () => {
               </span>
             </>
           )}
-          <div>Työmahdollisuudet listaus</div>
+          <div className="flex flex-col gap-5">
+            {mockOpportunities.map((item) => {
+              return (
+                <OpportunityCard
+                  key={item.id}
+                  name={item.nimi}
+                  description={item.kuvaus}
+                  matchValue={item.sopivuus}
+                  matchLabel="Sopivuus"
+                  type={item.tyyppi === 'työ' ? 'work' : 'education'}
+                />
+              );
+            })}
+          </div>
         </div>
         {sm && (
           <div className="col-span-2 sm:mt-8">
