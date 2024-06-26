@@ -76,6 +76,57 @@
   "how-do-i-use-the-service": "Kuinka käytän palvelua?",
   "instructions": "Ohjeet",
   "interests": "Kiinnostukset",
+  "job-opportunity": {
+    "competences": {
+      "navigation": "Osaamisvaatimukset",
+      "route": "Osaamiset"
+    },
+    "description": "Kuvaus",
+    "digital-skills-for-citizens": {
+      "description": "Kestävän kehityksen asiantuntijan tärkeitä kansalaisen digitaitoja ovat:",
+      "title": "Kansalaisen digitaidot"
+    },
+    "employment-trends": {
+      "description": "Graafissa näkyy ammatin työllisyyskehitys vuodesta 2015-2023. Tiedot 2024-26 ovat ennakointitietoja.",
+      "title": "Työllisyyskehitys"
+    },
+    "general-working-life-skills": {
+      "description": "Kestävän kehityksen asiantuntijalle tärkeitä yleisiä työelämäosaamisia ovat:",
+      "title": "Yleiset työelämäosaamiset"
+    },
+    "key-figures": {
+      "description": "Tarkastele ammattia eri tunnuslukujen valossa. Voit valita tunnusluvuista joko tilanteen tällä hetkellä tai lähitulevaisuuden ennakkotiedon.",
+      "title": "Tunnusluvut"
+    },
+    "labour-market-picture": {
+      "description": "Tarkastele ammatin työvoimakohtaantoa. Voit valita tarkastelun kohteeksi joko tilanteen tällä hetkellä, lähitulevaisuudessa tai pidemmän ajan ennakkotiedon.",
+      "title": "Työvoimakohtaanto"
+    },
+    "most-common-job-tasks": {
+      "description": "Tarkastele ammattia yleisimpien työtehtävien kautta.",
+      "title": "Yleisimmät työtehtävät"
+    },
+    "overview": {
+      "navigation": "Ammatin yleiskuvaus",
+      "route": "Yleiskuvaus"
+    },
+    "personal-characteristics": {
+      "description": "Kestävän kehityksen asiantuntijan tärkeitä henkilökohtaisia ominaisuuksia:",
+      "title": "Henkilökohtaiset ominaisuudet"
+    },
+    "related-jobs": {
+      "description": "Lähiammatit muodostetaan ammattien osaamisvaatimusten mukaan. Alla näet ammatteja jotka osaamisvaatimuksiltaan lähinnä Kestävän kehityksen asiantuntijan ammattia.",
+      "title": "Lähiammatit"
+    },
+    "salary-trends": {
+      "description": "Graafissa näkyy ammatin palkkakehitys vuodesta 2015-2023. Tiedot 2024-26 ovat palkkakehityksen ennakointitietoja.",
+      "title": "Palkkakehitys"
+    },
+    "specific-professional-competences": {
+      "description": "Kestävän kehityksen asiantuntijoiden ammatillisia erityisosaamisalueita ovat:",
+      "title": "Ammatilliset erityisosaamiset"
+    }
+  },
   "logout": "Kirjaudu ulos",
   "more-information": "Lisätietoa",
   "my-competences": {
@@ -114,6 +165,11 @@
     "data-sources": "datalahteet",
     "how-do-i-give-feedback": "miten-annan-palautetta",
     "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
+    "job-opportunity": {
+      "competences": "osaamiset",
+      "index": "tyomahdollisuus",
+      "overview": "yleiskuvaus"
+    },
     "no-internet-connection": "ei-internetyhteytta",
     "privacy-policy": "tietosuojaseloste",
     "profile": {

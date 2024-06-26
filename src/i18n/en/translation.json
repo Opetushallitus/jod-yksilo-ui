@@ -76,6 +76,16 @@
   "how-do-i-use-the-service": "How do I use the service?",
   "instructions": "Instructions",
   "interests": "Interests",
+  "job-opportunity": {
+    "description": "Description",
+    "employment-trends": "Employment trends",
+    "index": "Overview of the job",
+    "key-figures": "Key figures",
+    "labour-market-picture": "Labour market picture",
+    "most-common-job-tasks": "Most common job tasks",
+    "related-jobs": "Related jobs",
+    "salary-trends": "Salary trends"
+  },
   "logout": "Log out",
   "more-information": "More information",
   "my-competences": {
@@ -114,6 +124,11 @@
     "data-sources": "data-sources",
     "how-do-i-give-feedback": "how-do-I-give-feedback",
     "how-do-i-use-the-service": "how-do-i-use-the-service",
+    "job-opportunity": {
+      "competences": "competences",
+      "index": "job-opportunity",
+      "overview": "overview"
+    },
     "no-internet-connection": "no-internet-connection",
     "privacy-policy": "privacy-policy",
     "profile": {

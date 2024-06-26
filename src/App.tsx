@@ -26,6 +26,7 @@ import {
 import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom';
 import i18n from './i18n/config';
 import './index.css';
+import { JobOpportunity, Competences as JobOpportunityCompetences, Overview } from './routes/JobOpportunity';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,24 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: `${i18n.t('slugs.job-opportunity.index')}/:id`,
+        element: <JobOpportunity />,
+        children: [
+          {
+            index: true,
+            loader: () => redirect(i18n.t('slugs.job-opportunity.overview')),
+          },
+          {
+            path: i18n.t('slugs.job-opportunity.overview'),
+            element: <Overview />,
+          },
+          {
+            path: i18n.t('slugs.job-opportunity.competences'),
+            element: <JobOpportunityCompetences />,
+          },
+        ],
       },
       {
         path: i18n.t('slugs.tool.index'),

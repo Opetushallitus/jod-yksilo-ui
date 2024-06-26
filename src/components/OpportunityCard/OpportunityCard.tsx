@@ -1,5 +1,3 @@
-import React from 'react';
-
 type CardType = 'work' | 'education';
 interface OpportunityCardProps {
   name: string;
@@ -26,13 +24,7 @@ const Match = ({ match, label, bg }: { match: number; label: string; bg: string 
     </div>
   );
 };
-export const OpportunityCard: React.FC<OpportunityCardProps> = ({
-  name,
-  description,
-  matchValue,
-  matchLabel,
-  type,
-}) => {
+export const OpportunityCard = ({ name, description, matchValue, matchLabel, type }: OpportunityCardProps) => {
   return (
     <div className="rounded-[8px] shadow-[0_1px_1px_1px_rgba(0,0,0,0.10)] bg-white pt-5 pr-5 pl-6 pb-7">
       <div className="flex flex-col sm:flex-row sm:gap-5 gap-3">

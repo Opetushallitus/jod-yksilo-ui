@@ -15,6 +15,7 @@ import {
 } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
 
 const mockOpportunities = [
   {
@@ -104,7 +105,7 @@ const Filters = ({
 };
 
 const Competences = () => {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { sm } = useMediaQueries();
 
   const [competencesMultiplier, setCompetencesMultiplier] = React.useState(50);
@@ -247,14 +248,18 @@ const Competences = () => {
           <div className="flex flex-col gap-5">
             {mockOpportunities.map((item) => {
               return (
-                <OpportunityCard
+                <NavLink
                   key={item.id}
-                  name={item.nimi}
-                  description={item.kuvaus}
-                  matchValue={item.sopivuus}
-                  matchLabel="Sopivuus"
-                  type={item.tyyppi === 'työ' ? 'work' : 'education'}
-                />
+                  to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${crypto.randomUUID()}`}
+                >
+                  <OpportunityCard
+                    name={item.nimi}
+                    description={item.kuvaus}
+                    matchValue={item.sopivuus}
+                    matchLabel="Sopivuus"
+                    type={item.tyyppi === 'työ' ? 'work' : 'education'}
+                  />
+                </NavLink>
               );
             })}
           </div>
