@@ -76,6 +76,16 @@
   "how-do-i-use-the-service": "Hur använder jag tjänsten?",
   "instructions": "Instruktioner",
   "interests": "Intressen",
+  "job-opportunity": {
+    "description": "Beskrivning",
+    "employment-trends": "Anställningstrender",
+    "index": "Översikt av jobbet",
+    "key-figures": "Nyckeltal",
+    "labour-market-picture": "Arbetsmarknadsbild",
+    "most-common-job-tasks": "Vanligaste arbetsuppgifter",
+    "related-jobs": "Relaterade jobb",
+    "salary-trends": "Lönetrender"
+  },
   "logout": "Logga ut",
   "more-information": "Mer information",
   "my-competences": {
@@ -114,6 +124,11 @@
     "data-sources": "datakallor",
     "how-do-i-give-feedback": "hur-ger-jag-feedback",
     "how-do-i-use-the-service": "hur-anvander-jag-tjansten",
+    "job-opportunity": {
+      "competences": "kompetens",
+      "index": "jobbmojligheter",
+      "overview": "oversikt"
+    },
     "no-internet-connection": "ingen-internetanslutning",
     "privacy-policy": "integritetspolicy",
     "profile": {
