@@ -133,8 +133,7 @@
       "index": "tyokalu",
       "instructions": "ohjeet",
       "interests": "kiinnostukset",
-      "restrictions": "rajoitteet",
-      "search": "haku"
+      "restrictions": "rajoitteet"
     },
     "user": "kayttaja",
     "user-guide": {

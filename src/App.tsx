@@ -13,15 +13,7 @@ import { EducationHistory, loader as educationHistoryLoader } from '@/routes/Pro
 import { FreeTimeActivities, loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import { ErrorElement, NoMatch, Root, loader as rootLoader } from '@/routes/Root';
-import {
-  Goals,
-  Instructions,
-  Interests,
-  Restrictions,
-  Search,
-  Tool,
-  Competences as ToolCompetences,
-} from '@/routes/Tool';
+import { Goals, Instructions, Interests, Restrictions, Tool, Competences as ToolCompetences } from '@/routes/Tool';
 import {
   HowDoIGiveFeedback,
   HowDoIUseTheService,
@@ -77,10 +69,6 @@ const router = createBrowserRouter([
           {
             path: i18n.t('slugs.tool.restrictions'),
             element: <Restrictions />,
-          },
-          {
-            path: i18n.t('slugs.tool.search'),
-            element: <Search />,
           },
         ],
       },

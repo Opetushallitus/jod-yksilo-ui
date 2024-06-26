@@ -133,8 +133,7 @@
       "index": "verktyg",
       "instructions": "instruktioner",
       "interests": "intressen",
-      "restrictions": "trammels",
-      "search": "sok"
+      "restrictions": "trammels"
     },
     "user": "anvandare",
     "user-guide": {
