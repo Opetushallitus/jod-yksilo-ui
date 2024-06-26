@@ -133,8 +133,7 @@
       "index": "tool",
       "instructions": "instructions",
       "interests": "interests",
-      "restrictions": "restrictions",
-      "search": "search"
+      "restrictions": "restrictions"
     },
     "user": "user",
     "user-guide": {
