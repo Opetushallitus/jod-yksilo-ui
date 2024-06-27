@@ -1,3 +1,4 @@
+import { client } from '@/api/client';
 import { OsaamisSuosittelija, SimpleNavigationList } from '@/components';
 import { OpportunityCard } from '@/components/OpportunityCard/OpportunityCard';
 import { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
@@ -17,34 +18,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
-const mockOpportunities = [
-  {
-    id: 'c67f7390-ded5-4188-9c48-bd85e27375e0',
-    nimi: 'Farmaseutti',
-    kuvaus:
-      'Farmaseutti on lääkkeiden ja lääkehoitojen asiantuntija. Farmaseutit työskentelevät yleensä apteekeissa asiantuntijoina ja asiakaspalvelijoina. Farmaseutilta edellytetään tietoa lääkeaineista ja niiden vaikutuksista. Ammatissa tarvitaan myös asiakaspalvelutaitoja, tarkkuutta ja huolellisuutta.',
-    sopivuus: 99,
-    tyyppi: 'työ',
-    kehitystrendi: 'kasvava',
-    Työllisyysnakyma: '4',
-    rajoitteita: false,
-    toimialanNimi: 'Lorem dolor ipsum ',
-    yleisinKoulutustausta: 'Lorem dolor ipsum ',
-  },
-  {
-    id: 'd72f5f3f-e816-4b96-bca8-e0a7559f0b70',
-    nimi: 'Farmaseutti / Koulutus',
-    kuvaus:
-      'Farmaseutti on lääkkeiden ja lääkehoitojen asiantuntija. Farmaseutit työskentelevät yleensä apteekeissa asiantuntijoina ja asiakaspalvelijoina. Farmaseutilta edellytetään tietoa lääkeaineista ja niiden vaikutuksista. Ammatissa tarvitaan myös asiakaspalvelutaitoja, tarkkuutta ja huolellisuutta.',
-    sopivuus: 97,
-    tyyppi: 'koulutus',
-    kehitystrendi: 'kasvava',
-    Työllisyysnakyma: '4',
-    rajoitteita: false,
-    toimialanNimi: 'Lorem ipsum dolor',
-    yleisinKoulutustausta: 'Lorem ipsum dolor',
-  },
-];
+interface Tyomahdollisuus {
+  id?: string;
+  nimi: Record<string, string | undefined>;
+  kuvaus?: Record<string, string | undefined>;
+}
 
 const HelpingToolsContent = () => (
   <>
@@ -119,10 +97,29 @@ const Competences = () => {
   const [debouncedTyotehtava, tyotehtava, setTyotehtava] = useDebounceState('', 500);
 
   const [selectedCompetences, setSelectedCompentences] = React.useState<OsaaminenValue[]>([]);
+  const [tyomahdollisuudet, setTyomahdollisuudet] = React.useState<Tyomahdollisuus[]>([]);
 
   const osaamisSuosittelijaHandler = (values: OsaaminenValue[]) => {
     setSelectedCompentences(values);
   };
+
+  const fetchTyomahdollisuudet = async () => {
+    const response = await client.GET('/api/tyomahdollisuudet', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (response.data?.sisalto) {
+      setTyomahdollisuudet(response.data.sisalto);
+    }
+  };
+
+  React.useEffect(() => {
+    const getTyomahdollisuudet = async () => {
+      await fetchTyomahdollisuudet();
+    };
+    void getTyomahdollisuudet();
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -246,18 +243,18 @@ const Competences = () => {
             </>
           )}
           <div className="flex flex-col gap-5">
-            {mockOpportunities.map((item) => {
+            {tyomahdollisuudet.map((item) => {
               return (
                 <NavLink
                   key={item.id}
                   to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${crypto.randomUUID()}`}
                 >
                   <OpportunityCard
-                    name={item.nimi}
-                    description={item.kuvaus}
-                    matchValue={item.sopivuus}
+                    name={item.nimi[i18n.language] ?? ''}
+                    description={item.kuvaus?.[i18n.language] ?? ''}
+                    matchValue={99}
                     matchLabel="Sopivuus"
-                    type={item.tyyppi === 'työ' ? 'work' : 'education'}
+                    type={'work'}
                   />
                 </NavLink>
               );

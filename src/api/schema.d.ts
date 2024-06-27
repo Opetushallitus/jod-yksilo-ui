@@ -247,6 +247,26 @@ export interface paths {
     patch: operations['koulutusUpdateKategoria'];
     trace?: never;
   };
+  '/api/tyomahdollisuudet': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Hae työmahdollisuudet
+     * @description Palauttaa työpaikkailmoitukset JSON-muodossa.
+     */
+    get: operations['tyomahdollisuusFindAll'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/kategoriat': {
     parameters: {
       query?: never;
@@ -409,6 +429,25 @@ export interface components {
       /** Format: double */
       osuvuus?: number;
     };
+    SivuDtoTyomahdollisuusDto: {
+      sisalto?: components['schemas']['TyomahdollisuusDto'][];
+      /**
+       * Format: int32
+       * @example 1
+       */
+      sivuja?: number;
+      /**
+       * Format: int64
+       * @example 10
+       */
+      maara?: number;
+    };
+    TyomahdollisuusDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+    };
     OsaaminenDto: {
       /** Format: uri */
       uri?: string;
@@ -422,8 +461,8 @@ export interface components {
       lahde?: components['schemas']['OsaamisenLahdeDto'];
     };
     CsrfToken: {
-      headerName?: string;
       token?: string;
+      headerName?: string;
       parameterName?: string;
     };
   };
@@ -976,6 +1015,29 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['KoulutusUpdateResultDto'];
+        };
+      };
+    };
+  };
+  tyomahdollisuusFindAll: {
+    parameters: {
+      query?: {
+        sivu?: number;
+        koko?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SivuDtoTyomahdollisuusDto'];
         };
       };
     };
