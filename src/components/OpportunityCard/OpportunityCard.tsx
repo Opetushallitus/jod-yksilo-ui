@@ -17,7 +17,7 @@ const bgForType = (type: CardType) => {
 const Match = ({ match, label, bg }: { match: number; label: string; bg: string }) => {
   return (
     <div
-      className={`${bg} flex flex-row sm:flex-col rounded-[16px] sm:rounded-[40px] sm:min-h-[80px] sm:min-w-[80px] w-[132px] h-[32px] text-white justify-center text-center items-center`}
+      className={`${bg} flex flex-row sm:flex-col rounded-[16px] sm:rounded-[40px] sm:min-h-[80px] w-[132px] sm:w-[80px] h-[32px] text-white justify-center text-center items-center`}
     >
       <span className="mr-3 sm:mr-0 font-semibold text-[22px] sm:text-[24px]">{`${match}%`}</span>
       <span className="flex justify-center text-[12px] font-bold">{label}</span>
