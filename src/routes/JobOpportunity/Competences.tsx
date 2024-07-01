@@ -60,7 +60,7 @@ const Competences = () => {
             <p className="text-body-sm mt-4 mb-4">
               {t('job-opportunity.specific-professional-competences.description')}
             </p>
-            <ol className="list-decimal ml-7 font-bold text-primary-gray leading-7">
+            <ol className="list-decimal ml-7 font-bold text-black leading-7">
               {mockTyomahdollisuus.ammatillisetErityisosaamiset.map((competence) => (
                 <li key={competence}>{competence}</li>
               ))}

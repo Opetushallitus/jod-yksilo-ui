@@ -125,11 +125,11 @@ const Competences = () => {
     <div className="flex flex-col">
       <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-6">
         <div className="order-1 col-span-2 sm:col-span-4">
-          <h1 className="mb-5 mt-7 text-heading-1 text-primary-gray">{t('tool.competences.heading-1')}</h1>
+          <h1 className="mb-5 mt-7 text-heading-1 text-black">{t('tool.competences.heading-1')}</h1>
 
           <div className="pb-7">
-            <p className="mb-6 text-body-md text-primary-gray">{t('tool.competences.page-description')}</p>
-            <p className="text-body-md text-primary-gray">{t('tool.competences.field-description')}</p>
+            <p className="mb-6 text-body-md text-black">{t('tool.competences.page-description')}</p>
+            <p className="text-body-md text-black">{t('tool.competences.field-description')}</p>
           </div>
         </div>
 
@@ -151,7 +151,7 @@ const Competences = () => {
         <div className="order-2 col-span-2 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0">
           {sm ? (
             <>
-              <span className="text-heading-4 text-primary-gray">Apuvälineitä</span>
+              <span className="text-heading-4 text-black">Apuvälineitä</span>
               <HelpingToolsContent />
             </>
           ) : (
@@ -165,7 +165,7 @@ const Competences = () => {
       <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-6">
         <div className="col-span-2 sm:col-span-6">
           <div className="mt-10 flex flex-col sm:mt-11 sm:flex-row">
-            <span className="mb-2 text-heading-3 text-primary-gray sm:mb-0 sm:mr-5">Tulokset</span>
+            <span className="mb-2 text-heading-3 text-black sm:mb-0 sm:mr-5">Tulokset</span>
             <span className="text-body-sm text-secondary-gray sm:text-body-md">
               Lukumääräisesti valittavissasi eri vaihtoehtoja - vieritä näkymää alaspäin itse tuloksiin.
             </span>
@@ -178,7 +178,7 @@ const Competences = () => {
         </div>
 
         <div className="col-span-2 mt-10 flex flex-col sm:col-span-6 sm:mt-9 sm:flex-row">
-          <span className="mb-2 text-heading-3 text-primary-gray sm:mb-0 sm:mr-5">Painotukset</span>
+          <span className="mb-2 text-heading-3 text-black sm:mb-0 sm:mr-5">Painotukset</span>
           <span className="text-body-sm text-secondary-gray sm:text-body-md">
             Säädä syöttämäsi tietojen painotuksia - tulokset päivittyvät samanaikaisesti uusien painotusten mukaan.
           </span>
@@ -208,7 +208,7 @@ const Competences = () => {
           {!sm && (
             <>
               <div className="mb-2 flex flex-row justify-between">
-                <span className="mr-5 text-heading-3 text-primary-gray">Tuloslista</span>
+                <span className="mr-5 text-heading-3 text-black">Tuloslista</span>
                 <button
                   className="material-symbols-outlined size-24 select-none"
                   aria-label="Näytä suodattimet"
