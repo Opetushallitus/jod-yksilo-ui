@@ -1,3 +1,4 @@
+import { AuthGuard } from '@/routes/AuthGuard';
 import {
   AccessibilityStatement,
   BasicInformation,
@@ -93,7 +94,11 @@ const router = createBrowserRouter([
       },
       {
         path: i18n.t('slugs.profile.index'),
-        element: <Profile />,
+        element: (
+          <AuthGuard>
+            <Profile />
+          </AuthGuard>
+        ),
         children: [
           {
             index: true,
