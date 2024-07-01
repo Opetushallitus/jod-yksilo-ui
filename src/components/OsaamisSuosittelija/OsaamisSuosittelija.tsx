@@ -73,15 +73,12 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
   return (
     <div className={`mb-6 ${sm ? 'grid grid-cols-3 gap-x-5' : 'flex flex-col'}`}>
       <div className={`${sm ? 'col-span-1' : 'order-1'} flex items-end`}>
-        <label htmlFor={ehdotetutOsaamisetId} className="mb-4 inline-block align-top text-form-label text-primary-gray">
+        <label htmlFor={ehdotetutOsaamisetId} className="mb-4 inline-block align-top text-form-label text-black">
           {t('work-history.proposed-competences')}
         </label>
       </div>
       <div className={`${sm ? 'col-span-2' : 'order-3'} flex items-end`}>
-        <label
-          htmlFor={valitsemasiOsaamisetId}
-          className="mb-4 inline-block align-top text-form-label text-primary-gray"
-        >
+        <label htmlFor={valitsemasiOsaamisetId} className="mb-4 inline-block align-top text-form-label text-black">
           {t('work-history.competences-of-your-choice')}
         </label>
       </div>

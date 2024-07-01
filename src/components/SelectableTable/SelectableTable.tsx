@@ -150,7 +150,7 @@ const SelectableTableRow = ({
         <>
           <td
             colSpan={2}
-            className={`${setRow ? 'pl-8 sm:pl-[56px]' : ''} pr-5 text-body-xs font-bold text-accent sm:pt-3`.trim()}
+            className={`${setRow ? 'pl-8 sm:pl-[56px]' : ''} pr-5 text-body-xs font-bold text-secondary-gray sm:pt-3`.trim()}
           >
             {sm ? row.nimi[language] : <p className={!row.hideSubrowDetails ? 'pt-3' : 'pt-2'}>{row.nimi[language]}</p>}
             {!sm && !row.hideSubrowDetails && (

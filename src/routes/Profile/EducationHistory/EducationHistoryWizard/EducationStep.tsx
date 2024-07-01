@@ -22,7 +22,7 @@ const EducationStep = ({ type, tutkinto }: EducationStepProps) => {
         {type === 'tutkinto' && !tutkintoId && t('education-history.add-new-degree-or-course')}
         {type === 'tutkinto' && tutkintoId && t('education-history.edit-degree')}
       </h2>
-      <p className="mb-7 text-body-sm text-primary-gray sm:mb-9">
+      <p className="mb-7 text-body-sm text-black sm:mb-9">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.

@@ -87,7 +87,7 @@ const Overview = () => {
             lang={i18n.language}
           >
             <p className="text-body-sm mt-4 mb-4">{t('job-opportunity.most-common-job-tasks.description')}</p>
-            <ol className="list-decimal ml-7 font-bold text-primary-gray leading-7">
+            <ol className="list-decimal ml-7 font-bold text-black leading-7">
               {mockTyomahdollisuus.yleisimmatTyotehtavat.map((task) => (
                 <li key={task}>{task}</li>
               ))}

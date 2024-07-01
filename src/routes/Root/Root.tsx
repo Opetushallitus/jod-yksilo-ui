@@ -68,8 +68,8 @@ const Root = () => {
         <NavigationBar
           logo={
             <NavLink to={`/${i18n.language}`} className="flex">
-              <div className="inline-flex select-none items-center gap-4 text-[24px] leading-[140%] text-accent">
-                <div className="h-8 w-8 bg-accent"></div>JOD
+              <div className="inline-flex select-none items-center gap-4 text-[24px] leading-[140%] text-secondary-gray">
+                <div className="h-8 w-8 bg-secondary-gray"></div>JOD
               </div>
             </NavLink>
           }
