@@ -1,19 +1,13 @@
 import i18n, { type Resource } from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import translationEn from './en/translation.json';
 import translationFi from './fi/translation.json';
-import translationSv from './sv/translation.json';
 
 export const resources: Resource = {
-  en: {
-    translation: translationEn,
-  },
+  en: {},
   fi: {
     translation: translationFi,
   },
-  sv: {
-    translation: translationSv,
-  },
+  sv: {},
 };
 
 export const lng = 'fi';
