@@ -1,11 +1,9 @@
+// import { client } from '@/api/client';
+import { components } from '@/api/schema';
 import i18n, { fallbackLng, resources } from '@/i18n/config';
 import { LoaderFunction, redirect } from 'react-router-dom';
 
-export interface RootLoaderData {
-  csrf?: { headerName: string; parameterName: string; token: string };
-}
-
-export default (async ({ params: { lng } }) => {
+export default (async ({ params: { lng }, request }) => {
   // Redirect if the language is not supported
   if (lng && !Object.keys(resources).includes(lng)) {
     return redirect(`/${fallbackLng}`);
@@ -17,13 +15,12 @@ export default (async ({ params: { lng } }) => {
   }
 
   // Fetch CSRF token
-  const data: RootLoaderData = {};
-  const response = await fetch('/api/csrf', {
-    signal: AbortSignal.timeout(10000),
+  const response = await fetch('/api/yksilo', {
+    signal: request.signal,
   });
   if (response.ok) {
-    data.csrf = (await response.json()) as RootLoaderData['csrf'];
+    return (await response.json()) as components['schemas']['YksiloDto'];
   }
 
-  return data;
+  return null;
 }) satisfies LoaderFunction;

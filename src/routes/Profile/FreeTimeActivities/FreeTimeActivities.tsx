@@ -9,7 +9,6 @@ import {
 } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
 import { useAuth } from '@/hooks/useAuth';
-import { RootLoaderData } from '@/routes/Root/loader';
 import { Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -29,7 +28,8 @@ const FreeTimeActivities = () => {
   const actionBar = useActionBar();
   const [isOpen, setIsOpen] = React.useState(false);
   const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanToiminnat));
-  const { csrf } = useAuth() as { csrf: NonNullable<RootLoaderData['csrf']> };
+  const auth = useAuth();
+  const csrf = auth!.csrf;
 
   const checkedRows = rows.filter((row) => row.checked);
 

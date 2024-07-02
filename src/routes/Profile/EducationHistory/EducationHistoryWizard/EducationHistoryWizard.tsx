@@ -2,7 +2,6 @@
 import { client } from '@/api/client';
 import { SelectableTableRow } from '@/components';
 import { useAuth } from '@/hooks/useAuth';
-import { type RootLoaderData } from '@/routes/Root/loader';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -27,7 +26,8 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
     i18n: { language },
   } = useTranslation();
   const navigate = useNavigate();
-  const { csrf } = useAuth() as { csrf: NonNullable<RootLoaderData['csrf']> };
+  const auth = useAuth();
+  const csrf = auth!.csrf;
   const { sm } = useMediaQueries();
 
   const formId = React.useId();
