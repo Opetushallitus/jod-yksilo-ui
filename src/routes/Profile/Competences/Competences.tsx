@@ -11,7 +11,6 @@ import { useAuth } from '@/hooks/useAuth';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
 import { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
-import { RootLoaderData } from '@/routes/Root/loader';
 import { Accordion, Button, Checkbox, RadioButton, RadioButtonGroup } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -30,7 +29,8 @@ const Competences = () => {
   const [groupBy, setGroupBy] = React.useState<string>(GROUP_BY_SOURCE);
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
-  const { csrf } = useAuth() as { csrf: NonNullable<RootLoaderData['csrf']> };
+  const auth = useAuth();
+  const csrf = auth!.csrf;
   const locale = i18n.language as 'fi' | 'sv';
   const [selectedFilters, setSelectedFilters] = React.useState<FiltersType>({});
   const [filterKeys, setFilterKeys] = React.useState<(keyof FiltersType)[]>([]);

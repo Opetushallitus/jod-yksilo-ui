@@ -1,3 +1,4 @@
+import { components } from '@/api/schema';
 import { ErrorNote } from '@/features';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
@@ -6,7 +7,6 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Outlet, ScrollRestoration, matchPath, useLoaderData, useLocation } from 'react-router-dom';
-import { RootLoaderData } from './loader';
 
 const NavigationBarItem = (to: string, text: string) => ({
   key: to,
@@ -55,7 +55,8 @@ const Root = () => {
     : 'dark';
   const footerRef = React.useRef<HTMLDivElement>(null);
 
-  const data = useLoaderData() as RootLoaderData;
+  const data = useLoaderData() as components['schemas']['YksiloDto'] | null;
+  const name = 'Reetta Räppänä';
 
   return (
     <AuthContext.Provider value={data}>
@@ -75,13 +76,19 @@ const Root = () => {
             </NavLink>
           }
           user={
-            data.csrf && {
-              name: 'Reetta Räppänä',
+            data?.csrf && {
+              name,
               component: ({ children, className }) => {
                 return (
                   <div className="relative">
-                    <button type="button" className={className} onClick={() => setUserMenuOpen(!userMenuOpen)}>
-                      {children}
+                    <button
+                      type="button"
+                      className={`${className} bg-cover bg-center`}
+                      style={data.kuva ? { backgroundImage: `url(/api/kuvat/${data.kuva})` } : undefined}
+                      onClick={() => setUserMenuOpen(!userMenuOpen)}
+                      aria-label={data?.kuva ? name : undefined}
+                    >
+                      {data?.kuva ? undefined : children}
                     </button>
                     {userMenuOpen && (
                       <div className="absolute right-0 min-w-max translate-y-8 transform">

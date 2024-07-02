@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 export const AuthGuard = ({ children }: { children: React.ReactNode }) => {
-  const { csrf } = useAuth();
+  const auth = useAuth();
+  const csrf = auth?.csrf;
   const { i18n } = useTranslation();
   const navigate = useNavigate();
 
@@ -14,5 +15,5 @@ export const AuthGuard = ({ children }: { children: React.ReactNode }) => {
     }
   }, [csrf, i18n.language, navigate]);
 
-  return csrf ? children : <></>;
+  return csrf ? children : <div className="flex grow"></div>;
 };

@@ -30,6 +30,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/yksilo/kuva': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['yksiloAddKuva'];
+    delete: operations['yksiloDeleteKuva'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/vapaa-ajan-toiminnot': {
     parameters: {
       query?: never;
@@ -247,6 +263,22 @@ export interface paths {
     patch: operations['koulutusUpdateKategoria'];
     trace?: never;
   };
+  '/api/yksilo': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['yksiloGetYksilo'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/tyomahdollisuudet': {
     parameters: {
       query?: never;
@@ -291,6 +323,22 @@ export interface paths {
       cookie?: never;
     };
     get: operations['osaaminenFindAll'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/kuvat/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['kuvaGet'];
     put?: never;
     post?: never;
     delete?: never;
@@ -429,18 +477,30 @@ export interface components {
       /** Format: double */
       osuvuus?: number;
     };
+    CsrfTokenDto: {
+      headerName: string;
+      parameterName: string;
+      token: string;
+    };
+    YksiloDto: {
+      /** Format: uuid */
+      id: string;
+      csrf: components['schemas']['CsrfTokenDto'];
+      /** Format: uuid */
+      kuva?: string;
+    };
     SivuDtoTyomahdollisuusDto: {
       sisalto?: components['schemas']['TyomahdollisuusDto'][];
-      /**
-       * Format: int32
-       * @example 1
-       */
-      sivuja?: number;
       /**
        * Format: int64
        * @example 10
        */
       maara?: number;
+      /**
+       * Format: int32
+       * @example 1
+       */
+      sivuja?: number;
     };
     TyomahdollisuusDto: {
       /** Format: uuid */
@@ -461,9 +521,9 @@ export interface components {
       lahde?: components['schemas']['OsaamisenLahdeDto'];
     };
     CsrfToken: {
-      token?: string;
-      headerName?: string;
       parameterName?: string;
+      headerName?: string;
+      token?: string;
     };
   };
   responses: never;
@@ -510,6 +570,51 @@ export interface operations {
         'application/json': components['schemas']['ToimintoDto'];
       };
     };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  yksiloAddKuva: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': {
+          /** Format: binary */
+          file: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': string;
+        };
+      };
+    };
+  };
+  yksiloDeleteKuva: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
     responses: {
       /** @description No Content */
       204: {
@@ -1019,6 +1124,26 @@ export interface operations {
       };
     };
   };
+  yksiloGetYksilo: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['YksiloDto'];
+        };
+      };
+    };
+  };
   tyomahdollisuusFindAll: {
     parameters: {
       query?: {
@@ -1078,6 +1203,28 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['OsaaminenDto'][];
+        };
+      };
+    };
+  };
+  kuvaGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': string[];
         };
       };
     };
