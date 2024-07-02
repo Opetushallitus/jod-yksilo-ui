@@ -1,7 +1,7 @@
-import { RootLoaderData } from '@/routes/Root/loader';
+import { components } from '@/api/schema';
 import React from 'react';
 
-export const AuthContext = React.createContext<RootLoaderData | undefined>(undefined);
+export const AuthContext = React.createContext<components['schemas']['YksiloDto'] | null>(null);
 
 export const useAuth = () => {
   const context = React.useContext(AuthContext);

@@ -1,6 +1,7 @@
+import { components } from '@/api/schema';
 import i18n from '@/i18n/config';
 import { describe, expect, it, vi } from 'vitest';
-import loader, { RootLoaderData } from './loader';
+import loader from './loader';
 
 describe('loader', () => {
   it('should change the language if it is different from the current language', async () => {
@@ -36,7 +37,7 @@ describe('loader', () => {
   });
 
   it('should fetch CSRF token if the request is successful', async () => {
-    const mockCsrf: RootLoaderData['csrf'] = {
+    const mockCsrf: components['schemas']['YksiloDto']['csrf'] = {
       headerName: 'headerName',
       parameterName: 'parameterName',
       token: 'token',
@@ -44,7 +45,10 @@ describe('loader', () => {
     vi.spyOn(global, 'fetch').mockImplementation(() =>
       Promise.resolve({
         ok: true,
-        json: () => Promise.resolve(mockCsrf),
+        json: () =>
+          Promise.resolve({
+            csrf: mockCsrf,
+          }),
       } as Response),
     );
 

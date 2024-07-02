@@ -1,6 +1,5 @@
 import { client } from '@/api/client';
 import { useAuth } from '@/hooks/useAuth';
-import { type RootLoaderData } from '@/routes/Root/loader';
 import { Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -27,7 +26,8 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
   const { sm } = useMediaQueries();
   const ehdotetutOsaamisetId = React.useId();
   const valitsemasiOsaamisetId = React.useId();
-  const { csrf } = useAuth() as { csrf: NonNullable<RootLoaderData['csrf']> };
+  const auth = useAuth();
+  const csrf = auth!.csrf;
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
 
