@@ -9,7 +9,7 @@ export const useActionBar = () => {
   React.useEffect(() => {
     // Create a new div element
     const element = document.createElement('div');
-    element.className = 'sticky bottom-0 bg-bg-gray print:hidden';
+    element.className = 'sticky bottom-0 bg-bg-gray-2 print:hidden';
     const parent = actionBar?.parentElement;
     // Insert the new element before the footer
     parent?.insertBefore(element, actionBar);
