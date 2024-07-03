@@ -62,6 +62,7 @@ const Root = () => {
       <ScrollRestoration />
       <Helmet>
         <html lang={i18n.language} />
+        <body className="bg-bg-gray" />
       </Helmet>
       <header role="banner" className="sticky top-0 z-10 print:hidden">
         <SkipLink hash="#jod-main" label={t('skiplinks.main')} />
