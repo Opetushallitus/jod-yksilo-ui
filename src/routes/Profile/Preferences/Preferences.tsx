@@ -35,12 +35,16 @@ const Preferences = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const kuva = auth?.kuva;
+  const csrf = auth!.csrf;
 
   const saveAvatar = async (file: File, hideDialog: () => void) => {
     const formData = new FormData();
     formData.append('file', file);
     await fetch('/api/yksilo/kuva', {
       method: 'POST',
+      headers: {
+        [csrf.headerName]: csrf.token,
+      },
       body: formData,
     });
     hideDialog();
@@ -48,7 +52,11 @@ const Preferences = () => {
   };
 
   const deleteImage = async () => {
-    await client.DELETE('/api/yksilo/kuva', {});
+    await client.DELETE('/api/yksilo/kuva', {
+      headers: {
+        [csrf.headerName]: csrf.token,
+      },
+    });
     navigate('.', { replace: true });
   };
 
