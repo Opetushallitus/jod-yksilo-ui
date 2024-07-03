@@ -6,7 +6,7 @@ import { Footer, NavigationBar, PopupList, SkipLink } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Outlet, ScrollRestoration, matchPath, useLoaderData, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router-dom';
 
 const NavigationBarItem = (to: string, text: string) => ({
   key: to,
@@ -49,10 +49,6 @@ const Root = () => {
       </a>
     ),
   }));
-  // If homepage, use light variant, otherwise use dark variant
-  const variant: React.ComponentProps<typeof Footer>['variant'] = matchPath(`/${i18n.language}`, pathname)
-    ? 'light'
-    : 'dark';
   const footerRef = React.useRef<HTMLDivElement>(null);
 
   const data = useLoaderData() as components['schemas']['YksiloDto'] | null;
@@ -120,7 +116,7 @@ const Root = () => {
       <ActionBarContext.Provider value={footerRef.current}>
         <Outlet />
       </ActionBarContext.Provider>
-      <Footer ref={footerRef} items={footerItems} logos={logos} copyright={t('copyright')} variant={variant} />
+      <Footer ref={footerRef} items={footerItems} logos={logos} copyright={t('copyright')} variant="light" />
     </AuthContext.Provider>
   );
 };
