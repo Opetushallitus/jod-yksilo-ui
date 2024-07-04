@@ -299,6 +299,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/tyomahdollisuudet/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['tyomahdollisuusFindById'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/kategoriat': {
     parameters: {
       query?: never;
@@ -490,23 +506,46 @@ export interface components {
       csrf: components['schemas']['CsrfTokenDto'];
     };
     SivuDtoTyomahdollisuusDto: {
-      sisalto?: components['schemas']['TyomahdollisuusDto'][];
-      /**
-       * Format: int64
-       * @example 10
-       */
-      maara?: number;
       /**
        * Format: int32
        * @example 1
        */
       sivuja?: number;
+      /**
+       * Format: int64
+       * @example 10
+       */
+      maara?: number;
+      sisalto?: components['schemas']['TyomahdollisuusDto'][];
     };
     TyomahdollisuusDto: {
       /** Format: uuid */
-      id?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
+      id: string;
+      otsikko: components['schemas']['LokalisoituTeksti'];
+      tiivistelma?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
+    };
+    ArvoDto: {
+      arvo?: string;
+      /** Format: double */
+      osuus?: number;
+    };
+    JakaumaDto: {
+      /** Format: int32 */
+      maara?: number;
+      /** Format: int32 */
+      tyhjia?: number;
+      arvot?: components['schemas']['ArvoDto'][];
+    };
+    TyomahdollisuusFullDto: {
+      /** Format: uuid */
+      id: string;
+      otsikko: components['schemas']['LokalisoituTeksti'];
+      tiivistelma?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      jakaumat?: {
+        [key: string]: components['schemas']['JakaumaDto'] | undefined;
+      };
     };
     OsaaminenDto: {
       /** Format: uri */
@@ -521,9 +560,9 @@ export interface components {
       lahde?: components['schemas']['OsaamisenLahdeDto'];
     };
     CsrfToken: {
-      parameterName?: string;
-      headerName?: string;
       token?: string;
+      headerName?: string;
+      parameterName?: string;
     };
   };
   responses: never;
@@ -1163,6 +1202,28 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['SivuDtoTyomahdollisuusDto'];
+        };
+      };
+    };
+  };
+  tyomahdollisuusFindById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['TyomahdollisuusFullDto'];
         };
       };
     };
