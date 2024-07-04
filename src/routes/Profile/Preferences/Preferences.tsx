@@ -68,6 +68,15 @@ const Preferences = () => {
     navigate('.', { replace: true });
   };
 
+  const deleteAccount = async () => {
+    await client.DELETE('/api/yksilo', {
+      headers: {
+        [csrf.headerName]: csrf.token,
+      },
+    });
+    window.location.href = '/';
+  };
+
   return (
     <MainLayout
       navChildren={
@@ -151,7 +160,18 @@ const Preferences = () => {
               </ConfirmDialog>
             )}
             <Button variant="white" label={t('preferences.share-my-competences')} disabled />
-            <Button variant="white-delete" label={t('preferences.delete-my-account')} disabled />
+            <ConfirmDialog
+              title={t('preferences.delete-my-account')}
+              onConfirm={() => void deleteAccount()}
+              confirmText={t('delete')}
+              cancelText={t('cancel')}
+              variant="destructive"
+              description={t('preferences.confirm-delete-my-account')}
+            >
+              {(showDialog: () => void) => (
+                <Button variant="white-delete" label={t('preferences.delete-my-account')} onClick={showDialog} />
+              )}
+            </ConfirmDialog>
           </div>,
           actionBar,
         )}

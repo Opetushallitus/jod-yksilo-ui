@@ -273,7 +273,7 @@ export interface paths {
     get: operations['yksiloGetYksilo'];
     put?: never;
     post?: never;
-    delete?: never;
+    delete: operations['yksiloDeleteYksilo'];
     options?: never;
     head?: never;
     patch?: never;
@@ -506,17 +506,17 @@ export interface components {
       csrf: components['schemas']['CsrfTokenDto'];
     };
     SivuDtoTyomahdollisuusDto: {
-      /**
-       * Format: int32
-       * @example 1
-       */
-      sivuja?: number;
+      sisalto?: components['schemas']['TyomahdollisuusDto'][];
       /**
        * Format: int64
        * @example 10
        */
       maara?: number;
-      sisalto?: components['schemas']['TyomahdollisuusDto'][];
+      /**
+       * Format: int32
+       * @example 1
+       */
+      sivuja?: number;
     };
     TyomahdollisuusDto: {
       /** Format: uuid */
@@ -560,9 +560,9 @@ export interface components {
       lahde?: components['schemas']['OsaamisenLahdeDto'];
     };
     CsrfToken: {
+      parameterName?: string;
       token?: string;
       headerName?: string;
-      parameterName?: string;
     };
   };
   responses: never;
@@ -1180,6 +1180,24 @@ export interface operations {
         content: {
           'application/json': components['schemas']['YksiloCsrfDto'];
         };
+      };
+    };
+  };
+  yksiloDeleteYksilo: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };

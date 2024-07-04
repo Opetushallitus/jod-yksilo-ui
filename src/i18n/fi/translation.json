@@ -141,6 +141,7 @@
   "preferences": {
     "add-image": "Lisää kuva",
     "confirm-delete-image": "Haluatko varmasti poistaa kuvan?",
+    "confirm-delete-my-account": "Haluatko varmasti poistaa tilisi?",
     "delete-image": "Poista kuva",
     "delete-my-account": "Poista tilini",
     "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius.",
