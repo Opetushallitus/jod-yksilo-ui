@@ -15,7 +15,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
   const patevyysId = watch(`patevyydet.${patevyys}.id`);
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
+      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2 font-poppins">
         {type === 'toiminta' && !id && t('free-time-activities.add-new-activity')}
         {type === 'toiminta' && id && t('free-time-activities.edit-activity')}
         {type === 'patevyys' && !patevyysId && t('free-time-activities.add-new-profiency')}

@@ -12,7 +12,7 @@ const AccessibilityStatement = () => {
   return (
     <>
       <Title value={title} />
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">{title}</h1>
       <p className="mb-8 text-body-md">
         Dignissim suspendisse in est ante. Egestas pretium aenean pharetra magna ac placerat. Quam adipiscing vitae
         proin sagittis. Lectus magna fringilla urna porttitor rhoncus dolor purus non. Neque vitae tempus quam

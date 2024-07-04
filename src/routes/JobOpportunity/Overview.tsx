@@ -58,13 +58,13 @@ const Overview = () => {
       }
     >
       <Title value={title} />
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">{title}</h1>
       <Tabs />
       <div className="flex flex-col gap-11">
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.description')} className="text-heading-3">
+              <h2 id={t('job-opportunity.description')} className="text-heading-3 font-poppins">
                 {t('job-opportunity.description')}
               </h2>
             }
@@ -78,7 +78,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.most-common-job-tasks.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.most-common-job-tasks.title')} className="text-heading-3 font-poppins">
                 {t('job-opportunity.most-common-job-tasks.title')}
               </h2>
             }
@@ -97,7 +97,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.key-figures.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.key-figures.title')} className="text-heading-3 font-poppins">
                 {t('job-opportunity.key-figures.title')}
               </h2>
             }
@@ -112,7 +112,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.labour-market-picture.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.labour-market-picture.title')} className="text-heading-3 font-poppins">
                 {t('job-opportunity.labour-market-picture.title')}
               </h2>
             }
@@ -127,7 +127,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.salary-trends.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.salary-trends.title')} className="text-heading-3 font-poppins">
                 {t('job-opportunity.salary-trends.title')}
               </h2>
             }
@@ -142,7 +142,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.employment-trends.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.employment-trends.title')} className="text-heading-3 font-poppins">
                 {t('job-opportunity.employment-trends.title')}
               </h2>
             }
@@ -157,7 +157,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.related-jobs.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.related-jobs.title')} className="text-heading-3 font-poppins">
                 {t('job-opportunity.related-jobs.title')}
               </h2>
             }

@@ -102,7 +102,7 @@ const SelectableTableRow = ({
               <>
                 <Checkbox
                   name="tyopaikka"
-                  label={<span className="pl-5 text-heading-4">{row.nimi[language]}</span>}
+                  label={<span className="pl-5 text-heading-4 font-poppins">{row.nimi[language]}</span>}
                   ariaLabel={row.nimi[language]}
                   value={row.nimi[language]}
                   checked={row.checked}
@@ -122,7 +122,7 @@ const SelectableTableRow = ({
               </>
             ) : (
               <div>
-                <span className="pr-5 text-heading-4">{row.nimi[language]}</span>
+                <span className="pr-5 text-heading-4 font-poppins">{row.nimi[language]}</span>
                 {!sm && (
                   <div className="flex gap-5 pb-2 pt-1 text-body-xs font-bold text-secondary-gray">
                     <p>

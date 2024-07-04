@@ -16,7 +16,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
 
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
+      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2 font-poppins">
         {type === 'tyopaikka' && !id && t('work-history.add-new-workplace')}
         {type === 'tyopaikka' && id && t('work-history.edit-workplace')}
         {type === 'toimenkuva' && !toimenkuvaId && t('work-history.add-new-job-description')}

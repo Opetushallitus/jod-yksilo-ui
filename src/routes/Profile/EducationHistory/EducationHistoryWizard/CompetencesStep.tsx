@@ -18,10 +18,10 @@ const CompetencesStep = ({ tutkinto }: CompetencesStepProps) => {
 
   return (
     <>
-      <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">
+      <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2 font-poppins">
         {id ? t('education-history.edit-competences') : t('education-history.identify-competences')}
       </h2>
-      <h3 className="mb-4 text-heading-5 text-black sm:mb-5 sm:text-heading-3">
+      <h3 className="mb-4 text-heading-5 text-black sm:mb-5 sm:text-heading-3 sm:font-poppins">
         {getValues('nimi') && `${getValues('nimi')} - `}
         {getValues(`koulutukset.${tutkinto}.nimi`)}
       </h3>
