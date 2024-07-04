@@ -24,8 +24,6 @@ interface OsaamisSuosittelijaProps {
 export const OsaamisSuosittelija = ({ description, value = [], onChange }: OsaamisSuosittelijaProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
-  const ehdotetutOsaamisetId = React.useId();
-  const valitsemasiOsaamisetId = React.useId();
   const auth = useAuth();
   const csrf = auth?.csrf;
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
@@ -76,20 +74,10 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
 
   return (
     <div className={`mb-6 ${sm ? 'grid grid-cols-3 gap-x-5' : 'flex flex-col'}`}>
-      <div className={`${sm ? 'col-span-1' : 'order-1'} flex items-end`}>
-        <label htmlFor={ehdotetutOsaamisetId} className="mb-4 inline-block align-top text-form-label text-black">
-          {t('work-history.proposed-competences')}
-        </label>
-      </div>
-      <div className={`${sm ? 'col-span-2' : 'order-3'} flex items-end`}>
-        <label htmlFor={valitsemasiOsaamisetId} className="mb-4 inline-block align-top text-form-label text-black">
-          {t('work-history.competences-of-your-choice')}
-        </label>
-      </div>
       <div
-        className={`${sm ? 'col-span-1' : 'order-2 mb-6'} h-[400px] overflow-y-auto rounded-[10px] border-[5px] border-solid border-border-gray p-5`}
+        className={`${sm ? 'col-span-1' : 'order-2 mb-6'} h-[400px] overflow-y-auto rounded border border-border-gray p-5 bg-white`}
       >
-        <div id={ehdotetutOsaamisetId} className="flex flex-wrap gap-3">
+        <div aria-label={t('work-history.proposed-competences')} className="flex flex-wrap gap-3">
           {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen) => (
             <Tag
               key={ehdotettuOsaaminen.id}
@@ -103,9 +91,9 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
         </div>
       </div>
       <div
-        className={`${sm ? 'col-span-2' : 'order-4'} h-[400px] overflow-y-auto rounded-[10px] border-[5px] border-solid border-border-gray p-5`}
+        className={`${sm ? 'col-span-2' : 'order-4'} h-[400px] overflow-y-auto rounded border border-border-gray p-5 bg-white`}
       >
-        <div id={valitsemasiOsaamisetId} className="flex flex-wrap gap-3">
+        <div aria-label={t('work-history.competences-of-your-choice')} className="flex flex-wrap gap-3">
           {value.map((val) => (
             <Tag
               key={val.id}
