@@ -18,10 +18,10 @@ const ProfiencyStep = ({ patevyys }: ProfiencyStepProps) => {
 
   return (
     <>
-      <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">
+      <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2 font-poppins">
         {id ? t('free-time-activities.edit-proficiencies') : t('free-time-activities.identify-proficiencies')}
       </h2>
-      <h3 className="mb-4 text-heading-5 text-black sm:mb-5 sm:text-heading-3">
+      <h3 className="mb-4 text-heading-5 text-black sm:mb-5 sm:text-heading-3 sm:font-poppins">
         {getValues('nimi')} - {getValues(`patevyydet.${patevyys}.nimi`)}
       </h3>
       <p className="mb-7 text-body-sm text-black sm:mb-9">

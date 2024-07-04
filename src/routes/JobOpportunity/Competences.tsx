@@ -43,13 +43,16 @@ const Competences = () => {
       }
     >
       <Title value={title} />
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">{title}</h1>
       <Tabs />
       <div className="flex flex-col gap-11">
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.specific-professional-competences.title')} className="text-heading-3">
+              <h2
+                id={t('job-opportunity.specific-professional-competences.title')}
+                className="text-heading-3 font-poppins"
+              >
                 {t('job-opportunity.specific-professional-competences.title')}
               </h2>
             }
@@ -70,7 +73,7 @@ const Competences = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.general-working-life-skills.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.general-working-life-skills.title')} className="text-heading-3 font-poppins">
                 {t('job-opportunity.general-working-life-skills.title')}
               </h2>
             }
@@ -85,7 +88,7 @@ const Competences = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.digital-skills-for-citizens.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.digital-skills-for-citizens.title')} className="text-heading-3 font-poppins">
                 {t('job-opportunity.digital-skills-for-citizens.title')}
               </h2>
             }
@@ -100,7 +103,7 @@ const Competences = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.personal-characteristics.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.personal-characteristics.title')} className="text-heading-3 font-poppins">
                 {t('job-opportunity.personal-characteristics.title')}
               </h2>
             }

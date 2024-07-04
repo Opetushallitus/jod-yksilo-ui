@@ -8,7 +8,7 @@ const WhereCanIGetMoreHelp = () => {
   return (
     <>
       <Title value={title} />
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">{title}</h1>
       <p className="mb-8 text-body-md">
         Laoreet suspendisse interdum consectetur libero id faucibus. Quisque egestas diam in arcu. A cras semper auctor
         neque vitae tempus quam. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae congue. Ac feugiat sed lectus

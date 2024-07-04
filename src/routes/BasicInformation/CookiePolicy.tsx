@@ -13,11 +13,11 @@ const CookiePolicy = () => {
   return (
     <>
       <Title value={title} />
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">{title}</h1>
       <p className="mb-5 text-body-sm text-secondary-gray">
         {t('updated')}: {updated}
       </p>
-      <p className="mb-8 text-body-lg">
+      <p className="mb-8 text-body-lg font-poppins">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Vulputate mi sit amet mauris commodo quis. Amet mauris commodo quis imperdiet massa tincidunt nunc
         pulvinar sapien. Maecenas volutpat blandit aliquam etiam erat velit scelerisque. Lorem mollis aliquam ut
@@ -27,7 +27,7 @@ const CookiePolicy = () => {
         tempor commodo ullamcorper. Pellentesque massa placerat duis ultricies lacus sed. Quis imperdiet massa tincidunt
         nunc pulvinar sapien.
       </p>
-      <h2 className="mb-5 text-heading-4">Eu mi bibendum neque egestas?</h2>
+      <h2 className="mb-5 text-heading-4 font-poppins">Eu mi bibendum neque egestas?</h2>
       <p className="mb-8 text-body-md">
         Eu mi bibendum neque egestas congue quisque egestas. Turpis egestas sed tempus urna et. Eleifend donec pretium
         vulputate sapien. Faucibus ornare suspendisse sed nisi lacus. Vel quam elementum pulvinar etiam non quam lacus
@@ -36,7 +36,7 @@ const CookiePolicy = () => {
         elit pellentesque habitant morbi tristique senectus et netus et. Dui nunc mattis enim ut tellus elementum
         sagittis vitae. Justo eget magna fermentum iaculis eu non.
       </p>
-      <h2 className="mb-5 text-heading-4">Volutpat ac tincidunt vitae semper?</h2>
+      <h2 className="mb-5 text-heading-4 font-poppins">Volutpat ac tincidunt vitae semper?</h2>
       <p className="mb-8 text-body-md">
         Volutpat ac tincidunt vitae semper quis lectus nulla. Neque gravida in fermentum et sollicitudin ac orci
         phasellus egestas. Facilisi nullam vehicula ipsum a arcu cursus. Vestibulum mattis ullamcorper velit sed
@@ -46,7 +46,7 @@ const CookiePolicy = () => {
         aliquet bibendum enim facilisis gravida neque. Nulla malesuada pellentesque elit eget gravida cum sociis natoque
         penatibus. Sodales ut eu sem integer vitae justo.
       </p>
-      <h2 className="mb-5 text-heading-4">Odio facilisis mauris sit amet</h2>
+      <h2 className="mb-5 text-heading-4 font-poppins">Odio facilisis mauris sit amet</h2>
       <p className="mb-8 text-body-md">
         Odio facilisis mauris sit amet. Eu tincidunt tortor aliquam nulla. Amet consectetur adipiscing elit ut aliquam
         purus sit. Diam quam nulla porttitor massa. Interdum posuere lorem ipsum dolor. Id leo in vitae turpis. Et
@@ -57,7 +57,7 @@ const CookiePolicy = () => {
         facilisi nullam vehicula ipsum. Non enim praesent elementum facilisis. Amet mattis vulputate enim nulla aliquet.
         Condimentum vitae sapien pellentesque habitant morbi tristique.
       </p>
-      <h2 className="mb-5 text-heading-4">Nisl suscipit adipiscing bibendum</h2>
+      <h2 className="mb-5 text-heading-4 font-poppins">Nisl suscipit adipiscing bibendum</h2>
       <p className="mb-8 text-body-md">
         Nisl suscipit adipiscing bibendum est ultricies integer. Ac turpis egestas maecenas pharetra. Lorem ipsum dolor
         sit amet consectetur adipiscing elit. In ante metus dictum at tempor commodo ullamcorper a lacus. Tincidunt

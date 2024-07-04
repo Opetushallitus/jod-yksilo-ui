@@ -8,7 +8,7 @@ const WhatIsTheService = () => {
   return (
     <>
       <Title value={title} />
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">{title}</h1>
       <p className="mb-8 text-body-md">
         Non curabitur gravida arcu ac tortor dignissim. Eget lorem dolor sed viverra ipsum. Nibh mauris cursus mattis
         molestie a iaculis at erat pellentesque. Sagittis orci a scelerisque purus. Consequat nisl vel pretium lectus

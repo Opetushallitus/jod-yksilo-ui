@@ -77,7 +77,7 @@ const Preferences = () => {
       }
     >
       <Title value={title} />
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{t('welcome', { name: 'Reetta' })}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">{t('welcome', { name: 'Reetta' })}</h1>
       <p className="mb-8 text-body-md">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
@@ -111,7 +111,7 @@ const Preferences = () => {
                   <section>
                     <div
                       {...getRootProps()}
-                      className="flex-col border-2 border-[#CECECE] border-dashed w-full h-[200px] bg-bg-gray rounded-md p-4 text-body-sm text-accent text-center flex gap-5 items-center cursor-pointer justify-center"
+                      className="flex-col border-2 border-[#CECECE] border-dashed w-full h-[200px] bg-bg-gray rounded-md p-4 text-body-sm text-accent text-center flex gap-5 items-center cursor-pointer justify-center font-poppins"
                     >
                       <input {...getInputProps()} />
                       {isDragActive ? (

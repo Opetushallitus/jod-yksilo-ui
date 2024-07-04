@@ -30,7 +30,7 @@ export const OpportunityCard = ({ name, description, matchValue, matchLabel, typ
       <div className="flex flex-col sm:flex-row sm:gap-5 gap-3">
         <Match match={matchValue} label={matchLabel} bg={bgForType(type)} />
         <div className="flex flex-col">
-          <span className="text-heading-3 text-black">{name}</span>
+          <span className="text-heading-3 font-poppins text-black">{name}</span>
           <span className="text-[16px]">{description}</span>
         </div>
       </div>

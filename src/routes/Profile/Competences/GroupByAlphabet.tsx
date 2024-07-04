@@ -23,7 +23,7 @@ export const GroupByAlphabet = ({ locale, osaamiset, deleteOsaaminen, isOsaamine
   );
   return (
     <>
-      <h2 className="mb-6 text-heading-3">Osaamiseni aakkosjärjestyksessä</h2>
+      <h2 className="mb-6 text-heading-3 font-poppins">Osaamiseni aakkosjärjestyksessä</h2>
       {Array.from(alphabet)
         .filter(letterHasOsaaminen)
         .map((letter) => {
