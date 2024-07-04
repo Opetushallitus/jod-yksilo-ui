@@ -185,22 +185,19 @@ const Competences = () => {
           </span>
         </div>
 
-        <div className="col-span-2 mt-6 grid grid-cols-1 gap-6 sm:col-span-6 sm:mt-5 sm:grid-cols-3">
+        <div className="col-span-2 mt-6 grid grid-cols-1 gap-7 sm:col-span-6 sm:mt-5 sm:grid-cols-3">
           <Slider
             label="Osaamiset"
-            icon="school"
             onValueChange={(val) => setCompetencesMultiplier(val)}
             value={competencesMultiplier}
           />
           <Slider
             label="Kiinnostukset"
-            icon="interests"
             onValueChange={(val) => setInterestMultiplier(val)}
             value={interestMultiplier}
           />
           <Slider
             label="Rajoitukset"
-            icon="block"
             onValueChange={(val) => setRestrictionsMultiplier(val)}
             value={restrictionsMultiplier}
           />
