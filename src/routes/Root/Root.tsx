@@ -51,7 +51,7 @@ const Root = () => {
   }));
   const footerRef = React.useRef<HTMLDivElement>(null);
 
-  const data = useLoaderData() as components['schemas']['YksiloDto'] | null;
+  const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
   const name = 'Reetta Räppänä';
 
   return (

@@ -40,12 +40,20 @@ const Preferences = () => {
   const saveAvatar = async (file: File, hideDialog: () => void) => {
     const formData = new FormData();
     formData.append('file', file);
-    await fetch('/api/yksilo/kuva', {
-      method: 'POST',
+    await client.POST('/api/yksilo/kuva', {
       headers: {
         [csrf.headerName]: csrf.token,
       },
-      body: formData,
+      body: {
+        file: file as unknown as string,
+      },
+      bodySerializer(body) {
+        const fd = new FormData();
+        if (body) {
+          fd.append('file', body.file);
+        }
+        return fd;
+      },
     });
     hideDialog();
     navigate('.', { replace: true });
