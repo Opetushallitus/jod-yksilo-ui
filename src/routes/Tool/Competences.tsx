@@ -20,7 +20,8 @@ import { NavLink } from 'react-router-dom';
 
 interface Tyomahdollisuus {
   id?: string;
-  nimi: Record<string, string | undefined>;
+  otsikko: Record<string, string | undefined>;
+  tiivistelma?: Record<string, string | undefined>;
   kuvaus?: Record<string, string | undefined>;
 }
 
@@ -250,8 +251,8 @@ const Competences = () => {
                   to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${crypto.randomUUID()}`}
                 >
                   <OpportunityCard
-                    name={item.nimi[i18n.language] ?? ''}
-                    description={item.kuvaus?.[i18n.language] ?? ''}
+                    name={item.otsikko[i18n.language] ?? ''}
+                    description={item.tiivistelma?.[i18n.language] ?? ''}
                     matchValue={99}
                     matchLabel="Sopivuus"
                     type={'work'}
