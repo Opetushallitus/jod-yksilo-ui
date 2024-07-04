@@ -27,7 +27,7 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
   const ehdotetutOsaamisetId = React.useId();
   const valitsemasiOsaamisetId = React.useId();
   const auth = useAuth();
-  const csrf = auth!.csrf;
+  const csrf = auth?.csrf;
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
 
@@ -39,10 +39,14 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
 
     const fetchCompetences = async (kuvaus: string) => {
       try {
+        const csrfHeaders: Record<string, string> = {};
+        if (csrf) {
+          csrfHeaders[csrf.headerName] = csrf.token;
+        }
         const { data } = (await client.POST('/api/ehdotus/osaamiset', {
           headers: {
             'Content-Type': 'application/json',
-            [csrf.headerName]: csrf.token,
+            ...csrfHeaders,
           },
           body: { kuvaus },
           signal: abortController.current?.signal,
