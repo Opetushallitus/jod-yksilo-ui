@@ -19,7 +19,7 @@ export default (async ({ params: { lng }, request }) => {
     signal: request.signal,
   });
   if (response.ok) {
-    return (await response.json()) as components['schemas']['YksiloDto'];
+    return (await response.json()) as components['schemas']['YksiloCsrfDto'];
   }
 
   return null;

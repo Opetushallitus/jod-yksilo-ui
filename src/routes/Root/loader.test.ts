@@ -37,7 +37,7 @@ describe('loader', () => {
   });
 
   it('should fetch CSRF token if the request is successful', async () => {
-    const mockCsrf: components['schemas']['YksiloDto']['csrf'] = {
+    const mockCsrf: components['schemas']['YksiloCsrfDto']['csrf'] = {
       headerName: 'headerName',
       parameterName: 'parameterName',
       token: 'token',

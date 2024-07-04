@@ -1,7 +1,7 @@
 import { components } from '@/api/schema';
 import React from 'react';
 
-export const AuthContext = React.createContext<components['schemas']['YksiloDto'] | null>(null);
+export const AuthContext = React.createContext<components['schemas']['YksiloCsrfDto'] | null>(null);
 
 export const useAuth = () => {
   const context = React.useContext(AuthContext);

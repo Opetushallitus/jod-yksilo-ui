@@ -478,16 +478,16 @@ export interface components {
       osuvuus?: number;
     };
     CsrfTokenDto: {
+      token: string;
       headerName: string;
       parameterName: string;
-      token: string;
     };
-    YksiloDto: {
+    YksiloCsrfDto: {
       /** Format: uuid */
       id: string;
-      csrf: components['schemas']['CsrfTokenDto'];
       /** Format: uuid */
       kuva?: string;
+      csrf: components['schemas']['CsrfTokenDto'];
     };
     SivuDtoTyomahdollisuusDto: {
       sisalto?: components['schemas']['TyomahdollisuusDto'][];
@@ -589,7 +589,7 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': {
+        'multipart/form-data': {
           /** Format: binary */
           file: string;
         };
@@ -1139,7 +1139,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['YksiloDto'];
+          'application/json': components['schemas']['YksiloCsrfDto'];
         };
       };
     };
