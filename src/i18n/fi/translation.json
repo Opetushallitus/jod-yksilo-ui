@@ -131,7 +131,8 @@
   "more-information": "Lisätietoa",
   "my-competences": {
     "by-KOULUTUS": "Koulutuksen mukaan",
-    "by-TOIMENKUVA": "Toimenkuvan mukaan"
+    "by-TOIMENKUVA": "Toimenkuvan mukaan",
+    "by-PATEVYYS": "Vapaa-ajan toiminnon mukaan"
   },
   "next": "Seuraava",
   "no-match": {
@@ -227,7 +228,8 @@
   "types": {
     "competence": {
       "KOULUTUS": "Koulutus",
-      "TOIMENKUVA": "Toimenkuva"
+      "TOIMENKUVA": "Toimenkuva",
+      "PATEVYYS": "Vapaa-ajan toiminto"
     }
   },
   "updated": "Päivitetty",

@@ -21,7 +21,7 @@ import { GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME, type FiltersType } 
 
 const Competences = () => {
   const routes: RoutesNavigationListProps['routes'] = useOutletContext();
-  const { toimenkuvat, koulutukset, osaamiset: osaamisetData } = useLoaderData() as CompetencesLoaderData;
+  const { toimenkuvat, koulutukset, patevyydet, osaamiset: osaamisetData } = useLoaderData() as CompetencesLoaderData;
   const [initialized, setInitialized] = React.useState(false);
   const [osaamiset, setOsaamiset] = React.useState(osaamisetData);
   const { t, i18n } = useTranslation();
@@ -58,11 +58,14 @@ const Competences = () => {
         if (type === 'KOULUTUS') {
           initialFilters[type] = koulutukset.map(mapExperienceToFilter(selectedFilters, type));
         }
+        if (type === 'PATEVYYS') {
+          initialFilters[type] = patevyydet.map(mapExperienceToFilter(selectedFilters, type));
+        }
       });
 
       return initialFilters;
     },
-    [koulutukset, mapExperienceToFilter, selectedFilters, toimenkuvat],
+    [koulutukset, mapExperienceToFilter, patevyydet, selectedFilters, toimenkuvat],
   );
 
   React.useEffect(() => {
