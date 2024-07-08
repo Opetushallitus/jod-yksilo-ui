@@ -1,4 +1,4 @@
-/* eslint-disable sonarjs/cognitive-complexity */
+/* eslint-disable sonarjs/cognitive-complexity, sonarjs/no-duplicate-string */
 import { client } from '@/api/client';
 import { SelectableTableRow } from '@/components';
 import { useAuth } from '@/hooks/useAuth';
@@ -36,9 +36,11 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
     resolver: zodResolver(
       z
         .object({
+          id: z.string().optional(),
           nimi: z.string().min(1).optional().or(z.literal('')),
           koulutukset: z
             .object({
+              id: z.string().optional(),
               nimi: z.string().min(1),
               alkuPvm: z.string().date(),
               loppuPvm: z.string().date().optional().or(z.literal('')),
@@ -60,16 +62,8 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
       // Fetch osaamiset and koulutukset if the koulutus is defined
       if (selectedRow?.key) {
         const [osaamiset, koulutukset] = await Promise.all([
-          client.GET('/api/profiili/osaamiset', {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }),
-          client.GET('/api/profiili/koulutukset', {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }),
+          client.GET('/api/profiili/osaamiset'),
+          client.GET('/api/profiili/koulutukset'),
         ]);
         const koulutus =
           koulutukset.data?.find((koulutus) => koulutus.kategoria?.id === selectedRow.key) ??
@@ -77,6 +71,7 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
             koulutus.koulutukset?.some((koulutus) => koulutus.id === selectedRow.key),
           );
         return {
+          id: koulutus?.kategoria?.id,
           nimi: koulutus?.kategoria?.nimi?.[language] ?? '',
           koulutukset:
             koulutus?.koulutukset?.map((tutkinto) => ({
@@ -119,82 +114,35 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
     name: 'koulutukset',
   });
   const onSubmit: FormSubmitHandler<EducationHistoryForm> = async ({ data }: { data: EducationHistoryForm }) => {
-    // Update the kategoria if it exists
-    if (selectedRow?.key) {
-      const actions = [];
-      if (data.nimi.length > 0) {
-        actions.push(
-          client.PATCH('/api/profiili/kategoriat/{id}', {
-            params: {
-              path: { id: selectedRow.key },
-            },
-            headers: {
-              'Content-Type': 'application/json',
-              [csrf.headerName]: csrf.token,
-            },
-            body: {
-              id: selectedRow.key,
+    const params = {
+      headers: {
+        'Content-Type': 'application/json',
+        [csrf.headerName]: csrf.token,
+      },
+      body: {
+        kategoria: data.nimi
+          ? {
+              id: data.id,
               nimi: {
                 [language]: data.nimi,
               },
-            },
-          }),
-        );
-      }
-      data.koulutukset.map((koulutus, index) => {
-        const koulutusId = methods.watch(`koulutukset.${index}.id`);
-        if (koulutusId) {
-          actions.push(
-            client.PATCH('/api/profiili/koulutukset/{id}', {
-              params: {
-                path: { id: koulutusId },
-              },
-              headers: {
-                'Content-Type': 'application/json',
-                [csrf.headerName]: csrf.token,
-              },
-              body: {
-                id: koulutusId,
-                nimi: {
-                  [language]: koulutus.nimi,
-                },
-                alkuPvm: koulutus.alkuPvm,
-                loppuPvm: koulutus.loppuPvm,
-                osaamiset: koulutus.osaamiset.map((osaaminen) => osaaminen.id),
-              },
-            }),
-          );
-        } else {
-          // TODO: Implement koulutus creation in the backend
-        }
-        // TODO: remove deleted koulutukset
-      });
-
-      await Promise.all(actions);
+            }
+          : undefined,
+        koulutukset: data.koulutukset.map((tutkinto) => ({
+          id: tutkinto.id,
+          nimi: {
+            [language]: tutkinto.nimi,
+          },
+          alkuPvm: tutkinto.alkuPvm,
+          loppuPvm: tutkinto.loppuPvm,
+          osaamiset: tutkinto.osaamiset.map((osaaminen) => osaaminen.id),
+        })),
+      },
+    };
+    if (selectedRow?.key) {
+      await client.PUT('/api/profiili/koulutukset', params);
     } else {
-      await client.POST('/api/profiili/koulutukset', {
-        headers: {
-          'Content-Type': 'application/json',
-          [csrf.headerName]: csrf.token,
-        },
-        body: {
-          kategoria: data.nimi
-            ? {
-                nimi: {
-                  [language]: data.nimi,
-                },
-              }
-            : undefined,
-          koulutukset: data.koulutukset.map((tutkinto) => ({
-            nimi: {
-              [language]: tutkinto.nimi,
-            },
-            alkuPvm: tutkinto.alkuPvm,
-            loppuPvm: tutkinto.loppuPvm,
-            osaamiset: tutkinto.osaamiset.map((osaaminen) => osaaminen.id),
-          })),
-        },
-      });
+      await client.POST('/api/profiili/koulutukset', params);
     }
     setIsOpen(false);
     navigate('.', { replace: true });
