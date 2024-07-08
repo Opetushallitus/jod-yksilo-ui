@@ -39,22 +39,21 @@ const EducationHistory = () => {
   }, [koulutukset]);
 
   const deleteKoulutukset = async () => {
-    await Promise.all(
-      checkedRows
-        .map((row) => row.key)
-        .map((id) => {
-          const koulutus = koulutukset.filter((row) => row.kategoria).find((row) => row.kategoria?.id === id);
-          return (koulutus?.koulutukset.map((koulutus) => koulutus.id as unknown as string) ?? [id]).map((id) =>
-            client.DELETE('/api/profiili/koulutukset/{id}', {
-              headers: {
-                [csrf.headerName]: csrf.token,
-              },
-              params: { path: { id } },
-            }),
-          );
-        })
-        .flat(),
-    );
+    const ids = checkedRows
+      .map((row) => row.key)
+      .map((id) => {
+        const koulutus = koulutukset.filter((row) => row.kategoria).find((row) => row.kategoria?.id === id);
+        return koulutus?.koulutukset.map((koulutus) => koulutus.id as unknown as string) ?? [id];
+      })
+      .flat();
+
+    await client.DELETE('/api/profiili/koulutukset', {
+      headers: {
+        [csrf.headerName]: csrf.token,
+      },
+      params: { query: { ids } },
+    });
+
     navigate('.', { replace: true });
   };
 

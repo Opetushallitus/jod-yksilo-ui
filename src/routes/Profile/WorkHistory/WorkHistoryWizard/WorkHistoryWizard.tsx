@@ -36,9 +36,11 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
     resolver: zodResolver(
       z
         .object({
+          id: z.string().optional(),
           nimi: z.string().min(1),
           toimenkuvat: z
             .object({
+              id: z.string().optional(),
               nimi: z.string().min(1),
               alkuPvm: z.string().date(),
               loppuPvm: z.string().date().optional().or(z.literal('')),
@@ -131,20 +133,19 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
           [csrf.headerName]: csrf.token,
         },
         body: {
-          id: methods.watch('id'),
+          id: data.id,
           nimi: {
             [language]: data.nimi,
           },
-          // TODO: Implement toimenkuvat in the backend
-          // toimenkuvat: data.toimenkuvat.map((toimenkuva, index) => ({
-          //   id: methods.watch(`toimenkuvat.${index}.id`),
-          //   nimi: {
-          //     [language]: toimenkuva.nimi,
-          //   },
-          //   alkuPvm: toimenkuva.alkuPvm,
-          //   loppuPvm: toimenkuva.loppuPvm,
-          //   osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
-          // })),
+          toimenkuvat: data.toimenkuvat.map((toimenkuva) => ({
+            id: toimenkuva.id,
+            nimi: {
+              [language]: toimenkuva.nimi,
+            },
+            alkuPvm: toimenkuva.alkuPvm,
+            loppuPvm: toimenkuva.loppuPvm,
+            osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
+          })),
         },
       });
     } else {
