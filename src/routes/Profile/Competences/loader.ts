@@ -12,7 +12,7 @@ export interface CompetencesLoaderData {
 export default (async ({ request }) => {
   const { data: osaamiset } = await client.GET('/api/profiili/osaamiset', { signal: request.signal });
   const { data: tyopaikat } = await client.GET('/api/profiili/tyopaikat', { signal: request.signal });
-  const { data: koulut } = await client.GET('/api/profiili/koulutukset', { signal: request.signal });
+  const { data: koulut } = await client.GET('/api/profiili/koulutuskokonaisuudet', { signal: request.signal });
   const { data: vapaaAjanToiminnot } = await client.GET('/api/profiili/vapaa-ajan-toiminnot', {
     signal: request.signal,
   });

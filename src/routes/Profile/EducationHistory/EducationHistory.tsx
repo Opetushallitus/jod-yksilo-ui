@@ -47,7 +47,7 @@ const EducationHistory = () => {
       })
       .flat();
 
-    await client.DELETE('/api/profiili/koulutukset', {
+    await client.DELETE('/api/profiili/koulutuskokonaisuudet/koulutukset', {
       headers: {
         [csrf.headerName]: csrf.token,
       },
