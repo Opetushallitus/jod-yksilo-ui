@@ -24,7 +24,7 @@ const Favorites = () => {
     <MainLayout
       navChildren={
         <div className="flex flex-col gap-5">
-          <SimpleNavigationList title={t('profile.index')} collapsible>
+          <SimpleNavigationList title={t('profile.index')}>
             <RoutesNavigationList routes={navigationRoutes} />
           </SimpleNavigationList>
           <SimpleNavigationList title="Sisältö" collapsible>
