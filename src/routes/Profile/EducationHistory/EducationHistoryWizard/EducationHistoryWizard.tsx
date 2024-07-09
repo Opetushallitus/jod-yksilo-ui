@@ -63,7 +63,7 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
       if (selectedRow?.key) {
         const [osaamiset, koulutukset] = await Promise.all([
           client.GET('/api/profiili/osaamiset'),
-          client.GET('/api/profiili/koulutukset'),
+          client.GET('/api/profiili/koulutuskokonaisuudet'),
         ]);
         const koulutus =
           koulutukset.data?.find((koulutus) => koulutus.kategoria?.id === selectedRow.key) ??
@@ -140,9 +140,9 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
       },
     };
     if (selectedRow?.key) {
-      await client.PUT('/api/profiili/koulutukset', params);
+      await client.PUT('/api/profiili/koulutuskokonaisuudet', params);
     } else {
-      await client.POST('/api/profiili/koulutukset', params);
+      await client.POST('/api/profiili/koulutuskokonaisuudet', params);
     }
     setIsOpen(false);
     navigate('.', { replace: true });

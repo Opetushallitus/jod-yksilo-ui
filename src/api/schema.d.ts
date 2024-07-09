@@ -30,7 +30,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/koulutukset': {
+  '/api/profiili/koulutuskokonaisuudet': {
     parameters: {
       query?: never;
       header?: never;
@@ -38,37 +38,37 @@ export interface paths {
       cookie?: never;
     };
     /** Get all koulutukset and kategoriat of the user */
-    get: operations['koulutusFind'];
+    get: operations['koulutusKokonaisuusFindAll'];
     /**
      * Updates a set of Koulutus
      * @description If an existing Koulutus in a Kategoria is omitted, it will be removed.
      */
-    put: operations['koulutusUpdate'];
+    put: operations['koulutusKokonaisuusUpdate'];
     /** Creates a set of Koulutus associated with an optional Kategoria, creating the Kategoria if necessary */
-    post: operations['koulutusAdd'];
-    delete: operations['koulutusDeleteAll'];
+    post: operations['koulutusKokonaisuusAdd'];
+    delete?: never;
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/koulutukset/{id}': {
+  '/api/profiili/koulutuskokonaisuudet/koulutukset/{id}': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    get: operations['koulutusGet'];
-    put: operations['koulutusUpdateKoulutus'];
+    get: operations['koulutusKokonaisuusGetKoulutus'];
+    put: operations['koulutusKokonaisuusUpdateKoulutus'];
     post?: never;
-    delete: operations['koulutusDelete'];
+    delete: operations['koulutusKokonaisuusDeleteKoulutus'];
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/koulutukset/kategoriat/{id}': {
+  '/api/profiili/koulutuskokonaisuudet/kategoriat/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -76,7 +76,7 @@ export interface paths {
       cookie?: never;
     };
     get?: never;
-    put: operations['koulutusUpdateKategoria'];
+    put: operations['koulutusKokonaisuusUpdateKategoria'];
     post?: never;
     delete?: never;
     options?: never;
@@ -295,14 +295,14 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/koulutukset/kategoriat': {
+  '/api/profiili/koulutuskokonaisuudet/kategoriat': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    get: operations['koulutusGetKategoriat'];
+    get: operations['koulutusKokonaisuusGetKategoriat'];
     put?: never;
     post?: never;
     delete?: never;
@@ -370,6 +370,26 @@ export interface paths {
     put?: never;
     post?: never;
     delete: operations['yksilonOsaaminenDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/koulutuskokonaisuudet/koulutukset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    /**
+     * Deletes one or more Koulutus by ID
+     * @description Possible resulting empty Kategoria are alse removed.
+     */
+    delete: operations['koulutusKokonaisuusDeleteKoulutukset'];
     options?: never;
     head?: never;
     patch?: never;
@@ -596,9 +616,11 @@ export interface operations {
       };
     };
   };
-  koulutusFind: {
+  koulutusKokonaisuusFindAll: {
     parameters: {
-      query?: never;
+      query?: {
+        kategoria?: string;
+      };
       header?: never;
       path?: never;
       cookie?: never;
@@ -616,7 +638,7 @@ export interface operations {
       };
     };
   };
-  koulutusUpdate: {
+  koulutusKokonaisuusUpdate: {
     parameters: {
       query?: never;
       header?: never;
@@ -640,7 +662,7 @@ export interface operations {
       };
     };
   };
-  koulutusAdd: {
+  koulutusKokonaisuusAdd: {
     parameters: {
       query?: never;
       header?: never;
@@ -664,27 +686,7 @@ export interface operations {
       };
     };
   };
-  koulutusDeleteAll: {
-    parameters: {
-      query: {
-        ids: string[];
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  koulutusGet: {
+  koulutusKokonaisuusGetKoulutus: {
     parameters: {
       query?: never;
       header?: never;
@@ -706,7 +708,7 @@ export interface operations {
       };
     };
   };
-  koulutusUpdateKoulutus: {
+  koulutusKokonaisuusUpdateKoulutus: {
     parameters: {
       query?: never;
       header?: never;
@@ -730,7 +732,7 @@ export interface operations {
       };
     };
   };
-  koulutusDelete: {
+  koulutusKokonaisuusDeleteKoulutus: {
     parameters: {
       query?: never;
       header?: never;
@@ -750,7 +752,7 @@ export interface operations {
       };
     };
   };
-  koulutusUpdateKategoria: {
+  koulutusKokonaisuusUpdateKategoria: {
     parameters: {
       query?: never;
       header?: never;
@@ -979,7 +981,7 @@ export interface operations {
     parameters: {
       query?: {
         tyyppi?: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS';
-        id?: string;
+        lahdeId?: string;
       };
       header?: never;
       path?: never;
@@ -1263,7 +1265,7 @@ export interface operations {
       };
     };
   };
-  koulutusGetKategoriat: {
+  koulutusKokonaisuusGetKategoriat: {
     parameters: {
       query?: never;
       header?: never;
@@ -1352,6 +1354,26 @@ export interface operations {
       path: {
         id: string;
       };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  koulutusKokonaisuusDeleteKoulutukset: {
+    parameters: {
+      query: {
+        ids: string[];
+      };
+      header?: never;
+      path?: never;
       cookie?: never;
     };
     requestBody?: never;
