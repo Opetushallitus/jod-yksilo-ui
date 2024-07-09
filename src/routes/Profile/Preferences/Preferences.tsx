@@ -80,7 +80,7 @@ const Preferences = () => {
   return (
     <MainLayout
       navChildren={
-        <SimpleNavigationList title={t('profile.index')} collapsible>
+        <SimpleNavigationList title={t('profile.index')}>
           <RoutesNavigationList routes={navigationRoutes} />
         </SimpleNavigationList>
       }

@@ -17,7 +17,7 @@ export const SimpleNavigationList = ({
   addPadding = true,
 }: SimpleNavigationListProps) => {
   const { i18n, t } = useTranslation();
-  const borderClassName = borderEnabled ? 'rounded-[20px] border-[3px] border-solid border-secondary-gray' : '';
+  const borderClassName = borderEnabled ? 'rounded-md bg-secondary-1-25' : '';
   const paddingClassName = addPadding ? 'py-6 px-[20px]' : '';
   return (
     <div className={`${borderClassName} bg-white ${paddingClassName}`.trim()}>
