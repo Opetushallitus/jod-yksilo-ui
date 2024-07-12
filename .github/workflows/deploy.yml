@@ -30,13 +30,13 @@ jobs:
     permissions:
       id-token: write # Needed to interact with GitHub's OIDC Token endpoint
       contents: read
+      actions: read
     environment: ${{ inputs.environment }}
     steps:
       - name: Download dist artifact
         uses: actions/download-artifact@v4
         with:
-          name: dist
-          github_token: ${{ github.token }}
+          name: dist          
           run-id: ${{ inputs.run-id || github.run_id }}
 
       - name: Configure AWS credentials
