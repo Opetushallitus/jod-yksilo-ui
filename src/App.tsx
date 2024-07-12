@@ -10,7 +10,7 @@ import {
 import { Home } from '@/routes/Home';
 import { Favorites, Preferences, Profile, SomethingElse } from '@/routes/Profile';
 import { Competences, competencesLoader } from '@/routes/Profile/Competences';
-import { EducationHistory, loader as educationHistoryLoader } from '@/routes/Profile/EducationHistory';
+import { EducationHistoryV2, loader as educationHistoryLoader } from '@/routes/Profile/EducationHistory';
 import { FreeTimeActivities, loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import { ErrorElement, NoMatch, Root, loader as rootLoader } from '@/routes/Root';
@@ -125,7 +125,7 @@ const router = createBrowserRouter([
           {
             path: i18n.t('slugs.profile.education-history'),
             loader: educationHistoryLoader,
-            element: <EducationHistory />,
+            element: <EducationHistoryV2 />,
           },
           {
             path: i18n.t('slugs.profile.free-time-activities'),
