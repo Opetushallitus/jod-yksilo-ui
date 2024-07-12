@@ -1,0 +1,53 @@
+name: deploy
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        description: 'Environment to deploy to'
+        required: true
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: 'Environment to deploy to'
+        required: true
+        default: 'development'
+        options:
+          - development
+          - test
+      run-id:
+        type: string
+        description: 'Build workflow run id'
+        required: true
+
+concurrency:
+  group: ${{ github.repository_id }}-${{ inputs.environment }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Needed to interact with GitHub's OIDC Token endpoint
+      contents: read
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          run-id: ${{ inputs.run-id || github.run_id }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.JOD_AWS_ACCOUNT_ID }}:role/${{ secrets.JOD_AWS_GITHUB_ROLE_NAME}}
+          aws-region: eu-west-1
+
+      - name: Copy files to S3
+        run: |
+          aws s3 sync --delete --cache-control "public,max-age=31536000,immutable" assets/ s3://${{ secrets.JOD_AWS_DIST_BUCKET }}/assets
+          aws s3 sync --exclude "assets/*" --delete --cache-control "public,max-age=60" . s3://${{ secrets.JOD_AWS_DIST_BUCKET }}
+
+      - name: Invalidate cache for index.html on deploy
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.JOD_AWS_CLOUDFRONT_ID }} --paths '/index.html'

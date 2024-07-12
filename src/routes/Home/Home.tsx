@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <main role="main" className="mx-auto w-full max-w-screen-lg" id="jod-main">
       <Title value={t('home.title')} />
-      <div className="mx-auto bg-[url('/assets/hero.jpeg')] bg-[top_-6rem_left_-5rem] py-11">
+      <div className="mx-auto bg-[url(@/../assets/hero.jpeg)] bg-[top_-6rem_left_-5rem] py-11">
         <div className="mx-auto flex max-w-[1140px] flex-col gap-11 px-6">
           <div className="mb-[40px] max-w-2xl">
             <HeroCard

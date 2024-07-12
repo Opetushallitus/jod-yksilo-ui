@@ -32,7 +32,7 @@ npm run dev
 
 ## Download third-party UI assets
 
-Third-party assets such as images, fonts, and icons are stored in S3 bucket. Guide to download assets is available in the infrastructure repository.
+Third-party assets such as images, fonts, and icons are stored in a S3 bucket. Guide to download assets is available in the infrastructure repository.
 
 ## Updating JOD Design System
 
