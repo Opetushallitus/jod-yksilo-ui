@@ -93,6 +93,7 @@ jobs:
     permissions:
       id-token: write # Needed to interact with GitHub's OIDC Token endpoint
       contents: read
+      actions: read
     secrets: inherit
     with:
       environment: 'development'
