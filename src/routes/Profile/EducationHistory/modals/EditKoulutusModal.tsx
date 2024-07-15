@@ -133,18 +133,20 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
   const methods = useForm<KoulutusForm>({
     mode: 'onChange',
     resolver: zodResolver(
-      z.object({
-        id: z.string(),
-        nimi: z.string().min(1),
-        kuvaus: z.string().min(1).or(z.literal('')),
-        alkuPvm: z.string().date(),
-        loppuPvm: z.string().date().optional().or(z.literal('')),
-        osaamiset: z.array(
-          z.object({
-            id: z.string().min(1),
-          }),
-        ),
-      }),
+      z
+        .object({
+          id: z.string(),
+          nimi: z.string().min(1),
+          kuvaus: z.string().min(1).or(z.literal('')),
+          alkuPvm: z.string().date(),
+          loppuPvm: z.string().date().optional().or(z.literal('')),
+          osaamiset: z.array(
+            z.object({
+              id: z.string().min(1),
+            }),
+          ),
+        })
+        .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm),
     ),
     defaultValues: async () => {
       const { data: osaamiset } = await client.GET('/api/profiili/osaamiset');
@@ -169,11 +171,9 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
     },
   });
   const trigger = methods.trigger;
-  const { isLoading, errors } = useFormState({
+  const { isLoading, isValid } = useFormState({
     control: methods.control,
   });
-
-  const mainFormHasErrors = React.useCallback(() => !!errors.nimi || !!errors.alkuPvm, [errors]);
 
   const onSubmit: FormSubmitHandler<KoulutusForm> = async ({ data }: { data: KoulutusForm }) => {
     const params = {
@@ -240,8 +240,8 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
           </ConfirmDialog>
           <Button label={t('cancel')} variant="white" onClick={onClose} />
           <Button label={t('previous')} variant="white" disabled={isFirstStep} onClick={previousStep} />
-          <Button label={t('next')} variant="white" disabled={isLastStep || mainFormHasErrors()} onClick={nextStep} />
-          <Button form={formId} label={t('save')} variant="white" disabled={Object.keys(errors).length > 0} />
+          <Button label={t('next')} variant="white" disabled={isLastStep || !isValid} onClick={nextStep} />
+          <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />
         </div>
       }
     />
