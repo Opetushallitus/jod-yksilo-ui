@@ -79,7 +79,7 @@ const Competences = () => {
 
   const deleteOsaaminen = async (id: string) => {
     try {
-      await client.DELETE('/api/profiili/osaamiset/{id}', {
+      await client.DELETE('/api/profiili/osaamiset', {
         headers: {
           'Content-Type': 'application/json',
           [csrf.headerName]: csrf.token,
