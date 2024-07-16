@@ -22,7 +22,7 @@ on:
         required: true
 
 concurrency:
-  group: ${{ github.repository_id }}-${{ inputs.environment }}
+  group: ${{ github.repository_id }}-${{ github.event.inputs.environment }}
 
 jobs:
   deploy:
