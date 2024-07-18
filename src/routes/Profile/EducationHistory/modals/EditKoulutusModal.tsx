@@ -160,7 +160,7 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
         id: koulutus?.id,
         nimi: koulutus?.nimi?.[language] ?? '',
         kuvaus: koulutus?.kuvaus?.[language] ?? '',
-        alkuPvm: koulutus?.alkuPvm,
+        alkuPvm: koulutus?.alkuPvm ?? '',
         loppuPvm: koulutus?.loppuPvm,
         osaamiset:
           koulutus?.osaamiset?.map((osaaminenId) => ({

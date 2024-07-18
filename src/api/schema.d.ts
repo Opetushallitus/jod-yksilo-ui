@@ -318,7 +318,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    get: operations['osaaminenFindAll'];
+    get: operations['osaaminenFind'];
     put?: never;
     post?: never;
     delete?: never;
@@ -411,7 +411,7 @@ export interface components {
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
       /** Format: date */
-      alkuPvm?: string;
+      alkuPvm: string;
       /** Format: date */
       loppuPvm?: string;
       osaamiset?: string[];
@@ -434,7 +434,7 @@ export interface components {
       nimi: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       /** Format: date */
-      alkuPvm?: string;
+      alkuPvm: string;
       /** Format: date */
       loppuPvm?: string;
       osaamiset?: string[];
@@ -450,7 +450,7 @@ export interface components {
     };
     IdDtoUUID: {
       /** Format: uuid */
-      id?: string;
+      id: string;
     };
     ToimenkuvaDto: {
       /** Format: uuid */
@@ -458,7 +458,7 @@ export interface components {
       nimi: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       /** Format: date */
-      alkuPvm?: string;
+      alkuPvm: string;
       /** Format: date */
       loppuPvm?: string;
       osaamiset?: string[];
@@ -503,17 +503,17 @@ export interface components {
       csrf: components['schemas']['CsrfTokenDto'];
     };
     SivuDtoTyomahdollisuusDto: {
+      sisalto: components['schemas']['TyomahdollisuusDto'][];
       /**
        * Format: int64
-       * @example 10
+       * @example 30
        */
-      maara?: number;
+      maara: number;
       /**
        * Format: int32
-       * @example 1
+       * @example 3
        */
-      sivuja?: number;
-      sisalto?: components['schemas']['TyomahdollisuusDto'][];
+      sivuja: number;
     };
     TyomahdollisuusDto: {
       /** Format: uuid */
@@ -523,16 +523,16 @@ export interface components {
       kuvaus?: components['schemas']['LokalisoituTeksti'];
     };
     ArvoDto: {
-      arvo?: string;
+      arvo: string;
       /** Format: double */
-      osuus?: number;
+      osuus: number;
     };
     JakaumaDto: {
       /** Format: int32 */
-      maara?: number;
+      maara: number;
       /** Format: int32 */
-      tyhjia?: number;
-      arvot?: components['schemas']['ArvoDto'][];
+      tyhjia: number;
+      arvot: components['schemas']['ArvoDto'][];
     };
     TyomahdollisuusFullDto: {
       /** Format: uuid */
@@ -546,15 +546,28 @@ export interface components {
     };
     OsaaminenDto: {
       /** Format: uri */
-      uri?: string;
-      nimi?: components['schemas']['LokalisoituTeksti'];
-      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      uri: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      kuvaus: components['schemas']['LokalisoituTeksti'];
     };
     YksilonOsaaminenDto: {
       /** Format: uuid */
-      id?: string;
-      osaaminen?: components['schemas']['OsaaminenDto'];
-      lahde?: components['schemas']['OsaamisenLahdeDto'];
+      id: string;
+      osaaminen: components['schemas']['OsaaminenDto'];
+      lahde: components['schemas']['OsaamisenLahdeDto'];
+    };
+    SivuDtoOsaaminenDto: {
+      sisalto: components['schemas']['OsaaminenDto'][];
+      /**
+       * Format: int64
+       * @example 30
+       */
+      maara: number;
+      /**
+       * Format: int32
+       * @example 3
+       */
+      sivuja: number;
     };
     CsrfToken: {
       token?: string;
@@ -1285,9 +1298,13 @@ export interface operations {
       };
     };
   };
-  osaaminenFindAll: {
+  osaaminenFind: {
     parameters: {
-      query?: never;
+      query?: {
+        sivu?: number;
+        koko?: number;
+        uri?: string[];
+      };
       header?: never;
       path?: never;
       cookie?: never;
@@ -1300,7 +1317,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['OsaaminenDto'][];
+          'application/json': components['schemas']['SivuDtoOsaaminenDto'];
         };
       };
     };
