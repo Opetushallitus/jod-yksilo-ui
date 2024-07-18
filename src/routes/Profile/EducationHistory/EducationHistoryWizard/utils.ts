@@ -6,7 +6,7 @@ export interface OsaaminenForm {
 export interface KoulutusForm {
   id?: string;
   nimi: string;
-  alkuPvm?: string;
+  alkuPvm: string;
   loppuPvm?: string;
   osaamiset: OsaaminenForm[];
 }

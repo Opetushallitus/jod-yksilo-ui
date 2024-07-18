@@ -17,7 +17,7 @@ export default (async ({ request }) => {
     signal: request.signal,
   });
 
-  const osaaminenLahdeIds = osaamiset?.map((o) => o.lahde?.id);
+  const osaaminenLahdeIds = osaamiset?.map((o) => o.lahde.id) ?? [];
 
   /*
     Each main category (työpaikka, koulu, vapaa-ajan toiminto) has its own array of subcategories:
@@ -33,7 +33,7 @@ export default (async ({ request }) => {
   const toimenkuvat: components['schemas']['ToimenkuvaDto'][] = [];
   tyopaikat?.forEach((tyopaikka) => {
     tyopaikka.toimenkuvat?.forEach((toimenkuva) => {
-      if (osaaminenLahdeIds?.includes(toimenkuva.id)) {
+      if (toimenkuva.id && osaaminenLahdeIds.includes(toimenkuva.id)) {
         toimenkuvat.push(toimenkuva);
       }
     });
@@ -42,7 +42,7 @@ export default (async ({ request }) => {
   const patevyydet: components['schemas']['PatevyysDto'][] = [];
   vapaaAjanToiminnot?.forEach((toiminto) => {
     toiminto.patevyydet?.forEach((patevyys) => {
-      if (osaaminenLahdeIds?.includes(patevyys.id)) {
+      if (patevyys.id && osaaminenLahdeIds.includes(patevyys.id)) {
         patevyydet.push(patevyys);
       }
     });
@@ -51,7 +51,7 @@ export default (async ({ request }) => {
   const koulutukset: components['schemas']['KoulutusDto'][] = [];
   koulut?.forEach((koulu) => {
     koulu.koulutukset?.forEach((koulutus) => {
-      if (osaaminenLahdeIds?.includes(koulutus.id)) {
+      if (koulutus.id && osaaminenLahdeIds.includes(koulutus.id)) {
         koulutukset.push(koulutus);
       }
     });
