@@ -42,7 +42,10 @@ const SummaryStep = () => {
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
-      <SelectableTable selectableColumnHeader={t('work-history.workplace-or-job-description')} rows={rows} />
+      <SelectableTable
+        selectableColumnHeader={t('free-time-activities.activity-or-profiency-description')}
+        rows={rows}
+      />
     </>
   );
 };
