@@ -17,10 +17,10 @@ export const SimpleNavigationList = ({
   addPadding = true,
 }: SimpleNavigationListProps) => {
   const { i18n, t } = useTranslation();
-  const borderClassName = borderEnabled ? 'rounded-md bg-secondary-1-25' : '';
+  const borderClassName = borderEnabled ? 'rounded-md' : '';
   const paddingClassName = addPadding ? 'py-6 px-[20px]' : '';
   return (
-    <div className={`${borderClassName} bg-white ${paddingClassName}`.trim()}>
+    <div className={`${borderClassName} bg-secondary-1-25 ${paddingClassName}`.trim()}>
       {collapsible ? (
         <Accordion
           title={title}
