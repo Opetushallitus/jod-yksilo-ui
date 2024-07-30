@@ -2,11 +2,11 @@ import { components } from '@/api/schema';
 import { ErrorNote } from '@/features';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
-import { Footer, NavigationBar, PopupList, SkipLink } from '@jod/design-system';
+import { Footer, NavigationBar, PopupList, PopupListItem, SkipLink } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router-dom';
 
 const NavigationBarItem = (to: string, text: string) => ({
   key: to,
@@ -19,11 +19,9 @@ const NavigationBarItem = (to: string, text: string) => ({
 
 const Root = () => {
   const { t, i18n } = useTranslation();
-  const { pathname } = useLocation();
   const [userMenuOpen, setUserMenuOpen] = React.useState(false);
   const userGuide = `/${i18n.language}/${t('slugs.user-guide.index')}`;
   const basicInformation = `/${i18n.language}/${t('slugs.basic-information')}`;
-  const isCurrentPageActive = (path: string) => path === pathname;
   const footerItems: React.ComponentProps<typeof Footer>['items'] = [
     NavigationBarItem(`${userGuide}/${t('slugs.user-guide.what-is-the-service')}`, t('about-us-and-user-guide')),
     NavigationBarItem(`${basicInformation}/${t('slugs.cookie-policy')}`, t('cookie-policy')),
@@ -53,6 +51,8 @@ const Root = () => {
 
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
   const name = 'Reetta Räppänä';
+  const getActiveClassNames = ({ isActive }: { isActive: boolean }) =>
+    isActive ? 'bg-secondary-1-50 w-full rounded-sm py-3 pl-5 -ml-5' : '';
 
   return (
     <AuthContext.Provider value={data}>
@@ -88,20 +88,22 @@ const Root = () => {
                     </button>
                     {userMenuOpen && (
                       <div className="absolute right-0 min-w-max translate-y-8 transform">
-                        <PopupList
-                          items={[
-                            {
-                              label: t('profile.index'),
-                              href: userMenuUrls.preferences,
-                              active: isCurrentPageActive(userMenuUrls.preferences),
-                            },
-                            {
-                              label: t('logout'),
-                              type: 'button',
-                              onClick: logout,
-                            },
-                          ]}
-                        />
+                        <PopupList>
+                          <PopupListItem>
+                            <NavLink
+                              to={userMenuUrls.preferences}
+                              onClick={() => setUserMenuOpen(false)}
+                              className={getActiveClassNames}
+                            >
+                              {t('profile.index')}
+                            </NavLink>
+                          </PopupListItem>
+                          <PopupListItem>
+                            <button type="button" onClick={logout}>
+                              {t('logout')}
+                            </button>
+                          </PopupListItem>
+                        </PopupList>
                       </div>
                     )}
                   </div>
