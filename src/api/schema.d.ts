@@ -500,6 +500,8 @@ export interface components {
     YksiloCsrfDto: {
       /** Format: uuid */
       kuva?: string;
+      etunimet?: string;
+      sukunimi?: string;
       csrf: components['schemas']['CsrfTokenDto'];
     };
     SivuDtoTyomahdollisuusDto: {
