@@ -35,7 +35,7 @@ const Root = () => {
 
   const logout = () => {
     store.dispatch(clearCsrfToken());
-    window.location.href = '/logout';
+    logoutForm.current?.submit();
   };
 
   const userMenuUrls = {
@@ -51,11 +51,12 @@ const Root = () => {
     ),
   }));
   const footerRef = React.useRef<HTMLDivElement>(null);
+  const logoutForm = React.useRef<HTMLFormElement>(null);
 
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
-  const name = 'Reetta Räppänä';
   const getActiveClassNames = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'bg-secondary-1-50 w-full rounded-sm py-3 pl-5 -ml-5' : '';
+  const name = `${data?.etunimi} ${data?.sukunimi}`;
 
   return (
     <AuthContext.Provider value={data}>
@@ -80,6 +81,9 @@ const Root = () => {
               component: ({ children, className }) => {
                 return (
                   <div className="relative">
+                    <form action="/logout" method="POST" hidden ref={logoutForm}>
+                      <input type="hidden" name="_csrf" value={data.csrf.token} />
+                    </form>
                     <button
                       type="button"
                       className={`${className} bg-cover bg-center`}

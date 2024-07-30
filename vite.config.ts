@@ -31,17 +31,22 @@ export default defineConfig({
       '/api': {
         target,
         xfwd: true,
-        changeOrigin: true,
       },
       '/login': {
         target,
         xfwd: true,
-        changeOrigin: true,
+      },
+      '/saml2': {
+        target,
+        xfwd: true,
       },
       '/logout': {
         target,
         xfwd: true,
-        changeOrigin: true,
+      },
+      '/openapi': {
+        target,
+        xfwd: true,
       },
     },
   },
