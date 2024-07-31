@@ -83,6 +83,7 @@ const Root = () => {
                   <div className="relative">
                     <form action="/logout" method="POST" hidden ref={logoutForm}>
                       <input type="hidden" name="_csrf" value={data.csrf.token} />
+                      <input type="hidden" name="lang" value={i18n.language} />
                     </form>
                     <button
                       type="button"
@@ -118,7 +119,7 @@ const Root = () => {
               },
             }
           }
-          login={{ url: '/login', text: 'Login' }}
+          login={{ url: `/login?lang=${i18n.language}`, text: 'Login' }}
         />
         <ErrorNote />
       </header>
