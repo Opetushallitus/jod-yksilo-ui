@@ -1,5 +1,4 @@
 import { client } from '@/api/client';
-import { useAuth } from '@/hooks/useAuth';
 import { Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -24,8 +23,6 @@ interface OsaamisSuosittelijaProps {
 export const OsaamisSuosittelija = ({ description, value = [], onChange }: OsaamisSuosittelijaProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
-  const auth = useAuth();
-  const csrf = auth?.csrf;
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
 
@@ -37,15 +34,7 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
 
     const fetchCompetences = async (kuvaus: string) => {
       try {
-        const csrfHeaders: Record<string, string> = {};
-        if (csrf) {
-          csrfHeaders[csrf.headerName] = csrf.token;
-        }
         const { data } = (await client.POST('/api/ehdotus/osaamiset', {
-          headers: {
-            'Content-Type': 'application/json',
-            ...csrfHeaders,
-          },
           body: { kuvaus },
           signal: abortController.current?.signal,
         })) as { data: Osaaminen[] };
@@ -64,7 +53,7 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
     } else {
       setEhdotetutOsaamiset([]);
     }
-  }, [description, csrf]);
+  }, [description]);
 
   React.useEffect(() => {
     setFilteredEhdotetutOsaamiset([

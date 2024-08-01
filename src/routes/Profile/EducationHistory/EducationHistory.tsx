@@ -9,7 +9,6 @@ import {
   type RoutesNavigationListProps,
 } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
-import { useAuth } from '@/hooks/useAuth';
 import { Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -29,9 +28,6 @@ const EducationHistory = () => {
   const actionBar = useActionBar();
   const [isOpen, setIsOpen] = React.useState(false);
   const [rows, setRows] = React.useState<SelectableTableRow[]>(getEducationHistoryTableRows(koulutukset));
-  const auth = useAuth();
-  const csrf = auth!.csrf;
-
   const checkedRows = rows.filter((row) => row.checked);
 
   React.useEffect(() => {
@@ -48,9 +44,6 @@ const EducationHistory = () => {
       .flat();
 
     await client.DELETE('/api/profiili/koulutuskokonaisuudet/koulutukset', {
-      headers: {
-        [csrf.headerName]: csrf.token,
-      },
       params: { query: { ids } },
     });
 

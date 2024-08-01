@@ -2,6 +2,8 @@ import { components } from '@/api/schema';
 import { ErrorNote } from '@/features';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
+import { clearCsrfToken } from '@/state/csrf/csrfSlice';
+import { store } from '@/state/store';
 import { Footer, NavigationBar, PopupList, PopupListItem, SkipLink } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -32,6 +34,7 @@ const Root = () => {
   ];
 
   const logout = () => {
+    store.dispatch(clearCsrfToken());
     window.location.href = '/logout';
   };
 

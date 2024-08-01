@@ -1,7 +1,6 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 import { client } from '@/api/client';
 import { SelectableTableRow } from '@/components';
-import { useAuth } from '@/hooks/useAuth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -26,8 +25,6 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
     i18n: { language },
   } = useTranslation();
   const navigate = useNavigate();
-  const auth = useAuth();
-  const csrf = auth!.csrf;
   const { sm } = useMediaQueries();
 
   const formId = React.useId();
@@ -64,16 +61,9 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
       // Fetch osaamiset and toimenkuvat if the tyopaikka is defined
       if (selectedRow?.key) {
         const [osaamiset, toimenkuvat] = await Promise.all([
-          client.GET('/api/profiili/osaamiset', {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }),
+          client.GET('/api/profiili/osaamiset'),
           client.GET('/api/profiili/tyopaikat/{id}/toimenkuvat', {
             params: { path: { id: selectedRow.key } },
-            headers: {
-              'Content-Type': 'application/json',
-            },
           }),
         ]);
         return {
@@ -128,10 +118,6 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
         params: {
           path: { id: selectedRow.key },
         },
-        headers: {
-          'Content-Type': 'application/json',
-          [csrf.headerName]: csrf.token,
-        },
         body: {
           id: data.id,
           nimi: {
@@ -150,10 +136,6 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
       });
     } else {
       await client.POST('/api/profiili/tyopaikat', {
-        headers: {
-          'Content-Type': 'application/json',
-          [csrf.headerName]: csrf.token,
-        },
         body: {
           nimi: {
             [language]: data.nimi,

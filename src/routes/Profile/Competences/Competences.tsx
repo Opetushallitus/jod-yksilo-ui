@@ -7,7 +7,6 @@ import {
   type RoutesNavigationListProps,
 } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
-import { useAuth } from '@/hooks/useAuth';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
 import { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
@@ -29,8 +28,6 @@ const Competences = () => {
   const [groupBy, setGroupBy] = React.useState<string>(GROUP_BY_SOURCE);
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
-  const auth = useAuth();
-  const csrf = auth!.csrf;
   const locale = i18n.language as 'fi' | 'sv';
   const [selectedFilters, setSelectedFilters] = React.useState<FiltersType>({});
   const [filterKeys, setFilterKeys] = React.useState<(keyof FiltersType)[]>([]);
@@ -80,10 +77,6 @@ const Competences = () => {
   const deleteOsaaminen = async (id: string) => {
     try {
       await client.DELETE('/api/profiili/osaamiset', {
-        headers: {
-          'Content-Type': 'application/json',
-          [csrf.headerName]: csrf.token,
-        },
         params: { query: { ids: [id] } },
       });
 

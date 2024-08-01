@@ -1,7 +1,6 @@
 /* eslint-disable sonarjs/cognitive-complexity, sonarjs/no-duplicate-string */
 import { client } from '@/api/client';
 import { SelectableTableRow } from '@/components';
-import { useAuth } from '@/hooks/useAuth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -26,8 +25,6 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
     i18n: { language },
   } = useTranslation();
   const navigate = useNavigate();
-  const auth = useAuth();
-  const csrf = auth!.csrf;
   const { sm } = useMediaQueries();
 
   const formId = React.useId();
@@ -115,10 +112,6 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
   });
   const onSubmit: FormSubmitHandler<EducationHistoryForm> = async ({ data }: { data: EducationHistoryForm }) => {
     const params = {
-      headers: {
-        'Content-Type': 'application/json',
-        [csrf.headerName]: csrf.token,
-      },
       body: {
         kategoria: data.nimi
           ? {

@@ -8,7 +8,6 @@ import {
   type RoutesNavigationListProps,
 } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
-import { useAuth } from '@/hooks/useAuth';
 import { Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -28,9 +27,6 @@ const FreeTimeActivities = () => {
   const actionBar = useActionBar();
   const [isOpen, setIsOpen] = React.useState(false);
   const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanToiminnat));
-  const auth = useAuth();
-  const csrf = auth!.csrf;
-
   const checkedRows = rows.filter((row) => row.checked);
 
   React.useEffect(() => {
@@ -40,9 +36,6 @@ const FreeTimeActivities = () => {
   const deleteVapaaAjanToiminnat = async () => {
     await Promise.all([
       client.DELETE('/api/profiili/vapaa-ajan-toiminnot', {
-        headers: {
-          [csrf.headerName]: csrf.token,
-        },
         params: { query: { ids: checkedRows.map((row) => row.key) } },
       }),
     ]);

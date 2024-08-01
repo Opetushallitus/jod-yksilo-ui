@@ -1,6 +1,5 @@
 import { client } from '@/api/client';
 import { OsaamisSuosittelija } from '@/components';
-import { useAuth } from '@/hooks/useAuth';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { type KoulutusForm } from '@/routes/Profile/EducationHistory/EducationHistoryWizard/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -97,9 +96,6 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
 
   const deleteKoulutukset = async () => {
     await client.DELETE(API_PATH, {
-      headers: {
-        [csrf.headerName]: csrf.token,
-      },
       params: { path: { id: koulutusId } },
     });
 
@@ -114,8 +110,6 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
     onClose();
   }
 
-  const auth = useAuth();
-  const csrf = auth!.csrf;
   const formId = React.useId();
   const [step, setStep] = React.useState(0);
   const steps = [MainStep, OsaaminenStep];
@@ -177,10 +171,6 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
 
   const onSubmit: FormSubmitHandler<KoulutusForm> = async ({ data }: { data: KoulutusForm }) => {
     const params = {
-      headers: {
-        'Content-Type': 'application/json',
-        [csrf.headerName]: csrf.token,
-      },
       params: {
         path: {
           id: data.id!,
