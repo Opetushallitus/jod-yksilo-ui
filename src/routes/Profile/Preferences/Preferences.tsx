@@ -78,7 +78,7 @@ const Preferences = () => {
     >
       <Title value={title} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">
-        {t('welcome', { name: auth?.etunimet ?? 'Nimetön' })}
+        {t('welcome', { name: auth?.etunimi ?? 'Nimetön' })}
       </h1>
       <p className="mb-8 text-body-md">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
