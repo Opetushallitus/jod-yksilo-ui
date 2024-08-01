@@ -16,7 +16,7 @@ import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useOutletContext } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
-import { GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME, type FiltersType } from './constants';
+import { GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME, osaaminenColorMap, type FiltersType } from './constants';
 
 const Competences = () => {
   const routes: RoutesNavigationListProps['routes'] = useOutletContext();
@@ -125,6 +125,20 @@ const Competences = () => {
     setSelectedFilters(newFilter);
   };
 
+  // Overly complex way of getting classnames for the filter colors.
+  // Tailwind requires that the full CSS classname is written somewhere in the code, otherwise
+  // it will not be included in the final CSS bundle. This prevents the use of dynamic classnames.
+  // https://tailwindcss.com/docs/content-configuration#dynamic-class-names
+  type ColorMapType = typeof osaaminenColorMap;
+  type ColorKeys = keyof ColorMapType;
+  type ColorValue = ColorMapType[ColorKeys];
+  const filterColorMap: Record<ColorValue, string> = {
+    'secondary-2': 'bg-secondary-2',
+    'secondary-3': 'bg-secondary-3',
+    'secondary-4': 'bg-secondary-4',
+    'secondary-5': 'bg-secondary-5',
+  };
+
   return (
     <MainLayout
       navChildren={
@@ -132,70 +146,63 @@ const Competences = () => {
           <SimpleNavigationList title={t('profile.index')}>
             <RoutesNavigationList routes={navigationRoutes} />
           </SimpleNavigationList>
-          <SimpleNavigationList title="Järjestele" collapsible>
-            <RadioButtonGroup
-              label="Valitse, miten haluat ryhmitellä osaamisesi."
-              value={groupBy}
-              onChange={setGroupBy}
-              className="py-4"
-            >
+          <SimpleNavigationList title="Järjestele" backgroundClassName="bg-bg-gray-2" collapsible>
+            <RadioButtonGroup label="" value={groupBy} onChange={setGroupBy} className="font-poppins py-4">
               <RadioButton label="Lähteiden mukaan" value={GROUP_BY_SOURCE} />
               <RadioButton label="Teemoittain" value={GROUP_BY_THEME} />
               <RadioButton label="Aakkosellisesti" value={GROUP_BY_ALPHABET} />
             </RadioButtonGroup>
           </SimpleNavigationList>
-          <SimpleNavigationList title="Suodata" collapsible>
-            <div className="py-4">
-              <p className="mb-5 text-body-xs text-secondary-gray">
-                Valitse osaamiset eri lähteistä. Käytämme valitsemiasi osaamisia mahdollisuuksien tunnistamiseen.
-              </p>
-              <div className="flex flex-col gap-y-3">
-                {filterKeys.map((key) => (
-                  <Accordion
-                    key={key}
-                    title={
+          <SimpleNavigationList title="Suodata" backgroundClassName="bg-bg-gray-2" collapsible>
+            <div className="flex flex-col gap-y-3 py-4">
+              {filterKeys.map((key) => (
+                <Accordion
+                  key={key}
+                  title={
+                    <Checkbox
+                      label={
+                        <span className="font-poppins flex items-center hyphens-auto" lang={locale}>
+                          <div
+                            className={`mx-3 h-5 w-5 flex-none rounded-full ${filterColorMap[osaaminenColorMap[key]]}`}
+                            aria-hidden
+                          />
+                          {t(`types.competence.${key}`)}
+                        </span>
+                      }
+                      checked={isFilterTypeChecked(key)}
+                      onChange={toggleFiltersByType(key)}
+                      ariaLabel="Työpaikka osaamiset"
+                      name="suodata"
+                      value="tyopaikka-osaamiset"
+                      className="min-h-7"
+                    />
+                  }
+                  expandMoreText={t('expand-more')}
+                  expandLessText={t('expand-less')}
+                  lang={locale}
+                >
+                  {selectedFilters[key]?.map((item, idx) => (
+                    <div className="pl-6" key={item.value}>
                       <Checkbox
-                        label={
-                          <span className="flex items-center hyphens-auto" lang={locale}>
-                            <div className="mx-3 h-5 w-5 flex-none rounded-full bg-secondary-1" aria-hidden />
-                            {t(`types.competence.${key}`)}
-                          </span>
-                        }
-                        checked={isFilterTypeChecked(key)}
-                        onChange={toggleFiltersByType(key)}
-                        ariaLabel="Työpaikka osaamiset"
-                        name="suodata"
-                        value="tyopaikka-osaamiset"
-                        className="min-h-7"
+                        name={item.label}
+                        ariaLabel={`${key} ${item.label}`}
+                        label={item.label}
+                        checked={item.checked}
+                        onChange={toggleSingleFilter(key, idx)}
+                        value={item.value}
                       />
-                    }
-                    expandMoreText={t('expand-more')}
-                    expandLessText={t('expand-less')}
-                    lang={locale}
-                  >
-                    {selectedFilters[key]?.map((item, idx) => (
-                      <div className="pl-6" key={item.value}>
-                        <Checkbox
-                          name={item.label}
-                          ariaLabel={`${key} ${item.label}`}
-                          label={item.label}
-                          checked={item.checked}
-                          onChange={toggleSingleFilter(key, idx)}
-                          value={item.value}
-                        />
-                      </div>
-                    ))}
-                  </Accordion>
-                ))}
-              </div>
+                    </div>
+                  ))}
+                </Accordion>
+              ))}
             </div>
           </SimpleNavigationList>
         </div>
       }
     >
       <Title value={title} />
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">{title}</h1>
-      <p className="mb-8 text-body-md">
+      <h1 className="mb-5 text-heading-1 sm:text-heading-1 font-poppins">{title}</h1>
+      <p className="mb-8 text-body-lg font-semibold">
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
