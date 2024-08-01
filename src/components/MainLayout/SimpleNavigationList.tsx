@@ -7,6 +7,7 @@ interface SimpleNavigationListProps {
   children: React.ReactNode;
   borderEnabled?: boolean;
   addPadding?: boolean;
+  backgroundClassName?: string;
 }
 
 export const SimpleNavigationList = ({
@@ -15,12 +16,13 @@ export const SimpleNavigationList = ({
   children,
   borderEnabled = true,
   addPadding = true,
+  backgroundClassName = 'bg-secondary-1-25',
 }: SimpleNavigationListProps) => {
   const { i18n, t } = useTranslation();
   const borderClassName = borderEnabled ? 'rounded-md' : '';
   const paddingClassName = addPadding ? 'py-6 px-[20px]' : '';
   return (
-    <div className={`${borderClassName} bg-secondary-1-25 ${paddingClassName}`.trim()}>
+    <div className={`${borderClassName} ${backgroundClassName} ${paddingClassName}`.trim()}>
       {collapsible ? (
         <Accordion
           title={title}
