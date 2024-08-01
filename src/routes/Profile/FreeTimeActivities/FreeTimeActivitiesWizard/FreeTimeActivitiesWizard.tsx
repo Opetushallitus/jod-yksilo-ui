@@ -1,7 +1,6 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 import { client } from '@/api/client';
 import { SelectableTableRow } from '@/components';
-import { useAuth } from '@/hooks/useAuth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -26,8 +25,6 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
     i18n: { language },
   } = useTranslation();
   const navigate = useNavigate();
-  const auth = useAuth();
-  const csrf = auth!.csrf;
   const { sm } = useMediaQueries();
 
   const formId = React.useId();
@@ -60,16 +57,9 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
       // Fetch osaamiset and patevyydet if the nimi is defined
       if (selectedRow?.key) {
         const [osaamiset, patevyydet] = await Promise.all([
-          client.GET('/api/profiili/osaamiset', {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }),
+          client.GET('/api/profiili/osaamiset'),
           client.GET('/api/profiili/vapaa-ajan-toiminnot/{id}', {
             params: { path: { id: selectedRow.key } },
-            headers: {
-              'Content-Type': 'application/json',
-            },
           }),
         ]);
         return {
@@ -122,10 +112,6 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
     if (selectedRow?.key) {
       await client.PUT('/api/profiili/vapaa-ajan-toiminnot/{id}', {
         params: { path: { id: selectedRow.key } },
-        headers: {
-          'Content-Type': 'application/json',
-          [csrf.headerName]: csrf.token,
-        },
         body: {
           id: methods.watch('id'),
           nimi: {
@@ -144,10 +130,6 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
       });
     } else {
       await client.POST('/api/profiili/vapaa-ajan-toiminnot', {
-        headers: {
-          'Content-Type': 'application/json',
-          [csrf.headerName]: csrf.token,
-        },
         body: {
           nimi: {
             [language]: data.nimi,

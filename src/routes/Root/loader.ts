@@ -1,6 +1,7 @@
-// import { client } from '@/api/client';
-import { components } from '@/api/schema';
+import { client } from '@/api/client';
 import i18n, { fallbackLng, resources } from '@/i18n/config';
+import { setCsrfToken } from '@/state/csrf/csrfSlice';
+import { store } from '@/state/store';
 import { LoaderFunction, redirect } from 'react-router-dom';
 
 export default (async ({ params: { lng }, request }) => {
@@ -15,11 +16,13 @@ export default (async ({ params: { lng }, request }) => {
   }
 
   // Fetch CSRF token
-  const response = await fetch('/api/yksilo', {
+  const { data, error } = await client.GET('/api/yksilo', {
     signal: request.signal,
   });
-  if (response.ok) {
-    return (await response.json()) as components['schemas']['YksiloCsrfDto'];
+
+  if (!error) {
+    store.dispatch(setCsrfToken(data.csrf));
+    return data;
   }
 
   return null;

@@ -105,11 +105,7 @@ const Competences = () => {
   };
 
   const fetchTyomahdollisuudet = async () => {
-    const response = await client.GET('/api/tyomahdollisuudet', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await client.GET('/api/tyomahdollisuudet');
     if (response.data?.sisalto) {
       setTyomahdollisuudet(response.data.sisalto);
     }

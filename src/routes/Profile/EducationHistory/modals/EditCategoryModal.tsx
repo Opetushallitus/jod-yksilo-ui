@@ -1,5 +1,4 @@
 import { client } from '@/api/client';
-import { useAuth } from '@/hooks/useAuth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -19,9 +18,6 @@ const EditKategoriaModal = ({ isOpen, onClose, kategoriaId }: EditKategoriaModal
     t,
     i18n: { language },
   } = useTranslation();
-
-  const auth = useAuth();
-  const csrf = auth!.csrf;
 
   const formId = React.useId();
   const methods = useForm<KategoriaForm>({
@@ -51,10 +47,6 @@ const EditKategoriaModal = ({ isOpen, onClose, kategoriaId }: EditKategoriaModal
 
   const onSubmit: FormSubmitHandler<KategoriaForm> = async ({ data }: { data: KategoriaForm }) => {
     const params = {
-      headers: {
-        'Content-Type': 'application/json',
-        [csrf.headerName]: csrf.token,
-      },
       body: {
         kategoria: data.nimi
           ? {
