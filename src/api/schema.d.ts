@@ -84,22 +84,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/yksilo/kuva': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['yksiloAddKuva'];
-    delete: operations['yksiloDeleteKuva'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/profiili/vapaa-ajan-toiminnot': {
     parameters: {
       query?: never;
@@ -327,22 +311,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/kuvat/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['kuvaGet'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/profiili/osaamiset/{id}': {
     parameters: {
       query?: never;
@@ -388,7 +356,7 @@ export interface components {
      *       "sv": "på svenska"
      *     } */
     LokalisoituTeksti: {
-      [key: string]: string | undefined;
+      [key: string]: string;
     };
     PatevyysDto: {
       /** Format: uuid */
@@ -482,8 +450,6 @@ export interface components {
       parameterName: string;
     };
     YksiloCsrfDto: {
-      /** Format: uuid */
-      kuva?: string;
       etunimi?: string;
       sukunimi?: string;
       csrf: components['schemas']['CsrfTokenDto'];
@@ -527,7 +493,7 @@ export interface components {
       tiivistelma?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       jakaumat?: {
-        [key: string]: components['schemas']['JakaumaDto'] | undefined;
+        [key: string]: components['schemas']['JakaumaDto'];
       };
     };
     OsaaminenDto: {
@@ -763,51 +729,6 @@ export interface operations {
     responses: {
       /** @description OK */
       200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  yksiloAddKuva: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: {
-      content: {
-        'multipart/form-data': {
-          /** Format: binary */
-          file: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Created */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': string;
-        };
-      };
-    };
-  };
-  yksiloDeleteKuva: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
         headers: {
           [name: string]: unknown;
         };
@@ -1299,28 +1220,6 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['SivuDtoOsaaminenDto'];
-        };
-      };
-    };
-  };
-  kuvaGet: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': string;
         };
       };
     };

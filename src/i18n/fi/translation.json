@@ -143,17 +143,10 @@
     "title": "Sivua ei löytynyt"
   },
   "preferences": {
-    "add-image": "Lisää kuva",
-    "confirm-delete-image": "Haluatko varmasti poistaa kuvan?",
     "confirm-delete-my-account": "Haluatko varmasti poistaa tilisi?",
-    "delete-image": "Poista kuva",
     "delete-my-account": "Poista tilini",
     "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius.",
-    "help": "Raahaa kuva tähän\ntai klikkaa aluetta valitaksesi\nkuva tietokoneeltasi.",
-    "help-active": "Pudota kuva tähän...",
-    "selected-image": "Valittu kuva: {{name}}",
-    "share-my-competences": "Jaa osaamiseni",
-    "title": "Lisää avatar-kuva"
+    "share-my-competences": "Jaa osaamiseni"
   },
   "previous": "Edellinen",
   "privacy-policy": "Tietosuojaseloste",
