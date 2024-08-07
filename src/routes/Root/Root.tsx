@@ -88,11 +88,9 @@ const Root = () => {
                     <button
                       type="button"
                       className={`${className} bg-cover bg-center`}
-                      style={data.kuva ? { backgroundImage: `url(/api/kuvat/${data.kuva})` } : undefined}
                       onClick={() => setUserMenuOpen(!userMenuOpen)}
-                      aria-label={data?.kuva ? name : undefined}
                     >
-                      {data?.kuva ? undefined : children}
+                      {children}
                     </button>
                     {userMenuOpen && (
                       <div className="absolute right-0 min-w-max translate-y-8 transform">
