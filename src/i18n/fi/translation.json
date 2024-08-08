@@ -192,6 +192,12 @@
       "something-else": "jotain-muuta",
       "work-history": "tyopaikkani"
     },
+    "language": {
+      "change": "Kieli",
+      "fi": "Suomeksi",
+      "sv": "På sverige",
+      "en": "In English"
+    },
     "terms-of-service": "kayttoehdot",
     "tool": {
       "competences": "osaamiset",
