@@ -1,14 +1,16 @@
 import { components } from '@/api/schema';
+import { RoutesNavigationList, SimpleNavigationList } from '@/components';
+import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { ErrorNote } from '@/features';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
 import { clearCsrfToken } from '@/state/csrf/csrfSlice';
 import { store } from '@/state/store';
-import { Footer, NavigationBar, PopupList, PopupListItem, SkipLink } from '@jod/design-system';
+import { Footer, NavigationBar, PopupList, PopupListItem, SkipLink, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router-dom';
+import { NavLink, Outlet, ScrollRestoration, matchPath, useLoaderData, useLocation } from 'react-router-dom';
 
 const NavigationBarItem = (to: string, text: string) => ({
   key: to,
@@ -21,6 +23,8 @@ const NavigationBarItem = (to: string, text: string) => ({
 
 const Root = () => {
   const { t, i18n } = useTranslation();
+  const { sm } = useMediaQueries();
+  const [megaMenuOpen, setMegaMenuOpen] = React.useState(false);
   const [userMenuOpen, setUserMenuOpen] = React.useState(false);
   const userGuide = `/${i18n.language}/${t('slugs.user-guide.index')}`;
   const basicInformation = `/${i18n.language}/${t('slugs.basic-information')}`;
@@ -38,8 +42,46 @@ const Root = () => {
     logoutForm.current?.submit();
   };
 
+  const { pathname } = useLocation();
+  const profileIndexPath = t('slugs.profile.index');
+  const ownPagesPath = `/${i18n.language}/${profileIndexPath}`;
+  const routes = [
+    {
+      name: t('profile.preferences'),
+      path: t('slugs.profile.preferences'),
+    },
+    {
+      name: t('profile.favorites'),
+      path: t('slugs.profile.favorites'),
+    },
+    {
+      name: t('profile.competences'),
+      path: t('slugs.profile.competences'),
+    },
+    {
+      name: t('profile.work-history'),
+      path: t('slugs.profile.work-history'),
+    },
+    {
+      name: t('profile.education-history'),
+      path: t('slugs.profile.education-history'),
+    },
+    {
+      name: t('profile.free-time-activities'),
+      path: t('slugs.profile.free-time-activities'),
+    },
+    {
+      name: t('profile.something-else'),
+      path: t('slugs.profile.something-else'),
+    },
+  ].map((route) => ({
+    ...route,
+    path: `${profileIndexPath}/${route.path}`,
+    active: !!matchPath(`${ownPagesPath}/${route.path}`, pathname),
+  }));
+
   const userMenuUrls = {
-    preferences: `/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`,
+    preferences: `/${i18n.language}/${profileIndexPath}/${t('slugs.profile.preferences')}`,
   };
 
   const logos: React.ComponentProps<typeof Footer>['logos'] = [1, 2, 3].map((item) => ({
@@ -50,6 +92,7 @@ const Root = () => {
       </a>
     ),
   }));
+
   const footerRef = React.useRef<HTMLDivElement>(null);
   const logoutForm = React.useRef<HTMLFormElement>(null);
 
@@ -74,6 +117,24 @@ const Root = () => {
                 <div className="h-8 w-8 bg-secondary-gray"></div>JOD
               </div>
             </NavLink>
+          }
+          menuComponent={
+            <button
+              className="flex gap-4 justify-center"
+              aria-label="Avaa valikko"
+              onClick={() => {
+                setMegaMenuOpen(!megaMenuOpen);
+              }}
+            >
+              {sm ? (
+                <>
+                  <span className="font-poppins">Valikko</span>
+                  <span className="material-symbols-outlined size-24 select-none">menu</span>
+                </>
+              ) : (
+                <span className="material-symbols-outlined size-24 select-none">{megaMenuOpen ? 'close' : 'menu'}</span>
+              )}
+            </button>
           }
           user={
             data?.csrf && {
@@ -120,6 +181,26 @@ const Root = () => {
           login={{ url: `/login?lang=${i18n.language}`, text: 'Login' }}
         />
         <ErrorNote />
+        {megaMenuOpen && (
+          <div className="absolute top[68px] left-0 right-0 max-w-[1092px] m-auto">
+            <MegaMenu
+              footer={
+                'Lorem ipsum dolor sit amet, soleat iracundia eos ea, est in modo vivendo moderatius. Ex duo hinc graeco evertitur, nisl affert vel cu. Ne ius quis repudiare. Ne modo eius corpora mea. Ipsum congue definitiones sed in, an sit unum splendide.'
+              }
+              onClose={() => setMegaMenuOpen(false)}
+            >
+              <SimpleNavigationList title={'Ohjeet'} backgroundClassName="" collapsible={!sm}>
+                <span>TODO</span>
+              </SimpleNavigationList>
+              <SimpleNavigationList title={'Kohtaantopalvelu'} backgroundClassName="" collapsible={!sm}>
+                <span>TODO</span>
+              </SimpleNavigationList>
+              <SimpleNavigationList title={t('profile.index')} backgroundClassName="" collapsible={!sm}>
+                <RoutesNavigationList routes={routes} onClick={() => setMegaMenuOpen(false)} />
+              </SimpleNavigationList>
+            </MegaMenu>
+          </div>
+        )}
       </header>
       <ActionBarContext.Provider value={footerRef.current}>
         <Outlet />
