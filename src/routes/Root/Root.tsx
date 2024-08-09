@@ -2,13 +2,14 @@ import { components } from '@/api/schema';
 import { ErrorNote } from '@/features';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
+import { LangCode, supportedLanguageCodes } from '@/i18n/config';
 import { clearCsrfToken } from '@/state/csrf/csrfSlice';
 import { store } from '@/state/store';
-import { Footer, NavigationBar, PopupList, PopupListItem, SkipLink } from '@jod/design-system';
+import { Footer, NavigationBar, PopupList, PopupListItem, RoundButton, SkipLink } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router-dom';
+import { NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 
 const NavigationBarItem = (to: string, text: string) => ({
   key: to,
@@ -22,6 +23,8 @@ const NavigationBarItem = (to: string, text: string) => ({
 const Root = () => {
   const { t, i18n } = useTranslation();
   const [userMenuOpen, setUserMenuOpen] = React.useState(false);
+  const [langMenuOpen, setLangMenuOpen] = React.useState(false);
+
   const userGuide = `/${i18n.language}/${t('slugs.user-guide.index')}`;
   const basicInformation = `/${i18n.language}/${t('slugs.basic-information')}`;
   const footerItems: React.ComponentProps<typeof Footer>['items'] = [
@@ -57,6 +60,15 @@ const Root = () => {
   const getActiveClassNames = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'bg-secondary-1-50 w-full rounded-sm py-3 pl-5 -ml-5' : '';
   const name = `${data?.etunimi} ${data?.sukunimi}`;
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const changeLanguage = async (lang: LangCode) => {
+    const oldLang = i18n.language;
+    setLangMenuOpen(false);
+    await i18n.changeLanguage(lang);
+    navigate(location.pathname.replace(`/${oldLang}`, `/${i18n.language}`));
+  };
 
   return (
     <AuthContext.Provider value={data}>
@@ -68,6 +80,45 @@ const Root = () => {
       <header role="banner" className="sticky top-0 z-10 print:hidden">
         <SkipLink hash="#jod-main" label={t('skiplinks.main')} />
         <NavigationBar
+          items={[
+            {
+              key: 'langSelector-key',
+              text: 'langSelector',
+              active: true,
+              component: ({ className }) => {
+                return (
+                  <div className="relative scale-75 mt-4 mb-4">
+                    <RoundButton
+                      label={t(`slugs.language.change}`)}
+                      hideLabel
+                      className={`${className} bg-cover bg-center`}
+                      onClick={() => setLangMenuOpen(!langMenuOpen)}
+                      icon="language"
+                    />
+                    {langMenuOpen && (
+                      <div className="absolute right-0 min-w-max translate-y-6 transform">
+                        <PopupList classNames="!bg-bg-gray-2">
+                          {supportedLanguageCodes.map((value) => {
+                            return (
+                              <PopupListItem key={`lang-${value}-key`}>
+                                <button
+                                  type="button"
+                                  className="text-bold text-black"
+                                  onClick={() => void changeLanguage(value)}
+                                >
+                                  {t(`slugs.language.${value}`)}
+                                </button>
+                              </PopupListItem>
+                            );
+                          })}
+                        </PopupList>
+                      </div>
+                    )}
+                  </div>
+                );
+              },
+            },
+          ]}
           logo={
             <NavLink to={`/${i18n.language}`} className="flex">
               <div className="inline-flex select-none items-center gap-4 text-[24px] leading-[140%] text-secondary-gray">
