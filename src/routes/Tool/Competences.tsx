@@ -40,43 +40,41 @@ const HelpingToolsContent = () => (
 );
 
 const Filters = ({
-  keyFigure,
-  setKeyFigure,
+  industry,
+  setIndustry,
   order,
   setOrder,
   isMobile,
 }: {
-  keyFigure: string;
-  setKeyFigure: (val: string) => void;
+  industry: string;
+  setIndustry: (val: string) => void;
   order: string;
   setOrder: (val: string) => void;
   isMobile: boolean;
 }) => {
   return (
     <div className="inline-flex flex-col gap-6 sm:gap-5 w-full">
-      <SimpleNavigationList title="Tunnusluvut" collapsible borderEnabled={isMobile} addPadding={isMobile}>
-        <RadioButtonGroup
-          label="Valitse näytettävä tunnusluku. Vaihtoehdot riippuvat hakutuloksistasi."
-          value={keyFigure}
-          onChange={(val) => setKeyFigure(val)}
-          className="py-4"
-        >
+      <SimpleNavigationList
+        title="Järjestele (kaikki)"
+        borderEnabled={isMobile}
+        addPadding={isMobile}
+        backgroundClassName="bg-bg-gray-2"
+      >
+        <RadioButtonGroup label="" value={order} onChange={setOrder}>
           <RadioButton label="Tuloksen sopivuus" value="a" />
-          <RadioButton label="Ennakoitu muutos" value="b" />
-          <RadioButton label="Keskiansio" value="c" />
-          <RadioButton label="Työvoimakohtaanto" value="d" />
-          <RadioButton label="Työttömyysprosentti" value="e" />
+          <RadioButton label="Kehitystrendi" value="b" />
+          <RadioButton label="Työllistusnäkymä" value="c" />
         </RadioButtonGroup>
       </SimpleNavigationList>
-      <SimpleNavigationList title="Järjestys" collapsible borderEnabled={isMobile} addPadding={isMobile}>
-        <RadioButtonGroup
-          label="Valitse järjestystapa. Tulokset järjestetään valitun tunnusluvun mukaan."
-          value={order}
-          onChange={(val) => setOrder(val)}
-          className="py-4"
-        >
-          <RadioButton label="Laskeva" value="descending" />
-          <RadioButton label="Nouseva" value="ascending" />
+      <SimpleNavigationList
+        title="Toimiala (työmahdollisuudet)"
+        borderEnabled={isMobile}
+        addPadding={isMobile}
+        backgroundClassName="bg-bg-gray-2"
+      >
+        <RadioButtonGroup label="" value={industry} onChange={setIndustry}>
+          <RadioButton label="Toimiala x" value="x" />
+          <RadioButton label="Toimiala y" value="y" />
         </RadioButtonGroup>
       </SimpleNavigationList>
     </div>
@@ -92,8 +90,8 @@ const Competences = () => {
   const [restrictionsMultiplier, setRestrictionsMultiplier] = React.useState(50);
 
   const [showFilters, setShowFilters] = React.useState(false);
-  const [keyFigure, setKeyFigure] = React.useState('a');
-  const [order, setOrder] = React.useState('descending');
+  const [industry, setIndustry] = React.useState('x');
+  const [order, setOrder] = React.useState('a');
 
   const [debouncedTyotehtava, tyotehtava, setTyotehtava] = useDebounceState('', 500);
 
@@ -216,8 +214,8 @@ const Competences = () => {
                   onClose={() => setShowFilters(false)}
                   content={
                     <Filters
-                      keyFigure={keyFigure}
-                      setKeyFigure={setKeyFigure}
+                      industry={industry}
+                      setIndustry={setIndustry}
                       order={order}
                       setOrder={setOrder}
                       isMobile={sm}
@@ -257,13 +255,7 @@ const Competences = () => {
         </div>
         {sm && (
           <div className="col-span-2 sm:mt-8">
-            <Filters
-              keyFigure={keyFigure}
-              setKeyFigure={setKeyFigure}
-              order={order}
-              setOrder={setOrder}
-              isMobile={sm}
-            />
+            <Filters industry={industry} setIndustry={setIndustry} order={order} setOrder={setOrder} isMobile={sm} />
           </div>
         )}
       </div>
