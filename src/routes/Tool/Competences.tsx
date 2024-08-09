@@ -10,7 +10,6 @@ import {
   Modal,
   RadioButton,
   RadioButtonGroup,
-  ResultsCard,
   Slider,
   useMediaQueries,
 } from '@jod/design-system';
@@ -94,9 +93,10 @@ const Competences = () => {
   const [order, setOrder] = React.useState('a');
 
   const [debouncedTyotehtava, tyotehtava, setTyotehtava] = useDebounceState('', 500);
-
   const [selectedCompetences, setSelectedCompentences] = React.useState<OsaaminenValue[]>([]);
   const [tyomahdollisuudet, setTyomahdollisuudet] = React.useState<Tyomahdollisuus[]>([]);
+  const [professionsCount] = React.useState(534);
+  const [educationsCount] = React.useState(1002);
 
   const osaamisSuosittelijaHandler = (values: OsaaminenValue[]) => {
     setSelectedCompentences(values);
@@ -158,24 +158,20 @@ const Competences = () => {
       </div>
 
       <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-6">
-        <div className="col-span-2 sm:col-span-6">
+        <div className="font-poppins col-span-2 sm:col-span-6">
           <div className="mt-10 flex flex-col sm:mt-11 sm:flex-row">
-            <span className="mb-2 text-heading-3 font-poppins text-black sm:mb-0 sm:mr-5">Tulokset</span>
-            <span className="text-body-sm text-secondary-gray sm:text-body-md">
-              Lukumääräisesti valittavissasi eri vaihtoehtoja - vieritä näkymää alaspäin itse tuloksiin.
+            <span className="text-body-md text-black font-medium sm:text-body-lg">
+              {t('tool.competences.available-options')}{' '}
+              <span className="text-heading-3 font-bold">
+                {t('tool.competences.available-options-totals', { professionsCount, educationsCount })}
+              </span>
             </span>
           </div>
         </div>
 
-        <div className="col-span-2 mt-6 flex flex-col gap-6 sm:col-span-6 sm:mt-5 sm:flex-row">
-          <ResultsCard value={534} label="ammatteja" />
-          <ResultsCard value={1987} label="koulutuksia" />
-        </div>
-
-        <div className="col-span-2 mt-10 flex flex-col sm:col-span-6 sm:mt-9 sm:flex-row">
-          <span className="mb-2 text-heading-3 font-poppins text-black sm:mb-0 sm:mr-5">Painotukset</span>
-          <span className="text-body-sm text-secondary-gray sm:text-body-md">
-            Säädä syöttämäsi tietojen painotuksia - tulokset päivittyvät samanaikaisesti uusien painotusten mukaan.
+        <div className="font-poppins col-span-2 mt-10 flex flex-col sm:col-span-6 sm:mt-9 sm:flex-row">
+          <span className="text-body-md text-black font-medium sm:text-body-lg">
+            {t('tool.competences.adjust-data-emphasis')}
           </span>
         </div>
 
