@@ -34,7 +34,7 @@ export const SimpleNavigationList = ({
         </Accordion>
       ) : (
         <>
-          <div className="hyphens-auto text-heading-4 font-poppins" lang={i18n.language}>
+          <div className="hyphens-auto text-heading-3 font-poppins" lang={i18n.language}>
             {title}
           </div>
           {children}
