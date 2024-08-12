@@ -59,7 +59,7 @@ const Filters = ({
         addPadding={isMobile}
         backgroundClassName="bg-bg-gray-2"
       >
-        <RadioButtonGroup label="" value={order} onChange={setOrder}>
+        <RadioButtonGroup value={order} onChange={setOrder}>
           <RadioButton label="Tuloksen sopivuus" value="a" />
           <RadioButton label="Kehitystrendi" value="b" />
           <RadioButton label="Työllistusnäkymä" value="c" />
@@ -71,7 +71,7 @@ const Filters = ({
         addPadding={isMobile}
         backgroundClassName="bg-bg-gray-2"
       >
-        <RadioButtonGroup label="" value={industry} onChange={setIndustry}>
+        <RadioButtonGroup value={industry} onChange={setIndustry}>
           <RadioButton label="Toimiala x" value="x" />
           <RadioButton label="Toimiala y" value="y" />
         </RadioButtonGroup>

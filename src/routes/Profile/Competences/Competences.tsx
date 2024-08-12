@@ -147,7 +147,7 @@ const Competences = () => {
             <RoutesNavigationList routes={navigationRoutes} />
           </SimpleNavigationList>
           <SimpleNavigationList title="Järjestele" backgroundClassName="bg-bg-gray-2" collapsible>
-            <RadioButtonGroup label="" value={groupBy} onChange={setGroupBy} className="font-poppins py-4">
+            <RadioButtonGroup value={groupBy} onChange={setGroupBy} className="font-poppins py-4">
               <RadioButton label="Lähteiden mukaan" value={GROUP_BY_SOURCE} />
               <RadioButton label="Teemoittain" value={GROUP_BY_THEME} />
               <RadioButton label="Aakkosellisesti" value={GROUP_BY_ALPHABET} />
