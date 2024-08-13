@@ -2,6 +2,7 @@ import { components } from '@/api/schema';
 import { ErrorNote } from '@/features';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
+import { useLanguage } from '@/hooks/useLanguage';
 import { LangCode, supportedLanguageCodes } from '@/i18n/config';
 import { clearCsrfToken } from '@/state/csrf/csrfSlice';
 import { store } from '@/state/store';
@@ -62,12 +63,14 @@ const Root = () => {
   const name = `${data?.etunimi} ${data?.sukunimi}`;
   const location = useLocation();
   const navigate = useNavigate();
+  const { setLanguage } = useLanguage();
 
   const changeLanguage = async (lang: LangCode) => {
     const oldLang = i18n.language;
     setLangMenuOpen(false);
     await i18n.changeLanguage(lang);
     navigate(location.pathname.replace(`/${oldLang}`, `/${i18n.language}`));
+    setLanguage(lang);
   };
 
   return (
