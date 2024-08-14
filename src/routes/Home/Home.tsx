@@ -23,7 +23,7 @@ const Home = () => {
           <div className="mb-[40px] max-w-2xl">
             <HeroCard backgroundColor="#006DB3F2" content={t('home.card-1-content')} title={t('home.card-1-title')} />
           </div>
-          <div className="grid grid-flow-row auto-rows-max grid-cols-1 gap-[32px] sm:grid-cols-3">
+          <div className="grid grid-flow-row auto-rows-max grid-cols-1 gap-[32px] md:grid-cols-3 hyphens-auto">
             <HeroCard {...smHeroCardProps} backgroundColor="#00A8B3F2" title={t('home.card-2-title')} />
             <HeroCard {...smHeroCardProps} backgroundColor="#EE7C45F2" title={t('home.card-3-title')} />
             <HeroCard {...smHeroCardProps} backgroundColor="#CD4EB3F2" title={t('home.card-4-title')} />
