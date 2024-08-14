@@ -1,11 +1,9 @@
 import { MainLayout, RoutesNavigationList, SimpleNavigationList } from '@/components';
 import { useTranslation } from 'react-i18next';
-import { Outlet, matchPath, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 const UserGuide = () => {
-  const { t, i18n } = useTranslation();
-  const { pathname } = useLocation();
-  const basicInformationPath = `/${i18n.language}/${t('slugs.user-guide.index')}`;
+  const { t } = useTranslation();
   const routes = [
     {
       name: t('what-is-the-service'),
@@ -31,10 +29,7 @@ const UserGuide = () => {
       name: t('how-do-i-give-feedback'),
       path: t('slugs.user-guide.how-do-i-give-feedback'),
     },
-  ].map((route) => ({
-    ...route,
-    active: !!matchPath(`${basicInformationPath}/${route.path}`, pathname),
-  }));
+  ];
 
   return (
     <MainLayout
