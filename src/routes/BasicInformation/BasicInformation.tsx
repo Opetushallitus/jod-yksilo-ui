@@ -1,11 +1,9 @@
 import { MainLayout, RoutesNavigationList, SimpleNavigationList } from '@/components';
 import { useTranslation } from 'react-i18next';
-import { Outlet, matchPath, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 const BasicInformation = () => {
-  const { t, i18n } = useTranslation();
-  const { pathname } = useLocation();
-  const basicInformationPath = `/${i18n.language}/${t('slugs.basic-information')}`;
+  const { t } = useTranslation();
   const routes = [
     {
       name: t('cookie-policy'),
@@ -27,10 +25,7 @@ const BasicInformation = () => {
       name: t('privacy-policy'),
       path: t('slugs.privacy-policy'),
     },
-  ].map((route) => ({
-    ...route,
-    active: !!matchPath(`${basicInformationPath}/${route.path}`, pathname),
-  }));
+  ];
 
   return (
     <MainLayout

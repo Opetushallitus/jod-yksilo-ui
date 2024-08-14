@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { Outlet, matchPath, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 const Profile = () => {
-  const { t, i18n } = useTranslation();
-  const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   const routes = [
     {
@@ -34,10 +33,7 @@ const Profile = () => {
       name: t('profile.something-else'),
       path: t('slugs.profile.something-else'),
     },
-  ].map((route) => ({
-    ...route,
-    active: !!matchPath(`/${i18n.language}/${t('slugs.profile.index')}/${route.path}`, pathname),
-  }));
+  ];
 
   return <Outlet context={routes} />;
 };
