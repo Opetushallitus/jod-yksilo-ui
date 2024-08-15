@@ -6,6 +6,9 @@ import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
 import { useLanguage } from '@/hooks/useLanguage';
 import { LangCode, supportedLanguageCodes } from '@/i18n/config';
+import { profileRoutes } from '@/routeDefinitions/profileRoutes';
+import { toolRoutes } from '@/routeDefinitions/toolRoutes';
+import { userGuideRoutes } from '@/routeDefinitions/userGuideRoutes';
 import { clearCsrfToken } from '@/state/csrf/csrfSlice';
 import { store } from '@/state/store';
 import { Footer, NavigationBar, PopupList, PopupListItem, SkipLink, useMediaQueries } from '@jod/design-system';
@@ -47,38 +50,17 @@ const Root = () => {
   };
 
   const profileIndexPath = t('slugs.profile.index');
-  const routes = [
-    {
-      name: t('profile.preferences'),
-      path: t('slugs.profile.preferences'),
-    },
-    {
-      name: t('profile.favorites'),
-      path: t('slugs.profile.favorites'),
-    },
-    {
-      name: t('profile.competences'),
-      path: t('slugs.profile.competences'),
-    },
-    {
-      name: t('profile.work-history'),
-      path: t('slugs.profile.work-history'),
-    },
-    {
-      name: t('profile.education-history'),
-      path: t('slugs.profile.education-history'),
-    },
-    {
-      name: t('profile.free-time-activities'),
-      path: t('slugs.profile.free-time-activities'),
-    },
-    {
-      name: t('profile.something-else'),
-      path: t('slugs.profile.something-else'),
-    },
-  ].map((route) => ({
+  const profileMenuRoutes = profileRoutes.map((route) => ({
     ...route,
     path: `${profileIndexPath}/${route.path}`,
+  }));
+  const toolMenuRoutes = toolRoutes.map((route) => ({
+    ...route,
+    path: `${t('slugs.tool.index')}/${route.path}`,
+  }));
+  const userGuideMenuRoutes = userGuideRoutes.map((route) => ({
+    ...route,
+    path: `${t('slugs.user-guide.index')}/${route.path}`,
   }));
 
   const userMenuUrls = {
@@ -226,14 +208,14 @@ const Root = () => {
               }
               onClose={() => setMegaMenuOpen(false)}
             >
-              <SimpleNavigationList title={'Ohjeet'} backgroundClassName="bg-white" collapsible={!sm}>
-                <span>TODO</span>
+              <SimpleNavigationList title={t('user-guide')} backgroundClassName="bg-white" collapsible={!sm}>
+                <RoutesNavigationList routes={userGuideMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
               </SimpleNavigationList>
               <SimpleNavigationList title={'Kohtaantopalvelu'} backgroundClassName="bg-white" collapsible={!sm}>
-                <span>TODO</span>
+                <RoutesNavigationList routes={toolMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
               </SimpleNavigationList>
               <SimpleNavigationList title={t('profile.index')} backgroundClassName="bg-white" collapsible={!sm}>
-                <RoutesNavigationList routes={routes} onClick={() => setMegaMenuOpen(false)} />
+                <RoutesNavigationList routes={profileMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
               </SimpleNavigationList>
             </MegaMenu>
           </div>
