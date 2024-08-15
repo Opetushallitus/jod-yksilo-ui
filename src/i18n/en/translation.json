@@ -7,5 +7,56 @@
     "card-3-title": "Discover how you use the service and create your own future",
     "card-4-title": "Create your own profile and design your path",
     "title": "Front page"
+  },
+  "slugs": {
+    "about-us": "about-us",
+    "accessibility-statement": "accessibility-statement",
+    "basic-information": "basic-information",
+    "cookie-policy": "cookie-policy",
+    "data-sources": "data-sources",
+    "how-do-i-give-feedback": "how-do-i-give-feedback",
+    "how-do-i-use-the-service": "how-do-i-use-the-service",
+    "job-opportunity": {
+      "competences": "competences",
+      "index": "job-opportunity",
+      "overview": "overview"
+    },
+    "no-internet-connection": "no-internet-connection",
+    "privacy-policy": "privacy-policy",
+    "profile": {
+      "competences": "competences",
+      "education-history": "education-history",
+      "favorites": "favorites",
+      "free-time-activities": "free-time-activities",
+      "index": "profile",
+      "preferences": "preferences",
+      "something-else": "something-else",
+      "work-history": "work-history"
+    },
+    "language": {
+      "change": "Language",
+      "fi": "Suomeksi",
+      "sv": "På sverige",
+      "en": "In English"
+    },
+    "terms-of-service": "terms-of-service",
+    "tool": {
+      "competences": "competences",
+      "goals": "goals",
+      "index": "tool",
+      "instructions": "instructions",
+      "interests": "interests",
+      "restrictions": "restrictions"
+    },
+    "user": "user",
+    "user-guide": {
+      "how-do-i-give-feedback": "how-do-i-give-feedback",
+      "how-do-i-use-the-service": "how-do-i-use-the-service",
+      "index": "user-guide",
+      "what-is-the-service": "what-is-the-service",
+      "where-can-i-get-more-help": "where-can-i-get-more-help",
+      "who-is-the-service-for": "who-is-the-service-for",
+      "who-provides-the-service": "who-provides-the-service"
+    }
   }
 }

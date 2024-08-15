@@ -7,5 +7,56 @@
     "card-3-title": "Upptäck hur du använder tjänsten och skapar din egen framtid",
     "card-4-title": "Skapa din egen profil och designa din väg",
     "title": "Förstasida"
+  },
+  "slugs": {
+    "about-us": "tietoa-palvelusta",
+    "accessibility-statement": "saavutettavuusseloste",
+    "basic-information": "perustiedot",
+    "cookie-policy": "evastekaytanto",
+    "data-sources": "datalahteet",
+    "how-do-i-give-feedback": "miten-annan-palautetta",
+    "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
+    "job-opportunity": {
+      "competences": "osaamiset",
+      "index": "tyomahdollisuus",
+      "overview": "yleiskuvaus"
+    },
+    "no-internet-connection": "ei-internetyhteytta",
+    "privacy-policy": "tietosuojaseloste",
+    "profile": {
+      "competences": "osaamiseni",
+      "education-history": "koulutukseni",
+      "favorites": "suosikkini",
+      "free-time-activities": "vapaa-ajan-toimintoni",
+      "index": "omat-sivuni",
+      "preferences": "asetukseni",
+      "something-else": "jotain-muuta",
+      "work-history": "tyopaikkani"
+    },
+    "language": {
+      "change": "Kieli",
+      "fi": "Suomeksi",
+      "sv": "På sverige",
+      "en": "In English"
+    },
+    "terms-of-service": "kayttoehdot",
+    "tool": {
+      "competences": "osaamiset",
+      "goals": "tavoitteet",
+      "index": "tyokalu",
+      "instructions": "ohjeet",
+      "interests": "kiinnostukset",
+      "restrictions": "rajoitteet"
+    },
+    "user": "kayttaja",
+    "user-guide": {
+      "how-do-i-give-feedback": "miten-annan-palautetta",
+      "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
+      "index": "ohjeet",
+      "what-is-the-service": "mika-palvelu-on",
+      "where-can-i-get-more-help": "mista-saan-lisaa-apua",
+      "who-is-the-service-for": "kenelle-palvelu-on-tarkoitettu",
+      "who-provides-the-service": "kuka-palvelun-tarjoaa"
+    }
   }
 }
