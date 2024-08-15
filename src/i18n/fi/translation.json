@@ -266,5 +266,13 @@
     "started": "Alkoi",
     "summary": "Yhteenveto",
     "workplace-or-job-description": "Työpaikka / toimenkuva"
+  },
+  "menus": {
+    "tool-navigation": {
+      "competences": "Mitä minä osaan",
+      "goals": "Mitä minä haluan",
+      "interests": "Mikä minua kiinnostaa",
+      "restrictions": "Mitä minä en halua"
+    }
   }
 }
