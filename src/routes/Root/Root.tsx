@@ -15,7 +15,7 @@ import { Footer, NavigationBar, PopupList, PopupListItem, SkipLink, useMediaQuer
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, ScrollRestoration, useLoaderData, useNavigate } from 'react-router-dom';
 
 const NavigationBarItem = (to: string, text: string) => ({
   key: to,
@@ -83,7 +83,6 @@ const Root = () => {
   const getActiveClassNames = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'bg-secondary-1-50 w-full rounded-sm py-3 pl-5 -ml-5' : '';
   const name = `${data?.etunimi} ${data?.sukunimi}`;
-  const location = useLocation();
   const navigate = useNavigate();
   const { setLanguage } = useLanguage();
 
@@ -105,11 +104,10 @@ const Root = () => {
   };
 
   const changeLanguage = async (lang: LangCode) => {
-    const oldLang = i18n.language;
     setLangMenuOpen(false);
     await i18n.changeLanguage(lang);
-    navigate(location.pathname.replace(`/${oldLang}`, `/${i18n.language}`));
     setLanguage(lang);
+    navigate(`/${i18n.language}`);
   };
 
   return (
