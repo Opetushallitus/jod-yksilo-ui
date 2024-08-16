@@ -1,3 +1,5 @@
+@import '@jod/design-system/dist/style.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,8 +9,4 @@
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-}
-
-.language-menu {
-  margin-left: 70em;
 }
