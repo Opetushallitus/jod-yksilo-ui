@@ -28,7 +28,12 @@ import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom'
 import { useLanguage } from './hooks/useLanguage';
 import i18n from './i18n/config';
 import './index.css';
-import { JobOpportunity, Competences as JobOpportunityCompetences, Overview } from './routes/JobOpportunity';
+import {
+  JobOpportunity,
+  Competences as JobOpportunityCompetences,
+  Overview,
+  loader as jobOpportunityLoader,
+} from './routes/JobOpportunity';
 
 const App = () => {
   const { getLanguage } = useLanguage();
@@ -50,6 +55,8 @@ const App = () => {
         {
           path: `${i18n.t('slugs.job-opportunity.index')}/:id`,
           element: <JobOpportunity />,
+          loader: jobOpportunityLoader,
+          id: 'job-opportunity',
           children: [
             {
               index: true,

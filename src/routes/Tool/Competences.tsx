@@ -233,10 +233,7 @@ const Competences = () => {
           <div className="flex flex-col gap-5">
             {tyomahdollisuudet.map((item) => {
               return (
-                <NavLink
-                  key={item.id}
-                  to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${crypto.randomUUID()}`}
-                >
+                <NavLink key={item.id} to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${item.id}`}>
                   <OpportunityCard
                     name={item.otsikko[i18n.language] ?? ''}
                     description={item.tiivistelma?.[i18n.language] ?? ''}
