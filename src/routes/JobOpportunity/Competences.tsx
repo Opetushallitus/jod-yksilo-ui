@@ -4,12 +4,18 @@ import { useActionBar } from '@/hooks/useActionBar';
 import { Accordion, Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
+import { useRouteLoaderData } from 'react-router-dom';
 import Tabs from './Tabs';
-import { mockTyomahdollisuus } from './utils';
+import { LoaderData } from './loader';
 
 const Competences = () => {
   const { i18n, t } = useTranslation();
-  const title = mockTyomahdollisuus.nimi;
+  const data = useRouteLoaderData('job-opportunity') as LoaderData;
+  const lang = i18n.language;
+  const title = data.tyomahdollisuus?.otsikko[lang] ?? '';
+  const competences = data.osaamiset;
+  console.log(competences);
+
   const routes: RoutesNavigationListProps['routes'] = [
     {
       active: false,
@@ -64,8 +70,8 @@ const Competences = () => {
               {t('job-opportunity.specific-professional-competences.description')}
             </p>
             <ol className="list-decimal ml-7 font-bold text-black leading-7">
-              {mockTyomahdollisuus.ammatillisetErityisosaamiset.map((competence) => (
-                <li key={competence}>{competence}</li>
+              {competences.map((competence) => (
+                <li key={competence.uri}>{competence.nimi[lang]}</li>
               ))}
             </ol>
           </Accordion>

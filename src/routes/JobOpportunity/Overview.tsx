@@ -4,12 +4,15 @@ import { useActionBar } from '@/hooks/useActionBar';
 import { Accordion, Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
+import { useRouteLoaderData } from 'react-router-dom';
 import Tabs from './Tabs';
-import { mockTyomahdollisuus } from './utils';
+import { LoaderData } from './loader';
 
 const Overview = () => {
   const { i18n, t } = useTranslation();
-  const title = mockTyomahdollisuus.nimi;
+  const jobOpportunity = (useRouteLoaderData('job-opportunity') as LoaderData).tyomahdollisuus;
+  const lang = i18n.language;
+  const title = jobOpportunity?.otsikko[lang];
   const routes: RoutesNavigationListProps['routes'] = [
     {
       active: false,
@@ -57,7 +60,7 @@ const Overview = () => {
         </SimpleNavigationList>
       }
     >
-      <Title value={title} />
+      <Title value={title ?? ''} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">{title}</h1>
       <Tabs />
       <div className="flex flex-col gap-11">
@@ -72,7 +75,7 @@ const Overview = () => {
             expandLessText={t('expand-less')}
             lang={i18n.language}
           >
-            <p className="text-body-sm mt-4">{mockTyomahdollisuus.kuvaus}</p>
+            <p className="text-body-sm mt-4">{jobOpportunity?.kuvaus?.[lang]}</p>
           </Accordion>
         </div>
         <div>
@@ -88,9 +91,7 @@ const Overview = () => {
           >
             <p className="text-body-sm mt-4 mb-4">{t('job-opportunity.most-common-job-tasks.description')}</p>
             <ol className="list-decimal ml-7 font-bold text-black leading-7">
-              {mockTyomahdollisuus.yleisimmatTyotehtavat.map((task) => (
-                <li key={task}>{task}</li>
-              ))}
+              {jobOpportunity?.jakaumat?.ammatti?.arvot.map((task) => <li key={task.arvo}>{task.arvo}</li>)}
             </ol>
           </Accordion>
         </div>
