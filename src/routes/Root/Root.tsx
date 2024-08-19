@@ -199,24 +199,22 @@ const Root = () => {
         )}
         <ErrorNote />
         {megaMenuOpen && (
-          <div className="absolute left-0 right-0 max-w-[1092px] m-auto">
-            <MegaMenu
-              footer={
-                'Lorem ipsum dolor sit amet, soleat iracundia eos ea, est in modo vivendo moderatius. Ex duo hinc graeco evertitur, nisl affert vel cu. Ne ius quis repudiare. Ne modo eius corpora mea. Ipsum congue definitiones sed in, an sit unum splendide.'
-              }
-              onClose={() => setMegaMenuOpen(false)}
-            >
-              <SimpleNavigationList title={t('user-guide')} backgroundClassName="bg-white" collapsible={!sm}>
-                <RoutesNavigationList routes={userGuideMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
-              </SimpleNavigationList>
-              <SimpleNavigationList title={'Kohtaantopalvelu'} backgroundClassName="bg-white" collapsible={!sm}>
-                <RoutesNavigationList routes={toolMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
-              </SimpleNavigationList>
-              <SimpleNavigationList title={t('profile.index')} backgroundClassName="bg-white" collapsible={!sm}>
-                <RoutesNavigationList routes={profileMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
-              </SimpleNavigationList>
-            </MegaMenu>
-          </div>
+          <MegaMenu
+            footer={
+              'Lorem ipsum dolor sit amet, soleat iracundia eos ea, est in modo vivendo moderatius. Ex duo hinc graeco evertitur, nisl affert vel cu. Ne ius quis repudiare. Ne modo eius corpora mea. Ipsum congue definitiones sed in, an sit unum splendide.'
+            }
+            onClose={() => setMegaMenuOpen(false)}
+          >
+            <SimpleNavigationList title={t('user-guide')} backgroundClassName="bg-white" collapsible={!sm}>
+              <RoutesNavigationList routes={userGuideMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
+            </SimpleNavigationList>
+            <SimpleNavigationList title={'Kohtaantopalvelu'} backgroundClassName="bg-white" collapsible={!sm}>
+              <RoutesNavigationList routes={toolMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
+            </SimpleNavigationList>
+            <SimpleNavigationList title={t('profile.index')} backgroundClassName="bg-white" collapsible={!sm}>
+              <RoutesNavigationList routes={profileMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
+            </SimpleNavigationList>
+          </MegaMenu>
         )}
       </header>
       <ActionBarContext.Provider value={footerRef.current}>
