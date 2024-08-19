@@ -30,5 +30,6 @@ module.exports = {
     '@typescript-eslint/no-misused-promises': 'warn',
     '@typescript-eslint/no-floating-promises': 'warn',
     '@singlestore/react-hooks-disable-import/react-hooks-disable-import': 'error',
+    'no-console': 'warn',
   },
 };

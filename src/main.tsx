@@ -12,11 +12,13 @@ const root = createRoot(container);
 
 if (process.env.NODE_ENV !== 'production') {
   void import('web-vitals').then((vitals) => {
+    /* eslint-disable no-console */
     vitals.onCLS(console.log);
     vitals.onFID(console.log);
     vitals.onFCP(console.log);
     vitals.onLCP(console.log);
     vitals.onTTFB(console.log);
+    /* eslint-enable no-console */
   });
   void import('@axe-core/react').then((axe) => {
     void axe.default(React, root, 1000);
