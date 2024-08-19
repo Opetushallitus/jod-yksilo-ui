@@ -14,7 +14,6 @@ const Competences = () => {
   const lang = i18n.language;
   const title = data.tyomahdollisuus?.otsikko[lang] ?? '';
   const competences = data.osaamiset;
-  console.log(competences);
 
   const routes: RoutesNavigationListProps['routes'] = [
     {
