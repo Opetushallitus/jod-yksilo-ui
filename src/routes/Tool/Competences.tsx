@@ -16,6 +16,7 @@ import {
 } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { MdTune } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 
 interface Tyomahdollisuus {
@@ -213,7 +214,7 @@ const Competences = () => {
                   label="Näytä suodattimet"
                   hideLabel
                   onClick={() => setShowFilters(true)}
-                  icon="tune"
+                  icon={<MdTune size={24} />}
                 />
 
                 <Modal

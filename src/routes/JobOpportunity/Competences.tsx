@@ -4,6 +4,7 @@ import { useActionBar } from '@/hooks/useActionBar';
 import { Accordion, Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
+import { MdArrowBack } from 'react-icons/md';
 import { useRouteLoaderData } from 'react-router-dom';
 import Tabs from './Tabs';
 import { LoaderData } from './loader';
@@ -130,7 +131,7 @@ const Competences = () => {
             <Button
               variant="white"
               label="Takaisin"
-              icon="arrow_back"
+              icon={<MdArrowBack size={24} />}
               iconSide="left"
               onClick={() => {
                 alert('Takaisin');

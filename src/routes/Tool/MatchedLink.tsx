@@ -1,7 +1,7 @@
 import { RoundLinkButton, useMediaQueries } from '@jod/design-system';
 import { Link, useMatch } from 'react-router-dom';
 
-const MatchedLink = ({ link }: { link: { to: string; text: string; icon: string } }) => {
+const MatchedLink = ({ link }: { link: { to: string; text: string; icon: React.ReactNode } }) => {
   const { sm } = useMediaQueries();
   const match = useMatch(link.to);
   const selected = match?.pathname == link.to;
