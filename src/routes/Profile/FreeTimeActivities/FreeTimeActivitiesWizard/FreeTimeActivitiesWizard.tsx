@@ -6,6 +6,7 @@ import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-syst
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import ActivityStep from './ActivityStep';
@@ -226,7 +227,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
                 onClick={() => setStep(step - 1)}
                 label={t('previous')}
                 variant="white"
-                icon={!sm ? 'arrow_back' : undefined}
+                icon={!sm ? <MdArrowBack size={24} /> : undefined}
               />
             )}
             {step < steps && (
@@ -234,7 +235,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
                 onClick={() => setStep(step + 1)}
                 label={t('next')}
                 variant="white"
-                icon={!sm ? 'arrow_forward' : undefined}
+                icon={!sm ? <MdArrowForward size={24} /> : undefined}
                 disabled={errors.nimi !== undefined || errors.patevyydet?.[selectedPatevyys] !== undefined}
               />
             )}

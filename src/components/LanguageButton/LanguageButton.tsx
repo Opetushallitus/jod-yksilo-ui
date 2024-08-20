@@ -1,3 +1,5 @@
+import { MdLanguage } from 'react-icons/md';
+
 interface LanguageButtonProps {
   onLanguageClick: () => void;
 }
@@ -5,7 +7,7 @@ interface LanguageButtonProps {
 export const LanguageButton = ({ onLanguageClick }: LanguageButtonProps) => {
   return (
     <button className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2" onClick={onLanguageClick}>
-      <span className="material-symbols-outlined size-24 select-none text-black">language</span>
+      <MdLanguage size={24} />
     </button>
   );
 };

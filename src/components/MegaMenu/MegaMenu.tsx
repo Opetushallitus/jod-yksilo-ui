@@ -8,6 +8,8 @@ import { userGuideRoutes } from '@/routeDefinitions/userGuideRoutes';
 import { useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { MdClose, MdOutlineCancel } from 'react-icons/md';
+export { LanguageButton, UserButton } from '@/components';
 
 type MegaMenuProps = {
   onClose: () => void;
@@ -62,9 +64,9 @@ export const MegaMenu = ({ onClose, user, changeLanguage, logout }: MegaMenuProp
             <button onClick={doClose} className="flex items-center ml-5">
               <span
                 aria-hidden
-                className={`text-black sm:text-secondary-gray material-symbols-outlined size-32 flex size-[32px] select-none items-center justify-center self-center rounded-full`}
+                className={`text-black sm:text-secondary-gray flex select-none items-center justify-center self-center rounded-full`}
               >
-                {sm ? 'cancel' : 'close'}
+                {sm ? <MdOutlineCancel size={32} /> : <MdClose size={32} />}
               </span>
             </button>
           </li>

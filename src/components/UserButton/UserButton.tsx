@@ -1,5 +1,6 @@
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
 import { useTranslation } from 'react-i18next';
+import { MdOutlinePerson } from 'react-icons/md';
 
 export const UserButton = ({ user }: Pick<NavigationBarProps, 'user'>) => {
   const { i18n } = useTranslation();
@@ -22,7 +23,7 @@ export const UserButton = ({ user }: Pick<NavigationBarProps, 'user'>) => {
     </user.component>
   ) : (
     <a href={login.url} className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2">
-      <span className="material-symbols-outlined size-24 select-none text-black">person</span>
+      <MdOutlinePerson size={24} />
     </a>
   );
 };

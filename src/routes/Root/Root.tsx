@@ -13,6 +13,7 @@ import { Footer, PopupList, PopupListItem, SkipLink, useMediaQueries } from '@jo
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+import { MdClose, MdMenu } from 'react-icons/md';
 import { NavLink, Outlet, ScrollRestoration, useLoaderData, useNavigate } from 'react-router-dom';
 
 const NavigationBarItem = (to: string, text: string) => ({
@@ -161,15 +162,31 @@ const Root = () => {
           }
           menuComponent={
             sm ? (
-              <button className="flex gap-4 justify-center" aria-label="Avaa valikko" onClick={toggleMenu('mega')}>
+              <button
+                className="flex gap-4 justify-center items-center"
+                aria-label="Avaa valikko"
+                onClick={toggleMenu('mega')}
+              >
                 <>
                   <span>Valikko</span>
-                  <span className="material-symbols-outlined size-24 select-none">menu</span>
+                  <span className="size-7 flex justify-center items-center">
+                    <MdMenu size={24} />
+                  </span>
                 </>
               </button>
             ) : (
               <button className="flex justify-self-end" aria-label="Avaa valikko" onClick={toggleMenu('mega')}>
-                <span className="material-symbols-outlined size-24 select-none">{megaMenuOpen ? 'close' : 'menu'}</span>
+                <>
+                  {megaMenuOpen ? (
+                    <span className="size-7 flex justify-center items-center">
+                      <MdClose size={24} />
+                    </span>
+                  ) : (
+                    <span className="size-7 flex justify-center items-center">
+                      <MdMenu size={24} />
+                    </span>
+                  )}
+                </>
               </button>
             )
           }
