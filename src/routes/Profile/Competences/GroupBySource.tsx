@@ -13,7 +13,7 @@ export const GroupBySource = ({
 }: GroupByProps) => {
   return (
     <>
-      <h2 className="my-6 text-heading-2 font-poppins">Osaamiseni lähteiden mukaan</h2>
+      <h2 className="my-6 text-heading-2">Osaamiseni lähteiden mukaan</h2>
       {filterKeys.map((key) => {
         return (
           Array.isArray(filters[key]) &&

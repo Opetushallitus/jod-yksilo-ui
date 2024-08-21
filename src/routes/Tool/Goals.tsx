@@ -267,7 +267,7 @@ const ToolTipContent = () => (
 
 // TODO: title and description per SelectionCard
 const SelectionInfoCard = () => (
-  <div className="bg-white px-7 py-6 rounded text-body-md">
+  <div className="bg-white px-7 py-6 rounded text-body-md font-arial">
     <span className="font-bold">Tavoitteen vaikutus tuloksiin:</span>
     <p>
       Ohjeistaa täyttämään osaamisprofiilin ja sieltä löytyvien apuvälineiden hyödyntämiseen. Kannustaa katsomaan myös
@@ -289,11 +289,11 @@ const Goals = () => {
     <div className="flex flex-col">
       <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
         <div className="order-1 col-span-1 sm:col-span-2">
-          <h1 className="mb-5 mt-7 text-heading-1 font-poppins text-black">{t('tool.goals.heading-1')}</h1>
+          <h1 className="mb-5 mt-7 text-heading-1 text-black">{t('tool.goals.heading-1')}</h1>
 
           <div className="pb-7">
-            <p className="mb-6 text-body-md text-black">{t('tool.goals.page-description')}</p>
-            <p className="text-body-md text-black">{t('tool.goals.field-description')}</p>
+            <p className="mb-6 text-body-md font-arial text-black">{t('tool.goals.page-description')}</p>
+            <p className="text-body-md font-arial text-black">{t('tool.goals.field-description')}</p>
           </div>
         </div>
 

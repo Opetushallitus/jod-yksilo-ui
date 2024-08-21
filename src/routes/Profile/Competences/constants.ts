@@ -11,7 +11,7 @@ export const osaaminenColorMap: Record<OsaaminenLahdeTyyppi, NonNullable<TagProp
   PATEVYYS: 'secondary-2',
 };
 
-export const groupByHeaderClasses = 'font-poppins mb-5 mt-8 pb-3 border-b border-border-gray truncate text-heading-3';
+export const groupByHeaderClasses = 'mb-5 mt-8 pb-3 border-b border-border-gray truncate text-heading-3';
 export interface FilterData {
   label: string;
   value: string;

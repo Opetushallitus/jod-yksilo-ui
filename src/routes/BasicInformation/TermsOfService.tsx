@@ -12,8 +12,8 @@ const TermsOfService = () => {
   return (
     <>
       <Title value={title} />
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">{title}</h1>
-      <p className="mb-8 text-body-md">
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <p className="mb-8 text-body-md font-arial">
         Vitae tempus quam pellentesque nec nam aliquam. Turpis cursus in hac habitasse platea dictumst quisque sagittis.
         Et odio pellentesque diam volutpat. Magna ac placerat vestibulum lectus mauris ultrices eros in cursus. Sed
         vulputate mi sit amet mauris commodo quis imperdiet massa. Et netus et malesuada fames ac turpis. Vel fringilla

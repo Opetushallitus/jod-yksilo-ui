@@ -26,7 +26,7 @@ interface Tyomahdollisuus {
 
 const HelpingToolsContent = () => (
   <>
-    <span className="text-body-sm text-secondary-gray sm:text-body-xs">
+    <span className="text-body-sm font-arial text-secondary-gray sm:text-body-xs">
       Rakenna koulutus- ja työhistoriasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle
       sopivia osaamisia.
     </span>
@@ -59,7 +59,7 @@ const Filters = ({
         addPadding={isMobile}
         backgroundClassName="bg-bg-gray-2"
       >
-        <RadioButtonGroup value={order} onChange={setOrder}>
+        <RadioButtonGroup value={order} onChange={setOrder} label="Järjestele (kaikki)" hideLabel>
           <RadioButton label="Tuloksen sopivuus" value="a" />
           <RadioButton label="Kehitystrendi" value="b" />
           <RadioButton label="Työllistusnäkymä" value="c" />
@@ -71,7 +71,7 @@ const Filters = ({
         addPadding={isMobile}
         backgroundClassName="bg-bg-gray-2"
       >
-        <RadioButtonGroup value={industry} onChange={setIndustry}>
+        <RadioButtonGroup value={industry} onChange={setIndustry} label="Järjestele (kaikki)" hideLabel>
           <RadioButton label="Toimiala x" value="x" />
           <RadioButton label="Toimiala y" value="y" />
         </RadioButtonGroup>
@@ -120,11 +120,11 @@ const Competences = () => {
     <div className="flex flex-col">
       <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-6">
         <div className="order-1 col-span-2 sm:col-span-4">
-          <h1 className="mb-5 mt-7 text-heading-1 font-poppins text-black">{t('tool.competences.heading-1')}</h1>
+          <h1 className="mb-5 mt-7 text-heading-1 text-black">{t('tool.competences.heading-1')}</h1>
 
           <div className="pb-7">
-            <p className="mb-6 text-body-md text-black">{t('tool.competences.page-description')}</p>
-            <p className="text-body-md text-black">{t('tool.competences.field-description')}</p>
+            <p className="mb-6 text-body-md font-arial text-black">{t('tool.competences.page-description')}</p>
+            <p className="text-body-md font-arial text-black">{t('tool.competences.field-description')}</p>
           </div>
         </div>
 
@@ -146,7 +146,7 @@ const Competences = () => {
         <div className="order-2 col-span-2 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0">
           {sm ? (
             <>
-              <span className="text-heading-4 font-poppins text-black">Apuvälineitä</span>
+              <span className="text-heading-4 text-black">Apuvälineitä</span>
               <HelpingToolsContent />
             </>
           ) : (
@@ -158,9 +158,9 @@ const Competences = () => {
       </div>
 
       <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-6">
-        <div className="font-poppins col-span-2 sm:col-span-6">
+        <div className="col-span-2 sm:col-span-6">
           <div className="mt-10 flex flex-col sm:mt-11 sm:flex-row">
-            <span className="text-body-md text-black font-medium sm:text-body-lg">
+            <span className="text-body-md font-arial text-black font-medium sm:text-body-lg sm:font-poppins">
               {t('tool.competences.available-options')}{' '}
               <span className="text-heading-3 font-bold">
                 {t('tool.competences.available-options-totals', { professionsCount, educationsCount })}
@@ -169,8 +169,8 @@ const Competences = () => {
           </div>
         </div>
 
-        <div className="font-poppins col-span-2 mt-10 flex flex-col sm:col-span-6 sm:mt-9 sm:flex-row">
-          <span className="text-body-md text-black font-medium sm:text-body-lg">
+        <div className="col-span-2 mt-10 flex flex-col sm:col-span-6 sm:mt-9 sm:flex-row">
+          <span className="text-body-md font-arial text-black font-medium sm:text-body-lg sm:font-poppins">
             {t('tool.competences.adjust-data-emphasis')}
           </span>
         </div>
@@ -196,7 +196,7 @@ const Competences = () => {
           {!sm && (
             <>
               <div className="mb-2 flex flex-row justify-between">
-                <span className="mr-5 text-heading-3 font-poppins text-black">Tuloslista</span>
+                <span className="mr-5 text-heading-3 text-black">Tuloslista</span>
                 <button
                   className="material-symbols-outlined size-24 select-none"
                   aria-label="Näytä suodattimet"

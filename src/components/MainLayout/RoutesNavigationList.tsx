@@ -11,7 +11,7 @@ export interface RoutesNavigationListProps {
 
 export const RoutesNavigationList = ({ routes, onClick }: RoutesNavigationListProps) => {
   return (
-    <ul className="flex flex-col gap-y-2 py-4 font-poppins">
+    <ul className="flex flex-col gap-y-2 py-4">
       {routes.map((route) => (
         <li key={route.path} className="flex min-h-7 items-center w-full">
           <NavLink
