@@ -1,0 +1,88 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NavigationBar > renders no navigation items and no user 1`] = `
+<div
+  class="min-w-min shadow-border bg-white"
+>
+  <nav
+    class="mx-auto flex h-[56px] items-center justify-between gap-4 px-7 py-3 font-semibold lg:container"
+    role="navigation"
+  >
+    <div>
+      logo
+    </div>
+    <ul
+      class="inline-flex items-center gap-3 sm:gap-5"
+    >
+      <li
+        class="ml-5"
+      >
+        <button
+          class="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
+        >
+          <span
+            class="material-symbols-outlined size-24 select-none text-black"
+          >
+            language
+          </span>
+        </button>
+      </li>
+      <li>
+        <a
+          class="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
+          href="/login"
+        >
+          <span
+            class="material-symbols-outlined size-24 select-none text-black"
+          >
+            person
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;
+
+exports[`NavigationBar > renders only user 1`] = `
+<div
+  class="min-w-min shadow-border bg-white"
+>
+  <nav
+    class="mx-auto flex h-[56px] items-center justify-between gap-4 px-7 py-3 font-semibold lg:container"
+    role="navigation"
+  >
+    <div>
+      logo
+    </div>
+    <ul
+      class="inline-flex items-center gap-3 sm:gap-5"
+    >
+      <li
+        class="ml-5"
+      >
+        <button
+          class="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
+        >
+          <span
+            class="material-symbols-outlined size-24 select-none text-black"
+          >
+            language
+          </span>
+        </button>
+      </li>
+      <li>
+        <a
+          aria-label="Profile"
+          class="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-3 text-white"
+          href="/profile"
+          role="img"
+          title="Reetta Räppänä"
+        >
+          RR
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

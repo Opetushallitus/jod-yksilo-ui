@@ -1,5 +1,5 @@
 import { components } from '@/api/schema';
-import { RoutesNavigationList, SimpleNavigationList } from '@/components';
+import { NavigationBar, RoutesNavigationList, SimpleNavigationList } from '@/components';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { ErrorNote } from '@/features';
 import { ActionBarContext } from '@/hooks/useActionBar';
@@ -11,7 +11,7 @@ import { toolRoutes } from '@/routeDefinitions/toolRoutes';
 import { userGuideRoutes } from '@/routeDefinitions/userGuideRoutes';
 import { clearCsrfToken } from '@/state/csrf/csrfSlice';
 import { store } from '@/state/store';
-import { Footer, NavigationBar, PopupList, PopupListItem, SkipLink, useMediaQueries } from '@jod/design-system';
+import { Footer, PopupList, PopupListItem, SkipLink, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
