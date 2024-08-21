@@ -132,7 +132,7 @@ const Root = () => {
             <button className="flex gap-4 justify-center" aria-label="Avaa valikko" onClick={toggleMenu('mega')}>
               {sm ? (
                 <>
-                  <span className="font-poppins">Valikko</span>
+                  <span>Valikko</span>
                   <span className="material-symbols-outlined size-24 select-none">menu</span>
                 </>
               ) : (

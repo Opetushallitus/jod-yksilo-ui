@@ -29,21 +29,21 @@ const EducationTable = ({ selectableColumnHeader, rows, onRowClick }: TableProps
 
   return (
     <div className="overflow-x-hidden">
-      <table className="mb-8 w-full text-left font-poppins" border={0} cellPadding={0} cellSpacing={0}>
+      <table className="mb-8 w-full text-left" border={0} cellPadding={0} cellSpacing={0}>
         <thead>
           <tr className="border-b-2 border-inactive-gray">
-            <th scope="col" className="py-3 pr-5 align-bottom text-form-label text-secondary-gray">
+            <th scope="col" className="py-3 pr-5 align-bottom text-form-label font-arial text-secondary-gray">
               {selectableColumnHeader}
             </th>
             {sm && (
               <>
-                <th scope="col" className="py-3 pr-5 align-bottom text-form-label text-secondary-gray">
+                <th scope="col" className="py-3 pr-5 align-bottom text-form-label font-arial text-secondary-gray">
                   {t('work-history.started')}
                 </th>
-                <th scope="col" className="py-3 pr-7 align-bottom text-form-label text-secondary-gray">
+                <th scope="col" className="py-3 pr-7 align-bottom text-form-label font-arial text-secondary-gray">
                   {t('work-history.ended')}
                 </th>
-                <th scope="col" className="py-3 align-bottom text-form-label text-secondary-gray">
+                <th scope="col" className="py-3 align-bottom text-form-label font-arial text-secondary-gray">
                   {t('work-history.competences')}
                 </th>
               </>
@@ -99,7 +99,7 @@ const TableRow = ({
   const countCompetences = 'work-history.count-competences';
 
   // CSS class names for non-header cells
-  const tdBaseClasses = 'pt-5 text-body-xs font-bold text-secondary-gray';
+  const tdBaseClasses = 'pt-5 text-body-xs font-arial font-bold text-secondary-gray';
 
   const osaamisetCountTotal =
     row.osaamisetCount > 0
@@ -111,10 +111,10 @@ const TableRow = ({
       <tr key={row.key} className="align-bottom">
         <td className="pl-8 sm:pl-[56px] pr-5">
           <button className="bg-none border-none" onClick={() => onRowClick(row)}>
-            <span className="text-body-xs font-bold text-secondary-gray sm:pt-3">{row.nimi[language]}</span>
+            <span className="text-body-xs font-arial font-bold text-secondary-gray sm:pt-3">{row.nimi[language]}</span>
           </button>
           {!sm && (
-            <div className="flex gap-5 pb-2 pt-1 text-body-xs font-bold text-secondary-gray">
+            <div className="flex gap-5 pb-2 pt-1 text-body-xs font-arial font-bold text-secondary-gray">
               <p>
                 {formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
               </p>
@@ -142,7 +142,7 @@ const TableRow = ({
               <span className="pr-5 text-heading-4">{row.nimi[language]}</span>
             </button>
             {!sm && (
-              <div className="flex gap-5 pb-2 pt-1 text-body-xs font-bold text-secondary-gray">
+              <div className="flex gap-5 pb-2 pt-1 text-body-xs font-arial font-bold text-secondary-gray">
                 <p>
                   {formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
                 </p>

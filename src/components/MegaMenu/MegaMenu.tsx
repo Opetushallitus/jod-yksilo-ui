@@ -26,7 +26,7 @@ export const MegaMenu = ({ children, footer, onClose }: MegaMenuProps) => {
       <div className="overflow-y-auto max-h-[calc(100vh-172px)] sm:max-h-[calc(100vh-56px)] overscroll-contain">
         <div className="pt-9 sm:pt-10 px-5 sm:px-10 pb-7 sm:grid-cols-3 grid-cols-1 sm:gap-8 grid">{children}</div>
         {sm && footer && (
-          <div className="sticky bottom-0 bg-[#F5F5F5] h-[100px] px-9 py-6 text-secondary-gray text-body-sm">
+          <div className="sticky bottom-0 bg-[#F5F5F5] h-[100px] px-9 py-6 text-secondary-gray text-body-sm font-arial">
             {footer}
           </div>
         )}

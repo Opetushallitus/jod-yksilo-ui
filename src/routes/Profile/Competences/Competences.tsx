@@ -147,7 +147,13 @@ const Competences = () => {
             <RoutesNavigationList routes={navigationRoutes} />
           </SimpleNavigationList>
           <SimpleNavigationList title="Järjestele" backgroundClassName="bg-bg-gray-2" collapsible>
-            <RadioButtonGroup value={groupBy} onChange={setGroupBy} className="font-poppins py-4">
+            <RadioButtonGroup
+              value={groupBy}
+              onChange={setGroupBy}
+              className="py-4"
+              label="Järjestele (kaikki)"
+              hideLabel
+            >
               <RadioButton label="Lähteiden mukaan" value={GROUP_BY_SOURCE} />
               <RadioButton label="Teemoittain" value={GROUP_BY_THEME} />
               <RadioButton label="Aakkosellisesti" value={GROUP_BY_ALPHABET} />
@@ -161,7 +167,7 @@ const Competences = () => {
                   title={
                     <Checkbox
                       label={
-                        <span className="font-poppins flex items-center hyphens-auto" lang={locale}>
+                        <span className="flex items-center hyphens-auto" lang={locale}>
                           <div
                             className={`mx-3 h-5 w-5 flex-none rounded-full ${filterColorMap[osaaminenColorMap[key]]}`}
                             aria-hidden
@@ -201,7 +207,7 @@ const Competences = () => {
       }
     >
       <Title value={title} />
-      <h1 className="mb-5 text-heading-1 sm:text-heading-1 font-poppins">{title}</h1>
+      <h1 className="mb-5 text-heading-1 sm:text-heading-1">{title}</h1>
       <p className="mb-8 text-body-lg font-semibold">
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.

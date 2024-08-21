@@ -29,7 +29,7 @@ const Favorites = () => {
           </SimpleNavigationList>
           <SimpleNavigationList title="Sisältö" collapsible>
             <div className="py-4">
-              <p className="mb-5 text-body-xs text-secondary-gray">Valitse näytettävien suosikit.</p>
+              <p className="mb-5 text-body-xs font-arial text-secondary-gray">Valitse näytettävien suosikit.</p>
               TODO
             </div>
           </SimpleNavigationList>
@@ -37,8 +37,8 @@ const Favorites = () => {
       }
     >
       <Title value={title} />
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1 font-poppins">{title}</h1>
-      <p className="mb-8 text-body-md">
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <p className="mb-8 text-body-md font-arial">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
