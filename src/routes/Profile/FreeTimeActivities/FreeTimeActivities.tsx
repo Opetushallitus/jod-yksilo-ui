@@ -58,7 +58,7 @@ const FreeTimeActivities = () => {
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
       <SelectableTable
-        selectableColumnHeader={t('free-time-activities.activity-or-profiency-description')}
+        selectableColumnHeader={t('free-time-activities.activity-or-proficiency-description')}
         rows={rows}
         setRows={setRows}
       />
