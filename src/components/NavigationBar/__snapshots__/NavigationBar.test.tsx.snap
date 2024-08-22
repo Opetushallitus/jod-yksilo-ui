@@ -5,14 +5,14 @@ exports[`NavigationBar > renders no navigation items and no user 1`] = `
   class="min-w-min shadow-border bg-white"
 >
   <nav
-    class="mx-auto flex h-[56px] items-center justify-between gap-4 px-7 py-3 font-semibold lg:container"
+    class="mx-auto flex h-[56px] items-center gap-4 px-7 py-3 font-semibold lg:container"
     role="navigation"
   >
     <div>
       logo
     </div>
     <ul
-      class="inline-flex items-center gap-3 sm:gap-5"
+      class="inline-flex items-center gap-3 sm:gap-5 ml-auto"
     >
       <li
         class="ml-5"
@@ -30,7 +30,7 @@ exports[`NavigationBar > renders no navigation items and no user 1`] = `
       <li>
         <a
           class="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
-          href="/login"
+          href="/login?lang=fi"
         >
           <span
             class="material-symbols-outlined size-24 select-none text-black"
@@ -49,14 +49,14 @@ exports[`NavigationBar > renders only user 1`] = `
   class="min-w-min shadow-border bg-white"
 >
   <nav
-    class="mx-auto flex h-[56px] items-center justify-between gap-4 px-7 py-3 font-semibold lg:container"
+    class="mx-auto flex h-[56px] items-center gap-4 px-7 py-3 font-semibold lg:container"
     role="navigation"
   >
     <div>
       logo
     </div>
     <ul
-      class="inline-flex items-center gap-3 sm:gap-5"
+      class="inline-flex items-center gap-3 sm:gap-5 ml-auto"
     >
       <li
         class="ml-5"

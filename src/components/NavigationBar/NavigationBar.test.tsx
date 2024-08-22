@@ -1,10 +1,16 @@
+import { useMediaQueries } from '@jod/design-system';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
-
+import { describe, expect, it, vi } from 'vitest';
 import { NavigationBar, NavigationBarLinkProps } from './NavigationBar';
 
+vi.mock('@jod/design-system', () => ({
+  useMediaQueries: vi.fn(),
+}));
+
 describe('NavigationBar', () => {
+  vi.mocked(useMediaQueries).mockReturnValue({ sm: true, lg: false });
+
   const logo = <div>logo</div>;
 
   const user = {
@@ -16,10 +22,10 @@ describe('NavigationBar', () => {
     ),
   };
 
-  const login = { url: '/login', text: 'Login' };
+  const onLanguageClick = vi.fn();
 
   it('renders only user', () => {
-    const { container } = render(<NavigationBar logo={logo} user={user} login={login} />);
+    const { container } = render(<NavigationBar logo={logo} user={user} onLanguageClick={onLanguageClick} />);
 
     // Assert snapshot
     expect(container.firstChild).toMatchSnapshot();
@@ -30,7 +36,7 @@ describe('NavigationBar', () => {
   });
 
   it('renders no navigation items and no user', () => {
-    const { container } = render(<NavigationBar logo={logo} login={login} />);
+    const { container } = render(<NavigationBar logo={logo} onLanguageClick={onLanguageClick} />);
 
     // Assert snapshot
     expect(container.firstChild).toMatchSnapshot();
@@ -42,7 +48,7 @@ describe('NavigationBar', () => {
 
   it('renders menu component', () => {
     const menuComponent = <div>Menu</div>;
-    render(<NavigationBar logo={logo} menuComponent={menuComponent} login={login} />);
+    render(<NavigationBar logo={logo} menuComponent={menuComponent} onLanguageClick={onLanguageClick} />);
     const menuComponentElement = screen.getByText('Menu');
     expect(menuComponentElement).toBeInTheDocument();
   });
