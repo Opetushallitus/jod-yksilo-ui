@@ -150,8 +150,8 @@ const Competences = () => {
             <RadioButtonGroup
               value={groupBy}
               onChange={setGroupBy}
-              className="py-4"
-              label="Järjestele (kaikki)"
+              label="Järjestele"
+              className="font-poppins py-4"
               hideLabel
             >
               <RadioButton label="Lähteiden mukaan" value={GROUP_BY_SOURCE} />
