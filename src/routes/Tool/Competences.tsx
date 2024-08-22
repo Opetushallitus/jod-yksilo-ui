@@ -71,7 +71,7 @@ const Filters = ({
         addPadding={isMobile}
         backgroundClassName="bg-bg-gray-2"
       >
-        <RadioButtonGroup value={industry} onChange={setIndustry} label="Järjestele (kaikki)" hideLabel>
+        <RadioButtonGroup value={industry} onChange={setIndustry} label="Toimiala (työmahdollisuudet)" hideLabel>
           <RadioButton label="Toimiala x" value="x" />
           <RadioButton label="Toimiala y" value="y" />
         </RadioButtonGroup>
