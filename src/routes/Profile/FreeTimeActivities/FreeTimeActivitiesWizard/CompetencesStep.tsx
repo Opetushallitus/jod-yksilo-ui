@@ -6,11 +6,11 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FreeTimeActivitiesForm } from './utils';
 
-interface ProfiencyStepProps {
+interface CompetencesStepProps {
   patevyys: number;
 }
 
-const ProfiencyStep = ({ patevyys }: ProfiencyStepProps) => {
+const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
   const { t } = useTranslation();
   const { getValues, watch, control } = useFormContext<FreeTimeActivitiesForm>();
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
@@ -50,4 +50,4 @@ const ProfiencyStep = ({ patevyys }: ProfiencyStepProps) => {
   );
 };
 
-export default ProfiencyStep;
+export default CompetencesStep;

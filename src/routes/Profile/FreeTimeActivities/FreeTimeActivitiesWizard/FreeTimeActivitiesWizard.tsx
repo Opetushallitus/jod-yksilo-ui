@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import ActivityStep from './ActivityStep';
-import ProfiencyStep from './ProfiencyStep';
+import CompetencesStep from './CompetencesStep';
 import SummaryStep from './SummaryStep';
 import { type FreeTimeActivitiesForm } from './utils';
 
@@ -33,9 +33,11 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
     resolver: zodResolver(
       z
         .object({
+          id: z.string().optional(),
           nimi: z.string().min(1),
           patevyydet: z
             .object({
+              id: z.string().optional(),
               nimi: z.string().min(1),
               alkuPvm: z.string().date(),
               loppuPvm: z.string().date().optional().or(z.literal('')),
@@ -98,6 +100,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
       }
     },
   });
+  const trigger = methods.trigger;
   const errors = methods.formState.errors;
   const { isValid, isLoading } = useFormState({
     control: methods.control,
@@ -157,8 +160,12 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
   const isFirstStep = React.useMemo(() => step === 1, [step]);
   const selectedPatevyys = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
   const isActivityStep = React.useMemo(() => step !== steps && (step + 1) % 2 === 0, [step, steps]);
-  const isProficienyStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
+  const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
   const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
+
+  React.useEffect(() => {
+    void trigger();
+  }, [trigger, fields]);
 
   return !isLoading ? (
     <Modal
@@ -178,7 +185,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
             {isActivityStep && (
               <ActivityStep type={isFirstStep ? 'toiminta' : 'patevyys'} patevyys={selectedPatevyys} />
             )}
-            {isProficienyStep && <ProfiencyStep patevyys={selectedPatevyys} />}
+            {isCompetencesStep && <CompetencesStep patevyys={selectedPatevyys} />}
             {isSummaryStep && <SummaryStep />}
           </Form>
         </FormProvider>

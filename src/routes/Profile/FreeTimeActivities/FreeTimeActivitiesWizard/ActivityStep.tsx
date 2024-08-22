@@ -18,8 +18,8 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
         {type === 'toiminta' && !id && t('free-time-activities.add-new-activity')}
         {type === 'toiminta' && id && t('free-time-activities.edit-activity')}
-        {type === 'patevyys' && !patevyysId && t('free-time-activities.add-new-profiency')}
-        {type === 'patevyys' && patevyysId && t('free-time-activities.edit-profiency')}
+        {type === 'patevyys' && !patevyysId && t('free-time-activities.add-new-proficiency')}
+        {type === 'patevyys' && patevyysId && t('free-time-activities.edit-proficiency')}
       </h2>
       <p className="mb-7 text-body-sm font-arial text-black sm:mb-9">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
@@ -38,7 +38,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
       )}
       <div className="mb-6">
         <InputField
-          label={t('free-time-activities.profiency')}
+          label={t('free-time-activities.proficiency')}
           {...register(`patevyydet.${patevyys}.nimi` as const)}
           placeholder="Lorem ipsum dolor sit amet"
           help="Help text"
