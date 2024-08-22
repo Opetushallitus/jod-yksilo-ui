@@ -1,14 +1,12 @@
 import { components } from '@/api/schema';
-import { NavigationBar, RoutesNavigationList, SimpleNavigationList } from '@/components';
+import { LanguageMenu, NavigationBar } from '@/components';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
+import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
 import { ErrorNote } from '@/features';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
 import { useLanguage } from '@/hooks/useLanguage';
-import { LangCode, supportedLanguageCodes } from '@/i18n/config';
-import { profileRoutes } from '@/routeDefinitions/profileRoutes';
-import { toolRoutes } from '@/routeDefinitions/toolRoutes';
-import { userGuideRoutes } from '@/routeDefinitions/userGuideRoutes';
+import { LangCode } from '@/i18n/config';
 import { clearCsrfToken } from '@/state/csrf/csrfSlice';
 import { store } from '@/state/store';
 import { Footer, PopupList, PopupListItem, SkipLink, useMediaQueries } from '@jod/design-system';
@@ -50,18 +48,6 @@ const Root = () => {
   };
 
   const profileIndexPath = t('slugs.profile.index');
-  const profileMenuRoutes = profileRoutes.map((route) => ({
-    ...route,
-    path: `${profileIndexPath}/${route.path}`,
-  }));
-  const toolMenuRoutes = toolRoutes.map((route) => ({
-    ...route,
-    path: `${t('slugs.tool.index')}/${route.path}`,
-  }));
-  const userGuideMenuRoutes = userGuideRoutes.map((route) => ({
-    ...route,
-    path: `${t('slugs.user-guide.index')}/${route.path}`,
-  }));
 
   const userMenuUrls = {
     preferences: `/${i18n.language}/${profileIndexPath}/${t('slugs.profile.preferences')}`,
@@ -108,7 +94,50 @@ const Root = () => {
     await i18n.changeLanguage(lang);
     setLanguage(lang);
     navigate(`/${i18n.language}`);
+    setMegaMenuOpen(false);
   };
+
+  const getUserData: () => NavigationBarProps['user'] = () =>
+    data?.csrf && {
+      name,
+      component: ({ children, className }) => {
+        return (
+          <div className="relative">
+            <form action="/logout" method="POST" hidden ref={logoutForm}>
+              <input type="hidden" name="_csrf" value={data.csrf.token} />
+              <input type="hidden" name="lang" value={i18n.language} />
+            </form>
+            <button
+              type="button"
+              className={`${className} bg-cover bg-center`}
+              onClick={sm ? toggleMenu('user') : void 0}
+            >
+              {children}
+            </button>
+            {sm && userMenuOpen && (
+              <div className="absolute right-0 min-w-max translate-y-8 transform">
+                <PopupList>
+                  <PopupListItem>
+                    <NavLink
+                      to={userMenuUrls.preferences}
+                      onClick={() => setUserMenuOpen(false)}
+                      className={getActiveClassNames}
+                    >
+                      {t('profile.index')}
+                    </NavLink>
+                  </PopupListItem>
+                  <PopupListItem>
+                    <button type="button" onClick={logout}>
+                      {t('logout')}
+                    </button>
+                  </PopupListItem>
+                </PopupList>
+              </div>
+            )}
+          </div>
+        );
+      },
+    };
 
   return (
     <AuthContext.Provider value={data}>
@@ -122,99 +151,45 @@ const Root = () => {
         <NavigationBar
           onLanguageClick={toggleMenu('lang')}
           logo={
-            <NavLink to={`/${i18n.language}`} className="flex">
-              <div className="inline-flex select-none items-center gap-4 text-[24px] leading-[140%] text-secondary-gray">
-                <div className="h-8 w-8 bg-secondary-gray"></div>JOD
-              </div>
-            </NavLink>
+            sm && (
+              <NavLink to={`/${i18n.language}`} className="flex">
+                <div className="inline-flex select-none items-center gap-4 text-[24px] leading-[140%] text-secondary-gray">
+                  <div className="h-8 w-8 bg-secondary-gray"></div>JOD
+                </div>
+              </NavLink>
+            )
           }
           menuComponent={
-            <button className="flex gap-4 justify-center" aria-label="Avaa valikko" onClick={toggleMenu('mega')}>
-              {sm ? (
+            sm ? (
+              <button className="flex gap-4 justify-center" aria-label="Avaa valikko" onClick={toggleMenu('mega')}>
                 <>
                   <span>Valikko</span>
                   <span className="material-symbols-outlined size-24 select-none">menu</span>
                 </>
-              ) : (
+              </button>
+            ) : (
+              <button className="flex justify-self-end" aria-label="Avaa valikko" onClick={toggleMenu('mega')}>
                 <span className="material-symbols-outlined size-24 select-none">{megaMenuOpen ? 'close' : 'menu'}</span>
-              )}
-            </button>
+              </button>
+            )
           }
-          user={
-            data?.csrf && {
-              name,
-              component: ({ children, className }) => {
-                return (
-                  <div className="relative">
-                    <form action="/logout" method="POST" hidden ref={logoutForm}>
-                      <input type="hidden" name="_csrf" value={data.csrf.token} />
-                      <input type="hidden" name="lang" value={i18n.language} />
-                    </form>
-                    <button type="button" className={`${className} bg-cover bg-center`} onClick={toggleMenu('user')}>
-                      {children}
-                    </button>
-                    {userMenuOpen && (
-                      <div className="absolute right-0 min-w-max translate-y-8 transform">
-                        <PopupList>
-                          <PopupListItem>
-                            <NavLink
-                              to={userMenuUrls.preferences}
-                              onClick={() => setUserMenuOpen(false)}
-                              className={getActiveClassNames}
-                            >
-                              {t('profile.index')}
-                            </NavLink>
-                          </PopupListItem>
-                          <PopupListItem>
-                            <button type="button" onClick={logout}>
-                              {t('logout')}
-                            </button>
-                          </PopupListItem>
-                        </PopupList>
-                      </div>
-                    )}
-                  </div>
-                );
-              },
-            }
-          }
-          login={{ url: `/login?lang=${i18n.language}`, text: 'Login' }}
+          user={getUserData()}
         />
         {langMenuOpen && (
           <div className="relative lg:container mx-auto">
             <div className="absolute right-[50px] translate-y-7">
-              <PopupList classNames=" !bg-bg-gray-2">
-                {supportedLanguageCodes.map((value) => {
-                  return (
-                    <PopupListItem key={`lang-${value}-key`}>
-                      <button type="button" className="text-bold text-black" onClick={() => void changeLanguage(value)}>
-                        {t(`slugs.language.${value}`)}
-                      </button>
-                    </PopupListItem>
-                  );
-                })}
-              </PopupList>
+              <LanguageMenu onLanguageClick={changeLanguage} />
             </div>
           </div>
         )}
         <ErrorNote />
         {megaMenuOpen && (
           <MegaMenu
-            footer={
-              'Lorem ipsum dolor sit amet, soleat iracundia eos ea, est in modo vivendo moderatius. Ex duo hinc graeco evertitur, nisl affert vel cu. Ne ius quis repudiare. Ne modo eius corpora mea. Ipsum congue definitiones sed in, an sit unum splendide.'
-            }
+            changeLanguage={changeLanguage}
+            user={getUserData()}
+            logout={logout}
             onClose={() => setMegaMenuOpen(false)}
-          >
-            <SimpleNavigationList title={t('user-guide')} backgroundClassName="bg-white" collapsible={!sm}>
-              <RoutesNavigationList routes={userGuideMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
-            </SimpleNavigationList>
-            <SimpleNavigationList title={'Kohtaantopalvelu'} backgroundClassName="bg-white" collapsible={!sm}>
-              <RoutesNavigationList routes={toolMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
-            </SimpleNavigationList>
-            <SimpleNavigationList title={t('profile.index')} backgroundClassName="bg-white" collapsible={!sm}>
-              <RoutesNavigationList routes={profileMenuRoutes} onClick={() => setMegaMenuOpen(false)} />
-            </SimpleNavigationList>
-          </MegaMenu>
+          />
         )}
       </header>
       <ActionBarContext.Provider value={footerRef.current}>
