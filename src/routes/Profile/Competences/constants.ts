@@ -28,3 +28,7 @@ export interface GroupByProps {
   deleteOsaaminen: (id: string) => Promise<void>;
   isOsaaminenVisible: (key: OsaaminenLahdeTyyppi, id: string) => boolean;
 }
+
+export interface MobileFilterButton {
+  mobileFilterOpenerComponent: React.ReactNode;
+}
