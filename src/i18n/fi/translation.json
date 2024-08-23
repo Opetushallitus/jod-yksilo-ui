@@ -6,6 +6,7 @@
   "accessibility-statement": "Saavutettavuusseloste",
   "basic-information": "Perustiedot",
   "cancel": "Peruuta",
+  "choose": "Valitse",
   "competences": "Osaamiset",
   "cookie-policy": "Evästekäytäntö",
   "cookies": "Evästeet",
@@ -225,7 +226,15 @@
       "page-description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi - kaikki tietosi ja kokemuksesi ovat tärkeitä.",
       "available-options": "Lukumääräisesti valittavissasi eri vaihtoehtoja",
       "available-options-totals": "{{professionsCount}} ammattia, {{educationsCount}} koulutusta.",
-      "adjust-data-emphasis": "Säädä syöttämäsi tietojen painotuksia - tulokset päivittyvät samanaikaisesti uusien painotusten mukaan."
+      "adjust-data-emphasis": "Säädä syöttämäsi tietojen painotuksia - tulokset päivittyvät samanaikaisesti uusien painotusten mukaan.",
+      "trend": "Kehitystrendi",
+      "trend-up": "Nouseva kehitys",
+      "trend-down": "Laskeva kehitys",
+      "employment-outlook": "Työllisyysnäkymä",
+      "outlook-value": "{{outlook}}/5",
+      "maybe-has-restrictions": "Saattaa sisältää rajoitteita",
+      "idustry-name": "Toimialan nimi",
+      "common-educational-background": "Yleisin koulutustausta"
     },
     "title": "Työkalu",
     "goals": {

@@ -98,6 +98,15 @@ const Competences = () => {
   const [tyomahdollisuudet, setTyomahdollisuudet] = React.useState<Tyomahdollisuus[]>([]);
   const [professionsCount] = React.useState(534);
   const [educationsCount] = React.useState(1002);
+  const [selectedOpportunities, setSelectedOpportunities] = React.useState<string[]>([]);
+
+  const toggleOpportunity = (id: string) => {
+    if (selectedOpportunities.includes(id)) {
+      setSelectedOpportunities(selectedOpportunities.filter((item) => item !== id));
+    } else {
+      setSelectedOpportunities([...selectedOpportunities, id]);
+    }
+  };
 
   const osaamisSuosittelijaHandler = (values: OsaaminenValue[]) => {
     setSelectedCompentences(values);
@@ -237,11 +246,18 @@ const Competences = () => {
               return (
                 <NavLink key={item.id} to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${item.id}`}>
                   <OpportunityCard
+                    toggleSelection={() => toggleOpportunity(item.id ?? '')}
+                    selected={selectedOpportunities.includes(item.id ?? '')}
                     name={item.otsikko[i18n.language] ?? ''}
                     description={item.tiivistelma?.[i18n.language] ?? ''}
                     matchValue={99}
                     matchLabel="Sopivuus"
-                    type={'work'}
+                    type="work"
+                    trend="up"
+                    employmentOutlook={3}
+                    hasRestrictions
+                    industryName="Lorem ipsum dolor"
+                    mostCommonEducationBackground="Lorem ipsum dolor"
                   />
                 </NavLink>
               );
