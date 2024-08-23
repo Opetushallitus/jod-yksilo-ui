@@ -10,6 +10,7 @@ import {
   Modal,
   RadioButton,
   RadioButtonGroup,
+  RoundButton,
   Slider,
   useMediaQueries,
 } from '@jod/design-system';
@@ -57,7 +58,7 @@ const Filters = ({
         title="Järjestele (kaikki)"
         borderEnabled={isMobile}
         addPadding={isMobile}
-        backgroundClassName="bg-bg-gray-2"
+        backgroundClassName={isMobile ? 'bg-bg-gray-2' : 'bg-bg-gray'}
       >
         <RadioButtonGroup value={order} onChange={setOrder} label="Järjestele (kaikki)" hideLabel>
           <RadioButton label="Tuloksen sopivuus" value="a" />
@@ -69,7 +70,7 @@ const Filters = ({
         title="Toimiala (työmahdollisuudet)"
         borderEnabled={isMobile}
         addPadding={isMobile}
-        backgroundClassName="bg-bg-gray-2"
+        backgroundClassName={isMobile ? 'bg-bg-gray-2' : 'bg-bg-gray'}
       >
         <RadioButtonGroup value={industry} onChange={setIndustry} label="Toimiala (työmahdollisuudet)" hideLabel>
           <RadioButton label="Toimiala x" value="x" />
@@ -197,13 +198,14 @@ const Competences = () => {
             <>
               <div className="mb-2 flex flex-row justify-between">
                 <span className="mr-5 text-heading-3 text-black">Tuloslista</span>
-                <button
-                  className="material-symbols-outlined size-24 select-none"
-                  aria-label="Näytä suodattimet"
+                <RoundButton
+                  size="sm"
+                  bgColor="white"
+                  label="Näytä suodattimet"
+                  hideLabel
                   onClick={() => setShowFilters(true)}
-                >
-                  tune
-                </button>
+                  icon="tune"
+                />
 
                 <Modal
                   open={showFilters}
