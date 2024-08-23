@@ -1,9 +1,15 @@
 import { ConfirmDialog, Tag } from '@jod/design-system';
 import { t } from 'i18next';
 import React from 'react';
-import { GroupByProps, groupByHeaderClasses, osaaminenColorMap } from './constants';
+import { GroupByProps, MobileFilterButton, groupByHeaderClasses, osaaminenColorMap } from './constants';
 
-export const GroupByAlphabet = ({ locale, osaamiset, deleteOsaaminen, isOsaaminenVisible }: GroupByProps) => {
+export const GroupByAlphabet = ({
+  locale,
+  osaamiset,
+  deleteOsaaminen,
+  isOsaaminenVisible,
+  mobileFilterOpenerComponent,
+}: GroupByProps & MobileFilterButton) => {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ';
 
   const letterHasOsaaminen = (letter: string) =>
@@ -23,7 +29,10 @@ export const GroupByAlphabet = ({ locale, osaamiset, deleteOsaaminen, isOsaamine
   );
   return (
     <>
-      <h2 className="mb-6 text-heading-2">Osaamiseni aakkosjärjestyksessä</h2>
+      <div className="flex flex-row justify-between gap-5">
+        <h2 className="my-6 text-heading-2">Osaamiseni aakkosjärjestyksessä</h2>
+        {mobileFilterOpenerComponent}
+      </div>
       {Array.from(alphabet)
         .filter(letterHasOsaaminen)
         .map((letter) => {

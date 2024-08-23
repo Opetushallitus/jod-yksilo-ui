@@ -10,7 +10,16 @@ import { useActionBar } from '@/hooks/useActionBar';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
 import { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
-import { Accordion, Button, Checkbox, RadioButton, RadioButtonGroup } from '@jod/design-system';
+import {
+  Accordion,
+  Button,
+  Checkbox,
+  Modal,
+  RadioButton,
+  RadioButtonGroup,
+  RoundButton,
+  useMediaQueries,
+} from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
@@ -31,6 +40,8 @@ const Competences = () => {
   const locale = i18n.language as 'fi' | 'sv';
   const [selectedFilters, setSelectedFilters] = React.useState<FiltersType>({});
   const [filterKeys, setFilterKeys] = React.useState<(keyof FiltersType)[]>([]);
+  const [showFilters, setShowFilters] = React.useState(false);
+  const { sm } = useMediaQueries();
 
   const mapExperienceToFilter = React.useCallback(
     (currentFilters: FiltersType, type: OsaaminenLahdeTyyppi) => (experience: Kokemus) => ({
@@ -139,6 +150,77 @@ const Competences = () => {
     'secondary-5': 'bg-secondary-5',
   };
 
+  const MobileFilterButton = () => {
+    return !sm ? (
+      <RoundButton
+        size="sm"
+        bgColor="white"
+        label="Näytä suodattimet"
+        hideLabel
+        onClick={() => setShowFilters(true)}
+        icon="tune"
+      />
+    ) : (
+      <></>
+    );
+  };
+
+  const Filters = () => (
+    <>
+      <SimpleNavigationList title="Järjestele" backgroundClassName={sm ? 'bg-bg-gray-2' : 'bg-bg-gray'} collapsible>
+        <RadioButtonGroup value={groupBy} onChange={setGroupBy} className="py-4" label="Järjestele (kaikki)" hideLabel>
+          <RadioButton label="Lähteiden mukaan" value={GROUP_BY_SOURCE} />
+          <RadioButton label="Teemoittain" value={GROUP_BY_THEME} />
+          <RadioButton label="Aakkosellisesti" value={GROUP_BY_ALPHABET} />
+        </RadioButtonGroup>
+      </SimpleNavigationList>
+      <SimpleNavigationList title="Suodata" backgroundClassName={sm ? 'bg-bg-gray-2' : 'bg-bg-gray'} collapsible>
+        <div className="flex flex-col gap-y-3 py-4">
+          {filterKeys.map((key) => (
+            <Accordion
+              key={key}
+              title={
+                <Checkbox
+                  label={
+                    <span className="flex items-center hyphens-auto" lang={locale}>
+                      <div
+                        className={`mx-3 h-5 w-5 flex-none rounded-full ${filterColorMap[osaaminenColorMap[key]]}`}
+                        aria-hidden
+                      />
+                      {t(`types.competence.${key}`)}
+                    </span>
+                  }
+                  checked={isFilterTypeChecked(key)}
+                  onChange={toggleFiltersByType(key)}
+                  ariaLabel="Työpaikka osaamiset"
+                  name="suodata"
+                  value="tyopaikka-osaamiset"
+                  className="min-h-7"
+                />
+              }
+              expandMoreText={t('expand-more')}
+              expandLessText={t('expand-less')}
+              lang={locale}
+            >
+              {selectedFilters[key]?.map((item, idx) => (
+                <div className="pl-6" key={item.value}>
+                  <Checkbox
+                    name={item.label}
+                    ariaLabel={`${key} ${item.label}`}
+                    label={item.label}
+                    checked={item.checked}
+                    onChange={toggleSingleFilter(key, idx)}
+                    value={item.value}
+                  />
+                </div>
+              ))}
+            </Accordion>
+          ))}
+        </div>
+      </SimpleNavigationList>
+    </>
+  );
+
   return (
     <MainLayout
       navChildren={
@@ -150,8 +232,8 @@ const Competences = () => {
             <RadioButtonGroup
               value={groupBy}
               onChange={setGroupBy}
-              label="Järjestele"
-              className="font-poppins py-4"
+              className="py-4"
+              label="Järjestele (kaikki)"
               hideLabel
             >
               <RadioButton label="Lähteiden mukaan" value={GROUP_BY_SOURCE} />
@@ -203,6 +285,7 @@ const Competences = () => {
               ))}
             </div>
           </SimpleNavigationList>
+          <Filters />
         </div>
       }
     >
@@ -212,27 +295,43 @@ const Competences = () => {
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
-      {groupBy === GROUP_BY_SOURCE && (
-        <GroupBySource
-          filters={selectedFilters}
-          filterKeys={filterKeys}
-          locale={locale}
-          osaamiset={osaamiset}
-          deleteOsaaminen={deleteOsaaminen}
-          isOsaaminenVisible={isOsaaminenVisible}
-        />
-      )}
-      {groupBy === GROUP_BY_THEME && <></>}
-      {groupBy === GROUP_BY_ALPHABET && (
-        <GroupByAlphabet
-          filters={selectedFilters}
-          filterKeys={filterKeys}
-          locale={locale}
-          osaamiset={osaamiset}
-          deleteOsaaminen={deleteOsaaminen}
-          isOsaaminenVisible={isOsaaminenVisible}
-        />
-      )}
+      <div>
+        {!sm && (
+          <Modal
+            open={showFilters}
+            onClose={() => setShowFilters(false)}
+            content={<Filters />}
+            footer={
+              <div className="flex flex-row justify-end gap-4">
+                <Button variant="white" label="Sulje" onClick={() => setShowFilters(false)} />
+              </div>
+            }
+          />
+        )}
+        {groupBy === GROUP_BY_SOURCE && (
+          <GroupBySource
+            filters={selectedFilters}
+            filterKeys={filterKeys}
+            locale={locale}
+            osaamiset={osaamiset}
+            deleteOsaaminen={deleteOsaaminen}
+            isOsaaminenVisible={isOsaaminenVisible}
+            mobileFilterOpenerComponent={<MobileFilterButton />}
+          />
+        )}
+        {groupBy === GROUP_BY_THEME && <></>}
+        {groupBy === GROUP_BY_ALPHABET && (
+          <GroupByAlphabet
+            filters={selectedFilters}
+            filterKeys={filterKeys}
+            locale={locale}
+            osaamiset={osaamiset}
+            deleteOsaaminen={deleteOsaaminen}
+            isOsaaminenVisible={isOsaaminenVisible}
+            mobileFilterOpenerComponent={<MobileFilterButton />}
+          />
+        )}
+      </div>
       {actionBar &&
         createPortal(
           <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">

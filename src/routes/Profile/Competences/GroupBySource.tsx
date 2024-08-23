@@ -1,7 +1,7 @@
 import { ConfirmDialog, Tag } from '@jod/design-system';
 import { t } from 'i18next';
 import React from 'react';
-import { groupByHeaderClasses, osaaminenColorMap, type GroupByProps } from './constants';
+import { GroupByProps, MobileFilterButton, groupByHeaderClasses, osaaminenColorMap } from './constants';
 
 export const GroupBySource = ({
   filters,
@@ -10,10 +10,15 @@ export const GroupBySource = ({
   osaamiset,
   deleteOsaaminen,
   isOsaaminenVisible,
-}: GroupByProps) => {
+  mobileFilterOpenerComponent,
+}: GroupByProps & MobileFilterButton) => {
   return (
     <>
-      <h2 className="my-6 text-heading-2">Osaamiseni lähteiden mukaan</h2>
+      <div className="flex flex-row justify-between gap-5">
+        <h2 className="my-6 text-heading-2">Osaamiseni lähteiden mukaan</h2>
+        {mobileFilterOpenerComponent}
+      </div>
+
       {filterKeys.map((key) => {
         return (
           Array.isArray(filters[key]) &&
