@@ -129,8 +129,8 @@ const Competences = () => {
 
   return (
     <div className="flex flex-col">
-      <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-6">
-        <div className="order-1 col-span-2 sm:col-span-4">
+      <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
+        <div className="order-1 col-span-1 sm:col-span-2">
           <h1 className="mb-5 mt-7 text-heading-1 text-black">{t('tool.competences.heading-1')}</h1>
 
           <div className="pb-7">
@@ -139,7 +139,7 @@ const Competences = () => {
           </div>
         </div>
 
-        <div className="order-3 col-span-2 sm:order-2 sm:col-span-4">
+        <div className="order-3 col-span-1 sm:order-2 sm:col-span-2">
           <div className="mb-5">
             <InputField
               label={t('work-history.job-duties')}
@@ -154,7 +154,7 @@ const Competences = () => {
             value={selectedCompetences}
           />
         </div>
-        <div className="order-2 col-span-2 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0">
+        <div className="order-2 col-span-1 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0">
           {sm ? (
             <>
               <span className="text-heading-4 text-black">Apuvälineitä</span>
@@ -168,8 +168,8 @@ const Competences = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-6">
-        <div className="col-span-2 sm:col-span-6">
+      <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
+        <div className="col-span-1 sm:col-span-3">
           <div className="mt-10 flex flex-col sm:mt-11 sm:flex-row">
             <span className="text-body-md font-arial text-black font-medium sm:text-body-lg sm:font-poppins">
               {t('tool.competences.available-options')}{' '}
@@ -180,13 +180,13 @@ const Competences = () => {
           </div>
         </div>
 
-        <div className="col-span-2 mt-10 flex flex-col sm:col-span-6 sm:mt-9 sm:flex-row">
+        <div className="col-span-1 mt-10 flex flex-col sm:col-span-3 sm:mt-9 sm:flex-row">
           <span className="text-body-md font-arial text-black font-medium sm:text-body-lg sm:font-poppins">
             {t('tool.competences.adjust-data-emphasis')}
           </span>
         </div>
 
-        <div className="col-span-2 mt-6 grid grid-cols-1 gap-7 sm:col-span-6 sm:mt-5 sm:grid-cols-3">
+        <div className="col-span-1 mt-6 grid grid-cols-1 gap-7 sm:col-span-3 sm:mt-5 sm:grid-cols-3">
           <Slider
             label="Osaamiset"
             onValueChange={(val) => setCompetencesMultiplier(val)}
@@ -203,7 +203,7 @@ const Competences = () => {
             value={restrictionsMultiplier}
           />
         </div>
-        <div className="col-span-2 mt-10 sm:col-span-4 sm:mt-8">
+        <div className="col-span-1 mt-10 sm:col-span-2 sm:mt-8">
           {!sm && (
             <>
               <div className="mb-2 flex flex-row justify-between">
@@ -266,7 +266,7 @@ const Competences = () => {
           </div>
         </div>
         {sm && (
-          <div className="col-span-2 sm:mt-8">
+          <div className="col-span-1 sm:mt-8">
             <Filters industry={industry} setIndustry={setIndustry} order={order} setOrder={setOrder} isMobile={sm} />
           </div>
         )}
