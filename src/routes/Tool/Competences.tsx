@@ -1,30 +1,9 @@
-import { client } from '@/api/client';
-import { OsaamisSuosittelija, SimpleNavigationList } from '@/components';
-import { OpportunityCard } from '@/components/OpportunityCard/OpportunityCard';
+import { OsaamisSuosittelija } from '@/components';
 import { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 import { useDebounceState } from '@/hooks/useDebounceState';
-import {
-  Accordion,
-  Button,
-  InputField,
-  Modal,
-  RadioButton,
-  RadioButtonGroup,
-  RoundButton,
-  Slider,
-  useMediaQueries,
-} from '@jod/design-system';
+import { Accordion, InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdTune } from 'react-icons/md';
-import { NavLink } from 'react-router-dom';
-
-interface Tyomahdollisuus {
-  id?: string;
-  otsikko: Record<string, string | undefined>;
-  tiivistelma?: Record<string, string | undefined>;
-  kuvaus?: Record<string, string | undefined>;
-}
 
 const HelpingToolsContent = () => (
   <>
@@ -40,92 +19,16 @@ const HelpingToolsContent = () => (
   </>
 );
 
-const Filters = ({
-  industry,
-  setIndustry,
-  order,
-  setOrder,
-  isMobile,
-}: {
-  industry: string;
-  setIndustry: (val: string) => void;
-  order: string;
-  setOrder: (val: string) => void;
-  isMobile: boolean;
-}) => {
-  return (
-    <div className="inline-flex flex-col gap-6 sm:gap-5 w-full">
-      <SimpleNavigationList
-        title="Järjestele (kaikki)"
-        borderEnabled={isMobile}
-        addPadding={isMobile}
-        backgroundClassName={isMobile ? 'bg-bg-gray-2' : 'bg-bg-gray'}
-      >
-        <RadioButtonGroup value={order} onChange={setOrder} label="Järjestele (kaikki)" hideLabel>
-          <RadioButton label="Tuloksen sopivuus" value="a" />
-          <RadioButton label="Kehitystrendi" value="b" />
-          <RadioButton label="Työllistusnäkymä" value="c" />
-        </RadioButtonGroup>
-      </SimpleNavigationList>
-      <SimpleNavigationList
-        title="Toimiala (työmahdollisuudet)"
-        borderEnabled={isMobile}
-        addPadding={isMobile}
-        backgroundClassName={isMobile ? 'bg-bg-gray-2' : 'bg-bg-gray'}
-      >
-        <RadioButtonGroup value={industry} onChange={setIndustry} label="Toimiala (työmahdollisuudet)" hideLabel>
-          <RadioButton label="Toimiala x" value="x" />
-          <RadioButton label="Toimiala y" value="y" />
-        </RadioButtonGroup>
-      </SimpleNavigationList>
-    </div>
-  );
-};
-
 const Competences = () => {
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
   const { sm } = useMediaQueries();
-
-  const [competencesMultiplier, setCompetencesMultiplier] = React.useState(50);
-  const [interestMultiplier, setInterestMultiplier] = React.useState(50);
-  const [restrictionsMultiplier, setRestrictionsMultiplier] = React.useState(50);
-
-  const [showFilters, setShowFilters] = React.useState(false);
-  const [industry, setIndustry] = React.useState('x');
-  const [order, setOrder] = React.useState('a');
 
   const [debouncedTyotehtava, tyotehtava, setTyotehtava] = useDebounceState('', 500);
   const [selectedCompetences, setSelectedCompentences] = React.useState<OsaaminenValue[]>([]);
-  const [tyomahdollisuudet, setTyomahdollisuudet] = React.useState<Tyomahdollisuus[]>([]);
-  const [professionsCount] = React.useState(534);
-  const [educationsCount] = React.useState(1002);
-  const [selectedOpportunities, setSelectedOpportunities] = React.useState<string[]>([]);
-
-  const toggleOpportunity = (id: string) => {
-    if (selectedOpportunities.includes(id)) {
-      setSelectedOpportunities(selectedOpportunities.filter((item) => item !== id));
-    } else {
-      setSelectedOpportunities([...selectedOpportunities, id]);
-    }
-  };
 
   const osaamisSuosittelijaHandler = (values: OsaaminenValue[]) => {
     setSelectedCompentences(values);
   };
-
-  const fetchTyomahdollisuudet = async () => {
-    const response = await client.GET('/api/tyomahdollisuudet');
-    if (response.data?.sisalto) {
-      setTyomahdollisuudet(response.data.sisalto);
-    }
-  };
-
-  React.useEffect(() => {
-    const getTyomahdollisuudet = async () => {
-      await fetchTyomahdollisuudet();
-    };
-    void getTyomahdollisuudet();
-  }, []);
 
   return (
     <div className="flex flex-col">
@@ -166,110 +69,6 @@ const Competences = () => {
             </Accordion>
           )}
         </div>
-      </div>
-
-      <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
-        <div className="col-span-1 sm:col-span-3">
-          <div className="mt-10 flex flex-col sm:mt-11 sm:flex-row">
-            <span className="text-body-md font-arial text-black font-medium sm:text-body-lg sm:font-poppins">
-              {t('tool.competences.available-options')}{' '}
-              <span className="text-heading-3 font-bold">
-                {t('tool.competences.available-options-totals', { professionsCount, educationsCount })}
-              </span>
-            </span>
-          </div>
-        </div>
-
-        <div className="col-span-1 mt-10 flex flex-col sm:col-span-3 sm:mt-9 sm:flex-row">
-          <span className="text-body-md font-arial text-black font-medium sm:text-body-lg sm:font-poppins">
-            {t('tool.competences.adjust-data-emphasis')}
-          </span>
-        </div>
-
-        <div className="col-span-1 mt-6 grid grid-cols-1 gap-7 sm:col-span-3 sm:mt-5 sm:grid-cols-3">
-          <Slider
-            label="Osaamiset"
-            onValueChange={(val) => setCompetencesMultiplier(val)}
-            value={competencesMultiplier}
-          />
-          <Slider
-            label="Kiinnostukset"
-            onValueChange={(val) => setInterestMultiplier(val)}
-            value={interestMultiplier}
-          />
-          <Slider
-            label="Rajoitukset"
-            onValueChange={(val) => setRestrictionsMultiplier(val)}
-            value={restrictionsMultiplier}
-          />
-        </div>
-        <div className="col-span-1 mt-10 sm:col-span-2 sm:mt-8">
-          {!sm && (
-            <>
-              <div className="mb-2 flex flex-row justify-between">
-                <span className="mr-5 text-heading-3 text-black">Tuloslista</span>
-                <RoundButton
-                  size="sm"
-                  bgColor="white"
-                  label="Näytä suodattimet"
-                  hideLabel
-                  onClick={() => setShowFilters(true)}
-                  icon={<MdTune size={24} />}
-                />
-
-                <Modal
-                  open={showFilters}
-                  onClose={() => setShowFilters(false)}
-                  content={
-                    <Filters
-                      industry={industry}
-                      setIndustry={setIndustry}
-                      order={order}
-                      setOrder={setOrder}
-                      isMobile={sm}
-                    />
-                  }
-                  footer={
-                    <div className="flex flex-row justify-end gap-4">
-                      <Button variant="white" label="Sulje" onClick={() => setShowFilters(false)} />
-                    </div>
-                  }
-                />
-              </div>
-              <span>
-                Tarkenna tuloksia: valitse haluamasi tunnusluvut ja järjestä lista uudelleen napauttamalla oikean laidan
-                painiketta.
-              </span>
-            </>
-          )}
-          <div className="flex flex-col gap-5">
-            {tyomahdollisuudet.map((item) => {
-              return (
-                <NavLink key={item.id} to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${item.id}`}>
-                  <OpportunityCard
-                    toggleSelection={() => toggleOpportunity(item.id ?? '')}
-                    selected={selectedOpportunities.includes(item.id ?? '')}
-                    name={item.otsikko[i18n.language] ?? ''}
-                    description={item.tiivistelma?.[i18n.language] ?? ''}
-                    matchValue={99}
-                    matchLabel="Sopivuus"
-                    type="work"
-                    trend="up"
-                    employmentOutlook={3}
-                    hasRestrictions
-                    industryName="Lorem ipsum dolor"
-                    mostCommonEducationBackground="Lorem ipsum dolor"
-                  />
-                </NavLink>
-              );
-            })}
-          </div>
-        </div>
-        {sm && (
-          <div className="col-span-1 sm:mt-8">
-            <Filters industry={industry} setIndustry={setIndustry} order={order} setOrder={setOrder} isMobile={sm} />
-          </div>
-        )}
       </div>
     </div>
   );
