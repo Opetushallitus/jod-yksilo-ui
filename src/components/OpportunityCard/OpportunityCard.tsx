@@ -114,14 +114,12 @@ export const OpportunityCard = ({
           <Match match={matchValue} label={matchLabel} bg={bgForType(type)} />
           {!sm && <SelectedCheckbox selected={selected} toggleSelection={toggleSelection} name={name} />}
         </div>
-        {!sm && <div className="font-[22px] leading-[34px] font-bold text-black">{name}</div>}
+        {!sm && <div className="text-[22px] leading-[34px] font-bold text-black">{name}</div>}
         <div className="flex flex-col gap-y-2">
           {sm && (
             <div className="flex flex-row justify-between">
-              <span className="grow-1 text-heading-2 text-black">{name}</span>
-              <span className="grow-0 shrink">
-                <SelectedCheckbox selected={selected} toggleSelection={toggleSelection} name={name} />
-              </span>
+              <span className="text-heading-2 text-black hyphens-auto">{name}</span>
+              <SelectedCheckbox selected={selected} toggleSelection={toggleSelection} name={name} />
             </div>
           )}
           <span className="font-arial text-body-md">{description}</span>

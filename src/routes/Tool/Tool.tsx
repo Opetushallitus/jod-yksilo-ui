@@ -183,8 +183,8 @@ const Tool = () => {
       <nav role="navigation">{sm ? <Desktop /> : <Mobile />}</nav>
       <Outlet />
 
-      <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-6">
-        <div className="col-span-2 sm:col-span-6">
+      <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
+        <div className="col-span-1 sm:col-span-3">
           <div className="mt-10 flex flex-col sm:mt-11 sm:flex-row">
             <span className="text-body-md font-arial text-black font-medium sm:text-body-lg sm:font-poppins">
               {t('tool.competences.available-options')}{' '}
@@ -195,13 +195,13 @@ const Tool = () => {
           </div>
         </div>
 
-        <div className="col-span-2 mt-10 flex flex-col sm:col-span-6 sm:mt-9 sm:flex-row">
+        <div className="col-span-1 mt-10 flex flex-col sm:col-span-3 sm:mt-9 sm:flex-row">
           <span className="text-body-md font-arial text-black font-medium sm:text-body-lg sm:font-poppins">
             {t('tool.competences.adjust-data-emphasis')}
           </span>
         </div>
 
-        <div className="col-span-2 mt-6 grid grid-cols-1 gap-7 sm:col-span-6 sm:mt-5 sm:grid-cols-3">
+        <div className="col-span-1 mt-6 grid grid-cols-1 gap-7 sm:col-span-3 sm:mt-5 sm:grid-cols-3">
           <Slider
             label="Osaamiset"
             onValueChange={(val) => setCompetencesMultiplier(val)}
@@ -218,7 +218,7 @@ const Tool = () => {
             value={restrictionsMultiplier}
           />
         </div>
-        <div className="col-span-2 mt-10 sm:col-span-4 sm:mt-8">
+        <div className="col-span-1 mt-10 sm:col-span-2 sm:mt-8">
           {!sm && (
             <>
               <div className="mb-2 flex flex-row justify-between">
@@ -281,7 +281,7 @@ const Tool = () => {
           </div>
         </div>
         {sm && (
-          <div className="col-span-2 sm:mt-8">
+          <div className="col-span-1 sm:mt-8">
             <Filters industry={industry} setIndustry={setIndustry} order={order} setOrder={setOrder} isMobile={sm} />
           </div>
         )}
