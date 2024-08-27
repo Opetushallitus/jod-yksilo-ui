@@ -298,7 +298,7 @@ const Goals = () => {
         </div>
 
         <div className="order-3 col-span-1 sm:order-2 sm:col-span-3">
-          <div className="flex flex-col sm:flex-row space-between gap-3 sm:gap-8">
+          <div className="flex flex-wrap flex-col sm:flex-row space-between gap-3 sm:gap-8">
             <SelectionCard
               selected={selectedCard === 'a'}
               onClick={() => toggleCardSelection('a')}
