@@ -1,6 +1,8 @@
 import { useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { HiTrendingDown, HiTrendingUp } from 'react-icons/hi';
+import { MdBlock } from 'react-icons/md';
 
 type CardType = 'work' | 'education';
 interface OpportunityCardProps {
@@ -125,8 +127,8 @@ export const OpportunityCard = ({
           <span className="font-arial text-body-md">{description}</span>
           <div className="mt-4 flex flex-wrap">
             <BottomBox title={t('tool.competences.trend')}>
-              <span className="material-symbols-outlined text-accent" aria-label={t(`tool.competences.trend-${trend}`)}>
-                <span aria-hidden>{`trending_${trend}`}</span>
+              <span className="text-accent" aria-label={t(`tool.competences.trend-${trend}`)}>
+                {trend === 'up' ? <HiTrendingUp size={24} /> : <HiTrendingDown size={24} />}
               </span>
             </BottomBox>
             <BottomBox title={t('tool.competences.employment-outlook')}>
@@ -137,9 +139,7 @@ export const OpportunityCard = ({
             </BottomBox>
             {hasRestrictions && (
               <BottomBox title={t('tool.competences.maybe-has-restrictions')}>
-                <span className="material-symbols-outlined text-accent" aria-hidden>
-                  block
-                </span>
+                <MdBlock className="text-accent" size={20} />
               </BottomBox>
             )}
             {industryName && (
