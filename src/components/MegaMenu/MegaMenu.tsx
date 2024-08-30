@@ -2,9 +2,9 @@ import { LanguageButton, LanguageMenu, RoutesNavigationList, SimpleNavigationLis
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
 import { useAuth } from '@/hooks/useAuth';
 import { LangCode } from '@/i18n/config';
-import { profileRoutes } from '@/routeDefinitions/profileRoutes';
-import { toolRoutes } from '@/routeDefinitions/toolRoutes';
-import { userGuideRoutes } from '@/routeDefinitions/userGuideRoutes';
+import useProfileRoutes from '@/routeDefinitions/profileRoutes';
+import useToolRoutes from '@/routeDefinitions/toolRoutes';
+import useUserGuideRoutes from '@/routeDefinitions/userGuideRoutes';
 import { useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -32,19 +32,18 @@ export const MegaMenu = ({ onClose, user, changeLanguage, logout }: MegaMenuProp
     onClose();
   };
 
+  const { profileRoutes } = useProfileRoutes();
+  const { toolRoutes } = useToolRoutes();
+  const { userGuideRoutes } = useUserGuideRoutes();
+  const prefixRoutePath = (prefix: string) => (route: { name: string; path: string }) => ({
+    ...route,
+    path: `${prefix}/${route.path}`,
+  });
+
   const profileIndexPath = t('slugs.profile.index');
-  const profileMenuRoutes = profileRoutes.map((route) => ({
-    ...route,
-    path: `${profileIndexPath}/${route.path}`,
-  }));
-  const toolMenuRoutes = toolRoutes.map((route) => ({
-    ...route,
-    path: `${t('slugs.tool.index')}/${route.path}`,
-  }));
-  const userGuideMenuRoutes = userGuideRoutes.map((route) => ({
-    ...route,
-    path: `${t('slugs.user-guide.index')}/${route.path}`,
-  }));
+  const profileMenuRoutes = profileRoutes.map(prefixRoutePath(profileIndexPath));
+  const toolMenuRoutes = toolRoutes.map(prefixRoutePath(t('slugs.tool.index')));
+  const userGuideMenuRoutes = userGuideRoutes.map(prefixRoutePath(t('slugs.user-guide.index')));
 
   return (
     <div className="fixed top-0 sm:top-[56px] left-0 right-0 m-auto max-w-[1092px] bg-white shadow-border rounded-b-lg overflow-hidden">

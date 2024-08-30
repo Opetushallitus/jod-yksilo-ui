@@ -2,10 +2,11 @@ import { components } from '@/api/schema';
 import { LanguageMenu, NavigationBar } from '@/components';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
+import { LANG_SESSION_STORAGE_KEY } from '@/constants';
 import { ErrorNote } from '@/features';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
-import { useLanguage } from '@/hooks/useLanguage';
+import useLocalizedRoutes from '@/hooks/useLocalizedRoutes/useLocalizedRoutes';
 import { LangCode } from '@/i18n/config';
 import { clearCsrfToken } from '@/state/csrf/csrfSlice';
 import { store } from '@/state/store';
@@ -27,13 +28,16 @@ const NavigationBarItem = (to: string, text: string) => ({
 
 const Root = () => {
   const { t, i18n } = useTranslation();
+  const { resolveLocalizedUrl } = useLocalizedRoutes();
+  const navigate = useNavigate();
+
   const { sm } = useMediaQueries();
   const [megaMenuOpen, setMegaMenuOpen] = React.useState(false);
   const [userMenuOpen, setUserMenuOpen] = React.useState(false);
   const [langMenuOpen, setLangMenuOpen] = React.useState(false);
 
-  const userGuide = `/${i18n.language}/${t('slugs.user-guide.index')}`;
-  const basicInformation = `/${i18n.language}/${t('slugs.basic-information')}`;
+  const userGuide = t('slugs.user-guide.index');
+  const basicInformation = t('slugs.basic-information');
   const footerItems: React.ComponentProps<typeof Footer>['items'] = [
     NavigationBarItem(`${userGuide}/${t('slugs.user-guide.what-is-the-service')}`, t('about-us-and-user-guide')),
     NavigationBarItem(`${basicInformation}/${t('slugs.cookie-policy')}`, t('cookie-policy')),
@@ -46,12 +50,12 @@ const Root = () => {
   const logout = () => {
     store.dispatch(clearCsrfToken());
     logoutForm.current?.submit();
+    sessionStorage.removeItem(LANG_SESSION_STORAGE_KEY);
   };
 
   const profileIndexPath = t('slugs.profile.index');
-
   const userMenuUrls = {
-    preferences: `/${i18n.language}/${profileIndexPath}/${t('slugs.profile.preferences')}`,
+    preferences: `${profileIndexPath}/${t('slugs.profile.preferences')}`,
   };
 
   const logos: React.ComponentProps<typeof Footer>['logos'] = [1, 2, 3].map((item) => ({
@@ -70,8 +74,6 @@ const Root = () => {
   const getActiveClassNames = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'bg-secondary-1-50 w-full rounded-sm py-3 pl-5 -ml-5' : '';
   const name = `${data?.etunimi} ${data?.sukunimi}`;
-  const navigate = useNavigate();
-  const { setLanguage } = useLanguage();
 
   const toggleMenu = (menu: 'mega' | 'user' | 'lang') => () => {
     setMegaMenuOpen(false);
@@ -92,10 +94,13 @@ const Root = () => {
 
   const changeLanguage = async (lang: LangCode) => {
     setLangMenuOpen(false);
+    const newLocation = resolveLocalizedUrl(lang);
     await i18n.changeLanguage(lang);
-    setLanguage(lang);
-    navigate(`/${i18n.language}`);
+    sessionStorage.setItem(LANG_SESSION_STORAGE_KEY, lang);
+    navigate(newLocation);
+    setLangMenuOpen(false);
     setMegaMenuOpen(false);
+    location.assign(newLocation);
   };
 
   const getUserData: () => NavigationBarProps['user'] = () =>
