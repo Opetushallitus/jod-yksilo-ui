@@ -238,11 +238,11 @@
     },
     "title": "Työkalu",
     "goals": {
-      "field-description": "Napauta kuvaketta, jos haluat valita sen tavoitteeksesi.  Voit peruuttaa valinnan napauttamalla kuvaketta uudelleen.",
+      "field-description": "Napauta kuvaketta, jos haluat valita sen tavoitteeksesi. Voit peruuttaa valinnan napauttamalla kuvaketta uudelleen.",
       "heading-1": "Mitä minä haluan",
       "map-competence": "Kartoittaa omaa osaamistani",
-      "trainings": "Koulutuksia  osaamiseni  kasvattamiseksi",
-      "job-opportunities": "Tutkia työmahdollisuuksia osaamisellani",
+      "trainings": "Koulutuksia osaamiseni kasvattamiseksi",
+      "job-opportunities": "Tutkia työmahdollisuuksia osaamisellani",
       "map-opportunities": "Kartoittaa mahdollisuuksia alan vaihtamiseen",
       "something-else": "Jotain muuta, en tiedä mitä...",
       "page-description": "Tässä osiossa voit valita toiveidesi mukaiset tulokset palvelustamme. Jos olet epävarma, voit ohittaa tämän ja tutustua palveluumme omaan tahtiisi. Kun liikutat hiirtä kuvakkeiden ylle, näet niiden alla olevan selityksen siitä, miten ne vaikuttavat lopputulokseen"

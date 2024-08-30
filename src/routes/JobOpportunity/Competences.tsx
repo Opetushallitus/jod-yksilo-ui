@@ -1,6 +1,8 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList, Title } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
+import { useRouteId } from '@/hooks/useRouteId/useRouteId';
+import { type LangCode } from '@/i18n/config';
 import { Accordion, Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
@@ -11,10 +13,11 @@ import { LoaderData } from './loader';
 
 const Competences = () => {
   const { i18n, t } = useTranslation();
-  const data = useRouteLoaderData('job-opportunity') as LoaderData;
+  const routeId = useRouteId('job-opportunity', i18n.language as LangCode);
+  const data = useRouteLoaderData(routeId) as LoaderData;
   const lang = i18n.language;
-  const title = data.tyomahdollisuus?.otsikko[lang] ?? '';
-  const competences = data.osaamiset;
+  const title = data?.tyomahdollisuus?.otsikko[lang] ?? '';
+  const competences = data?.osaamiset ?? [];
 
   const routes: RoutesNavigationListProps['routes'] = [
     {

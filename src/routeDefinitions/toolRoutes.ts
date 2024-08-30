@@ -1,20 +1,28 @@
-import i18n from '@/i18n/config';
+import { useTranslation } from 'react-i18next';
 
-export const toolRoutes = [
-  {
-    name: i18n.t('menus.tool-navigation.goals'),
-    path: i18n.t('slugs.tool.goals'),
-  },
-  {
-    name: i18n.t('menus.tool-navigation.competences'),
-    path: i18n.t('slugs.tool.competences'),
-  },
-  {
-    name: i18n.t('menus.tool-navigation.interests'),
-    path: i18n.t('slugs.tool.interests'),
-  },
-  {
-    name: i18n.t('menus.tool-navigation.restrictions'),
-    path: i18n.t('slugs.tool.restrictions'),
-  },
-];
+const useToolRoutes = () => {
+  const { t } = useTranslation();
+
+  const toolRoutes = [
+    {
+      name: t('menus.tool-navigation.goals'),
+      path: t('slugs.tool.goals'),
+    },
+    {
+      name: t('menus.tool-navigation.competences'),
+      path: t('slugs.tool.competences'),
+    },
+    {
+      name: t('menus.tool-navigation.interests'),
+      path: t('slugs.tool.interests'),
+    },
+    {
+      name: t('menus.tool-navigation.restrictions'),
+      path: t('slugs.tool.restrictions'),
+    },
+  ];
+
+  return { toolRoutes };
+};
+
+export default useToolRoutes;
