@@ -23,6 +23,7 @@ import {
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
+import { MdTune } from 'react-icons/md';
 import { useLoaderData, useOutletContext } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
 import { GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME, osaaminenColorMap, type FiltersType } from './constants';
@@ -158,7 +159,7 @@ const Competences = () => {
         label="Näytä suodattimet"
         hideLabel
         onClick={() => setShowFilters(true)}
-        icon="tune"
+        icon={<MdTune size={24} />}
       />
     ) : (
       <></>
