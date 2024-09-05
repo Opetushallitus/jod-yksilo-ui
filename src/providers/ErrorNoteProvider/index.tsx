@@ -12,7 +12,7 @@ export const ErrorNoteProvider = ({ children }: { children: React.ReactNode }) =
     setError(null);
   };
 
-  return (
-    <ErrorNoteContext.Provider value={{ error, setErrorNote, clearErrorNote }}>{children}</ErrorNoteContext.Provider>
-  );
+  const memoizedValue = React.useMemo(() => ({ error, setErrorNote, clearErrorNote }), [error]);
+
+  return <ErrorNoteContext.Provider value={memoizedValue}>{children}</ErrorNoteContext.Provider>;
 };
