@@ -1,19 +1,7 @@
-import { store } from '@/state/store';
 import createClient, { Middleware } from 'openapi-fetch';
-import type { paths } from './schema';
+import type { components, paths } from './schema';
 
 export const client = createClient<paths>();
-
-const csrfMiddleware: Middleware = {
-  onRequest(request) {
-    const state = store.getState();
-    const { csrf } = state.root;
-    if (csrf?.headerName && csrf?.token) {
-      request.headers.set(csrf.headerName, csrf.token);
-    }
-    return request;
-  },
-};
 
 const contentTypeMiddleware: Middleware = {
   onRequest(request) {
@@ -24,4 +12,28 @@ const contentTypeMiddleware: Middleware = {
   },
 };
 
-client.use(csrfMiddleware, contentTypeMiddleware);
+client.use(contentTypeMiddleware);
+
+type CsrfDTO = components['schemas']['CsrfTokenDto'];
+const csrfMiddleware = (csrf: CsrfDTO): Middleware => ({
+  onRequest(request) {
+    request.headers.set(csrf.headerName, csrf.token);
+    return request;
+  },
+});
+
+let csrfMiddlewareRegistered = false;
+
+export const registerCsrfMiddleware = (csrf: CsrfDTO) => {
+  if (!csrfMiddlewareRegistered) {
+    client.use(csrfMiddleware(csrf));
+    csrfMiddlewareRegistered = true;
+  }
+};
+
+export const unregisterCsrfMiddleware = (csrf: CsrfDTO) => {
+  if (csrfMiddlewareRegistered) {
+    client.eject(csrfMiddleware(csrf));
+    csrfMiddlewareRegistered = false;
+  }
+};

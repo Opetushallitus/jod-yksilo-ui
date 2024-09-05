@@ -9,6 +9,8 @@ const mockCsrf: components['schemas']['YksiloCsrfDto']['csrf'] = {
 };
 
 vi.mock('@/api/client', () => ({
+  registerCsrfMiddleware: vi.fn(),
+  unregisterCsrfMiddleware: vi.fn(),
   client: {
     GET: () => Promise.resolve({ data: { csrf: { ...mockCsrf } } }),
   },
