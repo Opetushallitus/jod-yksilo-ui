@@ -1,11 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import App from './App.tsx';
 import './i18n/config';
-import { persistor, store } from './state/store';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -27,12 +24,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <HelmetProvider>
-          <App />
-        </HelmetProvider>
-      </PersistGate>
-    </Provider>
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
   </React.StrictMode>,
 );

@@ -1,15 +1,14 @@
 import { components } from '@/api/schema';
-import { LanguageMenu, NavigationBar } from '@/components';
+import { ErrorNote, LanguageMenu, NavigationBar } from '@/components';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
 import { LANG_SESSION_STORAGE_KEY } from '@/constants';
-import { ErrorNote } from '@/features';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { AuthContext } from '@/hooks/useAuth';
+import { useErrorNote } from '@/hooks/useErrorNote';
 import useLocalizedRoutes from '@/hooks/useLocalizedRoutes/useLocalizedRoutes';
 import { LangCode } from '@/i18n/config';
-import { clearCsrfToken } from '@/state/csrf/csrfSlice';
-import { store } from '@/state/store';
+import { clearCsrf } from '@/routes/Root/loader';
 import { Footer, PopupList, PopupListItem, SkipLink, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -29,6 +28,7 @@ const NavigationBarItem = (to: string, text: string) => ({
 const Root = () => {
   const { t, i18n } = useTranslation();
   const { resolveLocalizedUrl } = useLocalizedRoutes();
+  const { error, clearErrorNote } = useErrorNote();
   const navigate = useNavigate();
 
   const { sm } = useMediaQueries();
@@ -47,8 +47,12 @@ const Root = () => {
     NavigationBarItem(`${basicInformation}/${t('slugs.privacy-policy')}`, t('privacy-policy')),
   ];
 
+  const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
+
   const logout = () => {
-    store.dispatch(clearCsrfToken());
+    if (data?.csrf) {
+      clearCsrf();
+    }
     logoutForm.current?.submit();
     sessionStorage.removeItem(LANG_SESSION_STORAGE_KEY);
   };
@@ -70,7 +74,6 @@ const Root = () => {
   const footerRef = React.useRef<HTMLDivElement>(null);
   const logoutForm = React.useRef<HTMLFormElement>(null);
 
-  const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
   const getActiveClassNames = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'bg-secondary-1-50 w-full rounded-sm py-3 pl-5 -ml-5' : '';
   const name = `${data?.etunimi} ${data?.sukunimi}`;
@@ -204,7 +207,7 @@ const Root = () => {
             </div>
           </div>
         )}
-        <ErrorNote />
+        {error && <ErrorNote error={error} onCloseClick={clearErrorNote} />}
         {megaMenuOpen && (
           <MegaMenu
             changeLanguage={changeLanguage}
