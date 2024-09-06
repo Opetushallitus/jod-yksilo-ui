@@ -21,7 +21,15 @@ import { EducationHistoryV2, loader as educationHistoryLoader } from '@/routes/P
 import { FreeTimeActivities, loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import { ErrorElement, NoMatch, Root, loader as rootLoader } from '@/routes/Root';
-import { Goals, Instructions, Interests, Restrictions, Tool, Competences as ToolCompetences } from '@/routes/Tool';
+import {
+  Goals,
+  Instructions,
+  Interests,
+  Restrictions,
+  Tool,
+  Competences as ToolCompetences,
+  toolLoader,
+} from '@/routes/Tool';
 import {
   HowDoIGiveFeedback,
   HowDoIUseTheService,
@@ -75,6 +83,7 @@ const useLocalizedRoutes = () => {
           {
             path: i18n.t('slugs.tool.index', { lng }),
             element: <Tool />,
+            loader: toolLoader,
             children: [
               {
                 index: true,
