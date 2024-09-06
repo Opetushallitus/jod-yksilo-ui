@@ -1,4 +1,4 @@
-import { client } from '@/api/client';
+import { components } from '@/api/schema';
 import { SimpleNavigationList, Title } from '@/components';
 import { OpportunityCard } from '@/components/OpportunityCard/OpportunityCard';
 import { Button, Modal, RadioButton, RadioButtonGroup, RoundButton, Slider, useMediaQueries } from '@jod/design-system';
@@ -6,7 +6,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { GrTarget } from 'react-icons/gr';
 import { MdBlock, MdOutlineInterests, MdOutlineSchool, MdTune } from 'react-icons/md';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLoaderData } from 'react-router-dom';
 import MatchedLink from './MatchedLink';
 
 const MenuBookIcon = ({ size }: { size: number }) => (
@@ -83,6 +83,12 @@ const Tool = () => {
   const [professionsCount] = React.useState(534);
   const [educationsCount] = React.useState(1002);
   const [selectedOpportunities, setSelectedOpportunities] = React.useState<string[]>([]);
+
+  const data = useLoaderData() as components['schemas']['SivuDtoTyomahdollisuusDto'];
+
+  React.useEffect(() => {
+    setTyomahdollisuudet(data.sisalto);
+  }, [data.sisalto]);
 
   const toggleOpportunity = (id: string) => {
     if (selectedOpportunities.includes(id)) {
@@ -162,20 +168,6 @@ const Tool = () => {
       </div>
     );
   };
-
-  const fetchTyomahdollisuudet = async () => {
-    const response = await client.GET('/api/tyomahdollisuudet');
-    if (response.data?.sisalto) {
-      setTyomahdollisuudet(response.data.sisalto);
-    }
-  };
-
-  React.useEffect(() => {
-    const getTyomahdollisuudet = async () => {
-      await fetchTyomahdollisuudet();
-    };
-    void getTyomahdollisuudet();
-  }, []);
 
   return (
     <main role="main" className="mx-auto max-w-[1140px] p-5" id="jod-main">
