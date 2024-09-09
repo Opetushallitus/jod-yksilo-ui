@@ -7,7 +7,7 @@ import {
   type RoutesNavigationListProps,
 } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
-import { useAuth } from '@/hooks/useAuth';
+import { authProvider } from '@/providers';
 import { Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -21,7 +21,6 @@ const Preferences = () => {
   const title = t('profile.preferences');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
-  const auth = useAuth();
 
   const deleteAccount = async () => {
     await client.DELETE('/api/yksilo');
@@ -37,7 +36,9 @@ const Preferences = () => {
       }
     >
       <Title value={title} />
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{t('welcome', { name: auth?.etunimi ?? 'Nimetön' })}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1">
+        {t('welcome', { name: authProvider.data?.etunimi ?? 'Nimetön' })}
+      </h1>
       <p className="mb-8 text-body-md font-arial">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,

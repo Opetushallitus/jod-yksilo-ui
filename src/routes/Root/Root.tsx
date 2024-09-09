@@ -4,11 +4,10 @@ import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
 import { LANG_SESSION_STORAGE_KEY } from '@/constants';
 import { ActionBarContext } from '@/hooks/useActionBar';
-import { AuthContext } from '@/hooks/useAuth';
 import { useErrorNote } from '@/hooks/useErrorNote';
 import useLocalizedRoutes from '@/hooks/useLocalizedRoutes/useLocalizedRoutes';
 import { LangCode } from '@/i18n/config';
-import { clearCsrf } from '@/routes/Root/loader';
+import { authProvider } from '@/providers';
 import { Footer, PopupList, PopupListItem, SkipLink, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -47,12 +46,14 @@ const Root = () => {
     NavigationBarItem(`${basicInformation}/${t('slugs.privacy-policy')}`, t('privacy-policy')),
   ];
 
-  const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
+  const loaderData = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
+  if (loaderData && (authProvider.loginState === 'unknown' || authProvider.loginState === 'loggedOut')) {
+    authProvider.login(loaderData);
+  }
 
   const logout = () => {
-    if (data?.csrf) {
-      clearCsrf();
-    }
+    authProvider.logout();
+
     logoutForm.current?.submit();
     sessionStorage.removeItem(LANG_SESSION_STORAGE_KEY);
   };
@@ -76,7 +77,7 @@ const Root = () => {
 
   const getActiveClassNames = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'bg-secondary-1-50 w-full rounded-sm py-3 pl-5 -ml-5' : '';
-  const name = `${data?.etunimi} ${data?.sukunimi}`;
+  const name = `${authProvider.data?.etunimi} ${authProvider.data?.sukunimi}`;
 
   const toggleMenu = (menu: 'mega' | 'user' | 'lang') => () => {
     setMegaMenuOpen(false);
@@ -107,13 +108,13 @@ const Root = () => {
   };
 
   const getUserData: () => NavigationBarProps['user'] = () =>
-    data?.csrf && {
+    authProvider.data?.csrf && {
       name,
       component: ({ children, className }) => {
         return (
           <div className="relative">
             <form action="/logout" method="POST" hidden ref={logoutForm}>
-              <input type="hidden" name="_csrf" value={data.csrf.token} />
+              <input type="hidden" name="_csrf" value={authProvider.data?.csrf.token} />
               <input type="hidden" name="lang" value={i18n.language} />
             </form>
             <button
@@ -149,7 +150,7 @@ const Root = () => {
     };
 
   return (
-    <AuthContext.Provider value={data}>
+    <>
       <ScrollRestoration />
       <Helmet>
         <html lang={i18n.language} />
@@ -221,7 +222,7 @@ const Root = () => {
         <Outlet />
       </ActionBarContext.Provider>
       <Footer ref={footerRef} items={footerItems} logos={logos} copyright={t('copyright')} variant="light" />
-    </AuthContext.Provider>
+    </>
   );
 };
 

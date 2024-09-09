@@ -1,4 +1,5 @@
-import { supportedLanguageCodes, type LangCode } from '@/i18n/config';
+import i18n, { supportedLanguageCodes, type LangCode } from '@/i18n/config';
+import { authProvider } from '@/providers';
 import { AuthGuard } from '@/routes/AuthGuard';
 import {
   AccessibilityStatement,
@@ -21,6 +22,7 @@ import { EducationHistory, loader as educationHistoryLoader } from '@/routes/Pro
 import { FreeTimeActivities, loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import { ErrorElement, NoMatch, Root, loader as rootLoader } from '@/routes/Root';
+import { SessionExpired } from '@/routes/SessionExpired';
 import {
   Goals,
   Instructions,
@@ -40,11 +42,58 @@ import {
   WhoProvidesTheService,
 } from '@/routes/UserGuide';
 import { getLocalizedRoutesMap } from '@/utils';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { RouteObject, createBrowserRouter, generatePath, matchRoutes, redirect } from 'react-router-dom';
+import {
+  LoaderFunctionArgs,
+  RouteObject,
+  createBrowserRouter,
+  generatePath,
+  matchRoutes,
+  redirect,
+} from 'react-router-dom';
+
+const sessionExpiredLoader = () => {
+  if (authProvider.loginState !== 'sessionExpired') {
+    window.location.href = `/${i18n.language}`;
+  }
+  return null;
+};
+
+const sessionExpiredSlug = 'slugs.session-expired';
+
+const restrictedLoader = ({ request }: LoaderFunctionArgs) => {
+  if (authProvider.loginState === 'loggedOut' || authProvider.loginState === 'unknown') {
+    const newParams = new URLSearchParams();
+    newParams.set('lang', i18n.language);
+    newParams.set('callbackUrl', new URL(request.url).pathname);
+    window.location.href = `/login?${newParams.toString()}`;
+  } else if (authProvider.loginState === 'sessionExpired') {
+    return redirect(`/${i18n.language}/${i18n.t(sessionExpiredSlug)}`);
+  }
+  return null;
+};
 
 const useLocalizedRoutes = () => {
   const { i18n } = useTranslation();
+  const [loginState, setLoginState] = React.useState(authProvider.loginState);
+
+  React.useEffect(() => {
+    const handleSessionExpiry = () => {
+      setLoginState(authProvider.loginState);
+    };
+    authProvider.on(handleSessionExpiry);
+
+    return () => {
+      authProvider.off(handleSessionExpiry);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (loginState === 'sessionExpired') {
+      redirect(`/${i18n.language}/${i18n.t(sessionExpiredSlug)}`);
+    }
+  }, [i18n, loginState]);
 
   const localizedRoutes = supportedLanguageCodes.map((lng) => ({
     lang: lng,
@@ -118,6 +167,7 @@ const useLocalizedRoutes = () => {
                 <Profile />
               </AuthGuard>
             ),
+            loader: restrictedLoader,
             children: [
               {
                 index: true,
@@ -220,6 +270,11 @@ const useLocalizedRoutes = () => {
                 element: <PrivacyPolicy />,
               },
             ],
+          },
+          {
+            path: i18n.t(sessionExpiredSlug, { lng }),
+            element: <SessionExpired />,
+            loader: sessionExpiredLoader,
           },
         ],
       },

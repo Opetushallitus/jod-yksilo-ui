@@ -1,3 +1,4 @@
+import { authProvider } from '@/providers';
 import createClient, { Middleware } from 'openapi-fetch';
 import type { components, paths } from './schema';
 
@@ -37,3 +38,14 @@ export const unregisterCsrfMiddleware = (csrf: CsrfDTO) => {
     csrfMiddlewareRegistered = false;
   }
 };
+
+const errorHandlingMiddleware: Middleware = {
+  onResponse(response) {
+    if (response.status === 403 && authProvider.loginState === 'loggedIn') {
+      authProvider.expireSession();
+    }
+    return response;
+  },
+};
+
+client.use(errorHandlingMiddleware);
