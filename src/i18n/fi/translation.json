@@ -128,6 +128,7 @@
       "title": "Ammatilliset erityisosaamiset"
     }
   },
+  "login": "Kirjaudu sisään",
   "logout": "Kirjaudu ulos",
   "menus": {
     "tool-navigation": {
@@ -170,6 +171,10 @@
   "restrictions": "Rajoitteet",
   "save": "Tallenna",
   "search": "Haku",
+  "session-expired": {
+    "title": "Istunto vanhentunut",
+    "description": "Istuntosi on vanhentunut. Sinun täytyy kirjautua palveluun uudelleen."
+  },
   "skiplinks": {
     "main": "Siirry pääsisältöön"
   },
@@ -204,6 +209,7 @@
       "something-else": "jotain-muuta",
       "work-history": "tyopaikkani"
     },
+    "session-expired": "istunto-vanhentunut",
     "terms-of-service": "kayttoehdot",
     "tool": {
       "competences": "osaamiset",
