@@ -24,8 +24,8 @@
     "degree": "Tutkinto",
     "degree-or-course": "Tutkinto tai kurssi",
     "delete-degree-or-course": "Poista tutkinto tai kurssi",
-    "delete-selected-education-history": "Poista valitut koulutukset",
     "delete-education-history": "Poista koulutus",
+    "delete-selected-education-history": "Poista valitut koulutukset",
     "edit-competences": "Muokkaa osaamisia",
     "edit-degree": "Muokkaa tutkintoa",
     "edit-education": "Muokkaa koulutusta",
@@ -131,11 +131,19 @@
     }
   },
   "logout": "Kirjaudu ulos",
+  "menus": {
+    "tool-navigation": {
+      "competences": "Mitä minä osaan",
+      "goals": "Mitä minä haluan",
+      "interests": "Mikä minua kiinnostaa",
+      "restrictions": "Mitä minä en halua"
+    }
+  },
   "more-information": "Lisätietoa",
   "my-competences": {
     "by-KOULUTUS": "Koulutuksen mukaan",
-    "by-TOIMENKUVA": "Toimenkuvan mukaan",
-    "by-PATEVYYS": "Vapaa-ajan toiminnon mukaan"
+    "by-PATEVYYS": "Vapaa-ajan toiminnon mukaan",
+    "by-TOIMENKUVA": "Toimenkuvan mukaan"
   },
   "next": "Seuraava",
   "no-match": {
@@ -180,6 +188,12 @@
       "index": "tyomahdollisuus",
       "overview": "yleiskuvaus"
     },
+    "language": {
+      "change": "Kieli",
+      "en": "In English",
+      "fi": "Suomeksi",
+      "sv": "På sverige"
+    },
     "no-internet-connection": "ei-internetyhteytta",
     "privacy-policy": "tietosuojaseloste",
     "profile": {
@@ -191,12 +205,6 @@
       "preferences": "asetukseni",
       "something-else": "jotain-muuta",
       "work-history": "tyopaikkani"
-    },
-    "language": {
-      "change": "Kieli",
-      "fi": "Suomeksi",
-      "sv": "På sverige",
-      "en": "In English"
     },
     "terms-of-service": "kayttoehdot",
     "tool": {
@@ -221,38 +229,45 @@
   "terms-of-service": "Käyttöehdot",
   "tool": {
     "competences": {
-      "field-description": "Kirjoita taitosi tekstikenttään. Lisää osaaminen klikkaamalla + -merkkiä osaamisen vieressä. Poista osaaminen klikkaamalla rastia.",
-      "heading-1": "Mitä minä osaan",
-      "page-description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi - kaikki tietosi ja kokemuksesi ovat tärkeitä.",
+      "adjust-data-emphasis": "Säädä syöttämäsi tietojen painotuksia - tulokset päivittyvät samanaikaisesti uusien painotusten mukaan.",
       "available-options": "Lukumääräisesti valittavissasi eri vaihtoehtoja",
       "available-options-totals": "{{professionsCount}} ammattia, {{educationsCount}} koulutusta.",
-      "adjust-data-emphasis": "Säädä syöttämäsi tietojen painotuksia - tulokset päivittyvät samanaikaisesti uusien painotusten mukaan.",
-      "trend": "Kehitystrendi",
-      "trend-up": "Nouseva kehitys",
-      "trend-down": "Laskeva kehitys",
+      "common-educational-background": "Yleisin koulutustausta",
       "employment-outlook": "Työllisyysnäkymä",
-      "outlook-value": "{{outlook}}/5",
-      "maybe-has-restrictions": "Saattaa sisältää rajoitteita",
+      "field-description": "Kirjoita taitosi tekstikenttään. Lisää osaaminen klikkaamalla ‘+‘-merkkiä osaamisen vieressä. Poista osaaminen klikkaamalla rastia.",
+      "heading-1": "Mitä minä osaan",
       "idustry-name": "Toimialan nimi",
-      "common-educational-background": "Yleisin koulutustausta"
+      "input-field-placeholder": "Taitosi",
+      "maybe-has-restrictions": "Saattaa sisältää rajoitteita",
+      "outlook-value": "{{outlook}}/5",
+      "page-description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi - kaikki tietosi ja kokemuksesi ovat tärkeitä.",
+      "trend": "Kehitystrendi",
+      "trend-down": "Laskeva kehitys",
+      "trend-up": "Nouseva kehitys"
     },
-    "title": "Työkalu",
     "goals": {
       "field-description": "Napauta kuvaketta, jos haluat valita sen tavoitteeksesi. Voit peruuttaa valinnan napauttamalla kuvaketta uudelleen.",
       "heading-1": "Mitä minä haluan",
-      "map-competence": "Kartoittaa omaa osaamistani",
-      "trainings": "Koulutuksia osaamiseni kasvattamiseksi",
       "job-opportunities": "Tutkia työmahdollisuuksia osaamisellani",
+      "map-competence": "Kartoittaa omaa osaamistani",
       "map-opportunities": "Kartoittaa mahdollisuuksia alan vaihtamiseen",
+      "page-description": "Tässä osiossa voit valita toiveidesi mukaiset tulokset palvelustamme. Jos olet epävarma, voit ohittaa tämän ja tutustua palveluumme omaan tahtiisi. Kun liikutat hiirtä kuvakkeiden ylle, näet niiden alla olevan selityksen siitä, miten ne vaikuttavat lopputulokseen",
       "something-else": "Jotain muuta, en tiedä mitä...",
-      "page-description": "Tässä osiossa voit valita toiveidesi mukaiset tulokset palvelustamme. Jos olet epävarma, voit ohittaa tämän ja tutustua palveluumme omaan tahtiisi. Kun liikutat hiirtä kuvakkeiden ylle, näet niiden alla olevan selityksen siitä, miten ne vaikuttavat lopputulokseen"
-    }
+      "trainings": "Koulutuksia osaamiseni kasvattamiseksi"
+    },
+    "interests": {
+      "field-description": "Kirjaa kiinnostuksesi tekstikenttään. Valitse ehdotuksista klikkaamalla ‘+‘-merkkiä ehdotuksen vieressä. Poista aihe klikkaamalla rastia sen vieressä.",
+      "heading-1": "Mistä minä olen kiinnostunut",
+      "input-field-placeholder": "Kiinnostuksesi",
+      "page-description": "Pohdi, mikä sinua innostaa ja mitä uutta haluaisit kokeilla tai oppia, olipa se sitten yhteydessä aiempaan koulutukseesi tai ei. Kirjaa ylös kaikki kiinnostuksen kohteesi, vaikka ne tuntuisivat epärealistisilta."
+    },
+    "title": "Työkalu"
   },
   "types": {
     "competence": {
       "KOULUTUS": "Koulutus",
-      "TOIMENKUVA": "Toimenkuva",
-      "PATEVYYS": "Vapaa-ajan toiminto"
+      "PATEVYYS": "Vapaa-ajan toiminto",
+      "TOIMENKUVA": "Toimenkuva"
     }
   },
   "updated": "Päivitetty",
@@ -284,13 +299,5 @@
     "started": "Alkoi",
     "summary": "Yhteenveto",
     "workplace-or-job-description": "Työpaikka / toimenkuva"
-  },
-  "menus": {
-    "tool-navigation": {
-      "competences": "Mitä minä osaan",
-      "goals": "Mitä minä haluan",
-      "interests": "Mikä minua kiinnostaa",
-      "restrictions": "Mitä minä en halua"
-    }
   }
 }

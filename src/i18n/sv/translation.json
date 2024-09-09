@@ -21,6 +21,12 @@
       "index": "tyomahdollisuus",
       "overview": "yleiskuvaus"
     },
+    "language": {
+      "change": "Kieli",
+      "en": "In English",
+      "fi": "Suomeksi",
+      "sv": "På sverige"
+    },
     "no-internet-connection": "ei-internetyhteytta",
     "privacy-policy": "tietosuojaseloste",
     "profile": {
@@ -32,12 +38,6 @@
       "preferences": "asetukseni",
       "something-else": "jotain-muuta",
       "work-history": "tyopaikkani"
-    },
-    "language": {
-      "change": "Kieli",
-      "fi": "Suomeksi",
-      "sv": "På sverige",
-      "en": "In English"
     },
     "terms-of-service": "kayttoehdot",
     "tool": {
