@@ -1,7 +1,7 @@
 import { LanguageButton, LanguageMenu, RoutesNavigationList, SimpleNavigationList, UserButton } from '@/components';
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
-import { useAuth } from '@/hooks/useAuth';
 import { LangCode } from '@/i18n/config';
+import { authProvider } from '@/providers';
 import useProfileRoutes from '@/routeDefinitions/profileRoutes';
 import useToolRoutes from '@/routeDefinitions/toolRoutes';
 import useUserGuideRoutes from '@/routeDefinitions/userGuideRoutes';
@@ -21,7 +21,6 @@ export const MegaMenu = ({ onClose, user, changeLanguage, logout }: MegaMenuProp
   const { sm } = useMediaQueries();
   const { t } = useTranslation();
   const [megaMenuState, setMegaMenuState] = React.useState<'main' | 'lang'>('main');
-  const auth = useAuth();
 
   const onLanguageButtonClick = () => {
     setMegaMenuState('lang');
@@ -103,7 +102,7 @@ export const MegaMenu = ({ onClose, user, changeLanguage, logout }: MegaMenuProp
             sed in, an sit unum splendide.
           </div>
         )}
-        {megaMenuState === 'main' && !sm && auth?.csrf && (
+        {megaMenuState === 'main' && !sm && authProvider.loginState === 'loggedIn' && (
           <button
             type="button"
             className="font-arial sticky bottom-0 p-6 bg-white w-full text-right text-body-md text-accent hover:underline"

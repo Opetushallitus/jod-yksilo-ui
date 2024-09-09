@@ -39,6 +39,7 @@
       "something-else": "something-else",
       "work-history": "work-history"
     },
+    "session-expired": "session-expired",
     "terms-of-service": "terms-of-service",
     "tool": {
       "competences": "competences",

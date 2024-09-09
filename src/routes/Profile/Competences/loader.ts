@@ -9,8 +9,11 @@ export interface CompetencesLoaderData {
   patevyydet: components['schemas']['PatevyysDto'][];
 }
 
+const filterItems = <T extends { id?: string }>(items: T[], osaaminenLahdeIds: string[]): T[] =>
+  items.filter((item) => item.id && osaaminenLahdeIds.includes(item.id));
+
 export default (async ({ request }) => {
-  const { data: osaamiset } = await client.GET('/api/profiili/osaamiset', { signal: request.signal });
+  const { data: osaamiset, error } = await client.GET('/api/profiili/osaamiset', { signal: request.signal });
   const { data: tyopaikat } = await client.GET('/api/profiili/tyopaikat', { signal: request.signal });
   const { data: koulut } = await client.GET('/api/profiili/koulutuskokonaisuudet', { signal: request.signal });
   const { data: vapaaAjanToiminnot } = await client.GET('/api/profiili/vapaa-ajan-toiminnot', {
@@ -30,32 +33,15 @@ export default (async ({ request }) => {
 
     The resulting data will be used to populate the filters in Competences page.
   */
-  const toimenkuvat: components['schemas']['ToimenkuvaDto'][] = [];
-  tyopaikat?.forEach((tyopaikka) => {
-    tyopaikka.toimenkuvat?.forEach((toimenkuva) => {
-      if (toimenkuva.id && osaaminenLahdeIds.includes(toimenkuva.id)) {
-        toimenkuvat.push(toimenkuva);
-      }
-    });
-  });
+  const toimenkuvat =
+    tyopaikat?.flatMap((tyopaikka) => filterItems(tyopaikka.toimenkuvat ?? [], osaaminenLahdeIds)) ?? [];
 
-  const patevyydet: components['schemas']['PatevyysDto'][] = [];
-  vapaaAjanToiminnot?.forEach((toiminto) => {
-    toiminto.patevyydet?.forEach((patevyys) => {
-      if (patevyys.id && osaaminenLahdeIds.includes(patevyys.id)) {
-        patevyydet.push(patevyys);
-      }
-    });
-  });
+  const patevyydet =
+    vapaaAjanToiminnot?.flatMap((toiminto) => filterItems(toiminto.patevyydet ?? [], osaaminenLahdeIds)) ?? [];
 
-  const koulutukset: components['schemas']['KoulutusDto'][] = [];
-  koulut?.forEach((koulu) => {
-    koulu.koulutukset?.forEach((koulutus) => {
-      if (koulutus.id && osaaminenLahdeIds.includes(koulutus.id)) {
-        koulutukset.push(koulutus);
-      }
-    });
-  });
-
-  return { osaamiset, toimenkuvat, koulutukset, patevyydet } as CompetencesLoaderData;
+  const koulutukset = koulut?.flatMap((koulu) => filterItems(koulu.koulutukset ?? [], osaaminenLahdeIds)) ?? [];
+  if (!error) {
+    return { osaamiset, toimenkuvat, koulutukset, patevyydet } as CompetencesLoaderData;
+  }
+  return { osaamiset: [], toimenkuvat: [], koulutukset: [], patevyydet: [] } as CompetencesLoaderData;
 }) satisfies LoaderFunction;
