@@ -21,6 +21,12 @@
       "index": "job-opportunity",
       "overview": "overview"
     },
+    "language": {
+      "change": "Language",
+      "en": "In English",
+      "fi": "Suomeksi",
+      "sv": "På sverige"
+    },
     "no-internet-connection": "no-internet-connection",
     "privacy-policy": "privacy-policy",
     "profile": {
@@ -32,12 +38,6 @@
       "preferences": "preferences",
       "something-else": "something-else",
       "work-history": "work-history"
-    },
-    "language": {
-      "change": "Language",
-      "fi": "Suomeksi",
-      "sv": "På sverige",
-      "en": "In English"
     },
     "terms-of-service": "terms-of-service",
     "tool": {

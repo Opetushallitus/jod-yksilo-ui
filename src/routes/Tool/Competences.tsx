@@ -23,7 +23,7 @@ const Competences = () => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
 
-  const [debouncedTyotehtava, tyotehtava, setTyotehtava] = useDebounceState('', 500);
+  const [debouncedTaito, taito, setTaito] = useDebounceState('', 500);
   const [selectedCompetences, setSelectedCompentences] = React.useState<OsaaminenValue[]>([]);
 
   const osaamisSuosittelijaHandler = (values: OsaaminenValue[]) => {
@@ -45,14 +45,13 @@ const Competences = () => {
         <div className="order-3 col-span-1 sm:order-2 sm:col-span-2">
           <div className="mb-5">
             <InputField
-              label={t('work-history.job-duties')}
-              value={tyotehtava}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTyotehtava(event.target.value)}
-              placeholder="Lorem ipsum dolor sit amet"
+              label={t('tool.competences.input-field-placeholder')}
+              value={taito}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTaito(event.target.value)}
             />
           </div>
           <OsaamisSuosittelija
-            description={debouncedTyotehtava}
+            description={debouncedTaito}
             onChange={osaamisSuosittelijaHandler}
             value={selectedCompetences}
           />
