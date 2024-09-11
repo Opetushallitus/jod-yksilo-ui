@@ -4,12 +4,15 @@ import { removeDuplicates } from '@/utils';
 import { LoaderFunction } from 'react-router-dom';
 
 export interface ToolLoaderData {
-  tyomahdollisuudet: components['schemas']['SivuDtoTyomahdollisuusDto'];
+  tyomahdollisuudet: components['schemas']['EhdotusDto'][];
   osaamiset: components['schemas']['YksilonOsaaminenDto'][];
 }
 
 export default (async ({ request }) => {
-  const { data: tyomahdollisuudet } = await client.GET('/api/tyomahdollisuudet', { signal: request.signal });
+  const { data: tyomahdollisuudet } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
+    body: {},
+    signal: request.signal,
+  });
 
   let osaamiset: components['schemas']['YksilonOsaaminenDto'][] = [];
 

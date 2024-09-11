@@ -432,6 +432,26 @@ export interface components {
       osaamiset: string[];
       lahde: components['schemas']['OsaamisenLahdeDto'];
     };
+    LuoEhdotusDto: {
+      /** Format: double */
+      osaamisPainotus?: number;
+      osaamiset?: string[];
+      /** Format: double */
+      kiinostusPainotus?: number;
+      kiinnostukset?: string[];
+    };
+    EhdotusDto: {
+      tyomahdollisuus?: components['schemas']['TyomahdollisuusDto'];
+      /** Format: double */
+      osuvuus?: number;
+    };
+    TyomahdollisuusDto: {
+      /** Format: uuid */
+      id: string;
+      otsikko: components['schemas']['LokalisoituTeksti'];
+      tiivistelma?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+    };
     Taidot: {
       kuvaus: string;
     };
@@ -466,13 +486,6 @@ export interface components {
        * @example 3
        */
       sivuja: number;
-    };
-    TyomahdollisuusDto: {
-      /** Format: uuid */
-      id: string;
-      otsikko: components['schemas']['LokalisoituTeksti'];
-      tiivistelma?: components['schemas']['LokalisoituTeksti'];
-      kuvaus?: components['schemas']['LokalisoituTeksti'];
     };
     ArvoDto: {
       arvo: string;
@@ -968,7 +981,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': string[];
+        'application/json': components['schemas']['LuoEhdotusDto'];
       };
     };
     responses: {
@@ -978,7 +991,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': unknown;
+          'application/json': components['schemas']['EhdotusDto'][];
         };
       };
     };
