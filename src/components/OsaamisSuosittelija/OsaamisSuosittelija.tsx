@@ -1,4 +1,6 @@
 import { client } from '@/api/client';
+import { components } from '@/api/schema';
+import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,11 +8,11 @@ import { useTranslation } from 'react-i18next';
 export interface Osaaminen {
   id: string;
   nimi: string;
-  tyyppi: string;
+  tyyppi?: components['schemas']['OsaamisenLahdeDto']['tyyppi'];
   osuvuus: number;
 }
 
-export type OsaaminenValue = Pick<Osaaminen, 'id' | 'nimi'>;
+export type OsaaminenValue = Pick<Osaaminen, 'id' | 'nimi' | 'tyyppi'>;
 
 interface OsaamisSuosittelijaProps {
   /** Description text that is used to search for competences */
@@ -87,6 +89,7 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
             <Tag
               key={val.id}
               label={val.nimi ?? ''}
+              color={val.tyyppi ? OSAAMINEN_COLOR_MAP[val.tyyppi] : undefined}
               onClick={() => {
                 onChange(value.filter((selectedValue) => selectedValue.id !== val.id));
               }}
