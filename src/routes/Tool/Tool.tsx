@@ -1,6 +1,7 @@
-import { components } from '@/api/schema';
-import { SimpleNavigationList, Title } from '@/components';
-import { OpportunityCard } from '@/components/OpportunityCard/OpportunityCard';
+import { OpportunityCard, OsaaminenValue, SimpleNavigationList, Title } from '@/components';
+import { ToolDataContext } from '@/hooks';
+import { ToolLoaderData } from '@/routes/Tool/loader';
+import { getLocalizedText } from '@/utils';
 import { Button, Modal, RadioButton, RadioButtonGroup, RoundButton, Slider, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -84,7 +85,23 @@ const Tool = () => {
   const [educationsCount] = React.useState(1002);
   const [selectedOpportunities, setSelectedOpportunities] = React.useState<string[]>([]);
 
-  const data = useLoaderData() as components['schemas']['SivuDtoTyomahdollisuusDto'];
+  const { tyomahdollisuudet: data, osaamiset: osaamisetResponse } = useLoaderData() as ToolLoaderData;
+  const { setOsaamiset, osaamiset } = React.useContext(ToolDataContext);
+
+  React.useEffect(() => {
+    // Use loader data only if the context is empty, otherwise
+    // user selections will be overwritten.
+    if (!osaamiset.length) {
+      const mapped = osaamisetResponse.map(
+        (osaaminen): OsaaminenValue => ({
+          id: osaaminen.id,
+          nimi: getLocalizedText(osaaminen.osaaminen.nimi),
+          tyyppi: osaaminen.lahde.tyyppi,
+        }),
+      );
+      setOsaamiset(mapped);
+    }
+  }, [osaamisetResponse, setOsaamiset, osaamiset.length]);
 
   React.useEffect(() => {
     setTyomahdollisuudet(data.sisalto);

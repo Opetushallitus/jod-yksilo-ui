@@ -6,6 +6,7 @@ import {
   Title,
   type RoutesNavigationListProps,
 } from '@/components';
+import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useActionBar } from '@/hooks/useActionBar';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
@@ -26,7 +27,7 @@ import { useTranslation } from 'react-i18next';
 import { MdTune } from 'react-icons/md';
 import { useLoaderData, useOutletContext } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
-import { GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME, osaaminenColorMap, type FiltersType } from './constants';
+import { GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME, type FiltersType } from './constants';
 
 const Competences = () => {
   const routes: RoutesNavigationListProps['routes'] = useOutletContext();
@@ -141,7 +142,7 @@ const Competences = () => {
   // Tailwind requires that the full CSS classname is written somewhere in the code, otherwise
   // it will not be included in the final CSS bundle. This prevents the use of dynamic classnames.
   // https://tailwindcss.com/docs/content-configuration#dynamic-class-names
-  type ColorMapType = typeof osaaminenColorMap;
+  type ColorMapType = typeof OSAAMINEN_COLOR_MAP;
   type ColorKeys = keyof ColorMapType;
   type ColorValue = ColorMapType[ColorKeys];
   const filterColorMap: Record<ColorValue, string> = {
@@ -185,7 +186,7 @@ const Competences = () => {
                   label={
                     <span className="flex items-center hyphens-auto" lang={locale}>
                       <div
-                        className={`mx-3 h-5 w-5 flex-none rounded-full ${filterColorMap[osaaminenColorMap[key]]}`}
+                        className={`mx-3 h-5 w-5 flex-none rounded-full ${filterColorMap[OSAAMINEN_COLOR_MAP[key]]}`}
                         aria-hidden
                       />
                       {t(`types.competence.${key}`)}
@@ -252,7 +253,7 @@ const Competences = () => {
                       label={
                         <span className="flex items-center hyphens-auto" lang={locale}>
                           <div
-                            className={`mx-3 h-5 w-5 flex-none rounded-full ${filterColorMap[osaaminenColorMap[key]]}`}
+                            className={`mx-3 h-5 w-5 flex-none rounded-full ${filterColorMap[OSAAMINEN_COLOR_MAP[key]]}`}
                             aria-hidden
                           />
                           {t(`types.competence.${key}`)}

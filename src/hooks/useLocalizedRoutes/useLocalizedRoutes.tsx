@@ -1,4 +1,5 @@
 import { supportedLanguageCodes, type LangCode } from '@/i18n/config';
+import { ToolDataProvider } from '@/providers/ToolDataProvider';
 import { AuthGuard } from '@/routes/AuthGuard';
 import {
   AccessibilityStatement,
@@ -82,7 +83,11 @@ const useLocalizedRoutes = () => {
           },
           {
             path: i18n.t('slugs.tool.index', { lng }),
-            element: <Tool />,
+            element: (
+              <ToolDataProvider>
+                <Tool />
+              </ToolDataProvider>
+            ),
             loader: toolLoader,
             children: [
               {

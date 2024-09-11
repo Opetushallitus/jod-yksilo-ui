@@ -1,7 +1,8 @@
+import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { ConfirmDialog, Tag } from '@jod/design-system';
 import { t } from 'i18next';
 import React from 'react';
-import { GroupByProps, MobileFilterButton, groupByHeaderClasses, osaaminenColorMap } from './constants';
+import { GroupByProps, MobileFilterButton, groupByHeaderClasses } from './constants';
 
 export const GroupByAlphabet = ({
   locale,
@@ -57,7 +58,7 @@ export const GroupByAlphabet = ({
                           key={val.id}
                           variant="added"
                           onClick={showDialog}
-                          color={osaaminenColorMap[val.lahde.tyyppi]}
+                          color={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
                         />
                       )}
                     </ConfirmDialog>
