@@ -1,11 +1,10 @@
 import { OsaamisSuosittelija } from '@/components';
-import { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
-import { ToolDataContext } from '@/hooks';
 import { useDebounceState } from '@/hooks/useDebounceState';
-import { removeDuplicates } from '@/utils';
 import { Accordion, InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useOutletContext } from 'react-router-dom';
+import { ContextType } from './types';
 
 const HelpingToolsContent = () => (
   <>
@@ -26,11 +25,9 @@ const Competences = () => {
   const { sm } = useMediaQueries();
 
   const [debouncedTaito, taito, setTaito] = useDebounceState('', 500);
-  const { setOsaamiset, osaamiset } = React.useContext(ToolDataContext);
-
-  const osaamisSuosittelijaHandler = (values: OsaaminenValue[]) => {
-    setOsaamiset(removeDuplicates([...values, ...osaamiset], 'nimi'));
-  };
+  const {
+    competences: [selectedCompetences, setSelectedCompentences],
+  } = useOutletContext<ContextType>();
 
   return (
     <div className="flex flex-col">
@@ -52,7 +49,11 @@ const Competences = () => {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTaito(event.target.value)}
             />
           </div>
-          <OsaamisSuosittelija description={debouncedTaito} onChange={osaamisSuosittelijaHandler} value={osaamiset} />
+          <OsaamisSuosittelija
+            description={debouncedTaito}
+            onChange={setSelectedCompentences}
+            value={selectedCompetences}
+          />
         </div>
         <div className="order-2 col-span-1 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0">
           {sm ? (

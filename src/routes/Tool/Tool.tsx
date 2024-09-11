@@ -1,5 +1,6 @@
+import { client } from '@/api/client';
+import { components } from '@/api/schema';
 import { OpportunityCard, OsaaminenValue, SimpleNavigationList, Title } from '@/components';
-import { ToolDataContext } from '@/hooks';
 import { ToolLoaderData } from '@/routes/Tool/loader';
 import { getLocalizedText } from '@/utils';
 import { Button, Modal, RadioButton, RadioButtonGroup, RoundButton, Slider, useMediaQueries } from '@jod/design-system';
@@ -9,6 +10,7 @@ import { GrTarget } from 'react-icons/gr';
 import { MdBlock, MdOutlineInterests, MdOutlineSchool, MdTune } from 'react-icons/md';
 import { NavLink, Outlet, useLoaderData } from 'react-router-dom';
 import MatchedLink from './MatchedLink';
+import { ContextType } from './types';
 
 const MenuBookIcon = ({ size }: { size: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" height={size} viewBox="0 -960 960 960" width={size}>
@@ -69,6 +71,7 @@ const Filters = ({
 };
 
 const Tool = () => {
+  const { tyomahdollisuudet: tyomahdollisuudetData, osaamiset: osaamisetData } = useLoaderData() as ToolLoaderData;
   const { sm } = useMediaQueries();
   const { t, i18n } = useTranslation();
 
@@ -80,32 +83,55 @@ const Tool = () => {
   const [industry, setIndustry] = React.useState('x');
   const [order, setOrder] = React.useState('a');
 
-  const [tyomahdollisuudet, setTyomahdollisuudet] = React.useState<Tyomahdollisuus[]>([]);
+  const [tyomahdollisuudet, setTyomahdollisuudet] = React.useState<components['schemas']['EhdotusDto'][]>([]);
   const [professionsCount] = React.useState(534);
   const [educationsCount] = React.useState(1002);
+
   const [selectedOpportunities, setSelectedOpportunities] = React.useState<string[]>([]);
-
-  const { tyomahdollisuudet: data, osaamiset: osaamisetResponse } = useLoaderData() as ToolLoaderData;
-  const { setOsaamiset, osaamiset } = React.useContext(ToolDataContext);
-
-  React.useEffect(() => {
-    // Use loader data only if the context is empty, otherwise
-    // user selections will be overwritten.
-    if (!osaamiset.length) {
-      const mapped = osaamisetResponse.map(
-        (osaaminen): OsaaminenValue => ({
-          id: osaaminen.id,
-          nimi: getLocalizedText(osaaminen.osaaminen.nimi),
-          tyyppi: osaaminen.lahde.tyyppi,
-        }),
-      );
-      setOsaamiset(mapped);
-    }
-  }, [osaamisetResponse, setOsaamiset, osaamiset.length]);
+  const [selectedCompetences, setSelectedCompetences] = React.useState<OsaaminenValue[]>([
+    ...osaamisetData.map(
+      (osaaminen): OsaaminenValue => ({
+        id: osaaminen.osaaminen.uri,
+        nimi: getLocalizedText(osaaminen.osaaminen.nimi),
+        tyyppi: osaaminen.lahde.tyyppi,
+      }),
+    ),
+  ]);
+  const [selectedInterests, setSelectedInterests] = React.useState<OsaaminenValue[]>([]);
 
   React.useEffect(() => {
-    setTyomahdollisuudet(data.sisalto);
-  }, [data.sisalto]);
+    setTyomahdollisuudet(tyomahdollisuudetData);
+  }, [tyomahdollisuudetData]);
+
+  const abortController = React.useRef<AbortController>();
+  React.useEffect(() => {
+    abortController.current?.abort('Abort previous request');
+    abortController.current = new AbortController();
+
+    const fetchOpportunities = async () => {
+      const { data } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
+        body: {
+          osaamiset: selectedCompetences.map((item) => item.id),
+          kiinnostukset: selectedInterests.map((item) => item.id),
+          osaamisPainotus: competencesMultiplier / 100,
+          kiinostusPainotus: interestMultiplier / 100,
+          rajoitePainotus: restrictionsMultiplier / 100,
+        },
+        signal: abortController.current?.signal,
+      });
+      // Set the first 10 opportunities
+      setTyomahdollisuudet(data?.splice(0, 10) ?? []);
+    };
+
+    // Debounce the fetch
+    const timer = setTimeout(() => {
+      void fetchOpportunities();
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [selectedCompetences, selectedInterests, competencesMultiplier, interestMultiplier, restrictionsMultiplier]);
 
   const toggleOpportunity = (id: string) => {
     if (selectedOpportunities.includes(id)) {
@@ -190,7 +216,14 @@ const Tool = () => {
     <main role="main" className="mx-auto max-w-[1140px] p-5" id="jod-main">
       <Title value={t('tool.title')} />
       <nav role="navigation">{sm ? <Desktop /> : <Mobile />}</nav>
-      <Outlet />
+      <Outlet
+        context={
+          {
+            competences: [selectedCompetences, setSelectedCompetences],
+            interests: [selectedInterests, setSelectedInterests],
+          } satisfies ContextType
+        }
+      />
 
       <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
         <div className="col-span-1 sm:col-span-3">
@@ -227,6 +260,7 @@ const Tool = () => {
             value={restrictionsMultiplier}
           />
         </div>
+
         <div className="col-span-1 mt-10 sm:col-span-2 sm:mt-8">
           {!sm && (
             <>
@@ -268,14 +302,18 @@ const Tool = () => {
           )}
           <div className="flex flex-col gap-5">
             {tyomahdollisuudet.map((item) => {
+              const tyomahdollisuus = item.tyomahdollisuus as Tyomahdollisuus;
               return (
-                <NavLink key={item.id} to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${item.id}`}>
+                <NavLink
+                  key={tyomahdollisuus.id}
+                  to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${tyomahdollisuus.id}`}
+                >
                   <OpportunityCard
-                    toggleSelection={() => toggleOpportunity(item.id ?? '')}
-                    selected={selectedOpportunities.includes(item.id ?? '')}
-                    name={item.otsikko[i18n.language] ?? ''}
-                    description={item.tiivistelma?.[i18n.language] ?? ''}
-                    matchValue={99}
+                    toggleSelection={() => toggleOpportunity(tyomahdollisuus.id ?? '')}
+                    selected={selectedOpportunities.includes(tyomahdollisuus.id ?? '')}
+                    name={tyomahdollisuus.otsikko[i18n.language] ?? ''}
+                    description={tyomahdollisuus.tiivistelma?.[i18n.language] ?? ''}
+                    matchValue={item.osuvuus}
                     matchLabel="Sopivuus"
                     type="work"
                     trend="up"

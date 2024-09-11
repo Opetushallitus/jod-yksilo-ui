@@ -1,9 +1,10 @@
 import { OsaamisSuosittelija } from '@/components';
-import { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { Accordion, InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useOutletContext } from 'react-router-dom';
+import { ContextType } from './types';
 
 const HelpingToolsContent = () => (
   <>
@@ -23,11 +24,9 @@ const Interests = () => {
   const { sm } = useMediaQueries();
 
   const [debouncedKiinnostus, kiinnostus, setKiinnostus] = useDebounceState('', 500);
-  const [selectedCompetences, setSelectedCompentences] = React.useState<OsaaminenValue[]>([]);
-
-  const osaamisSuosittelijaHandler = (values: OsaaminenValue[]) => {
-    setSelectedCompentences(values);
-  };
+  const {
+    interests: [selectedInterests, setSelectedInterests],
+  } = useOutletContext<ContextType>();
 
   return (
     <div className="flex flex-col">
@@ -51,8 +50,8 @@ const Interests = () => {
           </div>
           <OsaamisSuosittelija
             description={debouncedKiinnostus}
-            onChange={osaamisSuosittelijaHandler}
-            value={selectedCompetences}
+            onChange={setSelectedInterests}
+            value={selectedInterests}
           />
         </div>
         <div className="order-2 col-span-1 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0">
