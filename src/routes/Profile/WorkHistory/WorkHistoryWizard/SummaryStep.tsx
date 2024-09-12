@@ -1,4 +1,4 @@
-import { SelectableTable, SelectableTableRow } from '@/components';
+import { ExperienceTable, SelectableTableRow } from '@/components';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -40,7 +40,7 @@ const SummaryStep = () => {
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
-      <SelectableTable selectableColumnHeader={t('work-history.workplace-or-job-description')} rows={rows} />
+      <ExperienceTable selectableColumnHeader={t('work-history.workplace-or-job-description')} rows={rows} />
     </>
   );
 };
