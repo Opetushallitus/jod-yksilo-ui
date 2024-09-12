@@ -58,7 +58,7 @@ export const GroupByAlphabet = ({
                           key={val.id}
                           variant="added"
                           onClick={showDialog}
-                          color={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
+                          sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
                         />
                       )}
                     </ConfirmDialog>

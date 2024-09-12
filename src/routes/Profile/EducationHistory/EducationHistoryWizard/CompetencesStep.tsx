@@ -44,7 +44,12 @@ const CompetencesStep = ({ tutkinto }: CompetencesStepProps) => {
         control={control}
         name={`koulutukset.${tutkinto}.osaamiset`}
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija description={debouncedDescription} onChange={onChange} value={value} />
+          <OsaamisSuosittelija
+            description={debouncedDescription}
+            onChange={onChange}
+            value={value}
+            sourceType="KOULUTUS"
+          />
         )}
       />
     </>

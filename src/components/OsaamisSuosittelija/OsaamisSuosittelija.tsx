@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 export interface Osaaminen {
   id: string;
   nimi: string;
-  tyyppi?: components['schemas']['OsaamisenLahdeDto']['tyyppi'];
+  tyyppi?: components['schemas']['OsaamisenLahdeDto']['tyyppi'] | 'JOTAIN_MUUTA' | 'KIINNOSTUS';
   osuvuus: number;
 }
 
@@ -21,8 +21,15 @@ interface OsaamisSuosittelijaProps {
   onChange: (values: OsaaminenValue[]) => void;
   /** Initial values */
   value?: OsaaminenValue[];
+  /** Type of the source */
+  sourceType?: Osaaminen['tyyppi'];
 }
-export const OsaamisSuosittelija = ({ description, value = [], onChange }: OsaamisSuosittelijaProps) => {
+export const OsaamisSuosittelija = ({
+  description,
+  value = [],
+  onChange,
+  sourceType = 'JOTAIN_MUUTA',
+}: OsaamisSuosittelijaProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
@@ -73,8 +80,9 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
             <Tag
               key={ehdotettuOsaaminen.id}
               label={ehdotettuOsaaminen.nimi ?? ''}
+              sourceType={OSAAMINEN_COLOR_MAP[sourceType]}
               onClick={() => {
-                onChange([...value, { id: ehdotettuOsaaminen.id, nimi: ehdotettuOsaaminen.nimi }]);
+                onChange([...value, { id: ehdotettuOsaaminen.id, nimi: ehdotettuOsaaminen.nimi, tyyppi: sourceType }]);
               }}
               variant="selectable"
             />
@@ -89,7 +97,7 @@ export const OsaamisSuosittelija = ({ description, value = [], onChange }: Osaam
             <Tag
               key={val.id}
               label={val.nimi ?? ''}
-              color={val.tyyppi ? OSAAMINEN_COLOR_MAP[val.tyyppi] : undefined}
+              sourceType={OSAAMINEN_COLOR_MAP[val.tyyppi ? val.tyyppi : sourceType]}
               onClick={() => {
                 onChange(value.filter((selectedValue) => selectedValue.id !== val.id));
               }}

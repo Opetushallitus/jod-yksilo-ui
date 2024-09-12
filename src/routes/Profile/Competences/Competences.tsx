@@ -138,20 +138,6 @@ const Competences = () => {
     setSelectedFilters(newFilter);
   };
 
-  // Overly complex way of getting classnames for the filter colors.
-  // Tailwind requires that the full CSS classname is written somewhere in the code, otherwise
-  // it will not be included in the final CSS bundle. This prevents the use of dynamic classnames.
-  // https://tailwindcss.com/docs/content-configuration#dynamic-class-names
-  type ColorMapType = typeof OSAAMINEN_COLOR_MAP;
-  type ColorKeys = keyof ColorMapType;
-  type ColorValue = ColorMapType[ColorKeys];
-  const filterColorMap: Record<ColorValue, string> = {
-    'secondary-2': 'bg-secondary-2',
-    'secondary-3': 'bg-secondary-3',
-    'secondary-4': 'bg-secondary-4',
-    'secondary-5': 'bg-secondary-5',
-  };
-
   const MobileFilterButton = () => {
     return !sm ? (
       <RoundButton
@@ -186,7 +172,7 @@ const Competences = () => {
                   label={
                     <span className="flex items-center hyphens-auto" lang={locale}>
                       <div
-                        className={`mx-3 h-5 w-5 flex-none rounded-full ${filterColorMap[OSAAMINEN_COLOR_MAP[key]]}`}
+                        className={`mx-3 h-5 w-5 flex-none rounded-full ds-bg-tag-${OSAAMINEN_COLOR_MAP[key]}`}
                         aria-hidden
                       />
                       {t(`types.competence.${key}`)}
@@ -229,63 +215,6 @@ const Competences = () => {
         <div className="flex flex-col gap-5">
           <SimpleNavigationList title={t('profile.index')}>
             <RoutesNavigationList routes={navigationRoutes} />
-          </SimpleNavigationList>
-          <SimpleNavigationList title="Järjestele" backgroundClassName="bg-bg-gray-2" collapsible>
-            <RadioButtonGroup
-              value={groupBy}
-              onChange={setGroupBy}
-              className="py-4"
-              label="Järjestele (kaikki)"
-              hideLabel
-            >
-              <RadioButton label="Lähteiden mukaan" value={GROUP_BY_SOURCE} />
-              <RadioButton label="Teemoittain" value={GROUP_BY_THEME} />
-              <RadioButton label="Aakkosellisesti" value={GROUP_BY_ALPHABET} />
-            </RadioButtonGroup>
-          </SimpleNavigationList>
-          <SimpleNavigationList title="Suodata" backgroundClassName="bg-bg-gray-2" collapsible>
-            <div className="flex flex-col gap-y-3 py-4">
-              {filterKeys.map((key) => (
-                <Accordion
-                  key={key}
-                  title={
-                    <Checkbox
-                      label={
-                        <span className="flex items-center hyphens-auto" lang={locale}>
-                          <div
-                            className={`mx-3 h-5 w-5 flex-none rounded-full ${filterColorMap[OSAAMINEN_COLOR_MAP[key]]}`}
-                            aria-hidden
-                          />
-                          {t(`types.competence.${key}`)}
-                        </span>
-                      }
-                      checked={isFilterTypeChecked(key)}
-                      onChange={toggleFiltersByType(key)}
-                      ariaLabel="Työpaikka osaamiset"
-                      name="suodata"
-                      value="tyopaikka-osaamiset"
-                      className="min-h-7"
-                    />
-                  }
-                  expandMoreText={t('expand-more')}
-                  expandLessText={t('expand-less')}
-                  lang={locale}
-                >
-                  {selectedFilters[key]?.map((item, idx) => (
-                    <div className="pl-6" key={item.value}>
-                      <Checkbox
-                        name={item.label}
-                        ariaLabel={`${key} ${item.label}`}
-                        label={item.label}
-                        checked={item.checked}
-                        onChange={toggleSingleFilter(key, idx)}
-                        value={item.value}
-                      />
-                    </div>
-                  ))}
-                </Accordion>
-              ))}
-            </div>
           </SimpleNavigationList>
           <Filters />
         </div>

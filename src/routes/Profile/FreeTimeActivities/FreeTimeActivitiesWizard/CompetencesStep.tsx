@@ -43,7 +43,12 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
         control={control}
         name={`patevyydet.${patevyys}.osaamiset`}
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija description={debouncedDescription} onChange={onChange} value={value} />
+          <OsaamisSuosittelija
+            description={debouncedDescription}
+            onChange={onChange}
+            value={value}
+            sourceType="PATEVYYS"
+          />
         )}
       />
     </>
