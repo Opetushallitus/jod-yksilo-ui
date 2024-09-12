@@ -70,8 +70,33 @@ const Filters = ({
   );
 };
 
+interface EhdotusData {
+  /** Format: uuid */
+  mahdollisuusId: string;
+  ehdotusMetadata?: EhdotusMetadata;
+}
+
+interface EhdotusMetadata {
+  /** Format: double */
+  pisteet?: number;
+  /** @enum {string} */
+  trendi?: 'NOUSEVA' | 'LASKEVA';
+  /** Format: int32 */
+  tyollisyysNakyma?: number;
+}
+
+type EhdotusRecord = Record<string, EhdotusMetadata>;
+
+const ehdotusDataToRecord = (array: EhdotusData[]): EhdotusRecord => {
+  return array.reduce((acc, item) => {
+    acc[item.mahdollisuusId] = item?.ehdotusMetadata ?? {};
+    return acc;
+  }, {} as EhdotusRecord);
+};
+
 const Tool = () => {
-  const { tyomahdollisuudet: tyomahdollisuudetData, osaamiset: osaamisetData } = useLoaderData() as ToolLoaderData;
+  const { tyomahdollisuusEhdotukset: tyomahdollisuusEhdotuksetData, osaamiset: osaamisetData } =
+    useLoaderData() as ToolLoaderData;
   const { sm } = useMediaQueries();
   const { t, i18n } = useTranslation();
 
@@ -83,7 +108,10 @@ const Tool = () => {
   const [industry, setIndustry] = React.useState('x');
   const [order, setOrder] = React.useState('a');
 
-  const [tyomahdollisuudet, setTyomahdollisuudet] = React.useState<components['schemas']['EhdotusDto'][]>([]);
+  const [tyomahdollisuudet, setTyomahdollisuudet] = React.useState<components['schemas']['TyomahdollisuusDto'][]>([]);
+  const [tyomahdollisuusEhdotukset, setTyomahdollisuusEhdotukset] = React.useState<
+    Record<string, EhdotusMetadata> | undefined
+  >();
   const [professionsCount] = React.useState(534);
   const [educationsCount] = React.useState(1002);
 
@@ -100,15 +128,50 @@ const Tool = () => {
   const [selectedInterests, setSelectedInterests] = React.useState<OsaaminenValue[]>([]);
 
   React.useEffect(() => {
-    setTyomahdollisuudet(tyomahdollisuudetData);
-  }, [tyomahdollisuudetData]);
+    if (tyomahdollisuusEhdotuksetData) {
+      setTyomahdollisuusEhdotukset(ehdotusDataToRecord(tyomahdollisuusEhdotuksetData as EhdotusData[]));
+    }
+  }, [tyomahdollisuusEhdotuksetData]);
 
   const abortController = React.useRef<AbortController>();
+
+  // Update tyomahdollisuudet after the tyomahdollisuusEhdotukset has changed
+  React.useEffect(() => {
+    const fetchOpportunities = async () => {
+      const ids = Object.keys(tyomahdollisuusEhdotukset ?? [])
+        .map((key) => {
+          const pisteet = tyomahdollisuusEhdotukset?.[key].pisteet ?? 0;
+          return { key, pisteet };
+        })
+        .sort((a, b) => b.pisteet - a.pisteet)
+        .map((id) => id.key);
+
+      const { data } = await client.GET('/api/tyomahdollisuudet', {
+        params: {
+          query: {
+            id: ids.slice(0, 30), // TODO: fetch by paging
+          },
+        },
+        signal: abortController.current?.signal,
+      });
+      // All that has been returned are sorted by the scores
+      const results = data?.sisalto ?? [];
+      const sortedResults = [...results].sort((a, b) =>
+        tyomahdollisuusEhdotukset
+          ? (tyomahdollisuusEhdotukset[b.id]?.pisteet ?? 0) - (tyomahdollisuusEhdotukset[a.id]?.pisteet ?? 0)
+          : 0,
+      );
+      setTyomahdollisuudet(sortedResults);
+    };
+
+    void fetchOpportunities();
+  }, [tyomahdollisuusEhdotukset]);
+
   React.useEffect(() => {
     abortController.current?.abort('Abort previous request');
     abortController.current = new AbortController();
 
-    const fetchOpportunities = async () => {
+    const fetchSuggestions = async () => {
       const { data } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
         body: {
           osaamiset: selectedCompetences.map((item) => item.id),
@@ -119,13 +182,15 @@ const Tool = () => {
         },
         signal: abortController.current?.signal,
       });
-      // Set the first 10 opportunities
-      setTyomahdollisuudet(data?.splice(0, 10) ?? []);
+
+      if (data) {
+        setTyomahdollisuusEhdotukset(ehdotusDataToRecord(data as EhdotusData[]));
+      }
     };
 
     // Debounce the fetch
     const timer = setTimeout(() => {
-      void fetchOpportunities();
+      void fetchSuggestions();
     }, 300);
 
     return () => {
@@ -302,7 +367,7 @@ const Tool = () => {
           )}
           <div className="flex flex-col gap-5">
             {tyomahdollisuudet.map((item) => {
-              const tyomahdollisuus = item.tyomahdollisuus as Tyomahdollisuus;
+              const tyomahdollisuus = item as Tyomahdollisuus;
               return (
                 <NavLink
                   key={tyomahdollisuus.id}
@@ -313,11 +378,11 @@ const Tool = () => {
                     selected={selectedOpportunities.includes(tyomahdollisuus.id ?? '')}
                     name={tyomahdollisuus.otsikko[i18n.language] ?? ''}
                     description={tyomahdollisuus.tiivistelma?.[i18n.language] ?? ''}
-                    matchValue={item.osuvuus}
+                    matchValue={tyomahdollisuusEhdotukset?.[item.id].pisteet}
                     matchLabel="Sopivuus"
                     type="work"
-                    trend="up"
-                    employmentOutlook={3}
+                    trend={tyomahdollisuusEhdotukset?.[item.id].trendi}
+                    employmentOutlook={tyomahdollisuusEhdotukset?.[item.id].tyollisyysNakyma ?? 0}
                     hasRestrictions
                     industryName="Lorem ipsum dolor"
                     mostCommonEducationBackground="Lorem ipsum dolor"
