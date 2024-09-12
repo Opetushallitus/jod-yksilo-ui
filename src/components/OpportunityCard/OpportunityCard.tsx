@@ -1,3 +1,4 @@
+import { components } from '@/api/schema';
 import { useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +12,7 @@ interface OpportunityCardProps {
   matchValue?: number;
   matchLabel: string;
   type: CardType;
-  trend: 'up' | 'down';
+  trend: components['schemas']['EhdotusMetadata']['trendi'];
   employmentOutlook: number;
   hasRestrictions: boolean;
   industryName?: string;
@@ -51,7 +52,7 @@ const BottomBox = ({ title, children }: { title?: string; children: React.ReactN
 
 const OutlookDots = ({ outlook, ariaLabel }: { outlook: number; ariaLabel: string }) => (
   <div className="flex flex-row gap-2" aria-label={ariaLabel}>
-    {Array.from({ length: 5 }).map((_, idx) => (
+    {Array.from({ length: outlook }).map((_, idx) => (
       <div key={idx} className={`${idx < outlook ? 'bg-accent' : 'bg-accent-25'} w-4 h-4 rounded-full`} aria-hidden />
     ))}
   </div>
@@ -132,7 +133,7 @@ export const OpportunityCard = ({
           <div className="mt-4 flex flex-wrap">
             <BottomBox title={t('tool.competences.trend')}>
               <span className="text-accent" aria-label={t(`tool.competences.trend-${trend}`)}>
-                {trend === 'up' ? <HiTrendingUp size={24} /> : <HiTrendingDown size={24} />}
+                {trend === 'NOUSEVA' ? <HiTrendingUp size={24} /> : <HiTrendingDown size={24} />}
               </span>
             </BottomBox>
             <BottomBox title={t('tool.competences.employment-outlook')}>

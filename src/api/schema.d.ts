@@ -251,8 +251,8 @@ export interface paths {
       cookie?: never;
     };
     /**
-     * Hae työmahdollisuudet
-     * @description Palauttaa työpaikkailmoitukset JSON-muodossa.
+     * Get all työmahdollisuudet paged of by list of id
+     * @description Returns all työmahdollisuudet basic information in JSON-format.
      */
     get: operations['tyomahdollisuusFindAll'];
     put?: never;
@@ -270,6 +270,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /**
+     * Get full information content of single työmahdollisuus
+     * @description Returns one työmahdollisuus full content by id
+     */
     get: operations['tyomahdollisuusFindById'];
     put?: never;
     post?: never;
@@ -441,16 +445,17 @@ export interface components {
       kiinnostukset?: string[];
     };
     EhdotusDto: {
-      tyomahdollisuus?: components['schemas']['TyomahdollisuusDto'];
-      /** Format: double */
-      osuvuus?: number;
-    };
-    TyomahdollisuusDto: {
       /** Format: uuid */
-      id: string;
-      otsikko: components['schemas']['LokalisoituTeksti'];
-      tiivistelma?: components['schemas']['LokalisoituTeksti'];
-      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      mahdollisuusId?: string;
+      ehdotusMetadata?: components['schemas']['EhdotusMetadata'];
+    };
+    EhdotusMetadata: {
+      /** Format: double */
+      pisteet?: number;
+      /** @enum {string} */
+      trendi?: 'NOUSEVA' | 'LASKEVA';
+      /** Format: int32 */
+      tyollisyysNakyma?: number;
     };
     Taidot: {
       kuvaus: string;
@@ -486,6 +491,13 @@ export interface components {
        * @example 3
        */
       sivuja: number;
+    };
+    TyomahdollisuusDto: {
+      /** Format: uuid */
+      id: string;
+      otsikko: components['schemas']['LokalisoituTeksti'];
+      tiivistelma?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
     };
     ArvoDto: {
       arvo: string;
@@ -1153,6 +1165,7 @@ export interface operations {
       query?: {
         sivu?: number;
         koko?: number;
+        id?: string[];
       };
       header?: never;
       path?: never;

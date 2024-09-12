@@ -4,7 +4,7 @@ import { removeDuplicates } from '@/utils';
 import { LoaderFunction } from 'react-router-dom';
 
 export interface ToolLoaderData {
-  tyomahdollisuudet: components['schemas']['EhdotusDto'][];
+  tyomahdollisuusEhdotukset: components['schemas']['EhdotusDto'][];
   osaamiset: components['schemas']['YksilonOsaaminenDto'][];
 }
 
@@ -20,12 +20,12 @@ export default (async ({ request }) => {
     // Ignore error -> User is not logged in
   }
 
-  const { data: tyomahdollisuudet } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
+  const { data: tyomahdollisuusEhdotukset } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
     body: {
       osaamiset: osaamiset.map((osaaminen) => osaaminen.osaaminen.uri),
     },
     signal: request.signal,
   });
 
-  return { tyomahdollisuudet, osaamiset };
+  return { tyomahdollisuusEhdotukset, osaamiset };
 }) satisfies LoaderFunction;
