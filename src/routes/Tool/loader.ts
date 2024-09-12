@@ -9,11 +9,6 @@ export interface ToolLoaderData {
 }
 
 export default (async ({ request }) => {
-  const { data: tyomahdollisuudet } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
-    body: {},
-    signal: request.signal,
-  });
-
   let osaamiset: components['schemas']['YksilonOsaaminenDto'][] = [];
 
   try {
@@ -24,6 +19,13 @@ export default (async ({ request }) => {
   } catch (error) {
     // Ignore error -> User is not logged in
   }
+
+  const { data: tyomahdollisuudet } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
+    body: {
+      osaamiset: osaamiset.map((osaaminen) => osaaminen.osaaminen.uri),
+    },
+    signal: request.signal,
+  });
 
   return { tyomahdollisuudet, osaamiset };
 }) satisfies LoaderFunction;

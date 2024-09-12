@@ -35,7 +35,7 @@ declare interface Kokemus {
   osaamiset?: string[] | undefined;
 }
 
-declare type OsaaminenLahdeTyyppi = OsaaminenApiResponse['lahde']['tyyppi'];
+declare type OsaaminenLahdeTyyppi = OsaaminenApiResponse['lahde']['tyyppi'] | 'JOTAIN_MUUTA' | 'KIINNOSTUS';
 
 declare interface OsaaminenPostRequest {
   osaamiset: string[];
