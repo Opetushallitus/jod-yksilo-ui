@@ -1,7 +1,6 @@
 import { client } from '@/api/client';
 import { OsaamisSuosittelija } from '@/components';
 import { useDebounceState } from '@/hooks/useDebounceState';
-import { type KoulutusForm } from '@/routes/Profile/EducationHistory/EducationHistoryWizard/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -17,23 +16,33 @@ import {
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-interface EditKoulutusModalProps {
+interface EditToimenkuvaModalProps {
   isOpen: boolean;
-  onClose: React.Dispatch<React.SetStateAction<void>>;
-  koulutusId: string;
+  onClose: () => void;
+  tyopaikkaId: string;
+  toimenkuvaId: string;
+}
+
+interface ToimenkuvaForm {
+  id: string;
+  nimi: string;
+  kuvaus: string;
+  alkuPvm: string;
+  loppuPvm: string;
+  osaamiset: { id: string; nimi: string }[];
 }
 
 const MainStep = () => {
   const { t } = useTranslation();
-  const { register, control } = useFormContext<KoulutusForm>();
+  const { register, control } = useFormContext<ToimenkuvaForm>();
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t('education-history.edit-education-or-degree')}
+        {t('work-history.edit-job-description')}
       </h2>
       <div className="mb-6">
         <InputField
-          label={t('education-history.degree-or-course')}
+          label={t('work-history.job-description')}
           {...register('nimi')}
           placeholder="Lorem ipsum dolor sit amet"
         />
@@ -45,7 +54,7 @@ const MainStep = () => {
             render={({ field }) => (
               <Datepicker label={t('work-history.started')} {...field} placeholder={t('date-placeholder')} />
             )}
-            name={'alkuPvm'}
+            name="alkuPvm"
           />
         </div>
         <div className="block w-full">
@@ -54,7 +63,7 @@ const MainStep = () => {
             render={({ field }) => (
               <Datepicker label={t('work-history.ended')} {...field} placeholder={t('date-or-continues-placeholder')} />
             )}
-            name={'loppuPvm'}
+            name="loppuPvm"
           />
         </div>
       </div>
@@ -65,15 +74,13 @@ const MainStep = () => {
 const OsaaminenStep = () => {
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const { t } = useTranslation();
-  const { control } = useFormContext<KoulutusForm>();
+  const { control } = useFormContext<ToimenkuvaForm>();
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t('education-history.edit-competences')}
-      </h2>
+      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{t('work-history.edit-competences')}</h2>
       <div className="mb-6">
         <InputField
-          label={t('education-history.educational-content')}
+          label={t('work-history.edit-competences')}
           value={description}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
           placeholder="Lorem ipsum dolor sit amet"
@@ -82,7 +89,7 @@ const OsaaminenStep = () => {
 
       <Controller
         control={control}
-        name={'osaamiset'}
+        name="osaamiset"
         render={({ field: { onChange, value } }) => (
           <OsaamisSuosittelija description={debouncedDescription} onChange={onChange} value={value} />
         )}
@@ -91,22 +98,21 @@ const OsaaminenStep = () => {
   );
 };
 
-const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalProps) => {
-  const API_PATH = '/api/profiili/koulutuskokonaisuudet/koulutukset/{id}';
-
+const EditToimenkuvaModal = ({ isOpen, onClose, tyopaikkaId: id, toimenkuvaId }: EditToimenkuvaModalProps) => {
   const deleteKoulutukset = async () => {
-    await client.DELETE(API_PATH, {
-      params: { path: { id: koulutusId } },
+    await client.DELETE('/api/profiili/tyopaikat/{id}/toimenkuvat/{toimenkuvaId}', {
+      params: { path: { id, toimenkuvaId } },
     });
 
     onClose();
   };
+
   const {
     t,
     i18n: { language },
   } = useTranslation();
 
-  if (!koulutusId) {
+  if (!id) {
     onClose();
   }
 
@@ -124,7 +130,7 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
   const isLastStep = step === stepComponents.length - 1;
   const isFirstStep = step === 0;
 
-  const methods = useForm<KoulutusForm>({
+  const methods = useForm<ToimenkuvaForm>({
     mode: 'onChange',
     resolver: zodResolver(
       z
@@ -144,20 +150,22 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
     ),
     defaultValues: async () => {
       const { data: osaamiset } = await client.GET('/api/profiili/osaamiset');
-      const { data: koulutus } = await client.GET('/api/profiili/koulutuskokonaisuudet/koulutukset/{id}', {
+      const { data: toimenkuvat } = await client.GET('/api/profiili/tyopaikat/{id}/toimenkuvat', {
         params: {
-          path: { id: koulutusId },
+          path: { id },
         },
       });
 
+      const toimenkuva = toimenkuvat?.find((tk) => tk.id === toimenkuvaId);
+
       return {
-        id: koulutus?.id,
-        nimi: koulutus?.nimi?.[language] ?? '',
-        kuvaus: koulutus?.kuvaus?.[language] ?? '',
-        alkuPvm: koulutus?.alkuPvm ?? '',
-        loppuPvm: koulutus?.loppuPvm,
+        id: toimenkuva?.id ?? '',
+        nimi: toimenkuva?.nimi?.[language] ?? '',
+        kuvaus: toimenkuva?.kuvaus?.[language] ?? '',
+        alkuPvm: toimenkuva?.alkuPvm ?? '',
+        loppuPvm: toimenkuva?.loppuPvm ?? '',
         osaamiset:
-          koulutus?.osaamiset?.map((osaaminenId) => ({
+          toimenkuva?.osaamiset?.map((osaaminenId) => ({
             id: osaaminenId,
             nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi?.[language] ?? '',
           })) ?? [],
@@ -169,11 +177,12 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
     control: methods.control,
   });
 
-  const onSubmit: FormSubmitHandler<KoulutusForm> = async ({ data }: { data: KoulutusForm }) => {
+  const onSubmit: FormSubmitHandler<ToimenkuvaForm> = async ({ data }: { data: ToimenkuvaForm }) => {
     const params = {
       params: {
         path: {
-          id: data.id!,
+          id,
+          toimenkuvaId,
         },
       },
       body: {
@@ -186,7 +195,7 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
         osaamiset: data.osaamiset.map((o) => o.id),
       },
     };
-    await client.PUT(API_PATH, params);
+    await client.PATCH('/api/profiili/tyopaikat/{id}/toimenkuvat/{toimenkuvaId}', params);
     onClose();
   };
 
@@ -194,7 +203,10 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
     void trigger();
   }, [trigger]);
 
-  return !isLoading ? (
+  if (isLoading) {
+    return null;
+  }
+  return (
     <Modal
       open={isOpen}
       progress={<WizardProgress steps={stepComponents.length} currentStep={step + 1} />}
@@ -217,12 +229,12 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
       footer={
         <div className="flex flex-row justify-end gap-5">
           <ConfirmDialog
-            title={t('education-history.delete-education-history')}
+            title={t('work-history.delete-work-history')}
             onConfirm={() => void deleteKoulutukset()}
             confirmText={t('delete')}
             cancelText={t('cancel')}
             variant="destructive"
-            description={t('education-history.confirm-delete-education-history')}
+            description={t('work-history.confirm-delete-work-history')}
           >
             {(showDialog: () => void) => (
               <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
@@ -235,9 +247,7 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
         </div>
       }
     />
-  ) : (
-    <></>
   );
 };
 
-export default EditKoulutusModal;
+export default EditToimenkuvaModal;

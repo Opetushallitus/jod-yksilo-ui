@@ -1,6 +1,4 @@
-/* eslint-disable sonarjs/cognitive-complexity, sonarjs/no-duplicate-string */
 import { client } from '@/api/client';
-import { SelectableTableRow } from '@/components';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -16,11 +14,10 @@ import { type EducationHistoryForm } from './utils';
 
 interface EducationHistoryWizard {
   isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedRow?: SelectableTableRow;
+  onClose: () => void;
 }
 
-const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHistoryWizard) => {
+const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => {
   const {
     t,
     i18n: { language },
@@ -57,49 +54,17 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
         ), // alkuPvm <= loppuPvm
     ),
     defaultValues: async () => {
-      // Fetch osaamiset and koulutukset if the koulutus is defined
-      if (selectedRow?.key) {
-        const [osaamiset, koulutukset] = await Promise.all([
-          client.GET('/api/profiili/osaamiset'),
-          client.GET('/api/profiili/koulutuskokonaisuudet'),
-        ]);
-        const koulutus =
-          koulutukset.data?.find((koulutus) => koulutus.kategoria?.id === selectedRow.key) ??
-          koulutukset.data?.find((koulutus) =>
-            koulutus.koulutukset?.some((koulutus) => koulutus.id === selectedRow.key),
-          );
-        return {
-          id: koulutus?.kategoria?.id,
-          nimi: koulutus?.kategoria?.nimi?.[language] ?? '',
-          koulutukset:
-            koulutus?.koulutukset?.map((tutkinto) => ({
-              id: tutkinto.id,
-              nimi: tutkinto.nimi[language] ?? '',
-              alkuPvm: tutkinto.alkuPvm ?? '',
-              loppuPvm: tutkinto.loppuPvm ?? '',
-              osaamiset:
-                tutkinto.osaamiset?.map((osaaminenId) => ({
-                  id: osaaminenId,
-                  nimi:
-                    osaamiset.data?.find((osaaminen) => osaaminen.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi?.[
-                      language
-                    ] ?? '',
-                })) ?? [],
-            })) ?? [],
-        };
-      } else {
-        return Promise.resolve({
-          nimi: '',
-          koulutukset: [
-            {
-              nimi: '',
-              alkuPvm: '',
-              loppuPvm: '',
-              osaamiset: [],
-            },
-          ],
-        });
-      }
+      return Promise.resolve({
+        nimi: '',
+        koulutukset: [
+          {
+            nimi: '',
+            alkuPvm: '',
+            loppuPvm: '',
+            osaamiset: [],
+          },
+        ],
+      });
     },
   });
   const trigger = methods.trigger;
@@ -133,12 +98,8 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
         })),
       },
     };
-    if (selectedRow?.key) {
-      await client.PUT('/api/profiili/koulutuskokonaisuudet', params);
-    } else {
-      await client.POST('/api/profiili/koulutuskokonaisuudet', params);
-    }
-    setIsOpen(false);
+    await client.POST('/api/profiili/koulutuskokonaisuudet', params);
+    onClose();
     navigate('.', { replace: true });
   };
 
@@ -157,7 +118,11 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
     void trigger();
   }, [trigger, fields]);
 
-  return !isLoading ? (
+  if (isLoading) {
+    return null;
+  }
+
+  return (
     <Modal
       open={isOpen}
       content={
@@ -183,34 +148,8 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
       progress={<WizardProgress steps={steps} currentStep={step} />}
       footer={
         <div className="flex flex-row-reverse justify-between gap-5">
-          {/* <div className="flex gap-5">
-            {step === steps && (
-              <Button
-                onClick={() => {
-                  append({
-                    nimi: '',
-                    alkuPvm: '',
-                    loppuPvm: '',
-                    osaamiset: [],
-                  });
-                }}
-                label={t('education-history.add-new-degree-or-course')}
-                variant="white"
-              />
-            )}
-            {step !== steps && selectedTutkinto > 0 && (
-              <Button
-                onClick={() => {
-                  setStep(selectedTutkinto * 2);
-                  remove(selectedTutkinto);
-                }}
-                label={t('education-history.delete-degree-or-course')}
-                variant="white-delete"
-              />
-            )}
-          </div> */}
           <div className="flex gap-5">
-            <Button onClick={() => setIsOpen(false)} label={t('cancel')} variant="white" />
+            <Button onClick={onClose} label={t('cancel')} variant="white" />
             {step > 1 && (
               <Button
                 onClick={() => setStep(step - 1)}
@@ -233,8 +172,6 @@ const EducationHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: EducationHis
         </div>
       }
     />
-  ) : (
-    <></>
   );
 };
 

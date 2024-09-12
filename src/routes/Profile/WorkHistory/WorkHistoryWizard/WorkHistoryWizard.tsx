@@ -1,6 +1,4 @@
-/* eslint-disable sonarjs/cognitive-complexity */
 import { client } from '@/api/client';
-import { SelectableTableRow } from '@/components';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -16,11 +14,10 @@ import { type WorkHistoryForm } from './utils';
 
 interface WorkHistoryWizardProps {
   isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedRow?: SelectableTableRow;
+  onClose: () => void;
 }
 
-const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizardProps) => {
+const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   const {
     t,
     i18n: { language },
@@ -59,48 +56,17 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
         ), // alkuPvm <= loppuPvm
     ),
     defaultValues: async () => {
-      // Fetch osaamiset and toimenkuvat if the tyopaikka is defined
-      if (selectedRow?.key) {
-        const [osaamiset, toimenkuvat] = await Promise.all([
-          client.GET('/api/profiili/osaamiset'),
-          client.GET('/api/profiili/tyopaikat/{id}/toimenkuvat', {
-            params: { path: { id: selectedRow.key } },
-          }),
-        ]);
-        return {
-          id: selectedRow?.key,
-          nimi: selectedRow.nimi[language] ?? '',
-          toimenkuvat:
-            toimenkuvat.data
-              ?.sort((a, b) => (a.alkuPvm as unknown as string).localeCompare(b.alkuPvm as unknown as string))
-              .map((toimenkuva) => ({
-                id: toimenkuva.id,
-                nimi: toimenkuva.nimi[language] ?? '',
-                alkuPvm: toimenkuva.alkuPvm ?? '',
-                loppuPvm: toimenkuva.loppuPvm ?? '',
-                osaamiset:
-                  toimenkuva.osaamiset?.map((osaaminenId) => ({
-                    id: osaaminenId,
-                    nimi:
-                      osaamiset.data?.find((osaaminen) => osaaminen.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi?.[
-                        language
-                      ] ?? '',
-                  })) ?? [],
-              })) ?? [],
-        };
-      } else {
-        return Promise.resolve({
-          nimi: '',
-          toimenkuvat: [
-            {
-              nimi: '',
-              alkuPvm: '',
-              loppuPvm: '',
-              osaamiset: [],
-            },
-          ],
-        });
-      }
+      return Promise.resolve({
+        nimi: '',
+        toimenkuvat: [
+          {
+            nimi: '',
+            alkuPvm: '',
+            loppuPvm: '',
+            osaamiset: [],
+          },
+        ],
+      });
     },
   });
   const trigger = methods.trigger;
@@ -113,46 +79,22 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
     name: 'toimenkuvat',
   });
   const onSubmit: FormSubmitHandler<WorkHistoryForm> = async ({ data }: { data: WorkHistoryForm }) => {
-    // Update the tyopaikka if it exists
-    if (selectedRow?.key) {
-      await client.PATCH('/api/profiili/tyopaikat/{id}', {
-        params: {
-          path: { id: selectedRow.key },
+    await client.POST('/api/profiili/tyopaikat', {
+      body: {
+        nimi: {
+          [language]: data.nimi,
         },
-        body: {
-          id: data.id,
+        toimenkuvat: data.toimenkuvat.map((toimenkuva) => ({
           nimi: {
-            [language]: data.nimi,
+            [language]: toimenkuva.nimi,
           },
-          toimenkuvat: data.toimenkuvat.map((toimenkuva) => ({
-            id: toimenkuva.id,
-            nimi: {
-              [language]: toimenkuva.nimi,
-            },
-            alkuPvm: toimenkuva.alkuPvm,
-            loppuPvm: toimenkuva.loppuPvm,
-            osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
-          })),
-        },
-      });
-    } else {
-      await client.POST('/api/profiili/tyopaikat', {
-        body: {
-          nimi: {
-            [language]: data.nimi,
-          },
-          toimenkuvat: data.toimenkuvat.map((toimenkuva) => ({
-            nimi: {
-              [language]: toimenkuva.nimi,
-            },
-            alkuPvm: toimenkuva.alkuPvm,
-            loppuPvm: toimenkuva.loppuPvm,
-            osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
-          })),
-        },
-      });
-    }
-    setIsOpen(false);
+          alkuPvm: toimenkuva.alkuPvm,
+          loppuPvm: toimenkuva.loppuPvm,
+          osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
+        })),
+      },
+    });
+    onClose();
     navigate('.', { replace: true });
   };
 
@@ -171,7 +113,11 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
     void trigger();
   }, [trigger, fields]);
 
-  return !isLoading ? (
+  if (isLoading) {
+    return null;
+  }
+
+  return (
     <Modal
       open={isOpen}
       content={
@@ -224,7 +170,7 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
             )}
           </div>
           <div className="flex gap-5">
-            <Button onClick={() => setIsOpen(false)} label={t('cancel')} variant="white" />
+            <Button onClick={() => onClose()} label={t('cancel')} variant="white" />
             {step > 1 && (
               <Button
                 onClick={() => setStep(step - 1)}
@@ -247,8 +193,6 @@ const WorkHistoryWizard = ({ isOpen, setIsOpen, selectedRow }: WorkHistoryWizard
         </div>
       }
     />
-  ) : (
-    <></>
   );
 };
 

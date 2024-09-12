@@ -1,4 +1,4 @@
-import { type SelectableTableRow } from '@/components';
+import { type ExperienceTableRowData } from '@/components';
 
 export interface Toimenkuva {
   id?: string;
@@ -14,8 +14,8 @@ export interface Tyopaikka {
   toimenkuvat: Toimenkuva[];
 }
 
-export const getWorkHistoryTableRows = (data: Tyopaikka[]): SelectableTableRow[] =>
-  data.reduce((rows: SelectableTableRow[], row) => {
+export const getWorkHistoryTableRows = (data: Tyopaikka[]): ExperienceTableRowData[] =>
+  data.reduce((rows: ExperienceTableRowData[], row) => {
     const { toimenkuvat } = row;
     const alkuPvm = Math.min(...toimenkuvat.map((t) => new Date(t.alkuPvm).getTime()));
     const loppuPvm = toimenkuvat.some((toimenkuva) => !toimenkuva.loppuPvm)
@@ -25,26 +25,25 @@ export const getWorkHistoryTableRows = (data: Tyopaikka[]): SelectableTableRow[]
             .filter((toimenkuva) => toimenkuva.loppuPvm)
             .map((toimenkuva) => new Date(toimenkuva.loppuPvm as unknown as string).getTime()),
         );
-    rows.push({
+
+    const rowData: ExperienceTableRowData = {
       key: row.id ?? crypto.randomUUID(),
-      hideSubrowDetails: toimenkuvat.length <= 1,
-      checked: false,
       nimi: row.nimi,
       alkuPvm: new Date(alkuPvm),
       loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
+      subrows: [...toimenkuvat].sort((a, b) => a.alkuPvm.localeCompare(b.alkuPvm)).map(mapToimenkuvaToRow),
       osaamisetCount: toimenkuvat.reduce((acc, cur) => acc + (cur.osaamiset.length ?? 0), 0),
-    });
-    toimenkuvat
-      .sort((a, b) => a.alkuPvm.localeCompare(b.alkuPvm))
-      .forEach((toimenkuva) => {
-        rows.push({
-          key: toimenkuva.id ?? crypto.randomUUID(),
-          hideSubrowDetails: toimenkuvat.length <= 1,
-          nimi: toimenkuva.nimi,
-          alkuPvm: new Date(toimenkuva.alkuPvm),
-          loppuPvm: toimenkuva.loppuPvm ? new Date(toimenkuva.loppuPvm) : undefined,
-          osaamisetCount: toimenkuva.osaamiset.length ?? 0,
-        });
-      });
+    };
+
+    rows.push(rowData);
+
     return rows;
   }, []);
+
+const mapToimenkuvaToRow = (toimenkuva: Toimenkuva): ExperienceTableRowData => ({
+  key: toimenkuva.id ?? crypto.randomUUID(),
+  nimi: toimenkuva.nimi,
+  alkuPvm: new Date(toimenkuva.alkuPvm),
+  loppuPvm: toimenkuva.loppuPvm ? new Date(toimenkuva.loppuPvm) : undefined,
+  osaamisetCount: toimenkuva.osaamiset.length ?? 0,
+});
