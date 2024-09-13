@@ -1,6 +1,4 @@
-/* eslint-disable sonarjs/cognitive-complexity */
 import { client } from '@/api/client';
-import { SelectableTableRow } from '@/components';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -17,10 +15,9 @@ import { type FreeTimeActivitiesForm } from './utils';
 interface FreeTimeActivitiesWizardProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedRow?: SelectableTableRow;
 }
 
-const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeActivitiesWizardProps) => {
+const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizardProps) => {
   const {
     t,
     i18n: { language },
@@ -57,48 +54,17 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
         ), // alkuPvm <= loppuPvm
     ),
     defaultValues: async () => {
-      // Fetch osaamiset and patevyydet if the nimi is defined
-      if (selectedRow?.key) {
-        const [osaamiset, patevyydet] = await Promise.all([
-          client.GET('/api/profiili/osaamiset'),
-          client.GET('/api/profiili/vapaa-ajan-toiminnot/{id}', {
-            params: { path: { id: selectedRow.key } },
-          }),
-        ]);
-        return {
-          id: selectedRow.key,
-          nimi: selectedRow.nimi[language] ?? '',
-          patevyydet:
-            patevyydet.data?.patevyydet
-              ?.sort((a, b) => (a.alkuPvm as unknown as string).localeCompare(b.alkuPvm as unknown as string))
-              .map((patevyys) => ({
-                id: patevyys.id,
-                nimi: patevyys.nimi[language] ?? '',
-                alkuPvm: patevyys.alkuPvm ?? '',
-                loppuPvm: patevyys.loppuPvm ?? '',
-                osaamiset:
-                  patevyys.osaamiset?.map((osaaminenId) => ({
-                    id: osaaminenId,
-                    nimi:
-                      osaamiset.data?.find((osaaminen) => osaaminen.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi?.[
-                        language
-                      ] ?? '',
-                  })) ?? [],
-              })) ?? [],
-        };
-      } else {
-        return Promise.resolve({
-          nimi: '',
-          patevyydet: [
-            {
-              nimi: '',
-              alkuPvm: '',
-              loppuPvm: '',
-              osaamiset: [],
-            },
-          ],
-        });
-      }
+      return Promise.resolve({
+        nimi: '',
+        patevyydet: [
+          {
+            nimi: '',
+            alkuPvm: '',
+            loppuPvm: '',
+            osaamiset: [],
+          },
+        ],
+      });
     },
   });
   const trigger = methods.trigger;
@@ -113,42 +79,21 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen, selectedRow }: FreeTimeAc
   });
 
   const onSubmit: FormSubmitHandler<FreeTimeActivitiesForm> = async ({ data }: { data: FreeTimeActivitiesForm }) => {
-    if (selectedRow?.key) {
-      await client.PUT('/api/profiili/vapaa-ajan-toiminnot/{id}', {
-        params: { path: { id: selectedRow.key } },
-        body: {
-          id: methods.watch('id'),
-          nimi: {
-            [language]: data.nimi,
-          },
-          patevyydet: data.patevyydet.map((patevyys, index) => ({
-            id: methods.watch(`patevyydet.${index}.id`),
-            nimi: {
-              [language]: patevyys.nimi,
-            },
-            alkuPvm: patevyys.alkuPvm,
-            loppuPvm: patevyys.loppuPvm,
-            osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),
-          })),
+    await client.POST('/api/profiili/vapaa-ajan-toiminnot', {
+      body: {
+        nimi: {
+          [language]: data.nimi,
         },
-      });
-    } else {
-      await client.POST('/api/profiili/vapaa-ajan-toiminnot', {
-        body: {
+        patevyydet: data.patevyydet.map((patevyys) => ({
           nimi: {
-            [language]: data.nimi,
+            [language]: patevyys.nimi,
           },
-          patevyydet: data.patevyydet.map((patevyys) => ({
-            nimi: {
-              [language]: patevyys.nimi,
-            },
-            alkuPvm: patevyys.alkuPvm,
-            loppuPvm: patevyys.loppuPvm,
-            osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),
-          })),
-        },
-      });
-    }
+          alkuPvm: patevyys.alkuPvm,
+          loppuPvm: patevyys.loppuPvm,
+          osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),
+        })),
+      },
+    });
     setIsOpen(false);
     navigate('.', { replace: true });
   };

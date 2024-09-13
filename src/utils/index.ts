@@ -85,3 +85,32 @@ export const removeDuplicates = <T extends object>(array: T[], key: NestedKeyOf<
   array.filter(
     (item, index, self) => index === self.findIndex((t) => getNestedProperty(t, key) === getNestedProperty(item, key)),
   );
+
+/**
+ * Sorts an array of objects by a specified property.
+ * @param property The property name to sort by.
+ * @param reverse Whether to sort in reverse order.
+ * @returns A sorting function for use with Array.sort().
+ */
+export const sortByProperty =
+  <T, K extends keyof T>(property: K, reverse = false) =>
+  (a: T, b: T) => {
+    const values = reverse ? [b[property], a[property]] : [a[property], b[property]];
+    const isStringType = values.every((p) => typeof p === 'string');
+    const isNumberType = values.every((p) => typeof p === 'number');
+    const isDateType = values.every((p) => p instanceof Date);
+
+    if (isStringType) {
+      return (values[0] as string).localeCompare(values[1] as string, i18n.language);
+    } else if (isNumberType || isDateType) {
+      if (values[0] < values[1]) {
+        return -1;
+      }
+      if (values[0] > values[1]) {
+        return 1;
+      }
+      return 0;
+    } else {
+      return 0;
+    }
+  };

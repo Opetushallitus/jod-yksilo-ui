@@ -9,6 +9,5 @@ export { SimpleNavigationList } from './MainLayout/SimpleNavigationList';
 export { NavigationBar } from './NavigationBar/NavigationBar';
 export { OpportunityCard } from './OpportunityCard/OpportunityCard';
 export { OsaamisSuosittelija, type Osaaminen, type OsaaminenValue } from './OsaamisSuosittelija/OsaamisSuosittelija';
-export { SelectableTable, type SelectableTableRow } from './SelectableTable/SelectableTable';
 export { Title } from './Title/Title';
 export { UserButton } from './UserButton/UserButton';

@@ -1,4 +1,5 @@
 import { type ExperienceTableRowData } from '@/components';
+import { sortByProperty } from '@/utils';
 
 export interface Tutkinto {
   id?: string;
@@ -33,7 +34,7 @@ export const getEducationHistoryTableRows = (data: Koulutus[]): ExperienceTableR
         nimi: oppilaitos.nimi,
         alkuPvm: new Date(alkuPvm),
         loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
-        subrows: [...tutkinnot].sort((a, b) => a.alkuPvm.localeCompare(b.alkuPvm)).map(mapTutkintoToRow),
+        subrows: [...tutkinnot].sort(sortByProperty('alkuPvm')).map(mapTutkintoToRow),
         osaamisetCount: tutkinnot.reduce((acc, cur) => acc + (cur.osaamiset.length ?? 0), 0),
       };
 

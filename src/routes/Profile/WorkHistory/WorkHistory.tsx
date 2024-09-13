@@ -86,7 +86,7 @@ const WorkHistory = () => {
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
       <ExperienceTable
-        selectableColumnHeader={t('work-history.workplace-or-job-description')}
+        mainColumnHeader={t('work-history.workplace-or-job-description')}
         rows={rows}
         onRowClick={handleRowClick}
       />
