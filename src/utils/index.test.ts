@@ -1,5 +1,5 @@
 import { LangCode } from '@/i18n/config';
-import { formatDate, getLocalizedRoutesMap, getLocalizedText, removeDuplicates } from '@/utils';
+import { formatDate, getLocalizedRoutesMap, getLocalizedText, removeDuplicates, sortByProperty } from '@/utils';
 import i18n from 'i18next';
 import { RouteObject } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
@@ -150,6 +150,46 @@ describe('utils', () => {
         { id: 1, info: { details: { name: 'Alice' } } },
         { id: 2, info: { details: { name: 'Bob' } } },
       ]);
+    });
+  });
+
+  describe('sortByProperty', () => {
+    it('should sort objects by string property', () => {
+      const items = [{ name: 'banana' }, { name: 'apple' }, { name: 'cherry' }];
+      const sortedItems = items.sort(sortByProperty('name'));
+      expect(sortedItems).toEqual([{ name: 'apple' }, { name: 'banana' }, { name: 'cherry' }]);
+    });
+
+    it('should reverse the sorted array', () => {
+      const items = [{ name: 'banana' }, { name: 'apple' }, { name: 'cherry' }];
+      const sortedItems = items.sort(sortByProperty('name', true));
+      expect(sortedItems).toEqual([{ name: 'cherry' }, { name: 'banana' }, { name: 'apple' }]);
+    });
+
+    it('should sort objects by number property', () => {
+      const items = [{ age: 30 }, { age: 20 }, { age: 40 }];
+      const sortedItems = items.sort(sortByProperty('age'));
+      expect(sortedItems).toEqual([{ age: 20 }, { age: 30 }, { age: 40 }]);
+    });
+
+    it('should sort objects by date property', () => {
+      const items = [
+        { date: new Date('2022-01-01') },
+        { date: new Date('2021-01-01') },
+        { date: new Date('2023-01-01') },
+      ];
+      const sortedItems = items.sort(sortByProperty('date'));
+      expect(sortedItems).toEqual([
+        { date: new Date('2021-01-01') },
+        { date: new Date('2022-01-01') },
+        { date: new Date('2023-01-01') },
+      ]);
+    });
+
+    it('should return 0 for non-comparable types', () => {
+      const items = [{ value: {} }, { value: {} }];
+      const sortedItems = items.sort(sortByProperty('value'));
+      expect(sortedItems).toEqual(items);
     });
   });
 });

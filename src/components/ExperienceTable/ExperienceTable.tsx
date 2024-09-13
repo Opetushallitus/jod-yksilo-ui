@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { ExperienceTableRow, type ExperienceTableRowData } from './ExperienceTableRow';
 
 interface ExperienceTableProps {
-  selectableColumnHeader: string;
+  mainColumnHeader: string;
   rows: ExperienceTableRowData[];
   onRowClick?: (row: ExperienceTableRowData) => void;
 }
 
-export const ExperienceTable = ({ selectableColumnHeader, rows, onRowClick }: ExperienceTableProps) => {
+export const ExperienceTable = ({ mainColumnHeader, rows, onRowClick }: ExperienceTableProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
 
@@ -22,7 +22,7 @@ export const ExperienceTable = ({ selectableColumnHeader, rows, onRowClick }: Ex
         <thead>
           <tr className="border-b-2 border-inactive-gray">
             <th scope="col" className="py-3 pr-5 align-bottom text-form-label font-arial text-secondary-gray">
-              {selectableColumnHeader}
+              {mainColumnHeader}
             </th>
             {sm && (
               <>
@@ -55,7 +55,7 @@ export const ExperienceTable = ({ selectableColumnHeader, rows, onRowClick }: Ex
                 colSpan={4}
                 className="border-b border-inactive-gray py-3 pr-7 align-bottom text-form-label text-secondary-gray pt-6"
               >
-                {selectableColumnHeader} ilman kategoriaa
+                {mainColumnHeader} ilman kategoriaa
               </td>
             </tr>
           )}

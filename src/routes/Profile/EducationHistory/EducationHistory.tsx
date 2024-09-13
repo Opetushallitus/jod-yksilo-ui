@@ -81,7 +81,7 @@ const EducationHistory = () => {
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
       <ExperienceTable
-        selectableColumnHeader={t('education-history.education-or-degree')}
+        mainColumnHeader={t('education-history.education-or-degree')}
         rows={rows}
         onRowClick={handleRowClick}
       />

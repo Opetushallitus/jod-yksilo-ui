@@ -91,7 +91,12 @@ const OsaaminenStep = () => {
         control={control}
         name="osaamiset"
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija description={debouncedDescription} onChange={onChange} value={value} />
+          <OsaamisSuosittelija
+            description={debouncedDescription}
+            onChange={onChange}
+            value={value}
+            sourceType="TOIMENKUVA"
+          />
         )}
       />
     </>
@@ -227,23 +232,31 @@ const EditToimenkuvaModal = ({ isOpen, onClose, tyopaikkaId: id, toimenkuvaId }:
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-end gap-5">
-          <ConfirmDialog
-            title={t('work-history.delete-work-history')}
-            onConfirm={() => void deleteKoulutukset()}
-            confirmText={t('delete')}
-            cancelText={t('cancel')}
-            variant="destructive"
-            description={t('work-history.confirm-delete-work-history')}
-          >
-            {(showDialog: () => void) => (
-              <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
+        <div className="flex flex-row justify-between">
+          <div>
+            <ConfirmDialog
+              title={t('work-history.delete-work-history')}
+              onConfirm={() => void deleteKoulutukset()}
+              confirmText={t('delete')}
+              cancelText={t('cancel')}
+              variant="destructive"
+              description={t('work-history.confirm-delete-work-history')}
+            >
+              {(showDialog: () => void) => (
+                <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
+              )}
+            </ConfirmDialog>
+          </div>
+          <div className="flex flex-row justify-between gap-5">
+            <Button label={t('cancel')} variant="white" onClick={onClose} />
+            {!isFirstStep && (
+              <Button label={t('previous')} variant="white" disabled={!isValid} onClick={previousStep} />
             )}
-          </ConfirmDialog>
-          <Button label={t('cancel')} variant="white" onClick={onClose} />
-          <Button label={t('previous')} variant="white" disabled={isFirstStep} onClick={previousStep} />
-          <Button label={t('next')} variant="white" disabled={isLastStep || !isValid} onClick={nextStep} />
-          <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />
+            {!isLastStep && (
+              <Button label={t('next')} variant="white" disabled={isLastStep || !isValid} onClick={nextStep} />
+            )}
+            {isLastStep && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}
+          </div>
         </div>
       }
     />

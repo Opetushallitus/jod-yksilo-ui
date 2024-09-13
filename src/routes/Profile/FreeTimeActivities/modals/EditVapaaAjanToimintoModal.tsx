@@ -7,26 +7,26 @@ import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 're
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-interface EditTyonantajaModalProps {
+interface EditVapaaAjanToimintoProps {
   isOpen: boolean;
   onClose: () => void;
-  tyopaikkaId: string;
+  toimintoId: string;
 }
 
-interface TyonantajaForm {
-  id: components['schemas']['TyopaikkaDto']['id'];
+export interface VapaaAjanToimintoForm {
+  id: components['schemas']['ToimintoDto']['id'];
   nimi: string;
-  toimenkuvat: components['schemas']['TyopaikkaDto']['toimenkuvat'];
+  patevyydet: components['schemas']['ToimintoDto']['patevyydet'];
 }
 
-const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantajaModalProps) => {
+export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: EditVapaaAjanToimintoProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
 
   const formId = React.useId();
-  const methods = useForm<TyonantajaForm>({
+  const methods = useForm<VapaaAjanToimintoForm>({
     mode: 'onChange',
     resolver: zodResolver(
       z.object({
@@ -35,14 +35,14 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
       }),
     ),
     defaultValues: async () => {
-      const tyopaikat = await client.GET('/api/profiili/tyopaikat');
-      const tyopaikka =
-        tyopaikat.data?.find((tp) => tp.id === id) ??
-        tyopaikat.data?.find((tp) => tp.toimenkuvat?.some((tk) => tk.id === id));
+      const toiminnot = await client.GET('/api/profiili/vapaa-ajan-toiminnot');
+      const toiminto =
+        toiminnot.data?.find((toiminto) => toiminto.id === id) ??
+        toiminnot.data?.find((toiminto) => toiminto.patevyydet?.some((p) => p.id === id));
       return {
-        id: tyopaikka?.id,
-        nimi: tyopaikka?.nimi?.[language] ?? '',
-        toimenkuvat: tyopaikka?.toimenkuvat,
+        id: toiminto?.id,
+        nimi: toiminto?.nimi?.[language] ?? '',
+        patevyydet: toiminto?.patevyydet,
       };
     },
   });
@@ -51,7 +51,7 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
     control: methods.control,
   });
 
-  const onSubmit: FormSubmitHandler<TyonantajaForm> = async ({ data }: { data: TyonantajaForm }) => {
+  const onSubmit: FormSubmitHandler<VapaaAjanToimintoForm> = async ({ data }: { data: VapaaAjanToimintoForm }) => {
     const params = {
       params: {
         path: {
@@ -63,16 +63,16 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
         nimi: {
           [language]: data.nimi,
         },
-        toimenkuvat: data.toimenkuvat,
+        patevyydet: data.patevyydet,
       },
     };
-    await client.PATCH('/api/profiili/tyopaikat/{id}', params);
+    await client.PUT('/api/profiili/vapaa-ajan-toiminnot/{id}', params);
     onClose();
   };
 
-  const deleteTyopaikka = async () => {
-    await client.DELETE('/api/profiili/tyopaikat/{id}', {
-      params: { path: { id } },
+  const deleteToiminto = async () => {
+    await client.DELETE('/api/profiili/vapaa-ajan-toiminnot', {
+      params: { query: { ids: [id] } },
     });
 
     onClose();
@@ -102,11 +102,11 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
             }}
           >
             <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-              {t('work-history.edit-workplace')}
+              {t('free-time-activities.edit-activity')}
             </h2>
 
             <InputField
-              label={t('work-history.employer')}
+              label={t('free-time-activities.activity-or-proficiency-description')}
               {...methods.register('nimi')}
               placeholder="Lorem ipsum dolor sit amet"
               help="Help text"
@@ -118,12 +118,12 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
         <div className="flex flex-row justify-between">
           <div>
             <ConfirmDialog
-              title={t('work-history.delete-work-history')}
-              onConfirm={() => void deleteTyopaikka()}
+              title={t('free-time-activities.delete-free-time-activity')}
+              onConfirm={() => void deleteToiminto()}
               confirmText={t('delete')}
               cancelText={t('cancel')}
               variant="destructive"
-              description={t('work-history.confirm-delete-work-history')}
+              description={t('free-time-activities.confirm-delete-free-time-activity')}
             >
               {(showDialog: () => void) => (
                 <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
@@ -139,5 +139,3 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
     />
   );
 };
-
-export default EditTyonantajaModal;

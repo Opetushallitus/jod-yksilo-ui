@@ -1,4 +1,5 @@
 import { type ExperienceTableRowData } from '@/components';
+import { sortByProperty } from '@/utils';
 
 export interface Toimenkuva {
   id?: string;
@@ -31,7 +32,7 @@ export const getWorkHistoryTableRows = (data: Tyopaikka[]): ExperienceTableRowDa
       nimi: row.nimi,
       alkuPvm: new Date(alkuPvm),
       loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
-      subrows: [...toimenkuvat].sort((a, b) => a.alkuPvm.localeCompare(b.alkuPvm)).map(mapToimenkuvaToRow),
+      subrows: [...toimenkuvat].sort(sortByProperty('alkuPvm')).map(mapToimenkuvaToRow),
       osaamisetCount: toimenkuvat.reduce((acc, cur) => acc + (cur.osaamiset.length ?? 0), 0),
     };
 

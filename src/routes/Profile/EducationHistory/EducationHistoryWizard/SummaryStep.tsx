@@ -1,4 +1,4 @@
-import { ExperienceTable, SelectableTableRow } from '@/components';
+import { ExperienceTable, type ExperienceTableRowData } from '@/components';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,7 @@ import { type EducationHistoryForm } from './utils';
 const SummaryStep = () => {
   const { t } = useTranslation();
   const { watch } = useFormContext<EducationHistoryForm>();
-  const [rows, setRows] = React.useState<SelectableTableRow[]>([]);
+  const [rows, setRows] = React.useState<ExperienceTableRowData[]>([]);
 
   React.useEffect(() => {
     const koulutus = watch();
@@ -44,7 +44,7 @@ const SummaryStep = () => {
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
-      <ExperienceTable selectableColumnHeader={t('education-history.degree-or-course')} rows={rows} />
+      <ExperienceTable mainColumnHeader={t('education-history.degree-or-course')} rows={rows} />
     </>
   );
 };

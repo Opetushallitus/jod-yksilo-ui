@@ -1,7 +1,8 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { client } from '@/api/client';
+import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
 import { useDebounceState } from '@/hooks/useDebounceState';
-import { type KoulutusForm } from '@/routes/Profile/EducationHistory/EducationHistoryWizard/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -17,23 +18,32 @@ import {
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-interface EditKoulutusModalProps {
+interface EditPatevyysProps {
   isOpen: boolean;
-  onClose: React.Dispatch<React.SetStateAction<void>>;
-  koulutusId: string;
+  onClose: () => void;
+  toimintoId: string;
+  patevyysId: string;
+}
+
+interface PatevyysForm {
+  id: string;
+  nimi: string;
+  alkuPvm: string;
+  loppuPvm: string;
+  osaamiset: { id: string; nimi: string }[];
 }
 
 const MainStep = () => {
   const { t } = useTranslation();
-  const { register, control } = useFormContext<KoulutusForm>();
+  const { register, control } = useFormContext<PatevyysForm>();
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t('education-history.edit-education-or-degree')}
+        {t('work-history.edit-job-description')}
       </h2>
       <div className="mb-6">
         <InputField
-          label={t('education-history.degree-or-course')}
+          label={t('work-history.job-description')}
           {...register('nimi')}
           placeholder="Lorem ipsum dolor sit amet"
         />
@@ -45,7 +55,7 @@ const MainStep = () => {
             render={({ field }) => (
               <Datepicker label={t('work-history.started')} {...field} placeholder={t('date-placeholder')} />
             )}
-            name={'alkuPvm'}
+            name="alkuPvm"
           />
         </div>
         <div className="block w-full">
@@ -54,7 +64,7 @@ const MainStep = () => {
             render={({ field }) => (
               <Datepicker label={t('work-history.ended')} {...field} placeholder={t('date-or-continues-placeholder')} />
             )}
-            name={'loppuPvm'}
+            name="loppuPvm"
           />
         </div>
       </div>
@@ -65,15 +75,13 @@ const MainStep = () => {
 const OsaaminenStep = () => {
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const { t } = useTranslation();
-  const { control } = useFormContext<KoulutusForm>();
+  const { control } = useFormContext<PatevyysForm>();
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t('education-history.edit-competences')}
-      </h2>
+      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{t('work-history.edit-competences')}</h2>
       <div className="mb-6">
         <InputField
-          label={t('education-history.educational-content')}
+          label={t('work-history.edit-competences')}
           value={description}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
           placeholder="Lorem ipsum dolor sit amet"
@@ -82,13 +90,13 @@ const OsaaminenStep = () => {
 
       <Controller
         control={control}
-        name={'osaamiset'}
+        name="osaamiset"
         render={({ field: { onChange, value } }) => (
           <OsaamisSuosittelija
             description={debouncedDescription}
             onChange={onChange}
             value={value}
-            sourceType="KOULUTUS"
+            sourceType="PATEVYYS"
           />
         )}
       />
@@ -96,25 +104,17 @@ const OsaaminenStep = () => {
   );
 };
 
-const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalProps) => {
-  const API_PATH = '/api/profiili/koulutuskokonaisuudet/koulutukset/{id}';
-
-  const deleteKoulutukset = async () => {
-    await client.DELETE(API_PATH, {
-      params: { path: { id: koulutusId } },
-    });
-
-    onClose();
-  };
+export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId }: EditPatevyysProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
 
-  if (!koulutusId) {
+  if (!id) {
     onClose();
   }
 
+  const [toiminto, setToiminto] = React.useState<components['schemas']['ToimintoDto'] | undefined>(undefined);
   const formId = React.useId();
   const [step, setStep] = React.useState(0);
   const stepComponents = [MainStep, OsaaminenStep];
@@ -129,14 +129,13 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
   const isLastStep = step === stepComponents.length - 1;
   const isFirstStep = step === 0;
 
-  const methods = useForm<KoulutusForm>({
+  const methods = useForm<PatevyysForm>({
     mode: 'onChange',
     resolver: zodResolver(
       z
         .object({
           id: z.string(),
           nimi: z.string().min(1),
-          kuvaus: z.string().min(1).or(z.literal('')),
           alkuPvm: z.string().date(),
           loppuPvm: z.string().date().optional().or(z.literal('')),
           osaamiset: z.array(
@@ -149,20 +148,22 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
     ),
     defaultValues: async () => {
       const { data: osaamiset } = await client.GET('/api/profiili/osaamiset');
-      const { data: koulutus } = await client.GET('/api/profiili/koulutuskokonaisuudet/koulutukset/{id}', {
+      const { data: toimintoData } = await client.GET('/api/profiili/vapaa-ajan-toiminnot/{id}', {
         params: {
-          path: { id: koulutusId },
+          path: { id },
         },
       });
 
+      setToiminto(toimintoData);
+      const patevyys = toimintoData?.patevyydet?.find((p) => p.id === patevyysId);
+
       return {
-        id: koulutus?.id,
-        nimi: koulutus?.nimi?.[language] ?? '',
-        kuvaus: koulutus?.kuvaus?.[language] ?? '',
-        alkuPvm: koulutus?.alkuPvm ?? '',
-        loppuPvm: koulutus?.loppuPvm,
+        id: patevyys?.id ?? '',
+        nimi: patevyys?.nimi?.[language] ?? '',
+        alkuPvm: patevyys?.alkuPvm ?? '',
+        loppuPvm: patevyys?.loppuPvm ?? '',
         osaamiset:
-          koulutus?.osaamiset?.map((osaaminenId) => ({
+          patevyys?.osaamiset?.map((osaaminenId) => ({
             id: osaaminenId,
             nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi?.[language] ?? '',
           })) ?? [],
@@ -174,24 +175,39 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
     control: methods.control,
   });
 
-  const onSubmit: FormSubmitHandler<KoulutusForm> = async ({ data }: { data: KoulutusForm }) => {
+  const onSubmit: FormSubmitHandler<PatevyysForm> = async ({ data }: { data: PatevyysForm }) => {
+    if (!toiminto) {
+      return;
+    }
+
     const params = {
       params: {
         path: {
-          id: data.id!,
+          id,
         },
       },
       body: {
-        id: data.id,
-        nimi: {
-          [language]: data.nimi,
-        },
-        alkuPvm: data.alkuPvm,
-        loppuPvm: data.loppuPvm,
-        osaamiset: data.osaamiset.map((o) => o.id),
+        id: toiminto.id,
+        nimi: toiminto.nimi,
+        patevyydet:
+          toiminto?.patevyydet?.map((p) => {
+            if (p.id === patevyysId) {
+              return {
+                id: data.id,
+                nimi: {
+                  [language]: data.nimi,
+                },
+                alkuPvm: data.alkuPvm,
+                loppuPvm: data.loppuPvm,
+                osaamiset: data.osaamiset.map((o) => o.id),
+              };
+            }
+            return p;
+          }) ?? [],
       },
     };
-    await client.PUT(API_PATH, params);
+    await client.PUT('/api/profiili/vapaa-ajan-toiminnot/{id}', params);
+
     onClose();
   };
 
@@ -199,7 +215,27 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
     void trigger();
   }, [trigger]);
 
-  return !isLoading ? (
+  const deletePatevyys = async () => {
+    if (toiminto) {
+      await client.PUT('/api/profiili/vapaa-ajan-toiminnot/{id}', {
+        params: {
+          path: { id },
+        },
+        body: {
+          id: toiminto.id,
+          nimi: toiminto.nimi,
+          patevyydet: toiminto.patevyydet?.filter((p) => p.id !== patevyysId),
+        },
+      });
+
+      onClose();
+    }
+  };
+
+  if (isLoading) {
+    return null;
+  }
+  return (
     <Modal
       open={isOpen}
       progress={<WizardProgress steps={stepComponents.length} currentStep={step + 1} />}
@@ -223,12 +259,12 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
         <div className="flex flex-row justify-between">
           <div>
             <ConfirmDialog
-              title={t('education-history.delete-education-history')}
-              onConfirm={() => void deleteKoulutukset()}
+              title={t('work-history.delete-work-history')}
+              onConfirm={() => void deletePatevyys()}
               confirmText={t('delete')}
               cancelText={t('cancel')}
               variant="destructive"
-              description={t('education-history.confirm-delete-education-history')}
+              description={t('work-history.confirm-delete-work-history')}
             >
               {(showDialog: () => void) => (
                 <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
@@ -248,9 +284,5 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
         </div>
       }
     />
-  ) : (
-    <></>
   );
 };
-
-export default EditKoulutusModal;
