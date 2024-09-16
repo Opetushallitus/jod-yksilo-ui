@@ -1,6 +1,4 @@
-/* eslint-disable sonarjs/no-duplicate-string */
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -28,10 +26,13 @@ interface EditPatevyysProps {
 interface PatevyysForm {
   id: string;
   nimi: string;
+  kuvaus: string;
   alkuPvm: string;
   loppuPvm: string;
   osaamiset: { id: string; nimi: string }[];
 }
+
+const PATEVYYS_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet/{patevyysId}';
 
 const MainStep = () => {
   const { t } = useTranslation();
@@ -39,11 +40,11 @@ const MainStep = () => {
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t('work-history.edit-job-description')}
+        {t('free-time-activities.edit-proficiency')}
       </h2>
       <div className="mb-6">
         <InputField
-          label={t('work-history.job-description')}
+          label={t('free-time-activities.proficiency')}
           {...register('nimi')}
           placeholder="Lorem ipsum dolor sit amet"
         />
@@ -53,7 +54,7 @@ const MainStep = () => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker label={t('work-history.started')} {...field} placeholder={t('date-placeholder')} />
+              <Datepicker label={t('free-time-activities.started')} {...field} placeholder={t('date-placeholder')} />
             )}
             name="alkuPvm"
           />
@@ -62,7 +63,11 @@ const MainStep = () => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker label={t('work-history.ended')} {...field} placeholder={t('date-or-continues-placeholder')} />
+              <Datepicker
+                label={t('free-time-activities.ended')}
+                {...field}
+                placeholder={t('date-or-continues-placeholder')}
+              />
             )}
             name="loppuPvm"
           />
@@ -78,10 +83,12 @@ const OsaaminenStep = () => {
   const { control } = useFormContext<PatevyysForm>();
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{t('work-history.edit-competences')}</h2>
+      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
+        {t('free-time-activities.edit-competences')}
+      </h2>
       <div className="mb-6">
         <InputField
-          label={t('work-history.edit-competences')}
+          label={t('free-time-activities.edit-competences')}
           value={description}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
           placeholder="Lorem ipsum dolor sit amet"
@@ -114,7 +121,6 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
     onClose();
   }
 
-  const [toiminto, setToiminto] = React.useState<components['schemas']['ToimintoDto'] | undefined>(undefined);
   const formId = React.useId();
   const [step, setStep] = React.useState(0);
   const stepComponents = [MainStep, OsaaminenStep];
@@ -136,6 +142,7 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
         .object({
           id: z.string(),
           nimi: z.string().min(1),
+          kuvaus: z.string().min(1).or(z.literal('')),
           alkuPvm: z.string().date(),
           loppuPvm: z.string().date().optional().or(z.literal('')),
           osaamiset: z.array(
@@ -147,19 +154,19 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
         .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm),
     ),
     defaultValues: async () => {
-      const { data: osaamiset } = await client.GET('/api/profiili/osaamiset');
-      const { data: toimintoData } = await client.GET('/api/profiili/vapaa-ajan-toiminnot/{id}', {
-        params: {
-          path: { id },
-        },
-      });
-
-      setToiminto(toimintoData);
-      const patevyys = toimintoData?.patevyydet?.find((p) => p.id === patevyysId);
+      const [{ data: osaamiset }, { data: patevyys }] = await Promise.all([
+        client.GET('/api/profiili/osaamiset'),
+        client.GET(PATEVYYS_API_PATH, {
+          params: {
+            path: { id, patevyysId },
+          },
+        }),
+      ]);
 
       return {
         id: patevyys?.id ?? '',
         nimi: patevyys?.nimi?.[language] ?? '',
+        kuvaus: patevyys?.kuvaus?.[language] ?? '',
         alkuPvm: patevyys?.alkuPvm ?? '',
         loppuPvm: patevyys?.loppuPvm ?? '',
         osaamiset:
@@ -176,37 +183,31 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
   });
 
   const onSubmit: FormSubmitHandler<PatevyysForm> = async ({ data }: { data: PatevyysForm }) => {
-    if (!toiminto) {
-      return;
-    }
-
-    const params = {
+    await client.PUT(PATEVYYS_API_PATH, {
       params: {
         path: {
           id,
+          patevyysId,
         },
       },
       body: {
-        id: toiminto.id,
-        nimi: toiminto.nimi,
-        patevyydet:
-          toiminto?.patevyydet?.map((p) => {
-            if (p.id === patevyysId) {
-              return {
-                id: data.id,
-                nimi: {
-                  [language]: data.nimi,
-                },
-                alkuPvm: data.alkuPvm,
-                loppuPvm: data.loppuPvm,
-                osaamiset: data.osaamiset.map((o) => o.id),
-              };
-            }
-            return p;
-          }) ?? [],
+        id: data.id,
+        nimi: {
+          [language]: data.nimi,
+        },
+        alkuPvm: data.alkuPvm,
+        loppuPvm: data.loppuPvm,
+        osaamiset: data.osaamiset.map((o) => o.id),
       },
-    };
-    await client.PUT('/api/profiili/vapaa-ajan-toiminnot/{id}', params);
+    });
+
+    onClose();
+  };
+
+  const deletePatevyys = async () => {
+    await client.DELETE(PATEVYYS_API_PATH, {
+      params: { path: { id, patevyysId } },
+    });
 
     onClose();
   };
@@ -215,26 +216,10 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
     void trigger();
   }, [trigger]);
 
-  const deletePatevyys = async () => {
-    if (toiminto) {
-      await client.PUT('/api/profiili/vapaa-ajan-toiminnot/{id}', {
-        params: {
-          path: { id },
-        },
-        body: {
-          id: toiminto.id,
-          nimi: toiminto.nimi,
-          patevyydet: toiminto.patevyydet?.filter((p) => p.id !== patevyysId),
-        },
-      });
-
-      onClose();
-    }
-  };
-
   if (isLoading) {
     return null;
   }
+
   return (
     <Modal
       open={isOpen}
@@ -259,12 +244,12 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
         <div className="flex flex-row justify-between">
           <div>
             <ConfirmDialog
-              title={t('work-history.delete-work-history')}
+              title={t('free-time-activities.delete-proficiency')}
               onConfirm={() => void deletePatevyys()}
               confirmText={t('delete')}
               cancelText={t('cancel')}
               variant="destructive"
-              description={t('work-history.confirm-delete-work-history')}
+              description={t('free-time-activities.confirm-delete-proficiency')}
             >
               {(showDialog: () => void) => (
                 <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />

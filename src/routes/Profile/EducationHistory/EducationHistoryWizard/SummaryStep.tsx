@@ -2,7 +2,7 @@ import { ExperienceTable, type ExperienceTableRowData } from '@/components';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Tutkinto, getEducationHistoryTableRows } from '../utils';
+import { Koulutus, getEducationHistoryTableRows } from '../utils';
 import { type EducationHistoryForm } from './utils';
 
 const SummaryStep = () => {
@@ -11,25 +11,21 @@ const SummaryStep = () => {
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>([]);
 
   React.useEffect(() => {
-    const koulutus = watch();
+    const koulutuskokonaisuus = watch();
     setRows(
       getEducationHistoryTableRows([
         {
-          kategoria: koulutus.nimi
-            ? {
-                nimi: { fi: koulutus.nimi },
-              }
-            : undefined,
-          koulutukset: koulutus.koulutukset.map(
-            (tutkinto) =>
+          nimi: { fi: koulutuskokonaisuus.nimi },
+          koulutukset: koulutuskokonaisuus.koulutukset.map(
+            (koulutus) =>
               ({
                 nimi: {
-                  fi: tutkinto.nimi,
+                  fi: koulutus.nimi,
                 },
-                alkuPvm: tutkinto.alkuPvm,
-                loppuPvm: tutkinto.loppuPvm,
-                osaamiset: tutkinto.osaamiset.map((osaaminen) => osaaminen.id),
-              }) as Tutkinto,
+                alkuPvm: koulutus.alkuPvm,
+                loppuPvm: koulutus.loppuPvm,
+                osaamiset: koulutus.osaamiset.map((osaaminen) => osaaminen.id),
+              }) as Koulutus,
           ),
         },
       ]),
@@ -44,7 +40,7 @@ const SummaryStep = () => {
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
-      <ExperienceTable mainColumnHeader={t('education-history.degree-or-course')} rows={rows} />
+      <ExperienceTable mainColumnHeader={t('education-history.education-or-degree')} rows={rows} />
     </>
   );
 };

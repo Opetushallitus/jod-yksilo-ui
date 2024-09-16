@@ -16,8 +16,9 @@ interface EditTyonantajaModalProps {
 interface TyonantajaForm {
   id: components['schemas']['TyopaikkaDto']['id'];
   nimi: string;
-  toimenkuvat: components['schemas']['TyopaikkaDto']['toimenkuvat'];
 }
+
+const TYOPAIKKA_API_PATH = '/api/profiili/tyopaikat/{id}';
 
 const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantajaModalProps) => {
   const {
@@ -35,14 +36,10 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
       }),
     ),
     defaultValues: async () => {
-      const tyopaikat = await client.GET('/api/profiili/tyopaikat');
-      const tyopaikka =
-        tyopaikat.data?.find((tp) => tp.id === id) ??
-        tyopaikat.data?.find((tp) => tp.toimenkuvat?.some((tk) => tk.id === id));
+      const { data: tyopaikka } = await client.GET(TYOPAIKKA_API_PATH, { params: { path: { id } } });
       return {
         id: tyopaikka?.id,
         nimi: tyopaikka?.nimi?.[language] ?? '',
-        toimenkuvat: tyopaikka?.toimenkuvat,
       };
     },
   });
@@ -52,7 +49,7 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
   });
 
   const onSubmit: FormSubmitHandler<TyonantajaForm> = async ({ data }: { data: TyonantajaForm }) => {
-    const params = {
+    await client.PUT(TYOPAIKKA_API_PATH, {
       params: {
         path: {
           id: data.id!,
@@ -63,15 +60,13 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
         nimi: {
           [language]: data.nimi,
         },
-        toimenkuvat: data.toimenkuvat,
       },
-    };
-    await client.PATCH('/api/profiili/tyopaikat/{id}', params);
+    });
     onClose();
   };
 
   const deleteTyopaikka = async () => {
-    await client.DELETE('/api/profiili/tyopaikat/{id}', {
+    await client.DELETE(TYOPAIKKA_API_PATH, {
       params: { path: { id } },
     });
 
@@ -116,7 +111,7 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
       }
       footer={
         <div className="flex flex-row justify-between">
-          <div>
+          <div className="flex flex-row gap-5">
             <ConfirmDialog
               title={t('work-history.delete-work-history')}
               onConfirm={() => void deleteTyopaikka()}

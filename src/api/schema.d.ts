@@ -11,74 +11,108 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /**
-     * Get vapaa-ajan toiminto by id
-     * @description This endpoint can be used to get vapaa-ajan toiminto by id.
-     *
-     */
+    /** Get the vapaa-ajan toiminto (including patevyydet) */
     get: operations['toimintoGet'];
-    /**
-     * Updates the vapaa-ajan toiminto by id
-     * @description This endpoint can be used to update vapaa-ajan toiminto.
-     *
-     */
+    /** Updates the vapaa-ajan toiminto (shallow update) */
     put: operations['toimintoUpdate'];
     post?: never;
-    delete?: never;
+    /** Delete the vapaa-ajan toiminto (including all patevyydet) */
+    delete: operations['toimintoDelete'];
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/koulutuskokonaisuudet': {
+  '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet/{patevyysId}': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    /** Get all koulutukset and kategoriat of the user */
-    get: operations['koulutusKokonaisuusFindAll'];
-    /**
-     * Updates a set of Koulutus
-     * @description If an existing Koulutus in a Kategoria is omitted, it will be removed.
-     */
+    /** Gets a patevyys of the vapaa-ajan toiminto */
+    get: operations['patevyysGet'];
+    /** Updates a patevyys of the vapaa-ajan toiminto (including osaamiset) */
+    put: operations['patevyysUpdate'];
+    post?: never;
+    /** Deletes a patevyys of the vapaa-ajan toiminto (including all osaamiset) */
+    delete: operations['patevyysDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/tyopaikat/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Gets a tyopaikka */
+    get: operations['tyopaikkaGet'];
+    /** Updates a tyopaikka (shallow update) */
+    put: operations['tyopaikkaUpdate'];
+    post?: never;
+    /** Deletes a tyopaikka */
+    delete: operations['tyopaikkaDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/tyopaikat/{id}/toimenkuvat/{toimenkuvaId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Gets a toimenkuva of the tyopaikka */
+    get: operations['toimenkuvaGet'];
+    /** Updates a toimenkuva of the tyopaikka */
+    put: operations['toimenkuvaUpdate'];
+    post?: never;
+    /** Deletes a toimenkuva of the tyopaikka */
+    delete: operations['toimenkuvaDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/koulutuskokonaisuudet/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Gets a koulutuskokonaisuus */
+    get: operations['koulutusKokonaisuusGet'];
+    /** Updates a koulutuskokonaisuus (shallow update) */
     put: operations['koulutusKokonaisuusUpdate'];
-    /** Creates a set of Koulutus associated with an optional Kategoria, creating the Kategoria if necessary */
-    post: operations['koulutusKokonaisuusAdd'];
-    delete?: never;
+    post?: never;
+    /** Deletes a koulutuskokonaisuus (including koulutukset) */
+    delete: operations['koulutusKokonaisuusDelete'];
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/koulutuskokonaisuudet/koulutukset/{id}': {
+  '/api/profiili/koulutuskokonaisuudet/{id}/koulutukset/{koulutusId}': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    get: operations['koulutusKokonaisuusGetKoulutus'];
-    put: operations['koulutusKokonaisuusUpdateKoulutus'];
+    /** Gets a koulutus of the koulutuskokonaisuus */
+    get: operations['koulutusGet'];
+    /** Updates a koulutus of the koulutuskokonaisuus */
+    put: operations['koulutusUpdate'];
     post?: never;
-    delete: operations['koulutusKokonaisuusDeleteKoulutus'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/profiili/koulutuskokonaisuudet/kategoriat/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put: operations['koulutusKokonaisuusUpdateKategoria'];
-    post?: never;
-    delete?: never;
+    /** Deletes a koulutus of the koulutuskokonaisuus */
+    delete: operations['koulutusDelete'];
     options?: never;
     head?: never;
     patch?: never;
@@ -91,25 +125,30 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /**
-     * Get all vapaa-ajan toiminnot of the user
-     * @description This endpoint can be used to get all vapaa-ajan toiminnot of the user.
-     *
-     */
-    get: operations['toimintoGetAll'];
+    /** Get all vapaa-ajan toiminnot of the user */
+    get: operations['toimintoFindAll'];
     put?: never;
-    /**
-     * Adds a new vapaa-ajan toiminto
-     * @description This endpoint can be used to add a new vapaa-ajan toiminto.
-     *
-     */
+    /** Adds a new vapaa-ajan toiminto (and optionally patevyydet) */
     post: operations['toimintoAdd'];
-    /**
-     * Delete the vapaa-ajan toiminto by id
-     * @description This endpoint can be used to delete the vapaa-ajan toiminto by id.
-     *
-     */
-    delete: operations['toimintoDelete'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Gets all patevyydet of the vapaa-ajan toiminto */
+    get: operations['patevyysFindAll'];
+    put?: never;
+    /** Adds a new patevyys to the vapaa-ajan toiminto */
+    post: operations['patevyysAdd'];
+    delete?: never;
     options?: never;
     head?: never;
     patch?: never;
@@ -122,8 +161,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    get: operations['tyopaikkaGetAll'];
+    /** Gets all tyopaikat of the user */
+    get: operations['tyopaikkaFindAll'];
     put?: never;
+    /** Adds a new tyopaikka (and optionally toimenkuvat) */
     post: operations['tyopaikkaAdd'];
     delete?: never;
     options?: never;
@@ -138,8 +179,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    get: operations['toimenkuvaGetAll'];
+    /** Gets all toimenkuvat of the tyopaikka */
+    get: operations['toimenkuvaFindAll'];
     put?: never;
+    /** Adds a new toimenkuva to the tyopaikka */
     post: operations['toimenkuvaAdd'];
     delete?: never;
     options?: never;
@@ -147,17 +190,37 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/osaamiset': {
+  '/api/profiili/koulutuskokonaisuudet': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    get: operations['yksilonOsaaminenFind'];
+    /** Get all koulutuskokonaisuudet of the user */
+    get: operations['koulutusKokonaisuusGetAll'];
     put?: never;
-    post: operations['yksilonOsaaminenAdd'];
-    delete: operations['yksilonOsaaminenDelete'];
+    /** Adds a new koulutuskokonaisuus, and optionally associated koulutukset */
+    post: operations['koulutusKokonaisuusAdd'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/koulutuskokonaisuudet/{id}/koulutukset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Gets all koulutukset of the koulutuskokonaisuus */
+    get: operations['koulutusGetAll'];
+    put?: never;
+    /** Adds a new koulutus to the koulutuskokonaisuus */
+    post: operations['koulutusAdd'];
+    delete?: never;
     options?: never;
     head?: never;
     patch?: never;
@@ -195,54 +258,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/tyopaikat/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post?: never;
-    delete: operations['tyopaikkaDelete'];
-    options?: never;
-    head?: never;
-    patch: operations['tyopaikkaUpdate'];
-    trace?: never;
-  };
-  '/api/profiili/tyopaikat/{id}/toimenkuvat/{toimenkuvaId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post?: never;
-    delete: operations['toimenkuvaDelete'];
-    options?: never;
-    head?: never;
-    patch: operations['toimenkuvaUpdate'];
-    trace?: never;
-  };
-  '/api/yksilo': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['yksiloGetYksilo'];
-    put?: never;
-    post?: never;
-    delete: operations['yksiloDeleteYksilo'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/tyomahdollisuudet': {
     parameters: {
       query?: never;
@@ -251,7 +266,7 @@ export interface paths {
       cookie?: never;
     };
     /**
-     * Get all työmahdollisuudet paged of by list of id
+     * Get all työmahdollisuudet paged of by page and size or set of ids
      * @description Returns all työmahdollisuudet basic information in JSON-format.
      */
     get: operations['tyomahdollisuusFindAll'];
@@ -283,17 +298,69 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/koulutuskokonaisuudet/kategoriat': {
+  '/api/profiili/yksilo': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    get: operations['koulutusKokonaisuusGetKategoriat'];
+    get: operations['yksiloGet'];
     put?: never;
     post?: never;
-    delete?: never;
+    delete: operations['yksiloDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/yksilo': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['yksiloGet'];
+    put?: never;
+    post?: never;
+    delete: operations['yksiloDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/osaamiset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Finds all Osaaminen, optionally filtered by Tyyppi and/or LahdeId */
+    get: operations['yksilonOsaaminenFind'];
+    put?: never;
+    post?: never;
+    /** Deletes one or more Yksilo's Osaaminen */
+    delete: operations['yksilonOsaaminenDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/osaamiset/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Gets a Yksilo's Osaaminen */
+    get: operations['yksilonOsaaminenGet'];
+    put?: never;
+    post?: never;
+    /** Deletes a Yksilo's Osaaminen */
+    delete: operations['yksilonOsaaminenDelete'];
     options?: never;
     head?: never;
     patch?: never;
@@ -315,42 +382,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/osaamiset/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post?: never;
-    delete: operations['yksilonOsaaminenDelete'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/profiili/koulutuskokonaisuudet/koulutukset': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post?: never;
-    /**
-     * Deletes one or more Koulutus by ID
-     * @description Possible resulting empty Kategoria are alse removed.
-     */
-    delete: operations['koulutusKokonaisuusDeleteKoulutukset'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -362,32 +393,15 @@ export interface components {
     LokalisoituTeksti: {
       [key: string]: string;
     };
+    ToimintoUpdateDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+    };
     PatevyysDto: {
       /** Format: uuid */
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
-      /** Format: date */
-      alkuPvm: string;
-      /** Format: date */
-      loppuPvm?: string;
-      osaamiset?: string[];
-    };
-    ToimintoDto: {
-      /** Format: uuid */
-      id?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
-      patevyydet?: components['schemas']['PatevyysDto'][];
-    };
-    KategoriaDto: {
-      /** Format: uuid */
-      id?: string;
-      nimi?: components['schemas']['LokalisoituTeksti'];
-      kuvaus?: components['schemas']['LokalisoituTeksti'];
-    };
-    KoulutusDto: {
-      /** Format: uuid */
-      id?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       /** Format: date */
       alkuPvm: string;
@@ -395,18 +409,10 @@ export interface components {
       loppuPvm?: string;
       osaamiset?: string[];
     };
-    KoulutusKategoriaDto: {
-      kategoria?: components['schemas']['KategoriaDto'];
-      koulutukset?: components['schemas']['KoulutusDto'][];
-    };
-    KoulutusUpdateResultDto: {
+    TyopaikkaUpdateDto: {
       /** Format: uuid */
-      kategoria?: string;
-      koulutukset?: string[];
-    };
-    IdDtoUUID: {
-      /** Format: uuid */
-      id: string;
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
     };
     ToimenkuvaDto: {
       /** Format: uuid */
@@ -419,29 +425,50 @@ export interface components {
       loppuPvm?: string;
       osaamiset?: string[];
     };
+    KoulutusKokonaisuusUpdateDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+    };
+    KoulutusDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      /** Format: date */
+      alkuPvm: string;
+      /** Format: date */
+      loppuPvm?: string;
+      osaamiset?: string[];
+    };
+    ToimintoDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      patevyydet?: components['schemas']['PatevyysDto'][];
+    };
+    IdDtoUUID: {
+      /** Format: uuid */
+      id: string;
+    };
     TyopaikkaDto: {
       /** Format: uuid */
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
       toimenkuvat?: components['schemas']['ToimenkuvaDto'][];
     };
-    OsaamisenLahdeDto: {
-      /** @enum {string} */
-      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS';
+    KoulutusKokonaisuusDto: {
       /** Format: uuid */
-      id: string;
-    };
-    YksilonOsaaminenLisaysDto: {
-      /** @description Reference */
-      osaamiset: string[];
-      lahde: components['schemas']['OsaamisenLahdeDto'];
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      koulutukset?: components['schemas']['KoulutusDto'][];
     };
     LuoEhdotusDto: {
       /** Format: double */
       osaamisPainotus?: number;
       osaamiset?: string[];
       /** Format: double */
-      kiinostusPainotus?: number;
+      kiinnostusPainotus?: number;
       kiinnostukset?: string[];
     };
     EhdotusDto: {
@@ -450,12 +477,20 @@ export interface components {
       ehdotusMetadata?: components['schemas']['EhdotusMetadata'];
     };
     EhdotusMetadata: {
-      /** Format: double */
-      pisteet?: number;
+      pisteet?: {
+        empty?: boolean;
+        present?: boolean;
+        /** Format: double */
+        asDouble?: number;
+      };
       /** @enum {string} */
       trendi?: 'NOUSEVA' | 'LASKEVA';
-      /** Format: int32 */
-      tyollisyysNakyma?: number;
+      tyollisyysNakyma?: {
+        empty?: boolean;
+        present?: boolean;
+        /** Format: int32 */
+        asInt?: number;
+      };
     };
     Taidot: {
       kuvaus: string;
@@ -468,16 +503,6 @@ export interface components {
       tyyppi?: string;
       /** Format: double */
       osuvuus?: number;
-    };
-    CsrfTokenDto: {
-      token: string;
-      headerName: string;
-      parameterName: string;
-    };
-    YksiloCsrfDto: {
-      etunimi?: string;
-      sukunimi?: string;
-      csrf: components['schemas']['CsrfTokenDto'];
     };
     SivuDtoTyomahdollisuusDto: {
       sisalto: components['schemas']['TyomahdollisuusDto'][];
@@ -521,11 +546,27 @@ export interface components {
         [key: string]: components['schemas']['JakaumaDto'];
       };
     };
+    CsrfTokenDto: {
+      token: string;
+      headerName: string;
+      parameterName: string;
+    };
+    YksiloCsrfDto: {
+      etunimi?: string;
+      sukunimi?: string;
+      csrf: components['schemas']['CsrfTokenDto'];
+    };
     OsaaminenDto: {
       /** Format: uri */
       uri: string;
       nimi: components['schemas']['LokalisoituTeksti'];
       kuvaus: components['schemas']['LokalisoituTeksti'];
+    };
+    OsaamisenLahdeDto: {
+      /** @enum {string} */
+      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS';
+      /** Format: uuid */
+      id: string;
     };
     YksilonOsaaminenDto: {
       /** Format: uuid */
@@ -588,7 +629,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['ToimintoDto'];
+        'application/json': components['schemas']['ToimintoUpdateDto'];
       };
     };
     responses: {
@@ -601,13 +642,34 @@ export interface operations {
       };
     };
   };
-  koulutusKokonaisuusFindAll: {
+  toimintoDelete: {
     parameters: {
-      query?: {
-        kategoria?: string;
-      };
+      query?: never;
       header?: never;
-      path?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  patevyysGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        patevyysId: string;
+      };
       cookie?: never;
     };
     requestBody?: never;
@@ -618,7 +680,210 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['KoulutusKategoriaDto'][];
+          'application/json': components['schemas']['PatevyysDto'];
+        };
+      };
+    };
+  };
+  patevyysUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        patevyysId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PatevyysDto'];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  patevyysDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        patevyysId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  tyopaikkaGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['TyopaikkaDto'];
+        };
+      };
+    };
+  };
+  tyopaikkaUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['TyopaikkaUpdateDto'];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  tyopaikkaDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  toimenkuvaGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        toimenkuvaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ToimenkuvaDto'];
+        };
+      };
+    };
+  };
+  toimenkuvaUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        toimenkuvaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ToimenkuvaDto'];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  toimenkuvaDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        toimenkuvaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  koulutusKokonaisuusGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['KoulutusKokonaisuusDto'];
         };
       };
     };
@@ -627,56 +892,53 @@ export interface operations {
     parameters: {
       query?: never;
       header?: never;
-      path?: never;
+      path: {
+        id: string;
+      };
       cookie?: never;
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['KoulutusKategoriaDto'];
+        'application/json': components['schemas']['KoulutusKokonaisuusUpdateDto'];
       };
     };
     responses: {
-      /** @description OK */
-      200: {
+      /** @description No Content */
+      204: {
         headers: {
           [name: string]: unknown;
         };
-        content: {
-          'application/json': components['schemas']['KoulutusUpdateResultDto'];
-        };
+        content?: never;
       };
     };
   };
-  koulutusKokonaisuusAdd: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['KoulutusKategoriaDto'];
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['KoulutusUpdateResultDto'];
-        };
-      };
-    };
-  };
-  koulutusKokonaisuusGetKoulutus: {
+  koulutusKokonaisuusDelete: {
     parameters: {
       query?: never;
       header?: never;
       path: {
         id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  koulutusGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        koulutusId: string;
       };
       cookie?: never;
     };
@@ -693,12 +955,13 @@ export interface operations {
       };
     };
   };
-  koulutusKokonaisuusUpdateKoulutus: {
+  koulutusUpdate: {
     parameters: {
       query?: never;
       header?: never;
       path: {
         id: string;
+        koulutusId: string;
       };
       cookie?: never;
     };
@@ -708,8 +971,8 @@ export interface operations {
       };
     };
     responses: {
-      /** @description OK */
-      200: {
+      /** @description No Content */
+      204: {
         headers: {
           [name: string]: unknown;
         };
@@ -717,12 +980,13 @@ export interface operations {
       };
     };
   };
-  koulutusKokonaisuusDeleteKoulutus: {
+  koulutusDelete: {
     parameters: {
       query?: never;
       header?: never;
       path: {
         id: string;
+        koulutusId: string;
       };
       cookie?: never;
     };
@@ -737,31 +1001,7 @@ export interface operations {
       };
     };
   };
-  koulutusKokonaisuusUpdateKategoria: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['KategoriaDto'];
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  toimintoGetAll: {
+  toimintoFindAll: {
     parameters: {
       query?: never;
       header?: never;
@@ -805,27 +1045,55 @@ export interface operations {
       };
     };
   };
-  toimintoDelete: {
+  patevyysFindAll: {
     parameters: {
-      query: {
-        ids: string[];
-      };
+      query?: never;
       header?: never;
-      path?: never;
+      path: {
+        id: string;
+      };
       cookie?: never;
     };
     requestBody?: never;
     responses: {
-      /** @description No Content */
-      204: {
+      /** @description OK */
+      200: {
         headers: {
           [name: string]: unknown;
         };
-        content?: never;
+        content: {
+          'application/json': components['schemas']['PatevyysDto'][];
+        };
       };
     };
   };
-  tyopaikkaGetAll: {
+  patevyysAdd: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PatevyysDto'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['IdDtoUUID'];
+        };
+      };
+    };
+  };
+  tyopaikkaFindAll: {
     parameters: {
       query?: never;
       header?: never;
@@ -869,7 +1137,7 @@ export interface operations {
       };
     };
   };
-  toimenkuvaGetAll: {
+  toimenkuvaFindAll: {
     parameters: {
       query?: never;
       header?: never;
@@ -917,12 +1185,9 @@ export interface operations {
       };
     };
   };
-  yksilonOsaaminenFind: {
+  koulutusKokonaisuusGetAll: {
     parameters: {
-      query?: {
-        tyyppi?: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS';
-        lahdeId?: string;
-      };
+      query?: never;
       header?: never;
       path?: never;
       cookie?: never;
@@ -935,12 +1200,12 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['YksilonOsaaminenDto'][];
+          'application/json': components['schemas']['KoulutusKokonaisuusDto'][];
         };
       };
     };
   };
-  yksilonOsaaminenAdd: {
+  koulutusKokonaisuusAdd: {
     parameters: {
       query?: never;
       header?: never;
@@ -949,7 +1214,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['YksilonOsaaminenLisaysDto'];
+        'application/json': components['schemas']['KoulutusKokonaisuusDto'];
       };
     };
     responses: {
@@ -959,28 +1224,56 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['IdDtoUUID'][];
+          'application/json': components['schemas']['IdDtoUUID'];
         };
       };
     };
   };
-  yksilonOsaaminenDelete: {
+  koulutusGetAll: {
     parameters: {
-      query: {
-        ids: string[];
-      };
+      query?: never;
       header?: never;
-      path?: never;
+      path: {
+        id: string;
+      };
       cookie?: never;
     };
     requestBody?: never;
     responses: {
-      /** @description No Content */
-      204: {
+      /** @description OK */
+      200: {
         headers: {
           [name: string]: unknown;
         };
-        content?: never;
+        content: {
+          'application/json': components['schemas']['KoulutusDto'][];
+        };
+      };
+    };
+  };
+  koulutusAdd: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['KoulutusDto'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['IdDtoUUID'];
+        };
       };
     };
   };
@@ -1032,134 +1325,6 @@ export interface operations {
       };
     };
   };
-  tyopaikkaDelete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  tyopaikkaUpdate: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['TyopaikkaDto'];
-      };
-    };
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  toimenkuvaDelete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-        toimenkuvaId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  toimenkuvaUpdate: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-        toimenkuvaId: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['ToimenkuvaDto'];
-      };
-    };
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  yksiloGetYksilo: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['YksiloCsrfDto'];
-        };
-      };
-    };
-  };
-  yksiloDeleteYksilo: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
   tyomahdollisuusFindAll: {
     parameters: {
       query?: {
@@ -1206,7 +1371,7 @@ export interface operations {
       };
     };
   };
-  koulutusKokonaisuusGetKategoriat: {
+  yksiloGet: {
     parameters: {
       query?: never;
       header?: never;
@@ -1221,17 +1386,72 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['KategoriaDto'][];
+          'application/json': components['schemas']['YksiloCsrfDto'];
         };
       };
     };
   };
-  osaaminenFind: {
+  yksiloDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  yksiloGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['YksiloCsrfDto'];
+        };
+      };
+    };
+  };
+  yksiloDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  yksilonOsaaminenFind: {
     parameters: {
       query?: {
-        sivu?: number;
-        koko?: number;
-        uri?: string[];
+        tyyppi?: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS';
+        lahdeId?: string;
       };
       header?: never;
       path?: never;
@@ -1245,7 +1465,49 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['SivuDtoOsaaminenDto'];
+          'application/json': components['schemas']['YksilonOsaaminenDto'][];
+        };
+      };
+    };
+  };
+  yksilonOsaaminenDelete: {
+    parameters: {
+      query: {
+        ids: string[];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  yksilonOsaaminenGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['YksilonOsaaminenDto'];
         };
       };
     };
@@ -1270,10 +1532,12 @@ export interface operations {
       };
     };
   };
-  koulutusKokonaisuusDeleteKoulutukset: {
+  osaaminenFind: {
     parameters: {
-      query: {
-        ids: string[];
+      query?: {
+        sivu?: number;
+        koko?: number;
+        uri?: string[];
       };
       header?: never;
       path?: never;
@@ -1281,12 +1545,14 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description No Content */
-      204: {
+      /** @description OK */
+      200: {
         headers: {
           [name: string]: unknown;
         };
-        content?: never;
+        content: {
+          'application/json': components['schemas']['SivuDtoOsaaminenDto'];
+        };
       };
     };
   };

@@ -32,7 +32,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => 
       z
         .object({
           id: z.string().optional(),
-          nimi: z.string().min(1).optional().or(z.literal('')),
+          nimi: z.string().min(1),
           koulutukset: z
             .object({
               id: z.string().optional(),
@@ -48,9 +48,9 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => 
             .array()
             .nonempty(),
         })
-        .refine((data) => data.koulutukset.length > 0) // At least one toimenkuva
+        .refine((data) => data.koulutukset.length > 0) // At least one koulutus
         .refine((data) =>
-          data.koulutukset.every((tutkinto) => (tutkinto.loppuPvm ? tutkinto.alkuPvm <= tutkinto.loppuPvm : true)),
+          data.koulutukset.every((koulutus) => (koulutus.loppuPvm ? koulutus.alkuPvm <= koulutus.loppuPvm : true)),
         ), // alkuPvm <= loppuPvm
     ),
     defaultValues: async () => {
@@ -72,33 +72,26 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => 
   const { isValid, isLoading } = useFormState({
     control: methods.control,
   });
-  const { fields } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control: methods.control,
     name: 'koulutukset',
   });
   const onSubmit: FormSubmitHandler<EducationHistoryForm> = async ({ data }: { data: EducationHistoryForm }) => {
-    const params = {
+    await client.POST('/api/profiili/koulutuskokonaisuudet', {
       body: {
-        kategoria: data.nimi
-          ? {
-              id: data.id,
-              nimi: {
-                [language]: data.nimi,
-              },
-            }
-          : undefined,
-        koulutukset: data.koulutukset.map((tutkinto) => ({
-          id: tutkinto.id,
+        nimi: {
+          [language]: data.nimi,
+        },
+        koulutukset: data.koulutukset.map((koulutus) => ({
           nimi: {
-            [language]: tutkinto.nimi,
+            [language]: koulutus.nimi,
           },
-          alkuPvm: tutkinto.alkuPvm,
-          loppuPvm: tutkinto.loppuPvm,
-          osaamiset: tutkinto.osaamiset.map((osaaminen) => osaaminen.id),
+          alkuPvm: koulutus.alkuPvm,
+          loppuPvm: koulutus.loppuPvm,
+          osaamiset: koulutus.osaamiset.map((osaaminen) => osaaminen.id),
         })),
       },
-    };
-    await client.POST('/api/profiili/koulutuskokonaisuudet', params);
+    });
     onClose();
     navigate('.', { replace: true });
   };
@@ -108,7 +101,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => 
     setSteps(fields.length * 2 + 1);
   }, [fields.length]);
   const [step, setStep] = React.useState(1);
-  const selectedTutkinto = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
+  const selectedKoulutus = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
   const isFirstStep = React.useMemo(() => step === 1, [step]);
   const isEducationStep = React.useMemo(() => step !== steps && (step + 1) % 2 === 0, [step, steps]);
   const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
@@ -138,16 +131,42 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => 
             }}
           >
             {isEducationStep && (
-              <EducationStep type={isFirstStep ? 'koulutus' : 'tutkinto'} tutkinto={selectedTutkinto} />
+              <EducationStep type={isFirstStep ? 'oppilaitos' : 'koulutus'} koulutus={selectedKoulutus} />
             )}
-            {isCompetencesStep && <CompetencesStep tutkinto={selectedTutkinto} />}
+            {isCompetencesStep && <CompetencesStep koulutus={selectedKoulutus} />}
             {isSummaryStep && <SummaryStep />}
           </Form>
         </FormProvider>
       }
       progress={<WizardProgress steps={steps} currentStep={step} />}
       footer={
-        <div className="flex flex-row-reverse justify-between gap-5">
+        <div className="flex justify-between gap-5">
+          <div className="flex gap-5">
+            {step === steps && (
+              <Button
+                onClick={() => {
+                  append({
+                    nimi: '',
+                    alkuPvm: '',
+                    loppuPvm: '',
+                    osaamiset: [],
+                  });
+                }}
+                label={t('education-history.add-new-degree')}
+                variant="white"
+              />
+            )}
+            {step !== steps && selectedKoulutus > 0 && (
+              <Button
+                onClick={() => {
+                  setStep(selectedKoulutus * 2);
+                  remove(selectedKoulutus);
+                }}
+                label={t('education-history.delete-degree')}
+                variant="white-delete"
+              />
+            )}
+          </div>
           <div className="flex gap-5">
             <Button onClick={onClose} label={t('cancel')} variant="white" />
             {step > 1 && (
@@ -164,7 +183,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => 
                 label={t('next')}
                 variant="white"
                 icon={!sm ? <MdArrowForward size={24} /> : undefined}
-                disabled={errors.nimi !== undefined || errors.koulutukset?.[selectedTutkinto] !== undefined}
+                disabled={errors.nimi !== undefined || errors.koulutukset?.[selectedKoulutus] !== undefined}
               />
             )}
             {step === steps && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}

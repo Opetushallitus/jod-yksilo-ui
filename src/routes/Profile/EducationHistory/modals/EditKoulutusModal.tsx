@@ -1,7 +1,6 @@
 import { client } from '@/api/client';
 import { OsaamisSuosittelija } from '@/components';
 import { useDebounceState } from '@/hooks/useDebounceState';
-import { type KoulutusForm } from '@/routes/Profile/EducationHistory/EducationHistoryWizard/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -20,20 +19,30 @@ import { z } from 'zod';
 interface EditKoulutusModalProps {
   isOpen: boolean;
   onClose: React.Dispatch<React.SetStateAction<void>>;
+  koulutuskokonaisuusId: string;
   koulutusId: string;
 }
+
+interface KoulutusForm {
+  id: string;
+  nimi: string;
+  kuvaus: string;
+  alkuPvm: string;
+  loppuPvm: string;
+  osaamiset: { id: string; nimi: string }[];
+}
+
+const KOULUTUS_API_PATH = '/api/profiili/koulutuskokonaisuudet/{id}/koulutukset/{koulutusId}';
 
 const MainStep = () => {
   const { t } = useTranslation();
   const { register, control } = useFormContext<KoulutusForm>();
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t('education-history.edit-education-or-degree')}
-      </h2>
+      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{t('education-history.edit-degree')}</h2>
       <div className="mb-6">
         <InputField
-          label={t('education-history.degree-or-course')}
+          label={t('education-history.degree')}
           {...register('nimi')}
           placeholder="Lorem ipsum dolor sit amet"
         />
@@ -43,7 +52,7 @@ const MainStep = () => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker label={t('work-history.started')} {...field} placeholder={t('date-placeholder')} />
+              <Datepicker label={t('education-history.started')} {...field} placeholder={t('date-placeholder')} />
             )}
             name={'alkuPvm'}
           />
@@ -52,7 +61,11 @@ const MainStep = () => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker label={t('work-history.ended')} {...field} placeholder={t('date-or-continues-placeholder')} />
+              <Datepicker
+                label={t('education-history.ended')}
+                {...field}
+                placeholder={t('date-or-continues-placeholder')}
+              />
             )}
             name={'loppuPvm'}
           />
@@ -96,16 +109,7 @@ const OsaaminenStep = () => {
   );
 };
 
-const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalProps) => {
-  const API_PATH = '/api/profiili/koulutuskokonaisuudet/koulutukset/{id}';
-
-  const deleteKoulutukset = async () => {
-    await client.DELETE(API_PATH, {
-      params: { path: { id: koulutusId } },
-    });
-
-    onClose();
-  };
+const EditKoulutusModal = ({ isOpen, onClose, koulutuskokonaisuusId: id, koulutusId }: EditKoulutusModalProps) => {
   const {
     t,
     i18n: { language },
@@ -148,19 +152,21 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
         .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm),
     ),
     defaultValues: async () => {
-      const { data: osaamiset } = await client.GET('/api/profiili/osaamiset');
-      const { data: koulutus } = await client.GET('/api/profiili/koulutuskokonaisuudet/koulutukset/{id}', {
-        params: {
-          path: { id: koulutusId },
-        },
-      });
+      const [{ data: osaamiset }, { data: koulutus }] = await Promise.all([
+        client.GET('/api/profiili/osaamiset'),
+        client.GET(KOULUTUS_API_PATH, {
+          params: {
+            path: { id, koulutusId },
+          },
+        }),
+      ]);
 
       return {
-        id: koulutus?.id,
+        id: koulutus?.id ?? '',
         nimi: koulutus?.nimi?.[language] ?? '',
         kuvaus: koulutus?.kuvaus?.[language] ?? '',
         alkuPvm: koulutus?.alkuPvm ?? '',
-        loppuPvm: koulutus?.loppuPvm,
+        loppuPvm: koulutus?.loppuPvm ?? '',
         osaamiset:
           koulutus?.osaamiset?.map((osaaminenId) => ({
             id: osaaminenId,
@@ -175,10 +181,11 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
   });
 
   const onSubmit: FormSubmitHandler<KoulutusForm> = async ({ data }: { data: KoulutusForm }) => {
-    const params = {
+    await client.PUT(KOULUTUS_API_PATH, {
       params: {
         path: {
-          id: data.id!,
+          id,
+          koulutusId,
         },
       },
       body: {
@@ -190,8 +197,15 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
         loppuPvm: data.loppuPvm,
         osaamiset: data.osaamiset.map((o) => o.id),
       },
-    };
-    await client.PUT(API_PATH, params);
+    });
+    onClose();
+  };
+
+  const deleteKoulutus = async () => {
+    await client.DELETE(KOULUTUS_API_PATH, {
+      params: { path: { id, koulutusId } },
+    });
+
     onClose();
   };
 
@@ -199,7 +213,11 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
     void trigger();
   }, [trigger]);
 
-  return !isLoading ? (
+  if (isLoading) {
+    return null;
+  }
+
+  return (
     <Modal
       open={isOpen}
       progress={<WizardProgress steps={stepComponents.length} currentStep={step + 1} />}
@@ -223,12 +241,12 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
         <div className="flex flex-row justify-between">
           <div>
             <ConfirmDialog
-              title={t('education-history.delete-education-history')}
-              onConfirm={() => void deleteKoulutukset()}
+              title={t('education-history.delete-degree')}
+              onConfirm={() => void deleteKoulutus()}
               confirmText={t('delete')}
               cancelText={t('cancel')}
               variant="destructive"
-              description={t('education-history.confirm-delete-education-history')}
+              description={t('education-history.confirm-delete-degree')}
             >
               {(showDialog: () => void) => (
                 <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
@@ -248,8 +266,6 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutusId }: EditKoulutusModalPro
         </div>
       }
     />
-  ) : (
-    <></>
   );
 };
 
