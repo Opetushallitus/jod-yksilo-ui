@@ -12,7 +12,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? [['github'], ['html']] : 'html',
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:8080',
     trace: 'on-first-retry',
     headless: !!process.env.CI,
   },
@@ -47,8 +47,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: process.env.CI ? 'vite preview --port 5173' : 'vite dev',
-    url: 'http://localhost:5173',
+    command: process.env.CI ? 'vite preview --port 8080' : 'vite dev',
+    url: 'http://localhost:8080',
     reuseExistingServer: !process.env.CI,
   },
 });
