@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 import { configDefaults } from 'vitest/config';
 
 // The target API base URL
-const target = process.env.API_BASE_URL ?? 'http://localhost:8080';
+const target = process.env.API_BASE_URL ?? 'http://localhost:9080';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -29,6 +29,7 @@ export default defineConfig({
     ],
   },
   server: {
+    port: 8080,
     proxy: {
       '/api': {
         target,
