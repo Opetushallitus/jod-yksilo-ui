@@ -1,5 +1,5 @@
 import { client } from '@/api/client';
-import type { components } from '@/api/schema';
+import { components } from '@/api/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -7,27 +7,31 @@ import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 're
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-interface EditVapaaAjanToimintoProps {
+interface EditKoulutuskokonaisuusModalProps {
   isOpen: boolean;
-  onClose: () => void;
-  toimintoId: string;
+  onClose: React.Dispatch<React.SetStateAction<void>>;
+  koulutuskokonaisuusId: string;
 }
 
-export interface VapaaAjanToimintoForm {
-  id: components['schemas']['ToimintoDto']['id'];
+interface KoulutuskokonaisuusForm {
+  id: components['schemas']['TyopaikkaDto']['id'];
   nimi: string;
 }
 
-const VAPAA_AJAN_TOIMINTO_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}';
+const KOULUTUSKOKONAISUUS_API_PATH = '/api/profiili/koulutuskokonaisuudet/{id}';
 
-export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: EditVapaaAjanToimintoProps) => {
+const EditKoulutuskokonaisuusModal = ({
+  isOpen,
+  onClose,
+  koulutuskokonaisuusId: id,
+}: EditKoulutuskokonaisuusModalProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
 
   const formId = React.useId();
-  const methods = useForm<VapaaAjanToimintoForm>({
+  const methods = useForm<KoulutuskokonaisuusForm>({
     mode: 'onChange',
     resolver: zodResolver(
       z.object({
@@ -36,12 +40,12 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
       }),
     ),
     defaultValues: async () => {
-      const { data: toiminto } = await client.GET(VAPAA_AJAN_TOIMINTO_API_PATH, {
+      const { data: koulutus } = await client.GET(KOULUTUSKOKONAISUUS_API_PATH, {
         params: { path: { id } },
       });
       return {
-        id: toiminto?.id,
-        nimi: toiminto?.nimi?.[language] ?? '',
+        id: koulutus?.id,
+        nimi: koulutus?.nimi?.[language] ?? '',
       };
     },
   });
@@ -50,8 +54,8 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
     control: methods.control,
   });
 
-  const onSubmit: FormSubmitHandler<VapaaAjanToimintoForm> = async ({ data }: { data: VapaaAjanToimintoForm }) => {
-    await client.PUT(VAPAA_AJAN_TOIMINTO_API_PATH, {
+  const onSubmit: FormSubmitHandler<KoulutuskokonaisuusForm> = async ({ data }: { data: KoulutuskokonaisuusForm }) => {
+    await client.PUT(KOULUTUSKOKONAISUUS_API_PATH, {
       params: {
         path: {
           id: data.id!,
@@ -67,8 +71,8 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
     onClose();
   };
 
-  const deleteToiminto = async () => {
-    await client.DELETE(VAPAA_AJAN_TOIMINTO_API_PATH, {
+  const deleteKoulutuskokonaisuus = async () => {
+    await client.DELETE(KOULUTUSKOKONAISUUS_API_PATH, {
       params: { path: { id } },
     });
 
@@ -99,11 +103,11 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
             }}
           >
             <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-              {t('free-time-activities.edit-activity')}
+              {t('education-history.edit-education')}
             </h2>
 
             <InputField
-              label={t('free-time-activities.activity-name')}
+              label={t('education-history.educational-institution')}
               {...methods.register('nimi')}
               placeholder="Lorem ipsum dolor sit amet"
               help="Help text"
@@ -113,14 +117,14 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
       }
       footer={
         <div className="flex flex-row justify-between">
-          <div>
+          <div className="flex flex-row gap-5">
             <ConfirmDialog
-              title={t('free-time-activities.delete-free-time-activity')}
-              onConfirm={() => void deleteToiminto()}
+              title={t('education-history.delete-education-history')}
+              onConfirm={() => void deleteKoulutuskokonaisuus()}
               confirmText={t('delete')}
               cancelText={t('cancel')}
               variant="destructive"
-              description={t('free-time-activities.confirm-delete-free-time-activity')}
+              description={t('education-history.confirm-delete-education-history')}
             >
               {(showDialog: () => void) => (
                 <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
@@ -136,3 +140,5 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
     />
   );
 };
+
+export default EditKoulutuskokonaisuusModal;

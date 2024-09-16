@@ -9,48 +9,53 @@ import {
 } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
-import EditKategoriaModal from '@/routes/Profile/EducationHistory/modals/EditCategoryModal';
 import EditKoulutusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutusModal';
+import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import { Button } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useOutletContext, useRevalidator } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
-import { Koulutus, getEducationHistoryTableRows } from './utils';
+import { Koulutuskokonaisuus, getEducationHistoryTableRows } from './utils';
 
 const EducationHistory = () => {
   const routes: RoutesNavigationListProps['routes'] = useOutletContext();
-  const koulutukset = useLoaderData() as Koulutus[];
+  const koulutuskokonaisuudet = useLoaderData() as Koulutuskokonaisuus[];
   const { t } = useTranslation();
   const title = t('profile.education-history');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
   const [isWizardOpen, setIsWizardOpen] = React.useState(false);
-  const [isKategoriaOpen, setIsKategoriaOpen] = React.useState(false);
+  const [isKoulutuskokonaisuusOpen, setIsKoulutuskokonaisuusOpen] = React.useState(false);
   const [isKoulutusOpen, setIsKoulutusOpen] = React.useState(false);
   const [koulutusId, setKoulutusId] = React.useState<string | undefined>(undefined);
-  const [kategoriaId, setKategoriaId] = React.useState<string | undefined>(undefined);
-  const [rows, setRows] = React.useState<ExperienceTableRowData[]>(getEducationHistoryTableRows(koulutukset));
+  const [koulutuskokonaisuusId, setKoulutuskokonaisuusId] = React.useState<string | undefined>(undefined);
+  const [rows, setRows] = React.useState<ExperienceTableRowData[]>(getEducationHistoryTableRows(koulutuskokonaisuudet));
   const revalidator = useRevalidator(); // For reloading data after modal close
 
   React.useEffect(() => {
-    setRows(getEducationHistoryTableRows(koulutukset));
-  }, [koulutukset]);
+    setRows(getEducationHistoryTableRows(koulutuskokonaisuudet));
+  }, [koulutuskokonaisuudet]);
 
   const handleRowClick = (row: ExperienceTableRowData) => {
     if (Array.isArray(row.subrows)) {
-      setKategoriaId(row.key);
-      setIsKategoriaOpen(true);
+      setKoulutuskokonaisuusId(row.key);
+      setIsKoulutuskokonaisuusOpen(true);
     } else {
-      setKoulutusId(row.key);
-      setIsKoulutusOpen(true);
+      const koulutus = koulutuskokonaisuudet.find((kk) => kk.koulutukset.find((k) => k.id === row.key));
+
+      if (koulutus?.id) {
+        setKoulutuskokonaisuusId(koulutus.id);
+        setKoulutusId(row.key);
+        setIsKoulutusOpen(true);
+      }
     }
   };
 
   const onCloseKategoriaModal = () => {
-    setIsKategoriaOpen(false);
-    setKategoriaId(undefined);
+    setIsKoulutuskokonaisuusOpen(false);
+    setKoulutuskokonaisuusId(undefined);
     revalidator.revalidate();
   };
 
@@ -85,12 +90,20 @@ const EducationHistory = () => {
         rows={rows}
         onRowClick={handleRowClick}
       />
-
-      {isKategoriaOpen && (
-        <EditKategoriaModal isOpen={isKategoriaOpen} onClose={onCloseKategoriaModal} kategoriaId={kategoriaId!} />
+      {isKoulutuskokonaisuusOpen && (
+        <EditKoulutuskokonaisuusModal
+          isOpen={isKoulutuskokonaisuusOpen}
+          onClose={onCloseKategoriaModal}
+          koulutuskokonaisuusId={koulutuskokonaisuusId!}
+        />
       )}
       {isKoulutusOpen && (
-        <EditKoulutusModal isOpen={isKoulutusOpen} onClose={onCloseKoulutusModal} koulutusId={koulutusId!} />
+        <EditKoulutusModal
+          isOpen={isKoulutusOpen}
+          onClose={onCloseKoulutusModal}
+          koulutuskokonaisuusId={koulutuskokonaisuusId!}
+          koulutusId={koulutusId!}
+        />
       )}
       {isWizardOpen && <EducationHistoryWizard isOpen={isWizardOpen} onClose={onCloseWizard} />}
       {actionBar &&

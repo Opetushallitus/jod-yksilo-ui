@@ -7,23 +7,22 @@ import { useTranslation } from 'react-i18next';
 import { EducationHistoryForm } from './utils';
 
 interface CompetencesStepProps {
-  tutkinto: number;
+  koulutus: number;
 }
 
-const CompetencesStep = ({ tutkinto }: CompetencesStepProps) => {
+const CompetencesStep = ({ koulutus }: CompetencesStepProps) => {
   const { t } = useTranslation();
   const { getValues, watch, control } = useFormContext<EducationHistoryForm>();
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
-  const id = watch(`koulutukset.${tutkinto}.id`);
+  const id = watch(`koulutukset.${koulutus}.id`);
 
   return (
     <>
-      <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">
+      <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2 font-poppins">
         {id ? t('education-history.edit-competences') : t('education-history.identify-competences')}
       </h2>
       <h3 className="mb-4 text-heading-5 font-arial text-black sm:mb-5 sm:text-heading-3 sm:font-poppins">
-        {getValues('nimi') && `${getValues('nimi')} - `}
-        {getValues(`koulutukset.${tutkinto}.nimi`)}
+        {getValues('nimi')} - {getValues(`koulutukset.${koulutus}.nimi`)}
       </h3>
       <p className="mb-7 text-body-sm font-arial text-black sm:mb-9">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
@@ -42,7 +41,7 @@ const CompetencesStep = ({ tutkinto }: CompetencesStepProps) => {
 
       <Controller
         control={control}
-        name={`koulutukset.${tutkinto}.osaamiset`}
+        name={`koulutukset.${koulutus}.osaamiset`}
         render={({ field: { onChange, value } }) => (
           <OsaamisSuosittelija
             description={debouncedDescription}
