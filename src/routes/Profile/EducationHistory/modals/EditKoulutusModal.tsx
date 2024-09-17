@@ -51,9 +51,7 @@ const MainStep = () => {
         <div className="block w-full">
           <Controller
             control={control}
-            render={({ field }) => (
-              <Datepicker label={t('education-history.started')} {...field} placeholder={t('date-placeholder')} />
-            )}
+            render={({ field }) => <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} />}
             name={'alkuPvm'}
           />
         </div>
@@ -61,11 +59,7 @@ const MainStep = () => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker
-                label={t('education-history.ended')}
-                {...field}
-                placeholder={t('date-or-continues-placeholder')}
-              />
+              <Datepicker label={t('ended')} {...field} placeholder={t('date-or-continues-placeholder')} />
             )}
             name={'loppuPvm'}
           />

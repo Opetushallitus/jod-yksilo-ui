@@ -19,10 +19,10 @@
   "education-history": {
     "add-new-degree": "Lisää uusi tutkinto",
     "add-new-education": "Lisää uusi koulutus",
-    "confirm-delete-education-history": "Haluatko varmasti poistaa tämän koulutuksen?",
     "confirm-delete-degree": "Haluatko varmasti poistaa tämän tutkinnon?",
+    "confirm-delete-education-history": "Haluatko varmasti poistaa tämän koulutuksen?",
     "degree": "Tutkinto",
-    "delete-degree": "Poista kurssi",
+    "delete-degree": "Poista tutkinto",
     "delete-education-history": "Poista koulutus",
     "edit-competences": "Muokkaa osaamisia",
     "edit-degree": "Muokkaa tutkintoa",
@@ -32,6 +32,7 @@
     "educational-institution": "Oppilaitos",
     "identify-competences": "Tunnista osaamisia"
   },
+  "ended": "Loppui",
   "error": {
     "network": {
       "500": "Tapahtui odottamaton virhe. Yritä myöhemmin uudelleen.",
@@ -47,7 +48,6 @@
   "free-time-activities": {
     "activity-content": "Toiminnon sisältö",
     "activity-name": "Toiminnon nimi",
-    "edit-competences": "Muokkaa osaamisia",
     "activity-or-proficiency-description": "Toiminto / pätevyys",
     "add-new-activity": "Lisää uusi vapaa-ajan toiminto",
     "add-new-free-time-activity": "Lisää uusi toiminto",
@@ -57,12 +57,11 @@
     "delete-free-time-activity": "Poista vapaa-ajan toiminto",
     "delete-proficiency": "Poista pätevyys",
     "edit-activity": "Muokkaa vapaa-ajan toimintoa",
+    "edit-competences": "Muokkaa osaamisia",
     "edit-proficiencies": "Muokkaa osaamisia",
     "edit-proficiency": "Muokkaa pätevyyttä",
-    "ended": "Loppui",
     "identify-proficiencies": "Tunnista osaamisia",
-    "proficiency": "Pätevyys",
-    "started": "Alkoi"
+    "proficiency": "Pätevyys"
   },
   "goals": "Tavoitteet",
   "home": {
@@ -225,6 +224,7 @@
       "who-provides-the-service": "kuka-palvelun-tarjoaa"
     }
   },
+  "started": "Alkoi",
   "terms-of-service": "Käyttöehdot",
   "tool": {
     "competences": {
@@ -282,8 +282,8 @@
     "add-new-workplace": "Lisää uusi työpaikka",
     "competences": "Osaamiset",
     "competences-of-your-choice": "Valitsemasi osaamiset",
-    "confirm-delete-work-history": "Haluatko varmasti poistaa työpaikan?",
     "confirm-delete-job-description": "Haluatko varmasti poistaa toimenkuvan?",
+    "confirm-delete-work-history": "Haluatko varmasti poistaa työpaikan?",
     "count-competences": "{{count}} osaamista",
     "delete-job-description": "Poista toimenkuva",
     "delete-work-history": "Poista työpaikka",
@@ -291,12 +291,10 @@
     "edit-job-description": "Muokkaa toimenkuvaa",
     "edit-workplace": "Muokkaa työpaikkaa",
     "employer": "Työnantaja",
-    "ended": "Loppui",
     "identify-competences": "Tunnista osaamisia",
     "job-description": "Toimenkuva",
     "job-duties": "Työtehtävät",
     "proposed-competences": "Ehdotetut osaamiset",
-    "started": "Alkoi",
     "summary": "Yhteenveto",
     "workplace-or-job-description": "Työpaikka / toimenkuva"
   }

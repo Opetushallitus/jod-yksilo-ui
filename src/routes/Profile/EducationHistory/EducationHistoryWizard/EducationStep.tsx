@@ -50,12 +50,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker
-                label={t('work-history.started')}
-                {...field}
-                placeholder={t('date-placeholder')}
-                help="Help text"
-              />
+              <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} help="Help text" />
             )}
             name={`koulutukset.${koulutus}.alkuPvm`}
           />
@@ -65,7 +60,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
             control={control}
             render={({ field }) => (
               <Datepicker
-                label={t('work-history.ended')}
+                label={t('ended')}
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
                 help="Help text"

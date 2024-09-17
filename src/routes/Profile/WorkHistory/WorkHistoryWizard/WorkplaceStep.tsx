@@ -50,12 +50,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker
-                label={t('work-history.started')}
-                {...field}
-                placeholder={t('date-placeholder')}
-                help="Help text"
-              />
+              <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} help="Help text" />
             )}
             name={`toimenkuvat.${toimenkuva}.alkuPvm`}
           />
@@ -65,7 +60,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
             control={control}
             render={({ field }) => (
               <Datepicker
-                label={t('work-history.ended')}
+                label={t('ended')}
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
                 help="Help text"
