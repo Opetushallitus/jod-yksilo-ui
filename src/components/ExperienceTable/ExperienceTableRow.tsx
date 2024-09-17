@@ -13,40 +13,38 @@ export interface ExperienceTableRowData {
 }
 
 interface ExperienceTableRowProps {
-  index: number;
   row: ExperienceTableRowData;
   nested?: boolean;
   onRowClick?: (row: ExperienceTableRowData) => void;
+  className?: string;
 }
 
 const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData }) => {
   const { i18n } = useTranslation();
 
   return nested ? (
-    <span className="text-body-xs font-arial font-bold text-secondary-gray sm:pt-3">{row.nimi[i18n.language]}</span>
+    <span className="px-5 text-black text-body-sm sm:pt-3 font-bold sm:font-normal sm:text-body-md">
+      {row.nimi[i18n.language]}
+    </span>
   ) : (
-    <span className="pr-5 text-heading-4">{row.nimi[i18n.language]}</span>
+    <span className="px-5 text-heading-4 sm:text-heading-3">{row.nimi[i18n.language]}</span>
   );
 };
 
-export const ExperienceTableRow = ({ index, row, nested, onRowClick }: ExperienceTableRowProps) => {
+export const ExperienceTableRow = ({ row, nested, className, onRowClick }: ExperienceTableRowProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
 
-  const countCompetences = 'work-history.count-competences';
-
   // CSS class names for non-header cells
-  const tdBaseClasses = 'pt-5 text-body-xs font-arial font-bold text-secondary-gray';
+  const tdBaseClasses = 'text-body-md text-black py-2';
 
   const osaamisetCountTotal =
-    row.osaamisetCount > 0
-      ? t(countCompetences, { count: row.osaamisetCount })
-      : `(${t('work-history.identify-competences')})`;
+    row.osaamisetCount > 0 ? t('count-competences', { count: row.osaamisetCount }) : t('no-competences');
 
   if (nested) {
     return (
-      <tr key={row.key} className="align-bottom">
-        <td className="pl-8 sm:pl-[56px] pr-5">
+      <tr key={row.key} className={className}>
+        <td>
           {onRowClick ? (
             <button className="bg-none border-none" onClick={() => onRowClick(row)}>
               <Title row={row} nested />
@@ -55,7 +53,7 @@ export const ExperienceTableRow = ({ index, row, nested, onRowClick }: Experienc
             <Title row={row} nested />
           )}
           {!sm && (
-            <div className="flex gap-5 pb-2 pt-1 text-body-xs font-arial font-bold text-secondary-gray">
+            <div className="flex gap-5 pb-2 pt-1 px-5 text-body-sm">
               <p>
                 {formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
               </p>
@@ -65,19 +63,17 @@ export const ExperienceTableRow = ({ index, row, nested, onRowClick }: Experienc
         </td>
         {sm && (
           <>
-            <td className={`pr-5 ${tdBaseClasses}`}>{!row.hideRowDetails && formatDate(row.alkuPvm)}</td>
-            <td className={`pr-7 ${tdBaseClasses}`}>
-              {!row.hideRowDetails && row.loppuPvm && formatDate(row.loppuPvm)}
-            </td>
-            <td className={`w-1/4 ${tdBaseClasses}`}>{osaamisetCountTotal}</td>
+            <td className={tdBaseClasses}>{!row.hideRowDetails && formatDate(row.alkuPvm)}</td>
+            <td className={tdBaseClasses}>{!row.hideRowDetails && row.loppuPvm && formatDate(row.loppuPvm)}</td>
+            <td className={tdBaseClasses}>{osaamisetCountTotal}</td>
           </>
         )}
       </tr>
     );
   } else {
     return (
-      <tr key={row.key} className="align-bottom">
-        <td className={`pr-5 ${index === 0 ? 'pt-5' : 'pt-6'} align-bottom sm:pt-5`.trim()}>
+      <tr key={row.key} className={className}>
+        <td>
           <div>
             {onRowClick ? (
               <button className="bg-none border-none" onClick={() => onRowClick(row)}>
@@ -87,22 +83,22 @@ export const ExperienceTableRow = ({ index, row, nested, onRowClick }: Experienc
               <Title row={row} />
             )}
             {!sm && (
-              <div className="flex gap-5 pb-2 pt-1 text-body-xs font-arial font-bold text-secondary-gray">
-                <p>
+              <div className="flex gap-5 pb-2 pt-1 text-body-sm px-5 text-black">
+                <span>
                   {formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
-                </p>
-                <p>{osaamisetCountTotal}</p>
+                </span>
+                <span>{osaamisetCountTotal}</span>
               </div>
             )}
           </div>
         </td>
         {sm && (
           <>
-            <td className={`pr-5 ${tdBaseClasses}`} colSpan={row.loppuPvm ? 1 : 2}>
+            <td className={tdBaseClasses} colSpan={row.loppuPvm ? 1 : 2}>
               {formatDate(row.alkuPvm)}
             </td>
-            {row.loppuPvm && <td className={`pr-5 ${tdBaseClasses}`}>{formatDate(row.alkuPvm)}</td>}
-            <td className={`pr-5 ${tdBaseClasses}`}>{osaamisetCountTotal}</td>
+            {row.loppuPvm && <td className={tdBaseClasses}>{formatDate(row.loppuPvm)}</td>}
+            <td className={tdBaseClasses}>{osaamisetCountTotal}</td>
           </>
         )}
       </tr>
