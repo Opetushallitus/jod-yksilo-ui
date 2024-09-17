@@ -16,6 +16,8 @@
   "date-placeholder": "pp.kk.vvvv",
   "delete": "Poista",
   "edit": "Muokkaa",
+  "no-competences": "Ei osaamisia",
+  "count-competences": "{{count}} osaamista",
   "education-history": {
     "add-new-degree": "Lisää uusi tutkinto",
     "add-new-education": "Lisää uusi koulutus",

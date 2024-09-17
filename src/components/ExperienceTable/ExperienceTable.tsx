@@ -9,6 +9,12 @@ interface ExperienceTableProps {
   onRowClick?: (row: ExperienceTableRowData) => void;
 }
 
+const SpacerRow = ({ className = 'py-3' }: { className?: string }) => (
+  <tr>
+    <td colSpan={4} className={className}></td>
+  </tr>
+);
+
 export const ExperienceTable = ({ mainColumnHeader, rows, onRowClick }: ExperienceTableProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
@@ -18,49 +24,54 @@ export const ExperienceTable = ({ mainColumnHeader, rows, onRowClick }: Experien
 
   return (
     <div className="overflow-x-hidden">
-      <table className="mb-8 w-full text-left" border={0} cellPadding={0} cellSpacing={0}>
+      <table className="w-full" border={0} cellPadding={0} cellSpacing={0}>
         <thead>
-          <tr className="border-b-2 border-inactive-gray">
-            <th scope="col" className="py-3 pr-5 align-bottom text-form-label font-arial text-secondary-gray">
+          <tr className="border-b border-inactive-gray text-left text-body-md">
+            <th scope="col" className="font-normal pb-3">
               {mainColumnHeader}
             </th>
             {sm && (
               <>
-                <th scope="col" className="py-3 pr-5 align-bottom text-form-label font-arial text-secondary-gray">
+                <th scope="col" className="font-normal">
                   {t('started')}
                 </th>
-                <th scope="col" className="py-3 pr-7 align-bottom text-form-label font-arial text-secondary-gray">
+                <th scope="col" className="font-normal">
                   {t('ended')}
                 </th>
-                <th scope="col" className="py-3 align-bottom text-form-label font-arial text-secondary-gray">
-                  {t('work-history.competences')}
+                <th scope="col" className="font-normal">
+                  {t('competences')}
                 </th>
               </>
             )}
           </tr>
         </thead>
         <tbody>
-          {categorizedRows.map((row, index) => (
+          <SpacerRow />
+          {categorizedRows.map((row) => (
             <React.Fragment key={row.key}>
-              <ExperienceTableRow key={row.key} row={row} index={index} onRowClick={onRowClick} />
-              {row.subrows?.map((tutkinto, index) => (
-                <ExperienceTableRow key={tutkinto.key} row={tutkinto} index={index} onRowClick={onRowClick} nested />
+              <ExperienceTableRow key={row.key} row={row} onRowClick={onRowClick} className="bg-white" />
+              {row.subrows?.map((subrow, i) => (
+                <ExperienceTableRow
+                  key={subrow.key}
+                  row={subrow}
+                  onRowClick={onRowClick}
+                  className={i % 2 !== 0 ? 'bg-white' : 'bg-bg-gray'}
+                  nested
+                />
               ))}
+              <SpacerRow className="py-5" />
             </React.Fragment>
           ))}
 
           {uncategorizedRows.length > 0 && (
             <tr>
-              <td
-                colSpan={4}
-                className="border-b border-inactive-gray py-3 pr-7 align-bottom text-form-label text-secondary-gray pt-6"
-              >
+              <td colSpan={4} className="border-b border-inactive-gray text-body-md pt-6">
                 {mainColumnHeader} ilman kategoriaa
               </td>
             </tr>
           )}
-          {uncategorizedRows.map((row, index) => (
-            <ExperienceTableRow key={row.key} row={row} index={index} onRowClick={onRowClick} />
+          {uncategorizedRows.map((row) => (
+            <ExperienceTableRow key={row.key} row={row} onRowClick={onRowClick} />
           ))}
         </tbody>
       </table>
