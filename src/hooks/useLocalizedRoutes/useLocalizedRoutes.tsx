@@ -63,7 +63,7 @@ const sessionExpiredLoader = () => {
 const sessionExpiredSlug = 'slugs.session-expired';
 
 const restrictedLoader = ({ request }: LoaderFunctionArgs) => {
-  if (authProvider.loginState === 'loggedOut' || authProvider.loginState === 'unknown') {
+  if (authProvider.loginState === 'loggedOut') {
     const newParams = new URLSearchParams();
     newParams.set('lang', i18n.language);
     newParams.set('callbackUrl', new URL(request.url).pathname);
