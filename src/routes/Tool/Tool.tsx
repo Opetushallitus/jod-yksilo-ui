@@ -177,7 +177,7 @@ const Tool = () => {
           osaamiset: selectedCompetences.map((item) => item.id),
           kiinnostukset: selectedInterests.map((item) => item.id),
           osaamisPainotus: competencesMultiplier / 100,
-          kiinostusPainotus: interestMultiplier / 100,
+          kiinnostusPainotus: interestMultiplier / 100,
           rajoitePainotus: restrictionsMultiplier / 100,
         },
         signal: abortController.current?.signal,
