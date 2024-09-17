@@ -49,12 +49,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker
-                label={t('free-time-activities.started')}
-                {...field}
-                placeholder={t('date-placeholder')}
-                help="Help text"
-              />
+              <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} help="Help text" />
             )}
             name={`patevyydet.${patevyys}.alkuPvm`}
           />
@@ -64,7 +59,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
             control={control}
             render={({ field }) => (
               <Datepicker
-                label={t('free-time-activities.ended')}
+                label={t('ended')}
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
                 help="Help text"

@@ -27,10 +27,10 @@ export const ExperienceTable = ({ mainColumnHeader, rows, onRowClick }: Experien
             {sm && (
               <>
                 <th scope="col" className="py-3 pr-5 align-bottom text-form-label font-arial text-secondary-gray">
-                  {t('work-history.started')}
+                  {t('started')}
                 </th>
                 <th scope="col" className="py-3 pr-7 align-bottom text-form-label font-arial text-secondary-gray">
-                  {t('work-history.ended')}
+                  {t('ended')}
                 </th>
                 <th scope="col" className="py-3 align-bottom text-form-label font-arial text-secondary-gray">
                   {t('work-history.competences')}
