@@ -33,7 +33,7 @@ const Match = ({ match, label, bg }: { match?: number; label: string; bg: string
     <div
       className={`${bg} flex flex-row shrink-0 sm:flex-col rounded-lg sm:rounded-[40px] sm:min-h-[80px] w-[132px] sm:w-[80px] h-[32px] text-white justify-center text-center items-center`}
     >
-      {match && (
+      {match !== undefined && match > 0 && (
         <>
           <span className="mr-3 sm:mr-0 font-semibold text-[22px] sm:text-[24px]">{Math.round(match * 100)}%</span>
           <span className="flex justify-center text-[12px] leading-[16px] font-arial font-bold">{label}</span>
