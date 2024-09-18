@@ -46,7 +46,7 @@ export const ExperienceTableRow = ({ row, nested, className, onRowClick }: Exper
       <tr key={row.key} className={className}>
         <td>
           {onRowClick ? (
-            <button className="bg-none border-none" onClick={() => onRowClick(row)}>
+            <button className="bg-none border-none w-full text-left" onClick={() => onRowClick(row)}>
               <Title row={row} nested />
             </button>
           ) : (
@@ -76,7 +76,7 @@ export const ExperienceTableRow = ({ row, nested, className, onRowClick }: Exper
         <td>
           <div>
             {onRowClick ? (
-              <button className="bg-none border-none" onClick={() => onRowClick(row)}>
+              <button className="bg-none border-none w-full text-left" onClick={() => onRowClick(row)}>
                 <Title row={row} />
               </button>
             ) : (
