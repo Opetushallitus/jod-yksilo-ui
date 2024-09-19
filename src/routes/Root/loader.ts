@@ -5,7 +5,7 @@ import { LoaderFunction } from 'react-router-dom';
 export default (async ({ request }) => {
   if (authProvider.loginState === 'unknown') {
     // Fetch CSRF token
-    const { data, error } = await client.GET('/api/yksilo', {
+    const { data, error } = await client.GET('/api/profiili/yksilo', {
       signal: request.signal,
     });
 

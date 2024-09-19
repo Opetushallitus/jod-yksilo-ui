@@ -23,7 +23,7 @@ const Preferences = () => {
   const actionBar = useActionBar();
 
   const deleteAccount = async () => {
-    await client.DELETE('/api/yksilo');
+    await client.DELETE('/api/profiili/yksilo');
     window.location.href = '/';
   };
 

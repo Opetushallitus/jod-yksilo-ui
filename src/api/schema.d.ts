@@ -314,22 +314,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/yksilo': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['yksiloGet'];
-    put?: never;
-    post?: never;
-    delete: operations['yksiloDelete'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/profiili/osaamiset': {
     parameters: {
       query?: never;
@@ -1368,44 +1352,6 @@ export interface operations {
         content: {
           'application/json': components['schemas']['TyomahdollisuusFullDto'];
         };
-      };
-    };
-  };
-  yksiloGet: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['YksiloCsrfDto'];
-        };
-      };
-    };
-  };
-  yksiloDelete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
       };
     };
   };
