@@ -164,39 +164,33 @@ const Tool = () => {
       setTyomahdollisuudet(sortedResults);
     };
 
-    void fetchOpportunities();
+    if (Object.keys(tyomahdollisuusEhdotukset ?? {}).length > 0) {
+      void fetchOpportunities();
+    }
   }, [tyomahdollisuusEhdotukset]);
 
-  React.useEffect(() => {
+  const [ehdotuksetLoading, setEhdotuksetLoading] = React.useState(false);
+  const updateEhdotukset = async () => {
     abortController.current?.abort('Abort previous request');
     abortController.current = new AbortController();
 
-    const fetchSuggestions = async () => {
-      const { data } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
-        body: {
-          osaamiset: selectedCompetences.map((item) => item.id),
-          kiinnostukset: selectedInterests.map((item) => item.id),
-          osaamisPainotus: competencesMultiplier / 100,
-          kiinnostusPainotus: interestMultiplier / 100,
-          rajoitePainotus: restrictionsMultiplier / 100,
-        },
-        signal: abortController.current?.signal,
-      });
+    setEhdotuksetLoading(true);
+    const { data } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
+      body: {
+        osaamiset: selectedCompetences.map((item) => item.id),
+        kiinnostukset: selectedInterests.map((item) => item.id),
+        osaamisPainotus: competencesMultiplier / 100,
+        kiinnostusPainotus: interestMultiplier / 100,
+        rajoitePainotus: restrictionsMultiplier / 100,
+      },
+      signal: abortController.current?.signal,
+    });
 
-      if (data) {
-        setTyomahdollisuusEhdotukset(ehdotusDataToRecord(data as EhdotusData[]));
-      }
-    };
-
-    // Debounce the fetch
-    const timer = setTimeout(() => {
-      void fetchSuggestions();
-    }, 300);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [selectedCompetences, selectedInterests, competencesMultiplier, interestMultiplier, restrictionsMultiplier]);
+    if (data) {
+      setTyomahdollisuusEhdotukset(ehdotusDataToRecord(data as EhdotusData[]));
+    }
+    setEhdotuksetLoading(false);
+  };
 
   const toggleOpportunity = (id: string) => {
     if (selectedOpportunities.includes(id)) {
@@ -290,20 +284,27 @@ const Tool = () => {
         }
       />
 
+      <div className="mb-8 mt-5">
+        <Button
+          onClick={() => void updateEhdotukset()}
+          label={t('tool.update-job-opportunities-list')}
+          variant="accent"
+          disabled={ehdotuksetLoading}
+        />
+      </div>
+
       <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
         <div className="col-span-1 sm:col-span-3">
-          <div className="mt-10 flex flex-col sm:mt-11 sm:flex-row">
-            <span className="text-body-md font-arial text-black font-medium sm:text-body-lg sm:font-poppins">
-              {t('tool.competences.available-options')}{' '}
-              <span className="text-heading-3 font-bold">
-                {t('tool.competences.available-options-totals', { professionsCount, educationsCount })}
-              </span>
+          <div className="flex flex-col sm:flex-row">
+            <span className="text-body-md text-black font-medium sm:text-body-lg">
+              <h2 className="text-heading-2 mb-4">{t('tool.competences.opportunities-title')}</h2>
+              {t('tool.competences.available-options-totals', { professionsCount, educationsCount })}
             </span>
           </div>
         </div>
 
-        <div className="col-span-1 mt-10 flex flex-col sm:col-span-3 sm:mt-9 sm:flex-row">
-          <span className="text-body-md font-arial text-black font-medium sm:text-body-lg sm:font-poppins">
+        <div className="col-span-1 mt-5 flex flex-col sm:col-span-3 sm:flex-row">
+          <span className="text-body-md text-black font-medium sm:text-body-lg">
             {t('tool.competences.adjust-data-emphasis')}
           </span>
         </div>

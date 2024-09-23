@@ -18,6 +18,8 @@
   "edit": "Muokkaa",
   "no-competences": "Ei osaamisia",
   "count-competences": "{{count}} osaamista",
+  "proposed-competences": "Ehdotetut osaamiset",
+  "competences-of-your-choice": "Valitsemasi osaamiset",
   "education-history": {
     "add-new-degree": "Lisää uusi tutkinto",
     "add-new-education": "Lisää uusi koulutus",
@@ -235,10 +237,11 @@
   "started": "Alkoi",
   "terms-of-service": "Käyttöehdot",
   "tool": {
+    "update-job-opportunities-list": "Päivitä mahdollisuuslista",
     "competences": {
+      "opportunities-title": "Mahdollisuutesi",
       "adjust-data-emphasis": "Säädä syöttämäsi tietojen painotuksia - tulokset päivittyvät samanaikaisesti uusien painotusten mukaan.",
-      "available-options": "Lukumääräisesti valittavissasi eri vaihtoehtoja",
-      "available-options-totals": "{{professionsCount}} ammattia, {{educationsCount}} koulutusta.",
+      "available-options-totals": "Syöttämilläsi tiedoilla sinulle löytyy {{professionsCount}} ammattia ja {{educationsCount}} koulutusmahdollisuutta.",
       "common-educational-background": "Yleisin koulutustausta",
       "employment-outlook": "Työllisyysnäkymä",
       "field-description": "Kirjoita taitosi tekstikenttään. Lisää osaaminen klikkaamalla ‘+‘-merkkiä osaamisen vieressä. Poista osaaminen klikkaamalla rastia.",
@@ -289,7 +292,6 @@
     "add-new-job-description": "Lisää uusi toimenkuva",
     "add-new-workplace": "Lisää uusi työpaikka",
     "competences": "Osaamiset",
-    "competences-of-your-choice": "Valitsemasi osaamiset",
     "confirm-delete-job-description": "Haluatko varmasti poistaa toimenkuvan?",
     "confirm-delete-work-history": "Haluatko varmasti poistaa työpaikan?",
     "count-competences": "{{count}} osaamista",
@@ -302,7 +304,6 @@
     "identify-competences": "Tunnista osaamisia",
     "job-description": "Toimenkuva",
     "job-duties": "Työtehtävät",
-    "proposed-competences": "Ehdotetut osaamiset",
     "summary": "Yhteenveto",
     "workplace-or-job-description": "Työpaikka / toimenkuva"
   }
