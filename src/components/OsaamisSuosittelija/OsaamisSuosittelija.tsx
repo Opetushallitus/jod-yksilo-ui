@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { Tag, useMediaQueries } from '@jod/design-system';
@@ -30,7 +31,7 @@ export const OsaamisSuosittelija = ({
   onChange,
   sourceType = 'JOTAIN_MUUTA',
 }: OsaamisSuosittelijaProps) => {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { sm } = useMediaQueries();
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
@@ -43,11 +44,24 @@ export const OsaamisSuosittelija = ({
 
     const fetchCompetences = async (kuvaus: string) => {
       try {
-        const { data } = (await client.POST('/api/ehdotus/osaamiset', {
-          body: { kuvaus },
+        const ehdotus = await client.POST('/api/ehdotus/osaamiset', {
+          body: { [i18n.language]: kuvaus },
           signal: abortController.current?.signal,
-        })) as { data: Osaaminen[] };
-        setEhdotetutOsaamiset([...data]);
+        });
+        setEhdotetutOsaamiset(
+          await osaamiset.combine(
+            ehdotus.data,
+            (e) => e.uri,
+            (e, o) => {
+              return {
+                id: o.uri,
+                nimi: o.nimi[i18n.language],
+                osuvuus: e.osuvuus ?? 0,
+              };
+            },
+            abortController.current?.signal,
+          ),
+        );
       } catch (error) {
         // Ignore abort errors
         if (!(error instanceof DOMException && error.name === 'AbortError')) {
@@ -62,7 +76,7 @@ export const OsaamisSuosittelija = ({
     } else {
       setEhdotetutOsaamiset([]);
     }
-  }, [description]);
+  }, [description, i18n.language]);
 
   React.useEffect(() => {
     setFilteredEhdotetutOsaamiset([
