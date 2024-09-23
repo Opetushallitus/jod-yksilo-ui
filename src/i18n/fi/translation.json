@@ -153,6 +153,10 @@
     "description": "Hakemaasi sivua ei löytynyt.",
     "title": "Sivua ei löytynyt"
   },
+  "opportunity-type": {
+    "work": "Työmahdollisuus",
+    "education": "Koulutusmahdollisuus"
+  },
   "preferences": {
     "confirm-delete-my-account": "Haluatko varmasti poistaa tilisi?",
     "delete-my-account": "Poista tilini",

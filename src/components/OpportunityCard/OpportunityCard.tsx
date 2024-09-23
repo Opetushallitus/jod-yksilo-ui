@@ -31,7 +31,7 @@ const bgForType = (type: CardType) => {
 const Match = ({ match, label, bg }: { match?: number; label: string; bg: string }) => {
   return (
     <div
-      className={`${bg} flex flex-row shrink-0 sm:flex-col rounded-lg sm:rounded-[40px] sm:min-h-[80px] w-[132px] sm:w-[80px] h-[32px] text-white justify-center text-center items-center`}
+      className={`${bg} flex flex-row shrink-0 sm:flex-col rounded-lg sm:rounded-[40px] sm:min-h-[80px] w-[132px] sm:w-[80px] h-[32px] text-white justify-center text-center items-center sm:mt-3`}
     >
       {match !== undefined && match > 0 && (
         <>
@@ -84,7 +84,7 @@ const SelectedCheckbox = ({
 
   return (
     <span
-      className="inline-flex items-center gap-2 font-arial font-bold text-[12px] leading-[24px] text-accent"
+      className="inline-flex items-center gap-2 font-bold text-[12px] leading-[24px] text-accent"
       onClick={onClick}
       onKeyDown={onKeyDown}
       aria-label={`${t('choose')} ${name}`}
@@ -114,6 +114,9 @@ export const OpportunityCard = ({
 }: OpportunityCardProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
+
+  const cardTypeTitle = type == 'work' ? t('opportunity-type.work') : t('opportunity-type.education');
+
   return (
     <div className="rounded shadow-border bg-white pt-5 pr-5 pl-6 pb-7">
       <div className="flex flex-col gap-3 sm:flex-row sm:gap-5">
@@ -124,9 +127,15 @@ export const OpportunityCard = ({
         {!sm && <div className="text-[22px] leading-[34px] font-bold text-black">{name}</div>}
         <div className="flex flex-col gap-y-2">
           {sm && (
-            <div className="flex flex-row justify-between">
-              <span className="text-heading-2 text-black hyphens-auto">{name}</span>
-              <SelectedCheckbox selected={selected} toggleSelection={toggleSelection} name={name} />
+            <div className="flex flex-row justify-between gap-3">
+              <div className="flex flex-col mt-3">
+                <span className="font-arial text-body-sm text-black uppercase leading-[24px]">{cardTypeTitle}</span>
+                <span className="text-heading-2 text-black hyphens-auto">{name}</span>
+              </div>
+
+              <div className="relative top-0 right-0">
+                <SelectedCheckbox selected={selected} toggleSelection={toggleSelection} name={name} />
+              </div>
             </div>
           )}
           <span className="font-arial text-body-md">{description}</span>
