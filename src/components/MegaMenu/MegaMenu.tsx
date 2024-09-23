@@ -1,23 +1,20 @@
 import { LanguageButton, LanguageMenu, RoutesNavigationList, SimpleNavigationList, UserButton } from '@/components';
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
-import { LangCode } from '@/i18n/config';
-import { authProvider } from '@/providers';
-import useProfileRoutes from '@/routeDefinitions/profileRoutes';
-import useToolRoutes from '@/routeDefinitions/toolRoutes';
-import useUserGuideRoutes from '@/routeDefinitions/userGuideRoutes';
+import { useAppRoutes } from '@/hooks/useAppRoutes';
 import { useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdClose, MdOutlineCancel } from 'react-icons/md';
+import { MdClose, MdKeyboardBackspace, MdOutlineCancel } from 'react-icons/md';
 export { LanguageButton, UserButton } from '@/components';
 
 type MegaMenuProps = {
+  loggedIn: boolean;
   onClose: () => void;
-  changeLanguage: (lng: LangCode) => Promise<void>;
+  onLanguageClick: () => void;
   logout: () => void;
 } & Pick<NavigationBarProps, 'user'>;
 
-export const MegaMenu = ({ onClose, user, changeLanguage, logout }: MegaMenuProps) => {
+export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, user, logout }: MegaMenuProps) => {
   const { sm } = useMediaQueries();
   const { t } = useTranslation();
   const [megaMenuState, setMegaMenuState] = React.useState<'main' | 'lang'>('main');
@@ -31,9 +28,7 @@ export const MegaMenu = ({ onClose, user, changeLanguage, logout }: MegaMenuProp
     onClose();
   };
 
-  const { profileRoutes } = useProfileRoutes();
-  const { toolRoutes } = useToolRoutes();
-  const { userGuideRoutes } = useUserGuideRoutes();
+  const { profileRoutes, toolRoutes, userGuideRoutes } = useAppRoutes();
   const prefixRoutePath = (prefix: string) => (route: { name: string; path: string }) => ({
     ...route,
     path: `${prefix}/${route.path}`,
@@ -50,7 +45,7 @@ export const MegaMenu = ({ onClose, user, changeLanguage, logout }: MegaMenuProp
         {!sm && megaMenuState === 'main' && (
           <>
             <li>
-              <LanguageButton onLanguageClick={onLanguageButtonClick} />
+              <LanguageButton onClick={onLanguageButtonClick} />
             </li>
             <li className="ml-3">
               <UserButton user={user} />
@@ -78,7 +73,7 @@ export const MegaMenu = ({ onClose, user, changeLanguage, logout }: MegaMenuProp
               <SimpleNavigationList title={t('user-guide')} backgroundClassName="bg-white" collapsible={!sm}>
                 <RoutesNavigationList routes={userGuideMenuRoutes} onClick={onClose} />
               </SimpleNavigationList>
-              <SimpleNavigationList title={'Kohtaantopalvelu'} backgroundClassName="bg-white" collapsible={!sm}>
+              <SimpleNavigationList title={t('match-service')} backgroundClassName="bg-white" collapsible={!sm}>
                 <RoutesNavigationList routes={toolMenuRoutes} onClick={onClose} />
               </SimpleNavigationList>
               <SimpleNavigationList title={t('profile.index')} backgroundClassName="bg-white" collapsible={!sm}>
@@ -89,9 +84,9 @@ export const MegaMenu = ({ onClose, user, changeLanguage, logout }: MegaMenuProp
           {megaMenuState === 'lang' && !sm && (
             <>
               <button type="button" className="flex select-none mb-8" onClick={() => setMegaMenuState('main')}>
-                <span className="material-symbols-outlined size-32">keyboard_backspace</span>
+                <MdKeyboardBackspace size={32} />
               </button>
-              <LanguageMenu onLanguageClick={changeLanguage} inline />
+              <LanguageMenu onClick={onLanguageClick} inline />
             </>
           )}
         </div>
@@ -102,7 +97,7 @@ export const MegaMenu = ({ onClose, user, changeLanguage, logout }: MegaMenuProp
             sed in, an sit unum splendide.
           </div>
         )}
-        {megaMenuState === 'main' && !sm && authProvider.loginState === 'loggedIn' && (
+        {megaMenuState === 'main' && !sm && loggedIn && (
           <button
             type="button"
             className="font-arial sticky bottom-0 p-6 bg-white w-full text-right text-body-md text-accent hover:underline"

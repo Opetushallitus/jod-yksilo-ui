@@ -1,9 +1,12 @@
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
+import { useLoginLink } from '@/hooks/useLoginLink';
 import { useTranslation } from 'react-i18next';
 import { MdOutlinePerson } from 'react-icons/md';
 
 export const UserButton = ({ user }: Pick<NavigationBarProps, 'user'>) => {
-  const { i18n } = useTranslation();
+  const { t } = useTranslation();
+  const loginLink = useLoginLink();
+  const login = { url: loginLink, text: t('login') };
   const initials = user?.name
     .split(' ')
     .map((part) => part[0])
@@ -11,18 +14,20 @@ export const UserButton = ({ user }: Pick<NavigationBarProps, 'user'>) => {
     .join('')
     .toUpperCase();
 
-  const login = { url: `/login?lang=${i18n.language}`, text: 'Login' };
-
   return user ? (
     <user.component
-      className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-3 text-white"
+      className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-3 text-black"
       role="img"
       title={user.name}
     >
       {initials}
     </user.component>
   ) : (
-    <a href={login.url} className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2">
+    <a
+      href={login.url}
+      className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
+      aria-label={login.text}
+    >
       <MdOutlinePerson size={24} />
     </a>
   );

@@ -8,6 +8,12 @@ vi.mock('@jod/design-system', () => ({
   useMediaQueries: vi.fn(),
 }));
 
+vi.mock('react-router-dom', () => ({
+  useLocation: () => ({
+    pathname: vi.fn(),
+  }),
+}));
+
 describe('NavigationBar', () => {
   vi.mocked(useMediaQueries).mockReturnValue({ sm: true, lg: false });
 

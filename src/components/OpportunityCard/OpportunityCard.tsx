@@ -124,7 +124,7 @@ export const OpportunityCard = ({
           <Match match={matchValue} label={matchLabel} bg={bgForType(type)} />
           {!sm && <SelectedCheckbox selected={selected} toggleSelection={toggleSelection} name={name} />}
         </div>
-        {!sm && <div className="text-[22px] leading-[34px] font-bold text-black">{name}</div>}
+        {!sm && <div className="text-[22px] leading-[34px] font-bold text-black hyphens-auto">{name}</div>}
         <div className="flex flex-col gap-y-2">
           {sm && (
             <div className="flex flex-row justify-between gap-3">

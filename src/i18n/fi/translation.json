@@ -8,18 +8,16 @@
   "cancel": "Peruuta",
   "choose": "Valitse",
   "competences": "Osaamiset",
+  "competences-of-your-choice": "Valitsemasi osaamiset",
   "cookie-policy": "Evästekäytäntö",
   "cookies": "Evästeet",
   "copyright": "© JOD 2024. Kaikki oikeudet pidätetään.",
+  "count-competences": "{{count}} osaamista",
   "data-sources": "Datalähteet",
   "date-or-continues-placeholder": "pp.kk.vvvv tai jatkuu",
   "date-placeholder": "pp.kk.vvvv",
   "delete": "Poista",
   "edit": "Muokkaa",
-  "no-competences": "Ei osaamisia",
-  "count-competences": "{{count}} osaamista",
-  "proposed-competences": "Ehdotetut osaamiset",
-  "competences-of-your-choice": "Valitsemasi osaamiset",
   "education-history": {
     "add-new-degree": "Lisää uusi tutkinto",
     "add-new-education": "Lisää uusi koulutus",
@@ -44,8 +42,9 @@
     }
   },
   "error-boundary": {
-    "description": "Tapahtui odottamaton virhe. Tämä voi johtua verkkoyhteyden katkeamisesta tai palvelun virheestä. Yritä myöhemmin uudelleen.",
-    "title": "Virhe"
+    "title": "Tapahtui virhe",
+    "session-expired": "Istuntosi on vanhentunut. Sinun täytyy kirjautua palveluun uudelleen tai käyttää palvelua ilman kirjautumista.",
+    "unexpected": "Tapahtui odottamaton virhe. Tämä voi johtua verkkoyhteyden katkeamisesta tai palvelun virheestä. Yritä myöhemmin uudelleen."
   },
   "expand-less": "Näytä vähemmän",
   "expand-more": "Näytä lisää",
@@ -134,6 +133,7 @@
   },
   "login": "Kirjaudu sisään",
   "logout": "Kirjaudu ulos",
+  "match-service": "Kohtaantopalvelu",
   "menus": {
     "tool-navigation": {
       "competences": "Mitä minä osaan",
@@ -149,13 +149,14 @@
     "by-TOIMENKUVA": "Työpaikkojen mukaan"
   },
   "next": "Seuraava",
+  "no-competences": "Ei osaamisia",
   "no-match": {
     "description": "Hakemaasi sivua ei löytynyt.",
     "title": "Sivua ei löytynyt"
   },
   "opportunity-type": {
-    "work": "Työmahdollisuus",
-    "education": "Koulutusmahdollisuus"
+    "education": "Koulutusmahdollisuus",
+    "work": "Työmahdollisuus"
   },
   "preferences": {
     "confirm-delete-my-account": "Haluatko varmasti poistaa tilisi?",
@@ -175,14 +176,13 @@
     "something-else": "Jotain muuta",
     "work-history": "Työpaikkani"
   },
+  "proposed-competences": "Ehdotetut osaamiset",
   "remove-approval": "Hylkää hyväksyntä",
   "restrictions": "Rajoitteet",
+  "return-home": "Palaa etusivulle",
   "save": "Tallenna",
   "search": "Haku",
-  "session-expired": {
-    "title": "Istunto vanhentunut",
-    "description": "Istuntosi on vanhentunut. Sinun täytyy kirjautua palveluun uudelleen."
-  },
+  "select-language": "Valitse kieli",
   "skiplinks": {
     "main": "Siirry pääsisältöön"
   },
@@ -198,12 +198,6 @@
       "competences": "osaamiset",
       "index": "tyomahdollisuus",
       "overview": "yleiskuvaus"
-    },
-    "language": {
-      "change": "Kieli",
-      "en": "In English",
-      "fi": "Suomeksi",
-      "sv": "På sverige"
     },
     "no-internet-connection": "ei-internetyhteytta",
     "privacy-policy": "tietosuojaseloste",
@@ -241,9 +235,7 @@
   "started": "Alkoi",
   "terms-of-service": "Käyttöehdot",
   "tool": {
-    "update-job-opportunities-list": "Päivitä mahdollisuuslista",
     "competences": {
-      "opportunities-title": "Mahdollisuutesi",
       "adjust-data-emphasis": "Säädä syöttämäsi tietojen painotuksia - tulokset päivittyvät samanaikaisesti uusien painotusten mukaan.",
       "available-options-totals": "Syöttämilläsi tiedoilla sinulle löytyy {{professionsCount}} ammattia ja {{educationsCount}} koulutusmahdollisuutta.",
       "common-educational-background": "Yleisin koulutustausta",
@@ -253,6 +245,7 @@
       "idustry-name": "Toimialan nimi",
       "input-field-placeholder": "Taitosi",
       "maybe-has-restrictions": "Saattaa sisältää rajoitteita",
+      "opportunities-title": "Mahdollisuutesi",
       "outlook-value": "{{outlook}}/5",
       "page-description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi - kaikki tietosi ja kokemuksesi ovat tärkeitä.",
       "trend": "Kehitystrendi",
@@ -275,7 +268,8 @@
       "input-field-placeholder": "Kiinnostuksesi",
       "page-description": "Pohdi, mikä sinua innostaa ja mitä uutta haluaisit kokeilla tai oppia, olipa se sitten yhteydessä aiempaan koulutukseesi tai ei. Kirjaa ylös kaikki kiinnostuksen kohteesi, vaikka ne tuntuisivat epärealistisilta."
     },
-    "title": "Työkalu"
+    "title": "Työkalu",
+    "update-job-opportunities-list": "Päivitä mahdollisuuslista"
   },
   "types": {
     "competence": {

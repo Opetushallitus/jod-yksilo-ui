@@ -1,0 +1,1 @@
+export { useLocalizedRoutes } from './useLocalizedRoutes';
