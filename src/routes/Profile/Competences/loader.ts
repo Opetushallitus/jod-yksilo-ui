@@ -44,4 +44,4 @@ export default (async ({ request }) => {
     return { osaamiset, toimenkuvat, koulutukset, patevyydet } as CompetencesLoaderData;
   }
   return { osaamiset: [], toimenkuvat: [], koulutukset: [], patevyydet: [] } as CompetencesLoaderData;
-}) satisfies LoaderFunction;
+}) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

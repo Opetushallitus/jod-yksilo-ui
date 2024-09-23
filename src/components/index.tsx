@@ -1,4 +1,4 @@
-export { ErrorNote } from './ErrorNote/ErrorNote';
+export { ErrorNote } from './ErrorNote';
 export { ExperienceTable } from './ExperienceTable/ExperienceTable';
 export { type ExperienceTableRowData } from './ExperienceTable/ExperienceTableRow';
 export { LanguageButton } from './LanguageButton/LanguageButton';

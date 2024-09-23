@@ -1,8 +1,8 @@
-import useProfileRoutes from '@/routeDefinitions/profileRoutes';
+import { useAppRoutes } from '@/hooks/useAppRoutes';
 import { Outlet } from 'react-router-dom';
 
 const Profile = () => {
-  const { profileRoutes } = useProfileRoutes();
+  const { profileRoutes } = useAppRoutes();
   return <Outlet context={profileRoutes} />;
 };
 

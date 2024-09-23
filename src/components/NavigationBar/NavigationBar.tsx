@@ -39,7 +39,7 @@ export const NavigationBar = ({ logo, menuComponent, onLanguageClick, user }: Na
           {sm && (
             <>
               <li className="ml-5">
-                <LanguageButton onLanguageClick={onLanguageClick} />
+                <LanguageButton onClick={onLanguageClick} />
               </li>
               <li>
                 <UserButton user={user} />

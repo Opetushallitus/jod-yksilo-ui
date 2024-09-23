@@ -1,19 +1,15 @@
 import { components } from '@/api/schema';
-import { ErrorNote, LanguageMenu, NavigationBar } from '@/components';
+import { LanguageMenu, NavigationBar } from '@/components';
+import { ErrorNote, useErrorNote } from '@/components/ErrorNote';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
-import { LANG_SESSION_STORAGE_KEY } from '@/constants';
 import { ActionBarContext } from '@/hooks/useActionBar';
-import { useErrorNote } from '@/hooks/useErrorNote';
-import useLocalizedRoutes from '@/hooks/useLocalizedRoutes/useLocalizedRoutes';
-import { LangCode } from '@/i18n/config';
-import { authProvider } from '@/providers';
 import { Footer, PopupList, PopupListItem, SkipLink, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { MdClose, MdMenu } from 'react-icons/md';
-import { NavLink, Outlet, ScrollRestoration, useLoaderData, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router-dom';
 
 const NavigationBarItem = (to: string, text: string) => ({
   key: to,
@@ -26,9 +22,7 @@ const NavigationBarItem = (to: string, text: string) => ({
 
 const Root = () => {
   const { t, i18n } = useTranslation();
-  const { resolveLocalizedUrl } = useLocalizedRoutes();
   const { error, clearErrorNote } = useErrorNote();
-  const navigate = useNavigate();
 
   const { sm } = useMediaQueries();
   const [megaMenuOpen, setMegaMenuOpen] = React.useState(false);
@@ -46,16 +40,10 @@ const Root = () => {
     NavigationBarItem(`${basicInformation}/${t('slugs.privacy-policy')}`, t('privacy-policy')),
   ];
 
-  const loaderData = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
-  if (loaderData && (authProvider.loginState === 'unknown' || authProvider.loginState === 'loggedOut')) {
-    authProvider.login(loaderData);
-  }
+  const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
 
   const logout = () => {
-    authProvider.logout();
-
     logoutForm.current?.submit();
-    sessionStorage.removeItem(LANG_SESSION_STORAGE_KEY);
   };
 
   const profileIndexPath = t('slugs.profile.index');
@@ -77,7 +65,7 @@ const Root = () => {
 
   const getActiveClassNames = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'bg-secondary-1-50 w-full rounded-sm py-3 pl-5 -ml-5' : '';
-  const name = `${authProvider.data?.etunimi} ${authProvider.data?.sukunimi}`;
+  const name = `${data?.etunimi} ${data?.sukunimi}`;
 
   const toggleMenu = (menu: 'mega' | 'user' | 'lang') => () => {
     setMegaMenuOpen(false);
@@ -96,25 +84,19 @@ const Root = () => {
     }
   };
 
-  const changeLanguage = async (lang: LangCode) => {
-    setLangMenuOpen(false);
-    const newLocation = resolveLocalizedUrl(lang);
-    await i18n.changeLanguage(lang);
-    sessionStorage.setItem(LANG_SESSION_STORAGE_KEY, lang);
-    navigate(newLocation);
+  const changeLanguage = () => {
     setLangMenuOpen(false);
     setMegaMenuOpen(false);
-    location.assign(newLocation);
   };
 
   const getUserData: () => NavigationBarProps['user'] = () =>
-    authProvider.data?.csrf && {
+    data?.csrf && {
       name,
       component: ({ children, className }) => {
         return (
           <div className="relative">
             <form action="/logout" method="POST" hidden ref={logoutForm}>
-              <input type="hidden" name="_csrf" value={authProvider.data?.csrf.token} />
+              <input type="hidden" name="_csrf" value={data?.csrf.token} />
               <input type="hidden" name="lang" value={i18n.language} />
             </form>
             <button
@@ -151,7 +133,6 @@ const Root = () => {
 
   return (
     <>
-      <ScrollRestoration />
       <Helmet>
         <html lang={i18n.language} />
         <body className="bg-bg-gray" />
@@ -204,17 +185,18 @@ const Root = () => {
         {langMenuOpen && (
           <div className="relative lg:container mx-auto">
             <div className="absolute right-[50px] translate-y-7">
-              <LanguageMenu onLanguageClick={changeLanguage} />
+              <LanguageMenu onClick={changeLanguage} />
             </div>
           </div>
         )}
         {error && <ErrorNote error={error} onCloseClick={clearErrorNote} />}
         {megaMenuOpen && (
           <MegaMenu
-            changeLanguage={changeLanguage}
+            loggedIn={!!data}
             user={getUserData()}
             logout={logout}
             onClose={() => setMegaMenuOpen(false)}
+            onLanguageClick={changeLanguage}
           />
         )}
       </header>
@@ -222,6 +204,7 @@ const Root = () => {
         <Outlet />
       </ActionBarContext.Provider>
       <Footer ref={footerRef} items={footerItems} logos={logos} copyright={t('copyright')} variant="light" />
+      <ScrollRestoration />
     </>
   );
 };

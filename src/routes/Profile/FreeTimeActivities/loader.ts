@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { components } from '@/api/schema';
 import { LoaderFunction } from 'react-router-dom';
 
 export default (async ({ request }) => {
@@ -7,4 +8,4 @@ export default (async ({ request }) => {
     return data;
   }
   return [];
-}) satisfies LoaderFunction;
+}) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

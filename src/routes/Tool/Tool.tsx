@@ -1,7 +1,6 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OpportunityCard, OsaaminenValue, SimpleNavigationList, Title } from '@/components';
-import { ToolLoaderData } from '@/routes/Tool/loader';
 import { getLocalizedText } from '@/utils';
 import { Button, Modal, RadioButton, RadioButtonGroup, RoundButton, Slider, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -10,7 +9,9 @@ import { GrTarget } from 'react-icons/gr';
 import { MdBlock, MdOutlineInterests, MdOutlineSchool, MdTune } from 'react-icons/md';
 import { NavLink, Outlet, useLoaderData } from 'react-router-dom';
 import MatchedLink from './MatchedLink';
+import { ToolLoaderData } from './loader';
 import { ContextType } from './types';
+import { EhdotusData, EhdotusMetadata, ehdotusDataToRecord } from './utils';
 
 const MenuBookIcon = ({ size }: { size: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" height={size} viewBox="0 -960 960 960" width={size}>
@@ -70,33 +71,13 @@ const Filters = ({
   );
 };
 
-interface EhdotusData {
-  /** Format: uuid */
-  mahdollisuusId: string;
-  ehdotusMetadata?: EhdotusMetadata;
-}
-
-interface EhdotusMetadata {
-  /** Format: double */
-  pisteet?: number;
-  /** @enum {string} */
-  trendi?: 'NOUSEVA' | 'LASKEVA';
-  /** Format: int32 */
-  tyollisyysNakyma?: number;
-}
-
-type EhdotusRecord = Record<string, EhdotusMetadata>;
-
-const ehdotusDataToRecord = (array: EhdotusData[]): EhdotusRecord => {
-  return array.reduce((acc, item) => {
-    acc[item.mahdollisuusId] = item?.ehdotusMetadata ?? {};
-    return acc;
-  }, {} as EhdotusRecord);
-};
-
 const Tool = () => {
-  const { tyomahdollisuusEhdotukset: tyomahdollisuusEhdotuksetData, osaamiset: osaamisetData } =
-    useLoaderData() as ToolLoaderData;
+  const {
+    osaamiset: osaamisetData,
+    tyomahdollisuusEhdotukset: tyomahdollisuusEhdotuksetData,
+    tyomahdollisuudet: tyomahdollisuudetData,
+  } = useLoaderData() as ToolLoaderData;
+
   const { sm } = useMediaQueries();
   const { t, i18n } = useTranslation();
 
@@ -108,10 +89,11 @@ const Tool = () => {
   const [industry, setIndustry] = React.useState('x');
   const [order, setOrder] = React.useState('a');
 
-  const [tyomahdollisuudet, setTyomahdollisuudet] = React.useState<components['schemas']['TyomahdollisuusDto'][]>([]);
   const [tyomahdollisuusEhdotukset, setTyomahdollisuusEhdotukset] = React.useState<
     Record<string, EhdotusMetadata> | undefined
-  >();
+  >(tyomahdollisuusEhdotuksetData);
+  const [tyomahdollisuudet, setTyomahdollisuudet] =
+    React.useState<components['schemas']['TyomahdollisuusDto'][]>(tyomahdollisuudetData);
   const [professionsCount] = React.useState(534);
   const [educationsCount] = React.useState(1002);
 
@@ -127,55 +109,12 @@ const Tool = () => {
   ]);
   const [selectedInterests, setSelectedInterests] = React.useState<OsaaminenValue[]>([]);
 
-  React.useEffect(() => {
-    if (tyomahdollisuusEhdotuksetData) {
-      setTyomahdollisuusEhdotukset(ehdotusDataToRecord(tyomahdollisuusEhdotuksetData as EhdotusData[]));
-    }
-  }, [tyomahdollisuusEhdotuksetData]);
-
-  const abortController = React.useRef<AbortController>();
-
-  // Update tyomahdollisuudet after the tyomahdollisuusEhdotukset has changed
-  React.useEffect(() => {
-    const fetchOpportunities = async () => {
-      const ids = Object.keys(tyomahdollisuusEhdotukset ?? [])
-        .map((key) => {
-          const pisteet = tyomahdollisuusEhdotukset?.[key].pisteet ?? 0;
-          return { key, pisteet };
-        })
-        .sort((a, b) => b.pisteet - a.pisteet)
-        .map((id) => id.key);
-
-      const { data } = await client.GET('/api/tyomahdollisuudet', {
-        params: {
-          query: {
-            id: ids.slice(0, 30), // TODO: fetch by paging
-          },
-        },
-        signal: abortController.current?.signal,
-      });
-      // All that has been returned are sorted by the scores
-      const results = data?.sisalto ?? [];
-      const sortedResults = [...results].sort((a, b) =>
-        tyomahdollisuusEhdotukset
-          ? (tyomahdollisuusEhdotukset[b.id]?.pisteet ?? 0) - (tyomahdollisuusEhdotukset[a.id]?.pisteet ?? 0)
-          : 0,
-      );
-      setTyomahdollisuudet(sortedResults);
-    };
-
-    if (Object.keys(tyomahdollisuusEhdotukset ?? {}).length > 0) {
-      void fetchOpportunities();
-    }
-  }, [tyomahdollisuusEhdotukset]);
-
   const [ehdotuksetLoading, setEhdotuksetLoading] = React.useState(false);
-  const updateEhdotukset = async () => {
-    abortController.current?.abort('Abort previous request');
-    abortController.current = new AbortController();
 
+  const updateEhdotukset = async () => {
     setEhdotuksetLoading(true);
-    const { data } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
+
+    const { data: tyomahdollisuudetData } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
       body: {
         osaamiset: selectedCompetences.map((item) => item.id),
         kiinnostukset: selectedInterests.map((item) => item.id),
@@ -183,12 +122,34 @@ const Tool = () => {
         kiinnostusPainotus: interestMultiplier / 100,
         rajoitePainotus: restrictionsMultiplier / 100,
       },
-      signal: abortController.current?.signal,
     });
 
-    if (data) {
-      setTyomahdollisuusEhdotukset(ehdotusDataToRecord(data as EhdotusData[]));
-    }
+    const ehdotukset = ehdotusDataToRecord((tyomahdollisuudetData ?? []) as EhdotusData[]);
+    setTyomahdollisuusEhdotukset(ehdotukset);
+
+    const ids = Object.keys(ehdotukset ?? []);
+    ids
+      .map((key) => {
+        const pisteet = ehdotukset?.[key].pisteet ?? 0;
+        return { key, pisteet };
+      })
+      .sort((a, b) => b.pisteet - a.pisteet)
+      .forEach((id) => id.key);
+
+    const { data } = await client.GET('/api/tyomahdollisuudet', {
+      params: {
+        query: {
+          id: ids.slice(0, 30), // TODO: fetch by paging
+        },
+      },
+    });
+    // All that has been returned are sorted by the scores
+    const results = data?.sisalto ?? [];
+    const sortedResults = [...results].sort((a, b) =>
+      ehdotukset ? (ehdotukset[b.id]?.pisteet ?? 0) - (ehdotukset[a.id]?.pisteet ?? 0) : 0,
+    );
+    setTyomahdollisuudet(sortedResults);
+
     setEhdotuksetLoading(false);
   };
 
