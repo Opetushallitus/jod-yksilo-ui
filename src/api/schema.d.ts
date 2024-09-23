@@ -476,15 +476,9 @@ export interface components {
         asInt?: number;
       };
     };
-    Taidot: {
-      kuvaus: string;
-    };
     Ehdotus: {
       /** Format: uri */
-      id?: string;
-      nimi?: string;
-      /** Format: uri */
-      tyyppi?: string;
+      uri: string;
       /** Format: double */
       osuvuus?: number;
     };
@@ -1294,7 +1288,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['Taidot'];
+        'application/json': components['schemas']['LokalisoituTeksti'];
       };
     };
     responses: {
