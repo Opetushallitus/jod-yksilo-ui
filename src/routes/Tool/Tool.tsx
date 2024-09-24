@@ -1,6 +1,5 @@
-import { client } from '@/api/client';
-import { components } from '@/api/schema';
 import { OpportunityCard, OsaaminenValue, SimpleNavigationList, Title } from '@/components';
+import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import { Button, Modal, RadioButton, RadioButtonGroup, RoundButton, Slider, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -11,7 +10,6 @@ import { NavLink, Outlet, useLoaderData } from 'react-router-dom';
 import MatchedLink from './MatchedLink';
 import { ToolLoaderData } from './loader';
 import { ContextType } from './types';
-import { EhdotusData, EhdotusMetadata, ehdotusDataToRecord } from './utils';
 
 const MenuBookIcon = ({ size }: { size: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" height={size} viewBox="0 -960 960 960" width={size}>
@@ -73,93 +71,49 @@ const Filters = ({
 
 const Tool = () => {
   const { osaamiset: osaamisetData } = useLoaderData() as ToolLoaderData;
+  const { sm } = useMediaQueries();
+  const { t, i18n } = useTranslation();
+  const toolStore = useToolStore();
+
+  const [industry, setIndustry] = React.useState('x');
+  const [order, setOrder] = React.useState('a');
+  const [ehdotuksetLoading, setEhdotuksetLoading] = React.useState(false);
+
+  // placeholder states
+  const [showFilters, setShowFilters] = React.useState(false);
+  const [professionsCount] = React.useState(534);
+  const [educationsCount] = React.useState(1002);
 
   const initialized = React.useRef(false);
   React.useEffect(() => {
     if (!initialized.current) {
       initialized.current = true;
-      void updateEhdotukset();
+      if (toolStore.tyomahdollisuudet.length === 0) {
+        toolStore.setOsaamiset(
+          osaamisetData.map(
+            (osaaminen): OsaaminenValue => ({
+              id: osaaminen.osaaminen.uri,
+              nimi: getLocalizedText(osaaminen.osaaminen.nimi),
+              tyyppi: osaaminen.lahde.tyyppi,
+            }),
+          ),
+        );
+        void updateEhdotukset();
+      }
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const { sm } = useMediaQueries();
-  const { t, i18n } = useTranslation();
-
-  const [competenceInterestMultiplier, setCompetenceInterestMultiplier] = React.useState(50);
-  const [restrictionsMultiplier, setRestrictionsMultiplier] = React.useState(50);
-
-  const [showFilters, setShowFilters] = React.useState(false);
-  const [industry, setIndustry] = React.useState('x');
-  const [order, setOrder] = React.useState('a');
-
-  const [tyomahdollisuusEhdotukset, setTyomahdollisuusEhdotukset] = React.useState<
-    Record<string, EhdotusMetadata> | undefined
-  >();
-  const [tyomahdollisuudet, setTyomahdollisuudet] = React.useState<components['schemas']['TyomahdollisuusDto'][]>([]);
-  const [professionsCount] = React.useState(534);
-  const [educationsCount] = React.useState(1002);
-
-  const [selectedOpportunities, setSelectedOpportunities] = React.useState<string[]>([]);
-  const [selectedCompetences, setSelectedCompetences] = React.useState<OsaaminenValue[]>([
-    ...osaamisetData.map(
-      (osaaminen): OsaaminenValue => ({
-        id: osaaminen.osaaminen.uri,
-        nimi: getLocalizedText(osaaminen.osaaminen.nimi),
-        tyyppi: osaaminen.lahde.tyyppi,
-      }),
-    ),
-  ]);
-  const [selectedInterests, setSelectedInterests] = React.useState<OsaaminenValue[]>([]);
-
-  const [ehdotuksetLoading, setEhdotuksetLoading] = React.useState(false);
-
   const updateEhdotukset = async () => {
     setEhdotuksetLoading(true);
-
-    const { data: tyomahdollisuudetData } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
-      body: {
-        osaamiset: selectedCompetences.map((item) => item.id),
-        kiinnostukset: selectedInterests.map((item) => item.id),
-        osaamisPainotus: (100 - competenceInterestMultiplier) / 100,
-        kiinnostusPainotus: competenceInterestMultiplier / 100,
-        rajoitePainotus: restrictionsMultiplier / 100,
-      },
-    });
-
-    const ehdotukset = ehdotusDataToRecord((tyomahdollisuudetData ?? []) as EhdotusData[]);
-    setTyomahdollisuusEhdotukset(ehdotukset);
-
-    const ids = Object.keys(ehdotukset ?? []);
-    ids
-      .map((key) => {
-        const pisteet = ehdotukset?.[key].pisteet ?? 0;
-        return { key, pisteet };
-      })
-      .sort((a, b) => b.pisteet - a.pisteet)
-      .forEach((id) => id.key);
-
-    const { data } = await client.GET('/api/tyomahdollisuudet', {
-      params: {
-        query: {
-          id: ids.slice(0, 30), // TODO: fetch by paging
-        },
-      },
-    });
-    // All that has been returned are sorted by the scores
-    const results = data?.sisalto ?? [];
-    const sortedResults = [...results].sort((a, b) =>
-      ehdotukset ? (ehdotukset[b.id]?.pisteet ?? 0) - (ehdotukset[a.id]?.pisteet ?? 0) : 0,
-    );
-    setTyomahdollisuudet(sortedResults);
-
+    await toolStore.updateEhdotuksetAndTyomahdollisuudet();
     setEhdotuksetLoading(false);
   };
 
   const toggleOpportunity = (id: string) => {
-    if (selectedOpportunities.includes(id)) {
-      setSelectedOpportunities(selectedOpportunities.filter((item) => item !== id));
+    if (toolStore.mahdollisuudet.includes(id)) {
+      toolStore.setMahdollisuudet(toolStore.mahdollisuudet.filter((item) => item !== id));
     } else {
-      setSelectedOpportunities([...selectedOpportunities, id]);
+      toolStore.setMahdollisuudet([...toolStore.mahdollisuudet, id]);
     }
   };
 
@@ -241,8 +195,8 @@ const Tool = () => {
       <Outlet
         context={
           {
-            competences: [selectedCompetences, setSelectedCompetences],
-            interests: [selectedInterests, setSelectedInterests],
+            competences: [toolStore.osaamiset, toolStore.setOsaamiset],
+            interests: [toolStore.kiinnostukset, toolStore.setKiinnostukset],
           } satisfies ContextType
         }
       />
@@ -276,14 +230,13 @@ const Tool = () => {
           <Slider
             label={t('competences')}
             rightLabel={t('interests')}
-            onValueChange={(val) => setCompetenceInterestMultiplier(val)}
-            value={competenceInterestMultiplier}
+            onValueChange={(val) => toolStore.setOsaamisKiinnostusPainotus(val)}
+            value={toolStore.osaamisKiinnostusPainotus}
           />
-
           <Slider
             label="Rajoitukset"
-            onValueChange={(val) => setRestrictionsMultiplier(val)}
-            value={restrictionsMultiplier}
+            onValueChange={(val) => toolStore.setRajoitePainotus(val)}
+            value={toolStore.rajoitePainotus}
           />
         </div>
 
@@ -327,7 +280,7 @@ const Tool = () => {
             </>
           )}
           <div className="flex flex-col gap-5">
-            {tyomahdollisuudet.map((item) => {
+            {toolStore.tyomahdollisuudet.map((item) => {
               const tyomahdollisuus = item as Tyomahdollisuus;
               return (
                 <NavLink
@@ -336,14 +289,14 @@ const Tool = () => {
                 >
                   <OpportunityCard
                     toggleSelection={() => toggleOpportunity(tyomahdollisuus.id ?? '')}
-                    selected={selectedOpportunities.includes(tyomahdollisuus.id ?? '')}
+                    selected={toolStore.mahdollisuudet.includes(tyomahdollisuus.id ?? '')}
                     name={tyomahdollisuus.otsikko[i18n.language] ?? ''}
                     description={tyomahdollisuus.tiivistelma?.[i18n.language] ?? ''}
-                    matchValue={tyomahdollisuusEhdotukset?.[item.id].pisteet}
+                    matchValue={toolStore.tyomahdollisuusEhdotukset?.[item.id].pisteet}
                     matchLabel="Sopivuus"
                     type="work"
-                    trend={tyomahdollisuusEhdotukset?.[item.id].trendi}
-                    employmentOutlook={tyomahdollisuusEhdotukset?.[item.id].tyollisyysNakyma ?? 0}
+                    trend={toolStore.tyomahdollisuusEhdotukset?.[item.id].trendi}
+                    employmentOutlook={toolStore.tyomahdollisuusEhdotukset?.[item.id].tyollisyysNakyma ?? 0}
                     hasRestrictions
                     industryName="Lorem ipsum dolor"
                     mostCommonEducationBackground="Lorem ipsum dolor"

@@ -1,6 +1,6 @@
 import { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 
 export interface ContextType {
-  competences: [OsaaminenValue[], React.Dispatch<React.SetStateAction<OsaaminenValue[]>>];
-  interests: [OsaaminenValue[], React.Dispatch<React.SetStateAction<OsaaminenValue[]>>];
+  competences: [OsaaminenValue[], (state: OsaaminenValue[]) => void];
+  interests: [OsaaminenValue[], (state: OsaaminenValue[]) => void];
 }

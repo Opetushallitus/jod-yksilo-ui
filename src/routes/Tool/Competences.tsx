@@ -26,7 +26,7 @@ const Competences = () => {
 
   const [debouncedTaito, taito, setTaito] = useDebounceState('', 500);
   const {
-    competences: [selectedCompetences, setSelectedCompentences],
+    competences: [osaamiset, setOsaamiset],
   } = useOutletContext<ContextType>();
 
   return (
@@ -49,11 +49,7 @@ const Competences = () => {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTaito(event.target.value)}
             />
           </div>
-          <OsaamisSuosittelija
-            description={debouncedTaito}
-            onChange={setSelectedCompentences}
-            value={selectedCompetences}
-          />
+          <OsaamisSuosittelija description={debouncedTaito} onChange={setOsaamiset} value={osaamiset} />
         </div>
         <div className="order-2 col-span-1 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0">
           {sm ? (
