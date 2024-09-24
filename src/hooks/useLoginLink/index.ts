@@ -7,7 +7,7 @@ export const useLoginLink = () => {
 
   const params = new URLSearchParams();
   params.set('lang', i18n.language);
-  params.set('callbackUrl', pathname);
+  params.set('callback', pathname);
 
   return `/login?${params.toString()}`;
 };

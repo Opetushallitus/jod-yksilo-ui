@@ -72,11 +72,15 @@ const Filters = ({
 };
 
 const Tool = () => {
-  const {
-    osaamiset: osaamisetData,
-    tyomahdollisuusEhdotukset: tyomahdollisuusEhdotuksetData,
-    tyomahdollisuudet: tyomahdollisuudetData,
-  } = useLoaderData() as ToolLoaderData;
+  const { osaamiset: osaamisetData } = useLoaderData() as ToolLoaderData;
+
+  const initialized = React.useRef(false);
+  React.useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      void updateEhdotukset();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const { sm } = useMediaQueries();
   const { t, i18n } = useTranslation();
@@ -90,9 +94,8 @@ const Tool = () => {
 
   const [tyomahdollisuusEhdotukset, setTyomahdollisuusEhdotukset] = React.useState<
     Record<string, EhdotusMetadata> | undefined
-  >(tyomahdollisuusEhdotuksetData);
-  const [tyomahdollisuudet, setTyomahdollisuudet] =
-    React.useState<components['schemas']['TyomahdollisuusDto'][]>(tyomahdollisuudetData);
+  >();
+  const [tyomahdollisuudet, setTyomahdollisuudet] = React.useState<components['schemas']['TyomahdollisuusDto'][]>([]);
   const [professionsCount] = React.useState(534);
   const [educationsCount] = React.useState(1002);
 
