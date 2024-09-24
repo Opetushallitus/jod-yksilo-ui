@@ -4,6 +4,7 @@
   "accept": "Hyväksy",
   "accept-preferences": "Hyväksy asetukset",
   "accessibility-statement": "Saavutettavuusseloste",
+  "back": "Takaisin",
   "basic-information": "Perustiedot",
   "cancel": "Peruuta",
   "choose": "Valitse",
@@ -42,8 +43,8 @@
     }
   },
   "error-boundary": {
-    "title": "Tapahtui virhe",
     "session-expired": "Istuntosi on vanhentunut. Sinun täytyy kirjautua palveluun uudelleen tai käyttää palvelua ilman kirjautumista.",
+    "title": "Tapahtui virhe",
     "unexpected": "Tapahtui odottamaton virhe. Tämä voi johtua verkkoyhteyden katkeamisesta tai palvelun virheestä. Yritä myöhemmin uudelleen."
   },
   "expand-less": "Näytä vähemmän",

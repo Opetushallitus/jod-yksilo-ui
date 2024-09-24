@@ -25,7 +25,7 @@ const Interests = () => {
 
   const [debouncedKiinnostus, kiinnostus, setKiinnostus] = useDebounceState('', 500);
   const {
-    interests: [selectedInterests, setSelectedInterests],
+    interests: [kiinnostukset, setKiinnostukset],
   } = useOutletContext<ContextType>();
 
   return (
@@ -50,8 +50,8 @@ const Interests = () => {
           </div>
           <OsaamisSuosittelija
             description={debouncedKiinnostus}
-            onChange={setSelectedInterests}
-            value={selectedInterests}
+            onChange={setKiinnostukset}
+            value={kiinnostukset}
             sourceType="KIINNOSTUS"
           />
         </div>

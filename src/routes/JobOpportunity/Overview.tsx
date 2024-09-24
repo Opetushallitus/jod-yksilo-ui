@@ -7,12 +7,13 @@ import { Accordion, Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { MdArrowBack } from 'react-icons/md';
-import { useRouteLoaderData } from 'react-router-dom';
+import { useNavigate, useRouteLoaderData } from 'react-router-dom';
 import Tabs from './Tabs';
 import { LoaderData } from './loader';
 
 const Overview = () => {
   const { i18n, t } = useTranslation();
+  const navigate = useNavigate();
   const routeId = useRouteId('job-opportunity', i18n.language as LangCode);
   const jobOpportunity = (useRouteLoaderData(routeId) as LoaderData)?.tyomahdollisuus;
   const lang = i18n.language;
@@ -184,12 +185,10 @@ const Overview = () => {
           <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
             <Button
               variant="white"
-              label="Takaisin"
+              label={t('back')}
               icon={<MdArrowBack size={24} />}
               iconSide="left"
-              onClick={() => {
-                alert('Takaisin');
-              }}
+              onClick={() => navigate(-1)}
             />
             <Button
               variant="white"
