@@ -81,8 +81,7 @@ const Tool = () => {
   const { sm } = useMediaQueries();
   const { t, i18n } = useTranslation();
 
-  const [competencesMultiplier, setCompetencesMultiplier] = React.useState(50);
-  const [interestMultiplier, setInterestMultiplier] = React.useState(50);
+  const [competenceInterestMultiplier, setCompetenceInterestMultiplier] = React.useState(50);
   const [restrictionsMultiplier, setRestrictionsMultiplier] = React.useState(50);
 
   const [showFilters, setShowFilters] = React.useState(false);
@@ -118,8 +117,8 @@ const Tool = () => {
       body: {
         osaamiset: selectedCompetences.map((item) => item.id),
         kiinnostukset: selectedInterests.map((item) => item.id),
-        osaamisPainotus: competencesMultiplier / 100,
-        kiinnostusPainotus: interestMultiplier / 100,
+        osaamisPainotus: (100 - competenceInterestMultiplier) / 100,
+        kiinnostusPainotus: competenceInterestMultiplier / 100,
         rajoitePainotus: restrictionsMultiplier / 100,
       },
     });
@@ -272,15 +271,12 @@ const Tool = () => {
 
         <div className="col-span-1 mt-6 grid grid-cols-1 gap-7 sm:col-span-3 sm:mt-5 sm:grid-cols-3">
           <Slider
-            label="Osaamiset"
-            onValueChange={(val) => setCompetencesMultiplier(val)}
-            value={competencesMultiplier}
+            label={t('competences')}
+            rightLabel={t('interests')}
+            onValueChange={(val) => setCompetenceInterestMultiplier(val)}
+            value={competenceInterestMultiplier}
           />
-          <Slider
-            label="Kiinnostukset"
-            onValueChange={(val) => setInterestMultiplier(val)}
-            value={interestMultiplier}
-          />
+
           <Slider
             label="Rajoitukset"
             onValueChange={(val) => setRestrictionsMultiplier(val)}
