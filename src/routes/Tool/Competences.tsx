@@ -16,21 +16,21 @@ const HelpingToolsContent = () => {
       <span className="text-body-sm font-arial text-secondary-gray sm:text-body-xs">
         <div>{t('profile.help-text')}</div>
       </span>
-      <ul>
+      <ul className="flex flex-col gap-4">
         <li>
-          <div className="flex items-center space-x-2 mb-3">
+          <div className="flex gap-x-3">
             <MdOutlineSchool size={24} color="00818A" />
             <div>{t('profile.education-history')}</div>
           </div>
         </li>
         <li>
-          <div className="flex items-center space-x-2 mb-3">
+          <div className="flex gap-x-3">
             <TbBriefcase2 size={24} color="AD4298" />
             <div>{t('profile.work-history')}</div>
           </div>
         </li>
         <li>
-          <div className="flex items-center space-x-2 mb-3">
+          <div className="flex gap-x-3">
             <MdOutlineSailing size={24} color="006DB3" />
             <div>{t('profile.free-time-activities')}</div>
           </div>
