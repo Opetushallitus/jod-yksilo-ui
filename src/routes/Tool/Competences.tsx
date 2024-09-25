@@ -3,22 +3,42 @@ import { useDebounceState } from '@/hooks/useDebounceState';
 import { Accordion, InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { MdOutlineSailing, MdOutlineSchool } from 'react-icons/md';
+import { TbBriefcase2 } from 'react-icons/tb';
 import { useOutletContext } from 'react-router-dom';
 import { ContextType } from './types';
 
-const HelpingToolsContent = () => (
-  <>
-    <span className="text-body-sm font-arial text-secondary-gray sm:text-body-xs">
-      Rakenna koulutus- ja työhistoriasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle
-      sopivia osaamisia.
-    </span>
-    <ul>
-      <li>Koulutukseni</li>
-      <li>Työpaikkani</li>
-      <li>Vapaa-ajan toimintoni</li>
-    </ul>
-  </>
-);
+const HelpingToolsContent = () => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <span className="text-body-sm font-arial text-secondary-gray sm:text-body-xs">
+        <div>{t('profile.help-text')}</div>
+      </span>
+      <ul>
+        <li>
+          <div className="flex items-center space-x-2 mb-3">
+            <MdOutlineSchool size={24} color="00818A" />
+            <div>{t('profile.education-history')}</div>
+          </div>
+        </li>
+        <li>
+          <div className="flex items-center space-x-2 mb-3">
+            <TbBriefcase2 size={24} color="AD4298" />
+            <div>{t('profile.work-history')}</div>
+          </div>
+        </li>
+        <li>
+          <div className="flex items-center space-x-2 mb-3">
+            <MdOutlineSailing size={24} color="006DB3" />
+            <div>{t('profile.free-time-activities')}</div>
+          </div>
+        </li>
+      </ul>
+    </>
+  );
+};
 
 const Competences = () => {
   const { t } = useTranslation();
