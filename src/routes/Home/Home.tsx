@@ -1,10 +1,45 @@
+import { components } from '@/api/schema';
 import { Title } from '@/components';
 import { HeroCard } from '@jod/design-system';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useRouteLoaderData } from 'react-router-dom';
 
 const Home = () => {
-  const { t, i18n } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+  const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
+  const preferencesLink = React.useMemo(() => {
+    if (data) {
+      return {
+        to: `${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`,
+        component: Link,
+      };
+    } else {
+      const params = new URLSearchParams();
+      params.set('lang', language);
+      params.set('callback', `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`);
+
+      return {
+        to: `/login?${params.toString()}`,
+        component: ({
+          to,
+          className,
+          children,
+        }: {
+          to: object | string;
+          className?: string;
+          children: React.ReactNode;
+        }) => (
+          <a href={to as string} className={className}>
+            {children}
+          </a>
+        ),
+      };
+    }
+  }, [data, language, t]);
 
   return (
     <main role="main" className="mx-auto w-full max-w-screen-lg" id="jod-main">
@@ -16,15 +51,29 @@ const Home = () => {
           </div>
           <div className="grid grid-flow-row auto-rows-max grid-cols-1 gap-3 sm:gap-7 md:grid-cols-3">
             <HeroCard
-              to={`/${i18n.language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+              to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
               linkComponent={Link}
               size="sm"
               textColor="#000"
               backgroundColor="#00A8B3F2"
               title={t('home.card-2-title')}
             />
-            <HeroCard size="sm" textColor="#000" backgroundColor="#EE7C45F2" title={t('home.card-3-title')} />
-            <HeroCard size="sm" textColor="#000" backgroundColor="#CD4EB3F2" title={t('home.card-4-title')} />
+            <HeroCard
+              to={`${t('slugs.user-guide.index')}/${t('slugs.user-guide.what-is-the-service')}`}
+              linkComponent={Link}
+              size="sm"
+              textColor="#000"
+              backgroundColor="#EE7C45F2"
+              title={t('home.card-3-title')}
+            />
+            <HeroCard
+              to={preferencesLink.to}
+              linkComponent={preferencesLink.component}
+              size="sm"
+              textColor="#000"
+              backgroundColor="#CD4EB3F2"
+              title={t('home.card-4-title')}
+            />
           </div>
         </div>
       </div>
