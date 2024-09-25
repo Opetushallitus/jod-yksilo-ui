@@ -226,7 +226,7 @@ const Tool = () => {
           </span>
         </div>
 
-        <div className="col-span-1 mt-6 grid grid-cols-1 gap-7 sm:col-span-3 sm:mt-5 sm:grid-cols-3">
+        <div className="col-span-1 mt-6 gap-7 sm:col-span-3 sm:mt-5 flex flex-col sm:flex-row flex-wrap">
           <Slider
             label={t('competences')}
             rightLabel={t('interests')}
