@@ -35,7 +35,10 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, user, logout }: M
   });
 
   const profileIndexPath = t('slugs.profile.index');
-  const profileMenuRoutes = profileRoutes.map(prefixRoutePath(profileIndexPath));
+  const profileMenuRoutes = profileRoutes.map((route) => ({
+    ...prefixRoutePath(profileIndexPath)(route),
+    authRequired: true,
+  }));
   const toolMenuRoutes = toolRoutes.map(prefixRoutePath(t('slugs.tool.index')));
   const userGuideMenuRoutes = userGuideRoutes.map(prefixRoutePath(t('slugs.user-guide.index')));
 

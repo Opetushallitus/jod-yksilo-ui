@@ -1,32 +1,69 @@
+import { components } from '@/api/schema';
+import { cx } from '@jod/design-system';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLoaderData } from 'react-router-dom';
 
 export interface RoutesNavigationListProps {
   routes: {
     path: string;
     name: string;
     active?: boolean;
+    authRequired?: boolean;
   }[];
   onClick?: () => void;
 }
 
+interface LoginLinkProps {
+  children: React.ReactNode;
+  path: string;
+  lang: string;
+}
+
+const LoginLink = ({ children, path, lang }: LoginLinkProps) => {
+  const params = new URLSearchParams();
+  params.set('lang', lang);
+  params.set('callback', `/${lang}/${path}`);
+
+  const href = `/login?${params.toString()}`;
+  return (
+    <a
+      href={href}
+      lang={lang}
+      className={'hyphens-auto text-button-md text-black hover:underline w-full pl-5 block py-3'}
+    >
+      {children}
+    </a>
+  );
+};
+
 export const RoutesNavigationList = ({ routes, onClick }: RoutesNavigationListProps) => {
   const { i18n } = useTranslation();
+  const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
+
   return (
     <ul className="flex flex-col gap-y-2 py-4">
       {routes.map((route) => {
         return (
           <li key={route.path} className="flex min-h-7 items-center w-full">
-            <NavLink
-              to={route.path}
-              lang={i18n.language}
-              className={({ isActive }) =>
-                `${isActive ? 'bg-secondary-1-50 rounded-md' : ''} hyphens-auto text-button-md text-black hover:underline w-full pl-5 block py-3`
-              }
-              onClick={onClick}
-            >
-              {route.name}
-            </NavLink>
+            {route.authRequired && !data ? (
+              <LoginLink path={route.path} lang={i18n.language}>
+                {route.name}
+              </LoginLink>
+            ) : (
+              <NavLink
+                to={route.path}
+                lang={i18n.language}
+                className={({ isActive }) =>
+                  cx('hyphens-auto text-button-md text-black hover:underline w-full pl-5 block py-3', {
+                    'bg-secondary-1-50 rounded-md': isActive,
+                  })
+                }
+                onClick={onClick}
+              >
+                {route.name}
+              </NavLink>
+            )}
           </li>
         );
       })}
