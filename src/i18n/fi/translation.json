@@ -175,7 +175,8 @@
     "index": "Omat sivuni",
     "preferences": "Asetukseni",
     "something-else": "Jotain muuta",
-    "work-history": "Työpaikkani"
+    "work-history": "Työpaikkani",
+    "help-text": "Rakenna koulutus- ja työhistoriasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle sopivia osaamisia."
   },
   "proposed-competences": "Ehdotetut osaamiset",
   "remove-approval": "Hylkää hyväksyntä",
