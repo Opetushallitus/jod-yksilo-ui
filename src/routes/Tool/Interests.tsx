@@ -3,21 +3,35 @@ import { useDebounceState } from '@/hooks/useDebounceState';
 import { Accordion, InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { MdOutlineInterests, MdOutlineQuiz } from 'react-icons/md';
 import { useOutletContext } from 'react-router-dom';
 import { ContextType } from './types';
 
-const HelpingToolsContent = () => (
-  <>
-    <span className="text-body-sm font-arial text-secondary-gray sm:text-body-xs">
-      Hahmota kiinnostuksen kohteitasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle sopivia
-      kiinnostuksen kohteita.
-    </span>
-    <ul>
-      <li>RIASEC-testi</li>
-      <li>Intressibarometri</li>
-    </ul>
-  </>
-);
+const HelpingToolsContent = () => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <span className="text-body-sm font-arial text-secondary-gray sm:text-body-xs">
+        <div>{t('tool.interests.help-text')}</div>
+      </span>
+      <ul className="flex flex-col gap-4">
+        <li>
+          <div className="flex gap-x-3">
+            <MdOutlineQuiz size={24} color="#006DB3" />
+            <div>{t('tool.interests.riasec-test')}</div>
+          </div>
+        </li>
+        <li>
+          <div className="flex gap-x-3">
+            <MdOutlineInterests size={24} color="#AD4298" />
+            <div>{t('tool.interests.interest-barometer')}</div>
+          </div>
+        </li>
+      </ul>
+    </>
+  );
+};
 
 const Interests = () => {
   const { t } = useTranslation();
