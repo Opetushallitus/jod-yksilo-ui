@@ -33,7 +33,9 @@ export const getEducationHistoryTableRows = (data: Koulutuskokonaisuus[]): Exper
       alkuPvm: new Date(alkuPvm),
       loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
       subrows: [...koulutukset].sort(sortByProperty('alkuPvm')).map(mapKoulutusToRow),
-      osaamisetCount: koulutukset.reduce((acc, cur) => acc + (cur.osaamiset.length ?? 0), 0),
+      osaamisetCount: [
+        ...new Set(koulutukset.map((koulutus) => koulutus.osaamiset.map((osaaminen) => osaaminen)).flat()),
+      ].length,
     };
 
     rows.push(rowData);

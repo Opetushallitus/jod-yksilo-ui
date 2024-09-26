@@ -33,7 +33,9 @@ export const getWorkHistoryTableRows = (data: Tyopaikka[]): ExperienceTableRowDa
       alkuPvm: new Date(alkuPvm),
       loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
       subrows: [...toimenkuvat].sort(sortByProperty('alkuPvm')).map(mapToimenkuvaToRow),
-      osaamisetCount: toimenkuvat.reduce((acc, cur) => acc + (cur.osaamiset.length ?? 0), 0),
+      osaamisetCount: [
+        ...new Set(toimenkuvat.map((toimenkuva) => toimenkuva.osaamiset.map((osaaminen) => osaaminen)).flat()),
+      ].length,
     };
 
     rows.push(rowData);
