@@ -7,18 +7,18 @@ const loader = (async ({ request, params }) => {
     throw new Response('Bad request', { status: 400 });
   }
 
-  const jobOpportunity = await client.GET('/api/tyomahdollisuudet/{id}', {
+  const { data } = await client.GET('/api/tyomahdollisuudet/{id}', {
     signal: request.signal,
     params: { path: { id: params.id } },
   });
 
   const results = await osaamiset.combine(
-    jobOpportunity.data?.jakaumat?.osaaminen?.arvot,
+    data?.jakaumat?.osaaminen?.arvot,
     (value) => value.arvo,
     (_, osaaminen) => osaaminen,
     request.signal,
   );
-  return { tyomahdollisuus: jobOpportunity.data, osaamiset: results };
+  return { tyomahdollisuus: data, osaamiset: results };
 }) satisfies LoaderFunction;
 
 export type LoaderData = Awaited<ReturnType<typeof loader>>;

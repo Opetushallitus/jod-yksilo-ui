@@ -20,7 +20,7 @@ import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
 import { getFreeTimeActivitiesTableRows, type VapaaAjanToiminto } from './utils';
 
 const FreeTimeActivities = () => {
-  const routes: RoutesNavigationListProps['routes'] = useOutletContext();
+  const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const vapaaAjanToiminnot = useLoaderData() as VapaaAjanToiminto[];
   const { t } = useTranslation();
   const title = t('profile.free-time-activities');

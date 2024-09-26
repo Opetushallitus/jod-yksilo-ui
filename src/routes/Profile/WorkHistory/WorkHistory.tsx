@@ -20,7 +20,7 @@ import { WorkHistoryWizard } from './WorkHistoryWizard';
 import { Tyopaikka, getWorkHistoryTableRows } from './utils';
 
 const WorkHistory = () => {
-  const routes: RoutesNavigationListProps['routes'] = useOutletContext();
+  const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const tyopaikat = useLoaderData() as Tyopaikka[];
   const { t } = useTranslation();
   const title = t('profile.work-history');

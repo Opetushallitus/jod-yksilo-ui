@@ -14,7 +14,7 @@ import { useOutletContext } from 'react-router-dom';
 import { mapNavigationRoutes } from './utils';
 
 const Favorites = () => {
-  const routes: RoutesNavigationListProps['routes'] = useOutletContext();
+  const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const { t } = useTranslation();
   const title = t('profile.favorites');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);

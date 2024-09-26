@@ -20,7 +20,7 @@ import { mapNavigationRoutes } from '../utils';
 import { Koulutuskokonaisuus, getEducationHistoryTableRows } from './utils';
 
 const EducationHistory = () => {
-  const routes: RoutesNavigationListProps['routes'] = useOutletContext();
+  const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const koulutuskokonaisuudet = useLoaderData() as Koulutuskokonaisuus[];
   const { t } = useTranslation();
   const title = t('profile.education-history');

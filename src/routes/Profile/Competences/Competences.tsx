@@ -30,7 +30,7 @@ import { mapNavigationRoutes } from '../utils';
 import { GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME, type FiltersType } from './constants';
 
 const Competences = () => {
-  const routes: RoutesNavigationListProps['routes'] = useOutletContext();
+  const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const { toimenkuvat, koulutukset, patevyydet, osaamiset: osaamisetData } = useLoaderData() as CompetencesLoaderData;
   const [initialized, setInitialized] = React.useState(false);
   const [osaamiset, setOsaamiset] = React.useState(osaamisetData);
