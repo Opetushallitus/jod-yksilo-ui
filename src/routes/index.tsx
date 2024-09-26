@@ -8,14 +8,15 @@ import {
 import { competencesLoader, Competences as ProfileCompetences } from '@/routes/Profile/Competences';
 import { loader as educationHistoryLoader } from '@/routes/Profile/EducationHistory';
 import { loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
+import { interestsLoader, Interests as ProfileInterests } from '@/routes/Profile/Interests';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import {
   Goals,
   Instructions,
-  Interests,
   Restrictions,
   Tool,
   Competences as ToolCompetences,
+  Interests as ToolInterests,
   toolLoader,
 } from '@/routes/Tool';
 import { redirect, RouteObject } from 'react-router-dom';
@@ -70,6 +71,12 @@ const profileRoutes = supportedLanguageCodes.map(
           path: i18n.t('slugs.profile.competences', { lng }),
           loader: withYksiloContext(competencesLoader),
           element: <ProfileCompetences />,
+        },
+        {
+          id: `{slugs.profile.interests}|${lng}`,
+          path: i18n.t('slugs.profile.interests', { lng }),
+          loader: withYksiloContext(interestsLoader),
+          element: <ProfileInterests />,
         },
         {
           id: `{slugs.profile.work-history}|${lng}`,
@@ -128,7 +135,7 @@ const toolRoutes = supportedLanguageCodes.map(
         {
           id: `{slugs.tool.interests}|${lng}`,
           path: i18n.t('slugs.tool.interests', { lng }),
-          element: <Interests />,
+          element: <ToolInterests />,
         },
         {
           id: `{slugs.tool.restrictions}|${lng}`,

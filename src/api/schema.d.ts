@@ -118,6 +118,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/profiili/kiinnostukset/osaamiset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['kiinnostusGetOsaamiset'];
+    put: operations['kiinnostusUpdateOsaamiset'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/vapaa-ajan-toiminnot': {
     parameters: {
       query?: never;
@@ -299,6 +315,22 @@ export interface paths {
     trace?: never;
   };
   '/api/profiili/yksilo': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['yksiloGet'];
+    put?: never;
+    post?: never;
+    delete: operations['yksiloDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/yksilo': {
     parameters: {
       query?: never;
       header?: never;
@@ -979,6 +1011,48 @@ export interface operations {
       };
     };
   };
+  kiinnostusGetOsaamiset: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': string[];
+        };
+      };
+    };
+  };
+  kiinnostusUpdateOsaamiset: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': string[];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   toimintoFindAll: {
     parameters: {
       query?: never;
@@ -1346,6 +1420,44 @@ export interface operations {
         content: {
           'application/json': components['schemas']['TyomahdollisuusFullDto'];
         };
+      };
+    };
+  };
+  yksiloGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['YksiloCsrfDto'];
+        };
+      };
+    };
+  };
+  yksiloDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
