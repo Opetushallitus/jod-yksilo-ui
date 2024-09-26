@@ -172,11 +172,11 @@
     "education-history": "Koulutukseni",
     "favorites": "Suosikkini",
     "free-time-activities": "Vapaa-ajan toimintoni",
+    "help-text": "Rakenna koulutus- ja työhistoriasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle sopivia osaamisia.",
     "index": "Omat sivuni",
     "preferences": "Asetukseni",
     "something-else": "Jotain muuta",
-    "work-history": "Työpaikkani",
-    "help-text": "Rakenna koulutus- ja työhistoriasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle sopivia osaamisia."
+    "work-history": "Työpaikkani"
   },
   "proposed-competences": "Ehdotetut osaamiset",
   "remove-approval": "Hylkää hyväksyntä",
@@ -267,8 +267,11 @@
     "interests": {
       "field-description": "Kirjaa kiinnostuksesi tekstikenttään. Valitse ehdotuksista klikkaamalla ‘+‘-merkkiä ehdotuksen vieressä. Poista aihe klikkaamalla rastia sen vieressä.",
       "heading-1": "Mistä minä olen kiinnostunut",
+      "help-text": "Hahmota kiinnostuksen kohteitasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle sopivia kiinnostuksen kohteita.",
       "input-field-placeholder": "Kiinnostuksesi",
-      "page-description": "Pohdi, mikä sinua innostaa ja mitä uutta haluaisit kokeilla tai oppia, olipa se sitten yhteydessä aiempaan koulutukseesi tai ei. Kirjaa ylös kaikki kiinnostuksen kohteesi, vaikka ne tuntuisivat epärealistisilta."
+      "interest-barometer": "Intressibarometri",
+      "page-description": "Pohdi, mikä sinua innostaa ja mitä uutta haluaisit kokeilla tai oppia, olipa se sitten yhteydessä aiempaan koulutukseesi tai ei. Kirjaa ylös kaikki kiinnostuksen kohteesi, vaikka ne tuntuisivat epärealistisilta.",
+      "riasec-test": "RIASEC-testi"
     },
     "title": "Työkalu",
     "update-job-opportunities-list": "Päivitä mahdollisuuslista"
