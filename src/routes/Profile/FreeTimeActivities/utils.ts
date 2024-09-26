@@ -33,7 +33,9 @@ export const getFreeTimeActivitiesTableRows = (data: VapaaAjanToiminto[]): Exper
       alkuPvm: new Date(alkuPvm),
       loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
       subrows: [...patevyydet].sort(sortByProperty('alkuPvm')).map(mapPatevyysToRow),
-      osaamisetCount: patevyydet.reduce((acc, cur) => acc + (cur.osaamiset.length ?? 0), 0),
+      osaamisetCount: [
+        ...new Set(patevyydet.map((patevyys) => patevyys.osaamiset.map((osaaminen) => osaaminen)).flat()),
+      ].length,
     };
     rows.push(rowData);
 
