@@ -10,10 +10,12 @@ const Tabs = () => {
     {
       name: t('job-opportunity.overview.route'),
       path: t('slugs.job-opportunity.overview'),
+      replace: true,
     },
     {
       name: t('job-opportunity.competences.route'),
       path: t('slugs.job-opportunity.competences'),
+      replace: true,
     },
   ].map((route) => ({
     ...route,
@@ -27,6 +29,7 @@ const Tabs = () => {
           {route.active && <div className="mx-3 h-5 w-5 flex-none rounded-full bg-accent" aria-hidden />}
           <NavLink
             to={`../${route.path}`}
+            replace={route.replace}
             className={`${!route.active ? 'ml-7' : ''} hyphens-auto text-button-md text-black hover:underline`.trim()}
           >
             {route.name}

@@ -10,6 +10,7 @@ export interface RoutesNavigationListProps {
     name: string;
     active?: boolean;
     authRequired?: boolean;
+    replace?: boolean;
   }[];
   onClick?: () => void;
 }
@@ -53,6 +54,7 @@ export const RoutesNavigationList = ({ routes, onClick }: RoutesNavigationListPr
             ) : (
               <NavLink
                 to={route.path}
+                replace={route.replace}
                 lang={i18n.language}
                 className={({ isActive }) =>
                   cx('hyphens-auto text-button-md text-black hover:underline w-full pl-5 block py-3', {

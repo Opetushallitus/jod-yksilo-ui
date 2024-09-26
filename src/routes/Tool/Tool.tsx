@@ -121,21 +121,25 @@ const Tool = () => {
   const linksOnLeft = [
     {
       to: `/${i18n.language}/${toolIndexSlug}/${t('slugs.tool.goals')}`,
+      replace: true,
       text: t('goals'),
       icon: <GrTarget size={32} />,
     },
     {
       to: `/${i18n.language}/${toolIndexSlug}/${t('slugs.tool.competences')}`,
+      replace: true,
       text: t('competences'),
       icon: <MdOutlineSchool size={32} />,
     },
     {
       to: `/${i18n.language}/${toolIndexSlug}/${t('slugs.tool.interests')}`,
+      replace: true,
       text: t('interests'),
       icon: <MdOutlineInterests size={32} />,
     },
     {
       to: `/${i18n.language}/${toolIndexSlug}/${t('slugs.tool.restrictions')}`,
+      replace: true,
       text: t('restrictions'),
       icon: <MdBlock size={32} />,
     },
@@ -143,6 +147,7 @@ const Tool = () => {
   const linkOnRight = [
     {
       to: `/${i18n.language}/${toolIndexSlug}/${t('slugs.tool.instructions')}`,
+      replace: true,
       text: t('instructions'),
       icon: <MenuBookIcon size={32} />,
     },

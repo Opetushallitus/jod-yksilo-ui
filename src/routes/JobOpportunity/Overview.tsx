@@ -1,58 +1,62 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList, Title } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
-import { useRouteId } from '@/hooks/useRouteId/useRouteId';
-import { type LangCode } from '@/i18n/config';
 import { Accordion, Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { MdArrowBack } from 'react-icons/md';
-import { useNavigate, useRouteLoaderData } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import Tabs from './Tabs';
 import { LoaderData } from './loader';
 
 const Overview = () => {
   const { i18n, t } = useTranslation();
   const navigate = useNavigate();
-  const routeId = useRouteId('job-opportunity', i18n.language as LangCode);
-  const jobOpportunity = (useRouteLoaderData(routeId) as LoaderData)?.tyomahdollisuus;
+  const { tyomahdollisuus } = useOutletContext<LoaderData>();
   const lang = i18n.language;
-  const title = jobOpportunity?.otsikko[lang];
+  const title = tyomahdollisuus?.otsikko[lang];
   const routes: RoutesNavigationListProps['routes'] = [
     {
       active: false,
       name: t('job-opportunity.description'),
       path: `#${t('job-opportunity.description')}`,
+      replace: true,
     },
     {
       active: false,
       name: t('job-opportunity.most-common-job-tasks.title'),
       path: `#${t('job-opportunity.most-common-job-tasks.title')}`,
+      replace: true,
     },
     {
       active: false,
       name: t('job-opportunity.key-figures.title'),
       path: `#${t('job-opportunity.key-figures.title')}`,
+      replace: true,
     },
     {
       active: false,
       name: t('job-opportunity.labour-market-picture.title'),
       path: `#${t('job-opportunity.labour-market-picture.title')}`,
+      replace: true,
     },
     {
       active: false,
       name: t('job-opportunity.salary-trends.title'),
       path: `#${t('job-opportunity.salary-trends.title')}`,
+      replace: true,
     },
     {
       active: false,
       name: t('job-opportunity.employment-trends.title'),
       path: `#${t('job-opportunity.employment-trends.title')}`,
+      replace: true,
     },
     {
       active: false,
       name: t('job-opportunity.related-jobs.title'),
       path: `#${t('job-opportunity.related-jobs.title')}`,
+      replace: true,
     },
   ];
   const actionBar = useActionBar();
@@ -80,7 +84,7 @@ const Overview = () => {
             expandLessText={t('expand-less')}
             lang={i18n.language}
           >
-            <p className="text-body-sm font-arial mt-4">{jobOpportunity?.kuvaus?.[lang]}</p>
+            <p className="text-body-sm font-arial mt-4">{tyomahdollisuus?.kuvaus?.[lang]}</p>
           </Accordion>
         </div>
         <div>
@@ -98,7 +102,7 @@ const Overview = () => {
               {t('job-opportunity.most-common-job-tasks.description')}
             </p>
             <ol className="list-decimal ml-7 font-bold text-black leading-7">
-              {jobOpportunity?.jakaumat?.ammatti?.arvot.map((task) => <li key={task.arvo}>{task.arvo}</li>)}
+              {tyomahdollisuus?.jakaumat?.ammatti?.arvot.map((task) => <li key={task.arvo}>{task.arvo}</li>)}
             </ol>
           </Accordion>
         </div>

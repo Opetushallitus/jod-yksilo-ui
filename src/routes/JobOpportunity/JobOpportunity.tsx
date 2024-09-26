@@ -1,7 +1,8 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLoaderData } from 'react-router-dom';
 
 const JobOpportunity = () => {
-  return <Outlet />;
+  const loaderData = useLoaderData();
+  return <Outlet context={loaderData} />;
 };
 
 export default JobOpportunity;

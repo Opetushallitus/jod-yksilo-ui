@@ -1,45 +1,46 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList, Title } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
-import { useRouteId } from '@/hooks/useRouteId/useRouteId';
-import { type LangCode } from '@/i18n/config';
 import { Accordion, Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { MdArrowBack } from 'react-icons/md';
-import { useNavigate, useRouteLoaderData } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import Tabs from './Tabs';
 import { LoaderData } from './loader';
 
 const Competences = () => {
   const { i18n, t } = useTranslation();
   const navigate = useNavigate();
-  const routeId = useRouteId('job-opportunity', i18n.language as LangCode);
-  const data = useRouteLoaderData(routeId) as LoaderData;
+  const { tyomahdollisuus, osaamiset } = useOutletContext<LoaderData>();
   const lang = i18n.language;
-  const title = data?.tyomahdollisuus?.otsikko[lang] ?? '';
-  const competences = data?.osaamiset ?? [];
+  const title = tyomahdollisuus?.otsikko[lang] ?? '';
+  const competences = osaamiset ?? [];
 
   const routes: RoutesNavigationListProps['routes'] = [
     {
       active: false,
       name: t('job-opportunity.specific-professional-competences.title'),
       path: `#${t('job-opportunity.specific-professional-competences.title')}`,
+      replace: true,
     },
     {
       active: false,
       name: t('job-opportunity.general-working-life-skills.title'),
       path: `#${t('job-opportunity.general-working-life-skills.title')}`,
+      replace: true,
     },
     {
       active: false,
       name: t('job-opportunity.digital-skills-for-citizens.title'),
       path: `#${t('job-opportunity.digital-skills-for-citizens.title')}`,
+      replace: true,
     },
     {
       active: false,
       name: t('job-opportunity.personal-characteristics.title'),
       path: `#${t('job-opportunity.personal-characteristics.title')}`,
+      replace: true,
     },
   ];
   const actionBar = useActionBar();
