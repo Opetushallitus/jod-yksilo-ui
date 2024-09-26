@@ -17,6 +17,10 @@ export const useAppRoutes = () => {
       path: t('slugs.profile.competences'),
     },
     {
+      name: t('profile.interests.title'),
+      path: t('slugs.profile.interests'),
+    },
+    {
       name: t('profile.work-history'),
       path: t('slugs.profile.work-history'),
     },
