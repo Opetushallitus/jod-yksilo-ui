@@ -162,15 +162,15 @@ const Tool = () => {
 
   const Desktop = () => {
     return (
-      <div className="flex justify-between">
-        <ul className="m-0 space-x-[16px] p-0">
+      <div className="-mx-5 flex justify-between">
+        <ul className="p-0">
           {linksOnLeft.map((link) => (
             <li className="inline-block" key={link.text}>
               <MatchedLink link={link} />
             </li>
           ))}
         </ul>
-        <ul className="m-0 space-x-[25px] p-0">
+        <ul className="p-0">
           {linkOnRight.map((link) => (
             <li className="inline-block" key={link.text}>
               <MatchedLink link={link} />
