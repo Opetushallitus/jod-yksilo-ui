@@ -55,9 +55,9 @@ const Competences = () => {
         <div className="order-1 col-span-1 sm:col-span-2">
           <h1 className="mb-5 mt-7 text-heading-1 text-black">{t('tool.competences.heading-1')}</h1>
 
-          <div className="pb-7">
-            <p className="mb-6 text-body-md font-arial text-black">{t('tool.competences.page-description')}</p>
-            <p className="text-body-md font-arial text-black">{t('tool.competences.field-description')}</p>
+          <div className="flex flex-col pb-7 gap-6 text-body-md text-black">
+            <p>{t('tool.competences.page-description')}</p>
+            <p>{t('tool.competences.field-description')}</p>
           </div>
         </div>
 
@@ -65,6 +65,7 @@ const Competences = () => {
           <div className="mb-5">
             <InputField
               label={t('tool.competences.input-field-placeholder')}
+              placeholder={t('tool.competences.input-field-placeholder')}
               value={taito}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTaito(event.target.value)}
             />
