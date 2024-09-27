@@ -34,7 +34,10 @@ const HelpingToolsContent = () => {
 };
 
 const Interests = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { sm } = useMediaQueries();
 
   const [debouncedKiinnostus, kiinnostus, setKiinnostus] = useDebounceState('', 500);
@@ -73,11 +76,16 @@ const Interests = () => {
         <div className="order-2 col-span-1 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0">
           {sm ? (
             <>
-              <span className="text-heading-4 text-black">Apuvälineitä</span>
+              <span className="text-heading-4 text-black">{t('tools')}</span>
               <HelpingToolsContent />
             </>
           ) : (
-            <Accordion title="Apuvälineitä" expandLessText="Less" expandMoreText="More" lang="xy">
+            <Accordion
+              title={t('tools')}
+              expandLessText={t('expand-less')}
+              expandMoreText={t('expand-more')}
+              lang={language}
+            >
               <HelpingToolsContent />
             </Accordion>
           )}

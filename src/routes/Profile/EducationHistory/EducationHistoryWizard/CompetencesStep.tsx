@@ -24,7 +24,7 @@ const CompetencesStep = ({ koulutus }: CompetencesStepProps) => {
       <h3 className="mb-4 text-heading-5 font-arial text-black sm:mb-5 sm:text-heading-3 sm:font-poppins">
         {getValues('nimi')} - {getValues(`koulutukset.${koulutus}.nimi`)}
       </h3>
-      <p className="mb-7 text-body-sm font-arial text-black sm:mb-9">
+      <p className="mb-7 text-body-sm font-arial text-black sm:mb-9 text-todo">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
@@ -35,7 +35,7 @@ const CompetencesStep = ({ koulutus }: CompetencesStepProps) => {
           value={description}
           onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
           placeholder="Lorem ipsum dolor sit amet"
-          help="Help text"
+          help="TODO: Help text"
         />
       </div>
 

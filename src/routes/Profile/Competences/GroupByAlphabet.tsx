@@ -1,6 +1,7 @@
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { Tag } from '@jod/design-system';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { GroupByProps, MobileFilterButton, groupByHeaderClasses } from './constants';
 
 export const GroupByAlphabet = ({
@@ -9,6 +10,8 @@ export const GroupByAlphabet = ({
   isOsaaminenVisible,
   mobileFilterOpenerComponent,
 }: GroupByProps & MobileFilterButton) => {
+  const { t } = useTranslation();
+
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ';
 
   const letterHasOsaaminen = (letter: string) =>
@@ -29,7 +32,7 @@ export const GroupByAlphabet = ({
   return (
     <>
       <div className="flex flex-row justify-between gap-5">
-        <h2 className="my-6 text-heading-2">Osaamiseni aakkosjärjestyksessä</h2>
+        <h2 className="my-6 text-heading-2">{t('my-competences-alphabetically')}</h2>
         {mobileFilterOpenerComponent}
       </div>
       {Array.from(alphabet)

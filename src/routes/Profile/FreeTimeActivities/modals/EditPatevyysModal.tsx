@@ -46,7 +46,7 @@ const MainStep = () => {
         <InputField
           label={t('free-time-activities.proficiency')}
           {...register('nimi')}
-          placeholder="Lorem ipsum dolor sit amet"
+          placeholder="TODO: Lorem ipsum dolor sit amet"
         />
       </div>
       <div className="mb-6 flex grow gap-6">
@@ -85,7 +85,7 @@ const OsaaminenStep = () => {
           label={t('free-time-activities.edit-competences')}
           value={description}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
-          placeholder="Lorem ipsum dolor sit amet"
+          placeholder="TODO: Lorem ipsum dolor sit amet"
         />
       </div>
 

@@ -94,7 +94,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, user, logout }: M
           )}
         </div>
         {sm && (
-          <div className="flex items-center font-arial sticky bottom-0 bg-[#F5F5F5] h-[100px] px-9 py-6 text-secondary-gray text-body-sm">
+          <div className="flex items-center font-arial sticky bottom-0 bg-[#F5F5F5] h-[100px] px-9 py-6 text-secondary-gray text-body-sm text-todo">
             Lorem ipsum dolor sit amet, soleat iracundia eos ea, est in modo vivendo moderatius. Ex duo hinc graeco
             evertitur, nisl affert vel cu. Ne ius quis repudiare. Ne modo eius corpora mea. Ipsum congue definitiones
             sed in, an sit unum splendide.

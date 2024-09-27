@@ -10,11 +10,13 @@ import Tabs from './Tabs';
 import { LoaderData } from './loader';
 
 const Competences = () => {
-  const { i18n, t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const navigate = useNavigate();
   const { tyomahdollisuus, osaamiset } = useOutletContext<LoaderData>();
-  const lang = i18n.language;
-  const title = tyomahdollisuus?.otsikko[lang] ?? '';
+  const title = tyomahdollisuus?.otsikko[language] ?? '';
   const competences = osaamiset ?? [];
 
   const routes: RoutesNavigationListProps['routes'] = [
@@ -66,14 +68,14 @@ const Competences = () => {
             }
             expandMoreText={t('expand-more')}
             expandLessText={t('expand-less')}
-            lang={i18n.language}
+            lang={language}
           >
             <p className="text-body-sm font-arial mt-4 mb-4">
               {t('job-opportunity.specific-professional-competences.description')}
             </p>
             <ol className="list-decimal ml-7 font-bold text-black leading-7">
               {competences.map((competence) => (
-                <li key={competence.uri}>{competence.nimi[lang]}</li>
+                <li key={competence.uri}>{competence.nimi[language]}</li>
               ))}
             </ol>
           </Accordion>
@@ -87,7 +89,7 @@ const Competences = () => {
             }
             expandMoreText={t('expand-more')}
             expandLessText={t('expand-less')}
-            lang={i18n.language}
+            lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">
               {t('job-opportunity.general-working-life-skills.description')}
@@ -104,7 +106,7 @@ const Competences = () => {
             }
             expandMoreText={t('expand-more')}
             expandLessText={t('expand-less')}
-            lang={i18n.language}
+            lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">
               {t('job-opportunity.digital-skills-for-citizens.description')}
@@ -121,7 +123,7 @@ const Competences = () => {
             }
             expandMoreText={t('expand-more')}
             expandLessText={t('expand-less')}
-            lang={i18n.language}
+            lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">
               {t('job-opportunity.personal-characteristics.description')}
@@ -140,27 +142,9 @@ const Competences = () => {
               iconSide="left"
               onClick={() => navigate(-1)}
             />
-            <Button
-              variant="white"
-              label="Luo polku"
-              onClick={() => {
-                alert('Luo polku');
-              }}
-            />
-            <Button
-              variant="white"
-              label="Lisää suosikkeihin"
-              onClick={() => {
-                alert('Lisää suosikkeihin');
-              }}
-            />
-            <Button
-              variant="white"
-              label="Vertaile osaamisia"
-              onClick={() => {
-                alert('Vertaile osaamisia');
-              }}
-            />
+            <Button variant="white" label="TODO: Luo polku" />
+            <Button variant="white" label="TODO: Lisää suosikkeihin" />
+            <Button variant="white" label="TODO: Vertaile osaamisia" />
           </div>,
           actionBar,
         )}

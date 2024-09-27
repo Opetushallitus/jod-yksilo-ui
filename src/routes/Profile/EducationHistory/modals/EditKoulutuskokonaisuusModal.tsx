@@ -109,8 +109,8 @@ const EditKoulutuskokonaisuusModal = ({
             <InputField
               label={t('education-history.educational-institution')}
               {...methods.register('nimi')}
-              placeholder="Lorem ipsum dolor sit amet"
-              help="Help text"
+              placeholder="TODO: Lorem ipsum dolor sit amet"
+              help="TODO: Help text"
             />
           </Form>
         </FormProvider>

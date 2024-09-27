@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
     <>
       <Title value={title} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
-      <p className="mb-8 text-body-md font-arial">
+      <p className="mb-8 text-body-md font-arial text-todo">
         Tempor nec feugiat nisl pretium fusce id velit. Fringilla ut morbi tincidunt augue interdum velit. Porta lorem
         mollis aliquam ut porttitor leo a diam. Imperdiet massa tincidunt nunc pulvinar. Adipiscing enim eu turpis
         egestas pretium aenean pharetra magna ac. Pellentesque id nibh tortor id. Dui accumsan sit amet nulla facilisi
@@ -27,13 +27,7 @@ const PrivacyPolicy = () => {
       {actionBar &&
         createPortal(
           <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button
-              variant="white"
-              label={t('more-information')}
-              onClick={() => {
-                alert(t('more-information'));
-              }}
-            />
+            <Button variant="white" label={`TODO: ${t('more-information')}`} />
           </div>,
           actionBar,
         )}

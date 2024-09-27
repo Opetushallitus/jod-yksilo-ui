@@ -105,8 +105,8 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
             <InputField
               label={t('free-time-activities.activity-name')}
               {...methods.register('nimi')}
-              placeholder="Lorem ipsum dolor sit amet"
-              help="Help text"
+              placeholder="TODO: Lorem ipsum dolor sit amet"
+              help="TODO: Help text"
             />
           </Form>
         </FormProvider>

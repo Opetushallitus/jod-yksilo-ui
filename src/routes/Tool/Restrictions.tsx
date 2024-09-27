@@ -1,5 +1,5 @@
 const Restrictions = () => {
-  return <div>Restrictions</div>;
+  return <div className="text-todo">TODO: Restrictions</div>;
 };
 
 export default Restrictions;

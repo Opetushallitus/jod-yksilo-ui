@@ -28,7 +28,7 @@ const Favorites = () => {
             <RoutesNavigationList routes={navigationRoutes} />
           </SimpleNavigationList>
           <SimpleNavigationList title="Sisältö" collapsible>
-            <div className="py-4">
+            <div className="py-4 text-todo">
               <p className="mb-5 text-body-xs font-arial text-secondary-gray">Valitse näytettävien suosikit.</p>
               TODO
             </div>
@@ -38,7 +38,7 @@ const Favorites = () => {
     >
       <Title value={title} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
-      <p className="mb-8 text-body-md font-arial">
+      <p className="mb-8 text-body-md font-arial text-todo">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
@@ -46,27 +46,9 @@ const Favorites = () => {
       {actionBar &&
         createPortal(
           <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button
-              variant="white"
-              label="Vertaile"
-              onClick={() => {
-                alert('Vertaile');
-              }}
-            />
-            <Button
-              variant="white"
-              label="Luo polku"
-              onClick={() => {
-                alert('Luo polku');
-              }}
-            />
-            <Button
-              variant="white-delete"
-              label="Poista valitut ammatit"
-              onClick={() => {
-                alert('Poista valitut ammatit');
-              }}
-            />
+            <Button variant="white" label="TODO: Vertaile" />
+            <Button variant="white" label="TODO: Luo polku" />
+            <Button variant="white-delete" label="TODO: Poista valitut ammatit" />
           </div>,
           actionBar,
         )}

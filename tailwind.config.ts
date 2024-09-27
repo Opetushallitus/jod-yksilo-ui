@@ -7,4 +7,11 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   presets: [designSystem],
   plugins: [],
+  theme: {
+    extend: {
+      colors: {
+        todo: '#ff0000',
+      },
+    },
+  },
 } satisfies Config;

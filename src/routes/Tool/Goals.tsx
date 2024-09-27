@@ -254,28 +254,27 @@ const CompetenceIcon = () => (
     />
   </svg>
 );
-// TODO: title and description per SelectionCard
-const ToolTipContent = () => (
-  <>
-    <div className="text-heading-4 mb-4">Tavoitteen vaikutus tuloksiin</div>
-    <p>
-      Ohjeistaa täyttämään osaamisprofiilin ja sieltä löytyvien apuvälineiden hyödyntämiseen. Kannustaa katsomaan myös
-      kohtaannon tuloksia.
-    </p>
-  </>
-);
+const ToolTipContent = () => {
+  const { t } = useTranslation();
 
-// TODO: title and description per SelectionCard
-const SelectionInfoCard = () => (
-  <div className="bg-white px-7 py-6 rounded text-body-md font-arial">
-    <span className="font-bold">Tavoitteen vaikutus tuloksiin:</span>
-    <p>
-      Ohjeistaa täyttämään osaamisprofiilin ja sieltä löytyvien apuvälineiden hyödyntämiseen. Kannustaa katsomaan myös
-      kohtaannon tuloksia.
-    </p>
-  </div>
-);
+  return (
+    <>
+      <div className="text-heading-4 mb-4">{t('tool.goals.selection-info-card-title')}</div>
+      <p>{t('tool.goals.selection-info-card-description')}</p>
+    </>
+  );
+};
 
+const SelectionInfoCard = () => {
+  const { t } = useTranslation();
+
+  return (
+    <div className="bg-white px-7 py-6 rounded text-body-md font-arial">
+      <span className="font-bold">{t('tool.goals.selection-info-card-title')}</span>
+      <p>{t('tool.goals.selection-info-card-description')}</p>
+    </div>
+  );
+};
 const Goals = () => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
@@ -298,7 +297,7 @@ const Goals = () => {
         </div>
 
         <div className="order-3 col-span-1 sm:order-2 sm:col-span-3">
-          <div className="flex flex-wrap flex-col sm:flex-row space-between gap-3 sm:gap-8">
+          <div className="flex flex-wrap flex-col sm:flex-row space-between gap-3 sm:gap-8 bg-todo">
             <SelectionCard
               selected={selectedCard === 'a'}
               onClick={() => toggleCardSelection('a')}

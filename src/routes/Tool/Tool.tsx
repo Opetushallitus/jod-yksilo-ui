@@ -40,29 +40,31 @@ const Filters = ({
   setOrder: (val: string) => void;
   isMobile: boolean;
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="inline-flex flex-col gap-6 sm:gap-5 w-full">
       <SimpleNavigationList
-        title="Järjestele (kaikki)"
+        title={t('sort-all')}
         borderEnabled={isMobile}
         addPadding={isMobile}
         backgroundClassName={isMobile ? 'bg-bg-gray-2' : 'bg-bg-gray'}
       >
-        <RadioButtonGroup value={order} onChange={setOrder} label="Järjestele (kaikki)" hideLabel>
-          <RadioButton label="Tuloksen sopivuus" value="a" />
-          <RadioButton label="Kehitystrendi" value="b" />
-          <RadioButton label="Työllistusnäkymä" value="c" />
+        <RadioButtonGroup value={order} onChange={setOrder} label={t('sort-all')} hideLabel>
+          <RadioButton label={`TODO: ${t('fit-of-result')}`} value="a" />
+          <RadioButton label={`TODO: ${t('development-trend')}`} value="b" />
+          <RadioButton label={`TODO: ${t('employment-view')}`} value="c" />
         </RadioButtonGroup>
       </SimpleNavigationList>
       <SimpleNavigationList
-        title="Toimiala (työmahdollisuudet)"
+        title={t('industry-job-opportunities')}
         borderEnabled={isMobile}
         addPadding={isMobile}
         backgroundClassName={isMobile ? 'bg-bg-gray-2' : 'bg-bg-gray'}
       >
-        <RadioButtonGroup value={industry} onChange={setIndustry} label="Toimiala (työmahdollisuudet)" hideLabel>
-          <RadioButton label="Toimiala x" value="x" />
-          <RadioButton label="Toimiala y" value="y" />
+        <RadioButtonGroup value={industry} onChange={setIndustry} label={t('industry-job-opportunities')} hideLabel>
+          <RadioButton label="TODO: Toimiala x" value="x" />
+          <RadioButton label="TODO: Toimiala y" value="y" />
         </RadioButtonGroup>
       </SimpleNavigationList>
     </div>
@@ -246,7 +248,7 @@ const Tool = () => {
             value={toolStore.osaamisKiinnostusPainotus}
           />
           <Slider
-            label="Rajoitukset"
+            label={`TODO: ${t('restrictions')}`}
             onValueChange={(val) => toolStore.setRajoitePainotus(val)}
             value={toolStore.rajoitePainotus}
           />
@@ -256,11 +258,11 @@ const Tool = () => {
           {!sm && (
             <>
               <div className="mb-2 flex flex-row justify-between">
-                <span className="mr-5 text-heading-3 text-black">Tuloslista</span>
+                <span className="mr-5 text-heading-3 text-black">{t('result-list')}</span>
                 <RoundButton
                   size="sm"
                   bgColor="white"
-                  label="Näytä suodattimet"
+                  label={t('show-filters')}
                   hideLabel
                   onClick={() => setShowFilters(true)}
                   icon={<MdTune size={24} />}
@@ -285,10 +287,7 @@ const Tool = () => {
                   }
                 />
               </div>
-              <span>
-                Tarkenna tuloksia: valitse haluamasi tunnusluvut ja järjestä lista uudelleen napauttamalla oikean laidan
-                painiketta.
-              </span>
+              <span>{t('tool.filters-text')}</span>
             </>
           )}
           <div className="flex flex-col gap-5">
@@ -305,13 +304,13 @@ const Tool = () => {
                     name={tyomahdollisuus.otsikko[i18n.language] ?? ''}
                     description={tyomahdollisuus.tiivistelma?.[i18n.language] ?? ''}
                     matchValue={toolStore.tyomahdollisuusEhdotukset?.[item.id].pisteet}
-                    matchLabel="Sopivuus"
+                    matchLabel={t('fit')}
                     type="work"
                     trend={toolStore.tyomahdollisuusEhdotukset?.[item.id].trendi}
                     employmentOutlook={toolStore.tyomahdollisuusEhdotukset?.[item.id].tyollisyysNakyma ?? 0}
                     hasRestrictions
-                    industryName="Lorem ipsum dolor"
-                    mostCommonEducationBackground="Lorem ipsum dolor"
+                    industryName="TODO: Lorem ipsum dolor"
+                    mostCommonEducationBackground="TODO: Lorem ipsum dolor"
                   />
                 </NavLink>
               );
