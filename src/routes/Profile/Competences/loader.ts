@@ -20,7 +20,7 @@ export default (async ({ request }) => {
     signal: request.signal,
   });
 
-  const osaaminenLahdeIds = osaamiset?.map((o) => o.lahde.id) ?? [];
+  const osaaminenLahdeIds = (osaamiset?.filter((o) => o.lahde.id).map((o) => o.lahde.id) ?? []) as string[];
 
   /*
     Each main category (työpaikka, koulu, vapaa-ajan toiminto) has its own array of subcategories:
@@ -31,7 +31,7 @@ export default (async ({ request }) => {
     Each item in subcategories will be compared against "osaamiset", which contains all the competences for the user.
     This is done to eliminate the chance for competences that aren't tied to any categories.
 
-    The resulting data will be used to populate the filters in Competences page.
+    The resulting data will be used to populate the Competences page.
   */
   const toimenkuvat =
     tyopaikat?.flatMap((tyopaikka) => filterItems(tyopaikka.toimenkuvat ?? [], osaaminenLahdeIds)) ?? [];

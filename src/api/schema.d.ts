@@ -80,6 +80,24 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/profiili/muu-osaaminen': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Gets all other osaaminen of the user */
+    get: operations['muuOsaaminenFindAll'];
+    /** Gets all other osaaminen of the user */
+    put: operations['muuOsaaminenUpdate'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/koulutuskokonaisuudet/{id}': {
     parameters: {
       query?: never;
@@ -512,7 +530,7 @@ export interface components {
       /** Format: uri */
       uri: string;
       /** Format: double */
-      osuvuus?: number;
+      osuvuus: number;
     };
     SivuDtoTyomahdollisuusDto: {
       sisalto: components['schemas']['TyomahdollisuusDto'][];
@@ -574,13 +592,13 @@ export interface components {
     };
     OsaamisenLahdeDto: {
       /** @enum {string} */
-      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS';
+      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
       /** Format: uuid */
-      id: string;
+      id?: string;
     };
     YksilonOsaaminenDto: {
       /** Format: uuid */
-      id: string;
+      id?: string;
       osaaminen: components['schemas']['OsaaminenDto'];
       lahde: components['schemas']['OsaamisenLahdeDto'];
     };
@@ -866,6 +884,48 @@ export interface operations {
       cookie?: never;
     };
     requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  muuOsaaminenFindAll: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': string[];
+        };
+      };
+    };
+  };
+  muuOsaaminenUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': string[];
+      };
+    };
     responses: {
       /** @description No Content */
       204: {
@@ -1502,7 +1562,7 @@ export interface operations {
   yksilonOsaaminenFind: {
     parameters: {
       query?: {
-        tyyppi?: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS';
+        tyyppi?: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
         lahdeId?: string;
       };
       header?: never;

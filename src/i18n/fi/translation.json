@@ -182,7 +182,13 @@
       "write-what-interests-you": "Kirjoita, mikä sinua kiinnostaa"
     },
     "preferences": "Asetukseni",
-    "something-else": "Jotain muuta",
+    "something-else": {
+      "my-other-comptetences": "Muut osaamiseni",
+      "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius.",
+      "description-placeholder": "Kirjoita tähän osaamisesi",
+      "edit-other-competences": "Muokkaa muita osaamisia",
+      "title": "Muut osaamiseni"
+    },
     "work-history": "Työpaikkani"
   },
   "proposed-competences": "Ehdotetut osaamiset",
@@ -219,7 +225,7 @@
       "index": "omat-sivuni",
       "interests": "kiinnostukseni",
       "preferences": "asetukseni",
-      "something-else": "jotain-muuta",
+      "something-else": "muut-osaamiset",
       "work-history": "tyopaikkani"
     },
     "session-expired": "istunto-vanhentunut",
