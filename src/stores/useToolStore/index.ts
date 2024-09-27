@@ -12,6 +12,7 @@ interface ToolState {
   rajoitePainotus: number;
   tyomahdollisuusEhdotukset: EhdotusRecord;
   tyomahdollisuudet: components['schemas']['TyomahdollisuusDto'][];
+  reset: () => void;
   setMahdollisuudet: (state: string[]) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
   setKiinnostukset: (state: OsaaminenValue[]) => void;
@@ -31,6 +32,8 @@ export const useToolStore = create<ToolState>()((set) => ({
   rajoitePainotus: 50,
   tyomahdollisuusEhdotukset: {},
   tyomahdollisuudet: [],
+  reset: () =>
+    set({ mahdollisuudet: [], osaamiset: [], kiinnostukset: [], tyomahdollisuusEhdotukset: {}, tyomahdollisuudet: [] }),
   setMahdollisuudet: (state) => set({ mahdollisuudet: state }),
   setOsaamiset: (state) => set({ osaamiset: state }),
   setKiinnostukset: (state) => set({ kiinnostukset: state }),

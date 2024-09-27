@@ -6,11 +6,13 @@ import { MdHome, MdOutlinePerson } from 'react-icons/md';
 import { useRouteError } from 'react-router-dom';
 
 const ErrorBoundary = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const loginLink = useLoginLink();
   const error = useRouteError() as Error;
   const title = t('error-boundary.title');
-  const message = (error.message && t(`error-boundary.${error.message}`)) ?? t('error-boundary.unexpected');
+  const message =
+    (error.message && i18n.exists(`error-boundary.${error.message}`) && t(`error-boundary.${error.message}`)) ||
+    t('error-boundary.unexpected');
 
   return (
     <main role="main" id="jod-main" className="m-4 flex flex-col items-center justify-center gap-4">
