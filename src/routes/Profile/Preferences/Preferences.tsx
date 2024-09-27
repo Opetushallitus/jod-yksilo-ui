@@ -40,7 +40,7 @@ const Preferences = () => {
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">
         {t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
       </h1>
-      <p className="mb-8 text-body-md font-arial">
+      <p className="mb-8 text-body-md font-arial text-todo">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
@@ -52,7 +52,7 @@ const Preferences = () => {
       {actionBar &&
         createPortal(
           <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button variant="white" label={t('preferences.share-my-competences')} disabled />
+            <Button variant="white" label={`TODO: ${t('preferences.share-my-competences')}`} />
             <ConfirmDialog
               title={t('preferences.delete-my-account')}
               onConfirm={() => void deleteAccount()}

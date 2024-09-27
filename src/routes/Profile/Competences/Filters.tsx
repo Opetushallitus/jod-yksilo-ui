@@ -94,7 +94,7 @@ export const Filters = ({ groupBy, setGroupBy, filterKeys, selectedFilters, setS
           hideLabel
         >
           <RadioButton label={t('profile.competences.group-by-source')} value={GROUP_BY_SOURCE} />
-          <RadioButton label={t('profile.competences.group-by-theme')} value={GROUP_BY_THEME} />
+          <RadioButton label={`TODO: ${t('profile.competences.group-by-theme')}`} value={GROUP_BY_THEME} />
           <RadioButton label={t('profile.competences.group-by-alphabet')} value={GROUP_BY_ALPHABET} />
         </RadioButtonGroup>
       </SimpleNavigationList>

@@ -43,8 +43,18 @@ const Match = ({ match, label, bg }: { match?: number; label: string; bg: string
   );
 };
 
-const BottomBox = ({ title, children }: { title?: string; children: React.ReactNode }) => (
-  <div className="font-arial border border-inactive-gray py-2 px-3 -mr-[1px] -mb-[1px] text-[12px] leading-[20px] flex flex-row items-center gap-2">
+const BottomBox = ({
+  title,
+  className,
+  children,
+}: {
+  title?: string;
+  className?: string;
+  children: React.ReactNode;
+}) => (
+  <div
+    className={`font-arial border border-inactive-gray py-2 px-3 -mr-[1px] -mb-[1px] text-[12px] leading-[20px] flex flex-row items-center gap-2 ${className}`.trim()}
+  >
     <span className="flex items-center mr-1">{title}</span>
     <span className="flex items-center">{children}</span>
   </div>
@@ -84,7 +94,7 @@ const SelectedCheckbox = ({
 
   return (
     <span
-      className="inline-flex items-center gap-2 font-bold text-[12px] leading-[24px] text-accent"
+      className="inline-flex items-center gap-2 font-bold text-[12px] leading-[24px] text-accent bg-todo"
       onClick={onClick}
       onKeyDown={onKeyDown}
       aria-label={`${t('choose')} ${name}`}
@@ -140,30 +150,30 @@ export const OpportunityCard = ({
           )}
           <span className="font-arial text-body-md">{description}</span>
           <div className="mt-4 flex flex-wrap">
-            <BottomBox title={t('tool.competences.trend')}>
+            <BottomBox title={t('tool.competences.trend')} className="bg-todo">
               <span className="text-accent" aria-label={t(`tool.competences.trend-${trend}`)}>
                 {trend === 'NOUSEVA' ? <HiTrendingUp size={24} /> : <HiTrendingDown size={24} />}
               </span>
             </BottomBox>
-            <BottomBox title={t('tool.competences.employment-outlook')}>
+            <BottomBox title={t('tool.competences.employment-outlook')} className="bg-todo">
               <OutlookDots
                 outlook={employmentOutlook}
                 ariaLabel={t('tool.competences.outlook-value', { outlook: employmentOutlook })}
               />
             </BottomBox>
             {hasRestrictions && (
-              <BottomBox title={t('tool.competences.maybe-has-restrictions')}>
+              <BottomBox title={t('tool.competences.maybe-has-restrictions')} className="bg-todo">
                 <MdBlock className="text-accent" size={20} />
               </BottomBox>
             )}
             {industryName && (
-              <BottomBox title={`${t('tool.competences.idustry-name')}:`}>
-                <span className="font-bold">Lorem ipsum dolor</span>
+              <BottomBox title={`${t('tool.competences.idustry-name')}:`} className="bg-todo">
+                <span className="font-bold">TODO: Lorem ipsum dolor</span>
               </BottomBox>
             )}
             {mostCommonEducationBackground && (
-              <BottomBox title={`${t('tool.competences.common-educational-background')}:`}>
-                <span className="font-bold">Lorem ipsum dolor</span>
+              <BottomBox title={`${t('tool.competences.common-educational-background')}:`} className="bg-todo">
+                <span className="font-bold">TODO: Lorem ipsum dolor</span>
               </BottomBox>
             )}
           </div>

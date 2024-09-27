@@ -19,6 +19,7 @@
   "date-or-continues-placeholder": "pp.kk.vvvv tai jatkuu",
   "date-placeholder": "pp.kk.vvvv",
   "delete": "Poista",
+  "development-trend": "Kehitystrendi",
   "edit": "Muokkaa",
   "education-history": {
     "add-new-degree": "Lisää uusi tutkinto",
@@ -36,6 +37,7 @@
     "educational-institution": "Oppilaitos",
     "identify-competences": "Tunnista osaamisia"
   },
+  "employment-view": "Työllisyysnäkymä",
   "ended": "Loppui",
   "error": {
     "network": {
@@ -50,6 +52,8 @@
   },
   "expand-less": "Näytä vähemmän",
   "expand-more": "Näytä lisää",
+  "fit": "Sopivuus",
+  "fit-of-result": "Tuloksen sopivuus",
   "free-time-activities": {
     "activity-content": "Toiminnon sisältö",
     "activity-name": "Toiminnon nimi",
@@ -80,6 +84,7 @@
   },
   "how-do-i-give-feedback": "Miten annan palautetta?",
   "how-do-i-use-the-service": "Kuinka käytän palvelua?",
+  "industry-job-opportunities": "Toimiala (työmahdollisuudet)",
   "instructions": "Ohjeet",
   "interests": "Kiinnostukset",
   "job-opportunity": {
@@ -136,6 +141,7 @@
   "login": "Kirjaudu sisään",
   "logout": "Kirjaudu ulos",
   "match-service": "Kohtaantopalvelu",
+  "menu": "Valikko",
   "menus": {
     "tool-navigation": {
       "competences": "Mitä minä osaan",
@@ -151,16 +157,20 @@
     "by-PATEVYYS": "Vapaa-ajan toiminnon mukaan",
     "by-TOIMENKUVA": "Työpaikkojen mukaan"
   },
+  "my-competences-alphabetically": "Osaamiseni aakkosjärjestyksessä",
+  "my-competences-by-sources": "Osaamiseni lähteiden mukaan",
   "next": "Seuraava",
   "no-competences": "Ei osaamisia",
   "no-match": {
     "description": "Hakemaasi sivua ei löytynyt.",
     "title": "Sivua ei löytynyt"
   },
+  "open-menu": "Avaa valikko",
   "opportunity-type": {
     "education": "Koulutusmahdollisuus",
     "work": "Työmahdollisuus"
   },
+  "osaamispolku": "Osaamispolku",
   "preferences": {
     "confirm-delete-my-account": "Haluatko varmasti poistaa tilisi?",
     "delete-my-account": "Poista tilini",
@@ -205,11 +215,13 @@
   "proposed-competences": "Ehdotetut osaamiset",
   "remove-approval": "Hylkää hyväksyntä",
   "restrictions": "Rajoitteet",
+  "result-list": "Tuloslista",
   "return-home": "Palaa etusivulle",
   "save": "Tallenna",
   "search": "Haku",
   "select-language": "Valitse kieli",
   "share": "Jaa",
+  "show-filters": "Näytä suodattimet",
   "skiplinks": {
     "main": "Siirry pääsisältöön"
   },
@@ -260,6 +272,8 @@
       "who-provides-the-service": "kuka-palvelun-tarjoaa"
     }
   },
+  "sort": "Järjestele",
+  "sort-all": "Järjestä (kaikki)",
   "started": "Alkoi",
   "terms-of-service": "Käyttöehdot",
   "tool": {
@@ -280,6 +294,7 @@
       "trend-down": "Laskeva kehitys",
       "trend-up": "Nouseva kehitys"
     },
+    "filters-text": "Tarkenna tuloksia: valitse haluamasi tunnusluvut ja järjestä lista uudelleen napauttamalla oikean laidan painiketta.",
     "goals": {
       "field-description": "Napauta kuvaketta, jos haluat valita sen tavoitteeksesi. Voit peruuttaa valinnan napauttamalla kuvaketta uudelleen.",
       "heading-1": "Mitä minä haluan",
@@ -287,6 +302,8 @@
       "map-competence": "Kartoittaa omaa osaamistani",
       "map-opportunities": "Kartoittaa mahdollisuuksia alan vaihtamiseen",
       "page-description": "Tässä osiossa voit valita toiveidesi mukaiset tulokset palvelustamme. Jos olet epävarma, voit ohittaa tämän ja tutustua palveluumme omaan tahtiisi. Kun liikutat hiirtä kuvakkeiden ylle, näet niiden alla olevan selityksen siitä, miten ne vaikuttavat lopputulokseen",
+      "selection-info-card-description": "Ohjeistaa täyttämään osaamisprofiilin ja sieltä löytyvien apuvälineiden hyödyntämiseen. Kannustaa katsomaan myös kohtaannon tuloksia.",
+      "selection-info-card-title": "Tavoitteen vaikutus tuloksiin:",
       "something-else": "Jotain muuta, en tiedä mitä...",
       "trainings": "Koulutuksia osaamiseni kasvattamiseksi"
     },
@@ -302,6 +319,7 @@
     "title": "Työkalu",
     "update-job-opportunities-list": "Päivitä mahdollisuuslista"
   },
+  "tools": "Apuvälineitä",
   "types": {
     "competence": {
       "KOULUTUS": "Koulutus",
@@ -336,5 +354,6 @@
     "job-duties": "Työtehtävät",
     "summary": "Yhteenveto",
     "workplace-or-job-description": "Työpaikka / toimenkuva"
-  }
+  },
+  "workplace-competences": "Työpaikka osaamiset"
 }

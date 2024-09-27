@@ -10,11 +10,13 @@ import Tabs from './Tabs';
 import { LoaderData } from './loader';
 
 const Overview = () => {
-  const { i18n, t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const navigate = useNavigate();
   const { tyomahdollisuus } = useOutletContext<LoaderData>();
-  const lang = i18n.language;
-  const title = tyomahdollisuus?.otsikko[lang];
+  const title = tyomahdollisuus?.otsikko[language];
   const routes: RoutesNavigationListProps['routes'] = [
     {
       active: false,
@@ -82,9 +84,9 @@ const Overview = () => {
             }
             expandMoreText={t('expand-more')}
             expandLessText={t('expand-less')}
-            lang={i18n.language}
+            lang={language}
           >
-            <p className="text-body-sm font-arial mt-4">{tyomahdollisuus?.kuvaus?.[lang]}</p>
+            <p className="text-body-sm font-arial mt-4">{tyomahdollisuus?.kuvaus?.[language]}</p>
           </Accordion>
         </div>
         <div>
@@ -96,7 +98,7 @@ const Overview = () => {
             }
             expandMoreText={t('expand-more')}
             expandLessText={t('expand-less')}
-            lang={i18n.language}
+            lang={language}
           >
             <p className="text-body-sm font-arial mt-4 mb-4">
               {t('job-opportunity.most-common-job-tasks.description')}
@@ -115,7 +117,7 @@ const Overview = () => {
             }
             expandMoreText={t('expand-more')}
             expandLessText={t('expand-less')}
-            lang={i18n.language}
+            lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.key-figures.description')}</p>
             <div className="bg-bg-gray h-[380px]" />
@@ -130,7 +132,7 @@ const Overview = () => {
             }
             expandMoreText={t('expand-more')}
             expandLessText={t('expand-less')}
-            lang={i18n.language}
+            lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">
               {t('job-opportunity.labour-market-picture.description')}
@@ -147,7 +149,7 @@ const Overview = () => {
             }
             expandMoreText={t('expand-more')}
             expandLessText={t('expand-less')}
-            lang={i18n.language}
+            lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.salary-trends.description')}</p>
             <div className="bg-bg-gray h-[380px]" />
@@ -162,7 +164,7 @@ const Overview = () => {
             }
             expandMoreText={t('expand-more')}
             expandLessText={t('expand-less')}
-            lang={i18n.language}
+            lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.employment-trends.description')}</p>
             <div className="bg-bg-gray h-[380px]" />
@@ -177,7 +179,7 @@ const Overview = () => {
             }
             expandMoreText={t('expand-more')}
             expandLessText={t('expand-less')}
-            lang={i18n.language}
+            lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.related-jobs.description')}</p>
             <div className="bg-bg-gray h-[380px] mb-8" />
@@ -194,27 +196,9 @@ const Overview = () => {
               iconSide="left"
               onClick={() => navigate(-1)}
             />
-            <Button
-              variant="white"
-              label="Luo polku"
-              onClick={() => {
-                alert('Luo polku');
-              }}
-            />
-            <Button
-              variant="white"
-              label="Lisää suosikkeihin"
-              onClick={() => {
-                alert('Lisää suosikkeihin');
-              }}
-            />
-            <Button
-              variant="white"
-              label="Vertaile osaamisia"
-              onClick={() => {
-                alert('Vertaile osaamisia');
-              }}
-            />
+            <Button variant="white" label="TODO: Luo polku" />
+            <Button variant="white" label="TODO: Lisää suosikkeihin" />
+            <Button variant="white" label="TODO: Vertaile osaamisia" />
           </div>,
           actionBar,
         )}

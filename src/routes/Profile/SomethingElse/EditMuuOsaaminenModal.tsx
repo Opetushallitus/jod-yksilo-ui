@@ -95,7 +95,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModal) => {
                 value={description}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
                 placeholder={t('profile.something-else.description-placeholder')}
-                help="Help text"
+                help="TODO: Help text"
               />
             </div>
             <Controller

@@ -1,5 +1,5 @@
 const Instructions = () => {
-  return <div>Instructions</div>;
+  return <div className="text-todo">TODO: Instructions</div>;
 };
 
 export default Instructions;

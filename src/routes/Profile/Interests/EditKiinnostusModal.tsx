@@ -95,7 +95,7 @@ const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
                 value={description}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
                 placeholder={t('profile.interests.write-what-interests-you')}
-                help="Help text"
+                help="TODO: Help text"
               />
             </div>
             <Controller

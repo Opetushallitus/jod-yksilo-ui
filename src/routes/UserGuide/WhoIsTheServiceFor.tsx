@@ -9,7 +9,7 @@ const WhoIsTheServiceFor = () => {
     <>
       <Title value={title} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
-      <p className="mb-8 text-body-md font-arial">
+      <p className="mb-8 text-body-md font-arial text-todo">
         Feugiat in fermentum posuere urna nec tincidunt praesent. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper.
         Porttitor rhoncus dolor purus non enim praesent. Mattis pellentesque id nibh tortor id aliquet lectus proin
         nibh. Ac tincidunt vitae semper quis. Molestie nunc non blandit massa enim nec dui. Ridiculus mus mauris vitae

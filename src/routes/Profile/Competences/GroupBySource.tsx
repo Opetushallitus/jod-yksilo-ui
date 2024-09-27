@@ -15,7 +15,7 @@ export const GroupBySource = ({
   return (
     <>
       <div className="flex flex-row justify-between gap-5">
-        <h2 className="my-6 text-heading-2">Osaamiseni lähteiden mukaan</h2>
+        <h2 className="my-6 text-heading-2">{t('my-competences-by-sources')}</h2>
         {mobileFilterOpenerComponent}
       </div>
 

@@ -46,7 +46,7 @@ const MainStep = () => {
         <InputField
           label={t('work-history.job-description')}
           {...register('nimi')}
-          placeholder="Lorem ipsum dolor sit amet"
+          placeholder="TODO: Lorem ipsum dolor sit amet"
         />
       </div>
       <div className="mb-6 flex grow gap-6">
@@ -83,7 +83,7 @@ const OsaaminenStep = () => {
           label={t('work-history.edit-competences')}
           value={description}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
-          placeholder="Lorem ipsum dolor sit amet"
+          placeholder="TODO: Lorem ipsum dolor sit amet"
         />
       </div>
 

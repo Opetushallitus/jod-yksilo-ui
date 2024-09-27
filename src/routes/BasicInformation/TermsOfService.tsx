@@ -13,7 +13,7 @@ const TermsOfService = () => {
     <>
       <Title value={title} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
-      <p className="mb-8 text-body-md font-arial">
+      <p className="mb-8 text-body-md font-arial text-todo">
         Vitae tempus quam pellentesque nec nam aliquam. Turpis cursus in hac habitasse platea dictumst quisque sagittis.
         Et odio pellentesque diam volutpat. Magna ac placerat vestibulum lectus mauris ultrices eros in cursus. Sed
         vulputate mi sit amet mauris commodo quis imperdiet massa. Et netus et malesuada fames ac turpis. Vel fringilla
@@ -25,20 +25,8 @@ const TermsOfService = () => {
       {actionBar &&
         createPortal(
           <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button
-              variant="white"
-              label={t('accept')}
-              onClick={() => {
-                alert(t('accept'));
-              }}
-            />
-            <Button
-              variant="white-delete"
-              label={t('remove-approval')}
-              onClick={() => {
-                alert(t('remove-approval'));
-              }}
-            />
+            <Button variant="white" label={`TODO: ${t('accept')}`} />
+            <Button variant="white-delete" label={`TODO: ${t('remove-approval')}`} />
           </div>,
           actionBar,
         )}

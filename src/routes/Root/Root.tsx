@@ -55,7 +55,7 @@ const Root = () => {
     key: item,
     component: ({ className }) => (
       <a href={`/logo${item}`} className={className}>
-        Logo {item}
+        TODO: Logo {item}
       </a>
     ),
   }));
@@ -154,18 +154,18 @@ const Root = () => {
             sm ? (
               <button
                 className="flex gap-4 justify-center items-center"
-                aria-label="Avaa valikko"
+                aria-label={t('open-menu')}
                 onClick={toggleMenu('mega')}
               >
                 <>
-                  <span>Valikko</span>
+                  <span>{t('menu')}</span>
                   <span className="size-7 flex justify-center items-center">
                     <MdMenu size={24} />
                   </span>
                 </>
               </button>
             ) : (
-              <button className="flex justify-self-end" aria-label="Avaa valikko" onClick={toggleMenu('mega')}>
+              <button className="flex justify-self-end" aria-label={t('open-menu')} onClick={toggleMenu('mega')}>
                 <>
                   {megaMenuOpen ? (
                     <span className="size-7 flex justify-center items-center">

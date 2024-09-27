@@ -42,7 +42,7 @@ const SomethingElse = () => {
       {isModalOpen && <EditMuuOsaaminenModal onClose={onAddModalClose} isOpen={isModalOpen} />}
       <Title value={title} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
-      <p className="mb-8 text-body-md font-arial">{t('profile.something-else.description')}</p>
+      <p className="mb-8 text-body-md font-arial text-todo">{t('profile.something-else.description')}</p>
       {data.length > 0 && (
         <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
           {t('profile.something-else.my-other-comptetences')}
