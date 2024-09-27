@@ -70,7 +70,7 @@ const Filters = ({
 };
 
 const Tool = () => {
-  const { osaamiset: osaamisetData } = useLoaderData() as ToolLoaderData;
+  const { osaamiset: osaamisetData, kiinnostukset } = useLoaderData() as ToolLoaderData;
   const { sm } = useMediaQueries();
   const { t, i18n } = useTranslation();
   const toolStore = useToolStore();
@@ -97,6 +97,13 @@ const Tool = () => {
               tyyppi: osaaminen.lahde.tyyppi,
             }),
           ),
+        );
+        toolStore.setKiinnostukset(
+          kiinnostukset.map((k) => ({
+            id: k.uri,
+            nimi: getLocalizedText(k.nimi),
+            tyyppi: 'KIINNOSTUS',
+          })),
         );
         void updateEhdotukset();
       }
