@@ -33,7 +33,7 @@ export const useAppRoutes = () => {
       path: t('slugs.profile.free-time-activities'),
     },
     {
-      name: t('profile.something-else'),
+      name: t('profile.something-else.title'),
       path: t('slugs.profile.something-else'),
     },
   ];

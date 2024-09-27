@@ -9,6 +9,7 @@ import { competencesLoader, Competences as ProfileCompetences } from '@/routes/P
 import { loader as educationHistoryLoader } from '@/routes/Profile/EducationHistory';
 import { loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
 import { interestsLoader, Interests as ProfileInterests } from '@/routes/Profile/Interests';
+import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import {
   Goals,
@@ -100,6 +101,7 @@ const profileRoutes = supportedLanguageCodes.map(
           id: `{slugs.profile.something-else}|${lng}`,
           path: i18n.t('slugs.profile.something-else', { lng }),
           element: <SomethingElse />,
+          loader: withYksiloContext(muuOsaaminenLoader),
         },
       ],
     }) as RouteObject,

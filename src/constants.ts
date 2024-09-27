@@ -1,3 +1,4 @@
+import { OsaaminenLahdeTyyppi } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 import { Tag } from '@jod/design-system';
 
 type TagProps = React.ComponentProps<typeof Tag>;
@@ -5,6 +6,6 @@ export const OSAAMINEN_COLOR_MAP: Record<OsaaminenLahdeTyyppi, NonNullable<TagPr
   TOIMENKUVA: 'tyopaikka',
   KOULUTUS: 'koulutus',
   PATEVYYS: 'vapaa-ajan-toiminto',
-  JOTAIN_MUUTA: 'jotain-muuta',
+  MUU_OSAAMINEN: 'jotain-muuta',
   KIINNOSTUS: 'kiinnostus',
 };

@@ -6,6 +6,7 @@ import {
   Title,
   type RoutesNavigationListProps,
 } from '@/components';
+import { OsaaminenLahdeTyyppi } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useActionBar } from '@/hooks/useActionBar';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';

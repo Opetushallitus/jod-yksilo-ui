@@ -34,20 +34,3 @@ declare interface Kokemus {
   loppuPvm?: string | undefined;
   osaamiset?: string[] | undefined;
 }
-
-declare type OsaaminenLahdeTyyppi = OsaaminenApiResponse['lahde']['tyyppi'] | 'JOTAIN_MUUTA' | 'KIINNOSTUS';
-
-declare interface OsaaminenPostRequest {
-  osaamiset: string[];
-  lahde: {
-    tyyppi: OsaaminenLahdeTyyppi;
-    id: string;
-  };
-}
-
-declare interface Osaaminen {
-  id: string;
-  nimi: string;
-  tyyppi: string;
-  osuvuus: number;
-}

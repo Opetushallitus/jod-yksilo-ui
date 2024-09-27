@@ -57,7 +57,7 @@ export const RoutesNavigationList = ({ routes, onClick }: RoutesNavigationListPr
                 replace={route.replace}
                 lang={i18n.language}
                 className={({ isActive }) =>
-                  cx('hyphens-auto text-button-md text-black hover:underline w-full pl-5 block py-3', {
+                  cx('hyphens-auto text-black w-full pl-5 block py-3 text-button-md hover:underline', {
                     'bg-secondary-1-50 rounded-md': isActive,
                   })
                 }

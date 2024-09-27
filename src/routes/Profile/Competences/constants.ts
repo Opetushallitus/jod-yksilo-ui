@@ -1,3 +1,5 @@
+import { OsaaminenLahdeTyyppi } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
+
 export const GROUP_BY_SOURCE = 'a';
 export const GROUP_BY_THEME = 'b';
 export const GROUP_BY_ALPHABET = 'c';

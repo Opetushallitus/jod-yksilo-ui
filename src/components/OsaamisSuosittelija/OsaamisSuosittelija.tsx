@@ -6,10 +6,11 @@ import { Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+export type OsaaminenLahdeTyyppi = components['schemas']['OsaamisenLahdeDto']['tyyppi'] | 'KIINNOSTUS';
 export interface Osaaminen {
   id: string;
   nimi: string;
-  tyyppi?: components['schemas']['OsaamisenLahdeDto']['tyyppi'] | 'JOTAIN_MUUTA' | 'KIINNOSTUS';
+  tyyppi?: OsaaminenLahdeTyyppi;
   osuvuus: number;
 }
 
@@ -29,7 +30,7 @@ export const OsaamisSuosittelija = ({
   description,
   value = [],
   onChange,
-  sourceType = 'JOTAIN_MUUTA',
+  sourceType = 'MUU_OSAAMINEN',
 }: OsaamisSuosittelijaProps) => {
   const { i18n, t } = useTranslation();
   const { sm } = useMediaQueries();
