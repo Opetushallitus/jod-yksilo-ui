@@ -1,5 +1,5 @@
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
-import { ConfirmDialog, Tag } from '@jod/design-system';
+import { Tag } from '@jod/design-system';
 import { t } from 'i18next';
 import React from 'react';
 import { GroupByProps, MobileFilterButton, groupByHeaderClasses } from './constants';
@@ -9,7 +9,6 @@ export const GroupBySource = ({
   filterKeys,
   locale,
   osaamiset,
-  deleteOsaaminen,
   isOsaaminenVisible,
   mobileFilterOpenerComponent,
 }: GroupByProps & MobileFilterButton) => {
@@ -32,24 +31,12 @@ export const GroupBySource = ({
                   return (
                     val.lahde.tyyppi === sourceType &&
                     isOsaaminenVisible(sourceType, val.lahde.id) && (
-                      <ConfirmDialog
+                      <Tag
+                        label={label}
                         key={val.id}
-                        title="Poista osaaminen"
-                        onConfirm={() => void deleteOsaaminen(val.id)}
-                        confirmText={t('delete')}
-                        cancelText={t('cancel')}
-                        description="Haluatko varmasti poistaa osaamisen?"
-                      >
-                        {(showDialog: () => void) => (
-                          <Tag
-                            label={label}
-                            key={val.id}
-                            variant="added"
-                            onClick={showDialog}
-                            sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
-                          />
-                        )}
-                      </ConfirmDialog>
+                        variant="presentation"
+                        sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
+                      />
                     )
                   );
                 })}

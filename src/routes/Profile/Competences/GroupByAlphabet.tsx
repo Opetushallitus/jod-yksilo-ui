@@ -1,13 +1,11 @@
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
-import { ConfirmDialog, Tag } from '@jod/design-system';
-import { t } from 'i18next';
+import { Tag } from '@jod/design-system';
 import React from 'react';
 import { GroupByProps, MobileFilterButton, groupByHeaderClasses } from './constants';
 
 export const GroupByAlphabet = ({
   locale,
   osaamiset,
-  deleteOsaaminen,
   isOsaaminenVisible,
   mobileFilterOpenerComponent,
 }: GroupByProps & MobileFilterButton) => {
@@ -44,24 +42,12 @@ export const GroupByAlphabet = ({
                 {getOsaaminenByLetter(letter).map((val) => {
                   const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
                   return (
-                    <ConfirmDialog
+                    <Tag
+                      label={label}
                       key={val.id}
-                      title="Poista osaaminen"
-                      onConfirm={() => void deleteOsaaminen(val.id)}
-                      confirmText={t('delete')}
-                      cancelText={t('cancel')}
-                      description="Haluatko varmasti poistaa osaamisen?"
-                    >
-                      {(showDialog: () => void) => (
-                        <Tag
-                          label={label}
-                          key={val.id}
-                          variant="added"
-                          onClick={showDialog}
-                          sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
-                        />
-                      )}
-                    </ConfirmDialog>
+                      variant="presentation"
+                      sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
+                    />
                   );
                 })}
               </div>
