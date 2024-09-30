@@ -8,7 +8,7 @@ import {
 } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
 import EditKiinnostusModal from '@/routes/Profile/Interests/EditKiinnostusModal';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, sortByProperty } from '@/utils';
 import { Button, Tag } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -18,7 +18,7 @@ import { mapNavigationRoutes } from '../utils';
 
 const Interests = () => {
   const routes: RoutesNavigationListProps['routes'] = useOutletContext();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const data = useLoaderData() as components['schemas']['OsaaminenDto'][];
   const title = t('profile.interests.title');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
@@ -30,6 +30,8 @@ const Interests = () => {
     setIsAddModalOpen(false);
     revalidator.revalidate();
   };
+
+  const sortedData = React.useMemo(() => [...data].sort(sortByProperty(`nimi.${i18n.language}`)), [data, i18n]);
 
   return (
     <MainLayout
@@ -47,7 +49,7 @@ const Interests = () => {
       <p className="mb-8 text-body-lg">{t('profile.interests.description')}</p>
       <h2 className="mb-7 text-heading-2">{t('profile.interests.skills-that-interest-me')}</h2>
       <div className="flex flex-wrap gap-4">
-        {data.map((val) => (
+        {sortedData.map((val) => (
           <Tag label={getLocalizedText(val.nimi)} key={val.uri} variant="presentation" sourceType="kiinnostus" />
         ))}
       </div>

@@ -2,6 +2,10 @@ import { formatDate, getLocalizedText, removeDuplicates, sortByProperty } from '
 import i18n from 'i18next';
 import { describe, expect, it } from 'vitest';
 
+const TEST_DATE_1 = '2021-01-01';
+const TEST_DATE_2 = '2022-01-01';
+const TEST_DATE_3 = '2023-01-01';
+
 describe('utils', () => {
   describe('formatDate', () => {
     it('should return formatted date string', () => {
@@ -94,40 +98,90 @@ describe('utils', () => {
   describe('sortByProperty', () => {
     it('should sort objects by string property', () => {
       const items = [{ name: 'banana' }, { name: 'apple' }, { name: 'cherry' }];
-      const sortedItems = items.sort(sortByProperty('name'));
+      const sortedItems = [...items].sort(sortByProperty('name'));
       expect(sortedItems).toEqual([{ name: 'apple' }, { name: 'banana' }, { name: 'cherry' }]);
     });
 
     it('should reverse the sorted array', () => {
       const items = [{ name: 'banana' }, { name: 'apple' }, { name: 'cherry' }];
-      const sortedItems = items.sort(sortByProperty('name', true));
+      const sortedItems = [...items].sort(sortByProperty('name', true));
       expect(sortedItems).toEqual([{ name: 'cherry' }, { name: 'banana' }, { name: 'apple' }]);
     });
 
     it('should sort objects by number property', () => {
       const items = [{ age: 30 }, { age: 20 }, { age: 40 }];
-      const sortedItems = items.sort(sortByProperty('age'));
+      const sortedItems = [...items].sort(sortByProperty('age'));
       expect(sortedItems).toEqual([{ age: 20 }, { age: 30 }, { age: 40 }]);
     });
 
     it('should sort objects by date property', () => {
-      const items = [
-        { date: new Date('2022-01-01') },
-        { date: new Date('2021-01-01') },
-        { date: new Date('2023-01-01') },
-      ];
-      const sortedItems = items.sort(sortByProperty('date'));
+      const items = [{ date: new Date(TEST_DATE_2) }, { date: new Date(TEST_DATE_1) }, { date: new Date(TEST_DATE_3) }];
+      const sortedItems = [...items].sort(sortByProperty('date'));
       expect(sortedItems).toEqual([
-        { date: new Date('2021-01-01') },
-        { date: new Date('2022-01-01') },
-        { date: new Date('2023-01-01') },
+        { date: new Date(TEST_DATE_1) },
+        { date: new Date(TEST_DATE_2) },
+        { date: new Date(TEST_DATE_3) },
       ]);
     });
 
     it('should return 0 for non-comparable types', () => {
       const items = [{ value: {} }, { value: {} }];
-      const sortedItems = items.sort(sortByProperty('value'));
+      const sortedItems = [...items].sort(sortByProperty('value'));
       expect(sortedItems).toEqual(items);
     });
+  });
+
+  it('should sort objects by nested string properties', () => {
+    const items = [{ fruit: { name: 'banana' } }, { fruit: { name: 'apple' } }, { fruit: { name: 'cherry' } }];
+    const sortedItems = [...items].sort(sortByProperty('fruit.name'));
+    expect(sortedItems).toEqual([
+      { fruit: { name: 'apple' } },
+      { fruit: { name: 'banana' } },
+      { fruit: { name: 'cherry' } },
+    ]);
+  });
+
+  it('should reverse the sorted array', () => {
+    const items = [{ fruit: { name: 'banana' } }, { fruit: { name: 'apple' } }, { fruit: { name: 'cherry' } }];
+    const sortedItems = [...items].sort(sortByProperty('fruit.name', true));
+    expect(sortedItems).toEqual([
+      { fruit: { name: 'cherry' } },
+      { fruit: { name: 'banana' } },
+      { fruit: { name: 'apple' } },
+    ]);
+  });
+
+  it('should sort objects by number property  in reverse', () => {
+    const items = [
+      { fruit: { name: 'banana', count: 30 } },
+      { fruit: { name: 'apple', count: 50 } },
+      { fruit: { name: 'cherry', count: 100 } },
+    ];
+    const sortedItems = [...items].sort(sortByProperty('fruit.count', true));
+    expect(sortedItems).toEqual([
+      { fruit: { name: 'cherry', count: 100 } },
+      { fruit: { name: 'apple', count: 50 } },
+      { fruit: { name: 'banana', count: 30 } },
+    ]);
+  });
+
+  it('should sort objects by date property', () => {
+    const items = [
+      { fruit: { name: 'banana', count: 30, data: { date: new Date(TEST_DATE_2) } } },
+      { fruit: { name: 'apple', count: 50, data: { date: new Date(TEST_DATE_1) } } },
+      { fruit: { name: 'cherry', count: 100, data: { date: new Date(TEST_DATE_3) } } },
+    ];
+    const sortedItems = [...items].sort(sortByProperty('fruit.data.date'));
+    expect(sortedItems).toEqual([
+      { fruit: { name: 'apple', count: 50, data: { date: new Date(TEST_DATE_1) } } },
+      { fruit: { name: 'banana', count: 30, data: { date: new Date(TEST_DATE_2) } } },
+      { fruit: { name: 'cherry', count: 100, data: { date: new Date(TEST_DATE_3) } } },
+    ]);
+  });
+
+  it('should return 0 for non-comparable types', () => {
+    const items = [{ value: { nested: {} } }, { value: { nested: {} } }];
+    const sortedItems = [...items].sort(sortByProperty('value.nested'));
+    expect(sortedItems).toEqual(items);
   });
 });

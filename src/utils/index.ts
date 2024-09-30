@@ -43,21 +43,40 @@ export const removeDuplicates = <T extends object>(array: T[], key: NestedKeyOf<
   );
 
 /**
- * Sorts an array of objects by a specified property.
+ * Sorts an array of objects by a specified punction separated property path
+ * current implementation support comparison for string, numer and Date properties
  * @param property The property name to sort by.
  * @param reverse Whether to sort in reverse order.
  * @returns A sorting function for use with Array.sort().
+ *
+ * @example
+ *
+ * const fruits = [
+ *       { fruit: { name: 'banana', count: 30 } },
+ *       { fruit: { name: 'apple', count: 50 } },
+ *       { fruit: { name: 'cherry', count: 100 } },
+ *     ];
+ * const sortedFruits = [...fruits].sort(sortByNestedProperty('fruit.count', true));
+ *
+ * // returns: sortedFruits as
+ *  [
+ *    { fruit: { name: 'cherry', count: 100 } },
+ *    { fruit: { name: 'apple', count: 50 } },
+ *    { fruit: { name: 'banana', count: 30 } },
+ *  ]
  */
 export const sortByProperty =
-  <T, K extends keyof T>(property: K, reverse = false) =>
+  <T extends object>(property: NestedKeyOf<T>, reverse = false) =>
   (a: T, b: T) => {
-    const values = reverse ? [b[property], a[property]] : [a[property], b[property]];
-    const isStringType = values.every((p) => typeof p === 'string');
+    const aValue = getNestedProperty(a, property) as string | number | Date | object;
+    const bValue = getNestedProperty(b, property) as string | number | Date | object;
+
+    const values = reverse ? [bValue, aValue] : [aValue, bValue];
     const isNumberType = values.every((p) => typeof p === 'number');
     const isDateType = values.every((p) => p instanceof Date);
 
-    if (isStringType) {
-      return (values[0] as string).localeCompare(values[1] as string, i18n.language);
+    if (typeof values[0] === 'string' && typeof values[1] === 'string') {
+      return values[0].localeCompare(values[1], i18n.language);
     } else if (isNumberType || isDateType) {
       if (values[0] < values[1]) {
         return -1;
