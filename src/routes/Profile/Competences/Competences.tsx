@@ -12,6 +12,7 @@ import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
 import { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
+import { sortByProperty } from '@/utils';
 import { Button, Modal, RoundButton, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -112,6 +113,11 @@ const Competences = () => {
     [selectedFilters],
   );
 
+  const sortedOsaamiset = React.useMemo(
+    () => [...osaamiset].sort(sortByProperty(`osaaminen.nimi.${locale}`)),
+    [osaamiset, locale],
+  );
+
   const MobileFilterButton = () => {
     return !sm ? (
       <RoundButton
@@ -176,7 +182,7 @@ const Competences = () => {
             filters={selectedFilters}
             filterKeys={filterKeys}
             locale={locale}
-            osaamiset={osaamiset}
+            osaamiset={sortedOsaamiset}
             isOsaaminenVisible={isOsaaminenVisible}
             mobileFilterOpenerComponent={<MobileFilterButton />}
           />

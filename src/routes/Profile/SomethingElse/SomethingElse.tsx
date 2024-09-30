@@ -8,7 +8,7 @@ import {
 } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, sortByProperty } from '@/utils';
 import { Button, Tag } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -18,7 +18,7 @@ import { mapNavigationRoutes } from '../utils';
 
 const SomethingElse = () => {
   const routes: RoutesNavigationListProps['routes'] = useOutletContext();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const title = t('profile.something-else.title');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const data = useLoaderData() as OsaaminenDto[];
@@ -30,6 +30,8 @@ const SomethingElse = () => {
     setIsModalOpen(false);
     revalidator.revalidate();
   };
+
+  const sortedData = React.useMemo(() => [...data].sort(sortByProperty(`nimi.${i18n.language}`)), [data, i18n]);
 
   return (
     <MainLayout
@@ -49,7 +51,7 @@ const SomethingElse = () => {
         </h2>
       )}
       <div className="flex flex-wrap gap-4">
-        {data.map((val) => (
+        {sortedData.map((val) => (
           <Tag label={getLocalizedText(val.nimi)} key={val.uri} variant="presentation" sourceType="jotain-muuta" />
         ))}
       </div>
