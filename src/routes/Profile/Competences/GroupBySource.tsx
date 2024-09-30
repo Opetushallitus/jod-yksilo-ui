@@ -20,17 +20,18 @@ export const GroupBySource = ({
         {mobileFilterOpenerComponent}
       </div>
 
-      {filterKeys.map((key) => {
+      {filterKeys.map((sourceType) => {
         return (
-          Array.isArray(filters[key]) &&
-          filters[key]!.some((filter) => filter.checked) && (
-            <React.Fragment key={key}>
-              <div className={groupByHeaderClasses}>{t(`my-competences.by-${key}`)}</div>
+          Array.isArray(filters[sourceType]) &&
+          filters[sourceType].some((filter) => filter.checked) && (
+            <React.Fragment key={sourceType}>
+              <div className={groupByHeaderClasses}>{t(`my-competences.by-${sourceType}`)}</div>
               <div className="flex flex-wrap gap-4">
                 {osaamiset.map((val) => {
                   const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
                   return (
-                    isOsaaminenVisible(key, val.lahde.id) && (
+                    val.lahde.tyyppi === sourceType &&
+                    isOsaaminenVisible(sourceType, val.lahde.id) && (
                       <ConfirmDialog
                         key={val.id}
                         title="Poista osaaminen"

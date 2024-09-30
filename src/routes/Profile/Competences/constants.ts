@@ -1,3 +1,4 @@
+import { components } from '@/api/schema';
 import { OsaaminenLahdeTyyppi } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 
 export const GROUP_BY_SOURCE = 'a';
@@ -11,16 +12,16 @@ export interface FilterData {
   checked: boolean;
 }
 
-export type FiltersType = Partial<Record<OsaaminenLahdeTyyppi, FilterData[]>>;
+export type FiltersType = Record<OsaaminenLahdeTyyppi, FilterData[]>;
 export const FILTERS_ORDER = ['TOIMENKUVA', 'KOULUTUS', 'PATEVYYS', 'KIINNOSTUS', 'MUU_OSAAMINEN'] as const;
 
 export interface GroupByProps {
   filters: FiltersType;
   filterKeys: (keyof FiltersType)[];
   locale: 'fi' | 'sv';
-  osaamiset: OsaaminenApiResponse[];
-  deleteOsaaminen: (id: string) => Promise<void>;
-  isOsaaminenVisible: (key: OsaaminenLahdeTyyppi, id: string) => boolean;
+  osaamiset: components['schemas']['YksilonOsaaminenDto'][];
+  deleteOsaaminen: (id?: string) => Promise<void>;
+  isOsaaminenVisible: (key: OsaaminenLahdeTyyppi, id?: string) => boolean;
 }
 
 export interface MobileFilterButton {
