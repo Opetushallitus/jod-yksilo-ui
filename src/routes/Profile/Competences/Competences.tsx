@@ -1,4 +1,3 @@
-import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import {
   MainLayout,
@@ -34,15 +33,8 @@ interface Kokemus {
 
 const Competences = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
-  const {
-    toimenkuvat,
-    koulutukset,
-    patevyydet,
-    muutOsaamiset,
-    osaamiset: osaamisetData,
-  } = useLoaderData() as CompetencesLoaderData;
+  const { toimenkuvat, koulutukset, patevyydet, muutOsaamiset, osaamiset } = useLoaderData() as CompetencesLoaderData;
   const [initialized, setInitialized] = React.useState(false);
-  const [osaamiset, setOsaamiset] = React.useState(osaamisetData);
   const { t, i18n } = useTranslation();
   const title = t('profile.competences.title');
   const [groupBy, setGroupBy] = React.useState<string>(GROUP_BY_SOURCE);
@@ -108,26 +100,6 @@ const Competences = () => {
       setInitialized(true);
     }
   }, [initFilters, initialized, osaamiset]);
-
-  const deleteOsaaminen = async (id?: string) => {
-    if (!id) {
-      return;
-    }
-
-    try {
-      await client.DELETE('/api/profiili/osaamiset', {
-        params: { query: { ids: [id] } },
-      });
-
-      setOsaamiset(osaamiset.filter((osaaminen) => osaaminen.id !== id));
-      initFilters(osaamiset);
-    } catch (error) {
-      // Ignore abort errors
-      if (!(error instanceof DOMException && error.name === 'AbortError')) {
-        throw error;
-      }
-    }
-  };
 
   // Determines if osaamiset from a specific source should be visible. Id is the id of the source (eg. koulutus or toimenkuva).
   // Muu osaaminen doesn't have any sources, so they'll show up if any are marked as checked.
@@ -205,7 +177,6 @@ const Competences = () => {
             filterKeys={filterKeys}
             locale={locale}
             osaamiset={osaamiset}
-            deleteOsaaminen={deleteOsaaminen}
             isOsaaminenVisible={isOsaaminenVisible}
             mobileFilterOpenerComponent={<MobileFilterButton />}
           />
@@ -217,7 +188,6 @@ const Competences = () => {
             filterKeys={filterKeys}
             locale={locale}
             osaamiset={osaamiset}
-            deleteOsaaminen={deleteOsaaminen}
             isOsaaminenVisible={isOsaaminenVisible}
             mobileFilterOpenerComponent={<MobileFilterButton />}
           />
