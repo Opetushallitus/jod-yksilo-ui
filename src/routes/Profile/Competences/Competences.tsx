@@ -28,7 +28,7 @@ import { useTranslation } from 'react-i18next';
 import { MdTune } from 'react-icons/md';
 import { useLoaderData, useOutletContext } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
-import { GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME, type FiltersType } from './constants';
+import { FILTERS_ORDER, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME, type FiltersType } from './constants';
 
 const Competences = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
@@ -83,7 +83,11 @@ const Competences = () => {
     if (!initialized) {
       const initialFilters = initFilters(osaamiset);
       setSelectedFilters(initialFilters);
-      setFilterKeys(Object.keys(initialFilters) as (keyof FiltersType)[]);
+      setFilterKeys(
+        [...(Object.keys(initialFilters) as (keyof FiltersType)[])].sort(
+          (a, b) => FILTERS_ORDER.indexOf(a) - FILTERS_ORDER.indexOf(b),
+        ),
+      );
       setInitialized(true);
     }
   }, [initFilters, initialized, osaamiset]);
