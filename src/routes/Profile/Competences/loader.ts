@@ -3,45 +3,64 @@ import { components } from '@/api/schema';
 import { LoaderFunction } from 'react-router-dom';
 
 export interface CompetencesLoaderData {
-  osaamiset: OsaaminenApiResponse[];
+  osaamiset: components['schemas']['YksilonOsaaminenDto'][];
   toimenkuvat: components['schemas']['ToimenkuvaDto'][];
   koulutukset: components['schemas']['KoulutusDto'][];
   patevyydet: components['schemas']['PatevyysDto'][];
+  muutOsaamiset: components['schemas']['OsaaminenDto'][];
 }
 
+/*
+  Each main category (työpaikka, koulu, vapaa-ajan toiminto) has its own array of competences:
+    - tyopaikat -> toimenkuvat
+    - koulut -> koulutukset
+    - vapaaAjanToiminnot -> patevyydet
+
+  Each item in competences will be compared against "osaamiset" response, which contains all the competences for the user and nonmatching are filtered out.
+  This is done to make. The resulting data will be used to populate the Competences page.
+
+  Muu osaaminen is a special case, as it's not tied to any category.
+*/
 const filterItems = <T extends { id?: string }>(items: T[], osaaminenLahdeIds: string[]): T[] =>
   items.filter((item) => item.id && osaaminenLahdeIds.includes(item.id));
 
 export default (async ({ request }) => {
-  const { data: osaamiset, error } = await client.GET('/api/profiili/osaamiset', { signal: request.signal });
-  const { data: tyopaikat } = await client.GET('/api/profiili/tyopaikat', { signal: request.signal });
-  const { data: koulut } = await client.GET('/api/profiili/koulutuskokonaisuudet', { signal: request.signal });
-  const { data: vapaaAjanToiminnot } = await client.GET('/api/profiili/vapaa-ajan-toiminnot', {
-    signal: request.signal,
-  });
+  try {
+    const [osaamisetRes, tyopaikatRes, koulutRes, vapaaAjanToiminnotRes] = await Promise.all([
+      client.GET('/api/profiili/osaamiset', { signal: request.signal }),
+      client.GET('/api/profiili/tyopaikat', { signal: request.signal }),
+      client.GET('/api/profiili/koulutuskokonaisuudet', { signal: request.signal }),
+      client.GET('/api/profiili/vapaa-ajan-toiminnot', { signal: request.signal }),
+    ]);
 
-  const osaaminenLahdeIds = (osaamiset?.filter((o) => o.lahde.id).map((o) => o.lahde.id) ?? []) as string[];
+    const osaaminenLahdeIds = (osaamisetRes?.data?.filter((o) => o.lahde.id).map((o) => o.lahde.id) ?? []) as string[];
+    const muutOsaamiset =
+      osaamisetRes?.data?.filter((o) => o.lahde.tyyppi === 'MUU_OSAAMINEN').map((o) => o.osaaminen) ?? [];
 
-  /*
-    Each main category (työpaikka, koulu, vapaa-ajan toiminto) has its own array of subcategories:
-      - tyopaikat -> toimenkuvat
-      - koulut -> koulutukset
-      - vapaaAjanToiminnot -> patevyydet
+    const toimenkuvat =
+      tyopaikatRes?.data?.flatMap((tyopaikka) => filterItems(tyopaikka.toimenkuvat ?? [], osaaminenLahdeIds)) ?? [];
 
-    Each item in subcategories will be compared against "osaamiset", which contains all the competences for the user.
-    This is done to eliminate the chance for competences that aren't tied to any categories.
+    const patevyydet =
+      vapaaAjanToiminnotRes?.data?.flatMap((toiminto) => filterItems(toiminto.patevyydet ?? [], osaaminenLahdeIds)) ??
+      [];
 
-    The resulting data will be used to populate the Competences page.
-  */
-  const toimenkuvat =
-    tyopaikat?.flatMap((tyopaikka) => filterItems(tyopaikka.toimenkuvat ?? [], osaaminenLahdeIds)) ?? [];
+    const koulutukset =
+      koulutRes?.data?.flatMap((koulu) => filterItems(koulu.koulutukset ?? [], osaaminenLahdeIds)) ?? [];
 
-  const patevyydet =
-    vapaaAjanToiminnot?.flatMap((toiminto) => filterItems(toiminto.patevyydet ?? [], osaaminenLahdeIds)) ?? [];
-
-  const koulutukset = koulut?.flatMap((koulu) => filterItems(koulu.koulutukset ?? [], osaaminenLahdeIds)) ?? [];
-  if (!error) {
-    return { osaamiset, toimenkuvat, koulutukset, patevyydet } as CompetencesLoaderData;
+    return {
+      osaamiset: osaamisetRes.data,
+      toimenkuvat,
+      koulutukset,
+      patevyydet,
+      muutOsaamiset,
+    } as CompetencesLoaderData;
+  } catch (e) {
+    return {
+      osaamiset: [],
+      toimenkuvat: [],
+      koulutukset: [],
+      patevyydet: [],
+      muutOsaamiset: [],
+    } as CompetencesLoaderData;
   }
-  return { osaamiset: [], toimenkuvat: [], koulutukset: [], patevyydet: [] } as CompetencesLoaderData;
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

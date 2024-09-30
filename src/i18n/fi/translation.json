@@ -8,6 +8,7 @@
   "basic-information": "Perustiedot",
   "cancel": "Peruuta",
   "choose": "Valitse",
+  "close": "Sulje",
   "competences": "Osaamiset",
   "competences-of-your-choice": "Valitsemasi osaamiset",
   "cookie-policy": "Evästekäytäntö",
@@ -146,6 +147,7 @@
   "more-information": "Lisätietoa",
   "my-competences": {
     "by-KOULUTUS": "Koulutuksen mukaan",
+    "by-MUU_OSAAMINEN": "Muiden osaamisten mukaan",
     "by-PATEVYYS": "Vapaa-ajan toiminnon mukaan",
     "by-TOIMENKUVA": "Työpaikkojen mukaan"
   },
@@ -168,7 +170,16 @@
   "previous": "Edellinen",
   "privacy-policy": "Tietosuojaseloste",
   "profile": {
-    "competences": "Osaamiseni",
+    "competences": {
+      "add": "Lisää osaaminen",
+      "do-filter": "Suodata",
+      "group": "Järjestele",
+      "group-by-alphabet": "Aakkosellisesti",
+      "group-by-source": "Lähteiden mukaan",
+      "group-by-theme": "Teemoittain",
+      "show-filters": "Näytä suodattimet",
+      "title": "Osaamiseni"
+    },
     "education-history": "Koulutukseni",
     "favorites": "Suosikkini",
     "free-time-activities": "Vapaa-ajan toimintoni",
@@ -183,10 +194,10 @@
     },
     "preferences": "Asetukseni",
     "something-else": {
-      "my-other-comptetences": "Muut osaamiseni",
       "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius.",
       "description-placeholder": "Kirjoita tähän osaamisesi",
       "edit-other-competences": "Muokkaa muita osaamisia",
+      "my-other-comptetences": "Muut osaamiseni",
       "title": "Muut osaamiseni"
     },
     "work-history": "Työpaikkani"
@@ -294,6 +305,7 @@
   "types": {
     "competence": {
       "KOULUTUS": "Koulutus",
+      "MUU_OSAAMINEN": "Muu osaaminen",
       "PATEVYYS": "Vapaa-ajan toiminto",
       "TOIMENKUVA": "Työpaikka"
     }
