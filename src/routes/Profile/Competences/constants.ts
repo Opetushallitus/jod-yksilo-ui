@@ -12,6 +12,7 @@ export interface FilterData {
 }
 
 export type FiltersType = Partial<Record<OsaaminenLahdeTyyppi, FilterData[]>>;
+export const FILTERS_ORDER = ['TOIMENKUVA', 'KOULUTUS', 'PATEVYYS', 'KIINNOSTUS', 'MUU_OSAAMINEN'] as const;
 
 export interface GroupByProps {
   filters: FiltersType;

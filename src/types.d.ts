@@ -12,7 +12,7 @@ declare interface OsaaminenApiResponse {
     };
   };
   lahde: {
-    tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS';
+    tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
     id: string;
   };
 }
