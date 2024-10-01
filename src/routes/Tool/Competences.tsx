@@ -19,19 +19,19 @@ const HelpingToolsContent = () => {
       <ul className="flex flex-col gap-4">
         <li>
           <div className="flex gap-x-3">
-            <MdOutlineSchool size={24} color="00818A" />
+            <MdOutlineSchool size={24} color="#00818A" />
             <div>{t('profile.education-history')}</div>
           </div>
         </li>
         <li>
           <div className="flex gap-x-3">
-            <TbBriefcase2 size={24} color="AD4298" />
+            <TbBriefcase2 size={24} color="#AD4298" />
             <div>{t('profile.work-history')}</div>
           </div>
         </li>
         <li>
           <div className="flex gap-x-3">
-            <MdOutlineSailing size={24} color="006DB3" />
+            <MdOutlineSailing size={24} color="#006DB3" />
             <div>{t('profile.free-time-activities')}</div>
           </div>
         </li>
