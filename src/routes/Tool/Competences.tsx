@@ -31,7 +31,7 @@ const HelpingToolsContent = () => {
         </li>
         <li>
           <div className="flex gap-x-3">
-            <MdOutlineSailing size={24} color="#006DB3" />
+            <MdOutlineSailing size={24} className="text-accent" />
             <div>{t('profile.free-time-activities')}</div>
           </div>
         </li>
