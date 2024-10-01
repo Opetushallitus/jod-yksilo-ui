@@ -203,7 +203,14 @@ const Root = () => {
       <ActionBarContext.Provider value={footerRef.current}>
         <Outlet />
       </ActionBarContext.Provider>
-      <Footer ref={footerRef} items={footerItems} logos={logos} copyright={t('copyright')} variant="light" />
+      <Footer
+        ref={footerRef}
+        items={footerItems}
+        logos={logos}
+        copyright={t('copyright')}
+        variant="light"
+        className={!sm ? 'pt-0' : undefined}
+      />
       <ScrollRestoration />
     </>
   );
