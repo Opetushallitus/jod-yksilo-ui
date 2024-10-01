@@ -73,7 +73,7 @@ const Interests = () => {
             sourceType="KIINNOSTUS"
           />
         </div>
-        <div className="order-2 col-span-1 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0">
+        <div className="order-2 col-span-1 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0 bg-todo">
           {sm ? (
             <>
               <span className="text-heading-4 text-black">{t('tools')}</span>
