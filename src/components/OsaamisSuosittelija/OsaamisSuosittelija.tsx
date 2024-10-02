@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
+import { getLocalizedText } from '@/utils';
 import { Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 export type OsaaminenLahdeTyyppi = components['schemas']['OsaamisenLahdeDto']['tyyppi'] | 'KIINNOSTUS';
 export interface Osaaminen {
   id: string;
-  nimi: string;
+  nimi: components['schemas']['LokalisoituTeksti'];
   tyyppi?: OsaaminenLahdeTyyppi;
   osuvuus: number;
 }
@@ -56,7 +57,7 @@ export const OsaamisSuosittelija = ({
             (e, o) => {
               return {
                 id: o.uri,
-                nimi: o.nimi[i18n.language],
+                nimi: o.nimi,
                 osuvuus: e.osuvuus ?? 0,
               };
             },
@@ -94,7 +95,7 @@ export const OsaamisSuosittelija = ({
           {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen) => (
             <Tag
               key={ehdotettuOsaaminen.id}
-              label={ehdotettuOsaaminen.nimi ?? ''}
+              label={getLocalizedText(ehdotettuOsaaminen.nimi)}
               sourceType={OSAAMINEN_COLOR_MAP[sourceType]}
               onClick={() => {
                 onChange([...value, { id: ehdotettuOsaaminen.id, nimi: ehdotettuOsaaminen.nimi, tyyppi: sourceType }]);
@@ -111,7 +112,7 @@ export const OsaamisSuosittelija = ({
           {value.map((val) => (
             <Tag
               key={val.id}
-              label={val.nimi ?? ''}
+              label={getLocalizedText(val.nimi)}
               sourceType={OSAAMINEN_COLOR_MAP[val.tyyppi ? val.tyyppi : sourceType]}
               onClick={() => {
                 onChange(value.filter((selectedValue) => selectedValue.id !== val.id));

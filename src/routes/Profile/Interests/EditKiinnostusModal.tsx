@@ -21,7 +21,7 @@ interface KiinnostusForm {
 }
 
 const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const data = (useLoaderData() as components['schemas']['OsaaminenDto'][]) ?? [];
 
@@ -44,7 +44,7 @@ const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
         description: '',
         kiinnostukset: data.map((x) => ({
           id: x.uri,
-          nimi: x.nimi[i18n.language],
+          nimi: x.nimi,
         })),
       });
     },

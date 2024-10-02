@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -29,7 +30,7 @@ interface PatevyysForm {
   kuvaus: string;
   alkuPvm: string;
   loppuPvm: string;
-  osaamiset: { id: string; nimi: string }[];
+  osaamiset: { id: string; nimi: components['schemas']['LokalisoituTeksti'] }[];
 }
 
 const PATEVYYS_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet/{patevyysId}';
@@ -71,7 +72,7 @@ const MainStep = () => {
   );
 };
 
-const OsaaminenStep = () => {
+const OsaamisetStep = () => {
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const { t } = useTranslation();
   const { control } = useFormContext<PatevyysForm>();
@@ -117,7 +118,7 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
 
   const formId = React.useId();
   const [step, setStep] = React.useState(0);
-  const stepComponents = [MainStep, OsaaminenStep];
+  const stepComponents = [MainStep, OsaamisetStep];
   const StepComponent = stepComponents[step];
 
   const nextStep = () => {
@@ -166,7 +167,7 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
         osaamiset:
           patevyys?.osaamiset?.map((osaaminenId) => ({
             id: osaaminenId,
-            nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi?.[language] ?? '',
+            nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
           })) ?? [],
       };
     },
