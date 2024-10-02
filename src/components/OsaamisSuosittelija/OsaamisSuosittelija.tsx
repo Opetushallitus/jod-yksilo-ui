@@ -11,11 +11,12 @@ export type OsaaminenLahdeTyyppi = components['schemas']['OsaamisenLahdeDto']['t
 export interface Osaaminen {
   id: string;
   nimi: components['schemas']['LokalisoituTeksti'];
+  kuvaus: components['schemas']['LokalisoituTeksti'];
   tyyppi?: OsaaminenLahdeTyyppi;
   osuvuus: number;
 }
 
-export type OsaaminenValue = Pick<Osaaminen, 'id' | 'nimi' | 'tyyppi'>;
+export type OsaaminenValue = Pick<Osaaminen, 'id' | 'nimi' | 'kuvaus' | 'tyyppi'>;
 
 interface OsaamisSuosittelijaProps {
   /** Description text that is used to search for competences */
@@ -44,10 +45,10 @@ export const OsaamisSuosittelija = ({
     abortController.current?.abort();
     abortController.current = new AbortController();
 
-    const fetchCompetences = async (kuvaus: string) => {
+    const fetchCompetences = async (value: string) => {
       try {
         const ehdotus = await client.POST('/api/ehdotus/osaamiset', {
-          body: { [i18n.language]: kuvaus },
+          body: { [i18n.language]: value },
           signal: abortController.current?.signal,
         });
         setEhdotetutOsaamiset(
@@ -58,6 +59,7 @@ export const OsaamisSuosittelija = ({
               return {
                 id: o.uri,
                 nimi: o.nimi,
+                kuvaus: o.kuvaus,
                 osuvuus: e.osuvuus ?? 0,
               };
             },
@@ -96,9 +98,18 @@ export const OsaamisSuosittelija = ({
             <Tag
               key={ehdotettuOsaaminen.id}
               label={getLocalizedText(ehdotettuOsaaminen.nimi)}
+              title={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
               sourceType={OSAAMINEN_COLOR_MAP[sourceType]}
               onClick={() => {
-                onChange([...value, { id: ehdotettuOsaaminen.id, nimi: ehdotettuOsaaminen.nimi, tyyppi: sourceType }]);
+                onChange([
+                  ...value,
+                  {
+                    id: ehdotettuOsaaminen.id,
+                    nimi: ehdotettuOsaaminen.nimi,
+                    kuvaus: ehdotettuOsaaminen.kuvaus,
+                    tyyppi: sourceType,
+                  },
+                ]);
               }}
               variant="selectable"
             />
@@ -113,6 +124,7 @@ export const OsaamisSuosittelija = ({
             <Tag
               key={val.id}
               label={getLocalizedText(val.nimi)}
+              title={getLocalizedText(val.kuvaus)}
               sourceType={OSAAMINEN_COLOR_MAP[val.tyyppi ? val.tyyppi : sourceType]}
               onClick={() => {
                 onChange(value.filter((selectedValue) => selectedValue.id !== val.id));

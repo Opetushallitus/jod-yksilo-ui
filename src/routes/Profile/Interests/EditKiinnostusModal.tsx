@@ -45,6 +45,7 @@ const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
         kiinnostukset: data.map((x) => ({
           id: x.uri,
           nimi: x.nimi,
+          kuvaus: x.kuvaus,
         })),
       });
     },

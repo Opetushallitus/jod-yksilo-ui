@@ -104,6 +104,7 @@ const Tool = () => {
             (osaaminen): OsaaminenValue => ({
               id: osaaminen.osaaminen.uri,
               nimi: osaaminen.osaaminen.nimi,
+              kuvaus: osaaminen.osaaminen.kuvaus,
               tyyppi: osaaminen.lahde.tyyppi,
             }),
           ),
@@ -112,6 +113,7 @@ const Tool = () => {
           kiinnostukset.map((k) => ({
             id: k.uri,
             nimi: k.nimi,
+            kuvaus: k.kuvaus,
             tyyppi: 'KIINNOSTUS',
           })),
         );

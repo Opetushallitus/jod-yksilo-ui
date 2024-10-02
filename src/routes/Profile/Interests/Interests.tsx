@@ -50,7 +50,13 @@ const Interests = () => {
       <h2 className="mb-7 text-heading-2">{t('profile.interests.skills-that-interest-me')}</h2>
       <div className="flex flex-wrap gap-4">
         {sortedData.map((val) => (
-          <Tag label={getLocalizedText(val.nimi)} key={val.uri} variant="presentation" sourceType="kiinnostus" />
+          <Tag
+            label={getLocalizedText(val.nimi)}
+            title={getLocalizedText(val.kuvaus)}
+            key={val.uri}
+            variant="presentation"
+            sourceType="kiinnostus"
+          />
         ))}
       </div>
 
