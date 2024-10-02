@@ -5,9 +5,9 @@
     "card-1-title": "Feel free to change! Explore your chances, plan your path and create your future.",
     "card-2-title": "Identify your skills and explore opportunities",
     "card-3-title": "Discover how you use the service and create your own future",
-    "card-4-title": "Create your own profile and design your path",
-    "title": "Front page"
+    "card-4-title": "Create your own profile and design your path"
   },
+  "osaamispolku": "Competency Path",
   "slugs": {
     "about-us": "about-us",
     "accessibility-statement": "accessibility-statement",
@@ -25,11 +25,11 @@
     "privacy-policy": "privacy-policy",
     "profile": {
       "competences": "competences",
-      "interests": "interests",
       "education-history": "education-history",
       "favorites": "favorites",
       "free-time-activities": "free-time-activities",
       "index": "profile",
+      "interests": "interests",
       "preferences": "preferences",
       "something-else": "something-else",
       "work-history": "work-history"

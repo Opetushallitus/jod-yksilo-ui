@@ -3,6 +3,26 @@ export { ExperienceTable } from './ExperienceTable/ExperienceTable';
 export { type ExperienceTableRowData } from './ExperienceTable/ExperienceTableRow';
 export { LanguageButton } from './LanguageButton/LanguageButton';
 export { LanguageMenu } from './LanguageMenu/LanguageMenu';
+export {
+  LogoArrowBlack,
+  LogoArrowBlue,
+  LogoArrowOrange,
+  LogoArrowPink,
+  LogoArrowTurquoise,
+  LogoArrowWhite,
+  LogoBlackEn,
+  LogoBlackFi,
+  LogoBlackSv,
+  LogoIconBlack,
+  LogoIconRgb,
+  LogoIconWhite,
+  LogoRgbEn,
+  LogoRgbFi,
+  LogoRgbSv,
+  LogoWhiteEn,
+  LogoWhiteFi,
+  LogoWhiteSv,
+} from './Logo';
 export { MainLayout } from './MainLayout/MainLayout';
 export { RoutesNavigationList, type RoutesNavigationListProps } from './MainLayout/RoutesNavigationList';
 export { SimpleNavigationList } from './MainLayout/SimpleNavigationList';
