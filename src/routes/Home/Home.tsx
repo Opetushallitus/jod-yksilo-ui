@@ -64,7 +64,7 @@ const Home = () => {
 
   return (
     <main role="main" className="mx-auto w-full max-w-screen-lg bg-white" id="jod-main">
-      <Title value={t('home.title')} />
+      <Title value={t('osaamispolku')} />
       <div className="h-[320px] sm:h-auto mx-auto bg-[url(@/../assets/hero.jpeg)] bg-[length:auto_680px] bg-[top_-2rem_right_-22rem] sm:bg-[length:auto_auto] sm:bg-[top_-6rem_left_-5rem] py-5 sm:py-11">
         {sm && <Cards />}
       </div>

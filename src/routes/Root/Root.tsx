@@ -1,5 +1,5 @@
 import { components } from '@/api/schema';
-import { LanguageMenu, NavigationBar } from '@/components';
+import { LanguageMenu, LogoIconRgb, LogoRgbEn, LogoRgbFi, LogoRgbSv, NavigationBar } from '@/components';
 import { ErrorNote, useErrorNote } from '@/components/ErrorNote';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
@@ -20,8 +20,22 @@ const NavigationBarItem = (to: string, text: string) => ({
   ),
 });
 
+const LogoRgb = ({ language, size }: { language: string; size: number }) => {
+  switch (language) {
+    case 'sv':
+      return <LogoRgbSv size={size} />;
+    case 'en':
+      return <LogoRgbEn size={size} />;
+    default:
+      return <LogoRgbFi size={size} />;
+  }
+};
+
 const Root = () => {
-  const { t, i18n } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { error, clearErrorNote } = useErrorNote();
 
   const { sm } = useMediaQueries();
@@ -97,7 +111,7 @@ const Root = () => {
           <div className="relative">
             <form action="/logout" method="POST" hidden ref={logoutForm}>
               <input type="hidden" name="_csrf" value={data?.csrf.token} />
-              <input type="hidden" name="lang" value={i18n.language} />
+              <input type="hidden" name="lang" value={language} />
             </form>
             <button
               type="button"
@@ -134,7 +148,8 @@ const Root = () => {
   return (
     <>
       <Helmet>
-        <html lang={i18n.language} />
+        <html lang={language} />
+        <link rel="manifest" href={`/manifest-${language}.json`} />
         <body className="bg-bg-gray" />
       </Helmet>
       <header role="banner" className="sticky top-0 z-30 print:hidden">
@@ -142,13 +157,12 @@ const Root = () => {
         <NavigationBar
           onLanguageClick={toggleMenu('lang')}
           logo={
-            sm && (
-              <NavLink to={`/${i18n.language}`} className="flex">
-                <div className="inline-flex select-none items-center gap-4 text-[24px] leading-[140%] text-secondary-gray">
-                  <div className="h-8 w-8 bg-secondary-gray"></div>JOD
-                </div>
-              </NavLink>
-            )
+            <NavLink to={`/${language}`} className="flex">
+              <div className="inline-flex select-none items-center gap-4 text-[24px] leading-[140%] text-secondary-gray">
+                {sm ? <LogoRgb language={language} size={32} /> : <LogoIconRgb size={32} />}
+                <span className="sr-only">{t('osaamispolku')}</span>
+              </div>
+            </NavLink>
           }
           menuComponent={
             sm ? (
