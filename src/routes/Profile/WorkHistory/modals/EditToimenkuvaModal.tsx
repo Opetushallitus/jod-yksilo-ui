@@ -30,7 +30,11 @@ interface ToimenkuvaForm {
   kuvaus: string;
   alkuPvm: string;
   loppuPvm: string;
-  osaamiset: { id: string; nimi: components['schemas']['LokalisoituTeksti'] }[];
+  osaamiset: {
+    id: string;
+    nimi: components['schemas']['LokalisoituTeksti'];
+    kuvaus: components['schemas']['LokalisoituTeksti'];
+  }[];
 }
 
 const TOIMENKUVA_API_PATH = '/api/profiili/tyopaikat/{id}/toimenkuvat/{toimenkuvaId}';
@@ -166,6 +170,7 @@ const EditToimenkuvaModal = ({ isOpen, onClose, tyopaikkaId: id, toimenkuvaId }:
           toimenkuva?.osaamiset?.map((osaaminenId) => ({
             id: osaaminenId,
             nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
+            kuvaus: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.kuvaus ?? {},
           })) ?? [],
       };
     },

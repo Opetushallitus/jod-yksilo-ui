@@ -30,7 +30,11 @@ interface PatevyysForm {
   kuvaus: string;
   alkuPvm: string;
   loppuPvm: string;
-  osaamiset: { id: string; nimi: components['schemas']['LokalisoituTeksti'] }[];
+  osaamiset: {
+    id: string;
+    nimi: components['schemas']['LokalisoituTeksti'];
+    kuvaus: components['schemas']['LokalisoituTeksti'];
+  }[];
 }
 
 const PATEVYYS_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet/{patevyysId}';
@@ -168,6 +172,7 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
           patevyys?.osaamiset?.map((osaaminenId) => ({
             id: osaaminenId,
             nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
+            kuvaus: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.kuvaus ?? {},
           })) ?? [],
       };
     },

@@ -52,7 +52,13 @@ const SomethingElse = () => {
       )}
       <div className="flex flex-wrap gap-4">
         {sortedData.map((val) => (
-          <Tag label={getLocalizedText(val.nimi)} key={val.uri} variant="presentation" sourceType="jotain-muuta" />
+          <Tag
+            label={getLocalizedText(val.nimi)}
+            title={getLocalizedText(val.kuvaus)}
+            key={val.uri}
+            variant="presentation"
+            sourceType="jotain-muuta"
+          />
         ))}
       </div>
       {actionBar &&

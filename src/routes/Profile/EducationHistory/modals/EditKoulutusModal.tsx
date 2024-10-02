@@ -30,7 +30,11 @@ interface KoulutusForm {
   kuvaus: string;
   alkuPvm: string;
   loppuPvm: string;
-  osaamiset: { id: string; nimi: components['schemas']['LokalisoituTeksti'] }[];
+  osaamiset: {
+    id: string;
+    nimi: components['schemas']['LokalisoituTeksti'];
+    kuvaus: components['schemas']['LokalisoituTeksti'];
+  }[];
 }
 
 const KOULUTUS_API_PATH = '/api/profiili/koulutuskokonaisuudet/{id}/koulutukset/{koulutusId}';
@@ -166,6 +170,7 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutuskokonaisuusId: id, koulutu
           koulutus?.osaamiset?.map((osaaminenId) => ({
             id: osaaminenId,
             nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
+            kuvaus: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.kuvaus ?? {},
           })) ?? [],
       };
     },
