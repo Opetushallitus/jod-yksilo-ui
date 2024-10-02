@@ -1,7 +1,9 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList, Title } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
-import { Accordion, Button } from '@jod/design-system';
+import { getLocalizedText, sortByProperty } from '@/utils';
+import { Accordion, Button, Tag } from '@jod/design-system';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { MdArrowBack } from 'react-icons/md';
@@ -17,7 +19,10 @@ const Competences = () => {
   const navigate = useNavigate();
   const { tyomahdollisuus, osaamiset } = useOutletContext<LoaderData>();
   const title = tyomahdollisuus?.otsikko[language] ?? '';
-  const competences = osaamiset ?? [];
+  const sortedCompetences = React.useMemo(
+    () => [...(osaamiset ?? [])].sort(sortByProperty(`nimi.${language}`)),
+    [osaamiset, language],
+  );
 
   const routes: RoutesNavigationListProps['routes'] = [
     {
@@ -73,11 +78,16 @@ const Competences = () => {
             <p className="text-body-sm font-arial mt-4 mb-4">
               {t('job-opportunity.specific-professional-competences.description')}
             </p>
-            <ol className="list-decimal ml-7 font-bold text-black leading-7">
-              {competences.map((competence) => (
-                <li key={competence.uri}>{competence.nimi[language]}</li>
+            <div className="flex flex-wrap gap-4">
+              {sortedCompetences.map((competence) => (
+                <Tag
+                  label={getLocalizedText(competence.nimi)}
+                  title={getLocalizedText(competence.kuvaus)}
+                  key={competence.uri}
+                  variant="presentation"
+                />
               ))}
-            </ol>
+            </div>
           </Accordion>
         </div>
         <div>
@@ -94,7 +104,7 @@ const Competences = () => {
             <p className="text-body-sm font-arial mb-6 mt-4">
               {t('job-opportunity.general-working-life-skills.description')}
             </p>
-            <div className="bg-bg-gray h-[380px]" />
+            <div className="bg-todo h-[380px]" />
           </Accordion>
         </div>
         <div>
@@ -111,7 +121,7 @@ const Competences = () => {
             <p className="text-body-sm font-arial mb-6 mt-4">
               {t('job-opportunity.digital-skills-for-citizens.description')}
             </p>
-            <div className="bg-bg-gray h-[380px]" />
+            <div className="bg-todo h-[380px]" />
           </Accordion>
         </div>
         <div>
@@ -128,7 +138,7 @@ const Competences = () => {
             <p className="text-body-sm font-arial mb-6 mt-4">
               {t('job-opportunity.personal-characteristics.description')}
             </p>
-            <div className="bg-bg-gray h-[380px]" />
+            <div className="bg-todo h-[380px]" />
           </Accordion>
         </div>
       </div>

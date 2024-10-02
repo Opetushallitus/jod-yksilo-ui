@@ -120,7 +120,7 @@ const Overview = () => {
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.key-figures.description')}</p>
-            <div className="bg-bg-gray h-[380px]" />
+            <div className="bg-todo h-[380px]" />
           </Accordion>
         </div>
         <div>
@@ -137,7 +137,7 @@ const Overview = () => {
             <p className="text-body-sm font-arial mb-6 mt-4">
               {t('job-opportunity.labour-market-picture.description')}
             </p>
-            <div className="bg-bg-gray h-[380px]" />
+            <div className="bg-todo h-[380px]" />
           </Accordion>
         </div>
         <div>
@@ -152,7 +152,7 @@ const Overview = () => {
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.salary-trends.description')}</p>
-            <div className="bg-bg-gray h-[380px]" />
+            <div className="bg-todo h-[380px]" />
           </Accordion>
         </div>
         <div>
@@ -167,7 +167,7 @@ const Overview = () => {
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.employment-trends.description')}</p>
-            <div className="bg-bg-gray h-[380px]" />
+            <div className="bg-todo h-[380px]" />
           </Accordion>
         </div>
         <div>
@@ -182,7 +182,7 @@ const Overview = () => {
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.related-jobs.description')}</p>
-            <div className="bg-bg-gray h-[380px] mb-8" />
+            <div className="bg-todo h-[380px] mb-8" />
           </Accordion>
         </div>
       </div>
