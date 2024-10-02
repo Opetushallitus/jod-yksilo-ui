@@ -5,6 +5,7 @@ import { removeDuplicates } from '@/utils';
 import { LoaderFunction } from 'react-router-dom';
 
 type YksilonOsaaminenDto = components['schemas']['YksilonOsaaminenDto'];
+
 export interface ToolLoaderData {
   osaamiset: YksilonOsaaminenDto[];
   kiinnostukset: OsaaminenDto[];

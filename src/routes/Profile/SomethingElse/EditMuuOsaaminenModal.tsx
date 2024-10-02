@@ -21,7 +21,7 @@ interface OsaamisetForm {
 }
 
 const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModal) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const data = (useLoaderData() as OsaaminenDto[]) ?? [];
 
@@ -34,7 +34,6 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModal) => {
         osaamiset: z.array(
           z.object({
             id: z.string().min(1),
-            nimi: z.string(),
           }),
         ),
       }),
@@ -44,7 +43,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModal) => {
         description: '',
         osaamiset: data.map((x) => ({
           id: x.uri,
-          nimi: x.nimi[i18n.language],
+          nimi: x.nimi,
         })),
       });
     },

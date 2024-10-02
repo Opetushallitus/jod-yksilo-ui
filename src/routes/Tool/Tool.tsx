@@ -1,6 +1,5 @@
 import { OpportunityCard, OsaaminenValue, SimpleNavigationList, Title } from '@/components';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText } from '@/utils';
 import {
   Button,
   Modal,
@@ -104,7 +103,7 @@ const Tool = () => {
           osaamisetData.map(
             (osaaminen): OsaaminenValue => ({
               id: osaaminen.osaaminen.uri,
-              nimi: getLocalizedText(osaaminen.osaaminen.nimi),
+              nimi: osaaminen.osaaminen.nimi,
               tyyppi: osaaminen.lahde.tyyppi,
             }),
           ),
@@ -112,7 +111,7 @@ const Tool = () => {
         toolStore.setKiinnostukset(
           kiinnostukset.map((k) => ({
             id: k.uri,
-            nimi: getLocalizedText(k.nimi),
+            nimi: k.nimi,
             tyyppi: 'KIINNOSTUS',
           })),
         );

@@ -1,3 +1,5 @@
+import { components } from '@/api/schema';
+
 export interface EducationHistoryForm {
   id?: string;
   nimi: string;
@@ -8,7 +10,7 @@ export interface EducationHistoryForm {
     loppuPvm: string;
     osaamiset: {
       id: string;
-      nimi: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
     }[];
   }[];
 }

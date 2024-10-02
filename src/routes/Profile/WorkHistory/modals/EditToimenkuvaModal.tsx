@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -29,7 +30,7 @@ interface ToimenkuvaForm {
   kuvaus: string;
   alkuPvm: string;
   loppuPvm: string;
-  osaamiset: { id: string; nimi: string }[];
+  osaamiset: { id: string; nimi: components['schemas']['LokalisoituTeksti'] }[];
 }
 
 const TOIMENKUVA_API_PATH = '/api/profiili/tyopaikat/{id}/toimenkuvat/{toimenkuvaId}';
@@ -71,7 +72,7 @@ const MainStep = () => {
   );
 };
 
-const OsaaminenStep = () => {
+const OsaamisetStep = () => {
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const { t } = useTranslation();
   const { control } = useFormContext<ToimenkuvaForm>();
@@ -115,7 +116,7 @@ const EditToimenkuvaModal = ({ isOpen, onClose, tyopaikkaId: id, toimenkuvaId }:
 
   const formId = React.useId();
   const [step, setStep] = React.useState(0);
-  const stepComponents = [MainStep, OsaaminenStep];
+  const stepComponents = [MainStep, OsaamisetStep];
   const StepComponent = stepComponents[step];
 
   const nextStep = () => {
@@ -164,7 +165,7 @@ const EditToimenkuvaModal = ({ isOpen, onClose, tyopaikkaId: id, toimenkuvaId }:
         osaamiset:
           toimenkuva?.osaamiset?.map((osaaminenId) => ({
             id: osaaminenId,
-            nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi?.[language] ?? '',
+            nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
           })) ?? [],
       };
     },
