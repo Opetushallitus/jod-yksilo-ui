@@ -12,7 +12,7 @@ export const MainLayout = ({ children, navChildren }: MainLayoutProps) => {
     <div className="mx-auto grid w-full max-w-[1140px] grow grid-cols-3 gap-6 px-5 pb-6 pt-8 sm:px-6 print:p-0">
       {sm && (
         <aside className="order-last col-span-1 print:hidden">
-          <nav role="navigation" className="sticky top-0 pt-[96px]">
+          <nav role="navigation" className="sticky top-0 max-h-[calc(100vh-196px)] overflow-y-auto scrollbar-hidden">
             {navChildren}
           </nav>
         </aside>
