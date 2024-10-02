@@ -23,7 +23,7 @@ const EducationHistory = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const koulutuskokonaisuudet = useLoaderData() as Koulutuskokonaisuus[];
   const { t } = useTranslation();
-  const title = t('profile.education-history');
+  const title = t('profile.education-history.title');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
   const [isWizardOpen, setIsWizardOpen] = React.useState(false);
@@ -80,11 +80,7 @@ const EducationHistory = () => {
     >
       <Title value={title} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
-      <p className="mb-8 text-body-md font-arial text-todo">
-        Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
-        simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
-        in albucius nominavi principes eum, quem facilisi cotidieque mel no.
-      </p>
+      <p className="mb-8 text-body-lg">{t('profile.education-history.description')}</p>
       <ExperienceTable
         mainColumnHeader={t('education-history.education-or-degree')}
         rows={rows}

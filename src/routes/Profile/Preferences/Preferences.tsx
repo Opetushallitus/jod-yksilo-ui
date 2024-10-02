@@ -18,7 +18,7 @@ import { mapNavigationRoutes } from '../utils';
 const Preferences = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const { t } = useTranslation();
-  const title = t('profile.preferences');
+  const title = t('profile.preferences.title');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
   const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
@@ -40,15 +40,22 @@ const Preferences = () => {
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">
         {t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
       </h1>
-      <p className="mb-8 text-body-md font-arial text-todo">
-        Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
-        simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
-        in albucius nominavi principes eum, quem facilisi cotidieque mel no.
-        <br />
-        <br />
-        Cum ei sale incorrupte voluptatibus, his causae epicuri in, in est vero inimicus. Nam an ipsum tantas torquatos,
-        per ei decore commodo, consul voluptua neglegentur te eam.
-      </p>
+
+      <div className="mb-8 text-body-md flex flex-col gap-7">
+        <p>{t('profile.preferences.you-are-signed-in')}</p>
+        <ul>
+          <li className="list-disc ml-7 pl-4">{t('profile.preferences.list-1-item-1')}</li>
+          <li className="list-disc ml-7 pl-4">{t('profile.preferences.list-1-item-2')}</li>
+          <li className="list-disc ml-7 pl-4">{t('profile.preferences.list-1-item-3')}</li>
+        </ul>
+        <p>{t('profile.preferences.paragraph-2')}</p>
+        <ul>
+          <li className="list-disc ml-7 pl-4">{t('profile.preferences.list-2-item-1')}</li>
+          <li className="list-disc ml-7 pl-4">{t('profile.preferences.list-2-item-2')}</li>
+        </ul>
+        <p>{t('profile.preferences.paragraph-3')}</p>
+        <p>{t('profile.preferences.paragraph-4')}</p>
+      </div>
       {actionBar &&
         createPortal(
           <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">

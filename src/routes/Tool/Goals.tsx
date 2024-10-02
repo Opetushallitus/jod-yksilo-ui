@@ -290,9 +290,9 @@ const Goals = () => {
         <div className="order-1 col-span-1 sm:col-span-2">
           <h1 className="mb-5 mt-7 text-heading-1 text-black">{t('tool.goals.heading-1')}</h1>
 
-          <div className="pb-7">
-            <p className="mb-6 text-body-md font-arial text-black">{t('tool.goals.page-description')}</p>
-            <p className="text-body-md font-arial text-black">{t('tool.goals.field-description')}</p>
+          <div className="pb-7 text-black flex flex-col gap-6">
+            <p>{t('tool.goals.page-description')}</p>
+            <p>{t('tool.goals.field-description')}</p>
           </div>
         </div>
 
