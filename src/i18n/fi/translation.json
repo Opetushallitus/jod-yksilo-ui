@@ -11,6 +11,7 @@
   "close": "Sulje",
   "competences": "Osaamiset",
   "competences-of-your-choice": "Valitsemasi osaamiset",
+  "content": "Sisältö",
   "cookie-policy": "Evästekäytäntö",
   "cookies": "Evästeet",
   "copyright": "© JOD 2024. Kaikki oikeudet pidätetään.",
@@ -37,6 +38,7 @@
     "educational-institution": "Oppilaitos",
     "identify-competences": "Tunnista osaamisia"
   },
+  "education-opportunities": "Koulutusmahdollisuudet",
   "employment-view": "Työllisyysnäkymä",
   "ended": "Loppui",
   "error": {
@@ -87,6 +89,7 @@
   "industry-job-opportunities": "Toimiala (työmahdollisuudet)",
   "instructions": "Ohjeet",
   "interests": "Kiinnostukset",
+  "job-opportunities": "Työmahdollisuudet",
   "job-opportunity": {
     "competences": {
       "navigation": "Osaamisvaatimukset",
@@ -182,6 +185,7 @@
   "profile": {
     "competences": {
       "add": "Lisää osaaminen",
+      "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius.",
       "do-filter": "Suodata",
       "group": "Järjestele",
       "group-by-alphabet": "Aakkosellisesti",
@@ -190,9 +194,18 @@
       "show-filters": "Näytä suodattimet",
       "title": "Osaamiseni"
     },
-    "education-history": "Koulutukseni",
-    "favorites": "Suosikkini",
-    "free-time-activities": "Vapaa-ajan toimintoni",
+    "education-history": {
+      "description": "Löydät alta koulutushistoriasi. Voit lisätä käsin koulutushistoriaasi sekä siihen liittyviä tutkintoja, kursseja sekä kartoittaa niihin liittyviä osaamisiasi. Voit myös tuoda koulutushistoriasi ja kartoittaa siihen liittyviä osaamisiasi Oma Opintopolun omista opintosuorituksista.",
+      "title": "Koulutukseni"
+    },
+    "favorites": {
+      "description": "Suosikeiksi tallentamasi koulutus- ja työmahdollisuudet löytyvät täältä. Voit tallentaa lisää mahdollisuuksia suosikeiksi kohtautuskoneen tulosnäkymässä. Voit poistaa suosikkeja sekä luoda yhdestä tai useammasta suosikista koulutus- ja urapolkusuunnitelman.",
+      "title": "Suosikkini"
+    },
+    "free-time-activities": {
+      "description": "Löydät alta vapaa-ajan toimintosi. Vapaa-ajan toimintoja voivat olla harrastukset, luottamustoimet sekä erilaiset pätevyydet. Voit lisätä käsin vapaa-ajan toimintojasi sekä kartoittaa niihin liittyviä osaamisiasi.",
+      "title": "Vapaa-ajan toimintoni"
+    },
     "help-text": "Rakenna koulutus- ja työhistoriasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle sopivia osaamisia.",
     "index": "Omat sivuni",
     "interests": {
@@ -202,7 +215,18 @@
       "title": "Kiinnostuksen kohteeni",
       "write-what-interests-you": "Kirjoita, mikä sinua kiinnostaa"
     },
-    "preferences": "Asetukseni",
+    "preferences": {
+      "list-1-item-1": "kerätä tietoa omasta osaamisestasi (osaaminen)",
+      "list-1-item-2": "tallentaa koulutus- ja työhistoriasi sekä lisätä vapaa-ajan tekemisiä sekä tuoda myös työhistoriasi työmarkkinatorin työnhakuprofiilista sekä koulutushistoriasi Opintopolun omista opintosuorituksista (työpaikat, koulutus, vapaa-aika)",
+      "list-1-item-3": "tietoa omista kiinnostuksenkohteistasi (kiinnostukseni)",
+      "list-2-item-1": "Voit myös tallentaa ehdotettuja koulutus- ja työmahdollisuuksia suosikeiksi talteen myöhempää käyttöä varten ja osaamispolkujen luomista varten (suosikit)",
+      "list-2-item-2": "Voit luoda ja ylläpitää koulutus- ja urapolkusuunnitelmiasi (polut)",
+      "paragraph-2": "Kun täytät mahdollisimman kattavasti ylläolevat, saat juuri sinulle sopivia työ- ja koulutusmahdollisuusehdotuksia.",
+      "paragraph-3": "Profiili on omasi! Päätät itse, mitä tietoja omaan osaamisprofiiliisi tallennat, mihin tietojasi käytät, ketkä muut pääsevät näkemään profiilisi ja miten muut toimijat voivat profiiliasi hyödyntää.",
+      "paragraph-4": "Osaamisprofiili perustuu Lakiin valtakunnallisesta jatkuvan oppimisen digitaalisesta palvelukokonaisuudesta. Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta.",
+      "title": "Asetukseni",
+      "you-are-signed-in": "Olet kirjautunut osaamisprofiiliisi. Osaamisprofiili toimii Osaamispolku-palvelun omien tietojesi säilytys- ja hallintapaikkana. Tänne voit:"
+    },
     "something-else": {
       "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius.",
       "description-placeholder": "Kirjoita tähän osaamisesi",
@@ -210,7 +234,10 @@
       "my-other-comptetences": "Muut osaamiseni",
       "title": "Muut osaamiseni"
     },
-    "work-history": "Työpaikkani"
+    "work-history": {
+      "description": "Löydät alta työhistoriasi. Voit lisätä käsin työhistoriaasi sekä siihen liittyviä työtehtäviä sekä kartoittaa niihin liittyviä osaamisiasi. Voit myös tuoda työhistoriasi ja siihen liittyvät osaamisesi Työmarkkinatorin työnhakuprofiilistasi, jos sinulla on sellainen käytössä.",
+      "title": "Työpaikkani"
+    }
   },
   "proposed-competences": "Ehdotetut osaamiset",
   "remove-approval": "Hylkää hyväksyntä",

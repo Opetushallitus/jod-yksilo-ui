@@ -12,10 +12,10 @@ const HelpingToolsContent = () => {
 
   return (
     <>
-      <span className="text-body-sm font-arial text-secondary-gray sm:text-body-xs">
+      <span className="text-body-sm sm:text-body-xs">
         <div>{t('tool.interests.help-text')}</div>
       </span>
-      <ul className="flex flex-col gap-4">
+      <ul className="flex flex-col gap-4 text-button-md">
         <li>
           <div className="flex gap-x-3">
             <MdOutlineQuiz size={24} color="#006DB3" />

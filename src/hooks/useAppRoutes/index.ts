@@ -5,11 +5,11 @@ export const useAppRoutes = () => {
 
   const profileRoutes = [
     {
-      name: t('profile.preferences'),
+      name: t('profile.preferences.title'),
       path: t('slugs.profile.preferences'),
     },
     {
-      name: t('profile.favorites'),
+      name: t('profile.favorites.title'),
       path: t('slugs.profile.favorites'),
     },
     {
@@ -21,15 +21,15 @@ export const useAppRoutes = () => {
       path: t('slugs.profile.interests'),
     },
     {
-      name: t('profile.work-history'),
+      name: t('profile.work-history.title'),
       path: t('slugs.profile.work-history'),
     },
     {
-      name: t('profile.education-history'),
+      name: t('profile.education-history.title'),
       path: t('slugs.profile.education-history'),
     },
     {
-      name: t('profile.free-time-activities'),
+      name: t('profile.free-time-activities.title'),
       path: t('slugs.profile.free-time-activities'),
     },
     {

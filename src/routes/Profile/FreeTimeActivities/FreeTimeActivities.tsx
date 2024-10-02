@@ -23,7 +23,7 @@ const FreeTimeActivities = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const vapaaAjanToiminnot = useLoaderData() as VapaaAjanToiminto[];
   const { t } = useTranslation();
-  const title = t('profile.free-time-activities');
+  const title = t('profile.free-time-activities.title');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
   const [isWizardOpen, setIsWizardOpen] = React.useState(false);
@@ -80,11 +80,7 @@ const FreeTimeActivities = () => {
     >
       <Title value={title} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
-      <p className="mb-8 text-body-md font-arial text-todo">
-        Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
-        simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
-        in albucius nominavi principes eum, quem facilisi cotidieque mel no.
-      </p>
+      <p className="mb-8 text-body-lg">{t('profile.free-time-activities.description')}</p>
       <ExperienceTable
         mainColumnHeader={t('free-time-activities.activity-or-proficiency-description')}
         rows={rows}
