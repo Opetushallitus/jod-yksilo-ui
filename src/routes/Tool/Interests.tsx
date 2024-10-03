@@ -1,14 +1,26 @@
+import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { Accordion, InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdOutlineInterests, MdOutlineQuiz } from 'react-icons/md';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useRouteLoaderData } from 'react-router-dom';
+import { generateProfileLink } from '../Profile/utils';
 import { ContextType } from './types';
 
 const HelpingToolsContent = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+
+  const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
+
+  const interestsLink = React.useMemo(
+    () => generateProfileLink('slugs.profile.interests', data, language, t),
+    [data, language, t],
+  );
 
   return (
     <>
@@ -16,6 +28,14 @@ const HelpingToolsContent = () => {
         <div>{t('tool.interests.help-text')}</div>
       </span>
       <ul className="flex flex-col gap-4 text-button-md">
+        <li>
+          <interestsLink.component to={interestsLink.to}>
+            <div className="flex gap-x-3">
+              <MdOutlineInterests size={24} color="#006DB3" />
+              <div>{t('profile.interests.title')}</div>
+            </div>
+          </interestsLink.component>
+        </li>
         <li>
           <div className="flex gap-x-3">
             <MdOutlineQuiz size={24} color="#006DB3" />

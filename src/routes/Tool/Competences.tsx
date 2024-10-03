@@ -1,15 +1,39 @@
+import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { Accordion, InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdOutlineSailing, MdOutlineSchool } from 'react-icons/md';
+import { MdLightbulbOutline, MdOutlineSailing, MdOutlineSchool } from 'react-icons/md';
 import { TbBriefcase2 } from 'react-icons/tb';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useRouteLoaderData } from 'react-router-dom';
+import { generateProfileLink } from '../Profile/utils';
 import { ContextType } from './types';
 
 const HelpingToolsContent = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+
+  const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
+
+  const educationLink = React.useMemo(
+    () => generateProfileLink('slugs.profile.education-history', data, language, t),
+    [data, language, t],
+  );
+  const workLink = React.useMemo(
+    () => generateProfileLink('slugs.profile.work-history', data, language, t),
+    [data, language, t],
+  );
+  const freeTimeLink = React.useMemo(
+    () => generateProfileLink('slugs.profile.free-time-activities', data, language, t),
+    [data, language, t],
+  );
+  const somethingElseLink = React.useMemo(
+    () => generateProfileLink('slugs.profile.something-else', data, language, t),
+    [data, language, t],
+  );
 
   return (
     <>
@@ -18,22 +42,36 @@ const HelpingToolsContent = () => {
       </span>
       <ul className="flex flex-col gap-4 text-button-md">
         <li>
-          <div className="flex gap-x-3">
-            <MdOutlineSchool size={24} color="#00818A" />
-            <div>{t('profile.education-history.title')}</div>
-          </div>
+          <educationLink.component to={educationLink.to}>
+            <div className="flex gap-x-3">
+              <MdOutlineSchool size={24} color="#00818A" />
+              <div>{t('profile.education-history.title')}</div>
+            </div>
+          </educationLink.component>
         </li>
         <li>
-          <div className="flex gap-x-3">
-            <TbBriefcase2 size={24} color="#AD4298" />
-            <div>{t('profile.work-history.title')}</div>
-          </div>
+          <workLink.component to={workLink.to}>
+            <div className="flex gap-x-3">
+              <TbBriefcase2 size={24} color="#AD4298" />
+              <div>{t('profile.work-history.title')}</div>
+            </div>
+          </workLink.component>
         </li>
         <li>
-          <div className="flex gap-x-3">
-            <MdOutlineSailing size={24} className="text-accent" />
-            <div>{t('profile.free-time-activities.title')}</div>
-          </div>
+          <freeTimeLink.component to={freeTimeLink.to}>
+            <div className="flex gap-x-3">
+              <MdOutlineSailing size={24} className="text-accent" />
+              <div>{t('profile.free-time-activities.title')}</div>
+            </div>
+          </freeTimeLink.component>
+        </li>
+        <li>
+          <somethingElseLink.component to={somethingElseLink.to}>
+            <div className="flex gap-x-3">
+              <MdLightbulbOutline size={24} className="text-secondary-5" />
+              <div>{t('profile.something-else.title')}</div>
+            </div>
+          </somethingElseLink.component>
         </li>
       </ul>
     </>
