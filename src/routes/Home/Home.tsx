@@ -4,6 +4,7 @@ import { HeroCard, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useRouteLoaderData } from 'react-router-dom';
+import { generateProfileLink } from '../Profile/utils';
 
 interface CardsProps {
   className?: string;
@@ -15,36 +16,11 @@ const Cards = ({ className }: CardsProps) => {
     i18n: { language },
   } = useTranslation();
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
-  const preferencesLink = React.useMemo(() => {
-    if (data) {
-      return {
-        to: `${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`,
-        component: Link,
-      };
-    } else {
-      const params = new URLSearchParams();
-      params.set('lang', language);
-      params.set('callback', `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`);
 
-      return {
-        to: `/login?${params.toString()}`,
-        component: ({
-          to,
-          className,
-          children,
-        }: {
-          to: object | string;
-          className?: string;
-          children: React.ReactNode;
-        }) => (
-          <a href={to as string} className={className}>
-            {children}
-          </a>
-        ),
-      };
-    }
-  }, [data, language, t]);
-
+  const preferencesLink = React.useMemo(
+    () => generateProfileLink('slugs.profile.preferences', data, language, t),
+    [data, language, t],
+  );
   return (
     <div
       className={`mx-auto flex max-w-[1140px] flex-col gap-3 sm:gap-11 px-5 sm:px-6 hyphens-auto lg:hyphens-none ${className}`.trim()}
