@@ -10,6 +10,20 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { MdClose, MdMenu } from 'react-icons/md';
 import { NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router-dom';
+import {
+  LogoEuEn,
+  LogoEuFi,
+  LogoEuSv,
+  LogoKehaEn,
+  LogoKehaFi,
+  LogoKehaSv,
+  LogoOkmEn,
+  LogoOkmFiSv,
+  LogoOphEn,
+  LogoOphFiSv,
+  LogoTemEn,
+  LogoTemFiSv,
+} from './logos';
 
 const NavigationBarItem = (to: string, text: string) => ({
   key: to,
@@ -53,6 +67,64 @@ const Root = () => {
     NavigationBarItem(`${basicInformation}/${t('slugs.accessibility-statement')}`, t('accessibility-statement')),
     NavigationBarItem(`${basicInformation}/${t('slugs.privacy-policy')}`, t('privacy-policy')),
   ];
+  const logos = React.useMemo(() => {
+    switch (language) {
+      case 'sv':
+        return [
+          <div key="LogoEuSv" className="flex">
+            <LogoEuSv className="h-10" />
+          </div>,
+          <div key="LogoOkmFiSv" className="flex">
+            <LogoOkmFiSv className="h-10" />
+          </div>,
+          <div key="LogoTemFiSv" className="flex">
+            <LogoTemFiSv className="h-10" />
+          </div>,
+          <div key="LogoKehaSv" className="flex">
+            <LogoKehaSv className="h-10" />
+          </div>,
+          <div key="LogoOphFiSv" className="flex">
+            <LogoOphFiSv className="h-10" />
+          </div>,
+        ];
+      case 'en':
+        return [
+          <div key="LogoEuEn" className="flex">
+            <LogoEuEn className="h-10" />
+          </div>,
+          <div key="LogoOkmEn" className="flex">
+            <LogoOkmEn className="h-10" />
+          </div>,
+          <div key="LogoTemEn" className="flex">
+            <LogoTemEn className="h-10" />
+          </div>,
+          <div key="LogoKehaEn" className="flex">
+            <LogoKehaEn className="h-10" />
+          </div>,
+          <div key="LogoOphEn" className="flex">
+            <LogoOphEn className="h-10" />
+          </div>,
+        ];
+      default:
+        return [
+          <div key="LogoEuFi" className="flex">
+            <LogoEuFi className="h-10" />
+          </div>,
+          <div key="LogoOkmFiSv" className="flex">
+            <LogoOkmFiSv className="h-10" />
+          </div>,
+          <div key="LogoTemFiSv" className="flex">
+            <LogoTemFiSv className="h-10" />
+          </div>,
+          <div key="LogoKehaFi" className="flex">
+            <LogoKehaFi className="h-10" />
+          </div>,
+          <div key="LogoOphFiSv" className="flex">
+            <LogoOphFiSv className="h-10" />
+          </div>,
+        ];
+    }
+  }, [language]);
 
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
 
@@ -64,15 +136,6 @@ const Root = () => {
   const userMenuUrls = {
     preferences: `${profileIndexPath}/${t('slugs.profile.preferences')}`,
   };
-
-  const logos: React.ComponentProps<typeof Footer>['logos'] = [1, 2, 3].map((item) => ({
-    key: item,
-    component: ({ className }) => (
-      <a href={`/logo${item}`} className={className}>
-        TODO: Logo {item}
-      </a>
-    ),
-  }));
 
   const footerRef = React.useRef<HTMLDivElement>(null);
   const logoutForm = React.useRef<HTMLFormElement>(null);
@@ -220,7 +283,11 @@ const Root = () => {
       <Footer
         ref={footerRef}
         items={footerItems}
-        logos={logos}
+        logos={
+          logos ? (
+            <div className="px-5 sm:px-0 grid sm:grid-cols-3 gap-6 sm:gap-9 items-center">{logos}</div>
+          ) : undefined
+        }
         copyright={t('copyright')}
         variant="light"
         className={!sm ? 'pt-0' : undefined}
