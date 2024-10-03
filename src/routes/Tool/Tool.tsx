@@ -1,7 +1,16 @@
 import { OpportunityCard, OsaaminenValue, SimpleNavigationList, Title } from '@/components';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
-import { Button, Modal, RadioButton, RadioButtonGroup, RoundButton, Slider, useMediaQueries } from '@jod/design-system';
+import {
+  Button,
+  Modal,
+  RadioButton,
+  RadioButtonGroup,
+  RoundButton,
+  Slider,
+  Spinner,
+  useMediaQueries,
+} from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { GrTarget } from 'react-icons/gr';
@@ -202,6 +211,8 @@ const Tool = () => {
     );
   };
 
+  const updateButtonLabel = ehdotuksetLoading ? t('updating-list') : t('tool.update-job-opportunities-list');
+
   return (
     <main role="main" className="mx-auto max-w-[1140px] p-5" id="jod-main">
       <Title value={t('tool.title')} />
@@ -218,9 +229,11 @@ const Tool = () => {
       <div className="mb-8 mt-5">
         <Button
           onClick={() => void updateEhdotukset()}
-          label={t('tool.update-job-opportunities-list')}
+          label={updateButtonLabel}
           variant="accent"
           disabled={ehdotuksetLoading}
+          iconSide="left"
+          icon={ehdotuksetLoading ? <Spinner size={24} color="white" /> : undefined}
         />
       </div>
 
