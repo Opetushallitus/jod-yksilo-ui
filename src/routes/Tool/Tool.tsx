@@ -310,7 +310,7 @@ const Tool = () => {
               return (
                 <NavLink
                   key={tyomahdollisuus.id}
-                  to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${tyomahdollisuus.id}`}
+                  to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${tyomahdollisuus.id}/${t('slugs.job-opportunity.overview')}`}
                 >
                   <OpportunityCard
                     toggleSelection={() => toggleOpportunity(tyomahdollisuus.id ?? '')}
@@ -333,7 +333,9 @@ const Tool = () => {
         </div>
         {sm && (
           <div className="col-span-1 sm:mt-8">
-            <Filters industry={industry} setIndustry={setIndustry} order={order} setOrder={setOrder} isMobile={sm} />
+            <div className="sticky top-[96px] max-h-[calc(100vh-112px)] overflow-y-auto scrollbar-hidden">
+              <Filters industry={industry} setIndustry={setIndustry} order={order} setOrder={setOrder} isMobile={sm} />
+            </div>
           </div>
         )}
       </div>

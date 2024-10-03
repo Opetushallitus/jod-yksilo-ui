@@ -4,8 +4,7 @@ import { useActionBar } from '@/hooks/useActionBar';
 import { Accordion, Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { MdArrowBack } from 'react-icons/md';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import Tabs from './Tabs';
 import { LoaderData } from './loader';
 
@@ -14,7 +13,6 @@ const Overview = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const navigate = useNavigate();
   const { tyomahdollisuus } = useOutletContext<LoaderData>();
   const title = tyomahdollisuus?.otsikko[language];
   const routes: RoutesNavigationListProps['routes'] = [
@@ -78,7 +76,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.description')} className="text-heading-3">
+              <h2 id={t('job-opportunity.description')} className="text-heading-3 scroll-mt-[96px]">
                 {t('job-opportunity.description')}
               </h2>
             }
@@ -92,7 +90,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.most-common-job-tasks.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.most-common-job-tasks.title')} className="text-heading-3 scroll-mt-[96px]">
                 {t('job-opportunity.most-common-job-tasks.title')}
               </h2>
             }
@@ -111,7 +109,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.key-figures.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.key-figures.title')} className="text-heading-3 scroll-mt-[96px]">
                 {t('job-opportunity.key-figures.title')}
               </h2>
             }
@@ -126,7 +124,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.labour-market-picture.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.labour-market-picture.title')} className="text-heading-3 scroll-mt-[96px]">
                 {t('job-opportunity.labour-market-picture.title')}
               </h2>
             }
@@ -143,7 +141,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.salary-trends.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.salary-trends.title')} className="text-heading-3 scroll-mt-[96px]">
                 {t('job-opportunity.salary-trends.title')}
               </h2>
             }
@@ -158,7 +156,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.employment-trends.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.employment-trends.title')} className="text-heading-3 scroll-mt-[96px]">
                 {t('job-opportunity.employment-trends.title')}
               </h2>
             }
@@ -173,7 +171,7 @@ const Overview = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.related-jobs.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.related-jobs.title')} className="text-heading-3 scroll-mt-[96px]">
                 {t('job-opportunity.related-jobs.title')}
               </h2>
             }
@@ -189,13 +187,6 @@ const Overview = () => {
       {actionBar &&
         createPortal(
           <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button
-              variant="white"
-              label={t('back')}
-              icon={<MdArrowBack size={24} />}
-              iconSide="left"
-              onClick={() => navigate(-1)}
-            />
             <Button variant="white" label="TODO: Luo polku" />
             <Button variant="white" label="TODO: Lisää suosikkeihin" />
             <Button variant="white" label="TODO: Vertaile osaamisia" />

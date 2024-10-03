@@ -6,8 +6,7 @@ import { Accordion, Button, Tag } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { MdArrowBack } from 'react-icons/md';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import Tabs from './Tabs';
 import { LoaderData } from './loader';
 
@@ -16,7 +15,6 @@ const Competences = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const navigate = useNavigate();
   const { tyomahdollisuus, osaamiset } = useOutletContext<LoaderData>();
   const title = tyomahdollisuus?.otsikko[language] ?? '';
   const sortedCompetences = React.useMemo(
@@ -67,7 +65,10 @@ const Competences = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.specific-professional-competences.title')} className="text-heading-3">
+              <h2
+                id={t('job-opportunity.specific-professional-competences.title')}
+                className="text-heading-3 scroll-mt-[96px]"
+              >
                 {t('job-opportunity.specific-professional-competences.title')}
               </h2>
             }
@@ -93,7 +94,10 @@ const Competences = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.general-working-life-skills.title')} className="text-heading-3">
+              <h2
+                id={t('job-opportunity.general-working-life-skills.title')}
+                className="text-heading-3 scroll-mt-[96px]"
+              >
                 {t('job-opportunity.general-working-life-skills.title')}
               </h2>
             }
@@ -110,7 +114,10 @@ const Competences = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.digital-skills-for-citizens.title')} className="text-heading-3">
+              <h2
+                id={t('job-opportunity.digital-skills-for-citizens.title')}
+                className="text-heading-3 scroll-mt-[96px]"
+              >
                 {t('job-opportunity.digital-skills-for-citizens.title')}
               </h2>
             }
@@ -127,7 +134,7 @@ const Competences = () => {
         <div>
           <Accordion
             title={
-              <h2 id={t('job-opportunity.personal-characteristics.title')} className="text-heading-3">
+              <h2 id={t('job-opportunity.personal-characteristics.title')} className="text-heading-3 scroll-mt-[96px]">
                 {t('job-opportunity.personal-characteristics.title')}
               </h2>
             }
@@ -145,13 +152,6 @@ const Competences = () => {
       {actionBar &&
         createPortal(
           <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button
-              variant="white"
-              label={t('back')}
-              icon={<MdArrowBack size={24} />}
-              iconSide="left"
-              onClick={() => navigate(-1)}
-            />
             <Button variant="white" label="TODO: Luo polku" />
             <Button variant="white" label="TODO: Lisää suosikkeihin" />
             <Button variant="white" label="TODO: Vertaile osaamisia" />
