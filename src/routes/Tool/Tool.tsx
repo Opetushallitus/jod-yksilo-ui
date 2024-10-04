@@ -3,6 +3,7 @@ import { useToolStore } from '@/stores/useToolStore';
 import {
   Button,
   Modal,
+  Pagination,
   RadioButton,
   RadioButtonGroup,
   RoundButton,
@@ -34,6 +35,9 @@ interface Tyomahdollisuus {
   tiivistelma?: Record<string, string | undefined>;
   kuvaus?: Record<string, string | undefined>;
 }
+
+type OnPageChangeType = React.ComponentProps<typeof Pagination>['onPageChange'];
+type PageChangeDetails = Parameters<OnPageChangeType>[0];
 
 const Filters = ({
   industry,
@@ -84,10 +88,10 @@ const Tool = () => {
   const { sm } = useMediaQueries();
   const { t, i18n } = useTranslation();
   const toolStore = useToolStore();
+  const scrollRef = React.useRef<HTMLDivElement>(null);
 
   const [industry, setIndustry] = React.useState('x');
   const [order, setOrder] = React.useState('a');
-  const [ehdotuksetLoading, setEhdotuksetLoading] = React.useState(false);
 
   // placeholder states
   const [showFilters, setShowFilters] = React.useState(false);
@@ -123,9 +127,7 @@ const Tool = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const updateEhdotukset = async () => {
-    setEhdotuksetLoading(true);
     await toolStore.updateEhdotuksetAndTyomahdollisuudet();
-    setEhdotuksetLoading(false);
   };
 
   const toggleOpportunity = (id: string) => {
@@ -212,7 +214,21 @@ const Tool = () => {
     );
   };
 
-  const updateButtonLabel = ehdotuksetLoading ? t('updating-list') : t('tool.update-job-opportunities-list');
+  const updateButtonLabel = toolStore.ehdotuksetLoading ? t('updating-list') : t('tool.update-job-opportunities-list');
+
+  const onPageChange = async ({ page }: PageChangeDetails) => {
+    if (toolStore.tyomahdollisuudetLoading) {
+      return;
+    }
+
+    await toolStore.fetchTyomahdollisuudetPage(page);
+
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <main role="main" className="mx-auto max-w-[1140px] p-5" id="jod-main">
@@ -232,15 +248,15 @@ const Tool = () => {
           onClick={() => void updateEhdotukset()}
           label={updateButtonLabel}
           variant="accent"
-          disabled={ehdotuksetLoading}
+          disabled={toolStore.ehdotuksetLoading}
           iconSide="left"
-          icon={ehdotuksetLoading ? <Spinner size={24} color="white" /> : undefined}
+          icon={toolStore.ehdotuksetLoading ? <Spinner size={24} color="white" /> : undefined}
         />
       </div>
 
       <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
         <div className="col-span-1 sm:col-span-3">
-          <div className="flex flex-col sm:flex-row">
+          <div className="flex flex-col sm:flex-row" ref={scrollRef}>
             <span className="text-body-md text-black font-medium sm:text-body-lg">
               <h2 className="text-heading-2 mb-4">{t('tool.competences.opportunities-title')}</h2>
               {t('tool.competences.available-options-totals', { professionsCount, educationsCount })}
@@ -304,7 +320,7 @@ const Tool = () => {
               <span>{t('tool.filters-text')}</span>
             </>
           )}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 mb-8">
             {toolStore.tyomahdollisuudet.map((item) => {
               const tyomahdollisuus = item as Tyomahdollisuus;
               return (
@@ -330,6 +346,21 @@ const Tool = () => {
               );
             })}
           </div>
+
+          <Pagination
+            currentPage={toolStore.ehdotuksetPageNr}
+            type="button"
+            pageSize={toolStore.ehdotuksetPageSize}
+            siblingCount={1}
+            translations={{
+              nextTriggerLabel: t('pagination.next'),
+              prevTriggerLabel: t('pagination.previous'),
+              lastPageTriggerLabel: t('pagination.last'),
+              firstPageTriggerLabel: t('pagination.first'),
+            }}
+            totalItems={toolStore.ehdotuksetCount}
+            onPageChange={(data) => void onPageChange(data)}
+          />
         </div>
         {sm && (
           <div className="col-span-1 sm:mt-8">
