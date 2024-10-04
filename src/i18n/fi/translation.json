@@ -173,6 +173,12 @@
     "work": "Työmahdollisuus"
   },
   "osaamispolku": "Osaamispolku",
+  "pagination": {
+    "first": "Siirry ensimmäiselle sivulle",
+    "last": "Siirry viimeiselle sivulle",
+    "next": "Siirry seuraavalle sivulle",
+    "previous": "Siirry edelliselle sivulle"
+  },
   "preferences": {
     "confirm-delete-my-account": "Haluatko varmasti poistaa tilisi?",
     "delete-my-account": "Poista tilini",
