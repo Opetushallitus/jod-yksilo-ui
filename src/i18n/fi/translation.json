@@ -174,8 +174,6 @@
   },
   "osaamispolku": "Osaamispolku",
   "pagination": {
-    "first": "Siirry ensimmäiselle sivulle",
-    "last": "Siirry viimeiselle sivulle",
     "next": "Siirry seuraavalle sivulle",
     "previous": "Siirry edelliselle sivulle"
   },

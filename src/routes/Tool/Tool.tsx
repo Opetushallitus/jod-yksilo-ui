@@ -355,8 +355,6 @@ const Tool = () => {
             translations={{
               nextTriggerLabel: t('pagination.next'),
               prevTriggerLabel: t('pagination.previous'),
-              lastPageTriggerLabel: t('pagination.last'),
-              firstPageTriggerLabel: t('pagination.first'),
             }}
             totalItems={toolStore.ehdotuksetCount}
             onPageChange={(data) => void onPageChange(data)}
