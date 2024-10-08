@@ -45,6 +45,7 @@ export const RoutesNavigationList = ({ routes, onClick }: RoutesNavigationListPr
   return (
     <ul className="flex flex-col gap-y-2 py-4">
       {routes.map((route) => {
+        const isSubPage = route.path.split('/').slice(1).length > 1;
         return (
           <li key={route.path} className="flex min-h-7 items-center w-full">
             {route.authRequired && !data ? (
@@ -57,11 +58,14 @@ export const RoutesNavigationList = ({ routes, onClick }: RoutesNavigationListPr
                 replace={route.replace}
                 lang={i18n.language}
                 className={({ isActive }) =>
-                  cx('hyphens-auto text-black w-full pl-5 block py-3 text-button-md hover:underline', {
+                  cx('hyphens-auto text-black w-full block py-3 text-button-md hover:underline', {
                     'bg-secondary-1-50 rounded-md': isActive,
+                    'pl-7': isSubPage,
+                    'pl-5': !isSubPage,
                   })
                 }
                 onClick={onClick}
+                end
               >
                 {route.name}
               </NavLink>
