@@ -231,10 +231,11 @@
       "you-are-signed-in": "Olet kirjautunut osaamisprofiiliisi. Osaamisprofiili toimii Osaamispolku-palvelun omien tietojesi säilytys- ja hallintapaikkana. Tänne voit:"
     },
     "something-else": {
+      "add-other-competences": "Lisää osaamisia",
       "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius.",
       "description-placeholder": "Kirjoita tähän osaamisesi",
-      "edit-other-competences": "Muokkaa muita osaamisia",
-      "my-other-comptetences": "Muut osaamiseni",
+      "edit-other-competences": "Muokkaa osaamisia",
+      "my-other-comptetences": "Osaamiseni",
       "title": "Muut osaamiseni"
     },
     "work-history": {
