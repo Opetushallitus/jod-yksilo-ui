@@ -5,10 +5,14 @@ import { EhdotusData, ehdotusDataToRecord, EhdotusRecord } from '@/routes/Tool/u
 import { sortByProperty } from '@/utils';
 import { create } from 'zustand';
 
+const SUOSIKIT_PATH = '/api/profiili/suosikki';
+
 interface ToolState {
   mahdollisuudet: string[];
   osaamiset: OsaaminenValue[];
   kiinnostukset: OsaaminenValue[];
+  suosikit: components['schemas']['SuosikkiDto'][];
+  suosikitLoading: boolean;
   osaamisKiinnostusPainotus: number;
   rajoitePainotus: number;
   tyomahdollisuusEhdotukset: EhdotusRecord;
@@ -22,6 +26,9 @@ interface ToolState {
   setMahdollisuudet: (state: string[]) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
   setKiinnostukset: (state: OsaaminenValue[]) => void;
+  setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
+  updateSuosikit: () => Promise<void>;
+  toggleSuosikki: (suosionKohdeId: string) => Promise<void>;
 
   setOsaamisKiinnostusPainotus: (state: number) => void;
   setRajoitePainotus: (state: number) => void;
@@ -35,6 +42,8 @@ export const useToolStore = create<ToolState>()((set) => ({
   mahdollisuudet: [],
   osaamiset: [],
   kiinnostukset: [],
+  suosikit: [],
+  suosikitLoading: false,
   osaamisKiinnostusPainotus: 50,
   kiinnostusPainotus: 50,
   rajoitePainotus: 50,
@@ -50,6 +59,7 @@ export const useToolStore = create<ToolState>()((set) => ({
   setMahdollisuudet: (state) => set({ mahdollisuudet: state }),
   setOsaamiset: (state) => set({ osaamiset: state }),
   setKiinnostukset: (state) => set({ kiinnostukset: state }),
+  setSuosikit: (state) => set({ suosikit: state }),
 
   setOsaamisKiinnostusPainotus: (state: number) => set({ osaamisKiinnostusPainotus: state }),
   setRajoitePainotus: (state: number) => set({ rajoitePainotus: state }),
@@ -127,5 +137,46 @@ export const useToolStore = create<ToolState>()((set) => ({
   updateEhdotuksetAndTyomahdollisuudet: async () => {
     await useToolStore.getState().updateEhdotukset();
     await useToolStore.getState().fetchTyomahdollisuudetPage(1);
+  },
+  toggleSuosikki: async (suosionKohdeId: string) => {
+    const { suosikitLoading, suosikit, updateSuosikit } = useToolStore.getState();
+
+    if (suosikitLoading) {
+      return;
+    }
+
+    const favorite = suosikit.find((s) => s.suosionKohdeId === suosionKohdeId);
+    set({ suosikitLoading: true });
+    try {
+      if (favorite?.id) {
+        await client.DELETE(SUOSIKIT_PATH, {
+          params: {
+            query: { id: favorite.id },
+          },
+        });
+      } else {
+        await client.POST(SUOSIKIT_PATH, {
+          body: {
+            suosionKohdeId,
+            tyyppi: 'TYOMAHDOLLISUUS',
+          },
+        });
+      }
+      await updateSuosikit();
+    } catch (error) {
+      // Error, do nothing
+    }
+    set({ suosikitLoading: false });
+  },
+
+  updateSuosikit: async () => {
+    set({ suosikitLoading: true });
+    try {
+      const { data: suosikit = [] } = await client.GET(SUOSIKIT_PATH);
+      set({ suosikit });
+    } catch (error) {
+      set({ suosikit: useToolStore.getState().suosikit ?? [] });
+    }
+    set({ suosikitLoading: false });
   },
 }));

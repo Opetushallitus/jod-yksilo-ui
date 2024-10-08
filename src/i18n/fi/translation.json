@@ -4,6 +4,7 @@
   "accept": "Hyväksy",
   "accept-preferences": "Hyväksy asetukset",
   "accessibility-statement": "Saavutettavuusseloste",
+  "add-favorite": "Lisää suosikiksi",
   "back": "Takaisin",
   "basic-information": "Perustiedot",
   "cancel": "Peruuta",
@@ -140,6 +141,7 @@
       "title": "Ammatilliset erityisosaamiset"
     }
   },
+  "log-in-for-favorites": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa mahdollisuuksia suosikkeihin ja päästä tarkastelemaan niitä myöhemmin.",
   "login": "Kirjaudu sisään",
   "logout": "Kirjaudu ulos",
   "match-service": "Kohtaantopalvelu",
@@ -244,6 +246,7 @@
   },
   "proposed-competences": "Ehdotetut osaamiset",
   "remove-approval": "Hylkää hyväksyntä",
+  "remove-favorite": "Poista suosikeista",
   "restrictions": "Rajoitteet",
   "result-list": "Tuloslista",
   "return-home": "Palaa etusivulle",

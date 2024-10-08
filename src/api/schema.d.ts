@@ -35,7 +35,7 @@ export interface paths {
     /** Updates a patevyys of the vapaa-ajan toiminto (including osaamiset) */
     put: operations['patevyysUpdate'];
     post?: never;
-    /** Deletes a patevyys of the vapaa-ajan toiminto (including all osaamiset) */
+    /** Deletes a patevyys of the vapaa-ajan toiminto (including all osaamiset). If the toiminto becomes empty, it will also be deleted. */
     delete: operations['patevyysDelete'];
     options?: never;
     head?: never;
@@ -73,7 +73,7 @@ export interface paths {
     /** Updates a toimenkuva of the tyopaikka */
     put: operations['toimenkuvaUpdate'];
     post?: never;
-    /** Deletes a toimenkuva of the tyopaikka */
+    /** Deletes a toimenkuva of the tyopaikka. If the tyopaikka becomes empty, it will also be deleted. */
     delete: operations['toimenkuvaDelete'];
     options?: never;
     head?: never;
@@ -129,7 +129,7 @@ export interface paths {
     /** Updates a koulutus of the koulutuskokonaisuus */
     put: operations['koulutusUpdate'];
     post?: never;
-    /** Deletes a koulutus of the koulutuskokonaisuus */
+    /** Deletes a koulutus of the koulutuskokonaisuus. If the kokonaisuus becomes empty, it will be deleted. */
     delete: operations['koulutusDelete'];
     options?: never;
     head?: never;
@@ -219,6 +219,25 @@ export interface paths {
     /** Adds a new toimenkuva to the tyopaikka */
     post: operations['toimenkuvaAdd'];
     delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/suosikki': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Finds all yksilon suosikit */
+    get: operations['yksilonSuosikkiGet'];
+    put?: never;
+    /** Add a Yksilo's suosikki */
+    post: operations['yksilonSuosikkiPost'];
+    /** Deletes one of Yksilo's suosikki */
+    delete: operations['yksilonSuosikkiDelete'];
     options?: never;
     head?: never;
     patch?: never;
@@ -333,22 +352,6 @@ export interface paths {
     trace?: never;
   };
   '/api/profiili/yksilo': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['yksiloGet'];
-    put?: never;
-    post?: never;
-    delete: operations['yksiloDelete'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/yksilo': {
     parameters: {
       query?: never;
       header?: never;
@@ -490,6 +493,19 @@ export interface components {
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
       toimenkuvat?: components['schemas']['ToimenkuvaDto'][];
+    };
+    SuosikkiDto: {
+      /** Format: uuid */
+      readonly id?: string;
+      /** Format: uuid */
+      suosionKohdeId: string;
+      /**
+       * @example TYOMAHDOLLISUUS
+       * @enum {string}
+       */
+      tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      /** Format: date-time */
+      readonly luotu?: string;
     };
     KoulutusKokonaisuusDto: {
       /** Format: uuid */
@@ -1297,6 +1313,72 @@ export interface operations {
       };
     };
   };
+  yksilonSuosikkiGet: {
+    parameters: {
+      query?: {
+        tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SuosikkiDto'][];
+        };
+      };
+    };
+  };
+  yksilonSuosikkiPost: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SuosikkiDto'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': string;
+        };
+      };
+    };
+  };
+  yksilonSuosikkiDelete: {
+    parameters: {
+      query: {
+        id: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   koulutusKokonaisuusGetAll: {
     parameters: {
       query?: never;
@@ -1480,44 +1562,6 @@ export interface operations {
         content: {
           'application/json': components['schemas']['TyomahdollisuusFullDto'];
         };
-      };
-    };
-  };
-  yksiloGet: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['YksiloCsrfDto'];
-        };
-      };
-    };
-  };
-  yksiloDelete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
       };
     };
   };
