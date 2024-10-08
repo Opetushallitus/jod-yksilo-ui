@@ -6,12 +6,10 @@ import {
   Title,
   type RoutesNavigationListProps,
 } from '@/components';
-import { useActionBar } from '@/hooks/useActionBar';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { Button, Tag } from '@jod/design-system';
 import React from 'react';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useOutletContext, useRevalidator } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
@@ -22,7 +20,6 @@ const SomethingElse = () => {
   const title = t('profile.something-else.title');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const data = useLoaderData() as OsaaminenDto[];
-  const actionBar = useActionBar();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const revalidator = useRevalidator();
 
@@ -61,19 +58,19 @@ const SomethingElse = () => {
           />
         ))}
       </div>
-      {actionBar &&
-        createPortal(
-          <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button
-              variant="white"
-              label={t('profile.something-else.edit-other-competences')}
-              onClick={() => {
-                setIsModalOpen(true);
-              }}
-            />
-          </div>,
-          actionBar,
-        )}
+      <div className="flex pt-7">
+        <Button
+          variant="white"
+          label={
+            data.length > 0
+              ? t('profile.something-else.edit-other-competences')
+              : t('profile.something-else.add-other-competences')
+          }
+          onClick={() => {
+            setIsModalOpen(true);
+          }}
+        />
+      </div>
     </MainLayout>
   );
 };
