@@ -45,6 +45,8 @@ import {
   WhoProvidesTheService,
 } from './UserGuide';
 
+const competencesSlug = 'slugs.profile.competences';
+
 const profileRoutes = supportedLanguageCodes.map(
   (lng) =>
     ({
@@ -69,39 +71,39 @@ const profileRoutes = supportedLanguageCodes.map(
         },
         {
           id: `{slugs.profile.competences}|${lng}`,
-          path: i18n.t('slugs.profile.competences', { lng }),
+          path: i18n.t(competencesSlug, { lng }),
           loader: withYksiloContext(competencesLoader),
           element: <ProfileCompetences />,
+        },
+        {
+          id: `{slugs.profile.work-history}|${lng}`,
+          path: `${i18n.t(competencesSlug, { lng })}/${i18n.t('slugs.profile.work-history', { lng })}`,
+          loader: withYksiloContext(workHistoryLoader),
+          element: <WorkHistory />,
+        },
+        {
+          id: `{slugs.profile.education-history}|${lng}`,
+          path: `${i18n.t(competencesSlug, { lng })}/${i18n.t('slugs.profile.education-history', { lng })}`,
+          loader: withYksiloContext(educationHistoryLoader),
+          element: <EducationHistory />,
+        },
+        {
+          id: `{slugs.profile.free-time-activities}|${lng}`,
+          path: `${i18n.t(competencesSlug, { lng })}/${i18n.t('slugs.profile.free-time-activities', { lng })}`,
+          loader: withYksiloContext(freeTimeActivitiesLoader),
+          element: <FreeTimeActivities />,
+        },
+        {
+          id: `{slugs.profile.something-else}|${lng}`,
+          path: `${i18n.t(competencesSlug, { lng })}/${i18n.t('slugs.profile.something-else', { lng })}`,
+          element: <SomethingElse />,
+          loader: withYksiloContext(muuOsaaminenLoader),
         },
         {
           id: `{slugs.profile.interests}|${lng}`,
           path: i18n.t('slugs.profile.interests', { lng }),
           loader: withYksiloContext(interestsLoader),
           element: <ProfileInterests />,
-        },
-        {
-          id: `{slugs.profile.work-history}|${lng}`,
-          path: i18n.t('slugs.profile.work-history', { lng }),
-          loader: withYksiloContext(workHistoryLoader),
-          element: <WorkHistory />,
-        },
-        {
-          id: `{slugs.profile.education-history}|${lng}`,
-          path: i18n.t('slugs.profile.education-history', { lng }),
-          loader: withYksiloContext(educationHistoryLoader),
-          element: <EducationHistory />,
-        },
-        {
-          id: `{slugs.profile.free-time-activities}|${lng}`,
-          path: i18n.t('slugs.profile.free-time-activities', { lng }),
-          loader: withYksiloContext(freeTimeActivitiesLoader),
-          element: <FreeTimeActivities />,
-        },
-        {
-          id: `{slugs.profile.something-else}|${lng}`,
-          path: i18n.t('slugs.profile.something-else', { lng }),
-          element: <SomethingElse />,
-          loader: withYksiloContext(muuOsaaminenLoader),
         },
       ],
     }) as RouteObject,

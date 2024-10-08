@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 export const useAppRoutes = () => {
   const { t } = useTranslation();
 
+  const competencesPath = t('slugs.profile.competences');
+
   const profileRoutes = [
     {
       name: t('profile.preferences.title'),
@@ -14,27 +16,27 @@ export const useAppRoutes = () => {
     },
     {
       name: t('profile.competences.title'),
-      path: t('slugs.profile.competences'),
+      path: competencesPath,
+    },
+    {
+      name: t('profile.work-history.title'),
+      path: `${competencesPath}/${t('slugs.profile.work-history')}`,
+    },
+    {
+      name: t('profile.education-history.title'),
+      path: `${competencesPath}/${t('slugs.profile.education-history')}`,
+    },
+    {
+      name: t('profile.free-time-activities.title'),
+      path: `${competencesPath}/${t('slugs.profile.free-time-activities')}`,
+    },
+    {
+      name: t('profile.something-else.title'),
+      path: `${competencesPath}/${t('slugs.profile.something-else')}`,
     },
     {
       name: t('profile.interests.title'),
       path: t('slugs.profile.interests'),
-    },
-    {
-      name: t('profile.work-history.title'),
-      path: t('slugs.profile.work-history'),
-    },
-    {
-      name: t('profile.education-history.title'),
-      path: t('slugs.profile.education-history'),
-    },
-    {
-      name: t('profile.free-time-activities.title'),
-      path: t('slugs.profile.free-time-activities'),
-    },
-    {
-      name: t('profile.something-else.title'),
-      path: t('slugs.profile.something-else'),
     },
   ];
 
