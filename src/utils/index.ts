@@ -12,8 +12,9 @@ export const formatDate = (date: Date) => {
  * @param entry Object with localized texts
  * @returns The text in current i18next language
  */
-export const getLocalizedText = (entry: components['schemas']['LokalisoituTeksti']) =>
-  entry[i18n.language] ?? entry[defaultLang] ?? '';
+export const getLocalizedText = (
+  entry?: components['schemas']['LokalisoituTeksti'] | Record<string, string | undefined>,
+) => entry?.[i18n.language] ?? entry?.[defaultLang] ?? '';
 
 type NestedKeyOf<ObjectType extends object> = {
   [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object

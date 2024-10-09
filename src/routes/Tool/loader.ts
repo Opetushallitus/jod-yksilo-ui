@@ -9,14 +9,17 @@ type YksilonOsaaminenDto = components['schemas']['YksilonOsaaminenDto'];
 export interface ToolLoaderData {
   osaamiset: YksilonOsaaminenDto[];
   kiinnostukset: OsaaminenDto[];
+  suosikit: components['schemas']['SuosikkiDto'][];
+  isLoggedIn: boolean;
 }
 
 export default (async ({ request, context }) => {
-  let osaamiset: YksilonOsaaminenDto[] = [];
-  let kiinnostukset: OsaaminenDto[] = [];
+  let osaamiset: ToolLoaderData['osaamiset'] = [];
+  let kiinnostukset: ToolLoaderData['kiinnostukset'] = [];
+  let suosikit: ToolLoaderData['suosikit'] = [];
 
   if (context) {
-    const [osaamisetResponse, kiinnostuksetResponse] = await Promise.all([
+    const [osaamisetResponse, kiinnostuksetResponse, suosikitResponse] = await Promise.all([
       client.GET('/api/profiili/osaamiset', {
         signal: request.signal,
       }),
@@ -25,12 +28,15 @@ export default (async ({ request, context }) => {
           signal: request.signal,
         })
         .then((response) => osaamisetService.find(response.data)),
+
+      client.GET('/api/profiili/suosikki', { signal: request.signal }),
     ]);
 
     const { data: osaamisetData = [] } = osaamisetResponse;
     kiinnostukset = kiinnostuksetResponse;
     osaamiset = removeDuplicates(osaamisetData, 'osaaminen.uri');
+    suosikit = suosikitResponse.data ?? [];
   }
 
-  return { osaamiset, kiinnostukset } as ToolLoaderData;
+  return { osaamiset, kiinnostukset, suosikit, isLoggedIn: !!context } as ToolLoaderData;
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
