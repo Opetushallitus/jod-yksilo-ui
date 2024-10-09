@@ -1,16 +1,24 @@
 import { components } from '@/api/schema';
-import { useMediaQueries } from '@jod/design-system';
+import { useLoginLink } from '@/hooks/useLoginLink';
+import { ToolLoaderData } from '@/routes/Tool/loader';
+import { Button, Modal, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { HiTrendingDown, HiTrendingUp } from 'react-icons/hi';
-import { MdBlock } from 'react-icons/md';
+import {
+  MdBlock,
+  MdOutlineStar,
+  MdOutlineStarBorder,
+  MdOutlineTrendingDown,
+  MdOutlineTrendingUp,
+} from 'react-icons/md';
+import { useLoaderData } from 'react-router-dom';
 
 type CardType = 'work' | 'education';
 interface OpportunityCardProps {
   name: string;
   description: string;
   matchValue?: number;
-  matchLabel: string;
+  matchLabel?: string;
   type: CardType;
   trend: components['schemas']['EhdotusMetadata']['trendi'];
   employmentOutlook: number;
@@ -19,6 +27,8 @@ interface OpportunityCardProps {
   mostCommonEducationBackground?: string;
   selected: boolean;
   toggleSelection: () => void;
+  toggleFavorite: () => void;
+  isFavorite?: boolean;
 }
 
 const bgForType = (type: CardType) => {
@@ -108,6 +118,56 @@ const SelectedCheckbox = ({
   );
 };
 
+interface FavoriteToggleProps {
+  isFavorite?: boolean;
+  onToggleFavorite: (e: React.MouseEvent) => void;
+}
+const FavoriteToggle = ({ isFavorite, onToggleFavorite }: FavoriteToggleProps) => {
+  const { t } = useTranslation();
+  const buttonClassName = 'bg-white rounded w-full flex justify-center';
+
+  return isFavorite ? (
+    <button className={buttonClassName} onClick={onToggleFavorite} aria-label={t('remove-favorite')}>
+      <MdOutlineStar size={26} className="text-secondary-3" />
+    </button>
+  ) : (
+    <button className={buttonClassName} onClick={onToggleFavorite} aria-label={t('add-favorite')}>
+      <MdOutlineStarBorder size={26} className="text-secondary-gray" />
+    </button>
+  );
+};
+
+interface LoginModalProps {
+  onClose: () => void;
+  isOpen: boolean;
+}
+const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
+  const { t } = useTranslation();
+  const loginLink = useLoginLink();
+
+  return (
+    <Modal
+      open={isOpen}
+      content={
+        <>
+          <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{t('login')}</h2>
+          <div className="mb-6">{t('login-for-favorites')}</div>
+        </>
+      }
+      footer={
+        <div className="flex justify-end gap-5">
+          <Button
+            label={t('login')}
+            variant="gray"
+            LinkComponent={({ children }) => <a href={loginLink}>{children}</a>}
+          />
+          <Button onClick={onClose} label={t('close')} />
+        </div>
+      }
+    />
+  );
+};
+
 export const OpportunityCard = ({
   description,
   employmentOutlook,
@@ -121,64 +181,85 @@ export const OpportunityCard = ({
   type,
   selected,
   toggleSelection,
+  toggleFavorite,
+  isFavorite,
 }: OpportunityCardProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
+  const { isLoggedIn } = useLoaderData() as ToolLoaderData;
+  const [loginModalOpen, setLoginModalOpen] = React.useState(false);
+
+  const onToggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!isLoggedIn) {
+      setLoginModalOpen(true);
+    } else {
+      toggleFavorite();
+    }
+  };
 
   const cardTypeTitle = type == 'work' ? t('opportunity-type.work') : t('opportunity-type.education');
+  const ActionSection = (
+    <div className="flex flex-row gap-5">
+      <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />
+      <SelectedCheckbox selected={selected} toggleSelection={toggleSelection} name={name} />
+    </div>
+  );
 
   return (
-    <div className="rounded shadow-border bg-white pt-5 pr-5 pl-6 pb-7">
-      <div className="flex flex-col gap-3 sm:flex-row sm:gap-5">
-        <div className="flex flex-row justify-between align-center">
-          <Match match={matchValue} label={matchLabel} bg={bgForType(type)} />
-          {!sm && <SelectedCheckbox selected={selected} toggleSelection={toggleSelection} name={name} />}
-        </div>
-        {!sm && <div className="text-[22px] leading-[34px] font-bold text-black hyphens-auto">{name}</div>}
-        <div className="flex flex-col gap-y-2">
-          {sm && (
-            <div className="flex flex-row justify-between gap-3">
+    <>
+      {loginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} isOpen={loginModalOpen} />}
+      <div className="rounded shadow-border bg-white pt-5 pr-5 pl-6 pb-7">
+        <div className="flex flex-col gap-3 sm:flex-row sm:gap-5">
+          <div className="flex flex-row justify-between align-center">
+            {matchValue && matchLabel && <Match match={matchValue} label={matchLabel} bg={bgForType(type)} />}
+            {!sm && ActionSection}
+          </div>
+          {!sm && <div className="text-[22px] leading-[34px] font-bold text-black hyphens-auto">{name}</div>}
+          <div className="flex flex-col gap-y-2">
+            {sm && (
               <div className="flex flex-col mt-3">
-                <span className="font-arial text-body-sm text-black uppercase leading-[24px]">{cardTypeTitle}</span>
+                <div className="flex flex-row justify-between items-center">
+                  <span className="font-arial text-body-sm text-black uppercase leading-[24px]">{cardTypeTitle}</span>
+                  {ActionSection}
+                </div>
                 <span className="text-heading-2 text-black hyphens-auto">{name}</span>
               </div>
-
-              <div className="relative top-0 right-0">
-                <SelectedCheckbox selected={selected} toggleSelection={toggleSelection} name={name} />
-              </div>
+            )}
+            <span className="font-arial text-body-md">{description}</span>
+            <div className="mt-4 flex flex-wrap">
+              <BottomBox title={t('tool.competences.trend')} className="bg-todo">
+                <span className="text-accent" aria-label={t(`tool.competences.trend-${trend}`)}>
+                  {trend === 'NOUSEVA' ? <MdOutlineTrendingUp size={24} /> : <MdOutlineTrendingDown size={24} />}
+                </span>
+              </BottomBox>
+              <BottomBox title={t('tool.competences.employment-outlook')} className="bg-todo">
+                <OutlookDots
+                  outlook={employmentOutlook}
+                  ariaLabel={t('tool.competences.outlook-value', { outlook: employmentOutlook })}
+                />
+              </BottomBox>
+              {hasRestrictions && (
+                <BottomBox title={t('tool.competences.maybe-has-restrictions')} className="bg-todo">
+                  <MdBlock className="text-accent" size={20} />
+                </BottomBox>
+              )}
+              {industryName && (
+                <BottomBox title={`${t('tool.competences.idustry-name')}:`} className="bg-todo">
+                  <span className="font-bold">TODO: Lorem ipsum dolor</span>
+                </BottomBox>
+              )}
+              {mostCommonEducationBackground && (
+                <BottomBox title={`${t('tool.competences.common-educational-background')}:`} className="bg-todo">
+                  <span className="font-bold">TODO: Lorem ipsum dolor</span>
+                </BottomBox>
+              )}
             </div>
-          )}
-          <span className="font-arial text-body-md">{description}</span>
-          <div className="mt-4 flex flex-wrap">
-            <BottomBox title={t('tool.competences.trend')} className="bg-todo">
-              <span className="text-accent" aria-label={t(`tool.competences.trend-${trend}`)}>
-                {trend === 'NOUSEVA' ? <HiTrendingUp size={24} /> : <HiTrendingDown size={24} />}
-              </span>
-            </BottomBox>
-            <BottomBox title={t('tool.competences.employment-outlook')} className="bg-todo">
-              <OutlookDots
-                outlook={employmentOutlook}
-                ariaLabel={t('tool.competences.outlook-value', { outlook: employmentOutlook })}
-              />
-            </BottomBox>
-            {hasRestrictions && (
-              <BottomBox title={t('tool.competences.maybe-has-restrictions')} className="bg-todo">
-                <MdBlock className="text-accent" size={20} />
-              </BottomBox>
-            )}
-            {industryName && (
-              <BottomBox title={`${t('tool.competences.idustry-name')}:`} className="bg-todo">
-                <span className="font-bold">TODO: Lorem ipsum dolor</span>
-              </BottomBox>
-            )}
-            {mostCommonEducationBackground && (
-              <BottomBox title={`${t('tool.competences.common-educational-background')}:`} className="bg-todo">
-                <span className="font-bold">TODO: Lorem ipsum dolor</span>
-              </BottomBox>
-            )}
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

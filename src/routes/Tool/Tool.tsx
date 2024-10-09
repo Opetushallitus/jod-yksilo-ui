@@ -1,5 +1,6 @@
 import { OpportunityCard, OsaaminenValue, SimpleNavigationList, Title } from '@/components';
 import { useToolStore } from '@/stores/useToolStore';
+import { getLocalizedText } from '@/utils';
 import {
   Button,
   Modal,
@@ -28,13 +29,6 @@ const MenuBookIcon = ({ size }: { size: number }) => (
     />
   </svg>
 );
-
-interface Tyomahdollisuus {
-  id?: string;
-  otsikko: Record<string, string | undefined>;
-  tiivistelma?: Record<string, string | undefined>;
-  kuvaus?: Record<string, string | undefined>;
-}
 
 type OnPageChangeType = React.ComponentProps<typeof Pagination>['onPageChange'];
 type PageChangeDetails = Parameters<OnPageChangeType>[0];
@@ -84,7 +78,7 @@ const Filters = ({
 };
 
 const Tool = () => {
-  const { osaamiset: osaamisetData, kiinnostukset } = useLoaderData() as ToolLoaderData;
+  const { osaamiset: osaamisetData, kiinnostukset, suosikit, isLoggedIn } = useLoaderData() as ToolLoaderData;
   const { sm } = useMediaQueries();
   const { t, i18n } = useTranslation();
   const toolStore = useToolStore();
@@ -95,7 +89,6 @@ const Tool = () => {
 
   // placeholder states
   const [showFilters, setShowFilters] = React.useState(false);
-  const [professionsCount] = React.useState(534);
   const [educationsCount] = React.useState(1002);
 
   const initialized = React.useRef(false);
@@ -121,6 +114,7 @@ const Tool = () => {
             tyyppi: 'KIINNOSTUS',
           })),
         );
+        toolStore.setSuosikit(suosikit);
         void updateEhdotukset();
       }
     }
@@ -130,7 +124,7 @@ const Tool = () => {
     await toolStore.updateEhdotuksetAndTyomahdollisuudet();
   };
 
-  const toggleOpportunity = (id: string) => {
+  const toggleMahdollisuus = (id: string) => {
     if (toolStore.mahdollisuudet.includes(id)) {
       toolStore.setMahdollisuudet(toolStore.mahdollisuudet.filter((item) => item !== id));
     } else {
@@ -237,6 +231,7 @@ const Tool = () => {
       <Outlet
         context={
           {
+            isLoggedIn,
             competences: [toolStore.osaamiset, toolStore.setOsaamiset],
             interests: [toolStore.kiinnostukset, toolStore.setKiinnostukset],
           } satisfies ContextType
@@ -259,7 +254,10 @@ const Tool = () => {
           <div className="flex flex-col sm:flex-row" ref={scrollRef}>
             <span className="text-body-md text-black font-medium sm:text-body-lg">
               <h2 className="text-heading-2 mb-4">{t('tool.competences.opportunities-title')}</h2>
-              {t('tool.competences.available-options-totals', { professionsCount, educationsCount })}
+              {t('tool.competences.available-options-totals', {
+                professionsCount: toolStore.ehdotuksetCount,
+                educationsCount,
+              })}
             </span>
           </div>
         </div>
@@ -321,23 +319,26 @@ const Tool = () => {
             </>
           )}
           <div className="flex flex-col gap-5 mb-8">
-            {toolStore.tyomahdollisuudet.map((item) => {
-              const tyomahdollisuus = item as Tyomahdollisuus;
+            {toolStore.tyomahdollisuudet.map((tyomahdollisuus) => {
+              const { id } = tyomahdollisuus;
+              const isFavorite = toolStore.suosikit?.find((s) => s.suosionKohdeId === id) !== undefined;
               return (
                 <NavLink
                   key={tyomahdollisuus.id}
-                  to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${tyomahdollisuus.id}/${t('slugs.job-opportunity.overview')}`}
+                  to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`}
                 >
                   <OpportunityCard
-                    toggleSelection={() => toggleOpportunity(tyomahdollisuus.id ?? '')}
-                    selected={toolStore.mahdollisuudet.includes(tyomahdollisuus.id ?? '')}
-                    name={tyomahdollisuus.otsikko[i18n.language] ?? ''}
-                    description={tyomahdollisuus.tiivistelma?.[i18n.language] ?? ''}
-                    matchValue={toolStore.tyomahdollisuusEhdotukset?.[item.id].pisteet}
+                    isFavorite={isFavorite}
+                    toggleSelection={() => toggleMahdollisuus(id)}
+                    toggleFavorite={() => void toolStore.toggleSuosikki(id)}
+                    selected={toolStore.mahdollisuudet.includes(id)}
+                    name={getLocalizedText(tyomahdollisuus.otsikko)}
+                    description={getLocalizedText(tyomahdollisuus.tiivistelma)}
+                    matchValue={toolStore.tyomahdollisuusEhdotukset?.[id].pisteet}
                     matchLabel={t('fit')}
                     type="work"
-                    trend={toolStore.tyomahdollisuusEhdotukset?.[item.id].trendi}
-                    employmentOutlook={toolStore.tyomahdollisuusEhdotukset?.[item.id].tyollisyysNakyma ?? 0}
+                    trend={toolStore.tyomahdollisuusEhdotukset?.[id].trendi}
+                    employmentOutlook={toolStore.tyomahdollisuusEhdotukset?.[id].tyollisyysNakyma ?? 0}
                     hasRestrictions
                     industryName="TODO: Lorem ipsum dolor"
                     mostCommonEducationBackground="TODO: Lorem ipsum dolor"
