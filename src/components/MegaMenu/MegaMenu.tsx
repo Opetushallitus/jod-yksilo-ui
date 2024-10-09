@@ -43,7 +43,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, user, logout }: M
   const userGuideMenuRoutes = userGuideRoutes.map(prefixRoutePath(t('slugs.user-guide.index')));
 
   return (
-    <div className="fixed top-0 sm:top-[56px] left-0 right-0 m-auto max-w-[1092px] bg-white shadow-border rounded-b-lg overflow-hidden">
+    <div className="fixed top-0 sm:top-11 left-0 right-0 m-auto max-w-[1092px] bg-white shadow-border rounded-b-lg overflow-hidden">
       <ul className="flex flex-row justify-end items-center pr-5 pt-5">
         {!sm && megaMenuState === 'main' && (
           <>
