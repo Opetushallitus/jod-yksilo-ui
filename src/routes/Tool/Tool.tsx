@@ -231,7 +231,6 @@ const Tool = () => {
       <Outlet
         context={
           {
-            isLoggedIn,
             competences: [toolStore.osaamiset, toolStore.setOsaamiset],
             interests: [toolStore.kiinnostukset, toolStore.setKiinnostukset],
           } satisfies ContextType
@@ -329,6 +328,7 @@ const Tool = () => {
                 >
                   <OpportunityCard
                     isFavorite={isFavorite}
+                    isLoggedIn={isLoggedIn}
                     toggleSelection={() => toggleMahdollisuus(id)}
                     toggleFavorite={() => void toolStore.toggleSuosikki(id)}
                     selected={toolStore.mahdollisuudet.includes(id)}

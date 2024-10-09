@@ -1,6 +1,5 @@
 import { components } from '@/api/schema';
 import { useLoginLink } from '@/hooks/useLoginLink';
-import { ToolLoaderData } from '@/routes/Tool/loader';
 import { Button, Modal, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +10,6 @@ import {
   MdOutlineTrendingDown,
   MdOutlineTrendingUp,
 } from 'react-icons/md';
-import { useLoaderData } from 'react-router-dom';
 
 type CardType = 'work' | 'education';
 interface OpportunityCardProps {
@@ -29,6 +27,7 @@ interface OpportunityCardProps {
   toggleSelection: () => void;
   toggleFavorite: () => void;
   isFavorite?: boolean;
+  isLoggedIn?: boolean;
 }
 
 const bgForType = (type: CardType) => {
@@ -183,10 +182,10 @@ export const OpportunityCard = ({
   toggleSelection,
   toggleFavorite,
   isFavorite,
+  isLoggedIn,
 }: OpportunityCardProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
-  const { isLoggedIn } = useLoaderData() as ToolLoaderData;
   const [loginModalOpen, setLoginModalOpen] = React.useState(false);
 
   const onToggleFavorite = (e: React.MouseEvent) => {
