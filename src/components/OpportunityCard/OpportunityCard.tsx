@@ -104,7 +104,7 @@ const SelectedCheckbox = ({
 
   return (
     <span
-      className="inline-flex items-center gap-2 font-bold text-[12px] leading-[24px] text-accent bg-todo"
+      className="inline-flex items-center gap-2 text-accent bg-todo"
       onClick={onClick}
       onKeyDown={onKeyDown}
       aria-label={`${t('choose')} ${name}`}
@@ -112,7 +112,9 @@ const SelectedCheckbox = ({
       aria-checked={selected}
       tabIndex={0}
     >
-      <span aria-hidden>{t('choose')}</span>
+      <span aria-hidden className="font-bold text-[12px] leading-[24px]">
+        {t('choose')}
+      </span>
       <span aria-hidden className={`size-5 appearance-none border border-accent ${selected ? 'bg-accent' : ''}`} />
     </span>
   );
@@ -211,13 +213,20 @@ export const OpportunityCard = ({
   return (
     <>
       {loginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} isOpen={loginModalOpen} />}
-      <div className="rounded shadow-border bg-white pt-5 pr-5 pl-6 pb-7">
-        <div className="flex flex-col gap-3 sm:flex-row sm:gap-5">
+      <div className="rounded shadow-border bg-white pt-5 pr-5 pl-5 sm:pl-6 pb-5 sm:pb-7">
+        <div className="flex flex-col sm:flex-row sm:gap-5">
           <div className="flex flex-row justify-between align-center">
-            {matchValue && matchLabel && <Match match={matchValue} label={matchLabel} bg={bgForType(type)} />}
+            <div>
+              {matchValue && matchLabel && <Match match={matchValue} label={matchLabel} bg={bgForType(type)} />}
+            </div>
             {!sm && ActionSection}
           </div>
-          {!sm && <div className="text-[22px] leading-[34px] font-bold text-black hyphens-auto">{name}</div>}
+          {!sm && (
+            <div className="text-black mt-3 mb-2">
+              <span className="font-arial text-[13px] uppercase leading-[24px]">{cardTypeTitle}</span>
+              <div className="text-[22px] leading-[32px] font-bold hyphens-auto">{name}</div>
+            </div>
+          )}
           <div className="flex flex-col gap-y-2">
             {sm && (
               <div className="flex flex-col mt-3">
