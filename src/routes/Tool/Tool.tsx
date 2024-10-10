@@ -1,4 +1,5 @@
 import { OpportunityCard, OsaaminenValue, SimpleNavigationList, Title } from '@/components';
+import { PageChangeDetails } from '@/constants';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import {
@@ -29,9 +30,6 @@ const MenuBookIcon = ({ size }: { size: number }) => (
     />
   </svg>
 );
-
-type OnPageChangeType = React.ComponentProps<typeof Pagination>['onPageChange'];
-type PageChangeDetails = Parameters<OnPageChangeType>[0];
 
 const Filters = ({
   industry,
@@ -231,7 +229,6 @@ const Tool = () => {
       <Outlet
         context={
           {
-            isLoggedIn,
             competences: [toolStore.osaamiset, toolStore.setOsaamiset],
             interests: [toolStore.kiinnostukset, toolStore.setKiinnostukset],
           } satisfies ContextType
@@ -329,6 +326,7 @@ const Tool = () => {
                 >
                   <OpportunityCard
                     isFavorite={isFavorite}
+                    isLoggedIn={isLoggedIn}
                     toggleSelection={() => toggleMahdollisuus(id)}
                     toggleFavorite={() => void toolStore.toggleSuosikki(id)}
                     selected={toolStore.mahdollisuudet.includes(id)}
