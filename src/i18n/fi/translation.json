@@ -40,6 +40,21 @@
     "identify-competences": "Tunnista osaamisia"
   },
   "education-opportunities": "Koulutusmahdollisuudet",
+  "education-opportunity": {
+    "competences": {
+      "navigation": "Osaamisvaatimukset",
+      "route": "Osaamiset"
+    },
+    "description": "Kuvaus",
+    "overview": {
+      "navigation": "Koulutuksen yleiskuvaus",
+      "route": "Yleiskuvaus"
+    },
+    "specific-professional-competences": {
+      "description": "Koulutuksen erityisosaamisalueita ovat:",
+      "title": "Koulutuksen erityisosaamiset"
+    }
+  },
   "employment-view": "Työllisyysnäkymä",
   "ended": "Loppui",
   "error": {
@@ -265,6 +280,11 @@
     "basic-information": "perustiedot",
     "cookie-policy": "evastekaytanto",
     "data-sources": "datalahteet",
+    "education-opportunity": {
+      "competences": "osaamiset",
+      "index": "koulutusmahdollisuus",
+      "overview": "yleiskuvaus"
+    },
     "how-do-i-give-feedback": "miten-annan-palautetta",
     "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
     "job-opportunity": {
