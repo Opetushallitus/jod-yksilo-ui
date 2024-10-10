@@ -5,6 +5,7 @@ import {
   Button,
   Modal,
   Pagination,
+  ProgressIndicatorCard,
   RadioButton,
   RadioButtonGroup,
   RoundButton,
@@ -319,6 +320,7 @@ const Tool = () => {
             </>
           )}
           <div className="flex flex-col gap-5 mb-8">
+            {toolStore.ehdotuksetLoading && <ProgressIndicatorCard />}
             {toolStore.tyomahdollisuudet.map((tyomahdollisuus) => {
               const { id } = tyomahdollisuus;
               const isFavorite = toolStore.suosikit?.find((s) => s.suosionKohdeId === id) !== undefined;
