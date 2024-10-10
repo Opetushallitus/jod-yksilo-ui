@@ -1,14 +1,20 @@
 import i18n, { supportedLanguageCodes } from '@/i18n/config';
 import {
+  EducationOpportunity,
+  Competences as EducationOpportunityCompetences,
+  Overview as EducationOpportunityOverview,
+  educationOpportunityLoader,
+} from '@/routes/EducationOpportunity';
+import {
   JobOpportunity,
   Competences as JobOpportunityCompetences,
+  Overview as JobOpportunityOverview,
   loader as jobOpportunityLoader,
-  Overview,
 } from '@/routes/JobOpportunity';
-import { competencesLoader, Competences as ProfileCompetences } from '@/routes/Profile/Competences';
+import { Competences as ProfileCompetences, competencesLoader } from '@/routes/Profile/Competences';
 import { loader as educationHistoryLoader } from '@/routes/Profile/EducationHistory';
 import { loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
-import { interestsLoader, Interests as ProfileInterests } from '@/routes/Profile/Interests';
+import { Interests as ProfileInterests, interestsLoader } from '@/routes/Profile/Interests';
 import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import {
@@ -20,7 +26,7 @@ import {
   Interests as ToolInterests,
   toolLoader,
 } from '@/routes/Tool';
-import { redirect, RouteObject } from 'react-router-dom';
+import { RouteObject, redirect } from 'react-router-dom';
 import { withYksiloContext } from '../auth';
 import {
   AccessibilityStatement,
@@ -165,12 +171,38 @@ const jobOpportunityRoutes = supportedLanguageCodes.map(
         {
           id: `{slugs.job-opportunity.overview}|${lng}`,
           path: i18n.t('slugs.job-opportunity.overview', { lng }),
-          element: <Overview />,
+          element: <JobOpportunityOverview />,
         },
         {
           id: `{slugs.job-opportunity.competences}|${lng}`,
           path: i18n.t('slugs.job-opportunity.competences', { lng }),
           element: <JobOpportunityCompetences />,
+        },
+      ],
+    }) as RouteObject,
+);
+
+const educationOpportunityRoutes = supportedLanguageCodes.map(
+  (lng) =>
+    ({
+      id: `{slugs.education-opportunity.index}/:id|${lng}`,
+      path: `${i18n.t('slugs.education-opportunity.index', { lng })}/:id`,
+      element: <EducationOpportunity />,
+      loader: educationOpportunityLoader,
+      children: [
+        {
+          index: true,
+          loader: () => redirect(i18n.t('slugs.education-opportunity.overview', { lng })),
+        },
+        {
+          id: `{slugs.education-opportunity.overview}|${lng}`,
+          path: i18n.t('slugs.education-opportunity.overview', { lng }),
+          element: <EducationOpportunityOverview />,
+        },
+        {
+          id: `{slugs.education-opportunity.competences}|${lng}`,
+          path: i18n.t('slugs.education-opportunity.competences', { lng }),
+          element: <EducationOpportunityCompetences />,
         },
       ],
     }) as RouteObject,
@@ -269,6 +301,7 @@ const rootRoute: RouteObject = {
     ...profileRoutes,
     ...toolRoutes,
     ...jobOpportunityRoutes,
+    ...educationOpportunityRoutes,
     ...userGuideRoutes,
     ...basicInformationRoutes,
   ],
