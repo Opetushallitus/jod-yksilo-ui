@@ -224,7 +224,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/suosikki': {
+  '/api/profiili/suosikit': {
     parameters: {
       query?: never;
       header?: never;
@@ -411,6 +411,39 @@ export interface paths {
       cookie?: never;
     };
     get: operations['osaaminenFind'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/koulutusmahdollisuudet': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['koulutusmahdollisuusFindAll'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/koulutusmahdollisuudet/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get full information content of a koulutusmahdollisuus */
+    get: operations['koulutusmahdollisuusFindById'];
     put?: never;
     post?: never;
     delete?: never;
@@ -630,6 +663,55 @@ export interface components {
        * @example 3
        */
       sivuja: number;
+    };
+    KestoJakaumaDto: {
+      /** Format: double */
+      minimi: number;
+      /** Format: double */
+      mediaani: number;
+      /** Format: double */
+      maksimi: number;
+    };
+    KoulutusmahdollisuusDto: {
+      /** Format: uuid */
+      id: string;
+      /** @enum {string} */
+      tyyppi: 'TUTKINTO' | 'EI_TUTKINTO';
+      otsikko: components['schemas']['LokalisoituTeksti'];
+      tiivistelma?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      kesto?: components['schemas']['KestoJakaumaDto'];
+    };
+    SivuDtoKoulutusmahdollisuusDto: {
+      sisalto: components['schemas']['KoulutusmahdollisuusDto'][];
+      /**
+       * Format: int64
+       * @example 30
+       */
+      maara: number;
+      /**
+       * Format: int32
+       * @example 3
+       */
+      sivuja: number;
+    };
+    KoulutusViiteDto: {
+      oid?: string;
+      nimi?: components['schemas']['LokalisoituTeksti'];
+    };
+    KoulutusmahdollisuusFullDto: {
+      /** Format: uuid */
+      id: string;
+      /** @enum {string} */
+      tyyppi: 'TUTKINTO' | 'EI_TUTKINTO';
+      otsikko: components['schemas']['LokalisoituTeksti'];
+      tiivistelma?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      kesto?: components['schemas']['KestoJakaumaDto'];
+      koulutukset?: components['schemas']['KoulutusViiteDto'][];
+      jakaumat?: {
+        [key: string]: components['schemas']['JakaumaDto'];
+      };
     };
   };
   responses: never;
@@ -1708,6 +1790,52 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['SivuDtoOsaaminenDto'];
+        };
+      };
+    };
+  };
+  koulutusmahdollisuusFindAll: {
+    parameters: {
+      query?: {
+        sivu?: number;
+        koko?: number;
+        id?: string[];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SivuDtoKoulutusmahdollisuusDto'];
+        };
+      };
+    };
+  };
+  koulutusmahdollisuusFindById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['KoulutusmahdollisuusFullDto'];
         };
       };
     };
