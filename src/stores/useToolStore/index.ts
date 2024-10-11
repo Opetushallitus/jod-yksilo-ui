@@ -5,7 +5,7 @@ import { EhdotusData, ehdotusDataToRecord, EhdotusRecord } from '@/routes/Tool/u
 import { sortByProperty } from '@/utils';
 import { create } from 'zustand';
 
-const SUOSIKIT_PATH = '/api/profiili/suosikki';
+const SUOSIKIT_PATH = '/api/profiili/suosikit';
 
 interface ToolState {
   mahdollisuudet: string[];

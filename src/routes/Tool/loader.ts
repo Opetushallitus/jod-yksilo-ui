@@ -29,7 +29,7 @@ export default (async ({ request, context }) => {
         })
         .then((response) => osaamisetService.find(response.data)),
 
-      client.GET('/api/profiili/suosikki', { signal: request.signal }),
+      client.GET('/api/profiili/suosikit', { signal: request.signal }),
     ]);
 
     const { data: osaamisetData = [] } = osaamisetResponse;
