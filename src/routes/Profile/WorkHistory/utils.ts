@@ -15,7 +15,17 @@ export interface Tyopaikka {
   toimenkuvat: Toimenkuva[];
 }
 
-export const getWorkHistoryTableRows = (data: Tyopaikka[]): ExperienceTableRowData[] =>
+export const getWorkHistoryTableRows = (
+  data: Tyopaikka[],
+  osaamisetMap?: Record<
+    string,
+    {
+      id: string;
+      nimi: Record<string, string>;
+      kuvaus: Record<string, string>;
+    }
+  >,
+): ExperienceTableRowData[] =>
   data.reduce((rows: ExperienceTableRowData[], row) => {
     const { toimenkuvat } = row;
     const alkuPvm = Math.min(...toimenkuvat.map((t) => new Date(t.alkuPvm).getTime()));
@@ -32,10 +42,15 @@ export const getWorkHistoryTableRows = (data: Tyopaikka[]): ExperienceTableRowDa
       nimi: row.nimi,
       alkuPvm: new Date(alkuPvm),
       loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
-      subrows: [...toimenkuvat].sort(sortByProperty('alkuPvm')).map(mapToimenkuvaToRow),
-      osaamisetCount: [
-        ...new Set(toimenkuvat.map((toimenkuva) => toimenkuva.osaamiset.map((osaaminen) => osaaminen)).flat()),
-      ].length,
+      subrows: [...toimenkuvat]
+        .sort(sortByProperty('alkuPvm'))
+        .map((toimenkuva) => mapToimenkuvaToRow(toimenkuva, osaamisetMap)),
+      osaamiset: [...new Set(toimenkuvat.map((toimenkuva) => toimenkuva.osaamiset).flat())].map((id) => ({
+        ...(osaamisetMap
+          ? osaamisetMap[id]
+          : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
+        sourceType: 'tyopaikka',
+      })),
     };
 
     rows.push(rowData);
@@ -43,10 +58,23 @@ export const getWorkHistoryTableRows = (data: Tyopaikka[]): ExperienceTableRowDa
     return rows;
   }, []);
 
-const mapToimenkuvaToRow = (toimenkuva: Toimenkuva): ExperienceTableRowData => ({
+const mapToimenkuvaToRow = (
+  toimenkuva: Toimenkuva,
+  osaamisetMap?: Record<
+    string,
+    {
+      id: string;
+      nimi: Record<string, string>;
+      kuvaus: Record<string, string>;
+    }
+  >,
+): ExperienceTableRowData => ({
   key: toimenkuva.id ?? crypto.randomUUID(),
   nimi: toimenkuva.nimi,
   alkuPvm: new Date(toimenkuva.alkuPvm),
   loppuPvm: toimenkuva.loppuPvm ? new Date(toimenkuva.loppuPvm) : undefined,
-  osaamisetCount: toimenkuva.osaamiset.length ?? 0,
+  osaamiset: toimenkuva.osaamiset.map((id) => ({
+    ...(osaamisetMap ? osaamisetMap[id] : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
+    sourceType: 'tyopaikka',
+  })),
 });

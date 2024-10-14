@@ -48,7 +48,7 @@ const Interests = () => {
       <h1 className="text-heading-1 mb-5">{title}</h1>
       <p className="mb-8 text-body-lg text-todo">{t('profile.interests.description')}</p>
       <h2 className="mb-7 text-heading-2">{t('profile.interests.skills-that-interest-me')}</h2>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-3">
         {sortedData.map((val) => (
           <Tag
             label={getLocalizedText(val.nimi)}

@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
@@ -17,11 +18,11 @@ import {
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-interface EditKoulutusModalProps {
+interface AddOrEditKoulutusModalProps {
   isOpen: boolean;
   onClose: React.Dispatch<React.SetStateAction<void>>;
   koulutuskokonaisuusId: string;
-  koulutusId: string;
+  koulutusId?: string;
 }
 
 interface KoulutusForm {
@@ -37,14 +38,16 @@ interface KoulutusForm {
   }[];
 }
 
-const KOULUTUS_API_PATH = '/api/profiili/koulutuskokonaisuudet/{id}/koulutukset/{koulutusId}';
+const KOULUTUKSET_API_PATH = '/api/profiili/koulutuskokonaisuudet/{id}/koulutukset';
 
-const MainStep = () => {
+const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
   const { t } = useTranslation();
   const { register, control } = useFormContext<KoulutusForm>();
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{t('education-history.edit-degree')}</h2>
+      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
+        {t(koulutusId ? 'education-history.edit-degree' : 'education-history.add-new-degree')}
+      </h2>
       <div className="mb-6">
         <InputField
           label={t('education-history.degree')}
@@ -74,14 +77,14 @@ const MainStep = () => {
   );
 };
 
-const OsaamisetStep = () => {
+const OsaamisetStep = ({ koulutusId }: { koulutusId?: string }) => {
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const { t } = useTranslation();
   const { control } = useFormContext<KoulutusForm>();
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t('education-history.edit-competences')}
+        {t(koulutusId ? 'education-history.edit-competences' : 'education-history.identify-competences')}
       </h2>
       <div className="mb-6">
         <InputField
@@ -108,13 +111,18 @@ const OsaamisetStep = () => {
   );
 };
 
-const EditKoulutusModal = ({ isOpen, onClose, koulutuskokonaisuusId: id, koulutusId }: EditKoulutusModalProps) => {
+const AddOrEditKoulutusModal = ({
+  isOpen,
+  onClose,
+  koulutuskokonaisuusId: id,
+  koulutusId,
+}: AddOrEditKoulutusModalProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
 
-  if (!koulutusId) {
+  if (!id) {
     onClose();
   }
 
@@ -151,28 +159,39 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutuskokonaisuusId: id, koulutu
         .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm),
     ),
     defaultValues: async () => {
-      const [{ data: osaamiset }, { data: koulutus }] = await Promise.all([
-        client.GET('/api/profiili/osaamiset'),
-        client.GET(KOULUTUS_API_PATH, {
-          params: {
-            path: { id, koulutusId },
-          },
-        }),
-      ]);
+      if (koulutusId) {
+        const [{ data: osaamiset }, { data: koulutus }] = await Promise.all([
+          client.GET('/api/profiili/osaamiset'),
+          client.GET(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
+            params: {
+              path: { id, koulutusId },
+            },
+          }),
+        ]);
 
-      return {
-        id: koulutus?.id ?? '',
-        nimi: koulutus?.nimi?.[language] ?? '',
-        kuvaus: koulutus?.kuvaus?.[language] ?? '',
-        alkuPvm: koulutus?.alkuPvm ?? '',
-        loppuPvm: koulutus?.loppuPvm ?? '',
-        osaamiset:
-          koulutus?.osaamiset?.map((osaaminenId) => ({
-            id: osaaminenId,
-            nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
-            kuvaus: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.kuvaus ?? {},
-          })) ?? [],
-      };
+        return {
+          id: koulutus?.id ?? '',
+          nimi: koulutus?.nimi?.[language] ?? '',
+          kuvaus: koulutus?.kuvaus?.[language] ?? '',
+          alkuPvm: koulutus?.alkuPvm ?? '',
+          loppuPvm: koulutus?.loppuPvm ?? '',
+          osaamiset:
+            koulutus?.osaamiset?.map((osaaminenId) => ({
+              id: osaaminenId,
+              nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
+              kuvaus: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.kuvaus ?? {},
+            })) ?? [],
+        };
+      } else {
+        return {
+          id: '',
+          nimi: '',
+          kuvaus: '',
+          alkuPvm: '',
+          loppuPvm: '',
+          osaamiset: [],
+        };
+      }
     },
   });
   const trigger = methods.trigger;
@@ -181,31 +200,44 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutuskokonaisuusId: id, koulutu
   });
 
   const onSubmit: FormSubmitHandler<KoulutusForm> = async ({ data }: { data: KoulutusForm }) => {
-    await client.PUT(KOULUTUS_API_PATH, {
-      params: {
-        path: {
-          id,
-          koulutusId,
+    if (koulutusId) {
+      await client.PUT(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
+        params: {
+          path: {
+            id,
+            koulutusId,
+          },
         },
-      },
-      body: {
-        id: data.id,
-        nimi: {
-          [language]: data.nimi,
+        body: {
+          id: data.id,
+          nimi: {
+            [language]: data.nimi,
+          },
+          alkuPvm: data.alkuPvm,
+          loppuPvm: data.loppuPvm,
+          osaamiset: data.osaamiset.map((o) => o.id),
         },
-        alkuPvm: data.alkuPvm,
-        loppuPvm: data.loppuPvm,
-        osaamiset: data.osaamiset.map((o) => o.id),
-      },
-    });
+      });
+    } else {
+      await client.POST(KOULUTUKSET_API_PATH, {
+        params: { path: { id } },
+        body: {
+          nimi: {
+            [language]: data.nimi,
+          },
+          alkuPvm: data.alkuPvm,
+          loppuPvm: data.loppuPvm,
+          osaamiset: data.osaamiset.map((o) => o.id),
+        },
+      });
+    }
     onClose();
   };
 
   const deleteKoulutus = async () => {
-    await client.DELETE(KOULUTUS_API_PATH, {
-      params: { path: { id, koulutusId } },
+    await client.DELETE(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
+      params: { path: { id, koulutusId: koulutusId! } },
     });
-
     onClose();
   };
 
@@ -213,11 +245,7 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutuskokonaisuusId: id, koulutu
     void trigger();
   }, [trigger]);
 
-  if (isLoading) {
-    return null;
-  }
-
-  return (
+  return !isLoading ? (
     <Modal
       open={isOpen}
       progress={<WizardProgress steps={stepComponents.length} currentStep={step + 1} />}
@@ -233,25 +261,27 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutuskokonaisuusId: id, koulutu
               }
             }}
           >
-            <StepComponent />
+            <StepComponent koulutusId={koulutusId} />
           </Form>
         </FormProvider>
       }
       footer={
         <div className="flex flex-row justify-between">
           <div>
-            <ConfirmDialog
-              title={t('education-history.delete-degree')}
-              onConfirm={() => void deleteKoulutus()}
-              confirmText={t('delete')}
-              cancelText={t('cancel')}
-              variant="destructive"
-              description={t('education-history.confirm-delete-degree')}
-            >
-              {(showDialog: () => void) => (
-                <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
-              )}
-            </ConfirmDialog>
+            {koulutusId && (
+              <ConfirmDialog
+                title={t('education-history.delete-degree')}
+                onConfirm={() => void deleteKoulutus()}
+                confirmText={t('delete')}
+                cancelText={t('cancel')}
+                variant="destructive"
+                description={t('education-history.confirm-delete-degree')}
+              >
+                {(showDialog: () => void) => (
+                  <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
+                )}
+              </ConfirmDialog>
+            )}
           </div>
           <div className="flex flex-row justify-between gap-5">
             <Button label={t('cancel')} variant="white" onClick={onClose} />
@@ -266,7 +296,9 @@ const EditKoulutusModal = ({ isOpen, onClose, koulutuskokonaisuusId: id, koulutu
         </div>
       }
     />
+  ) : (
+    <></>
   );
 };
 
-export default EditKoulutusModal;
+export default AddOrEditKoulutusModal;

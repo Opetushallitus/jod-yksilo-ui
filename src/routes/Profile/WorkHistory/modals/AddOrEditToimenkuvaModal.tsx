@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
@@ -17,11 +18,11 @@ import {
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-interface EditToimenkuvaModalProps {
+interface AddOrEditToimenkuvaModalProps {
   isOpen: boolean;
   onClose: () => void;
   tyopaikkaId: string;
-  toimenkuvaId: string;
+  toimenkuvaId?: string;
 }
 
 interface ToimenkuvaForm {
@@ -37,15 +38,15 @@ interface ToimenkuvaForm {
   }[];
 }
 
-const TOIMENKUVA_API_PATH = '/api/profiili/tyopaikat/{id}/toimenkuvat/{toimenkuvaId}';
+const TOIMENKUVAT_API_PATH = '/api/profiili/tyopaikat/{id}/toimenkuvat';
 
-const MainStep = () => {
+const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
   const { t } = useTranslation();
   const { register, control } = useFormContext<ToimenkuvaForm>();
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t('work-history.edit-job-description')}
+        {t(toimenkuvaId ? 'work-history.edit-job-description' : 'work-history.add-new-job-description')}
       </h2>
       <div className="mb-6">
         <InputField
@@ -76,13 +77,15 @@ const MainStep = () => {
   );
 };
 
-const OsaamisetStep = () => {
+const OsaamisetStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const { t } = useTranslation();
   const { control } = useFormContext<ToimenkuvaForm>();
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{t('work-history.edit-competences')}</h2>
+      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
+        {t(toimenkuvaId ? 'work-history.edit-competences' : 'work-history.identify-competences')}
+      </h2>
       <div className="mb-6">
         <InputField
           label={t('work-history.edit-competences')}
@@ -108,7 +111,12 @@ const OsaamisetStep = () => {
   );
 };
 
-const EditToimenkuvaModal = ({ isOpen, onClose, tyopaikkaId: id, toimenkuvaId }: EditToimenkuvaModalProps) => {
+const AddOrEditToimenkuvaModal = ({
+  isOpen,
+  onClose,
+  tyopaikkaId: id,
+  toimenkuvaId,
+}: AddOrEditToimenkuvaModalProps) => {
   const {
     t,
     i18n: { language },
@@ -151,28 +159,39 @@ const EditToimenkuvaModal = ({ isOpen, onClose, tyopaikkaId: id, toimenkuvaId }:
         .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm),
     ),
     defaultValues: async () => {
-      const [{ data: osaamiset }, { data: toimenkuva }] = await Promise.all([
-        client.GET('/api/profiili/osaamiset'),
-        client.GET(TOIMENKUVA_API_PATH, {
-          params: {
-            path: { id, toimenkuvaId },
-          },
-        }),
-      ]);
+      if (toimenkuvaId) {
+        const [{ data: osaamiset }, { data: toimenkuva }] = await Promise.all([
+          client.GET('/api/profiili/osaamiset'),
+          client.GET(`${TOIMENKUVAT_API_PATH}/{toimenkuvaId}`, {
+            params: {
+              path: { id, toimenkuvaId },
+            },
+          }),
+        ]);
 
-      return {
-        id: toimenkuva?.id ?? '',
-        nimi: toimenkuva?.nimi?.[language] ?? '',
-        kuvaus: toimenkuva?.kuvaus?.[language] ?? '',
-        alkuPvm: toimenkuva?.alkuPvm ?? '',
-        loppuPvm: toimenkuva?.loppuPvm ?? '',
-        osaamiset:
-          toimenkuva?.osaamiset?.map((osaaminenId) => ({
-            id: osaaminenId,
-            nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
-            kuvaus: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.kuvaus ?? {},
-          })) ?? [],
-      };
+        return {
+          id: toimenkuva?.id ?? '',
+          nimi: toimenkuva?.nimi?.[language] ?? '',
+          kuvaus: toimenkuva?.kuvaus?.[language] ?? '',
+          alkuPvm: toimenkuva?.alkuPvm ?? '',
+          loppuPvm: toimenkuva?.loppuPvm ?? '',
+          osaamiset:
+            toimenkuva?.osaamiset?.map((osaaminenId) => ({
+              id: osaaminenId,
+              nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
+              kuvaus: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.kuvaus ?? {},
+            })) ?? [],
+        };
+      } else {
+        return {
+          id: '',
+          nimi: '',
+          kuvaus: '',
+          alkuPvm: '',
+          loppuPvm: '',
+          osaamiset: [],
+        };
+      }
     },
   });
   const trigger = methods.trigger;
@@ -181,31 +200,44 @@ const EditToimenkuvaModal = ({ isOpen, onClose, tyopaikkaId: id, toimenkuvaId }:
   });
 
   const onSubmit: FormSubmitHandler<ToimenkuvaForm> = async ({ data }: { data: ToimenkuvaForm }) => {
-    await client.PUT(TOIMENKUVA_API_PATH, {
-      params: {
-        path: {
-          id,
-          toimenkuvaId,
+    if (toimenkuvaId) {
+      await client.PUT(`${TOIMENKUVAT_API_PATH}/{toimenkuvaId}`, {
+        params: {
+          path: {
+            id,
+            toimenkuvaId,
+          },
         },
-      },
-      body: {
-        id: data.id,
-        nimi: {
-          [language]: data.nimi,
+        body: {
+          id: data.id,
+          nimi: {
+            [language]: data.nimi,
+          },
+          alkuPvm: data.alkuPvm,
+          loppuPvm: data.loppuPvm,
+          osaamiset: data.osaamiset.map((o) => o.id),
         },
-        alkuPvm: data.alkuPvm,
-        loppuPvm: data.loppuPvm,
-        osaamiset: data.osaamiset.map((o) => o.id),
-      },
-    });
+      });
+    } else {
+      await client.POST(TOIMENKUVAT_API_PATH, {
+        params: { path: { id } },
+        body: {
+          nimi: {
+            [language]: data.nimi,
+          },
+          alkuPvm: data.alkuPvm,
+          loppuPvm: data.loppuPvm,
+          osaamiset: data.osaamiset.map((o) => o.id),
+        },
+      });
+    }
     onClose();
   };
 
   const deleteToimenkuva = async () => {
-    await client.DELETE(TOIMENKUVA_API_PATH, {
-      params: { path: { id, toimenkuvaId } },
+    await client.DELETE(`${TOIMENKUVAT_API_PATH}/{toimenkuvaId}`, {
+      params: { path: { id, toimenkuvaId: toimenkuvaId! } },
     });
-
     onClose();
   };
 
@@ -213,11 +245,7 @@ const EditToimenkuvaModal = ({ isOpen, onClose, tyopaikkaId: id, toimenkuvaId }:
     void trigger();
   }, [trigger]);
 
-  if (isLoading) {
-    return null;
-  }
-
-  return (
+  return !isLoading ? (
     <Modal
       open={isOpen}
       progress={<WizardProgress steps={stepComponents.length} currentStep={step + 1} />}
@@ -233,25 +261,27 @@ const EditToimenkuvaModal = ({ isOpen, onClose, tyopaikkaId: id, toimenkuvaId }:
               }
             }}
           >
-            <StepComponent />
+            <StepComponent toimenkuvaId={toimenkuvaId} />
           </Form>
         </FormProvider>
       }
       footer={
         <div className="flex flex-row justify-between">
           <div>
-            <ConfirmDialog
-              title={t('work-history.delete-job-description')}
-              onConfirm={() => void deleteToimenkuva()}
-              confirmText={t('delete')}
-              cancelText={t('cancel')}
-              variant="destructive"
-              description={t('work-history.confirm-delete-job-description')}
-            >
-              {(showDialog: () => void) => (
-                <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
-              )}
-            </ConfirmDialog>
+            {toimenkuvaId && (
+              <ConfirmDialog
+                title={t('work-history.delete-job-description')}
+                onConfirm={() => void deleteToimenkuva()}
+                confirmText={t('delete')}
+                cancelText={t('cancel')}
+                variant="destructive"
+                description={t('work-history.confirm-delete-job-description')}
+              >
+                {(showDialog: () => void) => (
+                  <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
+                )}
+              </ConfirmDialog>
+            )}
           </div>
           <div className="flex flex-row justify-between gap-5">
             <Button label={t('cancel')} variant="white" onClick={onClose} />
@@ -266,7 +296,9 @@ const EditToimenkuvaModal = ({ isOpen, onClose, tyopaikkaId: id, toimenkuvaId }:
         </div>
       }
     />
+  ) : (
+    <></>
   );
 };
 
-export default EditToimenkuvaModal;
+export default AddOrEditToimenkuvaModal;

@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
@@ -17,11 +18,11 @@ import {
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-interface EditPatevyysProps {
+interface AddOrEditPatevyysModalProps {
   isOpen: boolean;
   onClose: () => void;
   toimintoId: string;
-  patevyysId: string;
+  patevyysId?: string;
 }
 
 interface PatevyysForm {
@@ -37,15 +38,15 @@ interface PatevyysForm {
   }[];
 }
 
-const PATEVYYS_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet/{patevyysId}';
+const PATEVYYDET_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet'; // /{patevyysId}
 
-const MainStep = () => {
+const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
   const { t } = useTranslation();
   const { register, control } = useFormContext<PatevyysForm>();
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t('free-time-activities.edit-proficiency')}
+        {t(patevyysId ? 'free-time-activities.edit-proficiency' : 'free-time-activities.add-new-proficiency')}
       </h2>
       <div className="mb-6">
         <InputField
@@ -76,14 +77,14 @@ const MainStep = () => {
   );
 };
 
-const OsaamisetStep = () => {
+const OsaamisetStep = ({ patevyysId }: { patevyysId?: string }) => {
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const { t } = useTranslation();
   const { control } = useFormContext<PatevyysForm>();
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t('free-time-activities.edit-competences')}
+        {t(patevyysId ? 'free-time-activities.edit-competences' : 'free-time-activities.identify-proficiencies')}
       </h2>
       <div className="mb-6">
         <InputField
@@ -110,7 +111,12 @@ const OsaamisetStep = () => {
   );
 };
 
-export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId }: EditPatevyysProps) => {
+export const AddOrEditPatevyysModal = ({
+  isOpen,
+  onClose,
+  toimintoId: id,
+  patevyysId,
+}: AddOrEditPatevyysModalProps) => {
   const {
     t,
     i18n: { language },
@@ -153,28 +159,39 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
         .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm),
     ),
     defaultValues: async () => {
-      const [{ data: osaamiset }, { data: patevyys }] = await Promise.all([
-        client.GET('/api/profiili/osaamiset'),
-        client.GET(PATEVYYS_API_PATH, {
-          params: {
-            path: { id, patevyysId },
-          },
-        }),
-      ]);
+      if (patevyysId) {
+        const [{ data: osaamiset }, { data: patevyys }] = await Promise.all([
+          client.GET('/api/profiili/osaamiset'),
+          client.GET(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
+            params: {
+              path: { id, patevyysId },
+            },
+          }),
+        ]);
 
-      return {
-        id: patevyys?.id ?? '',
-        nimi: patevyys?.nimi?.[language] ?? '',
-        kuvaus: patevyys?.kuvaus?.[language] ?? '',
-        alkuPvm: patevyys?.alkuPvm ?? '',
-        loppuPvm: patevyys?.loppuPvm ?? '',
-        osaamiset:
-          patevyys?.osaamiset?.map((osaaminenId) => ({
-            id: osaaminenId,
-            nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
-            kuvaus: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.kuvaus ?? {},
-          })) ?? [],
-      };
+        return {
+          id: patevyys?.id ?? '',
+          nimi: patevyys?.nimi?.[language] ?? '',
+          kuvaus: patevyys?.kuvaus?.[language] ?? '',
+          alkuPvm: patevyys?.alkuPvm ?? '',
+          loppuPvm: patevyys?.loppuPvm ?? '',
+          osaamiset:
+            patevyys?.osaamiset?.map((osaaminenId) => ({
+              id: osaaminenId,
+              nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
+              kuvaus: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.kuvaus ?? {},
+            })) ?? [],
+        };
+      } else {
+        return {
+          id: '',
+          nimi: '',
+          kuvaus: '',
+          alkuPvm: '',
+          loppuPvm: '',
+          osaamiset: [],
+        };
+      }
     },
   });
   const trigger = methods.trigger;
@@ -183,32 +200,44 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
   });
 
   const onSubmit: FormSubmitHandler<PatevyysForm> = async ({ data }: { data: PatevyysForm }) => {
-    await client.PUT(PATEVYYS_API_PATH, {
-      params: {
-        path: {
-          id,
-          patevyysId,
+    if (patevyysId) {
+      await client.PUT(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
+        params: {
+          path: {
+            id,
+            patevyysId,
+          },
         },
-      },
-      body: {
-        id: data.id,
-        nimi: {
-          [language]: data.nimi,
+        body: {
+          id: data.id,
+          nimi: {
+            [language]: data.nimi,
+          },
+          alkuPvm: data.alkuPvm,
+          loppuPvm: data.loppuPvm,
+          osaamiset: data.osaamiset.map((o) => o.id),
         },
-        alkuPvm: data.alkuPvm,
-        loppuPvm: data.loppuPvm,
-        osaamiset: data.osaamiset.map((o) => o.id),
-      },
-    });
-
+      });
+    } else {
+      await client.POST(PATEVYYDET_API_PATH, {
+        params: { path: { id } },
+        body: {
+          nimi: {
+            [language]: data.nimi,
+          },
+          alkuPvm: data.alkuPvm,
+          loppuPvm: data.loppuPvm,
+          osaamiset: data.osaamiset.map((o) => o.id),
+        },
+      });
+    }
     onClose();
   };
 
   const deletePatevyys = async () => {
-    await client.DELETE(PATEVYYS_API_PATH, {
-      params: { path: { id, patevyysId } },
+    await client.DELETE(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
+      params: { path: { id, patevyysId: patevyysId! } },
     });
-
     onClose();
   };
 
@@ -216,11 +245,7 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
     void trigger();
   }, [trigger]);
 
-  if (isLoading) {
-    return null;
-  }
-
-  return (
+  return !isLoading ? (
     <Modal
       open={isOpen}
       progress={<WizardProgress steps={stepComponents.length} currentStep={step + 1} />}
@@ -236,25 +261,27 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
               }
             }}
           >
-            <StepComponent />
+            <StepComponent patevyysId={patevyysId} />
           </Form>
         </FormProvider>
       }
       footer={
         <div className="flex flex-row justify-between">
           <div>
-            <ConfirmDialog
-              title={t('free-time-activities.delete-proficiency')}
-              onConfirm={() => void deletePatevyys()}
-              confirmText={t('delete')}
-              cancelText={t('cancel')}
-              variant="destructive"
-              description={t('free-time-activities.confirm-delete-proficiency')}
-            >
-              {(showDialog: () => void) => (
-                <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
-              )}
-            </ConfirmDialog>
+            {patevyysId && (
+              <ConfirmDialog
+                title={t('free-time-activities.delete-proficiency')}
+                onConfirm={() => void deletePatevyys()}
+                confirmText={t('delete')}
+                cancelText={t('cancel')}
+                variant="destructive"
+                description={t('free-time-activities.confirm-delete-proficiency')}
+              >
+                {(showDialog: () => void) => (
+                  <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
+                )}
+              </ConfirmDialog>
+            )}
           </div>
           <div className="flex flex-row justify-between gap-5">
             <Button label={t('cancel')} variant="white" onClick={onClose} />
@@ -269,5 +296,7 @@ export const EditPatevyysModal = ({ isOpen, onClose, toimintoId: id, patevyysId 
         </div>
       }
     />
+  ) : (
+    <></>
   );
 };
