@@ -47,7 +47,7 @@ const SomethingElse = () => {
           {t('profile.something-else.my-other-comptetences')}
         </h2>
       )}
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-3">
         {sortedData.map((val) => (
           <Tag
             label={getLocalizedText(val.nimi)}

@@ -41,7 +41,7 @@ export const GroupByAlphabet = ({
           return (
             <React.Fragment key={letter}>
               <div className={groupByHeaderClasses}>{letter}</div>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-3">
                 {getOsaaminenByLetter(letter).map((val) => {
                   const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
                   const title = val.osaaminen.kuvaus[locale];

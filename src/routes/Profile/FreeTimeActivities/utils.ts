@@ -15,7 +15,17 @@ export interface VapaaAjanToiminto {
   patevyydet: Patevyys[];
 }
 
-export const getFreeTimeActivitiesTableRows = (data: VapaaAjanToiminto[]): ExperienceTableRowData[] =>
+export const getFreeTimeActivitiesTableRows = (
+  data: VapaaAjanToiminto[],
+  osaamisetMap?: Record<
+    string,
+    {
+      id: string;
+      nimi: Record<string, string>;
+      kuvaus: Record<string, string>;
+    }
+  >,
+): ExperienceTableRowData[] =>
   data.reduce((rows: ExperienceTableRowData[], row) => {
     const { patevyydet } = row;
     const alkuPvm = Math.min(...patevyydet.map((t) => new Date(t.alkuPvm).getTime()));
@@ -32,20 +42,38 @@ export const getFreeTimeActivitiesTableRows = (data: VapaaAjanToiminto[]): Exper
       nimi: row.nimi,
       alkuPvm: new Date(alkuPvm),
       loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
-      subrows: [...patevyydet].sort(sortByProperty('alkuPvm')).map(mapPatevyysToRow),
-      osaamisetCount: [
-        ...new Set(patevyydet.map((patevyys) => patevyys.osaamiset.map((osaaminen) => osaaminen)).flat()),
-      ].length,
+      subrows: [...patevyydet]
+        .sort(sortByProperty('alkuPvm'))
+        .map((patevyys) => mapPatevyysToRow(patevyys, osaamisetMap)),
+      osaamiset: [...new Set(patevyydet.map((patevyys) => patevyys.osaamiset).flat())].map((id) => ({
+        ...(osaamisetMap
+          ? osaamisetMap[id]
+          : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
+        sourceType: 'vapaa-ajan-toiminto',
+      })),
     };
     rows.push(rowData);
 
     return rows;
   }, []);
 
-const mapPatevyysToRow = (toimenkuva: Patevyys): ExperienceTableRowData => ({
-  key: toimenkuva.id ?? crypto.randomUUID(),
-  nimi: toimenkuva.nimi,
-  alkuPvm: new Date(toimenkuva.alkuPvm),
-  loppuPvm: toimenkuva.loppuPvm ? new Date(toimenkuva.loppuPvm) : undefined,
-  osaamisetCount: toimenkuva.osaamiset.length ?? 0,
+const mapPatevyysToRow = (
+  patevyys: Patevyys,
+  osaamisetMap?: Record<
+    string,
+    {
+      id: string;
+      nimi: Record<string, string>;
+      kuvaus: Record<string, string>;
+    }
+  >,
+): ExperienceTableRowData => ({
+  key: patevyys.id ?? crypto.randomUUID(),
+  nimi: patevyys.nimi,
+  alkuPvm: new Date(patevyys.alkuPvm),
+  loppuPvm: patevyys.loppuPvm ? new Date(patevyys.loppuPvm) : undefined,
+  osaamiset: patevyys.osaamiset.map((id) => ({
+    ...(osaamisetMap ? osaamisetMap[id] : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
+    sourceType: 'vapaa-ajan-toiminto',
+  })),
 });

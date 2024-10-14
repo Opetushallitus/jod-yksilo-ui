@@ -7,27 +7,33 @@ import {
   type ExperienceTableRowData,
   type RoutesNavigationListProps,
 } from '@/components';
-import { useActionBar } from '@/hooks/useActionBar';
-import { EditPatevyysModal } from '@/routes/Profile/FreeTimeActivities/modals/EditPatevyysModal';
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
-import { Button } from '@jod/design-system';
 import React from 'react';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useOutletContext, useRevalidator } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
+import { AddOrEditPatevyysModal } from './modals/AddOrEditPatevyysModal';
 import { getFreeTimeActivitiesTableRows, type VapaaAjanToiminto } from './utils';
 
 const FreeTimeActivities = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
-  const vapaaAjanToiminnot = useLoaderData() as VapaaAjanToiminto[];
+  const { vapaaAjanToiminnot, osaamisetMap } = useLoaderData() as {
+    vapaaAjanToiminnot: VapaaAjanToiminto[];
+    osaamisetMap: Record<
+      string,
+      {
+        id: string;
+        nimi: Record<string, string>;
+        kuvaus: Record<string, string>;
+      }
+    >;
+  };
   const { t } = useTranslation();
   const title = t('profile.free-time-activities.title');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
-  const actionBar = useActionBar();
   const [isWizardOpen, setIsWizardOpen] = React.useState(false);
-  const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot));
+  const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot, osaamisetMap));
   const [toimintoId, setToimintoId] = React.useState<string | undefined>(undefined);
   const [patevyysId, setPatevyysId] = React.useState<string | undefined>(undefined);
   const [isToimintoModalOpen, setIsToimintoModalOpen] = React.useState(false);
@@ -35,8 +41,27 @@ const FreeTimeActivities = () => {
   const revalidator = useRevalidator(); // For reloading data after modal close
 
   React.useEffect(() => {
-    setRows(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot));
-  }, [vapaaAjanToiminnot]);
+    setRows(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot, osaamisetMap));
+  }, [vapaaAjanToiminnot, osaamisetMap]);
+
+  const onRowClick = (row: ExperienceTableRowData) => {
+    setToimintoId(row.key);
+    setIsToimintoModalOpen(true);
+  };
+
+  const onNestedRowClick = (row: ExperienceTableRowData) => {
+    const toiminto = vapaaAjanToiminnot.find((vat) => vat.patevyydet.find((p) => p.id === row.key));
+    if (toiminto?.id) {
+      setToimintoId(toiminto.id);
+      setPatevyysId(row.key);
+      setIsPatevyysModalOpen(true);
+    }
+  };
+
+  const onAddNestedRowClick = (row: ExperienceTableRowData) => {
+    setToimintoId(row.key);
+    setIsPatevyysModalOpen(true);
+  };
 
   const onCloseToimintoModal = () => {
     setIsToimintoModalOpen(false);
@@ -55,21 +80,6 @@ const FreeTimeActivities = () => {
     revalidator.revalidate();
   };
 
-  const handleRowClick = (row: ExperienceTableRowData) => {
-    if (Array.isArray(row.subrows)) {
-      setToimintoId(row.key);
-      setIsToimintoModalOpen(true);
-    } else {
-      const toiminto = vapaaAjanToiminnot.find((vat) => vat.patevyydet.find((p) => p.id === row.key));
-
-      if (toiminto?.id) {
-        setToimintoId(toiminto.id);
-        setPatevyysId(row.key);
-        setIsPatevyysModalOpen(true);
-      }
-    }
-  };
-
   return (
     <MainLayout
       navChildren={
@@ -80,13 +90,17 @@ const FreeTimeActivities = () => {
     >
       <Title value={title} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
-      <p className="mb-8 text-body-lg">{t('profile.free-time-activities.description')}</p>
+      <p className="mb-9 text-body-lg">{t('profile.free-time-activities.description')}</p>
       <ExperienceTable
         mainColumnHeader={t('free-time-activities.activity-or-proficiency-description')}
+        addNewLabel={t('free-time-activities.add-new-free-time-activity')}
+        addNewNestedLabel={t('free-time-activities.add-new-proficiency')}
         rows={rows}
-        onRowClick={handleRowClick}
+        onAddClick={() => setIsWizardOpen(true)}
+        onRowClick={onRowClick}
+        onNestedRowClick={onNestedRowClick}
+        onAddNestedRowClick={onAddNestedRowClick}
       />
-      {isWizardOpen && <FreeTimeActivitiesWizard isOpen={isWizardOpen} setIsOpen={onCloseWizard} />}
       {isToimintoModalOpen && toimintoId && (
         <EditVapaaAjanToimintoModal
           isOpen={isToimintoModalOpen}
@@ -94,28 +108,15 @@ const FreeTimeActivities = () => {
           toimintoId={toimintoId}
         />
       )}
-
-      {isPatevyysModalOpen && toimintoId && patevyysId && (
-        <EditPatevyysModal
+      {isPatevyysModalOpen && toimintoId && (
+        <AddOrEditPatevyysModal
           isOpen={isPatevyysModalOpen}
           onClose={onClosePatevyysModal}
           toimintoId={toimintoId}
           patevyysId={patevyysId}
         />
       )}
-      {actionBar &&
-        createPortal(
-          <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button
-              variant="white"
-              label={t('free-time-activities.add-new-free-time-activity')}
-              onClick={() => {
-                setIsWizardOpen(true);
-              }}
-            />
-          </div>,
-          actionBar,
-        )}
+      {isWizardOpen && <FreeTimeActivitiesWizard isOpen={isWizardOpen} setIsOpen={onCloseWizard} />}
     </MainLayout>
   );
 };

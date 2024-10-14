@@ -34,7 +34,6 @@ const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
         kiinnostukset: z.array(
           z.object({
             id: z.string().min(1),
-            nimi: z.string(),
           }),
         ),
       }),

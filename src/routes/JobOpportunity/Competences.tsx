@@ -79,7 +79,7 @@ const Competences = () => {
             <p className="text-body-sm font-arial mt-4 mb-4">
               {t('job-opportunity.specific-professional-competences.description')}
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3">
               {sortedCompetences.map((competence) => (
                 <Tag
                   label={getLocalizedText(competence.nimi)}
