@@ -1,4 +1,4 @@
-import { formatDate, getLocalizedText, removeDuplicates, sortByProperty } from '@/utils';
+import { formatDate, getLocalizedText, paginate, removeDuplicates, sortByProperty } from '@/utils';
 import i18n from 'i18next';
 import { describe, expect, it } from 'vitest';
 
@@ -183,5 +183,53 @@ describe('utils', () => {
     const items = [{ value: { nested: {} } }, { value: { nested: {} } }];
     const sortedItems = [...items].sort(sortByProperty('value.nested'));
     expect(sortedItems).toEqual(items);
+  });
+
+  describe('paginate', () => {
+    it('should return the correct page of items', () => {
+      const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const pageSize = 3;
+      const pageNumber = 2;
+      const result = paginate(items, pageNumber, pageSize);
+      expect(result).toEqual([4, 5, 6]);
+    });
+
+    it('should handle an empty array', () => {
+      const items: number[] = [];
+      const pageSize = 3;
+      const pageNumber = 1;
+      const result = paginate(items, pageNumber, pageSize);
+      expect(result).toEqual([]);
+    });
+
+    it('should handle a page number that is out of bounds', () => {
+      const items = [1, 2, 3, 4, 5];
+      const pageSize = 3;
+      const pageNumber = 3;
+      const result = paginate(items, pageNumber, pageSize);
+      expect(result).toEqual([]);
+    });
+
+    it('should handle a page size of zero', () => {
+      const items = [1, 2, 3, 4, 5];
+      const pageSize = 0;
+      const pageNumber = 1;
+      const result = paginate(items, pageNumber, pageSize);
+      expect(result).toEqual([]);
+    });
+
+    it('should handle a negative page number', () => {
+      const items = [1, 2, 3, 4, 5];
+      const pageSize = 3;
+      const pageNumber = -1;
+      const result = paginate(items, pageNumber, pageSize);
+      expect(result).toEqual([1, 2, 3]);
+    });
+
+    it('should use default page number and page size', () => {
+      // Assuming that DEFAULT_PAGE_SIZE is 20 in constants file
+      const result = paginate(Array.from({ length: 60 }).map((_, i) => i + 1));
+      expect(result).toEqual(Array.from({ length: 20 }).map((_, i) => i + 1));
+    });
   });
 });

@@ -1,4 +1,5 @@
 import { components } from '@/api/schema';
+import { DEFAULT_PAGE_SIZE } from '@/constants';
 import i18n, { defaultLang } from '@/i18n/config';
 
 export const formatDate = (date: Date) => {
@@ -91,3 +92,15 @@ export const sortByProperty =
       return 0;
     }
   };
+
+/**
+ * Takes an array and returns a new array with a subset of items based on the page number and page size.
+ * @param array Items to be paginated
+ * @param pageNumber Desired page number. Starts from 1.
+ * @param pageSize Items per page
+ * @returns Sliced array based on the page number and page size
+ */
+export const paginate = <T>(array: T[], pageNumber = 1, pageSize = DEFAULT_PAGE_SIZE) => {
+  const safePageNumber = Math.max(pageNumber, 1);
+  return array.slice((safePageNumber - 1) * pageSize, safePageNumber * pageSize);
+};
