@@ -1,8 +1,9 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaaminenValue } from '@/components';
+import { DEFAULT_PAGE_SIZE } from '@/constants';
 import { EhdotusData, ehdotusDataToRecord, EhdotusRecord } from '@/routes/Tool/utils';
-import { sortByProperty } from '@/utils';
+import { paginate, sortByProperty } from '@/utils';
 import { create } from 'zustand';
 
 const SUOSIKIT_PATH = '/api/profiili/suosikit';
@@ -51,7 +52,7 @@ export const useToolStore = create<ToolState>()((set) => ({
   tyomahdollisuudet: [],
   ehdotuksetLoading: false,
   tyomahdollisuudetLoading: false,
-  ehdotuksetPageSize: 30,
+  ehdotuksetPageSize: DEFAULT_PAGE_SIZE,
   ehdotuksetPageNr: 1,
   ehdotuksetCount: 0,
   reset: () =>
@@ -106,15 +107,12 @@ export const useToolStore = create<ToolState>()((set) => ({
       .sort(sortByProperty('pisteet'))
       .forEach((item) => item.key);
 
-    const pageNr = Math.max(newPage - 1, 0);
-    const pageIndex = pageNr * pageSize;
-
     set({ tyomahdollisuudetLoading: true });
     try {
       const { data } = await client.GET('/api/tyomahdollisuudet', {
         params: {
           query: {
-            id: ids.slice(Math.max(pageIndex, 0), Math.min(pageIndex + pageSize - 1, ids.length - 1)),
+            id: paginate(ids, newPage, pageSize),
           },
         },
       });

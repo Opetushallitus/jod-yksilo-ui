@@ -13,6 +13,7 @@ import {
 } from '@/routes/JobOpportunity';
 import { Competences as ProfileCompetences, competencesLoader } from '@/routes/Profile/Competences';
 import { loader as educationHistoryLoader } from '@/routes/Profile/EducationHistory';
+import { favoritesLoader } from '@/routes/Profile/Favorites';
 import { loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
 import { Interests as ProfileInterests, interestsLoader } from '@/routes/Profile/Interests';
 import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
@@ -74,6 +75,7 @@ const profileRoutes = supportedLanguageCodes.map(
           id: `{slugs.profile.favorites}|${lng}`,
           path: i18n.t('slugs.profile.favorites', { lng }),
           element: <Favorites />,
+          loader: withYksiloContext(favoritesLoader),
         },
         {
           id: `{slugs.profile.competences}|${lng}`,

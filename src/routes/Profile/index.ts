@@ -1,4 +1,4 @@
-import Favorites from './Favorites';
+import Favorites from './Favorites/Favorites';
 import Preferences from './Preferences/Preferences';
 import Profile from './Profile';
 import SomethingElse from './SomethingElse/SomethingElse';
