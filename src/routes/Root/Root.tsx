@@ -140,8 +140,7 @@ const Root = () => {
   const footerRef = React.useRef<HTMLDivElement>(null);
   const logoutForm = React.useRef<HTMLFormElement>(null);
 
-  const getActiveClassNames = ({ isActive }: { isActive: boolean }) =>
-    isActive ? 'bg-secondary-1-50 w-full rounded-sm py-3 pl-5 -ml-5' : '';
+  const getActiveClassNames = ({ isActive }: { isActive: boolean }) => (isActive ? 'bg-secondary-1-50 rounded-sm' : '');
   const name = `${data?.etunimi} ${data?.sukunimi}`;
 
   const toggleMenu = (menu: 'mega' | 'user' | 'lang') => () => {
@@ -185,21 +184,17 @@ const Root = () => {
             </button>
             {sm && userMenuOpen && (
               <div className="absolute right-0 min-w-max translate-y-8 transform">
-                <PopupList>
-                  <PopupListItem>
-                    <NavLink
-                      to={userMenuUrls.preferences}
-                      onClick={() => setUserMenuOpen(false)}
-                      className={getActiveClassNames}
-                    >
-                      {t('profile.index')}
-                    </NavLink>
-                  </PopupListItem>
-                  <PopupListItem>
-                    <button type="button" onClick={logout}>
-                      {t('logout')}
-                    </button>
-                  </PopupListItem>
+                <PopupList classNames="gap-2">
+                  <NavLink
+                    to={userMenuUrls.preferences}
+                    onClick={() => setUserMenuOpen(false)}
+                    className={(props) => `w-full ${getActiveClassNames(props)}`.trim()}
+                  >
+                    <PopupListItem>{t('profile.index')}</PopupListItem>
+                  </NavLink>
+                  <button type="button" onClick={logout} className="w-full">
+                    <PopupListItem classNames="w-full">{t('logout')}</PopupListItem>
+                  </button>
                 </PopupList>
               </div>
             )}
@@ -290,7 +285,7 @@ const Root = () => {
         }
         copyright={t('copyright')}
         variant="light"
-        className={!sm ? 'pt-0' : undefined}
+        className={!sm ? 'py-7' : undefined}
       />
       <ScrollRestoration />
     </>
