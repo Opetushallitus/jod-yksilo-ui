@@ -560,20 +560,12 @@ export interface components {
       ehdotusMetadata?: components['schemas']['EhdotusMetadata'];
     };
     EhdotusMetadata: {
-      pisteet?: {
-        empty?: boolean;
-        present?: boolean;
-        /** Format: double */
-        asDouble?: number;
-      };
+      /** Format: double */
+      pisteet?: number;
       /** @enum {string} */
       trendi?: 'NOUSEVA' | 'LASKEVA';
-      tyollisyysNakyma?: {
-        empty?: boolean;
-        present?: boolean;
-        /** Format: int32 */
-        asInt?: number;
-      };
+      /** Format: int32 */
+      tyollisyysNakyma?: number;
     };
     Ehdotus: {
       /** Format: uri */

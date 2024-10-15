@@ -201,7 +201,7 @@ export const OpportunityCard = ({
     }
   };
 
-  const cardTypeTitle = type == 'work' ? t('opportunity-type.work') : t('opportunity-type.education');
+  const cardTypeTitle = type === 'work' ? t('opportunity-type.work') : t('opportunity-type.education');
   const ActionSection = (
     <div className="flex flex-row gap-5">
       <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />
@@ -215,7 +215,7 @@ export const OpportunityCard = ({
       <div className="rounded shadow-border bg-white pt-5 pr-5 pl-5 sm:pl-6 pb-5 sm:pb-7">
         <div className="flex flex-col sm:flex-row sm:gap-5">
           <div className="flex flex-row justify-between align-center">
-            <div>
+            <div className={type !== 'work' ? 'bg-todo' : undefined}>
               {matchValue && matchLabel && <Match match={matchValue} label={matchLabel} bg={bgForType(type)} />}
             </div>
             {!sm && ActionSection}
