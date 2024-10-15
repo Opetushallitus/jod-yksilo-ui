@@ -18,7 +18,7 @@ const Cards = ({ className }: CardsProps) => {
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
 
   const preferencesLink = React.useMemo(
-    () => generateProfileLink('slugs.profile.preferences', data, language, t),
+    () => generateProfileLink(['slugs.profile.preferences'], data, language, t),
     [data, language, t],
   );
   return (
