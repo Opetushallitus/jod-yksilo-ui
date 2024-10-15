@@ -248,9 +248,11 @@ const Tool = () => {
 
       <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
         <div className="col-span-1 sm:col-span-3">
-          <div className="flex flex-col sm:flex-row" ref={scrollRef}>
+          <div className="flex flex-col sm:flex-row">
             <span className="text-body-md text-black font-medium sm:text-body-lg">
-              <h2 className="text-heading-2 mb-4">{t('tool.competences.opportunities-title')}</h2>
+              <h2 className="text-heading-2 mb-4 scroll-mt-[96px]" ref={scrollRef}>
+                {t('tool.competences.opportunities-title')}
+              </h2>
               {t('tool.competences.available-options-totals', {
                 professionsCount: toolStore.ehdotuksetCount,
                 educationsCount,
@@ -346,18 +348,20 @@ const Tool = () => {
             })}
           </div>
 
-          <Pagination
-            currentPage={toolStore.ehdotuksetPageNr}
-            type="button"
-            pageSize={toolStore.ehdotuksetPageSize}
-            siblingCount={1}
-            translations={{
-              nextTriggerLabel: t('pagination.next'),
-              prevTriggerLabel: t('pagination.previous'),
-            }}
-            totalItems={toolStore.ehdotuksetCount}
-            onPageChange={(data) => void onPageChange(data)}
-          />
+          {toolStore.tyomahdollisuudet.length > 0 && (
+            <Pagination
+              currentPage={toolStore.ehdotuksetPageNr}
+              type="button"
+              pageSize={toolStore.ehdotuksetPageSize}
+              siblingCount={1}
+              translations={{
+                nextTriggerLabel: t('pagination.next'),
+                prevTriggerLabel: t('pagination.previous'),
+              }}
+              totalItems={toolStore.ehdotuksetCount}
+              onPageChange={(data) => void onPageChange(data)}
+            />
+          )}
         </div>
         {sm && (
           <div className="col-span-1 sm:mt-8">
