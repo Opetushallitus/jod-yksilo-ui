@@ -14,6 +14,11 @@
     "basic-information": "basic-information",
     "cookie-policy": "cookie-policy",
     "data-sources": "data-sources",
+    "education-opportunity": {
+      "competences": "competences",
+      "index": "education-opportunity",
+      "overview": "overview"
+    },
     "how-do-i-give-feedback": "how-do-i-give-feedback",
     "how-do-i-use-the-service": "how-do-i-use-the-service",
     "job-opportunity": {
