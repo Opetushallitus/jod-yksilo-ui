@@ -18,7 +18,7 @@ const HelpingToolsContent = () => {
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
 
   const interestsLink = React.useMemo(
-    () => generateProfileLink('slugs.profile.interests', data, language, t),
+    () => generateProfileLink(['slugs.profile.interests'], data, language, t),
     [data, language, t],
   );
 

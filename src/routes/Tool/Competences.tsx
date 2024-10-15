@@ -17,21 +17,22 @@ const HelpingToolsContent = () => {
   } = useTranslation();
 
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
+  const competencesSlug = 'slugs.profile.competences';
 
   const educationLink = React.useMemo(
-    () => generateProfileLink('slugs.profile.education-history', data, language, t),
+    () => generateProfileLink([competencesSlug, 'slugs.profile.education-history'], data, language, t),
     [data, language, t],
   );
   const workLink = React.useMemo(
-    () => generateProfileLink('slugs.profile.work-history', data, language, t),
+    () => generateProfileLink([competencesSlug, 'slugs.profile.work-history'], data, language, t),
     [data, language, t],
   );
   const freeTimeLink = React.useMemo(
-    () => generateProfileLink('slugs.profile.free-time-activities', data, language, t),
+    () => generateProfileLink([competencesSlug, 'slugs.profile.free-time-activities'], data, language, t),
     [data, language, t],
   );
   const somethingElseLink = React.useMemo(
-    () => generateProfileLink('slugs.profile.something-else', data, language, t),
+    () => generateProfileLink([competencesSlug, 'slugs.profile.something-else'], data, language, t),
     [data, language, t],
   );
 
