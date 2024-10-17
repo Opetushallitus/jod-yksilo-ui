@@ -34,7 +34,7 @@ export const LanguageMenu = ({ inline, onClick }: LanguageMenuProps) => {
   return inline ? (
     <ListItems onClick={onClick} />
   ) : (
-    <PopupList classNames="!bg-bg-gray-2">
+    <PopupList classNames="!bg-bg-gray-2 gap-y-2">
       <ListItems onClick={onClick} />
     </PopupList>
   );

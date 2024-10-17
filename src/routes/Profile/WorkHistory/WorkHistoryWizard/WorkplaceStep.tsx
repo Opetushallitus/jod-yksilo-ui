@@ -9,7 +9,10 @@ interface WorkplaceStepProps {
 }
 
 const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { register, watch, control } = useFormContext<WorkHistoryForm>();
   const id = watch('id');
   const toimenkuvaId = watch(`toimenkuvat.${toimenkuva}.id`);
@@ -31,7 +34,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
         <div className="mb-6">
           <InputField
             label={t('work-history.employer')}
-            {...register('nimi')}
+            {...register(`nimi.${language}` as const)}
             placeholder="TODO: Lorem ipsum dolor sit amet"
             help="TODO: Help text"
           />
@@ -40,7 +43,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
       <div className="mb-6">
         <InputField
           label={t('work-history.job-description')}
-          {...register(`toimenkuvat.${toimenkuva}.nimi` as const)}
+          {...register(`toimenkuvat.${toimenkuva}.nimi.${language}` as const)}
           placeholder="TODO: Lorem ipsum dolor sit amet"
           help="TODO: Help text"
         />

@@ -9,7 +9,10 @@ interface ActivityStepProps {
 }
 
 const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { register, watch, control } = useFormContext<FreeTimeActivitiesForm>();
   const id = watch('id');
   const patevyysId = watch(`patevyydet.${patevyys}.id`);
@@ -30,7 +33,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
         <div className="mb-6">
           <InputField
             label={t('free-time-activities.activity-name')}
-            {...register('nimi')}
+            {...register(`nimi.${language}` as const)}
             placeholder="TODO: Lorem ipsum dolor sit amet"
             help="TODO: Help text"
           />
@@ -39,7 +42,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
       <div className="mb-6">
         <InputField
           label={t('free-time-activities.proficiency')}
-          {...register(`patevyydet.${patevyys}.nimi` as const)}
+          {...register(`patevyydet.${patevyys}.nimi.${language}` as const)}
           placeholder="TODO: Lorem ipsum dolor sit amet"
           help="TODO: Help text"
         />

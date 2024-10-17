@@ -27,8 +27,8 @@ interface AddOrEditToimenkuvaModalProps {
 
 interface ToimenkuvaForm {
   id: string;
-  nimi: string;
-  kuvaus: string;
+  nimi: components['schemas']['LokalisoituTeksti'];
+  kuvaus: components['schemas']['LokalisoituTeksti'];
   alkuPvm: string;
   loppuPvm: string;
   osaamiset: {
@@ -41,7 +41,10 @@ interface ToimenkuvaForm {
 const TOIMENKUVAT_API_PATH = '/api/profiili/tyopaikat/{id}/toimenkuvat';
 
 const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { register, control } = useFormContext<ToimenkuvaForm>();
   return (
     <>
@@ -51,7 +54,7 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
       <div className="mb-6">
         <InputField
           label={t('work-history.job-description')}
-          {...register('nimi')}
+          {...register(`nimi.${language}` as const)}
           placeholder="TODO: Lorem ipsum dolor sit amet"
         />
       </div>
@@ -117,10 +120,7 @@ const AddOrEditToimenkuvaModal = ({
   tyopaikkaId: id,
   toimenkuvaId,
 }: AddOrEditToimenkuvaModalProps) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   if (!id) {
     onClose();
@@ -146,8 +146,8 @@ const AddOrEditToimenkuvaModal = ({
       z
         .object({
           id: z.string(),
-          nimi: z.string().min(1),
-          kuvaus: z.string().min(1).or(z.literal('')),
+          nimi: z.object({}).catchall(z.string().min(1)),
+          kuvaus: z.object({}).catchall(z.string().min(1).or(z.literal(''))),
           alkuPvm: z.string().date(),
           loppuPvm: z.string().date().optional().or(z.literal('')),
           osaamiset: z.array(
@@ -171,8 +171,8 @@ const AddOrEditToimenkuvaModal = ({
 
         return {
           id: toimenkuva?.id ?? '',
-          nimi: toimenkuva?.nimi?.[language] ?? '',
-          kuvaus: toimenkuva?.kuvaus?.[language] ?? '',
+          nimi: toimenkuva?.nimi ?? {},
+          kuvaus: toimenkuva?.kuvaus ?? {},
           alkuPvm: toimenkuva?.alkuPvm ?? '',
           loppuPvm: toimenkuva?.loppuPvm ?? '',
           osaamiset:
@@ -185,8 +185,8 @@ const AddOrEditToimenkuvaModal = ({
       } else {
         return {
           id: '',
-          nimi: '',
-          kuvaus: '',
+          nimi: {},
+          kuvaus: {},
           alkuPvm: '',
           loppuPvm: '',
           osaamiset: [],
@@ -210,9 +210,7 @@ const AddOrEditToimenkuvaModal = ({
         },
         body: {
           id: data.id,
-          nimi: {
-            [language]: data.nimi,
-          },
+          nimi: data.nimi,
           alkuPvm: data.alkuPvm,
           loppuPvm: data.loppuPvm,
           osaamiset: data.osaamiset.map((o) => o.id),
@@ -222,9 +220,7 @@ const AddOrEditToimenkuvaModal = ({
       await client.POST(TOIMENKUVAT_API_PATH, {
         params: { path: { id } },
         body: {
-          nimi: {
-            [language]: data.nimi,
-          },
+          nimi: data.nimi,
           alkuPvm: data.alkuPvm,
           loppuPvm: data.loppuPvm,
           osaamiset: data.osaamiset.map((o) => o.id),

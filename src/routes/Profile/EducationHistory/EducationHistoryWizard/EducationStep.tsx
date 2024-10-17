@@ -9,7 +9,10 @@ interface EducationStepProps {
 }
 
 const EducationStep = ({ type, koulutus }: EducationStepProps) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { register, watch, control } = useFormContext<EducationHistoryForm>();
   const id = watch('id');
   const koulutusId = watch(`koulutukset.${koulutus}.id`);
@@ -31,7 +34,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
         <div className="mb-6">
           <InputField
             label={t('education-history.educational-institution')}
-            {...register('nimi')}
+            {...register(`nimi.${language}` as const)}
             placeholder="Lorem ipsum dolor sit amet"
             help="TODO: Help text"
           />
@@ -40,7 +43,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
       <div className="mb-6">
         <InputField
           label={t('education-history.degree')}
-          {...register(`koulutukset.${koulutus}.nimi` as const)}
+          {...register(`koulutukset.${koulutus}.nimi.${language}` as const)}
           placeholder="Lorem ipsum dolor sit amet"
           help="TODO: Help text"
         />

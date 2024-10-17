@@ -27,8 +27,8 @@ interface AddOrEditPatevyysModalProps {
 
 interface PatevyysForm {
   id: string;
-  nimi: string;
-  kuvaus: string;
+  nimi: components['schemas']['LokalisoituTeksti'];
+  kuvaus: components['schemas']['LokalisoituTeksti'];
   alkuPvm: string;
   loppuPvm: string;
   osaamiset: {
@@ -41,7 +41,10 @@ interface PatevyysForm {
 const PATEVYYDET_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet'; // /{patevyysId}
 
 const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { register, control } = useFormContext<PatevyysForm>();
   return (
     <>
@@ -51,7 +54,7 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
       <div className="mb-6">
         <InputField
           label={t('free-time-activities.proficiency')}
-          {...register('nimi')}
+          {...register(`nimi.${language}` as const)}
           placeholder="TODO: Lorem ipsum dolor sit amet"
         />
       </div>
@@ -117,10 +120,7 @@ export const AddOrEditPatevyysModal = ({
   toimintoId: id,
   patevyysId,
 }: AddOrEditPatevyysModalProps) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   if (!id) {
     onClose();
@@ -146,8 +146,8 @@ export const AddOrEditPatevyysModal = ({
       z
         .object({
           id: z.string(),
-          nimi: z.string().min(1),
-          kuvaus: z.string().min(1).or(z.literal('')),
+          nimi: z.object({}).catchall(z.string().min(1)),
+          kuvaus: z.object({}).catchall(z.string().min(1).or(z.literal(''))),
           alkuPvm: z.string().date(),
           loppuPvm: z.string().date().optional().or(z.literal('')),
           osaamiset: z.array(
@@ -171,8 +171,8 @@ export const AddOrEditPatevyysModal = ({
 
         return {
           id: patevyys?.id ?? '',
-          nimi: patevyys?.nimi?.[language] ?? '',
-          kuvaus: patevyys?.kuvaus?.[language] ?? '',
+          nimi: patevyys?.nimi ?? {},
+          kuvaus: patevyys?.kuvaus ?? {},
           alkuPvm: patevyys?.alkuPvm ?? '',
           loppuPvm: patevyys?.loppuPvm ?? '',
           osaamiset:
@@ -185,8 +185,8 @@ export const AddOrEditPatevyysModal = ({
       } else {
         return {
           id: '',
-          nimi: '',
-          kuvaus: '',
+          nimi: {},
+          kuvaus: {},
           alkuPvm: '',
           loppuPvm: '',
           osaamiset: [],
@@ -210,9 +210,7 @@ export const AddOrEditPatevyysModal = ({
         },
         body: {
           id: data.id,
-          nimi: {
-            [language]: data.nimi,
-          },
+          nimi: data.nimi,
           alkuPvm: data.alkuPvm,
           loppuPvm: data.loppuPvm,
           osaamiset: data.osaamiset.map((o) => o.id),
@@ -222,9 +220,7 @@ export const AddOrEditPatevyysModal = ({
       await client.POST(PATEVYYDET_API_PATH, {
         params: { path: { id } },
         body: {
-          nimi: {
-            [language]: data.nimi,
-          },
+          nimi: data.nimi,
           alkuPvm: data.alkuPvm,
           loppuPvm: data.loppuPvm,
           osaamiset: data.osaamiset.map((o) => o.id),

@@ -18,10 +18,7 @@ interface FreeTimeActivitiesWizardProps {
 }
 
 const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizardProps) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { sm } = useMediaQueries();
 
@@ -32,11 +29,11 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
       z
         .object({
           id: z.string().optional(),
-          nimi: z.string().min(1),
+          nimi: z.object({}).catchall(z.string().min(1)),
           patevyydet: z
             .object({
               id: z.string().optional(),
-              nimi: z.string().min(1),
+              nimi: z.object({}).catchall(z.string().min(1)),
               alkuPvm: z.string().date(),
               loppuPvm: z.string().date().optional().or(z.literal('')),
               osaamiset: z.array(
@@ -55,10 +52,10 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
     ),
     defaultValues: async () => {
       return Promise.resolve({
-        nimi: '',
+        nimi: {},
         patevyydet: [
           {
-            nimi: '',
+            nimi: {},
             alkuPvm: '',
             loppuPvm: '',
             osaamiset: [],
@@ -81,13 +78,9 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
   const onSubmit: FormSubmitHandler<FreeTimeActivitiesForm> = async ({ data }: { data: FreeTimeActivitiesForm }) => {
     await client.POST('/api/profiili/vapaa-ajan-toiminnot', {
       body: {
-        nimi: {
-          [language]: data.nimi,
-        },
+        nimi: data.nimi,
         patevyydet: data.patevyydet.map((patevyys) => ({
-          nimi: {
-            [language]: patevyys.nimi,
-          },
+          nimi: patevyys.nimi,
           alkuPvm: patevyys.alkuPvm,
           loppuPvm: patevyys.loppuPvm,
           osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),
@@ -144,7 +137,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
               <Button
                 onClick={() => {
                   append({
-                    nimi: '',
+                    nimi: {},
                     alkuPvm: '',
                     loppuPvm: '',
                     osaamiset: [],

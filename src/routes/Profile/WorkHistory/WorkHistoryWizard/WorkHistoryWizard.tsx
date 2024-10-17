@@ -18,10 +18,7 @@ interface WorkHistoryWizardProps {
 }
 
 const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { sm } = useMediaQueries();
 
@@ -32,11 +29,11 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
       z
         .object({
           id: z.string().optional(),
-          nimi: z.string().min(1),
+          nimi: z.object({}).catchall(z.string().min(1)),
           toimenkuvat: z
             .object({
               id: z.string().optional(),
-              nimi: z.string().min(1),
+              nimi: z.object({}).catchall(z.string().min(1)),
               alkuPvm: z.string().date(),
               loppuPvm: z.string().date().optional().or(z.literal('')),
               osaamiset: z.array(
@@ -57,10 +54,10 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
     ),
     defaultValues: async () => {
       return Promise.resolve({
-        nimi: '',
+        nimi: {},
         toimenkuvat: [
           {
-            nimi: '',
+            nimi: {},
             alkuPvm: '',
             loppuPvm: '',
             osaamiset: [],
@@ -81,13 +78,9 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   const onSubmit: FormSubmitHandler<WorkHistoryForm> = async ({ data }: { data: WorkHistoryForm }) => {
     await client.POST('/api/profiili/tyopaikat', {
       body: {
-        nimi: {
-          [language]: data.nimi,
-        },
+        nimi: data.nimi,
         toimenkuvat: data.toimenkuvat.map((toimenkuva) => ({
-          nimi: {
-            [language]: toimenkuva.nimi,
-          },
+          nimi: toimenkuva.nimi,
           alkuPvm: toimenkuva.alkuPvm,
           loppuPvm: toimenkuva.loppuPvm,
           osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
@@ -148,7 +141,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
               <Button
                 onClick={() => {
                   append({
-                    nimi: '',
+                    nimi: {},
                     alkuPvm: '',
                     loppuPvm: '',
                     osaamiset: [],

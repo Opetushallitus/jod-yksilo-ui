@@ -11,7 +11,10 @@ interface CompetencesStepProps {
 }
 
 const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { getValues, watch, control } = useFormContext<FreeTimeActivitiesForm>();
   const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const id = watch(`patevyydet.${patevyys}.id`);
@@ -22,7 +25,7 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
         {id ? t('free-time-activities.edit-proficiencies') : t('free-time-activities.identify-proficiencies')}
       </h2>
       <h3 className="mb-4 text-heading-5 font-arial text-black sm:mb-5 sm:text-heading-3 sm:font-poppins">
-        {getValues('nimi')} - {getValues(`patevyydet.${patevyys}.nimi`)}
+        {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}
       </h3>
       <p className="mb-7 text-body-sm font-arial sm:mb-9 text-todo">
         Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,

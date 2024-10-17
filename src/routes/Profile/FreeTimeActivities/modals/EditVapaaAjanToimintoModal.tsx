@@ -15,7 +15,7 @@ interface EditVapaaAjanToimintoProps {
 
 export interface VapaaAjanToimintoForm {
   id: components['schemas']['ToimintoDto']['id'];
-  nimi: string;
+  nimi: components['schemas']['LokalisoituTeksti'];
 }
 
 const VAPAA_AJAN_TOIMINTO_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}';
@@ -32,7 +32,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
     resolver: zodResolver(
       z.object({
         id: z.string().min(1),
-        nimi: z.string().min(1),
+        nimi: z.object({}).catchall(z.string().min(1)),
       }),
     ),
     defaultValues: async () => {
@@ -41,7 +41,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
       });
       return {
         id: toiminto?.id,
-        nimi: toiminto?.nimi?.[language] ?? '',
+        nimi: toiminto?.nimi ?? {},
       };
     },
   });
@@ -59,9 +59,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
       },
       body: {
         id: data.id,
-        nimi: {
-          [language]: data.nimi,
-        },
+        nimi: data.nimi,
       },
     });
     onClose();
@@ -104,7 +102,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
 
             <InputField
               label={t('free-time-activities.activity-name')}
-              {...methods.register('nimi')}
+              {...methods.register(`nimi.${language}` as const)}
               placeholder="TODO: Lorem ipsum dolor sit amet"
               help="TODO: Help text"
             />

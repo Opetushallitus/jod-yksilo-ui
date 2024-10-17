@@ -18,10 +18,7 @@ interface EducationHistoryWizard {
 }
 
 const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { sm } = useMediaQueries();
 
@@ -32,11 +29,11 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => 
       z
         .object({
           id: z.string().optional(),
-          nimi: z.string().min(1),
+          nimi: z.object({}).catchall(z.string().min(1)),
           koulutukset: z
             .object({
               id: z.string().optional(),
-              nimi: z.string().min(1),
+              nimi: z.object({}).catchall(z.string().min(1)),
               alkuPvm: z.string().date(),
               loppuPvm: z.string().date().optional().or(z.literal('')),
               osaamiset: z.array(
@@ -55,10 +52,10 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => 
     ),
     defaultValues: async () => {
       return Promise.resolve({
-        nimi: '',
+        nimi: {},
         koulutukset: [
           {
-            nimi: '',
+            nimi: {},
             alkuPvm: '',
             loppuPvm: '',
             osaamiset: [],
@@ -79,13 +76,9 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => 
   const onSubmit: FormSubmitHandler<EducationHistoryForm> = async ({ data }: { data: EducationHistoryForm }) => {
     await client.POST('/api/profiili/koulutuskokonaisuudet', {
       body: {
-        nimi: {
-          [language]: data.nimi,
-        },
+        nimi: data.nimi,
         koulutukset: data.koulutukset.map((koulutus) => ({
-          nimi: {
-            [language]: koulutus.nimi,
-          },
+          nimi: koulutus.nimi,
           alkuPvm: koulutus.alkuPvm,
           loppuPvm: koulutus.loppuPvm,
           osaamiset: koulutus.osaamiset.map((osaaminen) => osaaminen.id),
@@ -146,7 +139,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => 
               <Button
                 onClick={() => {
                   append({
-                    nimi: '',
+                    nimi: {},
                     alkuPvm: '',
                     loppuPvm: '',
                     osaamiset: [],

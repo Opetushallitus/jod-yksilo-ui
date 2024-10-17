@@ -1,6 +1,6 @@
 import { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
-import i18n, { defaultLang } from '@/i18n/config';
+import i18n from '@/i18n/config';
 
 export const formatDate = (date: Date) => {
   const month = date.getMonth();
@@ -15,7 +15,7 @@ export const formatDate = (date: Date) => {
  */
 export const getLocalizedText = (
   entry?: components['schemas']['LokalisoituTeksti'] | Record<string, string | undefined>,
-) => entry?.[i18n.language] ?? entry?.[defaultLang] ?? '';
+) => entry?.[i18n.language] ?? '';
 
 type NestedKeyOf<ObjectType extends object> = {
   [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
