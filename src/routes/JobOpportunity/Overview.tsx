@@ -1,6 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList, Title } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
+import { getLocalizedText } from '@/utils';
 import { Accordion, Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +15,7 @@ const Overview = () => {
     i18n: { language },
   } = useTranslation();
   const { tyomahdollisuus } = useOutletContext<LoaderData>();
-  const title = tyomahdollisuus?.otsikko[language];
+  const title = getLocalizedText(tyomahdollisuus?.otsikko);
   const routes: RoutesNavigationListProps['routes'] = [
     {
       active: false,
@@ -84,7 +85,7 @@ const Overview = () => {
             expandLessText={t('expand-less')}
             lang={language}
           >
-            <p className="text-body-sm font-arial mt-4">{tyomahdollisuus?.kuvaus?.[language]}</p>
+            <p className="text-body-sm font-arial mt-4">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>
           </Accordion>
         </div>
         <div>

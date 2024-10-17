@@ -2,10 +2,10 @@ import { components } from '@/api/schema';
 
 export interface WorkHistoryForm {
   id?: string;
-  nimi: string;
+  nimi: components['schemas']['LokalisoituTeksti'];
   toimenkuvat: {
     id?: string;
-    nimi: string;
+    nimi: components['schemas']['LokalisoituTeksti'];
     alkuPvm: string;
     loppuPvm: string;
     osaamiset: {

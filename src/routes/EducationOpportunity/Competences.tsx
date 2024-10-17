@@ -16,7 +16,7 @@ const Competences = () => {
     i18n: { language },
   } = useTranslation();
   const { koulutusmahdollisuus, osaamiset } = useOutletContext<LoaderData>();
-  const title = koulutusmahdollisuus?.otsikko[language] ?? '';
+  const title = getLocalizedText(koulutusmahdollisuus?.otsikko);
   const sortedCompetences = React.useMemo(
     () => [...(osaamiset ?? [])].sort(sortByProperty(`nimi.${language}`)),
     [osaamiset, language],

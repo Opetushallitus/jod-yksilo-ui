@@ -15,13 +15,11 @@ const SummaryStep = () => {
     setRows(
       getWorkHistoryTableRows([
         {
-          nimi: { fi: tyopaikka.nimi },
+          nimi: tyopaikka.nimi,
           toimenkuvat: tyopaikka.toimenkuvat.map(
             (toimenkuva) =>
               ({
-                nimi: {
-                  fi: toimenkuva.nimi,
-                },
+                nimi: toimenkuva.nimi,
                 alkuPvm: toimenkuva.alkuPvm,
                 loppuPvm: toimenkuva.loppuPvm,
                 osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),

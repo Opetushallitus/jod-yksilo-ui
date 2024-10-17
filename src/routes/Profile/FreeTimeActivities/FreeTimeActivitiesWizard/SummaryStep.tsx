@@ -15,13 +15,11 @@ const SummaryStep = () => {
     setRows(
       getFreeTimeActivitiesTableRows([
         {
-          nimi: { fi: freeTimeActivity.nimi },
+          nimi: freeTimeActivity.nimi,
           patevyydet: freeTimeActivity.patevyydet.map(
             (patevyys) =>
               ({
-                nimi: {
-                  fi: patevyys.nimi,
-                },
+                nimi: patevyys.nimi,
                 alkuPvm: patevyys.alkuPvm,
                 loppuPvm: patevyys.loppuPvm,
                 osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),

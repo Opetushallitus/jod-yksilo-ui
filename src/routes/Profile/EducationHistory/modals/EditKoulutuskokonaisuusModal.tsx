@@ -15,7 +15,7 @@ interface EditKoulutuskokonaisuusModalProps {
 
 interface KoulutuskokonaisuusForm {
   id: components['schemas']['TyopaikkaDto']['id'];
-  nimi: string;
+  nimi: components['schemas']['LokalisoituTeksti'];
 }
 
 const KOULUTUSKOKONAISUUS_API_PATH = '/api/profiili/koulutuskokonaisuudet/{id}';
@@ -36,7 +36,7 @@ const EditKoulutuskokonaisuusModal = ({
     resolver: zodResolver(
       z.object({
         id: z.string().min(1),
-        nimi: z.string().min(1),
+        nimi: z.object({}).catchall(z.string().min(1)),
       }),
     ),
     defaultValues: async () => {
@@ -45,7 +45,7 @@ const EditKoulutuskokonaisuusModal = ({
       });
       return {
         id: koulutus?.id,
-        nimi: koulutus?.nimi?.[language] ?? '',
+        nimi: koulutus?.nimi ?? {},
       };
     },
   });
@@ -63,9 +63,7 @@ const EditKoulutuskokonaisuusModal = ({
       },
       body: {
         id: data.id,
-        nimi: {
-          [language]: data.nimi,
-        },
+        nimi: data.nimi,
       },
     });
     onClose();
@@ -108,7 +106,7 @@ const EditKoulutuskokonaisuusModal = ({
 
             <InputField
               label={t('education-history.educational-institution')}
-              {...methods.register('nimi')}
+              {...methods.register(`nimi.${language}` as const)}
               placeholder="TODO: Lorem ipsum dolor sit amet"
               help="TODO: Help text"
             />

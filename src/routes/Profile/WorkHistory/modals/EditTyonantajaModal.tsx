@@ -15,7 +15,7 @@ interface EditTyonantajaModalProps {
 
 interface TyonantajaForm {
   id: components['schemas']['TyopaikkaDto']['id'];
-  nimi: string;
+  nimi: components['schemas']['LokalisoituTeksti'];
 }
 
 const TYOPAIKKA_API_PATH = '/api/profiili/tyopaikat/{id}';
@@ -32,14 +32,14 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
     resolver: zodResolver(
       z.object({
         id: z.string().min(1),
-        nimi: z.string().min(1),
+        nimi: z.object({}).catchall(z.string().min(1)),
       }),
     ),
     defaultValues: async () => {
       const { data: tyopaikka } = await client.GET(TYOPAIKKA_API_PATH, { params: { path: { id } } });
       return {
         id: tyopaikka?.id,
-        nimi: tyopaikka?.nimi?.[language] ?? '',
+        nimi: tyopaikka?.nimi ?? {},
       };
     },
   });
@@ -57,9 +57,7 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
       },
       body: {
         id: data.id,
-        nimi: {
-          [language]: data.nimi,
-        },
+        nimi: data.nimi,
       },
     });
     onClose();
@@ -99,10 +97,9 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
             <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
               {t('work-history.edit-workplace')}
             </h2>
-
             <InputField
               label={t('work-history.employer')}
-              {...methods.register('nimi')}
+              {...methods.register(`nimi.${language}` as const)}
               placeholder="TODO: Lorem ipsum dolor sit amet"
               help="TODO: Help text"
             />

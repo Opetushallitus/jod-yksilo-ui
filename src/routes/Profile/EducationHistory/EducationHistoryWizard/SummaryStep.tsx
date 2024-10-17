@@ -15,13 +15,11 @@ const SummaryStep = () => {
     setRows(
       getEducationHistoryTableRows([
         {
-          nimi: { fi: koulutuskokonaisuus.nimi },
+          nimi: koulutuskokonaisuus.nimi,
           koulutukset: koulutuskokonaisuus.koulutukset.map(
             (koulutus) =>
               ({
-                nimi: {
-                  fi: koulutus.nimi,
-                },
+                nimi: koulutus.nimi,
                 alkuPvm: koulutus.alkuPvm,
                 loppuPvm: koulutus.loppuPvm,
                 osaamiset: koulutus.osaamiset.map((osaaminen) => osaaminen.id),
