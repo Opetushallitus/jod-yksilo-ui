@@ -216,7 +216,7 @@ const Root = () => {
           onLanguageClick={toggleMenu('lang')}
           logo={
             <NavLink to={`/${language}`} className="flex">
-              <div className="inline-flex select-none items-center gap-4 text-[24px] leading-[140%] text-secondary-gray">
+              <div className="inline-flex select-none items-center gap-4">
                 {sm ? <LogoRgb language={language} size={32} /> : <LogoIconRgb size={32} />}
                 <span className="sr-only">{t('osaamispolku')}</span>
               </div>

@@ -44,8 +44,8 @@ const Match = ({ match, label, bg }: { match?: number; label: string; bg: string
     >
       {match !== undefined && match > 0 && (
         <>
-          <span className="mr-3 sm:mr-0 font-semibold text-[22px] sm:text-[24px]">{Math.round(match * 100)}%</span>
-          <span className="flex justify-center text-[12px] leading-[16px] font-arial font-bold">{label}</span>
+          <span className="mr-3 sm:mr-0 text-heading-2-mobile sm:text-heading-2">{Math.round(match * 100)}%</span>
+          <span className="flex justify-center text-body-xs font-arial font-bold">{label}</span>
         </>
       )}
     </div>
@@ -62,7 +62,7 @@ const BottomBox = ({
   children: React.ReactNode;
 }) => (
   <div
-    className={`font-arial border border-inactive-gray py-2 px-3 -mr-[1px] -mb-[1px] text-[12px] leading-[20px] flex flex-row items-center gap-2 ${className}`.trim()}
+    className={`font-arial border border-inactive-gray py-2 px-3 -mr-[1px] -mb-[1px] text-attrib-title flex flex-row items-center gap-2 ${className}`.trim()}
   >
     <span className="flex items-center mr-1">{title}</span>
     <span className="flex items-center">{children}</span>
@@ -222,18 +222,18 @@ export const OpportunityCard = ({
           </div>
           {!sm && (
             <div className="text-black mt-3 mb-2">
-              <span className="font-arial text-[13px] uppercase leading-[24px]">{cardTypeTitle}</span>
-              <div className="text-[22px] leading-[32px] font-bold hyphens-auto">{name}</div>
+              <span className="font-arial text-body-sm-mobile uppercase">{cardTypeTitle}</span>
+              <div className="text-heading-2-mobile hyphens-auto">{name}</div>
             </div>
           )}
           <div className="flex flex-col gap-y-2">
             {sm && (
-              <div className="flex flex-col mt-3">
+              <div className="flex flex-col mt-3 text-black">
                 <div className="flex flex-row justify-between items-center">
-                  <span className="font-arial text-body-sm text-black uppercase leading-[24px]">{cardTypeTitle}</span>
+                  <span className="font-arial text-body-sm uppercase">{cardTypeTitle}</span>
                   {ActionSection}
                 </div>
-                <span className="text-heading-2 text-black hyphens-auto">{name}</span>
+                <span className="text-heading-2 hyphens-auto">{name}</span>
               </div>
             )}
             <span className="font-arial text-body-md">{description}</span>
