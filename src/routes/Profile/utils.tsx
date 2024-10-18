@@ -1,16 +1,34 @@
 import { components } from '@/api/schema';
 import { type RoutesNavigationListProps } from '@/components';
-import { Link } from 'react-router-dom';
+import { Link, LinkProps } from 'react-router-dom';
 
 export const mapNavigationRoutes = (routes: RoutesNavigationListProps['routes']) =>
   routes.map((route) => ({ ...route, path: `../${route.path}` }));
+
+export type ProfileLink =
+  | {
+      to: string;
+      component: React.ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>>;
+    }
+  | {
+      to: string;
+      component: ({
+        to,
+        className,
+        children,
+      }: {
+        to: object | string;
+        className?: string;
+        children: React.ReactNode;
+      }) => JSX.Element;
+    };
 
 export const generateProfileLink = (
   profilePageSlugs: string[],
   data: { etunimi?: string; sukunimi?: string; csrf: components['schemas']['CsrfTokenDto'] } | null,
   language: string,
   t: (key: string) => string,
-) => {
+): ProfileLink => {
   const profilePageSlug = profilePageSlugs.map((slug) => t(slug)).join('/');
 
   if (data) {

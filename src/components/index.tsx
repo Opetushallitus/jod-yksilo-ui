@@ -1,6 +1,8 @@
 export { ErrorNote } from './ErrorNote';
 export { ExperienceTable } from './ExperienceTable/ExperienceTable';
 export { type ExperienceTableRowData } from './ExperienceTable/ExperienceTableRow';
+export { HelpingToolLinkItem, HelpingToolProfileLinkItem, HelpingToolsContent } from './HelpingToolsContent';
+export type { HelpingToolLinkItemProps, HelpingToolProfileLinkItemProps } from './HelpingToolsContent';
 export { LanguageButton } from './LanguageButton/LanguageButton';
 export { LanguageMenu } from './LanguageMenu/LanguageMenu';
 export {
