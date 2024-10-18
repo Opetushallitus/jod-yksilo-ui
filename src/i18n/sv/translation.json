@@ -7,5 +7,20 @@
     "card-3-title": "Upptäck hur du använder tjänsten och skapar din egen framtid",
     "card-4-title": "Skapa din egen profil och designa din väg"
   },
-  "osaamispolku": "Kompetensstigen"
+  "osaamispolku": "Kompetensstigen",
+  "profile": {
+    "favorites": {
+      "description": "Utbildnings- och arbetsmöjligheter som du har sparat som favoriter finns här. Du kan spara fler möjligheter som favoriter i mötesmaskinens resultatsvy. Du kan ta bort favoriter och skapa en utbildnings- och karriärvägsplan från en eller flera favoriter."
+    },
+    "preferences": {
+      "list-1-item-1": "Samla information om din egen kompetens (kompetens)",
+      "list-1-item-2": "Spara din utbildnings- och arbetslivshistoria, lägga till fritidsaktiviteter och även importera din arbetshistorik från Jobbmarknadens jobbsökningsprofil samt din utbildningshistorik från Studieinfos egna studieprestationer (arbetsplatser, utbildning, fritid)",
+      "list-1-item-3": "Samla information om dina egna intressen (intressen)",
+      "list-2-item-1": "Du kan också spara föreslagna utbildnings- och arbetsmöjligheter som favoriter för senare användning och för att skapa kompetensstigar (favoriter).",
+      "list-2-item-2": "Du kan skapa och underhålla dina utbildnings- och karriärvägsplaner (stigar).",
+      "paragraph-2": "Genom att fylla i ovanstående delar så heltäckande som möjligt, får du jobbmöjligheter och utbildningsförslag som passar just dig.",
+      "paragraph-3": "Profilen är din! Du bestämmer själv vilken information du sparar i din kompetensprofil, hur du använder dina uppgifter, vem som får se din profil och hur andra aktörer kan använda din profil.",
+      "you-are-signed-in": "Du har loggat in på din kompetensprofil. Kompetensprofilen fungerar som lagrings- och hanteringsplats för dina uppgifter inom Kompetensstigen-tjänst. Här kan du:"
+    }
+  }
 }

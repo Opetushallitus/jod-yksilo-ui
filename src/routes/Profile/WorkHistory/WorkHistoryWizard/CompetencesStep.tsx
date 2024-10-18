@@ -27,18 +27,13 @@ const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
       <h3 className="mb-4 text-heading-5 font-arial text-black sm:mb-5 sm:text-heading-3 sm:font-poppins">
         {getValues(`nimi.${language}`)} - {getValues(`toimenkuvat.${toimenkuva}.nimi.${language}`)}
       </h3>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9 text-todo">
-        Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
-        simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
-        in albucius nominavi principes eum, quem facilisi cotidieque mel no.
-      </p>
+      <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.work-history.modals.competences-description')}</p>
       <div className="mb-6">
         <InputField
           label={t('work-history.job-duties')}
           value={description}
           onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
-          placeholder="TODO: Lorem ipsum dolor sit amet"
-          help="TODO: Help text"
+          help={t('profile.work-history.modals.competences-help')}
         />
       </div>
 
