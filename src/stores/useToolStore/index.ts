@@ -2,7 +2,7 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaaminenValue } from '@/components';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
-import { EhdotusData, ehdotusDataToRecord, EhdotusRecord } from '@/routes/Tool/utils';
+import { ehdotusDataToRecord, EhdotusRecord } from '@/routes/Tool/utils';
 import { paginate } from '@/utils';
 import { create } from 'zustand';
 
@@ -26,7 +26,7 @@ interface ToolState {
   mahdollisuudetLoading: boolean;
   ehdotuksetPageSize: number;
   ehdotuksetPageNr: number;
-  ehdotuksetCount: number;
+  ehdotuksetCount: Record<'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS', number>;
   reset: () => void;
   setMahdollisuudet: (state: string[]) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
@@ -60,7 +60,7 @@ export const useToolStore = create<ToolState>()((set) => ({
   ehdotuksetPageSize: DEFAULT_PAGE_SIZE,
   mahdollisuudetLoading: false,
   ehdotuksetPageNr: 1,
-  ehdotuksetCount: 0,
+  ehdotuksetCount: { TYOMAHDOLLISUUS: 0, KOULUTUSMAHDOLLISUUS: 0 },
   reset: () =>
     set({
       mahdollisuudet: [],
@@ -83,8 +83,7 @@ export const useToolStore = create<ToolState>()((set) => ({
 
     set({ ehdotuksetLoading: true });
     try {
-      // THIS API will start providing both work and education opportunities
-      const { data: mahdollisuusData } = await client.POST('/api/ehdotus/tyomahdollisuudet', {
+      const { data: mahdollisuusData } = await client.POST('/api/ehdotus/mahdollisuudet', {
         body: {
           osaamiset: osaamiset.map((item) => item.id),
           kiinnostukset: kiinnostukset.map((item) => item.id),
@@ -93,26 +92,27 @@ export const useToolStore = create<ToolState>()((set) => ({
           rajoitePainotus: rajoitePainotus / 100,
         },
       });
-      // TODO: remove mock data when opportunities provide educations
-      mahdollisuusData?.unshift(
-        {
-          mahdollisuusId: '30080e88-f292-48a3-9835-41950817abd2',
-          ehdotusMetadata: { pisteet: 1 },
-        },
-        {
-          mahdollisuusId: '30080e88-f292-48a3-9835-41950817abd3',
-          ehdotusMetadata: { pisteet: 0.9 },
-        },
-      );
-      const mahdollisuusEhdotukset = ehdotusDataToRecord((mahdollisuusData ?? []) as EhdotusData[]);
+
+      const mahdollisuusEhdotukset = ehdotusDataToRecord(mahdollisuusData ?? []);
 
       set({
         mahdollisuusEhdotukset,
         ehdotuksetLoading: false,
-        ehdotuksetCount: Object.keys(mahdollisuusEhdotukset).length,
+        ehdotuksetCount: {
+          TYOMAHDOLLISUUS: mahdollisuusData?.filter((m) => m.ehdotusMetadata?.tyyppi === 'TYOMAHDOLLISUUS').length ?? 0,
+          KOULUTUSMAHDOLLISUUS:
+            mahdollisuusData?.filter((m) => m.ehdotusMetadata?.tyyppi === 'KOULUTUSMAHDOLLISUUS').length ?? 0,
+        },
       });
     } catch (error) {
-      set({ mahdollisuusEhdotukset: {}, ehdotuksetLoading: false, ehdotuksetCount: 0 });
+      set({
+        mahdollisuusEhdotukset: {},
+        ehdotuksetLoading: false,
+        ehdotuksetCount: {
+          TYOMAHDOLLISUUS: 0,
+          KOULUTUSMAHDOLLISUUS: 0,
+        },
+      });
     }
   },
   fetchMahdollisuudetPage: async (newPage = 1) => {
