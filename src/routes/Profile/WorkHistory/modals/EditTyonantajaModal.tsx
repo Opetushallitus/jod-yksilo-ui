@@ -100,8 +100,8 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
             <InputField
               label={t('work-history.employer')}
               {...methods.register(`nimi.${language}` as const)}
-              placeholder="TODO: Lorem ipsum dolor sit amet"
-              help="TODO: Help text"
+              placeholder={t('profile.work-history.modals.workplace-placeholder')}
+              help={t('profile.work-history.modals.workplace-help')}
             />
           </Form>
         </FormProvider>
