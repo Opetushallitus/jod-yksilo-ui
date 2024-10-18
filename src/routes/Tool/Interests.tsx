@@ -1,5 +1,10 @@
 import { components } from '@/api/schema';
-import { OsaamisSuosittelija } from '@/components';
+import {
+  HelpingToolLinkItem,
+  HelpingToolProfileLinkItem,
+  HelpingToolsContent,
+  OsaamisSuosittelija,
+} from '@/components';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { Accordion, InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -9,7 +14,7 @@ import { useOutletContext, useRouteLoaderData } from 'react-router-dom';
 import { generateProfileLink } from '../Profile/utils';
 import { ContextType } from './types';
 
-const HelpingToolsContent = () => {
+const HelpingToolsContents = () => {
   const {
     t,
     i18n: { language },
@@ -23,33 +28,23 @@ const HelpingToolsContent = () => {
   );
 
   return (
-    <>
-      <span className="text-body-sm sm:text-body-xs">
-        <div>{t('tool.interests.help-text')}</div>
-      </span>
-      <ul className="flex flex-col gap-4 text-button-md">
-        <li>
-          <interestsLink.component to={interestsLink.to}>
-            <div className="flex gap-x-3">
-              <MdOutlineInterests size={24} color="#006DB3" />
-              <div>{t('profile.interests.title')}</div>
-            </div>
-          </interestsLink.component>
-        </li>
-        <li>
-          <div className="flex gap-x-3">
-            <MdOutlineQuiz size={24} color="#006DB3" />
-            <div>{t('tool.interests.riasec-test')}</div>
-          </div>
-        </li>
-        <li>
-          <div className="flex gap-x-3">
-            <MdOutlineInterests size={24} color="#AD4298" />
-            <div>{t('tool.interests.interest-barometer')}</div>
-          </div>
-        </li>
-      </ul>
-    </>
+    <HelpingToolsContent text={t('tool.interests.help-text')}>
+      <HelpingToolProfileLinkItem
+        profileLink={interestsLink}
+        icon={<MdOutlineInterests size={24} color="#006DB3" />}
+        title={t('profile.interests.title')}
+      />
+      <HelpingToolLinkItem
+        icon={<MdOutlineQuiz size={24} color="#006DB3" />}
+        title={t('tool.interests.riasec-test')}
+        component={({ children }) => <div className="bg-todo">{children}</div>}
+      />
+      <HelpingToolLinkItem
+        icon={<MdOutlineInterests size={24} color="#AD4298" />}
+        title={t('tool.interests.interest-barometer')}
+        component={({ children }) => <div className="bg-todo">{children}</div>}
+      />
+    </HelpingToolsContent>
   );
 };
 
@@ -97,7 +92,7 @@ const Interests = () => {
           {sm ? (
             <>
               <span className="text-heading-4 text-black">{t('tools')}</span>
-              <HelpingToolsContent />
+              <HelpingToolsContents />
             </>
           ) : (
             <Accordion
@@ -106,7 +101,7 @@ const Interests = () => {
               expandMoreText={t('expand-more')}
               lang={language}
             >
-              <HelpingToolsContent />
+              <HelpingToolsContents />
             </Accordion>
           )}
         </div>
