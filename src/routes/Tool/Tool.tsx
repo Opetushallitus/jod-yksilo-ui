@@ -87,7 +87,6 @@ const Tool = () => {
 
   // placeholder states
   const [showFilters, setShowFilters] = React.useState(false);
-  const [educationsCount] = React.useState(1002);
 
   const initialized = React.useRef(false);
   React.useEffect(() => {
@@ -254,8 +253,8 @@ const Tool = () => {
                 {t('tool.competences.opportunities-title')}
               </h2>
               {t('tool.competences.available-options-totals', {
-                professionsCount: toolStore.ehdotuksetCount,
-                educationsCount,
+                professionsCount: toolStore.ehdotuksetCount.TYOMAHDOLLISUUS,
+                educationsCount: toolStore.ehdotuksetCount.KOULUTUSMAHDOLLISUUS,
               })}
             </span>
           </div>
@@ -320,16 +319,13 @@ const Tool = () => {
           <div className="flex flex-col gap-5 mb-8">
             {toolStore.mixedMahdollisuudet.map((mahdollisuus) => {
               const { id } = mahdollisuus;
+              const ehdotus = toolStore.mahdollisuusEhdotukset?.[id];
               const isFavorite = toolStore.suosikit?.find((s) => s.suosionKohdeId === id) !== undefined;
-              // TODO: mahdollisuus tyyppi will be available in mahdollisuus ehdotukset
-              const mahdollisuusTyyppi = toolStore.tyomahdollisuudet.find((m) => m.id === id)
-                ? 'TYOMAHDOLLISUUS'
-                : 'KOULUTUSMAHDOLLISUUS';
-              return (
+              return ehdotus ? (
                 <NavLink
                   key={id}
                   to={
-                    mahdollisuusTyyppi == 'TYOMAHDOLLISUUS'
+                    ehdotus.tyyppi === 'TYOMAHDOLLISUUS'
                       ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`
                       : `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}/${t('slugs.education-opportunity.overview')}`
                   }
@@ -342,17 +338,17 @@ const Tool = () => {
                     selected={toolStore.mahdollisuudet.includes(id)}
                     name={getLocalizedText(mahdollisuus.otsikko)}
                     description={getLocalizedText(mahdollisuus.tiivistelma)}
-                    matchValue={toolStore.mahdollisuusEhdotukset?.[id]?.pisteet}
+                    matchValue={ehdotus?.pisteet}
                     matchLabel={t('fit')}
-                    type={mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? 'work' : 'education'}
-                    trend={toolStore.mahdollisuusEhdotukset?.[id]?.trendi}
-                    employmentOutlook={toolStore.mahdollisuusEhdotukset?.[id]?.tyollisyysNakyma ?? 0}
+                    type={ehdotus.tyyppi === 'TYOMAHDOLLISUUS' ? 'work' : 'education'}
+                    trend={ehdotus?.trendi}
+                    employmentOutlook={ehdotus?.tyollisyysNakyma ?? 0}
                     hasRestrictions
                     industryName="TODO: Lorem ipsum dolor"
                     mostCommonEducationBackground="TODO: Lorem ipsum dolor"
                   />
                 </NavLink>
-              );
+              ) : null;
             })}
           </div>
 
@@ -366,7 +362,7 @@ const Tool = () => {
                 nextTriggerLabel: t('pagination.next'),
                 prevTriggerLabel: t('pagination.previous'),
               }}
-              totalItems={toolStore.ehdotuksetCount}
+              totalItems={toolStore.ehdotuksetCount.KOULUTUSMAHDOLLISUUS + toolStore.ehdotuksetCount.TYOMAHDOLLISUUS}
               onPageChange={(data) => void onPageChange(data)}
             />
           )}
