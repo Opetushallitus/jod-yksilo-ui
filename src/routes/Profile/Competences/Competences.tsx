@@ -152,7 +152,7 @@ const Competences = () => {
     >
       <Title value={title} />
       <h1 className="mb-5 text-heading-1">{title}</h1>
-      <p className="mb-8 text-body-lg text-todo">{t('profile.competences.description')}</p>
+      <p className="mb-8 text-body-lg">{t('profile.competences.description')}</p>
       <div>
         {!sm && (
           <Modal

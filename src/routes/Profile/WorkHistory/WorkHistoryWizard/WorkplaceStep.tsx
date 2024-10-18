@@ -25,18 +25,14 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
         {type === 'toimenkuva' && !toimenkuvaId && t('work-history.add-new-job-description')}
         {type === 'toimenkuva' && toimenkuvaId && t('work-history.edit-job-description')}
       </h2>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9 text-todo">
-        Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
-        simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
-        in albucius nominavi principes eum, quem facilisi cotidieque mel no.
-      </p>
+      <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.work-history.modals.description')}</p>
       {type === 'tyopaikka' && (
         <div className="mb-6">
           <InputField
             label={t('work-history.employer')}
             {...register(`nimi.${language}` as const)}
-            placeholder="TODO: Lorem ipsum dolor sit amet"
-            help="TODO: Help text"
+            placeholder={t('profile.work-history.modals.workplace-placeholder')}
+            help={t('profile.work-history.modals.workplace-help')}
           />
         </div>
       )}
@@ -44,17 +40,15 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
         <InputField
           label={t('work-history.job-description')}
           {...register(`toimenkuvat.${toimenkuva}.nimi.${language}` as const)}
-          placeholder="TODO: Lorem ipsum dolor sit amet"
-          help="TODO: Help text"
+          placeholder={t('profile.work-history.modals.job-description-placeholder')}
+          help={t('profile.work-history.modals.job-description-help')}
         />
       </div>
       <div className="mb-6 flex grow gap-6">
         <div className="block w-full">
           <Controller
             control={control}
-            render={({ field }) => (
-              <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} help="TODO: Help text" />
-            )}
+            render={({ field }) => <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} />}
             name={`toimenkuvat.${toimenkuva}.alkuPvm`}
           />
         </div>
@@ -62,12 +56,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker
-                label={t('ended')}
-                {...field}
-                placeholder={t('date-or-continues-placeholder')}
-                help="TODO: Help text"
-              />
+              <Datepicker label={t('ended')} {...field} placeholder={t('date-or-continues-placeholder')} />
             )}
             name={`toimenkuvat.${toimenkuva}.loppuPvm`}
           />

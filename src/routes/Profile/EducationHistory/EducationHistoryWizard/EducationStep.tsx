@@ -25,18 +25,14 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
         {type === 'koulutus' && !koulutusId && t('education-history.add-new-degree')}
         {type === 'koulutus' && koulutusId && t('education-history.edit-degree')}
       </h2>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9 text-todo">
-        Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
-        simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
-        in albucius nominavi principes eum, quem facilisi cotidieque mel no.
-      </p>
+      <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.education-history.modals.description')}</p>
       {type === 'oppilaitos' && (
         <div className="mb-6">
           <InputField
             label={t('education-history.educational-institution')}
             {...register(`nimi.${language}` as const)}
-            placeholder="Lorem ipsum dolor sit amet"
-            help="TODO: Help text"
+            placeholder={t('profile.education-history.modals.workplace-placeholder')}
+            help={t('profile.education-history.modals.workplace-help')}
           />
         </div>
       )}
@@ -44,17 +40,15 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
         <InputField
           label={t('education-history.degree')}
           {...register(`koulutukset.${koulutus}.nimi.${language}` as const)}
-          placeholder="Lorem ipsum dolor sit amet"
-          help="TODO: Help text"
+          placeholder={t('profile.education-history.modals.job-description-placeholder')}
+          help={t('profile.education-history.modals.job-description-help')}
         />
       </div>
       <div className="mb-6 flex grow gap-6">
         <div className="block w-full">
           <Controller
             control={control}
-            render={({ field }) => (
-              <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} help="TODO: Help text" />
-            )}
+            render={({ field }) => <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} />}
             name={`koulutukset.${koulutus}.alkuPvm`}
           />
         </div>
@@ -62,12 +56,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker
-                label={t('ended')}
-                {...field}
-                placeholder={t('date-or-continues-placeholder')}
-                help="TODO: Help text"
-              />
+              <Datepicker label={t('ended')} {...field} placeholder={t('date-or-continues-placeholder')} />
             )}
             name={`koulutukset.${koulutus}.loppuPvm`}
           />
