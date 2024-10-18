@@ -1,5 +1,5 @@
 import { components } from '@/api/schema';
-import { OsaamisSuosittelija } from '@/components';
+import { HelpingToolProfileLinkItem, HelpingToolsContent, OsaamisSuosittelija } from '@/components';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { Accordion, InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -10,7 +10,7 @@ import { useOutletContext, useRouteLoaderData } from 'react-router-dom';
 import { generateProfileLink } from '../Profile/utils';
 import { ContextType } from './types';
 
-const HelpingToolsContent = () => {
+const HelpingToolsContents = () => {
   const {
     t,
     i18n: { language },
@@ -37,45 +37,28 @@ const HelpingToolsContent = () => {
   );
 
   return (
-    <>
-      <span className="text-body-sm sm:text-body-xs">
-        <div>{t('profile.help-text')}</div>
-      </span>
-      <ul className="flex flex-col gap-4 text-button-md">
-        <li>
-          <educationLink.component to={educationLink.to}>
-            <div className="flex gap-x-3">
-              <MdOutlineSchool size={24} color="#00818A" />
-              <div>{t('profile.education-history.title')}</div>
-            </div>
-          </educationLink.component>
-        </li>
-        <li>
-          <workLink.component to={workLink.to}>
-            <div className="flex gap-x-3">
-              <TbBriefcase2 size={24} color="#AD4298" />
-              <div>{t('profile.work-history.title')}</div>
-            </div>
-          </workLink.component>
-        </li>
-        <li>
-          <freeTimeLink.component to={freeTimeLink.to}>
-            <div className="flex gap-x-3">
-              <MdOutlineSailing size={24} className="text-accent" />
-              <div>{t('profile.free-time-activities.title')}</div>
-            </div>
-          </freeTimeLink.component>
-        </li>
-        <li>
-          <somethingElseLink.component to={somethingElseLink.to}>
-            <div className="flex gap-x-3">
-              <MdLightbulbOutline size={24} className="text-secondary-5" />
-              <div>{t('profile.something-else.title')}</div>
-            </div>
-          </somethingElseLink.component>
-        </li>
-      </ul>
-    </>
+    <HelpingToolsContent text={t('profile.help-text')}>
+      <HelpingToolProfileLinkItem
+        profileLink={educationLink}
+        icon={<MdOutlineSchool size={24} color="#00818A" />}
+        title={t('profile.education-history.title')}
+      />
+      <HelpingToolProfileLinkItem
+        profileLink={workLink}
+        icon={<TbBriefcase2 size={24} color="#AD4298" />}
+        title={t('profile.work-history.title')}
+      />
+      <HelpingToolProfileLinkItem
+        profileLink={freeTimeLink}
+        icon={<MdOutlineSailing size={24} className="text-accent" />}
+        title={t('profile.free-time-activities.title')}
+      />
+      <HelpingToolProfileLinkItem
+        profileLink={somethingElseLink}
+        icon={<MdLightbulbOutline size={24} className="text-secondary-5" />}
+        title={t('profile.something-else.title')}
+      />
+    </HelpingToolsContent>
   );
 };
 
@@ -118,7 +101,7 @@ const Competences = () => {
           {sm ? (
             <>
               <span className="text-heading-4 text-black">{t('tools')}</span>
-              <HelpingToolsContent />
+              <HelpingToolsContents />
             </>
           ) : (
             <Accordion
@@ -127,7 +110,7 @@ const Competences = () => {
               expandMoreText={t('expand-more')}
               lang={language}
             >
-              <HelpingToolsContent />
+              <HelpingToolsContents />
             </Accordion>
           )}
         </div>
