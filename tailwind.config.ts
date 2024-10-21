@@ -10,7 +10,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        todo: '#ff0000',
+        todo: '#ff000066',
       },
     },
   },
