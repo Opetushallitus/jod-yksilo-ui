@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import { components } from '@/api/schema';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { Button, ConfirmDialog, Modal, PopupList, PopupListItem, useMediaQueries } from '@jod/design-system';
@@ -11,7 +13,7 @@ import {
   MdOutlineTrendingDown,
   MdOutlineTrendingUp,
 } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, To } from 'react-router-dom';
 
 type CardType = 'work' | 'education';
 interface OpportunityCardProps {
@@ -28,6 +30,7 @@ interface OpportunityCardProps {
   toggleFavorite: () => void;
   isFavorite?: boolean;
   isLoggedIn?: boolean;
+  compareTo?: To;
 }
 
 const bgForType = (type: CardType) => {
@@ -130,7 +133,7 @@ const FavoriteToggle = ({ isFavorite, onToggleFavorite }: { isFavorite?: boolean
   );
 };
 
-const MoreActionsDropdown = () => {
+const MoreActionsDropdown = ({ compareTo }: { compareTo?: To }) => {
   const { t } = useTranslation();
   const [open, isOpen] = React.useState(false);
   const listId = React.useId();
@@ -149,16 +152,26 @@ const MoreActionsDropdown = () => {
         onClick={() => isOpen(!open)}
       />
       {open && (
-        <div id={listId} role="listbox" className="absolute -right-2 translate-y-[10px] cursor-auto">
+        <div
+          id={listId}
+          role="listbox"
+          className="absolute -right-2 translate-y-[10px] cursor-auto"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+        >
           <PopupList classNames="gap-y-2">
-            <Link to="/" onClick={onClose} type="button">
-              <PopupListItem>{t('compare')}</PopupListItem>
+            {compareTo && (
+              <Link to={compareTo} onClick={onClose} type="button">
+                <PopupListItem>{t('compare')}</PopupListItem>
+              </Link>
+            )}
+            <Link to="#" onClick={onClose} type="button">
+              <PopupListItem>TODO: {t('create-path')}</PopupListItem>
             </Link>
-            <Link to={'/'} onClick={onClose} type="button">
-              <PopupListItem>{t('create-path')}</PopupListItem>
-            </Link>
-            <Link to={'/'} onClick={onClose} type="button">
-              <PopupListItem>{t('share')}</PopupListItem>
+            <Link to="#" onClick={onClose} type="button">
+              <PopupListItem>TODO: {t('share')}</PopupListItem>
             </Link>
           </PopupList>
         </div>
@@ -212,6 +225,7 @@ export const OpportunityCard = ({
   toggleFavorite,
   isFavorite,
   isLoggedIn,
+  compareTo,
 }: OpportunityCardProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
@@ -227,9 +241,9 @@ export const OpportunityCard = ({
 
   const cardTypeTitle = type === 'work' ? t('opportunity-type.work') : t('opportunity-type.education');
   const ActionsSection = (
-    <div className="flex flex-wrap gap-x-5 gap-y-2 mb-3 sm:mb-0">
+    <div className="flex flex-wrap gap-x-5 gap-y-2 mb-3 sm:mb-0 justify-end">
       <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />
-      <MoreActionsDropdown />
+      <MoreActionsDropdown compareTo={compareTo} />
     </div>
   );
 

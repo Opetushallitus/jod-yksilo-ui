@@ -98,6 +98,10 @@ const Favorites = () => {
                 toggleFavorite={() => void deleteSuosikki(id, 'work')}
                 trend="NOUSEVA"
                 type="work"
+                compareTo={{
+                  pathname: `/${language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.competences')}`,
+                  hash: t('job-opportunity.specific-professional-competences.title'),
+                }}
               />
             </NavLink>
           );

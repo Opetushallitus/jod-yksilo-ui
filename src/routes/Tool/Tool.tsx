@@ -336,6 +336,17 @@ const Tool = () => {
                     hasRestrictions
                     industryName="TODO: Lorem ipsum dolor"
                     mostCommonEducationBackground="TODO: Lorem ipsum dolor"
+                    compareTo={
+                      mahdollisuusTyyppi == 'TYOMAHDOLLISUUS'
+                        ? {
+                            pathname: `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.competences')}`,
+                            hash: t('job-opportunity.specific-professional-competences.title'),
+                          }
+                        : {
+                            pathname: `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}/${t('slugs.education-opportunity.competences')}`,
+                            hash: t('education-opportunity.specific-professional-competences.title'),
+                          }
+                    }
                   />
                 </NavLink>
               ) : null;
