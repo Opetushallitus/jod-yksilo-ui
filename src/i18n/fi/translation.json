@@ -10,6 +10,7 @@
   "cancel": "Peruuta",
   "choose": "Valitse",
   "close": "Sulje",
+  "compare": "Vertaile",
   "competences": "Osaamiset",
   "competences-of-your-choice": "Valitsemasi osaamiset",
   "content": "Sisältö",
@@ -17,6 +18,7 @@
   "cookies": "Evästeet",
   "copyright": "© JOD 2024. Kaikki oikeudet pidätetään.",
   "count-competences": "{{count}} osaamista",
+  "create-path": "Luo polku",
   "data-sources": "Datalähteet",
   "date-or-continues-placeholder": "pp.kk.vvvv tai jatkuu",
   "date-placeholder": "pp.kk.vvvv",
@@ -169,6 +171,7 @@
       "restrictions": "Mitä minä en halua"
     }
   },
+  "more-actions": "Lisää valintoja",
   "more-information": "Lisätietoa",
   "my-competences": {
     "by-KOULUTUS": "Koulutuksen mukaan",
@@ -216,16 +219,16 @@
     },
     "education-history": {
       "description": "Löydät alta koulutushistoriasi. Voit lisätä käsin koulutushistoriaasi sekä siihen liittyviä tutkintoja, kursseja sekä kartoittaa niihin liittyviä osaamisiasi. Voit myös tuoda koulutushistoriasi ja kartoittaa siihen liittyviä osaamisiasi Oma Opintopolun omista opintosuorituksista.",
-      "title": "Koulutukseni",
       "modals": {
-        "description": "Ilmoita tässä suorittamasi koulutuksesi perustiedot. Jos opiskelet kyseisessä koulutuksessa juuri nyt, jätä loppumispäivämäärä ilmoittamatta.",
-        "workplace-placeholder": "esim. Maailman opisto",
-        "workplace-help": "Lisätessäsi myöhemmin uutta koulutusta, ryhmittyvät nämä samannimisen oppilaitoksen alle automaattisesti",
-        "job-description-placeholder": "esim. osaamisen kartoittamisen tutkinto",
-        "job-description-help": "Kirjaa tähän suorittamasi tutkinnon tai kurssin nimi",
         "competences-description": "Kirjaa koulutuksen sisältö sille varattuun kenttään alle. Voit myös kopioida koulutuksen sisältökuvauksia muualta, jos ne on kirjattu esimerkiksi opinto-oppaaseen,  oppilaitoksen verkkosivun kuvaukseen tai ovat tallessa sosiaalisen median palveluissa. ",
-        "competences-help": "Kirjoittamasi tekstin perusteella sinulle tarjotaan erilaisia avainsanoja alla olevaan listaan. Valitse mielestäsi parhaat avainsanat valitsemalla + ja ne siirtyvät osaamisprofiiliin koulutuksen tuottamiksi osaamisiksi. Voit poistaa väärin valittuja osaamisia valitsemalla x."
-      }
+        "competences-help": "Kirjoittamasi tekstin perusteella sinulle tarjotaan erilaisia avainsanoja alla olevaan listaan. Valitse mielestäsi parhaat avainsanat valitsemalla + ja ne siirtyvät osaamisprofiiliin koulutuksen tuottamiksi osaamisiksi. Voit poistaa väärin valittuja osaamisia valitsemalla x.",
+        "description": "Ilmoita tässä suorittamasi koulutuksesi perustiedot. Jos opiskelet kyseisessä koulutuksessa juuri nyt, jätä loppumispäivämäärä ilmoittamatta.",
+        "job-description-help": "Kirjaa tähän suorittamasi tutkinnon tai kurssin nimi",
+        "job-description-placeholder": "esim. osaamisen kartoittamisen tutkinto",
+        "workplace-help": "Lisätessäsi myöhemmin uutta koulutusta, ryhmittyvät nämä samannimisen oppilaitoksen alle automaattisesti",
+        "workplace-placeholder": "esim. Maailman opisto"
+      },
+      "title": "Koulutukseni"
     },
     "favorites": {
       "description": "Suosikeiksi tallentamasi koulutus- ja työmahdollisuudet löytyvät täältä. Voit tallentaa lisää mahdollisuuksia suosikeiksi kohtautuskoneen tulosnäkymässä. Voit poistaa suosikkeja sekä luoda yhdestä tai useammasta suosikista koulutus- ja urapolkusuunnitelman.",
@@ -269,16 +272,16 @@
     },
     "work-history": {
       "description": "Löydät alta työhistoriasi. Voit lisätä käsin työhistoriaasi sekä siihen liittyviä työtehtäviä sekä kartoittaa niihin liittyviä osaamisiasi. Voit myös tuoda työhistoriasi ja siihen liittyvät osaamisesi Työmarkkinatorin työnhakuprofiilistasi, jos sinulla on sellainen käytössä.",
-      "title": "Työpaikkani",
       "modals": {
-        "description": "Ilmoita tässä työpaikkasi perustiedot. Jos työpaikkasi on nykyinen, jätä loppumispäivämäärä ilmoittamatta.",
-        "workplace-placeholder": "esim. Työpaikka Oy",
-        "workplace-help": "Lisätessäsi myöhemmin uutta työpaikkaa ja/tai toimenkuvaa, ryhmittyvät nämä samannimisen työnantajan alle automaattisest",
-        "job-description-placeholder": "esim. Suunnittelija",
-        "job-description-help": "Toimenkuva voi olla tittelisi, tehtävänimikkeesi tai ammattisi",
         "competences-description": "Kirjaa työtehtävät-kenttään työtehtäviäsi vapaasti tekstillä. Voit myös kopioida työtehtäväsi muualta, jos ne on kirjattu esimerkiksi ansioluetteloon, henkilöstöjärjestelmään tai ovat tallessa sosiaalisen median palveluissa.",
-        "competences-help": "Kirjoittamasi tekstin perusteella sinulle tarjotaan erilaisia avainsanoja alla olevaan listaan. Valitse mielestäsi parhaat avainsanat valitsemalla + ja ne siirtyvät osaamisprofiiliin työpaikkasi tuottamiksi osaamisiksi. Voit poistaa väärin valittuja osaamisia valitsemalla x."
-      }
+        "competences-help": "Kirjoittamasi tekstin perusteella sinulle tarjotaan erilaisia avainsanoja alla olevaan listaan. Valitse mielestäsi parhaat avainsanat valitsemalla + ja ne siirtyvät osaamisprofiiliin työpaikkasi tuottamiksi osaamisiksi. Voit poistaa väärin valittuja osaamisia valitsemalla x.",
+        "description": "Ilmoita tässä työpaikkasi perustiedot. Jos työpaikkasi on nykyinen, jätä loppumispäivämäärä ilmoittamatta.",
+        "job-description-help": "Toimenkuva voi olla tittelisi, tehtävänimikkeesi tai ammattisi",
+        "job-description-placeholder": "esim. Suunnittelija",
+        "workplace-help": "Lisätessäsi myöhemmin uutta työpaikkaa ja/tai toimenkuvaa, ryhmittyvät nämä samannimisen työnantajan alle automaattisest",
+        "workplace-placeholder": "esim. Työpaikka Oy"
+      },
+      "title": "Työpaikkani"
     }
   },
   "proposed-competences": "Ehdotetut osaamiset",

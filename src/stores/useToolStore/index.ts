@@ -11,7 +11,6 @@ const SUOSIKIT_PATH = '/api/profiili/suosikit';
 type Mahdollisuus = components['schemas']['TyomahdollisuusDto'] | components['schemas']['KoulutusmahdollisuusDto'];
 
 interface ToolState {
-  mahdollisuudet: string[];
   osaamiset: OsaaminenValue[];
   kiinnostukset: OsaaminenValue[];
   suosikit: components['schemas']['SuosikkiDto'][];
@@ -28,7 +27,6 @@ interface ToolState {
   ehdotuksetPageNr: number;
   ehdotuksetCount: number;
   reset: () => void;
-  setMahdollisuudet: (state: string[]) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
   setKiinnostukset: (state: OsaaminenValue[]) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
@@ -44,7 +42,6 @@ interface ToolState {
 }
 
 export const useToolStore = create<ToolState>()((set) => ({
-  mahdollisuudet: [],
   osaamiset: [],
   kiinnostukset: [],
   suosikit: [],
@@ -63,7 +60,6 @@ export const useToolStore = create<ToolState>()((set) => ({
   ehdotuksetCount: 0,
   reset: () =>
     set({
-      mahdollisuudet: [],
       osaamiset: [],
       kiinnostukset: [],
       mahdollisuusEhdotukset: {},
@@ -71,7 +67,6 @@ export const useToolStore = create<ToolState>()((set) => ({
       koulutusmahdollisuudet: [],
       mixedMahdollisuudet: [],
     }),
-  setMahdollisuudet: (state) => set({ mahdollisuudet: state }),
   setOsaamiset: (state) => set({ osaamiset: state }),
   setKiinnostukset: (state) => set({ kiinnostukset: state }),
   setSuosikit: (state) => set({ suosikit: state }),

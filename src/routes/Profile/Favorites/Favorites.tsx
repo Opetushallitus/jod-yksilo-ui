@@ -9,7 +9,7 @@ import {
 import { useActionBar } from '@/hooks/useActionBar';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
-import { Button, Checkbox, ConfirmDialog, Pagination } from '@jod/design-system';
+import { Button, Checkbox, Pagination } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
@@ -30,7 +30,6 @@ const Favorites = () => {
   const educationFilterText = t('education-opportunities');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
-  const [selectedFavorites, setSelectedFavorites] = React.useState<string[]>([]);
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -42,14 +41,6 @@ const Favorites = () => {
   };
 
   const isFilterChecked = (value: string) => filters.includes(value);
-
-  const toggleFavorite = (id: string) => {
-    if (selectedFavorites.includes(id)) {
-      setSelectedFavorites(selectedFavorites.filter((favorite) => favorite !== id));
-    } else {
-      setSelectedFavorites([...selectedFavorites, id]);
-    }
-  };
 
   return (
     <MainLayout
@@ -95,32 +86,19 @@ const Favorites = () => {
               key={id}
               to={`/${language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`}
             >
-              <ConfirmDialog
-                title={t('remove-favorite-confirmation-title')}
-                onConfirm={() => void deleteSuosikki(id, 'work')}
-                confirmText={t('delete')}
-                cancelText={t('cancel')}
-                variant="destructive"
-                description={t('remove-favorite-opportunity-confirmation')}
-              >
-                {(showDialog: () => void) => (
-                  <OpportunityCard
-                    description={getLocalizedText(mahdollisuus.tiivistelma)}
-                    employmentOutlook={2}
-                    hasRestrictions
-                    industryName="TODO: Lorem ipsum dolor"
-                    isFavorite={true}
-                    isLoggedIn={true}
-                    mostCommonEducationBackground="TODO: Lorem ipsum dolor"
-                    name={getLocalizedText(mahdollisuus.otsikko)}
-                    selected={selectedFavorites.includes(id ?? '')}
-                    toggleFavorite={showDialog}
-                    toggleSelection={() => toggleFavorite(id ?? '')}
-                    trend="NOUSEVA"
-                    type="work"
-                  />
-                )}
-              </ConfirmDialog>
+              <OpportunityCard
+                description={getLocalizedText(mahdollisuus.tiivistelma)}
+                employmentOutlook={2}
+                hasRestrictions
+                industryName="TODO: Lorem ipsum dolor"
+                isFavorite={true}
+                isLoggedIn={true}
+                mostCommonEducationBackground="TODO: Lorem ipsum dolor"
+                name={getLocalizedText(mahdollisuus.otsikko)}
+                toggleFavorite={() => void deleteSuosikki(id, 'work')}
+                trend="NOUSEVA"
+                type="work"
+              />
             </NavLink>
           );
         })}
