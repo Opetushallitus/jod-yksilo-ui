@@ -121,14 +121,6 @@ const Tool = () => {
     await toolStore.updateEhdotuksetAndTyomahdollisuudet();
   };
 
-  const toggleMahdollisuus = (id: string) => {
-    if (toolStore.mahdollisuudet.includes(id)) {
-      toolStore.setMahdollisuudet(toolStore.mahdollisuudet.filter((item) => item !== id));
-    } else {
-      toolStore.setMahdollisuudet([...toolStore.mahdollisuudet, id]);
-    }
-  };
-
   const toolIndexSlug = t('slugs.tool.index');
   const linksOnLeft = [
     {
@@ -333,9 +325,7 @@ const Tool = () => {
                   <OpportunityCard
                     isFavorite={isFavorite}
                     isLoggedIn={isLoggedIn}
-                    toggleSelection={() => toggleMahdollisuus(id)}
                     toggleFavorite={() => void toolStore.toggleSuosikki(id)}
-                    selected={toolStore.mahdollisuudet.includes(id)}
                     name={getLocalizedText(mahdollisuus.otsikko)}
                     description={getLocalizedText(mahdollisuus.tiivistelma)}
                     matchValue={ehdotus?.pisteet}

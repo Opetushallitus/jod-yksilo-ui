@@ -1,15 +1,17 @@
 import { components } from '@/api/schema';
 import { useLoginLink } from '@/hooks/useLoginLink';
-import { Button, Modal, useMediaQueries } from '@jod/design-system';
+import { Button, ConfirmDialog, Modal, PopupList, PopupListItem, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   MdBlock,
-  MdOutlineStar,
-  MdOutlineStarBorder,
+  MdFavorite,
+  MdFavoriteBorder,
+  MdMoreVert,
   MdOutlineTrendingDown,
   MdOutlineTrendingUp,
 } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 type CardType = 'work' | 'education';
 interface OpportunityCardProps {
@@ -23,8 +25,6 @@ interface OpportunityCardProps {
   hasRestrictions: boolean;
   industryName?: string;
   mostCommonEducationBackground?: string;
-  selected: boolean;
-  toggleSelection: () => void;
   toggleFavorite: () => void;
   isFavorite?: boolean;
   isLoggedIn?: boolean;
@@ -77,64 +77,93 @@ const OutlookDots = ({ outlook, ariaLabel }: { outlook: number; ariaLabel: strin
   </div>
 );
 
-const SelectedCheckbox = ({
-  selected,
-  toggleSelection,
-  name,
+const ActionButton = ({
+  label,
+  icon,
+  className = '',
+  onClick,
 }: {
-  selected: boolean;
-  toggleSelection: () => void;
-  name: string;
-}) => {
+  label: string;
+  icon: React.ReactNode;
+  className?: string;
+  onClick: () => void;
+}) => (
+  <button
+    className={`flex items-center gap-x-3 text-button-sm text-nowrap ${className}`.trim()}
+    onClick={(e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      onClick();
+    }}
+  >
+    {icon}
+    {label}
+  </button>
+);
+
+const FavoriteToggle = ({ isFavorite, onToggleFavorite }: { isFavorite?: boolean; onToggleFavorite: () => void }) => {
   const { t } = useTranslation();
 
-  const onClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.stopPropagation();
-    e.preventDefault();
-    toggleSelection();
-  };
-
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    if (['Enter', ' '].includes(e.key)) {
-      e.preventDefault();
-      toggleSelection();
-    }
-  };
-
-  return (
-    <span
-      className="inline-flex items-center gap-2 text-accent bg-todo"
-      onClick={onClick}
-      onKeyDown={onKeyDown}
-      aria-label={`${t('choose')} ${name}`}
-      role="checkbox"
-      aria-checked={selected}
-      tabIndex={0}
+  return isFavorite ? (
+    <ConfirmDialog
+      title={t('remove-favorite-confirmation-title')}
+      onConfirm={onToggleFavorite}
+      confirmText={t('delete')}
+      cancelText={t('cancel')}
+      variant="destructive"
+      description={t('remove-favorite-opportunity-confirmation')}
     >
-      <span aria-hidden className="font-bold text-[12px] leading-[24px]">
-        {t('choose')}
-      </span>
-      <span aria-hidden className={`size-5 appearance-none border border-accent ${selected ? 'bg-accent' : ''}`} />
-    </span>
+      {(showDialog: () => void) => (
+        <ActionButton
+          label={t('remove-favorite')}
+          icon={<MdFavorite size={24} className="text-accent" aria-hidden />}
+          onClick={showDialog}
+        />
+      )}
+    </ConfirmDialog>
+  ) : (
+    <ActionButton
+      label={t('add-favorite')}
+      icon={<MdFavoriteBorder size={24} className="text-accent" />}
+      onClick={onToggleFavorite}
+    />
   );
 };
 
-interface FavoriteToggleProps {
-  isFavorite?: boolean;
-  onToggleFavorite: (e: React.MouseEvent) => void;
-}
-const FavoriteToggle = ({ isFavorite, onToggleFavorite }: FavoriteToggleProps) => {
+const MoreActionsDropdown = () => {
   const { t } = useTranslation();
-  const buttonClassName = 'bg-white rounded w-full flex justify-center';
+  const [open, isOpen] = React.useState(false);
+  const listId = React.useId();
 
-  return isFavorite ? (
-    <button className={buttonClassName} onClick={onToggleFavorite} aria-label={t('remove-favorite')}>
-      <MdOutlineStar size={26} className="text-secondary-3" />
-    </button>
-  ) : (
-    <button className={buttonClassName} onClick={onToggleFavorite} aria-label={t('add-favorite')}>
-      <MdOutlineStarBorder size={26} className="text-secondary-gray" />
-    </button>
+  const onClose = React.useCallback(() => isOpen(false), []);
+
+  return (
+    <div className="relative">
+      <ActionButton
+        label={t('more-actions')}
+        icon={<MdMoreVert size={24} className="text-accent" />}
+        aria-controls={listId}
+        aria-expanded={open}
+        aria-haspopup="listbox"
+        className={open ? 'text-accent' : ''}
+        onClick={() => isOpen(!open)}
+      />
+      {open && (
+        <div id={listId} role="listbox" className="absolute -right-2 translate-y-[10px] cursor-auto">
+          <PopupList classNames="gap-y-2">
+            <Link to="/" onClick={onClose} type="button">
+              <PopupListItem>{t('compare')}</PopupListItem>
+            </Link>
+            <Link to={'/'} onClick={onClose} type="button">
+              <PopupListItem>{t('create-path')}</PopupListItem>
+            </Link>
+            <Link to={'/'} onClick={onClose} type="button">
+              <PopupListItem>{t('share')}</PopupListItem>
+            </Link>
+          </PopupList>
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -180,8 +209,6 @@ export const OpportunityCard = ({
   name,
   trend,
   type,
-  selected,
-  toggleSelection,
   toggleFavorite,
   isFavorite,
   isLoggedIn,
@@ -190,10 +217,7 @@ export const OpportunityCard = ({
   const { sm } = useMediaQueries();
   const [loginModalOpen, setLoginModalOpen] = React.useState(false);
 
-  const onToggleFavorite = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
+  const onToggleFavorite = () => {
     if (!isLoggedIn) {
       setLoginModalOpen(true);
     } else {
@@ -202,10 +226,10 @@ export const OpportunityCard = ({
   };
 
   const cardTypeTitle = type === 'work' ? t('opportunity-type.work') : t('opportunity-type.education');
-  const ActionSection = (
-    <div className="flex flex-row gap-5">
+  const ActionsSection = (
+    <div className="flex flex-wrap gap-x-5 gap-y-2 mb-3 sm:mb-0">
       <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />
-      <SelectedCheckbox selected={selected} toggleSelection={toggleSelection} name={name} />
+      <MoreActionsDropdown />
     </div>
   );
 
@@ -214,13 +238,13 @@ export const OpportunityCard = ({
       {loginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} isOpen={loginModalOpen} />}
       <div className="rounded shadow-border bg-white pt-5 pr-5 pl-5 sm:pl-6 pb-5 sm:pb-7">
         <div className="flex flex-col sm:flex-row sm:gap-5">
+          {!sm && ActionsSection}
           <div className="flex flex-row justify-between align-center">
             <div>
               {typeof matchValue === 'number' && matchLabel && (
                 <Match match={matchValue} label={matchLabel} bg={bgForType(type)} />
               )}
             </div>
-            {!sm && ActionSection}
           </div>
           {!sm && (
             <div className="text-black mt-3 mb-2">
@@ -231,9 +255,9 @@ export const OpportunityCard = ({
           <div className="flex flex-col gap-y-2">
             {sm && (
               <div className="flex flex-col mt-3 text-black">
-                <div className="flex flex-row justify-between items-center">
+                <div className="flex flex-row flex-wrap-reverse gap-x-5 gap-y-5 justify-between items-center">
                   <span className="font-arial text-body-sm uppercase">{cardTypeTitle}</span>
-                  {ActionSection}
+                  {ActionsSection}
                 </div>
                 <span className="text-heading-2 hyphens-auto">{name}</span>
               </div>
