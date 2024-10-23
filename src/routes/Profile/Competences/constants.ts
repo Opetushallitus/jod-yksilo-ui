@@ -14,6 +14,7 @@ export interface FilterData {
 
 export type FiltersType = Record<OsaaminenLahdeTyyppi, FilterData[]>;
 export const FILTERS_ORDER = ['TOIMENKUVA', 'KOULUTUS', 'PATEVYYS', 'KIINNOSTUS', 'MUU_OSAAMINEN'] as const;
+export const COMPETENCE_TYPES = ['TOIMENKUVA', 'KOULUTUS', 'PATEVYYS', 'MUU_OSAAMINEN'] as const;
 
 export interface GroupByProps {
   filters: FiltersType;
