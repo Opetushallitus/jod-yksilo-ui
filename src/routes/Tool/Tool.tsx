@@ -337,7 +337,7 @@ const Tool = () => {
                     industryName="TODO: Lorem ipsum dolor"
                     mostCommonEducationBackground="TODO: Lorem ipsum dolor"
                     compareTo={
-                      mahdollisuusTyyppi == 'TYOMAHDOLLISUUS'
+                      ehdotus.tyyppi == 'TYOMAHDOLLISUUS'
                         ? {
                             pathname: `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.competences')}`,
                             hash: t('job-opportunity.specific-professional-competences.title'),
