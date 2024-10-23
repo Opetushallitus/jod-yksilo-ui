@@ -3,6 +3,7 @@ import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { MdArrowForward } from 'react-icons/md';
 import { Link, useRouteLoaderData } from 'react-router-dom';
 import { generateProfileLink } from '../utils';
 import { COMPETENCE_TYPES, GroupByProps, MobileFilterButton, groupByHeaderClasses } from './constants';
@@ -18,12 +19,6 @@ export const GroupBySource = ({
     t,
     i18n: { language },
   } = useTranslation();
-
-  const ArrowIcon = () => (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="#006DB3" />
-    </svg>
-  );
 
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
   const competencesSlug = 'slugs.profile.competences';
@@ -95,12 +90,12 @@ export const GroupBySource = ({
                     to={competenceLinks(competence)}
                     key={competence}
                     type="button"
-                    className="text-button-md hover:underline px-5 py-3 text-accent mt-3"
+                    className="text-button-md hover:underline text-accent ml-3 mt-5"
                   >
                     <div className="flex flex-row justify-start">
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2">
                         {t('profile.competences.edit')}
-                        <ArrowIcon />
+                        <MdArrowForward size={24} />
                       </div>
                     </div>
                   </Link>
@@ -110,12 +105,12 @@ export const GroupBySource = ({
                   to={competenceLinks(competence)}
                   key={competence}
                   type="button"
-                  className="text-button-md hover:underline px-5 py-3 text-accent"
+                  className="text-button-md hover:underline text-accent ml-3"
                 >
                   <div className="flex flex-row justify-start">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
                       {t('profile.competences.add')}
-                      <ArrowIcon />
+                      <MdArrowForward size={24} />
                     </div>
                   </div>
                 </Link>
