@@ -32,11 +32,13 @@ const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData 
   const { i18n } = useTranslation();
 
   return nested ? (
-    <p className="pl-5 pr-7 pt-2 text-body-sm font-bold sm:font-normal sm:text-body-md sm:py-2">
+    <p className="pl-5 pr-7 pt-2 text-body-sm font-bold sm:font-normal sm:text-body-md sm:py-2 hyphens-auto">
       {row.nimi[i18n.language]}
     </p>
   ) : (
-    <p className="pl-5 pr-7 pt-2 text-heading-4 sm:text-heading-3 sm:pt-1 sm:pb-[3px]">{row.nimi[i18n.language]}</p>
+    <p className="pl-5 pr-7 pt-2 text-heading-4 sm:text-heading-3 sm:pt-1 sm:pb-[3px] hyphens-auto">
+      {row.nimi[i18n.language]}
+    </p>
   );
 };
 
