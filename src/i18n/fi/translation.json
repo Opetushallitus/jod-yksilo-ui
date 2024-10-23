@@ -33,7 +33,6 @@
     "degree": "Tutkinto",
     "delete-degree": "Poista tutkinto",
     "delete-education-history": "Poista koulutus",
-    "edit-competences": "Muokkaa osaamisia",
     "edit-degree": "Muokkaa tutkintoa",
     "edit-education": "Muokkaa koulutusta",
     "education-or-degree": "Koulutus / tutkinto",
@@ -86,8 +85,6 @@
     "delete-free-time-activity": "Poista vapaa-ajan toiminto",
     "delete-proficiency": "Poista pätevyys",
     "edit-activity": "Muokkaa vapaa-ajan toimintoa",
-    "edit-competences": "Muokkaa osaamisia",
-    "edit-proficiencies": "Muokkaa osaamisia",
     "edit-proficiency": "Muokkaa pätevyyttä",
     "identify-proficiencies": "Tunnista osaamisia",
     "proficiency": "Pätevyys"
@@ -174,10 +171,10 @@
   "more-actions": "Lisää valintoja",
   "more-information": "Lisätietoa",
   "my-competences": {
-    "by-KOULUTUS": "Koulutuksen mukaan",
-    "by-MUU_OSAAMINEN": "Muiden osaamisten mukaan",
-    "by-PATEVYYS": "Vapaa-ajan toiminnon mukaan",
-    "by-TOIMENKUVA": "Työpaikkojen mukaan"
+    "by-KOULUTUS": "Koulutuksesta kertynyt osaamiseni",
+    "by-MUU_OSAAMINEN": "Muu osaamiseni",
+    "by-PATEVYYS": "Vapaa-ajan toiminnasta kertynyt osaamiseni",
+    "by-TOIMENKUVA": "Työpaikoista kertynyt osaamiseni"
   },
   "my-competences-alphabetically": "Osaamiseni aakkosjärjestyksessä",
   "my-competences-by-sources": "Osaamiseni lähteiden mukaan",
@@ -207,7 +204,8 @@
   "privacy-policy": "Tietosuojaseloste",
   "profile": {
     "competences": {
-      "add": "Lisää osaaminen",
+      "add": "Lisää osaamisia",
+      "edit": "Muokkaa osaamisia",
       "description": "Löydät alta kaikki osaamisesi, jotka olet tunnistanut tai lisännyt profiiliisi. Osaamisesi ryhmittelyn ja esitystavan voit valita itse.",
       "do-filter": "Suodata",
       "group": "Järjestele",
@@ -263,10 +261,8 @@
       "you-are-signed-in": "Olet kirjautunut osaamisprofiiliisi. Osaamisprofiili toimii Osaamispolku-palvelun omien tietojesi säilytys- ja hallintapaikkana. Tänne voit:"
     },
     "something-else": {
-      "add-other-competences": "Lisää osaamisia",
       "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius.",
       "description-placeholder": "Kirjoita tähän osaamisesi",
-      "edit-other-competences": "Muokkaa osaamisia",
       "my-other-comptetences": "Osaamiseni",
       "title": "Muut osaamiseni"
     },
@@ -426,7 +422,6 @@
     "count-competences": "{{count}} osaamista",
     "delete-job-description": "Poista toimenkuva",
     "delete-work-history": "Poista työpaikka",
-    "edit-competences": "Muokkaa osaamisia",
     "edit-job-description": "Muokkaa toimenkuvaa",
     "edit-workplace": "Muokkaa työpaikkaa",
     "employer": "Työnantaja",

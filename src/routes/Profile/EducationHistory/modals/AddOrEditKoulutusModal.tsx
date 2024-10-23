@@ -87,7 +87,7 @@ const OsaamisetStep = ({ koulutusId }: { koulutusId?: string }) => {
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t(koulutusId ? 'education-history.edit-competences' : 'education-history.identify-competences')}
+        {t(koulutusId ? 'profile.competences.edit' : 'education-history.identify-competences')}
       </h2>
       <div className="mb-6">
         <InputField

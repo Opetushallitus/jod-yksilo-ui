@@ -7,7 +7,6 @@ import {
   type RoutesNavigationListProps,
 } from '@/components';
 import { OsaaminenLahdeTyyppi } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
-import { useActionBar } from '@/hooks/useActionBar';
 import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
@@ -15,7 +14,6 @@ import { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
 import { sortByProperty } from '@/utils';
 import { Button, Modal, RoundButton, useMediaQueries } from '@jod/design-system';
 import React from 'react';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { MdTune } from 'react-icons/md';
 import { useLoaderData, useOutletContext } from 'react-router-dom';
@@ -40,7 +38,6 @@ const Competences = () => {
   const title = t('profile.competences.title');
   const [groupBy, setGroupBy] = React.useState<string>(GROUP_BY_SOURCE);
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
-  const actionBar = useActionBar();
   const locale = i18n.language as 'fi' | 'sv';
   const [selectedFilters, setSelectedFilters] = React.useState<FiltersType>({
     TOIMENKUVA: [],
@@ -196,36 +193,6 @@ const Competences = () => {
           />
         )}
       </div>
-      {actionBar &&
-        createPortal(
-          <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button
-              disabled
-              variant="white"
-              label={t('profile.competences.add')}
-              onClick={() => {
-                alert(t('profile.competences.add'));
-              }}
-            />
-            <Button
-              disabled
-              variant="white"
-              label={t('share')}
-              onClick={() => {
-                alert(t('share'));
-              }}
-            />
-            <Button
-              disabled
-              variant="white"
-              label={t('edit')}
-              onClick={() => {
-                alert(t('edit'));
-              }}
-            />
-          </div>,
-          actionBar,
-        )}
     </MainLayout>
   );
 };

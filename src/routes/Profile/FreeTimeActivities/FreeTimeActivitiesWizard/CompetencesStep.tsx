@@ -22,7 +22,7 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
   return (
     <>
       <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">
-        {id ? t('free-time-activities.edit-proficiencies') : t('free-time-activities.identify-proficiencies')}
+        {id ? t('profile.competences.edit') : t('free-time-activities.identify-proficiencies')}
       </h2>
       <h3 className="mb-4 text-heading-5 font-arial text-black sm:mb-5 sm:text-heading-3 sm:font-poppins">
         {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}

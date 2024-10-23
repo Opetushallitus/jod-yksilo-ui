@@ -39,7 +39,7 @@ interface PatevyysForm {
 }
 
 const PATEVYYDET_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet'; // /{patevyysId}
-
+const editCompetencesSlug = 'profile.competences.edit';
 const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
   const {
     t,
@@ -49,7 +49,7 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t(patevyysId ? 'free-time-activities.edit-proficiency' : 'free-time-activities.add-new-proficiency')}
+        {t(patevyysId ? editCompetencesSlug : 'free-time-activities.add-new-proficiency')}
       </h2>
       <div className="mb-6">
         <InputField
@@ -87,11 +87,11 @@ const OsaamisetStep = ({ patevyysId }: { patevyysId?: string }) => {
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t(patevyysId ? 'free-time-activities.edit-competences' : 'free-time-activities.identify-proficiencies')}
+        {t(patevyysId ? editCompetencesSlug : 'free-time-activities.identify-proficiencies')}
       </h2>
       <div className="mb-6">
         <InputField
-          label={t('free-time-activities.edit-competences')}
+          label={t(editCompetencesSlug)}
           value={description}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
           placeholder="TODO: Lorem ipsum dolor sit amet"

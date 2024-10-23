@@ -61,11 +61,7 @@ const SomethingElse = () => {
       <div className="flex pt-7">
         <Button
           variant="white"
-          label={
-            data.length > 0
-              ? t('profile.something-else.edit-other-competences')
-              : t('profile.something-else.add-other-competences')
-          }
+          label={data.length > 0 ? t('profile.competences.edit') : t('profile.competences.add')}
           onClick={() => {
             setIsModalOpen(true);
           }}

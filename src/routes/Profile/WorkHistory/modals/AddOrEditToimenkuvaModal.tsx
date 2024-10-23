@@ -88,12 +88,12 @@ const OsaamisetStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t(toimenkuvaId ? 'work-history.edit-competences' : 'work-history.identify-competences')}
+        {t(toimenkuvaId ? 'profile.competences.edit' : 'work-history.identify-competences')}
       </h2>
       <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.work-history.modals.competences-description')}</p>
       <div className="mb-6">
         <InputField
-          label={t('work-history.edit-competences')}
+          label={t('profile.competences.edit')}
           value={description}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
           help={t('profile.work-history.modals.competences-help')}

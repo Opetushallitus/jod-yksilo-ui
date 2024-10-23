@@ -85,10 +85,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModal) => {
               }
             }}
           >
-            <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">
-              {t('profile.something-else.edit-other-competences')}
-            </h2>
-
+            <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">{t('profile.competences.edit')}</h2>
             <div className="mb-6">
               <InputField
                 label={t('profile.something-else.description-placeholder')}
