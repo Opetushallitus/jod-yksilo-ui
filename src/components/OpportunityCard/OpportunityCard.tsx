@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 import { components } from '@/api/schema';
 import { useLoginLink } from '@/hooks/useLoginLink';
+import { MahdollisuusTyyppi } from '@/routes/types';
 import { Button, ConfirmDialog, Modal, PopupList, PopupListItem, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,13 +16,12 @@ import {
 } from 'react-icons/md';
 import { Link, To } from 'react-router-dom';
 
-type CardType = 'work' | 'education';
 interface OpportunityCardProps {
   name: string;
   description: string;
   matchValue?: number;
   matchLabel?: string;
-  type: CardType;
+  type: MahdollisuusTyyppi;
   trend: components['schemas']['EhdotusMetadata']['trendi'];
   employmentOutlook: number;
   hasRestrictions: boolean;
@@ -33,8 +33,8 @@ interface OpportunityCardProps {
   compareTo?: To;
 }
 
-const bgForType = (type: CardType) => {
-  if (type === 'work') {
+const bgForType = (type: MahdollisuusTyyppi) => {
+  if (type === 'TYOMAHDOLLISUUS') {
     return 'bg-[#AD4298]';
   }
   return 'bg-[#00818A]';
@@ -239,7 +239,7 @@ export const OpportunityCard = ({
     }
   };
 
-  const cardTypeTitle = type === 'work' ? t('opportunity-type.work') : t('opportunity-type.education');
+  const cardTypeTitle = type === 'TYOMAHDOLLISUUS' ? t('opportunity-type.work') : t('opportunity-type.education');
   const ActionsSection = (
     <div className="flex flex-wrap gap-x-5 gap-y-2 mb-3 sm:mb-0 justify-end">
       <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />

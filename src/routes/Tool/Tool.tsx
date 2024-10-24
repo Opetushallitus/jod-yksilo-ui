@@ -310,14 +310,14 @@ const Tool = () => {
           )}
           <div className="flex flex-col gap-5 mb-8">
             {toolStore.mixedMahdollisuudet.map((mahdollisuus) => {
-              const { id } = mahdollisuus;
+              const { id, mahdollisuusTyyppi } = mahdollisuus;
               const ehdotus = toolStore.mahdollisuusEhdotukset?.[id];
               const isFavorite = toolStore.suosikit?.find((s) => s.suosionKohdeId === id) !== undefined;
               return ehdotus ? (
                 <NavLink
                   key={id}
                   to={
-                    ehdotus.tyyppi === 'TYOMAHDOLLISUUS'
+                    mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
                       ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`
                       : `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}/${t('slugs.education-opportunity.overview')}`
                   }
@@ -325,19 +325,19 @@ const Tool = () => {
                   <OpportunityCard
                     isFavorite={isFavorite}
                     isLoggedIn={isLoggedIn}
-                    toggleFavorite={() => void toolStore.toggleSuosikki(id)}
+                    toggleFavorite={() => void toolStore.toggleSuosikki(id, ehdotus.tyyppi)}
                     name={getLocalizedText(mahdollisuus.otsikko)}
                     description={getLocalizedText(mahdollisuus.tiivistelma)}
                     matchValue={ehdotus?.pisteet}
                     matchLabel={t('fit')}
-                    type={ehdotus.tyyppi === 'TYOMAHDOLLISUUS' ? 'work' : 'education'}
+                    type={mahdollisuusTyyppi}
                     trend={ehdotus?.trendi}
                     employmentOutlook={ehdotus?.tyollisyysNakyma ?? 0}
                     hasRestrictions
                     industryName="TODO: Lorem ipsum dolor"
                     mostCommonEducationBackground="TODO: Lorem ipsum dolor"
                     compareTo={
-                      ehdotus.tyyppi == 'TYOMAHDOLLISUUS'
+                      mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
                         ? {
                             pathname: `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.competences')}`,
                             hash: t('job-opportunity.specific-professional-competences.title'),
