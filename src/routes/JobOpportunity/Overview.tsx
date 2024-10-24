@@ -14,8 +14,9 @@ const Overview = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { tyomahdollisuus } = useOutletContext<LoaderData>();
+  const { tyomahdollisuus, ammatit } = useOutletContext<LoaderData>();
   const title = getLocalizedText(tyomahdollisuus?.otsikko);
+  const clusterSize = tyomahdollisuus?.jakaumat?.ammatti?.maara;
   const routes: RoutesNavigationListProps['routes'] = [
     {
       active: false,
@@ -103,7 +104,15 @@ const Overview = () => {
               {t('job-opportunity.most-common-job-tasks.description')}
             </p>
             <ol className="list-decimal ml-7 font-bold text-black leading-7">
-              {tyomahdollisuus?.jakaumat?.ammatti?.arvot.map((task) => <li key={task.arvo}>{task.arvo}</li>)}
+              {ammatit.map((ammatti) => (
+                <li
+                  className="text-capitalize"
+                  title={`${ammatti.koodi} ${getLocalizedText(ammatti.kuvaus)} (${ammatti.osuus.toFixed(1)}%, N = ${clusterSize})`}
+                  key={ammatti.uri}
+                >
+                  {getLocalizedText(ammatti.nimi)}
+                </li>
+              ))}
             </ol>
           </Accordion>
         </div>
