@@ -1,10 +1,10 @@
 import { OpportunityCard, OsaaminenValue, SimpleNavigationList, Title } from '@/components';
-import { PageChangeDetails } from '@/constants';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import {
   Button,
   Modal,
+  PageChangeDetails,
   Pagination,
   RadioButton,
   RadioButtonGroup,
