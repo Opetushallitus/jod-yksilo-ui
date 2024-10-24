@@ -12,6 +12,10 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
+
+  .text-capitalize::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 /* Needed for sticky footer */
