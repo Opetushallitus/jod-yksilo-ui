@@ -2,13 +2,12 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaaminenValue } from '@/components';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
-import { ehdotusDataToRecord, EhdotusRecord } from '@/routes/Tool/utils';
+import { EhdotusRecord, ehdotusDataToRecord } from '@/routes/Tool/utils';
+import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import { paginate } from '@/utils';
 import { create } from 'zustand';
 
 const SUOSIKIT_PATH = '/api/profiili/suosikit';
-
-type Mahdollisuus = components['schemas']['TyomahdollisuusDto'] | components['schemas']['KoulutusmahdollisuusDto'];
 
 interface ToolState {
   osaamiset: OsaaminenValue[];
@@ -20,18 +19,18 @@ interface ToolState {
   mahdollisuusEhdotukset: EhdotusRecord;
   tyomahdollisuudet: components['schemas']['TyomahdollisuusDto'][];
   koulutusmahdollisuudet: components['schemas']['KoulutusmahdollisuusDto'][];
-  mixedMahdollisuudet: Mahdollisuus[];
+  mixedMahdollisuudet: TypedMahdollisuus[];
   ehdotuksetLoading: boolean;
   mahdollisuudetLoading: boolean;
   ehdotuksetPageSize: number;
   ehdotuksetPageNr: number;
-  ehdotuksetCount: Record<'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS', number>;
+  ehdotuksetCount: Record<MahdollisuusTyyppi, number>;
   reset: () => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
   setKiinnostukset: (state: OsaaminenValue[]) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
   updateSuosikit: () => Promise<void>;
-  toggleSuosikki: (suosionKohdeId: string) => Promise<void>;
+  toggleSuosikki: (suosionKohdeId: string, tyyppi: MahdollisuusTyyppi) => Promise<void>;
 
   setOsaamisKiinnostusPainotus: (state: number) => void;
   setRajoitePainotus: (state: number) => void;
@@ -122,22 +121,27 @@ export const useToolStore = create<ToolState>()((set) => ({
     const ids = Object.keys(ehdotukset ?? []);
     set({ mahdollisuudetLoading: true });
     try {
-      const { tyomahdollisuusResults, sortedTyomahdollisuusResults } = await fetchTyomahdollisuudet(
-        ids,
-        newPage,
-        pageSize,
-        ehdotukset,
-      );
-      const { koulutusmahdollisuusResults, sortedKoulutusMahdollisuudet } = await fetchKoulutusMahdollisuudet(
-        ids,
-        newPage,
-        pageSize,
-        ehdotukset,
-      );
+      const [tyomahdollisuusData, koulutusmahdollisuusData] = await Promise.all([
+        fetchTyomahdollisuudet(ids, newPage, pageSize, ehdotukset),
+        fetchKoulutusMahdollisuudet(ids, newPage, pageSize, ehdotukset),
+      ]);
 
-      const sortedMixedMahdollisuudet = [...[...koulutusmahdollisuusResults, ...tyomahdollisuusResults]].sort((a, b) =>
-        ehdotukset ? (ehdotukset[b.id]?.pisteet ?? 0) - (ehdotukset[a.id]?.pisteet ?? 0) : 0,
-      );
+      const { tyomahdollisuusResults, sortedTyomahdollisuusResults } = tyomahdollisuusData;
+      const { koulutusmahdollisuusResults, sortedKoulutusMahdollisuudet } = koulutusmahdollisuusData;
+
+      const typedTyomahdollisuusResults = tyomahdollisuusResults.map((tm) => ({
+        ...tm,
+        mahdollisuusTyyppi: 'TYOMAHDOLLISUUS',
+      }));
+
+      const typedKoulutusmahdollisuusResults = koulutusmahdollisuusResults.map((km) => ({
+        ...km,
+        mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS',
+      }));
+
+      const sortedMixedMahdollisuudet = [...[...typedKoulutusmahdollisuusResults, ...typedTyomahdollisuusResults]].sort(
+        (a, b) => (ehdotukset ? (ehdotukset[b.id]?.pisteet ?? 0) - (ehdotukset[a.id]?.pisteet ?? 0) : 0),
+      ) as TypedMahdollisuus[];
 
       // All that has been returned are sorted by the scores
       set({
@@ -156,7 +160,7 @@ export const useToolStore = create<ToolState>()((set) => ({
     await useToolStore.getState().updateEhdotukset();
     await useToolStore.getState().fetchMahdollisuudetPage(1);
   },
-  toggleSuosikki: async (suosionKohdeId: string) => {
+  toggleSuosikki: async (suosionKohdeId: string, tyyppi: MahdollisuusTyyppi) => {
     const { suosikitLoading, suosikit, updateSuosikit } = useToolStore.getState();
 
     if (suosikitLoading) {
@@ -176,7 +180,7 @@ export const useToolStore = create<ToolState>()((set) => ({
         await client.POST(SUOSIKIT_PATH, {
           body: {
             suosionKohdeId,
-            tyyppi: 'TYOMAHDOLLISUUS',
+            tyyppi,
           },
         });
       }

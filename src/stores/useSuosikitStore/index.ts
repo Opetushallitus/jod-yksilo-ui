@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE, PageChangeDetails } from '@/constants';
+import { TypedMahdollisuus } from '@/routes/types';
 import { paginate, sortByProperty } from '@/utils';
 import { create } from 'zustand';
 
@@ -10,13 +11,13 @@ interface FavoritesState {
   pageNr: number;
   pageSize: number;
   filters: string[];
-  pageData: components['schemas']['TyomahdollisuusDto'][];
+  pageData: TypedMahdollisuus[];
 
   setFilters: (state: string[]) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
-  setPageData: (state: components['schemas']['TyomahdollisuusDto'][]) => void;
+  setPageData: (state: TypedMahdollisuus[]) => void;
   fetchSuosikit: () => Promise<void>;
-  deleteSuosikki: (suosionKohdeId: string, type: 'work' | 'education') => Promise<void>;
+  deleteSuosikki: (suosionKohdeId: string) => Promise<void>;
   fetchPage: (details: PageChangeDetails) => Promise<void>;
 }
 
@@ -31,16 +32,13 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
   setPageData: (state) => set({ pageData: state }),
   setFilters: (state) => set({ filters: state }),
 
-  deleteSuosikki: async (mahdollisuusId: string, type: 'work' | 'education') => {
+  deleteSuosikki: async (mahdollisuusId: string) => {
     const { suosikitLoading, suosikit, fetchSuosikit, pageData, pageNr, pageSize, fetchPage } = get();
     if (suosikitLoading) {
       return;
     }
 
-    let suosikkiId = null;
-    if (type === 'work') {
-      suosikkiId = suosikit.find((s) => s.tyyppi === 'TYOMAHDOLLISUUS' && s.suosionKohdeId === mahdollisuusId)?.id;
-    }
+    const suosikkiId = suosikit.find((s) => s.suosionKohdeId === mahdollisuusId)?.id;
 
     if (!suosikkiId) {
       return;
@@ -92,14 +90,41 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
     }
 
     const paginated = paginate(suosikit, page, pageSize);
-    const { data } = await client.GET('/api/tyomahdollisuudet', {
-      params: {
-        query: {
-          id: paginated.map((item) => item.suosionKohdeId),
+    const [tyomahdollisuudetResponse, koulutusmahdollisuudetResponse] = await Promise.all([
+      client.GET('/api/tyomahdollisuudet', {
+        params: {
+          query: {
+            id: paginated.filter((item) => item.tyyppi === 'TYOMAHDOLLISUUS').map((item) => item.suosionKohdeId),
+          },
         },
-      },
-    });
-    set({ pageData: data?.sisalto ?? [] });
+      }),
+      client.GET('/api/koulutusmahdollisuudet', {
+        params: {
+          query: {
+            id: paginated.filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS').map((item) => item.suosionKohdeId),
+          },
+        },
+      }),
+    ]);
+
+    const { data: tyomahdollisuudet } = tyomahdollisuudetResponse;
+    const { data: koulutusmahdollisuudet } = koulutusmahdollisuudetResponse;
+
+    const typedTyomahdollisuudet = (tyomahdollisuudet?.sisalto ?? []).map((tm) => ({
+      ...tm,
+      mahdollisuusTyyppi: 'TYOMAHDOLLISUUS',
+    }));
+    const typedKoulutusmahdollisuudet = (koulutusmahdollisuudet?.sisalto ?? []).map((tm) => ({
+      ...tm,
+      mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS',
+    }));
+    const sortedResultBySuosikkiOrder = [...typedTyomahdollisuudet, ...typedKoulutusmahdollisuudet].sort(
+      (a, b) =>
+        suosikit.findIndex((item) => item.suosionKohdeId === b.id) -
+        suosikit.findIndex((item) => item.suosionKohdeId === a.id),
+    ) as TypedMahdollisuus[];
+
+    set({ pageData: sortedResultBySuosikkiOrder });
     set({ pageNr: page });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   },
