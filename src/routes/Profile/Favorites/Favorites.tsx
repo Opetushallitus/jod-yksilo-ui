@@ -80,7 +80,7 @@ const Favorites = () => {
 
       <div className="flex flex-col gap-5 mb-8">
         {pageData.map((mahdollisuus) => {
-          const { id } = mahdollisuus;
+          const { id, mahdollisuusTyyppi } = mahdollisuus;
           return (
             <NavLink
               key={id}
@@ -95,9 +95,9 @@ const Favorites = () => {
                 isLoggedIn={true}
                 mostCommonEducationBackground="TODO: Lorem ipsum dolor"
                 name={getLocalizedText(mahdollisuus.otsikko)}
-                toggleFavorite={() => void deleteSuosikki(id, 'work')}
+                toggleFavorite={() => void deleteSuosikki(id)}
                 trend="NOUSEVA"
-                type="work"
+                type={mahdollisuusTyyppi}
                 compareTo={{
                   pathname: `/${language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.competences')}`,
                   hash: t('job-opportunity.specific-professional-competences.title'),

@@ -304,7 +304,7 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    post: operations['tyomahdollisuudetCreateEhdotus'];
+    post: operations['mahdollisuudetCreateEhdotus'];
     delete?: never;
     options?: never;
     head?: never;
@@ -566,10 +566,10 @@ export interface components {
       ehdotusMetadata?: components['schemas']['EhdotusMetadata'];
     };
     EhdotusMetadata: {
+      /** @enum {string} */
+      tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       /** Format: double */
       pisteet?: number;
-      /** @enum {string} */
-      tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       /** @enum {string} */
       trendi?: 'NOUSEVA' | 'LASKEVA';
       /** Format: int32 */
@@ -1571,7 +1571,7 @@ export interface operations {
       };
     };
   };
-  tyomahdollisuudetCreateEhdotus: {
+  mahdollisuudetCreateEhdotus: {
     parameters: {
       query?: never;
       header?: never;

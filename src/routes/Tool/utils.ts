@@ -4,8 +4,8 @@ export type EhdotusRecord = Record<string, components['schemas']['EhdotusMetadat
 
 export const ehdotusDataToRecord = (array: components['schemas']['EhdotusDto'][]): EhdotusRecord => {
   return array.reduce((acc, item) => {
-    if (item.mahdollisuusId) {
-      acc[item.mahdollisuusId] = item?.ehdotusMetadata ?? {};
+    if (item.mahdollisuusId && item.ehdotusMetadata) {
+      acc[item.mahdollisuusId] = item?.ehdotusMetadata;
     }
     return acc;
   }, {} as EhdotusRecord);
