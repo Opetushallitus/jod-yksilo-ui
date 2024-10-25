@@ -1,8 +1,9 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
-import { DEFAULT_PAGE_SIZE, PageChangeDetails } from '@/constants';
+import { DEFAULT_PAGE_SIZE } from '@/constants';
 import { TypedMahdollisuus } from '@/routes/types';
 import { paginate, sortByProperty } from '@/utils';
+import { PageChangeDetails } from '@jod/design-system';
 import { create } from 'zustand';
 
 interface FavoritesState {
@@ -61,9 +62,9 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
       const isLastPage = Math.ceil(suosikit.length / pageSize) === pageNr;
       // When on last page, fetch the previous page, otherwise reload the current page.
       if (isLastPage) {
-        await fetchPage({ page: pageNr - 1 });
+        await fetchPage({ page: pageNr - 1, pageSize });
       } else {
-        await fetchPage({ page: pageNr });
+        await fetchPage({ page: pageNr, pageSize });
       }
     }
     set({ suosikitLoading: false });
