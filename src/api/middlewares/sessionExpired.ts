@@ -3,7 +3,7 @@ import { Middleware } from 'openapi-fetch';
 import { unregisterCsrfMiddleware } from './csrf';
 
 export const sessionExpiredMiddleware: Middleware = {
-  onResponse(response) {
+  onResponse({ response }) {
     if (response.status === 403 && !response.url.endsWith('/api/profiili/yksilo')) {
       authStore.yksiloPromise = undefined;
       unregisterCsrfMiddleware();

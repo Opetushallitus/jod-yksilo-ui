@@ -4,7 +4,7 @@ import type { components } from '../schema';
 
 type CsrfDTO = components['schemas']['CsrfTokenDto'];
 const csrfMiddleware = (csrf: CsrfDTO): Middleware => ({
-  onRequest(request) {
+  onRequest({ request }) {
     request.headers.set(csrf.headerName, csrf.token);
     return request;
   },
