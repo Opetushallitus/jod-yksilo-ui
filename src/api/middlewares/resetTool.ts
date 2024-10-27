@@ -5,8 +5,7 @@ import { Middleware } from 'openapi-fetch';
 const ignoredPaths = ['/api/profiili/suosikit'];
 
 export const resetTool: Middleware = {
-  onRequest(request) {
-    const { schemaPath } = request;
+  onRequest({ request, schemaPath }) {
     if (
       ['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method) &&
       schemaPath.startsWith('/api/profiili') &&
