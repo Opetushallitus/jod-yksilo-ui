@@ -7,6 +7,7 @@ import {
   type RoutesNavigationListProps,
 } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
+import { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
 import { Button, Checkbox, Pagination } from '@jod/design-system';
@@ -32,15 +33,81 @@ const Favorites = () => {
   const actionBar = useActionBar();
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+    const value = event.target.value as MahdollisuusTyyppi;
     if (filters.includes(value)) {
-      setFilters(filters.filter((filter) => filter !== value));
+      if (filters.length > 1) {
+        setFilters(filters.filter((filter) => filter !== value));
+      }
     } else {
       setFilters([...filters, value]);
     }
   };
 
-  const isFilterChecked = (value: string) => filters.includes(value);
+  const isFilterChecked = (value: MahdollisuusTyyppi) => filters.includes(value);
+
+  type SelectedFilter = 'KAIKKI' | 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+
+  const selectedFilter: SelectedFilter = React.useMemo(() => {
+    if (filters.includes('TYOMAHDOLLISUUS') && filters.includes('KOULUTUSMAHDOLLISUUS')) {
+      return 'KAIKKI';
+    } else if (filters.includes('TYOMAHDOLLISUUS')) {
+      return 'TYOMAHDOLLISUUS';
+    } else if (filters.includes('KOULUTUSMAHDOLLISUUS')) {
+      return 'KOULUTUSMAHDOLLISUUS';
+    }
+    return 'KAIKKI';
+  }, [filters]);
+
+  const subtitleToShow = React.useMemo(() => {
+    switch (selectedFilter) {
+      case 'KAIKKI':
+        return t('profile.favorites.job-and-education-opportunities');
+      case 'TYOMAHDOLLISUUS':
+        return jobFilterText;
+      case 'KOULUTUSMAHDOLLISUUS':
+        return educationFilterText;
+    }
+  }, [selectedFilter, jobFilterText, educationFilterText, t]);
+
+  const favoritesPerType = React.useMemo(() => {
+    switch (selectedFilter) {
+      case 'KAIKKI':
+        return pageData;
+      case 'TYOMAHDOLLISUUS':
+        return pageData.filter((mahdollisuus) => mahdollisuus.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS');
+      case 'KOULUTUSMAHDOLLISUUS':
+        return pageData.filter((mahdollisuus) => mahdollisuus.mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS');
+    }
+  }, [selectedFilter, pageData]);
+
+  const favoriteCount = React.useMemo(() => {
+    switch (selectedFilter) {
+      case 'KAIKKI':
+        return suosikit.length;
+      case 'TYOMAHDOLLISUUS':
+        return suosikit.filter((s) => s.tyyppi === 'TYOMAHDOLLISUUS').length;
+      case 'KOULUTUSMAHDOLLISUUS':
+        return suosikit.filter((s) => s.tyyppi === 'KOULUTUSMAHDOLLISUUS').length;
+    }
+  }, [selectedFilter, suosikit]);
+
+  const favoriteCountText = React.useMemo(() => {
+    switch (selectedFilter) {
+      case 'KAIKKI':
+        return t('profile.favorites.you-have-saved-opportunities', {
+          jobOpportunitiesCount: suosikit.filter((s) => s.tyyppi === 'TYOMAHDOLLISUUS').length,
+          educationOpportunitiesCount: suosikit.filter((s) => s.tyyppi === 'KOULUTUSMAHDOLLISUUS').length,
+        });
+      case 'TYOMAHDOLLISUUS':
+        return t('profile.favorites.you-have-saved-n-job-opportunities', {
+          count: favoriteCount,
+        });
+      case 'KOULUTUSMAHDOLLISUUS':
+        return t('profile.favorites.you-have-saved-n-education-opportunities', {
+          count: favoriteCount,
+        });
+    }
+  }, [selectedFilter, suosikit, t, favoriteCount]);
 
   return (
     <MainLayout
@@ -54,19 +121,19 @@ const Favorites = () => {
               <div className="text-todo">TODO</div>
               <Checkbox
                 ariaLabel={jobFilterText}
-                checked={isFilterChecked('work')}
+                checked={isFilterChecked('TYOMAHDOLLISUUS')}
                 label={jobFilterText}
                 name={jobFilterText}
                 onChange={handleFilterChange}
-                value="work"
+                value="TYOMAHDOLLISUUS"
               />
               <Checkbox
                 ariaLabel={educationFilterText}
-                checked={isFilterChecked('education')}
+                checked={isFilterChecked('KOULUTUSMAHDOLLISUUS')}
                 label={educationFilterText}
                 name={educationFilterText}
                 onChange={handleFilterChange}
-                value="education"
+                value="KOULUTUSMAHDOLLISUUS"
               />
             </div>
           </SimpleNavigationList>
@@ -76,10 +143,13 @@ const Favorites = () => {
       <Title value={title} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-8 text-body-lg">{t('profile.favorites.description')}</p>
-      <p className="mb-8">{t('profile.favorites.you-have-saved-n-opportunities', { count: suosikit.length })}</p>
+
+      <h2 className="text-heading-2-mobile sm:text-heading-2">{subtitleToShow}</h2>
+
+      <p className="mb-8">{favoriteCountText}</p>
 
       <div className="flex flex-col gap-5 mb-8">
-        {pageData.map((mahdollisuus) => {
+        {favoritesPerType.map((mahdollisuus) => {
           const { id, mahdollisuusTyyppi } = mahdollisuus;
           return (
             <NavLink
@@ -117,7 +187,7 @@ const Favorites = () => {
             nextTriggerLabel: t('pagination.next'),
             prevTriggerLabel: t('pagination.previous'),
           }}
-          totalItems={suosikit.length}
+          totalItems={favoriteCount}
           type="button"
         />
       )}

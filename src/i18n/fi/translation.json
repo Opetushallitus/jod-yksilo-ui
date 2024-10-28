@@ -229,11 +229,16 @@
       "title": "Koulutukseni"
     },
     "favorites": {
+      "job-and-education-opportunities": "Työ- ja koulutusmahdollisuudet",
       "description": "Suosikeiksi tallentamasi koulutus- ja työmahdollisuudet löytyvät täältä. Voit tallentaa lisää mahdollisuuksia suosikeiksi kohtautuskoneen tulosnäkymässä. Voit poistaa suosikkeja sekä luoda yhdestä tai useammasta suosikista koulutus- ja urapolkusuunnitelman.",
       "title": "Suosikkini",
-      "you-have-saved-n-opportunities_one": "Olet tallentanut yhden mahdollisuuden suosikiksi",
-      "you-have-saved-n-opportunities_other": "Olet tallentanut {{count}} mahdollisuutta suosikiksi",
-      "you-have-saved-n-opportunities_zero": "Et ole vielä tallentanut yhtään mahdollisuutta suosikiksi"
+      "you-have-saved-opportunities": "Olet tallentanut {{jobOpportunitiesCount}} työmahdollisuutta ja {{educationOpportunitiesCount}} koulutusmahdollisuutta.",
+      "you-have-saved-n-education-opportunities_one": "Olet tallentanut yhden koulutusmahdollisuuden suosikiksi",
+      "you-have-saved-n-education-opportunities_other": "Olet tallentanut {{count}} koulutusmahdollisuutta suosikiksi",
+      "you-have-saved-n-education-opportunities_zero": "Et ole vielä tallentanut yhtään koulutusmahdollisuutta suosikiksi",
+      "you-have-saved-n-job-opportunities_one": "Olet tallentanut yhden työmahdollisuuden suosikiksi",
+      "you-have-saved-n-job-opportunities_other": "Olet tallentanut {{count}} työmahdollisuutta suosikiksi",
+      "you-have-saved-n-job-opportunities_zero": "Et ole vielä tallentanut yhtään työmahdollisuutta suosikiksi"
     },
     "free-time-activities": {
       "description": "Löydät alta vapaa-ajan toimintosi. Vapaa-ajan toimintoja voivat olla harrastukset, luottamustoimet sekä erilaiset pätevyydet. Voit lisätä käsin vapaa-ajan toimintojasi sekä kartoittaa niihin liittyviä osaamisiasi.",
