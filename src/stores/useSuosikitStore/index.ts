@@ -1,7 +1,7 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
-import { TypedMahdollisuus } from '@/routes/types';
+import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import { paginate, sortByProperty } from '@/utils';
 import { PageChangeDetails } from '@jod/design-system';
 import { create } from 'zustand';
@@ -11,10 +11,10 @@ interface FavoritesState {
   suosikitLoading: boolean;
   pageNr: number;
   pageSize: number;
-  filters: string[];
   pageData: TypedMahdollisuus[];
+  filters: MahdollisuusTyyppi[];
 
-  setFilters: (state: string[]) => void;
+  setFilters: (state: MahdollisuusTyyppi[]) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
   setPageData: (state: TypedMahdollisuus[]) => void;
   fetchSuosikit: () => Promise<void>;
@@ -27,7 +27,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
   suosikitLoading: false,
   pageNr: 1,
   pageSize: DEFAULT_PAGE_SIZE,
-  filters: [],
+  filters: ['TYOMAHDOLLISUUS', 'KOULUTUSMAHDOLLISUUS'],
   pageData: [],
   setSuosikit: (state) => set({ suosikit: state }),
   setPageData: (state) => set({ pageData: state }),
