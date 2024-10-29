@@ -69,8 +69,7 @@ const Competences = () => {
                 {t('job-opportunity.specific-professional-competences.title')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('job-opportunity.specific-professional-competences.title')}
             lang={language}
           >
             <p className="text-body-sm font-arial mt-4 mb-4">
@@ -98,8 +97,7 @@ const Competences = () => {
                 {t('job-opportunity.general-working-life-skills.title')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('job-opportunity.general-working-life-skills.title')}
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">
@@ -118,8 +116,7 @@ const Competences = () => {
                 {t('job-opportunity.digital-skills-for-citizens.title')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('job-opportunity.digital-skills-for-citizens.title')}
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">
@@ -135,8 +132,7 @@ const Competences = () => {
                 {t('job-opportunity.personal-characteristics.title')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('job-opportunity.personal-characteristics.title')}
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">

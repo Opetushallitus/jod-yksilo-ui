@@ -97,8 +97,7 @@ const Overview = () => {
                 {t('job-opportunity.description')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('job-opportunity.description')}
             lang={language}
           >
             <p className="text-body-sm font-arial mt-4">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>
@@ -111,8 +110,7 @@ const Overview = () => {
                 {t('job-opportunity.most-common-job-tasks.title')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('job-opportunity.most-common-job-tasks.title')}
             lang={language}
           >
             <p className="text-body-sm font-arial mt-4 mb-4">
@@ -138,8 +136,7 @@ const Overview = () => {
                 {t('job-opportunity.key-figures.title')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('job-opportunity.key-figures.title')}
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.key-figures.description')}</p>
@@ -153,8 +150,7 @@ const Overview = () => {
                 {t('job-opportunity.labour-market-picture.title')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('job-opportunity.labour-market-picture.title')}
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">
@@ -170,8 +166,7 @@ const Overview = () => {
                 {t('job-opportunity.salary-trends.title')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('job-opportunity.salary-trends.title')}
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.salary-trends.description')}</p>
@@ -185,8 +180,7 @@ const Overview = () => {
                 {t('competences')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('competences')}
             lang={language}
           >
             <CompareCompetencesTable
@@ -203,8 +197,7 @@ const Overview = () => {
                 {t('job-opportunity.employment-trends.title')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('job-opportunity.employment-trends.title')}
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.employment-trends.description')}</p>
@@ -218,8 +211,7 @@ const Overview = () => {
                 {t('job-opportunity.related-jobs.title')}
               </h2>
             }
-            expandMoreText={t('expand-more')}
-            expandLessText={t('expand-less')}
+            titleText={t('job-opportunity.related-jobs.title')}
             lang={language}
           >
             <p className="text-body-sm font-arial mb-6 mt-4">{t('job-opportunity.related-jobs.description')}</p>

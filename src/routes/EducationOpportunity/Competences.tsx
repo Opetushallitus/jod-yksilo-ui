@@ -53,8 +53,7 @@ const Competences = () => {
               {t('education-opportunity.specific-professional-competences.title')}
             </h2>
           }
-          expandMoreText={t('expand-more')}
-          expandLessText={t('expand-less')}
+          titleText={t('education-opportunity.specific-professional-competences.title')}
           lang={language}
         >
           <p className="text-body-sm font-arial mt-4 mb-4">

@@ -95,12 +95,7 @@ const Interests = () => {
               <HelpingToolsContents />
             </>
           ) : (
-            <Accordion
-              title={t('tools')}
-              expandLessText={t('expand-less')}
-              expandMoreText={t('expand-more')}
-              lang={language}
-            >
+            <Accordion title={t('tools')} lang={language}>
               <HelpingToolsContents />
             </Accordion>
           )}
