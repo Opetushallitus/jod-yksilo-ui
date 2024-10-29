@@ -21,14 +21,14 @@ export const SimpleNavigationList = ({
   backgroundClassName = 'bg-secondary-1-25',
   lang,
 }: SimpleNavigationListProps) => {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const borderClassName = borderEnabled ? 'rounded-md' : '';
   const paddingClassName = addPadding ? 'py-6 px-[20px]' : '';
   const language = lang ?? i18n.language;
   return (
     <div className={`${borderClassName} ${backgroundClassName} ${paddingClassName}`.trim()}>
       {collapsible ? (
-        <Accordion title={title} expandLessText={t('expand-less')} expandMoreText={t('expand-more')} lang={language}>
+        <Accordion title={title} lang={language}>
           {children}
         </Accordion>
       ) : (

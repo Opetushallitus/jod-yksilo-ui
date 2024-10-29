@@ -103,37 +103,46 @@ export const Filters = ({ groupBy, setGroupBy, filterKeys, selectedFilters, setS
         backgroundClassName={sm ? 'bg-bg-gray-2' : 'bg-bg-gray'}
         collapsible
       >
-        <div className="flex flex-col gap-y-3 py-4">
+        <ul className="flex flex-col gap-y-3 py-4">
           {filterKeys.map((key) => (
             <React.Fragment key={key}>
               {key !== 'MUU_OSAAMINEN' ? (
-                <Accordion
-                  title={
-                    <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
-                  }
-                  expandMoreText={t('expand-more')}
-                  expandLessText={t('expand-less')}
-                  lang={i18n.language}
-                >
-                  {selectedFilters[key]?.map((item, idx) => (
-                    <div className="pl-6" key={item.value}>
-                      <Checkbox
-                        name={item.label}
-                        ariaLabel={`${key} ${item.label}`}
-                        label={item.label}
-                        checked={item.checked}
-                        onChange={toggleSingleFilter(key, idx)}
-                        value={item.value}
+                <li>
+                  <Accordion
+                    title={
+                      <TitleCheckbox
+                        type={key}
+                        checked={isFilterTypeChecked(key)}
+                        onChange={toggleFiltersByType(key)}
                       />
-                    </div>
-                  ))}
-                </Accordion>
+                    }
+                    titleText={t(`types.competence.${key}`)}
+                    lang={i18n.language}
+                  >
+                    <ul className="gap-y-3 flex-col flex">
+                      {selectedFilters[key]?.map((item, idx) => (
+                        <li className="pl-6" key={item.value}>
+                          <Checkbox
+                            name={item.label}
+                            ariaLabel={`${key} ${item.label}`}
+                            label={item.label}
+                            checked={item.checked}
+                            onChange={toggleSingleFilter(key, idx)}
+                            value={item.value}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </Accordion>
+                </li>
               ) : (
-                <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
+                <li>
+                  <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
+                </li>
               )}
             </React.Fragment>
           ))}
-        </div>
+        </ul>
       </SimpleNavigationList>
     </>
   );

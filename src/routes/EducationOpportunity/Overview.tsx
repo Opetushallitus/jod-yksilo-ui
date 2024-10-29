@@ -44,8 +44,7 @@ const Overview = () => {
               {t('job-opportunity.description')}
             </h2>
           }
-          expandMoreText={t('expand-more')}
-          expandLessText={t('expand-less')}
+          titleText={t('job-opportunity.description')}
           lang={language}
         >
           <p className="text-body-sm font-arial mt-4">{getLocalizedText(koulutusmahdollisuus?.kuvaus)}</p>

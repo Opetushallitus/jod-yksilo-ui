@@ -70,8 +70,6 @@
     "title": "Tapahtui virhe",
     "unexpected": "Tapahtui odottamaton virhe. Tämä voi johtua verkkoyhteyden katkeamisesta tai palvelun virheestä."
   },
-  "expand-less": "Näytä vähemmän",
-  "expand-more": "Näytä lisää",
   "fit": "Sopivuus",
   "fit-of-result": "Tuloksen sopivuus",
   "found": "Löytyi",
