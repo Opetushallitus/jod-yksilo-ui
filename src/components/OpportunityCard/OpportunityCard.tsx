@@ -43,7 +43,7 @@ const bgForType = (type: MahdollisuusTyyppi) => {
 const Match = ({ match, label, bg }: { match?: number; label: string; bg: string }) => {
   return (
     <div
-      className={`${bg} flex flex-row shrink-0 sm:flex-col rounded-lg sm:rounded-[40px] sm:min-h-[80px] w-[132px] sm:w-[80px] h-[32px] text-white justify-center text-center items-center sm:mt-3`}
+      className={`${bg} flex flex-row shrink-0 sm:flex-col rounded-lg sm:rounded-[40px] sm:min-h-[80px] w-[132px] sm:w-[80px] h-[32px] text-white justify-center text-center items-center mr-5 sm:mt-3`}
     >
       {match !== undefined && match >= 0 && (
         <>
@@ -251,7 +251,7 @@ export const OpportunityCard = ({
     <>
       {loginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} isOpen={loginModalOpen} />}
       <div className="rounded shadow-border bg-white pt-5 pr-5 pl-5 sm:pl-6 pb-5 sm:pb-7">
-        <div className="flex flex-col sm:flex-row sm:gap-5">
+        <div className="flex flex-col sm:flex-row">
           {!sm && ActionsSection}
           <div className="flex flex-row justify-between align-center">
             <div>
