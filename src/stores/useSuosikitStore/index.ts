@@ -22,6 +22,17 @@ interface FavoritesState {
   fetchPage: (details: PageChangeDetails) => Promise<void>;
 }
 
+const filterSuosikit = (suosikit: components['schemas']['SuosikkiDto'][], filters: MahdollisuusTyyppi[]) => {
+  if (filters.includes('TYOMAHDOLLISUUS') && filters.includes('KOULUTUSMAHDOLLISUUS')) {
+    return suosikit;
+  } else if (filters.includes('TYOMAHDOLLISUUS')) {
+    return suosikit.filter((item) => item.tyyppi === 'TYOMAHDOLLISUUS');
+  } else if (filters.includes('KOULUTUSMAHDOLLISUUS')) {
+    return suosikit.filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS');
+  }
+  return [];
+};
+
 export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
   suosikit: [],
   suosikitLoading: false,
@@ -82,7 +93,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
   },
 
   fetchPage: async ({ page }: PageChangeDetails) => {
-    const { pageSize, suosikit } = get();
+    const { pageSize, suosikit, filters } = get();
 
     // Do not fetch data for opportunities if there are no favorites
     if (!suosikit.length) {
@@ -90,22 +101,34 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
       return;
     }
 
-    const paginated = paginate(suosikit, page, pageSize);
+    const filteredSuosikit = filterSuosikit(suosikit, filters);
+    const paginated = paginate(filteredSuosikit, page, pageSize);
+
+    const hasTyomahdollisuus = filteredSuosikit.findIndex((s) => s.tyyppi === 'TYOMAHDOLLISUUS') > -1;
+    const hasKoulutusMahdollisuus = filteredSuosikit.findIndex((s) => s.tyyppi === 'KOULUTUSMAHDOLLISUUS') > -1;
+
     const [tyomahdollisuudetResponse, koulutusmahdollisuudetResponse] = await Promise.all([
-      client.GET('/api/tyomahdollisuudet', {
-        params: {
-          query: {
-            id: paginated.filter((item) => item.tyyppi === 'TYOMAHDOLLISUUS').map((item) => item.suosionKohdeId),
-          },
-        },
-      }),
-      client.GET('/api/koulutusmahdollisuudet', {
-        params: {
-          query: {
-            id: paginated.filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS').map((item) => item.suosionKohdeId),
-          },
-        },
-      }),
+      hasTyomahdollisuus
+        ? client.GET('/api/tyomahdollisuudet', {
+            params: {
+              query: {
+                id: paginated.filter((item) => item.tyyppi === 'TYOMAHDOLLISUUS').map((item) => item.suosionKohdeId),
+              },
+            },
+          })
+        : { data: undefined },
+
+      hasKoulutusMahdollisuus
+        ? client.GET('/api/koulutusmahdollisuudet', {
+            params: {
+              query: {
+                id: paginated
+                  .filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS')
+                  .map((item) => item.suosionKohdeId),
+              },
+            },
+          })
+        : { data: undefined },
     ]);
 
     const { data: tyomahdollisuudet } = tyomahdollisuudetResponse;
