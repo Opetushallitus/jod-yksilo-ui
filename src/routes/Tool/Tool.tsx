@@ -114,8 +114,10 @@ const Tool = () => {
         toolStore.setSuosikit(suosikit);
         void updateEhdotukset();
       }
+    } else {
+      toolStore.setSuosikit(suosikit);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [suosikit]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const updateEhdotukset = async () => {
     await toolStore.updateEhdotuksetAndTyomahdollisuudet();

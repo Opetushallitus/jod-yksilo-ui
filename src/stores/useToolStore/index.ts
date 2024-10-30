@@ -167,10 +167,12 @@ export const useToolStore = create<ToolState>()(
       },
 
       updateEhdotuksetAndTyomahdollisuudet: async () => {
-        await useToolStore.getState().updateEhdotukset();
-        await useToolStore.getState().fetchMahdollisuudetPage(1);
-      },
+        const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit } = useToolStore.getState();
 
+        await updateEhdotukset();
+        await fetchMahdollisuudetPage(1);
+        await updateSuosikit();
+      },
       toggleSuosikki: async (suosionKohdeId: string, tyyppi: MahdollisuusTyyppi) => {
         const { suosikitLoading, suosikit, updateSuosikit } = useToolStore.getState();
 
