@@ -32,7 +32,10 @@ export const NavigationBar = ({ logo, menuComponent, onLanguageClick, user }: Na
 
   return (
     <div className="min-w-min shadow-border bg-white">
-      <nav role="navigation" className="mx-auto flex h-11 items-center gap-4 px-7 py-3 font-semibold lg:container">
+      <nav
+        role="navigation"
+        className="mx-auto flex h-11 items-center gap-4 px-5 sm:px-7 py-3 font-semibold lg:container"
+      >
         {logo}
         <ul className="inline-flex items-center gap-3 sm:gap-5 ml-auto">
           {menuComponent && <li className="ml-3 sm:ml-0">{menuComponent}</li>}

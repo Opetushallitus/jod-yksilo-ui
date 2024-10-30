@@ -16,7 +16,7 @@ export const UserButton = ({ user }: Pick<NavigationBarProps, 'user'>) => {
 
   return user ? (
     <user.component
-      className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-3 text-black"
+      className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-3 text-black select-none"
       role="img"
       title={user.name}
     >

@@ -216,7 +216,7 @@ const Root = () => {
           onLanguageClick={toggleMenu('lang')}
           logo={
             <NavLink to={`/${language}`} className="flex">
-              <div className="inline-flex select-none items-center gap-4">
+              <div className="inline-flex select-none items-center p-3">
                 {sm ? <LogoRgb language={language} size={32} /> : <LogoIconRgb size={32} />}
                 <span className="sr-only">{t('osaamispolku')}</span>
               </div>
@@ -225,19 +225,19 @@ const Root = () => {
           menuComponent={
             sm ? (
               <button
-                className="flex gap-4 justify-center items-center"
+                className="flex gap-4 justify-center items-center select-none"
                 aria-label={t('open-menu')}
                 onClick={toggleMenu('mega')}
               >
                 <>
-                  <span>{t('menu')}</span>
+                  <span className="py-3 pl-3">{t('menu')}</span>
                   <span className="size-7 flex justify-center items-center">
                     <MdMenu size={24} />
                   </span>
                 </>
               </button>
             ) : (
-              <button className="flex justify-self-end" aria-label={t('open-menu')} onClick={toggleMenu('mega')}>
+              <button className="flex justify-self-end p-3" aria-label={t('open-menu')} onClick={toggleMenu('mega')}>
                 <>
                   {megaMenuOpen ? (
                     <span className="size-7 flex justify-center items-center">
