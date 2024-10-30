@@ -41,6 +41,7 @@ const Favorites = () => {
     } else {
       setFilters([...filters, value]);
     }
+    void fetchPage({ page: 1, pageSize: pageSize });
   };
 
   const isFilterChecked = (value: MahdollisuusTyyppi) => filters.includes(value);
