@@ -34,20 +34,20 @@ export const ExperienceTable = ({
     <div className="overflow-x-auto">
       {rows.length > 0 && (
         <table className="w-full" border={0} cellPadding={0} cellSpacing={0}>
-          <thead>
-            <tr className="border-b border-inactive-gray text-left text-body-md">
-              <th scope="col" className="font-normal pr-7 pb-3">
+          <thead className="after:content-[''] after:block after:h-5">
+            <tr className="border-b border-inactive-gray text-left text-body-md font-normal">
+              <th scope="col" className="pr-7 pb-3">
                 {mainColumnHeader}
               </th>
               {sm && (
                 <>
-                  <th scope="col" className="font-normal pr-7 pb-3">
+                  <th scope="col" className="pr-7 pb-3">
                     {t('started')}
                   </th>
-                  <th scope="col" className="font-normal pr-7 pb-3">
+                  <th scope="col" className="pr-7 pb-3">
                     {t('ended')}
                   </th>
-                  <th scope="col" className={`font-normal pb-3 ${onNestedRowClick ? 'pr-7' : 'pr-5'}`.trim()}>
+                  <th scope="col" className={`pb-3 ${onNestedRowClick ? 'pr-7' : 'pr-5'}`.trim()}>
                     {t('competences')}
                   </th>
                 </>
@@ -55,9 +55,6 @@ export const ExperienceTable = ({
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td colSpan={5} className="py-3"></td>
-            </tr>
             {categorizedRows.map((row, index) => (
               <React.Fragment key={row.key}>
                 <ExperienceTableRow
@@ -76,19 +73,16 @@ export const ExperienceTable = ({
                     nested
                   />
                 ))}
-                <tr>
-                  <td colSpan={5} className="py-3"></td>
-                </tr>
                 {onAddNestedRowClick && addNewNestedLabel && (
                   <tr>
-                    <td colSpan={5}>
+                    <td
+                      colSpan={5}
+                      className={`pt-5 ${categorizedRows.length - 1 === index ? 'pb-7 sm:pb-11' : 'pb-7'}`.trim()}
+                    >
                       <Button variant="white" label={addNewNestedLabel} onClick={() => onAddNestedRowClick(row)} />
                     </td>
                   </tr>
                 )}
-                <tr>
-                  <td colSpan={5} className={categorizedRows.length - 1 === index ? ' py-5 sm:py-7' : 'py-5'}></td>
-                </tr>
               </React.Fragment>
             ))}
 
