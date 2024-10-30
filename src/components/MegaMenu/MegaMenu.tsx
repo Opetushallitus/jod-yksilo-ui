@@ -44,7 +44,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, user, logout }: M
 
   return (
     <div className="fixed top-0 sm:top-11 left-0 right-0 m-auto max-w-[1092px] bg-white shadow-border rounded-b-lg overflow-hidden">
-      <ul className="flex flex-row justify-end items-center pr-5 pt-5">
+      <ul className="flex flex-row justify-end items-center px-5 pt-3 sm:pt-5 pb-3 sm:pb-0">
         {!sm && megaMenuState === 'main' && (
           <>
             <li>
@@ -58,10 +58,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, user, logout }: M
         {megaMenuState === 'main' && (
           <li>
             <button onClick={doClose} className="flex items-center ml-5">
-              <span
-                aria-hidden
-                className={`text-black sm:text-secondary-gray flex select-none items-center justify-center self-center rounded-full`}
-              >
+              <span aria-hidden className={`text-black sm:text-secondary-gray p-3 sm:p-0`}>
                 {sm ? <MdOutlineCancel size={32} /> : <MdClose size={32} />}
               </span>
             </button>
