@@ -170,8 +170,8 @@ const Favorites = () => {
                 trend="NOUSEVA"
                 type={mahdollisuusTyyppi}
                 compareTo={{
-                  pathname: `/${language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.competences')}`,
-                  hash: t('job-opportunity.specific-professional-competences.title'),
+                  pathname: `/${language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`,
+                  hash: t('job-opportunity.competences.title'),
                 }}
               />
             </NavLink>

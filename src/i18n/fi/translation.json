@@ -11,6 +11,7 @@
   "choose": "Valitse",
   "close": "Sulje",
   "compare": "Vertaile",
+  "competence": "Osaaminen",
   "competences": "Osaamiset",
   "competences-of-your-choice": "Valitsemasi osaamiset",
   "content": "Sisältö",
@@ -73,6 +74,7 @@
   "expand-more": "Näytä lisää",
   "fit": "Sopivuus",
   "fit-of-result": "Tuloksen sopivuus",
+  "found": "Löytyi",
   "free-time-activities": {
     "activity-content": "Toiminnon sisältö",
     "activity-name": "Toiminnon nimi",
@@ -107,7 +109,8 @@
   "job-opportunity": {
     "competences": {
       "navigation": "Osaamisvaatimukset",
-      "route": "Osaamiset"
+      "route": "Osaamiset",
+      "title": "Osaamiset"
     },
     "description": "Kuvaus",
     "digital-skills-for-citizens": {
@@ -436,5 +439,6 @@
     "summary": "Yhteenveto",
     "workplace-or-job-description": "Työpaikka / toimenkuva"
   },
-  "workplace-competences": "Työpaikka osaamiset"
+  "workplace-competences": "Työpaikka osaamiset",
+  "your-competences": "Oma osaamisesi"
 }
