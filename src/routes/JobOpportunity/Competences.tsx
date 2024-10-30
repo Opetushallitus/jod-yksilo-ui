@@ -1,10 +1,8 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList, Title } from '@/components';
-import { useActionBar } from '@/hooks/useActionBar';
 import { getLocalizedText, sortByProperty } from '@/utils';
-import { Accordion, Button, Tag } from '@jod/design-system';
+import { Accordion, Tag } from '@jod/design-system';
 import React from 'react';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router-dom';
 import Tabs from './Tabs';
@@ -48,7 +46,6 @@ const Competences = () => {
       replace: true,
     },
   ];
-  const actionBar = useActionBar();
 
   return (
     <MainLayout
@@ -149,15 +146,6 @@ const Competences = () => {
           </Accordion>
         </div>
       </div>
-      {actionBar &&
-        createPortal(
-          <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button variant="white" label="TODO: Luo polku" />
-            <Button variant="white" label="TODO: Lisää suosikkeihin" />
-            <Button variant="white" label="TODO: Vertaile osaamisia" />
-          </div>,
-          actionBar,
-        )}
     </MainLayout>
   );
 };

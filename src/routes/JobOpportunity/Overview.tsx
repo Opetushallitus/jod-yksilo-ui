@@ -1,9 +1,10 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList, Title } from '@/components';
-import { useActionBar } from '@/hooks/useActionBar';
+import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
+import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
-import { Accordion, Button } from '@jod/design-system';
-import { createPortal } from 'react-dom';
+import { Accordion } from '@jod/design-system';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router-dom';
 import Tabs from './Tabs';
@@ -14,8 +15,17 @@ const Overview = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { tyomahdollisuus, ammatit } = useOutletContext<LoaderData>();
+  const { tyomahdollisuus, ammatit, osaamiset } = useOutletContext<LoaderData>();
+  const toolStore = useToolStore();
   const title = getLocalizedText(tyomahdollisuus?.otsikko);
+  const omatOsaamisetUris = React.useMemo(
+    () => toolStore.osaamiset?.map((osaaminen) => osaaminen.id),
+    [toolStore.osaamiset],
+  );
+  const competencesTableData = React.useMemo(
+    () => osaamiset.map((competence) => ({ ...competence, profiili: omatOsaamisetUris?.includes(competence.uri) })),
+    [osaamiset, omatOsaamisetUris],
+  );
   const clusterSize = tyomahdollisuus?.jakaumat?.ammatti?.maara;
   const routes: RoutesNavigationListProps['routes'] = [
     {
@@ -50,6 +60,12 @@ const Overview = () => {
     },
     {
       active: false,
+      name: t('job-opportunity.competences.title'),
+      path: `#${t('job-opportunity.competences.title')}`,
+      replace: true,
+    },
+    {
+      active: false,
       name: t('job-opportunity.employment-trends.title'),
       path: `#${t('job-opportunity.employment-trends.title')}`,
       replace: true,
@@ -61,7 +77,6 @@ const Overview = () => {
       replace: true,
     },
   ];
-  const actionBar = useActionBar();
 
   return (
     <MainLayout
@@ -166,6 +181,24 @@ const Overview = () => {
         <div>
           <Accordion
             title={
+              <h2 id={t('job-opportunity.competences.title')} className="text-heading-3 scroll-mt-[96px]">
+                {t('competences')}
+              </h2>
+            }
+            expandMoreText={t('expand-more')}
+            expandLessText={t('expand-less')}
+            lang={language}
+          >
+            <CompareCompetencesTable
+              opportunityName={tyomahdollisuus?.otsikko}
+              rows={competencesTableData}
+              className="mt-4"
+            />
+          </Accordion>
+        </div>
+        <div>
+          <Accordion
+            title={
               <h2 id={t('job-opportunity.employment-trends.title')} className="text-heading-3 scroll-mt-[96px]">
                 {t('job-opportunity.employment-trends.title')}
               </h2>
@@ -194,15 +227,6 @@ const Overview = () => {
           </Accordion>
         </div>
       </div>
-      {actionBar &&
-        createPortal(
-          <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button variant="white" label="TODO: Luo polku" />
-            <Button variant="white" label="TODO: Lisää suosikkeihin" />
-            <Button variant="white" label="TODO: Vertaile osaamisia" />
-          </div>,
-          actionBar,
-        )}
     </MainLayout>
   );
 };

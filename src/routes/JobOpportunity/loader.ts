@@ -30,6 +30,7 @@ const loader = (async ({ request, params }) => {
       request.signal,
     ),
   ]);
+
   return { tyomahdollisuus: data, osaamiset: competences, ammatit: occupations };
 }) satisfies LoaderFunction;
 
