@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { MdArrowForward } from 'react-icons/md';
 import { Link, useRouteLoaderData } from 'react-router-dom';
 import { generateProfileLink } from '../utils';
-import { COMPETENCE_TYPES, GroupByProps, MobileFilterButton, groupByHeaderClasses } from './constants';
+import { FILTERS_ORDER, GroupByProps, MobileFilterButton, groupByHeaderClasses } from './constants';
 
 export const GroupBySource = ({
   filters,
@@ -62,7 +62,7 @@ export const GroupBySource = ({
         {mobileFilterOpenerComponent}
       </div>
       <div className="mb-10">
-        {COMPETENCE_TYPES.map((competence) => {
+        {FILTERS_ORDER.map((competence) => {
           return (
             <React.Fragment key={competence}>
               <div className={groupByHeaderClasses}>{t(`my-competences.by-${competence}`)}</div>
