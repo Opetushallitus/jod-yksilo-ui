@@ -6,7 +6,6 @@ import {
   Title,
   type RoutesNavigationListProps,
 } from '@/components';
-import { OsaaminenLahdeTyyppi } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
@@ -18,7 +17,14 @@ import { useTranslation } from 'react-i18next';
 import { MdTune } from 'react-icons/md';
 import { useLoaderData, useOutletContext } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
-import { FILTERS_ORDER, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME, type FiltersType } from './constants';
+import {
+  CompetenceFilter,
+  FILTERS_ORDER,
+  GROUP_BY_ALPHABET,
+  GROUP_BY_SOURCE,
+  GROUP_BY_THEME,
+  type FiltersType,
+} from './constants';
 
 interface Kokemus {
   id?: string;
@@ -44,14 +50,13 @@ const Competences = () => {
     KOULUTUS: [],
     PATEVYYS: [],
     MUU_OSAAMINEN: [],
-    KIINNOSTUS: [],
   });
   const [filterKeys, setFilterKeys] = React.useState<(keyof FiltersType)[]>([]);
   const [showFilters, setShowFilters] = React.useState(false);
   const { sm } = useMediaQueries();
 
   const mapExperienceToFilter = React.useCallback(
-    (currentFilters: FiltersType, type: OsaaminenLahdeTyyppi) => (experience: Kokemus) => ({
+    (currentFilters: FiltersType, type: CompetenceFilter) => (experience: Kokemus) => ({
       label: experience.nimi[locale] ?? '',
       value: experience.id ?? experience.uri ?? '',
       checked: currentFilters?.[type]?.find((item) => item.value === experience.id)?.checked ?? true,
@@ -102,7 +107,7 @@ const Competences = () => {
   // Determines if osaamiset from a specific source should be visible. Id is the id of the source (eg. koulutus or toimenkuva).
   // Muu osaaminen doesn't have any sources, so they'll show up if any are marked as checked.
   const isOsaaminenVisible = React.useCallback(
-    (type: OsaaminenLahdeTyyppi, id?: string): boolean => {
+    (type: CompetenceFilter, id?: string): boolean => {
       return type === 'MUU_OSAAMINEN'
         ? selectedFilters.MUU_OSAAMINEN.length > 0 && selectedFilters.MUU_OSAAMINEN.some((item) => item.checked)
         : selectedFilters[type]?.find((item) => item.value === id)?.checked ?? false;

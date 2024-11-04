@@ -1,11 +1,11 @@
 import { SimpleNavigationList } from '@/components';
-import { OsaaminenLahdeTyyppi } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import {
+  CompetenceFilter,
+  FiltersType,
   GROUP_BY_ALPHABET,
   GROUP_BY_SOURCE,
   GROUP_BY_THEME,
-  type FiltersType,
 } from '@/routes/Profile/Competences/constants';
 import { Accordion, Checkbox, RadioButton, RadioButtonGroup, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -51,7 +51,7 @@ export const Filters = ({ groupBy, setGroupBy, filterKeys, selectedFilters, setS
   const { sm } = useMediaQueries();
 
   // Toggle single filter item
-  const toggleSingleFilter = (type: OsaaminenLahdeTyyppi, index: number) => () => {
+  const toggleSingleFilter = (type: CompetenceFilter, index: number) => () => {
     const newFilters = { ...selectedFilters };
     newFilters[type][index] = newFilters[type][index] ?? { checked: true };
     newFilters[type][index].checked = !newFilters[type][index].checked;
@@ -59,13 +59,13 @@ export const Filters = ({ groupBy, setGroupBy, filterKeys, selectedFilters, setS
   };
 
   // Check if any filter of a specific type is checked
-  const isFilterTypeChecked = (type: OsaaminenLahdeTyyppi) => {
+  const isFilterTypeChecked = (type: CompetenceFilter) => {
     const filter = selectedFilters[type];
     return (filter.length > 0 && filter?.some((item) => item.checked)) ?? false;
   };
 
   // Toggle all filters of a specific type
-  const toggleFiltersByType = (type: OsaaminenLahdeTyyppi) => () => {
+  const toggleFiltersByType = (type: CompetenceFilter) => () => {
     const newFilter = { ...selectedFilters };
     newFilter[type] = newFilter[type] ?? [];
 
