@@ -1,3 +1,5 @@
+import { client } from '@/api/client';
+import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import { components } from '@/api/schema';
 import {
   HelpingToolLinkItem,
@@ -5,21 +7,24 @@ import {
   HelpingToolsContent,
   OsaamisSuosittelija,
 } from '@/components';
-import { useDebounceState } from '@/hooks/useDebounceState';
-import { Accordion, InputField, useMediaQueries } from '@jod/design-system';
+import { OsaaminenLahdeTyyppi } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
+import { useToolStore } from '@/stores/useToolStore';
+import { removeDuplicates } from '@/utils';
+import { Accordion, Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdOutlineInterests, MdOutlineQuiz } from 'react-icons/md';
 import { useOutletContext, useRouteLoaderData } from 'react-router-dom';
 import { generateProfileLink } from '../Profile/utils';
-import { ContextType } from './types';
+import { ToolLoaderData } from './loader';
 
-const HelpingToolsContents = () => {
+const Interests = () => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
-
+  const toolStore = useToolStore();
+  const { isLoggedIn } = useOutletContext<ToolLoaderData>();
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
 
   const interestsLink = React.useMemo(
@@ -27,81 +32,88 @@ const HelpingToolsContents = () => {
     [data, language, t],
   );
 
-  return (
-    <HelpingToolsContent text={t('tool.interests.help-text')}>
-      <HelpingToolProfileLinkItem
-        profileLink={interestsLink}
-        icon={<MdOutlineInterests size={24} color="#006DB3" />}
-        title={t('profile.interests.title')}
-      />
-      <HelpingToolLinkItem
-        icon={<MdOutlineQuiz size={24} color="#006DB3" />}
-        title={t('tool.interests.riasec-test')}
-        component={({ children }) => <div className="bg-todo">{children}</div>}
-      />
-      <HelpingToolLinkItem
-        icon={<MdOutlineInterests size={24} color="#AD4298" />}
-        title={t('tool.interests.interest-barometer')}
-        component={({ children }) => <div className="bg-todo">{children}</div>}
-      />
-    </HelpingToolsContent>
-  );
-};
+  const importFromProfile = React.useCallback(async () => {
+    const { data } = await client.GET('/api/profiili/kiinnostukset/osaamiset');
+    const kiinnostukset = [
+      ...(await osaamisetService.find(data)).map((k) => ({
+        id: k.uri,
+        nimi: k.nimi,
+        kuvaus: k.kuvaus,
+        tyyppi: 'KIINNOSTUS' as OsaaminenLahdeTyyppi,
+      })),
+      ...toolStore.kiinnostukset.filter((o) => o.tyyppi === 'KARTOITETTU'),
+    ];
+    toolStore.setKiinnostukset(removeDuplicates(kiinnostukset, 'id'));
+  }, [toolStore]);
 
-const Interests = () => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
-  const { sm } = useMediaQueries();
-
-  const [debouncedKiinnostus, kiinnostus, setKiinnostus] = useDebounceState('', 500);
-  const {
-    interests: [kiinnostukset, setKiinnostukset],
-  } = useOutletContext<ContextType>();
+  const exportToProfile = React.useCallback(async () => {
+    await client.PUT('/api/profiili/kiinnostukset/osaamiset', {
+      body: toolStore.kiinnostukset.map((k) => k.id),
+    });
+  }, [toolStore]);
 
   return (
-    <div className="flex flex-col">
-      <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
-        <div className="order-1 col-span-1 sm:col-span-2">
-          <h1 className="mb-5 mt-7 text-heading-1 text-black">{t('tool.interests.heading-1')}</h1>
-
-          <div className="flex flex-col pb-7 gap-6 text-body-md text-black">
-            <p>{t('tool.interests.page-description')}</p>
-            <p>{t('tool.interests.field-description')}</p>
-          </div>
-        </div>
-
-        <div className="order-3 col-span-1 sm:order-2 sm:col-span-2">
-          <div className="mb-5">
-            <InputField
-              label={t('tool.interests.input-field-placeholder')}
-              placeholder={t('tool.interests.input-field-placeholder')}
-              value={kiinnostus}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setKiinnostus(event.target.value)}
-            />
-          </div>
-          <OsaamisSuosittelija
-            description={debouncedKiinnostus}
-            onChange={setKiinnostukset}
-            value={kiinnostukset}
-            sourceType="KIINNOSTUS"
-          />
-        </div>
-        <div className="order-2 col-span-1 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0 bg-todo">
-          {sm ? (
-            <>
-              <span className="text-heading-4 text-black">{t('tools')}</span>
-              <HelpingToolsContents />
-            </>
-          ) : (
-            <Accordion title={t('tools')} lang={language}>
-              <HelpingToolsContents />
-            </Accordion>
-          )}
-        </div>
+    <>
+      <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3 sm:mb-5">{t('tool.my-own-data.interests.title')}</h2>
+      <p className="text-body-md-mobile sm:text-body-md whitespace-pre-wrap mb-6">
+        {t('tool.my-own-data.interests.description')}
+      </p>
+      <div className="mb-6">
+        <OsaamisSuosittelija
+          onChange={toolStore.setKiinnostukset}
+          value={toolStore.kiinnostukset}
+          className="!bg-[#F7F7F9]"
+        />
       </div>
-    </div>
+      <div className="flex flex-wrap gap-5 mb-7">
+        <Button
+          label={t('tool.my-own-data.interests.import')}
+          onClick={() => void importFromProfile()}
+          disabled={!isLoggedIn}
+        />
+        <Button
+          label={t('tool.my-own-data.interests.export')}
+          onClick={() => void exportToProfile()}
+          disabled={!isLoggedIn}
+        />
+        <ConfirmDialog
+          title={t('tool.my-own-data.interests.delete-all.title')}
+          onConfirm={() => toolStore.setKiinnostukset([])}
+          confirmText={t('delete')}
+          cancelText={t('cancel')}
+          variant="destructive"
+          description={t('tool.my-own-data.interests.delete-all.description')}
+        >
+          {(showDialog: () => void) => (
+            <Button
+              variant="gray-delete"
+              label={t('tool.my-own-data.interests.delete-all.title')}
+              onClick={showDialog}
+              disabled={toolStore.kiinnostukset.length === 0}
+            />
+          )}
+        </ConfirmDialog>
+      </div>
+      <Accordion title={t('tool.tools')} lang={language}>
+        <HelpingToolsContent text={t('tool.my-own-data.interests.help-text')}>
+          <HelpingToolProfileLinkItem
+            profileLink={interestsLink}
+            icon={<MdOutlineInterests size={24} color="#006DB3" />}
+            title={t('profile.interests.title')}
+          />
+          <HelpingToolLinkItem
+            icon={<MdOutlineQuiz size={24} color="#006DB3" />}
+            title={t('tool.my-own-data.interests.riasec-test')}
+            component={({ children }) => <div className="bg-todo">{children}</div>}
+          />
+          <HelpingToolLinkItem
+            icon={<MdOutlineInterests size={24} color="#AD4298" />}
+            title={t('tool.my-own-data.interests.interest-barometer')}
+            component={({ children }) => <div className="bg-todo">{children}</div>}
+          />
+        </HelpingToolsContent>
+      </Accordion>
+    </>
   );
 };
 

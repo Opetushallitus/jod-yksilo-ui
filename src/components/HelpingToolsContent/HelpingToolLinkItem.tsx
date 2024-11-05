@@ -34,9 +34,9 @@ export const HelpingToolLinkItem = ({
   return (
     <li className="group">
       <Component>
-        <div className="flex gap-x-4">
+        <div className="flex gap-x-3">
           {icon}
-          <div className="text-heading-4 text-black group-hover:text-accent group-hover:underline">{title}</div>
+          <div className="text-heading-4 text-black group-hover:text-link group-hover:underline">{title}</div>
         </div>
       </Component>
     </li>

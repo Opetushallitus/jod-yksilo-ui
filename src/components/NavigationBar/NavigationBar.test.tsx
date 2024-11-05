@@ -15,7 +15,7 @@ vi.mock('react-router-dom', () => ({
 }));
 
 describe('NavigationBar', () => {
-  vi.mocked(useMediaQueries).mockReturnValue({ sm: true, lg: false });
+  vi.mocked(useMediaQueries).mockReturnValue({ sm: true, md: false, lg: false, xl: false });
 
   const logo = <div>logo</div>;
 

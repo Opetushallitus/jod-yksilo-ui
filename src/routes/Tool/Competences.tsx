@@ -1,20 +1,23 @@
+import { client } from '@/api/client';
 import { components } from '@/api/schema';
-import { HelpingToolProfileLinkItem, HelpingToolsContent, OsaamisSuosittelija } from '@/components';
-import { useDebounceState } from '@/hooks/useDebounceState';
-import { Accordion, InputField, useMediaQueries } from '@jod/design-system';
+import { HelpingToolProfileLinkItem, HelpingToolsContent, OsaaminenValue, OsaamisSuosittelija } from '@/components';
+import { useToolStore } from '@/stores/useToolStore';
+import { removeDuplicates } from '@/utils';
+import { Accordion, Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdLightbulbOutline, MdOutlineSailing, MdOutlineSchool } from 'react-icons/md';
-import { TbBriefcase2 } from 'react-icons/tb';
+import { MdLightbulbOutline, MdOutlineSailing, MdOutlineSchool, MdWorkOutline } from 'react-icons/md';
 import { useOutletContext, useRouteLoaderData } from 'react-router-dom';
 import { generateProfileLink } from '../Profile/utils';
-import { ContextType } from './types';
+import { ToolLoaderData } from './loader';
 
-const HelpingToolsContents = () => {
+const Competences = () => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
+  const toolStore = useToolStore();
+  const { isLoggedIn } = useOutletContext<ToolLoaderData>();
 
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
   const competencesSlug = 'slugs.profile.competences';
@@ -36,81 +39,114 @@ const HelpingToolsContents = () => {
     [data, language, t],
   );
 
+  const importFromProfile = React.useCallback(async () => {
+    const osaamiset = (await client.GET('/api/profiili/osaamiset')).data ?? [];
+    const restOsaamiset = osaamiset.filter((o) => o.lahde.tyyppi !== 'MUU_OSAAMINEN');
+
+    const muuOsaaminenOsaamiset = osaamiset.filter((o) => o.lahde.tyyppi === 'MUU_OSAAMINEN');
+    const muuOsaaminenAndKartoitettuOsaamiset = [
+      ...muuOsaaminenOsaamiset.map(
+        (osaaminen): OsaaminenValue => ({
+          id: osaaminen.osaaminen.uri,
+          nimi: osaaminen.osaaminen.nimi,
+          kuvaus: osaaminen.osaaminen.kuvaus,
+          tyyppi: osaaminen.lahde.tyyppi,
+        }),
+      ),
+      ...toolStore.osaamiset.filter((o) => o.tyyppi === 'KARTOITETTU'),
+    ];
+
+    toolStore.setOsaamiset([
+      ...removeDuplicates(muuOsaaminenAndKartoitettuOsaamiset, 'id'),
+      ...restOsaamiset.map(
+        (osaaminen): OsaaminenValue => ({
+          id: osaaminen.osaaminen.uri,
+          nimi: osaaminen.osaaminen.nimi,
+          kuvaus: osaaminen.osaaminen.kuvaus,
+          tyyppi: osaaminen.lahde.tyyppi,
+        }),
+      ),
+    ]);
+  }, [toolStore]);
+
+  const exportToProfile = React.useCallback(async () => {
+    await client.PUT('/api/profiili/muu-osaaminen', {
+      body: toolStore.osaamiset
+        .filter((o) => o.tyyppi === 'KARTOITETTU' || o.tyyppi === 'MUU_OSAAMINEN')
+        .map((o) => o.id),
+    });
+  }, [toolStore]);
+
   return (
-    <HelpingToolsContent text={t('profile.help-text')}>
-      <HelpingToolProfileLinkItem
-        profileLink={educationLink}
-        icon={<MdOutlineSchool size={24} color="#00818A" />}
-        title={t('profile.education-history.title')}
-      />
-      <HelpingToolProfileLinkItem
-        profileLink={workLink}
-        icon={<TbBriefcase2 size={24} color="#AD4298" />}
-        title={t('profile.work-history.title')}
-      />
-      <HelpingToolProfileLinkItem
-        profileLink={freeTimeLink}
-        icon={<MdOutlineSailing size={24} className="text-accent" />}
-        title={t('profile.free-time-activities.title')}
-      />
-      <HelpingToolProfileLinkItem
-        profileLink={somethingElseLink}
-        icon={<MdLightbulbOutline size={24} className="text-secondary-5" />}
-        title={t('profile.something-else.title')}
-      />
-    </HelpingToolsContent>
-  );
-};
-
-const Competences = () => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
-  const { sm } = useMediaQueries();
-
-  const [debouncedTaito, taito, setTaito] = useDebounceState('', 500);
-  const {
-    competences: [osaamiset, setOsaamiset],
-  } = useOutletContext<ContextType>();
-
-  return (
-    <div className="flex flex-col">
-      <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
-        <div className="order-1 col-span-1 sm:col-span-2">
-          <h1 className="mb-5 mt-7 text-heading-1 text-black">{t('tool.competences.heading-1')}</h1>
-
-          <div className="flex flex-col pb-7 gap-6 text-body-md text-black">
-            <p>{t('tool.competences.page-description')}</p>
-            <p>{t('tool.competences.field-description')}</p>
-          </div>
-        </div>
-
-        <div className="order-3 col-span-1 sm:order-2 sm:col-span-2">
-          <div className="mb-5">
-            <InputField
-              label={t('tool.competences.input-field-placeholder')}
-              placeholder={t('tool.competences.input-field-placeholder')}
-              value={taito}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTaito(event.target.value)}
-            />
-          </div>
-          <OsaamisSuosittelija description={debouncedTaito} onChange={setOsaamiset} value={osaamiset} categorized />
-        </div>
-        <div className="order-2 col-span-1 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0 bg-todo">
-          {sm ? (
-            <>
-              <span className="text-heading-4 text-black">{t('tools')}</span>
-              <HelpingToolsContents />
-            </>
-          ) : (
-            <Accordion title={t('tools')} lang={language}>
-              <HelpingToolsContents />
-            </Accordion>
-          )}
-        </div>
+    <>
+      <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3 sm:mb-5">
+        {t('tool.my-own-data.competences.title')}
+      </h2>
+      <p className="text-body-md-mobile sm:text-body-md whitespace-pre-wrap mb-6">
+        {t('tool.my-own-data.competences.description')}
+      </p>
+      <div className="mb-6">
+        <OsaamisSuosittelija
+          onChange={toolStore.setOsaamiset}
+          value={toolStore.osaamiset}
+          categorized
+          className="!bg-[#F7F7F9]"
+        />
       </div>
-    </div>
+      <div className="flex flex-wrap gap-5 mb-7">
+        <Button
+          label={t('tool.my-own-data.competences.import')}
+          onClick={() => void importFromProfile()}
+          disabled={!isLoggedIn}
+        />
+        <Button
+          label={t('tool.my-own-data.competences.export')}
+          onClick={() => void exportToProfile()}
+          disabled={!isLoggedIn}
+        />
+        <ConfirmDialog
+          title={t('tool.my-own-data.competences.delete-all.title')}
+          onConfirm={() => toolStore.setOsaamiset([])}
+          confirmText={t('delete')}
+          cancelText={t('cancel')}
+          variant="destructive"
+          description={t('tool.my-own-data.competences.delete-all.description')}
+        >
+          {(showDialog: () => void) => (
+            <Button
+              variant="gray-delete"
+              label={t('tool.my-own-data.competences.delete-all.title')}
+              onClick={showDialog}
+              disabled={toolStore.osaamiset.length === 0}
+            />
+          )}
+        </ConfirmDialog>
+      </div>
+      <Accordion title={t('tool.tools')} lang={language}>
+        <HelpingToolsContent text={t('profile.help-text')}>
+          <HelpingToolProfileLinkItem
+            profileLink={workLink}
+            icon={<MdWorkOutline size={24} color="#AD4298" />}
+            title={t('profile.work-history.title')}
+          />
+          <HelpingToolProfileLinkItem
+            profileLink={educationLink}
+            icon={<MdOutlineSchool size={24} color="#00818A" />}
+            title={t('profile.education-history.title')}
+          />
+          <HelpingToolProfileLinkItem
+            profileLink={freeTimeLink}
+            icon={<MdOutlineSailing size={24} className="text-accent" />}
+            title={t('profile.free-time-activities.title')}
+          />
+          <HelpingToolProfileLinkItem
+            profileLink={somethingElseLink}
+            icon={<MdLightbulbOutline size={24} className="text-secondary-5" />}
+            title={t('profile.something-else.title')}
+          />
+        </HelpingToolsContent>
+      </Accordion>
+    </>
   );
 };
 

@@ -1,7 +1,4 @@
 import { OsaamisSuosittelija } from '@/components';
-import { useDebounceState } from '@/hooks/useDebounceState';
-import { InputField } from '@jod/design-system';
-import { ChangeEvent } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { WorkHistoryForm } from './utils';
@@ -16,7 +13,6 @@ const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
     i18n: { language },
   } = useTranslation();
   const { getValues, watch, control } = useFormContext<WorkHistoryForm>();
-  const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const id = watch(`toimenkuvat.${toimenkuva}.id`);
 
   return (
@@ -28,25 +24,11 @@ const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
         {getValues(`nimi.${language}`)} - {getValues(`toimenkuvat.${toimenkuva}.nimi.${language}`)}
       </h3>
       <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.work-history.modals.competences-description')}</p>
-      <div className="mb-6">
-        <InputField
-          label={t('work-history.job-duties')}
-          value={description}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
-          help={t('profile.work-history.modals.competences-help')}
-        />
-      </div>
-
       <Controller
         control={control}
         name={`toimenkuvat.${toimenkuva}.osaamiset`}
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija
-            description={debouncedDescription}
-            onChange={onChange}
-            value={value}
-            sourceType="TOIMENKUVA"
-          />
+          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="TOIMENKUVA" />
         )}
       />
     </>

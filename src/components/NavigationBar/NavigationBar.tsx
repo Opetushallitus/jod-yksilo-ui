@@ -34,7 +34,7 @@ export const NavigationBar = ({ logo, menuComponent, onLanguageClick, user }: Na
     <div className="min-w-min shadow-border bg-white">
       <nav
         role="navigation"
-        className="mx-auto flex h-11 items-center gap-4 px-5 sm:px-7 py-3 font-semibold lg:container"
+        className="mx-auto flex h-11 items-center gap-4 px-5 sm:px-7 py-3 font-semibold xl:container"
       >
         {logo}
         <ul className="inline-flex items-center gap-3 sm:gap-5 ml-auto">

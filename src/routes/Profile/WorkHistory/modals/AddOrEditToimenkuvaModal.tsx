@@ -2,7 +2,6 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
-import { useDebounceState } from '@/hooks/useDebounceState';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -82,7 +81,6 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
 };
 
 const OsaamisetStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
-  const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const { t } = useTranslation();
   const { control } = useFormContext<ToimenkuvaForm>();
   return (
@@ -91,25 +89,11 @@ const OsaamisetStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
         {t(toimenkuvaId ? 'profile.competences.edit' : 'work-history.identify-competences')}
       </h2>
       <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.work-history.modals.competences-description')}</p>
-      <div className="mb-6">
-        <InputField
-          label={t('profile.competences.edit')}
-          value={description}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
-          help={t('profile.work-history.modals.competences-help')}
-        />
-      </div>
-
       <Controller
         control={control}
         name="osaamiset"
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija
-            description={debouncedDescription}
-            onChange={onChange}
-            value={value}
-            sourceType="TOIMENKUVA"
-          />
+          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="TOIMENKUVA" />
         )}
       />
     </>

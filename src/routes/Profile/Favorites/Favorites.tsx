@@ -14,7 +14,7 @@ import { Button, Checkbox, Pagination } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
 
 const Favorites = () => {
@@ -153,28 +153,25 @@ const Favorites = () => {
         {favoritesPerType.map((mahdollisuus) => {
           const { id, mahdollisuusTyyppi } = mahdollisuus;
           return (
-            <NavLink
+            <OpportunityCard
               key={id}
               to={`/${language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`}
-            >
-              <OpportunityCard
-                description={getLocalizedText(mahdollisuus.tiivistelma)}
-                employmentOutlook={2}
-                hasRestrictions
-                industryName="TODO: Lorem ipsum dolor"
-                isFavorite={true}
-                isLoggedIn={true}
-                mostCommonEducationBackground="TODO: Lorem ipsum dolor"
-                name={getLocalizedText(mahdollisuus.otsikko)}
-                toggleFavorite={() => void deleteSuosikki(id)}
-                trend="NOUSEVA"
-                type={mahdollisuusTyyppi}
-                compareTo={{
-                  pathname: `/${language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`,
-                  hash: t('job-opportunity.competences.title'),
-                }}
-              />
-            </NavLink>
+              description={getLocalizedText(mahdollisuus.tiivistelma)}
+              employmentOutlook={2}
+              hasRestrictions
+              industryName="TODO: Lorem ipsum dolor"
+              isFavorite={true}
+              isLoggedIn={true}
+              mostCommonEducationBackground="TODO: Lorem ipsum dolor"
+              name={getLocalizedText(mahdollisuus.otsikko)}
+              toggleFavorite={() => void deleteSuosikki(id)}
+              trend="NOUSEVA"
+              type={mahdollisuusTyyppi}
+              compareTo={{
+                pathname: `/${language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`,
+                hash: t('job-opportunity.competences.title'),
+              }}
+            />
           );
         })}
       </div>
