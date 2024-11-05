@@ -1,9 +1,8 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaaminenValue, OsaamisSuosittelija } from '@/components';
-import { useDebounceState } from '@/hooks/useDebounceState';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, InputField, Modal } from '@jod/design-system';
+import { Button, Modal } from '@jod/design-system';
 import React from 'react';
 import { Controller, Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -22,7 +21,6 @@ interface KiinnostusForm {
 
 const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
   const { t } = useTranslation();
-  const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const data = (useLoaderData() as components['schemas']['OsaaminenDto'][]) ?? [];
 
   const formId = React.useId();
@@ -88,26 +86,11 @@ const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
             <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">
               {t('profile.interests.edit-interests')}
             </h2>
-
-            <div className="mb-6">
-              <InputField
-                label={t('profile.interests.write-what-interests-you')}
-                value={description}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
-                placeholder={t('profile.interests.write-what-interests-you')}
-                help="TODO: Help text"
-              />
-            </div>
             <Controller
               control={methods.control}
               name="kiinnostukset"
               render={({ field: { onChange, value } }) => (
-                <OsaamisSuosittelija
-                  description={debouncedDescription}
-                  onChange={onChange}
-                  value={value}
-                  sourceType="KIINNOSTUS"
-                />
+                <OsaamisSuosittelija onChange={onChange} value={value} sourceType="KIINNOSTUS" />
               )}
             />
           </Form>

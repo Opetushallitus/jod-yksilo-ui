@@ -4,6 +4,7 @@ import { ErrorNote, useErrorNote } from '@/components/ErrorNote';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
 import { ActionBarContext } from '@/hooks/useActionBar';
+import { useToolStore } from '@/stores/useToolStore';
 import { Footer, PopupList, PopupListItem, SkipLink, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -127,8 +128,10 @@ const Root = () => {
   }, [language]);
 
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
+  const toolStore = useToolStore();
 
   const logout = () => {
+    toolStore.reset();
     logoutForm.current?.submit();
   };
 
@@ -255,7 +258,7 @@ const Root = () => {
           user={getUserData()}
         />
         {langMenuOpen && (
-          <div className="relative lg:container mx-auto">
+          <div className="relative xl:container mx-auto">
             <div className="absolute right-[50px] translate-y-7">
               <LanguageMenu onClick={changeLanguage} />
             </div>

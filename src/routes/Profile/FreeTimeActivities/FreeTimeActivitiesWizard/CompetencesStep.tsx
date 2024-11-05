@@ -1,7 +1,4 @@
 import { OsaamisSuosittelija } from '@/components';
-import { useDebounceState } from '@/hooks/useDebounceState';
-import { InputField } from '@jod/design-system';
-import { ChangeEvent } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FreeTimeActivitiesForm } from './utils';
@@ -16,7 +13,6 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
     i18n: { language },
   } = useTranslation();
   const { getValues, watch, control } = useFormContext<FreeTimeActivitiesForm>();
-  const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const id = watch(`patevyydet.${patevyys}.id`);
 
   return (
@@ -32,26 +28,11 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
         simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
         in albucius nominavi principes eum, quem facilisi cotidieque mel no.
       </p>
-      <div className="mb-6">
-        <InputField
-          label={t('free-time-activities.activity-content')}
-          value={description}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
-          placeholder="TODO: Lorem ipsum dolor sit amet"
-          help="TODO: Help text"
-        />
-      </div>
-
       <Controller
         control={control}
         name={`patevyydet.${patevyys}.osaamiset`}
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija
-            description={debouncedDescription}
-            onChange={onChange}
-            value={value}
-            sourceType="PATEVYYS"
-          />
+          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="PATEVYYS" />
         )}
       />
     </>

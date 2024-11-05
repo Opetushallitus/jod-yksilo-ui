@@ -1,42 +1,25 @@
 import { client } from '@/api/client';
-import { OsaaminenDto, osaamiset as osaamisetService } from '@/api/osaamiset';
 import { components } from '@/api/schema';
-import { removeDuplicates } from '@/utils';
+import { useToolStore } from '@/stores/useToolStore';
 import { LoaderFunction } from 'react-router-dom';
 
-type YksilonOsaaminenDto = components['schemas']['YksilonOsaaminenDto'];
-
 export interface ToolLoaderData {
-  osaamiset: YksilonOsaaminenDto[];
-  kiinnostukset: OsaaminenDto[];
-  suosikit: components['schemas']['SuosikkiDto'][];
   isLoggedIn: boolean;
 }
 
 export default (async ({ request, context }) => {
-  let osaamiset: ToolLoaderData['osaamiset'] = [];
-  let kiinnostukset: ToolLoaderData['kiinnostukset'] = [];
-  let suosikit: ToolLoaderData['suosikit'] = [];
+  const state = useToolStore.getState();
 
-  if (context) {
-    const [osaamisetResponse, kiinnostuksetResponse, suosikitResponse] = await Promise.all([
-      client.GET('/api/profiili/osaamiset', {
-        signal: request.signal,
-      }),
-      client
-        .GET('/api/profiili/kiinnostukset/osaamiset', {
-          signal: request.signal,
-        })
-        .then((response) => osaamisetService.find(response.data)),
-
-      client.GET('/api/profiili/suosikit', { signal: request.signal }),
-    ]);
-
-    const { data: osaamisetData = [] } = osaamisetResponse;
-    kiinnostukset = kiinnostuksetResponse;
-    osaamiset = removeDuplicates(osaamisetData, 'osaaminen.uri');
-    suosikit = suosikitResponse.data ?? [];
+  // Load tyomahdollisuudet and ehdotukset if they are not already loaded
+  if (state.tyomahdollisuudet.length === 0) {
+    await state.updateEhdotuksetAndTyomahdollisuudet();
   }
 
-  return { osaamiset, kiinnostukset, suosikit, isLoggedIn: !!context } as ToolLoaderData;
+  // Load suosikit if the user is logged in
+  if (context) {
+    const suosikitResponse = await client.GET('/api/profiili/suosikit', { signal: request.signal });
+    state.setSuosikit(suosikitResponse.data ?? []);
+  }
+
+  return { isLoggedIn: !!context } as ToolLoaderData;
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

@@ -1,5 +1,5 @@
-import { SelectionCard, useMediaQueries } from '@jod/design-system';
-import React from 'react';
+import { useToolStore } from '@/stores/useToolStore';
+import { SelectionCard } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 
 const SomethingElseIcon = () => (
@@ -254,95 +254,76 @@ const CompetenceIcon = () => (
     />
   </svg>
 );
+
 const ToolTipContent = () => {
   const { t } = useTranslation();
 
   return (
     <>
-      <div className="text-heading-4 mb-4">{t('tool.goals.selection-info-card-title')}</div>
-      <p>{t('tool.goals.selection-info-card-description')}</p>
+      <div className="text-heading-4 mb-4">{t('tool.my-own-data.goals.selection-info-card-title')}</div>
+      <p>{t('tool.my-own-data.goals.selection-info-card-description')}</p>
     </>
   );
 };
 
-const SelectionInfoCard = () => {
-  const { t } = useTranslation();
-
-  return (
-    <div className="bg-white px-7 py-6 rounded text-body-md font-arial">
-      <span className="font-bold">{t('tool.goals.selection-info-card-title')}</span>
-      <p>{t('tool.goals.selection-info-card-description')}</p>
-    </div>
-  );
-};
 const Goals = () => {
   const { t } = useTranslation();
-  const { sm } = useMediaQueries();
-  const [selectedCard, setSelectedCard] = React.useState<string | null>(null);
-
-  const toggleCardSelection = (cardId: string) => {
-    setSelectedCard(selectedCard === cardId ? null : cardId);
-  };
+  const toolStore = useToolStore();
 
   return (
-    <div className="flex flex-col">
-      <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-3">
-        <div className="order-1 col-span-1 sm:col-span-2">
-          <h1 className="mb-5 mt-7 text-heading-1 text-black">{t('tool.goals.heading-1')}</h1>
-
-          <div className="pb-7 text-black flex flex-col gap-6">
-            <p>{t('tool.goals.page-description')}</p>
-            <p>{t('tool.goals.field-description')}</p>
-          </div>
-        </div>
-
-        <div className="order-3 col-span-1 sm:order-2 sm:col-span-3">
-          <div className="flex flex-wrap flex-col sm:flex-row space-between gap-3 sm:gap-8 bg-todo">
-            <SelectionCard
-              selected={selectedCard === 'a'}
-              onClick={() => toggleCardSelection('a')}
-              label={t('tool.goals.map-competence')}
-              infoAriaLabel="info"
-              icon={<CompetenceIcon />}
-              tooltipContent={<ToolTipContent />}
-            />
-            <SelectionCard
-              selected={selectedCard === 'b'}
-              onClick={() => toggleCardSelection('b')}
-              label={t('tool.goals.trainings')}
-              infoAriaLabel="info"
-              icon={<TrainingsIcon />}
-              tooltipContent={<ToolTipContent />}
-            />
-            <SelectionCard
-              selected={selectedCard === 'c'}
-              onClick={() => toggleCardSelection('c')}
-              label={t('tool.goals.job-opportunities')}
-              infoAriaLabel="info"
-              icon={<JobOpportunitiesIcon />}
-              tooltipContent={<ToolTipContent />}
-            />
-            <SelectionCard
-              selected={selectedCard === 'd'}
-              onClick={() => toggleCardSelection('d')}
-              label={t('tool.goals.map-opportunities')}
-              infoAriaLabel="info"
-              icon={<MappingOpportunitiesIcon />}
-              tooltipContent={<ToolTipContent />}
-            />
-            <SelectionCard
-              selected={selectedCard === 'e'}
-              onClick={() => toggleCardSelection('e')}
-              label={t('tool.goals.something-else')}
-              infoAriaLabel="info"
-              icon={<SomethingElseIcon />}
-              tooltipContent={<ToolTipContent />}
-            />
-          </div>
-          {sm && <SelectionInfoCard />}
-        </div>
+    <>
+      <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3 sm:mb-5">{t('tool.my-own-data.goals.title')}</h2>
+      <p className="text-body-md-mobile sm:text-body-md whitespace-pre-wrap mb-6">
+        {t('tool.my-own-data.goals.description')}
+      </p>
+      <div className="flex flex-wrap flex-col space-between gap-3">
+        <SelectionCard
+          selected={toolStore.tavoitteet.a}
+          onClick={() => toolStore.setTavoitteet({ ...toolStore.tavoitteet, a: !toolStore.tavoitteet.a })}
+          label={t('tool.my-own-data.goals.map-competence')}
+          infoAriaLabel="info"
+          icon={<CompetenceIcon />}
+          tooltipContent={<ToolTipContent />}
+          sm={false}
+        />
+        <SelectionCard
+          selected={toolStore.tavoitteet.b}
+          onClick={() => toolStore.setTavoitteet({ ...toolStore.tavoitteet, b: !toolStore.tavoitteet.b })}
+          label={t('tool.my-own-data.goals.trainings')}
+          infoAriaLabel="info"
+          icon={<TrainingsIcon />}
+          tooltipContent={<ToolTipContent />}
+          sm={false}
+        />
+        <SelectionCard
+          selected={toolStore.tavoitteet.c}
+          onClick={() => toolStore.setTavoitteet({ ...toolStore.tavoitteet, c: !toolStore.tavoitteet.c })}
+          label={t('tool.my-own-data.goals.job-opportunities')}
+          infoAriaLabel="info"
+          icon={<JobOpportunitiesIcon />}
+          tooltipContent={<ToolTipContent />}
+          sm={false}
+        />
+        <SelectionCard
+          selected={toolStore.tavoitteet.d}
+          onClick={() => toolStore.setTavoitteet({ ...toolStore.tavoitteet, d: !toolStore.tavoitteet.d })}
+          label={t('tool.my-own-data.goals.map-opportunities')}
+          infoAriaLabel="info"
+          icon={<MappingOpportunitiesIcon />}
+          tooltipContent={<ToolTipContent />}
+          sm={false}
+        />
+        <SelectionCard
+          selected={toolStore.tavoitteet.e}
+          onClick={() => toolStore.setTavoitteet({ ...toolStore.tavoitteet, e: !toolStore.tavoitteet.e })}
+          label={t('tool.my-own-data.goals.something-else')}
+          infoAriaLabel="info"
+          icon={<SomethingElseIcon />}
+          tooltipContent={<ToolTipContent />}
+          sm={false}
+        />
       </div>
-    </div>
+    </>
   );
 };
 

@@ -11,6 +11,13 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 const SUOSIKIT_PATH = '/api/profiili/suosikit';
 
 interface ToolState {
+  tavoitteet: {
+    a?: boolean;
+    b?: boolean;
+    c?: boolean;
+    d?: boolean;
+    e?: boolean;
+  };
   osaamiset: OsaaminenValue[];
   kiinnostukset: OsaaminenValue[];
   suosikit: components['schemas']['SuosikkiDto'][];
@@ -27,6 +34,8 @@ interface ToolState {
   ehdotuksetPageNr: number;
   ehdotuksetCount: Record<MahdollisuusTyyppi, number>;
   reset: () => void;
+
+  setTavoitteet: (state: ToolState['tavoitteet']) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
   setKiinnostukset: (state: OsaaminenValue[]) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
@@ -44,6 +53,7 @@ interface ToolState {
 export const useToolStore = create<ToolState>()(
   persist(
     (set) => ({
+      tavoitteet: {},
       osaamiset: [],
       kiinnostukset: [],
       suosikit: [],
@@ -62,6 +72,7 @@ export const useToolStore = create<ToolState>()(
       ehdotuksetCount: { TYOMAHDOLLISUUS: 0, KOULUTUSMAHDOLLISUUS: 0 },
       reset: () =>
         set({
+          tavoitteet: {},
           osaamiset: [],
           kiinnostukset: [],
           mahdollisuusEhdotukset: {},
@@ -69,6 +80,8 @@ export const useToolStore = create<ToolState>()(
           koulutusmahdollisuudet: [],
           mixedMahdollisuudet: [],
         }),
+
+      setTavoitteet: (state) => set({ tavoitteet: state }),
       setOsaamiset: (state) => set({ osaamiset: state }),
       setKiinnostukset: (state) => set({ kiinnostukset: state }),
       setSuosikit: (state) => set({ suosikit: state }),

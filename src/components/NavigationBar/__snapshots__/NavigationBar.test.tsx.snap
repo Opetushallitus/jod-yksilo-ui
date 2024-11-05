@@ -5,7 +5,7 @@ exports[`NavigationBar > renders no navigation items and no user 1`] = `
   class="min-w-min shadow-border bg-white"
 >
   <nav
-    class="mx-auto flex h-11 items-center gap-4 px-5 sm:px-7 py-3 font-semibold lg:container"
+    class="mx-auto flex h-11 items-center gap-4 px-5 sm:px-7 py-3 font-semibold xl:container"
     role="navigation"
   >
     <div>
@@ -75,7 +75,7 @@ exports[`NavigationBar > renders only user 1`] = `
   class="min-w-min shadow-border bg-white"
 >
   <nav
-    class="mx-auto flex h-11 items-center gap-4 px-5 sm:px-7 py-3 font-semibold lg:container"
+    class="mx-auto flex h-11 items-center gap-4 px-5 sm:px-7 py-3 font-semibold xl:container"
     role="navigation"
   >
     <div>

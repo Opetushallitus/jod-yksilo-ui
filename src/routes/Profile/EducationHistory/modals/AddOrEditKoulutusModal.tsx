@@ -2,7 +2,6 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
-import { useDebounceState } from '@/hooks/useDebounceState';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -81,7 +80,6 @@ const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
 };
 
 const OsaamisetStep = ({ koulutusId }: { koulutusId?: string }) => {
-  const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const { t } = useTranslation();
   const { control } = useFormContext<KoulutusForm>();
   return (
@@ -89,25 +87,11 @@ const OsaamisetStep = ({ koulutusId }: { koulutusId?: string }) => {
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
         {t(koulutusId ? 'profile.competences.edit' : 'education-history.identify-competences')}
       </h2>
-      <div className="mb-6">
-        <InputField
-          label={t('education-history.educational-content')}
-          value={description}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
-          placeholder="TODO: Lorem ipsum dolor sit amet"
-        />
-      </div>
-
       <Controller
         control={control}
         name={'osaamiset'}
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija
-            description={debouncedDescription}
-            onChange={onChange}
-            value={value}
-            sourceType="KOULUTUS"
-          />
+          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="KOULUTUS" />
         )}
       />
     </>

@@ -20,7 +20,6 @@ import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import {
   Goals,
-  Instructions,
   Restrictions,
   Tool,
   Competences as ToolCompetences,
@@ -127,12 +126,7 @@ const toolRoutes = supportedLanguageCodes.map(
       children: [
         {
           index: true,
-          loader: () => redirect(i18n.t('slugs.tool.competences', { lng })),
-        },
-        {
-          id: `{slugs.tool.instructions}|${lng}`,
-          path: i18n.t('slugs.tool.instructions', { lng }),
-          element: <Instructions />,
+          loader: () => redirect(i18n.t('slugs.tool.goals', { lng })),
         },
         {
           id: `{slugs.tool.goals}|${lng}`,

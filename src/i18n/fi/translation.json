@@ -188,14 +188,36 @@
     "title": "Sivua ei löytynyt"
   },
   "open-menu": "Avaa valikko",
+  "opportunity-card": {
+    "common-educational-background": "Yleisin koulutustausta",
+    "employment-outlook": "Työllisyysnäkymä",
+    "idustry-name": "Toimialan nimi",
+    "maybe-has-restrictions": "Saattaa sisältää rajoitteita",
+    "opportunities-title": "Mahdollisuutesi",
+    "outlook-value": "{{outlook}}/5",
+    "trend": "Kehitystrendi",
+    "trend-down": "Laskeva kehitys",
+    "trend-up": "Nouseva kehitys"
+  },
   "opportunity-type": {
     "education": "Koulutusmahdollisuus",
     "work": "Työmahdollisuus"
   },
   "osaamispolku": "Osaamispolku",
+  "osaamissuosittelija": {
+    "add": "Lisää osaaminen klikkaamalla '+'-merkkiä osaamisen vieressä.",
+    "my-KIINNOSTUS": "Kiinnostukseni",
+    "my-KOULUTUS": "Koulutukseni",
+    "my-MUU_OSAAMINEN": "Muu osaamiseni",
+    "my-PATEVYYS": "Vapaa-ajan toimintoni",
+    "my-TOIMENKUVA": "Työpaikkani",
+    "remove": "Poista osaaminen klikkaamalla rastia."
+  },
   "pagination": {
+    "bottom": "Alapuolen sivutus",
     "next": "Siirry seuraavalle sivulle",
-    "previous": "Siirry edelliselle sivulle"
+    "previous": "Siirry edelliselle sivulle",
+    "top": "Yläpuolen sivutus"
   },
   "preferences": {
     "confirm-delete-my-account": "Haluatko varmasti poistaa tilisi?",
@@ -361,55 +383,56 @@
   "started": "Alkoi",
   "terms-of-service": "Käyttöehdot",
   "tool": {
-    "competences": {
-      "add-competence": "Lisää osaaminen klikkaamalla '+'-merkkiä osaamisen vieressä.",
-      "adjust-data-emphasis": "Säädä syöttämäsi tietojen painotuksia - tulokset päivittyvät samanaikaisesti uusien painotusten mukaan.",
-      "available-options-totals": "Syöttämilläsi tiedoilla sinulle löytyy {{professionsCount}} ammattia ja {{educationsCount}} koulutusmahdollisuutta.",
-      "common-educational-background": "Yleisin koulutustausta",
-      "employment-outlook": "Työllisyysnäkymä",
-      "heading-1": "Mitä minä osaan",
-      "idustry-name": "Toimialan nimi",
-      "input-field-placeholder": "Taitosi",
-      "maybe-has-restrictions": "Saattaa sisältää rajoitteita",
-      "my-KIINNOSTUS": "Kiinnostukseni",
-      "my-KOULUTUS": "Koulutukseni",
-      "my-MUU_OSAAMINEN": "Muu osaamiseni",
-      "my-PATEVYYS": "Vapaa-ajan toimintoni",
-      "my-TOIMENKUVA": "Työpaikkani",
-      "opportunities-title": "Mahdollisuutesi",
-      "outlook-value": "{{outlook}}/5",
-      "page-description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi - kaikki tietosi ja kokemuksesi ovat tärkeitä.",
-      "remove-competence": "Poista osaaminen klikkaamalla rastia.",
-      "trend": "Kehitystrendi",
-      "trend-down": "Laskeva kehitys",
-      "trend-up": "Nouseva kehitys"
-    },
-    "filters-text": "Tarkenna tuloksia: valitse haluamasi tunnusluvut ja järjestä lista uudelleen napauttamalla oikean laidan painiketta.",
-    "goals": {
-      "field-description": "Napauta kuvaketta, jos haluat valita sen tavoitteeksesi. Voit peruuttaa valinnan napauttamalla kuvaketta uudelleen.",
-      "heading-1": "Mitä minä haluan",
-      "job-opportunities": "Tutkia työmahdollisuuksia osaamisellani",
-      "map-competence": "Kartoittaa omaa osaamistani",
-      "map-opportunities": "Kartoittaa mahdollisuuksia alan vaihtamiseen",
-      "page-description": "Tässä osiossa voit valita toiveidesi mukaiset tulokset palvelustamme. Jos olet epävarma, voit ohittaa tämän ja tutustua palveluumme omaan tahtiisi. Kun liikutat hiirtä kuvakkeiden ylle, näet niiden alla olevan selityksen siitä, miten ne vaikuttavat lopputulokseen",
-      "selection-info-card-description": "Ohjeistaa täyttämään osaamisprofiilin ja sieltä löytyvien apuvälineiden hyödyntämiseen. Kannustaa katsomaan myös kohtaannon tuloksia.",
-      "selection-info-card-title": "Tavoitteen vaikutus tuloksiin:",
-      "something-else": "Jotain muuta, en tiedä mitä...",
-      "trainings": "Koulutuksia osaamiseni kasvattamiseksi"
-    },
-    "interests": {
-      "field-description": "Kirjaa kiinnostuksesi tekstikenttään. Valitse ehdotuksista klikkaamalla ‘+‘-merkkiä ehdotuksen vieressä. Poista aihe klikkaamalla rastia sen vieressä.",
-      "heading-1": "Mistä minä olen kiinnostunut",
-      "help-text": "Hahmota kiinnostuksen kohteitasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle sopivia kiinnostuksen kohteita.",
-      "input-field-placeholder": "Kiinnostuksesi",
-      "interest-barometer": "Intressibarometri",
-      "page-description": "Pohdi, mikä sinua innostaa ja mitä uutta haluaisit kokeilla tai oppia, olipa se sitten yhteydessä aiempaan koulutukseesi tai ei. Kirjaa ylös kaikki kiinnostuksen kohteesi, vaikka ne tuntuisivat epärealistisilta.",
-      "riasec-test": "RIASEC-testi"
+    "my-own-data": {
+      "competences": {
+        "delete-all": {
+          "description": "Haluatko varmasti tyhjentää kaikki valitut osaamiset?",
+          "title": "Tyhjennä kaikki valitut osaamiset"
+        },
+        "description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi – kaikki tietosi ja kokemuksesi ovat tärkeitä.",
+        "export": "Tallenna osaamiset osaamisprofiiliin",
+        "import": "Tuo osaamiset osaamisprofiilista",
+        "textarea-placeholder": "Kirjoita taitosi tekstikenttään.",
+        "title": "Mitä minä osaan"
+      },
+      "description": "Alla on työkalut joiden avulla syötän tietojasi joiden perusteella tarjoamme sinulle mahdollisuuksia oikealla.",
+      "goals": {
+        "description": "Tässä osiossa voit valita toiveidesi mukaiset tulokset palvelustamme. Jos olet epävarma, voit ohittaa tämän ja tutustua palveluumme omaan tahtiisi. Kun liikutat hiirtä kuvakkeiden ylle, näet niiden alla olevan selityksen siitä, miten ne vaikuttavat lopputulokseen.\n\nNapauta kuvaketta, jos haluat valita sen tavoitteeksesi. Voit peruuttaa valinnan napauttamalla kuvaketta uudelleen.",
+        "job-opportunities": "Tutkia työmahdollisuuksia osaamisellani",
+        "map-competence": "Kartoittaa omaa osaamistani",
+        "map-opportunities": "Kartoittaa mahdollisuuksia alan vaihtamiseen",
+        "selection-info-card-description": "Ohjeistaa täyttämään osaamisprofiilin ja sieltä löytyvien apuvälineiden hyödyntämiseen. Kannustaa katsomaan myös kohtaannon tuloksia.",
+        "selection-info-card-title": "Tavoitteen vaikutus tuloksiin:",
+        "something-else": "Jotain muuta, en tiedä mitä...",
+        "title": "Mitä minä haluan",
+        "trainings": "Koulutuksia osaamiseni kasvattamiseksi"
+      },
+      "interests": {
+        "delete-all": {
+          "description": "Haluatko varmasti tyhjentää kaikki valitut kiinnostukset?",
+          "title": "Tyhjennä kaikki valitut kiinnostukset"
+        },
+        "description": "Pohdi, mikä sinua innostaa ja mitä uutta haluaisit kokeilla tai oppia, olipa se sitten yhteydessä aiempaan koulutukseesi tai ei. Kirjaa ylös kaikki kiinnostuksen kohteesi, vaikka ne tuntuisivat epärealistisilta.",
+        "export": "Tallenna kiinnostukset osaamisprofiiliin",
+        "import": "Tuo kiinnostukset osaamisprofiilista",
+        "interest-barometer": "Intressibarometri",
+        "riasec-test": "RIASEC-testi",
+        "textarea-placeholder": "Kirjoita kiinnostuksesi tekstikenttään.",
+        "title": "Mistä minä olen kiinnostunut"
+      },
+      "title": "Kartoita tilanteesi"
     },
     "title": "Kohtaantotyökalu",
-    "update-job-opportunities-list": "Päivitä mahdollisuuslista"
+    "tools": "Apuvälineitä",
+    "your-opportunities": {
+      "card": {
+        "action": "Päivitä mahdollisuutesi",
+        "description": "Voit säätää osaamisten ja kiinnostusten painotusta tuloksissa."
+      },
+      "description": "Alla näet palvelun tunnistamia työ- ja koulutusmahdollisuuksia tietojesi pohjalta.",
+      "title": "Mahdollisuutesi"
+    }
   },
-  "tools": "Apuvälineitä",
   "types": {
     "competence": {
       "KIINNOSTUS": "Kiinnostus",

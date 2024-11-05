@@ -13,10 +13,8 @@ interface HelpingToolsContentProps {
 export const HelpingToolsContent = ({ children, text }: HelpingToolsContentProps) => {
   return (
     <>
-      <span className="text-body-sm sm:text-body-xs">
-        <div>{text}</div>
-      </span>
-      <ul className="flex flex-col gap-4 text-button-md">{children}</ul>
+      <p className="text-body-xs sm:text-body-sm mb-5">{text}</p>
+      <ul className="flex flex-col gap-5 text-button-md">{children}</ul>
     </>
   );
 };

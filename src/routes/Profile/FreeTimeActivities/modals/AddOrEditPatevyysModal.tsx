@@ -2,7 +2,6 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
-import { useDebounceState } from '@/hooks/useDebounceState';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -81,7 +80,6 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
 };
 
 const OsaamisetStep = ({ patevyysId }: { patevyysId?: string }) => {
-  const [debouncedDescription, description, setDescription] = useDebounceState('', 500);
   const { t } = useTranslation();
   const { control } = useFormContext<PatevyysForm>();
   return (
@@ -89,25 +87,11 @@ const OsaamisetStep = ({ patevyysId }: { patevyysId?: string }) => {
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
         {t(patevyysId ? editCompetencesSlug : 'free-time-activities.identify-proficiencies')}
       </h2>
-      <div className="mb-6">
-        <InputField
-          label={t(editCompetencesSlug)}
-          value={description}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
-          placeholder="TODO: Lorem ipsum dolor sit amet"
-        />
-      </div>
-
       <Controller
         control={control}
         name="osaamiset"
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija
-            description={debouncedDescription}
-            onChange={onChange}
-            value={value}
-            sourceType="PATEVYYS"
-          />
+          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="PATEVYYS" />
         )}
       />
     </>
