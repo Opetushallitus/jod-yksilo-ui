@@ -8,6 +8,7 @@ export const OSAAMINEN_COLOR_MAP: Record<OsaaminenLahdeTyyppi, NonNullable<TagPr
   PATEVYYS: 'vapaa-ajan-toiminto',
   MUU_OSAAMINEN: 'jotain-muuta',
   KIINNOSTUS: 'kiinnostus',
+  KARTOITETTU: 'jotain-muuta',
 };
 
 export const DEFAULT_PAGE_SIZE = 20;

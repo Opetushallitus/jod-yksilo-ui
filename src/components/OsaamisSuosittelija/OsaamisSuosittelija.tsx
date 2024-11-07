@@ -7,7 +7,7 @@ import { Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-export type OsaaminenLahdeTyyppi = components['schemas']['OsaamisenLahdeDto']['tyyppi'] | 'KIINNOSTUS';
+export type OsaaminenLahdeTyyppi = components['schemas']['OsaamisenLahdeDto']['tyyppi'] | 'KIINNOSTUS' | 'KARTOITETTU';
 export interface Osaaminen {
   id: string;
   nimi: components['schemas']['LokalisoituTeksti'];
@@ -27,17 +27,45 @@ interface OsaamisSuosittelijaProps {
   value?: OsaaminenValue[];
   /** Type of the source */
   sourceType?: Osaaminen['tyyppi'];
+  /** Should display skills by categories. False by default. */
+  categorized?: boolean;
 }
+
+type CategorizedValue = Record<OsaaminenLahdeTyyppi, OsaaminenValue[]>;
+
 export const OsaamisSuosittelija = ({
   description,
   value = [],
   onChange,
-  sourceType = 'MUU_OSAAMINEN',
+  sourceType = 'KARTOITETTU',
+  categorized = false,
 }: OsaamisSuosittelijaProps) => {
   const { i18n, t } = useTranslation();
   const { sm } = useMediaQueries();
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
+  const [categorizedValue, setCategorizedValue] = React.useState<CategorizedValue>({
+    MUU_OSAAMINEN: [],
+    KOULUTUS: [],
+    TOIMENKUVA: [],
+    PATEVYYS: [],
+    KIINNOSTUS: [],
+    KARTOITETTU: [],
+  });
+  const categoryOrder = ['KARTOITETTU', 'MUU_OSAAMINEN', 'TOIMENKUVA', 'KOULUTUS', 'PATEVYYS', 'KIINNOSTUS'] as const;
+  const sortCategories = (a: OsaaminenLahdeTyyppi, b: OsaaminenLahdeTyyppi) =>
+    categoryOrder.indexOf(a) - categoryOrder.indexOf(b);
+
+  React.useEffect(() => {
+    setCategorizedValue({
+      KARTOITETTU: value.filter((val) => val.tyyppi === 'KARTOITETTU'),
+      MUU_OSAAMINEN: value.filter((val) => val.tyyppi === 'MUU_OSAAMINEN'),
+      PATEVYYS: value.filter((val) => val.tyyppi === 'PATEVYYS'),
+      KOULUTUS: value.filter((val) => val.tyyppi === 'KOULUTUS'),
+      TOIMENKUVA: value.filter((val) => val.tyyppi === 'TOIMENKUVA'),
+      KIINNOSTUS: value.filter((val) => val.tyyppi === 'KIINNOSTUS'),
+    });
+  }, [value]);
 
   const abortController = React.useRef<AbortController>();
 
@@ -88,12 +116,29 @@ export const OsaamisSuosittelija = ({
     ]);
   }, [ehdotetutOsaamiset, value]);
 
+  const getTag = (osaaminen: OsaaminenValue) => (
+    <Tag
+      key={osaaminen.id}
+      label={getLocalizedText(osaaminen.nimi)}
+      title={getLocalizedText(osaaminen.kuvaus)}
+      sourceType={OSAAMINEN_COLOR_MAP[osaaminen.tyyppi ? osaaminen.tyyppi : sourceType]}
+      onClick={() => {
+        onChange(value.filter((selectedValue) => selectedValue.id !== osaaminen.id));
+      }}
+      variant="added"
+    />
+  );
+
   return (
-    <div className={`mb-6 ${sm ? 'grid grid-cols-3 gap-x-5' : 'flex flex-col'}`}>
-      <div
-        className={`${sm ? 'col-span-1' : 'order-2 mb-6'} h-[400px] overflow-y-auto rounded border border-border-gray p-5 bg-white`}
-      >
-        <div aria-label={t('work-history.proposed-competences')} className="flex flex-wrap gap-3">
+    <div className="mb-6 flex flex-col">
+      <div className={`${sm ? 'text-heading-4 font-arial' : 'text-heading-4-mobile'} font-bold mb-2`}>
+        {t('proposed-competences')}
+      </div>
+      <div className={`${sm ? 'text-body-sm font-arial' : 'text-body-sm-mobile'} mb-3`}>
+        {t('tool.competences.add-competence')}
+      </div>
+      <div className={`mb-6 min-h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-white`}>
+        <div aria-label={t('proposed-competences')} className="flex flex-wrap gap-3">
           {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen) => (
             <Tag
               key={ehdotettuOsaaminen.id}
@@ -116,22 +161,34 @@ export const OsaamisSuosittelija = ({
           ))}
         </div>
       </div>
-      <div
-        className={`${sm ? 'col-span-2' : 'order-4'} h-[400px] overflow-y-auto rounded border border-border-gray p-5 bg-white`}
-      >
-        <div aria-label={t('work-history.competences-of-your-choice')} className="flex flex-wrap gap-3">
-          {value.map((val) => (
-            <Tag
-              key={val.id}
-              label={getLocalizedText(val.nimi)}
-              title={getLocalizedText(val.kuvaus)}
-              sourceType={OSAAMINEN_COLOR_MAP[val.tyyppi ? val.tyyppi : sourceType]}
-              onClick={() => {
-                onChange(value.filter((selectedValue) => selectedValue.id !== val.id));
-              }}
-              variant="added"
-            />
-          ))}
+
+      <div className={`${sm ? 'text-heading-4 font-arial' : 'text-heading-4-mobile'} font-bold mb-2`}>
+        {t('competences-of-your-choice')}
+      </div>
+      <div className={`${sm ? 'text-body-sm font-arial' : 'text-body-sm-mobile'} mb-3`}>
+        {t('tool.competences.remove-competence')}
+      </div>
+      <div className={`min-h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-white`}>
+        <div aria-label={t('competences-of-your-choice')} className="flex flex-wrap gap-3">
+          {categorized ? (
+            <div className="flex-col">
+              <div className="text-heading-4 uppercase mb-3">{t('mapped-competences')}</div>
+              <div className="flex flex-wrap gap-3 mb-4 min-h-[28px]">{categorizedValue.KARTOITETTU.map(getTag)}</div>
+
+              <div className="text-heading-4 uppercase mb-3">{t('competences-from-profile')}</div>
+              {(Object.entries(categorizedValue) as [OsaaminenLahdeTyyppi, OsaaminenValue[]][])
+                .filter(([skillType, skills]) => skillType !== 'KARTOITETTU' && skills.length > 0)
+                .sort(([a], [b]) => sortCategories(a, b))
+                .map(([skillType, skills]) => (
+                  <div key={skillType} className="mb-4">
+                    <div className="text-body-sm mb-3 uppercase">{t(`tool.competences.my-${skillType}`)}</div>
+                    <div className="flex flex-wrap gap-3">{skills.map(getTag)}</div>
+                  </div>
+                ))}
+            </div>
+          ) : (
+            value.map(getTag)
+          )}
         </div>
       </div>
     </div>

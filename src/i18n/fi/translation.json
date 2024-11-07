@@ -13,7 +13,8 @@
   "compare": "Vertaile",
   "competence": "Osaaminen",
   "competences": "Osaamiset",
-  "competences-of-your-choice": "Valitsemasi osaamiset",
+  "competences-from-profile": "Osaamisprofiilista tuotu osaamiseni",
+  "competences-of-your-choice": "Valitut osaamiset",
   "content": "Sisältö",
   "cookie-policy": "Evästekäytäntö",
   "cookies": "Evästeet",
@@ -159,6 +160,7 @@
   "login": "Kirjaudu sisään",
   "login-for-favorites": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa suosikkeja ja päästä tarkastelemaan niitä myöhemmin.",
   "logout": "Kirjaudu ulos",
+  "mapped-competences": "Kartoitetut osaamiset",
   "match-service": "Kohtaantopalvelu",
   "menu": "Valikko",
   "menus": {
@@ -360,18 +362,24 @@
   "terms-of-service": "Käyttöehdot",
   "tool": {
     "competences": {
+      "add-competence": "Lisää osaaminen klikkaamalla '+'-merkkiä osaamisen vieressä.",
       "adjust-data-emphasis": "Säädä syöttämäsi tietojen painotuksia - tulokset päivittyvät samanaikaisesti uusien painotusten mukaan.",
       "available-options-totals": "Syöttämilläsi tiedoilla sinulle löytyy {{professionsCount}} ammattia ja {{educationsCount}} koulutusmahdollisuutta.",
       "common-educational-background": "Yleisin koulutustausta",
       "employment-outlook": "Työllisyysnäkymä",
-      "field-description": "Kirjoita taitosi tekstikenttään. Lisää osaaminen klikkaamalla ‘+‘-merkkiä osaamisen vieressä. Poista osaaminen klikkaamalla rastia.",
       "heading-1": "Mitä minä osaan",
       "idustry-name": "Toimialan nimi",
       "input-field-placeholder": "Taitosi",
       "maybe-has-restrictions": "Saattaa sisältää rajoitteita",
+      "my-KIINNOSTUS": "Kiinnostukseni",
+      "my-KOULUTUS": "Koulutukseni",
+      "my-MUU_OSAAMINEN": "Muu osaamiseni",
+      "my-PATEVYYS": "Vapaa-ajan toimintoni",
+      "my-TOIMENKUVA": "Työpaikkani",
       "opportunities-title": "Mahdollisuutesi",
       "outlook-value": "{{outlook}}/5",
       "page-description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi - kaikki tietosi ja kokemuksesi ovat tärkeitä.",
+      "remove-competence": "Poista osaaminen klikkaamalla rastia.",
       "trend": "Kehitystrendi",
       "trend-down": "Laskeva kehitys",
       "trend-up": "Nouseva kehitys"
@@ -404,6 +412,7 @@
   "tools": "Apuvälineitä",
   "types": {
     "competence": {
+      "KIINNOSTUS": "Kiinnostus",
       "KOULUTUS": "Koulutus",
       "MUU_OSAAMINEN": "Muu osaaminen",
       "PATEVYYS": "Vapaa-ajan toiminto",
