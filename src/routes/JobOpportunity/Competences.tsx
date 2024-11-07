@@ -1,8 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList, Title } from '@/components';
-import { getLocalizedText, sortByProperty } from '@/utils';
+import { getLocalizedText } from '@/utils';
 import { Accordion, Tag } from '@jod/design-system';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router-dom';
 import Tabs from './Tabs';
@@ -15,10 +14,6 @@ const Competences = () => {
   } = useTranslation();
   const { tyomahdollisuus, osaamiset } = useOutletContext<LoaderData>();
   const title = getLocalizedText(tyomahdollisuus?.otsikko);
-  const sortedCompetences = React.useMemo(
-    () => [...(osaamiset ?? [])].sort(sortByProperty(`nimi.${language}`)),
-    [osaamiset, language],
-  );
 
   const routes: RoutesNavigationListProps['routes'] = [
     {
@@ -76,10 +71,10 @@ const Competences = () => {
               {t('job-opportunity.specific-professional-competences.description')}
             </p>
             <div className="flex flex-wrap gap-3">
-              {sortedCompetences.map((competence) => (
+              {osaamiset.map((competence) => (
                 <Tag
                   label={getLocalizedText(competence.nimi)}
-                  title={getLocalizedText(competence.kuvaus)}
+                  title={`${getLocalizedText(competence.kuvaus)} (${competence.osuus.toFixed(1)}%)`}
                   key={competence.uri}
                   variant="presentation"
                 />

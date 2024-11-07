@@ -20,7 +20,7 @@ const loader = (async ({ request, params }) => {
     osaamiset.combine(
       data?.jakaumat?.osaaminen?.arvot,
       (value) => value.arvo,
-      (_, osaaminen) => osaaminen,
+      (value, osaaminen) => ({ ...osaaminen, osuus: value.osuus }),
       request.signal,
     ),
     ammatit.combine(
