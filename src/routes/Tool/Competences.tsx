@@ -95,7 +95,7 @@ const Competences = () => {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTaito(event.target.value)}
             />
           </div>
-          <OsaamisSuosittelija description={debouncedTaito} onChange={setOsaamiset} value={osaamiset} />
+          <OsaamisSuosittelija description={debouncedTaito} onChange={setOsaamiset} value={osaamiset} categorized />
         </div>
         <div className="order-2 col-span-1 mb-8 flex flex-col gap-4 sm:order-3 sm:mb-0 bg-todo">
           {sm ? (
