@@ -11,6 +11,7 @@ import {
   Overview as JobOpportunityOverview,
   loader as jobOpportunityLoader,
 } from '@/routes/JobOpportunity';
+import { Licenses } from '@/routes/Licenses';
 import { Competences as ProfileCompetences, competencesLoader } from '@/routes/Profile/Competences';
 import { loader as educationHistoryLoader } from '@/routes/Profile/EducationHistory';
 import { favoritesLoader } from '@/routes/Profile/Favorites';
@@ -283,6 +284,12 @@ const basicInformationRoutes: RouteObject[] = supportedLanguageCodes.map((lng) =
   ],
 }));
 
+const licensesRoutes: RouteObject[] = supportedLanguageCodes.map((lng) => ({
+  id: `{slugs.licenses}|${lng}`,
+  path: i18n.t('slugs.licenses', { lng }),
+  element: <Licenses />,
+}));
+
 const rootRoute: RouteObject = {
   id: 'root',
   path: '/:lng',
@@ -300,6 +307,7 @@ const rootRoute: RouteObject = {
     ...educationOpportunityRoutes,
     ...userGuideRoutes,
     ...basicInformationRoutes,
+    ...licensesRoutes,
   ],
 };
 

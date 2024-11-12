@@ -157,6 +157,12 @@
       "title": "Ammatilliset erityisosaamiset"
     }
   },
+  "licenses": {
+    "description": "Alla on listattu palvelun avoimen lähdekoodin riippuvuudet ja niiden käyttämät lisenssit.",
+    "title": "Lisenssit",
+    "name": "Nimi",
+    "license-type": "Lisenssin tyyppi"
+  },
   "login": "Kirjaudu sisään",
   "login-for-favorites": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa suosikkeja ja päästä tarkastelemaan niitä myöhemmin.",
   "logout": "Kirjaudu ulos",
@@ -344,6 +350,7 @@
       "index": "tyomahdollisuus",
       "overview": "yleiskuvaus"
     },
+    "licenses": "lisenssit",
     "no-internet-connection": "ei-internetyhteytta",
     "privacy-policy": "tietosuojaseloste",
     "profile": {
