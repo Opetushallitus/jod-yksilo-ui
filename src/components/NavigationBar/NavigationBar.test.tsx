@@ -10,7 +10,7 @@ vi.mock('@jod/design-system', () => ({
 
 vi.mock('react-router-dom', () => ({
   useLocation: () => ({
-    pathname: vi.fn(),
+    pathname: 'callback-url',
   }),
 }));
 
