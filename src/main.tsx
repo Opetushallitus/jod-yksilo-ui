@@ -21,7 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
       }
     };
     vitals.onCLS(warnOnlyNegativeMetrics);
-    vitals.onFID(warnOnlyNegativeMetrics);
+    vitals.onINP(warnOnlyNegativeMetrics);
     vitals.onFCP(warnOnlyNegativeMetrics);
     vitals.onLCP(warnOnlyNegativeMetrics);
     vitals.onTTFB(warnOnlyNegativeMetrics);
