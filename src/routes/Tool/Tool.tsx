@@ -161,6 +161,7 @@ const YourOpportunitiesPagination = ({
 }) => {
   const { t } = useTranslation();
   const toolStore = useToolStore();
+  const { sm } = useMediaQueries();
 
   const onPageChange = async ({ page }: PageChangeDetails) => {
     if (toolStore.mahdollisuudetLoading) {
@@ -183,7 +184,7 @@ const YourOpportunitiesPagination = ({
         type="button"
         ariaLabel={ariaLabel}
         pageSize={toolStore.ehdotuksetPageSize}
-        siblingCount={1}
+        siblingCount={sm ? 1 : 0}
         translations={{
           nextTriggerLabel: t('pagination.next'),
           prevTriggerLabel: t('pagination.previous'),
