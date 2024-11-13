@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router-dom';
 import { z } from 'zod';
 
-interface EditMuuOsaaminenModal {
+interface EditMuuOsaaminenModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
@@ -19,7 +19,7 @@ interface OsaamisetForm {
   osaamiset: OsaaminenValue[];
 }
 
-const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModal) => {
+const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModalProps) => {
   const { t } = useTranslation();
   const data = (useLoaderData() as OsaaminenDto[]) ?? [];
 

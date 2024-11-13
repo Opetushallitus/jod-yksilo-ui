@@ -171,6 +171,7 @@ const Root = () => {
   const getUserData: () => NavigationBarProps['user'] = () =>
     data?.csrf && {
       name,
+      /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
       component: ({ children, className }) => {
         return (
           <div className="relative">
@@ -232,26 +233,22 @@ const Root = () => {
                 aria-label={t('open-menu')}
                 onClick={toggleMenu('mega')}
               >
-                <>
-                  <span className="py-3 pl-3">{t('menu')}</span>
-                  <span className="size-7 flex justify-center items-center">
-                    <MdMenu size={24} />
-                  </span>
-                </>
+                <span className="py-3 pl-3">{t('menu')}</span>
+                <span className="size-7 flex justify-center items-center">
+                  <MdMenu size={24} />
+                </span>
               </button>
             ) : (
               <button className="flex justify-self-end p-3" aria-label={t('open-menu')} onClick={toggleMenu('mega')}>
-                <>
-                  {megaMenuOpen ? (
-                    <span className="size-7 flex justify-center items-center">
-                      <MdClose size={24} />
-                    </span>
-                  ) : (
-                    <span className="size-7 flex justify-center items-center">
-                      <MdMenu size={24} />
-                    </span>
-                  )}
-                </>
+                {megaMenuOpen ? (
+                  <span className="size-7 flex justify-center items-center">
+                    <MdClose size={24} />
+                  </span>
+                ) : (
+                  <span className="size-7 flex justify-center items-center">
+                    <MdMenu size={24} />
+                  </span>
+                )}
               </button>
             )
           }

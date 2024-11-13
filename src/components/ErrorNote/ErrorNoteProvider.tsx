@@ -1,17 +1,5 @@
 import React from 'react';
-
-export interface ErrorNoteData {
-  title: string;
-  description: string;
-}
-
-interface ErrorNoteContextProps {
-  error: ErrorNoteData | null;
-  setErrorNote: (message: ErrorNoteData) => void;
-  clearErrorNote: () => void;
-}
-
-export const ErrorNoteContext = React.createContext<ErrorNoteContextProps | undefined>(undefined);
+import { ErrorNoteContext, ErrorNoteData } from './ErrorNoteContext';
 
 export const ErrorNoteProvider = ({ children }: { children: React.ReactNode }) => {
   const [error, setError] = React.useState<ErrorNoteData | null>(null);

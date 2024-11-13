@@ -12,12 +12,12 @@ import EducationStep from './EducationStep';
 import SummaryStep from './SummaryStep';
 import { type EducationHistoryForm } from './utils';
 
-interface EducationHistoryWizard {
+interface EducationHistoryWizardProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizard) => {
+const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { sm } = useMediaQueries();

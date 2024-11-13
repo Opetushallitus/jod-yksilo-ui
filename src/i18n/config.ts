@@ -24,6 +24,7 @@ const resources: Resource = {
 i18n.use(initReactI18next).init({
   lng: defaultLang,
   supportedLngs: supportedLanguageCodes,
+  /* eslint-disable sonarjs/todo-tag */
   // fallbackLng: defaultLang, // TODO: Uncomment this line when translations are ready
   resources,
   interpolation: {

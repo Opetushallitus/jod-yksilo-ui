@@ -86,7 +86,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
     try {
       const { data: suosikit = [] } = await client.GET('/api/profiili/suosikit');
       set({ suosikit: [...suosikit].sort(sortByProperty('luotu')) });
-    } catch (error) {
+    } catch (_error) {
       set({ suosikit: get().suosikit ?? [] });
     }
     set({ suosikitLoading: false });

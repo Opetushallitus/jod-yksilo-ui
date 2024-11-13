@@ -1,5 +1,5 @@
 import React from 'react';
-import { ErrorNoteContext } from './ErrorNoteProvider';
+import { ErrorNoteContext } from './ErrorNoteContext';
 
 export const useErrorNote = () => {
   const context = React.useContext(ErrorNoteContext);
