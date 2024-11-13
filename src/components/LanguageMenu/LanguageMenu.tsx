@@ -1,6 +1,7 @@
 import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
 import { langLabels, supportedLanguageCodes } from '@/i18n/config';
 import { PopupList, cx } from '@jod/design-system';
+import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -30,12 +31,14 @@ const ListItems = ({ onClick }: { onClick: LanguageMenuProps['onClick'] }) => {
   ));
 };
 
-export const LanguageMenu = ({ inline, onClick }: LanguageMenuProps) => {
-  return inline ? (
-    <ListItems onClick={onClick} />
+export const LanguageMenu = forwardRef<HTMLDivElement, LanguageMenuProps>(function LanguageMenuWithRef(props, ref) {
+  return props.inline ? (
+    <ListItems onClick={props.onClick} />
   ) : (
-    <PopupList classNames="!bg-bg-gray-2 gap-y-2">
-      <ListItems onClick={onClick} />
-    </PopupList>
+    <div ref={ref}>
+      <PopupList classNames="!bg-bg-gray-2 gap-y-2">
+        <ListItems onClick={props.onClick} />
+      </PopupList>
+    </div>
   );
-};
+});

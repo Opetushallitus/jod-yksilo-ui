@@ -1,5 +1,6 @@
 import { LanguageButton, UserButton } from '@/components';
 import { useMediaQueries } from '@jod/design-system';
+import React from 'react';
 
 export interface NavigationBarLinkProps {
   className?: string;
@@ -17,17 +18,17 @@ export interface NavigationBarProps {
   menuComponent?: React.ReactNode;
   /** For language selection button **/
   onLanguageClick: () => void;
-  /** Navigation avatar */
-  user?: {
-    name: string;
-    component: NavigationBarLink;
+
+  /** HTML Element refs */
+  refs?: {
+    langMenuButtonRef: React.RefObject<HTMLLIElement>;
   };
 }
 
 /**
  * This component is a navigation bar that displays a logo, and an avatar.
  */
-export const NavigationBar = ({ logo, menuComponent, onLanguageClick, user }: NavigationBarProps) => {
+export const NavigationBar = ({ logo, menuComponent, onLanguageClick, refs }: NavigationBarProps) => {
   const { sm } = useMediaQueries();
 
   return (
@@ -41,11 +42,11 @@ export const NavigationBar = ({ logo, menuComponent, onLanguageClick, user }: Na
           {menuComponent && <li className="ml-3 sm:ml-0">{menuComponent}</li>}
           {sm && (
             <>
-              <li className="ml-5">
+              <li className="ml-5" ref={refs?.langMenuButtonRef}>
                 <LanguageButton onClick={onLanguageClick} />
               </li>
               <li>
-                <UserButton user={user} />
+                <UserButton />
               </li>
             </>
           )}
