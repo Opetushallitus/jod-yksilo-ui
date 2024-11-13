@@ -1,5 +1,4 @@
 import { LanguageButton, LanguageMenu, RoutesNavigationList, SimpleNavigationList, UserButton } from '@/components';
-import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
 import { useAppRoutes } from '@/hooks/useAppRoutes';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useMediaQueries } from '@jod/design-system';
@@ -8,14 +7,14 @@ import { useTranslation } from 'react-i18next';
 import { MdClose, MdKeyboardBackspace, MdOutlineCancel } from 'react-icons/md';
 export { LanguageButton, UserButton } from '@/components';
 
-type MegaMenuProps = {
+interface MegaMenuProps {
   loggedIn: boolean;
   onClose: () => void;
   onLanguageClick: () => void;
   logout: () => void;
-} & Pick<NavigationBarProps, 'user'>;
+}
 
-export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, user, logout }: MegaMenuProps) => {
+export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, logout }: MegaMenuProps) => {
   const { sm } = useMediaQueries();
   const { t } = useTranslation();
   const [megaMenuState, setMegaMenuState] = React.useState<'main' | 'lang'>('main');
@@ -53,7 +52,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, user, logout }: M
               <LanguageButton onClick={onLanguageButtonClick} />
             </li>
             <li className="ml-3">
-              <UserButton user={user} />
+              <UserButton />
             </li>
           </>
         )}

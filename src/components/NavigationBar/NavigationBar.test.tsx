@@ -12,11 +12,15 @@ vi.mock('react-router-dom', () => ({
   useLocation: () => ({
     pathname: 'callback-url',
   }),
+  useLoaderData: () => ({
+    etunimi: 'Reetta',
+    sukunimi: 'Räppänä',
+    csrf: 'not null',
+  }),
 }));
 
 describe('NavigationBar', () => {
   vi.mocked(useMediaQueries).mockReturnValue({ sm: true, md: false, lg: false, xl: false });
-
   const logo = <div>logo</div>;
 
   const user = {
@@ -31,13 +35,11 @@ describe('NavigationBar', () => {
   const onLanguageClick = vi.fn();
 
   it('renders only user', () => {
-    const { container } = render(<NavigationBar logo={logo} user={user} onLanguageClick={onLanguageClick} />);
-
+    const { container } = render(<NavigationBar logo={logo} onLanguageClick={onLanguageClick} />);
     // Assert snapshot
     expect(container.firstChild).toMatchSnapshot();
-
     // Assert user
-    const userAvatar = screen.queryByTitle(user.name);
+    const userAvatar = screen.queryByLabelText(user.name);
     expect(userAvatar).toBeInTheDocument();
   });
 

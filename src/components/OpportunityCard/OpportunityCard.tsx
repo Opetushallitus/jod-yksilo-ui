@@ -1,6 +1,7 @@
 import { components } from '@/api/schema';
 import { ActionButton, FavoriteToggle, LoginModal } from '@/components';
 import { useEnvironment } from '@/hooks/useEnvironment';
+import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { cx, PopupList, PopupListItem } from '@jod/design-system';
 import React from 'react';
@@ -59,19 +60,23 @@ const MoreActionsDropdown = ({ compareTo }: { compareTo?: To }) => {
   const [open, setOpen] = React.useState(false);
   const listId = React.useId();
 
+  const actionButtonRef = React.useRef<HTMLDivElement>(null);
   const onClose = React.useCallback(() => setOpen(false), []);
+  const actionMenuRef = useMenuClickHandler(() => setOpen(false), actionButtonRef);
 
   return (
-    <div className="relative">
-      <ActionButton
-        label={t('more-actions')}
-        icon={<MdMoreVert size={24} className="text-accent" />}
-        aria-controls={listId}
-        aria-expanded={open}
-        aria-haspopup="listbox"
-        className={open ? 'text-accent' : ''}
-        onClick={() => setOpen(!open)}
-      />
+    <div className="relative" ref={actionMenuRef}>
+      <div ref={actionButtonRef}>
+        <ActionButton
+          label={t('more-actions')}
+          icon={<MdMoreVert size={24} className="text-accent" />}
+          aria-controls={listId}
+          aria-expanded={open}
+          aria-haspopup="listbox"
+          className={open ? 'text-accent' : ''}
+          onClick={() => setOpen(!open)}
+        />
+      </div>
       {open && (
         /* Preventing the click through of the wrapper <div> if not able to click exactly at the list items */
         /* eslint-disable jsx-a11y/click-events-have-key-events */

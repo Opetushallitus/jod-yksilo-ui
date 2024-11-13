@@ -2,10 +2,10 @@ import { components } from '@/api/schema';
 import { LanguageMenu, LogoIconRgb, LogoRgbEn, LogoRgbFi, LogoRgbSv, NavigationBar } from '@/components';
 import { ErrorNote, useErrorNote } from '@/components/ErrorNote';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
-import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
 import { ActionBarContext } from '@/hooks/useActionBar';
+import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { useToolStore } from '@/stores/useToolStore';
-import { Footer, PopupList, PopupListItem, SkipLink, useMediaQueries } from '@jod/design-system';
+import { Footer, SkipLink, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
@@ -55,7 +55,6 @@ const Root = () => {
 
   const { sm } = useMediaQueries();
   const [megaMenuOpen, setMegaMenuOpen] = React.useState(false);
-  const [userMenuOpen, setUserMenuOpen] = React.useState(false);
   const [langMenuOpen, setLangMenuOpen] = React.useState(false);
 
   const userGuide = t('slugs.user-guide.index');
@@ -68,6 +67,13 @@ const Root = () => {
     NavigationBarItem(`${basicInformation}/${t('slugs.accessibility-statement')}`, t('accessibility-statement')),
     NavigationBarItem(`${basicInformation}/${t('slugs.privacy-policy')}`, t('privacy-policy')),
   ];
+
+  const megaMenuButtonRef = React.useRef<HTMLButtonElement>(null);
+  const langMenuButtonRef = React.useRef<HTMLLIElement>(null);
+
+  const megaMenuRef = useMenuClickHandler(() => setMegaMenuOpen(false), megaMenuButtonRef);
+  const langMenuRef = useMenuClickHandler(() => setLangMenuOpen(false), langMenuButtonRef);
+
   const logos = React.useMemo(() => {
     switch (language) {
       case 'sv':
@@ -135,27 +141,16 @@ const Root = () => {
     logoutForm.current?.submit();
   };
 
-  const profileIndexPath = t('slugs.profile.index');
-  const userMenuUrls = {
-    preferences: `${profileIndexPath}/${t('slugs.profile.preferences')}`,
-  };
-
   const footerRef = React.useRef<HTMLDivElement>(null);
   const logoutForm = React.useRef<HTMLFormElement>(null);
 
-  const getActiveClassNames = ({ isActive }: { isActive: boolean }) => (isActive ? 'bg-secondary-1-50 rounded-sm' : '');
-  const name = `${data?.etunimi} ${data?.sukunimi}`;
-
-  const toggleMenu = (menu: 'mega' | 'user' | 'lang') => () => {
+  const toggleMenu = (menu: 'mega' | 'lang') => () => {
     setMegaMenuOpen(false);
-    setUserMenuOpen(false);
     setLangMenuOpen(false);
+
     switch (menu) {
       case 'mega':
         setMegaMenuOpen(!megaMenuOpen);
-        break;
-      case 'user':
-        setUserMenuOpen(!userMenuOpen);
         break;
       case 'lang':
         setLangMenuOpen(!langMenuOpen);
@@ -167,45 +162,6 @@ const Root = () => {
     setLangMenuOpen(false);
     setMegaMenuOpen(false);
   };
-
-  const getUserData: () => NavigationBarProps['user'] = () =>
-    data?.csrf && {
-      name,
-      /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
-      component: ({ children, className }) => {
-        return (
-          <div className="relative">
-            <form action="/yksilo/logout" method="POST" hidden ref={logoutForm}>
-              <input type="hidden" name="_csrf" value={data?.csrf.token} />
-              <input type="hidden" name="lang" value={language} />
-            </form>
-            <button
-              type="button"
-              className={`${className} bg-cover bg-center`}
-              onClick={sm ? toggleMenu('user') : void 0}
-            >
-              {children}
-            </button>
-            {sm && userMenuOpen && (
-              <div className="absolute right-0 min-w-max translate-y-8 transform">
-                <PopupList classNames="gap-2">
-                  <NavLink
-                    to={userMenuUrls.preferences}
-                    onClick={() => setUserMenuOpen(false)}
-                    className={(props) => `w-full ${getActiveClassNames(props)}`.trim()}
-                  >
-                    <PopupListItem>{t('profile.index')}</PopupListItem>
-                  </NavLink>
-                  <button type="button" onClick={logout} className="w-full">
-                    <PopupListItem classNames="w-full">{t('logout')}</PopupListItem>
-                  </button>
-                </PopupList>
-              </div>
-            )}
-          </div>
-        );
-      },
-    };
 
   return (
     <>
@@ -232,6 +188,7 @@ const Root = () => {
                 className="flex gap-4 justify-center items-center select-none"
                 aria-label={t('open-menu')}
                 onClick={toggleMenu('mega')}
+                ref={megaMenuButtonRef}
               >
                 <span className="py-3 pl-3">{t('menu')}</span>
                 <span className="size-7 flex justify-center items-center">
@@ -239,7 +196,12 @@ const Root = () => {
                 </span>
               </button>
             ) : (
-              <button className="flex justify-self-end p-3" aria-label={t('open-menu')} onClick={toggleMenu('mega')}>
+              <button
+                className="flex justify-self-end p-3"
+                aria-label={t('open-menu')}
+                onClick={toggleMenu('mega')}
+                ref={megaMenuButtonRef}
+              >
                 {megaMenuOpen ? (
                   <span className="size-7 flex justify-center items-center">
                     <MdClose size={24} />
@@ -252,24 +214,25 @@ const Root = () => {
               </button>
             )
           }
-          user={getUserData()}
+          refs={{ langMenuButtonRef: langMenuButtonRef }}
         />
         {langMenuOpen && (
           <div className="relative xl:container mx-auto">
-            <div className="absolute right-[50px] translate-y-7">
+            <div ref={langMenuRef} className="absolute right-[50px] translate-y-7">
               <LanguageMenu onClick={changeLanguage} />
             </div>
           </div>
         )}
         {error && <ErrorNote error={error} onCloseClick={clearErrorNote} />}
         {megaMenuOpen && (
-          <MegaMenu
-            loggedIn={!!data}
-            user={getUserData()}
-            logout={logout}
-            onClose={() => setMegaMenuOpen(false)}
-            onLanguageClick={changeLanguage}
-          />
+          <div ref={megaMenuRef}>
+            <MegaMenu
+              loggedIn={!!data}
+              logout={logout}
+              onClose={() => setMegaMenuOpen(false)}
+              onLanguageClick={changeLanguage}
+            />
+          </div>
         )}
       </header>
       <ActionBarContext.Provider value={footerRef.current}>
