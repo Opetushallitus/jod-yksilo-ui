@@ -54,7 +54,7 @@ export default (async ({ request }) => {
       patevyydet,
       muutOsaamiset,
     } as CompetencesLoaderData;
-  } catch (e) {
+  } catch (_e) {
     return {
       osaamiset: [],
       toimenkuvat: [],

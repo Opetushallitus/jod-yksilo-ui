@@ -1,3 +1,4 @@
 export { ErrorNote } from './ErrorNote';
-export { ErrorNoteContext, ErrorNoteProvider } from './ErrorNoteProvider';
+export { ErrorNoteContext } from './ErrorNoteContext';
+export { ErrorNoteProvider } from './ErrorNoteProvider';
 export { useErrorNote } from './useErrorNote';

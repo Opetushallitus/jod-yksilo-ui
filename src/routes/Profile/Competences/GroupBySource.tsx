@@ -72,18 +72,15 @@ export const GroupBySource = ({
                     {osaamiset.map((val) => {
                       const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
                       const title = val.osaaminen.kuvaus[locale];
-                      return (
-                        val.lahde.tyyppi === competence &&
-                        isOsaaminenVisible(competence, val.lahde.id) && (
-                          <Tag
-                            label={label}
-                            title={title}
-                            key={val.id}
-                            variant="presentation"
-                            sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
-                          />
-                        )
-                      );
+                      return val.lahde.tyyppi === competence && isOsaaminenVisible(competence, val.lahde.id) ? (
+                        <Tag
+                          label={label}
+                          title={title}
+                          key={val.id}
+                          variant="presentation"
+                          sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
+                        />
+                      ) : null;
                     })}
                   </div>
                   <Link

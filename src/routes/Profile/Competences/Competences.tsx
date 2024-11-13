@@ -36,6 +36,24 @@ interface Kokemus {
   osaamiset?: string[];
 }
 
+const MobileFilterButton = ({ onClick }: { onClick: () => void }) => {
+  const { sm } = useMediaQueries();
+  const { t } = useTranslation();
+
+  return !sm ? (
+    <RoundButton
+      size="sm"
+      bgColor="white"
+      label={t('profile.competences.show-filters')}
+      hideLabel
+      onClick={onClick}
+      icon={<MdTune size={24} />}
+    />
+  ) : (
+    <></>
+  );
+};
+
 const Competences = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const { toimenkuvat, koulutukset, patevyydet, muutOsaamiset, osaamiset } = useLoaderData() as CompetencesLoaderData;
@@ -120,21 +138,6 @@ const Competences = () => {
     [osaamiset, locale],
   );
 
-  const MobileFilterButton = () => {
-    return !sm ? (
-      <RoundButton
-        size="sm"
-        bgColor="white"
-        label={t('profile.competences.show-filters')}
-        hideLabel
-        onClick={() => setShowFilters(true)}
-        icon={<MdTune size={24} />}
-      />
-    ) : (
-      <></>
-    );
-  };
-
   return (
     <MainLayout
       navChildren={
@@ -183,7 +186,7 @@ const Competences = () => {
             locale={locale}
             osaamiset={sortedOsaamiset}
             isOsaaminenVisible={isOsaaminenVisible}
-            mobileFilterOpenerComponent={<MobileFilterButton />}
+            mobileFilterOpenerComponent={<MobileFilterButton onClick={() => setShowFilters(true)} />}
           />
         )}
         {groupBy === GROUP_BY_THEME && <></>}
@@ -194,7 +197,7 @@ const Competences = () => {
             locale={locale}
             osaamiset={osaamiset}
             isOsaaminenVisible={isOsaaminenVisible}
-            mobileFilterOpenerComponent={<MobileFilterButton />}
+            mobileFilterOpenerComponent={<MobileFilterButton onClick={() => setShowFilters(true)} />}
           />
         )}
       </div>

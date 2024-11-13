@@ -114,7 +114,7 @@ export const useToolStore = create<ToolState>()(
                 mahdollisuusData?.filter((m) => m.ehdotusMetadata?.tyyppi === 'KOULUTUSMAHDOLLISUUS').length ?? 0,
             },
           });
-        } catch (error) {
+        } catch (_error) {
           set({
             mahdollisuusEhdotukset: {},
             ehdotuksetLoading: false,
@@ -169,7 +169,7 @@ export const useToolStore = create<ToolState>()(
             mahdollisuudetLoading: false,
             mixedMahdollisuudet: sortedMixedMahdollisuudet,
           });
-        } catch (error) {
+        } catch (_error) {
           set({
             mixedMahdollisuudet: [],
             koulutusmahdollisuudet: [],
@@ -211,7 +211,7 @@ export const useToolStore = create<ToolState>()(
             });
           }
           await updateSuosikit();
-        } catch (error) {
+        } catch (_error) {
           // Error, do nothing
         }
         set({ suosikitLoading: false });
@@ -222,7 +222,7 @@ export const useToolStore = create<ToolState>()(
         try {
           const { data: suosikit = [] } = await client.GET(SUOSIKIT_PATH);
           set({ suosikit });
-        } catch (error) {
+        } catch (_error) {
           set({ suosikit: useToolStore.getState().suosikit ?? [] });
         }
         set({ suosikitLoading: false });

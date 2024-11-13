@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/cognitive-complexity */
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';

@@ -20,8 +20,7 @@ export const useLocalizedRoutes = () => {
           // Split id to get path
           const path = id.split('|')[0];
           // Replace path parameters with translations
-          const localizedPath: string = path.replaceAll(/{(.*?)}/g, (m: string) => {
-            const translationKey = m.slice(1, -1); // Remove curly braces
+          const localizedPath = path.replace(/{([^{}]*)}/g, (_m, translationKey: string) => {
             return t(translationKey, { lng });
           });
           pathnameParts.push(localizedPath);

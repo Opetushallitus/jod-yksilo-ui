@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/no-duplicate-string */
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList, Title } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
 import Tabs from '@/routes/EducationOpportunity/Tabs';

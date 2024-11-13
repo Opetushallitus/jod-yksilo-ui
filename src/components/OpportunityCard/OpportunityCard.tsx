@@ -53,6 +53,7 @@ const BottomBox = ({
 const OutlookDots = ({ outlook, ariaLabel }: { outlook: number; ariaLabel: string }) => (
   <div role="figure" className="flex flex-row gap-2" aria-label={ariaLabel}>
     {Array.from({ length: outlook }).map((_, idx) => (
+      /* eslint-disable-next-line sonarjs/no-array-index-key*/
       <div key={idx} className={`${idx < outlook ? 'bg-accent' : 'bg-accent-25'} w-4 h-4 rounded-full`} aria-hidden />
     ))}
   </div>
@@ -63,6 +64,7 @@ const ActionButton = ({
   icon,
   className = '',
   onClick,
+  ...restProps
 }: {
   label: string;
   icon: React.ReactNode;
@@ -74,6 +76,7 @@ const ActionButton = ({
       aria-label={label}
       className={`flex items-center gap-x-3 text-button-sm text-nowrap ${className}`.trim()}
       onClick={onClick}
+      {...restProps}
     >
       {icon}
       {label}
@@ -112,10 +115,10 @@ const FavoriteToggle = ({ isFavorite, onToggleFavorite }: { isFavorite?: boolean
 
 const MoreActionsDropdown = ({ compareTo }: { compareTo?: To }) => {
   const { t } = useTranslation();
-  const [open, isOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const listId = React.useId();
 
-  const onClose = React.useCallback(() => isOpen(false), []);
+  const onClose = React.useCallback(() => setOpen(false), []);
 
   return (
     <div className="relative">
@@ -126,22 +129,39 @@ const MoreActionsDropdown = ({ compareTo }: { compareTo?: To }) => {
         aria-expanded={open}
         aria-haspopup="listbox"
         className={open ? 'text-accent' : ''}
-        onClick={() => isOpen(!open)}
+        onClick={() => setOpen(!open)}
       />
       {open && (
-        <div id={listId} role="listbox" className="absolute -right-2 translate-y-[10px] cursor-auto">
-          <PopupList classNames="gap-y-2">
-            {compareTo && (
-              <Link to={compareTo} onClick={onClose} type="button">
-                <PopupListItem>{t('compare')}</PopupListItem>
-              </Link>
-            )}
-            <Link to="#" onClick={onClose} type="button">
-              <PopupListItem>TODO: {t('create-path')}</PopupListItem>
-            </Link>
-            <Link to="#" onClick={onClose} type="button">
-              <PopupListItem>TODO: {t('share')}</PopupListItem>
-            </Link>
+        /* Preventing the click through of the wrapper <div> if not able to click exactly at the list items */
+        /* eslint-disable jsx-a11y/click-events-have-key-events */
+        /* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
+        <div
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          className="absolute -right-2 translate-y-[10px] cursor-auto"
+        >
+          <PopupList>
+            <ul id={listId} className="flex flex-col gap-y-2 w-full">
+              {compareTo && (
+                <li>
+                  <Link to={compareTo} onClick={onClose} type="button">
+                    <PopupListItem>{t('compare')}</PopupListItem>
+                  </Link>
+                </li>
+              )}
+              <li>
+                <Link to="#" onClick={onClose} type="button">
+                  <PopupListItem>TODO: {t('create-path')}</PopupListItem>
+                </Link>
+              </li>
+              <li>
+                <Link to="#" onClick={onClose} type="button">
+                  <PopupListItem>TODO: {t('share')}</PopupListItem>
+                </Link>
+              </li>
+            </ul>
           </PopupList>
         </div>
       )}
@@ -171,6 +191,7 @@ const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
           <Button
             label={t('login')}
             variant="gray"
+            /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
             LinkComponent={({ children }) => <a href={loginLink}>{children}</a>}
           />
           <Button onClick={onClose} label={t('close')} />

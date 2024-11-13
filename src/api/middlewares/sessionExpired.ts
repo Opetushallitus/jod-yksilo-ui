@@ -7,6 +7,7 @@ export const sessionExpiredMiddleware: Middleware = {
     if (response.status === 403 && !response.url.endsWith('/api/profiili/yksilo')) {
       authStore.yksiloPromise = undefined;
       unregisterCsrfMiddleware();
+      /* eslint-disable sonarjs/todo-tag */
       throw new Error('session-expired'); // TODO: This should be replaced with a proper handling of session expiration
     }
     return response;

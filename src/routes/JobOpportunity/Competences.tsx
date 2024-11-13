@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/no-duplicate-string */
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList, Title } from '@/components';
 import { getLocalizedText } from '@/utils';
 import { Accordion, Tag } from '@jod/design-system';
