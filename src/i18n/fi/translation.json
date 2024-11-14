@@ -414,6 +414,7 @@
         },
         "description": "Pohdi, mikä sinua innostaa ja mitä uutta haluaisit kokeilla tai oppia, olipa se sitten yhteydessä aiempaan koulutukseesi tai ei. Kirjaa ylös kaikki kiinnostuksen kohteesi, vaikka ne tuntuisivat epärealistisilta.",
         "export": "Tallenna kiinnostukset osaamisprofiiliin",
+        "help-text": "Hahmota kiinnostuksen kohteitasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle sopivia kiinnostuksen kohteita.",
         "import": "Tuo kiinnostukset osaamisprofiilista",
         "interest-barometer": "Intressibarometri",
         "riasec-test": "RIASEC-testi",

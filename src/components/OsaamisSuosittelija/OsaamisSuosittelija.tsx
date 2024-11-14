@@ -3,7 +3,7 @@ import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, removeDuplicates } from '@/utils';
 import { Tag, Textarea, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -201,7 +201,7 @@ export const OsaamisSuosittelija = ({
                     .map(([skillType, skills]) => (
                       <React.Fragment key={skillType}>
                         <div className="text-body-sm mb-3 uppercase">{t(`osaamissuosittelija.my-${skillType}`)}</div>
-                        <div className="flex flex-wrap gap-3 mb-3">{skills.map(getTag)}</div>
+                        <div className="flex flex-wrap gap-3 mb-3">{removeDuplicates(skills, 'id').map(getTag)}</div>
                       </React.Fragment>
                     ))}
                 </div>
