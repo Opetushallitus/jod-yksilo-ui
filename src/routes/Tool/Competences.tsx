@@ -71,10 +71,20 @@ const Competences = () => {
 
   const exportToProfile = React.useCallback(async () => {
     await client.PUT('/api/profiili/muu-osaaminen', {
-      body: toolStore.osaamiset
-        .filter((o) => o.tyyppi === 'KARTOITETTU' || o.tyyppi === 'MUU_OSAAMINEN')
-        .map((o) => o.id),
+      body: [
+        ...new Set([
+          ...((await client.GET('/api/profiili/muu-osaaminen')).data ?? []),
+          ...toolStore.osaamiset
+            .filter((o) => o.tyyppi === 'KARTOITETTU' || o.tyyppi === 'MUU_OSAAMINEN')
+            .map((o) => o.id),
+        ]),
+      ],
     });
+    const osaamiset = toolStore.osaamiset.map((o) => ({
+      ...o,
+      tyyppi: o.tyyppi === 'KARTOITETTU' ? 'MUU_OSAAMINEN' : o.tyyppi,
+    }));
+    toolStore.setOsaamiset(removeDuplicates(osaamiset, 'id'));
   }, [toolStore]);
 
   return (
