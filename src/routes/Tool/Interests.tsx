@@ -18,6 +18,8 @@ import { useOutletContext, useRouteLoaderData } from 'react-router-dom';
 import { generateProfileLink } from '../Profile/utils';
 import { ToolLoaderData } from './loader';
 
+const kiinnostuksetOsaamisetApiPath = '/api/profiili/kiinnostukset/osaamiset';
+
 const Interests = () => {
   const {
     t,
@@ -33,7 +35,7 @@ const Interests = () => {
   );
 
   const importFromProfile = React.useCallback(async () => {
-    const { data } = await client.GET('/api/profiili/kiinnostukset/osaamiset');
+    const { data } = await client.GET(kiinnostuksetOsaamisetApiPath);
     const kiinnostukset = [
       ...(await osaamisetService.find(data)).map((k) => ({
         id: k.uri,
@@ -47,9 +49,19 @@ const Interests = () => {
   }, [toolStore]);
 
   const exportToProfile = React.useCallback(async () => {
-    await client.PUT('/api/profiili/kiinnostukset/osaamiset', {
-      body: toolStore.kiinnostukset.map((k) => k.id),
+    await client.PUT(kiinnostuksetOsaamisetApiPath, {
+      body: [
+        ...new Set([
+          ...((await client.GET(kiinnostuksetOsaamisetApiPath)).data ?? []),
+          ...toolStore.kiinnostukset.map((k) => k.id),
+        ]),
+      ],
     });
+    const kiinnostukset = toolStore.kiinnostukset.map((k) => ({
+      ...k,
+      tyyppi: k.tyyppi === 'KARTOITETTU' ? 'KIINNOSTUS' : k.tyyppi,
+    }));
+    toolStore.setKiinnostukset(removeDuplicates(kiinnostukset, 'id'));
   }, [toolStore]);
 
   return (
