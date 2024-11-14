@@ -139,6 +139,7 @@ export const OsaamisSuosittelija = ({
           value={taitosi}
           onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setTaitosi(event.target.value)}
           rows={2}
+          maxLength={10000}
           hideLabel
           className={className}
         />
