@@ -155,7 +155,7 @@ const Favorites = () => {
           return (
             <OpportunityCard
               key={id}
-              to={`/${language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`}
+              to={`/${language}/${t('slugs.job-opportunity.index')}/${id}`}
               description={getLocalizedText(mahdollisuus.tiivistelma)}
               employmentOutlook={2}
               hasRestrictions
@@ -168,7 +168,7 @@ const Favorites = () => {
               trend="NOUSEVA"
               type={mahdollisuusTyyppi}
               compareTo={{
-                pathname: `/${language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`,
+                pathname: `/${language}/${t('slugs.job-opportunity.index')}/${id}`,
                 hash: t('job-opportunity.competences.title'),
               }}
             />

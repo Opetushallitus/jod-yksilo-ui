@@ -1,17 +1,10 @@
 import { components } from '@/api/schema';
-import { useLoginLink } from '@/hooks/useLoginLink';
+import { ActionButton, FavoriteToggle, LoginModal } from '@/components';
 import { MahdollisuusTyyppi } from '@/routes/types';
-import { Button, ConfirmDialog, Modal, PopupList, PopupListItem } from '@jod/design-system';
+import { PopupList, PopupListItem } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  MdBlock,
-  MdFavorite,
-  MdFavoriteBorder,
-  MdMoreVert,
-  MdOutlineTrendingDown,
-  MdOutlineTrendingUp,
-} from 'react-icons/md';
+import { MdBlock, MdMoreVert, MdOutlineTrendingDown, MdOutlineTrendingUp } from 'react-icons/md';
 import { Link, NavLink, To } from 'react-router-dom';
 
 interface OpportunityCardProps {
@@ -58,60 +51,6 @@ const OutlookDots = ({ outlook, ariaLabel }: { outlook: number; ariaLabel: strin
     ))}
   </div>
 );
-
-const ActionButton = ({
-  label,
-  icon,
-  className = '',
-  onClick,
-  ...restProps
-}: {
-  label: string;
-  icon: React.ReactNode;
-  className?: string;
-  onClick: () => void;
-}) => {
-  return (
-    <button
-      aria-label={label}
-      className={`flex items-center gap-x-3 text-button-sm text-nowrap ${className}`.trim()}
-      onClick={onClick}
-      {...restProps}
-    >
-      {icon}
-      {label}
-    </button>
-  );
-};
-
-const FavoriteToggle = ({ isFavorite, onToggleFavorite }: { isFavorite?: boolean; onToggleFavorite: () => void }) => {
-  const { t } = useTranslation();
-
-  return isFavorite ? (
-    <ConfirmDialog
-      title={t('remove-favorite-confirmation-title')}
-      onConfirm={onToggleFavorite}
-      confirmText={t('delete')}
-      cancelText={t('cancel')}
-      variant="destructive"
-      description={t('remove-favorite-opportunity-confirmation')}
-    >
-      {(showDialog: () => void) => (
-        <ActionButton
-          label={t('remove-favorite')}
-          icon={<MdFavorite size={24} className="text-accent" aria-hidden />}
-          onClick={showDialog}
-        />
-      )}
-    </ConfirmDialog>
-  ) : (
-    <ActionButton
-      label={t('add-favorite')}
-      icon={<MdFavoriteBorder size={24} className="text-accent" />}
-      onClick={onToggleFavorite}
-    />
-  );
-};
 
 const MoreActionsDropdown = ({ compareTo }: { compareTo?: To }) => {
   const { t } = useTranslation();
@@ -166,38 +105,6 @@ const MoreActionsDropdown = ({ compareTo }: { compareTo?: To }) => {
         </div>
       )}
     </div>
-  );
-};
-
-interface LoginModalProps {
-  onClose: () => void;
-  isOpen: boolean;
-}
-const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
-  const { t } = useTranslation();
-  const loginLink = useLoginLink();
-
-  return (
-    <Modal
-      open={isOpen}
-      content={
-        <>
-          <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{t('login')}</h2>
-          <div className="mb-6">{t('login-for-favorites')}</div>
-        </>
-      }
-      footer={
-        <div className="flex justify-end gap-5">
-          <Button
-            label={t('login')}
-            variant="gray"
-            /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
-            LinkComponent={({ children }) => <a href={loginLink}>{children}</a>}
-          />
-          <Button onClick={onClose} label={t('close')} />
-        </div>
-      }
-    />
   );
 };
 

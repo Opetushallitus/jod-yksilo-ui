@@ -5,12 +5,7 @@ import {
   Overview as EducationOpportunityOverview,
   educationOpportunityLoader,
 } from '@/routes/EducationOpportunity';
-import {
-  JobOpportunity,
-  Competences as JobOpportunityCompetences,
-  Overview as JobOpportunityOverview,
-  loader as jobOpportunityLoader,
-} from '@/routes/JobOpportunity';
+import { JobOpportunity, loader as jobOpportunityLoader } from '@/routes/JobOpportunity';
 import { Competences as ProfileCompetences, competencesLoader } from '@/routes/Profile/Competences';
 import { loader as educationHistoryLoader } from '@/routes/Profile/EducationHistory';
 import { favoritesLoader } from '@/routes/Profile/Favorites';
@@ -158,23 +153,7 @@ const jobOpportunityRoutes = supportedLanguageCodes.map(
       id: `{slugs.job-opportunity.index}/:id|${lng}`,
       path: `${i18n.t('slugs.job-opportunity.index', { lng })}/:id`,
       element: <JobOpportunity />,
-      loader: jobOpportunityLoader,
-      children: [
-        {
-          index: true,
-          loader: () => redirect(i18n.t('slugs.job-opportunity.overview', { lng })),
-        },
-        {
-          id: `{slugs.job-opportunity.overview}|${lng}`,
-          path: i18n.t('slugs.job-opportunity.overview', { lng }),
-          element: <JobOpportunityOverview />,
-        },
-        {
-          id: `{slugs.job-opportunity.competences}|${lng}`,
-          path: i18n.t('slugs.job-opportunity.competences', { lng }),
-          element: <JobOpportunityCompetences />,
-        },
-      ],
+      loader: withYksiloContext(jobOpportunityLoader, false),
     }) as RouteObject,
 );
 
