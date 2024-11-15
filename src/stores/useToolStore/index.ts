@@ -10,6 +10,8 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 const SUOSIKIT_PATH = '/api/profiili/suosikit';
 
+let abortController = new AbortController();
+
 interface ToolState {
   tavoitteet: {
     a?: boolean;
@@ -33,6 +35,7 @@ interface ToolState {
   ehdotuksetPageSize: number;
   ehdotuksetPageNr: number;
   ehdotuksetCount: Record<MahdollisuusTyyppi, number>;
+  automaticLoading: boolean;
   reset: () => void;
 
   setTavoitteet: (state: ToolState['tavoitteet']) => void;
@@ -45,9 +48,11 @@ interface ToolState {
   setOsaamisKiinnostusPainotus: (state: number) => void;
   setRajoitePainotus: (state: number) => void;
 
-  updateEhdotukset: () => Promise<void>;
-  fetchMahdollisuudetPage: (page?: number) => Promise<void>;
+  updateEhdotukset: (signal?: AbortSignal) => Promise<void>;
+  fetchMahdollisuudetPage: (signal?: AbortSignal, page?: number) => Promise<void>;
   updateEhdotuksetAndTyomahdollisuudet: () => Promise<void>;
+
+  setAutomaticLoading: (state: boolean) => void;
 }
 
 export const useToolStore = create<ToolState>()(
@@ -70,7 +75,8 @@ export const useToolStore = create<ToolState>()(
       mahdollisuudetLoading: false,
       ehdotuksetPageNr: 1,
       ehdotuksetCount: { TYOMAHDOLLISUUS: 0, KOULUTUSMAHDOLLISUUS: 0 },
-      reset: () =>
+      automaticLoading: true,
+      reset: () => {
         set({
           tavoitteet: {},
           osaamiset: [],
@@ -79,15 +85,36 @@ export const useToolStore = create<ToolState>()(
           tyomahdollisuudet: [],
           koulutusmahdollisuudet: [],
           mixedMahdollisuudet: [],
-        }),
+        });
+      },
 
       setTavoitteet: (state) => set({ tavoitteet: state }),
-      setOsaamiset: (state) => set({ osaamiset: state }),
-      setKiinnostukset: (state) => set({ kiinnostukset: state }),
+      setOsaamiset: (state) => {
+        set({ osaamiset: state });
+        if (useToolStore.getState().automaticLoading) {
+          void useToolStore.getState().updateEhdotuksetAndTyomahdollisuudet();
+        }
+      },
+      setKiinnostukset: (state) => {
+        set({ kiinnostukset: state });
+        if (useToolStore.getState().automaticLoading) {
+          void useToolStore.getState().updateEhdotuksetAndTyomahdollisuudet();
+        }
+      },
       setSuosikit: (state) => set({ suosikit: state }),
-      setOsaamisKiinnostusPainotus: (state: number) => set({ osaamisKiinnostusPainotus: state }),
-      setRajoitePainotus: (state: number) => set({ rajoitePainotus: state }),
-      updateEhdotukset: async () => {
+      setOsaamisKiinnostusPainotus: (state: number) => {
+        set({ osaamisKiinnostusPainotus: state });
+        if (useToolStore.getState().automaticLoading) {
+          void useToolStore.getState().updateEhdotuksetAndTyomahdollisuudet();
+        }
+      },
+      setRajoitePainotus: (state: number) => {
+        set({ rajoitePainotus: state });
+        if (useToolStore.getState().automaticLoading) {
+          void useToolStore.getState().updateEhdotuksetAndTyomahdollisuudet();
+        }
+      },
+      updateEhdotukset: async (signal?: AbortSignal) => {
         const { osaamiset, kiinnostukset, osaamisKiinnostusPainotus, rajoitePainotus } = useToolStore.getState();
 
         set({ ehdotuksetLoading: true });
@@ -100,6 +127,7 @@ export const useToolStore = create<ToolState>()(
               kiinnostusPainotus: osaamisKiinnostusPainotus / 100,
               rajoitePainotus: rajoitePainotus / 100,
             },
+            signal,
           });
 
           const mahdollisuusEhdotukset = ehdotusDataToRecord(mahdollisuusData ?? []);
@@ -114,23 +142,25 @@ export const useToolStore = create<ToolState>()(
                 mahdollisuusData?.filter((m) => m.ehdotusMetadata?.tyyppi === 'KOULUTUSMAHDOLLISUUS').length ?? 0,
             },
           });
-        } catch (_error) {
-          set({
-            mahdollisuusEhdotukset: {},
-            ehdotuksetLoading: false,
-            ehdotuksetCount: {
-              TYOMAHDOLLISUUS: 0,
-              KOULUTUSMAHDOLLISUUS: 0,
-            },
-          });
+        } catch (error) {
+          if ((error as Error).name !== 'AbortError') {
+            set({
+              mahdollisuusEhdotukset: {},
+              ehdotuksetLoading: false,
+              ehdotuksetCount: {
+                TYOMAHDOLLISUUS: 0,
+                KOULUTUSMAHDOLLISUUS: 0,
+              },
+            });
+          }
         }
       },
-      fetchMahdollisuudetPage: async (newPage = 1) => {
+      fetchMahdollisuudetPage: async (signal, newPage = 1) => {
         const pageSize = useToolStore.getState().ehdotuksetPageSize;
         let ehdotukset = useToolStore.getState().mahdollisuusEhdotukset;
 
         if (Object.keys(ehdotukset).length === 0) {
-          await useToolStore.getState().updateEhdotukset();
+          await useToolStore.getState().updateEhdotukset(signal);
           ehdotukset = useToolStore.getState().mahdollisuusEhdotukset;
         }
 
@@ -180,10 +210,18 @@ export const useToolStore = create<ToolState>()(
       },
 
       updateEhdotuksetAndTyomahdollisuudet: async () => {
-        const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit } = useToolStore.getState();
+        const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit, automaticLoading } = useToolStore.getState();
 
-        await updateEhdotukset();
-        await fetchMahdollisuudetPage(1);
+        if (automaticLoading) {
+          document.getElementById('tool-your-opportunities-card')?.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        abortController.abort();
+        abortController = new AbortController();
+        const signal = abortController.signal;
+
+        await updateEhdotukset(signal);
+        await fetchMahdollisuudetPage(signal, 1);
         await updateSuosikit();
       },
       toggleSuosikki: async (suosionKohdeId: string, tyyppi: MahdollisuusTyyppi) => {
@@ -227,6 +265,8 @@ export const useToolStore = create<ToolState>()(
         }
         set({ suosikitLoading: false });
       },
+
+      setAutomaticLoading: (state) => set({ automaticLoading: state }),
     }),
     {
       name: 'tool-storage',

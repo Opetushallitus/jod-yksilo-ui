@@ -1,7 +1,16 @@
 import { OpportunityCard, Title } from '@/components';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
-import { Button, PageChangeDetails, Pagination, Slider, Spinner, cx, useMediaQueries } from '@jod/design-system';
+import {
+  Button,
+  Checkbox,
+  PageChangeDetails,
+  Pagination,
+  Slider,
+  Spinner,
+  cx,
+  useMediaQueries,
+} from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdBlock, MdOutlineInterests, MdOutlineSchool } from 'react-icons/md';
@@ -168,7 +177,7 @@ const YourOpportunitiesPagination = ({
       return;
     }
 
-    await toolStore.fetchMahdollisuudetPage(page);
+    await toolStore.fetchMahdollisuudetPage(undefined, page);
 
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -226,7 +235,10 @@ const YourOpportunitiesCard = ({ scrollRef }: { scrollRef: React.RefObject<HTMLU
   }, [toolStore.kiinnostukset.length, toolStore.osaamisKiinnostusPainotus, toolStore.osaamiset.length]);
 
   return (
-    <div className="flex flex-col gap-5 mb-7 p-5 sm:p-6 bg-secondary-1-25 rounded shadow-border z-10">
+    <div
+      id="tool-your-opportunities-card"
+      className="flex flex-col gap-5 mb-7 p-5 sm:p-6 bg-secondary-1-25 rounded shadow-border z-10"
+    >
       <p className="text-body-md-mobile sm:text-body-md">{t('tool.your-opportunities.card.description')}</p>
       <Slider
         label={t('competences')}
@@ -234,6 +246,14 @@ const YourOpportunitiesCard = ({ scrollRef }: { scrollRef: React.RefObject<HTMLU
         onValueChange={(val) => toolStore.setOsaamisKiinnostusPainotus(val)}
         value={value}
         disabled={toolStore.osaamiset.length === 0 || toolStore.kiinnostukset.length === 0}
+      />
+      <Checkbox
+        label={t('tool.your-opportunities.card.automatic-checkbox')}
+        checked={toolStore.automaticLoading}
+        onChange={() => toolStore.setAutomaticLoading(!toolStore.automaticLoading)}
+        name="name"
+        value="value"
+        ariaLabel={t('tool.your-opportunities.card.automatic-checkbox')}
       />
       <div className="flex justify-center sm:justify-start">
         <Button
@@ -264,7 +284,11 @@ const YourOpportunities = () => {
 
       <YourOpportunitiesPagination scrollRef={scrollRef} ariaLabel={t('pagination.top')} className="mb-7" />
 
-      <ul ref={scrollRef} className="flex flex-col gap-3 sm:gap-5 mb-8 scroll-mt-[96px]">
+      <ul
+        id="tool-your-opportunities-list"
+        ref={scrollRef}
+        className="flex flex-col gap-3 sm:gap-5 mb-8 scroll-mt-[96px]"
+      >
         {toolStore.mixedMahdollisuudet.map((mahdollisuus) => {
           const { id, mahdollisuusTyyppi } = mahdollisuus;
           const ehdotus = toolStore.mahdollisuusEhdotukset?.[id];
