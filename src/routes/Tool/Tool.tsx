@@ -275,7 +275,7 @@ const YourOpportunities = () => {
               as="li"
               to={
                 mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
-                  ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`
+                  ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`
                   : `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}/${t('slugs.education-opportunity.overview')}`
               }
               isFavorite={isFavorite}
@@ -294,7 +294,7 @@ const YourOpportunities = () => {
               compareTo={
                 mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
                   ? {
-                      pathname: `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}/${t('slugs.job-opportunity.overview')}`,
+                      pathname: `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`,
                       hash: t('job-opportunity.competences.title'),
                     }
                   : {

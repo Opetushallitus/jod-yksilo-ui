@@ -136,10 +136,7 @@
       "description": "Tarkastele ammattia yleisimpien työtehtävien kautta.",
       "title": "Yleisimmät työtehtävät"
     },
-    "overview": {
-      "navigation": "Ammatin yleiskuvaus",
-      "route": "Yleiskuvaus"
-    },
+    "navigation": "Ammatin yleiskuvaus",
     "personal-characteristics": {
       "description": "Kestävän kehityksen asiantuntijan tärkeitä henkilökohtaisia ominaisuuksia:",
       "title": "Henkilökohtaiset ominaisuudet"
@@ -226,6 +223,7 @@
     "share-my-competences": "Jaa osaamiseni"
   },
   "previous": "Edellinen",
+  "print": "Tulosta",
   "privacy-policy": "Tietosuojaseloste",
   "profile": {
     "competences": {
@@ -340,9 +338,7 @@
     "how-do-i-give-feedback": "miten-annan-palautetta",
     "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
     "job-opportunity": {
-      "competences": "osaamiset",
-      "index": "tyomahdollisuus",
-      "overview": "yleiskuvaus"
+      "index": "tyomahdollisuus"
     },
     "no-internet-connection": "ei-internetyhteytta",
     "privacy-policy": "tietosuojaseloste",
