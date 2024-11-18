@@ -128,7 +128,7 @@ const JobOpportunity = () => {
       {loginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} isOpen={loginModalOpen} />}
       <Title value={title ?? ''} />
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
-      <div className="flex flex-row gap-7 my-8 print:hidden">
+      <div className="flex flex-row flex-wrap gap-x-7 gap-y-5 my-8 print:hidden">
         <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={() => void onToggleFavorite()} />
         <ActionButton
           label={t('compare')}
