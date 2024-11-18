@@ -188,7 +188,7 @@
   "opportunity-card": {
     "common-educational-background": "Yleisin koulutustausta",
     "employment-outlook": "Työllisyysnäkymä",
-    "idustry-name": "Toimialan nimi",
+    "industry-name": "Toimialan nimi",
     "maybe-has-restrictions": "Saattaa sisältää rajoitteita",
     "opportunities-title": "Mahdollisuutesi",
     "outlook-value": "{{outlook}}/5",
