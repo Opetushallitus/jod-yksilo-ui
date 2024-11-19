@@ -46,6 +46,7 @@ export const RoutesNavigationList = ({ routes, onClick }: RoutesNavigationListPr
     <ul className="flex flex-col gap-y-2 py-4">
       {routes.map((route) => {
         const isSubPage = route.path.split('/').slice(1).length > 1;
+        const isAnchorLink = route.path.startsWith('#');
         return (
           <li key={route.path} className="flex min-h-7 items-center w-full">
             {route.authRequired && !data ? (
@@ -59,7 +60,7 @@ export const RoutesNavigationList = ({ routes, onClick }: RoutesNavigationListPr
                 lang={i18n.language}
                 className={({ isActive }) =>
                   cx('hyphens-auto text-black w-full block py-3 text-button-md hover:underline', {
-                    'bg-secondary-1-50 rounded-md': isActive,
+                    'bg-secondary-1-50 rounded-md': isActive && !isAnchorLink,
                     'pl-7': isSubPage,
                     'pl-5': !isSubPage,
                   })
