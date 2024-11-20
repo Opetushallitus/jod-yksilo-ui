@@ -151,7 +151,7 @@ const Competences = () => {
           />
           <HelpingToolProfileLinkItem
             profileLink={somethingElseLink}
-            icon={<MdLightbulbOutline size={24} className="text-secondary-5" />}
+            icon={<MdLightbulbOutline size={24} className="text-secondary-gray" />}
             title={t('profile.something-else.title')}
           />
         </HelpingToolsContent>
