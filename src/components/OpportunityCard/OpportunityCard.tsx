@@ -1,7 +1,7 @@
 import { components } from '@/api/schema';
 import { ActionButton, FavoriteToggle, LoginModal } from '@/components';
 import { MahdollisuusTyyppi } from '@/routes/types';
-import { PopupList, PopupListItem } from '@jod/design-system';
+import { cx, PopupList, PopupListItem } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdBlock, MdMoreVert, MdOutlineTrendingDown, MdOutlineTrendingUp } from 'react-icons/md';
@@ -198,7 +198,12 @@ export const OpportunityCard = ({
           className={`flex flex-wrap-reverse items-center gap-x-7 gap-y-5 mb-4 order-1 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
         >
           {typeof matchValue === 'number' && matchLabel && (
-            <div className="flex flex-nowrap gap-x-3 items-center px-4 bg-[#AD4298] rounded-full text-white select-none">
+            <div
+              className={cx('flex flex-nowrap gap-x-3 items-center px-4 text-white rounded-full select-none', {
+                'bg-[#AD4298]': type === 'TYOMAHDOLLISUUS',
+                'bg-[#00818A]': type === 'KOULUTUSMAHDOLLISUUS',
+              })}
+            >
               <span className="text-heading-2-mobile leading-8">{Math.round(matchValue * 100)}%</span>
               <span className="text-body-xs font-arial font-bold">{matchLabel}</span>
             </div>
