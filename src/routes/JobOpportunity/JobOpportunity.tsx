@@ -49,63 +49,36 @@ const JobOpportunity = () => {
     [osaamiset, omatOsaamisetUris],
   );
   const clusterSize = tyomahdollisuus?.jakaumat?.ammatti?.maara;
-  const readyRoutes: RoutesNavigationListProps['routes'] = [
-    {
-      active: false,
-      name: t('job-opportunity.description'),
-      path: `#${t('job-opportunity.description')}`,
-      replace: true,
-    },
-    {
-      active: false,
-      name: t('job-opportunity.most-common-job-tasks.title'),
-      path: `#${t('job-opportunity.most-common-job-tasks.title')}`,
-      replace: true,
-    },
 
-    {
-      active: false,
-      name: t('job-opportunity.competences.title'),
-      path: `#${t('job-opportunity.competences.title')}`,
-      replace: true,
-    },
-  ];
+  interface HeadingRoute {
+    title: string;
+    isDev?: boolean;
+  }
 
-  const todoRoutes: RoutesNavigationListProps['routes'] = [
-    {
-      active: false,
-      name: t('job-opportunity.key-figures.title'),
-      path: `#${t('job-opportunity.key-figures.title')}`,
-      replace: true,
-    },
-    {
-      active: false,
-      name: t('job-opportunity.labour-market-picture.title'),
-      path: `#${t('job-opportunity.labour-market-picture.title')}`,
-      replace: true,
-    },
-    {
-      active: false,
-      name: t('job-opportunity.salary-trends.title'),
-      path: `#${t('job-opportunity.salary-trends.title')}`,
-      replace: true,
-    },
-    {
-      active: false,
-      name: t('job-opportunity.employment-trends.title'),
-      path: `#${t('job-opportunity.employment-trends.title')}`,
-      replace: true,
-    },
-    {
-      active: false,
-      name: t('job-opportunity.related-jobs.title'),
-      path: `#${t('job-opportunity.related-jobs.title')}`,
-      replace: true,
-    },
-  ];
+  const createHeadingRoutes = (headings: HeadingRoute[]): RoutesNavigationListProps['routes'] => {
+    return headings
+      .filter((h) => !h.isDev || isDev)
+      .map((hf) => {
+        return {
+          active: false,
+          name: hf.title,
+          path: `#${hf.title}`,
+          replace: true,
+        };
+      });
+  };
 
-  // Remember to put the routes in the correct order once they're done
-  const routes = isDev ? [...readyRoutes, ...todoRoutes] : readyRoutes;
+  const routes = createHeadingRoutes([
+    { title: t('job-opportunity.description') },
+    { title: t('job-opportunity.professional-group'), isDev: true },
+    { title: t('job-opportunity.most-common-job-tasks.title') },
+    { title: t('job-opportunity.key-figures.title'), isDev: true },
+    { title: t('job-opportunity.labour-market-picture.title'), isDev: true },
+    { title: t('job-opportunity.salary-trends.title'), isDev: true },
+    { title: t('job-opportunity.competences.title') },
+    { title: t('job-opportunity.employment-trends.title'), isDev: true },
+    { title: t('job-opportunity.related-jobs.title'), isDev: true },
+  ]);
 
   const [isFavorite, setIsFavorite] = React.useState(false);
 
@@ -193,6 +166,12 @@ const JobOpportunity = () => {
             ))}
           </ol>
         </div>
+        {isDev && (
+          <div>
+            <ScrollHeading title={t('job-opportunity.professional-group')} heading="h2" className="text-heading-2" />
+            <p className="text-body-md font-arial mb-6 mt-4">{tyomahdollisuus?.ammattiryhma}</p>
+          </div>
+        )}
         {isDev && (
           <div>
             <ScrollHeading title={t('job-opportunity.key-figures.title')} heading="h2" className="text-heading-2" />
