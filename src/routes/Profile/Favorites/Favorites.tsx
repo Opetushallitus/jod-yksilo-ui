@@ -119,7 +119,6 @@ const Favorites = () => {
           </SimpleNavigationList>
           <SimpleNavigationList title={t('content')} backgroundClassName="bg-bg-gray-2" collapsible>
             <div className="flex flex-col gap-4 hyphens-auto">
-              <div className="text-todo">TODO</div>
               <Checkbox
                 ariaLabel={jobFilterText}
                 checked={isFilterChecked('TYOMAHDOLLISUUS')}

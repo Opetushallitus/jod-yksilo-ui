@@ -1,5 +1,6 @@
 import { components } from '@/api/schema';
 import { ActionButton, FavoriteToggle, LoginModal } from '@/components';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { cx, PopupList, PopupListItem } from '@jod/design-system';
 import React from 'react';
@@ -129,6 +130,7 @@ export const OpportunityCard = ({
 }: OpportunityCardProps) => {
   const { t } = useTranslation();
   const [loginModalOpen, setLoginModalOpen] = React.useState(false);
+  const { isDev } = useEnvironment();
 
   const onToggleFavorite = () => {
     if (!isLoggedIn) {
@@ -159,40 +161,42 @@ export const OpportunityCard = ({
             {name}
           </NavLink>
           <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
-          <div className="flex flex-wrap mt-5">
-            <BottomBox title={t('opportunity-card.trend')} className="bg-todo">
-              {trend === 'NOUSEVA' ? (
-                <MdOutlineTrendingUp size={24} className="text-accent" aria-label={t(`opportunity-card.trend-up`)} />
-              ) : (
-                <MdOutlineTrendingDown
-                  size={24}
-                  className="text-accent"
-                  aria-label={t(`opportunity-card.trend-down`)}
+          {isDev && (
+            <div className="flex flex-wrap mt-5">
+              <BottomBox title={t('opportunity-card.trend')} className="bg-todo">
+                {trend === 'NOUSEVA' ? (
+                  <MdOutlineTrendingUp size={24} className="text-accent" aria-label={t(`opportunity-card.trend-up`)} />
+                ) : (
+                  <MdOutlineTrendingDown
+                    size={24}
+                    className="text-accent"
+                    aria-label={t(`opportunity-card.trend-down`)}
+                  />
+                )}
+              </BottomBox>
+              <BottomBox title={t('opportunity-card.employment-outlook')} className="bg-todo">
+                <OutlookDots
+                  outlook={employmentOutlook}
+                  ariaLabel={t('opportunity-card.outlook-value', { outlook: employmentOutlook })}
                 />
+              </BottomBox>
+              {hasRestrictions && (
+                <BottomBox title={t('opportunity-card.maybe-has-restrictions')} className="bg-todo">
+                  <MdBlock className="text-accent" size={20} role="presentation" />
+                </BottomBox>
               )}
-            </BottomBox>
-            <BottomBox title={t('opportunity-card.employment-outlook')} className="bg-todo">
-              <OutlookDots
-                outlook={employmentOutlook}
-                ariaLabel={t('opportunity-card.outlook-value', { outlook: employmentOutlook })}
-              />
-            </BottomBox>
-            {hasRestrictions && (
-              <BottomBox title={t('opportunity-card.maybe-has-restrictions')} className="bg-todo">
-                <MdBlock className="text-accent" size={20} role="presentation" />
-              </BottomBox>
-            )}
-            {industryName && (
-              <BottomBox title={`${t('opportunity-card.industry-name')}:`} className="bg-todo">
-                <span className="font-bold">{industryName}</span>
-              </BottomBox>
-            )}
-            {mostCommonEducationBackground && (
-              <BottomBox title={`${t('opportunity-card.common-educational-background')}:`} className="bg-todo">
-                <span className="font-bold">{mostCommonEducationBackground}</span>
-              </BottomBox>
-            )}
-          </div>
+              {industryName && (
+                <BottomBox title={`${t('opportunity-card.industry-name')}:`} className="bg-todo">
+                  <span className="font-bold">{industryName}</span>
+                </BottomBox>
+              )}
+              {mostCommonEducationBackground && (
+                <BottomBox title={`${t('opportunity-card.common-educational-background')}:`} className="bg-todo">
+                  <span className="font-bold">{mostCommonEducationBackground}</span>
+                </BottomBox>
+              )}
+            </div>
+          )}
         </div>
         <div
           className={`flex flex-wrap-reverse items-center gap-x-7 gap-y-5 mb-4 order-1 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}

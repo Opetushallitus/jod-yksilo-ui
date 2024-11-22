@@ -9,6 +9,7 @@ import {
   Title,
 } from '@/components';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import { tidyClasses as tc } from '@jod/design-system';
@@ -36,6 +37,7 @@ const JobOpportunity = () => {
   const { t } = useTranslation();
   const { tyomahdollisuus, ammatit, osaamiset, isLoggedIn } = useLoaderData() as LoaderData;
   const toolStore = useToolStore();
+  const { isDev } = useEnvironment();
   const title = getLocalizedText(tyomahdollisuus?.otsikko);
   const [loginModalOpen, setLoginModalOpen] = React.useState(false);
   const omatOsaamisetUris = React.useMemo(
@@ -47,7 +49,7 @@ const JobOpportunity = () => {
     [osaamiset, omatOsaamisetUris],
   );
   const clusterSize = tyomahdollisuus?.jakaumat?.ammatti?.maara;
-  const routes: RoutesNavigationListProps['routes'] = [
+  const readyRoutes: RoutesNavigationListProps['routes'] = [
     {
       active: false,
       name: t('job-opportunity.description'),
@@ -60,6 +62,16 @@ const JobOpportunity = () => {
       path: `#${t('job-opportunity.most-common-job-tasks.title')}`,
       replace: true,
     },
+
+    {
+      active: false,
+      name: t('job-opportunity.competences.title'),
+      path: `#${t('job-opportunity.competences.title')}`,
+      replace: true,
+    },
+  ];
+
+  const todoRoutes: RoutesNavigationListProps['routes'] = [
     {
       active: false,
       name: t('job-opportunity.key-figures.title'),
@@ -80,12 +92,6 @@ const JobOpportunity = () => {
     },
     {
       active: false,
-      name: t('job-opportunity.competences.title'),
-      path: `#${t('job-opportunity.competences.title')}`,
-      replace: true,
-    },
-    {
-      active: false,
       name: t('job-opportunity.employment-trends.title'),
       path: `#${t('job-opportunity.employment-trends.title')}`,
       replace: true,
@@ -97,6 +103,9 @@ const JobOpportunity = () => {
       replace: true,
     },
   ];
+
+  // Remember to put the routes in the correct order once they're done
+  const routes = isDev ? [...readyRoutes, ...todoRoutes] : readyRoutes;
 
   const [isFavorite, setIsFavorite] = React.useState(false);
 
@@ -130,24 +139,30 @@ const JobOpportunity = () => {
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <div className="flex flex-row flex-wrap gap-x-7 gap-y-5 my-8 print:hidden">
         <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={() => void onToggleFavorite()} />
-        <ActionButton
-          label={t('compare')}
-          icon={<MdCompareArrows size={24} className="text-accent" />}
-          onClick={notImplemented}
-          className="bg-todo"
-        />
-        <ActionButton
-          label={t('create-path')}
-          icon={<MdOutlineRoute size={24} className="text-accent transform rotate-90 -scale-x-100" />}
-          onClick={notImplemented}
-          className="bg-todo"
-        />
-        <ActionButton
-          label={t('share')}
-          icon={<MdOutlineShare size={24} className="text-accent" />}
-          onClick={notImplemented}
-          className="bg-todo"
-        />
+        {isDev && (
+          <ActionButton
+            label={t('compare')}
+            icon={<MdCompareArrows size={24} className="text-accent" />}
+            onClick={notImplemented}
+            className="bg-todo"
+          />
+        )}
+        {isDev && (
+          <ActionButton
+            label={t('create-path')}
+            icon={<MdOutlineRoute size={24} className="text-accent transform rotate-90 -scale-x-100" />}
+            onClick={notImplemented}
+            className="bg-todo"
+          />
+        )}
+        {isDev && (
+          <ActionButton
+            label={t('share')}
+            icon={<MdOutlineShare size={24} className="text-accent" />}
+            onClick={notImplemented}
+            className="bg-todo"
+          />
+        )}
         <ActionButton
           label={t('print')}
           icon={<MdOutlinePrint size={24} className="text-accent" />}
@@ -178,25 +193,33 @@ const JobOpportunity = () => {
             ))}
           </ol>
         </div>
-        <div>
-          <ScrollHeading title={t('job-opportunity.key-figures.title')} heading="h2" className="text-heading-2" />
-          <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.key-figures.description')}</p>
-          <div className="bg-todo h-[380px]" />
-        </div>
-        <div>
-          <ScrollHeading
-            title={t('job-opportunity.labour-market-picture.title')}
-            heading="h2"
-            className="text-heading-2"
-          />
-          <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.labour-market-picture.description')}</p>
-          <div className="bg-todo h-[380px]" />
-        </div>
-        <div>
-          <ScrollHeading title={t('job-opportunity.salary-trends.title')} heading="h2" className="text-heading-2" />
-          <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.salary-trends.description')}</p>
-          <div className="bg-todo h-[380px]" />
-        </div>
+        {isDev && (
+          <div>
+            <ScrollHeading title={t('job-opportunity.key-figures.title')} heading="h2" className="text-heading-2" />
+            <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.key-figures.description')}</p>
+            <div className="bg-todo h-[380px]" />
+          </div>
+        )}
+        {isDev && (
+          <div>
+            <ScrollHeading
+              title={t('job-opportunity.labour-market-picture.title')}
+              heading="h2"
+              className="text-heading-2"
+            />
+            <p className="text-body-md font-arial mb-6 mt-4">
+              {t('job-opportunity.labour-market-picture.description')}
+            </p>
+            <div className="bg-todo h-[380px]" />
+          </div>
+        )}
+        {isDev && (
+          <div>
+            <ScrollHeading title={t('job-opportunity.salary-trends.title')} heading="h2" className="text-heading-2" />
+            <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.salary-trends.description')}</p>
+            <div className="bg-todo h-[380px]" />
+          </div>
+        )}
         <div>
           <ScrollHeading title={t('job-opportunity.competences.title')} heading="h2" className="text-heading-2" />
           <CompareCompetencesTable
@@ -205,16 +228,24 @@ const JobOpportunity = () => {
             className="mt-4"
           />
         </div>
-        <div>
-          <ScrollHeading title={t('job-opportunity.employment-trends.title')} heading="h2" className="text-heading-2" />
-          <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.employment-trends.description')}</p>
-          <div className="bg-todo h-[380px]" />
-        </div>
-        <div>
-          <ScrollHeading title={t('job-opportunity.related-jobs.title')} heading="h2" className="text-heading-2" />
-          <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.related-jobs.description')}</p>
-          <div className="bg-todo h-[380px] mb-8" />
-        </div>
+        {isDev && (
+          <div>
+            <ScrollHeading
+              title={t('job-opportunity.employment-trends.title')}
+              heading="h2"
+              className="text-heading-2"
+            />
+            <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.employment-trends.description')}</p>
+            <div className="bg-todo h-[380px]" />
+          </div>
+        )}
+        {isDev && (
+          <div>
+            <ScrollHeading title={t('job-opportunity.related-jobs.title')} heading="h2" className="text-heading-2" />
+            <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.related-jobs.description')}</p>
+            <div className="bg-todo h-[380px] mb-8" />
+          </div>
+        )}
       </div>
     </MainLayout>
   );
