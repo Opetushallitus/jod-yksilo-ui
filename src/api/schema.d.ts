@@ -629,6 +629,9 @@ export interface components {
       otsikko: components['schemas']['LokalisoituTeksti'];
       tiivistelma?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
+      tehtavat?: components['schemas']['LokalisoituTeksti'];
+      yleisetVaatimukset?: components['schemas']['LokalisoituTeksti'];
+      ammattiryhma?: string;
       jakaumat?: {
         [key: string]: components['schemas']['JakaumaDto'];
       };
