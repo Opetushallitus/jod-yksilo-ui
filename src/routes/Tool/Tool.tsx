@@ -1,4 +1,5 @@
 import { OpportunityCard, Title } from '@/components';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import {
@@ -36,12 +37,13 @@ const MyOwnData = () => {
     i18n: { language },
   } = useTranslation();
   const titleId = React.useId();
+  const { isDev } = useEnvironment();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { lg } = useMediaQueries();
   const { isLoggedIn } = useLoaderData() as ToolLoaderData;
-  const tabs = React.useMemo(
-    () => [
+  const tabs = React.useMemo(() => {
+    const tabs = [
       {
         text: t('goals'),
         icon: <MdTarget size={lg ? 24 : 32} className="mx-auto" />,
@@ -60,15 +62,19 @@ const MyOwnData = () => {
         active: pathname.endsWith(t('slugs.tool.interests', { lng: language })),
         to: t('slugs.tool.interests', { lng: language }),
       },
+    ];
+
+    const todoTabs = [
       {
         text: t('restrictions'),
         icon: <MdBlock size={lg ? 24 : 32} className="mx-auto" />,
         active: pathname.endsWith(t('slugs.tool.restrictions', { lng: language })),
         to: t('slugs.tool.restrictions', { lng: language }),
       },
-    ],
-    [t, language, pathname, lg],
-  );
+    ];
+
+    return isDev ? [...tabs, ...todoTabs] : tabs;
+  }, [t, lg, pathname, language, isDev]);
 
   const onKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {

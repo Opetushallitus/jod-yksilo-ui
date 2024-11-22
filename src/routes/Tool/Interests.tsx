@@ -8,6 +8,7 @@ import {
   OsaamisSuosittelija,
 } from '@/components';
 import { OsaaminenLahdeTyyppi } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicates } from '@/utils';
 import { Accordion, Button, ConfirmDialog } from '@jod/design-system';
@@ -25,6 +26,7 @@ const Interests = () => {
     t,
     i18n: { language },
   } = useTranslation();
+  const { isDev } = useEnvironment();
   const toolStore = useToolStore();
   const { isLoggedIn } = useOutletContext<ToolLoaderData>();
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
@@ -113,18 +115,22 @@ const Interests = () => {
             icon={<MdOutlineInterests size={24} color="#006DB3" />}
             title={t('profile.interests.title')}
           />
-          <HelpingToolLinkItem
-            icon={<MdOutlineQuiz size={24} color="#006DB3" />}
-            title={t('tool.my-own-data.interests.riasec-test')}
-            /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
-            component={({ children }) => <div className="bg-todo">{children}</div>}
-          />
-          <HelpingToolLinkItem
-            icon={<MdOutlineInterests size={24} color="#AD4298" />}
-            title={t('tool.my-own-data.interests.interest-barometer')}
-            /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
-            component={({ children }) => <div className="bg-todo">{children}</div>}
-          />
+          {isDev && (
+            <HelpingToolLinkItem
+              icon={<MdOutlineQuiz size={24} color="#006DB3" />}
+              title={t('tool.my-own-data.interests.riasec-test')}
+              /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+              component={({ children }) => <div className="bg-todo">{children}</div>}
+            />
+          )}
+          {isDev && (
+            <HelpingToolLinkItem
+              icon={<MdOutlineInterests size={24} color="#AD4298" />}
+              title={t('tool.my-own-data.interests.interest-barometer')}
+              /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+              component={({ children }) => <div className="bg-todo">{children}</div>}
+            />
+          )}
         </HelpingToolsContent>
       </Accordion>
     </>

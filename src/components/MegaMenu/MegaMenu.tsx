@@ -1,6 +1,7 @@
 import { LanguageButton, LanguageMenu, RoutesNavigationList, SimpleNavigationList, UserButton } from '@/components';
 import { NavigationBarProps } from '@/components/NavigationBar/NavigationBar';
 import { useAppRoutes } from '@/hooks/useAppRoutes';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +19,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, user, logout }: M
   const { sm } = useMediaQueries();
   const { t } = useTranslation();
   const [megaMenuState, setMegaMenuState] = React.useState<'main' | 'lang'>('main');
+  const { isDev } = useEnvironment();
 
   const onLanguageButtonClick = () => {
     setMegaMenuState('lang');
@@ -90,7 +92,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, user, logout }: M
             </>
           )}
         </div>
-        {sm && (
+        {isDev && sm && (
           <div className="flex items-center font-arial sticky bottom-0 bg-[#F5F5F5] h-[100px] px-9 py-6 text-secondary-gray text-body-sm text-todo">
             Lorem ipsum dolor sit amet, soleat iracundia eos ea, est in modo vivendo moderatius. Ex duo hinc graeco
             evertitur, nisl affert vel cu. Ne ius quis repudiare. Ne modo eius corpora mea. Ipsum congue definitiones
