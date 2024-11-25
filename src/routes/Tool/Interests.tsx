@@ -76,6 +76,8 @@ const Interests = () => {
         <OsaamisSuosittelija
           onChange={toolStore.setKiinnostukset}
           value={toolStore.kiinnostukset}
+          categorized
+          mode="kiinnostukset"
           className="!bg-[#F7F7F9]"
         />
       </div>
