@@ -19,6 +19,8 @@ export interface Osaaminen {
 
 export type OsaaminenValue = Pick<Osaaminen, 'id' | 'nimi' | 'kuvaus' | 'tyyppi'>;
 
+type OsaamisSuosittelijaMode = 'osaamiset' | 'kiinnostukset';
+
 interface OsaamisSuosittelijaProps {
   /** Callback that handles data on change */
   onChange: (values: OsaaminenValue[]) => void;
@@ -28,6 +30,8 @@ interface OsaamisSuosittelijaProps {
   sourceType?: Osaaminen['tyyppi'];
   /** Should display skills by categories. False by default. */
   categorized?: boolean;
+  /** Mode that tells which translations to use and what color to use for tags */
+  mode?: OsaamisSuosittelijaMode;
   /** Additional class name */
   className?: string;
 }
@@ -39,6 +43,7 @@ export const OsaamisSuosittelija = ({
   onChange,
   sourceType = 'KARTOITETTU',
   categorized = false,
+  mode = 'osaamiset',
   className = '',
 }: OsaamisSuosittelijaProps) => {
   const { i18n, t } = useTranslation();
@@ -123,7 +128,9 @@ export const OsaamisSuosittelija = ({
       key={osaaminen.id}
       label={getLocalizedText(osaaminen.nimi)}
       title={getLocalizedText(osaaminen.kuvaus)}
-      sourceType={OSAAMINEN_COLOR_MAP[osaaminen.tyyppi ? osaaminen.tyyppi : sourceType]}
+      sourceType={
+        mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[osaaminen.tyyppi ?? sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
+      }
       onClick={() => {
         onChange(value.filter((selectedValue) => selectedValue.id !== osaaminen.id));
       }}
@@ -146,10 +153,10 @@ export const OsaamisSuosittelija = ({
       </div>
       <div className="mb-6 flex flex-col">
         <div className={`${sm ? 'text-heading-4 font-arial' : 'text-heading-4-mobile'} font-bold mb-2`}>
-          {t('proposed-competences')}
+          {mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}
         </div>
         <div className={`${sm ? 'text-body-sm font-arial' : 'text-body-sm-mobile'} mb-3`}>
-          {t('osaamissuosittelija.add')}
+          {mode === 'osaamiset' ? t('osaamissuosittelija.competence.add') : t('osaamissuosittelija.interest.add')}
         </div>
         <div
           className={`mb-6 h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-white ${className}`.trim()}
@@ -160,7 +167,7 @@ export const OsaamisSuosittelija = ({
                 key={ehdotettuOsaaminen.id}
                 label={getLocalizedText(ehdotettuOsaaminen.nimi)}
                 title={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
-                sourceType={OSAAMINEN_COLOR_MAP[sourceType]}
+                sourceType={mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
                 onClick={() => {
                   onChange([
                     ...value,
@@ -179,10 +186,10 @@ export const OsaamisSuosittelija = ({
         </div>
 
         <div className={`${sm ? 'text-heading-4 font-arial' : 'text-heading-4-mobile'} font-bold mb-2`}>
-          {t('competences-of-your-choice')}
+          {mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}
         </div>
         <div className={`${sm ? 'text-body-sm font-arial' : 'text-body-sm-mobile'} mb-3`}>
-          {t('osaamissuosittelija.remove')}
+          {mode === 'osaamiset' ? t('osaamissuosittelija.competence.remove') : t('osaamissuosittelija.interest.remove')}
         </div>
         <div
           className={`min-h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-white ${className}`.trim()}
@@ -190,17 +197,24 @@ export const OsaamisSuosittelija = ({
           <div className="flex flex-wrap gap-3">
             {categorized ? (
               <div className="flex-col">
-                <div className="text-heading-4 uppercase mb-3">{t('mapped-competences')}</div>
+                <div className="text-heading-4 uppercase mb-3">
+                  {mode === 'osaamiset' ? t('mapped-competences') : t('mapped-interests')}
+                </div>
                 <div className="flex flex-wrap gap-3 mb-4 min-h-[28px]">{categorizedValue.KARTOITETTU.map(getTag)}</div>
 
-                <div className="text-heading-4 uppercase mb-3">{t('competences-from-profile')}</div>
+                <div className="text-heading-4 uppercase mb-3">
+                  {mode === 'osaamiset' ? t('competences-from-profile') : t('interests-from-profile')}
+                </div>
+
                 <div className="min-h-[28px]">
                   {(Object.entries(categorizedValue) as [OsaaminenLahdeTyyppi, OsaaminenValue[]][])
                     .filter(([skillType, skills]) => skillType !== 'KARTOITETTU' && skills.length > 0)
                     .sort(([a], [b]) => sortCategories(a, b))
                     .map(([skillType, skills]) => (
                       <React.Fragment key={skillType}>
-                        <div className="text-body-sm mb-3 uppercase">{t(`osaamissuosittelija.my-${skillType}`)}</div>
+                        {mode === 'osaamiset' && (
+                          <div className="text-body-sm mb-3 uppercase">{t(`osaamissuosittelija.my-${skillType}`)}</div>
+                        )}
                         <div className="flex flex-wrap gap-3 mb-3">{removeDuplicates(skills, 'id').map(getTag)}</div>
                       </React.Fragment>
                     ))}
