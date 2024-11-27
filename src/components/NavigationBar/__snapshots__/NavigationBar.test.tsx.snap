@@ -44,7 +44,7 @@ exports[`NavigationBar > renders no navigation items and no user 1`] = `
         <a
           aria-label="Kirjaudu sisään"
           class="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
-          href="/login?lang=fi&callback=callback-url"
+          href="/yksilo/login?lang=fi&callback=callback-url"
         >
           <svg
             fill="currentColor"

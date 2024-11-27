@@ -51,7 +51,7 @@ npm update @jod/design-system
 Start the JOD Yksilö locally and make sure it is running on http://localhost:9080/. Then run the following command to generate TypeScript types from the OpenAPI schema:
 
 ```shell
-npx openapi-typescript http://localhost:9080/openapi/openapi.json -o src/api/schema.d.ts && npx prettier src/api/schema.d.ts --write
+npx openapi-typescript http://localhost:9080/yksilo/openapi/openapi.json -o src/api/schema.d.ts && npx prettier src/api/schema.d.ts --write
 ```
 
 ## Accessibility testing

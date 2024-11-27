@@ -8,7 +8,7 @@ import './i18n/config';
 import './index.css';
 import { routes } from './routes';
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes, { basename: '/yksilo' });
 
 const root = createRoot(document.getElementById('root')!);
 
