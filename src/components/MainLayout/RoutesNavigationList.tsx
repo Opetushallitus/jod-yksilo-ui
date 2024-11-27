@@ -26,7 +26,7 @@ const LoginLink = ({ children, path, lang }: LoginLinkProps) => {
   params.set('lang', lang);
   params.set('callback', `/${lang}/${path}`);
 
-  const href = `/login?${params.toString()}`;
+  const href = `/yksilo/login?${params.toString()}`;
   return (
     <a
       href={href}

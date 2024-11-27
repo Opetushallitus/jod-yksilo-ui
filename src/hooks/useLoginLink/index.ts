@@ -9,5 +9,5 @@ export const useLoginLink = () => {
   params.set('lang', i18n.language);
   params.set('callback', pathname);
 
-  return `/login?${params.toString()}`;
+  return `/yksilo/login?${params.toString()}`;
 };

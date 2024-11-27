@@ -9,6 +9,7 @@ const target = process.env.API_BASE_URL ?? 'http://localhost:9080';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/yksilo/',
   plugins: [react()],
   test: {
     environment: 'jsdom',
@@ -31,23 +32,23 @@ export default defineConfig({
   server: {
     port: 8080,
     proxy: {
-      '/api': {
+      '/yksilo/api': {
         target,
         xfwd: true,
       },
-      '/login': {
+      '/yksilo/login': {
         target,
         xfwd: true,
       },
-      '/saml2': {
+      '/yksilo/saml2': {
         target,
         xfwd: true,
       },
-      '/logout': {
+      '/yksilo/logout': {
         target,
         xfwd: true,
       },
-      '/openapi': {
+      '/yksilo/openapi': {
         target,
         xfwd: true,
       },
