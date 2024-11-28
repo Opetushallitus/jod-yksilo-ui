@@ -104,6 +104,8 @@
   "industry-job-opportunities": "Toimiala (työmahdollisuudet)",
   "instructions": "Ohjeet",
   "interests": "Kiinnostukset",
+  "interests-from-profile": "Osaamisprofiilista tuotu kiinnostukseni",
+  "interests-of-your-choice": "Valitut kiinnostukset",
   "job-opportunities": "Työmahdollisuudet",
   "job-opportunity": {
     "competences": {
@@ -141,6 +143,7 @@
       "description": "Kestävän kehityksen asiantuntijan tärkeitä henkilökohtaisia ominaisuuksia:",
       "title": "Henkilökohtaiset ominaisuudet"
     },
+    "professional-group": "Ammattiryhmä",
     "related-jobs": {
       "description": "Lähiammatit muodostetaan ammattien osaamisvaatimusten mukaan. Alla näet ammatteja jotka osaamisvaatimuksiltaan lähinnä Kestävän kehityksen asiantuntijan ammattia.",
       "title": "Lähiammatit"
@@ -158,6 +161,7 @@
   "login-for-favorites": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa suosikkeja ja päästä tarkastelemaan niitä myöhemmin.",
   "logout": "Kirjaudu ulos",
   "mapped-competences": "Kartoitetut osaamiset",
+  "mapped-interests": "Kartoitetut kiinnostukset",
   "match-service": "Kohtaantopalvelu",
   "menu": "Valikko",
   "menus": {
@@ -202,13 +206,19 @@
   },
   "osaamispolku": "Osaamispolku",
   "osaamissuosittelija": {
-    "add": "Lisää osaaminen klikkaamalla '+'-merkkiä osaamisen vieressä.",
+    "competence": {
+      "add": "Lisää osaaminen klikkaamalla '+'-merkkiä osaamisen vieressä.",
+      "remove": "Poista osaaminen klikkaamalla rastia."
+    },
+    "interest": {
+      "add": "Lisää kiinnostus klikkaamalla '+'-merkkiä kiinnostuksen vieressä.",
+      "remove": "Poista kiinnostus klikkaamalla rastia."
+    },
     "my-KIINNOSTUS": "Kiinnostukseni",
     "my-KOULUTUS": "Koulutukseni",
     "my-MUU_OSAAMINEN": "Muu osaamiseni",
     "my-PATEVYYS": "Vapaa-ajan toimintoni",
-    "my-TOIMENKUVA": "Työpaikkani",
-    "remove": "Poista osaaminen klikkaamalla rastia."
+    "my-TOIMENKUVA": "Työpaikkani"
   },
   "pagination": {
     "bottom": "Alapuolen sivutus",
@@ -309,6 +319,7 @@
     }
   },
   "proposed-competences": "Ehdotetut osaamiset",
+  "proposed-interests": "Ehdotetut kiinnostukset",
   "remove-approval": "Hylkää hyväksyntä",
   "remove-favorite": "Poista suosikeista",
   "remove-favorite-confirmation-title": "Poista suosikeista",
