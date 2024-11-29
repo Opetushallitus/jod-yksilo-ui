@@ -175,7 +175,7 @@ const Root = () => {
       component: ({ children, className }) => {
         return (
           <div className="relative">
-            <form action="/logout" method="POST" hidden ref={logoutForm}>
+            <form action="/yksilo/logout" method="POST" hidden ref={logoutForm}>
               <input type="hidden" name="_csrf" value={data?.csrf.token} />
               <input type="hidden" name="lang" value={language} />
             </form>
