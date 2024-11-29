@@ -132,6 +132,7 @@ const toolRoutes = supportedLanguageCodes.map(
           id: `{slugs.tool.competences}|${lng}`,
           path: i18n.t('slugs.tool.competences', { lng }),
           element: <ToolCompetences />,
+          loader: withYksiloContext(competencesLoader, false),
         },
         {
           id: `{slugs.tool.interests}|${lng}`,

@@ -1,15 +1,180 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
-import { HelpingToolProfileLinkItem, HelpingToolsContent, OsaaminenValue, OsaamisSuosittelija } from '@/components';
+import { HelpingToolProfileLinkItem, HelpingToolsContent, OsaamisSuosittelija } from '@/components';
+import { useInitializeFilters } from '@/hooks/useInitializeFilters';
+import { useLoginLink } from '@/hooks/useLoginLink';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicates } from '@/utils';
 import { Accordion, Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdLightbulbOutline, MdOutlineSailing, MdOutlineSchool, MdWorkOutline } from 'react-icons/md';
-import { useOutletContext, useRouteLoaderData } from 'react-router-dom';
+import { useLoaderData, useOutletContext, useRouteLoaderData } from 'react-router-dom';
+import { CompetenceFilters } from '../Profile/Competences/CompetenceFilters';
+import { FILTERS_ORDER } from '../Profile/Competences/constants';
+import { CompetencesLoaderData } from '../Profile/Competences/loader';
 import { generateProfileLink } from '../Profile/utils';
 import { ToolLoaderData } from './loader';
+
+const CompetenceExport = () => {
+  const { t } = useTranslation();
+  const loginLink = useLoginLink();
+  const { isLoggedIn } = useOutletContext<ToolLoaderData>();
+  const toolStore = useToolStore();
+
+  const exportToProfile = React.useCallback(async () => {
+    await client.PUT('/api/profiili/muu-osaaminen', {
+      body: [
+        ...new Set([
+          ...((await client.GET('/api/profiili/muu-osaaminen')).data ?? []),
+          ...toolStore.osaamiset
+            .filter((o) => o.tyyppi === 'KARTOITETTU' || o.tyyppi === 'MUU_OSAAMINEN')
+            .map((o) => o.id),
+        ]),
+      ],
+    });
+    const osaamiset = toolStore.osaamiset.map((o) => ({
+      ...o,
+      tyyppi: o.tyyppi === 'KARTOITETTU' ? 'MUU_OSAAMINEN' : o.tyyppi,
+    }));
+    toolStore.setOsaamiset(removeDuplicates(osaamiset, 'id'));
+  }, [toolStore]);
+
+  return isLoggedIn ? (
+    <ConfirmDialog
+      title={t('tool.my-own-data.competences.export.confirm-title')}
+      description={t('tool.my-own-data.competences.export.confirm-description')}
+      onConfirm={() => void exportToProfile()}
+      confirmText={t('tool.my-own-data.competences.export.confirm-button')}
+      cancelText={t('tool.my-own-data.cancel-text')}
+    >
+      {(showExportConfirmDialog: () => void) => (
+        <Button label={t('tool.my-own-data.competences.export.export-button')} onClick={showExportConfirmDialog} />
+      )}
+    </ConfirmDialog>
+  ) : (
+    <ConfirmDialog
+      title={t('login-to-service')}
+      description={t('tool.my-own-data.competences.export.login-description')}
+      /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+      footer={(closeDialog: () => void) => (
+        <div className="flex gap-4">
+          <Button label={t('tool.my-own-data.cancel-text')} size="md" variant="gray" onClick={closeDialog} />
+          <Button
+            label={t('login')}
+            size="md"
+            variant="gray"
+            /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+            LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
+          />
+        </div>
+      )}
+    >
+      {(showLoginConfirmDialog: () => void) => (
+        <Button label={t('tool.my-own-data.competences.export.export-button')} onClick={showLoginConfirmDialog} />
+      )}
+    </ConfirmDialog>
+  );
+};
+
+const CompetenceImport = () => {
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+  const loginLink = useLoginLink();
+  const { isLoggedIn } = useOutletContext<ToolLoaderData>();
+  const toolStore = useToolStore();
+
+  const locale = language as 'fi' | 'sv';
+  const { toimenkuvat, koulutukset, patevyydet, muutOsaamiset, osaamiset } = useLoaderData() as CompetencesLoaderData;
+
+  const { selectedFilters, setSelectedFilters, filterKeys } = useInitializeFilters(
+    locale,
+    {
+      TOIMENKUVA: [],
+      KOULUTUS: [],
+      PATEVYYS: [],
+      MUU_OSAAMINEN: [],
+    },
+    toimenkuvat,
+    koulutukset,
+    patevyydet,
+    muutOsaamiset,
+  );
+
+  const onCompetenceImportConfirm = React.useCallback(() => {
+    const mappedSelectedCompetences = FILTERS_ORDER.map((tyyppi) =>
+      selectedFilters[tyyppi]
+        .filter((sf) => sf.checked)
+        .map((f) => ({
+          id: f.value,
+          tyyppi: tyyppi,
+        })),
+    ).flat();
+
+    const toBeImportedSkills = [
+      ...osaamiset
+        .filter((osaaminen) =>
+          mappedSelectedCompetences.some((msc) =>
+            msc.tyyppi === 'MUU_OSAAMINEN' ? msc.id === osaaminen.osaaminen.uri : msc.id === osaaminen.lahde.id,
+          ),
+        )
+        .map((skill) => ({
+          id: skill.osaaminen.uri,
+          nimi: skill.osaaminen.nimi,
+          kuvaus: skill.osaaminen.kuvaus,
+          tyyppi: skill.lahde.tyyppi,
+        })),
+      ...toolStore.osaamiset.filter((o) => o.tyyppi === 'KARTOITETTU'),
+    ];
+
+    toolStore.setOsaamiset([...removeDuplicates(toBeImportedSkills, 'id')]);
+  }, [osaamiset, selectedFilters, toolStore]);
+
+  return isLoggedIn ? (
+    <ConfirmDialog
+      title={t('tool.my-own-data.competences.import.confirm-title')}
+      description={t('tool.my-own-data.competences.import.confirm-description')}
+      onConfirm={onCompetenceImportConfirm}
+      confirmText={t('tool.my-own-data.competences.import.confirm-button')}
+      cancelText={t('tool.my-own-data.cancel-text')}
+      content={
+        <CompetenceFilters
+          filterKeys={filterKeys}
+          selectedFilters={selectedFilters}
+          setSelectedFilters={setSelectedFilters}
+        />
+      }
+    >
+      {(showImportDialog: () => void) => (
+        <Button label={t('tool.my-own-data.competences.import.import-button')} onClick={showImportDialog} />
+      )}
+    </ConfirmDialog>
+  ) : (
+    <ConfirmDialog
+      title={t('login-to-service')}
+      description={t('tool.my-own-data.competences.import.login-description')}
+      /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+      footer={(closeDialog: () => void) => (
+        <div className="flex gap-4">
+          <Button label={t('tool.my-own-data.cancel-text')} size="md" variant="gray" onClick={closeDialog} />
+          <Button
+            label={t('login')}
+            size="md"
+            variant="gray"
+            /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+            LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
+          />
+        </div>
+      )}
+    >
+      {(showLoginConfirmDialog: () => void) => (
+        <Button label={t('tool.my-own-data.competences.import.import-button')} onClick={showLoginConfirmDialog} />
+      )}
+    </ConfirmDialog>
+  );
+};
 
 const Competences = () => {
   const {
@@ -17,7 +182,6 @@ const Competences = () => {
     i18n: { language },
   } = useTranslation();
   const toolStore = useToolStore();
-  const { isLoggedIn } = useOutletContext<ToolLoaderData>();
 
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
   const competencesSlug = 'slugs.profile.competences';
@@ -39,54 +203,6 @@ const Competences = () => {
     [data, language, t],
   );
 
-  const importFromProfile = React.useCallback(async () => {
-    const osaamiset = (await client.GET('/api/profiili/osaamiset')).data ?? [];
-    const restOsaamiset = osaamiset.filter((o) => o.lahde.tyyppi !== 'MUU_OSAAMINEN');
-
-    const muuOsaaminenOsaamiset = osaamiset.filter((o) => o.lahde.tyyppi === 'MUU_OSAAMINEN');
-    const muuOsaaminenAndKartoitettuOsaamiset = [
-      ...muuOsaaminenOsaamiset.map(
-        (osaaminen): OsaaminenValue => ({
-          id: osaaminen.osaaminen.uri,
-          nimi: osaaminen.osaaminen.nimi,
-          kuvaus: osaaminen.osaaminen.kuvaus,
-          tyyppi: osaaminen.lahde.tyyppi,
-        }),
-      ),
-      ...toolStore.osaamiset.filter((o) => o.tyyppi === 'KARTOITETTU'),
-    ];
-
-    toolStore.setOsaamiset([
-      ...removeDuplicates(muuOsaaminenAndKartoitettuOsaamiset, 'id'),
-      ...restOsaamiset.map(
-        (osaaminen): OsaaminenValue => ({
-          id: osaaminen.osaaminen.uri,
-          nimi: osaaminen.osaaminen.nimi,
-          kuvaus: osaaminen.osaaminen.kuvaus,
-          tyyppi: osaaminen.lahde.tyyppi,
-        }),
-      ),
-    ]);
-  }, [toolStore]);
-
-  const exportToProfile = React.useCallback(async () => {
-    await client.PUT('/api/profiili/muu-osaaminen', {
-      body: [
-        ...new Set([
-          ...((await client.GET('/api/profiili/muu-osaaminen')).data ?? []),
-          ...toolStore.osaamiset
-            .filter((o) => o.tyyppi === 'KARTOITETTU' || o.tyyppi === 'MUU_OSAAMINEN')
-            .map((o) => o.id),
-        ]),
-      ],
-    });
-    const osaamiset = toolStore.osaamiset.map((o) => ({
-      ...o,
-      tyyppi: o.tyyppi === 'KARTOITETTU' ? 'MUU_OSAAMINEN' : o.tyyppi,
-    }));
-    toolStore.setOsaamiset(removeDuplicates(osaamiset, 'id'));
-  }, [toolStore]);
-
   return (
     <>
       <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3 sm:mb-5">
@@ -104,16 +220,8 @@ const Competences = () => {
         />
       </div>
       <div className="flex flex-wrap gap-5 mb-7">
-        <Button
-          label={t('tool.my-own-data.competences.import')}
-          onClick={() => void importFromProfile()}
-          disabled={!isLoggedIn}
-        />
-        <Button
-          label={t('tool.my-own-data.competences.export')}
-          onClick={() => void exportToProfile()}
-          disabled={!isLoggedIn}
-        />
+        <CompetenceImport />
+        <CompetenceExport />
         <ConfirmDialog
           title={t('tool.my-own-data.competences.delete-all.title')}
           onConfirm={() => toolStore.setOsaamiset([])}
