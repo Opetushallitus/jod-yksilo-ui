@@ -26,7 +26,6 @@ export default [
   sonarjs.configs.recommended,
   ...tseslint.configs.recommended,
   ...tseslint.configs.stylistic,
-  eslintConfigPrettier, // must be last, override other configs
   {
     plugins: {
       '@singlestore/react-hooks-disable-import': singlestoreReactHooksDisableImport,
@@ -51,13 +50,11 @@ export default [
         tsconfigRootDir: __dirname,
       },
     },
-
     settings: {
       react: {
         version: 'detect',
       },
     },
-
     rules: {
       'react-refresh/only-export-components': [
         'warn',
@@ -94,4 +91,5 @@ export default [
       ...hooksPlugin.configs.recommended.rules,
     },
   },
+  eslintConfigPrettier, // must be last, override other configs
 ];

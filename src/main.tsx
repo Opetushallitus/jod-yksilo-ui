@@ -35,7 +35,12 @@ root.render(
   <React.StrictMode>
     <HelmetProvider>
       <ErrorNoteProvider>
-        <RouterProvider router={router} />
+        <RouterProvider
+          router={router}
+          future={{
+            v7_startTransition: true,
+          }}
+        />
       </ErrorNoteProvider>
     </HelmetProvider>
   </React.StrictMode>,
