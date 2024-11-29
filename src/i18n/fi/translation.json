@@ -160,6 +160,7 @@
   },
   "login": "Kirjaudu sisään",
   "login-for-favorites": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa suosikkeja ja päästä tarkastelemaan niitä myöhemmin.",
+  "login-to-service": "Kirjaudu palveluun",
   "logout": "Kirjaudu ulos",
   "mapped-competences": "Kartoitetut osaamiset",
   "mapped-interests": "Kartoitetut kiinnostukset",
@@ -391,14 +392,27 @@
   "terms-of-service": "Käyttöehdot",
   "tool": {
     "my-own-data": {
+      "cancel-text": "Ei, peruuta",
       "competences": {
         "delete-all": {
           "description": "Haluatko varmasti tyhjentää kaikki valitut osaamiset?",
           "title": "Tyhjennä kaikki valitut osaamiset"
         },
         "description": "Kerro palvelulle vahvuutesi ja taitosi. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi – kaikki tietosi ja kokemuksesi ovat tärkeitä.",
-        "export": "Tallenna osaamiset osaamisprofiiliin",
-        "import": "Tuo osaamiset osaamisprofiilista",
+        "export": {
+          "confirm-button": "Kyllä",
+          "confirm-description": "Osaamiset tallennetaan osaamisprofiiliisi muun osaamisesi kohtaan.",
+          "confirm-title": "Haluatko tallentaa tunnistamasi osaamiset?",
+          "export-button": "Tallenna osaamiset osaamisprofiiliin",
+          "login-description": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa tunnistamasi osaamiset osaamisprofiiliin ja päästä tarkastelemaan niitä myöhemmin osaamisprofiiliisi muun osaamisesi kohdassa."
+        },
+        "import": {
+          "confirm-button": "Tuo osaamiset",
+          "confirm-description": "Valitse haluamasi osaamiset alla olevasta listasta.",
+          "confirm-title": "Haluatko tuoda osaamisesi osaamisprofiilistasi?",
+          "import-button": "Tuo osaamiset osaamisprofiilista",
+          "login-description": "Kirjaudu sisään Osaamispolkuun, jotta voit tuoda osaamisesi osaamisprofiilistasi."
+        },
         "textarea-placeholder": "Kirjoita taitosi tekstikenttään.",
         "title": "Mitä minä osaan"
       },

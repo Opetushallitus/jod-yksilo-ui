@@ -1,4 +1,3 @@
-import { components } from '@/api/schema';
 import {
   MainLayout,
   RoutesNavigationList,
@@ -6,6 +5,7 @@ import {
   Title,
   type RoutesNavigationListProps,
 } from '@/components';
+import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
@@ -17,24 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { MdTune } from 'react-icons/md';
 import { useLoaderData, useOutletContext } from 'react-router-dom';
 import { mapNavigationRoutes } from '../utils';
-import {
-  CompetenceFilter,
-  FILTERS_ORDER,
-  GROUP_BY_ALPHABET,
-  GROUP_BY_SOURCE,
-  GROUP_BY_THEME,
-  type FiltersType,
-} from './constants';
-
-interface Kokemus {
-  id?: string;
-  uri?: string;
-  nimi: Record<string, string | undefined>;
-  kuvaus?: Record<string, string | undefined>;
-  alkuPvm?: string;
-  loppuPvm?: string;
-  osaamiset?: string[];
-}
+import { CompetenceFilter, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
 
 const MobileFilterButton = ({ onClick }: { onClick: () => void }) => {
   const { sm } = useMediaQueries();
@@ -57,70 +40,27 @@ const MobileFilterButton = ({ onClick }: { onClick: () => void }) => {
 const Competences = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const { toimenkuvat, koulutukset, patevyydet, muutOsaamiset, osaamiset } = useLoaderData() as CompetencesLoaderData;
-  const [initialized, setInitialized] = React.useState(false);
   const { t, i18n } = useTranslation();
   const title = t('profile.competences.title');
   const [groupBy, setGroupBy] = React.useState<string>(GROUP_BY_SOURCE);
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const locale = i18n.language as 'fi' | 'sv';
-  const [selectedFilters, setSelectedFilters] = React.useState<FiltersType>({
-    TOIMENKUVA: [],
-    KOULUTUS: [],
-    PATEVYYS: [],
-    MUU_OSAAMINEN: [],
-  });
-  const [filterKeys, setFilterKeys] = React.useState<(keyof FiltersType)[]>([]);
   const [showFilters, setShowFilters] = React.useState(false);
   const { sm } = useMediaQueries();
 
-  const mapExperienceToFilter = React.useCallback(
-    (currentFilters: FiltersType, type: CompetenceFilter) => (experience: Kokemus) => ({
-      label: experience.nimi[locale] ?? '',
-      value: experience.id ?? experience.uri ?? '',
-      checked: currentFilters?.[type]?.find((item) => item.value === experience.id)?.checked ?? true,
-    }),
-    [locale],
-  );
-
-  const initFilters = React.useCallback(
-    (osaamiset: components['schemas']['YksilonOsaaminenDto'][]) => {
-      const initialFilters = {} as FiltersType;
-
-      osaamiset.forEach((osaaminen) => {
-        const type = osaaminen.lahde.tyyppi;
-        initialFilters[type] = initialFilters[type] ?? [];
-
-        if (type === 'TOIMENKUVA') {
-          initialFilters[type] = toimenkuvat.map(mapExperienceToFilter(selectedFilters, type));
-        }
-        if (type === 'KOULUTUS') {
-          initialFilters[type] = koulutukset.map(mapExperienceToFilter(selectedFilters, type));
-        }
-        if (type === 'PATEVYYS') {
-          initialFilters[type] = patevyydet.map(mapExperienceToFilter(selectedFilters, type));
-        }
-        if (type === 'MUU_OSAAMINEN') {
-          initialFilters[type] = muutOsaamiset.map(mapExperienceToFilter(selectedFilters, type));
-        }
-      });
-
-      return initialFilters;
+  const { selectedFilters, setSelectedFilters, filterKeys } = useInitializeFilters(
+    locale,
+    {
+      TOIMENKUVA: [],
+      KOULUTUS: [],
+      PATEVYYS: [],
+      MUU_OSAAMINEN: [],
     },
-    [koulutukset, mapExperienceToFilter, muutOsaamiset, patevyydet, selectedFilters, toimenkuvat],
+    toimenkuvat,
+    koulutukset,
+    patevyydet,
+    muutOsaamiset,
   );
-
-  React.useEffect(() => {
-    if (!initialized) {
-      const initialFilters = initFilters(osaamiset);
-      setSelectedFilters(initialFilters);
-      setFilterKeys(
-        [...(Object.keys(initialFilters) as (keyof FiltersType)[])].sort(
-          (a, b) => FILTERS_ORDER.indexOf(a) - FILTERS_ORDER.indexOf(b),
-        ),
-      );
-      setInitialized(true);
-    }
-  }, [initFilters, initialized, osaamiset]);
 
   // Determines if osaamiset from a specific source should be visible. Id is the id of the source (eg. koulutus or toimenkuva).
   // Muu osaaminen doesn't have any sources, so they'll show up if any are marked as checked.
