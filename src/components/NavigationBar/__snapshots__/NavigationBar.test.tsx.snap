@@ -45,7 +45,7 @@ exports[`NavigationBar > renders no navigation items and no user 1`] = `
           class="relative"
         >
           <form
-            action="/logout"
+            action="/yksilo/logout"
             hidden=""
             method="POST"
           >
@@ -119,7 +119,7 @@ exports[`NavigationBar > renders only user 1`] = `
           class="relative"
         >
           <form
-            action="/logout"
+            action="/yksilo/logout"
             hidden=""
             method="POST"
           >
