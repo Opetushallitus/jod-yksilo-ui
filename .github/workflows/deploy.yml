@@ -1,4 +1,4 @@
-name: deploy
+name: Deploy
 on:
   workflow_call:
     inputs:
@@ -47,8 +47,8 @@ jobs:
 
       - name: Copy files to S3
         run: |
-          aws s3 sync --size-only --delete --cache-control "public,max-age=31536000,immutable" assets/ s3://${{ secrets.JOD_AWS_DIST_BUCKET }}/assets
-          aws s3 sync --exclude "assets/*" --delete --cache-control "public,max-age=0,s-maxage=60,must-revalidate" . s3://${{ secrets.JOD_AWS_DIST_BUCKET }}
+          aws s3 sync --size-only --delete --cache-control "public,max-age=31536000,immutable" assets/ s3://${{ secrets.JOD_AWS_DIST_BUCKET }}/yksilo/assets
+          aws s3 sync --exclude "assets/*" --delete --cache-control "public,max-age=0,s-maxage=60,must-revalidate" . s3://${{ secrets.JOD_AWS_DIST_BUCKET }}/yksilo
 
       - name: Invalidate cache for index.html on deploy
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.JOD_AWS_CLOUDFRONT_ID }} --paths '/index.html'
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.JOD_AWS_CLOUDFRONT_ID }} --paths '/yksilo/index.html'
