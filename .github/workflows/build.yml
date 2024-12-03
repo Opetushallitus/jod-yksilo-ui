@@ -1,4 +1,4 @@
-name: Build and deploy JOD Yksilö UI
+name: Build
 on:
   workflow_dispatch:
   push:
