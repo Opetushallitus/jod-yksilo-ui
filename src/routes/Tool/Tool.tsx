@@ -4,16 +4,7 @@ import { OpportunitiesFilter } from '@/routes/Tool';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
-import {
-  Button,
-  Checkbox,
-  PageChangeDetails,
-  Pagination,
-  Slider,
-  Spinner,
-  cx,
-  useMediaQueries,
-} from '@jod/design-system';
+import { Button, PageChangeDetails, Pagination, Slider, Spinner, cx, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdBlock, MdOutlineInterests, MdOutlineSchool, MdOutlineTune } from 'react-icons/md';
@@ -215,7 +206,7 @@ const YourOpportunitiesPagination = ({
   );
 };
 
-const YourOpportunitiesCard = ({ scrollRef }: { scrollRef: React.RefObject<HTMLUListElement> }) => {
+const YourOpportunitiesCard = () => {
   const { t } = useTranslation();
   const toolStore = useToolStore();
 
@@ -223,11 +214,6 @@ const YourOpportunitiesCard = ({ scrollRef }: { scrollRef: React.RefObject<HTMLU
 
   const onClick = async () => {
     await toolStore.updateEhdotuksetAndTyomahdollisuudet();
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
   };
 
   const value = React.useMemo(() => {
@@ -254,14 +240,6 @@ const YourOpportunitiesCard = ({ scrollRef }: { scrollRef: React.RefObject<HTMLU
         onValueChange={(val) => toolStore.setOsaamisKiinnostusPainotus(val)}
         value={value}
         disabled={toolStore.osaamiset.length === 0 || toolStore.kiinnostukset.length === 0}
-      />
-      <Checkbox
-        label={t('tool.your-opportunities.card.automatic-checkbox')}
-        checked={toolStore.automaticLoading}
-        onChange={() => toolStore.setAutomaticLoading(!toolStore.automaticLoading)}
-        name="name"
-        value="value"
-        ariaLabel={t('tool.your-opportunities.card.automatic-checkbox')}
       />
       <div className="flex justify-center sm:justify-start">
         <Button
@@ -295,7 +273,7 @@ const YourOpportunities = () => {
       <h1 className="text-heading-1-mobile sm:text-heading-1">{t('tool.your-opportunities.title')}</h1>
       <p className="text-body-md-mobile sm:text-body-md mb-7">{t('tool.your-opportunities.description')}</p>
 
-      <YourOpportunitiesCard scrollRef={scrollRef} />
+      <YourOpportunitiesCard />
 
       <div className="mb-6 flex justify-between items-center">
         <span className="font-arial text-form-label">
