@@ -435,7 +435,6 @@
     "your-opportunities": {
       "card": {
         "action": "Päivitä mahdollisuutesi",
-        "automatic-checkbox": "Päivitä automaattisesti",
         "description": "Voit säätää osaamisten ja kiinnostusten painotusta tuloksissa."
       },
       "description": "Alla näet palvelun tunnistamia työ- ja koulutusmahdollisuuksia tietojesi pohjalta.",

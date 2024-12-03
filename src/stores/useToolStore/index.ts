@@ -45,7 +45,6 @@ interface ToolState {
   ehdotuksetPageSize: number;
   ehdotuksetPageNr: number;
   ehdotuksetCount: Record<MahdollisuusTyyppi, number>;
-  automaticLoading: boolean;
   sorting: OpportunitySortingValue;
   filter: OpportunityFilterValue;
   reset: () => void;
@@ -64,7 +63,6 @@ interface ToolState {
   fetchMahdollisuudetPage: (signal?: AbortSignal, page?: number) => Promise<void>;
   updateEhdotuksetAndTyomahdollisuudet: () => Promise<void>;
 
-  setAutomaticLoading: (state: boolean) => void;
   setSorting: (state: string) => void;
   setFilter: (state: string) => void;
 }
@@ -89,7 +87,6 @@ export const useToolStore = create<ToolState>()(
       mahdollisuudetLoading: false,
       ehdotuksetPageNr: 1,
       ehdotuksetCount: { TYOMAHDOLLISUUS: 0, KOULUTUSMAHDOLLISUUS: 0 },
-      automaticLoading: true,
       sorting: DEFAULT_SORTING,
       filter: DEFAULT_FILTER,
       reset: () => {
@@ -107,28 +104,16 @@ export const useToolStore = create<ToolState>()(
       setTavoitteet: (state) => set({ tavoitteet: state }),
       setOsaamiset: (state) => {
         set({ osaamiset: state });
-        if (get().automaticLoading) {
-          void get().updateEhdotuksetAndTyomahdollisuudet();
-        }
       },
       setKiinnostukset: (state) => {
         set({ kiinnostukset: state });
-        if (get().automaticLoading) {
-          void get().updateEhdotuksetAndTyomahdollisuudet();
-        }
       },
       setSuosikit: (state) => set({ suosikit: state }),
       setOsaamisKiinnostusPainotus: (state: number) => {
         set({ osaamisKiinnostusPainotus: state });
-        if (get().automaticLoading) {
-          void get().updateEhdotuksetAndTyomahdollisuudet();
-        }
       },
       setRajoitePainotus: (state: number) => {
         set({ rajoitePainotus: state });
-        if (get().automaticLoading) {
-          void get().updateEhdotuksetAndTyomahdollisuudet();
-        }
       },
       updateEhdotukset: async (signal?: AbortSignal) => {
         const { osaamiset, kiinnostukset, osaamisKiinnostusPainotus, rajoitePainotus } = get();
@@ -236,11 +221,7 @@ export const useToolStore = create<ToolState>()(
       },
 
       updateEhdotuksetAndTyomahdollisuudet: async () => {
-        const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit, automaticLoading } = get();
-
-        if (automaticLoading) {
-          document.getElementById('tool-your-opportunities-card')?.scrollIntoView({ behavior: 'smooth' });
-        }
+        const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit } = get();
 
         abortController.abort();
         abortController = new AbortController();
@@ -293,7 +274,6 @@ export const useToolStore = create<ToolState>()(
         set({ suosikitLoading: false });
       },
 
-      setAutomaticLoading: (state) => set({ automaticLoading: state }),
       setSorting: (state) => {
         set({ sorting: state as OpportunitySortingValue });
         void get().fetchMahdollisuudetPage(abortController.signal, get().ehdotuksetPageNr);
