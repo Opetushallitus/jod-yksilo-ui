@@ -26,6 +26,7 @@
   "date-placeholder": "pp.kk.vvvv",
   "delete": "Poista",
   "development-trend": "Kehitystrendi",
+  "do-filter": "Suodata",
   "edit": "Muokkaa",
   "education-history": {
     "add-new-degree": "Lisää uusi tutkinto",
@@ -239,7 +240,6 @@
     "competences": {
       "add": "Lisää osaamisia",
       "description": "Löydät alta kaikki osaamisesi, jotka olet tunnistanut tai lisännyt profiiliisi. Osaamisesi ryhmittelyn ja esitystavan voit valita itse.",
-      "do-filter": "Suodata",
       "edit": "Muokkaa osaamisia",
       "group": "Järjestele",
       "group-by-alphabet": "Aakkosellisesti",
@@ -439,6 +439,18 @@
         "description": "Voit säätää osaamisten ja kiinnostusten painotusta tuloksissa."
       },
       "description": "Alla näet palvelun tunnistamia työ- ja koulutusmahdollisuuksia tietojesi pohjalta.",
+      "filters": {
+        "education-opportunities": "Koulutusmahdollisuudet",
+        "job-and-education-opportunities": "Työ- ja koulutusmahdollisuudet",
+        "job-opportunities": "Työmahdollisuudet",
+        "title": "Näytä mahdollisuuksissa"
+      },
+      "n-opportunities-found": "Löysimme {{count}} mahdollisuutta.",
+      "sorting": {
+        "alphabetically": "Aakkosjärjestyksessä",
+        "by-relevance": "Sopivimmat",
+        "title": "Järjestele mahdollisuudet"
+      },
       "title": "Mahdollisuutesi"
     }
   },

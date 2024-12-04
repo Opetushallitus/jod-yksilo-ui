@@ -32,7 +32,7 @@ const TitleCheckbox = ({ type, checked, onChange }: TitleCheckboxProps) => {
       checked={checked}
       onChange={onChange}
       ariaLabel={t(`types.competence.${type}`)}
-      name={t('profile.competences.do-filter')}
+      name={t('do-filter')}
       value={type}
       className="min-h-7"
     />
@@ -98,11 +98,7 @@ export const Filters = ({ groupBy, setGroupBy, filterKeys, selectedFilters, setS
           <RadioButton label={t('profile.competences.group-by-alphabet')} value={GROUP_BY_ALPHABET} />
         </RadioButtonGroup>
       </SimpleNavigationList>
-      <SimpleNavigationList
-        title={t('profile.competences.do-filter')}
-        backgroundClassName={sm ? 'bg-bg-gray-2' : 'bg-bg-gray'}
-        collapsible
-      >
+      <SimpleNavigationList title={t('do-filter')} backgroundClassName={sm ? 'bg-bg-gray-2' : 'bg-bg-gray'} collapsible>
         <ul className="flex flex-col gap-y-3 py-4">
           {filterKeys.map((key) => (
             <React.Fragment key={key}>

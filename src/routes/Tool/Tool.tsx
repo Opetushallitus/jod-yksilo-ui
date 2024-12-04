@@ -1,5 +1,7 @@
 import { OpportunityCard, Title } from '@/components';
 import { useEnvironment } from '@/hooks/useEnvironment';
+import { OpportunitiesFilter } from '@/routes/Tool';
+import { MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import {
@@ -14,7 +16,7 @@ import {
 } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdBlock, MdOutlineInterests, MdOutlineSchool } from 'react-icons/md';
+import { MdBlock, MdOutlineInterests, MdOutlineSchool, MdOutlineTune } from 'react-icons/md';
 import { Outlet, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { ToolLoaderData } from './loader';
 
@@ -243,7 +245,7 @@ const YourOpportunitiesCard = ({ scrollRef }: { scrollRef: React.RefObject<HTMLU
   return (
     <div
       id="tool-your-opportunities-card"
-      className="flex flex-col gap-5 mb-7 p-5 sm:p-6 bg-secondary-1-25 rounded shadow-border z-10"
+      className="flex flex-col gap-5 mb-6 p-5 sm:p-6 bg-secondary-1-25 rounded shadow-border z-10"
     >
       <p className="text-body-md-mobile sm:text-body-md">{t('tool.your-opportunities.card.description')}</p>
       <Slider
@@ -280,6 +282,13 @@ const YourOpportunities = () => {
   const toolStore = useToolStore();
   const scrollRef = React.useRef<HTMLUListElement>(null);
   const { isLoggedIn } = useLoaderData() as ToolLoaderData;
+  const [filtersOpen, setFiltersOpen] = React.useState(false);
+  const ehdotuksetCount = toolStore.ehdotuksetCount ?? {};
+  const filter = toolStore.filter;
+  const count =
+    filter === 'ALL'
+      ? Object.keys(ehdotuksetCount).reduce((acc, key) => acc + ehdotuksetCount[key as MahdollisuusTyyppi], 0)
+      : ehdotuksetCount[filter];
 
   return (
     <main role="main" className="col-span-3 lg:col-span-1" id="jod-main">
@@ -288,7 +297,21 @@ const YourOpportunities = () => {
 
       <YourOpportunitiesCard scrollRef={scrollRef} />
 
-      <YourOpportunitiesPagination scrollRef={scrollRef} ariaLabel={t('pagination.top')} className="mb-7" />
+      <div className="mb-6 flex justify-between items-center">
+        <span className="font-arial text-form-label">
+          {t('tool.your-opportunities.n-opportunities-found', { count })}
+        </span>
+        <button
+          className="text-form-label flex flex-row items-center gap-5"
+          onClick={() => setFiltersOpen(!filtersOpen)}
+        >
+          <span className="font-arial">{t('do-filter')}</span>
+          <span className="flex bg-white rounded-full relative size-7 justify-center items-center">
+            <MdOutlineTune size={20} />
+            {filtersOpen && <OpportunitiesFilter />}
+          </span>
+        </button>
+      </div>
 
       <ul
         id="tool-your-opportunities-list"
