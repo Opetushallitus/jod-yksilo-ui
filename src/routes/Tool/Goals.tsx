@@ -1,6 +1,7 @@
 import { useToolStore } from '@/stores/useToolStore';
-import { SelectionCard } from '@jod/design-system';
+import { SelectionCard, useMediaQueries } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
+import { MdInfoOutline } from 'react-icons/md';
 
 const SomethingElseIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="80" height="99" viewBox="0 0 80 99" fill="none">
@@ -269,6 +270,8 @@ const ToolTipContent = () => {
 const Goals = () => {
   const { t } = useTranslation();
   const toolStore = useToolStore();
+  const { xl } = useMediaQueries();
+  const mobileInfoIcon = !xl ? <MdInfoOutline size={24} /> : null;
 
   return (
     <>
@@ -283,6 +286,7 @@ const Goals = () => {
           label={t('tool.my-own-data.goals.map-competence')}
           infoAriaLabel="info"
           icon={<CompetenceIcon />}
+          infoIcon={mobileInfoIcon}
           tooltipContent={<ToolTipContent />}
           sm={false}
         />
@@ -292,6 +296,7 @@ const Goals = () => {
           label={t('tool.my-own-data.goals.trainings')}
           infoAriaLabel="info"
           icon={<TrainingsIcon />}
+          infoIcon={mobileInfoIcon}
           tooltipContent={<ToolTipContent />}
           sm={false}
         />
@@ -301,6 +306,7 @@ const Goals = () => {
           label={t('tool.my-own-data.goals.job-opportunities')}
           infoAriaLabel="info"
           icon={<JobOpportunitiesIcon />}
+          infoIcon={mobileInfoIcon}
           tooltipContent={<ToolTipContent />}
           sm={false}
         />
@@ -311,6 +317,7 @@ const Goals = () => {
           infoAriaLabel="info"
           icon={<MappingOpportunitiesIcon />}
           tooltipContent={<ToolTipContent />}
+          infoIcon={mobileInfoIcon}
           sm={false}
         />
         <SelectionCard
@@ -319,6 +326,7 @@ const Goals = () => {
           label={t('tool.my-own-data.goals.something-else')}
           infoAriaLabel="info"
           icon={<SomethingElseIcon />}
+          infoIcon={mobileInfoIcon}
           tooltipContent={<ToolTipContent />}
           sm={false}
         />
