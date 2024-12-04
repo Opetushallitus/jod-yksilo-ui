@@ -231,7 +231,7 @@ const YourOpportunitiesCard = () => {
   return (
     <div
       id="tool-your-opportunities-card"
-      className="flex flex-col gap-5 mb-6 p-5 sm:p-6 bg-secondary-1-25 rounded shadow-border z-10"
+      className="flex flex-col gap-5 p-5 sm:p-6 bg-secondary-1-25 rounded shadow-border z-10"
     >
       <p className="text-body-md-mobile sm:text-body-md">{t('tool.your-opportunities.card.description')}</p>
       <Slider
@@ -275,20 +275,22 @@ const YourOpportunities = () => {
 
       <YourOpportunitiesCard />
 
-      <div className="mb-6 flex justify-between items-center">
-        <span className="font-arial text-form-label">
-          {t('tool.your-opportunities.n-opportunities-found', { count })}
-        </span>
-        <button
-          className="text-form-label flex flex-row items-center gap-5"
-          onClick={() => setFiltersOpen(!filtersOpen)}
-        >
-          <span className="font-arial">{t('do-filter')}</span>
-          <span className="flex bg-white rounded-full relative size-7 justify-center items-center">
-            <MdOutlineTune size={20} />
-            {filtersOpen && <OpportunitiesFilter />}
+      <div className="lg:sticky lg:top-11 lg:z-10 lg:h-11">
+        <div className="flex gap-5 justify-between items-center py-5 bg-gradient-to-b from-85% from-bg-gray lg:absolute lg:-left-4 lg:-right-4 lg:px-4">
+          <span className="font-arial text-form-label">
+            {t('tool.your-opportunities.n-opportunities-found', { count })}
           </span>
-        </button>
+          <button
+            className="text-form-label flex flex-row items-center gap-5"
+            onClick={() => setFiltersOpen(!filtersOpen)}
+          >
+            <span className="font-arial">{t('do-filter')}</span>
+            <span className="flex bg-white rounded-full relative size-7 justify-center items-center">
+              <MdOutlineTune size={20} />
+              {filtersOpen && <OpportunitiesFilter />}
+            </span>
+          </button>
+        </div>
       </div>
 
       <ul
