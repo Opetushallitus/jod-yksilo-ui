@@ -169,6 +169,10 @@ export const OsaamisSuosittelija = ({
                 title={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
                 sourceType={mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
                 onClick={() => {
+                  if (ehdotettuOsaaminen.id && value.find((val) => val.id === ehdotettuOsaaminen.id)) {
+                    return; // Prevent adding duplicates by rapid clicking
+                  }
+
                   onChange([
                     ...value,
                     {
