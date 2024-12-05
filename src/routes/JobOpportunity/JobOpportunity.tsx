@@ -160,8 +160,7 @@ const JobOpportunity = () => {
             heading="h2"
             className="text-heading-2"
           />
-          <p className="text-body-md font-arial my-5">{t('job-opportunity.most-common-job-tasks.description')}</p>
-          <div className="bg-todo h-[280px]" />
+          <p className="text-body-md font-arial mt-5">{getLocalizedText(tyomahdollisuus?.tehtavat)}</p>
         </div>
         <div>
           <ScrollHeading title={t('job-opportunity.occupations.title')} heading="h2" className="text-heading-2" />
