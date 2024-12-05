@@ -70,8 +70,9 @@ const JobOpportunity = () => {
 
   const routes = createHeadingRoutes([
     { title: t('job-opportunity.description') },
-    { title: t('job-opportunity.professional-group'), isDev: true },
     { title: t('job-opportunity.most-common-job-tasks.title') },
+    { title: t('job-opportunity.occupations.title') },
+    { title: t('job-opportunity.professional-group'), isDev: true },
     { title: t('job-opportunity.key-figures.title'), isDev: true },
     { title: t('job-opportunity.labour-market-picture.title'), isDev: true },
     { title: t('job-opportunity.salary-trends.title'), isDev: true },
@@ -160,6 +161,10 @@ const JobOpportunity = () => {
             className="text-heading-2"
           />
           <p className="text-body-md font-arial my-5">{t('job-opportunity.most-common-job-tasks.description')}</p>
+          <div className="bg-todo h-[280px]" />
+        </div>
+        <div>
+          <ScrollHeading title={t('job-opportunity.occupations.title')} heading="h2" className="text-heading-2" />
           <ol className="list-decimal ml-7 text-body-lg font-medium text-black leading-7">
             {ammatit.map((ammatti) => (
               <li
