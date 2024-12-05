@@ -1,5 +1,6 @@
 import { OpportunityCard, Title } from '@/components';
 import { useEnvironment } from '@/hooks/useEnvironment';
+import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { OpportunitiesFilter } from '@/routes/Tool';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
@@ -261,6 +262,9 @@ const YourOpportunities = () => {
   const scrollRef = React.useRef<HTMLUListElement>(null);
   const { isLoggedIn } = useLoaderData() as ToolLoaderData;
   const [filtersOpen, setFiltersOpen] = React.useState(false);
+  const filterMenuButtonRef = React.useRef<HTMLButtonElement>(null);
+  const filterMenuRef = useMenuClickHandler(() => setFiltersOpen(false), filterMenuButtonRef);
+
   const ehdotuksetCount = toolStore.ehdotuksetCount ?? {};
   const filter = toolStore.filter;
   const count =
@@ -282,12 +286,17 @@ const YourOpportunities = () => {
           </span>
           <button
             className="text-form-label flex flex-row items-center gap-5"
+            ref={filterMenuButtonRef}
             onClick={() => setFiltersOpen(!filtersOpen)}
           >
             <span className="font-arial">{t('do-filter')}</span>
             <span className="flex bg-white rounded-full relative size-7 justify-center items-center">
               <MdOutlineTune size={20} />
-              {filtersOpen && <OpportunitiesFilter />}
+              {filtersOpen && (
+                <div ref={filterMenuRef}>
+                  <OpportunitiesFilter />
+                </div>
+              )}
             </span>
           </button>
         </div>
