@@ -140,6 +140,9 @@
       "title": "Yleisimmät työtehtävät"
     },
     "navigation": "Ammatin yleiskuvaus",
+    "occupations": {
+      "title": "Työmahdollisuudessa esiintyvät ammatit"
+    },
     "personal-characteristics": {
       "description": "Kestävän kehityksen asiantuntijan tärkeitä henkilökohtaisia ominaisuuksia:",
       "title": "Henkilökohtaiset ominaisuudet"
