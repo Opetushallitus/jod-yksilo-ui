@@ -99,6 +99,10 @@ const JobOpportunity = () => {
     console.log('Feature not implemented');
   };
 
+  const doPrint = () => {
+    window.print();
+  };
+
   return (
     <MainLayout
       navChildren={
@@ -136,11 +140,13 @@ const JobOpportunity = () => {
             className="bg-todo"
           />
         )}
-        <ActionButton
-          label={t('print')}
-          icon={<MdOutlinePrint size={24} className="text-accent" />}
-          onClick={window.print}
-        />
+        {!!window.print && (
+          <ActionButton
+            label={t('print')}
+            icon={<MdOutlinePrint size={24} className="text-accent" />}
+            onClick={doPrint}
+          />
+        )}
       </div>
       <div className="flex flex-col gap-7">
         <div>
