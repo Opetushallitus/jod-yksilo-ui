@@ -41,7 +41,7 @@ export const generateProfileLink = (
     params.set('lang', language);
     params.set('callback', `/${language}/${t('slugs.profile.index')}/${profilePageSlug}`);
     return {
-      to: `/login?${params.toString()}`,
+      to: `/yksilo/login?${params.toString()}`,
       component: ({
         to,
         className,
