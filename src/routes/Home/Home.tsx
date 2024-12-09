@@ -3,7 +3,7 @@ import { Title } from '@/components';
 import { HeroCard, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useRouteLoaderData } from 'react-router-dom';
+import { Link, useRouteLoaderData } from 'react-router';
 import { generateProfileLink } from '../Profile/utils';
 
 interface CardsProps {

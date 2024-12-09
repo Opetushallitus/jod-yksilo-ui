@@ -1,7 +1,7 @@
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
-import { LoaderFunction } from 'react-router-dom';
+import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
   return await client

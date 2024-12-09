@@ -1,6 +1,6 @@
 import { registerCsrfMiddleware } from '@/api/middlewares/csrf';
 import { components } from '@/api/schema';
-import { LoaderFunction, LoaderFunctionArgs, redirect } from 'react-router-dom';
+import { LoaderFunction, LoaderFunctionArgs, redirect } from 'react-router';
 import { client } from '../api/client';
 
 export const authStore: {

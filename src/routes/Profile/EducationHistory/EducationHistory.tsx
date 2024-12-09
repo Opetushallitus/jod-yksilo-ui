@@ -11,7 +11,7 @@ import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/Educat
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
 import { Koulutuskokonaisuus, getEducationHistoryTableRows } from './utils';

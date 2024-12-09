@@ -67,8 +67,8 @@ export default [
       'no-console': 'warn',
       'react/jsx-child-element-spacing': 'error',
       '@typescript-eslint/consistent-indexed-object-style': 'warn',
-      '@typescript-eslint/no-misused-promises': 'warn',
-      '@typescript-eslint/no-floating-promises': 'warn',
+      '@typescript-eslint/no-misused-promises': 'off',
+      '@typescript-eslint/no-floating-promises': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -88,6 +88,7 @@ export default [
       'sonarjs/mouse-events-a11y': 'off', // this is also checked by the jsx-a11y
       'sonarjs/no-unstable-nested-components': 'warn',
       'sonarjs/slow-regex': 'error',
+      'sonarjs/no-misused-promises': 'off',
       ...hooksPlugin.configs.recommended.rules,
     },
   },

@@ -15,7 +15,7 @@ import { Accordion, Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdOutlineInterests, MdOutlineQuiz } from 'react-icons/md';
-import { useOutletContext, useRouteLoaderData } from 'react-router-dom';
+import { useOutletContext, useRouteLoaderData } from 'react-router';
 import { generateProfileLink } from '../Profile/utils';
 import { ToolLoaderData } from './loader';
 

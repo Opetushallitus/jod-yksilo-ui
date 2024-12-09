@@ -1,7 +1,7 @@
 import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import { components } from '@/api/schema';
-import { LoaderFunction } from 'react-router-dom';
+import { LoaderFunction } from 'react-router';
 
 const loader = (async ({ request, params }) => {
   if (!params.id) {

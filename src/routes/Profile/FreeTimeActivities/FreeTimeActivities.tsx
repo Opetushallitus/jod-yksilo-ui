@@ -10,7 +10,7 @@ import {
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
 import { AddOrEditPatevyysModal } from './modals/AddOrEditPatevyysModal';

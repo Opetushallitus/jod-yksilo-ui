@@ -1,14 +1,16 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 import { Metric } from 'web-vitals';
 import { ErrorNoteProvider } from './components/ErrorNote';
 import './i18n/config';
 import './index.css';
 import { routes } from './routes';
 
-const router = createBrowserRouter(routes, { basename: '/yksilo' });
+const router = createBrowserRouter(routes, {
+  basename: '/yksilo',
+});
 
 const root = createRoot(document.getElementById('root')!);
 
@@ -35,12 +37,7 @@ root.render(
   <React.StrictMode>
     <HelmetProvider>
       <ErrorNoteProvider>
-        <RouterProvider
-          router={router}
-          future={{
-            v7_startTransition: true,
-          }}
-        />
+        <RouterProvider router={router} />
       </ErrorNoteProvider>
     </HelmetProvider>
   </React.StrictMode>,

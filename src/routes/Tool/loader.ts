@@ -1,7 +1,7 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { useToolStore } from '@/stores/useToolStore';
-import { LoaderFunction } from 'react-router-dom';
+import { LoaderFunction } from 'react-router';
 
 export interface ToolLoaderData {
   isLoggedIn: boolean;

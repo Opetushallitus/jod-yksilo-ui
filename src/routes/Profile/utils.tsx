@@ -1,6 +1,6 @@
 import { components } from '@/api/schema';
 import { type RoutesNavigationListProps } from '@/components';
-import { Link, LinkProps } from 'react-router-dom';
+import { Link, LinkProps } from 'react-router';
 
 export const mapNavigationRoutes = (routes: RoutesNavigationListProps['routes']) =>
   routes.map((route) => ({ ...route, path: `../${route.path}` }));

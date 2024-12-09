@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData } from 'react-router-dom';
+import { Outlet, useLoaderData } from 'react-router';
 
 const EducationOpportunity = () => {
   const loaderData = useLoaderData();

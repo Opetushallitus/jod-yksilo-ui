@@ -1,7 +1,7 @@
 import { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
-import { LoaderFunction } from 'react-router-dom';
+import { LoaderFunction } from 'react-router';
 
 export default (async () => {
   const { fetchSuosikit, fetchPage } = useSuosikitStore.getState();

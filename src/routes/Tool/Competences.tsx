@@ -9,7 +9,7 @@ import { Accordion, Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdLightbulbOutline, MdOutlineSailing, MdOutlineSchool, MdWorkOutline } from 'react-icons/md';
-import { useLoaderData, useOutletContext, useRouteLoaderData } from 'react-router-dom';
+import { useLoaderData, useOutletContext, useRouteLoaderData } from 'react-router';
 import { CompetenceFilters } from '../Profile/Competences/CompetenceFilters';
 import { FILTERS_ORDER } from '../Profile/Competences/constants';
 import { CompetencesLoaderData } from '../Profile/Competences/loader';

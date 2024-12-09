@@ -16,7 +16,7 @@ import { tidyClasses as tc } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdCompareArrows, MdOutlinePrint, MdOutlineRoute, MdOutlineShare } from 'react-icons/md';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router';
 import { LoaderData } from './loader';
 
 interface ScrollHeadingProps {

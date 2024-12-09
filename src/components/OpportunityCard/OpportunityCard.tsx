@@ -7,7 +7,7 @@ import { cx, PopupList, PopupListItem } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdBlock, MdMoreVert, MdOutlineTrendingDown, MdOutlineTrendingUp } from 'react-icons/md';
-import { Link, NavLink, To } from 'react-router-dom';
+import { Link, NavLink, To } from 'react-router';
 
 interface OpportunityCardProps {
   as?: React.ElementType;

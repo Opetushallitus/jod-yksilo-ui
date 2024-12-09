@@ -1,6 +1,6 @@
 import { components } from '@/api/schema';
 import i18n, { defaultLang, LangCode, supportedLanguageCodes } from '@/i18n/config';
-import { LoaderFunction, redirect } from 'react-router-dom';
+import { LoaderFunction, redirect } from 'react-router';
 
 export default (async ({ params: { lng }, context }) => {
   // Redirect if the language is not supported
