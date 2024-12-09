@@ -79,55 +79,55 @@ const Root = () => {
       case 'sv':
         return [
           <div key="LogoEuSv" className="flex">
-            <LogoEuSv className="h-10" />
+            <LogoEuSv className="h-10 max-w-full" />
           </div>,
           <div key="LogoOkmFiSv" className="flex">
-            <LogoOkmFiSv className="h-10" />
+            <LogoOkmFiSv className="h-10 max-w-full" />
           </div>,
           <div key="LogoTemFiSv" className="flex">
-            <LogoTemFiSv className="h-10" />
+            <LogoTemFiSv className="h-10 max-w-full" />
           </div>,
           <div key="LogoKehaSv" className="flex">
-            <LogoKehaSv className="h-10" />
+            <LogoKehaSv className="h-10 max-w-full" />
           </div>,
           <div key="LogoOphFiSv" className="flex">
-            <LogoOphFiSv className="h-10" />
+            <LogoOphFiSv className="h-10 max-w-full" />
           </div>,
         ];
       case 'en':
         return [
           <div key="LogoEuEn" className="flex">
-            <LogoEuEn className="h-10" />
+            <LogoEuEn className="h-10 max-w-full" />
           </div>,
           <div key="LogoOkmEn" className="flex">
-            <LogoOkmEn className="h-10" />
+            <LogoOkmEn className="h-10 max-w-full" />
           </div>,
           <div key="LogoTemEn" className="flex">
-            <LogoTemEn className="h-10" />
+            <LogoTemEn className="h-10 max-w-full" />
           </div>,
           <div key="LogoKehaEn" className="flex">
-            <LogoKehaEn className="h-10" />
+            <LogoKehaEn className="h-10 max-w-full" />
           </div>,
           <div key="LogoOphEn" className="flex">
-            <LogoOphEn className="h-10" />
+            <LogoOphEn className="h-10 max-w-full" />
           </div>,
         ];
       default:
         return [
           <div key="LogoEuFi" className="flex">
-            <LogoEuFi className="h-10" />
+            <LogoEuFi className="h-10 max-w-full" />
           </div>,
           <div key="LogoOkmFiSv" className="flex">
-            <LogoOkmFiSv className="h-10" />
+            <LogoOkmFiSv className="h-10 max-w-full" />
           </div>,
           <div key="LogoTemFiSv" className="flex">
-            <LogoTemFiSv className="h-10" />
+            <LogoTemFiSv className="h-10 max-w-full" />
           </div>,
           <div key="LogoKehaFi" className="flex">
-            <LogoKehaFi className="h-10" />
+            <LogoKehaFi className="h-10 max-w-full" />
           </div>,
           <div key="LogoOphFiSv" className="flex">
-            <LogoOphFiSv className="h-10" />
+            <LogoOphFiSv className="h-10 max-w-full" />
           </div>,
         ];
     }
