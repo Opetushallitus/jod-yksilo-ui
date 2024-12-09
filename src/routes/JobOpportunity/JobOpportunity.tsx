@@ -4,7 +4,6 @@ import {
   LoginModal,
   MainLayout,
   RoutesNavigationList,
-  RoutesNavigationListProps,
   SimpleNavigationList,
   Title,
 } from '@/components';
@@ -50,36 +49,121 @@ const JobOpportunity = () => {
   );
   const clusterSize = tyomahdollisuus?.jakaumat?.ammatti?.maara;
 
-  interface HeadingRoute {
-    title: string;
-    isDev?: boolean;
+  interface Section {
+    navTitle: string; // Navigation title
+    content: JSX.Element; // Section content
+    dev?: boolean; // Only render in dev environment
   }
+  const sections: Section[] = [
+    {
+      navTitle: t('job-opportunity.description'),
+      content: <p className="text-body-md font-arial mt-5">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>,
+    },
+    {
+      navTitle: t('job-opportunity.most-common-job-tasks.title'),
+      content: <p className="text-body-md font-arial mt-5">{getLocalizedText(tyomahdollisuus?.tehtavat)}</p>,
+    },
+    {
+      navTitle: t('job-opportunity.occupations.title'),
+      content: (
+        <ol className="list-decimal ml-7 mt-5 text-body-lg font-medium text-black leading-7">
+          {ammatit.map((ammatti) => (
+            <li
+              className="text-capitalize text-body"
+              title={`${ammatti.koodi} ${getLocalizedText(ammatti.kuvaus)} (${ammatti.osuus.toFixed(1)}%, N = ${clusterSize})`}
+              key={ammatti.uri}
+            >
+              {getLocalizedText(ammatti.nimi)}
+            </li>
+          ))}
+        </ol>
+      ),
+    },
+    {
+      navTitle: t('job-opportunity.professional-group'),
+      content: (
+        <ul className="list-none ml-0 mt-5 text-body-lg font-medium text-black leading-7">
+          <li
+            className="text-capitalize text-body"
+            title={`${ammattiryhma?.uri}\n${getLocalizedTextByLang('en', ammattiryhma?.kuvaus)}`}
+            key={ammattiryhma?.uri}
+          >
+            {getLocalizedText(ammattiryhma?.nimi)}
+          </li>
+        </ul>
+      ),
+      dev: true,
+    },
+    {
+      navTitle: t('job-opportunity.key-figures.title'),
+      content: (
+        <>
+          <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.key-figures.description')}</p>
+          <div className="bg-todo h-[380px]" />
+        </>
+      ),
+      dev: true,
+    },
+    {
+      navTitle: t('job-opportunity.labour-market-picture.title'),
+      content: (
+        <>
+          <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.labour-market-picture.description')}</p>
+          <div className="bg-todo h-[380px]" />
+        </>
+      ),
+      dev: true,
+    },
+    {
+      navTitle: t('job-opportunity.salary-trends.title'),
+      content: (
+        <>
+          <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.salary-trends.description')}</p>
+          <div className="bg-todo h-[380px]" />
+        </>
+      ),
+      dev: true,
+    },
+    {
+      navTitle: t('job-opportunity.competences.title'),
+      content: (
+        <CompareCompetencesTable
+          opportunityName={tyomahdollisuus?.otsikko}
+          rows={competencesTableData}
+          className="mt-4"
+        />
+      ),
+    },
+    {
+      navTitle: t('job-opportunity.employment-trends.title'),
+      content: (
+        <>
+          <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.employment-trends.description')}</p>
+          <div className="bg-todo h-[380px]" />
+        </>
+      ),
+      dev: true,
+    },
+    {
+      navTitle: t('job-opportunity.related-jobs.title'),
+      content: (
+        <>
+          <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.related-jobs.description')}</p>
+          <div className="bg-todo h-[380px] mb-8" />
+        </>
+      ),
+      dev: true,
+    },
+  ];
 
-  const createHeadingRoutes = (headings: HeadingRoute[]): RoutesNavigationListProps['routes'] => {
-    return headings
-      .filter((h) => !h.isDev || isDev)
-      .map((hf) => {
-        return {
-          active: false,
-          name: hf.title,
-          path: `#${hf.title}`,
-          replace: true,
-        };
-      });
-  };
+  const filterDevSections = (section: Section) => !section.dev || (isDev && section.dev);
 
-  const routes = createHeadingRoutes([
-    { title: t('job-opportunity.description') },
-    { title: t('job-opportunity.most-common-job-tasks.title') },
-    { title: t('job-opportunity.occupations.title') },
-    { title: t('job-opportunity.professional-group'), isDev: true },
-    { title: t('job-opportunity.key-figures.title'), isDev: true },
-    { title: t('job-opportunity.labour-market-picture.title'), isDev: true },
-    { title: t('job-opportunity.salary-trends.title'), isDev: true },
-    { title: t('job-opportunity.competences.title') },
-    { title: t('job-opportunity.employment-trends.title'), isDev: true },
-    { title: t('job-opportunity.related-jobs.title'), isDev: true },
-  ]);
+  const routes = sections.filter(filterDevSections).map((section) => ({
+    active: false,
+    name: section.navTitle,
+    path: `#${section.navTitle}`,
+    replace: true,
+  }));
 
   const [isFavorite, setIsFavorite] = React.useState(false);
 
@@ -150,99 +234,13 @@ const JobOpportunity = () => {
         )}
       </div>
       <div className="flex flex-col gap-7">
-        <div>
-          <ScrollHeading title={t('job-opportunity.description')} heading="h2" className="text-heading-2" />
-          <p className="text-body-md font-arial mt-5">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>
-        </div>
-        <div>
-          <ScrollHeading
-            title={t('job-opportunity.most-common-job-tasks.title')}
-            heading="h2"
-            className="text-heading-2"
-          />
-          <p className="text-body-md font-arial mt-5">{getLocalizedText(tyomahdollisuus?.tehtavat)}</p>
-        </div>
-        <div>
-          <ScrollHeading title={t('job-opportunity.occupations.title')} heading="h2" className="text-heading-2" />
-          <ol className="list-decimal ml-7 mt-5 text-body-lg font-medium text-black leading-7">
-            {ammatit.map((ammatti) => (
-              <li
-                className="text-capitalize text-body"
-                title={`${ammatti.koodi} ${getLocalizedText(ammatti.kuvaus)} (${ammatti.osuus.toFixed(1)}%, N = ${clusterSize})`}
-                key={ammatti.uri}
-              >
-                {getLocalizedText(ammatti.nimi)}
-              </li>
-            ))}
-          </ol>
-        </div>
-        {isDev && (
-          <div>
-            <ScrollHeading title={t('job-opportunity.professional-group')} heading="h2" className="text-heading-2" />
-            <ul className="list-none ml-0 mt-5 text-body-lg font-medium text-black leading-7">
-              <li
-                className="text-capitalize text-body"
-                title={`${ammattiryhma?.uri}\n${getLocalizedTextByLang('en', ammattiryhma?.kuvaus)}`}
-                key={ammattiryhma?.uri}
-              >
-                {getLocalizedText(ammattiryhma?.nimi)}
-              </li>
-            </ul>
-          </div>
-        )}
-        {isDev && (
-          <div>
-            <ScrollHeading title={t('job-opportunity.key-figures.title')} heading="h2" className="text-heading-2" />
-            <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.key-figures.description')}</p>
-            <div className="bg-todo h-[380px]" />
-          </div>
-        )}
-        {isDev && (
-          <div>
-            <ScrollHeading
-              title={t('job-opportunity.labour-market-picture.title')}
-              heading="h2"
-              className="text-heading-2"
-            />
-            <p className="text-body-md font-arial mb-6 mt-4">
-              {t('job-opportunity.labour-market-picture.description')}
-            </p>
-            <div className="bg-todo h-[380px]" />
-          </div>
-        )}
-        {isDev && (
-          <div>
-            <ScrollHeading title={t('job-opportunity.salary-trends.title')} heading="h2" className="text-heading-2" />
-            <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.salary-trends.description')}</p>
-            <div className="bg-todo h-[380px]" />
-          </div>
-        )}
-        <div>
-          <ScrollHeading title={t('job-opportunity.competences.title')} heading="h2" className="text-heading-2" />
-          <CompareCompetencesTable
-            opportunityName={tyomahdollisuus?.otsikko}
-            rows={competencesTableData}
-            className="mt-4"
-          />
-        </div>
-        {isDev && (
-          <div>
-            <ScrollHeading
-              title={t('job-opportunity.employment-trends.title')}
-              heading="h2"
-              className="text-heading-2"
-            />
-            <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.employment-trends.description')}</p>
-            <div className="bg-todo h-[380px]" />
-          </div>
-        )}
-        {isDev && (
-          <div>
-            <ScrollHeading title={t('job-opportunity.related-jobs.title')} heading="h2" className="text-heading-2" />
-            <p className="text-body-md font-arial mb-6 mt-4">{t('job-opportunity.related-jobs.description')}</p>
-            <div className="bg-todo h-[380px] mb-8" />
-          </div>
-        )}
+        {!!tyomahdollisuus &&
+          sections.filter(filterDevSections).map((section) => (
+            <div key={section.navTitle}>
+              <ScrollHeading title={section.navTitle} heading="h2" className="text-heading-2" />
+              {section.content}
+            </div>
+          ))}
       </div>
     </MainLayout>
   );
