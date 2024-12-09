@@ -18,7 +18,7 @@ const loader = (async ({ request, params, context }) => {
   data?.jakaumat?.ammatti?.arvot?.sort((a, b) => b.osuus - a.osuus);
   data?.jakaumat?.osaaminen?.arvot?.sort((a, b) => b.osuus - a.osuus);
 
-  const [competences, occupations] = await Promise.all([
+  const [competences, occupations, occupationGroup] = await Promise.all([
     osaamiset.combine(
       data?.jakaumat?.osaaminen?.arvot,
       (value) => value.arvo,
@@ -31,13 +31,20 @@ const loader = (async ({ request, params, context }) => {
       (value, occupation) => ({ ...occupation, osuus: value.osuus }),
       request.signal,
     ),
+    ammatit.get(data?.ammattiryhma ?? '', request.signal),
   ]);
 
   if (context) {
     await useToolStore.getState().updateSuosikit();
   }
 
-  return { tyomahdollisuus: data, osaamiset: competences, ammatit: occupations, isLoggedIn: !!context };
+  return {
+    tyomahdollisuus: data,
+    osaamiset: competences,
+    ammatit: occupations,
+    ammattiryhma: occupationGroup,
+    isLoggedIn: !!context,
+  };
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
 
 export type LoaderData = Awaited<ReturnType<typeof loader>>;

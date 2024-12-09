@@ -11,7 +11,7 @@ import {
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, getLocalizedTextByLang } from '@/utils';
 import { tidyClasses as tc } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -35,7 +35,7 @@ const ScrollHeading = ({ title, heading, className }: ScrollHeadingProps) => {
 
 const JobOpportunity = () => {
   const { t } = useTranslation();
-  const { tyomahdollisuus, ammatit, osaamiset, isLoggedIn } = useLoaderData() as LoaderData;
+  const { tyomahdollisuus, ammatit, ammattiryhma, osaamiset, isLoggedIn } = useLoaderData() as LoaderData;
   const toolStore = useToolStore();
   const { isDev } = useEnvironment();
   const title = getLocalizedText(tyomahdollisuus?.otsikko);
@@ -164,7 +164,7 @@ const JobOpportunity = () => {
         </div>
         <div>
           <ScrollHeading title={t('job-opportunity.occupations.title')} heading="h2" className="text-heading-2" />
-          <ol className="list-decimal ml-7 text-body-lg font-medium text-black leading-7">
+          <ol className="list-decimal ml-7 mt-5 text-body-lg font-medium text-black leading-7">
             {ammatit.map((ammatti) => (
               <li
                 className="text-capitalize text-body"
@@ -179,7 +179,15 @@ const JobOpportunity = () => {
         {isDev && (
           <div>
             <ScrollHeading title={t('job-opportunity.professional-group')} heading="h2" className="text-heading-2" />
-            <p className="text-body-md font-arial mb-6 mt-4">{tyomahdollisuus?.ammattiryhma}</p>
+            <ul className="list-none ml-0 mt-5 text-body-lg font-medium text-black leading-7">
+              <li
+                className="text-capitalize text-body"
+                title={`${ammattiryhma?.uri}\n${getLocalizedTextByLang('en', ammattiryhma?.kuvaus)}`}
+                key={ammattiryhma?.uri}
+              >
+                {getLocalizedText(ammattiryhma?.nimi)}
+              </li>
+            </ul>
           </div>
         )}
         {isDev && (
