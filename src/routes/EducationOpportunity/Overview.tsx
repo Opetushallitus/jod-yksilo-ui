@@ -5,7 +5,7 @@ import { getLocalizedText } from '@/utils';
 import { Accordion, Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router';
 import { LoaderData } from './loader';
 
 const Overview = () => {

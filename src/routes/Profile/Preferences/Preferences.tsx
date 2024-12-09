@@ -12,7 +12,7 @@ import { Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { useOutletContext, useRouteLoaderData } from 'react-router-dom';
+import { useOutletContext, useRouteLoaderData } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 
 const Preferences = () => {

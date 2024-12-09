@@ -15,7 +15,7 @@ import { Button, Modal, RoundButton, useMediaQueries } from '@jod/design-system'
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdTune } from 'react-icons/md';
-import { useLoaderData, useOutletContext } from 'react-router-dom';
+import { useLoaderData, useOutletContext } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 import { CompetenceFilter, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
 

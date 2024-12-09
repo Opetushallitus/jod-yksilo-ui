@@ -4,7 +4,7 @@ import { Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdArrowForward } from 'react-icons/md';
-import { Link, useRouteLoaderData } from 'react-router-dom';
+import { Link, useRouteLoaderData } from 'react-router';
 import { generateProfileLink } from '../utils';
 import { FILTERS_ORDER, GroupByProps, MobileFilterButton, groupByHeaderClasses } from './constants';
 

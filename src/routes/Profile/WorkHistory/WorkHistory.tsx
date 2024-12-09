@@ -10,7 +10,7 @@ import {
 import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonantajaModal';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 import { WorkHistoryWizard } from './WorkHistoryWizard';
 import AddOrEditToimenkuvaModal from './modals/AddOrEditToimenkuvaModal';

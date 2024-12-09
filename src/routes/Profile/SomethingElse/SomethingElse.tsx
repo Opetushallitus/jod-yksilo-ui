@@ -11,7 +11,7 @@ import { getLocalizedText, sortByProperty } from '@/utils';
 import { Button, Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 
 const SomethingElse = () => {

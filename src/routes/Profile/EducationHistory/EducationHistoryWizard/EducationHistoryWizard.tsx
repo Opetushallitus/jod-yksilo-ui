@@ -5,7 +5,7 @@ import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { z } from 'zod';
 import CompetencesStep from './CompetencesStep';
 import EducationStep from './EducationStep';

@@ -20,7 +20,6 @@ const resources: Resource = {
   sv: { translation: translationSv },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
 i18n.use(initReactI18next).init({
   lng: defaultLang,
   supportedLngs: supportedLanguageCodes,

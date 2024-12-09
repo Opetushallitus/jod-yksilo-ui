@@ -3,7 +3,7 @@ import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
 import { useToolStore } from '@/stores/useToolStore';
-import { LoaderFunction } from 'react-router-dom';
+import { LoaderFunction } from 'react-router';
 
 const loader = (async ({ request, params, context }) => {
   if (!params.id) {

@@ -2,7 +2,7 @@ import { components } from '@/api/schema';
 import { cx } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useLoaderData } from 'react-router-dom';
+import { NavLink, useLoaderData } from 'react-router';
 
 export interface RoutesNavigationListProps {
   routes: {

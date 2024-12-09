@@ -6,7 +6,7 @@ import { PopupList, PopupListItem, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdOutlinePerson } from 'react-icons/md';
-import { NavLink, useLoaderData } from 'react-router-dom';
+import { NavLink, useLoaderData } from 'react-router';
 
 export const UserButton = () => {
   const {

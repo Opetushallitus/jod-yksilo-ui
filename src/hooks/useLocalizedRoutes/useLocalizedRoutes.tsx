@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, useMatches, useParams } from 'react-router-dom';
+import { generatePath, useMatches, useParams } from 'react-router';
 
 export const useLocalizedRoutes = () => {
   const matches = useMatches();

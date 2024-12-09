@@ -9,7 +9,7 @@ import { Button, PageChangeDetails, Pagination, Slider, Spinner, cx, useMediaQue
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdBlock, MdOutlineInterests, MdOutlineSchool, MdOutlineTune } from 'react-icons/md';
-import { Outlet, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLoaderData, useLocation, useNavigate } from 'react-router';
 import { ToolLoaderData } from './loader';
 
 const MdTarget = ({ size, className }: { size: number; className: string }) => (

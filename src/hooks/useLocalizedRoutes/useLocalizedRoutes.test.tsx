@@ -1,11 +1,11 @@
 import { renderHook } from '@testing-library/react';
 import { useTranslation } from 'react-i18next';
-import { useMatches, useParams } from 'react-router-dom';
+import { useMatches, useParams } from 'react-router';
 import { Mock, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useLocalizedRoutes } from './useLocalizedRoutes';
 
 // Mock the necessary hooks
-vi.mock('react-router-dom', () => ({
+vi.mock('react-router', () => ({
   useMatches: vi.fn(),
   useParams: vi.fn(),
   generatePath: vi.fn((path: string, params: Record<string, string>) => {

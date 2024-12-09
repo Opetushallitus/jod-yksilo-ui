@@ -8,7 +8,7 @@ vi.mock('@jod/design-system', () => ({
   useMediaQueries: vi.fn(),
 }));
 
-vi.mock('react-router-dom', () => ({
+vi.mock('react-router', () => ({
   useLocation: () => ({
     pathname: 'callback-url',
   }),

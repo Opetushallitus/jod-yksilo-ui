@@ -3,7 +3,7 @@ import { useLoginLink } from '@/hooks/useLoginLink';
 import { Button } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { MdHome, MdOutlinePerson } from 'react-icons/md';
-import { useRouteError } from 'react-router-dom';
+import { useRouteError } from 'react-router';
 
 const ErrorBoundary = () => {
   const { t, i18n } = useTranslation();

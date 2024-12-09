@@ -21,7 +21,7 @@ import {
   Interests as ToolInterests,
   toolLoader,
 } from '@/routes/Tool';
-import { RouteObject, redirect } from 'react-router-dom';
+import { RouteObject, redirect } from 'react-router';
 import { withYksiloContext } from '../auth';
 import {
   AccessibilityStatement,

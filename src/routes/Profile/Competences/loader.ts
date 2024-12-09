@@ -1,6 +1,6 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
-import { LoaderFunction } from 'react-router-dom';
+import { LoaderFunction } from 'react-router';
 
 export interface CompetencesLoaderData {
   osaamiset: components['schemas']['YksilonOsaaminenDto'][];

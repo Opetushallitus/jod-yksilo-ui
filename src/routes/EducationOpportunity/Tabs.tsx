@@ -1,6 +1,6 @@
 import { RoutesNavigationListProps } from '@/components';
 import { useTranslation } from 'react-i18next';
-import { NavLink, matchPath, useLocation, useParams } from 'react-router-dom';
+import { NavLink, matchPath, useLocation, useParams } from 'react-router';
 
 const Tabs = () => {
   const { i18n, t } = useTranslation();
