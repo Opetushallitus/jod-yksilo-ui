@@ -285,7 +285,7 @@ export const useToolStore = create<ToolState>()(
     }),
     {
       name: 'tool-storage',
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => sessionStorage),
     },
   ),
 );
