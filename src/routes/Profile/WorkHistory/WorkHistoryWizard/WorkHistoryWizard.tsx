@@ -133,7 +133,16 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
           </Form>
         </FormProvider>
       }
-      progress={<WizardProgress steps={steps} currentStep={step} />}
+      progress={
+        <WizardProgress
+          labelText={t('wizard.label')}
+          stepText={t('wizard.step')}
+          completedText={t('wizard.completed')}
+          currentText={t('wizard.current')}
+          steps={steps}
+          currentStep={step}
+        />
+      }
       footer={
         <div className="flex justify-between gap-5">
           <div className="flex gap-5">

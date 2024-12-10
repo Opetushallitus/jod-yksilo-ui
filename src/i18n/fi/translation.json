@@ -488,6 +488,12 @@
   "where-can-i-get-more-help": "Mistä saan lisää apua?",
   "who-is-the-service-for": "Kenelle palvelu on tarkoitettu?",
   "who-provides-the-service": "Kuka palvelun tarjoaa?",
+  "wizard": {
+    "completed": "Valmis",
+    "current": "Nykyinen",
+    "label": "Eteneminen",
+    "step": "Vaihe"
+  },
   "work-history": {
     "add-new-job-description": "Lisää uusi toimenkuva",
     "add-new-workplace": "Lisää uusi työpaikka",
