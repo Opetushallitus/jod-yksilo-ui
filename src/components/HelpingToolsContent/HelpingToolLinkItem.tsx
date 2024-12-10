@@ -13,7 +13,7 @@ export interface HelpingToolProfileLinkItemProps extends HelpingToolLinkItemProp
 export const HelpingToolProfileLinkItem = ({ profileLink, icon, title }: HelpingToolProfileLinkItemProps) => {
   return (
     <HelpingToolLinkItem
-      /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+      /* eslint-disable-next-line react/no-unstable-nested-components */
       component={({ ...rootProps }) => (
         <profileLink.component to={profileLink.to} {...rootProps}></profileLink.component>
       )}

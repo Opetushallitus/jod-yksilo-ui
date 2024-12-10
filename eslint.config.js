@@ -86,7 +86,8 @@ export default [
       'sonarjs/no-ignored-exceptions': 'off',
       'sonarjs/todo-tag': 'warn',
       'sonarjs/mouse-events-a11y': 'off', // this is also checked by the jsx-a11y
-      'sonarjs/no-unstable-nested-components': 'warn',
+      'react/no-unstable-nested-components': 'warn',
+      'react/no-array-index-key': 'warn',
       'sonarjs/slow-regex': 'error',
       'sonarjs/no-misused-promises': 'off',
       ...hooksPlugin.configs.recommended.rules,

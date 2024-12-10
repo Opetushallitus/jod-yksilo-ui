@@ -121,7 +121,7 @@ const Interests = () => {
             <HelpingToolLinkItem
               icon={<MdOutlineQuiz size={24} color="#006DB3" />}
               title={t('tool.my-own-data.interests.riasec-test')}
-              /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+              /* eslint-disable-next-line react/no-unstable-nested-components */
               component={({ children }) => <div className="bg-todo">{children}</div>}
             />
           )}
@@ -129,7 +129,7 @@ const Interests = () => {
             <HelpingToolLinkItem
               icon={<MdOutlineInterests size={24} color="#AD4298" />}
               title={t('tool.my-own-data.interests.interest-barometer')}
-              /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+              /* eslint-disable-next-line react/no-unstable-nested-components */
               component={({ children }) => <div className="bg-todo">{children}</div>}
             />
           )}
