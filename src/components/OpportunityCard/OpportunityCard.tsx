@@ -49,7 +49,7 @@ const BottomBox = ({
 const OutlookDots = ({ outlook, ariaLabel }: { outlook: number; ariaLabel: string }) => (
   <div role="figure" className="flex flex-row gap-2" aria-label={ariaLabel}>
     {Array.from({ length: 5 }).map((_, idx) => (
-      /* eslint-disable-next-line sonarjs/no-array-index-key*/
+      /* eslint-disable-next-line react/no-array-index-key */
       <div key={idx} className={`${idx < outlook ? 'bg-accent' : 'bg-accent-25'} w-4 h-4 rounded-full`} aria-hidden />
     ))}
   </div>

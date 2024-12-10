@@ -24,7 +24,7 @@ export const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
           <Button
             label={t('login')}
             variant="gray"
-            /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+            /* eslint-disable-next-line react/no-unstable-nested-components */
             LinkComponent={({ children }) => <a href={loginLink}>{children}</a>}
           />
           <Button onClick={onClose} label={t('close')} />

@@ -17,7 +17,7 @@ const NoMatch = () => {
         label={t('return-home')}
         size="md"
         variant="gray"
-        /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+        /* eslint-disable-next-line react/no-unstable-nested-components */
         LinkComponent={({ children }: { children: React.ReactNode }) => <a href="/">{children}</a>}
       />
     </main>

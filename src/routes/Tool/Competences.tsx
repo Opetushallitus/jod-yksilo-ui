@@ -56,7 +56,7 @@ const CompetenceExport = () => {
     <ConfirmDialog
       title={t('login-to-service')}
       description={t('tool.my-own-data.competences.export.login-description')}
-      /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+      /* eslint-disable-next-line react/no-unstable-nested-components */
       footer={(closeDialog: () => void) => (
         <div className="flex gap-4">
           <Button label={t('tool.my-own-data.cancel-text')} size="md" variant="gray" onClick={closeDialog} />
@@ -64,7 +64,7 @@ const CompetenceExport = () => {
             label={t('login')}
             size="md"
             variant="gray"
-            /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+            /* eslint-disable-next-line react/no-unstable-nested-components */
             LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
           />
         </div>
@@ -155,7 +155,7 @@ const CompetenceImport = () => {
     <ConfirmDialog
       title={t('login-to-service')}
       description={t('tool.my-own-data.competences.import.login-description')}
-      /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+      /* eslint-disable-next-line react/no-unstable-nested-components */
       footer={(closeDialog: () => void) => (
         <div className="flex gap-4">
           <Button label={t('tool.my-own-data.cancel-text')} size="md" variant="gray" onClick={closeDialog} />
@@ -163,7 +163,7 @@ const CompetenceImport = () => {
             label={t('login')}
             size="md"
             variant="gray"
-            /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+            /* eslint-disable-next-line react/no-unstable-nested-components */
             LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
           />
         </div>
