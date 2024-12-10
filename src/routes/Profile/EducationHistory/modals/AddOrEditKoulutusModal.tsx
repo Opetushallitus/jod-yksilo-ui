@@ -227,7 +227,16 @@ const AddOrEditKoulutusModal = ({
   return !isLoading ? (
     <Modal
       open={isOpen}
-      progress={<WizardProgress steps={stepComponents.length} currentStep={step + 1} />}
+      progress={
+        <WizardProgress
+          labelText={t('wizard.label')}
+          stepText={t('wizard.step')}
+          completedText={t('wizard.completed')}
+          currentText={t('wizard.current')}
+          steps={stepComponents.length}
+          currentStep={step + 1}
+        />
+      }
       content={
         <FormProvider {...methods}>
           <Form
