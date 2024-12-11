@@ -85,14 +85,14 @@ export const CompetenceFilters = ({ filterKeys, selectedFilters, setSelectedFilt
               >
                 <ul className="gap-y-3 flex-col flex">
                   {selectedFilters[key]?.map((item, idx) => (
-                    <li className="pl-6" key={item.value}>
+                    <li className="pl-6" key={item.label}>
                       <Checkbox
                         name={item.label}
                         ariaLabel={`${key} ${item.label}`}
                         label={item.label}
                         checked={item.checked}
                         onChange={toggleSingleFilter(key, idx)}
-                        value={item.value}
+                        value={JSON.stringify(item.value)}
                       />
                     </li>
                   ))}

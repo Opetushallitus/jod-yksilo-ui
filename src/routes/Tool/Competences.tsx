@@ -115,11 +115,16 @@ const CompetenceImport = () => {
 
     const toBeImportedSkills = [
       ...osaamiset
-        .filter((osaaminen) =>
-          mappedSelectedCompetences.some((msc) =>
-            msc.tyyppi === 'MUU_OSAAMINEN' ? msc.id === osaaminen.osaaminen.uri : msc.id === osaaminen.lahde.id,
-          ),
-        )
+        .filter((osaaminen) => {
+          return mappedSelectedCompetences.some((msc) => {
+            if (msc.tyyppi === 'MUU_OSAAMINEN') {
+              return msc.id.includes(osaaminen.osaaminen.uri);
+            } else if (osaaminen.lahde.id) {
+              return msc.id.includes(osaaminen.lahde.id);
+            }
+            return false;
+          });
+        })
         .map((skill) => ({
           id: skill.osaaminen.uri,
           nimi: skill.osaaminen.nimi,

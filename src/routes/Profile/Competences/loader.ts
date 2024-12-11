@@ -2,11 +2,20 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { LoaderFunction } from 'react-router';
 
+export interface CompetenceDataGroup {
+  id?: string;
+  nimi: components['schemas']['LokalisoituTeksti'];
+  data?:
+    | components['schemas']['ToimenkuvaDto'][]
+    | components['schemas']['PatevyysDto'][]
+    | components['schemas']['KoulutusDto'][];
+}
+
 export interface CompetencesLoaderData {
   osaamiset: components['schemas']['YksilonOsaaminenDto'][];
-  toimenkuvat: components['schemas']['ToimenkuvaDto'][];
-  koulutukset: components['schemas']['KoulutusDto'][];
-  patevyydet: components['schemas']['PatevyysDto'][];
+  toimenkuvat: CompetenceDataGroup[];
+  koulutukset: CompetenceDataGroup[];
+  patevyydet: CompetenceDataGroup[];
   muutOsaamiset: components['schemas']['OsaaminenDto'][];
 }
 
@@ -34,18 +43,30 @@ export default (async ({ request }) => {
     ]);
 
     const osaaminenLahdeIds = (osaamisetRes?.data?.filter((o) => o.lahde.id).map((o) => o.lahde.id) ?? []) as string[];
+
     const muutOsaamiset =
       osaamisetRes?.data?.filter((o) => o.lahde.tyyppi === 'MUU_OSAAMINEN').map((o) => o.osaaminen) ?? [];
 
     const toimenkuvat =
-      tyopaikatRes?.data?.flatMap((tyopaikka) => filterItems(tyopaikka.toimenkuvat ?? [], osaaminenLahdeIds)) ?? [];
+      tyopaikatRes?.data?.map((tyopaikka) => ({
+        id: tyopaikka.id,
+        nimi: tyopaikka.nimi,
+        data: filterItems(tyopaikka.toimenkuvat ?? [], osaaminenLahdeIds),
+      })) ?? [];
 
     const patevyydet =
-      vapaaAjanToiminnotRes?.data?.flatMap((toiminto) => filterItems(toiminto.patevyydet ?? [], osaaminenLahdeIds)) ??
-      [];
+      vapaaAjanToiminnotRes?.data?.map((toiminto) => ({
+        id: toiminto.id,
+        nimi: toiminto.nimi,
+        data: filterItems(toiminto.patevyydet ?? [], osaaminenLahdeIds),
+      })) ?? [];
 
     const koulutukset =
-      koulutRes?.data?.flatMap((koulu) => filterItems(koulu.koulutukset ?? [], osaaminenLahdeIds)) ?? [];
+      koulutRes?.data?.map((koulu) => ({
+        id: koulu.id,
+        nimi: koulu.nimi,
+        data: filterItems(koulu.koulutukset ?? [], osaaminenLahdeIds),
+      })) ?? [];
 
     return {
       osaamiset: osaamisetRes.data,
