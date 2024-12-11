@@ -17,6 +17,10 @@ const OpportunitiesFilter = () => {
         <h3 className="text-heading-3">{filterTitle}</h3>
         <RadioButtonGroup label={filterTitle} value={filter} onChange={setFilter} hideLabel>
           <RadioButton
+            label={t('tool.your-opportunities.filters.job-and-education-opportunities')}
+            value={filterValues.ALL}
+          />
+          <RadioButton
             label={t('tool.your-opportunities.filters.job-opportunities')}
             value={filterValues.TYOMAHDOLLISUUS}
           />
@@ -24,16 +28,12 @@ const OpportunitiesFilter = () => {
             label={t('tool.your-opportunities.filters.education-opportunities')}
             value={filterValues.KOULUTUSMAHDOLLISUUS}
           />
-          <RadioButton
-            label={t('tool.your-opportunities.filters.job-and-education-opportunities')}
-            value={filterValues.ALL}
-          />
         </RadioButtonGroup>
 
         <h3 className="text-heading-3">{sortingTitle}</h3>
         <RadioButtonGroup label={sortingTitle} value={sorting} onChange={setSorting} hideLabel>
-          <RadioButton label={t('tool.your-opportunities.sorting.alphabetically')} value={sortingValues.ALPHABET} />
           <RadioButton label={t('tool.your-opportunities.sorting.by-relevance')} value={sortingValues.RELEVANCE} />
+          <RadioButton label={t('tool.your-opportunities.sorting.alphabetically')} value={sortingValues.ALPHABET} />
         </RadioButtonGroup>
       </div>
     </div>
