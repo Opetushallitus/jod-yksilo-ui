@@ -68,7 +68,7 @@ const Competences = () => {
     (type: CompetenceFilter, id?: string): boolean => {
       return type === 'MUU_OSAAMINEN'
         ? selectedFilters.MUU_OSAAMINEN.length > 0 && selectedFilters.MUU_OSAAMINEN.some((item) => item.checked)
-        : (selectedFilters[type]?.find((item) => item.value === id)?.checked ?? false);
+        : (selectedFilters[type]?.find((item) => (id ? item.value.includes(id) : false))?.checked ?? false);
     },
     [selectedFilters],
   );

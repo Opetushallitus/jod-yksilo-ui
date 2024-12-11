@@ -5,9 +5,10 @@ export const GROUP_BY_THEME = 'b';
 export const GROUP_BY_ALPHABET = 'c';
 
 export const groupByHeaderClasses = 'mb-5 mt-8 pb-3 border-b border-border-gray truncate text-heading-3';
+
 export interface FilterData {
   label: string;
-  value: string;
+  value: string[];
   checked: boolean;
 }
 
@@ -23,7 +24,6 @@ export interface GroupByProps {
   osaamiset: components['schemas']['YksilonOsaaminenDto'][];
   isOsaaminenVisible: (key: CompetenceFilter, id?: string) => boolean;
 }
-
 export interface MobileFilterButton {
   mobileFilterOpenerComponent: React.ReactNode;
 }
