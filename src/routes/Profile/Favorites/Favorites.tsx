@@ -110,6 +110,9 @@ const Favorites = () => {
     }
   }, [selectedFilter, suosikit, t, favoriteCount]);
 
+  const getTypeSlug = (type: MahdollisuusTyyppi) =>
+    type === 'TYOMAHDOLLISUUS' ? t('slugs.job-opportunity.index') : t('slugs.education-opportunity.index');
+
   return (
     <MainLayout
       navChildren={
@@ -154,7 +157,7 @@ const Favorites = () => {
           return (
             <OpportunityCard
               key={id}
-              to={`/${language}/${t('slugs.job-opportunity.index')}/${id}`}
+              to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}`}
               description={getLocalizedText(mahdollisuus.tiivistelma)}
               employmentOutlook={2}
               hasRestrictions
