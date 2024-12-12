@@ -98,7 +98,7 @@
   "instructions": "Ohjeet",
   "interests": "Kiinnostukset",
   "interests-from-profile": "Osaamisprofiilista tuotu kiinnostukseni",
-  "interests-of-your-choice": "Valitut kiinnostukset",
+  "interests-of-your-choice": "Valitut kiinnostuksen kohteet",
   "job-opportunities": "Työmahdollisuudet",
   "job-opportunity": {
     "competences": {
@@ -208,8 +208,9 @@
       "remove": "Poista osaaminen klikkaamalla rastia."
     },
     "interest": {
-      "add": "Lisää kiinnostus klikkaamalla '+'-merkkiä kiinnostuksen vieressä.",
-      "remove": "Poista kiinnostus klikkaamalla rastia."
+      "add": "Lisää kiinnostuksen kohde klikkaamalla '+'-merkkiä kiinnostuksen vieressä.",
+      "textarea-placeholder": "Kirjoita tekstikenttään mikä sinua kiinnostaa",
+      "remove": "Poista kiinnostuksen kohde klikkaamalla rastia."
     },
     "my-KIINNOSTUS": "Kiinnostukseni",
     "my-KOULUTUS": "Koulutukseni",
@@ -315,7 +316,7 @@
     }
   },
   "proposed-competences": "Ehdotetut osaamiset",
-  "proposed-interests": "Ehdotetut kiinnostukset",
+  "proposed-interests": "Ehdotetut kiinnostuksen kohteet",
   "remove-approval": "Hylkää hyväksyntä",
   "remove-favorite": "Poista suosikeista",
   "remove-favorite-confirmation-title": "Poista suosikeista",

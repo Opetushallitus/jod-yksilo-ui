@@ -90,7 +90,7 @@ const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
               control={methods.control}
               name="kiinnostukset"
               render={({ field: { onChange, value } }) => (
-                <OsaamisSuosittelija onChange={onChange} value={value} sourceType="KIINNOSTUS" />
+                <OsaamisSuosittelija onChange={onChange} value={value} sourceType="KIINNOSTUS" mode="kiinnostukset" />
               )}
             />
           </Form>
