@@ -142,7 +142,11 @@ export const OsaamisSuosittelija = ({
     <>
       <div className="mb-6">
         <Textarea
-          placeholder={t('tool.my-own-data.competences.textarea-placeholder')}
+          placeholder={
+            mode === 'osaamiset'
+              ? t('tool.my-own-data.competences.textarea-placeholder')
+              : t('osaamissuosittelija.interest.textarea-placeholder')
+          }
           value={taitosi}
           onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setTaitosi(event.target.value)}
           rows={2}
