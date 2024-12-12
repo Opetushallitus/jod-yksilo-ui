@@ -1,10 +1,5 @@
 import i18n, { supportedLanguageCodes } from '@/i18n/config';
-import {
-  EducationOpportunity,
-  Competences as EducationOpportunityCompetences,
-  Overview as EducationOpportunityOverview,
-  educationOpportunityLoader,
-} from '@/routes/EducationOpportunity';
+import { EducationOpportunity, educationOpportunityLoader } from '@/routes/EducationOpportunity';
 import { JobOpportunity, loader as jobOpportunityLoader } from '@/routes/JobOpportunity';
 import { Competences as ProfileCompetences, competencesLoader } from '@/routes/Profile/Competences';
 import { loader as educationHistoryLoader } from '@/routes/Profile/EducationHistory';
@@ -164,23 +159,7 @@ const educationOpportunityRoutes = supportedLanguageCodes.map(
       id: `{slugs.education-opportunity.index}/:id|${lng}`,
       path: `${i18n.t('slugs.education-opportunity.index', { lng })}/:id`,
       element: <EducationOpportunity />,
-      loader: educationOpportunityLoader,
-      children: [
-        {
-          index: true,
-          loader: () => redirect(i18n.t('slugs.education-opportunity.overview', { lng })),
-        },
-        {
-          id: `{slugs.education-opportunity.overview}|${lng}`,
-          path: i18n.t('slugs.education-opportunity.overview', { lng }),
-          element: <EducationOpportunityOverview />,
-        },
-        {
-          id: `{slugs.education-opportunity.competences}|${lng}`,
-          path: i18n.t('slugs.education-opportunity.competences', { lng }),
-          element: <EducationOpportunityCompetences />,
-        },
-      ],
+      loader: withYksiloContext(educationOpportunityLoader, false),
     }) as RouteObject,
 );
 

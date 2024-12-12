@@ -8,6 +8,21 @@
     "card-4-title": "Create your own profile and design your path"
   },
   "osaamispolku": "Competency Path",
+  "profile": {
+    "favorites": {
+      "description": "The educational and job opportunities you have saved as favorites can be found here. You can save more opportunities as favorites in the matching tool's results view. You can remove favorites and create an educational and career path plan from one or more of your favorites."
+    },
+    "preferences": {
+      "list-1-item-1": "Collect information about your own skills and competencies (skills and competencies)",
+      "list-1-item-2": "Save your education and work history, add leisure activities, and also import your work history from the Job Market Finland's Job applicant profile as well as your education history from My Studyinfo's My studies (jobs, education leisure)",
+      "list-1-item-3": "Collect information about your own interests (interests)",
+      "list-2-item-1": "You can also save suggested education and job opportunities as favourites for future reference and for creating a personal competency path (favourites)",
+      "list-2-item-2": "You can also create and maintain your education and career path plans (paths)",
+      "paragraph-2": "By completing the above sections as comprehensively as possible, you will reveibe job and educational opportunities that are tailored to you.",
+      "paragraph-3": "The profile is yours! You decide what information to save in your Competency Profile, how to use your information, who else can see your profile, and how other parties can utilize your profile.",
+      "you-are-signed-in": "You have logged in to your Competency Profile. The Competency Profile serves as the storage and management location for your personal information within the CompetencyPath service. Here you can:"
+    }
+  },
   "slugs": {
     "about-us": "about-us",
     "accessibility-statement": "accessibility-statement",
@@ -15,16 +30,12 @@
     "cookie-policy": "cookie-policy",
     "data-sources": "data-sources",
     "education-opportunity": {
-      "competences": "competences",
-      "index": "education-opportunity",
-      "overview": "overview"
+      "index": "education-opportunity"
     },
     "how-do-i-give-feedback": "how-do-i-give-feedback",
     "how-do-i-use-the-service": "how-do-i-use-the-service",
     "job-opportunity": {
-      "competences": "competences",
-      "index": "job-opportunity",
-      "overview": "overview"
+      "index": "job-opportunity"
     },
     "no-internet-connection": "no-internet-connection",
     "privacy-policy": "privacy-policy",
@@ -58,21 +69,6 @@
       "where-can-i-get-more-help": "where-can-i-get-more-help",
       "who-is-the-service-for": "who-is-the-service-for",
       "who-provides-the-service": "who-provides-the-service"
-    }
-  },
-  "profile": {
-    "favorites": {
-      "description": "The educational and job opportunities you have saved as favorites can be found here. You can save more opportunities as favorites in the matching tool's results view. You can remove favorites and create an educational and career path plan from one or more of your favorites."
-    },
-    "preferences": {
-      "list-1-item-1": "Collect information about your own skills and competencies (skills and competencies)",
-      "list-1-item-2": "Save your education and work history, add leisure activities, and also import your work history from the Job Market Finland's Job applicant profile as well as your education history from My Studyinfo's My studies (jobs, education leisure)",
-      "list-1-item-3": "Collect information about your own interests (interests)",
-      "list-2-item-1": "You can also save suggested education and job opportunities as favourites for future reference and for creating a personal competency path (favourites)",
-      "list-2-item-2": "You can also create and maintain your education and career path plans (paths)",
-      "paragraph-2": "By completing the above sections as comprehensively as possible, you will reveibe job and educational opportunities that are tailored to you.",
-      "paragraph-3": "The profile is yours! You decide what information to save in your Competency Profile, how to use your information, who else can see your profile, and how other parties can utilize your profile.",
-      "you-are-signed-in": "You have logged in to your Competency Profile. The Competency Profile serves as the storage and management location for your personal information within the CompetencyPath service. Here you can:"
     }
   }
 }

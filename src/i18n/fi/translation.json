@@ -25,6 +25,7 @@
   "date-or-continues-placeholder": "pp.kk.vvvv tai jatkuu",
   "date-placeholder": "pp.kk.vvvv",
   "delete": "Poista",
+  "description": "Kuvaus",
   "development-trend": "Kehitystrendi",
   "do-filter": "Suodata",
   "edit": "Muokkaa",
@@ -45,15 +46,6 @@
   },
   "education-opportunities": "Koulutusmahdollisuudet",
   "education-opportunity": {
-    "competences": {
-      "navigation": "Osaamisvaatimukset",
-      "route": "Osaamiset"
-    },
-    "description": "Kuvaus",
-    "overview": {
-      "navigation": "Koulutuksen yleiskuvaus",
-      "route": "Yleiskuvaus"
-    },
     "specific-professional-competences": {
       "description": "Koulutuksen erityisosaamisalueita ovat:",
       "title": "Koulutuksen erityisosaamiset"
@@ -114,7 +106,6 @@
       "route": "Osaamiset",
       "title": "Osaamiset"
     },
-    "description": "Kuvaus",
     "digital-skills-for-citizens": {
       "description": "Kestävän kehityksen asiantuntijan tärkeitä kansalaisen digitaitoja ovat:",
       "title": "Kansalaisen digitaidot"
@@ -139,7 +130,6 @@
       "description": "Tarkastele ammattia yleisimpien työtehtävien kautta.",
       "title": "Yleisimmät työtehtävät"
     },
-    "navigation": "Ammatin yleiskuvaus",
     "occupations": {
       "title": "Työmahdollisuudessa esiintyvät ammatit"
     },
@@ -205,6 +195,8 @@
     "trend-down": "Laskeva kehitys",
     "trend-up": "Nouseva kehitys"
   },
+  "opportunity-description-KOULUTUSMAHDOLLISUUS": "Koulutusmahdollisuuden yleiskuvaus",
+  "opportunity-description-TYOMAHDOLLISUUS": "Työmahdollisuuden yleiskuvaus",
   "opportunity-type": {
     "education": "Koulutusmahdollisuus",
     "work": "Työmahdollisuus"
@@ -346,9 +338,7 @@
     "cookie-policy": "evastekaytanto",
     "data-sources": "datalahteet",
     "education-opportunity": {
-      "competences": "osaamiset",
-      "index": "koulutusmahdollisuus",
-      "overview": "yleiskuvaus"
+      "index": "koulutusmahdollisuus"
     },
     "how-do-i-give-feedback": "miten-annan-palautetta",
     "how-do-i-use-the-service": "kuinka-kaytan-palvelua",

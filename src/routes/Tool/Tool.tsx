@@ -318,7 +318,7 @@ const YourOpportunities = () => {
               to={
                 mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
                   ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`
-                  : `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}/${t('slugs.education-opportunity.overview')}`
+                  : `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}`
               }
               isFavorite={isFavorite}
               isLoggedIn={isLoggedIn}
