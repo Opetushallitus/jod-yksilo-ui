@@ -1,11 +1,10 @@
 import { components } from '@/api/schema';
-import { useLoginLink } from '@/hooks/useLoginLink';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { PopupList, PopupListItem, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdOutlinePerson } from 'react-icons/md';
-import { NavLink, useLoaderData } from 'react-router';
+import { Link, NavLink, useLoaderData } from 'react-router';
 
 interface UserButtonProps {
   onLogout: () => void;
@@ -14,7 +13,6 @@ interface UserButtonProps {
 export const UserButton = ({ onLogout }: UserButtonProps) => {
   const { t } = useTranslation();
 
-  const loginLink = useLoginLink();
   const { sm } = useMediaQueries();
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
 
@@ -27,7 +25,7 @@ export const UserButton = ({ onLogout }: UserButtonProps) => {
   // Highlight menu element when active
   const getActiveClassNames = ({ isActive }: { isActive: boolean }) => (isActive ? 'bg-secondary-1-50 rounded-sm' : '');
 
-  const login = { url: loginLink, text: t('login') };
+  const landingPageUrl = `/${language}/${t('slugs.profile.login')}`;
   const fullName = `${data?.etunimi} ${data?.sukunimi}`;
   const initials = !!data?.etunimi && !!data?.sukunimi ? data.etunimi[0] + data.sukunimi[0] : '';
 
@@ -60,12 +58,13 @@ export const UserButton = ({ onLogout }: UserButtonProps) => {
       )}
     </div>
   ) : (
-    <a
-      href={login.url}
+    <Link
+      to={landingPageUrl}
+      state={{ callbackURL: ' ' }}
       className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
-      aria-label={login.text}
+      aria-label={t('login')}
     >
       <MdOutlinePerson size={24} />
-    </a>
+    </Link>
   );
 };

@@ -27,7 +27,7 @@ import {
   TermsOfService,
 } from './BasicInformation';
 import { Home } from './Home';
-import { Favorites, Preferences, Profile, SomethingElse } from './Profile';
+import { Favorites, LandingPage, Preferences, Profile, SomethingElse } from './Profile';
 import { EducationHistory } from './Profile/EducationHistory';
 import { FreeTimeActivities } from './Profile/FreeTimeActivities';
 import { ErrorBoundary, NoMatch, Root, loader as rootLoader } from './Root';
@@ -153,6 +153,15 @@ const jobOpportunityRoutes = supportedLanguageCodes.map(
     }) as RouteObject,
 );
 
+const profileLandingPageRoutes = supportedLanguageCodes.map(
+  (lng) =>
+    ({
+      id: `{slugs.profile.login}|${lng}`,
+      path: i18n.t('slugs.profile.login', { lng }),
+      element: <LandingPage />,
+    }) as RouteObject,
+);
+
 const educationOpportunityRoutes = supportedLanguageCodes.map(
   (lng) =>
     ({
@@ -259,6 +268,7 @@ const rootRoute: RouteObject = {
     ...educationOpportunityRoutes,
     ...userGuideRoutes,
     ...basicInformationRoutes,
+    ...profileLandingPageRoutes,
   ],
 };
 

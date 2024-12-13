@@ -30,6 +30,8 @@ export const generateProfileLink = (
   t: (key: string) => string,
 ): ProfileLink => {
   const profilePageSlug = profilePageSlugs.map((slug) => t(slug)).join('/');
+  const callbackURL = `/${language}/${t('slugs.profile.index')}/${profilePageSlug}`;
+  const landingPageURL = `/${language}/${t('slugs.profile.login')}`;
 
   if (data) {
     return {
@@ -41,7 +43,7 @@ export const generateProfileLink = (
     params.set('lang', language);
     params.set('callback', `/${language}/${t('slugs.profile.index')}/${profilePageSlug}`);
     return {
-      to: `/yksilo/login?${params.toString()}`,
+      to: landingPageURL,
       component: ({
         to,
         className,
@@ -51,9 +53,9 @@ export const generateProfileLink = (
         className?: string;
         children: React.ReactNode;
       }) => (
-        <a href={to as string} className={className}>
+        <Link to={to} className={className} state={callbackURL}>
           {children}
-        </a>
+        </Link>
       ),
     };
   }

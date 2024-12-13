@@ -1,6 +1,5 @@
 import { components } from '@/api/schema';
 import { cx } from '@jod/design-system';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLoaderData } from 'react-router';
 
@@ -15,32 +14,10 @@ export interface RoutesNavigationListProps {
   onClick?: () => void;
 }
 
-interface LoginLinkProps {
-  children: React.ReactNode;
-  path: string;
-  lang: string;
-}
-
-const LoginLink = ({ children, path, lang }: LoginLinkProps) => {
-  const params = new URLSearchParams();
-  params.set('lang', lang);
-  params.set('callback', `/${lang}/${path}`);
-
-  const href = `/yksilo/login?${params.toString()}`;
-  return (
-    <a
-      href={href}
-      lang={lang}
-      className={'hyphens-auto text-button-md text-black hover:underline w-full pl-5 block py-3'}
-    >
-      {children}
-    </a>
-  );
-};
-
 export const RoutesNavigationList = ({ routes, onClick }: RoutesNavigationListProps) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
+  const landingPageUrl = `/${i18n.language}/${t('slugs.profile.login')}`;
 
   return (
     <ul className="flex flex-col gap-y-2 py-4">
@@ -50,9 +27,15 @@ export const RoutesNavigationList = ({ routes, onClick }: RoutesNavigationListPr
         return (
           <li key={route.path} className="flex min-h-7 items-center w-full">
             {route.authRequired && !data ? (
-              <LoginLink path={route.path} lang={i18n.language}>
+              <NavLink
+                state={{ callbackURL: route.path }}
+                to={landingPageUrl}
+                className={'hyphens-auto text-button-md text-black hover:underline w-full pl-5 block py-3'}
+                aria-label={t('login')}
+                onClick={onClick}
+              >
                 {route.name}
-              </LoginLink>
+              </NavLink>
             ) : (
               <NavLink
                 to={route.path}
