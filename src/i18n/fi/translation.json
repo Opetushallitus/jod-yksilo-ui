@@ -234,6 +234,24 @@
   "print": "Tulosta",
   "privacy-policy": "Tietosuojaseloste",
   "profile": {
+    "landing-page": {
+      "page-title": "Kirjaudu palveluun",
+      "title": "Tervetuloa! Luo oma osaamispolkusi ja hyödynnä monipuoliset palvelut",
+      "description": "Kirjautumalla sisään saat käyttöösi henkilökohtaisen osaamispolkusi, joka auttaa sinua hallinnoimaan ja hyödyntämään osaamistasi tehokkaasti.",
+      "profile-includes": "Oma Osaamispolku sisältää:",
+      "list-1-item-1": "Oman osaamispolun hallinta ja tietojen luvitus: Päätä, miten ja missä tietojasi käytetään.",
+      "list-1-item-2": "Työ- ja koulutushistoria: Tallenna saavutuksesi yhteen paikkaan.",
+      "list-1-item-3": "Omat osaamiset ja kiinnostuksen kohteet: Tunnista vahvuutesi ja kiinnostuksen kohteesi.",
+      "list-1-item-4": "Urasuunnitelmat: Suunnittele tulevaisuutesi ja seuraa edistymistäsi.",
+      "list-1-item-5": "Tietojen tuonti muista palveluista: tuo tietosi Työmarkkinatorista ja Oma Opintopolusta.",
+      "list-1-item-6": "Suosikkisisällöt: Tallenna ja hallitse kiinnostavimpia työ- ja koulutusvaihtoehtoja.",
+      "paragraph-2": "Miten Oma Osaamispolku voi auttaa sinua?",
+      "list-2-item-1": "Näet kaikki osaamiseesi ja kiinnostuksiisi liittyvät tiedot yhdessä paikassa.",
+      "list-2-item-2": "Voit tunnistaa vahvuutesi, myös vapaa-ajan harrastusten kautta.",
+      "list-2-item-3": "Löydät profiilisi perusteella työ- ja koulutusmahdollisuuksia, jotka sopivat juuri sinulle.",
+      "paragraph-3": "Aloita luomalla oma osaamispolkusi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
+      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta. Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta."
+    },
     "competences": {
       "add": "Lisää osaamisia",
       "description": "Löydät alta kaikki osaamisesi, jotka olet tunnistanut tai lisännyt profiiliisi. Osaamisesi ryhmittelyn ja esitystavan voit valita itse.",
@@ -355,6 +373,7 @@
       "free-time-activities": "vapaa-ajan-toimintoni",
       "index": "omat-sivuni",
       "interests": "kiinnostukseni",
+      "login": "kirjaudu-sisaan",
       "preferences": "asetukseni",
       "something-else": "muut-osaamiset",
       "work-history": "tyopaikkani"
