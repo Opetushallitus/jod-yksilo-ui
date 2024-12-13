@@ -1,5 +1,14 @@
 import { components } from '@/api/schema';
-import { LanguageMenu, LogoIconRgb, LogoRgbEn, LogoRgbFi, LogoRgbSv, NavigationBar } from '@/components';
+import {
+  LanguageButton,
+  LanguageMenu,
+  LogoIconRgb,
+  LogoRgbEn,
+  LogoRgbFi,
+  LogoRgbSv,
+  NavigationBar,
+  UserButton,
+} from '@/components';
 import { ErrorNote, useErrorNote } from '@/components/ErrorNote';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { ActionBarContext } from '@/hooks/useActionBar';
@@ -51,6 +60,7 @@ const Root = () => {
     t,
     i18n: { language },
   } = useTranslation();
+  const toolStore = useToolStore();
   const { error, clearErrorNote } = useErrorNote();
 
   const { sm } = useMediaQueries();
@@ -67,7 +77,7 @@ const Root = () => {
     NavigationBarItem(`${basicInformation}/${t('slugs.accessibility-statement')}`, t('accessibility-statement')),
     NavigationBarItem(`${basicInformation}/${t('slugs.privacy-policy')}`, t('privacy-policy')),
   ];
-
+  const logoutForm = React.useRef<HTMLFormElement>(null);
   const megaMenuButtonRef = React.useRef<HTMLButtonElement>(null);
   const langMenuButtonRef = React.useRef<HTMLLIElement>(null);
 
@@ -134,15 +144,7 @@ const Root = () => {
   }, [language]);
 
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
-  const toolStore = useToolStore();
-
-  const logout = () => {
-    toolStore.reset();
-    logoutForm.current?.submit();
-  };
-
   const footerRef = React.useRef<HTMLDivElement>(null);
-  const logoutForm = React.useRef<HTMLFormElement>(null);
 
   const toggleMenu = (menu: 'mega' | 'lang') => () => {
     setMegaMenuOpen(false);
@@ -163,6 +165,11 @@ const Root = () => {
     setMegaMenuOpen(false);
   };
 
+  const logout = () => {
+    toolStore.reset();
+    logoutForm.current?.submit();
+  };
+
   return (
     <>
       <Helmet>
@@ -172,8 +179,13 @@ const Root = () => {
       </Helmet>
       <header role="banner" className="sticky top-0 z-30 print:hidden">
         <SkipLink hash="#jod-main" label={t('skiplinks.main')} />
+        <form action="/yksilo/logout" method="POST" hidden ref={logoutForm}>
+          <input type="hidden" name="_csrf" value={data?.csrf.token} />
+          <input type="hidden" name="lang" value={language} />
+        </form>
         <NavigationBar
-          onLanguageClick={toggleMenu('lang')}
+          languageButtonComponent={<LanguageButton onClick={toggleMenu('lang')} />}
+          userButtonComponent={<UserButton onLogout={logout} />}
           logo={
             <NavLink to={`/${language}`} className="flex">
               <div className="inline-flex select-none items-center p-3">
@@ -228,7 +240,7 @@ const Root = () => {
           <div ref={megaMenuRef}>
             <MegaMenu
               loggedIn={!!data}
-              logout={logout}
+              onLogout={logout}
               onClose={() => setMegaMenuOpen(false)}
               onLanguageClick={changeLanguage}
             />

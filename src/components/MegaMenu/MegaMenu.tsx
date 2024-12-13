@@ -11,10 +11,10 @@ interface MegaMenuProps {
   loggedIn: boolean;
   onClose: () => void;
   onLanguageClick: () => void;
-  logout: () => void;
+  onLogout: () => void;
 }
 
-export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, logout }: MegaMenuProps) => {
+export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, onLogout }: MegaMenuProps) => {
   const { sm } = useMediaQueries();
   const { t } = useTranslation();
   const [megaMenuState, setMegaMenuState] = React.useState<'main' | 'lang'>('main');
@@ -52,7 +52,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, logout }: MegaMen
               <LanguageButton onClick={onLanguageButtonClick} />
             </li>
             <li className="ml-3">
-              <UserButton />
+              <UserButton onLogout={onLogout} />
             </li>
           </>
         )}
@@ -102,7 +102,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, logout }: MegaMen
           <button
             type="button"
             className="font-arial sticky bottom-0 p-6 bg-white w-full text-right text-body-md text-accent hover:underline"
-            onClick={logout}
+            onClick={onLogout}
           >
             {t('logout')}
           </button>
