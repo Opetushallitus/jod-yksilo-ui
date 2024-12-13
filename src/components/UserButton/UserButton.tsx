@@ -1,18 +1,18 @@
 import { components } from '@/api/schema';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
-import { useToolStore } from '@/stores/useToolStore';
 import { PopupList, PopupListItem, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdOutlinePerson } from 'react-icons/md';
 import { NavLink, useLoaderData } from 'react-router';
 
-export const UserButton = () => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+interface UserButtonProps {
+  onLogout: () => void;
+}
+
+export const UserButton = ({ onLogout }: UserButtonProps) => {
+  const { t } = useTranslation();
 
   const loginLink = useLoginLink();
   const { sm } = useMediaQueries();
@@ -21,14 +21,6 @@ export const UserButton = () => {
   const [userMenuOpen, setUserMenuOpen] = React.useState(false);
   const userMenuButtonRef = React.useRef<HTMLButtonElement>(null);
   const userMenuRef = useMenuClickHandler(() => setUserMenuOpen(false), userMenuButtonRef);
-
-  const logoutForm = React.useRef<HTMLFormElement>(null);
-  const toolStore = useToolStore();
-
-  const logout = () => {
-    toolStore.reset();
-    logoutForm.current?.submit();
-  };
 
   const userMenuPreferencesUrl = `${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`;
 
@@ -41,10 +33,6 @@ export const UserButton = () => {
 
   return data?.csrf ? (
     <div className="relative">
-      <form action="/yksilo/logout" method="POST" hidden ref={logoutForm}>
-        <input type="hidden" name="_csrf" value={data?.csrf.token} />
-        <input type="hidden" name="lang" value={language} />
-      </form>
       <button
         ref={userMenuButtonRef}
         type="button"
@@ -64,7 +52,7 @@ export const UserButton = () => {
             >
               <PopupListItem>{t('profile.index')}</PopupListItem>
             </NavLink>
-            <button type="button" onClick={logout} className="w-full">
+            <button type="button" onClick={onLogout} className="w-full">
               <PopupListItem classNames="w-full">{t('logout')}</PopupListItem>
             </button>
           </PopupList>

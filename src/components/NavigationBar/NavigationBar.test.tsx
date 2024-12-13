@@ -2,6 +2,8 @@ import { useMediaQueries } from '@jod/design-system';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+import { LanguageButton } from '../LanguageButton/LanguageButton';
+import { UserButton } from '../UserButton/UserButton';
 import { NavigationBar, NavigationBarLinkProps } from './NavigationBar';
 
 vi.mock('@jod/design-system', () => ({
@@ -21,7 +23,12 @@ vi.mock('react-router', () => ({
 
 describe('NavigationBar', () => {
   vi.mocked(useMediaQueries).mockReturnValue({ sm: true, md: false, lg: false, xl: false });
+
+  const onLanguageClick = vi.fn();
   const logo = <div>logo</div>;
+
+  const langButton = <LanguageButton onClick={onLanguageClick} />;
+  const userButton = <UserButton onLogout={vi.fn()} />;
 
   const user = {
     name: 'Reetta Räppänä',
@@ -32,10 +39,10 @@ describe('NavigationBar', () => {
     ),
   };
 
-  const onLanguageClick = vi.fn();
-
   it('renders only user', () => {
-    const { container } = render(<NavigationBar logo={logo} onLanguageClick={onLanguageClick} />);
+    const { container } = render(
+      <NavigationBar logo={logo} languageButtonComponent={langButton} userButtonComponent={userButton} />,
+    );
     // Assert snapshot
     expect(container.firstChild).toMatchSnapshot();
     // Assert user
@@ -44,7 +51,9 @@ describe('NavigationBar', () => {
   });
 
   it('renders no navigation items and no user', () => {
-    const { container } = render(<NavigationBar logo={logo} onLanguageClick={onLanguageClick} />);
+    const { container } = render(
+      <NavigationBar logo={logo} languageButtonComponent={langButton} userButtonComponent={userButton} />,
+    );
 
     // Assert snapshot
     expect(container.firstChild).toMatchSnapshot();
@@ -56,7 +65,15 @@ describe('NavigationBar', () => {
 
   it('renders menu component', () => {
     const menuComponent = <div>Menu</div>;
-    render(<NavigationBar logo={logo} menuComponent={menuComponent} onLanguageClick={onLanguageClick} />);
+    render(
+      <NavigationBar
+        logo={logo}
+        menuComponent={menuComponent}
+        languageButtonComponent={langButton}
+        userButtonComponent={userButton}
+      />,
+    );
+
     const menuComponentElement = screen.getByText('Menu');
     expect(menuComponentElement).toBeInTheDocument();
   });

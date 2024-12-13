@@ -18,7 +18,7 @@ exports[`NavigationBar > renders no navigation items and no user 1`] = `
         class="ml-5"
       >
         <button
-          aria-label="Valitse kieli"
+          aria-label="select-language"
           class="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
         >
           <svg
@@ -44,22 +44,6 @@ exports[`NavigationBar > renders no navigation items and no user 1`] = `
         <div
           class="relative"
         >
-          <form
-            action="/yksilo/logout"
-            hidden=""
-            method="POST"
-          >
-            <input
-              name="_csrf"
-              type="hidden"
-              value=""
-            />
-            <input
-              name="lang"
-              type="hidden"
-              value="fi"
-            />
-          </form>
           <button
             aria-label="Reetta Räppänä"
             class="h-8 w-8 rounded-full bg-secondary-3 bg-cover bg-center"
@@ -92,7 +76,7 @@ exports[`NavigationBar > renders only user 1`] = `
         class="ml-5"
       >
         <button
-          aria-label="Valitse kieli"
+          aria-label="select-language"
           class="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
         >
           <svg
@@ -118,22 +102,6 @@ exports[`NavigationBar > renders only user 1`] = `
         <div
           class="relative"
         >
-          <form
-            action="/yksilo/logout"
-            hidden=""
-            method="POST"
-          >
-            <input
-              name="_csrf"
-              type="hidden"
-              value=""
-            />
-            <input
-              name="lang"
-              type="hidden"
-              value="fi"
-            />
-          </form>
           <button
             aria-label="Reetta Räppänä"
             class="h-8 w-8 rounded-full bg-secondary-3 bg-cover bg-center"
