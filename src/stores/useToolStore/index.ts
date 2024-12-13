@@ -47,6 +47,8 @@ interface ToolState {
   ehdotuksetCount: Record<MahdollisuusTyyppi, number>;
   sorting: OpportunitySortingValue;
   filter: OpportunityFilterValue;
+  itemCount: number;
+  previousEhdotusUpdateLang: string;
   reset: () => void;
 
   setTavoitteet: (state: ToolState['tavoitteet']) => void;
@@ -59,12 +61,13 @@ interface ToolState {
   setOsaamisKiinnostusPainotus: (state: number) => void;
   setRajoitePainotus: (state: number) => void;
 
-  updateEhdotukset: (signal?: AbortSignal) => Promise<void>;
+  updateEhdotukset: (lang: string, signal?: AbortSignal) => Promise<void>;
   fetchMahdollisuudetPage: (signal?: AbortSignal, page?: number) => Promise<void>;
   updateEhdotuksetAndTyomahdollisuudet: () => Promise<void>;
 
   setSorting: (state: string) => void;
   setFilter: (state: string) => void;
+  updateItemCount: () => void;
 }
 
 export const useToolStore = create<ToolState>()(
@@ -89,6 +92,8 @@ export const useToolStore = create<ToolState>()(
       ehdotuksetCount: { TYOMAHDOLLISUUS: 0, KOULUTUSMAHDOLLISUUS: 0 },
       sorting: DEFAULT_SORTING,
       filter: DEFAULT_FILTER,
+      itemCount: 0,
+      previousEhdotusUpdateLang: '',
       reset: () => {
         set({
           tavoitteet: {},
@@ -98,6 +103,7 @@ export const useToolStore = create<ToolState>()(
           tyomahdollisuudet: [],
           koulutusmahdollisuudet: [],
           mixedMahdollisuudet: [],
+          itemCount: 0,
         });
       },
 
@@ -115,7 +121,7 @@ export const useToolStore = create<ToolState>()(
       setRajoitePainotus: (state: number) => {
         set({ rajoitePainotus: state });
       },
-      updateEhdotukset: async (signal?: AbortSignal) => {
+      updateEhdotukset: async (lang: string, signal?: AbortSignal) => {
         const { osaamiset, kiinnostukset, osaamisKiinnostusPainotus, rajoitePainotus } = get();
 
         set({ ehdotuksetLoading: true });
@@ -129,6 +135,7 @@ export const useToolStore = create<ToolState>()(
               rajoitePainotus: rajoitePainotus / 100,
             },
             signal,
+            headers: { 'Content-Language': lang },
           });
 
           const mahdollisuusEhdotukset = ehdotusDataToRecord(mahdollisuusData ?? []);
@@ -157,23 +164,23 @@ export const useToolStore = create<ToolState>()(
         }
       },
       fetchMahdollisuudetPage: async (signal, newPage = 1) => {
-        const { filter, ehdotuksetPageSize } = get();
+        const { filter, ehdotuksetPageSize, sorting } = get();
         let ehdotukset = get().mahdollisuusEhdotukset;
 
-        if (Object.keys(ehdotukset).length === 0) {
-          await get().updateEhdotukset(signal);
-          ehdotukset = get().mahdollisuusEhdotukset;
-        }
-
-        const allIds = Object.keys(ehdotukset ?? []);
+        // apply ID sorting and filter
+        const allSortedIds = await fetchSortedAndFilteredEhdotusIds(filter);
 
         set({ mahdollisuudetLoading: true });
         try {
           const sortedMixedMahdollisuudet = [];
 
+          // paginate before fetch to fetch only the ids of selected newPage
+          const pagedIds = paginate(allSortedIds, newPage, ehdotuksetPageSize);
+
+          // fetch tyomahdollisuudet of the page
           if ([filterValues.ALL, filterValues.TYOMAHDOLLISUUS].includes(filter)) {
-            const ids = allIds.filter((id) => ehdotukset[id].tyyppi === 'TYOMAHDOLLISUUS');
-            const tyomahdollisuudet = await fetchTyomahdollisuudet(ids, newPage, ehdotuksetPageSize).then((data) =>
+            const ids = pagedIds.filter((id) => ehdotukset[id].tyyppi === 'TYOMAHDOLLISUUS');
+            const tyomahdollisuudet = await fetchTyomahdollisuudet(ids).then((data) =>
               data.tyomahdollisuusResults.map(
                 (tm) => ({ ...tm, mahdollisuusTyyppi: 'TYOMAHDOLLISUUS' }) as TypedMahdollisuus,
               ),
@@ -182,13 +189,14 @@ export const useToolStore = create<ToolState>()(
             set({ tyomahdollisuudet });
           }
 
+          // fetch koulutusmahdollisuudet of the page
           if ([filterValues.ALL, filterValues.KOULUTUSMAHDOLLISUUS].includes(filter)) {
-            const ids = allIds.filter((id) => ehdotukset[id].tyyppi === 'KOULUTUSMAHDOLLISUUS');
-            const koulutusmahdollisuudet = await fetchKoulutusMahdollisuudet(ids, newPage, ehdotuksetPageSize).then(
-              (data) =>
-                data.koulutusmahdollisuusResults.map(
-                  (km) => ({ ...km, mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS' }) as TypedMahdollisuus,
-                ),
+            const ids = pagedIds.filter((id) => ehdotukset[id].tyyppi === 'KOULUTUSMAHDOLLISUUS');
+
+            const koulutusmahdollisuudet = await fetchKoulutusMahdollisuudet(ids).then((data) =>
+              data.koulutusmahdollisuusResults.map(
+                (km) => ({ ...km, mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS' }) as TypedMahdollisuus,
+              ),
             );
             sortedMixedMahdollisuudet.push(...koulutusmahdollisuudet);
 
@@ -199,10 +207,13 @@ export const useToolStore = create<ToolState>()(
             });
           }
 
+          // Apply final sorting of page items based on selected sorting
           sortedMixedMahdollisuudet.sort((a, b) =>
-            get().sorting === sortingValues.RELEVANCE
-              ? (ehdotukset[b.id]?.pisteet ?? 0) - (ehdotukset[a.id]?.pisteet ?? 0)
-              : a.otsikko[i18n.language].localeCompare(b.otsikko[i18n.language]),
+            sorting === sortingValues.RELEVANCE
+              ? // sort by scores
+                (ehdotukset[b.id]?.pisteet ?? 0) - (ehdotukset[a.id]?.pisteet ?? 0)
+              : // sort by backend provided lexicalOrder
+                ehdotukset[a.id].aakkosIndeksi - ehdotukset[b.id].aakkosIndeksi,
           );
 
           set({
@@ -218,18 +229,36 @@ export const useToolStore = create<ToolState>()(
             mahdollisuudetLoading: false,
           });
         }
+
+        async function fetchSortedAndFilteredEhdotusIds(filter: OpportunityFilterValue) {
+          if (Object.keys(ehdotukset).length === 0 || i18n.language !== get().previousEhdotusUpdateLang) {
+            await get().updateEhdotukset(i18n.language, signal);
+            ehdotukset = get().mahdollisuusEhdotukset;
+            set({ previousEhdotusUpdateLang: i18n.language });
+          }
+
+          return Object.entries(ehdotukset ?? [])
+            .filter(([, meta]) => (filter === 'ALL' ? true : filter === meta.tyyppi))
+            .sort(([, metadataA], [, metadataB]) =>
+              sorting === sortingValues.RELEVANCE
+                ? (metadataB?.pisteet ?? 0) - (metadataA?.pisteet ?? 0)
+                : (metadataA?.aakkosIndeksi ?? 0) - (metadataB?.aakkosIndeksi ?? 0),
+            )
+            .map(([key]) => key);
+        }
       },
 
       updateEhdotuksetAndTyomahdollisuudet: async () => {
-        const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit } = get();
+        const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit, updateItemCount } = get();
 
         abortController.abort();
         abortController = new AbortController();
         const signal = abortController.signal;
 
-        await updateEhdotukset(signal);
+        await updateEhdotukset(i18n.language, signal);
         await fetchMahdollisuudetPage(signal, 1);
         await updateSuosikit();
+        updateItemCount();
       },
 
       toggleSuosikki: async (suosionKohdeId: string, tyyppi: MahdollisuusTyyppi) => {
@@ -281,6 +310,21 @@ export const useToolStore = create<ToolState>()(
       setFilter: (state) => {
         set({ filter: state as OpportunityFilterValue, ehdotuksetPageNr: 1 });
         void get().fetchMahdollisuudetPage(abortController.signal, 1);
+        get().updateItemCount();
+      },
+      updateItemCount: () => {
+        const { filter, ehdotuksetCount } = get();
+        switch (filter) {
+          case 'TYOMAHDOLLISUUS':
+            set({ itemCount: ehdotuksetCount.TYOMAHDOLLISUUS });
+            break;
+          case 'KOULUTUSMAHDOLLISUUS':
+            set({ itemCount: ehdotuksetCount.KOULUTUSMAHDOLLISUUS });
+            break;
+          case 'ALL':
+            set({ itemCount: ehdotuksetCount.TYOMAHDOLLISUUS + ehdotuksetCount.KOULUTUSMAHDOLLISUUS });
+            break;
+        }
       },
     }),
     {
@@ -290,26 +334,32 @@ export const useToolStore = create<ToolState>()(
   ),
 );
 
-async function fetchKoulutusMahdollisuudet(ids: string[], newPage: number, pageSize: number) {
-  const { data: koulutusmahdollisuudet } = await client.GET('/api/koulutusmahdollisuudet', {
-    params: {
-      query: {
-        id: paginate(ids, newPage, pageSize),
-      },
-    },
-  });
+async function fetchKoulutusMahdollisuudet(ids: string[]) {
+  const { data: koulutusmahdollisuudet } =
+    ids.length > 0
+      ? await client.GET('/api/koulutusmahdollisuudet', {
+          params: {
+            query: {
+              id: ids,
+            },
+          },
+        })
+      : { data: undefined };
 
   return { koulutusmahdollisuusResults: koulutusmahdollisuudet?.sisalto ?? [] };
 }
 
-async function fetchTyomahdollisuudet(ids: string[], newPage: number, pageSize: number) {
-  const { data: tyomahdollisuudet } = await client.GET('/api/tyomahdollisuudet', {
-    params: {
-      query: {
-        id: paginate(ids, newPage, pageSize),
-      },
-    },
-  });
+async function fetchTyomahdollisuudet(ids: string[]) {
+  const { data: tyomahdollisuudet } =
+    ids.length > 0
+      ? await client.GET('/api/tyomahdollisuudet', {
+          params: {
+            query: {
+              id: ids,
+            },
+          },
+        })
+      : { data: undefined };
 
   return { tyomahdollisuusResults: tyomahdollisuudet?.sisalto ?? [] };
 }

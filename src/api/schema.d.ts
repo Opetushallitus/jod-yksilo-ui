@@ -590,6 +590,8 @@ export interface components {
       trendi?: 'NOUSEVA' | 'LASKEVA';
       /** Format: int32 */
       tyollisyysNakyma?: number;
+      /** Format: int32 */
+      aakkosIndeksi: number;
     };
     SivuDtoTyomahdollisuusDto: {
       sisalto: components['schemas']['TyomahdollisuusDto'][];
@@ -1612,8 +1614,12 @@ export interface operations {
   };
   mahdollisuudetCreateEhdotus: {
     parameters: {
-      query?: never;
-      header?: never;
+      query?: {
+        sort?: 'ASC' | 'DESC';
+      };
+      header?: {
+        'Content-Language'?: 'fi' | 'sv' | 'en';
+      };
       path?: never;
       cookie?: never;
     };

@@ -186,7 +186,7 @@ const YourOpportunitiesPagination = ({
     }
   };
 
-  return toolStore.tyomahdollisuudet.length > 0 ? (
+  return toolStore.mixedMahdollisuudet.length > 0 ? (
     <div className={className}>
       <Pagination
         currentPage={toolStore.ehdotuksetPageNr}
@@ -198,7 +198,7 @@ const YourOpportunitiesPagination = ({
           nextTriggerLabel: t('pagination.next'),
           prevTriggerLabel: t('pagination.previous'),
         }}
-        totalItems={toolStore.ehdotuksetCount.KOULUTUSMAHDOLLISUUS + toolStore.ehdotuksetCount.TYOMAHDOLLISUUS}
+        totalItems={toolStore.itemCount}
         onPageChange={(data) => void onPageChange(data)}
       />
     </div>
