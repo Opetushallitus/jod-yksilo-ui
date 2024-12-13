@@ -11,7 +11,10 @@ interface UserButtonProps {
 }
 
 export const UserButton = ({ onLogout }: UserButtonProps) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
 
   const { sm } = useMediaQueries();
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;

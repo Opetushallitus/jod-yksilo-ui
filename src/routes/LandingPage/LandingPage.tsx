@@ -8,8 +8,10 @@ import { MdArrowForward } from 'react-icons/md';
 import { NavLink, useLocation, useNavigate, useRouteLoaderData } from 'react-router';
 
 const LandingPage = () => {
-  const { i18n } = useTranslation();
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const location = useLocation();
 
   const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
@@ -19,8 +21,8 @@ const LandingPage = () => {
 
   const loginLink = useLoginLink({
     callbackURL: state?.callbackURL
-      ? `/${i18n.language}/${state?.callbackURL}`
-      : `/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`,
+      ? `/${language}/${state?.callbackURL}`
+      : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`,
   });
 
   // Redirect to root if already logged-in
@@ -62,7 +64,7 @@ const LandingPage = () => {
         <Button
           variant="white"
           label={t('login-to-service')}
-          /* eslint-disable-next-line sonarjs/no-unstable-nested-components */
+          /* eslint-disable-next-line react/no-unstable-nested-components */
           LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
         />
       </div>
@@ -71,8 +73,8 @@ const LandingPage = () => {
       </div>
       <div className="mb-8">
         <NavLink
-          to={`/${i18n.language}/${basicInformation}/${t('slugs.privacy-policy')}`}
-          lang={i18n.language}
+          to={`/${language}/${basicInformation}/${t('slugs.privacy-policy')}`}
+          lang={language}
           key={'competence'}
           type="button"
           className="text-button-md hover:underline text-accent ml-3"
