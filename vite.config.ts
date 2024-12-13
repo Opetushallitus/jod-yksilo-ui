@@ -52,6 +52,10 @@ export default defineConfig({
         target,
         xfwd: true,
       },
+      '/urataidot': {
+        target: 'http://localhost:5173',
+        xfwd: true,
+      },
     },
   },
 });

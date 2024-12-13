@@ -110,7 +110,7 @@ const Interests = () => {
           )}
         </ConfirmDialog>
       </div>
-      <Accordion title={t('tool.tools')} lang={language}>
+      <Accordion title={t('tool.tools.title')} lang={language}>
         <HelpingToolsContent text={t('tool.my-own-data.interests.help-text')}>
           <HelpingToolProfileLinkItem
             profileLink={interestsLink}

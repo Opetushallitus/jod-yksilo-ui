@@ -10,12 +10,31 @@ export interface HelpingToolProfileLinkItemProps extends HelpingToolLinkItemProp
   profileLink: ProfileLink;
 }
 
+export interface HelpingToolExternalLinkItemProps extends HelpingToolLinkItemProps {
+  href: string;
+}
+
 export const HelpingToolProfileLinkItem = ({ profileLink, icon, title }: HelpingToolProfileLinkItemProps) => {
   return (
     <HelpingToolLinkItem
       /* eslint-disable-next-line react/no-unstable-nested-components */
       component={({ ...rootProps }) => (
         <profileLink.component to={profileLink.to} {...rootProps}></profileLink.component>
+      )}
+      icon={icon}
+      title={title}
+    />
+  );
+};
+
+export const HelpingToolExternalLinkItem = ({ href, icon, title }: HelpingToolExternalLinkItemProps) => {
+  return (
+    <HelpingToolLinkItem
+      /* eslint-disable-next-line react/no-unstable-nested-components */
+      component={({ ...rootProps }) => (
+        <a href={href} {...rootProps} target="_blank" rel="noreferrer">
+          {rootProps.children}
+        </a>
       )}
       icon={icon}
       title={title}
