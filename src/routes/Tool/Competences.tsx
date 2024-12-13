@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { HelpingToolProfileLinkItem, HelpingToolsContent, OsaamisSuosittelija } from '@/components';
+import { HelpingToolExternalLinkItem } from '@/components/HelpingToolsContent/HelpingToolLinkItem';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useToolStore } from '@/stores/useToolStore';
@@ -9,7 +10,7 @@ import { Accordion, Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdLightbulbOutline, MdOutlineSailing, MdOutlineSchool, MdWorkOutline } from 'react-icons/md';
-import { useLoaderData, useOutletContext, useRouteLoaderData } from 'react-router';
+import { useLoaderData, useOutletContext, useParams, useRouteLoaderData } from 'react-router';
 import { CompetenceFilters } from '../Profile/Competences/CompetenceFilters';
 import { FILTERS_ORDER } from '../Profile/Competences/constants';
 import { CompetencesLoaderData } from '../Profile/Competences/loader';
@@ -187,6 +188,7 @@ const Competences = () => {
     i18n: { language },
   } = useTranslation();
   const toolStore = useToolStore();
+  const { lng } = useParams();
 
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
   const competencesSlug = 'slugs.profile.competences';
@@ -245,27 +247,32 @@ const Competences = () => {
           )}
         </ConfirmDialog>
       </div>
-      <Accordion title={t('tool.tools')} lang={language}>
+      <Accordion title={t('tool.tools.title')} lang={language}>
         <HelpingToolsContent text={t('profile.help-text')}>
           <HelpingToolProfileLinkItem
             profileLink={workLink}
             icon={<MdWorkOutline size={24} color="#AD4298" />}
-            title={t('profile.work-history.title')}
+            title={t('tool.tools.work-history')}
           />
           <HelpingToolProfileLinkItem
             profileLink={educationLink}
             icon={<MdOutlineSchool size={24} color="#00818A" />}
-            title={t('profile.education-history.title')}
+            title={t('tool.tools.education-history')}
           />
           <HelpingToolProfileLinkItem
             profileLink={freeTimeLink}
             icon={<MdOutlineSailing size={24} className="text-accent" />}
-            title={t('profile.free-time-activities.title')}
+            title={t('tool.tools.free-time-activities')}
           />
           <HelpingToolProfileLinkItem
             profileLink={somethingElseLink}
             icon={<MdLightbulbOutline size={24} className="text-secondary-gray" />}
-            title={t('profile.something-else.title')}
+            title={t('tool.tools.something-else')}
+          />
+          <HelpingToolExternalLinkItem
+            href={`/urataidot/${lng}?yksilo=`}
+            icon={<MdOutlineSchool size={24} color="#00818A" />}
+            title={t('tool.tools.career-skills-self-assessment-tool')}
           />
         </HelpingToolsContent>
       </Accordion>

@@ -439,7 +439,14 @@
       "title": "Kartoita tilanteesi"
     },
     "title": "Kohtaantotyökalu",
-    "tools": "Apuvälineitä",
+    "tools": {
+      "career-skills-self-assessment-tool": "Urataitojen itsearviointi työkalu",
+      "education-history": "Koulutukseni",
+      "free-time-activities": "Vapaa-ajan toimintoni",
+      "something-else": "Muut osaamiseni",
+      "title": "Apuvälineitä",
+      "work-history": "Työpaikkani"
+    },
     "your-opportunities": {
       "card": {
         "action": "Päivitä mahdollisuutesi",
