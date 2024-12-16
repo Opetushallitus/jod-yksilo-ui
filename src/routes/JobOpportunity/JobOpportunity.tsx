@@ -60,7 +60,6 @@ const JobOpportunity = () => {
           </li>
         </ul>
       ),
-      showInDevOnly: true,
     },
     {
       navTitle: t('job-opportunity.key-figures.title'),
