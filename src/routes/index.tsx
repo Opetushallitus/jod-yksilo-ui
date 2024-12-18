@@ -16,7 +16,7 @@ import {
   Interests as ToolInterests,
   toolLoader,
 } from '@/routes/Tool';
-import { RouteObject, redirect } from 'react-router';
+import { RouteObject, replace } from 'react-router';
 import { withYksiloContext } from '../auth';
 import {
   AccessibilityStatement,
@@ -53,7 +53,7 @@ const profileRoutes = supportedLanguageCodes.map(
       children: [
         {
           index: true,
-          loader: () => redirect(i18n.t('slugs.profile.preferences', { lng })),
+          loader: () => replace(i18n.t('slugs.profile.preferences', { lng })),
         },
         {
           id: `{slugs.profile.preferences}|${lng}`,
@@ -116,7 +116,7 @@ const toolRoutes = supportedLanguageCodes.map(
       children: [
         {
           index: true,
-          loader: () => redirect(i18n.t('slugs.tool.goals', { lng })),
+          loader: () => replace(i18n.t('slugs.tool.goals', { lng })),
         },
         {
           id: `{slugs.tool.goals}|${lng}`,
@@ -179,7 +179,7 @@ const userGuideRoutes: RouteObject[] = supportedLanguageCodes.map((lng) => ({
   children: [
     {
       index: true,
-      loader: () => redirect(i18n.t('slugs.user-guide.what-is-the-service', { lng })),
+      loader: () => replace(i18n.t('slugs.user-guide.what-is-the-service', { lng })),
     },
     {
       id: `{slugs.user-guide.what-is-the-service}|${lng}`,
@@ -221,7 +221,7 @@ const basicInformationRoutes: RouteObject[] = supportedLanguageCodes.map((lng) =
   children: [
     {
       index: true,
-      loader: () => redirect(i18n.t('slugs.cookie-policy', { lng })),
+      loader: () => replace(i18n.t('slugs.cookie-policy', { lng })),
     },
     {
       id: `{slugs.cookie-policy}|${lng}`,
@@ -275,7 +275,7 @@ const rootRoute: RouteObject = {
 export const routes: RouteObject[] = [
   {
     path: '/',
-    loader: () => redirect(`/${i18n.language}`),
+    loader: () => replace(`/${i18n.language}`),
   },
   rootRoute,
   { path: '*', element: <NoMatch /> },
