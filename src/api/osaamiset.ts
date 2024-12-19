@@ -17,6 +17,7 @@ export const osaamiset = {
    * Note: If the number of osaaminen to fetch is large, the requests are split into multiple chunks to avoid exceeding the maximum query length.
    */
   combine: async <T, R>(
+    mode: 'osaamiset' | 'kiinnostukset',
     objects: Iterable<T> | undefined,
     key: (o: T) => string,
     combiner: (object: T, osaaminen: OsaaminenDto) => R,
@@ -27,11 +28,29 @@ export const osaamiset = {
       key,
       combiner,
       async (chunk, signal) => {
-        const result = await client.GET('/api/osaamiset', {
+        // eslint-disable-next-line sonarjs/no-clear-text-protocols
+        const skills = chunk.filter((uri) => !uri.startsWith('http://data.europa.eu/esco/occupation/'));
+        const skillsResult = await client.GET('/api/osaamiset', {
           signal,
-          params: { query: { uri: chunk, sivu: 0, koko: chunk.length } },
+          params: { query: { uri: skills, sivu: 0, koko: skills.length } },
         });
-        return result.data?.sisalto ?? [];
+
+        let occupationsResult;
+        if (mode === 'kiinnostukset') {
+          // eslint-disable-next-line sonarjs/no-clear-text-protocols
+          const occupations = chunk.filter((uri) => uri.startsWith('http://data.europa.eu/esco/occupation/'));
+          occupationsResult = (
+            await client.GET('/api/ammatit', {
+              signal,
+              params: { query: { uri: occupations, sivu: 0, koko: occupations.length } },
+            })
+          ).data?.sisalto.map((osaaminen) => ({
+            uri: osaaminen.uri,
+            nimi: osaaminen.nimi,
+            kuvaus: osaaminen.kuvaus ?? {},
+          }));
+        }
+        return [...(skillsResult.data?.sisalto ?? []), ...(occupationsResult ?? [])];
       },
       signal,
     );
@@ -42,6 +61,7 @@ export const osaamiset = {
       return [];
     }
     return await osaamiset.combine(
+      'osaamiset',
       uris,
       (uri) => uri,
       (_, osaaminen) => osaaminen,

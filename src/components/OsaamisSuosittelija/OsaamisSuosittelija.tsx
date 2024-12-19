@@ -88,6 +88,7 @@ export const OsaamisSuosittelija = ({
         });
         setEhdotetutOsaamiset(
           await osaamiset.combine(
+            mode,
             ehdotus.data,
             (e) => e.uri,
             (e, o) => {
@@ -115,7 +116,7 @@ export const OsaamisSuosittelija = ({
     } else {
       setEhdotetutOsaamiset([]);
     }
-  }, [debouncedTaitosi, i18n.language]);
+  }, [debouncedTaitosi, i18n.language, mode]);
 
   React.useEffect(() => {
     setFilteredEhdotetutOsaamiset([
