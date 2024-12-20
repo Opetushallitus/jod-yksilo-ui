@@ -128,7 +128,7 @@ const MyOwnData = () => {
               tabIndex={tab.active ? undefined : -1}
               onKeyDown={(event) => onKeyDown(event, index)}
               onClick={() => navigate(tab.to, { replace: true, preventScrollReset: true })}
-              className={cx('w-full p-3 rounded-t text-center text-ellipsis overflow-hidden', {
+              className={cx(`w-full p-3 rounded-t text-center text-button-sm-mobile overflow-hidden`, {
                 'bg-white': tab.active,
                 'text-link': !tab.active,
               })}
