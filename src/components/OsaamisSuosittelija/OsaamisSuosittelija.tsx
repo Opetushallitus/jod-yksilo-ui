@@ -1,7 +1,7 @@
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
-import { OSAAMINEN_COLOR_MAP } from '@/constants';
+import { ESCO_SKILL_PREFIX, OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { getLocalizedText, removeDuplicates } from '@/utils';
 import { Tag, Textarea, useMediaQueries } from '@jod/design-system';
@@ -88,8 +88,7 @@ export const OsaamisSuosittelija = ({
         });
         setEhdotetutOsaamiset(
           await osaamiset.combine(
-            mode,
-            ehdotus.data,
+            mode === 'osaamiset' ? ehdotus.data?.filter((e) => e.uri.startsWith(ESCO_SKILL_PREFIX)) : ehdotus.data,
             (e) => e.uri,
             (e, o) => {
               return {

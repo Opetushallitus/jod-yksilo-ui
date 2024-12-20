@@ -34,7 +34,7 @@ describe('osaamiset.combine', () => {
       id: object.id,
       osaaminen,
     });
-    const result = await osaamiset.combine('osaamiset', objects, key, combiner);
+    const result = await osaamiset.combine(objects, key, combiner);
     expect(result).toEqual([
       { id: 1, osaaminen: mockOsaaminen1 },
       { id: 2, osaaminen: mockOsaaminen1 },

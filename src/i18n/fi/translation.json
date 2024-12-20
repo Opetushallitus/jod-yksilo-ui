@@ -297,6 +297,7 @@
     "interests": {
       "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius.",
       "edit-interests": "Muokkaa kiinnostuksen kohteita",
+      "occupations-that-interest-me": "Ammatit, jotka kiinnostavat minua",
       "skills-that-interest-me": "Osaamiset, jotka kiinnostavat minua",
       "title": "Kiinnostuksen kohteeni",
       "write-what-interests-you": "Kirjoita, mikä sinua kiinnostaa"
