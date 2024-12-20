@@ -1,3 +1,4 @@
+import { ESCO_OCCUPATION_PREFIX } from '@/constants';
 import { client } from './client';
 import { combinerImpl } from './combinerImpl';
 import { components } from './schema';
@@ -17,7 +18,6 @@ export const osaamiset = {
    * Note: If the number of osaaminen to fetch is large, the requests are split into multiple chunks to avoid exceeding the maximum query length.
    */
   combine: async <T, R>(
-    mode: 'osaamiset' | 'kiinnostukset',
     objects: Iterable<T> | undefined,
     key: (o: T) => string,
     combiner: (object: T, osaaminen: OsaaminenDto) => R,
@@ -28,17 +28,15 @@ export const osaamiset = {
       key,
       combiner,
       async (chunk, signal) => {
-        // eslint-disable-next-line sonarjs/no-clear-text-protocols
-        const skills = chunk.filter((uri) => !uri.startsWith('http://data.europa.eu/esco/occupation/'));
+        const skills = chunk.filter((uri) => !uri.startsWith(ESCO_OCCUPATION_PREFIX));
         const skillsResult = await client.GET('/api/osaamiset', {
           signal,
           params: { query: { uri: skills, sivu: 0, koko: skills.length } },
         });
 
         let occupationsResult;
-        if (mode === 'kiinnostukset') {
-          // eslint-disable-next-line sonarjs/no-clear-text-protocols
-          const occupations = chunk.filter((uri) => uri.startsWith('http://data.europa.eu/esco/occupation/'));
+        const occupations = chunk.filter((uri) => uri.startsWith(ESCO_OCCUPATION_PREFIX));
+        if (occupations.length > 0) {
           occupationsResult = (
             await client.GET('/api/ammatit', {
               signal,
@@ -61,7 +59,6 @@ export const osaamiset = {
       return [];
     }
     return await osaamiset.combine(
-      'osaamiset',
       uris,
       (uri) => uri,
       (_, osaaminen) => osaaminen,
