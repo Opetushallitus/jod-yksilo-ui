@@ -70,19 +70,20 @@
   "found": "Löytyi",
   "free-time-activities": {
     "activity-content": "Toiminnon sisältö",
-    "activity-name": "Toiminnon nimi",
-    "activity-or-proficiency-description": "Toiminto / pätevyys",
-    "add-new-activity": "Lisää uusi vapaa-ajan toiminto",
-    "add-new-free-time-activity": "Lisää uusi toiminto",
-    "add-new-proficiency": "Lisää uusi pätevyys",
+    "add-new-activity": "Lisää uusi toiminto",
+    "add-new-free-time-activity": "Lisää uusi vapaa-ajan toiminto",
+    "add-new-free-time-theme-and-activities": "Lisää uusi vapaa-ajan teema ja toimintoja",
     "confirm-delete-free-time-activity": "Haluatko varmasti poistaa vapaa-ajan toiminnon? Jos vapaa-ajantoimintoon ei liity poiston jälkeen enää yhtään pätevyyttä, myös vapaa-ajantoiminto poistetaan.",
     "confirm-delete-proficiency": "Haluatko varmasti poistaa pätevyyden?",
     "delete-free-time-activity": "Poista vapaa-ajan toiminto",
     "delete-proficiency": "Poista pätevyys",
     "edit-activity": "Muokkaa vapaa-ajan toimintoa",
+    "edit-free-time-theme": "Muokkaa vapaa-ajan teemaa",
     "edit-proficiency": "Muokkaa pätevyyttä",
     "identify-proficiencies": "Tunnista osaamisia",
-    "proficiency": "Pätevyys"
+    "name-of-free-time-activity": "Vapaa-ajan toiminnon nimi",
+    "name-of-free-time-theme": "Vapaa-ajan teeman nimi",
+    "theme-or-activity": "Teema / Toiminto"
   },
   "goals": "Tavoitteet",
   "home": {
@@ -271,6 +272,13 @@
     },
     "free-time-activities": {
       "description": "Löydät alta vapaa-ajan toimintosi. Vapaa-ajan toimintoja voivat olla harrastukset, luottamustoimet sekä erilaiset pätevyydet. Voit lisätä käsin vapaa-ajan toimintojasi sekä kartoittaa niihin liittyviä osaamisiasi.",
+      "modals": {
+        "competences-description": "Kuvaile vapaa-ajan toimintoasi. Kirjoita esimerkiksi mitä olet tehnyt tai millaista tekemistä se on sisältänyt. Osaamistunnistajamme ehdottaa sinulle muodostunutta osaamista, jota voit valita osaamisprofiiliisi.",
+        "competences-placeholder": "Opin tunnistamaan ihmisten osaamisia ja sanoittamaan niitä...",
+        "description": "Kerro tässä vapaa-ajastasi. Vapaa-ajan toimintoja voivat olla esim. harrastustoiminta, luottamustoimet sekä erilaiset pätevyydet ja muut ansiot. Vapaa-ajan tekemisestä syntyy paljon osaamista sinulle ja autamme sinua tunnistamaan sitä. Voit ilmoittaa vapaa-ajan toimintoja teemoittain ja rakentaa itsellesi sopivan näkymän vapaa-ajan tekemiseesi.",
+        "name-of-free-time-activity-placeholder": "Esim. Sukellusmatka/Sihteerinä toimiminen/Valmentaminen",
+        "name-of-free-time-theme-placeholder": "Esim. Sukeltaminen/Taloyhtiön hallitus/Liikunta"
+      },
       "title": "Vapaa-ajan toimintoni"
     },
     "help-text": "Rakenna koulutus- ja työhistoriasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle sopivia osaamisia.",

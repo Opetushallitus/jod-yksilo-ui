@@ -19,41 +19,33 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {type === 'toiminta' && !id && t('free-time-activities.add-new-activity')}
+        {type === 'toiminta' && !id && t('free-time-activities.add-new-free-time-activity')}
         {type === 'toiminta' && id && t('free-time-activities.edit-activity')}
-        {type === 'patevyys' && !patevyysId && t('free-time-activities.add-new-proficiency')}
+        {type === 'patevyys' && !patevyysId && t('free-time-activities.add-new-activity')}
         {type === 'patevyys' && patevyysId && t('free-time-activities.edit-proficiency')}
       </h2>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9 text-todo">
-        Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
-        simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
-        in albucius nominavi principes eum, quem facilisi cotidieque mel no.
-      </p>
+      <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.free-time-activities.modals.description')}</p>
       {type === 'toiminta' && (
         <div className="mb-6">
           <InputField
-            label={t('free-time-activities.activity-name')}
+            label={t('free-time-activities.name-of-free-time-theme')}
             {...register(`nimi.${language}` as const)}
-            placeholder="TODO: Lorem ipsum dolor sit amet"
-            help="TODO: Help text"
+            placeholder={t('profile.free-time-activities.modals.name-of-free-time-theme-placeholder')}
           />
         </div>
       )}
       <div className="mb-6">
         <InputField
-          label={t('free-time-activities.proficiency')}
+          label={t('free-time-activities.name-of-free-time-activity')}
           {...register(`patevyydet.${patevyys}.nimi.${language}` as const)}
-          placeholder="TODO: Lorem ipsum dolor sit amet"
-          help="TODO: Help text"
+          placeholder={t('profile.free-time-activities.modals.name-of-free-time-activity-placeholder')}
         />
       </div>
       <div className="mb-6 flex grow gap-6">
         <div className="block w-full">
           <Controller
             control={control}
-            render={({ field }) => (
-              <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} help="TODO: Help text" />
-            )}
+            render={({ field }) => <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} />}
             name={`patevyydet.${patevyys}.alkuPvm`}
           />
         </div>
@@ -61,12 +53,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker
-                label={t('ended')}
-                {...field}
-                placeholder={t('date-or-continues-placeholder')}
-                help="TODO: Help text"
-              />
+              <Datepicker label={t('ended')} {...field} placeholder={t('date-or-continues-placeholder')} />
             )}
             name={`patevyydet.${patevyys}.loppuPvm`}
           />

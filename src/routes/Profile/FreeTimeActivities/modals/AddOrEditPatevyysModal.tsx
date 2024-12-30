@@ -37,7 +37,7 @@ interface PatevyysForm {
 }
 
 const PATEVYYDET_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet'; // /{patevyysId}
-const editCompetencesSlug = 'profile.competences.edit';
+const editCompetencesSlug = 'free-time-activities.edit-activity';
 const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
   const {
     t,
@@ -47,13 +47,13 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t(patevyysId ? editCompetencesSlug : 'free-time-activities.add-new-proficiency')}
+        {t(patevyysId ? editCompetencesSlug : 'free-time-activities.add-new-activity')}
       </h2>
       <div className="mb-6">
         <InputField
-          label={t('free-time-activities.proficiency')}
+          label={t('free-time-activities.name-of-free-time-activity')}
           {...register(`nimi.${language}` as const)}
-          placeholder="TODO: Lorem ipsum dolor sit amet"
+          placeholder={t('profile.free-time-activities.modals.name-of-free-time-activity-placeholder')}
         />
       </div>
       <div className="mb-6 flex grow gap-6">
@@ -86,11 +86,19 @@ const OsaamisetStep = ({ patevyysId }: { patevyysId?: string }) => {
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
         {t(patevyysId ? editCompetencesSlug : 'free-time-activities.identify-proficiencies')}
       </h2>
+      <p className="mb-7 text-body-sm font-arial sm:mb-9">
+        {t('profile.free-time-activities.modals.competences-description')}
+      </p>
       <Controller
         control={control}
         name="osaamiset"
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="PATEVYYS" />
+          <OsaamisSuosittelija
+            onChange={onChange}
+            value={value}
+            sourceType="PATEVYYS"
+            placeholder={t('profile.free-time-activities.modals.competences-placeholder')}
+          />
         )}
       />
     </>

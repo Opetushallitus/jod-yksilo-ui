@@ -34,6 +34,8 @@ interface OsaamisSuosittelijaProps {
   mode?: OsaamisSuosittelijaMode;
   /** Additional class name */
   className?: string;
+  /** Placeholder text for the textarea */
+  placeholder?: string;
 }
 
 type CategorizedValue = Record<OsaaminenLahdeTyyppi, OsaaminenValue[]>;
@@ -45,6 +47,7 @@ export const OsaamisSuosittelija = ({
   categorized = false,
   mode = 'osaamiset',
   className = '',
+  placeholder,
 }: OsaamisSuosittelijaProps) => {
   const { i18n, t } = useTranslation();
   const { sm } = useMediaQueries();
@@ -138,15 +141,21 @@ export const OsaamisSuosittelija = ({
     />
   );
 
+  const textareaPlaceholder = () => {
+    if (placeholder) {
+      return placeholder;
+    } else if (mode === 'osaamiset') {
+      return t('tool.my-own-data.competences.textarea-placeholder');
+    } else {
+      return t('osaamissuosittelija.interest.textarea-placeholder');
+    }
+  };
+
   return (
     <>
       <div className="mb-6">
         <Textarea
-          placeholder={
-            mode === 'osaamiset'
-              ? t('tool.my-own-data.competences.textarea-placeholder')
-              : t('osaamissuosittelija.interest.textarea-placeholder')
-          }
+          placeholder={textareaPlaceholder()}
           value={taitosi}
           onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setTaitosi(event.target.value)}
           rows={2}
