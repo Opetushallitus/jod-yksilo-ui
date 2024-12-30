@@ -154,7 +154,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                     osaamiset: [],
                   });
                 }}
-                label={t('education-history.add-new-degree')}
+                label={t('education-history.add-studies-to-this-education')}
                 variant="white"
               />
             )}

@@ -47,13 +47,13 @@ const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t(koulutusId ? 'education-history.edit-degree' : 'education-history.add-new-degree')}
+        {t(koulutusId ? 'education-history.edit-degree-or-education' : 'education-history.add-studies-to-education')}
       </h2>
       <div className="mb-6">
         <InputField
-          label={t('education-history.degree')}
+          label={t('education-history.name-of-degree-or-education')}
           {...register(`nimi.${language}` as const)}
-          placeholder="TODO: Lorem ipsum dolor sit amet"
+          placeholder={t('profile.education-history.modals.job-description-placeholder')}
         />
       </div>
       <div className="mb-6 flex grow gap-6">
@@ -86,6 +86,9 @@ const OsaamisetStep = ({ koulutusId }: { koulutusId?: string }) => {
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
         {t(koulutusId ? 'profile.competences.edit' : 'education-history.identify-competences')}
       </h2>
+      <p className="mb-7 text-body-sm font-arial sm:mb-9">
+        {t('profile.education-history.modals.competences-description')}
+      </p>
       <Controller
         control={control}
         name={'osaamiset'}
