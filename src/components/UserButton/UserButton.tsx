@@ -8,9 +8,10 @@ import { Link, NavLink, useLoaderData } from 'react-router';
 
 interface UserButtonProps {
   onLogout: () => void;
+  onClick?: () => void;
 }
 
-export const UserButton = ({ onLogout }: UserButtonProps) => {
+export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
   const {
     t,
     i18n: { language },
@@ -66,6 +67,11 @@ export const UserButton = ({ onLogout }: UserButtonProps) => {
       state={{ callbackURL: ' ' }}
       className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
       aria-label={t('login')}
+      onClick={() => {
+        if (onClick) {
+          onClick();
+        }
+      }}
     >
       <MdOutlinePerson size={24} />
     </Link>
