@@ -152,7 +152,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
                     osaamiset: [],
                   });
                 }}
-                label={t('free-time-activities.add-new-proficiency')}
+                label={t('free-time-activities.add-new-activity')}
                 variant="white"
               />
             )}

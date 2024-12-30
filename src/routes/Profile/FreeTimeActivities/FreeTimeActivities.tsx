@@ -92,9 +92,9 @@ const FreeTimeActivities = () => {
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-9 text-body-lg">{t('profile.free-time-activities.description')}</p>
       <ExperienceTable
-        mainColumnHeader={t('free-time-activities.activity-or-proficiency-description')}
-        addNewLabel={t('free-time-activities.add-new-free-time-activity')}
-        addNewNestedLabel={t('free-time-activities.add-new-proficiency')}
+        mainColumnHeader={t('free-time-activities.theme-or-activity')}
+        addNewLabel={t('free-time-activities.add-new-free-time-theme-and-activities')}
+        addNewNestedLabel={t('free-time-activities.add-new-activity')}
         rows={rows}
         onAddClick={() => setIsWizardOpen(true)}
         onRowClick={onRowClick}

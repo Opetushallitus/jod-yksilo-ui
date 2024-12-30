@@ -23,16 +23,19 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
       <h3 className="mb-4 text-heading-5 font-arial text-black sm:mb-5 sm:text-heading-3 sm:font-poppins">
         {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}
       </h3>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9 text-todo">
-        Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque,
-        simul accusata no ius. Volumus corpora per te, pri lucilius salutatus iracundia ut. Mutat posse voluptua quo cu,
-        in albucius nominavi principes eum, quem facilisi cotidieque mel no.
+      <p className="mb-7 text-body-sm font-arial sm:mb-9">
+        {t('profile.free-time-activities.modals.competences-description')}
       </p>
       <Controller
         control={control}
         name={`patevyydet.${patevyys}.osaamiset`}
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="PATEVYYS" />
+          <OsaamisSuosittelija
+            onChange={onChange}
+            value={value}
+            sourceType="PATEVYYS"
+            placeholder={t('profile.free-time-activities.modals.competences-placeholder')}
+          />
         )}
       />
     </>
