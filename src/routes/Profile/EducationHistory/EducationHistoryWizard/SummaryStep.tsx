@@ -33,7 +33,7 @@ const SummaryStep = () => {
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{t('work-history.summary')}</h2>
-      <ExperienceTable mainColumnHeader={t('education-history.education-or-degree')} rows={rows} />
+      <ExperienceTable mainColumnHeader={t('education-history.education-provider-or-education')} rows={rows} />
     </>
   );
 };

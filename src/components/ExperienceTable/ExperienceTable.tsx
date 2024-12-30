@@ -79,7 +79,12 @@ export const ExperienceTable = ({
                       colSpan={5}
                       className={`pt-5 ${categorizedRows.length - 1 === index ? 'pb-7 sm:pb-11' : 'pb-7'}`.trim()}
                     >
-                      <Button variant="white" label={addNewNestedLabel} onClick={() => onAddNestedRowClick(row)} />
+                      <Button
+                        variant="white"
+                        size="sm"
+                        label={addNewNestedLabel}
+                        onClick={() => onAddNestedRowClick(row)}
+                      />
                     </td>
                   </tr>
                 )}

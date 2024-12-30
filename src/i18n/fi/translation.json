@@ -30,19 +30,20 @@
   "do-filter": "Suodata",
   "edit": "Muokkaa",
   "education-history": {
-    "add-new-degree": "Lisää uusi tutkinto",
     "add-new-education": "Lisää uusi koulutus",
+    "add-studies-to-education": "Lisää opintoja koulutukseen",
+    "add-studies-to-this-education": "Lisää opintoja tähän koulutukseen",
     "confirm-delete-degree": "Haluatko varmasti poistaa tämän tutkinnon? Jos koulutukseen ei liity poiston jälkeen enää yhtään tutkintoa, myös koulutus poistetaan.",
     "confirm-delete-education-history": "Haluatko varmasti poistaa tämän koulutuksen?",
-    "degree": "Tutkinto",
     "delete-degree": "Poista tutkinto",
     "delete-education-history": "Poista koulutus",
-    "edit-degree": "Muokkaa tutkintoa",
+    "edit-degree-or-education": "Muokkaa tutkintoa tai koulutusta",
     "edit-education": "Muokkaa koulutusta",
-    "education-or-degree": "Koulutus / tutkinto",
+    "education-provider-or-education": "Koulutuksen järjestäjä / koulutus",
     "educational-content": "Koulutuksen sisältö",
-    "educational-institution": "Oppilaitos",
-    "identify-competences": "Tunnista osaamisia"
+    "educational-institution-or-education-provider": "Oppilaitos tai koulutuksen järjestäjä",
+    "identify-competences": "Tunnista osaamisia",
+    "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi"
   },
   "education-opportunities": "Koulutusmahdollisuudet",
   "education-opportunity": {
@@ -209,8 +210,8 @@
     },
     "interest": {
       "add": "Lisää kiinnostuksen kohde klikkaamalla '+'-merkkiä kiinnostuksen vieressä.",
-      "textarea-placeholder": "Kirjoita tekstikenttään mikä sinua kiinnostaa",
-      "remove": "Poista kiinnostuksen kohde klikkaamalla rastia."
+      "remove": "Poista kiinnostuksen kohde klikkaamalla rastia.",
+      "textarea-placeholder": "Kirjoita tekstikenttään mikä sinua kiinnostaa"
     },
     "my-KIINNOSTUS": "Kiinnostukseni",
     "my-KOULUTUS": "Koulutukseni",
@@ -234,24 +235,6 @@
   "print": "Tulosta",
   "privacy-policy": "Tietosuojaseloste",
   "profile": {
-    "landing-page": {
-      "page-title": "Kirjaudu palveluun",
-      "title": "Tervetuloa! Luo oma osaamispolkusi ja hyödynnä monipuoliset palvelut",
-      "description": "Kirjautumalla sisään saat käyttöösi henkilökohtaisen osaamispolkusi, joka auttaa sinua hallinnoimaan ja hyödyntämään osaamistasi tehokkaasti.",
-      "profile-includes": "Oma Osaamispolku sisältää:",
-      "list-1-item-1": "Oman osaamispolun hallinta ja tietojen luvitus: Päätä, miten ja missä tietojasi käytetään.",
-      "list-1-item-2": "Työ- ja koulutushistoria: Tallenna saavutuksesi yhteen paikkaan.",
-      "list-1-item-3": "Omat osaamiset ja kiinnostuksen kohteet: Tunnista vahvuutesi ja kiinnostuksen kohteesi.",
-      "list-1-item-4": "Urasuunnitelmat: Suunnittele tulevaisuutesi ja seuraa edistymistäsi.",
-      "list-1-item-5": "Tietojen tuonti muista palveluista: tuo tietosi Työmarkkinatorista ja Oma Opintopolusta.",
-      "list-1-item-6": "Suosikkisisällöt: Tallenna ja hallitse kiinnostavimpia työ- ja koulutusvaihtoehtoja.",
-      "paragraph-2": "Miten Oma Osaamispolku voi auttaa sinua?",
-      "list-2-item-1": "Näet kaikki osaamiseesi ja kiinnostuksiisi liittyvät tiedot yhdessä paikassa.",
-      "list-2-item-2": "Voit tunnistaa vahvuutesi, myös vapaa-ajan harrastusten kautta.",
-      "list-2-item-3": "Löydät profiilisi perusteella työ- ja koulutusmahdollisuuksia, jotka sopivat juuri sinulle.",
-      "paragraph-3": "Aloita luomalla oma osaamispolkusi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
-      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta. Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta."
-    },
     "competences": {
       "add": "Lisää osaamisia",
       "description": "Löydät alta kaikki osaamisesi, jotka olet tunnistanut tai lisännyt profiiliisi. Osaamisesi ryhmittelyn ja esitystavan voit valita itse.",
@@ -266,13 +249,11 @@
     "education-history": {
       "description": "Löydät alta koulutushistoriasi. Voit lisätä käsin koulutushistoriaasi sekä siihen liittyviä tutkintoja, kursseja sekä kartoittaa niihin liittyviä osaamisiasi. Voit myös tuoda koulutushistoriasi ja kartoittaa siihen liittyviä osaamisiasi Oma Opintopolun omista opintosuorituksista.",
       "modals": {
-        "competences-description": "Kirjaa koulutuksen sisältö sille varattuun kenttään alle. Voit myös kopioida koulutuksen sisältökuvauksia muualta, jos ne on kirjattu esimerkiksi opinto-oppaaseen,  oppilaitoksen verkkosivun kuvaukseen tai ovat tallessa sosiaalisen median palveluissa. ",
+        "competences-description": "Kerro mitä opit koulutuksessa. Voit myös kopioida koulutuksen sisältökuvauksia muualta, jos ne on kirjattu esimerkiksi opinto-oppaaseen, oppilaitoksen verkkosivun kuvaukseen tai ovat tallessa sosiaalisen median palveluissa.",
         "competences-help": "Kirjoittamasi tekstin perusteella sinulle tarjotaan erilaisia avainsanoja alla olevaan listaan. Valitse mielestäsi parhaat avainsanat valitsemalla + ja ne siirtyvät osaamisprofiiliin koulutuksen tuottamiksi osaamisiksi. Voit poistaa väärin valittuja osaamisia valitsemalla x.",
         "description": "Ilmoita tässä suorittamasi koulutuksesi perustiedot. Jos opiskelet kyseisessä koulutuksessa juuri nyt, jätä loppumispäivämäärä ilmoittamatta.",
-        "job-description-help": "Kirjaa tähän suorittamasi tutkinnon tai kurssin nimi",
-        "job-description-placeholder": "esim. osaamisen kartoittamisen tutkinto",
-        "workplace-help": "Lisätessäsi myöhemmin uutta koulutusta, ryhmittyvät nämä samannimisen oppilaitoksen alle automaattisesti",
-        "workplace-placeholder": "esim. Maailman opisto"
+        "job-description-placeholder": "Esim. osaamisen kartoittamisen tutkinto",
+        "workplace-placeholder": "Esim. Maailman opisto"
       },
       "title": "Koulutukseni"
     },
@@ -302,6 +283,24 @@
       "title": "Kiinnostuksen kohteeni",
       "write-what-interests-you": "Kirjoita, mikä sinua kiinnostaa"
     },
+    "landing-page": {
+      "description": "Kirjautumalla sisään saat käyttöösi henkilökohtaisen osaamispolkusi, joka auttaa sinua hallinnoimaan ja hyödyntämään osaamistasi tehokkaasti.",
+      "list-1-item-1": "Oman osaamispolun hallinta ja tietojen luvitus: Päätä, miten ja missä tietojasi käytetään.",
+      "list-1-item-2": "Työ- ja koulutushistoria: Tallenna saavutuksesi yhteen paikkaan.",
+      "list-1-item-3": "Omat osaamiset ja kiinnostuksen kohteet: Tunnista vahvuutesi ja kiinnostuksen kohteesi.",
+      "list-1-item-4": "Urasuunnitelmat: Suunnittele tulevaisuutesi ja seuraa edistymistäsi.",
+      "list-1-item-5": "Tietojen tuonti muista palveluista: tuo tietosi Työmarkkinatorista ja Oma Opintopolusta.",
+      "list-1-item-6": "Suosikkisisällöt: Tallenna ja hallitse kiinnostavimpia työ- ja koulutusvaihtoehtoja.",
+      "list-2-item-1": "Näet kaikki osaamiseesi ja kiinnostuksiisi liittyvät tiedot yhdessä paikassa.",
+      "list-2-item-2": "Voit tunnistaa vahvuutesi, myös vapaa-ajan harrastusten kautta.",
+      "list-2-item-3": "Löydät profiilisi perusteella työ- ja koulutusmahdollisuuksia, jotka sopivat juuri sinulle.",
+      "page-title": "Kirjaudu palveluun",
+      "paragraph-2": "Miten Oma Osaamispolku voi auttaa sinua?",
+      "paragraph-3": "Aloita luomalla oma osaamispolkusi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
+      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta. Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta.",
+      "profile-includes": "Oma Osaamispolku sisältää:",
+      "title": "Tervetuloa! Luo oma osaamispolkusi ja hyödynnä monipuoliset palvelut"
+    },
     "preferences": {
       "list-1-item-1": "kerätä tietoa omasta osaamisestasi (osaaminen)",
       "list-1-item-2": "tallentaa koulutus- ja työhistoriasi sekä lisätä vapaa-ajan tekemisiä sekä tuoda myös työhistoriasi työmarkkinatorin työnhakuprofiilista sekä koulutushistoriasi Opintopolun omista opintosuorituksista (työpaikat, koulutus, vapaa-aika)",
@@ -327,9 +326,9 @@
         "competences-help": "Kirjoittamasi tekstin perusteella sinulle tarjotaan erilaisia avainsanoja alla olevaan listaan. Valitse mielestäsi parhaat avainsanat valitsemalla + ja ne siirtyvät osaamisprofiiliin työpaikkasi tuottamiksi osaamisiksi. Voit poistaa väärin valittuja osaamisia valitsemalla x.",
         "description": "Ilmoita tässä työpaikkasi perustiedot. Jos työpaikkasi on nykyinen, jätä loppumispäivämäärä ilmoittamatta.",
         "job-description-help": "Toimenkuva voi olla tittelisi, tehtävänimikkeesi tai ammattisi",
-        "job-description-placeholder": "esim. Suunnittelija",
+        "job-description-placeholder": "Esim. Suunnittelija",
         "workplace-help": "Lisätessäsi myöhemmin uutta työpaikkaa ja/tai toimenkuvaa, ryhmittyvät nämä samannimisen työnantajan alle automaattisest",
-        "workplace-placeholder": "esim. Työpaikka Oy"
+        "workplace-placeholder": "Esim. Työpaikka Oy"
       },
       "title": "Työpaikkani"
     }
@@ -427,7 +426,7 @@
           "import-button": "Tuo osaamiset osaamisprofiilista",
           "login-description": "Kirjaudu sisään Osaamispolkuun, jotta voit tuoda osaamisesi osaamisprofiilistasi."
         },
-        "textarea-placeholder": "Kirjoita taitosi tekstikenttään.",
+        "textarea-placeholder": "Esim. Opin tunnistamaan ihmisten osaamisia ja sanoittamaan niitä...",
         "title": "Mitä minä osaan"
       },
       "description": "Alla on työkalut joiden avulla syötän tietojasi joiden perusteella tarjoamme sinulle mahdollisuuksia oikealla.",
