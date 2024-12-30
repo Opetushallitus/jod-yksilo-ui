@@ -52,7 +52,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, onLogout }: MegaM
               <LanguageButton onClick={onLanguageButtonClick} />
             </li>
             <li className="ml-3">
-              <UserButton onLogout={onLogout} />
+              <UserButton onLogout={onLogout} onClick={onClose} />
             </li>
           </>
         )}
