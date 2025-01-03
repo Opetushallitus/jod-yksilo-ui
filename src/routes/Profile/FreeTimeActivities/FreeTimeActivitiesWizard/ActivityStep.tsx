@@ -1,3 +1,4 @@
+import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -45,7 +46,16 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
         <div className="block w-full">
           <Controller
             control={control}
-            render={({ field }) => <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} />}
+            render={({ field }) => (
+              <Datepicker
+                label={t('started')}
+                {...field}
+                placeholder={t('date-placeholder')}
+                translations={getDatePickerTranslations(
+                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
+                )}
+              />
+            )}
             name={`patevyydet.${patevyys}.alkuPvm`}
           />
         </div>
@@ -53,7 +63,14 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker label={t('ended')} {...field} placeholder={t('date-or-continues-placeholder')} />
+              <Datepicker
+                label={t('ended')}
+                {...field}
+                placeholder={t('date-or-continues-placeholder')}
+                translations={getDatePickerTranslations(
+                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
+                )}
+              />
             )}
             name={`patevyydet.${patevyys}.loppuPvm`}
           />

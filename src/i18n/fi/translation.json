@@ -24,6 +24,28 @@
   "data-sources": "Datalähteet",
   "date-or-continues-placeholder": "pp.kk.vvvv tai jatkuu",
   "date-placeholder": "pp.kk.vvvv",
+  "datepicker": {
+    "actions": {
+      "close": "Sulje kalenteri",
+      "open": "Avaa kalenteri",
+      "select": "Valitse"
+    },
+    "day": {
+      "next": "Vaihda seuraavaan kuukauteen",
+      "prev": "Vaihda edelliseen kuukauteen",
+      "view": "Vaihda kuukausinäkymään"
+    },
+    "month": {
+      "next": "Vaihda seuraavaan vuoteen",
+      "prev": "Vaihda edelliseen vuoteen",
+      "view": "Vaihda vuosinäkymään"
+    },
+    "year": {
+      "next": "Vaihda seuraavaan vuosikymmeneen",
+      "prev": "Vaihda edelliseen vuosikymmeneen",
+      "view": "Vaihda päivänäkymään"
+    }
+  },
   "delete": "Poista",
   "description": "Kuvaus",
   "development-trend": "Kehitystrendi",

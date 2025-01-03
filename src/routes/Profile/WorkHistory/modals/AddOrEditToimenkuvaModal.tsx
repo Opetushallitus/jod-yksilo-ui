@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaamisSuosittelija } from '@/components';
+import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -61,7 +62,16 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
         <div className="block w-full">
           <Controller
             control={control}
-            render={({ field }) => <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} />}
+            render={({ field }) => (
+              <Datepicker
+                label={t('started')}
+                {...field}
+                placeholder={t('date-placeholder')}
+                translations={getDatePickerTranslations(
+                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
+                )}
+              />
+            )}
             name="alkuPvm"
           />
         </div>
@@ -69,7 +79,14 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker label={t('ended')} {...field} placeholder={t('date-or-continues-placeholder')} />
+              <Datepicker
+                label={t('ended')}
+                {...field}
+                placeholder={t('date-or-continues-placeholder')}
+                translations={getDatePickerTranslations(
+                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
+                )}
+              />
             )}
             name="loppuPvm"
           />
