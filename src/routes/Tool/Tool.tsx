@@ -144,13 +144,10 @@ const MyOwnData = () => {
           role="tabpanel"
           tabIndex={0}
           aria-labelledby="tab-1"
-          className={cx(
-            'py-6 sm:py-7 px-5 sm:px-6 bg-white rounded-b lg:max-h-[calc(100vh-186px)] lg:overflow-y-auto',
-            {
-              'rounded-tl': tabs.findIndex((tab) => tab.active) !== 0,
-              'rounded-tr': tabs.findIndex((tab) => tab.active) !== tabs.length - 1,
-            },
-          )}
+          className={cx('flex flex-col bg-white rounded-b lg:max-h-[calc(100vh-186px)] lg:overflow-y-auto', {
+            'rounded-tl': tabs.findIndex((tab) => tab.active) !== 0,
+            'rounded-tr': tabs.findIndex((tab) => tab.active) !== tabs.length - 1,
+          })}
         >
           <Outlet context={{ isLoggedIn }} />
         </div>

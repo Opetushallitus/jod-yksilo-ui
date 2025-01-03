@@ -279,6 +279,40 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/keskustelut': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Creates a keskustelu */
+    post: operations['keskusteluCreateKeskustelu'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/keskustelut/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Continues a keskustelu */
+    post: operations['keskusteluContinueKeskustelu'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/ehdotus/osaamiset': {
     parameters: {
       query?: never;
@@ -397,7 +431,7 @@ export interface paths {
     put?: never;
     post?: never;
     /** Deletes a Yksilo's Osaaminen */
-    delete: operations['yksilonOsaaminenDelete'];
+    delete: operations['yksilonOsaaminenDelete_1'];
     options?: never;
     head?: never;
     patch?: never;
@@ -561,6 +595,17 @@ export interface components {
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
       koulutukset?: components['schemas']['KoulutusDto'][];
+    };
+    Kiinnostus: {
+      /** Format: uri */
+      esco_uri?: string;
+      kuvaus?: string;
+    };
+    ResponseWithId: {
+      /** Format: uuid */
+      id?: string;
+      kiinnostukset?: components['schemas']['Kiinnostus'][];
+      vastaus?: string;
     };
     Ehdotus: {
       /** Format: uri */
@@ -1588,6 +1633,56 @@ export interface operations {
       };
     };
   };
+  keskusteluCreateKeskustelu: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['LokalisoituTeksti'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ResponseWithId'];
+        };
+      };
+    };
+  };
+  keskusteluContinueKeskustelu: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['LokalisoituTeksti'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ResponseWithId'];
+        };
+      };
+    };
+  };
   osaamisetEhdotusCreateEhdotus: {
     parameters: {
       query?: never;
@@ -1789,7 +1884,7 @@ export interface operations {
       };
     };
   };
-  yksilonOsaaminenDelete: {
+  yksilonOsaaminenDelete_1: {
     parameters: {
       query?: never;
       header?: never;

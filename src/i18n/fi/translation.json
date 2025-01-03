@@ -472,6 +472,7 @@
         "trainings": "Koulutuksia osaamiseni kasvattamiseksi"
       },
       "interests": {
+        "conversational-virtual-assistant": "Keskusteleva kiinnostusten kartoitus",
         "delete-all": {
           "description": "Haluatko varmasti tyhjentää kaikki valitut kiinnostukset?",
           "title": "Tyhjennä kaikki valitut kiinnostukset"
@@ -483,7 +484,18 @@
         "interest-barometer": "Intressibarometri",
         "riasec-test": "RIASEC-testi",
         "textarea-placeholder": "Kirjoita kiinnostuksesi tekstikenttään.",
-        "title": "Mistä minä olen kiinnostunut"
+        "title": "Mistä minä olen kiinnostunut",
+        "virtual-assistant": {
+          "add": "Lisää kiinnostus klikkaamalla '+'-merkkiä osaamisen vieressä ja tarkastele valintoja alhaalla Kiinnostukset-napista.",
+          "description": "Aloita kiinnostusten kartoitus keskustelemalla tekoälyn kanssa. Vastaamalla kysymyksiin saat tietoa kiinnostuksistasi ja niiden perusteella voimme tarjota sinulle sopivia kiinnostuksen kohteita.",
+          "done": "Valmis",
+          "error": "Virhe vastauksen muodostamisessa. Yritä uudestaan samalla tai uuden syötteen kanssa.",
+          "intrests": "Kiinnostukset ({{count}})",
+          "loading": "Vastausta ladataan... Ole hyvä ja odota hetki.",
+          "respond-to-chat": "Vastaa chatille",
+          "send": "Lähetä",
+          "title": "Kiinnostusten kartoitus"
+        }
       },
       "title": "Kartoita tilanteesi"
     },
