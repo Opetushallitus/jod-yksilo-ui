@@ -1,6 +1,8 @@
 import { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import i18n, { LangCode } from '@/i18n/config';
+import { Datepicker } from '@jod/design-system';
+import { ComponentProps } from 'react';
 
 export const formatDate = (date: Date) => {
   const month = date.getMonth();
@@ -115,3 +117,45 @@ export const paginate = <T>(array: T[], pageNumber = 1, pageSize = DEFAULT_PAGE_
   const safePageNumber = Math.max(pageNumber, 1);
   return array.slice((safePageNumber - 1) * pageSize, safePageNumber * pageSize);
 };
+
+export interface DatePickerTranslations {
+  day: {
+    next: string;
+    view: string;
+    prev: string;
+  };
+  month: {
+    next: string;
+    view: string;
+    prev: string;
+  };
+  year: {
+    next: string;
+    view: string;
+    prev: string;
+  };
+  actions: {
+    select: string;
+    open: string;
+    close: string;
+  };
+}
+export const getDatePickerTranslations = (
+  translations: DatePickerTranslations,
+): ComponentProps<typeof Datepicker>['translations'] => ({
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  nextTrigger: (view) => translations[view].next,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  viewTrigger: (view) => translations[view].view,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  prevTrigger: (view) => translations[view].prev,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  dayCell: (state): string => `${translations.actions.select} ${state.formattedDate}`,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  trigger: (open): string => (open ? translations.actions.close : translations.actions.open),
+});

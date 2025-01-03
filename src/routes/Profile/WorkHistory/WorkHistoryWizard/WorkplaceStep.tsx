@@ -1,3 +1,4 @@
+import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -48,7 +49,16 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
         <div className="block w-full">
           <Controller
             control={control}
-            render={({ field }) => <Datepicker label={t('started')} {...field} placeholder={t('date-placeholder')} />}
+            render={({ field }) => (
+              <Datepicker
+                label={t('started')}
+                {...field}
+                placeholder={t('date-placeholder')}
+                translations={getDatePickerTranslations(
+                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
+                )}
+              />
+            )}
             name={`toimenkuvat.${toimenkuva}.alkuPvm`}
           />
         </div>
@@ -56,7 +66,14 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
           <Controller
             control={control}
             render={({ field }) => (
-              <Datepicker label={t('ended')} {...field} placeholder={t('date-or-continues-placeholder')} />
+              <Datepicker
+                label={t('ended')}
+                {...field}
+                placeholder={t('date-or-continues-placeholder')}
+                translations={getDatePickerTranslations(
+                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
+                )}
+              />
             )}
             name={`toimenkuvat.${toimenkuva}.loppuPvm`}
           />
