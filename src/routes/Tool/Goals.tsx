@@ -256,17 +256,6 @@ const CompetenceIcon = () => (
   </svg>
 );
 
-const ToolTipContent = () => {
-  const { t } = useTranslation();
-
-  return (
-    <>
-      <div className="text-heading-4 mb-4">{t('tool.my-own-data.goals.selection-info-card-title')}</div>
-      <p>{t('tool.my-own-data.goals.selection-info-card-description')}</p>
-    </>
-  );
-};
-
 const Goals = () => {
   const { t } = useTranslation();
   const toolStore = useToolStore();
@@ -287,7 +276,7 @@ const Goals = () => {
           infoAriaLabel="info"
           icon={<CompetenceIcon />}
           infoIcon={mobileInfoIcon}
-          tooltipContent={<ToolTipContent />}
+          tooltipContent={<>{t('tool.my-own-data.goals.map-competence-tooltip')}</>}
           sm={false}
         />
         <SelectionCard
@@ -297,7 +286,7 @@ const Goals = () => {
           infoAriaLabel="info"
           icon={<TrainingsIcon />}
           infoIcon={mobileInfoIcon}
-          tooltipContent={<ToolTipContent />}
+          tooltipContent={<>{t('tool.my-own-data.goals.trainings-tooltip')}</>}
           sm={false}
         />
         <SelectionCard
@@ -307,7 +296,7 @@ const Goals = () => {
           infoAriaLabel="info"
           icon={<JobOpportunitiesIcon />}
           infoIcon={mobileInfoIcon}
-          tooltipContent={<ToolTipContent />}
+          tooltipContent={<>{t('tool.my-own-data.goals.job-opportunities-tooltip')}</>}
           sm={false}
         />
         <SelectionCard
@@ -316,7 +305,7 @@ const Goals = () => {
           label={t('tool.my-own-data.goals.map-opportunities')}
           infoAriaLabel="info"
           icon={<MappingOpportunitiesIcon />}
-          tooltipContent={<ToolTipContent />}
+          tooltipContent={<>{t('tool.my-own-data.goals.map-opportunities-tooltip')}</>}
           infoIcon={mobileInfoIcon}
           sm={false}
         />
@@ -327,7 +316,7 @@ const Goals = () => {
           infoAriaLabel="info"
           icon={<SomethingElseIcon />}
           infoIcon={mobileInfoIcon}
-          tooltipContent={<ToolTipContent />}
+          tooltipContent={<>{t('tool.my-own-data.goals.something-else-tooltip')}</>}
           sm={false}
         />
       </div>
