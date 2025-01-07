@@ -463,13 +463,16 @@
       "goals": {
         "description": "Tässä osiossa voit valita toiveidesi mukaiset tulokset palvelustamme. Jos olet epävarma, voit ohittaa tämän ja tutustua palveluumme omaan tahtiisi. Kun liikutat hiirtä kuvakkeiden ylle, näet niiden alla olevan selityksen siitä, miten ne vaikuttavat lopputulokseen.\n\nNapauta kuvaketta, jos haluat valita sen tavoitteeksesi. Voit peruuttaa valinnan napauttamalla kuvaketta uudelleen.",
         "job-opportunities": "Tutkia työmahdollisuuksia osaamisellani",
+        "job-opportunities-tooltip": "Siirry Mahdollisuutesi kohtaan ja valitse suodata ja \"Näytä mahdollisuuksissa - työmahdollisuudet\" Saat listan Suomessa olevista työmahdollisuuksista. Voit myös esimerkiksi kartoittaa kiinnostuksen kohteitasi ja katsoa miten kiinnostuksen kohteet vaikuttavat sinulle tarjottaviin koulutusmahdollisuuksiin.",
         "map-competence": "Kartoittaa omaa osaamistani",
+        "map-competence-tooltip": "Siirry \"Osaamiset\" -välilehdelle ja kartoita osaamisesi! Syötä vain kuvaus tiedoistasi, taidoistasi ja kokemuksistasi ja osaamissuosittelijamme ehdottaa sinulle erilaisia osaamisia. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi – kaikki tietosi ja kokemuksesi ovat tärkeitä.",
         "map-opportunities": "Kartoittaa mahdollisuuksia alan vaihtamiseen",
-        "selection-info-card-description": "Ohjeistaa täyttämään osaamisprofiilin ja sieltä löytyvien apuvälineiden hyödyntämiseen. Kannustaa katsomaan myös kohtaannon tuloksia.",
-        "selection-info-card-title": "Tavoitteen vaikutus tuloksiin:",
+        "map-opportunities-tooltip": "Kirjaudu sisään Omaan Osaamispolkuusi ja luo itsellesi osaamisprofiili! Luo tai tuo työ- ja koulutushistoriasi ja kerro harrastuksistasi sekä kartoita niihin liittyvää osaamistasi. Kartoita myös kiinnostuksen kohteitasi. Tämän tehtyäsi voit tuoda tietosi Osaamiset ja Kiinnostukset -välilehdille ja tutkia erilaisia työ- sekä koulutusmahdollisuuksia ja tallentaa itsellesi mieluisimmat suosikeiksi osaamisprofiiliisi.",
         "something-else": "Jotain muuta, en tiedä mitä...",
+        "something-else-tooltip": "Kokeile palvelua ja sen osioita vapaasti ja rohkeasti! Palvelun kautta voit tunnistaa, kartoittaa ja sanoittaa osaamisesi, taitosi ja intohimosi ja rakentaa ainutlaatuisen ja omannäköisen osaamisprofiilin, joka tuo esiin todellisen potentiaalisi. Voit myös tutustua Suomen koulutustarjontaan ja työmarkkinoihin selailemalla vapaasti tai yksilöllisesti kohdennettuja koulutus- ja työmahdollisuuksia.",
         "title": "Mitä minä haluan",
-        "trainings": "Koulutuksia osaamiseni kasvattamiseksi"
+        "trainings": "Koulutuksia osaamiseni kasvattamiseksi",
+        "trainings-tooltip": "Siirry Mahdollisuutesi kohtaan ja valitse suodata ja \"Näytä mahdollisuuksissa - koulutusmahdollisuudet\". Saat listan Suomessa tarjotuista koulutusmahdollisuuksista. Voit myös esimerkiksi kartoittaa kiinnostuksen kohteitasi \"Kiinnostukset\" -välilehdellä ja katsoa miten kiinnostuksen kohteesi vaikuttavat sinulle esitettäviin koulutusmahdollisuuksiin."
       },
       "interests": {
         "conversational-virtual-assistant": "Keskusteleva kiinnostusten kartoitus",
