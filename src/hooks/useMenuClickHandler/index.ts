@@ -3,10 +3,9 @@ import React from 'react';
 export const useMenuClickHandler = (
   handleOutsideClick: (event: MouseEvent) => void,
   menuButtonRef:
-    | React.RefObject<HTMLButtonElement>
-    | React.RefObject<HTMLLIElement>
-    | React.RefObject<HTMLDivElement>
-    | null,
+    | React.RefObject<HTMLButtonElement | null>
+    | React.RefObject<HTMLLIElement | null>
+    | React.RefObject<HTMLDivElement | null>,
 ) => {
   const ref = React.useRef<HTMLDivElement>(null);
 

@@ -1,4 +1,5 @@
 import { tidyClasses as tc } from '@jod/design-system';
+import { JSX } from 'react';
 
 export interface ScrollHeadingProps {
   title: string;

@@ -22,7 +22,7 @@ export interface NavigationBarProps {
 
   /** HTML Element refs */
   refs?: {
-    langMenuButtonRef: React.RefObject<HTMLLIElement>;
+    langMenuButtonRef: React.RefObject<HTMLLIElement | null>;
   };
 }
 

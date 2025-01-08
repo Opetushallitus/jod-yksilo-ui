@@ -161,7 +161,7 @@ const YourOpportunitiesPagination = ({
   className,
   ariaLabel,
 }: {
-  scrollRef: React.RefObject<HTMLUListElement>;
+  scrollRef: React.RefObject<HTMLUListElement | null>;
   className?: string;
   ariaLabel?: string;
 }) => {
