@@ -13,10 +13,10 @@ import { ErrorNote, useErrorNote } from '@/components/ErrorNote';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
+import i18n from '@/i18n/config';
 import { useToolStore } from '@/stores/useToolStore';
 import { Footer, SkipLink, useMediaQueries } from '@jod/design-system';
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { MdMenu } from 'react-icons/md';
 import { NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router';
@@ -170,13 +170,14 @@ const Root = () => {
     logoutForm.current?.submit();
   };
 
+  React.useEffect(() => {
+    document.documentElement.setAttribute('lang', i18n.language);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i18n.language]);
+
   return (
-    <>
-      <Helmet>
-        <html lang={language} />
-        <link rel="manifest" href={`/yksilo/manifest-${language}.json`} crossOrigin="use-credentials" />
-        <body className="bg-bg-gray" />
-      </Helmet>
+    <div className="bg-bg-gray">
+      <link rel="manifest" href={`/yksilo/manifest-${language}.json`} crossOrigin="use-credentials" />
       <header role="banner" className="sticky top-0 z-30 print:hidden">
         <SkipLink hash="#jod-main" label={t('skiplinks.main')} />
         <form action="/yksilo/logout" method="POST" hidden ref={logoutForm}>
@@ -259,7 +260,7 @@ const Root = () => {
         className={!sm ? 'py-7' : undefined}
       />
       <ScrollRestoration />
-    </>
+    </div>
   );
 };
 

@@ -77,7 +77,7 @@ export const OsaamisSuosittelija = ({
     });
   }, [value]);
 
-  const abortController = React.useRef<AbortController>();
+  const abortController = React.useRef<AbortController | null>(null);
 
   React.useEffect(() => {
     abortController.current?.abort();

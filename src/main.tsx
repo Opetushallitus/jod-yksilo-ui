@@ -1,6 +1,5 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { HelmetProvider } from 'react-helmet-async';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { Metric } from 'web-vitals';
 import { ErrorNoteProvider } from './components/ErrorNote';
@@ -35,10 +34,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 root.render(
   <React.StrictMode>
-    <HelmetProvider>
-      <ErrorNoteProvider>
-        <RouterProvider router={router} />
-      </ErrorNoteProvider>
-    </HelmetProvider>
+    <ErrorNoteProvider>
+      <RouterProvider router={router} />
+    </ErrorNoteProvider>
   </React.StrictMode>,
 );

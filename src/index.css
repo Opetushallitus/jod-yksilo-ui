@@ -1,5 +1,5 @@
 @import 'tailwindcss/base';
-@import '@jod/design-system/dist/style.css';
+@import '@jod/design-system/dist/main.css';
 @tailwind components;
 @tailwind utilities;
 
