@@ -18,7 +18,7 @@ import { Footer, SkipLink, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { MdClose, MdMenu } from 'react-icons/md';
+import { MdMenu } from 'react-icons/md';
 import { NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router';
 import {
   LogoEuEn,
@@ -198,7 +198,7 @@ const Root = () => {
             sm ? (
               <button
                 className="flex gap-4 justify-center items-center select-none"
-                aria-label={t('open-menu')}
+                aria-label={megaMenuOpen ? t('close-menu') : t('open-menu')}
                 onClick={toggleMenu('mega')}
                 ref={megaMenuButtonRef}
               >
@@ -208,22 +208,18 @@ const Root = () => {
                 </span>
               </button>
             ) : (
-              <button
-                className="flex justify-self-end p-3"
-                aria-label={t('open-menu')}
-                onClick={toggleMenu('mega')}
-                ref={megaMenuButtonRef}
-              >
-                {megaMenuOpen ? (
-                  <span className="size-7 flex justify-center items-center">
-                    <MdClose size={24} />
-                  </span>
-                ) : (
+              !megaMenuOpen && (
+                <button
+                  className="flex justify-self-end p-3"
+                  aria-label={t('open-menu')}
+                  onClick={toggleMenu('mega')}
+                  ref={megaMenuButtonRef}
+                >
                   <span className="size-7 flex justify-center items-center">
                     <MdMenu size={24} />
                   </span>
-                )}
-              </button>
+                </button>
+              )
             )
           }
           refs={{ langMenuButtonRef: langMenuButtonRef }}
