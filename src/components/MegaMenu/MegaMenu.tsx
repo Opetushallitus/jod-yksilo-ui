@@ -58,7 +58,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, onLogout }: MegaM
         )}
         {megaMenuState === 'main' && (
           <li>
-            <button onClick={doClose} className="flex items-center ml-5">
+            <button aria-label={t('close-menu')} onClick={doClose} className="flex items-center ml-5">
               <span aria-hidden className={`text-black sm:text-secondary-gray p-3 sm:p-0`}>
                 {sm ? <MdOutlineCancel size={32} /> : <MdClose size={32} />}
               </span>
@@ -84,7 +84,12 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, onLogout }: MegaM
           )}
           {megaMenuState === 'lang' && !sm && (
             <>
-              <button type="button" className="flex select-none mb-8" onClick={() => setMegaMenuState('main')}>
+              <button
+                type="button"
+                className="flex select-none mb-8"
+                onClick={() => setMegaMenuState('main')}
+                aria-label={t('return-menu')}
+              >
                 <MdKeyboardBackspace size={32} />
               </button>
               <LanguageMenu onClick={onLanguageClick} inline />

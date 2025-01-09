@@ -33,7 +33,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
   const fullName = `${data?.etunimi} ${data?.sukunimi}`;
   const initials = !!data?.etunimi && !!data?.sukunimi ? data.etunimi[0] + data.sukunimi[0] : '';
 
-  return data?.csrf ? (
+  const elementBasedOnScreenSize = sm ? (
     <div className="relative">
       <button
         ref={userMenuButtonRef}
@@ -61,6 +61,18 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
         </div>
       )}
     </div>
+  ) : (
+    <span
+      role="note"
+      className={`flex justify-center content-center flex-wrap h-8 w-8 rounded-full bg-secondary-3 bg-cover bg-center`}
+      aria-label={fullName}
+    >
+      {initials}
+    </span>
+  );
+
+  return data?.csrf ? (
+    elementBasedOnScreenSize
   ) : (
     <Link
       to={landingPageUrl}
