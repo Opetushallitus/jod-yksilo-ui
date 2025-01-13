@@ -12,6 +12,13 @@ interface ExperienceTableProps {
   onRowClick?: (row: ExperienceTableRowData) => void;
   onNestedRowClick?: (row: ExperienceTableRowData) => void;
   onAddNestedRowClick?: (row: ExperienceTableRowData) => void;
+  hideOsaamiset?: boolean;
+  rowActionElement?: React.ReactNode;
+  useConfirm?: boolean;
+  confirmTitle?: string;
+  confirmRowDescription?: string;
+  confirmSubRowDescription?: string;
+  actionLabel?: string;
 }
 
 export const ExperienceTable = ({
@@ -23,6 +30,13 @@ export const ExperienceTable = ({
   onRowClick,
   onNestedRowClick,
   onAddNestedRowClick,
+  hideOsaamiset,
+  rowActionElement,
+  useConfirm,
+  confirmTitle,
+  confirmRowDescription,
+  confirmSubRowDescription,
+  actionLabel,
 }: ExperienceTableProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
@@ -47,9 +61,11 @@ export const ExperienceTable = ({
                   <th scope="col" className="pr-7 pb-3">
                     {t('ended')}
                   </th>
-                  <th scope="col" className={`pb-3 ${onNestedRowClick ? 'pr-7' : 'pr-5'}`.trim()}>
-                    {t('competences')}
-                  </th>
+                  {!hideOsaamiset && (
+                    <th scope="col" className={`pb-3 ${onNestedRowClick ? 'pr-7' : 'pr-5'}`.trim()}>
+                      {t('competences')}
+                    </th>
+                  )}
                 </>
               )}
             </tr>
@@ -62,6 +78,12 @@ export const ExperienceTable = ({
                   row={row}
                   onRowClick={onRowClick}
                   className="bg-white border-spacing-x-2"
+                  hideOsaamiset={hideOsaamiset}
+                  rowActionElement={rowActionElement}
+                  useConfirm={useConfirm}
+                  confirmTitle={confirmTitle}
+                  confirmDescription={confirmRowDescription}
+                  actionLabel={actionLabel}
                 />
                 {row.subrows?.map((subrow, i) => (
                   <ExperienceTableRow
@@ -71,6 +93,12 @@ export const ExperienceTable = ({
                     onRowClick={onNestedRowClick}
                     className={i % 2 !== 0 ? 'bg-white bg-opacity-60' : 'bg-bg-gray'}
                     nested
+                    hideOsaamiset={hideOsaamiset}
+                    rowActionElement={rowActionElement}
+                    useConfirm={useConfirm}
+                    confirmTitle={confirmTitle}
+                    confirmDescription={confirmSubRowDescription}
+                    actionLabel={actionLabel}
                   />
                 ))}
                 {onAddNestedRowClick && addNewNestedLabel && (
@@ -99,7 +127,17 @@ export const ExperienceTable = ({
               </tr>
             )}
             {uncategorizedRows.map((row) => (
-              <ExperienceTableRow key={row.key} row={row} onRowClick={onRowClick} />
+              <ExperienceTableRow
+                key={row.key}
+                row={row}
+                onRowClick={onRowClick}
+                hideOsaamiset={hideOsaamiset}
+                rowActionElement={rowActionElement}
+                useConfirm={useConfirm}
+                confirmTitle={confirmTitle}
+                confirmDescription={confirmRowDescription}
+                actionLabel={actionLabel}
+              />
             ))}
           </tbody>
         </table>

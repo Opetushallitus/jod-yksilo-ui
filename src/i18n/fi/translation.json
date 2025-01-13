@@ -68,6 +68,20 @@
     "identify-competences": "Tunnista osaamisia",
     "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi"
   },
+  "education-import": {
+    "share-link": "Opintopolun jakolinkki",
+    "invalid-share-link": "Tarkasta opintopolun jakolinkki",
+    "data-header": "Opintopolusta löytyneet koulutukset",
+    "data-info": "Voit poistaa listasta ne koulutukset, joita et halua tuoda omaan osaamisprofiiliisi.",
+    "data-loading": "Ladataan tietoja opintopolusta...",
+    "data-load-failed": "Tietojen lataaminen epäonnistui",
+    "data-load-retry": "Yritä uudelleen",
+    "data-hint": "Käy luomassa Opintopolku-palvelussa jakolinkki ja liitä se tälle sivulle.",
+    "confirm-delete-title": "En halua lisätä tätä tietoa omaan osaamisprofiilini",
+    "confirm-delete-oppilaitos": "Oletko varma, että et halua lisätä tätä oppilaitosta ja siellä suoritettuja kolutuksia omaan osaamisprofiiliisi?",
+    "confirm-delete-education": "Oletko varma, että et halua lisätä tätä koulutusta/ tutkintoa omaan osaamisprofiiliisi?",
+    "education-or-degree": "Oppilaitos / tutkinto"
+  },
   "education-opportunities": "Koulutusmahdollisuudet",
   "education-opportunity": {
     "specific-professional-competences": {
