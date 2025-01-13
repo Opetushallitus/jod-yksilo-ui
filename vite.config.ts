@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 import react from '@vitejs/plugin-react-swc';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
