@@ -1,6 +1,6 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
-import { Tag, useMediaQueries } from '@jod/design-system';
+import { ConfirmDialog, Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdEdit, MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
@@ -26,6 +26,12 @@ interface ExperienceTableRowProps {
   last?: boolean;
   onRowClick?: (row: ExperienceTableRowData) => void;
   className?: string;
+  hideOsaamiset?: boolean;
+  rowActionElement?: React.ReactNode;
+  useConfirm?: boolean;
+  confirmTitle?: string;
+  confirmDescription?: string;
+  actionLabel?: string;
 }
 
 const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData }) => {
@@ -33,16 +39,28 @@ const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData 
 
   return nested ? (
     <p className="pl-5 pr-7 pt-2 text-body-sm font-bold sm:font-normal sm:text-body-md sm:py-2 hyphens-auto">
-      {row.nimi[i18n.language]}
+      {row?.nimi[i18n.language]}
     </p>
   ) : (
     <p className="pl-5 pr-7 pt-2 text-heading-4 sm:text-heading-3 sm:pt-1 sm:pb-[3px] hyphens-auto">
-      {row.nimi[i18n.language]}
+      {row?.nimi[i18n.language]}
     </p>
   );
 };
 
-export const ExperienceTableRow = ({ row, nested, last = false, className, onRowClick }: ExperienceTableRowProps) => {
+export const ExperienceTableRow = ({
+  row,
+  nested,
+  last = false,
+  className,
+  onRowClick,
+  hideOsaamiset,
+  rowActionElement,
+  useConfirm,
+  confirmTitle,
+  confirmDescription,
+  actionLabel,
+}: ExperienceTableRowProps) => {
   const {
     t,
     i18n: { language },
@@ -59,6 +77,43 @@ export const ExperienceTableRow = ({ row, nested, last = false, className, onRow
     [row.osaamiset, language],
   );
 
+  const rowAction = (
+    onRowClick: (row: ExperienceTableRowData) => void,
+    row: ExperienceTableRowData,
+    useConfirm: boolean | undefined,
+    rowActionElement: React.ReactNode | undefined,
+    confirmTitle?: string,
+    confirmDescription?: string,
+    actionLabel?: string,
+  ) => {
+    return (
+      <ConfirmDialog
+        title={confirmTitle || ''}
+        onConfirm={() => onRowClick(row)}
+        confirmText={t('delete')}
+        cancelText={t('cancel')}
+        variant="destructive"
+        description={confirmDescription || ''}
+      >
+        {(showDialog: () => void) => (
+          <button
+            aria-label={actionLabel || t('edit')}
+            onClick={() => {
+              if (useConfirm) {
+                showDialog();
+              } else {
+                onRowClick(row);
+              }
+            }}
+            className="flex size-7 items-center justify-center"
+          >
+            {rowActionElement || <MdEdit size={24} className="fill-[#006DB3]" />}
+          </button>
+        )}
+      </ConfirmDialog>
+    );
+  };
+
   return nested ? (
     <>
       <tr key={row.key} className={className}>
@@ -70,7 +125,7 @@ export const ExperienceTableRow = ({ row, nested, last = false, className, onRow
             </div>
           )}
         </td>
-        {!sm && (
+        {!hideOsaamiset && !sm && (
           <td className="text-nowrap text-body-sm">
             {onRowClick && row.osaamiset.length > 0 ? (
               <button
@@ -90,31 +145,27 @@ export const ExperienceTableRow = ({ row, nested, last = false, className, onRow
           <>
             <td className="text-body-md pr-7">{!row.hideRowDetails && formatDate(row.alkuPvm)}</td>
             <td className="text-body-md pr-7">{!row.hideRowDetails && row.loppuPvm && formatDate(row.loppuPvm)}</td>
-            <td className={`text-body-md ${onRowClick ? 'pr-7' : 'pr-5'}`.trim()}>
-              {onRowClick && row.osaamiset.length > 0 ? (
-                <button
-                  aria-label={t(isOpen ? 'close' : 'open')}
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="flex gap-x-2 items-center text-nowrap"
-                >
-                  {isOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
-                  {osaamisetCountTotal}
-                </button>
-              ) : (
-                <span className={`text-nowrap ${onRowClick ? 'pl-[28px]' : ''}`.trim()}>{osaamisetCountTotal}</span>
-              )}
-            </td>
+            {!hideOsaamiset && (
+              <td className={`text-body-md ${onRowClick ? 'pr-7' : 'pr-5'}`.trim()}>
+                {onRowClick && row.osaamiset.length > 0 ? (
+                  <button
+                    aria-label={t(isOpen ? 'close' : 'open')}
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="flex gap-x-2 items-center text-nowrap"
+                  >
+                    {isOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
+                    {osaamisetCountTotal}
+                  </button>
+                ) : (
+                  <span className={`text-nowrap ${onRowClick ? 'pl-[28px]' : ''}`.trim()}>{osaamisetCountTotal}</span>
+                )}
+              </td>
+            )}
           </>
         )}
         {onRowClick && (
           <td>
-            <button
-              aria-label={t('edit')}
-              onClick={() => onRowClick(row)}
-              className="flex size-7 items-center justify-center"
-            >
-              <MdEdit size={24} className="fill-[#006DB3]" />
-            </button>
+            {rowAction(onRowClick, row, useConfirm, rowActionElement, confirmTitle, confirmDescription, actionLabel)}
           </td>
         )}
       </tr>
@@ -148,7 +199,7 @@ export const ExperienceTableRow = ({ row, nested, last = false, className, onRow
           </div>
         )}
       </td>
-      {!sm && (
+      {!hideOsaamiset && !sm && (
         <td>
           <span className="text-body-sm text-nowrap pl-[28px] pr-7">{osaamisetCountTotal}</span>
         </td>
@@ -159,20 +210,16 @@ export const ExperienceTableRow = ({ row, nested, last = false, className, onRow
             {formatDate(row.alkuPvm)}
           </td>
           {row.loppuPvm && <td className="text-body-md pr-7">{formatDate(row.loppuPvm)}</td>}
-          <td className={`text-body-md text-nowrap ${onRowClick ? 'pr-7 pl-[28px]' : 'pr-5'.trim()}`}>
-            {osaamisetCountTotal}
-          </td>
+          {!hideOsaamiset && (
+            <td className={`text-body-md text-nowrap ${onRowClick ? 'pr-7 pl-[28px]' : 'pr-5'.trim()}`}>
+              {osaamisetCountTotal}
+            </td>
+          )}
         </>
       )}
       {onRowClick && (
         <td>
-          <button
-            aria-label={t('edit')}
-            onClick={() => onRowClick(row)}
-            className="flex size-7 items-center justify-center"
-          >
-            <MdEdit size={24} className="fill-[#006DB3]" />
-          </button>
+          {rowAction(onRowClick, row, useConfirm, rowActionElement, confirmTitle, confirmDescription, actionLabel)}
         </td>
       )}
     </tr>
