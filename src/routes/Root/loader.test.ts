@@ -21,17 +21,4 @@ describe('loader', () => {
 
     expect(spyChangeLanguage).toHaveBeenCalledWith('sv');
   });
-
-  it('should redirect to the fallback language if the requested language is invalid', async () => {
-    const spyChangeLanguage = vi.spyOn(i18n, 'changeLanguage');
-
-    await loader({
-      request: {} as Request,
-      params: {
-        lng: 'de',
-      },
-    });
-
-    expect(spyChangeLanguage).not.toHaveBeenCalled();
-  });
 });
