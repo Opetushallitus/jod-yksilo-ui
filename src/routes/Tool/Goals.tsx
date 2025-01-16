@@ -1,5 +1,6 @@
 import { useToolStore } from '@/stores/useToolStore';
-import { SelectionCard, useMediaQueries } from '@jod/design-system';
+import { SelectionCard, Tooltip, TooltipContent, TooltipTrigger, useMediaQueries } from '@jod/design-system';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdInfoOutline } from 'react-icons/md';
 
@@ -256,11 +257,89 @@ const CompetenceIcon = () => (
   </svg>
 );
 
+const InfoButton = ({ ariaLabel, onClick }: { ariaLabel: string; onClick: () => void }) => {
+  const { xl } = useMediaQueries();
+  const mobileInfoIcon = !xl ? <MdInfoOutline size={24} /> : null;
+  return xl ? null : (
+    <button className="ml-auto p-5" aria-label={ariaLabel} onClick={onClick}>
+      {mobileInfoIcon}
+    </button>
+  );
+};
+
+const TooltipWrapper = ({
+  children,
+  tooltipOpen,
+  tooltipContent,
+}: {
+  children: React.ReactNode;
+  tooltipContent: React.ReactNode;
+  tooltipOpen: boolean;
+}) => {
+  const { sm } = useMediaQueries();
+  return (
+    <Tooltip open={tooltipOpen} placement="bottom">
+      <TooltipContent
+        className={`bg-black text-white rounded-xl p-5 z-50 text-body-sm sm:text-body-md font-arial ${sm ? 'w-1/2' : 'max-w-fit mr-11'}`}
+      >
+        {tooltipContent}
+      </TooltipContent>
+      <TooltipTrigger asChild>
+        <div>{children}</div>
+      </TooltipTrigger>
+    </Tooltip>
+  );
+};
+
 const Goals = () => {
   const { t } = useTranslation();
   const toolStore = useToolStore();
   const { xl } = useMediaQueries();
-  const mobileInfoIcon = !xl ? <MdInfoOutline size={24} /> : null;
+  const [openTooltips, setOpenTooltips] = React.useState({
+    mapCompetence: false,
+    trainings: false,
+    jobOpportunities: false,
+    mapOpportunities: false,
+    somethingElse: false,
+  });
+
+  type OpenTooltips = typeof openTooltips;
+
+  const toggleTooltip = (tooltipKey: keyof OpenTooltips, setOpen?: boolean) => () => {
+    const tooltips = Object.keys(openTooltips).reduce((acc, key) => {
+      const k = key as keyof OpenTooltips;
+
+      if (k === tooltipKey) {
+        acc[k] = setOpen ?? !openTooltips[k];
+      } else {
+        acc[k] = false;
+      }
+      return acc;
+    }, {} as OpenTooltips);
+
+    setOpenTooltips(tooltips);
+  };
+
+  const cardOnClick = (goalKey: keyof typeof toolStore.tavoitteet) => () => {
+    toolStore.setTavoitteet({ ...toolStore.tavoitteet, [goalKey]: !toolStore.tavoitteet[goalKey] });
+    setOpenTooltips({
+      mapCompetence: false,
+      trainings: false,
+      jobOpportunities: false,
+      mapOpportunities: false,
+      somethingElse: false,
+    });
+  };
+
+  const eventProps = (key: keyof OpenTooltips) =>
+    xl
+      ? {
+          onMouseEnter: toggleTooltip(key, true),
+          onMouseLeave: toggleTooltip(key, false),
+          onFocus: toggleTooltip(key, true),
+          onBlur: toggleTooltip(key, false),
+        }
+      : {};
 
   return (
     <div className="py-6 sm:py-7 px-5 sm:px-6">
@@ -268,57 +347,82 @@ const Goals = () => {
       <p className="text-body-md-mobile sm:text-body-md whitespace-pre-wrap mb-6">
         {t('tool.my-own-data.goals.description')}
       </p>
-      <div className="flex flex-wrap flex-col space-between gap-3">
-        <SelectionCard
-          selected={toolStore.tavoitteet.a}
-          onClick={() => toolStore.setTavoitteet({ ...toolStore.tavoitteet, a: !toolStore.tavoitteet.a })}
-          label={t('tool.my-own-data.goals.map-competence')}
-          infoAriaLabel="info"
-          icon={<CompetenceIcon />}
-          infoIcon={mobileInfoIcon}
-          tooltipContent={<>{t('tool.my-own-data.goals.map-competence-tooltip')}</>}
-          sm={false}
-        />
-        <SelectionCard
-          selected={toolStore.tavoitteet.b}
-          onClick={() => toolStore.setTavoitteet({ ...toolStore.tavoitteet, b: !toolStore.tavoitteet.b })}
-          label={t('tool.my-own-data.goals.trainings')}
-          infoAriaLabel="info"
-          icon={<TrainingsIcon />}
-          infoIcon={mobileInfoIcon}
-          tooltipContent={<>{t('tool.my-own-data.goals.trainings-tooltip')}</>}
-          sm={false}
-        />
-        <SelectionCard
-          selected={toolStore.tavoitteet.c}
-          onClick={() => toolStore.setTavoitteet({ ...toolStore.tavoitteet, c: !toolStore.tavoitteet.c })}
-          label={t('tool.my-own-data.goals.job-opportunities')}
-          infoAriaLabel="info"
-          icon={<JobOpportunitiesIcon />}
-          infoIcon={mobileInfoIcon}
-          tooltipContent={<>{t('tool.my-own-data.goals.job-opportunities-tooltip')}</>}
-          sm={false}
-        />
-        <SelectionCard
-          selected={toolStore.tavoitteet.d}
-          onClick={() => toolStore.setTavoitteet({ ...toolStore.tavoitteet, d: !toolStore.tavoitteet.d })}
-          label={t('tool.my-own-data.goals.map-opportunities')}
-          infoAriaLabel="info"
-          icon={<MappingOpportunitiesIcon />}
-          tooltipContent={<>{t('tool.my-own-data.goals.map-opportunities-tooltip')}</>}
-          infoIcon={mobileInfoIcon}
-          sm={false}
-        />
-        <SelectionCard
-          selected={toolStore.tavoitteet.e}
-          onClick={() => toolStore.setTavoitteet({ ...toolStore.tavoitteet, e: !toolStore.tavoitteet.e })}
-          label={t('tool.my-own-data.goals.something-else')}
-          infoAriaLabel="info"
-          icon={<SomethingElseIcon />}
-          infoIcon={mobileInfoIcon}
-          tooltipContent={<>{t('tool.my-own-data.goals.something-else-tooltip')}</>}
-          sm={false}
-        />
+      <div className="flex flex-wrap flex-col gap-3">
+        <TooltipWrapper
+          tooltipOpen={openTooltips.mapCompetence}
+          tooltipContent={t('tool.my-own-data.goals.map-competence-tooltip')}
+        >
+          <SelectionCard
+            actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('mapCompetence')} />}
+            className="bg-bg-gray-2"
+            icon={<CompetenceIcon />}
+            label={t('tool.my-own-data.goals.map-competence')}
+            onClick={cardOnClick('a')}
+            orientation="horizontal"
+            selected={toolStore.tavoitteet.a}
+            {...eventProps('mapCompetence')}
+          />
+        </TooltipWrapper>
+        <TooltipWrapper
+          tooltipOpen={openTooltips.trainings}
+          tooltipContent={t('tool.my-own-data.goals.trainings-tooltip')}
+        >
+          <SelectionCard
+            actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('trainings')} />}
+            className="bg-bg-gray-2"
+            icon={<TrainingsIcon />}
+            label={t('tool.my-own-data.goals.trainings')}
+            onClick={cardOnClick('b')}
+            orientation="horizontal"
+            selected={toolStore.tavoitteet.b}
+            {...eventProps('trainings')}
+          />
+        </TooltipWrapper>
+        <TooltipWrapper
+          tooltipOpen={openTooltips.jobOpportunities}
+          tooltipContent={t('tool.my-own-data.goals.job-opportunities-tooltip')}
+        >
+          <SelectionCard
+            actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('jobOpportunities')} />}
+            className="bg-bg-gray-2"
+            icon={<JobOpportunitiesIcon />}
+            label={t('tool.my-own-data.goals.job-opportunities')}
+            onClick={cardOnClick('c')}
+            orientation="horizontal"
+            selected={toolStore.tavoitteet.c}
+            {...eventProps('jobOpportunities')}
+          />
+        </TooltipWrapper>
+        <TooltipWrapper
+          tooltipOpen={openTooltips.mapOpportunities}
+          tooltipContent={t('tool.my-own-data.goals.map-opportunities-tooltip')}
+        >
+          <SelectionCard
+            actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('mapOpportunities')} />}
+            className="bg-bg-gray-2"
+            icon={<MappingOpportunitiesIcon />}
+            label={t('tool.my-own-data.goals.map-opportunities')}
+            onClick={cardOnClick('d')}
+            orientation="horizontal"
+            selected={toolStore.tavoitteet.d}
+            {...eventProps('mapOpportunities')}
+          />
+        </TooltipWrapper>
+        <TooltipWrapper
+          tooltipOpen={openTooltips.somethingElse}
+          tooltipContent={t('tool.my-own-data.goals.something-else-tooltip')}
+        >
+          <SelectionCard
+            actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('somethingElse')} />}
+            className="bg-bg-gray-2"
+            icon={<SomethingElseIcon />}
+            label={t('tool.my-own-data.goals.something-else')}
+            onClick={cardOnClick('e')}
+            orientation="horizontal"
+            selected={toolStore.tavoitteet.e}
+            {...eventProps('somethingElse')}
+          />
+        </TooltipWrapper>
       </div>
     </div>
   );
