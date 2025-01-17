@@ -14,7 +14,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     exclude: [...configDefaults.exclude, 'e2e'],
-    setupFiles: ['./vitest.setup.ts'],
+    setupFiles: ['./vitest.setup.ts', './src/i18n/config.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['lcov'],
