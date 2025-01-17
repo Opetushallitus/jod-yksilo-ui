@@ -18,7 +18,7 @@ exports[`NavigationBar > renders no navigation items and no user 1`] = `
         class="ml-5"
       >
         <button
-          aria-label="select-language"
+          aria-label="Valitse kieli"
           class="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
         >
           <svg
@@ -76,7 +76,7 @@ exports[`NavigationBar > renders only user 1`] = `
         class="ml-5"
       >
         <button
-          aria-label="select-language"
+          aria-label="Valitse kieli"
           class="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
         >
           <svg
