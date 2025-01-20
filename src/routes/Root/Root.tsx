@@ -1,21 +1,12 @@
 import { components } from '@/api/schema';
-import {
-  LanguageButton,
-  LanguageMenu,
-  LogoIconRgb,
-  LogoRgbEn,
-  LogoRgbFi,
-  LogoRgbSv,
-  NavigationBar,
-  UserButton,
-} from '@/components';
+import { LanguageButton, LanguageMenu, UserButton } from '@/components';
 import { ErrorNote, useErrorNote } from '@/components/ErrorNote';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import i18n from '@/i18n/config';
 import { useToolStore } from '@/stores/useToolStore';
-import { Footer, SkipLink, useMediaQueries } from '@jod/design-system';
+import { Footer, NavigationBar, SkipLink, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdMenu } from 'react-icons/md';
@@ -43,17 +34,6 @@ const NavigationBarItem = (to: string, text: string) => ({
     </NavLink>
   ),
 });
-
-const LogoRgb = ({ language, size }: { language: string; size: number }) => {
-  switch (language) {
-    case 'sv':
-      return <LogoRgbSv size={size} />;
-    case 'en':
-      return <LogoRgbEn size={size} />;
-    default:
-      return <LogoRgbFi size={size} />;
-  }
-};
 
 const Root = () => {
   const {
@@ -187,14 +167,11 @@ const Root = () => {
         <NavigationBar
           languageButtonComponent={<LanguageButton onClick={toggleMenu('lang')} />}
           userButtonComponent={<UserButton onLogout={logout} />}
-          logo={
-            <NavLink to={`/${language}`} className="flex">
-              <div className="inline-flex select-none items-center p-3">
-                {sm ? <LogoRgb language={language} size={32} /> : <LogoIconRgb size={32} />}
-                <span className="sr-only">{t('osaamispolku')}</span>
-              </div>
-            </NavLink>
-          }
+          logo={{
+            to: `/${language}`,
+            language,
+            srText: t('osaamispolku'),
+          }}
           menuComponent={
             sm ? (
               <button
@@ -224,6 +201,11 @@ const Root = () => {
             )
           }
           refs={{ langMenuButtonRef: langMenuButtonRef }}
+          renderLink={({ to, className, children }) => (
+            <NavLink to={to} className={className}>
+              {children as React.ReactNode}
+            </NavLink>
+          )}
         />
         {langMenuOpen && (
           <div className="relative xl:container mx-auto">
