@@ -1,4 +1,3 @@
-import { Title } from '@/components';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { Button } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
@@ -16,7 +15,7 @@ const ErrorBoundary = () => {
 
   return (
     <main role="main" id="jod-main" className="m-4 flex flex-col items-center justify-center gap-4">
-      <Title value={title} />
+      <title>{title}</title>
       <h1 className="text-heading-1">{title}</h1>
       <p className="text-body-lg">{message}</p>
       <div className="flex gap-4">

@@ -34,5 +34,4 @@ export { SimpleNavigationList } from './MainLayout/SimpleNavigationList';
 export { NavigationBar } from './NavigationBar/NavigationBar';
 export { OpportunityCard } from './OpportunityCard/OpportunityCard';
 export { OsaamisSuosittelija, type Osaaminen, type OsaaminenValue } from './OsaamisSuosittelija/OsaamisSuosittelija';
-export { Title } from './Title/Title';
 export { UserButton } from './UserButton/UserButton';

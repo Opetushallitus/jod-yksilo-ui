@@ -6,7 +6,6 @@ import {
   MainLayout,
   RoutesNavigationList,
   SimpleNavigationList,
-  Title,
 } from '@/components';
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
@@ -82,7 +81,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections }: OpportunityD
       }
     >
       {loginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} isOpen={loginModalOpen} />}
-      <Title value={title ?? ''} />
+      {title && <title>{title}</title>}
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
 
       {/* Action bar */}

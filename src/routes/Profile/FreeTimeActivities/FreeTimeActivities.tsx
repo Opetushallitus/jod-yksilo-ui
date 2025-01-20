@@ -3,7 +3,6 @@ import {
   MainLayout,
   RoutesNavigationList,
   SimpleNavigationList,
-  Title,
   type ExperienceTableRowData,
   type RoutesNavigationListProps,
 } from '@/components';
@@ -88,7 +87,7 @@ const FreeTimeActivities = () => {
         </SimpleNavigationList>
       }
     >
-      <Title value={title} />
+      <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-9 text-body-lg">{t('profile.free-time-activities.description')}</p>
       <ExperienceTable

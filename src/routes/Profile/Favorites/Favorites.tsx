@@ -3,7 +3,6 @@ import {
   OpportunityCard,
   RoutesNavigationList,
   SimpleNavigationList,
-  Title,
   type RoutesNavigationListProps,
 } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
@@ -143,7 +142,7 @@ const Favorites = () => {
         </div>
       }
     >
-      <Title value={title} />
+      <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-8 text-body-lg">{t('profile.favorites.description')}</p>
 
