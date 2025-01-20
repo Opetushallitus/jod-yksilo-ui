@@ -1,4 +1,3 @@
-import { Title } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
 import { Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
@@ -12,7 +11,7 @@ const CookiePolicy = () => {
 
   return (
     <>
-      <Title value={title} />
+      <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-5 text-body-sm font-arial text-secondary-gray text-todo">
         {t('updated')}: {updated}

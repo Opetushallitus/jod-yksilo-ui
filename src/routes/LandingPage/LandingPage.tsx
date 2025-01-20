@@ -1,5 +1,5 @@
 import { components } from '@/api/schema';
-import { MainLayout, Title } from '@/components';
+import { MainLayout } from '@/components';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { Button } from '@jod/design-system';
 import React from 'react';
@@ -37,7 +37,7 @@ const LandingPage = () => {
 
   return (
     <MainLayout navChildren={<></>}>
-      <Title value={title} />
+      <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{t('profile.landing-page.title')}</h1>
 
       <div className="mb-8 text-body-md flex flex-col gap-6">

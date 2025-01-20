@@ -1,4 +1,3 @@
-import { Title } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
 import { Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
@@ -11,7 +10,7 @@ const TermsOfService = () => {
 
   return (
     <>
-      <Title value={title} />
+      <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-8 text-body-md font-arial text-todo">
         Vitae tempus quam pellentesque nec nam aliquam. Turpis cursus in hac habitasse platea dictumst quisque sagittis.

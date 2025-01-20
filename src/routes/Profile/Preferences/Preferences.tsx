@@ -1,12 +1,6 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
-import {
-  MainLayout,
-  RoutesNavigationList,
-  SimpleNavigationList,
-  Title,
-  type RoutesNavigationListProps,
-} from '@/components';
+import { MainLayout, RoutesNavigationList, SimpleNavigationList, type RoutesNavigationListProps } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
 import { Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
@@ -36,7 +30,7 @@ const Preferences = () => {
         </SimpleNavigationList>
       }
     >
-      <Title value={title} />
+      <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">
         {t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
       </h1>

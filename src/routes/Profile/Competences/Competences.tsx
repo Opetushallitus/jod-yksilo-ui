@@ -1,10 +1,4 @@
-import {
-  MainLayout,
-  RoutesNavigationList,
-  SimpleNavigationList,
-  Title,
-  type RoutesNavigationListProps,
-} from '@/components';
+import { MainLayout, RoutesNavigationList, SimpleNavigationList, type RoutesNavigationListProps } from '@/components';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
@@ -95,7 +89,7 @@ const Competences = () => {
         </div>
       }
     >
-      <Title value={title} />
+      <title>{title}</title>
       <h1 className="mb-5 text-heading-1">{title}</h1>
       <p className="mb-8 text-body-lg">{t('profile.competences.description')}</p>
       <div>

@@ -1,11 +1,5 @@
 import { OsaaminenDto } from '@/api/osaamiset';
-import {
-  MainLayout,
-  RoutesNavigationList,
-  SimpleNavigationList,
-  Title,
-  type RoutesNavigationListProps,
-} from '@/components';
+import { MainLayout, RoutesNavigationList, SimpleNavigationList, type RoutesNavigationListProps } from '@/components';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { Button, Tag } from '@jod/design-system';
@@ -39,7 +33,7 @@ const SomethingElse = () => {
       }
     >
       {isModalOpen && <EditMuuOsaaminenModal onClose={onAddModalClose} isOpen={isModalOpen} />}
-      <Title value={title} />
+      <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-8 text-body-lg text-todo">{t('profile.something-else.description')}</p>
       {data.length > 0 && (

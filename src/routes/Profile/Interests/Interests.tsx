@@ -1,11 +1,5 @@
 import { components } from '@/api/schema';
-import {
-  MainLayout,
-  RoutesNavigationList,
-  SimpleNavigationList,
-  Title,
-  type RoutesNavigationListProps,
-} from '@/components';
+import { MainLayout, RoutesNavigationList, SimpleNavigationList, type RoutesNavigationListProps } from '@/components';
 import { ESCO_OCCUPATION_PREFIX } from '@/constants';
 import EditKiinnostusModal from '@/routes/Profile/Interests/EditKiinnostusModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
@@ -45,7 +39,7 @@ const Interests = () => {
       }
     >
       {isAddModalOpen && <EditKiinnostusModal onClose={onAddModalClose} isOpen={isAddModalOpen} />}
-      <Title value={title} />
+      <title>{title}</title>
       <h1 className="text-heading-1 mb-5">{title}</h1>
       <p className="mb-8 text-body-lg text-todo">{t('profile.interests.description')}</p>
       {sortedSkills.length > 0 && (

@@ -1,4 +1,3 @@
-import { Title } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
 import { Button } from '@jod/design-system';
 import { createPortal } from 'react-dom';
@@ -11,7 +10,7 @@ const DataSources = () => {
 
   return (
     <>
-      <Title value={title} />
+      <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-8 text-body-md font-arial text-todo">
         Feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Cras tincidunt lobortis feugiat
