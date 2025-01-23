@@ -25,7 +25,7 @@ const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
 
   const formId = React.useId();
   const methods = useForm<KiinnostusForm>({
-    mode: 'onChange',
+    mode: 'onBlur',
     resolver: zodResolver(
       z.object({
         description: z.string(),

@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
+import { formErrorMessage, LIMITS } from '@/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-system';
+import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -24,18 +25,34 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
 
   const formId = React.useId();
   const methods = useForm<FreeTimeActivitiesForm>({
-    mode: 'onChange',
+    mode: 'onBlur',
     resolver: zodResolver(
       z
         .object({
           id: z.string().optional(),
-          nimi: z.object({}).catchall(z.string().min(1)),
+          nimi: z
+            .object({})
+            .catchall(
+              z
+                .string()
+                .trim()
+                .nonempty(formErrorMessage.required())
+                .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
+            ),
           patevyydet: z
             .object({
               id: z.string().optional(),
-              nimi: z.object({}).catchall(z.string().min(1)),
-              alkuPvm: z.string().date(),
-              loppuPvm: z.string().date().optional().or(z.literal('')),
+              nimi: z
+                .object({})
+                .catchall(
+                  z
+                    .string()
+                    .trim()
+                    .nonempty(formErrorMessage.required())
+                    .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
+                ),
+              alkuPvm: z.string().nonempty(formErrorMessage.required()).date(formErrorMessage.date()),
+              loppuPvm: z.string().date(formErrorMessage.date()).optional().or(z.literal('')),
               osaamiset: z.array(
                 z.object({
                   id: z.string().min(1),
@@ -46,8 +63,10 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
             .nonempty(),
         })
         .refine((data) => data.patevyydet.length > 0) // At least one patevyys
-        .refine((data) =>
-          data.patevyydet.every((patevyys) => (patevyys.loppuPvm ? patevyys.alkuPvm <= patevyys.loppuPvm : true)),
+        .refine(
+          (data) =>
+            data.patevyydet.every((patevyys) => (patevyys.loppuPvm ? patevyys.alkuPvm <= patevyys.loppuPvm : true)),
+          formErrorMessage.dateRange(['loppuPvm']),
         ), // alkuPvm <= loppuPvm
     ),
     defaultValues: async () => {

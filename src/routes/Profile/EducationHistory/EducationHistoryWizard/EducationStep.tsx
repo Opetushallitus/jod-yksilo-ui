@@ -1,5 +1,7 @@
+import { FormError, TouchedFormError } from '@/components';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
+import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { EducationHistoryForm } from './utils';
@@ -14,9 +16,19 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { register, watch, control } = useFormContext<EducationHistoryForm>();
+  const {
+    register,
+    watch,
+    control,
+    trigger,
+    formState: { errors, touchedFields },
+  } = useFormContext<EducationHistoryForm>();
   const id = watch('id');
   const koulutusId = watch(`koulutukset.${koulutus}.id`);
+
+  React.useEffect(() => {
+    trigger(`koulutukset.${koulutus}.id`);
+  }, [koulutus, koulutusId, trigger]);
 
   return (
     <>
@@ -34,6 +46,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
             {...register(`nimi.${language}` as const)}
             placeholder={t('profile.education-history.modals.workplace-placeholder')}
           />
+          <FormError name={`nimi.${language}`} errors={errors} />
         </div>
       )}
       <div className="mb-6">
@@ -42,6 +55,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
           {...register(`koulutukset.${koulutus}.nimi.${language}` as const)}
           placeholder={t('profile.education-history.modals.job-description-placeholder')}
         />
+        <FormError name={`koulutukset.${koulutus}.nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-6">
         <div className="block w-full">
@@ -59,6 +73,11 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
             )}
             name={`koulutukset.${koulutus}.alkuPvm`}
           />
+          <TouchedFormError
+            touchedFields={touchedFields}
+            fieldName={`koulutukset.${koulutus}.alkuPvm`}
+            errors={errors}
+          />
         </div>
         <div className="block w-full">
           <Controller
@@ -75,6 +94,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
             )}
             name={`koulutukset.${koulutus}.loppuPvm`}
           />
+          <FormError name={`koulutukset.${koulutus}.loppuPvm`} errors={errors} />
         </div>
       </div>
     </>

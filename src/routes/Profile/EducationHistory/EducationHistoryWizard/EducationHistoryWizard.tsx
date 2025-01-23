@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
+import { formErrorMessage, LIMITS } from '@/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-system';
+import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -21,21 +22,39 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { sm } = useMediaQueries();
+  const [step, setStep] = React.useState(1);
+  const selectedKoulutus = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
 
   const formId = React.useId();
   const methods = useForm<EducationHistoryForm>({
-    mode: 'onChange',
+    mode: 'onBlur',
     resolver: zodResolver(
       z
         .object({
           id: z.string().optional(),
-          nimi: z.object({}).catchall(z.string().min(1)),
+          nimi: z
+            .object({})
+            .catchall(
+              z
+                .string()
+                .trim()
+                .nonempty(formErrorMessage.required())
+                .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
+            ),
           koulutukset: z
             .object({
               id: z.string().optional(),
-              nimi: z.object({}).catchall(z.string().min(1)),
-              alkuPvm: z.string().date(),
-              loppuPvm: z.string().date().optional().or(z.literal('')),
+              nimi: z
+                .object({})
+                .catchall(
+                  z
+                    .string()
+                    .trim()
+                    .nonempty(formErrorMessage.required())
+                    .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
+                ),
+              alkuPvm: z.string().nonempty(formErrorMessage.required()).date(formErrorMessage.date()),
+              loppuPvm: z.string().date(formErrorMessage.date()).optional().or(z.literal('')),
               osaamiset: z.array(
                 z.object({
                   id: z.string().min(1),
@@ -46,8 +65,10 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
             .nonempty(),
         })
         .refine((data) => data.koulutukset.length > 0) // At least one koulutus
-        .refine((data) =>
-          data.koulutukset.every((koulutus) => (koulutus.loppuPvm ? koulutus.alkuPvm <= koulutus.loppuPvm : true)),
+        .refine(
+          (data) =>
+            data.koulutukset.every((koulutus) => (koulutus.loppuPvm ? koulutus.alkuPvm <= koulutus.loppuPvm : true)),
+          formErrorMessage.dateRange(['koulutukset', `${selectedKoulutus}`, 'loppuPvm']),
         ), // alkuPvm <= loppuPvm
     ),
     defaultValues: async () => {
@@ -93,8 +114,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
   React.useEffect(() => {
     setSteps(fields.length * 2 + 1);
   }, [fields.length]);
-  const [step, setStep] = React.useState(1);
-  const selectedKoulutus = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
+
   const isFirstStep = React.useMemo(() => step === 1, [step]);
   const isEducationStep = React.useMemo(() => step !== steps && (step + 1) % 2 === 0, [step, steps]);
   const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);

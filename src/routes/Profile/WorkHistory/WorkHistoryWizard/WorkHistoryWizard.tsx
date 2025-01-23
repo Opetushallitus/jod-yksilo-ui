@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
+import { formErrorMessage, LIMITS } from '@/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Modal, WizardProgress, useMediaQueries } from '@jod/design-system';
+import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -21,21 +22,39 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { sm } = useMediaQueries();
+  const [step, setStep] = React.useState(1);
+  const selectedToimenkuva = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
 
   const formId = React.useId();
   const methods = useForm<WorkHistoryForm>({
-    mode: 'onChange',
+    mode: 'onBlur',
     resolver: zodResolver(
       z
         .object({
           id: z.string().optional(),
-          nimi: z.object({}).catchall(z.string().min(1)),
+          nimi: z
+            .object({})
+            .catchall(
+              z
+                .string()
+                .trim()
+                .nonempty(formErrorMessage.required())
+                .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
+            ),
           toimenkuvat: z
             .object({
               id: z.string().optional(),
-              nimi: z.object({}).catchall(z.string().min(1)),
-              alkuPvm: z.string().date(),
-              loppuPvm: z.string().date().optional().or(z.literal('')),
+              nimi: z
+                .object({})
+                .catchall(
+                  z
+                    .string()
+                    .trim()
+                    .nonempty(formErrorMessage.required())
+                    .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
+                ),
+              alkuPvm: z.string().nonempty(formErrorMessage.required()).date(formErrorMessage.date()),
+              loppuPvm: z.string().date(formErrorMessage.date()).optional().or(z.literal('')),
               osaamiset: z.array(
                 z.object({
                   id: z.string().min(1),
@@ -43,13 +62,15 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
               ),
             })
             .array()
-            .nonempty(),
+            .nonempty(formErrorMessage.required()),
         })
         .refine((data) => data.toimenkuvat.length > 0) // At least one toimenkuva
-        .refine((data) =>
-          data.toimenkuvat.every((toimenkuva) =>
-            toimenkuva.loppuPvm ? toimenkuva.alkuPvm <= toimenkuva.loppuPvm : true,
-          ),
+        .refine(
+          (data) =>
+            data.toimenkuvat.every((toimenkuva) =>
+              toimenkuva.loppuPvm ? toimenkuva.alkuPvm <= toimenkuva.loppuPvm : true,
+            ),
+          formErrorMessage.dateRange(['toimenkuvat', `${selectedToimenkuva}`, 'loppuPvm']),
         ), // alkuPvm <= loppuPvm
     ),
     defaultValues: async () => {
@@ -66,9 +87,9 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
       });
     },
   });
+
   const trigger = methods.trigger;
-  const errors = methods.formState.errors;
-  const { isValid, isLoading } = useFormState({
+  const { isValid, isLoading, errors } = useFormState({
     control: methods.control,
   });
   const { fields, append, remove } = useFieldArray({
@@ -95,8 +116,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   React.useEffect(() => {
     setSteps(fields.length * 2 + 1);
   }, [fields.length]);
-  const [step, setStep] = React.useState(1);
-  const selectedToimeenkuva = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
+
   const isFirstStep = React.useMemo(() => step === 1, [step]);
   const isWorkplaceStep = React.useMemo(() => step !== steps && (step + 1) % 2 === 0, [step, steps]);
   const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
@@ -126,9 +146,9 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
             }}
           >
             {isWorkplaceStep && (
-              <WorkplaceStep type={isFirstStep ? 'tyopaikka' : 'toimenkuva'} toimenkuva={selectedToimeenkuva} />
+              <WorkplaceStep type={isFirstStep ? 'tyopaikka' : 'toimenkuva'} toimenkuva={selectedToimenkuva} />
             )}
-            {isCompetencesStep && <CompetencesStep toimenkuva={selectedToimeenkuva} />}
+            {isCompetencesStep && <CompetencesStep toimenkuva={selectedToimenkuva} />}
             {isSummaryStep && <SummaryStep />}
           </Form>
         </FormProvider>
@@ -160,11 +180,11 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 variant="white"
               />
             )}
-            {step !== steps && selectedToimeenkuva > 0 && (
+            {step !== steps && selectedToimenkuva > 0 && (
               <Button
                 onClick={() => {
-                  setStep(selectedToimeenkuva * 2);
-                  remove(selectedToimeenkuva);
+                  setStep(selectedToimenkuva * 2);
+                  remove(selectedToimenkuva);
                 }}
                 label={t('work-history.delete-job-description')}
                 variant="white-delete"
@@ -187,7 +207,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 label={t('next')}
                 variant="white"
                 icon={!sm ? <MdArrowForward size={24} /> : undefined}
-                disabled={errors.nimi !== undefined || errors.toimenkuvat?.[selectedToimeenkuva] !== undefined}
+                disabled={errors.nimi !== undefined || errors.toimenkuvat?.[selectedToimenkuva] !== undefined}
               />
             )}
             {step === steps && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}

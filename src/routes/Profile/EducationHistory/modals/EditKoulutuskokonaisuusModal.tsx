@@ -1,5 +1,7 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
+import { FormError } from '@/components';
+import { formErrorMessage, LIMITS } from '@/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -32,11 +34,19 @@ const EditKoulutuskokonaisuusModal = ({
 
   const formId = React.useId();
   const methods = useForm<KoulutuskokonaisuusForm>({
-    mode: 'onChange',
+    mode: 'onBlur',
     resolver: zodResolver(
       z.object({
         id: z.string().min(1),
-        nimi: z.object({}).catchall(z.string().min(1)),
+        nimi: z
+          .object({})
+          .catchall(
+            z
+              .string()
+              .trim()
+              .nonempty(formErrorMessage.required())
+              .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
+          ),
       }),
     ),
     defaultValues: async () => {
@@ -50,7 +60,7 @@ const EditKoulutuskokonaisuusModal = ({
     },
   });
   const trigger = methods.trigger;
-  const { isValid, isLoading } = useFormState({
+  const { isValid, isLoading, errors } = useFormState({
     control: methods.control,
   });
 
@@ -109,6 +119,7 @@ const EditKoulutuskokonaisuusModal = ({
               {...methods.register(`nimi.${language}` as const)}
               placeholder={t('profile.education-history.modals.workplace-placeholder')}
             />
+            <FormError name={`nimi.${language}`} errors={errors} />
           </Form>
         </FormProvider>
       }
