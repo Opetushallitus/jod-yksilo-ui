@@ -1,3 +1,4 @@
+import { FormError, TouchedFormError } from '@/components';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -14,7 +15,12 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { register, watch, control } = useFormContext<FreeTimeActivitiesForm>();
+  const {
+    register,
+    watch,
+    control,
+    formState: { errors, touchedFields },
+  } = useFormContext<FreeTimeActivitiesForm>();
   const id = watch('id');
   const patevyysId = watch(`patevyydet.${patevyys}.id`);
   return (
@@ -33,6 +39,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
             {...register(`nimi.${language}` as const)}
             placeholder={t('profile.free-time-activities.modals.name-of-free-time-theme-placeholder')}
           />
+          <FormError name={`nimi.${language}`} errors={errors} />
         </div>
       )}
       <div className="mb-6">
@@ -41,6 +48,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
           {...register(`patevyydet.${patevyys}.nimi.${language}` as const)}
           placeholder={t('profile.free-time-activities.modals.name-of-free-time-activity-placeholder')}
         />
+        <FormError name={`patevyydet.${patevyys}.nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-6">
         <div className="block w-full">
@@ -58,6 +66,11 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
             )}
             name={`patevyydet.${patevyys}.alkuPvm`}
           />
+          <TouchedFormError
+            touchedFields={touchedFields}
+            fieldName={`patevyydet.${patevyys}.alkuPvm`}
+            errors={errors}
+          />
         </div>
         <div className="block w-full">
           <Controller
@@ -74,6 +87,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
             )}
             name={`patevyydet.${patevyys}.loppuPvm`}
           />
+          <FormError name={`patevyydet.${patevyys}.loppuPvm`} errors={errors} />
         </div>
       </div>
     </>

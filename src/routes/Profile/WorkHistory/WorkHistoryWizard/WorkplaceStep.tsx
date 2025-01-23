@@ -1,5 +1,7 @@
+import { FormError, TouchedFormError } from '@/components';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
+import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { WorkHistoryForm } from './utils';
@@ -14,9 +16,18 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { register, watch, control } = useFormContext<WorkHistoryForm>();
+  const { register, watch, control, trigger, formState } = useFormContext<WorkHistoryForm>();
+
+  const errors = formState.errors;
   const id = watch('id');
   const toimenkuvaId = watch(`toimenkuvat.${toimenkuva}.id`);
+  const alkuPvm = watch(`toimenkuvat.${toimenkuva}.alkuPvm`);
+
+  // For some reason, the "date range" error does not appear if the "alkuPvm"
+  // is set after "loppuPvm". This is a workaround to trigger the validation.
+  React.useEffect(() => {
+    trigger(`toimenkuvat.${toimenkuva}.loppuPvm`);
+  }, [alkuPvm, toimenkuva, trigger]);
 
   return (
     <>
@@ -35,6 +46,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
             placeholder={t('profile.work-history.modals.workplace-placeholder')}
             help={t('profile.work-history.modals.workplace-help')}
           />
+          <FormError name={`nimi.${language}`} errors={errors} />
         </div>
       )}
       <div className="mb-6">
@@ -44,6 +56,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
           placeholder={t('profile.work-history.modals.job-description-placeholder')}
           help={t('profile.work-history.modals.job-description-help')}
         />
+        <FormError name={`toimenkuvat.${toimenkuva}.nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-6">
         <div className="block w-full">
@@ -61,6 +74,11 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
             )}
             name={`toimenkuvat.${toimenkuva}.alkuPvm`}
           />
+          <TouchedFormError
+            touchedFields={formState.touchedFields}
+            fieldName={`toimenkuvat.${toimenkuva}.alkuPvm`}
+            errors={errors}
+          />
         </div>
         <div className="block w-full">
           <Controller
@@ -77,6 +95,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
             )}
             name={`toimenkuvat.${toimenkuva}.loppuPvm`}
           />
+          <FormError name={`toimenkuvat.${toimenkuva}.loppuPvm`} errors={errors} />
         </div>
       </div>
     </>

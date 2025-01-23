@@ -25,7 +25,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModalProps) 
 
   const formId = React.useId();
   const methods = useForm<OsaamisetForm>({
-    mode: 'onChange',
+    mode: 'onBlur',
     resolver: zodResolver(
       z.object({
         description: z.string(),

@@ -69,18 +69,18 @@
     "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi"
   },
   "education-import": {
-    "share-link": "Opintopolun jakolinkki",
-    "invalid-share-link": "Tarkasta opintopolun jakolinkki",
+    "confirm-delete-education": "Oletko varma, että et halua lisätä tätä koulutusta/ tutkintoa omaan osaamisprofiiliisi?",
+    "confirm-delete-oppilaitos": "Oletko varma, että et halua lisätä tätä oppilaitosta ja siellä suoritettuja kolutuksia omaan osaamisprofiiliisi?",
+    "confirm-delete-title": "En halua lisätä tätä tietoa omaan osaamisprofiilini",
     "data-header": "Opintopolusta löytyneet koulutukset",
+    "data-hint": "Käy luomassa Opintopolku-palvelussa jakolinkki ja liitä se tälle sivulle.",
     "data-info": "Voit poistaa listasta ne koulutukset, joita et halua tuoda omaan osaamisprofiiliisi.",
-    "data-loading": "Ladataan tietoja opintopolusta...",
     "data-load-failed": "Tietojen lataaminen epäonnistui",
     "data-load-retry": "Yritä uudelleen",
-    "data-hint": "Käy luomassa Opintopolku-palvelussa jakolinkki ja liitä se tälle sivulle.",
-    "confirm-delete-title": "En halua lisätä tätä tietoa omaan osaamisprofiilini",
-    "confirm-delete-oppilaitos": "Oletko varma, että et halua lisätä tätä oppilaitosta ja siellä suoritettuja kolutuksia omaan osaamisprofiiliisi?",
-    "confirm-delete-education": "Oletko varma, että et halua lisätä tätä koulutusta/ tutkintoa omaan osaamisprofiiliisi?",
-    "education-or-degree": "Oppilaitos / tutkinto"
+    "data-loading": "Ladataan tietoja opintopolusta...",
+    "education-or-degree": "Oppilaitos / tutkinto",
+    "invalid-share-link": "Tarkasta opintopolun jakolinkki",
+    "share-link": "Opintopolun jakolinkki"
   },
   "education-opportunities": "Koulutusmahdollisuudet",
   "education-opportunity": {
@@ -92,6 +92,14 @@
   "employment-view": "Työllisyysnäkymä",
   "ended": "Loppui",
   "error": {
+    "form": {
+      "date": "Tarkista päivämäärä",
+      "date-range": "Alkupäivämäärä ei voi olla loppumispäivämäärän jälkeen",
+      "max": "Maksimipituus on {{count}} merkkiä",
+      "min_many": "Minimipituus on {{count}} merkkiä",
+      "min_one": "Minimipituus on {{count}} merkki",
+      "required": "Pakollinen kenttä"
+    },
     "network": {
       "500": "Tapahtui odottamaton virhe. Yritä myöhemmin uudelleen.",
       "title": "Verkkovirhe"

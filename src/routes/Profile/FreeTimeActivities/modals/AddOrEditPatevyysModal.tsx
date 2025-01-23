@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
-import { OsaamisSuosittelija } from '@/components';
+import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
+import { formErrorMessage, LIMITS } from '@/constants';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
@@ -44,7 +45,20 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { register, control } = useFormContext<PatevyysForm>();
+  const {
+    register,
+    control,
+    watch,
+    trigger,
+    formState: { errors, touchedFields },
+  } = useFormContext<PatevyysForm>();
+
+  // For triggering "date-range" error when "alkuPvm" is set after "loppuPvm"
+  const alkuPvm = watch('alkuPvm');
+  React.useEffect(() => {
+    void trigger('loppuPvm');
+  }, [alkuPvm, trigger]);
+
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
@@ -56,6 +70,7 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
           {...register(`nimi.${language}` as const)}
           placeholder={t('profile.free-time-activities.modals.name-of-free-time-activity-placeholder')}
         />
+        <FormError name={`nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-6">
         <div className="block w-full">
@@ -73,6 +88,7 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
             )}
             name="alkuPvm"
           />
+          <TouchedFormError touchedFields={touchedFields} fieldName="alkuPvm" errors={errors} />
         </div>
         <div className="block w-full">
           <Controller
@@ -89,6 +105,7 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
             )}
             name="loppuPvm"
           />
+          <FormError name="loppuPvm" errors={errors} />
         </div>
       </div>
     </>
@@ -149,14 +166,22 @@ export const AddOrEditPatevyysModal = ({
   const isFirstStep = step === 0;
 
   const methods = useForm<PatevyysForm>({
-    mode: 'onChange',
+    mode: 'onBlur',
     resolver: zodResolver(
       z
         .object({
           id: z.string(),
-          nimi: z.object({}).catchall(z.string().min(1)),
+          nimi: z
+            .object({})
+            .catchall(
+              z
+                .string()
+                .trim()
+                .nonempty(formErrorMessage.required())
+                .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
+            ),
           kuvaus: z.object({}).catchall(z.string().min(1).or(z.literal(''))),
-          alkuPvm: z.string().date(),
+          alkuPvm: z.string().nonempty(formErrorMessage.required()).date(formErrorMessage.date()),
           loppuPvm: z.string().date().optional().or(z.literal('')),
           osaamiset: z.array(
             z.object({
@@ -164,7 +189,7 @@ export const AddOrEditPatevyysModal = ({
             }),
           ),
         })
-        .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm),
+        .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm, formErrorMessage.dateRange(['loppuPvm'])),
     ),
     defaultValues: async () => {
       if (patevyysId) {
