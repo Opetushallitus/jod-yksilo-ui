@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
 import { formErrorMessage, LIMITS } from '@/constants';
+import { toastAdd } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -95,7 +96,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
   });
 
   const onSubmit: FormSubmitHandler<FreeTimeActivitiesForm> = async ({ data }: { data: FreeTimeActivitiesForm }) => {
-    await client.POST('/api/profiili/vapaa-ajan-toiminnot', {
+    const { response } = await client.POST('/api/profiili/vapaa-ajan-toiminnot', {
       body: {
         nimi: data.nimi,
         patevyydet: data.patevyydet.map((patevyys) => ({
@@ -106,6 +107,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
         })),
       },
     });
+    toastAdd(response);
     setIsOpen(false);
     navigate('.', { replace: true });
   };

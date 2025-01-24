@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { MainLayout, RoutesNavigationList, SimpleNavigationList, type RoutesNavigationListProps } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
+import { toastDelete } from '@/utils';
 import { Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -18,7 +19,8 @@ const Preferences = () => {
   const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
 
   const deleteAccount = async () => {
-    await client.DELETE('/api/profiili/yksilo');
+    const { response } = await client.DELETE('/api/profiili/yksilo');
+    toastDelete(response);
     window.location.href = '/';
   };
 

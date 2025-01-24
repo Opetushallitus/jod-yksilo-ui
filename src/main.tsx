@@ -2,7 +2,6 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { Metric } from 'web-vitals';
-import { ErrorNoteProvider } from './components/ErrorNote';
 import './i18n/config';
 import './index.css';
 import { routes } from './routes';
@@ -34,8 +33,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 root.render(
   <React.StrictMode>
-    <ErrorNoteProvider>
-      <RouterProvider router={router} />
-    </ErrorNoteProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );

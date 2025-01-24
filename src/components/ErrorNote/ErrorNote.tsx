@@ -1,6 +1,6 @@
 import { Note } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
-import { ErrorNoteData } from './ErrorNoteContext';
+import { ErrorNoteData } from '../../stores/useErrorNoteStore';
 
 interface ErrorNoteProps {
   error: ErrorNoteData;

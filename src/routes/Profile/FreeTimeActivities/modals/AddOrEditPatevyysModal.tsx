@@ -2,7 +2,7 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
+import { DatePickerTranslations, getDatePickerTranslations, toastAdd, toastDelete, toastUpdate } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -234,7 +234,7 @@ export const AddOrEditPatevyysModal = ({
 
   const onSubmit: FormSubmitHandler<PatevyysForm> = async ({ data }: { data: PatevyysForm }) => {
     if (patevyysId) {
-      await client.PUT(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
+      const { response } = await client.PUT(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
         params: {
           path: {
             id,
@@ -249,8 +249,9 @@ export const AddOrEditPatevyysModal = ({
           osaamiset: data.osaamiset.map((o) => o.id),
         },
       });
+      toastUpdate(response);
     } else {
-      await client.POST(PATEVYYDET_API_PATH, {
+      const { response } = await client.POST(PATEVYYDET_API_PATH, {
         params: { path: { id } },
         body: {
           nimi: data.nimi,
@@ -259,14 +260,16 @@ export const AddOrEditPatevyysModal = ({
           osaamiset: data.osaamiset.map((o) => o.id),
         },
       });
+      toastAdd(response);
     }
     onClose();
   };
 
   const deletePatevyys = async () => {
-    await client.DELETE(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
+    const { response } = await client.DELETE(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
       params: { path: { id, patevyysId: patevyysId! } },
     });
+    toastDelete(response);
     onClose();
   };
 

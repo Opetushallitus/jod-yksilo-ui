@@ -5,7 +5,7 @@ import { HelpingToolExternalLinkItem } from '@/components/HelpingToolsContent/He
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useToolStore } from '@/stores/useToolStore';
-import { removeDuplicates } from '@/utils';
+import { removeDuplicates, toastAdd } from '@/utils';
 import { Accordion, Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +24,7 @@ const CompetenceExport = () => {
   const toolStore = useToolStore();
 
   const exportToProfile = React.useCallback(async () => {
-    await client.PUT('/api/profiili/muu-osaaminen', {
+    const { response } = await client.PUT('/api/profiili/muu-osaaminen', {
       body: [
         ...new Set([
           ...((await client.GET('/api/profiili/muu-osaaminen')).data ?? []),
@@ -34,6 +34,8 @@ const CompetenceExport = () => {
         ]),
       ],
     });
+    toastAdd(response);
+
     const osaamiset = toolStore.osaamiset.map((o) => ({
       ...o,
       tyyppi: o.tyyppi === 'KARTOITETTU' ? 'MUU_OSAAMINEN' : o.tyyppi,

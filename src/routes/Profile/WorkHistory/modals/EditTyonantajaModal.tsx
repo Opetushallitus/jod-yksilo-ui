@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
+import { toastDelete, toastUpdate } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -59,7 +60,7 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
   });
 
   const onSubmit: FormSubmitHandler<TyonantajaForm> = async ({ data }: { data: TyonantajaForm }) => {
-    await client.PUT(TYOPAIKKA_API_PATH, {
+    const { response } = await client.PUT(TYOPAIKKA_API_PATH, {
       params: {
         path: {
           id: data.id!,
@@ -70,14 +71,15 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
         nimi: data.nimi,
       },
     });
+    toastUpdate(response);
     onClose();
   };
 
   const deleteTyopaikka = async () => {
-    await client.DELETE(TYOPAIKKA_API_PATH, {
+    const { response } = await client.DELETE(TYOPAIKKA_API_PATH, {
       params: { path: { id } },
     });
-
+    toastDelete(response);
     onClose();
   };
 

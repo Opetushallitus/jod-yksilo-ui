@@ -457,6 +457,14 @@
   "sort-all": "Järjestä (kaikki)",
   "started": "Alkoi",
   "terms-of-service": "Käyttöehdot",
+  "toast": {
+    "add-failed": "Lisäys epäonnistui",
+    "add-success": "Lisäys onnistui",
+    "delete-failed": "Poisto epäonnistui",
+    "delete-success": "Poisto onnistui",
+    "update-failed": "Päivitys epäonnistui",
+    "update-success": "Päivitys onnistui"
+  },
   "tool": {
     "my-own-data": {
       "cancel-text": "Ei, peruuta",
