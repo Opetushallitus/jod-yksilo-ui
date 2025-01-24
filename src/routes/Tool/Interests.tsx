@@ -97,7 +97,7 @@ const VirtualAssistant = ({
 
   return (
     <>
-      <div className="flex flex-row flex-shrink-0 justify-between items-center border-b border-bg-gray px-5 py-3">
+      <div className="flex flex-row shrink-0 justify-between items-center border-b border-bg-gray px-5 py-3">
         <h2 className="text-heading-4-mobile sm:text-heading-4">
           {t('tool.my-own-data.interests.virtual-assistant.title')}
         </h2>
@@ -109,7 +109,7 @@ const VirtualAssistant = ({
         />
       </div>
 
-      <div ref={containerRef} className="flex flex-col flex-grow overflow-auto py-6 sm:py-7 px-5 sm:px-6 gap-7">
+      <div ref={containerRef} className="flex flex-col grow overflow-auto py-6 sm:py-7 px-5 sm:px-6 gap-7">
         {Object.keys(history).length ? (
           Object.entries(history).map(([key, row]) => (
             <Fragment key={key}>
@@ -164,7 +164,7 @@ const VirtualAssistant = ({
         )}
       </div>
 
-      <div className="flex flex-col flex-shrink-0 gap-5 px-5 pb-5">
+      <div className="flex flex-col shrink-0 gap-5 px-5 pb-5">
         <Textarea
           placeholder={t('tool.my-own-data.interests.virtual-assistant.respond-to-chat')}
           value={value}
@@ -173,7 +173,7 @@ const VirtualAssistant = ({
           rows={2}
           maxLength={10000}
           hideLabel
-          className="!bg-[#F7F7F9]"
+          className="bg-[#F7F7F9]!"
         />
         <div className="flex justify-between">
           <Button
@@ -259,7 +259,7 @@ const Interests = () => {
           value={toolStore.kiinnostukset}
           categorized
           mode="kiinnostukset"
-          className="!bg-[#F7F7F9]"
+          className="bg-[#F7F7F9]!"
         />
       </div>
       <div className="flex flex-wrap gap-5 mb-7">
@@ -303,7 +303,7 @@ const Interests = () => {
             title={t('tool.my-own-data.interests.conversational-virtual-assistant')}
             /* eslint-disable-next-line react/no-unstable-nested-components */
             component={({ children }) => (
-              <button onClick={() => setVirtualAssistantOpen(true)} type="button">
+              <button onClick={() => setVirtualAssistantOpen(true)} type="button" className="cursor-pointer">
                 {children}
               </button>
             )}

@@ -11,7 +11,7 @@ export const ActionButton = ({ label, icon, className = '', onClick }: ActionBut
   return (
     <button
       aria-label={label}
-      className={tc(`flex items-center gap-x-3 text-button-sm text-nowrap ${className}`)}
+      className={tc(`cursor-pointer flex items-center gap-x-3 text-button-sm text-nowrap ${className}`)}
       onClick={onClick}
     >
       {icon}

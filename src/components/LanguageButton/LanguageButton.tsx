@@ -11,7 +11,7 @@ export const LanguageButton = ({ onClick }: LanguageButtonProps) => {
     <button
       onClick={onClick}
       aria-label={t('select-language')}
-      className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
+      className="cursor-pointer flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
     >
       <MdLanguage size={24} />
     </button>
