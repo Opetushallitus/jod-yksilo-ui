@@ -261,7 +261,7 @@ const InfoButton = ({ ariaLabel, onClick }: { ariaLabel: string; onClick: () => 
   const { xl } = useMediaQueries();
   const mobileInfoIcon = !xl ? <MdInfoOutline size={24} /> : null;
   return xl ? null : (
-    <button className="ml-auto p-5" aria-label={ariaLabel} onClick={onClick}>
+    <button className="cursor-pointer ml-auto p-5" aria-label={ariaLabel} onClick={onClick}>
       {mobileInfoIcon}
     </button>
   );

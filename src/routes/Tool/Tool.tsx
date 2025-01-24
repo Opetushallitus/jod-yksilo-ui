@@ -128,7 +128,7 @@ const MyOwnData = () => {
               tabIndex={tab.active ? undefined : -1}
               onKeyDown={(event) => onKeyDown(event, index)}
               onClick={() => navigate(tab.to, { replace: true, preventScrollReset: true })}
-              className={cx(`w-full p-3 rounded-t text-center text-button-sm-mobile overflow-hidden`, {
+              className={cx(`cursor-pointer w-full p-3 rounded-t text-center text-button-sm-mobile overflow-hidden`, {
                 'bg-white': tab.active,
                 'text-link': !tab.active,
               })}
@@ -277,12 +277,12 @@ const YourOpportunities = () => {
       <YourOpportunitiesCard />
 
       <div className="lg:sticky lg:top-11 lg:z-10 lg:h-11">
-        <div className="flex gap-5 justify-between items-center py-5 bg-gradient-to-b from-85% from-bg-gray lg:absolute lg:-left-4 lg:-right-4 lg:px-4">
+        <div className="flex gap-5 justify-between items-center py-5 bg-linear-to-b from-85% from-bg-gray lg:absolute lg:-left-4 lg:-right-4 lg:px-4">
           <span className="font-arial text-form-label">
             {t('tool.your-opportunities.n-opportunities-found', { count })}
           </span>
           <button
-            className="text-form-label flex flex-row items-center gap-5"
+            className="cursor-pointer text-form-label flex flex-row items-center gap-5"
             ref={filterMenuButtonRef}
             onClick={() => setFiltersOpen(!filtersOpen)}
           >

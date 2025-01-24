@@ -102,7 +102,7 @@ const Root = () => {
           menuComponent={
             sm ? (
               <button
-                className="flex gap-4 justify-center items-center select-none"
+                className="cursor-pointer flex gap-4 justify-center items-center select-none"
                 aria-label={megaMenuOpen ? t('close-menu') : t('open-menu')}
                 onClick={toggleMenu('mega')}
                 ref={megaMenuButtonRef}
@@ -115,7 +115,7 @@ const Root = () => {
             ) : (
               !megaMenuOpen && (
                 <button
-                  className="flex justify-self-end p-3"
+                  className="cursor-pointer flex justify-self-end p-3"
                   aria-label={t('open-menu')}
                   onClick={toggleMenu('mega')}
                   ref={megaMenuButtonRef}

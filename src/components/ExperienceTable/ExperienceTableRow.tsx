@@ -105,7 +105,7 @@ export const ExperienceTableRow = ({
                 onRowClick(row);
               }
             }}
-            className="flex size-7 items-center justify-center"
+            className="cursor-pointer flex size-7 items-center justify-center"
           >
             {rowActionElement || <MdEdit size={24} className="fill-[#006DB3]" />}
           </button>
@@ -131,7 +131,7 @@ export const ExperienceTableRow = ({
               <button
                 aria-label={t(isOpen ? 'close' : 'open')}
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex gap-x-2 items-center pr-7"
+                className="cursor-pointer flex gap-x-2 items-center pr-7"
               >
                 {isOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
                 {osaamisetCountTotal}
@@ -151,7 +151,7 @@ export const ExperienceTableRow = ({
                   <button
                     aria-label={t(isOpen ? 'close' : 'open')}
                     onClick={() => setIsOpen(!isOpen)}
-                    className="flex gap-x-2 items-center text-nowrap"
+                    className="cursor-pointer flex gap-x-2 items-center text-nowrap"
                   >
                     {isOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
                     {osaamisetCountTotal}

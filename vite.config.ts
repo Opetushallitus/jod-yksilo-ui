@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react-swc';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
@@ -9,7 +10,7 @@ const target = process.env.API_BASE_URL ?? 'http://localhost:9080';
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/yksilo/',
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   test: {
     environment: 'jsdom',
     globals: true,

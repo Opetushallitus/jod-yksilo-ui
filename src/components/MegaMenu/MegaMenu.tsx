@@ -58,7 +58,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, onLogout }: MegaM
         )}
         {megaMenuState === 'main' && (
           <li>
-            <button aria-label={t('close-menu')} onClick={doClose} className="flex items-center ml-5">
+            <button aria-label={t('close-menu')} onClick={doClose} className="cursor-pointer flex items-center ml-5">
               <span aria-hidden className={`text-black sm:text-secondary-gray p-3 sm:p-0`}>
                 {sm ? <MdOutlineCancel size={32} /> : <MdClose size={32} />}
               </span>
@@ -86,7 +86,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, onLogout }: MegaM
             <>
               <button
                 type="button"
-                className="flex select-none mb-8"
+                className="cursor-pointer flex select-none mb-8"
                 onClick={() => setMegaMenuState('main')}
                 aria-label={t('return-menu')}
               >
@@ -106,7 +106,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, onLogout }: MegaM
         {megaMenuState === 'main' && !sm && loggedIn && (
           <button
             type="button"
-            className="font-arial sticky bottom-0 p-6 bg-white w-full text-right text-body-md text-accent hover:underline"
+            className="cursor-pointer font-arial sticky bottom-0 p-6 bg-white w-full text-right text-body-md text-accent hover:underline"
             onClick={onLogout}
           >
             {t('logout')}

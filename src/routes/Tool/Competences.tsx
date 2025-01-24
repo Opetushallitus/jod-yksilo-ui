@@ -223,7 +223,7 @@ const Competences = () => {
           onChange={toolStore.setOsaamiset}
           value={toolStore.osaamiset}
           categorized
-          className="!bg-[#F7F7F9]"
+          className="bg-[#F7F7F9]!"
         />
       </div>
       <div className="flex flex-wrap gap-5 mb-7">

@@ -38,7 +38,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
       <button
         ref={userMenuButtonRef}
         type="button"
-        className={`h-8 w-8 rounded-full bg-secondary-3 bg-cover bg-center`}
+        className={`cursor-pointer h-8 w-8 rounded-full bg-secondary-3 bg-cover bg-center`}
         onClick={sm ? () => setUserMenuOpen(!userMenuOpen) : void 0}
         aria-label={fullName}
       >
@@ -54,7 +54,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
             >
               <PopupListItem>{t('profile.index')}</PopupListItem>
             </NavLink>
-            <button type="button" onClick={onLogout} className="w-full">
+            <button type="button" onClick={onLogout} className="cursor-pointer w-full">
               <PopupListItem classNames="w-full">{t('logout')}</PopupListItem>
             </button>
           </PopupList>
