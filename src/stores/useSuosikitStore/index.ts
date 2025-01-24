@@ -2,7 +2,7 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
-import { paginate, sortByProperty } from '@/utils';
+import { paginate, sortByProperty, toastDelete } from '@/utils';
 import { PageChangeDetails } from '@jod/design-system';
 import { create } from 'zustand';
 
@@ -57,11 +57,12 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
     }
 
     set({ suosikitLoading: true });
-    await client.DELETE('/api/profiili/suosikit', {
+    const { response } = await client.DELETE('/api/profiili/suosikit', {
       params: {
         query: { id: suosikkiId },
       },
     });
+    toastDelete(response);
 
     // Remove the deleted item from the pageData
     set({ pageData: pageData.filter((t) => t.id !== mahdollisuusId) });

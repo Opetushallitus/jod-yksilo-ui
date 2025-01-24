@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
 import { formErrorMessage, LIMITS } from '@/constants';
+import { toastAdd } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -97,7 +98,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
     name: 'toimenkuvat',
   });
   const onSubmit: FormSubmitHandler<WorkHistoryForm> = async ({ data }: { data: WorkHistoryForm }) => {
-    await client.POST('/api/profiili/tyopaikat', {
+    const { response } = await client.POST('/api/profiili/tyopaikat', {
       body: {
         nimi: data.nimi,
         toimenkuvat: data.toimenkuvat.map((toimenkuva) => ({
@@ -108,6 +109,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
         })),
       },
     });
+    toastAdd(response);
     onClose();
     navigate('.', { replace: true });
   };

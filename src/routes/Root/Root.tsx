@@ -1,10 +1,12 @@
 import { components } from '@/api/schema';
 import { LanguageButton, LanguageMenu, UserButton } from '@/components';
-import { ErrorNote, useErrorNote } from '@/components/ErrorNote';
+import { ErrorNote } from '@/components/ErrorNote';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
+import { Toaster } from '@/components/Toaster/Toaster';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import i18n from '@/i18n/config';
+import { useErrorNoteStore } from '@/stores/useErrorNoteStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { Footer, NavigationBar, SkipLink, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -27,7 +29,7 @@ const Root = () => {
     i18n: { language },
   } = useTranslation();
   const toolStore = useToolStore();
-  const { error, clearErrorNote } = useErrorNote();
+  const { error, clearErrorNote } = useErrorNoteStore();
 
   const { sm } = useMediaQueries();
   const [megaMenuOpen, setMegaMenuOpen] = React.useState(false);
@@ -164,6 +166,7 @@ const Root = () => {
         variant="light"
         className={!sm ? 'py-7' : undefined}
       />
+      <Toaster />
       <ScrollRestoration />
     </div>
   );

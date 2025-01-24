@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
 import { formErrorMessage, LIMITS } from '@/constants';
+import { toastAdd } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -95,7 +96,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
     name: 'koulutukset',
   });
   const onSubmit: FormSubmitHandler<EducationHistoryForm> = async ({ data }: { data: EducationHistoryForm }) => {
-    await client.POST('/api/profiili/koulutuskokonaisuudet', {
+    const { response } = await client.POST('/api/profiili/koulutuskokonaisuudet', {
       body: {
         nimi: data.nimi,
         koulutukset: data.koulutukset.map((koulutus) => ({
@@ -106,6 +107,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
         })),
       },
     });
+    toastAdd(response);
     onClose();
     navigate('.', { replace: true });
   };
