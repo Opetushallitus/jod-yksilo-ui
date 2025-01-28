@@ -483,7 +483,7 @@
         "textarea-placeholder": "Esim. Opin tunnistamaan ihmisten osaamisia ja sanoittamaan niitä...",
         "title": "Mitä minä osaan"
       },
-      "description": "Alla on työkalut joiden avulla syötän tietojasi joiden perusteella tarjoamme sinulle mahdollisuuksia oikealla.",
+      "description": "Mitä osaat ja mistä olet kiinnostunut? Kokeile erilaisia kartoitustyökalujamme, jolla voit kartoittaa omaa tilannettasi!",
       "goals": {
         "description": "Tässä osiossa voit valita toiveidesi mukaiset tulokset palvelustamme. Jos olet epävarma, voit ohittaa tämän ja tutustua palveluumme omaan tahtiisi. Kun liikutat hiirtä kuvakkeiden ylle, näet niiden alla olevan selityksen siitä, miten ne vaikuttavat lopputulokseen.\n\nNapauta kuvaketta, jos haluat valita sen tavoitteeksesi. Voit peruuttaa valinnan napauttamalla kuvaketta uudelleen.",
         "job-opportunities": "Tutkia työmahdollisuuksia osaamisellani",
@@ -540,7 +540,7 @@
         "action": "Päivitä mahdollisuutesi",
         "description": "Voit säätää osaamisten ja kiinnostusten painotusta tuloksissa."
       },
-      "description": "Alla näet palvelun tunnistamia työ- ja koulutusmahdollisuuksia tietojesi pohjalta.",
+      "description": "Tutki erilaisia työ- ja koulutusmahdollisuuksia. Voit myös testata miten kartoittamasi tiedot vaikuttavat esitettäviin mahdollisuuksiin.",
       "filters": {
         "education-opportunities": "Koulutusmahdollisuudet",
         "job-and-education-opportunities": "Työ- ja koulutusmahdollisuudet",
