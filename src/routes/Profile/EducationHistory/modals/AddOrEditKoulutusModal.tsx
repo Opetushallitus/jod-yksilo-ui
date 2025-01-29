@@ -2,7 +2,7 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { DatePickerTranslations, getDatePickerTranslations, toastAdd, toastDelete, toastUpdate } from '@/utils';
+import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -233,7 +233,7 @@ const AddOrEditKoulutusModal = ({
 
   const onSubmit: FormSubmitHandler<KoulutusForm> = async ({ data }: { data: KoulutusForm }) => {
     if (koulutusId) {
-      const { response } = await client.PUT(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
+      await client.PUT(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
         params: {
           path: {
             id,
@@ -248,9 +248,8 @@ const AddOrEditKoulutusModal = ({
           osaamiset: data.osaamiset.map((o) => o.id),
         },
       });
-      toastUpdate(response);
     } else {
-      const { response } = await client.POST(KOULUTUKSET_API_PATH, {
+      await client.POST(KOULUTUKSET_API_PATH, {
         params: { path: { id } },
         body: {
           nimi: data.nimi,
@@ -259,16 +258,14 @@ const AddOrEditKoulutusModal = ({
           osaamiset: data.osaamiset.map((o) => o.id),
         },
       });
-      toastAdd(response);
     }
     onClose();
   };
 
   const deleteKoulutus = async () => {
-    const { response } = await client.DELETE(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
+    await client.DELETE(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
       params: { path: { id, koulutusId: koulutusId! } },
     });
-    toastDelete(response);
     onClose();
   };
 

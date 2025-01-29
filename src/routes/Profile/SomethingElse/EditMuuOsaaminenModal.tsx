@@ -1,7 +1,6 @@
 import { client } from '@/api/client';
 import { OsaaminenDto } from '@/api/osaamiset';
 import { OsaaminenValue, OsaamisSuosittelija } from '@/components';
-import { toastAdd } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal } from '@jod/design-system';
 import React from 'react';
@@ -55,10 +54,9 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModalProps) 
   });
 
   const onSubmit: FormSubmitHandler<OsaamisetForm> = async ({ data }: { data: OsaamisetForm }) => {
-    const { response } = await client.PUT('/api/profiili/muu-osaaminen', {
+    await client.PUT('/api/profiili/muu-osaaminen', {
       body: data.osaamiset.map((o) => o.id),
     });
-    toastAdd(response);
     onClose();
   };
 
