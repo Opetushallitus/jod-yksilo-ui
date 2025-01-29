@@ -2,7 +2,6 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { toastDelete, toastUpdate } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -66,7 +65,7 @@ const EditKoulutuskokonaisuusModal = ({
   });
 
   const onSubmit: FormSubmitHandler<KoulutuskokonaisuusForm> = async ({ data }: { data: KoulutuskokonaisuusForm }) => {
-    const { response } = await client.PUT(KOULUTUSKOKONAISUUS_API_PATH, {
+    await client.PUT(KOULUTUSKOKONAISUUS_API_PATH, {
       params: {
         path: {
           id: data.id!,
@@ -77,15 +76,14 @@ const EditKoulutuskokonaisuusModal = ({
         nimi: data.nimi,
       },
     });
-    toastUpdate(response);
     onClose();
   };
 
   const deleteKoulutuskokonaisuus = async () => {
-    const { response } = await client.DELETE(KOULUTUSKOKONAISUUS_API_PATH, {
+    await client.DELETE(KOULUTUSKOKONAISUUS_API_PATH, {
       params: { path: { id } },
     });
-    toastDelete(response);
+
     onClose();
   };
 

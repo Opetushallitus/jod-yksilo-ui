@@ -3,7 +3,6 @@ import { DEFAULT_PAGE_SIZE } from '@/constants';
 import i18n, { LangCode } from '@/i18n/config';
 import { Datepicker } from '@jod/design-system';
 import { ComponentProps } from 'react';
-import toast from 'react-hot-toast/headless';
 
 export const formatDate = (date: Date) => {
   const month = date.getMonth();
@@ -160,27 +159,3 @@ export const getDatePickerTranslations = (
   // @ts-ignore
   trigger: (open): string => (open ? translations.actions.close : translations.actions.open),
 });
-
-export const toastAdd = (response: Response) => {
-  if (response.ok) {
-    toast(i18n.t('toast.add-success'));
-  } else {
-    toast.error(i18n.t('toast.add-failed'));
-  }
-};
-
-export const toastUpdate = (response: Response) => {
-  if (response.ok) {
-    toast(i18n.t('toast.update-success'));
-  } else {
-    toast.error(i18n.t('toast.update-failed'));
-  }
-};
-
-export const toastDelete = (response: Response) => {
-  if (response.ok) {
-    toast(i18n.t('toast.delete-success'));
-  } else {
-    toast.error(i18n.t('toast.delete-failed'));
-  }
-};

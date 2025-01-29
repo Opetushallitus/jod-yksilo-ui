@@ -2,7 +2,7 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { DatePickerTranslations, getDatePickerTranslations, toastDelete } from '@/utils';
+import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -259,10 +259,9 @@ const AddOrEditToimenkuvaModal = ({
   };
 
   const deleteToimenkuva = async () => {
-    const { response } = await client.DELETE(`${TOIMENKUVAT_API_PATH}/{toimenkuvaId}`, {
+    await client.DELETE(`${TOIMENKUVAT_API_PATH}/{toimenkuvaId}`, {
       params: { path: { id, toimenkuvaId: toimenkuvaId! } },
     });
-    toastDelete(response);
     onClose();
   };
 

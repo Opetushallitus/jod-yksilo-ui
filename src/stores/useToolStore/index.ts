@@ -14,7 +14,7 @@ import {
   sortingValues,
 } from '@/routes/Tool/utils';
 import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
-import { paginate, toastAdd, toastDelete } from '@/utils';
+import { paginate } from '@/utils';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -272,20 +272,18 @@ export const useToolStore = create<ToolState>()(
         set({ suosikitLoading: true });
         try {
           if (favorite?.id) {
-            const { response } = await client.DELETE(SUOSIKIT_PATH, {
+            await client.DELETE(SUOSIKIT_PATH, {
               params: {
                 query: { id: favorite.id },
               },
             });
-            toastDelete(response);
           } else {
-            const { response } = await client.POST(SUOSIKIT_PATH, {
+            await client.POST(SUOSIKIT_PATH, {
               body: {
                 suosionKohdeId,
                 tyyppi,
               },
             });
-            toastAdd(response);
           }
           await updateSuosikit();
         } catch (_error) {
