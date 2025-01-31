@@ -522,12 +522,14 @@
         "title": "Mistä minä olen kiinnostunut",
         "virtual-assistant": {
           "add": "Lisää kiinnostus klikkaamalla '+'-merkkiä osaamisen vieressä ja tarkastele valintoja alhaalla Kiinnostukset-napista.",
+          "close-selected-interests": "Sulje valitut kiinnostukset",
           "description": "Aloita kiinnostusten kartoitus keskustelemalla tekoälyn kanssa. Vastaamalla kysymyksiin saat tietoa kiinnostuksistasi ja niiden perusteella voimme tarjota sinulle sopivia kiinnostuksen kohteita.",
           "done": "Valmis",
           "error": "Virhe vastauksen muodostamisessa. Yritä uudestaan samalla tai uuden syötteen kanssa.",
           "intrests": "Kiinnostukset ({{count}})",
           "loading": "Vastausta ladataan... Ole hyvä ja odota hetki.",
           "respond-to-chat": "Vastaa chatille",
+          "selected-interests": "Valitut kiinnostukset",
           "send": "Lähetä",
           "title": "Kiinnostusten kartoitus"
         }
