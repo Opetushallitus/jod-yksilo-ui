@@ -15,7 +15,7 @@ import { removeDuplicates } from '@/utils';
 import { Accordion, Button, ConfirmDialog, Tag, Textarea, useMediaQueries } from '@jod/design-system';
 import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdOutlineInterests, MdOutlineQuiz, MdOutlineSmartToy, MdSend } from 'react-icons/md';
+import { MdClose, MdOutlineInterests, MdOutlineQuiz, MdOutlineSmartToy, MdSend } from 'react-icons/md';
 import { useOutletContext, useRouteLoaderData } from 'react-router';
 import { generateProfileLink } from '../Profile/utils';
 import { ToolLoaderData } from './loader';
@@ -45,6 +45,9 @@ const VirtualAssistant = ({
   const [id, setId] = React.useState<string>();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const { sm } = useMediaQueries();
+  const [selectedKiinnostuksetViewVisible, setSelectedKiinnostuksetViewVisible] = React.useState(false);
+  const selectedKiinnostuksetViewId = React.useId();
+  const toolStore = useToolStore();
 
   const [selectedKiinnostukset, setSelectedKiinnostukset] = React.useState<components['schemas']['Kiinnostus'][]>([]);
 
@@ -97,19 +100,38 @@ const VirtualAssistant = ({
 
   return (
     <>
-      <div className="flex flex-row shrink-0 justify-between items-center border-b border-bg-gray px-5 py-3">
+      <div
+        inert={selectedKiinnostuksetViewVisible}
+        className="flex flex-row shrink-0 justify-between items-center border-b border-bg-gray px-5 py-3"
+      >
         <h2 className="text-heading-4-mobile sm:text-heading-4">
           {t('tool.my-own-data.interests.virtual-assistant.title')}
         </h2>
         <Button
-          onClick={() => setVirtualAssistantOpen(false)}
+          onClick={() => {
+            const newKiinnostukset = selectedKiinnostukset.map((k) => ({
+              id: k.esco_uri ?? k.kuvaus ?? '',
+              nimi: { [language]: k.kuvaus ?? '' },
+              kuvaus: { [language]: k.kuvaus ?? '' },
+              tyyppi: 'KARTOITETTU' as const,
+            }));
+
+            const allKiinnostukset = [...toolStore.kiinnostukset, ...newKiinnostukset];
+            toolStore.setKiinnostukset([...removeDuplicates(allKiinnostukset, 'id')]);
+
+            setVirtualAssistantOpen(false);
+          }}
           variant="gray"
           size="sm"
           label={t('tool.my-own-data.interests.virtual-assistant.done')}
         />
       </div>
 
-      <div ref={containerRef} className="flex flex-col grow overflow-auto py-6 sm:py-7 px-5 sm:px-6 gap-7">
+      <div
+        inert={selectedKiinnostuksetViewVisible}
+        ref={containerRef}
+        className="flex flex-col grow overflow-auto py-6 sm:py-7 px-5 sm:px-6 gap-7"
+      >
         {Object.keys(history).length ? (
           Object.entries(history).map(([key, row]) => (
             <Fragment key={key}>
@@ -164,7 +186,7 @@ const VirtualAssistant = ({
         )}
       </div>
 
-      <div className="flex flex-col shrink-0 gap-5 px-5 pb-5">
+      <div inert={selectedKiinnostuksetViewVisible} className="flex flex-col shrink-0 gap-5 px-5 pb-5">
         <Textarea
           placeholder={t('tool.my-own-data.interests.virtual-assistant.respond-to-chat')}
           value={value}
@@ -178,7 +200,7 @@ const VirtualAssistant = ({
         <div className="flex justify-between">
           <Button
             onClick={() => {
-              alert(JSON.stringify(selectedKiinnostukset));
+              setSelectedKiinnostuksetViewVisible(true);
             }}
             variant="gray"
             size="sm"
@@ -195,6 +217,49 @@ const VirtualAssistant = ({
           />
         </div>
       </div>
+      {selectedKiinnostuksetViewVisible && (
+        <div className="absolute w-full mt-6 h-full left-0 z-21">
+          <div className="bg-white rounded shadow-[0_-1px_24px_rgba(0,0,0,0.25)] h-full flex flex-col">
+            <button
+              aria-label={'tool.my-own-data.interests.virtual-assistant.close-selected-interests'}
+              onClick={() => setSelectedKiinnostuksetViewVisible(false)}
+              className="absolute cursor-pointer self-end items-center p-4 m-3"
+            >
+              <span aria-hidden className="text-black sm:text-secondary-gray p-3 sm:p-0">
+                <MdClose size={24} />
+              </span>
+            </button>
+            <div className="px-5 pt-9">
+              <h2 id={selectedKiinnostuksetViewId} className="text-heading-4-mobile sm:text-heading-4 text-center">
+                {t('tool.my-own-data.interests.virtual-assistant.selected-interests')}
+              </h2>
+
+              <div
+                aria-labelledby={selectedKiinnostuksetViewId}
+                className="min-h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-[#F7F7F9] mt-5"
+              >
+                <div className="flex flex-wrap gap-3">
+                  {selectedKiinnostukset.map((k) => (
+                    <Tag
+                      key={k.kuvaus ?? k.esco_uri}
+                      label={k.kuvaus ?? k.esco_uri ?? ''}
+                      sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
+                      variant="added"
+                      onClick={() => {
+                        setSelectedKiinnostukset((prevState) => {
+                          // eslint-disable-next-line sonarjs/no-nested-functions
+                          return prevState.filter((selectedValue) => selectedValue.kuvaus !== k.kuvaus);
+                        });
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+              <span className="text-body-sm sm: text-body-sm-mobile">{t('osaamissuosittelija.interest.remove')}</span>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
