@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { MdBlock, MdOutlineInterests, MdOutlineSchool, MdOutlineTune } from 'react-icons/md';
 import { Outlet, useLoaderData, useLocation, useNavigate } from 'react-router';
 import { ToolLoaderData } from './loader';
+import { VirtualAssistant } from './VirtualAssistant';
 
 const MdTarget = ({ size, className }: { size: number; className: string }) => (
   <svg
@@ -30,6 +31,7 @@ const MyOwnData = () => {
     t,
     i18n: { language },
   } = useTranslation();
+  const toolStore = useToolStore();
   const titleId = React.useId();
   const { isDev } = useEnvironment();
   const { pathname } = useLocation();
@@ -108,50 +110,64 @@ const MyOwnData = () => {
     [navigate, tabs],
   );
 
-  return (
-    <aside className="col-span-3 lg:col-span-1">
-      <h1 id={titleId} className="text-heading-1-mobile sm:text-heading-1">
-        {t('tool.my-own-data.title')}
-      </h1>
-      <p className="text-body-md-mobile sm:text-body-md mb-5 sm:mb-7">{t('tool.my-own-data.description')}</p>
+  // 100vh - header height - padding
+  const virtualAssistantClassNames: string = toolStore.virtualAssistantOpen ? 'h-[calc(100vh-96px-40px)]' : '';
 
-      <div className="lg:sticky lg:top-[96px]">
-        <div role="tablist" aria-labelledby={titleId} className="flex text-button-sm select-none">
-          {tabs.map((tab, index) => (
-            <button
-              key={tab.text}
-              id={`tab-${index + 1}`}
-              type="button"
-              role="tab"
-              aria-selected={pathname.endsWith(tab.to)}
-              aria-controls={`tabpanel-${index + 1}`}
-              tabIndex={tab.active ? undefined : -1}
-              onKeyDown={(event) => onKeyDown(event, index)}
-              onClick={() => navigate(tab.to, { replace: true, preventScrollReset: true })}
-              className={cx(`cursor-pointer w-full p-3 rounded-t text-center text-button-sm-mobile overflow-hidden`, {
-                'bg-white': tab.active,
-                'text-link': !tab.active,
+  return (
+    <aside className={`col-span-3 lg:col-span-1 ${virtualAssistantClassNames}`}>
+      {toolStore.virtualAssistantOpen ? (
+        <div className="bg-white rounded h-full flex flex-col">
+          <VirtualAssistant setVirtualAssistantOpen={toolStore.setVirtualAssistantOpen} />
+        </div>
+      ) : (
+        <>
+          <h1 id={titleId} className="text-heading-1-mobile sm:text-heading-1">
+            {t('tool.my-own-data.title')}
+          </h1>
+          <p className="text-body-md-mobile sm:text-body-md mb-5 sm:mb-7">{t('tool.my-own-data.description')}</p>
+
+          <div className="lg:sticky lg:top-[96px]">
+            <div role="tablist" aria-labelledby={titleId} className="flex text-button-sm select-none">
+              {tabs.map((tab, index) => (
+                <button
+                  key={tab.text}
+                  id={`tab-${index + 1}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={pathname.endsWith(tab.to)}
+                  aria-controls={`tabpanel-${index + 1}`}
+                  tabIndex={tab.active ? undefined : -1}
+                  onKeyDown={(event) => onKeyDown(event, index)}
+                  onClick={() => navigate(tab.to, { replace: true, preventScrollReset: true })}
+                  className={cx(
+                    `cursor-pointer w-full p-3 rounded-t text-center text-button-sm-mobile overflow-hidden`,
+                    {
+                      'bg-white': tab.active,
+                      'text-link': !tab.active,
+                    },
+                  )}
+                >
+                  {tab.icon}
+                  {tab.text}
+                </button>
+              ))}
+            </div>
+
+            <div
+              id={`tabpanel-${tabs.findIndex((tab) => tab.active) + 1}`}
+              role="tabpanel"
+              tabIndex={0}
+              aria-labelledby="tab-1"
+              className={cx('flex flex-col bg-white rounded-b lg:max-h-[calc(100vh-186px)] lg:overflow-y-auto', {
+                'rounded-tl': tabs.findIndex((tab) => tab.active) !== 0,
+                'rounded-tr': tabs.findIndex((tab) => tab.active) !== tabs.length - 1,
               })}
             >
-              {tab.icon}
-              {tab.text}
-            </button>
-          ))}
-        </div>
-
-        <div
-          id={`tabpanel-${tabs.findIndex((tab) => tab.active) + 1}`}
-          role="tabpanel"
-          tabIndex={0}
-          aria-labelledby="tab-1"
-          className={cx('flex flex-col bg-white rounded-b lg:max-h-[calc(100vh-186px)] lg:overflow-y-auto', {
-            'rounded-tl': tabs.findIndex((tab) => tab.active) !== 0,
-            'rounded-tr': tabs.findIndex((tab) => tab.active) !== tabs.length - 1,
-          })}
-        >
-          <Outlet context={{ isLoggedIn }} />
-        </div>
-      </div>
+              <Outlet context={{ isLoggedIn }} />
+            </div>
+          </div>
+        </>
+      )}
     </aside>
   );
 };
