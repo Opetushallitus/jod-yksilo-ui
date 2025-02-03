@@ -35,7 +35,7 @@ const loader = (async ({ request, params, context }) => {
   ]);
 
   if (context) {
-    await useToolStore.getState().updateSuosikit();
+    await useToolStore.getState().updateSuosikit(true);
   }
 
   return {
