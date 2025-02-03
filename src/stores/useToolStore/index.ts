@@ -68,6 +68,9 @@ interface ToolState {
   setSorting: (state: string) => void;
   setFilter: (state: string) => void;
   updateItemCount: () => void;
+
+  virtualAssistantOpen: boolean;
+  setVirtualAssistantOpen: (state: boolean) => void;
 }
 
 export const useToolStore = create<ToolState>()(
@@ -325,6 +328,10 @@ export const useToolStore = create<ToolState>()(
             set({ itemCount: ehdotuksetCount.TYOMAHDOLLISUUS + ehdotuksetCount.KOULUTUSMAHDOLLISUUS });
             break;
         }
+      },
+      virtualAssistantOpen: false,
+      setVirtualAssistantOpen: (state) => {
+        set({ virtualAssistantOpen: state });
       },
     }),
     {
