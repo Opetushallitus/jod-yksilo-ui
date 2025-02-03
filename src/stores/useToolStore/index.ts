@@ -55,7 +55,7 @@ interface ToolState {
   setOsaamiset: (state: OsaaminenValue[]) => void;
   setKiinnostukset: (state: OsaaminenValue[]) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
-  updateSuosikit: () => Promise<void>;
+  updateSuosikit: (loggedIn: boolean) => Promise<void>;
   toggleSuosikki: (suosionKohdeId: string, tyyppi: MahdollisuusTyyppi) => Promise<void>;
 
   setOsaamisKiinnostusPainotus: (state: number) => void;
@@ -63,7 +63,7 @@ interface ToolState {
 
   updateEhdotukset: (lang: string, signal?: AbortSignal) => Promise<void>;
   fetchMahdollisuudetPage: (signal?: AbortSignal, page?: number) => Promise<void>;
-  updateEhdotuksetAndTyomahdollisuudet: () => Promise<void>;
+  updateEhdotuksetAndTyomahdollisuudet: (loggedIn: boolean) => Promise<void>;
 
   setSorting: (state: string) => void;
   setFilter: (state: string) => void;
@@ -248,7 +248,7 @@ export const useToolStore = create<ToolState>()(
         }
       },
 
-      updateEhdotuksetAndTyomahdollisuudet: async () => {
+      updateEhdotuksetAndTyomahdollisuudet: async (loggedIn: boolean) => {
         const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit, updateItemCount } = get();
 
         abortController.abort();
@@ -257,7 +257,7 @@ export const useToolStore = create<ToolState>()(
 
         await updateEhdotukset(i18n.language, signal);
         await fetchMahdollisuudetPage(signal, 1);
-        await updateSuosikit();
+        await updateSuosikit(loggedIn);
         updateItemCount();
       },
 
@@ -285,17 +285,17 @@ export const useToolStore = create<ToolState>()(
               },
             });
           }
-          await updateSuosikit();
+          await updateSuosikit(true);
         } catch (_error) {
           // Error, do nothing
         }
         set({ suosikitLoading: false });
       },
 
-      updateSuosikit: async () => {
+      updateSuosikit: async (loggedIn: boolean) => {
         set({ suosikitLoading: true });
         try {
-          const { data: suosikit = [] } = await client.GET(SUOSIKIT_PATH);
+          const { data: suosikit = [] } = loggedIn ? await client.GET(SUOSIKIT_PATH) : { data: [] };
           set({ suosikit });
         } catch (_error) {
           set({ suosikit: get().suosikit ?? [] });

@@ -204,14 +204,14 @@ const YourOpportunitiesPagination = ({
   );
 };
 
-const YourOpportunitiesCard = () => {
+const YourOpportunitiesCard = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const { t } = useTranslation();
   const toolStore = useToolStore();
 
   const updateButtonLabel = toolStore.ehdotuksetLoading ? t('updating-list') : t('tool.your-opportunities.card.action');
 
   const onClick = async () => {
-    await toolStore.updateEhdotuksetAndTyomahdollisuudet();
+    await toolStore.updateEhdotuksetAndTyomahdollisuudet(isLoggedIn);
   };
 
   const value = React.useMemo(() => {
@@ -274,7 +274,7 @@ const YourOpportunities = () => {
       <h1 className="text-heading-1-mobile sm:text-heading-1">{t('tool.your-opportunities.title')}</h1>
       <p className="text-body-md-mobile sm:text-body-md mb-7">{t('tool.your-opportunities.description')}</p>
 
-      <YourOpportunitiesCard />
+      <YourOpportunitiesCard isLoggedIn={isLoggedIn} />
 
       <div className="lg:sticky lg:top-11 lg:z-10 lg:h-11">
         <div className="flex gap-5 justify-between items-center py-5 bg-linear-to-b from-85% from-bg-gray lg:absolute lg:-left-4 lg:-right-4 lg:px-4">

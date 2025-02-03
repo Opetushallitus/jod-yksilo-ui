@@ -12,7 +12,7 @@ export default (async ({ request, context }) => {
 
   // Load tyomahdollisuudet and ehdotukset if they are not already loaded
   if (state.tyomahdollisuudet.length === 0) {
-    await state.updateEhdotuksetAndTyomahdollisuudet();
+    await state.updateEhdotuksetAndTyomahdollisuudet(!!context);
   }
 
   // Load suosikit if the user is logged in

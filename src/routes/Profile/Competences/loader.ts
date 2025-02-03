@@ -33,14 +33,16 @@ export interface CompetencesLoaderData {
 const filterItems = <T extends { id?: string }>(items: T[], osaaminenLahdeIds: string[]): T[] =>
   items.filter((item) => item.id && osaaminenLahdeIds.includes(item.id));
 
-export default (async ({ request }) => {
+export default (async ({ request, context }) => {
   try {
-    const [osaamisetRes, tyopaikatRes, koulutRes, vapaaAjanToiminnotRes] = await Promise.all([
-      client.GET('/api/profiili/osaamiset', { signal: request.signal }),
-      client.GET('/api/profiili/tyopaikat', { signal: request.signal }),
-      client.GET('/api/profiili/koulutuskokonaisuudet', { signal: request.signal }),
-      client.GET('/api/profiili/vapaa-ajan-toiminnot', { signal: request.signal }),
-    ]);
+    const [osaamisetRes, tyopaikatRes, koulutRes, vapaaAjanToiminnotRes] = context
+      ? await Promise.all([
+          client.GET('/api/profiili/osaamiset', { signal: request.signal }),
+          client.GET('/api/profiili/tyopaikat', { signal: request.signal }),
+          client.GET('/api/profiili/koulutuskokonaisuudet', { signal: request.signal }),
+          client.GET('/api/profiili/vapaa-ajan-toiminnot', { signal: request.signal }),
+        ])
+      : [null, null, null, null];
 
     const osaaminenLahdeIds = (osaamisetRes?.data?.filter((o) => o.lahde.id).map((o) => o.lahde.id) ?? []) as string[];
 
@@ -69,7 +71,7 @@ export default (async ({ request }) => {
       })) ?? [];
 
     return {
-      osaamiset: osaamisetRes.data,
+      osaamiset: osaamisetRes?.data ?? [],
       toimenkuvat,
       koulutukset,
       patevyydet,
