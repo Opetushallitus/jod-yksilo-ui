@@ -98,6 +98,8 @@ const VirtualAssistant = ({
     }
   };
 
+  const { isDev } = useEnvironment();
+
   return (
     <>
       <div
@@ -132,6 +134,40 @@ const VirtualAssistant = ({
         ref={containerRef}
         className="flex flex-col grow overflow-auto py-6 sm:py-7 px-5 sm:px-6 gap-7"
       >
+        {
+          // Remove this section when the virtual assistant is ready
+          isDev && (
+            <>
+              <div className="font-arial border border-inactive-gray py-2 px-3 text-body-sm-mobile sm:text-body-sm bg-todo">
+                System Prompt:
+                <ul className="list-inside list-disc">
+                  <li>
+                    You are a career adviser, whose task is to converse with users and help them find out their goals,
+                    and what kinds of skills they have and they could learn. Answer all questions in {language}. You
+                    have been equipped with a long term memory containing sample pieces of conversations between career
+                    advisers and their clients.
+                  </li>
+                </ul>
+              </div>
+              <div className="font-arial border border-inactive-gray py-2 px-3 text-body-sm-mobile sm:text-body-sm bg-todo">
+                Interests Detection Prompt:
+                <ul className="list-inside list-disc">
+                  <li>You are an expert extraction algorithm.</li>
+                  <li>Only extract relevant information from the message and response.</li>
+                  <li>
+                    If you do not know the value of an attribute asked to extract, return null for the attribute&apos;s
+                    value.
+                  </li>
+                  <li>
+                    If the message and response are a general greeting or a statement that does not reveal any possible
+                    interests of the person, return an empty list.
+                  </li>
+                  <li>Always describe the interests in Finnish language.</li>
+                </ul>
+              </div>
+            </>
+          )
+        }
         {Object.keys(history).length ? (
           Object.entries(history).map(([key, row]) => (
             <Fragment key={key}>
