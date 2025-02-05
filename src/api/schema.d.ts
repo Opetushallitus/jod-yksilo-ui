@@ -486,6 +486,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/integraatiot/koski/koulutukset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get import data from Koski */
+    get: operations['integraatioGetKoskiData'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/integraatiot/koski': {
     parameters: {
       query?: never;
