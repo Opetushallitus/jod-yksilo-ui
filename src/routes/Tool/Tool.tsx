@@ -337,7 +337,7 @@ const YourOpportunities = () => {
                       hash: t('job-opportunity.competences.title'),
                     }
                   : {
-                      pathname: `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}/${t('slugs.education-opportunity.overview')}`,
+                      pathname: `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}`,
                       hash: t('education-opportunity.competences.route'),
                     }
               }

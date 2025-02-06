@@ -84,6 +84,9 @@
   },
   "education-opportunities": "Koulutusmahdollisuudet",
   "education-opportunity": {
+    "competences": {
+      "route": "Osaamiset"
+    },
     "specific-professional-competences": {
       "description": "Koulutuksen erityisosaamisalueita ovat:",
       "title": "Koulutuksen erityisosaamiset"

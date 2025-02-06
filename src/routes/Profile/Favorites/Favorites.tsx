@@ -168,10 +168,17 @@ const Favorites = () => {
               toggleFavorite={() => void deleteSuosikki(id)}
               trend="NOUSEVA"
               type={mahdollisuusTyyppi}
-              compareTo={{
-                pathname: `/${language}/${t('slugs.job-opportunity.index')}/${id}`,
-                hash: t('job-opportunity.competences.title'),
-              }}
+              compareTo={
+                mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
+                  ? {
+                      pathname: `/${language}/${t('slugs.job-opportunity.index')}/${id}`,
+                      hash: t('job-opportunity.competences.title'),
+                    }
+                  : {
+                      pathname: `/${language}/${t('slugs.education-opportunity.index')}/${id}`,
+                      hash: t('education-opportunity.competences.route'),
+                    }
+              }
             />
           );
         })}
