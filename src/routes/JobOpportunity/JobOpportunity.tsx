@@ -2,7 +2,7 @@ import { components } from '@/api/schema';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText, getLocalizedTextByLang } from '@/utils';
+import { getLocalizedText } from '@/utils';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
@@ -53,7 +53,7 @@ const JobOpportunity = () => {
         <ul className="list-none ml-0 text-body-lg font-medium text-black leading-7">
           <li
             className="text-capitalize text-body"
-            title={`${ammattiryhma?.uri}\n${getLocalizedTextByLang('en', ammattiryhma?.kuvaus)}`}
+            title={`${ammattiryhma?.uri}\n${(getLocalizedText(ammattiryhma?.kuvaus), 'en')}`}
             key={ammattiryhma?.uri}
           >
             {getLocalizedText(ammattiryhma?.nimi)}

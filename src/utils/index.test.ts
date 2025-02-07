@@ -33,6 +33,11 @@ describe('utils', () => {
       i18n.language = 'fi';
       expect(getLocalizedText(entry)).toBe('');
     });
+
+    it('should return the text in the given language', () => {
+      const entry = { en: 'Hello', fi: 'Moro' };
+      expect(getLocalizedText(entry, 'en')).toBe('Hello');
+    });
   });
 
   describe('removeDuplicates', () => {

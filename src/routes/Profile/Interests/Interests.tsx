@@ -41,7 +41,7 @@ const Interests = () => {
       {isAddModalOpen && <EditKiinnostusModal onClose={onAddModalClose} isOpen={isAddModalOpen} />}
       <title>{title}</title>
       <h1 className="text-heading-1 mb-5">{title}</h1>
-      <p className="mb-8 text-body-lg text-todo">{t('profile.interests.description')}</p>
+      <p className="mb-8 text-body-lg">{t('profile.interests.description')}</p>
       {sortedSkills.length > 0 && (
         <>
           <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">

@@ -11,10 +11,14 @@ interface FavoritesState {
   suosikitLoading: boolean;
   pageNr: number;
   pageSize: number;
+  totalItems: number;
   pageData: TypedMahdollisuus[];
   filters: MahdollisuusTyyppi[];
+  excludedIds: string[];
 
   setFilters: (state: MahdollisuusTyyppi[]) => void;
+  setTotalItems: (state: number) => void;
+  setExcludedIds: (state: string[]) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
   setPageData: (state: TypedMahdollisuus[]) => void;
   fetchSuosikit: () => Promise<void>;
@@ -22,13 +26,19 @@ interface FavoritesState {
   fetchPage: (details: PageChangeDetails) => Promise<void>;
 }
 
-const filterSuosikit = (suosikit: components['schemas']['SuosikkiDto'][], filters: MahdollisuusTyyppi[]) => {
+const filterSuosikit = (
+  suosikit: components['schemas']['SuosikkiDto'][],
+  filters: MahdollisuusTyyppi[],
+  excludedIds: string[] = [],
+) => {
+  const withoutExcluded = suosikit.filter((item) => !excludedIds.includes(item.suosionKohdeId));
+
   if (filters.includes('TYOMAHDOLLISUUS') && filters.includes('KOULUTUSMAHDOLLISUUS')) {
-    return suosikit;
+    return withoutExcluded;
   } else if (filters.includes('TYOMAHDOLLISUUS')) {
-    return suosikit.filter((item) => item.tyyppi === 'TYOMAHDOLLISUUS');
+    return withoutExcluded.filter((item) => item.tyyppi === 'TYOMAHDOLLISUUS');
   } else if (filters.includes('KOULUTUSMAHDOLLISUUS')) {
-    return suosikit.filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS');
+    return withoutExcluded.filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS');
   }
   return [];
 };
@@ -37,12 +47,16 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
   suosikit: [],
   suosikitLoading: false,
   pageNr: 1,
+  totalItems: 0,
   pageSize: DEFAULT_PAGE_SIZE,
   filters: ['TYOMAHDOLLISUUS', 'KOULUTUSMAHDOLLISUUS'],
   pageData: [],
+  excludedIds: [],
+  setTotalItems: (state) => set({ totalItems: state }),
   setSuosikit: (state) => set({ suosikit: state }),
   setPageData: (state) => set({ pageData: state }),
   setFilters: (state) => set({ filters: state }),
+  setExcludedIds: (state) => set({ excludedIds: state }),
 
   deleteSuosikki: async (mahdollisuusId: string) => {
     const { suosikitLoading, suosikit, fetchSuosikit, pageData, pageNr, pageSize, fetchPage } = get();
@@ -83,17 +97,20 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
 
   fetchSuosikit: async () => {
     set({ suosikitLoading: true });
+    const { excludedIds = [] } = get();
     try {
-      const { data: suosikit = [] } = await client.GET('/api/profiili/suosikit');
-      set({ suosikit: [...suosikit].sort(sortByProperty('luotu')) });
+      const { data = [] } = await client.GET('/api/profiili/suosikit');
+      const suosikit = [...data].filter((s) => !excludedIds.includes(s.suosionKohdeId)).sort(sortByProperty('luotu'));
+      set({ suosikit });
     } catch (_error) {
       set({ suosikit: get().suosikit ?? [] });
     }
     set({ suosikitLoading: false });
   },
 
-  fetchPage: async ({ page }: PageChangeDetails) => {
-    const { pageSize, suosikit, filters } = get();
+  fetchPage: async ({ page: requestedPage }: PageChangeDetails) => {
+    const { pageSize, suosikit, filters, excludedIds, pageData, pageNr } = get();
+    let safePageNr = requestedPage;
 
     // Do not fetch data for opportunities if there are no favorites
     if (!suosikit.length) {
@@ -101,11 +118,26 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
       return;
     }
 
-    const filteredSuosikit = filterSuosikit(suosikit, filters);
-    const paginated = paginate(filteredSuosikit, page, pageSize);
+    const filteredSuosikit = filterSuosikit(suosikit, filters, excludedIds);
+    const totalPages = Math.ceil(filteredSuosikit.length / pageSize);
 
-    const hasTyomahdollisuus = filteredSuosikit.findIndex((s) => s.tyyppi === 'TYOMAHDOLLISUUS') > -1;
-    const hasKoulutusMahdollisuus = filteredSuosikit.findIndex((s) => s.tyyppi === 'KOULUTUSMAHDOLLISUUS') > -1;
+    // If the page number is too high, set it to the last page
+    if (safePageNr > totalPages) {
+      safePageNr = totalPages;
+    }
+
+    // If fetching the same page that is already fetched, check the excludedIds and update the current pageData.
+    if (pageNr === requestedPage && pageData.length > 0) {
+      const newPageData = pageData.filter((item) => !excludedIds.includes(item.id));
+      set({
+        pageData: newPageData,
+        pageNr: safePageNr,
+        totalItems: filteredSuosikit.length,
+      });
+    }
+    const paginated = paginate(filteredSuosikit, safePageNr, pageSize);
+    const hasTyomahdollisuus = paginated.findIndex((s) => s.tyyppi === 'TYOMAHDOLLISUUS') > -1;
+    const hasKoulutusMahdollisuus = paginated.findIndex((s) => s.tyyppi === 'KOULUTUSMAHDOLLISUUS') > -1;
 
     const [tyomahdollisuudetResponse, koulutusmahdollisuudetResponse] = await Promise.all([
       hasTyomahdollisuus
@@ -148,8 +180,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
         suosikit.findIndex((item) => item.suosionKohdeId === a.id),
     ) as TypedMahdollisuus[];
 
-    set({ pageData: sortedResultBySuosikkiOrder });
-    set({ pageNr: page });
+    set({ pageData: sortedResultBySuosikkiOrder, pageNr: safePageNr, totalItems: filteredSuosikit.length });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   },
 }));

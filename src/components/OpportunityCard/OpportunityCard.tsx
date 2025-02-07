@@ -3,15 +3,29 @@ import { ActionButton, FavoriteToggle, LoginModal } from '@/components';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { MahdollisuusTyyppi } from '@/routes/types';
-import { cx, PopupList, PopupListItem } from '@jod/design-system';
+import { cx } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdBlock, MdMoreVert, MdOutlineTrendingDown, MdOutlineTrendingUp } from 'react-icons/md';
-import { Link, NavLink, To } from 'react-router';
+import { NavLink } from 'react-router';
 
-interface OpportunityCardProps {
+type FavoriteProps =
+  | {
+      hideFavorite: true;
+      toggleFavorite?: never;
+      isFavorite?: never;
+      isLoggedIn?: never;
+    }
+  | {
+      hideFavorite?: never;
+      toggleFavorite: () => void;
+      isFavorite: boolean;
+      isLoggedIn: boolean;
+    };
+
+type OpportunityCardProps = {
   as?: React.ElementType;
-  to: string;
+  to?: string;
   name: string;
   description: string;
   matchValue?: number;
@@ -22,11 +36,11 @@ interface OpportunityCardProps {
   hasRestrictions: boolean;
   industryName?: string;
   mostCommonEducationBackground?: string;
-  toggleFavorite: () => void;
-  isFavorite?: boolean;
-  isLoggedIn?: boolean;
-  compareTo?: To;
-}
+  // Menu component to use with "Lisää toimintoja"
+  menuContent: React.ReactNode;
+  // Id of the menu content component, needed for a11y
+  menuId: string;
+} & FavoriteProps;
 
 const BottomBox = ({
   title,
@@ -55,13 +69,10 @@ const OutlookDots = ({ outlook, ariaLabel }: { outlook: number; ariaLabel: strin
   </div>
 );
 
-const MoreActionsDropdown = ({ compareTo }: { compareTo?: To }) => {
+const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuContent: React.ReactNode }) => {
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
-  const listId = React.useId();
-
   const actionButtonRef = React.useRef<HTMLDivElement>(null);
-  const onClose = React.useCallback(() => setOpen(false), []);
   const actionMenuRef = useMenuClickHandler(() => setOpen(false), actionButtonRef);
 
   return (
@@ -70,7 +81,7 @@ const MoreActionsDropdown = ({ compareTo }: { compareTo?: To }) => {
         <ActionButton
           label={t('more-actions')}
           icon={<MdMoreVert size={24} className="text-accent" />}
-          aria-controls={listId}
+          aria-controls={menuId}
           aria-expanded={open}
           aria-haspopup="listbox"
           className={open ? 'text-accent' : ''}
@@ -86,29 +97,9 @@ const MoreActionsDropdown = ({ compareTo }: { compareTo?: To }) => {
             e.preventDefault();
             e.stopPropagation();
           }}
-          className="absolute -right-2 translate-y-[10px] cursor-auto"
+          className="absolute -right-2 translate-y-[10px] cursor-auto z-50"
         >
-          <PopupList>
-            <ul id={listId} className="flex flex-col gap-y-2 w-full">
-              {compareTo && (
-                <li>
-                  <Link to={compareTo} onClick={onClose} type="button">
-                    <PopupListItem>{t('compare')}</PopupListItem>
-                  </Link>
-                </li>
-              )}
-              <li>
-                <Link to="#" onClick={onClose} type="button">
-                  <PopupListItem>TODO: {t('create-path')}</PopupListItem>
-                </Link>
-              </li>
-              <li>
-                <Link to="#" onClick={onClose} type="button">
-                  <PopupListItem>TODO: {t('share')}</PopupListItem>
-                </Link>
-              </li>
-            </ul>
-          </PopupList>
+          {menuContent}
         </div>
       )}
     </div>
@@ -131,25 +122,31 @@ export const OpportunityCard = ({
   toggleFavorite,
   isFavorite,
   isLoggedIn,
-  compareTo,
+  hideFavorite,
+  menuContent,
+  menuId,
 }: OpportunityCardProps) => {
   const { t } = useTranslation();
   const [loginModalOpen, setLoginModalOpen] = React.useState(false);
   const { isDev } = useEnvironment();
 
   const onToggleFavorite = () => {
+    if (hideFavorite) {
+      return;
+    }
+
     if (!isLoggedIn) {
       setLoginModalOpen(true);
     } else {
-      toggleFavorite();
+      toggleFavorite?.();
     }
   };
 
   const cardTypeTitle = type === 'TYOMAHDOLLISUUS' ? t('opportunity-type.work') : t('opportunity-type.education');
   const ActionsSection = (
     <div className="grow flex flex-wrap gap-x-5 gap-y-2 justify-end">
-      <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />
-      <MoreActionsDropdown compareTo={compareTo} />
+      {!hideFavorite && <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />}
+      <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />
     </div>
   );
 
@@ -159,12 +156,16 @@ export const OpportunityCard = ({
       <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border">
         <div className="order-2 flex flex-col">
           <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">{cardTypeTitle}</span>
-          <NavLink
-            to={to}
-            className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto hover:underline hover:text-link"
-          >
-            {name}
-          </NavLink>
+          {to ? (
+            <NavLink
+              to={to}
+              className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto hover:underline hover:text-link"
+            >
+              {name}
+            </NavLink>
+          ) : (
+            <span className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto">{name}</span>
+          )}
           <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
           {isDev && (
             <div className="flex flex-wrap mt-5">

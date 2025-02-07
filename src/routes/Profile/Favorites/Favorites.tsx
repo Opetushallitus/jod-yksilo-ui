@@ -6,6 +6,7 @@ import {
   type RoutesNavigationListProps,
 } from '@/components';
 import { useActionBar } from '@/hooks/useActionBar';
+import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
@@ -14,12 +15,26 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router';
-import { mapNavigationRoutes } from '../utils';
+import { useShallow } from 'zustand/shallow';
+import { getTypeSlug, mapNavigationRoutes } from '../utils';
 
 const Favorites = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
 
-  const { deleteSuosikki, filters, fetchPage, pageData, pageNr, pageSize, setFilters, suosikit } = useSuosikitStore();
+  const { deleteSuosikki, filters, fetchPage, pageData, pageNr, pageSize, setFilters, suosikit, totalItems } =
+    useSuosikitStore(
+      useShallow((state) => ({
+        deleteSuosikki: state.deleteSuosikki,
+        filters: state.filters,
+        fetchPage: state.fetchPage,
+        pageData: state.pageData,
+        pageNr: state.pageNr,
+        pageSize: state.pageSize,
+        setFilters: state.setFilters,
+        suosikit: state.suosikit,
+        totalItems: state.totalItems,
+      })),
+    );
   const {
     t,
     i18n: { language },
@@ -80,17 +95,6 @@ const Favorites = () => {
     }
   }, [selectedFilter, pageData]);
 
-  const favoriteCount = React.useMemo(() => {
-    switch (selectedFilter) {
-      case 'KAIKKI':
-        return suosikit.length;
-      case 'TYOMAHDOLLISUUS':
-        return suosikit.filter((s) => s.tyyppi === 'TYOMAHDOLLISUUS').length;
-      case 'KOULUTUSMAHDOLLISUUS':
-        return suosikit.filter((s) => s.tyyppi === 'KOULUTUSMAHDOLLISUUS').length;
-    }
-  }, [selectedFilter, suosikit]);
-
   const favoriteCountText = React.useMemo(() => {
     switch (selectedFilter) {
       case 'KAIKKI':
@@ -100,17 +104,14 @@ const Favorites = () => {
         });
       case 'TYOMAHDOLLISUUS':
         return t('profile.favorites.you-have-saved-n-job-opportunities', {
-          count: favoriteCount,
+          count: totalItems,
         });
       case 'KOULUTUSMAHDOLLISUUS':
         return t('profile.favorites.you-have-saved-n-education-opportunities', {
-          count: favoriteCount,
+          count: totalItems,
         });
     }
-  }, [selectedFilter, suosikit, t, favoriteCount]);
-
-  const getTypeSlug = (type: MahdollisuusTyyppi) =>
-    type === 'TYOMAHDOLLISUUS' ? t('slugs.job-opportunity.index') : t('slugs.education-opportunity.index');
+  }, [selectedFilter, suosikit, t, totalItems]);
 
   return (
     <MainLayout
@@ -168,17 +169,14 @@ const Favorites = () => {
               toggleFavorite={() => void deleteSuosikki(id)}
               trend="NOUSEVA"
               type={mahdollisuusTyyppi}
-              compareTo={
-                mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
-                  ? {
-                      pathname: `/${language}/${t('slugs.job-opportunity.index')}/${id}`,
-                      hash: t('job-opportunity.competences.title'),
-                    }
-                  : {
-                      pathname: `/${language}/${t('slugs.education-opportunity.index')}/${id}`,
-                      hash: t('education-opportunity.competences.route'),
-                    }
+              menuContent={
+                <FavoritesOpportunityCardActionMenu
+                  mahdollisuusId={id}
+                  mahdollisuusTyyppi={mahdollisuusTyyppi}
+                  menuId={id}
+                />
               }
+              menuId={id}
             />
           );
         })}
@@ -193,7 +191,7 @@ const Favorites = () => {
             nextTriggerLabel: t('pagination.next'),
             prevTriggerLabel: t('pagination.previous'),
           }}
-          totalItems={favoriteCount}
+          totalItems={totalItems}
           type="button"
         />
       )}
