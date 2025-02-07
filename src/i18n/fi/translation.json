@@ -357,6 +357,25 @@
       "profile-includes": "Oma Osaamispolku sisältää:",
       "title": "Tervetuloa! Luo oma osaamispolkusi ja hyödynnä monipuoliset palvelut"
     },
+    "my-goals": {
+      "add-favorites-to-goals": "Lisää suosikkeja päämääräksi",
+      "add-modal-title": "Valitse suosikkeja päämääräksi",
+      "delete-goal": "Poista päämääristä",
+      "delete-goal-description": "Haluatko varmasti poistaa tämän päämäärän?",
+      "description": "TODO: Tässä kerrotaan päämääristä ja miten työmahdollisuus merkataan päämääräksi",
+      "goal-description": "Oma tavoite päämäärälle",
+      "goal-description-placeholder": "Oma tavoite päämäärälle",
+      "long-term-goal": "Pitkän aikavälin päämäärä",
+      "long-term-goal-description": "TODO: Pitkän aikavälin päämäärä kuvaus",
+      "other-goals": "Muut päämäärät",
+      "other-goals-description": "TODO: Muut päämäärät kuvaus",
+      "set-long-term-goal": "Aseta pitkän aikavälin päämäärä",
+      "set-other-goal": "Aseta muuksi päämääräksi",
+      "set-short-term-goal": "Aseta lyhyen aikavälin päämäärä",
+      "short-term-goal": "Lyhyen aikavälin päämäärä",
+      "short-term-goal-description": "TODO: Lyhyen aikavälin päämäärä kuvaus",
+      "title": "Päämääräni"
+    },
     "preferences": {
       "list-1-item-1": "kerätä tietoa omasta osaamisestasi (osaaminen)",
       "list-1-item-2": "tallentaa koulutus- ja työhistoriasi sekä lisätä vapaa-ajan tekemisiä sekä tuoda myös työhistoriasi työmarkkinatorin työnhakuprofiilista sekä koulutushistoriasi Opintopolun omista opintosuorituksista (työpaikat, koulutus, vapaa-aika)",
@@ -400,6 +419,8 @@
   "return-home": "Palaa etusivulle",
   "return-menu": "Palaa valikkoon",
   "save": "Tallenna",
+  "save-in-progress": "Tallennetaan...",
+  "saved": "Tallennettu",
   "search": "Haku",
   "select-language": "Valitse kieli",
   "share": "Jaa",
@@ -431,6 +452,7 @@
       "index": "omat-sivuni",
       "interests": "kiinnostukseni",
       "login": "kirjaudu-sisaan",
+      "my-goals": "paamaarani",
       "preferences": "asetukseni",
       "something-else": "muut-osaamiset",
       "work-history": "tyopaikkani"

@@ -1,5 +1,7 @@
 import { components } from '@/api/schema';
 import { type RoutesNavigationListProps } from '@/components';
+import i18n from '@/i18n/config';
+import { MahdollisuusTyyppi } from '@/routes/types';
 import { JSX } from 'react';
 import { Link, LinkProps } from 'react-router';
 
@@ -61,3 +63,6 @@ export const generateProfileLink = (
     };
   }
 };
+
+export const getTypeSlug = (type: MahdollisuusTyyppi) =>
+  type === 'TYOMAHDOLLISUUS' ? i18n.t('slugs.job-opportunity.index') : i18n.t('slugs.education-opportunity.index');

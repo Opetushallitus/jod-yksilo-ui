@@ -80,6 +80,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/profiili/paamaarat/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put: operations['paamaaraUpdate'];
+    post?: never;
+    delete: operations['paamaaraDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/muu-osaaminen': {
     parameters: {
       query?: never;
@@ -238,6 +254,22 @@ export interface paths {
     post: operations['yksilonSuosikkiAdd'];
     /** Deletes one of Yksilo's suosikki */
     delete: operations['yksilonSuosikkiDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/paamaarat': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['paamaaraFindAll'];
+    put?: never;
+    post: operations['paamaaraAdd'];
+    delete?: never;
     options?: never;
     head?: never;
     patch?: never;
@@ -562,6 +594,19 @@ export interface components {
       loppuPvm?: string;
       osaamiset?: string[];
     };
+    PaamaaraDto: {
+      /** Format: uuid */
+      readonly id?: string;
+      /** @enum {string} */
+      tyyppi: 'LYHYT' | 'PITKA' | 'MUU';
+      /** @enum {string} */
+      mahdollisuusTyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      /** Format: uuid */
+      mahdollisuusId: string;
+      tavoite?: components['schemas']['LokalisoituTeksti'];
+      /** Format: date-time */
+      readonly luotu?: string;
+    };
     KoulutusKokonaisuusUpdateDto: {
       /** Format: uuid */
       id?: string;
@@ -599,10 +644,7 @@ export interface components {
       readonly id?: string;
       /** Format: uuid */
       suosionKohdeId: string;
-      /**
-       * @example TYOMAHDOLLISUUS
-       * @enum {string}
-       */
+      /** @enum {string} */
       tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       /** Format: date-time */
       readonly luotu?: string;
@@ -1089,6 +1131,50 @@ export interface operations {
       };
     };
   };
+  paamaaraUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PaamaaraDto'];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  paamaaraDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   muuOsaaminenFindAll: {
     parameters: {
       query?: never;
@@ -1555,6 +1641,50 @@ export interface operations {
           [name: string]: unknown;
         };
         content?: never;
+      };
+    };
+  };
+  paamaaraFindAll: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PaamaaraDto'][];
+        };
+      };
+    };
+  };
+  paamaaraAdd: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PaamaaraDto'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': string;
+        };
       };
     };
   };

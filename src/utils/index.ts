@@ -1,6 +1,6 @@
 import { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
-import i18n, { LangCode } from '@/i18n/config';
+import i18n from '@/i18n/config';
 import { Datepicker } from '@jod/design-system';
 import { ComponentProps } from 'react';
 
@@ -11,23 +11,14 @@ export const formatDate = (date: Date) => {
 };
 
 /**
- * Gets the localized text from an object.
+ * Gets the localized text from "LokalisoituTeksti" object. Uses current i18next language by default.
  * @param entry Object with localized texts
+ * @param lang Language code. Uses current i18next language by default.
  * @returns The text in current i18next language
  */
 export const getLocalizedText = (
   entry?: components['schemas']['LokalisoituTeksti'] | Record<string, string | undefined>,
-) => entry?.[i18n.language] ?? '';
-
-/**
- * Gets the localized text from an object.
- * @param lang langcode
- * @param entry Object with localized texts
- * @returns The text in current i18next language
- */
-export const getLocalizedTextByLang = (
-  lang: LangCode,
-  entry?: components['schemas']['LokalisoituTeksti'] | Record<string, string | undefined>,
+  lang = i18n.language,
 ) => entry?.[lang] ?? '';
 
 type NestedKeyOf<ObjectType extends object> = {
@@ -143,19 +134,9 @@ export interface DatePickerTranslations {
 export const getDatePickerTranslations = (
   translations: DatePickerTranslations,
 ): ComponentProps<typeof Datepicker>['translations'] => ({
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   nextTrigger: (view) => translations[view].next,
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   viewTrigger: (view) => translations[view].view,
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   prevTrigger: (view) => translations[view].prev,
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   dayCell: (state): string => `${translations.actions.select} ${state.formattedDate}`,
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   trigger: (open): string => (open ? translations.actions.close : translations.actions.open),
 });

@@ -2,6 +2,7 @@ import { OpportunityCard } from '@/components';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { OpportunitiesFilter } from '@/routes/Tool';
+import ToolOpportunityCardActionMenu from '@/routes/Tool/ToolOpportunityCardActionMenu';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
@@ -346,17 +347,14 @@ const YourOpportunities = () => {
               hasRestrictions
               industryName="TODO: Lorem ipsum dolor"
               mostCommonEducationBackground="TODO: Lorem ipsum dolor"
-              compareTo={
-                mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
-                  ? {
-                      pathname: `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`,
-                      hash: t('job-opportunity.competences.title'),
-                    }
-                  : {
-                      pathname: `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}`,
-                      hash: t('education-opportunity.competences.route'),
-                    }
+              menuContent={
+                <ToolOpportunityCardActionMenu
+                  mahdollisuusId={id}
+                  mahdollisuusTyyppi={mahdollisuusTyyppi}
+                  menuId={id}
+                />
               }
+              menuId={id}
             />
           ) : null;
         })}

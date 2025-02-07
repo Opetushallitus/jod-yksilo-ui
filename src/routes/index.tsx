@@ -6,6 +6,7 @@ import { loader as educationHistoryLoader } from '@/routes/Profile/EducationHist
 import { favoritesLoader } from '@/routes/Profile/Favorites';
 import { loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
 import { Interests as ProfileInterests, interestsLoader } from '@/routes/Profile/Interests';
+import { MyGoals, goalsLoader } from '@/routes/Profile/MyGoals';
 import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import {
@@ -95,6 +96,12 @@ const profileRoutes = supportedLanguageCodes.map(
           path: `${i18n.t(competencesSlug, { lng })}/${i18n.t('slugs.profile.something-else', { lng })}`,
           element: <SomethingElse />,
           loader: withYksiloContext(muuOsaaminenLoader),
+        },
+        {
+          id: `{slugs.profile.my-goals}|${lng}`,
+          path: i18n.t('slugs.profile.my-goals', { lng }),
+          loader: withYksiloContext(goalsLoader),
+          element: <MyGoals />,
         },
         {
           id: `{slugs.profile.interests}|${lng}`,

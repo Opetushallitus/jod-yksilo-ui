@@ -7,12 +7,13 @@ interface ActionButtonProps {
   onClick: () => void;
 }
 
-export const ActionButton = ({ label, icon, className = '', onClick }: ActionButtonProps) => {
+export const ActionButton = ({ label, icon, className = '', onClick, ...rest }: ActionButtonProps) => {
   return (
     <button
       aria-label={label}
       className={tc(`cursor-pointer flex items-center gap-x-3 text-button-sm text-nowrap ${className}`)}
       onClick={onClick}
+      {...rest}
     >
       {icon}
       {label}
