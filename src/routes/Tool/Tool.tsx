@@ -195,6 +195,12 @@ const YourOpportunitiesPagination = ({
 
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+      const focusableElements = scrollRef.current.querySelectorAll(
+        'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])',
+      );
+      if (focusableElements.length > 0) {
+        (focusableElements[0] as HTMLElement).focus();
+      }
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
