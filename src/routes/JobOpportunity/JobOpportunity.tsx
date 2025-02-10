@@ -2,7 +2,7 @@ import { components } from '@/api/schema';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, hashString } from '@/utils';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
@@ -22,6 +22,13 @@ const JobOpportunity = () => {
   );
   const clusterSize = tyomahdollisuus?.jakaumat?.ammatti?.maara;
 
+  const tyomahdollisuusTehtavat =
+    getLocalizedText(tyomahdollisuus?.tehtavat) !== ''
+      ? getLocalizedText(tyomahdollisuus?.tehtavat)
+          .split('\n')
+          .sort((a, b) => a.localeCompare(b))
+      : [];
+
   const sections: OpportunityDetailsSection[] = [
     {
       navTitle: t('description'),
@@ -29,7 +36,16 @@ const JobOpportunity = () => {
     },
     {
       navTitle: t('job-opportunity.most-common-job-tasks.title'),
-      content: <p className="text-body-md font-arial">{getLocalizedText(tyomahdollisuus?.tehtavat)}</p>,
+      content: (
+        <ol className="list-decimal ml-7 text-body-lg font-medium text-black leading-7">
+          {tyomahdollisuusTehtavat.map((value, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <li key={`${hashString(value)}-${index}`} className="text-capitalize text-body">
+              {value}
+            </li>
+          ))}
+        </ol>
+      ),
     },
     {
       navTitle: t('job-opportunity.occupations.title'),
