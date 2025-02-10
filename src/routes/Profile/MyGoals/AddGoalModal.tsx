@@ -101,12 +101,15 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
       setFilters([...filters, value]);
     }
     void fetchPage({ page: 1, pageSize: pageSize });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const isFilterChecked = (value: MahdollisuusTyyppi) => filters.includes(value);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const onPageChange = async (data: PageChangeDetails) => {
     await fetchPage(data);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     if (scrollRef.current) {
       scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
     }

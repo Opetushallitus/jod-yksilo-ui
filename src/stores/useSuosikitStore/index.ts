@@ -181,6 +181,5 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
     ) as TypedMahdollisuus[];
 
     set({ pageData: sortedResultBySuosikkiOrder, pageNr: safePageNr, totalItems: filteredSuosikit.length });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   },
 }));

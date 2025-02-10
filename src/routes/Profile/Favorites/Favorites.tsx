@@ -56,6 +56,7 @@ const Favorites = () => {
       setFilters([...filters, value]);
     }
     void fetchPage({ page: 1, pageSize: pageSize });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const isFilterChecked = (value: MahdollisuusTyyppi) => filters.includes(value);
@@ -184,7 +185,10 @@ const Favorites = () => {
       {suosikit.length > 0 && (
         <Pagination
           currentPage={pageNr}
-          onPageChange={(data) => void fetchPage(data)}
+          onPageChange={(data) => {
+            void fetchPage(data);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
           pageSize={pageSize}
           siblingCount={1}
           translations={{
