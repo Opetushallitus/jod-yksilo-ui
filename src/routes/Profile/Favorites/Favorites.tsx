@@ -5,18 +5,54 @@ import {
   SimpleNavigationList,
   type RoutesNavigationListProps,
 } from '@/components';
+import { MobileFilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useActionBar } from '@/hooks/useActionBar';
 import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
-import { Button, Checkbox, Pagination } from '@jod/design-system';
+import { Button, Checkbox, Modal, Pagination, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { getTypeSlug, mapNavigationRoutes } from '../utils';
+
+interface FilterCheckboxGroupProps {
+  jobFilterText: string;
+  educationFilterText: string;
+  isFilterChecked: (filter: MahdollisuusTyyppi) => boolean;
+  handleFilterChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const FilterCheckboxGroup: React.FC<FilterCheckboxGroupProps> = ({
+  jobFilterText,
+  educationFilterText,
+  isFilterChecked,
+  handleFilterChange,
+}) => {
+  return (
+    <div className="flex flex-col gap-4 hyphens-auto">
+      <Checkbox
+        ariaLabel={jobFilterText}
+        checked={isFilterChecked('TYOMAHDOLLISUUS')}
+        label={jobFilterText}
+        name={jobFilterText}
+        onChange={handleFilterChange}
+        value="TYOMAHDOLLISUUS"
+      />
+      <Checkbox
+        ariaLabel={educationFilterText}
+        checked={isFilterChecked('KOULUTUSMAHDOLLISUUS')}
+        label={educationFilterText}
+        name={educationFilterText}
+        onChange={handleFilterChange}
+        value="KOULUTUSMAHDOLLISUUS"
+      />
+    </div>
+  );
+};
 
 const Favorites = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
@@ -45,6 +81,8 @@ const Favorites = () => {
   const educationFilterText = t('education-opportunities');
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
+  const { sm } = useMediaQueries();
+  const [showFilters, setShowFilters] = React.useState(false);
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value as MahdollisuusTyyppi;
@@ -122,24 +160,12 @@ const Favorites = () => {
             <RoutesNavigationList routes={navigationRoutes} />
           </SimpleNavigationList>
           <SimpleNavigationList title={t('content')} backgroundClassName="bg-bg-gray-2" collapsible>
-            <div className="flex flex-col gap-4 hyphens-auto">
-              <Checkbox
-                ariaLabel={jobFilterText}
-                checked={isFilterChecked('TYOMAHDOLLISUUS')}
-                label={jobFilterText}
-                name={jobFilterText}
-                onChange={handleFilterChange}
-                value="TYOMAHDOLLISUUS"
-              />
-              <Checkbox
-                ariaLabel={educationFilterText}
-                checked={isFilterChecked('KOULUTUSMAHDOLLISUUS')}
-                label={educationFilterText}
-                name={educationFilterText}
-                onChange={handleFilterChange}
-                value="KOULUTUSMAHDOLLISUUS"
-              />
-            </div>
+            <FilterCheckboxGroup
+              jobFilterText={jobFilterText}
+              educationFilterText={educationFilterText}
+              isFilterChecked={isFilterChecked}
+              handleFilterChange={handleFilterChange}
+            />
           </SimpleNavigationList>
         </div>
       }
@@ -148,9 +174,39 @@ const Favorites = () => {
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-8 text-body-lg">{t('profile.favorites.description')}</p>
 
-      <h2 className="text-heading-2-mobile sm:text-heading-2">{subtitleToShow}</h2>
+      <div className="flex flex-row justify-between">
+        <h2 className="text-heading-2-mobile sm:text-heading-2">{subtitleToShow}</h2>
+        <div className="flex flex-row justify-end pb-6">
+          <MobileFilterButton onClick={() => setShowFilters(true)} label={t('profile.favorites.show-filters')} />
+        </div>
+      </div>
 
       <p className="mb-8">{favoriteCountText}</p>
+
+      <div>
+        {!sm && (
+          <Modal
+            open={showFilters}
+            onClose={() => setShowFilters(false)}
+            content={
+              <div className="py-6 px-[20px] bg-bg-gray">
+                <span className="text-heading-3">{t('content')}</span>
+                <FilterCheckboxGroup
+                  jobFilterText={jobFilterText}
+                  educationFilterText={educationFilterText}
+                  isFilterChecked={isFilterChecked}
+                  handleFilterChange={handleFilterChange}
+                />
+              </div>
+            }
+            footer={
+              <div className="flex flex-row justify-end gap-4">
+                <Button variant="white" label={t('close')} onClick={() => setShowFilters(false)} />
+              </div>
+            }
+          />
+        )}
+      </div>
 
       <div className="flex flex-col gap-5 mb-8">
         {favoritesPerType.map((mahdollisuus) => {

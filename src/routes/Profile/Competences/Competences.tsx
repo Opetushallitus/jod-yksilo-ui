@@ -1,35 +1,17 @@
 import { MainLayout, RoutesNavigationList, SimpleNavigationList, type RoutesNavigationListProps } from '@/components';
+import { MobileFilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
 import { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
 import { sortByProperty } from '@/utils';
-import { Button, Modal, RoundButton, useMediaQueries } from '@jod/design-system';
+import { Button, Modal, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdTune } from 'react-icons/md';
 import { useLoaderData, useOutletContext } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 import { CompetenceFilter, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
-
-const MobileFilterButton = ({ onClick }: { onClick: () => void }) => {
-  const { sm } = useMediaQueries();
-  const { t } = useTranslation();
-
-  return !sm ? (
-    <RoundButton
-      size="sm"
-      bgColor="white"
-      label={t('profile.competences.show-filters')}
-      hideLabel
-      onClick={onClick}
-      icon={<MdTune size={24} />}
-    />
-  ) : (
-    <></>
-  );
-};
 
 const Competences = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
@@ -120,7 +102,9 @@ const Competences = () => {
             locale={locale}
             osaamiset={sortedOsaamiset}
             isOsaaminenVisible={isOsaaminenVisible}
-            mobileFilterOpenerComponent={<MobileFilterButton onClick={() => setShowFilters(true)} />}
+            mobileFilterOpenerComponent={
+              <MobileFilterButton onClick={() => setShowFilters(true)} label={t('profile.competences.show-filters')} />
+            }
           />
         )}
         {groupBy === GROUP_BY_THEME && <></>}
@@ -131,7 +115,9 @@ const Competences = () => {
             locale={locale}
             osaamiset={osaamiset}
             isOsaaminenVisible={isOsaaminenVisible}
-            mobileFilterOpenerComponent={<MobileFilterButton onClick={() => setShowFilters(true)} />}
+            mobileFilterOpenerComponent={
+              <MobileFilterButton onClick={() => setShowFilters(true)} label={t('profile.competences.show-filters')} />
+            }
           />
         )}
       </div>
