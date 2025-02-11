@@ -136,7 +136,8 @@ const ImportKoskiModal = ({ isOpen, onClose, setKoskiModalOpen }: ImportKoskiMod
       setStep(step < stepComponents.length - 1 ? step + 1 : step);
       setKoskiModalOpen(true);
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only need to run once after page is loaded.
 
   const nextStep = () => {
     fetchKoskiDataWithJakolinkki();
