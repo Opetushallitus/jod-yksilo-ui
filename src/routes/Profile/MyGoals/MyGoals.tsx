@@ -1,5 +1,4 @@
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList } from '@/components';
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { mapNavigationRoutes } from '@/routes/Profile/utils';
 import { usePaamaaratStore } from '@/stores/usePaamaratStore';
 import { Button } from '@jod/design-system';
@@ -41,7 +40,6 @@ const MyGoals = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const title = t('profile.my-goals.title');
-  const { isDev } = useEnvironment();
   const [addModalOpen, setAddModalOpen] = React.useState(false);
   const revalidator = useRevalidator();
   const { pitkanAikavalinTavoite, lyhyenAikavalinTavoite, muutTavoitteet } = usePaamaaratStore(
@@ -68,9 +66,11 @@ const MyGoals = () => {
     >
       {addModalOpen && <AddGoalModal onClose={onCloseAddModal} isOpen={addModalOpen} />}
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
-      {isDev && <p className="mb-8 text-body-lg text-todo">{t('profile.my-goals.description')}</p>}
-
+      <h1 className="mb-5 text-heading-1-mobile sm:text-heading-1">{title}</h1>
+      <div className="flex flex-col gap-4 mb-9 sm:text-body-lg text-body-lg-mobile">
+        <p>{t('profile.my-goals.description')}</p>
+        <p>{t('profile.my-goals.description-2')}</p>
+      </div>
       <div className="flex flex-col gap-5">
         <MyGoalsSection
           title={t('profile.my-goals.long-term-goal')}

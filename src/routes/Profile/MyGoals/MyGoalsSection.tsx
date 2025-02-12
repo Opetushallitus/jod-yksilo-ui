@@ -1,6 +1,5 @@
 import { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { getTypeSlug } from '@/routes/Profile/utils';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
@@ -34,15 +33,13 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
     [koulutusMahdollisuudetDetails, tyomahdollisuudetDetails],
   );
 
-  const { isDev } = useEnvironment();
-
   return (
     <div className="mb-5">
       <div className="flex flex-row items-center gap-3">
         {icon}
         <h2 className="text-heading-2-mobile sm:text-heading-2">{title}</h2>
       </div>
-      {isDev && <p className={`${icon ? 'ml-8' : ''} text-body-lg font-medium mb-5 text-todo`}>{description}</p>}
+      <p className={`${icon ? 'ml-8' : ''} text-body-lg font-medium mb-5`}>{description}</p>
       <div className="flex flex-col gap-5 mb-5">
         {paamaarat.map((pm, i) => {
           const { mahdollisuusId, mahdollisuusTyyppi, id } = pm;
