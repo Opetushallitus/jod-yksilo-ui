@@ -95,7 +95,8 @@ const TavoiteInput = ({ paamaara }: TavoiteInputProps) => {
           <Textarea
             {...register(`tavoite.${language}` as const)}
             label={t('profile.my-goals.goal-description')}
-            placeholder={t('profile.my-goals.goal-description')}
+            placeholder={t('profile.my-goals.goal-description-placeholder')}
+            help={t('profile.my-goals.goal-description-help')}
             ref={ref}
             value={inputValue}
             maxLength={LIMITS.TEXTAREA}

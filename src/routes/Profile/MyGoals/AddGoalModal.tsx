@@ -122,7 +122,8 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
       content={
         <>
           <div className="sticky top-0 bg-bg-gray z-10 pb-3">
-            <h1 className="text-heading-1">{t('profile.my-goals.add-modal-title')}</h1>
+            <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-modal-title')}</h1>
+            <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-modal-description')}</p>
           </div>
           <div className="flex flex-row mt-6 gap-5" ref={scrollRef}>
             <div className="flex flex-col gap-3 w-full">
