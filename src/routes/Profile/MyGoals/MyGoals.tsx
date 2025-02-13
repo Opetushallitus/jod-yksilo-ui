@@ -1,10 +1,12 @@
 import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList } from '@/components';
 import { mapNavigationRoutes } from '@/routes/Profile/utils';
 import { usePaamaaratStore } from '@/stores/usePaamaratStore';
+import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useOutletContext, useRevalidator } from 'react-router';
+import { MdArrowForward } from 'react-icons/md';
+import { Link, useOutletContext, useRevalidator } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import AddGoalModal from './AddGoalModal';
 import MyGoalsSection from './MyGoalsSection';
@@ -36,12 +38,16 @@ const AwardIcon = ({ color }: { color: 'gold' | 'silver' }) => {
 };
 
 const MyGoals = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const title = t('profile.my-goals.title');
   const [addModalOpen, setAddModalOpen] = React.useState(false);
   const revalidator = useRevalidator();
+  const suosikitIsEmpty = useSuosikitStore((state) => state.suosikit).length === 0;
   const { pitkanAikavalinTavoite, lyhyenAikavalinTavoite, muutTavoitteet } = usePaamaaratStore(
     useShallow((state) => ({
       pitkanAikavalinTavoite: state.pitkanAikavalinTavoite,
@@ -90,10 +96,28 @@ const MyGoals = () => {
           paamaarat={muutTavoitteet}
         />
       </div>
+      {suosikitIsEmpty && (
+        <div className="flex flex-col gap-3 my-3">
+          <p className="text-body-lg">{t('profile.my-goals.no-favorites-selected')}</p>
+          <Link
+            to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.goals')}`}
+            type="button"
+            className="text-button-md hover:underline text-accent"
+          >
+            <div className="flex flex-row justify-start">
+              <div className="flex items-center gap-2">
+                {t('profile.my-goals.add-favorites-link')}
+                <MdArrowForward size={24} />
+              </div>
+            </div>
+          </Link>
+        </div>
+      )}
       <Button
         variant="accent"
         onClick={() => setAddModalOpen(true)}
         label={t('profile.my-goals.add-favorites-to-goals')}
+        disabled={suosikitIsEmpty}
       />
     </MainLayout>
   );

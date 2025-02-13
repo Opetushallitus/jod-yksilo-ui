@@ -5,54 +5,20 @@ import {
   SimpleNavigationList,
   type RoutesNavigationListProps,
 } from '@/components';
-import { MobileFilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
+import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
+import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useActionBar } from '@/hooks/useActionBar';
 import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
-import { Button, Checkbox, Modal, Pagination, useMediaQueries } from '@jod/design-system';
+import { Button, Modal, Pagination, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { getTypeSlug, mapNavigationRoutes } from '../utils';
-
-interface FilterCheckboxGroupProps {
-  jobFilterText: string;
-  educationFilterText: string;
-  isFilterChecked: (filter: MahdollisuusTyyppi) => boolean;
-  handleFilterChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-const FilterCheckboxGroup: React.FC<FilterCheckboxGroupProps> = ({
-  jobFilterText,
-  educationFilterText,
-  isFilterChecked,
-  handleFilterChange,
-}) => {
-  return (
-    <div className="flex flex-col gap-4 hyphens-auto">
-      <Checkbox
-        ariaLabel={jobFilterText}
-        checked={isFilterChecked('TYOMAHDOLLISUUS')}
-        label={jobFilterText}
-        name={jobFilterText}
-        onChange={handleFilterChange}
-        value="TYOMAHDOLLISUUS"
-      />
-      <Checkbox
-        ariaLabel={educationFilterText}
-        checked={isFilterChecked('KOULUTUSMAHDOLLISUUS')}
-        label={educationFilterText}
-        name={educationFilterText}
-        onChange={handleFilterChange}
-        value="KOULUTUSMAHDOLLISUUS"
-      />
-    </div>
-  );
-};
 
 const Favorites = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
@@ -160,7 +126,7 @@ const Favorites = () => {
             <RoutesNavigationList routes={navigationRoutes} />
           </SimpleNavigationList>
           <SimpleNavigationList title={t('content')} backgroundClassName="bg-bg-gray-2" collapsible>
-            <FilterCheckboxGroup
+            <MahdollisuusTyyppiFilter
               jobFilterText={jobFilterText}
               educationFilterText={educationFilterText}
               isFilterChecked={isFilterChecked}
@@ -177,7 +143,7 @@ const Favorites = () => {
       <div className="flex flex-row justify-between">
         <h2 className="text-heading-2-mobile sm:text-heading-2">{subtitleToShow}</h2>
         <div className="flex flex-row justify-end pb-6">
-          <MobileFilterButton onClick={() => setShowFilters(true)} label={t('profile.favorites.show-filters')} />
+          <FilterButton onClick={() => setShowFilters(true)} label={t('profile.favorites.show-filters')} />
         </div>
       </div>
 
@@ -191,7 +157,7 @@ const Favorites = () => {
             content={
               <div className="py-6 px-[20px] bg-bg-gray">
                 <span className="text-heading-3">{t('content')}</span>
-                <FilterCheckboxGroup
+                <MahdollisuusTyyppiFilter
                   jobFilterText={jobFilterText}
                   educationFilterText={educationFilterText}
                   isFilterChecked={isFilterChecked}
