@@ -10,7 +10,7 @@ const OpportunitiesFilter = () => {
   const sortingTitle = t('tool.your-opportunities.sorting.title');
 
   return (
-    <div className="flex flex-col absolute right-0 top-full z-10 bg-bg-gray-2 p-6 rounded-md mt-4 w-[343px] shadow-border text-left gap-6">
+    <div className="flex flex-col absolute right-0 top-full z-10 bg-bg-gray-2 p-6 rounded-md w-[343px] shadow-border text-left gap-6">
       <h2 className="text-heading-2">{t('do-filter')}</h2>
 
       <div className="flex flex-col gap-5">

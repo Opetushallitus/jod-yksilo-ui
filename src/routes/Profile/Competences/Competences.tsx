@@ -1,5 +1,5 @@
 import { MainLayout, RoutesNavigationList, SimpleNavigationList, type RoutesNavigationListProps } from '@/components';
-import { MobileFilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
+import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
@@ -103,7 +103,7 @@ const Competences = () => {
             osaamiset={sortedOsaamiset}
             isOsaaminenVisible={isOsaaminenVisible}
             mobileFilterOpenerComponent={
-              <MobileFilterButton onClick={() => setShowFilters(true)} label={t('profile.competences.show-filters')} />
+              <FilterButton onClick={() => setShowFilters(true)} label={t('profile.competences.show-filters')} />
             }
           />
         )}
@@ -116,7 +116,7 @@ const Competences = () => {
             osaamiset={osaamiset}
             isOsaaminenVisible={isOsaaminenVisible}
             mobileFilterOpenerComponent={
-              <MobileFilterButton onClick={() => setShowFilters(true)} label={t('profile.competences.show-filters')} />
+              <FilterButton onClick={() => setShowFilters(true)} label={t('profile.competences.show-filters')} />
             }
           />
         )}

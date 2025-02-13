@@ -378,6 +378,9 @@
       "set-short-term-goal": "Aseta lyhyen aikavälin päämäärä",
       "short-term-goal": "Lyhyen aikavälin päämäärä",
       "short-term-goal-description": "Lyhyen aikavälin tavoite on lähitulevaisuudessa saavutettava päämäärä, joka voi liittyä esimerkiksi tietyn projektin loppuunsaattamiseen tai uuden taidon oppimiseen.",
+      "show-filters": "Näytä suodattimet",
+      "no-favorites-selected": "Et ole lisännyt yhtään työ- tai koulutusmahdollisuutta suosikiksi.",
+      "add-favorites-link": "Voit katsoa mahdollisuuksia ja lisätä niitä suosikiksi täältä",
       "title": "Päämääräni"
     },
     "preferences": {

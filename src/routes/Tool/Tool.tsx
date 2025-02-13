@@ -1,4 +1,5 @@
 import { OpportunityCard } from '@/components';
+import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { OpportunitiesFilter } from '@/routes/Tool';
@@ -9,7 +10,7 @@ import { getLocalizedText } from '@/utils';
 import { Button, PageChangeDetails, Pagination, Slider, Spinner, cx, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdBlock, MdOutlineInterests, MdOutlineSchool, MdOutlineTune } from 'react-icons/md';
+import { MdBlock, MdOutlineInterests, MdOutlineSchool } from 'react-icons/md';
 import { Outlet, useLoaderData, useLocation, useNavigate } from 'react-router';
 import { ToolLoaderData } from './loader';
 import { VirtualAssistant } from './VirtualAssistant';
@@ -299,27 +300,24 @@ const YourOpportunities = () => {
 
       <YourOpportunitiesCard isLoggedIn={isLoggedIn} />
 
-      <div className="lg:sticky lg:top-11 lg:z-10 lg:h-11">
+      <div className="lg:sticky lg:top-11 lg:z-10 lg:h-11 relative">
         <div className="flex gap-5 justify-between items-center py-5 bg-linear-to-b from-85% from-bg-gray lg:absolute lg:-left-4 lg:-right-4 lg:px-4">
           <span className="font-arial text-form-label">
             {t('tool.your-opportunities.n-opportunities-found', { count })}
           </span>
-          <button
-            className="cursor-pointer text-form-label flex flex-row items-center gap-5"
-            ref={filterMenuButtonRef}
+          <FilterButton
+            label={t('do-filter')}
             onClick={() => setFiltersOpen(!filtersOpen)}
-          >
-            <span className="font-arial">{t('do-filter')}</span>
-            <span className="flex bg-white rounded-full relative size-7 justify-center items-center">
-              <MdOutlineTune size={20} />
-              {filtersOpen && (
-                <div ref={filterMenuRef}>
-                  <OpportunitiesFilter />
-                </div>
-              )}
-            </span>
-          </button>
+            ref={filterMenuButtonRef}
+            breakpoint="none"
+            inline
+          />
         </div>
+        {filtersOpen && (
+          <div ref={filterMenuRef}>
+            <OpportunitiesFilter />
+          </div>
+        )}
       </div>
 
       <ul

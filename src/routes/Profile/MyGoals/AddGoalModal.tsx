@@ -1,14 +1,43 @@
 import { OpportunityCard } from '@/components';
-import { SimpleNavigationList } from '@/components/MainLayout/SimpleNavigationList';
+import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
+import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
+import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import MyGoalsOpportunityCardMenu from '@/routes/Profile/MyGoals/MyGoalsOpportunityCardMenu';
 import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import { usePaamaaratStore } from '@/stores/usePaamaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
-import { Button, Checkbox, Modal, PageChangeDetails, Pagination, useMediaQueries } from '@jod/design-system';
+import { Button, Modal, PageChangeDetails, Pagination, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
+
+const Filters = ({
+  handleFilterChange,
+  filters,
+}: {
+  handleFilterChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  filters: string[];
+}) => {
+  const { t } = useTranslation();
+  const isFilterChecked = (value: MahdollisuusTyyppi) => filters.includes(value);
+  const jobFilterText = t('job-opportunities');
+  const educationFilterText = t('education-opportunities');
+
+  return (
+    <div className="flex flex-col gap-6">
+      <h2 className="text-heading-2">{t('do-filter')}</h2>
+      <div className="flex flex-col gap-5">
+        <MahdollisuusTyyppiFilter
+          jobFilterText={jobFilterText}
+          educationFilterText={educationFilterText}
+          isFilterChecked={isFilterChecked}
+          handleFilterChange={handleFilterChange}
+        />
+      </div>
+    </div>
+  );
+};
 
 interface AddGoalModalProps {
   isOpen: boolean;
@@ -16,7 +45,10 @@ interface AddGoalModalProps {
 }
 const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
   const { t } = useTranslation();
-  const { sm } = useMediaQueries();
+  const { sm, lg } = useMediaQueries();
+  const [filtersOpen, setFiltersOpen] = React.useState(false);
+  const filterMenuButtonRef = React.useRef<HTMLButtonElement>(null);
+  const filterMenuRef = useMenuClickHandler(() => setFiltersOpen(false), filterMenuButtonRef);
   const {
     fetchPage,
     fetchSuosikit,
@@ -25,9 +57,9 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
     pageNr,
     pageSize,
     setFilters,
-    suosikit,
     setExcludedIds,
-    totalItems,
+    excludedIds,
+    totalItems: totalFavorites,
   } = useSuosikitStore(
     useShallow((state) => ({
       fetchPage: state.fetchPage,
@@ -37,7 +69,7 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
       pageNr: state.pageNr,
       pageSize: state.pageSize,
       setFilters: state.setFilters,
-      suosikit: state.suosikit,
+      excludedIds: state.excludedIds,
       setExcludedIds: state.setExcludedIds,
       totalItems: state.totalItems,
     })),
@@ -75,12 +107,15 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
     setListItems(favoritesPerType.filter((item) => !paamaarat.find((pm) => pm.mahdollisuusId === item.id)));
   }, [favoritesPerType, paamaarat]);
 
-  // Initial fetch
+  // Initial fetch. Fetch suosikit in case päämäärät have been updated, otherwise
+  // page data won't be updated correctly.
   React.useEffect(() => {
     const fetchData = async () => {
-      setExcludedIds(paamaarat.map((pm) => pm.mahdollisuusId));
+      const newExcludeIds = paamaarat.map((pm) => pm.mahdollisuusId);
+      const previousExcludedIds = [...excludedIds];
 
-      if (suosikit.length === 0) {
+      if (previousExcludedIds.length !== newExcludeIds.length) {
+        setExcludedIds(paamaarat.map((pm) => pm.mahdollisuusId));
         await fetchSuosikit();
       }
       await fetchPage({ page: 1, pageSize });
@@ -89,8 +124,6 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const jobFilterText = t('job-opportunities');
-  const educationFilterText = t('education-opportunities');
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value as MahdollisuusTyyppi;
     if (filters.includes(value)) {
@@ -104,11 +137,9 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const isFilterChecked = (value: MahdollisuusTyyppi) => filters.includes(value);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const onPageChange = async (data: PageChangeDetails) => {
     await fetchPage(data);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (scrollRef.current) {
       scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -121,9 +152,31 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
       onClose={onClose}
       content={
         <>
-          <div className="sticky top-0 bg-bg-gray z-10 pb-3">
-            <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-modal-title')}</h1>
-            <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-modal-description')}</p>
+          <div>
+            <div className="sticky top-0 bg-bg-gray z-10 pb-3">
+              <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-modal-title')}</h1>
+              <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-modal-description')}</p>
+
+              {totalFavorites > 0 && (
+                <div className="flex justify-end p-3">
+                  <FilterButton
+                    onClick={() => setFiltersOpen(!filtersOpen)}
+                    label={t('do-filter')}
+                    breakpoint="lg"
+                    ref={filterMenuButtonRef}
+                    inline
+                  />
+                </div>
+              )}
+              {totalFavorites > 0 && filtersOpen && !lg && (
+                <div
+                  className="flex flex-col absolute right-0 top-full z-10 bg-bg-gray-2 p-6 rounded-md mt-4 w-[343px] shadow-border text-left gap-6"
+                  ref={filterMenuRef}
+                >
+                  <Filters handleFilterChange={handleFilterChange} filters={filters} />
+                </div>
+              )}
+            </div>
           </div>
           <div className="flex flex-row mt-6 gap-5" ref={scrollRef}>
             <div className="flex flex-col gap-3 w-full">
@@ -163,38 +216,18 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
                       nextTriggerLabel: t('pagination.next'),
                       prevTriggerLabel: t('pagination.previous'),
                     }}
-                    totalItems={totalItems}
-                    type="button"
+                    totalItems={totalFavorites}
                   />
                 </div>
               )}
             </div>
+            {lg && (
+              <div className="p-5 bg-bg-gray-2 sticky top-0 rounded-md h-min">
+                <Filters handleFilterChange={handleFilterChange} filters={filters} />
+              </div>
+            )}
           </div>
         </>
-      }
-      sidePanel={
-        <div className="pt-6">
-          <SimpleNavigationList title={t('content')} backgroundClassName="bg-bg-gray-2 mt-11" collapsible>
-            <div className="flex flex-col gap-4 hyphens-auto">
-              <Checkbox
-                ariaLabel={jobFilterText}
-                checked={isFilterChecked('TYOMAHDOLLISUUS')}
-                label={jobFilterText}
-                name={jobFilterText}
-                onChange={handleFilterChange}
-                value="TYOMAHDOLLISUUS"
-              />
-              <Checkbox
-                ariaLabel={educationFilterText}
-                checked={isFilterChecked('KOULUTUSMAHDOLLISUUS')}
-                label={educationFilterText}
-                name={educationFilterText}
-                onChange={handleFilterChange}
-                value="KOULUTUSMAHDOLLISUUS"
-              />
-            </div>
-          </SimpleNavigationList>
-        </div>
       }
       footer={
         <div className="flex justify-end">
