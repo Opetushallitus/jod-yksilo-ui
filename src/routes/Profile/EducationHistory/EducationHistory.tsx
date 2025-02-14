@@ -88,6 +88,11 @@ const EducationHistory = () => {
     setKoskiModalOpen(true);
   };
 
+  const importFromKoskiOAuth = () => {
+    const currentUrl = encodeURIComponent(window.location.href);
+    window.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}`;
+  };
+
   return (
     <MainLayout
       navChildren={
@@ -125,8 +130,17 @@ const EducationHistory = () => {
         />
       )}
       {isWizardOpen && <EducationHistoryWizard isOpen={isWizardOpen} onClose={onCloseWizard} />}
-      <div className="my-5">
-        <Button variant="white" label="Tuo tiedot Opintopolusta" onClick={importFromKoski} />
+      <div className="my-5 space-y-4">
+        <Button
+          variant="white"
+          label={t('education-history.import-education-history-link')}
+          onClick={importFromKoski}
+        />
+        <Button
+          variant="white"
+          label={t('education-history.import-education-history')}
+          onClick={importFromKoskiOAuth}
+        />
       </div>
       <ImportKoskiModal
         isOpen={koskiModalOpen}
@@ -134,6 +148,7 @@ const EducationHistory = () => {
           setKoskiModalOpen(false);
           revalidator.revalidate();
         }}
+        setKoskiModalOpen={setKoskiModalOpen}
       />
     </MainLayout>
   );

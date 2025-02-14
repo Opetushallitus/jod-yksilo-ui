@@ -52,6 +52,22 @@ export default defineConfig({
         target,
         xfwd: true,
       },
+      '/yksilo/oauth2/authorize/koski': {
+        target,
+        xfwd: true,
+      },
+      '/yksilo/oauth2/authorization/koski': {
+        target,
+        xfwd: true,
+      },
+      '/yksilo/oauth2/response/koski': {
+        target,
+        xfwd: true,
+      },
+      '/api/integraatiot/koski/koulutukset': {
+        target,
+        xfwd: true,
+      },
       '/urataidot': {
         target: 'http://localhost:5173',
         xfwd: true,

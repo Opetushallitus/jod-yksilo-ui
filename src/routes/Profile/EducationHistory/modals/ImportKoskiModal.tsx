@@ -6,12 +6,13 @@ import { t } from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdDelete } from 'react-icons/md';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { getEducationHistoryTableRows, Koulutus } from '../utils';
 
 interface ImportKoskiModalProps {
   isOpen: boolean;
   onClose: React.Dispatch<React.SetStateAction<void>>;
+  setKoskiModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Util functions
@@ -116,7 +117,7 @@ const KoskiDataStep = ({
   );
 };
 
-const ImportKoskiModal = ({ isOpen, onClose }: ImportKoskiModalProps) => {
+const ImportKoskiModal = ({ isOpen, onClose, setKoskiModalOpen }: ImportKoskiModalProps) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = React.useState(false);
   const [koskiFetchError, setError] = React.useState<Error | undefined>(undefined);
@@ -125,9 +126,21 @@ const ImportKoskiModal = ({ isOpen, onClose }: ImportKoskiModalProps) => {
   const [step, setStep] = React.useState(0);
   const stepComponents = [MainStep, KoskiDataStep];
   const StepComponent = stepComponents[step];
+  const location = useLocation();
+
+  React.useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    if (queryParams.get('koski') === 'authorized') {
+      queryParams.delete('koski');
+      fetchKoskiDataWithOAuth2();
+      setStep(step < stepComponents.length - 1 ? step + 1 : step);
+      setKoskiModalOpen(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only need to run once after page is loaded.
 
   const nextStep = () => {
-    fetchKoskiData();
+    fetchKoskiDataWithJakolinkki();
     setStep(step < stepComponents.length - 1 ? step + 1 : step);
   };
   const previousStep = () => {
@@ -146,11 +159,19 @@ const ImportKoskiModal = ({ isOpen, onClose }: ImportKoskiModalProps) => {
     setKoskiData(newKoskiData);
   };
 
-  const fetchKoskiData = async () => {
+  const fetchKoskiDataWithJakolinkki = async () => {
+    fetchKoskiData('/api/integraatiot/koski');
+  };
+
+  const fetchKoskiDataWithOAuth2 = async () => {
+    fetchKoskiData('/api/integraatiot/koski/koulutukset');
+  };
+
+  const fetchKoskiData = async (endpoint: '/api/integraatiot/koski' | '/api/integraatiot/koski/koulutukset') => {
     setIsLoading(true);
     setKoskiData(undefined);
     setError(undefined);
-    const { data, error } = await client.GET('/api/integraatiot/koski', {
+    const { data, error } = await client.GET(endpoint, {
       params: { query: { jakolinkki: jakolinkki ?? '' } },
     });
 
@@ -272,7 +293,7 @@ const ImportKoskiModal = ({ isOpen, onClose }: ImportKoskiModalProps) => {
           rows={convertKoskiDataToExperienceTableRows(koskiData)}
           isLoading={isLoading}
           error={koskiFetchError}
-          reload={fetchKoskiData}
+          reload={fetchKoskiDataWithJakolinkki}
           onRowClick={deleteRow}
         />
       }
