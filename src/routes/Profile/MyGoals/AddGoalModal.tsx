@@ -1,6 +1,7 @@
 import { OpportunityCard } from '@/components';
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import MyGoalsOpportunityCardMenu from '@/routes/Profile/MyGoals/MyGoalsOpportunityCardMenu';
 import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
@@ -78,6 +79,9 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
   const paamaarat = usePaamaaratStore((state) => state.paamaarat);
   const [listItems, setListItems] = React.useState<TypedMahdollisuus[]>([]);
 
+  const goalsId = React.useId();
+  useEscHandler(onClose, goalsId);
+
   type SelectedFilter = 'KAIKKI' | 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
 
   const selectedFilter: SelectedFilter = React.useMemo(() => {
@@ -149,11 +153,10 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
   return (
     <Modal
       open={isOpen}
-      onClose={onClose}
       content={
-        <>
+        <div id={goalsId}>
           <div>
-            <div className="sticky top-0 bg-bg-gray z-10 pb-3">
+            <div className="bg-bg-gray pb-3 relative">
               <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-modal-title')}</h1>
               <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-modal-description')}</p>
 
@@ -227,7 +230,7 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
               </div>
             )}
           </div>
-        </>
+        </div>
       }
       footer={
         <div className="flex justify-end">

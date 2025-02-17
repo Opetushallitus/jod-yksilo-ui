@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -33,6 +34,7 @@ const EditKoulutuskokonaisuusModal = ({
   } = useTranslation();
 
   const formId = React.useId();
+  useEscHandler(onClose, formId);
   const methods = useForm<KoulutuskokonaisuusForm>({
     mode: 'onBlur',
     resolver: zodResolver(

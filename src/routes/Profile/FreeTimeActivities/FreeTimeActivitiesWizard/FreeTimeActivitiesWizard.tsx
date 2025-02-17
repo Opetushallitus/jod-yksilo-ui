@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
 import { formErrorMessage, LIMITS } from '@/constants';
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -24,6 +25,8 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
   const { sm } = useMediaQueries();
 
   const formId = React.useId();
+  useEscHandler(() => setIsOpen(false), formId);
+
   const methods = useForm<FreeTimeActivitiesForm>({
     mode: 'onBlur',
     resolver: zodResolver(

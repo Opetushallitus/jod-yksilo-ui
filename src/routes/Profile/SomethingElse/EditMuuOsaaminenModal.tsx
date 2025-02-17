@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { OsaaminenDto } from '@/api/osaamiset';
 import { OsaaminenValue, OsaamisSuosittelija } from '@/components';
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal } from '@jod/design-system';
 import React from 'react';
@@ -24,6 +25,8 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModalProps) 
   const data = (useLoaderData() as OsaaminenDto[]) ?? [];
 
   const formId = React.useId();
+  useEscHandler(onClose, formId);
+
   const methods = useForm<OsaamisetForm>({
     mode: 'onBlur',
     resolver: zodResolver(

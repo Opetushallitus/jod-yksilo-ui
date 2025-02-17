@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const useMenuClickHandler = (
-  handleOutsideClick: (event: MouseEvent) => void,
+  handleOutsideClick: (event: MouseEvent | KeyboardEvent) => void,
   menuButtonRef:
     | React.RefObject<HTMLButtonElement | null>
     | React.RefObject<HTMLLIElement | null>
@@ -42,6 +42,18 @@ export const useMenuClickHandler = (
       document.removeEventListener('mousedown', clickHandler, true);
     };
   }, [ref, handleOutsideClick, menuButtonRef, isPartOfHeadlessUIDialog]);
+
+  React.useEffect(() => {
+    const escHandler = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        handleOutsideClick(event);
+      }
+    };
+    document.addEventListener('keydown', escHandler, true);
+    return () => {
+      document.removeEventListener('keydown', escHandler, true);
+    };
+  }, [handleOutsideClick]);
 
   return ref;
 };

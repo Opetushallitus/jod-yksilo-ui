@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OsaaminenValue, OsaamisSuosittelija } from '@/components';
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal } from '@jod/design-system';
 import React from 'react';
@@ -24,6 +25,8 @@ const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
   const data = (useLoaderData() as components['schemas']['OsaaminenDto'][]) ?? [];
 
   const formId = React.useId();
+  useEscHandler(onClose, formId);
+
   const methods = useForm<KiinnostusForm>({
     mode: 'onBlur',
     resolver: zodResolver(

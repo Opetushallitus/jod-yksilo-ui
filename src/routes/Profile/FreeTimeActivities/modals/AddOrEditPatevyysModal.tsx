@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
@@ -152,6 +153,7 @@ export const AddOrEditPatevyysModal = ({
   }
 
   const formId = React.useId();
+  useEscHandler(onClose, formId);
   const [step, setStep] = React.useState(0);
   const stepComponents = [MainStep, OsaamisetStep];
   const StepComponent = stepComponents[step];
