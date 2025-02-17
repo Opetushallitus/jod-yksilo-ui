@@ -8,6 +8,7 @@ import {
 } from '@/components';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
+import ImportKoskiSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoskiSummaryModal.tsx';
 import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -44,6 +45,7 @@ const EducationHistory = () => {
   );
   const revalidator = useRevalidator(); // For reloading data after modal close
   const [isKoskiStartModalOpen, setIsKoskiStartModalOpen] = React.useState(false);
+  const [isKoskiSummaryModalOpen, setIsKoskiSummaryModalOpen] = React.useState(false);
   const [isKoskiResultModalOpen, setIsKoskiResultModalOpen] = React.useState(false);
   const [isKoskiImportSuccess, setIsKoskiImportSuccess] = React.useState(false);
 
@@ -100,6 +102,14 @@ const EducationHistory = () => {
     setIsKoskiStartModalOpen(false);
   };
 
+  const openImportKoskiSummaryModal = () => {
+    setIsKoskiSummaryModalOpen(true);
+  };
+
+  const closeImportKoskiSummaryModal = () => {
+    setIsKoskiSummaryModalOpen(false);
+  };
+
   const openImportKoskiResultModal = () => {
     setIsKoskiResultModalOpen(true);
   };
@@ -135,6 +145,17 @@ const EducationHistory = () => {
             variant="white"
             label={t('education-history.import-education-history')}
             onClick={openImportKoskiStartModal}
+          />
+        </div>
+
+        <div>
+          <Button
+            variant="white"
+            size="sm"
+            label="Test summary"
+            onClick={() => {
+              openImportKoskiSummaryModal();
+            }}
           />
         </div>
 
@@ -181,6 +202,13 @@ const EducationHistory = () => {
         isOpen={isKoskiStartModalOpen}
         onClose={closeImportKoskiStartModal}
         onClickImport={importFromKoskiOAuth}
+      />
+      <ImportKoskiSummaryModal
+        isOpen={isKoskiSummaryModalOpen}
+        onClose={closeImportKoskiSummaryModal}
+        onSave={() => {
+          //ignore
+        }}
       />
       <ImportKoskiResultModal
         isOpen={isKoskiResultModalOpen}
