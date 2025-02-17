@@ -66,23 +66,36 @@
     "educational-content": "Koulutuksen sisältö",
     "educational-institution-or-education-provider": "Oppilaitos tai koulutuksen järjestäjä",
     "identify-competences": "Tunnista osaamisia",
-    "import-education-history": "Tuo tiedot Opintopolusta",
-    "import-education-history-link": "Tuo tiedot Opintopolusta jakolinkkillä",
+    "import-education-history": "Tuo koulutushistoriani",
     "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi"
   },
-  "education-import": {
-    "confirm-delete-education": "Oletko varma, että et halua lisätä tätä koulutusta/ tutkintoa omaan osaamisprofiiliisi?",
-    "confirm-delete-oppilaitos": "Oletko varma, että et halua lisätä tätä oppilaitosta ja siellä suoritettuja kolutuksia omaan osaamisprofiiliisi?",
-    "confirm-delete-title": "En halua lisätä tätä tietoa omaan osaamisprofiilini",
-    "data-header": "Opintopolusta löytyneet koulutukset",
-    "data-hint": "Käy luomassa Opintopolku-palvelussa jakolinkki ja liitä se tälle sivulle.",
-    "data-info": "Voit poistaa listasta ne koulutukset, joita et halua tuoda omaan osaamisprofiiliisi.",
-    "data-load-failed": "Tietojen lataaminen epäonnistui",
-    "data-load-retry": "Yritä uudelleen",
-    "data-loading": "Ladataan tietoja opintopolusta...",
-    "education-or-degree": "Oppilaitos / tutkinto",
-    "invalid-share-link": "Tarkasta opintopolun jakolinkki",
-    "share-link": "Opintopolun jakolinkki"
+  "education-history-import": {
+    "result-modal": {
+      "failure": "Koulutus historia lisääminen epäonnistui.",
+      "give-permission-failed": "Luvan antaminen epäonnistui. Yritä myöhemmin uudelleen.",
+      "success": "Koulutus historia lisätty onnistuneesti."
+    },
+    "start-modal": {
+      "description": "Voit tuoda koulutushistoriasi palveluun, kun olet antanut luvan Opintopolussa. Paina \"Siirry Opintopolkuun\", niin voit myöntää luvan tietojen tuontiin. Luvan antamisen jälkeen palaat automaattisesti takaisin palveluun.",
+      "import-button": "Siirry Opintopolkuun",
+      "import-redirect-fail": "Siirtyminen Opintopolkuun epäonnistui. Yritä uudelleen.",
+      "title": "Tuo koulutushistoriasi Koski-palvelusta"
+    },
+    "summary-modal": {
+      "cancel-modal": {
+        "description": "Haluatko varmasti keskeyttää opintosuoritustesi tuonnin Opintopolusta.",
+        "title": "Peruuta tuonti"
+      },
+      "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
+      "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
+      "data-load-retry": "Yritä uudelleen",
+      "data-loading": "Ladataan tietoja opintopolusta...",
+      "description": "Voit muokata koulutuksia tuotuasi ne osaamispolkuun osaamisprofiilissasi kohdassa koulutukset.",
+      "table-education": "Koulutukseni järjestäjä / koulutus",
+      "table-header-checkbox": "Tuo valitut",
+      "title": "Yhteenveto",
+      "wrong-person": "Kirjaudu ulos ja takaisin sisään, ja yritä sitten uudelleen."
+    }
   },
   "education-opportunities": "Koulutusmahdollisuudet",
   "education-opportunity": {
@@ -644,5 +657,6 @@
     "workplace-or-job-description": "Työpaikka / toimenkuva"
   },
   "workplace-competences": "Työpaikka osaamiset",
+  "yes": "Kyllä",
   "your-competences": "Oma osaamisesi"
 }

@@ -8,13 +8,15 @@ import {
 } from '@/components';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
+import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal.tsx';
 import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
+import { useLoaderData, useOutletContext, useRevalidator, useSearchParams } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
-import ImportKoskiModal from './modals/ImportKoskiModal';
+import ImportKoulutusResultModal from './modals/ImportKoulutusResultModal.tsx';
+import ImportKoulutusStartModal from './modals/ImportKoulutusStartModal.tsx';
 import { getEducationHistoryTableRows, Koulutuskokonaisuus } from './utils';
 
 const EducationHistory = () => {
@@ -38,11 +40,16 @@ const EducationHistory = () => {
   const [isKoulutusOpen, setIsKoulutusOpen] = React.useState(false);
   const [koulutusId, setKoulutusId] = React.useState<string | undefined>(undefined);
   const [koulutuskokonaisuusId, setKoulutuskokonaisuusId] = React.useState<string | undefined>(undefined);
-  const [koskiModalOpen, setKoskiModalOpen] = React.useState(false);
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>(
     getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap),
   );
   const revalidator = useRevalidator(); // For reloading data after modal close
+  const [isImportStartModalOpen, setIsImportStartModalOpen] = React.useState(false);
+  const [isImportSummaryModalOpen, setIsImportSummaryModalOpen] = React.useState(false);
+  const [isImportResultModalOpen, setIsImportResultModalOpen] = React.useState(false);
+  const [importResultErrorText, setImportResultErrorText] = React.useState<string | undefined>(undefined);
+  const [isImportSuccess, setIsImportSuccess] = React.useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   React.useEffect(() => {
     setRows(getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap));
@@ -84,14 +91,44 @@ const EducationHistory = () => {
     revalidator.revalidate();
   };
 
-  const importFromKoski = () => {
-    setKoskiModalOpen(true);
+  const openImportStartModal = () => {
+    setImportResultErrorText(undefined);
+    setIsImportStartModalOpen(true);
   };
 
-  const importFromKoskiOAuth = () => {
-    const currentUrl = encodeURIComponent(window.location.href);
-    window.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}`;
+  const closeImportStartModal = () => {
+    setIsImportStartModalOpen(false);
   };
+
+  const openImportSummaryModal = () => {
+    setIsImportSummaryModalOpen(true);
+  };
+
+  const closeImportSummaryModal = () => {
+    setIsImportSummaryModalOpen(false);
+  };
+
+  const openImportResultModal = (result: boolean) => {
+    setIsImportSuccess(result);
+    setIsImportResultModalOpen(true);
+  };
+
+  const closeImportResultModal = () => {
+    setIsImportResultModalOpen(false);
+  };
+
+  React.useEffect(() => {
+    const result = searchParams.get('koski');
+    if (result) {
+      setSearchParams({});
+      if (result === 'authorized') {
+        openImportSummaryModal();
+      } else if (result === 'error') {
+        setImportResultErrorText(t('education-history-import.result-modal.give-permission-failed'));
+        openImportResultModal(false);
+      }
+    }
+  }, [searchParams, setSearchParams, t]); // Only run once after the page is loaded
 
   return (
     <MainLayout
@@ -106,14 +143,28 @@ const EducationHistory = () => {
       <p className="mb-9 text-body-lg">{t('profile.education-history.description')}</p>
       <ExperienceTable
         mainColumnHeader={t('education-history.education-provider-or-education')}
-        addNewLabel={t('education-history.add-new-education')}
         addNewNestedLabel={t('education-history.add-studies-to-this-education')}
         rows={rows}
-        onAddClick={() => setIsWizardOpen(true)}
         onRowClick={onRowClick}
         onNestedRowClick={onNestedRowClick}
         onAddNestedRowClick={onAddNestedRowClick}
       />
+      <div className="flex space-x-4">
+        <div className="mb-[84px]">
+          <Button
+            variant="white"
+            label={t('education-history.add-new-education')}
+            onClick={() => setIsWizardOpen(true)}
+          />
+        </div>
+        <div>
+          <Button
+            variant="white"
+            label={t('education-history.import-education-history')}
+            onClick={openImportStartModal}
+          />
+        </div>
+      </div>
       {isKoulutuskokonaisuusOpen && koulutuskokonaisuusId && (
         <EditKoulutuskokonaisuusModal
           isOpen={isKoulutuskokonaisuusOpen}
@@ -130,25 +181,26 @@ const EducationHistory = () => {
         />
       )}
       {isWizardOpen && <EducationHistoryWizard isOpen={isWizardOpen} onClose={onCloseWizard} />}
-      <div className="my-5 space-y-4">
-        <Button
-          variant="white"
-          label={t('education-history.import-education-history-link')}
-          onClick={importFromKoski}
-        />
-        <Button
-          variant="white"
-          label={t('education-history.import-education-history')}
-          onClick={importFromKoskiOAuth}
-        />
-      </div>
-      <ImportKoskiModal
-        isOpen={koskiModalOpen}
-        onClose={() => {
-          setKoskiModalOpen(false);
+
+      <ImportKoulutusStartModal isOpen={isImportStartModalOpen} onClose={closeImportStartModal} />
+      <ImportKoulutusSummaryModal
+        isOpen={isImportSummaryModalOpen}
+        onClose={closeImportSummaryModal}
+        onSuccessful={() => {
+          closeImportSummaryModal();
           revalidator.revalidate();
+          openImportResultModal(true);
         }}
-        setKoskiModalOpen={setKoskiModalOpen}
+        onFailure={() => {
+          closeImportSummaryModal();
+          openImportResultModal(false);
+        }}
+      />
+      <ImportKoulutusResultModal
+        isOpen={isImportResultModalOpen}
+        onClose={closeImportResultModal}
+        isSuccess={isImportSuccess}
+        errorText={importResultErrorText}
       />
     </MainLayout>
   );
