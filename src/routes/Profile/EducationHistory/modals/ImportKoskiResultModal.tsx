@@ -1,0 +1,44 @@
+import { Button, Modal } from '@jod/design-system';
+import { useTranslation } from 'react-i18next';
+import { MdCheckCircleOutline, MdClear } from 'react-icons/md';
+
+interface ImportKoskiResultModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  isSuccess?: React.ReactNode;
+}
+
+const ImportKoskiResultModal = ({ isOpen, onClose, isSuccess }: ImportKoskiResultModalProps) => {
+  const { t } = useTranslation();
+
+  if (!isOpen) return null;
+
+  return (
+    <Modal
+      open={isOpen}
+      content={
+        <div className="flex flex-col items-center justify-center h-full w-full text-center">
+          {isSuccess ? (
+            <>
+              <MdCheckCircleOutline className="text-heading-1 text-success" />
+              <h3 className="mb-5 text-heading-2">{t('education-history-import.result-modal.success')}</h3>
+            </>
+          ) : (
+            <>
+              <MdClear className="text-heading-1 text-alert-text" />
+              <h3 className="mb-5 text-heading-2">{t('education-history-import.result-modal.failure')}</h3>
+            </>
+          )}
+        </div>
+      }
+      footer={
+        <div className="flex flex-row justify-between gap-5">
+          <div />
+          <Button label={t('close')} variant="white" onClick={onClose} />
+        </div>
+      }
+    />
+  );
+};
+
+export default ImportKoskiResultModal;

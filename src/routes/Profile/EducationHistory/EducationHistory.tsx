@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
+import ImportKoskiResultModal from './modals/ImportKoskiResultModal.tsx';
 import ImportKoskiStartModal from './modals/ImportKoskiStartModal';
 import { getEducationHistoryTableRows, Koulutuskokonaisuus } from './utils';
 
@@ -43,6 +44,8 @@ const EducationHistory = () => {
   );
   const revalidator = useRevalidator(); // For reloading data after modal close
   const [isKoskiStartModalOpen, setIsKoskiStartModalOpen] = React.useState(false);
+  const [isKoskiResultModalOpen, setIsKoskiResultModalOpen] = React.useState(false);
+  const [isKoskiImportSuccess, setIsKoskiImportSuccess] = React.useState(false);
 
   React.useEffect(() => {
     setRows(getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap));
@@ -97,6 +100,14 @@ const EducationHistory = () => {
     setIsKoskiStartModalOpen(false);
   };
 
+  const openImportKoskiResultModal = () => {
+    setIsKoskiResultModalOpen(true);
+  };
+
+  const closeImportKoskiResultModal = () => {
+    setIsKoskiResultModalOpen(false);
+  };
+
   return (
     <MainLayout
       navChildren={
@@ -119,11 +130,34 @@ const EducationHistory = () => {
           onNestedRowClick={onNestedRowClick}
           onAddNestedRowClick={onAddNestedRowClick}
         />
-        <div className="mb-[84px]">
+        <div>
           <Button
             variant="white"
             label={t('education-history.import-education-history')}
             onClick={openImportKoskiStartModal}
+          />
+        </div>
+
+        <div>
+          <Button
+            variant="white"
+            size="sm"
+            label="Test Failure"
+            onClick={() => {
+              setIsKoskiImportSuccess(false);
+              setTimeout(() => openImportKoskiResultModal(), 0);
+            }}
+          />
+        </div>
+        <div>
+          <Button
+            variant="white"
+            size="sm"
+            label="Test Success"
+            onClick={() => {
+              setIsKoskiImportSuccess(true);
+              openImportKoskiResultModal();
+            }}
           />
         </div>
       </div>
@@ -147,6 +181,11 @@ const EducationHistory = () => {
         isOpen={isKoskiStartModalOpen}
         onClose={closeImportKoskiStartModal}
         onClickImport={importFromKoskiOAuth}
+      />
+      <ImportKoskiResultModal
+        isOpen={isKoskiResultModalOpen}
+        onClose={closeImportKoskiResultModal}
+        isSuccess={isKoskiImportSuccess}
       />
     </MainLayout>
   );
