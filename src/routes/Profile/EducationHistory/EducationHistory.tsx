@@ -14,7 +14,6 @@ import { useTranslation } from 'react-i18next';
 import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
-import ImportKoskiModal from './modals/ImportKoskiModal';
 import ImportKoskiStartModal from './modals/ImportKoskiStartModal';
 import { getEducationHistoryTableRows, Koulutuskokonaisuus } from './utils';
 
@@ -39,7 +38,6 @@ const EducationHistory = () => {
   const [isKoulutusOpen, setIsKoulutusOpen] = React.useState(false);
   const [koulutusId, setKoulutusId] = React.useState<string | undefined>(undefined);
   const [koulutuskokonaisuusId, setKoulutuskokonaisuusId] = React.useState<string | undefined>(undefined);
-  const [koskiModalOpen, setKoskiModalOpen] = React.useState(false);
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>(
     getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap),
   );
@@ -145,21 +143,6 @@ const EducationHistory = () => {
         />
       )}
       {isWizardOpen && <EducationHistoryWizard isOpen={isWizardOpen} onClose={onCloseWizard} />}
-      <div className="my-5 space-y-4">
-        <Button
-          variant="white"
-          label={t('education-history.import-education-history-link')}
-          onClick={openImportKoskiStartModal}
-        />
-      </div>
-      <ImportKoskiModal
-        isOpen={koskiModalOpen}
-        onClose={() => {
-          setKoskiModalOpen(false);
-          revalidator.revalidate();
-        }}
-        setKoskiModalOpen={setKoskiModalOpen}
-      />
       <ImportKoskiStartModal
         isOpen={isKoskiStartModalOpen}
         onClose={closeImportKoskiStartModal}
