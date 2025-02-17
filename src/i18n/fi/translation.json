@@ -84,6 +84,25 @@
     "invalid-share-link": "Tarkasta opintopolun jakolinkki",
     "share-link": "Opintopolun jakolinkki"
   },
+  "education-history-import": {
+    "start-modal": {
+      "title": "Tuo koulutushistoriasi Koski-palvelusta",
+      "description": "Voit tuoda koulutushistoriasi palveluun, kun olet antanut luvan Opintopolussa. Paina \"Siirry Opintopolkuun\", niin voit myöntää luvan tietojen tuontiin. Luvan antamisen jälkeen palaat automaattisesti takaisin palveluun.",
+      "import-button": "Siirry Opintopolkuun"
+    },
+    "summary-modal": {
+      "title": "Yhteenveto",
+      "description": "Voit muokata koulutuksia tuotuasi ne osaamispolkuun osaamisprofiilissasi kohdassa koulutukset.",
+      "table-education": "Koulutukseni järjestäjä / koulutus",
+      "table-began": "Alkoi,",
+      "table-ended": "Loppui",
+      "table-checkbox": "Tuo valitut"
+    },
+    "result-modal": {
+      "success": "Koulutus historia lisätty onnistuneesti.",
+      "failure": "Koulutus historia lisääminen epäonnistui."
+    }
+  },
   "education-opportunities": "Koulutusmahdollisuudet",
   "education-opportunity": {
     "competences": {
