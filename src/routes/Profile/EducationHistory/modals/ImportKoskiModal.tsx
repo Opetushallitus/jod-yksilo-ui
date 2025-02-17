@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { ExperienceTable, ExperienceTableRowData } from '@/components';
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { Button, InputField, Modal, Spinner, WizardProgress } from '@jod/design-system';
 import { t } from 'i18next';
 import React from 'react';
@@ -138,6 +139,7 @@ const ImportKoskiModal = ({ isOpen, onClose, setKoskiModalOpen }: ImportKoskiMod
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only need to run once after page is loaded.
+  const contentId = React.useId();
 
   const nextStep = () => {
     fetchKoskiDataWithJakolinkki();
@@ -264,6 +266,7 @@ const ImportKoskiModal = ({ isOpen, onClose, setKoskiModalOpen }: ImportKoskiMod
     setStep(0);
     onClose();
   };
+  useEscHandler(close, contentId);
 
   return (
     <Modal
@@ -287,15 +290,17 @@ const ImportKoskiModal = ({ isOpen, onClose, setKoskiModalOpen }: ImportKoskiMod
         </>
       }
       content={
-        <StepComponent
-          jakolinkki={jakolinkki}
-          setJakolinkki={setJakolinkki}
-          rows={convertKoskiDataToExperienceTableRows(koskiData)}
-          isLoading={isLoading}
-          error={koskiFetchError}
-          reload={fetchKoskiDataWithJakolinkki}
-          onRowClick={deleteRow}
-        />
+        <div id={contentId}>
+          <StepComponent
+            jakolinkki={jakolinkki}
+            setJakolinkki={setJakolinkki}
+            rows={convertKoskiDataToExperienceTableRows(koskiData)}
+            isLoading={isLoading}
+            error={koskiFetchError}
+            reload={fetchKoskiDataWithJakolinkki}
+            onRowClick={deleteRow}
+          />
+        </div>
       }
       footer={
         <div className="flex flex-row justify-between">

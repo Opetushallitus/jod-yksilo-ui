@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useEnvironment } from '@/hooks/useEnvironment';
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicates } from '@/utils';
 import { Button, Tag, Textarea, useMediaQueries } from '@jod/design-system';
@@ -33,8 +34,10 @@ export const VirtualAssistant = ({
   const containerRef = React.useRef<HTMLDivElement>(null);
   const { sm } = useMediaQueries();
   const [selectedKiinnostuksetViewVisible, setSelectedKiinnostuksetViewVisible] = React.useState(false);
-  const selectedKiinnostuksetViewId = React.useId();
+  const selectedKiinnostuksetLabelId = React.useId();
   const toolStore = useToolStore();
+  const selectedInterestsViewId = React.useId();
+  useEscHandler(() => setSelectedKiinnostuksetViewVisible(false), selectedInterestsViewId);
 
   const [selectedKiinnostukset, setSelectedKiinnostukset] = React.useState<components['schemas']['Kiinnostus'][]>([]);
 
@@ -241,10 +244,10 @@ export const VirtualAssistant = ({
         </div>
       </div>
       {selectedKiinnostuksetViewVisible && (
-        <div className="absolute top-0 w-full pt-6 h-full left-0 z-21">
+        <div id={selectedInterestsViewId} className="absolute top-0 w-full pt-6 h-full left-0 z-21">
           <div className="bg-white rounded shadow-[0_-1px_24px_rgba(0,0,0,0.25)] h-full flex flex-col">
             <button
-              aria-label={'tool.my-own-data.interests.virtual-assistant.close-selected-interests'}
+              aria-label={t('tool.my-own-data.interests.virtual-assistant.close-selected-interests')}
               onClick={() => setSelectedKiinnostuksetViewVisible(false)}
               className="absolute cursor-pointer self-end items-center p-4 m-3"
             >
@@ -253,12 +256,12 @@ export const VirtualAssistant = ({
               </span>
             </button>
             <div className="px-5 pt-9">
-              <h2 id={selectedKiinnostuksetViewId} className="text-heading-4-mobile sm:text-heading-4 text-center">
+              <h2 id={selectedKiinnostuksetLabelId} className="text-heading-4-mobile sm:text-heading-4 text-center">
                 {t('tool.my-own-data.interests.virtual-assistant.selected-interests')}
               </h2>
 
               <div
-                aria-labelledby={selectedKiinnostuksetViewId}
+                aria-labelledby={selectedKiinnostuksetLabelId}
                 className="min-h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-[#F7F7F9] mt-5"
               >
                 <div className="flex flex-wrap gap-3">

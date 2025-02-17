@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -29,6 +30,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
   } = useTranslation();
 
   const formId = React.useId();
+  useEscHandler(onClose, formId);
   const methods = useForm<VapaaAjanToimintoForm>({
     mode: 'onBlur',
     resolver: zodResolver(

@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
 import { formErrorMessage, LIMITS } from '@/constants';
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -26,6 +27,8 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   const selectedToimenkuva = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
 
   const formId = React.useId();
+  useEscHandler(onClose, formId);
+
   const methods = useForm<WorkHistoryForm>({
     mode: 'onBlur',
     resolver: zodResolver(
