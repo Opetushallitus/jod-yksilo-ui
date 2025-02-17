@@ -5,7 +5,11 @@ import { unregisterCsrfMiddleware } from './csrf';
 
 export const sessionExpiredMiddleware: Middleware = {
   onResponse({ response }) {
-    if (response.status === 403 && !response.url.endsWith('/api/profiili/yksilo')) {
+    if (
+      response.status === 403 &&
+      !response.url.endsWith('/api/profiili/yksilo') &&
+      !response.url.endsWith('/api/integraatiot/koski/koulutukset')
+    ) {
       authStore.yksiloPromise = undefined;
       unregisterCsrfMiddleware();
 
