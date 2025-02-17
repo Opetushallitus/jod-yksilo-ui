@@ -15,6 +15,7 @@ import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
 import ImportKoskiModal from './modals/ImportKoskiModal';
+import ImportKoskiStartModal from './modals/ImportKoskiStartModal';
 import { getEducationHistoryTableRows, Koulutuskokonaisuus } from './utils';
 
 const EducationHistory = () => {
@@ -43,6 +44,7 @@ const EducationHistory = () => {
     getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap),
   );
   const revalidator = useRevalidator(); // For reloading data after modal close
+  const [isKoskiStartModalOpen, setIsKoskiStartModalOpen] = React.useState(false);
 
   React.useEffect(() => {
     setRows(getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap));
@@ -84,13 +86,17 @@ const EducationHistory = () => {
     revalidator.revalidate();
   };
 
-  const importFromKoski = () => {
-    setKoskiModalOpen(true);
-  };
-
   const importFromKoskiOAuth = () => {
     const currentUrl = encodeURIComponent(window.location.href);
     window.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}`;
+  };
+
+  const openImportKoskiStartModal = () => {
+    setIsKoskiStartModalOpen(true);
+  };
+
+  const closeImportKoskiStartModal = () => {
+    setIsKoskiStartModalOpen(false);
   };
 
   return (
@@ -119,7 +125,7 @@ const EducationHistory = () => {
           <Button
             variant="white"
             label={t('education-history.import-education-history')}
-            onClick={importFromKoskiOAuth}
+            onClick={openImportKoskiStartModal}
           />
         </div>
       </div>
@@ -143,7 +149,7 @@ const EducationHistory = () => {
         <Button
           variant="white"
           label={t('education-history.import-education-history-link')}
-          onClick={importFromKoski}
+          onClick={openImportKoskiStartModal}
         />
       </div>
       <ImportKoskiModal
@@ -153,6 +159,11 @@ const EducationHistory = () => {
           revalidator.revalidate();
         }}
         setKoskiModalOpen={setKoskiModalOpen}
+      />
+      <ImportKoskiStartModal
+        isOpen={isKoskiStartModalOpen}
+        onClose={closeImportKoskiStartModal}
+        onClickImport={importFromKoskiOAuth}
       />
     </MainLayout>
   );
