@@ -104,16 +104,25 @@ const EducationHistory = () => {
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-9 text-body-lg">{t('profile.education-history.description')}</p>
-      <ExperienceTable
-        mainColumnHeader={t('education-history.education-provider-or-education')}
-        addNewLabel={t('education-history.add-new-education')}
-        addNewNestedLabel={t('education-history.add-studies-to-this-education')}
-        rows={rows}
-        onAddClick={() => setIsWizardOpen(true)}
-        onRowClick={onRowClick}
-        onNestedRowClick={onNestedRowClick}
-        onAddNestedRowClick={onAddNestedRowClick}
-      />
+      <div className="flex space-x-4">
+        <ExperienceTable
+          mainColumnHeader={t('education-history.education-provider-or-education')}
+          addNewLabel={t('education-history.add-new-education')}
+          addNewNestedLabel={t('education-history.add-studies-to-this-education')}
+          rows={rows}
+          onAddClick={() => setIsWizardOpen(true)}
+          onRowClick={onRowClick}
+          onNestedRowClick={onNestedRowClick}
+          onAddNestedRowClick={onAddNestedRowClick}
+        />
+        <div className="mb-[84px]">
+          <Button
+            variant="white"
+            label={t('education-history.import-education-history')}
+            onClick={importFromKoskiOAuth}
+          />
+        </div>
+      </div>
       {isKoulutuskokonaisuusOpen && koulutuskokonaisuusId && (
         <EditKoulutuskokonaisuusModal
           isOpen={isKoulutuskokonaisuusOpen}
@@ -135,11 +144,6 @@ const EducationHistory = () => {
           variant="white"
           label={t('education-history.import-education-history-link')}
           onClick={importFromKoski}
-        />
-        <Button
-          variant="white"
-          label={t('education-history.import-education-history')}
-          onClick={importFromKoskiOAuth}
         />
       </div>
       <ImportKoskiModal
