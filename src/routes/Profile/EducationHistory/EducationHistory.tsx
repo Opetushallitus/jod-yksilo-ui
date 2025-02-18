@@ -89,11 +89,6 @@ const EducationHistory = () => {
     revalidator.revalidate();
   };
 
-  const importFromKoskiOAuth = () => {
-    const currentUrl = encodeURIComponent(window.location.href);
-    window.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}`;
-  };
-
   const openImportKoskiStartModal = () => {
     setIsKoskiStartModalOpen(true);
   };
@@ -198,11 +193,7 @@ const EducationHistory = () => {
         />
       )}
       {isWizardOpen && <EducationHistoryWizard isOpen={isWizardOpen} onClose={onCloseWizard} />}
-      <ImportKoskiStartModal
-        isOpen={isKoskiStartModalOpen}
-        onClose={closeImportKoskiStartModal}
-        onClickImport={importFromKoskiOAuth}
-      />
+      <ImportKoskiStartModal isOpen={isKoskiStartModalOpen} onClose={closeImportKoskiStartModal} />
       <ImportKoskiSummaryModal
         isOpen={isKoskiSummaryModalOpen}
         onClose={closeImportKoskiSummaryModal}
