@@ -3,7 +3,7 @@ import { components } from '@/api/schema';
 import { ExperienceTable } from '@/components';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { getEducationHistoryTableRows, Koulutus } from '@/routes/Profile/EducationHistory/utils.ts';
-import { Button, Modal } from '@jod/design-system';
+import { Button, Modal, Spinner } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -22,20 +22,28 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose }: ImportKoskiSummaryModalPro
   useEscHandler(onClose, modalId);
 
   React.useEffect(() => {
-    setIsFetching(true);
-    const exampleKoskiData = [
-      {
-        id: '1',
-        nimi: { fi: 'Esimerkki Koulutus', sv: '', en: '' },
-        kuvaus: { fi: 'Esimerkki Koulutuksen Kuvaus', sv: '', en: '' },
-        alkuPvm: '2020-01-01',
-        loppuPvm: '2021-01-01',
-        osaamiset: [],
-      },
-    ];
-    setKoskiData(exampleKoskiData);
-    setIsFetching(false);
+    if (isOpen) {
+      fetchAndSetEducationHistories();
+    }
   }, [isOpen]);
+
+  const fetchAndSetEducationHistories = async () => {
+    setIsFetching(true);
+    setKoskiData(undefined);
+    const { data, error } = await client.GET('/api/integraatiot/koski/koulutukset', {
+      params: { query: { jakolinkki: '' } },
+    });
+
+    if (error) {
+      setKoskiData(undefined);
+      setIsFetching(false);
+      return;
+    }
+
+    const d = data.map((k) => ({ id: `koski-${crypto.randomUUID()}`, ...k }));
+    setKoskiData(d);
+    setIsFetching(false);
+  };
 
   const convertKoskiDataToExperienceTableRows = (koskiData: components['schemas']['KoulutusDto'][] | undefined) => {
     const koulutusKokonaisuudet = new Map<string, Koulutus[]>();
@@ -124,10 +132,10 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose }: ImportKoskiSummaryModalPro
             <h3 className="mb-5 text-heading-2">{t('education-history-import.summary-modal.title')}</h3>
             <p className="mb-4">{t('education-history-import.summary-modal.description')}</p>
             {isFetching && (
-              <p className="flex items-center">
-                {/*<Spinner size={24} color="accent" />*/}
+              <div className="flex">
+                <Spinner className="mr-5 mb-5" size={24} color={'accent'} />
                 {t('education-history-import.summary-modal.data-loading')}
-              </p>
+              </div>
             )}
             {!isFetching && (
               <ExperienceTable
