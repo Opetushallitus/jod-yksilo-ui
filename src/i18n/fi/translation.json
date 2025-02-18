@@ -70,20 +70,6 @@
     "import-education-history-link": "Tuo tiedot Opintopolusta jakolinkkillä",
     "import-education-history": "Tuo koulutushistoriani"
   },
-  "education-import": {
-    "confirm-delete-education": "Oletko varma, että et halua lisätä tätä koulutusta/ tutkintoa omaan osaamisprofiiliisi?",
-    "confirm-delete-oppilaitos": "Oletko varma, että et halua lisätä tätä oppilaitosta ja siellä suoritettuja kolutuksia omaan osaamisprofiiliisi?",
-    "confirm-delete-title": "En halua lisätä tätä tietoa omaan osaamisprofiilini",
-    "data-header": "Opintopolusta löytyneet koulutukset",
-    "data-hint": "Käy luomassa Opintopolku-palvelussa jakolinkki ja liitä se tälle sivulle.",
-    "data-info": "Voit poistaa listasta ne koulutukset, joita et halua tuoda omaan osaamisprofiiliisi.",
-    "data-load-failed": "Tietojen lataaminen epäonnistui",
-    "data-load-retry": "Yritä uudelleen",
-    "data-loading": "Ladataan tietoja opintopolusta...",
-    "education-or-degree": "Oppilaitos / tutkinto",
-    "invalid-share-link": "Tarkasta opintopolun jakolinkki",
-    "share-link": "Opintopolun jakolinkki"
-  },
   "education-history-import": {
     "start-modal": {
       "title": "Tuo koulutushistoriasi Koski-palvelusta",
@@ -97,7 +83,7 @@
       "table-began": "Alkoi,",
       "table-ended": "Loppui",
       "table-checkbox": "Tuo valitut",
-      "data-load-failed": "Tietojen lataaminen epäonnistui",
+      "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
       "data-load-retry": "Yritä uudelleen",
       "data-loading": "Ladataan tietoja opintopolusta..."
     },
