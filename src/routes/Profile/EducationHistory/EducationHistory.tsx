@@ -166,38 +166,6 @@ const EducationHistory = () => {
             onClick={openImportKoskiStartModal}
           />
         </div>
-
-        <div>
-          <Button
-            variant="white"
-            size="sm"
-            label="Test summary"
-            onClick={() => {
-              openImportKoskiSummaryModal();
-            }}
-          />
-        </div>
-
-        <div>
-          <Button
-            variant="white"
-            size="sm"
-            label="Test Failure"
-            onClick={() => {
-              setTimeout(() => openImportKoskiResultModal(false), 0);
-            }}
-          />
-        </div>
-        <div>
-          <Button
-            variant="white"
-            size="sm"
-            label="Test Success"
-            onClick={() => {
-              openImportKoskiResultModal(true);
-            }}
-          />
-        </div>
       </div>
       {isKoulutuskokonaisuusOpen && koulutuskokonaisuusId && (
         <EditKoulutuskokonaisuusModal
