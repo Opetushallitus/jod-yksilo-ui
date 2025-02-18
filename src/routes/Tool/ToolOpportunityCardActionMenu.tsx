@@ -28,7 +28,7 @@ const ToolOpportunityCardActionMenu = ({
           hash: t('job-opportunity.competences.title'),
         }
       : {
-          pathname: `/${language}/${t('slugs.education-opportunity.index')}/${mahdollisuusId}/${t('slugs.education-opportunity.overview')}`,
+          pathname: `/${language}/${t('slugs.education-opportunity.index')}/${mahdollisuusId}`,
           hash: t('education-opportunity.competences.route'),
         };
 
