@@ -10,10 +10,11 @@ import { useTranslation } from 'react-i18next';
 interface ImportKoskiSummaryModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: () => void;
+  onSuccessful: () => void;
+  onFailure: () => void;
 }
 
-const ImportKoskiSummaryModal = ({ isOpen, onClose }: ImportKoskiSummaryModalProps) => {
+const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: ImportKoskiSummaryModalProps) => {
   const { t } = useTranslation();
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
   const [koskiData, setKoskiData] = React.useState<components['schemas']['KoulutusDto'][] | undefined>(undefined);
@@ -115,9 +116,10 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose }: ImportKoskiSummaryModalPro
           ),
       );
 
-      onClose();
+      onSuccessful();
     } catch (error) {
       console.error(error);
+      onFailure();
     }
   };
 

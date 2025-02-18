@@ -110,7 +110,8 @@ const EducationHistory = () => {
     setIsKoskiSummaryModalOpen(false);
   };
 
-  const openImportKoskiResultModal = () => {
+  const openImportKoskiResultModal = (result: boolean) => {
+    setIsKoskiImportSuccess(result);
     setIsKoskiResultModalOpen(true);
   };
 
@@ -126,8 +127,7 @@ const EducationHistory = () => {
       if (result === 'authorized') {
         openImportKoskiSummaryModal();
       } else if (queryParams.get('koski') === 'error') {
-        setIsKoskiImportSuccess(false);
-        openImportKoskiResultModal();
+        openImportKoskiResultModal(false);
       }
     }
   }, []); // Only run once after the page is loaded
@@ -184,8 +184,7 @@ const EducationHistory = () => {
             size="sm"
             label="Test Failure"
             onClick={() => {
-              setIsKoskiImportSuccess(false);
-              setTimeout(() => openImportKoskiResultModal(), 0);
+              setTimeout(() => openImportKoskiResultModal(false), 0);
             }}
           />
         </div>
@@ -195,8 +194,7 @@ const EducationHistory = () => {
             size="sm"
             label="Test Success"
             onClick={() => {
-              setIsKoskiImportSuccess(true);
-              openImportKoskiResultModal();
+              openImportKoskiResultModal(true);
             }}
           />
         </div>
@@ -221,8 +219,13 @@ const EducationHistory = () => {
       <ImportKoskiSummaryModal
         isOpen={isKoskiSummaryModalOpen}
         onClose={closeImportKoskiSummaryModal}
-        onSave={() => {
-          //ignore
+        onSuccessful={() => {
+          closeImportKoskiSummaryModal();
+          openImportKoskiResultModal(true);
+        }}
+        onFailure={() => {
+          closeImportKoskiSummaryModal();
+          openImportKoskiResultModal(false);
         }}
       />
       <ImportKoskiResultModal
