@@ -19,6 +19,11 @@ import ImportKoskiResultModal from './modals/ImportKoskiResultModal.tsx';
 import ImportKoskiStartModal from './modals/ImportKoskiStartModal';
 import { getEducationHistoryTableRows, Koulutuskokonaisuus } from './utils';
 
+const removeAllQueryParameters = () => {
+  const newUrl = `${location.pathname}`;
+  history.replaceState(null, '', newUrl);
+};
+
 const EducationHistory = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const { koulutuskokonaisuudet, osaamisetMap } = useLoaderData() as {
@@ -112,6 +117,20 @@ const EducationHistory = () => {
   const closeImportKoskiResultModal = () => {
     setIsKoskiResultModalOpen(false);
   };
+
+  React.useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const result = queryParams.get('koski');
+    if (result) {
+      removeAllQueryParameters();
+      if (result === 'authorized') {
+        openImportKoskiSummaryModal();
+      } else if (queryParams.get('koski') === 'error') {
+        setIsKoskiImportSuccess(false);
+        openImportKoskiResultModal();
+      }
+    }
+  }, []); // Only run once after the page is loaded
 
   return (
     <MainLayout
