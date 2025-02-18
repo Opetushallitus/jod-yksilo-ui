@@ -18,6 +18,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
   const { t } = useTranslation();
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
   const [koskiData, setKoskiData] = React.useState<components['schemas']['KoulutusDto'][] | undefined>(undefined);
+  const [error, setError] = React.useState<Error | undefined>(undefined);
 
   const modalId = React.useId();
   useEscHandler(onClose, modalId);
@@ -31,13 +32,12 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
   const fetchAndSetEducationHistories = async () => {
     setIsFetching(true);
     setKoskiData(undefined);
-    const { data, error } = await client.GET('/api/integraatiot/koski/koulutukset', {
-      params: { query: { jakolinkki: '' } },
-    });
+    const { data, error } = await client.GET('/api/integraatiot/koski/koulutukset', {});
 
     if (error) {
       setKoskiData(undefined);
       setIsFetching(false);
+      setError(error);
       return;
     }
 
@@ -117,8 +117,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
       );
 
       onSuccessful();
-    } catch (error) {
-      console.error(error);
+    } catch (_error) {
       onFailure();
     }
   };
@@ -133,6 +132,9 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
           <div className="text-left">
             <h3 className="mb-5 text-heading-2">{t('education-history-import.summary-modal.title')}</h3>
             <p className="mb-4">{t('education-history-import.summary-modal.description')}</p>
+            {!isFetching && error && (
+              <p className="text-alert-text">{t('education-history-import.summary-modal.data-load-failed')}</p>
+            )}
             {isFetching && (
               <div className="flex">
                 <Spinner className="mr-5 mb-5" size={24} color={'accent'} />
