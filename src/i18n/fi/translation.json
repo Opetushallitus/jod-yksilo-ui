@@ -96,7 +96,10 @@
       "table-education": "Koulutukseni järjestäjä / koulutus",
       "table-began": "Alkoi,",
       "table-ended": "Loppui",
-      "table-checkbox": "Tuo valitut"
+      "table-checkbox": "Tuo valitut",
+      "data-load-failed": "Tietojen lataaminen epäonnistui",
+      "data-load-retry": "Yritä uudelleen",
+      "data-loading": "Ladataan tietoja opintopolusta..."
     },
     "result-modal": {
       "success": "Koulutus historia lisätty onnistuneesti.",
