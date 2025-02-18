@@ -1,4 +1,6 @@
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { Button, Modal } from '@jod/design-system';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface ImportKoskiStartModalProps {
@@ -10,13 +12,16 @@ interface ImportKoskiStartModalProps {
 const ImportKoskiStartModal = ({ isOpen, onClose, onClickImport }: ImportKoskiStartModalProps) => {
   const { t } = useTranslation();
 
+  const modalId = React.useId();
+  useEscHandler(onClose, modalId);
+
   if (!isOpen) return null;
 
   return (
     <Modal
       open={isOpen}
       content={
-        <div className="flex flex-col items-center">
+        <div id={modalId} className="flex flex-col items-center">
           <div className="text-left">
             <h3 className="mb-5 text-heading-2">{t('education-history-import.start-modal.title')}</h3>
             <p className="mb-4">{t('education-history-import.start-modal.description')}</p>

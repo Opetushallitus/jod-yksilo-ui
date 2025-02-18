@@ -1,4 +1,6 @@
+import { useEscHandler } from '@/hooks/useEscHandler';
 import { Button, Modal } from '@jod/design-system';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdCheckCircleOutline, MdClear } from 'react-icons/md';
 
@@ -11,13 +13,16 @@ interface ImportKoskiResultModalProps {
 const ImportKoskiResultModal = ({ isOpen, onClose, isSuccess }: ImportKoskiResultModalProps) => {
   const { t } = useTranslation();
 
+  const modalId = React.useId();
+  useEscHandler(onClose, modalId);
+
   if (!isOpen) return null;
 
   return (
     <Modal
       open={isOpen}
       content={
-        <div className="flex flex-col items-center justify-center h-full w-full text-center">
+        <div id={modalId} className="flex flex-col items-center justify-center h-full w-full text-center">
           {isSuccess ? (
             <>
               <MdCheckCircleOutline className="text-heading-1 text-success" />
