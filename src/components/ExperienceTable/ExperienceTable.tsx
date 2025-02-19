@@ -19,6 +19,8 @@ interface ExperienceTableProps {
   confirmRowDescription?: string;
   confirmSubRowDescription?: string;
   actionLabel?: string;
+  showCheckbox?: boolean;
+  checkboxColumnHeader?: string;
 }
 
 export const ExperienceTable = ({
@@ -37,6 +39,8 @@ export const ExperienceTable = ({
   confirmRowDescription,
   confirmSubRowDescription,
   actionLabel,
+  showCheckbox,
+  checkboxColumnHeader,
 }: ExperienceTableProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
@@ -66,6 +70,11 @@ export const ExperienceTable = ({
                       {t('competences')}
                     </th>
                   )}
+                  {showCheckbox && (
+                    <th scope="col" className="pr-5 pb-3">
+                      {checkboxColumnHeader}
+                    </th>
+                  )}
                 </>
               )}
             </tr>
@@ -84,6 +93,7 @@ export const ExperienceTable = ({
                   confirmTitle={confirmTitle}
                   confirmDescription={confirmRowDescription}
                   actionLabel={actionLabel}
+                  showCheckbox={showCheckbox}
                 />
                 {row.subrows?.map((subrow, i) => (
                   <ExperienceTableRow
@@ -99,6 +109,7 @@ export const ExperienceTable = ({
                     confirmTitle={confirmTitle}
                     confirmDescription={confirmSubRowDescription}
                     actionLabel={actionLabel}
+                    showCheckbox={showCheckbox}
                   />
                 ))}
                 {onAddNestedRowClick && addNewNestedLabel && (
@@ -137,6 +148,7 @@ export const ExperienceTable = ({
                 confirmTitle={confirmTitle}
                 confirmDescription={confirmRowDescription}
                 actionLabel={actionLabel}
+                showCheckbox={showCheckbox}
               />
             ))}
           </tbody>

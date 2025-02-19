@@ -151,6 +151,8 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
                 mainColumnHeader={t('education-history.education-provider-or-education')}
                 rows={convertKoskiDataToExperienceTableRows(koskiData)}
                 hideOsaamiset
+                showCheckbox={true}
+                checkboxColumnHeader={t('education-history-import.summary-modal.table-header-checkbox')}
               />
             )}
           </div>

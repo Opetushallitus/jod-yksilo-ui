@@ -82,7 +82,7 @@
       "table-education": "Koulutukseni järjestäjä / koulutus",
       "table-began": "Alkoi,",
       "table-ended": "Loppui",
-      "table-checkbox": "Tuo valitut",
+      "table-header-checkbox": "Tuo valitut",
       "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
       "data-load-retry": "Yritä uudelleen",
       "data-loading": "Ladataan tietoja opintopolusta..."
