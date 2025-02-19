@@ -123,10 +123,9 @@ export const ExperienceTableRow = ({
         name={`checkbox-${row.key}`}
         value={row.key}
         checked={row?.checked ?? true}
-        onChange={(event) => {
-          if (onRowClick) {
-            onRowClick({ ...row, checked: event.target.checked });
-          }
+        onChange={(e) => {
+          row.checked = e.target.checked;
+          setIsOpen((prev) => !prev); // Ensure state rerenders
         }}
         ariaLabel="Select row"
         variant={'bordered'}
