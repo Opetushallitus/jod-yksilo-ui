@@ -129,6 +129,7 @@ export const ExperienceTableRow = ({
           }
         }}
         ariaLabel="Select row"
+        variant={'bordered'}
       />
     );
   }
