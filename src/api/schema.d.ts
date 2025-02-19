@@ -622,7 +622,6 @@ export interface components {
       /** Format: date */
       loppuPvm?: string;
       osaamiset?: string[];
-      checked?: boolean;
     };
     ToimintoDto: {
       /** Format: uuid */

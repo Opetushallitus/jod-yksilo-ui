@@ -1,6 +1,6 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
-import { ExperienceTable } from '@/components';
+import { ExperienceTable, ExperienceTableRowData } from '@/components';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { getEducationHistoryTableRows, Koulutus } from '@/routes/Profile/EducationHistory/utils.ts';
 import { Button, Modal, Spinner } from '@jod/design-system';
@@ -19,6 +19,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
   const [koskiData, setKoskiData] = React.useState<components['schemas']['KoulutusDto'][] | undefined>(undefined);
   const [error, setError] = React.useState<Error | undefined>(undefined);
+  const [tableRows, setTableRows] = React.useState<ExperienceTableRowData[]>([]);
 
   const modalId = React.useId();
   useEscHandler(onClose, modalId);
@@ -27,6 +28,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
     if (isOpen) {
       fetchAndSetEducationHistories();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const fetchAndSetEducationHistories = async () => {
@@ -36,12 +38,14 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
 
     if (error) {
       setKoskiData(undefined);
+      setTableRows([]);
       setIsFetching(false);
       setError(error);
       return;
     }
 
-    setKoskiData(data.map((k) => ({ id: `koski-${crypto.randomUUID()}`, checked: true, ...k })));
+    setKoskiData(data.map((k) => ({ id: `koski-${crypto.randomUUID()}`, ...k })));
+    setTableRows(convertKoskiDataToExperienceTableRows(data));
     setIsFetching(false);
   };
 
@@ -55,6 +59,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
         alkuPvm: k.alkuPvm,
         loppuPvm: k.loppuPvm,
         osaamiset: [],
+        checked: true,
       };
       if (koulutusKokonaisuudet.has(key)) {
         koulutusKokonaisuudet.get(key)?.push(koulutus);
@@ -74,6 +79,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
           alkuPvm: koulutus.alkuPvm,
           loppuPvm: koulutus.loppuPvm,
           osaamiset: koulutus.osaamiset,
+          checked: true,
         })),
       }));
     return getEducationHistoryTableRows(koulutuskokonaisuudet);
@@ -106,6 +112,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
   const saveSelectedKoulutus = async () => {
     const koulutusKokonaisuudet = createKoulutusKokonaisuudet(koskiData);
 
+    //TODO: Filter out all that is not checked.
     try {
       const requests = [];
       for (const [jsonNimi, koulutukset] of koulutusKokonaisuudet) {
@@ -148,7 +155,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
             {!isFetching && (
               <ExperienceTable
                 mainColumnHeader={t('education-history.education-provider-or-education')}
-                rows={convertKoskiDataToExperienceTableRows(koskiData)}
+                rows={tableRows}
                 hideOsaamiset
                 showCheckbox={true}
                 checkboxColumnHeader={t('education-history-import.summary-modal.table-header-checkbox')}
