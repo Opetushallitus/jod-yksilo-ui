@@ -41,8 +41,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
       return;
     }
 
-    const d = data.map((k) => ({ id: `koski-${crypto.randomUUID()}`, ...k }));
-    setKoskiData(d);
+    setKoskiData(data.map((k) => ({ id: `koski-${crypto.randomUUID()}`, checked: true, ...k })));
     setIsFetching(false);
   };
 
