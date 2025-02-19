@@ -80,44 +80,49 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
     return getEducationHistoryTableRows(koulutuskokonaisuudet);
   };
 
-  const saveSelectedKoulutus = async () => {
-    const koulutusKokonaisuudet = new Map<string, Koulutus[]>();
-    koskiData?.forEach((k) => {
-      const key = JSON.stringify(k.nimi);
-      const koulutus = {
-        nimi: k.kuvaus as Record<string, string>,
-        alkuPvm: k.alkuPvm,
-        loppuPvm: k.loppuPvm,
-        osaamiset: [],
-      };
-      if (koulutusKokonaisuudet.has(key)) {
-        koulutusKokonaisuudet.get(key)?.push(koulutus);
-      } else {
-        koulutusKokonaisuudet.set(key, [koulutus]);
-      }
-    });
-    const entries = Array.from(koulutusKokonaisuudet);
-    try {
-      await Promise.all(
-        entries
-          .map((entry) => ({ nimi: entry[0], koulutukset: entry[1] }))
-          .map((o) =>
-            client.POST('/api/profiili/koulutuskokonaisuudet', {
-              body: {
-                nimi: JSON.parse(o.nimi) as Record<string, string>,
-                koulutukset: o.koulutukset.map((koulutus) => ({
-                  nimi: koulutus.nimi,
-                  alkuPvm: koulutus.alkuPvm,
-                  loppuPvm: koulutus.loppuPvm,
-                  osaamiset: koulutus.osaamiset,
-                })),
-              },
-            }),
-          ),
-      );
+  const createKoulutus = (data: components['schemas']['KoulutusDto']): Koulutus => ({
+    nimi: data.kuvaus as Record<string, string>,
+    alkuPvm: data.alkuPvm,
+    loppuPvm: data.loppuPvm,
+    osaamiset: [],
+  });
 
+  const createKoulutusKokonaisuudet = (koskiData: components['schemas']['KoulutusDto'][] | undefined) => {
+    const koulutusKokonaisuudet = new Map<string, Koulutus[]>();
+
+    koskiData?.forEach((data) => {
+      const key = JSON.stringify(data.nimi);
+      const koulutus = createKoulutus(data);
+
+      if (!koulutusKokonaisuudet.has(key)) {
+        koulutusKokonaisuudet.set(key, []);
+      }
+
+      koulutusKokonaisuudet.get(key)?.push(koulutus);
+    });
+
+    return koulutusKokonaisuudet;
+  };
+
+  const saveSelectedKoulutus = async () => {
+    const koulutusKokonaisuudet = createKoulutusKokonaisuudet(koskiData);
+
+    try {
+      const requests = [];
+      for (const [jsonNimi, koulutukset] of koulutusKokonaisuudet) {
+        requests.push(
+          client.POST('/api/profiili/koulutuskokonaisuudet', {
+            body: {
+              nimi: JSON.parse(jsonNimi) as Record<string, string>,
+              koulutukset,
+            },
+          }),
+        );
+      }
+
+      await Promise.all(requests);
       onSuccessful();
-    } catch (_error) {
+    } catch (_) {
       onFailure();
     }
   };
