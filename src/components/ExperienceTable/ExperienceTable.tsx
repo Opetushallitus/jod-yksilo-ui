@@ -82,6 +82,11 @@ export const ExperienceTable = ({
           <tbody>
             {categorizedRows.map((row, index) => (
               <React.Fragment key={row.key}>
+                {index > 0 && showCheckbox && (
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                )}
                 <ExperienceTableRow
                   key={row.key}
                   row={row}
