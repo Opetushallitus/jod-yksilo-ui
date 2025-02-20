@@ -22,18 +22,23 @@ const ImportKoskiResultModal = ({ isOpen, onClose, isSuccess }: ImportKoskiResul
     <Modal
       open={isOpen}
       content={
-        <div id={modalId} className="flex flex-col items-center justify-center h-full w-full text-center">
-          {isSuccess ? (
-            <>
-              <MdCheckCircleOutline className="text-heading-1 text-success" />
-              <h3 className="mb-5 text-heading-2">{t('education-history-import.result-modal.success')}</h3>
-            </>
-          ) : (
-            <>
-              <MdClear className="text-heading-1 text-alert-text" />
-              <h3 className="mb-5 text-heading-2">{t('education-history-import.result-modal.failure')}</h3>
-            </>
-          )}
+        <div
+          id={modalId}
+          className="fixed inset-0 flex items-center justify-center overflow-y-hidden pointer-events-none"
+        >
+          <div className="flex flex-col items-center pointer-events-auto">
+            {isSuccess ? (
+              <>
+                <MdCheckCircleOutline className="text-heading-1 text-success" />
+                <h3 className="mb-5 text-heading-2">{t('education-history-import.result-modal.success')}</h3>
+              </>
+            ) : (
+              <>
+                <MdClear className="text-heading-1 text-alert-text" />
+                <h3 className="mb-5 text-heading-2">{t('education-history-import.result-modal.failure')}</h3>
+              </>
+            )}
+          </div>
         </div>
       }
       footer={
