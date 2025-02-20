@@ -85,7 +85,13 @@
       "table-header-checkbox": "Tuo valitut",
       "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
       "data-load-retry": "Yritä uudelleen",
-      "data-loading": "Ladataan tietoja opintopolusta..."
+      "data-loading": "Ladataan tietoja opintopolusta...",
+      "cancel-modal": {
+        "title": "Peruuta tuonti",
+        "description": "Haluatko varmasti keskeyttää opintosuoritustesi tuonnin Opintopolusta.",
+        "confirm-button": "Kyllä",
+        "cancel-button": "Peruuta"
+      }
     },
     "result-modal": {
       "success": "Koulutus historia lisätty onnistuneesti.",

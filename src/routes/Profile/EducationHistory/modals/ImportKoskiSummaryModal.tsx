@@ -3,7 +3,7 @@ import { components } from '@/api/schema';
 import { ExperienceTable, ExperienceTableRowData } from '@/components';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { getEducationHistoryTableRows, Koulutus } from '@/routes/Profile/EducationHistory/utils.ts';
-import { Button, Modal, Spinner } from '@jod/design-system';
+import { Button, ConfirmDialog, Modal, Spinner } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -162,16 +162,27 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
               />
             )}
           </div>
-          <div className="sticky p-4 bottom-0 bg-bg-gray w-full">
-            Tähän kuvaus, että osaamisia lisätty opintoihin. TODO: OPHJOD-1306
-          </div>
+          {!isFetching && (
+            <div className="sticky p-4 bottom-0 bg-bg-gray w-full">
+              Tähän kuvaus, että osaamisia lisätty opintoihin. TODO: OPHJOD-1306
+            </div>
+          )}
         </div>
       }
       footer={
         <div className="flex flex-row justify-between">
           <div />
           <div className="flex flex-row justify-between gap-5">
-            <Button label={t('cancel')} variant="white" onClick={onClose} />
+            <ConfirmDialog
+              title={t('education-history-import.summary-modal.cancel-modal.title')}
+              onConfirm={onClose}
+              confirmText={t('education-history-import.summary-modal.cancel-modal.confirm-button')}
+              cancelText={t('education-history-import.summary-modal.cancel-modal.cancel-button')}
+              variant="destructive"
+              description={t('education-history-import.summary-modal.cancel-modal.description')}
+            >
+              {(showDialog: () => void) => <Button variant="white" label={t('cancel')} onClick={showDialog} />}
+            </ConfirmDialog>
             <Button label={t('save')} variant="white" disabled={!koskiData} onClick={saveSelectedKoulutus} />
           </div>
         </div>
