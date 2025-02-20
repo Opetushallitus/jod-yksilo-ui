@@ -189,9 +189,9 @@ export const ExperienceTableRow = ({
         )}
         {showCheckbox && <td>{renderCheckbox()}</td>}
       </tr>
-      {isOpen && (
-        <tr>
-          <td colSpan={5} className={`w-full ${last ? 'px-5 pt-5' : 'p-5'}`.trim()}>
+      <tr>
+        <td colSpan={5} className={`w-full ${last ? 'px-5 pt-5' : 'p-5'}`.trim()}>
+          {isOpen && (
             <div className="flex flex-wrap gap-3">
               {sortedCompetences.map((competence) => (
                 <Tag
@@ -203,9 +203,9 @@ export const ExperienceTableRow = ({
                 />
               ))}
             </div>
-          </td>
-        </tr>
-      )}
+          )}
+        </td>
+      </tr>
     </>
   ) : (
     <tr key={row.key} className={className}>
