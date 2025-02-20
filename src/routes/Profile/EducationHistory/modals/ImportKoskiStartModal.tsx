@@ -25,12 +25,15 @@ const ImportKoskiStartModal = ({ isOpen, onClose }: ImportKoskiStartModalProps) 
     <Modal
       open={isOpen}
       content={
-        <div id={modalId} className="flex flex-col items-center">
-          <div className="text-left">
+        <div
+          id={modalId}
+          className="flex flex-col items-center justify-center fixed inset-0 overflow-hidden pointer-events-none"
+        >
+          <div className="text-left max-w-lg">
             <h3 className="mb-5 text-heading-2">{t('education-history-import.start-modal.title')}</h3>
             <p className="mb-4">{t('education-history-import.start-modal.description')}</p>
           </div>
-          <div className="mt-4">
+          <div className="mt-4 pointer-events-auto">
             <Button
               variant="white"
               label={t('education-history-import.start-modal.import-button')}
