@@ -139,7 +139,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
     <Modal
       open={isOpen}
       content={
-        <div id={modalId} className="flex flex-col items-center">
+        <div id={modalId} className="flex flex-col">
           <div className="text-left">
             <h3 className="mb-5 text-heading-2">{t('education-history-import.summary-modal.title')}</h3>
             <p className="mb-4">{t('education-history-import.summary-modal.description')}</p>
@@ -161,6 +161,9 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
                 checkboxColumnHeader={t('education-history-import.summary-modal.table-header-checkbox')}
               />
             )}
+          </div>
+          <div className="sticky p-4 bottom-0 bg-bg-gray w-full">
+            Tähän kuvaus, että osaamisia lisätty opintoihin. TODO: OPHJOD-1306
           </div>
         </div>
       }
