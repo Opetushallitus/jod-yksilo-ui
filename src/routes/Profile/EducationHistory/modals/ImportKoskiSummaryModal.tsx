@@ -31,22 +31,30 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
+  const handleGetKoulutusDataFailure = (error: Error | undefined) => {
+    setKoskiData(undefined);
+    setTableRows([]);
+    setIsFetching(false);
+    setError(error);
+  };
+
   const fetchAndSetEducationHistories = async () => {
     setIsFetching(true);
     setKoskiData(undefined);
-    const { data, error } = await client.GET('/api/integraatiot/koski/koulutukset', {});
+    try {
+      const { data, error } = await client.GET('/api/integraatiot/koski/koulutukset', {});
 
-    if (error) {
-      setKoskiData(undefined);
-      setTableRows([]);
+      if (error) {
+        handleGetKoulutusDataFailure(error);
+        return;
+      }
+
+      setKoskiData(data.map((k) => ({ id: `koski-${crypto.randomUUID()}`, ...k })));
+      setTableRows(convertKoskiDataToExperienceTableRows(data));
       setIsFetching(false);
-      setError(error);
-      return;
+    } catch (_error) {
+      handleGetKoulutusDataFailure(error);
     }
-
-    setKoskiData(data.map((k) => ({ id: `koski-${crypto.randomUUID()}`, ...k })));
-    setTableRows(convertKoskiDataToExperienceTableRows(data));
-    setIsFetching(false);
   };
 
   const convertKoskiDataToExperienceTableRows = (koskiData: components['schemas']['KoulutusDto'][] | undefined) => {
@@ -162,7 +170,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
               />
             )}
           </div>
-          {!isFetching && (
+          {!isFetching && !error && (
             <div className="sticky p-4 bottom-0 bg-bg-gray w-full">
               Tähän kuvaus, että osaamisia lisätty opintoihin. TODO: OPHJOD-1306
             </div>
