@@ -80,8 +80,8 @@ export const ExperienceTableRow = ({
   const rowAction = (
     onRowClick: (row: ExperienceTableRowData) => void,
     row: ExperienceTableRowData,
-    useConfirm: boolean | undefined,
-    rowActionElement: React.ReactNode | undefined,
+    useConfirm?: boolean,
+    rowActionElement?: React.ReactNode,
     confirmTitle?: string,
     confirmDescription?: string,
     actionLabel?: string,
@@ -151,13 +151,15 @@ export const ExperienceTableRow = ({
                   <button
                     aria-label={t(isOpen ? 'close' : 'open')}
                     onClick={() => setIsOpen(!isOpen)}
-                    className="cursor-pointer flex gap-x-2 items-center text-nowrap"
+                    className="cursor-pointer flex gap-x-2 items-center text-nowrap pr-2"
                   >
                     {isOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
                     {osaamisetCountTotal}
                   </button>
                 ) : (
-                  <span className={`text-nowrap ${onRowClick ? 'pl-[28px]' : ''}`.trim()}>{osaamisetCountTotal}</span>
+                  <span className={`text-nowrap pr-2 ${onRowClick ? 'pl-[28px]' : ''}`.trim()}>
+                    {osaamisetCountTotal}
+                  </span>
                 )}
               </td>
             )}
@@ -212,7 +214,7 @@ export const ExperienceTableRow = ({
           {row.loppuPvm && <td className="text-body-md pr-7">{formatDate(row.loppuPvm)}</td>}
           {!hideOsaamiset && (
             <td className={`text-body-md text-nowrap ${onRowClick ? 'pr-7 pl-[28px]' : 'pr-5'.trim()}`}>
-              {osaamisetCountTotal}
+              <span className="pr-2">{osaamisetCountTotal}</span>
             </td>
           )}
         </>
