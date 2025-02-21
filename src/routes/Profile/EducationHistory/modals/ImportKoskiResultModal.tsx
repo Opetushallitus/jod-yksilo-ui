@@ -8,9 +8,10 @@ interface ImportKoskiResultModalProps {
   isOpen: boolean;
   onClose: () => void;
   isSuccess?: React.ReactNode;
+  errorText?: string;
 }
 
-const ImportKoskiResultModal = ({ isOpen, onClose, isSuccess }: ImportKoskiResultModalProps) => {
+const ImportKoskiResultModal = ({ isOpen, onClose, isSuccess, errorText }: ImportKoskiResultModalProps) => {
   const { t } = useTranslation();
 
   const modalId = React.useId();
@@ -35,7 +36,9 @@ const ImportKoskiResultModal = ({ isOpen, onClose, isSuccess }: ImportKoskiResul
             ) : (
               <>
                 <MdClear className="text-heading-1 text-alert-text" />
-                <h3 className="mb-5 text-heading-2">{t('education-history-import.result-modal.failure')}</h3>
+                <h3 className="mb-5 text-heading-2">
+                  {errorText ? `${errorText}. ` : t('education-history-import.result-modal.failure')}
+                </h3>
               </>
             )}
           </div>

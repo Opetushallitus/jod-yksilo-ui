@@ -86,6 +86,8 @@
       "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
       "data-load-retry": "Yritä uudelleen",
       "data-loading": "Ladataan tietoja opintopolusta...",
+      "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
+      "wrong-person": "Kirjaudu ulos ja takaisin sisään, ja yritä sitten uudelleen.",
       "cancel-modal": {
         "title": "Peruuta tuonti",
         "description": "Haluatko varmasti keskeyttää opintosuoritustesi tuonnin Opintopolusta.",
@@ -95,7 +97,8 @@
     },
     "result-modal": {
       "success": "Koulutus historia lisätty onnistuneesti.",
-      "failure": "Koulutus historia lisääminen epäonnistui."
+      "failure": "Koulutus historia lisääminen epäonnistui.",
+      "give-permission-failed": "Luvan antaminen epäonnistui. Yritä myöhemmin uudelleen."
     }
   },
   "education-opportunities": "Koulutusmahdollisuudet",

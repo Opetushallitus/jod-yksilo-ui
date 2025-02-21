@@ -52,6 +52,7 @@ const EducationHistory = () => {
   const [isKoskiStartModalOpen, setIsKoskiStartModalOpen] = React.useState(false);
   const [isKoskiSummaryModalOpen, setIsKoskiSummaryModalOpen] = React.useState(false);
   const [isKoskiResultModalOpen, setIsKoskiResultModalOpen] = React.useState(false);
+  const [importKoskiResultErrorText, setImportKoskiResultErrorText] = React.useState<string | undefined>(undefined);
   const [isKoskiImportSuccess, setIsKoskiImportSuccess] = React.useState(false);
 
   React.useEffect(() => {
@@ -95,6 +96,7 @@ const EducationHistory = () => {
   };
 
   const openImportKoskiStartModal = () => {
+    setImportKoskiResultErrorText(undefined);
     setIsKoskiStartModalOpen(true);
   };
 
@@ -127,6 +129,7 @@ const EducationHistory = () => {
       if (result === 'authorized') {
         openImportKoskiSummaryModal();
       } else if (queryParams.get('koski') === 'error') {
+        setImportKoskiResultErrorText('education-history-import.result-modal.give-permission-failed');
         openImportKoskiResultModal(false);
       }
     }
@@ -202,6 +205,7 @@ const EducationHistory = () => {
         isOpen={isKoskiResultModalOpen}
         onClose={closeImportKoskiResultModal}
         isSuccess={isKoskiImportSuccess}
+        errorText={importKoskiResultErrorText}
       />
     </MainLayout>
   );

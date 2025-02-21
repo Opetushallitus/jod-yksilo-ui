@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { ErrorResponse } from '@/api/middlewares/errorResponse';
 import { components } from '@/api/schema';
 import { ExperienceTable, ExperienceTableRowData } from '@/components';
 import { useEscHandler } from '@/hooks/useEscHandler';
@@ -34,13 +35,13 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
   const handleGetKoulutusDataFailure = (error: Error | undefined) => {
     setKoskiData(undefined);
     setTableRows([]);
-    setIsFetching(false);
     setError(error);
   };
 
   const fetchAndSetEducationHistories = async () => {
     setIsFetching(true);
     setKoskiData(undefined);
+    setError(undefined);
     try {
       const { data, error } = await client.GET('/api/integraatiot/koski/koulutukset', {});
 
@@ -51,9 +52,10 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
 
       setKoskiData(data.map((k) => ({ id: `koski-${crypto.randomUUID()}`, ...k })));
       setTableRows(convertKoskiDataToExperienceTableRows(data));
-      setIsFetching(false);
     } catch (_error) {
       handleGetKoulutusDataFailure(error);
+    } finally {
+      setIsFetching(false);
     }
   };
 
@@ -169,6 +171,25 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
 
   if (!isOpen) return null;
 
+  const renderErrorMessage = () => {
+    return (
+      <>
+        {(() => {
+          const errorResponse = error as unknown as ErrorResponse;
+          if (errorResponse) {
+            if (errorResponse.errorCode === 'DATA_NOT_FOUND') {
+              return <p>{t('education-history-import.summary-modal.data-load-no-data')}</p>;
+            }
+            if (errorResponse.errorCode === 'WRONG_PERSON') {
+              return <p>{t('education-history-import.summary-modal.wrong-person')}</p>;
+            }
+            return <p>{t('education-history-import.summary-modal.data-load-failed')}</p>;
+          }
+        })()}
+      </>
+    );
+  };
+
   return (
     <Modal
       open={isOpen}
@@ -177,14 +198,16 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
           <div className="text-left">
             <h3 className="mb-5 text-heading-2">{t('education-history-import.summary-modal.title')}</h3>
             <p className="mb-4">{t('education-history-import.summary-modal.description')}</p>
-            {!isFetching && error && (
-              <p className="text-alert-text">{t('education-history-import.summary-modal.data-load-failed')}</p>
-            )}
             {isFetching && (
               <div className="flex">
                 <Spinner className="mr-5 mb-5" size={24} color={'accent'} />
                 {t('education-history-import.summary-modal.data-loading')}
               </div>
+            )}
+            {!isFetching && error && (
+              <>
+                <div className="text-alert-text">{renderErrorMessage()}</div>
+              </>
             )}
             {!isFetching && (
               <ExperienceTable
@@ -207,16 +230,20 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
         <div className="flex flex-row justify-between">
           <div />
           <div className="flex flex-row justify-between gap-5">
-            <ConfirmDialog
-              title={t('education-history-import.summary-modal.cancel-modal.title')}
-              onConfirm={onClose}
-              confirmText={t('education-history-import.summary-modal.cancel-modal.confirm-button')}
-              cancelText={t('education-history-import.summary-modal.cancel-modal.cancel-button')}
-              variant="destructive"
-              description={t('education-history-import.summary-modal.cancel-modal.description')}
-            >
-              {(showDialog: () => void) => <Button variant="white" label={t('cancel')} onClick={showDialog} />}
-            </ConfirmDialog>
+            {error ? (
+              <Button label={t('cancel')} variant="white" onClick={onClose} />
+            ) : (
+              <ConfirmDialog
+                title={t('education-history-import.summary-modal.cancel-modal.title')}
+                onConfirm={onClose}
+                confirmText={t('education-history-import.summary-modal.cancel-modal.confirm-button')}
+                cancelText={t('education-history-import.summary-modal.cancel-modal.cancel-button')}
+                variant="destructive"
+                description={t('education-history-import.summary-modal.cancel-modal.description')}
+              >
+                {(showDialog: () => void) => <Button variant="white" label={t('cancel')} onClick={showDialog} />}
+              </ConfirmDialog>
+            )}
             <Button label={t('save')} variant="white" disabled={!koskiData} onClick={saveSelectedKoulutus} />
           </div>
         </div>
