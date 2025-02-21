@@ -183,12 +183,14 @@ const EducationHistory = () => {
         />
       )}
       {isWizardOpen && <EducationHistoryWizard isOpen={isWizardOpen} onClose={onCloseWizard} />}
+
       <ImportKoskiStartModal isOpen={isKoskiStartModalOpen} onClose={closeImportKoskiStartModal} />
       <ImportKoskiSummaryModal
         isOpen={isKoskiSummaryModalOpen}
         onClose={closeImportKoskiSummaryModal}
         onSuccessful={() => {
           closeImportKoskiSummaryModal();
+          revalidator.revalidate();
           openImportKoskiResultModal(true);
         }}
         onFailure={() => {
