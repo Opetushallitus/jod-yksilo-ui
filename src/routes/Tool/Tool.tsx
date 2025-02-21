@@ -129,7 +129,7 @@ const MyOwnData = () => {
           <p className="text-body-md-mobile sm:text-body-md mb-5 sm:mb-7">{t('tool.my-own-data.description')}</p>
 
           <div className="lg:sticky lg:top-[96px]">
-            <div role="tablist" aria-labelledby={titleId} className="flex text-button-sm select-none">
+            <div role="tablist" aria-labelledby={titleId} className="flex text-button-sm-mobile select-none">
               {tabs.map((tab, index) => (
                 <button
                   key={tab.text}
@@ -141,13 +141,10 @@ const MyOwnData = () => {
                   tabIndex={tab.active ? undefined : -1}
                   onKeyDown={(event) => onKeyDown(event, index)}
                   onClick={() => navigate(tab.to, { replace: true, preventScrollReset: true })}
-                  className={cx(
-                    `cursor-pointer w-full p-3 rounded-t text-center text-button-sm-mobile overflow-hidden`,
-                    {
-                      'bg-white': tab.active,
-                      'text-link': !tab.active,
-                    },
-                  )}
+                  className={cx(`cursor-pointer w-full p-3 rounded-t text-center overflow-hidden`, {
+                    'bg-white': tab.active,
+                    'text-link': !tab.active,
+                  })}
                 >
                   {tab.icon}
                   {tab.text}

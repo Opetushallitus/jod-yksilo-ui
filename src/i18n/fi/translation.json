@@ -66,9 +66,9 @@
     "educational-content": "Koulutuksen sisältö",
     "educational-institution-or-education-provider": "Oppilaitos tai koulutuksen järjestäjä",
     "identify-competences": "Tunnista osaamisia",
-    "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi",
+    "import-education-history": "Tuo tiedot Opintopolusta",
     "import-education-history-link": "Tuo tiedot Opintopolusta jakolinkkillä",
-    "import-education-history": "Tuo tiedot Opintopolusta"
+    "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi"
   },
   "education-import": {
     "confirm-delete-education": "Oletko varma, että et halua lisätä tätä koulutusta/ tutkintoa omaan osaamisprofiiliisi?",
@@ -361,6 +361,7 @@
       "title": "Tervetuloa! Luo oma osaamispolkusi ja hyödynnä monipuoliset palvelut"
     },
     "my-goals": {
+      "add-favorites-link": "Voit katsoa mahdollisuuksia ja lisätä niitä suosikiksi täältä",
       "add-favorites-to-goals": "Lisää suosikkeja päämääräksi",
       "add-modal-description": "Valitse alta sopiva koulutus- tai työmahdollisuussuosikkisi ja lisää se pitkän tai lyhyen aikavälin tai muuksi päämääräksi \"Lisää valintoja\"-valikosta.",
       "add-modal-title": "Valitse suosikkeja päämääräksi",
@@ -373,6 +374,7 @@
       "goal-description-placeholder": "Kuvaile tavoitettasi asettamasi päämäärän osalta",
       "long-term-goal": "Pitkän aikavälin päämäärä",
       "long-term-goal-description": "Pitkän aikavälin päämäärä on yleensä vuosia vievä tavoite, joka voi liittyä uraan tai henkilökohtaiseen kehitykseen, kuten johtotehtävään pääseminen tai tutkinnon hankkiminen.",
+      "no-favorites-selected": "Et ole lisännyt yhtään työ- tai koulutusmahdollisuutta suosikiksi.",
       "other-goals": "Muut päämäärät",
       "other-goals-description": "Tästä löydät muita asettamiasi päämääriä.",
       "set-long-term-goal": "Aseta pitkän aikavälin päämäärä",
@@ -381,8 +383,6 @@
       "short-term-goal": "Lyhyen aikavälin päämäärä",
       "short-term-goal-description": "Lyhyen aikavälin tavoite on lähitulevaisuudessa saavutettava päämäärä, joka voi liittyä esimerkiksi tietyn projektin loppuunsaattamiseen tai uuden taidon oppimiseen.",
       "show-filters": "Näytä suodattimet",
-      "no-favorites-selected": "Et ole lisännyt yhtään työ- tai koulutusmahdollisuutta suosikiksi.",
-      "add-favorites-link": "Voit katsoa mahdollisuuksia ja lisätä niitä suosikiksi täältä",
       "title": "Päämääräni"
     },
     "preferences": {
@@ -618,6 +618,7 @@
   "where-can-i-get-more-help": "Mistä saan lisää apua?",
   "who-is-the-service-for": "Kenelle palvelu on tarkoitettu?",
   "who-provides-the-service": "Kuka palvelun tarjoaa?",
+  "without-category": "{{header}} ilman kategoriaa",
   "wizard": {
     "completed": "Valmis",
     "current": "Nykyinen",
