@@ -75,8 +75,7 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
         koulutusKokonaisuudet.set(key, [koulutus]);
       }
     });
-    const entries = Array.from(koulutusKokonaisuudet);
-    const koulutuskokonaisuudet = entries
+    const koulutuskokonaisuudet = Array.from(koulutusKokonaisuudet)
       .map((entry) => ({ key: entry[0], koulutukset: entry[1] }))
       .map((o, i) => ({
         nimi: JSON.parse(o.key),
@@ -100,11 +99,37 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
     osaamiset: [],
   });
 
-  const createKoulutusKokonaisuudet = (koskiData: components['schemas']['KoulutusDto'][] | undefined) => {
+  const isChecked = (
+    key: string,
+    data: {
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      alkuPvm: string;
+      loppuPvm?: string;
+      osaamiset?: string[];
+    },
+  ) => {
+    const matchSchool = tableRows?.find((row) => JSON.stringify(row.nimi) === key);
+    if (!matchSchool) {
+      return false;
+    }
+    const matchEducation = matchSchool.subrows?.find((row) => JSON.stringify(row.nimi) === JSON.stringify(data.kuvaus));
+    if (!matchEducation) {
+      return false;
+    }
+    return matchEducation.checked;
+  };
+
+  const createKoulutusKokonaisuudet = () => {
     const koulutusKokonaisuudet = new Map<string, Koulutus[]>();
 
     koskiData?.forEach((data) => {
       const key = JSON.stringify(data.nimi);
+      if (!isChecked(key, data)) {
+        return;
+      }
+
       const koulutus = createKoulutus(data);
 
       if (!koulutusKokonaisuudet.has(key)) {
@@ -118,9 +143,10 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
   };
 
   const saveSelectedKoulutus = async () => {
-    const koulutusKokonaisuudet = createKoulutusKokonaisuudet(koskiData);
-
-    //TODO: Filter out all that is not checked.
+    const koulutusKokonaisuudet = createKoulutusKokonaisuudet();
+    if (koulutusKokonaisuudet.size === 0) {
+      onSuccessful();
+    }
     try {
       const requests = [];
       for (const [jsonNimi, koulutukset] of koulutusKokonaisuudet) {
