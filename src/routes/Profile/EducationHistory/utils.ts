@@ -51,6 +51,7 @@ export const getEducationHistoryTableRows = (
           : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
         sourceType: 'koulutus',
       })),
+      checked: true,
     };
 
     rows.push(rowData);
@@ -77,4 +78,5 @@ const mapKoulutusToRow = (
     ...(osaamisetMap ? osaamisetMap[id] : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
     sourceType: 'koulutus',
   })),
+  checked: true,
 });

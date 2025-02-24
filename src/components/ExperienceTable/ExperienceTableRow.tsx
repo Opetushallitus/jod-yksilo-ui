@@ -1,11 +1,12 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
-import { ConfirmDialog, Tag, useMediaQueries } from '@jod/design-system';
+import { Checkbox, ConfirmDialog, Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdEdit, MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 export interface ExperienceTableRowData {
+  checked?: boolean;
   key: string;
   nimi: Record<string, string>;
   alkuPvm: Date;
@@ -32,6 +33,7 @@ interface ExperienceTableRowProps {
   confirmTitle?: string;
   confirmDescription?: string;
   actionLabel?: string;
+  showCheckbox?: boolean;
 }
 
 const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData }) => {
@@ -60,6 +62,7 @@ export const ExperienceTableRow = ({
   confirmTitle,
   confirmDescription,
   actionLabel,
+  showCheckbox,
 }: ExperienceTableRowProps) => {
   const {
     t,
@@ -113,6 +116,22 @@ export const ExperienceTableRow = ({
       </ConfirmDialog>
     );
   };
+
+  function renderCheckbox() {
+    return (
+      <Checkbox
+        name={`checkbox-${row.key}`}
+        value={row.key}
+        checked={row?.checked ?? true}
+        onChange={(e) => {
+          row.checked = e.target.checked;
+          setIsOpen((prev) => !prev); // Ensure state rerenders
+        }}
+        ariaLabel="Select row"
+        variant={'bordered'}
+      />
+    );
+  }
 
   return nested ? (
     <>
@@ -168,9 +187,10 @@ export const ExperienceTableRow = ({
             {rowAction(onRowClick, row, useConfirm, rowActionElement, confirmTitle, confirmDescription, actionLabel)}
           </td>
         )}
+        {showCheckbox && <td>{renderCheckbox()}</td>}
       </tr>
-      {isOpen && (
-        <tr>
+      <tr>
+        {isOpen && showCheckbox && (
           <td colSpan={5} className={`w-full ${last ? 'px-5 pt-5' : 'p-5'}`.trim()}>
             <div className="flex flex-wrap gap-3">
               {sortedCompetences.map((competence) => (
@@ -184,8 +204,8 @@ export const ExperienceTableRow = ({
               ))}
             </div>
           </td>
-        </tr>
-      )}
+        )}
+      </tr>
     </>
   ) : (
     <tr key={row.key} className={className}>
@@ -222,6 +242,7 @@ export const ExperienceTableRow = ({
           {rowAction(onRowClick, row, useConfirm, rowActionElement, confirmTitle, confirmDescription, actionLabel)}
         </td>
       )}
+      {showCheckbox && <td>{renderCheckbox()}</td>}
     </tr>
   );
 };
