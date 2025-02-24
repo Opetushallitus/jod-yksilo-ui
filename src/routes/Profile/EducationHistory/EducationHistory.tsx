@@ -129,7 +129,7 @@ const EducationHistory = () => {
       if (result === 'authorized') {
         openImportSummaryModal();
       } else if (queryParams.get('koski') === 'error') {
-        setImportResultErrorText('education-history-import.result-modal.give-permission-failed');
+        setImportResultErrorText(t('education-history-import.result-modal.give-permission-failed'));
         openImportResultModal(false);
       }
     }
