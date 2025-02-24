@@ -7,7 +7,7 @@ import { MdCheckCircleOutline, MdClear } from 'react-icons/md';
 interface ImportKoulutusResultModalProps {
   isOpen: boolean;
   onClose: () => void;
-  isSuccess?: React.ReactNode;
+  isSuccess?: boolean;
   errorText?: string;
 }
 
@@ -37,7 +37,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
               <>
                 <MdClear className="text-heading-1 text-alert-text" />
                 <h3 className="mb-5 text-heading-2">
-                  {errorText ? `${errorText}. ` : t('education-history-import.result-modal.failure')}
+                  {errorText ?? t('education-history-import.result-modal.failure')}
                 </h3>
               </>
             )}
