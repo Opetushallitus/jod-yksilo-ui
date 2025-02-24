@@ -133,7 +133,7 @@ const EducationHistory = () => {
         openImportResultModal(false);
       }
     }
-  }, []); // Only run once after the page is loaded
+  }, [t]); // Only run once after the page is loaded
 
   return (
     <MainLayout
