@@ -9,7 +9,7 @@ interface ImportKoulutusStartModalProps {
 }
 
 const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [error, setError] = React.useState<Error | undefined>(undefined);
 
   const modalId = React.useId();
@@ -19,7 +19,7 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
     setError(undefined);
     try {
       const currentUrl = encodeURIComponent(window.location.href);
-      window.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}`;
+      window.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}&lang=${i18n.language}`;
     } catch (error) {
       if (error instanceof Error) {
         setError(error);
