@@ -38,7 +38,7 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
     setError(error);
   };
 
-  const fetchAndSetEducationHistories = async () => {
+  const fetchAndSetEducationHistories = React.useCallback(async () => {
     setIsFetching(true);
     setKoskiData(undefined);
     setError(undefined);
@@ -50,14 +50,14 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
         return;
       }
 
-      setKoskiData(data.map((k) => ({ id: `koski-${crypto.randomUUID()}`, ...k })));
+      setKoskiData(Array.isArray(data) ? data.map((k) => ({ id: `koski-${crypto.randomUUID()}`, ...k })) : []);
       setTableRows(convertKoskiDataToExperienceTableRows(data));
-    } catch (_error) {
-      handleGetKoulutusDataFailure(error);
+    } catch (err) {
+      handleGetKoulutusDataFailure(err as Error);
     } finally {
       setIsFetching(false);
     }
-  };
+  }, []);
 
   const convertKoskiDataToExperienceTableRows = (koskiData: components['schemas']['KoulutusDto'][] | undefined) => {
     const koulutusKokonaisuudet = new Map<string, Koulutus[]>();
