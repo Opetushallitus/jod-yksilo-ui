@@ -74,7 +74,8 @@
     "start-modal": {
       "title": "Tuo koulutushistoriasi Koski-palvelusta",
       "description": "Voit tuoda koulutushistoriasi palveluun, kun olet antanut luvan Opintopolussa. Paina \"Siirry Opintopolkuun\", niin voit myöntää luvan tietojen tuontiin. Luvan antamisen jälkeen palaat automaattisesti takaisin palveluun.",
-      "import-button": "Siirry Opintopolkuun"
+      "import-button": "Siirry Opintopolkuun",
+      "import-redirect-fail": "Siirtyminen Opintopolkuun epäonnistui. Yritä uudelleen."
     },
     "summary-modal": {
       "title": "Yhteenveto",

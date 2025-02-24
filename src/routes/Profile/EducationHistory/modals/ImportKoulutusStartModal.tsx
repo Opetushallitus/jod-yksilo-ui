@@ -10,13 +10,19 @@ interface ImportKoulutusStartModalProps {
 
 const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalProps) => {
   const { t } = useTranslation();
+  const [error, setError] = React.useState<Error | undefined>(undefined);
 
   const modalId = React.useId();
   useEscHandler(onClose, modalId);
 
   const triggerGivePermissionToImportKoulutusData = () => {
-    const currentUrl = encodeURIComponent(window.location.href);
-    window.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}`;
+    setError(undefined);
+    try {
+      const currentUrl = encodeURIComponent(window.location.href);
+      window.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}`;
+    } catch (error: Error | unknown) {
+      setError(error as Error);
+    }
   };
 
   if (!isOpen) return null;
@@ -40,6 +46,9 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
               onClick={triggerGivePermissionToImportKoulutusData}
             />
           </div>
+          {error && (
+            <p className="mt-4 text-alert-text">{t('education-history-import.start-modal.import-redirect-fail')}</p>
+          )}
         </div>
       }
       footer={
