@@ -204,11 +204,7 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
                 {t('education-history-import.summary-modal.data-loading')}
               </div>
             )}
-            {!isFetching && error && (
-              <>
-                <div className="text-alert-text">{renderErrorMessage()}</div>
-              </>
-            )}
+            {!isFetching && error && <div className="text-alert-text">{renderErrorMessage()}</div>}
             {!isFetching && (
               <ExperienceTable
                 mainColumnHeader={t('education-history.education-provider-or-education')}

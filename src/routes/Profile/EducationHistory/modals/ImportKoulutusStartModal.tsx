@@ -20,8 +20,12 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
     try {
       const currentUrl = encodeURIComponent(window.location.href);
       window.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}`;
-    } catch (error: Error | unknown) {
-      setError(error as Error);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error);
+      } else {
+        setError(new Error(String(error)));
+      }
     }
   };
 
