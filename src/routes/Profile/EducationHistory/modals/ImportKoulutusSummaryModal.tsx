@@ -8,14 +8,14 @@ import { Button, ConfirmDialog, Modal, Spinner } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface ImportKoskiSummaryModalProps {
+interface ImportKoulutusSummaryModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccessful: () => void;
   onFailure: () => void;
 }
 
-const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: ImportKoskiSummaryModalProps) => {
+const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: ImportKoulutusSummaryModalProps) => {
   const { t } = useTranslation();
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
   const [koskiData, setKoskiData] = React.useState<components['schemas']['KoulutusDto'][] | undefined>(undefined);
@@ -252,4 +252,4 @@ const ImportKoskiSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: I
   );
 };
 
-export default ImportKoskiSummaryModal;
+export default ImportKoulutusSummaryModal;

@@ -4,14 +4,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdCheckCircleOutline, MdClear } from 'react-icons/md';
 
-interface ImportKoskiResultModalProps {
+interface ImportKoulutusResultModalProps {
   isOpen: boolean;
   onClose: () => void;
   isSuccess?: React.ReactNode;
   errorText?: string;
 }
 
-const ImportKoskiResultModal = ({ isOpen, onClose, isSuccess, errorText }: ImportKoskiResultModalProps) => {
+const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: ImportKoulutusResultModalProps) => {
   const { t } = useTranslation();
 
   const modalId = React.useId();
@@ -54,4 +54,4 @@ const ImportKoskiResultModal = ({ isOpen, onClose, isSuccess, errorText }: Impor
   );
 };
 
-export default ImportKoskiResultModal;
+export default ImportKoulutusResultModal;

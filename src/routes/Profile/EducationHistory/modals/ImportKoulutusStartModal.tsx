@@ -3,18 +3,18 @@ import { Button, Modal } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface ImportKoskiStartModalProps {
+interface ImportKoulutusStartModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const ImportKoskiStartModal = ({ isOpen, onClose }: ImportKoskiStartModalProps) => {
+const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalProps) => {
   const { t } = useTranslation();
 
   const modalId = React.useId();
   useEscHandler(onClose, modalId);
 
-  const importFromKoskiOAuth = () => {
+  const triggerGivePermissionToImportKoulutusData = () => {
     const currentUrl = encodeURIComponent(window.location.href);
     window.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}`;
   };
@@ -37,7 +37,7 @@ const ImportKoskiStartModal = ({ isOpen, onClose }: ImportKoskiStartModalProps) 
             <Button
               variant="white"
               label={t('education-history-import.start-modal.import-button')}
-              onClick={importFromKoskiOAuth}
+              onClick={triggerGivePermissionToImportKoulutusData}
             />
           </div>
         </div>
@@ -52,4 +52,4 @@ const ImportKoskiStartModal = ({ isOpen, onClose }: ImportKoskiStartModalProps) 
   );
 };
 
-export default ImportKoskiStartModal;
+export default ImportKoulutusStartModal;
