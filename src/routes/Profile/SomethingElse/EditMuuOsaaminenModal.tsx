@@ -35,6 +35,8 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModalProps) 
         osaamiset: z.array(
           z.object({
             id: z.string().min(1),
+            nimi: z.object({}).catchall(z.string()),
+            kuvaus: z.object({}).catchall(z.string()),
           }),
         ),
       }),

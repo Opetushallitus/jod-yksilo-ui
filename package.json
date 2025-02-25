@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@hookform/error-message": "^2.0.1",
-    "@hookform/resolvers": "^3.10.0",
+    "@hookform/resolvers": "^4.1.2",
     "@jod/design-system": "github:Opetushallitus/jod-design-system#main",
     "i18next": "^24.2.2",
     "openapi-fetch": "^0.13.4",

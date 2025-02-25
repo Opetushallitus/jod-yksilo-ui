@@ -17,7 +17,7 @@ interface EditTyonantajaModalProps {
 }
 
 interface TyonantajaForm {
-  id: components['schemas']['TyopaikkaDto']['id'];
+  id?: components['schemas']['TyopaikkaDto']['id'];
   nimi: components['schemas']['LokalisoituTeksti'];
 }
 
@@ -35,7 +35,7 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
     mode: 'onBlur',
     resolver: zodResolver(
       z.object({
-        id: z.string().min(1),
+        id: z.string().optional(),
         nimi: z
           .object({})
           .catchall(

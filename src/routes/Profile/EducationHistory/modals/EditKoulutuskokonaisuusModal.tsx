@@ -17,7 +17,7 @@ interface EditKoulutuskokonaisuusModalProps {
 }
 
 interface KoulutuskokonaisuusForm {
-  id: components['schemas']['TyopaikkaDto']['id'];
+  id?: components['schemas']['TyopaikkaDto']['id'];
   nimi: components['schemas']['LokalisoituTeksti'];
 }
 
@@ -39,7 +39,7 @@ const EditKoulutuskokonaisuusModal = ({
     mode: 'onBlur',
     resolver: zodResolver(
       z.object({
-        id: z.string().min(1),
+        id: z.string().optional(),
         nimi: z
           .object({})
           .catchall(

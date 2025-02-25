@@ -7,7 +7,7 @@ export interface FreeTimeActivitiesForm {
     id?: string;
     nimi: components['schemas']['LokalisoituTeksti'];
     alkuPvm: string;
-    loppuPvm: string;
+    loppuPvm?: string;
     osaamiset: {
       id: string;
       nimi: components['schemas']['LokalisoituTeksti'];

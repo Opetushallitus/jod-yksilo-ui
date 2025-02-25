@@ -61,11 +61,12 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
               osaamiset: z.array(
                 z.object({
                   id: z.string().min(1),
+                  nimi: z.object({}).catchall(z.string()),
+                  kuvaus: z.object({}).catchall(z.string()),
                 }),
               ),
             })
-            .array()
-            .nonempty(),
+            .array(),
         })
         .refine((data) => data.koulutukset.length > 0) // At least one koulutus
         .refine(
