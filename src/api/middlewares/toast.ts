@@ -20,7 +20,7 @@ const ignoredOperations: Partial<Record<keyof paths, Method>> = {
 
 const showToast = (method: Method, response: Response) => {
   const suffix = response.ok ? 'success' : 'failed';
-  const toastFn = response.ok ? toast : toast.error;
+  const toastFn = response.ok ? toast.success : toast.error;
 
   switch (method) {
     case 'DELETE':

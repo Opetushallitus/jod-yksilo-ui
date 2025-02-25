@@ -1,10 +1,13 @@
 import { Toast } from '@jod/design-system';
-import { useToaster } from 'react-hot-toast/headless';
+import { Toast as ReactHotToast, useToaster } from 'react-hot-toast/headless';
 import { MdCheck, MdDangerous } from 'react-icons/md';
+
+type SafeToast = Omit<ReactHotToast, 'message'> & { message: string };
 
 export const Toaster = () => {
   const { toasts, handlers } = useToaster();
   const { startPause, endPause } = handlers;
+  const safeToasts = toasts.filter((toast): toast is SafeToast => typeof toast.message === 'string');
 
   return (
     <div
@@ -13,7 +16,7 @@ export const Toaster = () => {
       onMouseEnter={startPause}
       onMouseLeave={endPause}
     >
-      {toasts
+      {safeToasts
         .filter((toast) => toast.visible)
         .map((toast) => (
           <Toast
