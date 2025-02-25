@@ -12,17 +12,12 @@ import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals
 import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
+import { useLoaderData, useOutletContext, useRevalidator, useSearchParams } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
 import ImportKoulutusResultModal from './modals/ImportKoulutusResultModal.tsx';
 import ImportKoulutusStartModal from './modals/ImportKoulutusStartModal.tsx';
 import { getEducationHistoryTableRows, Koulutuskokonaisuus } from './utils';
-
-const removeAllQueryParameters = () => {
-  const newUrl = `${location.pathname}`;
-  history.replaceState(null, '', newUrl);
-};
 
 const EducationHistory = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
@@ -54,6 +49,7 @@ const EducationHistory = () => {
   const [isImportResultModalOpen, setIsImportResultModalOpen] = React.useState(false);
   const [importResultErrorText, setImportResultErrorText] = React.useState<string | undefined>(undefined);
   const [isImportSuccess, setIsImportSuccess] = React.useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   React.useEffect(() => {
     setRows(getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap));
@@ -122,18 +118,17 @@ const EducationHistory = () => {
   };
 
   React.useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const result = queryParams.get('koski');
+    const result = searchParams.get('koski');
     if (result) {
-      removeAllQueryParameters();
+      setSearchParams({});
       if (result === 'authorized') {
         openImportSummaryModal();
-      } else if (queryParams.get('koski') === 'error') {
+      } else if (result === 'error') {
         setImportResultErrorText(t('education-history-import.result-modal.give-permission-failed'));
         openImportResultModal(false);
       }
     }
-  }, [t]); // Only run once after the page is loaded
+  }, [searchParams, setSearchParams, t]); // Only run once after the page is loaded
 
   return (
     <MainLayout

@@ -117,7 +117,7 @@ export const ExperienceTableRow = ({
     );
   };
 
-  function renderCheckbox() {
+  const renderCheckbox = () => {
     return (
       <Checkbox
         name={`checkbox-${row.key}`}
@@ -127,11 +127,11 @@ export const ExperienceTableRow = ({
           row.checked = e.target.checked;
           setIsOpen((prev) => !prev); // Ensure state rerenders
         }}
-        ariaLabel="Select row"
-        variant={'bordered'}
+        ariaLabel=""
+        variant="bordered"
       />
     );
-  }
+  };
 
   return nested ? (
     <>
@@ -190,7 +190,7 @@ export const ExperienceTableRow = ({
         {showCheckbox && <td>{renderCheckbox()}</td>}
       </tr>
       <tr>
-        {isOpen && showCheckbox && (
+        {isOpen && !showCheckbox && (
           <td colSpan={5} className={`w-full ${last ? 'px-5 pt-5' : 'p-5'}`.trim()}>
             <div className="flex flex-wrap gap-3">
               {sortedCompetences.map((competence) => (

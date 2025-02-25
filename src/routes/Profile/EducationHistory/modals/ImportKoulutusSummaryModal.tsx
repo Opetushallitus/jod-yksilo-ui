@@ -1,5 +1,5 @@
 import { client } from '@/api/client';
-import { ErrorResponse } from '@/api/middlewares/errorResponse';
+import { ErrorResponse } from '@/api/errorResponse';
 import { components } from '@/api/schema';
 import { ExperienceTable, ExperienceTableRowData } from '@/components';
 import { useEscHandler } from '@/hooks/useEscHandler';
@@ -169,7 +169,9 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   const renderErrorMessage = () => {
     return (
@@ -216,15 +218,14 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
             )}
           </div>
           {!isFetching && !error && (
-            <div className="sticky p-4 bottom-0 bg-bg-gray w-full">
+            <div className="sticky p-4 bottom-0 bg-bg-gray w-full text-todo">
               Tähän kuvaus, että osaamisia lisätty opintoihin. TODO: OPHJOD-1306
             </div>
           )}
         </div>
       }
       footer={
-        <div className="flex flex-row justify-between">
-          <div />
+        <div className="flex flex-row justify-end">
           <div className="flex flex-row justify-between gap-5">
             {error ? (
               <Button label={t('cancel')} variant="white" onClick={onClose} />
@@ -232,8 +233,8 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
               <ConfirmDialog
                 title={t('education-history-import.summary-modal.cancel-modal.title')}
                 onConfirm={onClose}
-                confirmText={t('education-history-import.summary-modal.cancel-modal.confirm-button')}
-                cancelText={t('education-history-import.summary-modal.cancel-modal.cancel-button')}
+                confirmText={t('yes')}
+                cancelText={t('cancel')}
                 variant="destructive"
                 description={t('education-history-import.summary-modal.cancel-modal.description')}
               >

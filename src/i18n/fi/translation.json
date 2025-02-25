@@ -66,39 +66,35 @@
     "educational-content": "Koulutuksen sisältö",
     "educational-institution-or-education-provider": "Oppilaitos tai koulutuksen järjestäjä",
     "identify-competences": "Tunnista osaamisia",
-    "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi",
-    "import-education-history": "Tuo koulutushistoriani"
+    "import-education-history": "Tuo koulutushistoriani",
+    "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi"
   },
   "education-history-import": {
+    "result-modal": {
+      "failure": "Koulutus historia lisääminen epäonnistui.",
+      "give-permission-failed": "Luvan antaminen epäonnistui. Yritä myöhemmin uudelleen.",
+      "success": "Koulutus historia lisätty onnistuneesti."
+    },
     "start-modal": {
-      "title": "Tuo koulutushistoriasi Koski-palvelusta",
       "description": "Voit tuoda koulutushistoriasi palveluun, kun olet antanut luvan Opintopolussa. Paina \"Siirry Opintopolkuun\", niin voit myöntää luvan tietojen tuontiin. Luvan antamisen jälkeen palaat automaattisesti takaisin palveluun.",
       "import-button": "Siirry Opintopolkuun",
-      "import-redirect-fail": "Siirtyminen Opintopolkuun epäonnistui. Yritä uudelleen."
+      "import-redirect-fail": "Siirtyminen Opintopolkuun epäonnistui. Yritä uudelleen.",
+      "title": "Tuo koulutushistoriasi Koski-palvelusta"
     },
     "summary-modal": {
-      "title": "Yhteenveto",
-      "description": "Voit muokata koulutuksia tuotuasi ne osaamispolkuun osaamisprofiilissasi kohdassa koulutukset.",
-      "table-education": "Koulutukseni järjestäjä / koulutus",
-      "table-began": "Alkoi,",
-      "table-ended": "Loppui",
-      "table-header-checkbox": "Tuo valitut",
+      "cancel-modal": {
+        "description": "Haluatko varmasti keskeyttää opintosuoritustesi tuonnin Opintopolusta.",
+        "title": "Peruuta tuonti"
+      },
       "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
+      "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
       "data-load-retry": "Yritä uudelleen",
       "data-loading": "Ladataan tietoja opintopolusta...",
-      "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
-      "wrong-person": "Kirjaudu ulos ja takaisin sisään, ja yritä sitten uudelleen.",
-      "cancel-modal": {
-        "title": "Peruuta tuonti",
-        "description": "Haluatko varmasti keskeyttää opintosuoritustesi tuonnin Opintopolusta.",
-        "confirm-button": "Kyllä",
-        "cancel-button": "Peruuta"
-      }
-    },
-    "result-modal": {
-      "success": "Koulutus historia lisätty onnistuneesti.",
-      "failure": "Koulutus historia lisääminen epäonnistui.",
-      "give-permission-failed": "Luvan antaminen epäonnistui. Yritä myöhemmin uudelleen."
+      "description": "Voit muokata koulutuksia tuotuasi ne osaamispolkuun osaamisprofiilissasi kohdassa koulutukset.",
+      "table-education": "Koulutukseni järjestäjä / koulutus",
+      "table-header-checkbox": "Tuo valitut",
+      "title": "Yhteenveto",
+      "wrong-person": "Kirjaudu ulos ja takaisin sisään, ja yritä sitten uudelleen."
     }
   },
   "education-opportunities": "Koulutusmahdollisuudet",
@@ -378,6 +374,7 @@
       "title": "Tervetuloa! Luo oma osaamispolkusi ja hyödynnä monipuoliset palvelut"
     },
     "my-goals": {
+      "add-favorites-link": "Voit katsoa mahdollisuuksia ja lisätä niitä suosikiksi täältä",
       "add-favorites-to-goals": "Lisää suosikkeja päämääräksi",
       "add-modal-description": "Valitse alta sopiva koulutus- tai työmahdollisuussuosikkisi ja lisää se pitkän tai lyhyen aikavälin tai muuksi päämääräksi \"Lisää valintoja\"-valikosta.",
       "add-modal-title": "Valitse suosikkeja päämääräksi",
@@ -390,6 +387,7 @@
       "goal-description-placeholder": "Kuvaile tavoitettasi asettamasi päämäärän osalta",
       "long-term-goal": "Pitkän aikavälin päämäärä",
       "long-term-goal-description": "Pitkän aikavälin päämäärä on yleensä vuosia vievä tavoite, joka voi liittyä uraan tai henkilökohtaiseen kehitykseen, kuten johtotehtävään pääseminen tai tutkinnon hankkiminen.",
+      "no-favorites-selected": "Et ole lisännyt yhtään työ- tai koulutusmahdollisuutta suosikiksi.",
       "other-goals": "Muut päämäärät",
       "other-goals-description": "Tästä löydät muita asettamiasi päämääriä.",
       "set-long-term-goal": "Aseta pitkän aikavälin päämäärä",
@@ -398,8 +396,6 @@
       "short-term-goal": "Lyhyen aikavälin päämäärä",
       "short-term-goal-description": "Lyhyen aikavälin tavoite on lähitulevaisuudessa saavutettava päämäärä, joka voi liittyä esimerkiksi tietyn projektin loppuunsaattamiseen tai uuden taidon oppimiseen.",
       "show-filters": "Näytä suodattimet",
-      "no-favorites-selected": "Et ole lisännyt yhtään työ- tai koulutusmahdollisuutta suosikiksi.",
-      "add-favorites-link": "Voit katsoa mahdollisuuksia ja lisätä niitä suosikiksi täältä",
       "title": "Päämääräni"
     },
     "preferences": {
@@ -660,5 +656,6 @@
     "workplace-or-job-description": "Työpaikka / toimenkuva"
   },
   "workplace-competences": "Työpaikka osaamiset",
+  "yes": "Kyllä",
   "your-competences": "Oma osaamisesi"
 }

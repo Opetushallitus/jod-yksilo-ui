@@ -17,7 +17,9 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
   const modalId = React.useId();
   useEscHandler(onClose, modalId);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <Modal
@@ -45,8 +47,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
         </div>
       }
       footer={
-        <div className="flex flex-row justify-between gap-5">
-          <div />
+        <div className="flex flex-row justify-end">
           <Button label={t('close')} variant="white" onClick={onClose} />
         </div>
       }

@@ -29,7 +29,9 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <Modal
@@ -56,8 +58,7 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
         </div>
       }
       footer={
-        <div className="flex flex-row justify-between gap-5">
-          <div />
+        <div className="flex flex-row justify-end">
           <Button label={t('close')} variant="white" onClick={onClose} />
         </div>
       }
