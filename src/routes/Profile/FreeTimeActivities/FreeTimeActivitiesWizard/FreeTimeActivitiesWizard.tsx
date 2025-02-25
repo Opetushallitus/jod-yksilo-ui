@@ -59,11 +59,12 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
               osaamiset: z.array(
                 z.object({
                   id: z.string().min(1),
+                  nimi: z.object({}).catchall(z.string()),
+                  kuvaus: z.object({}).catchall(z.string()),
                 }),
               ),
             })
-            .array()
-            .nonempty(),
+            .array(),
         })
         .refine((data) => data.patevyydet.length > 0) // At least one patevyys
         .refine(

@@ -61,13 +61,14 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
               osaamiset: z.array(
                 z.object({
                   id: z.string().min(1),
+                  nimi: z.object({}).catchall(z.string()),
+                  kuvaus: z.object({}).catchall(z.string()),
                 }),
               ),
             })
-            .array()
-            .nonempty(formErrorMessage.required()),
+            .array(),
         })
-        .refine((data) => data.toimenkuvat.length > 0) // At least one toimenkuva
+        .refine((data) => data.toimenkuvat.length > 0, formErrorMessage.required()) // At least one toimenkuva
         .refine(
           (data) =>
             data.toimenkuvat.every((toimenkuva) =>

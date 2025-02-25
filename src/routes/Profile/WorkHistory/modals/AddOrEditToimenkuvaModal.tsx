@@ -31,7 +31,7 @@ interface ToimenkuvaForm {
   nimi: components['schemas']['LokalisoituTeksti'];
   kuvaus: components['schemas']['LokalisoituTeksti'];
   alkuPvm: string;
-  loppuPvm: string;
+  loppuPvm?: string;
   osaamiset: {
     id: string;
     nimi: components['schemas']['LokalisoituTeksti'];
@@ -183,6 +183,8 @@ const AddOrEditToimenkuvaModal = ({
           osaamiset: z.array(
             z.object({
               id: z.string().min(1),
+              nimi: z.object({}).catchall(z.string()),
+              kuvaus: z.object({}).catchall(z.string()),
             }),
           ),
         })

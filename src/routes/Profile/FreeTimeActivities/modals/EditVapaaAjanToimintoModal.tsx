@@ -17,7 +17,7 @@ interface EditVapaaAjanToimintoProps {
 }
 
 export interface VapaaAjanToimintoForm {
-  id: components['schemas']['ToimintoDto']['id'];
+  id?: components['schemas']['ToimintoDto']['id'];
   nimi: components['schemas']['LokalisoituTeksti'];
 }
 
@@ -35,7 +35,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
     mode: 'onBlur',
     resolver: zodResolver(
       z.object({
-        id: z.string().min(1),
+        id: z.string().optional(),
         nimi: z
           .object({})
           .catchall(
