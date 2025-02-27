@@ -28,6 +28,7 @@ import {
   TermsOfService,
 } from './BasicInformation';
 import { Home } from './Home';
+import { Introduction } from './Introduction';
 import { Favorites, LandingPage, Preferences, Profile, SomethingElse } from './Profile';
 import { EducationHistory } from './Profile/EducationHistory';
 import { FreeTimeActivities } from './Profile/FreeTimeActivities';
@@ -258,6 +259,12 @@ const basicInformationRoutes: RouteObject[] = supportedLanguageCodes.map((lng) =
   ],
 }));
 
+const introductionRoutes: RouteObject[] = supportedLanguageCodes.map((lng) => ({
+  id: `{slugs.introduction}|${lng}`,
+  path: i18n.t('slugs.introduction', { lng }),
+  element: <Introduction />,
+}));
+
 const rootRoute: RouteObject = {
   id: 'root',
   path: '/:lng',
@@ -276,6 +283,7 @@ const rootRoute: RouteObject = {
     ...userGuideRoutes,
     ...basicInformationRoutes,
     ...profileLandingPageRoutes,
+    ...introductionRoutes,
   ],
 };
 

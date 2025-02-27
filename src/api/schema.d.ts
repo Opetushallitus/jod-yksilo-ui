@@ -4,6 +4,22 @@
  */
 
 export interface paths {
+  '/api/profiili/yksilo': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['yksiloGet'];
+    put: operations['yksiloUpdate'];
+    post?: never;
+    delete: operations['yksiloDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/vapaa-ajan-toiminnot/{id}': {
     parameters: {
       query?: never;
@@ -417,22 +433,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/yksilo': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['yksiloGet'];
-    put?: never;
-    post?: never;
-    delete: operations['yksiloDelete'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/profiili/osaamiset': {
     parameters: {
       query?: never;
@@ -518,23 +518,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/integraatiot/koski/koulutukset': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get import data from Koski */
-    get: operations['integraatioGetKoskiData'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/integraatiot/koski': {
     parameters: {
       query?: never;
@@ -544,6 +527,23 @@ export interface paths {
     };
     /** Try to import data from koski link */
     get: operations['integraatioGetKoskiData'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/integraatiot/koski/koulutukset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get user's education's histories from Koski's opintopolku. */
+    get: operations['integraatioKoskiGetEducationsDataFromKoski'];
     put?: never;
     post?: never;
     delete?: never;
@@ -572,6 +572,9 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
+    YksiloDto: {
+      tervetuloapolku?: boolean;
+    };
     /** @example {
      *       "fi": "suomeksi",
      *       "sv": "på svenska"
@@ -755,6 +758,8 @@ export interface components {
       tehtavat?: components['schemas']['LokalisoituTeksti'];
       yleisetVaatimukset?: components['schemas']['LokalisoituTeksti'];
       ammattiryhma?: string;
+      /** @enum {string} */
+      aineisto?: 'TMT' | 'AMMATTITIETO';
       jakaumat?: {
         [key: string]: components['schemas']['JakaumaDto'];
       };
@@ -768,6 +773,7 @@ export interface components {
       etunimi?: string;
       sukunimi?: string;
       csrf: components['schemas']['CsrfTokenDto'];
+      tervetuloapolku?: boolean;
     };
     OsaaminenDto: {
       /** Format: uri */
@@ -878,6 +884,66 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+  yksiloGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['YksiloCsrfDto'];
+        };
+      };
+    };
+  };
+  yksiloUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['YksiloDto'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  yksiloDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   toimintoGet: {
     parameters: {
       query?: never;
@@ -1945,44 +2011,6 @@ export interface operations {
       };
     };
   };
-  yksiloGet: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['YksiloCsrfDto'];
-        };
-      };
-    };
-  };
-  yksiloDelete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
   yksilonOsaaminenFind: {
     parameters: {
       query?: {
@@ -2143,6 +2171,26 @@ export interface operations {
       query: {
         jakolinkki: string;
       };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['KoulutusDto'][];
+        };
+      };
+    };
+  };
+  integraatioKoskiGetEducationsDataFromKoski: {
+    parameters: {
+      query?: never;
       header?: never;
       path?: never;
       cookie?: never;
