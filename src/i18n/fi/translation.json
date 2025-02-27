@@ -164,6 +164,37 @@
   "interests": "Kiinnostukset",
   "interests-from-profile": "Osaamisprofiilista tuotu kiinnostukseni",
   "interests-of-your-choice": "Valitut kiinnostuksen kohteet",
+  "introduction": {
+    "step-1": {
+      "item-1": "Tunnista vahvuutesi ja kiinnostuksen kohteesi. Kaikki osaamiseesi ja kiinnostuksiisi liittyvät tiedot ovat nähtävillä yhdessä paikassa.",
+      "item-2": "Tallenna työ- ja koulutushistoriasi. Voit tuoda tietojasi myös muista palveluista, kuten Työmarkkinatorista ja Oma Opintopolusta.",
+      "item-3": "Löydä profiilisi perusteella työ- ja koulutusmahdollisuuksia, jotka sopivat juuri sinulle.",
+      "item-4": "Tallenna kiinnostavimmat ammatit sekä työ- ja koulutusvaihtoehdot suosikeiksi.",
+      "item-5": "Suunnittele koulutus- ja urapolkuasi, sekä seuraa edistymistäsi asettamasi päämäärän saavuttamiseen",
+      "text-1": "Kirjautuneena saat käyttöösi henkilökohtaisen osaamispolun, joka auttaa sinua hallinnoimaan ja hyödyntämään osaamistasi tehokkaasti.",
+      "text-2": "Teksin paikka...",
+      "title": "1. Tervetuloa luomaan Oma Osaamispolkusi!"
+    },
+    "step-2": {
+      "item-1": "Käytämme tietojasi vain anonymisoituna, jotta voimme luoda yleiskuvan käyttäjien tarpeista.",
+      "item-2": "Älä syötä henkilötietojasi tai arkaluontoisia tietoja palvelun tekstikenttiin.",
+      "item-3": "Tietojenkäsittelymme perustuu Lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta. Lisätietoja tietosuojaselosteestamme.",
+      "item-4": "Voit itse määritellä, miten ja missä tietojasi käytetään asetuksissa.",
+      "text-1": "Palvelun käyttö on vapaaehtoista ja turvallista. Käsittelemme tietojasi luottamuksellisesti ja lainmukaisesti.",
+      "text-2": "Teksin paikka...",
+      "title": "2. Hyvä tietää tietosuojastasi"
+    },
+    "step-3": {
+      "item-1": "Auttaa sinua tunnistamaan osaamistasi ja kiinnostuksen kohteitasi.",
+      "item-2": "Muodostaa kuvauksia eri lähteistä luotettavista lähteistä yhteen näkymään.",
+      "item-text": "Osaamispolussa tekoäly:",
+      "text-1": "Hyödynnämme tekoälyä tarjoamaan sinulle personoitua ja itsenäistä digitaalista palvelua. Muista, että tekoäly tarjoaa ohjeita ja suosituksia, mutta lopulliset päätökset teet aina itse. Käytä omaa harkintaasi.",
+      "text-2": "Kun näet alla olevan kuvakkeen, saat lisätietoa siitä, miten tekoälyä hyödynnetään kyseisessä osiossa.",
+      "text-3": "Lisätietoja Tekoäly-sivulla.",
+      "text-4": "Tervetuloa luomaan Oma Osaamispolkusi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
+      "title": "3. Tekoäly apunasi"
+    }
+  },
   "job-opportunities": "Työmahdollisuudet",
   "job-opportunity": {
     "competences": {
@@ -234,6 +265,7 @@
   },
   "more-actions": "Lisää valintoja",
   "more-information": "Lisätietoa",
+  "move-to-service": "Siirry palveluun",
   "my-competences": {
     "by-KOULUTUS": "Koulutuksesta kertynyt osaamiseni",
     "by-MUU_OSAAMINEN": "Muu osaamiseni",
@@ -461,6 +493,7 @@
     },
     "how-do-i-give-feedback": "miten-annan-palautetta",
     "how-do-i-use-the-service": "kuinka-kaytan-palvelua",
+    "introduction": "tervetuloa",
     "job-opportunity": {
       "index": "tyomahdollisuus"
     },
