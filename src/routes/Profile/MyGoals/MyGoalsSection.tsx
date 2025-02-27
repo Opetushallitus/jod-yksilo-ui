@@ -3,9 +3,10 @@ import { OpportunityCard } from '@/components';
 import { getTypeSlug } from '@/routes/Profile/utils';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
+import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import loader from './loader';
 import MyGoalsOpportunityCardMenu from './MyGoalsOpportunityCardMenu';
 import TavoiteInput from './TavoiteInput';
@@ -17,7 +18,7 @@ interface MyGoalsSectionProps {
   paamaarat: components['schemas']['PaamaaraDto'][];
 }
 const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionProps) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { koulutusMahdollisuudetDetails, tyomahdollisuudetDetails } =
     useLoaderData<Awaited<ReturnType<typeof loader>>>();
 
@@ -69,6 +70,16 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                 hideFavorite
               />
               <TavoiteInput paamaara={pm} />
+              <div>
+                <Button
+                  variant="accent"
+                  label="Luo uusi polku päämäärälle"
+                  // eslint-disable-next-line react/no-unstable-nested-components
+                  LinkComponent={({ children }: { children: React.ReactNode }) => (
+                    <Link to={`${pm.id}/${t('slugs.profile.path')}/new`}>{children}</Link>
+                  )}
+                />
+              </div>
             </div>
           ) : null;
         })}

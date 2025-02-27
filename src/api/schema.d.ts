@@ -518,6 +518,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/integraatiot/koski': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Try to import data from koski link */
+    get: operations['integraatioGetKoskiData'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/integraatiot/koski/koulutukset': {
     parameters: {
       query?: never;
@@ -525,8 +542,8 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** Get import data from Koski */
-    get: operations['integraatioGetKoskiData'];
+    /** Get user's education's histories from Koski's opintopolku. */
+    get: operations['integraatioKoskiGetEducationsDataFromKoski'];
     put?: never;
     post?: never;
     delete?: never;
@@ -738,6 +755,8 @@ export interface components {
       tehtavat?: components['schemas']['LokalisoituTeksti'];
       yleisetVaatimukset?: components['schemas']['LokalisoituTeksti'];
       ammattiryhma?: string;
+      /** @enum {string} */
+      aineisto?: 'TMT' | 'AMMATTITIETO';
       jakaumat?: {
         [key: string]: components['schemas']['JakaumaDto'];
       };
@@ -2122,6 +2141,28 @@ export interface operations {
     };
   };
   integraatioGetKoskiData: {
+    parameters: {
+      query: {
+        jakolinkki: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['KoulutusDto'][];
+        };
+      };
+    };
+  };
+  integraatioKoskiGetEducationsDataFromKoski: {
     parameters: {
       query?: never;
       header?: never;

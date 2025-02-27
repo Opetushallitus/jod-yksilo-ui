@@ -7,6 +7,7 @@ import { favoritesLoader } from '@/routes/Profile/Favorites';
 import { loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
 import { Interests as ProfileInterests, interestsLoader } from '@/routes/Profile/Interests';
 import { MyGoals, goalsLoader } from '@/routes/Profile/MyGoals';
+import { Path, pathLoader } from '@/routes/Profile/Path';
 import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import {
@@ -102,7 +103,25 @@ const profileRoutes = supportedLanguageCodes.map(
           path: i18n.t('slugs.profile.my-goals', { lng }),
           loader: withYksiloContext(goalsLoader),
           element: <MyGoals />,
+          /* children: [
+            {
+              id: `{slugs.profile.path}/:pathId|${lng}`,
+              path: `:id/${i18n.t('slugs.profile.path', { lng })}/:pathId`,
+              element: <Path />,
+            },
+          ], */
         },
+        {
+          id: `{slugs.profile.path}/:id|${lng}`,
+          path: `${i18n.t('slugs.profile.my-goals', { lng })}/:goalId/${i18n.t('slugs.profile.path', { lng })}/:pathId`,
+          element: <Path />,
+          loader: withYksiloContext(pathLoader),
+        },
+        /* {
+          id: `{slugs.profile.path}/:id|${lng}`,
+          path: `${i18n.t('slugs.profile.path', { lng })}/:id`,
+          element: <Path />,
+        }, */
         {
           id: `{slugs.profile.interests}|${lng}`,
           path: i18n.t('slugs.profile.interests', { lng }),

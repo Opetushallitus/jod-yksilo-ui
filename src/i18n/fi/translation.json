@@ -398,6 +398,15 @@
       "show-filters": "Näytä suodattimet",
       "title": "Päämääräni"
     },
+    "paths": {
+      "description": "TODO: Tässä kerrotaan lyhyesti mikä on koulutus- ja urapolkusuunnitelma.",
+      "has-competence": "Osaan",
+      "ignore": "Älä huomioi",
+      "plan": "Suunnitelma",
+      "skill-progress": "Osaamisen kehittyminen",
+      "your-competences": "Omat osaamisesi",
+      "title": "Koulutus- ja urapolkusuunnitelma"
+    },
     "preferences": {
       "list-1-item-1": "kerätä tietoa omasta osaamisestasi (osaaminen)",
       "list-1-item-2": "tallentaa koulutus- ja työhistoriasi sekä lisätä vapaa-ajan tekemisiä sekä tuoda myös työhistoriasi työmarkkinatorin työnhakuprofiilista sekä koulutushistoriasi Opintopolun omista opintosuorituksista (työpaikat, koulutus, vapaa-aika)",
@@ -475,6 +484,7 @@
       "interests": "kiinnostukseni",
       "login": "kirjaudu-sisaan",
       "my-goals": "paamaarani",
+      "path": "polku",
       "preferences": "asetukseni",
       "something-else": "muut-osaamiset",
       "work-history": "tyopaikkani"
@@ -644,7 +654,6 @@
     "competences": "Osaamiset",
     "confirm-delete-job-description": "Haluatko varmasti poistaa toimenkuvan? Jos työpaikkaan ei liity poiston jälkeen enää yhtään toimenkuvaa, myös työpaikka poistetaan.",
     "confirm-delete-work-history": "Haluatko varmasti poistaa työpaikan?",
-    "count-competences": "{{count}} osaamista",
     "delete-job-description": "Poista toimenkuva",
     "delete-work-history": "Poista työpaikka",
     "edit-job-description": "Muokkaa toimenkuvaa",
