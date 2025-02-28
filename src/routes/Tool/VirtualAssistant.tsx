@@ -264,7 +264,7 @@ export const VirtualAssistant = ({
               </span>
             </button>
             <div className="px-5 pt-9">
-              <h2 className="text-heading-4-mobile sm:text-heading-4 text-center">
+              <h2 id={selectedKiinnostuksetLabelId} className="text-heading-4-mobile sm:text-heading-4 text-center">
                 {t('tool.my-own-data.interests.virtual-assistant.selected-interests')}
               </h2>
 
