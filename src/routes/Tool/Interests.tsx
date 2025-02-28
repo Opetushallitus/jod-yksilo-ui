@@ -126,6 +126,7 @@ const Interests = () => {
                 onClick={() => {
                   toolStore.setVirtualAssistantOpen(true);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
+                  setTimeout(() => document.getElementById('kiinnostuksetView')?.focus(), 0);
                 }}
                 type="button"
                 className="cursor-pointer"
