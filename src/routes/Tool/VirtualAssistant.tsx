@@ -227,6 +227,7 @@ export const VirtualAssistant = ({
           <Button
             onClick={() => {
               setSelectedKiinnostuksetViewVisible(true);
+              setTimeout(() => document.getElementById(selectedInterestsViewId)?.focus(), 0);
             }}
             variant="gray"
             size="sm"
@@ -244,8 +245,12 @@ export const VirtualAssistant = ({
         </div>
       </div>
       {selectedKiinnostuksetViewVisible && (
-        <div id={selectedInterestsViewId} className="absolute top-0 w-full pt-6 h-full left-0 z-21">
-          <div className="bg-white rounded shadow-[0_-1px_24px_rgba(0,0,0,0.25)] h-full flex flex-col">
+        <div className="absolute top-0 w-full pt-6 h-full left-0 z-21">
+          <div
+            tabIndex={-1}
+            id={selectedInterestsViewId}
+            className="bg-white rounded shadow-[0_-1px_24px_rgba(0,0,0,0.25)] h-full flex flex-col"
+          >
             <button
               aria-label={t('tool.my-own-data.interests.virtual-assistant.close-selected-interests')}
               onClick={() => setSelectedKiinnostuksetViewVisible(false)}
@@ -256,7 +261,7 @@ export const VirtualAssistant = ({
               </span>
             </button>
             <div className="px-5 pt-9">
-              <h2 id={selectedKiinnostuksetLabelId} className="text-heading-4-mobile sm:text-heading-4 text-center">
+              <h2 className="text-heading-4-mobile sm:text-heading-4 text-center">
                 {t('tool.my-own-data.interests.virtual-assistant.selected-interests')}
               </h2>
 
