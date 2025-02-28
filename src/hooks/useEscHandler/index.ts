@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const useEscHandler = (onEscKeyDown: () => void, parentElementId: string) => {
+export const useEscHandler = (onEscKeyDown: () => void, parentElementId: string, triggerAlsoAtFocus?: boolean) => {
   React.useEffect(() => {
     const escHandler = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -13,14 +13,19 @@ export const useEscHandler = (onEscKeyDown: () => void, parentElementId: string)
         }
 
         const parentElement = document.getElementById(parentElementId);
-
-        if (parentElement) {
-          if (parentElement.contains(activeElement)) {
-            // If the active element is a child of the specified parent element, do nothing
-            return;
-          } else if (activeElement.tagName === 'BODY') {
+        if (!parentElement) {
+          return;
+        }
+        if (parentElement.contains(activeElement)) {
+          if (triggerAlsoAtFocus) {
             onEscKeyDown();
+            return;
           }
+          // If the active element is a child of the specified parent element, do nothing
+          return;
+        }
+        if (activeElement.tagName === 'BODY') {
+          onEscKeyDown();
         }
       }
     };
@@ -30,5 +35,5 @@ export const useEscHandler = (onEscKeyDown: () => void, parentElementId: string)
     return () => {
       document.removeEventListener('keydown', escHandler, true);
     };
-  }, [onEscKeyDown, parentElementId]);
+  }, [onEscKeyDown, parentElementId, triggerAlsoAtFocus]);
 };
