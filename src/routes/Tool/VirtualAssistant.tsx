@@ -91,7 +91,7 @@ export const VirtualAssistant = ({
   const { isDev } = useEnvironment();
 
   return (
-    <div className="relative flex flex-col h-full">
+    <div tabIndex={-1} id="kiinnostuksetView" className="relative flex flex-col h-full">
       <div
         inert={selectedKiinnostuksetViewVisible}
         className="flex flex-row shrink-0 justify-between items-center border-b border-bg-gray px-5 py-3"
@@ -253,7 +253,10 @@ export const VirtualAssistant = ({
           >
             <button
               aria-label={t('tool.my-own-data.interests.virtual-assistant.close-selected-interests')}
-              onClick={() => setSelectedKiinnostuksetViewVisible(false)}
+              onClick={() => {
+                setSelectedKiinnostuksetViewVisible(false);
+                setTimeout(() => document.getElementById('kiinnostuksetView')?.focus(), 0);
+              }}
               className="absolute cursor-pointer self-end items-center p-4 m-3"
             >
               <span aria-hidden className="text-black sm:text-secondary-gray p-3 sm:p-0">
