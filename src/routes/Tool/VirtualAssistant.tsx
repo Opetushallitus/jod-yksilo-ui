@@ -32,12 +32,17 @@ export const VirtualAssistant = ({
   const [value, setValue] = React.useState('');
   const [id, setId] = React.useState<string>();
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const kiinnostuksetButtonRef = React.useRef<HTMLButtonElement>(null);
   const { sm } = useMediaQueries();
   const [selectedKiinnostuksetViewVisible, setSelectedKiinnostuksetViewVisible] = React.useState(false);
   const selectedKiinnostuksetLabelId = React.useId();
   const toolStore = useToolStore();
   const selectedInterestsViewId = React.useId();
-  useEscHandler(() => setSelectedKiinnostuksetViewVisible(false), selectedInterestsViewId);
+  const closeKiinnostuksetView = () => {
+    setSelectedKiinnostuksetViewVisible(false);
+    setTimeout(() => kiinnostuksetButtonRef.current?.focus(), 0);
+  };
+  useEscHandler(closeKiinnostuksetView, selectedInterestsViewId, true);
 
   const [selectedKiinnostukset, setSelectedKiinnostukset] = React.useState<components['schemas']['Kiinnostus'][]>([]);
 
@@ -96,7 +101,7 @@ export const VirtualAssistant = ({
         inert={selectedKiinnostuksetViewVisible}
         className="flex flex-row shrink-0 justify-between items-center border-b border-bg-gray px-5 py-3"
       >
-        <h2 className="text-heading-4-mobile sm:text-heading-4">
+        <h2 tabIndex={-1} id="kiinnostuksetTitle" className="text-heading-4-mobile sm:text-heading-4">
           {t('tool.my-own-data.interests.virtual-assistant.title')}
         </h2>
         <Button
@@ -225,12 +230,16 @@ export const VirtualAssistant = ({
         />
         <div className="flex justify-between">
           <Button
+            ref={kiinnostuksetButtonRef}
             onClick={() => {
               setSelectedKiinnostuksetViewVisible(true);
+              setTimeout(() => document.getElementById(selectedKiinnostuksetLabelId)?.focus(), 0);
             }}
             variant="gray"
             size="sm"
-            label={t('tool.my-own-data.interests.virtual-assistant.intrests', { count: selectedKiinnostukset.length })}
+            label={t('tool.my-own-data.interests.virtual-assistant.intrests', {
+              count: selectedKiinnostukset.length,
+            })}
           />
           <Button
             disabled={value === ''}
@@ -244,11 +253,15 @@ export const VirtualAssistant = ({
         </div>
       </div>
       {selectedKiinnostuksetViewVisible && (
-        <div id={selectedInterestsViewId} className="absolute top-0 w-full pt-6 h-full left-0 z-21">
-          <div className="bg-white rounded shadow-[0_-1px_24px_rgba(0,0,0,0.25)] h-full flex flex-col">
+        <div className="absolute top-0 w-full pt-6 h-full left-0 z-21">
+          <div
+            tabIndex={-1}
+            id={selectedInterestsViewId}
+            className="bg-white rounded shadow-[0_-1px_24px_rgba(0,0,0,0.25)] h-full flex flex-col"
+          >
             <button
               aria-label={t('tool.my-own-data.interests.virtual-assistant.close-selected-interests')}
-              onClick={() => setSelectedKiinnostuksetViewVisible(false)}
+              onClick={closeKiinnostuksetView}
               className="absolute cursor-pointer self-end items-center p-4 m-3"
             >
               <span aria-hidden className="text-black sm:text-secondary-gray p-3 sm:p-0">
@@ -256,7 +269,11 @@ export const VirtualAssistant = ({
               </span>
             </button>
             <div className="px-5 pt-9">
-              <h2 id={selectedKiinnostuksetLabelId} className="text-heading-4-mobile sm:text-heading-4 text-center">
+              <h2
+                tabIndex={-1}
+                id={selectedKiinnostuksetLabelId}
+                className="text-heading-4-mobile sm:text-heading-4 text-center"
+              >
                 {t('tool.my-own-data.interests.virtual-assistant.selected-interests')}
               </h2>
 
