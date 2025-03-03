@@ -23,7 +23,7 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
   const [tableRows, setTableRows] = React.useState<ExperienceTableRowData[]>([]);
 
   const modalId = React.useId();
-  useEscHandler(onClose, modalId);
+  useEscHandler(onClose, modalId, !!error);
 
   React.useEffect(() => {
     if (isOpen) {

@@ -37,7 +37,7 @@ export const VirtualAssistant = ({
   const selectedKiinnostuksetLabelId = React.useId();
   const toolStore = useToolStore();
   const selectedInterestsViewId = React.useId();
-  useEscHandler(() => setSelectedKiinnostuksetViewVisible(false), selectedInterestsViewId);
+  useEscHandler(() => setSelectedKiinnostuksetViewVisible(false), selectedInterestsViewId, true);
 
   const [selectedKiinnostukset, setSelectedKiinnostukset] = React.useState<components['schemas']['Kiinnostus'][]>([]);
 
