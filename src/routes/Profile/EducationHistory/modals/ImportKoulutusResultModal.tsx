@@ -15,7 +15,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
   const { t } = useTranslation();
 
   const modalId = React.useId();
-  useEscHandler(onClose, modalId, true);
+  useEscHandler(onClose, modalId);
 
   if (!isOpen) {
     return null;

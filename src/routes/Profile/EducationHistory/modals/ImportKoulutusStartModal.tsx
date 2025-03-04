@@ -13,7 +13,7 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
   const [error, setError] = React.useState<Error | undefined>(undefined);
 
   const modalId = React.useId();
-  useEscHandler(onClose, modalId, true);
+  useEscHandler(onClose, modalId);
 
   const triggerGivePermissionToImportKoulutusData = () => {
     setError(undefined);

@@ -23,7 +23,17 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
   const [tableRows, setTableRows] = React.useState<ExperienceTableRowData[]>([]);
 
   const modalId = React.useId();
-  useEscHandler(onClose, modalId, !!error);
+  useEscHandler(() => {
+    const cancelSpan = Array.from(document.querySelectorAll<HTMLSpanElement>('span')).find(
+      (el) => el.textContent?.trim() === t('cancel'),
+    );
+    const cancelButton = cancelSpan?.closest<HTMLButtonElement>('button');
+    if (cancelButton) {
+      setTimeout(() => {
+        cancelButton.click();
+      }, 0);
+    }
+  }, modalId);
 
   React.useEffect(() => {
     if (isOpen) {
@@ -226,21 +236,19 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
       }
       footer={
         <div className="flex flex-row justify-end">
-          <div className="flex flex-row justify-between gap-5">
-            {error ? (
-              <Button label={t('cancel')} variant="white" onClick={onClose} />
-            ) : (
-              <ConfirmDialog
-                title={t('education-history-import.summary-modal.cancel-modal.title')}
-                onConfirm={onClose}
-                confirmText={t('yes')}
-                cancelText={t('cancel')}
-                variant="destructive"
-                description={t('education-history-import.summary-modal.cancel-modal.description')}
-              >
-                {(showDialog: () => void) => <Button variant="white" label={t('cancel')} onClick={showDialog} />}
-              </ConfirmDialog>
-            )}
+          <div id="buttonSection" className="flex flex-row justify-between gap-5">
+            <ConfirmDialog
+              title={t('education-history-import.summary-modal.cancel-modal.title')}
+              onConfirm={onClose}
+              confirmText={t('yes')}
+              cancelText={t('cancel')}
+              variant="destructive"
+              description={t('education-history-import.summary-modal.cancel-modal.description')}
+            >
+              {(showDialog: () => void) => (
+                <Button variant="white" label={t('cancel')} onClick={error ? onClose : showDialog} />
+              )}
+            </ConfirmDialog>
             <Button label={t('save')} variant="white" disabled={!koskiData} onClick={saveSelectedKoulutus} />
           </div>
         </div>
