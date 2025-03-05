@@ -7,7 +7,7 @@ export const useEscHandler = (onEscKeyDown: () => void, parentElementId: string)
         const activeElement = document.activeElement as HTMLElement;
 
         // If active element is headless UI dialog, then it can be closed. Basically same if the focus would be in body-tag.
-        if (activeElement.id.includes('headlessui-dialog')) {
+        if (activeElement.id.includes('ds-modal')) {
           onEscKeyDown();
           return;
         }
