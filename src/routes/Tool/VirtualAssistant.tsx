@@ -32,12 +32,17 @@ export const VirtualAssistant = ({
   const [value, setValue] = React.useState('');
   const [id, setId] = React.useState<string>();
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const kiinnostuksetButtonRef = React.useRef<HTMLButtonElement>(null);
   const { sm } = useMediaQueries();
   const [selectedKiinnostuksetViewVisible, setSelectedKiinnostuksetViewVisible] = React.useState(false);
   const selectedKiinnostuksetLabelId = React.useId();
   const toolStore = useToolStore();
   const selectedInterestsViewId = React.useId();
-  useEscHandler(() => setSelectedKiinnostuksetViewVisible(false), selectedInterestsViewId, true);
+  const closeKiinnostuksetView = () => {
+    setSelectedKiinnostuksetViewVisible(false);
+    setTimeout(() => kiinnostuksetButtonRef.current?.focus(), 0);
+  };
+  useEscHandler(closeKiinnostuksetView, selectedInterestsViewId, true);
 
   const [selectedKiinnostukset, setSelectedKiinnostukset] = React.useState<components['schemas']['Kiinnostus'][]>([]);
 
@@ -223,8 +228,9 @@ export const VirtualAssistant = ({
           hideLabel
           className="bg-[#F7F7F9]!"
         />
-        <div id="kiinnostukset-button-section" className="flex justify-between">
+        <div className="flex justify-between">
           <Button
+            ref={kiinnostuksetButtonRef}
             onClick={() => {
               setSelectedKiinnostuksetViewVisible(true);
               setTimeout(() => document.getElementById(selectedKiinnostuksetLabelId)?.focus(), 0);
@@ -255,13 +261,7 @@ export const VirtualAssistant = ({
           >
             <button
               aria-label={t('tool.my-own-data.interests.virtual-assistant.close-selected-interests')}
-              onClick={() => {
-                setSelectedKiinnostuksetViewVisible(false);
-                setTimeout(
-                  () => document.getElementById('kiinnostukset-button-section')?.querySelector('button')?.focus(),
-                  0,
-                );
-              }}
+              onClick={closeKiinnostuksetView}
               className="absolute cursor-pointer self-end items-center p-4 m-3"
             >
               <span aria-hidden className="text-black sm:text-secondary-gray p-3 sm:p-0">

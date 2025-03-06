@@ -21,19 +21,10 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
   const [koskiData, setKoskiData] = React.useState<components['schemas']['KoulutusDto'][] | undefined>(undefined);
   const [error, setError] = React.useState<Error | undefined>(undefined);
   const [tableRows, setTableRows] = React.useState<ExperienceTableRowData[]>([]);
+  const cancelButtonRef = React.useRef<HTMLButtonElement>(null);
 
   const modalId = React.useId();
-  useEscHandler(() => {
-    const cancelSpan = Array.from(document.querySelectorAll<HTMLSpanElement>('span')).find(
-      (el) => el.textContent?.trim() === t('cancel'),
-    );
-    const cancelButton = cancelSpan?.closest<HTMLButtonElement>('button');
-    if (cancelButton) {
-      setTimeout(() => {
-        cancelButton.click();
-      }, 0);
-    }
-  }, modalId);
+  useEscHandler(() => cancelButtonRef.current?.click(), modalId);
 
   React.useEffect(() => {
     if (isOpen) {
@@ -246,7 +237,12 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
               description={t('education-history-import.summary-modal.cancel-modal.description')}
             >
               {(showDialog: () => void) => (
-                <Button variant="white" label={t('cancel')} onClick={error ? onClose : showDialog} />
+                <Button
+                  ref={cancelButtonRef}
+                  variant="white"
+                  label={t('cancel')}
+                  onClick={error ? onClose : showDialog}
+                />
               )}
             </ConfirmDialog>
             <Button label={t('save')} variant="white" disabled={!koskiData} onClick={saveSelectedKoulutus} />
