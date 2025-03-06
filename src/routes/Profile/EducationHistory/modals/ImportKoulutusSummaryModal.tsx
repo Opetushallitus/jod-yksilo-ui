@@ -21,9 +21,10 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
   const [koskiData, setKoskiData] = React.useState<components['schemas']['KoulutusDto'][] | undefined>(undefined);
   const [error, setError] = React.useState<Error | undefined>(undefined);
   const [tableRows, setTableRows] = React.useState<ExperienceTableRowData[]>([]);
+  const cancelButtonRef = React.useRef<HTMLButtonElement>(null);
 
   const modalId = React.useId();
-  useEscHandler(onClose, modalId);
+  useEscHandler(() => cancelButtonRef.current?.click(), modalId);
 
   React.useEffect(() => {
     if (isOpen) {
@@ -226,21 +227,24 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
       }
       footer={
         <div className="flex flex-row justify-end">
-          <div className="flex flex-row justify-between gap-5">
-            {error ? (
-              <Button label={t('cancel')} variant="white" onClick={onClose} />
-            ) : (
-              <ConfirmDialog
-                title={t('education-history-import.summary-modal.cancel-modal.title')}
-                onConfirm={onClose}
-                confirmText={t('yes')}
-                cancelText={t('cancel')}
-                variant="destructive"
-                description={t('education-history-import.summary-modal.cancel-modal.description')}
-              >
-                {(showDialog: () => void) => <Button variant="white" label={t('cancel')} onClick={showDialog} />}
-              </ConfirmDialog>
-            )}
+          <div id="buttonSection" className="flex flex-row justify-between gap-5">
+            <ConfirmDialog
+              title={t('education-history-import.summary-modal.cancel-modal.title')}
+              onConfirm={onClose}
+              confirmText={t('yes')}
+              cancelText={t('cancel')}
+              variant="destructive"
+              description={t('education-history-import.summary-modal.cancel-modal.description')}
+            >
+              {(showDialog: () => void) => (
+                <Button
+                  ref={cancelButtonRef}
+                  variant="white"
+                  label={t('cancel')}
+                  onClick={error ? onClose : showDialog}
+                />
+              )}
+            </ConfirmDialog>
             <Button label={t('save')} variant="white" disabled={!koskiData} onClick={saveSelectedKoulutus} />
           </div>
         </div>
