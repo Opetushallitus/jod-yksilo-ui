@@ -34,6 +34,9 @@ interface ExperienceTableRowProps {
   confirmDescription?: string;
   actionLabel?: string;
   showCheckbox?: boolean;
+  checked?: boolean;
+  indeterminate?: boolean;
+  onCheckboxChange?: (checked: boolean) => void;
 }
 
 const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData }) => {
@@ -63,6 +66,9 @@ export const ExperienceTableRow = ({
   confirmDescription,
   actionLabel,
   showCheckbox,
+  checked,
+  indeterminate,
+  onCheckboxChange,
 }: ExperienceTableRowProps) => {
   const {
     t,
@@ -122,10 +128,15 @@ export const ExperienceTableRow = ({
       <Checkbox
         name={`checkbox-${row.key}`}
         value={row.key}
-        checked={row?.checked ?? true}
+        checked={checked ?? row?.checked ?? false}
+        indeterminate={indeterminate}
         onChange={(e) => {
-          row.checked = e.target.checked;
-          setIsOpen((prev) => !prev); // Ensure state rerenders
+          if (onCheckboxChange) {
+            onCheckboxChange(e.target.checked);
+          } else {
+            row.checked = e.target.checked;
+            setIsOpen((prev) => !prev); // Ensure state rerenders
+          }
         }}
         ariaLabel={t('choose') + ' ' + row.nimi[language]}
         variant="bordered"

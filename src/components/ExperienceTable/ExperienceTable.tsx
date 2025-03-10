@@ -21,6 +21,8 @@ interface ExperienceTableProps {
   actionLabel?: string;
   showCheckbox?: boolean;
   checkboxColumnHeader?: string;
+  onCheckboxChange?: (rowKey: string, checked: boolean) => void;
+  onSubCheckboxChange?: (rowKey: string, subRowKey: string, checked: boolean) => void;
 }
 
 export const ExperienceTable = ({
@@ -41,9 +43,110 @@ export const ExperienceTable = ({
   actionLabel,
   showCheckbox,
   checkboxColumnHeader,
+  onCheckboxChange,
+  onSubCheckboxChange,
 }: ExperienceTableProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
+
+  // To track Checkbox checked status with indeterminate state.
+  const [rowsCheckboxState, setRowsCheckboxState] = React.useState<
+    Map<
+      string,
+      {
+        checked: boolean;
+        indeterminate: boolean;
+        subRows: Map<string, boolean>;
+      }
+    >
+  >(new Map());
+
+  // Initialize row state from props.
+  React.useEffect(() => {
+    const newRowsCheckboxState = new Map();
+
+    rows.forEach((row) => {
+      const subRowsMap = new Map();
+      if (row.subrows) {
+        row.subrows.forEach((subrow) => {
+          subRowsMap.set(subrow.key, subrow.checked ?? false);
+        });
+      }
+
+      // Calculate parent state
+      const allSubRowsChecked = row.subrows?.every((subRow) => subRow.checked) ?? false;
+      const someSubRowsChecked = row.subrows?.some((subRow) => subRow.checked) ?? false;
+
+      newRowsCheckboxState.set(row.key, {
+        checked: row.checked ?? allSubRowsChecked,
+        indeterminate: !allSubRowsChecked && someSubRowsChecked,
+        subRows: subRowsMap,
+      });
+    });
+
+    setRowsCheckboxState(newRowsCheckboxState);
+  }, [rows]);
+
+  const handleParentCheckboxChange = (row: ExperienceTableRowData, checked: boolean) => {
+    const rowState = rowsCheckboxState.get(row.key);
+    if (!rowState) return;
+
+    const updatedRowsState = new Map(rowsCheckboxState);
+    const updatedSubRows = new Map(rowState.subRows);
+
+    // Update all subrows to match parent's checked state
+    updatedRowsState.set(row.key, {
+      checked,
+      indeterminate: false,
+      subRows: updatedSubRows,
+    });
+
+    // Update all subrows
+    if (row.subrows) {
+      row.subrows.forEach((subrow) => {
+        updatedSubRows.set(subrow.key, checked);
+        subrow.checked = checked;
+
+        if (onSubCheckboxChange) {
+          onSubCheckboxChange(row.key, subrow.key, checked);
+        }
+      });
+    }
+
+    setRowsCheckboxState(updatedRowsState);
+
+    if (onCheckboxChange) {
+      onCheckboxChange(row.key, checked);
+    }
+  };
+
+  const handleSubCheckboxChange = (row: ExperienceTableRowData, subrow: ExperienceTableRowData, checked: boolean) => {
+    const rowState = rowsCheckboxState.get(row.key);
+    if (!rowState) return;
+
+    const updatedRowsState = new Map(rowsCheckboxState);
+    const updatedSubRows = new Map(rowState.subRows);
+
+    // Update the specific subrow
+    updatedSubRows.set(subrow.key, checked);
+    subrow.checked = checked;
+
+    // Calculate new parent state
+    const allChecked = Array.from(updatedSubRows.values()).every((isChecked) => isChecked);
+    const someChecked = Array.from(updatedSubRows.values()).some((isChecked) => isChecked);
+
+    updatedRowsState.set(row.key, {
+      checked: allChecked,
+      indeterminate: !allChecked && someChecked,
+      subRows: updatedSubRows,
+    });
+
+    setRowsCheckboxState(updatedRowsState);
+
+    if (onSubCheckboxChange) {
+      onSubCheckboxChange(row.key, subrow.key, checked);
+    }
+  };
 
   const uncategorizedRows = rows.filter((row) => !row.subrows);
   const categorizedRows = rows.filter((row) => row.subrows);
@@ -99,6 +202,9 @@ export const ExperienceTable = ({
                   confirmDescription={confirmRowDescription}
                   actionLabel={actionLabel}
                   showCheckbox={showCheckbox}
+                  checked={rowsCheckboxState.get(row.key)?.checked ?? false}
+                  indeterminate={rowsCheckboxState.get(row.key)?.indeterminate ?? false}
+                  onCheckboxChange={(checked) => handleParentCheckboxChange(row, checked)}
                 />
                 {row.subrows?.map((subrow, i) => (
                   <ExperienceTableRow
@@ -115,6 +221,8 @@ export const ExperienceTable = ({
                     confirmDescription={confirmSubRowDescription}
                     actionLabel={actionLabel}
                     showCheckbox={showCheckbox}
+                    checked={rowsCheckboxState.get(row.key)?.subRows.get(subrow.key) ?? false}
+                    onCheckboxChange={(checked) => handleSubCheckboxChange(row, subrow, checked)}
                   />
                 ))}
                 {onAddNestedRowClick && addNewNestedLabel && (
