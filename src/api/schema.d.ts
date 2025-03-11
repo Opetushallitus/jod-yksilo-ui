@@ -327,6 +327,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/profiili/koulutuskokonaisuudet/tuonti': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Adds many new koulutuskokonaisuudet, and optionally associated koulutukset */
+    post: operations['koulutusKokonaisuusAddMany'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/keskustelut': {
     parameters: {
       query?: never;
@@ -1843,6 +1860,28 @@ export interface operations {
         content: {
           'application/json': components['schemas']['IdDtoUUID'];
         };
+      };
+    };
+  };
+  koulutusKokonaisuusAddMany: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['KoulutusKokonaisuusDto'][];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };

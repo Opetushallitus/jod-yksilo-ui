@@ -146,24 +146,21 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
   };
 
   const saveSelectedKoulutus = async () => {
-    const koulutusKokonaisuudet = createKoulutusKokonaisuudet();
-    if (koulutusKokonaisuudet.size === 0) {
-      onSuccessful();
-    }
     try {
-      const requests = [];
+      const koulutusKokonaisuudet = createKoulutusKokonaisuudet();
+      const body: {
+        nimi: Record<string, string>;
+        koulutukset: Koulutus[];
+      }[] = [];
       for (const [jsonNimi, koulutukset] of koulutusKokonaisuudet) {
-        requests.push(
-          client.POST('/api/profiili/koulutuskokonaisuudet', {
-            body: {
-              nimi: JSON.parse(jsonNimi) as Record<string, string>,
-              koulutukset,
-            },
-          }),
-        );
+        body.push({
+          nimi: JSON.parse(jsonNimi) as Record<string, string>,
+          koulutukset,
+        });
       }
-
-      await Promise.all(requests);
+      await client.POST('/api/profiili/koulutuskokonaisuudet/tuonti', {
+        body,
+      });
       onSuccessful();
     } catch (_) {
       onFailure();
