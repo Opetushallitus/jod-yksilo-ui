@@ -19,7 +19,12 @@ export const formatDate = (date: Date) => {
 export const getLocalizedText = (
   entry?: components['schemas']['LokalisoituTeksti'] | Record<string, string | undefined>,
   lang = i18n.language,
-) => entry?.[lang] ?? '';
+) =>
+  entry?.[lang] ??
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  entry?.[i18n.options.fallbackLng] ??
+  '';
 
 type NestedKeyOf<ObjectType extends object> = {
   [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
