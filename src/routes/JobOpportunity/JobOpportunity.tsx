@@ -26,7 +26,7 @@ const JobOpportunity = () => {
     getLocalizedText(tyomahdollisuus?.tehtavat) !== ''
       ? getLocalizedText(tyomahdollisuus?.tehtavat)
           .split('\n')
-          .sort((a, b) => a.localeCompare(b))
+          .sort((a: string, b: string) => a.localeCompare(b))
       : [];
 
   const sections: OpportunityDetailsSection[] = [
@@ -38,7 +38,7 @@ const JobOpportunity = () => {
       navTitle: t('job-opportunity.most-common-job-tasks.title'),
       content: (
         <ol className="list-decimal ml-7 text-body-lg font-medium text-black leading-7">
-          {tyomahdollisuusTehtavat.map((value, index) => (
+          {tyomahdollisuusTehtavat.map((value: string, index: number) => (
             // eslint-disable-next-line react/no-array-index-key
             <li key={`${hashString(value)}-${index}`} className="text-capitalize text-body">
               {value}
