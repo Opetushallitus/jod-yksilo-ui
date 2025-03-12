@@ -88,7 +88,6 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
     },
   });
   const trigger = methods.trigger;
-  const errors = methods.formState.errors;
   const { isValid, isLoading } = useFormState({
     control: methods.control,
   });
@@ -198,6 +197,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
                 label={t('previous')}
                 variant="white"
                 icon={!sm ? <MdArrowBack size={24} /> : undefined}
+                disabled={!isValid}
               />
             )}
             {step < steps && (
@@ -206,7 +206,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
                 label={t('next')}
                 variant="white"
                 icon={!sm ? <MdArrowForward size={24} /> : undefined}
-                disabled={errors.nimi !== undefined || errors.patevyydet?.[selectedPatevyys] !== undefined}
+                disabled={!isValid}
               />
             )}
             {step === steps && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}

@@ -108,7 +108,7 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
-      alkuPvm: string;
+      alkuPvm?: string;
       loppuPvm?: string;
       osaamiset?: string[];
     },

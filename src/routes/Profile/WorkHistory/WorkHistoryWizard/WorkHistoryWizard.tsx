@@ -93,7 +93,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   });
 
   const trigger = methods.trigger;
-  const { isValid, isLoading, errors } = useFormState({
+  const { isValid, isLoading } = useFormState({
     control: methods.control,
   });
   const { fields, append, remove } = useFieldArray({
@@ -203,6 +203,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 label={t('previous')}
                 variant="white"
                 icon={!sm ? <MdArrowBack size={24} /> : undefined}
+                disabled={!isValid}
               />
             )}
             {step < steps && (
@@ -211,7 +212,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 label={t('next')}
                 variant="white"
                 icon={!sm ? <MdArrowForward size={24} /> : undefined}
-                disabled={errors.nimi !== undefined || errors.toimenkuvat?.[selectedToimenkuva] !== undefined}
+                disabled={!isValid}
               />
             )}
             {step === steps && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}

@@ -56,7 +56,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                     .nonempty(formErrorMessage.required())
                     .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
                 ),
-              alkuPvm: z.string().nonempty(formErrorMessage.required()).date(formErrorMessage.date()),
+              alkuPvm: z.string().date(formErrorMessage.date()).optional().or(z.literal('')),
               loppuPvm: z.string().date(formErrorMessage.date()).optional().or(z.literal('')),
               osaamiset: z.array(
                 z.object({
@@ -71,7 +71,9 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
         .refine((data) => data.koulutukset.length > 0) // At least one koulutus
         .refine(
           (data) =>
-            data.koulutukset.every((koulutus) => (koulutus.loppuPvm ? koulutus.alkuPvm <= koulutus.loppuPvm : true)),
+            data.koulutukset.every((koulutus) =>
+              koulutus.loppuPvm && koulutus.alkuPvm ? koulutus.alkuPvm <= koulutus.loppuPvm : true,
+            ),
           formErrorMessage.dateRange(['koulutukset', `${selectedKoulutus}`, 'loppuPvm']),
         ), // alkuPvm <= loppuPvm
     ),
@@ -90,7 +92,6 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
     },
   });
   const trigger = methods.trigger;
-  const errors = methods.formState.errors;
   const { isValid, isLoading } = useFormState({
     control: methods.control,
   });
@@ -201,6 +202,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 label={t('previous')}
                 variant="white"
                 icon={!sm ? <MdArrowBack size={24} /> : undefined}
+                disabled={!isValid}
               />
             )}
             {step < steps && (
@@ -209,7 +211,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 label={t('next')}
                 variant="white"
                 icon={!sm ? <MdArrowForward size={24} /> : undefined}
-                disabled={errors.nimi !== undefined || errors.koulutukset?.[selectedKoulutus] !== undefined}
+                disabled={!isValid}
               />
             )}
             {step === steps && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}

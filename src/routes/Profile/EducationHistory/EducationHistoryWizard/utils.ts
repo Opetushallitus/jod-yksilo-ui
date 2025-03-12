@@ -6,7 +6,7 @@ export interface EducationHistoryForm {
   koulutukset: {
     id?: string;
     nimi: components['schemas']['LokalisoituTeksti'];
-    alkuPvm: string;
+    alkuPvm?: string;
     loppuPvm?: string;
     osaamiset: {
       id: string;
