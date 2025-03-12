@@ -638,7 +638,7 @@ export interface components {
       nimi: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       /** Format: date */
-      alkuPvm: string;
+      alkuPvm?: string;
       /** Format: date */
       loppuPvm?: string;
       osaamiset?: string[];

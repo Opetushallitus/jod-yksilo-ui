@@ -30,7 +30,7 @@ interface KoulutusForm {
   id: string;
   nimi: components['schemas']['LokalisoituTeksti'];
   kuvaus: components['schemas']['LokalisoituTeksti'];
-  alkuPvm: string;
+  alkuPvm?: string;
   loppuPvm?: string;
   osaamiset: {
     id: string;
@@ -178,7 +178,7 @@ const AddOrEditKoulutusModal = ({
                 .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
             ),
           kuvaus: z.object({}).catchall(z.string().min(1).or(z.literal(''))),
-          alkuPvm: z.string().nonempty(formErrorMessage.required()).date(formErrorMessage.date()),
+          alkuPvm: z.string().date(formErrorMessage.date()).optional().or(z.literal('')),
           loppuPvm: z.string().date().optional().or(z.literal('')),
           osaamiset: z.array(
             z.object({
@@ -188,7 +188,10 @@ const AddOrEditKoulutusModal = ({
             }),
           ),
         })
-        .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm, formErrorMessage.dateRange(['loppuPvm'])),
+        .refine(
+          (data) => (data.alkuPvm && data.loppuPvm ? data.alkuPvm <= data.loppuPvm : true),
+          formErrorMessage.dateRange(['loppuPvm']),
+        ),
     ),
     defaultValues: async () => {
       if (koulutusId) {

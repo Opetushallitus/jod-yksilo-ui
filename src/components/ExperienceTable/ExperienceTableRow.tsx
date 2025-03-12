@@ -9,7 +9,7 @@ export interface ExperienceTableRowData {
   checked?: boolean;
   key: string;
   nimi: Record<string, string>;
-  alkuPvm: Date;
+  alkuPvm?: Date;
   hideRowDetails?: boolean;
   loppuPvm?: Date;
   subrows?: ExperienceTableRowData[];
@@ -147,7 +147,7 @@ export const ExperienceTableRow = ({
           <Title row={row} nested />
           {!sm && (
             <div className="flex flex-wrap gap-x-5 pb-2 pl-5 pr-7 text-body-sm">
-              {formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
+              {row.alkuPvm && formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
             </div>
           )}
         </td>
@@ -169,7 +169,7 @@ export const ExperienceTableRow = ({
         )}
         {sm && (
           <>
-            <td className="text-body-md pr-7">{!row.hideRowDetails && formatDate(row.alkuPvm)}</td>
+            <td className="text-body-md pr-7">{!row.hideRowDetails && row.alkuPvm && formatDate(row.alkuPvm)}</td>
             <td className="text-body-md pr-7">{!row.hideRowDetails && row.loppuPvm && formatDate(row.loppuPvm)}</td>
             {!hideOsaamiset && (
               <td className={`text-body-md ${onRowClick ? 'pr-7' : 'pr-5'}`.trim()}>
@@ -223,7 +223,7 @@ export const ExperienceTableRow = ({
         {!sm && (
           <div className="flex flex-wrap gap-x-5 pb-2 pl-5 pr-7 text-body-sm">
             <span>
-              {formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
+              {row.alkuPvm && formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
             </span>
           </div>
         )}
@@ -236,7 +236,7 @@ export const ExperienceTableRow = ({
       {sm && (
         <>
           <td className="text-body-md pr-7" colSpan={row.loppuPvm ? 1 : 2}>
-            {formatDate(row.alkuPvm)}
+            {row.alkuPvm && formatDate(row.alkuPvm)}
           </td>
           {row.loppuPvm && <td className="text-body-md pr-7">{formatDate(row.loppuPvm)}</td>}
           {!hideOsaamiset && (
