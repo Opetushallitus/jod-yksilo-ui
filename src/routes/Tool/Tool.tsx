@@ -11,7 +11,7 @@ import { Button, PageChangeDetails, Pagination, Slider, Spinner, cx, useMediaQue
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdBlock, MdOutlineInterests, MdOutlineSchool } from 'react-icons/md';
-import { Outlet, useLoaderData, useLocation, useNavigate } from 'react-router';
+import { Outlet, useLoaderData, useLocation, useNavigate, useSearchParams } from 'react-router';
 import { ToolLoaderData } from './loader';
 import { VirtualAssistant } from './VirtualAssistant';
 
@@ -34,12 +34,32 @@ const MyOwnData = () => {
     i18n: { language },
   } = useTranslation();
   const toolStore = useToolStore();
+  const [searchParams] = useSearchParams();
   const titleId = React.useId();
   const { isDev } = useEnvironment();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { lg } = useMediaQueries();
   const { isLoggedIn } = useLoaderData() as ToolLoaderData;
+
+  React.useEffect(() => {
+    if (searchParams.get('origin') === 'favorites') {
+      const filterParam = searchParams.get('filter');
+      if (filterParam) {
+        toolStore.setFilter(filterParam);
+      }
+      const opportunitiesTitleElement = document.getElementById('opportunities-title');
+      if (opportunitiesTitleElement) {
+        opportunitiesTitleElement.scrollIntoView({ behavior: 'smooth' });
+        opportunitiesTitleElement.focus();
+      }
+      const url = new URL(window.location.href);
+      url.search = ''; // Clear search parameters
+      window.history.replaceState({}, '', url.toString());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const tabs = React.useMemo(() => {
     const tabs = [
       {
@@ -292,7 +312,9 @@ const YourOpportunities = () => {
 
   return (
     <main role="main" className="col-span-3 lg:col-span-1" id="jod-main">
-      <h1 className="text-heading-1-mobile sm:text-heading-1">{t('tool.your-opportunities.title')}</h1>
+      <h1 id="opportunities-title" tabIndex={-1} className="text-heading-1-mobile sm:text-heading-1 scroll-mt-11">
+        {t('tool.your-opportunities.title')}
+      </h1>
       <p className="text-body-md-mobile sm:text-body-md mb-7">{t('tool.your-opportunities.description')}</p>
 
       <YourOpportunitiesCard isLoggedIn={isLoggedIn} />
