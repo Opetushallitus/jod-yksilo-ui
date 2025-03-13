@@ -9,6 +9,7 @@ import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useActionBar } from '@/hooks/useActionBar';
 import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
+import { filterValues } from '@/routes/Tool/utils.ts';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
@@ -16,9 +17,21 @@ import { Button, Modal, Pagination, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { useOutletContext } from 'react-router';
+import { MdArrowForward } from 'react-icons/md';
+import { Link, useOutletContext } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { getTypeSlug, mapNavigationRoutes } from '../utils';
+
+const descriptionKeys = {
+  KAIKKI: 'profile.favorites.you-have-no-job-nor-education-opportunities',
+  TYOMAHDOLLISUUS: 'profile.favorites.you-have-no-job-opportunities',
+  KOULUTUSMAHDOLLISUUS: 'profile.favorites.you-have-no-education-opportunities',
+};
+const linkTextKeys = {
+  KAIKKI: 'profile.favorites.link-go-to-job-and-education-opportunities',
+  TYOMAHDOLLISUUS: 'profile.favorites.link-go-to-job-opportunities',
+  KOULUTUSMAHDOLLISUUS: 'profile.favorites.link-go-to-education-opportunities',
+};
 
 const Favorites = () => {
   const routes = useOutletContext<RoutesNavigationListProps['routes']>();
@@ -100,23 +113,55 @@ const Favorites = () => {
     }
   }, [selectedFilter, pageData]);
 
-  const favoriteCountText = React.useMemo(() => {
+  const getFavoriteCountsForKaikki = React.useCallback(() => {
+    const jobCount = suosikit.filter((s) => s.tyyppi === 'TYOMAHDOLLISUUS').length;
+    const educationCount = suosikit.filter((s) => s.tyyppi === 'KOULUTUSMAHDOLLISUUS').length;
+    return { jobCount, educationCount };
+  }, [suosikit]);
+
+  const getFavoriteCount = React.useCallback(() => {
+    const { jobCount, educationCount } = getFavoriteCountsForKaikki();
+    if (selectedFilter === 'KAIKKI') {
+      return jobCount + educationCount;
+    }
+    if (selectedFilter === 'TYOMAHDOLLISUUS') {
+      return jobCount;
+    }
+    if (selectedFilter === 'KOULUTUSMAHDOLLISUUS') {
+      return educationCount;
+    }
+    return jobCount + educationCount;
+  }, [getFavoriteCountsForKaikki, selectedFilter]);
+
+  const getFavoriteCountText = React.useMemo(() => {
+    const { jobCount, educationCount } = getFavoriteCountsForKaikki();
     switch (selectedFilter) {
-      case 'KAIKKI':
+      case 'KAIKKI': {
         return t('profile.favorites.you-have-saved-opportunities', {
-          jobOpportunitiesCount: suosikit.filter((s) => s.tyyppi === 'TYOMAHDOLLISUUS').length,
-          educationOpportunitiesCount: suosikit.filter((s) => s.tyyppi === 'KOULUTUSMAHDOLLISUUS').length,
+          jobOpportunitiesCount: jobCount,
+          educationOpportunitiesCount: educationCount,
         });
+      }
       case 'TYOMAHDOLLISUUS':
-        return t('profile.favorites.you-have-saved-n-job-opportunities', {
-          count: totalItems,
+        return t('profile.favorites.you-have-saved-job-opportunities', {
+          jobOpportunitiesCount: jobCount,
         });
       case 'KOULUTUSMAHDOLLISUUS':
-        return t('profile.favorites.you-have-saved-n-education-opportunities', {
-          count: totalItems,
+        return t('profile.favorites.you-have-saved-education-opportunities', {
+          educationOpportunitiesCount: educationCount,
         });
     }
-  }, [selectedFilter, suosikit, t, totalItems]);
+  }, [getFavoriteCountsForKaikki, selectedFilter, t]);
+
+  const getFilterValueForTools = React.useMemo(() => {
+    if (selectedFilter === 'TYOMAHDOLLISUUS') {
+      return filterValues.TYOMAHDOLLISUUS;
+    }
+    if (selectedFilter === 'KOULUTUSMAHDOLLISUUS') {
+      return filterValues.KOULUTUSMAHDOLLISUUS;
+    }
+    return filterValues.ALL;
+  }, [selectedFilter]);
 
   return (
     <MainLayout
@@ -147,7 +192,23 @@ const Favorites = () => {
         </div>
       </div>
 
-      <p className="mb-8">{favoriteCountText}</p>
+      {getFavoriteCount() > 0 ? (
+        <p className="mt-2">{getFavoriteCountText}</p>
+      ) : (
+        <p className="mt-2 whitespace-pre-line">{t(descriptionKeys[selectedFilter])}</p>
+      )}
+
+      <div className="mt-4 mb-4">
+        <Link
+          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.goals')}?origin=favorites&filter=${getFilterValueForTools}`}
+          className="text-button-md hover:underline text-accent mt-4"
+        >
+          <div className="flex items-center gap-2">
+            {t(linkTextKeys[selectedFilter])}
+            <MdArrowForward size={24} />
+          </div>
+        </Link>
+      </div>
 
       <div>
         {!sm && (
@@ -204,7 +265,7 @@ const Favorites = () => {
           );
         })}
       </div>
-      {suosikit.length > 0 && (
+      {getFavoriteCount() > 0 && (
         <Pagination
           currentPage={pageNr}
           onPageChange={(data) => {
