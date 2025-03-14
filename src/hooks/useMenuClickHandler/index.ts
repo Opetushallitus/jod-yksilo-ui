@@ -16,7 +16,7 @@ export const useMenuClickHandler = (
    * @returns True if the element is part of a headlessui dialog, false otherwise
    */
   const isPartOfHeadlessUIDialog = React.useCallback((element: HTMLElement) => {
-    if (element.id.includes('headlessui-dialog')) {
+    if (element.id.includes('ds-confirm-dialog-panel')) {
       return true;
     } else if (element.parentElement) {
       return isPartOfHeadlessUIDialog(element.parentElement);
