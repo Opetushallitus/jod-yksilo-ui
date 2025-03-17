@@ -100,17 +100,14 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
     alkuPvm: data.alkuPvm,
     loppuPvm: data.loppuPvm,
     osaamiset: [],
+    osasuoritukset: data.osasuoritukset,
   });
 
   const isChecked = (
     key: string,
     data: {
-      id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
-      alkuPvm?: string;
-      loppuPvm?: string;
-      osaamiset?: string[];
     },
   ) => {
     const matchSchool = tableRows?.find((row) => JSON.stringify(row.nimi) === key);
@@ -215,11 +212,6 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
               />
             )}
           </div>
-          {!isFetching && !error && (
-            <div className="sticky p-4 bottom-0 bg-bg-gray w-full text-todo">
-              Tähän kuvaus, että osaamisia lisätty opintoihin. TODO: OPHJOD-1306
-            </div>
-          )}
         </div>
       }
       footer={

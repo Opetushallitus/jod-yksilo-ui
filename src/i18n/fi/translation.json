@@ -1,4 +1,5 @@
 {
+  "about-ai": "Tietoa tekoälyn käytöstä",
   "about-us": "Tietoa meistä",
   "about-us-and-user-guide": "Tietoa palvelusta ja käyttöohjeet",
   "accept": "Hyväksy",
@@ -17,6 +18,8 @@
   "competence": "Osaaminen",
   "competences": "Osaamiset",
   "competences-from-profile": "Osaamisprofiilista tuotu osaamiseni",
+  "competences-identify-failed": "Tekoälyn osaamistunnistus epäonnistui.",
+  "competences-identifying": "Voit muokata koulutusta, kun osaamiset ovat latautuneet.",
   "competences-of-your-choice": "Valitut osaamiset",
   "content": "Sisältö",
   "cookie-policy": "Evästekäytäntö",
@@ -76,7 +79,9 @@
     "result-modal": {
       "failure": "Koulutus historia lisääminen epäonnistui.",
       "give-permission-failed": "Luvan antaminen epäonnistui. Yritä myöhemmin uudelleen.",
-      "success": "Koulutus historia lisätty onnistuneesti."
+      "success": "Koulutus historia lisätty onnistuneesti.",
+      "success-osaamiset-info": "Seuraavaksi tunnistamme sinulle lisättyihin koulutuksiin osaamisia.\nVoit poistaa ja lisätä osaamisia muokkaamalla koulutuksen tietoja.\nLisätietoja osaamisten tunnistamisesta löydät alla olevasta linkistä.",
+      "success-osaamiset-link-about-ai": "Tietoa tekoälyn käytöstä"
     },
     "start-modal": {
       "description": "Voit tuoda koulutushistoriasi palveluun, kun olet antanut luvan Opintopolussa. Paina \"Siirry Opintopolkuun\", niin voit myöntää luvan tietojen tuontiin. Luvan antamisen jälkeen palaat automaattisesti takaisin palveluun.",
@@ -545,6 +550,7 @@
     "main": "Siirry pääsisältöön"
   },
   "slugs": {
+    "about-ai": "tietoa-tekoalysta",
     "about-us": "tietoa-palvelusta",
     "accessibility-statement": "saavutettavuusseloste",
     "basic-information": "perustiedot",
