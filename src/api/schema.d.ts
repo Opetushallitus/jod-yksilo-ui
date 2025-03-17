@@ -745,6 +745,9 @@ export interface components {
       /** Format: date */
       loppuPvm?: string;
       osaamiset?: string[];
+      osaamisetOdottaaTunnistusta?: boolean;
+      osaamisetTunnistusEpaonnistui?: boolean;
+      osasuoritukset?: string[];
     };
     ToimintoDto: {
       /** Format: uuid */

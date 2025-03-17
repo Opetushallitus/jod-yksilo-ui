@@ -6,17 +6,18 @@ import {
   type ExperienceTableRowData,
   type RoutesNavigationListProps,
 } from '@/components';
+import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
-import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal.tsx';
+import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal';
 import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useOutletContext, useRevalidator, useSearchParams } from 'react-router';
 import { mapNavigationRoutes } from '../utils';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
-import ImportKoulutusResultModal from './modals/ImportKoulutusResultModal.tsx';
-import ImportKoulutusStartModal from './modals/ImportKoulutusStartModal.tsx';
+import ImportKoulutusResultModal from './modals/ImportKoulutusResultModal';
+import ImportKoulutusStartModal from './modals/ImportKoulutusStartModal';
 import { getEducationHistoryTableRows, Koulutuskokonaisuus } from './utils';
 
 const EducationHistory = () => {
@@ -51,9 +52,18 @@ const EducationHistory = () => {
   const [isImportSuccess, setIsImportSuccess] = React.useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const [isOsaamisetIdentifyOngoing, setIsOsaamisetIdentifyOngoing] = React.useState(true);
+
   React.useEffect(() => {
     setRows(getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap));
   }, [koulutuskokonaisuudet, osaamisetMap]);
+
+  React.useEffect(() => {
+    const isIdentifyingCompetence = rows.some(
+      (row) => row.osaamisetOdottaaTunnistusta || row.subrows?.some((subRow) => subRow.osaamisetOdottaaTunnistusta),
+    );
+    setIsOsaamisetIdentifyOngoing(isIdentifyingCompetence);
+  }, [rows]);
 
   const onRowClick = (row: ExperienceTableRowData) => {
     setKoulutuskokonaisuusId(row.key);
@@ -115,6 +125,7 @@ const EducationHistory = () => {
 
   const closeImportResultModal = () => {
     setIsImportResultModalOpen(false);
+    revalidator.revalidate();
   };
 
   React.useEffect(() => {
@@ -158,11 +169,18 @@ const EducationHistory = () => {
           />
         </div>
         <div>
-          <Button
-            variant="white"
-            label={t('education-history.import-education-history')}
-            onClick={openImportStartModal}
-          />
+          <TooltipWrapper
+            tooltipPlacement="top"
+            tooltipContent={t('competences-identifying')}
+            tooltipOpen={isOsaamisetIdentifyOngoing ? undefined : false}
+          >
+            <Button
+              variant="white"
+              label={t('education-history.import-education-history')}
+              onClick={openImportStartModal}
+              disabled={isOsaamisetIdentifyOngoing}
+            />
+          </TooltipWrapper>
         </div>
       </div>
       {isKoulutuskokonaisuusOpen && koulutuskokonaisuusId && (

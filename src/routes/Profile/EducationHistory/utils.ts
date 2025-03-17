@@ -7,6 +7,9 @@ export interface Koulutus {
   alkuPvm?: string;
   loppuPvm?: string;
   osaamiset: string[];
+  osaamisetOdottaaTunnistusta?: boolean;
+  osaamisetTunnistusEpaonnistui?: boolean;
+  osasuoritukset?: string[];
 }
 
 export interface Koulutuskokonaisuus {
@@ -59,6 +62,8 @@ export const getEducationHistoryTableRows = (
         sourceType: 'koulutus',
       })),
       checked: true,
+      osaamisetOdottaaTunnistusta: row.koulutukset.some((koulutus) => koulutus.osaamisetOdottaaTunnistusta),
+      osaamisetTunnistusEpaonnistui: row.koulutukset.some((koulutus) => koulutus.osaamisetTunnistusEpaonnistui),
     };
 
     rows.push(rowData);
@@ -86,4 +91,6 @@ const mapKoulutusToRow = (
     sourceType: 'koulutus',
   })),
   checked: true,
+  osaamisetOdottaaTunnistusta: koulutus.osaamisetOdottaaTunnistusta,
+  osaamisetTunnistusEpaonnistui: koulutus.osaamisetTunnistusEpaonnistui,
 });
