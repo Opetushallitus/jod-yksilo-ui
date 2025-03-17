@@ -1,5 +1,6 @@
+import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useToolStore } from '@/stores/useToolStore';
-import { SelectionCard, Tooltip, TooltipContent, TooltipTrigger, useMediaQueries } from '@jod/design-system';
+import { SelectionCard, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdInfoOutline } from 'react-icons/md';
@@ -267,30 +268,6 @@ const InfoButton = ({ ariaLabel, onClick }: { ariaLabel: string; onClick: () => 
   );
 };
 
-const TooltipWrapper = ({
-  children,
-  tooltipOpen,
-  tooltipContent,
-}: {
-  children: React.ReactNode;
-  tooltipContent: React.ReactNode;
-  tooltipOpen: boolean;
-}) => {
-  const { sm } = useMediaQueries();
-  return (
-    <Tooltip open={tooltipOpen} placement="bottom">
-      <TooltipContent
-        className={`bg-black text-white rounded-xl p-5 z-50 text-body-sm sm:text-body-md font-arial ${sm ? 'w-1/2' : 'max-w-fit mr-11'}`}
-      >
-        {tooltipContent}
-      </TooltipContent>
-      <TooltipTrigger asChild>
-        <div>{children}</div>
-      </TooltipTrigger>
-    </Tooltip>
-  );
-};
-
 const Goals = () => {
   const { t } = useTranslation();
   const toolStore = useToolStore();
@@ -351,6 +328,7 @@ const Goals = () => {
         <TooltipWrapper
           tooltipOpen={openTooltips.mapCompetence}
           tooltipContent={t('tool.my-own-data.goals.map-competence-tooltip')}
+          halfWidth
         >
           <SelectionCard
             actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('mapCompetence')} />}
@@ -366,6 +344,7 @@ const Goals = () => {
         <TooltipWrapper
           tooltipOpen={openTooltips.trainings}
           tooltipContent={t('tool.my-own-data.goals.trainings-tooltip')}
+          halfWidth
         >
           <SelectionCard
             actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('trainings')} />}
@@ -381,6 +360,7 @@ const Goals = () => {
         <TooltipWrapper
           tooltipOpen={openTooltips.jobOpportunities}
           tooltipContent={t('tool.my-own-data.goals.job-opportunities-tooltip')}
+          halfWidth
         >
           <SelectionCard
             actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('jobOpportunities')} />}
@@ -396,6 +376,7 @@ const Goals = () => {
         <TooltipWrapper
           tooltipOpen={openTooltips.mapOpportunities}
           tooltipContent={t('tool.my-own-data.goals.map-opportunities-tooltip')}
+          halfWidth
         >
           <SelectionCard
             actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('mapOpportunities')} />}
@@ -411,6 +392,7 @@ const Goals = () => {
         <TooltipWrapper
           tooltipOpen={openTooltips.somethingElse}
           tooltipContent={t('tool.my-own-data.goals.something-else-tooltip')}
+          halfWidth
         >
           <SelectionCard
             actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('somethingElse')} />}

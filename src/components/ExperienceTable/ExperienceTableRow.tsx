@@ -1,9 +1,9 @@
-/* eslint-disable sonarjs/cognitive-complexity */
+import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
-import { Checkbox, ConfirmDialog, Tag, useMediaQueries } from '@jod/design-system';
+import { Checkbox, ConfirmDialog, Spinner, Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdEdit, MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
+import { MdEdit, MdError, MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 export interface ExperienceTableRowData {
   checked?: boolean;
@@ -19,6 +19,8 @@ export interface ExperienceTableRowData {
     kuvaus: Record<string, string>;
     sourceType: 'tyopaikka' | 'koulutus' | 'vapaa-ajan-toiminto';
   }[];
+  osaamisetOdottaaTunnistusta?: boolean;
+  osaamisetTunnistusEpaonnistui?: boolean;
 }
 
 interface ExperienceTableRowProps {
@@ -28,6 +30,8 @@ interface ExperienceTableRowProps {
   onRowClick?: (row: ExperienceTableRowData) => void;
   className?: string;
   hideOsaamiset?: boolean;
+  osaamisetOdottaaTunnistusta?: boolean;
+  osaamisetTunnistusEpaonnistui?: boolean;
   rowActionElement?: React.ReactNode;
   useConfirm?: boolean;
   confirmTitle?: string;
@@ -56,6 +60,8 @@ export const ExperienceTableRow = ({
   className,
   onRowClick,
   hideOsaamiset,
+  osaamisetOdottaaTunnistusta,
+  osaamisetTunnistusEpaonnistui,
   rowActionElement,
   useConfirm,
   confirmTitle,
@@ -76,6 +82,16 @@ export const ExperienceTableRow = ({
 
   const osaamisetCountTotal =
     row.osaamiset.length > 0 ? t('count-competences', { count: row.osaamiset.length }) : t('no-competences');
+
+  const renderCompetencesDetectFailure = () => {
+    return (
+      <div className="flex justify-start items-center">
+        <TooltipWrapper tooltipContent={t('competences-identify-failed')} tooltipPlacement="top">
+          <MdError size={24} color="red" />
+        </TooltipWrapper>
+      </div>
+    );
+  };
 
   const sortedCompetences = React.useMemo(
     () => [...(row.osaamiset ?? [])].sort(sortByProperty(`nimi.${language}`)),
@@ -100,21 +116,28 @@ export const ExperienceTableRow = ({
         variant="destructive"
         description={confirmDescription ?? ''}
       >
-        {(showDialog: () => void) => (
-          <button
-            aria-label={actionLabel ?? t('edit')}
-            onClick={() => {
-              if (useConfirm) {
-                showDialog();
-              } else {
-                onRowClick(row);
-              }
-            }}
-            className="cursor-pointer flex size-7 items-center justify-center"
-          >
-            {rowActionElement || <MdEdit size={24} className="fill-[#006DB3]" />}
-          </button>
-        )}
+        {(showDialog: () => void) => {
+          return (
+            <TooltipWrapper
+              tooltipPlacement="top"
+              tooltipContent={t('competences-identifying')}
+              tooltipOpen={osaamisetOdottaaTunnistusta ? undefined : false}
+            >
+              <button
+                aria-label={actionLabel ?? t('edit')}
+                onClick={() => (useConfirm ? showDialog() : onRowClick(row))}
+                className="cursor-pointer flex size-7 items-center justify-center"
+                disabled={osaamisetOdottaaTunnistusta}
+                title={osaamisetOdottaaTunnistusta ? t('competences-identifying') : undefined}
+                type="button"
+              >
+                {rowActionElement || (
+                  <MdEdit size={24} className={osaamisetOdottaaTunnistusta ? 'fill-[#83AED3]' : 'fill-[#006DB3]'} />
+                )}
+              </button>
+            </TooltipWrapper>
+          );
+        }}
       </ConfirmDialog>
     );
   };
@@ -140,6 +163,50 @@ export const ExperienceTableRow = ({
     );
   };
 
+  const renderOsaamisetNestedCell = (sm: boolean) => {
+    if (osaamisetOdottaaTunnistusta) {
+      return <Spinner size={24} color="accent" />;
+    }
+    if (osaamisetTunnistusEpaonnistui && row.osaamiset.length === 0) {
+      return renderCompetencesDetectFailure();
+    }
+    if (onRowClick && row.osaamiset.length > 0) {
+      return (
+        <button
+          aria-label={t(isOpen ? 'close' : 'open')}
+          onClick={() => setIsOpen(!isOpen)}
+          className={`cursor-pointer flex gap-x-2 items-center ${sm ? 'text-nowrap' : ''} pr-7`}
+        >
+          {isOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
+          {osaamisetCountTotal}
+        </button>
+      );
+    }
+    return <span className="pl-[28px] pr-7">{osaamisetCountTotal}</span>;
+  };
+
+  const renderOsaamisetCell = (sm: boolean) => {
+    if (osaamisetOdottaaTunnistusta) {
+      return (
+        <td className={`text-body-md text-nowrap ${sm ? 'text-center' : ''}`}>
+          <Spinner size={24} color="accent" />
+        </td>
+      );
+    }
+    if (osaamisetTunnistusEpaonnistui && row.osaamiset.length === 0) {
+      return <td className="text-body-md text-nowrap text-center">{renderCompetencesDetectFailure()}</td>;
+    }
+    return sm ? (
+      <td className={`text-body-md text-nowrap`}>
+        <span className="pl-[28px] pr-7">{osaamisetCountTotal}</span>
+      </td>
+    ) : (
+      <td className={`text-body-md text-nowrap ${onRowClick ? 'pr-7 pl-[28px]' : 'pr-5'.trim()}`}>
+        <span className="pr-2">{osaamisetCountTotal}</span>
+      </td>
+    );
+  };
+
   return nested ? (
     <>
       <tr key={row.key} className={className}>
@@ -151,43 +218,13 @@ export const ExperienceTableRow = ({
             </div>
           )}
         </td>
-        {!hideOsaamiset && !sm && (
-          <td className="text-nowrap text-body-sm">
-            {onRowClick && row.osaamiset.length > 0 ? (
-              <button
-                aria-label={t(isOpen ? 'close' : 'open')}
-                onClick={() => setIsOpen(!isOpen)}
-                className="cursor-pointer flex gap-x-2 items-center pr-7"
-              >
-                {isOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
-                {osaamisetCountTotal}
-              </button>
-            ) : (
-              <span className="pl-[28px] pr-7">{osaamisetCountTotal}</span>
-            )}
-          </td>
-        )}
+        {!hideOsaamiset && !sm && <td className="text-nowrap text-body-sm">{renderOsaamisetNestedCell(!sm)}</td>}
         {sm && (
           <>
             <td className="text-body-md pr-7">{!row.hideRowDetails && row.alkuPvm && formatDate(row.alkuPvm)}</td>
             <td className="text-body-md pr-7">{!row.hideRowDetails && row.loppuPvm && formatDate(row.loppuPvm)}</td>
             {!hideOsaamiset && (
-              <td className={`text-body-md ${onRowClick ? 'pr-7' : 'pr-5'}`.trim()}>
-                {onRowClick && row.osaamiset.length > 0 ? (
-                  <button
-                    aria-label={t(isOpen ? 'close' : 'open')}
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="cursor-pointer flex gap-x-2 items-center text-nowrap pr-2"
-                  >
-                    {isOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
-                    {osaamisetCountTotal}
-                  </button>
-                ) : (
-                  <span className={`text-nowrap pr-2 ${onRowClick ? 'pl-[28px]' : ''}`.trim()}>
-                    {osaamisetCountTotal}
-                  </span>
-                )}
-              </td>
+              <td className={`text-body-md ${onRowClick ? 'pr-7' : 'pr-5'}`.trim()}>{renderOsaamisetNestedCell(sm)}</td>
             )}
           </>
         )}
@@ -228,22 +265,14 @@ export const ExperienceTableRow = ({
           </div>
         )}
       </td>
-      {!hideOsaamiset && !sm && (
-        <td>
-          <span className="text-body-sm text-nowrap pl-[28px] pr-7">{osaamisetCountTotal}</span>
-        </td>
-      )}
+      {!sm && !hideOsaamiset && renderOsaamisetCell(!sm)}
       {sm && (
         <>
           <td className="text-body-md pr-7" colSpan={row.loppuPvm ? 1 : 2}>
             {row.alkuPvm && formatDate(row.alkuPvm)}
           </td>
           {row.loppuPvm && <td className="text-body-md pr-7">{formatDate(row.loppuPvm)}</td>}
-          {!hideOsaamiset && (
-            <td className={`text-body-md text-nowrap ${onRowClick ? 'pr-7 pl-[28px]' : 'pr-5'.trim()}`}>
-              <span className="pr-2">{osaamisetCountTotal}</span>
-            </td>
-          )}
+          {!hideOsaamiset && renderOsaamisetCell(sm)}
         </>
       )}
       {onRowClick && (

@@ -196,6 +196,8 @@ export const ExperienceTable = ({
                   onRowClick={onRowClick}
                   className="bg-white border-spacing-x-2"
                   hideOsaamiset={hideOsaamiset}
+                  osaamisetOdottaaTunnistusta={row.osaamisetOdottaaTunnistusta}
+                  osaamisetTunnistusEpaonnistui={row.osaamisetTunnistusEpaonnistui}
                   rowActionElement={rowActionElement}
                   useConfirm={useConfirm}
                   confirmTitle={confirmTitle}
@@ -215,6 +217,8 @@ export const ExperienceTable = ({
                     className={i % 2 !== 0 ? 'bg-white bg-opacity-60' : 'bg-bg-gray'}
                     nested
                     hideOsaamiset={hideOsaamiset}
+                    osaamisetOdottaaTunnistusta={subrow.osaamisetOdottaaTunnistusta}
+                    osaamisetTunnistusEpaonnistui={subrow.osaamisetTunnistusEpaonnistui}
                     rowActionElement={rowActionElement}
                     useConfirm={useConfirm}
                     confirmTitle={confirmTitle}
@@ -256,6 +260,8 @@ export const ExperienceTable = ({
                 row={row}
                 onRowClick={onRowClick}
                 hideOsaamiset={hideOsaamiset}
+                osaamisetOdottaaTunnistusta={row.osaamisetOdottaaTunnistusta}
+                osaamisetTunnistusEpaonnistui={row.osaamisetTunnistusEpaonnistui}
                 rowActionElement={rowActionElement}
                 useConfirm={useConfirm}
                 confirmTitle={confirmTitle}

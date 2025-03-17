@@ -25,6 +25,10 @@ const BasicInformation = () => {
       name: t('privacy-policy'),
       path: t('slugs.privacy-policy'),
     },
+    {
+      name: t('about-ai'),
+      path: t('slugs.about-ai'),
+    },
   ];
 
   return (

@@ -44,6 +44,7 @@ const Root = () => {
     NavigationBarItem(`${basicInformation}/${t('slugs.terms-of-service')}`, t('terms-of-service')),
     NavigationBarItem(`${basicInformation}/${t('slugs.accessibility-statement')}`, t('accessibility-statement')),
     NavigationBarItem(`${basicInformation}/${t('slugs.privacy-policy')}`, t('privacy-policy')),
+    NavigationBarItem(`${basicInformation}/${t('slugs.about-ai')}`, t('about-ai')),
   ];
   const logoutForm = React.useRef<HTMLFormElement>(null);
   const megaMenuButtonRef = React.useRef<HTMLButtonElement>(null);
