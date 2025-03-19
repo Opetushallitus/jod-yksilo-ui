@@ -8,10 +8,15 @@ const TEST_DATE_3 = '2023-01-01';
 
 describe('utils', () => {
   describe('formatDate', () => {
-    it('should return formatted date string', () => {
+    it('should return formatted short date string', () => {
       const date = new Date(2022, 0, 15);
       const formattedDate = formatDate(date);
       expect(formattedDate).toEqual('1/2022');
+    });
+    it('should return formatted medium date string', () => {
+      const date = new Date(2022, 0, 15);
+      const formattedDate = formatDate(date, 'medium');
+      expect(formattedDate).toEqual('15.1.2022');
     });
 
     it('should return empty string for invalid date', () => {

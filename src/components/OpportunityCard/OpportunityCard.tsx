@@ -1,12 +1,12 @@
 import { components } from '@/api/schema';
-import { ActionButton, FavoriteToggle, LoginModal } from '@/components';
+import { FavoriteToggle, LoginModal } from '@/components';
+import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDropdown';
 import { useEnvironment } from '@/hooks/useEnvironment';
-import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { cx } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdBlock, MdMoreVert, MdOutlineTrendingDown, MdOutlineTrendingUp } from 'react-icons/md';
+import { MdBlock, MdOutlineTrendingDown, MdOutlineTrendingUp } from 'react-icons/md';
 import { NavLink } from 'react-router';
 
 type FavoriteProps =
@@ -23,6 +23,18 @@ type FavoriteProps =
       isLoggedIn: boolean;
     };
 
+type MenuProps =
+  | {
+      // Menu component to use with "Lisää toimintoja"
+      menuContent: React.ReactNode;
+      // Id of the menu content component, needed for a11y
+      menuId: string;
+    }
+  | {
+      menuContent?: never;
+      menuId?: never;
+    };
+
 type OpportunityCardProps = {
   as?: React.ElementType;
   to?: string;
@@ -36,11 +48,8 @@ type OpportunityCardProps = {
   hasRestrictions: boolean;
   industryName?: string;
   mostCommonEducationBackground?: string;
-  // Menu component to use with "Lisää toimintoja"
-  menuContent: React.ReactNode;
-  // Id of the menu content component, needed for a11y
-  menuId: string;
-} & FavoriteProps;
+} & FavoriteProps &
+  MenuProps;
 
 const BottomBox = ({
   title,
@@ -68,43 +77,6 @@ const OutlookDots = ({ outlook, ariaLabel }: { outlook: number; ariaLabel: strin
     ))}
   </div>
 );
-
-const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuContent: React.ReactNode }) => {
-  const { t } = useTranslation();
-  const [open, setOpen] = React.useState(false);
-  const actionButtonRef = React.useRef<HTMLDivElement>(null);
-  const actionMenuRef = useMenuClickHandler(() => setOpen(false), actionButtonRef);
-
-  return (
-    <div className="relative" ref={actionMenuRef}>
-      <div ref={actionButtonRef}>
-        <ActionButton
-          label={t('more-actions')}
-          icon={<MdMoreVert size={24} className="text-accent" />}
-          aria-controls={menuId}
-          aria-expanded={open}
-          aria-haspopup="listbox"
-          className={open ? 'text-accent' : ''}
-          onClick={() => setOpen(!open)}
-        />
-      </div>
-      {open && (
-        /* Preventing the click through of the wrapper <div> if not able to click exactly at the list items */
-        /* eslint-disable jsx-a11y/click-events-have-key-events */
-        /* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
-        <div
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          }}
-          className="absolute -right-2 translate-y-[10px] cursor-auto z-50"
-        >
-          {menuContent}
-        </div>
-      )}
-    </div>
-  );
-};
 
 export const OpportunityCard = ({
   as: Component = 'div',
@@ -143,12 +115,13 @@ export const OpportunityCard = ({
   };
 
   const cardTypeTitle = type === 'TYOMAHDOLLISUUS' ? t('opportunity-type.work') : t('opportunity-type.education');
-  const ActionsSection = (
-    <div className="grow flex flex-wrap gap-x-5 gap-y-2 justify-end">
-      {!hideFavorite && <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />}
-      <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />
-    </div>
-  );
+  const ActionsSection =
+    menuId && menuContent ? (
+      <div className="grow flex flex-wrap gap-x-5 gap-y-2 justify-end">
+        {!hideFavorite && <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />}
+        <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />
+      </div>
+    ) : null;
 
   return (
     <>
@@ -218,7 +191,7 @@ export const OpportunityCard = ({
               <span className="text-body-xs font-arial font-bold">{matchLabel}</span>
             </div>
           )}
-          {ActionsSection}
+          {menuContent ? ActionsSection : null}
         </div>
       </Component>
     </>

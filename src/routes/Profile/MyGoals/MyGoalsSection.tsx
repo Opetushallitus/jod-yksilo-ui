@@ -1,11 +1,14 @@
+import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
 import { getTypeSlug } from '@/routes/Profile/utils';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
+import { Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+import { MdArrowForward } from 'react-icons/md';
+import { Link, useLoaderData } from 'react-router';
 import loader from './loader';
 import MyGoalsOpportunityCardMenu from './MyGoalsOpportunityCardMenu';
 import TavoiteInput from './TavoiteInput';
@@ -17,7 +20,10 @@ interface MyGoalsSectionProps {
   paamaarat: components['schemas']['PaamaaraDto'][];
 }
 const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionProps) => {
-  const { i18n } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { koulutusMahdollisuudetDetails, tyomahdollisuudetDetails } =
     useLoaderData<Awaited<ReturnType<typeof loader>>>();
 
@@ -32,6 +38,15 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
     },
     [koulutusMahdollisuudetDetails, tyomahdollisuudetDetails],
   );
+
+  const deletePolku = async (paamaaraId?: string, suunnitelmaId?: string) => {
+    if (!paamaaraId || !suunnitelmaId) {
+      return;
+    }
+    await client.DELETE('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}', {
+      params: { path: { id: paamaaraId, suunnitelmaId } },
+    });
+  };
 
   return (
     <div className="mb-5">
@@ -48,7 +63,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
           return details ? (
             <div key={mahdollisuusId} className="flex flex-col gap-5 mb-9">
               <OpportunityCard
-                to={`/${i18n.language}/${getTypeSlug(mahdollisuusTyyppi)}/${mahdollisuusId}`}
+                to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${mahdollisuusId}`}
                 description={getLocalizedText(details?.tiivistelma)}
                 employmentOutlook={2}
                 hasRestrictions
@@ -69,6 +84,49 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                 hideFavorite
               />
               <TavoiteInput paamaara={pm} />
+              <div className="text-form-label font-arial">{t('profile.my-goals.my-plan-towards-goal')}</div>
+              <div className="flex flex-col gap-3">
+                {pm.suunnitelmat?.map((polku) => (
+                  <div className="flex flex-col gap-4" key={polku.id}>
+                    <Link
+                      to={`${pm.id}/${t('slugs.profile.path')}/${polku.id}`}
+                      className="text-link flex gap-2 text-heading-4"
+                    >
+                      {polku.nimi[language]} <MdArrowForward size={24} />
+                    </Link>
+                    {pm.id && polku.id ? (
+                      <ConfirmDialog
+                        title={t('profile.paths.delete-path-title')}
+                        onConfirm={() => deletePolku(pm.id, polku.id)}
+                        confirmText={t('delete')}
+                        cancelText={t('cancel')}
+                        variant="destructive"
+                        description={t('profile.paths.delete-path-description')}
+                      >
+                        {(showDialog: () => void) => (
+                          <div>
+                            <Button
+                              label={t('profile.paths.delete-path')}
+                              variant="white-delete"
+                              onClick={showDialog}
+                            />
+                          </div>
+                        )}
+                      </ConfirmDialog>
+                    ) : null}
+                  </div>
+                ))}
+                <div className="mt-9">
+                  <Button
+                    variant="accent"
+                    label={t('profile.my-goals.create-new-path-for-goal')}
+                    // eslint-disable-next-line react/no-unstable-nested-components
+                    LinkComponent={({ children }: { children: React.ReactNode }) => (
+                      <Link to={`${pm.id}/${t('slugs.profile.path')}`}>{children}</Link>
+                    )}
+                  />
+                </div>
+              </div>
             </div>
           ) : null;
         })}

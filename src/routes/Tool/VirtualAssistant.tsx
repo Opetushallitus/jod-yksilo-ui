@@ -120,7 +120,7 @@ export const VirtualAssistant = ({
           }}
           variant="gray"
           size="sm"
-          label={t('tool.my-own-data.interests.virtual-assistant.done')}
+          label={t('done')}
         />
       </div>
 
