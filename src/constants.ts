@@ -24,6 +24,7 @@ const FORM_ERROR_KEY = {
   MAX: 'error.form.max',
   MIN: 'error.form.min',
   DATE: 'error.form.date',
+  URL: 'error.form.url',
   DATE_RANGE: 'error.form.date-range',
 };
 
@@ -37,6 +38,7 @@ export const formErrorMessage = {
   max: (count: number) => ({ message: i18n.t(FORM_ERROR_KEY.MAX, { count }) }),
   min: (count: number) => ({ message: i18n.t(FORM_ERROR_KEY.MIN, { count }) }),
   required: () => ({ message: i18n.t(FORM_ERROR_KEY.REQUIRED) }),
+  url: () => ({ message: i18n.t(FORM_ERROR_KEY.URL) }),
   date: () => i18n.t(FORM_ERROR_KEY.DATE),
   /**
    * Used to validate that the end date is after the start date

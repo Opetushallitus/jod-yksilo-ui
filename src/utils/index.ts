@@ -4,10 +4,21 @@ import i18n from '@/i18n/config';
 import { Datepicker } from '@jod/design-system';
 import { ComponentProps } from 'react';
 
-export const formatDate = (date: Date) => {
+export const formatDate = (date: Date, type: 'short' | 'medium' = 'short') => {
   const month = date.getMonth();
   const fullYear = date.getFullYear();
-  return isNaN(month) || isNaN(fullYear) ? '' : `${month + 1}/${fullYear}`;
+  const day = date.getDate();
+
+  if (isNaN(month) && isNaN(fullYear)) {
+    return '';
+  } else {
+    if (type === 'short') {
+      return `${month + 1}/${fullYear}`;
+    }
+    if (type === 'medium') {
+      return `${day}.${month + 1}.${fullYear}`;
+    }
+  }
 };
 
 /**

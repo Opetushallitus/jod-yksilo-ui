@@ -104,9 +104,48 @@ export interface paths {
       cookie?: never;
     };
     get?: never;
+    /** Updates a paamaara */
     put: operations['paamaaraUpdate'];
     post?: never;
+    /** Deletes a paamaara */
     delete: operations['paamaaraDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Gets a suunnitelma of the paamaara */
+    get: operations['polunSuunnitelmaGet'];
+    /** Updates a suunnitelma of the paamaara */
+    put: operations['polunSuunnitelmaUpdate'];
+    post?: never;
+    /** Deletes a suunnitelma of the paamaara */
+    delete: operations['polunSuunnitelmaDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    /** Updates a vaihe of the suunnitelma */
+    put: operations['polunVaiheUpdate'];
+    post?: never;
+    /** Deletes a vaihe of the suunnitelma */
+    delete: operations['polunVaiheDelete'];
     options?: never;
     head?: never;
     patch?: never;
@@ -282,9 +321,45 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Gets all paamaarat */
     get: operations['paamaaraFindAll'];
     put?: never;
+    /** Adds a new paamaara */
     post: operations['paamaaraAdd'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/paamaarat/{id}/suunnitelmat': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Adds a new suunnitelma to the paamaara */
+    post: operations['polunSuunnitelmaAdd'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}/vaiheet': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Adds a new vaihe to the suunnitelma */
+    post: operations['polunVaiheAdd'];
     delete?: never;
     options?: never;
     head?: never;
@@ -626,6 +701,34 @@ export interface components {
       tavoite?: components['schemas']['LokalisoituTeksti'];
       /** Format: date-time */
       readonly luotu?: string;
+      readonly suunnitelmat?: components['schemas']['PolunSuunnitelmaYhteenvetoDto'][];
+    };
+    PolunSuunnitelmaYhteenvetoDto: {
+      /** Format: uuid */
+      readonly id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+    };
+    PolunSuunnitelmaUpdateDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      osaamiset?: string[];
+      ignoredOsaamiset?: string[];
+    };
+    PolunVaiheDto: {
+      /** Format: uuid */
+      readonly id?: string;
+      /** @enum {string} */
+      tyyppi: 'KOULUTUS' | 'TYO';
+      nimi: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      linkit?: string[];
+      /** Format: date */
+      alkuPvm: string;
+      /** Format: date */
+      loppuPvm: string;
+      osaamiset?: string[];
+      valmis: boolean;
     };
     KoulutusKokonaisuusUpdateDto: {
       /** Format: uuid */
@@ -668,6 +771,20 @@ export interface components {
       tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       /** Format: date-time */
       readonly luotu?: string;
+    };
+    PaamaaraYhteenvetoDto: {
+      /** Format: uuid */
+      readonly id?: string;
+      tavoite?: components['schemas']['LokalisoituTeksti'];
+    };
+    PolunSuunnitelmaDto: {
+      /** Format: uuid */
+      readonly id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      readonly paamaara?: components['schemas']['PaamaaraYhteenvetoDto'];
+      readonly vaiheet?: components['schemas']['PolunVaiheDto'][];
+      readonly osaamiset?: string[];
+      readonly ignoredOsaamiset?: string[];
     };
     KoulutusKokonaisuusDto: {
       /** Format: uuid */
@@ -1258,6 +1375,123 @@ export interface operations {
       };
     };
   };
+  polunSuunnitelmaGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        suunnitelmaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PolunSuunnitelmaDto'];
+        };
+      };
+    };
+  };
+  polunSuunnitelmaUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        suunnitelmaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PolunSuunnitelmaUpdateDto'];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  polunSuunnitelmaDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        suunnitelmaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  polunVaiheUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        suunnitelmaId: string;
+        vaiheId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PolunVaiheDto'];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  polunVaiheDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        suunnitelmaId: string;
+        vaiheId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   muuOsaaminenFindAll: {
     parameters: {
       query?: never;
@@ -1757,6 +1991,59 @@ export interface operations {
     requestBody: {
       content: {
         'application/json': components['schemas']['PaamaaraDto'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': string;
+        };
+      };
+    };
+  };
+  polunSuunnitelmaAdd: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PolunSuunnitelmaDto'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': string;
+        };
+      };
+    };
+  };
+  polunVaiheAdd: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+        suunnitelmaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PolunVaiheDto'];
       };
     };
     responses: {
