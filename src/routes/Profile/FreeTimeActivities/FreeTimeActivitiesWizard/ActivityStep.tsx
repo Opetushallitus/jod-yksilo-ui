@@ -19,6 +19,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
     register,
     watch,
     control,
+    trigger,
     formState: { errors, touchedFields },
   } = useFormContext<FreeTimeActivitiesForm>();
   const id = watch('id');
@@ -54,10 +55,14 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
         <div className="block w-full">
           <Controller
             control={control}
-            render={({ field }) => (
+            render={({ field: { onBlur }, field }) => (
               <Datepicker
                 label={t('started')}
                 {...field}
+                onBlur={() => {
+                  onBlur();
+                  trigger(`patevyydet.${patevyys}.loppuPvm`);
+                }}
                 placeholder={t('date-placeholder')}
                 translations={getDatePickerTranslations(
                   t('datepicker', { returnObjects: true }) as DatePickerTranslations,

@@ -1,7 +1,6 @@
 import { FormError, TouchedFormError } from '@/components';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
-import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { EducationHistoryForm } from './utils';
@@ -25,10 +24,6 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
   } = useFormContext<EducationHistoryForm>();
   const id = watch('id');
   const koulutusId = watch(`koulutukset.${koulutus}.id`);
-
-  React.useEffect(() => {
-    trigger(`koulutukset.${koulutus}.id`);
-  }, [koulutus, koulutusId, trigger]);
 
   return (
     <>
@@ -61,10 +56,14 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
         <div className="block w-full">
           <Controller
             control={control}
-            render={({ field }) => (
+            render={({ field: { onBlur }, field }) => (
               <Datepicker
                 label={t('started')}
                 {...field}
+                onBlur={() => {
+                  onBlur();
+                  trigger(`koulutukset.${koulutus}.loppuPvm`);
+                }}
                 placeholder={t('date-placeholder')}
                 translations={getDatePickerTranslations(
                   t('datepicker', { returnObjects: true }) as DatePickerTranslations,
