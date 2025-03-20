@@ -31,6 +31,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
 
   const methods = useForm<WorkHistoryForm>({
     mode: 'onBlur',
+    reValidateMode: 'onBlur',
     resolver: zodResolver(
       z
         .object({
@@ -92,7 +93,6 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
     },
   });
 
-  const trigger = methods.trigger;
   const { isValid, isLoading } = useFormState({
     control: methods.control,
   });
@@ -125,10 +125,6 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   const isWorkplaceStep = React.useMemo(() => step !== steps && (step + 1) % 2 === 0, [step, steps]);
   const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
   const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
-
-  React.useEffect(() => {
-    void trigger();
-  }, [trigger, fields]);
 
   if (isLoading) {
     return null;

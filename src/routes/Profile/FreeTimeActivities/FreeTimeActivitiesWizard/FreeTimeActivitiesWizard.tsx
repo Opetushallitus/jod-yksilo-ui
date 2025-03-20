@@ -23,12 +23,15 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { sm } = useMediaQueries();
+  const [step, setStep] = React.useState(1);
+  const selectedPatevyys = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
 
   const formId = React.useId();
   useEscHandler(() => setIsOpen(false), formId);
 
   const methods = useForm<FreeTimeActivitiesForm>({
     mode: 'onBlur',
+    reValidateMode: 'onBlur',
     resolver: zodResolver(
       z
         .object({
@@ -70,7 +73,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
         .refine(
           (data) =>
             data.patevyydet.every((patevyys) => (patevyys.loppuPvm ? patevyys.alkuPvm <= patevyys.loppuPvm : true)),
-          formErrorMessage.dateRange(['loppuPvm']),
+          formErrorMessage.dateRange(['patevyydet', `${selectedPatevyys}`, 'loppuPvm']),
         ), // alkuPvm <= loppuPvm
     ),
     defaultValues: async () => {
@@ -87,7 +90,6 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
       });
     },
   });
-  const trigger = methods.trigger;
   const { isValid, isLoading } = useFormState({
     control: methods.control,
   });
@@ -117,16 +119,10 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
   React.useEffect(() => {
     setSteps(fields.length * 2 + 1);
   }, [fields.length]);
-  const [step, setStep] = React.useState(1);
   const isFirstStep = React.useMemo(() => step === 1, [step]);
-  const selectedPatevyys = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
   const isActivityStep = React.useMemo(() => step !== steps && (step + 1) % 2 === 0, [step, steps]);
   const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
   const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
-
-  React.useEffect(() => {
-    void trigger();
-  }, [trigger, fields]);
 
   return !isLoading ? (
     <Modal

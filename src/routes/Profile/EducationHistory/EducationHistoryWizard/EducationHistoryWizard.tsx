@@ -31,6 +31,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
 
   const methods = useForm<EducationHistoryForm>({
     mode: 'onBlur',
+    reValidateMode: 'onBlur',
     resolver: zodResolver(
       z
         .object({
@@ -91,7 +92,6 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
       });
     },
   });
-  const trigger = methods.trigger;
   const { isValid, isLoading } = useFormState({
     control: methods.control,
   });
@@ -124,10 +124,6 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
   const isEducationStep = React.useMemo(() => step !== steps && (step + 1) % 2 === 0, [step, steps]);
   const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
   const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
-
-  React.useEffect(() => {
-    void trigger();
-  }, [trigger, fields]);
 
   if (isLoading) {
     return null;

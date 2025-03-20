@@ -1,7 +1,6 @@
 import { FormError, TouchedFormError } from '@/components';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
-import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { WorkHistoryForm } from './utils';
@@ -21,13 +20,6 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
   const errors = formState.errors;
   const id = watch('id');
   const toimenkuvaId = watch(`toimenkuvat.${toimenkuva}.id`);
-  const alkuPvm = watch(`toimenkuvat.${toimenkuva}.alkuPvm`);
-
-  // For some reason, the "date range" error does not appear if the "alkuPvm"
-  // is set after "loppuPvm". This is a workaround to trigger the validation.
-  React.useEffect(() => {
-    trigger(`toimenkuvat.${toimenkuva}.loppuPvm`);
-  }, [alkuPvm, toimenkuva, trigger]);
 
   return (
     <>
@@ -62,10 +54,14 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
         <div className="block w-full">
           <Controller
             control={control}
-            render={({ field }) => (
+            render={({ field: { onBlur }, field }) => (
               <Datepicker
                 label={t('started')}
                 {...field}
+                onBlur={() => {
+                  onBlur();
+                  trigger(`toimenkuvat.${toimenkuva}.loppuPvm`);
+                }}
                 placeholder={t('date-placeholder')}
                 translations={getDatePickerTranslations(
                   t('datepicker', { returnObjects: true }) as DatePickerTranslations,
