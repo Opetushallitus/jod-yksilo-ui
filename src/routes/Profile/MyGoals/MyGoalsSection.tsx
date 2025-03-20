@@ -1,10 +1,10 @@
-import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
+import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
 import { getTypeSlug } from '@/routes/Profile/utils';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
-import { Button, ConfirmDialog } from '@jod/design-system';
+import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdArrowForward } from 'react-icons/md';
@@ -27,6 +27,9 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
   const { koulutusMahdollisuudetDetails, tyomahdollisuudetDetails } =
     useLoaderData<Awaited<ReturnType<typeof loader>>>();
 
+  // Use a local state for paamaarat to be able to remove suunnitelmat from it without reloading the page
+  const [goals, setGoals] = React.useState<components['schemas']['PaamaaraDto'][]>(paamaarat);
+
   const getDetailsByTyyppi = React.useCallback(
     (tyyppi: MahdollisuusTyyppi, id: string) => {
       switch (tyyppi) {
@@ -39,13 +42,21 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
     [koulutusMahdollisuudetDetails, tyomahdollisuudetDetails],
   );
 
-  const deletePolku = async (paamaaraId?: string, suunnitelmaId?: string) => {
-    if (!paamaaraId || !suunnitelmaId) {
-      return;
+  const removePolku = (paamaaraId?: string, suunnitelmaId?: string) => {
+    if (paamaaraId && suunnitelmaId) {
+      setGoals((prev) =>
+        prev.map((pm) => {
+          if (pm.id === paamaaraId) {
+            return {
+              ...pm,
+              // eslint-disable-next-line sonarjs/no-nested-functions
+              suunnitelmat: pm.suunnitelmat?.filter((s) => s.id !== suunnitelmaId),
+            };
+          }
+          return pm;
+        }),
+      );
     }
-    await client.DELETE('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}', {
-      params: { path: { id: paamaaraId, suunnitelmaId } },
-    });
   };
 
   return (
@@ -56,7 +67,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
       </div>
       <p className={`${icon ? 'ml-8' : ''} text-body-lg font-medium mb-5`}>{description}</p>
       <div className="flex flex-col gap-5 mb-5">
-        {paamaarat.map((pm, i) => {
+        {goals.map((pm, i) => {
           const { mahdollisuusId, mahdollisuusTyyppi, id } = pm;
           const details = getDetailsByTyyppi(mahdollisuusTyyppi, mahdollisuusId);
           const menuId = id ?? `menu-${i}`;
@@ -94,26 +105,11 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                     >
                       {polku.nimi[language]} <MdArrowForward size={24} />
                     </Link>
-                    {pm.id && polku.id ? (
-                      <ConfirmDialog
-                        title={t('profile.paths.delete-path-title')}
-                        onConfirm={() => deletePolku(pm.id, polku.id)}
-                        confirmText={t('delete')}
-                        cancelText={t('cancel')}
-                        variant="destructive"
-                        description={t('profile.paths.delete-path-description')}
-                      >
-                        {(showDialog: () => void) => (
-                          <div>
-                            <Button
-                              label={t('profile.paths.delete-path')}
-                              variant="white-delete"
-                              onClick={showDialog}
-                            />
-                          </div>
-                        )}
-                      </ConfirmDialog>
-                    ) : null}
+                    <DeletePolkuButton
+                      paamaaraId={pm.id}
+                      suunnitelmaId={polku.id}
+                      onDelete={() => removePolku(pm.id, polku.id)}
+                    />
                   </div>
                 ))}
                 <div className="mt-9">

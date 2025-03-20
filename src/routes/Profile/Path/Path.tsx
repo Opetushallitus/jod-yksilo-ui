@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { FormError, OpportunityCard } from '@/components';
+import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import VaiheCard from '@/routes/Profile/Path/VaiheCard';
@@ -9,7 +10,7 @@ import { generateProfileLink, getTypeSlug } from '@/routes/Profile/utils';
 import { usePolutStore } from '@/stores/usePolutStore';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Checkbox, ConfirmDialog, InputField, PathProgress, PathProgressStep } from '@jod/design-system';
+import { Button, Checkbox, InputField, PathProgress, PathProgressStep } from '@jod/design-system';
 import React from 'react';
 import { Controller, Form, FormProvider, FormSubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -326,20 +327,7 @@ const Path = () => {
     }
   };
 
-  const deletePolku = async () => {
-    if (paamaaraId && suunnitelmaId) {
-      const { error } = await client.DELETE('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}', {
-        params: { path: { id: paamaaraId, suunnitelmaId } },
-      });
-
-      if (!error) {
-        const route = generateProfileLink(['slugs.profile.my-goals'], yksiloRootData, language, t);
-        navigate(route.to);
-      }
-    }
-  };
-
-  const onClosePolku = () => {
+  const closePolku = () => {
     const route = generateProfileLink(['slugs.profile.my-goals'], yksiloRootData, language, t);
     navigate(route.to);
   };
@@ -361,7 +349,7 @@ const Path = () => {
               <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.paths.title')}</h1>
               <button
                 type="button"
-                onClick={onClosePolku}
+                onClick={closePolku}
                 className="cursor-pointer self-start"
                 aria-label={t('profile.paths.back-to-goals')}
               >
@@ -507,20 +495,12 @@ const Path = () => {
                 </tbody>
               </table>
             </div>
-            <ConfirmDialog
-              title={t('profile.paths.delete-path-title')}
-              onConfirm={deletePolku}
-              confirmText={t('delete')}
-              cancelText={t('cancel')}
-              variant="destructive"
-              description={t('profile.paths.delete-path-description')}
-            >
-              {(showDialog: () => void) => (
-                <div className="my-9">
-                  <Button label={t('profile.paths.delete-path')} variant="white-delete" onClick={showDialog} />
-                </div>
-              )}
-            </ConfirmDialog>
+            <DeletePolkuButton
+              paamaaraId={paamaaraId}
+              suunnitelmaId={suunnitelmaId}
+              onDelete={() => closePolku()}
+              className="my-9"
+            />
           </div>
         </Form>
       </FormProvider>
