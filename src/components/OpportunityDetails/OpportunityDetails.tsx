@@ -11,7 +11,7 @@ import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { type MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText } from '@/utils';
+import { copyToClipboard, getLocalizedText } from '@/utils';
 import React, { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdCompareArrows, MdOutlinePrint, MdOutlineRoute, MdOutlineShare } from 'react-icons/md';
@@ -110,8 +110,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections }: OpportunityD
           <ActionButton
             label={t('share')}
             icon={<MdOutlineShare size={24} className="text-accent" />}
-            onClick={notImplemented}
-            className="bg-todo"
+            onClick={() => void copyToClipboard(window.location.href)}
           />
         )}
         {!!window.print && (

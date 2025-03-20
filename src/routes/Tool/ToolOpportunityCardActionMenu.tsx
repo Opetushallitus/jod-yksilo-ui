@@ -1,4 +1,5 @@
 import { MahdollisuusTyyppi } from '@/routes/types';
+import { copyToClipboard } from '@/utils';
 import { PopupList, PopupListItem } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
@@ -50,9 +51,9 @@ const ToolOpportunityCardActionMenu = ({
           </Link>
         </li>
         <li>
-          <Link to="#" onClick={mockOnClick} type="button">
-            <PopupListItem>TODO: {t('share')}</PopupListItem>
-          </Link>
+          <button onClick={() => copyToClipboard(window.location.href)}>
+            <PopupListItem>{t('share')}</PopupListItem>
+          </button>
         </li>
       </ul>
     </PopupList>
