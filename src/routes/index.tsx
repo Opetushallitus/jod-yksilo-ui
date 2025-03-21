@@ -21,6 +21,7 @@ import {
 import { RouteObject, replace } from 'react-router';
 import { withYksiloContext } from '../auth';
 import {
+  AboutAi,
   AccessibilityStatement,
   BasicInformation,
   CookiePolicy,
@@ -267,6 +268,11 @@ const basicInformationRoutes: RouteObject[] = supportedLanguageCodes.map((lng) =
       id: `{slugs.privacy-policy}|${lng}`,
       path: i18n.t('slugs.privacy-policy', { lng }),
       element: <PrivacyPolicy />,
+    },
+    {
+      id: `{slugs.about-ai}|${lng}`,
+      path: i18n.t('slugs.about-ai', { lng }),
+      element: <AboutAi />,
     },
   ],
 }));
