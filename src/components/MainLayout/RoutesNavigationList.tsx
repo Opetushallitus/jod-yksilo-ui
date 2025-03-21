@@ -10,6 +10,8 @@ export interface RoutesNavigationListProps {
     active?: boolean;
     authRequired?: boolean;
     replace?: boolean;
+    /** On index page, index slug is needed to add to childs */
+    isUnderIndex?: boolean;
   }[];
   onClick?: () => void;
 }
@@ -22,7 +24,7 @@ export const RoutesNavigationList = ({ routes, onClick }: RoutesNavigationListPr
   return (
     <ul className="flex flex-col gap-y-2 py-4">
       {routes.map((route) => {
-        const isSubPage = route.path.split('/').slice(1).length > 1;
+        const isSubPage = route.path.split('/').slice(1).length > (route.isUnderIndex ? 2 : 1);
         const isAnchorLink = route.path.startsWith('#');
         return (
           <li key={route.path} className="flex min-h-7 items-center w-full">

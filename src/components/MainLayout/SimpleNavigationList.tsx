@@ -1,9 +1,12 @@
 import { LangCode } from '@/i18n/config';
 import { Accordion } from '@jod/design-system';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface SimpleNavigationListProps {
   title: string;
+  titleComponent?: React.ReactNode;
+  titleLink?: string;
   collapsible?: boolean;
   children: React.ReactNode;
   borderEnabled?: boolean;
@@ -14,6 +17,7 @@ interface SimpleNavigationListProps {
 
 export const SimpleNavigationList = ({
   title,
+  titleComponent,
   collapsible = false,
   children,
   borderEnabled = true,
@@ -25,6 +29,7 @@ export const SimpleNavigationList = ({
   const borderClassName = borderEnabled ? 'rounded-md' : '';
   const paddingClassName = addPadding ? 'py-6 px-[20px]' : '';
   const language = lang ?? i18n.language;
+
   return (
     <div className={`${borderClassName} ${backgroundClassName} ${paddingClassName}`.trim()}>
       {collapsible ? (
@@ -34,7 +39,7 @@ export const SimpleNavigationList = ({
       ) : (
         <>
           <div className="hyphens-auto text-heading-3" lang={language}>
-            {title}
+            {titleComponent ? titleComponent : title}
           </div>
           {children}
         </>

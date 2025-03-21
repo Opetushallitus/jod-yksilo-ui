@@ -1,20 +1,18 @@
 import { components } from '@/api/schema';
-import { MainLayout, RoutesNavigationList, SimpleNavigationList, type RoutesNavigationListProps } from '@/components';
+import { MainLayout } from '@/components';
 import { ESCO_OCCUPATION_PREFIX } from '@/constants';
 import EditKiinnostusModal from '@/routes/Profile/Interests/EditKiinnostusModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { Button, Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
-import { mapNavigationRoutes } from '../utils';
+import { useLoaderData, useRevalidator } from 'react-router';
+import { ProfileNavigationList } from '../components';
 
 const Interests = () => {
-  const routes: RoutesNavigationListProps['routes'] = useOutletContext();
   const { t, i18n } = useTranslation();
   const data = useLoaderData() as components['schemas']['OsaaminenDto'][];
   const title = t('profile.interests.title');
-  const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
   const revalidator = useRevalidator();
 
@@ -32,9 +30,7 @@ const Interests = () => {
     <MainLayout
       navChildren={
         <div className="flex flex-col gap-5">
-          <SimpleNavigationList title={t('profile.index')}>
-            <RoutesNavigationList routes={navigationRoutes} />
-          </SimpleNavigationList>
+          <ProfileNavigationList />
         </div>
       }
     >

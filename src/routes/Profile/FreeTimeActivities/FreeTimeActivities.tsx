@@ -1,22 +1,14 @@
-import {
-  ExperienceTable,
-  MainLayout,
-  RoutesNavigationList,
-  SimpleNavigationList,
-  type ExperienceTableRowData,
-  type RoutesNavigationListProps,
-} from '@/components';
+import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
-import { mapNavigationRoutes } from '../utils';
+import { useLoaderData, useRevalidator } from 'react-router';
+import { ProfileNavigationList } from '../components';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
 import { AddOrEditPatevyysModal } from './modals/AddOrEditPatevyysModal';
 import { getFreeTimeActivitiesTableRows, type VapaaAjanToiminto } from './utils';
 
 const FreeTimeActivities = () => {
-  const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const { vapaaAjanToiminnot, osaamisetMap } = useLoaderData() as {
     vapaaAjanToiminnot: VapaaAjanToiminto[];
     osaamisetMap: Record<
@@ -30,7 +22,6 @@ const FreeTimeActivities = () => {
   };
   const { t } = useTranslation();
   const title = t('profile.free-time-activities.title');
-  const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const [isWizardOpen, setIsWizardOpen] = React.useState(false);
   const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot, osaamisetMap));
   const [toimintoId, setToimintoId] = React.useState<string | undefined>(undefined);
@@ -80,13 +71,7 @@ const FreeTimeActivities = () => {
   };
 
   return (
-    <MainLayout
-      navChildren={
-        <SimpleNavigationList title={t('profile.index')}>
-          <RoutesNavigationList routes={navigationRoutes} />
-        </SimpleNavigationList>
-      }
-    >
+    <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-9 text-body-lg">{t('profile.free-time-activities.description')}</p>

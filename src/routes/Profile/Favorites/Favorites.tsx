@@ -1,10 +1,4 @@
-import {
-  MainLayout,
-  OpportunityCard,
-  RoutesNavigationList,
-  SimpleNavigationList,
-  type RoutesNavigationListProps,
-} from '@/components';
+import { MainLayout, OpportunityCard, SimpleNavigationList } from '@/components';
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useActionBar } from '@/hooks/useActionBar';
@@ -18,9 +12,10 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { MdArrowForward } from 'react-icons/md';
-import { Link, useOutletContext } from 'react-router';
+import { Link } from 'react-router';
 import { useShallow } from 'zustand/shallow';
-import { getTypeSlug, mapNavigationRoutes } from '../utils';
+import { ProfileNavigationList } from '../components';
+import { getTypeSlug } from '../utils';
 
 const descriptionKeys = {
   KAIKKI: 'profile.favorites.you-have-no-job-nor-education-opportunities',
@@ -34,8 +29,6 @@ const linkTextKeys = {
 };
 
 const Favorites = () => {
-  const routes = useOutletContext<RoutesNavigationListProps['routes']>();
-
   const { deleteSuosikki, filters, fetchPage, pageData, pageNr, pageSize, setFilters, suosikit, totalItems } =
     useSuosikitStore(
       useShallow((state) => ({
@@ -58,7 +51,6 @@ const Favorites = () => {
   const title = t('profile.favorites.title');
   const jobFilterText = t('job-opportunities');
   const educationFilterText = t('education-opportunities');
-  const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const actionBar = useActionBar();
   const { sm } = useMediaQueries();
   const [showFilters, setShowFilters] = React.useState(false);
@@ -167,9 +159,7 @@ const Favorites = () => {
     <MainLayout
       navChildren={
         <div className="flex flex-col gap-5">
-          <SimpleNavigationList title={t('profile.index')}>
-            <RoutesNavigationList routes={navigationRoutes} />
-          </SimpleNavigationList>
+          <ProfileNavigationList />
           <SimpleNavigationList title={t('content')} backgroundClassName="bg-bg-gray-2" collapsible>
             <MahdollisuusTyyppiFilter
               jobFilterText={jobFilterText}
