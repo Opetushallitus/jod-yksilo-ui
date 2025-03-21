@@ -4,8 +4,6 @@ import { usePaamaaratStore } from '@/stores/usePaamaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { LoaderFunction } from 'react-router';
 
-let hasSuosikitBeenFetchOnce = false;
-
 export default (async ({ request }) => {
   const response = await client.GET('/api/profiili/paamaarat', { signal: request.signal });
   const paamaarat = response.data ?? [];
@@ -41,18 +39,14 @@ export default (async ({ request }) => {
       ).data?.sisalto ?? [];
   }
 
-  const { setPaamaarat, updateCategories } = usePaamaaratStore.getState();
+  const { setPaamaarat } = usePaamaaratStore.getState();
   setPaamaarat(paamaarat);
-  updateCategories();
 
   const { setExcludedIds, fetchSuosikit } = useSuosikitStore.getState();
 
-  if (!hasSuosikitBeenFetchOnce) {
-    const suosikitAlreadyInPaamaarat = paamaarat.map((pm) => pm.mahdollisuusId);
-    setExcludedIds(suosikitAlreadyInPaamaarat);
-    await fetchSuosikit();
-    hasSuosikitBeenFetchOnce = true;
-  }
+  const suosikitAlreadyInPaamaarat = paamaarat.map((pm) => pm.mahdollisuusId);
+  setExcludedIds(suosikitAlreadyInPaamaarat);
+  await fetchSuosikit();
 
   return { paamaarat, tyomahdollisuudetDetails, koulutusMahdollisuudetDetails };
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

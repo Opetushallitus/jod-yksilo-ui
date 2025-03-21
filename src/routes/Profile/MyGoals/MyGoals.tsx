@@ -6,7 +6,7 @@ import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdArrowForward } from 'react-icons/md';
-import { Link, useOutletContext, useRevalidator } from 'react-router';
+import { Link, useOutletContext } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import AddGoalModal from './AddGoalModal';
 import MyGoalsSection from './MyGoalsSection';
@@ -46,20 +46,24 @@ const MyGoals = () => {
   const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const title = t('profile.my-goals.title');
   const [addModalOpen, setAddModalOpen] = React.useState(false);
-  const revalidator = useRevalidator();
   const suosikitIsEmpty = useSuosikitStore((state) => state.suosikit).length === 0;
-  const { pitkanAikavalinTavoite, lyhyenAikavalinTavoite, muutTavoitteet } = usePaamaaratStore(
+  const { paamaarat } = usePaamaaratStore(
     useShallow((state) => ({
-      pitkanAikavalinTavoite: state.pitkanAikavalinTavoite,
-      lyhyenAikavalinTavoite: state.lyhyenAikavalinTavoite,
-      muutTavoitteet: state.muutTavoitteet,
+      paamaarat: state.paamaarat,
     })),
+  );
+
+  const { pitkanAikavalinTavoite, lyhyenAikavalinTavoite, muutTavoitteet } = React.useMemo(
+    () => ({
+      pitkanAikavalinTavoite: paamaarat.filter((p) => p.tyyppi === 'PITKA'),
+      lyhyenAikavalinTavoite: paamaarat.filter((p) => p.tyyppi === 'LYHYT'),
+      muutTavoitteet: paamaarat.filter((p) => p.tyyppi === 'MUU'),
+    }),
+    [paamaarat],
   );
 
   const onCloseAddModal = () => {
     setAddModalOpen(false);
-    // Fetch the data again to update the goals
-    revalidator.revalidate();
   };
 
   return (
