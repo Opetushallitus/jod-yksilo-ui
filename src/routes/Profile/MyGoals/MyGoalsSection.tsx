@@ -30,6 +30,11 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
   // Use a local state for paamaarat to be able to remove suunnitelmat from it without reloading the page
   const [goals, setGoals] = React.useState<components['schemas']['PaamaaraDto'][]>(paamaarat);
 
+  // Update local goals when paamaarat changes, in case goal type changes.
+  React.useEffect(() => {
+    setTimeout(() => setGoals(paamaarat));
+  }, [paamaarat]);
+
   const getDetailsByTyyppi = React.useCallback(
     (tyyppi: MahdollisuusTyyppi, id: string) => {
       switch (tyyppi) {
