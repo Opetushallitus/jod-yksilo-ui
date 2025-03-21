@@ -33,6 +33,7 @@ import { Introduction } from './Introduction';
 import { Favorites, LandingPage, Preferences, Profile, SomethingElse } from './Profile';
 import { EducationHistory } from './Profile/EducationHistory';
 import { FreeTimeActivities } from './Profile/FreeTimeActivities';
+import ProfileFront from './Profile/ProfileFront/ProfileFront';
 import { ErrorBoundary, NoMatch, Root, loader as rootLoader } from './Root';
 import {
   HowDoIGiveFeedback,
@@ -56,7 +57,7 @@ const profileRoutes = supportedLanguageCodes.map(
       children: [
         {
           index: true,
-          loader: () => replace(i18n.t('slugs.profile.preferences', { lng })),
+          element: <ProfileFront />,
         },
         {
           id: `{slugs.profile.preferences}|${lng}`,

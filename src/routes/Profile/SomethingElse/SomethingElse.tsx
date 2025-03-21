@@ -1,18 +1,16 @@
 import { OsaaminenDto } from '@/api/osaamiset';
-import { MainLayout, RoutesNavigationList, SimpleNavigationList, type RoutesNavigationListProps } from '@/components';
+import { MainLayout } from '@/components';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { Button, Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
-import { mapNavigationRoutes } from '../utils';
+import { useLoaderData, useRevalidator } from 'react-router';
+import { ProfileNavigationList } from '../components';
 
 const SomethingElse = () => {
-  const routes: RoutesNavigationListProps['routes'] = useOutletContext();
   const { t, i18n } = useTranslation();
   const title = t('profile.something-else.title');
-  const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const data = useLoaderData() as OsaaminenDto[];
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const revalidator = useRevalidator();
@@ -25,13 +23,7 @@ const SomethingElse = () => {
   const sortedData = React.useMemo(() => [...data].sort(sortByProperty(`nimi.${i18n.language}`)), [data, i18n]);
 
   return (
-    <MainLayout
-      navChildren={
-        <SimpleNavigationList title={t('profile.index')}>
-          <RoutesNavigationList routes={navigationRoutes} />
-        </SimpleNavigationList>
-      }
-    >
+    <MainLayout navChildren={<ProfileNavigationList />}>
       {isModalOpen && <EditMuuOsaaminenModal onClose={onAddModalClose} isOpen={isModalOpen} />}
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>

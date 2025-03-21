@@ -1,6 +1,7 @@
 import { LanguageButton, LanguageMenu, RoutesNavigationList, SimpleNavigationList, UserButton } from '@/components';
 import { useAppRoutes } from '@/hooks/useAppRoutes';
 import { useEnvironment } from '@/hooks/useEnvironment';
+import { ProfileNavigationListWithCustomRoutes } from '@/routes/Profile/components';
 import { useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -37,7 +38,7 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, onLogout }: MegaM
 
   const profileIndexPath = t('slugs.profile.index');
   const profileMenuRoutes = profileRoutes.map((route) => ({
-    ...prefixRoutePath(profileIndexPath)(route),
+    ...prefixRoutePath(`${profileIndexPath}`)(route),
     authRequired: true,
   }));
   const toolMenuRoutes = toolRoutes.map(prefixRoutePath(t('slugs.tool.index')));
@@ -77,9 +78,13 @@ export const MegaMenu = ({ loggedIn, onClose, onLanguageClick, onLogout }: MegaM
               <SimpleNavigationList title={t('match-service')} backgroundClassName="bg-white" collapsible={!sm}>
                 <RoutesNavigationList routes={toolMenuRoutes} onClick={onClose} />
               </SimpleNavigationList>
-              <SimpleNavigationList title={t('profile.index')} backgroundClassName="bg-white" collapsible={!sm}>
-                <RoutesNavigationList routes={profileMenuRoutes} onClick={onClose} />
-              </SimpleNavigationList>
+
+              <ProfileNavigationListWithCustomRoutes
+                routes={profileMenuRoutes}
+                onClick={onClose}
+                collapsible={!sm}
+                backgroundClassName="bg-white"
+              />
             </>
           )}
           {megaMenuState === 'lang' && !sm && (
