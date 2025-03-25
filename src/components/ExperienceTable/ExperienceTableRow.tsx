@@ -175,14 +175,17 @@ export const ExperienceTableRow = ({
         <button
           aria-label={t(isOpen ? 'close' : 'open')}
           onClick={() => setIsOpen(!isOpen)}
-          className={`cursor-pointer flex gap-x-2 items-center ${sm ? 'text-nowrap' : ''} pr-7`}
+          className={`cursor-pointer flex gap-x-2 items-center ${sm ? 'text-nowrap pr-2' : 'pr-7'}`}
         >
           {isOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
           {osaamisetCountTotal}
         </button>
       );
     }
-    return <span className="pl-[28px] pr-7">{osaamisetCountTotal}</span>;
+    if (!sm) {
+      return <span className="pl-[28px] pr-7">{osaamisetCountTotal}</span>;
+    }
+    return <span className={`text-nowrap pr-2 ${onRowClick ? 'pl-[28px]' : ''}`.trim()}>{osaamisetCountTotal}</span>;
   };
 
   const renderOsaamisetCell = (sm: boolean) => {
@@ -197,12 +200,12 @@ export const ExperienceTableRow = ({
       return <td className="text-body-md text-nowrap text-center">{renderCompetencesDetectFailure()}</td>;
     }
     return sm ? (
-      <td className={`text-body-md text-nowrap`}>
-        <span className="pl-[28px] pr-7">{osaamisetCountTotal}</span>
-      </td>
-    ) : (
       <td className={`text-body-md text-nowrap ${onRowClick ? 'pr-7 pl-[28px]' : 'pr-5'.trim()}`}>
         <span className="pr-2">{osaamisetCountTotal}</span>
+      </td>
+    ) : (
+      <td>
+        <span className="text-body-sm text-nowrap pl-[28px] pr-7">{osaamisetCountTotal}</span>
       </td>
     );
   };
