@@ -9,7 +9,11 @@ export type PaamaaraTyyppi = components['schemas']['PaamaaraDto']['tyyppi'];
  * @returns The goal type of the opportunity
  */
 export const getPaamaaraTypeForMahdollisuus = (mahdollisuusId: string): PaamaaraTyyppi | undefined => {
-  const { pitkanAikavalinTavoite, lyhyenAikavalinTavoite, muutTavoitteet } = usePaamaaratStore.getState();
+  const { paamaarat } = usePaamaaratStore.getState();
+  const pitkanAikavalinTavoite = paamaarat.filter((p) => p.tyyppi === 'PITKA');
+  const lyhyenAikavalinTavoite = paamaarat.filter((p) => p.tyyppi === 'LYHYT');
+  const muutTavoitteet = paamaarat.filter((p) => p.tyyppi === 'MUU');
+
   if (pitkanAikavalinTavoite.find((tavoite) => tavoite.mahdollisuusId === mahdollisuusId)) {
     return 'PITKA';
   } else if (lyhyenAikavalinTavoite.find((tavoite) => tavoite.mahdollisuusId === mahdollisuusId)) {
