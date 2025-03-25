@@ -62,6 +62,7 @@ const Path = () => {
   const [disabledIgnores, setDisabledIgnores] = React.useState<string[]>([]);
   const yksiloRootData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
   const navigate = useNavigate();
+  const title = t('profile.paths.title');
 
   const methods = useForm<PolkuForm>({
     mode: 'onBlur',
@@ -118,7 +119,7 @@ const Path = () => {
   });
 
   const getProgressStep = (vaihe: VaiheForm, index: number): PathProgressStep => ({
-    label: getLocalizedText(vaihe.nimi),
+    label: t('profile.paths.phase-nr', { count: index + 1 }),
     circleComponent: index + 1,
     isCompleted: vaihe.valmis,
     content: (
@@ -343,10 +344,11 @@ const Path = () => {
       )}
       <FormProvider {...methods}>
         <Form className="flex flex-col gap-5" id={formId} onSubmit={onSubmit}>
+          <title>{title}</title>
           {/* Päämäärä */}
           <div className="bg-bg-gray pt-7 flex flex-col gap-5 w-full max-w-[1090px] mx-auto">
             <div className="flex flex-row items-center gap-3 justify-between">
-              <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.paths.title')}</h1>
+              <h1 className="text-heading-1-mobile sm:text-heading-1">{title}</h1>
               <button
                 type="button"
                 onClick={closePolku}
