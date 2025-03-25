@@ -5,7 +5,6 @@ import { usePaamaaratStore } from '@/stores/usePaamaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { ConfirmDialog, PopupList, PopupListItem } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
-import { useRevalidator } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 
 const ListItem = ({ label, onClick, disabled }: { label: string; onClick: () => void; disabled?: boolean }) => (
@@ -34,10 +33,10 @@ const MyGoalsOpportunityCardMenu = ({
   menuId: string;
 }) => {
   const { t } = useTranslation();
-  const revalidator = useRevalidator();
   const paamaaraType = getPaamaaraTypeForMahdollisuus(mahdollisuusId);
-  const { fetchPage, pageSize, pageNr, excludedIds, setExcludedIds } = useSuosikitStore(
+  const { fetchPage, pageSize, pageNr, excludedIds, setExcludedIds, pageData } = useSuosikitStore(
     useShallow((state) => ({
+      pageData: state.pageData,
       fetchPage: state.fetchPage,
       pageSize: state.pageSize,
       pageNr: state.pageNr,
@@ -45,54 +44,65 @@ const MyGoalsOpportunityCardMenu = ({
       setExcludedIds: state.setExcludedIds,
     })),
   );
-  const { paamaarat, upsertPaamaara } = usePaamaaratStore(
+  const { paamaarat, upsertPaamaara, deletePaamaara, mahdollisuusDetails, setMahdollisuusDetails } = usePaamaaratStore(
     useShallow((state) => ({
       paamaarat: state.paamaarat,
       upsertPaamaara: state.upsertPaamaara,
+      deletePaamaara: state.deletePaamaara,
+      setMahdollisuusDetails: state.setMahdollisuusDetails,
+      mahdollisuusDetails: state.mahdollisuusDetails,
     })),
   );
 
-  const setFavoriteAsGoal = async (tyyppi: PaamaaraTyyppi) => {
-    if (paamaaraId) {
-      const paamaara = paamaarat.find((pm) => pm.id === paamaaraId);
-
-      if (paamaara) {
-        const updatedPaamaara = { ...paamaara, tyyppi };
-        await client.PUT('/api/profiili/paamaarat/{id}', {
-          body: updatedPaamaara,
-          params: { path: { id: paamaaraId } },
-        });
-        upsertPaamaara(updatedPaamaara);
-      }
-    } else {
-      const newPaamaara = {
-        tyyppi,
-        mahdollisuusTyyppi,
-        mahdollisuusId,
-        tavoite: {
-          fi: '',
-          sv: '',
-          en: '',
-        },
-      };
-      const { data: id } = await client.POST('/api/profiili/paamaarat', {
-        body: newPaamaara,
-      });
-      // Add the new goal to excludedIds to prevent it from showing in the list
+  const insertPaamaara = async (tyyppi: PaamaaraTyyppi) => {
+    const newPaamaara = {
+      tyyppi,
+      mahdollisuusTyyppi,
+      mahdollisuusId,
+      tavoite: {
+        fi: '',
+        sv: '',
+        en: '',
+      },
+    };
+    const { data: id, error } = await client.POST('/api/profiili/paamaarat', {
+      body: newPaamaara,
+    });
+    if (!error) {
+      // Add the new goal to excludedIds to prevent it from showing in the list and reload suosikit
       setExcludedIds([...excludedIds, mahdollisuusId]);
       upsertPaamaara({ ...newPaamaara, id });
       await fetchPage({ page: pageNr, pageSize });
     }
   };
 
-  const deleteGoal = async () => {
-    if (paamaaraId) {
-      await client.DELETE('/api/profiili/paamaarat/{id}', {
-        params: {
-          path: { id: paamaaraId },
-        },
+  const updatePaamaara = async (tyyppi: PaamaaraTyyppi) => {
+    const paamaara = paamaarat.find((pm) => pm.id === paamaaraId);
+
+    if (paamaara && paamaaraId) {
+      const updatedPaamaara = { ...paamaara, tyyppi };
+      const { error } = await client.PUT('/api/profiili/paamaarat/{id}', {
+        body: updatedPaamaara,
+        params: { path: { id: paamaaraId } },
       });
-      await revalidator.revalidate();
+      if (!error) {
+        upsertPaamaara(updatedPaamaara);
+      }
+    }
+  };
+
+  const setFavoriteAsGoal = async (tyyppi: PaamaaraTyyppi) => {
+    if (paamaaraId) {
+      await updatePaamaara(tyyppi);
+    } else {
+      await insertPaamaara(tyyppi);
+    }
+
+    // Find the details for the opportunity and put them to the paamaara store.
+    // This is needed to show the opportunity in the goals list without the need to fetch the details again.
+    const details = pageData.find((item) => item.id === mahdollisuusId);
+    if (details) {
+      setMahdollisuusDetails([...mahdollisuusDetails, details]);
     }
   };
 
@@ -123,7 +133,7 @@ const MyGoalsOpportunityCardMenu = ({
         {!!paamaaraId && (
           <ConfirmDialog
             title={t('profile.my-goals.delete-goal')}
-            onConfirm={() => void deleteGoal()}
+            onConfirm={() => deletePaamaara(paamaaraId)}
             confirmText={t('delete')}
             cancelText={t('cancel')}
             variant="destructive"
