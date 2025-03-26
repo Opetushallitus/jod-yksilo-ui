@@ -193,8 +193,12 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
       content={
         <div id={modalId} className="flex flex-col">
           <div className="text-left">
-            <h3 className="mb-5 text-heading-2">{t('education-history-import.summary-modal.title')}</h3>
-            <p className="mb-4">{t('education-history-import.summary-modal.description')}</p>
+            <h3 className="mb-5 sm:text-heading-2 text-heading-2-mobile">
+              {t('education-history-import.summary-modal.title')}
+            </h3>
+            <p className="mb-4 sm:text-body-md text-body-md-mobile">
+              {t('education-history-import.summary-modal.description')}
+            </p>
             {isFetching && (
               <div className="flex">
                 <Spinner className="mr-5 mb-5" size={24} color={'accent'} />
