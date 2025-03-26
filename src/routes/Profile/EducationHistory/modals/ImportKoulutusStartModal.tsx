@@ -41,9 +41,13 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
           id={modalId}
           className="flex flex-col items-center justify-center fixed inset-0 overflow-hidden pointer-events-none"
         >
-          <div className="text-left max-w-lg">
-            <h3 className="mb-5 text-heading-2">{t('education-history-import.start-modal.title')}</h3>
-            <p className="mb-4">{t('education-history-import.start-modal.description')}</p>
+          <div className="text-left max-w-lg px-5">
+            <h3 className="mb-5 sm:text-heading-2 text-heading-2-mobile">
+              {t('education-history-import.start-modal.title')}
+            </h3>
+            <p className="mb-4 sm:text-body-md text-body-md-mobile">
+              {t('education-history-import.start-modal.description')}
+            </p>
           </div>
           <div className="mt-4 pointer-events-auto">
             <Button

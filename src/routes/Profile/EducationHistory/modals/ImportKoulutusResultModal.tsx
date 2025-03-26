@@ -33,7 +33,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
           id={modalId}
           className="fixed inset-0 flex items-center justify-center overflow-y-hidden pointer-events-none"
         >
-          <div className="flex flex-col items-center pointer-events-auto">
+          <div className="flex flex-col items-center pointer-events-auto px-5">
             {isSuccess ? (
               <div className="flex flex-col items-start w-full">
                 <div className="w-full flex justify-center mb-4">
@@ -58,7 +58,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
             ) : (
               <>
                 <MdClear className="text-heading-1 text-alert-text mb-4" />
-                <h3 className="mb-5 text-heading-2">
+                <h3 className="mb-5 sm:text-heading-2 text-heading-2-mobile">
                   {errorText ?? t('education-history-import.result-modal.failure')}
                 </h3>
               </>
