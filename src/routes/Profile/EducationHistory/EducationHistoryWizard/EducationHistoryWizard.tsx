@@ -1,6 +1,5 @@
 import { client } from '@/api/client';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -15,11 +14,10 @@ import SummaryStep from './SummaryStep';
 import { type EducationHistoryForm } from './utils';
 
 interface EducationHistoryWizardProps {
-  isOpen: boolean;
   onClose: () => void;
 }
 
-const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps) => {
+const EducationHistoryWizard = ({ onClose }: EducationHistoryWizardProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { sm } = useMediaQueries();
@@ -27,7 +25,6 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
   const selectedKoulutus = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
 
   const formId = React.useId();
-  useEscHandler(onClose, formId);
 
   const methods = useForm<EducationHistoryForm>({
     mode: 'onBlur',
@@ -115,6 +112,13 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
     navigate('.', { replace: true });
   };
 
+  const [open, setOpen] = React.useState(false);
+  React.useEffect(() => {
+    if (!isLoading) {
+      setOpen(true);
+    }
+  }, [isLoading]);
+
   const [steps, setSteps] = React.useState(1);
   React.useEffect(() => {
     setSteps(fields.length * 2 + 1);
@@ -131,38 +135,17 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
 
   return (
     <Modal
-      open={isOpen}
-      content={
-        <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-          >
-            {isEducationStep && (
-              <EducationStep type={isFirstStep ? 'oppilaitos' : 'koulutus'} koulutus={selectedKoulutus} />
-            )}
-            {isCompetencesStep && <CompetencesStep koulutus={selectedKoulutus} />}
-            {isSummaryStep && <SummaryStep />}
-          </Form>
-        </FormProvider>
-      }
-      progress={
-        <WizardProgress
-          labelText={t('wizard.label')}
-          stepText={t('wizard.step')}
-          completedText={t('wizard.completed')}
-          currentText={t('wizard.current')}
-          steps={steps}
-          currentStep={step}
-        />
-      }
-      footer={
+      open={open}
+      onClose={onClose}
+      confirmBeforeClose={{
+        translations: {
+          title: t('confirm-modal-close.title'),
+          description: t('confirm-modal-close.description'),
+          noLabel: t('confirm-modal-close.no'),
+          yesLabel: t('confirm-modal-close.yes'),
+        },
+      }}
+      renderFooter={(onCloseClick) => (
         <div className="flex justify-between gap-5">
           <div className="flex gap-5">
             {step === steps && (
@@ -191,7 +174,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
             )}
           </div>
           <div className="flex gap-5">
-            <Button onClick={onClose} label={t('cancel')} variant="white" />
+            <Button onClick={onCloseClick} label={t('cancel')} variant="white" />
             {step > 1 && (
               <Button
                 onClick={() => setStep(step - 1)}
@@ -213,8 +196,41 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
             {step === steps && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}
           </div>
         </div>
-      }
-    />
+      )}
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="order-1 sm:order-2 col-span-1 justify-items-end">
+          <WizardProgress
+            labelText={t('wizard.label')}
+            stepText={t('wizard.step')}
+            completedText={t('wizard.completed')}
+            currentText={t('wizard.current')}
+            steps={steps}
+            currentStep={step}
+          />
+        </div>
+        <div className="order-2 sm:order-1 col-span-1 sm:col-span-2">
+          <FormProvider {...methods}>
+            <Form
+              id={formId}
+              onSubmit={onSubmit}
+              onKeyDown={(event) => {
+                // Prevent form submission on Enter
+                if (event.key === 'Enter') {
+                  event.preventDefault();
+                }
+              }}
+            >
+              {isEducationStep && (
+                <EducationStep type={isFirstStep ? 'oppilaitos' : 'koulutus'} koulutus={selectedKoulutus} />
+              )}
+              {isCompetencesStep && <CompetencesStep koulutus={selectedKoulutus} />}
+              {isSummaryStep && <SummaryStep />}
+            </Form>
+          </FormProvider>
+        </div>
+      </div>
+    </Modal>
   );
 };
 

@@ -1,7 +1,6 @@
 import { client } from '@/api/client';
 import { OsaaminenDto } from '@/api/osaamiset';
 import { OsaaminenValue, OsaamisSuosittelija } from '@/components';
-import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal } from '@jod/design-system';
 import React from 'react';
@@ -25,7 +24,6 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModalProps) 
   const data = (useLoaderData() as OsaaminenDto[]) ?? [];
 
   const formId = React.useId();
-  useEscHandler(onClose, formId);
 
   const methods = useForm<OsaamisetForm>({
     mode: 'onBlur',
@@ -76,36 +74,48 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModalProps) 
   return (
     <Modal
       open={isOpen}
-      content={
-        <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-          >
-            <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">{t('profile.competences.edit')}</h2>
-            <Controller
-              control={methods.control}
-              name="osaamiset"
-              render={({ field: { onChange, value } }) => (
-                <OsaamisSuosittelija onChange={onChange} value={value} sourceType="MUU_OSAAMINEN" />
-              )}
-            />
-          </Form>
-        </FormProvider>
-      }
-      footer={
+      onClose={onClose}
+      confirmBeforeClose={{
+        translations: {
+          title: t('confirm-modal-close.title'),
+          description: t('confirm-modal-close.description'),
+          noLabel: t('confirm-modal-close.no'),
+          yesLabel: t('confirm-modal-close.yes'),
+        },
+      }}
+      renderFooter={(onCloseClick) => (
         <div className="flex flex-row justify-end gap-5">
-          <Button label={t('cancel')} variant="white" onClick={onClose} />
+          <Button label={t('cancel')} variant="white" onClick={onCloseClick} />
           <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />
         </div>
-      }
-    />
+      )}
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="col-span-1 sm:col-span-2">
+          <FormProvider {...methods}>
+            <Form
+              id={formId}
+              onSubmit={onSubmit}
+              onKeyDown={(event) => {
+                // Prevent form submission on Enter
+                if (event.key === 'Enter') {
+                  event.preventDefault();
+                }
+              }}
+            >
+              <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">{t('profile.competences.edit')}</h2>
+              <Controller
+                control={methods.control}
+                name="osaamiset"
+                render={({ field: { onChange, value } }) => (
+                  <OsaamisSuosittelija onChange={onChange} value={value} sourceType="MUU_OSAAMINEN" />
+                )}
+              />
+            </Form>
+          </FormProvider>
+        </div>
+      </div>
+    </Modal>
   );
 };
 

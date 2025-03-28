@@ -1,6 +1,5 @@
 import { client } from '@/api/client';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -15,11 +14,10 @@ import SummaryStep from './SummaryStep';
 import { type FreeTimeActivitiesForm } from './utils';
 
 interface FreeTimeActivitiesWizardProps {
-  isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizardProps) => {
+const FreeTimeActivitiesWizard = ({ setIsOpen }: FreeTimeActivitiesWizardProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { sm } = useMediaQueries();
@@ -27,7 +25,6 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
   const selectedPatevyys = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
 
   const formId = React.useId();
-  useEscHandler(() => setIsOpen(false), formId);
 
   const methods = useForm<FreeTimeActivitiesForm>({
     mode: 'onBlur',
@@ -115,6 +112,13 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
     navigate('.', { replace: true });
   };
 
+  const [open, setOpen] = React.useState(false);
+  React.useEffect(() => {
+    if (!isLoading) {
+      setOpen(true);
+    }
+  }, [isLoading]);
+
   const [steps, setSteps] = React.useState(1);
   React.useEffect(() => {
     setSteps(fields.length * 2 + 1);
@@ -124,40 +128,23 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
   const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
   const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
 
-  return !isLoading ? (
+  if (isLoading) {
+    return null;
+  }
+
+  return (
     <Modal
-      open={isOpen}
-      content={
-        <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-          >
-            {isActivityStep && (
-              <ActivityStep type={isFirstStep ? 'toiminta' : 'patevyys'} patevyys={selectedPatevyys} />
-            )}
-            {isCompetencesStep && <CompetencesStep patevyys={selectedPatevyys} />}
-            {isSummaryStep && <SummaryStep />}
-          </Form>
-        </FormProvider>
-      }
-      progress={
-        <WizardProgress
-          labelText={t('wizard.label')}
-          stepText={t('wizard.step')}
-          completedText={t('wizard.completed')}
-          currentText={t('wizard.current')}
-          steps={steps}
-          currentStep={step}
-        />
-      }
-      footer={
+      open={open}
+      onClose={() => setIsOpen(false)}
+      confirmBeforeClose={{
+        translations: {
+          title: t('confirm-modal-close.title'),
+          description: t('confirm-modal-close.description'),
+          noLabel: t('confirm-modal-close.no'),
+          yesLabel: t('confirm-modal-close.yes'),
+        },
+      }}
+      renderFooter={(onCloseClick) => (
         <div className="flex justify-between gap-5">
           <div className="flex gap-5">
             {step === steps && (
@@ -186,7 +173,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
             )}
           </div>
           <div className="flex gap-5">
-            <Button onClick={() => setIsOpen(false)} label={t('cancel')} variant="white" />
+            <Button onClick={onCloseClick} label={t('cancel')} variant="white" />
             {step > 1 && (
               <Button
                 onClick={() => setStep(step - 1)}
@@ -208,9 +195,42 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
             {step === steps && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}
           </div>
         </div>
-      }
-    />
-  ) : null;
+      )}
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="order-1 sm:order-2 col-span-1 justify-items-end">
+          <WizardProgress
+            labelText={t('wizard.label')}
+            stepText={t('wizard.step')}
+            completedText={t('wizard.completed')}
+            currentText={t('wizard.current')}
+            steps={steps}
+            currentStep={step}
+          />
+        </div>
+        <div className="order-2 sm:order-1 col-span-1 sm:col-span-2">
+          <FormProvider {...methods}>
+            <Form
+              id={formId}
+              onSubmit={onSubmit}
+              onKeyDown={(event) => {
+                // Prevent form submission on Enter
+                if (event.key === 'Enter') {
+                  event.preventDefault();
+                }
+              }}
+            >
+              {isActivityStep && (
+                <ActivityStep type={isFirstStep ? 'toiminta' : 'patevyys'} patevyys={selectedPatevyys} />
+              )}
+              {isCompetencesStep && <CompetencesStep patevyys={selectedPatevyys} />}
+              {isSummaryStep && <SummaryStep />}
+            </Form>
+          </FormProvider>
+        </div>
+      </div>
+    </Modal>
+  );
 };
 
 export default FreeTimeActivitiesWizard;

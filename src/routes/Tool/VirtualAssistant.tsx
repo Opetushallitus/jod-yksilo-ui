@@ -2,7 +2,6 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useEnvironment } from '@/hooks/useEnvironment';
-import { useEscHandler } from '@/hooks/useEscHandler';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicates } from '@/utils';
 import { Button, Tag, Textarea, useMediaQueries } from '@jod/design-system';
@@ -37,12 +36,10 @@ export const VirtualAssistant = ({
   const [selectedKiinnostuksetViewVisible, setSelectedKiinnostuksetViewVisible] = React.useState(false);
   const selectedKiinnostuksetLabelId = React.useId();
   const toolStore = useToolStore();
-  const selectedInterestsViewId = React.useId();
   const closeKiinnostuksetView = () => {
     setSelectedKiinnostuksetViewVisible(false);
     setTimeout(() => kiinnostuksetButtonRef.current?.focus(), 0);
   };
-  useEscHandler(closeKiinnostuksetView, selectedInterestsViewId, true);
 
   const [selectedKiinnostukset, setSelectedKiinnostukset] = React.useState<components['schemas']['Kiinnostus'][]>([]);
 
@@ -255,8 +252,13 @@ export const VirtualAssistant = ({
       {selectedKiinnostuksetViewVisible && (
         <div className="absolute top-0 w-full pt-6 h-full left-0 z-21">
           <div
-            tabIndex={-1}
-            id={selectedInterestsViewId}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') {
+                closeKiinnostuksetView();
+              }
+            }}
+            role="button"
+            tabIndex={0}
             className="bg-white rounded shadow-[0_-1px_24px_rgba(0,0,0,0.25)] h-full flex flex-col"
           >
             <button

@@ -2,7 +2,6 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { useEscHandler } from '@/hooks/useEscHandler';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
@@ -148,7 +147,6 @@ const AddOrEditKoulutusModal = ({
   }
 
   const formId = React.useId();
-  useEscHandler(onClose, formId);
   const [step, setStep] = React.useState(0);
   const stepComponents = [MainStep, OsaamisetStep];
   const StepComponent = stepComponents[step];
@@ -280,36 +278,23 @@ const AddOrEditKoulutusModal = ({
     void trigger();
   }, [trigger]);
 
-  return !isLoading ? (
+  if (isLoading) {
+    return null;
+  }
+
+  return (
     <Modal
       open={isOpen}
-      progress={
-        <WizardProgress
-          labelText={t('wizard.label')}
-          stepText={t('wizard.step')}
-          completedText={t('wizard.completed')}
-          currentText={t('wizard.current')}
-          steps={stepComponents.length}
-          currentStep={step + 1}
-        />
-      }
-      content={
-        <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-          >
-            <StepComponent koulutusId={koulutusId} />
-          </Form>
-        </FormProvider>
-      }
-      footer={
+      onClose={onClose}
+      confirmBeforeClose={{
+        translations: {
+          title: t('confirm-modal-close.title'),
+          description: t('confirm-modal-close.description'),
+          noLabel: t('confirm-modal-close.no'),
+          yesLabel: t('confirm-modal-close.yes'),
+        },
+      }}
+      renderFooter={(onCloseClick) => (
         <div className="flex flex-row justify-between">
           <div>
             {koulutusId && (
@@ -328,7 +313,7 @@ const AddOrEditKoulutusModal = ({
             )}
           </div>
           <div className="flex flex-row justify-between gap-5">
-            <Button label={t('cancel')} variant="white" onClick={onClose} />
+            <Button label={t('cancel')} variant="white" onClick={onCloseClick} />
             {!isFirstStep && (
               <Button label={t('previous')} variant="white" disabled={!isValid} onClick={previousStep} />
             )}
@@ -338,10 +323,37 @@ const AddOrEditKoulutusModal = ({
             {isLastStep && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}
           </div>
         </div>
-      }
-    />
-  ) : (
-    <></>
+      )}
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="order-1 sm:order-2 col-span-1 justify-items-end">
+          <WizardProgress
+            labelText={t('wizard.label')}
+            stepText={t('wizard.step')}
+            completedText={t('wizard.completed')}
+            currentText={t('wizard.current')}
+            steps={stepComponents.length}
+            currentStep={step + 1}
+          />
+        </div>
+        <div className="order-2 sm:order-1 col-span-1 sm:col-span-2">
+          <FormProvider {...methods}>
+            <Form
+              id={formId}
+              onSubmit={onSubmit}
+              onKeyDown={(event) => {
+                // Prevent form submission on Enter
+                if (event.key === 'Enter') {
+                  event.preventDefault();
+                }
+              }}
+            >
+              <StepComponent koulutusId={koulutusId} />
+            </Form>
+          </FormProvider>
+        </div>
+      </div>
+    </Modal>
   );
 };
 

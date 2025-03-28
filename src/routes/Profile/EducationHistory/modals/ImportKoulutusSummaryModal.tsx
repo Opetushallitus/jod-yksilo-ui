@@ -2,7 +2,6 @@ import { client } from '@/api/client';
 import { ErrorResponse } from '@/api/errorResponse';
 import { components } from '@/api/schema';
 import { ExperienceTable, ExperienceTableRowData } from '@/components';
-import { useEscHandler } from '@/hooks/useEscHandler';
 import { getEducationHistoryTableRows, Koulutus } from '@/routes/Profile/EducationHistory/utils.ts';
 import { Button, ConfirmDialog, Modal, Spinner } from '@jod/design-system';
 import React from 'react';
@@ -22,9 +21,6 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
   const [error, setError] = React.useState<Error | undefined>(undefined);
   const [tableRows, setTableRows] = React.useState<ExperienceTableRowData[]>([]);
   const cancelButtonRef = React.useRef<HTMLButtonElement>(null);
-
-  const modalId = React.useId();
-  useEscHandler(() => cancelButtonRef.current?.click(), modalId);
 
   React.useEffect(() => {
     if (isOpen) {
@@ -193,41 +189,21 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
   return (
     <Modal
       open={isOpen}
-      content={
-        <div id={modalId} className="flex flex-col">
-          <div className="text-left">
-            <h3 className="mb-5 text-heading-2">{t('education-history-import.summary-modal.title')}</h3>
-            <p className="mb-4">{t('education-history-import.summary-modal.description')}</p>
-            {isFetching && (
-              <div className="flex">
-                <Spinner className="mr-5 mb-5" size={24} color={'accent'} />
-                {t('education-history-import.summary-modal.data-loading')}
-              </div>
-            )}
-            {!isFetching && error && <div className="text-alert-text">{renderErrorMessage()}</div>}
-            {!isFetching && (
-              <ExperienceTable
-                mainColumnHeader={t('education-history.education-provider-or-education')}
-                rows={tableRows}
-                hideOsaamiset
-                showCheckbox={true}
-                checkboxColumnHeader={t('education-history-import.summary-modal.table-header-checkbox')}
-              />
-            )}
-          </div>
-          {!isFetching && !error && (
-            <div className="sticky p-4 bottom-0 bg-bg-gray w-full text-todo">
-              Tähän kuvaus, että osaamisia lisätty opintoihin. TODO: OPHJOD-1306
-            </div>
-          )}
-        </div>
-      }
-      footer={
+      onClose={onClose}
+      confirmBeforeClose={{
+        translations: {
+          title: t('confirm-modal-close.title'),
+          description: t('confirm-modal-close.description'),
+          noLabel: t('confirm-modal-close.no'),
+          yesLabel: t('confirm-modal-close.yes'),
+        },
+      }}
+      renderFooter={(onCloseClick) => (
         <div className="flex flex-row justify-end">
           <div id="buttonSection" className="flex flex-row justify-between gap-5">
             <ConfirmDialog
               title={t('education-history-import.summary-modal.cancel-modal.title')}
-              onConfirm={onClose}
+              onConfirm={onCloseClick}
               confirmText={t('yes')}
               cancelText={t('cancel')}
               variant="destructive"
@@ -238,15 +214,43 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
                   ref={cancelButtonRef}
                   variant="white"
                   label={t('cancel')}
-                  onClick={error ? onClose : showDialog}
+                  onClick={error ? onCloseClick : showDialog}
                 />
               )}
             </ConfirmDialog>
             <Button label={t('save')} variant="white" disabled={!koskiData} onClick={saveSelectedKoulutus} />
           </div>
         </div>
-      }
-    />
+      )}
+    >
+      <div className="flex flex-col">
+        <div className="text-left">
+          <h3 className="mb-5 text-heading-2">{t('education-history-import.summary-modal.title')}</h3>
+          <p className="mb-4">{t('education-history-import.summary-modal.description')}</p>
+          {isFetching && (
+            <div className="flex">
+              <Spinner className="mr-5 mb-5" size={24} color={'accent'} />
+              {t('education-history-import.summary-modal.data-loading')}
+            </div>
+          )}
+          {!isFetching && error && <div className="text-alert-text">{renderErrorMessage()}</div>}
+          {!isFetching && (
+            <ExperienceTable
+              mainColumnHeader={t('education-history.education-provider-or-education')}
+              rows={tableRows}
+              hideOsaamiset
+              showCheckbox={true}
+              checkboxColumnHeader={t('education-history-import.summary-modal.table-header-checkbox')}
+            />
+          )}
+        </div>
+        {!isFetching && !error && (
+          <div className="sticky p-4 bottom-0 bg-bg-gray w-full text-todo">
+            Tähän kuvaus, että osaamisia lisätty opintoihin. TODO: OPHJOD-1306
+          </div>
+        )}
+      </div>
+    </Modal>
   );
 };
 

@@ -1,7 +1,6 @@
 import { OpportunityCard } from '@/components';
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
-import { useEscHandler } from '@/hooks/useEscHandler';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import MyGoalsOpportunityCardMenu from '@/routes/Profile/MyGoals/MyGoalsOpportunityCardMenu';
 import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
@@ -79,9 +78,6 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
   const paamaarat = usePaamaaratStore((state) => state.paamaarat);
   const [listItems, setListItems] = React.useState<TypedMahdollisuus[]>([]);
 
-  const goalsId = React.useId();
-  useEscHandler(onClose, goalsId);
-
   type SelectedFilter = 'KAIKKI' | 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
 
   const selectedFilter: SelectedFilter = React.useMemo(() => {
@@ -153,91 +149,91 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
   return (
     <Modal
       open={isOpen}
-      content={
-        <div id={goalsId}>
-          <div>
-            <div className="bg-bg-gray pb-3 relative">
-              <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-modal-title')}</h1>
-              <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-modal-description')}</p>
+      onClose={onClose}
+      renderFooter={(onCloseClick) => (
+        <div className="flex justify-end">
+          <Button variant="white" label={t('close')} onClick={onCloseClick} />
+        </div>
+      )}
+    >
+      <>
+        <div>
+          <div className="bg-bg-gray pb-3 relative">
+            <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-modal-title')}</h1>
+            <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-modal-description')}</p>
 
-              {totalFavorites > 0 && (
-                <div className="flex justify-end p-3">
-                  <FilterButton
-                    onClick={() => setFiltersOpen(!filtersOpen)}
-                    label={t('do-filter')}
-                    breakpoint="lg"
-                    ref={filterMenuButtonRef}
-                    inline
-                  />
-                </div>
-              )}
-              {totalFavorites > 0 && filtersOpen && !lg && (
-                <div
-                  className="flex flex-col absolute right-0 top-full z-10 bg-bg-gray-2 p-6 rounded-md mt-4 w-[343px] shadow-border text-left gap-6"
-                  ref={filterMenuRef}
-                >
-                  <Filters handleFilterChange={handleFilterChange} filters={filters} />
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="flex flex-row mt-6 gap-5" ref={scrollRef}>
-            <div className="flex flex-col gap-3 w-full">
-              {listItems.map((mahdollisuus) => {
-                const { id, mahdollisuusTyyppi } = mahdollisuus;
-                return (
-                  <OpportunityCard
-                    key={id}
-                    description={getLocalizedText(mahdollisuus.tiivistelma)}
-                    employmentOutlook={2}
-                    hasRestrictions
-                    industryName="TODO: Lorem ipsum dolor"
-                    mostCommonEducationBackground="TODO: Lorem ipsum dolor"
-                    name={getLocalizedText(mahdollisuus.otsikko)}
-                    trend="LASKEVA"
-                    type={mahdollisuusTyyppi}
-                    hideFavorite
-                    menuContent={
-                      <MyGoalsOpportunityCardMenu
-                        mahdollisuusId={id}
-                        mahdollisuusTyyppi={mahdollisuusTyyppi}
-                        menuId={id}
-                      />
-                    }
-                    menuId={id}
-                  />
-                );
-              })}
-              {favoritesPerType.length > 0 && (
-                <div className="mt-5">
-                  <Pagination
-                    currentPage={pageNr}
-                    onPageChange={onPageChange}
-                    pageSize={pageSize}
-                    siblingCount={sm ? 1 : 0}
-                    translations={{
-                      nextTriggerLabel: t('pagination.next'),
-                      prevTriggerLabel: t('pagination.previous'),
-                    }}
-                    totalItems={totalFavorites}
-                  />
-                </div>
-              )}
-            </div>
-            {lg && (
-              <div className="p-5 bg-bg-gray-2 sticky top-0 rounded-md h-min">
+            {totalFavorites > 0 && (
+              <div className="flex justify-end p-3">
+                <FilterButton
+                  onClick={() => setFiltersOpen(!filtersOpen)}
+                  label={t('do-filter')}
+                  breakpoint="lg"
+                  ref={filterMenuButtonRef}
+                  inline
+                />
+              </div>
+            )}
+            {totalFavorites > 0 && filtersOpen && !lg && (
+              <div
+                className="flex flex-col absolute right-0 top-full z-10 bg-bg-gray-2 p-6 rounded-md mt-4 w-[343px] shadow-border text-left gap-6"
+                ref={filterMenuRef}
+              >
                 <Filters handleFilterChange={handleFilterChange} filters={filters} />
               </div>
             )}
           </div>
         </div>
-      }
-      footer={
-        <div className="flex justify-end">
-          <Button variant="white" label={t('close')} onClick={onClose} />
+        <div className="flex flex-row mt-6 gap-5" ref={scrollRef}>
+          <div className="flex flex-col gap-3 w-full">
+            {listItems.map((mahdollisuus) => {
+              const { id, mahdollisuusTyyppi } = mahdollisuus;
+              return (
+                <OpportunityCard
+                  key={id}
+                  description={getLocalizedText(mahdollisuus.tiivistelma)}
+                  employmentOutlook={2}
+                  hasRestrictions
+                  industryName="TODO: Lorem ipsum dolor"
+                  mostCommonEducationBackground="TODO: Lorem ipsum dolor"
+                  name={getLocalizedText(mahdollisuus.otsikko)}
+                  trend="LASKEVA"
+                  type={mahdollisuusTyyppi}
+                  hideFavorite
+                  menuContent={
+                    <MyGoalsOpportunityCardMenu
+                      mahdollisuusId={id}
+                      mahdollisuusTyyppi={mahdollisuusTyyppi}
+                      menuId={id}
+                    />
+                  }
+                  menuId={id}
+                />
+              );
+            })}
+            {favoritesPerType.length > 0 && (
+              <div className="mt-5">
+                <Pagination
+                  currentPage={pageNr}
+                  onPageChange={onPageChange}
+                  pageSize={pageSize}
+                  siblingCount={sm ? 1 : 0}
+                  translations={{
+                    nextTriggerLabel: t('pagination.next'),
+                    prevTriggerLabel: t('pagination.previous'),
+                  }}
+                  totalItems={totalFavorites}
+                />
+              </div>
+            )}
+          </div>
+          {lg && (
+            <div className="p-5 bg-bg-gray-2 sticky top-0 rounded-md h-min">
+              <Filters handleFilterChange={handleFilterChange} filters={filters} />
+            </div>
+          )}
         </div>
-      }
-    />
+      </>
+    </Modal>
   );
 };
 

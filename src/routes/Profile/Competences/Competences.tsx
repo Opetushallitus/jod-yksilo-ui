@@ -79,21 +79,20 @@ const Competences = () => {
           <Modal
             open={showFilters}
             onClose={() => setShowFilters(false)}
-            content={
-              <Filters
-                filterKeys={filterKeys}
-                groupBy={groupBy}
-                selectedFilters={selectedFilters}
-                setGroupBy={setGroupBy}
-                setSelectedFilters={setSelectedFilters}
-              />
-            }
-            footer={
+            renderFooter={(onCloseClick) => (
               <div className="flex flex-row justify-end gap-4">
-                <Button variant="white" label={t('close')} onClick={() => setShowFilters(false)} />
+                <Button variant="white" label={t('close')} onClick={onCloseClick} />
               </div>
-            }
-          />
+            )}
+          >
+            <Filters
+              filterKeys={filterKeys}
+              groupBy={groupBy}
+              selectedFilters={selectedFilters}
+              setGroupBy={setGroupBy}
+              setSelectedFilters={setSelectedFilters}
+            />
+          </Modal>
         )}
         {groupBy === GROUP_BY_SOURCE && (
           <GroupBySource

@@ -111,7 +111,7 @@ const WorkHistory = () => {
           toimenkuvaId={toimenkuvaId}
         />
       )}
-      {isWizardOpen && <WorkHistoryWizard isOpen={isWizardOpen} onClose={onCloseWizard} />}
+      {isWizardOpen && <WorkHistoryWizard onClose={onCloseWizard} />}
     </MainLayout>
   );
 };

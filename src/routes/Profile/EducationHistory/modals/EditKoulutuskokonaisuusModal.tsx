@@ -2,7 +2,6 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -34,7 +33,6 @@ const EditKoulutuskokonaisuusModal = ({
   } = useTranslation();
 
   const formId = React.useId();
-  useEscHandler(onClose, formId);
   const methods = useForm<KoulutuskokonaisuusForm>({
     mode: 'onBlur',
     resolver: zodResolver(
@@ -100,32 +98,16 @@ const EditKoulutuskokonaisuusModal = ({
   return (
     <Modal
       open={isOpen}
-      content={
-        <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-          >
-            <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-              {t('education-history.edit-education')}
-            </h2>
-
-            <InputField
-              label={t('education-history.educational-institution-or-education-provider')}
-              {...methods.register(`nimi.${language}` as const)}
-              placeholder={t('profile.education-history.modals.workplace-placeholder')}
-            />
-            <FormError name={`nimi.${language}`} errors={errors} />
-          </Form>
-        </FormProvider>
-      }
-      footer={
+      onClose={onClose}
+      confirmBeforeClose={{
+        translations: {
+          title: t('confirm-modal-close.title'),
+          description: t('confirm-modal-close.description'),
+          noLabel: t('confirm-modal-close.no'),
+          yesLabel: t('confirm-modal-close.yes'),
+        },
+      }}
+      renderFooter={(onCloseClick) => (
         <div className="flex flex-row justify-between">
           <div className="flex flex-row gap-5">
             <ConfirmDialog
@@ -142,12 +124,40 @@ const EditKoulutuskokonaisuusModal = ({
             </ConfirmDialog>
           </div>
           <div className="flex flex-row gap-5">
-            <Button label={t('cancel')} variant="white" onClick={onClose} />
+            <Button label={t('cancel')} variant="white" onClick={onCloseClick} />
             <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />
           </div>
         </div>
-      }
-    />
+      )}
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="col-span-1 sm:col-span-2">
+          <FormProvider {...methods}>
+            <Form
+              id={formId}
+              onSubmit={onSubmit}
+              onKeyDown={(event) => {
+                // Prevent form submission on Enter
+                if (event.key === 'Enter') {
+                  event.preventDefault();
+                }
+              }}
+            >
+              <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
+                {t('education-history.edit-education')}
+              </h2>
+
+              <InputField
+                label={t('education-history.educational-institution-or-education-provider')}
+                {...methods.register(`nimi.${language}` as const)}
+                placeholder={t('profile.education-history.modals.workplace-placeholder')}
+              />
+              <FormError name={`nimi.${language}`} errors={errors} />
+            </Form>
+          </FormProvider>
+        </div>
+      </div>
+    </Modal>
   );
 };
 

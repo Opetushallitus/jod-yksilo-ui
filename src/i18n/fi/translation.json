@@ -27,6 +27,12 @@
   "data-sources": "Datalähteet",
   "date-or-continues-placeholder": "pp.kk.vvvv tai jatkuu",
   "date-placeholder": "pp.kk.vvvv",
+  "confirm-modal-close": {
+    "title": "Haluatko varmasti sulkea modaalin?",
+    "description": "Jos suljet modaalin, kaikki tallentamattomat muutokset menetetään.",
+    "yes": "Kyllä",
+    "no": "Ei"
+  },
   "datepicker": {
     "actions": {
       "close": "Sulje kalenteri",

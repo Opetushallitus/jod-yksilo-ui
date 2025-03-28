@@ -1,6 +1,5 @@
 import { client } from '@/api/client';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { useEscHandler } from '@/hooks/useEscHandler';
 import { usePolutStore } from '@/stores/usePolutStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Modal, WizardProgress } from '@jod/design-system';
@@ -95,8 +94,6 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
     trigger,
   } = methods;
 
-  useEscHandler(onClose, React.useId());
-
   const onSubmit: FormSubmitHandler<VaiheForm> = async ({ data }: { data: VaiheForm }) => {
     if (!data || !suunnitelmaId || !paamaaraId) {
       close();
@@ -166,23 +163,8 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
     <FormProvider {...methods}>
       <Modal
         open={isOpen}
-        progress={
-          <WizardProgress
-            labelText={t('wizard.label')}
-            stepText={t('wizard.step')}
-            completedText={t('wizard.completed')}
-            currentText={t('wizard.current')}
-            steps={wizardComponents.length}
-            currentStep={wizardStep + 1}
-          />
-        }
-        content={
-          <Form id={formId} onSubmit={onSubmit}>
-            <WizardContent vaiheIndex={vaiheIndex} />
-          </Form>
-        }
-        sidePanel={wizardStep === 0 ? <></> : null}
-        footer={
+        onClose={close}
+        renderFooter={(onCloseClick) => (
           <div className="flex flex-row justify-end gap-5">
             {methods.formState.isDirty ? (
               <ConfirmDialog
@@ -196,7 +178,7 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
                 {(showDialog: () => void) => <Button label={t('cancel')} variant="white" onClick={showDialog} />}
               </ConfirmDialog>
             ) : (
-              <Button label={t('cancel')} variant="white" onClick={() => close()} />
+              <Button label={t('cancel')} variant="white" onClick={onCloseClick} />
             )}
 
             {wizardStep === 0 && <Button label={t('next')} variant="white" disabled={!isValid} onClick={nextStep} />}
@@ -207,8 +189,26 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
               </>
             )}
           </div>
-        }
-      />
+        )}
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div className="order-1 sm:order-2 col-span-1 justify-items-end">
+            <WizardProgress
+              labelText={t('wizard.label')}
+              stepText={t('wizard.step')}
+              completedText={t('wizard.completed')}
+              currentText={t('wizard.current')}
+              steps={wizardComponents.length}
+              currentStep={wizardStep + 1}
+            />
+          </div>
+          <div className="order-2 sm:order-1 col-span-1 sm:col-span-2">
+            <Form id={formId} onSubmit={onSubmit}>
+              <WizardContent vaiheIndex={vaiheIndex} />
+            </Form>
+          </div>
+        </div>
+      </Modal>
     </FormProvider>
   );
 };
