@@ -179,3 +179,13 @@ export const copyToClipboard = async (text: string) => {
     toast.error(i18n.t('link-copy-failed'));
   }
 };
+
+export const parseBoolean = (value: unknown) => {
+  if (typeof value === 'boolean' && value === true) {
+    return true;
+  } else if (['true', '1', 1].includes(String(value).toLowerCase())) {
+    return true;
+  } else {
+    return false;
+  }
+};

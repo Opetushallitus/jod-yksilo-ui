@@ -27,6 +27,7 @@
   "copyright": "© JOD 2024. Kaikki oikeudet pidätetään.",
   "count-competences": "{{count}} osaamista",
   "create-path": "Luo polku",
+  "data-not-available": "Tietoja ei ole saatavilla",
   "data-sources": "Datalähteet",
   "date-or-continues-placeholder": "pp.kk.vvvv tai jatkuu",
   "date-placeholder": "pp.kk.vvvv",
@@ -204,6 +205,50 @@
       "title": "3. Tekoäly apunasi"
     }
   },
+  "jakauma": {
+    "ajokortti": "Ajokortti",
+    "ammatti": "Ammatti",
+    "kielitaito": "Kielitaito",
+    "kortitJaLuvat": "Kortit ja luvat",
+    "koulutusaste": "Koulutusaste",
+    "kunta": "Kunta",
+    "maa": "Maa",
+    "maakunta": "Maakunta",
+    "matkustusvaatimus": "Matkustusvaatimus",
+    "osaaminen": "Osaaminen",
+    "palkanPeruste": "Palkan peruste",
+    "palvelussuhde": "Palvelussuhde",
+    "rikosrekisteriote": "Rikosrekisteriote",
+    "sijaintiJoustava": "Joustava sijainti",
+    "tyoaika": "Työaika",
+    "tyokieli": "Työkieli",
+    "tyonJatkuvuus": "Työn jatkuvuus"
+  },
+  "jakauma-values": {
+    "palkanPeruste": {
+      "OTHER": "Muu",
+      "PIECE_WORK": "Urakkapalkka",
+      "PROVISION": "Pelkkä provisio",
+      "SALARY": "Kiinteä palkka",
+      "SALARY_PROVISION": "Kiinteä palkka + provisio",
+      "TIME_RATE": "Aikapalkka",
+      "TIME_RATE_PROVISION": "Aikapalkka + provisio"
+    },
+    "palvelussuhde": {
+      "COMMISSION": "Toimeksianto",
+      "EMPLOYMENT": "Työsuhde",
+      "ENTREPRENEURSHIP": "Yrittäjyys",
+      "SERVICE_IN_PUBLIC_ADMINISTRATION": "Virkasuhde"
+    },
+    "tyoaika": {
+      "FULLTIME": "Kokoaikainen",
+      "PARTTIME": "Osa-aikainen"
+    },
+    "tyonJatkuvuus": {
+      "PERMANENT": "Toistaiseksi voimassa oleva",
+      "TEMPORARY": "Määräaikainen"
+    }
+  },
   "job-opportunities": "Työmahdollisuudet",
   "job-opportunity": {
     "competences": {
@@ -289,6 +334,7 @@
   "my-competences-by-sources": "Osaamiseni lähteiden mukaan",
   "name": "Nimi",
   "next": "Seuraava",
+  "no": "Ei",
   "no-competences": "Ei osaamisia",
   "no-match": {
     "description": "Hakemaasi sivua ei löytynyt.",

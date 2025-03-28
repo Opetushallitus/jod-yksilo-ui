@@ -1,16 +1,55 @@
 import { components } from '@/api/schema';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
+import { type Codeset, type Jakaumat } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText, hashString } from '@/utils';
+import { getLocalizedText, hashString, parseBoolean } from '@/utils';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 import { type LoaderData } from './loader';
 
+type Keys = (keyof Jakaumat)[];
+
+const JakaumaList = ({ name }: { name: keyof Jakaumat | Codeset }) => {
+  const { t } = useTranslation();
+  const { codesetValues, jakaumat } = useLoaderData<LoaderData>();
+
+  const codesetKeys: Keys = ['maa', 'maakunta', 'kunta', 'tyokieli'];
+  const booleanKeys: Keys = ['rikosrekisteriote', 'matkustusvaatimus', 'sijaintiJoustava'];
+
+  const getDisplayValue = (arvo: string) => {
+    if (codesetKeys.includes(name) && codesetValues) {
+      return codesetValues[name as Codeset]?.find((v) => v.code === arvo)?.value ?? arvo;
+    } else if (booleanKeys.includes(name)) {
+      return parseBoolean(arvo) === true ? t('yes') : t('no');
+    } else {
+      return t(`jakauma-values.${name}.${arvo}`);
+    }
+  };
+
+  const isEmpty = !jakaumat?.[name]?.arvot || jakaumat?.[name]?.arvot.length === 0;
+
+  return (
+    <div className="md:col-span-1 col-span-2">
+      <h2 className="text-heading-3 pb-2">{t(`jakauma.${name}`)}</h2>
+      {isEmpty ? (
+        <p className="text-black">{t('data-not-available')}</p>
+      ) : (
+        <ul className="list-none text-body-md text-black capitalize">
+          {jakaumat?.[name]?.arvot.map((arvo) => (
+            <li key={arvo.arvo}>{`${getDisplayValue(arvo.arvo)} (${arvo.osuus.toFixed(1)}%)`}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
 const JobOpportunity = () => {
   const { t } = useTranslation();
-  const { tyomahdollisuus, ammatit, ammattiryhma, osaamiset, isLoggedIn } = useLoaderData<LoaderData>();
+  const { tyomahdollisuus, ammatit, ammattiryhma, osaamiset, isLoggedIn, jakaumat } = useLoaderData<LoaderData>();
+
   const toolStore = useToolStore();
   const omatOsaamisetUris = React.useMemo(
     () => toolStore.osaamiset?.map((osaaminen) => osaaminen.id),
@@ -136,6 +175,18 @@ const JobOpportunity = () => {
         </>
       ),
       showInDevOnly: true,
+    },
+    {
+      navTitle: t('more-information'),
+      content: (
+        <div className="grid w-full grow grid-cols-2 gap-6">
+          {(Object.keys(jakaumat) as Keys)
+            .filter((key) => !['osaaminen', 'ammatti'].includes(key))
+            .map((key) => (
+              <JakaumaList key={key} name={key} />
+            ))}
+        </div>
+      ),
     },
   ];
   return (

@@ -1,4 +1,4 @@
-import { formatDate, getLocalizedText, paginate, removeDuplicates, sortByProperty } from '@/utils';
+import { formatDate, getLocalizedText, paginate, parseBoolean, removeDuplicates, sortByProperty } from '@/utils';
 import i18n from 'i18next';
 import { describe, expect, it } from 'vitest';
 
@@ -240,6 +240,29 @@ describe('utils', () => {
       // Assuming that DEFAULT_PAGE_SIZE is 20 in constants file
       const result = paginate(Array.from({ length: 60 }).map((_, i) => i + 1));
       expect(result).toEqual(Array.from({ length: 20 }).map((_, i) => i + 1));
+    });
+  });
+
+  describe('parseBoolean', () => {
+    it('should return true for truthy values', () => {
+      const values = ['true', 'True', 'TRUE', '1', 1, true];
+      values.forEach((value) => {
+        expect(parseBoolean(value)).toBe(true);
+      });
+    });
+
+    it('should return false for falsy values', () => {
+      const values = ['false', 'False', 'FALSE', '0', 0, false];
+      values.forEach((value) => {
+        expect(parseBoolean(value)).toBe(false);
+      });
+    });
+
+    it('should return false for weird values', () => {
+      const values = [() => void 0, {}, [], Number];
+      values.forEach((value) => {
+        expect(parseBoolean(value)).toBe(false);
+      });
     });
   });
 });
