@@ -1,0 +1,3880 @@
+[
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/aa",
+    "level": 1,
+    "code": "aa",
+    "order": 10,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "afar" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ab",
+    "level": 1,
+    "code": "ab",
+    "order": 20,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "abhaasi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ae",
+    "level": 1,
+    "code": "ae",
+    "order": 30,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "avesta" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/af",
+    "level": 1,
+    "code": "af",
+    "order": 40,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "afrikaans" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ak",
+    "level": 1,
+    "code": "ak",
+    "order": 50,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "akan" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/am",
+    "level": 1,
+    "code": "am",
+    "order": 60,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "amhara" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ar",
+    "level": 1,
+    "code": "ar",
+    "order": 70,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "arabia" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/an",
+    "level": 1,
+    "code": "an",
+    "order": 80,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "aragonia" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/as",
+    "level": 1,
+    "code": "as",
+    "order": 90,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "assami" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/av",
+    "level": 1,
+    "code": "av",
+    "order": 100,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "avaari" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ay",
+    "level": 1,
+    "code": "ay",
+    "order": 110,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "aimara" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/az",
+    "level": 1,
+    "code": "az",
+    "order": 120,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "azeri, aiemmin myös: azerbaidžani*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ba",
+    "level": 1,
+    "code": "ba",
+    "order": 130,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "baškiiri*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/be",
+    "level": 1,
+    "code": "be",
+    "order": 140,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "valkovenäjä" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/bg",
+    "level": 1,
+    "code": "bg",
+    "order": 150,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "bulgaria" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/bh",
+    "level": 1,
+    "code": "bh",
+    "order": 160,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "biharikieli, aiemmin: bihari*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/bi",
+    "level": 1,
+    "code": "bi",
+    "order": 170,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "bislama" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/bm",
+    "level": 1,
+    "code": "bm",
+    "order": 180,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "bambara" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/bn",
+    "level": 1,
+    "code": "bn",
+    "order": 190,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "bengali" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/bo",
+    "level": 1,
+    "code": "bo",
+    "order": 200,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tiibet" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/br",
+    "level": 1,
+    "code": "br",
+    "order": 210,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "bretoni" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/bs",
+    "level": 1,
+    "code": "bs",
+    "order": 220,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "bosnia" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ca",
+    "level": 1,
+    "code": "ca",
+    "order": 230,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "katalaani*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ce",
+    "level": 1,
+    "code": "ce",
+    "order": 240,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tšetšeeni" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ch",
+    "level": 1,
+    "code": "ch",
+    "order": 250,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tšamorro" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/co",
+    "level": 1,
+    "code": "co",
+    "order": 260,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "korsika" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/cr",
+    "level": 1,
+    "code": "cr",
+    "order": 270,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "cree" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/cs",
+    "level": 1,
+    "code": "cs",
+    "order": 280,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tšekki" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/cu",
+    "level": 1,
+    "code": "cu",
+    "order": 290,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kirkkoslaavi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/cv",
+    "level": 1,
+    "code": "cv",
+    "order": 300,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tšuvassi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/cy",
+    "level": 1,
+    "code": "cy",
+    "order": 310,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kymri, aiemmin myös: wales*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/da",
+    "level": 1,
+    "code": "da",
+    "order": 320,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tanska" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/de",
+    "level": 1,
+    "code": "de",
+    "order": 330,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "saksa" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/dv",
+    "level": 1,
+    "code": "dv",
+    "order": 340,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "divehi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/dz",
+    "level": 1,
+    "code": "dz",
+    "order": 350,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "dzongkha, aiemmin myös: bhutani*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ee",
+    "level": 1,
+    "code": "ee",
+    "order": 360,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "ewe" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/el",
+    "level": 1,
+    "code": "el",
+    "order": 370,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      { "langName": "suomi", "lang": "fi", "name": "kreikka, uuskreikka (vuoden 1453 jälkeen)" }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/en",
+    "level": 1,
+    "code": "en",
+    "order": 380,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "englanti" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/eo",
+    "level": 1,
+    "code": "eo",
+    "order": 390,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "esperanto" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/es",
+    "level": 1,
+    "code": "es",
+    "order": 400,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "espanja" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/et",
+    "level": 1,
+    "code": "et",
+    "order": 410,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "viro, aiemmin myös: eesti*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/eu",
+    "level": 1,
+    "code": "eu",
+    "order": 420,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "baski, euskara*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/fa",
+    "level": 1,
+    "code": "fa",
+    "order": 430,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "farsi, persia" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ff",
+    "level": 1,
+    "code": "ff",
+    "order": 440,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "fulani, aiemmin myös: fulfulde*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/fi",
+    "level": 1,
+    "code": "fi",
+    "order": 450,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "suomi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/fj",
+    "level": 1,
+    "code": "fj",
+    "order": 460,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "fidži" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/fo",
+    "level": 1,
+    "code": "fo",
+    "order": 470,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "fääri" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/fr",
+    "level": 1,
+    "code": "fr",
+    "order": 480,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "ranska" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/fy",
+    "level": 1,
+    "code": "fy",
+    "order": 490,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "länsifriisi, aiemmin: friisi*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ga",
+    "level": 1,
+    "code": "ga",
+    "order": 500,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "iiri*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/gd",
+    "level": 1,
+    "code": "gd",
+    "order": 510,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "gaeli" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/gl",
+    "level": 1,
+    "code": "gl",
+    "order": 520,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "galicia" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/gn",
+    "level": 1,
+    "code": "gn",
+    "order": 530,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "guarani" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/gu",
+    "level": 1,
+    "code": "gu",
+    "order": 540,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "gudžarati" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/gv",
+    "level": 1,
+    "code": "gv",
+    "order": 550,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "manksi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ha",
+    "level": 1,
+    "code": "ha",
+    "order": 560,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "hausa" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/he",
+    "level": 1,
+    "code": "he",
+    "order": 570,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "heprea" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/hi",
+    "level": 1,
+    "code": "hi",
+    "order": 580,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "hindi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ho",
+    "level": 1,
+    "code": "ho",
+    "order": 590,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "hiri-motu" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/hr",
+    "level": 1,
+    "code": "hr",
+    "order": 600,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kroatia" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ht",
+    "level": 1,
+    "code": "ht",
+    "order": 610,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "haiti" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/hu",
+    "level": 1,
+    "code": "hu",
+    "order": 620,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "unkari" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/hy",
+    "level": 1,
+    "code": "hy",
+    "order": 630,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "armenia" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/hz",
+    "level": 1,
+    "code": "hz",
+    "order": 640,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "herero" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ia",
+    "level": 1,
+    "code": "ia",
+    "order": 650,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      { "langName": "suomi", "lang": "fi", "name": "interlingua (International Auxiliary Language Association)" }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/id",
+    "level": 1,
+    "code": "id",
+    "order": 660,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      { "langName": "suomi", "lang": "fi", "name": "indonesia, aiemmin myös: bahasa indonesia*" }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ie",
+    "level": 1,
+    "code": "ie",
+    "order": 670,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "interlingue, occidental*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ig",
+    "level": 1,
+    "code": "ig",
+    "order": 680,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "igbo, aiemmin myös: ibo*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ii",
+    "level": 1,
+    "code": "ii",
+    "order": 690,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "sichuanin-yi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ik",
+    "level": 1,
+    "code": "ik",
+    "order": 700,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "inupiaq, inupiatun" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/io",
+    "level": 1,
+    "code": "io",
+    "order": 710,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "ido" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/is",
+    "level": 1,
+    "code": "is",
+    "order": 720,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "islanti" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/it",
+    "level": 1,
+    "code": "it",
+    "order": 730,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "italia" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/iu",
+    "level": 1,
+    "code": "iu",
+    "order": 740,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "inuktitut" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ja",
+    "level": 1,
+    "code": "ja",
+    "order": 750,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "japani" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/jv",
+    "level": 1,
+    "code": "jv",
+    "order": 760,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "jaava*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ka",
+    "level": 1,
+    "code": "ka",
+    "order": 770,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "georgia; aiemmin myös: gruusia*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/kg",
+    "level": 1,
+    "code": "kg",
+    "order": 780,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kongo, aiemmin myös: kikongo*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ki",
+    "level": 1,
+    "code": "ki",
+    "order": 790,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kikuju" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/kj",
+    "level": 1,
+    "code": "kj",
+    "order": 800,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kuanjama, aiemmin myös: kwanjama*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/kk",
+    "level": 1,
+    "code": "kk",
+    "order": 810,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kazakki" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/kl",
+    "level": 1,
+    "code": "kl",
+    "order": 820,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kalaallisut, grönlanti*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/km",
+    "level": 1,
+    "code": "km",
+    "order": 830,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "keskikhmer, aiemmin: khmer, kambodža*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/kn",
+    "level": 1,
+    "code": "kn",
+    "order": 840,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kannada" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ko",
+    "level": 1,
+    "code": "ko",
+    "order": 850,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "korea" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/kr",
+    "level": 1,
+    "code": "kr",
+    "order": 860,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kanuri" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ks",
+    "level": 1,
+    "code": "ks",
+    "order": 870,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kašmiri" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ku",
+    "level": 1,
+    "code": "ku",
+    "order": 880,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kurdi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/kv",
+    "level": 1,
+    "code": "kv",
+    "order": 890,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "komi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/kw",
+    "level": 1,
+    "code": "kw",
+    "order": 900,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "korni" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ky",
+    "level": 1,
+    "code": "ky",
+    "order": 910,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kirgiisi*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/la",
+    "level": 1,
+    "code": "la",
+    "order": 920,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "latina" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/lb",
+    "level": 1,
+    "code": "lb",
+    "order": 930,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "luxemburg, myös: letzeburg*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/lg",
+    "level": 1,
+    "code": "lg",
+    "order": 940,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "ganda, aiemmin myös: luganda*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ln",
+    "level": 1,
+    "code": "ln",
+    "order": 950,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "lingala" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/li",
+    "level": 1,
+    "code": "li",
+    "order": 960,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "limburgi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/lo",
+    "level": 1,
+    "code": "lo",
+    "order": 970,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "lao" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/lt",
+    "level": 1,
+    "code": "lt",
+    "order": 980,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "liettua" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/lu",
+    "level": 1,
+    "code": "lu",
+    "order": 990,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "katanganluba, aiemmin myös: luba*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/lv",
+    "level": 1,
+    "code": "lv",
+    "order": 1000,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "latvia, aiemmin myös: lätti*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/mg",
+    "level": 1,
+    "code": "mg",
+    "order": 1010,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "malagasi, aiemmin myös: madagassi*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/mh",
+    "level": 1,
+    "code": "mh",
+    "order": 1020,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "marshall" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/mi",
+    "level": 1,
+    "code": "mi",
+    "order": 1030,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "maori" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/mk",
+    "level": 1,
+    "code": "mk",
+    "order": 1040,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "makedonia" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ml",
+    "level": 1,
+    "code": "ml",
+    "order": 1050,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "malajalam" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/mn",
+    "level": 1,
+    "code": "mn",
+    "order": 1060,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "mongoli" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/mr",
+    "level": 1,
+    "code": "mr",
+    "order": 1070,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "marathi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ms",
+    "level": 1,
+    "code": "ms",
+    "order": 1080,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "malaiji" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/mt",
+    "level": 1,
+    "code": "mt",
+    "order": 1090,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "malta" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/my",
+    "level": 1,
+    "code": "my",
+    "order": 1100,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "burma" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/na",
+    "level": 1,
+    "code": "na",
+    "order": 1110,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "nauru" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/nb",
+    "level": 1,
+    "code": "nb",
+    "order": 1120,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      { "langName": "suomi", "lang": "fi", "name": "norjan bokmål, aiemmin myös: kirjanorja*" }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/nd",
+    "level": 1,
+    "code": "nd",
+    "order": 1130,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "pohjoisndebele" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ne",
+    "level": 1,
+    "code": "ne",
+    "order": 1140,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "nepali" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ng",
+    "level": 1,
+    "code": "ng",
+    "order": 1150,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "ndonga" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/nl",
+    "level": 1,
+    "code": "nl",
+    "order": 1160,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "hollanti" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/nn",
+    "level": 1,
+    "code": "nn",
+    "order": 1170,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      { "langName": "suomi", "lang": "fi", "name": "norjan nynorsk, aiemmin myös: uusnorja*" }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/no",
+    "level": 1,
+    "code": "no",
+    "order": 1180,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "norja" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/nr",
+    "level": 1,
+    "code": "nr",
+    "order": 1190,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "etelä-ndebele*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/nv",
+    "level": 1,
+    "code": "nv",
+    "order": 1200,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "navajo" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ny",
+    "level": 1,
+    "code": "ny",
+    "order": 1210,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "njandža, myös: tšitšewa, tšewa*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/oc",
+    "level": 1,
+    "code": "oc",
+    "order": 1220,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      { "langName": "suomi", "lang": "fi", "name": "oksitaani (1500-luvulta lähtien), myös: provensaali*" }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/oj",
+    "level": 1,
+    "code": "oj",
+    "order": 1230,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "odžibwa" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/om",
+    "level": 1,
+    "code": "om",
+    "order": 1240,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "oromo, aiemmin myös: afan oromo*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/or",
+    "level": 1,
+    "code": "or",
+    "order": 1250,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "orija" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/os",
+    "level": 1,
+    "code": "os",
+    "order": 1260,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "osseetti" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/pa",
+    "level": 1,
+    "code": "pa",
+    "order": 1270,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "pandžabi*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/pi",
+    "level": 1,
+    "code": "pi",
+    "order": 1280,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "paali" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/pl",
+    "level": 1,
+    "code": "pl",
+    "order": 1290,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "puola" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ps",
+    "level": 1,
+    "code": "ps",
+    "order": 1300,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "paštu, myös: afgaani*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/pt",
+    "level": 1,
+    "code": "pt",
+    "order": 1310,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "portugali" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/qu",
+    "level": 1,
+    "code": "qu",
+    "order": 1320,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "ketšua" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/rm",
+    "level": 1,
+    "code": "rm",
+    "order": 1330,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "retoromaani" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/rn",
+    "level": 1,
+    "code": "rn",
+    "order": 1340,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "rundi, aiemmin myös: kirundi*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ro",
+    "level": 1,
+    "code": "ro",
+    "order": 1350,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "romania" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ru",
+    "level": 1,
+    "code": "ru",
+    "order": 1360,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "venäjä" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/rw",
+    "level": 1,
+    "code": "rw",
+    "order": 1370,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      { "langName": "suomi", "lang": "fi", "name": "ruanda, aiemmin myös: kinjaruanda, njaruanda*" }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sa",
+    "level": 1,
+    "code": "sa",
+    "order": 1380,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "sanskrit" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sc",
+    "level": 1,
+    "code": "sc",
+    "order": 1390,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "sardi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sd",
+    "level": 1,
+    "code": "sd",
+    "order": 1400,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "sindhi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/se",
+    "level": 1,
+    "code": "se",
+    "order": 1410,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "pohjoissaame*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sg",
+    "level": 1,
+    "code": "sg",
+    "order": 1420,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "sango" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/si",
+    "level": 1,
+    "code": "si",
+    "order": 1430,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "sinhala, aiemmin: singali*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sk",
+    "level": 1,
+    "code": "sk",
+    "order": 1440,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "slovakki" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sl",
+    "level": 1,
+    "code": "sl",
+    "order": 1450,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "sloveeni" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sm",
+    "level": 1,
+    "code": "sm",
+    "order": 1460,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "samoa" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sn",
+    "level": 1,
+    "code": "sn",
+    "order": 1470,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "šona, aiemmin: shona*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/so",
+    "level": 1,
+    "code": "so",
+    "order": 1480,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "somali" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sq",
+    "level": 1,
+    "code": "sq",
+    "order": 1490,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "albania" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sr",
+    "level": 1,
+    "code": "sr",
+    "order": 1500,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "serbia" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ss",
+    "level": 1,
+    "code": "ss",
+    "order": 1510,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "swazi, aiemmin myös: siswati*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/st",
+    "level": 1,
+    "code": "st",
+    "order": 1520,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "eteläsotho*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/su",
+    "level": 1,
+    "code": "su",
+    "order": 1530,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "sunda" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sv",
+    "level": 1,
+    "code": "sv",
+    "order": 1540,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "ruotsi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/sw",
+    "level": 1,
+    "code": "sw",
+    "order": 1550,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "swahili, aiemmin myös: suahili*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ta",
+    "level": 1,
+    "code": "ta",
+    "order": 1560,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tamili" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/te",
+    "level": 1,
+    "code": "te",
+    "order": 1570,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "telugu" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/tg",
+    "level": 1,
+    "code": "tg",
+    "order": 1580,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tadžikki" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/th",
+    "level": 1,
+    "code": "th",
+    "order": 1590,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "thai*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ti",
+    "level": 1,
+    "code": "ti",
+    "order": 1600,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tigrinja" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/tk",
+    "level": 1,
+    "code": "tk",
+    "order": 1610,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "turkmeeni" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/tl",
+    "level": 1,
+    "code": "tl",
+    "order": 1620,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tagalog, aiemmin myös: pilipino*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/tn",
+    "level": 1,
+    "code": "tn",
+    "order": 1630,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tswana*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/to",
+    "level": 1,
+    "code": "to",
+    "order": 1640,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tongantonga" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/tr",
+    "level": 1,
+    "code": "tr",
+    "order": 1650,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "turkki*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ts",
+    "level": 1,
+    "code": "ts",
+    "order": 1660,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tsonga" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/tt",
+    "level": 1,
+    "code": "tt",
+    "order": 1670,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tataari" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/tw",
+    "level": 1,
+    "code": "tw",
+    "order": 1680,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "twi" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ty",
+    "level": 1,
+    "code": "ty",
+    "order": 1690,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "tahiti" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ug",
+    "level": 1,
+    "code": "ug",
+    "order": 1700,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "uiguuri" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/uk",
+    "level": 1,
+    "code": "uk",
+    "order": 1710,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "ukraina" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ur",
+    "level": 1,
+    "code": "ur",
+    "order": 1720,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "urdu" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/uz",
+    "level": 1,
+    "code": "uz",
+    "order": 1730,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "uzbekki" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/wa",
+    "level": 1,
+    "code": "wa",
+    "order": 1740,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "valloni" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/ve",
+    "level": 1,
+    "code": "ve",
+    "order": 1750,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "venda" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/vi",
+    "level": 1,
+    "code": "vi",
+    "order": 1760,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "vietnam*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/vo",
+    "level": 1,
+    "code": "vo",
+    "order": 1770,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "volapük" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/wo",
+    "level": 1,
+    "code": "wo",
+    "order": 1780,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "wolof" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/xh",
+    "level": 1,
+    "code": "xh",
+    "order": 1790,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "xhosa" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/yi",
+    "level": 1,
+    "code": "yi",
+    "order": 1800,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "jiddiš, aiemmin myös: jiddi*" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/yo",
+    "level": 1,
+    "code": "yo",
+    "order": 1810,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "joruba" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/za",
+    "level": 1,
+    "code": "za",
+    "order": 1820,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "zhuang" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/zh",
+    "level": 1,
+    "code": "zh",
+    "order": 1830,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "kiina" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [{ "langName": "suomi", "lang": "fi", "name": "Kieli 2010" }],
+      "classificationDescription": [
+        { "langName": "suomi", "lang": "fi", "description": "ISO 639-1 (kaksikirjaimiset tunnukset)" }
+      ]
+    },
+    "localId": "kieli_1_20101115/zu",
+    "level": 1,
+    "code": "zu",
+    "order": 1840,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [{ "langName": "suomi", "lang": "fi", "name": "zulu" }],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [{ "text": [] }]
+  }
+]
