@@ -1,4 +1,4 @@
-import { MainLayout, RoutesNavigationList, SimpleNavigationList, type RoutesNavigationListProps } from '@/components';
+import { MainLayout } from '@/components';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { Filters } from '@/routes/Profile/Competences/Filters';
@@ -9,17 +9,15 @@ import { sortByProperty } from '@/utils';
 import { Button, Modal, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext } from 'react-router';
-import { mapNavigationRoutes } from '../utils';
+import { useLoaderData } from 'react-router';
+import { ProfileNavigationList } from '../components';
 import { CompetenceFilter, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
 
 const Competences = () => {
-  const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const { toimenkuvat, koulutukset, patevyydet, muutOsaamiset, osaamiset } = useLoaderData() as CompetencesLoaderData;
   const { t, i18n } = useTranslation();
   const title = t('profile.competences.title');
   const [groupBy, setGroupBy] = React.useState<string>(GROUP_BY_SOURCE);
-  const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const locale = i18n.language as 'fi' | 'sv';
   const [showFilters, setShowFilters] = React.useState(false);
   const { sm } = useMediaQueries();
@@ -58,9 +56,7 @@ const Competences = () => {
     <MainLayout
       navChildren={
         <div className="flex flex-col gap-5">
-          <SimpleNavigationList title={t('profile.index')}>
-            <RoutesNavigationList routes={navigationRoutes} />
-          </SimpleNavigationList>
+          <ProfileNavigationList />
           <Filters
             filterKeys={filterKeys}
             groupBy={groupBy}

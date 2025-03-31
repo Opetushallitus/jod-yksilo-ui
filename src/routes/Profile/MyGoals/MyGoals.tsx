@@ -1,12 +1,12 @@
-import { MainLayout, RoutesNavigationList, RoutesNavigationListProps, SimpleNavigationList } from '@/components';
-import { mapNavigationRoutes } from '@/routes/Profile/utils';
+import { MainLayout } from '@/components';
 import { usePaamaaratStore } from '@/stores/usePaamaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdArrowForward } from 'react-icons/md';
-import { Link, useOutletContext } from 'react-router';
+import { Link } from 'react-router';
+import { ProfileNavigationList } from '../components';
 import AddGoalModal from './AddGoalModal';
 import MyGoalsSection from './MyGoalsSection';
 
@@ -41,8 +41,6 @@ const MyGoals = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const routes = useOutletContext<RoutesNavigationListProps['routes']>();
-  const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const title = t('profile.my-goals.title');
   const [addModalOpen, setAddModalOpen] = React.useState(false);
   const suosikitIsEmpty = useSuosikitStore((state) => state.suosikit).length === 0;
@@ -61,13 +59,7 @@ const MyGoals = () => {
   };
 
   return (
-    <MainLayout
-      navChildren={
-        <SimpleNavigationList title={t('profile.index')}>
-          <RoutesNavigationList routes={navigationRoutes} />
-        </SimpleNavigationList>
-      }
-    >
+    <MainLayout navChildren={<ProfileNavigationList />}>
       {addModalOpen && <AddGoalModal onClose={onCloseAddModal} isOpen={addModalOpen} />}
       <title>{title}</title>
       <h1 className="mb-5 text-heading-1-mobile sm:text-heading-1">{title}</h1>

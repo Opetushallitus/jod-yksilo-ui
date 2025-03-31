@@ -1,22 +1,14 @@
-import {
-  ExperienceTable,
-  MainLayout,
-  RoutesNavigationList,
-  SimpleNavigationList,
-  type ExperienceTableRowData,
-  type RoutesNavigationListProps,
-} from '@/components';
+import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonantajaModal';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext, useRevalidator } from 'react-router';
-import { mapNavigationRoutes } from '../utils';
+import { useLoaderData, useRevalidator } from 'react-router';
+import { ProfileNavigationList } from '../components';
 import { WorkHistoryWizard } from './WorkHistoryWizard';
 import AddOrEditToimenkuvaModal from './modals/AddOrEditToimenkuvaModal';
 import { Tyopaikka, getWorkHistoryTableRows } from './utils';
 
 const WorkHistory = () => {
-  const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const { tyopaikat, osaamisetMap } = useLoaderData() as {
     tyopaikat: Tyopaikka[];
     osaamisetMap: Record<
@@ -30,7 +22,6 @@ const WorkHistory = () => {
   };
   const { t } = useTranslation();
   const title = t('profile.work-history.title');
-  const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const [rows, setRows] = React.useState(getWorkHistoryTableRows(tyopaikat, osaamisetMap));
   const [tyopaikkaId, setTyopaikkaId] = React.useState<string | undefined>(undefined);
   const [toimenkuvaId, setToimenkuvaId] = React.useState<string | undefined>(undefined);
@@ -80,13 +71,7 @@ const WorkHistory = () => {
   };
 
   return (
-    <MainLayout
-      navChildren={
-        <SimpleNavigationList title={t('profile.index')}>
-          <RoutesNavigationList routes={navigationRoutes} />
-        </SimpleNavigationList>
-      }
-    >
+    <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-9 text-body-lg">{t('profile.work-history.description')}</p>
