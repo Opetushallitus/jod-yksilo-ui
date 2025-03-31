@@ -233,7 +233,7 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
         </div>
       }
       footer={
-        <div className="flex justify-end">
+        <div className="flex justify-end flex-1">
           <Button variant="white" label={t('close')} onClick={onClose} />
         </div>
       }

@@ -62,7 +62,7 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
         </div>
       }
       footer={
-        <div className="flex flex-row justify-end">
+        <div className="flex flex-row justify-end flex-1">
           <Button label={t('close')} variant="white" onClick={onClose} />
         </div>
       }

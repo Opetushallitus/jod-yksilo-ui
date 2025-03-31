@@ -59,7 +59,7 @@ const CompetenceExport = () => {
       description={t('tool.my-own-data.competences.export.login-description')}
       /* eslint-disable-next-line react/no-unstable-nested-components */
       footer={(closeDialog: () => void) => (
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-1">
           <Button label={t('tool.my-own-data.cancel-text')} size="md" variant="gray" onClick={closeDialog} />
           <Button
             label={t('login')}
@@ -163,7 +163,7 @@ const CompetenceImport = () => {
       description={t('tool.my-own-data.competences.import.login-description')}
       /* eslint-disable-next-line react/no-unstable-nested-components */
       footer={(closeDialog: () => void) => (
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-1">
           <Button label={t('tool.my-own-data.cancel-text')} size="md" variant="gray" onClick={closeDialog} />
           <Button
             label={t('login')}

@@ -102,7 +102,7 @@ const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-end gap-5">
+        <div className="flex flex-row justify-end gap-5 flex-1">
           <Button label={t('cancel')} variant="white" onClick={onClose} />
           <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />
         </div>

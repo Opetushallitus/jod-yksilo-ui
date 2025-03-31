@@ -122,7 +122,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between flex-1">
           <div>
             <ConfirmDialog
               title={t('free-time-activities.delete-free-time-activity')}

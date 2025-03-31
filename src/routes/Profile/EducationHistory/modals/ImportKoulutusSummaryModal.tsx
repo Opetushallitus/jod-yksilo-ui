@@ -219,7 +219,7 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
         </div>
       }
       footer={
-        <div className="flex flex-row justify-end">
+        <div className="flex flex-row justify-end flex-1">
           <div id="buttonSection" className="flex flex-row justify-between gap-5">
             <ConfirmDialog
               title={t('education-history-import.summary-modal.cancel-modal.title')}

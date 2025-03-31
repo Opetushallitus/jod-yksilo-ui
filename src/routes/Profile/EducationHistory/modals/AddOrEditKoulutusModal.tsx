@@ -310,7 +310,7 @@ const AddOrEditKoulutusModal = ({
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between flex-1">
           <div>
             {koulutusId && (
               <ConfirmDialog
