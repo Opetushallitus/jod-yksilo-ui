@@ -24,7 +24,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
   const userMenuButtonRef = React.useRef<HTMLButtonElement>(null);
   const userMenuRef = useMenuClickHandler(() => setUserMenuOpen(false), userMenuButtonRef);
 
-  const userMenuPreferencesUrl = `${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`;
+  const userMenuProfileFrontUrl = `${t('slugs.profile.index')}/${t('slugs.profile.front')}`;
 
   // Highlight menu element when active
   const getActiveClassNames = ({ isActive }: { isActive: boolean }) => (isActive ? 'bg-secondary-1-50 rounded-sm' : '');
@@ -48,7 +48,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
         <div ref={userMenuRef} className="absolute right-0 min-w-max translate-y-8 transform">
           <PopupList classNames="gap-2">
             <NavLink
-              to={userMenuPreferencesUrl}
+              to={userMenuProfileFrontUrl}
               onClick={() => setUserMenuOpen(false)}
               className={(props) => `w-full ${getActiveClassNames(props)}`.trim()}
             >
@@ -76,7 +76,6 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
   ) : (
     <Link
       to={landingPageUrl}
-      state={{ callbackURL: ' ' }}
       className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
       aria-label={t('login')}
       onClick={() => {
