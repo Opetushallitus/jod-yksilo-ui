@@ -1,11 +1,4 @@
-import {
-  ExperienceTable,
-  MainLayout,
-  RoutesNavigationList,
-  SimpleNavigationList,
-  type ExperienceTableRowData,
-  type RoutesNavigationListProps,
-} from '@/components';
+import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
@@ -13,15 +6,14 @@ import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals
 import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext, useRevalidator, useSearchParams } from 'react-router';
-import { mapNavigationRoutes } from '../utils';
+import { useLoaderData, useRevalidator, useSearchParams } from 'react-router';
+import { ProfileNavigationList } from '../components/index.tsx';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
 import ImportKoulutusResultModal from './modals/ImportKoulutusResultModal';
 import ImportKoulutusStartModal from './modals/ImportKoulutusStartModal';
 import { getEducationHistoryTableRows, Koulutuskokonaisuus } from './utils';
 
 const EducationHistory = () => {
-  const routes = useOutletContext<RoutesNavigationListProps['routes']>();
   const { koulutuskokonaisuudet, osaamisetMap } = useLoaderData() as {
     koulutuskokonaisuudet: Koulutuskokonaisuus[];
     osaamisetMap: Record<
@@ -35,7 +27,6 @@ const EducationHistory = () => {
   };
   const { t } = useTranslation();
   const title = t('profile.education-history.title');
-  const navigationRoutes = React.useMemo(() => mapNavigationRoutes(routes), [routes]);
   const [isWizardOpen, setIsWizardOpen] = React.useState(false);
   const [isKoulutuskokonaisuusOpen, setIsKoulutuskokonaisuusOpen] = React.useState(false);
   const [isKoulutusOpen, setIsKoulutusOpen] = React.useState(false);
@@ -142,13 +133,7 @@ const EducationHistory = () => {
   }, [searchParams, setSearchParams, t]); // Only run once after the page is loaded
 
   return (
-    <MainLayout
-      navChildren={
-        <SimpleNavigationList title={t('profile.index')}>
-          <RoutesNavigationList routes={navigationRoutes} />
-        </SimpleNavigationList>
-      }
-    >
+    <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
       <p className="mb-9 text-body-lg">{t('profile.education-history.description')}</p>

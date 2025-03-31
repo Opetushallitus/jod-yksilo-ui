@@ -391,6 +391,9 @@
   "print": "Tulosta",
   "privacy-policy": "Tietosuojaseloste",
   "profile": {
+    "front": {
+      "title": "Etusivu"
+    },
     "competences": {
       "add": "Lisää osaamisia",
       "description": "Löydät alta kaikki osaamisesi, jotka olet tunnistanut tai lisännyt profiiliisi. Osaamisesi ryhmittelyn ja esitystavan voit valita itse.",
@@ -618,6 +621,7 @@
       "education-history": "koulutukseni",
       "favorites": "suosikkini",
       "free-time-activities": "vapaa-ajan-toimintoni",
+      "front": "etusivu",
       "index": "omat-sivuni",
       "interests": "kiinnostukseni",
       "login": "kirjaudu-sisaan",

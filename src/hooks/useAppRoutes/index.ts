@@ -7,6 +7,10 @@ export const useAppRoutes = () => {
 
   const profileRoutes = [
     {
+      name: t('profile.front.title'),
+      path: t('slugs.profile.front'),
+    },
+    {
       name: t('profile.preferences.title'),
       path: t('slugs.profile.preferences'),
     },
