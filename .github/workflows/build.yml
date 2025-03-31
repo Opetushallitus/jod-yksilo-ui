@@ -56,21 +56,22 @@ jobs:
         run: npm run build
 
       # E2E tests
+      # Disabled for now, as they are not yet implemented.
       # It's not recommended to cache browsers.
       # See https://playwright.dev/docs/ci#caching-browsers
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+      # - name: Install Playwright browsers
+      #   run: npx playwright install --with-deps
 
-      - name: Run Playwright e2e tests
-        run: npx playwright test
+      # - name: Run Playwright e2e tests
+      #   run: npx playwright test
 
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+      # - name: Upload Playwright report
+      #   uses: actions/upload-artifact@v4
+      #   if: always()
+      #   with:
+      #     name: playwright-report
+      #     path: playwright-report/
+      #     retention-days: 30
 
       # SonarCloud analysis
       - name: SonarCloud Scan
