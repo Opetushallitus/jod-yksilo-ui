@@ -13,6 +13,13 @@ describe('loader', () => {
     );
 
     await loader({
+      context: {
+        csrf: {
+          token: 'dummyToken',
+          headerName: 'X-CSRF-Token',
+          parameterName: '_csrf',
+        },
+      },
       request: {} as Request,
       params: {
         lng: 'sv',
