@@ -22,7 +22,7 @@ const LandingPage = () => {
   const loginLink = useLoginLink({
     callbackURL: state?.callbackURL
       ? `/${language}/${state?.callbackURL}`
-      : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.preferences')}`,
+      : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
   });
 
   // Redirect to root if already logged-in
