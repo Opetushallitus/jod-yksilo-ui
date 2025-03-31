@@ -166,6 +166,7 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
     <FormProvider {...methods}>
       <Modal
         open={isOpen}
+        fullWidthContent={wizardStep === 1}
         progress={
           <WizardProgress
             labelText={t('wizard.label')}
@@ -181,7 +182,6 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
             <WizardContent vaiheIndex={vaiheIndex} />
           </Form>
         }
-        sidePanel={wizardStep === 0 ? <></> : null}
         footer={
           <div className="flex flex-row justify-end gap-5">
             {methods.formState.isDirty ? (
