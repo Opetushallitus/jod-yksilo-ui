@@ -120,7 +120,7 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between flex-1">
           <div className="flex flex-row gap-5">
             <ConfirmDialog
               title={t('work-history.delete-work-history')}

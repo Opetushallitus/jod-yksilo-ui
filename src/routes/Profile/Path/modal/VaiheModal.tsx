@@ -183,7 +183,7 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
           </Form>
         }
         footer={
-          <div className="flex flex-row justify-end gap-5">
+          <div className="flex flex-row justify-end gap-5 flex-1">
             {methods.formState.isDirty ? (
               <ConfirmDialog
                 title={t('cancel')}

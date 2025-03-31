@@ -24,7 +24,7 @@ export const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
         </div>
       }
       footer={
-        <div className="flex justify-end gap-5">
+        <div className="flex justify-end gap-5 flex-1">
           <Button
             label={t('login')}
             variant="gray"

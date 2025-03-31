@@ -126,7 +126,7 @@ const EditKoulutuskokonaisuusModal = ({
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between flex-1">
           <div className="flex flex-row gap-5">
             <ConfirmDialog
               title={t('education-history.delete-education-history')}

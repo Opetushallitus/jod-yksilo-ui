@@ -164,7 +164,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
         />
       }
       footer={
-        <div className="flex justify-between gap-5">
+        <div className="flex justify-between gap-5 flex-1">
           <div className="flex gap-5">
             {step === steps && (
               <Button
