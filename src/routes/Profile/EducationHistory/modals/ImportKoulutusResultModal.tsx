@@ -68,7 +68,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
       }
       footer={
         <div className="flex flex-row justify-end flex-1">
-          <Button label={t('close')} variant="white" onClick={onClose} />
+          <Button label={t('close')} variant="white" onClick={onClose} className="whitespace-nowrap" />
         </div>
       }
     />

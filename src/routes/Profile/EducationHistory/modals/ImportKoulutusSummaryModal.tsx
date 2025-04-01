@@ -235,10 +235,17 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
                   variant="white"
                   label={t('cancel')}
                   onClick={error ? onClose : showDialog}
+                  className="whitespace-nowrap"
                 />
               )}
             </ConfirmDialog>
-            <Button label={t('save')} variant="white" disabled={!koskiData} onClick={saveSelectedKoulutus} />
+            <Button
+              label={t('save')}
+              variant="white"
+              disabled={!koskiData}
+              onClick={saveSelectedKoulutus}
+              className="whitespace-nowrap"
+            />
           </div>
         </div>
       }

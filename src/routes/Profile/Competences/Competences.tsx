@@ -86,7 +86,12 @@ const Competences = () => {
             }
             footer={
               <div className="flex flex-row justify-end gap-4 flex-1">
-                <Button variant="white" label={t('close')} onClick={() => setShowFilters(false)} />
+                <Button
+                  variant="white"
+                  label={t('close')}
+                  onClick={() => setShowFilters(false)}
+                  className="whitespace-nowrap"
+                />
               </div>
             }
           />

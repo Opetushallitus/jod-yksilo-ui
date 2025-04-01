@@ -177,6 +177,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 }}
                 label={t('education-history.add-studies-to-this-education')}
                 variant="white"
+                className="whitespace-nowrap"
               />
             )}
             {step !== steps && selectedKoulutus > 0 && (
@@ -187,6 +188,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 }}
                 label={t('education-history.delete-degree')}
                 variant="white-delete"
+                className="whitespace-nowrap"
               />
             )}
           </div>
@@ -199,6 +201,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 variant="white"
                 icon={!sm ? <MdArrowBack size={24} /> : undefined}
                 disabled={!isValid}
+                className="whitespace-nowrap"
               />
             )}
             {step < steps && (
@@ -208,9 +211,18 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 variant="white"
                 icon={!sm ? <MdArrowForward size={24} /> : undefined}
                 disabled={!isValid}
+                className="whitespace-nowrap"
               />
             )}
-            {step === steps && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}
+            {step === steps && (
+              <Button
+                form={formId}
+                label={t('save')}
+                variant="white"
+                disabled={!isValid}
+                className="whitespace-nowrap"
+              />
+            )}
           </div>
         </div>
       }

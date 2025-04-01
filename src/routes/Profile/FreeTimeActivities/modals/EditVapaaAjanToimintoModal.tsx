@@ -133,13 +133,18 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
               description={t('free-time-activities.confirm-delete-free-time-activity')}
             >
               {(showDialog: () => void) => (
-                <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
+                <Button
+                  variant="white-delete"
+                  label={`${t('delete')}`}
+                  onClick={showDialog}
+                  className="whitespace-nowrap"
+                />
               )}
             </ConfirmDialog>
           </div>
           <div className="flex flex-row gap-5">
-            <Button label={t('cancel')} variant="white" onClick={onClose} />
-            <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />
+            <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />
+            <Button form={formId} label={t('save')} variant="white" disabled={!isValid} className="whitespace-nowrap" />
           </div>
         </div>
       }

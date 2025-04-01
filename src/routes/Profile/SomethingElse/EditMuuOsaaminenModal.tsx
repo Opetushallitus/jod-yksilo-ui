@@ -101,8 +101,8 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModalProps) 
       }
       footer={
         <div className="flex flex-row justify-end gap-5 flex-1">
-          <Button label={t('cancel')} variant="white" onClick={onClose} />
-          <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />
+          <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />
+          <Button form={formId} label={t('save')} variant="white" disabled={!isValid} className="whitespace-nowrap" />
         </div>
       }
     />

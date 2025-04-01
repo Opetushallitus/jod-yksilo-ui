@@ -322,20 +322,45 @@ const AddOrEditKoulutusModal = ({
                 description={t('education-history.confirm-delete-degree')}
               >
                 {(showDialog: () => void) => (
-                  <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
+                  <Button
+                    variant="white-delete"
+                    label={`${t('delete')}`}
+                    onClick={showDialog}
+                    className="whitespace-nowrap"
+                  />
                 )}
               </ConfirmDialog>
             )}
           </div>
           <div className="flex flex-row justify-between gap-5">
-            <Button label={t('cancel')} variant="white" onClick={onClose} />
+            <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />
             {!isFirstStep && (
-              <Button label={t('previous')} variant="white" disabled={!isValid} onClick={previousStep} />
+              <Button
+                label={t('previous')}
+                variant="white"
+                disabled={!isValid}
+                onClick={previousStep}
+                className="whitespace-nowrap"
+              />
             )}
             {!isLastStep && (
-              <Button label={t('next')} variant="white" disabled={isLastStep || !isValid} onClick={nextStep} />
+              <Button
+                label={t('next')}
+                variant="white"
+                disabled={isLastStep || !isValid}
+                onClick={nextStep}
+                className="whitespace-nowrap"
+              />
             )}
-            {isLastStep && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}
+            {isLastStep && (
+              <Button
+                form={formId}
+                label={t('save')}
+                variant="white"
+                disabled={!isValid}
+                className="whitespace-nowrap"
+              />
+            )}
           </div>
         </div>
       }
