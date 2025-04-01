@@ -60,19 +60,30 @@ const CompetenceExport = () => {
       /* eslint-disable-next-line react/no-unstable-nested-components */
       footer={(closeDialog: () => void) => (
         <div className="flex gap-4 flex-1">
-          <Button label={t('tool.my-own-data.cancel-text')} size="md" variant="gray" onClick={closeDialog} />
+          <Button
+            label={t('tool.my-own-data.cancel-text')}
+            size="md"
+            variant="gray"
+            onClick={closeDialog}
+            className="whitespace-nowrap"
+          />
           <Button
             label={t('login')}
             size="md"
             variant="gray"
             /* eslint-disable-next-line react/no-unstable-nested-components */
             LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
+            className="whitespace-nowrap"
           />
         </div>
       )}
     >
       {(showLoginConfirmDialog: () => void) => (
-        <Button label={t('tool.my-own-data.competences.export.export-button')} onClick={showLoginConfirmDialog} />
+        <Button
+          label={t('tool.my-own-data.competences.export.export-button')}
+          onClick={showLoginConfirmDialog}
+          className="whitespace-nowrap"
+        />
       )}
     </ConfirmDialog>
   );
@@ -164,13 +175,20 @@ const CompetenceImport = () => {
       /* eslint-disable-next-line react/no-unstable-nested-components */
       footer={(closeDialog: () => void) => (
         <div className="flex gap-4 flex-1">
-          <Button label={t('tool.my-own-data.cancel-text')} size="md" variant="gray" onClick={closeDialog} />
+          <Button
+            label={t('tool.my-own-data.cancel-text')}
+            size="md"
+            variant="gray"
+            onClick={closeDialog}
+            className="whitespace-nowrap"
+          />
           <Button
             label={t('login')}
             size="md"
             variant="gray"
             /* eslint-disable-next-line react/no-unstable-nested-components */
             LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
+            className="whitespace-nowrap"
           />
         </div>
       )}

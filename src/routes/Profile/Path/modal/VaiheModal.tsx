@@ -193,17 +193,33 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
                 cancelText={t('profile.paths.continue-editing')}
                 variant="destructive"
               >
-                {(showDialog: () => void) => <Button label={t('cancel')} variant="white" onClick={showDialog} />}
+                {(showDialog: () => void) => (
+                  <Button label={t('cancel')} variant="white" onClick={showDialog} className="whitespace-nowrap" />
+                )}
               </ConfirmDialog>
             ) : (
-              <Button label={t('cancel')} variant="white" onClick={() => close()} />
+              <Button label={t('cancel')} variant="white" onClick={() => close()} className="whitespace-nowrap" />
             )}
 
-            {wizardStep === 0 && <Button label={t('next')} variant="white" disabled={!isValid} onClick={nextStep} />}
+            {wizardStep === 0 && (
+              <Button
+                label={t('next')}
+                variant="white"
+                disabled={!isValid}
+                onClick={nextStep}
+                className="whitespace-nowrap"
+              />
+            )}
             {wizardStep === 1 && (
               <>
-                <Button label={t('previous')} variant="white" disabled={false} onClick={previousStep} />
-                <Button label={t('save')} variant="white" form={formId} />
+                <Button
+                  label={t('previous')}
+                  variant="white"
+                  disabled={false}
+                  onClick={previousStep}
+                  className="whitespace-nowrap"
+                />
+                <Button label={t('save')} variant="white" form={formId} className="whitespace-nowrap" />
               </>
             )}
           </div>

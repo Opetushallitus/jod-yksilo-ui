@@ -172,6 +172,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
                 }}
                 label={t('free-time-activities.add-new-activity')}
                 variant="white"
+                className="whitespace-nowrap"
               />
             )}
             {step !== steps && selectedPatevyys > 0 && (
@@ -182,11 +183,17 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
                 }}
                 label={t('free-time-activities.delete-proficiency')}
                 variant="white-delete"
+                className="whitespace-nowrap"
               />
             )}
           </div>
           <div className="flex gap-5">
-            <Button onClick={() => setIsOpen(false)} label={t('cancel')} variant="white" />
+            <Button
+              onClick={() => setIsOpen(false)}
+              label={t('cancel')}
+              variant="white"
+              className="whitespace-nowrap"
+            />
             {step > 1 && (
               <Button
                 onClick={() => setStep(step - 1)}
@@ -194,6 +201,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
                 variant="white"
                 icon={!sm ? <MdArrowBack size={24} /> : undefined}
                 disabled={!isValid}
+                className="whitespace-nowrap"
               />
             )}
             {step < steps && (
@@ -203,9 +211,18 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
                 variant="white"
                 icon={!sm ? <MdArrowForward size={24} /> : undefined}
                 disabled={!isValid}
+                className="whitespace-nowrap"
               />
             )}
-            {step === steps && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}
+            {step === steps && (
+              <Button
+                form={formId}
+                label={t('save')}
+                variant="white"
+                disabled={!isValid}
+                className="whitespace-nowrap"
+              />
+            )}
           </div>
         </div>
       }

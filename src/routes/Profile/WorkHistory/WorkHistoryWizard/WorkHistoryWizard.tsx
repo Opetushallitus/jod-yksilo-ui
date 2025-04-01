@@ -178,6 +178,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 }}
                 label={t('work-history.add-new-job-description')}
                 variant="white"
+                className="whitespace-nowrap"
               />
             )}
             {step !== steps && selectedToimenkuva > 0 && (
@@ -188,6 +189,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 }}
                 label={t('work-history.delete-job-description')}
                 variant="white-delete"
+                className="whitespace-nowrap"
               />
             )}
           </div>
@@ -200,6 +202,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 variant="white"
                 icon={!sm ? <MdArrowBack size={24} /> : undefined}
                 disabled={!isValid}
+                className="whitespace-nowrap"
               />
             )}
             {step < steps && (
@@ -209,9 +212,18 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 variant="white"
                 icon={!sm ? <MdArrowForward size={24} /> : undefined}
                 disabled={!isValid}
+                className="whitespace-nowrap"
               />
             )}
-            {step === steps && <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />}
+            {step === steps && (
+              <Button
+                form={formId}
+                label={t('save')}
+                variant="white"
+                disabled={!isValid}
+                className="whitespace-nowrap"
+              />
+            )}
           </div>
         </div>
       }

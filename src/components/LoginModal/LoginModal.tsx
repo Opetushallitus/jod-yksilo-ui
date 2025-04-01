@@ -30,6 +30,7 @@ export const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
             variant="gray"
             /* eslint-disable-next-line react/no-unstable-nested-components */
             LinkComponent={({ children }) => <a href={loginLink}>{children}</a>}
+            className="whitespace-nowrap"
           />
           <Button onClick={onClose} label={t('close')} />
         </div>
