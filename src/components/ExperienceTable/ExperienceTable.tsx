@@ -152,7 +152,7 @@ export const ExperienceTable = ({
   const categorizedRows = rows.filter((row) => row.subrows);
 
   return (
-    <div className="overflow-x-auto p-3">
+    <div>
       {rows.length > 0 && (
         <table className="w-full" border={0} cellPadding={0} cellSpacing={0}>
           <thead className="after:content-[''] after:block after:h-5">

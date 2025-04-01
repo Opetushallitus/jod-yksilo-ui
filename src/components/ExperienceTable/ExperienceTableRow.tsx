@@ -47,9 +47,13 @@ const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData 
   const text = getLocalizedText(row?.nimi);
 
   return nested ? (
-    <p className="pl-5 pr-7 pt-2 text-body-sm font-bold sm:font-normal sm:text-body-md sm:py-2 hyphens-auto">{text}</p>
+    <p className="pl-5 pr-7 pt-2 text-body-sm font-bold sm:font-normal sm:text-body-md sm:py-2 hyphens-auto [overflow-wrap:anywhere]">
+      {text}
+    </p>
   ) : (
-    <p className="pl-5 pr-7 pt-2 text-heading-4 sm:text-heading-3 sm:pt-1 sm:pb-[3px] hyphens-auto">{text}</p>
+    <p className="pl-5 pr-7 pt-2 text-heading-4 sm:text-heading-3 sm:pt-1 sm:pb-[3px] hyphens-auto [overflow-wrap:anywhere]">
+      {text}
+    </p>
   );
 };
 
