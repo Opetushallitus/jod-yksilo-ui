@@ -1,4 +1,5 @@
 import { ActionButton } from '@/components/ActionButton/ActionButton';
+import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,9 +7,28 @@ import { MdMoreVert } from 'react-icons/md';
 
 const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuContent: React.ReactNode }) => {
   const { t } = useTranslation();
+  const isMouseInteraction = useInteractionMethod();
   const [open, setOpen] = React.useState(false);
   const actionButtonRef = React.useRef<HTMLDivElement>(null);
   const actionMenuRef = useMenuClickHandler(() => setOpen(false), actionButtonRef);
+  const menuContentRef = React.useRef<HTMLDivElement>(null);
+
+  // Move focus to menu content when opened
+  React.useEffect(() => {
+    if (open && !isMouseInteraction && menuContentRef.current) {
+      const firstChild = menuContentRef.current.querySelector('a, button:not([disabled])');
+      if (firstChild) {
+        (firstChild as HTMLElement).focus();
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+    if (menuContentRef.current && !menuContentRef.current.contains(event.relatedTarget as Node)) {
+      setOpen(false);
+    }
+  };
 
   return (
     <div className="relative" ref={actionMenuRef}>
@@ -28,6 +48,8 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
         /* eslint-disable jsx-a11y/click-events-have-key-events */
         /* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
         <div
+          ref={menuContentRef}
+          onBlur={handleBlur}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();

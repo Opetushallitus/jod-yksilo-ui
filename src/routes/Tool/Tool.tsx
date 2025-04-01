@@ -1,6 +1,7 @@
 import { OpportunityCard } from '@/components';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useEnvironment } from '@/hooks/useEnvironment';
+import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { OpportunitiesFilter } from '@/routes/Tool';
 import ToolOpportunityCardActionMenu from '@/routes/Tool/ToolOpportunityCardActionMenu';
@@ -302,6 +303,7 @@ const YourOpportunities = () => {
   const [filtersOpen, setFiltersOpen] = React.useState(false);
   const filterMenuButtonRef = React.useRef<HTMLButtonElement>(null);
   const filterMenuRef = useMenuClickHandler(() => setFiltersOpen(false), filterMenuButtonRef);
+  const isMouseInteraction = useInteractionMethod();
 
   const ehdotuksetCount = toolStore.ehdotuksetCount ?? {};
   const filter = toolStore.filter;
@@ -309,6 +311,23 @@ const YourOpportunities = () => {
     filter === 'ALL'
       ? Object.keys(ehdotuksetCount).reduce((acc, key) => acc + ehdotuksetCount[key as MahdollisuusTyyppi], 0)
       : ehdotuksetCount[filter];
+
+  // Move focus to menu content when opened
+  React.useEffect(() => {
+    if (filtersOpen && !isMouseInteraction && filterMenuRef.current) {
+      const firstChild = filterMenuRef.current.querySelector('span');
+      if (firstChild) {
+        (firstChild as HTMLElement).focus();
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtersOpen]);
+
+  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+    if (filterMenuRef.current && !filterMenuRef.current.contains(event.relatedTarget as Node)) {
+      setFiltersOpen(false);
+    }
+  };
 
   return (
     <main role="main" className="col-span-3 lg:col-span-1" id="jod-main">
@@ -333,7 +352,7 @@ const YourOpportunities = () => {
           />
         </div>
         {filtersOpen && (
-          <div ref={filterMenuRef}>
+          <div ref={filterMenuRef} onBlur={handleBlur}>
             <OpportunitiesFilter />
           </div>
         )}
