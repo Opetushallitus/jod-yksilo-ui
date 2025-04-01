@@ -4,6 +4,7 @@ import { ErrorNote } from '@/components/ErrorNote';
 import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { ActionBarContext } from '@/hooks/useActionBar';
+import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import i18n from '@/i18n/config';
 import { useErrorNoteStore } from '@/stores/useErrorNoteStore';
@@ -30,6 +31,7 @@ const Root = () => {
   } = useTranslation();
   const toolStore = useToolStore();
   const { error, clearErrorNote } = useErrorNoteStore();
+  const isMouseInteraction = useInteractionMethod();
 
   const { sm } = useMediaQueries();
   const [megaMenuOpen, setMegaMenuOpen] = React.useState(false);
@@ -80,6 +82,23 @@ const Root = () => {
     logoutForm.current?.submit();
   };
 
+  // Move focus to menu content when opened
+  React.useEffect(() => {
+    if (langMenuOpen && !isMouseInteraction && langMenuRef.current) {
+      const firstChild = langMenuRef.current.querySelector('a, button');
+      if (firstChild) {
+        (firstChild as HTMLElement).focus();
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [langMenuOpen]);
+
+  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+    if (langMenuRef.current && !langMenuRef.current.contains(event.relatedTarget as Node)) {
+      setLangMenuOpen(false);
+    }
+  };
+
   React.useEffect(() => {
     document.documentElement.setAttribute('lang', i18n.language);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -97,11 +116,7 @@ const Root = () => {
         <NavigationBar
           languageButtonComponent={<LanguageButton onClick={toggleMenu('lang')} />}
           userButtonComponent={<UserButton onLogout={logout} />}
-          logo={{
-            to: `/${language}`,
-            language,
-            srText: t('osaamispolku'),
-          }}
+          logo={{ to: `/${language}`, language, srText: t('osaamispolku') }}
           menuComponent={
             sm ? (
               <button
@@ -139,7 +154,7 @@ const Root = () => {
         />
         {langMenuOpen && (
           <div className="relative xl:container mx-auto">
-            <div ref={langMenuRef} className="absolute right-[50px] translate-y-7">
+            <div ref={langMenuRef} onBlur={handleBlur} className="absolute right-[50px] translate-y-7">
               <LanguageMenu onClick={changeLanguage} />
             </div>
           </div>
