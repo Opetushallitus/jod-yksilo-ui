@@ -68,6 +68,7 @@ const MyOwnData = () => {
         icon: <MdTarget size={lg ? 24 : 32} className="mx-auto" />,
         active: pathname.endsWith(t('slugs.tool.goals', { lng: language })),
         to: t('slugs.tool.goals', { lng: language }),
+        wip: true,
       },
       {
         text: t('competences'),
@@ -81,18 +82,16 @@ const MyOwnData = () => {
         active: pathname.endsWith(t('slugs.tool.interests', { lng: language })),
         to: t('slugs.tool.interests', { lng: language }),
       },
-    ];
-
-    const todoTabs = [
       {
         text: t('restrictions'),
         icon: <MdBlock size={lg ? 24 : 32} className="mx-auto" />,
         active: pathname.endsWith(t('slugs.tool.restrictions', { lng: language })),
         to: t('slugs.tool.restrictions', { lng: language }),
+        wip: true,
       },
     ];
 
-    return isDev ? [...tabs, ...todoTabs] : tabs;
+    return isDev ? tabs : tabs.filter((tab) => !tab.wip);
   }, [t, lg, pathname, language, isDev]);
 
   const onKeyDown = React.useCallback(

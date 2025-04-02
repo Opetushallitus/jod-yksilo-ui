@@ -1,3 +1,4 @@
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { copyToClipboard } from '@/utils';
 import { PopupList, PopupListItem } from '@jod/design-system';
@@ -22,6 +23,7 @@ const FavoritesOpportunityCardActionMenu = ({
     t,
     i18n: { language },
   } = useTranslation();
+  const { isDev } = useEnvironment();
 
   const compareTo =
     mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
@@ -46,13 +48,18 @@ const FavoritesOpportunityCardActionMenu = ({
             <PopupListItem>{t('compare')}</PopupListItem>
           </Link>
         </li>
+        {isDev && (
+          <li>
+            <Link to="#" onClick={mockOnClick} type="button">
+              <PopupListItem>TODO: {t('create-path')}</PopupListItem>
+            </Link>
+          </li>
+        )}
         <li>
-          <Link to="#" onClick={mockOnClick} type="button">
-            <PopupListItem>TODO: {t('create-path')}</PopupListItem>
-          </Link>
-        </li>
-        <li>
-          <button onClick={() => void copyToClipboard(`${window.location.origin}/yksilo${compareTo.pathname}`)}>
+          <button
+            onClick={() => void copyToClipboard(`${window.location.origin}/yksilo${compareTo.pathname}`)}
+            className="cursor-pointer w-full"
+          >
             <PopupListItem>{t('share')}</PopupListItem>
           </button>
         </li>
