@@ -1,22 +1,30 @@
-import { client } from '@/api/client';
 import { MainLayout } from '@/components';
+import { LogoutFormContext } from '@/routes/Root';
+import { useToolStore } from '@/stores/useToolStore';
 import { Button, ConfirmDialog } from '@jod/design-system';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ProfileNavigationList } from '../components';
 
 const Preferences = () => {
   const { t } = useTranslation();
-  const title = t('profile.preferences.title');
+  const toolStore = useToolStore();
+
+  const logoutForm = React.useContext(LogoutFormContext);
 
   const deleteProfile = async () => {
-    if (await client.DELETE('/api/profiili/yksilo')) {
-      window.location.href = '/';
-    }
+    toolStore.reset();
+    const deletionInput = document.createElement('input');
+    deletionInput.type = 'hidden';
+    deletionInput.name = 'deletion';
+    deletionInput.value = 'true';
+    logoutForm?.appendChild(deletionInput);
+    logoutForm?.submit();
   };
 
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
-      <title>{title}</title>
+      <title>{t('preferences.title')}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{t('preferences.title')}</h1>
       <div className="mb-8 text-body-md flex flex-col gap-7">
         <p className="bg-todo">{t('preferences.description')}</p>
