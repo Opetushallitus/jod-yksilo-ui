@@ -388,10 +388,14 @@
     "top": "Yläpuolen sivutus"
   },
   "preferences": {
-    "confirm-delete-my-account": "Haluatko varmasti poistaa tilisi?",
-    "delete-my-account": "Poista tilini",
-    "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius.",
-    "share-my-competences": "Jaa osaamiseni"
+    "title": "Asetukseni",
+    "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius. Eum ad iudico eruditi, idque malorum cum no. Te nam rebum iuvaret, atqui legere admodum an pro.",
+    "delete-profile": {
+      "title": "Poista koko osaamisprofiilisi ja kaikki siihen tallennetut tiedot",
+      "description": "Kaikki osaamisprofiilisi tallennetut tiedot poistetaan pysyvästi, eikä niitä voi palauttaa.",
+      "action": "Poista osaamisprofiili",
+      "confirm": "Haluatko varmasti poistaa osaamisprofiilisi?"
+    }
   },
   "previous": "Edellinen",
   "print": "Tulosta",
