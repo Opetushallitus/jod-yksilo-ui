@@ -1,28 +1,50 @@
 import { MainLayout } from '@/components';
+import { LogoutFormContext } from '@/routes/Root';
+import { useToolStore } from '@/stores/useToolStore';
+import { Button, ConfirmDialog } from '@jod/design-system';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ProfileNavigationList } from '../components';
 
 const Preferences = () => {
   const { t } = useTranslation();
-  const title = t('profile.preferences.title');
+  const toolStore = useToolStore();
+
+  const logoutForm = React.useContext(LogoutFormContext);
+
+  const deleteProfile = async () => {
+    toolStore.reset();
+    const deletionInput = document.createElement('input');
+    deletionInput.type = 'hidden';
+    deletionInput.name = 'deletion';
+    deletionInput.value = 'true';
+    logoutForm?.appendChild(deletionInput);
+    logoutForm?.submit();
+  };
 
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
-      <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{t('profile.preferences.title')}</h1>
-
+      <title>{t('preferences.title')}</title>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{t('preferences.title')}</h1>
       <div className="mb-8 text-body-md flex flex-col gap-7">
-        <p className="bg-todo">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquet at tortor sed rutrum. Maecenas facilisis
-          pretium velit, in consectetur ipsum scelerisque quis. Curabitur eu diam a massa pretium commodo. Pellentesque
-          habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse eleifend lorem
-          nunc, eu vehicula orci malesuada vitae. Nam ac arcu finibus, feugiat ipsum et, bibendum augue. Curabitur orci
-          risus, tempus in mollis aliquam, tempor eu nisl. Etiam tellus nibh, auctor lobortis consectetur in, commodo
-          vel quam. Suspendisse ac libero porttitor, eleifend elit a, interdum sem. In congue nunc non rhoncus
-          imperdiet. Etiam magna neque, mollis et congue nec, ullamcorper ut tellus. Donec ac luctus quam. Etiam mattis
-          magna eu augue efficitur tristique.
-        </p>
+        <p className="bg-todo">{t('preferences.description')}</p>
       </div>
+      <section>
+        <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.delete-profile.title')}</h2>
+        <p className="text-body-md mb-5">{t('preferences.delete-profile.description')}</p>
+        <ConfirmDialog
+          title={t('preferences.delete-profile.action')}
+          onConfirm={() => void deleteProfile()}
+          confirmText={t('delete')}
+          cancelText={t('cancel')}
+          variant="destructive"
+          description={t('preferences.delete-profile.confirm')}
+        >
+          {(showDialog: () => void) => (
+            <Button variant="white-delete" label={t('preferences.delete-profile.action')} onClick={showDialog} />
+          )}
+        </ConfirmDialog>
+      </section>
     </MainLayout>
   );
 };
