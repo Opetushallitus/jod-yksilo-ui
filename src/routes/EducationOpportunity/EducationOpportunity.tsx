@@ -20,6 +20,7 @@ const EducationOpportunity = () => {
   const sections: OpportunityDetailsSection[] = [
     {
       navTitle: t('description'),
+      hasAiContent: true,
       content: <p className="text-body-md font-arial">{getLocalizedText(koulutusmahdollisuus?.kuvaus)}</p>,
     },
     {
@@ -45,6 +46,7 @@ const EducationOpportunity = () => {
       isLoggedIn={isLoggedIn}
       tyyppi="KOULUTUSMAHDOLLISUUS"
       sections={sections}
+      showAiInfoInTitle
     />
   );
 };

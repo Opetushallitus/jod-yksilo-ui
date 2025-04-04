@@ -8,6 +8,12 @@
   "add": "Lisää",
   "add-favorite": "Lisää suosikiksi",
   "added": "Lisätty",
+  "ai-info-tooltip": {
+    "ai-and-compentency-path": "Tekoäly ja Osaamispolku",
+    "aria-description": "Tietoa tekoälyn käytöstä",
+    "description": "Olemme käyttäneet tämän sisällön luomisessa hyödyksi kielimallia.\nLisää tietoa tekoälyn käytöstä Osaamispolussa:",
+    "title": "Tekoälyn avulla generoitu sisältö"
+  },
   "back": "Takaisin",
   "basic-information": "Perustiedot",
   "cancel": "Peruuta",
@@ -391,9 +397,6 @@
   "print": "Tulosta",
   "privacy-policy": "Tietosuojaseloste",
   "profile": {
-    "front": {
-      "title": "Etusivu"
-    },
     "competences": {
       "add": "Lisää osaamisia",
       "description": "Löydät alta kaikki osaamisesi, jotka olet tunnistanut tai lisännyt profiiliisi. Osaamisesi ryhmittelyn ja esitystavan voit valita itse.",
@@ -441,6 +444,9 @@
         "name-of-free-time-theme-placeholder": "Esim. Sukeltaminen/Taloyhtiön hallitus/Liikunta"
       },
       "title": "Vapaa-ajan toimintoni"
+    },
+    "front": {
+      "title": "Etusivu"
     },
     "help-text": "Rakenna koulutus- ja työhistoriasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle sopivia osaamisia.",
     "index": "Omat sivuni",
