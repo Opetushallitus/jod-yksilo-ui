@@ -36,7 +36,7 @@ const JakaumaList = ({ name }: { name: keyof Jakaumat | Codeset }) => {
       {isEmpty ? (
         <p className="text-black">{t('data-not-available')}</p>
       ) : (
-        <ul className="list-none text-body-md text-black capitalize">
+        <ul className="list-none text-body-md text-black first-letter:capitalize">
           {jakaumat?.[name]?.arvot.map((arvo) => (
             <li key={arvo.arvo}>{`${getDisplayValue(arvo.arvo)} (${arvo.osuus.toFixed(1)}%)`}</li>
           ))}
@@ -71,10 +71,12 @@ const JobOpportunity = () => {
   const sections: OpportunityDetailsSection[] = [
     {
       navTitle: t('description'),
+      hasAiContent: true,
       content: <p className="text-body-md font-arial">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>,
     },
     {
       navTitle: t('job-opportunity.most-common-job-tasks.title'),
+      hasAiContent: true,
       content: (
         <ol className="list-decimal ml-7 text-body-lg font-medium text-black leading-7">
           {tyomahdollisuusTehtavat.map((value: string, index: number) => (
@@ -195,6 +197,7 @@ const JobOpportunity = () => {
       isLoggedIn={isLoggedIn}
       tyyppi="TYOMAHDOLLISUUS"
       sections={sections}
+      showAiInfoInTitle
     />
   );
 };

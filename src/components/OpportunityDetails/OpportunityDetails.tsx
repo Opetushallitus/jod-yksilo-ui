@@ -1,6 +1,7 @@
 import { components } from '@/api/schema';
 import {
   ActionButton,
+  AiInfo,
   FavoriteToggle,
   LoginModal,
   MainLayout,
@@ -19,6 +20,7 @@ import { MdCompareArrows, MdOutlinePrint, MdOutlineRoute, MdOutlineShare } from 
 export interface OpportunityDetailsSection {
   navTitle: string;
   content: JSX.Element;
+  hasAiContent?: boolean;
   showInDevOnly?: boolean;
 }
 
@@ -27,11 +29,12 @@ export interface OpportunityDetailsProps {
   isLoggedIn: boolean;
   tyyppi: MahdollisuusTyyppi;
   sections: OpportunityDetailsSection[];
+  showAiInfoInTitle?: boolean;
 }
 /**
  * A generic component for displaying details of an education or job opportunity.
  */
-const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections }: OpportunityDetailsProps) => {
+const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTitle }: OpportunityDetailsProps) => {
   const { isDev } = useEnvironment();
   const [loginModalOpen, setLoginModalOpen] = React.useState(false);
   const { t } = useTranslation();
@@ -82,7 +85,14 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections }: OpportunityD
     >
       {loginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} isOpen={loginModalOpen} />}
       {title && <title>{title}</title>}
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <div className="flex flex-row justify-between items-center mb-5">
+        <h1 className="text-heading-2 sm:text-heading-1">{title}</h1>
+        {showAiInfoInTitle && (
+          <span className="print:hidden mr-2">
+            <AiInfo />
+          </span>
+        )}
+      </div>
 
       {/* Action bar */}
       <div className="flex flex-row flex-wrap gap-x-7 gap-y-5 my-8 print:hidden">
@@ -127,8 +137,13 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections }: OpportunityD
         {!!data &&
           sections.filter(filterDevSections).map((section) => (
             <div key={section.navTitle}>
-              <ScrollHeading title={section.navTitle} heading="h2" className="text-heading-2" />
-              {section.content}
+              <ScrollHeading
+                title={section.navTitle}
+                heading="h2"
+                className="text-heading-2"
+                hasAiContent={section.hasAiContent}
+              />
+              <div className="flex flex-row justify-between">{section.content}</div>
             </div>
           ))}
       </div>
