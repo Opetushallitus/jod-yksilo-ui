@@ -21,7 +21,7 @@
     "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^4.1.2",
     "@jod/design-system": "github:Opetushallitus/jod-design-system#main",
-    "i18next": "^24.2.2",
+    "i18next": "^24.2.3",
     "openapi-fetch": "^0.13.4",
     "openapi-typescript-fetch": "^2.1.0",
     "react": "^19.0.0",
