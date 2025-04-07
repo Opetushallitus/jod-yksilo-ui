@@ -14,6 +14,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdMenu } from 'react-icons/md';
 import { NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router';
+import { LogoutFormContext } from '.';
 
 const NavigationBarItem = (to: string, text: string) => ({
   key: to,
@@ -171,9 +172,11 @@ const Root = () => {
           </div>
         )}
       </header>
-      <ActionBarContext.Provider value={footerRef.current}>
-        <Outlet />
-      </ActionBarContext.Provider>
+      <LogoutFormContext.Provider value={logoutForm.current}>
+        <ActionBarContext.Provider value={footerRef.current}>
+          <Outlet />
+        </ActionBarContext.Provider>
+      </LogoutFormContext.Provider>
       <Footer
         ref={footerRef}
         items={footerItems}

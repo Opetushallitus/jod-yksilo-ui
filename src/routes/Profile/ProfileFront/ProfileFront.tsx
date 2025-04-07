@@ -6,12 +6,11 @@ import { ProfileNavigationList } from '../components';
 
 const ProfileFront = () => {
   const { t } = useTranslation();
-  const title = t('profile.front.title');
   const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
 
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
-      <title>{title}</title>
+      <title>{t('profile.front.title')}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">
         {t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
       </h1>
