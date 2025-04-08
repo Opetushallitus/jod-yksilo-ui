@@ -25,7 +25,13 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
   }, [open]);
 
   const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
-    if (menuContentRef.current && !menuContentRef.current.contains(event.relatedTarget as Node)) {
+    // Related target is the element that is focused after the menu loses focus.
+    // Do not close the menu if the related target is a DS confirm dialog.
+    if (event.relatedTarget?.id.includes('ds-confirm-dialog')) {
+      return;
+    }
+
+    if (menuContentRef.current && !menuContentRef.current.contains(event.relatedTarget)) {
       setOpen(false);
     }
   };
