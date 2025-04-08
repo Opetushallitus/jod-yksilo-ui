@@ -9,6 +9,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdArrowForward } from 'react-icons/md';
 import { Link } from 'react-router';
+import { useShallow } from 'zustand/shallow';
 import MyGoalsOpportunityCardMenu from './MyGoalsOpportunityCardMenu';
 import TavoiteInput from './TavoiteInput';
 
@@ -23,11 +24,31 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
     t,
     i18n: { language },
   } = useTranslation();
-  const mahdollisuusDetails = usePaamaaratStore((state) => state.mahdollisuusDetails);
+  const { mahdollisuusDetails, upsertPaamaara } = usePaamaaratStore(
+    useShallow((state) => ({ mahdollisuusDetails: state.mahdollisuusDetails, upsertPaamaara: state.upsertPaamaara })),
+  );
 
   const getMahdollisuusDetails = React.useCallback(
     (id: string) => mahdollisuusDetails.find((item) => item.id === id),
     [mahdollisuusDetails],
+  );
+
+  const removePolkuFromStore = React.useCallback(
+    (paamaaraId?: string, suunnitelmaId?: string) => {
+      if (!paamaaraId || !suunnitelmaId) {
+        return;
+      }
+
+      const paamaara = paamaarat.find((paamaara) => paamaara.id === paamaaraId);
+
+      if (paamaara) {
+        upsertPaamaara({
+          ...paamaara,
+          suunnitelmat: paamaara.suunnitelmat?.filter((polku) => polku.id !== suunnitelmaId),
+        });
+      }
+    },
+    [paamaarat, upsertPaamaara],
   );
 
   return (
@@ -74,9 +95,13 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                       to={`${pm.id}/${t('slugs.profile.path')}/${polku.id}`}
                       className="text-link flex gap-2 text-heading-4"
                     >
-                      {polku.nimi[language]} <MdArrowForward size={24} />
+                      {getLocalizedText(polku.nimi)} <MdArrowForward size={24} />
                     </Link>
-                    <DeletePolkuButton paamaaraId={pm.id} suunnitelmaId={polku.id} />
+                    <DeletePolkuButton
+                      paamaaraId={pm.id}
+                      suunnitelmaId={polku.id}
+                      onDelete={() => removePolkuFromStore(pm.id, polku.id)}
+                    />
                   </div>
                 ))}
                 <div className="mt-9">
