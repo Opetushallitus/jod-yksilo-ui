@@ -395,6 +395,11 @@
       "description": "Kaikki osaamisprofiilisi tallennetut tiedot poistetaan pysyvästi, eikä niitä voi palauttaa.",
       "action": "Poista osaamisprofiili",
       "confirm": "Haluatko varmasti poistaa osaamisprofiilisi?"
+    },
+    "download": {
+      "title": "Lataa talteen kaikki osaamisprofiilisi tallennetut tietosi",
+      "description": "Voit ladata itsellesi talteen kaikki osaamisprofiilin tallennetut tiedot",
+      "action": "Lataa osaamisprofiilin tiedot"
     }
   },
   "previous": "Edellinen",
