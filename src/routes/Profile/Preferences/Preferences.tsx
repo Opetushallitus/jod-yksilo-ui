@@ -6,6 +6,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ProfileNavigationList } from '../components';
 
+const DownloadLink = ({ children }: { children: React.ReactNode }) => (
+  <a href={`${import.meta.env.BASE_URL}api/profiili/yksilo/vienti`}>{children}</a>
+);
+
 const Preferences = () => {
   const { t } = useTranslation();
   const title = t('profile.preferences.title');
@@ -29,6 +33,11 @@ const Preferences = () => {
       <div className="mb-8 text-body-md flex flex-col gap-7">
         <p className="bg-todo">{t('preferences.description')}</p>
       </div>
+      <section className="mb-8">
+        <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.download.title')}</h2>
+        <p className="text-body-md mb-5">{t('preferences.download.description')}</p>
+        <Button variant="accent" label={t('preferences.download.action')} LinkComponent={DownloadLink} />
+      </section>
       <section>
         <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.delete-profile.title')}</h2>
         <p className="text-body-md mb-5">{t('preferences.delete-profile.description')}</p>
