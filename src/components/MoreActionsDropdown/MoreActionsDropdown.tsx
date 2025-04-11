@@ -25,13 +25,15 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
   }, [open]);
 
   const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+    const relatedTarget = event.relatedTarget as HTMLElement;
+
     // Related target is the element that is focused after the menu loses focus.
-    // Do not close the menu if the related target is a DS confirm dialog.
-    if (event.relatedTarget?.id.includes('ds-confirm-dialog')) {
+    // Do not close the menu if the related target is part of the dialog portal root.
+    if (relatedTarget?.closest('#headlessui-portal-root')) {
       return;
     }
 
-    if (menuContentRef.current && !menuContentRef.current.contains(event.relatedTarget)) {
+    if (menuContentRef.current && !menuContentRef.current.contains(relatedTarget)) {
       setOpen(false);
     }
   };
