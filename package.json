@@ -22,7 +22,7 @@
     "@hookform/resolvers": "^4.1.2",
     "@jod/design-system": "github:Opetushallitus/jod-design-system#main",
     "i18next": "^24.2.2",
-    "openapi-fetch": "^0.13.4",
+    "openapi-fetch": "^0.13.5",
     "openapi-typescript-fetch": "^2.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
