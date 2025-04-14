@@ -14,7 +14,7 @@ export interface paths {
     get: operations['yksiloGet'];
     put: operations['yksiloUpdate'];
     post?: never;
-    delete: operations['yksiloDelete'];
+    delete?: never;
     options?: never;
     head?: never;
     patch?: never;
@@ -525,6 +525,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/profiili/yksilo/vienti': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['yksiloExport'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/osaamiset': {
     parameters: {
       query?: never;
@@ -602,6 +618,22 @@ export interface paths {
     };
     /** Get full information content of a koulutusmahdollisuus */
     get: operations['koulutusmahdollisuusFindById'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/integraatiot/koski/osaamiset/tunnistus': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['integraatioKoskiOsaamisenTunnistusStatusQuery'];
     put?: never;
     post?: never;
     delete?: never;
@@ -856,6 +888,7 @@ export interface components {
       otsikko: components['schemas']['LokalisoituTeksti'];
       tiivistelma?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
+      aktiivinen?: boolean;
     };
     ArvoDto: {
       arvo: string;
@@ -877,6 +910,7 @@ export interface components {
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       tehtavat?: components['schemas']['LokalisoituTeksti'];
       yleisetVaatimukset?: components['schemas']['LokalisoituTeksti'];
+      /** Format: uri */
       ammattiryhma?: string;
       /** @enum {string} */
       aineisto?: 'TMT' | 'AMMATTITIETO';
@@ -894,6 +928,121 @@ export interface components {
       sukunimi?: string;
       csrf: components['schemas']['CsrfTokenDto'];
       tervetuloapolku?: boolean;
+    };
+    KoulutusExportDto: {
+      /** Format: uuid */
+      id?: string;
+      /** Format: date */
+      alkuPvm?: string;
+      /** Format: date */
+      loppuPvm?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      osaamiset?: string[];
+      /** @enum {string} */
+      osaamisenTunnistusStatus?: 'WAIT' | 'DONE' | 'FAIL';
+      osasuoritukset?: string[];
+    };
+    KoulutusKokonaisuusExportDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      koulutukset?: components['schemas']['KoulutusExportDto'][];
+    };
+    PaamaaraExportDto: {
+      /** Format: uuid */
+      id?: string;
+      /** Format: date-time */
+      luotu?: string;
+      /** @enum {string} */
+      tyyppi?: 'LYHYT' | 'PITKA' | 'MUU';
+      /** Format: uuid */
+      tyomahdollisuus?: string;
+      /** Format: uuid */
+      koulutusmahdollisuus?: string;
+      suunnitelmat?: components['schemas']['PolunSuunnitelmaExportDto'][];
+      tavoite?: components['schemas']['LokalisoituTeksti'];
+    };
+    PatevyysExportDto: {
+      /** Format: uuid */
+      id?: string;
+      /** Format: date */
+      alkuPvm?: string;
+      /** Format: date */
+      loppuPvm?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      osaamiset?: string[];
+    };
+    PolunSuunnitelmaExportDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      vaiheet?: components['schemas']['PolunVaiheExportDto'][];
+      osaamiset?: string[];
+      ignoredOsaamiset?: string[];
+    };
+    PolunVaiheExportDto: {
+      /** Format: uuid */
+      id?: string;
+      /** @enum {string} */
+      tyyppi?: 'KOULUTUS' | 'TYO';
+      nimi: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      linkit?: string[];
+      /** Format: date */
+      alkuPvm?: string;
+      /** Format: date */
+      loppuPvm?: string;
+      osaamiset?: string[];
+      valmis?: boolean;
+    };
+    ToimenkuvaExportDto: {
+      /** Format: uuid */
+      id?: string;
+      /** Format: date */
+      alkuPvm?: string;
+      /** Format: date */
+      loppuPvm?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      osaamiset?: string[];
+    };
+    ToimintoExportDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      patevyydet?: components['schemas']['PatevyysExportDto'][];
+    };
+    TyopaikkaExportDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      toimenkuvat?: components['schemas']['ToimenkuvaExportDto'][];
+    };
+    YksiloExportDto: {
+      /** Format: uuid */
+      id?: string;
+      tervetuloapolku?: boolean;
+      tyopaikat?: components['schemas']['TyopaikkaExportDto'][];
+      koulutusKokonaisuudet?: components['schemas']['KoulutusKokonaisuusExportDto'][];
+      toiminnot?: components['schemas']['ToimintoExportDto'][];
+      osaamisKiinnostukset?: string[];
+      ammattiKiinnostukset?: string[];
+      suosikit?: components['schemas']['YksilonSuosikkiExportDto'][];
+      paamaarat?: components['schemas']['PaamaaraExportDto'][];
+    };
+    YksilonSuosikkiExportDto: {
+      /** Format: uuid */
+      id?: string;
+      /** Format: date-time */
+      luotu?: string;
+      /** Format: uuid */
+      tyomahdollisuus?: string;
+      /** Format: uuid */
+      koulutusmahdollisuus?: string;
+      /** @enum {string} */
+      tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
     };
     OsaaminenDto: {
       /** Format: uri */
@@ -943,6 +1092,7 @@ export interface components {
       tiivistelma?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       kesto?: components['schemas']['KestoJakaumaDto'];
+      aktiivinen?: boolean;
     };
     SivuDtoKoulutusmahdollisuusDto: {
       sisalto: components['schemas']['KoulutusmahdollisuusDto'][];
@@ -1039,24 +1189,6 @@ export interface operations {
     responses: {
       /** @description OK */
       200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  yksiloDelete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
         headers: {
           [name: string]: unknown;
         };
@@ -2171,7 +2303,9 @@ export interface operations {
         headers: {
           [name: string]: unknown;
         };
-        content?: never;
+        content: {
+          'application/json': string[];
+        };
       };
     };
   };
@@ -2319,6 +2453,26 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['TyomahdollisuusFullDto'];
+        };
+      };
+    };
+  };
+  yksiloExport: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['YksiloExportDto'];
         };
       };
     };
@@ -2474,6 +2628,29 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['KoulutusmahdollisuusFullDto'];
+        };
+      };
+    };
+  };
+  integraatioKoskiOsaamisenTunnistusStatusQuery: {
+    parameters: {
+      query: {
+        /** @description Koulutus ids */
+        ids: string[];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['KoulutusDto'][];
         };
       };
     };

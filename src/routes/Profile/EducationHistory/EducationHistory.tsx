@@ -1,3 +1,5 @@
+import { client } from '@/api/client.ts';
+import { components } from '@/api/schema';
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
@@ -43,7 +45,7 @@ const EducationHistory = () => {
   const [isImportSuccess, setIsImportSuccess] = React.useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [isOsaamisetIdentifyOngoing, setIsOsaamisetIdentifyOngoing] = React.useState(true);
+  const [isOsaamisetTunnistusOngoing, setIsOsaamisetTunnistusOngoing] = React.useState(true);
 
   React.useEffect(() => {
     setRows(getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap));
@@ -53,7 +55,7 @@ const EducationHistory = () => {
     const isIdentifyingCompetence = rows.some(
       (row) => row.osaamisetOdottaaTunnistusta || row.subrows?.some((subRow) => subRow.osaamisetOdottaaTunnistusta),
     );
-    setIsOsaamisetIdentifyOngoing(isIdentifyingCompetence);
+    setIsOsaamisetTunnistusOngoing(isIdentifyingCompetence);
   }, [rows]);
 
   const onRowClick = (row: ExperienceTableRowData) => {
@@ -130,7 +132,129 @@ const EducationHistory = () => {
         openImportResultModal(false);
       }
     }
-  }, [searchParams, setSearchParams, t]); // Only run once after the page is loaded
+  }, [searchParams, setSearchParams, t]);
+
+  const updateRowSubrows = <ContextType,>(
+    row: ExperienceTableRowData,
+    transformSubrow: (subrow: ExperienceTableRowData, context: ContextType) => ExperienceTableRowData,
+    context: ContextType,
+  ): ExperienceTableRowData => {
+    if (!row.subrows?.length) {
+      return row;
+    }
+
+    return {
+      ...row,
+      subrows: row.subrows.map((subrow) => transformSubrow(subrow, context)),
+    };
+  };
+
+  const updateSubrow = (
+    subrow: ExperienceTableRowData,
+    responseMap: Map<string, components['schemas']['KoulutusDto']>,
+  ): ExperienceTableRowData => {
+    const responseItem = responseMap.get(subrow.key);
+
+    return responseItem
+      ? {
+          ...subrow,
+          osaamiset: (responseItem.osaamiset ?? []) as never,
+          osaamisetOdottaaTunnistusta: responseItem.osaamisetOdottaaTunnistusta,
+          osaamisetTunnistusEpaonnistui: responseItem.osaamisetTunnistusEpaonnistui,
+        }
+      : subrow;
+  };
+
+  const updateSubrowWithTunnistusStatus = (
+    subrow: ExperienceTableRowData,
+    rowIdsForOsaamisetTunnistus: string[],
+  ): ExperienceTableRowData => {
+    return rowIdsForOsaamisetTunnistus.includes(subrow.key)
+      ? {
+          ...subrow,
+          osaamisetTunnistusEpaonnistui: true,
+        }
+      : subrow;
+  };
+
+  const usePollOsaamisetTunnistus = (
+    isOsaamisetTunnistusOngoing: boolean,
+    rows: ExperienceTableRowData[],
+    setRows: React.Dispatch<React.SetStateAction<ExperienceTableRowData[]>>,
+    revalidator: ReturnType<typeof useRevalidator>,
+  ) => {
+    const [isPolling, setIsPolling] = React.useState(false);
+    const [error, setError] = React.useState<Error | null>(null);
+
+    const rowIdsForOsaamisetTunnistus = rows.flatMap((row) =>
+      row.osaamisetOdottaaTunnistusta && row.subrows?.length
+        ? row.subrows.filter((subRow) => subRow.osaamisetOdottaaTunnistusta).map((subRow) => subRow.key)
+        : [],
+    );
+
+    const fetchOsaamisetTunnistus = React.useCallback(async () => {
+      if (isPolling || !isOsaamisetTunnistusOngoing || rowIdsForOsaamisetTunnistus.length === 0) {
+        return;
+      }
+
+      setIsPolling(true);
+
+      let hasError = false;
+      try {
+        const { data, error } = await client.GET('/api/integraatiot/koski/osaamiset/tunnistus', {
+          params: {
+            query: {
+              ids: rowIdsForOsaamisetTunnistus,
+            },
+          },
+        });
+
+        if (error) {
+          hasError = true;
+          setError(error);
+          return;
+        }
+
+        if (!data) {
+          hasError = true;
+          setError(new Error('API returned empty response'));
+          return;
+        }
+
+        const koulutukset: components['schemas']['KoulutusDto'][] = data;
+        const responseMap = new Map(koulutukset.map((koulutus) => [koulutus.id, koulutus]));
+
+        // @ts-expect-error - Map keys are handled correctly at runtime
+        const updatedRows = rows.map((row) => updateRowSubrows(row, updateSubrow, responseMap));
+        setRows(updatedRows);
+
+        const remainingIds = rowIdsForOsaamisetTunnistus.filter((id) => !responseMap.has(id));
+        if (remainingIds.length === 0) {
+          revalidator.revalidate();
+        }
+      } catch (err) {
+        hasError = true;
+        setError(err instanceof Error ? err : new Error(String(err)));
+      } finally {
+        if (hasError) {
+          const updatedRowsToFailed = rows.map((row) =>
+            updateRowSubrows(row, updateSubrowWithTunnistusStatus, rowIdsForOsaamisetTunnistus),
+          );
+          setRows(updatedRowsToFailed);
+        }
+
+        setIsPolling(false);
+      }
+    }, [rows, setRows, revalidator, isPolling, isOsaamisetTunnistusOngoing, rowIdsForOsaamisetTunnistus]);
+
+    // Set up polling with an appropriate retry strategy
+    React.useEffect(() => {
+      const interval = error ? 15_000 : 5_000;
+      const intervalId = setInterval(fetchOsaamisetTunnistus, interval);
+      return () => clearInterval(intervalId);
+    }, [fetchOsaamisetTunnistus, error]);
+  };
+  usePollOsaamisetTunnistus(isOsaamisetTunnistusOngoing, rows, setRows, revalidator);
 
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
@@ -157,13 +281,13 @@ const EducationHistory = () => {
           <TooltipWrapper
             tooltipPlacement="top"
             tooltipContent={t('competences-identifying')}
-            tooltipOpen={isOsaamisetIdentifyOngoing ? undefined : false}
+            tooltipOpen={isOsaamisetTunnistusOngoing ? undefined : false}
           >
             <Button
               variant="white"
               label={t('education-history.import-education-history')}
               onClick={openImportStartModal}
-              disabled={isOsaamisetIdentifyOngoing}
+              disabled={isOsaamisetTunnistusOngoing}
             />
           </TooltipWrapper>
         </div>
