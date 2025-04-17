@@ -17,8 +17,8 @@ const loader = (async ({ request, params, context }) => {
     signal: request.signal,
     params: { path: { id: params.id } },
   });
-
-  const jakaumat = data?.jakaumat as unknown as Jakaumat;
+  const tyomahdollisuus = data as components['schemas']['TyomahdollisuusFullDto'];
+  const jakaumat = tyomahdollisuus?.jakaumat as unknown as Jakaumat;
 
   if (jakaumat) {
     Object.values(jakaumat).forEach((jakauma: Jakauma) => {
@@ -40,18 +40,18 @@ const loader = (async ({ request, params, context }) => {
 
   const [competences, occupations, occupationGroup] = await Promise.all([
     osaamiset.combine(
-      data?.jakaumat?.osaaminen?.arvot,
+      tyomahdollisuus?.jakaumat?.osaaminen?.arvot,
       (value) => value.arvo,
       (value, osaaminen) => ({ ...osaaminen, osuus: value.osuus }),
       request.signal,
     ),
     ammatit.combine(
-      data?.jakaumat?.ammatti?.arvot,
+      tyomahdollisuus?.jakaumat?.ammatti?.arvot,
       (value) => value.arvo,
       (value, occupation) => ({ ...occupation, osuus: value.osuus }),
       request.signal,
     ),
-    ammatit.get(data?.ammattiryhma ?? '', request.signal),
+    ammatit.get(tyomahdollisuus?.ammattiryhma ?? '', request.signal),
   ]);
 
   if (context) {
@@ -59,7 +59,7 @@ const loader = (async ({ request, params, context }) => {
   }
 
   return {
-    tyomahdollisuus: data,
+    tyomahdollisuus,
     osaamiset: competences,
     ammatit: occupations,
     ammattiryhma: occupationGroup,

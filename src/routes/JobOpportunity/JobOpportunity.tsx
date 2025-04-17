@@ -1,4 +1,3 @@
-import { components } from '@/api/schema';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { type Codeset, type Jakaumat } from '@/routes/types';
@@ -49,6 +48,7 @@ const JakaumaList = ({ name }: { name: keyof Jakaumat | Codeset }) => {
 const JobOpportunity = () => {
   const { t } = useTranslation();
   const { tyomahdollisuus, ammatit, ammattiryhma, osaamiset, isLoggedIn, jakaumat } = useLoaderData<LoaderData>();
+  const hasAiContent = tyomahdollisuus.aineisto !== 'AMMATTITIETO';
 
   const toolStore = useToolStore();
   const omatOsaamisetUris = React.useMemo(
@@ -71,12 +71,12 @@ const JobOpportunity = () => {
   const sections: OpportunityDetailsSection[] = [
     {
       navTitle: t('description'),
-      hasAiContent: true,
+      hasAiContent,
       content: <p className="text-body-md font-arial">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>,
     },
     {
       navTitle: t('job-opportunity.most-common-job-tasks.title'),
-      hasAiContent: true,
+      hasAiContent,
       content: (
         <ol className="list-decimal ml-7 text-body-lg font-medium text-black leading-7">
           {tyomahdollisuusTehtavat.map((value: string, index: number) => (
@@ -193,11 +193,11 @@ const JobOpportunity = () => {
   ];
   return (
     <OpportunityDetails
-      data={tyomahdollisuus as components['schemas']['TyomahdollisuusFullDto']}
+      data={tyomahdollisuus}
       isLoggedIn={isLoggedIn}
       tyyppi="TYOMAHDOLLISUUS"
       sections={sections}
-      showAiInfoInTitle
+      showAiInfoInTitle={hasAiContent}
     />
   );
 };
