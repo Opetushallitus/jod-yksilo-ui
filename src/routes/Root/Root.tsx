@@ -1,7 +1,7 @@
 import { components } from '@/api/schema';
 import { LanguageButton, LanguageMenu, UserButton } from '@/components';
 import { ErrorNote } from '@/components/ErrorNote';
-import { MegaMenu } from '@/components/MegaMenu/MegaMenu';
+import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { ActionBarContext } from '@/hooks/useActionBar';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
@@ -35,8 +35,9 @@ const Root = () => {
   const isMouseInteraction = useInteractionMethod();
 
   const { sm } = useMediaQueries();
-  const [megaMenuOpen, setMegaMenuOpen] = React.useState(false);
   const [langMenuOpen, setLangMenuOpen] = React.useState(false);
+
+  const [navMenuOpen, setNavMenuOpen] = React.useState(false);
 
   const userGuide = t('slugs.user-guide.index');
   const basicInformation = t('slugs.basic-information');
@@ -50,33 +51,12 @@ const Root = () => {
     NavigationBarItem(`${basicInformation}/${t('slugs.about-ai')}`, t('about-ai')),
   ];
   const logoutForm = React.useRef<HTMLFormElement>(null);
-  const megaMenuButtonRef = React.useRef<HTMLButtonElement>(null);
   const langMenuButtonRef = React.useRef<HTMLLIElement>(null);
 
-  const megaMenuRef = useMenuClickHandler(() => setMegaMenuOpen(false), megaMenuButtonRef);
   const langMenuRef = useMenuClickHandler(() => setLangMenuOpen(false), langMenuButtonRef);
 
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
   const footerRef = React.useRef<HTMLDivElement>(null);
-
-  const toggleMenu = (menu: 'mega' | 'lang') => () => {
-    setMegaMenuOpen(false);
-    setLangMenuOpen(false);
-
-    switch (menu) {
-      case 'mega':
-        setMegaMenuOpen(!megaMenuOpen);
-        break;
-      case 'lang':
-        setLangMenuOpen(!langMenuOpen);
-        break;
-    }
-  };
-
-  const changeLanguage = () => {
-    setLangMenuOpen(false);
-    setMegaMenuOpen(false);
-  };
 
   const logout = () => {
     toolStore.reset();
@@ -115,16 +95,15 @@ const Root = () => {
           <input type="hidden" name="lang" value={language} />
         </form>
         <NavigationBar
-          languageButtonComponent={<LanguageButton onClick={toggleMenu('lang')} />}
+          languageButtonComponent={<LanguageButton onClick={() => setLangMenuOpen(!langMenuOpen)} />}
           userButtonComponent={<UserButton onLogout={logout} />}
           logo={{ to: `/${language}`, language, srText: t('osaamispolku') }}
           menuComponent={
             sm ? (
               <button
                 className="cursor-pointer flex gap-4 justify-center items-center select-none"
-                aria-label={megaMenuOpen ? t('close-menu') : t('open-menu')}
-                onClick={toggleMenu('mega')}
-                ref={megaMenuButtonRef}
+                aria-label={navMenuOpen ? t('close-menu') : t('open-menu')}
+                onClick={() => setNavMenuOpen(!navMenuOpen)}
               >
                 <span className="py-3 pl-3">{t('menu')}</span>
                 <span className="size-7 flex justify-center items-center">
@@ -132,12 +111,11 @@ const Root = () => {
                 </span>
               </button>
             ) : (
-              !megaMenuOpen && (
+              !navMenuOpen && (
                 <button
                   className="cursor-pointer flex justify-self-end p-3"
                   aria-label={t('open-menu')}
-                  onClick={toggleMenu('mega')}
-                  ref={megaMenuButtonRef}
+                  onClick={() => setNavMenuOpen(!navMenuOpen)}
                 >
                   <span className="size-7 flex justify-center items-center">
                     <MdMenu size={24} />
@@ -156,23 +134,14 @@ const Root = () => {
         {langMenuOpen && (
           <div className="relative xl:container mx-auto">
             <div ref={langMenuRef} onBlur={handleBlur} className="absolute right-[50px] translate-y-7">
-              <LanguageMenu onClick={changeLanguage} />
+              <LanguageMenu onClick={() => setLangMenuOpen(false)} />
             </div>
           </div>
         )}
         {error && <ErrorNote error={error} onCloseClick={clearErrorNote} />}
-        {megaMenuOpen && (
-          <div ref={megaMenuRef}>
-            <MegaMenu
-              loggedIn={!!data}
-              onLogout={logout}
-              onClose={() => setMegaMenuOpen(false)}
-              onLanguageClick={changeLanguage}
-            />
-          </div>
-        )}
       </header>
       <LogoutFormContext.Provider value={logoutForm.current}>
+        <NavMenu open={navMenuOpen} onClose={() => setNavMenuOpen(false)} />
         <ActionBarContext.Provider value={footerRef.current}>
           <Outlet />
         </ActionBarContext.Provider>

@@ -164,6 +164,7 @@
     "name-of-free-time-theme": "Vapaa-ajan teeman nimi",
     "theme-or-activity": "Teema / Toiminto"
   },
+  "front-page": "Etusivu",
   "goals": "Tavoitteet",
   "home": {
     "card-1-action-content": "Kokeile palvelua",
@@ -338,6 +339,8 @@
   },
   "my-competences-alphabetically": "Osaamiseni aakkosjärjestyksessä",
   "my-competences-by-sources": "Osaamiseni lähteiden mukaan",
+  "my-competence-path": "Osaamispolkuni",
+  "my-competence-profile": "Osaamisprofiilini",
   "name": "Nimi",
   "next": "Seuraava",
   "no": "Ei",
@@ -347,6 +350,7 @@
     "title": "Sivua ei löytynyt"
   },
   "open-menu": "Avaa valikko",
+  "open-submenu": "Avaa alivalikko",
   "opportunity-card": {
     "common-educational-background": "Yleisin koulutustausta",
     "employment-outlook": "Työllisyysnäkymä",
