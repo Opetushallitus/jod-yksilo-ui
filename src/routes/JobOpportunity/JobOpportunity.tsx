@@ -1,53 +1,18 @@
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
+import JakaumaList from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
-import { type Codeset, type Jakaumat } from '@/routes/types';
+import type { JakaumaKey } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText, hashString, parseBoolean } from '@/utils';
+import { getLocalizedText, hashString } from '@/utils';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
-import { type LoaderData } from './loader';
-
-type Keys = (keyof Jakaumat)[];
-
-const JakaumaList = ({ name }: { name: keyof Jakaumat | Codeset }) => {
-  const { t } = useTranslation();
-  const { codesetValues, jakaumat } = useLoaderData<LoaderData>();
-
-  const codesetKeys: Keys = ['maa', 'maakunta', 'kunta', 'tyokieli'];
-  const booleanKeys: Keys = ['rikosrekisteriote', 'matkustusvaatimus', 'sijaintiJoustava'];
-
-  const getDisplayValue = (arvo: string) => {
-    if (codesetKeys.includes(name) && codesetValues) {
-      return codesetValues[name as Codeset]?.find((v) => v.code === arvo)?.value ?? arvo;
-    } else if (booleanKeys.includes(name)) {
-      return parseBoolean(arvo) === true ? t('yes') : t('no');
-    } else {
-      return t(`jakauma-values.${name}.${arvo}`);
-    }
-  };
-
-  const isEmpty = !jakaumat?.[name]?.arvot || jakaumat?.[name]?.arvot.length === 0;
-
-  return (
-    <div className="md:col-span-1 col-span-2">
-      <h2 className="text-heading-3 pb-2">{t(`jakauma.${name}`)}</h2>
-      {isEmpty ? (
-        <p className="text-black">{t('data-not-available')}</p>
-      ) : (
-        <ul className="list-none text-body-md text-black first-letter:capitalize">
-          {jakaumat?.[name]?.arvot.map((arvo) => (
-            <li key={arvo.arvo}>{`${getDisplayValue(arvo.arvo)} (${arvo.osuus.toFixed(1)}%)`}</li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-};
+import type { LoaderData } from './loader';
 
 const JobOpportunity = () => {
   const { t } = useTranslation();
-  const { tyomahdollisuus, ammatit, ammattiryhma, osaamiset, isLoggedIn, jakaumat } = useLoaderData<LoaderData>();
+  const { tyomahdollisuus, ammatit, ammattiryhma, osaamiset, isLoggedIn, jakaumat, codesetValues } =
+    useLoaderData<LoaderData>();
   const hasAiContent = tyomahdollisuus.aineisto !== 'AMMATTITIETO';
 
   const toolStore = useToolStore();
@@ -67,6 +32,10 @@ const JobOpportunity = () => {
           .split('\n')
           .sort((a: string, b: string) => a.localeCompare(b))
       : [];
+
+  const codesetKeys: JakaumaKey[] = ['maa', 'maakunta', 'kunta', 'tyokieli'];
+  const booleanKeys: JakaumaKey[] = ['rikosrekisteriote', 'matkustusvaatimus', 'sijaintiJoustava'];
+  const codesAsValue: JakaumaKey[] = ['ajokortti', 'kielitaito'];
 
   const sections: OpportunityDetailsSection[] = [
     {
@@ -182,10 +151,18 @@ const JobOpportunity = () => {
       navTitle: t('more-information'),
       content: (
         <div className="grid w-full grow grid-cols-2 gap-6">
-          {(Object.keys(jakaumat) as Keys)
+          {(Object.keys(jakaumat) as JakaumaKey[])
             .filter((key) => !['osaaminen', 'ammatti'].includes(key))
             .map((key) => (
-              <JakaumaList key={key} name={key} />
+              <JakaumaList
+                booleanKeys={booleanKeys}
+                codesAsValue={codesAsValue}
+                codesetKeys={codesetKeys}
+                codesetValues={codesetValues}
+                jakaumat={jakaumat}
+                key={key}
+                name={key}
+              />
             ))}
         </div>
       ),

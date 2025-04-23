@@ -22,24 +22,34 @@ export interface Jakauma {
   arvot: components['schemas']['ArvoDto'][];
 }
 
-export interface Jakaumat {
-  kortitJaLuvat: Jakauma;
-  tyonJatkuvuus: Jakauma;
-  palkanPeruste: Jakauma;
-  matkustusvaatimus: Jakauma;
-  sijaintiJoustava: Jakauma;
+export interface TyomahdollisuusJakaumat {
   ajokortti: Jakauma;
-  kielitaito: Jakauma;
-  koulutusaste: Jakauma;
-  rikosrekisteriote: Jakauma;
-  maakunta: Jakauma;
-  osaaminen: Jakauma;
-  tyoaika: Jakauma;
-  kunta: Jakauma;
-  tyokieli: Jakauma;
-  palvelussuhde: Jakauma;
   ammatti: Jakauma;
+  kielitaito: Jakauma;
+  kortitJaLuvat: Jakauma;
+  koulutusaste: Jakauma;
+  kunta: Jakauma;
   maa: Jakauma;
+  maakunta: Jakauma;
+  matkustusvaatimus: Jakauma;
+  osaaminen: Jakauma;
+  palkanPeruste: Jakauma;
+  palvelussuhde: Jakauma;
+  rikosrekisteriote: Jakauma;
+  sijaintiJoustava: Jakauma;
+  tyoaika: Jakauma;
+  tyokieli: Jakauma;
+  tyonJatkuvuus: Jakauma;
 }
 
-export type Codeset = Required<Extract<keyof Jakaumat, 'maa' | 'maakunta' | 'kunta' | 'tyokieli'>>;
+export interface KoulutusmahdollisuusJakaumat {
+  aika: Jakauma;
+  koulutusala: Jakauma;
+  kunta: Jakauma;
+  maksullisuus: Jakauma;
+  opetustapa: Jakauma;
+  osaaminen: Jakauma;
+}
+export type JakaumaKey = keyof KoulutusmahdollisuusJakaumat | keyof TyomahdollisuusJakaumat;
+export type Codeset = Required<Extract<keyof TyomahdollisuusJakaumat, 'maa' | 'maakunta' | 'kunta' | 'tyokieli'>>;
+export type CodesetValues = Record<Codeset, { code: string; value: string }[]>;

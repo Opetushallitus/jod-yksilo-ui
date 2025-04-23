@@ -2,7 +2,7 @@ import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
-import { type Codeset, type Jakauma, type Jakaumat } from '@/routes/types';
+import type { Codeset, CodesetValues, Jakauma, TyomahdollisuusJakaumat } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { sortByProperty } from '@/utils';
 import { getCodesetValue } from '@/utils/codes/codes';
@@ -17,8 +17,9 @@ const loader = (async ({ request, params, context }) => {
     signal: request.signal,
     params: { path: { id: params.id } },
   });
+
   const tyomahdollisuus = data as components['schemas']['TyomahdollisuusFullDto'];
-  const jakaumat = tyomahdollisuus?.jakaumat as unknown as Jakaumat;
+  const jakaumat = tyomahdollisuus?.jakaumat as unknown as TyomahdollisuusJakaumat;
 
   if (jakaumat) {
     Object.values(jakaumat).forEach((jakauma: Jakauma) => {
@@ -31,7 +32,7 @@ const loader = (async ({ request, params, context }) => {
   const mapArvoToCodeValue = (codeset: Codeset) => (arvo: components['schemas']['ArvoDto']) =>
     getCodesetValue(codeset, arvo.arvo).then((value) => ({ code: arvo.arvo, value }));
 
-  const codesetValues: Record<Codeset, { code: string; value: string }[]> = {
+  const codesetValues: CodesetValues = {
     kunta: jakaumat.kunta ? await Promise.all(jakaumat.kunta.arvot.map(mapArvoToCodeValue('kunta'))) : [],
     maa: jakaumat.maa ? await Promise.all(jakaumat.maa.arvot.map(mapArvoToCodeValue('maa'))) : [],
     maakunta: jakaumat.maakunta ? await Promise.all(jakaumat.maakunta.arvot.map(mapArvoToCodeValue('maakunta'))) : [],
