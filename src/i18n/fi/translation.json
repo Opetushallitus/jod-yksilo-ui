@@ -84,9 +84,9 @@
   },
   "education-history-import": {
     "result-modal": {
-      "failure": "Koulutus historia lisääminen epäonnistui.",
+      "failure": "Koulutushistorian lisääminen epäonnistui.",
       "give-permission-failed": "Luvan antaminen epäonnistui. Yritä myöhemmin uudelleen.",
-      "success": "Koulutus historia lisätty onnistuneesti.",
+      "success": "Koulutushistoria lisätty onnistuneesti.",
       "success-osaamiset-info": "Seuraavaksi tunnistamme sinulle lisättyihin koulutuksiin osaamisia.\nVoit poistaa ja lisätä osaamisia muokkaamalla koulutuksen tietoja.\nLisätietoja osaamisten tunnistamisesta löydät alla olevasta linkistä.",
       "success-osaamiset-link-about-ai": "Tietoa tekoälyn käytöstä"
     },
