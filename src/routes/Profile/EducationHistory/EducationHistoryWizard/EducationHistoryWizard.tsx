@@ -132,6 +132,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
   return (
     <Modal
       open={isOpen}
+      fullWidthContent
       content={
         <FormProvider {...methods}>
           <Form
@@ -209,7 +210,8 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 onClick={() => setStep(step + 1)}
                 label={t('next')}
                 variant="white"
-                icon={!sm ? <MdArrowForward size={24} /> : undefined}
+                icon={<MdArrowForward size={24} />}
+                iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
               />

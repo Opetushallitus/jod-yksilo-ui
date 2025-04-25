@@ -17,13 +17,13 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
 
   return (
     <>
-      <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">
+      <h2 className="mb-3 font-poppins text-black text-hero-mobile sm:text-hero">
         {id ? t('profile.competences.edit') : t('free-time-activities.identify-proficiencies')}
       </h2>
-      <h3 className="mb-4 text-heading-5 font-arial text-black sm:mb-5 sm:text-heading-3 sm:font-poppins">
+      <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
         {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}
       </h3>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9">
+      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.free-time-activities.modals.competences-description')}
       </p>
       <Controller

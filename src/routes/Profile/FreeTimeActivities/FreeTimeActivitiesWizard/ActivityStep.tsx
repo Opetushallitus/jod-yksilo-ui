@@ -26,13 +26,15 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
   const patevyysId = watch(`patevyydet.${patevyys}.id`);
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
+      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero">
         {type === 'toiminta' && !id && t('free-time-activities.add-new-free-time-activity')}
         {type === 'toiminta' && id && t('free-time-activities.edit-activity')}
         {type === 'patevyys' && !patevyysId && t('free-time-activities.add-new-activity')}
         {type === 'patevyys' && patevyysId && t('free-time-activities.edit-proficiency')}
       </h2>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.free-time-activities.modals.description')}</p>
+      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
+        {t('profile.free-time-activities.modals.description')}
+      </p>
       {type === 'toiminta' && (
         <div className="mb-6">
           <InputField

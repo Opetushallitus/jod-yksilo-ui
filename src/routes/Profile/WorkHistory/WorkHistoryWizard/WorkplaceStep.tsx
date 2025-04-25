@@ -23,13 +23,15 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
 
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
+      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero">
         {type === 'tyopaikka' && !id && t('work-history.add-new-workplace')}
         {type === 'tyopaikka' && id && t('work-history.edit-workplace')}
         {type === 'toimenkuva' && !toimenkuvaId && t('work-history.add-new-job-description')}
         {type === 'toimenkuva' && toimenkuvaId && t('work-history.edit-job-description')}
       </h2>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.work-history.modals.description')}</p>
+      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
+        {t('profile.work-history.modals.description')}
+      </p>
       {type === 'tyopaikka' && (
         <div className="mb-6">
           <InputField
