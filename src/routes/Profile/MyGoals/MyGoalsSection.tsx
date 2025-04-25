@@ -87,34 +87,38 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                 hideFavorite
               />
               <TavoiteInput paamaara={pm} />
-              <div className="text-form-label font-arial">{t('profile.my-goals.my-plan-towards-goal')}</div>
-              <div className="flex flex-col gap-3">
-                {pm.suunnitelmat?.map((polku) => (
-                  <div className="flex flex-col gap-4" key={polku.id}>
-                    <Link
-                      to={`${pm.id}/${t('slugs.profile.path')}/${polku.id}`}
-                      className="text-link flex gap-2 text-heading-4"
-                    >
-                      {getLocalizedText(polku.nimi)} <MdArrowForward size={24} />
-                    </Link>
-                    <DeletePolkuButton
-                      paamaaraId={pm.id}
-                      suunnitelmaId={polku.id}
-                      onDelete={() => removePolkuFromStore(pm.id, polku.id)}
-                    />
+              {pm.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' && (
+                <>
+                  <div className="text-form-label font-arial">{t('profile.my-goals.my-plan-towards-goal')}</div>
+                  <div className="flex flex-col gap-3">
+                    {pm.suunnitelmat?.map((polku) => (
+                      <div className="flex flex-col gap-4" key={polku.id}>
+                        <Link
+                          to={`${pm.id}/${t('slugs.profile.path')}/${polku.id}`}
+                          className="text-link flex gap-2 text-heading-4"
+                        >
+                          {getLocalizedText(polku.nimi)} <MdArrowForward size={24} />
+                        </Link>
+                        <DeletePolkuButton
+                          paamaaraId={pm.id}
+                          suunnitelmaId={polku.id}
+                          onDelete={() => removePolkuFromStore(pm.id, polku.id)}
+                        />
+                      </div>
+                    ))}
+                    <div className="mt-9">
+                      <Button
+                        variant="accent"
+                        label={t('profile.my-goals.create-new-path-for-goal')}
+                        // eslint-disable-next-line react/no-unstable-nested-components
+                        LinkComponent={({ children }: { children: React.ReactNode }) => (
+                          <Link to={`${pm.id}/${t('slugs.profile.path')}`}>{children}</Link>
+                        )}
+                      />
+                    </div>
                   </div>
-                ))}
-                <div className="mt-9">
-                  <Button
-                    variant="accent"
-                    label={t('profile.my-goals.create-new-path-for-goal')}
-                    // eslint-disable-next-line react/no-unstable-nested-components
-                    LinkComponent={({ children }: { children: React.ReactNode }) => (
-                      <Link to={`${pm.id}/${t('slugs.profile.path')}`}>{children}</Link>
-                    )}
-                  />
-                </div>
-              </div>
+                </>
+              )}
             </div>
           ) : null;
         })}
