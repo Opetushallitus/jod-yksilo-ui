@@ -127,6 +127,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
   return !isLoading ? (
     <Modal
       open={isOpen}
+      fullWidthContent
       content={
         <FormProvider {...methods}>
           <Form
@@ -209,7 +210,8 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
                 onClick={() => setStep(step + 1)}
                 label={t('next')}
                 variant="white"
-                icon={!sm ? <MdArrowForward size={24} /> : undefined}
+                icon={<MdArrowForward size={24} />}
+                iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
               />

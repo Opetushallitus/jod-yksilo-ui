@@ -160,7 +160,11 @@ export const OsaamisSuosittelija = ({
           onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setTaitosi(event.target.value)}
           rows={2}
           maxLength={10000}
-          hideLabel
+          label={
+            mode === 'osaamiset'
+              ? t('osaamissuosittelija.competence.identify')
+              : t('osaamissuosittelija.interest.identify')
+          }
           className={className}
         />
       </div>

@@ -27,13 +27,15 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
 
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
+      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero">
         {type === 'oppilaitos' && !id && t('education-history.add-new-education')}
         {type === 'oppilaitos' && id && t('education-history.edit-education')}
         {type === 'koulutus' && !koulutusId && t('education-history.add-studies-to-this-education')}
         {type === 'koulutus' && koulutusId && t('education-history.edit-degree-or-education')}
       </h2>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.education-history.modals.description')}</p>
+      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
+        {t('profile.education-history.modals.description')}
+      </p>
       {type === 'oppilaitos' && (
         <div className="mb-6">
           <InputField

@@ -81,7 +81,8 @@
     "educational-institution-or-education-provider": "Oppilaitos tai koulutuksen järjestäjä",
     "identify-competences": "Tunnista osaamisia",
     "import-education-history": "Tuo koulutushistoriani",
-    "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi"
+    "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi",
+    "summary": "Yhteenveto"
   },
   "education-history-import": {
     "result-modal": {
@@ -164,6 +165,7 @@
     "identify-proficiencies": "Tunnista osaamisia",
     "name-of-free-time-activity": "Vapaa-ajan toiminnon nimi",
     "name-of-free-time-theme": "Vapaa-ajan teeman nimi",
+    "summary": "Yhteenveto",
     "theme-or-activity": "Teema / Toiminto"
   },
   "front-page": "Etusivu",
@@ -383,10 +385,12 @@
   "osaamissuosittelija": {
     "competence": {
       "add": "Lisää osaaminen klikkaamalla '+'-merkkiä osaamisen vieressä.",
+      "identify": "Tunnista osaamisia",
       "remove": "Poista osaaminen klikkaamalla rastia."
     },
     "interest": {
       "add": "Lisää kiinnostuksen kohde klikkaamalla '+'-merkkiä kiinnostuksen vieressä.",
+      "identify": "Tunnista kiinnostuksia",
       "remove": "Poista kiinnostuksen kohde klikkaamalla rastia.",
       "textarea-placeholder": "Kirjoita tekstikenttään mikä sinua kiinnostaa"
     },
@@ -439,6 +443,7 @@
         "competences-help": "Kirjoittamasi tekstin perusteella sinulle tarjotaan erilaisia avainsanoja alla olevaan listaan. Valitse mielestäsi parhaat avainsanat valitsemalla + ja ne siirtyvät osaamisprofiiliin koulutuksen tuottamiksi osaamisiksi. Voit poistaa väärin valittuja osaamisia valitsemalla x.",
         "description": "Ilmoita tässä suorittamasi koulutuksesi perustiedot. Jos opiskelet kyseisessä koulutuksessa juuri nyt, jätä loppumispäivämäärä ilmoittamatta.",
         "job-description-placeholder": "Esim. osaamisen kartoittamisen tutkinto",
+        "summary-description": "Voit muokata koulutuksia tuotuasi ne Osaamipolkuun osaamisprofiilissasi kohdassa Koulutukseni.",
         "workplace-placeholder": "Esim. Maailman opisto"
       },
       "title": "Koulutukseni"
@@ -465,7 +470,8 @@
         "competences-placeholder": "Opin tunnistamaan ihmisten osaamisia ja sanoittamaan niitä...",
         "description": "Kerro tässä vapaa-ajastasi. Vapaa-ajan toimintoja voivat olla esim. harrastustoiminta, luottamustoimet sekä erilaiset pätevyydet ja muut ansiot. Vapaa-ajan tekemisestä syntyy paljon osaamista sinulle ja autamme sinua tunnistamaan sitä. Voit ilmoittaa vapaa-ajan toimintoja teemoittain ja rakentaa itsellesi sopivan näkymän vapaa-ajan tekemiseesi.",
         "name-of-free-time-activity-placeholder": "Esim. Sukellusmatka/Sihteerinä toimiminen/Valmentaminen",
-        "name-of-free-time-theme-placeholder": "Esim. Sukeltaminen/Taloyhtiön hallitus/Liikunta"
+        "name-of-free-time-theme-placeholder": "Esim. Sukeltaminen/Taloyhtiön hallitus/Liikunta",
+        "summary-description": "Voit muokata vapaa-ajan toimintoja tuotuasi ne Osaamipolkuun osaamisprofiilissasi kohdassa Vapaa-ajan toimintoni."
       },
       "title": "Vapaa-ajan toimintoni"
     },
@@ -602,6 +608,7 @@
         "description": "Ilmoita tässä työpaikkasi perustiedot. Jos työpaikkasi on nykyinen, jätä loppumispäivämäärä ilmoittamatta.",
         "job-description-help": "Toimenkuva voi olla tittelisi, tehtävänimikkeesi tai ammattisi",
         "job-description-placeholder": "Esim. Suunnittelija",
+        "summary-description": "Voit muokata toimenkuvia tuotuasi ne Osaamipolkuun osaamisprofiilissasi kohdassa Työpaikkani.",
         "workplace-help": "Lisätessäsi myöhemmin uutta työpaikkaa ja/tai toimenkuvaa, ryhmittyvät nämä samannimisen työnantajan alle automaattisest",
         "workplace-placeholder": "Esim. Työpaikka Oy"
       },
