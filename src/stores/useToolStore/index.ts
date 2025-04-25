@@ -56,7 +56,7 @@ interface ToolState {
   setKiinnostukset: (state: OsaaminenValue[]) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
   updateSuosikit: (loggedIn: boolean) => Promise<void>;
-  toggleSuosikki: (suosionKohdeId: string, tyyppi: MahdollisuusTyyppi) => Promise<void>;
+  toggleSuosikki: (kohdeId: string, tyyppi: MahdollisuusTyyppi) => Promise<void>;
 
   setOsaamisKiinnostusPainotus: (state: number) => void;
   setRajoitePainotus: (state: number) => void;
@@ -264,14 +264,14 @@ export const useToolStore = create<ToolState>()(
         updateItemCount();
       },
 
-      toggleSuosikki: async (suosionKohdeId: string, tyyppi: MahdollisuusTyyppi) => {
+      toggleSuosikki: async (kohdeId: string, tyyppi: MahdollisuusTyyppi) => {
         const { suosikitLoading, suosikit, updateSuosikit } = get();
 
         if (suosikitLoading) {
           return;
         }
 
-        const favorite = suosikit.find((s) => s.suosionKohdeId === suosionKohdeId);
+        const favorite = suosikit.find((s) => s.kohdeId === kohdeId);
         set({ suosikitLoading: true });
         try {
           if (favorite?.id) {
@@ -283,7 +283,7 @@ export const useToolStore = create<ToolState>()(
           } else {
             await client.POST(SUOSIKIT_PATH, {
               body: {
-                suosionKohdeId,
+                kohdeId,
                 tyyppi,
               },
             });

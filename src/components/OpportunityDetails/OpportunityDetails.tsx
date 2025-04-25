@@ -43,7 +43,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
   const [isFavorite, setIsFavorite] = React.useState(false);
 
   React.useEffect(() => {
-    setIsFavorite(toolStore.suosikit?.some((suosikki) => suosikki.suosionKohdeId === data?.id));
+    setIsFavorite(toolStore.suosikit?.some((suosikki) => suosikki.kohdeId === data?.id));
   }, [toolStore.suosikit, data?.id]);
 
   const handleLoginRequired = () => {
