@@ -22,7 +22,7 @@ interface FavoritesState {
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
   setPageData: (state: TypedMahdollisuus[]) => void;
   fetchSuosikit: () => Promise<void>;
-  deleteSuosikki: (suosionKohdeId: string) => Promise<void>;
+  deleteSuosikki: (kohdeId: string) => Promise<void>;
   fetchPage: (details: PageChangeDetails) => Promise<void>;
 }
 
@@ -31,7 +31,7 @@ const filterSuosikit = (
   filters: MahdollisuusTyyppi[],
   excludedIds: string[] = [],
 ) => {
-  const withoutExcluded = suosikit.filter((item) => !excludedIds.includes(item.suosionKohdeId));
+  const withoutExcluded = suosikit.filter((item) => !excludedIds.includes(item.kohdeId));
 
   if (filters.includes('TYOMAHDOLLISUUS') && filters.includes('KOULUTUSMAHDOLLISUUS')) {
     return withoutExcluded;
@@ -64,7 +64,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
       return;
     }
 
-    const suosikkiId = suosikit.find((s) => s.suosionKohdeId === mahdollisuusId)?.id;
+    const suosikkiId = suosikit.find((s) => s.kohdeId === mahdollisuusId)?.id;
 
     if (!suosikkiId) {
       return;
@@ -100,7 +100,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
     const { excludedIds = [] } = get();
     try {
       const { data = [] } = await client.GET('/api/profiili/suosikit');
-      const suosikit = [...data].filter((s) => !excludedIds.includes(s.suosionKohdeId)).sort(sortByProperty('luotu'));
+      const suosikit = [...data].filter((s) => !excludedIds.includes(s.kohdeId)).sort(sortByProperty('luotu'));
       set({ suosikit });
     } catch (_error) {
       set({ suosikit: get().suosikit ?? [] });
@@ -144,7 +144,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
         ? client.GET('/api/tyomahdollisuudet', {
             params: {
               query: {
-                id: paginated.filter((item) => item.tyyppi === 'TYOMAHDOLLISUUS').map((item) => item.suosionKohdeId),
+                id: paginated.filter((item) => item.tyyppi === 'TYOMAHDOLLISUUS').map((item) => item.kohdeId),
               },
             },
           })
@@ -154,9 +154,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
         ? client.GET('/api/koulutusmahdollisuudet', {
             params: {
               query: {
-                id: paginated
-                  .filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS')
-                  .map((item) => item.suosionKohdeId),
+                id: paginated.filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS').map((item) => item.kohdeId),
               },
             },
           })
@@ -176,8 +174,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
     }));
     const sortedResultBySuosikkiOrder = [...typedTyomahdollisuudet, ...typedKoulutusmahdollisuudet].sort(
       (a, b) =>
-        suosikit.findIndex((item) => item.suosionKohdeId === b.id) -
-        suosikit.findIndex((item) => item.suosionKohdeId === a.id),
+        suosikit.findIndex((item) => item.kohdeId === b.id) - suosikit.findIndex((item) => item.kohdeId === a.id),
     ) as TypedMahdollisuus[];
 
     set({ pageData: sortedResultBySuosikkiOrder, pageNr: safePageNr, totalItems: filteredSuosikit.length });

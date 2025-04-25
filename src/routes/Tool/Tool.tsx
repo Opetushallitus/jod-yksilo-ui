@@ -365,7 +365,7 @@ const YourOpportunities = () => {
         {toolStore.mixedMahdollisuudet.map((mahdollisuus) => {
           const { id, mahdollisuusTyyppi } = mahdollisuus;
           const ehdotus = toolStore.mahdollisuusEhdotukset?.[id];
-          const isFavorite = toolStore.suosikit?.find((s) => s.suosionKohdeId === id) !== undefined;
+          const isFavorite = toolStore.suosikit?.find((s) => s.kohdeId === id) !== undefined;
           return ehdotus ? (
             <OpportunityCard
               key={id}

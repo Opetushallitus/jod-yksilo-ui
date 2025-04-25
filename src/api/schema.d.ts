@@ -801,7 +801,7 @@ export interface components {
       /** Format: uuid */
       readonly id?: string;
       /** Format: uuid */
-      suosionKohdeId: string;
+      kohdeId: string;
       /** @enum {string} */
       tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       /** Format: date-time */
