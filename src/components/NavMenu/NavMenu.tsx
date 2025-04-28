@@ -26,11 +26,15 @@ const externalLinkSections: ExternalLinkSection[] = [
   },
 ];
 
-const frontPageLinkComponent = ({ children, className }: LinkComponent) => {
+const FrontPageLink = ({ children, className }: LinkComponent) => {
+  const {
+    i18n: { language },
+  } = useTranslation();
+
   return (
-    <a href="/#" className={className}>
+    <Link to={`/${language}`} className={className}>
       {children}
-    </a>
+    </Link>
   );
 };
 
@@ -59,11 +63,13 @@ export const NavMenu = ({ open, onClose }: { open: boolean; onClose: () => void 
     }));
   }, [generateLocalizedPath]);
 
+  const languageSelectionItems = getLanguageSelectionItems();
+
   return (
     <NavigationMenu
       open={open}
       accentColor="#85C4EC"
-      FrontPageLinkComponent={frontPageLinkComponent}
+      FrontPageLinkComponent={FrontPageLink}
       backLabel={t('back')}
       menuItems={menuItems}
       ariaCloseMenu={t('close-menu')}
@@ -71,7 +77,7 @@ export const NavMenu = ({ open, onClose }: { open: boolean; onClose: () => void 
       frontPageLinkLabel={t('front-page')}
       onClose={onClose}
       selectedLanguage={language}
-      languageSelectionItems={getLanguageSelectionItems()}
+      languageSelectionItems={languageSelectionItems}
       externalLinkSections={externalLinkSections}
     />
   );

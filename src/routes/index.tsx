@@ -109,19 +109,24 @@ const profileRoutes = supportedLanguageCodes.map(
         {
           id: `{slugs.profile.my-goals}|${lng}`,
           path: i18n.t('slugs.profile.my-goals', { lng }),
-          loader: withYksiloContext(goalsLoader),
-          element: <MyGoals />,
-        },
-        {
-          id: `{slugs.profile.path}|${lng}`,
-          path: `${i18n.t('slugs.profile.my-goals', { lng })}/:paamaaraId/${i18n.t('slugs.profile.path', { lng })}`,
-          loader: withYksiloContext(newPolkuLoader),
-        },
-        {
-          id: `{slugs.profile.path}/:id|${lng}`,
-          path: `${i18n.t('slugs.profile.my-goals', { lng })}/:paamaaraId/${i18n.t('slugs.profile.path', { lng })}/:suunnitelmaId`,
-          element: <Path />,
-          loader: withYksiloContext(polkuLoader),
+          children: [
+            {
+              index: true,
+              element: <MyGoals />,
+              loader: withYksiloContext(goalsLoader),
+            },
+            {
+              id: `:paamaaraId/{slugs.profile.path}|${lng}`,
+              path: `:paamaaraId/${i18n.t('slugs.profile.path', { lng })}`,
+              loader: withYksiloContext(newPolkuLoader),
+            },
+            {
+              id: `:paamaaraId/{slugs.profile.path}/:suunnitelmaId|${lng}`,
+              path: `:paamaaraId/${i18n.t('slugs.profile.path', { lng })}/:suunnitelmaId`,
+              element: <Path />,
+              loader: withYksiloContext(polkuLoader),
+            },
+          ],
         },
         {
           id: `{slugs.profile.interests}|${lng}`,
