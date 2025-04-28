@@ -3,7 +3,7 @@ import { useAppRoutes } from '@/hooks/useAppRoutes';
 import { LinkComponent, MenuItem } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useLoaderData } from 'react-router';
+import { NavLink, useLoaderData, useLocation } from 'react-router';
 import { NavLinkBasedOnAuth } from './NavLinkBasedOnAuth';
 
 interface MenuRoute {
@@ -17,6 +17,7 @@ export const useMenuRoutes = (onClose: () => void) => {
     t,
     i18n: { language },
   } = useTranslation();
+  const { pathname } = useLocation();
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
   const { profileRoutes, toolRoutes } = useAppRoutes();
 
@@ -73,6 +74,7 @@ export const useMenuRoutes = (onClose: () => void) => {
               {children}
             </NavLinkBasedOnAuth>
           ),
+          selected: pathname === `/${language}/${route.path}`,
         };
 
         if (subRoutesByParent[route.path]) {
@@ -89,6 +91,7 @@ export const useMenuRoutes = (onClose: () => void) => {
                 {children}
               </NavLinkBasedOnAuth>
             ),
+            selected: pathname === `/${language}/${childRoute.path}`,
           }));
         }
 
@@ -97,7 +100,7 @@ export const useMenuRoutes = (onClose: () => void) => {
 
       return menuItems;
     },
-    [data, onClose],
+    [data, language, onClose, pathname],
   );
 
   const mainLevelMenuItems: MenuItem[] = React.useMemo(() => {
@@ -109,6 +112,7 @@ export const useMenuRoutes = (onClose: () => void) => {
             {children}
           </NavLink>
         ),
+        selected: pathname === `/${language}`,
       },
       {
         label: t('tool.my-own-data.title'),
@@ -118,6 +122,7 @@ export const useMenuRoutes = (onClose: () => void) => {
           </NavLink>
         ),
         childItems: generatedMenuItems(toolMenuRoutes),
+        selected: pathname === `/${language}/${t('slugs.tool.index')}`,
       },
       {
         label: t('my-competence-profile'),
@@ -132,9 +137,10 @@ export const useMenuRoutes = (onClose: () => void) => {
           </NavLink>
         ),
         childItems: generatedMenuItems(profileMenuRoutes),
+        selected: pathname === `/${language}/${t('slugs.profile.index')}`,
       },
     ];
-  }, [t, language, generatedMenuItems, profileMenuRoutes, toolMenuRoutes, onClose]);
+  }, [t, pathname, language, generatedMenuItems, toolMenuRoutes, profileMenuRoutes, onClose]);
 
   return mainLevelMenuItems;
 };
