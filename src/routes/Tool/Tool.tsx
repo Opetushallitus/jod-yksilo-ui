@@ -149,7 +149,7 @@ const MyOwnData = () => {
           <p className="text-body-md-mobile sm:text-body-md mb-5 sm:mb-7">{t('tool.my-own-data.description')}</p>
 
           <div className="lg:sticky lg:top-[96px]">
-            <div role="tablist" aria-labelledby={titleId} className="flex text-button-sm-mobile select-none">
+            <div role="tablist" aria-labelledby={titleId} className="flex text-button-sm select-none">
               {tabs.map((tab, index) => (
                 <button
                   key={tab.text}
