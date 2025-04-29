@@ -27,14 +27,11 @@ const externalLinkSections: ExternalLinkSection[] = [
 ];
 
 const FrontPageLink = ({ children, className }: LinkComponent) => {
-  const {
-    i18n: { language },
-  } = useTranslation();
-
+  // Navigate to the landing page
   return (
-    <Link to={`/${language}`} className={className}>
+    <a href="/" className={className}>
       {children}
-    </Link>
+    </a>
   );
 };
 

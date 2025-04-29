@@ -19,7 +19,7 @@ export const useMenuRoutes = (onClose: () => void) => {
   } = useTranslation();
   const { pathname } = useLocation();
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
-  const { profileRoutes, toolRoutes } = useAppRoutes();
+  const { profileRoutes } = useAppRoutes();
 
   const prefixRoutePath = (prefix: string) => (route: { name: string; path: string }) => ({
     ...route,
@@ -30,8 +30,6 @@ export const useMenuRoutes = (onClose: () => void) => {
     ...prefixRoutePath(profileIndexPath)(route),
     authRequired: true,
   }));
-
-  const toolMenuRoutes: MenuRoute[] = toolRoutes.map(prefixRoutePath(t('slugs.tool.index')));
 
   const generatedMenuItems = React.useCallback(
     (menuRoutes: MenuRoute[]) => {
@@ -121,8 +119,7 @@ export const useMenuRoutes = (onClose: () => void) => {
             {children}
           </NavLink>
         ),
-        childItems: generatedMenuItems(toolMenuRoutes),
-        selected: pathname === `/${language}/${t('slugs.tool.index')}`,
+        selected: pathname.startsWith(`/${language}/${t('slugs.tool.index')}`),
       },
       {
         label: t('my-competence-profile'),
@@ -140,7 +137,7 @@ export const useMenuRoutes = (onClose: () => void) => {
         selected: pathname === `/${language}/${t('slugs.profile.index')}`,
       },
     ];
-  }, [t, pathname, language, generatedMenuItems, toolMenuRoutes, profileMenuRoutes, onClose]);
+  }, [t, pathname, language, generatedMenuItems, profileMenuRoutes, onClose]);
 
   return mainLevelMenuItems;
 };
