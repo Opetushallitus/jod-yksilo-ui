@@ -2,6 +2,7 @@ import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/comp
 import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonantajaModal';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { MdWorkOutline } from 'react-icons/md';
 import { useLoaderData, useRevalidator } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import { WorkHistoryWizard } from './WorkHistoryWizard';
@@ -73,7 +74,10 @@ const WorkHistory = () => {
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
+        <MdWorkOutline color="#AD4298" className="mr-2" />
+        {title}
+      </h1>
       <p className="mb-9 text-body-lg">{t('profile.work-history.description')}</p>
       <ExperienceTable
         mainColumnHeader={t('work-history.workplace-or-job-description')}

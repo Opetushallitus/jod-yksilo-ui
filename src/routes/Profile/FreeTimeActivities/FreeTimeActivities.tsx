@@ -2,6 +2,7 @@ import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/comp
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { MdOutlineSailing } from 'react-icons/md';
 import { useLoaderData, useRevalidator } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
@@ -73,7 +74,10 @@ const FreeTimeActivities = () => {
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
+        <MdOutlineSailing className="text-accent mr-2" />
+        {title}
+      </h1>
       <p className="mb-9 text-body-lg">{t('profile.free-time-activities.description')}</p>
       <ExperienceTable
         mainColumnHeader={t('free-time-activities.theme-or-activity')}
