@@ -5,6 +5,7 @@ import { getLocalizedText, sortByProperty } from '@/utils';
 import { Button, Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { MdLightbulbOutline } from 'react-icons/md';
 import { useLoaderData, useRevalidator } from 'react-router';
 import { ProfileNavigationList } from '../components';
 
@@ -26,7 +27,10 @@ const SomethingElse = () => {
     <MainLayout navChildren={<ProfileNavigationList />}>
       {isModalOpen && <EditMuuOsaaminenModal onClose={onAddModalClose} isOpen={isModalOpen} />}
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
+        <MdLightbulbOutline className="text-secondary-gray mr-2" />
+        {title}
+      </h1>
       <p className="mb-8 text-body-lg">{t('profile.something-else.description')}</p>
       {data.length > 0 && (
         <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
