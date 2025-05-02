@@ -3,7 +3,7 @@ import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward } from 'react-icons/md';
+import { MdArrowForward, MdLightbulbOutline, MdOutlineSailing, MdOutlineSchool, MdWorkOutline } from 'react-icons/md';
 import { Link, useRouteLoaderData } from 'react-router';
 import { generateProfileLink } from '../utils';
 import { FILTERS_ORDER, GroupByProps, MobileFilterButton, groupByHeaderClasses } from './constants';
@@ -40,7 +40,22 @@ export const GroupBySource = ({
     [data, language, t],
   );
 
-  const competenceLinks = (competenceType: string) => {
+  const competenceIcon = (competenceType: string) => {
+    switch (competenceType) {
+      case 'TOIMENKUVA':
+        return <MdWorkOutline color="#AD4298" className="mr-2" />;
+      case 'KOULUTUS':
+        return <MdOutlineSchool color="#00818A" className="mr-2" />;
+      case 'PATEVYYS':
+        return <MdOutlineSailing className="text-accent mr-2" />;
+      case 'MUU_OSAAMINEN':
+        return <MdLightbulbOutline className="text-secondary-gray mr-2" />;
+      default:
+        return null;
+    }
+  };
+
+  const competenceLink = (competenceType: string) => {
     switch (competenceType) {
       case 'TOIMENKUVA':
         return workLink.to;
@@ -58,14 +73,17 @@ export const GroupBySource = ({
   return (
     <>
       <div className="flex flex-row justify-between gap-5">
-        <h2 className="my-6 text-heading-2">{t('my-competences-by-sources')}</h2>
+        <h2 className="text-heading-2">{t('my-competences-by-sources')}</h2>
         {mobileFilterOpenerComponent}
       </div>
       <div className="mb-10">
         {FILTERS_ORDER.map((competence) => {
           return (
             <React.Fragment key={competence}>
-              <div className={groupByHeaderClasses}>{t(`my-competences.by-${competence}`)}</div>
+              <div className={`${groupByHeaderClasses} flex items-center`}>
+                {competenceIcon(competence)}
+                {t(`my-competences.by-${competence}`)}
+              </div>
               {Array.isArray(filters[competence]) && filters[competence].some((filter) => filter.checked) ? (
                 <div>
                   <div className="flex flex-wrap gap-4">
@@ -84,7 +102,7 @@ export const GroupBySource = ({
                     })}
                   </div>
                   <Link
-                    to={competenceLinks(competence)}
+                    to={competenceLink(competence)}
                     key={competence}
                     type="button"
                     className="text-button-md hover:underline text-accent ml-3 mt-5"
@@ -99,7 +117,7 @@ export const GroupBySource = ({
                 </div>
               ) : (
                 <Link
-                  to={competenceLinks(competence)}
+                  to={competenceLink(competence)}
                   key={competence}
                   type="button"
                   className="text-button-md hover:underline text-accent ml-3"

@@ -8,6 +8,7 @@ import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals
 import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { MdOutlineSchool } from 'react-icons/md';
 import { useLoaderData, useRevalidator, useSearchParams } from 'react-router';
 import { ProfileNavigationList } from '../components/index.tsx';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
@@ -259,7 +260,10 @@ const EducationHistory = () => {
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
+        <MdOutlineSchool color="#00818A" className="mr-2" />
+        {title}
+      </h1>
       <p className="mb-9 text-body-lg">{t('profile.education-history.description')}</p>
       <ExperienceTable
         mainColumnHeader={t('education-history.education-provider-or-education')}
