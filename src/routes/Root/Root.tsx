@@ -1,5 +1,5 @@
 import { components } from '@/api/schema';
-import { LanguageButton, LanguageMenu, UserButton } from '@/components';
+import { LanguageButton, UserButton } from '@/components';
 import { ErrorNote } from '@/components/ErrorNote';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
@@ -95,35 +95,29 @@ const Root = () => {
           <input type="hidden" name="lang" value={language} />
         </form>
         <NavigationBar
-          languageButtonComponent={<LanguageButton onClick={() => setLangMenuOpen(!langMenuOpen)} />}
-          userButtonComponent={<UserButton onLogout={logout} />}
           logo={{ to: `/${language}`, language, srText: t('osaamispolku') }}
           menuComponent={
-            sm ? (
-              <button
-                className="cursor-pointer flex gap-4 justify-center items-center select-none"
-                aria-label={navMenuOpen ? t('close-menu') : t('open-menu')}
-                onClick={() => setNavMenuOpen(!navMenuOpen)}
-              >
-                <span className="py-3 pl-3">{t('menu')}</span>
-                <span className="size-7 flex justify-center items-center">
-                  <MdMenu size={24} />
-                </span>
-              </button>
-            ) : (
-              !navMenuOpen && (
-                <button
-                  className="cursor-pointer flex justify-self-end p-3"
-                  aria-label={t('open-menu')}
-                  onClick={() => setNavMenuOpen(!navMenuOpen)}
-                >
-                  <span className="size-7 flex justify-center items-center">
-                    <MdMenu size={24} />
-                  </span>
-                </button>
-              )
-            )
+            <button
+              onClick={() => setNavMenuOpen(!navMenuOpen)}
+              aria-label={t('open-menu')}
+              className="flex gap-2 justify-center items-center select-none cursor-pointer"
+            >
+              <span className="size-7 flex justify-center items-center">
+                <MdMenu size={24} />
+              </span>
+              <span className="py-3 pr-2">{t('menu')}</span>
+            </button>
           }
+          languageButtonComponent={
+            <LanguageButton
+              onClick={() => setLangMenuOpen(!langMenuOpen)}
+              langMenuOpen={langMenuOpen}
+              menuRef={langMenuRef}
+              onMenuBlur={handleBlur}
+              onMenuClick={() => setLangMenuOpen(false)}
+            />
+          }
+          userButtonComponent={<UserButton onLogout={logout} />}
           refs={{ langMenuButtonRef: langMenuButtonRef }}
           renderLink={({ to, className, children }) => (
             <NavLink to={to} className={className}>
@@ -131,13 +125,6 @@ const Root = () => {
             </NavLink>
           )}
         />
-        {langMenuOpen && (
-          <div className="relative xl:container mx-auto">
-            <div ref={langMenuRef} onBlur={handleBlur} className="absolute right-[50px] translate-y-7">
-              <LanguageMenu onClick={() => setLangMenuOpen(false)} />
-            </div>
-          </div>
-        )}
         {error && <ErrorNote error={error} onCloseClick={clearErrorNote} />}
       </header>
       <LogoutFormContext.Provider value={logoutForm.current}>

@@ -36,7 +36,7 @@ export const LanguageMenu = forwardRef<HTMLDivElement, LanguageMenuProps>(functi
     <ListItems onClick={props.onClick} />
   ) : (
     <div ref={ref}>
-      <PopupList classNames="bg-bg-gray-2! gap-y-2">
+      <PopupList classNames="gap-2">
         <ListItems onClick={props.onClick} />
       </PopupList>
     </div>

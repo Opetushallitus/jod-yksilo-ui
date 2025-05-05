@@ -1,9 +1,9 @@
 import { components } from '@/api/schema';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
-import { PopupList, PopupListItem, useMediaQueries } from '@jod/design-system';
+import { PopupList, PopupListItem } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdOutlinePerson } from 'react-icons/md';
+import { MdExpandMore, MdPersonOutline } from 'react-icons/md';
 import { Link, NavLink, useLoaderData } from 'react-router';
 
 interface UserButtonProps {
@@ -17,7 +17,6 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
     i18n: { language },
   } = useTranslation();
 
-  const { sm } = useMediaQueries();
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
 
   const [userMenuOpen, setUserMenuOpen] = React.useState(false);
@@ -31,20 +30,23 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
 
   const landingPageUrl = `/${language}/${t('slugs.profile.login')}`;
   const fullName = `${data?.etunimi} ${data?.sukunimi}`;
-  const initials = !!data?.etunimi && !!data?.sukunimi ? data.etunimi[0] + data.sukunimi[0] : '';
 
-  const elementBasedOnScreenSize = sm ? (
+  return data?.csrf ? (
     <div className="relative">
       <button
         ref={userMenuButtonRef}
-        type="button"
-        className={`cursor-pointer h-8 w-8 rounded-full bg-secondary-3 bg-cover bg-center`}
-        onClick={sm ? () => setUserMenuOpen(!userMenuOpen) : void 0}
-        aria-label={fullName}
+        onClick={() => setUserMenuOpen(!userMenuOpen)}
+        className="ds:flex ds:gap-2 ds:justify-center ds:items-center ds:select-none ds:cursor-pointer"
       >
-        {initials}
+        <span className="ds:size-7 ds:flex ds:justify-center ds:items-center">
+          <MdPersonOutline size={24} />
+        </span>
+        <span className="ds:py-3 ds:whitespace-nowrap">{fullName}</span>
+        <span className="ds:size-7 ds:flex ds:justify-center ds:items-center">
+          <MdExpandMore size={24} />
+        </span>
       </button>
-      {sm && userMenuOpen && (
+      {userMenuOpen && (
         <div ref={userMenuRef} className="absolute right-0 min-w-max translate-y-8 transform">
           <PopupList classNames="gap-2">
             <NavLink
@@ -62,29 +64,19 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
       )}
     </div>
   ) : (
-    <span
-      role="note"
-      className={`flex justify-center content-center flex-wrap h-8 w-8 rounded-full bg-secondary-3 bg-cover bg-center`}
-      aria-label={fullName}
-    >
-      {initials}
-    </span>
-  );
-
-  return data?.csrf ? (
-    elementBasedOnScreenSize
-  ) : (
     <Link
       to={landingPageUrl}
-      className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-gray-2"
-      aria-label={t('login')}
+      className="ds:flex ds:gap-2 ds:justify-center ds:items-center ds:select-none ds:cursor-pointer"
       onClick={() => {
         if (onClick) {
           onClick();
         }
       }}
     >
-      <MdOutlinePerson size={24} />
+      <span className="ds:size-7 ds:flex ds:justify-center ds:items-center">
+        <MdPersonOutline size={24} />
+      </span>
+      <span className="ds:py-3 ds:whitespace-nowrap">{t('login')}</span>
     </Link>
   );
 };
