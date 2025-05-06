@@ -6,26 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useMenuRoutes } from './menuRoutes';
 
-const externalLinkSections: ExternalLinkSection[] = [
-  {
-    title: 'Osaamispolun sisältökokonaisuudet',
-    linkItems: [
-      {
-        label: 'Ohjaajan osio',
-        url: 'https://www.example.com',
-        description: 'Ohjausalasta kiinnostuneille',
-        accentColor: '#66CBD1',
-      },
-      {
-        label: 'Tietopalvelu',
-        url: 'https://www.example.com',
-        description: 'Tietoa päätöksentekijöille',
-        accentColor: '#EBB8E1',
-      },
-    ],
-  },
-];
-
 const FrontPageLink = ({ children, className }: LinkComponent) => {
   // Navigate to the landing page
   return (
@@ -61,6 +41,26 @@ export const NavMenu = ({ open, onClose }: { open: boolean; onClose: () => void 
   }, [generateLocalizedPath]);
 
   const languageSelectionItems = getLanguageSelectionItems();
+
+  const externalLinkSections: ExternalLinkSection[] = [
+    {
+      title: t('navigation.external.title'),
+      linkItems: [
+        {
+          label: t('navigation.external.ohjaaja.label'),
+          url: t('navigation.external.ohjaaja.url'),
+          description: t('navigation.external.ohjaaja.description'),
+          accentColor: '#66CBD1',
+        },
+        {
+          label: t('navigation.external.tietopalvelu.label'),
+          url: t('navigation.external.tietopalvelu.url'),
+          description: t('navigation.external.tietopalvelu.description'),
+          accentColor: '#EBB8E1',
+        },
+      ],
+    },
+  ];
 
   return (
     <NavigationMenu
