@@ -846,5 +846,20 @@
   },
   "workplace-competences": "Työpaikka osaamiset",
   "yes": "Kyllä",
+  "navigation": {
+    "external": {
+      "title": "Osaamispolun sisältökokonaisuudet",
+      "ohjaaja": {
+        "label": "Ohjaajan osio",
+        "url": "/ohjaaja/fi",
+        "description": "Ohjausalasta kiinnostuneille"
+      },
+      "tietopalvelu": {
+        "label": "Tietopalvelu",
+        "url": "/tietopalvelu/fi",
+        "description": "Tietoa päätöksentekijöille"
+      }
+    }
+  },
   "your-competences": "Oma osaamisesi"
 }
