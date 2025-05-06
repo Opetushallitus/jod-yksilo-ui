@@ -485,6 +485,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/ehdotus/mahdollisuudet/polku': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Gets suggestions for education and work opportunities for polku ranked suggestions based on missing skills. */
+    post: operations['mahdollisuudetGetMahdollisuudetSuggestionsForPolkuVaihe'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/tyomahdollisuudet': {
     parameters: {
       query?: never;
@@ -751,6 +768,8 @@ export interface components {
       /** Format: uuid */
       readonly id?: string;
       /** @enum {string} */
+      lahde: 'EHDOTUS' | 'KAYTTAJA';
+      /** @enum {string} */
       tyyppi: 'KOULUTUS' | 'TYO';
       nimi: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
@@ -985,6 +1004,8 @@ export interface components {
     PolunVaiheExportDto: {
       /** Format: uuid */
       id?: string;
+      /** @enum {string} */
+      lahde?: 'EHDOTUS' | 'KAYTTAJA';
       /** @enum {string} */
       tyyppi?: 'KOULUTUS' | 'TYO';
       nimi: components['schemas']['LokalisoituTeksti'];
@@ -2397,6 +2418,30 @@ export interface operations {
     requestBody: {
       content: {
         'application/json': components['schemas']['LuoEhdotusDto'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['EhdotusDto'][];
+        };
+      };
+    };
+  };
+  mahdollisuudetGetMahdollisuudetSuggestionsForPolkuVaihe: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': string[];
       };
     };
     responses: {

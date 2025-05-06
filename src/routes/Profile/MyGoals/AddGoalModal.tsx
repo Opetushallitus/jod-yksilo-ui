@@ -153,6 +153,7 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
   return (
     <Modal
       open={isOpen}
+      fullWidthContent
       content={
         <div id={goalsId}>
           <div>

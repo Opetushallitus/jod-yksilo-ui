@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { type PolkuQueryParams } from '@/routes/Profile/Path/utils';
 import { ConfirmDialog, PopupList, PopupListItem } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { useParams, useRevalidator } from 'react-router';
@@ -19,15 +20,19 @@ const ListItem = ({ label, onClick, disabled }: { label: string; onClick: () => 
 const VaiheCardMenu = ({ vaiheId, openVaiheModal }: { vaiheId: string; openVaiheModal: () => void }) => {
   const { t } = useTranslation();
   const revalidator = useRevalidator();
-  const { suunnitelmaId, paamaaraId } = useParams<{ suunnitelmaId: string; paamaaraId: string }>();
+  const { suunnitelmaId, paamaaraId } = useParams<PolkuQueryParams>();
 
   const deleteVaihe = async () => {
+    if (!paamaaraId || !suunnitelmaId) {
+      return;
+    }
+
     await client.DELETE(`/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}`, {
       params: {
         path: {
           vaiheId: vaiheId,
-          id: paamaaraId!,
-          suunnitelmaId: suunnitelmaId!,
+          id: paamaaraId,
+          suunnitelmaId,
         },
       },
     });
@@ -46,7 +51,7 @@ const VaiheCardMenu = ({ vaiheId, openVaiheModal }: { vaiheId: string; openVaihe
           cancelText={t('cancel')}
           variant="destructive"
         >
-          {(showDialog: () => void) => <ListItem label={t('profile.paths.delete-phase')} onClick={showDialog} />}
+          {(showDialog) => <ListItem label={t('profile.paths.delete-phase')} onClick={showDialog} />}
         </ConfirmDialog>
       </ul>
     </PopupList>
