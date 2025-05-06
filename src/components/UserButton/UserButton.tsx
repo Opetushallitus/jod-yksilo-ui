@@ -36,13 +36,13 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
       <button
         ref={userMenuButtonRef}
         onClick={() => setUserMenuOpen(!userMenuOpen)}
-        className="ds:flex ds:gap-2 ds:justify-center ds:items-center ds:select-none ds:cursor-pointer"
+        className="flex gap-2 justify-center items-center select-none cursor-pointer"
       >
-        <span className="ds:size-7 ds:flex ds:justify-center ds:items-center">
+        <span className="size-7 flex justify-center items-center">
           <MdPersonOutline size={24} />
         </span>
-        <span className="ds:py-3 ds:whitespace-nowrap">{fullName}</span>
-        <span className="ds:size-7 ds:flex ds:justify-center ds:items-center">
+        <span className="py-3 whitespace-nowrap">{fullName}</span>
+        <span className="size-7 flex justify-center items-center">
           <MdExpandMore size={24} />
         </span>
       </button>
@@ -66,17 +66,17 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
   ) : (
     <Link
       to={landingPageUrl}
-      className="ds:flex ds:gap-2 ds:justify-center ds:items-center ds:select-none ds:cursor-pointer"
+      className="flex gap-2 justify-center items-center select-none cursor-pointer"
       onClick={() => {
         if (onClick) {
           onClick();
         }
       }}
     >
-      <span className="ds:size-7 ds:flex ds:justify-center ds:items-center">
+      <span className="size-7 flex justify-center items-center">
         <MdPersonOutline size={24} />
       </span>
-      <span className="ds:py-3 ds:whitespace-nowrap">{t('login')}</span>
+      <span className="py-3 pr-2 whitespace-nowrap">{t('login')}</span>
     </Link>
   );
 };
