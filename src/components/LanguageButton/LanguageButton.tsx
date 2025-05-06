@@ -18,15 +18,12 @@ export const LanguageButton = ({ onClick, langMenuOpen, menuRef, onMenuBlur, onM
 
   return (
     <div className="relative">
-      <button
-        onClick={onClick}
-        className="ds:flex ds:gap-2 ds:justify-center ds:items-center ds:select-none ds:cursor-pointer"
-      >
-        <span className="ds:size-7 ds:flex ds:justify-center ds:items-center">
+      <button onClick={onClick} className="flex gap-2 justify-center items-center select-none cursor-pointer">
+        <span className="size-7 flex justify-center items-center">
           <MdLanguage size={24} />
         </span>
-        <span className="ds:py-3 ds:whitespace-nowrap">{langLabels[languageKey as keyof typeof langLabels]}</span>
-        <span className="ds:size-7 ds:flex ds:justify-center ds:items-center">
+        <span className="py-3 whitespace-nowrap">{langLabels[languageKey as keyof typeof langLabels]}</span>
+        <span className="size-7 flex justify-center items-center">
           <MdExpandMore size={24} />
         </span>
       </button>
