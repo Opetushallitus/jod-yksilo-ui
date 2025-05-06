@@ -2,6 +2,7 @@
 import { OsaaminenLahdeTyyppi } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 import i18n from '@/i18n/config';
 import { Tag } from '@jod/design-system';
+import { z } from 'zod';
 
 type TagProps = React.ComponentProps<typeof Tag>;
 export const OSAAMINEN_COLOR_MAP: Record<OsaaminenLahdeTyyppi, NonNullable<TagProps['sourceType']>> = {
@@ -45,4 +46,34 @@ export const formErrorMessage = {
    * @param path Path to the field where the error message should appear.
    */
   dateRange: (path: string[]) => ({ message: i18n.t(FORM_ERROR_KEY.DATE_RANGE), path }),
+};
+
+// Commonly used form validation schemas
+export const FORM_SCHEMA = {
+  nimi: z
+    .object({})
+    .catchall(
+      z
+        .string()
+        .trim()
+        .nonempty(formErrorMessage.required())
+        .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
+    ),
+  kuvaus: z
+    .object({})
+    .catchall(z.string().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA)))
+    .optional(),
+  linkit: z.array(
+    z.object({
+      url: z.string().url(formErrorMessage.url()),
+    }),
+  ),
+  osaamiset: z.array(
+    z.object({
+      uri: z.string().min(1),
+      nimi: z.object({}).catchall(z.string()),
+      kuvaus: z.object({}).catchall(z.string()),
+    }),
+  ),
+  pvm: z.string().date(formErrorMessage.date()),
 };

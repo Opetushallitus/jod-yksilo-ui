@@ -1,5 +1,5 @@
 import { client } from '@/api/client';
-import { formErrorMessage, LIMITS } from '@/constants';
+import { formErrorMessage } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { usePolutStore } from '@/stores/usePolutStore';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,20 +7,20 @@ import { Button, ConfirmDialog, Modal, WizardProgress } from '@jod/design-system
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { MdArrowForward } from 'react-icons/md';
 import { useParams } from 'react-router';
-import { z } from 'zod';
 import { useShallow } from 'zustand/shallow';
-import { VAIHE_TYYPIT, type PolkuQueryParams, type VaiheForm } from '../utils';
+import { vaiheFormSchema, type PolkuQueryParams, type VaiheForm } from '../../utils';
 import CompetencesStep from './CompetencesStep';
 import DetailsStep from './DetailsStep';
 
-interface VaiheModalProps {
+interface ManualVaiheModalProps {
   isOpen: boolean;
   onClose: (isCancel?: boolean) => void;
   vaiheIndex: number;
 }
 
-const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
+const ManualVaiheModal = ({ isOpen, onClose, vaiheIndex }: ManualVaiheModalProps) => {
   const { vaiheet } = usePolutStore(
     useShallow((state) => ({
       vaiheet: state.vaiheet,
@@ -33,42 +33,11 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
   const methods = useForm<VaiheForm>({
     mode: 'onBlur',
     resolver: zodResolver(
-      z
-        .object({
-          id: z.string().optional(),
-          nimi: z
-            .object({})
-            .catchall(
-              z
-                .string()
-                .trim()
-                .nonempty(formErrorMessage.required())
-                .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
-            ),
-          kuvaus: z
-            .object({})
-            .catchall(z.string().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA)))
-            .optional(),
-          tyyppi: z.enum(VAIHE_TYYPIT),
-          valmis: z.boolean(),
-          linkit: z.array(
-            z.object({
-              url: z.string().url(formErrorMessage.url()),
-            }),
-          ),
-          alkuPvm: z.string().nonempty(formErrorMessage.required()).date(formErrorMessage.date()),
-          loppuPvm: z.string().date(formErrorMessage.date()).or(z.literal('')),
-          osaamiset: z.array(
-            z.object({
-              uri: z.string().min(1),
-              nimi: z.object({}).catchall(z.string()),
-              kuvaus: z.object({}).catchall(z.string()),
-            }),
-          ),
-        })
-        .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm, formErrorMessage.dateRange(['loppuPvm'])),
+      vaiheFormSchema.refine(
+        (data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm,
+        formErrorMessage.dateRange(['loppuPvm']),
+      ),
     ),
-
     defaultValues: async () => {
       const vaihe = vaiheet.at(vaiheIndex);
 
@@ -79,6 +48,7 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
         tyyppi: vaihe?.tyyppi ?? 'KOULUTUS',
         valmis: vaihe?.valmis ?? false,
         linkit: vaihe?.linkit ?? [],
+        lahde: vaihe?.lahde ?? 'KAYTTAJA',
         alkuPvm: vaihe?.alkuPvm ?? '',
         loppuPvm: vaihe?.loppuPvm ?? '',
         osaamiset: vaihe?.osaamiset ?? [],
@@ -193,12 +163,10 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
                 cancelText={t('profile.paths.continue-editing')}
                 variant="destructive"
               >
-                {(showDialog: () => void) => (
-                  <Button label={t('cancel')} variant="white" onClick={showDialog} className="whitespace-nowrap" />
-                )}
+                {(showDialog: () => void) => <Button label={t('cancel')} variant="white" onClick={showDialog} />}
               </ConfirmDialog>
             ) : (
-              <Button label={t('cancel')} variant="white" onClick={() => close()} className="whitespace-nowrap" />
+              <Button label={t('cancel')} variant="white" onClick={() => close()} />
             )}
 
             {wizardStep === 0 && (
@@ -207,19 +175,14 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
                 variant="white"
                 disabled={!isValid}
                 onClick={nextStep}
-                className="whitespace-nowrap"
+                icon={<MdArrowForward size={24} />}
+                iconSide="right"
               />
             )}
             {wizardStep === 1 && (
               <>
-                <Button
-                  label={t('previous')}
-                  variant="white"
-                  disabled={false}
-                  onClick={previousStep}
-                  className="whitespace-nowrap"
-                />
-                <Button label={t('save')} variant="white" form={formId} className="whitespace-nowrap" />
+                <Button label={t('previous')} variant="white" disabled={false} onClick={previousStep} />
+                <Button label={t('save')} variant="white" form={formId} />
               </>
             )}
           </div>
@@ -229,4 +192,4 @@ const VaiheModal = ({ isOpen, onClose, vaiheIndex }: VaiheModalProps) => {
   );
 };
 
-export default VaiheModal;
+export default ManualVaiheModal;

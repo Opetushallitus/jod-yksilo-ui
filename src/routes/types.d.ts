@@ -4,7 +4,10 @@ export type Mahdollisuus =
   | components['schemas']['TyomahdollisuusDto']
   | components['schemas']['KoulutusmahdollisuusDto'];
 export type MahdollisuusTyyppi = 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
-export type TypedMahdollisuus = Mahdollisuus & { mahdollisuusTyyppi: MahdollisuusTyyppi };
+export type TypedMahdollisuus = Mahdollisuus & {
+  mahdollisuusTyyppi: MahdollisuusTyyppi;
+  osaamiset?: components['schemas']['OsaaminenDto'][];
+};
 
 export interface Kokemus {
   id?: string;

@@ -5,7 +5,7 @@ import React from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
-import { mapOsaaminenToUri, type VaiheForm } from '../utils';
+import { mapOsaaminenToUri, type VaiheForm } from '../../utils';
 
 const CompetencesStep = ({ vaiheIndex }: { vaiheIndex: number }) => {
   const [disabledOsaamiset, setDisabledOsaamiset] = React.useState<string[]>([]);
@@ -37,7 +37,7 @@ const CompetencesStep = ({ vaiheIndex }: { vaiheIndex: number }) => {
     const osaamisetInOtherVaiheet = vaiheet
       .filter((_, index) => index !== vaiheIndex)
       .flatMap((vaihe) => vaihe.osaamiset ?? [])
-      .map((osaaminen) => osaaminen.uri);
+      .map(mapOsaaminenToUri);
 
     const filteredProfiiliOsaamiset = osaamisetFromProfile
       .filter((osaaminen) => vaaditutOsaamiset.some((o) => o.uri === osaaminen.uri))
@@ -92,6 +92,7 @@ const CompetencesStep = ({ vaiheIndex }: { vaiheIndex: number }) => {
                   checked={isChecked(osaaminen.uri)}
                   ariaLabel={t('profile.paths.add-to-step')}
                   className="disabled:bg-inactive-gray"
+                  disabled={disabledOsaamiset.includes(osaaminen.uri)}
                   onChange={() => onOsaaminenChange(osaaminen.uri)}
                 />
               </td>

@@ -5,7 +5,8 @@ import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton'
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import VaiheCard from '@/routes/Profile/Path/VaiheCard';
-import VaiheModal from '@/routes/Profile/Path/modal/VaiheModal';
+import ManualVaiheModal from '@/routes/Profile/Path/modal/ManualVaiheModal/ManualVaiheModal';
+import ProposeVaiheModal from '@/routes/Profile/Path/modal/ProposeVaiheModal/ProposeVaiheModal';
 import { generateProfileLink, getTypeSlug } from '@/routes/Profile/utils';
 import { usePolutStore } from '@/stores/usePolutStore';
 import { getLocalizedText } from '@/utils';
@@ -56,7 +57,8 @@ const Path = () => {
   const [osaamisetFromVaiheetAndProfile, setOsaamisetFromVaiheetAndProfile] = React.useState<string[]>([]);
   const [percentage, setPercentage] = React.useState(0);
   const [vaiheIndex, setVaiheIndex] = React.useState<number>();
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [manualModalOpen, setManualModalOpen] = React.useState(false);
+  const [proposeModalOpen, setProposeModalOpen] = React.useState(false);
   const [allChecked, setAllChecked] = React.useState([...(polku?.osaamiset ?? []), ...osaamisetFromVaiheetAndProfile]);
   const [allDisabled, setAllDisabled] = React.useState(polku?.ignoredOsaamiset ?? []);
   const [disabledIgnores, setDisabledIgnores] = React.useState<string[]>([]);
@@ -108,12 +110,32 @@ const Path = () => {
 
   const [debouncedValue, , setDebouncedValue] = useDebounceState(methods.watch(), 1000);
 
+  const openVaiheModal = (vaihe: VaiheForm, index: number) => {
+    setVaiheIndex(index);
+    if (vaihe.lahde === 'EHDOTUS') {
+      setProposeModalOpen(true);
+    } else {
+      setManualModalOpen(true);
+    }
+  };
+
   const getFirstStep = () => ({
     label: '',
     circleComponent: 1,
     content: (
-      <div>
-        <Button variant="accent" label={t('profile.paths.add-phase-yourself')} onClick={() => openModal(0)} />
+      <div className="flex flex-row gap-3">
+        <Button
+          variant="accent"
+          label={t('profile.paths.propose-phase-to-me')}
+          onClick={() => openProposeModal(0)}
+          disabled={percentage === 100}
+        />
+        <Button
+          variant="accent"
+          label={t('profile.paths.add-phase-yourself')}
+          onClick={() => openManualModal(0)}
+          disabled={percentage === 100}
+        />
       </div>
     ),
   });
@@ -128,14 +150,20 @@ const Path = () => {
           vaihe={vaihe}
           totalSteps={vaaditutOsaamiset.length}
           setVaiheComplete={() => toggleVaiheCompleted(index)}
-          openVaiheModal={() => openModal(index)}
+          openVaiheModal={() => openVaiheModal(vaihe, index)}
         />
         {index === vaiheet.length - 1 && (
-          <div>
+          <div className="flex flex-row gap-3">
+            <Button
+              variant="accent"
+              label={t('profile.paths.propose-phase-to-me')}
+              onClick={() => openProposeModal(index + 1)}
+              disabled={percentage === 100}
+            />
             <Button
               variant="accent"
               label={t('profile.paths.add-phase-yourself')}
-              onClick={() => openModal(index + 1)}
+              onClick={() => openManualModal(index + 1)}
               disabled={percentage === 100}
             />
           </div>
@@ -306,16 +334,29 @@ const Path = () => {
     setSelectedOsaamiset(selectedOsaamisetValues);
   };
 
-  const openModal = (idx: number) => {
+  const openManualModal = (idx: number) => {
     setVaiheIndex(idx);
-    setModalOpen(true);
+    setManualModalOpen(true);
   };
 
-  const onCloseModal = async (isCancel: boolean) => {
+  const openProposeModal = (idx: number) => {
+    setVaiheIndex(idx);
+    setProposeModalOpen(true);
+  };
+
+  const onCloseManualModal = async (isCancel: boolean) => {
     if (!isCancel) {
       await revalidator.revalidate();
     }
-    setModalOpen(false);
+    setManualModalOpen(false);
+    setVaiheIndex(undefined);
+  };
+  const onCloseProposeModal = async (isCancel: boolean) => {
+    onCloseManualModal(isCancel);
+    if (!isCancel) {
+      await revalidator.revalidate();
+    }
+    setProposeModalOpen(false);
     setVaiheIndex(undefined);
   };
 
@@ -335,11 +376,18 @@ const Path = () => {
 
   return (
     <div>
-      {modalOpen && typeof vaiheIndex === 'number' && (
-        <VaiheModal
-          isOpen={modalOpen}
+      {manualModalOpen && typeof vaiheIndex === 'number' && (
+        <ManualVaiheModal
+          isOpen={manualModalOpen}
           vaiheIndex={vaiheIndex}
-          onClose={(isCancel) => void onCloseModal(isCancel ?? false)}
+          onClose={(isCancel) => void onCloseManualModal(isCancel ?? false)}
+        />
+      )}
+      {proposeModalOpen && typeof vaiheIndex === 'number' && (
+        <ProposeVaiheModal
+          isOpen={proposeModalOpen}
+          vaiheIndex={vaiheIndex}
+          onClose={(isCancel) => void onCloseProposeModal(isCancel ?? false)}
         />
       )}
       <FormProvider {...methods}>
