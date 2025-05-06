@@ -13,7 +13,7 @@ import { Footer, NavigationBar, SkipLink, useMediaQueries } from '@jod/design-sy
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdMenu } from 'react-icons/md';
-import { NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router';
+import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router';
 import { LogoutFormContext } from '.';
 
 const NavigationBarItem = (to: string, text: string) => ({
@@ -120,9 +120,9 @@ const Root = () => {
           userButtonComponent={<UserButton onLogout={logout} />}
           refs={{ langMenuButtonRef: langMenuButtonRef }}
           renderLink={({ to, className, children }) => (
-            <NavLink to={to} className={className}>
+            <Link to={to} className={className}>
               {children as React.ReactNode}
-            </NavLink>
+            </Link>
           )}
         />
         {error && <ErrorNote error={error} onCloseClick={clearErrorNote} />}
