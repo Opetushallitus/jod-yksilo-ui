@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { TypedMahdollisuus } from '@/routes/types';
 
 export const getTyoMahdollisuusDetails = async (ids: string[]) => {
   if (ids.length === 0) {
@@ -19,6 +20,12 @@ export const getTyoMahdollisuusDetails = async (ids: string[]) => {
   return [];
 };
 
+export const getTypedTyoMahdollisuusDetails = async (ids: string[]): Promise<TypedMahdollisuus[]> =>
+  (await getTyoMahdollisuusDetails(ids)).map((mahdollisuus) => ({
+    ...mahdollisuus,
+    mahdollisuusTyyppi: 'TYOMAHDOLLISUUS',
+  }));
+
 export const getKoulutusMahdollisuusDetails = async (ids: string[]) => {
   if (ids.length === 0) {
     return [];
@@ -36,3 +43,9 @@ export const getKoulutusMahdollisuusDetails = async (ids: string[]) => {
   }
   return [];
 };
+
+export const getTypedKoulutusMahdollisuusDetails = async (ids: string[]): Promise<TypedMahdollisuus[]> =>
+  (await getKoulutusMahdollisuusDetails(ids)).map((mahdollisuus) => ({
+    ...mahdollisuus,
+    mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS',
+  }));

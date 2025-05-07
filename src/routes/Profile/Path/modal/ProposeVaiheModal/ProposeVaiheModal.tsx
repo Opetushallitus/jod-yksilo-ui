@@ -185,27 +185,25 @@ const ProposeVaiheModal = ({ isOpen, onClose, vaiheIndex }: ProposeVaiheModalPro
                 iconSide="right"
               />
             )}
-            {wizardStep === 1 ||
-              (isEditMode && wizardStep === 0 && (
-                <>
-                  {!isEditMode && <Button label={t('previous')} variant="white" onClick={previousStep} />}
-                  <Button
-                    label={t('next')}
-                    variant="white"
-                    disabled={detailsStepHasErrors}
-                    onClick={nextStep}
-                    icon={<MdArrowForward size={24} />}
-                    iconSide="right"
-                  />
-                </>
-              ))}
-            {wizardStep === 2 ||
-              (isEditMode && wizardStep === 1 && (
-                <>
-                  <Button label={t('previous')} variant="white" onClick={previousStep} />
-                  <Button label={t('save')} variant="white" form={formId} />
-                </>
-              ))}
+            {((!isEditMode && wizardStep === 1) || (isEditMode && wizardStep === 0)) && (
+              <>
+                {!isEditMode && <Button label={t('previous')} variant="white" onClick={previousStep} />}
+                <Button
+                  label={t('next')}
+                  variant="white"
+                  disabled={detailsStepHasErrors}
+                  onClick={nextStep}
+                  icon={<MdArrowForward size={24} />}
+                  iconSide="right"
+                />
+              </>
+            )}
+            {((!isEditMode && wizardStep === 2) || (isEditMode && wizardStep === 1)) && (
+              <>
+                <Button label={t('previous')} variant="white" onClick={previousStep} />
+                <Button label={t('save')} variant="white" form={formId} />
+              </>
+            )}
           </div>
         }
       />
