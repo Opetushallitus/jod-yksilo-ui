@@ -1,11 +1,8 @@
-import { useActionBar } from '@/hooks/useActionBar';
 import { Button } from '@jod/design-system';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 const AccessibilityStatement = () => {
   const { t } = useTranslation();
-  const actionBar = useActionBar();
   const title = t('accessibility-statement');
 
   return (
@@ -19,13 +16,9 @@ const AccessibilityStatement = () => {
         imperdiet sed euismod nisi. Quis hendrerit dolor magna eget. Tortor at auctor urna nunc id cursus metus aliquam
         eleifend.
       </p>
-      {actionBar &&
-        createPortal(
-          <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button variant="white" label={`TODO: ${t('more-information')}`} />
-          </div>,
-          actionBar,
-        )}
+      <div className="flex flex-wrap gap-4">
+        <Button variant="white" label={`TODO: ${t('more-information')}`} />
+      </div>
     </>
   );
 };

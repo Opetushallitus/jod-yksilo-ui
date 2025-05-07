@@ -1,11 +1,8 @@
-import { useActionBar } from '@/hooks/useActionBar';
 import { Button } from '@jod/design-system';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 const CookiePolicy = () => {
   const { t, i18n } = useTranslation();
-  const actionBar = useActionBar();
   const title = t('cookie-policy');
   const updated = new Intl.DateTimeFormat(i18n.language).format(new Date('2024-03-27'));
 
@@ -65,15 +62,11 @@ const CookiePolicy = () => {
         Lectus sit amet est placerat in egestas erat imperdiet. Commodo viverra maecenas accumsan lacus vel facilisis
         volutpat est. Ac auctor augue mauris augue neque gravida in fermentum. Faucibus a pellentesque sit amet.
       </p>
-      {actionBar &&
-        createPortal(
-          <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button variant="white" label={`TODO: ${t('accept-preferences')}`} />
-            <Button variant="white" label={`TODO: ${t('edit')}`} />
-            <Button variant="white-delete" label={`TODO: ${t('remove-approval')}`} />
-          </div>,
-          actionBar,
-        )}
+      <div className="flex flex-wrap gap-4">
+        <Button variant="white" label={`TODO: ${t('accept-preferences')}`} />
+        <Button variant="white" label={`TODO: ${t('edit')}`} />
+        <Button variant="white-delete" label={`TODO: ${t('remove-approval')}`} />
+      </div>
     </>
   );
 };

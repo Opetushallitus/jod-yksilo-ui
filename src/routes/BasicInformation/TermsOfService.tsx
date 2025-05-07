@@ -1,11 +1,8 @@
-import { useActionBar } from '@/hooks/useActionBar';
 import { Button } from '@jod/design-system';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 const TermsOfService = () => {
   const { t } = useTranslation();
-  const actionBar = useActionBar();
   const title = t('terms-of-service');
 
   return (
@@ -21,14 +18,10 @@ const TermsOfService = () => {
         habitasse platea dictumst quisque sagittis purus sit. Ipsum dolor sit amet consectetur adipiscing elit ut.
         Fermentum dui faucibus in ornare quam. Varius quam quisque id diam vel.
       </p>
-      {actionBar &&
-        createPortal(
-          <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button variant="white" label={`TODO: ${t('accept')}`} />
-            <Button variant="white-delete" label={`TODO: ${t('remove-approval')}`} />
-          </div>,
-          actionBar,
-        )}
+      <div className="flex flex-wrap gap-4">
+        <Button variant="white" label={`TODO: ${t('accept')}`} />
+        <Button variant="white-delete" label={`TODO: ${t('remove-approval')}`} />
+      </div>
     </>
   );
 };

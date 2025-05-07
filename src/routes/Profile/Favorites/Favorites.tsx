@@ -1,7 +1,6 @@
 import { MainLayout, OpportunityCard, SimpleNavigationList } from '@/components';
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
-import { useActionBar } from '@/hooks/useActionBar';
 import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
 import { filterValues } from '@/routes/Tool/utils.ts';
 import { MahdollisuusTyyppi } from '@/routes/types';
@@ -9,7 +8,6 @@ import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
 import { Button, Modal, Pagination, useMediaQueries } from '@jod/design-system';
 import React from 'react';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { MdArrowForward } from 'react-icons/md';
 import { Link } from 'react-router';
@@ -51,7 +49,6 @@ const Favorites = () => {
   const title = t('profile.favorites.title');
   const jobFilterText = t('job-opportunities');
   const educationFilterText = t('education-opportunities');
-  const actionBar = useActionBar();
   const { sm } = useMediaQueries();
   const [showFilters, setShowFilters] = React.useState(false);
 
@@ -277,14 +274,10 @@ const Favorites = () => {
           type="button"
         />
       )}
-      {actionBar &&
-        createPortal(
-          <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button variant="white" label="TODO: Vertaile" />
-            <Button variant="white" label="TODO: Luo polku" />
-          </div>,
-          actionBar,
-        )}
+      <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
+        <Button variant="white" label="TODO: Vertaile" />
+        <Button variant="white" label="TODO: Luo polku" />
+      </div>
     </MainLayout>
   );
 };
