@@ -1,34 +1,14 @@
 /* eslint-disable sonarjs/no-clear-text-protocols */
 import { client } from '@/api/client';
-import { getKoulutusMahdollisuusDetails, getTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
+import { getTypedKoulutusMahdollisuusDetails } from '@/api/mahdollisuusService';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import i18n from '@/i18n/config';
-import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
+import { TypedMahdollisuus } from '@/routes/types';
 import { paginate, sortByProperty } from '@/utils';
 import { PageChangeDetails } from '@jod/design-system';
 import { create } from 'zustand/react';
-
-const filterEhdotukset = (
-  ehdotukset: components['schemas']['EhdotusDto'][],
-  filters: MahdollisuusTyyppi[],
-  excludedIds: string[] = [],
-) => {
-  const withoutExcluded = ehdotukset.filter((item) =>
-    item.mahdollisuusId ? !excludedIds.includes(item.mahdollisuusId) : true,
-  );
-
-  if (filters.includes('TYOMAHDOLLISUUS') && filters.includes('KOULUTUSMAHDOLLISUUS')) {
-    return withoutExcluded;
-  } else if (filters.includes('TYOMAHDOLLISUUS')) {
-    return withoutExcluded.filter((item) => item.ehdotusMetadata?.tyyppi === 'TYOMAHDOLLISUUS');
-  } else if (filters.includes('KOULUTUSMAHDOLLISUUS')) {
-    return withoutExcluded.filter((item) => item.ehdotusMetadata?.tyyppi === 'KOULUTUSMAHDOLLISUUS');
-  }
-  return [];
-};
-
 export interface EhdotetutVaiheetState {
   ehdotukset: components['schemas']['EhdotusDto'][];
   isLoading: boolean;
@@ -36,10 +16,8 @@ export interface EhdotetutVaiheetState {
   pageSize: number;
   totalItems: number;
   pageData: TypedMahdollisuus[];
-  filters: MahdollisuusTyyppi[];
   excludedIds: string[];
 
-  setFilters: (state: MahdollisuusTyyppi[]) => void;
   setTotalItems: (state: number) => void;
   setExcludedIds: (state: string[]) => void;
   setEhdotukset: (state: components['schemas']['EhdotusDto'][]) => void;
@@ -55,13 +33,11 @@ export const useEhdotetutVaiheetStore = create<EhdotetutVaiheetState>()((set, ge
   pageNr: 1,
   totalItems: 0,
   pageSize: DEFAULT_PAGE_SIZE,
-  filters: ['TYOMAHDOLLISUUS', 'KOULUTUSMAHDOLLISUUS'],
   pageData: [],
   excludedIds: [],
   setTotalItems: (state) => set({ totalItems: state }),
   setEhdotukset: (state) => set({ ehdotukset: state }),
   setPageData: (state) => set({ pageData: state }),
-  setFilters: (state) => set({ filters: state }),
   setExcludedIds: (state) => set({ excludedIds: state }),
   setIsLoading: (state) => set({ isLoading: state }),
   fetchEhdotukset: async (ids: string[]) => {
@@ -80,7 +56,7 @@ export const useEhdotetutVaiheetStore = create<EhdotetutVaiheetState>()((set, ge
     set({ isLoading: false });
   },
   fetchPage: async ({ page: requestedPage }: Pick<PageChangeDetails, 'page'>) => {
-    const { pageSize, ehdotukset, filters, excludedIds, pageData, pageNr } = get();
+    const { pageSize, ehdotukset, excludedIds, pageData, pageNr } = get();
     let safePageNr = requestedPage;
 
     // Do not fetch data for opportunities if there are no ehdotukset
@@ -89,7 +65,7 @@ export const useEhdotetutVaiheetStore = create<EhdotetutVaiheetState>()((set, ge
       return;
     }
 
-    const filteredEhdotukset = filterEhdotukset(ehdotukset, filters, excludedIds);
+    const filteredEhdotukset = ehdotukset.filter((e) => e.ehdotusMetadata?.tyyppi === 'KOULUTUSMAHDOLLISUUS');
     const totalPages = Math.ceil(filteredEhdotukset.length / pageSize);
 
     // If the page number is too high, set it to the last page
@@ -107,33 +83,11 @@ export const useEhdotetutVaiheetStore = create<EhdotetutVaiheetState>()((set, ge
       });
     }
     const paginated = paginate(filteredEhdotukset, safePageNr, pageSize);
-    const hasTyomahdollisuus = paginated.some((s) => s.ehdotusMetadata?.tyyppi === 'TYOMAHDOLLISUUS');
-    const hasKoulutusMahdollisuus = paginated.some((s) => s.ehdotusMetadata?.tyyppi === 'KOULUTUSMAHDOLLISUUS');
-
-    const tyoIds = paginated
-      .filter((s) => s.ehdotusMetadata?.tyyppi === 'TYOMAHDOLLISUUS')
-      .map((s) => s.mahdollisuusId ?? '')
-      .filter(Boolean);
-    const koulutusIds = paginated
-      .filter((s) => s.ehdotusMetadata?.tyyppi === 'KOULUTUSMAHDOLLISUUS')
-      .map((s) => s.mahdollisuusId ?? '')
-      .filter(Boolean);
+    const koulutusIds = paginated.map((s) => s.mahdollisuusId ?? '').filter(Boolean);
 
     set({ isLoading: true });
 
-    const [tyomahdollisuudet, koulutusmahdollisuudet] = await Promise.all([
-      hasTyomahdollisuus ? getTyoMahdollisuusDetails(tyoIds) : undefined,
-      hasKoulutusMahdollisuus ? getKoulutusMahdollisuusDetails(koulutusIds) : undefined,
-    ]);
-
-    const typedTyomahdollisuudet = (tyomahdollisuudet ?? []).map((m) => ({
-      ...m,
-      mahdollisuusTyyppi: 'TYOMAHDOLLISUUS',
-    }));
-    const typedKoulutusmahdollisuudet = (koulutusmahdollisuudet ?? []).map((m) => ({
-      ...m,
-      mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS',
-    }));
+    const typedKoulutusmahdollisuudet = await getTypedKoulutusMahdollisuusDetails(koulutusIds);
 
     const mockOsaamiset = await osaamiset.find([
       'http://data.europa.eu/esco/skill/089ddb19-1c7a-43ff-ba64-070f7ce4787a',
@@ -144,10 +98,10 @@ export const useEhdotetutVaiheetStore = create<EhdotetutVaiheetState>()((set, ge
     ]);
 
     set({
-      pageData: [...typedTyomahdollisuudet, ...typedKoulutusmahdollisuudet].map((m) => ({
+      pageData: typedKoulutusmahdollisuudet.map((m) => ({
         ...m,
         osaamiset: [...mockOsaamiset].sort(sortByProperty(`nimi.${i18n.language}`)),
-      })) as TypedMahdollisuus[],
+      })),
       pageNr: safePageNr,
       totalItems: filteredEhdotukset.length,
       isLoading: false,

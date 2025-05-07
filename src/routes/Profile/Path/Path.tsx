@@ -345,19 +345,22 @@ const Path = () => {
   };
 
   const onCloseManualModal = async (isCancel: boolean) => {
+    setManualModalOpen(false);
+    setVaiheIndex(undefined);
+
     if (!isCancel) {
       await revalidator.revalidate();
     }
-    setManualModalOpen(false);
-    setVaiheIndex(undefined);
   };
   const onCloseProposeModal = async (isCancel: boolean) => {
     onCloseManualModal(isCancel);
+
+    setProposeModalOpen(false);
+    setVaiheIndex(undefined);
+
     if (!isCancel) {
       await revalidator.revalidate();
     }
-    setProposeModalOpen(false);
-    setVaiheIndex(undefined);
   };
 
   const onSubmit: FormSubmitHandler<PolkuForm> = async ({ data }: { data: PolkuForm }) => {
