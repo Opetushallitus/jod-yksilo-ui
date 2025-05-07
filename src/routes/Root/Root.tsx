@@ -3,7 +3,6 @@ import { LanguageButton, UserButton } from '@/components';
 import { ErrorNote } from '@/components/ErrorNote';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
-import { ActionBarContext } from '@/hooks/useActionBar';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import i18n from '@/i18n/config';
@@ -56,7 +55,6 @@ const Root = () => {
   const langMenuRef = useMenuClickHandler(() => setLangMenuOpen(false), langMenuButtonRef);
 
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
-  const footerRef = React.useRef<HTMLDivElement>(null);
 
   const logout = () => {
     toolStore.reset();
@@ -129,12 +127,9 @@ const Root = () => {
       </header>
       <LogoutFormContext.Provider value={logoutForm.current}>
         <NavMenu open={navMenuOpen} onClose={() => setNavMenuOpen(false)} />
-        <ActionBarContext.Provider value={footerRef.current}>
-          <Outlet />
-        </ActionBarContext.Provider>
+        <Outlet />
       </LogoutFormContext.Provider>
       <Footer
-        ref={footerRef}
         items={footerItems}
         language={language}
         copyright={t('copyright')}

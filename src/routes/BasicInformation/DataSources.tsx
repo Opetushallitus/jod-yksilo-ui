@@ -1,11 +1,8 @@
-import { useActionBar } from '@/hooks/useActionBar';
 import { Button } from '@jod/design-system';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 const DataSources = () => {
   const { t } = useTranslation();
-  const actionBar = useActionBar();
   const title = t('data-sources');
 
   return (
@@ -19,13 +16,9 @@ const DataSources = () => {
         suspendisse sed nisi lacus sed viverra tellus. Sit amet tellus cras adipiscing enim eu turpis egestas. Etiam
         tempor orci eu lobortis elementum nibh tellus molestie. Egestas erat imperdiet sed euismod.
       </p>
-      {actionBar &&
-        createPortal(
-          <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button variant="white" label={`TODO: ${t('more-information')}`} />
-          </div>,
-          actionBar,
-        )}
+      <div className="flex flex-wrap gap-4">
+        <Button variant="white" label={`TODO: ${t('more-information')}`} />
+      </div>
     </>
   );
 };

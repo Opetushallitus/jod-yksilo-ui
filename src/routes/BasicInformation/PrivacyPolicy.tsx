@@ -1,11 +1,8 @@
-import { useActionBar } from '@/hooks/useActionBar';
 import { Button } from '@jod/design-system';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 const PrivacyPolicy = () => {
   const { t } = useTranslation();
-  const actionBar = useActionBar();
   const title = t('privacy-policy');
 
   return (
@@ -23,13 +20,9 @@ const PrivacyPolicy = () => {
         pellentesque habitant morbi tristique senectus et. Penatibus et magnis dis parturient montes nascetur ridiculus
         mus. Duis ultricies lacus sed turpis tincidunt id. At elementum eu facilisis sed odio.
       </p>
-      {actionBar &&
-        createPortal(
-          <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <Button variant="white" label={`TODO: ${t('more-information')}`} />
-          </div>,
-          actionBar,
-        )}
+      <div className="flex flex-wrap gap-4">
+        <Button variant="white" label={`TODO: ${t('more-information')}`} />
+      </div>
     </>
   );
 };
