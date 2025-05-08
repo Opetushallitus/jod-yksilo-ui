@@ -153,7 +153,7 @@ const Path = () => {
           openVaiheModal={() => openVaiheModal(vaihe, index)}
         />
         {index === vaiheet.length - 1 && (
-          <div className="flex flex-row gap-3">
+          <div className="flex flex-row gap-3 flex-wrap">
             <Button
               variant="accent"
               label={t('profile.paths.propose-phase-to-me')}
@@ -397,9 +397,9 @@ const Path = () => {
         <Form className="flex flex-col gap-5" id={formId} onSubmit={onSubmit}>
           <title>{title}</title>
           {/* Päämäärä */}
-          <div className="bg-bg-gray pt-7 flex flex-col gap-5 w-full max-w-[1090px] mx-auto">
+          <div className="bg-bg-gray pt-7 flex flex-col gap-5 w-full max-w-[1090px] mx-auto px-5">
             <div className="flex flex-row items-center gap-3 justify-between">
-              <h1 className="text-heading-1-mobile sm:text-heading-1">{title}</h1>
+              <h1 className="text-heading-1-mobile sm:text-heading-1 hyphens-auto">{title}</h1>
               <button
                 type="button"
                 onClick={closePolku}
@@ -445,7 +445,7 @@ const Path = () => {
             </div>
           </div>
           {/* Suunnitelma */}
-          <div className="flex flex-col bg-bg-gray-2 p-9">
+          <div className="flex flex-col bg-bg-gray-2 sm:p-9 p-5">
             <div className="w-full max-w-[1090px] mx-auto">
               <h2 className="text-heading-2 pb-7">{t('profile.paths.plan')}</h2>
               <div className="flex flex-col gap-5">
@@ -460,10 +460,10 @@ const Path = () => {
             </div>
           </div>
           {/* Osaamisen kehittyminen */}
-          <div className="flex flex-col bg-bg-gray pt-8 w-full max-w-[1090px] mx-auto">
+          <div className="flex flex-col bg-bg-gray pt-8 w-full max-w-[1090px] mx-auto px-5">
             <div className="flex flex-col w-full max-w-[1019px] mx-auto">
-              <div className="flex flex-row items-center gap-3">
-                <h2 className="text-heading-1">{t('profile.paths.skill-progress')}</h2>
+              <div className="flex flex-row items-center gap-3 flex-wrap">
+                <h2 className="text-heading-1 hyphens-auto">{t('profile.paths.skill-progress')}</h2>
                 <div className="grow text-body-lg">
                   ({allChecked.length}/
                   {t('count-competences', { count: vaaditutOsaamiset.length - ignoredOsaamisetValues.length })})
