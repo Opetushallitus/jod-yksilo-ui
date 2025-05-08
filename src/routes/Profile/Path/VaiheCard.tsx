@@ -33,12 +33,14 @@ const VaiheCard = ({ vaihe, totalSteps, setVaiheComplete, openVaiheModal }: Vaih
   return (
     <div className="shadow-border bg-white rounded-md flex flex-col gap-5 p-6 w-full">
       {/* Type & duration & actions */}
-      <div className="flex flex-row justify-between">
-        <div className="text-body-md font-semibold">
-          {t(`profile.paths.types.${vaihe.tyyppi}`)} - <span>{getVaiheDurationMessage()}</span>
+      <div className="flex flex-row justify-between flex-wrap gap-4">
+        <div className="text-body-md font-semibold flex-wrap flex gap-2">
+          <span>{t(`profile.paths.types.${vaihe.tyyppi}`)}</span>
+          <span>-</span>
+          <span>{getVaiheDurationMessage()}</span>
         </div>
         {/* Actions */}
-        <div className="flex flex-row justify-between gap-5">
+        <div className="flex flex-row justify-between gap-5 flex-wrap">
           <Checkbox
             name={vaihe.nimi[language]}
             value={vaihe.nimi[language]}
