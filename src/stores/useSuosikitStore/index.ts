@@ -12,15 +12,14 @@ interface FavoritesState {
   pageNr: number;
   pageSize: number;
   totalItems: number;
+  totalPages: number;
   pageData: TypedMahdollisuus[];
   filters: MahdollisuusTyyppi[];
   excludedIds: string[];
 
   setFilters: (state: MahdollisuusTyyppi[]) => void;
-  setTotalItems: (state: number) => void;
   setExcludedIds: (state: string[]) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
-  setPageData: (state: TypedMahdollisuus[]) => void;
   fetchSuosikit: () => Promise<void>;
   deleteSuosikki: (kohdeId: string) => Promise<void>;
   fetchPage: (details: PageChangeDetails) => Promise<void>;
@@ -48,13 +47,12 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
   suosikitLoading: false,
   pageNr: 1,
   totalItems: 0,
+  totalPages: 0,
   pageSize: DEFAULT_PAGE_SIZE,
   filters: ['TYOMAHDOLLISUUS', 'KOULUTUSMAHDOLLISUUS'],
   pageData: [],
   excludedIds: [],
-  setTotalItems: (state) => set({ totalItems: state }),
   setSuosikit: (state) => set({ suosikit: state }),
-  setPageData: (state) => set({ pageData: state }),
   setFilters: (state) => set({ filters: state }),
   setExcludedIds: (state) => set({ excludedIds: state }),
 
@@ -133,6 +131,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
         pageData: newPageData,
         pageNr: safePageNr,
         totalItems: filteredSuosikit.length,
+        totalPages: Math.ceil(filteredSuosikit.length / pageSize),
       });
     }
     const paginated = paginate(filteredSuosikit, safePageNr, pageSize);
@@ -177,6 +176,11 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
         suosikit.findIndex((item) => item.kohdeId === b.id) - suosikit.findIndex((item) => item.kohdeId === a.id),
     ) as TypedMahdollisuus[];
 
-    set({ pageData: sortedResultBySuosikkiOrder, pageNr: safePageNr, totalItems: filteredSuosikit.length });
+    set({
+      pageData: sortedResultBySuosikkiOrder,
+      pageNr: safePageNr,
+      totalItems: filteredSuosikit.length,
+      totalPages: Math.ceil(filteredSuosikit.length / pageSize),
+    });
   },
 }));
