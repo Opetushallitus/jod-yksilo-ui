@@ -27,20 +27,31 @@ const linkTextKeys = {
 };
 
 const Favorites = () => {
-  const { deleteSuosikki, filters, fetchPage, pageData, pageNr, pageSize, setFilters, suosikit, totalItems } =
-    useSuosikitStore(
-      useShallow((state) => ({
-        deleteSuosikki: state.deleteSuosikki,
-        filters: state.filters,
-        fetchPage: state.fetchPage,
-        pageData: state.pageData,
-        pageNr: state.pageNr,
-        pageSize: state.pageSize,
-        setFilters: state.setFilters,
-        suosikit: state.suosikit,
-        totalItems: state.totalItems,
-      })),
-    );
+  const {
+    deleteSuosikki,
+    filters,
+    fetchPage,
+    pageData,
+    pageNr,
+    pageSize,
+    setFilters,
+    suosikit,
+    totalItems,
+    totalPages,
+  } = useSuosikitStore(
+    useShallow((state) => ({
+      deleteSuosikki: state.deleteSuosikki,
+      fetchPage: state.fetchPage,
+      filters: state.filters,
+      pageData: state.pageData,
+      pageNr: state.pageNr,
+      pageSize: state.pageSize,
+      setFilters: state.setFilters,
+      suosikit: state.suosikit,
+      totalItems: state.totalItems,
+      totalPages: state.totalPages,
+    })),
+  );
   const {
     t,
     i18n: { language },
@@ -257,7 +268,7 @@ const Favorites = () => {
           );
         })}
       </div>
-      {getFavoriteCount() > 0 && (
+      {getFavoriteCount() > 0 && totalPages > 1 && (
         <Pagination
           currentPage={pageNr}
           onPageChange={(data) => {
