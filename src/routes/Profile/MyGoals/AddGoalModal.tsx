@@ -166,7 +166,7 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
                   <FilterButton
                     onClick={() => setFiltersOpen(!filtersOpen)}
                     label={t('do-filter')}
-                    breakpoint="lg"
+                    hideAfterBreakpoint="lg"
                     ref={filterMenuButtonRef}
                     inline
                   />
