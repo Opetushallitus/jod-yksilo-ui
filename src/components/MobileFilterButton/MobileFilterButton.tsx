@@ -4,13 +4,19 @@ import { MdTune } from 'react-icons/md';
 interface FilterButtonProps {
   onClick: () => void;
   label: string;
-  breakpoint?: keyof ReturnType<typeof useMediaQueries> | 'none';
+  hideAfterBreakpoint?: keyof ReturnType<typeof useMediaQueries> | 'none';
   inline?: boolean;
   ref?: React.RefObject<HTMLButtonElement | null>;
 }
-export const FilterButton = ({ onClick, label, breakpoint = 'sm', inline = false, ref }: FilterButtonProps) => {
+export const FilterButton = ({
+  onClick,
+  label,
+  hideAfterBreakpoint = 'sm',
+  inline = false,
+  ref,
+}: FilterButtonProps) => {
   const mediaQueries = useMediaQueries();
-  const shouldRender = breakpoint === 'none' || !mediaQueries[breakpoint];
+  const shouldRender = hideAfterBreakpoint === 'none' || !mediaQueries[hideAfterBreakpoint];
 
   if (!shouldRender) {
     return null;

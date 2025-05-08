@@ -60,7 +60,7 @@ const Favorites = () => {
   const title = t('profile.favorites.title');
   const jobFilterText = t('job-opportunities');
   const educationFilterText = t('education-opportunities');
-  const { sm } = useMediaQueries();
+  const { lg } = useMediaQueries();
   const [showFilters, setShowFilters] = React.useState(false);
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -185,9 +185,11 @@ const Favorites = () => {
 
       <div className="flex flex-row justify-between">
         <h2 className="text-heading-2-mobile sm:text-heading-2">{subtitleToShow}</h2>
-        <div className="flex flex-row justify-end pb-6">
-          <FilterButton onClick={() => setShowFilters(true)} label={t('profile.favorites.show-filters')} />
-        </div>
+        <FilterButton
+          onClick={() => setShowFilters(true)}
+          label={t('profile.favorites.show-filters')}
+          hideAfterBreakpoint="lg"
+        />
       </div>
 
       {getFavoriteCount() > 0 ? (
@@ -209,7 +211,7 @@ const Favorites = () => {
       </div>
 
       <div>
-        {!sm && (
+        {!lg && (
           <Modal
             open={showFilters}
             onClose={() => setShowFilters(false)}

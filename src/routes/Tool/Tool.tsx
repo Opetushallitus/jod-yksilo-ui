@@ -346,7 +346,7 @@ const YourOpportunities = () => {
             label={t('do-filter')}
             onClick={() => setFiltersOpen(!filtersOpen)}
             ref={filterMenuButtonRef}
-            breakpoint="none"
+            hideAfterBreakpoint="none"
             inline
           />
         </div>

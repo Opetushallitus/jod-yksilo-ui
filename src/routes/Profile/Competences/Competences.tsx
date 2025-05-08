@@ -20,7 +20,7 @@ const Competences = () => {
   const [groupBy, setGroupBy] = React.useState<string>(GROUP_BY_SOURCE);
   const locale = i18n.language as 'fi' | 'sv';
   const [showFilters, setShowFilters] = React.useState(false);
-  const { sm } = useMediaQueries();
+  const { lg } = useMediaQueries();
 
   const { selectedFilters, setSelectedFilters, filterKeys } = useInitializeFilters(
     locale,
@@ -71,7 +71,7 @@ const Competences = () => {
       <h1 className="mb-5 text-heading-1">{title}</h1>
       <p className="mb-8 text-body-lg">{t('profile.competences.description')}</p>
       <div>
-        {!sm && (
+        {!lg && (
           <Modal
             open={showFilters}
             onClose={() => setShowFilters(false)}
@@ -104,7 +104,11 @@ const Competences = () => {
             osaamiset={sortedOsaamiset}
             isOsaaminenVisible={isOsaaminenVisible}
             mobileFilterOpenerComponent={
-              <FilterButton onClick={() => setShowFilters(true)} label={t('profile.competences.show-filters')} />
+              <FilterButton
+                onClick={() => setShowFilters(true)}
+                label={t('profile.competences.show-filters')}
+                hideAfterBreakpoint="lg"
+              />
             }
           />
         )}
