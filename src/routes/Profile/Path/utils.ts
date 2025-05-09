@@ -70,7 +70,7 @@ export const vaiheFormSchema = z.object({
   kuvaus: FORM_SCHEMA.kuvaus,
   lahde: z.enum(VAIHE_LAHTEET),
   linkit: FORM_SCHEMA.linkit,
-  loppuPvm: FORM_SCHEMA.pvm.nonempty(formErrorMessage.required()).or(z.literal('')),
+  loppuPvm: FORM_SCHEMA.pvm.nonempty(formErrorMessage.required()),
   nimi: FORM_SCHEMA.nimi,
   osaamiset: FORM_SCHEMA.osaamiset,
   tyyppi: z.enum(VAIHE_TYYPIT),

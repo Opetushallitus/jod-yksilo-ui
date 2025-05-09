@@ -16,6 +16,9 @@ const DurationFormSection = () => {
   // For triggering "date-range" error when "alkuPvm" is set after "loppuPvm"
   const alkuPvm = useWatch({ control, name: `alkuPvm` });
   React.useEffect(() => {
+    if (!alkuPvm) {
+      return;
+    }
     void trigger(`loppuPvm`);
   }, [alkuPvm, trigger]);
 

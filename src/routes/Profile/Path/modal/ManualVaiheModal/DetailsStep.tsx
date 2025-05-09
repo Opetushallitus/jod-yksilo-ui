@@ -2,7 +2,6 @@ import { FormError } from '@/components';
 import DurationFormSection from '@/routes/Profile/Path/components/DurationFormSection';
 import LinksFormSection from '@/routes/Profile/Path/components/LinksFormSection';
 import { Combobox, InputField, Textarea } from '@jod/design-system';
-import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { VaiheTyyppi, type VaiheForm } from '../../utils';
@@ -11,19 +10,12 @@ const DetailsStep = ({ vaiheIndex }: { vaiheIndex: number }) => {
   const {
     register,
     control,
-    trigger,
     formState: { errors },
   } = useFormContext<VaiheForm>();
   const {
     t,
     i18n: { language },
   } = useTranslation();
-
-  // For triggering "date-range" error when "alkuPvm" is set after "loppuPvm"
-  const alkuPvm = useWatch({ control, name: `alkuPvm` });
-  React.useEffect(() => {
-    void trigger(`loppuPvm`);
-  }, [alkuPvm, trigger]);
 
   const type = useWatch({ control, name: `tyyppi`, defaultValue: 'KOULUTUS' });
   const labelPrefix = type === 'KOULUTUS' ? t('profile.paths.of-education') : t('profile.paths.of-work');
