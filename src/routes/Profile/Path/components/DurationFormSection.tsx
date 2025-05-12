@@ -28,7 +28,7 @@ const DurationFormSection = () => {
 
   return (
     <div className="flex flex-row gap-5">
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 flex-1">
         <Controller
           control={control}
           render={({ field }) => (
@@ -43,7 +43,7 @@ const DurationFormSection = () => {
         />
         <FormError name="alkuPvm" errors={errors} />
       </div>
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 flex-1">
         <Controller
           control={control}
           render={({ field }) => (
