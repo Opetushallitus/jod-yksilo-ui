@@ -119,7 +119,7 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
       const previousExcludedIds = [...excludedIds];
 
       if (previousExcludedIds.length !== newExcludeIds.length) {
-        setExcludedIds(paamaarat.map((pm) => pm.mahdollisuusId));
+        setExcludedIds(newExcludeIds);
         await fetchSuosikit();
       }
       await fetchPage({ page: 1, pageSize });
