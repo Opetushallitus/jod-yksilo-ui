@@ -3,6 +3,7 @@ import { langLabels, supportedLanguageCodes } from '@/i18n/config';
 import { ExternalLinkSection, LinkComponent, NavigationMenu } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { RxExternalLink } from 'react-icons/rx';
 import { Link } from 'react-router';
 import { useMenuRoutes } from './menuRoutes';
 
@@ -76,6 +77,26 @@ export const NavMenu = ({ open, onClose }: { open: boolean; onClose: () => void 
       selectedLanguage={language}
       languageSelectionItems={languageSelectionItems}
       externalLinkSections={externalLinkSections}
+      extraSection={
+        <div className="flex flex-col">
+          <span className="text-body-sm mb-5 mt-2 flex">{t('navigation.extra.title')}</span>
+          <a
+            href={t('navigation.extra.urataidot.url', { language })}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pl-6 pr-3 flex flex-row flex-1 space-between group focus:outline-accent"
+          >
+            <div className="flex flex-col flex-1 gap-3 py-3">
+              <div className="flex flex-row">
+                <span className="flex flex-1 group-hover:underline text-button-md">
+                  {t('navigation.extra.urataidot.label')}
+                </span>
+                <RxExternalLink size={24} role="presentation" />
+              </div>
+            </div>
+          </a>
+        </div>
+      }
     />
   );
 };

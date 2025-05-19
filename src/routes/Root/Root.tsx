@@ -5,7 +5,6 @@ import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
-import i18n from '@/i18n/config';
 import { useErrorNoteStore } from '@/stores/useErrorNoteStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { Footer, NavigationBar, SkipLink, useMediaQueries } from '@jod/design-system';
@@ -79,12 +78,11 @@ const Root = () => {
   };
 
   React.useEffect(() => {
-    document.documentElement.setAttribute('lang', i18n.language);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.language]);
+    document.documentElement.setAttribute('lang', language);
+  }, [language]);
 
   return (
-    <div className="bg-bg-gray">
+    <div className="flex flex-col min-h-screen bg-bg-gray">
       <link rel="manifest" href={`/yksilo/manifest-${language}.json`} crossOrigin="use-credentials" />
       <header role="banner" className="sticky top-0 z-30 print:hidden">
         <SkipLink hash="#jod-main" label={t('skiplinks.main')} />

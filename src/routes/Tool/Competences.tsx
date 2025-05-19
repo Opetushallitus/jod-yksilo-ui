@@ -288,7 +288,7 @@ const Competences = () => {
             title={t('tool.tools.something-else')}
           />
           <HelpingToolExternalLinkItem
-            href={`/urataidot/${lng}?yksilo=`}
+            href={`/urataidot/${lng}`}
             icon={<MdOutlineSchool size={24} color="#00818A" />}
             title={t('tool.tools.career-skills-self-assessment-tool')}
           />
