@@ -394,6 +394,13 @@
         "url": "/tietopalvelu/fi"
       },
       "title": "Osaamispolun sisältökokonaisuudet"
+    },
+    "extra": {
+      "title": "Tukea pohdintaan",
+      "urataidot": {
+        "label": "Urataitojen itsearviointi",
+        "url": "/urataidot/{{language}}"
+      }
     }
   },
   "next": "Seuraava",

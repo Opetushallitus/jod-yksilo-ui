@@ -16,7 +16,7 @@ export default [
     files: ['**/*.ts', '**/*.tsx'],
   },
   {
-    ignores: ['**/dist', '**/eslint.config.js', 'src/api/schema.d.ts', '**/coverage', '**/postcss.config.js'],
+    ignores: ['**/dist', '**/eslint.config.js', 'src/api/schema.d.ts', '**/coverage'],
   },
 
   eslint.configs.recommended,
