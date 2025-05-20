@@ -399,7 +399,7 @@
       "title": "Tukea pohdintaan",
       "urataidot": {
         "label": "Urataitojen itsearviointi",
-        "url": "/urataidot/{{language}}"
+        "url": "/urataidot/fi"
       }
     }
   },
