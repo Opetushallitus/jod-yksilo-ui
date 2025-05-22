@@ -197,11 +197,11 @@ const Path = () => {
         new Set([
           ...selectedOsaamisetValues,
           ...osaamisetFromVaiheet.map(mapOsaaminenToUri),
-          // ...osaamisetFromProfile.map(mapOsaaminenToUri),
+          ...osaamisetFromProfile.map(mapOsaaminenToUri),
         ]),
       ),
     );
-  }, [osaamisetFromVaiheet, selectedOsaamisetValues]);
+  }, [osaamisetFromProfile, osaamisetFromVaiheet, selectedOsaamisetValues]);
 
   /*
     Disabled osaamiset includes osaamiset that:
@@ -212,8 +212,12 @@ const Path = () => {
     If user has selected osaaminen manually, it should not be disabled
   */
   React.useEffect(() => {
-    setAllDisabled([...ignoredOsaamisetValues, ...osaamisetFromVaiheet.map(mapOsaaminenToUri)]);
-  }, [ignoredOsaamisetValues, osaamisetFromVaiheet]);
+    setAllDisabled([
+      ...ignoredOsaamisetValues,
+      ...osaamisetFromVaiheet.map(mapOsaaminenToUri),
+      ...osaamisetFromProfile.map(mapOsaaminenToUri),
+    ]);
+  }, [ignoredOsaamisetValues, osaamisetFromProfile, osaamisetFromVaiheet]);
 
   /*
     Disabled ignores (Älä huomioi) includes osaamiset that:
@@ -221,8 +225,11 @@ const Path = () => {
       - Come from users profile
   */
   React.useEffect(() => {
-    setDisabledIgnores([...osaamisetFromVaiheet.map(mapOsaaminenToUri)]);
-  }, [osaamisetFromVaiheet]);
+    setDisabledIgnores([
+      ...osaamisetFromVaiheet.map(mapOsaaminenToUri),
+      ...osaamisetFromProfile.map(mapOsaaminenToUri),
+    ]);
+  }, [osaamisetFromProfile, osaamisetFromVaiheet]);
 
   const toggleVaiheCompleted = async (index: number) => {
     const vaihe = vaiheet[index];
@@ -239,7 +246,7 @@ const Path = () => {
         ...vaihe,
         valmis: !vaihe.valmis,
         linkit: vaihe.linkit?.map((link) => link.url) ?? [],
-        osaamiset: vaihe.osaamiset?.map((osaaminen) => osaaminen.uri) ?? [],
+        osaamiset: vaihe.osaamiset?.map(mapOsaaminenToUri) ?? [],
       },
     });
     await revalidator.revalidate();
@@ -495,9 +502,9 @@ const Path = () => {
                 <tbody>
                   {vaaditutOsaamiset.map((osaaminen, i) => {
                     const name = getLocalizedText(osaaminen.nimi);
-                    const uri = osaaminen.uri;
+                    const { uri } = osaaminen;
                     return (
-                      <tr key={osaaminen.uri} className={i % 2 !== 0 ? 'bg-white bg-opacity-60' : 'bg-bg-gray-2'}>
+                      <tr key={uri} className="even:bg-white even:bg-opacity-60 odd:bg-bg-gray-2">
                         <td className="p-3 font-arial first-letter:capitalize text-body-md">{name}</td>
                         <td className="text-center">
                           <Controller
@@ -507,15 +514,16 @@ const Path = () => {
                               <Checkbox
                                 {...field}
                                 name={name}
-                                value={osaaminen.uri}
+                                value={uri}
                                 variant="bordered"
                                 disabled={allDisabled.includes(uri)}
                                 checked={
-                                  osaamisetArray.fields.some((osaaminen) => osaaminen.uri === uri) ||
+                                  osaamisetArray.fields.some((o) => o.uri === uri) ||
+                                  osaamisetFromProfile.some((o) => o.uri === uri) ||
                                   allDisabled.includes(uri)
                                 }
                                 label={
-                                  osaamisetFromVaiheet.map((o) => o.uri).includes(uri)
+                                  osaamisetFromVaiheet.map(mapOsaaminenToUri).includes(uri)
                                     ? t('profile.paths.added-to-path')
                                     : t('profile.paths.has-competence')
                                 }
@@ -551,7 +559,7 @@ const Path = () => {
             <DeletePolkuButton
               paamaaraId={paamaaraId}
               suunnitelmaId={suunnitelmaId}
-              onDelete={() => closePolku()}
+              onDelete={closePolku}
               className="my-9"
             />
           </div>
