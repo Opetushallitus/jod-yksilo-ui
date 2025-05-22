@@ -1,5 +1,5 @@
 import { client } from '@/api/client';
-import { getKoulutusMahdollisuusDetails, getTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
+import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import { components } from '@/api/schema';
 import { TypedMahdollisuus } from '@/routes/types';
 import { usePaamaaratStore } from '@/stores/usePaamaratStore';
@@ -17,19 +17,11 @@ export default (async ({ request }) => {
   const mapToIds = (pm: components['schemas']['PaamaaraDto']) => pm.mahdollisuusId;
 
   if (tyoPaamaarat.length > 0) {
-    tyomahdollisuudetDetails = (await getTyoMahdollisuusDetails(tyoPaamaarat.map(mapToIds))).map((item) => ({
-      ...item,
-      mahdollisuusTyyppi: 'TYOMAHDOLLISUUS',
-    }));
+    tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(tyoPaamaarat.map(mapToIds));
   }
 
   if (koulutusPaamarat.length > 0) {
-    koulutusMahdollisuudetDetails = (await getKoulutusMahdollisuusDetails(koulutusPaamarat.map(mapToIds))).map(
-      (item) => ({
-        ...item,
-        mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS',
-      }),
-    );
+    koulutusMahdollisuudetDetails = await getTypedKoulutusMahdollisuusDetails(koulutusPaamarat.map(mapToIds));
   }
 
   const mahdollisuusDetails: TypedMahdollisuus[] = [...tyomahdollisuudetDetails, ...koulutusMahdollisuudetDetails];
