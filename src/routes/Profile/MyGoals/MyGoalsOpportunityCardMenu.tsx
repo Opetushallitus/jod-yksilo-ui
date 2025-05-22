@@ -54,6 +54,12 @@ const MyGoalsOpportunityCardMenu = ({
     })),
   );
 
+  const onDeletePaamaara = async (id: string) => {
+    const suosikkiId = paamaarat.find((paamaara) => paamaara.id === id)?.mahdollisuusId;
+    await deletePaamaara(id);
+    setExcludedIds(excludedIds.filter((excludedId) => (suosikkiId ? excludedId !== suosikkiId : true)));
+  };
+
   const insertPaamaara = async (tyyppi: PaamaaraTyyppi) => {
     const newPaamaara = {
       tyyppi,
@@ -133,7 +139,7 @@ const MyGoalsOpportunityCardMenu = ({
         {!!paamaaraId && (
           <ConfirmDialog
             title={t('profile.my-goals.delete-goal')}
-            onConfirm={() => deletePaamaara(paamaaraId)}
+            onConfirm={() => onDeletePaamaara(paamaaraId)}
             confirmText={t('delete')}
             cancelText={t('cancel')}
             variant="destructive"
