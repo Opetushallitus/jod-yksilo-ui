@@ -43,7 +43,10 @@ const MyGoals = () => {
   } = useTranslation();
   const title = t('profile.my-goals.title');
   const [addModalOpen, setAddModalOpen] = React.useState(false);
-  const suosikitIsEmpty = useSuosikitStore((state) => state.suosikit).length === 0;
+  const suosikitIsEmpty = useSuosikitStore(
+    (state) => state.suosikit.filter((s) => !state.excludedIds.includes(s.kohdeId)).length === 0,
+  );
+
   const paamaarat = usePaamaaratStore((state) => state.paamaarat);
 
   const { pitkanAikavalinTavoite, lyhyenAikavalinTavoite, muutTavoitteet } = React.useMemo(() => {
