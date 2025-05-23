@@ -95,7 +95,7 @@ const Home = () => {
     [data, language, t],
   );
   const infoSlug = t('slugs.basic-information');
-  const toolLink = `/${language}/${t('slugs.tool.index')}/${t('slugs.tool.goals')}`;
+  const toolLink = `/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`;
   const placeholderLink = location.href;
 
   return (

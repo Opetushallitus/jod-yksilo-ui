@@ -1,14 +1,14 @@
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
-import { components } from '@/api/schema';
-import { ESCO_SKILL_PREFIX, OSAAMINEN_COLOR_MAP } from '@/constants';
+import type { components } from '@/api/schema';
+import AddedTags from '@/components/OsaamisSuosittelija/AddedTags';
+import { ESCO_SKILL_PREFIX, LIMITS, OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
-import { getLocalizedText, removeDuplicates } from '@/utils';
-import { Tag, Textarea, useMediaQueries } from '@jod/design-system';
+import type { OsaaminenLahdeTyyppi } from '@/routes/types';
+import { getLocalizedText } from '@/utils';
+import { Tag, Textarea } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
-export type OsaaminenLahdeTyyppi = components['schemas']['OsaamisenLahdeDto']['tyyppi'] | 'KIINNOSTUS' | 'KARTOITETTU';
 export interface Osaaminen {
   id: string;
   nimi: components['schemas']['LokalisoituTeksti'];
@@ -28,54 +28,32 @@ interface OsaamisSuosittelijaProps {
   value?: OsaaminenValue[];
   /** Type of the source */
   sourceType?: Osaaminen['tyyppi'];
-  /** Should display skills by categories. False by default. */
-  categorized?: boolean;
   /** Mode that tells which translations to use and what color to use for tags */
   mode?: OsaamisSuosittelijaMode;
   /** Additional class name */
   className?: string;
   /** Placeholder text for the textarea */
   placeholder?: string;
+  /** Should the selected competences be displayed */
+  hideSelected?: boolean;
+  /** Should the text area be displayed */
+  hideTextAreaLabel?: boolean;
 }
-
-type CategorizedValue = Record<OsaaminenLahdeTyyppi, OsaaminenValue[]>;
 
 export const OsaamisSuosittelija = ({
   value = [],
   onChange,
   sourceType = 'KARTOITETTU',
-  categorized = false,
   mode = 'osaamiset',
   className = '',
   placeholder,
+  hideSelected = false,
+  hideTextAreaLabel = false,
 }: OsaamisSuosittelijaProps) => {
   const { i18n, t } = useTranslation();
-  const { sm } = useMediaQueries();
   const [debouncedTaitosi, taitosi, setTaitosi] = useDebounceState('', 500);
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
-  const [categorizedValue, setCategorizedValue] = React.useState<CategorizedValue>({
-    MUU_OSAAMINEN: [],
-    KOULUTUS: [],
-    TOIMENKUVA: [],
-    PATEVYYS: [],
-    KIINNOSTUS: [],
-    KARTOITETTU: [],
-  });
-  const categoryOrder = ['KARTOITETTU', 'MUU_OSAAMINEN', 'TOIMENKUVA', 'KOULUTUS', 'PATEVYYS', 'KIINNOSTUS'] as const;
-  const sortCategories = (a: OsaaminenLahdeTyyppi, b: OsaaminenLahdeTyyppi) =>
-    categoryOrder.indexOf(a) - categoryOrder.indexOf(b);
-
-  React.useEffect(() => {
-    setCategorizedValue({
-      KARTOITETTU: value.filter((val) => val.tyyppi === 'KARTOITETTU'),
-      MUU_OSAAMINEN: value.filter((val) => val.tyyppi === 'MUU_OSAAMINEN'),
-      PATEVYYS: value.filter((val) => val.tyyppi === 'PATEVYYS'),
-      KOULUTUS: value.filter((val) => val.tyyppi === 'KOULUTUS'),
-      TOIMENKUVA: value.filter((val) => val.tyyppi === 'TOIMENKUVA'),
-      KIINNOSTUS: value.filter((val) => val.tyyppi === 'KIINNOSTUS'),
-    });
-  }, [value]);
 
   const abortController = React.useRef<AbortController | null>(null);
 
@@ -126,21 +104,6 @@ export const OsaamisSuosittelija = ({
     ]);
   }, [ehdotetutOsaamiset, value]);
 
-  const getTag = (osaaminen: OsaaminenValue) => (
-    <Tag
-      key={osaaminen.id}
-      label={getLocalizedText(osaaminen.nimi)}
-      title={getLocalizedText(osaaminen.kuvaus)}
-      sourceType={
-        mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[osaaminen.tyyppi ?? sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
-      }
-      onClick={() => {
-        onChange(value.filter((selectedValue) => selectedValue.id !== osaaminen.id));
-      }}
-      variant="added"
-    />
-  );
-
   const textareaPlaceholder = () => {
     if (placeholder) {
       return placeholder;
@@ -151,34 +114,41 @@ export const OsaamisSuosittelija = ({
     }
   };
 
+  const removeOsaaminenById = (id: string) => () => {
+    onChange(value.filter((val) => val.id !== id));
+  };
+
+  const textAreaLabel = () => {
+    if (hideTextAreaLabel) {
+      return '';
+    }
+    if (mode === 'osaamiset') {
+      return t('osaamissuosittelija.competence.identify');
+    } else {
+      return t('osaamissuosittelija.interest.identify');
+    }
+  };
+
   return (
     <>
       <div className="mb-6">
         <Textarea
           placeholder={textareaPlaceholder()}
           value={taitosi}
+          hideLabel={hideTextAreaLabel as false} // Weird hack for TypeScript, label and hideLabel props don't play along well.
           onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setTaitosi(event.target.value)}
           rows={2}
-          maxLength={10000}
-          label={
-            mode === 'osaamiset'
-              ? t('osaamissuosittelija.competence.identify')
-              : t('osaamissuosittelija.interest.identify')
-          }
+          maxLength={LIMITS.TEXTAREA}
+          label={textAreaLabel()}
           className={className}
         />
       </div>
       <div className="mb-6 flex flex-col">
-        <div className={`${sm ? 'text-heading-4 font-arial' : 'text-heading-4-mobile'} font-bold mb-2`}>
+        <div className="sm:text-help sm:font-arial text-help-mobile mb-2">
           {mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}
         </div>
-        <div className={`${sm ? 'text-body-sm font-arial' : 'text-body-sm-mobile'} mb-3`}>
-          {mode === 'osaamiset' ? t('osaamissuosittelija.competence.add') : t('osaamissuosittelija.interest.add')}
-        </div>
-        <div
-          className={`mb-6 h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-white ${className}`.trim()}
-        >
-          <div className="flex flex-wrap gap-3">
+        <div className="mb-6 min-h-[144px] max-h-[332px] overflow-y-auto">
+          <div className="flex flex-wrap gap-3 p-5">
             {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen) => (
               <Tag
                 key={ehdotettuOsaaminen.id}
@@ -205,47 +175,25 @@ export const OsaamisSuosittelija = ({
             ))}
           </div>
         </div>
+        <div className="font-arial text-body-md">{t('osaamissuosittelija.add')}</div>
 
-        <div className={`${sm ? 'text-heading-4 font-arial' : 'text-heading-4-mobile'} font-bold mb-2`}>
-          {mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}
-        </div>
-        <div className={`${sm ? 'text-body-sm font-arial' : 'text-body-sm-mobile'} mb-3`}>
-          {mode === 'osaamiset' ? t('osaamissuosittelija.competence.remove') : t('osaamissuosittelija.interest.remove')}
-        </div>
-        <div
-          className={`min-h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-white ${className}`.trim()}
-        >
-          <div className="flex flex-wrap gap-3">
-            {categorized ? (
-              <div className="flex-col">
-                <div className="text-heading-4 uppercase mb-3">
-                  {mode === 'osaamiset' ? t('mapped-competences') : t('mapped-interests')}
-                </div>
-                <div className="flex flex-wrap gap-3 mb-4 min-h-[28px]">{categorizedValue.KARTOITETTU.map(getTag)}</div>
-
-                <div className="text-heading-4 uppercase mb-3">
-                  {mode === 'osaamiset' ? t('competences-from-profile') : t('interests-from-profile')}
-                </div>
-
-                <div className="min-h-[28px]">
-                  {(Object.entries(categorizedValue) as [OsaaminenLahdeTyyppi, OsaaminenValue[]][])
-                    .filter(([skillType, skills]) => skillType !== 'KARTOITETTU' && skills.length > 0)
-                    .sort(([a], [b]) => sortCategories(a, b))
-                    .map(([skillType, skills]) => (
-                      <React.Fragment key={skillType}>
-                        {mode === 'osaamiset' && (
-                          <div className="text-body-sm mb-3 uppercase">{t(`osaamissuosittelija.my-${skillType}`)}</div>
-                        )}
-                        <div className="flex flex-wrap gap-3 mb-3">{removeDuplicates(skills, 'id').map(getTag)}</div>
-                      </React.Fragment>
-                    ))}
-                </div>
+        {!hideSelected && (
+          <>
+            <div className="sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold mb-2 mt-6">
+              {mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}
+            </div>
+            <div className="sm:text-body-sm sm:font-arial text-body-sm-mobile mb-3">
+              {mode === 'osaamiset'
+                ? t('osaamissuosittelija.competence.remove')
+                : t('osaamissuosittelija.interest.remove')}
+            </div>
+            <div className={`min-h-[144px] overflow-y-auto ${className}`.trim()}>
+              <div className="flex flex-wrap gap-3">
+                <AddedTags osaamiset={value} onClick={removeOsaaminenById} lahdetyyppi="KIINNOSTUS" />
               </div>
-            ) : (
-              value.map(getTag)
-            )}
-          </div>
-        </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

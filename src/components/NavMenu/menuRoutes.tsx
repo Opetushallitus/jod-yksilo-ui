@@ -113,7 +113,7 @@ export const useMenuRoutes = (onClose: () => void) => {
         selected: pathname === `/${language}`,
       },
       {
-        label: t('tool.my-own-data.title'),
+        label: t('tool.title'),
         LinkComponent: ({ children, className }: LinkComponent) => (
           <NavLink to={`/${language}/${t('slugs.tool.index')}`} className={className} lang={language} onClick={onClose}>
             {children}

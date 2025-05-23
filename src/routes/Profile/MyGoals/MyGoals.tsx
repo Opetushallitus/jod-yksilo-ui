@@ -93,7 +93,7 @@ const MyGoals = () => {
         <div className="flex flex-col gap-3 my-3">
           <p className="text-body-lg">{t('profile.my-goals.no-favorites-selected')}</p>
           <Link
-            to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.goals')}`}
+            to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
             type="button"
             className="text-button-md hover:underline text-accent"
           >

@@ -8,6 +8,7 @@ export type TypedMahdollisuus = Mahdollisuus & {
   mahdollisuusTyyppi: MahdollisuusTyyppi;
   osaamiset?: components['schemas']['OsaaminenDto'][];
 };
+export type OsaaminenLahdeTyyppi = components['schemas']['OsaamisenLahdeDto']['tyyppi'] | 'KIINNOSTUS' | 'KARTOITETTU';
 
 export interface Kokemus {
   id?: string;

@@ -1,6 +1,6 @@
 /* eslint-disable sonarjs/no-clear-text-protocols */
-import { OsaaminenLahdeTyyppi } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 import i18n from '@/i18n/config';
+import type { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { Tag } from '@jod/design-system';
 import { z } from 'zod';
 
