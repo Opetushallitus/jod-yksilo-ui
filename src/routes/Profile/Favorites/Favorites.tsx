@@ -200,7 +200,7 @@ const Favorites = () => {
 
       <div className="mt-4 mb-4">
         <Link
-          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.goals')}?origin=favorites&filter=${getFilterValueForTools}`}
+          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}?origin=favorites&filter=${getFilterValueForTools}`}
           className="text-button-md hover:underline text-accent mt-4"
         >
           <div className="flex items-center gap-2">

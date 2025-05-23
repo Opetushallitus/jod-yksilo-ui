@@ -2,7 +2,8 @@ import { ProfileLink } from '@/routes/Profile/utils';
 import React from 'react';
 
 export interface HelpingToolLinkItemProps {
-  icon: React.ReactNode;
+  iconLeft?: React.ReactNode;
+  iconRight?: React.ReactNode;
   title: string;
 }
 
@@ -14,20 +15,26 @@ export interface HelpingToolExternalLinkItemProps extends HelpingToolLinkItemPro
   href: string;
 }
 
-export const HelpingToolProfileLinkItem = ({ profileLink, icon, title }: HelpingToolProfileLinkItemProps) => {
+export const HelpingToolProfileLinkItem = ({
+  profileLink,
+  iconLeft,
+  iconRight,
+  title,
+}: HelpingToolProfileLinkItemProps) => {
   return (
     <HelpingToolLinkItem
       /* eslint-disable-next-line react/no-unstable-nested-components */
       component={({ ...rootProps }) => (
         <profileLink.component to={profileLink.to} {...rootProps}></profileLink.component>
       )}
-      icon={icon}
+      iconLeft={iconLeft}
+      iconRight={iconRight}
       title={title}
     />
   );
 };
 
-export const HelpingToolExternalLinkItem = ({ href, icon, title }: HelpingToolExternalLinkItemProps) => {
+export const HelpingToolExternalLinkItem = ({ href, iconLeft, iconRight, title }: HelpingToolExternalLinkItemProps) => {
   return (
     <HelpingToolLinkItem
       /* eslint-disable-next-line react/no-unstable-nested-components */
@@ -36,7 +43,8 @@ export const HelpingToolExternalLinkItem = ({ href, icon, title }: HelpingToolEx
           {rootProps.children}
         </a>
       )}
-      icon={icon}
+      iconLeft={iconLeft}
+      iconRight={iconRight}
       title={title}
     />
   );
@@ -48,15 +56,17 @@ interface ComponentProp {
 
 export const HelpingToolLinkItem = ({
   component: Component,
-  icon,
+  iconLeft,
+  iconRight,
   title,
 }: HelpingToolLinkItemProps & ComponentProp) => {
   return (
     <li className="group">
       <Component>
         <div className="flex gap-x-3">
-          {icon}
-          <div className="text-heading-4 text-black group-hover:text-link group-hover:underline">{title}</div>
+          {iconLeft ?? null}
+          <div className="text-heading-4 text-accent group-hover:text-link group-hover:underline">{title}</div>
+          {iconRight ?? null}
         </div>
       </Component>
     </li>

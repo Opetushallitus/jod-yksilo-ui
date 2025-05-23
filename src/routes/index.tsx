@@ -10,14 +10,7 @@ import { MyGoals, goalsLoader } from '@/routes/Profile/MyGoals';
 import { Path, newPolkuLoader, polkuLoader } from '@/routes/Profile/Path';
 import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
-import {
-  Goals,
-  Restrictions,
-  Tool,
-  Competences as ToolCompetences,
-  Interests as ToolInterests,
-  toolLoader,
-} from '@/routes/Tool';
+import { Tool, Competences as ToolCompetences, Interests as ToolInterests, toolLoader } from '@/routes/Tool';
 import { RouteObject, replace } from 'react-router';
 import { withYksiloContext } from '../auth';
 import {
@@ -148,12 +141,7 @@ const toolRoutes = supportedLanguageCodes.map(
       children: [
         {
           index: true,
-          loader: () => replace(i18n.t('slugs.tool.goals', { lng })),
-        },
-        {
-          id: `{slugs.tool.goals}|${lng}`,
-          path: i18n.t('slugs.tool.goals', { lng }),
-          element: <Goals />,
+          loader: () => replace(i18n.t('slugs.tool.competences', { lng })),
         },
         {
           id: `{slugs.tool.competences}|${lng}`,
@@ -165,11 +153,6 @@ const toolRoutes = supportedLanguageCodes.map(
           id: `{slugs.tool.interests}|${lng}`,
           path: i18n.t('slugs.tool.interests', { lng }),
           element: <ToolInterests />,
-        },
-        {
-          id: `{slugs.tool.restrictions}|${lng}`,
-          path: i18n.t('slugs.tool.restrictions', { lng }),
-          element: <Restrictions />,
         },
       ],
     }) as RouteObject,
