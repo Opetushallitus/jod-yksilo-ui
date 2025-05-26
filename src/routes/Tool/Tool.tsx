@@ -1,21 +1,37 @@
 import { OpportunityCard } from '@/components';
-import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
-import { OpportunitiesFilter } from '@/routes/Tool';
+import { OpportunitiesSorting } from '@/routes/Tool';
 import AdditionalSupport from '@/routes/Tool/AdditionalSupport';
 import CategorizedCompetenceTagList from '@/routes/Tool/CategorizedCompetenceTagList';
 import ToolOpportunityCardActionMenu from '@/routes/Tool/ToolOpportunityCardActionMenu';
-import { MahdollisuusTyyppi } from '@/routes/types';
+import {
+  countFilteredEhdotukset,
+  filterValues,
+  type OpportunityFilterValue,
+  type OpportunitySortingValue,
+} from '@/routes/Tool/utils';
+import type { MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
-import { Button, PageChangeDetails, Pagination, Slider, Spinner, cx, useMediaQueries } from '@jod/design-system';
+import {
+  Button,
+  Checkbox,
+  cx,
+  IconButton,
+  PageChangeDetails,
+  Pagination,
+  Slider,
+  Spinner,
+  useMediaQueries,
+} from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdOutlineInterests, MdOutlineSchool } from 'react-icons/md';
+import { TbArrowsSort } from 'react-icons/tb';
 import { Outlet, useLoaderData, useLocation, useNavigate, useSearchParams } from 'react-router';
 import { useShallow } from 'zustand/shallow';
-import { ToolLoaderData } from './loader';
+import type { ToolLoaderData } from './loader';
 import { VirtualAssistant } from './VirtualAssistant';
 
 const MyOwnData = () => {
@@ -39,9 +55,9 @@ const MyOwnData = () => {
 
   React.useEffect(() => {
     if (searchParams.get('origin') === 'favorites') {
-      const filterParam = searchParams.get('filter');
+      const filterParam = searchParams.get('filter') as OpportunityFilterValue;
       if (filterParam) {
-        setFilter(filterParam);
+        setFilter([filterParam]);
       }
       const opportunitiesTitleElement = document.getElementById('opportunities-title');
       if (opportunitiesTitleElement) {
@@ -183,18 +199,20 @@ const YourOpportunitiesPagination = ({
   const {
     ehdotuksetPageNr,
     ehdotuksetPageSize,
+    ehdotuksetCount,
     fetchMahdollisuudetPage,
     mahdollisuudetLoading,
     mixedMahdollisuudet,
-    itemCount,
+    filter,
   } = useToolStore(
     useShallow((state) => ({
       ehdotuksetPageNr: state.ehdotuksetPageNr,
       ehdotuksetPageSize: state.ehdotuksetPageSize,
+      ehdotuksetCount: state.ehdotuksetCount,
       fetchMahdollisuudetPage: state.fetchMahdollisuudetPage,
       mahdollisuudetLoading: state.mahdollisuudetLoading,
       mixedMahdollisuudet: state.mixedMahdollisuudet,
-      itemCount: state.itemCount,
+      filter: state.filter,
     })),
   );
   const { sm } = useMediaQueries();
@@ -219,6 +237,8 @@ const YourOpportunitiesPagination = ({
     }
   };
 
+  const filters = typeof filter === 'string' ? [filter] : filter;
+
   return mixedMahdollisuudet.length > 0 ? (
     <div className={className}>
       <Pagination
@@ -231,7 +251,7 @@ const YourOpportunitiesPagination = ({
           nextTriggerLabel: t('pagination.next'),
           prevTriggerLabel: t('pagination.previous'),
         }}
-        totalItems={itemCount}
+        totalItems={countFilteredEhdotukset(filters, ehdotuksetCount)}
         onPageChange={(data) => void onPageChange(data)}
       />
     </div>
@@ -279,7 +299,7 @@ const YourOpportunitiesCard = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   return (
     <div
       id="tool-your-opportunities-card"
-      className="flex flex-col gap-5 p-5 sm:p-6 bg-secondary-1-25 rounded shadow-[0_2px_2px_2px_rgba(0,0,0,0.20)] z-10 mb-2"
+      className="flex flex-col gap-5 p-5 sm:p-6 bg-secondary-1-25 rounded z-10 mb-2"
     >
       <p className="text-button-sm">{t('tool.your-opportunities.card.description')}</p>
       <Slider
@@ -305,28 +325,34 @@ const YourOpportunitiesCard = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
 
 const ExploreOpportunities = () => {
   const { t, i18n } = useTranslation();
-  const { mixedMahdollisuudet, suosikit, mahdollisuusEhdotukset, ehdotuksetCount, filter, toggleSuosikki } =
-    useToolStore(
-      useShallow((state) => ({
-        ehdotuksetCount: state.ehdotuksetCount,
-        filter: state.filter,
-        mahdollisuusEhdotukset: state.mahdollisuusEhdotukset,
-        mixedMahdollisuudet: state.mixedMahdollisuudet,
-        suosikit: state.suosikit,
-        toggleSuosikki: state.toggleSuosikki,
-      })),
-    );
+  const {
+    mixedMahdollisuudet,
+    suosikit,
+    mahdollisuusEhdotukset,
+    ehdotuksetCount,
+    filter,
+    setFilter,
+    toggleSuosikki,
+    sorting,
+  } = useToolStore(
+    useShallow((state) => ({
+      ehdotuksetCount: state.ehdotuksetCount,
+      filter: state.filter,
+      sorting: state.sorting,
+      setFilter: state.setFilter,
+      mahdollisuusEhdotukset: state.mahdollisuusEhdotukset,
+      mixedMahdollisuudet: state.mixedMahdollisuudet,
+      suosikit: state.suosikit,
+      toggleSuosikki: state.toggleSuosikki,
+    })),
+  );
+
   const scrollRef = React.useRef<HTMLUListElement>(null);
   const { isLoggedIn } = useLoaderData() as ToolLoaderData;
   const [filtersOpen, setFiltersOpen] = React.useState(false);
   const filterMenuButtonRef = React.useRef<HTMLButtonElement>(null);
   const filterMenuRef = useMenuClickHandler(() => setFiltersOpen(false), filterMenuButtonRef);
   const isMouseInteraction = useInteractionMethod();
-
-  const count =
-    filter === 'ALL'
-      ? Object.keys(ehdotuksetCount).reduce((acc, key) => acc + ehdotuksetCount[key as MahdollisuusTyyppi], 0)
-      : ehdotuksetCount[filter];
 
   // Move focus to menu content when opened
   React.useEffect(() => {
@@ -345,31 +371,67 @@ const ExploreOpportunities = () => {
     }
   };
 
+  const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newFilter = event.target.value as MahdollisuusTyyppi;
+
+    if (filter.includes(newFilter)) {
+      setFilter(filter.filter((f) => f !== newFilter));
+    } else {
+      setFilter([...filter, newFilter]);
+    }
+  };
+
+  const getCheckboxLabel = (type: MahdollisuusTyyppi) =>
+    type === 'TYOMAHDOLLISUUS'
+      ? t('n-job-opportunities', { count: ehdotuksetCount.TYOMAHDOLLISUUS })
+      : t('n-education-opportunities', { count: ehdotuksetCount.KOULUTUSMAHDOLLISUUS });
+
+  const getSortingTranslationKey = (sorting: OpportunitySortingValue) =>
+    sorting === 'ALPHABET'
+      ? t('tool.your-opportunities.sorting.alphabetically')
+      : t('tool.your-opportunities.sorting.by-relevance');
+
   return (
     <main role="main" className="col-span-3 lg:col-span-1" id="jod-main">
-      <h2 id="opportunities-title" tabIndex={-1} className="text-heading-2-mobile sm:text-heading-2 scroll-mt-11">
+      <h2 id="opportunities-title" tabIndex={-1} className="text-heading-2-mobile sm:text-heading-2 scroll-mt-11 mb-5">
         {`2. ${t('tool.your-opportunities.title')}`}
       </h2>
-      <p className="text-body-md-mobile sm:text-body-md mb-7">{t('tool.your-opportunities.description')}</p>
 
       <YourOpportunitiesCard isLoggedIn={isLoggedIn} />
 
-      <div className="lg:sticky lg:top-11 lg:z-10 lg:h-11 relative">
+      <div className="lg:sticky lg:top-11 lg:z-10 lg:h-[186px] relative">
         <div className="flex gap-5 justify-between items-center py-5 bg-linear-to-b from-85% from-bg-gray lg:absolute lg:-left-4 lg:-right-4 lg:px-4">
-          <span className="font-arial text-form-label">
-            {t('tool.your-opportunities.n-opportunities-found', { count })}
-          </span>
-          <FilterButton
-            label={t('do-filter')}
-            onClick={() => setFiltersOpen(!filtersOpen)}
-            ref={filterMenuButtonRef}
-            hideAfterBreakpoint="none"
-            inline
-          />
+          <div className="flex flex-col gap-5 mb-5 items-start">
+            <span className="text-heading-4-mobile sm:text-heading-4">{t('show')}</span>
+            <Checkbox
+              ariaLabel={getCheckboxLabel('TYOMAHDOLLISUUS')}
+              checked={filter.includes('TYOMAHDOLLISUUS')}
+              label={getCheckboxLabel('TYOMAHDOLLISUUS')}
+              name={filterValues.TYOMAHDOLLISUUS}
+              onChange={onFilterChange}
+              value={filterValues.TYOMAHDOLLISUUS}
+              variant="bordered"
+            />
+            <Checkbox
+              ariaLabel={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
+              checked={filter.includes('KOULUTUSMAHDOLLISUUS')}
+              label={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
+              name={filterValues.KOULUTUSMAHDOLLISUUS}
+              onChange={onFilterChange}
+              value={filterValues.KOULUTUSMAHDOLLISUUS}
+              variant="bordered"
+            />
+            <IconButton
+              label={`${t('sort')} (${getSortingTranslationKey(sorting)})`}
+              icon={<TbArrowsSort size={18} />}
+              bgColor="white"
+              onClick={() => setFiltersOpen(!filtersOpen)}
+            />
+          </div>
         </div>
         {filtersOpen && (
           <div ref={filterMenuRef} onBlur={handleBlur}>
-            <OpportunitiesFilter />
+            <OpportunitiesSorting />
           </div>
         )}
       </div>

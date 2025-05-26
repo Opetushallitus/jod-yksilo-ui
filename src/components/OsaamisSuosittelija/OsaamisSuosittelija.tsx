@@ -144,7 +144,7 @@ export const OsaamisSuosittelija = ({
         />
       </div>
       <div className="mb-6 flex flex-col">
-        <div className="sm:text-help sm:font-arial text-help-mobile mb-2">
+        <div className="sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold mb-2">
           {mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}
         </div>
         <div className="mb-6 min-h-[144px] max-h-[332px] overflow-y-auto">
@@ -175,7 +175,9 @@ export const OsaamisSuosittelija = ({
             ))}
           </div>
         </div>
-        <div className="font-arial text-body-md">{t('osaamissuosittelija.add')}</div>
+        <div className="font-arial text-body-md">
+          {t(`osaamissuosittelija.${mode === 'osaamiset' ? 'competence' : 'interest'}.add`)}
+        </div>
 
         {!hideSelected && (
           <>
