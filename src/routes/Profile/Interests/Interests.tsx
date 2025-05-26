@@ -1,17 +1,27 @@
+import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { MainLayout } from '@/components';
-import { ESCO_OCCUPATION_PREFIX } from '@/constants';
+import { ESCO_OCCUPATION_PREFIX, formErrorMessage, LIMITS } from '@/constants';
 import EditKiinnostusModal from '@/routes/Profile/Interests/EditKiinnostusModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
-import { Button, Tag } from '@jod/design-system';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Tag, Textarea } from '@jod/design-system';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useRevalidator } from 'react-router';
+import { z } from 'zod';
 import { ProfileNavigationList } from '../components';
 
 const Interests = () => {
-  const { t, i18n } = useTranslation();
-  const data = useLoaderData() as components['schemas']['OsaaminenDto'][];
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+  const { kiinnostukset, vapaateksti } = useLoaderData() as {
+    kiinnostukset: components['schemas']['OsaaminenDto'][];
+    vapaateksti: components['schemas']['LokalisoituTeksti'];
+  };
   const title = t('profile.interests.title');
   const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
   const revalidator = useRevalidator();
@@ -21,10 +31,58 @@ const Interests = () => {
     revalidator.revalidate();
   };
 
-  const sortedData = React.useMemo(() => [...data].sort(sortByProperty(`nimi.${i18n.language}`)), [data, i18n]);
+  const sortedData = React.useMemo(
+    () => [...kiinnostukset].sort(sortByProperty(`nimi.${language}`)),
+    [kiinnostukset, language],
+  );
 
   const sortedSkills = sortedData.filter((value) => !value.uri.startsWith(ESCO_OCCUPATION_PREFIX));
   const sortedOccupations = sortedData.filter((value) => value.uri.startsWith(ESCO_OCCUPATION_PREFIX));
+
+  const ref = React.useRef<HTMLTextAreaElement>(null);
+  const {
+    register,
+    formState: { isDirty, errors },
+    reset,
+    setValue,
+    getValues,
+    watch,
+  } = useForm<components['schemas']['LokalisoituTeksti']>({
+    defaultValues: vapaateksti,
+    resolver: zodResolver(z.record(z.string().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA)))),
+  });
+  const fields = watch();
+
+  React.useEffect(() => {
+    const timer = setTimeout(async () => {
+      if (!isDirty || Object.keys(errors).length > 0) {
+        return;
+      }
+
+      await client.PUT('/api/profiili/kiinnostukset/vapaateksti', {
+        body: fields,
+      });
+
+      reset(fields);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [fields, errors, isDirty, reset]);
+
+  React.useEffect(() => {
+    setValue(language, vapaateksti?.[language] ?? '');
+    reset(getValues());
+  }, [language, vapaateksti, getValues, reset, setValue]);
+
+  React.useEffect(() => {
+    if (ref.current) {
+      ref.current.style.height = 'auto';
+      ref.current.style.overflow = 'hidden';
+      ref.current.style.height = `${ref.current.scrollHeight}px`;
+    }
+  }, [fields]);
 
   return (
     <MainLayout
@@ -74,7 +132,7 @@ const Interests = () => {
           </div>
         </>
       )}
-      <div className="flex pt-7">
+      <div className="flex pt-7 mb-8">
         <Button
           variant="white"
           label={t('profile.interests.edit-interests')}
@@ -83,6 +141,16 @@ const Interests = () => {
           }}
         />
       </div>
+      <Textarea
+        label={t('profile.interests.free-form-description-of-my-interests')}
+        help={t('profile.interests.free-form-interests-description-guidance')}
+        maxLength={LIMITS.TEXTAREA}
+        {...register(language)}
+        ref={(e) => {
+          register(language).ref(e);
+          ref.current = e;
+        }}
+      />
     </MainLayout>
   );
 };
