@@ -2,8 +2,8 @@ import Competences from './Competences';
 import Goals from './Goals';
 import Interests from './Interests';
 import loader from './loader';
-import OpportunitiesFilter from './OpportunitiesFilter';
+import OpportunitiesSorting from './OpportunitiesSorting';
 import Restrictions from './Restrictions';
 import Tool from './Tool';
 
-export { Competences, Goals, Interests, OpportunitiesFilter, Restrictions, Tool, loader as toolLoader };
+export { Competences, Goals, Interests, OpportunitiesSorting, Restrictions, Tool, loader as toolLoader };

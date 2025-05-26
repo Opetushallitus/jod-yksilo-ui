@@ -380,6 +380,8 @@
   },
   "my-competences-alphabetically": "Osaamiseni aakkosjärjestyksessä",
   "my-competences-by-sources": "Osaamiseni lähteiden mukaan",
+  "n-education-opportunities": "{{count}} koulutusmahdollisuutta",
+  "n-job-opportunities": "{{count}} työmahdollisuutta",
   "name": "Nimi",
   "navigation": {
     "external": {
@@ -431,12 +433,13 @@
   },
   "osaamispolku": "Osaamispolku",
   "osaamissuosittelija": {
-    "add": "Lisää osaaminen '+'-merkistä.",
     "competence": {
+      "add": "Lisää osaaminen '+'-merkistä.",
       "identify": "Tunnista osaamisia",
       "remove": "Poista osaaminen klikkaamalla rastia."
     },
     "interest": {
+      "add": "Lisää kiinnostus '+'-merkistä.",
       "identify": "Tunnista kiinnostuksia",
       "remove": "Poista kiinnostuksen kohde klikkaamalla rastia.",
       "textarea-placeholder": "Kirjoita tekstikenttään mikä sinua kiinnostaa"
@@ -685,6 +688,7 @@
   "search": "Haku",
   "select-language": "Valitse kieli",
   "share": "Jaa",
+  "show": "Näytä",
   "show-filters": "Näytä suodattimet",
   "skiplinks": {
     "main": "Siirry pääsisältöön"
@@ -743,7 +747,7 @@
       "who-provides-the-service": "kuka-palvelun-tarjoaa"
     }
   },
-  "sort": "Järjestele",
+  "sort": "Järjestä",
   "sort-all": "Järjestä (kaikki)",
   "started": "Alkoi",
   "terms-of-service": "Käyttöehdot",
@@ -758,7 +762,6 @@
   },
   "tool": {
     "description": "Alla on työkalut joiden avulla syötät tietojasi, joiden perusteella tarjoamme sinulle mahdollisuuksia oikealla.",
-    "remove-competence-help": "Poista osaaminen tai kiinnostus 'X'-merkistä.",
     "my-own-data": {
       "cancel-text": "Ei, peruuta",
       "competences": {
@@ -823,6 +826,7 @@
       },
       "title": "Kerro mitä osaat ja mikä sinua kiinnostaa"
     },
+    "remove-competence-help": "Poista osaaminen tai kiinnostus 'X'-merkistä.",
     "title": "Kartoita tilanteesi",
     "tools": {
       "career-skills-self-assessment-tool": "Urataitojen itsearviointityökalu",
@@ -849,7 +853,7 @@
       },
       "n-opportunities-found": "Löysimme {{count}} mahdollisuutta.",
       "sorting": {
-        "alphabetically": "Aakkosjärjestyksessä",
+        "alphabetically": "a-ö",
         "by-relevance": "Sopivimmat",
         "title": "Järjestele mahdollisuudet"
       },
