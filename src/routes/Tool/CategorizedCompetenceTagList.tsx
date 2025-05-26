@@ -29,7 +29,7 @@ const CompetenceExport = () => {
     const osaaminenApiCall = client.PUT('/api/profiili/muu-osaaminen', {
       body: [
         ...new Set([
-          ...((await client.GET('/api/profiili/muu-osaaminen')).data ?? []),
+          ...((await client.GET('/api/profiili/muu-osaaminen')).data?.muuOsaaminen ?? []),
           ...osaamiset.filter((o) => o.tyyppi === 'KARTOITETTU' || o.tyyppi === 'MUU_OSAAMINEN').map((o) => o.id),
         ]),
       ],
@@ -38,7 +38,7 @@ const CompetenceExport = () => {
     const kiinnostuksetApiCall = client.PUT('/api/profiili/kiinnostukset/osaamiset', {
       body: [
         ...new Set([
-          ...((await client.GET('/api/profiili/kiinnostukset/osaamiset')).data ?? []),
+          ...((await client.GET('/api/profiili/kiinnostukset/osaamiset')).data?.kiinnostukset ?? []),
           ...kiinnostukset.map((k) => k.id),
         ]),
       ],

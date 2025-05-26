@@ -169,6 +169,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/profiili/muu-osaaminen/vapaateksti': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put: operations['muuOsaaminenUpdateVapaateksti'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/koulutuskokonaisuudet/{id}': {
     parameters: {
       query?: never;
@@ -202,6 +218,22 @@ export interface paths {
     post?: never;
     /** Deletes a koulutus of the koulutuskokonaisuus. If the kokonaisuus becomes empty, it will be deleted. */
     delete: operations['koulutusDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/kiinnostukset/vapaateksti': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put: operations['kiinnostusUpdateVapaateksti'];
+    post?: never;
+    delete?: never;
     options?: never;
     head?: never;
     patch?: never;
@@ -864,12 +896,18 @@ export interface components {
       osuvuus: number;
     };
     LuoEhdotusDto: {
+      osaamiset?: string[];
+      osaamisetText?: string;
       /** Format: double */
       osaamisPainotus?: number;
-      osaamiset?: string[];
+      kiinnostukset?: string[];
+      kiinnostuksetText?: string;
       /** Format: double */
       kiinnostusPainotus?: number;
-      kiinnostukset?: string[];
+      /** Format: double */
+      escoListPainotus?: number;
+      /** Format: double */
+      openTextPainotus?: number;
     };
     EhdotusDto: {
       /** Format: uuid */
@@ -955,7 +993,7 @@ export interface components {
       alkuPvm?: string;
       /** Format: date */
       loppuPvm?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
+      nimi?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       osaamiset?: string[];
       /** @enum {string} */
@@ -965,7 +1003,7 @@ export interface components {
     KoulutusKokonaisuusExportDto: {
       /** Format: uuid */
       id?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
+      nimi?: components['schemas']['LokalisoituTeksti'];
       koulutukset?: components['schemas']['KoulutusExportDto'][];
     };
     PaamaaraExportDto: {
@@ -989,14 +1027,14 @@ export interface components {
       alkuPvm?: string;
       /** Format: date */
       loppuPvm?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
+      nimi?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       osaamiset?: string[];
     };
     PolunSuunnitelmaExportDto: {
       /** Format: uuid */
       id?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
+      nimi?: components['schemas']['LokalisoituTeksti'];
       vaiheet?: components['schemas']['PolunVaiheExportDto'][];
       osaamiset?: string[];
       ignoredOsaamiset?: string[];
@@ -1008,7 +1046,7 @@ export interface components {
       lahde?: 'EHDOTUS' | 'KAYTTAJA';
       /** @enum {string} */
       tyyppi?: 'KOULUTUS' | 'TYO';
-      nimi: components['schemas']['LokalisoituTeksti'];
+      nimi?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       linkit?: string[];
       /** Format: date */
@@ -1025,20 +1063,20 @@ export interface components {
       alkuPvm?: string;
       /** Format: date */
       loppuPvm?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
+      nimi?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       osaamiset?: string[];
     };
     ToimintoExportDto: {
       /** Format: uuid */
       id?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
+      nimi?: components['schemas']['LokalisoituTeksti'];
       patevyydet?: components['schemas']['PatevyysExportDto'][];
     };
     TyopaikkaExportDto: {
       /** Format: uuid */
       id?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
+      nimi?: components['schemas']['LokalisoituTeksti'];
       toimenkuvat?: components['schemas']['ToimenkuvaExportDto'][];
     };
     YksiloExportDto: {
@@ -1050,6 +1088,8 @@ export interface components {
       toiminnot?: components['schemas']['ToimintoExportDto'][];
       osaamisKiinnostukset?: string[];
       ammattiKiinnostukset?: string[];
+      muuOsaaminenVapaateksti?: components['schemas']['LokalisoituTeksti'];
+      osaamisKiinnostuksetVapaateksti?: components['schemas']['LokalisoituTeksti'];
       suosikit?: components['schemas']['YksilonSuosikkiExportDto'][];
       paamaarat?: components['schemas']['PaamaaraExportDto'][];
     };
@@ -1082,6 +1122,14 @@ export interface components {
       id?: string;
       osaaminen: components['schemas']['OsaaminenDto'];
       lahde: components['schemas']['OsaamisenLahdeDto'];
+    };
+    MuuOsaaminenDto: {
+      muuOsaaminen?: string[];
+      vapaateksti?: components['schemas']['LokalisoituTeksti'];
+    };
+    KiinnostuksetDto: {
+      kiinnostukset?: string[];
+      vapaateksti?: components['schemas']['LokalisoituTeksti'];
     };
     SivuDtoOsaaminenDto: {
       sisalto: components['schemas']['OsaaminenDto'][];
@@ -1663,7 +1711,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': string[];
+          'application/json': components['schemas']['MuuOsaaminenDto'];
         };
       };
     };
@@ -1678,6 +1726,28 @@ export interface operations {
     requestBody: {
       content: {
         'application/json': string[];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  muuOsaaminenUpdateVapaateksti: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['LokalisoituTeksti'];
       };
     };
     responses: {
@@ -1825,6 +1895,28 @@ export interface operations {
       };
     };
   };
+  kiinnostusUpdateVapaateksti: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['LokalisoituTeksti'];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   kiinnostusGetOsaamiset: {
     parameters: {
       query?: never;
@@ -1840,7 +1932,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': string[];
+          'application/json': components['schemas']['KiinnostuksetDto'];
         };
       };
     };

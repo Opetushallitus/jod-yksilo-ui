@@ -25,7 +25,7 @@ const Interests = () => {
   const importFromProfile = React.useCallback(async () => {
     const { data } = await client.GET('/api/profiili/kiinnostukset/osaamiset');
     const newKiinnostukset = [
-      ...(await osaamisetService.find(data)).map((k) => ({
+      ...(await osaamisetService.find(data?.kiinnostukset)).map((k) => ({
         id: k.uri,
         nimi: k.nimi,
         kuvaus: k.kuvaus,

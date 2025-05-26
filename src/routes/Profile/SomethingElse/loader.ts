@@ -4,8 +4,10 @@ import { components } from '@/api/schema';
 import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
-  return await client
-    .GET('/api/profiili/muu-osaaminen', { signal: request.signal })
-    .then((res) => res.data ?? [])
-    .then(osaamiset.find);
+  const { data } = await client.GET('/api/profiili/muu-osaaminen', { signal: request.signal });
+
+  return {
+    muuOsaaminen: await osaamiset.find(data?.muuOsaaminen),
+    vapaateksti: data?.vapaateksti,
+  };
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

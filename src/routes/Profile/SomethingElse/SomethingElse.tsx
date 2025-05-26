@@ -1,18 +1,30 @@
+import { client } from '@/api/client';
 import { OsaaminenDto } from '@/api/osaamiset';
+import { components } from '@/api/schema';
 import { MainLayout } from '@/components';
+import { formErrorMessage, LIMITS } from '@/constants';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
-import { Button, Tag } from '@jod/design-system';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Tag, Textarea } from '@jod/design-system';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { MdLightbulbOutline } from 'react-icons/md';
 import { useLoaderData, useRevalidator } from 'react-router';
+import { z } from 'zod';
 import { ProfileNavigationList } from '../components';
 
 const SomethingElse = () => {
-  const { t, i18n } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const title = t('profile.something-else.title');
-  const data = useLoaderData() as OsaaminenDto[];
+  const { muuOsaaminen, vapaateksti } = useLoaderData() as {
+    muuOsaaminen: OsaaminenDto[];
+    vapaateksti: components['schemas']['LokalisoituTeksti'];
+  };
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const revalidator = useRevalidator();
 
@@ -21,7 +33,55 @@ const SomethingElse = () => {
     revalidator.revalidate();
   };
 
-  const sortedData = React.useMemo(() => [...data].sort(sortByProperty(`nimi.${i18n.language}`)), [data, i18n]);
+  const sortedData = React.useMemo(
+    () => [...muuOsaaminen].sort(sortByProperty(`nimi.${language}`)),
+    [muuOsaaminen, language],
+  );
+
+  const ref = React.useRef<HTMLTextAreaElement>(null);
+  const {
+    register,
+    formState: { isDirty, errors },
+    reset,
+    getValues,
+    setValue,
+    watch,
+  } = useForm<components['schemas']['LokalisoituTeksti']>({
+    defaultValues: vapaateksti,
+    resolver: zodResolver(z.record(z.string().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA)))),
+  });
+  const fields = watch();
+
+  React.useEffect(() => {
+    const timer = setTimeout(async () => {
+      if (!isDirty || Object.keys(errors).length > 0) {
+        return;
+      }
+
+      await client.PUT('/api/profiili/muu-osaaminen/vapaateksti', {
+        body: fields,
+      });
+
+      reset(fields);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [fields, errors, isDirty, reset]);
+
+  React.useEffect(() => {
+    setValue(language, vapaateksti?.[language] ?? '');
+    reset(getValues());
+  }, [language, vapaateksti, getValues, reset, setValue]);
+
+  React.useEffect(() => {
+    if (ref.current) {
+      ref.current.style.height = 'auto';
+      ref.current.style.overflow = 'hidden';
+      ref.current.style.height = `${ref.current.scrollHeight}px`;
+    }
+  }, [fields]);
 
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
@@ -32,7 +92,7 @@ const SomethingElse = () => {
         {title}
       </h1>
       <p className="mb-8 text-body-lg">{t('profile.something-else.description')}</p>
-      {data.length > 0 && (
+      {muuOsaaminen.length > 0 && (
         <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
           {t('profile.something-else.my-other-comptetences')}
         </h2>
@@ -48,15 +108,25 @@ const SomethingElse = () => {
           />
         ))}
       </div>
-      <div className="flex pt-7">
+      <div className="flex pt-7 mb-8">
         <Button
           variant="white"
-          label={data.length > 0 ? t('profile.competences.edit') : t('profile.competences.add')}
+          label={muuOsaaminen.length > 0 ? t('profile.competences.edit') : t('profile.competences.add')}
           onClick={() => {
             setIsModalOpen(true);
           }}
         />
       </div>
+      <Textarea
+        label={t('profile.something-else.free-form-description-of-my-interests')}
+        help={t('profile.something-else.free-form-interests-description-guidance')}
+        maxLength={LIMITS.TEXTAREA}
+        {...register(language)}
+        ref={(e) => {
+          register(language).ref(e);
+          ref.current = e;
+        }}
+      />
     </MainLayout>
   );
 };

@@ -533,6 +533,8 @@
     "interests": {
       "description": "Löydät alta kaikki kiinnostuksen kohteesi, jotka olet kartoittanut itsellesi ja tallentanut ne profiiliisi. Kiinnostuksen kohteet ryhmitellään tyypin mukaan.",
       "edit-interests": "Muokkaa kiinnostuksen kohteita",
+      "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus kiinnostuksitani",
+      "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin kiinnostuksiasi. Jos käytät palvelua suomeksi kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.",
       "occupations-that-interest-me": "Ammatit, jotka kiinnostavat minua",
       "skills-that-interest-me": "Osaamiset, jotka kiinnostavat minua",
       "title": "Kiinnostuksen kohteeni",
@@ -654,6 +656,8 @@
     "something-else": {
       "description": "Löydät alta muut osaamisesi, joita olet kartoittanut esimerkiksi palvelun kartoitustyökaluilla ja tallentanut ne profiiliisi. Voit lisätä ja poistaa osaamisia Muokkaa osaamisia painikkeella.",
       "description-placeholder": "Kirjoita tähän osaamisesi",
+      "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus osaamisestani",
+      "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin osaamistasi. Jos käytät palvelua suomeksi kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.",
       "my-other-comptetences": "Osaamiseni",
       "title": "Muut osaamiseni"
     },
