@@ -9,8 +9,50 @@ import { removeDuplicates } from '@/utils';
 import { Accordion, Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { MdClose } from 'react-icons/md';
 import { useLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
+
+const freeFormTextExpandedLimit = 100;
+
+const FreeFormText = ({
+  title,
+  description,
+  className,
+  onChange,
+}: {
+  title: string;
+  description: string;
+  className: string;
+  onChange: () => void;
+}) => {
+  const { t } = useTranslation();
+  const [isExpanded, setIsExpanded] = React.useState(false);
+
+  return (
+    <div className={`flex flex-col gap-3 p-4 rounded border-2 ${className}`.trim()}>
+      <div className="flex justify-between">
+        <div className="font-arial text-help">{title}</div>
+        <button onClick={onChange} className="cursor-pointer">
+          <MdClose size={24} color="#333" />
+        </button>
+      </div>
+      <div>
+        {isExpanded || description.length <= freeFormTextExpandedLimit
+          ? description
+          : `${description.slice(0, freeFormTextExpandedLimit)}...`}
+      </div>
+      {description.length > freeFormTextExpandedLimit && (
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="text-left text-body-sm cursor-pointer text-accent"
+        >
+          {t(isExpanded ? 'show-less' : 'show-more')}
+        </button>
+      )}
+    </div>
+  );
+};
 
 const CompetenceExport = () => {
   const { t } = useTranslation();
@@ -137,12 +179,25 @@ const CategorizedCompetenceTagList = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { osaamiset, kiinnostukset, setOsaamiset, setKiinnostukset } = useToolStore(
+  const {
+    osaamiset,
+    osaamisetVapaateksti,
+    kiinnostukset,
+    kiinnostuksetVapaateksti,
+    setOsaamiset,
+    setOsaamisetVapaateksti,
+    setKiinnostukset,
+    setKiinnostuksetVapaateksti,
+  } = useToolStore(
     useShallow((state) => ({
       osaamiset: state.osaamiset,
+      osaamisetVapaateksti: state.osaamisetVapaateksti,
       kiinnostukset: state.kiinnostukset,
+      kiinnostuksetVapaateksti: state.kiinnostuksetVapaateksti,
       setOsaamiset: state.setOsaamiset,
+      setOsaamisetVapaateksti: state.setOsaamisetVapaateksti,
       setKiinnostukset: state.setKiinnostukset,
+      setKiinnostuksetVapaateksti: state.setKiinnostuksetVapaateksti,
     })),
   );
 
@@ -210,11 +265,27 @@ const CategorizedCompetenceTagList = () => {
               osaamiset={osaamiset.filter(filterByType('MUU_OSAAMINEN'))}
               onChange={removeCompetenceByType('osaaminen')}
             />
+            {osaamisetVapaateksti?.[language] && (
+              <FreeFormText
+                title={t('profile.competences.free-form-text-for-competences')}
+                description={osaamisetVapaateksti[language]}
+                className="border-tag-jotain-muuta"
+                onChange={() => setOsaamisetVapaateksti(undefined)}
+              />
+            )}
             <CompetenceCategory
               title={t('profile.interests.skills-that-interest-me')}
               osaamiset={kiinnostukset.filter(filterByType('KIINNOSTUS'))}
               onChange={removeCompetenceByType('kiinnostus')}
             />
+            {kiinnostuksetVapaateksti?.[language] && (
+              <FreeFormText
+                title={t('profile.interests.free-form-text-for-interests')}
+                description={kiinnostuksetVapaateksti[language]}
+                className="border-tag-kiinnostus"
+                onChange={() => setKiinnostuksetVapaateksti(undefined)}
+              />
+            )}
             <div className="font-arial text-help">{t('tool.remove-competence-help')}</div>
           </div>
 
