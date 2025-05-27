@@ -295,7 +295,9 @@ const CategorizedCompetenceTagList = () => {
               title={t('tool.my-own-data.competences.delete-all.title')}
               onConfirm={() => {
                 setOsaamiset([]);
+                setOsaamisetVapaateksti(undefined);
                 setKiinnostukset([]);
+                setKiinnostuksetVapaateksti(undefined);
               }}
               confirmText={t('delete')}
               cancelText={t('cancel')}
@@ -307,7 +309,12 @@ const CategorizedCompetenceTagList = () => {
                   variant="white"
                   label={t('tool.my-own-data.competences.delete-all.title')}
                   onClick={showDialog}
-                  disabled={osaamiset.length === 0 && kiinnostukset.length === 0}
+                  disabled={
+                    osaamiset.length === 0 &&
+                    osaamisetVapaateksti?.[language] !== undefined &&
+                    kiinnostukset.length === 0 &&
+                    kiinnostuksetVapaateksti?.[language] !== undefined
+                  }
                 />
               )}
             </ConfirmDialog>

@@ -259,11 +259,16 @@ const YourOpportunitiesPagination = ({
 };
 
 const YourOpportunitiesCard = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const {
     ehdotuksetLoading,
     kiinnostukset,
+    kiinnostuksetVapaateksti,
     osaamiset,
+    osaamisetVapaateksti,
     osaamisKiinnostusPainotus,
     updateEhdotuksetAndTyomahdollisuudet,
     setOsaamisKiinnostusPainotus,
@@ -271,7 +276,9 @@ const YourOpportunitiesCard = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
     useShallow((state) => ({
       ehdotuksetLoading: state.ehdotuksetLoading,
       kiinnostukset: state.kiinnostukset,
+      kiinnostuksetVapaateksti: state.kiinnostuksetVapaateksti,
       osaamiset: state.osaamiset,
+      osaamisetVapaateksti: state.osaamisetVapaateksti,
       osaamisKiinnostusPainotus: state.osaamisKiinnostusPainotus,
       updateEhdotuksetAndTyomahdollisuudet: state.updateEhdotuksetAndTyomahdollisuudet,
       setOsaamisKiinnostusPainotus: state.setOsaamisKiinnostusPainotus,
@@ -284,17 +291,29 @@ const YourOpportunitiesCard = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
     await updateEhdotuksetAndTyomahdollisuudet(isLoggedIn);
   };
 
-  const value = React.useMemo(() => {
-    if (kiinnostukset.length === 0 && osaamiset.length === 0) {
-      return 50;
-    } else if (osaamiset.length === 0) {
-      return 100;
-    } else if (kiinnostukset.length === 0) {
-      return 0;
+  const painotus = React.useMemo(() => {
+    if (
+      kiinnostukset.length === 0 &&
+      kiinnostuksetVapaateksti?.[language].length === undefined &&
+      osaamiset.length === 0 &&
+      osaamisetVapaateksti?.[language].length === undefined
+    ) {
+      return { value: 50, disabled: true };
+    } else if (osaamiset.length === 0 && osaamisetVapaateksti?.[language].length === undefined) {
+      return { value: 100, disabled: true };
+    } else if (kiinnostukset.length === 0 && kiinnostuksetVapaateksti?.[language].length === undefined) {
+      return { value: 0, disabled: true };
     } else {
-      return osaamisKiinnostusPainotus;
+      return { value: osaamisKiinnostusPainotus, disabled: false };
     }
-  }, [kiinnostukset.length, osaamisKiinnostusPainotus, osaamiset.length]);
+  }, [
+    kiinnostukset.length,
+    kiinnostuksetVapaateksti,
+    osaamisKiinnostusPainotus,
+    osaamiset.length,
+    osaamisetVapaateksti,
+    language,
+  ]);
 
   return (
     <div
@@ -306,8 +325,8 @@ const YourOpportunitiesCard = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
         label={t('competences')}
         rightLabel={t('interests')}
         onValueChange={(val) => setOsaamisKiinnostusPainotus(val)}
-        value={value}
-        disabled={osaamiset.length === 0 || kiinnostukset.length === 0}
+        value={painotus.value}
+        disabled={painotus.disabled}
       />
       <div className="flex justify-center sm:justify-start">
         <Button
