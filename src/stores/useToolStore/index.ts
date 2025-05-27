@@ -32,7 +32,9 @@ interface ToolState {
     e?: boolean;
   };
   osaamiset: OsaaminenValue[];
+  osaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'];
   kiinnostukset: OsaaminenValue[];
+  kiinnostuksetVapaateksti?: components['schemas']['LokalisoituTeksti'];
   suosikit: components['schemas']['SuosikkiDto'][];
   suosikitLoading: boolean;
   osaamisKiinnostusPainotus: number;
@@ -53,7 +55,9 @@ interface ToolState {
 
   setTavoitteet: (state: ToolState['tavoitteet']) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
+  setOsaamisetVapaateksti: (state?: components['schemas']['LokalisoituTeksti']) => void;
   setKiinnostukset: (state: OsaaminenValue[]) => void;
+  setKiinnostuksetVapaateksti: (state?: components['schemas']['LokalisoituTeksti']) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
   updateSuosikit: (loggedIn: boolean) => Promise<void>;
   toggleSuosikki: (kohdeId: string, tyyppi: MahdollisuusTyyppi) => Promise<void>;
@@ -78,6 +82,7 @@ export const useToolStore = create<ToolState>()(
       tavoitteet: {},
       osaamiset: [],
       kiinnostukset: [],
+      kiinnostuksetVapaateksti: undefined,
       suosikit: [],
       suosikitLoading: false,
       osaamisKiinnostusPainotus: 50,
@@ -99,7 +104,9 @@ export const useToolStore = create<ToolState>()(
         set({
           tavoitteet: {},
           osaamiset: [],
+          osaamisetVapaateksti: undefined,
           kiinnostukset: [],
+          kiinnostuksetVapaateksti: undefined,
           mahdollisuusEhdotukset: {},
           tyomahdollisuudet: [],
           koulutusmahdollisuudet: [],
@@ -111,8 +118,14 @@ export const useToolStore = create<ToolState>()(
       setOsaamiset: (state) => {
         set({ osaamiset: state });
       },
+      setOsaamisetVapaateksti: (state) => {
+        set({ osaamisetVapaateksti: state });
+      },
       setKiinnostukset: (state) => {
         set({ kiinnostukset: state });
+      },
+      setKiinnostuksetVapaateksti: (state) => {
+        set({ kiinnostuksetVapaateksti: state });
       },
       setSuosikit: (state) => set({ suosikit: state }),
       setOsaamisKiinnostusPainotus: (state: number) => {
@@ -122,16 +135,27 @@ export const useToolStore = create<ToolState>()(
         set({ rajoitePainotus: state });
       },
       updateEhdotukset: async (lang: string, signal?: AbortSignal) => {
-        const { osaamiset, kiinnostukset, osaamisKiinnostusPainotus, rajoitePainotus } = get();
+        const {
+          osaamiset,
+          osaamisetVapaateksti,
+          kiinnostukset,
+          kiinnostuksetVapaateksti,
+          osaamisKiinnostusPainotus,
+          rajoitePainotus,
+        } = get();
 
         set({ ehdotuksetLoading: true });
         try {
           const { data: mahdollisuusData } = await client.POST('/api/ehdotus/mahdollisuudet', {
             body: {
               osaamiset: osaamiset.map((item) => item.id),
-              kiinnostukset: kiinnostukset.map((item) => item.id),
+              osaamisetText: osaamisetVapaateksti?.[lang],
               osaamisPainotus: (100 - osaamisKiinnostusPainotus) / 100,
+              kiinnostukset: kiinnostukset.map((item) => item.id),
+              kiinnostuksetText: kiinnostuksetVapaateksti?.[lang],
               kiinnostusPainotus: osaamisKiinnostusPainotus / 100,
+              escoListPainotus: 0.5,
+              openTextPainotus: 0.5,
               rajoitePainotus: rajoitePainotus / 100,
             },
             signal,

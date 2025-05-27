@@ -1,3 +1,4 @@
+import { client } from '@/api/client';
 import { OsaamisSuosittelija } from '@/components';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { useLoginLink } from '@/hooks/useLoginLink';
@@ -39,7 +40,7 @@ const CompetenceImport = () => {
     muutOsaamiset,
   );
 
-  const onCompetenceImportConfirm = React.useCallback(() => {
+  const onCompetenceImportConfirm = React.useCallback(async () => {
     const mappedSelectedCompetences = FILTERS_ORDER.map((tyyppi) =>
       selectedFilters[tyyppi]
         .filter((sf) => sf.checked)
@@ -71,6 +72,10 @@ const CompetenceImport = () => {
     ];
 
     toolStore.setOsaamiset([...removeDuplicates(toBeImportedSkills, 'id')]);
+    if (toBeImportedSkills.some((o) => o.tyyppi === 'MUU_OSAAMINEN')) {
+      const { data } = await client.GET('/api/profiili/muu-osaaminen');
+      toolStore.setOsaamisetVapaateksti(data?.vapaateksti);
+    }
   }, [osaamiset, selectedFilters, toolStore]);
 
   return isLoggedIn ? (

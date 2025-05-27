@@ -480,6 +480,7 @@
       "add": "Lisää osaamisia",
       "description": "Löydät alta kaikki osaamisesi, jotka olet tunnistanut tai lisännyt profiiliisi. Osaamisesi ryhmittelyn ja esitystavan voit valita itse.",
       "edit": "Muokkaa osaamisia",
+      "free-form-text-for-competences": "Vapaa teksti osaamisille",
       "group": "Järjestele",
       "group-by-alphabet": "Aakkosellisesti",
       "group-by-source": "Lähteiden mukaan",
@@ -535,6 +536,7 @@
       "edit-interests": "Muokkaa kiinnostuksen kohteita",
       "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus kiinnostuksitani",
       "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin kiinnostuksiasi. Jos käytät palvelua suomeksi kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.",
+      "free-form-text-for-interests": "Vapaa teksti kiinnostuksille",
       "occupations-that-interest-me": "Ammatit, jotka kiinnostavat minua",
       "skills-that-interest-me": "Osaamiset, jotka kiinnostavat minua",
       "title": "Kiinnostuksen kohteeni",
@@ -694,6 +696,8 @@
   "share": "Jaa",
   "show": "Näytä",
   "show-filters": "Näytä suodattimet",
+  "show-less": "Näytä vähemmän",
+  "show-more": "Näytä enemmän",
   "skiplinks": {
     "main": "Siirry pääsisältöön"
   },

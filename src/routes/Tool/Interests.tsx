@@ -13,10 +13,12 @@ import { ToolLoaderData } from './loader';
 
 const Interests = () => {
   const { t } = useTranslation();
-  const { setKiinnostukset, kiinnostukset, setVirtualAssistantOpen } = useToolStore(
+  const { setKiinnostukset, setKiinnostuksetVapaateksti, kiinnostukset, setVirtualAssistantOpen } = useToolStore(
     useShallow((state) => ({
       setKiinnostukset: state.setKiinnostukset,
+      setKiinnostuksetVapaateksti: state.setKiinnostuksetVapaateksti,
       kiinnostukset: state.kiinnostukset,
+      kiinnostuksetVapaateksti: state.kiinnostuksetVapaateksti,
       setVirtualAssistantOpen: state.setVirtualAssistantOpen,
     })),
   );
@@ -34,7 +36,8 @@ const Interests = () => {
       ...kiinnostukset.filter((o) => o.tyyppi === 'KARTOITETTU'),
     ];
     setKiinnostukset(removeDuplicates(newKiinnostukset, 'id'));
-  }, [kiinnostukset, setKiinnostukset]);
+    setKiinnostuksetVapaateksti(data?.vapaateksti);
+  }, [kiinnostukset, setKiinnostukset, setKiinnostuksetVapaateksti]);
 
   return (
     <div className="pt-6 sm:pt-7 px-5 sm:px-6">
