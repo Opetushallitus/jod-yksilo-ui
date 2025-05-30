@@ -93,7 +93,7 @@ const AdditionalSupport = () => {
               iconRight={<MdLaunch size={24} className="text-accent" />}
             />
             <HelpingToolExternalLinkItem
-              href={window.location.href}
+              href="https://www.suomi.fi/palveluhakemisto/osaamispolku"
               title={t('tool.tools.service-directory')}
               iconRight={<MdLaunch size={24} className="text-accent" />}
             />
