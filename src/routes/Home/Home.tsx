@@ -98,20 +98,20 @@ const Home = () => {
 
       <Content className="flex sm:flex-row gap-8 justify-evenly flex-col">
         <HeroCard
+          buttonLabel={t('home.explore-opportunities')}
+          content={t('home.card-1-content')}
+          LinkComponent={Link}
           size="sm"
           title={t('home.card-1-title')}
-          content={t('home.card-1-content')}
-          buttonLabel={t('home.create-own-profile')}
-          to={preferencesLink.to}
-          LinkComponent={Link}
+          to={toolLink}
         />
         <HeroCard
+          buttonLabel={t('home.create-own-profile')}
+          content={t('home.card-2-content')}
+          LinkComponent={Link}
           size="sm"
           title={t('home.card-2-title')}
-          content={t('home.card-2-content')}
-          buttonLabel={t('home.explore-opportunities')}
-          to={toolLink}
-          LinkComponent={Link}
+          to={preferencesLink.to}
         />
       </Content>
 
@@ -153,7 +153,7 @@ const Home = () => {
             content={t('home.need-personal-guidance-content')}
             title={t('home.need-personal-guidance')}
             buttonLabel={t('home.go-to-service-directory')}
-            to={placeholderLink}
+            to="https://www.suomi.fi/palveluhakemisto/osaamispolku"
             backgroundColor="#00A8B3"
             LinkComponent={Link}
           />
