@@ -22,6 +22,7 @@ export type VaiheLahde = (typeof VAIHE_LAHTEET)[number];
 export interface VaiheForm {
   id?: string;
   lahde: VaiheLahde;
+  mahdollisuusId?: string;
   tyyppi: VaiheTyyppi;
   nimi: components['schemas']['LokalisoituTeksti'];
   kuvaus?: components['schemas']['LokalisoituTeksti'];

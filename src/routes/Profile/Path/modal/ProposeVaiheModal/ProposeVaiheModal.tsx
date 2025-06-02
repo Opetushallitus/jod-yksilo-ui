@@ -54,7 +54,7 @@ const ProposeVaiheModal = ({ isOpen, onClose, vaiheIndex }: ProposeVaiheModalPro
         loppuPvm: vaihe?.loppuPvm ?? '',
         osaamiset: vaihe?.osaamiset ?? [],
         valmis: vaihe?.valmis ?? false,
-        tyyppi: vaihe?.tyyppi ?? 'TYO',
+        tyyppi: vaihe?.tyyppi ?? 'KOULUTUS',
         lahde: 'EHDOTUS',
       });
     },
@@ -92,6 +92,7 @@ const ProposeVaiheModal = ({ isOpen, onClose, vaiheIndex }: ProposeVaiheModalPro
             ...data,
             nimi: proposedOpportunity?.otsikko ?? {},
             kuvaus: proposedOpportunity?.kuvaus,
+            mahdollisuusId: proposedOpportunity?.id,
             linkit: data.linkit?.map((link) => link.url),
             osaamiset: data.osaamiset?.map(mapOsaaminenToUri),
           },
