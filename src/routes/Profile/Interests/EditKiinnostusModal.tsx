@@ -22,7 +22,13 @@ interface KiinnostusForm {
 
 const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
   const { t } = useTranslation();
-  const data = (useLoaderData() as components['schemas']['OsaaminenDto'][]) ?? [];
+  const data =
+    (
+      useLoaderData() as {
+        kiinnostukset: components['schemas']['OsaaminenDto'][];
+        vapaateksti: string;
+      }
+    ).kiinnostukset ?? [];
 
   const formId = React.useId();
   useEscHandler(onClose, formId);
