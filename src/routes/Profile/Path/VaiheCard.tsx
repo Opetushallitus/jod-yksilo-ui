@@ -3,6 +3,7 @@ import VaiheCardMenu from '@/routes/Profile/Path/VaiheCardMenu';
 import { formatDate, getLocalizedText } from '@/utils';
 import { Checkbox, Tag } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
 import { getDuration, type VaiheForm } from './utils';
 
 interface VaiheCardProps {
@@ -58,7 +59,16 @@ const VaiheCard = ({ vaihe, totalSteps, setVaiheComplete, openVaiheModal }: Vaih
       </div>
       {/* Title & description */}
       <div className="flex flex-col gap-5">
-        <div className="text-heading-2">{vaihe.nimi[language]}</div>
+        {vaihe.mahdollisuusId ? (
+          <Link
+            to={`/${language}/koulutusmahdollisuus/${vaihe.mahdollisuusId}`}
+            className="text-heading-2 hover:text-link hover:underline cursor-pointer"
+          >
+            {vaihe.nimi[language]}
+          </Link>
+        ) : (
+          <div className="text-heading-2">{vaihe.nimi[language]}</div>
+        )}
         <div className="text-body-md">{vaihe.kuvaus?.[language]}</div>
       </div>
       {/* Links */}
