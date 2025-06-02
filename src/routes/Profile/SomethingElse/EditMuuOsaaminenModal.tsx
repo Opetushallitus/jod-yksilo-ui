@@ -22,7 +22,7 @@ interface OsaamisetForm {
 
 const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModalProps) => {
   const { t } = useTranslation();
-  const data = (useLoaderData() as OsaaminenDto[]) ?? [];
+  const data = (useLoaderData() as { muuOsaaminen: OsaaminenDto[]; vapaateksti: string }).muuOsaaminen ?? [];
 
   const formId = React.useId();
   useEscHandler(onClose, formId);
