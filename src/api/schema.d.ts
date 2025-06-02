@@ -485,6 +485,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/integraatiot/tmt/vienti/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['tmtExportExport'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/ehdotus/osaamiset': {
     parameters: {
       query?: never;
@@ -675,6 +691,38 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/integraatiot/tmt/vienti/auktorisointi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['tmtExportAuthorize'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/integraatiot/tmt/vienti/auktorisointi/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['tmtExportResponse'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/integraatiot/koski/osaamiset/tunnistus': {
     parameters: {
       query?: never;
@@ -801,6 +849,8 @@ export interface components {
       readonly id?: string;
       /** @enum {string} */
       lahde: 'EHDOTUS' | 'KAYTTAJA';
+      /** Format: uuid */
+      mahdollisuusId?: string;
       /** @enum {string} */
       tyyppi: 'KOULUTUS' | 'TYO';
       nimi: components['schemas']['LokalisoituTeksti'];
@@ -1046,6 +1096,8 @@ export interface components {
       lahde?: 'EHDOTUS' | 'KAYTTAJA';
       /** @enum {string} */
       tyyppi?: 'KOULUTUS' | 'TYO';
+      /** Format: uuid */
+      mahdollisuusId?: string;
       nimi?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       linkit?: string[];
@@ -2472,6 +2524,26 @@ export interface operations {
       };
     };
   };
+  tmtExportExport: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   osaamisetEhdotusCreateEhdotus: {
     parameters: {
       query?: never;
@@ -2766,6 +2838,48 @@ export interface operations {
         content: {
           'application/json': components['schemas']['KoulutusmahdollisuusFullDto'];
         };
+      };
+    };
+  };
+  tmtExportAuthorize: {
+    parameters: {
+      query: {
+        callback: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  tmtExportResponse: {
+    parameters: {
+      query?: {
+        token?: string;
+      };
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
