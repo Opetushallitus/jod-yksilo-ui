@@ -287,10 +287,6 @@ const Favorites = () => {
           type="button"
         />
       )}
-      <div className="mx-auto flex max-w-[1140px] flex-wrap gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-5">
-        <Button variant="white" label="TODO: Vertaile" />
-        <Button variant="white" label="TODO: Luo polku" />
-      </div>
     </MainLayout>
   );
 };
