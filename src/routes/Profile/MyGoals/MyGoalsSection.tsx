@@ -2,7 +2,7 @@ import { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
 import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
 import { getTypeSlug } from '@/routes/Profile/utils';
-import { usePaamaaratStore } from '@/stores/usePaamaratStore';
+import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { getLocalizedText } from '@/utils';
 import { Button } from '@jod/design-system';
 import React from 'react';

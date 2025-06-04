@@ -1,5 +1,5 @@
 import { MainLayout } from '@/components';
-import { usePaamaaratStore } from '@/stores/usePaamaratStore';
+import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { Button } from '@jod/design-system';
 import React from 'react';
