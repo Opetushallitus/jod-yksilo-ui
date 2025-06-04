@@ -1,5 +1,5 @@
 import { components } from '@/api/schema';
-import { usePaamaaratStore } from '@/stores/usePaamaratStore';
+import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 
 export type PaamaaraTyyppi = components['schemas']['PaamaaraDto']['tyyppi'];
 

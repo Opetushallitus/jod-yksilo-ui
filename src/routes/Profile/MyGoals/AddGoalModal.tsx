@@ -5,7 +5,7 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import MyGoalsOpportunityCardMenu from '@/routes/Profile/MyGoals/MyGoalsOpportunityCardMenu';
 import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
-import { usePaamaaratStore } from '@/stores/usePaamaratStore';
+import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
 import { Button, Modal, PageChangeDetails, Pagination, useMediaQueries } from '@jod/design-system';
