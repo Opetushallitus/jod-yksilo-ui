@@ -7,21 +7,12 @@ import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { useErrorNoteStore } from '@/stores/useErrorNoteStore';
 import { useToolStore } from '@/stores/useToolStore';
-import { Footer, NavigationBar, SkipLink, useMediaQueries } from '@jod/design-system';
+import { Footer, NavigationBar, SkipLink } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdMenu } from 'react-icons/md';
 import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router';
 import { LogoutFormContext } from '.';
-
-const NavigationBarItem = (to: string, text: string) => ({
-  key: to,
-  component: ({ className }: { className: string }) => (
-    <NavLink to={to} className={className}>
-      {text}
-    </NavLink>
-  ),
-});
 
 const Root = () => {
   const {
@@ -32,22 +23,10 @@ const Root = () => {
   const { error, clearErrorNote } = useErrorNoteStore();
   const isMouseInteraction = useInteractionMethod();
 
-  const { sm } = useMediaQueries();
   const [langMenuOpen, setLangMenuOpen] = React.useState(false);
 
   const [navMenuOpen, setNavMenuOpen] = React.useState(false);
 
-  const userGuide = t('slugs.user-guide.index');
-  const basicInformation = t('slugs.basic-information');
-  const footerItems: React.ComponentProps<typeof Footer>['items'] = [
-    NavigationBarItem(`${userGuide}/${t('slugs.user-guide.what-is-the-service')}`, t('about-us-and-user-guide')),
-    NavigationBarItem(`${basicInformation}/${t('slugs.cookie-policy')}`, t('cookie-policy')),
-    NavigationBarItem(`${basicInformation}/${t('slugs.data-sources')}`, t('data-sources')),
-    NavigationBarItem(`${basicInformation}/${t('slugs.terms-of-service')}`, t('terms-of-service')),
-    NavigationBarItem(`${basicInformation}/${t('slugs.accessibility-statement')}`, t('accessibility-statement')),
-    NavigationBarItem(`${basicInformation}/${t('slugs.privacy-policy')}`, t('privacy-policy')),
-    NavigationBarItem(`${basicInformation}/${t('slugs.about-ai')}`, t('about-ai')),
-  ];
   const logoutForm = React.useRef<HTMLFormElement>(null);
   const langMenuButtonRef = React.useRef<HTMLLIElement>(null);
 
@@ -80,6 +59,30 @@ const Root = () => {
   React.useEffect(() => {
     document.documentElement.setAttribute('lang', language);
   }, [language]);
+
+  const infoSlug = t('slugs.basic-information');
+  const moreInfoLinks = [
+    {
+      to: `${t('slugs.user-guide.index')}/${t('slugs.user-guide.what-is-the-service')}`,
+      label: t('about-us'),
+    },
+    {
+      to: `${infoSlug}/${t('slugs.privacy-policy')}`,
+      label: t('privacy-policy-and-cookies'),
+    },
+    {
+      to: `${infoSlug}/${t('slugs.data-sources')}`,
+      label: t('data-sources'),
+    },
+    {
+      to: `${infoSlug}/${t('slugs.about-ai')}`,
+      label: t('about-ai'),
+    },
+    {
+      to: `${infoSlug}/${t('slugs.accessibility-statement')}`,
+      label: t('accessibility-statement'),
+    },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen bg-bg-gray">
@@ -127,12 +130,26 @@ const Root = () => {
         <NavMenu open={navMenuOpen} onClose={() => setNavMenuOpen(false)} />
         <Outlet />
       </LogoutFormContext.Provider>
+
       <Footer
-        items={footerItems}
         language={language}
+        okmLabel={t('footer.logos.okm-label')}
+        temLabel={t('footer.logos.tem-label')}
+        ophLabel={t('footer.logos.oph-label')}
+        kehaLabel={t('footer.logos.keha-label')}
+        cooperationTitle={t('footer.cooperation-title')}
+        fundingTitle={t('footer.funding-title')}
+        moreInfoTitle={t('footer.more-info-title')}
+        moreInfoDescription={t('footer.more-info-description')}
+        moreInfoLinks={moreInfoLinks}
+        MoreInfoLinkComponent={NavLink}
+        feedbackTitle={t('footer.feedback-title')}
+        feedbackContent={t('footer.feedback-content')}
+        feedbackButtonLabel={t('footer.feedback-button-label')}
+        feedbackTo="#"
+        feedbackBgImageClassName="bg-[url(@/../assets/home-1.avif)] bg-cover bg-[length:auto_auto] sm:bg-[length:auto_1000px] bg-[top_-0rem_right_-0rem] sm:bg-[top_-21rem_right_0rem]"
+        FeedbackLinkComponent={NavLink}
         copyright={t('copyright')}
-        variant="light"
-        className={!sm ? 'py-7' : undefined}
       />
       <Toaster />
       <ScrollRestoration />
