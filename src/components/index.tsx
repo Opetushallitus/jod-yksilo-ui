@@ -1,5 +1,6 @@
 export { ActionButton } from './ActionButton/ActionButton';
 export { AiInfo } from './AiInfo/AiInfo';
+export { Chatbot } from './Chatbot/Chatbot';
 export { ErrorNote } from './ErrorNote';
 export { ExperienceTable } from './ExperienceTable/ExperienceTable';
 export { type ExperienceTableRowData } from './ExperienceTable/ExperienceTableRow';

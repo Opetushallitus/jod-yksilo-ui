@@ -1,5 +1,5 @@
 import { components } from '@/api/schema';
-import { LanguageButton, UserButton } from '@/components';
+import { Chatbot, LanguageButton, UserButton } from '@/components';
 import { ErrorNote } from '@/components/ErrorNote';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
@@ -136,6 +136,7 @@ const Root = () => {
       />
       <Toaster />
       <ScrollRestoration />
+      <Chatbot />
     </div>
   );
 };
