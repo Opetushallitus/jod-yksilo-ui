@@ -1,5 +1,5 @@
 import { components } from '@/api/schema';
-import { Button, HeroCard, MoreInfo, tidyClasses as tc } from '@jod/design-system';
+import { Button, HeroCard, tidyClasses as tc } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdArrowForward } from 'react-icons/md';
@@ -52,32 +52,7 @@ const Home = () => {
     () => generateProfileLink(['slugs.profile.preferences'], data, language, t),
     [data, language, t],
   );
-  const infoSlug = t('slugs.basic-information');
   const toolLink = `/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`;
-  const placeholderLink = location.href;
-
-  const moreInfoLinks = [
-    {
-      to: `${t('slugs.user-guide.index')}/${t('slugs.about-us')}`,
-      label: t('about-us'),
-    },
-    {
-      to: `${infoSlug}/${t('slugs.privacy-policy')}`,
-      label: t('privacy-policy-and-cookies'),
-    },
-    {
-      to: `${infoSlug}/${t('slugs.data-sources')}`,
-      label: t('data-sources'),
-    },
-    {
-      to: `${infoSlug}/${t('slugs.about-ai')}`,
-      label: t('about-ai'),
-    },
-    {
-      to: `${infoSlug}/${t('slugs.accessibility-statement')}`,
-      label: t('accessibility-statement'),
-    },
-  ];
 
   return (
     <main role="main" className="mx-auto w-full max-w-(--breakpoint-xl) bg-white" id="jod-main">
@@ -164,29 +139,6 @@ const Home = () => {
         <p className="text-body-lg">{t('home.how-compentency-path-helps-you-content')}</p>
         <div className="h-[200px] bg-bg-gray-2" />
       </Content>
-
-      <FullWidthContainer className="bg-[url(@/../assets/home-1.avif)] items-center bg-[center_-340px]">
-        <div className="max-w-2xl">
-          <HeroCard
-            size="sm"
-            content={t('home.tell-us-what-you-think-content')}
-            title={t('home.tell-us-what-you-think')}
-            buttonLabel={t('home.provide-feedback')}
-            buttonVariant="white"
-            backgroundColor="#333"
-            to={placeholderLink}
-            LinkComponent={Link}
-          />
-        </div>
-      </FullWidthContainer>
-
-      <MoreInfo
-        title={t('home.want-to-know-more')}
-        description={t('home.want-to-know-more-content')}
-        language={language}
-        links={moreInfoLinks}
-        LinkComponent={Link}
-      />
     </main>
   );
 };
