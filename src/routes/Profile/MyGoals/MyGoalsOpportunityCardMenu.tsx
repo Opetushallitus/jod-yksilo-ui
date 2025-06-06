@@ -1,7 +1,7 @@
 import { client } from '@/api/client';
 import { getPaamaaraTypeForMahdollisuus, PaamaaraTyyppi } from '@/routes/Profile/MyGoals/utils';
 import { MahdollisuusTyyppi } from '@/routes/types';
-import { usePaamaaratStore } from '@/stores/usePaamaratStore';
+import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { ConfirmDialog, PopupList, PopupListItem } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
