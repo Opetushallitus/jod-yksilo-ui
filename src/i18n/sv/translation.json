@@ -1,4 +1,13 @@
 {
+  "chatbot": {
+    "agent-name": "JOD Sverige",
+    "error-message": "Oj då, något gick fel",
+    "greeting": "Hej, jag är en AI-baserad assistent och hjälper dig med frågor om JOD-tjänsten. Jag vet allt som du kan hitta på dessa webbsidor och lite till. Hur kan jag hjälpa dig?",
+    "header": "Chatt",
+    "open-window-text": "Psst, här hittar du hjälp",
+    "text-input-helper": "Ett ögonblick, jag funderar fortfarande på svaret...",
+    "text-input-placeholder": "Vad vill du fråga?"
+  },
   "osaamispolku": "Kompetensstigen",
   "profile": {
     "favorites": {
