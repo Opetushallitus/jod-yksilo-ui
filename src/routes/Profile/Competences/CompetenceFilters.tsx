@@ -71,7 +71,8 @@ export const CompetenceFilters = ({ filterKeys, selectedFilters, setSelectedFilt
   };
 
   return (
-    <ul className="flex flex-col gap-y-3 py-4">
+    // Height = viewport height - header and footer heights - padding
+    <ul className="flex flex-col gap-y-3 py-4 max-h-[calc(100vh-296px-64px)] overflow-y-auto">
       {filterKeys.map((key) => (
         <React.Fragment key={key}>
           {key !== 'MUU_OSAAMINEN' ? (
