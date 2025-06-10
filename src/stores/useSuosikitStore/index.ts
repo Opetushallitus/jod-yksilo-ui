@@ -17,6 +17,7 @@ interface FavoritesState {
   filters: MahdollisuusTyyppi[];
   excludedIds: string[];
 
+  reset: () => void;
   setFilters: (state: MahdollisuusTyyppi[]) => void;
   setExcludedIds: (state: string[]) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
@@ -42,7 +43,18 @@ const filterSuosikit = (
   return [];
 };
 
-export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
+const initialState: Pick<
+  FavoritesState,
+  | 'suosikit'
+  | 'suosikitLoading'
+  | 'pageNr'
+  | 'totalItems'
+  | 'totalPages'
+  | 'pageSize'
+  | 'filters'
+  | 'pageData'
+  | 'excludedIds'
+> = {
   suosikit: [],
   suosikitLoading: false,
   pageNr: 1,
@@ -52,6 +64,13 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
   filters: ['TYOMAHDOLLISUUS', 'KOULUTUSMAHDOLLISUUS'],
   pageData: [],
   excludedIds: [],
+};
+
+export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
+  ...initialState,
+  reset: () => {
+    set(initialState);
+  },
   setSuosikit: (state) => set({ suosikit: state }),
   setFilters: (state) => set({ filters: state }),
   setExcludedIds: (state) => set({ excludedIds: state }),
