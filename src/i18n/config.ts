@@ -11,7 +11,7 @@ export const defaultLang = 'fi';
 export const langLabels = {
   en: 'In English',
   fi: 'Suomeksi',
-  sv: 'På sverige',
+  sv: 'På svenska',
 };
 
 const resources: Resource = {
