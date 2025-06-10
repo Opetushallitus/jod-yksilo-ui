@@ -1,4 +1,6 @@
 import { authStore } from '@/auth';
+import { useSuosikitStore } from '@/stores/useSuosikitStore';
+import { useToolStore } from '@/stores/useToolStore';
 import { Middleware } from 'openapi-fetch';
 import { useErrorNoteStore } from '../../stores/useErrorNoteStore';
 import { unregisterCsrfMiddleware } from './csrf';
@@ -19,6 +21,10 @@ export const sessionExpiredMiddleware: Middleware = {
           description: 'error-boundary.session-expired',
         },
       });
+
+      useToolStore.getState().reset();
+      useSuosikitStore.getState().reset();
+
       /* eslint-disable sonarjs/todo-tag */
       throw new Error('session-expired'); // TODO: This should be replaced with a proper handling of session expiration
     }
