@@ -32,10 +32,10 @@ export const getLocalizedText = (
   entry?: components['schemas']['LokalisoituTeksti'] | Record<string, string | undefined>,
   lang = i18n.language,
 ) =>
-  entry?.[lang] ??
+  entry?.[lang]?.trim() ??
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
-  entry?.[i18n.options.fallbackLng] ??
+  entry?.[i18n.options.fallbackLng]?.trim() ??
   '';
 
 type NestedKeyOf<ObjectType extends object> = {

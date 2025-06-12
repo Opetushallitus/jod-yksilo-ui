@@ -8,20 +8,26 @@ import {
   RoutesNavigationList,
   SimpleNavigationList,
 } from '@/components';
+import RateAiContent from '@/components/RateAiContent/RateAiContent';
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { type MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { copyToClipboard, getLocalizedText } from '@/utils';
-import React, { JSX } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdCompareArrows, MdOutlinePrint, MdOutlineRoute, MdOutlineShare } from 'react-icons/md';
 
 export interface OpportunityDetailsSection {
   navTitle: string;
-  content: JSX.Element;
-  hasAiContent?: boolean;
+  /* Optional extra text to show after the title. Does not appear in the navigation */
+  titleAppendix?: string;
+  content: React.ReactNode;
+  showAiInfoInTitle?: boolean;
+  showAiRating?: boolean;
   showInDevOnly?: boolean;
+  showDivider?: boolean;
+  showNavTitle?: boolean;
 }
 
 export interface OpportunityDetailsProps {
@@ -78,7 +84,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
   return (
     <MainLayout
       navChildren={
-        <SimpleNavigationList title={t(`opportunity-description-${tyyppi}`)} collapsible>
+        <SimpleNavigationList title={getLocalizedText(data.otsikko)} collapsible>
           <RoutesNavigationList routes={routes} />
         </SimpleNavigationList>
       }
@@ -94,8 +100,15 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
         )}
       </div>
 
+      {(data as components['schemas']['TyomahdollisuusFullDto']).aineisto ? (
+        <div className="uppercase font-arial">
+          {(data as components['schemas']['TyomahdollisuusFullDto']).aineisto === 'TMT'
+            ? t('opportunity-type.work')
+            : t('opportunity-type.occupation')}
+        </div>
+      ) : null}
       {/* Action bar */}
-      <div className="flex flex-row flex-wrap gap-x-7 gap-y-5 my-8 print:hidden">
+      <div className="flex flex-row flex-wrap gap-x-7 gap-y-5 my-6 print:hidden">
         <FavoriteToggle
           isFavorite={isFavorite}
           onToggleFavorite={() => (!isLoggedIn ? handleLoginRequired() : handleToggleFavorite())}
@@ -136,14 +149,21 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
       <div className="flex flex-col gap-7">
         {!!data &&
           sections.filter(filterDevSections).map((section) => (
-            <div key={section.navTitle}>
+            <div key={section.navTitle} className="flex flex-col">
               <ScrollHeading
                 title={section.navTitle}
+                appendix={section.titleAppendix}
                 heading="h2"
-                className="text-heading-2"
-                hasAiContent={section.hasAiContent}
+                className={`text-heading-2 ${(section.showNavTitle ?? true) ? '' : 'text-transparent text-[0px] size-0'}`}
+                hasAiContent={section.showAiInfoInTitle}
               />
               <div className="flex flex-row justify-between">{section.content}</div>
+              {(section.showAiRating ?? false) && isDev && (
+                <div className="my-7">
+                  <RateAiContent onDislike={notImplemented} onLike={notImplemented} />
+                </div>
+              )}
+              {(section.showDivider ?? true) && <div className="mt-8 border-b" />}
             </div>
           ))}
       </div>

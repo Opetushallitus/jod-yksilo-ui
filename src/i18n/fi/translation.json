@@ -158,6 +158,21 @@
   },
   "fit": "Sopivuus",
   "fit-of-result": "Tuloksen sopivuus",
+  "footer": {
+    "cooperation-title": "Osaamipolku on toteutettu yhteistyössä seuraavien tahojen toimesta.",
+    "feedback-button-label": "Anna palautetta",
+    "feedback-content": "Haluamme kehittää Osaamispolkua vastaamaan paremmin juuri sinun tarpeita. Anna meille palautetta ja huomiomme sen kehitystyössä.",
+    "feedback-title": "Kerro meille mitä pidit palvelusta!",
+    "funding-title": "Palvelu on rahoitettu Euroopan RFF-rahoituksella.",
+    "logos": {
+      "keha-label": "KEHA-keskus",
+      "okm-label": "Opetus- ja kulttuuriministeriö",
+      "oph-label": "Opetushallitus",
+      "tem-label": "Työ- ja elinkeinoministeriö"
+    },
+    "more-info-description": "Mietityttääkö tietosuoja tai tekoälyn hyödyntäminen palvelussa? Alta löydät kootusti yleistä tietoa palvelusta ja sen käytöstä.",
+    "more-info-title": "Haluatko tietää lisää Osaamispolusta?"
+  },
   "found": "Löytyi",
   "free-time-activities": {
     "activity-content": "Toiminnon sisältö",
@@ -178,21 +193,6 @@
     "theme-or-activity": "Teema / Toiminto"
   },
   "front-page": "Etusivu",
-  "footer": {
-    "cooperation-title": "Osaamipolku on toteutettu yhteistyössä seuraavien tahojen toimesta.",
-    "feedback-button-label": "Anna palautetta",
-    "feedback-content": "Haluamme kehittää Osaamispolkua vastaamaan paremmin juuri sinun tarpeita. Anna meille palautetta ja huomiomme sen kehitystyössä.",
-    "feedback-title": "Kerro meille mitä pidit palvelusta!",
-    "funding-title": "Palvelu on rahoitettu Euroopan RFF-rahoituksella.",
-    "logos": {
-      "keha-label": "KEHA-keskus",
-      "okm-label": "Opetus- ja kulttuuriministeriö",
-      "oph-label": "Opetushallitus",
-      "tem-label": "Työ- ja elinkeinoministeriö"
-    },
-    "more-info-description": "Mietityttääkö tietosuoja tai tekoälyn hyödyntäminen palvelussa? Alta löydät kootusti yleistä tietoa palvelusta ja sen käytöstä.",
-    "more-info-title": "Haluatko tietää lisää Osaamispolusta?"
-  },
   "goals": "Tavoitteet",
   "home": {
     "beta": "Osaamispolku Beta-vaihe",
@@ -268,12 +268,12 @@
   },
   "jakauma": {
     "aika": "Aika",
-    "ajokortti": "Ajokortti",
+    "ajokortti": "Ajokorttivaatimus",
     "ammatti": "Ammatti",
-    "kielitaito": "Kielitaito",
+    "kielitaito": "Kielitaitovaatimukset",
     "kortitJaLuvat": "Kortit ja luvat",
-    "koulutusala": "Koulutusala",
-    "koulutusaste": "Koulutusaste",
+    "koulutusala": "Tarvittava koulutusala",
+    "koulutusaste": "Tarvittava koulutusaste",
     "kunta": "Kunta",
     "maa": "Maa",
     "maakunta": "Maakunta",
@@ -283,11 +283,11 @@
     "osaaminen": "Osaaminen",
     "palkanPeruste": "Palkan peruste",
     "palvelussuhde": "Palvelussuhde",
-    "rikosrekisteriote": "Rikosrekisteriote",
+    "rikosrekisteriote": "Rikosrekisteriotevaatimus",
     "sijaintiJoustava": "Joustava sijainti",
     "tyoaika": "Työaika",
     "tyokieli": "Työkieli",
-    "tyonJatkuvuus": "Työn jatkuvuus"
+    "tyonJatkuvuus": "Työsuhteen muoto ja jatkuvuus"
   },
   "jakauma-values": {
     "maksullisuus": {
@@ -326,30 +326,20 @@
       "route": "Osaamiset",
       "title": "Osaamiset"
     },
-    "digital-skills-for-citizens": {
-      "description": "Kestävän kehityksen asiantuntijan tärkeitä kansalaisen digitaitoja ovat:",
-      "title": "Kansalaisen digitaidot"
-    },
     "employment-trends": {
       "description": "Graafissa näkyy ammatin työllisyyskehitys vuodesta 2015-2023. Tiedot 2024-26 ovat ennakointitietoja.",
       "title": "Työllisyyskehitys"
-    },
-    "general-working-life-skills": {
-      "description": "Kestävän kehityksen asiantuntijalle tärkeitä yleisiä työelämäosaamisia ovat:",
-      "title": "Yleiset työelämäosaamiset"
     },
     "key-figures": {
       "description": "Tarkastele ammattia eri tunnuslukujen valossa. Voit valita tunnusluvuista joko tilanteen tällä hetkellä tai lähitulevaisuuden ennakkotiedon.",
       "title": "Tunnusluvut"
     },
-    "labour-market-picture": {
-      "description": "Tarkastele ammatin työvoimakohtaantoa. Voit valita tarkastelun kohteeksi joko tilanteen tällä hetkellä, lähitulevaisuudessa tai pidemmän ajan ennakkotiedon.",
-      "title": "Työvoimakohtaanto"
-    },
+    "more-information": "Tietoa työmahdollisuudesta",
     "most-common-job-tasks": {
       "description": "Tarkastele ammattia yleisimpien työtehtävien kautta.",
       "title": "Yleisimmät työtehtävät"
     },
+    "n-percent-of-job-ads": "{{count}} % ilmoitetuista työpaikoista.",
     "occupations": {
       "title": "Työmahdollisuudessa esiintyvät ammatit"
     },
@@ -366,6 +356,8 @@
       "description": "Graafissa näkyy ammatin palkkakehitys vuodesta 2015-2023. Tiedot 2024-26 ovat palkkakehityksen ennakointitietoja.",
       "title": "Palkkakehitys"
     },
+    "special-characteristics-from-tyomarkkinatori": "Työmarkkinatorin työpaikkailmoituksissa esiintyvät työmahdollisuuden erityispiirteet",
+    "special-characteristics-from-tyomarkkinatori-description": "Tiedon muodostamiseen on käytetty työmarkkinatorin työpaikkailmoituksia vuosilta 2021-2024.",
     "specific-professional-competences": {
       "description": "Kestävän kehityksen asiantuntijoiden ammatillisia erityisosaamisalueita ovat:",
       "title": "Ammatilliset erityisosaamiset"
@@ -453,6 +445,7 @@
   "opportunity-description-TYOMAHDOLLISUUS": "Työmahdollisuuden yleiskuvaus",
   "opportunity-type": {
     "education": "Koulutusmahdollisuus",
+    "occupation": "Ammatti",
     "work": "Työmahdollisuus"
   },
   "osaamispolku": "Osaamispolku",
@@ -704,6 +697,7 @@
   },
   "proposed-competences": "Ehdotetut osaamiset",
   "proposed-interests": "Ehdotetut kiinnostukset",
+  "rate-ai-content": "Tekoälyn muodostama ja ihmisen tarkistama sisältö – kerro miten onnistuimme?",
   "remove-approval": "Hylkää hyväksyntä",
   "remove-favorite": "Poista suosikeista",
   "remove-favorite-confirmation-title": "Poista suosikeista",
@@ -719,6 +713,7 @@
   "select-language": "Valitse kieli",
   "share": "Jaa",
   "show": "Näytä",
+  "show-all": "Näytä kaikki",
   "show-filters": "Näytä suodattimet",
   "show-less": "Näytä vähemmän",
   "show-more": "Näytä enemmän",

@@ -1,3 +1,5 @@
+import type { LoaderData as EducationLoaderData } from '@/routes/EducationOpportunity/loader';
+import type { LoaderData as JobLoaderData } from '@/routes/JobOpportunity/loader';
 import type {
   Codeset,
   CodesetValues,
@@ -7,6 +9,7 @@ import type {
 } from '@/routes/types';
 import { parseBoolean } from '@/utils';
 import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
 
 type JakaumaListProps =
   | {
@@ -30,6 +33,7 @@ type JakaumaListProps =
       codesetKeys?: never;
       codesetValues?: never;
     };
+
 const JakaumaList = ({
   name,
   jakaumat,
@@ -53,17 +57,25 @@ const JakaumaList = ({
   };
 
   const jakauma = jakaumat[name as keyof typeof jakaumat];
-  const isEmpty = !jakauma.arvot || jakauma.arvot.length === 0;
+  const isEmpty = !jakauma?.arvot || jakauma?.arvot.length === 0;
 
   return (
     <div className="md:col-span-1 col-span-2">
-      <h2 className="text-heading-3 pb-2">{t(`jakauma.${name}`)}</h2>
+      <h2 className="text-heading-3 pb-2">{t(`jakauma.${name}`)}:</h2>
       {isEmpty ? (
-        <p className="text-black">{t('data-not-available')}</p>
+        <div className="flex flex-col gap-3">
+          <p className="text-heading-3 text-accent">{t('data-not-available')}</p>
+          <span className="text-body-sm text-black">{t('job-opportunity.n-percent-of-job-ads', { count: 100 })}</span>
+        </div>
       ) : (
-        <ul className="list-none text-body-md text-black first-letter:capitalize">
+        <ul className="list-none flex flex-col gap-6 mb-7">
           {jakauma.arvot.map((arvo) => (
-            <li key={arvo.arvo}>{`${getDisplayValue(arvo.arvo)} (${arvo.osuus.toFixed(1)}%)`}</li>
+            <li key={arvo.arvo} className="flex flex-col gap-3">
+              <span className="text-heading-3 text-accent first-letter:capitalize">{getDisplayValue(arvo.arvo)}</span>
+              <span className="text-body-sm text-black">
+                {t('job-opportunity.n-percent-of-job-ads', { count: Math.round(arvo.osuus) })}
+              </span>
+            </li>
           ))}
         </ul>
       )}
@@ -71,4 +83,22 @@ const JakaumaList = ({
   );
 };
 
-export default JakaumaList;
+export const EducationJakaumaList = ({ name }: { name: JakaumaKey }) => {
+  const { jakaumat } = useLoaderData<EducationLoaderData>();
+  return <JakaumaList jakaumat={jakaumat} name={name} codesAsValue={['kunta', 'koulutusala', 'opetustapa', 'aika']} />;
+};
+
+export const JobJakaumaList = ({ name }: { name: JakaumaKey }) => {
+  const { jakaumat, codesetValues } = useLoaderData<JobLoaderData>();
+
+  return (
+    <JakaumaList
+      name={name}
+      jakaumat={jakaumat}
+      booleanKeys={['rikosrekisteriote', 'matkustusvaatimus', 'sijaintiJoustava']}
+      codesAsValue={['ajokortti', 'kielitaito']}
+      codesetKeys={['maa', 'maakunta', 'kunta', 'tyokieli']}
+      codesetValues={codesetValues}
+    />
+  );
+};

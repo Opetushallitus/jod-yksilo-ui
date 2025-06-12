@@ -1,7 +1,7 @@
-import JakaumaList from '@/components/JakaumaList/JakaumaList';
+import { EducationJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { type LoaderData } from '@/routes/EducationOpportunity/loader';
-import { JakaumaKey } from '@/routes/types';
+import type { JakaumaKey } from '@/routes/types';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { Tag } from '@jod/design-system';
 import React from 'react';
@@ -20,7 +20,6 @@ const EducationOpportunity = () => {
     () => [...(osaamiset ?? [])].sort(sortByProperty(`nimi.${language}`)),
     [osaamiset, language],
   );
-  const codesAsValue: JakaumaKey[] = ['kunta', 'koulutusala', 'opetustapa', 'aika'];
 
   const sections = [
     tiivistelma
@@ -74,16 +73,24 @@ const EducationOpportunity = () => {
       navTitle: t('more-information'),
       showInDevOnly: true,
       content: (
-        <div className="grid w-full grow grid-cols-2 gap-6">
-          {(Object.keys(jakaumat) as JakaumaKey[])
-            .filter((key) => !['osaaminen', 'ammatti'].includes(key))
-            .map((key) => (
-              <JakaumaList codesAsValue={codesAsValue} jakaumat={jakaumat} key={key} name={key} />
-            ))}
+        <div className="bg-white p-6 flex flex-col gap-6">
+          <div className="grid w-full grow grid-cols-2 gap-6">
+            {(Object.keys(jakaumat) as JakaumaKey[])
+              .filter((key) => !['osaaminen', 'ammatti'].includes(key))
+              .map((key) => (
+                <EducationJakaumaList key={key} name={key} />
+              ))}
+          </div>
         </div>
       ),
     },
-  ].filter(Boolean) as OpportunityDetailsSection[];
+  ]
+    .map((section) => ({
+      ...section,
+      showAiRating: false,
+      showDivider: false,
+    }))
+    .filter(Boolean) as OpportunityDetailsSection[];
 
   return (
     <OpportunityDetails
