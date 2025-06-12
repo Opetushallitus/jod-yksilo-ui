@@ -57,8 +57,20 @@ const loader = (async ({ request, params, context }) => {
 
   if (context) {
     await useToolStore.getState().updateSuosikit(true);
-  }
+    const { data = [] } = await client.GET('/api/profiili/osaamiset');
 
+    const omatRelevantOsaamiset = data.filter((osaaminen) =>
+      competences.some((c) => c.uri === osaaminen.osaaminen.uri),
+    );
+
+    useToolStore.getState().setOsaamiset(
+      omatRelevantOsaamiset.map((x) => ({
+        id: x.osaaminen.uri,
+        kuvaus: x.osaaminen.kuvaus,
+        nimi: x.osaaminen.nimi,
+      })),
+    );
+  }
   return {
     tyomahdollisuus,
     osaamiset: competences,

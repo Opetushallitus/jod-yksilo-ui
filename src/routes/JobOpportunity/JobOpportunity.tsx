@@ -1,30 +1,30 @@
+import { AiInfo } from '@/components';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
-import JakaumaList from '@/components/JakaumaList/JakaumaList';
+import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
-import type { JakaumaKey } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText, hashString } from '@/utils';
+import { getLocalizedText, hashString, sortByProperty } from '@/utils';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
+import { useShallow } from 'zustand/shallow';
 import type { LoaderData } from './loader';
 
 const JobOpportunity = () => {
-  const { t } = useTranslation();
-  const { tyomahdollisuus, ammatit, ammattiryhma, osaamiset, isLoggedIn, jakaumat, codesetValues } =
-    useLoaderData<LoaderData>();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+  const { tyomahdollisuus, osaamiset, isLoggedIn } = useLoaderData<LoaderData>();
   const hasAiContent = tyomahdollisuus.aineisto !== 'AMMATTITIETO';
-
-  const toolStore = useToolStore();
-  const omatOsaamisetUris = React.useMemo(
-    () => toolStore.osaamiset?.map((osaaminen) => osaaminen.id),
-    [toolStore.osaamiset],
-  );
+  const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
   const competencesTableData = React.useMemo(
-    () => osaamiset.map((competence) => ({ ...competence, profiili: omatOsaamisetUris?.includes(competence.uri) })),
-    [osaamiset, omatOsaamisetUris],
+    () =>
+      osaamiset
+        .map((competence) => ({ ...competence, profiili: omatOsaamisetUris?.includes(competence.uri) }))
+        .sort(sortByProperty(`nimi.${language}`)),
+    [osaamiset, language, omatOsaamisetUris],
   );
-  const clusterSize = tyomahdollisuus?.jakaumat?.ammatti?.maara;
 
   const tyomahdollisuusTehtavat =
     getLocalizedText(tyomahdollisuus?.tehtavat) !== ''
@@ -33,149 +33,65 @@ const JobOpportunity = () => {
           .sort((a: string, b: string) => a.localeCompare(b))
       : [];
 
-  const codesetKeys: JakaumaKey[] = ['maa', 'maakunta', 'kunta', 'tyokieli'];
-  const booleanKeys: JakaumaKey[] = ['rikosrekisteriote', 'matkustusvaatimus', 'sijaintiJoustava'];
-  const codesAsValue: JakaumaKey[] = ['ajokortti', 'kielitaito'];
-
   const sections: OpportunityDetailsSection[] = [
     {
       navTitle: t('description'),
-      hasAiContent,
-      content: <p className="text-body-md font-arial">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>,
+      titleAppendix: getLocalizedText(tyomahdollisuus.otsikko),
+      showDivider: false,
+      showAiRating: false,
+      showAiInfoInTitle: hasAiContent,
+      content: <p className="text-body-lg font-arial">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>,
     },
     {
       navTitle: t('job-opportunity.most-common-job-tasks.title'),
-      hasAiContent,
+      showAiInfoInTitle: false,
+      showAiRating: true,
       content: (
-        <ol className="list-decimal ml-7 text-body-lg font-medium text-black leading-7">
+        <ul className="list-disc ml-7 text-body-lg text-black">
           {tyomahdollisuusTehtavat.map((value: string, index: number) => (
             // eslint-disable-next-line react/no-array-index-key
             <li key={`${hashString(value)}-${index}`} className="text-capitalize text-body">
               {value}
             </li>
           ))}
-        </ol>
-      ),
-    },
-    {
-      navTitle: t('job-opportunity.occupations.title'),
-      content: (
-        <ol className="list-decimal ml-7 text-body-lg font-medium text-black leading-7">
-          {ammatit.map((ammatti) => (
-            <li
-              className="text-capitalize text-body"
-              title={`${ammatti.koodi} ${getLocalizedText(ammatti.kuvaus)} (${ammatti.osuus.toFixed(1)}%, N = ${clusterSize})`}
-              key={ammatti.uri}
-            >
-              {getLocalizedText(ammatti.nimi)}
-            </li>
-          ))}
-        </ol>
-      ),
-    },
-    {
-      navTitle: t('job-opportunity.professional-group'),
-      content: (
-        <ul className="list-none ml-0 text-body-lg font-medium text-black leading-7">
-          <li
-            className="text-capitalize text-body"
-            title={`${ammattiryhma?.uri}\n${(getLocalizedText(ammattiryhma?.kuvaus), 'en')}`}
-            key={ammattiryhma?.uri}
-          >
-            {getLocalizedText(ammattiryhma?.nimi)}
-          </li>
         </ul>
       ),
     },
     {
-      navTitle: t('job-opportunity.key-figures.title'),
-      content: (
-        <>
-          <p className="text-body-md font-arial mb-6">{t('job-opportunity.key-figures.description')}</p>
-          <div className="bg-todo h-[380px]" />
-        </>
-      ),
-      showInDevOnly: true,
-    },
-    {
-      navTitle: t('job-opportunity.labour-market-picture.title'),
-      content: (
-        <>
-          <p className="text-body-md font-arial mb-6">{t('job-opportunity.labour-market-picture.description')}</p>
-          <div className="bg-todo h-[380px]" />
-        </>
-      ),
-      showInDevOnly: true,
-    },
-    {
-      navTitle: t('job-opportunity.salary-trends.title'),
-      content: (
-        <>
-          <p className="text-body-md font-arial mb-6">{t('job-opportunity.salary-trends.description')}</p>
-          <div className="bg-todo h-[380px]" />
-        </>
-      ),
-      showInDevOnly: true,
-    },
-    {
       navTitle: t('job-opportunity.competences.title'),
-      content: (
-        <CompareCompetencesTable
-          opportunityName={tyomahdollisuus?.otsikko}
-          rows={competencesTableData}
-          className="mt-4"
-        />
-      ),
+      titleAppendix: getLocalizedText(tyomahdollisuus.otsikko),
+      showAiInfoInTitle: hasAiContent,
+      showAiRating: true,
+      content: <CompareCompetencesTable rows={competencesTableData} className="mt-4" />,
     },
     {
-      navTitle: t('job-opportunity.employment-trends.title'),
+      navTitle: t('job-opportunity.more-information'),
+      showNavTitle: true,
+      showDivider: false,
+      showAiRating: true,
       content: (
-        <>
-          <p className="text-body-md font-arial mb-6">{t('job-opportunity.employment-trends.description')}</p>
-          <div className="bg-todo h-[380px]" />
-        </>
-      ),
-      showInDevOnly: true,
-    },
-    {
-      navTitle: t('job-opportunity.related-jobs.title'),
-      content: (
-        <>
-          <p className="text-body-md font-arial mb-6">{t('job-opportunity.related-jobs.description')}</p>
-          <div className="bg-todo h-[380px] mb-8" />
-        </>
-      ),
-      showInDevOnly: true,
-    },
-    {
-      navTitle: t('more-information'),
-      content: (
-        <div className="grid w-full grow grid-cols-2 gap-6">
-          {(Object.keys(jakaumat) as JakaumaKey[])
-            .filter((key) => !['osaaminen', 'ammatti'].includes(key))
-            .map((key) => (
-              <JakaumaList
-                booleanKeys={booleanKeys}
-                codesAsValue={codesAsValue}
-                codesetKeys={codesetKeys}
-                codesetValues={codesetValues}
-                jakaumat={jakaumat}
-                key={key}
-                name={key}
-              />
-            ))}
+        <div className="bg-white p-6 flex flex-col gap-6">
+          <div className="flex justify-between">
+            <h3 className="text-heading-3">{t('job-opportunity.special-characteristics-from-tyomarkkinatori')}:</h3>
+            <div className="pl-7">
+              <AiInfo />
+            </div>
+          </div>
+          <p>{t('job-opportunity.special-characteristics-from-tyomarkkinatori-description')}</p>
+
+          <div className="grid w-full grow grid-cols-2 gap-6">
+            <JobJakaumaList name="tyonJatkuvuus" />
+            <JobJakaumaList name="kielitaito" />
+            <JobJakaumaList name="koulutusala" />
+            <JobJakaumaList name="ajokortti" />
+            <JobJakaumaList name="rikosrekisteriote" />
+          </div>
         </div>
       ),
     },
   ];
   return (
-    <OpportunityDetails
-      data={tyomahdollisuus}
-      isLoggedIn={isLoggedIn}
-      tyyppi="TYOMAHDOLLISUUS"
-      sections={sections}
-      showAiInfoInTitle={hasAiContent}
-    />
+    <OpportunityDetails data={tyomahdollisuus} isLoggedIn={isLoggedIn} tyyppi="TYOMAHDOLLISUUS" sections={sections} />
   );
 };
 
