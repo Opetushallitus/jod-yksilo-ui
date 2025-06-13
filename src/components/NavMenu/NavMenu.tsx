@@ -15,6 +15,20 @@ const FrontPageLink = ({ children, className }: LinkComponent) => {
   );
 };
 
+const LogoLink = ({
+  to,
+  className,
+  children,
+}: {
+  to: object | string;
+  className?: string;
+  children: React.ReactNode;
+}) => (
+  <Link to={to} className={className}>
+    {children}
+  </Link>
+);
+
 const LanguageSelectionLinkComponent = (generateLocalizedPath: (langCode: string) => string, langCode: string) => {
   const LanguageSelectionLink = (props: LinkComponent) => {
     const localizedPath = generateLocalizedPath(langCode);
@@ -82,6 +96,8 @@ export const NavMenu = ({ open, onClose }: { open: boolean; onClose: () => void 
       openSubMenuLabel={t('open-submenu')}
       frontPageLinkLabel={t('front-page')}
       onClose={onClose}
+      logo={{ to: `/${language}`, language, srText: t('osaamispolku') }}
+      logoLink={LogoLink}
       selectedLanguage={language}
       languageSelectionItems={languageSelectionItems}
       externalLinkSections={externalLinkSections}
