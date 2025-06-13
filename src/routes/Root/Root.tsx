@@ -146,10 +146,10 @@ const Root = () => {
         feedbackTitle={t('footer.feedback-title')}
         feedbackContent={t('footer.feedback-content')}
         feedbackButtonLabel={t('footer.feedback-button-label')}
-        feedbackTo="#"
         feedbackBgImageClassName="bg-[url(@/../assets/home-1.avif)] bg-cover bg-[length:auto_auto] sm:bg-[length:auto_1000px] bg-[top_-0rem_right_-0rem] sm:bg-[top_-21rem_right_0rem]"
-        FeedbackLinkComponent={NavLink}
         copyright={t('copyright')}
+        // eslint-disable-next-line no-console
+        feedbackOnClick={() => console.log('feedbackOnClick')}
       />
       <Toaster />
       <ScrollRestoration />
