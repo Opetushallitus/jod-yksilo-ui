@@ -1,7 +1,6 @@
-import { mapOsaaminenToUri } from '@/routes/Profile/Path/utils';
 import { useEhdotetutVaiheetStore } from '@/stores/useEhdotetutVaiheetStore';
 import { usePolutStore } from '@/stores/usePolutStore';
-import { PageChangeDetails, Pagination, RadioButtonGroup, Spinner, useMediaQueries } from '@jod/design-system';
+import { type PageChangeDetails, Pagination, RadioButtonGroup, Spinner, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -11,25 +10,11 @@ const SelectOpportunityStep = ({ vaiheIndex }: { vaiheIndex: number }) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
 
-  const {
-    disabledOsaamiset,
-    ignoredOsaamiset,
-    osaamisetFromProfile,
-    osaamisetFromVaiheet,
-    proposedOpportunity,
-    selectedOsaamiset,
-    setProposedOpportunity,
-    vaaditutOsaamiset,
-  } = usePolutStore(
+  const { proposedOpportunity, getMissingOsaamisetUris, setProposedOpportunity } = usePolutStore(
     useShallow((state) => ({
-      disabledOsaamiset: state.disabledOsaamiset,
-      ignoredOsaamiset: state.ignoredOsaamiset,
-      osaamisetFromProfile: state.osaamisetFromProfile,
-      osaamisetFromVaiheet: state.osaamisetFromVaiheet,
       proposedOpportunity: state.proposedOpportunity,
-      selectedOsaamiset: state.selectedOsaamiset,
+      getMissingOsaamisetUris: state.getMissingOsaamisetUris,
       setProposedOpportunity: state.setProposedOpportunity,
-      vaaditutOsaamiset: state.vaaditutOsaamiset,
     })),
   );
 
@@ -47,15 +32,7 @@ const SelectOpportunityStep = ({ vaiheIndex }: { vaiheIndex: number }) => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const existingOsaamiset = [
-        ...osaamisetFromProfile.map(mapOsaaminenToUri),
-        ...osaamisetFromVaiheet.map(mapOsaaminenToUri),
-        ...selectedOsaamiset,
-        ...disabledOsaamiset,
-        ...ignoredOsaamiset,
-      ];
-      const osaaminenUris = vaaditutOsaamiset.map(mapOsaaminenToUri).filter((uri) => !existingOsaamiset.includes(uri));
-      await fetchEhdotukset(osaaminenUris);
+      await fetchEhdotukset(getMissingOsaamisetUris());
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,10 +1,7 @@
-/* eslint-disable sonarjs/no-clear-text-protocols */
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails } from '@/api/mahdollisuusService';
-import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
-import i18n from '@/i18n/config';
 import { TypedMahdollisuus } from '@/routes/types';
 import { paginate, sortByProperty } from '@/utils';
 import { PageChangeDetails } from '@jod/design-system';
@@ -82,25 +79,28 @@ export const useEhdotetutVaiheetStore = create<EhdotetutVaiheetState>()((set, ge
         totalItems: filteredEhdotukset.length,
       });
     }
-    const paginated = paginate(filteredEhdotukset, safePageNr, pageSize);
+    const sorted = [...filteredEhdotukset].sort((a, b) => {
+      return a.ehdotusMetadata?.pisteet !== undefined && b.ehdotusMetadata?.pisteet !== undefined
+        ? sortByProperty<components['schemas']['EhdotusMetadata']>('pisteet', true)(
+            a.ehdotusMetadata,
+            b.ehdotusMetadata,
+          )
+        : 0;
+    });
+
+    const paginated = paginate(sorted, safePageNr, pageSize);
     const koulutusIds = paginated.map((s) => s.mahdollisuusId ?? '').filter(Boolean);
 
     set({ isLoading: true });
 
-    const typedKoulutusmahdollisuudet = await getTypedKoulutusMahdollisuusDetails(koulutusIds);
-
-    const mockOsaamiset = await osaamiset.find([
-      'http://data.europa.eu/esco/skill/089ddb19-1c7a-43ff-ba64-070f7ce4787a',
-      'http://data.europa.eu/esco/skill/09fd83e2-2e47-4e56-9200-0393c05f9a71',
-      'http://data.europa.eu/esco/skill/0cf27a00-947f-473d-af1a-24028c17ba27',
-      'http://data.europa.eu/esco/skill/0e89c75a-0f10-4d4c-b85c-ca7cfbeb9352',
-      'http://data.europa.eu/esco/skill/120e54ef-b480-4d49-bf8d-591dbd3598f5',
-    ]);
+    const typedKoulutusmahdollisuudet = (await getTypedKoulutusMahdollisuusDetails(koulutusIds)).sort(
+      (a, b) => sorted.findIndex((e) => e.mahdollisuusId === a.id) - sorted.findIndex((e) => e.mahdollisuusId === b.id),
+    );
 
     set({
-      pageData: typedKoulutusmahdollisuudet.map((m) => ({
-        ...m,
-        osaamiset: [...mockOsaamiset].sort(sortByProperty(`nimi.${i18n.language}`)),
+      pageData: typedKoulutusmahdollisuudet.map((mahdollisuus) => ({
+        ...mahdollisuus,
+        osaamisetCount: ehdotukset.find((e) => e.mahdollisuusId === mahdollisuus.id)?.ehdotusMetadata?.osaamisia ?? 0,
       })),
       pageNr: safePageNr,
       totalItems: filteredEhdotukset.length,

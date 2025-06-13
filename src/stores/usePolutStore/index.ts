@@ -1,5 +1,5 @@
 import { components } from '@/api/schema';
-import { VaiheForm } from '@/routes/Profile/Path/utils';
+import { mapOsaaminenToUri, VaiheForm } from '@/routes/Profile/Path/utils';
 import { TypedMahdollisuus } from '@/routes/types';
 import { create } from 'zustand';
 
@@ -27,9 +27,10 @@ interface PolkuState {
   setOsaamisetFromVaiheet: (state: Osaaminen[]) => void;
   setVaaditutOsaamiset: (state: Osaaminen[]) => void;
   setProposedOpportunity: (state: TypedMahdollisuus | undefined) => void;
+  getMissingOsaamisetUris: () => string[];
 }
 
-export const usePolutStore = create<PolkuState>()((set) => ({
+export const usePolutStore = create<PolkuState>()((set, get) => ({
   polku: undefined,
   vaiheet: [],
   polutLoading: false,
@@ -50,4 +51,16 @@ export const usePolutStore = create<PolkuState>()((set) => ({
   setOsaamisetFromVaiheet: (state) => set({ osaamisetFromVaiheet: state }),
   setVaaditutOsaamiset: (state) => set({ vaaditutOsaamiset: state }),
   setProposedOpportunity: (state) => set({ proposedOpportunity: state }),
+  getMissingOsaamisetUris: () => {
+    const existingOsaamiset = [
+      ...get().osaamisetFromProfile.map(mapOsaaminenToUri),
+      ...get().osaamisetFromVaiheet.map(mapOsaaminenToUri),
+      ...get().selectedOsaamiset,
+      ...get().disabledOsaamiset,
+      ...get().ignoredOsaamiset,
+    ];
+    return get()
+      .vaaditutOsaamiset.map(mapOsaaminenToUri)
+      .filter((uri) => !existingOsaamiset.includes(uri));
+  },
 }));

@@ -542,7 +542,7 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    /** Gets suggestions for education and work opportunities for polku ranked suggestions based on missing skills. */
+    /** Gets suggestions for education opportunities for polku ranked suggestions based on missing skills. */
     post: operations['mahdollisuudetGetMahdollisuudetSuggestionsForPolkuVaihe'];
     delete?: never;
     options?: never;
@@ -971,6 +971,8 @@ export interface components {
       pisteet?: number;
       /** @enum {string} */
       trendi?: 'NOUSEVA' | 'LASKEVA';
+      /** Format: int64 */
+      osaamisia?: number;
       /** Format: int32 */
       tyollisyysNakyma?: number;
       /** Format: int32 */

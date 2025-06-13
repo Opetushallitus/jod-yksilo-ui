@@ -6,7 +6,7 @@ import { usePolutStore } from '@/stores/usePolutStore';
 import { removeDuplicates, sortByProperty } from '@/utils';
 import { LoaderFunction } from 'react-router';
 
-export default (async ({ request, params }) => {
+const loader = (async ({ request, params }) => {
   const { paamaaraId, suunnitelmaId } = params;
   const polkuStore = usePolutStore.getState();
 
@@ -79,3 +79,5 @@ export default (async ({ request, params }) => {
     return { paamaara, mahdollisuus, vaaditutOsaamiset, profiiliOsaamiset };
   }
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
+export type PathLoaderData = Awaited<ReturnType<typeof loader>>;
+export default loader;
