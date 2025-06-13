@@ -778,6 +778,9 @@ export interface components {
   schemas: {
     YksiloDto: {
       tervetuloapolku?: boolean;
+      lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
+      lupaArkistoida?: boolean;
+      lupaKayttaaTekoalynKoulutukseen?: boolean;
     };
     /** @example {
      *       "fi": "suomeksi",
@@ -1037,6 +1040,9 @@ export interface components {
       sukunimi?: string;
       csrf: components['schemas']['CsrfTokenDto'];
       tervetuloapolku?: boolean;
+      lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
+      lupaArkistoida?: boolean;
+      lupaKayttaaTekoalynKoulutukseen?: boolean;
     };
     KoulutusExportDto: {
       /** Format: uuid */
@@ -1137,6 +1143,9 @@ export interface components {
       /** Format: uuid */
       id?: string;
       tervetuloapolku?: boolean;
+      lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
+      lupaArkistoida?: boolean;
+      lupaKayttaaTekoalynKoulutukseen?: boolean;
       tyopaikat?: components['schemas']['TyopaikkaExportDto'][];
       koulutusKokonaisuudet?: components['schemas']['KoulutusKokonaisuusExportDto'][];
       toiminnot?: components['schemas']['ToimintoExportDto'][];
