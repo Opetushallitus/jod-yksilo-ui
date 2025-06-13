@@ -1,8 +1,9 @@
 import { client } from '@/api/client';
+import { components } from '@/api/schema';
 import { Button, WizardProgress } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useNavigate, useRouteLoaderData } from 'react-router';
 
 const SparkleIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -83,10 +84,18 @@ const Introduction = () => {
   const { t } = useTranslation();
   const [step, setStep] = React.useState(1);
   const navigate = useNavigate();
+  const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
 
   const onClick = async () => {
     if (step === 3) {
-      await client.PUT('/api/profiili/yksilo', { body: { tervetuloapolku: true } });
+      await client.PUT('/api/profiili/yksilo', {
+        body: {
+          tervetuloapolku: true,
+          lupaLuovuttaaTiedotUlkopuoliselle: data?.lupaLuovuttaaTiedotUlkopuoliselle ?? false,
+          lupaArkistoida: data?.lupaArkistoida ?? false,
+          lupaKayttaaTekoalynKoulutukseen: data?.lupaKayttaaTekoalynKoulutukseen ?? false,
+        },
+      });
       navigate('/');
     } else {
       setStep((value) => value + 1);

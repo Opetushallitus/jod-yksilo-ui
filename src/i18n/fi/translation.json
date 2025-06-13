@@ -14,6 +14,7 @@
     "description": "Olemme käyttäneet tämän sisällön luomisessa hyödyksi kielimallia.\nLisää tietoa tekoälyn käytöstä Osaamispolussa:",
     "title": "Tekoälyn avulla generoitu sisältö"
   },
+  "allow": "Sallin",
   "back": "Takaisin",
   "basic-information": "Perustiedot",
   "cancel": "Peruuta",
@@ -72,6 +73,7 @@
   "delete": "Poista",
   "description": "Kuvaus",
   "development-trend": "Kehitystrendi",
+  "disallow": "En salli",
   "do-filter": "Suodata",
   "done": "Valmis",
   "duration": "Kesto",
@@ -475,6 +477,22 @@
     "top": "Yläpuolen sivutus"
   },
   "preferences": {
+    "data-disclosure-unanonymized": {
+      "description": "Voit valita, luovutetaanko tietosi rajapintojen kautta seuraaviin tarkoituksiin:",
+      "permission-ai-training": {
+        "description": "Voit sallia tietojesi käytön tekoälyn koulutukseen, mikä auttaa parantamaan palvelun laatua.",
+        "title": "Lupa käyttää tekoälyn koulutukseen"
+      },
+      "permission-share-with-third-parties": {
+        "description": "Voit sallia tietojesi luovuttamisen ulkopuolisille tahoille, kuten tutkimus- ja kehityshankkeisiin.",
+        "title": "Lupa luovuttaa tiedot ulkopuoliselle"
+      },
+      "permission-to-archive": {
+        "description": "Voit sallia tietojesi arkistoinnin, mikä mahdollistaa niiden säilyttämisen pidempiaikaisesti.",
+        "title": "Lupa arkistoida"
+      },
+      "title": "Tietojen luovutus anonymisoimattomana"
+    },
     "delete-profile": {
       "action": "Poista osaamisprofiili",
       "confirm": "Haluatko varmasti poistaa osaamisprofiilisi?",
