@@ -44,12 +44,7 @@ const VaiheOpportunityCard = React.memo(({ mahdollisuus }: VaiheOpportunityCardP
             {t('opportunity-type.education')}
           </span>
           <span>
-            <RadioButton
-              label={t('profile.paths.add-as-phase')}
-              value={id}
-              variant="bordered"
-              className="cursor-pointer"
-            />
+            <RadioButton label={t('profile.paths.add-as-phase')} value={id} className="cursor-pointer" />
           </span>
         </div>
         <span className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto">{getLocalizedText(otsikko)}</span>
