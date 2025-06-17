@@ -258,7 +258,7 @@ const Path = () => {
 
   React.useEffect(() => {
     const max = vaaditutOsaamiset.length - ignoredOsaamisetValues.length;
-    setPercentage(Math.round((allChecked.length / max) * 100));
+    setPercentage(max === 0 ? 100 : Math.round((allChecked.length / max) * 100));
   }, [allChecked.length, ignoredOsaamisetValues.length, vaaditutOsaamiset.length]);
 
   React.useEffect(() => {
