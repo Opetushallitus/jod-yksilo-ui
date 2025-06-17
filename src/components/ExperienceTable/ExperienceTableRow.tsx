@@ -162,7 +162,6 @@ export const ExperienceTableRow = ({
           }
         }}
         ariaLabel={t('choose') + ' ' + row.nimi[language]}
-        variant="bordered"
       />
     );
   };

@@ -95,7 +95,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                       <div className="flex flex-col gap-4" key={polku.id}>
                         <Link
                           to={`${pm.id}/${t('slugs.profile.path')}/${polku.id}`}
-                          className="text-link flex gap-2 text-heading-4"
+                          className="text-accent flex gap-2 text-heading-4"
                         >
                           {getLocalizedText(polku.nimi)} <MdArrowForward size={24} />
                         </Link>

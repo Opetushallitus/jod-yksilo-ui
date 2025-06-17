@@ -88,7 +88,6 @@ const CompetencesStep = ({ vaiheIndex }: { vaiheIndex: number }) => {
                 <Checkbox
                   name={osaaminen.uri}
                   value={osaaminen.uri}
-                  variant="bordered"
                   checked={isChecked(osaaminen.uri)}
                   ariaLabel={t('profile.paths.add-to-step')}
                   className="disabled:bg-inactive-gray"
