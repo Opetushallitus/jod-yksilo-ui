@@ -62,7 +62,7 @@ const VaiheCard = ({ vaihe, totalSteps, setVaiheComplete, openVaiheModal }: Vaih
         {vaihe.mahdollisuusId ? (
           <Link
             to={`/${language}/koulutusmahdollisuus/${vaihe.mahdollisuusId}`}
-            className="text-heading-2 hover:text-link hover:underline cursor-pointer"
+            className="text-heading-2 hover:text-accent hover:underline cursor-pointer"
           >
             {vaihe.nimi[language]}
           </Link>
@@ -78,7 +78,7 @@ const VaiheCard = ({ vaihe, totalSteps, setVaiheComplete, openVaiheModal }: Vaih
           <div className="flex flex-col gap-1">
             {vaihe.linkit.map((link) => (
               <div className="flex flex-row gap-6" key={link.url}>
-                <a href={link.url} target="_blank" rel="noreferrer" className="text-link">
+                <a href={link.url} target="_blank" rel="noreferrer" className="text-accent">
                   {link.url}
                 </a>
               </div>

@@ -65,7 +65,7 @@ export const HelpingToolLinkItem = ({
       <Component>
         <div className="flex gap-x-3">
           {iconLeft ?? null}
-          <div className="text-heading-4 text-accent group-hover:text-link group-hover:underline">{title}</div>
+          <div className="text-heading-4 text-accent group-hover:text-accent group-hover:underline">{title}</div>
           {iconRight ?? null}
         </div>
       </Component>
