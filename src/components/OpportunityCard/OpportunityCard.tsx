@@ -132,7 +132,7 @@ export const OpportunityCard = ({
           {to ? (
             <NavLink
               to={to}
-              className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto hover:underline hover:text-link"
+              className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto hover:underline hover:text-accent"
             >
               {name}
             </NavLink>

@@ -515,7 +515,6 @@ const Path = () => {
                                 {...field}
                                 name={name}
                                 value={uri}
-                                variant="bordered"
                                 disabled={allDisabled.includes(uri)}
                                 checked={
                                   osaamisetArray.fields.some((o) => o.uri === uri) ||
@@ -541,7 +540,6 @@ const Path = () => {
                               <Checkbox
                                 {...field}
                                 value={uri}
-                                variant="bordered"
                                 checked={ignoredOsaamisetArray.fields.some((osaaminen) => osaaminen.uri === uri)}
                                 disabled={disabledIgnores.includes(uri)}
                                 ariaLabel={`${t('profile.paths.ignore')} ${name}`}

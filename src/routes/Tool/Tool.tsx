@@ -158,7 +158,7 @@ const MyOwnData = () => {
                   onClick={() => navigate(tab.to, { replace: true, preventScrollReset: true })}
                   className={cx(`cursor-pointer w-full p-3 rounded-t text-center overflow-hidden`, {
                     'bg-white': tab.active,
-                    'text-link': !tab.active,
+                    'text-accent': !tab.active,
                   })}
                 >
                   {tab.icon}
@@ -429,7 +429,6 @@ const ExploreOpportunities = () => {
               name={filterValues.TYOMAHDOLLISUUS}
               onChange={onFilterChange}
               value={filterValues.TYOMAHDOLLISUUS}
-              variant="bordered"
             />
             <Checkbox
               ariaLabel={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
@@ -438,7 +437,6 @@ const ExploreOpportunities = () => {
               name={filterValues.KOULUTUSMAHDOLLISUUS}
               onChange={onFilterChange}
               value={filterValues.KOULUTUSMAHDOLLISUUS}
-              variant="bordered"
             />
             <IconButton
               label={`${t('sort')} (${getSortingTranslationKey(sorting)})`}
