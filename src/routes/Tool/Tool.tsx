@@ -424,7 +424,7 @@ const ExploreOpportunities = () => {
             <span className="text-heading-4-mobile sm:text-heading-4">{t('show')}</span>
             <Checkbox
               ariaLabel={getCheckboxLabel('TYOMAHDOLLISUUS')}
-              checked={filter.includes('TYOMAHDOLLISUUS')}
+              checked={filter.includes('ALL') || filter.includes('TYOMAHDOLLISUUS')}
               label={getCheckboxLabel('TYOMAHDOLLISUUS')}
               name={filterValues.TYOMAHDOLLISUUS}
               onChange={onFilterChange}
@@ -433,7 +433,7 @@ const ExploreOpportunities = () => {
             />
             <Checkbox
               ariaLabel={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
-              checked={filter.includes('KOULUTUSMAHDOLLISUUS')}
+              checked={filter.includes('ALL') || filter.includes('KOULUTUSMAHDOLLISUUS')}
               label={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
               name={filterValues.KOULUTUSMAHDOLLISUUS}
               onChange={onFilterChange}
