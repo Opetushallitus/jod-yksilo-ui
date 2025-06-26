@@ -1,11 +1,14 @@
 import { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { useTranslation } from 'react-i18next';
-import { useRouteLoaderData } from 'react-router';
+import { Link, useRouteLoaderData } from 'react-router';
 import { ProfileNavigationList } from '../components';
 
 const ProfileFront = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
 
   return (
@@ -28,7 +31,16 @@ const ProfileFront = () => {
           <li className="list-disc ml-7 pl-4">{t('profile.preferences.list-2-item-2')}</li>
         </ul>
         <p>{t('profile.preferences.paragraph-3')}</p>
-        <p>{t('profile.preferences.paragraph-4')}</p>
+        <p>
+          {t('profile.preferences.paragraph-4')}
+          <Link
+            to={`/${language}/${t('slugs.basic-information')}/${t('slugs.privacy-policy')}`}
+            className="text-accent hover:underline"
+          >
+            {t('profile.preferences.paragraph-4-link')}
+          </Link>
+          .
+        </p>
       </div>
     </MainLayout>
   );

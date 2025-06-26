@@ -680,14 +680,15 @@
       "your-competences": "Omat osaamisesi"
     },
     "preferences": {
-      "list-1-item-1": "kerätä tietoa omasta osaamisestasi (osaaminen)",
-      "list-1-item-2": "tallentaa koulutus- ja työhistoriasi sekä lisätä vapaa-ajan tekemisiä sekä tuoda myös työhistoriasi työmarkkinatorin työnhakuprofiilista sekä koulutushistoriasi Opintopolun omista opintosuorituksista (työpaikat, koulutus, vapaa-aika)",
-      "list-1-item-3": "kerätä myös tietoa omista kiinnostuksenkohteistasi (kiinnostukseni)",
-      "list-2-item-1": "Voit myös tallentaa ehdotettuja koulutus- ja työmahdollisuuksia suosikeiksi talteen myöhempää käyttöä varten ja osaamispolkujen luomista varten (suosikit)",
-      "list-2-item-2": "Voit luoda ja ylläpitää koulutus- ja urapolkusuunnitelmiasi (polut)",
+      "list-1-item-1": "kerätä tietoa omasta osaamisestasi (Osaamiseni)",
+      "list-1-item-2": "tallentaa koulutus- ja työhistoriasi sekä lisätä vapaa-ajan tekemisiä sekä tuoda myös työhistoriasi työmarkkinatorin työnhakuprofiilista sekä koulutushistoriasi Opintopolun omista opintosuorituksista (Työpaikkani, Koulutukseni, Vapaa-ajan toimintoni)",
+      "list-1-item-3": "kerätä myös tietoa omista kiinnostuksenkohteistasi (Kiinnostuksen kohteeni)",
+      "list-2-item-1": "Voit myös tallentaa ehdotettuja koulutus- ja työmahdollisuuksia suosikeiksi talteen myöhempää käyttöä varten ja osaamispolkujen luomista varten (Suosikkini)",
+      "list-2-item-2": "Voit luoda ja ylläpitää päämääriäsi sekä koulutus- ja urapolkusuunnitelmiasi (Päämääräni)",
       "paragraph-2": "Kun täytät mahdollisimman kattavasti ylläolevat, saat juuri sinulle sopivia työ- ja koulutusmahdollisuusehdotuksia.",
       "paragraph-3": "Profiili on omasi! Päätät itse, mitä tietoja omaan osaamisprofiiliisi tallennat, mihin tietojasi käytät, ketkä muut pääsevät näkemään profiilisi ja miten muut toimijat voivat profiiliasi hyödyntää.",
-      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen digitaalisesta palvelukokonaisuudesta. Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta.",
+      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen digitaalisesta palvelukokonaisuudesta. Lue lisää tietojen käsittelyn perusteista ",
+      "paragraph-4-link": "tietosuojaselosteesta",
       "title": "Asetukseni",
       "you-are-signed-in": "Olet kirjautunut osaamisprofiiliisi. Osaamisprofiili toimii Osaamispolku-palvelun omien tietojesi säilytys- ja hallintapaikkana. Tänne voit:"
     },
