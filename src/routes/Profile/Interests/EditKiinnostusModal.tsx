@@ -95,7 +95,7 @@ const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
             }}
           >
             <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">
-              {t('profile.interests.edit-interests')}
+              {t(data.length > 0 ? 'profile.interests.edit-interests' : 'profile.interests.add-interests')}
             </h2>
             <Controller
               control={methods.control}

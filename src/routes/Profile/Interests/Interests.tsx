@@ -135,7 +135,7 @@ const Interests = () => {
       <div className="flex pt-7 mb-8">
         <Button
           variant="white"
-          label={t('profile.interests.edit-interests')}
+          label={t(sortedSkills.length > 0 ? 'profile.interests.edit-interests' : 'profile.interests.add-interests')}
           onClick={() => {
             setIsAddModalOpen(true);
           }}

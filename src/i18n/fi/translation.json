@@ -568,6 +568,7 @@
     },
     "index": "Omat sivuni",
     "interests": {
+      "add-interests": "Lisää kiinnostuksen kohteita",
       "description": "Löydät alta kaikki kiinnostuksen kohteesi, jotka olet kartoittanut itsellesi ja tallentanut ne profiiliisi. Kiinnostuksen kohteet ryhmitellään tyypin mukaan.",
       "edit-interests": "Muokkaa kiinnostuksen kohteita",
       "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus kiinnostuksitani",
