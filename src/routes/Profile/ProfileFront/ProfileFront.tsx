@@ -19,7 +19,7 @@ const ProfileFront = () => {
       </h1>
 
       <div className="mb-8 text-body-md flex flex-col gap-7">
-        <p>{t('profile.preferences.you-are-signed-in')}</p>
+        <p className="text-body-lg">{t('profile.preferences.you-are-signed-in')}</p>
         <ul>
           <li className="list-disc ml-7 pl-4">{t('profile.preferences.list-1-item-1')}</li>
           <li className="list-disc ml-7 pl-4">{t('profile.preferences.list-1-item-2')}</li>

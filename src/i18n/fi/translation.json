@@ -499,7 +499,7 @@
       "description": "Kaikki osaamisprofiilisi tallennetut tiedot poistetaan pysyvästi, eikä niitä voi palauttaa.",
       "title": "Poista koko osaamisprofiilisi ja kaikki siihen tallennetut tiedot"
     },
-    "description": "Lorem ipsum dolor sit amet, no vis verear commodo. Vix quot dicta phaedrum ad. Has eu invenire concludaturque, simul accusata no ius. Eum ad iudico eruditi, idque malorum cum no. Te nam rebum iuvaret, atqui legere admodum an pro.",
+    "description": "Tällä sivulla voit hallita henkilökohtaisia asetuksiasi ja päättää, miten osaamisprofiilisi tietoja käytetään. Voit jakaa profiilisi jakolinkin avulla, hallita henkilötietojen luovutuslupia, ladata profiilisi tiedot talteen tai poistaa ne kokonaan. Sinä päätät, mitä tietoja jaat ja kenelle.",
     "download": {
       "action": "Lataa osaamisprofiilin tiedot",
       "description": "Voit ladata itsellesi talteen kaikki osaamisprofiilin tallennetut tiedot",
