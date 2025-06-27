@@ -99,8 +99,8 @@ const Preferences = () => {
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{t('preferences.title')}</h1>
-      <div className="mb-8 text-body-md flex flex-col gap-7">
-        <p className="bg-todo">{t('preferences.description')}</p>
+      <div className="mb-8 text-body-lg flex flex-col gap-7">
+        <p>{t('preferences.description')}</p>
       </div>
       <section className="mb-8">
         <h3 className="text-heading-3-mobile sm:text-heading-3 mb-3">
