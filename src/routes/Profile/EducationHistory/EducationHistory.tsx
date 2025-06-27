@@ -8,8 +8,8 @@ import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals
 import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdOutlineSchool } from 'react-icons/md';
-import { useLoaderData, useRevalidator, useSearchParams } from 'react-router';
+import { MdArrowForward, MdOutlineSchool } from 'react-icons/md';
+import { Link, useLoaderData, useRevalidator, useSearchParams } from 'react-router';
 import { ProfileNavigationList } from '../components/index.tsx';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
 import ImportKoulutusResultModal from './modals/ImportKoulutusResultModal';
@@ -28,7 +28,10 @@ const EducationHistory = () => {
       }
     >;
   };
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const title = t('profile.education-history.title');
   const [isWizardOpen, setIsWizardOpen] = React.useState(false);
   const [isKoulutuskokonaisuusOpen, setIsKoulutuskokonaisuusOpen] = React.useState(false);
@@ -264,7 +267,18 @@ const EducationHistory = () => {
         <MdOutlineSchool color="#00818A" className="mr-2" />
         {title}
       </h1>
-      <p className="mb-9 text-body-lg">{t('profile.education-history.description')}</p>
+      <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>
+      <div className="mb-8">
+        <Link
+          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+          className="text-button-md hover:underline text-accent mt-4"
+        >
+          <div className="flex items-center gap-2">
+            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
+            <MdArrowForward size={24} />
+          </div>
+        </Link>
+      </div>
       <ExperienceTable
         mainColumnHeader={t('education-history.education-provider-or-education')}
         addNewNestedLabel={t('education-history.add-studies-to-this-education')}

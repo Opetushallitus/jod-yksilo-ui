@@ -2,8 +2,8 @@ import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/comp
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdOutlineSailing } from 'react-icons/md';
-import { useLoaderData, useRevalidator } from 'react-router';
+import { MdArrowForward, MdOutlineSailing } from 'react-icons/md';
+import { Link, useLoaderData, useRevalidator } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
 import { AddOrEditPatevyysModal } from './modals/AddOrEditPatevyysModal';
@@ -21,7 +21,10 @@ const FreeTimeActivities = () => {
       }
     >;
   };
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const title = t('profile.free-time-activities.title');
   const [isWizardOpen, setIsWizardOpen] = React.useState(false);
   const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot, osaamisetMap));
@@ -78,7 +81,18 @@ const FreeTimeActivities = () => {
         <MdOutlineSailing className="text-accent mr-2" />
         {title}
       </h1>
-      <p className="mb-9 text-body-lg">{t('profile.free-time-activities.description')}</p>
+      <p className="mb-5 text-body-lg">{t('profile.free-time-activities.description')}</p>
+      <div className="mb-8">
+        <Link
+          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+          className="text-button-md hover:underline text-accent mt-4"
+        >
+          <div className="flex items-center gap-2">
+            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
+            <MdArrowForward size={24} />
+          </div>
+        </Link>
+      </div>
       <ExperienceTable
         mainColumnHeader={t('free-time-activities.theme-or-activity')}
         addNewLabel={t('free-time-activities.add-new-free-time-theme-and-activities')}

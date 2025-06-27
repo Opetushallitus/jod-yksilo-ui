@@ -2,8 +2,8 @@ import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/comp
 import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonantajaModal';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdWorkOutline } from 'react-icons/md';
-import { useLoaderData, useRevalidator } from 'react-router';
+import { MdArrowForward, MdWorkOutline } from 'react-icons/md';
+import { Link, useLoaderData, useRevalidator } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import { WorkHistoryWizard } from './WorkHistoryWizard';
 import AddOrEditToimenkuvaModal from './modals/AddOrEditToimenkuvaModal';
@@ -21,7 +21,10 @@ const WorkHistory = () => {
       }
     >;
   };
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const title = t('profile.work-history.title');
   const [rows, setRows] = React.useState(getWorkHistoryTableRows(tyopaikat, osaamisetMap));
   const [tyopaikkaId, setTyopaikkaId] = React.useState<string | undefined>(undefined);
@@ -78,7 +81,18 @@ const WorkHistory = () => {
         <MdWorkOutline color="#AD4298" className="mr-2" />
         {title}
       </h1>
-      <p className="mb-9 text-body-lg">{t('profile.work-history.description')}</p>
+      <p className="mb-5 text-body-lg">{t('profile.work-history.description')}</p>
+      <div className="mb-8">
+        <Link
+          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+          className="text-button-md hover:underline text-accent mt-4"
+        >
+          <div className="flex items-center gap-2">
+            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
+            <MdArrowForward size={24} />
+          </div>
+        </Link>
+      </div>
       <ExperienceTable
         mainColumnHeader={t('work-history.workplace-or-job-description')}
         addNewLabel={t('work-history.add-new-workplace')}

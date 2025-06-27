@@ -9,7 +9,8 @@ import { Button, Tag, Textarea } from '@jod/design-system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useRevalidator } from 'react-router';
+import { MdArrowForward } from 'react-icons/md';
+import { Link, useLoaderData, useRevalidator } from 'react-router';
 import { z } from 'zod';
 import { ProfileNavigationList } from '../components';
 
@@ -95,7 +96,18 @@ const Interests = () => {
       {isAddModalOpen && <EditKiinnostusModal onClose={onAddModalClose} isOpen={isAddModalOpen} />}
       <title>{title}</title>
       <h1 className="text-heading-1 mb-5">{title}</h1>
-      <p className="mb-8 text-body-lg">{t('profile.interests.description')}</p>
+      <p className="mb-5 text-body-lg">{t('profile.interests.description')}</p>
+      <div className="mb-8">
+        <Link
+          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+          className="text-button-md hover:underline text-accent mt-4"
+        >
+          <div className="flex items-center gap-2">
+            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
+            <MdArrowForward size={24} />
+          </div>
+        </Link>
+      </div>
       {sortedSkills.length > 0 && (
         <>
           <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
