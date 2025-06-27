@@ -10,8 +10,8 @@ import { Button, Tag, Textarea } from '@jod/design-system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { MdLightbulbOutline } from 'react-icons/md';
-import { useLoaderData, useRevalidator } from 'react-router';
+import { MdArrowForward, MdLightbulbOutline } from 'react-icons/md';
+import { Link, useLoaderData, useRevalidator } from 'react-router';
 import { z } from 'zod';
 import { ProfileNavigationList } from '../components';
 
@@ -91,7 +91,18 @@ const SomethingElse = () => {
         <MdLightbulbOutline className="text-secondary-gray mr-2" />
         {title}
       </h1>
-      <p className="mb-8 text-body-lg">{t('profile.something-else.description')}</p>
+      <p className="mb-5 text-body-lg">{t('profile.something-else.description')}</p>
+      <div className="mb-8">
+        <Link
+          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+          className="text-button-md hover:underline text-accent mt-4"
+        >
+          <div className="flex items-center gap-2">
+            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
+            <MdArrowForward size={24} />
+          </div>
+        </Link>
+      </div>
       {muuOsaaminen.length > 0 && (
         <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
           {t('profile.something-else.my-other-comptetences')}
