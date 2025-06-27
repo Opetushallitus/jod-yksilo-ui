@@ -1,6 +1,8 @@
+import { components } from '@/api/schema';
 import { CompetenceFilter, FILTERS_ORDER, FiltersType } from '@/routes/Profile/Competences/constants';
 import { CompetenceDataGroup } from '@/routes/Profile/Competences/loader';
 import { Kokemus } from '@/routes/types';
+import { getLocalizedText } from '@/utils';
 import React from 'react';
 
 const mapExperienceToFilter = (locale: string) => (currentFilters: FiltersType) => (experience: Kokemus) => ({
@@ -28,15 +30,25 @@ const initFilters = (
   koulutukset: CompetenceDataGroup[],
   patevyydet: CompetenceDataGroup[],
   muutOsaamiset: Kokemus[],
+  muutOsaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'],
 ): FiltersType => {
   const mapCompetenceDataGroup = mapCompetenceDataGroupToFilter(locale);
   const mapExperience = mapExperienceToFilter(locale);
 
+  const localizedMuutOsaamisetVapaateksti = getLocalizedText(muutOsaamisetVapaateksti);
   const initialFilters = {
     TOIMENKUVA: toimenkuvat.map(mapCompetenceDataGroup(selectedFilters, 'TOIMENKUVA')),
     KOULUTUS: koulutukset.map(mapCompetenceDataGroup(selectedFilters, 'KOULUTUS')),
     PATEVYYS: patevyydet.map(mapCompetenceDataGroup(selectedFilters, 'PATEVYYS')),
-    MUU_OSAAMINEN: muutOsaamiset.map(mapExperience(selectedFilters)),
+    MUU_OSAAMINEN: [
+      ...muutOsaamiset.map(mapExperience(selectedFilters)),
+      {
+        label: '',
+        value: [],
+        checked: localizedMuutOsaamisetVapaateksti.length > 0,
+        competences: [],
+      },
+    ],
   };
 
   return initialFilters;
@@ -49,14 +61,24 @@ export const useInitializeFilters = (
   koulutukset: CompetenceDataGroup[],
   patevyydet: CompetenceDataGroup[],
   muutOsaamiset: Kokemus[],
+  muutOsaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'],
 ) => {
   const [initialized, setInitialized] = React.useState(false);
   const [filterKeys, setFilterKeys] = React.useState<(keyof FiltersType)[]>([]);
   const [selectedFilters, setSelectedFilters] = React.useState<FiltersType>(initialSelectedFilters);
 
   const initializeFilters = React.useCallback(
-    () => initFilters(locale, selectedFilters, toimenkuvat, koulutukset, patevyydet, muutOsaamiset),
-    [locale, selectedFilters, toimenkuvat, koulutukset, patevyydet, muutOsaamiset],
+    () =>
+      initFilters(
+        locale,
+        selectedFilters,
+        toimenkuvat,
+        koulutukset,
+        patevyydet,
+        muutOsaamiset,
+        muutOsaamisetVapaateksti,
+      ),
+    [locale, selectedFilters, toimenkuvat, koulutukset, patevyydet, muutOsaamiset, muutOsaamisetVapaateksti],
   );
 
   React.useEffect(() => {

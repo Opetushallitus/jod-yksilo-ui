@@ -17,6 +17,7 @@ export interface CompetencesLoaderData {
   koulutukset: CompetenceDataGroup[];
   patevyydet: CompetenceDataGroup[];
   muutOsaamiset: components['schemas']['OsaaminenDto'][];
+  muutOsaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'];
 }
 
 /*
@@ -35,12 +36,13 @@ const filterItems = <T extends { id?: string }>(items: T[], osaaminenLahdeIds: s
 
 export default (async ({ request, context }) => {
   try {
-    const [osaamisetRes, tyopaikatRes, koulutRes, vapaaAjanToiminnotRes] = context
+    const [osaamisetRes, tyopaikatRes, koulutRes, vapaaAjanToiminnotRes, muuOsaaminenRes] = context
       ? await Promise.all([
           client.GET('/api/profiili/osaamiset', { signal: request.signal }),
           client.GET('/api/profiili/tyopaikat', { signal: request.signal }),
           client.GET('/api/profiili/koulutuskokonaisuudet', { signal: request.signal }),
           client.GET('/api/profiili/vapaa-ajan-toiminnot', { signal: request.signal }),
+          client.GET('/api/profiili/muu-osaaminen', { signal: request.signal }),
         ])
       : [null, null, null, null];
 
@@ -48,6 +50,7 @@ export default (async ({ request, context }) => {
 
     const muutOsaamiset =
       osaamisetRes?.data?.filter((o) => o.lahde.tyyppi === 'MUU_OSAAMINEN').map((o) => o.osaaminen) ?? [];
+    const muutOsaamisetVapaateksti = muuOsaaminenRes?.data?.vapaateksti;
 
     const toimenkuvat =
       tyopaikatRes?.data?.map((tyopaikka) => ({
@@ -76,6 +79,7 @@ export default (async ({ request, context }) => {
       koulutukset,
       patevyydet,
       muutOsaamiset,
+      muutOsaamisetVapaateksti,
     } as CompetencesLoaderData;
   } catch (_e) {
     return {

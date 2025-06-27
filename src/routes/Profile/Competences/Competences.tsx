@@ -14,7 +14,8 @@ import { ProfileNavigationList } from '../components';
 import { CompetenceFilter, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
 
 const Competences = () => {
-  const { toimenkuvat, koulutukset, patevyydet, muutOsaamiset, osaamiset } = useLoaderData() as CompetencesLoaderData;
+  const { osaamiset, toimenkuvat, koulutukset, patevyydet, muutOsaamiset, muutOsaamisetVapaateksti } =
+    useLoaderData() as CompetencesLoaderData;
   const { t, i18n } = useTranslation();
   const title = t('profile.competences.title');
   const [groupBy, setGroupBy] = React.useState<string>(GROUP_BY_SOURCE);
@@ -34,6 +35,7 @@ const Competences = () => {
     koulutukset,
     patevyydet,
     muutOsaamiset,
+    muutOsaamisetVapaateksti,
   );
 
   // Determines if osaamiset from a specific source should be visible. Id is the id of the source (eg. koulutus or toimenkuva).
@@ -102,6 +104,7 @@ const Competences = () => {
             filterKeys={filterKeys}
             locale={locale}
             osaamiset={sortedOsaamiset}
+            muutOsaamisetVapaateksti={muutOsaamisetVapaateksti}
             isOsaaminenVisible={isOsaaminenVisible}
             mobileFilterOpenerComponent={
               <FilterButton
