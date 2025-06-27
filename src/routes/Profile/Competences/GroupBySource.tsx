@@ -1,5 +1,6 @@
 import { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
+import { getLocalizedText } from '@/utils';
 import { Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,9 +13,13 @@ export const GroupBySource = ({
   filters,
   locale,
   osaamiset,
+  muutOsaamisetVapaateksti,
   isOsaaminenVisible,
   mobileFilterOpenerComponent,
-}: GroupByProps & MobileFilterButton) => {
+}: GroupByProps &
+  MobileFilterButton & {
+    muutOsaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'];
+  }) => {
   const {
     t,
     i18n: { language },
@@ -70,6 +75,18 @@ export const GroupBySource = ({
     }
   };
 
+  const localizedMuutOsaamisetVapaateksti = getLocalizedText(muutOsaamisetVapaateksti);
+  const [localizedMuutOsaamisetVapaatekstiExpanded, setLocalizedMuutOsaamisetVapaatekstiExpanded] =
+    React.useState(false);
+  const localizedMuutOsaamisetVapaatekstiMaxLength = 180;
+  const shouldShowExpandButton = localizedMuutOsaamisetVapaateksti.length > localizedMuutOsaamisetVapaatekstiMaxLength;
+
+  // Helper to truncate text
+  const getTruncatedText = (text: string, maxLength = localizedMuutOsaamisetVapaatekstiMaxLength) => {
+    if (!text || text.length <= maxLength) return text;
+    return text.slice(0, maxLength) + '...';
+  };
+
   return (
     <>
       <div className="flex flex-row justify-between gap-5">
@@ -84,22 +101,51 @@ export const GroupBySource = ({
                 {competenceIcon(competence)}
                 {t(`my-competences.by-${competence}`)}
               </div>
-              {Array.isArray(filters[competence]) && filters[competence].some((filter) => filter.checked) ? (
+              {(Array.isArray(filters[competence]) || localizedMuutOsaamisetVapaateksti.length > 0) &&
+              filters[competence].some((filter) => filter.checked) ? (
                 <div>
-                  <div className="flex flex-wrap gap-4">
-                    {osaamiset.map((val) => {
-                      const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
-                      const title = val.osaaminen.kuvaus[locale];
-                      return val.lahde.tyyppi === competence && isOsaaminenVisible(competence, val.lahde.id) ? (
-                        <Tag
-                          label={label}
-                          title={title}
-                          key={val.id}
-                          variant="presentation"
-                          sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
-                        />
-                      ) : null;
-                    })}
+                  <div className="flex flex-col gap-7">
+                    {osaamiset.filter(
+                      (val) => val.lahde.tyyppi === competence && isOsaaminenVisible(competence, val.lahde.id),
+                    ).length > 0 && (
+                      <div className="flex flex-wrap gap-4">
+                        {osaamiset.map((val) => {
+                          const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
+                          const title = val.osaaminen.kuvaus[locale];
+                          return val.lahde.tyyppi === competence && isOsaaminenVisible(competence, val.lahde.id) ? (
+                            <Tag
+                              label={label}
+                              title={title}
+                              key={val.id}
+                              variant="presentation"
+                              sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
+                            />
+                          ) : null;
+                        })}
+                      </div>
+                    )}
+                    {competence === 'MUU_OSAAMINEN' && localizedMuutOsaamisetVapaateksti.length > 0 && (
+                      <div className="flex flex-col bg-white px-5 py-4 rounded gap-3 border-2 border-[#CCC]">
+                        <p className="text-help">{t('profile.something-else.free-form-description-of-my-interests')}</p>
+                        <p className="text-body-sm whitespace-pre-line">
+                          {localizedMuutOsaamisetVapaatekstiExpanded
+                            ? localizedMuutOsaamisetVapaateksti
+                            : getTruncatedText(localizedMuutOsaamisetVapaateksti)}
+                        </p>
+                        {shouldShowExpandButton && (
+                          <div>
+                            <button
+                              onClick={() =>
+                                setLocalizedMuutOsaamisetVapaatekstiExpanded((currentState) => !currentState)
+                              }
+                              className="text-body-sm text-accent hover:underline hover:cursor-pointer"
+                            >
+                              {localizedMuutOsaamisetVapaatekstiExpanded ? t('show-less') : t('show-more')}
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <Link
                     to={competenceLink(competence)}
