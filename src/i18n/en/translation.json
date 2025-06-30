@@ -1,13 +1,4 @@
 {
-  "chatbot": {
-    "agent-name": "JOD Finland",
-    "error-message": "Oops, something went wrong",
-    "greeting": "Hi, I am an AI-based assistant and help with questions related to the JOD service. I know everything you can find on these websites and a bit more. How can I help you?",
-    "header": "Chat",
-    "open-window-text": "Psst, you can find help here",
-    "text-input-helper": "Just a moment, I am still thinking about the answer...",
-    "text-input-placeholder": "What would you like to ask?"
-  },
   "osaamispolku": "Competency Path",
   "profile": {
     "favorites": {

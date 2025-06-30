@@ -19,13 +19,16 @@
   "basic-information": "Perustiedot",
   "cancel": "Peruuta",
   "chatbot": {
-    "agent-name": "JOD Suomi",
-    "error-message": "Oijoi, jotain meni nyt pieleen",
-    "greeting": "Hei, olen AI pohjainen apuri ja autan JOD palveluun liittyvissä kysymyksissä. Tiedän kaiken, mitä näiltä verkkosivuilta voit löytää ja vähän enemmänkin. Kuinka voin auttaa?",
-    "header": "Chat",
-    "open-window-text": "Psst, täältä löydät apua",
-    "text-input-helper": "Pieni hetki, mietin vielä vastausta...",
-    "text-input-placeholder": "Mitä haluaisit kysyä?"
+    "agent-name": "Neuvontabotti",
+    "close": "Sulje",
+    "erase-chat-history": "Tyhjennä keskusteluhistoria",
+    "error-message": "Tapahtui jokin virhe.",
+    "greeting": "Hei, olen Osaamispolun neuvontabotti.",
+    "header": "Neuvontabotti",
+    "open-window-text": "Kysy neuvoa?",
+    "save-chat-as-csv": "Tallenna keskustelu CSV-tiedostona",
+    "text-input-helper": "Ole hyvä ja odota edellisen vastauksen valmistumista.",
+    "text-input-placeholder": "Kirjoita kysymyksesi tähän"
   },
   "choose": "Valitse",
   "close": "Sulje",

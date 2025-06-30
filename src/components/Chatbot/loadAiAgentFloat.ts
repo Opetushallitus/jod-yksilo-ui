@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/todo-tag */
 let isLoaded = false;
 
 export const loadAiAgentFloat = () => {
@@ -7,10 +6,14 @@ export const loadAiAgentFloat = () => {
   }
 
   const script = document.createElement('script');
-  // TODO: Use environment specific script URL?
-  script.src = 'https://okm-ps32.aiagent.fi/integrations/float/ai-agent-float.js';
+  script.src = 'https://okm-ps32.aiagent.fi/integrations/embed/ai-agent-embed.js';
   script.async = true;
   document.body.appendChild(script);
+
+  const script2 = document.createElement('script');
+  script2.src = 'https://okm-ps32.aiagent.fi/integrations/components/ai-agent-components.js';
+  script2.async = true;
+  document.body.appendChild(script2);
 
   isLoaded = true;
 };
