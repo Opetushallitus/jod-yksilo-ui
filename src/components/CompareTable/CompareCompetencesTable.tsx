@@ -32,12 +32,12 @@ export const CompareCompetencesTable = ({ rows, className }: CompareCompetencesT
           ))}
         </tbody>
       </table>
-      {rows.length > ROW_LIMIT && !showAll && (
+      {rows.length > ROW_LIMIT && (
         <button
-          onClick={() => setShowAll(true)}
-          className="text-accent text-button-sm sm:text-button-md mt-6 font-poppins cursor-pointer"
+          onClick={() => setShowAll((previous) => !previous)}
+          className="text-accent text-button-sm sm:text-button-sm mt-6 sm:px-5 font-poppins cursor-pointer"
         >
-          {t('show-all')}
+          {showAll ? t('show-less') : t('show-all')}
         </button>
       )}
     </div>
