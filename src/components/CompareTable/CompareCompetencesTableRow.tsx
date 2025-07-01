@@ -2,7 +2,6 @@ import { components } from '@/api/schema';
 import { getLocalizedText } from '@/utils';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdCheck } from 'react-icons/md';
 
 export interface CompareCompetencesTableRowData {
   uri: string;
@@ -27,7 +26,9 @@ export const CompareCompetencesTableRow = ({ row, className }: CompareCompetence
       </td>
 
       <td className="justify-items-center pr-5">
-        {row.profiili && <MdCheck size={24} className="text-accent" title={title} aria-label={t('found')} />}
+        {row.profiili && (
+          <div title={title} role="img" aria-label={t('found')} className="size-4 bg-secondary-1 rounded-full" />
+        )}
       </td>
     </tr>
   );
