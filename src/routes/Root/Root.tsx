@@ -7,11 +7,11 @@ import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { useErrorNoteStore } from '@/stores/useErrorNoteStore';
 import { useToolStore } from '@/stores/useToolStore';
-import { Footer, NavigationBar, SkipLink } from '@jod/design-system';
+import { Footer, MatomoTracker, NavigationBar, SkipLink } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdMenu } from 'react-icons/md';
-import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData } from 'react-router';
+import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router';
 import { LogoutFormContext } from '.';
 
 const Root = () => {
@@ -22,6 +22,16 @@ const Root = () => {
   const toolStore = useToolStore();
   const { error, clearErrorNote } = useErrorNoteStore();
   const isMouseInteraction = useInteractionMethod();
+  const location = useLocation();
+
+  const hostname = window.location.hostname;
+  const siteId = React.useMemo(() => {
+    if (hostname === 'localhost' || hostname === 'jodkehitys.fi') {
+      return 37;
+    } else if (hostname === 'jodtestaus.fi') {
+      return 38;
+    }
+  }, [hostname]);
 
   const [langMenuOpen, setLangMenuOpen] = React.useState(false);
 
@@ -154,6 +164,9 @@ const Root = () => {
       <Toaster />
       <ScrollRestoration />
       <Chatbot />
+      {siteId && (
+        <MatomoTracker trackerUrl="https://analytiikka.opintopolku.fi" siteId={siteId} pathname={location.pathname} />
+      )}
     </div>
   );
 };

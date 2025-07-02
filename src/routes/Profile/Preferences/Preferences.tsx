@@ -34,7 +34,12 @@ const ToggleWithText = ({
       </div>
       <div className="flex items-center gap-3">
         <p aria-hidden="true">{checked ? t('allow') : t('disallow')}</p>
-        <Toggle checked={checked} onChange={onChange} ariaLabel={checked ? t('allow') : t('disallow')} />
+        <Toggle
+          variant="yksilo"
+          checked={checked}
+          onChange={onChange}
+          ariaLabel={checked ? t('allow') : t('disallow')}
+        />
       </div>
     </div>
   );
