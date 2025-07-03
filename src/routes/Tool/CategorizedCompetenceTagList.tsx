@@ -235,7 +235,7 @@ const CategorizedCompetenceTagList = () => {
             <CompetenceCategory
               title="interests"
               osaamiset={mappedInterests}
-              onChange={removeCompetenceByType('osaaminen')}
+              onChange={removeCompetenceByType('kiinnostus')}
               lahdeTyyppi="KIINNOSTUS"
             />
           </div>
