@@ -8,9 +8,9 @@ import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { useErrorNoteStore } from '@/stores/useErrorNoteStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { Footer, MatomoTracker, NavigationBar, SkipLink } from '@jod/design-system';
+import { JodMenu } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdMenu } from 'react-icons/md';
 import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router';
 import { LogoutFormContext } from '.';
 
@@ -109,12 +109,10 @@ const Root = () => {
             <button
               onClick={() => setNavMenuOpen(!navMenuOpen)}
               aria-label={t('open-menu')}
-              className="flex gap-2 justify-center items-center select-none cursor-pointer"
+              className="flex flex-col sm:flex-row sm:gap-3 justify-center items-center select-none cursor-pointer"
             >
-              <span className="size-7 flex justify-center items-center">
-                <MdMenu size={24} />
-              </span>
-              <span className="py-3 pr-2">{t('menu')}</span>
+              <JodMenu className="mx-auto" />
+              <span className="md:pr-3 sm:text-button-sm text-[12px]">{t('menu')}</span>
             </button>
           }
           languageButtonComponent={
