@@ -40,6 +40,7 @@
   "competences-identify-failed": "Tekoälyn osaamistunnistus epäonnistui.",
   "competences-identifying": "Voit muokata koulutusta, kun osaamiset ovat latautuneet.",
   "competences-of-your-choice": "Valitut osaamiset",
+  "competency-path-portal": "Osaamispolkuportaali",
   "content": "Sisältö",
   "cookie-policy": "Evästekäytäntö",
   "cookies": "Evästeet",
@@ -369,11 +370,12 @@
       "title": "Ammatilliset erityisosaamiset"
     }
   },
+  "language-selection": "Käyttökieli",
   "link": "Linkki",
   "link-copied": "Linkki kopioitu!",
   "link-copy-failed": "Linkin kopiointi epäonnistui",
   "links": "Linkit",
-  "login": "Kirjaudu sisään",
+  "login": "Kirjaudu",
   "login-for-favorites": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa suosikkeja ja päästä tarkastelemaan niitä myöhemmin.",
   "login-to-service": "Kirjaudu palveluun",
   "logout": "Kirjaudu ulos",
@@ -408,7 +410,7 @@
   "navigation": {
     "external": {
       "ohjaaja": {
-        "description": "Ohjausalasta kiinnostuneille",
+        "description": "Tietoa ohjausalasta kiinnostuneille",
         "label": "Ohjaajan osio",
         "url": "/ohjaaja/fi"
       },
@@ -420,6 +422,10 @@
       "title": "Osaamispolun sisältökokonaisuudet"
     },
     "extra": {
+      "palveluhakemisto": {
+        "label": "Palveluhakemisto",
+        "url": "https://www.suomi.fi/palveluhakemisto/osaamispolku"
+      },
       "title": "Tukea pohdintaan",
       "urataidot": {
         "label": "Urataitojen itsearviointi",
