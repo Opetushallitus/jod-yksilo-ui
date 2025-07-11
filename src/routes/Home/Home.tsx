@@ -1,8 +1,8 @@
 import { components } from '@/api/schema';
 import { Button, HeroCard, tidyClasses as tc } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward } from 'react-icons/md';
 import { Link, useRouteLoaderData } from 'react-router';
 import { generateProfileLink } from '../Profile/utils';
 
@@ -16,7 +16,7 @@ const FeatureBox = ({ title }: { title: string }) => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-5">
-      <h3 className="text-heading-3 sm:h-[54px]">{t(`home.features.${title}`)}</h3>
+      <h3 className="text-heading-3 sm:min-h-[54px]">{t(`home.features.${title}`)}</h3>
       <p className="text-body-sm sm:mb-0 mb-5">{t(`home.features.${title}-content`)}</p>
     </div>
   );
@@ -107,14 +107,14 @@ const Home = () => {
           <Button
             label={t('home.explore-opportunities')}
             variant="accent"
-            icon={<MdArrowForward size={24} />}
+            icon={<JodArrowRight />}
             iconSide="right"
             LinkComponent={LinkComponent(toolLink)}
           />
           <Button
             label={t('home.create-own-profile')}
             variant="accent"
-            icon={<MdArrowForward size={24} />}
+            icon={<JodArrowRight />}
             iconSide="right"
             LinkComponent={LinkComponent(preferencesLink.to)}
           />

@@ -4,10 +4,10 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import { usePolutStore } from '@/stores/usePolutStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, ConfirmDialog, Modal, WizardProgress } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward } from 'react-icons/md';
 import { useParams } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { vaiheFormSchema, type PolkuQueryParams, type VaiheForm } from '../../utils';
@@ -175,7 +175,7 @@ const ManualVaiheModal = ({ isOpen, onClose, vaiheIndex }: ManualVaiheModalProps
                 variant="white"
                 disabled={!isValid}
                 onClick={nextStep}
-                icon={<MdArrowForward size={24} />}
+                icon={<JodArrowRight />}
                 iconSide="right"
               />
             )}

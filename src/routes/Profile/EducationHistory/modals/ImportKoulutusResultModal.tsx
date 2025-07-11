@@ -1,8 +1,8 @@
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { Button, Modal } from '@jod/design-system';
+import { JodArrowRight, JodCheckCircle, JodClose } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward, MdCheckCircleOutline, MdClear } from 'react-icons/md';
 import { Link } from 'react-router';
 
 interface ImportKoulutusResultModalProps {
@@ -37,7 +37,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
             {isSuccess ? (
               <div className="flex flex-col items-start w-full">
                 <div className="w-full flex justify-center mb-4">
-                  <MdCheckCircleOutline className="text-heading-1 text-success" />
+                  <JodCheckCircle size={20} className="text-heading-1 text-success" />
                 </div>
                 <div className="mx-8 w-full flex flex-col">
                   <div className="text-heading-2">{t('education-history-import.result-modal.success')}</div>
@@ -50,14 +50,14 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
                   >
                     <div className="flex items-center gap-2">
                       {t('education-history-import.result-modal.success-osaamiset-link-about-ai')}
-                      <MdArrowForward size={24} />
+                      <JodArrowRight />
                     </div>
                   </Link>
                 </div>
               </div>
             ) : (
               <>
-                <MdClear className="text-heading-1 text-alert-text mb-4" />
+                <JodClose className="text-heading-1 text-alert-text mb-4" />
                 <h3 className="mb-5 sm:text-heading-2 text-heading-2-mobile">
                   {errorText ?? t('education-history-import.result-modal.failure')}
                 </h3>

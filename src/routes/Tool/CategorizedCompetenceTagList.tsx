@@ -7,9 +7,9 @@ import type { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicates } from '@/utils';
 import { Accordion, Button, ConfirmDialog } from '@jod/design-system';
+import { JodClose } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdClose } from 'react-icons/md';
 import { useLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 
@@ -34,7 +34,7 @@ const FreeFormText = ({
       <div className="flex justify-between">
         <div className="font-arial text-help">{title}</div>
         <button onClick={onChange} className="cursor-pointer">
-          <MdClose size={24} color="#333" />
+          <JodClose color="#333" />
         </button>
       </div>
       <div>

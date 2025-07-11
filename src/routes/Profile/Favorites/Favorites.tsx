@@ -7,9 +7,9 @@ import { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
 import { Button, Modal, Pagination, useMediaQueries } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward } from 'react-icons/md';
 import { Link } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { ProfileNavigationList } from '../components';
@@ -205,7 +205,7 @@ const Favorites = () => {
         >
           <div className="flex items-center gap-2">
             {t(linkTextKeys[selectedFilter])}
-            <MdArrowForward size={24} />
+            <JodArrowRight />
           </div>
         </Link>
       </div>
