@@ -7,9 +7,9 @@ import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
 import { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
 import { sortByProperty } from '@/utils';
 import { Button, Modal, useMediaQueries } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward } from 'react-icons/md';
 import { Link, useLoaderData } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import { CompetenceFilter, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
@@ -83,7 +83,7 @@ const Competences = () => {
         >
           <div className="flex items-center gap-2">
             {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <MdArrowForward size={24} />
+            <JodArrowRight />
           </div>
         </Link>
       </div>

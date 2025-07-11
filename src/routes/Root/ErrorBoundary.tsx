@@ -1,7 +1,7 @@
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { Button } from '@jod/design-system';
+import { JodHome, JodUser } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
-import { MdHome, MdOutlinePerson } from 'react-icons/md';
 import { useRouteError } from 'react-router';
 
 const ErrorBoundary = () => {
@@ -20,18 +20,18 @@ const ErrorBoundary = () => {
       <p className="text-body-lg">{message}</p>
       <div className="flex gap-4">
         <Button
-          icon={<MdHome size={24} />}
+          icon={<JodHome />}
           iconSide="left"
           label={t('return-home')}
-          variant="white"
+          variant="accent"
           /* eslint-disable-next-line react/no-unstable-nested-components */
           LinkComponent={({ children }: { children: React.ReactNode }) => <a href="/">{children}</a>}
         />
         <Button
-          icon={<MdOutlinePerson size={24} />}
+          icon={<JodUser />}
           iconSide="left"
           label={t('login')}
-          variant="white"
+          variant="accent"
           /* eslint-disable-next-line react/no-unstable-nested-components */
           LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
         />

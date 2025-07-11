@@ -27,8 +27,8 @@ import {
 } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdOutlineInterests, MdOutlineSchool } from 'react-icons/md';
-import { TbArrowsSort } from 'react-icons/tb';
+
+import { JodFavs, JodSkills, JodSort } from '@jod/design-system/icons';
 import { Outlet, useLoaderData, useLocation, useNavigate, useSearchParams } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import type { ToolLoaderData } from './loader';
@@ -75,13 +75,13 @@ const MyOwnData = () => {
     const tabs = [
       {
         text: t('competences'),
-        icon: <MdOutlineSchool size={lg ? 24 : 32} className="mx-auto" />,
+        icon: <JodSkills size={lg ? 24 : 32} className="mx-auto" />,
         active: pathname.endsWith(t('slugs.tool.competences', { lng: language })),
         to: t('slugs.tool.competences', { lng: language }),
       },
       {
         text: t('interests'),
-        icon: <MdOutlineInterests size={lg ? 24 : 32} className="mx-auto" />,
+        icon: <JodFavs size={lg ? 24 : 32} className="mx-auto" />,
         active: pathname.endsWith(t('slugs.tool.interests', { lng: language })),
         to: t('slugs.tool.interests', { lng: language }),
       },
@@ -440,7 +440,7 @@ const ExploreOpportunities = () => {
             />
             <IconButton
               label={`${t('sort')} (${getSortingTranslationKey(sorting)})`}
-              icon={<TbArrowsSort size={18} />}
+              icon={<JodSort size={18} />}
               bgColor="white"
               onClick={() => setFiltersOpen(!filtersOpen)}
             />
