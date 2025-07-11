@@ -110,15 +110,13 @@ const CompetenceImport = () => {
         <div className="flex gap-4 flex-1">
           <Button
             label={t('tool.my-own-data.cancel-text')}
-            size="md"
-            variant="gray"
+            variant="white"
             onClick={closeDialog}
             className="whitespace-nowrap"
           />
           <Button
             label={t('login')}
-            size="md"
-            variant="gray"
+            variant="white"
             /* eslint-disable-next-line react/no-unstable-nested-components */
             LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
             className="whitespace-nowrap"

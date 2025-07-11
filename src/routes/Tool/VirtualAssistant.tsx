@@ -118,7 +118,7 @@ export const VirtualAssistant = ({
 
             setVirtualAssistantOpen(false);
           }}
-          variant="gray"
+          variant="white"
           size="sm"
           label={t('done')}
         />
@@ -235,7 +235,7 @@ export const VirtualAssistant = ({
               setSelectedKiinnostuksetViewVisible(true);
               setTimeout(() => document.getElementById(selectedKiinnostuksetLabelId)?.focus(), 0);
             }}
-            variant="gray"
+            variant="white"
             size="sm"
             label={t('tool.my-own-data.interests.virtual-assistant.intrests', {
               count: selectedKiinnostukset.length,
@@ -244,7 +244,7 @@ export const VirtualAssistant = ({
           <Button
             disabled={value === ''}
             onClick={() => updateHistory()}
-            variant="gray"
+            variant="white"
             size="sm"
             label={t('tool.my-own-data.interests.virtual-assistant.send')}
             iconSide="right"

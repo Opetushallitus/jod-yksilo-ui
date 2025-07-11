@@ -1,6 +1,7 @@
 import { components } from '@/api/schema';
 import { useAppRoutes } from '@/hooks/useAppRoutes';
 import { LinkComponent, MenuItem } from '@jod/design-system';
+import { JodHome } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLoaderData, useLocation } from 'react-router';
@@ -104,7 +105,8 @@ export const useMenuRoutes = (onClose: () => void) => {
   const mainLevelMenuItems: MenuItem[] = React.useMemo(() => {
     return [
       {
-        label: t('my-competence-path'),
+        label: t('front-page'),
+        icon: <JodHome />,
         LinkComponent: ({ children, className }: LinkComponent) => (
           <NavLink to={`/${language}`} className={className} lang={language} onClick={onClose}>
             {children}

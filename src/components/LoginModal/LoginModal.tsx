@@ -25,14 +25,14 @@ export const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
       }
       footer={
         <div className="flex justify-end gap-5 flex-1">
+          <Button onClick={onClose} label={t('close')} />
           <Button
             label={t('login')}
-            variant="gray"
+            variant="accent"
             /* eslint-disable-next-line react/no-unstable-nested-components */
             LinkComponent={({ children }) => <a href={loginLink}>{children}</a>}
             className="whitespace-nowrap"
           />
-          <Button onClick={onClose} label={t('close')} />
         </div>
       }
     />
