@@ -1,9 +1,9 @@
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
 import { Checkbox, ConfirmDialog, Spinner, Tag, useMediaQueries } from '@jod/design-system';
+import { JodCaretDown, JodCaretUp, JodEdit, JodError } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdEdit, MdError, MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 export interface ExperienceTableRowData {
   checked?: boolean;
@@ -91,7 +91,7 @@ export const ExperienceTableRow = ({
     return (
       <div className="flex justify-start items-center">
         <TooltipWrapper tooltipContent={t('competences-identify-failed')} tooltipPlacement="top">
-          <MdError size={24} color="red" />
+          <JodError className="text-alert" />
         </TooltipWrapper>
       </div>
     );
@@ -136,7 +136,7 @@ export const ExperienceTableRow = ({
                 type="button"
               >
                 {rowActionElement || (
-                  <MdEdit size={24} className={osaamisetOdottaaTunnistusta ? 'fill-[#83AED3]' : 'fill-[#006DB3]'} />
+                  <JodEdit className={osaamisetOdottaaTunnistusta ? 'text-[#83AED3]' : 'text-secondary-gray'} />
                 )}
               </button>
             </TooltipWrapper>
@@ -180,7 +180,7 @@ export const ExperienceTableRow = ({
           onClick={() => setIsOpen(!isOpen)}
           className={`cursor-pointer flex gap-x-2 items-center ${sm ? 'text-nowrap pr-2' : 'pr-7'}`}
         >
-          {isOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
+          {isOpen ? <JodCaretUp /> : <JodCaretDown />}
           {osaamisetCountTotal}
         </button>
       );

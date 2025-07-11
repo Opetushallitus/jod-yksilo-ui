@@ -6,10 +6,10 @@ import EditKiinnostusModal from '@/routes/Profile/Interests/EditKiinnostusModal'
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Tag, Textarea } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward } from 'react-icons/md';
 import { Link, useLoaderData, useRevalidator } from 'react-router';
 import { z } from 'zod';
 import { ProfileNavigationList } from '../components';
@@ -104,7 +104,7 @@ const Interests = () => {
         >
           <div className="flex items-center gap-2">
             {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <MdArrowForward size={24} />
+            <JodArrowRight />
           </div>
         </Link>
       </div>

@@ -1,8 +1,8 @@
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonantajaModal';
+import { JodArrowRight, JodWork } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward, MdWorkOutline } from 'react-icons/md';
 import { Link, useLoaderData, useRevalidator } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import { WorkHistoryWizard } from './WorkHistoryWizard';
@@ -78,7 +78,7 @@ const WorkHistory = () => {
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
-        <MdWorkOutline color="#AD4298" className="mr-2" />
+        <JodWork size={36} color="#AD4298" className="mr-2" />
         {title}
       </h1>
       <p className="mb-5 text-body-lg">{t('profile.work-history.description')}</p>
@@ -89,7 +89,7 @@ const WorkHistory = () => {
         >
           <div className="flex items-center gap-2">
             {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <MdArrowForward size={24} />
+            <JodArrowRight />
           </div>
         </Link>
       </div>

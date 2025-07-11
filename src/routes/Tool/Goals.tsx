@@ -1,9 +1,9 @@
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useToolStore } from '@/stores/useToolStore';
 import { SelectionCard, useMediaQueries } from '@jod/design-system';
+import { JodInfo } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdInfoOutline } from 'react-icons/md';
 
 const SomethingElseIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="80" height="99" viewBox="0 0 80 99" fill="none">
@@ -260,7 +260,7 @@ const CompetenceIcon = () => (
 
 const InfoButton = ({ ariaLabel, onClick }: { ariaLabel: string; onClick: () => void }) => {
   const { xl } = useMediaQueries();
-  const mobileInfoIcon = !xl ? <MdInfoOutline size={24} /> : null;
+  const mobileInfoIcon = !xl ? <JodInfo /> : null;
   return xl ? null : (
     <button className="cursor-pointer ml-auto p-5" aria-label={ariaLabel} onClick={onClick}>
       {mobileInfoIcon}

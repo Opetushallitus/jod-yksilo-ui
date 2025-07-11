@@ -1,9 +1,9 @@
 import { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { Button, InputField } from '@jod/design-system';
+import { JodClose } from '@jod/design-system/icons';
 import { t } from 'i18next';
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { MdClose } from 'react-icons/md';
 
 interface LinksFormSectionProps {
   fieldName?: string;
@@ -38,7 +38,7 @@ const LinksFormSection = ({ type, fieldName = 'linkit' }: LinksFormSectionProps)
               aria-label={t('profile.paths.remove-link')}
               className="cursor-pointer"
             >
-              <MdClose size={24} />
+              <JodClose />
             </button>
           </div>
           <FormError name={`linkit.${index}.url`} errors={errors} />

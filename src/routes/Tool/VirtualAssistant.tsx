@@ -6,9 +6,9 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicates } from '@/utils';
 import { Button, Tag, Textarea, useMediaQueries } from '@jod/design-system';
+import { JodChatBot, JodClose } from '@jod/design-system/icons';
 import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdClose, MdOutlineSmartToy, MdSend } from 'react-icons/md';
 
 export const VirtualAssistant = ({
   setVirtualAssistantOpen,
@@ -175,7 +175,7 @@ export const VirtualAssistant = ({
                 <div className="flex flex-row justify-start">
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-none items-center justify-center h-8 w-8 rounded bg-bg-gray-2">
-                      <MdOutlineSmartToy size={24} color="#000" />
+                      <JodChatBot className="text-black" />
                     </div>
                     <div className="text-body-sm-mobile sm:text-body-sm whitespace-pre-wrap">
                       {row.answer ? row.answer : t('tool.my-own-data.interests.virtual-assistant.loading')}
@@ -244,11 +244,9 @@ export const VirtualAssistant = ({
           <Button
             disabled={value === ''}
             onClick={() => updateHistory()}
-            variant="white"
+            variant="accent"
             size="sm"
             label={t('tool.my-own-data.interests.virtual-assistant.send')}
-            iconSide="right"
-            icon={<MdSend size={24} color="#fff" />}
           />
         </div>
       </div>
@@ -265,7 +263,7 @@ export const VirtualAssistant = ({
               className="absolute cursor-pointer self-end items-center p-4 m-3"
             >
               <span aria-hidden className="text-black sm:text-secondary-gray p-3 sm:p-0">
-                <MdClose size={24} />
+                <JodClose />
               </span>
             </button>
             <div className="px-5 pt-9">
@@ -298,7 +296,7 @@ export const VirtualAssistant = ({
                   ))}
                 </div>
               </div>
-              <span className="text-body-sm sm: text-body-sm-mobile">{t('osaamissuosittelija.interest.remove')}</span>
+              <span className="text-body-sm sm:text-body-sm-mobile">{t('osaamissuosittelija.interest.remove')}</span>
             </div>
           </div>
         </div>

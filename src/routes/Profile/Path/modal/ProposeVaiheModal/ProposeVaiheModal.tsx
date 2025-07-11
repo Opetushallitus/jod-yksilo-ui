@@ -6,10 +6,10 @@ import OpportunityDetailsStep from '@/routes/Profile/Path/modal/ProposeVaiheModa
 import { usePolutStore } from '@/stores/usePolutStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, clamp, ConfirmDialog, Modal, WizardProgress } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward } from 'react-icons/md';
 import { useParams } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { mapOsaaminenToUri, vaiheFormSchema, type PolkuQueryParams, type VaiheForm } from '../../utils';
@@ -182,7 +182,7 @@ const ProposeVaiheModal = ({ isOpen, onClose, vaiheIndex }: ProposeVaiheModalPro
                 variant="white"
                 disabled={!proposedOpportunity}
                 onClick={nextStep}
-                icon={<MdArrowForward size={24} />}
+                icon={<JodArrowRight />}
                 iconSide="right"
               />
             )}
@@ -194,7 +194,7 @@ const ProposeVaiheModal = ({ isOpen, onClose, vaiheIndex }: ProposeVaiheModalPro
                   variant="white"
                   disabled={detailsStepHasErrors}
                   onClick={nextStep}
-                  icon={<MdArrowForward size={24} />}
+                  icon={<JodArrowRight />}
                   iconSide="right"
                 />
               </>

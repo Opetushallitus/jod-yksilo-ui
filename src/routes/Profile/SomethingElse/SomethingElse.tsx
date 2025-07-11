@@ -7,10 +7,10 @@ import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaamin
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Tag, Textarea } from '@jod/design-system';
+import { JodArrowRight, JodOther } from '@jod/design-system/icons';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward, MdLightbulbOutline } from 'react-icons/md';
 import { Link, useLoaderData, useRevalidator } from 'react-router';
 import { z } from 'zod';
 import { ProfileNavigationList } from '../components';
@@ -88,7 +88,7 @@ const SomethingElse = () => {
       {isModalOpen && <EditMuuOsaaminenModal onClose={onAddModalClose} isOpen={isModalOpen} />}
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
-        <MdLightbulbOutline className="text-secondary-gray mr-2" />
+        <JodOther size={36} className="text-secondary-gray mr-2" />
         {title}
       </h1>
       <p className="mb-5 text-body-lg">{t('profile.something-else.description')}</p>
@@ -99,7 +99,7 @@ const SomethingElse = () => {
         >
           <div className="flex items-center gap-2">
             {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <MdArrowForward size={24} />
+            <JodArrowRight />
           </div>
         </Link>
       </div>

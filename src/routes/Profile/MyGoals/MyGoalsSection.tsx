@@ -5,9 +5,9 @@ import { getTypeSlug } from '@/routes/Profile/utils';
 import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { getLocalizedText } from '@/utils';
 import { Button } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward } from 'react-icons/md';
 import { Link } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import MyGoalsOpportunityCardMenu from './MyGoalsOpportunityCardMenu';
@@ -97,7 +97,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                           to={`${pm.id}/${t('slugs.profile.path')}/${polku.id}`}
                           className="text-accent flex gap-2 text-heading-4"
                         >
-                          {getLocalizedText(polku.nimi)} <MdArrowForward size={24} />
+                          {getLocalizedText(polku.nimi)} <JodArrowRight />
                         </Link>
                         <DeletePolkuButton
                           paamaaraId={pm.id}

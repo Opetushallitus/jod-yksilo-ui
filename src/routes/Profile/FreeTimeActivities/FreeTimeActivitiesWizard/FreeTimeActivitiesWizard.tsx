@@ -3,10 +3,10 @@ import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
 import ActivityStep from './ActivityStep';
@@ -200,7 +200,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
                 onClick={() => setStep(step - 1)}
                 label={t('previous')}
                 variant="white"
-                icon={!sm ? <MdArrowBack size={24} /> : undefined}
+                icon={!sm ? <JodArrowLeft /> : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
               />
@@ -210,7 +210,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
                 onClick={() => setStep(step + 1)}
                 label={t('next')}
                 variant="white"
-                icon={<MdArrowForward size={24} />}
+                icon={<JodArrowRight />}
                 iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"

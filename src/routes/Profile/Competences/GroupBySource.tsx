@@ -2,9 +2,9 @@ import { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { getLocalizedText } from '@/utils';
 import { Tag } from '@jod/design-system';
+import { JodArrowRight, JodInterests, JodOther, JodSkills, JodWork } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward, MdLightbulbOutline, MdOutlineSailing, MdOutlineSchool, MdWorkOutline } from 'react-icons/md';
 import { Link, useRouteLoaderData } from 'react-router';
 import { generateProfileLink } from '../utils';
 import { FILTERS_ORDER, GroupByProps, MobileFilterButton, groupByHeaderClasses } from './constants';
@@ -48,13 +48,13 @@ export const GroupBySource = ({
   const competenceIcon = (competenceType: string) => {
     switch (competenceType) {
       case 'TOIMENKUVA':
-        return <MdWorkOutline color="#AD4298" className="mr-2" />;
+        return <JodWork size={20} color="#AD4298" className="mr-2" />;
       case 'KOULUTUS':
-        return <MdOutlineSchool color="#00818A" className="mr-2" />;
+        return <JodSkills size={20} color="#00818A" className="mr-2" />;
       case 'PATEVYYS':
-        return <MdOutlineSailing className="text-accent mr-2" />;
+        return <JodInterests size={20} className="text-accent mr-2" />;
       case 'MUU_OSAAMINEN':
-        return <MdLightbulbOutline className="text-secondary-gray mr-2" />;
+        return <JodOther size={20} className="text-secondary-gray mr-2" />;
       default:
         return null;
     }
@@ -156,7 +156,7 @@ export const GroupBySource = ({
                     <div className="flex flex-row justify-start">
                       <div className="flex items-center gap-2">
                         {t('profile.competences.edit')}
-                        <MdArrowForward size={24} />
+                        <JodArrowRight />
                       </div>
                     </div>
                   </Link>
@@ -171,7 +171,7 @@ export const GroupBySource = ({
                   <div className="flex flex-row justify-start">
                     <div className="flex items-center gap-2">
                       {t('profile.competences.add')}
-                      <MdArrowForward size={24} />
+                      <JodArrowRight />
                     </div>
                   </div>
                 </Link>

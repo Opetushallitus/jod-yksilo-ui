@@ -12,10 +12,10 @@ import { usePolutStore } from '@/stores/usePolutStore';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Checkbox, InputField, PathProgress, PathProgressStep } from '@jod/design-system';
+import { JodClose, JodFlag } from '@jod/design-system/icons';
 import React from 'react';
 import { Controller, Form, FormProvider, FormSubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { MdClose, MdOutlineFlag } from 'react-icons/md';
 import { useLoaderData, useNavigate, useParams, useRevalidator, useRouteLoaderData } from 'react-router';
 import { z } from 'zod';
 import { useShallow } from 'zustand/shallow';
@@ -174,7 +174,7 @@ const Path = () => {
 
   const getLastStep = () => ({
     label: '',
-    circleComponent: <MdOutlineFlag size={24} />,
+    circleComponent: <JodFlag />,
     isCompleted: vaiheet.length > 0 && vaiheet.every((vaihe) => vaihe.valmis),
     content: (
       <div className="text-heading-3">
@@ -413,7 +413,7 @@ const Path = () => {
                 className="cursor-pointer self-start"
                 aria-label={t('profile.paths.back-to-goals')}
               >
-                <MdClose size={24} />
+                <JodClose />
               </button>
             </div>
             <p className="text-body-lg font-medium mb-5">{t('profile.paths.description')}</p>

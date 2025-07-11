@@ -1,9 +1,9 @@
 import { ActionButton } from '@/components/ActionButton/ActionButton';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
+import { JodMore } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdMoreVert } from 'react-icons/md';
 
 const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuContent: React.ReactNode }) => {
   const { t } = useTranslation();
@@ -43,7 +43,7 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
       <div ref={actionButtonRef}>
         <ActionButton
           label={t('more-actions')}
-          icon={<MdMoreVert size={24} className="text-accent" />}
+          icon={<JodMore className="text-accent" />}
           aria-controls={menuId}
           aria-expanded={open}
           aria-haspopup="listbox"

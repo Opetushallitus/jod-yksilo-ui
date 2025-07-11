@@ -2,9 +2,9 @@ import { MainLayout } from '@/components';
 import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { Button } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward } from 'react-icons/md';
 import { Link } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import AddGoalModal from './AddGoalModal';
@@ -100,7 +100,7 @@ const MyGoals = () => {
             <div className="flex flex-row justify-start">
               <div className="flex items-center gap-2">
                 {t('profile.my-goals.add-favorites-link')}
-                <MdArrowForward size={24} />
+                <JodArrowRight />
               </div>
             </div>
           </Link>

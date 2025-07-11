@@ -14,9 +14,9 @@ import { useEnvironment } from '@/hooks/useEnvironment';
 import { type MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { copyToClipboard, getLocalizedText } from '@/utils';
+import { JodPrint, JodShare } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdCompareArrows, MdOutlinePrint, MdOutlineRoute, MdOutlineShare } from 'react-icons/md';
 
 export interface OpportunityDetailsSection {
   navTitle: string;
@@ -115,33 +115,13 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
         />
         {isDev && (
           <ActionButton
-            label={t('compare')}
-            icon={<MdCompareArrows size={24} className="text-accent" />}
-            onClick={notImplemented}
-            className="bg-todo"
-          />
-        )}
-        {isDev && (
-          <ActionButton
-            label={t('create-path')}
-            icon={<MdOutlineRoute size={24} className="text-accent transform rotate-90 -scale-x-100" />}
-            onClick={notImplemented}
-            className="bg-todo"
-          />
-        )}
-        {isDev && (
-          <ActionButton
             label={t('share')}
-            icon={<MdOutlineShare size={24} className="text-accent" />}
+            icon={<JodShare className="text-accent" />}
             onClick={() => void copyToClipboard(window.location.href)}
           />
         )}
         {!!window.print && (
-          <ActionButton
-            label={t('print')}
-            icon={<MdOutlinePrint size={24} className="text-accent" />}
-            onClick={doPrint}
-          />
+          <ActionButton label={t('print')} icon={<JodPrint className="text-accent" />} onClick={doPrint} />
         )}
       </div>
 

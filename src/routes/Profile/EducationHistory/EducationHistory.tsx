@@ -6,9 +6,9 @@ import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/Educat
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal';
 import { Button } from '@jod/design-system';
+import { JodArrowRight, JodSkills } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward, MdOutlineSchool } from 'react-icons/md';
 import { Link, useLoaderData, useRevalidator, useSearchParams } from 'react-router';
 import { ProfileNavigationList } from '../components/index.tsx';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
@@ -264,7 +264,7 @@ const EducationHistory = () => {
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
-        <MdOutlineSchool color="#00818A" className="mr-2" />
+        <JodSkills size={36} color="#00818A" className="mr-2" />
         {title}
       </h1>
       <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>
@@ -275,7 +275,7 @@ const EducationHistory = () => {
         >
           <div className="flex items-center gap-2">
             {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <MdArrowForward size={24} />
+            <JodArrowRight />
           </div>
         </Link>
       </div>

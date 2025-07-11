@@ -1,6 +1,6 @@
 import { AiInfoButton } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward } from 'react-icons/md';
 import { Link } from 'react-router';
 
 // Wrapper component for DS AiInfoButton
@@ -19,7 +19,7 @@ export const AiInfo = () => {
         className="flex flex-row items-center mt-4 gap-4 text-heading-4"
       >
         <span>{t('ai-info-tooltip.ai-and-compentency-path')}</span>
-        <MdArrowForward size={24} />
+        <JodArrowRight />
       </Link>
     </div>
   );

@@ -2,9 +2,9 @@ import { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { Button } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward } from 'react-icons/md';
 import { NavLink, useLocation, useNavigate, useRouteLoaderData } from 'react-router';
 
 const LandingPage = () => {
@@ -82,7 +82,7 @@ const LandingPage = () => {
           <div className="flex flex-row justify-start">
             <div className="flex items-center gap-2">
               {t('privacy-policy')}
-              <MdArrowForward size={24} />
+              <JodArrowRight />
             </div>
           </div>
         </NavLink>

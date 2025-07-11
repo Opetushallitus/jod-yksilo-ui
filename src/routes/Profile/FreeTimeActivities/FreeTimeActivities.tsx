@@ -1,8 +1,8 @@
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
+import { JodArrowRight, JodInterests } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdArrowForward, MdOutlineSailing } from 'react-icons/md';
 import { Link, useLoaderData, useRevalidator } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
@@ -78,7 +78,7 @@ const FreeTimeActivities = () => {
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
-        <MdOutlineSailing className="text-accent mr-2" />
+        <JodInterests size={36} className="text-accent mr-2" />
         {title}
       </h1>
       <p className="mb-5 text-body-lg">{t('profile.free-time-activities.description')}</p>
@@ -89,7 +89,7 @@ const FreeTimeActivities = () => {
         >
           <div className="flex items-center gap-2">
             {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <MdArrowForward size={24} />
+            <JodArrowRight />
           </div>
         </Link>
       </div>

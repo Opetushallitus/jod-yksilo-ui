@@ -4,9 +4,9 @@ import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDro
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { cx } from '@jod/design-system';
+import { JodBlock, JodTrendingUp } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdBlock, MdOutlineTrendingDown, MdOutlineTrendingUp } from 'react-icons/md';
 import { NavLink } from 'react-router';
 
 type FavoriteProps =
@@ -144,13 +144,9 @@ export const OpportunityCard = ({
             <div className="flex flex-wrap mt-5">
               <BottomBox title={t('opportunity-card.trend')} className="bg-todo">
                 {trend === 'NOUSEVA' ? (
-                  <MdOutlineTrendingUp size={24} className="text-accent" aria-label={t(`opportunity-card.trend-up`)} />
+                  <JodTrendingUp className="text-accent" aria-label={t(`opportunity-card.trend-up`)} />
                 ) : (
-                  <MdOutlineTrendingDown
-                    size={24}
-                    className="text-accent"
-                    aria-label={t(`opportunity-card.trend-down`)}
-                  />
+                  <JodTrendingUp className="text-accent -scale-y-100" aria-label={t(`opportunity-card.trend-down`)} />
                 )}
               </BottomBox>
               <BottomBox title={t('opportunity-card.employment-outlook')} className="bg-todo">
@@ -161,7 +157,7 @@ export const OpportunityCard = ({
               </BottomBox>
               {hasRestrictions && (
                 <BottomBox title={t('opportunity-card.maybe-has-restrictions')} className="bg-todo">
-                  <MdBlock className="text-accent" size={20} role="presentation" />
+                  <JodBlock className="text-accent" size={20} role="presentation" />
                 </BottomBox>
               )}
               {industryName && (

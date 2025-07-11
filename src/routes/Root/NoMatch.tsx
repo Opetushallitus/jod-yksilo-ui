@@ -1,6 +1,6 @@
 import { Button } from '@jod/design-system';
+import { JodHome } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
-import { MdHome } from 'react-icons/md';
 
 const NoMatch = () => {
   const { t } = useTranslation();
@@ -11,10 +11,10 @@ const NoMatch = () => {
       <h1 className="text-heading-1">{title}</h1>
       <p className="text-body-lg">{t('no-match.description')}</p>
       <Button
-        icon={<MdHome size={24} />}
+        icon={<JodHome />}
         iconSide="left"
         label={t('return-home')}
-        variant="white"
+        variant="accent"
         /* eslint-disable-next-line react/no-unstable-nested-components */
         LinkComponent={({ children }: { children: React.ReactNode }) => <a href="/">{children}</a>}
       />
