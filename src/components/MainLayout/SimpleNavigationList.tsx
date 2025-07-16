@@ -6,27 +6,21 @@ interface SimpleNavigationListProps {
   title: string;
   collapsible?: boolean;
   children: React.ReactNode;
-  borderEnabled?: boolean;
-  addPadding?: boolean;
   backgroundClassName?: string;
   lang?: LangCode;
 }
 
 export const SimpleNavigationList = ({
   title,
-  collapsible = false,
+  collapsible = false, // For filters
   children,
-  borderEnabled = true,
-  addPadding = true,
-  backgroundClassName = 'bg-secondary-1-25',
+  backgroundClassName = 'bg-secondary-1-25', // For filters
   lang,
 }: SimpleNavigationListProps) => {
   const { i18n } = useTranslation();
-  const borderClassName = borderEnabled ? 'rounded-md' : '';
-  const paddingClassName = addPadding ? 'py-6 px-[20px]' : '';
   const language = lang ?? i18n.language;
   return (
-    <div className={`${borderClassName} ${backgroundClassName} ${paddingClassName}`.trim()}>
+    <div className={`rounded-md ${backgroundClassName} py-6 px-[20px]`.trim()}>
       {collapsible ? (
         <Accordion title={title} lang={language}>
           {children}

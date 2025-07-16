@@ -1,40 +1,33 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router';
+import { NavLink, NavLinkProps } from 'react-router';
 
-export const NavLinkBasedOnAuth = ({
-  to,
-  shouldLogin,
-  className,
-  children,
-  onClose,
-}: {
-  to: string;
+interface NavLinkBasedOnAuthProps extends NavLinkProps {
   shouldLogin: boolean;
-  className: string;
-  children: React.ReactNode;
-  onClose: () => void;
-}) => {
+  onClose?: () => void;
+}
+
+export const NavLinkBasedOnAuth = ({ shouldLogin, onClose, ...rest }: NavLinkBasedOnAuthProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
-  const landingPageUrl = `/${language}/${t('slugs.profile.login')}`;
+
+  const pathTo = typeof rest.to === 'string' ? `/${language}/${rest.to}` : `/${language}/${rest.to.pathname}`;
 
   return shouldLogin ? (
     <NavLink
-      state={{ callbackURL: to }}
-      to={landingPageUrl}
-      className={className}
+      {...rest}
+      state={{ callbackURL: pathTo }}
+      to={`/${language}/${t('slugs.profile.login')}`}
       lang={language}
       aria-label={t('login')}
       onClick={onClose}
     >
-      {children}
+      {rest.children}
     </NavLink>
   ) : (
-    <NavLink to={`/${language}/${to}`} className={className} lang={language} onClick={onClose}>
-      {children}
+    <NavLink {...rest} to={pathTo} lang={language} onClick={onClose}>
+      {rest.children}
     </NavLink>
   );
 };

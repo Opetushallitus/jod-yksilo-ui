@@ -7,7 +7,7 @@ import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { useErrorNoteStore } from '@/stores/useErrorNoteStore';
 import { useToolStore } from '@/stores/useToolStore';
-import { Footer, MatomoTracker, NavigationBar, SkipLink } from '@jod/design-system';
+import { Footer, MatomoTracker, NavigationBar, ServiceVariantProvider, SkipLink } from '@jod/design-system';
 import { JodMenu } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -134,9 +134,12 @@ const Root = () => {
         />
         {error && <ErrorNote error={error} onCloseClick={clearErrorNote} />}
       </header>
+
       <LogoutFormContext.Provider value={logoutForm.current}>
         <NavMenu open={navMenuOpen} onClose={() => setNavMenuOpen(false)} />
-        <Outlet />
+        <ServiceVariantProvider value="yksilo">
+          <Outlet />
+        </ServiceVariantProvider>
       </LogoutFormContext.Provider>
 
       <Footer

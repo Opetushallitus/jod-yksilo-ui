@@ -13,7 +13,6 @@ export { LanguageButton } from './LanguageButton/LanguageButton';
 export { LanguageMenu } from './LanguageMenu/LanguageMenu';
 export { LoginModal } from './LoginModal/LoginModal';
 export { MainLayout } from './MainLayout/MainLayout';
-export { RoutesNavigationList, type RoutesNavigationListProps } from './MainLayout/RoutesNavigationList';
 export { SimpleNavigationList } from './MainLayout/SimpleNavigationList';
 export { OpportunityCard } from './OpportunityCard/OpportunityCard';
 export { OsaamisSuosittelija, type Osaaminen, type OsaaminenValue } from './OsaamisSuosittelija/OsaamisSuosittelija';

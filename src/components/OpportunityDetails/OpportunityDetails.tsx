@@ -1,19 +1,13 @@
 import { components } from '@/api/schema';
-import {
-  ActionButton,
-  AiInfo,
-  FavoriteToggle,
-  LoginModal,
-  MainLayout,
-  RoutesNavigationList,
-  SimpleNavigationList,
-} from '@/components';
+import { ActionButton, AiInfo, FavoriteToggle, LoginModal, MainLayout } from '@/components';
 import RateAiContent from '@/components/RateAiContent/RateAiContent';
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { type MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { copyToClipboard, getLocalizedText } from '@/utils';
+import { getLinkTo } from '@/utils/routeUtils';
+import { MenuSection, PageNavigation } from '@jod/design-system';
 import { JodPrint, JodShare } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -74,21 +68,16 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
   const filterDevSections = (section: OpportunityDetailsSection) =>
     !section.showInDevOnly || (isDev && section.showInDevOnly);
 
-  const routes = sections.filter(filterDevSections).map((section) => ({
-    active: false,
-    name: section.navTitle,
-    path: `#${section.navTitle}`,
-    replace: true,
-  }));
+  const menuSection: MenuSection = {
+    title: t('on-this-page'),
+    linkItems: sections.filter(filterDevSections).map((section) => ({
+      label: section.navTitle,
+      LinkComponent: getLinkTo(`#${section.navTitle}`),
+    })),
+  };
 
   return (
-    <MainLayout
-      navChildren={
-        <SimpleNavigationList title={getLocalizedText(data.otsikko)} collapsible>
-          <RoutesNavigationList routes={routes} />
-        </SimpleNavigationList>
-      }
-    >
+    <MainLayout navChildren={<PageNavigation menuSection={menuSection} openSubMenuLabel="" activeIndicator="dot" />}>
       {loginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} isOpen={loginModalOpen} />}
       {title && <title>{title}</title>}
       <div className="flex flex-row justify-between items-center mb-5">
