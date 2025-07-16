@@ -237,6 +237,7 @@
   },
   "how-do-i-give-feedback": "Miten annan palautetta?",
   "how-do-i-use-the-service": "Kuinka käytän palvelua?",
+  "in-this-section": "Tässä osiossa",
   "industry-job-opportunities": "Toimiala (työmahdollisuudet)",
   "instructions": "Ohjeet",
   "interests": "Kiinnostukset",
@@ -440,6 +441,7 @@
     "description": "Hakemaasi sivua ei löytynyt.",
     "title": "Sivua ei löytynyt"
   },
+  "on-this-page": "Tällä sivulla",
   "open-menu": "Avaa valikko",
   "open-submenu": "Avaa alivalikko",
   "opportunity-card": {
@@ -573,7 +575,7 @@
       "title": "Vapaa-ajan toimintoni"
     },
     "front": {
-      "title": "Etusivu"
+      "title": "Omat sivuni"
     },
     "index": "Osaamisprofiilini",
     "interests": {
@@ -585,7 +587,7 @@
       "free-form-text-for-interests": "Vapaa teksti kiinnostuksille",
       "occupations-that-interest-me": "Ammatit, jotka kiinnostavat minua",
       "skills-that-interest-me": "Osaamiset, jotka kiinnostavat minua",
-      "title": "Kiinnostuksen kohteeni",
+      "title": "Kiinnostukseni",
       "write-what-interests-you": "Kirjoita, mikä sinua kiinnostaa"
     },
     "landing-page": {
@@ -708,7 +710,7 @@
       "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus osaamisestani",
       "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin osaamistasi. Jos käytät palvelua suomeksi kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.",
       "my-other-comptetences": "Osaamiseni",
-      "title": "Muut osaamiseni"
+      "title": "Muu osaamiseni"
     },
     "work-history": {
       "description": "Löydät alta työhistoriasi. Voit lisätä käsin työhistoriaasi sekä siihen liittyviä työtehtäviä sekä kartoittaa niihin liittyviä osaamisiasi. Voit myös tuoda työhistoriasi ja siihen liittyvät osaamisesi Työmarkkinatorin työnhakuprofiilistasi, jos sinulla on sellainen käytössä.",

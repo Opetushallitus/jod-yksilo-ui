@@ -1,9 +1,12 @@
-import { MainLayout, RoutesNavigationList, SimpleNavigationList } from '@/components';
+import { MainLayout } from '@/components';
+import { generateMenuItems } from '@/utils/routeUtils';
+import { PageNavigation, type MenuSection } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 
 const BasicInformation = () => {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
   const routes = [
     {
       name: t('cookie-policy'),
@@ -31,14 +34,17 @@ const BasicInformation = () => {
     },
   ];
 
+  const menuSection: MenuSection = {
+    title: t('on-this-page'),
+    linkItems: generateMenuItems({
+      menuRoutes: routes,
+      pathPrefix: t('slugs.basic-information'),
+      pathname,
+    }),
+  };
+
   return (
-    <MainLayout
-      navChildren={
-        <SimpleNavigationList title={t('basic-information')}>
-          <RoutesNavigationList routes={routes} />
-        </SimpleNavigationList>
-      }
-    >
+    <MainLayout navChildren={<PageNavigation menuSection={menuSection} openSubMenuLabel="" activeIndicator="dot" />}>
       <Outlet />
     </MainLayout>
   );

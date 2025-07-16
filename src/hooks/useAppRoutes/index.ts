@@ -9,42 +9,52 @@ export const useAppRoutes = () => {
     {
       name: t('profile.front.title'),
       path: t('slugs.profile.front'),
-    },
-    {
-      name: t('profile.competences.title'),
-      path: competencesPath,
-    },
-    {
-      name: t('profile.work-history.title'),
-      path: `${competencesPath}/${t('slugs.profile.work-history')}`,
-    },
-    {
-      name: t('profile.education-history.title'),
-      path: `${competencesPath}/${t('slugs.profile.education-history')}`,
-    },
-    {
-      name: t('profile.free-time-activities.title'),
-      path: `${competencesPath}/${t('slugs.profile.free-time-activities')}`,
-    },
-    {
-      name: t('profile.something-else.title'),
-      path: `${competencesPath}/${t('slugs.profile.something-else')}`,
-    },
-    {
-      name: t('profile.interests.title'),
-      path: t('slugs.profile.interests'),
-    },
-    {
-      name: t('profile.favorites.title'),
-      path: t('slugs.profile.favorites'),
-    },
-    {
-      name: t('profile.my-goals.title'),
-      path: t('slugs.profile.my-goals'),
+      authRequired: true,
     },
     {
       name: t('profile.preferences.title'),
       path: t('slugs.profile.preferences'),
+      authRequired: true,
+    },
+    {
+      name: t('profile.favorites.title'),
+      path: t('slugs.profile.favorites'),
+      authRequired: true,
+    },
+    {
+      name: t('profile.my-goals.title'),
+      path: t('slugs.profile.my-goals'),
+      authRequired: true,
+    },
+    {
+      name: t('profile.competences.title'),
+      path: competencesPath,
+      authRequired: true,
+    },
+    {
+      name: t('profile.work-history.title'),
+      path: `${competencesPath}/${t('slugs.profile.work-history')}`,
+      authRequired: true,
+    },
+    {
+      name: t('profile.education-history.title'),
+      path: `${competencesPath}/${t('slugs.profile.education-history')}`,
+      authRequired: true,
+    },
+    {
+      name: t('profile.free-time-activities.title'),
+      path: `${competencesPath}/${t('slugs.profile.free-time-activities')}`,
+      authRequired: true,
+    },
+    {
+      name: t('profile.something-else.title'),
+      path: `${competencesPath}/${t('slugs.profile.something-else')}`,
+      authRequired: true,
+    },
+    {
+      name: t('profile.interests.title'),
+      path: t('slugs.profile.interests'),
+      authRequired: true,
     },
   ];
 

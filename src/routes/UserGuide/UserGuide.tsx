@@ -1,20 +1,25 @@
-import { MainLayout, RoutesNavigationList, SimpleNavigationList } from '@/components';
+import { MainLayout } from '@/components';
 import { useAppRoutes } from '@/hooks/useAppRoutes';
+import { generateMenuItems } from '@/utils/routeUtils';
+import { PageNavigation, type MenuSection } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 
 const UserGuide = () => {
   const { t } = useTranslation();
   const { userGuideRoutes } = useAppRoutes();
+  const { pathname } = useLocation();
+  const menuSection: MenuSection = {
+    title: t('on-this-page'),
+    linkItems: generateMenuItems({
+      menuRoutes: userGuideRoutes,
+      pathPrefix: t('slugs.user-guide.index'),
+      pathname,
+    }),
+  };
 
   return (
-    <MainLayout
-      navChildren={
-        <SimpleNavigationList title={t('user-guide')}>
-          <RoutesNavigationList routes={userGuideRoutes} />
-        </SimpleNavigationList>
-      }
-    >
+    <MainLayout navChildren={<PageNavigation menuSection={menuSection} openSubMenuLabel="" activeIndicator="dot" />}>
       <Outlet />
     </MainLayout>
   );
