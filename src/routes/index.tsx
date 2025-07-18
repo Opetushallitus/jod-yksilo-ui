@@ -1,3 +1,4 @@
+import { ModalProvider } from '@/hooks/useModal/ModalProvider';
 import i18n, { supportedLanguageCodes } from '@/i18n/config';
 import { EducationOpportunity, educationOpportunityLoader } from '@/routes/EducationOpportunity';
 import { JobOpportunity, loader as jobOpportunityLoader } from '@/routes/JobOpportunity';
@@ -281,7 +282,11 @@ const rootRoute: RouteObject = {
   id: 'root',
   path: '/:lng',
   loader: withYksiloContext(rootLoader, false),
-  element: <Root />,
+  element: (
+    <ModalProvider>
+      <Root />
+    </ModalProvider>
+  ),
   errorElement: <ErrorBoundary />,
   children: [
     {

@@ -1,4 +1,5 @@
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
+import { useModal } from '@/hooks/useModal/useModal';
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
 import { JodArrowRight, JodInterests } from '@jod/design-system/icons';
 import React from 'react';
@@ -26,12 +27,8 @@ const FreeTimeActivities = () => {
     i18n: { language },
   } = useTranslation();
   const title = t('profile.free-time-activities.title');
-  const [isWizardOpen, setIsWizardOpen] = React.useState(false);
   const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot, osaamisetMap));
-  const [toimintoId, setToimintoId] = React.useState<string | undefined>(undefined);
-  const [patevyysId, setPatevyysId] = React.useState<string | undefined>(undefined);
-  const [isToimintoModalOpen, setIsToimintoModalOpen] = React.useState(false);
-  const [isPatevyysModalOpen, setIsPatevyysModalOpen] = React.useState(false);
+  const { showModal } = useModal();
   const revalidator = useRevalidator(); // For reloading data after modal close
 
   React.useEffect(() => {
@@ -39,39 +36,40 @@ const FreeTimeActivities = () => {
   }, [vapaaAjanToiminnot, osaamisetMap]);
 
   const onRowClick = (row: ExperienceTableRowData) => {
-    setToimintoId(row.key);
-    setIsToimintoModalOpen(true);
+    showModal(EditVapaaAjanToimintoModal, {
+      toimintoId: row.key,
+      onClose: () => {
+        void refreshData();
+      },
+    });
   };
 
   const onNestedRowClick = (row: ExperienceTableRowData) => {
     const toiminto = vapaaAjanToiminnot.find((vat) => vat.patevyydet.find((p) => p.id === row.key));
     if (toiminto?.id) {
-      setToimintoId(toiminto.id);
-      setPatevyysId(row.key);
-      setIsPatevyysModalOpen(true);
+      showModal(AddOrEditPatevyysModal, {
+        toimintoId: toiminto.id,
+        patevyysId: row.key,
+        onClose: () => {
+          void refreshData();
+        },
+      });
     }
   };
 
   const onAddNestedRowClick = (row: ExperienceTableRowData) => {
-    setToimintoId(row.key);
-    setIsPatevyysModalOpen(true);
+    showModal(AddOrEditPatevyysModal, {
+      toimintoId: row.key,
+      onClose: () => {
+        void refreshData();
+      },
+    });
   };
 
-  const onCloseToimintoModal = () => {
-    setIsToimintoModalOpen(false);
-    setToimintoId(undefined);
-    revalidator.revalidate();
-  };
-  const onClosePatevyysModal = () => {
-    setIsPatevyysModalOpen(false);
-    setToimintoId(undefined);
-    setPatevyysId(undefined);
-    revalidator.revalidate();
-  };
-
-  const onCloseWizard = () => {
-    setIsWizardOpen(false);
-    revalidator.revalidate();
+  const refreshData = async (isCancel?: boolean) => {
+    if (!isCancel) {
+      await revalidator.revalidate();
+    }
   };
 
   return (
@@ -98,27 +96,17 @@ const FreeTimeActivities = () => {
         addNewLabel={t('free-time-activities.add-new-free-time-theme-and-activities')}
         addNewNestedLabel={t('free-time-activities.add-new-activity')}
         rows={rows}
-        onAddClick={() => setIsWizardOpen(true)}
+        onAddClick={() => {
+          showModal(FreeTimeActivitiesWizard, {
+            onClose: () => {
+              void refreshData();
+            },
+          });
+        }}
         onRowClick={onRowClick}
         onNestedRowClick={onNestedRowClick}
         onAddNestedRowClick={onAddNestedRowClick}
       />
-      {isToimintoModalOpen && toimintoId && (
-        <EditVapaaAjanToimintoModal
-          isOpen={isToimintoModalOpen}
-          onClose={onCloseToimintoModal}
-          toimintoId={toimintoId}
-        />
-      )}
-      {isPatevyysModalOpen && toimintoId && (
-        <AddOrEditPatevyysModal
-          isOpen={isPatevyysModalOpen}
-          onClose={onClosePatevyysModal}
-          toimintoId={toimintoId}
-          patevyysId={patevyysId}
-        />
-      )}
-      {isWizardOpen && <FreeTimeActivitiesWizard isOpen={isWizardOpen} setIsOpen={onCloseWizard} />}
     </MainLayout>
   );
 };
