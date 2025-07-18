@@ -1,8 +1,10 @@
 import { components } from '@/api/schema';
-import { ActionButton, AiInfo, FavoriteToggle, LoginModal, MainLayout } from '@/components';
+import { ActionButton, AiInfo, FavoriteToggle, MainLayout } from '@/components';
 import RateAiContent from '@/components/RateAiContent/RateAiContent';
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
+import { useLoginLink } from '@/hooks/useLoginLink';
+import { useModal } from '@/hooks/useModal/useModal';
 import { type MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { copyToClipboard, getLocalizedText } from '@/utils';
@@ -11,6 +13,7 @@ import { MenuSection, PageNavigation } from '@jod/design-system';
 import { JodPrint, JodShare } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router';
 
 export interface OpportunityDetailsSection {
   navTitle: string;
@@ -36,19 +39,23 @@ export interface OpportunityDetailsProps {
  */
 const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTitle }: OpportunityDetailsProps) => {
   const { isDev } = useEnvironment();
-  const [loginModalOpen, setLoginModalOpen] = React.useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const title = getLocalizedText(data?.otsikko);
   const toolStore = useToolStore();
   const [isFavorite, setIsFavorite] = React.useState(false);
+  const { showDialog } = useModal();
+  const state = useLocation().state;
+  const loginLink = useLoginLink({
+    callbackURL: state?.callbackURL
+      ? `/${i18n.language}/${state?.callbackURL}`
+      : `/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
+  });
 
   React.useEffect(() => {
-    setIsFavorite(toolStore.suosikit?.some((suosikki) => suosikki.kohdeId === data?.id));
-  }, [toolStore.suosikit, data?.id]);
-
-  const handleLoginRequired = () => {
-    setLoginModalOpen(true);
-  };
+    if (isLoggedIn && data?.id) {
+      setIsFavorite(toolStore.suosikit?.some((suosikki) => suosikki.kohdeId === data?.id));
+    }
+  }, [toolStore.suosikit, data?.id, isLoggedIn]);
 
   const handleToggleFavorite = async () => {
     if (data?.id) {
@@ -78,7 +85,6 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
 
   return (
     <MainLayout navChildren={<PageNavigation menuSection={menuSection} openSubMenuLabel="" activeIndicator="dot" />}>
-      {loginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} isOpen={loginModalOpen} />}
       {title && <title>{title}</title>}
       <div className="flex flex-row justify-between items-center mb-5">
         <h1 className="text-heading-2 sm:text-heading-1">{title}</h1>
@@ -100,7 +106,21 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
       <div className="flex flex-row flex-wrap gap-x-7 gap-y-5 my-6 print:hidden">
         <FavoriteToggle
           isFavorite={isFavorite}
-          onToggleFavorite={() => (!isLoggedIn ? handleLoginRequired() : handleToggleFavorite())}
+          onToggleFavorite={() =>
+            !isLoggedIn
+              ? showDialog({
+                  title: t('login'),
+                  description: t('login-for-favorites'),
+                  cancelText: t('cancel'),
+                  confirmText: t('login'),
+                  onConfirm: () => {
+                    window.location.href = loginLink;
+                  },
+                  closeParentModal: true,
+                  variant: 'accent',
+                })
+              : handleToggleFavorite()
+          }
         />
         {isDev && (
           <ActionButton

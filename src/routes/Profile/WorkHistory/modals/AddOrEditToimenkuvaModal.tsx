@@ -3,9 +3,10 @@ import { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { useModal } from '@/hooks/useModal/useModal';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
+import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
 import {
   Controller,
@@ -59,7 +60,6 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
   React.useEffect(() => {
     void trigger('loppuPvm');
   }, [alkuPvm, trigger]);
-
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
@@ -273,6 +273,8 @@ const AddOrEditToimenkuvaModal = ({
     void trigger();
   }, [trigger]);
 
+  const { showDialog } = useModal();
+
   return !isLoading ? (
     <Modal
       open={isOpen}
@@ -306,23 +308,22 @@ const AddOrEditToimenkuvaModal = ({
         <div className="flex flex-row justify-between flex-1">
           <div>
             {toimenkuvaId && (
-              <ConfirmDialog
-                title={t('work-history.delete-job-description')}
-                onConfirm={() => void deleteToimenkuva()}
-                confirmText={t('delete')}
-                cancelText={t('cancel')}
-                variant="destructive"
-                description={t('work-history.confirm-delete-job-description')}
-              >
-                {(showDialog: () => void) => (
-                  <Button
-                    variant="white-delete"
-                    label={`${t('delete')}`}
-                    onClick={showDialog}
-                    className="whitespace-nowrap"
-                  />
-                )}
-              </ConfirmDialog>
+              <Button
+                className="whitespace-nowrap"
+                variant="white-delete"
+                label={`${t('delete')}`}
+                onClick={() => {
+                  showDialog({
+                    title: t('work-history.delete-job-description'),
+                    onConfirm: () => void deleteToimenkuva(),
+                    confirmText: t('delete'),
+                    cancelText: t('cancel'),
+                    variant: 'destructive',
+                    description: t('work-history.confirm-delete-job-description'),
+                    closeParentModal: true,
+                  });
+                }}
+              />
             )}
           </div>
           <div className="flex flex-row justify-between gap-5">

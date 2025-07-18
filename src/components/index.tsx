@@ -11,7 +11,6 @@ export { HelpingToolLinkItem, HelpingToolProfileLinkItem } from './HelpingToolsC
 export type { HelpingToolLinkItemProps, HelpingToolProfileLinkItemProps } from './HelpingToolsContent';
 export { LanguageButton } from './LanguageButton/LanguageButton';
 export { LanguageMenu } from './LanguageMenu/LanguageMenu';
-export { LoginModal } from './LoginModal/LoginModal';
 export { MainLayout } from './MainLayout/MainLayout';
 export { SimpleNavigationList } from './MainLayout/SimpleNavigationList';
 export { OpportunityCard } from './OpportunityCard/OpportunityCard';

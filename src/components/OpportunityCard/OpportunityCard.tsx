@@ -1,13 +1,15 @@
 import { components } from '@/api/schema';
-import { FavoriteToggle, LoginModal } from '@/components';
+import { FavoriteToggle } from '@/components';
 import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDropdown';
 import { useEnvironment } from '@/hooks/useEnvironment';
+import { useLoginLink } from '@/hooks/useLoginLink';
+import { useModal } from '@/hooks/useModal/useModal';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { cx } from '@jod/design-system';
 import { JodBlock, JodTrendingUp } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 
 type FavoriteProps =
   | {
@@ -98,9 +100,15 @@ export const OpportunityCard = ({
   menuContent,
   menuId,
 }: OpportunityCardProps) => {
-  const { t } = useTranslation();
-  const [loginModalOpen, setLoginModalOpen] = React.useState(false);
+  const { t, i18n } = useTranslation();
   const { isDev } = useEnvironment();
+  const { showDialog } = useModal();
+  const state = useLocation().state;
+  const loginLink = useLoginLink({
+    callbackURL: state?.callbackURL
+      ? `/${i18n.language}/${state?.callbackURL}`
+      : `/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
+  });
 
   const onToggleFavorite = () => {
     if (hideFavorite) {
@@ -108,7 +116,17 @@ export const OpportunityCard = ({
     }
 
     if (!isLoggedIn) {
-      setLoginModalOpen(true);
+      showDialog({
+        title: t('login'),
+        description: t('login-for-favorites'),
+        cancelText: t('cancel'),
+        confirmText: t('login'),
+        onConfirm: () => {
+          window.location.href = loginLink;
+        },
+        closeParentModal: true,
+        variant: 'accent',
+      });
     } else {
       toggleFavorite?.();
     }
@@ -125,7 +143,6 @@ export const OpportunityCard = ({
 
   return (
     <>
-      {loginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} isOpen={loginModalOpen} />}
       <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border">
         <div className="order-2 flex flex-col">
           <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">{cardTypeTitle}</span>

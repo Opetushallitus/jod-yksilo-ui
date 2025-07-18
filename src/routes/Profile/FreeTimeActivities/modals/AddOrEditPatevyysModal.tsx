@@ -3,9 +3,10 @@ import { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { useModal } from '@/hooks/useModal/useModal';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
+import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
 import {
   Controller,
@@ -278,6 +279,8 @@ export const AddOrEditPatevyysModal = ({
     void trigger();
   }, [trigger]);
 
+  const { showDialog } = useModal();
+
   return !isLoading ? (
     <Modal
       open={isOpen}
@@ -311,23 +314,20 @@ export const AddOrEditPatevyysModal = ({
         <div className="flex flex-row justify-between flex-1">
           <div>
             {patevyysId && (
-              <ConfirmDialog
-                title={t('free-time-activities.delete-proficiency')}
-                onConfirm={() => void deletePatevyys()}
-                confirmText={t('delete')}
-                cancelText={t('cancel')}
-                variant="destructive"
-                description={t('free-time-activities.confirm-delete-proficiency')}
-              >
-                {(showDialog: () => void) => (
-                  <Button
-                    variant="white-delete"
-                    label={`${t('delete')}`}
-                    onClick={showDialog}
-                    className="whitespace-nowrap"
-                  />
-                )}
-              </ConfirmDialog>
+              <Button
+                variant="white-delete"
+                label={`${t('delete')}`}
+                onClick={() => {
+                  showDialog({
+                    title: t('free-time-activities.delete-proficiency'),
+                    onConfirm: () => void deletePatevyys(),
+                    confirmText: t('delete'),
+                    cancelText: t('cancel'),
+                    variant: 'destructive',
+                    description: t('free-time-activities.confirm-delete-proficiency'),
+                  });
+                }}
+              />
             )}
           </div>
           <div className="flex flex-row justify-between gap-5">

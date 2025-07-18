@@ -1,3 +1,4 @@
+import { ModalProvider } from '@/hooks/useModal/ModalProvider';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
@@ -44,7 +45,9 @@ describe('Favorites', () => {
   it('renders correctly', () => {
     render(
       <MemoryRouter>
-        <Favorites />
+        <ModalProvider>
+          <Favorites />
+        </ModalProvider>
       </MemoryRouter>,
     );
 
@@ -56,7 +59,9 @@ describe('Favorites', () => {
   it('renders opportunity cards correctly', () => {
     render(
       <MemoryRouter>
-        <Favorites />
+        <ModalProvider>
+          <Favorites />
+        </ModalProvider>
       </MemoryRouter>,
     );
 
@@ -70,7 +75,9 @@ describe('Favorites', () => {
 
     render(
       <MemoryRouter>
-        <Favorites />
+        <ModalProvider>
+          <Favorites />
+        </ModalProvider>
       </MemoryRouter>,
     );
 

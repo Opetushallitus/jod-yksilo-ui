@@ -3,8 +3,9 @@ import type { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { useModal } from '@/hooks/useModal/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, ConfirmDialog, InputField, Modal } from '@jod/design-system';
+import { Button, InputField, Modal } from '@jod/design-system';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -30,6 +31,7 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
   } = useTranslation();
 
   const formId = React.useId();
+  const { showDialog } = useModal();
   useEscHandler(onClose, formId);
   const methods = useForm<TyonantajaForm>({
     mode: 'onBlur',
@@ -122,23 +124,21 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
       footer={
         <div className="flex flex-row justify-between flex-1">
           <div className="flex flex-row gap-5">
-            <ConfirmDialog
-              title={t('work-history.delete-work-history')}
-              onConfirm={() => void deleteTyopaikka()}
-              confirmText={t('delete')}
-              cancelText={t('cancel')}
-              variant="destructive"
-              description={t('work-history.confirm-delete-work-history')}
-            >
-              {(showDialog: () => void) => (
-                <Button
-                  variant="white-delete"
-                  label={`${t('delete')}`}
-                  onClick={showDialog}
-                  className="whitespace-nowrap"
-                />
-              )}
-            </ConfirmDialog>
+            <Button
+              className="whitespace-nowrap"
+              variant="white-delete"
+              label={`${t('delete')}`}
+              onClick={() => {
+                showDialog({
+                  title: t('work-history.delete-work-history'),
+                  description: t('work-history.confirm-delete-work-history'),
+                  confirmText: t('delete'),
+                  cancelText: t('cancel'),
+                  variant: 'destructive',
+                  onConfirm: deleteTyopaikka,
+                });
+              }}
+            />
           </div>
           <div className="flex flex-row gap-5">
             <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />

@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { ESCO_OCCUPATION_PREFIX, formErrorMessage, LIMITS } from '@/constants';
+import { useModal } from '@/hooks/useModal/useModal';
 import EditKiinnostusModal from '@/routes/Profile/Interests/EditKiinnostusModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,17 +20,16 @@ const Interests = () => {
     t,
     i18n: { language },
   } = useTranslation();
+  const { showModal } = useModal();
   const { kiinnostukset, vapaateksti } = useLoaderData() as {
     kiinnostukset: components['schemas']['OsaaminenDto'][];
     vapaateksti: components['schemas']['LokalisoituTeksti'];
   };
   const title = t('profile.interests.title');
-  const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
   const revalidator = useRevalidator();
 
-  const onAddModalClose = () => {
-    setIsAddModalOpen(false);
-    revalidator.revalidate();
+  const refreshData = async () => {
+    await revalidator.revalidate();
   };
 
   const sortedData = React.useMemo(
@@ -93,7 +93,6 @@ const Interests = () => {
         </div>
       }
     >
-      {isAddModalOpen && <EditKiinnostusModal onClose={onAddModalClose} isOpen={isAddModalOpen} />}
       <title>{title}</title>
       <h1 className="text-heading-1 mb-5">{title}</h1>
       <p className="mb-5 text-body-lg">{t('profile.interests.description')}</p>
@@ -149,7 +148,12 @@ const Interests = () => {
           variant="white"
           label={t(sortedSkills.length > 0 ? 'profile.interests.edit-interests' : 'profile.interests.add-interests')}
           onClick={() => {
-            setIsAddModalOpen(true);
+            showModal(EditKiinnostusModal, {
+              onClose: () => {
+                void refreshData();
+              },
+              data: kiinnostukset,
+            });
           }}
         />
       </div>
