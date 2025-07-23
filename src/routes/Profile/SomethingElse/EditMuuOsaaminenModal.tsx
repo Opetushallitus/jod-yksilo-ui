@@ -7,12 +7,13 @@ import { Button, Modal } from '@jod/design-system';
 import React from 'react';
 import { Controller, Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
 interface EditMuuOsaaminenModalProps {
   isOpen: boolean;
   onClose: () => void;
+  data: OsaaminenDto[];
 }
 
 interface OsaamisetForm {
@@ -20,9 +21,9 @@ interface OsaamisetForm {
   osaamiset: OsaaminenValue[];
 }
 
-const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModalProps) => {
+const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalProps) => {
   const { t } = useTranslation();
-  const data = (useLoaderData() as { muuOsaaminen: OsaaminenDto[]; vapaateksti: string }).muuOsaaminen ?? [];
+  const revalidator = useRevalidator();
 
   const formId = React.useId();
   useEscHandler(onClose, formId);
@@ -62,6 +63,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose }: EditMuuOsaaminenModalProps) 
     await client.PUT('/api/profiili/muu-osaaminen', {
       body: data.osaamiset.map((o) => o.id),
     });
+    await revalidator.revalidate();
     onClose();
   };
 

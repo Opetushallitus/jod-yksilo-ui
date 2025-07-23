@@ -3,9 +3,10 @@ import { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { useModal } from '@/hooks/useModal';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
+import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
 import {
   Controller,
@@ -17,6 +18,7 @@ import {
   useFormState,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
 interface AddOrEditPatevyysModalProps {
@@ -147,6 +149,7 @@ export const AddOrEditPatevyysModal = ({
   patevyysId,
 }: AddOrEditPatevyysModalProps) => {
   const { t } = useTranslation();
+  const revalidator = useRevalidator();
 
   if (!id) {
     onClose();
@@ -264,6 +267,7 @@ export const AddOrEditPatevyysModal = ({
         },
       });
     }
+    await revalidator.revalidate();
     onClose();
   };
 
@@ -271,12 +275,15 @@ export const AddOrEditPatevyysModal = ({
     await client.DELETE(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
       params: { path: { id, patevyysId: patevyysId! } },
     });
+    await revalidator.revalidate();
     onClose();
   };
 
   React.useEffect(() => {
     void trigger();
   }, [trigger]);
+
+  const { showDialog } = useModal();
 
   return !isLoading ? (
     <Modal
@@ -311,23 +318,20 @@ export const AddOrEditPatevyysModal = ({
         <div className="flex flex-row justify-between flex-1">
           <div>
             {patevyysId && (
-              <ConfirmDialog
-                title={t('free-time-activities.delete-proficiency')}
-                onConfirm={() => void deletePatevyys()}
-                confirmText={t('delete')}
-                cancelText={t('cancel')}
-                variant="destructive"
-                description={t('free-time-activities.confirm-delete-proficiency')}
-              >
-                {(showDialog: () => void) => (
-                  <Button
-                    variant="white-delete"
-                    label={`${t('delete')}`}
-                    onClick={showDialog}
-                    className="whitespace-nowrap"
-                  />
-                )}
-              </ConfirmDialog>
+              <Button
+                variant="white-delete"
+                label={`${t('delete')}`}
+                onClick={() => {
+                  showDialog({
+                    title: t('free-time-activities.delete-proficiency'),
+                    onConfirm: () => void deletePatevyys(),
+                    confirmText: t('delete'),
+                    cancelText: t('cancel'),
+                    variant: 'destructive',
+                    description: t('free-time-activities.confirm-delete-proficiency'),
+                  });
+                }}
+              />
             )}
           </div>
           <div className="flex flex-row justify-between gap-5">

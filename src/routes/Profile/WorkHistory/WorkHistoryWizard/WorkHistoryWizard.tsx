@@ -7,7 +7,7 @@ import { JodArrowLeft, JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 import CompetencesStep from './CompetencesStep';
 import SummaryStep from './SummaryStep';
@@ -21,10 +21,10 @@ interface WorkHistoryWizardProps {
 
 const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { sm } = useMediaQueries();
   const [step, setStep] = React.useState(1);
   const selectedToimenkuva = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
+  const revalidator = useRevalidator();
 
   const formId = React.useId();
   useEscHandler(onClose, formId);
@@ -112,8 +112,8 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
         })),
       },
     });
+    await revalidator.revalidate();
     onClose();
-    navigate('.', { replace: true });
   };
 
   const [steps, setSteps] = React.useState(1);

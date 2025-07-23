@@ -1,6 +1,7 @@
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
+import { useModal } from '@/hooks/useModal';
 import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
-import { Checkbox, ConfirmDialog, Spinner, Tag, useMediaQueries } from '@jod/design-system';
+import { Checkbox, Spinner, Tag, useMediaQueries } from '@jod/design-system';
 import { JodCaretDown, JodCaretUp, JodEdit, JodError } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -97,6 +98,22 @@ export const ExperienceTableRow = ({
     );
   };
 
+  const { showDialog } = useModal();
+  const onShowDialog = (onConfirm: () => void) => {
+    showDialog({
+      title: confirmTitle ?? t('delete'),
+      description: confirmDescription ?? '',
+      confirmText: t('delete'),
+      cancelText: t('cancel'),
+      variant: 'destructive',
+      onConfirm: () => {
+        setTimeout(() => {
+          onConfirm();
+        });
+      },
+    });
+  };
+
   const sortedCompetences = React.useMemo(
     () => [...(row.osaamiset ?? [])].sort(sortByProperty(`nimi.${language}`)),
     [row.osaamiset, language],
@@ -104,45 +121,36 @@ export const ExperienceTableRow = ({
 
   const rowAction = (
     onRowClick: (row: ExperienceTableRowData) => void,
-    row: ExperienceTableRowData,
+    selectedRow: ExperienceTableRowData,
     useConfirm?: boolean,
     rowActionElement?: React.ReactNode,
-    confirmTitle?: string,
-    confirmDescription?: string,
     actionLabel?: string,
   ) => {
     return (
-      <ConfirmDialog
-        title={confirmTitle ?? ''}
-        onConfirm={() => onRowClick(row)}
-        confirmText={t('delete')}
-        cancelText={t('cancel')}
-        variant="destructive"
-        description={confirmDescription ?? ''}
+      <TooltipWrapper
+        tooltipPlacement="top"
+        tooltipContent={t('competences-identifying')}
+        tooltipOpen={osaamisetOdottaaTunnistusta ? undefined : false}
       >
-        {(showDialog: () => void) => {
-          return (
-            <TooltipWrapper
-              tooltipPlacement="top"
-              tooltipContent={t('competences-identifying')}
-              tooltipOpen={osaamisetOdottaaTunnistusta ? undefined : false}
-            >
-              <button
-                aria-label={actionLabel ?? t('edit')}
-                onClick={() => (useConfirm ? showDialog() : onRowClick(row))}
-                className="cursor-pointer flex size-7 items-center justify-center"
-                disabled={osaamisetOdottaaTunnistusta}
-                title={osaamisetOdottaaTunnistusta ? t('competences-identifying') : undefined}
-                type="button"
-              >
-                {rowActionElement || (
-                  <JodEdit className={osaamisetOdottaaTunnistusta ? 'text-[#83AED3]' : 'text-secondary-gray'} />
-                )}
-              </button>
-            </TooltipWrapper>
-          );
-        }}
-      </ConfirmDialog>
+        <button
+          aria-label={actionLabel ?? t('edit')}
+          onClick={() =>
+            useConfirm
+              ? onShowDialog(() => {
+                  onRowClick(selectedRow);
+                })
+              : onRowClick(selectedRow)
+          }
+          className="cursor-pointer flex size-7 items-center justify-center"
+          disabled={osaamisetOdottaaTunnistusta}
+          title={osaamisetOdottaaTunnistusta ? t('competences-identifying') : undefined}
+          type="button"
+        >
+          {rowActionElement || (
+            <JodEdit className={osaamisetOdottaaTunnistusta ? 'text-[#83AED3]' : 'text-secondary-gray'} />
+          )}
+        </button>
+      </TooltipWrapper>
     );
   };
 
@@ -234,11 +242,7 @@ export const ExperienceTableRow = ({
             )}
           </>
         )}
-        {onRowClick && (
-          <td>
-            {rowAction(onRowClick, row, useConfirm, rowActionElement, confirmTitle, confirmDescription, actionLabel)}
-          </td>
-        )}
+        {onRowClick && <td>{rowAction(onRowClick, row, useConfirm, rowActionElement, actionLabel)}</td>}
         {showCheckbox && <td>{renderCheckbox()}</td>}
       </tr>
       <tr>
@@ -281,11 +285,7 @@ export const ExperienceTableRow = ({
           {!hideOsaamiset && renderOsaamisetCell(sm)}
         </>
       )}
-      {onRowClick && (
-        <td>
-          {rowAction(onRowClick, row, useConfirm, rowActionElement, confirmTitle, confirmDescription, actionLabel)}
-        </td>
-      )}
+      {onRowClick && <td>{rowAction(onRowClick, row, useConfirm, rowActionElement, actionLabel)}</td>}
       {showCheckbox && <td>{renderCheckbox()}</td>}
     </tr>
   );

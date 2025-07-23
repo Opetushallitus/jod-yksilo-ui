@@ -1,4 +1,5 @@
 import { MainLayout } from '@/components';
+import { useModal } from '@/hooks/useModal';
 import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { Button } from '@jod/design-system';
@@ -42,7 +43,7 @@ const MyGoals = () => {
     i18n: { language },
   } = useTranslation();
   const title = t('profile.my-goals.title');
-  const [addModalOpen, setAddModalOpen] = React.useState(false);
+  const { showModal } = useModal();
   const suosikitIsEmpty = useSuosikitStore(
     (state) => state.suosikit.filter((s) => !state.excludedIds.includes(s.kohdeId)).length === 0,
   );
@@ -57,13 +58,8 @@ const MyGoals = () => {
     };
   }, [paamaarat]);
 
-  const onCloseAddModal = () => {
-    setAddModalOpen(false);
-  };
-
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
-      {addModalOpen && <AddGoalModal onClose={onCloseAddModal} isOpen={addModalOpen} />}
       <title>{title}</title>
       <h1 className="mb-5 text-heading-1-mobile sm:text-heading-1">{title}</h1>
       <div className="flex flex-col gap-4 mb-9 sm:text-body-lg text-body-lg-mobile">
@@ -108,7 +104,9 @@ const MyGoals = () => {
       )}
       <Button
         variant="accent"
-        onClick={() => setAddModalOpen(true)}
+        onClick={() => {
+          showModal(AddGoalModal);
+        }}
         label={t('profile.my-goals.add-favorites-to-goals')}
         disabled={suosikitIsEmpty}
       />

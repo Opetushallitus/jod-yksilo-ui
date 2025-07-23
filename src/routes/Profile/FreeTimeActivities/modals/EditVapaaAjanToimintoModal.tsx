@@ -3,11 +3,13 @@ import type { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { useModal } from '@/hooks/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, ConfirmDialog, InputField, Modal } from '@jod/design-system';
+import { Button, InputField, Modal } from '@jod/design-system';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
 interface EditVapaaAjanToimintoProps {
@@ -28,6 +30,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
     t,
     i18n: { language },
   } = useTranslation();
+  const revalidator = useRevalidator();
 
   const formId = React.useId();
   useEscHandler(onClose, formId);
@@ -74,6 +77,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
         nimi: data.nimi,
       },
     });
+    await revalidator.revalidate();
     onClose();
   };
 
@@ -82,12 +86,15 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
       params: { path: { id } },
     });
 
+    await revalidator.revalidate();
     onClose();
   };
 
   React.useEffect(() => {
     void trigger();
   }, [trigger]);
+
+  const { showDialog } = useModal();
 
   if (isLoading) {
     return null;
@@ -124,23 +131,21 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
       footer={
         <div className="flex flex-row justify-between flex-1">
           <div>
-            <ConfirmDialog
-              title={t('free-time-activities.delete-free-time-activity')}
-              onConfirm={() => void deleteToiminto()}
-              confirmText={t('delete')}
-              cancelText={t('cancel')}
-              variant="destructive"
-              description={t('free-time-activities.confirm-delete-free-time-activity')}
-            >
-              {(showDialog: () => void) => (
-                <Button
-                  variant="white-delete"
-                  label={`${t('delete')}`}
-                  onClick={showDialog}
-                  className="whitespace-nowrap"
-                />
-              )}
-            </ConfirmDialog>
+            <Button
+              className="whitespace-nowrap"
+              variant="white-delete"
+              label={`${t('delete')}`}
+              onClick={() => {
+                showDialog({
+                  title: t('free-time-activities.delete-free-time-activity'),
+                  description: t('free-time-activities.confirm-delete-free-time-activity'),
+                  onConfirm: deleteToiminto,
+                  variant: 'destructive',
+                  confirmText: t('delete'),
+                  cancelText: t('cancel'),
+                });
+              }}
+            />
           </div>
           <div className="flex flex-row gap-5">
             <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />

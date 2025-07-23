@@ -2,6 +2,7 @@ import { client } from '@/api/client.ts';
 import { components } from '@/api/schema';
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
+import { useModal } from '@/hooks/useModal/index.ts';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal';
@@ -33,23 +34,16 @@ const EducationHistory = () => {
     i18n: { language },
   } = useTranslation();
   const title = t('profile.education-history.title');
-  const [isWizardOpen, setIsWizardOpen] = React.useState(false);
-  const [isKoulutuskokonaisuusOpen, setIsKoulutuskokonaisuusOpen] = React.useState(false);
-  const [isKoulutusOpen, setIsKoulutusOpen] = React.useState(false);
-  const [koulutusId, setKoulutusId] = React.useState<string | undefined>(undefined);
-  const [koulutuskokonaisuusId, setKoulutuskokonaisuusId] = React.useState<string | undefined>(undefined);
+
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>(
     getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap),
   );
   const revalidator = useRevalidator(); // For reloading data after modal close
-  const [isImportStartModalOpen, setIsImportStartModalOpen] = React.useState(false);
-  const [isImportSummaryModalOpen, setIsImportSummaryModalOpen] = React.useState(false);
-  const [isImportResultModalOpen, setIsImportResultModalOpen] = React.useState(false);
   const [importResultErrorText, setImportResultErrorText] = React.useState<string | undefined>(undefined);
-  const [isImportSuccess, setIsImportSuccess] = React.useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [isOsaamisetTunnistusOngoing, setIsOsaamisetTunnistusOngoing] = React.useState(true);
+  const { showModal } = useModal();
 
   React.useEffect(() => {
     setRows(getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap));
@@ -63,67 +57,61 @@ const EducationHistory = () => {
   }, [rows]);
 
   const onRowClick = (row: ExperienceTableRowData) => {
-    setKoulutuskokonaisuusId(row.key);
-    setIsKoulutuskokonaisuusOpen(true);
+    showModal(EditKoulutuskokonaisuusModal, {
+      koulutuskokonaisuusId: row.key,
+      onClose: () => {
+        void refreshData();
+      },
+    });
   };
 
   const onNestedRowClick = (row: ExperienceTableRowData) => {
     const koulutus = koulutuskokonaisuudet.find((kk) => kk.koulutukset.find((k) => k.id === row.key));
     if (koulutus?.id) {
-      setKoulutuskokonaisuusId(koulutus.id);
-      setKoulutusId(row.key);
-      setIsKoulutusOpen(true);
+      showModal(AddOrEditKoulutusModal, {
+        koulutuskokonaisuusId: koulutus.id,
+        koulutusId: row.key,
+      });
     }
   };
 
+  const refreshData = React.useCallback(async () => {
+    await revalidator.revalidate();
+  }, [revalidator]);
+
   const onAddNestedRowClick = (row: ExperienceTableRowData) => {
-    setKoulutuskokonaisuusId(row.key);
-    setIsKoulutusOpen(true);
-  };
-
-  const onCloseKategoriaModal = () => {
-    setIsKoulutuskokonaisuusOpen(false);
-    setKoulutuskokonaisuusId(undefined);
-    revalidator.revalidate();
-  };
-
-  const onCloseKoulutusModal = () => {
-    setIsKoulutusOpen(false);
-    setKoulutusId(undefined);
-    revalidator.revalidate();
-  };
-
-  const onCloseWizard = () => {
-    setIsWizardOpen(false);
-    revalidator.revalidate();
+    showModal(AddOrEditKoulutusModal, { koulutuskokonaisuusId: row.key });
   };
 
   const openImportStartModal = () => {
     setImportResultErrorText(undefined);
-    setIsImportStartModalOpen(true);
+    showModal(ImportKoulutusStartModal);
   };
 
-  const closeImportStartModal = () => {
-    setIsImportStartModalOpen(false);
-  };
+  const openImportResultModal = React.useCallback(
+    (result: boolean) => {
+      showModal(ImportKoulutusResultModal, {
+        isSuccess: result,
+        onClose: () => {
+          void refreshData();
+        },
+        errorText: importResultErrorText,
+      });
+    },
+    [importResultErrorText, refreshData, showModal],
+  );
 
-  const openImportSummaryModal = () => {
-    setIsImportSummaryModalOpen(true);
-  };
-
-  const closeImportSummaryModal = () => {
-    setIsImportSummaryModalOpen(false);
-  };
-
-  const openImportResultModal = (result: boolean) => {
-    setIsImportSuccess(result);
-    setIsImportResultModalOpen(true);
-  };
-
-  const closeImportResultModal = () => {
-    setIsImportResultModalOpen(false);
-    revalidator.revalidate();
-  };
+  const openImportSummaryModal = React.useCallback(() => {
+    showModal(ImportKoulutusSummaryModal, {
+      onSuccessful: () => {
+        refreshData();
+        openImportResultModal(true);
+      },
+      onFailure: () => {
+        openImportResultModal(false);
+      },
+    });
+  }, [showModal, refreshData, openImportResultModal]);
 
   React.useEffect(() => {
     const result = searchParams.get('koski');
@@ -136,7 +124,7 @@ const EducationHistory = () => {
         openImportResultModal(false);
       }
     }
-  }, [searchParams, setSearchParams, t]);
+  }, [openImportResultModal, openImportSummaryModal, searchParams, setSearchParams, t]);
 
   const updateRowSubrows = <ContextType,>(
     row: ExperienceTableRowData,
@@ -292,7 +280,9 @@ const EducationHistory = () => {
           <Button
             variant="white"
             label={t('education-history.add-new-education')}
-            onClick={() => setIsWizardOpen(true)}
+            onClick={() => {
+              showModal(EducationHistoryWizard);
+            }}
           />
         </div>
         <div>
@@ -310,43 +300,6 @@ const EducationHistory = () => {
           </TooltipWrapper>
         </div>
       </div>
-      {isKoulutuskokonaisuusOpen && koulutuskokonaisuusId && (
-        <EditKoulutuskokonaisuusModal
-          isOpen={isKoulutuskokonaisuusOpen}
-          onClose={onCloseKategoriaModal}
-          koulutuskokonaisuusId={koulutuskokonaisuusId}
-        />
-      )}
-      {isKoulutusOpen && koulutuskokonaisuusId && (
-        <AddOrEditKoulutusModal
-          isOpen={isKoulutusOpen}
-          onClose={onCloseKoulutusModal}
-          koulutuskokonaisuusId={koulutuskokonaisuusId}
-          koulutusId={koulutusId}
-        />
-      )}
-      {isWizardOpen && <EducationHistoryWizard isOpen={isWizardOpen} onClose={onCloseWizard} />}
-
-      <ImportKoulutusStartModal isOpen={isImportStartModalOpen} onClose={closeImportStartModal} />
-      <ImportKoulutusSummaryModal
-        isOpen={isImportSummaryModalOpen}
-        onClose={closeImportSummaryModal}
-        onSuccessful={() => {
-          closeImportSummaryModal();
-          revalidator.revalidate();
-          openImportResultModal(true);
-        }}
-        onFailure={() => {
-          closeImportSummaryModal();
-          openImportResultModal(false);
-        }}
-      />
-      <ImportKoulutusResultModal
-        isOpen={isImportResultModalOpen}
-        onClose={closeImportResultModal}
-        isSuccess={isImportSuccess}
-        errorText={importResultErrorText}
-      />
     </MainLayout>
   );
 };

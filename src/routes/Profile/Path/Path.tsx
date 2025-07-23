@@ -4,6 +4,7 @@ import { FormError, OpportunityCard } from '@/components';
 import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
+import { useModal } from '@/hooks/useModal';
 import VaiheCard from '@/routes/Profile/Path/VaiheCard';
 import ManualVaiheModal from '@/routes/Profile/Path/modal/ManualVaiheModal/ManualVaiheModal';
 import ProposeVaiheModal from '@/routes/Profile/Path/modal/ProposeVaiheModal/ProposeVaiheModal';
@@ -56,14 +57,12 @@ const Path = () => {
   const formId = React.useId();
   const [osaamisetFromVaiheetAndProfile, setOsaamisetFromVaiheetAndProfile] = React.useState<string[]>([]);
   const [percentage, setPercentage] = React.useState(0);
-  const [vaiheIndex, setVaiheIndex] = React.useState<number>();
-  const [manualModalOpen, setManualModalOpen] = React.useState(false);
-  const [proposeModalOpen, setProposeModalOpen] = React.useState(false);
   const [allChecked, setAllChecked] = React.useState([...(polku?.osaamiset ?? []), ...osaamisetFromVaiheetAndProfile]);
   const [allDisabled, setAllDisabled] = React.useState(polku?.ignoredOsaamiset ?? []);
   const [disabledIgnores, setDisabledIgnores] = React.useState<string[]>([]);
   const yksiloRootData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
   const navigate = useNavigate();
+  const { showModal } = useModal();
   const title = t('profile.paths.title');
 
   const methods = useForm<PolkuForm>({
@@ -111,11 +110,16 @@ const Path = () => {
   const [debouncedValue, , setDebouncedValue] = useDebounceState(methods.watch(), 1000);
 
   const openVaiheModal = (vaihe: VaiheForm, index: number) => {
-    setVaiheIndex(index);
     if (vaihe.lahde === 'EHDOTUS') {
-      setProposeModalOpen(true);
+      showModal(ProposeVaiheModal, {
+        vaiheIndex: index,
+        onClose: onCloseModal,
+      });
     } else {
-      setManualModalOpen(true);
+      showModal(ManualVaiheModal, {
+        vaiheIndex: index,
+        onClose: onCloseModal,
+      });
     }
   };
 
@@ -127,13 +131,23 @@ const Path = () => {
         <Button
           variant="accent"
           label={t('profile.paths.propose-phase-to-me')}
-          onClick={() => openProposeModal(0)}
+          onClick={() => {
+            showModal(ProposeVaiheModal, {
+              vaiheIndex: 0,
+              onClose: onCloseModal,
+            });
+          }}
           disabled={percentage === 100}
         />
         <Button
           variant="accent"
           label={t('profile.paths.add-phase-yourself')}
-          onClick={() => openManualModal(0)}
+          onClick={() => {
+            showModal(ManualVaiheModal, {
+              vaiheIndex: 0,
+              onClose: onCloseModal,
+            });
+          }}
           disabled={percentage === 100}
         />
       </div>
@@ -156,15 +170,25 @@ const Path = () => {
           <div className="flex flex-row gap-3 flex-wrap">
             <Button
               variant="accent"
-              label={t('profile.paths.propose-phase-to-me')}
-              onClick={() => openProposeModal(index + 1)}
               disabled={percentage === 100}
+              label={t('profile.paths.propose-phase-to-me')}
+              onClick={() => {
+                showModal(ProposeVaiheModal, {
+                  vaiheIndex: index + 1,
+                  onClose: onCloseModal,
+                });
+              }}
             />
             <Button
               variant="accent"
               label={t('profile.paths.add-phase-yourself')}
-              onClick={() => openManualModal(index + 1)}
               disabled={percentage === 100}
+              onClick={() => {
+                showModal(ManualVaiheModal, {
+                  vaiheIndex: index + 1,
+                  onClose: onCloseModal,
+                });
+              }}
             />
           </div>
         )}
@@ -341,32 +365,9 @@ const Path = () => {
     setSelectedOsaamiset(selectedOsaamisetValues);
   };
 
-  const openManualModal = (idx: number) => {
-    setVaiheIndex(idx);
-    setManualModalOpen(true);
-  };
-
-  const openProposeModal = (idx: number) => {
-    setVaiheIndex(idx);
-    setProposeModalOpen(true);
-  };
-
-  const onCloseManualModal = async (isCancel: boolean) => {
-    setManualModalOpen(false);
-    setVaiheIndex(undefined);
-
+  const onCloseModal = (isCancel?: boolean) => {
     if (!isCancel) {
-      await revalidator.revalidate();
-    }
-  };
-  const onCloseProposeModal = async (isCancel: boolean) => {
-    onCloseManualModal(isCancel);
-
-    setProposeModalOpen(false);
-    setVaiheIndex(undefined);
-
-    if (!isCancel) {
-      await revalidator.revalidate();
+      revalidator.revalidate();
     }
   };
 
@@ -386,20 +387,6 @@ const Path = () => {
 
   return (
     <div>
-      {manualModalOpen && typeof vaiheIndex === 'number' && (
-        <ManualVaiheModal
-          isOpen={manualModalOpen}
-          vaiheIndex={vaiheIndex}
-          onClose={(isCancel) => void onCloseManualModal(isCancel ?? false)}
-        />
-      )}
-      {proposeModalOpen && typeof vaiheIndex === 'number' && (
-        <ProposeVaiheModal
-          isOpen={proposeModalOpen}
-          vaiheIndex={vaiheIndex}
-          onClose={(isCancel) => void onCloseProposeModal(isCancel ?? false)}
-        />
-      )}
       <FormProvider {...methods}>
         <Form className="flex flex-col gap-5" id={formId} onSubmit={onSubmit}>
           <title>{title}</title>

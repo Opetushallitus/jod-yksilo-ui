@@ -3,20 +3,21 @@ import { ErrorResponse } from '@/api/errorResponse';
 import { components } from '@/api/schema';
 import { ExperienceTable, ExperienceTableRowData } from '@/components';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { useModal } from '@/hooks/useModal';
 import { getEducationHistoryTableRows, Koulutus } from '@/routes/Profile/EducationHistory/utils.ts';
-import { Button, ConfirmDialog, Modal, Spinner } from '@jod/design-system';
+import { Button, Modal, Spinner } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface ImportKoulutusSummaryModalProps {
   isOpen: boolean;
-  onClose: () => void;
   onSuccessful: () => void;
   onFailure: () => void;
 }
 
-const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }: ImportKoulutusSummaryModalProps) => {
+const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportKoulutusSummaryModalProps) => {
   const { t } = useTranslation();
+  const { showDialog, closeActiveModal } = useModal();
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
   const [koskiData, setKoskiData] = React.useState<components['schemas']['KoulutusDto'][] | undefined>(undefined);
   const [error, setError] = React.useState<Error | undefined>(undefined);
@@ -221,24 +222,27 @@ const ImportKoulutusSummaryModal = ({ isOpen, onClose, onSuccessful, onFailure }
       footer={
         <div className="flex flex-row justify-end flex-1">
           <div id="buttonSection" className="flex flex-row justify-between gap-5">
-            <ConfirmDialog
-              title={t('education-history-import.summary-modal.cancel-modal.title')}
-              onConfirm={onClose}
-              confirmText={t('yes')}
-              cancelText={t('cancel')}
-              variant="destructive"
-              description={t('education-history-import.summary-modal.cancel-modal.description')}
-            >
-              {(showDialog: () => void) => (
-                <Button
-                  ref={cancelButtonRef}
-                  variant="white"
-                  label={t('cancel')}
-                  onClick={error ? onClose : showDialog}
-                  className="whitespace-nowrap"
-                />
-              )}
-            </ConfirmDialog>
+            <Button
+              className="whitespace-nowrap"
+              ref={cancelButtonRef}
+              variant="white"
+              label={t('cancel')}
+              onClick={() => {
+                if (error) {
+                  closeActiveModal();
+                } else {
+                  showDialog({
+                    title: t('education-history-import.summary-modal.cancel-modal.title'),
+                    description: t('education-history-import.summary-modal.cancel-modal.description'),
+                    confirmText: t('yes'),
+                    cancelText: t('cancel'),
+                    variant: 'destructive',
+                    onConfirm: closeActiveModal,
+                  });
+                }
+              }}
+            />
+
             <Button
               label={t('save')}
               variant="white"

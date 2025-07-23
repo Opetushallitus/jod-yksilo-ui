@@ -1,16 +1,18 @@
 import { client } from '@/api/client';
+import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import AddedTags from '@/components/OsaamisSuosittelija/AddedTags';
-import { type OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
+import type { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 import { useLoginLink } from '@/hooks/useLoginLink';
-import { ToolLoaderData } from '@/routes/Tool/loader';
+import { useModal } from '@/hooks/useModal';
+import type { ToolLoaderData } from '@/routes/Tool/loader';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicates } from '@/utils';
-import { Accordion, Button, ConfirmDialog } from '@jod/design-system';
+import { Accordion, Button } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 
 const freeFormTextExpandedLimit = 100;
@@ -55,9 +57,19 @@ const FreeFormText = ({
 };
 
 const CompetenceExport = () => {
-  const { t } = useTranslation();
-  const loginLink = useLoginLink();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { isLoggedIn } = useLoaderData<ToolLoaderData>();
+  const { state } = useLocation();
+  const loginLink = useLoginLink({
+    callbackURL: state?.callbackURL
+      ? `/${language}/${state?.callbackURL}`
+      : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
+  });
+  const { showDialog, closeAllModals } = useModal();
+
   const { osaamiset, kiinnostukset, setOsaamiset, setKiinnostukset } = useToolStore(
     useShallow((state) => ({
       osaamiset: state.osaamiset,
@@ -101,49 +113,33 @@ const CompetenceExport = () => {
   }, [kiinnostukset, osaamiset, setKiinnostukset, setOsaamiset]);
 
   return isLoggedIn ? (
-    <ConfirmDialog
-      title={t('tool.my-own-data.export.confirm-title')}
-      description={t('tool.my-own-data.export.confirm-description')}
-      onConfirm={() => void exportToProfile()}
-      confirmText={t('tool.my-own-data.export.confirm-button')}
-      cancelText={t('tool.my-own-data.cancel-text')}
-    >
-      {(showExportConfirmDialog: () => void) => (
-        <Button label={t('tool.my-own-data.export.export-button')} onClick={showExportConfirmDialog} variant="white" />
-      )}
-    </ConfirmDialog>
+    <Button
+      label={t('tool.my-own-data.export.export-button')}
+      onClick={() => {
+        showDialog({
+          title: t('tool.my-own-data.export.confirm-title'),
+          description: t('tool.my-own-data.export.confirm-description'),
+          confirmText: t('tool.my-own-data.export.confirm-button'),
+          cancelText: t('tool.my-own-data.cancel-text'),
+          variant: 'destructive',
+          onConfirm: exportToProfile,
+        });
+      }}
+      variant="white"
+    />
   ) : (
-    <ConfirmDialog
-      title={t('login-to-service')}
-      description={t('tool.my-own-data.export.login-description')}
-      /* eslint-disable-next-line react/no-unstable-nested-components */
-      footer={(closeDialog: () => void) => (
-        <div className="flex gap-4 flex-1">
-          <Button
-            label={t('tool.my-own-data.cancel-text')}
-            variant="white"
-            onClick={closeDialog}
-            className="whitespace-nowrap"
-          />
-          <Button
-            label={t('login')}
-            variant="white"
-            /* eslint-disable-next-line react/no-unstable-nested-components */
-            LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
-            className="whitespace-nowrap"
-          />
-        </div>
-      )}
-    >
-      {(showLoginConfirmDialog: () => void) => (
-        <Button
-          label={t('tool.my-own-data.export.export-button')}
-          onClick={showLoginConfirmDialog}
-          className="whitespace-nowrap"
-          variant="white"
-        />
-      )}
-    </ConfirmDialog>
+    <Button
+      label={t('tool.my-own-data.export.export-button')}
+      onClick={() => {
+        showDialog({
+          title: t('login-to-service'),
+          description: t('tool.my-own-data.export.login-description'),
+          footer: createLoginDialogFooter(t, loginLink, closeAllModals),
+        });
+      }}
+      className="whitespace-nowrap"
+      variant="white"
+    />
   );
 };
 
@@ -177,6 +173,7 @@ const CategorizedCompetenceTagList = () => {
     t,
     i18n: { language },
   } = useTranslation();
+  const { showDialog } = useModal();
   const {
     osaamiset,
     osaamisetVapaateksti,
@@ -289,33 +286,31 @@ const CategorizedCompetenceTagList = () => {
 
           <div className="flex flex-col gap-4 p-6 -mx-6 -mb-6 bg-bg-gray-2 items-start rounded-b">
             <CompetenceExport />
-            <ConfirmDialog
-              title={t('tool.my-own-data.competences.delete-all.title')}
-              onConfirm={() => {
-                setOsaamiset([]);
-                setOsaamisetVapaateksti(undefined);
-                setKiinnostukset([]);
-                setKiinnostuksetVapaateksti(undefined);
+            <Button
+              variant="white"
+              label={t('tool.my-own-data.competences.delete-all.title')}
+              disabled={
+                osaamiset.length === 0 &&
+                osaamisetVapaateksti?.[language] !== undefined &&
+                kiinnostukset.length === 0 &&
+                kiinnostuksetVapaateksti?.[language] !== undefined
+              }
+              onClick={() => {
+                showDialog({
+                  title: t('tool.my-own-data.competences.delete-all.title'),
+                  description: t('tool.my-own-data.competences.delete-all.description'),
+                  confirmText: t('delete'),
+                  cancelText: t('cancel'),
+                  variant: 'destructive',
+                  onConfirm: () => {
+                    setOsaamiset([]);
+                    setOsaamisetVapaateksti(undefined);
+                    setKiinnostukset([]);
+                    setKiinnostuksetVapaateksti(undefined);
+                  },
+                });
               }}
-              confirmText={t('delete')}
-              cancelText={t('cancel')}
-              variant="destructive"
-              description={t('tool.my-own-data.competences.delete-all.description')}
-            >
-              {(showDialog: () => void) => (
-                <Button
-                  variant="white"
-                  label={t('tool.my-own-data.competences.delete-all.title')}
-                  onClick={showDialog}
-                  disabled={
-                    osaamiset.length === 0 &&
-                    osaamisetVapaateksti?.[language] !== undefined &&
-                    kiinnostukset.length === 0 &&
-                    kiinnostuksetVapaateksti?.[language] !== undefined
-                  }
-                />
-              )}
-            </ConfirmDialog>
+            />
           </div>
         </div>
       </Accordion>

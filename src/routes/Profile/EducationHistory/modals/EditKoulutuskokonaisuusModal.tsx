@@ -3,8 +3,9 @@ import { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { useModal } from '@/hooks/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, ConfirmDialog, InputField, Modal } from '@jod/design-system';
+import { Button, InputField, Modal } from '@jod/design-system';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -81,6 +82,8 @@ const EditKoulutuskokonaisuusModal = ({
     onClose();
   };
 
+  const { showDialog } = useModal();
+
   const deleteKoulutuskokonaisuus = async () => {
     await client.DELETE(KOULUTUSKOKONAISUUS_API_PATH, {
       params: { path: { id } },
@@ -128,18 +131,20 @@ const EditKoulutuskokonaisuusModal = ({
       footer={
         <div className="flex flex-row justify-between flex-1">
           <div className="flex flex-row gap-5">
-            <ConfirmDialog
-              title={t('education-history.delete-education-history')}
-              onConfirm={() => void deleteKoulutuskokonaisuus()}
-              confirmText={t('delete')}
-              cancelText={t('cancel')}
-              variant="destructive"
-              description={t('education-history.confirm-delete-education-history')}
-            >
-              {(showDialog: () => void) => (
-                <Button variant="white-delete" label={`${t('delete')}`} onClick={showDialog} />
-              )}
-            </ConfirmDialog>
+            <Button
+              variant="white-delete"
+              label={`${t('delete')}`}
+              onClick={() => {
+                showDialog({
+                  title: t('education-history.delete-education-history'),
+                  onConfirm: () => void deleteKoulutuskokonaisuus(),
+                  confirmText: t('delete'),
+                  cancelText: t('cancel'),
+                  variant: 'destructive',
+                  description: t('education-history.confirm-delete-education-history'),
+                });
+              }}
+            />
           </div>
           <div className="flex flex-row gap-5">
             <Button label={t('cancel')} variant="white" onClick={onClose} />

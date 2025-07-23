@@ -1,25 +1,34 @@
 import { client } from '@/api/client';
 import { OsaamisSuosittelija } from '@/components';
+import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { useLoginLink } from '@/hooks/useLoginLink';
+import { useModal } from '@/hooks/useModal';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicates } from '@/utils';
 import { Button, ConfirmDialog } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useOutletContext } from 'react-router';
+import { useLoaderData, useLocation, useOutletContext } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { CompetenceFilters } from '../Profile/Competences/CompetenceFilters';
 import { FILTERS_ORDER } from '../Profile/Competences/constants';
-import { CompetencesLoaderData } from '../Profile/Competences/loader';
-import { ToolLoaderData } from './loader';
+import type { CompetencesLoaderData } from '../Profile/Competences/loader';
+import type { ToolLoaderData } from './loader';
 
 const CompetenceImport = () => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
-  const loginLink = useLoginLink();
+  const { state } = useLocation();
+  const loginLink = useLoginLink({
+    callbackURL: state?.callbackURL
+      ? `/${language}/${state?.callbackURL}`
+      : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
+  });
+
+  const { showDialog, closeAllModals } = useModal();
   const { isLoggedIn } = useOutletContext<ToolLoaderData>();
   const toolStore = useToolStore();
 
@@ -79,6 +88,8 @@ const CompetenceImport = () => {
   }, [osaamiset, selectedFilters, toolStore]);
 
   return isLoggedIn ? (
+    // Have to render ConfirmDialog here instead of "showDialog" from the "useModal" hook because of the "content" prop.
+    // When using "showDialog" and passing content that way, the dialog will not render any changes to content, like ticking the checkboxes.
     <ConfirmDialog
       title={t('tool.my-own-data.competences.import.confirm-title')}
       description={t('tool.my-own-data.competences.import.confirm-description')}
@@ -102,36 +113,17 @@ const CompetenceImport = () => {
       )}
     </ConfirmDialog>
   ) : (
-    <ConfirmDialog
-      title={t('login-to-service')}
-      description={t('tool.my-own-data.competences.import.login-description')}
-      /* eslint-disable-next-line react/no-unstable-nested-components */
-      footer={(closeDialog: () => void) => (
-        <div className="flex gap-4 flex-1">
-          <Button
-            label={t('tool.my-own-data.cancel-text')}
-            variant="white"
-            onClick={closeDialog}
-            className="whitespace-nowrap"
-          />
-          <Button
-            label={t('login')}
-            variant="white"
-            /* eslint-disable-next-line react/no-unstable-nested-components */
-            LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
-            className="whitespace-nowrap"
-          />
-        </div>
-      )}
-    >
-      {(showLoginConfirmDialog: () => void) => (
-        <Button
-          label={t('tool.my-own-data.competences.import.import-button')}
-          onClick={showLoginConfirmDialog}
-          variant="white"
-        />
-      )}
-    </ConfirmDialog>
+    <Button
+      label={t('tool.my-own-data.competences.import.import-button')}
+      variant="white"
+      onClick={() => {
+        showDialog({
+          title: t('login-to-service'),
+          description: t('tool.my-own-data.competences.import.login-description'),
+          footer: createLoginDialogFooter(t, loginLink, closeAllModals),
+        });
+      }}
+    />
   );
 };
 

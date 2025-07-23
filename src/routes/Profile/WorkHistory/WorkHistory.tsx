@@ -1,11 +1,12 @@
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
+import { useModal } from '@/hooks/useModal';
 import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonantajaModal';
+import { WorkHistoryWizard } from '@/routes/Profile/WorkHistory/WorkHistoryWizard';
 import { JodArrowRight, JodWork } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData, useRevalidator } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { ProfileNavigationList } from '../components';
-import { WorkHistoryWizard } from './WorkHistoryWizard';
 import AddOrEditToimenkuvaModal from './modals/AddOrEditToimenkuvaModal';
 import { Tyopaikka, getWorkHistoryTableRows } from './utils';
 
@@ -27,51 +28,29 @@ const WorkHistory = () => {
   } = useTranslation();
   const title = t('profile.work-history.title');
   const [rows, setRows] = React.useState(getWorkHistoryTableRows(tyopaikat, osaamisetMap));
-  const [tyopaikkaId, setTyopaikkaId] = React.useState<string | undefined>(undefined);
-  const [toimenkuvaId, setToimenkuvaId] = React.useState<string | undefined>(undefined);
-  const [isWizardOpen, setIsWizardOpen] = React.useState(false);
-  const [isTyonantajaOpen, setIsTyonantajaOpen] = React.useState(false);
-  const [isToimenkuvaOpen, setIsToimenkuvaOpen] = React.useState(false);
-  const revalidator = useRevalidator(); // For reloading data after modal close
+  const { showModal } = useModal();
 
   React.useEffect(() => {
     setRows(getWorkHistoryTableRows(tyopaikat, osaamisetMap));
   }, [tyopaikat, osaamisetMap]);
 
   const onRowClick = (row: ExperienceTableRowData) => {
-    setTyopaikkaId(row.key);
-    setIsTyonantajaOpen(true);
+    showModal(EditTyonantajaModal, { tyopaikkaId: row.key });
   };
 
   const onNestedRowClick = (row: ExperienceTableRowData) => {
-    const tyopaikka = tyopaikat.find((tp) => tp.toimenkuvat.find((tk) => tk.id === row.key));
-    if (tyopaikka?.id) {
-      setTyopaikkaId(tyopaikka.id);
-      setToimenkuvaId(row.key);
-      setIsToimenkuvaOpen(true);
+    const tyopaikkaId = tyopaikat.find((tp) => tp.toimenkuvat.find((tk) => tk.id === row.key))?.id;
+
+    if (tyopaikkaId) {
+      showModal(AddOrEditToimenkuvaModal, {
+        tyopaikkaId,
+        toimenkuvaId: row.key,
+      });
     }
   };
 
   const onAddNestedRowClick = (row: ExperienceTableRowData) => {
-    setTyopaikkaId(row.key);
-    setIsToimenkuvaOpen(true);
-  };
-
-  const onCloseTyonantajaModal = () => {
-    setIsTyonantajaOpen(false);
-    setTyopaikkaId(undefined);
-    revalidator.revalidate();
-  };
-
-  const onCloseToimenkuvaModal = () => {
-    setIsToimenkuvaOpen(false);
-    setToimenkuvaId(undefined);
-    revalidator.revalidate();
-  };
-
-  const onCloseWizard = () => {
-    setIsWizardOpen(false);
-    revalidator.revalidate();
+    showModal(AddOrEditToimenkuvaModal, { tyopaikkaId: row.key });
   };
 
   return (
@@ -98,23 +77,13 @@ const WorkHistory = () => {
         addNewLabel={t('work-history.add-new-workplace')}
         addNewNestedLabel={t('work-history.add-new-job-description')}
         rows={rows}
-        onAddClick={() => setIsWizardOpen(true)}
+        onAddClick={() => {
+          showModal(WorkHistoryWizard);
+        }}
         onRowClick={onRowClick}
         onNestedRowClick={onNestedRowClick}
         onAddNestedRowClick={onAddNestedRowClick}
       />
-      {isTyonantajaOpen && tyopaikkaId && (
-        <EditTyonantajaModal isOpen={isTyonantajaOpen} onClose={onCloseTyonantajaModal} tyopaikkaId={tyopaikkaId} />
-      )}
-      {isToimenkuvaOpen && tyopaikkaId && (
-        <AddOrEditToimenkuvaModal
-          isOpen={isToimenkuvaOpen}
-          onClose={onCloseToimenkuvaModal}
-          tyopaikkaId={tyopaikkaId}
-          toimenkuvaId={toimenkuvaId}
-        />
-      )}
-      {isWizardOpen && <WorkHistoryWizard isOpen={isWizardOpen} onClose={onCloseWizard} />}
     </MainLayout>
   );
 };
