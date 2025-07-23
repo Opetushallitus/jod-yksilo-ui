@@ -1,9 +1,10 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { MainLayout } from '@/components';
+import { useModal } from '@/hooks/useModal';
 import { LogoutFormContext } from '@/routes/Root';
 import { useToolStore } from '@/stores/useToolStore';
-import { Button, ConfirmDialog, Toggle } from '@jod/design-system';
+import { Button, Toggle } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouteLoaderData } from 'react-router';
@@ -50,6 +51,7 @@ const Preferences = () => {
   const title = t('profile.preferences.title');
   const toolStore = useToolStore();
   const logoutForm = React.useContext(LogoutFormContext);
+  const { showDialog } = useModal();
 
   const deleteProfile = async () => {
     toolStore.reset();
@@ -145,18 +147,20 @@ const Preferences = () => {
       <section>
         <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.delete-profile.title')}</h2>
         <p className="text-body-md mb-5">{t('preferences.delete-profile.description')}</p>
-        <ConfirmDialog
-          title={t('preferences.delete-profile.action')}
-          onConfirm={() => void deleteProfile()}
-          confirmText={t('delete')}
-          cancelText={t('cancel')}
-          variant="destructive"
-          description={t('preferences.delete-profile.confirm')}
-        >
-          {(showDialog: () => void) => (
-            <Button variant="white-delete" label={t('preferences.delete-profile.action')} onClick={showDialog} />
-          )}
-        </ConfirmDialog>
+        <Button
+          variant="white-delete"
+          label={t('preferences.delete-profile.action')}
+          onClick={() => {
+            showDialog({
+              title: t('preferences.delete-profile.action'),
+              description: t('preferences.delete-profile.confirm'),
+              confirmText: t('delete'),
+              cancelText: t('cancel'),
+              variant: 'destructive',
+              onConfirm: deleteProfile,
+            });
+          }}
+        />
       </section>
     </MainLayout>
   );

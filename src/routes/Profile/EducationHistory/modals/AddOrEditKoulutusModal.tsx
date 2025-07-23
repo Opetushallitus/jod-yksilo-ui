@@ -3,9 +3,10 @@ import { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { useModal } from '@/hooks/useModal';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
+import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
 import {
   Controller,
@@ -17,6 +18,7 @@ import {
   useFormState,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
 interface AddOrEditKoulutusModalProps {
@@ -142,12 +144,14 @@ const AddOrEditKoulutusModal = ({
   koulutusId,
 }: AddOrEditKoulutusModalProps) => {
   const { t } = useTranslation();
+  const revalidator = useRevalidator();
 
   if (!id) {
     onClose();
   }
 
   const formId = React.useId();
+  const { showDialog } = useModal();
   useEscHandler(onClose, formId);
   const [step, setStep] = React.useState(0);
   const stepComponents = [MainStep, OsaamisetStep];
@@ -266,6 +270,7 @@ const AddOrEditKoulutusModal = ({
         },
       });
     }
+    await revalidator.revalidate();
     onClose();
   };
 
@@ -273,6 +278,7 @@ const AddOrEditKoulutusModal = ({
     await client.DELETE(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
       params: { path: { id, koulutusId: koulutusId! } },
     });
+    await revalidator.revalidate();
     onClose();
   };
 
@@ -313,23 +319,21 @@ const AddOrEditKoulutusModal = ({
         <div className="flex flex-row justify-between flex-1">
           <div>
             {koulutusId && (
-              <ConfirmDialog
-                title={t('education-history.delete-degree')}
-                onConfirm={() => void deleteKoulutus()}
-                confirmText={t('delete')}
-                cancelText={t('cancel')}
-                variant="destructive"
-                description={t('education-history.confirm-delete-degree')}
-              >
-                {(showDialog: () => void) => (
-                  <Button
-                    variant="white-delete"
-                    label={`${t('delete')}`}
-                    onClick={showDialog}
-                    className="whitespace-nowrap"
-                  />
-                )}
-              </ConfirmDialog>
+              <Button
+                variant="white-delete"
+                className="whitespace-nowrap"
+                label={`${t('delete')}`}
+                onClick={() =>
+                  showDialog({
+                    title: t('education-history.delete-degree'),
+                    onConfirm: () => void deleteKoulutus(),
+                    confirmText: t('delete'),
+                    cancelText: t('cancel'),
+                    variant: 'destructive',
+                    description: t('education-history.confirm-delete-degree'),
+                  })
+                }
+              />
             )}
           </div>
           <div className="flex flex-row justify-between gap-5">

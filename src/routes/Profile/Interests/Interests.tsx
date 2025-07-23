@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { ESCO_OCCUPATION_PREFIX, formErrorMessage, LIMITS } from '@/constants';
+import { useModal } from '@/hooks/useModal';
 import EditKiinnostusModal from '@/routes/Profile/Interests/EditKiinnostusModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,7 +11,7 @@ import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData, useRevalidator } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { z } from 'zod';
 import { ProfileNavigationList } from '../components';
 
@@ -19,18 +20,12 @@ const Interests = () => {
     t,
     i18n: { language },
   } = useTranslation();
+  const { showModal } = useModal();
   const { kiinnostukset, vapaateksti } = useLoaderData() as {
     kiinnostukset: components['schemas']['OsaaminenDto'][];
     vapaateksti: components['schemas']['LokalisoituTeksti'];
   };
   const title = t('profile.interests.title');
-  const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
-  const revalidator = useRevalidator();
-
-  const onAddModalClose = () => {
-    setIsAddModalOpen(false);
-    revalidator.revalidate();
-  };
 
   const sortedData = React.useMemo(
     () => [...kiinnostukset].sort(sortByProperty(`nimi.${language}`)),
@@ -93,7 +88,6 @@ const Interests = () => {
         </div>
       }
     >
-      {isAddModalOpen && <EditKiinnostusModal onClose={onAddModalClose} isOpen={isAddModalOpen} />}
       <title>{title}</title>
       <h1 className="text-heading-1 mb-5">{title}</h1>
       <p className="mb-5 text-body-lg">{t('profile.interests.description')}</p>
@@ -149,7 +143,7 @@ const Interests = () => {
           variant="white"
           label={t(sortedSkills.length > 0 ? 'profile.interests.edit-interests' : 'profile.interests.add-interests')}
           onClick={() => {
-            setIsAddModalOpen(true);
+            showModal(EditKiinnostusModal, { data: kiinnostukset });
           }}
         />
       </div>

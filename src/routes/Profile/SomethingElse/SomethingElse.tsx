@@ -3,6 +3,7 @@ import { OsaaminenDto } from '@/api/osaamiset';
 import { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
+import { useModal } from '@/hooks/useModal';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -11,7 +12,7 @@ import { JodArrowRight, JodOther } from '@jod/design-system/icons';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData, useRevalidator } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { z } from 'zod';
 import { ProfileNavigationList } from '../components';
 
@@ -21,16 +22,10 @@ const SomethingElse = () => {
     i18n: { language },
   } = useTranslation();
   const title = t('profile.something-else.title');
+  const { showModal } = useModal();
   const { muuOsaaminen, vapaateksti } = useLoaderData() as {
     muuOsaaminen: OsaaminenDto[];
     vapaateksti: components['schemas']['LokalisoituTeksti'];
-  };
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const revalidator = useRevalidator();
-
-  const onAddModalClose = () => {
-    setIsModalOpen(false);
-    revalidator.revalidate();
   };
 
   const sortedData = React.useMemo(
@@ -85,7 +80,6 @@ const SomethingElse = () => {
 
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
-      {isModalOpen && <EditMuuOsaaminenModal onClose={onAddModalClose} isOpen={isModalOpen} />}
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
         <JodOther size={36} className="text-secondary-gray mr-2" />
@@ -124,7 +118,7 @@ const SomethingElse = () => {
           variant="white"
           label={muuOsaaminen.length > 0 ? t('profile.competences.edit') : t('profile.competences.add')}
           onClick={() => {
-            setIsModalOpen(true);
+            showModal(EditMuuOsaaminenModal, { data: muuOsaaminen });
           }}
         />
       </div>

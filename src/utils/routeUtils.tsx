@@ -100,12 +100,16 @@ export const generateMenuItems = (opts: GenerateMenuItemsOptions): MenuItem[] =>
  * @param to Same as react-routers Link 'to' prop, can be a string or an object.
  * @returns A Link component
  */
-export const getLinkTo = (to: React.ComponentProps<typeof Link>['to']): LinkComponent => {
-  const LinkToComponent = ({ children, className }: LinkComponent) => (
-    <Link className={className} to={to}>
-      {children}
-    </Link>
-  );
-  LinkToComponent.displayName = 'LinkToComponent';
+export const getLinkTo = (to: React.ComponentProps<typeof Link>['to'], useAnchor = false): LinkComponent => {
+  const LinkToComponent = ({ children, className }: LinkComponent) =>
+    useAnchor ? (
+      <a className={className} href={typeof to === 'string' ? to : to.pathname}>
+        {children}
+      </a>
+    ) : (
+      <Link className={className} to={to}>
+        {children}
+      </Link>
+    );
   return LinkToComponent;
 };

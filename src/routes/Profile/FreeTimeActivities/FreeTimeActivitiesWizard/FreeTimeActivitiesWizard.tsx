@@ -7,7 +7,7 @@ import { JodArrowLeft, JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 import ActivityStep from './ActivityStep';
 import CompetencesStep from './CompetencesStep';
@@ -16,18 +16,17 @@ import { type FreeTimeActivitiesForm } from './utils';
 
 interface FreeTimeActivitiesWizardProps {
   isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: (isCancel?: boolean) => void;
 }
 
-const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizardProps) => {
+const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardProps) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { sm } = useMediaQueries();
   const [step, setStep] = React.useState(1);
   const selectedPatevyys = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
-
+  const revalidator = useRevalidator();
   const formId = React.useId();
-  useEscHandler(() => setIsOpen(false), formId);
+  useEscHandler(onClose, formId);
 
   const methods = useForm<FreeTimeActivitiesForm>({
     mode: 'onBlur',
@@ -111,8 +110,8 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
         })),
       },
     });
-    setIsOpen(false);
-    navigate('.', { replace: true });
+    await revalidator.revalidate();
+    onClose();
   };
 
   const [steps, setSteps] = React.useState(1);
@@ -189,12 +188,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, setIsOpen }: FreeTimeActivitiesWizar
             )}
           </div>
           <div className="flex gap-5">
-            <Button
-              onClick={() => setIsOpen(false)}
-              label={t('cancel')}
-              variant="white"
-              className="whitespace-nowrap"
-            />
+            <Button onClick={() => onClose(true)} label={t('cancel')} variant="white" className="whitespace-nowrap" />
             {step > 1 && (
               <Button
                 onClick={() => setStep(step - 1)}

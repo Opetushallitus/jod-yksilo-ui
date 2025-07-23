@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
+import { useModal } from '@/hooks/useModal';
 import { type PolkuQueryParams } from '@/routes/Profile/Path/utils';
-import { ConfirmDialog, PopupList, PopupListItem } from '@jod/design-system';
+import { PopupList, PopupListItem } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { useParams, useRevalidator } from 'react-router';
 
@@ -20,6 +21,7 @@ const ListItem = ({ label, onClick, disabled }: { label: string; onClick: () => 
 const VaiheCardMenu = ({ vaiheId, openVaiheModal }: { vaiheId: string; openVaiheModal: () => void }) => {
   const { t } = useTranslation();
   const revalidator = useRevalidator();
+  const { showDialog } = useModal();
   const { suunnitelmaId, paamaaraId } = useParams<PolkuQueryParams>();
 
   const deleteVaihe = async () => {
@@ -43,16 +45,19 @@ const VaiheCardMenu = ({ vaiheId, openVaiheModal }: { vaiheId: string; openVaihe
     <PopupList classNames="w-max">
       <ul className="flex flex-col gap-2 w-full" id={vaiheId}>
         <ListItem label={t('profile.paths.edit-phase')} onClick={openVaiheModal} />
-        <ConfirmDialog
-          title={t('profile.paths.delete-phase-title')}
-          description={t('profile.paths.delete-phase-description')}
-          onConfirm={() => void deleteVaihe()}
-          confirmText={t('delete')}
-          cancelText={t('cancel')}
-          variant="destructive"
-        >
-          {(showDialog) => <ListItem label={t('profile.paths.delete-phase')} onClick={showDialog} />}
-        </ConfirmDialog>
+        <ListItem
+          label={t('profile.paths.delete-phase')}
+          onClick={() =>
+            showDialog({
+              title: t('profile.paths.delete-phase-title'),
+              description: t('profile.paths.delete-phase-description'),
+              confirmText: t('delete'),
+              cancelText: t('cancel'),
+              variant: 'destructive',
+              onConfirm: () => void deleteVaihe(),
+            })
+          }
+        />
       </ul>
     </PopupList>
   );

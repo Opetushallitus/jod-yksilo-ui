@@ -3,9 +3,10 @@ import { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { useModal } from '@/hooks/useModal';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, ConfirmDialog, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
+import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
 import {
   Controller,
@@ -17,6 +18,7 @@ import {
   useFormState,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
 interface AddOrEditToimenkuvaModalProps {
@@ -59,7 +61,6 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
   React.useEffect(() => {
     void trigger('loppuPvm');
   }, [alkuPvm, trigger]);
-
   return (
     <>
       <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
@@ -151,6 +152,7 @@ const AddOrEditToimenkuvaModal = ({
   const [step, setStep] = React.useState(0);
   const stepComponents = [MainStep, OsaamisetStep];
   const StepComponent = stepComponents[step];
+  const revalidator = useRevalidator();
 
   const nextStep = () => {
     setStep(step < stepComponents.length - 1 ? step + 1 : step);
@@ -259,6 +261,7 @@ const AddOrEditToimenkuvaModal = ({
         },
       });
     }
+    await revalidator.revalidate();
     onClose();
   };
 
@@ -266,12 +269,15 @@ const AddOrEditToimenkuvaModal = ({
     await client.DELETE(`${TOIMENKUVAT_API_PATH}/{toimenkuvaId}`, {
       params: { path: { id, toimenkuvaId: toimenkuvaId! } },
     });
+    await revalidator.revalidate();
     onClose();
   };
 
   React.useEffect(() => {
     void trigger();
   }, [trigger]);
+
+  const { showDialog } = useModal();
 
   return !isLoading ? (
     <Modal
@@ -306,23 +312,22 @@ const AddOrEditToimenkuvaModal = ({
         <div className="flex flex-row justify-between flex-1">
           <div>
             {toimenkuvaId && (
-              <ConfirmDialog
-                title={t('work-history.delete-job-description')}
-                onConfirm={() => void deleteToimenkuva()}
-                confirmText={t('delete')}
-                cancelText={t('cancel')}
-                variant="destructive"
-                description={t('work-history.confirm-delete-job-description')}
-              >
-                {(showDialog: () => void) => (
-                  <Button
-                    variant="white-delete"
-                    label={`${t('delete')}`}
-                    onClick={showDialog}
-                    className="whitespace-nowrap"
-                  />
-                )}
-              </ConfirmDialog>
+              <Button
+                className="whitespace-nowrap"
+                variant="white-delete"
+                label={`${t('delete')}`}
+                onClick={() => {
+                  showDialog({
+                    title: t('work-history.delete-job-description'),
+                    onConfirm: () => void deleteToimenkuva(),
+                    confirmText: t('delete'),
+                    cancelText: t('cancel'),
+                    variant: 'destructive',
+                    description: t('work-history.confirm-delete-job-description'),
+                    closeParentModal: true,
+                  });
+                }}
+              />
             )}
           </div>
           <div className="flex flex-row justify-between gap-5">

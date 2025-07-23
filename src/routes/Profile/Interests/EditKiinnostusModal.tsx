@@ -7,12 +7,13 @@ import { Button, Modal } from '@jod/design-system';
 import React from 'react';
 import { Controller, Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
 interface EditKiinnostusModalProps {
   isOpen: boolean;
   onClose: () => void;
+  data: components['schemas']['OsaaminenDto'][];
 }
 
 interface KiinnostusForm {
@@ -20,15 +21,9 @@ interface KiinnostusForm {
   kiinnostukset: OsaaminenValue[];
 }
 
-const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
+const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalProps) => {
   const { t } = useTranslation();
-  const data =
-    (
-      useLoaderData() as {
-        kiinnostukset: components['schemas']['OsaaminenDto'][];
-        vapaateksti: string;
-      }
-    ).kiinnostukset ?? [];
+  const revalidator = useRevalidator();
 
   const formId = React.useId();
   useEscHandler(onClose, formId);
@@ -68,6 +63,7 @@ const EditInterestModal = ({ isOpen, onClose }: EditKiinnostusModalProps) => {
     await client.PUT('/api/profiili/kiinnostukset/osaamiset', {
       body: data.kiinnostukset.map((kiinnostus) => kiinnostus.id),
     });
+    await revalidator.revalidate();
     onClose();
   };
 

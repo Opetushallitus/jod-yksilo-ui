@@ -2,17 +2,17 @@ import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { useEscHandler } from '@/hooks/useEscHandler';
+import { useModal } from '@/hooks/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, ConfirmDialog, InputField, Modal } from '@jod/design-system';
+import { Button, InputField, Modal } from '@jod/design-system';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
 interface EditTyonantajaModalProps {
   isOpen: boolean;
-  onClose: () => void;
   tyopaikkaId: string;
 }
 
@@ -23,14 +23,15 @@ interface TyonantajaForm {
 
 const TYOPAIKKA_API_PATH = '/api/profiili/tyopaikat/{id}';
 
-const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantajaModalProps) => {
+const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
 
   const formId = React.useId();
-  useEscHandler(onClose, formId);
+  const { showDialog, closeActiveModal } = useModal();
+  const revalidator = useRevalidator();
   const methods = useForm<TyonantajaForm>({
     mode: 'onBlur',
     resolver: zodResolver(
@@ -72,15 +73,16 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
         nimi: data.nimi,
       },
     });
-    onClose();
+    await revalidator.revalidate();
+    closeActiveModal();
   };
 
   const deleteTyopaikka = async () => {
     await client.DELETE(TYOPAIKKA_API_PATH, {
       params: { path: { id } },
     });
-
-    onClose();
+    await revalidator.revalidate();
+    closeActiveModal();
   };
 
   React.useEffect(() => {
@@ -122,26 +124,24 @@ const EditTyonantajaModal = ({ isOpen, onClose, tyopaikkaId: id }: EditTyonantaj
       footer={
         <div className="flex flex-row justify-between flex-1">
           <div className="flex flex-row gap-5">
-            <ConfirmDialog
-              title={t('work-history.delete-work-history')}
-              onConfirm={() => void deleteTyopaikka()}
-              confirmText={t('delete')}
-              cancelText={t('cancel')}
-              variant="destructive"
-              description={t('work-history.confirm-delete-work-history')}
-            >
-              {(showDialog: () => void) => (
-                <Button
-                  variant="white-delete"
-                  label={`${t('delete')}`}
-                  onClick={showDialog}
-                  className="whitespace-nowrap"
-                />
-              )}
-            </ConfirmDialog>
+            <Button
+              className="whitespace-nowrap"
+              variant="white-delete"
+              label={`${t('delete')}`}
+              onClick={() => {
+                showDialog({
+                  title: t('work-history.delete-work-history'),
+                  description: t('work-history.confirm-delete-work-history'),
+                  confirmText: t('delete'),
+                  cancelText: t('cancel'),
+                  variant: 'destructive',
+                  onConfirm: deleteTyopaikka,
+                });
+              }}
+            />
           </div>
           <div className="flex flex-row gap-5">
-            <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />
+            <Button label={t('cancel')} variant="white" onClick={closeActiveModal} className="whitespace-nowrap" />
             <Button form={formId} label={t('save')} variant="white" disabled={!isValid} className="whitespace-nowrap" />
           </div>
         </div>

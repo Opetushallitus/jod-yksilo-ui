@@ -1,9 +1,10 @@
 import { client } from '@/api/client';
 import { formErrorMessage } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { useModal } from '@/hooks/useModal';
 import { usePolutStore } from '@/stores/usePolutStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, ConfirmDialog, Modal, WizardProgress } from '@jod/design-system';
+import { Button, Modal, WizardProgress } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm } from 'react-hook-form';
@@ -28,6 +29,8 @@ const ManualVaiheModal = ({ isOpen, onClose, vaiheIndex }: ManualVaiheModalProps
   );
   const { t } = useTranslation();
   const { suunnitelmaId, paamaaraId } = useParams<PolkuQueryParams>();
+  const { showDialog } = useModal();
+
   const formId = React.useId();
 
   const methods = useForm<VaiheForm>({
@@ -155,16 +158,20 @@ const ManualVaiheModal = ({ isOpen, onClose, vaiheIndex }: ManualVaiheModalProps
         footer={
           <div className="flex flex-row justify-end gap-5 flex-1">
             {methods.formState.isDirty ? (
-              <ConfirmDialog
-                title={t('cancel')}
-                description={t('profile.paths.cancel-confirmation-text')}
-                onConfirm={cancel}
-                confirmText={t('close')}
-                cancelText={t('profile.paths.continue-editing')}
-                variant="destructive"
-              >
-                {(showDialog: () => void) => <Button label={t('cancel')} variant="white" onClick={showDialog} />}
-              </ConfirmDialog>
+              <Button
+                label={t('cancel')}
+                variant="white"
+                onClick={() => {
+                  showDialog({
+                    title: t('cancel'),
+                    description: t('profile.paths.cancel-confirmation-text'),
+                    confirmText: t('close'),
+                    cancelText: t('profile.paths.continue-editing'),
+                    variant: 'destructive',
+                    onConfirm: cancel,
+                  });
+                }}
+              />
             ) : (
               <Button label={t('cancel')} variant="white" onClick={() => close()} />
             )}

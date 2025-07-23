@@ -1,13 +1,16 @@
 import { components } from '@/api/schema';
-import { FavoriteToggle, LoginModal } from '@/components';
+import { FavoriteToggle } from '@/components';
+import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDropdown';
 import { useEnvironment } from '@/hooks/useEnvironment';
-import { MahdollisuusTyyppi } from '@/routes/types';
+import { useLoginLink } from '@/hooks/useLoginLink';
+import { useModal } from '@/hooks/useModal';
+import type { MahdollisuusTyyppi } from '@/routes/types';
 import { cx } from '@jod/design-system';
 import { JodBlock, JodTrendingUp } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 
 type FavoriteProps =
   | {
@@ -98,9 +101,18 @@ export const OpportunityCard = ({
   menuContent,
   menuId,
 }: OpportunityCardProps) => {
-  const { t } = useTranslation();
-  const [loginModalOpen, setLoginModalOpen] = React.useState(false);
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { isDev } = useEnvironment();
+  const state = useLocation().state;
+  const loginLink = useLoginLink({
+    callbackURL: state?.callbackURL
+      ? `/${language}/${state?.callbackURL}`
+      : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
+  });
+  const { showDialog, closeAllModals } = useModal();
 
   const onToggleFavorite = () => {
     if (hideFavorite) {
@@ -108,7 +120,11 @@ export const OpportunityCard = ({
     }
 
     if (!isLoggedIn) {
-      setLoginModalOpen(true);
+      showDialog({
+        title: t('login'),
+        description: t('login-for-favorites'),
+        footer: createLoginDialogFooter(t, loginLink, closeAllModals),
+      });
     } else {
       toggleFavorite?.();
     }
@@ -124,72 +140,69 @@ export const OpportunityCard = ({
     ) : null;
 
   return (
-    <>
-      {loginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} isOpen={loginModalOpen} />}
-      <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border">
-        <div className="order-2 flex flex-col">
-          <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">{cardTypeTitle}</span>
-          {to ? (
-            <NavLink
-              to={to}
-              className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto hover:underline hover:text-accent"
-            >
-              {name}
-            </NavLink>
-          ) : (
-            <span className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto">{name}</span>
-          )}
-          <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
-          {isDev && (
-            <div className="flex flex-wrap mt-5">
-              <BottomBox title={t('opportunity-card.trend')} className="bg-todo">
-                {trend === 'NOUSEVA' ? (
-                  <JodTrendingUp className="text-accent" aria-label={t(`opportunity-card.trend-up`)} />
-                ) : (
-                  <JodTrendingUp className="text-accent -scale-y-100" aria-label={t(`opportunity-card.trend-down`)} />
-                )}
+    <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border">
+      <div className="order-2 flex flex-col">
+        <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">{cardTypeTitle}</span>
+        {to ? (
+          <NavLink
+            to={to}
+            className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto hover:underline hover:text-accent"
+          >
+            {name}
+          </NavLink>
+        ) : (
+          <span className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto">{name}</span>
+        )}
+        <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
+        {isDev && (
+          <div className="flex flex-wrap mt-5">
+            <BottomBox title={t('opportunity-card.trend')} className="bg-todo">
+              {trend === 'NOUSEVA' ? (
+                <JodTrendingUp className="text-accent" aria-label={t(`opportunity-card.trend-up`)} />
+              ) : (
+                <JodTrendingUp className="text-accent -scale-y-100" aria-label={t(`opportunity-card.trend-down`)} />
+              )}
+            </BottomBox>
+            <BottomBox title={t('opportunity-card.employment-outlook')} className="bg-todo">
+              <OutlookDots
+                outlook={employmentOutlook}
+                ariaLabel={t('opportunity-card.outlook-value', { outlook: employmentOutlook })}
+              />
+            </BottomBox>
+            {hasRestrictions && (
+              <BottomBox title={t('opportunity-card.maybe-has-restrictions')} className="bg-todo">
+                <JodBlock className="text-accent" size={20} role="presentation" />
               </BottomBox>
-              <BottomBox title={t('opportunity-card.employment-outlook')} className="bg-todo">
-                <OutlookDots
-                  outlook={employmentOutlook}
-                  ariaLabel={t('opportunity-card.outlook-value', { outlook: employmentOutlook })}
-                />
+            )}
+            {industryName && (
+              <BottomBox title={`${t('opportunity-card.industry-name')}:`} className="bg-todo">
+                <span className="font-bold">{industryName}</span>
               </BottomBox>
-              {hasRestrictions && (
-                <BottomBox title={t('opportunity-card.maybe-has-restrictions')} className="bg-todo">
-                  <JodBlock className="text-accent" size={20} role="presentation" />
-                </BottomBox>
-              )}
-              {industryName && (
-                <BottomBox title={`${t('opportunity-card.industry-name')}:`} className="bg-todo">
-                  <span className="font-bold">{industryName}</span>
-                </BottomBox>
-              )}
-              {mostCommonEducationBackground && (
-                <BottomBox title={`${t('opportunity-card.common-educational-background')}:`} className="bg-todo">
-                  <span className="font-bold">{mostCommonEducationBackground}</span>
-                </BottomBox>
-              )}
-            </div>
-          )}
-        </div>
-        <div
-          className={`flex flex-wrap-reverse items-center gap-x-7 gap-y-5 mb-4 order-1 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
-        >
-          {typeof matchValue === 'number' && matchLabel && (
-            <div
-              className={cx('flex flex-nowrap gap-x-3 items-center px-4 text-white rounded-full select-none', {
-                'bg-[#AD4298]': type === 'TYOMAHDOLLISUUS',
-                'bg-[#00818A]': type === 'KOULUTUSMAHDOLLISUUS',
-              })}
-            >
-              <span className="text-heading-2-mobile leading-8">{Math.round(matchValue * 100)}%</span>
-              <span className="text-body-xs font-arial font-bold">{matchLabel}</span>
-            </div>
-          )}
-          {menuContent ? ActionsSection : null}
-        </div>
-      </Component>
-    </>
+            )}
+            {mostCommonEducationBackground && (
+              <BottomBox title={`${t('opportunity-card.common-educational-background')}:`} className="bg-todo">
+                <span className="font-bold">{mostCommonEducationBackground}</span>
+              </BottomBox>
+            )}
+          </div>
+        )}
+      </div>
+      <div
+        className={`flex flex-wrap-reverse items-center gap-x-7 gap-y-5 mb-4 order-1 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
+      >
+        {typeof matchValue === 'number' && matchLabel && (
+          <div
+            className={cx('flex flex-nowrap gap-x-3 items-center px-4 text-white rounded-full select-none', {
+              'bg-[#AD4298]': type === 'TYOMAHDOLLISUUS',
+              'bg-[#00818A]': type === 'KOULUTUSMAHDOLLISUUS',
+            })}
+          >
+            <span className="text-heading-2-mobile leading-8">{Math.round(matchValue * 100)}%</span>
+            <span className="text-body-xs font-arial font-bold">{matchLabel}</span>
+          </div>
+        )}
+        {menuContent ? ActionsSection : null}
+      </div>
+    </Component>
   );
 };

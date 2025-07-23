@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
-import { Button, ConfirmDialog } from '@jod/design-system';
+import { useModal } from '@/hooks/useModal';
+import { Button } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 
 interface DeletePolkuButtonProps {
@@ -10,6 +11,7 @@ interface DeletePolkuButtonProps {
 }
 const DeletePolkuButton = ({ paamaaraId, suunnitelmaId, className, onDelete }: DeletePolkuButtonProps) => {
   const { t } = useTranslation();
+  const { showDialog } = useModal();
 
   const deletePolku = async () => {
     if (!paamaaraId || !suunnitelmaId) {
@@ -25,20 +27,22 @@ const DeletePolkuButton = ({ paamaaraId, suunnitelmaId, className, onDelete }: D
   };
 
   return paamaaraId && suunnitelmaId ? (
-    <ConfirmDialog
-      title={t('profile.paths.delete-path-title')}
-      onConfirm={deletePolku}
-      confirmText={t('delete')}
-      cancelText={t('cancel')}
-      variant="destructive"
-      description={t('profile.paths.delete-path-description')}
-    >
-      {(showDialog: () => void) => (
-        <div className={className ?? ''}>
-          <Button label={t('profile.paths.delete-path')} variant="white-delete" onClick={showDialog} />
-        </div>
-      )}
-    </ConfirmDialog>
+    <div className={className ?? ''}>
+      <Button
+        label={t('profile.paths.delete-path')}
+        variant="white-delete"
+        onClick={() => {
+          showDialog({
+            title: t('profile.paths.delete-path-title'),
+            description: t('profile.paths.delete-path-description'),
+            confirmText: t('delete'),
+            cancelText: t('cancel'),
+            variant: 'destructive',
+            onConfirm: deletePolku,
+          });
+        }}
+      />
+    </div>
   ) : null;
 };
 

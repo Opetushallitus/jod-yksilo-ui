@@ -1,9 +1,10 @@
 import { client } from '@/api/client';
+import { useModal } from '@/hooks/useModal';
 import { getPaamaaraTypeForMahdollisuus, PaamaaraTyyppi } from '@/routes/Profile/MyGoals/utils';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
-import { ConfirmDialog, PopupList, PopupListItem } from '@jod/design-system';
+import { PopupList, PopupListItem } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
@@ -33,6 +34,8 @@ const MyGoalsOpportunityCardMenu = ({
   menuId: string;
 }) => {
   const { t } = useTranslation();
+  const { showDialog } = useModal();
+
   const paamaaraType = getPaamaaraTypeForMahdollisuus(mahdollisuusId);
   const { fetchPage, pageSize, pageNr, excludedIds, setExcludedIds, pageData } = useSuosikitStore(
     useShallow((state) => ({
@@ -137,16 +140,19 @@ const MyGoalsOpportunityCardMenu = ({
           disabled={!canSetAsPaamaaraType('MUU')}
         />
         {!!paamaaraId && (
-          <ConfirmDialog
-            title={t('profile.my-goals.delete-goal')}
-            onConfirm={() => onDeletePaamaara(paamaaraId)}
-            confirmText={t('delete')}
-            cancelText={t('cancel')}
-            variant="destructive"
-            description={t('profile.my-goals.delete-goal-description')}
-          >
-            {(showDialog: () => void) => <ListItem label={t('profile.my-goals.delete-goal')} onClick={showDialog} />}
-          </ConfirmDialog>
+          <ListItem
+            label={t('profile.my-goals.delete-goal')}
+            onClick={() => {
+              showDialog({
+                title: t('profile.my-goals.delete-goal'),
+                description: t('profile.my-goals.delete-goal-description'),
+                confirmText: t('delete'),
+                cancelText: t('cancel'),
+                variant: 'destructive',
+                onConfirm: () => onDeletePaamaara(paamaaraId),
+              });
+            }}
+          />
         )}
       </ul>
     </PopupList>
