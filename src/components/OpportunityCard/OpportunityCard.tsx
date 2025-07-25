@@ -1,4 +1,3 @@
-import { components } from '@/api/schema';
 import { FavoriteToggle } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDropdown';
@@ -7,7 +6,7 @@ import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
 import type { MahdollisuusTyyppi } from '@/routes/types';
 import { cx } from '@jod/design-system';
-import { JodBlock, JodTrendingUp } from '@jod/design-system/icons';
+import { JodInfo } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router';
@@ -39,6 +38,7 @@ type MenuProps =
     };
 
 type OpportunityCardProps = {
+  ammattiryhma?: string;
   as?: React.ElementType;
   to?: string;
   name: string;
@@ -46,53 +46,29 @@ type OpportunityCardProps = {
   matchValue?: number;
   matchLabel?: string;
   type: MahdollisuusTyyppi;
-  trend: components['schemas']['EhdotusMetadata']['trendi'];
-  employmentOutlook: number;
-  hasRestrictions: boolean;
-  industryName?: string;
-  mostCommonEducationBackground?: string;
 } & FavoriteProps &
   MenuProps;
 
-const BottomBox = ({
-  title,
-  className,
-  children,
-}: {
-  title?: string;
-  className?: string;
-  children: React.ReactNode;
-}) => (
-  <div
-    role="note"
-    className={`font-arial border border-inactive-gray py-2 px-3 -mr-[1px] -mb-[1px] text-attrib-title flex flex-row items-center gap-2 ${className}`.trim()}
-  >
-    <span className="flex items-center mr-1">{title}</span>
-    <span className="flex items-center">{children}</span>
-  </div>
-);
-
-const OutlookDots = ({ outlook, ariaLabel }: { outlook: number; ariaLabel: string }) => (
-  <div role="figure" className="flex flex-row gap-2" aria-label={ariaLabel}>
-    {Array.from({ length: 5 }).map((_, idx) => (
-      /* eslint-disable-next-line react/no-array-index-key */
-      <div key={idx} className={`${idx < outlook ? 'bg-accent' : 'bg-accent-25'} w-4 h-4 rounded-full`} aria-hidden />
-    ))}
-  </div>
-);
+const OpportunityDetail = ({ title, value }: { title: string; value: string }) => {
+  return (
+    <div className="flex flex-col">
+      <div className="text-body-xs flex gap-4 items-center">
+        <span>{title}:</span>
+        <JodInfo size={18} className="text-[#999]" />
+      </div>
+      <div className="text-heading-3 text-secondary-1-dark">{value}</div>
+    </div>
+  );
+};
 
 export const OpportunityCard = ({
   as: Component = 'div',
   to,
   description,
-  employmentOutlook,
-  hasRestrictions,
-  industryName,
+  ammattiryhma,
   matchLabel,
   matchValue,
-  mostCommonEducationBackground,
   name,
-  trend,
   type,
   toggleFavorite,
   isFavorite,
@@ -133,7 +109,7 @@ export const OpportunityCard = ({
   const cardTypeTitle = type === 'TYOMAHDOLLISUUS' ? t('opportunity-type.work') : t('opportunity-type.education');
   const ActionsSection =
     menuId && menuContent ? (
-      <div className="grow flex flex-wrap gap-x-5 gap-y-2 justify-end">
+      <div className="grow flex flex-col sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end">
         {!hideFavorite && <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />}
         <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />
       </div>
@@ -155,40 +131,15 @@ export const OpportunityCard = ({
         )}
         <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
         {isDev && (
-          <div className="flex flex-wrap mt-5">
-            <BottomBox title={t('opportunity-card.trend')} className="bg-todo">
-              {trend === 'NOUSEVA' ? (
-                <JodTrendingUp className="text-accent" aria-label={t(`opportunity-card.trend-up`)} />
-              ) : (
-                <JodTrendingUp className="text-accent -scale-y-100" aria-label={t(`opportunity-card.trend-down`)} />
-              )}
-            </BottomBox>
-            <BottomBox title={t('opportunity-card.employment-outlook')} className="bg-todo">
-              <OutlookDots
-                outlook={employmentOutlook}
-                ariaLabel={t('opportunity-card.outlook-value', { outlook: employmentOutlook })}
-              />
-            </BottomBox>
-            {hasRestrictions && (
-              <BottomBox title={t('opportunity-card.maybe-has-restrictions')} className="bg-todo">
-                <JodBlock className="text-accent" size={20} role="presentation" />
-              </BottomBox>
-            )}
-            {industryName && (
-              <BottomBox title={`${t('opportunity-card.industry-name')}:`} className="bg-todo">
-                <span className="font-bold">{industryName}</span>
-              </BottomBox>
-            )}
-            {mostCommonEducationBackground && (
-              <BottomBox title={`${t('opportunity-card.common-educational-background')}:`} className="bg-todo">
-                <span className="font-bold">{mostCommonEducationBackground}</span>
-              </BottomBox>
-            )}
+          <div className="flex flex-col mt-5 gap-3">
+            {type === 'TYOMAHDOLLISUUS' && ammattiryhma ? (
+              <OpportunityDetail title={t('tool.job-opportunity-is-part-of-group')} value={ammattiryhma} />
+            ) : null}
           </div>
         )}
       </div>
       <div
-        className={`flex flex-wrap-reverse items-center gap-x-7 gap-y-5 mb-4 order-1 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
+        className={`flex flex-col sm:flex-row items-start sm:items-center gap-x-7 gap-y-5 mb-5 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
       >
         {typeof matchValue === 'number' && matchLabel && (
           <div

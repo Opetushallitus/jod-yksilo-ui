@@ -7,6 +7,7 @@ export type MahdollisuusTyyppi = 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
 export type TypedMahdollisuus = Mahdollisuus & {
   mahdollisuusTyyppi: MahdollisuusTyyppi;
   osaamisetCount?: number;
+  ammattiryhma?: string;
 };
 export type OsaaminenLahdeTyyppi = components['schemas']['OsaamisenLahdeDto']['tyyppi'] | 'KIINNOSTUS' | 'KARTOITETTU';
 

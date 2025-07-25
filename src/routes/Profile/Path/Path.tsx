@@ -29,6 +29,7 @@ const Path = () => {
   const paamaara = loaderData?.paamaara;
 
   const {
+    ammattiryhmaNimet,
     vaaditutOsaamiset,
     osaamisetFromProfile,
     osaamisetFromVaiheet,
@@ -38,6 +39,7 @@ const Path = () => {
     setSelectedOsaamiset,
   } = usePolutStore(
     useShallow((state) => ({
+      ammattiryhmaNimet: state.ammattiryhmaNimet,
       vaaditutOsaamiset: state.vaaditutOsaamiset,
       osaamisetFromProfile: state.osaamisetFromProfile,
       osaamisetFromVaiheet: state.osaamisetFromVaiheet,
@@ -419,13 +421,17 @@ const Path = () => {
                   <OpportunityCard
                     to={`/${language}/${getTypeSlug(paamaara.mahdollisuusTyyppi)}/${mahdollisuusId}`}
                     description={getLocalizedText(mahdollisuus?.tiivistelma)}
-                    employmentOutlook={2}
-                    industryName="TODO: Lorem ipsum dolor"
-                    mostCommonEducationBackground="TODO: Lorem ipsum dolor"
                     name={getLocalizedText(mahdollisuus?.otsikko)}
-                    trend="LASKEVA"
                     type={paamaara.mahdollisuusTyyppi}
-                    hasRestrictions
+                    ammattiryhma={
+                      paamaara.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
+                        ? getLocalizedText(
+                            ammattiryhmaNimet[
+                              (mahdollisuus as components['schemas']['TyomahdollisuusDto']).ammattiryhma!
+                            ],
+                          )
+                        : ''
+                    }
                     hideFavorite
                   />
                   {getLocalizedText(paamaara.tavoite) ? (
