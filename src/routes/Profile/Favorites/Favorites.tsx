@@ -28,6 +28,7 @@ const linkTextKeys = {
 
 const Favorites = () => {
   const {
+    ammattiryhmaNimet,
     deleteSuosikki,
     filters,
     fetchPage,
@@ -40,6 +41,7 @@ const Favorites = () => {
     totalPages,
   } = useSuosikitStore(
     useShallow((state) => ({
+      ammattiryhmaNimet: state.ammattiryhmaNimet,
       deleteSuosikki: state.deleteSuosikki,
       fetchPage: state.fetchPage,
       filters: state.filters,
@@ -248,15 +250,15 @@ const Favorites = () => {
               key={id}
               to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}`}
               description={getLocalizedText(mahdollisuus.tiivistelma)}
-              employmentOutlook={2}
-              hasRestrictions
-              industryName="TODO: Lorem ipsum dolor"
+              ammattiryhma={
+                mahdollisuus?.ammattiryhma
+                  ? getLocalizedText(ammattiryhmaNimet?.[mahdollisuus.ammattiryhma])
+                  : undefined
+              }
               isFavorite={true}
               isLoggedIn={true}
-              mostCommonEducationBackground="TODO: Lorem ipsum dolor"
               name={getLocalizedText(mahdollisuus.otsikko)}
               toggleFavorite={() => void deleteSuosikki(id)}
-              trend="NOUSEVA"
               type={mahdollisuusTyyppi}
               menuContent={
                 <FavoritesOpportunityCardActionMenu

@@ -1,3 +1,4 @@
+import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import { components } from '@/api/schema';
@@ -24,6 +25,18 @@ export default (async ({ request }) => {
     koulutusMahdollisuudetDetails = await getTypedKoulutusMahdollisuusDetails(koulutusPaamarat.map(mapToIds));
   }
 
+  const ammattiryhmaNimet: Record<string, components['schemas']['LokalisoituTeksti']> = {};
+  const ammattiryhmaUris = [...tyomahdollisuudetDetails, ...koulutusMahdollisuudetDetails]
+    .filter((m) => m.ammattiryhma && !ammattiryhmaNimet?.[m.ammattiryhma])
+    .map((m) => m.ammattiryhma!);
+
+  if (ammattiryhmaUris.length > 0) {
+    const ammattiryhmat = await ammatit.find(ammattiryhmaUris);
+    ammattiryhmat.forEach((ar) => {
+      ammattiryhmaNimet[ar.uri] = ar.nimi;
+    });
+  }
+
   const mahdollisuusDetails: TypedMahdollisuus[] = [...tyomahdollisuudetDetails, ...koulutusMahdollisuudetDetails];
   const { setPaamaarat, setMahdollisuusDetails } = usePaamaaratStore.getState();
   setPaamaarat(paamaarat);
@@ -34,5 +47,5 @@ export default (async ({ request }) => {
   setExcludedIds(suosikitAlreadyInPaamaarat);
   await fetchSuosikit();
 
-  return { paamaarat, tyomahdollisuudetDetails, koulutusMahdollisuudetDetails };
+  return { paamaarat, tyomahdollisuudetDetails, koulutusMahdollisuudetDetails, ammattiryhmaNimet };
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

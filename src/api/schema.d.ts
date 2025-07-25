@@ -550,6 +550,46 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/external-api/v1/tyomahdollisuudet': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get all työmahdollisuudet paged of by page and size
+     * @description Returns all työmahdollisuudet basic information in JSON-format.
+     */
+    get: operations['externalApiV1FindTyoMahdollisuudet'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/external-api/v1/koulutusmahdollisuudet': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get all koulutusmahdollisuudet paged of by page and size
+     * @description Returns all koulutusmahdollisuudet basic information in JSON-format.
+     */
+    get: operations['externalApiV1FindKoulutusMahdollisuudet'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/tyomahdollisuudet': {
     parameters: {
       query?: never;
@@ -981,6 +1021,59 @@ export interface components {
       /** Format: int32 */
       aakkosIndeksi: number;
     };
+    ExtTyoMahdollisuusDto: {
+      /** Format: uuid */
+      id?: string;
+      otsikko?: components['schemas']['LokalisoituTeksti'];
+      tiivistelma?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      /** Format: uri */
+      ammattiryhma?: string;
+      aktiivinen?: boolean;
+    };
+    SivuDtoExtTyoMahdollisuusDto: {
+      sisalto: components['schemas']['ExtTyoMahdollisuusDto'][];
+      /**
+       * Format: int64
+       * @example 30
+       */
+      maara: number;
+      /**
+       * Format: int32
+       * @example 3
+       */
+      sivuja: number;
+    };
+    ExtKoulutusMahdollisuusDto: {
+      /** Format: uuid */
+      id?: string;
+      otsikko?: components['schemas']['LokalisoituTeksti'];
+      tiivistelma?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      kesto?: components['schemas']['KestoJakauma'];
+      aktiivinen?: boolean;
+    };
+    KestoJakauma: {
+      /** Format: double */
+      minimi?: number;
+      /** Format: double */
+      mediaani?: number;
+      /** Format: double */
+      maksimi?: number;
+    };
+    SivuDtoExtKoulutusMahdollisuusDto: {
+      sisalto: components['schemas']['ExtKoulutusMahdollisuusDto'][];
+      /**
+       * Format: int64
+       * @example 30
+       */
+      maara: number;
+      /**
+       * Format: int32
+       * @example 3
+       */
+      sivuja: number;
+    };
     SivuDtoTyomahdollisuusDto: {
       sisalto: components['schemas']['TyomahdollisuusDto'][];
       /**
@@ -1000,6 +1093,8 @@ export interface components {
       otsikko: components['schemas']['LokalisoituTeksti'];
       tiivistelma?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
+      /** Format: uri */
+      ammattiryhma?: string;
       aktiivinen?: boolean;
     };
     ArvoDto: {
@@ -1026,6 +1121,7 @@ export interface components {
       ammattiryhma?: string;
       /** @enum {string} */
       aineisto?: 'TMT' | 'AMMATTITIETO';
+      aktiivinen?: boolean;
       jakaumat?: {
         [key: string]: components['schemas']['JakaumaDto'];
       };
@@ -2627,6 +2723,52 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['EhdotusDto'][];
+        };
+      };
+    };
+  };
+  externalApiV1FindTyoMahdollisuudet: {
+    parameters: {
+      query?: {
+        sivu?: number;
+        koko?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SivuDtoExtTyoMahdollisuusDto'];
+        };
+      };
+    };
+  };
+  externalApiV1FindKoulutusMahdollisuudet: {
+    parameters: {
+      query?: {
+        sivu?: number;
+        koko?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SivuDtoExtKoulutusMahdollisuusDto'];
         };
       };
     };

@@ -62,7 +62,7 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
             e.preventDefault();
             e.stopPropagation();
           }}
-          className="absolute -right-2 translate-y-[10px] cursor-auto z-50"
+          className="absolute left-0 right-0 sm:left-auto sm:-right-2 translate-y-[10px] cursor-auto z-50"
         >
           {menuContent}
         </div>

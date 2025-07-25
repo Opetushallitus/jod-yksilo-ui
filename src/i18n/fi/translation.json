@@ -458,7 +458,7 @@
   "opportunity-description-KOULUTUSMAHDOLLISUUS": "Koulutusmahdollisuuden yleiskuvaus",
   "opportunity-description-TYOMAHDOLLISUUS": "Työmahdollisuuden yleiskuvaus",
   "opportunity-type": {
-    "education": "Koulutusmahdollisuus",
+    "education": "Tutkinto",
     "occupation": "Ammatti",
     "work": "Työmahdollisuus"
   },
@@ -821,6 +821,7 @@
   },
   "tool": {
     "description": "Alla on työkalut joiden avulla syötät tietojasi, joiden perusteella tarjoamme sinulle mahdollisuuksia oikealla.",
+    "job-opportunity-is-part-of-group": "Työmahdollisuus kuuluu ammaattiryhmään",
     "my-own-data": {
       "cancel-text": "Ei, peruuta",
       "competences": {

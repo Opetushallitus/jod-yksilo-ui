@@ -5,6 +5,7 @@ import { create } from 'zustand';
 
 type Osaaminen = components['schemas']['OsaaminenDto'];
 interface PolkuState {
+  ammattiryhmaNimet: Record<string, components['schemas']['LokalisoituTeksti']>;
   polku?: components['schemas']['PolunSuunnitelmaDto'];
   vaiheet: VaiheForm[];
   polutLoading: boolean;
@@ -28,9 +29,11 @@ interface PolkuState {
   setVaaditutOsaamiset: (state: Osaaminen[]) => void;
   setProposedOpportunity: (state: TypedMahdollisuus | undefined) => void;
   getMissingOsaamisetUris: () => string[];
+  setAmmattiryhmaNimet: (state: Record<string, components['schemas']['LokalisoituTeksti']>) => void;
 }
 
 export const usePolutStore = create<PolkuState>()((set, get) => ({
+  ammattiryhmaNimet: {},
   polku: undefined,
   vaiheet: [],
   polutLoading: false,
@@ -51,6 +54,7 @@ export const usePolutStore = create<PolkuState>()((set, get) => ({
   setOsaamisetFromVaiheet: (state) => set({ osaamisetFromVaiheet: state }),
   setVaaditutOsaamiset: (state) => set({ vaaditutOsaamiset: state }),
   setProposedOpportunity: (state) => set({ proposedOpportunity: state }),
+  setAmmattiryhmaNimet: (state) => set({ ammattiryhmaNimet: state }),
   getMissingOsaamisetUris: () => {
     const existingOsaamiset = [
       ...get().osaamisetFromProfile.map(mapOsaaminenToUri),

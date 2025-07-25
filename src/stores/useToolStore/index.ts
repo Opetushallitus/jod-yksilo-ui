@@ -1,3 +1,4 @@
+import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import { components } from '@/api/schema';
@@ -31,6 +32,7 @@ interface ToolState {
     d?: boolean;
     e?: boolean;
   };
+  ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
   osaamiset: OsaaminenValue[];
   osaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'];
   kiinnostukset: OsaaminenValue[];
@@ -80,6 +82,7 @@ export const useToolStore = create<ToolState>()(
   persist(
     (set, get) => ({
       tavoitteet: {},
+      ammattiryhmaNimet: {},
       osaamiset: [],
       kiinnostukset: [],
       kiinnostuksetVapaateksti: undefined,
@@ -196,7 +199,7 @@ export const useToolStore = create<ToolState>()(
 
         set({ mahdollisuudetLoading: true });
         try {
-          const sortedMixedMahdollisuudet = [];
+          const sortedMixedMahdollisuudet: TypedMahdollisuus[] = [];
 
           // paginate before fetch to fetch only the ids of selected newPage
           const pagedIds = paginate(allSortedIds, newPage, ehdotuksetPageSize);
@@ -235,7 +238,22 @@ export const useToolStore = create<ToolState>()(
                 ehdotukset[a.id].aakkosIndeksi - ehdotukset[b.id].aakkosIndeksi,
           );
 
+          // Fetch ammattiryhma names if they are not already loaded
+          const ammattiryhmaNimet = { ...get().ammattiryhmaNimet };
+
+          const ammattiryhmaUris = sortedMixedMahdollisuudet
+            .filter((m) => m.ammattiryhma && !ammattiryhmaNimet?.[m.ammattiryhma])
+            .map((m) => m.ammattiryhma!);
+
+          if (ammattiryhmaUris.length > 0) {
+            const ammattiryhmat = await ammatit.find(ammattiryhmaUris);
+            ammattiryhmat.forEach((ar) => {
+              ammattiryhmaNimet[ar.uri] = ar.nimi;
+            });
+          }
+
           set({
+            ammattiryhmaNimet,
             ehdotuksetPageNr: newPage,
             mahdollisuudetLoading: false,
             mixedMahdollisuudet: sortedMixedMahdollisuudet,
