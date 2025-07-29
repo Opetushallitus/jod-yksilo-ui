@@ -345,22 +345,24 @@ const YourOpportunitiesCard = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
 const ExploreOpportunities = () => {
   const { t, i18n } = useTranslation();
   const {
-    mixedMahdollisuudet,
-    suosikit,
-    mahdollisuusEhdotukset,
+    ammattiryhmaNimet,
     ehdotuksetCount,
     filter,
+    mahdollisuusEhdotukset,
+    mixedMahdollisuudet,
     setFilter,
-    toggleSuosikki,
     sorting,
+    suosikit,
+    toggleSuosikki,
   } = useToolStore(
     useShallow((state) => ({
+      ammattiryhmaNimet: state.ammattiryhmaNimet,
       ehdotuksetCount: state.ehdotuksetCount,
       filter: state.filter,
-      sorting: state.sorting,
-      setFilter: state.setFilter,
       mahdollisuusEhdotukset: state.mahdollisuusEhdotukset,
       mixedMahdollisuudet: state.mixedMahdollisuudet,
+      setFilter: state.setFilter,
+      sorting: state.sorting,
       suosikit: state.suosikit,
       toggleSuosikki: state.toggleSuosikki,
     })),
@@ -478,12 +480,10 @@ const ExploreOpportunities = () => {
               description={getLocalizedText(mahdollisuus.tiivistelma)}
               matchValue={ehdotus?.pisteet}
               matchLabel={t('fit')}
+              ammattiryhma={
+                mahdollisuus.ammattiryhma ? getLocalizedText(ammattiryhmaNimet?.[mahdollisuus.ammattiryhma]) : undefined
+              }
               type={mahdollisuusTyyppi}
-              trend={ehdotus?.trendi}
-              employmentOutlook={ehdotus?.tyollisyysNakyma ?? 0}
-              hasRestrictions
-              industryName="TODO: Lorem ipsum dolor"
-              mostCommonEducationBackground="TODO: Lorem ipsum dolor"
               menuContent={
                 <ToolOpportunityCardActionMenu
                   mahdollisuusId={id}

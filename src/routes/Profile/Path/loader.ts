@@ -1,3 +1,4 @@
+import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
@@ -60,6 +61,20 @@ const loader = (async ({ request, params }) => {
         : client.GET('/api/tyomahdollisuudet/{id}', mahdollisuusOpts);
 
     const { data: mahdollisuus } = await mahdollisuusFetch;
+
+    if (paamaara.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS') {
+      const m = mahdollisuus as components['schemas']['TyomahdollisuusDto'];
+      const ammattiryhmaNimet: Record<string, components['schemas']['LokalisoituTeksti']> = {};
+      const ammattiryhmaUris = m.ammattiryhma ? [m.ammattiryhma] : [];
+
+      if (ammattiryhmaUris.length > 0) {
+        const ammattiryhmat = await ammatit.find(ammattiryhmaUris);
+        ammattiryhmat.forEach((ar) => {
+          ammattiryhmaNimet[ar.uri] = ar.nimi;
+        });
+        polkuStore.setAmmattiryhmaNimet(ammattiryhmaNimet);
+      }
+    }
 
     const vaaditutOsaamiset = await osaamiset.combine(
       mahdollisuus?.jakaumat?.osaaminen?.arvot,

@@ -190,12 +190,7 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
                   <OpportunityCard
                     key={id}
                     description={getLocalizedText(mahdollisuus.tiivistelma)}
-                    employmentOutlook={2}
-                    hasRestrictions
-                    industryName="TODO: Lorem ipsum dolor"
-                    mostCommonEducationBackground="TODO: Lorem ipsum dolor"
                     name={getLocalizedText(mahdollisuus.otsikko)}
-                    trend="LASKEVA"
                     type={mahdollisuusTyyppi}
                     hideFavorite
                     menuContent={

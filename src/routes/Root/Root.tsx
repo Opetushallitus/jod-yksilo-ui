@@ -131,6 +131,9 @@ const Root = () => {
               {children as React.ReactNode}
             </Link>
           )}
+          showServiceBar
+          serviceBarVariant="yksilo"
+          serviceBarTitle={t('my-competence-path')}
         />
         {error && <ErrorNote error={error} onCloseClick={clearErrorNote} />}
       </header>
