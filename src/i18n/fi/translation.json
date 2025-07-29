@@ -401,7 +401,11 @@
     "by-KOULUTUS": "Koulutuksesta kertynyt osaamiseni",
     "by-MUU_OSAAMINEN": "Muu osaamiseni",
     "by-PATEVYYS": "Vapaa-ajan toiminnasta kertynyt osaamiseni",
-    "by-TOIMENKUVA": "Työpaikoista kertynyt osaamiseni"
+    "by-TOIMENKUVA": "Työpaikoista kertynyt osaamiseni",
+    "missing-KOULUTUS": "Ei osaamisia. Aloita lisäämällä koulutuksia.",
+    "missing-MUU_OSAAMINEN": "Ei osaamisia. Aloita lisäämällä muita osaamisia.",
+    "missing-PATEVYYS": "Ei osaamisia. Aloita lisäämällä vapaa-ajan toimintoja.",
+    "missing-TOIMENKUVA": "Ei osaamisia. Aloita lisäämällä työpaikkoja."
   },
   "my-competences-alphabetically": "Osaamiseni aakkosjärjestyksessä",
   "my-competences-by-sources": "Osaamiseni lähteiden mukaan",
@@ -537,6 +541,7 @@
     },
     "education-history": {
       "description": "Löydät alta koulutushistoriasi. Voit lisätä käsin koulutushistoriaasi sekä siihen liittyviä tutkintoja, kursseja sekä kartoittaa niihin liittyviä osaamisiasi. Voit myös tuoda koulutushistoriasi ja kartoittaa siihen liittyviä osaamisiasi Oma Opintopolun omista opintosuorituksista.",
+      "empty": "Et ole vielä lisännyt koulutuksia.",
       "modals": {
         "competences-description": "Kerro mitä opit koulutuksessa. Voit myös kopioida koulutuksen sisältökuvauksia muualta, jos ne on kirjattu esimerkiksi opinto-oppaaseen, oppilaitoksen verkkosivun kuvaukseen tai ovat tallessa sosiaalisen median palveluissa.",
         "competences-help": "Kirjoittamasi tekstin perusteella sinulle tarjotaan erilaisia avainsanoja alla olevaan listaan. Valitse mielestäsi parhaat avainsanat valitsemalla + ja ne siirtyvät osaamisprofiiliin koulutuksen tuottamiksi osaamisiksi. Voit poistaa väärin valittuja osaamisia valitsemalla x.",
@@ -555,15 +560,16 @@
       "link-go-to-job-opportunities": "Voit tutustua työmahdollisuuksiin täältä",
       "show-filters": "Näytä suodattimet",
       "title": "Suosikkini",
-      "you-have-no-education-opportunities": "Et ole vielä tallentanut koulutusmahdollisuuksia suosikiksi.\nVoit tallentaa koulutusmahdollisuuksia suosikkeihin klikkaamalla sydän-ikonia.",
-      "you-have-no-job-nor-education-opportunities": "Et ole vielä tallentanut työ- tai koulutusmahdollisuuksia suosikiksi.\nVoit tallentaa työ- ja koulutusmahdollisuuksia suosikkeihin klikkaamalla sydän-ikonia.",
-      "you-have-no-job-opportunities": "Et ole vielä tallentanut työmahdollisuuksia suosikiksi.\nVoit tallentaa työmahdollisuuksia suosikkeihin klikkaamalla sydän-ikonia.",
+      "you-have-no-education-opportunities": "Ei suosikkeja. Lisää koulutusmahdollisuuksia suosikeiksi.",
+      "you-have-no-job-nor-education-opportunities": "Ei suosikkeja. Lisää työ-ja koulutusmahdollisuuksia suosikeiksi.",
+      "you-have-no-job-opportunities": "Ei suosikkeja. Lisää työmahdollisuuksia suosikeiksi.",
       "you-have-saved-education-opportunities": "Olet tallentanut {{educationOpportunitiesCount}} koulutusmahdollisuutta.",
       "you-have-saved-job-opportunities": "Olet tallentanut {{jobOpportunitiesCount}} työmahdollisuutta.",
       "you-have-saved-opportunities": "Olet tallentanut {{jobOpportunitiesCount}} työmahdollisuutta ja {{educationOpportunitiesCount}} koulutusmahdollisuutta."
     },
     "free-time-activities": {
       "description": "Löydät alta vapaa-ajan toimintosi. Vapaa-ajan toimintoja voivat olla harrastukset, luottamustoimet sekä erilaiset pätevyydet. Voit lisätä käsin vapaa-ajan toimintojasi sekä kartoittaa niihin liittyviä osaamisiasi.",
+      "empty": "Et ole vielä lisännyt vapaa-ajan toimintoja.",
       "modals": {
         "competences-description": "Kuvaile vapaa-ajan toimintoasi. Kirjoita esimerkiksi mitä olet tehnyt tai millaista tekemistä se on sisältänyt. Osaamistunnistajamme ehdottaa sinulle muodostunutta osaamista, jota voit valita osaamisprofiiliisi.",
         "competences-placeholder": "Opin tunnistamaan ihmisten osaamisia ja sanoittamaan niitä...",
@@ -581,6 +587,7 @@
     "interests": {
       "add-interests": "Lisää kiinnostuksen kohteita",
       "description": "Löydät alta kaikki kiinnostuksen kohteesi, jotka olet kartoittanut itsellesi ja tallentanut ne profiiliisi. Kiinnostuksen kohteet ryhmitellään tyypin mukaan.",
+      "empty": "Et ole vielä lisännyt kiinnostuksen kohteita.",
       "edit-interests": "Muokkaa kiinnostuksen kohteita",
       "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus kiinnostuksitani",
       "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin kiinnostuksiasi. Jos käytät palvelua suomeksi kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.",
@@ -706,6 +713,7 @@
     },
     "something-else": {
       "description": "Löydät alta muut osaamisesi, joita olet kartoittanut esimerkiksi palvelun kartoitustyökaluilla ja tallentanut ne profiiliisi. Voit lisätä ja poistaa osaamisia Muokkaa osaamisia painikkeella.",
+      "empty": "Et ole vielä lisännyt muita osaamisia.",
       "description-placeholder": "Kirjoita tähän osaamisesi",
       "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus osaamisestani",
       "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin osaamistasi. Jos käytät palvelua suomeksi kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.",
@@ -714,6 +722,7 @@
     },
     "work-history": {
       "description": "Löydät alta työhistoriasi. Voit lisätä käsin työhistoriaasi sekä siihen liittyviä työtehtäviä sekä kartoittaa niihin liittyviä osaamisiasi. Voit myös tuoda työhistoriasi ja siihen liittyvät osaamisesi Työmarkkinatorin työnhakuprofiilistasi, jos sinulla on sellainen käytössä.",
+      "empty": "Et ole vielä lisännyt työpaikkoja.",
       "modals": {
         "competences-description": "Kirjaa työtehtävät-kenttään työtehtäviäsi vapaasti tekstillä. Voit myös kopioida työtehtäväsi muualta, jos ne on kirjattu esimerkiksi ansioluetteloon, henkilöstöjärjestelmään tai ovat tallessa sosiaalisen median palveluissa.",
         "competences-help": "Kirjoittamasi tekstin perusteella sinulle tarjotaan erilaisia avainsanoja alla olevaan listaan. Valitse mielestäsi parhaat avainsanat valitsemalla + ja ne siirtyvät osaamisprofiiliin työpaikkasi tuottamiksi osaamisiksi. Voit poistaa väärin valittuja osaamisia valitsemalla x.",

@@ -2,10 +2,11 @@ import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/comp
 import { useModal } from '@/hooks/useModal';
 import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonantajaModal';
 import { WorkHistoryWizard } from '@/routes/Profile/WorkHistory/WorkHistoryWizard';
-import { JodArrowRight, JodWork } from '@jod/design-system/icons';
+import { EmptyState } from '@jod/design-system';
+import { JodWork } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import AddOrEditToimenkuvaModal from './modals/AddOrEditToimenkuvaModal';
 import { Tyopaikka, getWorkHistoryTableRows } from './utils';
@@ -22,10 +23,7 @@ const WorkHistory = () => {
       }
     >;
   };
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const title = t('profile.work-history.title');
   const [rows, setRows] = React.useState(getWorkHistoryTableRows(tyopaikat, osaamisetMap));
   const { showModal } = useModal();
@@ -61,17 +59,11 @@ const WorkHistory = () => {
         {title}
       </h1>
       <p className="mb-5 text-body-lg">{t('profile.work-history.description')}</p>
-      <div className="mb-8">
-        <Link
-          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
-          className="text-button-md hover:underline text-accent mt-4"
-        >
-          <div className="flex items-center gap-2">
-            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <JodArrowRight />
-          </div>
-        </Link>
-      </div>
+      {rows.length === 0 && (
+        <div className="mt-6 mb-7">
+          <EmptyState text={t('profile.work-history.empty')} />
+        </div>
+      )}
       <ExperienceTable
         mainColumnHeader={t('work-history.workplace-or-job-description')}
         addNewLabel={t('work-history.add-new-workplace')}
