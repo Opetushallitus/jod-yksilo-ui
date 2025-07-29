@@ -1,6 +1,7 @@
 import { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
 import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
+import loader from '@/routes/Profile/MyGoals/loader';
 import { getTypeSlug } from '@/routes/Profile/utils';
 import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { getLocalizedText } from '@/utils';
@@ -8,7 +9,7 @@ import { Button } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import MyGoalsOpportunityCardMenu from './MyGoalsOpportunityCardMenu';
 import TavoiteInput from './TavoiteInput';
@@ -27,6 +28,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
   const { mahdollisuusDetails, upsertPaamaara } = usePaamaaratStore(
     useShallow((state) => ({ mahdollisuusDetails: state.mahdollisuusDetails, upsertPaamaara: state.upsertPaamaara })),
   );
+  const loaderData = useLoaderData<Awaited<ReturnType<typeof loader>>>();
 
   const getMahdollisuusDetails = React.useCallback(
     (id: string) => mahdollisuusDetails.find((item) => item.id === id),
@@ -68,12 +70,10 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
               <OpportunityCard
                 to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${mahdollisuusId}`}
                 description={getLocalizedText(details?.tiivistelma)}
-                employmentOutlook={2}
-                hasRestrictions
-                industryName="TODO: Lorem ipsum dolor"
-                mostCommonEducationBackground="TODO: Lorem ipsum dolor"
+                ammattiryhma={
+                  details?.ammattiryhma ? getLocalizedText(loaderData.ammattiryhmaNimet[details.ammattiryhma]) : ''
+                }
                 name={getLocalizedText(details?.otsikko)}
-                trend="LASKEVA"
                 type={mahdollisuusTyyppi}
                 menuContent={
                   <MyGoalsOpportunityCardMenu

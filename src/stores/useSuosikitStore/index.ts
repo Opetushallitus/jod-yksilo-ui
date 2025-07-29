@@ -1,29 +1,31 @@
+import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
+import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
+import type { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
-import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
+import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import { paginate, sortByProperty } from '@/utils';
-import { PageChangeDetails } from '@jod/design-system';
+import type { PageChangeDetails } from '@jod/design-system';
 import { create } from 'zustand';
 
 interface FavoritesState {
-  suosikit: components['schemas']['SuosikkiDto'][];
-  suosikitLoading: boolean;
+  ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
+  deleteSuosikki: (kohdeId: string) => Promise<void>;
+  excludedIds: string[];
+  fetchPage: (details: PageChangeDetails) => Promise<void>;
+  fetchSuosikit: () => Promise<void>;
+  filters: MahdollisuusTyyppi[];
+  pageData: TypedMahdollisuus[];
   pageNr: number;
   pageSize: number;
+  reset: () => void;
+  setExcludedIds: (state: string[]) => void;
+  setFilters: (state: MahdollisuusTyyppi[]) => void;
+  setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
+  suosikit: components['schemas']['SuosikkiDto'][];
+  suosikitLoading: boolean;
   totalItems: number;
   totalPages: number;
-  pageData: TypedMahdollisuus[];
-  filters: MahdollisuusTyyppi[];
-  excludedIds: string[];
-
-  reset: () => void;
-  setFilters: (state: MahdollisuusTyyppi[]) => void;
-  setExcludedIds: (state: string[]) => void;
-  setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
-  fetchSuosikit: () => Promise<void>;
-  deleteSuosikki: (kohdeId: string) => Promise<void>;
-  fetchPage: (details: PageChangeDetails) => Promise<void>;
 }
 
 const filterSuosikit = (
@@ -68,6 +70,7 @@ const initialState: Pick<
 
 export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
   ...initialState,
+  ammattiryhmaNimet: {},
   reset: () => {
     set(initialState);
   },
@@ -157,45 +160,41 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
     const hasTyomahdollisuus = paginated.findIndex((s) => s.tyyppi === 'TYOMAHDOLLISUUS') > -1;
     const hasKoulutusMahdollisuus = paginated.findIndex((s) => s.tyyppi === 'KOULUTUSMAHDOLLISUUS') > -1;
 
-    const [tyomahdollisuudetResponse, koulutusmahdollisuudetResponse] = await Promise.all([
+    const [typedTyomahdollisuudet, typedKoulutusmahdollisuudet] = await Promise.all([
       hasTyomahdollisuus
-        ? client.GET('/api/tyomahdollisuudet', {
-            params: {
-              query: {
-                id: paginated.filter((item) => item.tyyppi === 'TYOMAHDOLLISUUS').map((item) => item.kohdeId),
-              },
-            },
-          })
-        : { data: undefined },
+        ? getTypedTyoMahdollisuusDetails(
+            paginated.filter((item) => item.tyyppi === 'TYOMAHDOLLISUUS').map((item) => item.kohdeId),
+          )
+        : [],
 
       hasKoulutusMahdollisuus
-        ? client.GET('/api/koulutusmahdollisuudet', {
-            params: {
-              query: {
-                id: paginated.filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS').map((item) => item.kohdeId),
-              },
-            },
-          })
-        : { data: undefined },
+        ? getTypedKoulutusMahdollisuusDetails(
+            paginated.filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS').map((item) => item.kohdeId),
+          )
+        : [],
     ]);
 
-    const { data: tyomahdollisuudet } = tyomahdollisuudetResponse;
-    const { data: koulutusmahdollisuudet } = koulutusmahdollisuudetResponse;
-
-    const typedTyomahdollisuudet = (tyomahdollisuudet?.sisalto ?? []).map((tm) => ({
-      ...tm,
-      mahdollisuusTyyppi: 'TYOMAHDOLLISUUS',
-    }));
-    const typedKoulutusmahdollisuudet = (koulutusmahdollisuudet?.sisalto ?? []).map((tm) => ({
-      ...tm,
-      mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS',
-    }));
     const sortedResultBySuosikkiOrder = [...typedTyomahdollisuudet, ...typedKoulutusmahdollisuudet].sort(
       (a, b) =>
         suosikit.findIndex((item) => item.kohdeId === b.id) - suosikit.findIndex((item) => item.kohdeId === a.id),
-    ) as TypedMahdollisuus[];
+    );
+
+    const ammattiryhmaNimet = { ...get().ammattiryhmaNimet };
+
+    const ammattiryhmaUris = sortedResultBySuosikkiOrder
+      .filter((m) => m.ammattiryhma && !ammattiryhmaNimet?.[m.ammattiryhma])
+      .map((m) => m.ammattiryhma!);
+
+    if (ammattiryhmaUris.length > 0) {
+      const ammattiryhmat = await ammatit.find(ammattiryhmaUris);
+
+      ammattiryhmat.forEach((ar) => {
+        ammattiryhmaNimet[ar.uri] = ar.nimi;
+      });
+    }
 
     set({
+      ammattiryhmaNimet,
       pageData: sortedResultBySuosikkiOrder,
       pageNr: safePageNr,
       totalItems: filteredSuosikit.length,
