@@ -6,7 +6,7 @@ import { filterValues } from '@/routes/Tool/utils.ts';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
-import { Button, Modal, Pagination, useMediaQueries } from '@jod/design-system';
+import { Button, EmptyState, Modal, Pagination, useMediaQueries } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -197,7 +197,9 @@ const Favorites = () => {
       {getFavoriteCount() > 0 ? (
         <p className="mt-2">{getFavoriteCountText}</p>
       ) : (
-        <p className="mt-2 whitespace-pre-line">{t(descriptionKeys[selectedFilter])}</p>
+        <div className="mt-5 mb-6">
+          <EmptyState text={t(descriptionKeys[selectedFilter])} />
+        </div>
       )}
 
       <div className="mt-4 mb-4">

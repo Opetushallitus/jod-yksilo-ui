@@ -7,12 +7,12 @@ import { useModal } from '@/hooks/useModal';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Tag, Textarea } from '@jod/design-system';
-import { JodArrowRight, JodOther } from '@jod/design-system/icons';
+import { Button, EmptyState, Tag, Textarea } from '@jod/design-system';
+import { JodOther } from '@jod/design-system/icons';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { z } from 'zod';
 import { ProfileNavigationList } from '../components';
 
@@ -86,17 +86,12 @@ const SomethingElse = () => {
         {title}
       </h1>
       <p className="mb-5 text-body-lg">{t('profile.something-else.description')}</p>
-      <div className="mb-8">
-        <Link
-          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
-          className="text-button-md hover:underline text-accent mt-4"
-        >
-          <div className="flex items-center gap-2">
-            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <JodArrowRight />
-          </div>
-        </Link>
-      </div>
+      {muuOsaaminen.length === 0 && (
+        <div className="mt-6 mb-7">
+          <EmptyState text={t('profile.something-else.empty')} />
+        </div>
+      )}
+
       {muuOsaaminen.length > 0 && (
         <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
           {t('profile.something-else.my-other-comptetences')}

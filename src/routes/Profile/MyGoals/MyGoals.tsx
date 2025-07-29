@@ -2,7 +2,7 @@ import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
-import { Button } from '@jod/design-system';
+import { Button, EmptyState } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -87,7 +87,9 @@ const MyGoals = () => {
       </div>
       {suosikitIsEmpty && (
         <div className="flex flex-col gap-3 my-3">
-          <p className="text-body-lg">{t('profile.my-goals.no-favorites-selected')}</p>
+          <div className="mt-6 mb-7">
+            <EmptyState text={t('profile.my-goals.no-favorites-selected')} />
+          </div>
           <Link
             to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
             type="button"

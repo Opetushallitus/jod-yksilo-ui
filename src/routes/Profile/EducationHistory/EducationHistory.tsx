@@ -6,11 +6,11 @@ import { useModal } from '@/hooks/useModal/index.ts';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal';
-import { Button } from '@jod/design-system';
-import { JodArrowRight, JodSkills } from '@jod/design-system/icons';
+import { Button, EmptyState } from '@jod/design-system';
+import { JodSkills } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData, useRevalidator, useSearchParams } from 'react-router';
+import { useLoaderData, useRevalidator, useSearchParams } from 'react-router';
 import { ProfileNavigationList } from '../components/index.tsx';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
 import ImportKoulutusResultModal from './modals/ImportKoulutusResultModal';
@@ -29,10 +29,7 @@ const EducationHistory = () => {
       }
     >;
   };
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const title = t('profile.education-history.title');
 
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>(
@@ -256,17 +253,11 @@ const EducationHistory = () => {
         {title}
       </h1>
       <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>
-      <div className="mb-8">
-        <Link
-          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
-          className="text-button-md hover:underline text-accent mt-4"
-        >
-          <div className="flex items-center gap-2">
-            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <JodArrowRight />
-          </div>
-        </Link>
-      </div>
+      {rows.length === 0 && (
+        <div className="mt-6 mb-7">
+          <EmptyState text={t('profile.education-history.empty')} />
+        </div>
+      )}
       <ExperienceTable
         mainColumnHeader={t('education-history.education-provider-or-education')}
         addNewNestedLabel={t('education-history.add-studies-to-this-education')}

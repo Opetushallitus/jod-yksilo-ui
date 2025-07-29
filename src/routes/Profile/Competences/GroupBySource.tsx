@@ -1,7 +1,7 @@
 import { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { getLocalizedText } from '@/utils';
-import { Tag } from '@jod/design-system';
+import { EmptyState, Tag } from '@jod/design-system';
 import { JodArrowRight, JodInterests, JodOther, JodSkills, JodWork } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -101,6 +101,7 @@ export const GroupBySource = ({
                 {competenceIcon(competence)}
                 {t(`my-competences.by-${competence}`)}
               </div>
+
               {(Array.isArray(filters[competence]) || localizedMuutOsaamisetVapaateksti.length > 0) &&
               filters[competence].some((filter) => filter.checked) ? (
                 <div>
@@ -162,19 +163,25 @@ export const GroupBySource = ({
                   </Link>
                 </div>
               ) : (
-                <Link
-                  to={competenceLink(competence)}
-                  key={competence}
-                  type="button"
-                  className="text-button-md hover:underline text-accent ml-3"
-                >
-                  <div className="flex flex-row justify-start">
-                    <div className="flex items-center gap-2">
-                      {t('profile.competences.add')}
-                      <JodArrowRight />
-                    </div>
+                <>
+                  <div className="mt-6 mb-7">
+                    <EmptyState text={t(`my-competences.missing-${competence}`)} />
                   </div>
-                </Link>
+
+                  <Link
+                    to={competenceLink(competence)}
+                    key={competence}
+                    type="button"
+                    className="text-button-md hover:underline text-accent ml-3"
+                  >
+                    <div className="flex flex-row justify-start">
+                      <div className="flex items-center gap-2">
+                        {t('profile.competences.add')}
+                        <JodArrowRight />
+                      </div>
+                    </div>
+                  </Link>
+                </>
               )}
             </React.Fragment>
           );
