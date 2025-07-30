@@ -3,6 +3,7 @@ import type { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useModal } from '@/hooks/useModal';
+import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -127,14 +128,13 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
             <Button
               className="whitespace-nowrap"
               variant="white-delete"
-              label={`${t('delete')}`}
+              label={`${t('work-history.delete-work-history')}`}
               onClick={() => {
                 showDialog({
                   title: t('work-history.delete-work-history'),
-                  description: t('work-history.confirm-delete-work-history'),
-                  confirmText: t('delete'),
-                  cancelText: t('cancel'),
-                  variant: 'destructive',
+                  description: t('work-history.confirm-delete-work-history', {
+                    name: getLocalizedText(methods.getValues('nimi')),
+                  }),
                   onConfirm: deleteTyopaikka,
                 });
               }}

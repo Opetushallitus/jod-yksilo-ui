@@ -1,10 +1,10 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
-import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
+import { type DatePickerTranslations, getDatePickerTranslations, getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -322,15 +322,14 @@ const AddOrEditKoulutusModal = ({
               <Button
                 variant="white-delete"
                 className="whitespace-nowrap"
-                label={`${t('delete')}`}
+                label={`${t('education-history.delete-degree')}`}
                 onClick={() =>
                   showDialog({
                     title: t('education-history.delete-degree'),
                     onConfirm: () => void deleteKoulutus(),
-                    confirmText: t('delete'),
-                    cancelText: t('cancel'),
-                    variant: 'destructive',
-                    description: t('education-history.confirm-delete-degree'),
+                    description: t('education-history.confirm-delete-degree', {
+                      name: getLocalizedText(methods.getValues('nimi')),
+                    }),
                   })
                 }
               />

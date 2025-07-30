@@ -174,7 +174,6 @@ const ProposeVaiheModal = ({ isOpen, onClose, vaiheIndex }: ProposeVaiheModalPro
                     description: t('profile.paths.cancel-confirmation-text'),
                     confirmText: t('close'),
                     cancelText: t('profile.paths.continue-editing'),
-                    variant: 'destructive',
                     onConfirm: cancel,
                   });
                 }}

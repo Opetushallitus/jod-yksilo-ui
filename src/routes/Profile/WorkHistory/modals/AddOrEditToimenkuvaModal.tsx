@@ -1,10 +1,10 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
-import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
+import { type DatePickerTranslations, getDatePickerTranslations, getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -315,15 +315,14 @@ const AddOrEditToimenkuvaModal = ({
               <Button
                 className="whitespace-nowrap"
                 variant="white-delete"
-                label={`${t('delete')}`}
+                label={`${t('work-history.delete-job-description')}`}
                 onClick={() => {
                   showDialog({
                     title: t('work-history.delete-job-description'),
                     onConfirm: () => void deleteToimenkuva(),
-                    confirmText: t('delete'),
-                    cancelText: t('cancel'),
-                    variant: 'destructive',
-                    description: t('work-history.confirm-delete-job-description'),
+                    description: t('work-history.confirm-delete-job-description', {
+                      name: getLocalizedText(methods.getValues('nimi')),
+                    }),
                     closeParentModal: true,
                   });
                 }}

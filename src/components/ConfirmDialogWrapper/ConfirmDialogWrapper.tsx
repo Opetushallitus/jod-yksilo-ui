@@ -1,75 +1,22 @@
 import { useModal } from '@/hooks/useModal';
-import { Button, ConfirmDialog } from '@jod/design-system';
+import { Button, ConfirmDialog, Spinner } from '@jod/design-system';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-const isPromise = (value: unknown): value is Promise<void> => {
-  return !!value && typeof (value as Promise<void>).then === 'function';
+const isPromise = (func: (() => Promise<void>) | (() => void)) => {
+  return func.constructor.name === 'AsyncFunction' || func instanceof Promise;
 };
 
 type ConfirmDialogProps = React.ComponentProps<typeof ConfirmDialog>;
-type FooterProps = Pick<
-  ConfirmDialogWrapperProps,
-  'variant' | 'closeParentModal' | 'cancelText' | 'confirmText' | 'onConfirm'
-> & {
-  closeActiveModal: () => void;
-  closeAllModals: () => void;
-};
-
-const getDefaultFooter = ({
-  cancelText,
-  closeActiveModal,
-  closeAllModals,
-  closeParentModal,
-  confirmText,
-  onConfirm,
-  variant,
-}: FooterProps) => {
-  const FooterContent = (hideDialog: () => void) => {
-    return (
-      <>
-        <Button
-          label={cancelText ?? ''}
-          onClick={() => {
-            hideDialog();
-            closeActiveModal();
-          }}
-        />
-        <Button
-          label={confirmText ?? ''}
-          onClick={async () => {
-            if (onConfirm) {
-              const result = onConfirm();
-
-              if (isPromise(result)) {
-                await result;
-              }
-            }
-            hideDialog();
-            // There aren't any places in the UI where there's more than 2 modals open at the same time,
-            // so we can safely close all modals when closeParentModal is true.
-            // Most likely scenario for closing all modals is when the user deletes an entity from it's edit modal.
-            if (closeParentModal) {
-              closeAllModals();
-            } else {
-              closeActiveModal();
-            }
-          }}
-          variant={variant === 'destructive' ? 'red-delete' : 'accent'}
-          serviceVariant="yksilo"
-        />
-      </>
-    );
-  };
-  return FooterContent;
-};
+type MaybePromise<T> = T | Promise<T>;
 
 export type ConfirmDialogWrapperProps = Omit<ConfirmDialogProps, 'children'> & {
   /** Closes parent modals on confirmation */
   closeParentModal?: boolean;
   /** Content component for the ConfirmationDialog */
   content?: React.ReactNode | (() => React.ReactNode);
-  /** onConfirm handler */
-  onConfirm?: () => void | Promise<void>;
+  /** onConfirm handler. If it's a promise/async function, it will be awaited and a loading spinner will be shown in the confirm button */
+  onConfirm?: () => MaybePromise<void>;
 };
 
 /**
@@ -93,31 +40,72 @@ export const ConfirmDialogWrapper = ({
   description,
   cancelText,
   confirmText,
-  variant,
+  variant = 'destructive',
   closeParentModal,
   onConfirm,
   footer,
   content,
 }: ConfirmDialogWrapperProps) => {
   const { closeActiveModal, closeAllModals } = useModal();
+  const { t } = useTranslation();
+  const defaultCancelText = t('cancel');
+  const defaultConfirmText = title;
+  const [loading, setLoading] = React.useState(false);
+  // eslint-disable-next-line react/no-unstable-nested-components
+  const DefaultFooter = (hideDialog: () => void) => (
+    <>
+      <Button
+        label={cancelText ?? defaultCancelText}
+        onClick={() => {
+          if (loading) {
+            return;
+          }
+          hideDialog();
+          closeActiveModal();
+        }}
+      />
+      <Button
+        label={confirmText ?? defaultConfirmText}
+        iconSide="right"
+        icon={loading ? <Spinner size={24} color="white" /> : undefined}
+        onClick={async () => {
+          if (loading) {
+            return;
+          }
+
+          if (onConfirm) {
+            if (isPromise(onConfirm)) {
+              const fn = onConfirm as () => Promise<void>;
+              setLoading(true);
+              await fn();
+            } else {
+              onConfirm();
+            }
+          }
+
+          setLoading(false);
+          hideDialog();
+          // There aren't any places in the UI where there's more than 2 modals open at the same time,
+          // so we can safely close all modals when closeParentModal is true.
+          // Most likely scenario for closing all modals is when the user deletes an entity from it's edit modal.
+          if (closeParentModal) {
+            closeAllModals();
+          } else {
+            closeActiveModal();
+          }
+        }}
+        variant={variant === 'destructive' ? 'red-delete' : 'accent'}
+        serviceVariant="yksilo"
+      />
+    </>
+  );
 
   return (
     <ConfirmDialog
       title={title}
       description={description}
       content={typeof content === 'function' ? content() : content}
-      footer={
-        footer ??
-        getDefaultFooter({
-          cancelText,
-          closeActiveModal,
-          closeAllModals,
-          closeParentModal,
-          confirmText,
-          onConfirm,
-          variant,
-        })
-      }
+      footer={footer ?? DefaultFooter}
     >
       {ShowDialogWrapper}
     </ConfirmDialog>

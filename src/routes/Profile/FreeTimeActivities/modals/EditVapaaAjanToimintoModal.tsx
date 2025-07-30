@@ -4,6 +4,7 @@ import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
+import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -134,11 +135,13 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
             <Button
               className="whitespace-nowrap"
               variant="white-delete"
-              label={`${t('delete')}`}
+              label={`${t('free-time-activities.delete-free-time-activity')}`}
               onClick={() => {
                 showDialog({
                   title: t('free-time-activities.delete-free-time-activity'),
-                  description: t('free-time-activities.confirm-delete-free-time-activity'),
+                  description: t('free-time-activities.confirm-delete-free-time-activity', {
+                    name: getLocalizedText(methods.getValues('nimi')),
+                  }),
                   onConfirm: deleteToiminto,
                   variant: 'destructive',
                   confirmText: t('delete'),

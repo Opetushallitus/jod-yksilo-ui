@@ -103,6 +103,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                           paamaaraId={pm.id}
                           suunnitelmaId={polku.id}
                           onDelete={() => removePolkuFromStore(pm.id, polku.id)}
+                          name={polku.nimi}
                         />
                       </div>
                     ))}

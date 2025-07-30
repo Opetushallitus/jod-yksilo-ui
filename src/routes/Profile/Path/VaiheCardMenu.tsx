@@ -18,7 +18,15 @@ const ListItem = ({ label, onClick, disabled }: { label: string; onClick: () => 
 /**
  * A menu component to use with "polun vaihe" card
  */
-const VaiheCardMenu = ({ vaiheId, openVaiheModal }: { vaiheId: string; openVaiheModal: () => void }) => {
+const VaiheCardMenu = ({
+  vaiheId,
+  vaiheNimi,
+  openVaiheModal,
+}: {
+  vaiheId: string;
+  openVaiheModal: () => void;
+  vaiheNimi: string;
+}) => {
   const { t } = useTranslation();
   const revalidator = useRevalidator();
   const { showDialog } = useModal();
@@ -49,11 +57,8 @@ const VaiheCardMenu = ({ vaiheId, openVaiheModal }: { vaiheId: string; openVaihe
           label={t('profile.paths.delete-phase')}
           onClick={() =>
             showDialog({
-              title: t('profile.paths.delete-phase-title'),
-              description: t('profile.paths.delete-phase-description'),
-              confirmText: t('delete'),
-              cancelText: t('cancel'),
-              variant: 'destructive',
+              title: t('profile.paths.delete-phase'),
+              description: t('profile.paths.delete-phase-description', { name: vaiheNimi }),
               onConfirm: () => void deleteVaihe(),
             })
           }

@@ -234,9 +234,6 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
                   showDialog({
                     title: t('education-history-import.summary-modal.cancel-modal.title'),
                     description: t('education-history-import.summary-modal.cancel-modal.description'),
-                    confirmText: t('yes'),
-                    cancelText: t('cancel'),
-                    variant: 'destructive',
                     onConfirm: closeActiveModal,
                   });
                 }

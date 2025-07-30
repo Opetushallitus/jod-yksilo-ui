@@ -1,15 +1,18 @@
 import { client } from '@/api/client';
+import type { components } from '@/api/schema';
 import { useModal } from '@/hooks/useModal';
+import { getLocalizedText } from '@/utils';
 import { Button } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 
 interface DeletePolkuButtonProps {
+  name?: string | components['schemas']['LokalisoituTeksti'];
   paamaaraId?: string;
   suunnitelmaId?: string;
   className?: string;
   onDelete?: () => void;
 }
-const DeletePolkuButton = ({ paamaaraId, suunnitelmaId, className, onDelete }: DeletePolkuButtonProps) => {
+const DeletePolkuButton = ({ paamaaraId, suunnitelmaId, className, name, onDelete }: DeletePolkuButtonProps) => {
   const { t } = useTranslation();
   const { showDialog } = useModal();
 
@@ -26,6 +29,8 @@ const DeletePolkuButton = ({ paamaaraId, suunnitelmaId, className, onDelete }: D
     }
   };
 
+  const polkuName = typeof name === 'string' ? name : getLocalizedText(name);
+
   return paamaaraId && suunnitelmaId ? (
     <div className={className ?? ''}>
       <Button
@@ -33,11 +38,8 @@ const DeletePolkuButton = ({ paamaaraId, suunnitelmaId, className, onDelete }: D
         variant="white-delete"
         onClick={() => {
           showDialog({
-            title: t('profile.paths.delete-path-title'),
-            description: t('profile.paths.delete-path-description'),
-            confirmText: t('delete'),
-            cancelText: t('cancel'),
-            variant: 'destructive',
+            title: t('profile.paths.delete-path'),
+            description: t('profile.paths.delete-path-description', { name: polkuName }),
             onConfirm: deletePolku,
           });
         }}

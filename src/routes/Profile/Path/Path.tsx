@@ -551,6 +551,7 @@ const Path = () => {
               paamaaraId={paamaaraId}
               suunnitelmaId={suunnitelmaId}
               onDelete={closePolku}
+              name={getLocalizedText(polku?.nimi)}
               className="my-9"
             />
           </div>

@@ -146,9 +146,6 @@ const MyGoalsOpportunityCardMenu = ({
               showDialog({
                 title: t('profile.my-goals.delete-goal'),
                 description: t('profile.my-goals.delete-goal-description'),
-                confirmText: t('delete'),
-                cancelText: t('cancel'),
-                variant: 'destructive',
                 onConfirm: () => onDeletePaamaara(paamaaraId),
               });
             }}
