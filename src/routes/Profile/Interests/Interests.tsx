@@ -1,5 +1,5 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { ESCO_OCCUPATION_PREFIX, formErrorMessage, LIMITS } from '@/constants';
 import { useModal } from '@/hooks/useModal';
@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 import { z } from 'zod';
-import { ProfileNavigationList } from '../components';
+import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 
 const Interests = () => {
   const {
@@ -88,7 +88,7 @@ const Interests = () => {
       }
     >
       <title>{title}</title>
-      <h1 className="text-heading-1 mb-5">{title}</h1>
+      <ProfileSectionTitle type="KIINNOSTUS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.interests.description')}</p>
       {sortedSkills.length === 0 && (
         <div className="mt-6 mb-7">
@@ -133,7 +133,7 @@ const Interests = () => {
       )}
       <div className="flex pt-7 mb-8">
         <Button
-          variant="white"
+          variant="accent"
           label={t(sortedSkills.length > 0 ? 'profile.interests.edit-interests' : 'profile.interests.add-interests')}
           onClick={() => {
             showModal(EditKiinnostusModal, { data: kiinnostukset });

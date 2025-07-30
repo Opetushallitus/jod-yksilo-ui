@@ -185,7 +185,6 @@
     "activity-content": "Toiminnon sisältö",
     "add-new-activity": "Lisää uusi toiminto",
     "add-new-free-time-activity": "Lisää uusi vapaa-ajan toiminto",
-    "add-new-free-time-theme-and-activities": "Lisää uusi vapaa-ajan teema ja toimintoja",
     "confirm-delete-free-time-activity": "Haluatko varmasti poistaa vapaa-ajan toiminnon? Jos vapaa-ajantoimintoon ei liity poiston jälkeen enää yhtään pätevyyttä, myös vapaa-ajantoiminto poistetaan.",
     "confirm-delete-proficiency": "Haluatko varmasti poistaa pätevyyden?",
     "delete-free-time-activity": "Poista vapaa-ajan toiminto",
@@ -536,6 +535,12 @@
       "group-by-alphabet": "Aakkosellisesti",
       "group-by-source": "Lähteiden mukaan",
       "group-by-theme": "Teemoittain",
+      "move-to-type": {
+        "KOULUTUS": "Siirry koulutuksiini",
+        "MUU_OSAAMINEN": "Siirry muihin osaamisiini",
+        "PATEVYYS": "Siirry vapaa-ajan toimintoihini",
+        "TOIMENKUVA": "Siirry työpaikkoihini"
+      },
       "show-filters": "Näytä suodattimet",
       "title": "Osaamiseni"
     },
@@ -555,11 +560,9 @@
     "favorites": {
       "description": "Suosikeiksi tallentamasi koulutus- ja työmahdollisuudet löytyvät täältä. Voit tallentaa lisää mahdollisuuksia suosikeiksi kohtautuskoneen tulosnäkymässä. Voit poistaa suosikkeja sekä luoda yhdestä tai useammasta suosikista koulutus- ja urapolkusuunnitelman.",
       "job-and-education-opportunities": "Työ- ja koulutusmahdollisuudet",
-      "link-go-to-education-opportunities": "Voit tutustua koulutusmahdollisuuksiin täältä",
-      "link-go-to-job-and-education-opportunities": "Voit tutustua työ- ja koulutusmahdollisuuksiin täältä",
-      "link-go-to-job-opportunities": "Voit tutustua työmahdollisuuksiin täältä",
       "show-filters": "Näytä suodattimet",
       "title": "Suosikkini",
+      "move-to-job-and-education-opportunities": "Siirry työ- ja koulutusmahdollisuuksiin",
       "you-have-no-education-opportunities": "Ei suosikkeja. Lisää koulutusmahdollisuuksia suosikeiksi.",
       "you-have-no-job-nor-education-opportunities": "Ei suosikkeja. Lisää työ-ja koulutusmahdollisuuksia suosikeiksi.",
       "you-have-no-job-opportunities": "Ei suosikkeja. Lisää työmahdollisuuksia suosikeiksi.",
@@ -594,7 +597,7 @@
       "free-form-text-for-interests": "Vapaa teksti kiinnostuksille",
       "occupations-that-interest-me": "Ammatit, jotka kiinnostavat minua",
       "skills-that-interest-me": "Osaamiset, jotka kiinnostavat minua",
-      "title": "Kiinnostukseni",
+      "title": "Kiinnostuksen kohteeni",
       "write-what-interests-you": "Kirjoita, mikä sinua kiinnostaa"
     },
     "landing-page": {

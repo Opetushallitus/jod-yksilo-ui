@@ -1,6 +1,6 @@
 import { client } from '@/api/client';
-import { OsaaminenDto } from '@/api/osaamiset';
-import { components } from '@/api/schema';
+import type { OsaaminenDto } from '@/api/osaamiset';
+import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useModal } from '@/hooks/useModal';
@@ -8,13 +8,12 @@ import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaamin
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, EmptyState, Tag, Textarea } from '@jod/design-system';
-import { JodOther } from '@jod/design-system/icons';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 import { z } from 'zod';
-import { ProfileNavigationList } from '../components';
+import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 
 const SomethingElse = () => {
   const {
@@ -81,10 +80,7 @@ const SomethingElse = () => {
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
-        <JodOther size={36} className="text-secondary-gray mr-2" />
-        {title}
-      </h1>
+      <ProfileSectionTitle type="MUU_OSAAMINEN" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.something-else.description')}</p>
       {muuOsaaminen.length === 0 && (
         <div className="mt-6 mb-7">

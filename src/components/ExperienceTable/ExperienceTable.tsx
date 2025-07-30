@@ -275,7 +275,7 @@ export const ExperienceTable = ({
       )}
       {onAddClick && addNewLabel && (
         <div className="mb-[84px]">
-          <Button variant="white" label={addNewLabel} onClick={onAddClick} />
+          <Button variant="accent" label={addNewLabel} onClick={onAddClick} />
         </div>
       )}
     </div>

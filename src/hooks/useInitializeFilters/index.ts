@@ -1,7 +1,7 @@
 import { components } from '@/api/schema';
-import { CompetenceFilter, FILTERS_ORDER, FiltersType } from '@/routes/Profile/Competences/constants';
+import { type CompetenceSourceType, FILTERS_ORDER, type FiltersType } from '@/routes/Profile/Competences/constants';
 import { CompetenceDataGroup } from '@/routes/Profile/Competences/loader';
-import { Kokemus } from '@/routes/types';
+import type { Kokemus } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
 import React from 'react';
 
@@ -15,7 +15,7 @@ const mapExperienceToFilter = (locale: string) => (currentFilters: FiltersType) 
 });
 
 const mapCompetenceDataGroupToFilter =
-  (locale: string) => (currentFilters: FiltersType, type: CompetenceFilter) => (cdg: CompetenceDataGroup) => ({
+  (locale: string) => (currentFilters: FiltersType, type: CompetenceSourceType) => (cdg: CompetenceDataGroup) => ({
     label: cdg.nimi[locale] ?? '',
     value: cdg.data?.map((d) => d.id ?? '') ?? [],
     checked:

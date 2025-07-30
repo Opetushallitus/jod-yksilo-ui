@@ -1,5 +1,5 @@
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
-import { CompetenceFilter, FiltersType } from '@/routes/Profile/Competences/constants';
+import type { CompetenceSourceType, FiltersType } from '@/routes/Profile/Competences/constants';
 import { Accordion, Checkbox } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -42,7 +42,7 @@ export const CompetenceFilters = ({ filterKeys, selectedFilters, setSelectedFilt
   const { t, i18n } = useTranslation();
 
   // Toggle single filter item
-  const toggleSingleFilter = (type: CompetenceFilter, index: number) => () => {
+  const toggleSingleFilter = (type: CompetenceSourceType, index: number) => () => {
     const newFilters = { ...selectedFilters };
     newFilters[type][index] = newFilters[type][index] ?? { checked: true };
     newFilters[type][index].checked = !newFilters[type][index].checked;
@@ -50,13 +50,13 @@ export const CompetenceFilters = ({ filterKeys, selectedFilters, setSelectedFilt
   };
 
   // Check if any filter of a specific type is checked
-  const isFilterTypeChecked = (type: CompetenceFilter) => {
+  const isFilterTypeChecked = (type: CompetenceSourceType) => {
     const filter = selectedFilters[type];
     return (filter.length > 0 && filter?.some((item) => item.checked)) ?? false;
   };
 
   // Toggle all filters of a specific type
-  const toggleFiltersByType = (type: CompetenceFilter) => () => {
+  const toggleFiltersByType = (type: CompetenceSourceType) => () => {
     const newFilter = { ...selectedFilters };
     newFilter[type] = newFilter[type] ?? [];
 

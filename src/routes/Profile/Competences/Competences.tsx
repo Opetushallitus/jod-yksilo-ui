@@ -4,15 +4,14 @@ import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
-import { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
+import type { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
 import { sortByProperty } from '@/utils';
 import { Button, Modal, useMediaQueries } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData } from 'react-router';
-import { ProfileNavigationList } from '../components';
-import { CompetenceFilter, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
+import { useLoaderData } from 'react-router';
+import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { type CompetenceSourceType, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
 
 const Competences = () => {
   const { osaamiset, toimenkuvat, koulutukset, patevyydet, muutOsaamiset, muutOsaamisetVapaateksti } =
@@ -45,7 +44,7 @@ const Competences = () => {
   // Determines if osaamiset from a specific source should be visible. Id is the id of the source (eg. koulutus or toimenkuva).
   // Muu osaaminen doesn't have any sources, so they'll show up if any are marked as checked.
   const isOsaaminenVisible = React.useCallback(
-    (type: CompetenceFilter, id?: string): boolean => {
+    (type: CompetenceSourceType, id?: string): boolean => {
       return type === 'MUU_OSAAMINEN'
         ? selectedFilters.MUU_OSAAMINEN.length > 0 && selectedFilters.MUU_OSAAMINEN.some((item) => item.checked)
         : (selectedFilters[type]?.find((item) => (id ? item.value.includes(id) : false))?.checked ?? false);
@@ -74,19 +73,9 @@ const Competences = () => {
       }
     >
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-1">{title}</h1>
+      <ProfileSectionTitle type="OSAAMISENI" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.competences.description')}</p>
-      <div className="mb-8">
-        <Link
-          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
-          className="text-button-md hover:underline text-accent mt-4"
-        >
-          <div className="flex items-center gap-2">
-            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <JodArrowRight />
-          </div>
-        </Link>
-      </div>
+
       <div>
         {!lg && (
           <Modal
