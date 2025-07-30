@@ -167,7 +167,6 @@ const ManualVaiheModal = ({ isOpen, onClose, vaiheIndex }: ManualVaiheModalProps
                     description: t('profile.paths.cancel-confirmation-text'),
                     confirmText: t('close'),
                     cancelText: t('profile.paths.continue-editing'),
-                    variant: 'destructive',
                     onConfirm: cancel,
                   });
                 }}

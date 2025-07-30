@@ -106,6 +106,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
       <div className="flex flex-row flex-wrap gap-x-7 gap-y-5 my-6 print:hidden">
         <FavoriteToggle
           isFavorite={isLoggedIn && !!data?.id && isSuosikki}
+          favoriteName={data?.otsikko}
           onToggleFavorite={() =>
             !isLoggedIn
               ? showDialog({

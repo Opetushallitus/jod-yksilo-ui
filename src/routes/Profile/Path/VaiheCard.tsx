@@ -17,6 +17,7 @@ const VaiheCard = ({ vaihe, totalSteps, setVaiheComplete, openVaiheModal }: Vaih
     t,
     i18n: { language },
   } = useTranslation();
+  const vaiheNimi = getLocalizedText(vaihe.nimi);
 
   const getVaiheDurationMessage = () => {
     const startDate = new Date(vaihe.alkuPvm);
@@ -43,16 +44,16 @@ const VaiheCard = ({ vaihe, totalSteps, setVaiheComplete, openVaiheModal }: Vaih
         {/* Actions */}
         <div className="flex flex-row justify-between gap-5 flex-wrap">
           <Checkbox
-            name={vaihe.nimi[language]}
-            value={vaihe.nimi[language]}
+            name={vaiheNimi}
+            value={vaiheNimi}
             checked={vaihe.valmis ?? false}
             label={t('done')}
             ariaLabel={t('done')}
             onChange={() => setVaiheComplete()}
           />
           <MoreActionsDropdown
-            menuId={vaihe.nimi[language]}
-            menuContent={<VaiheCardMenu vaiheId={vaihe.id} openVaiheModal={openVaiheModal} />}
+            menuId={vaiheNimi}
+            menuContent={<VaiheCardMenu vaiheId={vaihe.id} vaiheNimi={vaiheNimi} openVaiheModal={openVaiheModal} />}
           />
         </div>
       </div>
@@ -63,10 +64,10 @@ const VaiheCard = ({ vaihe, totalSteps, setVaiheComplete, openVaiheModal }: Vaih
             to={`/${language}/koulutusmahdollisuus/${vaihe.mahdollisuusId}`}
             className="text-heading-2 hover:text-accent hover:underline cursor-pointer"
           >
-            {vaihe.nimi[language]}
+            {vaiheNimi}
           </Link>
         ) : (
-          <div className="text-heading-2">{vaihe.nimi[language]}</div>
+          <div className="text-heading-2">{vaiheNimi}</div>
         )}
         <div className="text-body-md">{vaihe.kuvaus?.[language]}</div>
       </div>

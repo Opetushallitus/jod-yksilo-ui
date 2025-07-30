@@ -4,6 +4,7 @@ import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
+import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -133,15 +134,14 @@ const EditKoulutuskokonaisuusModal = ({
           <div className="flex flex-row gap-5">
             <Button
               variant="white-delete"
-              label={`${t('delete')}`}
+              label={`${t('education-history.delete-education-history')}`}
               onClick={() => {
                 showDialog({
                   title: t('education-history.delete-education-history'),
                   onConfirm: () => void deleteKoulutuskokonaisuus(),
-                  confirmText: t('delete'),
-                  cancelText: t('cancel'),
-                  variant: 'destructive',
-                  description: t('education-history.confirm-delete-education-history'),
+                  description: t('education-history.confirm-delete-education-history', {
+                    name: getLocalizedText(methods.getValues('nimi')),
+                  }),
                 });
               }}
             />

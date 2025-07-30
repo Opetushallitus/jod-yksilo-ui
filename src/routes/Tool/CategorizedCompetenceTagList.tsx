@@ -121,7 +121,7 @@ const CompetenceExport = () => {
           description: t('tool.my-own-data.export.confirm-description'),
           confirmText: t('tool.my-own-data.export.confirm-button'),
           cancelText: t('tool.my-own-data.cancel-text'),
-          variant: 'destructive',
+          variant: 'normal',
           onConfirm: exportToProfile,
         });
       }}
@@ -299,9 +299,6 @@ const CategorizedCompetenceTagList = () => {
                 showDialog({
                   title: t('tool.my-own-data.competences.delete-all.title'),
                   description: t('tool.my-own-data.competences.delete-all.description'),
-                  confirmText: t('delete'),
-                  cancelText: t('cancel'),
-                  variant: 'destructive',
                   onConfirm: () => {
                     setOsaamiset([]);
                     setOsaamisetVapaateksti(undefined);

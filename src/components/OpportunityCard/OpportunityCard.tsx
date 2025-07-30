@@ -110,7 +110,9 @@ export const OpportunityCard = ({
   const ActionsSection =
     menuId && menuContent ? (
       <div className="grow flex flex-col sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end">
-        {!hideFavorite && <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />}
+        {!hideFavorite && (
+          <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} favoriteName={name} />
+        )}
         <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />
       </div>
     ) : null;

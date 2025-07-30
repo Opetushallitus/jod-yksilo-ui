@@ -1,10 +1,10 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
-import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
+import { type DatePickerTranslations, getDatePickerTranslations, getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -320,15 +320,14 @@ export const AddOrEditPatevyysModal = ({
             {patevyysId && (
               <Button
                 variant="white-delete"
-                label={`${t('delete')}`}
+                label={`${t('free-time-activities.delete-proficiency')}`}
                 onClick={() => {
                   showDialog({
                     title: t('free-time-activities.delete-proficiency'),
-                    onConfirm: () => void deletePatevyys(),
-                    confirmText: t('delete'),
-                    cancelText: t('cancel'),
-                    variant: 'destructive',
-                    description: t('free-time-activities.confirm-delete-proficiency'),
+                    onConfirm: deletePatevyys,
+                    description: t('free-time-activities.confirm-delete-proficiency', {
+                      name: getLocalizedText(methods.getValues('nimi')),
+                    }),
                   });
                 }}
               />

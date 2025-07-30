@@ -1,5 +1,5 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { LogoutFormContext } from '@/routes/Root';
@@ -154,9 +154,6 @@ const Preferences = () => {
             showDialog({
               title: t('preferences.delete-profile.action'),
               description: t('preferences.delete-profile.confirm'),
-              confirmText: t('delete'),
-              cancelText: t('cancel'),
-              variant: 'destructive',
               onConfirm: deleteProfile,
             });
           }}
