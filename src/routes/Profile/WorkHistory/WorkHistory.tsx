@@ -3,11 +3,10 @@ import { useModal } from '@/hooks/useModal';
 import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonantajaModal';
 import { WorkHistoryWizard } from '@/routes/Profile/WorkHistory/WorkHistoryWizard';
 import { EmptyState } from '@jod/design-system';
-import { JodWork } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
-import { ProfileNavigationList } from '../components';
+import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import AddOrEditToimenkuvaModal from './modals/AddOrEditToimenkuvaModal';
 import { Tyopaikka, getWorkHistoryTableRows } from './utils';
 
@@ -54,10 +53,7 @@ const WorkHistory = () => {
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
-        <JodWork size={36} color="#AD4298" className="mr-2" />
-        {title}
-      </h1>
+      <ProfileSectionTitle type="TOIMENKUVA" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.work-history.description')}</p>
       {rows.length === 0 && (
         <div className="mt-6 mb-7">

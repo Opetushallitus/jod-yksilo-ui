@@ -6,24 +6,19 @@ import { filterValues } from '@/routes/Tool/utils.ts';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
+import { getLinkTo } from '@/utils/routeUtils';
 import { Button, EmptyState, Modal, Pagination, useMediaQueries } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
 import { useShallow } from 'zustand/shallow';
-import { ProfileNavigationList } from '../components';
+import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { getTypeSlug } from '../utils';
 
 const descriptionKeys = {
   KAIKKI: 'profile.favorites.you-have-no-job-nor-education-opportunities',
   TYOMAHDOLLISUUS: 'profile.favorites.you-have-no-job-opportunities',
   KOULUTUSMAHDOLLISUUS: 'profile.favorites.you-have-no-education-opportunities',
-};
-const linkTextKeys = {
-  KAIKKI: 'profile.favorites.link-go-to-job-and-education-opportunities',
-  TYOMAHDOLLISUUS: 'profile.favorites.link-go-to-job-opportunities',
-  KOULUTUSMAHDOLLISUUS: 'profile.favorites.link-go-to-education-opportunities',
 };
 
 const Favorites = () => {
@@ -182,7 +177,7 @@ const Favorites = () => {
       }
     >
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <ProfileSectionTitle type="SUOSIKKI" title={title} />
       <p className="mb-8 text-body-lg">{t('profile.favorites.description')}</p>
 
       <div className="flex flex-row justify-between">
@@ -202,16 +197,17 @@ const Favorites = () => {
         </div>
       )}
 
-      <div className="mt-4 mb-4">
-        <Link
-          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}?origin=favorites&filter=${getFilterValueForTools}`}
-          className="text-button-md hover:underline text-accent mt-4"
-        >
-          <div className="flex items-center gap-2">
-            {t(linkTextKeys[selectedFilter])}
-            <JodArrowRight />
-          </div>
-        </Link>
+      <div className="my-4">
+        <Button
+          LinkComponent={getLinkTo(
+            `/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}?origin=favorites&filter=${getFilterValueForTools}`,
+          )}
+          label={t('profile.favorites.move-to-job-and-education-opportunities')}
+          icon={<JodArrowRight />}
+          iconSide="right"
+          variant="accent"
+          size="sm"
+        />
       </div>
 
       <div>

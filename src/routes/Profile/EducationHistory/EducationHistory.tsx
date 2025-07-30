@@ -1,21 +1,21 @@
-import { client } from '@/api/client.ts';
-import { components } from '@/api/schema';
+import { client } from '@/api/client';
+import type { components } from '@/api/schema';
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
-import { useModal } from '@/hooks/useModal/index.ts';
+import { useModal } from '@/hooks/useModal';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal';
 import { Button, EmptyState } from '@jod/design-system';
-import { JodSkills } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useRevalidator, useSearchParams } from 'react-router';
+import { ProfileSectionTitle } from '../components';
 import { ProfileNavigationList } from '../components/index.tsx';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
 import ImportKoulutusResultModal from './modals/ImportKoulutusResultModal';
 import ImportKoulutusStartModal from './modals/ImportKoulutusStartModal';
-import { getEducationHistoryTableRows, Koulutuskokonaisuus } from './utils';
+import { getEducationHistoryTableRows, type Koulutuskokonaisuus } from './utils';
 
 const EducationHistory = () => {
   const { koulutuskokonaisuudet, osaamisetMap } = useLoaderData() as {
@@ -248,10 +248,7 @@ const EducationHistory = () => {
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
-        <JodSkills size={36} color="#00818A" className="mr-2" />
-        {title}
-      </h1>
+      <ProfileSectionTitle type="KOULUTUS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>
       {rows.length === 0 && (
         <div className="mt-6 mb-7">
@@ -269,7 +266,7 @@ const EducationHistory = () => {
       <div className="flex space-x-4">
         <div className="mb-[84px]">
           <Button
-            variant="white"
+            variant="accent"
             label={t('education-history.add-new-education')}
             onClick={() => {
               showModal(EducationHistoryWizard);

@@ -8,7 +8,7 @@ import { Button, Toggle } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouteLoaderData } from 'react-router';
-import { ProfileNavigationList } from '../components';
+import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 
 const DownloadLink = ({ children }: { children: React.ReactNode }) => (
   <a href={`${import.meta.env.BASE_URL}api/profiili/yksilo/vienti`}>{children}</a>
@@ -105,7 +105,7 @@ const Preferences = () => {
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{t('preferences.title')}</h1>
+      <ProfileSectionTitle type="ASETUKSENI" title={title} />
       <div className="mb-8 text-body-lg flex flex-col gap-7">
         <p>{t('preferences.description')}</p>
       </div>

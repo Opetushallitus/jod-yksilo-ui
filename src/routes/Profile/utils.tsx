@@ -1,8 +1,10 @@
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import i18n from '@/i18n/config';
-import { MahdollisuusTyyppi } from '@/routes/types';
+import type { CompetenceSourceType } from '@/routes/Profile/Competences/constants';
+import type { MahdollisuusTyyppi } from '@/routes/types';
+import { cx } from '@jod/design-system';
 import { JSX } from 'react';
-import { Link, LinkProps } from 'react-router';
+import { Link, type LinkProps } from 'react-router';
 
 export type ProfileLink =
   | {
@@ -62,3 +64,20 @@ export const generateProfileLink = (
 
 export const getTypeSlug = (type: MahdollisuusTyyppi) =>
   type === 'TYOMAHDOLLISUUS' ? i18n.t('slugs.job-opportunity.index') : i18n.t('slugs.education-opportunity.index');
+
+export type ProfileSectionType =
+  | CompetenceSourceType
+  | 'SUOSIKKI'
+  | 'KIINNOSTUS'
+  | 'OSAAMISENI'
+  | 'PAAMAARA'
+  | 'ASETUKSENI';
+export const getTextClassByCompetenceSourceType = (type: ProfileSectionType) =>
+  cx({
+    'text-secondary-4-dark': type === 'TOIMENKUVA',
+    'text-secondary-2-dark': type === 'KOULUTUS',
+    'text-secondary-1': type === 'PATEVYYS',
+    'text-secondary-gray': type === 'MUU_OSAAMINEN',
+    'text-secondary-3': type === 'KIINNOSTUS',
+    'text-secondary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'PAAMAARA', 'ASETUKSENI'].includes(type),
+  });

@@ -7,7 +7,7 @@ import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-import { ProfileNavigationList } from '../components';
+import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import AddGoalModal from './AddGoalModal';
 import MyGoalsSection from './MyGoalsSection';
 
@@ -61,7 +61,7 @@ const MyGoals = () => {
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-1-mobile sm:text-heading-1">{title}</h1>
+      <ProfileSectionTitle type="PAAMAARA" title={title} />
       <div className="flex flex-col gap-4 mb-9 sm:text-body-lg text-body-lg-mobile">
         <p>{t('profile.my-goals.description')}</p>
         <p>{t('profile.my-goals.description-2')}</p>

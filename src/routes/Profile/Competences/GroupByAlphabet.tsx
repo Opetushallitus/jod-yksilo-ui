@@ -2,7 +2,7 @@ import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { GroupByProps, MobileFilterButton, groupByHeaderClasses } from './constants';
+import { type GroupByProps, MobileFilterButton } from './constants';
 
 export const GroupByAlphabet = ({
   locale,
@@ -40,7 +40,7 @@ export const GroupByAlphabet = ({
         .map((letter) => {
           return (
             <React.Fragment key={letter}>
-              <div className={groupByHeaderClasses}>{letter}</div>
+              <div className="mb-5 mt-8 pb-3 border-b border-border-gray text-heading-3">{letter}</div>
               <div className="flex flex-wrap gap-3">
                 {getOsaaminenByLetter(letter).map((val) => {
                   const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;

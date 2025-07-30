@@ -2,11 +2,10 @@ import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/comp
 import { useModal } from '@/hooks/useModal';
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
 import { EmptyState } from '@jod/design-system';
-import { JodInterests } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
-import { ProfileNavigationList } from '../components';
+import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
 import { AddOrEditPatevyysModal } from './modals/AddOrEditPatevyysModal';
 import { getFreeTimeActivitiesTableRows, type VapaaAjanToiminto } from './utils';
@@ -53,10 +52,7 @@ const FreeTimeActivities = () => {
   return (
     <MainLayout navChildren={<ProfileNavigationList />}>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1 flex items-center">
-        <JodInterests size={36} className="text-accent mr-2" />
-        {title}
-      </h1>
+      <ProfileSectionTitle type="PATEVYYS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.free-time-activities.description')}</p>
       {rows.length === 0 && (
         <div className="mt-6 mb-7">
@@ -66,7 +62,7 @@ const FreeTimeActivities = () => {
 
       <ExperienceTable
         mainColumnHeader={t('free-time-activities.theme-or-activity')}
-        addNewLabel={t('free-time-activities.add-new-free-time-theme-and-activities')}
+        addNewLabel={t('free-time-activities.add-new-free-time-activity')}
         addNewNestedLabel={t('free-time-activities.add-new-activity')}
         rows={rows}
         onAddClick={() => {
