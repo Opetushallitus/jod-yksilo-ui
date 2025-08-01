@@ -246,7 +246,7 @@ const Favorites = () => {
           return (
             <OpportunityCard
               key={id}
-              to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}`}
+              to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}?origin=favorites`}
               description={getLocalizedText(mahdollisuus.tiivistelma)}
               ammattiryhma={
                 mahdollisuus?.ammattiryhma

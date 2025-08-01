@@ -5,6 +5,14 @@ import { MemoryRouter } from 'react-router';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import Favorites from './Favorites';
 
+vi.mock('react-router', async () => {
+  const actualDom = await vi.importActual('react-router');
+  return {
+    ...actualDom,
+    useMatches: vi.fn().mockReturnValue([]),
+  };
+});
+
 vi.mock('@/stores/useSuosikitStore', () => ({
   useSuosikitStore: vi.fn(),
 }));
