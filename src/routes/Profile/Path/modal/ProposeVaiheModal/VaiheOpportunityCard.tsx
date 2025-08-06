@@ -41,7 +41,7 @@ const VaiheOpportunityCard = React.memo(({ mahdollisuus }: VaiheOpportunityCardP
       <div className="order-2 flex flex-col gap-2">
         <div className="flex flex-row justify-between">
           <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">
-            {t('opportunity-type.education')}
+            {t(`opportunity-type.education.${mahdollisuus.tyyppi ?? 'EI_TUTKINTO'}`)}
           </span>
           <span>
             <RadioButton label={t('profile.paths.add-as-phase')} value={id} className="cursor-pointer" />

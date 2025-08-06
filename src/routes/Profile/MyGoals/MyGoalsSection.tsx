@@ -69,11 +69,12 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
             <div key={pm.id ?? mahdollisuusId} className="flex flex-col gap-5 mb-9">
               <OpportunityCard
                 to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${mahdollisuusId}`}
-                description={getLocalizedText(details?.tiivistelma)}
+                description={getLocalizedText(details.tiivistelma)}
                 ammattiryhma={
-                  details?.ammattiryhma ? getLocalizedText(loaderData.ammattiryhmaNimet[details.ammattiryhma]) : ''
+                  details.ammattiryhma ? getLocalizedText(loaderData.ammattiryhmaNimet[details.ammattiryhma]) : ''
                 }
-                name={getLocalizedText(details?.otsikko)}
+                name={getLocalizedText(details.otsikko)}
+                tyyppi={details.tyyppi}
                 type={mahdollisuusTyyppi}
                 menuContent={
                   <MyGoalsOpportunityCardMenu
