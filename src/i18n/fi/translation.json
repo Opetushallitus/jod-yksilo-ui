@@ -739,7 +739,7 @@
   },
   "proposed-competences": "Ehdotetut osaamiset",
   "proposed-interests": "Ehdotetut kiinnostukset",
-  "rate-ai-content": "Tekoälyn muodostama ja ihmisen tarkistama sisältö – kerro miten onnistuimme?",
+  "rate-ai-content": "Tekoälyn avulla luotu sisältö - saattaa sisältää virheitä. Kerro miten onnistuimme?",
   "remove-approval": "Hylkää hyväksyntä",
   "remove-favorite": "Poista suosikeista",
   "remove-favorite-opportunity-confirmation": "Haluatko varmasti poistaa mahdollisuuden \"{{name}}\" suosikeista?",
