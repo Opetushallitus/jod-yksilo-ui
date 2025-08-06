@@ -483,6 +483,7 @@ const ExploreOpportunities = () => {
               ammattiryhma={
                 mahdollisuus.ammattiryhma ? getLocalizedText(ammattiryhmaNimet?.[mahdollisuus.ammattiryhma]) : undefined
               }
+              tyyppi={mahdollisuus.tyyppi}
               type={mahdollisuusTyyppi}
               menuContent={
                 <ToolOpportunityCardActionMenu

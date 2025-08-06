@@ -1,3 +1,4 @@
+import { components } from '@/api/schema';
 import { FavoriteToggle } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDropdown';
@@ -46,6 +47,7 @@ type OpportunityCardProps = {
   matchValue?: number;
   matchLabel?: string;
   type: MahdollisuusTyyppi;
+  tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
 } & FavoriteProps &
   MenuProps;
 
@@ -69,6 +71,7 @@ export const OpportunityCard = ({
   matchLabel,
   matchValue,
   name,
+  tyyppi,
   type,
   toggleFavorite,
   isFavorite,
@@ -106,7 +109,14 @@ export const OpportunityCard = ({
     }
   };
 
-  const cardTypeTitle = type === 'TYOMAHDOLLISUUS' ? t('opportunity-type.work') : t('opportunity-type.education');
+  const cardTypeTitle = React.useMemo(() => {
+    if (type === 'TYOMAHDOLLISUUS') {
+      return t('opportunity-type.work');
+    } else {
+      return t(`opportunity-type.education.${tyyppi || 'EI_TUTKINTO'}`);
+    }
+  }, [t, tyyppi, type]);
+
   const ActionsSection =
     menuId && menuContent ? (
       <div className="grow flex flex-col sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end">

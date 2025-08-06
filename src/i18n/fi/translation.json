@@ -461,7 +461,10 @@
   "opportunity-description-KOULUTUSMAHDOLLISUUS": "Koulutusmahdollisuuden yleiskuvaus",
   "opportunity-description-TYOMAHDOLLISUUS": "Työmahdollisuuden yleiskuvaus",
   "opportunity-type": {
-    "education": "Tutkinto",
+    "education": {
+      "EI_TUTKINTO": "Muu koulutus",
+      "TUTKINTO": "Tutkinto"
+    },
     "occupation": "Ammatti",
     "work": "Työmahdollisuus"
   },
@@ -560,9 +563,9 @@
     "favorites": {
       "description": "Suosikeiksi tallentamasi koulutus- ja työmahdollisuudet löytyvät täältä. Voit tallentaa lisää mahdollisuuksia suosikeiksi kohtautuskoneen tulosnäkymässä. Voit poistaa suosikkeja sekä luoda yhdestä tai useammasta suosikista koulutus- ja urapolkusuunnitelman.",
       "job-and-education-opportunities": "Työ- ja koulutusmahdollisuudet",
+      "move-to-job-and-education-opportunities": "Siirry työ- ja koulutusmahdollisuuksiin",
       "show-filters": "Näytä suodattimet",
       "title": "Suosikkini",
-      "move-to-job-and-education-opportunities": "Siirry työ- ja koulutusmahdollisuuksiin",
       "you-have-no-education-opportunities": "Ei suosikkeja. Lisää koulutusmahdollisuuksia suosikeiksi.",
       "you-have-no-job-nor-education-opportunities": "Ei suosikkeja. Lisää työ-ja koulutusmahdollisuuksia suosikeiksi.",
       "you-have-no-job-opportunities": "Ei suosikkeja. Lisää työmahdollisuuksia suosikeiksi.",
@@ -590,8 +593,8 @@
     "interests": {
       "add-interests": "Lisää kiinnostuksen kohteita",
       "description": "Löydät alta kaikki kiinnostuksen kohteesi, jotka olet kartoittanut itsellesi ja tallentanut ne profiiliisi. Kiinnostuksen kohteet ryhmitellään tyypin mukaan.",
-      "empty": "Et ole vielä lisännyt kiinnostuksen kohteita.",
       "edit-interests": "Muokkaa kiinnostuksen kohteita",
+      "empty": "Et ole vielä lisännyt kiinnostuksen kohteita.",
       "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus kiinnostuksitani",
       "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin kiinnostuksiasi. Jos käytät palvelua suomeksi kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.",
       "free-form-text-for-interests": "Vapaa teksti kiinnostuksille",
@@ -714,8 +717,8 @@
     },
     "something-else": {
       "description": "Löydät alta muut osaamisesi, joita olet kartoittanut esimerkiksi palvelun kartoitustyökaluilla ja tallentanut ne profiiliisi. Voit lisätä ja poistaa osaamisia Muokkaa osaamisia painikkeella.",
-      "empty": "Et ole vielä lisännyt muita osaamisia.",
       "description-placeholder": "Kirjoita tähän osaamisesi",
+      "empty": "Et ole vielä lisännyt muita osaamisia.",
       "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus osaamisestani",
       "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin osaamistasi. Jos käytät palvelua suomeksi kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.",
       "my-other-comptetences": "Osaamiseni",
