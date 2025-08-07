@@ -483,6 +483,7 @@ const ExploreOpportunities = () => {
               ammattiryhma={
                 mahdollisuus.ammattiryhma ? getLocalizedText(ammattiryhmaNimet?.[mahdollisuus.ammattiryhma]) : undefined
               }
+              aineisto={mahdollisuus.aineisto}
               tyyppi={mahdollisuus.tyyppi}
               type={mahdollisuusTyyppi}
               menuContent={

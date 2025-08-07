@@ -74,6 +74,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                   details.ammattiryhma ? getLocalizedText(loaderData.ammattiryhmaNimet[details.ammattiryhma]) : ''
                 }
                 name={getLocalizedText(details.otsikko)}
+                aineisto={details.aineisto}
                 tyyppi={details.tyyppi}
                 type={mahdollisuusTyyppi}
                 menuContent={

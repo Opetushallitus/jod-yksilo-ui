@@ -1095,6 +1095,8 @@ export interface components {
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       /** Format: uri */
       ammattiryhma?: string;
+      /** @enum {string} */
+      aineisto?: 'TMT' | 'AMMATTITIETO';
       aktiivinen?: boolean;
     };
     ArvoDto: {

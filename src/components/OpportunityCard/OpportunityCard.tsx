@@ -44,6 +44,7 @@ type OpportunityCardProps = {
   to?: string;
   name: string;
   description: string;
+  aineisto?: components['schemas']['TyomahdollisuusDto']['aineisto'];
   matchValue?: number;
   matchLabel?: string;
   type: MahdollisuusTyyppi;
@@ -71,6 +72,7 @@ export const OpportunityCard = ({
   matchLabel,
   matchValue,
   name,
+  aineisto,
   tyyppi,
   type,
   toggleFavorite,
@@ -111,11 +113,11 @@ export const OpportunityCard = ({
 
   const cardTypeTitle = React.useMemo(() => {
     if (type === 'TYOMAHDOLLISUUS') {
-      return t('opportunity-type.work');
+      return t(`opportunity-type.work.${aineisto || 'TMT'}`);
     } else {
       return t(`opportunity-type.education.${tyyppi || 'EI_TUTKINTO'}`);
     }
-  }, [t, tyyppi, type]);
+  }, [type, t, aineisto, tyyppi]);
 
   const ActionsSection =
     menuId && menuContent ? (

@@ -466,7 +466,10 @@
       "TUTKINTO": "Tutkinto"
     },
     "occupation": "Ammatti",
-    "work": "Työmahdollisuus"
+    "work": {
+      "AMMATTITIETO": "Ammatti",
+      "TMT": "Muu työmahdollisuus"
+    }
   },
   "osaamispolku": "Osaamispolku",
   "osaamissuosittelija": {

@@ -242,7 +242,7 @@ const Favorites = () => {
 
       <div className="flex flex-col gap-5 mb-8">
         {favoritesPerType.map((mahdollisuus) => {
-          const { id, mahdollisuusTyyppi, tyyppi } = mahdollisuus;
+          const { id, mahdollisuusTyyppi, tyyppi, aineisto } = mahdollisuus;
           return (
             <OpportunityCard
               key={id}
@@ -257,6 +257,7 @@ const Favorites = () => {
               isLoggedIn={true}
               name={getLocalizedText(mahdollisuus.otsikko)}
               toggleFavorite={() => void deleteSuosikki(id)}
+              aineisto={aineisto}
               tyyppi={tyyppi}
               type={mahdollisuusTyyppi}
               menuContent={

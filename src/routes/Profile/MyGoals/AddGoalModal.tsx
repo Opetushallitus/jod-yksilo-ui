@@ -191,6 +191,7 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
                     key={id}
                     description={getLocalizedText(mahdollisuus.tiivistelma)}
                     name={getLocalizedText(mahdollisuus.otsikko)}
+                    aineisto={mahdollisuus.aineisto}
                     tyyppi={mahdollisuus.tyyppi}
                     type={mahdollisuusTyyppi}
                     hideFavorite
