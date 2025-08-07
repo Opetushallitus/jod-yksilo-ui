@@ -97,9 +97,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
 
       {(data as components['schemas']['TyomahdollisuusFullDto']).aineisto ? (
         <div className="uppercase font-arial">
-          {(data as components['schemas']['TyomahdollisuusFullDto']).aineisto === 'TMT'
-            ? t('opportunity-type.work')
-            : t('opportunity-type.occupation')}
+          {t(`opportunity-type.work.${(data as components['schemas']['TyomahdollisuusFullDto']).aineisto || 'TMT'}`)}
         </div>
       ) : null}
       {/* Action bar */}

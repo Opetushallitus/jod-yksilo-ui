@@ -422,6 +422,8 @@ const Path = () => {
                     to={`/${language}/${getTypeSlug(paamaara.mahdollisuusTyyppi)}/${mahdollisuusId}`}
                     description={getLocalizedText(mahdollisuus?.tiivistelma)}
                     name={getLocalizedText(mahdollisuus?.otsikko)}
+                    aineisto={(mahdollisuus as components['schemas']['TyomahdollisuusFullDto'])?.aineisto}
+                    tyyppi={(mahdollisuus as components['schemas']['KoulutusmahdollisuusFullDto'])?.tyyppi}
                     type={paamaara.mahdollisuusTyyppi}
                     ammattiryhma={
                       paamaara.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
