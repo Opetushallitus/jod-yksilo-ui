@@ -57,7 +57,9 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                     .nonempty(formErrorMessage.required())
                     .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
                 ),
+              // eslint-disable-next-line sonarjs/deprecation
               alkuPvm: z.string().nonempty(formErrorMessage.required()).date(formErrorMessage.date()),
+              // eslint-disable-next-line sonarjs/deprecation
               loppuPvm: z.string().date(formErrorMessage.date()).optional().or(z.literal('')),
               osaamiset: z.array(
                 z.object({
