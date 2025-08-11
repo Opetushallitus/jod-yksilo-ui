@@ -42,7 +42,9 @@ const SomethingElse = () => {
     watch,
   } = useForm<components['schemas']['LokalisoituTeksti']>({
     defaultValues: vapaateksti,
-    resolver: zodResolver(z.record(z.string().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA)))),
+    resolver: zodResolver(
+      z.object({}).catchall(z.string().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
+    ),
   });
   const fields = watch();
 

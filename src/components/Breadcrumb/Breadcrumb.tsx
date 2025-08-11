@@ -71,6 +71,7 @@ export const Breadcrumb = () => {
         id: '',
         params: {},
         pathname: '',
+        loaderData: undefined,
       });
     }
 

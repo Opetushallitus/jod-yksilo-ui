@@ -58,7 +58,9 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                     .nonempty(formErrorMessage.required())
                     .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
                 ),
+              // eslint-disable-next-line sonarjs/deprecation
               alkuPvm: z.string().date(formErrorMessage.date()).optional().or(z.literal('')),
+              // eslint-disable-next-line sonarjs/deprecation
               loppuPvm: z.string().date(formErrorMessage.date()).optional().or(z.literal('')),
               osaamiset: z.array(
                 z.object({

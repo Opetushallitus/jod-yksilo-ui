@@ -36,7 +36,7 @@ const TavoiteInput = ({ paamaara }: TavoiteInputProps) => {
     mode: 'onChange',
     resolver: zodResolver(
       z.object({
-        tavoite: z.record(z.string().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
+        tavoite: z.object({}).catchall(z.string().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
       }),
     ),
     defaultValues: { tavoite },

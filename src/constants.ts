@@ -65,6 +65,7 @@ export const FORM_SCHEMA = {
     .optional(),
   linkit: z.array(
     z.object({
+      // eslint-disable-next-line sonarjs/deprecation
       url: z.string().url(formErrorMessage.url()),
     }),
   ),
@@ -75,5 +76,6 @@ export const FORM_SCHEMA = {
       kuvaus: z.object({}).catchall(z.string()),
     }),
   ),
+  // eslint-disable-next-line sonarjs/deprecation
   pvm: z.string().date(formErrorMessage.date()),
 };
