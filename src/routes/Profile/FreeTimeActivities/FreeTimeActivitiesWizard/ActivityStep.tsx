@@ -1,6 +1,7 @@
 import { FormError, TouchedFormError } from '@/components';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
+import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FreeTimeActivitiesForm } from './utils';
@@ -24,6 +25,15 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
   } = useFormContext<FreeTimeActivitiesForm>();
   const id = watch('id');
   const patevyysId = watch(`patevyydet.${patevyys}.id`);
+
+  const alkuPvm = watch(`patevyydet.${patevyys}.alkuPvm`);
+  const loppuPvm = watch(`patevyydet.${patevyys}.loppuPvm`);
+  React.useEffect(() => {
+    if (alkuPvm || loppuPvm) {
+      trigger();
+    }
+  }, [alkuPvm, loppuPvm, trigger]);
+
   return (
     <>
       <h2 className="mb-6 text-black text-hero-mobile sm:text-hero">
