@@ -116,3 +116,104 @@ export const competences = {
   maara: 3,
   sivuja: 1,
 };
+
+export const freetimeActivities = [
+  {
+    id: 'afb867d5-f0f1-451b-bc21-b6729eb534ea',
+    nimi: {
+      fi: 'Testaaminen',
+    },
+    patevyydet: [
+      {
+        id: 'f873c947-9531-4249-9c4c-fd57faec6d92',
+        nimi: {
+          fi: 'Uima-altaan testaus',
+        },
+        alkuPvm: '2025-07-01',
+        loppuPvm: '2025-07-31',
+        osaamiset: [
+          'http://data.europa.eu/esco/skill/9926889a-7074-4e37-acce-1271fe6c5a6f',
+          'http://data.europa.eu/esco/skill/eb0d83b2-3aa4-4a36-a60a-99b6746429e2',
+          'http://data.europa.eu/esco/skill/e93acbe5-535a-4927-9e7c-3b2e06ddfee8',
+        ],
+      },
+    ],
+  },
+];
+
+export const freetimeActivityItem = {
+  nimi: { fi: 'Testaaminen' },
+  patevyydet: [
+    {
+      nimi: { fi: 'Uima-altaan testaus' },
+      alkuPvm: '2001-07-01',
+      loppuPvm: '2001-07-30',
+      osaamiset: [
+        'http://data.europa.eu/esco/skill/eb0d83b2-3aa4-4a36-a60a-99b6746429e2',
+        'http://data.europa.eu/esco/skill/9926889a-7074-4e37-acce-1271fe6c5a6f',
+        'http://data.europa.eu/esco/skill/e93acbe5-535a-4927-9e7c-3b2e06ddfee8',
+      ],
+    },
+  ],
+};
+
+export const suggestedFreetimeCompetences = [
+  {
+    uri: 'http://data.europa.eu/esco/skill/eb0d83b2-3aa4-4a36-a60a-99b6746429e2',
+    osuvuus: 222.5042600745072,
+  },
+  {
+    uri: 'http://data.europa.eu/esco/skill/9926889a-7074-4e37-acce-1271fe6c5a6f',
+    osuvuus: 222.5042600745072,
+  },
+  {
+    uri: 'http://data.europa.eu/esco/skill/e93acbe5-535a-4927-9e7c-3b2e06ddfee8',
+    osuvuus: 222.5042600745072,
+  },
+];
+
+export const freetimeCompetences = {
+  sisalto: [
+    {
+      uri: 'http://data.europa.eu/esco/skill/eb0d83b2-3aa4-4a36-a60a-99b6746429e2',
+      nimi: {
+        sv: 'simma',
+        en: 'swim',
+        fi: 'uida',
+      },
+      kuvaus: {
+        sv: 'Förflytta sig genom vatten med hjälp av armar och ben.',
+        en: 'Move through water by means of the limbs.',
+        fi: 'Liikkua vedessä raajojen avulla.',
+      },
+    },
+    {
+      uri: 'http://data.europa.eu/esco/skill/9926889a-7074-4e37-acce-1271fe6c5a6f',
+      nimi: {
+        sv: 'överleva på havet om fartyget överges',
+        en: 'survive at sea in the event of ship abandonment',
+        fi: 'selviytyä merellä tilanteessa, jossa laiva joudutaan jättämään',
+      },
+      kuvaus: {
+        sv: 'Identifiera samlingssignaler och vilka nödsituationer de signalerar. Följa fastställda förfaranden. Ta på och använd en flytväst eller en räddningsdräkt. Hoppa säkert i vattnet från en höjd. Simma och ställ i ordning en livflotte medan du bär flytväst. Håll dig flytande utan flytväst. Ta dig ombord på en livflotte från fartyget, eller från vattnet när du använder flytväst. Vidta inledande åtgärder för att gå ombord på livflotte för att öka möjligheten för överlevnad. Släpp ut en boj eller ett drivankare. Hantera livräddningsutrustning. Använd lokaliseringsutrustning, inklusive radioutrustning.',
+        en: 'Identify muster signals and what emergencies they signal. Comply with established procedures. Don and use a lifejacket or an immersion suit. Safely jump into the water from a height. Swim and right an inverted liferaft while wearing a swim while wearing a lifejacket. Keep afloat without a lifejacket. Board a survival craft from the ship, or from the water while wearing a lifejacket. Take initial actions on boarding survival craft to enhance chance of survival. Stream a drogue or sea-anchor. Operate survival craft equipment. Operate location devices, including radio equipment.',
+        fi: 'Tunnistaa hälytysmerkit ja minkälaisesta hädästä ne kertovat. Noudattaa menettelyjä. Käyttää pelastusliiviä tai pelastuspukua. Hypätä veteen turvallisesti myös korkealta. Suoristaa ylösalaisin oleva pelastuslautta pelastusliiveissä ja uida pelastusliivi päällä. Pysyä veden pinnalla ilman pelastusliiviä. Nousta pelastusveneeseen aluksella tai vedestä pelastusliiveissä. Ryhtyä nopeasti toimiin pelastusveneisiin ja -lauttoihin siirtymisessä pelastumismahdollisuuksien parantamiseksi. Käyttää pelastusvarjoa tai laahusankkuria. Käyttää pelastusveneiden laitteita. Käyttää paikannus- ja radiolaitteita.',
+      },
+    },
+    {
+      uri: 'http://data.europa.eu/esco/skill/e93acbe5-535a-4927-9e7c-3b2e06ddfee8',
+      nimi: {
+        sv: 'globala nödsignals- och säkerhetssystemet till sjöss',
+        en: 'Global Maritime Distress and Safety System',
+        fi: 'maailmanlaajuinen merihätä- ja turvallisuusjärjestelmä',
+      },
+      kuvaus: {
+        sv: 'Den internationellt överenskomna uppsättningen säkerhetsförfaranden, typer av utrustning och kommunikationsprotokoll som används för att öka säkerheten och göra det lättare att rädda nödställda fartyg, båtar och flygplan.',
+        en: 'The internationally agreed-upon set of safety procedures, types of equipment and communication protocols used to increase safety and make it easier to rescue distressed ships, boats and aircraft.',
+        fi: 'Kansainvälisesti sovitut turvallisuusmenettelyt, laitetyypit ja viestintäprotokollat, joilla parannetaan turvallisuutta ja helpotetaan merihädässä olevien alusten, veneiden ja ilma-alusten pelastamista.',
+      },
+    },
+  ],
+  maara: 3,
+  sivuja: 1,
+};
