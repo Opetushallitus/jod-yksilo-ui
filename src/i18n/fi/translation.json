@@ -566,6 +566,9 @@
     "favorites": {
       "description": "Suosikeiksi tallentamasi koulutus- ja työmahdollisuudet löytyvät täältä. Voit tallentaa lisää mahdollisuuksia suosikeiksi kohtautuskoneen tulosnäkymässä. Voit poistaa suosikkeja sekä luoda yhdestä tai useammasta suosikista koulutus- ja urapolkusuunnitelman.",
       "job-and-education-opportunities": "Työ- ja koulutusmahdollisuudet",
+      "link-go-to-education-opportunities": "Voit tutustua koulutusmahdollisuuksiin täältä",
+      "link-go-to-job-and-education-opportunities": "Voit tutustua työ- ja koulutusmahdollisuuksiin täältä",
+      "link-go-to-job-opportunities": "Voit tutustua työmahdollisuuksiin täältä",
       "move-to-job-and-education-opportunities": "Siirry työ- ja koulutusmahdollisuuksiin",
       "show-filters": "Näytä suodattimet",
       "title": "Suosikkini",
