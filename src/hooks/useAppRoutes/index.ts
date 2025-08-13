@@ -12,21 +12,6 @@ export const useAppRoutes = () => {
       authRequired: true,
     },
     {
-      name: t('profile.preferences.title'),
-      path: t('slugs.profile.preferences'),
-      authRequired: true,
-    },
-    {
-      name: t('profile.favorites.title'),
-      path: t('slugs.profile.favorites'),
-      authRequired: true,
-    },
-    {
-      name: t('profile.my-goals.title'),
-      path: t('slugs.profile.my-goals'),
-      authRequired: true,
-    },
-    {
       name: t('profile.competences.title'),
       path: competencesPath,
       authRequired: true,
@@ -54,6 +39,21 @@ export const useAppRoutes = () => {
     {
       name: t('profile.interests.title'),
       path: t('slugs.profile.interests'),
+      authRequired: true,
+    },
+    {
+      name: t('profile.favorites.title'),
+      path: t('slugs.profile.favorites'),
+      authRequired: true,
+    },
+    {
+      name: t('profile.preferences.title'),
+      path: t('slugs.profile.preferences'),
+      authRequired: true,
+    },
+    {
+      name: t('profile.my-goals.title'),
+      path: t('slugs.profile.my-goals'),
       authRequired: true,
     },
   ];
