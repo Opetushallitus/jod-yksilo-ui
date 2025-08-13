@@ -7,9 +7,10 @@ import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/Educat
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal';
 import { Button, EmptyState } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useRevalidator, useSearchParams } from 'react-router';
+import { Link, useLoaderData, useRevalidator, useSearchParams } from 'react-router';
 import { ProfileSectionTitle } from '../components';
 import { ProfileNavigationList } from '../components/index.tsx';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
@@ -29,7 +30,10 @@ const EducationHistory = () => {
       }
     >;
   };
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const title = t('profile.education-history.title');
 
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>(
@@ -250,6 +254,18 @@ const EducationHistory = () => {
       <title>{title}</title>
       <ProfileSectionTitle type="KOULUTUS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>
+      <div className="mb-8">
+        <Link
+          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+          className="text-button-md hover:underline text-accent mt-4"
+        >
+          <div className="flex items-center gap-2">
+            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
+            <JodArrowRight size={24} />
+          </div>
+        </Link>
+      </div>
+
       {rows.length === 0 && (
         <div className="mt-6 mb-7">
           <EmptyState text={t('profile.education-history.empty')} />

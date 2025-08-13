@@ -7,9 +7,10 @@ import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
 import type { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
 import { sortByProperty } from '@/utils';
 import { Button, Modal, useMediaQueries } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { type CompetenceSourceType, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
 
@@ -75,6 +76,17 @@ const Competences = () => {
       <title>{title}</title>
       <ProfileSectionTitle type="OSAAMISENI" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.competences.description')}</p>
+      <div className="mb-8">
+        <Link
+          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+          className="text-button-md hover:underline text-accent mt-4"
+        >
+          <div className="flex items-center gap-2">
+            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
+            <JodArrowRight size={24} />
+          </div>
+        </Link>
+      </div>
 
       <div>
         {!lg && (

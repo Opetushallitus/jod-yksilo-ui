@@ -2,9 +2,10 @@ import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/comp
 import { useModal } from '@/hooks/useModal';
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
 import { EmptyState } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
 import { AddOrEditPatevyysModal } from './modals/AddOrEditPatevyysModal';
@@ -22,7 +23,10 @@ const FreeTimeActivities = () => {
       }
     >;
   };
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const title = t('profile.free-time-activities.title');
   const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot, osaamisetMap));
   const { showModal } = useModal();
@@ -54,6 +58,17 @@ const FreeTimeActivities = () => {
       <title>{title}</title>
       <ProfileSectionTitle type="PATEVYYS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.free-time-activities.description')}</p>
+      <div className="mb-8">
+        <Link
+          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+          className="text-button-md hover:underline text-accent mt-4"
+        >
+          <div className="flex items-center gap-2">
+            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
+            <JodArrowRight size={24} />
+          </div>
+        </Link>
+      </div>
       {rows.length === 0 && (
         <div className="mt-6 mb-7">
           <EmptyState text={t('profile.free-time-activities.empty')} />
