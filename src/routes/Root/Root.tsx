@@ -30,6 +30,8 @@ const Root = () => {
       return 37;
     } else if (hostname === 'jodtestaus.fi') {
       return 38;
+    } else if (hostname === 'osaamispolku.fi') {
+      return 36;
     }
   }, [hostname]);
 
