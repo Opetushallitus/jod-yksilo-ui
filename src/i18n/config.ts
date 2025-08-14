@@ -5,7 +5,9 @@ import translationFi from './fi/translation.json';
 import translationSv from './sv/translation.json';
 
 export type LangCode = 'fi' | 'sv' | 'en';
-export const supportedLanguageCodes: LangCode[] = ['fi', 'sv', 'en'];
+export const supportedLanguageCodes: LangCode[] =
+  /* eslint-disable sonarjs/todo-tag */
+  window.location.hostname === 'osaamispolku.fi' ? ['fi'] : ['fi', 'sv', 'en']; // TODO: Set fi, sv, en when translations are ready
 export const defaultLang = 'fi';
 
 export const langLabels = {
