@@ -36,7 +36,7 @@ const LandingPage = () => {
   const basicInformation = t('slugs.basic-information');
 
   return (
-    <MainLayout navChildren={<></>}>
+    <MainLayout>
       <title>{title}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">{t('profile.landing-page.title')}</h1>
 

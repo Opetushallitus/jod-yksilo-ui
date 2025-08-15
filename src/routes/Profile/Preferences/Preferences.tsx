@@ -102,8 +102,10 @@ const Preferences = () => {
     data?.tervetuloapolku,
   ]);
 
+  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
+
   return (
-    <MainLayout navChildren={<ProfileNavigationList />}>
+    <MainLayout navChildren={navChildren}>
       <title>{title}</title>
       <ProfileSectionTitle type="ASETUKSENI" title={title} />
       <div className="mb-8 text-body-lg flex flex-col gap-7">

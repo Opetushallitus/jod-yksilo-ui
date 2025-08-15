@@ -53,8 +53,10 @@ const FreeTimeActivities = () => {
     showModal(AddOrEditPatevyysModal, { toimintoId: row.key });
   };
 
+  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
+
   return (
-    <MainLayout navChildren={<ProfileNavigationList />}>
+    <MainLayout navChildren={navChildren}>
       <title>{title}</title>
       <ProfileSectionTitle type="PATEVYYS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.free-time-activities.description')}</p>

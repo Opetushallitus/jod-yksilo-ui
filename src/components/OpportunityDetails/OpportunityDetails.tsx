@@ -72,19 +72,24 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
     window.print();
   };
 
-  const filterDevSections = (section: OpportunityDetailsSection) =>
-    !section.showInDevOnly || (isDev && section.showInDevOnly);
+  const filterDevSections = React.useCallback(
+    (section: OpportunityDetailsSection) => !section.showInDevOnly || (isDev && section.showInDevOnly),
+    [isDev],
+  );
 
-  const menuSection: MenuSection = {
-    title: t('on-this-page'),
-    linkItems: sections.filter(filterDevSections).map((section) => ({
-      label: section.navTitle,
-      LinkComponent: getLinkTo(`#${section.navTitle}`),
-    })),
-  };
+  const navChildren = React.useMemo(() => {
+    const menuSection: MenuSection = {
+      title: t('on-this-page'),
+      linkItems: sections.filter(filterDevSections).map((section) => ({
+        label: section.navTitle,
+        LinkComponent: getLinkTo(`#${section.navTitle}`),
+      })),
+    };
+    return <PageNavigation menuSection={menuSection} openSubMenuLabel="" activeIndicator="dot" />;
+  }, [t, sections, filterDevSections]);
 
   return (
-    <MainLayout navChildren={<PageNavigation menuSection={menuSection} openSubMenuLabel="" activeIndicator="dot" />}>
+    <MainLayout navChildren={navChildren}>
       {title && <title>{title}</title>}
       <div className="flex flex-row justify-between items-center mb-5">
         <h1 className="text-heading-2 sm:text-heading-1">{title}</h1>

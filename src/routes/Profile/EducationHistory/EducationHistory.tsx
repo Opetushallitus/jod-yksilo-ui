@@ -249,8 +249,10 @@ const EducationHistory = () => {
   };
   usePollOsaamisetTunnistus(isOsaamisetTunnistusOngoing, rows, setRows, revalidator);
 
+  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
+
   return (
-    <MainLayout navChildren={<ProfileNavigationList />}>
+    <MainLayout navChildren={navChildren}>
       <title>{title}</title>
       <ProfileSectionTitle type="KOULUTUS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>

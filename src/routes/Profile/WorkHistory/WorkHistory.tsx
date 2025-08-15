@@ -54,8 +54,10 @@ const WorkHistory = () => {
     showModal(AddOrEditToimenkuvaModal, { tyopaikkaId: row.key });
   };
 
+  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
+
   return (
-    <MainLayout navChildren={<ProfileNavigationList />}>
+    <MainLayout navChildren={navChildren}>
       <title>{title}</title>
       <ProfileSectionTitle type="TOIMENKUVA" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.work-history.description')}</p>
