@@ -217,3 +217,103 @@ export const freetimeCompetences = {
   maara: 3,
   sivuja: 1,
 };
+
+export const suggestedEducationCompetences = [
+  {
+    uri: 'http://data.europa.eu/esco/skill/edff6d20-660d-4d33-b412-9a5b664a14be',
+    osuvuus: 4630.724841015558,
+  },
+  {
+    uri: 'http://data.europa.eu/esco/skill/31b67516-af16-4b97-8430-a8a8e0f84190',
+    osuvuus: 4524.559580893479,
+  },
+  {
+    uri: 'http://data.europa.eu/esco/skill/7ee872de-db39-4ae3-8e19-75d1a2cdf697',
+    osuvuus: 4461.145169957676,
+  },
+];
+
+export const educationCompetences = {
+  sisalto: [
+    {
+      uri: 'http://data.europa.eu/esco/skill/edff6d20-660d-4d33-b412-9a5b664a14be',
+      nimi: {
+        en: 'curriculum objectives',
+        sv: 'mål i läroplanen',
+        fi: 'opetussuunnitelman tavoitteet',
+      },
+      kuvaus: {
+        en: 'The goals identified in curricula and defined learning outcomes.',
+        sv: 'De mål som fastställs i läroplanerna och de fastställda läranderesultaten.',
+        fi: 'Opetussuunnitelmissa ja oppimistavoitteissa määritetyt tavoitteet.',
+      },
+    },
+    {
+      uri: 'http://data.europa.eu/esco/skill/31b67516-af16-4b97-8430-a8a8e0f84190',
+      nimi: {
+        en: 'assessment processes',
+        sv: 'bedömningsprocesser',
+        fi: 'arviointiprosessit',
+      },
+      kuvaus: {
+        en: 'Various evaluation techniques, theories, and tools applicable in the assessment of students, participants in a programme, and employees. Different assessment strategies such as initial, formative, summative and self- assessment are used for varying purposes.',
+        sv: 'Olika utvärderingstekniker, teorier och verktyg för bedömning av elever, deltagare i ett program och anställda. Olika bedömningsstrategier som inledande, formativa och sammanfattande bedömningar samt självutvärderingar används för olika ändamål.',
+        fi: 'Erilaiset arviointitekniikat, -teoriat ja -välineet opiskelijoiden, ohjelmaan osallistujien ja työntekijöiden arvioinnissa. Eri tarkoituksiin käytetään erilaisia arviointistrategioita, kuten alustavaa, muovaavaa ja yhteenvedonomaista arviointia sekä itsearviointia.',
+      },
+    },
+    {
+      uri: 'http://data.europa.eu/esco/skill/7ee872de-db39-4ae3-8e19-75d1a2cdf697',
+      nimi: {
+        en: 'develop learning curriculum',
+        sv: 'utveckla läroplaner',
+        fi: 'kehittää opetusohjelma',
+      },
+      kuvaus: {
+        en: 'Develop and plan the learning goals and outcomes for education institutions, as well as the required teaching methods and potential education resources. Organise content, form, methods and technologies for delivery of study experiences.',
+        sv: 'Utveckla och planera inlärningsmål och läranderesultat för utbildningsanstalter samt de undervisningsmetoder och potentiella utbildningsresurser som krävs. Organisera innehåll, form, metoder och teknik för att tillhandahålla studier.\n\t',
+        fi: 'Kehittää ja suunnitella oppilaitosten opetustavoitteita ja -tuloksia sekä tarvittavia opetusmenetelmiä ja -resursseja. Järjestää sisältö, muoto, menetelmät ja tekniikat opintokokemusten tarjoamiseksi.\n\t',
+      },
+    },
+  ],
+  maara: 31,
+  sivuja: 1,
+};
+
+export const educationHistoryItem = {
+  nimi: { fi: 'Iso Opisto' },
+  koulutukset: [
+    {
+      nimi: { fi: 'Oppilas' },
+      alkuPvm: '2001-01-01',
+      loppuPvm: '',
+      osaamiset: [
+        'http://data.europa.eu/esco/skill/edff6d20-660d-4d33-b412-9a5b664a14be',
+        'http://data.europa.eu/esco/skill/31b67516-af16-4b97-8430-a8a8e0f84190',
+        'http://data.europa.eu/esco/skill/7ee872de-db39-4ae3-8e19-75d1a2cdf697',
+      ],
+    },
+  ],
+};
+
+export const educationHistory = [
+  {
+    id: '4c2c9aed-2125-4e17-8612-0c325c131954',
+    nimi: {
+      fi: 'Iso Opisto',
+    },
+    koulutukset: [
+      {
+        id: 'dc6d5886-6326-4b80-84d1-a135491136fc',
+        nimi: {
+          fi: 'Oppilas',
+        },
+        alkuPvm: '2001-01-01',
+        osaamiset: [
+          'http://data.europa.eu/esco/skill/31b67516-af16-4b97-8430-a8a8e0f84190',
+          'http://data.europa.eu/esco/skill/7ee872de-db39-4ae3-8e19-75d1a2cdf697',
+          'http://data.europa.eu/esco/skill/edff6d20-660d-4d33-b412-9a5b664a14be',
+        ],
+      },
+    ],
+  },
+];
