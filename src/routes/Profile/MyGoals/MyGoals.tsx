@@ -58,8 +58,10 @@ const MyGoals = () => {
     };
   }, [paamaarat]);
 
+  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
+
   return (
-    <MainLayout navChildren={<ProfileNavigationList />}>
+    <MainLayout navChildren={navChildren}>
       <title>{title}</title>
       <ProfileSectionTitle type="PAAMAARA" title={title} />
       <div className="flex flex-col gap-4 mb-9 sm:text-body-lg text-body-lg-mobile">

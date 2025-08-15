@@ -1,5 +1,6 @@
 import { components } from '@/api/schema';
 import { MainLayout } from '@/components';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useRouteLoaderData } from 'react-router';
 import { ProfileNavigationList } from '../components';
@@ -11,8 +12,10 @@ const ProfileFront = () => {
   } = useTranslation();
   const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
 
+  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
+
   return (
-    <MainLayout navChildren={<ProfileNavigationList />}>
+    <MainLayout navChildren={navChildren}>
       <title>{t('profile.front.title')}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1">
         {t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
