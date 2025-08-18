@@ -12,7 +12,7 @@ export const NavLinkBasedOnAuth = ({ shouldLogin, onClose, ...rest }: NavLinkBas
     i18n: { language },
   } = useTranslation();
 
-  const pathTo = typeof rest.to === 'string' ? `/${language}/${rest.to}` : `/${language}/${rest.to.pathname}`;
+  const pathTo = typeof rest.to === 'string' ? `${rest.to}` : `${rest.to.pathname}`;
 
   return shouldLogin ? (
     <NavLink
