@@ -1,4 +1,4 @@
 {
-  "*": ["prettier --check"],
+  "*.{ts,tsx,json,css,md,yml,yaml}": ["prettier --check"],
   "*.{ts,tsx}": ["eslint --report-unused-disable-directives"]
 }

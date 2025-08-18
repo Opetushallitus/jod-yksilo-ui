@@ -1,6 +1,5 @@
 export { ActionButton } from './ActionButton/ActionButton';
 export { AiInfo } from './AiInfo/AiInfo';
-export { Chatbot } from './Chatbot/Chatbot';
 export { ConfirmDialogWrapper, type ConfirmDialogWrapperProps } from './ConfirmDialogWrapper/ConfirmDialogWrapper';
 export { ErrorNote } from './ErrorNote';
 export { ExperienceTable } from './ExperienceTable/ExperienceTable';
