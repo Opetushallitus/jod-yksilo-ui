@@ -1,4 +1,4 @@
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { useAppRoutes } from '@/hooks/useAppRoutes';
 import { generateMenuItems } from '@/utils/routeUtils';
 import { LinkComponent, MenuItem } from '@jod/design-system';
@@ -6,6 +6,7 @@ import { JodHome } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLoaderData, useLocation } from 'react-router';
+import { NavLinkBasedOnAuth } from './NavLinkBasedOnAuth';
 
 export const useMenuRoutes = (onClose: () => void) => {
   const {
@@ -39,14 +40,15 @@ export const useMenuRoutes = (onClose: () => void) => {
       {
         label: t('my-competence-profile'),
         LinkComponent: ({ children, className }: LinkComponent) => (
-          <NavLink
+          <NavLinkBasedOnAuth
             to={`/${language}/${t('slugs.profile.index')}`}
             className={className}
             lang={language}
-            onClick={onClose}
+            onClose={onClose}
+            shouldLogin={!data}
           >
             {children}
-          </NavLink>
+          </NavLinkBasedOnAuth>
         ),
         childItems: generateMenuItems({
           menuRoutes: profileRoutes,
