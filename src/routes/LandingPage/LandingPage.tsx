@@ -1,4 +1,4 @@
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { Button } from '@jod/design-system';
