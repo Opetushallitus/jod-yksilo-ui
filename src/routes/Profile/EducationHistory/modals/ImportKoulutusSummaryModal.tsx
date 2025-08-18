@@ -19,6 +19,7 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
   const { t } = useTranslation();
   const { showDialog, closeActiveModal } = useModal();
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
+  const [isSaving, setIsSaving] = React.useState<boolean>(false);
   const [koskiData, setKoskiData] = React.useState<components['schemas']['KoulutusDto'][] | undefined>(undefined);
   const [error, setError] = React.useState<Error | undefined>(undefined);
   const [tableRows, setTableRows] = React.useState<ExperienceTableRowData[]>([]);
@@ -144,6 +145,10 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
   };
 
   const saveSelectedKoulutus = async () => {
+    if (isSaving) {
+      return;
+    }
+    setIsSaving(true);
     try {
       const koulutusKokonaisuudet = createKoulutusKokonaisuudet();
       const body: {
@@ -159,10 +164,13 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
       await client.POST('/api/profiili/koulutuskokonaisuudet/tuonti', {
         body,
       });
+      closeActiveModal();
       onSuccessful();
     } catch (_) {
+      closeActiveModal();
       onFailure();
     }
+    setIsSaving(false);
   };
 
   if (!isOpen) {

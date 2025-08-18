@@ -328,7 +328,7 @@ const AddOrEditKoulutusModal = ({
                 onClick={() =>
                   showDialog({
                     title: t('education-history.delete-degree'),
-                    onConfirm: () => void deleteKoulutus(),
+                    onConfirm: deleteKoulutus,
                     description: t('education-history.confirm-delete-degree', {
                       name: getLocalizedText(methods.getValues('nimi')),
                     }),

@@ -138,7 +138,7 @@ const EditKoulutuskokonaisuusModal = ({
               onClick={() => {
                 showDialog({
                   title: t('education-history.delete-education-history'),
-                  onConfirm: () => void deleteKoulutuskokonaisuus(),
+                  onConfirm: deleteKoulutuskokonaisuus,
                   description: t('education-history.confirm-delete-education-history', {
                     name: getLocalizedText(methods.getValues('nimi')),
                   }),
