@@ -1,5 +1,5 @@
 import { components } from '@/api/schema';
-import { Chatbot, LanguageButton, UserButton } from '@/components';
+import { LanguageButton, UserButton } from '@/components';
 import { ErrorNote } from '@/components/ErrorNote';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
@@ -7,12 +7,18 @@ import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { useErrorNoteStore } from '@/stores/useErrorNoteStore';
 import { useToolStore } from '@/stores/useToolStore';
-import { Footer, MatomoTracker, NavigationBar, ServiceVariantProvider, SkipLink } from '@jod/design-system';
+import { Chatbot, Footer, MatomoTracker, NavigationBar, ServiceVariantProvider, SkipLink } from '@jod/design-system';
 import { JodMenu } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router';
 import { LogoutFormContext } from '.';
+
+const agents: Record<'fi' | 'sv' | 'en', string> = {
+  fi: '2c134474-326f-4456-9139-8e585a569a9a',
+  sv: 'd41ea75b-628f-4420-9e4a-7431ffabb047',
+  en: '37f50124-4dec-4cab-8bc6-f8d2ea5bfe21',
+};
 
 const Root = () => {
   const {
@@ -169,7 +175,21 @@ const Root = () => {
       />
       <Toaster />
       <ScrollRestoration />
-      <Chatbot />
+      <Chatbot
+        agent={agents[language as keyof typeof agents]}
+        language={language}
+        agentIcon={`${import.meta.env.BASE_URL}chatbot-icon.svg`}
+        header={t('chatbot.header')}
+        openWindowText={t('chatbot.open-window-text')}
+        agentName={t('chatbot.agent-name')}
+        errorMessage={t('chatbot.error-message')}
+        greeting={t('chatbot.greeting')}
+        textInputPlaceholder={t('chatbot.text-input-placeholder')}
+        textInputHelper={t('chatbot.text-input-helper')}
+        eraseChatHistory={t('chatbot.erase-chat-history')}
+        saveChatAsCsv={t('chatbot.save-chat-as-csv')}
+        close={t('chatbot.close')}
+      />
       {siteId && (
         <MatomoTracker trackerUrl="https://analytiikka.opintopolku.fi" siteId={siteId} pathname={location.pathname} />
       )}
