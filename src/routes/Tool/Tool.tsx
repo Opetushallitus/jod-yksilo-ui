@@ -423,23 +423,26 @@ const ExploreOpportunities = () => {
       <div className="lg:sticky lg:top-11 lg:z-10 lg:h-[186px] relative">
         <div className="flex gap-5 justify-between items-center py-5 bg-linear-to-b from-85% from-bg-gray lg:absolute lg:-left-4 lg:-right-4 lg:px-4">
           <div className="flex flex-col gap-5 mb-5 items-start">
-            <span className="text-heading-4-mobile sm:text-heading-4">{t('show')}</span>
-            <Checkbox
-              ariaLabel={getCheckboxLabel('TYOMAHDOLLISUUS')}
-              checked={filter.includes('ALL') || filter.includes('TYOMAHDOLLISUUS')}
-              label={getCheckboxLabel('TYOMAHDOLLISUUS')}
-              name={filterValues.TYOMAHDOLLISUUS}
-              onChange={onFilterChange}
-              value={filterValues.TYOMAHDOLLISUUS}
-            />
-            <Checkbox
-              ariaLabel={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
-              checked={filter.includes('ALL') || filter.includes('KOULUTUSMAHDOLLISUUS')}
-              label={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
-              name={filterValues.KOULUTUSMAHDOLLISUUS}
-              onChange={onFilterChange}
-              value={filterValues.KOULUTUSMAHDOLLISUUS}
-            />
+            <fieldset className="flex flex-col gap-5">
+              <legend className="text-heading-4-mobile sm:text-heading-4 mb-5">{t('show')}</legend>
+              <Checkbox
+                ariaLabel={getCheckboxLabel('TYOMAHDOLLISUUS')}
+                checked={filter.includes('ALL') || filter.includes('TYOMAHDOLLISUUS')}
+                label={getCheckboxLabel('TYOMAHDOLLISUUS')}
+                name={filterValues.TYOMAHDOLLISUUS}
+                onChange={onFilterChange}
+                value={filterValues.TYOMAHDOLLISUUS}
+              />
+              <Checkbox
+                ariaLabel={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
+                checked={filter.includes('ALL') || filter.includes('KOULUTUSMAHDOLLISUUS')}
+                label={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
+                name={filterValues.KOULUTUSMAHDOLLISUUS}
+                onChange={onFilterChange}
+                value={filterValues.KOULUTUSMAHDOLLISUUS}
+              />
+            </fieldset>
+
             <IconButton
               label={`${t('sort')} (${getSortingTranslationKey(sorting)})`}
               icon={<JodSort size={18} />}
