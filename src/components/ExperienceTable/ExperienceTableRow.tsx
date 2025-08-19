@@ -184,6 +184,7 @@ export const ExperienceTableRow = ({
     if (onRowClick && row.osaamiset.length > 0) {
       return (
         <button
+          aria-expanded={isOpen}
           aria-label={t(isOpen ? 'close' : 'open')}
           onClick={() => setIsOpen(!isOpen)}
           className={`cursor-pointer flex gap-x-2 items-center ${sm ? 'text-nowrap pr-2' : 'pr-7'}`}
@@ -248,7 +249,7 @@ export const ExperienceTableRow = ({
       <tr>
         {isOpen && !showCheckbox && (
           <td colSpan={5} className={`w-full ${last ? 'px-5 pt-5' : 'p-5'}`.trim()}>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3" aria-label={t('competences')}>
               {sortedCompetences.map((competence) => (
                 <Tag
                   label={getLocalizedText(competence.nimi)}
