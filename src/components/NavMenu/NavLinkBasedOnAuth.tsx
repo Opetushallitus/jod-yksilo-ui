@@ -26,7 +26,7 @@ export const NavLinkBasedOnAuth = ({ shouldLogin, onClose, ...rest }: NavLinkBas
       {rest.children}
     </NavLink>
   ) : (
-    <NavLink {...rest} to={pathTo} lang={language} onClick={onClose}>
+    <NavLink {...rest} to={`/${language}/${pathTo}`} lang={language} onClick={onClose}>
       {rest.children}
     </NavLink>
   );

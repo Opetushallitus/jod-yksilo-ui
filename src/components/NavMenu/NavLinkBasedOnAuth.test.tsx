@@ -35,7 +35,7 @@ describe('NavLinkBasedOnAuth', () => {
       </NavLinkBasedOnAuth>,
     );
     const link = screen.getByText('Profile');
-    expect(link).toHaveAttribute('to', 'profile');
+    expect(link).toHaveAttribute('to', '/fi/profile');
     expect(link).not.toHaveAttribute('aria-label');
     expect(link).toHaveAttribute('lang', 'fi');
     expect(link).toHaveTextContent('Profile');

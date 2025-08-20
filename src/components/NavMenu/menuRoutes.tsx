@@ -41,7 +41,7 @@ export const useMenuRoutes = (onClose: () => void) => {
         label: t('my-competence-profile'),
         LinkComponent: ({ children, className }: LinkComponent) => (
           <NavLinkBasedOnAuth
-            to={`/${language}/${t('slugs.profile.index')}`}
+            to={`${t('slugs.profile.index')}/${t('slugs.profile.front')}`}
             className={className}
             lang={language}
             onClose={onClose}
