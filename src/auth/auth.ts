@@ -27,8 +27,9 @@ export const withYksiloContext = (
       registerCsrfMiddleware(data.csrf);
 
       const { lng } = args.params;
-      const url = `/${lng}/${i18n.t('slugs.introduction', { lng })}`;
-      if (!data.tervetuloapolku) {
+      const url = `/${lng}/${i18n.t('slugs.profile.index', { lng })}`;
+
+      if (!data.tervetuloapolku && loginRequired) {
         if (!showed) {
           showed = true;
           return replace(url);
