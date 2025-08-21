@@ -20,6 +20,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/profiili/yksilo/tiedot-ja-luvat': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['yksiloGetTiedotJaLuvat'];
+    put: operations['yksiloUpdateTiedotJaLuvat'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/vapaa-ajan-toiminnot/{id}': {
     parameters: {
       query?: never;
@@ -570,6 +586,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/external-api/v1/profiilit': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get all profiilit paged of by page and size
+     * @description Returns all profiilit basic information in JSON-format.
+     */
+    get: operations['externalApiV1FindProfiilit'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/external-api/v1/koulutusmahdollisuudet': {
     parameters: {
       query?: never;
@@ -817,10 +853,20 @@ export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
     YksiloDto: {
+      /** @enum {string} */
+      readonly tunnisteTyyppi?: 'FIN' | 'EIDAS';
       tervetuloapolku?: boolean;
       lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
       lupaArkistoida?: boolean;
       lupaKayttaaTekoalynKoulutukseen?: boolean;
+      /** Format: int32 */
+      syntymavuosi?: number;
+      /** @enum {string} */
+      sukupuoli?: 'MIES' | 'NAINEN';
+      kotikunta?: string;
+      aidinkieli?: string;
+      /** @enum {string} */
+      valittuKieli?: 'fi' | 'sv' | 'en';
     };
     /** @example {
      *       "fi": "suomeksi",
@@ -1044,6 +1090,65 @@ export interface components {
        */
       sivuja: number;
     };
+    ExtAmmattiKiinnostusDto: {
+      /** Format: uri */
+      uri?: string;
+      koodi?: string;
+    };
+    ExtOsaamisKiinnostusDto: {
+      /** Format: uri */
+      uri?: string;
+    };
+    ExtPaamaaraDto: {
+      /** @enum {string} */
+      tyyppi?: 'LYHYT' | 'PITKA' | 'MUU';
+      /** Format: uuid */
+      tyomahdollisuusId?: string;
+      /** Format: uuid */
+      koulutusmahdollisuusId?: string;
+    };
+    ExtProfiiliDto: {
+      /** Format: uuid */
+      id?: string;
+      /** Format: int32 */
+      syntymavuosi?: number;
+      /** @enum {string} */
+      sukupuoli?: 'MIES' | 'NAINEN';
+      kotikunta?: string;
+      aidinkieli?: string;
+      /** @enum {string} */
+      valittuKieli?: 'fi' | 'sv' | 'en';
+      yksilonOsaamiset?: components['schemas']['ExtYksilonOsaaminenDto'][];
+      osaamisKiinnostukset?: components['schemas']['ExtOsaamisKiinnostusDto'][];
+      ammattiKiinnostukset?: components['schemas']['ExtAmmattiKiinnostusDto'][];
+      suosikit?: components['schemas']['ExtSuosikkiDto'][];
+      paamaarat?: components['schemas']['ExtPaamaaraDto'][];
+    };
+    ExtSuosikkiDto: {
+      /** Format: uuid */
+      tyomahdollisuusId?: string;
+      /** Format: uuid */
+      koulutusmahdollisuusId?: string;
+    };
+    ExtYksilonOsaaminenDto: {
+      /** @enum {string} */
+      lahde?: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
+      /** Format: uri */
+      uri?: string;
+    };
+    SivuDtoExtProfiiliDto: {
+      sisalto: components['schemas']['ExtProfiiliDto'][];
+      /**
+       * Format: int64
+       * @example 30
+       */
+      maara: number;
+      /**
+       * Format: int32
+       * @example 3
+       */
+      sivuja: number;
+    };
     ExtKoulutusMahdollisuusDto: {
       /** Format: uuid */
       id?: string;
@@ -1244,6 +1349,14 @@ export interface components {
       lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
       lupaArkistoida?: boolean;
       lupaKayttaaTekoalynKoulutukseen?: boolean;
+      /** Format: int32 */
+      syntymavuosi?: number;
+      /** @enum {string} */
+      sukupuoli?: 'MIES' | 'NAINEN';
+      kotikunta?: string;
+      aidinkieli?: string;
+      /** @enum {string} */
+      valittuKieli?: 'fi' | 'sv' | 'en';
       tyopaikat?: components['schemas']['TyopaikkaExportDto'][];
       koulutusKokonaisuudet?: components['schemas']['KoulutusKokonaisuusExportDto'][];
       toiminnot?: components['schemas']['ToimintoExportDto'][];
@@ -1405,6 +1518,48 @@ export interface operations {
     };
   };
   yksiloUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['YksiloDto'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  yksiloGetTiedotJaLuvat: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['YksiloDto'];
+        };
+      };
+    };
+  };
+  yksiloUpdateTiedotJaLuvat: {
     parameters: {
       query?: never;
       header?: never;
@@ -2748,6 +2903,34 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['SivuDtoExtTyoMahdollisuusDto'];
+        };
+      };
+    };
+  };
+  externalApiV1FindProfiilit: {
+    parameters: {
+      query?: {
+        sivu?: number;
+        koko?: number;
+        /**
+         * @description Only get profiles modified after this timestamp
+         * @example 2025-07-03T09:00:00Z
+         */
+        muokattuJalkeen?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SivuDtoExtProfiiliDto'];
         };
       };
     };
