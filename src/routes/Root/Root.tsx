@@ -14,10 +14,17 @@ import { useTranslation } from 'react-i18next';
 import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router';
 import { LogoutFormContext } from '.';
 
-const agents: Record<'fi' | 'sv' | 'en', string> = {
-  fi: '2c134474-326f-4456-9139-8e585a569a9a',
-  sv: 'd41ea75b-628f-4420-9e4a-7431ffabb047',
-  en: '37f50124-4dec-4cab-8bc6-f8d2ea5bfe21',
+const agents = {
+  test: {
+    fi: 'dea3919a-4f96-436e-a6bd-b24e4218da9f',
+    sv: 'fdc65221-a280-48b3-9dbc-9dea053a9cb4',
+    en: 'e78e5079-e789-4706-b0a2-e665eb87e7dd',
+  },
+  prod: {
+    fi: '2c134474-326f-4456-9139-8e585a569a9a',
+    sv: 'd41ea75b-628f-4420-9e4a-7431ffabb047',
+    en: '37f50124-4dec-4cab-8bc6-f8d2ea5bfe21',
+  },
 };
 
 const Root = () => {
@@ -31,15 +38,15 @@ const Root = () => {
   const location = useLocation();
 
   const hostname = window.location.hostname;
-  const siteId = React.useMemo(() => {
-    if (hostname === 'localhost' || hostname === 'jodkehitys.fi') {
-      return 37;
+  const { siteId, agent } = React.useMemo(() => {
+    if (hostname === 'osaamispolku.fi') {
+      return { siteId: 38, agent: agents.prod[language as keyof typeof agents.prod] };
     } else if (hostname === 'jodtestaus.fi') {
-      return 38;
-    } else if (hostname === 'osaamispolku.fi') {
-      return 36;
+      return { siteId: 36, agent: agents.test[language as keyof typeof agents.test] };
+    } else {
+      return { siteId: 37, agent: agents.test[language as keyof typeof agents.test] };
     }
-  }, [hostname]);
+  }, [hostname, language]);
 
   const [langMenuOpen, setLangMenuOpen] = React.useState(false);
 
@@ -176,7 +183,7 @@ const Root = () => {
       <Toaster />
       <ScrollRestoration />
       <Chatbot
-        agent={agents[language as keyof typeof agents]}
+        agent={agent}
         language={language}
         agentIcon={`${import.meta.env.BASE_URL}chatbot-icon.svg`}
         header={t('chatbot.header')}
@@ -190,9 +197,7 @@ const Root = () => {
         saveChatAsCsv={t('chatbot.save-chat-as-csv')}
         close={t('chatbot.close')}
       />
-      {siteId && (
-        <MatomoTracker trackerUrl="https://analytiikka.opintopolku.fi" siteId={siteId} pathname={location.pathname} />
-      )}
+      <MatomoTracker trackerUrl="https://analytiikka.opintopolku.fi" siteId={siteId} pathname={location.pathname} />
     </div>
   );
 };
