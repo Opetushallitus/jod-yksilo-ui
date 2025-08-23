@@ -43,19 +43,23 @@ const ToolOpportunityCardActionMenu = ({
     <PopupList>
       <ul id={menuId} className="flex flex-col gap-y-2 w-full">
         <li>
-          <Link to={compareTo} type="button">
+          <Link to={compareTo} type="button" data-testid="opportunity-action-compare">
             <PopupListItem>{t('compare')}</PopupListItem>
           </Link>
         </li>
         {isDev && (
           <li>
-            <Link to="#" onClick={mockOnClick} type="button">
+            <Link to="#" onClick={mockOnClick} type="button" data-testid="opportunity-action-create-path">
               <PopupListItem>TODO: {t('create-path')}</PopupListItem>
             </Link>
           </li>
         )}
         <li>
-          <button onClick={() => copyToClipboard(window.location.href)} className="cursor-pointer w-full">
+          <button
+            data-testid="opportunity-action-share"
+            onClick={() => copyToClipboard(window.location.href)}
+            className="cursor-pointer w-full"
+          >
             <PopupListItem>{t('share')}</PopupListItem>
           </button>
         </li>

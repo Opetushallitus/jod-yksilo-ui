@@ -38,7 +38,9 @@ const LandingPage = () => {
   return (
     <MainLayout>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{t('profile.landing-page.title')}</h1>
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1" data-testid="landing-title">
+        {t('profile.landing-page.title')}
+      </h1>
 
       <div className="mb-8 text-body-md flex flex-col gap-6">
         <p>{t('profile.landing-page.description')}</p>
@@ -66,6 +68,7 @@ const LandingPage = () => {
           label={t('login-to-service')}
           /* eslint-disable-next-line react/no-unstable-nested-components */
           LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
+          data-testid="landing-login"
         />
       </div>
       <div className="mt-8">

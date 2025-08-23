@@ -332,11 +332,18 @@ export const AddOrEditPatevyysModal = ({
                     }),
                   });
                 }}
+                data-testid="free-time-delete"
               />
             )}
           </div>
           <div className="flex flex-row justify-between gap-5">
-            <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />
+            <Button
+              label={t('cancel')}
+              variant="white"
+              onClick={onClose}
+              className="whitespace-nowrap"
+              data-testid="free-time-cancel"
+            />
             {!isFirstStep && (
               <Button
                 label={t('previous')}
@@ -344,6 +351,7 @@ export const AddOrEditPatevyysModal = ({
                 disabled={!isValid}
                 onClick={previousStep}
                 className="whitespace-nowrap"
+                data-testid="free-time-previous"
               />
             )}
             {!isLastStep && (
@@ -353,6 +361,7 @@ export const AddOrEditPatevyysModal = ({
                 disabled={isLastStep || !isValid}
                 onClick={nextStep}
                 className="whitespace-nowrap"
+                data-testid="free-time-next"
               />
             )}
             {isLastStep && (
@@ -362,6 +371,7 @@ export const AddOrEditPatevyysModal = ({
                 variant="white"
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                data-testid="free-time-save"
               />
             )}
           </div>

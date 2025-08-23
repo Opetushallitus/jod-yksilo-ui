@@ -29,6 +29,7 @@ const AddedTags = ({ osaamiset, lahdetyyppi, onClick }: AddedTagProps) =>
         sourceType={sourceType}
         onClick={onClick(osaaminen.id)}
         variant="added"
+        data-testid={`added-tag-${osaaminen.id}`}
       />
     );
   });

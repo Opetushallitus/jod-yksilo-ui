@@ -32,7 +32,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
 
   return (
     <>
-      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero">
+      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero" data-testid="work-history-step-title">
         {type === 'tyopaikka' && !id && t('work-history.add-new-workplace')}
         {type === 'tyopaikka' && id && t('work-history.edit-workplace')}
         {type === 'toimenkuva' && !toimenkuvaId && t('work-history.add-new-job-description')}
@@ -42,7 +42,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
         {t('profile.work-history.modals.description')}
       </p>
       {type === 'tyopaikka' && (
-        <div className="mb-6">
+        <div className="mb-6" data-testid="work-history-employer-field">
           <InputField
             label={t('work-history.employer')}
             {...register(`nimi.${language}` as const)}
@@ -52,7 +52,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
           <FormError name={`nimi.${language}`} errors={errors} />
         </div>
       )}
-      <div className="mb-6">
+      <div className="mb-6" data-testid="work-history-job-description-field">
         <InputField
           label={t('work-history.job-description')}
           {...register(`toimenkuvat.${toimenkuva}.nimi.${language}` as const)}
@@ -62,7 +62,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
         <FormError name={`toimenkuvat.${toimenkuva}.nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-6">
-        <div className="block w-full">
+        <div className="block w-full" data-testid="work-history-started-field">
           <Controller
             control={control}
             render={({ field: { onBlur }, field }) => (
@@ -87,7 +87,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
             errors={errors}
           />
         </div>
-        <div className="block w-full">
+        <div className="block w-full" data-testid="work-history-ended-field">
           <Controller
             control={control}
             render={({ field }) => (

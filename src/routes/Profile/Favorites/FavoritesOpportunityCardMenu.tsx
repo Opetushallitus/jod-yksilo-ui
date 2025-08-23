@@ -44,13 +44,13 @@ const FavoritesOpportunityCardActionMenu = ({
     <PopupList>
       <ul id={menuId} className="flex flex-col gap-y-2 w-full">
         <li>
-          <Link to={compareTo} type="button">
+          <Link to={compareTo} type="button" data-testid="opportunity-action-compare">
             <PopupListItem>{t('compare')}</PopupListItem>
           </Link>
         </li>
         {isDev && (
           <li>
-            <Link to="#" onClick={mockOnClick} type="button">
+            <Link to="#" onClick={mockOnClick} type="button" data-testid="opportunity-action-create-path">
               <PopupListItem>TODO: {t('create-path')}</PopupListItem>
             </Link>
           </li>
@@ -59,6 +59,7 @@ const FavoritesOpportunityCardActionMenu = ({
           <button
             onClick={() => void copyToClipboard(`${window.location.origin}/yksilo${compareTo.pathname}`)}
             className="cursor-pointer w-full"
+            data-testid="opportunity-action-share"
           >
             <PopupListItem>{t('share')}</PopupListItem>
           </button>

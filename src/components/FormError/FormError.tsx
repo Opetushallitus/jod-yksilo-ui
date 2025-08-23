@@ -14,5 +14,13 @@ interface FormErrorProps {
  */
 export const FormError = ({ name, errors }: FormErrorProps) =>
   name && getNestedProperty(errors, name) ? (
-    <ErrorMessage name={name} errors={errors} render={({ message }) => <span className="text-alert">{message}</span>} />
+    <ErrorMessage
+      name={name}
+      errors={errors}
+      render={({ message }) => (
+        <span className="text-alert" data-testid={`form-error-${name.replace(/\./g, '-')}`}>
+          {message}
+        </span>
+      )}
+    />
   ) : null;

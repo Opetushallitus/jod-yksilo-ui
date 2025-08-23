@@ -95,13 +95,14 @@ const EducationOpportunity = () => {
       navTitle: t('education-opportunity.open-educations'),
       showNavTitle: false,
       content: (
-        <div className="flex flex-col w-full mb-9">
+        <div className="flex flex-col w-full mb-9" data-testid="education-opportunity-opintopolku-section">
           <div className="bg-[#397B0F] h-9 flex items-center pl-4 mb-7">
             <img src={opintopolkuLogo} alt={t('education-opportunity.opintopolku.banner-alt-text')} className="h-6" />
           </div>
           <h3 className="text-heading-2 mb-4">{t('education-opportunity.opintopolku.title')}</h3>
           <p>{t('education-opportunity.opintopolku.description')}</p>
           <Button
+            data-testid="education-opportunity-open-opintopolku"
             size="sm"
             className="w-fit mt-7"
             label={t('education-opportunity.opintopolku.button-label')}

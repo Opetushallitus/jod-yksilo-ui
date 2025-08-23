@@ -60,6 +60,7 @@ export const GroupBySource = ({
       iconSide="right"
       variant="white"
       size="sm"
+      data-testid={`competences-move-to-${competence.toLowerCase()}`}
     />
   );
 
@@ -120,6 +121,7 @@ export const GroupBySource = ({
                               setLocalizedMuutOsaamisetVapaatekstiExpanded((currentState) => !currentState)
                             }
                             className="text-body-sm text-accent hover:underline hover:cursor-pointer"
+                            data-testid="competences-freeform-toggle"
                           >
                             {localizedMuutOsaamisetVapaatekstiExpanded ? t('show-less') : t('show-more')}
                           </button>

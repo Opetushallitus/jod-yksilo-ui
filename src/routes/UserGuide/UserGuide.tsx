@@ -20,12 +20,21 @@ const UserGuide = () => {
         pathname,
       }),
     };
-    return <PageNavigation menuSection={menuSection} openSubMenuLabel="" activeIndicator="dot" />;
+    return (
+      <PageNavigation
+        data-testid="user-guide-nav"
+        menuSection={menuSection}
+        openSubMenuLabel=""
+        activeIndicator="dot"
+      />
+    );
   }, [t, userGuideRoutes, pathname]);
 
   return (
     <MainLayout navChildren={navChildren}>
-      <Outlet />
+      <div data-testid="user-guide-content">
+        <Outlet />
+      </div>
     </MainLayout>
   );
 };

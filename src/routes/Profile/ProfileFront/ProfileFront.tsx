@@ -504,7 +504,7 @@ const ProfileFront = () => {
   return (
     <MainLayout navChildren={navChildren}>
       <title>{t('profile.front.title')}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1" data-testid="profile-front-title">
         {t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
       </h1>
 

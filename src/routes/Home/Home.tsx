@@ -55,7 +55,7 @@ const Home = () => {
   const toolLink = `/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`;
 
   return (
-    <main role="main" className="mx-auto w-full max-w-(--breakpoint-xl) bg-white" id="jod-main">
+    <main role="main" className="mx-auto w-full max-w-(--breakpoint-xl) bg-white" id="jod-main" data-testid="home-page">
       <title>{t('osaamispolku')}</title>
 
       <FullWidthContainer
@@ -110,6 +110,7 @@ const Home = () => {
             icon={<JodArrowRight />}
             iconSide="right"
             LinkComponent={LinkComponent(toolLink)}
+            data-testid="home-explore-opportunities"
           />
           <Button
             label={t('home.create-own-profile')}
@@ -117,6 +118,7 @@ const Home = () => {
             icon={<JodArrowRight />}
             iconSide="right"
             LinkComponent={LinkComponent(preferencesLink.to)}
+            data-testid="home-create-profile"
           />
         </div>
       </Content>

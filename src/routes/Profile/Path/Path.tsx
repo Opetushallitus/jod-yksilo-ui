@@ -401,6 +401,7 @@ const Path = () => {
                 onClick={closePolku}
                 className="cursor-pointer self-start"
                 aria-label={t('profile.paths.back-to-goals')}
+                data-testid="path-close"
               >
                 <JodClose />
               </button>
@@ -411,6 +412,7 @@ const Path = () => {
                 label={t('profile.paths.plan-name')}
                 {...methods.register(`nimi.${language}` as const)}
                 onBlur={methods.handleSubmit(save)}
+                data-testid="path-plan-name"
               />
               <FormError name={`nimi.${language}`} errors={methods.formState.errors} />
             </div>
@@ -457,6 +459,7 @@ const Path = () => {
                       ? [getFirstStep(), getLastStep()]
                       : [...vaiheet.map((vaihe, index) => getProgressStep(vaihe, index)), getLastStep()]
                   }
+                  data-testid="path-progress"
                 />
               </div>
             </div>
@@ -470,7 +473,9 @@ const Path = () => {
                   ({allChecked.length}/
                   {t('count-competences', { count: vaaditutOsaamiset.length - ignoredOsaamisetValues.length })})
                 </div>
-                <div className="text-heading-3">{percentage}%</div>
+                <div className="text-heading-3" data-testid="path-percentage">
+                  {percentage}%
+                </div>
               </div>
               {/* Progress bar */}
               <div className="relative w-full h-6 mb-11">
@@ -480,7 +485,7 @@ const Path = () => {
             </div>
             {/* Osaamiset */}
             <div>
-              <table className="w-full" border={0} cellPadding={0} cellSpacing={0}>
+              <table className="w-full" border={0} cellPadding={0} cellSpacing={0} data-testid="path-competences-table">
                 <thead className="bg-white">
                   <tr className="text-body-md text-left align-middle">
                     <th scope="col" className="font-arial text-form-label p-4">
@@ -523,6 +528,7 @@ const Path = () => {
                                 }
                                 ariaLabel={name}
                                 onChange={() => onOsaaminenChange(uri)}
+                                data-testid={`path-has-competence-${i}`}
                               />
                             )}
                           />
@@ -539,6 +545,7 @@ const Path = () => {
                                 disabled={disabledIgnores.includes(uri)}
                                 ariaLabel={`${t('profile.paths.ignore')} ${name}`}
                                 onChange={() => onIgnoreChange(uri)}
+                                data-testid={`path-ignore-${i}`}
                               />
                             )}
                           />

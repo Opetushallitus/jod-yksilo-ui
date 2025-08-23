@@ -90,12 +90,13 @@ const MyGoals = () => {
       {suosikitIsEmpty && (
         <div className="flex flex-col gap-3 my-3">
           <div className="mt-6 mb-7">
-            <EmptyState text={t('profile.my-goals.no-favorites-selected')} />
+            <EmptyState text={t('profile.my-goals.no-favorites-selected')} data-testid="goals-empty-state" />
           </div>
           <Link
             to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
             type="button"
             className="text-button-md hover:underline text-accent"
+            data-testid="goals-add-favorites-link"
           >
             <div className="flex flex-row justify-start">
               <div className="flex items-center gap-2">
@@ -113,6 +114,7 @@ const MyGoals = () => {
         }}
         label={t('profile.my-goals.add-favorites-to-goals')}
         disabled={suosikitIsEmpty}
+        data-testid="goals-add-favorites-button"
       />
     </MainLayout>
   );

@@ -132,7 +132,7 @@ export const OpportunityCard = ({
     ) : null;
 
   return (
-    <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border">
+    <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border" data-testid="opportunity-card">
       <div className="order-2 flex flex-col">
         <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">{cardTypeTitle}</span>
         {to ? (
@@ -140,11 +140,17 @@ export const OpportunityCard = ({
             to={to}
             state={{ from }}
             className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto hover:underline hover:text-accent"
+            data-testid="opportunity-card-title-link"
           >
             {name}
           </NavLink>
         ) : (
-          <span className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto">{name}</span>
+          <span
+            className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto"
+            data-testid="opportunity-card-title"
+          >
+            {name}
+          </span>
         )}
         <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
         {isDev && (
@@ -157,6 +163,7 @@ export const OpportunityCard = ({
       </div>
       <div
         className={`flex flex-col sm:flex-row items-start sm:items-center gap-x-7 gap-y-5 mb-5 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
+        data-testid="opportunity-card-actions"
       >
         {typeof matchValue === 'number' && matchLabel && (
           <div
@@ -164,6 +171,7 @@ export const OpportunityCard = ({
               'bg-[#AD4298]': type === 'TYOMAHDOLLISUUS',
               'bg-[#00818A]': type === 'KOULUTUSMAHDOLLISUUS',
             })}
+            data-testid="opportunity-card-match"
           >
             <span className="text-heading-2-mobile leading-8">{Math.round(matchValue * 100)}%</span>
             <span className="text-body-xs font-arial font-bold">{matchLabel}</span>

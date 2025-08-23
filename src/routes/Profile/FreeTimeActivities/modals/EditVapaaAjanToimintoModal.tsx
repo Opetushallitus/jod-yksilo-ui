@@ -148,11 +148,25 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
                   cancelText: t('cancel'),
                 });
               }}
+              data-testid="free-time-delete-activity"
             />
           </div>
           <div className="flex flex-row gap-5">
-            <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />
-            <Button form={formId} label={t('save')} variant="white" disabled={!isValid} className="whitespace-nowrap" />
+            <Button
+              label={t('cancel')}
+              variant="white"
+              onClick={onClose}
+              className="whitespace-nowrap"
+              data-testid="free-time-cancel"
+            />
+            <Button
+              form={formId}
+              label={t('save')}
+              variant="white"
+              disabled={!isValid}
+              className="whitespace-nowrap"
+              data-testid="free-time-save"
+            />
           </div>
         </div>
       }

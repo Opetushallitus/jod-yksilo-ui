@@ -34,27 +34,29 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
   const carets = sm ? <>{userMenuOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}</> : null;
 
   return data?.csrf ? (
-    <div className="relative">
+    <div className="relative" data-testid="user-button">
       <button
         ref={userMenuButtonRef}
         onClick={() => setUserMenuOpen(!userMenuOpen)}
         className="flex flex-col sm:flex-row justify-center items-center select-none cursor-pointer sm:mr-5"
+        data-testid="user-button-trigger"
       >
         <JodUser className="mx-auto" />
         <span className="whitespace-nowrap sm:text-button-sm text-[12px] sm:mx-3">{data?.etunimi}</span>
         {carets}
       </button>
       {userMenuOpen && (
-        <div ref={userMenuRef} className="absolute right-0 min-w-max translate-y-8 transform">
+        <div ref={userMenuRef} className="absolute right-0 min-w-max translate-y-8 transform" data-testid="user-menu">
           <PopupList classNames="gap-2">
             <NavLink
               to={userMenuProfileFrontUrl}
               onClick={() => setUserMenuOpen(false)}
               className={(props) => `w-full ${getActiveClassNames(props)}`.trim()}
+              data-testid="user-menu-profile"
             >
               <PopupListItem>{t('profile.index')}</PopupListItem>
             </NavLink>
-            <button type="button" onClick={onLogout} className="cursor-pointer w-full">
+            <button type="button" onClick={onLogout} className="cursor-pointer w-full" data-testid="user-menu-logout">
               <PopupListItem classNames="w-full">{t('logout')}</PopupListItem>
             </button>
           </PopupList>
@@ -70,6 +72,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
           onClick();
         }
       }}
+      data-testid="user-login-link"
     >
       <JodUser className="mx-auto" />
       <span className="whitespace-nowrap text-[12px] sm:text-button-sm sm:mr-5">{t('login')}</span>

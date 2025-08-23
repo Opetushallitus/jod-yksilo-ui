@@ -36,7 +36,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
 
   return (
     <>
-      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero">
+      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero" data-testid="free-time-step-title">
         {type === 'toiminta' && !id && t('free-time-activities.add-new-free-time-activity')}
         {type === 'toiminta' && id && t('free-time-activities.edit-activity')}
         {type === 'patevyys' && !patevyysId && t('free-time-activities.add-new-activity')}
@@ -46,7 +46,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
         {t('profile.free-time-activities.modals.description')}
       </p>
       {type === 'toiminta' && (
-        <div className="mb-6">
+        <div className="mb-6" data-testid="free-time-theme-field">
           <InputField
             label={t('free-time-activities.name-of-free-time-theme')}
             {...register(`nimi.${language}` as const)}
@@ -55,7 +55,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
           <FormError name={`nimi.${language}`} errors={errors} />
         </div>
       )}
-      <div className="mb-6">
+      <div className="mb-6" data-testid="free-time-activity-name-field">
         <InputField
           label={t('free-time-activities.name-of-free-time-activity')}
           {...register(`patevyydet.${patevyys}.nimi.${language}` as const)}

@@ -104,5 +104,5 @@ export const Breadcrumb = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <DSBreadCrumb items={items} serviceVariant="yksilo" LinkComponent={NavLink} />;
+  return <DSBreadCrumb items={items} serviceVariant="yksilo" LinkComponent={NavLink} dataTestId="breadcrumb" />;
 };

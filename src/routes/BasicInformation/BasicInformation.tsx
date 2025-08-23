@@ -47,12 +47,21 @@ const BasicInformation = () => {
         pathname,
       }),
     };
-    return <PageNavigation menuSection={menuSection} openSubMenuLabel="" activeIndicator="dot" />;
+    return (
+      <PageNavigation
+        data-testid="basic-information-nav"
+        menuSection={menuSection}
+        openSubMenuLabel=""
+        activeIndicator="dot"
+      />
+    );
   }, [t, routes, pathname]);
 
   return (
     <MainLayout navChildren={navChildren}>
-      <Outlet />
+      <div data-testid="basic-information-content">
+        <Outlet />
+      </div>
     </MainLayout>
   );
 };

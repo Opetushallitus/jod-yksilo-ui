@@ -53,6 +53,7 @@ const Interests = () => {
       </div>
       <div className="p-6 -mx-6 bg-bg-gray-2 flex flex-col items-start gap-5 rounded-b">
         <Button
+          data-testid="interests-open-virtual-assistant"
           label={t('tool.my-own-data.interests.conversational-virtual-assistant')}
           variant="white"
           onClick={() => {
@@ -62,6 +63,7 @@ const Interests = () => {
           }}
         />
         <Button
+          data-testid="interests-import-from-profile"
           label={t('tool.my-own-data.interests.import')}
           onClick={() => void importFromProfile()}
           disabled={!isLoggedIn}
