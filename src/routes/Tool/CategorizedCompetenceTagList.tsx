@@ -209,8 +209,9 @@ const CategorizedCompetenceTagList = () => {
   };
 
   return (
-    <div className="bg-white rounded p-6">
+    <div className="bg-white rounded p-6" data-testid="categorized-competence-tag-list">
       <Accordion
+        data-testid="categorized-competence-accordion"
         title={t('tool.my-own-data.competences-of-your-choice-with-counts', {
           osaamiset: osaamiset.filter((o) => o.tyyppi !== 'KIINNOSTUS').length,
           kiinnostukset: kiinnostukset.length,
@@ -285,8 +286,11 @@ const CategorizedCompetenceTagList = () => {
           </div>
 
           <div className="flex flex-col gap-4 p-6 -mx-6 -mb-6 bg-bg-gray-2 items-start rounded-b">
-            <CompetenceExport />
+            <div data-testid="competence-export">
+              <CompetenceExport />
+            </div>
             <Button
+              data-testid="competence-delete-all"
               variant="white"
               label={t('tool.my-own-data.competences.delete-all.title')}
               disabled={

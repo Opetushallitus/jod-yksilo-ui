@@ -123,6 +123,7 @@ const Preferences = () => {
           onChange={() => {
             setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle);
           }}
+          data-testid="pref-share-third-parties"
         />
         <ToggleWithText
           title={t('preferences.data-disclosure-unanonymized.permission-to-archive.title')}
@@ -131,6 +132,7 @@ const Preferences = () => {
           onChange={() => {
             setLupaArkistoida(!lupaArkistoida);
           }}
+          data-testid="pref-archive"
         />
         <ToggleWithText
           title={t('preferences.data-disclosure-unanonymized.permission-ai-training.title')}
@@ -139,12 +141,18 @@ const Preferences = () => {
           onChange={() => {
             setLupaKayttaaTekoalynKoulutukseen(!lupaKayttaaTekoalynKoulutukseen);
           }}
+          data-testid="pref-ai-training"
         />
       </section>
       <section className="mb-8">
         <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.download.title')}</h2>
         <p className="text-body-md mb-5">{t('preferences.download.description')}</p>
-        <Button variant="accent" label={t('preferences.download.action')} LinkComponent={DownloadLink} />
+        <Button
+          variant="accent"
+          label={t('preferences.download.action')}
+          LinkComponent={DownloadLink}
+          data-testid="pref-download-data"
+        />
       </section>
       <section>
         <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.delete-profile.title')}</h2>
@@ -159,6 +167,7 @@ const Preferences = () => {
               onConfirm: deleteProfile,
             });
           }}
+          data-testid="pref-delete-profile"
         />
       </section>
     </MainLayout>

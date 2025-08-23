@@ -132,7 +132,7 @@ const MyOwnData = () => {
   const virtualAssistantClassNames = virtualAssistantOpen ? 'h-[calc(100vh-96px-40px)]' : '';
 
   return (
-    <aside className={virtualAssistantClassNames}>
+    <aside className={virtualAssistantClassNames} data-testid="tool-sidebar">
       {virtualAssistantOpen ? (
         <div className="bg-white rounded h-full flex flex-col">
           <VirtualAssistant setVirtualAssistantOpen={setVirtualAssistantOpen} />
@@ -144,7 +144,12 @@ const MyOwnData = () => {
           </h2>
           <p className="text-body-md-mobile sm:text-body-md mb-5 sm:mb-7">{t('tool.my-own-data.description')}</p>
           <div className="lg:sticky lg:top-[96px]">
-            <div role="tablist" aria-labelledby={titleId} className="flex text-button-sm select-none">
+            <div
+              role="tablist"
+              aria-labelledby={titleId}
+              className="flex text-button-sm select-none"
+              data-testid="tool-tabs"
+            >
               {tabs.map((tab, index) => (
                 <button
                   key={tab.text}
@@ -160,6 +165,7 @@ const MyOwnData = () => {
                     'bg-white': tab.active,
                     'text-accent': !tab.active,
                   })}
+                  data-testid={`tool-tab-${tab.text.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   {tab.icon}
                   {tab.text}
@@ -240,7 +246,7 @@ const YourOpportunitiesPagination = ({
   const filters = typeof filter === 'string' ? [filter] : filter;
 
   return mixedMahdollisuudet.length > 0 ? (
-    <div className={className}>
+    <div className={className} data-testid="tool-pagination">
       <Pagination
         currentPage={ehdotuksetPageNr}
         type="button"
@@ -336,6 +342,7 @@ const YourOpportunitiesCard = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
           disabled={ehdotuksetLoading}
           iconSide="left"
           icon={ehdotuksetLoading ? <Spinner size={24} color="white" /> : undefined}
+          data-testid="update-opportunities"
         />
       </div>
     </div>
@@ -413,7 +420,7 @@ const ExploreOpportunities = () => {
       : t('tool.your-opportunities.sorting.by-relevance');
 
   return (
-    <main role="main" className="col-span-3 lg:col-span-1" id="jod-main">
+    <main role="main" className="col-span-3 lg:col-span-1" id="jod-main" data-testid="tool-main">
       <h2 id="opportunities-title" tabIndex={-1} className="text-heading-2-mobile sm:text-heading-2 scroll-mt-11 mb-5">
         {`2. ${t('tool.your-opportunities.title')}`}
       </h2>
@@ -423,7 +430,7 @@ const ExploreOpportunities = () => {
       <div className="lg:sticky lg:top-11 lg:z-10 lg:h-[186px] relative">
         <div className="flex gap-5 justify-between items-center py-5 bg-linear-to-b from-85% from-bg-gray lg:absolute lg:-left-4 lg:-right-4 lg:px-4">
           <div className="flex flex-col gap-5 mb-5 items-start">
-            <fieldset className="flex flex-col gap-5">
+            <fieldset className="flex flex-col gap-5" data-testid="tool-filters">
               <legend className="text-heading-4-mobile sm:text-heading-4 mb-5">{t('show')}</legend>
               <Checkbox
                 ariaLabel={getCheckboxLabel('TYOMAHDOLLISUUS')}
@@ -432,6 +439,7 @@ const ExploreOpportunities = () => {
                 name={filterValues.TYOMAHDOLLISUUS}
                 onChange={onFilterChange}
                 value={filterValues.TYOMAHDOLLISUUS}
+                data-testid="filter-job-opportunities"
               />
               <Checkbox
                 ariaLabel={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
@@ -440,6 +448,7 @@ const ExploreOpportunities = () => {
                 name={filterValues.KOULUTUSMAHDOLLISUUS}
                 onChange={onFilterChange}
                 value={filterValues.KOULUTUSMAHDOLLISUUS}
+                data-testid="filter-education-opportunities"
               />
             </fieldset>
 
@@ -448,11 +457,12 @@ const ExploreOpportunities = () => {
               icon={<JodSort size={18} />}
               bgColor="white"
               onClick={() => setFiltersOpen(!filtersOpen)}
+              data-testid="open-sorting"
             />
           </div>
         </div>
         {filtersOpen && (
-          <div ref={filterMenuRef} onBlur={handleBlur}>
+          <div ref={filterMenuRef} onBlur={handleBlur} data-testid="sorting-menu">
             <OpportunitiesSorting />
           </div>
         )}
@@ -462,6 +472,7 @@ const ExploreOpportunities = () => {
         id="tool-your-opportunities-list"
         ref={scrollRef}
         className="flex flex-col gap-3 sm:gap-5 mb-8 scroll-mt-[96px]"
+        data-testid="opportunities-list"
       >
         {mixedMahdollisuudet.map((mahdollisuus) => {
           const { id, mahdollisuusTyyppi } = mahdollisuus;

@@ -13,11 +13,11 @@ const RateAiContent = ({ isLiked, isDisliked, onLike, onDislike }: RateAiContent
   const DislikeIcon = isDisliked ? JodThumbDownFilled : JodThumbDown;
 
   return (
-    <div className="bg-white px-5 py-4 flex justify-between items-center">
+    <div className="bg-white px-5 py-4 flex justify-between items-center" data-testid="rate-ai-content">
       <p className="text-body-sm">{t('rate-ai-content')}</p>
       <div className="flex gap-6">
-        <LikeIcon className="text-accent cursor-pointer" onClick={onLike} />
-        <DislikeIcon className="text-accent cursor-pointer" onClick={onDislike} />
+        <LikeIcon className="text-accent cursor-pointer" onClick={onLike} data-testid="rate-like" />
+        <DislikeIcon className="text-accent cursor-pointer" onClick={onDislike} data-testid="rate-dislike" />
       </div>
     </div>
   );

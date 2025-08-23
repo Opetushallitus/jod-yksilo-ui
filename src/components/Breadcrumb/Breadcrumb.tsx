@@ -20,7 +20,7 @@ export type BreadcrumbLinkProps = {
 
 export const BreadcrumbLink = ({ to, children, current }: BreadcrumbLinkProps) => {
   return (
-    <li>
+    <li data-testid={current ? 'breadcrumb-current' : 'breadcrumb-link'}>
       {current ? (
         <span className="text-black" aria-current="location">
           {children}
@@ -32,6 +32,7 @@ export const BreadcrumbLink = ({ to, children, current }: BreadcrumbLinkProps) =
             className={cx('todo', {
               'text-black': current,
             })}
+            data-testid="breadcrumb-navlink"
           >
             {children}
           </NavLink>
@@ -108,7 +109,11 @@ export const Breadcrumb = () => {
   }, [language, matches, searchParams, t]);
 
   return (
-    <nav aria-label={t('current-location')} className="text-accent text-body-sm font-bold col-span-3 mb-3 print:hidden">
+    <nav
+      aria-label={t('current-location')}
+      className="text-accent text-body-sm font-bold col-span-3 mb-3 print:hidden"
+      data-testid="breadcrumb"
+    >
       <ol className="flex flex-row flex-wrap gap-y-2">{crumbLinks()}</ol>
     </nav>
   );

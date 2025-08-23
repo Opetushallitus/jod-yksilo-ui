@@ -21,14 +21,15 @@ export const TooltipWrapper = ({
   }
 
   return (
-    <Tooltip open={tooltipOpen} placement={tooltipPlacement}>
+    <Tooltip open={tooltipOpen} placement={tooltipPlacement} data-testid="tooltip">
       <TooltipContent
         className={`bg-black text-white rounded-xl p-5 z-50 text-body-sm sm:text-body-md font-arial ${sizeClassName}`}
+        data-testid="tooltip-content"
       >
         {tooltipContent}
       </TooltipContent>
       <TooltipTrigger asChild>
-        <div>{children}</div>
+        <div data-testid="tooltip-trigger">{children}</div>
       </TooltipTrigger>
     </Tooltip>
   );

@@ -1,11 +1,11 @@
 import { tidyClasses as tc } from '@jod/design-system';
 
-interface ActionButtonProps {
+type ActionButtonProps = {
   label: string;
   icon: React.ReactNode;
   className?: string;
   onClick: () => void;
-}
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const ActionButton = ({ label, icon, className = '', onClick, ...rest }: ActionButtonProps) => {
   return (

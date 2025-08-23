@@ -262,7 +262,12 @@ const InfoButton = ({ ariaLabel, onClick }: { ariaLabel: string; onClick: () => 
   const { xl } = useMediaQueries();
   const mobileInfoIcon = !xl ? <JodInfo /> : null;
   return xl ? null : (
-    <button className="cursor-pointer ml-auto p-5" aria-label={ariaLabel} onClick={onClick}>
+    <button
+      data-testid={`goal-info-${ariaLabel}`}
+      className="cursor-pointer ml-auto p-5"
+      aria-label={ariaLabel}
+      onClick={onClick}
+    >
       {mobileInfoIcon}
     </button>
   );
@@ -324,13 +329,14 @@ const Goals = () => {
       <p className="text-body-md-mobile sm:text-body-md whitespace-pre-wrap mb-6">
         {t('tool.my-own-data.goals.description')}
       </p>
-      <div className="flex flex-wrap flex-col gap-3">
+      <div className="flex flex-wrap flex-col gap-3" data-testid="goals-list">
         <TooltipWrapper
           tooltipOpen={openTooltips.mapCompetence}
           tooltipContent={t('tool.my-own-data.goals.map-competence-tooltip')}
           halfWidth
         >
           <SelectionCard
+            data-testid="goal-map-competence"
             actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('mapCompetence')} />}
             className="bg-bg-gray-2"
             icon={<CompetenceIcon />}
@@ -347,6 +353,7 @@ const Goals = () => {
           halfWidth
         >
           <SelectionCard
+            data-testid="goal-trainings"
             actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('trainings')} />}
             className="bg-bg-gray-2"
             icon={<TrainingsIcon />}
@@ -363,6 +370,7 @@ const Goals = () => {
           halfWidth
         >
           <SelectionCard
+            data-testid="goal-job-opportunities"
             actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('jobOpportunities')} />}
             className="bg-bg-gray-2"
             icon={<JobOpportunitiesIcon />}
@@ -379,6 +387,7 @@ const Goals = () => {
           halfWidth
         >
           <SelectionCard
+            data-testid="goal-map-opportunities"
             actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('mapOpportunities')} />}
             className="bg-bg-gray-2"
             icon={<MappingOpportunitiesIcon />}
@@ -395,6 +404,7 @@ const Goals = () => {
           halfWidth
         >
           <SelectionCard
+            data-testid="goal-something-else"
             actionComponent={<InfoButton ariaLabel="info" onClick={toggleTooltip('somethingElse')} />}
             className="bg-bg-gray-2"
             icon={<SomethingElseIcon />}

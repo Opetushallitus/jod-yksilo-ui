@@ -101,7 +101,12 @@ export const VirtualAssistant = ({
         inert={selectedKiinnostuksetViewVisible}
         className="flex flex-row shrink-0 justify-between items-center border-b border-bg-gray px-5 py-3"
       >
-        <h2 tabIndex={-1} id="kiinnostuksetTitle" className="text-heading-4-mobile sm:text-heading-4">
+        <h2
+          tabIndex={-1}
+          id="kiinnostuksetTitle"
+          className="text-heading-4-mobile sm:text-heading-4"
+          data-testid="va-title"
+        >
           {t('tool.my-own-data.interests.virtual-assistant.title')}
         </h2>
         <Button
@@ -121,6 +126,7 @@ export const VirtualAssistant = ({
           variant="white"
           size="sm"
           label={t('done')}
+          data-testid="va-done"
         />
       </div>
 
@@ -128,6 +134,7 @@ export const VirtualAssistant = ({
         inert={selectedKiinnostuksetViewVisible}
         ref={containerRef}
         className="flex flex-col grow overflow-auto py-6 sm:py-7 px-5 sm:px-6 gap-7"
+        data-testid="va-transcript"
       >
         {
           // Remove this section when the virtual assistant is ready
@@ -227,6 +234,7 @@ export const VirtualAssistant = ({
           maxLength={10000}
           hideLabel
           className="bg-[#F7F7F9]!"
+          data-testid="va-input"
         />
         <div className="flex justify-between">
           <Button
@@ -240,6 +248,7 @@ export const VirtualAssistant = ({
             label={t('tool.my-own-data.interests.virtual-assistant.intrests', {
               count: selectedKiinnostukset.length,
             })}
+            data-testid="va-open-selected-interests"
           />
           <Button
             disabled={value === ''}
@@ -247,6 +256,7 @@ export const VirtualAssistant = ({
             variant="accent"
             size="sm"
             label={t('tool.my-own-data.interests.virtual-assistant.send')}
+            data-testid="va-send"
           />
         </div>
       </div>
@@ -256,6 +266,7 @@ export const VirtualAssistant = ({
             tabIndex={-1}
             id={selectedInterestsViewId}
             className="bg-white rounded shadow-[0_-1px_24px_rgba(0,0,0,0.25)] h-full flex flex-col"
+            data-testid="va-selected-interests"
           >
             <button
               aria-label={t('tool.my-own-data.interests.virtual-assistant.close-selected-interests')}

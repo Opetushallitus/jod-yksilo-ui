@@ -17,7 +17,10 @@ const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
 
   return (
     <>
-      <h2 className="mb-3 font-poppins text-black text-hero-mobile sm:text-hero">
+      <h2
+        className="mb-3 font-poppins text-black text-hero-mobile sm:text-hero"
+        data-testid="work-history-competences-title"
+      >
         {id ? t('profile.competences.edit') : t('work-history.identify-competences')}
       </h2>
       <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
@@ -30,7 +33,12 @@ const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
         control={control}
         name={`toimenkuvat.${toimenkuva}.osaamiset`}
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="TOIMENKUVA" />
+          <OsaamisSuosittelija
+            onChange={onChange}
+            value={value}
+            sourceType="TOIMENKUVA"
+            data-testid="work-history-competences-picker"
+          />
         )}
       />
     </>

@@ -17,7 +17,10 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
 
   return (
     <>
-      <h2 className="mb-3 font-poppins text-black text-hero-mobile sm:text-hero">
+      <h2
+        className="mb-3 font-poppins text-black text-hero-mobile sm:text-hero"
+        data-testid="free-time-competences-title"
+      >
         {id ? t('profile.competences.edit') : t('free-time-activities.identify-proficiencies')}
       </h2>
       <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
@@ -35,6 +38,7 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
             value={value}
             sourceType="PATEVYYS"
             placeholder={t('profile.free-time-activities.modals.competences-placeholder')}
+            data-testid="free-time-competences-picker"
           />
         )}
       />

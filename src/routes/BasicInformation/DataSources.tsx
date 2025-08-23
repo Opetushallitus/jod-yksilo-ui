@@ -8,7 +8,9 @@ const DataSources = () => {
   return (
     <>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 data-testid="data-sources-title" className="mb-5 text-heading-2 sm:text-heading-1">
+        {title}
+      </h1>
       <p className="mb-8 text-body-md font-arial text-todo">
         Feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Cras tincidunt lobortis feugiat
         vivamus at augue. Purus non enim praesent elementum facilisis leo vel. Nam aliquam sem et tortor. Ut etiam sit
@@ -17,7 +19,7 @@ const DataSources = () => {
         tempor orci eu lobortis elementum nibh tellus molestie. Egestas erat imperdiet sed euismod.
       </p>
       <div className="flex flex-wrap gap-4">
-        <Button variant="white" label={`TODO: ${t('more-information')}`} />
+        <Button data-testid="data-sources-more-information" variant="white" label={`TODO: ${t('more-information')}`} />
       </div>
     </>
   );

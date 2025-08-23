@@ -14,7 +14,7 @@ export const CompareCompetencesTable = ({ rows, className }: CompareCompetencesT
   const rowsToRender = showAll ? rows : rows.slice(0, ROW_LIMIT);
 
   return (
-    <div className={`overflow-x-auto font-arial w-full ${className}`.trim()}>
+    <div className={`overflow-x-auto font-arial w-full ${className}`.trim()} data-testid="compare-competences-table">
       <table className="w-full" border={0} cellPadding={0} cellSpacing={0}>
         <thead className="after:content-[''] after:block after:h-3">
           <tr className="border-b border-inactive-gray text-form-label">
@@ -36,6 +36,7 @@ export const CompareCompetencesTable = ({ rows, className }: CompareCompetencesT
         <button
           onClick={() => setShowAll((previous) => !previous)}
           className="text-accent text-button-sm sm:text-button-sm mt-6 sm:px-5 font-poppins cursor-pointer"
+          data-testid="compare-competences-toggle"
         >
           {showAll ? t('show-less') : t('show-all')}
         </button>

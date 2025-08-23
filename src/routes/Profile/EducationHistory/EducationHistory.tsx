@@ -260,6 +260,7 @@ const EducationHistory = () => {
         <Link
           to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
           className="text-button-md hover:underline text-accent mt-4"
+          data-testid="education-history-go-to-tool"
         >
           <div className="flex items-center gap-2">
             {t('profile.favorites.link-go-to-job-and-education-opportunities')}
@@ -269,7 +270,7 @@ const EducationHistory = () => {
       </div>
 
       {rows.length === 0 && (
-        <div className="mt-6 mb-7">
+        <div className="mt-6 mb-7" data-testid="education-history-empty-state">
           <EmptyState text={t('profile.education-history.empty')} />
         </div>
       )}
@@ -289,6 +290,7 @@ const EducationHistory = () => {
             onClick={() => {
               showModal(EducationHistoryWizard);
             }}
+            data-testid="education-history-add"
           />
         </div>
         <div>
@@ -302,6 +304,7 @@ const EducationHistory = () => {
               label={t('education-history.import-education-history')}
               onClick={openImportStartModal}
               disabled={isOsaamisetTunnistusOngoing}
+              data-testid="education-history-import"
             />
           </TooltipWrapper>
         </div>

@@ -9,8 +9,10 @@ const CookiePolicy = () => {
   return (
     <>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
-      <p className="mb-5 text-body-sm font-arial text-secondary-gray text-todo">
+      <h1 data-testid="cookie-policy-title" className="mb-5 text-heading-2 sm:text-heading-1">
+        {title}
+      </h1>
+      <p className="mb-5 text-body-sm font-arial text-todo">
         {t('updated')}: {updated}
       </p>
       <p className="mb-8 text-body-lg text-todo">
@@ -23,7 +25,9 @@ const CookiePolicy = () => {
         tempor commodo ullamcorper. Pellentesque massa placerat duis ultricies lacus sed. Quis imperdiet massa tincidunt
         nunc pulvinar sapien.
       </p>
-      <h2 className="mb-5 text-heading-4 text-todo">Eu mi bibendum neque egestas?</h2>
+      <h2 data-testid="cookie-policy-section-1" className="mb-5 text-heading-4 text-todo">
+        Eu mi bibendum neque egestas?
+      </h2>
       <p className="mb-8 text-body-md font-arial text-todo">
         Eu mi bibendum neque egestas congue quisque egestas. Turpis egestas sed tempus urna et. Eleifend donec pretium
         vulputate sapien. Faucibus ornare suspendisse sed nisi lacus. Vel quam elementum pulvinar etiam non quam lacus
@@ -32,7 +36,9 @@ const CookiePolicy = () => {
         elit pellentesque habitant morbi tristique senectus et netus et. Dui nunc mattis enim ut tellus elementum
         sagittis vitae. Justo eget magna fermentum iaculis eu non.
       </p>
-      <h2 className="mb-5 text-heading-4 text-todo">Volutpat ac tincidunt vitae semper?</h2>
+      <h2 data-testid="cookie-policy-section-2" className="mb-5 text-heading-4 text-todo">
+        Volutpat ac tincidunt vitae semper?
+      </h2>
       <p className="mb-8 text-body-md font-arial text-todo">
         Volutpat ac tincidunt vitae semper quis lectus nulla. Neque gravida in fermentum et sollicitudin ac orci
         phasellus egestas. Facilisi nullam vehicula ipsum a arcu cursus. Vestibulum mattis ullamcorper velit sed
@@ -42,7 +48,9 @@ const CookiePolicy = () => {
         aliquet bibendum enim facilisis gravida neque. Nulla malesuada pellentesque elit eget gravida cum sociis natoque
         penatibus. Sodales ut eu sem integer vitae justo.
       </p>
-      <h2 className="mb-5 text-heading-4 text-todo">Odio facilisis mauris sit amet</h2>
+      <h2 data-testid="cookie-policy-section-3" className="mb-5 text-heading-4 text-todo">
+        Odio facilisis mauris sit amet
+      </h2>
       <p className="mb-8 text-body-md font-arial text-todo">
         Odio facilisis mauris sit amet. Eu tincidunt tortor aliquam nulla. Amet consectetur adipiscing elit ut aliquam
         purus sit. Diam quam nulla porttitor massa. Interdum posuere lorem ipsum dolor. Id leo in vitae turpis. Et
@@ -63,9 +71,17 @@ const CookiePolicy = () => {
         volutpat est. Ac auctor augue mauris augue neque gravida in fermentum. Faucibus a pellentesque sit amet.
       </p>
       <div className="flex flex-wrap gap-4">
-        <Button variant="white" label={`TODO: ${t('accept-preferences')}`} />
-        <Button variant="white" label={`TODO: ${t('edit')}`} />
-        <Button variant="white-delete" label={`TODO: ${t('remove-approval')}`} />
+        <Button
+          data-testid="cookie-policy-accept-preferences"
+          variant="white"
+          label={`TODO: ${t('accept-preferences')}`}
+        />
+        <Button data-testid="cookie-policy-edit" variant="white" label={`TODO: ${t('edit')}`} />
+        <Button
+          data-testid="cookie-policy-remove-approval"
+          variant="white-delete"
+          label={`TODO: ${t('remove-approval')}`}
+        />
       </div>
     </>
   );

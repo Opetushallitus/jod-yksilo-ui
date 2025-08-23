@@ -22,10 +22,11 @@ export const LanguageButton = ({ onClick, langMenuOpen, menuRef, onMenuBlur, onM
   const carets = sm ? <>{langMenuOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}</> : null;
 
   return (
-    <div className="relative">
+    <div className="relative" data-testid="language-button">
       <button
         onClick={onClick}
         className="flex flex-col sm:flex-row justify-center items-center select-none cursor-pointer sm:mr-5"
+        data-testid="language-button-trigger"
       >
         <JodLanguage className="mx-auto" />
         <span className="whitespace-nowrap text-[12px] sm:text-button-sm sm:mx-3">
@@ -34,7 +35,7 @@ export const LanguageButton = ({ onClick, langMenuOpen, menuRef, onMenuBlur, onM
         {carets}
       </button>
       {langMenuOpen && (
-        <div ref={menuRef} onBlur={onMenuBlur} className="absolute right-0 translate-y-8">
+        <div ref={menuRef} onBlur={onMenuBlur} className="absolute right-0 translate-y-8" data-testid="language-menu">
           <LanguageMenu onClick={onMenuClick} />
         </div>
       )}

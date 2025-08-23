@@ -91,6 +91,7 @@ const SomethingElse = () => {
         <Link
           to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
           className="text-button-md hover:underline text-accent mt-4"
+          data-testid="something-else-go-to-tool"
         >
           <div className="flex items-center gap-2">
             {t('profile.favorites.link-go-to-job-and-education-opportunities')}
@@ -99,7 +100,7 @@ const SomethingElse = () => {
         </Link>
       </div>
       {muuOsaaminen.length === 0 && (
-        <div className="mt-6 mb-7">
+        <div className="mt-6 mb-7" data-testid="something-else-empty-state">
           <EmptyState text={t('profile.something-else.empty')} />
         </div>
       )}
@@ -109,7 +110,7 @@ const SomethingElse = () => {
           {t('profile.something-else.my-other-comptetences')}
         </h2>
       )}
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3" data-testid="something-else-tags">
         {sortedData.map((val) => (
           <Tag
             label={getLocalizedText(val.nimi)}
@@ -127,6 +128,7 @@ const SomethingElse = () => {
           onClick={() => {
             showModal(EditMuuOsaaminenModal, { data: muuOsaaminen });
           }}
+          data-testid="something-else-edit"
         />
       </div>
       <Textarea
@@ -138,6 +140,7 @@ const SomethingElse = () => {
           register(language).ref(e);
           ref.current = e;
         }}
+        data-testid="something-else-freeform"
       />
     </MainLayout>
   );

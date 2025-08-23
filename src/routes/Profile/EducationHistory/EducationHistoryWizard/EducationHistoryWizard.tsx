@@ -135,6 +135,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
   return (
     <Modal
       open={isOpen}
+      data-testid="education-history-wizard"
       fullWidthContent
       content={
         <FormProvider {...methods}>
@@ -149,10 +150,20 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
             }}
           >
             {isEducationStep && (
-              <EducationStep type={isFirstStep ? 'oppilaitos' : 'koulutus'} koulutus={selectedKoulutus} />
+              <div data-testid="education-step-education">
+                <EducationStep type={isFirstStep ? 'oppilaitos' : 'koulutus'} koulutus={selectedKoulutus} />
+              </div>
             )}
-            {isCompetencesStep && <CompetencesStep koulutus={selectedKoulutus} />}
-            {isSummaryStep && <SummaryStep />}
+            {isCompetencesStep && (
+              <div data-testid="education-step-competences">
+                <CompetencesStep koulutus={selectedKoulutus} />
+              </div>
+            )}
+            {isSummaryStep && (
+              <div data-testid="education-step-summary">
+                <SummaryStep />
+              </div>
+            )}
           </Form>
         </FormProvider>
       }
@@ -167,7 +178,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
         />
       }
       footer={
-        <div className="flex justify-between gap-5 flex-1">
+        <div className="flex justify-between gap-5 flex-1" data-testid="education-history-wizard-footer">
           <div className="flex gap-5">
             {step === steps && (
               <Button
@@ -182,6 +193,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 label={t('education-history.add-studies-to-this-education')}
                 variant="white"
                 className="whitespace-nowrap"
+                data-testid="education-history-add-degree"
               />
             )}
             {step !== steps && selectedKoulutus > 0 && (
@@ -193,11 +205,12 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 label={t('education-history.delete-degree')}
                 variant="white-delete"
                 className="whitespace-nowrap"
+                data-testid="education-history-delete-degree"
               />
             )}
           </div>
           <div className="flex gap-5">
-            <Button onClick={onClose} label={t('cancel')} variant="white" />
+            <Button onClick={onClose} label={t('cancel')} variant="white" data-testid="education-history-cancel" />
             {step > 1 && (
               <Button
                 onClick={() => setStep(step - 1)}
@@ -206,6 +219,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 icon={!sm ? <JodArrowLeft /> : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                data-testid="education-history-previous"
               />
             )}
             {step < steps && (
@@ -217,6 +231,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                data-testid="education-history-next"
               />
             )}
             {step === steps && (
@@ -226,6 +241,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 variant="white"
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                data-testid="education-history-save"
               />
             )}
           </div>
