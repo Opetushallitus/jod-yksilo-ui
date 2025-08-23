@@ -80,6 +80,7 @@ const Competences = () => {
         <Link
           to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
           className="text-button-md hover:underline text-accent mt-4"
+          data-testid="competences-go-to-tool"
         >
           <div className="flex items-center gap-2">
             {t('profile.favorites.link-go-to-job-and-education-opportunities')}
@@ -109,6 +110,7 @@ const Competences = () => {
                   label={t('close')}
                   onClick={() => setShowFilters(false)}
                   className="whitespace-nowrap"
+                  data-testid="competences-close-filters"
                 />
               </div>
             }
@@ -127,8 +129,10 @@ const Competences = () => {
                 onClick={() => setShowFilters(true)}
                 label={t('profile.competences.show-filters')}
                 hideAfterBreakpoint="lg"
+                data-testid="competences-open-filters"
               />
             }
+            data-testid="competences-group-by-source"
           />
         )}
         {groupBy === GROUP_BY_THEME && <></>}
@@ -140,8 +144,13 @@ const Competences = () => {
             osaamiset={osaamiset}
             isOsaaminenVisible={isOsaaminenVisible}
             mobileFilterOpenerComponent={
-              <FilterButton onClick={() => setShowFilters(true)} label={t('profile.competences.show-filters')} />
+              <FilterButton
+                onClick={() => setShowFilters(true)}
+                label={t('profile.competences.show-filters')}
+                data-testid="competences-open-filters"
+              />
             }
+            data-testid="competences-group-by-alphabet"
           />
         )}
       </div>

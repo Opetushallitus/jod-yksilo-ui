@@ -8,7 +8,9 @@ const AccessibilityStatement = () => {
   return (
     <>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 data-testid="accessibility-statement-title" className="mb-5 text-heading-2 sm:text-heading-1">
+        {title}
+      </h1>
       <p className="mb-8 text-body-md font-arial text-todo">
         Dignissim suspendisse in est ante. Egestas pretium aenean pharetra magna ac placerat. Quam adipiscing vitae
         proin sagittis. Lectus magna fringilla urna porttitor rhoncus dolor purus non. Neque vitae tempus quam
@@ -17,7 +19,11 @@ const AccessibilityStatement = () => {
         eleifend.
       </p>
       <div className="flex flex-wrap gap-4">
-        <Button variant="white" label={`TODO: ${t('more-information')}`} />
+        <Button
+          data-testid="accessibility-statement-more-information"
+          variant="white"
+          label={`TODO: ${t('more-information')}`}
+        />
       </div>
     </>
   );

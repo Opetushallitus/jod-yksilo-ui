@@ -135,6 +135,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   return (
     <Modal
       open={isOpen}
+      data-testid="work-history-wizard"
       fullWidthContent
       content={
         <FormProvider {...methods}>
@@ -149,10 +150,20 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
             }}
           >
             {isWorkplaceStep && (
-              <WorkplaceStep type={isFirstStep ? 'tyopaikka' : 'toimenkuva'} toimenkuva={selectedToimenkuva} />
+              <div data-testid="work-history-step-workplace">
+                <WorkplaceStep type={isFirstStep ? 'tyopaikka' : 'toimenkuva'} toimenkuva={selectedToimenkuva} />
+              </div>
             )}
-            {isCompetencesStep && <CompetencesStep toimenkuva={selectedToimenkuva} />}
-            {isSummaryStep && <SummaryStep />}
+            {isCompetencesStep && (
+              <div data-testid="work-history-step-competences">
+                <CompetencesStep toimenkuva={selectedToimenkuva} />
+              </div>
+            )}
+            {isSummaryStep && (
+              <div data-testid="work-history-step-summary">
+                <SummaryStep />
+              </div>
+            )}
           </Form>
         </FormProvider>
       }
@@ -167,7 +178,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
         />
       }
       footer={
-        <div className="flex justify-between gap-5 flex-1">
+        <div className="flex justify-between gap-5 flex-1" data-testid="work-history-wizard-footer">
           <div className="flex gap-5">
             {step === steps && (
               <Button
@@ -182,6 +193,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 label={t('work-history.add-new-job-description')}
                 variant="white"
                 className="whitespace-nowrap"
+                data-testid="work-history-add-job-description"
               />
             )}
             {step !== steps && selectedToimenkuva > 0 && (
@@ -193,11 +205,12 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 label={t('work-history.delete-job-description')}
                 variant="white-delete"
                 className="whitespace-nowrap"
+                data-testid="work-history-delete-job-description"
               />
             )}
           </div>
           <div className="flex gap-5">
-            <Button onClick={() => onClose()} label={t('cancel')} variant="white" />
+            <Button onClick={() => onClose()} label={t('cancel')} variant="white" data-testid="work-history-cancel" />
             {step > 1 && (
               <Button
                 onClick={() => setStep(step - 1)}
@@ -206,6 +219,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 icon={!sm ? <JodArrowLeft /> : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                data-testid="work-history-previous"
               />
             )}
             {step < steps && (
@@ -217,6 +231,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                data-testid="work-history-next"
               />
             )}
             {step === steps && (
@@ -226,6 +241,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 variant="white"
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                data-testid="work-history-save"
               />
             )}
           </div>

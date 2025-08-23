@@ -128,6 +128,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
   return !isLoading ? (
     <Modal
       open={isOpen}
+      data-testid="free-time-wizard"
       fullWidthContent
       content={
         <FormProvider {...methods}>
@@ -142,10 +143,20 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
             }}
           >
             {isActivityStep && (
-              <ActivityStep type={isFirstStep ? 'toiminta' : 'patevyys'} patevyys={selectedPatevyys} />
+              <div data-testid="free-time-step-activity">
+                <ActivityStep type={isFirstStep ? 'toiminta' : 'patevyys'} patevyys={selectedPatevyys} />
+              </div>
             )}
-            {isCompetencesStep && <CompetencesStep patevyys={selectedPatevyys} />}
-            {isSummaryStep && <SummaryStep />}
+            {isCompetencesStep && (
+              <div data-testid="free-time-step-competences">
+                <CompetencesStep patevyys={selectedPatevyys} />
+              </div>
+            )}
+            {isSummaryStep && (
+              <div data-testid="free-time-step-summary">
+                <SummaryStep />
+              </div>
+            )}
           </Form>
         </FormProvider>
       }
@@ -160,7 +171,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
         />
       }
       footer={
-        <div className="flex justify-between gap-5 flex-1">
+        <div className="flex justify-between gap-5 flex-1" data-testid="free-time-wizard-footer">
           <div className="flex gap-5">
             {step === steps && (
               <Button
@@ -175,6 +186,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 label={t('free-time-activities.add-new-activity')}
                 variant="white"
                 className="whitespace-nowrap"
+                data-testid="free-time-add-activity"
               />
             )}
             {step !== steps && selectedPatevyys > 0 && (
@@ -186,11 +198,18 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 label={t('free-time-activities.delete-proficiency')}
                 variant="white-delete"
                 className="whitespace-nowrap"
+                data-testid="free-time-delete-activity"
               />
             )}
           </div>
           <div className="flex gap-5">
-            <Button onClick={() => onClose(true)} label={t('cancel')} variant="white" className="whitespace-nowrap" />
+            <Button
+              onClick={() => onClose(true)}
+              label={t('cancel')}
+              variant="white"
+              className="whitespace-nowrap"
+              data-testid="free-time-cancel"
+            />
             {step > 1 && (
               <Button
                 onClick={() => setStep(step - 1)}
@@ -199,6 +218,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 icon={!sm ? <JodArrowLeft /> : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                data-testid="free-time-previous"
               />
             )}
             {step < steps && (
@@ -210,6 +230,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                data-testid="free-time-next"
               />
             )}
             {step === steps && (
@@ -219,6 +240,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 variant="white"
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                data-testid="free-time-save"
               />
             )}
           </div>

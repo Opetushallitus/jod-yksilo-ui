@@ -8,7 +8,9 @@ const PrivacyPolicy = () => {
   return (
     <>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 data-testid="privacy-policy-title" className="mb-5 text-heading-2 sm:text-heading-1">
+        {title}
+      </h1>
       <p className="mb-8 text-body-md font-arial text-todo">
         Tempor nec feugiat nisl pretium fusce id velit. Fringilla ut morbi tincidunt augue interdum velit. Porta lorem
         mollis aliquam ut porttitor leo a diam. Imperdiet massa tincidunt nunc pulvinar. Adipiscing enim eu turpis
@@ -21,7 +23,11 @@ const PrivacyPolicy = () => {
         mus. Duis ultricies lacus sed turpis tincidunt id. At elementum eu facilisis sed odio.
       </p>
       <div className="flex flex-wrap gap-4">
-        <Button variant="white" label={`TODO: ${t('more-information')}`} />
+        <Button
+          data-testid="privacy-policy-more-information"
+          variant="white"
+          label={`TODO: ${t('more-information')}`}
+        />
       </div>
     </>
   );

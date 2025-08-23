@@ -93,6 +93,7 @@ const Interests = () => {
         <Link
           to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
           className="text-button-md hover:underline text-accent mt-4"
+          data-testid="interests-go-to-tool"
         >
           <div className="flex items-center gap-2">
             {t('profile.favorites.link-go-to-job-and-education-opportunities')}
@@ -102,7 +103,7 @@ const Interests = () => {
       </div>
       {sortedSkills.length === 0 && (
         <div className="mt-6 mb-7">
-          <EmptyState text={t('profile.interests.empty')} />
+          <EmptyState text={t('profile.interests.empty')} data-testid="interests-empty-state" />
         </div>
       )}
       {sortedSkills.length > 0 && (
@@ -148,6 +149,7 @@ const Interests = () => {
           onClick={() => {
             showModal(EditKiinnostusModal, { data: kiinnostukset });
           }}
+          data-testid="interests-edit-button"
         />
       </div>
       <Textarea
@@ -159,6 +161,7 @@ const Interests = () => {
           register(language).ref(e);
           ref.current = e;
         }}
+        data-testid="interests-freeform"
       />
     </MainLayout>
   );

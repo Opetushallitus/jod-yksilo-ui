@@ -39,7 +39,7 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
   };
 
   return (
-    <div className="relative" ref={actionMenuRef}>
+    <div className="relative" ref={actionMenuRef} data-testid="more-actions-dropdown">
       <div ref={actionButtonRef}>
         <ActionButton
           label={t('more-actions')}
@@ -49,6 +49,7 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
           aria-haspopup="listbox"
           className={open ? 'text-accent' : ''}
           onClick={() => setOpen(!open)}
+          data-testid="more-actions-trigger"
         />
       </div>
       {open && (
@@ -63,6 +64,7 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
             e.stopPropagation();
           }}
           className="absolute left-0 right-0 sm:left-auto sm:-right-2 translate-y-[10px] cursor-auto z-50"
+          data-testid="more-actions-menu"
         >
           {menuContent}
         </div>

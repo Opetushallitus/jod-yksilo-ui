@@ -110,9 +110,9 @@ const Root = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-bg-gray">
+    <div className="flex flex-col min-h-screen bg-bg-gray" data-testid="app-root">
       <link rel="manifest" href={`/yksilo/manifest-${language}.json`} crossOrigin="use-credentials" />
-      <header role="banner" className="sticky top-0 z-30 print:hidden">
+      <header role="banner" className="sticky top-0 z-30 print:hidden" data-testid="app-header">
         <SkipLink hash="#jod-main" label={t('skiplinks.main')} />
         <form action="/yksilo/logout" method="POST" hidden ref={logoutForm}>
           <input type="hidden" name="_csrf" value={data?.csrf.token} />
@@ -125,6 +125,7 @@ const Root = () => {
               onClick={() => setNavMenuOpen(!navMenuOpen)}
               aria-label={t('open-menu')}
               className="flex flex-col sm:flex-row sm:gap-3 justify-center items-center select-none cursor-pointer"
+              data-testid="open-nav-menu"
             >
               <JodMenu className="mx-auto" />
               <span className="md:pr-3 sm:text-button-sm text-[12px]">{t('menu')}</span>
@@ -179,6 +180,7 @@ const Root = () => {
         copyright={t('copyright')}
         // eslint-disable-next-line no-console
         feedbackOnClick={() => console.log('feedbackOnClick')}
+        data-testid="app-footer"
       />
       <Toaster />
       <ScrollRestoration />

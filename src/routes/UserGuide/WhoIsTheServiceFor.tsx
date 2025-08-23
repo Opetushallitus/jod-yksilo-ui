@@ -7,7 +7,9 @@ const WhoIsTheServiceFor = () => {
   return (
     <>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 data-testid="who-is-the-service-for-title" className="mb-5 text-heading-2 sm:text-heading-1">
+        {title}
+      </h1>
       <p className="mb-8 text-body-md font-arial text-todo">
         Feugiat in fermentum posuere urna nec tincidunt praesent. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper.
         Porttitor rhoncus dolor purus non enim praesent. Mattis pellentesque id nibh tortor id aliquet lectus proin

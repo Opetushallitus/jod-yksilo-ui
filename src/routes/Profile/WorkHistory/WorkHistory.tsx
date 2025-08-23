@@ -65,6 +65,7 @@ const WorkHistory = () => {
         <Link
           to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
           className="text-button-md hover:underline text-accent mt-4"
+          data-testid="work-history-go-to-tool"
         >
           <div className="flex items-center gap-2">
             {t('profile.favorites.link-go-to-job-and-education-opportunities')}
@@ -73,7 +74,7 @@ const WorkHistory = () => {
         </Link>
       </div>
       {rows.length === 0 && (
-        <div className="mt-6 mb-7">
+        <div className="mt-6 mb-7" data-testid="work-history-empty-state">
           <EmptyState text={t('profile.work-history.empty')} />
         </div>
       )}

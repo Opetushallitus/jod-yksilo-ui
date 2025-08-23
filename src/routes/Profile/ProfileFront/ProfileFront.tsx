@@ -17,11 +17,11 @@ const ProfileFront = () => {
   return (
     <MainLayout navChildren={navChildren}>
       <title>{t('profile.front.title')}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1" data-testid="profile-front-title">
         {t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
       </h1>
 
-      <div className="mb-8 text-body-md flex flex-col gap-7">
+      <div className="mb-8 text-body-md flex flex-col gap-7" data-testid="profile-front-content">
         <p className="text-body-lg">{t('profile.preferences.you-are-signed-in')}</p>
         <ul>
           <li className="list-disc ml-7 pl-4">{t('profile.preferences.list-1-item-1')}</li>

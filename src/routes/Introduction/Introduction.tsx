@@ -110,7 +110,7 @@ const Introduction = () => {
     <div className="bg-white">
       <main role="main" className="mx-auto w-full sm:max-w-[868px] px-5 sm:px-6 py-8" id="jod-main">
         <title>{t('osaamispolku')}</title>
-        <div className="flex flex-row-reverse mb-6">
+        <div className="flex flex-row-reverse mb-6" data-testid="intro-progress">
           <WizardProgress
             labelText={t('wizard.label')}
             stepText={t('wizard.step')}
@@ -120,11 +120,23 @@ const Introduction = () => {
             currentStep={step}
           />
         </div>
-        {step === 1 && <StepOne />}
-        {step === 2 && <StepTwo />}
-        {step === 3 && <StepThree />}
+        {step === 1 && (
+          <div data-testid="intro-step-1">
+            <StepOne />
+          </div>
+        )}
+        {step === 2 && (
+          <div data-testid="intro-step-2">
+            <StepTwo />
+          </div>
+        )}
+        {step === 3 && (
+          <div data-testid="intro-step-3">
+            <StepThree />
+          </div>
+        )}
         <div className="flex flex-row-reverse">
-          <Button label={step === 3 ? t('move-to-service') : t('next')} onClick={onClick} />
+          <Button label={step === 3 ? t('move-to-service') : t('next')} onClick={onClick} data-testid="intro-next" />
         </div>
       </main>
     </div>

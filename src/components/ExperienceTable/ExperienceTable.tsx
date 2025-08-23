@@ -152,9 +152,9 @@ export const ExperienceTable = ({
   const categorizedRows = rows.filter((row) => row.subrows);
 
   return (
-    <div>
+    <div data-testid="experience-table">
       {rows.length > 0 && (
-        <table className="w-full" border={0} cellPadding={0} cellSpacing={0}>
+        <table className="w-full" border={0} cellPadding={0} cellSpacing={0} data-testid="experience-table-grid">
           <thead className="after:content-[''] after:block after:h-5">
             <tr className="border-b border-inactive-gray text-left text-body-md font-normal">
               <th scope="col" className="pr-7 pb-3">
@@ -249,7 +249,11 @@ export const ExperienceTable = ({
 
             {uncategorizedRows.length > 0 && (
               <tr>
-                <td colSpan={5} className="border-b border-inactive-gray text-body-md pt-6">
+                <td
+                  colSpan={5}
+                  className="border-b border-inactive-gray text-body-md pt-6"
+                  data-testid="experience-table-uncategorized-title"
+                >
                   {t('without-category', { header: mainColumnHeader })}
                 </td>
               </tr>
@@ -275,7 +279,7 @@ export const ExperienceTable = ({
       )}
       {onAddClick && addNewLabel && (
         <div className="mb-[84px]">
-          <Button variant="accent" label={addNewLabel} onClick={onAddClick} />
+          <Button variant="accent" label={addNewLabel} onClick={onAddClick} data-testid="experience-table-add" />
         </div>
       )}
     </div>

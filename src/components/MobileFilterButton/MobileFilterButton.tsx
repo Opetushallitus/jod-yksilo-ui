@@ -23,13 +23,26 @@ export const FilterButton = ({
   }
 
   return inline ? (
-    <button className="cursor-pointer text-form-label flex flex-row items-center gap-x-5" ref={ref} onClick={onClick}>
+    <button
+      className="cursor-pointer text-form-label flex flex-row items-center gap-x-5"
+      ref={ref}
+      onClick={onClick}
+      data-testid="mobile-filter-button"
+    >
       <span className="font-arial">{label}</span>
       <span className="flex bg-white rounded-full relative size-7 justify-center items-center">
         <JodSettings />
       </span>
     </button>
   ) : (
-    <RoundButton size="sm" bgColor="white" label={label} hideLabel onClick={onClick} icon={<JodSettings />} />
+    <RoundButton
+      size="sm"
+      bgColor="white"
+      label={label}
+      hideLabel
+      onClick={onClick}
+      icon={<JodSettings />}
+      data-testid="mobile-filter-fab"
+    />
   );
 };
