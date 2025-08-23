@@ -105,8 +105,21 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
       }
       footer={
         <div className="flex flex-row justify-end gap-5 flex-1">
-          <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />
-          <Button form={formId} label={t('save')} variant="white" disabled={!isValid} className="whitespace-nowrap" />
+          <Button
+            label={t('cancel')}
+            variant="white"
+            onClick={onClose}
+            className="whitespace-nowrap"
+            data-testid="interests-cancel"
+          />
+          <Button
+            form={formId}
+            label={t('save')}
+            variant="white"
+            disabled={!isValid}
+            className="whitespace-nowrap"
+            data-testid="interests-save"
+          />
         </div>
       }
     />

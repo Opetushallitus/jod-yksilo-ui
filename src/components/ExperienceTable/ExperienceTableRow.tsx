@@ -145,6 +145,7 @@ export const ExperienceTableRow = ({
           disabled={osaamisetOdottaaTunnistusta}
           title={osaamisetOdottaaTunnistusta ? t('competences-identifying') : undefined}
           type="button"
+          data-testid={`experience-row-edit-${selectedRow.key}`}
         >
           {rowActionElement || (
             <JodEdit className={osaamisetOdottaaTunnistusta ? 'text-[#83AED3]' : 'text-secondary-gray'} />
@@ -170,6 +171,7 @@ export const ExperienceTableRow = ({
           }
         }}
         ariaLabel={t('choose') + ' ' + row.nimi[language]}
+        data-testid={`experience-row-checkbox-${row.key}`}
       />
     );
   };
@@ -188,6 +190,7 @@ export const ExperienceTableRow = ({
           aria-label={t(isOpen ? 'close' : 'open')}
           onClick={() => setIsOpen(!isOpen)}
           className={`cursor-pointer flex gap-x-2 items-center ${sm ? 'text-nowrap pr-2' : 'pr-7'}`}
+          data-testid={`experience-row-competences-toggle-${row.key}`}
         >
           {isOpen ? <JodCaretUp /> : <JodCaretDown />}
           {osaamisetCountTotal}

@@ -8,7 +8,9 @@ const TermsOfService = () => {
   return (
     <>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1">{title}</h1>
+      <h1 data-testid="terms-of-service-title" className="mb-5 text-heading-2 sm:text-heading-1">
+        {title}
+      </h1>
       <p className="mb-8 text-body-md font-arial text-todo">
         Vitae tempus quam pellentesque nec nam aliquam. Turpis cursus in hac habitasse platea dictumst quisque sagittis.
         Et odio pellentesque diam volutpat. Magna ac placerat vestibulum lectus mauris ultrices eros in cursus. Sed
@@ -19,8 +21,12 @@ const TermsOfService = () => {
         Fermentum dui faucibus in ornare quam. Varius quam quisque id diam vel.
       </p>
       <div className="flex flex-wrap gap-4">
-        <Button variant="white" label={`TODO: ${t('accept')}`} />
-        <Button variant="white-delete" label={`TODO: ${t('remove-approval')}`} />
+        <Button data-testid="terms-of-service-accept" variant="white" label={`TODO: ${t('accept')}`} />
+        <Button
+          data-testid="terms-of-service-remove-approval"
+          variant="white-delete"
+          label={`TODO: ${t('remove-approval')}`}
+        />
       </div>
     </>
   );

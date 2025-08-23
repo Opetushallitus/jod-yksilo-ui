@@ -36,7 +36,9 @@ const SummaryStep = () => {
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.free-time-activities.modals.summary-description')}
       </p>
-      <ExperienceTable mainColumnHeader={t('free-time-activities.theme-or-activity')} rows={rows} />
+      <div data-testid="free-time-summary-table">
+        <ExperienceTable mainColumnHeader={t('free-time-activities.theme-or-activity')} rows={rows} />
+      </div>
     </>
   );
 };

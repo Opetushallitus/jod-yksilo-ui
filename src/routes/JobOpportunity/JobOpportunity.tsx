@@ -113,13 +113,14 @@ const JobOpportunity = () => {
       navTitle: t('job-opportunity.open-jobs'),
       showNavTitle: false,
       content: (
-        <div className="flex flex-col w-full mb-9">
+        <div className="flex flex-col w-full mb-9" data-testid="job-opportunity-tmt-section">
           <div className="bg-[#442496] h-9 flex items-center pl-4 mb-7">
             <img src={tmtLogo} alt={t('job-opportunity.tyomarkkinatori.banner-alt-text')} className="h-7" />
           </div>
           <h3 className="text-heading-2 mb-4">{t('job-opportunity.tyomarkkinatori.title')}</h3>
           <p>{t('job-opportunity.tyomarkkinatori.description')}</p>
           <Button
+            data-testid="job-opportunity-open-tyomarkkinatori"
             size="sm"
             className="w-fit mt-7"
             label={t('job-opportunity.tyomarkkinatori.button-label')}

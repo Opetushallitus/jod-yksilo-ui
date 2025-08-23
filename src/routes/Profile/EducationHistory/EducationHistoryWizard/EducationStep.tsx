@@ -27,7 +27,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
 
   return (
     <>
-      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero">
+      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero" data-testid="education-step-title">
         {type === 'oppilaitos' && !id && t('education-history.add-new-education')}
         {type === 'oppilaitos' && id && t('education-history.edit-education')}
         {type === 'koulutus' && !koulutusId && t('education-history.add-studies-to-this-education')}
@@ -37,7 +37,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
         {t('profile.education-history.modals.description')}
       </p>
       {type === 'oppilaitos' && (
-        <div className="mb-6">
+        <div className="mb-6" data-testid="education-education-provider-field">
           <InputField
             label={t('education-history.educational-institution-or-education-provider')}
             {...register(`nimi.${language}` as const)}
@@ -46,7 +46,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
           <FormError name={`nimi.${language}`} errors={errors} />
         </div>
       )}
-      <div className="mb-6">
+      <div className="mb-6" data-testid="education-degree-name-field">
         <InputField
           label={t('education-history.name-of-degree-or-education')}
           {...register(`koulutukset.${koulutus}.nimi.${language}` as const)}

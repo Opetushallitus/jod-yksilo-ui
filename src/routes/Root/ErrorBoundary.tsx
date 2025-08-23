@@ -14,12 +14,20 @@ const ErrorBoundary = () => {
     t('error-boundary.unexpected');
 
   return (
-    <main role="main" id="jod-main" className="m-4 flex flex-col items-center justify-center gap-4">
+    <main
+      role="main"
+      id="jod-main"
+      className="m-4 flex flex-col items-center justify-center gap-4"
+      data-testid="error-boundary"
+    >
       <title>{title}</title>
-      <h1 className="text-heading-1">{title}</h1>
+      <h1 className="text-heading-1" data-testid="error-boundary-title">
+        {title}
+      </h1>
       <p className="text-body-lg">{message}</p>
       <div className="flex gap-4">
         <Button
+          data-testid="error-boundary-home"
           icon={<JodHome />}
           iconSide="left"
           label={t('return-home')}
@@ -28,6 +36,7 @@ const ErrorBoundary = () => {
           LinkComponent={({ children }: { children: React.ReactNode }) => <a href="/">{children}</a>}
         />
         <Button
+          data-testid="error-boundary-login"
           icon={<JodUser />}
           iconSide="left"
           label={t('login')}

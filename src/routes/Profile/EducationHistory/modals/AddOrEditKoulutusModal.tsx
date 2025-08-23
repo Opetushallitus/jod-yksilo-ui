@@ -334,11 +334,18 @@ const AddOrEditKoulutusModal = ({
                     }),
                   })
                 }
+                data-testid="education-history-delete"
               />
             )}
           </div>
           <div className="flex flex-row justify-between gap-5">
-            <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />
+            <Button
+              label={t('cancel')}
+              variant="white"
+              onClick={onClose}
+              className="whitespace-nowrap"
+              data-testid="education-history-cancel"
+            />
             {!isFirstStep && (
               <Button
                 label={t('previous')}
@@ -346,6 +353,7 @@ const AddOrEditKoulutusModal = ({
                 disabled={!isValid}
                 onClick={previousStep}
                 className="whitespace-nowrap"
+                data-testid="education-history-previous"
               />
             )}
             {!isLastStep && (
@@ -355,6 +363,7 @@ const AddOrEditKoulutusModal = ({
                 disabled={isLastStep || !isValid}
                 onClick={nextStep}
                 className="whitespace-nowrap"
+                data-testid="education-history-next"
               />
             )}
             {isLastStep && (
@@ -364,6 +373,7 @@ const AddOrEditKoulutusModal = ({
                 variant="white"
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                data-testid="education-history-save"
               />
             )}
           </div>

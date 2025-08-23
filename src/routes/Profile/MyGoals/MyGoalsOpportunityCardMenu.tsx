@@ -8,10 +8,26 @@ import { PopupList, PopupListItem } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-const ListItem = ({ label, onClick, disabled }: { label: string; onClick: () => void; disabled?: boolean }) => (
+const ListItem = ({
+  label,
+  onClick,
+  disabled,
+  testId,
+}: {
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+  testId?: string;
+}) => (
   <li>
     <PopupListItem>
-      <button type="button" onClick={onClick} className="group text-left cursor-pointer" disabled={disabled}>
+      <button
+        type="button"
+        onClick={onClick}
+        className="group text-left cursor-pointer"
+        disabled={disabled}
+        data-testid={testId}
+      >
         <span className="group-disabled:text-inactive-gray group-disabled:cursor-not-allowed">{label}</span>
       </button>
     </PopupListItem>
@@ -128,16 +144,19 @@ const MyGoalsOpportunityCardMenu = ({
           label={t('profile.my-goals.set-long-term-goal')}
           onClick={() => void setFavoriteAsGoal('PITKA')}
           disabled={!canSetAsPaamaaraType('PITKA')}
+          testId="goals-set-long-term"
         />
         <ListItem
           label={t('profile.my-goals.set-short-term-goal')}
           onClick={() => void setFavoriteAsGoal('LYHYT')}
           disabled={!canSetAsPaamaaraType('LYHYT')}
+          testId="goals-set-short-term"
         />
         <ListItem
           label={t('profile.my-goals.set-other-goal')}
           onClick={() => void setFavoriteAsGoal('MUU')}
           disabled={!canSetAsPaamaaraType('MUU')}
+          testId="goals-set-other"
         />
         {!!paamaaraId && (
           <ListItem
@@ -149,6 +168,7 @@ const MyGoalsOpportunityCardMenu = ({
                 onConfirm: () => onDeletePaamaara(paamaaraId),
               });
             }}
+            testId="goals-delete"
           />
         )}
       </ul>

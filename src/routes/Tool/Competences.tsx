@@ -106,6 +106,7 @@ const CompetenceImport = () => {
     >
       {(showImportDialog: () => void) => (
         <Button
+          data-testid="competences-open-import"
           label={t('tool.my-own-data.competences.import.import-button')}
           onClick={showImportDialog}
           variant="white"
@@ -114,6 +115,7 @@ const CompetenceImport = () => {
     </ConfirmDialog>
   ) : (
     <Button
+      data-testid="competences-open-login"
       label={t('tool.my-own-data.competences.import.import-button')}
       variant="white"
       onClick={() => {
@@ -136,7 +138,7 @@ const Competences = () => {
   );
 
   return (
-    <div className="pt-6 sm:pt-7 px-5 sm:px-6">
+    <div className="pt-6 sm:pt-7 px-5 sm:px-6" data-testid="competences-view">
       <div className="mb-6">
         <OsaamisSuosittelija
           onChange={setOsaamiset}
@@ -146,7 +148,7 @@ const Competences = () => {
           hideTextAreaLabel
         />
       </div>
-      <div className="p-6 -mx-6 bg-bg-gray-2 rounded-b">
+      <div className="p-6 -mx-6 bg-bg-gray-2 rounded-b" data-testid="competences-import-section">
         <CompetenceImport />
       </div>
     </div>

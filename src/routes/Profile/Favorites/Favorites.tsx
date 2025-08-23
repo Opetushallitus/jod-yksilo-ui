@@ -186,6 +186,7 @@ const Favorites = () => {
           onClick={() => setShowFilters(true)}
           label={t('profile.favorites.show-filters')}
           hideAfterBreakpoint="lg"
+          data-testid="favorites-open-filters"
         />
       </div>
 
@@ -193,7 +194,7 @@ const Favorites = () => {
         <p className="mt-2">{getFavoriteCountText}</p>
       ) : (
         <div className="mt-5 mb-6">
-          <EmptyState text={t(descriptionKeys[selectedFilter])} />
+          <EmptyState text={t(descriptionKeys[selectedFilter])} data-testid="favorites-empty-state" />
         </div>
       )}
 
@@ -207,6 +208,7 @@ const Favorites = () => {
           iconSide="right"
           variant="accent"
           size="sm"
+          data-testid="favorites-go-to-tool"
         />
       </div>
 
@@ -233,6 +235,7 @@ const Favorites = () => {
                   label={t('close')}
                   onClick={() => setShowFilters(false)}
                   className="whitespace-nowrap"
+                  data-testid="favorites-close-filters"
                 />
               </div>
             }
@@ -240,7 +243,7 @@ const Favorites = () => {
         )}
       </div>
 
-      <div className="flex flex-col gap-5 mb-8">
+      <div className="flex flex-col gap-5 mb-8" data-testid="favorites-list">
         {favoritesPerType.map((mahdollisuus) => {
           const { id, mahdollisuusTyyppi, tyyppi, aineisto } = mahdollisuus;
           return (
@@ -288,6 +291,7 @@ const Favorites = () => {
           }}
           totalItems={totalItems}
           type="button"
+          data-testid="favorites-pagination"
         />
       )}
     </MainLayout>

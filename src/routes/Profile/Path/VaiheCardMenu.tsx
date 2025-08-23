@@ -5,10 +5,26 @@ import { PopupList, PopupListItem } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { useParams, useRevalidator } from 'react-router';
 
-const ListItem = ({ label, onClick, disabled }: { label: string; onClick: () => void; disabled?: boolean }) => (
+const ListItem = ({
+  label,
+  onClick,
+  disabled,
+  testId,
+}: {
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+  testId?: string;
+}) => (
   <li>
     <PopupListItem>
-      <button type="button" onClick={onClick} className="group text-left cursor-pointer" disabled={disabled}>
+      <button
+        type="button"
+        onClick={onClick}
+        className="group text-left cursor-pointer"
+        disabled={disabled}
+        data-testid={testId}
+      >
         <span className="group-disabled:text-inactive-gray group-disabled:cursor-not-allowed">{label}</span>
       </button>
     </PopupListItem>
@@ -52,7 +68,7 @@ const VaiheCardMenu = ({
   return (
     <PopupList classNames="w-max">
       <ul className="flex flex-col gap-2 w-full" id={vaiheId}>
-        <ListItem label={t('profile.paths.edit-phase')} onClick={openVaiheModal} />
+        <ListItem label={t('profile.paths.edit-phase')} onClick={openVaiheModal} testId="path-edit-phase" />
         <ListItem
           label={t('profile.paths.delete-phase')}
           onClick={() =>
@@ -62,6 +78,7 @@ const VaiheCardMenu = ({
               onConfirm: () => void deleteVaihe(),
             })
           }
+          testId="path-delete-phase"
         />
       </ul>
     </PopupList>
