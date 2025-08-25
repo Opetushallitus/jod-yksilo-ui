@@ -4,10 +4,10 @@ import { CompareCompetencesTableRow, CompareCompetencesTableRowData } from './Co
 
 interface CompareCompetencesTableProps {
   rows: CompareCompetencesTableRowData[];
-  className: string;
+  className?: string;
 }
 
-export const CompareCompetencesTable = ({ rows, className }: CompareCompetencesTableProps) => {
+export const CompareCompetencesTable = ({ rows, className = '' }: CompareCompetencesTableProps) => {
   const { t } = useTranslation();
   const [showAll, setShowAll] = React.useState(false);
   const ROW_LIMIT = 10;
@@ -16,7 +16,7 @@ export const CompareCompetencesTable = ({ rows, className }: CompareCompetencesT
   return (
     <div className={`overflow-x-auto font-arial w-full ${className}`.trim()}>
       <table className="w-full" border={0} cellPadding={0} cellSpacing={0}>
-        <thead className="after:content-[''] after:block after:h-3">
+        <thead>
           <tr className="border-b border-inactive-gray text-form-label">
             <th scope="col" className="text-left pl-5 pr-7 pb-3">
               {t('competence')}

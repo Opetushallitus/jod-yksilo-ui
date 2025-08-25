@@ -1,4 +1,9 @@
 {
+  "job-opportunity": {
+    "tyomarkkinatori": {
+      "url": "https://tyomarkkinatori.fi/sv/personkunder/lediga-arbetsplatser/"
+    }
+  },
   "osaamispolku": "Kompetensstigen",
   "profile": {
     "favorites": {
