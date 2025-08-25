@@ -6,12 +6,12 @@
   "accept-preferences": "Hyväksy asetukset",
   "accessibility-statement": "Saavutettavuusseloste",
   "add": "Lisää",
-  "add-favorite": "Lisää suosikiksi",
+  "add-favorite": "Tallenna suosikiksi",
   "added": "Lisätty",
   "ai-info-tooltip": {
     "ai-and-compentency-path": "Tekoäly ja Osaamispolku",
     "aria-description": "Tietoa tekoälyn käytöstä",
-    "description": "Olemme käyttäneet tämän sisällön luomisessa hyödyksi kielimallia.\nLisää tietoa tekoälyn käytöstä Osaamispolussa:",
+    "description": "Olemme käyttäneet tämän sisällön luomisessa hyödyksi kielimallia. Lisää tietoa voit lukea <CustomLink>Tekoäly ja Osaamispolku<Icon></Icon></CustomLink>-sivulta.",
     "title": "Tekoälyn avulla generoitu sisältö"
   },
   "allow": "Sallin",
@@ -133,7 +133,23 @@
   "education-opportunities": "Koulutusmahdollisuudet",
   "education-opportunity": {
     "competences": {
+      "description": "Olemme tunnistaneet koulutuksen kautta saatavia osaamisia.",
       "route": "Osaamiset"
+    },
+    "duration": {
+      "average-months_one": "Tutkinnon keskimääräinen kesto on {{count}} kuukausi.",
+      "average-months_other": "Tutkinnon keskimääräinen kesto on {{count}} kuukautta.",
+      "average-years_one": "Tutkinnon keskimääräinen kesto on {{count}} vuosi.",
+      "average-years_other": "Tutkinnon keskimääräinen kesto on {{count}} vuotta."
+    },
+    "education-characteristics": "Koulutuksen erityispiirteitä",
+    "of-educations": "ilmoitetuista koulutuksista.",
+    "open-educations": "Avoimet koulutukset",
+    "opintopolku": {
+      "banner-alt-text": "Opintopolku",
+      "button-label": "Siirry Opintopolkuun",
+      "description": "Voit etsiä Opintopolusta koulutuksia tämän mahdollisuuden nimellä. Käy tutustamassa vaihtoehtoihin ja löydä sinulle sopivia koulutuksia.",
+      "title": "Avoimet koulutukset löydät kätevästi Opintopolusta"
     },
     "specific-professional-competences": {
       "description": "Koulutuksen erityisosaamisalueita ovat:",
@@ -275,9 +291,9 @@
   },
   "jakauma": {
     "aika": "Aika",
-    "ajokortti": "Ajokorttivaatimus",
+    "ajokortti": "Ajokortti",
     "ammatti": "Ammatti",
-    "kielitaito": "Kielitaitovaatimukset",
+    "kielitaito": "Kielitaito",
     "kortitJaLuvat": "Kortit ja luvat",
     "koulutusala": "Tarvittava koulutusala",
     "koulutusaste": "Tarvittava koulutusaste",
@@ -290,7 +306,7 @@
     "osaaminen": "Osaaminen",
     "palkanPeruste": "Palkan peruste",
     "palvelussuhde": "Palvelussuhde",
-    "rikosrekisteriote": "Rikosrekisteriotevaatimus",
+    "rikosrekisteriote": "Rikosrekisteriote",
     "sijaintiJoustava": "Joustava sijainti",
     "tyoaika": "Työaika",
     "tyokieli": "Työkieli",
@@ -329,6 +345,7 @@
   "job-opportunities": "Työmahdollisuudet",
   "job-opportunity": {
     "competences": {
+      "description": "Olemme tunnistaneet työmahdollisuuden kautta saatavia osaamisia.",
       "navigation": "Osaamisvaatimukset",
       "route": "Osaamiset",
       "title": "Osaamiset"
@@ -337,6 +354,8 @@
       "description": "Graafissa näkyy ammatin työllisyyskehitys vuodesta 2015-2023. Tiedot 2024-26 ovat ennakointitietoja.",
       "title": "Työllisyyskehitys"
     },
+    "job-advertisement-characteristics": "Työpaikkailmoitusten erityispiirteet",
+    "job-advertisement-characteristics-description": "Tiedon muodostamiseen on käytetty työmarkkinatorin työpaikkailmoituksia vuosilta 2021-2024.",
     "key-figures": {
       "description": "Tarkastele ammattia eri tunnuslukujen valossa. Voit valita tunnusluvuista joko tilanteen tällä hetkellä tai lähitulevaisuuden ennakkotiedon.",
       "title": "Tunnusluvut"
@@ -346,10 +365,11 @@
       "description": "Tarkastele ammattia yleisimpien työtehtävien kautta.",
       "title": "Yleisimmät työtehtävät"
     },
-    "n-percent-of-job-ads": "{{count}} % ilmoitetuista työpaikoista.",
     "occupations": {
       "title": "Työmahdollisuudessa esiintyvät ammatit"
     },
+    "of-job-ads": "ilmoitetuista työpaikoista.",
+    "open-jobs": "Avoimet työpaikat",
     "personal-characteristics": {
       "description": "Kestävän kehityksen asiantuntijan tärkeitä henkilökohtaisia ominaisuuksia:",
       "title": "Henkilökohtaiset ominaisuudet"
@@ -363,11 +383,16 @@
       "description": "Graafissa näkyy ammatin palkkakehitys vuodesta 2015-2023. Tiedot 2024-26 ovat palkkakehityksen ennakointitietoja.",
       "title": "Palkkakehitys"
     },
-    "special-characteristics-from-tyomarkkinatori": "Työmarkkinatorin työpaikkailmoituksissa esiintyvät työmahdollisuuden erityispiirteet",
-    "special-characteristics-from-tyomarkkinatori-description": "Tiedon muodostamiseen on käytetty työmarkkinatorin työpaikkailmoituksia vuosilta 2021-2024.",
     "specific-professional-competences": {
       "description": "Kestävän kehityksen asiantuntijoiden ammatillisia erityisosaamisalueita ovat:",
       "title": "Ammatilliset erityisosaamiset"
+    },
+    "tyomarkkinatori": {
+      "banner-alt-text": "Työmarkkinatori",
+      "button-label": "Siirry Työmarkkinatoriin",
+      "description": "Työmarkkinatorissa voit hakea ja tarkastella mahdollisuuteen liittyviä työpaikkailmoituksia sen nimellä. Käy tutustumassa avoimiin paikkoihin ja löydä sinulle sopivia vaihtoehtoja.",
+      "title": "Avoimet työpaikkailmoitukset löydät kätevästi Työmarkkinatorista",
+      "url": "https://tyomarkkinatori.fi/henkiloasiakkaat/avoimet-tyopaikat/"
     }
   },
   "language-selection": "Käyttökieli",
@@ -444,6 +469,7 @@
     "description": "Hakemaasi sivua ei löytynyt.",
     "title": "Sivua ei löytynyt"
   },
+  "not-required": "Ei vaadita",
   "on-this-page": "Tällä sivulla",
   "open-menu": "Avaa valikko",
   "open-submenu": "Avaa alivalikko",
@@ -752,6 +778,7 @@
   "remove-approval": "Hylkää hyväksyntä",
   "remove-favorite": "Poista suosikeista",
   "remove-favorite-opportunity-confirmation": "Haluatko varmasti poistaa mahdollisuuden \"{{name}}\" suosikeista?",
+  "required": "Vaaditaan",
   "restrictions": "Rajoitteet",
   "result-list": "Tuloslista",
   "return-home": "Palaa etusivulle",

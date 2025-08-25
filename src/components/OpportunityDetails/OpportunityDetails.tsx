@@ -1,7 +1,6 @@
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { ActionButton, AiInfo, FavoriteToggle, MainLayout } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
-import RateAiContent from '@/components/RateAiContent/RateAiContent';
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useLoginLink } from '@/hooks/useLoginLink';
@@ -10,8 +9,8 @@ import { type MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { copyToClipboard, getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
-import { MenuSection, PageNavigation } from '@jod/design-system';
-import { JodPrint, JodShare } from '@jod/design-system/icons';
+import { type MenuSection, PageNavigation, useMediaQueries } from '@jod/design-system';
+import { JodBuild, JodInfoFilled, JodPrint, JodShare, JodWorkPossibilities } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
@@ -19,11 +18,11 @@ import { useShallow } from 'zustand/shallow';
 
 export interface OpportunityDetailsSection {
   navTitle: string;
+  navTitleHidden?: boolean;
   /* Optional extra text to show after the title. Does not appear in the navigation */
   titleAppendix?: string;
   content: React.ReactNode;
   showAiInfoInTitle?: boolean;
-  showAiRating?: boolean;
   showInDevOnly?: boolean;
   showDivider?: boolean;
   showNavTitle?: boolean;
@@ -43,14 +42,18 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
   const { isDev } = useEnvironment();
   const { t, i18n } = useTranslation();
   const title = getLocalizedText(data?.otsikko);
+  const { sm } = useMediaQueries();
   const { isSuosikki, toggleSuosikki } = useToolStore(
     useShallow((state) => ({
       isSuosikki: state.suosikit?.some((suosikki) => suosikki.kohdeId === data?.id),
       toggleSuosikki: state.toggleSuosikki,
     })),
   );
+  const jobData = data as components['schemas']['TyomahdollisuusFullDto'];
+  const educationData = data as components['schemas']['KoulutusmahdollisuusFullDto'];
+
   const { showDialog, closeAllModals } = useModal();
-  const state = useLocation().state;
+  const { state } = useLocation();
   const loginLink = useLoginLink({
     callbackURL: state?.callbackURL
       ? `/${i18n.language}/${state?.callbackURL}`
@@ -63,11 +66,6 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
     }
   };
 
-  const notImplemented = () => {
-    // eslint-disable-next-line no-console
-    console.log('Feature not implemented');
-  };
-
   const doPrint = () => {
     window.print();
   };
@@ -77,6 +75,18 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
     [isDev],
   );
 
+  const TitleIcon = tyyppi === 'TYOMAHDOLLISUUS' ? JodBuild : JodWorkPossibilities;
+
+  const typeText = React.useMemo(() => {
+    if (tyyppi === 'TYOMAHDOLLISUUS') {
+      return t(`opportunity-type.work.${jobData.aineisto ?? 'TMT'}`);
+    } else if (tyyppi === 'KOULUTUSMAHDOLLISUUS') {
+      return t(`opportunity-type.education.${educationData.tyyppi}`);
+    } else {
+      return null;
+    }
+  }, [tyyppi, t, jobData.aineisto, educationData.tyyppi]);
+
   const navChildren = React.useMemo(() => {
     const menuSection: MenuSection = {
       title: t('on-this-page'),
@@ -85,76 +95,86 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
         LinkComponent: getLinkTo(`#${section.navTitle}`),
       })),
     };
-    return <PageNavigation menuSection={menuSection} openSubMenuLabel="" activeIndicator="dot" />;
+    return <PageNavigation menuSection={menuSection} activeIndicator="dot" />;
   }, [t, sections, filterDevSections]);
+
+  const OpportunityType = typeText ? (
+    <div className="uppercase text-body-sm font-semibold text-primary-gray flex items-center gap-3 mb-4 sm:mb-0">
+      {typeText}
+      <JodInfoFilled className="text-secondary-gray" />
+    </div>
+  ) : null;
 
   return (
     <MainLayout navChildren={navChildren}>
-      {title && <title>{title}</title>}
-      <div className="flex flex-row justify-between items-center mb-5">
-        <h1 className="text-heading-2 sm:text-heading-1">{title}</h1>
-        {showAiInfoInTitle && (
-          <span className="print:hidden mr-2">
-            <AiInfo />
+      {title ? <title>{title}</title> : null}
+      <div className="flex flex-col">
+        {!sm && OpportunityType}
+        {/* Header: Icon & title */}
+        <div className="flex gap-x-4 items-center">
+          <span className="flex items-center justify-center size-9 aspect-square rounded-full bg-secondary-1-dark-2">
+            <TitleIcon className="text-white" />
           </span>
-        )}
-      </div>
-
-      {(data as components['schemas']['TyomahdollisuusFullDto']).aineisto ? (
-        <div className="uppercase font-arial">
-          {t(`opportunity-type.work.${(data as components['schemas']['TyomahdollisuusFullDto']).aineisto || 'TMT'}`)}
+          {title ? (
+            <h1 className="text-hero-mobile sm:text-hero text-secondary-1-dark-2 hyphens-auto text-pretty break-all">
+              {title}
+            </h1>
+          ) : null}
+          {showAiInfoInTitle && (
+            <span className="print:hidden size-6">
+              <AiInfo />
+            </span>
+          )}
         </div>
-      ) : null}
-      {/* Action bar */}
-      <div className="flex flex-row flex-wrap gap-x-7 gap-y-5 my-6 print:hidden">
-        <FavoriteToggle
-          isFavorite={isLoggedIn && !!data?.id && isSuosikki}
-          favoriteName={data?.otsikko}
-          onToggleFavorite={() =>
-            !isLoggedIn
-              ? showDialog({
-                  title: t('login'),
-                  description: t('login-for-favorites'),
-                  closeParentModal: true,
-                  footer: createLoginDialogFooter(t, loginLink, closeAllModals),
-                })
-              : handleToggleFavorite()
-          }
-        />
-        {isDev && (
-          <ActionButton
-            label={t('share')}
-            icon={<JodShare className="text-accent" />}
-            onClick={() => void copyToClipboard(window.location.href)}
-          />
-        )}
-        {!!window.print && (
-          <ActionButton label={t('print')} icon={<JodPrint className="text-accent" />} onClick={doPrint} />
-        )}
+
+        <div className="flex justify-between flex-wrap gap-y-5 sm:mt-6 sm:mb-8">
+          {sm && OpportunityType}
+
+          {/* Action bar */}
+          <div className="flex flex-col sm:flex-row sm:gap-7 gap-3 sm:my-0 my-6 print:hidden">
+            <FavoriteToggle
+              isFavorite={isLoggedIn && !!data?.id && isSuosikki}
+              favoriteName={data?.otsikko}
+              onToggleFavorite={() =>
+                !isLoggedIn
+                  ? showDialog({
+                      title: t('login'),
+                      description: t('login-for-favorites'),
+                      closeParentModal: true,
+                      footer: createLoginDialogFooter(t, loginLink, closeAllModals),
+                    })
+                  : handleToggleFavorite()
+              }
+            />
+            {isDev && (
+              <ActionButton
+                label={t('share')}
+                icon={<JodShare className="text-accent" />}
+                onClick={() => void copyToClipboard(window.location.href)}
+              />
+            )}
+            {!!window.print && (
+              <ActionButton label={t('print')} icon={<JodPrint className="text-accent" />} onClick={doPrint} />
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Sections */}
-      <div className="flex flex-col gap-7">
-        {!!data &&
-          sections.filter(filterDevSections).map((section) => (
-            <div key={section.navTitle} className="flex flex-col">
-              <ScrollHeading
-                title={section.navTitle}
-                appendix={section.titleAppendix}
-                heading="h2"
-                className={`text-heading-2 ${(section.showNavTitle ?? true) ? '' : 'text-transparent text-[0px] size-0'}`}
-                hasAiContent={section.showAiInfoInTitle}
-              />
-              <div className="flex flex-row justify-between">{section.content}</div>
-              {(section.showAiRating ?? false) && isDev && (
-                <div className="my-7">
-                  <RateAiContent onDislike={notImplemented} onLike={notImplemented} />
-                </div>
-              )}
-              {(section.showDivider ?? true) && <div className="mt-8 border-b" />}
-            </div>
-          ))}
-      </div>
+      {!!data &&
+        sections.filter(filterDevSections).map((section) => (
+          <div key={section.navTitle} className="flex flex-col mb-7">
+            <ScrollHeading
+              title={section.navTitle}
+              appendix={section.titleAppendix}
+              heading="h2"
+              className={`text-heading-2 ${(section.showNavTitle ?? true) ? 'mb-3' : 'text-transparent text-[0px] size-0'}`}
+              hasAiContent={section.showAiInfoInTitle}
+            />
+            <div className="flex flex-row justify-between">{section.content}</div>
+            {(section.showDivider ?? true) && <div className="border-b border-border-gray" />}
+          </div>
+        ))}
     </MainLayout>
   );
 };

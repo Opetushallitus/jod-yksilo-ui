@@ -11,16 +11,16 @@ export interface ScrollHeadingProps {
 }
 export const ScrollHeading = ({ title, heading, className, hasAiContent, appendix }: ScrollHeadingProps) => {
   const HeadingTag = heading as keyof JSX.IntrinsicElements;
-  const appendixText = appendix ? `: ${appendix}` : '';
+  const appendixText = appendix ? ` — ${appendix}` : '';
   return (
-    <div className={`flex flex-row justify-between items-center mb-5 ${className}`}>
-      <HeadingTag id={title} className={tc(`scroll-mt-[96px]`)}>
+    <div className={tc(`flex gap-3 ${className}`)}>
+      <HeadingTag id={title} className="scroll-mt-[96px] text-pretty hyphens-auto">
         {`${title}${appendixText}`}
       </HeadingTag>
       {hasAiContent && (
-        <div className="print:hidden mr-2">
+        <span className="print:hidden pt-2">
           <AiInfo />
-        </div>
+        </span>
       )}
     </div>
   );
