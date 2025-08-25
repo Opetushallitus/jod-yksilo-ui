@@ -1,6 +1,6 @@
 import { AiInfoButton } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
-import { useTranslation } from 'react-i18next';
+import { JodOpenInNew } from '@jod/design-system/icons';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 // Wrapper component for DS AiInfoButton
@@ -11,16 +11,22 @@ export const AiInfo = () => {
   } = useTranslation();
 
   const tooltipContent = (
-    <div className="flex flex-col text-body-md">
-      <p className="text-heading-4">{t('ai-info-tooltip.title')}:</p>
-      <p className="whitespace-break-spaces">{t('ai-info-tooltip.description')}</p>
-      <Link
-        to={`/${language}/${t('slugs.basic-information')}/${t('slugs.about-ai')}`}
-        className="flex flex-row items-center mt-4 gap-4 text-heading-4"
-      >
-        <span>{t('ai-info-tooltip.ai-and-compentency-path')}</span>
-        <JodArrowRight />
-      </Link>
+    <div className="flex flex-col text-body-xs max-w-[290px] gap-3 leading-5">
+      <p className="font-semibold">{t('ai-info-tooltip.title')}</p>
+      <p>
+        <Trans
+          i18nKey="ai-info-tooltip.description"
+          components={{
+            Icon: <JodOpenInNew size={18} />,
+            CustomLink: (
+              <Link
+                to={`/${language}/${t('slugs.basic-information')}/${t('slugs.about-ai')}`}
+                className="inline-flex underline"
+              />
+            ),
+          }}
+        />
+      </p>
     </div>
   );
 

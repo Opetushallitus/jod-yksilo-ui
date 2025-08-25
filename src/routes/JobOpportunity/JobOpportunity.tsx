@@ -4,6 +4,9 @@ import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText, hashString, sortByProperty } from '@/utils';
+import { getLinkTo } from '@/utils/routeUtils';
+import { Button } from '@jod/design-system';
+import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
@@ -15,7 +18,7 @@ const JobOpportunity = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { tyomahdollisuus, osaamiset, isLoggedIn } = useLoaderData<LoaderData>();
+  const { tyomahdollisuus, osaamiset, isLoggedIn, ammattiryhma } = useLoaderData<LoaderData>();
   const hasAiContent = tyomahdollisuus.aineisto !== 'AMMATTITIETO';
   const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
   const competencesTableData = React.useMemo(
@@ -33,24 +36,35 @@ const JobOpportunity = () => {
           .sort((a: string, b: string) => a.localeCompare(b))
       : [];
 
+  const tmtUrl = React.useMemo(() => {
+    const url = new URL(t('job-opportunity.tyomarkkinatori.url'));
+
+    if (ammattiryhma?.koodi) {
+      url.searchParams.set('in', ammattiryhma.koodi);
+    }
+
+    return url.href;
+  }, [ammattiryhma?.koodi, t]);
+
   const sections: OpportunityDetailsSection[] = [
     {
       navTitle: t('description'),
-      titleAppendix: getLocalizedText(tyomahdollisuus.otsikko),
       showDivider: false,
-      showAiRating: false,
       showAiInfoInTitle: hasAiContent,
       content: <p className="text-body-lg font-arial">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>,
     },
     {
       navTitle: t('job-opportunity.most-common-job-tasks.title'),
+      showDivider: false,
       showAiInfoInTitle: false,
-      showAiRating: true,
       content: (
-        <ul className="list-disc ml-7 text-body-lg text-black">
+        <ul className="list-disc ml-7">
           {tyomahdollisuusTehtavat.map((value: string, index: number) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <li key={`${hashString(value)}-${index}`} className="text-capitalize text-body">
+            <li
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${hashString(value)}-${index}`}
+              className="text-capitalize text-body-md font-arial text-primary-gray"
+            >
               {value}
             </li>
           ))}
@@ -59,33 +73,63 @@ const JobOpportunity = () => {
     },
     {
       navTitle: t('job-opportunity.competences.title'),
-      titleAppendix: getLocalizedText(tyomahdollisuus.otsikko),
       showAiInfoInTitle: hasAiContent,
-      showAiRating: true,
-      content: <CompareCompetencesTable rows={competencesTableData} className="mt-4" />,
+      content: (
+        <div className="flex flex-col gap-6 mb-9 grow">
+          <span className="font-arial">{t('job-opportunity.competences.description')}</span>
+          <CompareCompetencesTable rows={competencesTableData} />
+        </div>
+      ),
     },
     {
-      navTitle: t('job-opportunity.more-information'),
-      showNavTitle: true,
+      navTitle: t('job-opportunity.professional-group'),
+      titleAppendix: getLocalizedText(ammattiryhma?.nimi),
+      content: <div className="font-arial">{getLocalizedText(tyomahdollisuus.kuvaus)}</div>,
       showDivider: false,
-      showAiRating: true,
+    },
+    {
+      navTitle: t('job-opportunity.job-advertisement-characteristics'),
+      showNavTitle: false,
       content: (
-        <div className="bg-white p-6 flex flex-col gap-6">
-          <div className="flex justify-between">
-            <h3 className="text-heading-3">{t('job-opportunity.special-characteristics-from-tyomarkkinatori')}:</h3>
-            <div className="pl-7">
-              <AiInfo />
-            </div>
+        <div className="bg-white p-6 flex flex-col gap-6 mb-9">
+          <div className="flex items-center gap-4">
+            <h3 className="text-heading-3">{t('job-opportunity.job-advertisement-characteristics')}</h3>
+            <AiInfo />
           </div>
-          <p>{t('job-opportunity.special-characteristics-from-tyomarkkinatori-description')}</p>
+          <p className="font-arial">{t('job-opportunity.job-advertisement-characteristics-description')}</p>
 
-          <div className="grid w-full grow grid-cols-2 gap-6">
+          <div className="grid w-full grow grid-cols-2 gap-7">
             <JobJakaumaList name="tyonJatkuvuus" />
             <JobJakaumaList name="kielitaito" />
             <JobJakaumaList name="koulutusala" />
             <JobJakaumaList name="ajokortti" />
             <JobJakaumaList name="rikosrekisteriote" />
           </div>
+        </div>
+      ),
+    },
+    {
+      navTitle: t('job-opportunity.open-jobs'),
+      showNavTitle: false,
+      content: (
+        <div className="flex flex-col w-full mb-9">
+          <div className="bg-[#442496] h-9 flex items-center pl-4 mb-7">
+            <img
+              src="../../assets/tyomarkkinatori.svg"
+              alt={t('job-opportunity.tyomarkkinatori.banner-alt-text')}
+              className="h-7"
+            />
+          </div>
+          <h3 className="text-heading-2 mb-4">{t('job-opportunity.tyomarkkinatori.title')}</h3>
+          <p>{t('job-opportunity.tyomarkkinatori.description')}</p>
+          <Button
+            size="sm"
+            className="w-fit mt-7"
+            label={t('job-opportunity.tyomarkkinatori.button-label')}
+            icon={<JodOpenInNew />}
+            iconSide="right"
+            LinkComponent={getLinkTo(tmtUrl, { useAnchor: true, target: '_blank' })}
+          />
         </div>
       ),
     },
