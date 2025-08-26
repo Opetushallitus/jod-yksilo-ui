@@ -1,48 +1,10 @@
-import i18n from '@/i18n/config';
-import { cx } from '@jod/design-system';
+import type { LoaderData as EducationOpportunityData } from '@/routes/EducationOpportunity/loader';
+import type { LoaderData as JobOpportunityData } from '@/routes/JobOpportunity/loader';
+import { getLocalizedText } from '@/utils';
+import { type BreadcrumbItem, Breadcrumb as DSBreadCrumb } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink, UIMatch, useMatches, useSearchParams } from 'react-router';
-
-type BreadcrumbTo =
-  | {
-      current: true;
-      to?: never;
-    }
-  | {
-      current?: false;
-      to: string;
-    };
-
-export type BreadcrumbLinkProps = {
-  children: React.ReactNode;
-} & BreadcrumbTo;
-
-export const BreadcrumbLink = ({ to, children, current }: BreadcrumbLinkProps) => {
-  return (
-    <li>
-      {current ? (
-        <span className="text-black" aria-current="location">
-          {children}
-        </span>
-      ) : (
-        <>
-          <NavLink
-            to={to}
-            className={cx('todo', {
-              'text-black': current,
-            })}
-          >
-            {children}
-          </NavLink>
-          <span className="text-secondary-5 w-[8px] mx-2" aria-hidden={true}>
-            /
-          </span>
-        </>
-      )}
-    </li>
-  );
-};
+import { NavLink, UIMatch, useMatches } from 'react-router';
 
 interface YksiloHandle {
   title?: string;
@@ -52,64 +14,95 @@ interface YksiloHandle {
 const useTypedMatches = () => useMatches() as UIMatch<unknown, YksiloHandle>[];
 
 export const Breadcrumb = () => {
+  const history = window.history;
   const matches = useTypedMatches();
-  const [searchParams] = useSearchParams();
-
   const {
     t,
     i18n: { language },
   } = useTranslation();
+  const [items, setItems] = React.useState<BreadcrumbItem[]>([]);
 
-  const crumbLinks = React.useCallback(() => {
-    const validMatches = matches.filter((m) => m.handle?.title || m.id === 'root');
+  React.useEffect(() => {
+    const opts = { lng: language };
 
-    const isToolPage = validMatches.some((item) => item.handle?.title === i18n.t('tool.title'));
-    if (isToolPage) {
-      validMatches.push({
-        data: {},
-        handle: { title: '' },
-        id: '',
-        params: {},
-        pathname: '',
-        loaderData: undefined,
-      });
-    }
+    const validMatches = matches.filter((m) => m.handle?.title || m.id === 'root' || m.handle?.type);
+    const crumbs: BreadcrumbItem[] = [
+      {
+        label: t('front-page', opts),
+        to: `/${language}`,
+      },
+    ];
 
-    const breadcrumbParts = validMatches.map((match: UIMatch<unknown, YksiloHandle>, index: number) => {
-      let pathname = match.pathname;
-      let title = match.handle?.title;
+    const opportunityIndex = validMatches.findIndex(
+      (item) => item?.handle?.type && ['jobOpportunity', 'educationOpportunity'].includes(item?.handle?.type),
+    );
+    const opportunity = opportunityIndex !== -1 ? validMatches[opportunityIndex] : null;
 
-      if (match.handle?.title === i18n.t('tool.title')) {
-        if (searchParams.get('origin') === 'favorites') {
-          title = i18n.t('profile.favorites.title');
-          pathname = `/${language}/${t('slugs.profile.index')}/${i18n.t('slugs.profile.favorites')}`;
-        } else {
-          title = i18n.t('tool.title');
-          pathname = `/${language}/${t('slugs.tool.index')}`;
-        }
+    /**
+     * Gets the parent breadcrumbs for the opportunity based on the "from" parameter from state
+     * @returns Breadcrumb items array
+     */
+    const getOpportunityParents = () => {
+      const from: 'tool' | 'favorite' | 'path' | 'goal' = history.state?.usr?.from ?? 'tool';
+      const profileIndex: BreadcrumbItem = {
+        label: t('profile.index', opts),
+        to: `/${language}/${t('slugs.profile.index', opts)}`,
+      };
+
+      if (from === 'tool') {
+        return [{ label: t('tool.title', opts), to: `/${language}/${t('slugs.tool.index', opts)}` }];
+      } else if (from === 'favorite') {
+        return [
+          profileIndex,
+          {
+            label: t('profile.favorites.title', opts),
+            to: `/${language}/${t('slugs.profile.index', opts)}/${t('slugs.profile.favorites', opts)}`,
+          },
+        ];
+      } else if (from === 'goal') {
+        return [
+          profileIndex,
+          {
+            label: t('profile.my-goals.title', opts),
+            to: `/${language}/${t('slugs.profile.index', opts)}/${t('slugs.profile.my-goals', opts)}`,
+          },
+        ];
+      } else {
+        return [];
       }
-      const isLast = index === validMatches.length - 1;
-      const isRoot = match.id === 'root';
+    };
 
-      if (isLast && !title) {
-        return;
+    // Opportunities need some special handling
+    if (opportunity) {
+      crumbs.push(...(getOpportunityParents() || []));
+
+      if (opportunity.handle.type === 'jobOpportunity') {
+        const loaderData = opportunity.loaderData as JobOpportunityData;
+        crumbs.push({
+          label: getLocalizedText(loaderData?.tyomahdollisuus?.otsikko),
+        });
+      } else if (opportunity.handle.type === 'educationOpportunity') {
+        const loaderData = opportunity.loaderData as EducationOpportunityData;
+        crumbs.push({
+          label: getLocalizedText(loaderData?.koulutusmahdollisuus.otsikko),
+        });
       }
-      return isLast ? (
-        <BreadcrumbLink key={match.id} current>
-          {title}
-        </BreadcrumbLink>
-      ) : (
-        <BreadcrumbLink key={match.id} to={pathname}>
-          {isRoot ? t('front-page') : title}
-        </BreadcrumbLink>
+
+      setItems(crumbs);
+    } else {
+      setItems(
+        validMatches.map((match) => {
+          const isRoot = match.id === 'root';
+          return {
+            label: isRoot ? t('front-page') : match.handle?.title || '',
+            to: match.pathname,
+          };
+        }),
       );
-    });
-    return breadcrumbParts;
-  }, [language, matches, searchParams, t]);
+    }
+    // Breadcrumb only needs to be initialized once per page load.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return (
-    <nav aria-label={t('current-location')} className="text-accent text-body-sm font-bold col-span-3 mb-3 print:hidden">
-      <ol className="flex flex-row flex-wrap gap-y-2">{crumbLinks()}</ol>
-    </nav>
-  );
+  return <DSBreadCrumb items={items} serviceVariant="yksilo" LinkComponent={NavLink} />;
 };

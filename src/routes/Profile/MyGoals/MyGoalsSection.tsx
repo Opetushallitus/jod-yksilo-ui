@@ -70,6 +70,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
               <OpportunityCard
                 to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${mahdollisuusId}`}
                 description={getLocalizedText(details.tiivistelma)}
+                from="goal"
                 ammattiryhma={
                   details.ammattiryhma ? getLocalizedText(loaderData.ammattiryhmaNimet[details.ammattiryhma]) : ''
                 }
