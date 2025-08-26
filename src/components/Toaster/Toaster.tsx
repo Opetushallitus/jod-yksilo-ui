@@ -1,5 +1,6 @@
 import { Toast } from '@jod/design-system';
 import { Toast as ReactHotToast, useToaster } from 'react-hot-toast/headless';
+import './toaster.css';
 
 type SafeToast = Omit<ReactHotToast, 'message'> & { message: string };
 
@@ -22,7 +23,9 @@ export const Toaster = () => {
       {safeToasts
         .filter((toast) => toast.visible)
         .map((toast) => (
-          <Toast key={toast.id} text={toast.message} variant={toast.type === 'error' ? 'error' : 'success'} />
+          <div key={toast.id} className="toast-in">
+            <Toast text={toast.message} variant={toast.type === 'error' ? 'error' : 'success'} />
+          </div>
         ))}
     </div>
   );
