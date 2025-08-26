@@ -48,6 +48,7 @@ type OpportunityCardProps = {
   matchValue?: number;
   matchLabel?: string;
   type: MahdollisuusTyyppi;
+  from?: 'tool' | 'favorite' | 'path' | 'goal';
   tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
 } & FavoriteProps &
   MenuProps;
@@ -67,6 +68,7 @@ const OpportunityDetail = ({ title, value }: { title: string; value: string }) =
 export const OpportunityCard = ({
   as: Component = 'div',
   to,
+  from,
   description,
   ammattiryhma,
   matchLabel,
@@ -136,6 +138,7 @@ export const OpportunityCard = ({
         {to ? (
           <NavLink
             to={to}
+            state={{ from }}
             className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto hover:underline hover:text-accent"
           >
             {name}

@@ -471,6 +471,7 @@ const ExploreOpportunities = () => {
             <OpportunityCard
               key={id}
               as="li"
+              from="tool"
               to={
                 mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
                   ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`

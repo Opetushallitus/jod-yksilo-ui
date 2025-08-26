@@ -12,7 +12,7 @@ import { Path, newPolkuLoader, polkuLoader } from '@/routes/Profile/Path';
 import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import { Tool, Competences as ToolCompetences, Interests as ToolInterests, toolLoader } from '@/routes/Tool';
-import { RouteObject, replace } from 'react-router';
+import { type RouteObject, replace } from 'react-router';
 import { withYksiloContext } from '../auth';
 import {
   AboutAi,
@@ -198,7 +198,7 @@ const jobOpportunityRoutes = supportedLanguageCodes.map(
       element: <JobOpportunity />,
       loader: withYksiloContext(jobOpportunityLoader, false),
       handle: {
-        title: i18n.t('tool.title', { lng }),
+        type: 'jobOpportunity',
       },
     }) as RouteObject,
 );
@@ -209,6 +209,9 @@ const profileLandingPageRoutes = supportedLanguageCodes.map(
       id: `{slugs.profile.login}|${lng}`,
       path: i18n.t('slugs.profile.login', { lng }),
       element: <LandingPage />,
+      handle: {
+        title: i18n.t('login-to-service', { lng }),
+      },
     }) as RouteObject,
 );
 
@@ -220,7 +223,7 @@ const educationOpportunityRoutes = supportedLanguageCodes.map(
       element: <EducationOpportunity />,
       loader: withYksiloContext(educationOpportunityLoader, false),
       handle: {
-        title: i18n.t('tool.title', { lng }),
+        type: 'educationOpportunity',
       },
     }) as RouteObject,
 );
