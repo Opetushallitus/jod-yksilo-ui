@@ -1,17 +1,26 @@
 import { components } from '@/api/schema';
 import { LanguageButton, UserButton } from '@/components';
-import { ErrorNote } from '@/components/ErrorNote';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
-import { useErrorNoteStore } from '@/stores/useErrorNoteStore';
+import { useNoteStore } from '@/stores/useNoteStore';
 import { useToolStore } from '@/stores/useToolStore';
-import { Chatbot, Footer, MatomoTracker, NavigationBar, ServiceVariantProvider, SkipLink } from '@jod/design-system';
+import {
+  Chatbot,
+  Footer,
+  MatomoTracker,
+  NavigationBar,
+  NoteStack,
+  ServiceVariantProvider,
+  SkipLink,
+  useNoteStack,
+} from '@jod/design-system';
 import { JodMenu } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router';
+import { useShallow } from 'zustand/shallow';
 import { LogoutFormContext } from '.';
 
 const agents = {
@@ -32,11 +41,17 @@ const Root = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const toolStore = useToolStore();
-  const { error, clearErrorNote } = useErrorNoteStore();
+  const resetToolStore = useToolStore((state) => state.reset);
+  const { note, clearNote } = useNoteStore(useShallow((state) => ({ note: state.note, clearNote: state.clearNote })));
   const isMouseInteraction = useInteractionMethod();
   const location = useLocation();
-
+  const { addNote } = useNoteStack();
+  const [langMenuOpen, setLangMenuOpen] = React.useState(false);
+  const [navMenuOpen, setNavMenuOpen] = React.useState(false);
+  const logoutForm = React.useRef<HTMLFormElement>(null);
+  const langMenuButtonRef = React.useRef<HTMLLIElement>(null);
+  const langMenuRef = useMenuClickHandler(() => setLangMenuOpen(false), langMenuButtonRef);
+  const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
   const hostname = window.location.hostname;
   const { siteId, agent } = React.useMemo(() => {
     if (hostname === 'osaamispolku.fi') {
@@ -48,21 +63,26 @@ const Root = () => {
     }
   }, [hostname, language]);
 
-  const [langMenuOpen, setLangMenuOpen] = React.useState(false);
-
-  const [navMenuOpen, setNavMenuOpen] = React.useState(false);
-
-  const logoutForm = React.useRef<HTMLFormElement>(null);
-  const langMenuButtonRef = React.useRef<HTMLLIElement>(null);
-
-  const langMenuRef = useMenuClickHandler(() => setLangMenuOpen(false), langMenuButtonRef);
-
-  const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
-
   const logout = () => {
-    toolStore.reset();
+    resetToolStore();
     logoutForm.current?.submit();
   };
+
+  React.useEffect(() => {
+    if (!note) {
+      return;
+    }
+
+    addNote({
+      title: t(note.title),
+      description: t(note.description),
+      variant: 'error',
+      permanent: note.permanent ?? false,
+      // Prevent multiple session-expired notes with fixed id
+      id: note.description.includes('session-expired') ? 'session-expired' : undefined,
+    });
+    clearNote();
+  }, [addNote, clearNote, note, t]);
 
   // Move focus to menu content when opened
   React.useEffect(() => {
@@ -150,7 +170,8 @@ const Root = () => {
           serviceBarVariant="yksilo"
           serviceBarTitle={t('my-competence-path')}
         />
-        {error && <ErrorNote error={error} onCloseClick={clearErrorNote} />}
+
+        <NoteStack showAllText={t('show-all')} />
       </header>
 
       <LogoutFormContext.Provider value={logoutForm.current}>
