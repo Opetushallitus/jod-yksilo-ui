@@ -12,6 +12,7 @@ import { Path, newPolkuLoader, polkuLoader } from '@/routes/Profile/Path';
 import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import { Tool, Competences as ToolCompetences, Interests as ToolInterests, toolLoader } from '@/routes/Tool';
+import { NoteStackProvider } from '@jod/design-system';
 import { type RouteObject, replace } from 'react-router';
 import { withYksiloContext } from '../auth';
 import {
@@ -365,9 +366,11 @@ const rootRoute: RouteObject = {
   path: '/:lng',
   loader: withYksiloContext(rootLoader, false),
   element: (
-    <ModalProvider>
-      <Root />
-    </ModalProvider>
+    <NoteStackProvider>
+      <ModalProvider>
+        <Root />
+      </ModalProvider>
+    </NoteStackProvider>
   ),
   errorElement: <ErrorBoundary />,
   children: [

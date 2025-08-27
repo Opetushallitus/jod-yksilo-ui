@@ -1,7 +1,6 @@
 export { ActionButton } from './ActionButton/ActionButton';
 export { AiInfo } from './AiInfo/AiInfo';
 export { ConfirmDialogWrapper, type ConfirmDialogWrapperProps } from './ConfirmDialogWrapper/ConfirmDialogWrapper';
-export { ErrorNote } from './ErrorNote';
 export { ExperienceTable } from './ExperienceTable/ExperienceTable';
 export { type ExperienceTableRowData } from './ExperienceTable/ExperienceTableRow';
 export { FavoriteToggle } from './FavoriteToggle/FavoriteToggle';

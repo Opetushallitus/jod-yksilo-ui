@@ -2,7 +2,7 @@ import { authStore } from '@/auth';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { Middleware } from 'openapi-fetch';
-import { useErrorNoteStore } from '../../stores/useErrorNoteStore';
+import { useNoteStore } from '../../stores/useNoteStore';
 import { unregisterCsrfMiddleware } from './csrf';
 
 export const sessionExpiredMiddleware: Middleware = {
@@ -15,11 +15,10 @@ export const sessionExpiredMiddleware: Middleware = {
       authStore.yksiloPromise = undefined;
       unregisterCsrfMiddleware();
 
-      useErrorNoteStore.setState({
-        error: {
-          title: 'error-boundary.title',
-          description: 'error-boundary.session-expired',
-        },
+      useNoteStore.getState().setNote({
+        title: 'error-boundary.title',
+        description: 'error-boundary.session-expired',
+        variant: 'error',
       });
 
       useToolStore.getState().reset();
