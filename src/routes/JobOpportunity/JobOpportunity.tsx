@@ -1,3 +1,4 @@
+import tmtLogo from '@/../assets/tyomarkkinatori.svg';
 import { AiInfo } from '@/components';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
@@ -114,11 +115,7 @@ const JobOpportunity = () => {
       content: (
         <div className="flex flex-col w-full mb-9">
           <div className="bg-[#442496] h-9 flex items-center pl-4 mb-7">
-            <img
-              src="../../assets/tyomarkkinatori.svg"
-              alt={t('job-opportunity.tyomarkkinatori.banner-alt-text')}
-              className="h-7"
-            />
+            <img src={tmtLogo} alt={t('job-opportunity.tyomarkkinatori.banner-alt-text')} className="h-7" />
           </div>
           <h3 className="text-heading-2 mb-4">{t('job-opportunity.tyomarkkinatori.title')}</h3>
           <p>{t('job-opportunity.tyomarkkinatori.description')}</p>

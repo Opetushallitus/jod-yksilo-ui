@@ -1,3 +1,4 @@
+import opintopolkuLogo from '@/../assets/opintopolku.svg';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import { EducationJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
@@ -96,11 +97,7 @@ const EducationOpportunity = () => {
       content: (
         <div className="flex flex-col w-full mb-9">
           <div className="bg-[#397B0F] h-9 flex items-center pl-4 mb-7">
-            <img
-              src="../../assets/opintopolku.svg"
-              alt={t('education-opportunity.opintopolku.banner-alt-text')}
-              className="h-6"
-            />
+            <img src={opintopolkuLogo} alt={t('education-opportunity.opintopolku.banner-alt-text')} className="h-6" />
           </div>
           <h3 className="text-heading-2 mb-4">{t('education-opportunity.opintopolku.title')}</h3>
           <p>{t('education-opportunity.opintopolku.description')}</p>
