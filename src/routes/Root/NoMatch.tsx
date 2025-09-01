@@ -3,7 +3,10 @@ import { JodHome } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
 
 const NoMatch = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const title = t('no-match.title');
   return (
     <main
@@ -24,7 +27,7 @@ const NoMatch = () => {
         label={t('return-home')}
         variant="accent"
         /* eslint-disable-next-line react/no-unstable-nested-components */
-        LinkComponent={({ children }: { children: React.ReactNode }) => <a href="/">{children}</a>}
+        LinkComponent={({ children }: { children: React.ReactNode }) => <a href={`/yksilo/${language}`}>{children}</a>}
       />
     </main>
   );
