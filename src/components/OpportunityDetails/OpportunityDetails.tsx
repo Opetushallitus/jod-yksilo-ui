@@ -10,7 +10,14 @@ import { useToolStore } from '@/stores/useToolStore';
 import { copyToClipboard, getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { type MenuSection, PageNavigation, useMediaQueries } from '@jod/design-system';
-import { JodBuild, JodInfoFilled, JodPrint, JodShare, JodWorkPossibilities } from '@jod/design-system/icons';
+import {
+  JodBuild,
+  JodCertificate,
+  JodInfoFilled,
+  JodPrint,
+  JodShare,
+  JodWorkPossibilities,
+} from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
@@ -27,6 +34,23 @@ export interface OpportunityDetailsSection {
   showDivider?: boolean;
   showNavTitle?: boolean;
 }
+
+const TitleIcon = ({
+  tyyppi,
+  aineisto,
+}: {
+  tyyppi: MahdollisuusTyyppi;
+  aineisto: 'AMMATTITIETO' | 'TMT' | undefined;
+}) => {
+  if (tyyppi === 'TYOMAHDOLLISUUS') {
+    return aineisto === 'AMMATTITIETO' ? (
+      <JodBuild className="text-white" />
+    ) : (
+      <JodWorkPossibilities className="text-white" />
+    );
+  }
+  return <JodCertificate className="text-white" />;
+};
 
 export interface OpportunityDetailsProps {
   data: components['schemas']['KoulutusmahdollisuusFullDto'] | components['schemas']['TyomahdollisuusFullDto'];
@@ -75,8 +99,6 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
     [isDev],
   );
 
-  const TitleIcon = tyyppi === 'TYOMAHDOLLISUUS' ? JodBuild : JodWorkPossibilities;
-
   const typeText = React.useMemo(() => {
     if (tyyppi === 'TYOMAHDOLLISUUS') {
       return t(`opportunity-type.work.${jobData.aineisto ?? 'TMT'}`);
@@ -113,7 +135,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
         {/* Header: Icon & title */}
         <div className="flex gap-x-4 items-center">
           <span className="flex items-center justify-center size-9 aspect-square rounded-full bg-secondary-1-dark-2">
-            <TitleIcon className="text-white" />
+            <TitleIcon tyyppi={tyyppi} aineisto={jobData.aineisto} />
           </span>
           {title ? (
             <h1 className="text-hero-mobile sm:text-hero text-secondary-1-dark-2 hyphens-auto text-pretty break-all">
