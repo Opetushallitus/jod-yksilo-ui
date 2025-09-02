@@ -782,7 +782,16 @@
   },
   "proposed-competences": "Ehdotetut osaamiset",
   "proposed-interests": "Ehdotetut kiinnostukset",
-  "rate-ai-content": "Tekoälyn avulla luotu sisältö - saattaa sisältää virheitä. Kerro miten onnistuimme?",
+  "rate-ai-content": {
+    "header": "Arvioi tekoälyn tuottamaa sisältöä",
+    "header-for-opportunities": "Arvioi tekoälyn tunnistamia mahdollisuuksia",
+    "body": "Tällä sivulla on tekoälyn avulla tunnistettuja mahdollisuuksia. Kerro miten onnistuimme?",
+    "body-for-opportunities": "Tällä sivulla on tekoälyn avulla tunnistettuja mahdollisuuksia. Kerro miten onnistuimme?",
+    "modal-header": "Annoit peukun alas",
+    "modal-body": "Huomasimme, että annoit peukun alas tekoälyn tuottamalle sisällölle. Voisitko kertoa tarkemmin, mikä ei toiminut? Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
+    "modal-placeholder": "Esim. sisältö epätarkkaa, ei vastannut tarvetta, väärä sävy…",
+    "toast": "Kiitos palautteestasi!"
+  },
   "remove-approval": "Hylkää hyväksyntä",
   "remove-favorite": "Poista suosikeista",
   "remove-favorite-opportunity-confirmation": "Haluatko varmasti poistaa mahdollisuuden \"{{name}}\" suosikeista?",
