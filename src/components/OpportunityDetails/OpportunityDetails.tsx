@@ -22,6 +22,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
+import RateAiContent from '../RateAiContent/RateAiContent';
 
 export interface OpportunityDetailsSection {
   navTitle: string;
@@ -117,7 +118,18 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
         LinkComponent: getLinkTo(`#${section.navTitle}`),
       })),
     };
-    return <PageNavigation menuSection={menuSection} activeIndicator="dot" />;
+    return (
+      <>
+        <PageNavigation menuSection={menuSection} activeIndicator="dot" className={'mb-4'} />
+        <RateAiContent
+          // eslint-disable-next-line no-console
+          onDislike={(value) => console.log('not implemented', value)}
+          // eslint-disable-next-line no-console
+          onLike={() => console.log('not implemented')}
+          variant="opportunity"
+        />
+      </>
+    );
   }, [t, sections, filterDevSections]);
 
   const OpportunityType = typeText ? (
