@@ -2,6 +2,7 @@ import opintopolkuLogo from '@/../assets/opintopolku.svg';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import { EducationJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
+import RateAiContent from '@/components/RateAiContent/RateAiContent';
 import type { LoaderData } from '@/routes/EducationOpportunity/loader';
 import type { JakaumaKey } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
@@ -68,6 +69,15 @@ const EducationOpportunity = () => {
         <div className="flex flex-col gap-6 grow">
           <span className="font-arial">{t('education-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} />
+          {!sm && (
+            <RateAiContent
+              // eslint-disable-next-line no-console
+              onDislike={(value) => console.log('not implemented', value)}
+              // eslint-disable-next-line no-console
+              onLike={() => console.log('not implemented')}
+              variant="opportunity"
+            />
+          )}
         </div>
       ),
     },

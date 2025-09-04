@@ -3,10 +3,11 @@ import { AiInfo } from '@/components';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
+import RateAiContent from '@/components/RateAiContent/RateAiContent';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText, hashString, sortByProperty } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
-import { Button } from '@jod/design-system';
+import { Button, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +20,7 @@ const JobOpportunity = () => {
     t,
     i18n: { language },
   } = useTranslation();
+  const { sm } = useMediaQueries();
   const { tyomahdollisuus, osaamiset, isLoggedIn, ammattiryhma } = useLoaderData<LoaderData>();
   const hasAiContent = tyomahdollisuus.aineisto !== 'AMMATTITIETO';
   const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
@@ -79,6 +81,15 @@ const JobOpportunity = () => {
         <div className="flex flex-col gap-6 mb-9 grow">
           <span className="font-arial">{t('job-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} />
+          {!sm && (
+            <RateAiContent
+              // eslint-disable-next-line no-console
+              onDislike={(value) => console.log('not implemented', value)}
+              // eslint-disable-next-line no-console
+              onLike={() => console.log('not implemented')}
+              variant="opportunity"
+            />
+          )}
         </div>
       ),
     },

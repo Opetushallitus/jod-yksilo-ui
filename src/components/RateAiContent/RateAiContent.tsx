@@ -42,7 +42,7 @@ const RateAiContent = ({ isLiked, isDisliked, onLike, onDislike, variant }: Rate
     variant === 'kohtaanto' ? t('rate-ai-content.body') : t('rate-ai-content.body-for-opportunities');
 
   return (
-    <div className="bg-accent flex flex-col rounded-lg" style={{ height: 271, padding: 24 }}>
+    <div className="bg-accent flex flex-col rounded-lg h-[271px] p-6">
       <div className="flex items-start mb-2">
         <div className="text-heading-2 text-white mr-2">{headerText}</div>
         <div className="text-white">
@@ -52,10 +52,7 @@ const RateAiContent = ({ isLiked, isDisliked, onLike, onDislike, variant }: Rate
       <div className="flex items-center mb-2">
         <p className="text-body-lg text-white">{bodyDescription}</p>
       </div>
-      <div
-        className="bg-white flex items-center justify-between px-5 mt-auto"
-        style={{ width: 128, height: 48, borderRadius: 30 }}
-      >
+      <div className="bg-white flex items-center justify-between px-5 w-[128px] h-9 rounded-[30px] mt-auto">
         <span className="bg-white rounded-full flex items-center px-3">
           <LikeIcon className="text-accent cursor-pointer" onClick={onLike} />
         </span>
