@@ -208,7 +208,7 @@ const Root = () => {
       <Chatbot
         agent={agent}
         language={language}
-        agentIcon={`${import.meta.env.BASE_URL}chatbot-icon.svg`}
+        agentIcon={'/chatbot-icon.svg'}
         header={t('chatbot.header')}
         openWindowText={t('chatbot.open-window-text')}
         agentName={t('chatbot.agent-name')}
