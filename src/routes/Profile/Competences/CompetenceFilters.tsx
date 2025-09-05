@@ -36,23 +36,31 @@ export interface CompetenceFiltersProps {
   filterKeys: (keyof FiltersType)[];
   selectedFilters: FiltersType;
   setSelectedFilters: (value: FiltersType) => void;
+  ignoredFilterKeys?: (keyof FiltersType)[];
 }
 
-export const CompetenceFilters = ({ filterKeys, selectedFilters, setSelectedFilters }: CompetenceFiltersProps) => {
+export const CompetenceFilters = ({
+  filterKeys,
+  selectedFilters,
+  setSelectedFilters,
+  ignoredFilterKeys = [],
+}: CompetenceFiltersProps) => {
   const { t, i18n } = useTranslation();
 
   // Toggle single filter item
   const toggleSingleFilter = (type: CompetenceSourceType, index: number) => () => {
     const newFilters = { ...selectedFilters };
-    newFilters[type][index] = newFilters[type][index] ?? { checked: true };
-    newFilters[type][index].checked = !newFilters[type][index].checked;
+    if (newFilters[type]) {
+      newFilters[type][index] = newFilters[type][index] ?? { checked: true };
+      newFilters[type][index].checked = !newFilters[type][index].checked;
+    }
     setSelectedFilters(newFilters);
   };
 
   // Check if any filter of a specific type is checked
   const isFilterTypeChecked = (type: CompetenceSourceType) => {
     const filter = selectedFilters[type];
-    return (filter.length > 0 && filter?.some((item) => item.checked)) ?? false;
+    return filter ? ((filter.length > 0 && filter.some((item) => item.checked)) ?? false) : false;
   };
 
   // Toggle all filters of a specific type
@@ -73,40 +81,42 @@ export const CompetenceFilters = ({ filterKeys, selectedFilters, setSelectedFilt
   return (
     // Height = viewport height - header and footer heights - padding
     <ul className="flex flex-col gap-y-3 py-4 max-h-[calc(100vh-296px-64px)] overflow-y-auto">
-      {filterKeys.map((key) => (
-        <React.Fragment key={key}>
-          {key !== 'MUU_OSAAMINEN' ? (
-            <li>
-              <Accordion
-                title={
-                  <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
-                }
-                titleText={t(`types.competence.${key}`)}
-                lang={i18n.language}
-              >
-                <ul className="gap-y-3 flex-col flex">
-                  {selectedFilters[key]?.map((item, idx) => (
-                    <li className="pl-6" key={item.label}>
-                      <Checkbox
-                        name={item.label}
-                        ariaLabel={`${key} ${item.label}`}
-                        label={item.label}
-                        checked={item.checked}
-                        onChange={toggleSingleFilter(key, idx)}
-                        value={JSON.stringify(item.value)}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </Accordion>
-            </li>
-          ) : (
-            <li>
-              <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
-            </li>
-          )}
-        </React.Fragment>
-      ))}
+      {filterKeys
+        .filter((key) => !ignoredFilterKeys.includes(key))
+        .map((key) => (
+          <React.Fragment key={key}>
+            {key !== 'MUU_OSAAMINEN' && key !== 'KIINNOSTUS' ? (
+              <li>
+                <Accordion
+                  title={
+                    <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
+                  }
+                  titleText={t(`types.competence.${key}`)}
+                  lang={i18n.language}
+                >
+                  <ul className="gap-y-3 flex-col flex">
+                    {selectedFilters[key]?.map((item, idx) => (
+                      <li className="pl-6" key={item.label}>
+                        <Checkbox
+                          name={item.label}
+                          ariaLabel={`${key} ${item.label}`}
+                          label={item.label}
+                          checked={item.checked}
+                          onChange={toggleSingleFilter(key, idx)}
+                          value={JSON.stringify(item.value)}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </Accordion>
+              </li>
+            ) : (
+              <li>
+                <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
+              </li>
+            )}
+          </React.Fragment>
+        ))}
     </ul>
   );
 };

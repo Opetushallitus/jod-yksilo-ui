@@ -1,5 +1,6 @@
 export { ActionButton } from './ActionButton/ActionButton';
 export { AiInfo } from './AiInfo/AiInfo';
+export { Breadcrumb } from './Breadcrumb/Breadcrumb';
 export { ConfirmDialogWrapper, type ConfirmDialogWrapperProps } from './ConfirmDialogWrapper/ConfirmDialogWrapper';
 export { ExperienceTable } from './ExperienceTable/ExperienceTable';
 export { type ExperienceTableRowData } from './ExperienceTable/ExperienceTableRow';

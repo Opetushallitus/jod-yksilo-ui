@@ -201,7 +201,7 @@ const Favorites = () => {
       <div className="my-4">
         <Button
           LinkComponent={getLinkTo(
-            `/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}?origin=favorites&filter=${getFilterValueForTools}`,
+            `/${language}/${t('slugs.tool.index')}?origin=favorites&filter=${getFilterValueForTools}`,
           )}
           label={t('profile.favorites.move-to-job-and-education-opportunities')}
           icon={<JodArrowRight />}
