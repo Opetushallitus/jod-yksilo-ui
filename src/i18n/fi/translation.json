@@ -494,6 +494,16 @@
   },
   "opportunity-description-KOULUTUSMAHDOLLISUUS": "Koulutusmahdollisuuden yleiskuvaus",
   "opportunity-description-TYOMAHDOLLISUUS": "Työmahdollisuuden yleiskuvaus",
+  "opportunity-tooltip": {
+    "education": {
+      "EI_TUTKINTO": "Muu koulutus on koulutus, joka ei johda tutkintoon. Se voi kehittää osaamista esimerkiksi työelämää varten tai henkilökohtaisiin tarpeisiin. Tekoäly ryhmittelee nämä koulutukset opittavien taitojen ja koulutusalan perusteella.",
+      "TUTKINTO": "Tutkintokoulutus on koulutus, joka johtaa viralliseen tutkintoon. Tekoäly ryhmittelee nämä koulutukset sen mukaan, mitä taitoja niissä opitaan ja mihin koulutusalaan ja viralliseen tutkintoluokitukseen ne kuuluvat."
+    },
+    "work": {
+      "AMMATTITIETO": "Ammatti on kokonaisuus keskenään hyvin samankaltaisista töistä. Se kuvaa, millaisia tehtäviä, taitoja ja vastuita työhön kuuluu. Samaan ammattiin kuuluvat työt ovat sisällöltään niin samanlaisia, että ne voidaan luokitella yhdeksi ammatiksi.",
+      "TMT": "Työmahdollisuus on tekoälyn muodostama ryhmä samankaltaisista työpaikoista. Tekoäly lukee työpaikkailmoituksia ja tunnistaa niistä tarvittavat taidot, luvat, ajokortit ja mainitut ammatit. Ilmoitukset, joissa on riittävästi tietoa, ryhmitellään sisällön perusteella, jolloin syntyy työmahdollisuuksia – eli joukkoja töistä, joissa vaaditaan samanlaisia osaamisia ja ominaisuuksia."
+    }
+  },
   "opportunity-type": {
     "education": {
       "EI_TUTKINTO": "Muu koulutus",
