@@ -258,7 +258,7 @@ const EducationHistory = () => {
       <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>
       <div className="mb-8">
         <Link
-          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+          to={`/${language}/${t('slugs.tool.index')}`}
           className="text-button-md hover:underline text-accent mt-4"
           data-testid="education-history-go-to-tool"
         >

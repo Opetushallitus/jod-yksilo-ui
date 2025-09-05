@@ -36,7 +36,6 @@
   "compare": "Vertaile",
   "competence": "Osaaminen",
   "competences": "Osaamiset",
-  "competences-from-profile": "Profiilista tuodut",
   "competences-identify-failed": "Tekoälyn osaamistunnistus epäonnistui.",
   "competences-identifying": "Voit muokata koulutusta, kun osaamiset ovat latautuneet.",
   "competences-of-your-choice": "Valitut osaamiset",
@@ -412,8 +411,6 @@
   "login-for-favorites": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa suosikkeja ja päästä tarkastelemaan niitä myöhemmin.",
   "login-to-service": "Kirjaudu palveluun",
   "logout": "Kirjaudu ulos",
-  "mapped": "Kartoitetut",
-  "mapped-interests": "Kartoitetut kiinnostukset",
   "match-service": "Kohtaantopalvelu",
   "menu": "Valikko",
   "menus": {
@@ -520,12 +517,16 @@
     "competence": {
       "add": "Lisää osaaminen '+'-merkistä.",
       "identify": "Tunnista osaamisia",
-      "remove": "Poista osaaminen klikkaamalla rastia."
+      "none-proposed": "Ei ehdotettuja osaamisia",
+      "none-selected": "Ei valittuja osaamisia",
+      "remove": "Poista osaaminen x-merkistä."
     },
     "interest": {
       "add": "Lisää kiinnostus '+'-merkistä.",
       "identify": "Tunnista kiinnostuksia",
-      "remove": "Poista kiinnostuksen kohde klikkaamalla rastia.",
+      "none-proposed": "Ei ehdotettuja kiinnostuksia",
+      "none-selected": "Ei valittuja kiinnostuksia",
+      "remove": "Poista kiinnostuksen kohde x-merkistä.",
       "textarea-placeholder": "Kirjoita tekstikenttään mikä sinua kiinnostaa"
     },
     "my-KIINNOSTUS": "Kiinnostukseni",
@@ -793,12 +794,12 @@
   "proposed-competences": "Ehdotetut osaamiset",
   "proposed-interests": "Ehdotetut kiinnostukset",
   "rate-ai-content": {
-    "header": "Arvioi tekoälyn tuottamaa sisältöä",
-    "header-for-opportunities": "Arvioi tekoälyn tunnistamia mahdollisuuksia",
     "body": "Tällä sivulla on tekoälyn avulla tunnistettuja mahdollisuuksia. Kerro miten onnistuimme?",
     "body-for-opportunities": "Tällä sivulla on tekoälyn avulla tunnistettuja mahdollisuuksia. Kerro miten onnistuimme?",
-    "modal-header": "Annoit peukun alas",
+    "header": "Arvioi tekoälyn tuottamaa sisältöä",
+    "header-for-opportunities": "Arvioi tekoälyn tunnistamia mahdollisuuksia",
     "modal-body": "Huomasimme, että annoit peukun alas tekoälyn tuottamalle sisällölle. Voisitko kertoa tarkemmin, mikä ei toiminut? Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
+    "modal-header": "Annoit peukun alas",
     "modal-placeholder": "Esim. sisältö epätarkkaa, ei vastannut tarvetta, väärä sävy…",
     "toast": "Kiitos palautteestasi!"
   },
@@ -864,12 +865,7 @@
     "session-expired": "istunto-vanhentunut",
     "terms-of-service": "kayttoehdot",
     "tool": {
-      "competences": "osaamiset",
-      "goals": "tavoitteet",
-      "index": "tyokalu",
-      "instructions": "ohjeet",
-      "interests": "kiinnostukset",
-      "restrictions": "rajoitteet"
+      "index": "tyokalu"
     },
     "user": "kayttaja",
     "user-guide": {
@@ -896,31 +892,51 @@
     "update-success": "Päivitys onnistui"
   },
   "tool": {
-    "description": "Alla on työkalut joiden avulla syötät tietojasi, joiden perusteella tarjoamme sinulle mahdollisuuksia oikealla.",
+    "competency-profile": {
+      "description": "Tuo osaamisia profiilista tai vie valintasi sinne, jotta tietosi pysyvät yhdessä paikassa.",
+      "help": "Tuo osaamisia osaamisprofiilistasi. Voit hyödyntää aiemmin tallentamiasi osaamisia mahdollisuuksien kartoittamisessa. Voit tuoda kaikki osaamiset tai vain ne, jotka haluat.\n\nVoit myös päivittää osaamisprofiiliasi tähän näkymään syöttämiesi uusien osaamisten ja kiinnostusten perusteella.",
+      "login-description": "Kirjaudu palveluun tuodaksesi osaamisprofiilistasi osaamisia tähän työkaluun tai viedäksesi täällä lisäämäsi osaamiset ja kiinnostukset profiiliisi. Profiili kokoaa yhteen osaamisesi, taustasi ja tavoitteesi, ja voit täydentää sitä myös muista palveluista.",
+      "title": "Osaamisprofiili"
+    },
+    "description": "Syötä alle osaamisesi ja kiinnostuksen kohteesi – niiden perusteella näytämme sinulle sopivia työ- ja koulutusmahdollisuuksia oikealla. Voit suodattaa ja järjestää mahdollisuuksia säätimillä omien tarpeidesi mukaan.",
+    "info-overview": {
+      "data-from-profile": "Profiilista tuodut tiedot",
+      "description": "Näe kaikki valitsemasi ja profiilista tuodut osaamiset, jotka vaikuttavat tarjottaviin mahdollisuuksiin.",
+      "mapped-competences": "Kartoitetut osaamiset",
+      "no-competences-from-profile": "Ei profiilista tuotuja osaamisia",
+      "no-mapped-competences": "Ei kartoitetuja osaamisia",
+      "other-data-from-profile": "Profiilista tuodut muut tiedot",
+      "other-data-from-profile-description": "Tekstilisäyksesi muihin osaamisiin ja kiinnostuksiin",
+      "title": "Tietojesi kokonaiskuva"
+    },
     "job-opportunity-is-part-of-group": "Työmahdollisuus kuuluu ammaattiryhmään",
     "my-own-data": {
       "cancel-text": "Ei, peruuta",
       "competences": {
-        "delete-all": {
-          "description": "Haluatko varmasti tyhjentää kaikki valitut osaamiset ja kiinnostukset?",
-          "title": "Tyhjennä valitut"
-        },
+        "description": "Sanoita taitosi ja valitse sopivimmat osaamiset, joiden perusteella sinulle ehdotetaan mahdollisuuksia.",
         "import": {
           "confirm-button": "Tuo osaamiset",
           "confirm-description": "Valitse haluamasi osaamiset alla olevasta listasta.",
           "confirm-title": "Haluatko tuoda osaamisesi osaamisprofiilistasi?",
-          "import-button": "Tuo osaamiset profiilista",
+          "import-button": "Tuo tietoja profiilista",
           "login-description": "Kirjaudu sisään Osaamispolkuun, jotta voit tuoda osaamisesi osaamisprofiilistasi."
         },
         "textarea-placeholder": "Kirjoita taitosi tekstikenttään."
       },
-      "competences-of-your-choice-with-counts": "Valitut osaamiset ({{osaamiset}}) ja kiinnostukset ({{kiinnostukset}})",
+      "delete-imported": {
+        "description": "Haluatko varmasti tyhjentää valitut profiilista tuodut osaamiset ja kiinnostukset?",
+        "title": "Tyhjennä profiilista tuodut osaamiset"
+      },
+      "delete-mapped": {
+        "description": "Haluatko varmasti tyhjentää valitut kartoitetut osaamiset ja kiinnostukset?",
+        "title": "Tyhjennä kartoitetut osaamiset"
+      },
       "description": "Saat ehdotuksia osaamisista ja kiinnostuksista tekstin pohjalta. Valitse sopivat. Oikealla näkyvä lista perustuu valintoihisi.",
       "export": {
         "confirm-button": "Tallenna profiiliin",
         "confirm-description": "Osaamiset tallennetaan osaamisprofiiliisi \"Muut osaamiset\"-kohtaan ja kiinnostukset.",
         "confirm-title": "Haluatko tallentaa kartoitetut osaamiset ja kiinnostukset?",
-        "export-button": "Tallenna kartoitetut osaamisprofiiliin",
+        "export-button": "Vie tietoja profiiliin",
         "login-description": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa tunnistamasi osaamiset osaamisprofiiliin ja päästä tarkastelemaan niitä myöhemmin osaamisprofiiliisi muun osaamisesi kohdassa."
       },
       "goals": {
@@ -939,10 +955,7 @@
       },
       "interests": {
         "conversational-virtual-assistant": "Tunnista kiinnostuksia tekoälyllä",
-        "delete-all": {
-          "description": "Haluatko varmasti tyhjentää kaikki valitut kiinnostukset?",
-          "title": "Tyhjennä kaikki valitut kiinnostukset"
-        },
+        "description": "Kuvaa kiinnostuksesi ja valitse sopivimmat osaamiset, joiden perusteella sinulle ehdotetaan mahdollisuuksia.",
         "import": "Tuo kiinnostukset profiilista",
         "interest-barometer": "Intressibarometri",
         "riasec-test": "RIASEC-testi",
@@ -960,15 +973,39 @@
           "title": "Kiinnostusten kartoitus"
         }
       },
-      "title": "Kerro mitä osaat ja mikä sinua kiinnostaa"
+      "title": "Tietosi"
     },
-    "remove-competence-help": "Poista osaaminen tai kiinnostus 'X'-merkistä.",
-    "title": "Kartoita tilanteesi",
+    "remove-competence-help": "Poista osaaminen x-merkistä.",
+    "settings": {
+      "education-opportunity": {
+        "duration": "Kesto",
+        "field": "Koulutusala",
+        "title": "Suodata koulutusmahdollisuuksia",
+        "type": "Tyyppi"
+      },
+      "general": {
+        "filter": "Suodatus",
+        "location": "Sijainti",
+        "sorting": "Järjestys",
+        "title": "Yleiset säätimet",
+        "weight": "Painotus"
+      },
+      "job-opportunity": {
+        "industry": "Toimiala",
+        "occupation": "Ammattiryhmä",
+        "title": "Suodata työmahdollisuuksia",
+        "type": "Tyyppi"
+      },
+      "toggle-title-closed": "Näytä säätimet",
+      "toggle-title-open": "Piilota säätimet"
+    },
+    "title": "Etsi mahdollisuuksia",
     "tools": {
       "career-skills-self-assessment-tool": "Urataitojen itsearviointityökalu",
+      "description": "Tutustu apuvälineisiin, jotka auttavat tunnistamaan tavoitteesi, jotta voit tehdä parempia valintoja.",
       "education-history": "Koulutukseni",
       "free-time-activities": "Vapaa-ajan toimintoni",
-      "help-text": "Rakenna koulutus- ja työhistoriasi käyttämällä alla olevia työkaluja, jolloin palvelu voi tunnistaa sinulle sopivia osaamisia.",
+      "help-text": "Kirjautuneena käyttäjänä voit kartoittaa osaamisia ja kiinnostuksia tarkemmin osaamisprofiilissa.",
       "help-text-2": "Seuraavat sivustot eivät tallenna tietoja osaamisprofiiliisi, mutta ne voivat auttaa sinua pohtimaan nykytilaasi ja toiveitasi.",
       "service-directory": "Osaamispolun palveluhakemisto",
       "something-else": "Muu osaamiseni",
@@ -976,24 +1013,12 @@
       "work-history": "Työpaikkani"
     },
     "your-opportunities": {
-      "card": {
-        "action": "Päivitä mahdollisuudet tiedoillasi",
-        "description": "Voit säätää osaamisten ja kiinnostusten painotusta tuloksissa."
-      },
-      "description": "Tutki erilaisia työ- ja koulutusmahdollisuuksia. Voit myös testata miten kartoittamasi tiedot vaikuttavat esitettäviin mahdollisuuksiin.",
-      "filters": {
-        "education-opportunities": "Koulutusmahdollisuudet",
-        "job-and-education-opportunities": "Työ- ja koulutusmahdollisuudet",
-        "job-opportunities": "Työmahdollisuudet",
-        "title": "Näytä mahdollisuuksissa"
-      },
-      "n-opportunities-found": "Löysimme {{count}} mahdollisuutta.",
       "sorting": {
-        "alphabetically": "a-ö",
+        "alphabetically": "Aakkosjärjestyksessä",
         "by-relevance": "Sopivimmat",
         "title": "Järjestele mahdollisuudet"
       },
-      "title": "Tutki mahdollisuuksia"
+      "title": "Mahdollisuutesi"
     }
   },
   "types": {
@@ -1005,6 +1030,7 @@
       "TOIMENKUVA": "Työpaikka"
     }
   },
+  "update": "Päivitä",
   "updated": "Päivitetty",
   "updating-list": "Päivitetään listaa",
   "user": "Käyttäjä",

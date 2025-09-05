@@ -35,11 +35,7 @@ const Competences = () => {
       PATEVYYS: [],
       MUU_OSAAMINEN: [],
     },
-    toimenkuvat,
-    koulutukset,
-    patevyydet,
-    muutOsaamiset,
-    muutOsaamisetVapaateksti,
+    { toimenkuvat, koulutukset, patevyydet, muutOsaamiset, muutOsaamisetVapaateksti },
   );
 
   // Determines if osaamiset from a specific source should be visible. Id is the id of the source (eg. koulutus or toimenkuva).
@@ -78,7 +74,7 @@ const Competences = () => {
       <p className="mb-5 text-body-lg">{t('profile.competences.description')}</p>
       <div className="mb-8">
         <Link
-          to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+          to={`/${language}/${t('slugs.tool.index')}`}
           className="text-button-md hover:underline text-accent mt-4"
           data-testid="competences-go-to-tool"
         >

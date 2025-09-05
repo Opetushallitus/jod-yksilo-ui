@@ -37,6 +37,7 @@ export const Filters = ({ filterKeys, selectedFilters, setSelectedFilters, group
           filterKeys={filterKeys}
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
+          ignoredFilterKeys={['KIINNOSTUS']}
         />
       </SimpleNavigationList>
     </>
