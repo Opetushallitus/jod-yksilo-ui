@@ -100,7 +100,7 @@ jobs:
       environment: 'development'
 
   deploy-test:
-    name: Deploy to testing
+    name: Deploy to test
     if: github.ref == 'refs/heads/main'
     needs: build
     uses: ./.github/workflows/deploy.yml
@@ -111,3 +111,16 @@ jobs:
     secrets: inherit
     with:
       environment: 'test'
+
+  deploy-production:
+    name: Deploy to production
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      id-token: write # Needed to interact with GitHub's OIDC Token endpoint
+      contents: read
+      actions: read
+    secrets: inherit
+    with:
+      environment: 'production'
