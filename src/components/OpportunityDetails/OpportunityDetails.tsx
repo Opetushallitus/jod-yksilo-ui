@@ -23,6 +23,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import RateAiContent from '../RateAiContent/RateAiContent';
+import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
 export interface OpportunityDetailsSection {
   navTitle: string;
@@ -132,10 +133,32 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
     );
   }, [t, sections, filterDevSections]);
 
+  const typeTooltip = React.useMemo(() => {
+    if (tyyppi === 'TYOMAHDOLLISUUS') {
+      return (
+        <div className="font-arial text-white leading-5 text-card-label">
+          <p className="mb-2">{typeText}</p>
+          <p className="font-normal">{t(`opportunity-tooltip.work.${jobData.aineisto ?? 'TMT'}`)}</p>
+        </div>
+      );
+    } else if (tyyppi === 'KOULUTUSMAHDOLLISUUS') {
+      return (
+        <div className="font-arial text-white leading-5 text-card-label">
+          <p className="mb-2">{tyyppi}</p>
+          <p className="font-normal">{t(`opportunity-tooltip.education.${educationData.tyyppi}`)}</p>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }, [tyyppi, jobData.aineisto, educationData.tyyppi, t, typeText]);
+
   const OpportunityType = typeText ? (
     <div className="uppercase text-body-sm font-semibold text-primary-gray flex items-center gap-3 mb-4 sm:mb-0">
       {typeText}
-      <JodInfoFilled className="text-secondary-gray" />
+      <TooltipWrapper tooltipPlacement="top" tooltipContent={typeTooltip}>
+        <JodInfoFilled className="text-secondary-gray" />
+      </TooltipWrapper>
     </div>
   ) : null;
 
