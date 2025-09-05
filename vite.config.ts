@@ -72,6 +72,15 @@ export default defineConfig({
         target: 'http://localhost:5173',
         xfwd: true,
       },
+      '/': {
+        target: 'http://localhost:5173', // Landing page UI
+        xfwd: true,
+        bypass: (req) => {
+          if (req.url && req.url.startsWith('/yksilo')) {
+            return req.url;
+          }
+        },
+      },
     },
   },
 });
