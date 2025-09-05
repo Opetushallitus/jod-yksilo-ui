@@ -35,6 +35,7 @@ export const GroupBySource = ({
       KOULUTUS: generateProfileLink([competencesSlug, 'slugs.profile.education-history'], data, language, t).to,
       PATEVYYS: generateProfileLink([competencesSlug, 'slugs.profile.free-time-activities'], data, language, t).to,
       MUU_OSAAMINEN: generateProfileLink([competencesSlug, 'slugs.profile.something-else'], data, language, t).to,
+      KIINNOSTUS: undefined,
     }),
     [data, language, t],
   );
@@ -51,18 +52,19 @@ export const GroupBySource = ({
     return text.slice(0, maxLength) + '…';
   };
 
-  const getLinkButton = (competence: CompetenceSourceType) => (
-    <Button
-      LinkComponent={getLinkTo(links[competence])}
-      key={competence}
-      label={t(`profile.competences.move-to-type.${competence}`)}
-      icon={<JodArrowRight />}
-      iconSide="right"
-      variant="white"
-      size="sm"
-      data-testid={`competences-move-to-${competence.toLowerCase()}`}
-    />
-  );
+  const getLinkButton = (competence: CompetenceSourceType) =>
+    competence && links[competence] ? (
+      <Button
+        LinkComponent={getLinkTo(links[competence])}
+        key={competence}
+        label={t(`profile.competences.move-to-type.${competence}`)}
+        icon={<JodArrowRight />}
+        iconSide="right"
+        variant="white"
+        size="sm"
+        data-testid={`competences-move-to-${competence.toLowerCase()}`}
+      />
+    ) : null;
 
   return (
     <>
@@ -71,7 +73,7 @@ export const GroupBySource = ({
         {mobileFilterOpenerComponent}
       </div>
 
-      {FILTERS_ORDER.map((competence) => {
+      {FILTERS_ORDER.filter((f) => f !== 'KIINNOSTUS').map((competence) => {
         return (
           <div key={competence} className="flex flex-col mb-11">
             <Accordion

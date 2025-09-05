@@ -1,6 +1,6 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
-import { LoaderFunction } from 'react-router';
+import type { components } from '@/api/schema';
+import type { LoaderFunction } from 'react-router';
 
 export interface CompetenceDataGroup {
   id?: string;
@@ -31,12 +31,17 @@ export interface CompetencesLoaderData {
 
   Muu osaaminen is a special case, as it's not tied to any category.
 */
-const filterItems = <T extends { id?: string }>(items: T[], osaaminenLahdeIds: string[]): T[] =>
+const filterItems = <T extends { id?: string }>(osaaminenLahdeIds: string[], items: T[] = []): T[] =>
   items.filter((item) => item.id && osaaminenLahdeIds.includes(item.id));
 
-export default (async ({ request, context }) => {
+/**
+ * Get competence data for the user. This is in a separate function as this exact data is also needed in tool loader.
+ */
+export const getCompetenceData = async (request: Request, context: components['schemas']['YksiloCsrfDto'] | null) => {
+  const isLoggedIn = !!context;
+
   try {
-    const [osaamisetRes, tyopaikatRes, koulutRes, vapaaAjanToiminnotRes, muuOsaaminenRes] = context
+    const [osaamisetRes, tyopaikatRes, koulutRes, vapaaAjanToiminnotRes, muuOsaaminenRes] = isLoggedIn
       ? await Promise.all([
           client.GET('/api/profiili/osaamiset', { signal: request.signal }),
           client.GET('/api/profiili/tyopaikat', { signal: request.signal }),
@@ -56,21 +61,21 @@ export default (async ({ request, context }) => {
       tyopaikatRes?.data?.map((tyopaikka) => ({
         id: tyopaikka.id,
         nimi: tyopaikka.nimi,
-        data: filterItems(tyopaikka.toimenkuvat ?? [], osaaminenLahdeIds),
+        data: filterItems(osaaminenLahdeIds, tyopaikka.toimenkuvat),
       })) ?? [];
 
     const patevyydet =
       vapaaAjanToiminnotRes?.data?.map((toiminto) => ({
         id: toiminto.id,
         nimi: toiminto.nimi,
-        data: filterItems(toiminto.patevyydet ?? [], osaaminenLahdeIds),
+        data: filterItems(osaaminenLahdeIds, toiminto.patevyydet),
       })) ?? [];
 
     const koulutukset =
       koulutRes?.data?.map((koulu) => ({
         id: koulu.id,
         nimi: koulu.nimi,
-        data: filterItems(koulu.koulutukset ?? [], osaaminenLahdeIds),
+        data: filterItems(osaaminenLahdeIds, koulu.koulutukset),
       })) ?? [];
 
     return {
@@ -90,4 +95,9 @@ export default (async ({ request, context }) => {
       muutOsaamiset: [],
     } as CompetencesLoaderData;
   }
+};
+
+export default (async ({ request, context }) => {
+  const data: CompetencesLoaderData = await getCompetenceData(request, context);
+  return data;
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

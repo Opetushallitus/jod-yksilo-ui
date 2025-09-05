@@ -1,477 +1,119 @@
-import { OpportunityCard } from '@/components';
+import { Breadcrumb, OpportunityCard } from '@/components';
+import RateAiContent from '@/components/RateAiContent/RateAiContent';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
-import { OpportunitiesSorting } from '@/routes/Tool';
 import AdditionalSupport from '@/routes/Tool/AdditionalSupport';
 import CategorizedCompetenceTagList from '@/routes/Tool/CategorizedCompetenceTagList';
 import ToolOpportunityCardActionMenu from '@/routes/Tool/ToolOpportunityCardActionMenu';
-import {
-  countFilteredEhdotukset,
-  filterValues,
-  type OpportunityFilterValue,
-  type OpportunitySortingValue,
-} from '@/routes/Tool/utils';
-import type { MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
-import {
-  Button,
-  Checkbox,
-  cx,
-  IconButton,
-  PageChangeDetails,
-  Pagination,
-  Slider,
-  Spinner,
-  useMediaQueries,
-} from '@jod/design-system';
+import { Button, cx, Spinner, useMediaQueries } from '@jod/design-system';
+import { JodClose, JodCompass, JodSettings } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { JodFavs, JodSkills, JodSort } from '@jod/design-system/icons';
-import { Outlet, useLoaderData, useLocation, useNavigate, useSearchParams } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
+import Competences from './Competences';
+import ToolAccordion from './components/ToolAccordion';
+import Interests from './Interests';
 import type { ToolLoaderData } from './loader';
-import { VirtualAssistant } from './VirtualAssistant';
-
-const MyOwnData = () => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
-  const { setVirtualAssistantOpen, setFilter, virtualAssistantOpen } = useToolStore(
-    useShallow((state) => ({
-      setVirtualAssistantOpen: state.setVirtualAssistantOpen,
-      setFilter: state.setFilter,
-      virtualAssistantOpen: state.virtualAssistantOpen,
-    })),
-  );
-  const [searchParams] = useSearchParams();
-  const titleId = React.useId();
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-  const { lg } = useMediaQueries();
-  const { isLoggedIn } = useLoaderData() as ToolLoaderData;
-
-  React.useEffect(() => {
-    if (searchParams.get('origin') === 'favorites') {
-      const filterParam = searchParams.get('filter') as OpportunityFilterValue;
-      if (filterParam) {
-        setFilter([filterParam]);
-      }
-      const opportunitiesTitleElement = document.getElementById('opportunities-title');
-      if (opportunitiesTitleElement) {
-        opportunitiesTitleElement.scrollIntoView({ behavior: 'smooth' });
-        opportunitiesTitleElement.focus();
-      }
-      const url = new URL(window.location.href);
-      url.search = ''; // Clear search parameters
-      window.history.replaceState({}, '', url.toString());
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const tabs = React.useMemo(() => {
-    const tabs = [
-      {
-        text: t('competences'),
-        icon: <JodSkills size={lg ? 24 : 32} className="mx-auto" />,
-        active: pathname.endsWith(t('slugs.tool.competences', { lng: language })),
-        to: t('slugs.tool.competences', { lng: language }),
-      },
-      {
-        text: t('interests'),
-        icon: <JodFavs size={lg ? 24 : 32} className="mx-auto" />,
-        active: pathname.endsWith(t('slugs.tool.interests', { lng: language })),
-        to: t('slugs.tool.interests', { lng: language }),
-      },
-    ];
-
-    return tabs;
-  }, [t, lg, pathname, language]);
-
-  const onKeyDown = React.useCallback(
-    (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
-      switch (event.key) {
-        case 'ArrowLeft':
-          if (index > 0) {
-            navigate(tabs[index - 1].to, { replace: true, preventScrollReset: true });
-            (event.currentTarget.previousElementSibling as HTMLElement)?.focus();
-          }
-          event.stopPropagation();
-          event.preventDefault();
-          break;
-        case 'ArrowRight':
-          if (index < tabs.length - 1) {
-            navigate(tabs[index + 1].to, { replace: true, preventScrollReset: true });
-            (event.currentTarget.nextElementSibling as HTMLElement)?.focus();
-          }
-          event.stopPropagation();
-          event.preventDefault();
-          break;
-        case 'Home':
-          navigate(tabs[0].to, { replace: true, preventScrollReset: true });
-          (event.currentTarget.parentElement?.firstElementChild as HTMLElement)?.focus();
-          event.stopPropagation();
-          event.preventDefault();
-          break;
-        case 'End':
-          navigate(tabs[tabs.length - 1].to, { replace: true, preventScrollReset: true });
-          (event.currentTarget.parentElement?.lastElementChild as HTMLElement)?.focus();
-          event.stopPropagation();
-          event.preventDefault();
-          break;
-        default:
-          break;
-      }
-    },
-    [navigate, tabs],
-  );
-
-  // 100vh - header height - padding
-  const virtualAssistantClassNames = virtualAssistantOpen ? 'h-[calc(100vh-96px-40px)]' : '';
-
-  return (
-    <aside className={virtualAssistantClassNames} data-testid="tool-sidebar">
-      {virtualAssistantOpen ? (
-        <div className="bg-white rounded h-full flex flex-col">
-          <VirtualAssistant setVirtualAssistantOpen={setVirtualAssistantOpen} />
-        </div>
-      ) : (
-        <>
-          <h2 id={titleId} className="text-heading-2-mobile sm:text-heading-2">
-            {`1. ${t('tool.my-own-data.title')}`}
-          </h2>
-          <p className="text-body-md-mobile sm:text-body-md mb-5 sm:mb-7">{t('tool.my-own-data.description')}</p>
-          <div className="lg:sticky lg:top-[96px]">
-            <div
-              role="tablist"
-              aria-labelledby={titleId}
-              className="flex text-button-sm select-none"
-              data-testid="tool-tabs"
-            >
-              {tabs.map((tab, index) => (
-                <button
-                  key={tab.text}
-                  id={`tab-${index + 1}`}
-                  type="button"
-                  role="tab"
-                  aria-selected={pathname.endsWith(tab.to)}
-                  aria-controls={`tabpanel-${index + 1}`}
-                  tabIndex={tab.active ? undefined : -1}
-                  onKeyDown={(event) => onKeyDown(event, index)}
-                  onClick={() => navigate(tab.to, { replace: true, preventScrollReset: true })}
-                  className={cx(`cursor-pointer w-full p-3 rounded-t text-center overflow-hidden`, {
-                    'bg-white': tab.active,
-                    'text-accent': !tab.active,
-                  })}
-                  data-testid={`tool-tab-${tab.text.toLowerCase().replace(/\s+/g, '-')}`}
-                >
-                  {tab.icon}
-                  {tab.text}
-                </button>
-              ))}
-            </div>
-
-            <div
-              id={`tabpanel-${tabs.findIndex((tab) => tab.active) + 1}`}
-              role="tabpanel"
-              tabIndex={0}
-              aria-labelledby="tab-1"
-              className={cx('flex flex-col bg-white rounded-b', {
-                'rounded-tl': tabs.findIndex((tab) => tab.active) !== 0,
-                'rounded-tr': tabs.findIndex((tab) => tab.active) !== tabs.length - 1,
-              })}
-            >
-              <Outlet context={{ isLoggedIn }} />
-            </div>
-          </div>
-        </>
-      )}
-    </aside>
-  );
-};
-
-const YourOpportunitiesPagination = ({
-  scrollRef,
-  className,
-  ariaLabel,
-}: {
-  scrollRef: React.RefObject<HTMLUListElement | null>;
-  className?: string;
-  ariaLabel?: string;
-}) => {
-  const { t } = useTranslation();
-  const {
-    ehdotuksetPageNr,
-    ehdotuksetPageSize,
-    ehdotuksetCount,
-    fetchMahdollisuudetPage,
-    mahdollisuudetLoading,
-    mixedMahdollisuudet,
-    filter,
-  } = useToolStore(
-    useShallow((state) => ({
-      ehdotuksetPageNr: state.ehdotuksetPageNr,
-      ehdotuksetPageSize: state.ehdotuksetPageSize,
-      ehdotuksetCount: state.ehdotuksetCount,
-      fetchMahdollisuudetPage: state.fetchMahdollisuudetPage,
-      mahdollisuudetLoading: state.mahdollisuudetLoading,
-      mixedMahdollisuudet: state.mixedMahdollisuudet,
-      filter: state.filter,
-    })),
-  );
-  const { sm } = useMediaQueries();
-
-  const onPageChange = async ({ page }: PageChangeDetails) => {
-    if (mahdollisuudetLoading) {
-      return;
-    }
-
-    await fetchMahdollisuudetPage(undefined, page);
-
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
-      const focusableElements = scrollRef.current.querySelectorAll(
-        'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])',
-      );
-      if (focusableElements.length > 0) {
-        (focusableElements[0] as HTMLElement).focus();
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const filters = typeof filter === 'string' ? [filter] : filter;
-
-  return mixedMahdollisuudet.length > 0 ? (
-    <div className={className} data-testid="tool-pagination">
-      <Pagination
-        currentPage={ehdotuksetPageNr}
-        type="button"
-        ariaLabel={ariaLabel}
-        pageSize={ehdotuksetPageSize}
-        siblingCount={sm ? 1 : 0}
-        translations={{
-          nextTriggerLabel: t('pagination.next'),
-          prevTriggerLabel: t('pagination.previous'),
-        }}
-        totalItems={countFilteredEhdotukset(filters, ehdotuksetCount)}
-        onPageChange={(data) => void onPageChange(data)}
-      />
-    </div>
-  ) : null;
-};
-
-const YourOpportunitiesCard = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
-  const {
-    ehdotuksetLoading,
-    kiinnostukset,
-    kiinnostuksetVapaateksti,
-    osaamiset,
-    osaamisetVapaateksti,
-    osaamisKiinnostusPainotus,
-    updateEhdotuksetAndTyomahdollisuudet,
-    setOsaamisKiinnostusPainotus,
-  } = useToolStore(
-    useShallow((state) => ({
-      ehdotuksetLoading: state.ehdotuksetLoading,
-      kiinnostukset: state.kiinnostukset,
-      kiinnostuksetVapaateksti: state.kiinnostuksetVapaateksti,
-      osaamiset: state.osaamiset,
-      osaamisetVapaateksti: state.osaamisetVapaateksti,
-      osaamisKiinnostusPainotus: state.osaamisKiinnostusPainotus,
-      updateEhdotuksetAndTyomahdollisuudet: state.updateEhdotuksetAndTyomahdollisuudet,
-      setOsaamisKiinnostusPainotus: state.setOsaamisKiinnostusPainotus,
-    })),
-  );
-
-  const updateButtonLabel = ehdotuksetLoading ? t('updating-list') : t('tool.your-opportunities.card.action');
-
-  const onClick = async () => {
-    await updateEhdotuksetAndTyomahdollisuudet(isLoggedIn);
-  };
-
-  const painotus = React.useMemo(() => {
-    if (
-      kiinnostukset.length === 0 &&
-      kiinnostuksetVapaateksti?.[language].length === undefined &&
-      osaamiset.length === 0 &&
-      osaamisetVapaateksti?.[language].length === undefined
-    ) {
-      return { value: 50, disabled: true };
-    } else if (osaamiset.length === 0 && osaamisetVapaateksti?.[language].length === undefined) {
-      return { value: 100, disabled: true };
-    } else if (kiinnostukset.length === 0 && kiinnostuksetVapaateksti?.[language].length === undefined) {
-      return { value: 0, disabled: true };
-    } else {
-      return { value: osaamisKiinnostusPainotus, disabled: false };
-    }
-  }, [
-    kiinnostukset.length,
-    kiinnostuksetVapaateksti,
-    osaamisKiinnostusPainotus,
-    osaamiset.length,
-    osaamisetVapaateksti,
-    language,
-  ]);
-
-  return (
-    <div
-      id="tool-your-opportunities-card"
-      className="flex flex-col gap-5 p-5 sm:p-6 bg-secondary-1-25 rounded z-10 mb-2"
-    >
-      <p className="text-button-sm">{t('tool.your-opportunities.card.description')}</p>
-      <Slider
-        label={t('competences')}
-        rightLabel={t('interests')}
-        onValueChange={(val) => setOsaamisKiinnostusPainotus(val)}
-        value={painotus.value}
-        disabled={painotus.disabled}
-      />
-      <div className="flex justify-center sm:justify-start">
-        <Button
-          onClick={() => void onClick()}
-          label={updateButtonLabel}
-          variant="accent"
-          disabled={ehdotuksetLoading}
-          iconSide="left"
-          icon={ehdotuksetLoading ? <Spinner size={24} color="white" /> : undefined}
-          data-testid="update-opportunities"
-        />
-      </div>
-    </div>
-  );
-};
+import ProfileImportExport from './ProfileImportExport';
+import ToolSettings from './ToolSettings';
+import YourOpportunitiesPagination from './YourOpportunitiesPagination';
 
 const ExploreOpportunities = () => {
   const { t, i18n } = useTranslation();
   const {
     ammattiryhmaNimet,
-    ehdotuksetCount,
-    filter,
+    weightChanged,
     mahdollisuusEhdotukset,
     mixedMahdollisuudet,
-    setFilter,
-    sorting,
     suosikit,
+    mahdollisuudetLoading,
+    ehdotuksetLoading,
+    updateEhdotuksetAndTyomahdollisuudet,
     toggleSuosikki,
   } = useToolStore(
     useShallow((state) => ({
       ammattiryhmaNimet: state.ammattiryhmaNimet,
-      ehdotuksetCount: state.ehdotuksetCount,
-      filter: state.filter,
+      weightChanged: state.weightChanged,
       mahdollisuusEhdotukset: state.mahdollisuusEhdotukset,
       mixedMahdollisuudet: state.mixedMahdollisuudet,
-      setFilter: state.setFilter,
-      sorting: state.sorting,
       suosikit: state.suosikit,
       toggleSuosikki: state.toggleSuosikki,
+      updateEhdotuksetAndTyomahdollisuudet: state.updateEhdotuksetAndTyomahdollisuudet,
+      mahdollisuudetLoading: state.mahdollisuudetLoading,
+      ehdotuksetLoading: state.ehdotuksetLoading,
     })),
   );
 
   const scrollRef = React.useRef<HTMLUListElement>(null);
-  const { isLoggedIn } = useLoaderData() as ToolLoaderData;
-  const [filtersOpen, setFiltersOpen] = React.useState(false);
-  const filterMenuButtonRef = React.useRef<HTMLButtonElement>(null);
-  const filterMenuRef = useMenuClickHandler(() => setFiltersOpen(false), filterMenuButtonRef);
+  const { isLoggedIn } = useLoaderData<ToolLoaderData>();
+  const [settingsOpen, setSettingsOpen] = React.useState(false);
+  const settingsButtonRef = React.useRef<HTMLButtonElement>(null);
+  const firstSettingRef = useMenuClickHandler(() => setSettingsOpen(false), settingsButtonRef);
   const isMouseInteraction = useInteractionMethod();
+  const { lg } = useMediaQueries();
 
   // Move focus to menu content when opened
   React.useEffect(() => {
-    if (filtersOpen && !isMouseInteraction && filterMenuRef.current) {
-      const firstChild = filterMenuRef.current.querySelector('span');
+    if (settingsOpen && !isMouseInteraction && firstSettingRef.current) {
+      const firstChild = firstSettingRef.current.querySelector('button');
       if (firstChild) {
         (firstChild as HTMLElement).focus();
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filtersOpen]);
+  }, [settingsOpen]);
 
-  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
-    if (filterMenuRef.current && !filterMenuRef.current.contains(event.relatedTarget as Node)) {
-      setFiltersOpen(false);
-    }
+  const onUpdateResults = async () => {
+    await updateEhdotuksetAndTyomahdollisuudet(isLoggedIn);
   };
 
-  const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newFilter = event.target.value as MahdollisuusTyyppi;
-
-    if (filter.includes(newFilter)) {
-      setFilter(filter.filter((f) => f !== newFilter));
-    } else {
-      setFilter([...filter, newFilter]);
-    }
-  };
-
-  const getCheckboxLabel = (type: MahdollisuusTyyppi) =>
-    type === 'TYOMAHDOLLISUUS'
-      ? t('n-job-opportunities', { count: ehdotuksetCount.TYOMAHDOLLISUUS })
-      : t('n-education-opportunities', { count: ehdotuksetCount.KOULUTUSMAHDOLLISUUS });
-
-  const getSortingTranslationKey = (sorting: OpportunitySortingValue) =>
-    sorting === 'ALPHABET'
-      ? t('tool.your-opportunities.sorting.alphabetically')
-      : t('tool.your-opportunities.sorting.by-relevance');
+  const isLoading = ehdotuksetLoading || mahdollisuudetLoading;
+  const updateButtonLabel = ehdotuksetLoading ? t('updating-list') : t('update');
 
   return (
-    <main role="main" className="col-span-3 lg:col-span-1" id="jod-main" data-testid="tool-main">
-      <h2 id="opportunities-title" tabIndex={-1} className="text-heading-2-mobile sm:text-heading-2 scroll-mt-11 mb-5">
-        {`2. ${t('tool.your-opportunities.title')}`}
-      </h2>
-
-      <YourOpportunitiesCard isLoggedIn={isLoggedIn} />
-
-      <div className="lg:sticky lg:top-11 lg:z-10 lg:h-[186px] relative">
-        <div className="flex gap-5 justify-between items-center py-5 bg-linear-to-b from-85% from-bg-gray lg:absolute lg:-left-4 lg:-right-4 lg:px-4">
-          <div className="flex flex-col gap-5 mb-5 items-start">
-            <fieldset className="flex flex-col gap-5" data-testid="tool-filters">
-              <legend className="text-heading-4-mobile sm:text-heading-4 mb-5">{t('show')}</legend>
-              <Checkbox
-                ariaLabel={getCheckboxLabel('TYOMAHDOLLISUUS')}
-                checked={filter.includes('ALL') || filter.includes('TYOMAHDOLLISUUS')}
-                label={getCheckboxLabel('TYOMAHDOLLISUUS')}
-                name={filterValues.TYOMAHDOLLISUUS}
-                onChange={onFilterChange}
-                value={filterValues.TYOMAHDOLLISUUS}
-                data-testid="filter-job-opportunities"
-              />
-              <Checkbox
-                ariaLabel={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
-                checked={filter.includes('ALL') || filter.includes('KOULUTUSMAHDOLLISUUS')}
-                label={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
-                name={filterValues.KOULUTUSMAHDOLLISUUS}
-                onChange={onFilterChange}
-                value={filterValues.KOULUTUSMAHDOLLISUUS}
-                data-testid="filter-education-opportunities"
-              />
-            </fieldset>
-
-            <IconButton
-              label={`${t('sort')} (${getSortingTranslationKey(sorting)})`}
-              icon={<JodSort size={18} />}
-              bgColor="white"
-              onClick={() => setFiltersOpen(!filtersOpen)}
-              data-testid="open-sorting"
+    <>
+      <div className="lg:mb-3 not-lg:sticky not-lg:top-[108px] not-lg:z-10">
+        <div className="flex not-lg:bg-bg-gray-2 not-lg:w-full justify-end lg:justify-between not-lg:my-3 not-lg:px-4 h-7">
+          {lg && (
+            <h2 id="opportunities-title" tabIndex={-1} className="text-heading-3-mobile sm:text-heading-3">
+              {t('tool.your-opportunities.title')}
+            </h2>
+          )}
+          <div className="flex gap-6">
+            <Button
+              variant="plain"
+              size="sm"
+              className="text-black!"
+              onClick={() => setSettingsOpen(!settingsOpen)}
+              icon={settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
+              iconSide="left"
+              label={settingsOpen ? t('tool.settings.toggle-title-open') : t('tool.settings.toggle-title-closed')}
+              data-testid="open-tool-settings"
             />
+            {lg && (
+              <Button
+                size="sm"
+                label={updateButtonLabel}
+                variant="accent"
+                onClick={onUpdateResults}
+                disabled={isLoading || !weightChanged}
+                icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
+                iconSide={isLoading ? 'right' : undefined}
+                data-testid="update-opportunities"
+              />
+            )}
           </div>
         </div>
-        {filtersOpen && (
-          <div ref={filterMenuRef} onBlur={handleBlur} data-testid="sorting-menu">
-            <OpportunitiesSorting />
-          </div>
-        )}
       </div>
 
+      <>{settingsOpen && <ToolSettings ref={firstSettingRef} />}</>
       <ul
         id="tool-your-opportunities-list"
         ref={scrollRef}
-        className="flex flex-col gap-3 sm:gap-5 mb-8 scroll-mt-[96px]"
+        className="flex flex-col gap-5 sm:gap-3 mb-8 scroll-mt-[96px]"
         data-testid="opportunities-list"
       >
         {mixedMahdollisuudet.map((mahdollisuus) => {
@@ -515,30 +157,168 @@ const ExploreOpportunities = () => {
       </ul>
 
       <YourOpportunitiesPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="mb-7" />
-    </main>
+    </>
+  );
+};
+
+const YourInfo = () => {
+  const { t } = useTranslation();
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  const noop = () => {};
+  return (
+    <>
+      <ToolAccordion title={t('interests')} description={t('tool.my-own-data.interests.description')}>
+        <Interests />
+      </ToolAccordion>
+
+      <ToolAccordion title={t('competences')} description={t('tool.my-own-data.competences.description')}>
+        <Competences />
+      </ToolAccordion>
+
+      <ToolAccordion title={t('tool.info-overview.title')} description={t('tool.info-overview.description')}>
+        <CategorizedCompetenceTagList />
+      </ToolAccordion>
+
+      <ToolAccordion title={t('tool.competency-profile.title')} description={t('tool.competency-profile.description')}>
+        <ProfileImportExport />
+      </ToolAccordion>
+
+      <ToolAccordion title={t('tool.tools.title')} description={t('tool.tools.description')}>
+        <AdditionalSupport />
+      </ToolAccordion>
+
+      <RateAiContent onDislike={noop} onLike={noop} variant="kohtaanto" />
+    </>
   );
 };
 
 const Tool = () => {
   const { t } = useTranslation();
+  const { lg } = useMediaQueries();
+  const [currentTab, setCurrentTab] = React.useState<'info' | 'opportunities'>('info');
+  const tabs = React.useMemo(() => {
+    const tabs = [
+      {
+        text: t('tool.my-own-data.title'),
+        active: currentTab === 'info',
+        onclick: () => setCurrentTab('info'),
+      },
+      {
+        text: t('tool.your-opportunities.title'),
+        active: currentTab === 'opportunities',
+        onclick: () => setCurrentTab('opportunities'),
+      },
+    ];
+
+    return tabs;
+  }, [currentTab, t]);
+
+  const onKeyDown = React.useCallback(
+    (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+      switch (event.key) {
+        case 'Home':
+        case 'ArrowLeft':
+          if (index > 0) {
+            setCurrentTab('info');
+            (event.currentTarget.previousElementSibling as HTMLElement)?.focus();
+          }
+          event.stopPropagation();
+          event.preventDefault();
+          break;
+        case 'End':
+        case 'ArrowRight':
+          if (index < tabs.length - 1) {
+            setCurrentTab('opportunities');
+            (event.currentTarget.nextElementSibling as HTMLElement)?.focus();
+          }
+          event.stopPropagation();
+          event.preventDefault();
+          break;
+        default:
+          break;
+      }
+    },
+    [tabs],
+  );
 
   return (
-    <div className="mx-auto w-full max-w-[1140px] grow px-5 pb-6 pt-8 sm:px-6">
-      <div>
-        <h1 className="text-heading-1-mobile sm:text-heading-1">{t('tool.title')}</h1>
-        <p className="text-body-md-mobile sm:text-body-md mb-5 sm:mb-7">{t('tool.description')}</p>
+    <main role="main" id="jod-main" className="mx-auto w-full max-w-[1140px] px-5 pb-6 pt-7" data-testid="tool-main">
+      <div className="mb-6">
+        <Breadcrumb />
       </div>
-      <title>{t('tool.title')}</title>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-6">
-        <div className="flex flex-col gap-4">
-          <MyOwnData />
-          <CategorizedCompetenceTagList />
-          <AdditionalSupport />
+      <div className="flex gap-4 mb-6">
+        <div className="rounded-full bg-secondary-1-dark-2 size-9 flex justify-center items-center">
+          <JodCompass className="text-white" />
         </div>
-        <ExploreOpportunities />
+        <h1 className="text-heading-1-mobile sm:text-heading-1 text-secondary-1-dark-2">{t('tool.title')}</h1>
       </div>
-    </div>
+      <p className="text-body-lg-mobile sm:text-body-lg mb-7 sm:mb-9 max-w-[700px]">{t('tool.description')}</p>
+      <title>{t('tool.title')}</title>
+      {lg ? (
+        // Desktop
+        <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-7">
+          <div className="col-span-1 lg:col-span-5">
+            <h2 className="text-heading-3 mb-3 h-7">{t('tool.my-own-data.title')}</h2>
+            <div className="flex flex-col gap-6">
+              <YourInfo />
+            </div>
+          </div>
+          <div className="col-span-1 lg:col-span-7">
+            {!lg && (
+              <h2 id="opportunities-title" tabIndex={-1} className="text-heading-3-mobile sm:text-heading-3">
+                {t('tool.your-opportunities.title')}
+              </h2>
+            )}
+            <ExploreOpportunities />
+          </div>
+        </div>
+      ) : (
+        // Mobile
+        <>
+          <div className="sticky top-[66px] z-10 -mx-5">
+            <div role="tablist" className="flex text-button-sm select-none gap-1 bg-bg-gray px-5">
+              {tabs.map((tab, index) => (
+                <button
+                  type="button"
+                  data-testid={`toggle-tab-${tab.text}`}
+                  key={tab.text}
+                  onClick={tab.onclick}
+                  role="tab"
+                  aria-controls={`tabpanel-${currentTab}`}
+                  tabIndex={currentTab === 'info' ? undefined : -1}
+                  onKeyDown={(event) => onKeyDown(event, index)}
+                  id={`tab-${tab.text}`}
+                  aria-selected={tab.active}
+                  className={cx('flex justify-center items-center bg-white py-4 grow rounded-t cursor-pointer', {
+                    'text-accent': tab.active,
+                    'bg-bg-gray-2': !tab.active,
+                  })}
+                >
+                  {tab.text}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div
+            id={`tabpanel-${currentTab}`}
+            role="tabpanel"
+            tabIndex={0}
+            aria-labelledby="tab-1"
+            className={cx('flex flex-col w-full')}
+          >
+            {currentTab === 'info' ? (
+              <div className="flex flex-col gap-5 -mx-5">
+                <YourInfo />
+              </div>
+            ) : (
+              <div className="-mx-5">
+                <ExploreOpportunities />
+              </div>
+            )}
+          </div>
+        </>
+      )}
+    </main>
   );
 };
 

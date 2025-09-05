@@ -52,7 +52,7 @@ const Home = () => {
     () => generateProfileLink(['slugs.profile.preferences'], data, language, t),
     [data, language, t],
   );
-  const toolLink = `/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`;
+  const toolLink = `/${language}/${t('slugs.tool.index')}`;
 
   return (
     <main role="main" className="mx-auto w-full max-w-(--breakpoint-xl) bg-white" id="jod-main" data-testid="home-page">

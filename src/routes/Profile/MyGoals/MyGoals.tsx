@@ -93,7 +93,7 @@ const MyGoals = () => {
             <EmptyState text={t('profile.my-goals.no-favorites-selected')} data-testid="goals-empty-state" />
           </div>
           <Link
-            to={`/${language}/${t('slugs.tool.index')}/${t('slugs.tool.competences')}`}
+            to={`/${language}/${t('slugs.tool.index')}`}
             type="button"
             className="text-button-md hover:underline text-accent"
             data-testid="goals-add-favorites-link"

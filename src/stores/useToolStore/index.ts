@@ -53,6 +53,7 @@ interface ToolState {
   sorting: OpportunitySortingValue;
   filter: OpportunityFilterValue[];
   previousEhdotusUpdateLang: string;
+  weightChanged: boolean;
   reset: () => void;
 
   setTavoitteet: (state: ToolState['tavoitteet']) => void;
@@ -65,7 +66,6 @@ interface ToolState {
   toggleSuosikki: (kohdeId: string, tyyppi: MahdollisuusTyyppi) => Promise<void>;
 
   setOsaamisKiinnostusPainotus: (state: number) => void;
-  setRajoitePainotus: (state: number) => void;
 
   updateEhdotukset: (lang: string, signal?: AbortSignal) => Promise<void>;
   fetchMahdollisuudetPage: (signal?: AbortSignal, page?: number) => Promise<void>;
@@ -102,6 +102,7 @@ export const useToolStore = create<ToolState>()(
       ehdotuksetCount: { TYOMAHDOLLISUUS: 0, KOULUTUSMAHDOLLISUUS: 0 },
       sorting: DEFAULT_SORTING,
       filter: DEFAULT_FILTER,
+      weightChanged: false,
       previousEhdotusUpdateLang: '',
       reset: () => {
         set({
@@ -114,6 +115,7 @@ export const useToolStore = create<ToolState>()(
           tyomahdollisuudet: [],
           koulutusmahdollisuudet: [],
           mixedMahdollisuudet: [],
+          weightChanged: false,
         });
       },
 
@@ -132,10 +134,7 @@ export const useToolStore = create<ToolState>()(
       },
       setSuosikit: (state) => set({ suosikit: state }),
       setOsaamisKiinnostusPainotus: (state: number) => {
-        set({ osaamisKiinnostusPainotus: state });
-      },
-      setRajoitePainotus: (state: number) => {
-        set({ rajoitePainotus: state });
+        set({ osaamisKiinnostusPainotus: state, weightChanged: true });
       },
       updateEhdotukset: async (lang: string, signal?: AbortSignal) => {
         const {
@@ -302,6 +301,7 @@ export const useToolStore = create<ToolState>()(
         await updateEhdotukset(i18n.language, signal);
         await fetchMahdollisuudetPage(signal, 1);
         await updateSuosikit(loggedIn);
+        set({ weightChanged: false });
       },
 
       toggleSuosikki: async (kohdeId: string, tyyppi: MahdollisuusTyyppi) => {
