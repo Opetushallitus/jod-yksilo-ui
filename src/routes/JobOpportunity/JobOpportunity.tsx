@@ -1,6 +1,7 @@
 import tmtLogo from '@/../assets/tyomarkkinatori.svg';
 import { AiInfo } from '@/components';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
+import { CounselingBanner } from '@/components/CounselingBanner/CounselingBanner';
 import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import RateAiContent from '@/components/RateAiContent/RateAiContent';
@@ -82,13 +83,16 @@ const JobOpportunity = () => {
           <span className="font-arial">{t('job-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} />
           {!sm && (
-            <RateAiContent
-              // eslint-disable-next-line no-console
-              onDislike={(value) => console.log('not implemented', value)}
-              // eslint-disable-next-line no-console
-              onLike={() => console.log('not implemented')}
-              variant="opportunity"
-            />
+            <>
+              <RateAiContent
+                // eslint-disable-next-line no-console
+                onDislike={(value) => console.log('not implemented', value)}
+                // eslint-disable-next-line no-console
+                onLike={() => console.log('not implemented')}
+                variant="opportunity"
+              />
+              <CounselingBanner />
+            </>
           )}
         </div>
       ),
