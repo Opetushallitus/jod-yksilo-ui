@@ -1,11 +1,10 @@
 import React from 'react';
 
+type MenuButtonTypes = HTMLButtonElement | HTMLLIElement | HTMLDivElement | null;
+
 export const useMenuClickHandler = (
   handleOutsideClick: (event: MouseEvent | KeyboardEvent) => void,
-  menuButtonRef:
-    | React.RefObject<HTMLButtonElement | null>
-    | React.RefObject<HTMLLIElement | null>
-    | React.RefObject<HTMLDivElement | null>,
+  menuButtonRef: React.RefObject<MenuButtonTypes>,
 ) => {
   const ref = React.useRef<HTMLDivElement>(null);
 

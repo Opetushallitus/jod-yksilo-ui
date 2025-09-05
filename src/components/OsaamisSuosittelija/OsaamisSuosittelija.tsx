@@ -6,7 +6,7 @@ import { ESCO_SKILL_PREFIX, LIMITS, OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
-import { Tag, Textarea } from '@jod/design-system';
+import { EmptyState, Tag, Textarea, tidyClasses as tc } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 export interface Osaaminen {
@@ -129,6 +129,8 @@ export const OsaamisSuosittelija = ({
     }
   };
 
+  const translationKey = React.useMemo(() => (mode === 'osaamiset' ? 'competence' : 'interest'), [mode]);
+
   return (
     <>
       <div className="mb-6">
@@ -140,59 +142,81 @@ export const OsaamisSuosittelija = ({
           rows={2}
           maxLength={LIMITS.TEXTAREA}
           label={textAreaLabel()}
-          className={className}
+          className={tc(['bg-[#F7F7F9]!', className])}
         />
       </div>
       <div className="mb-6 flex flex-col">
-        <div className="sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold mb-2">
+        <div className="sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold ">
           {mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}
         </div>
-        <div className="mb-6 min-h-[144px] max-h-[332px] overflow-y-auto">
-          <div className="flex flex-wrap gap-3 p-5">
-            {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen) => (
-              <Tag
-                key={ehdotettuOsaaminen.id}
-                label={getLocalizedText(ehdotettuOsaaminen.nimi)}
-                title={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
-                sourceType={mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
-                onClick={() => {
-                  if (ehdotettuOsaaminen.id && value.find((val) => val.id === ehdotettuOsaaminen.id)) {
-                    return; // Prevent adding duplicates by rapid clicking
-                  }
 
-                  onChange([
-                    ...value,
-                    {
-                      id: ehdotettuOsaaminen.id,
-                      nimi: ehdotettuOsaaminen.nimi,
-                      kuvaus: ehdotettuOsaaminen.kuvaus,
-                      tyyppi: sourceType,
-                    },
-                  ]);
-                }}
-                variant="selectable"
-              />
-            ))}
-          </div>
-        </div>
-        <div className="font-arial text-body-md">
-          {t(`osaamissuosittelija.${mode === 'osaamiset' ? 'competence' : 'interest'}.add`)}
+        <div className="mb-6 overflow-y-auto max-h-[278px]">
+          {filteredEhdotetutOsaamiset.length > 0 ? (
+            <>
+              <div className="font-arial text-body-sm text-secondary-gray mb-4">
+                {t(`osaamissuosittelija.${translationKey}.add`)}
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen) => (
+                  <Tag
+                    key={ehdotettuOsaaminen.id}
+                    label={getLocalizedText(ehdotettuOsaaminen.nimi)}
+                    title={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
+                    sourceType={
+                      mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
+                    }
+                    onClick={() => {
+                      if (ehdotettuOsaaminen.id && value.find((val) => val.id === ehdotettuOsaaminen.id)) {
+                        return; // Prevent adding duplicates by rapid clicking
+                      }
+
+                      onChange([
+                        ...value,
+                        {
+                          id: ehdotettuOsaaminen.id,
+                          nimi: ehdotettuOsaaminen.nimi,
+                          kuvaus: ehdotettuOsaaminen.kuvaus,
+                          tyyppi: sourceType,
+                        },
+                      ]);
+                    }}
+                    variant="selectable"
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="mt-4">
+              <EmptyState text={t(`osaamissuosittelija.${translationKey}.none-proposed`)} />
+            </div>
+          )}
         </div>
 
         {!hideSelected && (
           <>
-            <div className="sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold mb-2 mt-6">
+            <div className="sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold">
               {mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}
             </div>
-            <div className="sm:text-body-sm sm:font-arial text-body-sm-mobile mb-3">
-              {mode === 'osaamiset'
-                ? t('osaamissuosittelija.competence.remove')
-                : t('osaamissuosittelija.interest.remove')}
-            </div>
-            <div className={`min-h-[144px] overflow-y-auto ${className}`.trim()}>
-              <div className="flex flex-wrap gap-3">
-                <AddedTags osaamiset={value} onClick={removeOsaaminenById} lahdetyyppi="KIINNOSTUS" />
-              </div>
+
+            <div className={tc(`overflow-y-auto max-h-[278px] ${className}`)}>
+              {value.length > 0 ? (
+                <>
+                  <div className="font-arial text-body-sm text-secondary-gray mb-4">
+                    {t(`osaamissuosittelija.${translationKey}.remove`)}
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    <AddedTags
+                      osaamiset={value}
+                      onClick={removeOsaaminenById}
+                      lahdetyyppi={mode === 'osaamiset' ? 'MUU_OSAAMINEN' : 'KIINNOSTUS'}
+                    />
+                  </div>
+                </>
+              ) : (
+                <div className="mt-4">
+                  <EmptyState text={t(`osaamissuosittelija.${translationKey}.none-selected`)} />
+                </div>
+              )}
             </div>
           </>
         )}
