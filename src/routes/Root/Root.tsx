@@ -131,7 +131,7 @@ const Root = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-bg-gray" data-testid="app-root">
-      <link rel="manifest" href={`/yksilo/manifest-${language}.json`} crossOrigin="use-credentials" />
+      <link rel="manifest" href={`/manifest-${language}.json`} crossOrigin="use-credentials" />
       <header role="banner" className="sticky top-0 z-30 print:hidden" data-testid="app-header">
         <SkipLink hash="#jod-main" label={t('skiplinks.main')} />
         <form action="/yksilo/logout" method="POST" hidden ref={logoutForm}>
