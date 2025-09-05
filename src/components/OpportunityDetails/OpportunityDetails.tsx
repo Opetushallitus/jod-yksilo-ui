@@ -22,6 +22,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
+import { CounselingBanner } from '../CounselingBanner/CounselingBanner';
 import RateAiContent from '../RateAiContent/RateAiContent';
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
@@ -129,6 +130,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           onLike={() => console.log('not implemented')}
           variant="opportunity"
         />
+        <CounselingBanner />
       </>
     );
   }, [t, sections, filterDevSections]);

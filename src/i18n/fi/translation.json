@@ -815,6 +815,10 @@
   "saved": "Tallennettu",
   "search": "Haku",
   "select-language": "Valitse kieli",
+  "service-catalog": {
+    "description": "Löydät omiin tarpeisiisi sopiva ohjauspalvelun täältä.",
+    "header": "Kaipaatko neuvontaa ja ohjausta oman suunnan löytämiseen?"
+  },
   "share": "Jaa",
   "show": "Näytä",
   "show-all": "Näytä kaikki",
