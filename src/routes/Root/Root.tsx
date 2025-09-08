@@ -112,15 +112,15 @@ const Root = () => {
       label: t('about-us'),
     },
     {
-      to: `${infoSlug}/${t('slugs.privacy-policy')}`,
-      label: t('privacy-policy-and-cookies'),
+      to: t('slugs.privacy-policy'),
+      label: t('privacy-policy-and-cookies.title'),
     },
     {
       to: `${infoSlug}/${t('slugs.data-sources')}`,
       label: t('data-sources'),
     },
     {
-      to: `${infoSlug}/${t('slugs.about-ai')}`,
+      to: t('slugs.about-ai'),
       label: t('about-ai'),
     },
     {

@@ -16,15 +16,14 @@ import { NoteStackProvider } from '@jod/design-system';
 import { type RouteObject, replace } from 'react-router';
 import { withYksiloContext } from '../auth';
 import {
-  AboutAi,
   AccessibilityStatement,
   BasicInformation,
   CookiePolicy,
   DataSources,
-  PrivacyPolicy,
   TermsOfService,
 } from './BasicInformation';
 import { Home } from './Home';
+import { AboutAi, PrivacyPolicy } from './InfoPages';
 import { Favorites, LandingPage, Preferences, Profile, SomethingElse } from './Profile';
 import { EducationHistory } from './Profile/EducationHistory';
 import { FreeTimeActivities } from './Profile/FreeTimeActivities';
@@ -277,6 +276,27 @@ const userGuideRoutes: RouteObject[] = supportedLanguageCodes.map((lng) => ({
   ],
 }));
 
+const infoPages: RouteObject[] = supportedLanguageCodes.map((lng) => ({
+  children: [
+    {
+      id: `{slugs.about-ai}|${lng}`,
+      path: i18n.t('slugs.about-ai', { lng }),
+      element: <AboutAi />,
+      handle: {
+        title: i18n.t('about-ai', { lng }),
+      },
+    },
+    {
+      id: `{slugs.privacy-policy}|${lng}`,
+      path: i18n.t('slugs.privacy-policy', { lng }),
+      element: <PrivacyPolicy />,
+      handle: {
+        title: i18n.t('privacy-policy', { lng }),
+      },
+    },
+  ],
+}));
+
 const basicInformationRoutes: RouteObject[] = supportedLanguageCodes.map((lng) => ({
   id: `{slugs.basic-information}|${lng}`,
   path: i18n.t('slugs.basic-information', { lng }),
@@ -321,22 +341,6 @@ const basicInformationRoutes: RouteObject[] = supportedLanguageCodes.map((lng) =
         title: i18n.t('accessibility-statement', { lng }),
       },
     },
-    {
-      id: `{slugs.privacy-policy}|${lng}`,
-      path: i18n.t('slugs.privacy-policy', { lng }),
-      element: <PrivacyPolicy />,
-      handle: {
-        title: i18n.t('privacy-policy', { lng }),
-      },
-    },
-    {
-      id: `{slugs.about-ai}|${lng}`,
-      path: i18n.t('slugs.about-ai', { lng }),
-      element: <AboutAi />,
-      handle: {
-        title: i18n.t('about-ai', { lng }),
-      },
-    },
   ],
 }));
 
@@ -364,6 +368,7 @@ const rootRoute: RouteObject = {
     ...userGuideRoutes,
     ...basicInformationRoutes,
     ...profileLandingPageRoutes,
+    ...infoPages,
   ],
 };
 

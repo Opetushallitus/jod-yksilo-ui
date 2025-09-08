@@ -33,7 +33,6 @@ const LandingPage = () => {
   }, [rootLoaderData, navigate]);
 
   const title = t('profile.landing-page.page-title');
-  const basicInformation = t('slugs.basic-information');
 
   return (
     <MainLayout>
@@ -76,7 +75,7 @@ const LandingPage = () => {
       </div>
       <div className="mb-8">
         <NavLink
-          to={`/${language}/${basicInformation}/${t('slugs.privacy-policy')}`}
+          to={`/${language}/${t('slugs.privacy-policy')}`}
           lang={language}
           key={'competence'}
           type="button"

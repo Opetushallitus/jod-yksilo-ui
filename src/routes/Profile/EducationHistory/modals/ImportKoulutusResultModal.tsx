@@ -45,7 +45,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
                     {t('education-history-import.result-modal.success-osaamiset-info')}
                   </p>
                   <Link
-                    to={`/${language}/${t('slugs.basic-information')}/${t('slugs.about-ai')}`}
+                    to={`/${language}/${t('slugs.about-ai')}`}
                     className="text-button-md hover:underline text-accent mt-4"
                   >
                     <div className="flex items-center gap-2">
