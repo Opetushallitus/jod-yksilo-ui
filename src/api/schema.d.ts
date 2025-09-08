@@ -1216,10 +1216,13 @@ export interface components {
       tyhjia: number;
       arvot: components['schemas']['ArvoDto'][];
     };
-    PalkkaTiedotDto: {
-      alinDesiiliPalkka: number;
-      mediaaniPalkka: number;
-      ylinDesiiliPalkka: number;
+    PalkkaDataDto: {
+      /** Format: int32 */
+      mediaaniPalkka?: number;
+      /** Format: int32 */
+      ylinDesiiliPalkka?: number;
+      /** Format: int32 */
+      alinDesiiliPalkka?: number;
     };
     TyomahdollisuusFullDto: {
       /** Format: uuid */
@@ -1231,7 +1234,7 @@ export interface components {
       yleisetVaatimukset?: components['schemas']['LokalisoituTeksti'];
       /** Format: uri */
       ammattiryhma?: string;
-      palkkatiedot: components['schemas']['PalkkaTiedotDto'];
+      palkkatiedot?: components['schemas']['PalkkaDataDto'];
       /** @enum {string} */
       aineisto?: 'TMT' | 'AMMATTITIETO';
       aktiivinen?: boolean;
