@@ -128,7 +128,7 @@ const JobOpportunity = () => {
                   <h2 style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
                     {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka || '--'} €
                   </h2>
-                  <p style={{ marginBottom: '0.25rem', color: '#4B5563' /* gray-600 */ }}>
+                  <p style={{ marginBottom: '0.25rem' }} className="text-secondary-gray">
                     {t('job-opportunity.salary-data.lowest-decile')}
                   </p>
                 </div>
@@ -137,25 +137,27 @@ const JobOpportunity = () => {
                   <h2 style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
                     {tyomahdollisuus?.palkkatiedot?.mediaaniPalkka || '--'} €
                   </h2>
-                  <p style={{ marginBottom: '0.25rem', color: '#4B5563' }}>{t('job-opportunity.salary-data.median')}</p>
+                  <p style={{ marginBottom: '0.25rem' }} className="text-secondary-gray">
+                    {t('job-opportunity.salary-data.median')}
+                  </p>
                 </div>
 
                 <div>
                   <h2 style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
                     {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka || '--'} €
                   </h2>
-                  <p style={{ marginBottom: '0.25rem', color: '#4B5563' }}>
+                  <p style={{ marginBottom: '0.25rem' }} className="text-secondary-gray">
                     {t('job-opportunity.salary-data.highest-decile')}
                   </p>
                 </div>
               </div>
 
-              <p style={{ lineHeight: 1.625, color: '#374151' /* gray-700 */, margin: 0 }}>
+              <p style={{ margin: 0 }} className="text-secondary-gray">
                 {t('job-opportunity.salary-data.description')}
               </p>
             </>
           ) : (
-            <p>Palkkatietoja ei saatavilla</p>
+            <p className="text-secondary-gray">{t('job-opportunity.salary-data.not-available')}</p>
           )}
         </div>
       ),
