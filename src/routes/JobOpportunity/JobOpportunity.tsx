@@ -104,6 +104,58 @@ const JobOpportunity = () => {
       showDivider: false,
     },
     {
+      navTitle: t('job-opportunity.salary-data.title'),
+      showDivider: false,
+      showNavTitle: false,
+      showAiInfoInTitle: false,
+      content: (
+        <div style={{ backgroundColor: 'white', padding: '1.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2rem' }}>
+            <h3 className="text-heading-3">{t('job-opportunity.salary-data.title')}</h3>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              textAlign: 'center',
+              gap: '3rem',
+              marginBottom: '2rem',
+            }}
+          >
+            <div>
+              <h2 style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
+                {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka} €
+              </h2>
+              <p style={{ marginBottom: '0.25rem', color: '#4B5563' /* gray-600 */ }}>
+                {t('job-opportunity.salary-data.lowest-decile')}
+              </p>
+            </div>
+
+            <div>
+              <h2 style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
+                {tyomahdollisuus?.palkkatiedot?.mediaaniPalkka} €
+              </h2>
+              <p style={{ marginBottom: '0.25rem', color: '#4B5563' }}>{t('job-opportunity.salary-data.median')}</p>
+            </div>
+
+            <div>
+              <h2 style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
+                {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka} €
+              </h2>
+              <p style={{ marginBottom: '0.25rem', color: '#4B5563' }}>
+                {t('job-opportunity.salary-data.highest-decile')}
+              </p>
+            </div>
+          </div>
+
+          <p style={{ lineHeight: 1.625, color: '#374151' /* gray-700 */, margin: 0 }}>
+            {t('job-opportunity.salary-data.description')}
+          </p>
+        </div>
+      ),
+    },
+    {
       navTitle: t('job-opportunity.job-advertisement-characteristics'),
       showNavTitle: false,
       content: (
