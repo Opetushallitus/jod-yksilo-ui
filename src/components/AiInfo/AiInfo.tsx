@@ -18,12 +18,7 @@ export const AiInfo = () => {
           i18nKey="ai-info-tooltip.description"
           components={{
             Icon: <JodOpenInNew size={18} />,
-            CustomLink: (
-              <Link
-                to={`/${language}/${t('slugs.basic-information')}/${t('slugs.about-ai')}`}
-                className="inline-flex underline"
-              />
-            ),
+            CustomLink: <Link to={`/${language}/${t('slugs.about-ai')}`} className="inline-flex underline" />,
           }}
         />
       </p>

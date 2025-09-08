@@ -226,7 +226,7 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
             Icon: <JodOpenInNew />,
             CustomLink: (
               <Link
-                to={`/${language}/${t('slugs.basic-information')}/${t('slugs.privacy-policy')}`}
+                to={`/${language}/${t('slugs.privacy-policy')}`}
                 className="inline-flex text-accent"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -262,7 +262,7 @@ const StepAi = () => {
               Icon: <JodOpenInNew />,
               CustomLink: (
                 <Link
-                  to={`/${language}/${t('slugs.basic-information')}/${t('slugs.about-ai')}`}
+                  to={`/${language}/${t('slugs.about-ai')}`}
                   className="inline-flex text-accent"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -516,10 +516,7 @@ const ProfileFront = () => {
         <p>{t('profile.preferences.paragraph-3')}</p>
         <p>
           {t('profile.preferences.paragraph-4')}
-          <Link
-            to={`/${language}/${t('slugs.basic-information')}/${t('slugs.privacy-policy')}`}
-            className="text-accent hover:underline"
-          >
+          <Link to={`/${language}/${t('slugs.privacy-policy')}`} className="text-accent hover:underline">
             {t('profile.preferences.paragraph-4-link')}
           </Link>
           .

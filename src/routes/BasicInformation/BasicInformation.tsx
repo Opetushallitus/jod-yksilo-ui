@@ -26,14 +26,6 @@ const BasicInformation = () => {
         name: t('accessibility-statement'),
         path: t('slugs.accessibility-statement'),
       },
-      {
-        name: t('privacy-policy'),
-        path: t('slugs.privacy-policy'),
-      },
-      {
-        name: t('about-ai'),
-        path: t('slugs.about-ai'),
-      },
     ],
     [t],
   );

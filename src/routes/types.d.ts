@@ -60,3 +60,10 @@ export interface KoulutusmahdollisuusJakaumat {
 export type JakaumaKey = keyof KoulutusmahdollisuusJakaumat | keyof TyomahdollisuusJakaumat;
 export type Codeset = Required<Extract<keyof TyomahdollisuusJakaumat, 'maa' | 'maakunta' | 'kunta' | 'tyokieli'>>;
 export type CodesetValues = Record<Codeset, { code: string; value: string }[]>;
+
+export interface ArticleSection {
+  navTitle: string;
+  content: React.ReactNode;
+  showInDevOnly?: boolean;
+  showNavTitle?: boolean;
+}
