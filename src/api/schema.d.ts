@@ -1217,6 +1217,8 @@ export interface components {
       arvot: components['schemas']['ArvoDto'][];
     };
     PalkkaDataDto: {
+      /** Format: date-time */
+      tiedotHaettu?: string;
       /** Format: int32 */
       mediaaniPalkka?: number;
       /** Format: int32 */
