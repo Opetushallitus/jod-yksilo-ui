@@ -55,9 +55,9 @@ const Root = () => {
   const hostname = window.location.hostname;
   const { siteId, agent } = React.useMemo(() => {
     if (hostname === 'osaamispolku.fi') {
-      return { siteId: 38, agent: agents.prod[language as keyof typeof agents.prod] };
+      return { siteId: 36, agent: agents.prod[language as keyof typeof agents.prod] };
     } else if (hostname === 'jodtestaus.fi') {
-      return { siteId: 36, agent: agents.test[language as keyof typeof agents.test] };
+      return { siteId: 38, agent: agents.test[language as keyof typeof agents.test] };
     } else {
       return { siteId: 37, agent: agents.test[language as keyof typeof agents.test] };
     }
