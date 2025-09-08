@@ -1,5 +1,106 @@
 {
   "about-ai": "Tietoa tekoälyn käytöstä",
+  "about-ai-page": {
+    "title": "Tietoa tekoälyn käytöstä",
+    "ai-methods": {
+      "title": "Mitä tekoälymenetelmiä käytetään?",
+      "description-1": "Palvelussa käytetään seuraavia menetelmiä ja komponentteja:",
+      "list": {
+        "item-1": "koneoppimismallit osaamisten tunnistamiseen (mm. TFIDF, FinBERT)",
+        "item-2": "klusterointialgoritmit (DBSCAN, KMeans) työpaikkailmoitusten ja koulutustarjonnan ryhmittelyyn työ- ja koulutusmahdollisuuksiksi",
+        "item-3": "generatiivinen tekoäly (Claude 3.5 Sonnet) tuottamaan kuvaustekstejä ja tiivistelmiä",
+        "item-4": "suosittelualgoritmit, jotka yhdistävät osaamiset ja kiinnostukset koulutus- ja työmahdollisuuksiin",
+        "item-5": "keskusteleva kiinnostusten kartoittaja, joka hyödyntää kielimalleja (Claude 3.5 Sonnet) keskustelun käymiseksi ja RAG-toiminnallisuutta (Retrieval-Augmented Generation) erilaisten ohjaustyötä ja kartoitustyötä tukevien apuvälineiden ja materiaalien hallitsemiseksi ja käyttämiseksi keskutelun tukena."
+      },
+      "description-2": "Työkaluja, malleja ja menetelmiä käytetään Amazon Web Services (AWS) pilvialustalla. AWS ylläpitää yksityistä infrastruktuuriamme ja suurinta osaa keskustelulokeista, jotka sisältävät viestit ja keskustelun aiheen, aikaleimat sekä telemetriatietoja.",
+      "data-location": "Tietojen sijainti:",
+      "data-location-eu": "EU",
+      "data-preservation-time": "Tietojen säilytysaika:",
+      "data-preservation-time-until-delete": "Kunnes tiedot poistetaan"
+    },
+    "why-ai": {
+      "title": "Miksi tekoälyä käytetään Osaamispolussa?",
+      "description": "Osaamispolku hyödyntää tekoälyä tukemaan yksilöiden koulutus- ja uravalintoja. Tavoitteena on tarjota käyttäjälle räätälöityjä ehdotuksia koulutus- ja työmahdollisuuksista, jotka perustuvat hänen osaamiseensa, kiinnostuksen kohteisiinsa ja taustatietoihin.",
+      "possibilities": {
+        "title": "Tekoäly mahdollistaa:",
+        "item-1": {
+          "title": "Osaamisten tunnistamisen käyttäjän antamasta tekstistä (esim. CV, koulutustiedot)",
+          "description": "Tekoäly vertaa sanoja ja lauseita tunnettuihin taitoihin ja valitsee ehdotettavaksi ne, jotka sopivat parhaiten. <br/><br/>Tekoälyä käytetään myös tunnistamaan osaamisia työpaikkailmoitusteksteistä ja koulutustarjonnan kuvauksista, jos näissä ei ole valmiiksi kuvattu vaadittavia tai työn/koulutuksen tuottamia taitoja."
+        },
+        "item-2": {
+          "title": "Työ- ja koulutusmahdollisuuksien luomisen  ryhmittelemällä  Työmarkkinatorin työpaikkailmoituksia ja Opintopolun koulutustarjontaa",
+          "work": {
+            "title": "Työmahdollisuudet",
+            "description-1": "Tekoäly lukee Työmarkkinatorin työpaikkailmoituksia ja etsii niistä tietoa, kuten:",
+            "list": {
+              "item-1": "mitä taitoja työssä tarvitaan",
+              "item-2": "millaisia lupia tai ajokortteja vaaditaan",
+              "item-3": "mitä ammatteja ilmoituksessa mainitaan."
+            },
+            "description-2": "Sitten se ryhmittelee ilmoitukset niin, että samanlaiset työpaikat päätyvät samaan ryhmään. Näin syntyy työmahdollisuuksia, eli ryhmiä samantyyppisistä töistä. <br/></br/>Jos ilmoituksessa ei ole tarpeeksi tietoa, se jätetään pois. <br/><br/>Lopuksi tekoäly tallentaa ryhmät ja tekee niistä yhteenvetoja, joita käytetään suosituksissa."
+          },
+          "education": {
+            "title": "Koulutusmahdollisuudet",
+            "description-1": "Tekoäly käsittelee Opintopolun koulutustietoja ja ryhmittelee koulutukset sen mukaan:",
+            "list": {
+              "item-1": "mitä taitoja koulutuksessa opitaan",
+              "item-2": "onko koulutus tutkintoon johtava vai ei",
+              "item-3": "mihin koulutusalaan se kuuluu."
+            },
+            "description-2": "Tekoäly tiivistää pitkät koulutuskuvaukset ja tekee niistä selkeitä yhteenvetoja. Näin käyttäjä saa helpommin käsityksen siitä, mitä koulutus sisältää."
+          }
+        },
+        "item-3": {
+          "title": "Suosittelujen tuottamisen (Yksilölliset suositukset koulutus- ja työmahdollisuuksiksi perustuen syöttämiisi tietoihisi)",
+          "description": "Suosittelukone toimii kuin älykäs hakukone. Käyttäjä kertoo, mitä taitoja hänellä on ja mistä hän on kiinnostunut. Tekoäly vertaa niitä tietoihin työpaikoista ja koulutuksista ja antaa listan sopivista vaihtoehdoista."
+        },
+        "item-4": {
+          "title": "Keskusteluavun kiinnostuksen kartoittamiseksi",
+          "description": "Tekoäly voi myös keskustella käyttäjän kanssa ja auttaa häntä löytämään sopivia vaihtoehtoja kiinnostuksen kohteiksi sekä antaa keskustelu- ja pohdinta-apua kiinnostusten kohteiden mietintään. Se ymmärtää käyttäjän kirjoittamia viestejä ja vastaa niihin hyödyllisesti. Keskusteleva kiinnostusten kartoittaja voi käyttää apuna erilaisia ohjausalan materiaaleja ja tietoja."
+        },
+        "item-5": {
+          "title": "Sisällön tuottamisen ja kääntämisen eri kielille (erityisesti työ- ja koulutusmahdollisuuksissa)",
+          "description": "Tekoäly kirjoittaa tiivistelmiä työ- ja koulutusmahdollisuuksista perustuen niiden taustalla oleviin työpaikkailmoituksiin, ammattitietoon sekä koulutustarjonnassa oleviin koulutusten kuvauksiin, jotta ne ovat helpommin ymmärrettäviä käyttäjälle. Tausta-aineistoista siivotaan pois mahdolliset henkilötiedot. <br/><br/>Tekoäly kääntää kirjoittamansa tekstit ruotsiksi ja englanniksi. "
+        }
+      }
+    },
+    "functionality-tracking": {
+      "title": "Miten tekoälyn toimivuutta seurataan?",
+      "description-1": "Palvelun kehityksessä käytetään:",
+      "list": {
+        "item-1": "evaluointimetriikoita (esim. F1-score, Jaccard-indeksi)",
+        "item-2": "tiedonvaihtoa ja asiantuntija-arvioita eri alojen asiantuntijoiden kanssa",
+        "item-3": "käyttäjäpalautetta ja testidataa",
+        "item-4": "versiohallintaa ja automaattitestejä."
+      },
+      "description-2": "Tavoitteena on varmistaa, että tekoäly toimii luotettavasti, läpinäkyvästi ja yhdenvertaisesti."
+    },
+    "security": {
+      "title": "Miten tietoturva ja tietosuoja on huomioitu?",
+      "description-1": "Tekoälyn käyttö perustuu EU:n tekoälysäädökseen (EU 2024/1689) ja yleiseen tietosuoja-asetukseen (GDPR). <br/><br/>Palvelussa:",
+      "list": {
+        "item-1": "Käyttäjä voi käyttää palvelua anonyymisti.",
+        "item-2": "Henkilötietoja käsitellään vain lakiin perustuen, mutta käyttäjällä on oikeus hallita omia tietojaan vapaasti.",
+        "item-3": "Kirjautuneilla käyttäjillä on oikeus kieltää henkilötietojensa käyttö tekoälyn kehittämiseen.",
+        "item-4": "Tiedot voidaan anonymisoida tutkimus- ja kehityskäyttöön."
+      },
+      "description-2": "Palvelu ei tee automaattisia päätöksiä, eikä sitä ole luokiteltu suuririskiseksi tekoälyjärjestelmäksi. <br/><br/>Lue lisää tietojesi käsittelystä tietosuojaselosteesta"
+    },
+    "effect": {
+      "title": "Miten tekoäly vaikuttaa käyttäjään?",
+      "description": "Tekoäly toimii avustavana työkaluna, ei päätöksentekijänä. \n\nKäyttäjä saa:",
+      "list": {
+        "item-1": "ehdotuksia, ei sitovia suosituksia",
+        "item-2": "mahdollisuuden muokata ja poistaa omia tietojaan",
+        "item-3": "tukea urasuunnitteluun",
+        "item-4": "monikielisen käyttöliittymän, jossa sisältöä tuotetaan ja käännetään automaattisesti."
+      }
+    },
+    "limitation-of-liability": {
+      "title": "Vastuunrajoitus",
+      "description": "Osaamispolun tekoälytoiminnallisuuksia, kuten keskustelevia kartoittajia, suosittelualgoritmiä sekä sisällön tuotantoa, kehitetään ja valvotaan ihmisten toimesta. Tekoäly toimii kuitenkin osin automaattisesti, eikä jokainen vuorovaikutus, tuotos tai ehdotus ole erikseen ihmisen tarkistama. <br/><br/>Vaikka pyrimme jatkuvasti parantamaan tekoälyn laatua ja luotettavuutta, sen antamat vastaukset voivat joskus olla epätarkkoja, puutteellisia tai sisältää virheellistä tietoa. Tekoäly ei korvaa asiantuntijan arviota, eikä sen tuottama sisältö välttämättä edusta viranomaisten virallista näkemystä. <br/><br/>Tekoälyä käytetään Osaamispolussa ensisijaisesti keskustelukumppanina ja ehdotusten tukena – ei päätöksentekijänä. Käyttäjän vastuulla on arvioida ja tarvittaessa täydentää saamaansa tietoa ennen päätösten tekemistä. <br/><br/>Palvelua kehitetään jatkuvasti, ja tekoälytoiminnallisuudet voivat ajoittain olla poissa käytöstä tai muuttua ilman erillistä ilmoitusta."
+    }
+  },
   "about-us": "Tietoa palvelusta",
   "about-us-and-user-guide": "Tietoa palvelusta ja käyttöohjeet",
   "accept": "Hyväksy",
