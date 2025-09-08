@@ -10,6 +10,7 @@ import { getLocalizedText, hashString, sortByProperty } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
+import { format } from 'date-fns';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
@@ -110,11 +111,14 @@ const JobOpportunity = () => {
       showAiInfoInTitle: false,
       content: (
         <div style={{ backgroundColor: 'white', padding: '1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <h3 className="text-heading-3">{t('job-opportunity.salary-data.title')}</h3>
           </div>
           {tyomahdollisuus?.palkkatiedot ? (
             <>
+              <p className="text-secondary-gray">
+                {format(new Date(tyomahdollisuus?.palkkatiedot?.tiedotHaettu), 'dd.MM.yyyy')}
+              </p>
               <div
                 style={{
                   display: 'flex',
@@ -122,6 +126,7 @@ const JobOpportunity = () => {
                   textAlign: 'center',
                   gap: '3rem',
                   marginBottom: '2rem',
+                  marginTop: '2rem',
                 }}
               >
                 <div>
