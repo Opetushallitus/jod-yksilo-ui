@@ -1218,7 +1218,7 @@ export interface components {
     };
     PalkkaDataDto: {
       /** Format: date-time */
-      tiedotHaettu?: string;
+      tiedotHaettu: string;
       /** Format: int32 */
       mediaaniPalkka?: number;
       /** Format: int32 */
