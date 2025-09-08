@@ -1,4 +1,5 @@
 import { OsaamisSuosittelija } from '@/components';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { useToolStore } from '@/stores/useToolStore';
 import { Button } from '@jod/design-system';
 import { JodChatBot } from '@jod/design-system/icons';
@@ -8,6 +9,7 @@ import { VirtualAssistant } from './VirtualAssistant';
 
 const Interests = () => {
   const { t } = useTranslation();
+  const { isPrd } = useEnvironment();
   const { setKiinnostukset, virtualAssistantOpen, kiinnostukset, setVirtualAssistantOpen } = useToolStore(
     useShallow((state) => ({
       setKiinnostukset: state.setKiinnostukset,
@@ -49,21 +51,23 @@ const Interests = () => {
             mode="kiinnostukset"
             hideTextAreaLabel
           />
-          <div className="pt-5">
-            <Button
-              data-testid="interests-open-virtual-assistant"
-              label={t('tool.my-own-data.interests.conversational-virtual-assistant')}
-              variant="gray"
-              size="sm"
-              className="w-fit"
-              icon={<JodChatBot />}
-              iconSide="right"
-              onClick={() => {
-                setVirtualAssistantOpen(true);
-                scrollToTitle();
-              }}
-            />
-          </div>
+          {!isPrd && (
+            <div className="pt-5">
+              <Button
+                data-testid="interests-open-virtual-assistant"
+                label={t('tool.my-own-data.interests.conversational-virtual-assistant')}
+                variant="gray"
+                size="sm"
+                className="w-fit"
+                icon={<JodChatBot />}
+                iconSide="right"
+                onClick={() => {
+                  setVirtualAssistantOpen(true);
+                  scrollToTitle();
+                }}
+              />
+            </div>
+          )}
         </>
       )}
     </div>
