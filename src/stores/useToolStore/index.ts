@@ -53,7 +53,6 @@ interface ToolState {
   sorting: OpportunitySortingValue;
   filter: OpportunityFilterValue[];
   previousEhdotusUpdateLang: string;
-  weightChanged: boolean;
   reset: () => void;
 
   setTavoitteet: (state: ToolState['tavoitteet']) => void;
@@ -102,7 +101,6 @@ export const useToolStore = create<ToolState>()(
       ehdotuksetCount: { TYOMAHDOLLISUUS: 0, KOULUTUSMAHDOLLISUUS: 0 },
       sorting: DEFAULT_SORTING,
       filter: DEFAULT_FILTER,
-      weightChanged: false,
       previousEhdotusUpdateLang: '',
       reset: () => {
         set({
@@ -115,7 +113,6 @@ export const useToolStore = create<ToolState>()(
           tyomahdollisuudet: [],
           koulutusmahdollisuudet: [],
           mixedMahdollisuudet: [],
-          weightChanged: false,
         });
       },
 
@@ -134,7 +131,7 @@ export const useToolStore = create<ToolState>()(
       },
       setSuosikit: (state) => set({ suosikit: state }),
       setOsaamisKiinnostusPainotus: (state: number) => {
-        set({ osaamisKiinnostusPainotus: state, weightChanged: true });
+        set({ osaamisKiinnostusPainotus: state });
       },
       updateEhdotukset: async (lang: string, signal?: AbortSignal) => {
         const {
@@ -301,7 +298,6 @@ export const useToolStore = create<ToolState>()(
         await updateEhdotukset(i18n.language, signal);
         await fetchMahdollisuudetPage(signal, 1);
         await updateSuosikit(loggedIn);
-        set({ weightChanged: false });
       },
 
       toggleSuosikki: async (kohdeId: string, tyyppi: MahdollisuusTyyppi) => {
