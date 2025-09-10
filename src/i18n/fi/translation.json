@@ -812,6 +812,7 @@
   "return-home": "Palaa etusivulle",
   "return-menu": "Palaa valikkoon",
   "save": "Tallenna",
+  "save-and-close": "Tallenna ja sulje",
   "save-in-progress": "Tallennetaan...",
   "saved": "Tallennettu",
   "search": "Haku",
@@ -977,6 +978,7 @@
     },
     "remove-competence-help": "Poista osaaminen x-merkistä.",
     "settings": {
+      "reset": "Poista valinnat",
       "education-opportunity": {
         "duration": "Kesto",
         "field": "Koulutusala",
@@ -994,7 +996,9 @@
         "industry": "Toimiala",
         "occupation": "Ammattiryhmä",
         "title": "Suodata työmahdollisuuksia",
-        "type": "Tyyppi"
+        "type": "Tyyppi",
+        "type-ammatit": "Ammatit",
+        "type-tyomahdollisuudet": "Työmahdollisuudet"
       },
       "toggle-title-closed": "Näytä säätimet",
       "toggle-title-open": "Piilota säätimet"

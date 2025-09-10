@@ -28,7 +28,7 @@ const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOp
       fetchMahdollisuudetPage: state.fetchMahdollisuudetPage,
       mahdollisuudetLoading: state.mahdollisuudetLoading,
       mixedMahdollisuudet: state.mixedMahdollisuudet,
-      filter: state.filter,
+      filter: state.filters.opportunityType,
     })),
   );
   const { sm } = useMediaQueries();
@@ -59,6 +59,7 @@ const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOp
     <div className={className} data-testid="tool-pagination">
       <Pagination
         currentPage={ehdotuksetPageNr}
+        serviceVariant="yksilo"
         type="button"
         ariaLabel={ariaLabel}
         pageSize={ehdotuksetPageSize}

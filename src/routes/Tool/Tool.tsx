@@ -87,15 +87,17 @@ const ExploreOpportunities = () => {
               variant="plain"
               size="sm"
               className="text-black!"
-              onClick={() => setSettingsOpen(!settingsOpen)}
               icon={settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
               iconSide="left"
               label={settingsOpen ? t('tool.settings.toggle-title-open') : t('tool.settings.toggle-title-closed')}
               data-testid="open-tool-settings"
+              onClick={() => {
+                setSettingsOpen(!settingsOpen);
+              }}
             />
             {lg && (
               <Button
-                size="sm"
+                size="lg"
                 label={updateButtonLabel}
                 variant="accent"
                 onClick={onUpdateResults}
@@ -109,7 +111,16 @@ const ExploreOpportunities = () => {
         </div>
       </div>
 
-      <>{settingsOpen && <ToolSettings ref={firstSettingRef} />}</>
+      <>
+        {settingsOpen && (
+          <ToolSettings
+            ref={firstSettingRef}
+            isOpen={settingsOpen}
+            onClose={() => setSettingsOpen(false)}
+            isModal={!lg}
+          />
+        )}
+      </>
       <ul
         id="tool-your-opportunities-list"
         ref={scrollRef}
@@ -124,6 +135,7 @@ const ExploreOpportunities = () => {
             mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
               ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`
               : `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}`;
+
           return ehdotus ? (
             <OpportunityCard
               key={id}
