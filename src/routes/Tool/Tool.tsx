@@ -25,7 +25,6 @@ const ExploreOpportunities = () => {
   const { t, i18n } = useTranslation();
   const {
     ammattiryhmaNimet,
-    weightChanged,
     mahdollisuusEhdotukset,
     mixedMahdollisuudet,
     suosikit,
@@ -36,7 +35,6 @@ const ExploreOpportunities = () => {
   } = useToolStore(
     useShallow((state) => ({
       ammattiryhmaNimet: state.ammattiryhmaNimet,
-      weightChanged: state.weightChanged,
       mahdollisuusEhdotukset: state.mahdollisuusEhdotukset,
       mixedMahdollisuudet: state.mixedMahdollisuudet,
       suosikit: state.suosikit,
@@ -99,7 +97,7 @@ const ExploreOpportunities = () => {
                 label={updateButtonLabel}
                 variant="accent"
                 onClick={onUpdateResults}
-                disabled={isLoading || !weightChanged}
+                disabled={isLoading}
                 icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
                 iconSide={isLoading ? 'right' : undefined}
                 data-testid="update-opportunities"
