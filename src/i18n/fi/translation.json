@@ -707,6 +707,103 @@
     "intro": {
       "title": "Johdanto",
       "description": "Tässä tietosuojaselosteessa kuvataan, miten henkilötietoja käsitellään Osaamispolku-palvelussa. Selosteessa kerrotaan myös, mitä oikeuksia rekisteröidyillä henkilöillä on ja miten oikeuksia voi käyttää. Rekisteröityjä ovat osaamisprofiilin tehneet henkilöt sekä ohjaajan työpöydälle kirjautuneet henkilöt. <br/><br/>Tietosuojaselostetta päivitetään säännöllisesti. Ajankohtainen versio löytyy aina tältä sivulta"
+    },
+    "register-controller": {
+      "title": "Rekisterinpitäjä",
+      "description-1": "Tietovarannon yhteisrekisterinpitäjiä ovat Opetushallitus sekä Työllisyys-, kehittämis- ja hallintokeskus. <br/><br/>Opetushallitus vastaa luonnollisten henkilöiden suojelusta henkilötietojen käsittelyssä sekä näiden tietojen vapaasta liikkuvuudesta ja direktiivin 95/46/EY kumoamisesta annetun Euroopan parlamentin asetuksen (EU) 2016/679 (yleinen tietosuoja-asetus) III luvussa tarkoitetuista rekisteröityjen oikeuksista ja muista rekisterinpitäjän vastuista, ellei niitä ole tässä pykälässä säädetty kummankin yhteisrekisterinpitäjien yhteiseksi vastuuksi. <br/><br/>Yhteisrekisterinpitäjät määrittelevät yhdessä henkilötietojen käsittelyn tarkoitukset ja keinot 4 artiklan 7 kohdassa ja 26 artiklassa tarkoitetulla tavalla. Lisäksi yhteisrekisterinpitäjät vastaavat yhdessä seuraavista yleisen tietosuoja-asetuksen velvoitteista:",
+      "list": {
+        "item-1": "5 artiklan 2 kohdassa tarkoitettu osoitusvelvollisuus;",
+        "item-2": "6 artiklassa tarkoitettu käsittelyn lainmukaisuus;",
+        "item-3": "rekisteröidyn tunnistamistarpeen arviointi 11 artiklan ja muun lainsäädännön mukaisesti;",
+        "item-4": "IV luvun 1 jakson mukaisista rekisterinpitäjää ja henkilötietojen käsittelijää koskevat yleiset velvollisuudet;",
+        "item-5": "33–34 artiklassa tarkoitetut tietoturvaloukkauksia koskevat ilmoitusvelvollisuudet; sekä",
+        "item-6": "IV luvun 3 jakson mukainen tietosuojan vaikutustenarviointi ja ennakkokuuleminen."
+      },
+      "description-2": "Lisäksi yhteisrekisterinpitäjät vastaavat yhdessä tietosuojalain (1050/2018) 6 §:n 2 momentin 9–11 kohdissa tarkoitetuista erityisistä menettelysäännöistä, tietosuojan vaikutustenarvioinnin laatimisesta ja muista menettelyllisistä ja organisatorisista toimenpiteistä."
+    },
+    "data-handling-use": {
+      "title": "Henkilötietojen käsittelyn tarkoitus",
+      "description": "Valtakunnallisen osaamistietovarannon tarkoituksena on mahdollistaa henkilöiden tallentaa ja ylläpitää tietoa omasta osaamisestaan ja työuraan ja koulutukseen liittyvistä kiinnostuksenkohteistaan ja suunnitelmistaan. Osaamistietovaranto on osa digitaalista palvelua, jäljempänä palvelu, jonka tarkoitus on tukea henkilöitä koulutukseen ja työelämään hakeutumisessa, niihin liittyvissä siirtymissä, oman osaamisen ylläpitämisessä sekä omien koulutus- ja uratietojen hyödyntämisessä. <br/><br/>Lisäksi tietovarannon tarkoituksena on tarjota tietopohjaa opetuksen, koulutuksen, ohjauksen ja osaamisen tilannekuvan ylläpitämiseksi ja niiden kehittämisen ja ennakoinnin tueksi.",
+      "legal-basis": {
+        "title": "Oikeusperuste",
+        "description": "Laki valtakunnallisesta osaamistietovarannosta xx/20xx <br/><br/>Laki Opetushallituksesta 508/2025 <br/><br/>Laki elinvoimakeskuksista sekä Työllisyys-, kehittämis- ja hallintokeskuksesta 531/2025 <br/><br/>Laki valtakunnallisista opinto-, koulutus- ja tutkintorekistereistä 884/2017 <br/><br/>Laki työvoimapalveluiden järjestämisestä 380/2023"
+      }
+    },
+    "register-information-content": {
+      "title": "Rekisterin tietosisältö / käsiteltävät henkilötietoryhmät",
+      "description": "Henkilö saa tallentaa itsestään osaamistietovarantoon tiedot, jotka henkilö itse sitä varten vapaaehtoisesti päättää. Tietojen tulee liittyä hänen koulutus- ja työhistoriaansa, osaamisiinsa ja koulutusta, työuraa ja osaamista koskeviin suunnitelmiinsa ja tavoitteisiinsa. <br/><br/>Tietovarantoon ei saa antaa salassa pidettäviä tai erityisiin henkilötietoryhmiin kuuluvia tietoja. Henkilö saa kuitenkin halutessaan antaa tietovarantoon tietoa opinnäytetyöstään ja tieteellisestä tutkimuksestaan, hänelle suoritetusta psykologisesta testistä ja soveltuvuuskokeesta, oppilaitokselta saamistaan todistuksista, osallistumisestaan yhdistystoimintaan, vapaa-ajan harrastuksista ja muista vastaavista tiedoista, jos tällaiset tiedot ovat välttämättömiä hänen koulutus- ja työhistoriansa, osaamistensa ja koulutukseen, työuraan ja osaamiseen liittyvien suunnitelmiensa ja tavoitteidensa kannalta. <br/><br/>Opetushallitus saa lisäksi tallentaa tietovarantoon palvelun toiminnallisuuksia koskevat valinnat ja tiedot henkilön maantieteellisestä alueesta, iästä ja kielestä.",
+      "yksilo": {
+        "title": "Henkilötietoryhmä 1: Yksilöt",
+        "content": [
+          { "key": "birth-year", "title": "Syntymävuosi", "items": [] },
+          { "key": "gender", "title": "Sukupuoli", "items": [] },
+          { "key": "mother-tongue", "title": "Äidinkieli", "items": [] },
+          { "key": "home-municipality", "title": "Kotikunta", "items": [] },
+          { "key": "email", "title": "Sähköpostiosoite", "items": [] },
+          { "key": "ui-language", "title": "Palvelun käyttökieli", "items": [] },
+
+          {
+            "key": "permissions",
+            "title": "Lupatiedot",
+            "items": [
+              { "key": "welcome-flow-completed", "title": "Tervetuloapolun läpikäynti" },
+              { "key": "data-disclosure-controller", "title": "Lupa omien tietojen luovutukseen rekisterinpitäjälle" },
+              { "key": "ai-training-permission", "title": "Lupa omien tietojen käytön tekoälyn kouluttamiseen" }
+            ]
+          },
+          {
+            "key": "work-history",
+            "title": "Työhistoria",
+            "items": [
+              { "key": "workplace", "title": "Työpaikka" },
+              { "key": "job-role", "title": "Toimenkuva kullakin työpaikalla" },
+              { "key": "job-role-competences", "title": "Kuhunkin toimenkuvaan liittyvät osaamiset" }
+            ]
+          },
+          {
+            "key": "education-history",
+            "title": "Koulutushistoria",
+            "items": [
+              { "key": "provider", "title": "Koulutuksen järjestäjä" },
+              { "key": "education", "title": "Koulutus kullakin koulutuksen järjestäjällä" },
+              { "key": "education-competences", "title": "Kuhunkin koulutukseen liittyvät osaamiset" }
+            ]
+          },
+          {
+            "key": "free-time-history",
+            "title": "Vapaa-ajan historia",
+            "items": [
+              { "key": "theme", "title": "Vapaa-ajan teema" },
+              { "key": "activity", "title": "Vapaa-ajan toiminto kullakin teemalla" },
+              { "key": "activity-competences", "title": "Kuhunkin toimintoon liittyvät osaamiset" }
+            ]
+          },
+          {
+            "key": "interests",
+            "title": "Kiinnostuksen kohteet",
+            "items": [
+              { "key": "skills", "title": "osaamiset" },
+              { "key": "occupations", "title": "ammatit" },
+              { "key": "free-text", "title": "vapaa-sana kuvaus omista kiinnostuksen kohteista" }
+            ]
+          },
+          {
+            "key": "other-competences",
+            "title": "Muut osaamiset",
+            "items": [
+              { "key": "skills", "title": "osaamiset" },
+              { "key": "free-text", "title": "vapaa-sana kuvaus omasta osaamisesta" }
+            ]
+          },
+
+          { "key": "favorites", "title": "Suosikit", "items": [] },
+          { "key": "goals", "title": "Päämäärät", "items": [] },
+          { "key": "plans", "title": "Koulutus- ja urasuunnitelmapolut", "items": [] }
+        ]
+      },
+      "ohjaaja": {
+        "title": "Henkilötietoryhmä 2: Ohjaajat"
+      }
     }
   },
   "profile": {

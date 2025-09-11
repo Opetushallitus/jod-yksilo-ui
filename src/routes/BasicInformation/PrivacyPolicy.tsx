@@ -20,6 +20,41 @@ const PrivacyPolicy = () => {
     [isDev],
   );
 
+  interface YksiloLeafItem {
+    key: string;
+    title: string;
+  }
+
+  interface YksiloGroupItem extends YksiloLeafItem {
+    items: YksiloLeafItem[];
+  }
+
+  type YksiloItem = YksiloGroupItem;
+
+  const YksiloRegisterContent = () => {
+    const { t } = useTranslation();
+
+    const raw = t('privacy-policy-and-cookies.register-information-content.yksilo.content', { returnObjects: true });
+    const content: YksiloItem[] = Array.isArray(raw) ? (raw as YksiloItem[]) : [];
+
+    return (
+      <ul className="list-disc">
+        {content.map((item) => (
+          <li key={item.key} style={{}}>
+            <strong>{item.title}</strong>
+            {item.items?.length > 0 && (
+              <ul className="ml-5 list-[circle]">
+                {item.items.map((sub) => (
+                  <li key={sub.key}>{sub.title}</li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   const sections: ArticleSection[] = React.useMemo(() => {
     return [
       {
@@ -29,6 +64,44 @@ const PrivacyPolicy = () => {
             <Trans i18nKey="privacy-policy-and-cookies.intro.description" />
           </p>
         ),
+      },
+      {
+        navTitle: t('privacy-policy-and-cookies.register-controller.title'),
+        content: (
+          <div>
+            <p>
+              <Trans i18nKey="privacy-policy-and-cookies.register-controller.description-1" />
+            </p>
+            <ol className="ml-6 mb-4 list-decimal">
+              <li>{t('privacy-policy-and-cookies.register-controller.list.item-1')}</li>
+              <li>{t('privacy-policy-and-cookies.register-controller.list.item-2')}</li>
+              <li>{t('privacy-policy-and-cookies.register-controller.list.item-3')}</li>
+              <li>{t('privacy-policy-and-cookies.register-controller.list.item-4')}</li>
+              <li>{t('privacy-policy-and-cookies.register-controller.list.item-5')}</li>
+              <li>{t('privacy-policy-and-cookies.register-controller.list.item-6')}</li>
+            </ol>
+            <p>{t('privacy-policy-and-cookies.register-controller.description-2')}</p>
+          </div>
+        ),
+      },
+      {
+        navTitle: t('privacy-policy-and-cookies.data-handling-use.title'),
+        content: (
+          <div>
+            <Trans i18nKey="privacy-policy-and-cookies.data-handling-use.description" />
+
+            <h3 className="mt-6 mb-3 text-heading-3-mobile sm:text-heading-3">
+              {t('privacy-policy-and-cookies.data-handling-use.legal-basis.title')}
+            </h3>
+            <p>
+              <Trans i18nKey="privacy-policy-and-cookies.data-handling-use.legal-basis.description" />
+            </p>
+          </div>
+        ),
+      },
+      {
+        navTitle: t('privacy-policy-and-cookies.register-information-content.title'),
+        content: <YksiloRegisterContent />,
       },
     ];
   }, [t]);
@@ -87,7 +160,7 @@ const PrivacyPolicy = () => {
 
       <div className="font-arial">
         {sections.filter(filterDevSections).map((section) => (
-          <div key={section.navTitle} className="flex flex-col mb-7">
+          <div key={section.navTitle} className="flex flex-col mb-8">
             <ScrollHeading
               title={section.navTitle}
               heading="h2"
