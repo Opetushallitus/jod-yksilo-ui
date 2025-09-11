@@ -1,35 +1,103 @@
-import { Button } from '@jod/design-system';
-import { useTranslation } from 'react-i18next';
+import { MainLayout } from '@/components';
+import { IconHeading } from '@/components/IconHeading';
+import { InfoBox, InfoboxItem } from '@/components/InfoBox';
+import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
+import { useEnvironment } from '@/hooks/useEnvironment';
+import { getLinkTo } from '@/utils/routeUtils';
+import { MenuSection, PageNavigation } from '@jod/design-system';
+import { JodInfo } from '@jod/design-system/icons';
+import React from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+import { ArticleSection } from '../types';
 
 const PrivacyPolicy = () => {
+  const { isDev } = useEnvironment();
   const { t } = useTranslation();
   const title = t('privacy-policy');
 
+  const filterDevSections = React.useCallback(
+    (section: ArticleSection) => !section.showInDevOnly || (isDev && section.showInDevOnly),
+    [isDev],
+  );
+
+  const sections: ArticleSection[] = React.useMemo(() => {
+    return [
+      {
+        navTitle: t('privacy-policy-and-cookies.intro.title'),
+        content: (
+          <p>
+            <Trans i18nKey="privacy-policy-and-cookies.intro.description" />
+          </p>
+        ),
+      },
+    ];
+  }, [t]);
+
+  const navChildren = React.useMemo(() => {
+    const menuSection: MenuSection = {
+      title: t('on-this-page'),
+      linkItems: sections.filter(filterDevSections).map((section) => ({
+        label: section.navTitle,
+        LinkComponent: getLinkTo(`#${section.navTitle}`),
+      })),
+    };
+    return (
+      <>
+        <PageNavigation menuSection={menuSection} activeIndicator="dot" className={'mb-4'} />
+      </>
+    );
+  }, [t, sections, filterDevSections]);
+
+  const infoBoxItems: InfoboxItem[] = React.useMemo(() => {
+    return [
+      {
+        label: t('privacy-policy-and-cookies.info.register.title'),
+        content: t('privacy-policy-and-cookies.info.register.content'),
+      },
+      {
+        label: t('privacy-policy-and-cookies.info.register-controller.title'),
+        content: t('privacy-policy-and-cookies.info.register-controller.content'),
+      },
+      {
+        label: t('privacy-policy-and-cookies.info.contact.title'),
+        content: t('privacy-policy-and-cookies.info.contact.content'),
+      },
+      {
+        label: t('privacy-policy-and-cookies.info.email.title'),
+        content: t('privacy-policy-and-cookies.info.email.content'),
+      },
+      {
+        label: t('privacy-policy-and-cookies.info.phone.title'),
+        content: t('privacy-policy-and-cookies.info.phone.content'),
+      },
+      {
+        label: t('privacy-policy-and-cookies.info.fax.title'),
+        content: t('privacy-policy-and-cookies.info.fax.content'),
+      },
+    ];
+  }, [t]);
+
   return (
-    <>
+    <MainLayout navChildren={navChildren}>
       <title>{title}</title>
-      <h1 data-testid="privacy-policy-title" className="mb-5 text-heading-2 sm:text-heading-1">
-        {title}
-      </h1>
-      <p className="mb-8 text-body-md font-arial text-todo">
-        Tempor nec feugiat nisl pretium fusce id velit. Fringilla ut morbi tincidunt augue interdum velit. Porta lorem
-        mollis aliquam ut porttitor leo a diam. Imperdiet massa tincidunt nunc pulvinar. Adipiscing enim eu turpis
-        egestas pretium aenean pharetra magna ac. Pellentesque id nibh tortor id. Dui accumsan sit amet nulla facilisi
-        morbi tempus iaculis. Blandit libero volutpat sed cras ornare. Euismod quis viverra nibh cras pulvinar mattis
-        nunc sed blandit. Nulla facilisi morbi tempus iaculis urna id volutpat lacus laoreet. Viverra maecenas accumsan
-        lacus vel facilisis volutpat est. Pulvinar sapien et ligula ullamcorper malesuada proin. Quisque id diam vel
-        quam elementum pulvinar etiam. Et pharetra pharetra massa massa. Vel orci porta non pulvinar. Adipiscing elit
-        pellentesque habitant morbi tristique senectus et. Penatibus et magnis dis parturient montes nascetur ridiculus
-        mus. Duis ultricies lacus sed turpis tincidunt id. At elementum eu facilisis sed odio.
-      </p>
-      <div className="flex flex-wrap gap-4">
-        <Button
-          data-testid="privacy-policy-more-information"
-          variant="white"
-          label={`TODO: ${t('more-information')}`}
-        />
+
+      <IconHeading icon={<JodInfo />} title={title} dataTestId="privacy-policy-title" />
+
+      <InfoBox items={infoBoxItems} className="mb-8" />
+
+      <div className="font-arial">
+        {sections.filter(filterDevSections).map((section) => (
+          <div key={section.navTitle} className="flex flex-col mb-7">
+            <ScrollHeading
+              title={section.navTitle}
+              heading="h2"
+              className={`text-heading-2-mobile sm:text-heading-2 font-poppins ${(section.showNavTitle ?? true) ? 'mb-3' : 'text-transparent text-[0px] size-0'}`}
+            />
+            <div className="flex flex-row justify-between">{section.content}</div>
+          </div>
+        ))}
       </div>
-    </>
+    </MainLayout>
   );
 };
 

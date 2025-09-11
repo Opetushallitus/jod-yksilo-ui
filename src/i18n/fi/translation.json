@@ -676,7 +676,39 @@
   "previous": "Edellinen",
   "print": "Tulosta",
   "privacy-policy": "Tietosuojaseloste",
-  "privacy-policy-and-cookies": "Tietosuojaseloste ja evästeet",
+  "privacy-policy-and-cookies": {
+    "title": "Tietosuojaseloste ja evästeet",
+    "info": {
+      "register": {
+        "title": "Rekisterin nimi:",
+        "content": "Valtakunnallinen osaamistietovaranto"
+      },
+      "register-controller": {
+        "title": "Rekisterinpitäjä:",
+        "content": "Opetushallitus ja Työllisyys-, kehittämis- ja hallintokeskus"
+      },
+      "contact": {
+        "title": "Yhteyshenkilö:",
+        "content": "Riku Hanhinen"
+      },
+      "email": {
+        "title": "Sähköposti:",
+        "content": "opetushallitus@oph.fi"
+      },
+      "phone": {
+        "title": "Puhelinvaihde:",
+        "content": "029 533 1000"
+      },
+      "fax": {
+        "title": "Fax:",
+        "content": "029 533 1035"
+      }
+    },
+    "intro": {
+      "title": "Johdanto",
+      "description": "Tässä tietosuojaselosteessa kuvataan, miten henkilötietoja käsitellään Osaamispolku-palvelussa. Selosteessa kerrotaan myös, mitä oikeuksia rekisteröidyillä henkilöillä on ja miten oikeuksia voi käyttää. Rekisteröityjä ovat osaamisprofiilin tehneet henkilöt sekä ohjaajan työpöydälle kirjautuneet henkilöt. <br/><br/>Tietosuojaselostetta päivitetään säännöllisesti. Ajankohtainen versio löytyy aina tältä sivulta"
+    }
+  },
   "profile": {
     "competences": {
       "add": "Lisää osaamisia",

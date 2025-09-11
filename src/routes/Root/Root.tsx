@@ -113,7 +113,7 @@ const Root = () => {
     },
     {
       to: `${infoSlug}/${t('slugs.privacy-policy')}`,
-      label: t('privacy-policy-and-cookies'),
+      label: t('privacy-policy-and-cookies.title'),
     },
     {
       to: `${infoSlug}/${t('slugs.data-sources')}`,

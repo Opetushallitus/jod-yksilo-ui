@@ -1,11 +1,13 @@
 import { MainLayout } from '@/components';
+import { IconHeading } from '@/components/IconHeading';
+import { InfoBox, InfoboxItem } from '@/components/InfoBox';
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Accordion, MenuSection, PageNavigation } from '@jod/design-system';
-import { JodInfo } from '@jod/design-system/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
+import { ArticleSection } from '../types';
 
 const AiIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
@@ -23,13 +25,6 @@ const AiIcon = () => (
   </svg>
 );
 
-export interface ArticleSection {
-  navTitle: string;
-  content: React.ReactNode;
-  showInDevOnly?: boolean;
-  showNavTitle?: boolean;
-}
-
 const AboutAi = () => {
   const {
     t,
@@ -37,6 +32,19 @@ const AboutAi = () => {
   } = useTranslation();
   const { isDev } = useEnvironment();
   const title = t('about-ai-page.title');
+
+  const infoBoxItems: InfoboxItem[] = React.useMemo(() => {
+    return [
+      {
+        label: t('about-ai-page.ai-methods.data-location'),
+        content: t('about-ai-page.ai-methods.data-location-eu'),
+      },
+      {
+        label: t('about-ai-page.ai-methods.data-preservation-time'),
+        content: t('about-ai-page.ai-methods.data-preservation-time-until-delete'),
+      },
+    ];
+  }, [t]);
 
   const sections: ArticleSection[] = React.useMemo(() => {
     return [
@@ -144,21 +152,8 @@ const AboutAi = () => {
               <li>{t('about-ai-page.ai-methods.list.item-5')}</li>
             </ul>
             <p className="">{t('about-ai-page.ai-methods.description-2')}</p>
-            <div className="rounded flex flex-row bg-bg-gray-2 p-4 gap-4 text-heading-4-mobile sm:text-heading-4 text-primary-gray mt-8 font-poppins">
-              <JodInfo className="text-secondary-1-dark-2" />
-              <div className="flex-1 flex flex-col">
-                <div className="flex gap-2">
-                  <span>{t('about-ai-page.ai-methods.data-location')}</span>
-                  <span className="text-secondary-1-dark-2">{t('about-ai-page.ai-methods.data-location-eu')}</span>
-                </div>
-                <div className="flex gap-2">
-                  <span>{t('about-ai-page.ai-methods.data-preservation-time')}</span>
-                  <span className="text-secondary-1-dark-2">
-                    {t('about-ai-page.ai-methods.data-preservation-time-until-delete')}
-                  </span>
-                </div>
-              </div>
-            </div>
+
+            <InfoBox items={infoBoxItems} />
           </div>
         ),
       },
@@ -217,7 +212,7 @@ const AboutAi = () => {
         ),
       },
     ];
-  }, [language, t]);
+  }, [t, language, infoBoxItems]);
 
   const filterDevSections = React.useCallback(
     (section: ArticleSection) => !section.showInDevOnly || (isDev && section.showInDevOnly),
@@ -243,17 +238,8 @@ const AboutAi = () => {
     <MainLayout navChildren={navChildren}>
       <title>{title}</title>
 
-      <div className="mb-6 sm:mb-8 flex gap-x-4 items-center">
-        <span className="flex items-center justify-center size-9 aspect-square rounded-full bg-secondary-1-dark-2">
-          <AiIcon />
-        </span>
-        <h1
-          data-testid="about-ai-title"
-          className="text-hero-mobile sm:text-hero text-secondary-1-dark-2 hyphens-auto text-pretty break-all"
-        >
-          {title}
-        </h1>
-      </div>
+      <IconHeading icon={<AiIcon />} title={title} dataTestId="about-ai-title" />
+
       <div className="font-arial">
         {sections.filter(filterDevSections).map((section) => (
           <div key={section.navTitle} className="flex flex-col mb-7">
