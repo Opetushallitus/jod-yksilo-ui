@@ -110,56 +110,39 @@ const JobOpportunity = () => {
       showNavTitle: false,
       showAiInfoInTitle: false,
       content: (
-        <div style={{ backgroundColor: 'white', padding: '1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="bg-white p-6">
+          <div className="flex items-center">
             <h3 className="text-heading-3">{t('job-opportunity.salary-data.title')}</h3>
           </div>
+
           {tyomahdollisuus?.palkkatiedot ? (
             <>
               <p className="text-secondary-gray">
                 {format(new Date(tyomahdollisuus?.palkkatiedot?.tiedotHaettu), 'dd.MM.yyyy')}
               </p>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-around',
-                  textAlign: 'center',
-                  gap: '3rem',
-                  marginBottom: '2rem',
-                  marginTop: '2rem',
-                }}
-              >
+
+              <div className="flex justify-around text-center gap-12 mb-8 mt-8">
                 <div>
-                  <h2 style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
+                  <h2 className="font-bold text-[2.5rem]">
                     {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka || '--'} €
                   </h2>
-                  <p style={{ marginBottom: '0.25rem' }} className="text-secondary-gray">
-                    {t('job-opportunity.salary-data.lowest-decile')}
-                  </p>
+                  <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.lowest-decile')}</p>
                 </div>
 
                 <div>
-                  <h2 style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
-                    {tyomahdollisuus?.palkkatiedot?.mediaaniPalkka || '--'} €
-                  </h2>
-                  <p style={{ marginBottom: '0.25rem' }} className="text-secondary-gray">
-                    {t('job-opportunity.salary-data.median')}
-                  </p>
+                  <h2 className="font-bold text-[2.5rem]">{tyomahdollisuus?.palkkatiedot?.mediaaniPalkka || '--'} €</h2>
+                  <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.median')}</p>
                 </div>
 
                 <div>
-                  <h2 style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
+                  <h2 className="font-bold text-[2.5rem]">
                     {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka || '--'} €
                   </h2>
-                  <p style={{ marginBottom: '0.25rem' }} className="text-secondary-gray">
-                    {t('job-opportunity.salary-data.highest-decile')}
-                  </p>
+                  <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.highest-decile')}</p>
                 </div>
               </div>
 
-              <p style={{ margin: 0 }} className="text-secondary-gray">
-                {t('job-opportunity.salary-data.description')}
-              </p>
+              <p className="m-0 text-secondary-gray">{t('job-opportunity.salary-data.description')}</p>
             </>
           ) : (
             <p className="text-secondary-gray">{t('job-opportunity.salary-data.not-available')}</p>
