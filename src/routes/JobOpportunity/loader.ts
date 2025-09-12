@@ -2,7 +2,7 @@ import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
-import type { Codeset, CodesetValues, Jakauma, TyomahdollisuusJakaumat } from '@/routes/types';
+import type { Codeset, Jakauma, JobCodesetValues, TyomahdollisuusJakaumat } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { sortByProperty } from '@/utils';
 import { getCodesetValue } from '@/utils/codes/codes';
@@ -32,7 +32,7 @@ const loader = (async ({ request, params, context }) => {
   const mapArvoToCodeValue = (codeset: Codeset) => (arvo: components['schemas']['ArvoDto']) =>
     getCodesetValue(codeset, arvo.arvo).then((value) => ({ code: arvo.arvo, value }));
 
-  const codesetValues: CodesetValues = {
+  const codesetValues: JobCodesetValues = {
     kunta: jakaumat.kunta ? await Promise.all(jakaumat.kunta.arvot.map(mapArvoToCodeValue('kunta'))) : [],
     maa: jakaumat.maa ? await Promise.all(jakaumat.maa.arvot.map(mapArvoToCodeValue('maa'))) : [],
     maakunta: jakaumat.maakunta ? await Promise.all(jakaumat.maakunta.arvot.map(mapArvoToCodeValue('maakunta'))) : [],

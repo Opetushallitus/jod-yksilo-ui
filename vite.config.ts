@@ -32,6 +32,11 @@ export default defineConfig({
   server: {
     port: 8080,
     proxy: {
+      '/opintopolku': {
+        target: 'https://virkailija.opintopolku.fi',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/opintopolku/, ''),
+      },
       '/yksilo/api': {
         target,
         xfwd: true,
