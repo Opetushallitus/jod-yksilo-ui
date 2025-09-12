@@ -4,56 +4,98 @@ import { InfoBox, InfoboxItem } from '@/components/InfoBox';
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { getLinkTo } from '@/utils/routeUtils';
-import { MenuSection, PageNavigation } from '@jod/design-system';
+import { Accordion, MenuSection, PageNavigation } from '@jod/design-system';
 import { JodInfo } from '@jod/design-system/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { ArticleSection } from '../types';
 
+interface YksiloLeafItem {
+  key: string;
+  title: string;
+}
+
+interface YksiloGroupItem extends YksiloLeafItem {
+  items: YksiloLeafItem[];
+}
+
+type YksiloItem = YksiloGroupItem;
+
+const YksiloRegisterContent = () => {
+  const { t } = useTranslation();
+
+  const raw = t('privacy-policy-and-cookies.register-information-content.yksilo.content', { returnObjects: true });
+  const content: YksiloItem[] = Array.isArray(raw) ? (raw as YksiloItem[]) : [];
+
+  return (
+    <ul className="list-disc">
+      {content.map((item) => (
+        <li key={item.key} style={{}}>
+          <strong>{item.title}</strong>
+          {item.items?.length > 0 && (
+            <ul className="ml-5 list-[circle]">
+              {item.items.map((sub) => (
+                <li key={sub.key}>{sub.title}</li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const OhjaajaRegisterContent = () => {
+  const { t } = useTranslation();
+
+  const raw = t('privacy-policy-and-cookies.register-information-content.ohjaaja.content', { returnObjects: true });
+  const content: YksiloItem[] = Array.isArray(raw) ? (raw as YksiloItem[]) : [];
+
+  return (
+    <ul className="list-disc">
+      {content.map((item) => (
+        <li key={item.key} style={{}}>
+          <strong>{item.title}</strong>
+          {item.items?.length > 0 && (
+            <ul className="ml-5 list-[circle]">
+              {item.items.map((sub) => (
+                <li key={sub.key}>{sub.title}</li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const DataSubjectRight = ({ title, content }: { title: string; content: React.ReactNode }) => {
+  const {
+    i18n: { language },
+  } = useTranslation();
+  return (
+    <Accordion
+      lang={language}
+      titleText={title}
+      title={<span className="font-poppins text-heading-4-mobile sm:text-heading-4">{title}</span>}
+    >
+      <p>{content}</p>
+    </Accordion>
+  );
+};
+
 const PrivacyPolicy = () => {
   const { isDev } = useEnvironment();
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const title = t('privacy-policy');
 
   const filterDevSections = React.useCallback(
     (section: ArticleSection) => !section.showInDevOnly || (isDev && section.showInDevOnly),
     [isDev],
   );
-
-  interface YksiloLeafItem {
-    key: string;
-    title: string;
-  }
-
-  interface YksiloGroupItem extends YksiloLeafItem {
-    items: YksiloLeafItem[];
-  }
-
-  type YksiloItem = YksiloGroupItem;
-
-  const YksiloRegisterContent = () => {
-    const { t } = useTranslation();
-
-    const raw = t('privacy-policy-and-cookies.register-information-content.yksilo.content', { returnObjects: true });
-    const content: YksiloItem[] = Array.isArray(raw) ? (raw as YksiloItem[]) : [];
-
-    return (
-      <ul className="list-disc">
-        {content.map((item) => (
-          <li key={item.key} style={{}}>
-            <strong>{item.title}</strong>
-            {item.items?.length > 0 && (
-              <ul className="ml-5 list-[circle]">
-                {item.items.map((sub) => (
-                  <li key={sub.key}>{sub.title}</li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
-    );
-  };
 
   const sections: ArticleSection[] = React.useMemo(() => {
     return [
@@ -101,7 +143,173 @@ const PrivacyPolicy = () => {
       },
       {
         navTitle: t('privacy-policy-and-cookies.register-information-content.title'),
-        content: <YksiloRegisterContent />,
+        content: (
+          <div>
+            <p>
+              <Trans i18nKey="privacy-policy-and-cookies.register-information-content.description" />
+            </p>
+            <div className="mt-6">
+              <Accordion
+                lang={language}
+                titleText={t('privacy-policy-and-cookies.register-information-content.yksilo.title')}
+                title={
+                  <span className="font-poppins text-heading-4-mobile sm:text-heading-4">
+                    {t('privacy-policy-and-cookies.register-information-content.yksilo.title')}
+                  </span>
+                }
+              >
+                <YksiloRegisterContent />
+              </Accordion>
+            </div>
+            <div>
+              <Accordion
+                lang={language}
+                titleText={t('privacy-policy-and-cookies.register-information-content.ohjaaja.title')}
+                title={
+                  <span className="font-poppins text-heading-4-mobile sm:text-heading-4">
+                    {t('privacy-policy-and-cookies.register-information-content.ohjaaja.title')}
+                  </span>
+                }
+              >
+                <OhjaajaRegisterContent />
+              </Accordion>
+            </div>
+          </div>
+        ),
+      },
+      {
+        navTitle: t('privacy-policy-and-cookies.recipients-of-personal-data.title'),
+        content: (
+          <p>
+            <Trans i18nKey="privacy-policy-and-cookies.recipients-of-personal-data.description" />
+          </p>
+        ),
+      },
+      {
+        navTitle: t('privacy-policy-and-cookies.info-about-3rd-country.title'),
+        content: <p>{t('privacy-policy-and-cookies.info-about-3rd-country.description')}</p>,
+      },
+      {
+        navTitle: t('privacy-policy-and-cookies.storing-time-of-personal-data.title'),
+        content: (
+          <div>
+            <p>
+              <Trans i18nKey="privacy-policy-and-cookies.storing-time-of-personal-data.description" />
+            </p>
+            <div>
+              <h3 className="font-poppins mt-6 mb-3 text-heading-3-mobile sm:text-heading-3">
+                {t('privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.title')}
+              </h3>
+              <div>
+                <DataSubjectRight
+                  title={t(
+                    'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.access-personal-data.title',
+                  )}
+                  content={
+                    <Trans
+                      i18nKey={
+                        'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.access-personal-data.description'
+                      }
+                    />
+                  }
+                />
+
+                <DataSubjectRight
+                  title={t(
+                    'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.rectification.title',
+                  )}
+                  content={
+                    <Trans
+                      i18nKey={
+                        'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.rectification.description'
+                      }
+                    />
+                  }
+                />
+                <DataSubjectRight
+                  title={t('privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.delete.title')}
+                  content={
+                    <Trans
+                      i18nKey={
+                        'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.delete.description'
+                      }
+                    />
+                  }
+                />
+                <DataSubjectRight
+                  title={t(
+                    'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.restrict-processing.title',
+                  )}
+                  content={
+                    <Trans
+                      i18nKey={
+                        'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.restrict-processing.description'
+                      }
+                    />
+                  }
+                />
+                <DataSubjectRight
+                  title={t('privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.object.title')}
+                  content={
+                    <Trans
+                      i18nKey={
+                        'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.object.description'
+                      }
+                    />
+                  }
+                />
+                <DataSubjectRight
+                  title={t(
+                    'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.transfer.title',
+                  )}
+                  content={
+                    <Trans
+                      i18nKey={
+                        'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.transfer.description'
+                      }
+                    />
+                  }
+                />
+                <DataSubjectRight
+                  title={t(
+                    'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.withdraw-consent.title',
+                  )}
+                  content={
+                    <Trans
+                      i18nKey={
+                        'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.withdraw-consent.description'
+                      }
+                    />
+                  }
+                />
+                <DataSubjectRight
+                  title={t(
+                    'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.request-of-data.title',
+                  )}
+                  content={
+                    <Trans
+                      i18nKey={
+                        'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.request-of-data.description'
+                      }
+                    />
+                  }
+                />
+                <DataSubjectRight
+                  title={t(
+                    'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.complaint.title',
+                  )}
+                  content={
+                    <Trans
+                      i18nKey={
+                        'privacy-policy-and-cookies.storing-time-of-personal-data.data-subject-rights.complaint.description'
+                      }
+                    />
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        ),
       },
     ];
   }, [t]);

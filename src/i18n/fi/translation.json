@@ -802,7 +802,71 @@
         ]
       },
       "ohjaaja": {
-        "title": "Henkilötietoryhmä 2: Ohjaajat"
+        "title": "Henkilötietoryhmä 2: Ohjaajat",
+        "content": [
+          { "key": "workplace-type", "title": "Työskentelypaikan tyyppi", "items": [] },
+          { "key": "interests", "title": "Kiinnostuksen kohteet", "items": [] },
+          {
+            "key": "permissions",
+            "title": "Lupatiedot",
+            "items": [
+              { "key": "welcome-flow-completed", "title": "Tervetuloapolun läpikäynti" },
+              { "key": "data-disclosure-controller", "title": "Lupa omien tietojen luovutukseen rekisterinpitäjälle" }
+            ]
+          },
+          { "key": "favorites", "title": "Suosikit", "items": [] }
+        ]
+      }
+    },
+    "recipients-of-personal-data": {
+      "title": "Henkilötietojen vastaanottajat tai vastaanottajaryhmät",
+      "description": "Henkilö voi katsoa, käyttää ja hallinnoida osaamistietovarantoon tallentamiaan omia tietojaan vapaasti. Henkilö voi myös itse päättää kenelle tietoja luovuttaa. <br/><br/>Poiketen siitä mitä viranomaisten toiminnan julkisuudesta annetussa laissa ja muualla laissa säädetään, Opetushallitus voi luovuttaa tietoja vain, jos henkilö tai hänen laillinen edustajansa on antanut suostumuksensa siihen. <br/><br/>Suostumuksen voi antaa osaamistietovarannossa olevien tietojen luovuttamiseen viranomaiselle tai muulle taholle henkilön omia tarkoituksia varten, myös salassapitosäännösten estämättä. <br/><br/>Lisäksi suostumuksen voi antaa tietojen luovuttamiseen opetuksen, koulutuksen ja osaamisen arviointia, kehittämistä, muuta seurantaa, ohjausta ja suunnittelua varten. Tällöin salassapitosäännösten estämättä saadaan luovuttaa vain välttämättömät tiedot. <br/><br/>Tässä pykälässä tarkoitetun suostumuksen voi antaa ja sen voi milloin tahansa perua palvelun kautta. Suostumuksen tulee olla annettu vapaaehtoisesti ja nimenomaisesti sekä tietoisena siitä, mihin tarkoituksiin tietoja voidaan käyttää ja luovuttaa. Suostumus ja ilmoitus sen perumisesta on säilytettävä yhtä pitkään kuin henkilöön yhdistettävissä olevat tiedot. <br/><br/>Mitä 1 momentissa säädetään viranomaisten toiminnan julkisuudesta annetusta laista ja muusta laista poikkeamisesta, ei kuitenkaan koske tietojen luovuttamista yleisen edun mukaisia arkistointitarkoituksia, tieteellisiä ja historiallisia tutkimustarkoituksia eikä tilastollisia tarkoituksia varten."
+    },
+    "info-about-3rd-country": {
+      "title": "Tiedot tietojen siirrosta kolmansiin maihin ja tiedot käytettävistä suojatoimista",
+      "description": "Tietoja säilytetään Amazon Web Services- palveluntarjoajan konesaleissa EU-alueella. Tietoja ei siirretä EU:n tai Euroopan talousalueen ulkopuolelle."
+    },
+    "storing-time-of-personal-data": {
+      "title": "Henkilötietojen säilyttämisaika",
+      "description": "Osaamistietovarannon tiedot säilytetään, kunnes henkilö itse poistaa tietonsa palvelusta. <br/><br/>Opetushallitus sekä Työllisyys-, kehittämis- ja hallintokeskus voivat kuitenkin määrittää tiedoille muun säilytysajan julkisen hallinnon tiedonhallinnasta annetun lain (906/2019) 21 §:n 1 momentissa tarkoitetuilla perusteilla.",
+      "data-subject-rights": {
+        "title": "Rekisteröidyn oikeudet",
+        "access-personal-data": {
+          "title": "Oikeus saada pääsy henkilötietoihin",
+          "description": "Rekisteröidyllä voi itse päästä henkilötietoihinsa Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle."
+        },
+        "rectification": {
+          "title": "Oikeus tietojen oikaisemiseen",
+          "description": "Rekisteröity voi itse korjata virheelliset tiedot Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle, siltä osin kun niitä tallentaa sinne."
+        },
+        "delete": {
+          "title": "Oikeus tietojen poistamiseen",
+          "description": "Rekisteröity voi itse poistaa tietonsa Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle."
+        },
+        "restrict-processing": {
+          "title": "Oikeus käsittelyn rajoittamiseen",
+          "description": "Rekisteröity voi hallita tietojen käsittelyn rajoittamista itse Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle. <br/><br/>Henkilön antamia tai tallentamia tietoja taikka hänen valitsemiaan rajauksia voidaan käsitellä henkilön tai hänen laillisen edustajansa erillisestä pyynnöstä yleisen tietosuoja-asetuksen 22 artiklan 1 kohdassa tarkoitettuun pelkästään automaattiseen käsittelyyn koulutus- ja uravaihtoehtojen esittämiseksi henkilölle tässä laissa tarkoitetussa palvelussa. Käsittelystä on selkeästi ilmoitettava rekisteröidylle ennen pyynnön tekemistä. <br/><br/>Edellä 1 momentissa tarkoitettua tukea osaamisen kehittämiseen sekä ura- ja opinto-ohjaukseen on henkilöllä oikeus saada palvelusta myös anonyymisti tai tallentamatta tietojaan osaamistietovarantoon"
+        },
+        "object": {
+          "title": "Vastustamisoikeus",
+          "description": "Kun kyseessä olevan henkilötiedon käsittely perustuu tietosuoja-asetuksen 6 artiklan 1 c kohtaan (lakisääteinen velvoite), rekisteröidyllä ei ole oikeutta vastustaa tietojensa käsittelyä."
+        },
+        "transfer": {
+          "title": "Oikeus siirtää tiedot järjestelmästä toiseen",
+          "description": "Rekisteröity voi itse siirtää tietojaan Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin. <br/><br/>Henkilön pyynnöstä hänen tietojaan on luovutettava salassapitosäännösten estämättä osaamistietovarantoon valtakunnallisista opinto- ja tutkintorekistereistä annetussa laissa (884/2017) tarkoitetuista rekistereistä ja tietovarannoista. Lisäksi yksilön pyynnöstä hänen tietojaan on luovutettava salassapitosäännösten estämättä osaamisprofiilin ja työvoimapalveluiden järjestämisestä annetun lain (380/2023) 14 luvussa tarkoitetun palvelualustalla olevan työnhakuprofiilin välillä."
+        },
+        "withdraw-consent": {
+          "title": "Tieto oikeudesta peruuttaa suostumus",
+          "description": "Osaamistietovarannon suostumuksen voi antaa ja sen voi milloin tahansa perua palvelun kautta. <br/><br/>Suostumuksesta tulee käydä ilmi, että se on annettu vapaaehtoisesti ja nimenomaisesti sekä tietoisena siitä, mihin tarkoituksiin osaamistietoja voidaan käyttää ja luovuttaa. Suostumuksesta on myös käytävä ilmi, ettei sitä ole annettu työvoimahallinnon asiakaspalvelutilanteessa eikä viranomaismenettelyssä. Alaikäiseltä lapselta tarvitaan tietojen käyttöön ja luovuttamiseen myös tämän huoltajan tai muun laillisen edustajan suostumus. <br/><br/>Suostumus ja ilmoitus sen perumisesta on säilytettävä yhtä pitkään kuin henkilöön yhdistettävissä olevat tiedot."
+        },
+        "request-of-data": {
+          "title": "Rekisterinpitäjän tehtävät rekisteröidyn pyynnöstä",
+          "description": "Rekisteröidyllä on oikeus pyytää rekisterinpitäjää toimeenpanemaan yllä olevat oikeudet siltä osin, kun ei itse pysty niitä täyttämään Osaamispolku-palvelua käyttämällä. <br/><br/>Pyyntö tulee osoittaa kirjallisesti Opetushallitukselle osoitteeseen Opetushallitus, Hakaniemenranta 6, PL 380, 00531 Helsinki. Pyyntöön tulee rekisteröidyn liittää tietojen etsimiseen tarvittavat tiedot (Nimi ja henkilötunnus). Lue ja täytä tarkastuspyyntölomake (https://assets.ctfassets.net/4h0h2z8iv5uv/2odzXnRlO1YPgjQjcIOAHu/033736e6a4288f7cf15983a2175f780e/Rekisteritietojen_tarkastuslomake_suomi.pdf)."
+        },
+        "complaint": {
+          "title": "Oikeus tehdä valitus valvontaviranomaiselle",
+          "description": "Rekisteröidyllä on oikeus tehdä kantelu valvontaviranomaiselle, erityisesti siinä jäsenvaltiossa, jossa hänen vakinainen asuinpaikkansa tai työpaikkansa on, tai jossa väitetty tietosuoja-asetuksen rikkominen on tapahtunut."
+        }
       }
     }
   },
