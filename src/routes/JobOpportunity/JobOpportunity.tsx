@@ -116,7 +116,9 @@ const JobOpportunity = () => {
 
           {tyomahdollisuus?.palkkatiedot ? (
             <>
-              <p className="text-secondary-gray">{formatDate(new Date(tyomahdollisuus?.palkkatiedot?.tiedotHaettu))}</p>
+              <p className="text-secondary-gray">
+                {formatDate(new Date(tyomahdollisuus?.palkkatiedot?.tiedotHaettu), 'medium')}
+              </p>
 
               <div className="flex justify-around text-center gap-12 mb-8 mt-8">
                 <div>
