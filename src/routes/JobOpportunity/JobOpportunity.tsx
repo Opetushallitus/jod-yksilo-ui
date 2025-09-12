@@ -6,11 +6,10 @@ import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import RateAiContent from '@/components/RateAiContent/RateAiContent';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText, hashString, sortByProperty } from '@/utils';
+import { formatDate, getLocalizedText, hashString, sortByProperty } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
-import { format } from 'date-fns';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
@@ -117,9 +116,7 @@ const JobOpportunity = () => {
 
           {tyomahdollisuus?.palkkatiedot ? (
             <>
-              <p className="text-secondary-gray">
-                {format(new Date(tyomahdollisuus?.palkkatiedot?.tiedotHaettu), 'dd.MM.yyyy')}
-              </p>
+              <p className="text-secondary-gray">{formatDate(new Date(tyomahdollisuus?.palkkatiedot?.tiedotHaettu))}</p>
 
               <div className="flex justify-around text-center gap-12 mb-8 mt-8">
                 <div>
