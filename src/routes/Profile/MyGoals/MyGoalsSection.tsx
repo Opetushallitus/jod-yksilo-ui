@@ -1,6 +1,7 @@
 import { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
 import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import loader from '@/routes/Profile/MyGoals/loader';
 import { getTypeSlug } from '@/routes/Profile/utils';
 import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
@@ -28,6 +29,8 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
   const { mahdollisuusDetails, upsertPaamaara } = usePaamaaratStore(
     useShallow((state) => ({ mahdollisuusDetails: state.mahdollisuusDetails, upsertPaamaara: state.upsertPaamaara })),
   );
+  const { isPrd } = useEnvironment();
+
   const loaderData = useLoaderData<Awaited<ReturnType<typeof loader>>>();
 
   const getMahdollisuusDetails = React.useCallback(
@@ -90,7 +93,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                 hideFavorite
               />
               <TavoiteInput paamaara={pm} />
-              {pm.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' && (
+              {!isPrd && pm.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' && (
                 <>
                   <div className="text-form-label font-arial">{t('profile.my-goals.my-plan-towards-goal')}</div>
                   <div className="flex flex-col gap-3">
