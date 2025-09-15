@@ -106,14 +106,17 @@ const CategorizedCompetenceTagList = () => {
         {hasMappedCompetences ? (
           <>
             <div className="font-arial text-body-sm text-secondary-gray">{t('tool.remove-competence-help')}</div>
-            <CompetenceCategory osaamiset={mappedCompetences} onChange={removeOsaaminen} />
-            <CompetenceCategory osaamiset={mappedInterests} onChange={removeKiinnostus} lahdeTyyppi="KIINNOSTUS" />
+            {mappedCompetences.length > 0 && (
+              <CompetenceCategory osaamiset={mappedCompetences} onChange={removeOsaaminen} />
+            )}
+            {mappedInterests.length > 0 && (
+              <CompetenceCategory osaamiset={mappedInterests} onChange={removeKiinnostus} lahdeTyyppi="KIINNOSTUS" />
+            )}
             <Button
               variant="plain"
-              className="-mt-4"
               onClick={() => {
                 showDialog({
-                  title: t('tool.own-data.delete-mapped.title'),
+                  title: t('tool.my-own-data.delete-mapped.title'),
                   description: t('tool.my-own-data.delete-mapped.description'),
                   onConfirm: () => {
                     setOsaamiset(osaamiset.filter((o) => o.tyyppi !== 'KARTOITETTU'));
@@ -132,20 +135,21 @@ const CategorizedCompetenceTagList = () => {
       </div>
       <div className="text-heading-4">{t('tool.info-overview.data-from-profile')}</div>
       {hasProfileCompetences ? (
-        <>
-          <div className="font-arial text-body-sm text-secondary-gray mb-4">{t('tool.remove-competence-help')}</div>
-          {profileTypes.map((type) => (
-            <div key={type}>
-              <CompetenceCategory
-                key={type}
-                osaamiset={combinedData.filter(filterByType(type))}
-                onChange={removeOsaaminen}
-              />
-            </div>
-          ))}
+        <div className="flex flex-col gap-4">
+          <div className="font-arial text-body-sm text-secondary-gray">{t('tool.remove-competence-help')}</div>
+          {profileTypes
+            .filter((type) => combinedData.some((o) => o.tyyppi === type))
+            .map((type) => (
+              <div key={type}>
+                <CompetenceCategory
+                  key={type}
+                  osaamiset={combinedData.filter(filterByType(type))}
+                  onChange={removeOsaaminen}
+                />
+              </div>
+            ))}
           <Button
             variant="plain"
-            className="mt-4"
             onClick={() => {
               showDialog({
                 title: t('tool.my-own-data.delete-imported.title'),
@@ -162,7 +166,7 @@ const CategorizedCompetenceTagList = () => {
             }}
             label={t('delete')}
           />
-        </>
+        </div>
       ) : (
         <div className="mt-4">
           <EmptyState text={t('tool.info-overview.no-competences-from-profile')} />

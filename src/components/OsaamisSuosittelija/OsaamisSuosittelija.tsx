@@ -142,11 +142,11 @@ export const OsaamisSuosittelija = ({
           rows={2}
           maxLength={LIMITS.TEXTAREA}
           label={textAreaLabel()}
-          className={tc(['bg-[#F7F7F9]!', className])}
+          className={tc(['bg-[#F7F7F9]! placeholder:text-body-sm', className])}
         />
       </div>
       <div className="mb-6 flex flex-col">
-        <div className="sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold ">
+        <div className="sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold">
           {mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}
         </div>
 
