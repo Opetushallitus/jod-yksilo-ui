@@ -9,6 +9,7 @@ interface OpportunityCardActionMenuProps {
   menuId: string;
   mahdollisuusTyyppi: MahdollisuusTyyppi;
   mahdollisuusId: string;
+  opportunityUrl: string;
 }
 
 /**
@@ -18,12 +19,14 @@ const ToolOpportunityCardActionMenu = ({
   mahdollisuusTyyppi,
   mahdollisuusId,
   menuId,
+  opportunityUrl,
 }: OpportunityCardActionMenuProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
   const { isDev } = useEnvironment();
+
   const compareTo =
     mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
       ? {
@@ -57,7 +60,7 @@ const ToolOpportunityCardActionMenu = ({
         <li>
           <button
             data-testid="opportunity-action-share"
-            onClick={() => copyToClipboard(window.location.href)}
+            onClick={() => copyToClipboard(window.location.origin + '/yksilo' + opportunityUrl)}
             className="cursor-pointer w-full"
           >
             <PopupListItem>{t('share')}</PopupListItem>

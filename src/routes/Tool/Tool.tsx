@@ -25,7 +25,6 @@ const ExploreOpportunities = () => {
   const { t, i18n } = useTranslation();
   const {
     ammattiryhmaNimet,
-    weightChanged,
     mahdollisuusEhdotukset,
     mixedMahdollisuudet,
     suosikit,
@@ -36,7 +35,6 @@ const ExploreOpportunities = () => {
   } = useToolStore(
     useShallow((state) => ({
       ammattiryhmaNimet: state.ammattiryhmaNimet,
-      weightChanged: state.weightChanged,
       mahdollisuusEhdotukset: state.mahdollisuusEhdotukset,
       mixedMahdollisuudet: state.mixedMahdollisuudet,
       suosikit: state.suosikit,
@@ -99,7 +97,7 @@ const ExploreOpportunities = () => {
                 label={updateButtonLabel}
                 variant="accent"
                 onClick={onUpdateResults}
-                disabled={isLoading || !weightChanged}
+                disabled={isLoading}
                 icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
                 iconSide={isLoading ? 'right' : undefined}
                 data-testid="update-opportunities"
@@ -120,16 +118,16 @@ const ExploreOpportunities = () => {
           const { id, mahdollisuusTyyppi } = mahdollisuus;
           const ehdotus = mahdollisuusEhdotukset?.[id];
           const isFavorite = suosikit?.find((s) => s.kohdeId === id) !== undefined;
+          const path =
+            mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
+              ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`
+              : `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}`;
           return ehdotus ? (
             <OpportunityCard
               key={id}
               as="li"
               from="tool"
-              to={
-                mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
-                  ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`
-                  : `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}`
-              }
+              to={path}
               isFavorite={isFavorite}
               isLoggedIn={isLoggedIn}
               toggleFavorite={() => void toggleSuosikki(id, ehdotus.tyyppi)}
@@ -148,6 +146,7 @@ const ExploreOpportunities = () => {
                   mahdollisuusId={id}
                   mahdollisuusTyyppi={mahdollisuusTyyppi}
                   menuId={id}
+                  opportunityUrl={path}
                 />
               }
               menuId={id}
