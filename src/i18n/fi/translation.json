@@ -524,7 +524,7 @@
       "none-proposed": "Ei ehdotettuja kiinnostuksia",
       "none-selected": "Ei valittuja kiinnostuksia",
       "remove": "Poista kiinnostuksen kohde x-merkistä.",
-      "textarea-placeholder": "Kirjoita tekstikenttään mikä sinua kiinnostaa"
+      "textarea-placeholder": "Kerro omin sanoin mahdollisimman kuvailevasti mikä sinua kiinnostaa"
     },
     "my-KIINNOSTUS": "Kiinnostukseni",
     "my-KOULUTUS": "Koulutukseni",
@@ -791,8 +791,8 @@
   "proposed-competences": "Ehdotetut osaamiset",
   "proposed-interests": "Ehdotetut kiinnostukset",
   "rate-ai-content": {
-    "body": "Tällä sivulla on tekoälyn avulla tunnistettuja mahdollisuuksia. Kerro miten onnistuimme?",
-    "body-for-opportunities": "Tällä sivulla on tekoälyn avulla tunnistettuja mahdollisuuksia. Kerro miten onnistuimme?",
+    "body": "Tällä sivulla sinulle ehdotetaan osaamisesi ja kiinnostusten kohteittesi perusteella sinulle sopivia mahdollisuuksia. Kerro miten onnistuimme?",
+    "body-for-opportunities": "Tällä sivulla sinulle ehdotetaan osaamisesi ja kiinnostusten kohteittesi perusteella sinulle sopivia mahdollisuuksia. Kerro miten onnistuimme?",
     "header": "Arvioi tekoälyn tuottamaa sisältöä",
     "header-for-opportunities": "Arvioi tekoälyn tunnistamia mahdollisuuksia",
     "modal-body": "Huomasimme, että annoit peukun alas tekoälyn tuottamalle sisällölle. Voisitko kertoa tarkemmin, mikä ei toiminut? Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
@@ -918,7 +918,7 @@
           "import-button": "Tuo tietoja profiilista",
           "login-description": "Kirjaudu sisään Osaamispolkuun, jotta voit tuoda osaamisesi osaamisprofiilistasi."
         },
-        "textarea-placeholder": "Kirjoita taitosi tekstikenttään."
+        "textarea-placeholder": "Kerro omin sanoin mahdollisimman kuvailevasti mitä sinä jo osaat"
       },
       "delete-imported": {
         "description": "Haluatko varmasti tyhjentää valitut profiilista tuodut osaamiset ja kiinnostukset?",
@@ -996,7 +996,7 @@
       "toggle-title-closed": "Näytä säätimet",
       "toggle-title-open": "Piilota säätimet"
     },
-    "title": "Etsi mahdollisuuksia",
+    "title": "Löydä mahdollisuuksia",
     "tools": {
       "career-skills-self-assessment-tool": "Urataitojen itsearviointityökalu",
       "description": "Tutustu apuvälineisiin, jotka auttavat tunnistamaan tavoitteesi, jotta voit tehdä parempia valintoja.",

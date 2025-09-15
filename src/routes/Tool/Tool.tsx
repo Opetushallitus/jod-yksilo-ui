@@ -73,14 +73,14 @@ const ExploreOpportunities = () => {
 
   return (
     <>
-      <div className="lg:mb-3 not-lg:sticky not-lg:top-[108px] not-lg:z-10">
-        <div className="flex not-lg:bg-bg-gray-2 not-lg:w-full justify-end lg:justify-between not-lg:my-3 not-lg:px-4 h-7">
+      <div className="not-lg:sticky not-lg:top-[108px] not-lg:z-10">
+        <div className="flex items-center justify-end h-9 lg:pb-4 not-lg:bg-bg-gray-2 not-lg:w-full lg:justify-between not-lg:my-3 not-lg:px-4">
           {lg && (
-            <h2 id="opportunities-title" tabIndex={-1} className="text-heading-3-mobile sm:text-heading-3">
+            <h2 id="opportunities-title" tabIndex={-1} className="text-heading-2-mobile sm:text-heading-2">
               {t('tool.your-opportunities.title')}
             </h2>
           )}
-          <div className="flex gap-6">
+          <div className="flex gap-6 h-fit">
             <Button
               variant="plain"
               size="sm"
@@ -93,7 +93,7 @@ const ExploreOpportunities = () => {
             />
             {lg && (
               <Button
-                size="sm"
+                size="lg"
                 label={updateButtonLabel}
                 variant="accent"
                 onClick={onUpdateResults}
@@ -257,8 +257,8 @@ const Tool = () => {
         // Desktop
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-7">
           <div className="col-span-1 lg:col-span-5">
-            <h2 className="text-heading-3 mb-3 h-7">{t('tool.my-own-data.title')}</h2>
-            <div className="flex flex-col gap-6">
+            <h2 className="sm:text-heading-2 text-heading-2-mobile h-9">{t('tool.my-own-data.title')}</h2>
+            <div className="flex flex-col gap-4">
               <YourInfo />
             </div>
           </div>
