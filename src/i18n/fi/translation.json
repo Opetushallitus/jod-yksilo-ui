@@ -354,6 +354,14 @@
       "route": "Osaamiset",
       "title": "Osaamiset"
     },
+    "salary-data": {
+      "description": "Palkkatiedot on haettu ammattiryhmälle tulorekisteristä. Mediaani tarkoittaa järjestetyn ryhmän keskimmäistä havaintoa. Puolet ammattiryhmästä siis tienaa mediaania enemmän ja puolet vähemmän kuin mediaani. Ylin desiili on parhaiten tienaava 10% ja alin desiili on vähiten tienaava 10%.",
+      "highest-decile": "Ylin desiili",
+      "lowest-decile": "Alin desiili",
+      "median": "Mediaanipalkka",
+      "not-available": "Palkkatietoja ei ole saatavilla ammattiryhmälle.",
+      "title": "Palkkatiedot"
+    },
     "employment-trends": {
       "description": "Graafissa näkyy ammatin työllisyyskehitys vuodesta 2015-2023. Tiedot 2024-26 ovat ennakointitietoja.",
       "title": "Työllisyyskehitys"
