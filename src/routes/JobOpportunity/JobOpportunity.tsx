@@ -120,21 +120,23 @@ const JobOpportunity = () => {
                 {formatDate(new Date(tyomahdollisuus?.palkkatiedot?.tiedotHaettu), 'medium')}
               </p>
 
-              <div className="flex justify-around text-center gap-12 mb-8 mt-8">
+              <div className="flex justify-around text-center gap-11 my-8">
                 <div>
-                  <h2 className="font-bold text-[2.5rem]">
+                  <h2 className="font-bold text-heading-1">
                     {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka || '--'} €
                   </h2>
                   <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.lowest-decile')}</p>
                 </div>
 
                 <div>
-                  <h2 className="font-bold text-[2.5rem]">{tyomahdollisuus?.palkkatiedot?.mediaaniPalkka || '--'} €</h2>
+                  <h2 className="font-bold text-heading-1">
+                    {tyomahdollisuus?.palkkatiedot?.mediaaniPalkka || '--'} €
+                  </h2>
                   <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.median')}</p>
                 </div>
 
                 <div>
-                  <h2 className="font-bold text-[2.5rem]">
+                  <h2 className="font-bold text-heading-1">
                     {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka || '--'} €
                   </h2>
                   <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.highest-decile')}</p>
