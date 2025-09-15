@@ -354,6 +354,14 @@
       "route": "Osaamiset",
       "title": "Osaamiset"
     },
+    "salary-data": {
+      "description": "Palkkatiedot on haettu ammattiryhmälle tulorekisteristä. Mediaani tarkoittaa järjestetyn ryhmän keskimmäistä havaintoa. Puolet ammattiryhmästä siis tienaa mediaania enemmän ja puolet vähemmän kuin mediaani. Ylin desiili on parhaiten tienaava 10% ja alin desiili on vähiten tienaava 10%.",
+      "highest-decile": "Ylin desiili",
+      "lowest-decile": "Alin desiili",
+      "median": "Mediaanipalkka",
+      "not-available": "Palkkatietoja ei ole saatavilla ammattiryhmälle.",
+      "title": "Palkkatiedot"
+    },
     "employment-trends": {
       "description": "Graafissa näkyy ammatin työllisyyskehitys vuodesta 2015-2023. Tiedot 2024-26 ovat ennakointitietoja.",
       "title": "Työllisyyskehitys"
@@ -524,7 +532,7 @@
       "none-proposed": "Ei ehdotettuja kiinnostuksia",
       "none-selected": "Ei valittuja kiinnostuksia",
       "remove": "Poista kiinnostuksen kohde x-merkistä.",
-      "textarea-placeholder": "Kirjoita tekstikenttään mikä sinua kiinnostaa"
+      "textarea-placeholder": "Kerro omin sanoin mahdollisimman kuvailevasti mikä sinua kiinnostaa"
     },
     "my-KIINNOSTUS": "Kiinnostukseni",
     "my-KOULUTUS": "Koulutukseni",
@@ -791,8 +799,8 @@
   "proposed-competences": "Ehdotetut osaamiset",
   "proposed-interests": "Ehdotetut kiinnostukset",
   "rate-ai-content": {
-    "body": "Tällä sivulla on tekoälyn avulla tunnistettuja mahdollisuuksia. Kerro miten onnistuimme?",
-    "body-for-opportunities": "Tällä sivulla on tekoälyn avulla tunnistettuja mahdollisuuksia. Kerro miten onnistuimme?",
+    "body": "Tällä sivulla sinulle ehdotetaan osaamisesi ja kiinnostusten kohteittesi perusteella sinulle sopivia mahdollisuuksia. Kerro miten onnistuimme?",
+    "body-for-opportunities": "Tällä sivulla sinulle ehdotetaan osaamisesi ja kiinnostusten kohteittesi perusteella sinulle sopivia mahdollisuuksia. Kerro miten onnistuimme?",
     "header": "Arvioi tekoälyn tuottamaa sisältöä",
     "header-for-opportunities": "Arvioi tekoälyn tunnistamia mahdollisuuksia",
     "modal-body": "Huomasimme, että annoit peukun alas tekoälyn tuottamalle sisällölle. Voisitko kertoa tarkemmin, mikä ei toiminut? Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
@@ -918,7 +926,7 @@
           "import-button": "Tuo tietoja profiilista",
           "login-description": "Kirjaudu sisään Osaamispolkuun, jotta voit tuoda osaamisesi osaamisprofiilistasi."
         },
-        "textarea-placeholder": "Kirjoita taitosi tekstikenttään."
+        "textarea-placeholder": "Kerro omin sanoin mahdollisimman kuvailevasti mitä sinä jo osaat"
       },
       "delete-imported": {
         "description": "Haluatko varmasti tyhjentää valitut profiilista tuodut osaamiset ja kiinnostukset?",
@@ -996,7 +1004,7 @@
       "toggle-title-closed": "Näytä säätimet",
       "toggle-title-open": "Piilota säätimet"
     },
-    "title": "Etsi mahdollisuuksia",
+    "title": "Löydä mahdollisuuksia",
     "tools": {
       "career-skills-self-assessment-tool": "Urataitojen itsearviointityökalu",
       "description": "Tutustu apuvälineisiin, jotka auttavat tunnistamaan tavoitteesi, jotta voit tehdä parempia valintoja.",

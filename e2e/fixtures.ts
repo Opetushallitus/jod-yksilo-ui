@@ -9,7 +9,6 @@ export const userProfile = {
   sukunimi: 'User',
   tervetuloapolku: true,
   lupaLuovuttaaTiedotUlkopuoliselle: false,
-  lupaArkistoida: false,
   lupaKayttaaTekoalynKoulutukseen: false,
 };
 

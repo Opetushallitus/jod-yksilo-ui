@@ -1,25 +1,12 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
-import {
-  AiInfoButton,
-  Button,
-  Combobox,
-  InputField,
-  Modal,
-  Toggle,
-  useMediaQueries,
-  WizardProgress,
-} from '@jod/design-system';
-import { JodOpenInNew } from '@jod/design-system/icons';
-import React from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import { Link, useRevalidator, useRouteLoaderData } from 'react-router';
-import { ProfileNavigationList } from '../components';
-
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { getCodesetValue } from '@/utils/codes/codes';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Combobox, InputField, Modal, Toggle, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodAi, JodOpenInNew } from '@jod/design-system/icons';
+import React from 'react';
 import {
   Controller,
   Form,
@@ -29,7 +16,10 @@ import {
   useFormContext,
   useFormState,
 } from 'react-hook-form';
+import { Trans, useTranslation } from 'react-i18next';
+import { Link, useRevalidator, useRouteLoaderData } from 'react-router';
 import z from 'zod';
+import { ProfileNavigationList } from '../components';
 
 const LANGUAGE_VALUES = ['fi', 'sv', 'en'] as const;
 type LanguageValue = (typeof LANGUAGE_VALUES)[number];
@@ -284,7 +274,7 @@ const StepAi = () => {
       </p>
 
       <div className="mb-11">
-        <AiInfoButton size={52} />
+        <JodAi size={52} className="text-secondary-gray" />
       </div>
       <p className="text-body-lg-mobile sm:text-body-lg font-semibold mb-5">{t('introduction.step-3.text-3')}</p>
     </>
@@ -443,6 +433,7 @@ const useYksiloData = () => {
   const [apiData, setApiData] = React.useState<components['schemas']['YksiloDto']>();
   const [kotikuntaNimi, setKotikuntaNimi] = React.useState<string>('');
   const [isLoading, setIsLoading] = React.useState(true);
+  const language = i18n.language as LanguageValue;
 
   const sukupuoliText = (sukupuoli: GenderValue | undefined) => {
     switch (sukupuoli) {
@@ -460,14 +451,14 @@ const useYksiloData = () => {
     try {
       const { data } = await client.GET('/api/profiili/yksilo/tiedot-ja-luvat');
 
-      const kunta = data?.kotikunta ? await getCodesetValue('kunta', data.kotikunta, 'fi') : '';
+      const kunta = data?.kotikunta ? await getCodesetValue('kunta', data.kotikunta, language) : '';
       setKotikuntaNimi(kunta);
 
       setApiData(data);
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [language]);
 
   React.useEffect(() => {
     fetchApiData();
@@ -484,7 +475,7 @@ const useYksiloData = () => {
       kotikunta: apiData?.kotikunta,
       kotikuntaNimi: kotikuntaNimi || '',
       allowKotikunta: true,
-      aidinkieli: i18n.language as LanguageValue,
+      aidinkieli: language,
       email: '',
     },
     isLoading,

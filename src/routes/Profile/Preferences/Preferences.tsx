@@ -68,7 +68,6 @@ const Preferences = () => {
   const [lupaLuovuttaaTiedotUlkopuoliselle, setLupaLuovuttaaTiedotUlkopuoliselle] = React.useState(
     data?.lupaLuovuttaaTiedotUlkopuoliselle ?? false,
   );
-  const [lupaArkistoida, setLupaArkistoida] = React.useState(data?.lupaArkistoida ?? false);
   const [lupaKayttaaTekoalynKoulutukseen, setLupaKayttaaTekoalynKoulutukseen] = React.useState(
     data?.lupaKayttaaTekoalynKoulutukseen ?? false,
   );
@@ -79,7 +78,6 @@ const Preferences = () => {
         body: {
           tervetuloapolku: data?.tervetuloapolku ?? false,
           lupaLuovuttaaTiedotUlkopuoliselle,
-          lupaArkistoida,
           lupaKayttaaTekoalynKoulutukseen,
         },
       });
@@ -87,17 +85,14 @@ const Preferences = () => {
 
     if (
       lupaLuovuttaaTiedotUlkopuoliselle !== data?.lupaLuovuttaaTiedotUlkopuoliselle ||
-      lupaArkistoida !== data?.lupaArkistoida ||
       lupaKayttaaTekoalynKoulutukseen !== data?.lupaKayttaaTekoalynKoulutukseen
     ) {
       updateProfile();
     }
   }, [
     lupaLuovuttaaTiedotUlkopuoliselle,
-    lupaArkistoida,
     lupaKayttaaTekoalynKoulutukseen,
     data?.lupaLuovuttaaTiedotUlkopuoliselle,
-    data?.lupaArkistoida,
     data?.lupaKayttaaTekoalynKoulutukseen,
     data?.tervetuloapolku,
   ]);
@@ -124,15 +119,6 @@ const Preferences = () => {
             setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle);
           }}
           data-testid="pref-share-third-parties"
-        />
-        <ToggleWithText
-          title={t('preferences.data-disclosure-unanonymized.permission-to-archive.title')}
-          description={t('preferences.data-disclosure-unanonymized.permission-to-archive.description')}
-          checked={lupaArkistoida}
-          onChange={() => {
-            setLupaArkistoida(!lupaArkistoida);
-          }}
-          data-testid="pref-archive"
         />
         <ToggleWithText
           title={t('preferences.data-disclosure-unanonymized.permission-ai-training.title')}
