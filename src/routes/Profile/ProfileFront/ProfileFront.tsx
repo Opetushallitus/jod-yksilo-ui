@@ -42,7 +42,7 @@ interface YksiloData {
   kotikuntaNimi: string;
   allowKotikunta: boolean;
   aidinkieli: LanguageValue;
-  email: string;
+  email?: string;
 }
 
 const Separator = () => <hr aria-hidden className="ds:my-4 ds:h-1 ds:bg-bg-gray-2 ds:border-0" />;
@@ -300,7 +300,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
         kotikunta: z.string().optional(),
         kotikuntaNimi: z.string(),
         aidinkieli: z.enum(LANGUAGE_VALUES),
-        email: z.email(t('feedback.errors.valid-sposti')).or(z.literal('')),
+        email: z.email(t('feedback.errors.valid-sposti')).optional(),
         allowSukupuoli: z.boolean(),
         sukupuoli: z.enum(GENDER_VALUES).or(z.undefined()),
         sukupuoliNimi: z.string(),
@@ -315,7 +315,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
         kotikunta: yksiloData.kotikunta, // koodi
         kotikuntaNimi: yksiloData.kotikuntaNimi,
         aidinkieli: yksiloData.aidinkieli,
-        email: '',
+        email: yksiloData.email,
         allowSukupuoli: true,
         sukupuoli: yksiloData.sukupuoli,
         sukupuoliNimi: yksiloData.sukupuoliNimi,
@@ -336,6 +336,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
         kotikunta: data.allowKotikunta ? data.kotikunta : undefined,
         aidinkieli: data.aidinkieli,
         sukupuoli: data.allowSukupuoli ? data.sukupuoli : undefined,
+        email: data.email,
       },
     });
 
@@ -476,7 +477,7 @@ const useYksiloData = () => {
       kotikuntaNimi: kotikuntaNimi || '',
       allowKotikunta: true,
       aidinkieli: language,
-      email: '',
+      email: apiData?.email,
     },
     isLoading,
   };
