@@ -857,7 +857,6 @@ export interface components {
       readonly tunnisteTyyppi?: 'FIN' | 'EIDAS';
       tervetuloapolku?: boolean;
       lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
-      lupaArkistoida?: boolean;
       lupaKayttaaTekoalynKoulutukseen?: boolean;
       /** Format: int32 */
       syntymavuosi?: number;
@@ -1255,8 +1254,12 @@ export interface components {
       csrf: components['schemas']['CsrfTokenDto'];
       tervetuloapolku?: boolean;
       lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
-      lupaArkistoida?: boolean;
       lupaKayttaaTekoalynKoulutukseen?: boolean;
+    };
+    KiinnostuksetExportDto: {
+      vapaateksti?: components['schemas']['LokalisoituTeksti'];
+      osaamiset?: string[];
+      ammatit?: string[];
     };
     KoulutusExportDto: {
       /** Format: uuid */
@@ -1277,6 +1280,10 @@ export interface components {
       id?: string;
       nimi?: components['schemas']['LokalisoituTeksti'];
       koulutukset?: components['schemas']['KoulutusExportDto'][];
+    };
+    MuuOsaaminenExportDto: {
+      vapaateksti?: components['schemas']['LokalisoituTeksti'];
+      osaamiset?: string[];
     };
     PaamaaraExportDto: {
       /** Format: uuid */
@@ -1358,7 +1365,6 @@ export interface components {
       id?: string;
       tervetuloapolku?: boolean;
       lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
-      lupaArkistoida?: boolean;
       lupaKayttaaTekoalynKoulutukseen?: boolean;
       /** Format: int32 */
       syntymavuosi?: number;
@@ -1371,10 +1377,8 @@ export interface components {
       tyopaikat?: components['schemas']['TyopaikkaExportDto'][];
       koulutusKokonaisuudet?: components['schemas']['KoulutusKokonaisuusExportDto'][];
       toiminnot?: components['schemas']['ToimintoExportDto'][];
-      osaamisKiinnostukset?: string[];
-      ammattiKiinnostukset?: string[];
-      muuOsaaminenVapaateksti?: components['schemas']['LokalisoituTeksti'];
-      osaamisKiinnostuksetVapaateksti?: components['schemas']['LokalisoituTeksti'];
+      muuOsaaminen?: components['schemas']['MuuOsaaminenExportDto'];
+      kiinnostukset?: components['schemas']['KiinnostuksetExportDto'];
       suosikit?: components['schemas']['YksilonSuosikkiExportDto'][];
       paamaarat?: components['schemas']['PaamaaraExportDto'][];
     };

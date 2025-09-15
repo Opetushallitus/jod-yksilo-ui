@@ -557,10 +557,6 @@
         "description": "Voit sallia tietojesi luovuttamisen ulkopuolisille tahoille, kuten tutkimus- ja kehityshankkeisiin.",
         "title": "Lupa luovuttaa tiedot ulkopuoliselle"
       },
-      "permission-to-archive": {
-        "description": "Voit sallia tietojesi arkistoinnin, mikä mahdollistaa niiden säilyttämisen pidempiaikaisesti.",
-        "title": "Lupa arkistoida"
-      },
       "title": "Tietojen luovutus anonymisoimattomana"
     },
     "delete-profile": {
