@@ -6,7 +6,7 @@ import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import RateAiContent from '@/components/RateAiContent/RateAiContent';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText, hashString, sortByProperty } from '@/utils';
+import { formatDate, getLocalizedText, hashString, sortByProperty } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
@@ -102,6 +102,52 @@ const JobOpportunity = () => {
       titleAppendix: getLocalizedText(ammattiryhma?.nimi),
       content: <div className="font-arial">{getLocalizedText(tyomahdollisuus.kuvaus)}</div>,
       showDivider: false,
+    },
+    {
+      navTitle: t('job-opportunity.salary-data.title'),
+      showDivider: false,
+      showNavTitle: false,
+      showAiInfoInTitle: false,
+      content: (
+        <div className="bg-white p-6">
+          <div className="flex items-center">
+            <h3 className="text-heading-3">{t('job-opportunity.salary-data.title')}</h3>
+          </div>
+
+          {tyomahdollisuus?.palkkatiedot ? (
+            <>
+              <p className="text-secondary-gray">
+                {formatDate(new Date(tyomahdollisuus?.palkkatiedot?.tiedotHaettu), 'medium')}
+              </p>
+
+              <div className="flex justify-around text-center gap-12 mb-8 mt-8">
+                <div>
+                  <h2 className="font-bold text-[2.5rem]">
+                    {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka || '--'} €
+                  </h2>
+                  <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.lowest-decile')}</p>
+                </div>
+
+                <div>
+                  <h2 className="font-bold text-[2.5rem]">{tyomahdollisuus?.palkkatiedot?.mediaaniPalkka || '--'} €</h2>
+                  <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.median')}</p>
+                </div>
+
+                <div>
+                  <h2 className="font-bold text-[2.5rem]">
+                    {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka || '--'} €
+                  </h2>
+                  <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.highest-decile')}</p>
+                </div>
+              </div>
+
+              <p className="m-0 text-secondary-gray">{t('job-opportunity.salary-data.description')}</p>
+            </>
+          ) : (
+            <p className="text-secondary-gray">{t('job-opportunity.salary-data.not-available')}</p>
+          )}
+        </div>
+      ),
     },
     {
       navTitle: t('job-opportunity.job-advertisement-characteristics'),
