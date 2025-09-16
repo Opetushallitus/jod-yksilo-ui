@@ -23,6 +23,7 @@ const JobOpportunity = () => {
   } = useTranslation();
   const { sm } = useMediaQueries();
   const { tyomahdollisuus, osaamiset, isLoggedIn, ammattiryhma } = useLoaderData<LoaderData>();
+  console.log(tyomahdollisuus, ammattiryhma);
   const hasAiContent = tyomahdollisuus.aineisto !== 'AMMATTITIETO';
   const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
   const competencesTableData = React.useMemo(
@@ -100,7 +101,7 @@ const JobOpportunity = () => {
     {
       navTitle: t('job-opportunity.professional-group'),
       titleAppendix: getLocalizedText(ammattiryhma?.nimi),
-      content: <div className="font-arial">{getLocalizedText(tyomahdollisuus.kuvaus)}</div>,
+      content: <div className="font-arial">{getLocalizedText(ammattiryhma?.kuvaus)}</div>,
       showDivider: false,
     },
     {
