@@ -19,11 +19,13 @@ const ToggleWithText = ({
   description,
   checked,
   onChange,
+  disabled = false,
 }: {
   title: string;
   description: string;
   checked: boolean;
   onChange: () => void;
+  disabled: boolean;
 }) => {
   const { t } = useTranslation();
 
@@ -38,6 +40,7 @@ const ToggleWithText = ({
         <Toggle
           serviceVariant="yksilo"
           checked={checked}
+          disabled={disabled}
           onChange={onChange}
           ariaLabel={checked ? t('allow') : t('disallow')}
         />
@@ -71,8 +74,10 @@ const Preferences = () => {
   const [lupaKayttaaTekoalynKoulutukseen, setLupaKayttaaTekoalynKoulutukseen] = React.useState(
     data?.lupaKayttaaTekoalynKoulutukseen ?? false,
   );
+  const [updating, setUpdating] = React.useState<boolean>(false);
 
   React.useEffect(() => {
+    setUpdating(true);
     const updateProfile = async () => {
       await client.PUT('/api/profiili/yksilo', {
         body: {
@@ -82,13 +87,7 @@ const Preferences = () => {
         },
       });
     };
-
-    if (
-      lupaLuovuttaaTiedotUlkopuoliselle !== data?.lupaLuovuttaaTiedotUlkopuoliselle ||
-      lupaKayttaaTekoalynKoulutukseen !== data?.lupaKayttaaTekoalynKoulutukseen
-    ) {
-      updateProfile();
-    }
+    updateProfile().then(() => setUpdating(false));
   }, [
     lupaLuovuttaaTiedotUlkopuoliselle,
     lupaKayttaaTekoalynKoulutukseen,
@@ -118,6 +117,7 @@ const Preferences = () => {
           onChange={() => {
             setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle);
           }}
+          disabled={updating}
           data-testid="pref-share-third-parties"
         />
         <ToggleWithText
@@ -127,6 +127,7 @@ const Preferences = () => {
           onChange={() => {
             setLupaKayttaaTekoalynKoulutukseen(!lupaKayttaaTekoalynKoulutukseen);
           }}
+          disabled={updating}
           data-testid="pref-ai-training"
         />
       </section>
