@@ -2,10 +2,11 @@ import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { Button } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useLocation, useNavigate, useRouteLoaderData } from 'react-router';
+import { Link, useLocation, useNavigate, useRouteLoaderData } from 'react-router';
+
+const ListItem = ({ label }: { label: string }) => <li className="list-disc ml-7 pl-4">{label}</li>;
 
 const LandingPage = () => {
   const {
@@ -42,22 +43,26 @@ const LandingPage = () => {
       </h1>
 
       <div className="mb-8 text-body-md flex flex-col gap-6">
-        <p>{t('profile.landing-page.description')}</p>
+        <p className="whitespace-pre-line">{t('profile.landing-page.description')}</p>
 
         <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.landing-page.profile-includes')}</h2>
 
         <ul>
-          <li className="list-disc ml-7 pl-4">{t('profile.landing-page.list-1-item-1')}</li>
-          <li className="list-disc ml-7 pl-4">{t('profile.landing-page.list-1-item-2')}</li>
-          <li className="list-disc ml-7 pl-4">{t('profile.landing-page.list-1-item-4')}</li>
-          <li className="list-disc ml-7 pl-4">{t('profile.landing-page.list-1-item-5')}</li>
-          <li className="list-disc ml-7 pl-4">{t('profile.landing-page.list-1-item-6')}</li>
+          <ListItem label={t('profile.landing-page.list-1-item-1')} />
+          <ListItem label={t('profile.landing-page.list-1-item-2')} />
+          <ListItem label={t('profile.landing-page.list-1-item-3')} />
+          <ListItem label={t('profile.landing-page.list-1-item-4')} />
+          <ListItem label={t('profile.landing-page.list-1-item-5')} />
+          <ListItem label={t('profile.landing-page.list-1-item-6')} />
+          <ListItem label={t('profile.landing-page.list-1-item-7')} />
+          <ListItem label={t('profile.landing-page.list-1-item-8')} />
         </ul>
         <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.landing-page.paragraph-2')}</h2>
         <ul>
-          <li className="list-disc ml-7 pl-4">{t('profile.landing-page.list-2-item-1')}</li>
-          <li className="list-disc ml-7 pl-4">{t('profile.landing-page.list-2-item-2')}</li>
-          <li className="list-disc ml-7 pl-4">{t('profile.landing-page.list-2-item-3')}</li>
+          <ListItem label={t('profile.landing-page.list-2-item-1')} />
+          <ListItem label={t('profile.landing-page.list-2-item-2')} />
+          <ListItem label={t('profile.landing-page.list-2-item-3')} />
+          <ListItem label={t('profile.landing-page.list-2-item-4')} />
         </ul>
         <p>{t('profile.landing-page.paragraph-3')}</p>
       </div>
@@ -70,24 +75,13 @@ const LandingPage = () => {
           data-testid="landing-login"
         />
       </div>
-      <div className="mt-8">
-        <p>{t('profile.landing-page.paragraph-4')}</p>
-      </div>
-      <div className="mb-8">
-        <NavLink
-          to={`/${language}/${t('slugs.privacy-policy')}`}
-          lang={language}
-          key={'competence'}
-          type="button"
-          className="text-button-md hover:underline text-accent ml-3"
-        >
-          <div className="flex flex-row justify-start">
-            <div className="flex items-center gap-2">
-              {t('privacy-policy')}
-              <JodArrowRight />
-            </div>
-          </div>
-        </NavLink>
+      <div className="my-8">
+        <p>
+          {t('profile.landing-page.paragraph-4')}{' '}
+          <Link to={`/${language}/${t('slugs.privacy-policy')}`} className="text-accent hover:underline">
+            {t('profile.preferences.paragraph-4-link')}
+          </Link>
+        </p>
       </div>
     </MainLayout>
   );

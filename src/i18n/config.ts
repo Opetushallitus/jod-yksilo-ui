@@ -4,6 +4,8 @@ import translationEn from './en/translation.json';
 import translationFi from './fi/translation.json';
 import translationSv from './sv/translation.json';
 
+export const LANGUAGE_VALUES = ['fi', 'sv', 'en'] as const;
+export type LanguageValue = (typeof LANGUAGE_VALUES)[number];
 export type LangCode = 'fi' | 'sv' | 'en';
 export const supportedLanguageCodes: LangCode[] =
   /* eslint-disable sonarjs/todo-tag */

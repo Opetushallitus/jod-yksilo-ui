@@ -1,10 +1,13 @@
 {
   "about-ai": "Tietoa tekoälyn käytöstä",
   "about-ai-page": {
-    "title": "Tietoa tekoälyn käytöstä",
     "ai-methods": {
-      "title": "Mitä tekoälymenetelmiä käytetään?",
+      "data-location": "Tietojen sijainti:",
+      "data-location-eu": "EU",
+      "data-preservation-time": "Tietojen säilytysaika:",
+      "data-preservation-time-until-delete": "Kunnes tiedot poistetaan",
       "description-1": "Palvelussa käytetään seuraavia menetelmiä ja komponentteja:",
+      "description-2": "Työkaluja, malleja ja menetelmiä käytetään Amazon Web Services (AWS) pilvialustalla. AWS ylläpitää yksityistä infrastruktuuriamme ja suurinta osaa keskustelulokeista, jotka sisältävät viestit ja keskustelun aiheen, aikaleimat sekä telemetriatietoja.",
       "list": {
         "item-1": "koneoppimismallit osaamisten tunnistamiseen (mm. TFIDF, FinBERT)",
         "item-2": "klusterointialgoritmit (DBSCAN, KMeans) työpaikkailmoitusten ja koulutustarjonnan ryhmittelyyn työ- ja koulutusmahdollisuuksiksi",
@@ -12,93 +15,90 @@
         "item-4": "suosittelualgoritmit, jotka yhdistävät osaamiset ja kiinnostukset koulutus- ja työmahdollisuuksiin",
         "item-5": "keskusteleva kiinnostusten kartoittaja, joka hyödyntää kielimalleja (Claude 3.5 Sonnet) keskustelun käymiseksi ja RAG-toiminnallisuutta (Retrieval-Augmented Generation) erilaisten ohjaustyötä ja kartoitustyötä tukevien apuvälineiden ja materiaalien hallitsemiseksi ja käyttämiseksi keskutelun tukena."
       },
-      "description-2": "Työkaluja, malleja ja menetelmiä käytetään Amazon Web Services (AWS) pilvialustalla. AWS ylläpitää yksityistä infrastruktuuriamme ja suurinta osaa keskustelulokeista, jotka sisältävät viestit ja keskustelun aiheen, aikaleimat sekä telemetriatietoja.",
-      "data-location": "Tietojen sijainti:",
-      "data-location-eu": "EU",
-      "data-preservation-time": "Tietojen säilytysaika:",
-      "data-preservation-time-until-delete": "Kunnes tiedot poistetaan"
-    },
-    "why-ai": {
-      "title": "Miksi tekoälyä käytetään Osaamispolussa?",
-      "description": "Osaamispolku hyödyntää tekoälyä tukemaan yksilöiden koulutus- ja uravalintoja. Tavoitteena on tarjota käyttäjälle räätälöityjä ehdotuksia koulutus- ja työmahdollisuuksista, jotka perustuvat hänen osaamiseensa, kiinnostuksen kohteisiinsa ja taustatietoihin.",
-      "possibilities": {
-        "title": "Tekoäly mahdollistaa:",
-        "item-1": {
-          "title": "Osaamisten tunnistamisen käyttäjän antamasta tekstistä (esim. CV, koulutustiedot)",
-          "description": "Tekoäly vertaa sanoja ja lauseita tunnettuihin taitoihin ja valitsee ehdotettavaksi ne, jotka sopivat parhaiten. <br/><br/>Tekoälyä käytetään myös tunnistamaan osaamisia työpaikkailmoitusteksteistä ja koulutustarjonnan kuvauksista, jos näissä ei ole valmiiksi kuvattu vaadittavia tai työn/koulutuksen tuottamia taitoja."
-        },
-        "item-2": {
-          "title": "Työ- ja koulutusmahdollisuuksien luomisen  ryhmittelemällä  Työmarkkinatorin työpaikkailmoituksia ja Opintopolun koulutustarjontaa",
-          "work": {
-            "title": "Työmahdollisuudet",
-            "description-1": "Tekoäly lukee Työmarkkinatorin työpaikkailmoituksia ja etsii niistä tietoa, kuten:",
-            "list": {
-              "item-1": "mitä taitoja työssä tarvitaan",
-              "item-2": "millaisia lupia tai ajokortteja vaaditaan",
-              "item-3": "mitä ammatteja ilmoituksessa mainitaan."
-            },
-            "description-2": "Sitten se ryhmittelee ilmoitukset niin, että samanlaiset työpaikat päätyvät samaan ryhmään. Näin syntyy työmahdollisuuksia, eli ryhmiä samantyyppisistä töistä. <br/></br/>Jos ilmoituksessa ei ole tarpeeksi tietoa, se jätetään pois. <br/><br/>Lopuksi tekoäly tallentaa ryhmät ja tekee niistä yhteenvetoja, joita käytetään suosituksissa."
-          },
-          "education": {
-            "title": "Koulutusmahdollisuudet",
-            "description-1": "Tekoäly käsittelee Opintopolun koulutustietoja ja ryhmittelee koulutukset sen mukaan:",
-            "list": {
-              "item-1": "mitä taitoja koulutuksessa opitaan",
-              "item-2": "onko koulutus tutkintoon johtava vai ei",
-              "item-3": "mihin koulutusalaan se kuuluu."
-            },
-            "description-2": "Tekoäly tiivistää pitkät koulutuskuvaukset ja tekee niistä selkeitä yhteenvetoja. Näin käyttäjä saa helpommin käsityksen siitä, mitä koulutus sisältää."
-          }
-        },
-        "item-3": {
-          "title": "Suosittelujen tuottamisen (Yksilölliset suositukset koulutus- ja työmahdollisuuksiksi perustuen syöttämiisi tietoihisi)",
-          "description": "Suosittelukone toimii kuin älykäs hakukone. Käyttäjä kertoo, mitä taitoja hänellä on ja mistä hän on kiinnostunut. Tekoäly vertaa niitä tietoihin työpaikoista ja koulutuksista ja antaa listan sopivista vaihtoehdoista."
-        },
-        "item-4": {
-          "title": "Keskusteluavun kiinnostuksen kartoittamiseksi",
-          "description": "Tekoäly voi myös keskustella käyttäjän kanssa ja auttaa häntä löytämään sopivia vaihtoehtoja kiinnostuksen kohteiksi sekä antaa keskustelu- ja pohdinta-apua kiinnostusten kohteiden mietintään. Se ymmärtää käyttäjän kirjoittamia viestejä ja vastaa niihin hyödyllisesti. Keskusteleva kiinnostusten kartoittaja voi käyttää apuna erilaisia ohjausalan materiaaleja ja tietoja."
-        },
-        "item-5": {
-          "title": "Sisällön tuottamisen ja kääntämisen eri kielille (erityisesti työ- ja koulutusmahdollisuuksissa)",
-          "description": "Tekoäly kirjoittaa tiivistelmiä työ- ja koulutusmahdollisuuksista perustuen niiden taustalla oleviin työpaikkailmoituksiin, ammattitietoon sekä koulutustarjonnassa oleviin koulutusten kuvauksiin, jotta ne ovat helpommin ymmärrettäviä käyttäjälle. Tausta-aineistoista siivotaan pois mahdolliset henkilötiedot. <br/><br/>Tekoäly kääntää kirjoittamansa tekstit ruotsiksi ja englanniksi. "
-        }
-      }
-    },
-    "functionality-tracking": {
-      "title": "Miten tekoälyn toimivuutta seurataan?",
-      "description-1": "Palvelun kehityksessä käytetään:",
-      "list": {
-        "item-1": "evaluointimetriikoita (esim. F1-score, Jaccard-indeksi)",
-        "item-2": "tiedonvaihtoa ja asiantuntija-arvioita eri alojen asiantuntijoiden kanssa",
-        "item-3": "käyttäjäpalautetta ja testidataa",
-        "item-4": "versiohallintaa ja automaattitestejä."
-      },
-      "description-2": "Tavoitteena on varmistaa, että tekoäly toimii luotettavasti, läpinäkyvästi ja yhdenvertaisesti."
-    },
-    "security": {
-      "title": "Miten tietoturva ja tietosuoja on huomioitu?",
-      "description-1": "Tekoälyn käyttö perustuu EU:n tekoälysäädökseen (EU 2024/1689) ja yleiseen tietosuoja-asetukseen (GDPR). <br/><br/>Palvelussa:",
-      "list": {
-        "item-1": "Käyttäjä voi käyttää palvelua anonyymisti.",
-        "item-2": "Henkilötietoja käsitellään vain lakiin perustuen, mutta käyttäjällä on oikeus hallita omia tietojaan vapaasti.",
-        "item-3": "Kirjautuneilla käyttäjillä on oikeus kieltää henkilötietojensa käyttö tekoälyn kehittämiseen.",
-        "item-4": "Tiedot voidaan anonymisoida tutkimus- ja kehityskäyttöön."
-      },
-      "description-2": "Palvelu ei tee automaattisia päätöksiä, eikä sitä ole luokiteltu suuririskiseksi tekoälyjärjestelmäksi. <br/><br/>Lue lisää tietojesi käsittelystä tietosuojaselosteesta"
+      "title": "Mitä tekoälymenetelmiä käytetään?"
     },
     "effect": {
-      "title": "Miten tekoäly vaikuttaa käyttäjään?",
       "description": "Tekoäly toimii avustavana työkaluna, ei päätöksentekijänä. \n\nKäyttäjä saa:",
       "list": {
         "item-1": "ehdotuksia, ei sitovia suosituksia",
         "item-2": "mahdollisuuden muokata ja poistaa omia tietojaan",
         "item-3": "tukea urasuunnitteluun",
         "item-4": "monikielisen käyttöliittymän, jossa sisältöä tuotetaan ja käännetään automaattisesti."
-      }
+      },
+      "title": "Miten tekoäly vaikuttaa käyttäjään?"
+    },
+    "functionality-tracking": {
+      "description-1": "Palvelun kehityksessä käytetään:",
+      "description-2": "Tavoitteena on varmistaa, että tekoäly toimii luotettavasti, läpinäkyvästi ja yhdenvertaisesti.",
+      "list": {
+        "item-1": "evaluointimetriikoita (esim. F1-score, Jaccard-indeksi)",
+        "item-2": "tiedonvaihtoa ja asiantuntija-arvioita eri alojen asiantuntijoiden kanssa",
+        "item-3": "käyttäjäpalautetta ja testidataa",
+        "item-4": "versiohallintaa ja automaattitestejä."
+      },
+      "title": "Miten tekoälyn toimivuutta seurataan?"
     },
     "limitation-of-liability": {
-      "title": "Vastuunrajoitus",
-      "description": "Osaamispolun tekoälytoiminnallisuuksia, kuten keskustelevia kartoittajia, suosittelualgoritmiä sekä sisällön tuotantoa, kehitetään ja valvotaan ihmisten toimesta. Tekoäly toimii kuitenkin osin automaattisesti, eikä jokainen vuorovaikutus, tuotos tai ehdotus ole erikseen ihmisen tarkistama. <br/><br/>Vaikka pyrimme jatkuvasti parantamaan tekoälyn laatua ja luotettavuutta, sen antamat vastaukset voivat joskus olla epätarkkoja, puutteellisia tai sisältää virheellistä tietoa. Tekoäly ei korvaa asiantuntijan arviota, eikä sen tuottama sisältö välttämättä edusta viranomaisten virallista näkemystä. <br/><br/>Tekoälyä käytetään Osaamispolussa ensisijaisesti keskustelukumppanina ja ehdotusten tukena – ei päätöksentekijänä. Käyttäjän vastuulla on arvioida ja tarvittaessa täydentää saamaansa tietoa ennen päätösten tekemistä. <br/><br/>Palvelua kehitetään jatkuvasti, ja tekoälytoiminnallisuudet voivat ajoittain olla poissa käytöstä tai muuttua ilman erillistä ilmoitusta."
+      "description": "Osaamispolun tekoälytoiminnallisuuksia, kuten keskustelevia kartoittajia, suosittelualgoritmiä sekä sisällön tuotantoa, kehitetään ja valvotaan ihmisten toimesta. Tekoäly toimii kuitenkin osin automaattisesti, eikä jokainen vuorovaikutus, tuotos tai ehdotus ole erikseen ihmisen tarkistama. <br/><br/>Vaikka pyrimme jatkuvasti parantamaan tekoälyn laatua ja luotettavuutta, sen antamat vastaukset voivat joskus olla epätarkkoja, puutteellisia tai sisältää virheellistä tietoa. Tekoäly ei korvaa asiantuntijan arviota, eikä sen tuottama sisältö välttämättä edusta viranomaisten virallista näkemystä. <br/><br/>Tekoälyä käytetään Osaamispolussa ensisijaisesti keskustelukumppanina ja ehdotusten tukena – ei päätöksentekijänä. Käyttäjän vastuulla on arvioida ja tarvittaessa täydentää saamaansa tietoa ennen päätösten tekemistä. <br/><br/>Palvelua kehitetään jatkuvasti, ja tekoälytoiminnallisuudet voivat ajoittain olla poissa käytöstä tai muuttua ilman erillistä ilmoitusta.",
+      "title": "Vastuunrajoitus"
+    },
+    "security": {
+      "description-1": "Tekoälyn käyttö perustuu EU:n tekoälysäädökseen (EU 2024/1689) ja yleiseen tietosuoja-asetukseen (GDPR). <br/><br/>Palvelussa:",
+      "description-2": "Palvelu ei tee automaattisia päätöksiä, eikä sitä ole luokiteltu suuririskiseksi tekoälyjärjestelmäksi. <br/><br/>Lue lisää tietojesi käsittelystä tietosuojaselosteesta",
+      "list": {
+        "item-1": "Käyttäjä voi käyttää palvelua anonyymisti.",
+        "item-2": "Henkilötietoja käsitellään vain lakiin perustuen, mutta käyttäjällä on oikeus hallita omia tietojaan vapaasti.",
+        "item-3": "Kirjautuneilla käyttäjillä on oikeus kieltää henkilötietojensa käyttö tekoälyn kehittämiseen.",
+        "item-4": "Tiedot voidaan anonymisoida tutkimus- ja kehityskäyttöön."
+      },
+      "title": "Miten tietoturva ja tietosuoja on huomioitu?"
+    },
+    "title": "Tietoa tekoälyn käytöstä",
+    "why-ai": {
+      "description": "Osaamispolku hyödyntää tekoälyä tukemaan yksilöiden koulutus- ja uravalintoja. Tavoitteena on tarjota käyttäjälle räätälöityjä ehdotuksia koulutus- ja työmahdollisuuksista, jotka perustuvat hänen osaamiseensa, kiinnostuksen kohteisiinsa ja taustatietoihin.",
+      "possibilities": {
+        "item-1": {
+          "description": "Tekoäly vertaa sanoja ja lauseita tunnettuihin taitoihin ja valitsee ehdotettavaksi ne, jotka sopivat parhaiten. <br/><br/>Tekoälyä käytetään myös tunnistamaan osaamisia työpaikkailmoitusteksteistä ja koulutustarjonnan kuvauksista, jos näissä ei ole valmiiksi kuvattu vaadittavia tai työn/koulutuksen tuottamia taitoja.",
+          "title": "Osaamisten tunnistamisen käyttäjän antamasta tekstistä (esim. CV, koulutustiedot)"
+        },
+        "item-2": {
+          "education": {
+            "description-1": "Tekoäly käsittelee Opintopolun koulutustietoja ja ryhmittelee koulutukset sen mukaan:",
+            "description-2": "Tekoäly tiivistää pitkät koulutuskuvaukset ja tekee niistä selkeitä yhteenvetoja. Näin käyttäjä saa helpommin käsityksen siitä, mitä koulutus sisältää.",
+            "list": {
+              "item-1": "mitä taitoja koulutuksessa opitaan",
+              "item-2": "onko koulutus tutkintoon johtava vai ei",
+              "item-3": "mihin koulutusalaan se kuuluu."
+            },
+            "title": "Koulutusmahdollisuudet"
+          },
+          "title": "Työ- ja koulutusmahdollisuuksien luomisen  ryhmittelemällä  Työmarkkinatorin työpaikkailmoituksia ja Opintopolun koulutustarjontaa",
+          "work": {
+            "description-1": "Tekoäly lukee Työmarkkinatorin työpaikkailmoituksia ja etsii niistä tietoa, kuten:",
+            "description-2": "Sitten se ryhmittelee ilmoitukset niin, että samanlaiset työpaikat päätyvät samaan ryhmään. Näin syntyy työmahdollisuuksia, eli ryhmiä samantyyppisistä töistä. <br/></br/>Jos ilmoituksessa ei ole tarpeeksi tietoa, se jätetään pois. <br/><br/>Lopuksi tekoäly tallentaa ryhmät ja tekee niistä yhteenvetoja, joita käytetään suosituksissa.",
+            "list": {
+              "item-1": "mitä taitoja työssä tarvitaan",
+              "item-2": "millaisia lupia tai ajokortteja vaaditaan",
+              "item-3": "mitä ammatteja ilmoituksessa mainitaan."
+            },
+            "title": "Työmahdollisuudet"
+          }
+        },
+        "item-3": {
+          "description": "Suosittelukone toimii kuin älykäs hakukone. Käyttäjä kertoo, mitä taitoja hänellä on ja mistä hän on kiinnostunut. Tekoäly vertaa niitä tietoihin työpaikoista ja koulutuksista ja antaa listan sopivista vaihtoehdoista.",
+          "title": "Suosittelujen tuottamisen (Yksilölliset suositukset koulutus- ja työmahdollisuuksiksi perustuen syöttämiisi tietoihisi)"
+        },
+        "item-4": {
+          "description": "Tekoäly voi myös keskustella käyttäjän kanssa ja auttaa häntä löytämään sopivia vaihtoehtoja kiinnostuksen kohteiksi sekä antaa keskustelu- ja pohdinta-apua kiinnostusten kohteiden mietintään. Se ymmärtää käyttäjän kirjoittamia viestejä ja vastaa niihin hyödyllisesti. Keskusteleva kiinnostusten kartoittaja voi käyttää apuna erilaisia ohjausalan materiaaleja ja tietoja.",
+          "title": "Keskusteluavun kiinnostuksen kartoittamiseksi"
+        },
+        "item-5": {
+          "description": "Tekoäly kirjoittaa tiivistelmiä työ- ja koulutusmahdollisuuksista perustuen niiden taustalla oleviin työpaikkailmoituksiin, ammattitietoon sekä koulutustarjonnassa oleviin koulutusten kuvauksiin, jotta ne ovat helpommin ymmärrettäviä käyttäjälle. Tausta-aineistoista siivotaan pois mahdolliset henkilötiedot. <br/><br/>Tekoäly kääntää kirjoittamansa tekstit ruotsiksi ja englanniksi. ",
+          "title": "Sisällön tuottamisen ja kääntämisen eri kielille (erityisesti työ- ja koulutusmahdollisuuksissa)"
+        },
+        "title": "Tekoäly mahdollistaa:"
+      },
+      "title": "Miksi tekoälyä käytetään Osaamispolussa?"
     }
   },
   "about-us": "Tietoa palvelusta",
@@ -390,7 +390,7 @@
       "item-text": "Osaamispolussa tekoäly:",
       "text-1": "Hyödynnämme tekoälyä tarjoamaan sinulle personoitua ja itsenäistä digitaalista palvelua. Muista, että tekoäly tarjoaa ohjeita ja suosituksia, mutta lopulliset päätökset teet aina itse. Käytä omaa harkintaasi.",
       "text-2": "Kun näet alla olevan kuvakkeen, saat lisätietoa siitä, miten tekoälyä hyödynnetään kyseisessä osiossa. Lisätietoja <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink> -sivulla.",
-      "text-3": "Tervetuloa luomaan Oma Osaamispolkusi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
+      "text-3": "Aloita osaamisprofiilisi luominen ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
       "title": "Tekoäly apunasi"
     }
   },
@@ -455,14 +455,6 @@
       "route": "Osaamiset",
       "title": "Osaamiset"
     },
-    "salary-data": {
-      "description": "Palkkatiedot on haettu ammattiryhmälle tulorekisteristä. Mediaani tarkoittaa järjestetyn ryhmän keskimmäistä havaintoa. Puolet ammattiryhmästä siis tienaa mediaania enemmän ja puolet vähemmän kuin mediaani. Ylin desiili on parhaiten tienaava 10% ja alin desiili on vähiten tienaava 10%.",
-      "highest-decile": "Ylin desiili",
-      "lowest-decile": "Alin desiili",
-      "median": "Mediaanipalkka",
-      "not-available": "Palkkatietoja ei ole saatavilla ammattiryhmälle.",
-      "title": "Palkkatiedot"
-    },
     "employment-trends": {
       "description": "Graafissa näkyy ammatin työllisyyskehitys vuodesta 2015-2023. Tiedot 2024-26 ovat ennakointitietoja.",
       "title": "Työllisyyskehitys"
@@ -491,6 +483,14 @@
     "related-jobs": {
       "description": "Lähiammatit muodostetaan ammattien osaamisvaatimusten mukaan. Alla näet ammatteja jotka osaamisvaatimuksiltaan lähinnä Kestävän kehityksen asiantuntijan ammattia.",
       "title": "Lähiammatit"
+    },
+    "salary-data": {
+      "description": "Palkkatiedot on haettu ammattiryhmälle tulorekisteristä. Mediaani tarkoittaa järjestetyn ryhmän keskimmäistä havaintoa. Puolet ammattiryhmästä siis tienaa mediaania enemmän ja puolet vähemmän kuin mediaani. Ylin desiili on parhaiten tienaava 10% ja alin desiili on vähiten tienaava 10%.",
+      "highest-decile": "Ylin desiili",
+      "lowest-decile": "Alin desiili",
+      "median": "Mediaanipalkka",
+      "not-available": "Palkkatietoja ei ole saatavilla ammattiryhmälle.",
+      "title": "Palkkatiedot"
     },
     "salary-trends": {
       "description": "Graafissa näkyy ammatin palkkakehitys vuodesta 2015-2023. Tiedot 2024-26 ovat palkkakehityksen ennakointitietoja.",
@@ -676,42 +676,113 @@
   },
   "previous": "Edellinen",
   "print": "Tulosta",
+  "privacy-cookies": {
+    "3rd-party": {
+      "description": "Osaamispolussa on käytössä kolmansien osapuolien sovelluksia, kuten YouTube ja PowerBI, jotka latautuvat näiden palveluiden omilta palvelimilta. Youtubea käytetään Osaamispolun ohjaajan kokonaisuuden videoissa. PowerBI:tä käytetään raporttinäkymien tuottamiseen tietopalvelussa. Kolmannen osapuolen evästeitä käytetään anonyymisti sivustolle upotettujen sovellusten toiminnan varmistamiseen ja käyttäjäkokemuksen parantamiseen. <br/><br/>Jos et käytä ulkopuolisten palveluntarjoajien sisältöä, mitään kolmannen osapuolen evästeitä ei asenneta laitteellesi. <br/><br/>Kolmannen osapuolen tarjoamiin palveluihin tai kolmannen osapuolen välittämiin sovelluksiin sovelletaan kyseisen kolmannen osapuolen käyttö- ja muita ehtoja. <br/><br/>Lisätietoja: <br/><CustomLink1>Microsoft (PowerBI)</CustomLink1> <CustomLink2>Google (Youtube)</CustomLink2>",
+      "title": "Osaamispolun kolmannen osapuolen evästeet"
+    },
+    "blocking": {
+      "description": "Useimmissa uusissa selaimissa voi estää evästeiden asettamisen laitteelle kokonaan, mutta tällöin voit joutua mukauttamaan joitakin asetuksia aina, kun käyt jollakin sivustolla/sivulla. Jotkin palvelut ja toiminnot eivät välttämättä toimi kunnolla (esim. sisäänkirjautuminen).",
+      "title": "Evästeiden estäminen"
+    },
+    "possession": {
+      "description": "Evästeitä voi vapaasti hallita ja/tai poistaa. Ohjeita löytyy esimerkiksi osoitteesta aboutcookies.org.",
+      "title": "Evästeiden käytön hallinta"
+    },
+    "site-specific": {
+      "description": "Sivustokohtaisia evästeitä voi hallita selaimen yksityisyys- ja evästeasetuksista.",
+      "title": "Sivustokohtaisten evästeiden hallinta"
+    },
+    "title": "Evästeet",
+    "what": {
+      "description-1": "Evästeet ovat pieniä tekstitiedostoja, joita sivusto tallentaa tietokoneellesi tai mobiililaitteellesi. Se sisältää yksilöllisen, nimettömän tunnisteen, jonka avulla verkkopalvelu tunnistaa sivustolla vierailevat eri selaimet. Evästeillä kerättävillä tiedoilla ei voida tunnistaa yksittäisiä käyttäjiä. Opetushallitus edellyttää, että hyväksyt evästeiden käytön voidaksesi käyttää Osaamispolku-palvelua. <br/><br/>Evästeitä ovat:",
+      "description-2": "Evästeiden tarkoituksena on, että sivusto säilyttää tietyt valintasi tietyn ajan. Näin sinun ei tarvitse tehdä samoja valintoja uudelleen, kun siirryt sivustolla sivulta toiselle saman istunnon aikana. Evästeiden avulla voidaan myös kerätä anonymisoituja tietoja siitä, miten käyttäjät sivustolla toimivat. Näiden tietojen perusteella ei voida tunnistaa yksittäistä käyttäjää.",
+      "list": {
+        "item-1": "Ensimmäisen osapuolen evästeet tulevat suoraan verkkosivustolta, jolla käyt. Vain tämä sivusto voi lukea ne.",
+        "item-2": "Lisäksi verkkosivusto saattaa käyttää ulkopuolisia palveluja, jotka lähettävät omia evästeitään. Näitä kutsutaan kolmannen osapuolen evästeiksi.",
+        "item-3": "Pysyvät evästeet ovat tietokoneellesi tallennettavia evästeitä, joita ei poisteta automaattisesti, kun suljet selaimen. Istuntokohtaiset evästeet sen sijaan poistetaan istunnon päättyessä."
+      },
+      "title": "Mitä evästeet ovat?"
+    },
+    "what-for": {
+      "description-1": "Osaamispolussa on käytössä seuraavia ensimmäisen osapuolen evästeitä. Niiden tarkoitus on mahdollistaa sivuston käytön:",
+      "description-2": "Osaamispolulle analytiikan seurannassa käytetään Matomoa. Evästeiden avulla seurataan käyttäjän käyttökokemusta verkkosivustolla. Käyttäjätiedot ovat anonyymeja – kerätystä tiedosta ei voi tunnistaa käyttäjää henkilökohtaisesti. <br/><br/>Näitä tietoja ei myöskään jaeta minkään ulkopuolisen osapuolen kanssa eikä niitä käytetä muihin tarkoituksiin.",
+      "list": {
+        "item-1": "todentamisevästeet tallennetaan laitteellesi, kun kirjaudut Osaamisprofiiliin tai Ohjaajan työpöytään käyttäen Suomi.fi -tunnistautumista,",
+        "item-2": "tekniset evästeet."
+      },
+      "title": "Mihin evästeitä käytetään Osaamispolussa?"
+    }
+  },
   "privacy-policy": "Tietosuojaseloste",
   "privacy-policy-and-cookies": {
-    "title": "Tietosuojaseloste ja evästeet",
+    "acquiring": {
+      "description": "Henkilön rekisteröityessä palveluun hänestä saadaan henkilötiedot Digi- ja väestötietoviraston ylläpitämästä väestötietojärjestelmästä.",
+      "title": "Mistä henkilötiedot saadaan?"
+    },
+    "automatic-handling": {
+      "description": "Henkilön antamia ja tallentamia tietoja ja hänen valitsemiaan rajauksia saadaan käsitellä yleisen tietosuoja-asetuksen 22 artiklan 1 kohdassa tarkoitetulla tavalla pelkästään automaattisesti koulutus- ja työmahdollisuuksien kartoittamiseksi ja esittämiseksi. Tällainen käsittely edellyttää, että henkilö valitsee palvelussa automaattisen käsittelyn hyödyntämisen tähän tarkoitukseen. Ennen valinnan tekemistä Opetushallituksen on selkeästi ilmoitettava automaattisesta käsittelystä henkilölle palvelussa. Henkilölle esitettävän mahdollisuuden yhteydessä hänelle on palvelussa annettava tietoa siitä, miten siinä on huomioitu hänen tietojaan ja valitsemiaan rajauksia.",
+      "title": "Automaattinen tietojen käsittely ja sen vaikutukset"
+    },
+    "data-handling-use": {
+      "description": "Valtakunnallisen osaamistietovarannon tarkoituksena on mahdollistaa henkilöiden tallentaa ja ylläpitää tietoa omasta osaamisestaan ja työuraan ja koulutukseen liittyvistä kiinnostuksenkohteistaan ja suunnitelmistaan. Osaamistietovaranto on osa digitaalista palvelua, jäljempänä palvelu, jonka tarkoitus on tukea henkilöitä koulutukseen ja työelämään hakeutumisessa, niihin liittyvissä siirtymissä, oman osaamisen ylläpitämisessä sekä omien koulutus- ja uratietojen hyödyntämisessä. <br/><br/>Lisäksi tietovarannon tarkoituksena on tarjota tietopohjaa opetuksen, koulutuksen, ohjauksen ja osaamisen tilannekuvan ylläpitämiseksi ja niiden kehittämisen ja ennakoinnin tueksi.",
+      "legal-basis": {
+        "list": {
+          "item-1": "Laki valtakunnallisesta osaamistietovarannosta xx/20xx",
+          "item-2": "Laki Opetushallituksesta 508/2025",
+          "item-3": "Laki elinvoimakeskuksista sekä Työllisyys-, kehittämis- ja hallintokeskuksesta 531/2025",
+          "item-4": "Laki valtakunnallisista opinto-, koulutus- ja tutkintorekistereistä 884/2017",
+          "item-5": "Laki työvoimapalveluiden järjestämisestä 380/2023"
+        },
+        "title": "Oikeusperuste"
+      },
+      "title": "Henkilötietojen käsittelyn tarkoitus"
+    },
     "info": {
-      "register": {
-        "title": "Rekisterin nimi:",
-        "content": "Valtakunnallinen osaamistietovaranto"
-      },
-      "register-controller": {
-        "title": "Rekisterinpitäjä:",
-        "content": "Opetushallitus ja Työllisyys-, kehittämis- ja hallintokeskus"
-      },
       "contact": {
-        "title": "Yhteyshenkilö:",
-        "content": "Riku Hanhinen"
+        "content": "Riku Hanhinen",
+        "title": "Yhteyshenkilö:"
       },
       "email": {
-        "title": "Sähköposti:",
-        "content": "opetushallitus@oph.fi"
-      },
-      "phone": {
-        "title": "Puhelinvaihde:",
-        "content": "029 533 1000"
+        "content": "opetushallitus@oph.fi",
+        "title": "Sähköposti:"
       },
       "fax": {
-        "title": "Fax:",
-        "content": "029 533 1035"
+        "content": "029 533 1035",
+        "title": "Fax:"
+      },
+      "phone": {
+        "content": "029 533 1000",
+        "title": "Puhelinvaihde:"
+      },
+      "register": {
+        "content": "Valtakunnallinen osaamistietovaranto",
+        "title": "Rekisterin nimi:"
+      },
+      "register-controller": {
+        "content": "Opetushallitus ja Työllisyys-, kehittämis- ja hallintokeskus",
+        "title": "Rekisterinpitäjä:"
       }
     },
+    "info-about-3rd-country": {
+      "description": "Tietoja säilytetään Amazon Web Services- palveluntarjoajan konesaleissa EU-alueella. Tietoja ei siirretä EU:n tai Euroopan talousalueen ulkopuolelle.",
+      "title": "Tiedot tietojen siirrosta kolmansiin maihin ja tiedot käytettävistä suojatoimista"
+    },
     "intro": {
-      "title": "Johdanto",
-      "description": "Tässä tietosuojaselosteessa kuvataan, miten henkilötietoja käsitellään Osaamispolku-palvelussa. Selosteessa kerrotaan myös, mitä oikeuksia rekisteröidyillä henkilöillä on ja miten oikeuksia voi käyttää. Rekisteröityjä ovat osaamisprofiilin tehneet henkilöt sekä ohjaajan työpöydälle kirjautuneet henkilöt. <br/><br/>Tietosuojaselostetta päivitetään säännöllisesti. Ajankohtainen versio löytyy aina tältä sivulta"
+      "description": "Tässä tietosuojaselosteessa kuvataan, miten henkilötietoja käsitellään Osaamispolku-palvelussa. Selosteessa kerrotaan myös, mitä oikeuksia rekisteröidyillä henkilöillä on ja miten oikeuksia voi käyttää. Rekisteröityjä ovat osaamisprofiilin tehneet henkilöt sekä ohjaajan työpöydälle kirjautuneet henkilöt. <br/><br/>Tietosuojaselostetta päivitetään säännöllisesti. Ajankohtainen versio löytyy aina tältä sivulta",
+      "title": "Johdanto"
+    },
+    "obligation-to-provide": {
+      "description": "Valtakunnalliseen osaamistietovarantoon tallennetaan tiedot ja tiedot käsitellään valtakunnallisesta osaamistietovarannosta annetun lain perusteella.",
+      "title": "Henkilötietojen antamisen velvollisuus"
+    },
+    "recipients-of-personal-data": {
+      "description": "Henkilö voi katsoa, käyttää ja hallinnoida osaamistietovarantoon tallentamiaan omia tietojaan vapaasti. Henkilö voi myös itse päättää kenelle tietoja luovuttaa. <br/><br/>Poiketen siitä mitä viranomaisten toiminnan julkisuudesta annetussa laissa ja muualla laissa säädetään, Opetushallitus voi luovuttaa tietoja vain, jos henkilö tai hänen laillinen edustajansa on antanut suostumuksensa siihen. <br/><br/>Suostumuksen voi antaa osaamistietovarannossa olevien tietojen luovuttamiseen viranomaiselle tai muulle taholle henkilön omia tarkoituksia varten, myös salassapitosäännösten estämättä. <br/><br/>Lisäksi suostumuksen voi antaa tietojen luovuttamiseen opetuksen, koulutuksen ja osaamisen arviointia, kehittämistä, muuta seurantaa, ohjausta ja suunnittelua varten. Tällöin salassapitosäännösten estämättä saadaan luovuttaa vain välttämättömät tiedot. <br/><br/>Tässä pykälässä tarkoitetun suostumuksen voi antaa ja sen voi milloin tahansa perua palvelun kautta. Suostumuksen tulee olla annettu vapaaehtoisesti ja nimenomaisesti sekä tietoisena siitä, mihin tarkoituksiin tietoja voidaan käyttää ja luovuttaa. Suostumus ja ilmoitus sen perumisesta on säilytettävä yhtä pitkään kuin henkilöön yhdistettävissä olevat tiedot. <br/><br/>Mitä 1 momentissa säädetään viranomaisten toiminnan julkisuudesta annetusta laista ja muusta laista poikkeamisesta, ei kuitenkaan koske tietojen luovuttamista yleisen edun mukaisia arkistointitarkoituksia, tieteellisiä ja historiallisia tutkimustarkoituksia eikä tilastollisia tarkoituksia varten.",
+      "title": "Henkilötietojen vastaanottajat tai vastaanottajaryhmät"
     },
     "register-controller": {
-      "title": "Rekisterinpitäjä",
       "description-1": "Tietovarannon yhteisrekisterinpitäjiä ovat Opetushallitus sekä Työllisyys-, kehittämis- ja hallintokeskus. <br/><br/>Opetushallitus vastaa luonnollisten henkilöiden suojelusta henkilötietojen käsittelyssä sekä näiden tietojen vapaasta liikkuvuudesta ja direktiivin 95/46/EY kumoamisesta annetun Euroopan parlamentin asetuksen (EU) 2016/679 (yleinen tietosuoja-asetus) III luvussa tarkoitetuista rekisteröityjen oikeuksista ja muista rekisterinpitäjän vastuista, ellei niitä ole tässä pykälässä säädetty kummankin yhteisrekisterinpitäjien yhteiseksi vastuuksi. <br/><br/>Yhteisrekisterinpitäjät määrittelevät yhdessä henkilötietojen käsittelyn tarkoitukset ja keinot 4 artiklan 7 kohdassa ja 26 artiklassa tarkoitetulla tavalla. Lisäksi yhteisrekisterinpitäjät vastaavat yhdessä seuraavista yleisen tietosuoja-asetuksen velvoitteista:",
+      "description-2": "Lisäksi yhteisrekisterinpitäjät vastaavat yhdessä tietosuojalain (1050/2018) 6 §:n 2 momentin 9–11 kohdissa tarkoitetuista erityisistä menettelysäännöistä, tietosuojan vaikutustenarvioinnin laatimisesta ja muista menettelyllisistä ja organisatorisista toimenpiteistä.",
       "list": {
         "item-1": "5 artiklan 2 kohdassa tarkoitettu osoitusvelvollisuus;",
         "item-2": "6 artiklassa tarkoitettu käsittelyn lainmukaisuus;",
@@ -720,213 +791,245 @@
         "item-5": "33–34 artiklassa tarkoitetut tietoturvaloukkauksia koskevat ilmoitusvelvollisuudet; sekä",
         "item-6": "IV luvun 3 jakson mukainen tietosuojan vaikutustenarviointi ja ennakkokuuleminen."
       },
-      "description-2": "Lisäksi yhteisrekisterinpitäjät vastaavat yhdessä tietosuojalain (1050/2018) 6 §:n 2 momentin 9–11 kohdissa tarkoitetuista erityisistä menettelysäännöistä, tietosuojan vaikutustenarvioinnin laatimisesta ja muista menettelyllisistä ja organisatorisista toimenpiteistä."
-    },
-    "data-handling-use": {
-      "title": "Henkilötietojen käsittelyn tarkoitus",
-      "description": "Valtakunnallisen osaamistietovarannon tarkoituksena on mahdollistaa henkilöiden tallentaa ja ylläpitää tietoa omasta osaamisestaan ja työuraan ja koulutukseen liittyvistä kiinnostuksenkohteistaan ja suunnitelmistaan. Osaamistietovaranto on osa digitaalista palvelua, jäljempänä palvelu, jonka tarkoitus on tukea henkilöitä koulutukseen ja työelämään hakeutumisessa, niihin liittyvissä siirtymissä, oman osaamisen ylläpitämisessä sekä omien koulutus- ja uratietojen hyödyntämisessä. <br/><br/>Lisäksi tietovarannon tarkoituksena on tarjota tietopohjaa opetuksen, koulutuksen, ohjauksen ja osaamisen tilannekuvan ylläpitämiseksi ja niiden kehittämisen ja ennakoinnin tueksi.",
-      "legal-basis": {
-        "title": "Oikeusperuste",
-        "list": {
-          "item-1": "Laki valtakunnallisesta osaamistietovarannosta xx/20xx",
-          "item-2": "Laki Opetushallituksesta 508/2025",
-          "item-3": "Laki elinvoimakeskuksista sekä Työllisyys-, kehittämis- ja hallintokeskuksesta 531/2025",
-          "item-4": "Laki valtakunnallisista opinto-, koulutus- ja tutkintorekistereistä 884/2017",
-          "item-5": "Laki työvoimapalveluiden järjestämisestä 380/2023"
-        }
-      }
+      "title": "Rekisterinpitäjä"
     },
     "register-information-content": {
-      "title": "Rekisterin tietosisältö / käsiteltävät henkilötietoryhmät",
       "description": "Henkilö saa tallentaa itsestään osaamistietovarantoon tiedot, jotka henkilö itse sitä varten vapaaehtoisesti päättää. Tietojen tulee liittyä hänen koulutus- ja työhistoriaansa, osaamisiinsa ja koulutusta, työuraa ja osaamista koskeviin suunnitelmiinsa ja tavoitteisiinsa. <br/><br/>Tietovarantoon ei saa antaa salassa pidettäviä tai erityisiin henkilötietoryhmiin kuuluvia tietoja. Henkilö saa kuitenkin halutessaan antaa tietovarantoon tietoa opinnäytetyöstään ja tieteellisestä tutkimuksestaan, hänelle suoritetusta psykologisesta testistä ja soveltuvuuskokeesta, oppilaitokselta saamistaan todistuksista, osallistumisestaan yhdistystoimintaan, vapaa-ajan harrastuksista ja muista vastaavista tiedoista, jos tällaiset tiedot ovat välttämättömiä hänen koulutus- ja työhistoriansa, osaamistensa ja koulutukseen, työuraan ja osaamiseen liittyvien suunnitelmiensa ja tavoitteidensa kannalta. <br/><br/>Opetushallitus saa lisäksi tallentaa tietovarantoon palvelun toiminnallisuuksia koskevat valinnat ja tiedot henkilön maantieteellisestä alueesta, iästä ja kielestä.",
-      "yksilo": {
-        "title": "Henkilötietoryhmä 1: Yksilöt",
-        "content": [
-          { "key": "birth-year", "title": "Syntymävuosi", "items": [] },
-          { "key": "gender", "title": "Sukupuoli", "items": [] },
-          { "key": "mother-tongue", "title": "Äidinkieli", "items": [] },
-          { "key": "home-municipality", "title": "Kotikunta", "items": [] },
-          { "key": "email", "title": "Sähköpostiosoite", "items": [] },
-          { "key": "ui-language", "title": "Palvelun käyttökieli", "items": [] },
-
-          {
-            "key": "permissions",
-            "title": "Lupatiedot",
-            "items": [
-              { "key": "welcome-flow-completed", "title": "Tervetuloapolun läpikäynti" },
-              { "key": "data-disclosure-controller", "title": "Lupa omien tietojen luovutukseen rekisterinpitäjälle" },
-              { "key": "ai-training-permission", "title": "Lupa omien tietojen käytön tekoälyn kouluttamiseen" }
-            ]
-          },
-          {
-            "key": "work-history",
-            "title": "Työhistoria",
-            "items": [
-              { "key": "workplace", "title": "Työpaikka" },
-              { "key": "job-role", "title": "Toimenkuva kullakin työpaikalla" },
-              { "key": "job-role-competences", "title": "Kuhunkin toimenkuvaan liittyvät osaamiset" }
-            ]
-          },
-          {
-            "key": "education-history",
-            "title": "Koulutushistoria",
-            "items": [
-              { "key": "provider", "title": "Koulutuksen järjestäjä" },
-              { "key": "education", "title": "Koulutus kullakin koulutuksen järjestäjällä" },
-              { "key": "education-competences", "title": "Kuhunkin koulutukseen liittyvät osaamiset" }
-            ]
-          },
-          {
-            "key": "free-time-history",
-            "title": "Vapaa-ajan historia",
-            "items": [
-              { "key": "theme", "title": "Vapaa-ajan teema" },
-              { "key": "activity", "title": "Vapaa-ajan toiminto kullakin teemalla" },
-              { "key": "activity-competences", "title": "Kuhunkin toimintoon liittyvät osaamiset" }
-            ]
-          },
-          {
-            "key": "interests",
-            "title": "Kiinnostuksen kohteet",
-            "items": [
-              { "key": "skills", "title": "osaamiset" },
-              { "key": "occupations", "title": "ammatit" },
-              { "key": "free-text", "title": "vapaa-sana kuvaus omista kiinnostuksen kohteista" }
-            ]
-          },
-          {
-            "key": "other-competences",
-            "title": "Muut osaamiset",
-            "items": [
-              { "key": "skills", "title": "osaamiset" },
-              { "key": "free-text", "title": "vapaa-sana kuvaus omasta osaamisesta" }
-            ]
-          },
-
-          { "key": "favorites", "title": "Suosikit", "items": [] },
-          { "key": "goals", "title": "Päämäärät", "items": [] },
-          { "key": "plans", "title": "Koulutus- ja urasuunnitelmapolut", "items": [] }
-        ]
-      },
       "ohjaaja": {
-        "title": "Henkilötietoryhmä 2: Ohjaajat",
         "content": [
-          { "key": "workplace-type", "title": "Työskentelypaikan tyyppi", "items": [] },
-          { "key": "interests", "title": "Kiinnostuksen kohteet", "items": [] },
           {
-            "key": "permissions",
-            "title": "Lupatiedot",
-            "items": [
-              { "key": "welcome-flow-completed", "title": "Tervetuloapolun läpikäynti" },
-              { "key": "data-disclosure-controller", "title": "Lupa omien tietojen luovutukseen rekisterinpitäjälle" }
-            ]
+            "items": [],
+            "key": "workplace-type",
+            "title": "Työskentelypaikan tyyppi"
           },
-          { "key": "favorites", "title": "Suosikit", "items": [] }
-        ]
+          {
+            "items": [],
+            "key": "interests",
+            "title": "Kiinnostuksen kohteet"
+          },
+          {
+            "items": [
+              {
+                "key": "welcome-flow-completed",
+                "title": "Tervetuloapolun läpikäynti"
+              },
+              {
+                "key": "data-disclosure-controller",
+                "title": "Lupa omien tietojen luovutukseen rekisterinpitäjälle"
+              }
+            ],
+            "key": "permissions",
+            "title": "Lupatiedot"
+          },
+          {
+            "items": [],
+            "key": "favorites",
+            "title": "Suosikit"
+          }
+        ],
+        "title": "Henkilötietoryhmä 2: Ohjaajat"
+      },
+      "title": "Rekisterin tietosisältö / käsiteltävät henkilötietoryhmät",
+      "yksilo": {
+        "content": [
+          {
+            "items": [],
+            "key": "birth-year",
+            "title": "Syntymävuosi"
+          },
+          {
+            "items": [],
+            "key": "gender",
+            "title": "Sukupuoli"
+          },
+          {
+            "items": [],
+            "key": "mother-tongue",
+            "title": "Äidinkieli"
+          },
+          {
+            "items": [],
+            "key": "home-municipality",
+            "title": "Kotikunta"
+          },
+          {
+            "items": [],
+            "key": "email",
+            "title": "Sähköpostiosoite"
+          },
+          {
+            "items": [],
+            "key": "ui-language",
+            "title": "Palvelun käyttökieli"
+          },
+          {
+            "items": [
+              {
+                "key": "welcome-flow-completed",
+                "title": "Tervetuloapolun läpikäynti"
+              },
+              {
+                "key": "data-disclosure-controller",
+                "title": "Lupa omien tietojen luovutukseen rekisterinpitäjälle"
+              },
+              {
+                "key": "ai-training-permission",
+                "title": "Lupa omien tietojen käytön tekoälyn kouluttamiseen"
+              }
+            ],
+            "key": "permissions",
+            "title": "Lupatiedot"
+          },
+          {
+            "items": [
+              {
+                "key": "workplace",
+                "title": "Työpaikka"
+              },
+              {
+                "key": "job-role",
+                "title": "Toimenkuva kullakin työpaikalla"
+              },
+              {
+                "key": "job-role-competences",
+                "title": "Kuhunkin toimenkuvaan liittyvät osaamiset"
+              }
+            ],
+            "key": "work-history",
+            "title": "Työhistoria"
+          },
+          {
+            "items": [
+              {
+                "key": "provider",
+                "title": "Koulutuksen järjestäjä"
+              },
+              {
+                "key": "education",
+                "title": "Koulutus kullakin koulutuksen järjestäjällä"
+              },
+              {
+                "key": "education-competences",
+                "title": "Kuhunkin koulutukseen liittyvät osaamiset"
+              }
+            ],
+            "key": "education-history",
+            "title": "Koulutushistoria"
+          },
+          {
+            "items": [
+              {
+                "key": "theme",
+                "title": "Vapaa-ajan teema"
+              },
+              {
+                "key": "activity",
+                "title": "Vapaa-ajan toiminto kullakin teemalla"
+              },
+              {
+                "key": "activity-competences",
+                "title": "Kuhunkin toimintoon liittyvät osaamiset"
+              }
+            ],
+            "key": "free-time-history",
+            "title": "Vapaa-ajan historia"
+          },
+          {
+            "items": [
+              {
+                "key": "skills",
+                "title": "osaamiset"
+              },
+              {
+                "key": "occupations",
+                "title": "ammatit"
+              },
+              {
+                "key": "free-text",
+                "title": "vapaa-sana kuvaus omista kiinnostuksen kohteista"
+              }
+            ],
+            "key": "interests",
+            "title": "Kiinnostuksen kohteet"
+          },
+          {
+            "items": [
+              {
+                "key": "skills",
+                "title": "osaamiset"
+              },
+              {
+                "key": "free-text",
+                "title": "vapaa-sana kuvaus omasta osaamisesta"
+              }
+            ],
+            "key": "other-competences",
+            "title": "Muut osaamiset"
+          },
+          {
+            "items": [],
+            "key": "favorites",
+            "title": "Suosikit"
+          },
+          {
+            "items": [],
+            "key": "goals",
+            "title": "Päämäärät"
+          },
+          {
+            "items": [],
+            "key": "plans",
+            "title": "Koulutus- ja urasuunnitelmapolut"
+          }
+        ],
+        "title": "Henkilötietoryhmä 1: Yksilöt"
       }
-    },
-    "recipients-of-personal-data": {
-      "title": "Henkilötietojen vastaanottajat tai vastaanottajaryhmät",
-      "description": "Henkilö voi katsoa, käyttää ja hallinnoida osaamistietovarantoon tallentamiaan omia tietojaan vapaasti. Henkilö voi myös itse päättää kenelle tietoja luovuttaa. <br/><br/>Poiketen siitä mitä viranomaisten toiminnan julkisuudesta annetussa laissa ja muualla laissa säädetään, Opetushallitus voi luovuttaa tietoja vain, jos henkilö tai hänen laillinen edustajansa on antanut suostumuksensa siihen. <br/><br/>Suostumuksen voi antaa osaamistietovarannossa olevien tietojen luovuttamiseen viranomaiselle tai muulle taholle henkilön omia tarkoituksia varten, myös salassapitosäännösten estämättä. <br/><br/>Lisäksi suostumuksen voi antaa tietojen luovuttamiseen opetuksen, koulutuksen ja osaamisen arviointia, kehittämistä, muuta seurantaa, ohjausta ja suunnittelua varten. Tällöin salassapitosäännösten estämättä saadaan luovuttaa vain välttämättömät tiedot. <br/><br/>Tässä pykälässä tarkoitetun suostumuksen voi antaa ja sen voi milloin tahansa perua palvelun kautta. Suostumuksen tulee olla annettu vapaaehtoisesti ja nimenomaisesti sekä tietoisena siitä, mihin tarkoituksiin tietoja voidaan käyttää ja luovuttaa. Suostumus ja ilmoitus sen perumisesta on säilytettävä yhtä pitkään kuin henkilöön yhdistettävissä olevat tiedot. <br/><br/>Mitä 1 momentissa säädetään viranomaisten toiminnan julkisuudesta annetusta laista ja muusta laista poikkeamisesta, ei kuitenkaan koske tietojen luovuttamista yleisen edun mukaisia arkistointitarkoituksia, tieteellisiä ja historiallisia tutkimustarkoituksia eikä tilastollisia tarkoituksia varten."
-    },
-    "info-about-3rd-country": {
-      "title": "Tiedot tietojen siirrosta kolmansiin maihin ja tiedot käytettävistä suojatoimista",
-      "description": "Tietoja säilytetään Amazon Web Services- palveluntarjoajan konesaleissa EU-alueella. Tietoja ei siirretä EU:n tai Euroopan talousalueen ulkopuolelle."
     },
     "storing-time-of-personal-data": {
-      "title": "Henkilötietojen säilyttämisaika",
-      "description": "Osaamistietovarannon tiedot säilytetään, kunnes henkilö itse poistaa tietonsa palvelusta. <br/><br/>Opetushallitus sekä Työllisyys-, kehittämis- ja hallintokeskus voivat kuitenkin määrittää tiedoille muun säilytysajan julkisen hallinnon tiedonhallinnasta annetun lain (906/2019) 21 §:n 1 momentissa tarkoitetuilla perusteilla.",
       "data-subject-rights": {
-        "title": "Rekisteröidyn oikeudet",
         "access-personal-data": {
-          "title": "Oikeus saada pääsy henkilötietoihin",
-          "description": "Rekisteröidyllä voi itse päästä henkilötietoihinsa Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle."
-        },
-        "rectification": {
-          "title": "Oikeus tietojen oikaisemiseen",
-          "description": "Rekisteröity voi itse korjata virheelliset tiedot Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle, siltä osin kun niitä tallentaa sinne."
-        },
-        "delete": {
-          "title": "Oikeus tietojen poistamiseen",
-          "description": "Rekisteröity voi itse poistaa tietonsa Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle."
-        },
-        "restrict-processing": {
-          "title": "Oikeus käsittelyn rajoittamiseen",
-          "description": "Rekisteröity voi hallita tietojen käsittelyn rajoittamista itse Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle. <br/><br/>Henkilön antamia tai tallentamia tietoja taikka hänen valitsemiaan rajauksia voidaan käsitellä henkilön tai hänen laillisen edustajansa erillisestä pyynnöstä yleisen tietosuoja-asetuksen 22 artiklan 1 kohdassa tarkoitettuun pelkästään automaattiseen käsittelyyn koulutus- ja uravaihtoehtojen esittämiseksi henkilölle tässä laissa tarkoitetussa palvelussa. Käsittelystä on selkeästi ilmoitettava rekisteröidylle ennen pyynnön tekemistä. <br/><br/>Edellä 1 momentissa tarkoitettua tukea osaamisen kehittämiseen sekä ura- ja opinto-ohjaukseen on henkilöllä oikeus saada palvelusta myös anonyymisti tai tallentamatta tietojaan osaamistietovarantoon"
-        },
-        "object": {
-          "title": "Vastustamisoikeus",
-          "description": "Kun kyseessä olevan henkilötiedon käsittely perustuu tietosuoja-asetuksen 6 artiklan 1 c kohtaan (lakisääteinen velvoite), rekisteröidyllä ei ole oikeutta vastustaa tietojensa käsittelyä."
-        },
-        "transfer": {
-          "title": "Oikeus siirtää tiedot järjestelmästä toiseen",
-          "description": "Rekisteröity voi itse siirtää tietojaan Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin. <br/><br/>Henkilön pyynnöstä hänen tietojaan on luovutettava salassapitosäännösten estämättä osaamistietovarantoon valtakunnallisista opinto- ja tutkintorekistereistä annetussa laissa (884/2017) tarkoitetuista rekistereistä ja tietovarannoista. Lisäksi yksilön pyynnöstä hänen tietojaan on luovutettava salassapitosäännösten estämättä osaamisprofiilin ja työvoimapalveluiden järjestämisestä annetun lain (380/2023) 14 luvussa tarkoitetun palvelualustalla olevan työnhakuprofiilin välillä."
-        },
-        "withdraw-consent": {
-          "title": "Tieto oikeudesta peruuttaa suostumus",
-          "description": "Osaamistietovarannon suostumuksen voi antaa ja sen voi milloin tahansa perua palvelun kautta. <br/><br/>Suostumuksesta tulee käydä ilmi, että se on annettu vapaaehtoisesti ja nimenomaisesti sekä tietoisena siitä, mihin tarkoituksiin osaamistietoja voidaan käyttää ja luovuttaa. Suostumuksesta on myös käytävä ilmi, ettei sitä ole annettu työvoimahallinnon asiakaspalvelutilanteessa eikä viranomaismenettelyssä. Alaikäiseltä lapselta tarvitaan tietojen käyttöön ja luovuttamiseen myös tämän huoltajan tai muun laillisen edustajan suostumus. <br/><br/>Suostumus ja ilmoitus sen perumisesta on säilytettävä yhtä pitkään kuin henkilöön yhdistettävissä olevat tiedot."
-        },
-        "request-of-data": {
-          "title": "Rekisterinpitäjän tehtävät rekisteröidyn pyynnöstä",
-          "description": "Rekisteröidyllä on oikeus pyytää rekisterinpitäjää toimeenpanemaan yllä olevat oikeudet siltä osin, kun ei itse pysty niitä täyttämään Osaamispolku-palvelua käyttämällä. <br/><br/>Pyyntö tulee osoittaa kirjallisesti Opetushallitukselle osoitteeseen Opetushallitus, Hakaniemenranta 6, PL 380, 00531 Helsinki. Pyyntöön tulee rekisteröidyn liittää tietojen etsimiseen tarvittavat tiedot (Nimi ja henkilötunnus). Lue ja täytä <CustomLink>tarkastuspyyntölomake</CustomLink>.",
-          "link": "https://assets.ctfassets.net/4h0h2z8iv5uv/2odzXnRlO1YPgjQjcIOAHu/033736e6a4288f7cf15983a2175f780e/Rekisteritietojen_tarkastuslomake_suomi.pdf"
+          "description": "Rekisteröidyllä voi itse päästä henkilötietoihinsa Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle.",
+          "title": "Oikeus saada pääsy henkilötietoihin"
         },
         "complaint": {
-          "title": "Oikeus tehdä valitus valvontaviranomaiselle",
-          "description": "Rekisteröidyllä on oikeus tehdä kantelu valvontaviranomaiselle, erityisesti siinä jäsenvaltiossa, jossa hänen vakinainen asuinpaikkansa tai työpaikkansa on, tai jossa väitetty tietosuoja-asetuksen rikkominen on tapahtunut."
+          "description": "Rekisteröidyllä on oikeus tehdä kantelu valvontaviranomaiselle, erityisesti siinä jäsenvaltiossa, jossa hänen vakinainen asuinpaikkansa tai työpaikkansa on, tai jossa väitetty tietosuoja-asetuksen rikkominen on tapahtunut.",
+          "title": "Oikeus tehdä valitus valvontaviranomaiselle"
+        },
+        "delete": {
+          "description": "Rekisteröity voi itse poistaa tietonsa Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle.",
+          "title": "Oikeus tietojen poistamiseen"
+        },
+        "object": {
+          "description": "Kun kyseessä olevan henkilötiedon käsittely perustuu tietosuoja-asetuksen 6 artiklan 1 c kohtaan (lakisääteinen velvoite), rekisteröidyllä ei ole oikeutta vastustaa tietojensa käsittelyä.",
+          "title": "Vastustamisoikeus"
+        },
+        "rectification": {
+          "description": "Rekisteröity voi itse korjata virheelliset tiedot Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle, siltä osin kun niitä tallentaa sinne.",
+          "title": "Oikeus tietojen oikaisemiseen"
+        },
+        "request-of-data": {
+          "description": "Rekisteröidyllä on oikeus pyytää rekisterinpitäjää toimeenpanemaan yllä olevat oikeudet siltä osin, kun ei itse pysty niitä täyttämään Osaamispolku-palvelua käyttämällä. <br/><br/>Pyyntö tulee osoittaa kirjallisesti Opetushallitukselle osoitteeseen Opetushallitus, Hakaniemenranta 6, PL 380, 00531 Helsinki. Pyyntöön tulee rekisteröidyn liittää tietojen etsimiseen tarvittavat tiedot (Nimi ja henkilötunnus). Lue ja täytä <CustomLink>tarkastuspyyntölomake</CustomLink>.",
+          "link": "https://assets.ctfassets.net/4h0h2z8iv5uv/2odzXnRlO1YPgjQjcIOAHu/033736e6a4288f7cf15983a2175f780e/Rekisteritietojen_tarkastuslomake_suomi.pdf",
+          "title": "Rekisterinpitäjän tehtävät rekisteröidyn pyynnöstä"
+        },
+        "restrict-processing": {
+          "description": "Rekisteröity voi hallita tietojen käsittelyn rajoittamista itse Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin ja/tai ohjaajan työpöydälle. <br/><br/>Henkilön antamia tai tallentamia tietoja taikka hänen valitsemiaan rajauksia voidaan käsitellä henkilön tai hänen laillisen edustajansa erillisestä pyynnöstä yleisen tietosuoja-asetuksen 22 artiklan 1 kohdassa tarkoitettuun pelkästään automaattiseen käsittelyyn koulutus- ja uravaihtoehtojen esittämiseksi henkilölle tässä laissa tarkoitetussa palvelussa. Käsittelystä on selkeästi ilmoitettava rekisteröidylle ennen pyynnön tekemistä. <br/><br/>Edellä 1 momentissa tarkoitettua tukea osaamisen kehittämiseen sekä ura- ja opinto-ohjaukseen on henkilöllä oikeus saada palvelusta myös anonyymisti tai tallentamatta tietojaan osaamistietovarantoon",
+          "title": "Oikeus käsittelyn rajoittamiseen"
+        },
+        "title": "Rekisteröidyn oikeudet",
+        "transfer": {
+          "description": "Rekisteröity voi itse siirtää tietojaan Osaamispolku-palvelun kautta tunnistautumalla omaan osaamisprofiiliin. <br/><br/>Henkilön pyynnöstä hänen tietojaan on luovutettava salassapitosäännösten estämättä osaamistietovarantoon valtakunnallisista opinto- ja tutkintorekistereistä annetussa laissa (884/2017) tarkoitetuista rekistereistä ja tietovarannoista. Lisäksi yksilön pyynnöstä hänen tietojaan on luovutettava salassapitosäännösten estämättä osaamisprofiilin ja työvoimapalveluiden järjestämisestä annetun lain (380/2023) 14 luvussa tarkoitetun palvelualustalla olevan työnhakuprofiilin välillä.",
+          "title": "Oikeus siirtää tiedot järjestelmästä toiseen"
+        },
+        "withdraw-consent": {
+          "description": "Osaamistietovarannon suostumuksen voi antaa ja sen voi milloin tahansa perua palvelun kautta. <br/><br/>Suostumuksesta tulee käydä ilmi, että se on annettu vapaaehtoisesti ja nimenomaisesti sekä tietoisena siitä, mihin tarkoituksiin osaamistietoja voidaan käyttää ja luovuttaa. Suostumuksesta on myös käytävä ilmi, ettei sitä ole annettu työvoimahallinnon asiakaspalvelutilanteessa eikä viranomaismenettelyssä. Alaikäiseltä lapselta tarvitaan tietojen käyttöön ja luovuttamiseen myös tämän huoltajan tai muun laillisen edustajan suostumus. <br/><br/>Suostumus ja ilmoitus sen perumisesta on säilytettävä yhtä pitkään kuin henkilöön yhdistettävissä olevat tiedot.",
+          "title": "Tieto oikeudesta peruuttaa suostumus"
         }
-      }
-    },
-    "obligation-to-provide": {
-      "title": "Henkilötietojen antamisen velvollisuus",
-      "description": "Valtakunnalliseen osaamistietovarantoon tallennetaan tiedot ja tiedot käsitellään valtakunnallisesta osaamistietovarannosta annetun lain perusteella."
-    },
-    "acquiring": {
-      "title": "Mistä henkilötiedot saadaan?",
-      "description": "Henkilön rekisteröityessä palveluun hänestä saadaan henkilötiedot Digi- ja väestötietoviraston ylläpitämästä väestötietojärjestelmästä."
-    },
-    "automatic-handling": {
-      "title": "Automaattinen tietojen käsittely ja sen vaikutukset",
-      "description": "Henkilön antamia ja tallentamia tietoja ja hänen valitsemiaan rajauksia saadaan käsitellä yleisen tietosuoja-asetuksen 22 artiklan 1 kohdassa tarkoitetulla tavalla pelkästään automaattisesti koulutus- ja työmahdollisuuksien kartoittamiseksi ja esittämiseksi. Tällainen käsittely edellyttää, että henkilö valitsee palvelussa automaattisen käsittelyn hyödyntämisen tähän tarkoitukseen. Ennen valinnan tekemistä Opetushallituksen on selkeästi ilmoitettava automaattisesta käsittelystä henkilölle palvelussa. Henkilölle esitettävän mahdollisuuden yhteydessä hänelle on palvelussa annettava tietoa siitä, miten siinä on huomioitu hänen tietojaan ja valitsemiaan rajauksia."
-    }
-  },
-  "privacy-cookies": {
-    "title": "Evästeet",
-    "what": {
-      "title": "Mitä evästeet ovat?",
-      "description-1": "Evästeet ovat pieniä tekstitiedostoja, joita sivusto tallentaa tietokoneellesi tai mobiililaitteellesi. Se sisältää yksilöllisen, nimettömän tunnisteen, jonka avulla verkkopalvelu tunnistaa sivustolla vierailevat eri selaimet. Evästeillä kerättävillä tiedoilla ei voida tunnistaa yksittäisiä käyttäjiä. Opetushallitus edellyttää, että hyväksyt evästeiden käytön voidaksesi käyttää Osaamispolku-palvelua. <br/><br/>Evästeitä ovat:",
-      "list": {
-        "item-1": "Ensimmäisen osapuolen evästeet tulevat suoraan verkkosivustolta, jolla käyt. Vain tämä sivusto voi lukea ne.",
-        "item-2": "Lisäksi verkkosivusto saattaa käyttää ulkopuolisia palveluja, jotka lähettävät omia evästeitään. Näitä kutsutaan kolmannen osapuolen evästeiksi.",
-        "item-3": "Pysyvät evästeet ovat tietokoneellesi tallennettavia evästeitä, joita ei poisteta automaattisesti, kun suljet selaimen. Istuntokohtaiset evästeet sen sijaan poistetaan istunnon päättyessä."
       },
-      "description-2": "Evästeiden tarkoituksena on, että sivusto säilyttää tietyt valintasi tietyn ajan. Näin sinun ei tarvitse tehdä samoja valintoja uudelleen, kun siirryt sivustolla sivulta toiselle saman istunnon aikana. Evästeiden avulla voidaan myös kerätä anonymisoituja tietoja siitä, miten käyttäjät sivustolla toimivat. Näiden tietojen perusteella ei voida tunnistaa yksittäistä käyttäjää."
+      "description": "Osaamistietovarannon tiedot säilytetään, kunnes henkilö itse poistaa tietonsa palvelusta. <br/><br/>Opetushallitus sekä Työllisyys-, kehittämis- ja hallintokeskus voivat kuitenkin määrittää tiedoille muun säilytysajan julkisen hallinnon tiedonhallinnasta annetun lain (906/2019) 21 §:n 1 momentissa tarkoitetuilla perusteilla.",
+      "title": "Henkilötietojen säilyttämisaika"
     },
-    "what-for": {
-      "title": "Mihin evästeitä käytetään Osaamispolussa?",
-      "description-1": "Osaamispolussa on käytössä seuraavia ensimmäisen osapuolen evästeitä. Niiden tarkoitus on mahdollistaa sivuston käytön:",
-      "list": {
-        "item-1": "todentamisevästeet tallennetaan laitteellesi, kun kirjaudut Osaamisprofiiliin tai Ohjaajan työpöytään käyttäen Suomi.fi -tunnistautumista,",
-        "item-2": "tekniset evästeet."
-      },
-      "description-2": "Osaamispolulle analytiikan seurannassa käytetään Matomoa. Evästeiden avulla seurataan käyttäjän käyttökokemusta verkkosivustolla. Käyttäjätiedot ovat anonyymeja – kerätystä tiedosta ei voi tunnistaa käyttäjää henkilökohtaisesti. <br/><br/>Näitä tietoja ei myöskään jaeta minkään ulkopuolisen osapuolen kanssa eikä niitä käytetä muihin tarkoituksiin."
-    },
-    "3rd-party": {
-      "title": "Osaamispolun kolmannen osapuolen evästeet",
-      "description": "Osaamispolussa on käytössä kolmansien osapuolien sovelluksia, kuten YouTube ja PowerBI, jotka latautuvat näiden palveluiden omilta palvelimilta. Youtubea käytetään Osaamispolun ohjaajan kokonaisuuden videoissa. PowerBI:tä käytetään raporttinäkymien tuottamiseen tietopalvelussa. Kolmannen osapuolen evästeitä käytetään anonyymisti sivustolle upotettujen sovellusten toiminnan varmistamiseen ja käyttäjäkokemuksen parantamiseen. <br/><br/>Jos et käytä ulkopuolisten palveluntarjoajien sisältöä, mitään kolmannen osapuolen evästeitä ei asenneta laitteellesi. <br/><br/>Kolmannen osapuolen tarjoamiin palveluihin tai kolmannen osapuolen välittämiin sovelluksiin sovelletaan kyseisen kolmannen osapuolen käyttö- ja muita ehtoja. <br/><br/>Lisätietoja: <br/><CustomLink1>Microsoft (PowerBI)</CustomLink1> <CustomLink2>Google (Youtube)</CustomLink2>"
-    },
-    "possession": {
-      "title": "Evästeiden käytön hallinta",
-      "description": "Evästeitä voi vapaasti hallita ja/tai poistaa. Ohjeita löytyy esimerkiksi osoitteesta aboutcookies.org."
-    },
-    "site-specific": {
-      "title": "Sivustokohtaisten evästeiden hallinta",
-      "description": "Sivustokohtaisia evästeitä voi hallita selaimen yksityisyys- ja evästeasetuksista."
-    },
-    "blocking": {
-      "title": "Evästeiden estäminen",
-      "description": "Useimmissa uusissa selaimissa voi estää evästeiden asettamisen laitteelle kokonaan, mutta tällöin voit joutua mukauttamaan joitakin asetuksia aina, kun käyt jollakin sivustolla/sivulla. Jotkin palvelut ja toiminnot eivät välttämättä toimi kunnolla (esim. sisäänkirjautuminen)."
-    }
+    "title": "Tietosuojaseloste ja evästeet"
   },
   "profile": {
     "competences": {
@@ -1007,22 +1110,25 @@
       "write-what-interests-you": "Kirjoita, mikä sinua kiinnostaa"
     },
     "landing-page": {
-      "description": "Kirjautumalla sisään saat käyttöösi henkilökohtaisen osaamispolkusi, joka auttaa sinua hallinnoimaan ja hyödyntämään osaamistasi tehokkaasti.",
-      "list-1-item-1": "Oman osaamispolun hallinta ja tietojen luvitus: Päätä, miten ja missä tietojasi käytetään.",
-      "list-1-item-2": "Työ- ja koulutushistoria: Tallenna saavutuksesi yhteen paikkaan.",
-      "list-1-item-3": "Omat osaamiset ja kiinnostuksen kohteet: Tunnista vahvuutesi ja kiinnostuksen kohteesi.",
+      "description": "Osaamisprofiili on henkilökohtainen omien osaamistietojen, kiinnostusten sekä urasuunnitelmien säilytyspaikka.\n\nKun kirjaudut sisään ensimmäisen kerran luomme sinulle tyhjän profiilin. Jatkossa hallinnoit mitä tietoja tallennat sekä miten niitä käytät ja keillä on pääsy niihin. Profiili on tallessa niin kauan kuin tarvitset sitä.",
+      "list-1-item-1": "Osaamisesi: Tallenna mitä osaat yhteen paikkaan.",
+      "list-1-item-2": "Kiinnostuksesi: Kirjaa ylös, mikä sinua kiinnostaa.",
+      "list-1-item-3": "Suosikkisisällöt: Säilytä ja hallitse sinulle tärkeitä työ- ja koulutusmahdollisuuksia.",
       "list-1-item-4": "Urasuunnitelmat: Suunnittele tulevaisuutesi ja seuraa edistymistäsi.",
-      "list-1-item-5": "Tietojen tuonti muista palveluista: tuo tietosi Työmarkkinatorista ja Oma Opintopolusta.",
+      "list-1-item-5": "Päämäärät ja urasuunnitelmat: Suunnittele tulevaisuuttasi ja seuraa miten etenet.",
       "list-1-item-6": "Suosikkisisällöt: Tallenna ja hallitse kiinnostavimpia työ- ja koulutusvaihtoehtoja.",
-      "list-2-item-1": "Näet kaikki osaamiseesi ja kiinnostuksiisi liittyvät tiedot yhdessä paikassa.",
-      "list-2-item-2": "Voit tunnistaa vahvuutesi, myös vapaa-ajan harrastusten kautta.",
-      "list-2-item-3": "Löydät profiilisi perusteella työ- ja koulutusmahdollisuuksia, jotka sopivat juuri sinulle.",
+      "list-1-item-7": "Tietojen tuonti muista palveluista: tuo tietosi Työmarkkinatorista ja Oma Opintopolusta.",
+      "list-1-item-8": "Osaamisprofiilin asetukset: Päätä, miten ja missä tietojasi käytetään.",
+      "list-2-item-1": "Näet kaikki osaamiseesi ja kiinnostuksesi yhdessä paikassa.",
+      "list-2-item-2": "Voit huomata, missä olet hyvä.",
+      "list-2-item-3": "Saat ehdotuksia töistä ja koulutuksista, jotka sopivat sinulle.",
+      "list-2-item-4": "Voit suunnitella tulevaisuutta sinulle sopivista vaihtoehdoista.",
       "page-title": "Kirjaudu palveluun",
-      "paragraph-2": "Miten Oma Osaamispolku voi auttaa sinua?",
-      "paragraph-3": "Aloita luomalla oma osaamispolkusi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
-      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta. Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta.",
-      "profile-includes": "Oma Osaamispolku sisältää:",
-      "title": "Tervetuloa! Luo oma osaamispolkusi ja hyödynnä monipuoliset palvelut"
+      "paragraph-2": "Miten Osaamisprofiili auttaa sinua?",
+      "paragraph-3": "Siirry osaamisprofiiliisi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
+      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta.",
+      "profile-includes": "Osaamisprofiili sisältää:",
+      "title": "Luo oma osaamisprofiilisi!"
     },
     "my-goals": {
       "add-favorites-link": "Voit katsoa mahdollisuuksia ja lisätä niitä suosikiksi täältä",
@@ -1106,17 +1212,21 @@
       "your-competences": "Omat osaamisesi"
     },
     "preferences": {
-      "list-1-item-1": "kerätä tietoa omasta osaamisestasi (Osaamiseni)",
-      "list-1-item-2": "tallentaa koulutus- ja työhistoriasi sekä lisätä vapaa-ajan tekemisiä sekä tuoda myös työhistoriasi työmarkkinatorin työnhakuprofiilista sekä koulutushistoriasi Opintopolun omista opintosuorituksista (Työpaikkani, Koulutukseni, Vapaa-ajan toimintoni)",
-      "list-1-item-3": "kerätä myös tietoa omista kiinnostuksenkohteistasi (Kiinnostuksen kohteeni)",
-      "list-2-item-1": "Voit myös tallentaa ehdotettuja koulutus- ja työmahdollisuuksia suosikeiksi talteen myöhempää käyttöä varten ja osaamispolkujen luomista varten (Suosikkini)",
-      "list-2-item-2": "Voit luoda ja ylläpitää päämääriäsi sekä koulutus- ja urapolkusuunnitelmiasi (Päämääräni)",
-      "paragraph-2": "Kun täytät mahdollisimman kattavasti ylläolevat, saat juuri sinulle sopivia työ- ja koulutusmahdollisuusehdotuksia.",
-      "paragraph-3": "Profiili on omasi! Päätät itse, mitä tietoja omaan osaamisprofiiliisi tallennat, mihin tietojasi käytät, ketkä muut pääsevät näkemään profiilisi ja miten muut toimijat voivat profiiliasi hyödyntää.",
-      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen digitaalisesta palvelukokonaisuudesta. Lue lisää tietojen käsittelyn perusteista ",
-      "paragraph-4-link": "tietosuojaselosteesta",
+      "list-1-item-1": "Kirjata mitä osaat",
+      "list-1-item-2": "Tallentaa koulutus- ja työhistoriasi sekä vapaa-ajan tekemisiäsi tuoda ja viedä tietoja Työmarkkinatorin työnhakuprofiilin ja osaamisprofiilin välillä (tulossa myöhemmin) ja tuoda opintosuorituksesi Opintopolusta ja kartoittaa niihin liittyvää osaamistasi",
+      "list-1-item-3": "Kirjata, mikä sinua kiinnostaa",
+      "list-2-item-1": "Tallentaa sinua kiinnostavat työ- ja koulutusmahdollisuudet suosikkeihin",
+      "list-2-item-2": "Suunnitella ja seurata omia koulutus- ja urapolkujasi (tulossa myöhemmin)",
+      "list-3-item-1": "Mitä tietoja tallennat",
+      "list-3-item-2": "Mihin tietojasi käytetään",
+      "list-3-item-3": "Kuka voi nähdä profiilisi",
+      "list-3-item-4": "Miten muut voivat hyödyntää profiiliasi",
+      "paragraph-2": "Kun täytät nämä tiedot huolellisesti, saat ehdotuksia töistä ja koulutuksista, jotka sopivat juuri sinulle.\n\nVoit myös:",
+      "paragraph-3": "Profiili on sinun!\n\nSinä päätät:",
+      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta. ",
+      "paragraph-4-link": "Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta.",
       "title": "Asetukseni",
-      "you-are-signed-in": "Olet kirjautunut osaamisprofiiliisi. Osaamisprofiili toimii Osaamispolku-palvelun omien tietojesi säilytys- ja hallintapaikkana. Tänne voit:"
+      "you-are-signed-in": "Osaamisprofiili on paikka, jossa voit tallentaa ja hallita omia tietojasi. Tänne voit:"
     },
     "something-else": {
       "description": "Löydät alta muut osaamisesi, joita olet kartoittanut esimerkiksi palvelun kartoitustyökaluilla ja tallentanut ne profiiliisi. Voit lisätä ja poistaa osaamisia Muokkaa osaamisia painikkeella.",
@@ -1387,7 +1497,7 @@
   "updating-list": "Päivitetään listaa",
   "user": "Käyttäjä",
   "user-guide": "Ohjeet",
-  "welcome": "Hei {{name}} - tervetuloa",
+  "welcome": "Hei {{name}} - tervetuloa osaamisprofiiliisi!",
   "what-is-the-service": "Mikä palvelu on?",
   "where-can-i-get-more-help": "Mistä saan lisää apua?",
   "who-is-the-service-for": "Kenelle palvelu on tarkoitettu?",
