@@ -91,7 +91,17 @@ const Home = () => {
       </Content>
 
       <Content title="beta">
-        <p className="text-body-lg">{t('home.beta-content')}</p>
+        <p className="text-body-lg">
+          {t('home.beta-content')}
+          <Link
+            to={'https://wiki.eduuni.fi/x/Ok-bJ'}
+            className="inline-flex text-accent"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div>{t('home.beta-content-link')}</div>
+          </Link>
+        </p>
         <div className="h-[200px] bg-bg-gray-2" />
       </Content>
 
