@@ -62,6 +62,9 @@ export const generateProfileLink = (
   }
 };
 
+export const GENDER_VALUES = ['MIES', 'NAINEN'] as const;
+export type GenderValue = (typeof GENDER_VALUES)[number];
+
 export const getTypeSlug = (type: MahdollisuusTyyppi) =>
   type === 'TYOMAHDOLLISUUS' ? i18n.t('slugs.job-opportunity.index') : i18n.t('slugs.education-opportunity.index');
 
@@ -72,6 +75,7 @@ export type ProfileSectionType =
   | 'OSAAMISENI'
   | 'PAAMAARA'
   | 'ASETUKSENI';
+
 export const getTextClassByCompetenceSourceType = (type: ProfileSectionType) =>
   cx({
     'text-secondary-4-dark': type === 'TOIMENKUVA',
