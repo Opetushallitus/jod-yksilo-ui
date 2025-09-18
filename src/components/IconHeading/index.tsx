@@ -2,17 +2,29 @@ export interface IconHeadingProps {
   icon: React.ReactNode;
   title: string;
   dataTestId?: string;
+  bgClassName?: string;
+  textClassName?: string;
 }
 
-export const IconHeading = ({ icon, title, dataTestId }: IconHeadingProps) => {
+export const IconHeading = ({
+  icon,
+  title,
+  dataTestId,
+  bgClassName = 'bg-secondary-1-dark-2',
+  textClassName = 'text-secondary-1-dark-2',
+}: IconHeadingProps) => {
   return (
     <div className="mb-6 sm:mb-8 flex gap-x-4 items-center">
-      <span className="flex items-center justify-center size-9 aspect-square rounded-full bg-secondary-1-dark-2 text-white">
-        {icon}
-      </span>
+      {icon && (
+        <span
+          className={`flex items-center justify-center size-9 aspect-square rounded-full text-white ${bgClassName}`}
+        >
+          {icon}
+        </span>
+      )}
       <h1
         data-testid={dataTestId}
-        className="text-hero-mobile sm:text-hero text-secondary-1-dark-2 hyphens-auto text-pretty break-all"
+        className={`text-hero-mobile sm:text-hero hyphens-auto text-pretty break-all ${textClassName}`}
       >
         {title}
       </h1>
