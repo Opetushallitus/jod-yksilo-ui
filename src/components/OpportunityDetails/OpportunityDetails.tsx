@@ -23,6 +23,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { CounselingBanner } from '../CounselingBanner/CounselingBanner';
+import { IconHeading } from '../IconHeading';
 import RateAiContent from '../RateAiContent/RateAiContent';
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
@@ -169,16 +170,12 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
       {title ? <title>{title}</title> : null}
       <div className="flex flex-col">
         {!sm && OpportunityType}
-        {/* Header: Icon & title */}
-        <div className="flex gap-x-4 items-center">
-          <span className="flex items-center justify-center size-9 aspect-square rounded-full bg-secondary-1-dark-2">
-            <TitleIcon tyyppi={tyyppi} aineisto={jobData.aineisto} />
-          </span>
-          {title ? (
-            <h1 className="text-hero-mobile sm:text-hero text-secondary-1-dark-2 hyphens-auto text-pretty break-all">
-              {title}
-            </h1>
-          ) : null}
+        <div>
+          <IconHeading
+            icon={<TitleIcon tyyppi={tyyppi} aineisto={jobData.aineisto} />}
+            title={title}
+            dataTestId="opportunity-details-title"
+          />
           {showAiInfoInTitle && (
             <span className="print:hidden size-6">
               <AiInfo />

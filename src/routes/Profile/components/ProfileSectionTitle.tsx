@@ -1,5 +1,6 @@
+import { IconHeading } from '@/components/IconHeading';
 import { getTextClassByCompetenceSourceType, type ProfileSectionType } from '@/routes/Profile/utils';
-import { cx, tidyClasses } from '@jod/design-system';
+import { cx } from '@jod/design-system';
 import {
   JodCheckmarkAlt,
   JodFavorite,
@@ -36,21 +37,12 @@ export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType;
   const showIcon = type && iconMap[type] !== null;
 
   return (
-    <div className="mb-5 text-heading-2 sm:text-heading-1 flex items-center gap-4">
-      {showIcon && (
-        <span className={`${iconBg} text-white rounded-full sm:size-9 size-8 justify-center items-center flex`}>
-          {iconMap[type]}
-        </span>
-      )}
-      <h1
-        className={tidyClasses([
-          'text-heading-1-mobile',
-          'sm:text-heading-1',
-          getTextClassByCompetenceSourceType(type),
-        ])}
-      >
-        {title}
-      </h1>
-    </div>
+    <IconHeading
+      icon={showIcon ? iconMap[type] : undefined}
+      title={title}
+      bgClassName={iconBg}
+      textClassName={getTextClassByCompetenceSourceType(type)}
+      dataTestId="profile-section-title"
+    />
   );
 };
