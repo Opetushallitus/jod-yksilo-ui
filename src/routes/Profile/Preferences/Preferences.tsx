@@ -119,22 +119,22 @@ const Preferences = () => {
         </h3>
         <p className="text-body-md mb-5">{t('preferences.data-disclosure-unanonymized.description')}</p>
         <ToggleWithText
-          title={t('preferences.data-disclosure-unanonymized.permission-share-with-third-parties.title')}
-          description={t('preferences.data-disclosure-unanonymized.permission-share-with-third-parties.description')}
-          checked={lupaLuovuttaaTiedotUlkopuoliselle}
-          onChange={() => {
-            setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle);
-          }}
-          data-testid="pref-share-third-parties"
-        />
-        <ToggleWithText
-          title={t('preferences.data-disclosure-unanonymized.permission-ai-training.title')}
-          description={t('preferences.data-disclosure-unanonymized.permission-ai-training.description')}
+          title={t('preferences.data-disclosure-unanonymized.permission-education-and-planning.title')}
+          description={t('preferences.data-disclosure-unanonymized.permission-education-and-planning.description')}
           checked={lupaKayttaaTekoalynKoulutukseen}
           onChange={() => {
             setLupaKayttaaTekoalynKoulutukseen(!lupaKayttaaTekoalynKoulutukseen);
           }}
           data-testid="pref-ai-training"
+        />
+        <ToggleWithText
+          title={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.title')}
+          description={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.description')}
+          checked={lupaLuovuttaaTiedotUlkopuoliselle}
+          onChange={() => {
+            setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle);
+          }}
+          data-testid="pref-share-third-parties"
         />
       </section>
       <section className="mb-8">
