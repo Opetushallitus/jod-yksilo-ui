@@ -702,28 +702,28 @@
   },
   "preferences": {
     "data-disclosure-unanonymized": {
-      "description": "Voit valita, luovutetaanko tietosi rajapintojen kautta seuraaviin tarkoituksiin:",
-      "permission-ai-training": {
-        "description": "Voit sallia tietojesi käytön tekoälyn koulutukseen, mikä auttaa parantamaan palvelun laatua.",
-        "title": "Lupa käyttää tekoälyn koulutukseen"
+      "description": "Opetushallitus käyttää ensisijaisesti anonymisoituja tietoja. Tämä tarkoittaa, että henkilötietosi muunnetaan sellaiseen muotoon, ettei sinua voi enää tunnistaa niistä. Näin tietoja voidaan käyttää esimerkiksi tutkimukseen tai palvelun kehittämiseen ilman, että sinut voidaan tunnistaa. Jos kuitenkin haluat, voit antaa luvan käyttää tietojasi myös tunnistettavassa muodossa. Tämä tarkoittaa, että tietosi säilyvät sellaisina, että ne voidaan yhdistää sinuun. Voit antaa luvan jokaiseen kohtaan erikseen ja perua luvan milloin tahansa.",
+      "permission-education-and-planning": {
+        "description": "Lupa mahdollistaa henkilötietojen käytön opetuksen, koulutuksen ja ohjauksen yleiseen kehittämiseen. Tietoja hyödynnetään esimerkiksi oppimistulosten analysointiin ja koulutuksen suunnitteluun.",
+        "title": "Lupa käyttää tunnistettavia henkilötietojani opetuksen, koulutuksen ja osaamisen arviointia, kehittämistä, muuta seurantaa, ohjausta ja suunnittelua varten"
       },
-      "permission-share-with-third-parties": {
-        "description": "Voit sallia tietojesi luovuttamisen ulkopuolisille tahoille, kuten tutkimus- ja kehityshankkeisiin.",
-        "title": "Lupa luovuttaa tiedot ulkopuoliselle"
+      "permission-use-AI-education": {
+        "description": "Lupa mahdollistaa tietojesi käytön tekoälytoimintojen kehittämiseen palvelussa. Tietoja voidaan hyödyntää esimerkiksi toiminnallisuuksien parantamiseen, virheiden tunnistamiseen ja käyttäjäkokemuksen yleiseen optimointiin.",
+        "title": "Lupa käyttää henkilötietojani palvelussa toteutettujen tekoälytoiminnallisuuksien kehittämiseen"
       },
-      "title": "Tietojen luovutus anonymisoimattomana"
+      "title": "Tietojeni käyttö tunnistettavassa muodossa"
     },
     "delete-profile": {
-      "action": "Poista osaamisprofiili",
+      "action": "Poista osaamisprofiilini",
       "confirm": "Haluatko varmasti poistaa osaamisprofiilisi?",
-      "description": "Kaikki osaamisprofiilisi tallennetut tiedot poistetaan pysyvästi, eikä niitä voi palauttaa.",
-      "title": "Poista koko osaamisprofiilisi ja kaikki siihen tallennetut tiedot"
+      "description": "Voit poistaa koko osaamisprofiilisi ja kaikki siihen tallennetut tiedot pysyvästi. Poistoa ei voi perua. Huom! Voit poistaa ohjaajan profiilin Ohjaajan osiosta.",
+      "title": "Poista osaamisprofiilisi"
     },
-    "description": "Tällä sivulla voit hallita henkilökohtaisia asetuksiasi ja päättää, miten osaamisprofiilisi tietoja käytetään. Voit jakaa profiilisi jakolinkin avulla, hallita henkilötietojen luovutuslupia, ladata profiilisi tiedot talteen tai poistaa ne kokonaan. Sinä päätät, mitä tietoja jaat ja kenelle.",
+    "description": "Tällä sivulla voit hallita osaamisprofiilisi asetuksia ja päättää, miten tietojasi käytetään. Voit jakaa profiilisi linkin avulla, hallita lupia tietojen käyttöön, ladata profiilisi tiedot itsellesi, tai poistaa profiilisi kokonaan. Sinä päätät, mitä tietoja jaat ja kenelle.",
     "download": {
-      "action": "Lataa osaamisprofiilin tiedot",
-      "description": "Voit ladata itsellesi talteen kaikki osaamisprofiilin tallennetut tiedot",
-      "title": "Lataa talteen kaikki osaamisprofiilisi tallennetut tietosi"
+      "action": "Lataa osaamisprofiilini tiedot (JSON)",
+      "description": "Voit ladata kaikki osaamisprofiiliisi tallennetut tiedot omalle laitteellesi. Tiedot muodostetaan koneluettavaan JSON-muotoon. JSON on yksinkertainen ja kevyt avoimen standardin tiedostomuoto tiedonvälitykseen ja tallennukseen.",
+      "title": "Lataa osaamisprofiilisi"
     },
     "title": "Asetukseni"
   },
