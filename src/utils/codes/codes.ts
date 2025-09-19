@@ -51,7 +51,6 @@ export interface ClassificationItem {
  * @param lang Language code
  * @returns
  */
-
 export const getCodesetValue = async (codeset: Codeset, code: string, lang: LangCode = 'fi') => {
   const imported = await import(`./${codeset}_${lang}.json`);
 

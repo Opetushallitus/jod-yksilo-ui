@@ -25,7 +25,7 @@ export const sortingValues: Record<OpportunitySortingValue, OpportunitySortingVa
   RELEVANCE: 'RELEVANCE',
 } as const;
 
-export const DEFAULT_FILTER = [filterValues.KOULUTUSMAHDOLLISUUS, filterValues.TYOMAHDOLLISUUS];
+export const DEFAULT_OPPORTUNITY_TYPE_FILTER = [];
 export const DEFAULT_SORTING = sortingValues.RELEVANCE;
 
 export const countFilteredEhdotukset = (
