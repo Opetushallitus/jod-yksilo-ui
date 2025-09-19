@@ -234,10 +234,10 @@
       "route": "Osaamiset"
     },
     "duration": {
-      "average-months_one": "Tutkinnon keskimääräinen kesto on {{count}} kuukausi.",
-      "average-months_other": "Tutkinnon keskimääräinen kesto on {{count}} kuukautta.",
-      "average-years_one": "Tutkinnon keskimääräinen kesto on {{count}} vuosi.",
-      "average-years_other": "Tutkinnon keskimääräinen kesto on {{count}} vuotta."
+      "average-months_one": "Koulutuksen keskimääräinen kesto on {{count}} kuukausi.",
+      "average-months_other": "Koulutuksen keskimääräinen kesto on {{count}} kuukautta.",
+      "average-years_one": "Koulutuksen keskimääräinen kesto on {{count}} vuosi.",
+      "average-years_other": "Koulutuksen keskimääräinen kesto on {{count}} vuotta."
     },
     "education-characteristics": "Koulutuksen erityispiirteitä",
     "of-educations": "ilmoitetuista koulutuksista.",
