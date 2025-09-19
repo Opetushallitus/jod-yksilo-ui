@@ -72,6 +72,11 @@ export default defineConfig({
         target: 'http://localhost:5173',
         xfwd: true,
       },
+      '/api': {
+        target: 'https://jodkehitys.fi',
+        changeOrigin: true,
+        xfwd: true,
+      },
       '/': {
         target: 'http://localhost:5173', // Landing page UI
         xfwd: true,

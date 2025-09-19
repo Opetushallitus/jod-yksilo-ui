@@ -1,9 +1,10 @@
 import { components } from '@/api/schema';
-import { LanguageButton, UserButton } from '@/components';
+import { FeedbackModal, LanguageButton, UserButton } from '@/components';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
+import { LangCode } from '@/i18n/config';
 import { useNoteStore } from '@/stores/useNoteStore';
 import { useToolStore } from '@/stores/useToolStore';
 import {
@@ -48,6 +49,7 @@ const Root = () => {
   const { addNote } = useNoteStack();
   const [langMenuOpen, setLangMenuOpen] = React.useState(false);
   const [navMenuOpen, setNavMenuOpen] = React.useState(false);
+  const [feedbackVisible, setFeedbackVisible] = React.useState(false);
   const logoutForm = React.useRef<HTMLFormElement>(null);
   const langMenuButtonRef = React.useRef<HTMLLIElement>(null);
   const langMenuRef = useMenuClickHandler(() => setLangMenuOpen(false), langMenuButtonRef);
@@ -209,11 +211,17 @@ const Root = () => {
         feedbackTitle={t('footer.feedback-title')}
         feedbackContent={t('footer.feedback-content')}
         feedbackButtonLabel={t('footer.feedback-button-label')}
+        feedbackOnClick={() => setFeedbackVisible(true)}
         feedbackBgImageClassName="bg-[url(@/../assets/home-1.avif)] bg-cover bg-[length:auto_auto] sm:bg-[length:auto_1000px] bg-[top_-0rem_right_-0rem] sm:bg-[top_-21rem_right_0rem]"
         copyright={t('copyright')}
-        // eslint-disable-next-line no-console
-        feedbackOnClick={() => console.log('feedbackOnClick')}
         data-testid="app-footer"
+      />
+      <FeedbackModal
+        isOpen={feedbackVisible}
+        onClose={() => setFeedbackVisible(false)}
+        section="Osaamispolkuni"
+        area="Alatunniste"
+        language={language as LangCode}
       />
       <Toaster />
       <ScrollRestoration />
