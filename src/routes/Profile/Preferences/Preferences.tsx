@@ -76,7 +76,7 @@ const Preferences = () => {
   );
   const [updating, setUpdating] = React.useState<boolean>(false);
 
-  React.useEffect(() => {
+  const update = () => {
     setUpdating(true);
     const updateProfile = async () => {
       await client.PUT('/api/profiili/yksilo', {
@@ -88,13 +88,7 @@ const Preferences = () => {
       });
     };
     updateProfile().then(() => setUpdating(false));
-  }, [
-    lupaLuovuttaaTiedotUlkopuoliselle,
-    lupaKayttaaTekoalynKoulutukseen,
-    data?.lupaLuovuttaaTiedotUlkopuoliselle,
-    data?.lupaKayttaaTekoalynKoulutukseen,
-    data?.tervetuloapolku,
-  ]);
+  };
 
   const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
 
@@ -116,6 +110,7 @@ const Preferences = () => {
           checked={lupaLuovuttaaTiedotUlkopuoliselle}
           onChange={() => {
             setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle);
+            update();
           }}
           disabled={updating}
           data-testid="pref-share-third-parties"
@@ -126,6 +121,7 @@ const Preferences = () => {
           checked={lupaKayttaaTekoalynKoulutukseen}
           onChange={() => {
             setLupaKayttaaTekoalynKoulutukseen(!lupaKayttaaTekoalynKoulutukseen);
+            update();
           }}
           disabled={updating}
           data-testid="pref-ai-training"
