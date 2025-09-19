@@ -100,7 +100,7 @@ const JobOpportunity = () => {
     {
       navTitle: t('job-opportunity.professional-group'),
       titleAppendix: getLocalizedText(ammattiryhma?.nimi),
-      content: <div className="font-arial">{getLocalizedText(tyomahdollisuus.kuvaus)}</div>,
+      content: <div className="font-arial">{getLocalizedText(ammattiryhma?.kuvaus)}</div>,
       showDivider: false,
     },
     {
