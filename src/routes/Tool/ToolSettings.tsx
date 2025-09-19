@@ -56,7 +56,7 @@ const OpportunitySlider = () => {
   ]);
 
   return (
-    <div data-testid="tool-opportunity-slider">
+    <div data-testid="tool-opportunity-slider" className="mt-6">
       <Slider
         label={t('competences')}
         rightLabel={t('interests')}
@@ -162,7 +162,7 @@ const ToolSettings = ({ ref }: { ref: React.RefObject<HTMLDivElement | null> }) 
       : t('n-education-opportunities', { count: ehdotuksetCount.KOULUTUSMAHDOLLISUUS });
 
   return (
-    <div className="bg-bg-gray-2 rounded-t mb-7 py-4 px-6 sm:text-body-sm text-body-sm-mobile flex flex-col gap-6 not-lg:sticky not-lg:top-[140px] not-lg:z-10">
+    <div className="bg-bg-gray-2 rounded-t mb-7 py-4 px-6 sm:text-body-sm text-body-sm-mobile flex flex-col gap-6 sticky top-[168px] lg:top-[124px] z-10">
       <SettingsSection title={t('tool.settings.general.title')}>
         <Setting title={t('tool.settings.general.filter')} ref={ref}>
           <div className="py-2">
