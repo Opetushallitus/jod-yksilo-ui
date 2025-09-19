@@ -1,7 +1,7 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react-swc';
 import { fileURLToPath } from 'node:url';
-import { defineConfig } from 'vite';
+import { defineConfig, searchForWorkspaceRoot } from 'vite';
 import { configDefaults } from 'vitest/config';
 
 // The target API base URL
@@ -31,7 +31,14 @@ export default defineConfig({
   },
   server: {
     port: 8080,
+    fs: {
+      allow: [searchForWorkspaceRoot(process.cwd()), '../jod-assets'],
+    },
     proxy: {
+      '/koodisto-service/rest/json': {
+        target: 'https://virkailija.opintopolku.fi',
+        changeOrigin: true,
+      },
       '/yksilo/api': {
         target,
         xfwd: true,
