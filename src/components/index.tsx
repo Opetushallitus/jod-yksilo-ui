@@ -5,6 +5,7 @@ export { ConfirmDialogWrapper, type ConfirmDialogWrapperProps } from './ConfirmD
 export { ExperienceTable } from './ExperienceTable/ExperienceTable';
 export { type ExperienceTableRowData } from './ExperienceTable/ExperienceTableRow';
 export { FavoriteToggle } from './FavoriteToggle/FavoriteToggle';
+export { FeedbackModal } from './FeedbackModal/FeedbackModal';
 export { FormError } from './FormError/FormError';
 export { TouchedFormError } from './FormError/TouchedFormError';
 export { HelpingToolLinkItem, HelpingToolProfileLinkItem } from './HelpingToolsContent';
