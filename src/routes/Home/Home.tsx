@@ -27,7 +27,7 @@ interface ContainerProps {
 }
 
 const FullWidthContainer = ({ className = '', children }: ContainerProps) => (
-  <div className={tc(['bg-no-repeat', 'bg-[length:1440px_auto]', 'flex', 'justify-start', 'py-8', className])}>
+  <div className={tc(['flex', 'justify-start', 'py-8', className])}>
     <div className="w-[1092px] mx-auto px-5 sm:px-6">{children}</div>
   </div>
 );
@@ -60,8 +60,8 @@ const Home = () => {
 
       <FullWidthContainer
         className={tc([
-          'h-[640px]',
-          'bg-[url(@/../assets/pre-launch-1.avif)] bg-[center_-45px]',
+          'sm:h-[617px] h-[calc(100vh-104px)]', // Hero aspect ratio = ((9 / 21) * 1440px) = 617px
+          'bg-cover bg-[url(@/../assets/yksilo-hero.jpg)] xl:bg-[50%_50%] lg:bg-[60%_50%] md:bg-[67%_50%] sm:bg-[71%_50%] bg-[72%_50%]',
           'items-end sm:items-center',
           'pb-6 sm:pb-0',
         ])}
