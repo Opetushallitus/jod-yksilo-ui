@@ -49,6 +49,7 @@ const Interests = () => {
             onChange={setKiinnostukset}
             value={kiinnostukset}
             mode="kiinnostukset"
+            tagHeadingClassName="bg-white"
             hideTextAreaLabel
           />
           {!isPrd && (

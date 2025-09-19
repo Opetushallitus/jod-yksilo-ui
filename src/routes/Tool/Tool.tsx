@@ -73,8 +73,8 @@ const ExploreOpportunities = () => {
 
   return (
     <>
-      <div className="not-lg:sticky not-lg:top-[108px] not-lg:z-10">
-        <div className="flex items-center justify-end h-9 lg:pb-4 not-lg:bg-bg-gray-2 not-lg:w-full lg:justify-between not-lg:my-3 not-lg:px-4">
+      <div className="sticky top-[120px] lg:top-[66px] z-10 bg-bg-gray -mx-1 px-1 lg:pt-4">
+        <div className="flex items-center justify-end h-9 lg:pb-4 not-lg:bg-white not-lg:w-full lg:justify-between not-lg:mb-3 not-lg:px-4">
           {lg && (
             <h2 id="opportunities-title" tabIndex={-1} className="text-heading-2-mobile sm:text-heading-2">
               {t('tool.your-opportunities.title')}
@@ -91,28 +91,26 @@ const ExploreOpportunities = () => {
               label={settingsOpen ? t('tool.settings.toggle-title-open') : t('tool.settings.toggle-title-closed')}
               data-testid="open-tool-settings"
             />
-            {lg && (
-              <Button
-                size="lg"
-                label={updateButtonLabel}
-                variant="accent"
-                onClick={onUpdateResults}
-                disabled={isLoading}
-                icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
-                iconSide={isLoading ? 'right' : undefined}
-                data-testid="update-opportunities"
-              />
-            )}
+            <Button
+              size={lg ? 'lg' : 'sm'}
+              label={updateButtonLabel}
+              variant="accent"
+              onClick={onUpdateResults}
+              disabled={isLoading}
+              icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
+              iconSide={isLoading ? 'right' : undefined}
+              data-testid="update-opportunities"
+            />
           </div>
         </div>
       </div>
 
-      <>{settingsOpen && <ToolSettings ref={firstSettingRef} />}</>
+      {settingsOpen && <ToolSettings ref={firstSettingRef} />}
       <ul
         id="tool-your-opportunities-list"
         ref={scrollRef}
         className="flex flex-col gap-5 sm:gap-3 mb-8 scroll-mt-[96px]"
-        data-testid="opportunities-list"
+        data-testid="tool-opportunities-list"
       >
         {mixedMahdollisuudet.map((mahdollisuus) => {
           const { id, mahdollisuusTyyppi } = mahdollisuus;
@@ -192,25 +190,37 @@ const YourInfo = () => {
 };
 
 const Tool = () => {
+  type TabName = 'info' | 'opportunities';
   const { t } = useTranslation();
   const { lg } = useMediaQueries();
-  const [currentTab, setCurrentTab] = React.useState<'info' | 'opportunities'>('info');
+  const [currentTab, setCurrentTab] = React.useState<TabName>('info');
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+
+  const setTab = React.useCallback((tab: TabName) => {
+    setCurrentTab(tab);
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, []);
+
   const tabs = React.useMemo(() => {
     const tabs = [
       {
         text: t('tool.my-own-data.title'),
         active: currentTab === 'info',
-        onclick: () => setCurrentTab('info'),
+        onclick: () => setTab('info'),
       },
       {
         text: t('tool.your-opportunities.title'),
         active: currentTab === 'opportunities',
-        onclick: () => setCurrentTab('opportunities'),
+        onclick: () => setTab('opportunities'),
       },
     ];
 
     return tabs;
-  }, [currentTab, t]);
+  }, [currentTab, setTab, t]);
 
   const onKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
@@ -218,7 +228,7 @@ const Tool = () => {
         case 'Home':
         case 'ArrowLeft':
           if (index > 0) {
-            setCurrentTab('info');
+            setTab('info');
             (event.currentTarget.previousElementSibling as HTMLElement)?.focus();
           }
           event.stopPropagation();
@@ -227,7 +237,7 @@ const Tool = () => {
         case 'End':
         case 'ArrowRight':
           if (index < tabs.length - 1) {
-            setCurrentTab('opportunities');
+            setTab('opportunities');
             (event.currentTarget.nextElementSibling as HTMLElement)?.focus();
           }
           event.stopPropagation();
@@ -237,7 +247,7 @@ const Tool = () => {
           break;
       }
     },
-    [tabs],
+    [setTab, tabs.length],
   );
 
   return (
@@ -251,13 +261,17 @@ const Tool = () => {
         </div>
         <h1 className="text-heading-1-mobile sm:text-heading-1 text-secondary-1-dark-2">{t('tool.title')}</h1>
       </div>
-      <p className="text-body-lg-mobile sm:text-body-lg mb-7 sm:mb-9 max-w-[700px]">{t('tool.description')}</p>
+      <p className="text-body-lg-mobile sm:text-body-lg mb-7 sm:mb-9 max-w-[700px]" ref={scrollRef}>
+        {t('tool.description')}
+      </p>
       <title>{t('tool.title')}</title>
       {lg ? (
         // Desktop
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-7">
-          <div className="col-span-1 lg:col-span-5">
-            <h2 className="sm:text-heading-2 text-heading-2-mobile h-9">{t('tool.my-own-data.title')}</h2>
+          <div className="col-span-1 lg:col-span-5 max-h-fit">
+            <div className="sticky top-[68px] z-10 bg-bg-gray lg:pt-4">
+              <h2 className="sm:text-heading-2 text-heading-2-mobile h-9">{t('tool.my-own-data.title')}</h2>
+            </div>
             <div className="flex flex-col gap-4">
               <YourInfo />
             </div>
@@ -274,8 +288,8 @@ const Tool = () => {
       ) : (
         // Mobile
         <>
-          <div className="sticky top-[66px] z-10 -mx-5">
-            <div role="tablist" className="flex text-button-sm select-none gap-1 bg-bg-gray px-5">
+          <div className="sticky top-[66px] z-10 -mx-5 pt-4 bg-bg-gray">
+            <div role="tablist" className="flex text-button-sm select-none gap-3 px-5">
               {tabs.map((tab, index) => (
                 <button
                   type="button"

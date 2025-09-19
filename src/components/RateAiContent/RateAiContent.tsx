@@ -24,7 +24,7 @@ const RateAiContent = ({ isLiked, isDisliked, onLike, onDislike, variant }: Rate
     variant === 'kohtaanto' ? t('rate-ai-content.body') : t('rate-ai-content.body-for-opportunities');
 
   return (
-    <div className="bg-accent flex flex-col rounded-lg h-[271px] p-6">
+    <div className="bg-accent flex flex-col rounded-lg min-h-[271px] p-6">
       <div className="flex items-start mb-2">
         <div className="text-heading-2 text-white mr-2">{headerText}</div>
         <div className="text-white">

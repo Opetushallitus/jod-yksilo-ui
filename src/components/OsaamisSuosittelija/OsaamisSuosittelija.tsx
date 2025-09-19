@@ -30,8 +30,10 @@ interface OsaamisSuosittelijaProps {
   sourceType?: Osaaminen['tyyppi'];
   /** Mode that tells which translations to use and what color to use for tags */
   mode?: OsaamisSuosittelijaMode;
-  /** Additional class name */
-  className?: string;
+  /** Additional class name for the text area input */
+  textAreaClassName?: string;
+  /** Additional class name for the tag area headings (proposed & selected tags) */
+  tagHeadingClassName?: string;
   /** Placeholder text for the textarea */
   placeholder?: string;
   /** Should the selected competences be displayed */
@@ -45,7 +47,8 @@ export const OsaamisSuosittelija = ({
   onChange,
   sourceType = 'KARTOITETTU',
   mode = 'osaamiset',
-  className = '',
+  textAreaClassName = '',
+  tagHeadingClassName = '',
   placeholder,
   hideSelected = false,
   hideTextAreaLabel = false,
@@ -142,49 +145,54 @@ export const OsaamisSuosittelija = ({
           rows={2}
           maxLength={LIMITS.TEXTAREA}
           label={textAreaLabel()}
-          className={tc(['bg-[#F7F7F9]! placeholder:text-body-sm', className])}
+          className={tc(['bg-bg-gray-2-25! placeholder:text-body-sm', textAreaClassName])}
         />
       </div>
       <div className="mb-6 flex flex-col">
-        <div className="sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold">
-          {mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}
+        <div
+          className={tc([
+            'sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold sticky top-0',
+            tagHeadingClassName,
+          ])}
+        >
+          <span>{mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}</span>
+          {filteredEhdotetutOsaamiset.length > 0 && (
+            <div className="font-arial text-body-sm text-secondary-gray mb-4">
+              {t(`osaamissuosittelija.${translationKey}.add`)}
+            </div>
+          )}
         </div>
 
-        <div className="mb-6 overflow-y-auto max-h-[278px]">
+        <div className="mb-6 overflow-y-auto max-h-[228px]">
           {filteredEhdotetutOsaamiset.length > 0 ? (
-            <>
-              <div className="font-arial text-body-sm text-secondary-gray mb-4">
-                {t(`osaamissuosittelija.${translationKey}.add`)}
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen) => (
-                  <Tag
-                    key={ehdotettuOsaaminen.id}
-                    label={getLocalizedText(ehdotettuOsaaminen.nimi)}
-                    title={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
-                    sourceType={
-                      mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
+            <div className="flex flex-wrap gap-3">
+              {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen) => (
+                <Tag
+                  key={ehdotettuOsaaminen.id}
+                  label={getLocalizedText(ehdotettuOsaaminen.nimi)}
+                  title={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
+                  sourceType={
+                    mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
+                  }
+                  onClick={() => {
+                    if (ehdotettuOsaaminen.id && value.find((val) => val.id === ehdotettuOsaaminen.id)) {
+                      return; // Prevent adding duplicates by rapid clicking
                     }
-                    onClick={() => {
-                      if (ehdotettuOsaaminen.id && value.find((val) => val.id === ehdotettuOsaaminen.id)) {
-                        return; // Prevent adding duplicates by rapid clicking
-                      }
 
-                      onChange([
-                        ...value,
-                        {
-                          id: ehdotettuOsaaminen.id,
-                          nimi: ehdotettuOsaaminen.nimi,
-                          kuvaus: ehdotettuOsaaminen.kuvaus,
-                          tyyppi: sourceType,
-                        },
-                      ]);
-                    }}
-                    variant="selectable"
-                  />
-                ))}
-              </div>
-            </>
+                    onChange([
+                      ...value,
+                      {
+                        id: ehdotettuOsaaminen.id,
+                        nimi: ehdotettuOsaaminen.nimi,
+                        kuvaus: ehdotettuOsaaminen.kuvaus,
+                        tyyppi: sourceType,
+                      },
+                    ]);
+                  }}
+                  variant="selectable"
+                />
+              ))}
+            </div>
           ) : (
             <div className="mt-4">
               <EmptyState text={t(`osaamissuosittelija.${translationKey}.none-proposed`)} />
@@ -194,24 +202,29 @@ export const OsaamisSuosittelija = ({
 
         {!hideSelected && (
           <>
-            <div className="sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold">
-              {mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}
+            <div
+              className={tc([
+                'sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold sticky top-0',
+                tagHeadingClassName,
+              ])}
+            >
+              <span>{mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}</span>
+              {value.length > 0 && (
+                <div className="font-arial text-body-sm text-secondary-gray mb-4">
+                  {t(`osaamissuosittelija.${translationKey}.remove`)}
+                </div>
+              )}
             </div>
 
-            <div className={tc(`overflow-y-auto max-h-[278px] ${className}`)}>
+            <div className="overflow-y-auto max-h-[228px]">
               {value.length > 0 ? (
-                <>
-                  <div className="font-arial text-body-sm text-secondary-gray mb-4">
-                    {t(`osaamissuosittelija.${translationKey}.remove`)}
-                  </div>
-                  <div className="flex flex-wrap gap-3">
-                    <AddedTags
-                      osaamiset={value}
-                      onClick={removeOsaaminenById}
-                      lahdetyyppi={mode === 'osaamiset' ? 'MUU_OSAAMINEN' : 'KIINNOSTUS'}
-                    />
-                  </div>
-                </>
+                <div className="flex flex-wrap gap-3">
+                  <AddedTags
+                    osaamiset={value}
+                    onClick={removeOsaaminenById}
+                    lahdetyyppi={mode === 'osaamiset' ? 'MUU_OSAAMINEN' : 'KIINNOSTUS'}
+                  />
+                </div>
               ) : (
                 <div className="mt-4">
                   <EmptyState text={t(`osaamissuosittelija.${translationKey}.none-selected`)} />
