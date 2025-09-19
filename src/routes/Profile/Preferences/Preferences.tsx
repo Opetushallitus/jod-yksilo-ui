@@ -76,19 +76,39 @@ const Preferences = () => {
   );
   const [updating, setUpdating] = React.useState<boolean>(false);
 
-  const update = () => {
-    setUpdating(true);
-    const updateProfile = async () => {
-      await client.PUT('/api/profiili/yksilo', {
-        body: {
-          tervetuloapolku: data?.tervetuloapolku ?? false,
-          lupaLuovuttaaTiedotUlkopuoliselle,
-          lupaKayttaaTekoalynKoulutukseen,
-        },
-      });
+  // Store previous values for comparison to determine actual change
+  const prevValues = React.useRef({
+    lupaLuovuttaaTiedotUlkopuoliselle,
+    lupaKayttaaTekoalynKoulutukseen,
+  });
+
+  const isEqual = (a: object, b: object) => JSON.stringify(a) === JSON.stringify(b);
+
+  // Effect to call update only when data change (and not on first render)
+  React.useEffect(() => {
+    const currentValues = {
+      lupaLuovuttaaTiedotUlkopuoliselle,
+      lupaKayttaaTekoalynKoulutukseen,
     };
-    updateProfile().then(() => setUpdating(false));
-  };
+
+    if (!isEqual(prevValues.current, currentValues)) {
+      // Values changed, call update endpoint
+      setUpdating(true);
+      client
+        .PUT('/api/profiili/yksilo', {
+          body: {
+            tervetuloapolku: data?.tervetuloapolku ?? false,
+            lupaLuovuttaaTiedotUlkopuoliselle: currentValues.lupaLuovuttaaTiedotUlkopuoliselle,
+            lupaKayttaaTekoalynKoulutukseen: currentValues.lupaKayttaaTekoalynKoulutukseen,
+          },
+        })
+        .finally(() => {
+          setUpdating(false);
+        });
+
+      prevValues.current = currentValues;
+    }
+  }, [lupaLuovuttaaTiedotUlkopuoliselle, lupaKayttaaTekoalynKoulutukseen, data?.tervetuloapolku]);
 
   const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
 
@@ -108,10 +128,7 @@ const Preferences = () => {
           title={t('preferences.data-disclosure-unanonymized.permission-share-with-third-parties.title')}
           description={t('preferences.data-disclosure-unanonymized.permission-share-with-third-parties.description')}
           checked={lupaLuovuttaaTiedotUlkopuoliselle}
-          onChange={() => {
-            setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle);
-            update();
-          }}
+          onChange={() => setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle)}
           disabled={updating}
           data-testid="pref-share-third-parties"
         />
@@ -119,10 +136,7 @@ const Preferences = () => {
           title={t('preferences.data-disclosure-unanonymized.permission-ai-training.title')}
           description={t('preferences.data-disclosure-unanonymized.permission-ai-training.description')}
           checked={lupaKayttaaTekoalynKoulutukseen}
-          onChange={() => {
-            setLupaKayttaaTekoalynKoulutukseen(!lupaKayttaaTekoalynKoulutukseen);
-            update();
-          }}
+          onChange={() => setLupaKayttaaTekoalynKoulutukseen(!lupaKayttaaTekoalynKoulutukseen)}
           disabled={updating}
           data-testid="pref-ai-training"
         />
