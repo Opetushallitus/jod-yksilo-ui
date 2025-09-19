@@ -23,6 +23,13 @@ export interface Kokemus {
   osaamiset?: string[];
 }
 
+export interface ArticleSection {
+  navTitle: string;
+  content: React.ReactNode;
+  showInDevOnly?: boolean;
+  showNavTitle?: boolean;
+}
+
 export interface Jakauma {
   maara: number;
   tyhjia: number;
@@ -57,13 +64,19 @@ export interface KoulutusmahdollisuusJakaumat {
   opetustapa: Jakauma;
   osaaminen: Jakauma;
 }
-export type JakaumaKey = keyof KoulutusmahdollisuusJakaumat | keyof TyomahdollisuusJakaumat;
-export type Codeset = Required<Extract<keyof TyomahdollisuusJakaumat, 'maa' | 'maakunta' | 'kunta' | 'tyokieli'>>;
-export type CodesetValues = Record<Codeset, { code: string; value: string }[]>;
-
-export interface ArticleSection {
-  navTitle: string;
-  content: React.ReactNode;
-  showInDevOnly?: boolean;
-  showNavTitle?: boolean;
+interface CodeSetValue {
+  code: string;
+  value: string;
 }
+export type JakaumaKey = keyof KoulutusmahdollisuusJakaumat | keyof TyomahdollisuusJakaumat;
+
+export type EducationCodeSetKeys = Required<
+  Extract<keyof KoulutusmahdollisuusJakaumat, 'aika' | 'opetustapa' | 'koulutusala'>
+>;
+export type EducationCodeSetValues = Record<EducationCodeSetKeys, CodeSetValue[]>;
+
+export type JobCodesetKeys = Required<
+  Extract<keyof TyomahdollisuusJakaumat, 'maa' | 'maakunta' | 'kunta' | 'tyokieli'>
+>;
+export type JobCodesetValues = Record<JobCodesetKeys, CodeSetValue[]>;
+export type Codeset = JobCodesetKeys | EducationCodeSetKeys;
