@@ -34,13 +34,17 @@ const EducationOpportunity = () => {
       : t('education-opportunity.duration.average-years', { count: Math.round(kesto.mediaani / 12) });
   }, [kesto?.mediaani, t]);
 
-  const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
+  const kartoitetutKiinnostuksetUris = useToolStore(
+    useShallow((state) =>
+      state.kiinnostukset.filter((k) => k.tyyppi === 'KARTOITETTU').map((osaaminen) => osaaminen.id),
+    ),
+  );
   const competencesTableData = React.useMemo(
     () =>
       osaamiset
-        .map((competence) => ({ ...competence, profiili: omatOsaamisetUris?.includes(competence.uri) }))
+        .map((competence) => ({ ...competence, profiili: kartoitetutKiinnostuksetUris?.includes(competence.uri) }))
         .sort(sortByProperty(`nimi.${language}`)),
-    [osaamiset, language, omatOsaamisetUris],
+    [osaamiset, language, kartoitetutKiinnostuksetUris],
   );
 
   const opintopolkuUrl = React.useMemo(() => new URL(`https://opintopolku.fi/konfo/${language}/haku`).href, [language]);
@@ -68,7 +72,7 @@ const EducationOpportunity = () => {
       content: (
         <div className="flex flex-col gap-6 grow">
           <span className="font-arial">{t('education-opportunity.competences.description')}</span>
-          <CompareCompetencesTable rows={competencesTableData} />
+          <CompareCompetencesTable rows={competencesTableData} mode="kiinnostus" />
           {!sm && (
             <RateAiContent
               // eslint-disable-next-line no-console
