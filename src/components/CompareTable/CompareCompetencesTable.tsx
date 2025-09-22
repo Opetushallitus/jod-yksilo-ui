@@ -5,9 +5,10 @@ import { CompareCompetencesTableRow, CompareCompetencesTableRowData } from './Co
 interface CompareCompetencesTableProps {
   rows: CompareCompetencesTableRowData[];
   className?: string;
+  mode?: 'osaaminen' | 'kiinnostus';
 }
 
-export const CompareCompetencesTable = ({ rows, className = '' }: CompareCompetencesTableProps) => {
+export const CompareCompetencesTable = ({ rows, className = '', mode = 'osaaminen' }: CompareCompetencesTableProps) => {
   const { t } = useTranslation();
   const [showAll, setShowAll] = React.useState(false);
   const ROW_LIMIT = 10;
@@ -22,7 +23,7 @@ export const CompareCompetencesTable = ({ rows, className = '' }: CompareCompete
               {t('competence')}
             </th>
             <th scope="col" className="text-center whitespace-nowrap pr-5 pb-3">
-              {t('your-competences')}
+              {t(mode === 'kiinnostus' ? 'your-interests' : 'your-competences')}
             </th>
           </tr>
         </thead>
