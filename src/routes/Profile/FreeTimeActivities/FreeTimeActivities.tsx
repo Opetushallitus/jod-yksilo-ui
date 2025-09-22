@@ -1,12 +1,12 @@
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
-import { EmptyState } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
+import { EmptyState, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { ToolCard } from '../components/ToolCard';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
 import { AddOrEditPatevyysModal } from './modals/AddOrEditPatevyysModal';
 import { getFreeTimeActivitiesTableRows, type VapaaAjanToiminto } from './utils';
@@ -23,10 +23,8 @@ const FreeTimeActivities = () => {
       }
     >;
   };
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
+  const { lg } = useMediaQueries();
   const title = t('profile.free-time-activities.title');
   const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot, osaamisetMap));
   const { showModal } = useModal();
@@ -53,25 +51,19 @@ const FreeTimeActivities = () => {
     showModal(AddOrEditPatevyysModal, { toimintoId: row.key });
   };
 
-  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
-
   return (
-    <MainLayout navChildren={navChildren}>
+    <MainLayout
+      navChildren={
+        <div className="flex flex-col gap-5">
+          <ProfileNavigationList />
+          <ToolCard testId="free-time-go-to-tool" />
+        </div>
+      }
+    >
       <title>{title}</title>
       <ProfileSectionTitle type="PATEVYYS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.free-time-activities.description')}</p>
-      <div className="mb-8">
-        <Link
-          to={`/${language}/${t('slugs.tool.index')}`}
-          className="text-button-md hover:underline text-accent mt-4"
-          data-testid="free-time-go-to-tool"
-        >
-          <div className="flex items-center gap-2">
-            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <JodArrowRight size={24} />
-          </div>
-        </Link>
-      </div>
+
       {rows.length === 0 && (
         <div className="mt-6 mb-7" data-testid="free-time-empty-state">
           <EmptyState text={t('profile.free-time-activities.empty')} />
@@ -90,6 +82,7 @@ const FreeTimeActivities = () => {
         onNestedRowClick={onNestedRowClick}
         onAddNestedRowClick={onAddNestedRowClick}
       />
+      {lg ? null : <ToolCard testId="free-time-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };

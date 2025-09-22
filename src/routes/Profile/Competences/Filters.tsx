@@ -1,4 +1,5 @@
 import { SimpleNavigationList } from '@/components';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from '@/routes/Profile/Competences/constants';
 import { RadioButton, RadioButtonGroup, useMediaQueries } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +13,7 @@ interface FiltersProps extends CompetenceFiltersProps {
 export const Filters = ({ filterKeys, selectedFilters, setSelectedFilters, groupBy, setGroupBy }: FiltersProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
+  const { isDev } = useEnvironment();
 
   return (
     <>
@@ -28,7 +30,7 @@ export const Filters = ({ filterKeys, selectedFilters, setSelectedFilters, group
           hideLabel
         >
           <RadioButton label={t('profile.competences.group-by-source')} value={GROUP_BY_SOURCE} />
-          <RadioButton label={`TODO: ${t('profile.competences.group-by-theme')}`} value={GROUP_BY_THEME} />
+          {isDev && <RadioButton label={`TODO: ${t('profile.competences.group-by-theme')}`} value={GROUP_BY_THEME} />}
           <RadioButton label={t('profile.competences.group-by-alphabet')} value={GROUP_BY_ALPHABET} />
         </RadioButtonGroup>
       </SimpleNavigationList>

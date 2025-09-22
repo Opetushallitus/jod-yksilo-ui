@@ -1,10 +1,11 @@
 import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { useYksiloData } from '@/hooks/useYksiloData';
-import React from 'react';
+import { useMediaQueries } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { Link, useRouteLoaderData } from 'react-router';
 import { ProfileNavigationList } from '../components';
+import { ToolCard } from '../components/ToolCard';
 import WelcomePathModal from '../WelcomePathModal/WelcomePathModal';
 
 const ListItem = ({ label }: { label: string }) => <li className="list-disc ml-7 pl-4">{label}</li>;
@@ -14,13 +15,19 @@ const ProfileFront = () => {
     t,
     i18n: { language },
   } = useTranslation();
+  const { lg } = useMediaQueries();
   const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
   const { data, isLoading } = useYksiloData();
 
-  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
-
   return (
-    <MainLayout navChildren={navChildren}>
+    <MainLayout
+      navChildren={
+        <div className="flex flex-col gap-5">
+          <ProfileNavigationList />
+          <ToolCard testId="profile-front-go-to-tool" />
+        </div>
+      }
+    >
       <title>{t('profile.front.title')}</title>
       <h1 className="mb-5 text-heading-2 sm:text-heading-1" data-testid="profile-front-title">
         {t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
@@ -54,6 +61,7 @@ const ProfileFront = () => {
           </Link>
         </p>
       </div>
+      {lg ? null : <ToolCard testId="profile-front-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };
