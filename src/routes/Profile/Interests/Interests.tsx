@@ -6,14 +6,14 @@ import { useModal } from '@/hooks/useModal';
 import EditKiinnostusModal from '@/routes/Profile/Interests/EditKiinnostusModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, EmptyState, Tag, Textarea } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
+import { Button, EmptyState, Tag, Textarea, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { z } from 'zod';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { ToolCard } from '../components/ToolCard';
 
 const Interests = () => {
   const {
@@ -21,6 +21,7 @@ const Interests = () => {
     i18n: { language },
   } = useTranslation();
   const { showModal } = useModal();
+  const { lg } = useMediaQueries();
   const { kiinnostukset, vapaateksti } = useLoaderData() as {
     kiinnostukset: components['schemas']['OsaaminenDto'][];
     vapaateksti: components['schemas']['LokalisoituTeksti'];
@@ -82,25 +83,19 @@ const Interests = () => {
     }
   }, [fields]);
 
-  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
-
   return (
-    <MainLayout navChildren={navChildren}>
+    <MainLayout
+      navChildren={
+        <div className="flex flex-col gap-5">
+          <ProfileNavigationList />
+          <ToolCard testId="interests-go-to-tool" />
+        </div>
+      }
+    >
       <title>{title}</title>
       <ProfileSectionTitle type="KIINNOSTUS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.interests.description')}</p>
-      <div className="mb-8">
-        <Link
-          to={`/${language}/${t('slugs.tool.index')}`}
-          className="text-button-md hover:underline text-accent mt-4"
-          data-testid="interests-go-to-tool"
-        >
-          <div className="flex items-center gap-2">
-            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <JodArrowRight size={24} />
-          </div>
-        </Link>
-      </div>
+
       {sortedSkills.length === 0 && (
         <div className="mt-6 mb-7">
           <EmptyState text={t('profile.interests.empty')} data-testid="interests-empty-state" />
@@ -163,6 +158,7 @@ const Interests = () => {
         }}
         data-testid="interests-freeform"
       />
+      {lg ? null : <ToolCard testId="interests-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };

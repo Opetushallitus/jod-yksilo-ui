@@ -7,14 +7,14 @@ import { useModal } from '@/hooks/useModal';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, EmptyState, Tag, Textarea } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
+import { Button, EmptyState, Tag, Textarea, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { z } from 'zod';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { ToolCard } from '../components/ToolCard';
 
 const SomethingElse = () => {
   const {
@@ -23,6 +23,7 @@ const SomethingElse = () => {
   } = useTranslation();
   const title = t('profile.something-else.title');
   const { showModal } = useModal();
+  const { lg } = useMediaQueries();
   const { muuOsaaminen, vapaateksti } = useLoaderData() as {
     muuOsaaminen: OsaaminenDto[];
     vapaateksti: components['schemas']['LokalisoituTeksti'];
@@ -80,25 +81,19 @@ const SomethingElse = () => {
     }
   }, [fields]);
 
-  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
-
   return (
-    <MainLayout navChildren={navChildren}>
+    <MainLayout
+      navChildren={
+        <div className="flex flex-col gap-5">
+          <ProfileNavigationList />
+          <ToolCard testId="something-else-go-to-tool" />
+        </div>
+      }
+    >
       <title>{title}</title>
       <ProfileSectionTitle type="MUU_OSAAMINEN" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.something-else.description')}</p>
-      <div className="mb-8">
-        <Link
-          to={`/${language}/${t('slugs.tool.index')}`}
-          className="text-button-md hover:underline text-accent mt-4"
-          data-testid="something-else-go-to-tool"
-        >
-          <div className="flex items-center gap-2">
-            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <JodArrowRight size={24} />
-          </div>
-        </Link>
-      </div>
+
       {muuOsaaminen.length === 0 && (
         <div className="mt-6 mb-7" data-testid="something-else-empty-state">
           <EmptyState text={t('profile.something-else.empty')} />
@@ -142,6 +137,7 @@ const SomethingElse = () => {
         }}
         data-testid="something-else-freeform"
       />
+      {lg ? null : <ToolCard testId="something-else-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };

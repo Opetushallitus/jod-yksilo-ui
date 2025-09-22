@@ -1,4 +1,6 @@
+import type { components } from '@/api/schema';
 import { Breadcrumb, OpportunityCard } from '@/components';
+import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
@@ -8,10 +10,10 @@ import ToolOpportunityCardActionMenu from '@/routes/Tool/ToolOpportunityCardActi
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import { Button, cx, Spinner, useMediaQueries } from '@jod/design-system';
-import { JodClose, JodCompass, JodSettings } from '@jod/design-system/icons';
+import { JodArrowRight, JodClose, JodCompass, JodSettings } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useRouteLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import Competences from './Competences';
 import ToolAccordion from './components/ToolAccordion';
@@ -158,6 +160,22 @@ const ExploreOpportunities = () => {
   );
 };
 
+const ProfileLinkComponent = ({ className, children }: { className?: string; children: React.ReactNode }) => {
+  const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
+  const { t, i18n } = useTranslation();
+
+  return (
+    <NavLinkBasedOnAuth
+      className={className}
+      to={`${t('slugs.profile.index')}/${t('slugs.profile.front')}`}
+      shouldLogin={!rootLoaderData}
+      lang={i18n.language}
+    >
+      {children}
+    </NavLinkBasedOnAuth>
+  );
+};
+
 const YourInfo = () => {
   const { t } = useTranslation();
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -185,6 +203,22 @@ const YourInfo = () => {
       </ToolAccordion>
 
       <RateAiContent onDislike={noop} onLike={noop} variant="kohtaanto" />
+
+      <div className="flex flex-col rounded-lg p-6 gap-5 mt-4 bg-secondary-1-dark-2">
+        <div className="text-heading-2 text-white mr-2">{t('profile.banner.title')}</div>
+        <p className="text-body-lg text-white">{t('profile.banner.description')}</p>
+        <div className="mt-4">
+          <Button
+            label={t('profile.banner.link-text')}
+            variant="white"
+            size="lg"
+            LinkComponent={ProfileLinkComponent}
+            iconSide="right"
+            dataTestId="tool-go-to-profile"
+            icon={<JodArrowRight />}
+          />
+        </div>
+      </div>
     </>
   );
 };

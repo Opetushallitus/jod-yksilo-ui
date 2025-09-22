@@ -1085,6 +1085,11 @@
     "title": "Tietosuojaseloste ja evästeet"
   },
   "profile": {
+    "banner": {
+      "description": "Tallenna ja muokkaa tunnistamiasi osaamisia profiilissasi.",
+      "link-text": "Siirry profiiliin",
+      "title": "Oma osaamisprofiili"
+    },
     "competences": {
       "add": "Lisää osaamisia",
       "description": "Löydät alta kaikki osaamisesi, jotka olet tunnistanut tai lisännyt profiiliisi. Osaamisesi ryhmittelyn ja esitystavan voit valita itse.",
@@ -1411,6 +1416,11 @@
     "update-success": "Päivitys onnistui"
   },
   "tool": {
+    "banner": {
+      "description": "Löydä ammatti-, työ- ja koulutusmahdollisuuksia helposti kokeilemalla.",
+      "link-text": "Etsi mahdollisuuksia",
+      "title": "Etsi mahdollisuuksia"
+    },
     "competency-profile": {
       "description": "Tuo osaamisia profiilista tai vie valintasi sinne, jotta tietosi pysyvät yhdessä paikassa.",
       "help": "Tuo osaamisia osaamisprofiilistasi. Voit hyödyntää aiemmin tallentamiasi osaamisia mahdollisuuksien kartoittamisessa. Voit tuoda kaikki osaamiset tai vain ne, jotka haluat.\n\nVoit myös päivittää osaamisprofiiliasi tähän näkymään syöttämiesi uusien osaamisten ja kiinnostusten perusteella.",
