@@ -1,5 +1,5 @@
 import { Breadcrumb, OpportunityCard } from '@/components';
-import RateAiContent from '@/components/RateAiContent/RateAiContent';
+import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import AdditionalSupport from '@/routes/Tool/AdditionalSupport';

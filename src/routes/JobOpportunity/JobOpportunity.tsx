@@ -4,7 +4,7 @@ import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompet
 import { CounselingBanner } from '@/components/CounselingBanner/CounselingBanner';
 import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
-import RateAiContent from '@/components/RateAiContent/RateAiContent';
+import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { useToolStore } from '@/stores/useToolStore';
 import { formatDate, getLocalizedText, hashString, sortByProperty } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
@@ -89,7 +89,7 @@ const JobOpportunity = () => {
                 onDislike={(value) => console.log('not implemented', value)}
                 // eslint-disable-next-line no-console
                 onLike={() => console.log('not implemented')}
-                variant="opportunity"
+                variant="mahdollisuus"
               />
               <CounselingBanner />
             </>

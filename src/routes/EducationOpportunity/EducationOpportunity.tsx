@@ -2,7 +2,7 @@ import opintopolkuLogo from '@/../assets/opintopolku.svg';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import { EducationJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
-import RateAiContent from '@/components/RateAiContent/RateAiContent';
+import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import type { LoaderData } from '@/routes/EducationOpportunity/loader';
 import type { JakaumaKey } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
@@ -79,7 +79,7 @@ const EducationOpportunity = () => {
               onDislike={(value) => console.log('not implemented', value)}
               // eslint-disable-next-line no-console
               onLike={() => console.log('not implemented')}
-              variant="opportunity"
+              variant="mahdollisuus"
             />
           )}
         </div>

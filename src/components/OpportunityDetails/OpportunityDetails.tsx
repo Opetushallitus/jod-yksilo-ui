@@ -24,7 +24,7 @@ import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { CounselingBanner } from '../CounselingBanner/CounselingBanner';
 import { IconHeading } from '../IconHeading';
-import RateAiContent from '../RateAiContent/RateAiContent';
+import { RateAiContent } from '../RateAiContent/RateAiContent';
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
 export interface OpportunityDetailsSection {
@@ -129,7 +129,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           onDislike={(value) => console.log('not implemented', value)}
           // eslint-disable-next-line no-console
           onLike={() => console.log('not implemented')}
-          variant="opportunity"
+          variant="mahdollisuus"
         />
         <CounselingBanner />
       </>

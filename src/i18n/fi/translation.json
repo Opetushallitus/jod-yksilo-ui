@@ -1309,10 +1309,14 @@
   "proposed-competences": "Ehdotetut osaamiset",
   "proposed-interests": "Ehdotetut kiinnostukset",
   "rate-ai-content": {
-    "body": "Tällä sivulla sinulle ehdotetaan osaamisesi ja kiinnostusten kohteittesi perusteella sinulle sopivia mahdollisuuksia. Kerro miten onnistuimme?",
-    "body-for-opportunities": "Tällä sivulla sinulle ehdotetaan osaamisesi ja kiinnostusten kohteittesi perusteella sinulle sopivia mahdollisuuksia. Kerro miten onnistuimme?",
-    "header": "Arvioi tekoälyn tuottamaa sisältöä",
-    "header-for-opportunities": "Arvioi tekoälyn tunnistamia mahdollisuuksia",
+    "kohtaanto": {
+      "body": "Tällä sivulla on tekoälyn avulla luotua sisältöä - se saattaa sisältää virheitä. Kerro miten onnistuimme?",
+      "header": "Arvioi tekoälyn tuottamaa sisältöä"
+    },
+    "mahdollisuus": {
+      "body": "Tällä sivulla ehdotetaan syöttämiesi tietojen perusteella sinulle sopivia mahdollisuuksia. Kerro miten onnistuimme?",
+      "header": "Arvioi sinulle ehdotettuja mahdollisuuksia"
+    },
     "modal-body": "Huomasimme, että annoit peukun alas tekoälyn tuottamalle sisällölle. Voisitko kertoa tarkemmin, mikä ei toiminut? Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
     "modal-header": "Annoit peukun alas",
     "modal-placeholder": "Esim. sisältö epätarkkaa, ei vastannut tarvetta, väärä sävy…",
