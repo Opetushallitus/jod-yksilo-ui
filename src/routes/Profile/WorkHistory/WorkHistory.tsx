@@ -2,12 +2,12 @@ import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/comp
 import { useModal } from '@/hooks/useModal';
 import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonantajaModal';
 import { WorkHistoryWizard } from '@/routes/Profile/WorkHistory/WorkHistoryWizard';
-import { EmptyState } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
+import { EmptyState, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { ToolCard } from '../components/ToolCard';
 import AddOrEditToimenkuvaModal from './modals/AddOrEditToimenkuvaModal';
 import { Tyopaikka, getWorkHistoryTableRows } from './utils';
 
@@ -23,13 +23,11 @@ const WorkHistory = () => {
       }
     >;
   };
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const title = t('profile.work-history.title');
   const [rows, setRows] = React.useState(getWorkHistoryTableRows(tyopaikat, osaamisetMap));
   const { showModal } = useModal();
+  const { lg } = useMediaQueries();
 
   React.useEffect(() => {
     setRows(getWorkHistoryTableRows(tyopaikat, osaamisetMap));
@@ -54,25 +52,19 @@ const WorkHistory = () => {
     showModal(AddOrEditToimenkuvaModal, { tyopaikkaId: row.key });
   };
 
-  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
-
   return (
-    <MainLayout navChildren={navChildren}>
+    <MainLayout
+      navChildren={
+        <div className="flex flex-col gap-5">
+          <ProfileNavigationList />
+          <ToolCard testId="work-history-go-to-tool" />
+        </div>
+      }
+    >
       <title>{title}</title>
       <ProfileSectionTitle type="TOIMENKUVA" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.work-history.description')}</p>
-      <div className="mb-8">
-        <Link
-          to={`/${language}/${t('slugs.tool.index')}`}
-          className="text-button-md hover:underline text-accent mt-4"
-          data-testid="work-history-go-to-tool"
-        >
-          <div className="flex items-center gap-2">
-            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <JodArrowRight size={24} />
-          </div>
-        </Link>
-      </div>
+
       {rows.length === 0 && (
         <div className="mt-6 mb-7" data-testid="work-history-empty-state">
           <EmptyState text={t('profile.work-history.empty')} />
@@ -90,6 +82,7 @@ const WorkHistory = () => {
         onNestedRowClick={onNestedRowClick}
         onAddNestedRowClick={onAddNestedRowClick}
       />
+      {lg ? null : <ToolCard testId="work-history-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };

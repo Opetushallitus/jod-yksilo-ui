@@ -1,5 +1,6 @@
 import { MainLayout } from '@/components';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
@@ -7,11 +8,11 @@ import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
 import type { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
 import { sortByProperty } from '@/utils';
 import { Button, Modal, useMediaQueries } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { ToolCard } from '../components/ToolCard';
 import { type CompetenceSourceType, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
 
 const Competences = () => {
@@ -26,6 +27,7 @@ const Competences = () => {
   const locale = language as 'fi' | 'sv';
   const [showFilters, setShowFilters] = React.useState(false);
   const { lg } = useMediaQueries();
+  const { isDev } = useEnvironment();
 
   const { selectedFilters, setSelectedFilters, filterKeys } = useInitializeFilters(
     locale,
@@ -66,24 +68,13 @@ const Competences = () => {
             setGroupBy={setGroupBy}
             setSelectedFilters={setSelectedFilters}
           />
+          <ToolCard testId="competences-go-to-tool" />
         </div>
       }
     >
       <title>{title}</title>
       <ProfileSectionTitle type="OSAAMISENI" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.competences.description')}</p>
-      <div className="mb-8">
-        <Link
-          to={`/${language}/${t('slugs.tool.index')}`}
-          className="text-button-md hover:underline text-accent mt-4"
-          data-testid="competences-go-to-tool"
-        >
-          <div className="flex items-center gap-2">
-            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <JodArrowRight size={24} />
-          </div>
-        </Link>
-      </div>
 
       <div>
         {!lg && (
@@ -131,7 +122,7 @@ const Competences = () => {
             data-testid="competences-group-by-source"
           />
         )}
-        {groupBy === GROUP_BY_THEME && <></>}
+        {isDev && groupBy === GROUP_BY_THEME && <></>}
         {groupBy === GROUP_BY_ALPHABET && (
           <GroupByAlphabet
             filters={selectedFilters}
@@ -150,6 +141,7 @@ const Competences = () => {
           />
         )}
       </div>
+      {lg ? null : <ToolCard testId="competences-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };

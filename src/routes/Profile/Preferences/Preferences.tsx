@@ -4,11 +4,12 @@ import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { LogoutFormContext } from '@/routes/Root';
 import { useToolStore } from '@/stores/useToolStore';
-import { Button, Toggle } from '@jod/design-system';
+import { Button, Toggle, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouteLoaderData } from 'react-router';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { ToolCard } from '../components/ToolCard';
 
 const DownloadLink = ({ children }: { children: React.ReactNode }) => (
   <a href={`${import.meta.env.BASE_URL}api/profiili/yksilo/vienti`}>{children}</a>
@@ -48,6 +49,7 @@ const ToggleWithText = ({
 
 const Preferences = () => {
   const { t } = useTranslation();
+  const { lg } = useMediaQueries();
   const title = t('profile.preferences.title');
   const toolStore = useToolStore();
   const logoutForm = React.useContext(LogoutFormContext);
@@ -97,10 +99,15 @@ const Preferences = () => {
     data?.tervetuloapolku,
   ]);
 
-  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
-
   return (
-    <MainLayout navChildren={navChildren}>
+    <MainLayout
+      navChildren={
+        <div className="flex flex-col gap-5">
+          <ProfileNavigationList />
+          <ToolCard testId="preferences-go-to-tool" />
+        </div>
+      }
+    >
       <title>{title}</title>
       <ProfileSectionTitle type="ASETUKSENI" title={title} />
       <div className="mb-8 text-body-lg flex flex-col gap-7">
@@ -156,6 +163,7 @@ const Preferences = () => {
           data-testid="pref-delete-profile"
         />
       </section>
+      {lg ? null : <ToolCard testId="preferences-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };
