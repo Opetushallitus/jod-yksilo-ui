@@ -9,9 +9,10 @@ interface RateAiContentProps {
   onDislike: (feedback: string) => void;
   isLiked?: boolean;
   isDisliked?: boolean;
-  variant: 'kohtaanto' | 'opportunity';
+  variant: 'kohtaanto' | 'mahdollisuus';
 }
-const RateAiContent = ({ isLiked, isDisliked, onLike, onDislike, variant }: RateAiContentProps) => {
+
+export const RateAiContent = ({ isLiked, isDisliked, onLike, onDislike, variant }: RateAiContentProps) => {
   const { t } = useTranslation();
   const LikeIcon = isLiked ? JodThumbUpFilled : JodThumbUp;
   const DislikeIcon = isDisliked ? JodThumbDownFilled : JodThumbDown;
@@ -19,9 +20,9 @@ const RateAiContent = ({ isLiked, isDisliked, onLike, onDislike, variant }: Rate
   const dislikeRef = React.useRef('');
 
   const headerText =
-    variant === 'kohtaanto' ? t('rate-ai-content.header-for-opportunities') : t('rate-ai-content.header');
+    variant === 'kohtaanto' ? t('rate-ai-content.kohtaanto.header') : t('rate-ai-content.mahdollisuus.header');
   const bodyDescription =
-    variant === 'kohtaanto' ? t('rate-ai-content.body') : t('rate-ai-content.body-for-opportunities');
+    variant === 'kohtaanto' ? t('rate-ai-content.kohtaanto.body') : t('rate-ai-content.mahdollisuus.body');
 
   return (
     <div className="bg-accent flex flex-col rounded-lg min-h-[271px] p-6">
@@ -63,5 +64,3 @@ const RateAiContent = ({ isLiked, isDisliked, onLike, onDislike, variant }: Rate
     </div>
   );
 };
-
-export default RateAiContent;
