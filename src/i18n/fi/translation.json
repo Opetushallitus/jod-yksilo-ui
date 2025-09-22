@@ -117,6 +117,13 @@
   "allow": "Sallin",
   "back": "Takaisin",
   "basic-information": "Perustiedot",
+  "beta": {
+    "note": {
+      "description": "Kerro mielipiteesi ja auta meitä kehittämään palvelua.",
+      "title": "Kokeile palvelua",
+      "to-feedback": "Siirry kyselyyn"
+    }
+  },
   "cancel": "Peruuta",
   "chatbot": {
     "agent-name": "Neuvontabotti",
