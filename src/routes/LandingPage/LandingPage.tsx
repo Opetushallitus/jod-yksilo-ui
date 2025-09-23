@@ -4,7 +4,7 @@ import { useLoginLink } from '@/hooks/useLoginLink';
 import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation, useNavigate, useRouteLoaderData } from 'react-router';
+import { useLocation, useNavigate, useRouteLoaderData } from 'react-router';
 
 const ListItem = ({ label }: { label: string }) => <li className="list-disc ml-7 pl-4">{label}</li>;
 
@@ -78,9 +78,14 @@ const LandingPage = () => {
       <div className="my-8">
         <p>
           {t('profile.landing-page.paragraph-4')}{' '}
-          <Link to={`/${language}/${t('slugs.privacy-policy')}`} className="text-accent hover:underline">
+          <a
+            href={`/${language}/${t('slugs.privacy-and-cookies')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:underline"
+          >
             {t('profile.preferences.paragraph-4-link')}
-          </Link>
+          </a>
         </p>
       </div>
     </MainLayout>

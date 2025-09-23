@@ -3,7 +3,6 @@ import { Button, Modal } from '@jod/design-system';
 import { JodArrowRight, JodCheckCircle, JodClose } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
 
 interface ImportKoulutusResultModalProps {
   isOpen: boolean;
@@ -44,15 +43,17 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
                   <p className="max-w-full break-words whitespace-pre-line">
                     {t('education-history-import.result-modal.success-osaamiset-info')}
                   </p>
-                  <Link
-                    to={`/${language}/${t('slugs.about-ai')}`}
-                    className="text-button-md hover:underline text-accent mt-4"
+                  <a
+                    href={`/${language}/${t('slugs.ai-usage')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-button-md mt-4 text-accent hover:underline"
                   >
                     <div className="flex items-center gap-2">
                       {t('education-history-import.result-modal.success-osaamiset-link-about-ai')}
                       <JodArrowRight />
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </div>
             ) : (

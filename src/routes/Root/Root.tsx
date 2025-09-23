@@ -22,7 +22,7 @@ import {
 import { JodMenu, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router';
+import { Link, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { LogoutFormContext } from '.';
 
@@ -109,29 +109,15 @@ const Root = () => {
     document.documentElement.setAttribute('lang', language);
   }, [language]);
 
-  const infoSlug = t('slugs.basic-information');
-  const moreInfoLinks = [
-    {
-      to: `${t('slugs.user-guide.index')}/${t('slugs.user-guide.what-is-the-service')}`,
-      label: t('about-us'),
+  const moreInfoLinks = ['about-service', 'privacy-and-cookies', 'data-sources', 'ai-usage', 'accessibility'].map(
+    (key) => {
+      const slug = t(`slugs.${key}`);
+      return {
+        href: `/${language}/${slug}`,
+        label: t(`footer.more-info-links.${key}`),
+      };
     },
-    {
-      to: t('slugs.privacy-policy'),
-      label: t('privacy-policy-and-cookies.title'),
-    },
-    {
-      to: `${infoSlug}/${t('slugs.data-sources')}`,
-      label: t('data-sources'),
-    },
-    {
-      to: t('slugs.about-ai'),
-      label: t('about-ai'),
-    },
-    {
-      to: `${infoSlug}/${t('slugs.accessibility-statement')}`,
-      label: t('accessibility-statement'),
-    },
-  ];
+  );
 
   const [visibleBetaFeedback, setVisibleBetaFeedback] = React.useState(true);
 
@@ -240,7 +226,6 @@ const Root = () => {
         moreInfoTitle={t('footer.more-info-title')}
         moreInfoDescription={t('footer.more-info-description')}
         moreInfoLinks={moreInfoLinks}
-        MoreInfoLinkComponent={NavLink}
         feedbackTitle={t('footer.feedback-title')}
         feedbackContent={t('footer.feedback-content')}
         feedbackButtonLabel={t('footer.feedback-button-label')}
