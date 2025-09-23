@@ -1,7 +1,9 @@
 import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
+import { IconHeading } from '@/components/IconHeading';
 import { useYksiloData } from '@/hooks/useYksiloData';
 import { useMediaQueries } from '@jod/design-system';
+import { JodUser } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
 import { Link, useRouteLoaderData } from 'react-router';
 import { ProfileNavigationList } from '../components';
@@ -29,9 +31,11 @@ const ProfileFront = () => {
       }
     >
       <title>{t('profile.front.title')}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1" data-testid="profile-front-title">
-        {t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
-      </h1>
+      <IconHeading
+        icon={<JodUser />}
+        title={t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
+        dataTestId="profile-front-title"
+      />
 
       {!isLoading && !data.tervetuloapolku && <WelcomePathModal yksiloData={data} />}
 
