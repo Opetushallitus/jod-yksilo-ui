@@ -320,6 +320,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
         kotikunta: data.allowKotikunta ? data.kotikunta : undefined,
         aidinkieli: data.aidinkieli,
         sukupuoli: data.allowSukupuoli ? data.sukupuoli : undefined,
+        email: data.email,
       },
     });
 
