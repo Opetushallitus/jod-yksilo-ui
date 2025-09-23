@@ -15,29 +15,12 @@ import { Tool, toolLoader } from '@/routes/Tool';
 import { NoteStackProvider } from '@jod/design-system';
 import { type RouteObject, replace } from 'react-router';
 import { withYksiloContext } from '../auth';
-import {
-  AccessibilityStatement,
-  BasicInformation,
-  CookiePolicy,
-  DataSources,
-  TermsOfService,
-} from './BasicInformation';
 import { Home } from './Home';
-import { AboutAi, PrivacyPolicy } from './InfoPages';
 import { Favorites, LandingPage, Preferences, Profile, SomethingElse } from './Profile';
 import { EducationHistory } from './Profile/EducationHistory';
 import { FreeTimeActivities } from './Profile/FreeTimeActivities';
 import ProfileFront from './Profile/ProfileFront/ProfileFront';
 import { ErrorBoundary, NoMatch, Root, loader as rootLoader } from './Root';
-import {
-  HowDoIGiveFeedback,
-  HowDoIUseTheService,
-  UserGuide,
-  WhatIsTheService,
-  WhereCanIGetMoreHelp,
-  WhoIsTheServiceFor,
-  WhoProvidesTheService,
-} from './UserGuide';
 
 const competencesSlug = 'slugs.profile.competences';
 
@@ -213,137 +196,6 @@ const educationOpportunityRoutes = supportedLanguageCodes.map(
     }) as RouteObject,
 );
 
-const userGuideRoutes: RouteObject[] = supportedLanguageCodes.map((lng) => ({
-  id: `{slugs.user-guide.index}|${lng}`,
-  path: i18n.t('slugs.user-guide.index', { lng }),
-  element: <UserGuide />,
-  handle: {
-    title: i18n.t('user-guide', { lng }),
-  },
-  children: [
-    {
-      index: true,
-      loader: () => replace(i18n.t('slugs.user-guide.what-is-the-service', { lng })),
-    },
-    {
-      id: `{slugs.user-guide.what-is-the-service}|${lng}`,
-      path: i18n.t('slugs.user-guide.what-is-the-service', { lng }),
-      element: <WhatIsTheService />,
-      handle: {
-        title: i18n.t('what-is-the-service', { lng }),
-      },
-    },
-    {
-      id: `{slugs.user-guide.who-is-the-service-for}|${lng}`,
-      path: i18n.t('slugs.user-guide.who-is-the-service-for', { lng }),
-      element: <WhoIsTheServiceFor />,
-      handle: {
-        title: i18n.t('who-is-the-service-for', { lng }),
-      },
-    },
-    {
-      id: `{slugs.user-guide.how-do-i-use-the-service}|${lng}`,
-      path: i18n.t('slugs.user-guide.how-do-i-use-the-service', { lng }),
-      element: <HowDoIUseTheService />,
-      handle: {
-        title: i18n.t('how-do-i-use-the-service', { lng }),
-      },
-    },
-    {
-      id: `{slugs.user-guide.where-can-i-get-more-help}|${lng}`,
-      path: i18n.t('slugs.user-guide.where-can-i-get-more-help', { lng }),
-      element: <WhereCanIGetMoreHelp />,
-      handle: {
-        title: i18n.t('where-can-i-get-more-help', { lng }),
-      },
-    },
-    {
-      id: `{slugs.user-guide.who-provides-the-service}|${lng}`,
-      path: i18n.t('slugs.user-guide.who-provides-the-service', { lng }),
-      element: <WhoProvidesTheService />,
-      handle: {
-        title: i18n.t('who-provides-the-service', { lng }),
-      },
-    },
-    {
-      id: `{slugs.user-guide.how-do-i-give-feedback}|${lng}`,
-      path: i18n.t('slugs.user-guide.how-do-i-give-feedback', { lng }),
-      element: <HowDoIGiveFeedback />,
-      handle: {
-        title: i18n.t('how-do-i-give-feedback', { lng }),
-      },
-    },
-  ],
-}));
-
-const infoPages: RouteObject[] = supportedLanguageCodes.map((lng) => ({
-  children: [
-    {
-      id: `{slugs.about-ai}|${lng}`,
-      path: i18n.t('slugs.about-ai', { lng }),
-      element: <AboutAi />,
-      handle: {
-        title: i18n.t('about-ai', { lng }),
-      },
-    },
-    {
-      id: `{slugs.privacy-policy}|${lng}`,
-      path: i18n.t('slugs.privacy-policy', { lng }),
-      element: <PrivacyPolicy />,
-      handle: {
-        title: i18n.t('privacy-policy', { lng }),
-      },
-    },
-  ],
-}));
-
-const basicInformationRoutes: RouteObject[] = supportedLanguageCodes.map((lng) => ({
-  id: `{slugs.basic-information}|${lng}`,
-  path: i18n.t('slugs.basic-information', { lng }),
-  element: <BasicInformation />,
-  handle: {
-    title: i18n.t('basic-information', { lng }),
-  },
-  children: [
-    {
-      index: true,
-      loader: () => replace(i18n.t('slugs.cookie-policy', { lng })),
-    },
-    {
-      id: `{slugs.cookie-policy}|${lng}`,
-      path: i18n.t('slugs.cookie-policy', { lng }),
-      element: <CookiePolicy />,
-      handle: {
-        title: i18n.t('cookie-policy', { lng }),
-      },
-    },
-    {
-      id: `{slugs.data-sources}|${lng}`,
-      path: i18n.t('slugs.data-sources', { lng }),
-      element: <DataSources />,
-      handle: {
-        title: i18n.t('data-sources', { lng }),
-      },
-    },
-    {
-      id: `{slugs.terms-of-service}|${lng}`,
-      path: i18n.t('slugs.terms-of-service', { lng }),
-      element: <TermsOfService />,
-      handle: {
-        title: i18n.t('terms-of-service', { lng }),
-      },
-    },
-    {
-      id: `{slugs.accessibility-statement}|${lng}`,
-      path: i18n.t('slugs.accessibility-statement', { lng }),
-      element: <AccessibilityStatement />,
-      handle: {
-        title: i18n.t('accessibility-statement', { lng }),
-      },
-    },
-  ],
-}));
-
 const rootRoute: RouteObject = {
   id: 'root',
   path: '/:lng',
@@ -365,10 +217,7 @@ const rootRoute: RouteObject = {
     ...toolRoutes,
     ...jobOpportunityRoutes,
     ...educationOpportunityRoutes,
-    ...userGuideRoutes,
-    ...basicInformationRoutes,
     ...profileLandingPageRoutes,
-    ...infoPages,
   ],
 };
 

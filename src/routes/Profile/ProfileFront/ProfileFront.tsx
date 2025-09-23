@@ -5,7 +5,7 @@ import { useYksiloData } from '@/hooks/useYksiloData';
 import { useMediaQueries } from '@jod/design-system';
 import { JodUser } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
-import { Link, useRouteLoaderData } from 'react-router';
+import { useRouteLoaderData } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import WelcomePathModal from '../WelcomePathModal/WelcomePathModal';
@@ -60,9 +60,14 @@ const ProfileFront = () => {
         </ul>
         <p>
           {t('profile.preferences.paragraph-4')}
-          <Link to={`/${language}/${t('slugs.privacy-policy')}`} className="text-accent hover:underline">
+          <a
+            href={`/${language}/${t('slugs.privacy-and-cookies')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:underline"
+          >
             {t('profile.preferences.paragraph-4-link')}
-          </Link>
+          </a>
         </p>
       </div>
       {lg ? null : <ToolCard testId="profile-front-go-to-tool" className="mt-6" />}

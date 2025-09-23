@@ -21,11 +21,6 @@
     }
   },
   "slugs": {
-    "about-us": "about-us",
-    "accessibility-statement": "accessibility-statement",
-    "basic-information": "basic-information",
-    "cookie-policy": "cookie-policy",
-    "data-sources": "data-sources",
     "education-opportunity": {
       "index": "education-opportunity"
     },
@@ -48,7 +43,6 @@
       "work-history": "work-history"
     },
     "session-expired": "session-expired",
-    "terms-of-service": "terms-of-service",
     "tool": {
       "competences": "competences",
       "goals": "goals",

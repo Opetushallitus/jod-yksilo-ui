@@ -1,7 +1,10 @@
 import { AiInfoButton } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import { Trans, useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+
+const Link = ({ children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+  return <a {...rest}>{children}</a>;
+};
 
 // Wrapper component for DS AiInfoButton
 export const AiInfo = () => {
@@ -18,7 +21,7 @@ export const AiInfo = () => {
           i18nKey="ai-info-tooltip.description"
           components={{
             Icon: <JodOpenInNew size={18} />,
-            CustomLink: <Link to={`/${language}/${t('slugs.about-ai')}`} className="inline-flex underline" />,
+            CustomLink: <Link href={`/${language}/${t('slugs.ai-usage')}`} className="inline-flex underline" />,
           }}
         />
       </p>

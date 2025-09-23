@@ -16,7 +16,7 @@ import {
   useFormState,
 } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
-import { Link, useRevalidator } from 'react-router';
+import { useRevalidator } from 'react-router';
 import z from 'zod';
 import { GENDER_VALUES } from '../utils';
 
@@ -33,6 +33,10 @@ interface InfoBlockProps {
   interactiveComponent: React.ReactNode;
   orientation?: 'horizontal' | 'vertical';
 }
+
+const Link = ({ children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+  return <a {...rest}>{children}</a>;
+};
 
 interface ToggleAllowProps {
   checked: boolean;
@@ -206,10 +210,10 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
             Icon: <JodOpenInNew />,
             CustomLink: (
               <Link
-                to={`/${language}/${t('slugs.privacy-policy')}`}
-                className="inline-flex text-accent"
+                href={`/${language}/${t('slugs.privacy-and-cookies')}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-flex text-accent hover:underline"
               />
             ),
           }}
@@ -242,10 +246,10 @@ const StepAi = () => {
               Icon: <JodOpenInNew />,
               CustomLink: (
                 <Link
-                  to={`/${language}/${t('slugs.about-ai')}`}
-                  className="inline-flex text-accent"
+                  href={`/${language}/${t('slugs.ai-usage')}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="inline-flex text-accent hover:underline"
                 />
               ),
             }}
