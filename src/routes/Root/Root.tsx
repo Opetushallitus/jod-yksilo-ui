@@ -48,7 +48,7 @@ const Root = () => {
   const { note, clearNote } = useNoteStore(useShallow((state) => ({ note: state.note, clearNote: state.clearNote })));
   const isMouseInteraction = useInteractionMethod();
   const location = useLocation();
-  const { addNote } = useNoteStack();
+  const { addNote, removeNote } = useNoteStack();
   const [langMenuOpen, setLangMenuOpen] = React.useState(false);
   const [navMenuOpen, setNavMenuOpen] = React.useState(false);
   const [feedbackVisible, setFeedbackVisible] = React.useState(false);
@@ -133,28 +133,36 @@ const Root = () => {
     },
   ];
 
+  const [visibleBetaFeedback, setVisibleBetaFeedback] = React.useState(true);
+
   React.useEffect(() => {
-    addNote({
-      title: t('beta.note.title'),
-      description: t('beta.note.description'),
-      variant: 'feedback',
-      readMoreComponent: (
-        <Button
-          size="sm"
-          variant="white"
-          label={t('beta.note.to-feedback')}
-          icon={<JodOpenInNew />}
-          iconSide="right"
-          LinkComponent={getLinkTo('https://link.webropolsurveys.com/S/9697D299FF7E5000', {
-            useAnchor: true,
-            target: '_blank',
-          })}
-        />
-      ),
-      permanent: false,
-      id: 'beta-feedback',
-    });
-  }, [t, addNote]);
+    if (visibleBetaFeedback) {
+      addNote({
+        title: t('beta.note.title'),
+        description: t('beta.note.description'),
+        variant: 'feedback',
+        onCloseClick: () => {
+          setVisibleBetaFeedback(false);
+          removeNote('beta-feedback');
+        },
+        readMoreComponent: (
+          <Button
+            size="sm"
+            variant="white"
+            label={t('beta.note.to-feedback')}
+            icon={<JodOpenInNew />}
+            iconSide="right"
+            LinkComponent={getLinkTo('https://link.webropolsurveys.com/S/9697D299FF7E5000', {
+              useAnchor: true,
+              target: '_blank',
+            })}
+          />
+        ),
+        permanent: false,
+        id: 'beta-feedback',
+      });
+    }
+  }, [t, addNote, visibleBetaFeedback, removeNote]);
 
   return (
     <div className="flex flex-col min-h-screen bg-bg-gray" data-testid="app-root">
