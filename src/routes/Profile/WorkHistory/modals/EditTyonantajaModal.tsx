@@ -116,7 +116,6 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
               label={t('work-history.employer')}
               {...methods.register(`nimi.${language}` as const)}
               placeholder={t('profile.work-history.modals.workplace-placeholder')}
-              help={t('profile.work-history.modals.workplace-help')}
             />
             <FormError name={`nimi.${language}`} errors={errors} />
           </Form>

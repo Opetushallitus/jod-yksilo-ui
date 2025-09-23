@@ -95,7 +95,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
     },
   });
 
-  const { isValid, isLoading } = useFormState({
+  const { isValid, isSubmitting, isLoading } = useFormState({
     control: methods.control,
   });
   const { fields, append, remove } = useFieldArray({
@@ -239,7 +239,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 form={formId}
                 label={t('save')}
                 variant="white"
-                disabled={!isValid}
+                disabled={!isValid || isSubmitting}
                 className="whitespace-nowrap"
                 data-testid="work-history-save"
               />
