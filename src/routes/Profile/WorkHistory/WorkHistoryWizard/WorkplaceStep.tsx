@@ -47,7 +47,6 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
             label={t('work-history.employer')}
             {...register(`nimi.${language}` as const)}
             placeholder={t('profile.work-history.modals.workplace-placeholder')}
-            help={t('profile.work-history.modals.workplace-help')}
           />
           <FormError name={`nimi.${language}`} errors={errors} />
         </div>
