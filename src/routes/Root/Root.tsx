@@ -231,8 +231,8 @@ const Root = () => {
         feedbackButtonLabel={t('footer.feedback-button-label')}
         feedbackOnClick={() => setFeedbackVisible(true)}
         feedbackBgImageClassName="bg-[url(@/../assets/home-1.avif)] bg-cover bg-[length:auto_auto] sm:bg-[length:auto_1000px] bg-[top_-0rem_right_-0rem] sm:bg-[top_-21rem_right_0rem]"
-        copyright={t('copyright')}
-        data-testid="app-footer"
+        copyright={t('footer.copyright')}
+        dataTestId="footer"
       />
       <FeedbackModal
         isOpen={feedbackVisible}
