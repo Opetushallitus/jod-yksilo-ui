@@ -41,7 +41,6 @@
   "content": "Sisältö",
   "cookie-policy": "Evästekäytäntö",
   "cookies": "Evästeet",
-  "copyright": "© JOD 2024. Kaikki oikeudet pidätetään.",
   "count-competences_one": "{{count}} osaaminen",
   "count-competences_other": "{{count}} osaamista",
   "create-path": "Luo polku",
@@ -223,11 +222,12 @@
   "fit": "Sopivuus",
   "fit-of-result": "Tuloksen sopivuus",
   "footer": {
-    "cooperation-title": "Osaamipolku on toteutettu yhteistyössä seuraavien tahojen toimesta.",
+    "cooperation-title": "Osaamispolku on toteutettu yhteistyössä seuraavien tahojen toimesta",
+    "copyright": "© Osaamispolku 2025. Kaikki oikeudet pidätetään.",
     "feedback-button-label": "Anna palautetta",
     "feedback-content": "Haluamme kehittää Osaamispolkua vastaamaan paremmin juuri sinun tarpeita. Anna meille palautetta ja huomiomme sen kehitystyössä.",
     "feedback-title": "Kerro meille mitä pidit palvelusta!",
-    "funding-title": "Palvelu on rahoitettu Euroopan RFF-rahoituksella.",
+    "funding-title": "Palvelu on rahoitettu EU:n elpymis- ja palautumistukivälineellä (RRF)",
     "logos": {
       "keha-label": "KEHA-keskus",
       "okm-label": "Opetus- ja kulttuuriministeriö",
