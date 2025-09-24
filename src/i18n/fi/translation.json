@@ -908,18 +908,25 @@
   "proposed-competences": "Ehdotetut osaamiset",
   "proposed-interests": "Ehdotetut kiinnostukset",
   "rate-ai-content": {
+    "dislike": "En tykkää",
+    "icon": "Tekoälyllä tuotettu sisältöä",
     "kohtaanto": {
-      "body": "Tällä sivulla ehdotetaan syöttämiesi tietojen perusteella sinulle sopivia mahdollisuuksia. Kerro miten onnistuimme?",
+      "body": "Tällä sivulla ehdotetaan syöttämiesi tietojen perusteella sinulle sopivia mahdollisuuksia. Kerro miten onnistuimme.",
       "header": "Arvioi sinulle ehdotettuja mahdollisuuksia"
     },
+    "like": "Tykkään",
     "mahdollisuus": {
-      "body": "Tällä sivulla on tekoälyn avulla luotua sisältöä - se saattaa sisältää virheitä. Kerro miten onnistuimme?",
+      "body": "Tällä sivulla on tekoälyn avulla luotua sisältöä - se saattaa sisältää virheitä. Kerro miten onnistuimme.",
       "header": "Arvioi tekoälyn tuottamaa sisältöä"
     },
-    "modal-body": "Huomasimme, että annoit peukun alas tekoälyn tuottamalle sisällölle. Voisitko kertoa tarkemmin, mikä ei toiminut? Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
-    "modal-header": "Annoit peukun alas",
-    "modal-placeholder": "Esim. sisältö epätarkkaa, ei vastannut tarvetta, väärä sävy…",
-    "toast": "Kiitos palautteestasi!"
+    "modal": {
+      "body": "Et ollut tyytyväinen. Voisitko kertoa tarkemmin, mikä ei toiminut? Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
+      "close": "Sulje",
+      "header": "Tarkenna palautettasi",
+      "placeholder": "Esim. sisältö epätarkkaan, ei vastannut tarvetta, väärä sävy",
+      "send": "Lähetä"
+    },
+    "toast": "Kiitos palautteesta!"
   },
   "remove-approval": "Hylkää hyväksyntä",
   "remove-favorite": "Poista suosikeista",
