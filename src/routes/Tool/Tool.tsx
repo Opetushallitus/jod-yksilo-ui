@@ -6,7 +6,6 @@ import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import AdditionalSupport from '@/routes/Tool/AdditionalSupport';
 import CategorizedCompetenceTagList from '@/routes/Tool/CategorizedCompetenceTagList';
-import ToolOpportunityCardActionMenu from '@/routes/Tool/ToolOpportunityCardActionMenu';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import { Button, cx, Spinner, useMediaQueries } from '@jod/design-system';
@@ -141,15 +140,6 @@ const ExploreOpportunities = () => {
               aineisto={mahdollisuus.aineisto}
               tyyppi={mahdollisuus.tyyppi}
               type={mahdollisuusTyyppi}
-              menuContent={
-                <ToolOpportunityCardActionMenu
-                  mahdollisuusId={id}
-                  mahdollisuusTyyppi={mahdollisuusTyyppi}
-                  menuId={id}
-                  opportunityUrl={path}
-                />
-              }
-              menuId={id}
             />
           ) : null;
         })}

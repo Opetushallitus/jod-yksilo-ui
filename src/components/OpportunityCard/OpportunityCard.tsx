@@ -65,6 +65,36 @@ const OpportunityDetail = ({ title, value }: { title: string; value: string }) =
   );
 };
 
+interface ActionsSectionProps {
+  hideFavorite: boolean;
+  menuId?: string;
+  menuContent?: React.ReactNode;
+  isFavorite?: boolean;
+  onToggleFavorite: () => void;
+  name: string;
+}
+
+const ActionsSection = ({
+  hideFavorite,
+  menuId,
+  menuContent,
+  isFavorite,
+  onToggleFavorite,
+  name,
+}: ActionsSectionProps) => {
+  const nothingToShow = hideFavorite && !menuId && !menuContent;
+  return nothingToShow ? (
+    <></>
+  ) : (
+    <div className="grow flex flex-col sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end">
+      {!hideFavorite && (
+        <FavoriteToggle isFavorite={!!isFavorite} onToggleFavorite={onToggleFavorite} favoriteName={name} />
+      )}
+      {menuId && menuContent && <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />}
+    </div>
+  );
+};
+
 export const OpportunityCard = ({
   as: Component = 'div',
   to,
@@ -121,16 +151,6 @@ export const OpportunityCard = ({
     }
   }, [type, t, aineisto, tyyppi]);
 
-  const ActionsSection =
-    menuId && menuContent ? (
-      <div className="grow flex flex-col sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end">
-        {!hideFavorite && (
-          <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} favoriteName={name} />
-        )}
-        <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />
-      </div>
-    ) : null;
-
   return (
     <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border" data-testid="opportunity-card">
       <div className="order-2 flex flex-col">
@@ -139,7 +159,7 @@ export const OpportunityCard = ({
           <NavLink
             to={to}
             state={{ from }}
-            className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto hover:underline hover:text-accent"
+            className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto text-secondary-1-dark hover:underline"
             data-testid="opportunity-card-title-link"
           >
             {name}
@@ -177,7 +197,15 @@ export const OpportunityCard = ({
             <span className="text-body-xs font-arial font-bold">{matchLabel}</span>
           </div>
         )}
-        {menuContent ? ActionsSection : null}
+
+        <ActionsSection
+          hideFavorite={!!hideFavorite}
+          menuId={menuId}
+          menuContent={menuContent}
+          isFavorite={isFavorite}
+          onToggleFavorite={onToggleFavorite}
+          name={name}
+        />
       </div>
     </Component>
   );
