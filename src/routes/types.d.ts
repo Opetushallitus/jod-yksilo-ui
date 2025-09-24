@@ -23,13 +23,6 @@ export interface Kokemus {
   osaamiset?: string[];
 }
 
-export interface ArticleSection {
-  navTitle: string;
-  content: React.ReactNode;
-  showInDevOnly?: boolean;
-  showNavTitle?: boolean;
-}
-
 export interface Jakauma {
   maara: number;
   tyhjia: number;
