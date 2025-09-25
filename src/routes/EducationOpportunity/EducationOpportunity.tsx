@@ -88,7 +88,7 @@ const EducationOpportunity = () => {
     {
       navTitle: t('education-opportunity.education-characteristics'),
       showNavTitle: false,
-      showInDevOnly: true,
+      showInDevOnly: false,
       showDivider: sm,
       content: (
         <div className="bg-white p-6 flex flex-col gap-7 mb-8">
