@@ -173,14 +173,14 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
         <div>
           <IconHeading
             icon={<TitleIcon tyyppi={tyyppi} aineisto={jobData.aineisto} />}
-            title={title}
+            title={
+              <span>
+                {title}
+                {showAiInfoInTitle && <span className="relative print:hidden ml-2">{<AiInfo />}</span>}
+              </span>
+            }
             dataTestId="opportunity-details-title"
           />
-          {showAiInfoInTitle && (
-            <span className="print:hidden size-6">
-              <AiInfo />
-            </span>
-          )}
         </div>
 
         <div className="flex justify-between flex-wrap gap-y-5 sm:mt-6 sm:mb-8">
