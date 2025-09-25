@@ -473,6 +473,7 @@
   "link-copied": "Linkki kopioitu!",
   "link-copy-failed": "Linkin kopiointi epäonnistui",
   "links": "Linkit",
+  "log-in": "Kirjaudu sisään",
   "login": "Kirjaudu",
   "login-for-favorites": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa suosikkeja ja päästä tarkastelemaan niitä myöhemmin.",
   "login-to-service": "Kirjaudu palveluun",
@@ -679,6 +680,7 @@
       "title": "Mihin evästeitä käytetään Osaamispolussa?"
     }
   },
+  "privacy-policy": "Tietosuojaseloste",
   "profile": {
     "banner": {
       "description": "Tallenna ja muokkaa tunnistamiasi osaamisia profiilissasi.",
@@ -762,26 +764,22 @@
       "title": "Kiinnostukseni",
       "write-what-interests-you": "Kirjoita, mikä sinua kiinnostaa"
     },
-    "landing-page": {
-      "description": "Osaamisprofiili on henkilökohtainen omien osaamistietojen, kiinnostusten sekä urasuunnitelmien säilytyspaikka.\n\nKun kirjaudut sisään ensimmäisen kerran luomme sinulle tyhjän profiilin. Jatkossa hallinnoit mitä tietoja tallennat sekä miten niitä käytät ja keillä on pääsy niihin. Profiili on tallessa niin kauan kuin tarvitset sitä.",
-      "list-1-item-1": "Osaamisesi: Tallenna mitä osaat yhteen paikkaan.",
-      "list-1-item-2": "Kiinnostuksesi: Kirjaa ylös, mikä sinua kiinnostaa.",
-      "list-1-item-3": "Suosikkisisällöt: Säilytä ja hallitse sinulle tärkeitä työ- ja koulutusmahdollisuuksia.",
-      "list-1-item-4": "Urasuunnitelmat: Suunnittele tulevaisuutesi ja seuraa edistymistäsi.",
-      "list-1-item-5": "Päämäärät ja urasuunnitelmat: Suunnittele tulevaisuuttasi ja seuraa miten etenet.",
-      "list-1-item-6": "Suosikkisisällöt: Tallenna ja hallitse kiinnostavimpia työ- ja koulutusvaihtoehtoja.",
-      "list-1-item-7": "Tietojen tuonti muista palveluista: tuo tietosi Työmarkkinatorista ja Oma Opintopolusta.",
-      "list-1-item-8": "Osaamisprofiilin asetukset: Päätä, miten ja missä tietojasi käytetään.",
+    "login-page": {
+      "description": "Kirjautumalla sisään saat käyttöösi henkilökohtaisen osaamispolkusi, joka auttaa sinua hallinnoimaan ja hyödyntämään osaamistasi tehokkaasti.",
+      "list-1-item-1": "Oman osaamispolun hallinta ja tietojen luvitus: Päätä, miten ja missä tietojasi käytetään.",
+      "list-1-item-2": "Työ- ja koulutushistoria: Tallenna saavutuksesi yhteen paikkaan.",
+      "list-1-item-3": "Urasuunnitelmat: Suunnittele tulevaisuutesi ja seuraa edistymistäsi.",
+      "list-1-item-4": "Tietojen tuonti muista palveluista: tuo tietosi Työmarkkinatorista ja Oma Opintopolusta.",
+      "list-1-item-5": "Suosikkisisällöt: Tallenna ja hallitse kiinnostavimpia työ- ja koulutusvaihtoehtoja.",
       "list-2-item-1": "Näet kaikki osaamiseesi ja kiinnostuksesi yhdessä paikassa.",
-      "list-2-item-2": "Voit huomata, missä olet hyvä.",
-      "list-2-item-3": "Saat ehdotuksia töistä ja koulutuksista, jotka sopivat sinulle.",
-      "list-2-item-4": "Voit suunnitella tulevaisuutta sinulle sopivista vaihtoehdoista.",
+      "list-2-item-2": "Voit tunnistaa vahvuutesi, myös vapaa-ajan harrastusten kautta.",
+      "list-2-item-3": "Löydät profiilisi perusteella työ- ja koulutusmahdollisuuksia, jotka sopivat juuri sinulle.",
       "page-title": "Kirjaudu palveluun",
-      "paragraph-2": "Miten Osaamisprofiili auttaa sinua?",
-      "paragraph-3": "Siirry osaamisprofiiliisi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
-      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta.",
-      "profile-includes": "Osaamisprofiili sisältää:",
-      "title": "Luo oma osaamisprofiilisi!"
+      "paragraph-2": "Miten Osaamisprofiili voi auttaa sinua?",
+      "paragraph-3": "Aloita luomalla oma osaamispolkusi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
+      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta. Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta.",
+      "profile-includes": "Oma Osaamispolku sisältää:",
+      "title": "Tervetuloa! Luo oma osaamisprofiilisi ja hyödynnä monipuoliset palvelut"
     },
     "my-goals": {
       "add-favorites-link": "Voit katsoa mahdollisuuksia ja lisätä niitä suosikiksi täältä",
