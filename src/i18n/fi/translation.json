@@ -937,6 +937,7 @@
   "return-home": "Palaa etusivulle",
   "return-menu": "Palaa valikkoon",
   "save": "Tallenna",
+  "save-and-close": "Tallenna ja sulje",
   "save-in-progress": "Tallennetaan...",
   "saved": "Tallennettu",
   "search": "Haku",
@@ -1120,8 +1121,11 @@
         "industry": "Toimiala",
         "occupation": "Ammattiryhmä",
         "title": "Suodata työmahdollisuuksia",
-        "type": "Tyyppi"
+        "type": "Tyyppi",
+        "type-ammatit": "Ammatit",
+        "type-tyomahdollisuudet": "Työmahdollisuudet"
       },
+      "reset": "Poista valinnat",
       "toggle-title-closed": "Näytä säätimet",
       "toggle-title-open": "Piilota säätimet"
     },

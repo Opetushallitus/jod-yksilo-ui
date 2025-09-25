@@ -31,6 +31,8 @@ const ExploreOpportunities = () => {
     suosikit,
     mahdollisuudetLoading,
     ehdotuksetLoading,
+    settingsHaveChanged,
+    filters,
     updateEhdotuksetAndTyomahdollisuudet,
     toggleSuosikki,
   } = useToolStore(
@@ -39,10 +41,12 @@ const ExploreOpportunities = () => {
       mahdollisuusEhdotukset: state.mahdollisuusEhdotukset,
       mixedMahdollisuudet: state.mixedMahdollisuudet,
       suosikit: state.suosikit,
+      filters: state.filters,
       toggleSuosikki: state.toggleSuosikki,
       updateEhdotuksetAndTyomahdollisuudet: state.updateEhdotuksetAndTyomahdollisuudet,
       mahdollisuudetLoading: state.mahdollisuudetLoading,
       ehdotuksetLoading: state.ehdotuksetLoading,
+      settingsHaveChanged: state.settingsHaveChanged,
     })),
   );
 
@@ -69,8 +73,27 @@ const ExploreOpportunities = () => {
     await updateEhdotuksetAndTyomahdollisuudet(isLoggedIn);
   };
 
+  const onCloseSettings = () => {
+    setSettingsOpen(false);
+
+    // When in modal mode, update the results only after closing the settings
+    if (!lg && settingsHaveChanged) {
+      onUpdateResults();
+    }
+  };
+
+  const getTotalFilterCount = React.useCallback(() => {
+    return Object.values(filters).reduce((total, filter) => total + (filter?.length ?? 0), 0);
+  }, [filters]);
+
+  const toggleFiltersText = React.useMemo(() => {
+    const count = getTotalFilterCount();
+    const filterCount = count > 0 ? ` (${count})` : '';
+    return `${t('tool.settings.toggle-title-closed')}${filterCount}`;
+  }, [getTotalFilterCount, t]);
+
   const isLoading = ehdotuksetLoading || mahdollisuudetLoading;
-  const updateButtonLabel = ehdotuksetLoading ? t('updating-list') : t('update');
+  const updateButtonLabel = isLoading ? t('updating-list') : t('update');
 
   return (
     <>
@@ -86,27 +109,34 @@ const ExploreOpportunities = () => {
               variant="plain"
               size="sm"
               className="text-black!"
-              onClick={() => setSettingsOpen(!settingsOpen)}
               icon={settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
               iconSide="left"
-              label={settingsOpen ? t('tool.settings.toggle-title-open') : t('tool.settings.toggle-title-closed')}
+              label={settingsOpen ? t('tool.settings.toggle-title-open') : toggleFiltersText}
               data-testid="open-tool-settings"
+              onClick={() => {
+                setSettingsOpen(!settingsOpen);
+              }}
             />
-            <Button
-              size={lg ? 'lg' : 'sm'}
-              label={updateButtonLabel}
-              variant="accent"
-              onClick={onUpdateResults}
-              disabled={isLoading}
-              icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
-              iconSide={isLoading ? 'right' : undefined}
-              data-testid="update-opportunities"
-            />
+            {lg && (
+              <Button
+                size="lg"
+                label={updateButtonLabel}
+                variant="accent"
+                onClick={onUpdateResults}
+                disabled={isLoading || !settingsHaveChanged}
+                icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
+                iconSide={isLoading ? 'right' : undefined}
+                data-testid="update-opportunities"
+              />
+            )}
           </div>
         </div>
       </div>
 
-      {settingsOpen && <ToolSettings ref={firstSettingRef} />}
+      {settingsOpen && (
+        <ToolSettings ref={firstSettingRef} isOpen={settingsOpen} onClose={onCloseSettings} isModal={!lg} />
+      )}
+
       <ul
         id="tool-your-opportunities-list"
         ref={scrollRef}
@@ -121,6 +151,7 @@ const ExploreOpportunities = () => {
             mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
               ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`
               : `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}`;
+
           return ehdotus ? (
             <OpportunityCard
               key={id}
@@ -219,6 +250,7 @@ const Tool = () => {
   const { lg } = useMediaQueries();
   const [currentTab, setCurrentTab] = React.useState<TabName>('info');
   const scrollRef = React.useRef<HTMLDivElement>(null);
+  const isLoading = useToolStore((state) => state.ehdotuksetLoading || state.mahdollisuudetLoading);
 
   const setTab = React.useCallback((tab: TabName) => {
     setCurrentTab(tab);
@@ -235,11 +267,13 @@ const Tool = () => {
         text: t('tool.my-own-data.title'),
         active: currentTab === 'info',
         onclick: () => setTab('info'),
+        name: 'info',
       },
       {
-        text: t('tool.your-opportunities.title'),
+        text: `${t('tool.your-opportunities.title')}`,
         active: currentTab === 'opportunities',
         onclick: () => setTab('opportunities'),
+        name: 'opportunities',
       },
     ];
 
@@ -332,6 +366,7 @@ const Tool = () => {
                   })}
                 >
                   {tab.text}
+                  {isLoading && tab.name === 'opportunities' && <Spinner color="accent" size={16} className="ml-3" />}
                 </button>
               ))}
             </div>
