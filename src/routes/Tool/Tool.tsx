@@ -31,7 +31,6 @@ const ExploreOpportunities = () => {
     suosikit,
     mahdollisuudetLoading,
     ehdotuksetLoading,
-    settingsHaveChanged,
     filters,
     updateEhdotuksetAndTyomahdollisuudet,
     toggleSuosikki,
@@ -46,7 +45,6 @@ const ExploreOpportunities = () => {
       updateEhdotuksetAndTyomahdollisuudet: state.updateEhdotuksetAndTyomahdollisuudet,
       mahdollisuudetLoading: state.mahdollisuudetLoading,
       ehdotuksetLoading: state.ehdotuksetLoading,
-      settingsHaveChanged: state.settingsHaveChanged,
     })),
   );
 
@@ -77,7 +75,7 @@ const ExploreOpportunities = () => {
     setSettingsOpen(false);
 
     // When in modal mode, update the results only after closing the settings
-    if (!lg && settingsHaveChanged) {
+    if (!lg) {
       onUpdateResults();
     }
   };
@@ -123,7 +121,7 @@ const ExploreOpportunities = () => {
                 label={updateButtonLabel}
                 variant="accent"
                 onClick={onUpdateResults}
-                disabled={isLoading || !settingsHaveChanged}
+                disabled={isLoading}
                 icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
                 iconSide={isLoading ? 'right' : undefined}
                 data-testid="update-opportunities"
