@@ -1,6 +1,5 @@
 import AddedTags from '@/components/OsaamisSuosittelija/AddedTags';
 import type { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
-import { useModal } from '@/hooks/useModal';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { Button, EmptyState } from '@jod/design-system';
@@ -97,7 +96,6 @@ const CategorizedCompetenceTagList = () => {
   const combinedData = [...osaamiset, ...kiinnostukset];
   const hasProfileCompetences = combinedData.filter((o) => o.tyyppi && profileTypes.includes(o.tyyppi)).length > 0;
   const hasOtherData = osaamisetVapaateksti?.[language] || kiinnostuksetVapaateksti?.[language];
-  const { showDialog } = useModal();
 
   return (
     <div className="flex flex-col">
@@ -115,14 +113,8 @@ const CategorizedCompetenceTagList = () => {
             <Button
               variant="plain"
               onClick={() => {
-                showDialog({
-                  title: t('tool.my-own-data.delete-mapped.title'),
-                  description: t('tool.my-own-data.delete-mapped.description'),
-                  onConfirm: () => {
-                    setOsaamiset(osaamiset.filter((o) => o.tyyppi !== 'KARTOITETTU'));
-                    setKiinnostukset(kiinnostukset.filter((o) => o.tyyppi !== 'KARTOITETTU'));
-                  },
-                });
+                setOsaamiset(osaamiset.filter((o) => o.tyyppi !== 'KARTOITETTU'));
+                setKiinnostukset(kiinnostukset.filter((o) => o.tyyppi !== 'KARTOITETTU'));
               }}
               label={t('delete')}
             />
@@ -144,25 +136,17 @@ const CategorizedCompetenceTagList = () => {
                 <CompetenceCategory
                   key={type}
                   osaamiset={combinedData.filter(filterByType(type))}
-                  onChange={removeOsaaminen}
+                  onChange={type === 'KIINNOSTUS' ? removeKiinnostus : removeOsaaminen}
                 />
               </div>
             ))}
           <Button
             variant="plain"
             onClick={() => {
-              showDialog({
-                title: t('tool.my-own-data.delete-imported.title'),
-                description: t('tool.my-own-data.delete-imported.description'),
-                onConfirm: () => {
-                  setOsaamiset(
-                    osaamiset.filter((o) => o.tyyppi && ![...profileTypes, 'KIINNOSTUS'].includes(o.tyyppi)),
-                  );
-                  setKiinnostukset(
-                    kiinnostukset.filter((o) => o.tyyppi && ![...profileTypes, 'KIINNOSTUS'].includes(o.tyyppi)),
-                  );
-                },
-              });
+              setOsaamiset(osaamiset.filter((o) => o.tyyppi && ![...profileTypes, 'KIINNOSTUS'].includes(o.tyyppi)));
+              setKiinnostukset(
+                kiinnostukset.filter((o) => o.tyyppi && ![...profileTypes, 'KIINNOSTUS'].includes(o.tyyppi)),
+              );
             }}
             label={t('delete')}
           />
