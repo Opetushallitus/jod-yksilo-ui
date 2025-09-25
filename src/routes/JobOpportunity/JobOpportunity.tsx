@@ -60,7 +60,7 @@ const JobOpportunity = () => {
     {
       navTitle: t('job-opportunity.most-common-job-tasks.title'),
       showDivider: false,
-      showAiInfoInTitle: false,
+      showAiInfoInTitle: true,
       content: (
         <ul className="list-disc ml-7">
           {tyomahdollisuusTehtavat.map((value: string, index: number) => (
