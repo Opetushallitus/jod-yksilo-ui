@@ -73,15 +73,7 @@ const EducationOpportunity = () => {
         <div className="flex flex-col gap-6 grow">
           <span className="font-arial">{t('education-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} mode="kiinnostus" />
-          {!sm && (
-            <RateAiContent
-              // eslint-disable-next-line no-console
-              onDislike={(value) => console.log('not implemented', value)}
-              // eslint-disable-next-line no-console
-              onLike={() => console.log('not implemented')}
-              variant="mahdollisuus"
-            />
-          )}
+          {!sm && <RateAiContent variant="mahdollisuus" area="Koulutusmahdollisuus" />}
         </div>
       ),
     },

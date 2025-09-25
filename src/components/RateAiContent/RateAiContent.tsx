@@ -7,25 +7,68 @@ import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 
 interface RateAiContentProps {
-  onLike: () => void;
-  onDislike: (feedback: string) => void;
   isLiked?: boolean;
   isDisliked?: boolean;
   variant: 'kohtaanto' | 'mahdollisuus';
+  area: 'Kohtaanto työkalu' | 'Työmahdollisuus' | 'Koulutusmahdollisuus';
 }
 
-export const RateAiContent = ({ isLiked, isDisliked, onLike, onDislike, variant }: RateAiContentProps) => {
-  const { t } = useTranslation();
+export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiContentProps) => {
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const LikeIcon = isLiked ? JodThumbUpFilled : JodThumbUp;
   const DislikeIcon = isDisliked ? JodThumbDownFilled : JodThumbDown;
   const { showDialog } = useModal();
   const dislikeRef = React.useRef('');
   const { isDev } = useEnvironment();
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const headerText =
     variant === 'kohtaanto' ? t('rate-ai-content.kohtaanto.header') : t('rate-ai-content.mahdollisuus.header');
   const bodyDescription =
     variant === 'kohtaanto' ? t('rate-ai-content.kohtaanto.body') : t('rate-ai-content.mahdollisuus.body');
+
+  const onSubmit = async (rating: 1 | -1, message?: string) => {
+    try {
+      setIsSubmitting(true);
+      const body = JSON.stringify({
+        section: 'Osaamispolkuni',
+        area,
+        language,
+        details: window.location.href,
+        type: 'Arvostelu',
+        rating,
+        message,
+        timestamp: new Date().toISOString(),
+      });
+      const response = await fetch('/api/palaute', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-amz-content-sha256': Array.from(
+            new Uint8Array(await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(body))),
+          )
+            .map((b) => b.toString(16).padStart(2, '0'))
+            .join(''),
+        },
+        body,
+      });
+
+      if (!response.ok) {
+        throw new Error();
+      }
+
+      toast.success(t('rate-ai-content.toast'));
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      toast.error(t('rate-ai-content.toast-error'));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return isDev ? (
     <div className="bg-accent flex flex-col rounded-lg min-h-[271px] p-6">
@@ -40,21 +83,18 @@ export const RateAiContent = ({ isLiked, isDisliked, onLike, onDislike, variant 
       </div>
       <div className="flex flex-row items-center justify-between w-[128px] h-9 rounded-[30px] mt-auto">
         <button
-          className="bg-white rounded-l-[30px] flex-1 h-full w-full items-center justify-center pl-6 pr-5 flex"
+          className="bg-white rounded-l-[30px] flex-1 h-full w-full items-center justify-center pl-6 pr-5 flex cursor-pointer"
           aria-label={t('rate-ai-content.like')}
+          disabled={isSubmitting}
+          onClick={() => onSubmit(1)}
         >
-          <LikeIcon
-            className="text-accent cursor-pointer"
-            onClick={() => {
-              onLike();
-              toast.success(t('rate-ai-content.toast'));
-            }}
-          />
+          <LikeIcon className="text-accent" />
         </button>
         <div className="h-9 min-w-1 bg-border-gray" aria-hidden="true" />
         <button
-          className="bg-white rounded-r-[30px] flex-1 h-full items-center justify-center pl-5 pr-6 flex"
+          className="bg-white rounded-r-[30px] flex-1 h-full items-center justify-center pl-5 pr-6 flex cursor-pointer"
           aria-label={t('rate-ai-content.dislike')}
+          disabled={isSubmitting}
           onClick={() =>
             showDialog({
               variant: 'normal',
@@ -70,14 +110,11 @@ export const RateAiContent = ({ isLiked, isDisliked, onLike, onDislike, variant 
                 />
               ),
               description: t('rate-ai-content.modal.body'),
-              onConfirm: () => {
-                onDislike(dislikeRef.current);
-                toast.success(t('rate-ai-content.toast'));
-              },
+              onConfirm: () => onSubmit(-1, dislikeRef.current),
             })
           }
         >
-          <DislikeIcon className="text-accent cursor-pointer" />
+          <DislikeIcon className="text-accent" />
         </button>
       </div>
     </div>
