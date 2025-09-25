@@ -23,7 +23,6 @@ const JobOpportunity = () => {
   } = useTranslation();
   const { sm } = useMediaQueries();
   const { tyomahdollisuus, osaamiset, isLoggedIn, ammattiryhma } = useLoaderData<LoaderData>();
-  const hasAiContent = tyomahdollisuus.aineisto !== 'AMMATTITIETO';
   const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
   const competencesTableData = React.useMemo(
     () =>
@@ -54,7 +53,7 @@ const JobOpportunity = () => {
     {
       navTitle: t('description'),
       showDivider: false,
-      showAiInfoInTitle: hasAiContent,
+      showAiInfoInTitle: true,
       content: <p className="text-body-lg font-arial">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>,
     },
     {
@@ -77,7 +76,7 @@ const JobOpportunity = () => {
     },
     {
       navTitle: t('job-opportunity.competences.title'),
-      showAiInfoInTitle: hasAiContent,
+      showAiInfoInTitle: true,
       content: (
         <div className="flex flex-col gap-6 mb-9 grow">
           <span className="font-arial">{t('job-opportunity.competences.description')}</span>
