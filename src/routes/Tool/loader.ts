@@ -4,11 +4,15 @@ import type { components } from '@/api/schema';
 import { useToolStore } from '@/stores/useToolStore';
 import type { LoaderFunction } from 'react-router';
 import { type CompetencesLoaderData, getCompetenceData } from '../Profile/Competences/loader';
+import type { JobCodesetValues } from '../types';
 
 export type ToolLoaderData = {
   isLoggedIn: boolean;
   kiinnostukset: components['schemas']['OsaaminenDto'][];
   kiinnostuksetVapaateksti?: components['schemas']['LokalisoituTeksti'];
+  filters?: {
+    maakunta?: JobCodesetValues['maakunta'];
+  };
 } & CompetencesLoaderData;
 
 export default (async ({ request, context }): Promise<ToolLoaderData> => {
@@ -22,6 +26,7 @@ export default (async ({ request, context }): Promise<ToolLoaderData> => {
     patevyydet: [],
     muutOsaamiset: [],
     kiinnostukset: [],
+    filters: {},
   };
 
   // Load tyomahdollisuudet and ehdotukset if they are not already loaded
@@ -41,7 +46,7 @@ export default (async ({ request, context }): Promise<ToolLoaderData> => {
     const kiinnostukset = await osaamisetService.find(data?.kiinnostukset);
     const kiinnostuksetVapaateksti = data?.vapaateksti;
 
-    return { isLoggedIn, kiinnostukset, kiinnostuksetVapaateksti, ...competenceLoaderData };
+    return { isLoggedIn, kiinnostukset, filters: {}, kiinnostuksetVapaateksti, ...competenceLoaderData };
   } else {
     return emptyData;
   }

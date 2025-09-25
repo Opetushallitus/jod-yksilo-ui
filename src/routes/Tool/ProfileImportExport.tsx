@@ -263,7 +263,7 @@ const ProfileImportExport = () => {
     </div>
   ) : (
     <div className="flex flex-col gap-6">
-      <p>{t('tool.competency-profile.login-description')}</p>
+      <p className="font-arial">{t('tool.competency-profile.login-description')}</p>
       <Button
         data-testid="tool-open-login"
         label={t('login-to-service')}
