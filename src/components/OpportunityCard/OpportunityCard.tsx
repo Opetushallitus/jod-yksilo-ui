@@ -2,7 +2,6 @@ import { components } from '@/api/schema';
 import { FavoriteToggle } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDropdown';
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
 import type { MahdollisuusTyyppi } from '@/routes/types';
@@ -118,7 +117,6 @@ export const OpportunityCard = ({
     t,
     i18n: { language },
   } = useTranslation();
-  const { isDev } = useEnvironment();
   const state = useLocation().state;
   const loginLink = useLoginLink({
     callbackURL: state?.callbackURL
@@ -173,13 +171,11 @@ export const OpportunityCard = ({
           </span>
         )}
         <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
-        {isDev && (
-          <div className="flex flex-col mt-5 gap-3">
-            {type === 'TYOMAHDOLLISUUS' && ammattiryhma ? (
-              <OpportunityDetail title={t('tool.job-opportunity-is-part-of-group')} value={ammattiryhma} />
-            ) : null}
-          </div>
-        )}
+        <div className="flex flex-col mt-5 gap-3">
+          {type === 'TYOMAHDOLLISUUS' && ammattiryhma ? (
+            <OpportunityDetail title={t('tool.job-opportunity-is-part-of-group')} value={ammattiryhma} />
+          ) : null}
+        </div>
       </div>
       <div
         className={`flex flex-col sm:flex-row items-start sm:items-center gap-x-7 gap-y-5 mb-5 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
