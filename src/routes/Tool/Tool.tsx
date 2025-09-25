@@ -197,8 +197,7 @@ const ProfileLinkComponent = ({ className, children }: { className?: string; chi
 
 const YourInfo = () => {
   const { t } = useTranslation();
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const noop = () => {};
+
   return (
     <>
       <ToolAccordion title={t('interests')} description={t('tool.my-own-data.interests.description')}>
@@ -221,7 +220,7 @@ const YourInfo = () => {
         <AdditionalSupport />
       </ToolAccordion>
 
-      <RateAiContent onDislike={noop} onLike={noop} variant="kohtaanto" />
+      <RateAiContent variant="kohtaanto" area="Kohtaanto työkalu" />
 
       <div className="flex flex-col rounded-lg p-6 gap-5 mt-4 bg-secondary-1-dark-2">
         <div className="text-heading-2 text-white mr-2">{t('profile.banner.title')}</div>

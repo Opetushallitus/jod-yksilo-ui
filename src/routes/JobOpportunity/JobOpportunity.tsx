@@ -84,13 +84,7 @@ const JobOpportunity = () => {
           <CompareCompetencesTable rows={competencesTableData} />
           {!sm && (
             <>
-              <RateAiContent
-                // eslint-disable-next-line no-console
-                onDislike={(value) => console.log('not implemented', value)}
-                // eslint-disable-next-line no-console
-                onLike={() => console.log('not implemented')}
-                variant="mahdollisuus"
-              />
+              <RateAiContent variant="mahdollisuus" area="Työmahdollisuus" />
               <CounselingBanner />
             </>
           )}

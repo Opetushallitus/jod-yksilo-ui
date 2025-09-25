@@ -125,16 +125,13 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
       <>
         <PageNavigation menuSection={menuSection} activeIndicator="dot" className={'mb-4'} />
         <RateAiContent
-          // eslint-disable-next-line no-console
-          onDislike={(value) => console.log('not implemented', value)}
-          // eslint-disable-next-line no-console
-          onLike={() => console.log('not implemented')}
           variant="mahdollisuus"
+          area={tyyppi === 'TYOMAHDOLLISUUS' ? 'Työmahdollisuus' : 'Koulutusmahdollisuus'}
         />
         <CounselingBanner />
       </>
     );
-  }, [t, sections, filterDevSections]);
+  }, [t, sections, filterDevSections, tyyppi]);
 
   const typeTooltip = React.useMemo(() => {
     if (tyyppi === 'TYOMAHDOLLISUUS') {
@@ -215,7 +212,6 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           </div>
         </div>
       </div>
-
       {/* Sections */}
       {!!data &&
         sections.filter(filterDevSections).map((section) => (

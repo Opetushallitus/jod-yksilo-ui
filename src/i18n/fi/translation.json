@@ -926,7 +926,8 @@
       "placeholder": "Esim. sisältö epätarkkaan, ei vastannut tarvetta, väärä sävy",
       "send": "Lähetä"
     },
-    "toast": "Kiitos palautteesta!"
+    "toast": "Kiitos palautteesta!",
+    "toast-error": "Palautteen lähetys epäonnistui, yritä myöhemmin uudelleen"
   },
   "remove-approval": "Hylkää hyväksyntä",
   "remove-favorite": "Poista suosikeista",
