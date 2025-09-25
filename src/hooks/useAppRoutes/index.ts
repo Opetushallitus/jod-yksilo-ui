@@ -47,13 +47,13 @@ export const useAppRoutes = () => {
       authRequired: true,
     },
     {
-      name: t('profile.preferences.title'),
-      path: t('slugs.profile.preferences'),
+      name: t('profile.my-goals.title'),
+      path: t('slugs.profile.my-goals'),
       authRequired: true,
     },
     {
-      name: t('profile.my-goals.title'),
-      path: t('slugs.profile.my-goals'),
+      name: t('profile.preferences.title'),
+      path: t('slugs.profile.preferences'),
       authRequired: true,
     },
   ];

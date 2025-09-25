@@ -37,7 +37,7 @@
   "competences-identify-failed": "Tekoälyn osaamistunnistus epäonnistui.",
   "competences-identifying": "Voit muokata koulutusta, kun osaamiset ovat latautuneet.",
   "competences-of-your-choice": "Valitut osaamiset",
-  "competency-path-portal": "Osaamispolkuportaali",
+  "competency-path-portal": "Osaamispolun etusivu",
   "content": "Sisältö",
   "cookie-policy": "Evästekäytäntö",
   "cookies": "Evästeet",
@@ -262,7 +262,7 @@
     "summary": "Yhteenveto",
     "theme-or-activity": "Teema / Toiminto"
   },
-  "front-page": "Etusivu",
+  "front-page": "Osaamispolkuni",
   "goals": "Tavoitteet",
   "home": {
     "beta": "Osaamispolun beta-testausvaihe",
@@ -510,12 +510,12 @@
   "navigation": {
     "external": {
       "ohjaaja": {
-        "description": "Tietoa ohjausalasta kiinnostuneille",
+        "description": "Tietoja ja materiaaleja ohjaukseen",
         "label": "Ohjaajan osio",
         "url": "/ohjaaja/fi"
       },
       "tietopalvelu": {
-        "description": "Tietoa päätöksentekijöille",
+        "description": "Tietoa päätöksenteon tueksi",
         "label": "Tietopalvelu",
         "url": "/tietopalvelu/fi"
       },
@@ -523,14 +523,19 @@
     },
     "extra": {
       "palveluhakemisto": {
-        "label": "Palveluhakemisto",
+        "label": "Ohjaus- ja neuvontapalveluja",
         "url": "https://www.suomi.fi/palveluhakemisto/osaamispolku"
       },
-      "title": "Tukea pohdintaan",
+      "title": "Muuta tukea pohdintaan",
       "urataidot": {
         "label": "Urataitojen itsearviointi",
         "url": "/urataidot/fi"
       }
+    },
+    "main-section": {
+      "interests-title": "Kiinnostukseni",
+      "title": "Henkilökohtainen osaamispolku",
+      "tool-title": "Kartoita tilanteesi"
     }
   },
   "next": "Seuraava",
@@ -754,7 +759,7 @@
       "free-form-text-for-interests": "Vapaa teksti kiinnostuksille",
       "occupations-that-interest-me": "Ammatit, jotka kiinnostavat minua",
       "skills-that-interest-me": "Osaamiset, jotka kiinnostavat minua",
-      "title": "Kiinnostuksen kohteeni",
+      "title": "Kiinnostukseni",
       "write-what-interests-you": "Kirjoita, mikä sinua kiinnostaa"
     },
     "landing-page": {
@@ -803,7 +808,7 @@
       "short-term-goal": "Lyhyen aikavälin päämäärä",
       "short-term-goal-description": "Lyhyen aikavälin tavoite on lähitulevaisuudessa saavutettava päämäärä, joka voi liittyä esimerkiksi tietyn projektin loppuunsaattamiseen tai uuden taidon oppimiseen.",
       "show-filters": "Näytä suodattimet",
-      "title": "Päämääräni"
+      "title": "Tavoitteeni"
     },
     "paths": {
       "add-as-phase": "Lisää vaiheeksi",
@@ -1123,7 +1128,7 @@
       "help-text-2": "Seuraavat sivustot eivät tallenna tietoja osaamisprofiiliisi, mutta ne voivat auttaa sinua pohtimaan nykytilaasi ja toiveitasi.",
       "service-directory": "Osaamispolun palveluhakemisto",
       "something-else": "Muu osaamiseni",
-      "title": "Tukea pohdintaan",
+      "title": "Muuta tukea pohdintaan",
       "work-history": "Työpaikkani"
     },
     "your-opportunities": {
