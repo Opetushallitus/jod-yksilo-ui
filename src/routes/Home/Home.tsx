@@ -97,7 +97,7 @@ const Home = () => {
               Icon: <JodOpenInNew size={18} className="ml-1" />,
               CustomLink: (
                 <Link
-                  to="https://wiki.eduuni.fi/x/Ok-bJ"
+                  to="https://wiki.eduuni.fi/spaces/JOD/pages/641042258/Osaamispolun+suljettu+betatestaus"
                   className="inline-flex underline text-accent items-center"
                   target="_blank"
                   rel="noopener noreferrer"
