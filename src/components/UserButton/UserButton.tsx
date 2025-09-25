@@ -46,7 +46,11 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
         {carets}
       </button>
       {userMenuOpen && (
-        <div ref={userMenuRef} className="absolute right-0 min-w-max translate-y-8 transform" data-testid="user-menu">
+        <div
+          ref={userMenuRef}
+          className="z-60 absolute right-0 min-w-max translate-y-8 transform"
+          data-testid="user-menu"
+        >
           <PopupList classNames="gap-2">
             <NavLink
               to={userMenuProfileFrontUrl}
