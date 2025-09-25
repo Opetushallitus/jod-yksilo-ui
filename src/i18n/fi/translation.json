@@ -1049,14 +1049,6 @@
         },
         "textarea-placeholder": "Kerro omin sanoin mahdollisimman kuvailevasti mitä sinä jo osaat"
       },
-      "delete-imported": {
-        "description": "Haluatko varmasti tyhjentää valitut profiilista tuodut osaamiset ja kiinnostukset?",
-        "title": "Tyhjennä profiilista tuodut osaamiset"
-      },
-      "delete-mapped": {
-        "description": "Haluatko varmasti tyhjentää valitut kartoitetut osaamiset ja kiinnostukset?",
-        "title": "Tyhjennä kartoitetut osaamiset"
-      },
       "description": "Saat ehdotuksia osaamisista ja kiinnostuksista tekstin pohjalta. Valitse sopivat. Oikealla näkyvä lista perustuu valintoihisi.",
       "export": {
         "confirm-button": "Tallenna profiiliin",
