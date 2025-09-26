@@ -107,15 +107,16 @@ const EducationOpportunity = () => {
           </div>
           <h3 className="text-heading-2 mb-4">{t('education-opportunity.opintopolku.title')}</h3>
           <p>{t('education-opportunity.opintopolku.description')}</p>
-          <Button
-            data-testid="education-opportunity-open-opintopolku"
-            size="sm"
-            className="w-fit mt-7"
-            label={t('education-opportunity.opintopolku.button-label')}
-            icon={<JodOpenInNew />}
-            iconSide="right"
-            LinkComponent={getLinkTo(opintopolkuUrl, { useAnchor: true, target: '_blank' })}
-          />
+          <div className="mt-7">
+            <Button
+              data-testid="education-opportunity-open-opintopolku"
+              size="sm"
+              label={t('education-opportunity.opintopolku.button-label')}
+              icon={<JodOpenInNew />}
+              iconSide="right"
+              LinkComponent={getLinkTo(opintopolkuUrl, { useAnchor: true, target: '_blank' })}
+            />
+          </div>
         </div>
       ),
     },

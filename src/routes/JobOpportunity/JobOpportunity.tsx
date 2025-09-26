@@ -176,15 +176,16 @@ const JobOpportunity = () => {
           </div>
           <h3 className="text-heading-2 mb-4">{t('job-opportunity.tyomarkkinatori.title')}</h3>
           <p>{t('job-opportunity.tyomarkkinatori.description')}</p>
-          <Button
-            data-testid="job-opportunity-open-tyomarkkinatori"
-            size="sm"
-            className="w-fit mt-7"
-            label={t('job-opportunity.tyomarkkinatori.button-label')}
-            icon={<JodOpenInNew />}
-            iconSide="right"
-            LinkComponent={getLinkTo(tmtUrl, { useAnchor: true, target: '_blank' })}
-          />
+          <div className="mt-7">
+            <Button
+              data-testid="job-opportunity-open-tyomarkkinatori"
+              size="sm"
+              label={t('job-opportunity.tyomarkkinatori.button-label')}
+              icon={<JodOpenInNew />}
+              iconSide="right"
+              LinkComponent={getLinkTo(tmtUrl, { useAnchor: true, target: '_blank' })}
+            />
+          </div>
         </div>
       ),
     },
