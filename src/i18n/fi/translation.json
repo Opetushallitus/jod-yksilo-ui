@@ -22,7 +22,7 @@
   "chatbot": {
     "agent-name": "Neuvontabotti",
     "error-message": "Tapahtui jokin virhe.",
-    "greeting": "Hei, olen Osaamispolun neuvontabotti.",
+    "greeting": "Hei, olen Osaamispolun neuvontabotti. Voin auttaa sinua Osaamispolkuun liittyvissä kysymyksissä. Olen testiversio ja harjoittelen vielä, joten en osaa vastata kaikkiin kysymyksiin. Kysy silti, sillä opin koko ajan lisää. Esittämäsi kysymykset auttavat minua kehittymään. Esitäthän yhden kysymyksen kerrallaan. Pidä kysymykset lyhyinä ja selkeinä, niin pystyn auttamaan paremmin. En muista aiempia kysymyksiä tai vastauksia. Ethän kirjoita henkilötietojasi chattiin. Miten voin auttaa?",
     "header": "Neuvontabotti",
     "open-window-text": "Kysy neuvoa?",
     "text-input-placeholder": "Kirjoita kysymyksesi tähän",
