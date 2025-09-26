@@ -1,5 +1,6 @@
 import betaPlanImageDesktop from '@/../assets/gra_front_timeline_2.svg';
 import betaPlanImageMobile from '@/../assets/gra_front_timeline_mob_2.svg';
+import heroSrc from '@/../assets/yksilo-hero.jpg';
 import type { components } from '@/api/schema';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, HeroCard, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
@@ -25,14 +26,52 @@ interface ContainerProps {
 
 const FullWidthContainer = ({ className = '', children }: ContainerProps) => (
   <div className={tc(['flex', 'justify-start', 'py-8', className])}>
-    <div className="w-[1092px] mx-auto px-5 sm:px-6">{children}</div>
+    <div className="w-[1092px] mx-auto px-5 sm:px-6 xl:px-0">{children}</div>
   </div>
 );
 const Content = ({ className = '', title, children }: ContainerProps & { title?: string }) => {
   const { t } = useTranslation();
   return (
-    <div className={tc(['mx-auto', 'max-w-[1092px]', 'py-7', 'px-5 sm:px-6', 'flex', 'flex-col', 'gap-7', className])}>
+    <div
+      className={tc([
+        'mx-auto',
+        'max-w-[1092px]',
+        'py-7',
+        'px-5 sm:px-6 xl:px-0',
+        'flex',
+        'flex-col',
+        'gap-7',
+        className,
+      ])}
+    >
       {title && <h2 className="text-heading-1">{t(`home.${title}`)}</h2>}
+      {children}
+    </div>
+  );
+};
+
+const CardContainer = ({ className = '', children, ref }: ContainerProps & { ref?: React.Ref<HTMLDivElement> }) => {
+  return (
+    <div
+      className={tc([
+        'mx-auto',
+        'max-w-[1092px]',
+        'px-5',
+        'sm:px-6',
+        'xl:px-0',
+        'mb-6',
+        'lg:mb-8',
+        'relative',
+        'flex',
+        'flex-col',
+        'lg:grid',
+        'lg:grid-cols-2',
+        'gap-6',
+        'lg:gap-8',
+        className,
+      ])}
+      ref={ref}
+    >
       {children}
     </div>
   );
@@ -47,6 +86,22 @@ const Home = () => {
   const { sm } = useMediaQueries();
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
 
+  const firstCardRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (firstCardRef.current) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.target.isSameNode(firstCardRef.current) && firstCardRef.current?.style) {
+            firstCardRef.current.style.marginTop = `-${(2 * entry.contentRect.height) / 3}px`;
+          }
+        }
+      });
+      resizeObserver.observe(firstCardRef.current);
+      return () => resizeObserver.disconnect();
+    }
+  }, []);
+
   const preferencesLink = React.useMemo(
     () => generateProfileLink(['slugs.profile.preferences'], data, language, t),
     [data, language, t],
@@ -57,20 +112,22 @@ const Home = () => {
     <main role="main" className="mx-auto w-full max-w-(--breakpoint-xl) bg-white" id="jod-main" data-testid="home-page">
       <title>{t('osaamispolku')}</title>
 
-      <FullWidthContainer
-        className={tc([
-          'sm:h-[617px] h-[calc(100vh-104px)]', // Hero aspect ratio = ((9 / 21) * 1440px) = 617px
-          'bg-cover bg-[url(@/../assets/yksilo-hero.jpg)] xl:bg-[50%_50%] lg:bg-[60%_50%] md:bg-[67%_50%] sm:bg-[71%_50%] bg-[72%_50%]',
-          'items-end sm:items-center',
-          'pb-6 sm:pb-0',
-        ])}
-      >
-        <div className="max-w-2xl">
-          <HeroCard title={t('home.hero-title')} content={t('home.hero-content')} />
-        </div>
-      </FullWidthContainer>
+      <img
+        src={heroSrc}
+        alt=""
+        role="none"
+        className="w-(--breakpoint-xl) sm:h-[617px] h-[calc(100vh-104px)] object-cover xl:object-[50%_50%] lg:object-[60%_50%] md:object-[67%_50%] sm:object-[71%_50%] object-[72%_50%]"
+        data-testid="home-hero"
+      />
 
-      <Content className="flex sm:flex-row gap-8 justify-evenly flex-col">
+      <CardContainer ref={firstCardRef} className="relative">
+        <HeroCard
+          title={t('home.hero-title')}
+          content={t('home.hero-content')}
+          backgroundColor="var(--ds-color-secondary-1-dark-2)"
+        />
+      </CardContainer>
+      <CardContainer>
         <HeroCard
           buttonLabel={t('home.explore-opportunities')}
           content={t('home.card-1-content')}
@@ -78,6 +135,7 @@ const Home = () => {
           size="sm"
           title={t('home.card-1-title')}
           to={toolLink}
+          backgroundColor="var(--ds-color-secondary-1-dark)"
         />
         <HeroCard
           buttonLabel={t('home.create-own-profile')}
@@ -86,8 +144,9 @@ const Home = () => {
           size="sm"
           title={t('home.card-2-title')}
           to={preferencesLink.to}
+          backgroundColor="var(--ds-color-secondary-1-dark)"
         />
-      </Content>
+      </CardContainer>
 
       <Content title="beta">
         <p className="text-body-lg max-w-[716px]">
