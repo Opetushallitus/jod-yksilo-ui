@@ -1,6 +1,5 @@
 import { useEnvironment } from '@/hooks/useEnvironment';
-import { useModal } from '@/hooks/useModal';
-import { Textarea } from '@jod/design-system';
+import { Button, ConfirmDialog, Textarea } from '@jod/design-system';
 import { JodAi, JodThumbDown, JodThumbDownFilled, JodThumbUp, JodThumbUpFilled } from '@jod/design-system/icons';
 import React from 'react';
 import toast from 'react-hot-toast/headless';
@@ -20,9 +19,8 @@ export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiCont
   } = useTranslation();
   const LikeIcon = isLiked ? JodThumbUpFilled : JodThumbUp;
   const DislikeIcon = isDisliked ? JodThumbDownFilled : JodThumbDown;
-  const { showDialog } = useModal();
-  const dislikeRef = React.useRef('');
   const { isDev } = useEnvironment();
+  const [value, setValue] = React.useState('');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const headerText =
@@ -70,6 +68,27 @@ export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiCont
     }
   };
 
+  const footer = (hideDialog: () => void) => (
+    <div className="ds:flex ds:flex-row ds:justify-between ds:gap-5">
+      <Button
+        onClick={() => {
+          setValue('');
+          hideDialog();
+        }}
+        label={t('rate-ai-content.modal.close')}
+      />
+      <Button
+        disabled={value.trim().length === 0 || isSubmitting}
+        onClick={() => {
+          onSubmit(-1, value);
+          setValue('');
+          hideDialog();
+        }}
+        label={t('rate-ai-content.modal.send')}
+      />
+    </div>
+  );
+
   return isDev ? (
     <div className="bg-accent flex flex-col rounded-lg min-h-[271px] p-6">
       <div className="flex items-start mb-2">
@@ -91,31 +110,32 @@ export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiCont
           <LikeIcon className="text-accent" />
         </button>
         <div className="h-9 min-w-1 bg-border-gray" aria-hidden="true" />
-        <button
-          className="bg-white rounded-r-[30px] flex-1 h-full items-center justify-center pl-5 pr-6 flex cursor-pointer"
-          aria-label={t('rate-ai-content.dislike')}
-          disabled={isSubmitting}
-          onClick={() =>
-            showDialog({
-              variant: 'normal',
-              title: t('rate-ai-content.modal.header'),
-              cancelText: t('rate-ai-content.modal.close'),
-              confirmText: t('rate-ai-content.modal.send'),
-              content: (
-                <Textarea
-                  onChange={(e) => {
-                    dislikeRef.current = e.target.value;
-                  }}
-                  placeholder={t('rate-ai-content.modal.placeholder')}
-                />
-              ),
-              description: t('rate-ai-content.modal.body'),
-              onConfirm: () => onSubmit(-1, dislikeRef.current),
-            })
+        <ConfirmDialog
+          title={t('rate-ai-content.modal.header')}
+          description={t('rate-ai-content.modal.body')}
+          footer={footer}
+          content={
+            <Textarea
+              value={value}
+              onChange={(e) => {
+                setValue(e.target.value);
+              }}
+              placeholder={t('rate-ai-content.modal.placeholder')}
+              maxLength={5000}
+            />
           }
         >
-          <DislikeIcon className="text-accent" />
-        </button>
+          {(showDialog) => (
+            <button
+              className="bg-white rounded-r-[30px] flex-1 h-full items-center justify-center pl-5 pr-6 flex cursor-pointer"
+              aria-label={t('rate-ai-content.dislike')}
+              disabled={isSubmitting}
+              onClick={showDialog}
+            >
+              <DislikeIcon className="text-accent" />
+            </button>
+          )}
+        </ConfirmDialog>
       </div>
     </div>
   ) : (
