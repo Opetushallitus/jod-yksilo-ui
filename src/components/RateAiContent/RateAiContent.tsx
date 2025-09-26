@@ -1,4 +1,3 @@
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { Button, ConfirmDialog, Textarea } from '@jod/design-system';
 import { JodAi, JodThumbDown, JodThumbDownFilled, JodThumbUp, JodThumbUpFilled } from '@jod/design-system/icons';
 import React from 'react';
@@ -19,7 +18,6 @@ export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiCont
   } = useTranslation();
   const LikeIcon = isLiked ? JodThumbUpFilled : JodThumbUp;
   const DislikeIcon = isDisliked ? JodThumbDownFilled : JodThumbDown;
-  const { isDev } = useEnvironment();
   const [value, setValue] = React.useState('');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
@@ -89,7 +87,7 @@ export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiCont
     </div>
   );
 
-  return isDev ? (
+  return (
     <div className="bg-accent flex flex-col rounded-lg min-h-[271px] p-6">
       <div className="flex items-start mb-2">
         <div className="text-heading-2 text-white mr-2">{headerText}</div>
@@ -138,7 +136,5 @@ export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiCont
         </ConfirmDialog>
       </div>
     </div>
-  ) : (
-    <></>
   );
 };
