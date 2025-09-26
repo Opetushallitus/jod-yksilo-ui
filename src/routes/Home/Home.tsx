@@ -145,7 +145,7 @@ const Home = () => {
         </div>
       </Content>
 
-      <FullWidthContainer className="bg-[url(@/../assets/home-1.avif)] bg-[center_-325px] items-center">
+      <FullWidthContainer className="bg-[url(@/../assets/palveluhakemisto.jpg)] bg-cover bg-[50%_50%]">
         <div className="max-w-2xl">
           <HeroCard
             size="sm"
@@ -153,7 +153,7 @@ const Home = () => {
             title={t('home.need-personal-guidance')}
             buttonLabel={t('home.go-to-service-directory')}
             to="https://www.suomi.fi/palveluhakemisto/osaamispolku"
-            backgroundColor="#00A8B3"
+            backgroundColor="#00818A"
             LinkComponent={Link}
           />
         </div>
