@@ -32,7 +32,7 @@
     "react-router": "^7.8.0",
     "web-vitals": "^5.1.0",
     "zod": "^4.0.17",
-    "zustand": "^5.0.7"
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@axe-core/react": "^4.10.2",
