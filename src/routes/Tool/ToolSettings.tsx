@@ -76,6 +76,9 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
       <Setting title={t('tool.settings.general.sorting')}>
         <OpportunitiesSorting />
       </Setting>
+      <Setting title={t('tool.settings.general.sorting')}>
+        <OpportunitiesSorting />
+      </Setting>
     </SettingsSection>
   );
 };

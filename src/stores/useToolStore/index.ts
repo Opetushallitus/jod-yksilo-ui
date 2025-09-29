@@ -18,12 +18,14 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 const SUOSIKIT_PATH = '/api/profiili/suosikit';
+
 interface ToolFilters {
   /** Mahdollisuustyyppi */
   opportunityType: OpportunityFilterValue[];
   /** Maakunta */
   region: string[];
 }
+
 export type FilterName = keyof ToolFilters;
 export const DEFAULT_SORTING = sortingValues.RELEVANCE;
 const DEFAULT_FILTERS: ToolFilters = {
@@ -207,10 +209,28 @@ export const useToolStore = create<ToolState>()(
           }
         }
       },
+
       fetchMahdollisuudetPage: async (signal, newPage = 1) => {
         const { filters, ehdotuksetPageSize, sorting } = get();
         const { opportunityType } = filters;
         let ehdotukset = get().mahdollisuusEhdotukset;
+        const updateTyoMahdollisuudet = async (sortedMixedMahdollisuudet: TypedMahdollisuus[], pagedIds: string[]) => {
+          const ehdotukset = get().mahdollisuusEhdotukset;
+          const tyomahdollisuusIds = pagedIds.filter((id) => ehdotukset[id].tyyppi === 'TYOMAHDOLLISUUS');
+          const tyomahdollisuudet = await getTypedTyoMahdollisuusDetails(tyomahdollisuusIds);
+          sortedMixedMahdollisuudet.push(...tyomahdollisuudet);
+          set({ tyomahdollisuudet });
+        };
+        const updateKoulutusMahdollisuudet = async (
+          sortedMixedMahdollisuudet: TypedMahdollisuus[],
+          pagedIds: string[],
+        ) => {
+          const ehdotukset = get().mahdollisuusEhdotukset;
+          const koulutusmahdollisuusIds = pagedIds.filter((id) => ehdotukset[id].tyyppi === 'KOULUTUSMAHDOLLISUUS');
+          const koulutusmahdollisuudet = await getTypedKoulutusMahdollisuusDetails(koulutusmahdollisuusIds);
+          sortedMixedMahdollisuudet.push(...koulutusmahdollisuudet);
+          set({ koulutusmahdollisuudet });
+        };
 
         // apply ID sorting and filter
         const allSortedIds = await fetchSortedAndFilteredEhdotusIds(opportunityType);
@@ -222,29 +242,12 @@ export const useToolStore = create<ToolState>()(
           // paginate before fetch to fetch only the ids of selected newPage
           const pagedIds = paginate(allSortedIds, newPage, ehdotuksetPageSize);
           if (opportunityType.includes('ALL')) {
-            const koulutusmahdollisuusIds = pagedIds.filter((id) => ehdotukset[id].tyyppi === 'KOULUTUSMAHDOLLISUUS');
-            const koulutusmahdollisuudet = await getTypedKoulutusMahdollisuusDetails(koulutusmahdollisuusIds);
-            sortedMixedMahdollisuudet.push(...koulutusmahdollisuudet);
-            set({ koulutusmahdollisuudet });
-
-            const tyomahdollisuusIds = pagedIds.filter((id) => ehdotukset[id].tyyppi === 'TYOMAHDOLLISUUS');
-            const tyomahdollisuudet = await getTypedTyoMahdollisuusDetails(tyomahdollisuusIds);
-            sortedMixedMahdollisuudet.push(...tyomahdollisuudet);
-            set({ tyomahdollisuudet });
-          } else {
-            if (opportunityType.includes('TYOMAHDOLLISUUS') || opportunityType.length === 0) {
-              const ids = pagedIds.filter((id) => ehdotukset[id].tyyppi === 'TYOMAHDOLLISUUS');
-              const tyomahdollisuudet = await getTypedTyoMahdollisuusDetails(ids);
-              sortedMixedMahdollisuudet.push(...tyomahdollisuudet);
-              set({ tyomahdollisuudet });
-            }
-
-            if (opportunityType.includes('KOULUTUSMAHDOLLISUUS') || opportunityType.length === 0) {
-              const ids = pagedIds.filter((id) => ehdotukset[id].tyyppi === 'KOULUTUSMAHDOLLISUUS');
-              const koulutusmahdollisuudet = await getTypedKoulutusMahdollisuusDetails(ids);
-              sortedMixedMahdollisuudet.push(...koulutusmahdollisuudet);
-              set({ koulutusmahdollisuudet });
-            }
+            await updateKoulutusMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
+            await updateTyoMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
+          } else if (opportunityType.includes('TYOMAHDOLLISUUS') || opportunityType.length === 0) {
+            await updateTyoMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
+          } else if (opportunityType.includes('KOULUTUSMAHDOLLISUUS') || opportunityType.length === 0) {
+            await updateKoulutusMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
           }
 
           // Apply final sorting of page items based on selected sorting
@@ -295,9 +298,13 @@ export const useToolStore = create<ToolState>()(
           return Object.entries(ehdotukset ?? [])
             .filter(([, meta]) => {
               // If filter is empty, return all items
-              if (filter.length === 0) return true;
+              if (filter.length === 0) {
+                return true;
+              }
               // If 'ALL' is included, return all items regardless of type
-              if (filter.includes('ALL')) return true;
+              if (filter.includes('ALL')) {
+                return true;
+              }
               // Otherwise, only include items whose type is in the filter
               return filter.includes(meta.tyyppi);
             })
