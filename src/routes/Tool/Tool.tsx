@@ -87,7 +87,7 @@ const ExploreOpportunities = () => {
 
   return (
     <>
-      <div className="sticky top-[120px] lg:top-[66px] z-10 bg-bg-gray -mx-1 px-1 lg:pt-4">
+      <div className="sticky top-[144px] lg:top-[66px] z-10 bg-bg-gray -mx-1 px-1 lg:pt-9">
         <div className="flex items-center justify-end h-9 lg:pb-4 not-lg:bg-white not-lg:w-full lg:justify-between not-lg:mb-3 not-lg:px-4">
           {lg && (
             <h2 id="opportunities-title" tabIndex={-1} className="text-heading-2-mobile sm:text-heading-2">
@@ -305,22 +305,22 @@ const Tool = () => {
         </div>
         <h1 className="text-heading-1-mobile sm:text-heading-1 text-secondary-1-dark-2">{t('tool.title')}</h1>
       </div>
-      <p className="text-body-lg-mobile sm:text-body-lg mb-7 sm:mb-9 max-w-[700px]" ref={scrollRef}>
+      <p className="text-body-lg-mobile sm:text-body-lg mb-7 sm:mb-3 max-w-[700px]" ref={scrollRef}>
         {t('tool.description')}
       </p>
       <title>{t('tool.title')}</title>
       {lg ? (
         // Desktop
-        <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-7">
-          <div className="col-span-1 lg:col-span-5 max-h-fit">
-            <div className="sticky top-[68px] z-10 bg-bg-gray lg:pt-4">
+        <div className="grid grid-cols-12 gap-7">
+          <div className="col-span-5 max-h-fit">
+            <div className="sticky top-[66px] z-10 bg-bg-gray pt-9">
               <h2 className="sm:text-heading-2 text-heading-2-mobile h-9">{t('tool.my-own-data.title')}</h2>
             </div>
             <div className="flex flex-col gap-4">
               <YourInfo />
             </div>
           </div>
-          <div className="col-span-1 lg:col-span-7">
+          <div className="col-span-7">
             {!lg && (
               <h2 id="opportunities-title" tabIndex={-1} className="text-heading-3-mobile sm:text-heading-3">
                 {t('tool.your-opportunities.title')}
@@ -332,7 +332,7 @@ const Tool = () => {
       ) : (
         // Mobile
         <>
-          <div className="sticky top-[66px] z-10 -mx-5 pt-4 bg-bg-gray">
+          <div className="sticky top-[66px] z-10 -mx-5 pt-8 bg-bg-gray">
             <div role="tablist" className="flex text-button-sm select-none gap-3 px-5">
               {tabs.map((tab, index) => (
                 <button
