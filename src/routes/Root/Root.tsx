@@ -138,7 +138,7 @@ const Root = () => {
             label={t('beta.note.to-feedback')}
             icon={<JodOpenInNew />}
             iconSide="right"
-            LinkComponent={getLinkTo('https://link.webropolsurveys.com/S/9697D299FF7E5000', {
+            LinkComponent={getLinkTo('https://link.webropolsurveys.com/S/F27EA876E86B2D74', {
               useAnchor: true,
               target: '_blank',
             })}
