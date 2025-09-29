@@ -7,8 +7,12 @@ import { Link } from 'react-router';
 import { useMenuRoutes } from './menuRoutes';
 
 const PortalLink = ({ children, className }: LinkComponent) => {
+  const {
+    i18n: { language },
+  } = useTranslation();
+
   return (
-    <a href="/" className={className}>
+    <a href={`/${language}`} className={className}>
       {children}
     </a>
   );
