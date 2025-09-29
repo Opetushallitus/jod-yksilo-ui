@@ -1036,6 +1036,7 @@
       "title": "Tietojesi kokonaiskuva"
     },
     "job-opportunity-is-part-of-group": "Työmahdollisuus kuuluu ammattiryhmään",
+    "job-opportunity-is-part-of-group-tooltip": "Ammatteja ja työmahdollisuuksia ryhmitellään ammattiryhmiin.  Ammattiryhmiä käytetään väestön ammattirakenteen tilastoinnissa, ja niiden luomiseen käytetään ammattiluokitusta, joka auttaa vertailemaan tilastoja kansallisesti ja kansainvälisesti.",
     "my-own-data": {
       "cancel-text": "Ei, peruuta",
       "competences": {

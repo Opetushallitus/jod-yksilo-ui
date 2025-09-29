@@ -10,6 +10,7 @@ import { JodInfo } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router';
+import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
 type FavoriteProps =
   | {
@@ -52,12 +53,12 @@ type OpportunityCardProps = {
 } & FavoriteProps &
   MenuProps;
 
-const OpportunityDetail = ({ title, value }: { title: string; value: string }) => {
+const OpportunityDetail = ({ title, value, icon }: { title: string; value: string; icon: React.ReactNode }) => {
   return (
     <div className="flex flex-col">
       <div className="text-body-xs flex gap-4 items-center">
         <span>{title}:</span>
-        <JodInfo size={18} className="text-[#999]" />
+        {icon}
       </div>
       <div className="text-heading-3 text-secondary-1-dark">{value}</div>
     </div>
@@ -173,7 +174,22 @@ export const OpportunityCard = ({
         <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
         <div className="flex flex-col mt-5 gap-3">
           {type === 'TYOMAHDOLLISUUS' && ammattiryhma ? (
-            <OpportunityDetail title={t('tool.job-opportunity-is-part-of-group')} value={ammattiryhma} />
+            <OpportunityDetail
+              title={t('tool.job-opportunity-is-part-of-group')}
+              value={ammattiryhma}
+              icon={
+                <TooltipWrapper
+                  tooltipPlacement="top"
+                  tooltipContent={
+                    <div className="text-body-xs max-w-[290px] leading-5">
+                      {t('tool.job-opportunity-is-part-of-group-tooltip')}
+                    </div>
+                  }
+                >
+                  <JodInfo size={18} className="text-[#999]" />
+                </TooltipWrapper>
+              }
+            />
           ) : null}
         </div>
       </div>
