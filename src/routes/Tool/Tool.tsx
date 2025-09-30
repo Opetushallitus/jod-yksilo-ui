@@ -29,9 +29,8 @@ const ExploreOpportunities = () => {
     mahdollisuusEhdotukset,
     mixedMahdollisuudet,
     suosikit,
-    mahdollisuudetLoading,
-    ehdotuksetLoading,
     filters,
+    isLoading,
     updateEhdotuksetAndTyomahdollisuudet,
     toggleSuosikki,
   } = useToolStore(
@@ -41,10 +40,9 @@ const ExploreOpportunities = () => {
       mixedMahdollisuudet: state.mixedMahdollisuudet,
       suosikit: state.suosikit,
       filters: state.filters,
+      isLoading: state.ehdotuksetLoading || state.mahdollisuudetLoading,
       toggleSuosikki: state.toggleSuosikki,
       updateEhdotuksetAndTyomahdollisuudet: state.updateEhdotuksetAndTyomahdollisuudet,
-      mahdollisuudetLoading: state.mahdollisuudetLoading,
-      ehdotuksetLoading: state.ehdotuksetLoading,
     })),
   );
 
@@ -73,11 +71,6 @@ const ExploreOpportunities = () => {
 
   const onCloseSettings = () => {
     setSettingsOpen(false);
-
-    // When in modal mode, update the results only after closing the settings
-    if (!lg) {
-      onUpdateResults();
-    }
   };
 
   const getTotalFilterCount = React.useCallback(() => {
@@ -90,7 +83,6 @@ const ExploreOpportunities = () => {
     return `${t('tool.settings.toggle-title-closed')}${filterCount}`;
   }, [getTotalFilterCount, t]);
 
-  const isLoading = ehdotuksetLoading || mahdollisuudetLoading;
   const updateButtonLabel = isLoading ? t('updating-list') : t('update');
 
   return (
@@ -115,9 +107,9 @@ const ExploreOpportunities = () => {
                 setSettingsOpen(!settingsOpen);
               }}
             />
-            {lg && (
+            {
               <Button
-                size="lg"
+                size={lg ? 'lg' : 'sm'}
                 label={updateButtonLabel}
                 variant="accent"
                 onClick={onUpdateResults}
@@ -126,7 +118,7 @@ const ExploreOpportunities = () => {
                 iconSide={isLoading ? 'right' : undefined}
                 data-testid="update-opportunities"
               />
-            )}
+            }
           </div>
         </div>
       </div>
@@ -247,7 +239,6 @@ const Tool = () => {
   const { lg } = useMediaQueries();
   const [currentTab, setCurrentTab] = React.useState<TabName>('info');
   const scrollRef = React.useRef<HTMLDivElement>(null);
-  const isLoading = useToolStore((state) => state.ehdotuksetLoading || state.mahdollisuudetLoading);
 
   const setTab = React.useCallback((tab: TabName) => {
     setCurrentTab(tab);
@@ -264,13 +255,11 @@ const Tool = () => {
         text: t('tool.my-own-data.title'),
         active: currentTab === 'info',
         onclick: () => setTab('info'),
-        name: 'info',
       },
       {
         text: `${t('tool.your-opportunities.title')}`,
         active: currentTab === 'opportunities',
         onclick: () => setTab('opportunities'),
-        name: 'opportunities',
       },
     ];
 
@@ -363,7 +352,6 @@ const Tool = () => {
                   })}
                 >
                   {tab.text}
-                  {isLoading && tab.name === 'opportunities' && <Spinner color="accent" size={16} className="ml-3" />}
                 </button>
               ))}
             </div>
