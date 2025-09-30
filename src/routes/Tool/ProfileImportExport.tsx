@@ -177,9 +177,9 @@ const CompetenceImport = () => {
         .filter((osaaminen) => {
           return mappedSelectedCompetences.some((msc) => {
             if (msc.tyyppi === 'MUU_OSAAMINEN') {
-              return msc.id.includes(osaaminen.osaaminen.uri);
+              return msc.id.includes(osaaminen.osaaminen.uri) && osaaminen.lahde.tyyppi === 'MUU_OSAAMINEN';
             } else if (osaaminen.lahde.id) {
-              return msc.id.includes(osaaminen.lahde.id);
+              return msc.id.includes(osaaminen.lahde.id) && msc.tyyppi === osaaminen.lahde.tyyppi;
             }
             return false;
           });
