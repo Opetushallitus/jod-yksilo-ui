@@ -15,6 +15,7 @@
     "preview": "vite preview",
     "test:unit": "vitest --run",
     "test:e2e": "playwright test",
+    "unused-translations": "node ./script/findUnusedTranslations.cjs",
     "prepare": "husky"
   },
   "dependencies": {

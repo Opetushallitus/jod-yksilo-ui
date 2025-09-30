@@ -16,7 +16,14 @@ export default [
     files: ['**/*.ts', '**/*.tsx'],
   },
   {
-    ignores: ['**/dist', '**/eslint.config.js', 'src/api/schema.d.ts', '**/coverage', './playwright-report'],
+    ignores: [
+      '**/dist',
+      '**/eslint.config.js',
+      'src/api/schema.d.ts',
+      '**/coverage',
+      './playwright-report',
+      'script/*.cjs',
+    ],
   },
 
   eslint.configs.recommended,
