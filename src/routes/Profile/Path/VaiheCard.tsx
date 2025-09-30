@@ -103,6 +103,7 @@ const VaiheCard = ({ vaihe, totalSteps, setVaiheComplete, openVaiheModal }: Vaih
               variant="presentation"
               sourceType="tyopaikka"
               label={getLocalizedText(osaaminen.nimi)}
+              tooltip={getLocalizedText(osaaminen.kuvaus)}
             />
           ))}
         </div>

@@ -59,7 +59,7 @@ const VaiheOpportunityCard = React.memo(({ mahdollisuus }: VaiheOpportunityCardP
             {osaamiset.map((osaaminen) => (
               <Tag
                 label={getLocalizedText(osaaminen.nimi)}
-                title={getLocalizedText(osaaminen.kuvaus)}
+                tooltip={getLocalizedText(osaaminen.kuvaus)}
                 key={osaaminen.uri}
                 variant="presentation"
                 sourceType="tyopaikka"

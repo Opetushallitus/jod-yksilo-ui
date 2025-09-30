@@ -256,7 +256,7 @@ export const ExperienceTableRow = ({
               {sortedCompetences.map((competence) => (
                 <Tag
                   label={getLocalizedText(competence.nimi)}
-                  title={getLocalizedText(competence.kuvaus)}
+                  tooltip={getLocalizedText(competence.kuvaus)}
                   key={competence.id}
                   variant="presentation"
                   sourceType={competence.sourceType ?? 'jotain-muuta'}

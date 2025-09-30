@@ -110,7 +110,7 @@ const Interests = () => {
             {sortedSkills.map((val) => (
               <Tag
                 label={getLocalizedText(val.nimi)}
-                title={getLocalizedText(val.kuvaus)}
+                tooltip={getLocalizedText(val.kuvaus)}
                 key={val.uri}
                 variant="presentation"
                 sourceType="kiinnostus"
@@ -128,7 +128,7 @@ const Interests = () => {
             {sortedOccupations.map((val) => (
               <Tag
                 label={getLocalizedText(val.nimi)}
-                title={getLocalizedText(val.kuvaus)}
+                tooltip={getLocalizedText(val.kuvaus)}
                 key={val.uri}
                 variant="presentation"
                 sourceType="kiinnostus"
