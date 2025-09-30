@@ -134,6 +134,7 @@ export const ExperienceTableRow = ({
       >
         <button
           aria-label={actionLabel ?? t('edit')}
+          aria-haspopup="dialog"
           onClick={() =>
             useConfirm
               ? onShowDialog(() => {
