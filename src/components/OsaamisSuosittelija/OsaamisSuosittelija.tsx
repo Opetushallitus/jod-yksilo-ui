@@ -170,7 +170,7 @@ export const OsaamisSuosittelija = ({
                 <Tag
                   key={ehdotettuOsaaminen.id}
                   label={getLocalizedText(ehdotettuOsaaminen.nimi)}
-                  title={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
+                  tooltip={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
                   sourceType={
                     mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
                   }

@@ -109,7 +109,7 @@ const SomethingElse = () => {
         {sortedData.map((val) => (
           <Tag
             label={getLocalizedText(val.nimi)}
-            title={getLocalizedText(val.kuvaus)}
+            tooltip={getLocalizedText(val.kuvaus)}
             key={val.uri}
             variant="presentation"
             sourceType="jotain-muuta"

@@ -44,11 +44,11 @@ export const GroupByAlphabet = ({
               <div className="flex flex-wrap gap-3">
                 {getOsaaminenByLetter(letter).map((val) => {
                   const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
-                  const title = val.osaaminen.kuvaus[locale];
+                  const tooltip = val.osaaminen.kuvaus[locale];
                   return (
                     <Tag
                       label={label}
-                      title={title}
+                      tooltip={tooltip}
                       key={val.id}
                       variant="presentation"
                       sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
