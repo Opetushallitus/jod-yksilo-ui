@@ -28,26 +28,21 @@ const Setting = ({
   /** Ref is used to reference accordion open button for focusing */
   ref?: React.RefObject<HTMLDivElement | null>;
 }) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
-
+  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = React.useState(false);
-  const countStr = count ? ` (${count})` : '';
-
+  const titleText = title + (count ? ` (${count})` : '');
   return (
     <li>
       <Accordion
         title={
           <div ref={ref} className="w-full">
             <button onClick={() => setIsOpen(!isOpen)} className="block w-full text-left cursor-pointer p-1">
-              <span>{title + countStr}</span>
+              <span>{titleText}</span>
             </button>
           </div>
         }
-        lang={language}
-        titleText={t('sorting')}
+        lang={i18n.language}
+        titleText={titleText}
         initialState={false}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
