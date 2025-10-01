@@ -134,20 +134,20 @@ const Preferences = () => {
         <ToggleWithText
           title={t('preferences.data-disclosure-unanonymized.permission-education-and-planning.title')}
           description={t('preferences.data-disclosure-unanonymized.permission-education-and-planning.description')}
+          checked={lupaLuovuttaaTiedotUlkopuoliselle}
+          onChange={() => setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle)}
+          disabled={updating}
+          data-testid="pref-share-third-parties"
+        />
+        <ToggleWithText
+          title={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.title')}
+          description={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.description')}
           checked={lupaKayttaaTekoalynKoulutukseen}
           onChange={() => {
             setLupaKayttaaTekoalynKoulutukseen(!lupaKayttaaTekoalynKoulutukseen);
           }}
           disabled={updating}
           data-testid="pref-ai-training"
-        />
-        <ToggleWithText
-          title={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.title')}
-          description={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.description')}
-          checked={lupaLuovuttaaTiedotUlkopuoliselle}
-          onChange={() => setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle)}
-          disabled={updating}
-          data-testid="pref-share-third-parties"
         />
       </section>
       <section className="mb-8">
