@@ -113,33 +113,33 @@ const JobOpportunity = () => {
                 {formatDate(new Date(tyomahdollisuus?.palkkatiedot?.tiedotHaettu), 'medium')}
               </p>
 
-              <div className="flex justify-around text-center gap-11 my-8">
+              <div className="flex sm:flex-row flex-col justify-around text-center gap-9 sm:my-8 my-4">
                 <div>
-                  <h2 className="font-bold text-heading-1">
-                    {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka || '--'} €
+                  <h2 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                    {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka || '---'} €
                   </h2>
-                  <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.lowest-decile')}</p>
+                  <p>{t('job-opportunity.salary-data.lowest-decile')}</p>
                 </div>
 
                 <div>
-                  <h2 className="font-bold text-heading-1">
-                    {tyomahdollisuus?.palkkatiedot?.mediaaniPalkka || '--'} €
+                  <h2 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                    {tyomahdollisuus?.palkkatiedot?.mediaaniPalkka || '---'} €
                   </h2>
-                  <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.median')}</p>
+                  <p>{t('job-opportunity.salary-data.median')}</p>
                 </div>
 
                 <div>
-                  <h2 className="font-bold text-heading-1">
-                    {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka || '--'} €
+                  <h2 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                    {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka || '---'} €
                   </h2>
-                  <p className="mb-1 text-secondary-gray">{t('job-opportunity.salary-data.highest-decile')}</p>
+                  <p>{t('job-opportunity.salary-data.highest-decile')}</p>
                 </div>
               </div>
 
-              <p className="m-0 text-secondary-gray">{t('job-opportunity.salary-data.description')}</p>
+              <p>{t('job-opportunity.salary-data.description')}</p>
             </>
           ) : (
-            <p className="text-secondary-gray">{t('job-opportunity.salary-data.not-available')}</p>
+            <p>{t('job-opportunity.salary-data.not-available')}</p>
           )}
         </div>
       ),
