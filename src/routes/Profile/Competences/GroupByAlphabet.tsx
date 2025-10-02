@@ -41,21 +41,22 @@ export const GroupByAlphabet = ({
           return (
             <React.Fragment key={letter}>
               <div className="mb-5 mt-8 pb-3 border-b border-border-gray text-heading-3">{letter}</div>
-              <div className="flex flex-wrap gap-3">
+              <ul className="flex flex-wrap gap-3">
                 {getOsaaminenByLetter(letter).map((val) => {
                   const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
                   const tooltip = val.osaaminen.kuvaus[locale];
                   return (
-                    <Tag
-                      label={label}
-                      tooltip={tooltip}
-                      key={val.id}
-                      variant="presentation"
-                      sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
-                    />
+                    <li key={val.id}>
+                      <Tag
+                        label={label}
+                        tooltip={tooltip}
+                        variant="presentation"
+                        sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
+                      />
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             </React.Fragment>
           );
         })}

@@ -105,17 +105,18 @@ const SomethingElse = () => {
           {t('profile.something-else.my-other-comptetences')}
         </h2>
       )}
-      <div className="flex flex-wrap gap-3" data-testid="something-else-tags">
+      <ul className="flex flex-wrap gap-3" data-testid="something-else-tags">
         {sortedData.map((val) => (
-          <Tag
-            label={getLocalizedText(val.nimi)}
-            tooltip={getLocalizedText(val.kuvaus)}
-            key={val.uri}
-            variant="presentation"
-            sourceType="jotain-muuta"
-          />
+          <li key={val.uri}>
+            <Tag
+              label={getLocalizedText(val.nimi)}
+              tooltip={getLocalizedText(val.kuvaus)}
+              variant="presentation"
+              sourceType="jotain-muuta"
+            />
+          </li>
         ))}
-      </div>
+      </ul>
       <div className="flex pt-7 mb-8">
         <Button
           variant="white"

@@ -54,17 +54,18 @@ const VaiheOpportunityCard = React.memo(({ mahdollisuus }: VaiheOpportunityCardP
           initialState={false}
           fetchData={fetchOsaamiset}
         >
-          <div className="flex flex-row flex-wrap gap-3">
+          <ul className="flex flex-row flex-wrap gap-3">
             {osaamiset.map((osaaminen) => (
-              <Tag
-                label={getLocalizedText(osaaminen.nimi)}
-                tooltip={getLocalizedText(osaaminen.kuvaus)}
-                key={osaaminen.uri}
-                variant="presentation"
-                sourceType="tyopaikka"
-              />
+              <li key={osaaminen.uri}>
+                <Tag
+                  label={getLocalizedText(osaaminen.nimi)}
+                  tooltip={getLocalizedText(osaaminen.kuvaus)}
+                  variant="presentation"
+                  sourceType="tyopaikka"
+                />
+              </li>
             ))}
-          </div>
+          </ul>
         </Accordion>
       </div>
     </div>

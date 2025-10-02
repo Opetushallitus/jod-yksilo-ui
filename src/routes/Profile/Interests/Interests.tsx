@@ -106,17 +106,18 @@ const Interests = () => {
           <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
             {t('profile.interests.skills-that-interest-me')}
           </h2>
-          <div className="flex flex-wrap gap-3">
+          <ul className="flex flex-wrap gap-3">
             {sortedSkills.map((val) => (
-              <Tag
-                label={getLocalizedText(val.nimi)}
-                tooltip={getLocalizedText(val.kuvaus)}
-                key={val.uri}
-                variant="presentation"
-                sourceType="kiinnostus"
-              />
+              <li key={val.uri}>
+                <Tag
+                  label={getLocalizedText(val.nimi)}
+                  tooltip={getLocalizedText(val.kuvaus)}
+                  variant="presentation"
+                  sourceType="kiinnostus"
+                />
+              </li>
             ))}
-          </div>
+          </ul>
         </>
       )}
       {sortedOccupations.length > 0 && (
@@ -124,17 +125,18 @@ const Interests = () => {
           <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray mt-8">
             {t('profile.interests.occupations-that-interest-me')}
           </h2>
-          <div className="flex flex-wrap gap-3">
+          <ul className="flex flex-wrap gap-3">
             {sortedOccupations.map((val) => (
-              <Tag
-                label={getLocalizedText(val.nimi)}
-                tooltip={getLocalizedText(val.kuvaus)}
-                key={val.uri}
-                variant="presentation"
-                sourceType="kiinnostus"
-              />
+              <li key={val.uri}>
+                <Tag
+                  label={getLocalizedText(val.nimi)}
+                  tooltip={getLocalizedText(val.kuvaus)}
+                  variant="presentation"
+                  sourceType="kiinnostus"
+                />
+              </li>
             ))}
-          </div>
+          </ul>
         </>
       )}
       <div className="flex pt-7 mb-8">
