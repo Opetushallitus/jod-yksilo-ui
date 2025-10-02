@@ -997,6 +997,7 @@ export interface components {
     EhdotusMetadata: {
       /** @enum {string} */
       tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      ammattiryhma?: string;
       /** Format: double */
       pisteet?: number;
       /** @enum {string} */
@@ -1204,6 +1205,7 @@ export interface components {
       aidinkieli?: string;
       /** @enum {string} */
       valittuKieli?: 'fi' | 'sv' | 'en';
+      email?: string;
       tyopaikat?: components['schemas']['TyopaikkaExportDto'][];
       koulutusKokonaisuudet?: components['schemas']['KoulutusKokonaisuusExportDto'][];
       toiminnot?: components['schemas']['ToimintoExportDto'][];

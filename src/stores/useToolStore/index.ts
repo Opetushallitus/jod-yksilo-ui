@@ -24,6 +24,7 @@ interface ToolFilters {
   opportunityType: OpportunityFilterValue[];
   /** Maakunta */
   region: string[];
+  ammattiryhmat: string[];
 }
 
 export type FilterName = keyof ToolFilters;
@@ -31,6 +32,7 @@ export const DEFAULT_SORTING = sortingValues.RELEVANCE;
 const DEFAULT_FILTERS: ToolFilters = {
   opportunityType: [],
   region: [],
+  ammattiryhmat: [],
 };
 
 type ArrayFilters = Extract<FilterName, 'opportunityType' | 'region'>;
@@ -212,7 +214,7 @@ export const useToolStore = create<ToolState>()(
 
       fetchMahdollisuudetPage: async (signal, newPage = 1) => {
         const { filters, ehdotuksetPageSize, sorting } = get();
-        const { opportunityType } = filters;
+        const { opportunityType, ammattiryhmat } = filters;
         let ehdotukset = get().mahdollisuusEhdotukset;
         const updateTyoMahdollisuudet = async (sortedMixedMahdollisuudet: TypedMahdollisuus[], pagedIds: string[]) => {
           const ehdotukset = get().mahdollisuusEhdotukset;
@@ -233,15 +235,14 @@ export const useToolStore = create<ToolState>()(
         };
 
         // apply ID sorting and filter
-        const allSortedIds = await fetchSortedAndFilteredEhdotusIds(opportunityType);
-
+        const allSortedIds = await filterEhdotukset(opportunityType, ammattiryhmat);
         set({ mahdollisuudetLoading: true });
         try {
           const sortedMixedMahdollisuudet: TypedMahdollisuus[] = [];
 
           // paginate before fetch to fetch only the ids of selected newPage
           const pagedIds = paginate(allSortedIds, newPage, ehdotuksetPageSize);
-          if (opportunityType.includes('ALL')) {
+          if (opportunityType.includes('ALL') || opportunityType.length == 0) {
             await updateKoulutusMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
             await updateTyoMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
           } else if (opportunityType.includes('TYOMAHDOLLISUUS') || opportunityType.length === 0) {
@@ -288,13 +289,12 @@ export const useToolStore = create<ToolState>()(
           });
         }
 
-        async function fetchSortedAndFilteredEhdotusIds(filter: OpportunityFilterValue[]) {
+        async function filterEhdotukset(filter: OpportunityFilterValue[], ammattiryhmat: string[]) {
           if (Object.keys(ehdotukset).length === 0 || i18n.language !== get().previousEhdotusUpdateLang) {
             await get().updateEhdotukset(i18n.language, signal);
-            ehdotukset = get().mahdollisuusEhdotukset;
             set({ previousEhdotusUpdateLang: i18n.language });
           }
-
+          ehdotukset = get().mahdollisuusEhdotukset;
           return Object.entries(ehdotukset ?? [])
             .filter(([, meta]) => {
               // If filter is empty, return all items
@@ -307,6 +307,15 @@ export const useToolStore = create<ToolState>()(
               }
               // Otherwise, only include items whose type is in the filter
               return filter.includes(meta.tyyppi);
+            })
+            .filter(([, meta]) => {
+              if (ammattiryhmat.length == 0 || !meta.tyyppi != 'TYOMAHDOLLISUUS') {
+                return true;
+              }
+              // Ammattiryhmat are in form C1, and meta.ammattiryhma is in format C1234
+              // If meta.ammattiryhma starts with category code, it belongs to that category
+              // eslint-disable-next-line sonarjs/no-nested-functions
+              return ammattiryhmat.some((ar) => meta.ammattiryhma.startsWith(ar));
             })
             .sort(([, metadataA], [, metadataB]) =>
               sorting === sortingValues.RELEVANCE
@@ -392,6 +401,26 @@ export const useToolStore = create<ToolState>()(
               value && filters[name] && (filters[name] as string[]).includes(value)
                 ? filters[name].filter((v) => v !== value)
                 : [...(state.filters[name] ?? []), value],
+          },
+        }));
+      },
+
+      addAmmattiryhmaToFilter: (ammattiryhma: string) => {
+        set((state) => ({
+          settingsHaveChanged: true,
+          filters: {
+            ...state.filters,
+            ammattiryhmat: [...state.filters.ammattiryhmat, ammattiryhma],
+          },
+        }));
+      },
+
+      removeAmmattiryhmaFromFilter: (ammattiryhma: string) => {
+        set((state) => ({
+          settingsHaveChanged: true,
+          filters: {
+            ...state.filters,
+            ammattiryhmat: state.filters.ammattiryhmat.filter((ar: string) => ar !== ammattiryhma),
           },
         }));
       },

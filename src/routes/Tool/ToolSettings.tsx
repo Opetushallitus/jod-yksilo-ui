@@ -1,3 +1,4 @@
+import FilterAmmattiryhma from '@/routes/Tool/components/filters/FilterAmmattiryhma.tsx';
 import { FilterName, useToolStore } from '@/stores/useToolStore';
 import { Accordion, Button, Modal } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
@@ -76,8 +77,10 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
       <Setting title={t('tool.settings.general.sorting')}>
         <OpportunitiesSorting />
       </Setting>
-      <Setting title={t('tool.settings.general.sorting')}>
-        <OpportunitiesSorting />
+      <Setting title={t('tool.settings.general.job-opportunity-filters')}>
+        <Setting title={t('tool.settings.general.occupation-type')}>
+          <FilterAmmattiryhma />
+        </Setting>
       </Setting>
     </SettingsSection>
   );
