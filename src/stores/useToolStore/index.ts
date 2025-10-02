@@ -64,6 +64,7 @@ interface ToolState {
   ehdotuksetPageSize: number;
   ehdotuksetPageNr: number;
   ehdotuksetCount: Record<MahdollisuusTyyppi, number>;
+  filteredMahdollisuudetCount: number;
   sorting: OpportunitySortingValue;
   previousEhdotusUpdateLang: string;
   filters: ToolFilters;
@@ -195,13 +196,7 @@ export const useToolStore = create<ToolState>()(
             ehdotuksetLoading: false,
             ehdotuksetCount: {
               TYOMAHDOLLISUUS:
-                mahdollisuusData
-                  ?.filter((m) => m.ehdotusMetadata?.tyyppi === 'TYOMAHDOLLISUUS')
-                  .filter(
-                    (m) =>
-                      filters.ammattiryhmat.empty() ||
-                      filters.ammattiryhmat.some((ar) => m.ehdotusMetadata?.ammattiryhma?.startsWith(ar)),
-                  ).length ?? 0,
+                mahdollisuusData?.filter((m) => m.ehdotusMetadata?.tyyppi === 'TYOMAHDOLLISUUS').length ?? 0,
               KOULUTUSMAHDOLLISUUS:
                 mahdollisuusData?.filter((m) => m.ehdotusMetadata?.tyyppi === 'KOULUTUSMAHDOLLISUUS').length ?? 0,
             },
@@ -244,6 +239,8 @@ export const useToolStore = create<ToolState>()(
 
         // apply ID sorting and filter
         const allSortedIds = await filterEhdotukset(opportunityType, ammattiryhmat);
+        console.log('allsortedids: ' + allSortedIds);
+        set({ filteredMahdollisuudetCount: allSortedIds.length });
         set({ mahdollisuudetLoading: true });
         try {
           const sortedMixedMahdollisuudet: TypedMahdollisuus[] = [];
@@ -303,6 +300,7 @@ export const useToolStore = create<ToolState>()(
             set({ previousEhdotusUpdateLang: i18n.language });
           }
           ehdotukset = get().mahdollisuusEhdotukset;
+          console.log(ehdotukset);
           return Object.entries(ehdotukset ?? [])
             .filter(([, meta]) => {
               // If filter is empty, return all items
@@ -320,9 +318,12 @@ export const useToolStore = create<ToolState>()(
               if (ammattiryhmat.length == 0 || meta.tyyppi != 'TYOMAHDOLLISUUS') {
                 return true;
               }
+              console.log('filtteröi');
               // Ammattiryhmat are in form C1, and meta.ammattiryhma is in format C1234
               // If meta.ammattiryhma starts with category code, it belongs to that category
               // eslint-disable-next-line sonarjs/no-nested-functions
+              console.log(meta.ammattiryhma);
+              console.log(ammattiryhmat);
               return ammattiryhmat.some((ar) => meta.ammattiryhma?.startsWith(ar));
             })
             .sort(([, metadataA], [, metadataB]) =>
