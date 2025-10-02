@@ -72,6 +72,7 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
           label={t('free-time-activities.name-of-free-time-activity')}
           {...register(`nimi.${language}` as const)}
           placeholder={t('profile.free-time-activities.modals.name-of-free-time-activity-placeholder')}
+          requiredText={t('required')}
         />
         <FormError name={`nimi.${language}`} errors={errors} />
       </div>
@@ -84,6 +85,7 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
                 label={t('started')}
                 {...field}
                 placeholder={t('date-placeholder')}
+                requiredText={t('required')}
                 translations={getDatePickerTranslations(
                   t('datepicker', { returnObjects: true }) as DatePickerTranslations,
                 )}

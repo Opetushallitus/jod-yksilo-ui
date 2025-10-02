@@ -65,7 +65,7 @@ const JakaumaList = ({
       }
       return arvo;
     } else if (booleanKeys.includes(name)) {
-      return parseBoolean(arvo) === true ? t('required') : t('not-required');
+      return parseBoolean(arvo) === true ? t('is-required') : t('is-not-required');
     } else if (codesAsValue.includes(name)) {
       return arvo;
     } else {

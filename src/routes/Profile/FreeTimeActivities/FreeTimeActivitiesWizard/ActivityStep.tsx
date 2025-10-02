@@ -51,6 +51,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
             label={t('free-time-activities.name-of-free-time-theme')}
             {...register(`nimi.${language}` as const)}
             placeholder={t('profile.free-time-activities.modals.name-of-free-time-theme-placeholder')}
+            requiredText={t('required')}
           />
           <FormError name={`nimi.${language}`} errors={errors} />
         </div>
@@ -60,6 +61,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
           label={t('free-time-activities.name-of-free-time-activity')}
           {...register(`patevyydet.${patevyys}.nimi.${language}` as const)}
           placeholder={t('profile.free-time-activities.modals.name-of-free-time-activity-placeholder')}
+          requiredText={t('required')}
         />
         <FormError name={`patevyydet.${patevyys}.nimi.${language}`} errors={errors} />
       </div>
@@ -76,6 +78,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
                   trigger(`patevyydet.${patevyys}.loppuPvm`);
                 }}
                 placeholder={t('date-placeholder')}
+                requiredText={t('required')}
                 translations={getDatePickerTranslations(
                   t('datepicker', { returnObjects: true }) as DatePickerTranslations,
                 )}

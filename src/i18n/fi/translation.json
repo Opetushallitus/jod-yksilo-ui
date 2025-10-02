@@ -355,6 +355,8 @@
       "title": "Tekoäly apunasi"
     }
   },
+  "is-not-required": "Ei vaadita",
+  "is-required": "Vaaditaan",
   "jakauma": {
     "aika": "Aika",
     "ajokortti": "Ajokortti",
@@ -546,7 +548,6 @@
     "description": "Hakemaasi sivua ei löytynyt.",
     "title": "Sivua ei löytynyt"
   },
-  "not-required": "Ei vaadita",
   "on-this-page": "Tällä sivulla",
   "open-menu": "Avaa valikko",
   "open-submenu": "Avaa alivalikko",
@@ -930,7 +931,7 @@
   "remove-approval": "Hylkää hyväksyntä",
   "remove-favorite": "Poista suosikeista",
   "remove-favorite-opportunity-confirmation": "Haluatko varmasti poistaa mahdollisuuden \"{{name}}\" suosikeista?",
-  "required": "Vaaditaan",
+  "required": "pakollinen",
   "restrictions": "Rajoitteet",
   "result-list": "Tuloslista",
   "return-home": "Palaa etusivulle",

@@ -53,6 +53,7 @@ const DetailsStep = ({ vaiheIndex }: { vaiheIndex: number }) => {
           <InputField
             label={`${labelPrefix} ${t('name').toLocaleLowerCase()}`}
             {...register(`nimi.${language}` as const)}
+            requiredText={t('required')}
           />
           <FormError name={`nimi.${language}`} errors={errors} />
         </div>

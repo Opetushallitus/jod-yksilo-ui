@@ -412,6 +412,7 @@ const Path = () => {
                 label={t('profile.paths.plan-name')}
                 {...methods.register(`nimi.${language}` as const)}
                 onBlur={methods.handleSubmit(save)}
+                requiredText={t('required')}
                 data-testid="path-plan-name"
               />
               <FormError name={`nimi.${language}`} errors={methods.formState.errors} />

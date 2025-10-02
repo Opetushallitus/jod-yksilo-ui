@@ -174,6 +174,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
             rows={5}
             maxLength={MESSAGE_MAX_LENGTH}
             data-testid="feedback-message"
+            requiredText={t('required')}
           />
           <Controller
             control={control}
