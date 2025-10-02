@@ -192,22 +192,23 @@ export const VirtualAssistant = ({
                 {row.kiinnostukset && row.kiinnostukset.length > 0 && (
                   <div className="flex flex-col gap-3">
                     <div className="h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-[#F7F7F9]">
-                      <div className="flex flex-wrap gap-3">
+                      <ul className="flex flex-wrap gap-3">
                         {row.kiinnostukset
                           .filter((k) => !selectedKiinnostukset.find((val) => val.kuvaus === k.kuvaus))
                           .map((k) => (
-                            <Tag
-                              key={k.kuvaus ?? k.esco_uri}
-                              label={k.kuvaus ?? k.esco_uri ?? ''}
-                              sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
-                              onClick={() => {
-                                // eslint-disable-next-line sonarjs/no-nested-functions
-                                setSelectedKiinnostukset((prevState) => [...prevState, k]);
-                              }}
-                              variant="selectable"
-                            />
+                            <li key={k.kuvaus ?? k.esco_uri}>
+                              <Tag
+                                label={k.kuvaus ?? k.esco_uri ?? ''}
+                                sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
+                                onClick={() => {
+                                  // eslint-disable-next-line sonarjs/no-nested-functions
+                                  setSelectedKiinnostukset((prevState) => [...prevState, k]);
+                                }}
+                                variant="selectable"
+                              />
+                            </li>
                           ))}
-                      </div>
+                      </ul>
                     </div>
                     <div className={`${sm ? 'text-body-sm font-arial' : 'text-body-sm-mobile'}`}>
                       {t('tool.my-own-data.interests.virtual-assistant.add')}
@@ -290,22 +291,23 @@ export const VirtualAssistant = ({
                 aria-labelledby={selectedKiinnostuksetLabelId}
                 className="min-h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-[#F7F7F9] mt-5"
               >
-                <div className="flex flex-wrap gap-3">
+                <ul className="flex flex-wrap gap-3">
                   {selectedKiinnostukset.map((k) => (
-                    <Tag
-                      key={k.kuvaus ?? k.esco_uri}
-                      label={k.kuvaus ?? k.esco_uri ?? ''}
-                      sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
-                      variant="added"
-                      onClick={() => {
-                        setSelectedKiinnostukset((prevState) => {
-                          // eslint-disable-next-line sonarjs/no-nested-functions
-                          return prevState.filter((selectedValue) => selectedValue.kuvaus !== k.kuvaus);
-                        });
-                      }}
-                    />
+                    <li key={k.kuvaus ?? k.esco_uri}>
+                      <Tag
+                        label={k.kuvaus ?? k.esco_uri ?? ''}
+                        sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
+                        variant="added"
+                        onClick={() => {
+                          setSelectedKiinnostukset((prevState) => {
+                            // eslint-disable-next-line sonarjs/no-nested-functions
+                            return prevState.filter((selectedValue) => selectedValue.kuvaus !== k.kuvaus);
+                          });
+                        }}
+                      />
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
               <span className="text-body-sm sm:text-body-sm-mobile">{t('osaamissuosittelija.interest.remove')}</span>
             </div>
