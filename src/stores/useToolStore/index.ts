@@ -309,13 +309,13 @@ export const useToolStore = create<ToolState>()(
               return filter.includes(meta.tyyppi);
             })
             .filter(([, meta]) => {
-              if (ammattiryhmat.length == 0 || !meta.tyyppi != 'TYOMAHDOLLISUUS') {
+              if (ammattiryhmat.length == 0 || meta.tyyppi != 'TYOMAHDOLLISUUS') {
                 return true;
               }
               // Ammattiryhmat are in form C1, and meta.ammattiryhma is in format C1234
               // If meta.ammattiryhma starts with category code, it belongs to that category
               // eslint-disable-next-line sonarjs/no-nested-functions
-              return ammattiryhmat.some((ar) => meta.ammattiryhma.startsWith(ar));
+              return ammattiryhmat.some((ar) => meta.ammattiryhma?.startsWith(ar));
             })
             .sort(([, metadataA], [, metadataB]) =>
               sorting === sortingValues.RELEVANCE
