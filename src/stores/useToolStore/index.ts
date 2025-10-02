@@ -71,7 +71,8 @@ interface ToolState {
   setArrayFilter: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;
   reset: () => void;
   resetSettings: () => void;
-
+  addAmmattiryhmaFilter: (ammattiryhma: string) => void;
+  removeAmmattiryhmaFromFilter: (ammattiryhma: string) => void;
   setTavoitteet: (state: ToolState['tavoitteet']) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
   setOsaamisetVapaateksti: (state?: components['schemas']['LokalisoituTeksti']) => void;
@@ -166,6 +167,7 @@ export const useToolStore = create<ToolState>()(
           kiinnostuksetVapaateksti,
           osaamisKiinnostusPainotus,
           rajoitePainotus,
+          filters,
         } = get();
 
         set({ ehdotuksetLoading: true });
@@ -193,7 +195,13 @@ export const useToolStore = create<ToolState>()(
             ehdotuksetLoading: false,
             ehdotuksetCount: {
               TYOMAHDOLLISUUS:
-                mahdollisuusData?.filter((m) => m.ehdotusMetadata?.tyyppi === 'TYOMAHDOLLISUUS').length ?? 0,
+                mahdollisuusData
+                  ?.filter((m) => m.ehdotusMetadata?.tyyppi === 'TYOMAHDOLLISUUS')
+                  .filter(
+                    (m) =>
+                      filters.ammattiryhmat.empty() ||
+                      filters.ammattiryhmat.some((ar) => m.ehdotusMetadata?.ammattiryhma?.startsWith(ar)),
+                  ).length ?? 0,
               KOULUTUSMAHDOLLISUUS:
                 mahdollisuusData?.filter((m) => m.ehdotusMetadata?.tyyppi === 'KOULUTUSMAHDOLLISUUS').length ?? 0,
             },
