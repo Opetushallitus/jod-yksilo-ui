@@ -36,6 +36,7 @@ const DurationFormSection = () => {
               {...field}
               label={t('profile.paths.starts')}
               placeholder={t('date-placeholder')}
+              requiredText={t('required')}
               translations={DatePickerTranslations}
             />
           )}
@@ -51,6 +52,7 @@ const DurationFormSection = () => {
               {...field}
               label={t('profile.paths.ends')}
               placeholder={t('date-placeholder')}
+              requiredText={t('required')}
               translations={DatePickerTranslations}
             />
           )}

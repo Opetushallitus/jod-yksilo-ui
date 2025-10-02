@@ -72,6 +72,7 @@ const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
           label={t('education-history.name-of-degree-or-education')}
           {...register(`nimi.${language}` as const)}
           placeholder={t('profile.education-history.modals.job-description-placeholder')}
+          requiredText={t('required')}
         />
         <FormError name={`nimi.${language}`} errors={errors} />
       </div>
