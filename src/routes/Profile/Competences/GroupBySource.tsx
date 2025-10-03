@@ -91,21 +91,22 @@ export const GroupBySource = ({
                   {osaamiset.filter(
                     (val) => val.lahde.tyyppi === competence && isOsaaminenVisible(competence, val.lahde.id),
                   ).length > 0 && (
-                    <div className="flex flex-wrap gap-4">
+                    <ul className="flex flex-wrap gap-4">
                       {osaamiset.map((val) => {
                         const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
                         const tooltip = val.osaaminen.kuvaus[locale];
                         return val.lahde.tyyppi === competence && isOsaaminenVisible(competence, val.lahde.id) ? (
-                          <Tag
-                            label={label}
-                            tooltip={tooltip}
-                            key={val.id}
-                            variant="presentation"
-                            sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
-                          />
+                          <li key={val.id}>
+                            <Tag
+                              label={label}
+                              tooltip={tooltip}
+                              variant="presentation"
+                              sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
+                            />
+                          </li>
                         ) : null;
                       })}
-                    </div>
+                    </ul>
                   )}
                   {competence === 'MUU_OSAAMINEN' && localizedMuutOsaamisetVapaateksti.length > 0 && (
                     <div className="flex flex-col bg-white px-5 py-4 rounded gap-3 border-2 border-[#CCC]">

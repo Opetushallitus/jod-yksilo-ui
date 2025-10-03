@@ -96,17 +96,18 @@ const VaiheCard = ({ vaihe, totalSteps, setVaiheComplete, openVaiheModal }: Vaih
         <div className="text-body-lg">
           {t('profile.paths.competences-gained-from-phase')} ({vaihe.osaamiset?.length ?? 0}/{totalSteps})
         </div>
-        <div className="flex flex-row flex-wrap gap-2">
+        <ul className="flex flex-row flex-wrap gap-2">
           {vaihe.osaamiset?.map((osaaminen) => (
-            <Tag
-              key={osaaminen.uri}
-              variant="presentation"
-              sourceType="tyopaikka"
-              label={getLocalizedText(osaaminen.nimi)}
-              tooltip={getLocalizedText(osaaminen.kuvaus)}
-            />
+            <li key={osaaminen.uri}>
+              <Tag
+                variant="presentation"
+                sourceType="tyopaikka"
+                label={getLocalizedText(osaaminen.nimi)}
+                tooltip={getLocalizedText(osaaminen.kuvaus)}
+              />
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );

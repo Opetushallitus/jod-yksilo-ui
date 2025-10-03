@@ -165,34 +165,35 @@ export const OsaamisSuosittelija = ({
 
         <div className="mb-6 overflow-y-auto max-h-[228px]">
           {filteredEhdotetutOsaamiset.length > 0 ? (
-            <div className="flex flex-wrap gap-3">
+            <ul className="flex flex-wrap gap-3">
               {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen) => (
-                <Tag
-                  key={ehdotettuOsaaminen.id}
-                  label={getLocalizedText(ehdotettuOsaaminen.nimi)}
-                  tooltip={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
-                  sourceType={
-                    mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
-                  }
-                  onClick={() => {
-                    if (ehdotettuOsaaminen.id && value.find((val) => val.id === ehdotettuOsaaminen.id)) {
-                      return; // Prevent adding duplicates by rapid clicking
+                <li key={ehdotettuOsaaminen.id}>
+                  <Tag
+                    label={getLocalizedText(ehdotettuOsaaminen.nimi)}
+                    tooltip={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
+                    sourceType={
+                      mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
                     }
+                    onClick={() => {
+                      if (ehdotettuOsaaminen.id && value.find((val) => val.id === ehdotettuOsaaminen.id)) {
+                        return; // Prevent adding duplicates by rapid clicking
+                      }
 
-                    onChange([
-                      ...value,
-                      {
-                        id: ehdotettuOsaaminen.id,
-                        nimi: ehdotettuOsaaminen.nimi,
-                        kuvaus: ehdotettuOsaaminen.kuvaus,
-                        tyyppi: sourceType,
-                      },
-                    ]);
-                  }}
-                  variant="selectable"
-                />
+                      onChange([
+                        ...value,
+                        {
+                          id: ehdotettuOsaaminen.id,
+                          nimi: ehdotettuOsaaminen.nimi,
+                          kuvaus: ehdotettuOsaaminen.kuvaus,
+                          tyyppi: sourceType,
+                        },
+                      ]);
+                    }}
+                    variant="selectable"
+                  />
+                </li>
               ))}
-            </div>
+            </ul>
           ) : (
             <div className="mt-4">
               <EmptyState text={t(`osaamissuosittelija.${translationKey}.none-proposed`)} />
