@@ -115,23 +115,23 @@ const JobOpportunity = () => {
 
               <div className="flex sm:flex-row flex-col justify-around text-center gap-9 sm:my-8 my-4">
                 <div>
-                  <h2 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                  <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
                     {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka || '---'} €
-                  </h2>
+                  </h4>
                   <p>{t('job-opportunity.salary-data.lowest-decile')}</p>
                 </div>
 
                 <div>
-                  <h2 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                  <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
                     {tyomahdollisuus?.palkkatiedot?.mediaaniPalkka || '---'} €
-                  </h2>
+                  </h4>
                   <p>{t('job-opportunity.salary-data.median')}</p>
                 </div>
 
                 <div>
-                  <h2 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                  <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
                     {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka || '---'} €
-                  </h2>
+                  </h4>
                   <p>{t('job-opportunity.salary-data.highest-decile')}</p>
                 </div>
               </div>

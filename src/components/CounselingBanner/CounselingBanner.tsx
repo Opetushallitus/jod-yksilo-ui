@@ -15,7 +15,7 @@ export const CounselingBanner = () => {
   return (
     <div className="bg-secondary-3 flex flex-col rounded-lg h-[271px] p-6 mt-4">
       <div className="flex items-start mb-2">
-        <div className="text-heading-2 text-white mr-2">{t('service-catalog.header')}</div>
+        <h2 className="text-heading-2 text-white mr-2">{t('service-catalog.header')}</h2>
       </div>
       <div className="flex items-center mb-2">
         <p className="text-body-lg text-white">{t('service-catalog.description')}</p>

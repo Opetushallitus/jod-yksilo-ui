@@ -81,6 +81,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                 aineisto={details.aineisto}
                 tyyppi={details.tyyppi}
                 type={mahdollisuusTyyppi}
+                headingLevel="h3"
                 menuContent={
                   <MyGoalsOpportunityCardMenu
                     mahdollisuusId={mahdollisuusId}

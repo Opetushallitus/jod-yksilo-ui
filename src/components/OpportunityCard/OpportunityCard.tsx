@@ -48,6 +48,7 @@ type OpportunityCardProps = {
   matchValue?: number;
   matchLabel?: string;
   type: MahdollisuusTyyppi;
+  headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   from?: 'tool' | 'favorite' | 'path' | 'goal';
   tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
 } & FavoriteProps &
@@ -111,6 +112,7 @@ export const OpportunityCard = ({
   isFavorite,
   isLoggedIn,
   hideFavorite,
+  headingLevel,
   menuContent,
   menuId,
 }: OpportunityCardProps) => {
@@ -125,6 +127,7 @@ export const OpportunityCard = ({
       : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
   });
   const { showDialog, closeAllModals } = useModal();
+  const TitleTag = headingLevel || 'span';
 
   const onToggleFavorite = () => {
     if (hideFavorite) {
@@ -155,21 +158,18 @@ export const OpportunityCard = ({
       <div className="order-2 flex flex-col">
         <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">{cardTypeTitle}</span>
         {to ? (
-          <NavLink
-            to={to}
-            state={{ from }}
-            className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto text-secondary-1-dark hover:underline"
-            data-testid="opportunity-card-title-link"
-          >
-            {name}
+          <NavLink to={to} state={{ from }} data-testid="opportunity-card-title-link">
+            <TitleTag className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto text-secondary-1-dark hover:underline">
+              {name}
+            </TitleTag>
           </NavLink>
         ) : (
-          <span
+          <TitleTag
             className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto"
             data-testid="opportunity-card-title"
           >
             {name}
-          </span>
+          </TitleTag>
         )}
         <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
         <div className="flex flex-col mt-5 gap-3">
