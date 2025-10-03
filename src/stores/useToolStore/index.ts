@@ -74,7 +74,7 @@ interface ToolState {
   resetSettings: () => void;
   addAmmattiryhmaToFilter: (ammattiryhma: string) => void;
   removeAmmattiryhmaFromFilter: (ammattiryhma: string) => void;
-  fillAmmattiryhmaNimet: (uris: string[]) => void;
+  fillAmmattiryhmaNimet: (uris: string[]) => Promise<void>;
   setTavoitteet: (state: ToolState['tavoitteet']) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
   setOsaamisetVapaateksti: (state?: components['schemas']['LokalisoituTeksti']) => void;
@@ -247,13 +247,17 @@ export const useToolStore = create<ToolState>()(
 
           // paginate before fetch to fetch only the ids of selected newPage
           const pagedIds = paginate(allSortedIds, newPage, ehdotuksetPageSize);
+
           if (opportunityType.includes('ALL') || opportunityType.length == 0) {
             await updateKoulutusMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
             await updateTyoMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
-          } else if (opportunityType.includes('TYOMAHDOLLISUUS') || opportunityType.length === 0) {
-            await updateTyoMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
-          } else if (opportunityType.includes('KOULUTUSMAHDOLLISUUS') || opportunityType.length === 0) {
-            await updateKoulutusMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
+          } else {
+            if (opportunityType.includes('TYOMAHDOLLISUUS') || opportunityType.length === 0) {
+              await updateTyoMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
+            }
+            if (opportunityType.includes('KOULUTUSMAHDOLLISUUS') || opportunityType.length === 0) {
+              await updateKoulutusMahdollisuudet(sortedMixedMahdollisuudet, pagedIds);
+            }
           }
 
           // Apply final sorting of page items based on selected sorting
