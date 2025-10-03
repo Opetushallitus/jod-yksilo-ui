@@ -72,6 +72,7 @@ interface ToolState {
   setArrayFilter: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;
   reset: () => void;
   resetSettings: () => void;
+  filteredMahdollisuudetCount: number;
   addAmmattiryhmaToFilter: (ammattiryhma: string) => void;
   removeAmmattiryhmaFromFilter: (ammattiryhma: string) => void;
   fillAmmattiryhmaNimet: (uris: string[]) => void;
