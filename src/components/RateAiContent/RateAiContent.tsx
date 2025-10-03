@@ -90,7 +90,7 @@ export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiCont
   return (
     <div className="bg-accent flex flex-col rounded-lg min-h-[271px] p-6">
       <div className="flex items-start mb-2">
-        <div className="text-heading-2 text-white mr-2">{headerText}</div>
+        <h2 className="text-heading-2 text-white mr-2">{headerText}</h2>
         <div className="text-white">
           <JodAi aria-label={t('rate-ai-content.icon')} size={32} />
         </div>

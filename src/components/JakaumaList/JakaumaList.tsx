@@ -78,7 +78,7 @@ const JakaumaList = ({
 
   return (
     <div className="md:col-span-1 col-span-2 border-l-2 border-border-gray pl-4">
-      <h2 className="text-heading-4 pb-2">{t(`jakauma.${name}`)}</h2>
+      <h4 className="text-heading-4 pb-2">{t(`jakauma.${name}`)}</h4>
       {isEmpty ? (
         <div className="flex flex-col gap-3">
           <p className="text-heading-2 text-accent">---</p>
