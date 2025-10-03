@@ -11,36 +11,34 @@ const ToolAccordion = ({
   title: string;
   description: string;
 }) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
-
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = React.useState(false);
+  const id = title.toLocaleLowerCase().replace(/\s+/g, '-');
 
   return (
     <div className="bg-white rounded py-6 px-5">
       <Accordion
-        titleText={title}
+        ariaLabel={title}
         isOpen={isOpen}
         caretPosition="top"
         setIsOpen={setIsOpen}
         title={
-          (
-            <button onClick={() => setIsOpen(!isOpen)} className="flex flex-col text-left cursor-pointer w-full">
-              <span className="text-heading-3 hover:underline hover:text-accent">{t(title)}</span>
-              {!isOpen && (
-                <span className="font-arial text-body-sm text-secondary-gray text-pretty hyphens-auto">
-                  {t(description)}
-                </span>
-              )}
-            </button>
-          ) as React.ReactNode
+          <>
+            <span className="flex flex-col text-left cursor-pointer w-full text-heading-3" aria-controls={id}>
+              {t(title)}
+            </span>
+            {!isOpen && (
+              <span className="font-arial text-body-sm text-secondary-gray text-pretty hyphens-auto">
+                {t(description)}
+              </span>
+            )}
+          </>
         }
-        lang={language}
         initialState={false}
       >
-        {children}
+        <section className="pl-4" id={id} aria-labelledby={id}>
+          {children}
+        </section>
       </Accordion>
     </div>
   );

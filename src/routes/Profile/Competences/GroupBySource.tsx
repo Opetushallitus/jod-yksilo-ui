@@ -77,14 +77,13 @@ export const GroupBySource = ({
         return (
           <div key={competence} className="flex flex-col mb-11">
             <Accordion
-              lang={language}
               underline
               title={
                 <div className={`truncate text-heading-3 ${getTextClassByCompetenceSourceType(competence)}`}>
                   {t(`my-competences.by-${competence}`)}
                 </div>
               }
-              titleText=""
+              ariaLabel={t(`my-competences.by-${competence}`)}
             >
               {(Array.isArray(filters[competence]) || localizedMuutOsaamisetVapaateksti.length > 0) &&
               filters[competence].some((filter) => filter.checked) ? (
