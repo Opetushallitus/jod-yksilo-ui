@@ -77,7 +77,7 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
       <Setting title={t('tool.settings.general.sorting')}>
         <OpportunitiesSorting />
       </Setting>
-      <Setting title={t('tool.settings.general.job-opportunity-filters')}>
+      <Setting title={t('tool.settings.general.job-opportunity-filters')} count={getFilterCount('ammattiryhmat')}>
         <FilterAmmattiryhma />
       </Setting>
     </SettingsSection>

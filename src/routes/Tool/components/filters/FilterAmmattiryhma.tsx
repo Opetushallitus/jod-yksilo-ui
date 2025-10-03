@@ -1,4 +1,3 @@
-import { ammatit } from '@/api/ammatit.ts';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import { Checkbox } from '@jod/design-system';
@@ -8,14 +7,16 @@ import { useShallow } from 'zustand/shallow';
 
 const FilterAmmattiryhma = () => {
   const { t } = useTranslation();
-  const { ammattiryhmaNimet, filter, addAmmattiryhmaFilter, removeAmmattiryhmaFromFilter } = useToolStore(
-    useShallow((state) => ({
-      ammattiryhmaNimet: state.ammattiryhmaNimet,
-      filter: state.filters,
-      addAmmattiryhmaFilter: state.addAmmattiryhmaToFilter,
-      removeAmmattiryhmaFromFilter: state.removeAmmattiryhmaFromFilter,
-    })),
-  );
+  const { fillAmmattiryhmaNimet, ammattiryhmaNimet, filter, addAmmattiryhmaFilter, removeAmmattiryhmaFromFilter } =
+    useToolStore(
+      useShallow((state) => ({
+        fillAmmattiryhmaNimet: state.fillAmmattiryhmaNimet,
+        filter: state.filters,
+        ammattiryhmaNimet: state.ammattiryhmaNimet,
+        addAmmattiryhmaFilter: state.addAmmattiryhmaToFilter,
+        removeAmmattiryhmaFromFilter: state.removeAmmattiryhmaFromFilter,
+      })),
+    );
   const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const ammattiRyhma = event.target.value;
     if (filter.ammattiryhmat.includes(ammattiRyhma)) {
@@ -50,17 +51,10 @@ const FilterAmmattiryhma = () => {
 
   React.useEffect(
     () => {
-      async function fetchUpperLevelAmmattiryhmanimet() {
-        const ammattiryhmat = await ammatit.find(upperLevelAmmattiryhmat);
-        ammattiryhmat.forEach((ar) => {
-          ammattiryhmaNimet[ar.uri] = ar.nimi;
-        });
-      }
-
-      fetchUpperLevelAmmattiryhmanimet();
+      fillAmmattiryhmaNimet(upperLevelAmmattiryhmat);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [ammattiryhmaNimet],
   );
 
   return (
