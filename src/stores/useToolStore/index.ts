@@ -72,7 +72,6 @@ interface ToolState {
   setArrayFilter: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;
   reset: () => void;
   resetSettings: () => void;
-  filteredMahdollisuudetCount: number;
   addAmmattiryhmaToFilter: (ammattiryhma: string) => void;
   removeAmmattiryhmaFromFilter: (ammattiryhma: string) => void;
   fillAmmattiryhmaNimet: (uris: string[]) => void;
@@ -117,6 +116,7 @@ export const useToolStore = create<ToolState>()(
       ehdotuksetLoading: false,
       ehdotuksetPageSize: DEFAULT_PAGE_SIZE,
       mahdollisuudetLoading: false,
+      filteredMahdollisuudetCount: 0,
       ehdotuksetPageNr: 1,
       ehdotuksetCount: { TYOMAHDOLLISUUS: 0, KOULUTUSMAHDOLLISUUS: 0 },
       sorting: DEFAULT_SORTING,
