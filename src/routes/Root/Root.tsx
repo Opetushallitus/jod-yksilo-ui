@@ -1,11 +1,9 @@
 import type { components } from '@/api/schema';
-import { FeedbackModal, UserButton } from '@/components';
+import { FeedbackModal } from '@/components';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
-import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
 import { useLoginLink } from '@/hooks/useLoginLink';
-import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import { useSessionExpirationTimer } from '@/hooks/useSessionExpirationTimer';
 import { type LangCode, langLabels, supportedLanguageCodes } from '@/i18n/config';
 import { useNoteStore } from '@/stores/useNoteStore';
@@ -17,17 +15,20 @@ import {
   Footer,
   LanguageButton,
   MatomoTracker,
+  MenuButton,
   NavigationBar,
   NoteStack,
   ServiceVariantProvider,
   SkipLink,
   useNoteStack,
+  UserButton,
 } from '@jod/design-system';
-import { JodMenu, JodOpenInNew } from '@jod/design-system/icons';
+import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Link,
+  NavLink,
   Outlet,
   ScrollRestoration,
   useFetcher,
@@ -60,16 +61,13 @@ const Root = () => {
   const fetcher = useFetcher();
   const resetToolStore = useToolStore((state) => state.reset);
   const { note, clearNote } = useNoteStore(useShallow((state) => ({ note: state.note, clearNote: state.clearNote })));
-  const isMouseInteraction = useInteractionMethod();
   const location = useLocation();
   const navigate = useNavigate();
   const { addNote, removeNote } = useNoteStack();
-  const [langMenuOpen, setLangMenuOpen] = React.useState(false);
   const [navMenuOpen, setNavMenuOpen] = React.useState(false);
   const [feedbackVisible, setFeedbackVisible] = React.useState(false);
   const logoutForm = React.useRef<HTMLFormElement>(null);
-  const langMenuButtonRef = React.useRef<HTMLLIElement>(null);
-  const langMenuRef = useMenuClickHandler(() => setLangMenuOpen(false), langMenuButtonRef);
+
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
   const hostname = window.location.hostname;
   const menuButtonRef = React.useRef<HTMLButtonElement>(null);
@@ -199,23 +197,6 @@ const Root = () => {
     clearNote();
   }, [addNote, clearNote, note, t]);
 
-  // Move focus to menu content when opened
-  React.useEffect(() => {
-    if (langMenuOpen && !isMouseInteraction && langMenuRef.current) {
-      const firstChild = langMenuRef.current.querySelector('a, button');
-      if (firstChild) {
-        (firstChild as HTMLElement).focus();
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [langMenuOpen]);
-
-  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
-    if (langMenuRef.current && !langMenuRef.current.contains(event.relatedTarget as Node)) {
-      setLangMenuOpen(false);
-    }
-  };
-
   React.useEffect(() => {
     document.documentElement.setAttribute('lang', language);
   }, [language]);
@@ -229,6 +210,10 @@ const Root = () => {
       };
     },
   );
+
+  const userMenuProfileFrontUrl = `${t('slugs.profile.index')}/${t('slugs.profile.front')}`;
+  const loginPageUrl = `/${language}/${t('slugs.profile.login')}`;
+  const isProfileActive = !!useMatch(`/${language}/${t('slugs.profile.index')}/*`);
 
   const [visibleBetaFeedback, setVisibleBetaFeedback] = React.useState(true);
 
@@ -272,26 +257,11 @@ const Root = () => {
         </form>
         <NavigationBar
           logo={{ to: `/${language}`, language, srText: t('osaamispolku') }}
-          menuComponent={
-            <button
-              ref={menuButtonRef}
-              onClick={() => setNavMenuOpen(!navMenuOpen)}
-              aria-label={t('open-menu')}
-              className="flex flex-col md:flex-row gap-2 md:gap-3 justify-center items-center select-none cursor-pointer"
-              data-testid="open-nav-menu"
-            >
-              <JodMenu className="mx-auto" />
-              <span className="md:text-[14px] sm:text-[12px] text-[10px]">{t('menu')}</span>
-            </button>
-          }
+          menuComponent={<MenuButton onClick={() => setNavMenuOpen(!navMenuOpen)} label={t('menu')} />}
           languageButtonComponent={
             <LanguageButton
+              serviceVariant="yksilo"
               dataTestId="language-button"
-              onClick={() => setLangMenuOpen(!langMenuOpen)}
-              langMenuOpen={langMenuOpen}
-              menuRef={langMenuRef}
-              onMenuBlur={handleBlur}
-              onMenuClick={() => setLangMenuOpen(false)}
               language={language as LangCode}
               supportedLanguageCodes={supportedLanguageCodes}
               generateLocalizedPath={generateLocalizedPath}
@@ -303,8 +273,22 @@ const Root = () => {
               }}
             />
           }
-          userButtonComponent={<UserButton onLogout={logout} />}
-          refs={{ langMenuButtonRef: langMenuButtonRef }}
+          userButtonComponent={
+            <UserButton
+              serviceVariant="yksilo"
+              firstName={data?.etunimi}
+              isProfileActive={isProfileActive}
+              profileLabel={t('profile.index')}
+              // eslint-disable-next-line react/no-unstable-nested-components
+              profileLinkComponent={(props) => <NavLink to={userMenuProfileFrontUrl} {...props} />}
+              isLoggedIn={!!data?.csrf}
+              loginLabel={t('login')}
+              // eslint-disable-next-line react/no-unstable-nested-components
+              loginLinkComponent={(props) => <NavLink to={loginPageUrl} {...props} />}
+              logoutLabel={t('logout')}
+              onLogout={logout}
+            />
+          }
           renderLink={({ to, className, children }) => (
             <Link to={to} className={className}>
               {children as React.ReactNode}

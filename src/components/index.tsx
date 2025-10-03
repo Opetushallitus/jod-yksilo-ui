@@ -14,4 +14,3 @@ export { MainLayout } from './MainLayout/MainLayout';
 export { SimpleNavigationList } from './MainLayout/SimpleNavigationList';
 export { OpportunityCard } from './OpportunityCard/OpportunityCard';
 export { OsaamisSuosittelija, type Osaaminen, type OsaaminenValue } from './OsaamisSuosittelija/OsaamisSuosittelija';
-export { UserButton } from './UserButton/UserButton';
