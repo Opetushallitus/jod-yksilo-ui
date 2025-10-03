@@ -226,6 +226,7 @@ const Root = () => {
         errorMessage={t('chatbot.error-message')}
         greeting={t('chatbot.greeting')}
         textInputPlaceholder={t('chatbot.text-input-placeholder')}
+        disclaimer={t('chatbot.disclaimer')}
         waitingmessage={t('chatbot.waiting-message')}
       />
 
