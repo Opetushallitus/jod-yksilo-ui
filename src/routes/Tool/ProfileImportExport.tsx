@@ -172,6 +172,7 @@ const CompetenceImport = () => {
           kuvaus: k.kuvaus,
           tyyppi: 'KIINNOSTUS' as OsaaminenLahdeTyyppi,
         })),
+      ...storeKiinnostukset.filter((k) => k.tyyppi === 'KARTOITETTU'),
     ];
 
     const toBeImportedSkills = [
