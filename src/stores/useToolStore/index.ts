@@ -72,8 +72,9 @@ interface ToolState {
   setArrayFilter: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;
   reset: () => void;
   resetSettings: () => void;
-  addAmmattiryhmaFilter: (ammattiryhma: string) => void;
+  addAmmattiryhmaToFilter: (ammattiryhma: string) => void;
   removeAmmattiryhmaFromFilter: (ammattiryhma: string) => void;
+  fillAmmattiryhmaNimet: (uris: string[]) => void;
   setTavoitteet: (state: ToolState['tavoitteet']) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
   setOsaamisetVapaateksti: (state?: components['schemas']['LokalisoituTeksti']) => void;
