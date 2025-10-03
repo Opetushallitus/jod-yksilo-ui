@@ -73,7 +73,7 @@ interface ToolState {
   reset: () => void;
   resetSettings: () => void;
   addAmmattiryhmaToFilter: (ammattiryhma: string) => void;
-  removeAmmattiryhmaFromFilter: (ammattiryhma: string) => void;
+  removeAmmattiryhmaFromFilter: (ammattiryhma: string) => Promise<void>;
   fillAmmattiryhmaNimet: (uris: string[]) => Promise<void>;
   setTavoitteet: (state: ToolState['tavoitteet']) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
