@@ -18,7 +18,6 @@ const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOp
     fetchMahdollisuudetPage,
     mahdollisuudetLoading,
     mixedMahdollisuudet,
-    filter,
   } = useToolStore(
     useShallow((state) => ({
       ehdotuksetPageNr: state.ehdotuksetPageNr,
@@ -27,7 +26,6 @@ const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOp
       fetchMahdollisuudetPage: state.fetchMahdollisuudetPage,
       mahdollisuudetLoading: state.mahdollisuudetLoading,
       mixedMahdollisuudet: state.mixedMahdollisuudet,
-      filter: state.filters.opportunityType,
     })),
   );
   const { sm } = useMediaQueries();
@@ -51,8 +49,6 @@ const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOp
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
-
-  const filters = typeof filter === 'string' ? [filter] : filter;
 
   return mixedMahdollisuudet.length > 0 ? (
     <div className={className} data-testid="tool-pagination">
