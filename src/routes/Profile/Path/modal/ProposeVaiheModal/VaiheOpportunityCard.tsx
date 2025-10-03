@@ -16,7 +16,7 @@ const VaiheOpportunityCard = React.memo(({ mahdollisuus }: VaiheOpportunityCardP
   const [osaamiset, setOsaamiset] = React.useState<components['schemas']['OsaaminenDto'][]>([]);
   const getMissingOsaamisetUris = usePolutStore((state) => state.getMissingOsaamisetUris);
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { id, otsikko, kuvaus } = mahdollisuus;
   const fetchOsaamiset = () =>
     client
@@ -51,7 +51,6 @@ const VaiheOpportunityCard = React.memo(({ mahdollisuus }: VaiheOpportunityCardP
         <p className="font-arial text-body-md-mobile sm:text-body-md mb-4">{getLocalizedText(kuvaus)}</p>
         <Accordion
           title={t('count-competences', { count: mahdollisuus.osaamisetCount })}
-          lang={i18n.language}
           initialState={false}
           fetchData={fetchOsaamiset}
         >

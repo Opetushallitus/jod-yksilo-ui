@@ -23,31 +23,32 @@ const Setting = ({
   count,
 }: {
   title: string;
+  /** Amount of selected settings/filters */
   count?: number;
   children: React.ReactNode;
   /** Ref is used to reference accordion open button for focusing */
-  ref?: React.RefObject<HTMLDivElement | null>;
+  ref?: React.RefObject<HTMLSpanElement | null>;
 }) => {
-  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = React.useState(false);
   const titleText = title + (count ? ` (${count})` : '');
+  const id = title.toLocaleLowerCase().replace(/\s+/g, '-');
+
   return (
     <li>
       <Accordion
         title={
-          <div ref={ref} className="w-full">
-            <button onClick={() => setIsOpen(!isOpen)} className="block w-full text-left cursor-pointer p-1">
-              <span>{titleText}</span>
-            </button>
-          </div>
+          <span ref={ref} className="block w-full text-left cursor-pointer p-1 text-body-sm" aria-controls={id}>
+            {titleText}
+          </span>
         }
-        lang={i18n.language}
-        titleText={titleText}
+        ariaLabel={titleText}
         initialState={false}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       >
-        <div className="pl-4">{children}</div>
+        <section className="pl-4" id={id} aria-labelledby={id}>
+          {children}
+        </section>
       </Accordion>
     </li>
   );
@@ -61,9 +62,7 @@ export interface ToolSettingsProps {
 }
 const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
   const { t } = useTranslation();
-
   const filters = useToolStore((state) => state.filters);
-
   const getFilterCount = (filter: FilterName) => filters?.[filter]?.length ?? 0;
 
   return (
