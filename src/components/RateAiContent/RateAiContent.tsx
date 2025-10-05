@@ -32,14 +32,13 @@ export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiCont
       const body = JSON.stringify({
         section: 'Osaamispolkuni',
         area,
-        language,
+        language: message ? language : undefined,
         details: window.location.href,
-        type: 'Arvostelu',
         rating,
         message,
         timestamp: new Date().toISOString(),
       });
-      const response = await fetch('/api/palaute', {
+      const response = await fetch('/api/arvostelu', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
