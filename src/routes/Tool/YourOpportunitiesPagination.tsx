@@ -2,7 +2,6 @@ import { useToolStore } from '@/stores/useToolStore';
 import { type PageChangeDetails, Pagination, useMediaQueries } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
-import { countFilteredEhdotukset } from './utils';
 
 interface YourOpportunitiesPaginationProps {
   scrollRef: React.RefObject<HTMLUListElement | null>;
@@ -15,20 +14,18 @@ const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOp
   const {
     ehdotuksetPageNr,
     ehdotuksetPageSize,
-    ehdotuksetCount,
+    totalItems,
     fetchMahdollisuudetPage,
     mahdollisuudetLoading,
     mixedMahdollisuudet,
-    filter,
   } = useToolStore(
     useShallow((state) => ({
       ehdotuksetPageNr: state.ehdotuksetPageNr,
       ehdotuksetPageSize: state.ehdotuksetPageSize,
-      ehdotuksetCount: state.ehdotuksetCount,
+      totalItems: state.filteredMahdollisuudetCount,
       fetchMahdollisuudetPage: state.fetchMahdollisuudetPage,
       mahdollisuudetLoading: state.mahdollisuudetLoading,
       mixedMahdollisuudet: state.mixedMahdollisuudet,
-      filter: state.filters.opportunityType,
     })),
   );
   const { sm } = useMediaQueries();
@@ -53,8 +50,6 @@ const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOp
     }
   };
 
-  const filters = typeof filter === 'string' ? [filter] : filter;
-
   return mixedMahdollisuudet.length > 0 ? (
     <div className={className} data-testid="tool-pagination">
       <Pagination
@@ -68,7 +63,7 @@ const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOp
           nextTriggerLabel: t('pagination.next'),
           prevTriggerLabel: t('pagination.previous'),
         }}
-        totalItems={countFilteredEhdotukset(filters, ehdotuksetCount)}
+        totalItems={totalItems}
         onPageChange={(data) => void onPageChange(data)}
       />
     </div>
