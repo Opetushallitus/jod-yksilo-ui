@@ -1109,7 +1109,9 @@
         "location": "Sijainti",
         "sorting": "Järjestys",
         "title": "Yleiset säätimet",
-        "weight": "Painotus"
+        "weight": "Painotus",
+        "job-opportunity-filters": "Suodata työmahdollisuuksia",
+        "occupation-type": "Ylätason ammattiryhmä"
       },
       "job-opportunity": {
         "industry": "Toimiala",
