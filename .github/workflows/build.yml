@@ -93,7 +93,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     permissions:
       id-token: write # Needed to interact with GitHub's OIDC Token endpoint
-      contents: read
+      contents: write
       actions: read
     secrets: inherit
     with:
@@ -106,7 +106,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     permissions:
       id-token: write # Needed to interact with GitHub's OIDC Token endpoint
-      contents: read
+      contents: write
       actions: read
     secrets: inherit
     with:
@@ -119,7 +119,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     permissions:
       id-token: write # Needed to interact with GitHub's OIDC Token endpoint
-      contents: read
+      contents: write
       actions: read
     secrets: inherit
     with:
