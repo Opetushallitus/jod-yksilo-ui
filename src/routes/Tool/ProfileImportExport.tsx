@@ -159,7 +159,7 @@ const CompetenceImport = () => {
         })),
     ).flat();
 
-    const toBeImportedInterests = [
+    const importedInterests = [
       ...kiinnostukset
         .filter((kiinnostus) =>
           mappedSelectedCompetences.some((msc) => msc.tyyppi === 'KIINNOSTUS' && msc.id.includes(kiinnostus.uri)),
@@ -170,7 +170,6 @@ const CompetenceImport = () => {
           kuvaus: k.kuvaus,
           tyyppi: 'KIINNOSTUS' as OsaaminenLahdeTyyppi,
         })),
-      ...storeKiinnostukset.filter((k) => k.tyyppi === 'KARTOITETTU'),
     ];
 
     const currentAndImportedSkills = [
@@ -200,7 +199,7 @@ const CompetenceImport = () => {
       const { data } = await client.GET('/api/profiili/muu-osaaminen');
       setOsaamisetVapaateksti(data?.vapaateksti);
     }
-    if (toBeImportedInterests.some((o) => o.tyyppi === 'KIINNOSTUS')) {
+    if (importedInterests.length > 0) {
       await importKiinnostuksetFromProfile();
     }
   }, [
@@ -208,7 +207,6 @@ const CompetenceImport = () => {
     kiinnostukset,
     osaamiset,
     selectedFilters,
-    setKiinnostukset,
     setOsaamiset,
     setOsaamisetVapaateksti,
     storeOsaamiset,
