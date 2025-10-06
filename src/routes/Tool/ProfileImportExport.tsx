@@ -212,7 +212,6 @@ const CompetenceImport = () => {
     setOsaamiset,
     setOsaamisetVapaateksti,
     storeOsaamiset,
-    storeKiinnostukset,
   ]);
   // Have to render ConfirmDialog here instead of "showDialog" from the "useModal" hook because of the "content" prop.
   // When using "showDialog" and passing content that way, the dialog will not render any changes to content, like ticking the checkboxes.
