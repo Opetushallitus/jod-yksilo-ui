@@ -175,7 +175,7 @@ const CompetenceImport = () => {
       ...storeKiinnostukset.filter((k) => k.tyyppi === 'KARTOITETTU'),
     ];
 
-    const toBeImportedSkills = [
+    const currentAndImportedSkills = [
       ...osaamiset
         .filter((osaaminen) => {
           return mappedSelectedCompetences.some((msc) => {
@@ -196,10 +196,9 @@ const CompetenceImport = () => {
       ...storeOsaamiset.filter((o) => o.tyyppi === 'KARTOITETTU'),
     ];
 
-    setOsaamiset([...removeDuplicates(toBeImportedSkills, 'id')]);
-    setKiinnostukset([...removeDuplicates(toBeImportedInterests, 'id')]);
+    setOsaamiset([...removeDuplicates(currentAndImportedSkills, 'id')]);
 
-    if (toBeImportedSkills.some((o) => o.tyyppi === 'MUU_OSAAMINEN')) {
+    if (currentAndImportedSkills.some((o) => o.tyyppi === 'MUU_OSAAMINEN')) {
       const { data } = await client.GET('/api/profiili/muu-osaaminen');
       setOsaamisetVapaateksti(data?.vapaateksti);
     }
@@ -215,6 +214,7 @@ const CompetenceImport = () => {
     setOsaamiset,
     setOsaamisetVapaateksti,
     storeOsaamiset,
+    storeKiinnostukset,
   ]);
   // Have to render ConfirmDialog here instead of "showDialog" from the "useModal" hook because of the "content" prop.
   // When using "showDialog" and passing content that way, the dialog will not render any changes to content, like ticking the checkboxes.
