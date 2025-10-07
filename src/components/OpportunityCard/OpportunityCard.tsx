@@ -179,7 +179,11 @@ export const OpportunityCard = ({
             <>
               <OpportunityDetail
                 title={t('tool.job-opportunity-is-part-of-group')}
-                value={ammattiryhmaNimet !== undefined ? getLocalizedText(ammattiryhmaNimet[ammattiryhma.uri]) : ''}
+                value={
+                  ammattiryhmaNimet !== undefined && ammattiryhma?.uri
+                    ? getLocalizedText(ammattiryhmaNimet[ammattiryhma.uri])
+                    : ''
+                }
                 icon={
                   <TooltipWrapper
                     tooltipPlacement="top"
