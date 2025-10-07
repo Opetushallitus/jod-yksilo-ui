@@ -195,7 +195,7 @@ export const OpportunityCard = ({
               />
               <OpportunityDetail
                 title={t('tool.job-opportunity-median-salary')}
-                value={(ammattiryhma.mediaaniPalkka?.toString() || '---') + ' ' + t('tool.salary-suffix')}
+                value={`${ammattiryhma.mediaaniPalkka?.toString() || '---'} ${t('tool.salary-suffix')}`}
                 icon={
                   <TooltipWrapper
                     tooltipPlacement="top"
