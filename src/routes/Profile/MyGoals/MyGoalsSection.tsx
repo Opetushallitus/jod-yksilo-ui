@@ -74,9 +74,8 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                 to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${mahdollisuusId}`}
                 description={getLocalizedText(details.tiivistelma)}
                 from="goal"
-                ammattiryhma={
-                  details.ammattiryhma ? getLocalizedText(loaderData.ammattiryhmaNimet[details.ammattiryhma]) : ''
-                }
+                ammattiryhma={details.ammattiryhma}
+                ammattiryhmaNimet={loaderData?.ammattiryhmaNimet}
                 name={getLocalizedText(details.otsikko)}
                 aineisto={details.aineisto}
                 tyyppi={details.tyyppi}

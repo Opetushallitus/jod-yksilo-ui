@@ -238,11 +238,8 @@ const Favorites = () => {
               to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}?origin=favorites`}
               description={getLocalizedText(mahdollisuus.tiivistelma)}
               from="favorite"
-              ammattiryhma={
-                mahdollisuus?.ammattiryhma
-                  ? getLocalizedText(ammattiryhmaNimet?.[mahdollisuus.ammattiryhma])
-                  : undefined
-              }
+              ammattiryhma={mahdollisuus?.ammattiryhma}
+              ammattiryhmaNimet={ammattiryhmaNimet}
               isFavorite={true}
               isLoggedIn={true}
               name={getLocalizedText(mahdollisuus.otsikko)}
