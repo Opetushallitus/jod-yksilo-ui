@@ -9,7 +9,7 @@ export type TypedMahdollisuus = Mahdollisuus & {
   tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
   mahdollisuusTyyppi: MahdollisuusTyyppi;
   osaamisetCount?: number;
-  ammattiryhma?: string;
+  ammattiryhma?: components['schemas']['AmmattiryhmaBasicDto'];
 };
 export type OsaaminenLahdeTyyppi = components['schemas']['OsaamisenLahdeDto']['tyyppi'] | 'KIINNOSTUS' | 'KARTOITETTU';
 

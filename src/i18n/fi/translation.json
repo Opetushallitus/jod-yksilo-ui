@@ -449,9 +449,9 @@
       "title": "Lähiammatit"
     },
     "salary-data": {
-      "description": "Palkkatiedot on haettu ammattiryhmälle tulorekisteristä. Mediaani tarkoittaa järjestetyn ryhmän keskimmäistä havaintoa. Puolet ammattiryhmästä siis tienaa mediaania enemmän ja puolet vähemmän kuin mediaani. Ylin desiili on parhaiten tienaava 10% ja alin desiili on vähiten tienaava 10%.",
-      "highest-decile": "Ylin desiili",
-      "lowest-decile": "Alin desiili",
+      "description": "Palkkatiedot on haettu ammattiryhmälle tulorekisteristä. Mediaani tarkoittaa järjestetyn ryhmän keskimmäistä havaintoa. Puolet ammattiryhmästä siis tienaa mediaania enemmän ja puolet vähemmän kuin mediaani. Lisäksi näytetään parhaiten tienaava 10% ja vähiten tienaava 10%.",
+      "highest-decile": "Ylin 10%",
+      "lowest-decile": "Alin 10%",
       "median": "Mediaanipalkka",
       "not-available": "Palkkatietoja ei ole saatavilla ammattiryhmälle.",
       "title": "Palkkatiedot"
@@ -1038,6 +1038,9 @@
       "title": "Tietojesi kokonaiskuva"
     },
     "job-opportunity-is-part-of-group": "Työmahdollisuus kuuluu ammattiryhmään",
+    "job-opportunity-median-salary": "Mediaanipalkka",
+    "job-opportunity-median-salary-tooltip": "Mediaanipalkka tarkoittaa palkkaa, joka jakaa palkansaajat kahteen yhtä suureen ryhmään: puolet ansaitsee vähemmän ja puolet enemmän kuin mediaanipalkan verran. Se kuvaa paremmin \"tyypillistä\" palkkaa kuin keskiarvo, koska se ei vääristy yksittäisten erittäin suurten tai pienten palkkojen takia.",
+    "salary-suffix": "€/kk",
     "job-opportunity-is-part-of-group-tooltip": "Ammatteja ja työmahdollisuuksia ryhmitellään ammattiryhmiin. Ammattiryhmiä käytetään väestön ammattirakenteen tilastoinnissa, ja niiden luomiseen käytetään ammattiluokitusta, joka auttaa vertailemaan tilastoja kansallisesti ja kansainvälisesti.",
     "my-own-data": {
       "cancel-text": "Ei, peruuta",

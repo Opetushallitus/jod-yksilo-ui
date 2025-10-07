@@ -275,8 +275,9 @@ export const useToolStore = create<ToolState>()(
           const ammattiryhmaNimet = { ...get().ammattiryhmaNimet };
 
           const ammattiryhmaUris = sortedMixedMahdollisuudet
-            .filter((m) => m.ammattiryhma && !ammattiryhmaNimet?.[m.ammattiryhma])
-            .map((m) => m.ammattiryhma!);
+            .filter((m) => m.ammattiryhma?.uri && !ammattiryhmaNimet?.[m.ammattiryhma.uri])
+            .map((m) => m.ammattiryhma!.uri)
+            .filter((uri): uri is string => uri !== undefined);
 
           if (ammattiryhmaUris.length > 0) {
             const ammattiryhmat = await ammatit.find(ammattiryhmaUris);
