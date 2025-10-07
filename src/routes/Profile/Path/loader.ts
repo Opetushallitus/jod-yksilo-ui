@@ -65,7 +65,7 @@ const loader = (async ({ request, params }) => {
     if (paamaara.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS') {
       const m = mahdollisuus as components['schemas']['TyomahdollisuusDto'];
       const ammattiryhmaNimet: Record<string, components['schemas']['LokalisoituTeksti']> = {};
-      const ammattiryhmaUris = m.ammattiryhma ? [m.ammattiryhma] : [];
+      const ammattiryhmaUris = m.ammattiryhma?.uri ? [m.ammattiryhma.uri] : [];
 
       if (ammattiryhmaUris.length > 0) {
         const ammattiryhmat = await ammatit.find(ammattiryhmaUris);
