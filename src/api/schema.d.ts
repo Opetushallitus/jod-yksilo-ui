@@ -1182,6 +1182,12 @@ export interface components {
        */
       sivuja: number;
     };
+    AmmattiryhmaBasicDto: {
+      /** Format: uri */
+      uri?: string;
+      /** Format: int32 */
+      mediaaniPalkka?: number;
+    };
     SivuDtoTyomahdollisuusDto: {
       sisalto: components['schemas']['TyomahdollisuusDto'][];
       /**
@@ -1201,8 +1207,7 @@ export interface components {
       otsikko: components['schemas']['LokalisoituTeksti'];
       tiivistelma?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
-      /** Format: uri */
-      ammattiryhma?: string;
+      ammattiryhma?: components['schemas']['AmmattiryhmaBasicDto'];
       /** @enum {string} */
       aineisto?: 'TMT' | 'AMMATTITIETO';
       aktiivinen?: boolean;

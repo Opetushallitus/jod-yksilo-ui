@@ -156,9 +156,8 @@ const ExploreOpportunities = () => {
               matchValue={ehdotus?.pisteet}
               matchLabel={t('fit')}
               headingLevel="h3"
-              ammattiryhma={
-                mahdollisuus.ammattiryhma ? getLocalizedText(ammattiryhmaNimet?.[mahdollisuus.ammattiryhma]) : undefined
-              }
+              ammattiryhma={mahdollisuus.ammattiryhma}
+              ammattiryhmaNimet={ammattiryhmaNimet}
               aineisto={mahdollisuus.aineisto}
               tyyppi={mahdollisuus.tyyppi}
               type={mahdollisuusTyyppi}

@@ -5,6 +5,7 @@ import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDro
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
 import type { MahdollisuusTyyppi } from '@/routes/types';
+import { getLocalizedText } from '@/utils';
 import { cx } from '@jod/design-system';
 import { JodInfo } from '@jod/design-system/icons';
 import React from 'react';
@@ -39,7 +40,8 @@ type MenuProps =
     };
 
 type OpportunityCardProps = {
-  ammattiryhma?: string;
+  ammattiryhma?: components['schemas']['AmmattiryhmaBasicDto'];
+  ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
   as?: React.ElementType;
   to?: string;
   name: string;
@@ -102,6 +104,7 @@ export const OpportunityCard = ({
   from,
   description,
   ammattiryhma,
+  ammattiryhmaNimet,
   matchLabel,
   matchValue,
   name,
@@ -152,7 +155,6 @@ export const OpportunityCard = ({
       return t(`opportunity-type.education.${tyyppi || 'EI_TUTKINTO'}`);
     }
   }, [type, t, aineisto, tyyppi]);
-
   return (
     <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border" data-testid="opportunity-card">
       <div className="order-2 flex flex-col">
@@ -174,22 +176,40 @@ export const OpportunityCard = ({
         <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
         <div className="flex flex-col mt-5 gap-3">
           {type === 'TYOMAHDOLLISUUS' && ammattiryhma ? (
-            <OpportunityDetail
-              title={t('tool.job-opportunity-is-part-of-group')}
-              value={ammattiryhma}
-              icon={
-                <TooltipWrapper
-                  tooltipPlacement="top"
-                  tooltipContent={
-                    <div className="text-body-xs max-w-[290px] leading-5">
-                      {t('tool.job-opportunity-is-part-of-group-tooltip')}
-                    </div>
-                  }
-                >
-                  <JodInfo size={18} className="text-[#999]" />
-                </TooltipWrapper>
-              }
-            />
+            <>
+              <OpportunityDetail
+                title={t('tool.job-opportunity-is-part-of-group')}
+                value={ammattiryhmaNimet !== undefined ? getLocalizedText(ammattiryhmaNimet[ammattiryhma.uri]) : ''}
+                icon={
+                  <TooltipWrapper
+                    tooltipPlacement="top"
+                    tooltipContent={
+                      <div className="text-body-xs max-w-[290px] leading-5">
+                        {t('tool.job-opportunity-is-part-of-group-tooltip')}
+                      </div>
+                    }
+                  >
+                    <JodInfo size={18} className="text-[#999]" />
+                  </TooltipWrapper>
+                }
+              />
+              <OpportunityDetail
+                title={t('tool.job-opportunity-median-salary')}
+                value={(ammattiryhma.mediaaniPalkka?.toString() || '---') + ' ' + t('tool.salary-suffix')}
+                icon={
+                  <TooltipWrapper
+                    tooltipPlacement="top"
+                    tooltipContent={
+                      <div className="text-body-xs max-w-[290px] leading-5">
+                        {t('tool.job-opportunity-median-salary-tooltip')}
+                      </div>
+                    }
+                  >
+                    <JodInfo size={18} className="text-[#999]" />
+                  </TooltipWrapper>
+                }
+              />
+            </>
           ) : null}
         </div>
       </div>

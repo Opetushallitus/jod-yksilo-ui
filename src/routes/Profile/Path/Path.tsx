@@ -430,13 +430,10 @@ const Path = () => {
                     type={paamaara.mahdollisuusTyyppi}
                     ammattiryhma={
                       paamaara.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
-                        ? getLocalizedText(
-                            ammattiryhmaNimet[
-                              (mahdollisuus as components['schemas']['TyomahdollisuusDto']).ammattiryhma!
-                            ],
-                          )
-                        : ''
+                        ? (mahdollisuus as components['schemas']['TyomahdollisuusDto']).ammattiryhma
+                        : undefined
                     }
+                    ammattiryhmaNimet={ammattiryhmaNimet}
                     hideFavorite
                   />
                   {getLocalizedText(paamaara.tavoite) ? (
