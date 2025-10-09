@@ -65,11 +65,15 @@ export interface ToolSettingsProps {
 const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
   const { t } = useTranslation();
   const filters = useToolStore((state) => state.filters);
-  const getFilterCount = (filter: FilterName) => filters?.[filter]?.length ?? 0;
+
+  const getFilterCount = (filterList: FilterName[]) => {
+    if (!filters) return 0;
+    return filterList.reduce((sum, filter) => sum + (filters[filter]?.length ?? 0), 0);
+  };
 
   return (
     <SettingsSection title={t('tool.settings.general.title')}>
-      <Setting title={t('tool.settings.general.filter')} ref={ref} count={getFilterCount('opportunityType')}>
+      <Setting title={t('tool.settings.general.filter')} ref={ref} count={getFilterCount(['opportunityType'])}>
         <FilterOpporunityType />
       </Setting>
       <Setting title={t('tool.settings.general.weight')}>
@@ -78,12 +82,18 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
       <Setting title={t('tool.settings.general.sorting')}>
         <OpportunitiesSorting />
       </Setting>
-      <Setting title={t('tool.settings.general.job-opportunity-filters')} count={getFilterCount('ammattiryhmat')}>
+      <Setting
+        title={t('tool.settings.general.job-opportunity-filters')}
+        count={getFilterCount(['ammattiryhmat', 'jobOpportunityType'])}
+      >
         <ul>
-          <Setting title={t('tool.settings.general.occupation-type')} count={getFilterCount('ammattiryhmat')}>
+          <Setting title={t('tool.settings.general.occupation-type')} count={getFilterCount(['ammattiryhmat'])}>
             <FilterAmmattiryhma />
           </Setting>
-          <Setting title={t('tool.settings.general.job-opportunity-type')} count={getFilterCount('ammattiryhmat')}>
+          <Setting
+            title={t('tool.settings.general.job-opportunity-type')}
+            count={getFilterCount(['jobOpportunityType'])}
+          >
             <FilterJobOpportunityType />
           </Setting>
         </ul>
