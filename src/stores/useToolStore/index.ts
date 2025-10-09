@@ -37,7 +37,7 @@ const DEFAULT_FILTERS: ToolFilters = {
   jobOpportunityType: [],
 };
 
-type ArrayFilters = Extract<FilterName, 'opportunityType' | 'region'>;
+type ArrayFilters = Extract<FilterName, 'opportunityType' | 'region' | 'jobOpportunityType'>;
 let abortController = new AbortController();
 
 interface ToolState {
