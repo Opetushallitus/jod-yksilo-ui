@@ -14,6 +14,8 @@ const ToolAccordion = ({
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = React.useState(false);
   const id = title.toLocaleLowerCase().replace(/\s+/g, '-');
+  const triggerId = `accordion-${id}`;
+  const contentId = `accordion-${id}-content`;
 
   return (
     <div className="bg-white rounded py-6 px-5">
@@ -21,12 +23,12 @@ const ToolAccordion = ({
         ariaLabel={title}
         isOpen={isOpen}
         caretPosition="top"
+        triggerId={triggerId}
+        ariaControls={contentId}
         setIsOpen={setIsOpen}
         title={
           <>
-            <span className="flex flex-col text-left cursor-pointer w-full text-heading-3" aria-controls={id}>
-              {t(title)}
-            </span>
+            <span className="flex flex-col text-left cursor-pointer w-full text-heading-3">{t(title)}</span>
             {!isOpen && (
               <span className="font-arial text-body-sm text-secondary-gray text-pretty hyphens-auto">
                 {t(description)}
@@ -36,7 +38,7 @@ const ToolAccordion = ({
         }
         initialState={false}
       >
-        <section className="pl-4" id={id} aria-labelledby={id}>
+        <section className="pl-4" id={contentId} aria-labelledby={triggerId}>
           {children}
         </section>
       </Accordion>
