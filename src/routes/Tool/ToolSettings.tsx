@@ -33,10 +33,14 @@ const Setting = ({
   const [isOpen, setIsOpen] = React.useState(false);
   const titleText = title + (count ? ` (${count})` : '');
   const id = title.toLocaleLowerCase().replace(/\s+/g, '-');
+  const triggerId = `accordion-${id}`;
+  const contentId = `accordion-${id}-content`;
 
   return (
     <li>
       <Accordion
+        triggerId={triggerId}
+        ariaControls={contentId}
         title={
           <span ref={ref} className="block w-full text-left cursor-pointer p-1 text-body-sm" aria-controls={id}>
             {titleText}
@@ -47,7 +51,7 @@ const Setting = ({
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       >
-        <section className="pl-4" id={id} aria-labelledby={id}>
+        <section className="pl-4" id={contentId} aria-labelledby={triggerId}>
           {children}
         </section>
       </Accordion>
