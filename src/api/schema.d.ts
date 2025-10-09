@@ -1058,6 +1058,7 @@ export interface components {
       /** @enum {string} */
       tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       ammattiryhma?: string;
+      aineisto?: string;
       /** Format: double */
       pisteet?: number;
       /** @enum {string} */

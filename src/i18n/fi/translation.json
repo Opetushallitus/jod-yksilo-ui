@@ -1111,7 +1111,8 @@
         "title": "Yleiset säätimet",
         "weight": "Painotus",
         "job-opportunity-filters": "Suodata työmahdollisuuksia",
-        "occupation-type": "Ylätason ammattiryhmä"
+        "occupation-type": "Ylätason ammattiryhmä",
+        "job-opportunity-type": "Tyyppi"
       },
       "job-opportunity": {
         "industry": "Toimiala",

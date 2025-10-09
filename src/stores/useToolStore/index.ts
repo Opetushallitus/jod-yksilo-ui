@@ -25,6 +25,7 @@ interface ToolFilters {
   /** Maakunta */
   region: string[];
   ammattiryhmat: string[];
+  jobOpportunityType: string[];
 }
 
 export type FilterName = keyof ToolFilters;
@@ -33,6 +34,7 @@ const DEFAULT_FILTERS: ToolFilters = {
   opportunityType: [],
   region: [],
   ammattiryhmat: [],
+  jobOpportunityType: [],
 };
 
 type ArrayFilters = Extract<FilterName, 'opportunityType' | 'region'>;
@@ -239,7 +241,7 @@ export const useToolStore = create<ToolState>()(
         };
 
         // apply ID sorting and filter
-        const allSortedIds = await filterEhdotukset(opportunityType, ammattiryhmat);
+        const allSortedIds = await filterEhdotukset(opportunityType, ammattiryhmat, filters.jobOpportunityType);
         set({ filteredMahdollisuudetCount: allSortedIds.length });
         set({ mahdollisuudetLoading: true });
         try {
@@ -298,7 +300,11 @@ export const useToolStore = create<ToolState>()(
           });
         }
 
-        async function filterEhdotukset(filter: OpportunityFilterValue[], ammattiryhmat: string[]) {
+        async function filterEhdotukset(
+          filter: OpportunityFilterValue[],
+          ammattiryhmat: string[],
+          jobOpportunityTypes: string[],
+        ) {
           if (Object.keys(ehdotukset).length === 0 || i18n.language !== get().previousEhdotusUpdateLang) {
             await get().updateEhdotukset(i18n.language, signal);
             set({ previousEhdotusUpdateLang: i18n.language });
@@ -316,6 +322,16 @@ export const useToolStore = create<ToolState>()(
               }
               // Otherwise, only include items whose type is in the filter
               return filter.includes(meta.tyyppi);
+            })
+            .filter(([, meta]) => {
+              if (jobOpportunityTypes.length == 0 || meta.tyyppi != 'TYOMAHDOLLISUUS') {
+                return true;
+              }
+              const shouldShowAmmatit = jobOpportunityTypes.includes('AMMATTITIETO');
+              const isAmmatti = meta.aineisto == 'AMMATTITIETO';
+              const shouldShowMuut = jobOpportunityTypes.includes('TMT');
+              const isMuuMahdollisuus = meta.aineisto == 'TMT';
+              return (shouldShowAmmatit && isAmmatti) || (shouldShowMuut && isMuuMahdollisuus);
             })
             .filter(([, meta]) => {
               if (ammattiryhmat.length == 0 || meta.tyyppi != 'TYOMAHDOLLISUUS') {
