@@ -85,7 +85,7 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
         title={t('tool.settings.general.job-opportunity-filters')}
         count={getFilterCount(['ammattiryhmat', 'jobOpportunityType'])}
       >
-        <ul>
+        <ul className="flex flex-col gap-3">
           <Setting title={t('tool.settings.general.occupation-type')} count={getFilterCount(['ammattiryhmat'])}>
             <FilterAmmattiryhma />
           </Setting>
