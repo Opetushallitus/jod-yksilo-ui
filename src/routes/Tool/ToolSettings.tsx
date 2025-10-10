@@ -1,6 +1,6 @@
-import { FilterAmmattiryhma } from '@/routes/Tool/components/filters/FilterAmmattiryhma.tsx';
+import { FilterAmmattiryhma } from '@/routes/Tool/components/filters/FilterAmmattiryhma';
 import FilterJobOpportunityType from '@/routes/Tool/components/filters/FilterJobOpportunityType';
-import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType.tsx';
+import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType';
 import { FilterName, useToolStore } from '@/stores/useToolStore';
 import { Accordion, Button, Modal } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
