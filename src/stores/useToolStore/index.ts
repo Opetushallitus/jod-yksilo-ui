@@ -324,13 +324,13 @@ export const useToolStore = create<ToolState>()(
               return filter.includes(meta.tyyppi);
             })
             .filter(([, meta]) => {
-              if (jobOpportunityTypes.length == 0 || meta.tyyppi != 'TYOMAHDOLLISUUS') {
+              if (jobOpportunityTypes.length === 0 || meta.tyyppi !== 'TYOMAHDOLLISUUS') {
                 return true;
               }
               const shouldShowAmmatit = jobOpportunityTypes.includes('AMMATTITIETO');
-              const isAmmatti = meta.aineisto == 'AMMATTITIETO';
+              const isAmmatti = meta.aineisto === 'AMMATTITIETO';
               const shouldShowMuut = jobOpportunityTypes.includes('TMT');
-              const isMuuMahdollisuus = meta.aineisto == 'TMT';
+              const isMuuMahdollisuus = meta.aineisto === 'TMT';
               return (shouldShowAmmatit && isAmmatti) || (shouldShowMuut && isMuuMahdollisuus);
             })
             .filter(([, meta]) => {

@@ -1106,13 +1106,13 @@
       },
       "general": {
         "filter": "Suodatus",
+        "job-opportunity-type": "Tyyppi",
         "location": "Sijainti",
         "sorting": "Järjestys",
         "title": "Yleiset säätimet",
         "weight": "Painotus",
         "job-opportunity-filters": "Suodata työmahdollisuuksia",
-        "occupation-type": "Ylätason ammattiryhmä",
-        "job-opportunity-type": "Tyyppi"
+        "occupation-type": "Ylätason ammattiryhmä"
       },
       "job-opportunity": {
         "industry": "Toimiala",

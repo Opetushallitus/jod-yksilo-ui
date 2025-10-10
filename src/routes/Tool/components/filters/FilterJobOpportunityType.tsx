@@ -28,7 +28,7 @@ const FilterOpporunityType = () => {
         label={t('opportunity-type.work.AMMATTITIETO')}
         name={t('opportunity-type.work.AMMATTITIETO')}
         onChange={onFilterChange}
-        value={'AMMATTITIETO'}
+        value="AMMATTITIETO"
         data-testid="filter-job-opportunity-ammattitieto"
       />
       <Checkbox
@@ -38,7 +38,7 @@ const FilterOpporunityType = () => {
         label={t('opportunity-type.work.TMT')}
         name={t('opportunity-type.work.TMT')}
         onChange={onFilterChange}
-        value={'TMT'}
+        value="TMT"
         data-testid="filter-job-opportunity-tmt"
       />
     </fieldset>
