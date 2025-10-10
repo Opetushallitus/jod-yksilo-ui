@@ -1,10 +1,11 @@
-import FilterAmmattiryhma from '@/routes/Tool/components/filters/FilterAmmattiryhma.tsx';
+import { FilterAmmattiryhma } from '@/routes/Tool/components/filters/FilterAmmattiryhma';
+import FilterJobOpportunityType from '@/routes/Tool/components/filters/FilterJobOpportunityType';
+import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType';
 import { FilterName, useToolStore } from '@/stores/useToolStore';
 import { Accordion, Button, Modal } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import FilterOpporunityType from './components/filters/FilterOpportunityType';
 import OpportunitiesSorting from './components/filters/OpportunitiesSorting';
 import OpportunityWeight from './components/filters/OpportunityWeight';
 
@@ -64,12 +65,15 @@ export interface ToolSettingsProps {
 const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
   const { t } = useTranslation();
   const filters = useToolStore((state) => state.filters);
-  const getFilterCount = (filter: FilterName) => filters?.[filter]?.length ?? 0;
+
+  const getFilterCount = (filterList: FilterName[]) => {
+    return filters ? filterList.reduce((sum, filter) => sum + (filters[filter]?.length ?? 0), 0) : 0;
+  };
 
   return (
     <SettingsSection title={t('tool.settings.general.title')}>
-      <Setting title={t('tool.settings.general.filter')} ref={ref} count={getFilterCount('opportunityType')}>
-        <FilterOpporunityType />
+      <Setting title={t('tool.settings.general.filter')} ref={ref} count={getFilterCount(['opportunityType'])}>
+        <FilterOpportunityType />
       </Setting>
       <Setting title={t('tool.settings.general.weight')}>
         <OpportunityWeight />
@@ -77,10 +81,19 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
       <Setting title={t('tool.settings.general.sorting')}>
         <OpportunitiesSorting />
       </Setting>
-      <Setting title={t('tool.settings.general.job-opportunity-filters')} count={getFilterCount('ammattiryhmat')}>
-        <ul>
-          <Setting title={t('tool.settings.general.occupation-type')} count={getFilterCount('ammattiryhmat')}>
+      <Setting
+        title={t('tool.settings.general.job-opportunity-filters')}
+        count={getFilterCount(['ammattiryhmat', 'jobOpportunityType'])}
+      >
+        <ul className="flex flex-col gap-3">
+          <Setting title={t('tool.settings.general.occupation-type')} count={getFilterCount(['ammattiryhmat'])}>
             <FilterAmmattiryhma />
+          </Setting>
+          <Setting
+            title={t('tool.settings.general.job-opportunity-type')}
+            count={getFilterCount(['jobOpportunityType'])}
+          >
+            <FilterJobOpportunityType />
           </Setting>
         </ul>
       </Setting>

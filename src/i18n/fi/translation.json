@@ -1106,6 +1106,7 @@
       },
       "general": {
         "filter": "Suodatus",
+        "job-opportunity-type": "Tyyppi",
         "location": "Sijainti",
         "sorting": "Järjestys",
         "title": "Yleiset säätimet",

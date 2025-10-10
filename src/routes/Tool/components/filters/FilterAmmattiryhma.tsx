@@ -5,7 +5,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-const FilterAmmattiryhma = () => {
+export const FilterAmmattiryhma = () => {
   const { t } = useTranslation();
   const { fillAmmattiryhmaNimet, ammattiryhmaNimet, filter, addAmmattiryhmaFilter, removeAmmattiryhmaFromFilter } =
     useToolStore(
@@ -75,5 +75,3 @@ const FilterAmmattiryhma = () => {
     </fieldset>
   );
 };
-
-export default FilterAmmattiryhma;
