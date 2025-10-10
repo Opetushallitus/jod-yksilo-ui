@@ -1,11 +1,11 @@
-import FilterAmmattiryhma from '@/routes/Tool/components/filters/FilterAmmattiryhma.tsx';
-import FilterJobOpportunityType from '@/routes/Tool/components/filters/FilterJobOpportunityType.tsx';
+import { FilterAmmattiryhma } from '@/routes/Tool/components/filters/FilterAmmattiryhma.tsx';
+import FilterJobOpportunityType from '@/routes/Tool/components/filters/FilterJobOpportunityType';
+import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType.tsx';
 import { FilterName, useToolStore } from '@/stores/useToolStore';
 import { Accordion, Button, Modal } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import FilterOpporunityType from './components/filters/FilterOpportunityType';
 import OpportunitiesSorting from './components/filters/OpportunitiesSorting';
 import OpportunityWeight from './components/filters/OpportunityWeight';
 
@@ -67,14 +67,13 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
   const filters = useToolStore((state) => state.filters);
 
   const getFilterCount = (filterList: FilterName[]) => {
-    if (!filters) return 0;
-    return filterList.reduce((sum, filter) => sum + (filters[filter]?.length ?? 0), 0);
+    return filters ? filterList.reduce((sum, filter) => sum + (filters[filter]?.length ?? 0), 0) : 0;
   };
 
   return (
     <SettingsSection title={t('tool.settings.general.title')}>
       <Setting title={t('tool.settings.general.filter')} ref={ref} count={getFilterCount(['opportunityType'])}>
-        <FilterOpporunityType />
+        <FilterOpportunityType />
       </Setting>
       <Setting title={t('tool.settings.general.weight')}>
         <OpportunityWeight />

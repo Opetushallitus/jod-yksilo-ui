@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { filterValues, type OpportunityFilterValue } from '../../utils';
 
-const FilterOpporunityType = () => {
+export const FilterOpportunityType = () => {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
 
@@ -72,5 +72,3 @@ const FilterOpporunityType = () => {
     </fieldset>
   );
 };
-
-export default FilterOpporunityType;
