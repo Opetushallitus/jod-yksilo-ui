@@ -159,7 +159,7 @@ const CompetenceImport = () => {
         })),
     ).flat();
 
-    const importedInterests = [
+    const toBeImportedInterests = [
       ...kiinnostukset
         .filter((kiinnostus) =>
           mappedSelectedCompetences.some((msc) => msc.tyyppi === 'KIINNOSTUS' && msc.id.includes(kiinnostus.uri)),
@@ -172,7 +172,7 @@ const CompetenceImport = () => {
         })),
     ];
 
-    const currentAndImportedSkills = [
+    const toBeImportedSkills = [
       ...osaamiset
         .filter((osaaminen) => {
           return mappedSelectedCompetences.some((msc) => {
@@ -193,13 +193,14 @@ const CompetenceImport = () => {
       ...storeOsaamiset.filter((o) => o.tyyppi === 'KARTOITETTU'),
     ];
 
-    setOsaamiset([...removeDuplicates(currentAndImportedSkills, 'id')]);
+    setOsaamiset([...removeDuplicates(toBeImportedSkills, 'id')]);
+    setKiinnostukset([...removeDuplicates(toBeImportedInterests, 'id')]);
 
-    if (currentAndImportedSkills.some((o) => o.tyyppi === 'MUU_OSAAMINEN')) {
+    if (toBeImportedSkills.some((o) => o.tyyppi === 'MUU_OSAAMINEN')) {
       const { data } = await client.GET('/api/profiili/muu-osaaminen');
       setOsaamisetVapaateksti(data?.vapaateksti);
     }
-    if (importedInterests.length > 0) {
+    if (toBeImportedInterests.some((o) => o.tyyppi === 'KIINNOSTUS')) {
       await importKiinnostuksetFromProfile();
     }
   }, [
@@ -207,6 +208,7 @@ const CompetenceImport = () => {
     kiinnostukset,
     osaamiset,
     selectedFilters,
+    setKiinnostukset,
     setOsaamiset,
     setOsaamisetVapaateksti,
     storeOsaamiset,
