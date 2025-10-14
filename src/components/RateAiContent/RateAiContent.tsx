@@ -3,6 +3,7 @@ import { JodAi, JodThumbDown, JodThumbDownFilled, JodThumbUp, JodThumbUpFilled }
 import React from 'react';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router';
 
 interface RateAiContentProps {
   isLiked?: boolean;
@@ -20,6 +21,7 @@ export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiCont
   const DislikeIcon = isDisliked ? JodThumbDownFilled : JodThumbDown;
   const [value, setValue] = React.useState('');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const { id } = useParams();
 
   const headerText =
     variant === 'kohtaanto' ? t('rate-ai-content.kohtaanto.header') : t('rate-ai-content.mahdollisuus.header');
@@ -29,6 +31,9 @@ export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiCont
   const onSubmit = async (rating: 1 | -1, message?: string) => {
     try {
       setIsSubmitting(true);
+
+      globalThis._paq?.push(['trackEvent', `yksilo.${area}`, rating === 1 ? 'Tykkäys' : 'Ei tykkäys', id]);
+
       const body = JSON.stringify({
         section: 'Osaamispolkuni',
         area,

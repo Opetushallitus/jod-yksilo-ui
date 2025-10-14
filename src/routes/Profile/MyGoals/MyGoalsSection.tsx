@@ -119,7 +119,14 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                         label={t('profile.my-goals.create-new-path-for-goal')}
                         // eslint-disable-next-line react/no-unstable-nested-components
                         LinkComponent={({ children }: { children: React.ReactNode }) => (
-                          <Link to={`${pm.id}/${t('slugs.profile.path')}`}>{children}</Link>
+                          <Link
+                            to={`${pm.id}/${t('slugs.profile.path')}`}
+                            onClick={() => {
+                              globalThis._paq?.push(['trackEvent', 'yksilo.Polku', 'Luonti']);
+                            }}
+                          >
+                            {children}
+                          </Link>
                         )}
                       />
                     </div>

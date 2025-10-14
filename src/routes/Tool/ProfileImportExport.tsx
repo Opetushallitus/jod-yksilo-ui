@@ -30,6 +30,7 @@ const CompetenceExport = () => {
   );
 
   const exportToProfile = React.useCallback(async () => {
+    globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Profiiliin vienti']);
     const osaaminenApiCall = client.PUT('/api/profiili/muu-osaaminen', {
       body: [
         ...new Set([
@@ -135,6 +136,7 @@ const CompetenceImport = () => {
   );
 
   const importKiinnostuksetFromProfile = React.useCallback(async () => {
+    globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Profiilista tuonti']);
     const { data } = await client.GET('/api/profiili/kiinnostukset/osaamiset');
     const newKiinnostukset = [
       ...(await osaamisetService.find(data?.kiinnostukset)).map((k) => ({
