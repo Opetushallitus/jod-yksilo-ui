@@ -299,6 +299,7 @@ const Path = () => {
     if (!paamaaraId || !suunnitelmaId) {
       return;
     }
+    globalThis._paq?.push(['trackEvent', 'yksilo.Polku', 'Muokkaus']);
     await client.PUT('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}', {
       params: { path: { id: paamaaraId, suunnitelmaId } },
       body: {

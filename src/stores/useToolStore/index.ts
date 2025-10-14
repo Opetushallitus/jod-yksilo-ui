@@ -382,6 +382,7 @@ export const useToolStore = create<ToolState>()(
               },
             });
           } else {
+            globalThis._paq?.push(['trackEvent', 'yksilo.Suosikit', 'Lisäys', kohdeId]);
             await client.POST(SUOSIKIT_PATH, {
               body: {
                 kohdeId,

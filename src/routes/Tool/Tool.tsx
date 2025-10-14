@@ -57,6 +57,7 @@ const ExploreOpportunities = () => {
 
   // Move focus to menu content when opened
   React.useEffect(() => {
+    globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Säätimet']);
     if (settingsOpen && !isMouseInteraction && firstSettingRef.current) {
       const firstChild = firstSettingRef.current.querySelector('button');
       if (firstChild) {
@@ -67,6 +68,7 @@ const ExploreOpportunities = () => {
   }, [settingsOpen]);
 
   const onUpdateResults = async () => {
+    globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Päivitys']);
     await updateEhdotuksetAndTyomahdollisuudet(isLoggedIn);
   };
 
@@ -162,6 +164,7 @@ const ExploreOpportunities = () => {
               aineisto={mahdollisuus.aineisto}
               tyyppi={mahdollisuus.tyyppi}
               type={mahdollisuusTyyppi}
+              rateId={id}
             />
           ) : null;
         })}

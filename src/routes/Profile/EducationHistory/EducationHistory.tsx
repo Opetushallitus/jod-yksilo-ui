@@ -83,6 +83,7 @@ const EducationHistory = () => {
   };
 
   const openImportStartModal = () => {
+    globalThis._paq?.push(['trackEvent', 'yksilo.Rajapinnat', 'Koski tuonti']);
     setImportResultErrorText(undefined);
     showModal(ImportKoulutusStartModal);
   };

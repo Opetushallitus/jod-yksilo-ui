@@ -53,6 +53,7 @@ type OpportunityCardProps = {
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   from?: 'tool' | 'favorite' | 'path' | 'goal';
   tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
+  rateId?: string;
 } & FavoriteProps &
   MenuProps;
 
@@ -118,6 +119,7 @@ export const OpportunityCard = ({
   headingLevel,
   menuContent,
   menuId,
+  rateId,
 }: OpportunityCardProps) => {
   const {
     t,
@@ -160,7 +162,21 @@ export const OpportunityCard = ({
       <div className="order-2 flex flex-col">
         <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">{cardTypeTitle}</span>
         {to ? (
-          <NavLink to={to} state={{ from }} data-testid="opportunity-card-title-link">
+          <NavLink
+            to={to}
+            state={{ from }}
+            data-testid="opportunity-card-title-link"
+            onClick={() => {
+              if (rateId) {
+                globalThis._paq?.push([
+                  'trackEvent',
+                  type === 'TYOMAHDOLLISUUS' ? 'yksilo.Työmahdollisuus' : 'yksilo.Koulutusmahdollisuus',
+                  'Klikkaus',
+                  rateId,
+                ]);
+              }
+            }}
+          >
             <TitleTag className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto text-secondary-1-dark hover:underline">
               {name}
             </TitleTag>
