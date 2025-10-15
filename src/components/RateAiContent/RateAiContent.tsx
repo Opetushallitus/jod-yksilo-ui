@@ -36,7 +36,6 @@ export const RateAiContent = ({ isLiked, isDisliked, variant, area }: RateAiCont
         details: window.location.href,
         rating,
         message,
-        timestamp: new Date().toISOString(),
       });
       const response = await fetch('/api/arvostelu', {
         method: 'POST',
