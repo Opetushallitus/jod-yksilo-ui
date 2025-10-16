@@ -1,5 +1,6 @@
 import type { components } from '@/api/schema';
 import { Breadcrumb, OpportunityCard } from '@/components';
+import { IconHeading } from '@/components/IconHeading';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
@@ -299,11 +300,8 @@ const Tool = () => {
       <div className="mb-6">
         <Breadcrumb />
       </div>
-      <div className="flex gap-4 mb-6">
-        <div className="rounded-full bg-secondary-1-dark-2 size-9 flex justify-center items-center">
-          <JodCompass className="text-white" />
-        </div>
-        <h1 className="text-heading-1-mobile sm:text-heading-1 text-secondary-1-dark-2">{t('tool.title')}</h1>
+      <div>
+        <IconHeading icon={<JodCompass className="text-white" />} title={t('tool.title')} dataTestId="tool-title" />
       </div>
       <p className="text-body-lg-mobile sm:text-body-lg mb-7 sm:mb-9 max-w-[700px]" ref={scrollRef}>
         {t('tool.description')}
