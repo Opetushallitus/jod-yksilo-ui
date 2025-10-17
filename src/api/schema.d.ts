@@ -1058,7 +1058,10 @@ export interface components {
       /** @enum {string} */
       tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       ammattiryhma?: string;
-      aineisto?: string;
+      /** @enum {string} */
+      aineisto?: 'TMT' | 'AMMATTITIETO';
+      /** @enum {string} */
+      koulutusmahdollisuusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
       /** Format: double */
       pisteet?: number;
       /** @enum {string} */
