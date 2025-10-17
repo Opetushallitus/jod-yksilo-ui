@@ -28,11 +28,11 @@
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.62.0",
     "react-hot-toast": "^2.6.0",
-    "react-i18next": "^15.6.1",
+    "react-i18next": "^15.7.1",
     "react-router": "^7.8.1",
     "web-vitals": "^5.1.0",
     "zod": "^4.0.17",
-    "zustand": "^5.0.7"
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@axe-core/react": "^4.10.2",
