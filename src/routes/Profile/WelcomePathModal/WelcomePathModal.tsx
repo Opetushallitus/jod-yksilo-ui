@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { YksiloData } from '@/hooks/useYksiloData';
 import { LANGUAGE_VALUES, type LanguageValue } from '@/i18n/config';
@@ -80,7 +81,7 @@ const StepWelcome = () => {
 
   return (
     <>
-      <h1 className="text-heading-1-mobile sm:text-heading-1 mb-5">{t('introduction.step-1.title')}</h1>
+      <ModalHeader text={t('introduction.step-1.title')} className="text-heading-1-mobile sm:text-heading-1 mb-5" />
       <p className="text-body-lg-mobile sm:text-body-lg font-medium mb-7 sm:mb-8">{t('introduction.step-1.text-1')}</p>
       <ul className="text-body-md-mobile sm:text-body-md list-disc list-inside mb-7 font-arial">
         <li>{t('introduction.step-1.item-1')}</li>
@@ -105,7 +106,7 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
 
   return (
     <>
-      <h1 className="text-heading-1-mobile sm:text-heading-1 mb-5">{t('introduction.step-2.title')}</h1>
+      <ModalHeader text={t('introduction.step-2.title')} className="text-heading-1-mobile sm:text-heading-1 mb-5" />
       <p className="text-body-lg-mobile sm:text-body-lg font-medium mb-2">{t('introduction.step-2.text-1')}</p>
       <p className="text-body-md-mobile sm:text-body-md mb-7 font-arial">{t('introduction.step-2.text-2')}</p>
       <div>
@@ -231,7 +232,7 @@ const StepAi = () => {
 
   return (
     <>
-      <h1 className="text-heading-1-mobile sm:text-heading-1 mb-5">{t('introduction.step-3.title')}</h1>
+      <ModalHeader text={t('introduction.step-3.title')} className="text-heading-1-mobile sm:text-heading-1 mb-5" />
       <p className="text-body-lg-mobile sm:text-body-lg font-medium mb-5 sm:mb-8">{t('introduction.step-3.text-1')}</p>
       <p className="text-body-md-mobile sm:text-body-md">{t('introduction.step-3.item-text')}</p>
       <ul className="text-body-md-mobile sm:text-body-md list-disc list-inside ml-5 mb-7">

@@ -1,4 +1,5 @@
 import { FormError, TouchedFormError } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
 import React from 'react';
@@ -30,14 +31,19 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
     }
   }, [alkuPvm, loppuPvm, trigger]);
 
+  const headerText = React.useMemo(() => {
+    if (type === 'tyopaikka') {
+      return id ? t('work-history.edit-workplace') : t('work-history.add-new-workplace');
+    } else if (type === 'toimenkuva') {
+      return toimenkuvaId ? t('work-history.edit-job-description') : t('work-history.add-new-job-description');
+    } else {
+      return '';
+    }
+  }, [id, t, toimenkuvaId, type]);
+
   return (
     <>
-      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero" data-testid="work-history-step-title">
-        {type === 'tyopaikka' && !id && t('work-history.add-new-workplace')}
-        {type === 'tyopaikka' && id && t('work-history.edit-workplace')}
-        {type === 'toimenkuva' && !toimenkuvaId && t('work-history.add-new-job-description')}
-        {type === 'toimenkuva' && toimenkuvaId && t('work-history.edit-job-description')}
-      </h2>
+      <ModalHeader text={headerText} testId="work-history-step-title" />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.work-history.modals.description')}
       </p>

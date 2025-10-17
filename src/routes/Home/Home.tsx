@@ -123,6 +123,8 @@ const Home = () => {
       <CardContainer ref={firstCardRef} className="relative">
         <HeroCard
           title={t('home.hero-title')}
+          titleLevel={1}
+          titleClassName="focus:outline-0 text-heading-1 text-white"
           content={t('home.hero-content')}
           backgroundColor="var(--ds-color-secondary-1-dark-2)"
         />

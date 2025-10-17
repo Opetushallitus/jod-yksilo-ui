@@ -1,9 +1,11 @@
 import { FormError, TouchedFormError } from '@/components';
-import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
+import { ModalHeader } from '@/components/ModalHeader';
+import { type DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
+import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { EducationHistoryForm } from './utils';
+import type { EducationHistoryForm } from './utils';
 
 interface EducationStepProps {
   type: 'oppilaitos' | 'koulutus';
@@ -24,15 +26,21 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
   } = useFormContext<EducationHistoryForm>();
   const id = watch('id');
   const koulutusId = watch(`koulutukset.${koulutus}.id`);
+  const headerText = React.useMemo(() => {
+    if (type === 'oppilaitos') {
+      return id ? t('education-history.edit-education') : t('education-history.add-new-education');
+    } else if (type === 'koulutus') {
+      return koulutusId
+        ? t('education-history.edit-degree-or-education')
+        : t('education-history.add-studies-to-this-education');
+    } else {
+      return '';
+    }
+  }, [id, t, koulutusId, type]);
 
   return (
     <>
-      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero" data-testid="education-step-title">
-        {type === 'oppilaitos' && !id && t('education-history.add-new-education')}
-        {type === 'oppilaitos' && id && t('education-history.edit-education')}
-        {type === 'koulutus' && !koulutusId && t('education-history.add-studies-to-this-education')}
-        {type === 'koulutus' && koulutusId && t('education-history.edit-degree-or-education')}
-      </h2>
+      <ModalHeader text={headerText} testId="education-step-title" />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.education-history.modals.description')}
       </p>

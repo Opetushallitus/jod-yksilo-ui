@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { OsaaminenDto } from '@/api/osaamiset';
 import { OsaaminenValue, OsaamisSuosittelija } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal } from '@jod/design-system';
@@ -90,7 +91,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
               }
             }}
           >
-            <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">{t('profile.competences.edit')}</h2>
+            <ModalHeader text={t('profile.competences.edit')} testId="edit-other-competences" />
             <Controller
               control={methods.control}
               name="osaamiset"

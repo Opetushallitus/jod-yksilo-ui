@@ -1,9 +1,10 @@
 import { ExperienceTable, type ExperienceTableRowData } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Patevyys, getFreeTimeActivitiesTableRows } from '../utils';
-import { FreeTimeActivitiesForm } from './utils';
+import { type Patevyys, getFreeTimeActivitiesTableRows } from '../utils';
+import type { FreeTimeActivitiesForm } from './utils';
 
 const SummaryStep = () => {
   const { t } = useTranslation();
@@ -32,7 +33,7 @@ const SummaryStep = () => {
 
   return (
     <>
-      <h2 className="mb-4 text-black text-hero-mobile sm:text-hero">{t('free-time-activities.summary')}</h2>
+      <ModalHeader text={t('free-time-activities.summary')} testId="free-time-competences-summary" />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.free-time-activities.modals.summary-description')}
       </p>
