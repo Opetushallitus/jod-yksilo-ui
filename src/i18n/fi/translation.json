@@ -22,8 +22,8 @@
   "cancel": "Peruuta",
   "chatbot": {
     "agent-name": "Neuvontabotti",
-    "error-message": "Tapahtui jokin virhe.",
     "disclaimer": "Älä syötä henkilötietojasi neuvontabotille.",
+    "error-message": "Tapahtui jokin virhe.",
     "greeting": "Hei, olen Osaamispolun neuvontabotti. Voin auttaa sinua Osaamispolkuun liittyvissä kysymyksissä.<br/><br/>Olen testiversio ja harjoittelen vielä, joten en osaa vastata kaikkiin kysymyksiin. Kysy silti, sillä opin koko ajan lisää. Esittämäsi kysymykset auttavat minua kehittymään.<br/><br/>Esitäthän yhden kysymyksen kerrallaan. Pidä kysymykset lyhyinä ja selkeinä, niin pystyn auttamaan paremmin. En muista aiempia kysymyksiä tai vastauksia. Ethän kirjoita henkilötietojasi chattiin. Miten voin auttaa?",
     "header": "Neuvontabotti",
     "open-window-text": "Kysy neuvoa?",
@@ -172,7 +172,6 @@
     }
   },
   "error-boundary": {
-    "session-expired": "Istuntosi on vanhentunut. Sinun täytyy kirjautua palveluun uudelleen tai käyttää palvelua ilman kirjautumista.",
     "title": "Tapahtui virhe",
     "unexpected": "Tapahtui odottamaton virhe. Tämä voi johtua verkkoyhteyden katkeamisesta tai palvelun virheestä."
   },
@@ -946,6 +945,19 @@
   "service-catalog": {
     "description": "Löydät omiin tarpeisiisi sopivan ohjauspalvelun täältä.",
     "header": "Kaipaatko neuvontaa ja ohjausta oman suunnan löytämiseen?"
+  },
+  "session": {
+    "expired": {
+      "continue": "Jatka kirjautumatta",
+      "description": "Miten haluat jatkaa?",
+      "login": "Kirjaudu uudelleen",
+      "title": "Istuntosi on päättynyt"
+    },
+    "warning": {
+      "continue": "Jatka käyttöä",
+      "description": "Jatka palvelun käyttöä kirjautuneena.",
+      "title": "Istuntosi päättyy pian"
+    }
   },
   "share": "Jaa",
   "show": "Näytä",

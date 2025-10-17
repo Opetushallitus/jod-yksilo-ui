@@ -1,5 +1,6 @@
 import { components } from '@/api/schema';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
+import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
 import { PopupList, PopupListItem, useMediaQueries } from '@jod/design-system';
 import { JodCaretDown, JodCaretUp, JodUser } from '@jod/design-system/icons';
 import React from 'react';
@@ -18,6 +19,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
   } = useTranslation();
 
   const { md } = useMediaQueries();
+  const sessionExpired = useSessionExpirationStore((state) => state.sessionExpired);
 
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
 
@@ -33,7 +35,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
   const landingPageUrl = `/${language}/${t('slugs.profile.login')}`;
   const carets = md ? <>{userMenuOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}</> : null;
 
-  return data?.csrf ? (
+  return data?.csrf && !sessionExpired ? (
     <div className="relative" data-testid="user-button">
       <button
         ref={userMenuButtonRef}
