@@ -1120,13 +1120,16 @@
         "type": "Tyyppi"
       },
       "general": {
+        "education-opportunity-filters": "Suodata koulutusmahdollisuuksia",
+        "education-opportunity-type": "Tyyppi",
+
         "filter": "Suodatus",
         "job-opportunity-type": "Tyyppi",
+        "job-opportunity-filters": "Suodata työmahdollisuuksia",
         "location": "Sijainti",
         "sorting": "Järjestys",
         "title": "Yleiset säätimet",
         "weight": "Painotus",
-        "job-opportunity-filters": "Suodata työmahdollisuuksia",
         "occupation-type": "Ylätason ammattiryhmä"
       },
       "job-opportunity": {

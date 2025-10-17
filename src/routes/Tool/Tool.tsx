@@ -87,6 +87,7 @@ const ExploreOpportunities = () => {
   }, [getTotalFilterCount, t]);
 
   const updateButtonLabel = isLoading ? t('updating-list') : t('update');
+  console.log('mixedmahdollisuudet: ' + mixedMahdollisuudet);
 
   return (
     <>

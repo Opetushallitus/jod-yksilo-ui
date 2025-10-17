@@ -1,4 +1,5 @@
 import { FilterAmmattiryhma } from '@/routes/Tool/components/filters/FilterAmmattiryhma';
+import { FilterEducationOpportunityType } from '@/routes/Tool/components/filters/FilterEducationOpportunityType.tsx';
 import FilterJobOpportunityType from '@/routes/Tool/components/filters/FilterJobOpportunityType';
 import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType';
 import { FilterName, useToolStore } from '@/stores/useToolStore';
@@ -21,12 +22,14 @@ const SettingsSection = ({ title, children }: { title: string; children: React.R
 const Setting = ({
   title,
   children,
+  hidden,
   ref,
   count,
 }: {
   title: string;
   /** Amount of selected settings/filters */
   count?: number;
+  hidden?: boolean;
   children: React.ReactNode;
   /** Ref is used to reference accordion open button for focusing */
   ref?: React.RefObject<HTMLSpanElement | null>;
@@ -37,6 +40,9 @@ const Setting = ({
   const triggerId = `accordion-${id}`;
   const contentId = `accordion-${id}-content`;
 
+  if (hidden) {
+    return <></>;
+  }
   return (
     <li>
       <Accordion
@@ -87,6 +93,7 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
       </Setting>
       <Setting
         title={t('tool.settings.general.job-opportunity-filters')}
+        hidden={!filters.opportunityType.includes('TYOMAHDOLLISUUS') && filters.opportunityType.length > 0}
         count={getFilterCount(['ammattiryhmat', 'jobOpportunityType'])}
       >
         <ul className="flex flex-col gap-3">
@@ -98,6 +105,20 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
             count={getFilterCount(['jobOpportunityType'])}
           >
             <FilterJobOpportunityType />
+          </Setting>
+        </ul>
+      </Setting>
+      <Setting
+        title={t('tool.settings.general.education-opportunity-filters')}
+        hidden={!filters.opportunityType.includes('KOULUTUSMAHDOLLISUUS') && filters.opportunityType.length > 0}
+        count={getFilterCount(['educationOpportunityType'])}
+      >
+        <ul className="flex flex-col gap-3">
+          <Setting
+            title={t('tool.settings.general.education-opportunity-type')}
+            count={getFilterCount(['educationOpportunityType'])}
+          >
+            <FilterEducationOpportunityType />
           </Setting>
         </ul>
       </Setting>
