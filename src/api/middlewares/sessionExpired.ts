@@ -1,12 +1,21 @@
 import { authStore } from '@/auth';
+import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useToolStore } from '@/stores/useToolStore';
-import { Middleware } from 'openapi-fetch';
-import { useNoteStore } from '../../stores/useNoteStore';
+import type { Middleware } from 'openapi-fetch';
 import { unregisterCsrfMiddleware } from './csrf';
 
 export const sessionExpiredMiddleware: Middleware = {
-  onResponse({ response }) {
+  async onResponse({ response }) {
+    const { sessionExpired, extendSession, setSessionExpired, onSessionExtended } =
+      useSessionExpirationStore.getState();
+
+    // Reset session expiration on successful response
+    if (response.status >= 200 && response.status < 300 && !sessionExpired) {
+      onSessionExtended?.();
+      await extendSession();
+    }
+
     if (
       response.status === 403 &&
       !response.url.endsWith('/api/profiili/yksilo') &&
@@ -14,15 +23,9 @@ export const sessionExpiredMiddleware: Middleware = {
     ) {
       authStore.yksiloPromise = undefined;
       unregisterCsrfMiddleware();
-
-      useNoteStore.getState().setNote({
-        title: 'error-boundary.title',
-        description: 'error-boundary.session-expired',
-        variant: 'error',
-      });
-
       useToolStore.getState().reset();
       useSuosikitStore.getState().reset();
+      setSessionExpired(true);
 
       /* eslint-disable sonarjs/todo-tag */
       throw new Error('session-expired'); // TODO: This should be replaced with a proper handling of session expiration
