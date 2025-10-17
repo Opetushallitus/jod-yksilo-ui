@@ -1,11 +1,13 @@
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { FeedbackModal, UserButton } from '@/components';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
+import { useLoginLink } from '@/hooks/useLoginLink';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
-import { LangCode, langLabels, supportedLanguageCodes } from '@/i18n/config';
+import { useSessionExpirationTimer } from '@/hooks/useSessionExpirationTimer';
+import { type LangCode, langLabels, supportedLanguageCodes } from '@/i18n/config';
 import { useNoteStore } from '@/stores/useNoteStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLinkTo } from '@/utils/routeUtils';
@@ -24,7 +26,16 @@ import {
 import { JodMenu, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router';
+import {
+  Link,
+  Outlet,
+  ScrollRestoration,
+  useFetcher,
+  useLoaderData,
+  useLocation,
+  useMatch,
+  useNavigate,
+} from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { LogoutFormContext } from '.';
 
@@ -46,10 +57,12 @@ const Root = () => {
     t,
     i18n: { language },
   } = useTranslation();
+  const fetcher = useFetcher();
   const resetToolStore = useToolStore((state) => state.reset);
   const { note, clearNote } = useNoteStore(useShallow((state) => ({ note: state.note, clearNote: state.clearNote })));
   const isMouseInteraction = useInteractionMethod();
   const location = useLocation();
+  const navigate = useNavigate();
   const { addNote, removeNote } = useNoteStack();
   const [langMenuOpen, setLangMenuOpen] = React.useState(false);
   const [navMenuOpen, setNavMenuOpen] = React.useState(false);
@@ -71,6 +84,84 @@ const Root = () => {
   }, [hostname, language]);
 
   const { generateLocalizedPath } = useLocalizedRoutes();
+  const isLoggedIn = !!data;
+  const loginLink = useLoginLink({ callbackURL: location.pathname + location.search + location.hash });
+  const sessionWarningNoteId = 'session-expiration-warning';
+  const sessionExpiredNoteId = 'session-expired';
+  const isOnProtectedRoute = useMatch(`/${language}/${t('slugs.profile.index')}/*`);
+
+  const { extend, disable } = useSessionExpirationTimer({
+    isLoggedIn: isLoggedIn,
+    onExtended: () => {
+      setTimeout(() => {
+        // Wrapping the removal in timeout makes this more reliable, otherwise the note sometimes doesn't get removed
+        removeNote(sessionWarningNoteId);
+      }, 50);
+    },
+    onWarning: () => {
+      if (!isLoggedIn) {
+        return;
+      }
+      addNote({
+        id: sessionWarningNoteId,
+        title: t('session.warning.title'),
+        description: t('session.warning.description'),
+        variant: 'warning',
+        readMoreComponent: (
+          <Button
+            size="sm"
+            variant="white"
+            label={t('session.warning.continue')}
+            onClick={async () => {
+              removeNote(sessionWarningNoteId);
+              await extend();
+            }}
+          />
+        ),
+      });
+    },
+    onExpired: async () => {
+      if (!isLoggedIn) {
+        return;
+      }
+      removeNote(sessionWarningNoteId);
+      // Reload root loader, this should set CSRF data to null
+      await fetcher.load(`/${language}`);
+
+      addNote({
+        id: sessionExpiredNoteId,
+        title: t('session.expired.title'),
+        description: t('session.expired.description'),
+        variant: 'error',
+        permanent: true,
+        readMoreComponent: (
+          <div className="flex gap-4">
+            <Button
+              size="sm"
+              variant="white"
+              label={t('session.expired.login')}
+              LinkComponent={getLinkTo(loginLink, {
+                useAnchor: true,
+                target: '_blank',
+              })}
+            />
+            <Button
+              size="sm"
+              variant="white"
+              label={t('session.expired.continue')}
+              onClick={() => {
+                disable(); // Disables any future warnings or expirations
+                removeNote(sessionExpiredNoteId);
+                if (isOnProtectedRoute) {
+                  navigate(`/${language}`);
+                }
+              }}
+            />
+          </div>
+        ),
+      });
+    },
+  });
 
   const logout = () => {
     resetToolStore();
@@ -103,8 +194,7 @@ const Root = () => {
       description: t(note.description),
       variant: 'error',
       permanent: note.permanent ?? false,
-      // Prevent multiple session-expired notes with fixed id
-      id: note.description.includes('session-expired') ? 'session-expired' : undefined,
+      id: note.title,
     });
     clearNote();
   }, [addNote, clearNote, note, t]);

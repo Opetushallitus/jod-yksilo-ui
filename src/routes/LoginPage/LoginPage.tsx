@@ -1,6 +1,7 @@
 import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { useLoginLink } from '@/hooks/useLoginLink';
+import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
@@ -18,10 +19,9 @@ const LoginPage = () => {
     i18n: { language },
   } = useTranslation();
   const location = useLocation();
-
+  const sessionExpired = useSessionExpirationStore((state) => state.sessionExpired);
   const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
   const navigate = useNavigate();
-
   const state = location.state;
 
   const loginLink = useLoginLink({
@@ -32,10 +32,10 @@ const LoginPage = () => {
 
   // Redirect to root if already logged-in
   React.useEffect(() => {
-    if (rootLoaderData) {
+    if (rootLoaderData && !sessionExpired) {
       navigate('/');
     }
-  }, [rootLoaderData, navigate]);
+  }, [rootLoaderData, navigate, sessionExpired]);
 
   const title = t('profile.login-page.page-title');
 

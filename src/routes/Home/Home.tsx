@@ -2,13 +2,13 @@ import betaPlanImageDesktop from '@/../assets/gra_front_timeline_2.svg';
 import betaPlanImageMobile from '@/../assets/gra_front_timeline_mob_2.svg';
 import heroSrc from '@/../assets/yksilo-hero.jpg';
 import type { components } from '@/api/schema';
+import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { getLinkTo } from '@/utils/routeUtils';
-import { Button, HeroCard, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
+import { Button, HeroCard, type LinkComponent, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
 import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link, useRouteLoaderData } from 'react-router';
-import { generateProfileLink } from '../Profile/utils';
 
 const FeatureBox = ({ title }: { title: string }) => {
   const { t } = useTranslation();
@@ -77,6 +77,16 @@ const CardContainer = ({ className = '', children, ref }: ContainerProps & { ref
   );
 };
 
+const AuthNavLink = (shouldLogin: boolean, path?: string) => {
+  const Cmp = ({ to, className, children }: LinkComponent) => (
+    <NavLinkBasedOnAuth to={to ?? path} className={className} shouldLogin={shouldLogin}>
+      {children}
+    </NavLinkBasedOnAuth>
+  );
+  Cmp.displayName = 'AuthNavLink';
+  return Cmp;
+};
+
 const Home = () => {
   const {
     t,
@@ -85,7 +95,6 @@ const Home = () => {
 
   const { sm } = useMediaQueries();
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
-
   const firstCardRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -102,10 +111,6 @@ const Home = () => {
     }
   }, []);
 
-  const preferencesLink = React.useMemo(
-    () => generateProfileLink(['slugs.profile.preferences'], data, language, t),
-    [data, language, t],
-  );
   const toolLink = `/${language}/${t('slugs.tool.index')}`;
 
   return (
@@ -142,10 +147,10 @@ const Home = () => {
         <HeroCard
           buttonLabel={t('home.create-own-profile')}
           content={t('home.card-2-content')}
-          LinkComponent={Link}
+          LinkComponent={AuthNavLink(!data)}
           size="sm"
           title={t('home.card-2-title')}
-          to={preferencesLink.to}
+          to={t('slugs.profile.index')}
           backgroundColor="var(--ds-color-secondary-1-dark)"
         />
       </CardContainer>
@@ -200,7 +205,7 @@ const Home = () => {
             variant="accent"
             icon={<JodArrowRight />}
             iconSide="right"
-            LinkComponent={getLinkTo(preferencesLink.to)}
+            LinkComponent={AuthNavLink(!data, t('slugs.profile.index'))}
             data-testid="home-create-profile"
           />
         </div>
