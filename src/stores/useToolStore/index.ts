@@ -26,6 +26,7 @@ interface ToolFilters {
   region: string[];
   ammattiryhmat: string[];
   jobOpportunityType: string[];
+  educationOpportunityType: string[];
 }
 
 export type FilterName = keyof ToolFilters;
@@ -35,9 +36,13 @@ const DEFAULT_FILTERS: ToolFilters = {
   region: [],
   ammattiryhmat: [],
   jobOpportunityType: [],
+  educationOpportunityType: [],
 };
 
-type ArrayFilters = Extract<FilterName, 'opportunityType' | 'region' | 'jobOpportunityType'>;
+type ArrayFilters = Extract<
+  FilterName,
+  'opportunityType' | 'region' | 'jobOpportunityType' | 'educationOpportunityType'
+>;
 let abortController = new AbortController();
 
 interface ToolState {
@@ -220,8 +225,8 @@ export const useToolStore = create<ToolState>()(
 
       fetchMahdollisuudetPage: async (signal, newPage = 1) => {
         const { filters, ehdotuksetPageSize, sorting } = get();
-        const { opportunityType, ammattiryhmat } = filters;
-        let ehdotukset = get().mahdollisuusEhdotukset;
+        const { opportunityType } = filters;
+        let ehdotukset: EhdotusRecord = get().mahdollisuusEhdotukset;
         const updateTyoMahdollisuudet = async (sortedMixedMahdollisuudet: TypedMahdollisuus[], pagedIds: string[]) => {
           const ehdotukset = get().mahdollisuusEhdotukset;
           const tyomahdollisuusIds = pagedIds.filter((id) => ehdotukset[id].tyyppi === 'TYOMAHDOLLISUUS');
@@ -241,7 +246,7 @@ export const useToolStore = create<ToolState>()(
         };
 
         // apply ID sorting and filter
-        const allSortedIds = await filterEhdotukset(opportunityType, ammattiryhmat, filters.jobOpportunityType);
+        const allSortedIds = await filterEhdotukset(filters);
         set({ filteredMahdollisuudetCount: allSortedIds.length });
         set({ mahdollisuudetLoading: true });
         try {
@@ -293,6 +298,8 @@ export const useToolStore = create<ToolState>()(
             mixedMahdollisuudet: sortedMixedMahdollisuudet,
           });
         } catch (_error) {
+          /* eslint-disable no-console */
+          console.error(_error);
           set({
             mixedMahdollisuudet: [],
             koulutusmahdollisuudet: [],
@@ -301,16 +308,54 @@ export const useToolStore = create<ToolState>()(
           });
         }
 
-        async function filterEhdotukset(
-          filter: OpportunityFilterValue[],
+        function filterByEducationType(
+          educationOpportunityType: string[],
+          meta: components['schemas']['EhdotusMetadata'],
+        ): boolean {
+          if (educationOpportunityType.length === 0 || meta.tyyppi !== 'KOULUTUSMAHDOLLISUUS') {
+            return true;
+          }
+          const shouldShowTutkinnot = educationOpportunityType.includes('TUTKINTO');
+          const isTutkinto = meta.koulutusmahdollisuusTyyppi === 'TUTKINTO';
+          const shouldShowMuut = educationOpportunityType.includes('EI_TUTKINTO');
+          const isMuu = meta.koulutusmahdollisuusTyyppi === 'EI_TUTKINTO';
+          return (shouldShowTutkinnot && isTutkinto) || (shouldShowMuut && isMuu);
+        }
+
+        function filterByJobType(
+          jobOpportunityType: string[],
+          meta: components['schemas']['EhdotusMetadata'],
+        ): boolean {
+          if (jobOpportunityType.length === 0 || meta.tyyppi !== 'TYOMAHDOLLISUUS') {
+            return true;
+          }
+          const shouldShowAmmatit = jobOpportunityType.includes('AMMATTITIETO');
+          const isAmmatti = meta.aineisto === 'AMMATTITIETO';
+          const shouldShowMuut = jobOpportunityType.includes('TMT');
+          const isMuuMahdollisuus = meta.aineisto === 'TMT';
+          return (shouldShowAmmatit && isAmmatti) || (shouldShowMuut && isMuuMahdollisuus);
+        }
+
+        function filterByAmmattiryhmat(
           ammattiryhmat: string[],
-          jobOpportunityTypes: string[],
-        ) {
+          meta: components['schemas']['EhdotusMetadata'],
+        ): boolean {
+          if (ammattiryhmat.length == 0 || meta.tyyppi != 'TYOMAHDOLLISUUS') {
+            return true;
+          }
+          // Ammattiryhmat are in form C1, and meta.ammattiryhma is in format C1234
+          // If meta.ammattiryhma starts with category code, it belongs to that category
+          return ammattiryhmat.some((ar) => meta.ammattiryhma?.startsWith(ar));
+        }
+
+        async function filterEhdotukset(filters: ToolFilters) {
+          const { opportunityType: filter, ammattiryhmat, jobOpportunityType, educationOpportunityType } = filters;
           if (Object.keys(ehdotukset).length === 0 || i18n.language !== get().previousEhdotusUpdateLang) {
             await get().updateEhdotukset(i18n.language, signal);
             set({ previousEhdotusUpdateLang: i18n.language });
           }
           ehdotukset = get().mahdollisuusEhdotukset;
+
           return Object.entries(ehdotukset ?? [])
             .filter(([, meta]) => {
               // If filter is empty, return all items
@@ -325,23 +370,11 @@ export const useToolStore = create<ToolState>()(
               return filter.includes(meta.tyyppi);
             })
             .filter(([, meta]) => {
-              if (jobOpportunityTypes.length === 0 || meta.tyyppi !== 'TYOMAHDOLLISUUS') {
-                return true;
-              }
-              const shouldShowAmmatit = jobOpportunityTypes.includes('AMMATTITIETO');
-              const isAmmatti = meta.aineisto === 'AMMATTITIETO';
-              const shouldShowMuut = jobOpportunityTypes.includes('TMT');
-              const isMuuMahdollisuus = meta.aineisto === 'TMT';
-              return (shouldShowAmmatit && isAmmatti) || (shouldShowMuut && isMuuMahdollisuus);
-            })
-            .filter(([, meta]) => {
-              if (ammattiryhmat.length == 0 || meta.tyyppi != 'TYOMAHDOLLISUUS') {
-                return true;
-              }
-              // Ammattiryhmat are in form C1, and meta.ammattiryhma is in format C1234
-              // If meta.ammattiryhma starts with category code, it belongs to that category
-              // eslint-disable-next-line sonarjs/no-nested-functions
-              return ammattiryhmat.some((ar) => meta.ammattiryhma?.startsWith(ar));
+              return (
+                filterByJobType(jobOpportunityType, meta) &&
+                filterByEducationType(educationOpportunityType, meta) &&
+                filterByAmmattiryhmat(ammattiryhmat, meta)
+              );
             })
             .sort(([, metadataA], [, metadataB]) =>
               sorting === sortingValues.RELEVANCE
