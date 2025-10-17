@@ -1058,7 +1058,9 @@ export interface components {
       /** @enum {string} */
       tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       ammattiryhma?: string;
-      aineisto?: string;
+      /** @enum {string} */
+      aineisto?: 'TMT' | 'AMMATTITIETO';
+      maakunnat?: string[];
       /** Format: double */
       pisteet?: number;
       /** @enum {string} */

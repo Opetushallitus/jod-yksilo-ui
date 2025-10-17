@@ -1,6 +1,7 @@
 import { FilterAmmattiryhma } from '@/routes/Tool/components/filters/FilterAmmattiryhma';
 import FilterJobOpportunityType from '@/routes/Tool/components/filters/FilterJobOpportunityType';
 import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType';
+import { FilterSijainti } from '@/routes/Tool/components/filters/FilterSijainti.tsx';
 import { FilterName, useToolStore } from '@/stores/useToolStore';
 import { Accordion, Button, Modal } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
@@ -84,6 +85,9 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
       </Setting>
       <Setting title={t('tool.settings.general.sorting')}>
         <OpportunitiesSorting />
+      </Setting>
+      <Setting title={t('tool.settings.general.occupation-type')} count={getFilterCount(['region'])}>
+        <FilterSijainti />
       </Setting>
       <Setting
         title={t('tool.settings.general.job-opportunity-filters')}
