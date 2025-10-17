@@ -1,4 +1,5 @@
 import { ExperienceTable, type ExperienceTableRowData } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -32,7 +33,7 @@ const SummaryStep = () => {
 
   return (
     <>
-      <h2 className="mb-4 text-black text-hero-mobile sm:text-hero">{t('education-history.summary')}</h2>
+      <ModalHeader text={t('education-history.summary')} />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.education-history.modals.summary-description')}
       </p>

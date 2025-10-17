@@ -1,10 +1,11 @@
 import { FormError, TouchedFormError } from '@/components';
-import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
+import { ModalHeader } from '@/components/ModalHeader';
+import { type DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { FreeTimeActivitiesForm } from './utils';
+import type { FreeTimeActivitiesForm } from './utils';
 
 interface ActivityStepProps {
   type: 'toiminta' | 'patevyys';
@@ -34,14 +35,19 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
     }
   }, [alkuPvm, loppuPvm, trigger]);
 
+  const headerText = React.useMemo(() => {
+    if (type === 'toiminta') {
+      return id ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-free-time-activity');
+    } else if (type === 'patevyys') {
+      return patevyysId ? t('free-time-activities.edit-proficiency') : t('free-time-activities.add-new-activity');
+    } else {
+      return '';
+    }
+  }, [id, t, patevyysId, type]);
+
   return (
     <>
-      <h2 className="mb-6 text-black text-hero-mobile sm:text-hero" data-testid="free-time-step-title">
-        {type === 'toiminta' && !id && t('free-time-activities.add-new-free-time-activity')}
-        {type === 'toiminta' && id && t('free-time-activities.edit-activity')}
-        {type === 'patevyys' && !patevyysId && t('free-time-activities.add-new-activity')}
-        {type === 'patevyys' && patevyysId && t('free-time-activities.edit-proficiency')}
-      </h2>
+      <ModalHeader text={headerText} testId="free-time-step-title" />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.free-time-activities.modals.description')}
       </p>

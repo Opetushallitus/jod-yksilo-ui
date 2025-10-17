@@ -1,3 +1,4 @@
+import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { Button, Modal } from '@jod/design-system';
 import React from 'react';
@@ -42,9 +43,7 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
           className="flex flex-col items-center justify-center fixed inset-0 overflow-hidden pointer-events-none"
         >
           <div className="text-left max-w-lg px-5">
-            <h3 className="mb-5 sm:text-heading-2 text-heading-2-mobile">
-              {t('education-history-import.start-modal.title')}
-            </h3>
+            <ModalHeader text={t('education-history-import.start-modal.title')} />
             <p className="mb-4 sm:text-body-md text-body-md-mobile">
               {t('education-history-import.start-modal.description')}
             </p>

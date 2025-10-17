@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { FormError } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
@@ -116,10 +117,7 @@ const EditKoulutuskokonaisuusModal = ({
               }
             }}
           >
-            <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-              {t('education-history.edit-education')}
-            </h2>
-
+            <ModalHeader text={t('education-history.edit-education')} testId="edit-education-modal-title" />
             <InputField
               label={t('education-history.educational-institution-or-education-provider')}
               {...methods.register(`nimi.${language}` as const)}

@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
-import { OsaaminenValue, OsaamisSuosittelija } from '@/components';
+import type { components } from '@/api/schema';
+import { type OsaaminenValue, OsaamisSuosittelija } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal } from '@jod/design-system';
@@ -90,9 +91,10 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
               }
             }}
           >
-            <h2 className="mb-2 text-heading-3 text-black sm:text-heading-2">
-              {t(data.length > 0 ? 'profile.interests.edit-interests' : 'profile.interests.add-interests')}
-            </h2>
+            <ModalHeader
+              text={data.length > 0 ? t('profile.interests.edit-interests') : t('profile.interests.add-interests')}
+              testId="edit-interests-title"
+            />
             <Controller
               control={methods.control}
               name="kiinnostukset"

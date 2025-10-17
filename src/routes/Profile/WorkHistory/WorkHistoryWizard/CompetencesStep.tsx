@@ -1,4 +1,5 @@
 import { OsaamisSuosittelija } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { WorkHistoryForm } from './utils';
@@ -17,12 +18,10 @@ const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
 
   return (
     <>
-      <h2
-        className="mb-3 font-poppins text-black text-hero-mobile sm:text-hero"
-        data-testid="work-history-competences-title"
-      >
-        {id ? t('profile.competences.edit') : t('work-history.identify-competences')}
-      </h2>
+      <ModalHeader
+        text={id ? t('profile.competences.edit') : t('work-history.identify-competences')}
+        testId="work-history-competences-title"
+      />
       <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
         {getValues(`nimi.${language}`)} - {getValues(`toimenkuvat.${toimenkuva}.nimi.${language}`)}
       </h3>

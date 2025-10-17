@@ -59,6 +59,7 @@ const Root = () => {
   const langMenuRef = useMenuClickHandler(() => setLangMenuOpen(false), langMenuButtonRef);
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
   const hostname = window.location.hostname;
+  const menuButtonRef = React.useRef<HTMLButtonElement>(null);
   const { siteId, agent } = React.useMemo(() => {
     if (hostname === 'osaamispolku.fi') {
       return { siteId: 36, agent: agents.prod[language as keyof typeof agents.prod] };
@@ -75,6 +76,22 @@ const Root = () => {
     resetToolStore();
     logoutForm.current?.submit();
   };
+
+  // Tries to focus the first h1 inside main content or the skip link if no h1 found
+  React.useEffect(() => {
+    setTimeout(() => {
+      const mainElement = document.querySelector('#jod-main');
+      const firstHeading = mainElement?.querySelector('h1') || document.querySelector('h1');
+
+      if (firstHeading) {
+        firstHeading.setAttribute('tabIndex', '-1');
+        firstHeading.focus({ preventScroll: true });
+      } else {
+        const skipLink = document.querySelector<HTMLAnchorElement>('a[href="#jod-main"]');
+        skipLink?.focus();
+      }
+    });
+  }, [location.pathname]);
 
   React.useEffect(() => {
     if (!note) {
@@ -167,6 +184,7 @@ const Root = () => {
           logo={{ to: `/${language}`, language, srText: t('osaamispolku') }}
           menuComponent={
             <button
+              ref={menuButtonRef}
               onClick={() => setNavMenuOpen(!navMenuOpen)}
               aria-label={t('open-menu')}
               className="flex flex-col md:flex-row gap-2 md:gap-3 justify-center items-center select-none cursor-pointer"
@@ -211,7 +229,16 @@ const Root = () => {
       </header>
 
       <LogoutFormContext.Provider value={logoutForm.current}>
-        <NavMenu open={navMenuOpen} onClose={() => setNavMenuOpen(false)} />
+        <NavMenu
+          open={navMenuOpen}
+          onClose={() => {
+            setNavMenuOpen(false);
+            // Return focus to menu button when menu is closed for a11y
+            setTimeout(() => {
+              menuButtonRef.current?.focus();
+            }, 1);
+          }}
+        />
         <ServiceVariantProvider value="yksilo">
           <Outlet />
         </ServiceVariantProvider>

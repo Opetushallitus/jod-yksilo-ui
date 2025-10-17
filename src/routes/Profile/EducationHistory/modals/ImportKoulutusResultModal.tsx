@@ -1,3 +1,4 @@
+import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { Button, Modal } from '@jod/design-system';
 import { JodArrowRight, JodCheckCircle, JodClose } from '@jod/design-system/icons';
@@ -39,7 +40,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
                   <JodCheckCircle size={20} className="text-heading-1 text-success" />
                 </div>
                 <div className="mx-8 w-full flex flex-col">
-                  <div className="text-heading-2">{t('education-history-import.result-modal.success')}</div>
+                  <ModalHeader text={t('education-history-import.result-modal.success')} />
                   <p className="max-w-full break-words whitespace-pre-line">
                     {t('education-history-import.result-modal.success-osaamiset-info')}
                   </p>

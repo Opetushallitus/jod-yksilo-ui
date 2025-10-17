@@ -1,10 +1,11 @@
 import { client } from '@/api/client';
 import { ErrorResponse } from '@/api/errorResponse';
-import { components } from '@/api/schema';
-import { ExperienceTable, ExperienceTableRowData } from '@/components';
+import type { components } from '@/api/schema';
+import { ExperienceTable, type ExperienceTableRowData } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
-import { getEducationHistoryTableRows, Koulutus } from '@/routes/Profile/EducationHistory/utils.ts';
+import { getEducationHistoryTableRows, type Koulutus } from '@/routes/Profile/EducationHistory/utils.ts';
 import { Button, Modal, Spinner } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -202,9 +203,8 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
       content={
         <div id={modalId} className="flex flex-col">
           <div className="text-left">
-            <h3 className="mb-5 sm:text-heading-2 text-heading-2-mobile">
-              {t('education-history-import.summary-modal.title')}
-            </h3>
+            <ModalHeader text={t('education-history-import.summary-modal.title')} testId="education-step-title" />
+
             <p className="mb-4 sm:text-body-md text-body-md-mobile">
               {t('education-history-import.summary-modal.description')}
             </p>

@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { FormError } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
@@ -109,9 +110,7 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
               }
             }}
           >
-            <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-              {t('work-history.edit-workplace')}
-            </h2>
+            <ModalHeader text={t('work-history.edit-workplace')} testId="work-history-edit-workplace-title" />
             <InputField
               label={t('work-history.employer')}
               {...methods.register(`nimi.${language}` as const)}

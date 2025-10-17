@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
@@ -64,9 +65,11 @@ const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
 
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t(koulutusId ? 'education-history.edit-degree-or-education' : 'education-history.add-studies-to-education')}
-      </h2>
+      <ModalHeader
+        text={
+          koulutusId ? t('education-history.edit-degree-or-education') : t('education-history.add-studies-to-education')
+        }
+      />
       <div className="mb-6">
         <InputField
           label={t('education-history.name-of-degree-or-education')}
