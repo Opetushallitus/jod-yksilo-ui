@@ -1110,10 +1110,9 @@
       "general": {
         "education-opportunity-filters": "Suodata koulutusmahdollisuuksia",
         "education-opportunity-type": "Tyyppi",
-
         "filter": "Suodatus",
-        "job-opportunity-type": "Tyyppi",
         "job-opportunity-filters": "Suodata työmahdollisuuksia",
+        "job-opportunity-type": "Tyyppi",
         "location": "Sijainti",
         "sorting": "Järjestys",
         "title": "Yleiset säätimet",
