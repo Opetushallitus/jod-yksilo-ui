@@ -2,12 +2,11 @@ import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
-import { Button, EmptyState } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
+import { Button, EmptyState, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { ToolCard } from '../components/ToolCard';
 import AddGoalModal from './AddGoalModal';
 import MyGoalsSection from './MyGoalsSection';
 
@@ -38,10 +37,8 @@ const AwardIcon = ({ color }: { color: 'gold' | 'silver' }) => {
 };
 
 const MyGoals = () => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
+  const { lg } = useMediaQueries();
   const title = t('profile.my-goals.title');
   const { showModal } = useModal();
   const suosikitIsEmpty = useSuosikitStore(
@@ -58,10 +55,15 @@ const MyGoals = () => {
     };
   }, [paamaarat]);
 
-  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
-
   return (
-    <MainLayout navChildren={navChildren}>
+    <MainLayout
+      navChildren={
+        <div className="flex flex-col gap-5">
+          <ProfileNavigationList />
+          <ToolCard testId="goals-go-to-tool" />
+        </div>
+      }
+    >
       <title>{title}</title>
       <ProfileSectionTitle type="PAAMAARA" title={title} />
       <div className="flex flex-col gap-4 mb-9 sm:text-body-lg text-body-lg-mobile">
@@ -92,19 +94,6 @@ const MyGoals = () => {
           <div className="mt-6 mb-7">
             <EmptyState text={t('profile.my-goals.no-favorites-selected')} data-testid="goals-empty-state" />
           </div>
-          <Link
-            to={`/${language}/${t('slugs.tool.index')}`}
-            type="button"
-            className="text-button-md hover:underline text-accent"
-            data-testid="goals-add-favorites-link"
-          >
-            <div className="flex flex-row justify-start">
-              <div className="flex items-center gap-2">
-                {t('profile.my-goals.add-favorites-link')}
-                <JodArrowRight />
-              </div>
-            </div>
-          </Link>
         </div>
       )}
       <Button
@@ -116,6 +105,7 @@ const MyGoals = () => {
         disabled={suosikitIsEmpty}
         data-testid="goals-add-favorites-button"
       />
+      {lg ? null : <ToolCard testId="goals-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };

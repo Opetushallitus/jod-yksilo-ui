@@ -2,15 +2,16 @@ import { components } from '@/api/schema';
 import { FavoriteToggle } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDropdown';
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
 import type { MahdollisuusTyyppi } from '@/routes/types';
+import { getLocalizedText } from '@/utils';
 import { cx } from '@jod/design-system';
 import { JodInfo } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router';
+import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
 type FavoriteProps =
   | {
@@ -39,7 +40,8 @@ type MenuProps =
     };
 
 type OpportunityCardProps = {
-  ammattiryhma?: string;
+  ammattiryhma?: components['schemas']['AmmattiryhmaBasicDto'];
+  ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
   as?: React.ElementType;
   to?: string;
   name: string;
@@ -48,19 +50,50 @@ type OpportunityCardProps = {
   matchValue?: number;
   matchLabel?: string;
   type: MahdollisuusTyyppi;
+  headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   from?: 'tool' | 'favorite' | 'path' | 'goal';
   tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
 } & FavoriteProps &
   MenuProps;
 
-const OpportunityDetail = ({ title, value }: { title: string; value: string }) => {
+const OpportunityDetail = ({ title, value, icon }: { title: string; value: string; icon: React.ReactNode }) => {
   return (
     <div className="flex flex-col">
       <div className="text-body-xs flex gap-4 items-center">
         <span>{title}:</span>
-        <JodInfo size={18} className="text-[#999]" />
+        {icon}
       </div>
       <div className="text-heading-3 text-secondary-1-dark">{value}</div>
+    </div>
+  );
+};
+
+interface ActionsSectionProps {
+  hideFavorite: boolean;
+  menuId?: string;
+  menuContent?: React.ReactNode;
+  isFavorite?: boolean;
+  onToggleFavorite: () => void;
+  name: string;
+}
+
+const ActionsSection = ({
+  hideFavorite,
+  menuId,
+  menuContent,
+  isFavorite,
+  onToggleFavorite,
+  name,
+}: ActionsSectionProps) => {
+  const nothingToShow = hideFavorite && !menuId && !menuContent;
+  return nothingToShow ? (
+    <></>
+  ) : (
+    <div className="grow flex flex-col sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end">
+      {!hideFavorite && (
+        <FavoriteToggle isFavorite={!!isFavorite} onToggleFavorite={onToggleFavorite} favoriteName={name} />
+      )}
+      {menuId && menuContent && <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />}
     </div>
   );
 };
@@ -71,6 +104,7 @@ export const OpportunityCard = ({
   from,
   description,
   ammattiryhma,
+  ammattiryhmaNimet,
   matchLabel,
   matchValue,
   name,
@@ -81,6 +115,7 @@ export const OpportunityCard = ({
   isFavorite,
   isLoggedIn,
   hideFavorite,
+  headingLevel,
   menuContent,
   menuId,
 }: OpportunityCardProps) => {
@@ -88,7 +123,6 @@ export const OpportunityCard = ({
     t,
     i18n: { language },
   } = useTranslation();
-  const { isDev } = useEnvironment();
   const state = useLocation().state;
   const loginLink = useLoginLink({
     callbackURL: state?.callbackURL
@@ -96,6 +130,7 @@ export const OpportunityCard = ({
       : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
   });
   const { showDialog, closeAllModals } = useModal();
+  const TitleTag = headingLevel || 'span';
 
   const onToggleFavorite = () => {
     if (hideFavorite) {
@@ -120,46 +155,67 @@ export const OpportunityCard = ({
       return t(`opportunity-type.education.${tyyppi || 'EI_TUTKINTO'}`);
     }
   }, [type, t, aineisto, tyyppi]);
-
-  const ActionsSection =
-    menuId && menuContent ? (
-      <div className="grow flex flex-col sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end">
-        {!hideFavorite && (
-          <FavoriteToggle isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} favoriteName={name} />
-        )}
-        <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />
-      </div>
-    ) : null;
-
   return (
     <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border" data-testid="opportunity-card">
       <div className="order-2 flex flex-col">
         <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">{cardTypeTitle}</span>
         {to ? (
-          <NavLink
-            to={to}
-            state={{ from }}
-            className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto hover:underline hover:text-accent"
-            data-testid="opportunity-card-title-link"
-          >
-            {name}
+          <NavLink to={to} state={{ from }} data-testid="opportunity-card-title-link">
+            <TitleTag className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto text-secondary-1-dark hover:underline">
+              {name}
+            </TitleTag>
           </NavLink>
         ) : (
-          <span
+          <TitleTag
             className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto"
             data-testid="opportunity-card-title"
           >
             {name}
-          </span>
+          </TitleTag>
         )}
         <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
-        {isDev && (
-          <div className="flex flex-col mt-5 gap-3">
-            {type === 'TYOMAHDOLLISUUS' && ammattiryhma ? (
-              <OpportunityDetail title={t('tool.job-opportunity-is-part-of-group')} value={ammattiryhma} />
-            ) : null}
-          </div>
-        )}
+        <div className="flex flex-col mt-5 gap-3">
+          {type === 'TYOMAHDOLLISUUS' && ammattiryhma ? (
+            <>
+              <OpportunityDetail
+                title={t('tool.job-opportunity-is-part-of-group')}
+                value={
+                  ammattiryhmaNimet !== undefined && ammattiryhma?.uri
+                    ? getLocalizedText(ammattiryhmaNimet[ammattiryhma.uri])
+                    : ''
+                }
+                icon={
+                  <TooltipWrapper
+                    tooltipPlacement="top"
+                    tooltipContent={
+                      <div className="text-body-xs max-w-[290px] leading-5">
+                        {t('tool.job-opportunity-is-part-of-group-tooltip')}
+                      </div>
+                    }
+                  >
+                    <JodInfo size={18} className="text-[#999]" />
+                  </TooltipWrapper>
+                }
+              />
+              <OpportunityDetail
+                title={t('tool.job-opportunity-median-salary')}
+                value={`${ammattiryhma.mediaaniPalkka?.toString() || '---'} ${t('tool.salary-suffix')}`}
+                icon={
+                  <TooltipWrapper
+                    tooltipPlacement="top"
+                    tooltipContent={
+                      <div className="text-body-xs max-w-[290px] leading-5">
+                        {t('tool.job-opportunity-median-salary-tooltip')}
+                      </div>
+                    }
+                  >
+                    <JodInfo size={18} className="text-[#999]" />
+                  </TooltipWrapper>
+                }
+              />
+            </>
+          ) : null}
+        </div>
       </div>
       <div
         className={`flex flex-col sm:flex-row items-start sm:items-center gap-x-7 gap-y-5 mb-5 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
@@ -177,7 +233,15 @@ export const OpportunityCard = ({
             <span className="text-body-xs font-arial font-bold">{matchLabel}</span>
           </div>
         )}
-        {menuContent ? ActionsSection : null}
+
+        <ActionsSection
+          hideFavorite={!!hideFavorite}
+          menuId={menuId}
+          menuContent={menuContent}
+          isFavorite={isFavorite}
+          onToggleFavorite={onToggleFavorite}
+          name={name}
+        />
       </div>
     </Component>
   );

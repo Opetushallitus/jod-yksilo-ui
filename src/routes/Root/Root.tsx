@@ -1,14 +1,19 @@
 import { components } from '@/api/schema';
-import { LanguageButton, UserButton } from '@/components';
+import { FeedbackModal, UserButton } from '@/components';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
+import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
+import { LangCode, langLabels, supportedLanguageCodes } from '@/i18n/config';
 import { useNoteStore } from '@/stores/useNoteStore';
 import { useToolStore } from '@/stores/useToolStore';
+import { getLinkTo } from '@/utils/routeUtils';
 import {
+  Button,
   Chatbot,
   Footer,
+  LanguageButton,
   MatomoTracker,
   NavigationBar,
   NoteStack,
@@ -16,10 +21,10 @@ import {
   SkipLink,
   useNoteStack,
 } from '@jod/design-system';
-import { JodMenu } from '@jod/design-system/icons';
+import { JodMenu, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router';
+import { Link, Outlet, ScrollRestoration, useLoaderData, useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { LogoutFormContext } from '.';
 
@@ -45,9 +50,10 @@ const Root = () => {
   const { note, clearNote } = useNoteStore(useShallow((state) => ({ note: state.note, clearNote: state.clearNote })));
   const isMouseInteraction = useInteractionMethod();
   const location = useLocation();
-  const { addNote } = useNoteStack();
+  const { addNote, removeNote } = useNoteStack();
   const [langMenuOpen, setLangMenuOpen] = React.useState(false);
   const [navMenuOpen, setNavMenuOpen] = React.useState(false);
+  const [feedbackVisible, setFeedbackVisible] = React.useState(false);
   const logoutForm = React.useRef<HTMLFormElement>(null);
   const langMenuButtonRef = React.useRef<HTMLLIElement>(null);
   const langMenuRef = useMenuClickHandler(() => setLangMenuOpen(false), langMenuButtonRef);
@@ -62,6 +68,8 @@ const Root = () => {
       return { siteId: 37, agent: agents.test[language as keyof typeof agents.test] };
     }
   }, [hostname, language]);
+
+  const { generateLocalizedPath } = useLocalizedRoutes();
 
   const logout = () => {
     resetToolStore();
@@ -105,29 +113,46 @@ const Root = () => {
     document.documentElement.setAttribute('lang', language);
   }, [language]);
 
-  const infoSlug = t('slugs.basic-information');
-  const moreInfoLinks = [
-    {
-      to: `${t('slugs.user-guide.index')}/${t('slugs.user-guide.what-is-the-service')}`,
-      label: t('about-us'),
+  const moreInfoLinks = ['about-service', 'privacy-and-cookies', 'data-sources', 'ai-usage', 'accessibility'].map(
+    (key) => {
+      const slug = t(`slugs.${key}`);
+      return {
+        href: `/${language}/${slug}`,
+        label: t(`footer.more-info-links.${key}`),
+      };
     },
-    {
-      to: `${infoSlug}/${t('slugs.privacy-policy')}`,
-      label: t('privacy-policy-and-cookies'),
-    },
-    {
-      to: `${infoSlug}/${t('slugs.data-sources')}`,
-      label: t('data-sources'),
-    },
-    {
-      to: `${infoSlug}/${t('slugs.about-ai')}`,
-      label: t('about-ai'),
-    },
-    {
-      to: `${infoSlug}/${t('slugs.accessibility-statement')}`,
-      label: t('accessibility-statement'),
-    },
-  ];
+  );
+
+  const [visibleBetaFeedback, setVisibleBetaFeedback] = React.useState(true);
+
+  React.useEffect(() => {
+    if (visibleBetaFeedback) {
+      addNote({
+        title: t('beta.note.title'),
+        description: t('beta.note.description'),
+        variant: 'feedback',
+        onCloseClick: () => {
+          setVisibleBetaFeedback(false);
+          removeNote('beta-feedback');
+        },
+        readMoreComponent: (
+          <Button
+            size="sm"
+            variant="white"
+            label={t('beta.note.to-feedback')}
+            icon={<JodOpenInNew />}
+            iconSide="right"
+            LinkComponent={getLinkTo('https://link.webropolsurveys.com/S/F27EA876E86B2D74', {
+              useAnchor: true,
+              target: '_blank',
+            })}
+          />
+        ),
+        permanent: false,
+        id: 'beta-feedback',
+      });
+    }
+  }, [t, addNote, visibleBetaFeedback, removeNote]);
 
   return (
     <div className="flex flex-col min-h-screen bg-bg-gray" data-testid="app-root">
@@ -144,20 +169,30 @@ const Root = () => {
             <button
               onClick={() => setNavMenuOpen(!navMenuOpen)}
               aria-label={t('open-menu')}
-              className="flex flex-col sm:flex-row sm:gap-3 justify-center items-center select-none cursor-pointer"
+              className="flex flex-col md:flex-row gap-2 md:gap-3 justify-center items-center select-none cursor-pointer"
               data-testid="open-nav-menu"
             >
               <JodMenu className="mx-auto" />
-              <span className="md:pr-3 sm:text-button-sm text-[12px]">{t('menu')}</span>
+              <span className="md:text-[14px] sm:text-[12px] text-[10px]">{t('menu')}</span>
             </button>
           }
           languageButtonComponent={
             <LanguageButton
+              dataTestId="language-button"
               onClick={() => setLangMenuOpen(!langMenuOpen)}
               langMenuOpen={langMenuOpen}
               menuRef={langMenuRef}
               onMenuBlur={handleBlur}
               onMenuClick={() => setLangMenuOpen(false)}
+              language={language as LangCode}
+              supportedLanguageCodes={supportedLanguageCodes}
+              generateLocalizedPath={generateLocalizedPath}
+              LinkComponent={Link}
+              translations={{
+                fi: { change: 'Vaihda kieli.', label: langLabels.fi },
+                sv: { change: 'Andra språk.', label: langLabels.sv },
+                en: { change: 'Change language.', label: langLabels.en },
+              }}
             />
           }
           userButtonComponent={<UserButton onLogout={logout} />}
@@ -182,6 +217,19 @@ const Root = () => {
         </ServiceVariantProvider>
       </LogoutFormContext.Provider>
 
+      <Chatbot
+        agent={agent}
+        language={language}
+        header={t('chatbot.header')}
+        openWindowText={t('chatbot.open-window-text')}
+        agentName={t('chatbot.agent-name')}
+        errorMessage={t('chatbot.error-message')}
+        greeting={t('chatbot.greeting')}
+        textInputPlaceholder={t('chatbot.text-input-placeholder')}
+        disclaimer={t('chatbot.disclaimer')}
+        waitingmessage={t('chatbot.waiting-message')}
+      />
+
       <Footer
         language={language}
         okmLabel={t('footer.logos.okm-label')}
@@ -193,33 +241,23 @@ const Root = () => {
         moreInfoTitle={t('footer.more-info-title')}
         moreInfoDescription={t('footer.more-info-description')}
         moreInfoLinks={moreInfoLinks}
-        MoreInfoLinkComponent={NavLink}
         feedbackTitle={t('footer.feedback-title')}
         feedbackContent={t('footer.feedback-content')}
         feedbackButtonLabel={t('footer.feedback-button-label')}
-        feedbackBgImageClassName="bg-[url(@/../assets/home-1.avif)] bg-cover bg-[length:auto_auto] sm:bg-[length:auto_1000px] bg-[top_-0rem_right_-0rem] sm:bg-[top_-21rem_right_0rem]"
-        copyright={t('copyright')}
-        // eslint-disable-next-line no-console
-        feedbackOnClick={() => console.log('feedbackOnClick')}
-        data-testid="app-footer"
+        feedbackOnClick={() => setFeedbackVisible(true)}
+        feedbackBgImageClassName="bg-[url(@/../assets/feedback.jpg)] bg-cover bg-[50%_50%]"
+        copyright={t('footer.copyright')}
+        dataTestId="footer"
+      />
+      <FeedbackModal
+        isOpen={feedbackVisible}
+        onClose={() => setFeedbackVisible(false)}
+        section="Osaamispolkuni"
+        area="Alatunniste"
+        language={language as LangCode}
       />
       <Toaster />
       <ScrollRestoration />
-      <Chatbot
-        agent={agent}
-        language={language}
-        agentIcon={'/chatbot-icon.svg'}
-        header={t('chatbot.header')}
-        openWindowText={t('chatbot.open-window-text')}
-        agentName={t('chatbot.agent-name')}
-        errorMessage={t('chatbot.error-message')}
-        greeting={t('chatbot.greeting')}
-        textInputPlaceholder={t('chatbot.text-input-placeholder')}
-        textInputHelper={t('chatbot.text-input-helper')}
-        eraseChatHistory={t('chatbot.erase-chat-history')}
-        saveChatAsCsv={t('chatbot.save-chat-as-csv')}
-        close={t('chatbot.close')}
-      />
       <MatomoTracker trackerUrl="https://analytiikka.opintopolku.fi" siteId={siteId} pathname={location.pathname} />
     </div>
   );

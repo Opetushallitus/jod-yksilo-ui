@@ -6,13 +6,12 @@ import { filterValues } from '@/routes/Tool/utils.ts';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
-import { getLinkTo } from '@/utils/routeUtils';
 import { Button, EmptyState, Modal, Pagination, useMediaQueries } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { ToolCard } from '../components/ToolCard';
 import { getTypeSlug } from '../utils';
 
 const descriptionKeys = {
@@ -173,6 +172,7 @@ const Favorites = () => {
               handleFilterChange={handleFilterChange}
             />
           </SimpleNavigationList>
+          <ToolCard testId="favorites-go-to-tool" linkParams={`origin=favorites&filter=${getFilterValueForTools}`} />
         </div>
       }
     >
@@ -197,20 +197,6 @@ const Favorites = () => {
           <EmptyState text={t(descriptionKeys[selectedFilter])} data-testid="favorites-empty-state" />
         </div>
       )}
-
-      <div className="my-4">
-        <Button
-          LinkComponent={getLinkTo(
-            `/${language}/${t('slugs.tool.index')}?origin=favorites&filter=${getFilterValueForTools}`,
-          )}
-          label={t('profile.favorites.move-to-job-and-education-opportunities')}
-          icon={<JodArrowRight />}
-          iconSide="right"
-          variant="accent"
-          size="sm"
-          data-testid="favorites-go-to-tool"
-        />
-      </div>
 
       <div>
         {!lg && (
@@ -252,11 +238,8 @@ const Favorites = () => {
               to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}?origin=favorites`}
               description={getLocalizedText(mahdollisuus.tiivistelma)}
               from="favorite"
-              ammattiryhma={
-                mahdollisuus?.ammattiryhma
-                  ? getLocalizedText(ammattiryhmaNimet?.[mahdollisuus.ammattiryhma])
-                  : undefined
-              }
+              ammattiryhma={mahdollisuus?.ammattiryhma}
+              ammattiryhmaNimet={ammattiryhmaNimet}
               isFavorite={true}
               isLoggedIn={true}
               name={getLocalizedText(mahdollisuus.otsikko)}
@@ -294,6 +277,7 @@ const Favorites = () => {
           data-testid="favorites-pagination"
         />
       )}
+      {lg ? null : <ToolCard testId="favorites-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };

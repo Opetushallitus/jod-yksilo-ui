@@ -10,7 +10,14 @@ const Competences = () => {
     })),
   );
 
-  return <OsaamisSuosittelija onChange={setOsaamiset} value={osaamiset} hideTextAreaLabel />;
+  return (
+    <OsaamisSuosittelija
+      onChange={setOsaamiset}
+      value={osaamiset.filter((o) => o.tyyppi === 'KARTOITETTU')}
+      tagHeadingClassName="bg-white"
+      hideTextAreaLabel
+    />
+  );
 };
 
 export default Competences;

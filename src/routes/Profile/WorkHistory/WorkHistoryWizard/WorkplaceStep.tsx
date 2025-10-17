@@ -47,7 +47,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
             label={t('work-history.employer')}
             {...register(`nimi.${language}` as const)}
             placeholder={t('profile.work-history.modals.workplace-placeholder')}
-            help={t('profile.work-history.modals.workplace-help')}
+            requiredText={t('required')}
           />
           <FormError name={`nimi.${language}`} errors={errors} />
         </div>
@@ -56,6 +56,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
         <InputField
           label={t('work-history.job-description')}
           {...register(`toimenkuvat.${toimenkuva}.nimi.${language}` as const)}
+          requiredText={t('required')}
           placeholder={t('profile.work-history.modals.job-description-placeholder')}
           help={t('profile.work-history.modals.job-description-help')}
         />
@@ -74,6 +75,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
                   trigger(`toimenkuvat.${toimenkuva}.loppuPvm`);
                 }}
                 placeholder={t('date-placeholder')}
+                requiredText={t('required')}
                 translations={getDatePickerTranslations(
                   t('datepicker', { returnObjects: true }) as DatePickerTranslations,
                 )}

@@ -2,7 +2,7 @@ import opintopolkuLogo from '@/../assets/opintopolku.svg';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import { EducationJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
-import RateAiContent from '@/components/RateAiContent/RateAiContent';
+import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import type { LoaderData } from '@/routes/EducationOpportunity/loader';
 import type { JakaumaKey } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
@@ -34,13 +34,17 @@ const EducationOpportunity = () => {
       : t('education-opportunity.duration.average-years', { count: Math.round(kesto.mediaani / 12) });
   }, [kesto?.mediaani, t]);
 
-  const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
+  const kartoitetutKiinnostuksetUris = useToolStore(
+    useShallow((state) =>
+      state.kiinnostukset.filter((k) => k.tyyppi === 'KARTOITETTU').map((osaaminen) => osaaminen.id),
+    ),
+  );
   const competencesTableData = React.useMemo(
     () =>
       osaamiset
-        .map((competence) => ({ ...competence, profiili: omatOsaamisetUris?.includes(competence.uri) }))
+        .map((competence) => ({ ...competence, profiili: kartoitetutKiinnostuksetUris?.includes(competence.uri) }))
         .sort(sortByProperty(`nimi.${language}`)),
-    [osaamiset, language, omatOsaamisetUris],
+    [osaamiset, language, kartoitetutKiinnostuksetUris],
   );
 
   const opintopolkuUrl = React.useMemo(() => new URL(`https://opintopolku.fi/konfo/${language}/haku`).href, [language]);
@@ -68,23 +72,15 @@ const EducationOpportunity = () => {
       content: (
         <div className="flex flex-col gap-6 grow">
           <span className="font-arial">{t('education-opportunity.competences.description')}</span>
-          <CompareCompetencesTable rows={competencesTableData} />
-          {!sm && (
-            <RateAiContent
-              // eslint-disable-next-line no-console
-              onDislike={(value) => console.log('not implemented', value)}
-              // eslint-disable-next-line no-console
-              onLike={() => console.log('not implemented')}
-              variant="opportunity"
-            />
-          )}
+          <CompareCompetencesTable rows={competencesTableData} mode="kiinnostus" />
+          {!sm && <RateAiContent variant="mahdollisuus" area="Koulutusmahdollisuus" />}
         </div>
       ),
     },
     {
       navTitle: t('education-opportunity.education-characteristics'),
       showNavTitle: false,
-      showInDevOnly: true,
+      showInDevOnly: false,
       showDivider: sm,
       content: (
         <div className="bg-white p-6 flex flex-col gap-7 mb-8">
@@ -111,15 +107,16 @@ const EducationOpportunity = () => {
           </div>
           <h3 className="text-heading-2 mb-4">{t('education-opportunity.opintopolku.title')}</h3>
           <p>{t('education-opportunity.opintopolku.description')}</p>
-          <Button
-            data-testid="education-opportunity-open-opintopolku"
-            size="sm"
-            className="w-fit mt-7"
-            label={t('education-opportunity.opintopolku.button-label')}
-            icon={<JodOpenInNew />}
-            iconSide="right"
-            LinkComponent={getLinkTo(opintopolkuUrl, { useAnchor: true, target: '_blank' })}
-          />
+          <div className="mt-7">
+            <Button
+              data-testid="education-opportunity-open-opintopolku"
+              size="sm"
+              label={t('education-opportunity.opintopolku.button-label')}
+              icon={<JodOpenInNew />}
+              iconSide="right"
+              LinkComponent={getLinkTo(opintopolkuUrl, { useAnchor: true, target: '_blank' })}
+            />
+          </div>
         </div>
       ),
     },

@@ -5,12 +5,11 @@ export { ConfirmDialogWrapper, type ConfirmDialogWrapperProps } from './ConfirmD
 export { ExperienceTable } from './ExperienceTable/ExperienceTable';
 export { type ExperienceTableRowData } from './ExperienceTable/ExperienceTableRow';
 export { FavoriteToggle } from './FavoriteToggle/FavoriteToggle';
+export { FeedbackModal } from './FeedbackModal/FeedbackModal';
 export { FormError } from './FormError/FormError';
 export { TouchedFormError } from './FormError/TouchedFormError';
 export { HelpingToolLinkItem, HelpingToolProfileLinkItem } from './HelpingToolsContent';
 export type { HelpingToolLinkItemProps, HelpingToolProfileLinkItemProps } from './HelpingToolsContent';
-export { LanguageButton } from './LanguageButton/LanguageButton';
-export { LanguageMenu } from './LanguageMenu/LanguageMenu';
 export { MainLayout } from './MainLayout/MainLayout';
 export { SimpleNavigationList } from './MainLayout/SimpleNavigationList';
 export { OpportunityCard } from './OpportunityCard/OpportunityCard';

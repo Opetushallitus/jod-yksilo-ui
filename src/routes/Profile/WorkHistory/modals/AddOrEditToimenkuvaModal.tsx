@@ -70,6 +70,7 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
         <InputField
           label={t('work-history.job-description')}
           {...register(`nimi.${language}` as const)}
+          requiredText={t('required')}
           placeholder={t('profile.work-history.modals.job-description-placeholder')}
           help={t('profile.work-history.modals.job-description-help')}
         />
@@ -84,6 +85,7 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
                 label={t('started')}
                 {...field}
                 placeholder={t('date-placeholder')}
+                requiredText={t('required')}
                 translations={getDatePickerTranslations(
                   t('datepicker', { returnObjects: true }) as DatePickerTranslations,
                 )}

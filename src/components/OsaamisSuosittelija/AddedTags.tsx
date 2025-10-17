@@ -25,7 +25,7 @@ const AddedTags = ({ osaamiset, lahdetyyppi, onClick }: AddedTagProps) =>
       <Tag
         key={osaaminen.id}
         label={getLocalizedText(osaaminen.nimi)}
-        title={getLocalizedText(osaaminen.kuvaus)}
+        tooltip={getLocalizedText(osaaminen.kuvaus)}
         sourceType={sourceType}
         onClick={onClick(osaaminen.id)}
         variant="added"

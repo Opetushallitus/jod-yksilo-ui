@@ -23,7 +23,8 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { CounselingBanner } from '../CounselingBanner/CounselingBanner';
-import RateAiContent from '../RateAiContent/RateAiContent';
+import { IconHeading } from '../IconHeading';
+import { RateAiContent } from '../RateAiContent/RateAiContent';
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
 export interface OpportunityDetailsSection {
@@ -124,16 +125,13 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
       <>
         <PageNavigation menuSection={menuSection} activeIndicator="dot" className={'mb-4'} />
         <RateAiContent
-          // eslint-disable-next-line no-console
-          onDislike={(value) => console.log('not implemented', value)}
-          // eslint-disable-next-line no-console
-          onLike={() => console.log('not implemented')}
-          variant="opportunity"
+          variant="mahdollisuus"
+          area={tyyppi === 'TYOMAHDOLLISUUS' ? 'Työmahdollisuus' : 'Koulutusmahdollisuus'}
         />
         <CounselingBanner />
       </>
     );
-  }, [t, sections, filterDevSections]);
+  }, [t, sections, filterDevSections, tyyppi]);
 
   const typeTooltip = React.useMemo(() => {
     if (tyyppi === 'TYOMAHDOLLISUUS') {
@@ -169,21 +167,17 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
       {title ? <title>{title}</title> : null}
       <div className="flex flex-col">
         {!sm && OpportunityType}
-        {/* Header: Icon & title */}
-        <div className="flex gap-x-4 items-center">
-          <span className="flex items-center justify-center size-9 aspect-square rounded-full bg-secondary-1-dark-2">
-            <TitleIcon tyyppi={tyyppi} aineisto={jobData.aineisto} />
-          </span>
-          {title ? (
-            <h1 className="text-hero-mobile sm:text-hero text-secondary-1-dark-2 hyphens-auto text-pretty break-all">
-              {title}
-            </h1>
-          ) : null}
-          {showAiInfoInTitle && (
-            <span className="print:hidden size-6">
-              <AiInfo />
-            </span>
-          )}
+        <div>
+          <IconHeading
+            icon={<TitleIcon tyyppi={tyyppi} aineisto={jobData.aineisto} />}
+            title={
+              <span>
+                {title}
+                {showAiInfoInTitle && <span className="relative print:hidden ml-2">{<AiInfo />}</span>}
+              </span>
+            }
+            dataTestId="opportunity-details-title"
+          />
         </div>
 
         <div className="flex justify-between flex-wrap gap-y-5 sm:mt-6 sm:mb-8">
@@ -218,7 +212,6 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           </div>
         </div>
       </div>
-
       {/* Sections */}
       {!!data &&
         sections.filter(filterDevSections).map((section) => (

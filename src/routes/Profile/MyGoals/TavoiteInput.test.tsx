@@ -17,7 +17,7 @@ vi.mock('@/api/client', () => ({
 }));
 
 const mockUpsertPaamaara = vi.fn();
-const mockT = (key: string) => key;
+const mockT = vi.fn().mockImplementation((key: string) => key);
 const mockLanguage = 'fi';
 
 function doRender(paamaara = { id: 1, tavoite: { fi: 'alkuarvo', sv: 'startvärde' } }) {
@@ -37,9 +37,11 @@ describe('TavoiteInput', () => {
     (client.PUT as Mock).mockResolvedValue({});
   });
 
-  it('renders textarea with initial value', () => {
+  it('renders textarea with initial value', async () => {
     const { getByLabelText } = doRender();
-    expect(getByLabelText('profile.my-goals.goal-description')).toHaveValue('alkuarvo');
+    await waitFor(() => {
+      expect(getByLabelText('profile.my-goals.goal-description')).toHaveValue('alkuarvo');
+    });
   });
 
   it('calls save on debounced input change', async () => {
@@ -117,7 +119,9 @@ describe('TavoiteInput', () => {
     expect(getByLabelText('profile.my-goals.goal-description')).toHaveValue('suomi');
     language = 'sv';
     rerender(<TavoiteInput paamaara={paamaara as any} />);
-    expect(getByLabelText('profile.my-goals.goal-description')).toHaveValue('ruotsi');
+    await waitFor(() => {
+      expect(getByLabelText('profile.my-goals.goal-description')).toHaveValue('ruotsi');
+    });
   });
 
   it('shows save-in-progress and saved texts', async () => {

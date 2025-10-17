@@ -77,14 +77,13 @@ export const GroupBySource = ({
         return (
           <div key={competence} className="flex flex-col mb-11">
             <Accordion
-              lang={language}
               underline
               title={
                 <div className={`truncate text-heading-3 ${getTextClassByCompetenceSourceType(competence)}`}>
                   {t(`my-competences.by-${competence}`)}
                 </div>
               }
-              titleText=""
+              ariaLabel={t(`my-competences.by-${competence}`)}
             >
               {(Array.isArray(filters[competence]) || localizedMuutOsaamisetVapaateksti.length > 0) &&
               filters[competence].some((filter) => filter.checked) ? (
@@ -92,21 +91,22 @@ export const GroupBySource = ({
                   {osaamiset.filter(
                     (val) => val.lahde.tyyppi === competence && isOsaaminenVisible(competence, val.lahde.id),
                   ).length > 0 && (
-                    <div className="flex flex-wrap gap-4">
+                    <ul className="flex flex-wrap gap-4">
                       {osaamiset.map((val) => {
                         const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
-                        const title = val.osaaminen.kuvaus[locale];
+                        const tooltip = val.osaaminen.kuvaus[locale];
                         return val.lahde.tyyppi === competence && isOsaaminenVisible(competence, val.lahde.id) ? (
-                          <Tag
-                            label={label}
-                            title={title}
-                            key={val.id}
-                            variant="presentation"
-                            sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
-                          />
+                          <li key={val.id}>
+                            <Tag
+                              label={label}
+                              tooltip={tooltip}
+                              variant="presentation"
+                              sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
+                            />
+                          </li>
                         ) : null;
                       })}
-                    </div>
+                    </ul>
                   )}
                   {competence === 'MUU_OSAAMINEN' && localizedMuutOsaamisetVapaateksti.length > 0 && (
                     <div className="flex flex-col bg-white px-5 py-4 rounded gap-3 border-2 border-[#CCC]">

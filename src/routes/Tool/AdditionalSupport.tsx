@@ -98,9 +98,7 @@ const AdditionalSupport = () => {
             data-testid="additional-support-interests"
           />
         </ul>
-        <p className="text-body-sm sm:text-body-md mb-6 font-arial text-secondary-gray">
-          {t('tool.tools.help-text-2')}
-        </p>
+        <p className="text-body-sm sm:text-body-md mb-6 font-arial text-primary-gray">{t('tool.tools.help-text-2')}</p>
         <ul className="flex flex-col gap-5">
           <HelpingToolExternalLinkItem
             href={`/urataidot/${lng}`}

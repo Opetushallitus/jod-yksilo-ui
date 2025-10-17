@@ -1,4 +1,4 @@
-import { RoundButton, useMediaQueries } from '@jod/design-system';
+import { tidyClasses, useMediaQueries } from '@jod/design-system';
 import { JodSettings } from '@jod/design-system/icons';
 
 interface FilterButtonProps {
@@ -36,7 +36,6 @@ export const FilterButton = ({
     </button>
   ) : (
     <RoundButton
-      size="sm"
       bgColor="white"
       label={label}
       hideLabel
@@ -46,3 +45,88 @@ export const FilterButton = ({
     />
   );
 };
+
+interface RoundButtonProps {
+  /** Text shown on the button */
+  label: string;
+  /** Hide label */
+  hideLabel?: boolean;
+  /** Callback fired on tap/click of the button */
+  onClick: () => void;
+  /** Button disabled for any actions */
+  disabled?: boolean;
+  /** Selected */
+  selected?: boolean;
+  /** Icon shown on the link */
+  icon: React.ReactNode;
+  /** Background color */
+  bgColor?: 'gray' | 'white';
+  dataTestId?: string;
+}
+
+const RoundButton = ({
+  dataTestId,
+  label,
+  hideLabel = false,
+  onClick,
+  disabled = false,
+  selected = false,
+  icon,
+  bgColor = 'gray',
+}: RoundButtonProps) => {
+  const bgColorClass = tidyClasses([
+    !selected && bgColor === 'gray' ? 'bg-bg-gray-2' : '',
+    !selected && bgColor === 'white' ? 'bg-white' : '',
+  ]);
+
+  return (
+    <button
+      aria-label={label}
+      disabled={disabled}
+      type="button"
+      onClick={onClick}
+      data-testid={dataTestId}
+      className={tidyClasses([
+        'cursor-pointer',
+        disabled ? 'cursor-not-allowed opacity-50' : '',
+        'group',
+        'flex',
+        'flex-col',
+        'justify-center',
+        'items-center',
+        'gap-2',
+      ])}
+    >
+      <div
+        aria-hidden
+        className={tidyClasses([
+          'size-7',
+          selected ? 'bg-accent' : bgColorClass,
+          selected ? 'text-white' : 'text-primary-gray group-hover:text-accent',
+          'rounded-full',
+          'flex',
+          'items-center',
+          'justify-center',
+          'select-none',
+        ])}
+      >
+        {icon}
+      </div>
+      <LabelPart label={label} hideLabel={hideLabel} selected={selected} />
+    </button>
+  );
+};
+
+const LabelPart = ({ label, hideLabel, selected }: Pick<RoundButtonProps, 'label' | 'hideLabel' | 'selected'>) => (
+  <span
+    className={tidyClasses([
+      hideLabel ? 'hidden' : '',
+      selected ? 'text-accent' : 'text-primary-gray',
+      'text-button-md',
+      'group-hover:text-accent',
+      'group-hover:underline',
+    ])}
+  >
+    {label}
+  </span>
+);

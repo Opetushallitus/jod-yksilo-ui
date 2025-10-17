@@ -1,16 +1,14 @@
-import { components } from '@/api/schema';
-import { Button, HeroCard, tidyClasses as tc } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
+import betaPlanImageDesktop from '@/../assets/gra_front_timeline_2.svg';
+import betaPlanImageMobile from '@/../assets/gra_front_timeline_mob_2.svg';
+import heroSrc from '@/../assets/yksilo-hero.jpg';
+import type { components } from '@/api/schema';
+import { getLinkTo } from '@/utils/routeUtils';
+import { Button, HeroCard, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
+import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link, useRouteLoaderData } from 'react-router';
 import { generateProfileLink } from '../Profile/utils';
-
-const LinkComponent = (to: string) => {
-  const Component = ({ children }: { children: React.ReactNode }) => <Link to={to}>{children}</Link>;
-  Component.displayName = 'LinkComponent';
-  return Component;
-};
 
 const FeatureBox = ({ title }: { title: string }) => {
   const { t } = useTranslation();
@@ -27,15 +25,53 @@ interface ContainerProps {
 }
 
 const FullWidthContainer = ({ className = '', children }: ContainerProps) => (
-  <div className={tc(['bg-no-repeat', 'bg-[length:1440px_auto]', 'flex', 'justify-start', 'py-8', className])}>
-    <div className="w-[1092px] mx-auto px-5 sm:px-6">{children}</div>
+  <div className={tc(['flex', 'justify-start', 'py-8', className])}>
+    <div className="w-[1092px] mx-auto px-5 sm:px-6 xl:px-0">{children}</div>
   </div>
 );
 const Content = ({ className = '', title, children }: ContainerProps & { title?: string }) => {
   const { t } = useTranslation();
   return (
-    <div className={tc(['mx-auto', 'max-w-[1092px]', 'py-7', 'px-5 sm:px-6', 'flex', 'flex-col', 'gap-7', className])}>
+    <div
+      className={tc([
+        'mx-auto',
+        'max-w-[1092px]',
+        'py-7',
+        'px-5 sm:px-6 xl:px-0',
+        'flex',
+        'flex-col',
+        'gap-7',
+        className,
+      ])}
+    >
       {title && <h2 className="text-heading-1">{t(`home.${title}`)}</h2>}
+      {children}
+    </div>
+  );
+};
+
+const CardContainer = ({ className = '', children, ref }: ContainerProps & { ref?: React.Ref<HTMLDivElement> }) => {
+  return (
+    <div
+      className={tc([
+        'mx-auto',
+        'max-w-[1092px]',
+        'px-5',
+        'sm:px-6',
+        'xl:px-0',
+        'mb-6',
+        'lg:mb-8',
+        'relative',
+        'flex',
+        'flex-col',
+        'lg:grid',
+        'lg:grid-cols-2',
+        'gap-6',
+        'lg:gap-8',
+        className,
+      ])}
+      ref={ref}
+    >
       {children}
     </div>
   );
@@ -46,7 +82,25 @@ const Home = () => {
     t,
     i18n: { language },
   } = useTranslation();
+
+  const { sm } = useMediaQueries();
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
+
+  const firstCardRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (firstCardRef.current) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.target.isSameNode(firstCardRef.current) && firstCardRef.current?.style) {
+            firstCardRef.current.style.marginTop = `-${(2 * entry.contentRect.height) / 3}px`;
+          }
+        }
+      });
+      resizeObserver.observe(firstCardRef.current);
+      return () => resizeObserver.disconnect();
+    }
+  }, []);
 
   const preferencesLink = React.useMemo(
     () => generateProfileLink(['slugs.profile.preferences'], data, language, t),
@@ -58,20 +112,22 @@ const Home = () => {
     <main role="main" className="mx-auto w-full max-w-(--breakpoint-xl) bg-white" id="jod-main" data-testid="home-page">
       <title>{t('osaamispolku')}</title>
 
-      <FullWidthContainer
-        className={tc([
-          'h-[640px]',
-          'bg-[url(@/../assets/pre-launch-1.avif)] bg-[center_-45px]',
-          'items-end sm:items-center',
-          'pb-6 sm:pb-0',
-        ])}
-      >
-        <div className="max-w-2xl">
-          <HeroCard title={t('home.hero-title')} content={t('home.hero-content')} />
-        </div>
-      </FullWidthContainer>
+      <img
+        src={heroSrc}
+        alt=""
+        role="none"
+        className="w-(--breakpoint-xl) sm:h-[617px] h-[calc(100vh-104px)] object-cover xl:object-[50%_50%] lg:object-[60%_50%] md:object-[67%_50%] sm:object-[71%_50%] object-[72%_50%]"
+        data-testid="home-hero"
+      />
 
-      <Content className="flex sm:flex-row gap-8 justify-evenly flex-col">
+      <CardContainer ref={firstCardRef} className="relative">
+        <HeroCard
+          title={t('home.hero-title')}
+          content={t('home.hero-content')}
+          backgroundColor="var(--ds-color-secondary-1-dark-2)"
+        />
+      </CardContainer>
+      <CardContainer>
         <HeroCard
           buttonLabel={t('home.explore-opportunities')}
           content={t('home.card-1-content')}
@@ -79,6 +135,7 @@ const Home = () => {
           size="sm"
           title={t('home.card-1-title')}
           to={toolLink}
+          backgroundColor="var(--ds-color-secondary-1-dark)"
         />
         <HeroCard
           buttonLabel={t('home.create-own-profile')}
@@ -87,12 +144,36 @@ const Home = () => {
           size="sm"
           title={t('home.card-2-title')}
           to={preferencesLink.to}
+          backgroundColor="var(--ds-color-secondary-1-dark)"
         />
-      </Content>
+      </CardContainer>
 
       <Content title="beta">
-        <p className="text-body-lg">{t('home.beta-content')}</p>
-        <div className="h-[200px] bg-bg-gray-2" />
+        <p className="text-body-lg max-w-[716px]">
+          <Trans
+            i18nKey="home.beta-content"
+            components={{
+              Icon: <JodOpenInNew size={18} className="ml-1" />,
+              CustomLink: (
+                <Link
+                  to="https://wiki.eduuni.fi/spaces/JOD/pages/641042258/Osaamispolun+suljettu+betatestaus"
+                  className="inline-flex underline text-accent items-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              ),
+            }}
+          />
+        </p>
+        <div className="flex justify-center aspect-auto">
+          {
+            <img
+              className="max-w-[372px] sm:max-w-full"
+              src={sm ? betaPlanImageDesktop : betaPlanImageMobile}
+              alt={t('home.beta')}
+            />
+          }
+        </div>
       </Content>
 
       <Content title="features.title">
@@ -109,7 +190,7 @@ const Home = () => {
             variant="accent"
             icon={<JodArrowRight />}
             iconSide="right"
-            LinkComponent={LinkComponent(toolLink)}
+            LinkComponent={getLinkTo(toolLink)}
             data-testid="home-explore-opportunities"
           />
           <Button
@@ -117,13 +198,13 @@ const Home = () => {
             variant="accent"
             icon={<JodArrowRight />}
             iconSide="right"
-            LinkComponent={LinkComponent(preferencesLink.to)}
+            LinkComponent={getLinkTo(preferencesLink.to)}
             data-testid="home-create-profile"
           />
         </div>
       </Content>
 
-      <FullWidthContainer className="bg-[url(@/../assets/home-1.avif)] bg-[center_-325px] items-center">
+      <FullWidthContainer className="bg-[url(@/../assets/palveluhakemisto.jpg)] bg-cover bg-[50%_50%]">
         <div className="max-w-2xl">
           <HeroCard
             size="sm"
@@ -131,15 +212,82 @@ const Home = () => {
             title={t('home.need-personal-guidance')}
             buttonLabel={t('home.go-to-service-directory')}
             to="https://www.suomi.fi/palveluhakemisto/osaamispolku"
-            backgroundColor="#00A8B3"
+            backgroundColor="#00818A"
             LinkComponent={Link}
           />
         </div>
       </FullWidthContainer>
 
-      <Content title="how-compentency-path-helps-you">
-        <p className="text-body-lg">{t('home.how-compentency-path-helps-you-content')}</p>
-        <div className="h-[200px] bg-bg-gray-2" />
+      <Content title="how-competency-path-helps-you" className="mb-[128px] mt-11">
+        <p className="text-body-lg whitespace-pre-line max-w-[716px]">
+          {t('home.how-competency-path-helps-you-content')}
+        </p>
+        <div className="flex flex-col sm:flex-row gap-7 sm:flex-wrap">
+          <div className="flex flex-col gap-5 md:max-w-[320px]">
+            <div className="md:text-heading-3 text-heading-3-mobile ">
+              {t('home.how-competency-path-helps-you-opintopolku-title')}
+            </div>
+            <div>{t('home.how-competency-path-helps-you-opintopolku-description')}</div>
+            <div className="mt-auto">
+              <Button
+                size="lg"
+                variant="accent"
+                className="mt-5"
+                serviceVariant="yksilo"
+                label={t('home.how-competency-path-helps-you-opintopolku-link')}
+                icon={<JodOpenInNew />}
+                iconSide="right"
+                LinkComponent={getLinkTo(`https://opintopolku.fi/konfo/${language}/`, {
+                  useAnchor: true,
+                  target: '_blank',
+                })}
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-5 md:max-w-[320px]">
+            <div className="sm:text-heading-3 text-heading-3-mobile">
+              {t('home.how-competency-path-helps-you-tmt-title')}
+            </div>
+            <div>{t('home.how-competency-path-helps-you-tmt-description')}</div>
+            <div className="mt-auto">
+              <Button
+                size="lg"
+                variant="accent"
+                className="mt-5"
+                serviceVariant="yksilo"
+                label={t('home.how-competency-path-helps-you-tmt-link')}
+                icon={<JodOpenInNew />}
+                iconSide="right"
+                LinkComponent={getLinkTo(`https://tyomarkkinatori.fi/${language === 'fi' ? '' : language}`, {
+                  useAnchor: true,
+                  target: '_blank',
+                })}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-5 md:max-w-[320px]">
+            <div className="sm:text-heading-3 text-heading-3-mobile">
+              {t('home.how-competency-path-helps-you-opinfi-title')}
+            </div>
+            <div>{t('home.how-competency-path-helps-you-opinfi-description')}</div>
+            <div className="mt-auto">
+              <Button
+                size="lg"
+                variant="accent"
+                className="mt-5"
+                serviceVariant="yksilo"
+                label={t('home.how-competency-path-helps-you-opinfi-link')}
+                icon={<JodOpenInNew />}
+                iconSide="right"
+                LinkComponent={getLinkTo(`https://opin.fi/${language === 'fi' ? '' : language}`, {
+                  useAnchor: true,
+                  target: '_blank',
+                })}
+              />
+            </div>
+          </div>
+        </div>
       </Content>
     </main>
   );

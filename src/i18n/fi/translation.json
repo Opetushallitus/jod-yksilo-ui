@@ -1,34 +1,34 @@
 {
-  "about-ai": "Tietoa tekoälyn käytöstä",
-  "about-us": "Tietoa palvelusta",
-  "about-us-and-user-guide": "Tietoa palvelusta ja käyttöohjeet",
   "accept": "Hyväksy",
   "accept-preferences": "Hyväksy asetukset",
-  "accessibility-statement": "Saavutettavuusseloste",
   "add": "Lisää",
   "add-favorite": "Tallenna suosikiksi",
   "added": "Lisätty",
   "ai-info-tooltip": {
-    "ai-and-compentency-path": "Tekoäly ja Osaamispolku",
     "aria-description": "Tietoa tekoälyn käytöstä",
     "description": "Olemme käyttäneet tämän sisällön luomisessa hyödyksi kielimallia. Lisää tietoa voit lukea <CustomLink>Tekoäly ja Osaamispolku<Icon></Icon></CustomLink>-sivulta.",
     "title": "Tekoälyn avulla generoitu sisältö"
   },
-  "allow": "Sallin",
+  "allow": "Salli",
   "back": "Takaisin",
-  "basic-information": "Perustiedot",
+  "beta": {
+    "note": {
+      "description": "Kerro mielipiteesi ja auta meitä kehittämään palvelua.",
+      "title": "Kokeile palvelua",
+      "to-feedback": "Siirry kyselyyn"
+    }
+  },
+  "breadcrumb": "Murupolku",
   "cancel": "Peruuta",
   "chatbot": {
     "agent-name": "Neuvontabotti",
-    "close": "Sulje",
-    "erase-chat-history": "Tyhjennä keskusteluhistoria",
     "error-message": "Tapahtui jokin virhe.",
-    "greeting": "Hei, olen Osaamispolun neuvontabotti.",
+    "disclaimer": "Älä syötä henkilötietojasi neuvontabotille.",
+    "greeting": "Hei, olen Osaamispolun neuvontabotti. Voin auttaa sinua Osaamispolkuun liittyvissä kysymyksissä.<br/><br/>Olen testiversio ja harjoittelen vielä, joten en osaa vastata kaikkiin kysymyksiin. Kysy silti, sillä opin koko ajan lisää. Esittämäsi kysymykset auttavat minua kehittymään.<br/><br/>Esitäthän yhden kysymyksen kerrallaan. Pidä kysymykset lyhyinä ja selkeinä, niin pystyn auttamaan paremmin. En muista aiempia kysymyksiä tai vastauksia. Ethän kirjoita henkilötietojasi chattiin. Miten voin auttaa?",
     "header": "Neuvontabotti",
     "open-window-text": "Kysy neuvoa?",
-    "save-chat-as-csv": "Tallenna keskustelu CSV-tiedostona",
-    "text-input-helper": "Ole hyvä ja odota edellisen vastauksen valmistumista.",
-    "text-input-placeholder": "Kirjoita kysymyksesi tähän"
+    "text-input-placeholder": "Kirjoita kysymyksesi tähän",
+    "waiting-message": "Haetaan tietoa..."
   },
   "choose": "Valitse",
   "close": "Sulje",
@@ -39,16 +39,14 @@
   "competences-identify-failed": "Tekoälyn osaamistunnistus epäonnistui.",
   "competences-identifying": "Voit muokata koulutusta, kun osaamiset ovat latautuneet.",
   "competences-of-your-choice": "Valitut osaamiset",
-  "competency-path-portal": "Osaamispolkuportaali",
+  "competency-path-portal": "Osaamispolun etusivu",
   "content": "Sisältö",
   "cookie-policy": "Evästekäytäntö",
   "cookies": "Evästeet",
-  "copyright": "© JOD 2024. Kaikki oikeudet pidätetään.",
   "count-competences_one": "{{count}} osaaminen",
   "count-competences_other": "{{count}} osaamista",
   "create-path": "Luo polku",
   "data-not-available": "Tietoja ei ole saatavilla",
-  "data-sources": "Datalähteet",
   "date-or-continues-placeholder": "pp.kk.vvvv tai jatkuu",
   "date-placeholder": "pp.kk.vvvv",
   "datepicker": {
@@ -115,14 +113,14 @@
     },
     "summary-modal": {
       "cancel-modal": {
-        "description": "Haluatko varmasti keskeyttää opintosuoritustesi tuonnin Opintopolusta.",
+        "description": "Haluatko varmasti keskeyttää opintosuoritustesi tuonnin Opintopolusta?",
         "title": "Peruuta tuonti"
       },
       "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
       "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
       "data-load-retry": "Yritä uudelleen",
       "data-loading": "Ladataan tietoja opintopolusta...",
-      "description": "Voit muokata koulutuksia tuotuasi ne osaamispolkuun osaamisprofiilissasi kohdassa koulutukset.",
+      "description": "Voit muokata koulutuksia tuotuasi ne Osaamispolkuun osaamisprofiilissasi kohdassa koulutukset.",
       "table-education": "Koulutukseni järjestäjä / koulutus",
       "table-header-checkbox": "Tuo valitut",
       "title": "Yhteenveto",
@@ -136,10 +134,10 @@
       "route": "Osaamiset"
     },
     "duration": {
-      "average-months_one": "Tutkinnon keskimääräinen kesto on {{count}} kuukausi.",
-      "average-months_other": "Tutkinnon keskimääräinen kesto on {{count}} kuukautta.",
-      "average-years_one": "Tutkinnon keskimääräinen kesto on {{count}} vuosi.",
-      "average-years_other": "Tutkinnon keskimääräinen kesto on {{count}} vuotta."
+      "average-months_one": "Koulutuksen keskimääräinen kesto on {{count}} kuukausi.",
+      "average-months_other": "Koulutuksen keskimääräinen kesto on {{count}} kuukautta.",
+      "average-years_one": "Koulutuksen keskimääräinen kesto on {{count}} vuosi.",
+      "average-years_other": "Koulutuksen keskimääräinen kesto on {{count}} vuotta."
     },
     "education-characteristics": "Koulutuksen erityispiirteitä",
     "of-educations": "ilmoitetuista koulutuksista.",
@@ -178,14 +176,60 @@
     "title": "Tapahtui virhe",
     "unexpected": "Tapahtui odottamaton virhe. Tämä voi johtua verkkoyhteyden katkeamisesta tai palvelun virheestä."
   },
+  "feedback": {
+    "cancel": "Peruuta",
+    "email-label": "Sähköpostiosoite",
+    "error": "Palautteen lähettäminen epäonnistui. Yritä uudelleen myöhemmin.",
+    "footer-handled": {
+      "ohjaajan": "Ohjaajan osio KEHA-keskuksessa,",
+      "osaamispolkuni": "Osaamispolkuni Opetushallituksessa,",
+      "tietopalvelu": "Tietopalvelu ja koko palvelu opetus- ja kulttuuriministeriössä."
+    },
+    "footer-info-1": "Kun lähetät palautetta, tallennamme palvelun tilatiedon, kuten mistä näkymästä palaute on lähetetty. Tilatietoa ei välitetä eteenpäin kolmansille osapuolille. Palautteita käytetään palvelun kehittämiseen ja vapaaehtoisesti jätettäviä yhteystietoja palautteisiin vastaamiseen.",
+    "footer-info-heading": "Palaute käsitellään osiosta riippuen seuraavasti:",
+    "footer-privacy-heading": "Lue lisää palautteiden käsittelijöiden tietosuojaseloisteista:",
+    "intro-1": "Anna palautetta palvelusta tai ilmoita teknisestä ongelmasta. Näin autat meitä palveluiden kehittämisessä.",
+    "intro-2": "Jos raportoit häiriötilanteesta, meitä auttaisi, että kerrot siitä mahdollisimman tarkasti.",
+    "intro-privacy": "Älä kirjoita palautteeseen henkilökohtaisia tietoja, kuten henkilötunnusta tai terveystietoja. Täytähän kaikki kentät, jotta voimme käsitellä palautteesi.",
+    "linkHrefs": {
+      "keha": "https://tyomarkkinatori.fi/tietoa-palvelusta/tietosuoja-ja-kayttoehdot/tietosuojaselosteet",
+      "okm": "https://okm.fi/tietoa-sivustosta#henkilotiedot",
+      "oph": "https://www.oph.fi/fi/tietosuoja"
+    },
+    "links": {
+      "keha": "KEHA-keskuksen asiakas- ja neuvontapalveluiden tietosuojaseloste",
+      "okm": "Opetus- ja kulttuuriministeriön tietosuojaseloste",
+      "oph": "Opetushallituksen tietosuojakäytäntö"
+    },
+    "message-label": "Palaute",
+    "section-question": "Mitä osiota palautteesi koskee?",
+    "sections": {
+      "koko-palvelu": "Koko palvelu tai muu palaute",
+      "ohjaajan-osio": "Ohjaajan osio",
+      "osaamispolkuni": "Osaamispolkuni",
+      "tietopalvelu": "Tietopalvelu"
+    },
+    "submit": "Lähetä",
+    "success": "Kiitos palautteestasi! Palautteesi auttaa meitä parantamaan palvelua.",
+    "title": "Anna palautetta",
+    "type-question": "Minkälaista palautetta haluat antaa?",
+    "types": {
+      "kehitysehdotus": "Kehitysehdotus",
+      "kehu": "Kehu",
+      "moite": "Moite",
+      "vika": "Tekninen vika tai ongelma"
+    },
+    "wants-contact": "Haluan, että minuun otetaan yhteyttä"
+  },
   "fit": "Sopivuus",
   "fit-of-result": "Tuloksen sopivuus",
   "footer": {
-    "cooperation-title": "Osaamipolku on toteutettu yhteistyössä seuraavien tahojen toimesta.",
+    "cooperation-title": "Osaamispolku on toteutettu yhteistyössä seuraavien tahojen toimesta",
+    "copyright": "© Osaamispolku 2025. Kaikki oikeudet pidätetään.",
     "feedback-button-label": "Anna palautetta",
-    "feedback-content": "Haluamme kehittää Osaamispolkua vastaamaan paremmin juuri sinun tarpeita. Anna meille palautetta ja huomiomme sen kehitystyössä.",
+    "feedback-content": "Haluamme kehittää Osaamispolkua vastaamaan paremmin juuri sinun tarpeitasi. Anna meille palautetta ja huomioimme sen kehitystyössä.",
     "feedback-title": "Kerro meille mitä pidit palvelusta!",
-    "funding-title": "Palvelu on rahoitettu Euroopan RFF-rahoituksella.",
+    "funding-title": "Palvelu on rahoitettu EU:n elpymis- ja palautumistukivälineellä (RRF)",
     "logos": {
       "keha-label": "KEHA-keskus",
       "okm-label": "Opetus- ja kulttuuriministeriö",
@@ -193,6 +237,13 @@
       "tem-label": "Työ- ja elinkeinoministeriö"
     },
     "more-info-description": "Mietityttääkö tietosuoja tai tekoälyn hyödyntäminen palvelussa? Alta löydät kootusti yleistä tietoa palvelusta ja sen käytöstä.",
+    "more-info-links": {
+      "about-service": "Tietoa palvelusta",
+      "accessibility": "Tietoa saavutettavuudesta",
+      "ai-usage": "Tietoa tekoälyn käytöstä",
+      "data-sources": "Datalähteet",
+      "privacy-and-cookies": "Tietosuojaseloste ja evästeet"
+    },
     "more-info-title": "Haluatko tietää lisää Osaamispolusta?"
   },
   "found": "Löytyi",
@@ -213,11 +264,11 @@
     "summary": "Yhteenveto",
     "theme-or-activity": "Teema / Toiminto"
   },
-  "front-page": "Etusivu",
+  "front-page": "Osaamispolkuni",
   "goals": "Tavoitteet",
   "home": {
-    "beta": "Osaamispolku Beta-vaihe",
-    "beta-content": "Tervetuloa testaamaan Osaamispolun Beta versiota. Beta versio julkaistaan rajoitetulle käyttäjäryhmälle testausta varten. Beta-vaihe auttaa kehittäjiä tunnistamaan ja korjaamaan mahdollisia ongelmia ennen lopullista julkaisua. Annathan meille palautetta ja autat kehittämään Osaamispolkua.",
+    "beta": "Osaamispolun beta-testausvaihe",
+    "beta-content": "Tervetuloa kokeilemaan Osaamispolun beta-versiota. Palvelu on testikäytössä, ja palautteesi auttaa meitä kehittämään sitä paremmaksi. <CustomLink>Lue lisää beta-vaiheesta<Icon></Icon></CustomLink> — mitä se sisältää ja mitä vielä on tulossa loppuvuoteen mennessä.",
     "card-1-content": "Löydä työ- ja koulutusmahdollisuuksia, jotka sopivat juuri sinulle.",
     "card-1-title": "Haluatko löytää sinulle sopivia vaihtoehtoja nopeasti?",
     "card-2-content": "Tunnista vahvuutesi ja kiinnostuksen kohteesi sekä tallenna työ- ja koulutushistoriasi.",
@@ -225,26 +276,35 @@
     "create-own-profile": "Luo oma osaamisprofiilisi",
     "explore-opportunities": "Tutki mahdollisuuksia",
     "features": {
-      "education-to-increase-skills": "Löytää koulutuksia osaamisesi kasvattamiseksi",
-      "education-to-increase-skills-content": "Tunnista vahvuutesi sekä kiinnostuksen kohteesi ja löydä niiden perusteella koulutusvaihtoehtoja, jotka sopivat juuri sinulle. Kirjautumalla palveluun voit tallentaa kiinnostavimmat koulutukset suosikeiksi.",
-      "explore-job-opportunities": "Tutkia työmahdollisuuksia osaamisellasi",
-      "explore-job-opportunities-content": "Tunnista vahvuutesi ja löydä niiden perusteella työmahdollisuuksia, jotka sopivat juuri sinulle. Kirjautumalla palveluun voit tallentaa kiinnostavimmat työmahdollisuudet suosikeiksi.",
+      "education-to-increase-skills": "Löytää koulutuksia osaamiseni kasvattamiseksi",
+      "education-to-increase-skills-content": "Tunnista vahvuutesi ja kiinnostuksesi, ja löydä sinulle sopivia koulutuksia sekä tallenna suosikkisi kirjautumalla palveluun.",
+      "explore-job-opportunities": "Tutkia työmahdollisuuksia osaamisellani",
+      "explore-job-opportunities-content": "Tunnista vahvuutesi ja löydä sinulle sopivia työmahdollisuuksia – voit myös tallentaa kiinnostavimmat vaihtoehdot kirjautumalla palveluun.",
       "map-opportunitites-to-change-jobs": "Kartoittaa mahdollisuuksia alan vaihtamiseen",
       "map-opportunitites-to-change-jobs-content": "Suunnittele koulutus- ja urapolkuasi, sekä seuraa edistymistäsi asettamasi päämäärän saavuttamiseen.",
-      "map-own-competences": "Kartoittaa omaa osaamista ja kiinnostuksen kohteita",
-      "map-own-competences-content": "Tunnista vahvuutesi ja kiinnostuksen kohteesi ja kaikki osaamiseesi sekä  kiinnostuksiisi liittyvät tiedot ovat nähtävillä yhdessä paikassa. Voit myös tallentaa työ- ja koulutushistoriasi palveluun.",
-      "title": "Osaamispolussa voit:"
+      "map-own-competences": "Kartoittaa omaa osaamista",
+      "map-own-competences-content": "Tunnista vahvuutesi ja kiinnostuksesi, ja näe kaikki osaamisesi sekä taustasi yhdessä paikassa.",
+      "title": "Osaamispolussa voit"
     },
     "go-to-service-directory": "Siirry palveluhakemistoon",
-    "hero-content": "Elämä on jatkuvaa muutosta ja uudistumista. Olipa kyse uran vaihdosta, uuden osaamisen oppimisesta tai henkilökohtaisen elämäntilanteen parantamisesta, me tarjoamme sinulle tiedon ja inspiraation joita tarvitset.",
-    "hero-title": "Tutki mahdollisuuksiasi, suunnittele polkusi ja luo tulevaisuutesi.",
-    "how-compentency-path-helps-you": "Miten Osaamispolku auttaa sinua osana muita palveluita?",
-    "how-compentency-path-helps-you-content": "Tutki mahdollisuuksiasi, suunnittele polkusi ja luo tulevaisuutesi Osaamispolussasi. Osaamispolku linkittyy Työmarkkinatoriin ja Opintopolkuun joissa voit hakeutua valitsemiisi työ- tai koulutuspaikkoihin. Osaamipolun kautta löydät myös henkilökohtaisia ohjauspalveluita ja tietoa ohjausalasta.",
+    "hero-content": "Osaamispolussani voit kartoittaa omaa osaamistasi, löytää koulutuksia osaamisesi kasvattamiseksi, tutkia työmahdollisuuksia osaamisellasi ja kartoittaa mahdollisuuksia alan vaihtamiseen.",
+    "hero-title": "Osaamispolkuni",
+    "how-competency-path-helps-you": "Miten Osaamispolku auttaa sinua osana muita palveluita?",
+    "how-competency-path-helps-you-content": "Osaamispolku, Opintopolku, Työmarkkinatori ja Opin.fi muodostavat yhdessä palvelukokonaisuuden, joka tukee oppimista, urasuunnittelua ja työnhakua eri elämäntilanteissa. Jokaisella palvelulla on oma roolinsa, mutta yhdessä ne tarjoavat sinulle selkeän polun osaamisesi ja urasi kehittämiseen.\n\nOsaamispolku auttaa tunnistamaan omat vahvuudet ja kiinnostuksen kohteet sekä löytämään niihin sopivia koulutus- ja työmahdollisuuksia.",
+    "how-competency-path-helps-you-opinfi-description": "Opin.fi on suomalaisten yliopistojen ja ammattikorkeakoulujen yhteinen palvelu, jossa avoimet opinnot ovat helposti saatavillasi.",
+    "how-competency-path-helps-you-opinfi-link": "Opin.fi-palveluun",
+    "how-competency-path-helps-you-opinfi-title": "Opin.fi",
+    "how-competency-path-helps-you-opintopolku-description": "Opintopolku tarjoaa kattavat tiedot koulutuksista ja hakupalvelut eri koulutusasteille.",
+    "how-competency-path-helps-you-opintopolku-link": "Opintopolkuun",
+    "how-competency-path-helps-you-opintopolku-title": "Opintopolku",
+    "how-competency-path-helps-you-tmt-description": "Työmarkkinatori puolestaan kokoaa yhteen avoimet työpaikat ja tukee työnhakua sekä urasuunnittelua.",
+    "how-competency-path-helps-you-tmt-link": "Työmarkkinatorille",
+    "how-competency-path-helps-you-tmt-title": "Työmarkkinatori",
     "need-personal-guidance": "Tarvitsetko henkilökohtaista ohjausta?",
-    "need-personal-guidance-content": "Ohjauksen palveluhakemistosta löydät omaan tilanteeseesi sopivia, ohjausalan ammatilaisten tarjoamia ohjauspalveluita.",
+    "need-personal-guidance-content": "Ohjauksen palveluhakemistosta löydät omaan tilanteeseesi sopivia, ohjausalan ammattilaisten tarjoamia ohjauspalveluita.",
     "provide-feedback": "Anna palautetta",
     "tell-us-what-you-think": "Kerro meille mitä pidit palvelusta!",
-    "tell-us-what-you-think-content": "Haluamme kehittää Osaamispolkua vastaamaan paremmin juuri sinun tarpeita. Anna meille palautetta ja huomiomme sen kehitystyössä.",
+    "tell-us-what-you-think-content": "Haluamme kehittää Osaamispolkua vastaamaan paremmin juuri sinun tarpeitasi. Anna meille palautetta ja huomioimme sen kehitystyössä.",
     "use-tool-or-log-in": "Käytä työkalua tai kirjaudu sisään palveluun!",
     "want-to-know-more": "Haluatko tietää lisää Osaamispolusta?",
     "want-to-know-more-content": "Mietityttääkö tietosuoja tai tekoälyn hyödyntäminen palvelussa? Alta löydät kootusti yleistä tietoa palvelusta ja sen käytöstä."
@@ -292,10 +352,12 @@
       "item-text": "Osaamispolussa tekoäly:",
       "text-1": "Hyödynnämme tekoälyä tarjoamaan sinulle personoitua ja itsenäistä digitaalista palvelua. Muista, että tekoäly tarjoaa ohjeita ja suosituksia, mutta lopulliset päätökset teet aina itse. Käytä omaa harkintaasi.",
       "text-2": "Kun näet alla olevan kuvakkeen, saat lisätietoa siitä, miten tekoälyä hyödynnetään kyseisessä osiossa. Lisätietoja <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink> -sivulla.",
-      "text-3": "Tervetuloa luomaan Oma Osaamispolkusi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
+      "text-3": "Aloita osaamisprofiilisi luominen ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
       "title": "Tekoäly apunasi"
     }
   },
+  "is-not-required": "Ei vaadita",
+  "is-required": "Vaaditaan",
   "jakauma": {
     "aika": "Aika",
     "ajokortti": "Ajokortti",
@@ -386,6 +448,14 @@
       "description": "Lähiammatit muodostetaan ammattien osaamisvaatimusten mukaan. Alla näet ammatteja jotka osaamisvaatimuksiltaan lähinnä Kestävän kehityksen asiantuntijan ammattia.",
       "title": "Lähiammatit"
     },
+    "salary-data": {
+      "description": "Palkkatiedot on haettu ammattiryhmälle tulorekisteristä. Mediaani tarkoittaa järjestetyn ryhmän keskimmäistä havaintoa. Puolet ammattiryhmästä siis tienaa mediaania enemmän ja puolet vähemmän kuin mediaani. Lisäksi näytetään parhaiten tienaava 10% ja vähiten tienaava 10%.",
+      "highest-decile": "Ylin 10%",
+      "lowest-decile": "Alin 10%",
+      "median": "Mediaanipalkka",
+      "not-available": "Palkkatietoja ei ole saatavilla ammattiryhmälle.",
+      "title": "Palkkatiedot"
+    },
     "salary-trends": {
       "description": "Graafissa näkyy ammatin palkkakehitys vuodesta 2015-2023. Tiedot 2024-26 ovat palkkakehityksen ennakointitietoja.",
       "title": "Palkkakehitys"
@@ -397,7 +467,7 @@
     "tyomarkkinatori": {
       "banner-alt-text": "Työmarkkinatori",
       "button-label": "Siirry Työmarkkinatoriin",
-      "description": "Työmarkkinatorissa voit hakea ja tarkastella mahdollisuuteen liittyviä työpaikkailmoituksia sen nimellä. Käy tutustumassa avoimiin paikkoihin ja löydä sinulle sopivia vaihtoehtoja.",
+      "description": "Työmarkkinatorilla voit hakea ja tarkastella mahdollisuuteen liittyviä työpaikkailmoituksia sen nimellä. Käy tutustumassa avoimiin paikkoihin ja löydä sinulle sopivia vaihtoehtoja.",
       "title": "Avoimet työpaikkailmoitukset löydät kätevästi Työmarkkinatorista",
       "url": "https://tyomarkkinatori.fi/henkiloasiakkaat/avoimet-tyopaikat/"
     }
@@ -409,7 +479,7 @@
   "links": "Linkit",
   "login": "Kirjaudu",
   "login-for-favorites": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa suosikkeja ja päästä tarkastelemaan niitä myöhemmin.",
-  "login-to-service": "Kirjaudu palveluun",
+  "login-to-service": "Kirjaudu sisään",
   "logout": "Kirjaudu ulos",
   "match-service": "Kohtaantopalvelu",
   "menu": "Valikko",
@@ -444,12 +514,12 @@
   "navigation": {
     "external": {
       "ohjaaja": {
-        "description": "Tietoa ohjausalasta kiinnostuneille",
+        "description": "Tietoja ja materiaaleja ohjaukseen",
         "label": "Ohjaajan osio",
         "url": "/ohjaaja/fi"
       },
       "tietopalvelu": {
-        "description": "Tietoa päätöksentekijöille",
+        "description": "Tietoa päätöksenteon tueksi",
         "label": "Tietopalvelu",
         "url": "/tietopalvelu/fi"
       },
@@ -457,14 +527,19 @@
     },
     "extra": {
       "palveluhakemisto": {
-        "label": "Palveluhakemisto",
+        "label": "Ohjaus- ja neuvontapalveluja",
         "url": "https://www.suomi.fi/palveluhakemisto/osaamispolku"
       },
-      "title": "Tukea pohdintaan",
+      "title": "Muuta tukea pohdintaan",
       "urataidot": {
         "label": "Urataitojen itsearviointi",
         "url": "/urataidot/fi"
       }
+    },
+    "main-section": {
+      "interests-title": "Kiinnostukseni",
+      "title": "Henkilökohtainen osaamispolku",
+      "tool-title": "Löydä mahdollisuuksia"
     }
   },
   "next": "Seuraava",
@@ -474,7 +549,6 @@
     "description": "Hakemaasi sivua ei löytynyt.",
     "title": "Sivua ei löytynyt"
   },
-  "not-required": "Ei vaadita",
   "on-this-page": "Tällä sivulla",
   "open-menu": "Avaa valikko",
   "open-submenu": "Avaa alivalikko",
@@ -527,7 +601,7 @@
       "none-proposed": "Ei ehdotettuja kiinnostuksia",
       "none-selected": "Ei valittuja kiinnostuksia",
       "remove": "Poista kiinnostuksen kohde x-merkistä.",
-      "textarea-placeholder": "Kirjoita tekstikenttään mikä sinua kiinnostaa"
+      "textarea-placeholder": "Kerro omin sanoin mahdollisimman kuvailevasti mikä sinua kiinnostaa"
     },
     "my-KIINNOSTUS": "Kiinnostukseni",
     "my-KOULUTUS": "Koulutukseni",
@@ -543,40 +617,78 @@
   },
   "preferences": {
     "data-disclosure-unanonymized": {
-      "description": "Voit valita, luovutetaanko tietosi rajapintojen kautta seuraaviin tarkoituksiin:",
-      "permission-ai-training": {
-        "description": "Voit sallia tietojesi käytön tekoälyn koulutukseen, mikä auttaa parantamaan palvelun laatua.",
-        "title": "Lupa käyttää tekoälyn koulutukseen"
+      "description": "Opetushallitus käyttää ensisijaisesti anonymisoituja tietoja. Tämä tarkoittaa, että henkilötietosi muunnetaan sellaiseen muotoon, ettei sinua voi enää tunnistaa niistä. Näin tietoja voidaan käyttää esimerkiksi tutkimukseen tai palvelun kehittämiseen ilman, että sinut voidaan tunnistaa. Jos kuitenkin haluat, voit antaa luvan käyttää tietojasi myös tunnistettavassa muodossa. Tämä tarkoittaa, että tietosi säilyvät sellaisina, että ne voidaan yhdistää sinuun. Voit antaa luvan jokaiseen kohtaan erikseen ja perua luvan milloin tahansa.",
+      "permission-education-and-planning": {
+        "description": "Lupa mahdollistaa henkilötietojen käytön opetuksen, koulutuksen ja ohjauksen yleiseen kehittämiseen. Tietoja hyödynnetään esimerkiksi oppimistulosten analysointiin ja koulutuksen suunnitteluun.",
+        "title": "Lupa käyttää tunnistettavia henkilötietojani opetuksen, koulutuksen ja osaamisen arviointia, kehittämistä, muuta seurantaa, ohjausta ja suunnittelua varten"
       },
-      "permission-share-with-third-parties": {
-        "description": "Voit sallia tietojesi luovuttamisen ulkopuolisille tahoille, kuten tutkimus- ja kehityshankkeisiin.",
-        "title": "Lupa luovuttaa tiedot ulkopuoliselle"
+      "permission-use-AI-education": {
+        "description": "Lupa mahdollistaa tietojesi käytön tekoälytoimintojen kehittämiseen palvelussa. Tietoja voidaan hyödyntää esimerkiksi toiminnallisuuksien parantamiseen, virheiden tunnistamiseen ja käyttäjäkokemuksen yleiseen optimointiin.",
+        "title": "Lupa käyttää henkilötietojani palvelussa toteutettujen tekoälytoiminnallisuuksien kehittämiseen"
       },
-      "permission-to-archive": {
-        "description": "Voit sallia tietojesi arkistoinnin, mikä mahdollistaa niiden säilyttämisen pidempiaikaisesti.",
-        "title": "Lupa arkistoida"
-      },
-      "title": "Tietojen luovutus anonymisoimattomana"
+      "title": "Tietojeni käyttö tunnistettavassa muodossa"
     },
     "delete-profile": {
-      "action": "Poista osaamisprofiili",
+      "action": "Poista osaamisprofiilini",
       "confirm": "Haluatko varmasti poistaa osaamisprofiilisi?",
-      "description": "Kaikki osaamisprofiilisi tallennetut tiedot poistetaan pysyvästi, eikä niitä voi palauttaa.",
-      "title": "Poista koko osaamisprofiilisi ja kaikki siihen tallennetut tiedot"
+      "description": "Voit poistaa koko osaamisprofiilisi ja kaikki siihen tallennetut tiedot pysyvästi. Poistoa ei voi perua. Huom! Voit poistaa ohjaajan profiilin Ohjaajan osiosta.",
+      "title": "Poista osaamisprofiilisi"
     },
-    "description": "Tällä sivulla voit hallita henkilökohtaisia asetuksiasi ja päättää, miten osaamisprofiilisi tietoja käytetään. Voit jakaa profiilisi jakolinkin avulla, hallita henkilötietojen luovutuslupia, ladata profiilisi tiedot talteen tai poistaa ne kokonaan. Sinä päätät, mitä tietoja jaat ja kenelle.",
+    "description": "Tällä sivulla voit hallita osaamisprofiilisi asetuksia ja päättää, miten tietojasi käytetään. Voit jakaa profiilisi linkin avulla, hallita lupia tietojen käyttöön, ladata profiilisi tiedot itsellesi, tai poistaa profiilisi kokonaan. Sinä päätät, mitä tietoja jaat ja kenelle.",
     "download": {
-      "action": "Lataa osaamisprofiilin tiedot",
-      "description": "Voit ladata itsellesi talteen kaikki osaamisprofiilin tallennetut tiedot",
-      "title": "Lataa talteen kaikki osaamisprofiilisi tallennetut tietosi"
+      "action": "Lataa osaamisprofiilini tiedot (JSON)",
+      "description": "Voit ladata kaikki osaamisprofiiliisi tallennetut tiedot omalle laitteellesi. Tiedot muodostetaan koneluettavaan JSON-muotoon. JSON on yksinkertainen ja kevyt avoimen standardin tiedostomuoto tiedonvälitykseen ja tallennukseen.",
+      "title": "Lataa osaamisprofiilisi"
     },
     "title": "Asetukseni"
   },
   "previous": "Edellinen",
   "print": "Tulosta",
+  "privacy-cookies": {
+    "3rd-party": {
+      "description": "Osaamispolussa on käytössä kolmansien osapuolien sovelluksia, kuten YouTube ja PowerBI, jotka latautuvat näiden palveluiden omilta palvelimilta. Youtubea käytetään Osaamispolun ohjaajan kokonaisuuden videoissa. PowerBI:tä käytetään raporttinäkymien tuottamiseen tietopalvelussa. Kolmannen osapuolen evästeitä käytetään anonyymisti sivustolle upotettujen sovellusten toiminnan varmistamiseen ja käyttäjäkokemuksen parantamiseen. <br/><br/>Jos et käytä ulkopuolisten palveluntarjoajien sisältöä, mitään kolmannen osapuolen evästeitä ei asenneta laitteellesi. <br/><br/>Kolmannen osapuolen tarjoamiin palveluihin tai kolmannen osapuolen välittämiin sovelluksiin sovelletaan kyseisen kolmannen osapuolen käyttö- ja muita ehtoja. <br/><br/>Lisätietoja: <br/><CustomLink1>Microsoft (PowerBI)</CustomLink1> <CustomLink2>Google (Youtube)</CustomLink2>",
+      "title": "Osaamispolun kolmannen osapuolen evästeet"
+    },
+    "blocking": {
+      "description": "Useimmissa uusissa selaimissa voi estää evästeiden asettamisen laitteelle kokonaan, mutta tällöin voit joutua mukauttamaan joitakin asetuksia aina, kun käyt jollakin sivustolla/sivulla. Jotkin palvelut ja toiminnot eivät välttämättä toimi kunnolla (esim. sisäänkirjautuminen).",
+      "title": "Evästeiden estäminen"
+    },
+    "possession": {
+      "description": "Evästeitä voi vapaasti hallita ja/tai poistaa. Ohjeita löytyy esimerkiksi osoitteesta aboutcookies.org.",
+      "title": "Evästeiden käytön hallinta"
+    },
+    "site-specific": {
+      "description": "Sivustokohtaisia evästeitä voi hallita selaimen yksityisyys- ja evästeasetuksista.",
+      "title": "Sivustokohtaisten evästeiden hallinta"
+    },
+    "title": "Evästeet",
+    "what": {
+      "description-1": "Evästeet ovat pieniä tekstitiedostoja, joita sivusto tallentaa tietokoneellesi tai mobiililaitteellesi. Se sisältää yksilöllisen, nimettömän tunnisteen, jonka avulla verkkopalvelu tunnistaa sivustolla vierailevat eri selaimet. Evästeillä kerättävillä tiedoilla ei voida tunnistaa yksittäisiä käyttäjiä. Opetushallitus edellyttää, että hyväksyt evästeiden käytön voidaksesi käyttää Osaamispolku-palvelua. <br/><br/>Evästeitä ovat:",
+      "description-2": "Evästeiden tarkoituksena on, että sivusto säilyttää tietyt valintasi tietyn ajan. Näin sinun ei tarvitse tehdä samoja valintoja uudelleen, kun siirryt sivustolla sivulta toiselle saman istunnon aikana. Evästeiden avulla voidaan myös kerätä anonymisoituja tietoja siitä, miten käyttäjät sivustolla toimivat. Näiden tietojen perusteella ei voida tunnistaa yksittäistä käyttäjää.",
+      "list": {
+        "item-1": "Ensimmäisen osapuolen evästeet tulevat suoraan verkkosivustolta, jolla käyt. Vain tämä sivusto voi lukea ne.",
+        "item-2": "Lisäksi verkkosivusto saattaa käyttää ulkopuolisia palveluja, jotka lähettävät omia evästeitään. Näitä kutsutaan kolmannen osapuolen evästeiksi.",
+        "item-3": "Pysyvät evästeet ovat tietokoneellesi tallennettavia evästeitä, joita ei poisteta automaattisesti, kun suljet selaimen. Istuntokohtaiset evästeet sen sijaan poistetaan istunnon päättyessä."
+      },
+      "title": "Mitä evästeet ovat?"
+    },
+    "what-for": {
+      "description-1": "Osaamispolussa on käytössä seuraavia ensimmäisen osapuolen evästeitä. Niiden tarkoitus on mahdollistaa sivuston käytön:",
+      "description-2": "Osaamispolulle analytiikan seurannassa käytetään Matomoa. Evästeiden avulla seurataan käyttäjän käyttökokemusta verkkosivustolla. Käyttäjätiedot ovat anonyymeja – kerätystä tiedosta ei voi tunnistaa käyttäjää henkilökohtaisesti. <br/><br/>Näitä tietoja ei myöskään jaeta minkään ulkopuolisen osapuolen kanssa eikä niitä käytetä muihin tarkoituksiin.",
+      "list": {
+        "item-1": "todentamisevästeet tallennetaan laitteellesi, kun kirjaudut Osaamisprofiiliin tai Ohjaajan työpöytään käyttäen Suomi.fi-tunnistautumista,",
+        "item-2": "tekniset evästeet."
+      },
+      "title": "Mihin evästeitä käytetään Osaamispolussa?"
+    }
+  },
   "privacy-policy": "Tietosuojaseloste",
-  "privacy-policy-and-cookies": "Tietosuojaseloste ja evästeet",
   "profile": {
+    "banner": {
+      "description": "Tallenna ja muokkaa tunnistamiasi osaamisia profiilissasi.",
+      "link-text": "Siirry profiiliin",
+      "title": "Oma osaamisprofiili"
+    },
     "competences": {
       "add": "Lisää osaamisia",
       "description": "Löydät alta kaikki osaamisesi, jotka olet tunnistanut tai lisännyt profiiliisi. Osaamisesi ryhmittelyn ja esitystavan voit valita itse.",
@@ -603,7 +715,7 @@
         "competences-help": "Kirjoittamasi tekstin perusteella sinulle tarjotaan erilaisia avainsanoja alla olevaan listaan. Valitse mielestäsi parhaat avainsanat valitsemalla + ja ne siirtyvät osaamisprofiiliin koulutuksen tuottamiksi osaamisiksi. Voit poistaa väärin valittuja osaamisia valitsemalla x.",
         "description": "Ilmoita tässä suorittamasi koulutuksesi perustiedot. Jos opiskelet kyseisessä koulutuksessa juuri nyt, jätä loppumispäivämäärä ilmoittamatta.",
         "job-description-placeholder": "Esim. osaamisen kartoittamisen tutkinto",
-        "summary-description": "Voit muokata koulutuksia tuotuasi ne Osaamipolkuun osaamisprofiilissasi kohdassa Koulutukseni.",
+        "summary-description": "Voit muokata koulutuksia tuotuasi ne Osaamispolkuun osaamisprofiilissasi kohdassa Koulutukseni.",
         "workplace-placeholder": "Esim. Maailman opisto"
       },
       "title": "Koulutukseni"
@@ -633,7 +745,7 @@
         "description": "Kerro tässä vapaa-ajastasi. Vapaa-ajan toimintoja voivat olla esim. harrastustoiminta, luottamustoimet sekä erilaiset pätevyydet ja muut ansiot. Vapaa-ajan tekemisestä syntyy paljon osaamista sinulle ja autamme sinua tunnistamaan sitä. Voit ilmoittaa vapaa-ajan toimintoja teemoittain ja rakentaa itsellesi sopivan näkymän vapaa-ajan tekemiseesi.",
         "name-of-free-time-activity-placeholder": "Esim. Sukellusmatka/Sihteerinä toimiminen/Valmentaminen",
         "name-of-free-time-theme-placeholder": "Esim. Sukeltaminen/Taloyhtiön hallitus/Liikunta",
-        "summary-description": "Voit muokata vapaa-ajan toimintoja tuotuasi ne Osaamipolkuun osaamisprofiilissasi kohdassa Vapaa-ajan toimintoni."
+        "summary-description": "Voit muokata vapaa-ajan toimintoja tuotuasi ne Osaamispolkuun osaamisprofiilissasi kohdassa Vapaa-ajan toimintoni."
       },
       "title": "Vapaa-ajan toimintoni"
     },
@@ -646,31 +758,30 @@
       "description": "Löydät alta kaikki kiinnostuksen kohteesi, jotka olet kartoittanut itsellesi ja tallentanut ne profiiliisi. Kiinnostuksen kohteet ryhmitellään tyypin mukaan.",
       "edit-interests": "Muokkaa kiinnostuksen kohteita",
       "empty": "Et ole vielä lisännyt kiinnostuksen kohteita.",
-      "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus kiinnostuksitani",
+      "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus kiinnostuksistani",
       "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin kiinnostuksiasi. Jos käytät palvelua suomeksi kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.",
       "free-form-text-for-interests": "Vapaa teksti kiinnostuksille",
       "occupations-that-interest-me": "Ammatit, jotka kiinnostavat minua",
       "skills-that-interest-me": "Osaamiset, jotka kiinnostavat minua",
-      "title": "Kiinnostuksen kohteeni",
+      "title": "Kiinnostukseni",
       "write-what-interests-you": "Kirjoita, mikä sinua kiinnostaa"
     },
-    "landing-page": {
+    "login-page": {
       "description": "Kirjautumalla sisään saat käyttöösi henkilökohtaisen osaamispolkusi, joka auttaa sinua hallinnoimaan ja hyödyntämään osaamistasi tehokkaasti.",
       "list-1-item-1": "Oman osaamispolun hallinta ja tietojen luvitus: Päätä, miten ja missä tietojasi käytetään.",
       "list-1-item-2": "Työ- ja koulutushistoria: Tallenna saavutuksesi yhteen paikkaan.",
-      "list-1-item-3": "Omat osaamiset ja kiinnostuksen kohteet: Tunnista vahvuutesi ja kiinnostuksen kohteesi.",
-      "list-1-item-4": "Urasuunnitelmat: Suunnittele tulevaisuutesi ja seuraa edistymistäsi.",
-      "list-1-item-5": "Tietojen tuonti muista palveluista: tuo tietosi Työmarkkinatorista ja Oma Opintopolusta.",
-      "list-1-item-6": "Suosikkisisällöt: Tallenna ja hallitse kiinnostavimpia työ- ja koulutusvaihtoehtoja.",
-      "list-2-item-1": "Näet kaikki osaamiseesi ja kiinnostuksiisi liittyvät tiedot yhdessä paikassa.",
+      "list-1-item-3": "Urasuunnitelmat: Suunnittele tulevaisuutesi ja seuraa edistymistäsi.",
+      "list-1-item-4": "Tietojen tuonti muista palveluista: tuo tietosi Työmarkkinatorista ja Oma Opintopolusta.",
+      "list-1-item-5": "Suosikkisisällöt: Tallenna ja hallitse kiinnostavimpia työ- ja koulutusvaihtoehtoja.",
+      "list-2-item-1": "Näet kaikki osaamiseesi ja kiinnostuksesi yhdessä paikassa.",
       "list-2-item-2": "Voit tunnistaa vahvuutesi, myös vapaa-ajan harrastusten kautta.",
       "list-2-item-3": "Löydät profiilisi perusteella työ- ja koulutusmahdollisuuksia, jotka sopivat juuri sinulle.",
-      "page-title": "Kirjaudu palveluun",
-      "paragraph-2": "Miten Oma Osaamispolku voi auttaa sinua?",
+      "page-title": "Kirjaudu sisään",
+      "paragraph-2": "Miten Osaamisprofiili voi auttaa sinua?",
       "paragraph-3": "Aloita luomalla oma osaamispolkusi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
       "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta. Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta.",
       "profile-includes": "Oma Osaamispolku sisältää:",
-      "title": "Tervetuloa! Luo oma osaamispolkusi ja hyödynnä monipuoliset palvelut"
+      "title": "Tervetuloa! Luo oma osaamisprofiilisi ja hyödynnä monipuoliset palvelut"
     },
     "my-goals": {
       "add-favorites-link": "Voit katsoa mahdollisuuksia ja lisätä niitä suosikiksi täältä",
@@ -680,15 +791,15 @@
       "create-new-path-for-goal": "Luo uusi polku päämäärälle",
       "delete-goal": "Poista päämääristä",
       "delete-goal-description": "Haluatko varmasti poistaa tämän päämäärän?",
-      "description": "Päämääräni-sivulla voit asettaa uraan tai kouluttautumiseen liittyviä kehittymistavoitteita. Osaamispolku-palvelussa koulutus- ja uratavoitteita rakennetaan päämäärien kautta. Päämäärä voi olla mikä tahansa koulutus- tai työmahdollisuus, jonka olet valinnut suosikiksesi.",
-      "description-2": "Lisätäksesi henkilökohtaisen ura- ja kouluttautumistavoitteen käyttöliittymässä, napsauta \"Lisää suosikkeja päämääräksi\"-painiketta, valitse sopiva koulutus- tai työmahdollisuussuosikkisi ja lisää se pitkän tai lyhyen aikavälin tai muuksi päämääräksi \"Lisää valintoja\"-valikosta. Voit myös kirjoittaa vapaasti lisää päämäärästäsi sekä mihin itseäsi koskevaan tavoitteeseesi se liittyy.",
+      "description": "Päämääräni-sivulla voit asettaa uraan tai kouluttautumiseen liittyviä kehittymistavoitteita. Osaamispolussa koulutus- ja uratavoitteita rakennetaan päämäärien kautta. Päämäärä voi olla mikä tahansa koulutus- tai työmahdollisuus, jonka olet valinnut suosikiksesi.",
+      "description-2": "Lisätäksesi henkilökohtaisen ura- tai kouluttautumistavoitteen käyttöliittymässä napsauta \"Lisää suosikkeja päämääräksi\" -painiketta, valitse sopiva koulutus- tai työmahdollisuussuosikkisi ja lisää se pitkän tai lyhyen aikavälin tai muuksi päämääräksi \"Lisää valintoja\" -valikosta. Voit myös kirjoittaa vapaasti lisää päämäärästäsi sekä mihin itseäsi koskevaan tavoitteeseesi se liittyy.",
       "goal-description": "Oma tavoite päämäärälle",
       "goal-description-help": "Pohdi, mitä haluat elämältäsi ja mihin suuntaan haluat kehittyä. Koulutus- tai uratavoite voi olla tietty ammatti, saavutus tai jotain tarkemmin määrittelemätöntä, kuten muiden auttaminen tai luova työ. Tavoitteet auttavat ohjaamaan uraasi. Ne ohjaavat ponnistelujasi ja päätöksiäsi kohti tavoitettasi ja auttavat pitämään sinut motivoituneena ja keskittyneenä.",
       "goal-description-placeholder": "Kuvaile tavoitettasi asettamasi päämäärän osalta",
       "long-term-goal": "Pitkän aikavälin päämäärä",
       "long-term-goal-description": "Pitkän aikavälin päämäärä on yleensä vuosia vievä tavoite, joka voi liittyä uraan tai henkilökohtaiseen kehitykseen, kuten johtotehtävään pääseminen tai tutkinnon hankkiminen.",
       "my-plan-towards-goal": "Koulutus- ja urapolkusuunnitelmani päämäärään",
-      "no-favorites-selected": "Et ole lisännyt yhtään työ- tai koulutusmahdollisuutta suosikiksi, tai ne ovat jo lisätty päämääräksi.",
+      "no-favorites-selected": "Et ole lisännyt yhtään työ- tai koulutusmahdollisuutta suosikiksi, tai ne on jo lisätty päämääräksi.",
       "other-goals": "Muut päämäärät",
       "other-goals-description": "Tästä löydät muita asettamiasi päämääriä.",
       "set-long-term-goal": "Aseta pitkän aikavälin päämäärä",
@@ -697,7 +808,7 @@
       "short-term-goal": "Lyhyen aikavälin päämäärä",
       "short-term-goal-description": "Lyhyen aikavälin tavoite on lähitulevaisuudessa saavutettava päämäärä, joka voi liittyä esimerkiksi tietyn projektin loppuunsaattamiseen tai uuden taidon oppimiseen.",
       "show-filters": "Näytä suodattimet",
-      "title": "Päämääräni"
+      "title": "Tavoitteeni"
     },
     "paths": {
       "add-as-phase": "Lisää vaiheeksi",
@@ -712,7 +823,7 @@
       "cancel-confirmation-text": "Lomakkeella on tallentamattomia muutoksia, haluatko varmasti poistua?",
       "choose-for-phase": "Valitse polulle vaihe {{count}}",
       "choose-one-opportunity": "Valitse yksi mahdollisuus",
-      "competences-gained-from-phase": "Osaamiset joita saat vaiheesta",
+      "competences-gained-from-phase": "Osaamiset, joita saat vaiheesta",
       "continue-editing": "Jatka muokkaamista",
       "delete-path": "Poista polku",
       "delete-path-description": "Haluatko varmasti poistaa päämäärältä polun \"{{name}}\"?",
@@ -754,17 +865,21 @@
       "your-competences": "Omat osaamisesi"
     },
     "preferences": {
-      "list-1-item-1": "kerätä tietoa omasta osaamisestasi (Osaamiseni)",
-      "list-1-item-2": "tallentaa koulutus- ja työhistoriasi sekä lisätä vapaa-ajan tekemisiä sekä tuoda myös työhistoriasi työmarkkinatorin työnhakuprofiilista sekä koulutushistoriasi Opintopolun omista opintosuorituksista (Työpaikkani, Koulutukseni, Vapaa-ajan toimintoni)",
-      "list-1-item-3": "kerätä myös tietoa omista kiinnostuksenkohteistasi (Kiinnostuksen kohteeni)",
-      "list-2-item-1": "Voit myös tallentaa ehdotettuja koulutus- ja työmahdollisuuksia suosikeiksi talteen myöhempää käyttöä varten ja osaamispolkujen luomista varten (Suosikkini)",
-      "list-2-item-2": "Voit luoda ja ylläpitää päämääriäsi sekä koulutus- ja urapolkusuunnitelmiasi (Päämääräni)",
-      "paragraph-2": "Kun täytät mahdollisimman kattavasti ylläolevat, saat juuri sinulle sopivia työ- ja koulutusmahdollisuusehdotuksia.",
-      "paragraph-3": "Profiili on omasi! Päätät itse, mitä tietoja omaan osaamisprofiiliisi tallennat, mihin tietojasi käytät, ketkä muut pääsevät näkemään profiilisi ja miten muut toimijat voivat profiiliasi hyödyntää.",
-      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu Lakiin valtakunnallisesta jatkuvan oppimisen digitaalisesta palvelukokonaisuudesta. Lue lisää tietojen käsittelyn perusteista ",
-      "paragraph-4-link": "tietosuojaselosteesta",
+      "list-1-item-1": "Kirjata mitä osaat",
+      "list-1-item-2": "Tallentaa koulutus- ja työhistoriasi sekä vapaa-ajan tekemisiäsi tuoda ja viedä tietoja Työmarkkinatorin työnhakuprofiilin ja osaamisprofiilin välillä (tulossa myöhemmin) ja tuoda opintosuorituksesi Opintopolusta ja kartoittaa niihin liittyvää osaamistasi",
+      "list-1-item-3": "Kirjata, mikä sinua kiinnostaa",
+      "list-2-item-1": "Tallentaa sinua kiinnostavat työ- ja koulutusmahdollisuudet suosikkeihin",
+      "list-2-item-2": "Suunnitella ja seurata omia koulutus- ja urapolkujasi (tulossa myöhemmin)",
+      "list-3-item-1": "Mitä tietoja tallennat",
+      "list-3-item-2": "Mihin tietojasi käytetään",
+      "list-3-item-3": "Kuka voi nähdä profiilisi",
+      "list-3-item-4": "Miten muut voivat hyödyntää profiiliasi",
+      "paragraph-2": "Kun täytät nämä tiedot huolellisesti, saat ehdotuksia töistä ja koulutuksista, jotka sopivat juuri sinulle.\n\nVoit myös:",
+      "paragraph-3": "Profiili on sinun!\n\nSinä päätät:",
+      "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta. ",
+      "paragraph-4-link": "Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta.",
       "title": "Asetukseni",
-      "you-are-signed-in": "Olet kirjautunut osaamisprofiiliisi. Osaamisprofiili toimii Osaamispolku-palvelun omien tietojesi säilytys- ja hallintapaikkana. Tänne voit:"
+      "you-are-signed-in": "Osaamisprofiili on paikka, jossa voit tallentaa ja hallita omia tietojasi. Tänne voit:"
     },
     "something-else": {
       "description": "Löydät alta muut osaamisesi, joita olet kartoittanut esimerkiksi palvelun kartoitustyökaluilla ja tallentanut ne profiiliisi. Voit lisätä ja poistaa osaamisia Muokkaa osaamisia painikkeella.",
@@ -784,8 +899,7 @@
         "description": "Ilmoita tässä työpaikkasi perustiedot. Jos työpaikkasi on nykyinen, jätä loppumispäivämäärä ilmoittamatta.",
         "job-description-help": "Toimenkuva voi olla tittelisi, tehtävänimikkeesi tai ammattisi",
         "job-description-placeholder": "Esim. Suunnittelija",
-        "summary-description": "Voit muokata toimenkuvia tuotuasi ne Osaamipolkuun osaamisprofiilissasi kohdassa Työpaikkani.",
-        "workplace-help": "Lisätessäsi myöhemmin uutta työpaikkaa ja/tai toimenkuvaa, ryhmittyvät nämä samannimisen työnantajan alle automaattisest",
+        "summary-description": "Voit muokata toimenkuvia tuotuasi ne Osaamispolkuun osaamisprofiilissasi kohdassa Työpaikkani.",
         "workplace-placeholder": "Esim. Työpaikka Oy"
       },
       "title": "Työpaikkani"
@@ -794,30 +908,43 @@
   "proposed-competences": "Ehdotetut osaamiset",
   "proposed-interests": "Ehdotetut kiinnostukset",
   "rate-ai-content": {
-    "body": "Tällä sivulla on tekoälyn avulla tunnistettuja mahdollisuuksia. Kerro miten onnistuimme?",
-    "body-for-opportunities": "Tällä sivulla on tekoälyn avulla tunnistettuja mahdollisuuksia. Kerro miten onnistuimme?",
-    "header": "Arvioi tekoälyn tuottamaa sisältöä",
-    "header-for-opportunities": "Arvioi tekoälyn tunnistamia mahdollisuuksia",
-    "modal-body": "Huomasimme, että annoit peukun alas tekoälyn tuottamalle sisällölle. Voisitko kertoa tarkemmin, mikä ei toiminut? Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
-    "modal-header": "Annoit peukun alas",
-    "modal-placeholder": "Esim. sisältö epätarkkaa, ei vastannut tarvetta, väärä sävy…",
-    "toast": "Kiitos palautteestasi!"
+    "dislike": "En tykkää",
+    "icon": "Tekoälyn tuottamaa sisältöä",
+    "kohtaanto": {
+      "body": "Tällä sivulla ehdotetaan syöttämiesi tietojen perusteella sinulle sopivia mahdollisuuksia. Kerro miten onnistuimme.",
+      "header": "Arvioi sinulle ehdotettuja mahdollisuuksia"
+    },
+    "like": "Tykkään",
+    "mahdollisuus": {
+      "body": "Tällä sivulla on tekoälyn avulla luotua sisältöä - se saattaa sisältää virheitä. Kerro miten onnistuimme.",
+      "header": "Arvioi tekoälyn tuottamaa sisältöä"
+    },
+    "modal": {
+      "body": "Et ollut tyytyväinen. Voisitko kertoa tarkemmin, mikä ei toiminut? Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
+      "close": "Sulje",
+      "header": "Tarkenna palautettasi",
+      "placeholder": "Esim. sisältö epätarkkaa, ei vastannut tarvetta, väärä sävy",
+      "send": "Lähetä"
+    },
+    "toast": "Kiitos palautteesta!",
+    "toast-error": "Palautteen lähetys epäonnistui, yritä myöhemmin uudelleen"
   },
   "remove-approval": "Hylkää hyväksyntä",
   "remove-favorite": "Poista suosikeista",
   "remove-favorite-opportunity-confirmation": "Haluatko varmasti poistaa mahdollisuuden \"{{name}}\" suosikeista?",
-  "required": "Vaaditaan",
+  "required": "pakollinen",
   "restrictions": "Rajoitteet",
   "result-list": "Tuloslista",
   "return-home": "Palaa etusivulle",
   "return-menu": "Palaa valikkoon",
   "save": "Tallenna",
+  "save-and-close": "Tallenna ja sulje",
   "save-in-progress": "Tallennetaan...",
   "saved": "Tallennettu",
   "search": "Haku",
   "select-language": "Valitse kieli",
   "service-catalog": {
-    "description": "Löydät omiin tarpeisiisi sopiva ohjauspalvelun täältä.",
+    "description": "Löydät omiin tarpeisiisi sopivan ohjauspalvelun täältä.",
     "header": "Kaipaatko neuvontaa ja ohjausta oman suunnan löytämiseen?"
   },
   "share": "Jaa",
@@ -830,11 +957,9 @@
     "main": "Siirry pääsisältöön"
   },
   "slugs": {
-    "about-ai": "tietoa-tekoalysta",
-    "about-us": "tietoa-palvelusta",
-    "accessibility-statement": "saavutettavuusseloste",
-    "basic-information": "perustiedot",
-    "cookie-policy": "evastekaytanto",
+    "about-service": "tietoa-palvelusta",
+    "accessibility": "tietoa-saavutettavuudesta",
+    "ai-usage": "tietoa-tekoalyn-kaytosta",
     "data-sources": "datalahteet",
     "education-opportunity": {
       "index": "koulutusmahdollisuus"
@@ -846,7 +971,7 @@
       "index": "tyomahdollisuus"
     },
     "no-internet-connection": "ei-internetyhteytta",
-    "privacy-policy": "tietosuojaseloste",
+    "privacy-and-cookies": "tietosuojaseloste-ja-evasteet",
     "profile": {
       "competences": "osaamiseni",
       "education-history": "koulutukseni",
@@ -863,7 +988,6 @@
       "work-history": "tyopaikkani"
     },
     "session-expired": "istunto-vanhentunut",
-    "terms-of-service": "kayttoehdot",
     "tool": {
       "index": "tyokalu"
     },
@@ -881,7 +1005,6 @@
   "sort": "Järjestä",
   "sort-all": "Järjestä (kaikki)",
   "started": "Alkoi",
-  "terms-of-service": "Käyttöehdot",
   "text-summary": "Tiivistelmä",
   "toast": {
     "add-failed": "Lisäys epäonnistui",
@@ -892,10 +1015,15 @@
     "update-success": "Päivitys onnistui"
   },
   "tool": {
+    "banner": {
+      "description": "Löydä ammatti-, työ- ja koulutusmahdollisuuksia helposti kokeilemalla.",
+      "link-text": "Etsi mahdollisuuksia",
+      "title": "Etsi mahdollisuuksia"
+    },
     "competency-profile": {
       "description": "Tuo osaamisia profiilista tai vie valintasi sinne, jotta tietosi pysyvät yhdessä paikassa.",
       "help": "Tuo osaamisia osaamisprofiilistasi. Voit hyödyntää aiemmin tallentamiasi osaamisia mahdollisuuksien kartoittamisessa. Voit tuoda kaikki osaamiset tai vain ne, jotka haluat.\n\nVoit myös päivittää osaamisprofiiliasi tähän näkymään syöttämiesi uusien osaamisten ja kiinnostusten perusteella.",
-      "login-description": "Kirjaudu palveluun tuodaksesi osaamisprofiilistasi osaamisia tähän työkaluun tai viedäksesi täällä lisäämäsi osaamiset ja kiinnostukset profiiliisi. Profiili kokoaa yhteen osaamisesi, taustasi ja tavoitteesi, ja voit täydentää sitä myös muista palveluista.",
+      "login-description": "Kirjaudu sisään tuodaksesi osaamisprofiilistasi osaamisia tähän työkaluun tai viedäksesi täällä lisäämäsi osaamiset ja kiinnostukset profiiliisi. Profiili kokoaa yhteen osaamisesi, taustasi ja tavoitteesi, ja voit täydentää sitä myös muista palveluista.",
       "title": "Osaamisprofiili"
     },
     "description": "Syötä alle osaamisesi ja kiinnostuksen kohteesi – niiden perusteella näytämme sinulle sopivia työ- ja koulutusmahdollisuuksia oikealla. Voit suodattaa ja järjestää mahdollisuuksia säätimillä omien tarpeidesi mukaan.",
@@ -909,7 +1037,11 @@
       "other-data-from-profile-description": "Tekstilisäyksesi muihin osaamisiin ja kiinnostuksiin",
       "title": "Tietojesi kokonaiskuva"
     },
-    "job-opportunity-is-part-of-group": "Työmahdollisuus kuuluu ammaattiryhmään",
+    "job-opportunity-is-part-of-group": "Työmahdollisuus kuuluu ammattiryhmään",
+    "job-opportunity-median-salary": "Mediaanipalkka",
+    "job-opportunity-median-salary-tooltip": "Mediaanipalkka tarkoittaa palkkaa, joka jakaa palkansaajat kahteen yhtä suureen ryhmään: puolet ansaitsee vähemmän ja puolet enemmän kuin mediaanipalkan verran. Se kuvaa paremmin \"tyypillistä\" palkkaa kuin keskiarvo, koska se ei vääristy yksittäisten erittäin suurten tai pienten palkkojen takia.",
+    "salary-suffix": "€/kk",
+    "job-opportunity-is-part-of-group-tooltip": "Ammatteja ja työmahdollisuuksia ryhmitellään ammattiryhmiin. Ammattiryhmiä käytetään väestön ammattirakenteen tilastoinnissa, ja niiden luomiseen käytetään ammattiluokitusta, joka auttaa vertailemaan tilastoja kansallisesti ja kansainvälisesti.",
     "my-own-data": {
       "cancel-text": "Ei, peruuta",
       "competences": {
@@ -921,15 +1053,7 @@
           "import-button": "Tuo tietoja profiilista",
           "login-description": "Kirjaudu sisään Osaamispolkuun, jotta voit tuoda osaamisesi osaamisprofiilistasi."
         },
-        "textarea-placeholder": "Kirjoita taitosi tekstikenttään."
-      },
-      "delete-imported": {
-        "description": "Haluatko varmasti tyhjentää valitut profiilista tuodut osaamiset ja kiinnostukset?",
-        "title": "Tyhjennä profiilista tuodut osaamiset"
-      },
-      "delete-mapped": {
-        "description": "Haluatko varmasti tyhjentää valitut kartoitetut osaamiset ja kiinnostukset?",
-        "title": "Tyhjennä kartoitetut osaamiset"
+        "textarea-placeholder": "Kerro omin sanoin mahdollisimman kuvailevasti mitä sinä jo osaat"
       },
       "description": "Saat ehdotuksia osaamisista ja kiinnostuksista tekstin pohjalta. Valitse sopivat. Oikealla näkyvä lista perustuu valintoihisi.",
       "export": {
@@ -940,7 +1064,7 @@
         "login-description": "Kirjaudu sisään Osaamispolkuun, jotta voit tallentaa tunnistamasi osaamiset osaamisprofiiliin ja päästä tarkastelemaan niitä myöhemmin osaamisprofiiliisi muun osaamisesi kohdassa."
       },
       "goals": {
-        "description": "Tässä osiossa voit valita toiveidesi mukaiset tulokset palvelustamme. Jos olet epävarma, voit ohittaa tämän ja tutustua palveluumme omaan tahtiisi. Kun liikutat hiirtä kuvakkeiden ylle, näet niiden alla olevan selityksen siitä, miten ne vaikuttavat lopputulokseen.\n\nNapauta kuvaketta, jos haluat valita sen tavoitteeksesi. Voit peruuttaa valinnan napauttamalla kuvaketta uudelleen.",
+        "description": "Tässä osiossa voit valita toiveidesi mukaiset tulokset palvelustamme. Jos olet epävarma, voit ohittaa tämän ja tutustua palveluumme omaan tahtiisi. Kun liikutat hiirtä kuvakkeiden ylle, näet niiden alla olevan selityksen siitä, miten ne vaikuttavat lopputulokseen.\n\nNapsauta kuvaketta, jos haluat valita sen tavoitteeksesi. Voit peruuttaa valinnan napsauttamalla kuvaketta uudelleen.",
         "job-opportunities": "Tutkia työmahdollisuuksia osaamisellani",
         "job-opportunities-tooltip": "Siirry Mahdollisuutesi kohtaan ja valitse suodata ja \"Näytä mahdollisuuksissa - työmahdollisuudet\" Saat listan Suomessa olevista työmahdollisuuksista. Voit myös esimerkiksi kartoittaa kiinnostuksen kohteitasi ja katsoa miten kiinnostuksen kohteet vaikuttavat sinulle tarjottaviin koulutusmahdollisuuksiin.",
         "map-competence": "Kartoittaa omaa osaamistani",
@@ -985,21 +1109,27 @@
       },
       "general": {
         "filter": "Suodatus",
+        "job-opportunity-type": "Tyyppi",
         "location": "Sijainti",
         "sorting": "Järjestys",
         "title": "Yleiset säätimet",
-        "weight": "Painotus"
+        "weight": "Painotus",
+        "job-opportunity-filters": "Suodata työmahdollisuuksia",
+        "occupation-type": "Ylätason ammattiryhmä"
       },
       "job-opportunity": {
         "industry": "Toimiala",
         "occupation": "Ammattiryhmä",
         "title": "Suodata työmahdollisuuksia",
-        "type": "Tyyppi"
+        "type": "Tyyppi",
+        "type-ammatit": "Ammatit",
+        "type-tyomahdollisuudet": "Työmahdollisuudet"
       },
+      "reset": "Poista valinnat",
       "toggle-title-closed": "Näytä säätimet",
       "toggle-title-open": "Piilota säätimet"
     },
-    "title": "Etsi mahdollisuuksia",
+    "title": "Löydä mahdollisuuksia",
     "tools": {
       "career-skills-self-assessment-tool": "Urataitojen itsearviointityökalu",
       "description": "Tutustu apuvälineisiin, jotka auttavat tunnistamaan tavoitteesi, jotta voit tehdä parempia valintoja.",
@@ -1009,7 +1139,7 @@
       "help-text-2": "Seuraavat sivustot eivät tallenna tietoja osaamisprofiiliisi, mutta ne voivat auttaa sinua pohtimaan nykytilaasi ja toiveitasi.",
       "service-directory": "Osaamispolun palveluhakemisto",
       "something-else": "Muu osaamiseni",
-      "title": "Tukea pohdintaan",
+      "title": "Muuta tukea pohdintaan",
       "work-history": "Työpaikkani"
     },
     "your-opportunities": {
@@ -1032,10 +1162,10 @@
   },
   "update": "Päivitä",
   "updated": "Päivitetty",
-  "updating-list": "Päivitetään listaa",
+  "updating-list": "Päivitetään",
   "user": "Käyttäjä",
   "user-guide": "Ohjeet",
-  "welcome": "Hei {{name}} - tervetuloa",
+  "welcome": "Hei {{name}} - tervetuloa osaamisprofiiliisi!",
   "what-is-the-service": "Mikä palvelu on?",
   "where-can-i-get-more-help": "Mistä saan lisää apua?",
   "who-is-the-service-for": "Kenelle palvelu on tarkoitettu?",
@@ -1064,7 +1194,8 @@
     "summary": "Yhteenveto",
     "workplace-or-job-description": "Työpaikka / toimenkuva"
   },
-  "workplace-competences": "Työpaikka osaamiset",
+  "workplace-competences": "Työpaikan osaamiset",
   "yes": "Kyllä",
-  "your-competences": "Oma osaamisesi"
+  "your-competences": "Omat osaamiset",
+  "your-interests": "Omat kiinnostukset"
 }

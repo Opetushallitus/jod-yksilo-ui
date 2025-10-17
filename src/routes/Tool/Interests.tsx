@@ -47,8 +47,9 @@ const Interests = () => {
         <>
           <OsaamisSuosittelija
             onChange={setKiinnostukset}
-            value={kiinnostukset}
+            value={kiinnostukset.filter((k) => k.tyyppi === 'KARTOITETTU')}
             mode="kiinnostukset"
+            tagHeadingClassName="bg-white"
             hideTextAreaLabel
           />
           {!isPrd && (

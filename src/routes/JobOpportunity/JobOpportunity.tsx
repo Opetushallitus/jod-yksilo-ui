@@ -4,9 +4,9 @@ import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompet
 import { CounselingBanner } from '@/components/CounselingBanner/CounselingBanner';
 import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
-import RateAiContent from '@/components/RateAiContent/RateAiContent';
+import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText, hashString, sortByProperty } from '@/utils';
+import { formatDate, getLocalizedText, hashString, sortByProperty } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
@@ -23,7 +23,6 @@ const JobOpportunity = () => {
   } = useTranslation();
   const { sm } = useMediaQueries();
   const { tyomahdollisuus, osaamiset, isLoggedIn, ammattiryhma } = useLoaderData<LoaderData>();
-  const hasAiContent = tyomahdollisuus.aineisto !== 'AMMATTITIETO';
   const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
   const competencesTableData = React.useMemo(
     () =>
@@ -54,13 +53,13 @@ const JobOpportunity = () => {
     {
       navTitle: t('description'),
       showDivider: false,
-      showAiInfoInTitle: hasAiContent,
+      showAiInfoInTitle: true,
       content: <p className="text-body-lg font-arial">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>,
     },
     {
       navTitle: t('job-opportunity.most-common-job-tasks.title'),
       showDivider: false,
-      showAiInfoInTitle: false,
+      showAiInfoInTitle: true,
       content: (
         <ul className="list-disc ml-7">
           {tyomahdollisuusTehtavat.map((value: string, index: number) => (
@@ -77,20 +76,14 @@ const JobOpportunity = () => {
     },
     {
       navTitle: t('job-opportunity.competences.title'),
-      showAiInfoInTitle: hasAiContent,
+      showAiInfoInTitle: true,
       content: (
         <div className="flex flex-col gap-6 mb-9 grow">
           <span className="font-arial">{t('job-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} />
           {!sm && (
             <>
-              <RateAiContent
-                // eslint-disable-next-line no-console
-                onDislike={(value) => console.log('not implemented', value)}
-                // eslint-disable-next-line no-console
-                onLike={() => console.log('not implemented')}
-                variant="opportunity"
-              />
+              <RateAiContent variant="mahdollisuus" area="Työmahdollisuus" />
               <CounselingBanner />
             </>
           )}
@@ -100,8 +93,56 @@ const JobOpportunity = () => {
     {
       navTitle: t('job-opportunity.professional-group'),
       titleAppendix: getLocalizedText(ammattiryhma?.nimi),
-      content: <div className="font-arial">{getLocalizedText(tyomahdollisuus.kuvaus)}</div>,
+      content: <div className="font-arial">{getLocalizedText(ammattiryhma?.kuvaus)}</div>,
       showDivider: false,
+    },
+    {
+      navTitle: t('job-opportunity.salary-data.title'),
+      showDivider: false,
+      showNavTitle: false,
+      showAiInfoInTitle: false,
+      content: (
+        <div className="bg-white p-6">
+          <div className="flex items-center">
+            <h3 className="text-heading-3">{t('job-opportunity.salary-data.title')}</h3>
+          </div>
+
+          {tyomahdollisuus?.palkkatiedot ? (
+            <>
+              <p className="text-secondary-gray">
+                {formatDate(new Date(tyomahdollisuus?.palkkatiedot?.tiedotHaettu), 'medium')}
+              </p>
+
+              <div className="flex sm:flex-row flex-col justify-around text-center gap-9 sm:my-8 my-4">
+                <div>
+                  <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                    {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka || '---'} €
+                  </h4>
+                  <p>{t('job-opportunity.salary-data.lowest-decile')}</p>
+                </div>
+
+                <div>
+                  <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                    {tyomahdollisuus?.palkkatiedot?.mediaaniPalkka || '---'} €
+                  </h4>
+                  <p>{t('job-opportunity.salary-data.median')}</p>
+                </div>
+
+                <div>
+                  <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                    {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka || '---'} €
+                  </h4>
+                  <p>{t('job-opportunity.salary-data.highest-decile')}</p>
+                </div>
+              </div>
+
+              <p>{t('job-opportunity.salary-data.description')}</p>
+            </>
+          ) : (
+            <p>{t('job-opportunity.salary-data.not-available')}</p>
+          )}
+        </div>
+      ),
     },
     {
       navTitle: t('job-opportunity.job-advertisement-characteristics'),
@@ -134,15 +175,16 @@ const JobOpportunity = () => {
           </div>
           <h3 className="text-heading-2 mb-4">{t('job-opportunity.tyomarkkinatori.title')}</h3>
           <p>{t('job-opportunity.tyomarkkinatori.description')}</p>
-          <Button
-            data-testid="job-opportunity-open-tyomarkkinatori"
-            size="sm"
-            className="w-fit mt-7"
-            label={t('job-opportunity.tyomarkkinatori.button-label')}
-            icon={<JodOpenInNew />}
-            iconSide="right"
-            LinkComponent={getLinkTo(tmtUrl, { useAnchor: true, target: '_blank' })}
-          />
+          <div className="mt-7">
+            <Button
+              data-testid="job-opportunity-open-tyomarkkinatori"
+              size="sm"
+              label={t('job-opportunity.tyomarkkinatori.button-label')}
+              icon={<JodOpenInNew />}
+              iconSide="right"
+              LinkComponent={getLinkTo(tmtUrl, { useAnchor: true, target: '_blank' })}
+            />
+          </div>
         </div>
       ),
     },

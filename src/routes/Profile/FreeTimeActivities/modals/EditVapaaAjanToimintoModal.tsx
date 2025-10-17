@@ -124,6 +124,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
               label={t('free-time-activities.name-of-free-time-theme')}
               {...methods.register(`nimi.${language}` as const)}
               placeholder={t('profile.free-time-activities.modals.name-of-free-time-theme-placeholder')}
+              requiredText={t('required')}
             />
             <FormError name={`nimi.${language}`} errors={errors} />
           </Form>

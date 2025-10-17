@@ -45,7 +45,7 @@ export const CompetenceFilters = ({
   setSelectedFilters,
   ignoredFilterKeys = [],
 }: CompetenceFiltersProps) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   // Toggle single filter item
   const toggleSingleFilter = (type: CompetenceSourceType, index: number) => () => {
@@ -91,8 +91,7 @@ export const CompetenceFilters = ({
                   title={
                     <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
                   }
-                  titleText={t(`types.competence.${key}`)}
-                  lang={i18n.language}
+                  ariaLabel={t(`types.competence.${key}`)}
                 >
                   <ul className="gap-y-3 flex-col flex">
                     {selectedFilters[key]?.map((item, idx) => (

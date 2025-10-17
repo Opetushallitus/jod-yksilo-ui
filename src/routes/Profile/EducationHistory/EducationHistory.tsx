@@ -6,13 +6,13 @@ import { useModal } from '@/hooks/useModal';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal';
-import { Button, EmptyState } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
+import { Button, EmptyState, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLoaderData, useRevalidator, useSearchParams } from 'react-router';
+import { useLoaderData, useRevalidator, useSearchParams } from 'react-router';
 import { ProfileSectionTitle } from '../components';
 import { ProfileNavigationList } from '../components/index.tsx';
+import { ToolCard } from '../components/ToolCard.tsx';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
 import ImportKoulutusResultModal from './modals/ImportKoulutusResultModal';
 import ImportKoulutusStartModal from './modals/ImportKoulutusStartModal';
@@ -30,10 +30,8 @@ const EducationHistory = () => {
       }
     >;
   };
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
+  const { lg } = useMediaQueries();
   const title = t('profile.education-history.title');
 
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>(
@@ -242,32 +240,25 @@ const EducationHistory = () => {
 
     // Set up polling with an appropriate retry strategy
     React.useEffect(() => {
-      const interval = error ? 15_000 : 5_000;
+      const interval = error ? 15_000 : 5000;
       const intervalId = setInterval(fetchOsaamisetTunnistus, interval);
       return () => clearInterval(intervalId);
     }, [fetchOsaamisetTunnistus, error]);
   };
   usePollOsaamisetTunnistus(isOsaamisetTunnistusOngoing, rows, setRows, revalidator);
 
-  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
-
   return (
-    <MainLayout navChildren={navChildren}>
+    <MainLayout
+      navChildren={
+        <div className="flex flex-col gap-5">
+          <ProfileNavigationList />
+          <ToolCard testId="education-history-go-to-tool" />
+        </div>
+      }
+    >
       <title>{title}</title>
       <ProfileSectionTitle type="KOULUTUS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>
-      <div className="mb-8">
-        <Link
-          to={`/${language}/${t('slugs.tool.index')}`}
-          className="text-button-md hover:underline text-accent mt-4"
-          data-testid="education-history-go-to-tool"
-        >
-          <div className="flex items-center gap-2">
-            {t('profile.favorites.link-go-to-job-and-education-opportunities')}
-            <JodArrowRight size={24} />
-          </div>
-        </Link>
-      </div>
 
       {rows.length === 0 && (
         <div className="mt-6 mb-7" data-testid="education-history-empty-state">
@@ -309,6 +300,7 @@ const EducationHistory = () => {
           </TooltipWrapper>
         </div>
       </div>
+      {lg ? null : <ToolCard testId="education-history-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };

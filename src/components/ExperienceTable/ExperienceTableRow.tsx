@@ -134,6 +134,7 @@ export const ExperienceTableRow = ({
       >
         <button
           aria-label={actionLabel ?? t('edit')}
+          aria-haspopup="dialog"
           onClick={() =>
             useConfirm
               ? onShowDialog(() => {
@@ -252,17 +253,18 @@ export const ExperienceTableRow = ({
       <tr>
         {isOpen && !showCheckbox && (
           <td colSpan={5} className={`w-full ${last ? 'px-5 pt-5' : 'p-5'}`.trim()}>
-            <div className="flex flex-wrap gap-3" aria-label={t('competences')}>
+            <ul className="flex flex-wrap gap-3" aria-label={t('competences')}>
               {sortedCompetences.map((competence) => (
-                <Tag
-                  label={getLocalizedText(competence.nimi)}
-                  title={getLocalizedText(competence.kuvaus)}
-                  key={competence.id}
-                  variant="presentation"
-                  sourceType={competence.sourceType ?? 'jotain-muuta'}
-                />
+                <li key={competence.id}>
+                  <Tag
+                    label={getLocalizedText(competence.nimi)}
+                    tooltip={getLocalizedText(competence.kuvaus)}
+                    variant="presentation"
+                    sourceType={competence.sourceType ?? 'jotain-muuta'}
+                  />
+                </li>
               ))}
-            </div>
+            </ul>
           </td>
         )}
       </tr>

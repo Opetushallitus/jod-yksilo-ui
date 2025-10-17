@@ -4,11 +4,12 @@ import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { LogoutFormContext } from '@/routes/Root';
 import { useToolStore } from '@/stores/useToolStore';
-import { Button, Toggle } from '@jod/design-system';
+import { Button, Toggle, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouteLoaderData } from 'react-router';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { ToolCard } from '../components/ToolCard';
 
 const DownloadLink = ({ children }: { children: React.ReactNode }) => (
   <a href={`${import.meta.env.BASE_URL}api/profiili/yksilo/vienti`}>{children}</a>
@@ -19,11 +20,13 @@ const ToggleWithText = ({
   description,
   checked,
   onChange,
+  disabled = false,
 }: {
   title: string;
   description: string;
   checked: boolean;
   onChange: () => void;
+  disabled: boolean;
 }) => {
   const { t } = useTranslation();
 
@@ -38,6 +41,7 @@ const ToggleWithText = ({
         <Toggle
           serviceVariant="yksilo"
           checked={checked}
+          disabled={disabled}
           onChange={onChange}
           ariaLabel={checked ? t('allow') : t('disallow')}
         />
@@ -48,6 +52,7 @@ const ToggleWithText = ({
 
 const Preferences = () => {
   const { t } = useTranslation();
+  const { lg } = useMediaQueries();
   const title = t('profile.preferences.title');
   const toolStore = useToolStore();
   const logoutForm = React.useContext(LogoutFormContext);
@@ -68,44 +73,54 @@ const Preferences = () => {
   const [lupaLuovuttaaTiedotUlkopuoliselle, setLupaLuovuttaaTiedotUlkopuoliselle] = React.useState(
     data?.lupaLuovuttaaTiedotUlkopuoliselle ?? false,
   );
-  const [lupaArkistoida, setLupaArkistoida] = React.useState(data?.lupaArkistoida ?? false);
   const [lupaKayttaaTekoalynKoulutukseen, setLupaKayttaaTekoalynKoulutukseen] = React.useState(
     data?.lupaKayttaaTekoalynKoulutukseen ?? false,
   );
+  const [updating, setUpdating] = React.useState<boolean>(false);
 
+  // Store previous values for comparison to determine actual change
+  const prevValues = React.useRef({
+    lupaLuovuttaaTiedotUlkopuoliselle,
+    lupaKayttaaTekoalynKoulutukseen,
+  });
+
+  const isEqual = (a: object, b: object) => JSON.stringify(a) === JSON.stringify(b);
+
+  // Effect to call update only when data change (and not on first render)
   React.useEffect(() => {
-    const updateProfile = async () => {
-      await client.PUT('/api/profiili/yksilo', {
-        body: {
-          tervetuloapolku: data?.tervetuloapolku ?? false,
-          lupaLuovuttaaTiedotUlkopuoliselle,
-          lupaArkistoida,
-          lupaKayttaaTekoalynKoulutukseen,
-        },
-      });
+    const currentValues = {
+      lupaLuovuttaaTiedotUlkopuoliselle,
+      lupaKayttaaTekoalynKoulutukseen,
     };
 
-    if (
-      lupaLuovuttaaTiedotUlkopuoliselle !== data?.lupaLuovuttaaTiedotUlkopuoliselle ||
-      lupaArkistoida !== data?.lupaArkistoida ||
-      lupaKayttaaTekoalynKoulutukseen !== data?.lupaKayttaaTekoalynKoulutukseen
-    ) {
-      updateProfile();
-    }
-  }, [
-    lupaLuovuttaaTiedotUlkopuoliselle,
-    lupaArkistoida,
-    lupaKayttaaTekoalynKoulutukseen,
-    data?.lupaLuovuttaaTiedotUlkopuoliselle,
-    data?.lupaArkistoida,
-    data?.lupaKayttaaTekoalynKoulutukseen,
-    data?.tervetuloapolku,
-  ]);
+    if (!isEqual(prevValues.current, currentValues)) {
+      // Values changed, call update endpoint
+      setUpdating(true);
+      client
+        .PUT('/api/profiili/yksilo', {
+          body: {
+            tervetuloapolku: data?.tervetuloapolku ?? false,
+            lupaLuovuttaaTiedotUlkopuoliselle: currentValues.lupaLuovuttaaTiedotUlkopuoliselle,
+            lupaKayttaaTekoalynKoulutukseen: currentValues.lupaKayttaaTekoalynKoulutukseen,
+          },
+        })
+        .finally(() => {
+          setUpdating(false);
+        });
 
-  const navChildren = React.useMemo(() => <ProfileNavigationList />, []);
+      prevValues.current = currentValues;
+    }
+  }, [lupaLuovuttaaTiedotUlkopuoliselle, lupaKayttaaTekoalynKoulutukseen, data?.tervetuloapolku]);
 
   return (
-    <MainLayout navChildren={navChildren}>
+    <MainLayout
+      navChildren={
+        <div className="flex flex-col gap-5">
+          <ProfileNavigationList />
+          <ToolCard testId="preferences-go-to-tool" />
+        </div>
+      }
+    >
       <title>{title}</title>
       <ProfileSectionTitle type="ASETUKSENI" title={title} />
       <div className="mb-8 text-body-lg flex flex-col gap-7">
@@ -117,30 +132,21 @@ const Preferences = () => {
         </h3>
         <p className="text-body-md mb-5">{t('preferences.data-disclosure-unanonymized.description')}</p>
         <ToggleWithText
-          title={t('preferences.data-disclosure-unanonymized.permission-share-with-third-parties.title')}
-          description={t('preferences.data-disclosure-unanonymized.permission-share-with-third-parties.description')}
+          title={t('preferences.data-disclosure-unanonymized.permission-education-and-planning.title')}
+          description={t('preferences.data-disclosure-unanonymized.permission-education-and-planning.description')}
           checked={lupaLuovuttaaTiedotUlkopuoliselle}
-          onChange={() => {
-            setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle);
-          }}
+          onChange={() => setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle)}
+          disabled={updating}
           data-testid="pref-share-third-parties"
         />
         <ToggleWithText
-          title={t('preferences.data-disclosure-unanonymized.permission-to-archive.title')}
-          description={t('preferences.data-disclosure-unanonymized.permission-to-archive.description')}
-          checked={lupaArkistoida}
-          onChange={() => {
-            setLupaArkistoida(!lupaArkistoida);
-          }}
-          data-testid="pref-archive"
-        />
-        <ToggleWithText
-          title={t('preferences.data-disclosure-unanonymized.permission-ai-training.title')}
-          description={t('preferences.data-disclosure-unanonymized.permission-ai-training.description')}
+          title={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.title')}
+          description={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.description')}
           checked={lupaKayttaaTekoalynKoulutukseen}
           onChange={() => {
             setLupaKayttaaTekoalynKoulutukseen(!lupaKayttaaTekoalynKoulutukseen);
           }}
+          disabled={updating}
           data-testid="pref-ai-training"
         />
       </section>
@@ -170,6 +176,7 @@ const Preferences = () => {
           data-testid="pref-delete-profile"
         />
       </section>
+      {lg ? null : <ToolCard testId="preferences-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };

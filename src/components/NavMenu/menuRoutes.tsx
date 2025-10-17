@@ -29,7 +29,7 @@ export const useMenuRoutes = (onClose: () => void) => {
         selected: pathname === `/${language}`,
       },
       {
-        label: t('tool.title'),
+        label: t('navigation.main-section.tool-title'),
         LinkComponent: ({ children, className }: LinkComponent) => (
           <NavLink to={`/${language}/${t('slugs.tool.index')}`} className={className} lang={language} onClick={onClose}>
             {children}
@@ -51,7 +51,7 @@ export const useMenuRoutes = (onClose: () => void) => {
           </NavLinkBasedOnAuth>
         ),
         childItems: generateMenuItems({
-          menuRoutes: profileRoutes,
+          menuRoutes: profileRoutes.slice(1), // Exclude the first "Omat sivuni" route
           loggedIn: !!data,
           pathname,
           pathPrefix: t('slugs.profile.index'),

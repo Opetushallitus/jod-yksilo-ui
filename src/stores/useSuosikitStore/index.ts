@@ -182,12 +182,12 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
     const ammattiryhmaNimet = { ...get().ammattiryhmaNimet };
 
     const ammattiryhmaUris = sortedResultBySuosikkiOrder
-      .filter((m) => m.ammattiryhma && !ammattiryhmaNimet?.[m.ammattiryhma])
-      .map((m) => m.ammattiryhma!);
+      .filter((m) => m.ammattiryhma?.uri && !ammattiryhmaNimet?.[m.ammattiryhma.uri])
+      .map((m) => m.ammattiryhma!.uri)
+      .filter((uri): uri is string => uri !== undefined);
 
     if (ammattiryhmaUris.length > 0) {
       const ammattiryhmat = await ammatit.find(ammattiryhmaUris);
-
       ammattiryhmat.forEach((ar) => {
         ammattiryhmaNimet[ar.uri] = ar.nimi;
       });

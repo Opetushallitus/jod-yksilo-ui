@@ -412,6 +412,7 @@ const Path = () => {
                 label={t('profile.paths.plan-name')}
                 {...methods.register(`nimi.${language}` as const)}
                 onBlur={methods.handleSubmit(save)}
+                requiredText={t('required')}
                 data-testid="path-plan-name"
               />
               <FormError name={`nimi.${language}`} errors={methods.formState.errors} />
@@ -429,13 +430,10 @@ const Path = () => {
                     type={paamaara.mahdollisuusTyyppi}
                     ammattiryhma={
                       paamaara.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
-                        ? getLocalizedText(
-                            ammattiryhmaNimet[
-                              (mahdollisuus as components['schemas']['TyomahdollisuusDto']).ammattiryhma!
-                            ],
-                          )
-                        : ''
+                        ? (mahdollisuus as components['schemas']['TyomahdollisuusDto']).ammattiryhma
+                        : undefined
                     }
+                    ammattiryhmaNimet={ammattiryhmaNimet}
                     hideFavorite
                   />
                   {getLocalizedText(paamaara.tavoite) ? (

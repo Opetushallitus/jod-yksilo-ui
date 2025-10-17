@@ -857,7 +857,6 @@ export interface components {
       readonly tunnisteTyyppi?: 'FIN' | 'EIDAS';
       tervetuloapolku?: boolean;
       lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
-      lupaArkistoida?: boolean;
       lupaKayttaaTekoalynKoulutukseen?: boolean;
       /** Format: int32 */
       syntymavuosi?: number;
@@ -867,6 +866,8 @@ export interface components {
       aidinkieli?: string;
       /** @enum {string} */
       valittuKieli?: 'fi' | 'sv' | 'en';
+      /** Format: email */
+      email?: string;
     };
     /** @example {
      *       "fi": "suomeksi",
@@ -1056,6 +1057,8 @@ export interface components {
     EhdotusMetadata: {
       /** @enum {string} */
       tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      ammattiryhma?: string;
+      aineisto?: string;
       /** Format: double */
       pisteet?: number;
       /** @enum {string} */
@@ -1179,6 +1182,12 @@ export interface components {
        */
       sivuja: number;
     };
+    AmmattiryhmaBasicDto: {
+      /** Format: uri */
+      uri?: string;
+      /** Format: int32 */
+      mediaaniPalkka?: number;
+    };
     SivuDtoTyomahdollisuusDto: {
       sisalto: components['schemas']['TyomahdollisuusDto'][];
       /**
@@ -1198,8 +1207,7 @@ export interface components {
       otsikko: components['schemas']['LokalisoituTeksti'];
       tiivistelma?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
-      /** Format: uri */
-      ammattiryhma?: string;
+      ammattiryhma?: components['schemas']['AmmattiryhmaBasicDto'];
       /** @enum {string} */
       aineisto?: 'TMT' | 'AMMATTITIETO';
       aktiivinen?: boolean;
@@ -1216,6 +1224,16 @@ export interface components {
       tyhjia: number;
       arvot: components['schemas']['ArvoDto'][];
     };
+    PalkkaDataDto: {
+      /** Format: date-time */
+      tiedotHaettu: string;
+      /** Format: int32 */
+      mediaaniPalkka?: number;
+      /** Format: int32 */
+      ylinDesiiliPalkka?: number;
+      /** Format: int32 */
+      alinDesiiliPalkka?: number;
+    };
     TyomahdollisuusFullDto: {
       /** Format: uuid */
       id: string;
@@ -1226,6 +1244,7 @@ export interface components {
       yleisetVaatimukset?: components['schemas']['LokalisoituTeksti'];
       /** Format: uri */
       ammattiryhma?: string;
+      palkkatiedot?: components['schemas']['PalkkaDataDto'];
       /** @enum {string} */
       aineisto?: 'TMT' | 'AMMATTITIETO';
       aktiivinen?: boolean;
@@ -1244,8 +1263,12 @@ export interface components {
       csrf: components['schemas']['CsrfTokenDto'];
       tervetuloapolku?: boolean;
       lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
-      lupaArkistoida?: boolean;
       lupaKayttaaTekoalynKoulutukseen?: boolean;
+    };
+    KiinnostuksetExportDto: {
+      vapaateksti?: components['schemas']['LokalisoituTeksti'];
+      osaamiset?: string[];
+      ammatit?: string[];
     };
     KoulutusExportDto: {
       /** Format: uuid */
@@ -1266,6 +1289,10 @@ export interface components {
       id?: string;
       nimi?: components['schemas']['LokalisoituTeksti'];
       koulutukset?: components['schemas']['KoulutusExportDto'][];
+    };
+    MuuOsaaminenExportDto: {
+      vapaateksti?: components['schemas']['LokalisoituTeksti'];
+      osaamiset?: string[];
     };
     PaamaaraExportDto: {
       /** Format: uuid */
@@ -1347,7 +1374,6 @@ export interface components {
       id?: string;
       tervetuloapolku?: boolean;
       lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
-      lupaArkistoida?: boolean;
       lupaKayttaaTekoalynKoulutukseen?: boolean;
       /** Format: int32 */
       syntymavuosi?: number;
@@ -1357,13 +1383,12 @@ export interface components {
       aidinkieli?: string;
       /** @enum {string} */
       valittuKieli?: 'fi' | 'sv' | 'en';
+      email?: string;
       tyopaikat?: components['schemas']['TyopaikkaExportDto'][];
       koulutusKokonaisuudet?: components['schemas']['KoulutusKokonaisuusExportDto'][];
       toiminnot?: components['schemas']['ToimintoExportDto'][];
-      osaamisKiinnostukset?: string[];
-      ammattiKiinnostukset?: string[];
-      muuOsaaminenVapaateksti?: components['schemas']['LokalisoituTeksti'];
-      osaamisKiinnostuksetVapaateksti?: components['schemas']['LokalisoituTeksti'];
+      muuOsaaminen?: components['schemas']['MuuOsaaminenExportDto'];
+      kiinnostukset?: components['schemas']['KiinnostuksetExportDto'];
       suosikit?: components['schemas']['YksilonSuosikkiExportDto'][];
       paamaarat?: components['schemas']['PaamaaraExportDto'][];
     };
