@@ -6,22 +6,19 @@ import { WorkHistoryForm } from './utils';
 
 interface CompetencesStepProps {
   toimenkuva: number;
+  headerText: string;
 }
 
-const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
+const CompetencesStep = ({ toimenkuva, headerText }: CompetencesStepProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
-  const { getValues, watch, control } = useFormContext<WorkHistoryForm>();
-  const id = watch(`toimenkuvat.${toimenkuva}.id`);
+  const { getValues, control } = useFormContext<WorkHistoryForm>();
 
   return (
     <>
-      <ModalHeader
-        text={id ? t('profile.competences.edit') : t('work-history.identify-competences')}
-        testId="work-history-competences-title"
-      />
+      <ModalHeader text={headerText} testId="work-history-competences-title" />
       <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
         {getValues(`nimi.${language}`)} - {getValues(`toimenkuvat.${toimenkuva}.nimi.${language}`)}
       </h3>

@@ -120,6 +120,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
 
   return (
     <Modal
+      name={t('feedback.title')}
       open={isOpen}
       onClose={onClose}
       fullWidthContent

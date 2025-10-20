@@ -1,1 +1,8 @@
-{}
+{
+  "filters": "Filters",
+  "tool": {
+    "settings": {
+      "controls": "Controls"
+    }
+  }
+}

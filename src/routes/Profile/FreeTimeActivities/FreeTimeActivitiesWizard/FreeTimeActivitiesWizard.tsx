@@ -136,8 +136,28 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
   const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
   const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
 
+  const id = methods.watch('id');
+  const patevyysId = methods.watch(`patevyydet.${selectedPatevyys}.id`);
+
+  const headerText = React.useMemo(() => {
+    if (isSummaryStep) {
+      return t('free-time-activities.summary');
+    }
+    if (isCompetencesStep) {
+      return patevyysId ? t('profile.competences.edit') : t('free-time-activities.identify-proficiencies');
+    }
+    if (isActivityStep) {
+      if (isFirstStep) {
+        return id ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-free-time-activity');
+      }
+      return patevyysId ? t('free-time-activities.edit-proficiency') : t('free-time-activities.add-new-activity');
+    }
+    return '';
+  }, [id, patevyysId, isFirstStep, isActivityStep, isCompetencesStep, isSummaryStep, t]);
+
   return !isLoading ? (
     <Modal
+      name={headerText}
       open={isOpen}
       data-testid="free-time-wizard"
       fullWidthContent
@@ -155,17 +175,21 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
           >
             {isActivityStep && (
               <div data-testid="free-time-step-activity">
-                <ActivityStep type={isFirstStep ? 'toiminta' : 'patevyys'} patevyys={selectedPatevyys} />
+                <ActivityStep
+                  headerText={headerText}
+                  type={isFirstStep ? 'toiminta' : 'patevyys'}
+                  patevyys={selectedPatevyys}
+                />
               </div>
             )}
             {isCompetencesStep && (
               <div data-testid="free-time-step-competences">
-                <CompetencesStep patevyys={selectedPatevyys} />
+                <CompetencesStep headerText={headerText} patevyys={selectedPatevyys} />
               </div>
             )}
             {isSummaryStep && (
               <div data-testid="free-time-step-summary">
-                <SummaryStep />
+                <SummaryStep headerText={headerText} />
               </div>
             )}
           </Form>

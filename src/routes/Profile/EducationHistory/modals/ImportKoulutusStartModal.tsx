@@ -36,6 +36,7 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
 
   return (
     <Modal
+      name={t('education-history-import.start-modal.title')}
       open={isOpen}
       content={
         <div

@@ -311,8 +311,13 @@ const AddOrEditKoulutusModal = ({
     void trigger();
   }, [trigger]);
 
+  const title = koulutusId
+    ? t('education-history.edit-degree-or-education')
+    : t('education-history.add-studies-to-education');
+
   return !isLoading ? (
     <Modal
+      name={title}
       open={isOpen}
       progress={
         <WizardProgress

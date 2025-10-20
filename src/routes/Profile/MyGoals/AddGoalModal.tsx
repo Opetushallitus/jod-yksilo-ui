@@ -150,15 +150,17 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
     }
   };
 
+  const headerText = t('profile.my-goals.add-modal-title');
   return (
     <Modal
+      name={headerText}
       open={isOpen}
       fullWidthContent
       content={
         <div id={goalsId}>
           <div>
             <div className="bg-bg-gray pb-3 relative">
-              <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-modal-title')}</h1>
+              <h1 className="text-heading-1-mobile sm:text-heading-1">{headerText}</h1>
               <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-modal-description')}</p>
 
               {totalFavorites > 0 && (

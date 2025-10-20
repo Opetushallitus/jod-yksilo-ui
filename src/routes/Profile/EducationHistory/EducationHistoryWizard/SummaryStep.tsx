@@ -6,7 +6,11 @@ import { useTranslation } from 'react-i18next';
 import { Koulutus, getEducationHistoryTableRows } from '../utils';
 import { type EducationHistoryForm } from './utils';
 
-const SummaryStep = () => {
+interface SummaryStepProps {
+  headerText: string;
+}
+
+const SummaryStep = ({ headerText }: SummaryStepProps) => {
   const { t } = useTranslation();
   const { watch } = useFormContext<EducationHistoryForm>();
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>([]);
@@ -33,7 +37,7 @@ const SummaryStep = () => {
 
   return (
     <>
-      <ModalHeader text={t('education-history.summary')} />
+      <ModalHeader text={headerText} />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.education-history.modals.summary-description')}
       </p>

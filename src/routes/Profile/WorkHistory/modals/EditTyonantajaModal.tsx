@@ -114,6 +114,7 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
 
   return (
     <Modal
+      name={t('work-history.edit-workplace')}
       open={isOpen}
       content={
         <FormProvider {...methods}>

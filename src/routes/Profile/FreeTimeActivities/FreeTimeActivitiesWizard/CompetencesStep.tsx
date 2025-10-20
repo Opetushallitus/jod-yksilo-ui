@@ -6,22 +6,19 @@ import type { FreeTimeActivitiesForm } from './utils';
 
 interface CompetencesStepProps {
   patevyys: number;
+  headerText: string;
 }
 
-const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
+const CompetencesStep = ({ patevyys, headerText }: CompetencesStepProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
-  const { getValues, watch, control } = useFormContext<FreeTimeActivitiesForm>();
-  const id = watch(`patevyydet.${patevyys}.id`);
+  const { getValues, control } = useFormContext<FreeTimeActivitiesForm>();
 
   return (
     <>
-      <ModalHeader
-        text={id ? t('profile.competences.edit') : t('free-time-activities.identify-proficiencies')}
-        testId="free-time-competences-title"
-      />
+      <ModalHeader text={headerText} testId="free-time-competences-title" />
       <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
         {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}
       </h3>

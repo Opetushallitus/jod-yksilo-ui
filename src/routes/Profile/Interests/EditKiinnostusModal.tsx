@@ -83,12 +83,17 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
     void trigger();
   }, [trigger]);
 
+  const headerText = React.useMemo(() => {
+    return data.length > 0 ? t('profile.interests.edit-interests') : t('profile.interests.add-interests');
+  }, [data, t]);
+
   if (isLoading) {
     return null;
   }
 
   return (
     <Modal
+      name={headerText}
       open={isOpen}
       content={
         <FormProvider {...methods}>
@@ -102,10 +107,7 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
               }
             }}
           >
-            <ModalHeader
-              text={data.length > 0 ? t('profile.interests.edit-interests') : t('profile.interests.add-interests')}
-              testId="edit-interests-title"
-            />
+            <ModalHeader text={headerText} testId="edit-interests-title" />
             <Controller
               control={methods.control}
               name="kiinnostukset"

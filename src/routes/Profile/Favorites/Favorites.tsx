@@ -201,6 +201,7 @@ const Favorites = () => {
       <div>
         {!lg && (
           <Modal
+            name={t('filters')}
             open={showFilters}
             onClose={() => setShowFilters(false)}
             content={

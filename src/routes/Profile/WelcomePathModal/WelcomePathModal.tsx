@@ -347,12 +347,26 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
   const isInfoStep = React.useMemo(() => step === 2, [step]);
   const isAiStep = React.useMemo(() => step === 3, [step]);
 
+  const headerText = React.useMemo(() => {
+    if (isFirstStep) {
+      return t('introduction.step-1.title');
+    }
+    if (isInfoStep) {
+      return t('introduction.step-2.title');
+    }
+    if (isAiStep) {
+      return t('introduction.step-3.title');
+    }
+    return '';
+  }, [t, isFirstStep, isInfoStep, isAiStep]);
+
   if (isLoading) {
     return null;
   }
 
   return (
     <Modal
+      name={headerText}
       open={showWelcomePathModal}
       content={
         <FormProvider {...methods}>
