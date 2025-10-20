@@ -31,6 +31,8 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
     t,
     i18n: { language },
   } = useTranslation();
+  // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const revalidator = useRevalidator();
 
   const formId = React.useId();
@@ -67,28 +69,44 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
   });
 
   const onSubmit: FormSubmitHandler<VapaaAjanToimintoForm> = async ({ data }: { data: VapaaAjanToimintoForm }) => {
-    await client.PUT(VAPAA_AJAN_TOIMINTO_API_PATH, {
-      params: {
-        path: {
-          id: data.id!,
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.PUT(VAPAA_AJAN_TOIMINTO_API_PATH, {
+        params: {
+          path: {
+            id: data.id!,
+          },
         },
-      },
-      body: {
-        id: data.id,
-        nimi: data.nimi,
-      },
-    });
-    await revalidator.revalidate();
-    onClose();
+        body: {
+          id: data.id,
+          nimi: data.nimi,
+        },
+      });
+      await revalidator.revalidate();
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const deleteToiminto = async () => {
-    await client.DELETE(VAPAA_AJAN_TOIMINTO_API_PATH, {
-      params: { path: { id } },
-    });
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.DELETE(VAPAA_AJAN_TOIMINTO_API_PATH, {
+        params: { path: { id } },
+      });
 
-    await revalidator.revalidate();
-    onClose();
+      await revalidator.revalidate();
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   React.useEffect(() => {
@@ -138,6 +156,9 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
               variant="white-delete"
               label={`${t('free-time-activities.delete-free-time-activity')}`}
               onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
                 showDialog({
                   title: t('free-time-activities.delete-free-time-activity'),
                   description: t('free-time-activities.confirm-delete-free-time-activity', {
@@ -156,7 +177,12 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
             <Button
               label={t('cancel')}
               variant="white"
-              onClick={onClose}
+              onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
+                onClose();
+              }}
               className="whitespace-nowrap"
               data-testid="free-time-cancel"
             />

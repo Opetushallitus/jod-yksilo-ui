@@ -12,7 +12,7 @@ import { z } from 'zod';
 import CompetencesStep from './CompetencesStep';
 import SummaryStep from './SummaryStep';
 import WorkplaceStep from './WorkplaceStep';
-import { type WorkHistoryForm } from './utils';
+import type { WorkHistoryForm } from './utils';
 
 interface WorkHistoryWizardProps {
   isOpen: boolean;
@@ -22,6 +22,8 @@ interface WorkHistoryWizardProps {
 const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
+  // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [step, setStep] = React.useState(1);
   const selectedToimenkuva = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
   const revalidator = useRevalidator();
@@ -95,7 +97,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
     },
   });
 
-  const { isValid, isSubmitting, isLoading } = useFormState({
+  const { isValid, isLoading } = useFormState({
     control: methods.control,
   });
   const { fields, append, remove } = useFieldArray({
@@ -103,19 +105,28 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
     name: 'toimenkuvat',
   });
   const onSubmit: FormSubmitHandler<WorkHistoryForm> = async ({ data }: { data: WorkHistoryForm }) => {
-    await client.POST('/api/profiili/tyopaikat', {
-      body: {
-        nimi: data.nimi,
-        toimenkuvat: data.toimenkuvat.map((toimenkuva) => ({
-          nimi: toimenkuva.nimi,
-          alkuPvm: toimenkuva.alkuPvm,
-          loppuPvm: toimenkuva.loppuPvm,
-          osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
-        })),
-      },
-    });
-    await revalidator.revalidate();
-    onClose();
+    if (isSubmitting) {
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      await client.POST('/api/profiili/tyopaikat', {
+        body: {
+          nimi: data.nimi,
+          toimenkuvat: data.toimenkuvat.map((toimenkuva) => ({
+            nimi: toimenkuva.nimi,
+            alkuPvm: toimenkuva.alkuPvm,
+            loppuPvm: toimenkuva.loppuPvm,
+            osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
+          })),
+        },
+      });
+      await revalidator.revalidate();
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const [steps, setSteps] = React.useState(1);
@@ -183,6 +194,9 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
             {step === steps && (
               <Button
                 onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
                   append({
                     nimi: {},
                     alkuPvm: '',
@@ -199,6 +213,9 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
             {step !== steps && selectedToimenkuva > 0 && (
               <Button
                 onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
                   setStep(selectedToimenkuva * 2);
                   remove(selectedToimenkuva);
                 }}
@@ -213,7 +230,12 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
             <Button onClick={() => onClose()} label={t('cancel')} variant="white" data-testid="work-history-cancel" />
             {step > 1 && (
               <Button
-                onClick={() => setStep(step - 1)}
+                onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
+                  setStep(step - 1);
+                }}
                 label={t('previous')}
                 variant="white"
                 icon={!sm ? <JodArrowLeft /> : undefined}
@@ -224,7 +246,12 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
             )}
             {step < steps && (
               <Button
-                onClick={() => setStep(step + 1)}
+                onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
+                  setStep(step + 1);
+                }}
                 label={t('next')}
                 variant="white"
                 icon={<JodArrowRight />}
@@ -239,7 +266,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 form={formId}
                 label={t('save')}
                 variant="white"
-                disabled={!isValid || isSubmitting}
+                disabled={!isValid}
                 className="whitespace-nowrap"
                 data-testid="work-history-save"
               />

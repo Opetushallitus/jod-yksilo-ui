@@ -67,7 +67,10 @@ const ExploreOpportunities = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settingsOpen]);
 
-  const onUpdateResults = async () => {
+  const onUpdateResults = async (loading: boolean) => {
+    if (loading) {
+      return;
+    }
     globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Päivitys']);
     await updateEhdotuksetAndTyomahdollisuudet(isLoggedIn);
   };
@@ -115,8 +118,7 @@ const ExploreOpportunities = () => {
                 size={lg ? 'lg' : 'sm'}
                 label={updateButtonLabel}
                 variant="accent"
-                onClick={onUpdateResults}
-                disabled={isLoading}
+                onClick={() => onUpdateResults(isLoading)}
                 icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
                 iconSide={isLoading ? 'right' : undefined}
                 data-testid="update-opportunities"

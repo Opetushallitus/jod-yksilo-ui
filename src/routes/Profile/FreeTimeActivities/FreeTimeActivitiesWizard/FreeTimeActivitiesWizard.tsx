@@ -12,7 +12,7 @@ import { z } from 'zod';
 import ActivityStep from './ActivityStep';
 import CompetencesStep from './CompetencesStep';
 import SummaryStep from './SummaryStep';
-import { type FreeTimeActivitiesForm } from './utils';
+import type { FreeTimeActivitiesForm } from './utils';
 
 interface FreeTimeActivitiesWizardProps {
   isOpen: boolean;
@@ -22,6 +22,8 @@ interface FreeTimeActivitiesWizardProps {
 const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
+  // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [step, setStep] = React.useState(1);
   const selectedPatevyys = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
   const revalidator = useRevalidator();
@@ -101,19 +103,28 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
   });
 
   const onSubmit: FormSubmitHandler<FreeTimeActivitiesForm> = async ({ data }: { data: FreeTimeActivitiesForm }) => {
-    await client.POST('/api/profiili/vapaa-ajan-toiminnot', {
-      body: {
-        nimi: data.nimi,
-        patevyydet: data.patevyydet.map((patevyys) => ({
-          nimi: patevyys.nimi,
-          alkuPvm: patevyys.alkuPvm,
-          loppuPvm: patevyys.loppuPvm,
-          osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),
-        })),
-      },
-    });
-    await revalidator.revalidate();
-    onClose();
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.POST('/api/profiili/vapaa-ajan-toiminnot', {
+        body: {
+          nimi: data.nimi,
+          patevyydet: data.patevyydet.map((patevyys) => ({
+            nimi: patevyys.nimi,
+            alkuPvm: patevyys.alkuPvm,
+            loppuPvm: patevyys.loppuPvm,
+            osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),
+          })),
+        },
+      });
+      await revalidator.revalidate();
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
+    setIsSubmitting(false);
   };
 
   const [steps, setSteps] = React.useState(1);
@@ -176,6 +187,9 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
             {step === steps && (
               <Button
                 onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
                   append({
                     nimi: {},
                     alkuPvm: '',
@@ -192,6 +206,9 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
             {step !== steps && selectedPatevyys > 0 && (
               <Button
                 onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
                   setStep(selectedPatevyys * 2);
                   remove(selectedPatevyys);
                 }}
@@ -204,7 +221,12 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
           </div>
           <div className="flex gap-5">
             <Button
-              onClick={() => onClose(true)}
+              onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
+                onClose(true);
+              }}
               label={t('cancel')}
               variant="white"
               className="whitespace-nowrap"
@@ -212,7 +234,12 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
             />
             {step > 1 && (
               <Button
-                onClick={() => setStep(step - 1)}
+                onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
+                  setStep(step - 1);
+                }}
                 label={t('previous')}
                 variant="white"
                 icon={!sm ? <JodArrowLeft /> : undefined}
@@ -223,7 +250,12 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
             )}
             {step < steps && (
               <Button
-                onClick={() => setStep(step + 1)}
+                onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
+                  setStep(step + 1);
+                }}
                 label={t('next')}
                 variant="white"
                 icon={<JodArrowRight />}
