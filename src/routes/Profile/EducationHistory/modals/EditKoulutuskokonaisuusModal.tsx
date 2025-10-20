@@ -35,7 +35,10 @@ const EditKoulutuskokonaisuusModal = ({
     t,
     i18n: { language },
   } = useTranslation();
+  const { showDialog } = useModal();
 
+  // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const formId = React.useId();
   useEscHandler(onClose, formId);
   const methods = useForm<KoulutuskokonaisuusForm>({
@@ -70,28 +73,41 @@ const EditKoulutuskokonaisuusModal = ({
   });
 
   const onSubmit: FormSubmitHandler<KoulutuskokonaisuusForm> = async ({ data }: { data: KoulutuskokonaisuusForm }) => {
-    await client.PUT(KOULUTUSKOKONAISUUS_API_PATH, {
-      params: {
-        path: {
-          id: data.id!,
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.PUT(KOULUTUSKOKONAISUUS_API_PATH, {
+        params: {
+          path: {
+            id: data.id!,
+          },
         },
-      },
-      body: {
-        id: data.id,
-        nimi: data.nimi,
-      },
-    });
-    onClose();
+        body: {
+          id: data.id,
+          nimi: data.nimi,
+        },
+      });
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const { showDialog } = useModal();
-
   const deleteKoulutuskokonaisuus = async () => {
-    await client.DELETE(KOULUTUSKOKONAISUUS_API_PATH, {
-      params: { path: { id } },
-    });
-
-    onClose();
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.DELETE(KOULUTUSKOKONAISUUS_API_PATH, {
+        params: { path: { id } },
+      });
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   React.useEffect(() => {
@@ -135,6 +151,9 @@ const EditKoulutuskokonaisuusModal = ({
               variant="white-delete"
               label={`${t('education-history.delete-education-history')}`}
               onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
                 showDialog({
                   title: t('education-history.delete-education-history'),
                   onConfirm: deleteKoulutuskokonaisuus,
@@ -146,7 +165,16 @@ const EditKoulutuskokonaisuusModal = ({
             />
           </div>
           <div className="flex flex-row gap-5">
-            <Button label={t('cancel')} variant="white" onClick={onClose} />
+            <Button
+              label={t('cancel')}
+              variant="white"
+              onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
+                onClose();
+              }}
+            />
             <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />
           </div>
         </div>

@@ -12,7 +12,7 @@ import { z } from 'zod';
 import CompetencesStep from './CompetencesStep';
 import EducationStep from './EducationStep';
 import SummaryStep from './SummaryStep';
-import { type EducationHistoryForm } from './utils';
+import type { EducationHistoryForm } from './utils';
 
 interface EducationHistoryWizardProps {
   isOpen: boolean;
@@ -102,20 +102,31 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
     control: methods.control,
     name: 'koulutukset',
   });
+
+  // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const onSubmit: FormSubmitHandler<EducationHistoryForm> = async ({ data }: { data: EducationHistoryForm }) => {
-    await client.POST('/api/profiili/koulutuskokonaisuudet', {
-      body: {
-        nimi: data.nimi,
-        koulutukset: data.koulutukset.map((koulutus) => ({
-          nimi: koulutus.nimi,
-          alkuPvm: koulutus.alkuPvm,
-          loppuPvm: koulutus.loppuPvm,
-          osaamiset: koulutus.osaamiset.map((osaaminen) => osaaminen.id),
-        })),
-      },
-    });
-    await revalidator.revalidate();
-    onClose();
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.POST('/api/profiili/koulutuskokonaisuudet', {
+        body: {
+          nimi: data.nimi,
+          koulutukset: data.koulutukset.map((koulutus) => ({
+            nimi: koulutus.nimi,
+            alkuPvm: koulutus.alkuPvm,
+            loppuPvm: koulutus.loppuPvm,
+            osaamiset: koulutus.osaamiset.map((osaaminen) => osaaminen.id),
+          })),
+        },
+      });
+      await revalidator.revalidate();
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const [steps, setSteps] = React.useState(1);
@@ -183,6 +194,9 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
             {step === steps && (
               <Button
                 onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
                   append({
                     nimi: {},
                     alkuPvm: '',
@@ -199,6 +213,9 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
             {step !== steps && selectedKoulutus > 0 && (
               <Button
                 onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
                   setStep(selectedKoulutus * 2);
                   remove(selectedKoulutus);
                 }}
@@ -213,7 +230,12 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
             <Button onClick={onClose} label={t('cancel')} variant="white" data-testid="education-history-cancel" />
             {step > 1 && (
               <Button
-                onClick={() => setStep(step - 1)}
+                onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
+                  setStep(step - 1);
+                }}
                 label={t('previous')}
                 variant="white"
                 icon={!sm ? <JodArrowLeft /> : undefined}
@@ -224,7 +246,12 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
             )}
             {step < steps && (
               <Button
-                onClick={() => setStep(step + 1)}
+                onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
+                  setStep(step + 1);
+                }}
                 label={t('next')}
                 variant="white"
                 icon={<JodArrowRight />}

@@ -1,6 +1,6 @@
 import { client } from '@/api/client';
-import { OsaaminenDto } from '@/api/osaamiset';
-import { OsaaminenValue, OsaamisSuosittelija } from '@/components';
+import type { OsaaminenDto } from '@/api/osaamiset';
+import { type OsaaminenValue, OsaamisSuosittelija } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -25,6 +25,8 @@ interface OsaamisetForm {
 const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalProps) => {
   const { t } = useTranslation();
   const revalidator = useRevalidator();
+  // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const formId = React.useId();
   useEscHandler(onClose, formId);
@@ -61,11 +63,19 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
   });
 
   const onSubmit: FormSubmitHandler<OsaamisetForm> = async ({ data }: { data: OsaamisetForm }) => {
-    await client.PUT('/api/profiili/muu-osaaminen', {
-      body: data.osaamiset.map((o) => o.id),
-    });
-    await revalidator.revalidate();
-    onClose();
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.PUT('/api/profiili/muu-osaaminen', {
+        body: data.osaamiset.map((o) => o.id),
+      });
+      await revalidator.revalidate();
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   React.useEffect(() => {
@@ -104,7 +114,17 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
       }
       footer={
         <div className="flex flex-row justify-end gap-5 flex-1">
-          <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />
+          <Button
+            label={t('cancel')}
+            variant="white"
+            onClick={() => {
+              if (isSubmitting) {
+                return;
+              }
+              onClose();
+            }}
+            className="whitespace-nowrap"
+          />
           <Button form={formId} label={t('save')} variant="white" disabled={!isValid} className="whitespace-nowrap" />
         </div>
       }

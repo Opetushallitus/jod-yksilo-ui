@@ -156,15 +156,23 @@ const AddOrEditKoulutusModal = ({
 
   const formId = React.useId();
   const { showDialog } = useModal();
+  // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   useEscHandler(onClose, formId);
   const [step, setStep] = React.useState(0);
   const stepComponents = [MainStep, OsaamisetStep];
   const StepComponent = stepComponents[step];
 
   const nextStep = () => {
+    if (isSubmitting) {
+      return;
+    }
     setStep(step < stepComponents.length - 1 ? step + 1 : step);
   };
   const previousStep = () => {
+    if (isSubmitting) {
+      return;
+    }
     setStep(step > 0 ? step - 1 : step);
   };
   const isLastStep = step === stepComponents.length - 1;
@@ -249,38 +257,49 @@ const AddOrEditKoulutusModal = ({
   }, [id, trigger]);
 
   const onSubmit: FormSubmitHandler<KoulutusForm> = async ({ data }: { data: KoulutusForm }) => {
-    if (koulutusId) {
-      await client.PUT(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
-        params: {
-          path: {
-            id,
-            koulutusId,
-          },
-        },
-        body: {
-          id: data.id,
-          nimi: data.nimi,
-          alkuPvm: data.alkuPvm,
-          loppuPvm: data.loppuPvm,
-          osaamiset: data.osaamiset.map((o) => o.id),
-        },
-      });
-    } else {
-      await client.POST(KOULUTUKSET_API_PATH, {
-        params: { path: { id } },
-        body: {
-          nimi: data.nimi,
-          alkuPvm: data.alkuPvm,
-          loppuPvm: data.loppuPvm,
-          osaamiset: data.osaamiset.map((o) => o.id),
-        },
-      });
+    if (isSubmitting) {
+      return;
     }
-    await revalidator.revalidate();
-    onClose();
+    try {
+      setIsSubmitting(true);
+      if (koulutusId) {
+        await client.PUT(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
+          params: {
+            path: {
+              id,
+              koulutusId,
+            },
+          },
+          body: {
+            id: data.id,
+            nimi: data.nimi,
+            alkuPvm: data.alkuPvm,
+            loppuPvm: data.loppuPvm,
+            osaamiset: data.osaamiset.map((o) => o.id),
+          },
+        });
+      } else {
+        await client.POST(KOULUTUKSET_API_PATH, {
+          params: { path: { id } },
+          body: {
+            nimi: data.nimi,
+            alkuPvm: data.alkuPvm,
+            loppuPvm: data.loppuPvm,
+            osaamiset: data.osaamiset.map((o) => o.id),
+          },
+        });
+      }
+      await revalidator.revalidate();
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const deleteKoulutus = async () => {
+    if (isSubmitting) {
+      return;
+    }
     await client.DELETE(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
       params: { path: { id, koulutusId: koulutusId! } },
     });
@@ -329,15 +348,18 @@ const AddOrEditKoulutusModal = ({
                 variant="white-delete"
                 className="whitespace-nowrap"
                 label={`${t('education-history.delete-degree')}`}
-                onClick={() =>
+                onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
                   showDialog({
                     title: t('education-history.delete-degree'),
                     onConfirm: deleteKoulutus,
                     description: t('education-history.confirm-delete-degree', {
                       name: getLocalizedText(methods.getValues('nimi')),
                     }),
-                  })
-                }
+                  });
+                }}
                 data-testid="education-history-delete"
               />
             )}
@@ -346,7 +368,12 @@ const AddOrEditKoulutusModal = ({
             <Button
               label={t('cancel')}
               variant="white"
-              onClick={onClose}
+              onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
+                onClose();
+              }}
               className="whitespace-nowrap"
               data-testid="education-history-cancel"
             />

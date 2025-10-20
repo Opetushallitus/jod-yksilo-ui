@@ -25,6 +25,8 @@ interface KiinnostusForm {
 const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalProps) => {
   const { t } = useTranslation();
   const revalidator = useRevalidator();
+  // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const formId = React.useId();
   useEscHandler(onClose, formId);
@@ -61,11 +63,20 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
   });
 
   const onSubmit: FormSubmitHandler<KiinnostusForm> = async ({ data }: { data: KiinnostusForm }) => {
-    await client.PUT('/api/profiili/kiinnostukset/osaamiset', {
-      body: data.kiinnostukset.map((kiinnostus) => kiinnostus.id),
-    });
-    await revalidator.revalidate();
-    onClose();
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.PUT('/api/profiili/kiinnostukset/osaamiset', {
+        body: data.kiinnostukset.map((kiinnostus) => kiinnostus.id),
+      });
+      await revalidator.revalidate();
+      setIsSubmitting(false);
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   React.useEffect(() => {
@@ -110,7 +121,12 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
           <Button
             label={t('cancel')}
             variant="white"
-            onClick={onClose}
+            onClick={() => {
+              if (isSubmitting) {
+                return;
+              }
+              onClose();
+            }}
             className="whitespace-nowrap"
             data-testid="interests-cancel"
           />

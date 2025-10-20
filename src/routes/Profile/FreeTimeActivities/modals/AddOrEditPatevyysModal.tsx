@@ -151,6 +151,8 @@ export const AddOrEditPatevyysModal = ({
   patevyysId,
 }: AddOrEditPatevyysModalProps) => {
   const { t } = useTranslation();
+  // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const revalidator = useRevalidator();
 
   if (!id) {
@@ -164,9 +166,15 @@ export const AddOrEditPatevyysModal = ({
   const StepComponent = stepComponents[step];
 
   const nextStep = () => {
+    if (isSubmitting) {
+      return;
+    }
     setStep(step < stepComponents.length - 1 ? step + 1 : step);
   };
   const previousStep = () => {
+    if (isSubmitting) {
+      return;
+    }
     setStep(step > 0 ? step - 1 : step);
   };
   const isLastStep = step === stepComponents.length - 1;
@@ -244,43 +252,59 @@ export const AddOrEditPatevyysModal = ({
   });
 
   const onSubmit: FormSubmitHandler<PatevyysForm> = async ({ data }: { data: PatevyysForm }) => {
-    if (patevyysId) {
-      await client.PUT(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
-        params: {
-          path: {
-            id,
-            patevyysId,
-          },
-        },
-        body: {
-          id: data.id,
-          nimi: data.nimi,
-          alkuPvm: data.alkuPvm,
-          loppuPvm: data.loppuPvm,
-          osaamiset: data.osaamiset.map((o) => o.id),
-        },
-      });
-    } else {
-      await client.POST(PATEVYYDET_API_PATH, {
-        params: { path: { id } },
-        body: {
-          nimi: data.nimi,
-          alkuPvm: data.alkuPvm,
-          loppuPvm: data.loppuPvm,
-          osaamiset: data.osaamiset.map((o) => o.id),
-        },
-      });
+    if (isSubmitting) {
+      return;
     }
-    await revalidator.revalidate();
-    onClose();
+    try {
+      setIsSubmitting(true);
+      if (patevyysId) {
+        await client.PUT(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
+          params: {
+            path: {
+              id,
+              patevyysId,
+            },
+          },
+          body: {
+            id: data.id,
+            nimi: data.nimi,
+            alkuPvm: data.alkuPvm,
+            loppuPvm: data.loppuPvm,
+            osaamiset: data.osaamiset.map((o) => o.id),
+          },
+        });
+      } else {
+        await client.POST(PATEVYYDET_API_PATH, {
+          params: { path: { id } },
+          body: {
+            nimi: data.nimi,
+            alkuPvm: data.alkuPvm,
+            loppuPvm: data.loppuPvm,
+            osaamiset: data.osaamiset.map((o) => o.id),
+          },
+        });
+      }
+      await revalidator.revalidate();
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const deletePatevyys = async () => {
-    await client.DELETE(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
-      params: { path: { id, patevyysId: patevyysId! } },
-    });
-    await revalidator.revalidate();
-    onClose();
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.DELETE(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
+        params: { path: { id, patevyysId: patevyysId! } },
+      });
+      await revalidator.revalidate();
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   React.useEffect(() => {
@@ -326,6 +350,9 @@ export const AddOrEditPatevyysModal = ({
                 variant="white-delete"
                 label={`${t('free-time-activities.delete-proficiency')}`}
                 onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
                   showDialog({
                     title: t('free-time-activities.delete-proficiency'),
                     onConfirm: deletePatevyys,
@@ -342,7 +369,12 @@ export const AddOrEditPatevyysModal = ({
             <Button
               label={t('cancel')}
               variant="white"
-              onClick={onClose}
+              onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
+                onClose();
+              }}
               className="whitespace-nowrap"
               data-testid="free-time-cancel"
             />
@@ -360,7 +392,7 @@ export const AddOrEditPatevyysModal = ({
               <Button
                 label={t('next')}
                 variant="white"
-                disabled={isLastStep || !isValid}
+                disabled={!isValid}
                 onClick={nextStep}
                 className="whitespace-nowrap"
                 data-testid="free-time-next"

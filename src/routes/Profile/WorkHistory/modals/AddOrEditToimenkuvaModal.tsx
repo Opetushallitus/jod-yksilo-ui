@@ -81,6 +81,7 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
         <div className="block w-full">
           <Controller
             control={control}
+            name="alkuPvm"
             render={({ field }) => (
               <Datepicker
                 label={t('started')}
@@ -92,7 +93,6 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
                 )}
               />
             )}
-            name="alkuPvm"
           />
           <TouchedFormError touchedFields={touchedFields} fieldName="alkuPvm" errors={errors} />
         </div>
@@ -156,9 +156,15 @@ const AddOrEditToimenkuvaModal = ({
   const revalidator = useRevalidator();
 
   const nextStep = () => {
+    if (isSubmitting) {
+      return;
+    }
     setStep(step < stepComponents.length - 1 ? step + 1 : step);
   };
   const previousStep = () => {
+    if (isSubmitting) {
+      return;
+    }
     setStep(step > 0 ? step - 1 : step);
   };
   const isLastStep = step === stepComponents.length - 1;
@@ -235,8 +241,14 @@ const AddOrEditToimenkuvaModal = ({
   const { isLoading, isValid } = useFormState({
     control: methods.control,
   });
+  // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const onSubmit: FormSubmitHandler<ToimenkuvaForm> = async ({ data }: { data: ToimenkuvaForm }) => {
+    if (isSubmitting) {
+      return;
+    }
+    setIsSubmitting(true);
     if (toimenkuvaId) {
       await client.PUT(`${TOIMENKUVAT_API_PATH}/{toimenkuvaId}`, {
         params: {
@@ -265,15 +277,24 @@ const AddOrEditToimenkuvaModal = ({
       });
     }
     await revalidator.revalidate();
+    setIsSubmitting(false);
     onClose();
   };
 
   const deleteToimenkuva = async () => {
-    await client.DELETE(`${TOIMENKUVAT_API_PATH}/{toimenkuvaId}`, {
-      params: { path: { id, toimenkuvaId: toimenkuvaId! } },
-    });
-    await revalidator.revalidate();
-    onClose();
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.DELETE(`${TOIMENKUVAT_API_PATH}/{toimenkuvaId}`, {
+        params: { path: { id, toimenkuvaId: toimenkuvaId! } },
+      });
+      await revalidator.revalidate();
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   React.useEffect(() => {
@@ -320,6 +341,9 @@ const AddOrEditToimenkuvaModal = ({
                 variant="white-delete"
                 label={`${t('work-history.delete-job-description')}`}
                 onClick={() => {
+                  if (isSubmitting) {
+                    return;
+                  }
                   showDialog({
                     title: t('work-history.delete-job-description'),
                     onConfirm: () => void deleteToimenkuva(),

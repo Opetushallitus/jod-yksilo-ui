@@ -30,7 +30,8 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
     t,
     i18n: { language },
   } = useTranslation();
-
+  // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const formId = React.useId();
   const { showDialog, closeActiveModal } = useModal();
   const revalidator = useRevalidator();
@@ -64,27 +65,43 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
   });
 
   const onSubmit: FormSubmitHandler<TyonantajaForm> = async ({ data }: { data: TyonantajaForm }) => {
-    await client.PUT(TYOPAIKKA_API_PATH, {
-      params: {
-        path: {
-          id: data.id!,
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.PUT(TYOPAIKKA_API_PATH, {
+        params: {
+          path: {
+            id: data.id!,
+          },
         },
-      },
-      body: {
-        id: data.id,
-        nimi: data.nimi,
-      },
-    });
-    await revalidator.revalidate();
-    closeActiveModal();
+        body: {
+          id: data.id,
+          nimi: data.nimi,
+        },
+      });
+      await revalidator.revalidate();
+      closeActiveModal();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const deleteTyopaikka = async () => {
-    await client.DELETE(TYOPAIKKA_API_PATH, {
-      params: { path: { id } },
-    });
-    await revalidator.revalidate();
-    closeActiveModal();
+    if (isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      await client.DELETE(TYOPAIKKA_API_PATH, {
+        params: { path: { id } },
+      });
+      await revalidator.revalidate();
+      closeActiveModal();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   React.useEffect(() => {
@@ -129,6 +146,9 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
               variant="white-delete"
               label={`${t('work-history.delete-work-history')}`}
               onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
                 showDialog({
                   title: t('work-history.delete-work-history'),
                   description: t('work-history.confirm-delete-work-history', {
@@ -140,7 +160,17 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
             />
           </div>
           <div className="flex flex-row gap-5">
-            <Button label={t('cancel')} variant="white" onClick={closeActiveModal} className="whitespace-nowrap" />
+            <Button
+              label={t('cancel')}
+              variant="white"
+              onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
+                closeActiveModal();
+              }}
+              className="whitespace-nowrap"
+            />
             <Button form={formId} label={t('save')} variant="white" disabled={!isValid} className="whitespace-nowrap" />
           </div>
         </div>
