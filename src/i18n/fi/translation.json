@@ -922,11 +922,12 @@
       "body": "Et ollut tyytyväinen. Voisitko kertoa tarkemmin, mikä ei toiminut? Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
       "close": "Sulje",
       "header": "Tarkenna palautettasi",
-      "placeholder": "Esim. sisältö epätarkkaa, ei vastannut tarvetta, väärä sävy",
-      "send": "Lähetä"
+      "placeholder": "Esim. sisältö epätarkkaa, ei vastannut tarvetta, väärä sävy...",
+      "send": "Lähetä",
+      "sending": "Lähetetään"
     },
     "toast": "Kiitos palautteesta!",
-    "toast-error": "Palautteen lähetys epäonnistui, yritä myöhemmin uudelleen"
+    "toast-error": "Palautteen lähettäminen epäonnistui — yritä uudelleen"
   },
   "remove-approval": "Hylkää hyväksyntä",
   "remove-favorite": "Poista suosikeista",
@@ -1050,10 +1051,9 @@
       "title": "Tietojesi kokonaiskuva"
     },
     "job-opportunity-is-part-of-group": "Työmahdollisuus kuuluu ammattiryhmään",
+    "job-opportunity-is-part-of-group-tooltip": "Ammatteja ja työmahdollisuuksia ryhmitellään ammattiryhmiin. Ammattiryhmiä käytetään väestön ammattirakenteen tilastoinnissa, ja niiden luomiseen käytetään ammattiluokitusta, joka auttaa vertailemaan tilastoja kansallisesti ja kansainvälisesti.",
     "job-opportunity-median-salary": "Mediaanipalkka",
     "job-opportunity-median-salary-tooltip": "Mediaanipalkka tarkoittaa palkkaa, joka jakaa palkansaajat kahteen yhtä suureen ryhmään: puolet ansaitsee vähemmän ja puolet enemmän kuin mediaanipalkan verran. Se kuvaa paremmin \"tyypillistä\" palkkaa kuin keskiarvo, koska se ei vääristy yksittäisten erittäin suurten tai pienten palkkojen takia.",
-    "salary-suffix": "€/kk",
-    "job-opportunity-is-part-of-group-tooltip": "Ammatteja ja työmahdollisuuksia ryhmitellään ammattiryhmiin. Ammattiryhmiä käytetään väestön ammattirakenteen tilastoinnissa, ja niiden luomiseen käytetään ammattiluokitusta, joka auttaa vertailemaan tilastoja kansallisesti ja kansainvälisesti.",
     "my-own-data": {
       "cancel-text": "Ei, peruuta",
       "competences": {
@@ -1112,6 +1112,7 @@
       "title": "Tietosi"
     },
     "remove-competence-help": "Poista osaaminen x-merkistä.",
+    "salary-suffix": "€/kk",
     "settings": {
       "education-opportunity": {
         "duration": "Kesto",
@@ -1126,10 +1127,10 @@
         "job-opportunity-filters": "Suodata työmahdollisuuksia",
         "job-opportunity-type": "Tyyppi",
         "location": "Sijainti",
+        "occupation-type": "Ylätason ammattiryhmä",
         "sorting": "Järjestys",
         "title": "Yleiset säätimet",
-        "weight": "Painotus",
-        "occupation-type": "Ylätason ammattiryhmä"
+        "weight": "Painotus"
       },
       "job-opportunity": {
         "industry": "Toimiala",
