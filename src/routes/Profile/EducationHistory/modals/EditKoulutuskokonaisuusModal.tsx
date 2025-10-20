@@ -120,6 +120,7 @@ const EditKoulutuskokonaisuusModal = ({
 
   return (
     <Modal
+      name={t('education-history.edit-education')}
       open={isOpen}
       content={
         <FormProvider {...methods}>

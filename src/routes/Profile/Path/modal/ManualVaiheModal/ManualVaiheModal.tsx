@@ -138,6 +138,7 @@ const ManualVaiheModal = ({ isOpen, onClose, vaiheIndex }: ManualVaiheModalProps
   return (
     <FormProvider {...methods}>
       <Modal
+        name={t('profile.paths.step-n-details', { count: vaiheIndex + 1 })}
         open={isOpen}
         fullWidthContent={wizardStep === 1}
         progress={

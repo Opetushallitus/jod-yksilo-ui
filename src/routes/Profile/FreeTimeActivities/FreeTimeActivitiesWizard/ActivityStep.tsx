@@ -10,9 +10,10 @@ import type { FreeTimeActivitiesForm } from './utils';
 interface ActivityStepProps {
   type: 'toiminta' | 'patevyys';
   patevyys: number;
+  headerText: string;
 }
 
-const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
+const ActivityStep = ({ headerText, type, patevyys }: ActivityStepProps) => {
   const {
     t,
     i18n: { language },
@@ -24,8 +25,6 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
     trigger,
     formState: { errors, touchedFields },
   } = useFormContext<FreeTimeActivitiesForm>();
-  const id = watch('id');
-  const patevyysId = watch(`patevyydet.${patevyys}.id`);
 
   const alkuPvm = watch(`patevyydet.${patevyys}.alkuPvm`);
   const loppuPvm = watch(`patevyydet.${patevyys}.loppuPvm`);
@@ -34,16 +33,6 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
       trigger();
     }
   }, [alkuPvm, loppuPvm, trigger]);
-
-  const headerText = React.useMemo(() => {
-    if (type === 'toiminta') {
-      return id ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-free-time-activity');
-    } else if (type === 'patevyys') {
-      return patevyysId ? t('free-time-activities.edit-proficiency') : t('free-time-activities.add-new-activity');
-    } else {
-      return '';
-    }
-  }, [id, t, patevyysId, type]);
 
   return (
     <>

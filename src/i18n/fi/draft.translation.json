@@ -1,1 +1,8 @@
-{}
+{
+  "filters": "Suodattimet",
+  "tool": {
+    "settings": {
+      "controls": "Säätimet"
+    }
+  }
+}

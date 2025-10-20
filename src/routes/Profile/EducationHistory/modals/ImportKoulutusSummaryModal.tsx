@@ -199,6 +199,7 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
 
   return (
     <Modal
+      name={t('education-history-import.summary-modal.title')}
       open={isOpen}
       content={
         <div id={modalId} className="flex flex-col">

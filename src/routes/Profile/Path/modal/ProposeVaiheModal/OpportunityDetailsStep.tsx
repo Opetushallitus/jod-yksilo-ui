@@ -27,7 +27,7 @@ const OpportunityDetailsStep = ({ vaiheIndex }: { vaiheIndex: number }) => {
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-heading-1-mobile sm:text-heading-1">
-        {t('profile.paths.phase-n-details', { count: vaiheIndex + 1 })}
+        {t('profile.paths.step-n-details', { count: vaiheIndex + 1 })}
       </h1>
 
       <h3 className="text-heading-3">{t('profile.paths.phase-type')}</h3>

@@ -42,8 +42,8 @@ interface PatevyysForm {
 }
 
 const PATEVYYDET_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet'; // /{patevyysId}
-const editCompetencesSlug = 'free-time-activities.edit-activity';
-const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
+
+const MainStep = ({ headerText }: { headerText: string }) => {
   const {
     t,
     i18n: { language },
@@ -64,9 +64,7 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
 
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t(patevyysId ? editCompetencesSlug : 'free-time-activities.add-new-activity')}
-      </h2>
+      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{headerText}</h2>
       <div className="mb-6">
         <InputField
           label={t('free-time-activities.name-of-free-time-activity')}
@@ -117,14 +115,12 @@ const MainStep = ({ patevyysId }: { patevyysId?: string }) => {
   );
 };
 
-const OsaamisetStep = ({ patevyysId }: { patevyysId?: string }) => {
+const OsaamisetStep = ({ headerText }: { patevyysId?: string; headerText: string }) => {
   const { t } = useTranslation();
   const { control } = useFormContext<PatevyysForm>();
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t(patevyysId ? editCompetencesSlug : 'free-time-activities.identify-proficiencies')}
-      </h2>
+      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{headerText}</h2>
       <p className="mb-7 text-body-sm font-arial sm:mb-9">
         {t('profile.free-time-activities.modals.competences-description')}
       </p>
@@ -307,6 +303,14 @@ export const AddOrEditPatevyysModal = ({
     }
   };
 
+  const headerText = React.useMemo(() => {
+    const editCompetencesSlug = 'free-time-activities.edit-activity';
+    if (step === 0) {
+      return t(patevyysId ? editCompetencesSlug : 'free-time-activities.add-new-activity');
+    }
+    return t(patevyysId ? editCompetencesSlug : 'free-time-activities.identify-proficiencies');
+  }, [patevyysId, step, t]);
+
   React.useEffect(() => {
     void trigger();
   }, [trigger]);
@@ -315,6 +319,7 @@ export const AddOrEditPatevyysModal = ({
 
   return !isLoading ? (
     <Modal
+      name={headerText}
       open={isOpen}
       progress={
         <WizardProgress
@@ -338,7 +343,7 @@ export const AddOrEditPatevyysModal = ({
               }
             }}
           >
-            <StepComponent patevyysId={patevyysId} />
+            <StepComponent patevyysId={patevyysId} headerText={headerText} />
           </Form>
         </FormProvider>
       }

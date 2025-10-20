@@ -86,8 +86,11 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
     return null;
   }
 
+  const headerText = t('profile.competences.edit');
+
   return (
     <Modal
+      name={headerText}
       open={isOpen}
       content={
         <FormProvider {...methods}>
@@ -101,7 +104,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
               }
             }}
           >
-            <ModalHeader text={t('profile.competences.edit')} testId="edit-other-competences" />
+            <ModalHeader text={headerText} testId="edit-other-competences" />
             <Controller
               control={methods.control}
               name="osaamiset"

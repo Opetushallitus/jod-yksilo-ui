@@ -135,6 +135,13 @@ const ProposeVaiheModal = ({ isOpen, onClose, vaiheIndex }: ProposeVaiheModalPro
     close(true);
   };
 
+  const currentHeaderText = React.useMemo(() => {
+    if (WizardContent === SelectOpportunityStep) {
+      return t('profile.paths.choose-for-phase', { count: vaiheIndex + 1 });
+    }
+    return t('profile.paths.step-n-details', { count: vaiheIndex + 1 });
+  }, [WizardContent, vaiheIndex, t]);
+
   useEscHandler(cancel, React.useId());
 
   const [alkuPvm, loppuPvm] = methods.watch(['alkuPvm', 'loppuPvm']);
@@ -145,6 +152,7 @@ const ProposeVaiheModal = ({ isOpen, onClose, vaiheIndex }: ProposeVaiheModalPro
   return (
     <FormProvider {...methods}>
       <Modal
+        name={currentHeaderText}
         open={isOpen}
         fullWidthContent
         progress={

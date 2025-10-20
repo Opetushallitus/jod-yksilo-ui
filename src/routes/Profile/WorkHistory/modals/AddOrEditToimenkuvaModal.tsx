@@ -303,8 +303,11 @@ const AddOrEditToimenkuvaModal = ({
 
   const { showDialog } = useModal();
 
+  const headerText = t(toimenkuvaId ? 'work-history.edit-job-description' : 'work-history.add-new-job-description');
+
   return !isLoading ? (
     <Modal
+      name={headerText}
       open={isOpen}
       progress={
         <WizardProgress

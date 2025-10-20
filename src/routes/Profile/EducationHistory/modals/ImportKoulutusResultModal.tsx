@@ -27,6 +27,11 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
 
   return (
     <Modal
+      name={
+        isSuccess
+          ? t('education-history-import.result-modal.success')
+          : t('education-history-import.result-modal.failure')
+      }
       open={isOpen}
       content={
         <div

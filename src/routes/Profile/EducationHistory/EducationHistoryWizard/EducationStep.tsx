@@ -2,7 +2,6 @@ import { FormError, TouchedFormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { type DatePickerTranslations, getDatePickerTranslations } from '@/utils';
 import { Datepicker, InputField } from '@jod/design-system';
-import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import type { EducationHistoryForm } from './utils';
@@ -10,33 +9,20 @@ import type { EducationHistoryForm } from './utils';
 interface EducationStepProps {
   type: 'oppilaitos' | 'koulutus';
   koulutus: number;
+  headerText: string;
 }
 
-const EducationStep = ({ type, koulutus }: EducationStepProps) => {
+const EducationStep = ({ type, koulutus, headerText }: EducationStepProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
   const {
     register,
-    watch,
     control,
     trigger,
     formState: { errors, touchedFields },
   } = useFormContext<EducationHistoryForm>();
-  const id = watch('id');
-  const koulutusId = watch(`koulutukset.${koulutus}.id`);
-  const headerText = React.useMemo(() => {
-    if (type === 'oppilaitos') {
-      return id ? t('education-history.edit-education') : t('education-history.add-new-education');
-    } else if (type === 'koulutus') {
-      return koulutusId
-        ? t('education-history.edit-degree-or-education')
-        : t('education-history.add-studies-to-this-education');
-    } else {
-      return '';
-    }
-  }, [id, t, koulutusId, type]);
 
   return (
     <>

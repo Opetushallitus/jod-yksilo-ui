@@ -10,19 +10,16 @@ import { WorkHistoryForm } from './utils';
 interface WorkplaceStepProps {
   type: 'tyopaikka' | 'toimenkuva';
   toimenkuva: number;
+  headerText: string;
 }
 
-const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
+const WorkplaceStep = ({ type, toimenkuva, headerText }: WorkplaceStepProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
   const { register, watch, control, trigger, formState } = useFormContext<WorkHistoryForm>();
-
   const errors = formState.errors;
-  const id = watch('id');
-  const toimenkuvaId = watch(`toimenkuvat.${toimenkuva}.id`);
-
   const alkuPvm = watch(`toimenkuvat.${toimenkuva}.alkuPvm`);
   const loppuPvm = watch(`toimenkuvat.${toimenkuva}.loppuPvm`);
   React.useEffect(() => {
@@ -30,16 +27,6 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
       trigger();
     }
   }, [alkuPvm, loppuPvm, trigger]);
-
-  const headerText = React.useMemo(() => {
-    if (type === 'tyopaikka') {
-      return id ? t('work-history.edit-workplace') : t('work-history.add-new-workplace');
-    } else if (type === 'toimenkuva') {
-      return toimenkuvaId ? t('work-history.edit-job-description') : t('work-history.add-new-job-description');
-    } else {
-      return '';
-    }
-  }, [id, t, toimenkuvaId, type]);
 
   return (
     <>

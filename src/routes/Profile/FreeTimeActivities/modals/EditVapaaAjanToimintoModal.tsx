@@ -121,6 +121,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
 
   return (
     <Modal
+      name={t('free-time-activities.edit-free-time-theme')}
       open={isOpen}
       content={
         <FormProvider {...methods}>

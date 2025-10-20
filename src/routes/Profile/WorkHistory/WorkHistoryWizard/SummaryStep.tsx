@@ -6,7 +6,11 @@ import { useTranslation } from 'react-i18next';
 import { Toimenkuva, getWorkHistoryTableRows } from '../utils';
 import { type WorkHistoryForm } from './utils';
 
-const SummaryStep = () => {
+interface SummaryStepProps {
+  headerText: string;
+}
+
+const SummaryStep = ({ headerText }: SummaryStepProps) => {
   const { t } = useTranslation();
   const { watch } = useFormContext<WorkHistoryForm>();
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>([]);
@@ -33,7 +37,7 @@ const SummaryStep = () => {
 
   return (
     <>
-      <ModalHeader text={t('work-history.summary')} testId="work-history-summary-title" />
+      <ModalHeader text={headerText} testId="work-history-summary-title" />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.work-history.modals.summary-description')}
       </p>

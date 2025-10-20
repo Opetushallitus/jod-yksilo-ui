@@ -139,12 +139,32 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
   const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
 
+  const id = methods.watch('id');
+  const toimenkuvaId = methods.watch(`toimenkuvat.${selectedToimenkuva}.id`);
+
+  const headerText = React.useMemo(() => {
+    if (isSummaryStep) {
+      return t('work-history.summary');
+    }
+    if (isCompetencesStep) {
+      return toimenkuvaId ? t('profile.competences.edit') : t('work-history.identify-competences');
+    }
+    if (isWorkplaceStep) {
+      if (isFirstStep) {
+        return id ? t('work-history.edit-workplace') : t('work-history.add-new-workplace');
+      }
+      return toimenkuvaId ? t('work-history.edit-job-description') : t('work-history.add-new-job-description');
+    }
+    return '';
+  }, [id, toimenkuvaId, isFirstStep, isWorkplaceStep, isCompetencesStep, isSummaryStep, t]);
+
   if (isLoading) {
     return null;
   }
 
   return (
     <Modal
+      name={headerText}
       open={isOpen}
       data-testid="work-history-wizard"
       fullWidthContent
@@ -162,17 +182,21 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
           >
             {isWorkplaceStep && (
               <div data-testid="work-history-step-workplace">
-                <WorkplaceStep type={isFirstStep ? 'tyopaikka' : 'toimenkuva'} toimenkuva={selectedToimenkuva} />
+                <WorkplaceStep
+                  headerText={headerText}
+                  type={isFirstStep ? 'tyopaikka' : 'toimenkuva'}
+                  toimenkuva={selectedToimenkuva}
+                />
               </div>
             )}
             {isCompetencesStep && (
               <div data-testid="work-history-step-competences">
-                <CompetencesStep toimenkuva={selectedToimenkuva} />
+                <CompetencesStep headerText={headerText} toimenkuva={selectedToimenkuva} />
               </div>
             )}
             {isSummaryStep && (
               <div data-testid="work-history-step-summary">
-                <SummaryStep />
+                <SummaryStep headerText={headerText} />
               </div>
             )}
           </Form>

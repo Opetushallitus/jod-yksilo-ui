@@ -139,12 +139,34 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
   const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
   const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
 
+  const id = methods.watch('id');
+  const koulutusId = methods.watch(`koulutukset.${selectedKoulutus}.id`);
+
+  const headerText = React.useMemo(() => {
+    if (isSummaryStep) {
+      return t('education-history.summary');
+    }
+    if (isCompetencesStep) {
+      return koulutusId ? t('profile.competences.edit') : t('education-history.identify-competences');
+    }
+    if (isEducationStep) {
+      if (isFirstStep) {
+        return id ? t('education-history.edit-education') : t('education-history.add-new-education');
+      }
+      return koulutusId
+        ? t('education-history.edit-degree-or-education')
+        : t('education-history.add-studies-to-this-education');
+    }
+    return '';
+  }, [id, koulutusId, isFirstStep, isEducationStep, isCompetencesStep, isSummaryStep, t]);
+
   if (isLoading) {
     return null;
   }
 
   return (
     <Modal
+      name={headerText}
       open={isOpen}
       data-testid="education-history-wizard"
       fullWidthContent
@@ -162,17 +184,21 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
           >
             {isEducationStep && (
               <div data-testid="education-step-education">
-                <EducationStep type={isFirstStep ? 'oppilaitos' : 'koulutus'} koulutus={selectedKoulutus} />
+                <EducationStep
+                  headerText={headerText}
+                  type={isFirstStep ? 'oppilaitos' : 'koulutus'}
+                  koulutus={selectedKoulutus}
+                />
               </div>
             )}
             {isCompetencesStep && (
               <div data-testid="education-step-competences">
-                <CompetencesStep koulutus={selectedKoulutus} />
+                <CompetencesStep headerText={headerText} koulutus={selectedKoulutus} />
               </div>
             )}
             {isSummaryStep && (
               <div data-testid="education-step-summary">
-                <SummaryStep />
+                <SummaryStep headerText={headerText} />
               </div>
             )}
           </Form>

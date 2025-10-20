@@ -144,6 +144,7 @@ const ToolSettings = ({ ref, isOpen, onClose, isModal }: ToolSettingsProps) => {
 
   return isModal ? (
     <Modal
+      name={t('tool.settings.controls')}
       open={isOpen}
       onClose={onClose}
       fullWidthContent
