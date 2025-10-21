@@ -918,7 +918,16 @@
       "header": "Arvioi tekoälyn tuottamaa sisältöä"
     },
     "modal": {
-      "body": "Et ollut tyytyväinen. Voisitko kertoa tarkemmin, mikä ei toiminut? Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
+      "description": {
+        "intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi tekoälyä seuraavissa kohdissa:",
+        "list": {
+          "kohtaanto": ["työmahdollisuudet", "koulutusmahdollisuudet", "mahdollisuuksien sopivuuden laskeminen"],
+          "tyomahdollisuus": ["mahdollisuuden nimi", "kuvaus", "työpaikkailmoitusten erityispiirteet"],
+          "koulutusmahdollisuus": ["mahdollisuuden nimi", "kuvaus", "osaamiset", "koulutuksen erityispiirteet"]
+        },
+        "question": "Voisitko kertoa tarkemmin, mikä ei toiminut?",
+        "help": "Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa."
+      },
       "close": "Sulje",
       "header": "Tarkenna palautettasi",
       "placeholder": "Esim. sisältö epätarkkaa, ei vastannut tarvetta, väärä sävy...",

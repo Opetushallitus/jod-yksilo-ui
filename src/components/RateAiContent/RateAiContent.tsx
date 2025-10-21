@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 
 interface RateAiContentProps {
-  variant: 'kohtaanto' | 'mahdollisuus';
+  variant: 'kohtaanto' | 'tyomahdollisuus' | 'koulutusmahdollisuus';
   area: 'Kohtaanto työkalu' | 'Työmahdollisuus' | 'Koulutusmahdollisuus';
 }
 
@@ -32,11 +32,24 @@ export const RateAiContent = ({ variant, area }: RateAiContentProps) => {
           send: t('rate-ai-content.modal.send'),
           sending: t('rate-ai-content.modal.sending'),
           title: t('rate-ai-content.modal.header'),
-          description: t('rate-ai-content.modal.body'),
+          description: (
+            <>
+              <p>{t(`rate-ai-content.modal.description.intro`)}</p>
+              <ul className="ds:list-disc ds:ml-5">
+                {(t(`rate-ai-content.modal.description.list.${variant}`, { returnObjects: true }) as string[]).map(
+                  (item: string, index, array) => (
+                    <li key={item}>{`${item}${index === array.length - 1 ? '.' : ','}`}</li>
+                  ),
+                )}
+              </ul>
+              <p className="ds:mt-4">{t(`rate-ai-content.modal.description.question`)}</p>
+              <p>{t(`rate-ai-content.modal.description.help`)}</p>
+            </>
+          ),
           placeholder: t('rate-ai-content.modal.placeholder'),
         },
       }}
-      onSubmit={async ({ rating, message }) => {
+      onSubmit={async ({ rating, message }: { rating: number; message?: string }) => {
         try {
           globalThis._paq?.push(['trackEvent', `yksilo.${area}`, rating === 1 ? 'Tykkäys' : 'Ei tykkäys', id]);
 
