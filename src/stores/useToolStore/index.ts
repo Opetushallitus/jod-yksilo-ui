@@ -1,107 +1,24 @@
 import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
-import { components } from '@/api/schema';
-import { OsaaminenValue } from '@/components';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import i18n from '@/i18n/config';
-import {
-  EhdotusRecord,
-  type OpportunityFilterValue,
-  type OpportunitySortingValue,
-  ehdotusDataToRecord,
-  sortingValues,
-} from '@/routes/Tool/utils';
+import { EhdotusRecord, type OpportunitySortingValue, ehdotusDataToRecord, sortingValues } from '@/routes/Tool/utils';
 import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
+import {
+  filterByAmmattiryhmat,
+  filterByEducationType,
+  filterByJobType,
+  filterByRegion,
+} from '@/stores/useToolStore/filters.ts';
+import { DEFAULT_FILTERS, DEFAULT_SORTING, ToolFilters, ToolState } from '@/stores/useToolStore/ToolStoreModel.ts';
 import { paginate } from '@/utils';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 const SUOSIKIT_PATH = '/api/profiili/suosikit';
 
-interface ToolFilters {
-  /** Mahdollisuustyyppi */
-  opportunityType: OpportunityFilterValue[];
-  /** Maakunta */
-  region: string[];
-  ammattiryhmat: string[];
-  jobOpportunityType: string[];
-  educationOpportunityType: string[];
-}
-
-export type FilterName = keyof ToolFilters;
-export const DEFAULT_SORTING = sortingValues.RELEVANCE;
-const DEFAULT_FILTERS: ToolFilters = {
-  opportunityType: [],
-  region: [],
-  ammattiryhmat: [],
-  jobOpportunityType: [],
-  educationOpportunityType: [],
-};
-
-type ArrayFilters = Extract<
-  FilterName,
-  'opportunityType' | 'region' | 'jobOpportunityType' | 'educationOpportunityType'
->;
 let abortController = new AbortController();
-
-interface ToolState {
-  tavoitteet: {
-    a?: boolean;
-    b?: boolean;
-    c?: boolean;
-    d?: boolean;
-    e?: boolean;
-  };
-  ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
-  osaamiset: OsaaminenValue[];
-  osaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'];
-  kiinnostukset: OsaaminenValue[];
-  kiinnostuksetVapaateksti?: components['schemas']['LokalisoituTeksti'];
-  suosikit: components['schemas']['SuosikkiDto'][];
-  suosikitLoading: boolean;
-  osaamisKiinnostusPainotus: number;
-  rajoitePainotus: number;
-  mahdollisuusEhdotukset: EhdotusRecord;
-  tyomahdollisuudet: TypedMahdollisuus[];
-  koulutusmahdollisuudet: TypedMahdollisuus[];
-  mixedMahdollisuudet: TypedMahdollisuus[];
-  ehdotuksetLoading: boolean;
-  mahdollisuudetLoading: boolean;
-  ehdotuksetPageSize: number;
-  ehdotuksetPageNr: number;
-  ehdotuksetCount: Record<MahdollisuusTyyppi, number>;
-  filteredMahdollisuudetCount: number;
-  sorting: OpportunitySortingValue;
-  previousEhdotusUpdateLang: string;
-  filters: ToolFilters;
-  settingsHaveChanged?: boolean;
-  setArrayFilter: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;
-  reset: () => void;
-  resetSettings: () => void;
-  addAmmattiryhmaToFilter: (ammattiryhma: string) => void;
-  removeAmmattiryhmaFromFilter: (ammattiryhma: string) => void;
-  fillAmmattiryhmaNimet: (uris: string[]) => Promise<void>;
-  setTavoitteet: (state: ToolState['tavoitteet']) => void;
-  setOsaamiset: (state: OsaaminenValue[]) => void;
-  setOsaamisetVapaateksti: (state?: components['schemas']['LokalisoituTeksti']) => void;
-  setKiinnostukset: (state: OsaaminenValue[]) => void;
-  setKiinnostuksetVapaateksti: (state?: components['schemas']['LokalisoituTeksti']) => void;
-  setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
-  updateSuosikit: (loggedIn: boolean) => Promise<void>;
-  toggleSuosikki: (kohdeId: string, tyyppi: MahdollisuusTyyppi) => Promise<void>;
-
-  setOsaamisKiinnostusPainotus: (state: number) => void;
-
-  updateEhdotukset: (lang: string, signal?: AbortSignal) => Promise<void>;
-  fetchMahdollisuudetPage: (signal?: AbortSignal, page?: number) => Promise<void>;
-  updateEhdotuksetAndTyomahdollisuudet: (loggedIn: boolean) => Promise<void>;
-
-  setSorting: (state: string) => void;
-
-  virtualAssistantOpen: boolean;
-  setVirtualAssistantOpen: (state: boolean) => void;
-}
 
 export const useToolStore = create<ToolState>()(
   persist(
@@ -308,48 +225,14 @@ export const useToolStore = create<ToolState>()(
           });
         }
 
-        function filterByEducationType(
-          educationOpportunityType: string[],
-          meta: components['schemas']['EhdotusMetadata'],
-        ): boolean {
-          if (educationOpportunityType.length === 0 || meta.tyyppi !== 'KOULUTUSMAHDOLLISUUS') {
-            return true;
-          }
-          const shouldShowTutkinnot = educationOpportunityType.includes('TUTKINTO');
-          const isTutkinto = meta.koulutusmahdollisuusTyyppi === 'TUTKINTO';
-          const shouldShowMuut = educationOpportunityType.includes('EI_TUTKINTO');
-          const isMuu = meta.koulutusmahdollisuusTyyppi === 'EI_TUTKINTO';
-          return (shouldShowTutkinnot && isTutkinto) || (shouldShowMuut && isMuu);
-        }
-
-        function filterByJobType(
-          jobOpportunityType: string[],
-          meta: components['schemas']['EhdotusMetadata'],
-        ): boolean {
-          if (jobOpportunityType.length === 0 || meta.tyyppi !== 'TYOMAHDOLLISUUS') {
-            return true;
-          }
-          const shouldShowAmmatit = jobOpportunityType.includes('AMMATTITIETO');
-          const isAmmatti = meta.aineisto === 'AMMATTITIETO';
-          const shouldShowMuut = jobOpportunityType.includes('TMT');
-          const isMuuMahdollisuus = meta.aineisto === 'TMT';
-          return (shouldShowAmmatit && isAmmatti) || (shouldShowMuut && isMuuMahdollisuus);
-        }
-
-        function filterByAmmattiryhmat(
-          ammattiryhmat: string[],
-          meta: components['schemas']['EhdotusMetadata'],
-        ): boolean {
-          if (ammattiryhmat.length == 0 || meta.tyyppi != 'TYOMAHDOLLISUUS') {
-            return true;
-          }
-          // Ammattiryhmat are in form C1, and meta.ammattiryhma is in format C1234
-          // If meta.ammattiryhma starts with category code, it belongs to that category
-          return ammattiryhmat.some((ar) => meta.ammattiryhma?.startsWith(ar));
-        }
-
         async function filterEhdotukset(filters: ToolFilters) {
-          const { opportunityType: filter, ammattiryhmat, jobOpportunityType, educationOpportunityType } = filters;
+          const {
+            opportunityType: filter,
+            region,
+            ammattiryhmat,
+            jobOpportunityType,
+            educationOpportunityType,
+          } = filters;
           if (Object.keys(ehdotukset).length === 0 || i18n.language !== get().previousEhdotusUpdateLang) {
             await get().updateEhdotukset(i18n.language, signal);
             set({ previousEhdotusUpdateLang: i18n.language });
@@ -373,7 +256,8 @@ export const useToolStore = create<ToolState>()(
               return (
                 filterByJobType(jobOpportunityType, meta) &&
                 filterByEducationType(educationOpportunityType, meta) &&
-                filterByAmmattiryhmat(ammattiryhmat, meta)
+                filterByAmmattiryhmat(ammattiryhmat, meta) &&
+                filterByRegion(region, meta)
               );
             })
             .sort(([, metadataA], [, metadataB]) =>
