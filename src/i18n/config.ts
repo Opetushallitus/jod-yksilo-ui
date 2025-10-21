@@ -1,7 +1,10 @@
 import i18n, { type Resource } from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import draftTranslationEn from './en/draft.translation.json';
 import translationEn from './en/translation.json';
+import draftTranslationFi from './fi/draft.translation.json';
 import translationFi from './fi/translation.json';
+import draftTranslationSv from './sv/draft.translation.json';
 import translationSv from './sv/translation.json';
 
 export const LANGUAGE_VALUES = ['fi', 'sv', 'en'] as const;
@@ -34,5 +37,9 @@ i18n.use(initReactI18next).init({
     escapeValue: false,
   },
 });
+
+i18n.addResourceBundle('fi', 'translation', draftTranslationFi, true, true);
+i18n.addResourceBundle('en', 'translation', draftTranslationEn, true, true);
+i18n.addResourceBundle('sv', 'translation', draftTranslationSv, true, true);
 
 export default i18n;
