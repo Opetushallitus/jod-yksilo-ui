@@ -83,7 +83,7 @@ const JobOpportunity = () => {
           <CompareCompetencesTable rows={competencesTableData} />
           {!sm && (
             <>
-              <RateAiContent variant="mahdollisuus" area="Työmahdollisuus" />
+              {tyomahdollisuus.aineisto === 'TMT' && <RateAiContent variant="tyomahdollisuus" area="Työmahdollisuus" />}
               <CounselingBanner />
             </>
           )}

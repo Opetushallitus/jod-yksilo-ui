@@ -124,14 +124,16 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
     return (
       <>
         <PageNavigation menuSection={menuSection} activeIndicator="dot" className={'mb-4'} />
-        <RateAiContent
-          variant="mahdollisuus"
-          area={tyyppi === 'TYOMAHDOLLISUUS' ? 'Työmahdollisuus' : 'Koulutusmahdollisuus'}
-        />
+        {jobData.aineisto === 'TMT' && (
+          <RateAiContent
+            variant={tyyppi === 'TYOMAHDOLLISUUS' ? 'tyomahdollisuus' : 'koulutusmahdollisuus'}
+            area={tyyppi === 'TYOMAHDOLLISUUS' ? 'Työmahdollisuus' : 'Koulutusmahdollisuus'}
+          />
+        )}
         <CounselingBanner />
       </>
     );
-  }, [t, sections, filterDevSections, tyyppi]);
+  }, [t, sections, filterDevSections, tyyppi, jobData.aineisto]);
 
   const typeTooltip = React.useMemo(() => {
     if (tyyppi === 'TYOMAHDOLLISUUS') {
