@@ -1062,6 +1062,7 @@ export interface components {
       aineisto?: 'TMT' | 'AMMATTITIETO';
       /** @enum {string} */
       koulutusmahdollisuusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
+      maakunnat?: string[];
       /** Format: double */
       pisteet?: number;
       /** @enum {string} */

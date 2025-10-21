@@ -2,6 +2,7 @@ import { FilterAmmattiryhma } from '@/routes/Tool/components/filters/FilterAmmat
 import { FilterEducationOpportunityType } from '@/routes/Tool/components/filters/FilterEducationOpportunityType.tsx';
 import FilterJobOpportunityType from '@/routes/Tool/components/filters/FilterJobOpportunityType';
 import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType';
+import { FilterSijainti } from '@/routes/Tool/components/filters/FilterSijainti.tsx';
 import { FilterName, useToolStore } from '@/stores/useToolStore';
 import { Accordion, Button, Modal } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
@@ -12,9 +13,11 @@ import OpportunityWeight from './components/filters/OpportunityWeight';
 
 const SettingsSection = ({ title, children }: { title: string; children: React.ReactNode }) => {
   return (
-    <div>
+    <div className="sticky top-0 mt-4">
       <div className="border-b-2 border-border-gray pb-3 mb-3">{title}</div>
-      <ul className="flex flex-col gap-3">{children}</ul>
+      <div className="max-h-[80vh] overflow-y-auto">
+        <ul className="flex flex-col gap-3">{children}</ul>
+      </div>
     </div>
   );
 };
@@ -72,6 +75,7 @@ export interface ToolSettingsProps {
   onClose?: () => void;
   isModal?: boolean;
 }
+
 const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
   const { t } = useTranslation();
   const filters = useToolStore((state) => state.filters);
@@ -91,6 +95,7 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
       <Setting title={t('tool.settings.general.sorting')}>
         <OpportunitiesSorting />
       </Setting>
+
       <Setting
         title={t('tool.settings.general.job-opportunity-filters')}
         hidden={!filters.opportunityType.includes('TYOMAHDOLLISUUS') && filters.opportunityType.length > 0}
@@ -105,6 +110,9 @@ const SettingsMenu = ({ ref }: Pick<ToolSettingsProps, 'ref'>) => {
             count={getFilterCount(['jobOpportunityType'])}
           >
             <FilterJobOpportunityType />
+          </Setting>
+          <Setting title={t('tool.settings.general.location')} count={getFilterCount(['region'])}>
+            <FilterSijainti />
           </Setting>
         </ul>
       </Setting>
@@ -130,8 +138,7 @@ const ToolSettings = ({ ref, isOpen, onClose, isModal }: ToolSettingsProps) => {
   const { t } = useTranslation();
   const resetSettings = useToolStore((state) => state.resetSettings);
   const resetSection = (
-    <>
-      <hr className="border-0 border-b-2 border-border-gray mt-6 -mb-5" />
+    <div className="sticky bottom-0 bg-bg-gray-2 px-4 py-2">
       <Button
         variant="plain"
         size="sm"
@@ -139,7 +146,7 @@ const ToolSettings = ({ ref, isOpen, onClose, isModal }: ToolSettingsProps) => {
         onClick={resetSettings}
         label={t('tool.settings.reset')}
       />
-    </>
+    </div>
   );
 
   return isModal ? (
