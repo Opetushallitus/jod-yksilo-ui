@@ -43,6 +43,15 @@ jobs:
           path: coverage/
           retention-days: 30
 
+      - name: Export translations Excel file
+        run: npm run translations:export
+
+      - name: Upload translations Excel artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: translations-excel
+          path: translations-export/jod-yksilo-ui-translations-*.xlsx
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:

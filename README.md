@@ -85,3 +85,80 @@ Useful browser extension to use
 
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/google-lighthouse/)
 - [Chromium](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)
+
+## Translation Management
+
+### Overview
+
+This project manages translations using JSON files and an Excel-based workflow.  
+The Excel files are generated from existing JSON translation files, sent for translation, and then imported back to update the source files.  
+This process keeps all texts synchronized, tracks changes efficiently, and simplifies communication with translation services.
+
+---
+
+### File Structure
+
+Each language has **two translation files**:
+
+- **`translations.json`** - Contains approved translations provided by the translation service.
+- **`draft.translations.json`** – Contains new or modified texts that have not yet been professionally translated.
+
+All new or updated texts must be translated directly into the `draft.translations.json` files (manually or with AI assistance).  
+No changes should ever be made directly to `translations.json`.
+
+---
+
+### Process
+
+#### 1. During Development
+
+- Add all new and modified texts to `draft.translations.json`.
+- Always provide translations for the new or changed texts.
+- Do not edit `translations.json` manually.
+
+#### 2. When Requesting Translations (Export to Excel)
+
+- Generate Excel files for translators using:
+
+  ```bash
+  npm run translations:export
+  ```
+
+- The script merges `translations.json` and `draft.translations.json`, ensuring all Finnish texts are included and modified texts override existing ones.
+
+- The generated Excel file appears in:
+
+```
+translation-export/
+```
+
+- Send the Excel file(s) to the translation.
+
+#### 3. When Receiving Translated Excel Files (Import Back)
+
+- Place the returned Excel file(s) into:
+
+```
+translations-import/
+```
+
+- Import the translations with:
+
+```bash
+npm run translations:import
+```
+
+- The script updates all `translations.json` files based on the Excel content.
+
+- It then removes only the imported translation keys from `draft.translations.json`, leaving other draft entries intact.
+  This prevents the loss of new or modified texts that were added while the Excel file was being processed by the translation service.
+
+---
+
+### Summary
+
+| Step           | Action                                                   | Command                       | Result                                                                                |
+| -------------- | -------------------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------- |
+| 1. Development | Add and translate new texts in `draft.translations.json` | –                             | Drafts updated                                                                        |
+| 2. Export      | Generate Excel for translation                           | `npm run translations:export` | Excel in `translation-export/`                                                        |
+| 3. Import      | Import completed translations                            | `npm run translations:import` | Updates translations.json and removes only imported keys from draft.translations.json |

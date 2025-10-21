@@ -15,7 +15,9 @@
     "preview": "vite preview",
     "test:unit": "vitest --run",
     "test:e2e": "playwright test",
-    "prepare": "husky"
+    "prepare": "husky",
+    "translations:export": "node ./scripts/translations/export-translations.js jod-yksilo-ui",
+    "translations:import": "node ./scripts/translations/import-translations.js jod-yksilo-ui"
   },
   "dependencies": {
     "@hookform/error-message": "^2.0.1",
@@ -66,6 +68,7 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.0",
     "vite": "^7.1.0",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "xlsx": "file:vendor/xlsx-0.20.3.tgz"
   }
 }
