@@ -19,6 +19,11 @@ coverage
 /playwright/.cache/
 *.local
 
+# translation export and import files
+/translations-export
+/translations-import
+
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
