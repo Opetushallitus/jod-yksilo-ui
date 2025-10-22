@@ -208,7 +208,7 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
         <Trans
           i18nKey="introduction.step-2.text-4"
           components={{
-            Icon: <JodOpenInNew />,
+            Icon: <JodOpenInNew ariaLabel={t('external-link')} />,
             CustomLink: (
               <Link
                 href={`/${language}/${t('slugs.privacy-and-cookies')}`}
@@ -244,7 +244,7 @@ const StepAi = () => {
           <Trans
             i18nKey="introduction.step-3.text-2"
             components={{
-              Icon: <JodOpenInNew />,
+              Icon: <JodOpenInNew ariaLabel={t('external-link')} />,
               CustomLink: (
                 <Link
                   href={`/${language}/${t('slugs.ai-usage')}`}

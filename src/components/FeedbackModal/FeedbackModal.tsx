@@ -223,7 +223,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
                   className="inline-flex text-accent hover:underline"
                 >
                   {t('feedback.links.oph')}
-                  <JodOpenInNew />
+                  <JodOpenInNew ariaLabel={t('external-link')} />
                 </a>
               </li>
               <li>
@@ -234,7 +234,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
                   className="inline-flex text-accent hover:underline"
                 >
                   {t('feedback.links.keha')}
-                  <JodOpenInNew />
+                  <JodOpenInNew ariaLabel={t('external-link')} />
                 </a>
               </li>
               <li>
@@ -245,7 +245,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
                   className="inline-flex text-accent hover:underline"
                 >
                   {t('feedback.links.okm')}
-                  <JodOpenInNew />
+                  <JodOpenInNew ariaLabel={t('external-link')} />
                 </a>
               </li>
             </ul>
