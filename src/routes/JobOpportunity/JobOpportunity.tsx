@@ -180,7 +180,7 @@ const JobOpportunity = () => {
               data-testid="job-opportunity-open-tyomarkkinatori"
               size="sm"
               label={t('job-opportunity.tyomarkkinatori.button-label')}
-              icon={<JodOpenInNew />}
+              icon={<JodOpenInNew ariaLabel={t('external-link')} />}
               iconSide="right"
               LinkComponent={getLinkTo(tmtUrl, { useAnchor: true, target: '_blank' })}
             />

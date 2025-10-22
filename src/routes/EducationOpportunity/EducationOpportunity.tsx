@@ -112,7 +112,7 @@ const EducationOpportunity = () => {
               data-testid="education-opportunity-open-opintopolku"
               size="sm"
               label={t('education-opportunity.opintopolku.button-label')}
-              icon={<JodOpenInNew />}
+              icon={<JodOpenInNew ariaLabel={t('external-link')} />}
               iconSide="right"
               LinkComponent={getLinkTo(opintopolkuUrl, { useAnchor: true, target: '_blank' })}
             />

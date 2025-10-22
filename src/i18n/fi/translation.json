@@ -175,6 +175,7 @@
     "title": "Tapahtui virhe",
     "unexpected": "Tapahtui odottamaton virhe. Tämä voi johtua verkkoyhteyden katkeamisesta tai palvelun virheestä."
   },
+  "external-link": "Linkki johtaa palvelun ulkopuolelle",
   "feedback": {
     "cancel": "Peruuta",
     "email-label": "Sähköpostiosoite",
@@ -918,17 +919,17 @@
       "header": "Arvioi tekoälyn tuottamaa sisältöä"
     },
     "modal": {
+      "close": "Sulje",
       "description": {
+        "help": "Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
         "intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi tekoälyä seuraavissa kohdissa:",
         "list": {
           "kohtaanto": ["työmahdollisuudet", "koulutusmahdollisuudet", "mahdollisuuksien sopivuuden laskeminen"],
-          "tyomahdollisuus": ["mahdollisuuden nimi", "kuvaus", "työpaikkailmoitusten erityispiirteet"],
-          "koulutusmahdollisuus": ["mahdollisuuden nimi", "kuvaus", "osaamiset", "koulutuksen erityispiirteet"]
+          "koulutusmahdollisuus": ["mahdollisuuden nimi", "kuvaus", "osaamiset", "koulutuksen erityispiirteet"],
+          "tyomahdollisuus": ["mahdollisuuden nimi", "kuvaus", "työpaikkailmoitusten erityispiirteet"]
         },
-        "question": "Voisitko kertoa tarkemmin, mikä ei toiminut?",
-        "help": "Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa."
+        "question": "Voisitko kertoa tarkemmin, mikä ei toiminut?"
       },
-      "close": "Sulje",
       "header": "Tarkenna palautettasi",
       "placeholder": "Esim. sisältö epätarkkaa, ei vastannut tarvetta, väärä sävy...",
       "send": "Lähetä",

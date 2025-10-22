@@ -160,7 +160,7 @@ const Home = () => {
           <Trans
             i18nKey="home.beta-content"
             components={{
-              Icon: <JodOpenInNew size={18} className="ml-1" />,
+              Icon: <JodOpenInNew size={18} className="ml-1" ariaLabel={t('external-link')} />,
               CustomLink: (
                 <Link
                   to="https://wiki.eduuni.fi/spaces/JOD/pages/641042258/Osaamispolun+suljettu+betatestaus"
@@ -242,7 +242,7 @@ const Home = () => {
                 className="mt-5"
                 serviceVariant="yksilo"
                 label={t('home.how-competency-path-helps-you-opintopolku-link')}
-                icon={<JodOpenInNew />}
+                icon={<JodOpenInNew ariaLabel={t('external-link')} />}
                 iconSide="right"
                 LinkComponent={getLinkTo(`https://opintopolku.fi/konfo/${language}/`, {
                   useAnchor: true,
@@ -264,7 +264,7 @@ const Home = () => {
                 className="mt-5"
                 serviceVariant="yksilo"
                 label={t('home.how-competency-path-helps-you-tmt-link')}
-                icon={<JodOpenInNew />}
+                icon={<JodOpenInNew ariaLabel={t('external-link')} />}
                 iconSide="right"
                 LinkComponent={getLinkTo(`https://tyomarkkinatori.fi/${language === 'fi' ? '' : language}`, {
                   useAnchor: true,
@@ -285,7 +285,7 @@ const Home = () => {
                 className="mt-5"
                 serviceVariant="yksilo"
                 label={t('home.how-competency-path-helps-you-opinfi-link')}
-                icon={<JodOpenInNew />}
+                icon={<JodOpenInNew ariaLabel={t('external-link')} />}
                 iconSide="right"
                 LinkComponent={getLinkTo(`https://opin.fi/${language === 'fi' ? '' : language}`, {
                   useAnchor: true,

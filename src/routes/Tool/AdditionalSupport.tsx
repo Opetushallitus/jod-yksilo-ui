@@ -103,13 +103,13 @@ const AdditionalSupport = () => {
           <HelpingToolExternalLinkItem
             href={`/urataidot/${lng}`}
             title={t('tool.tools.career-skills-self-assessment-tool')}
-            iconRight={<JodOpenInNew className="text-accent" />}
+            iconRight={<JodOpenInNew className="text-accent" ariaLabel={t('external-link')} />}
             data-testid="additional-support-career-skills"
           />
           <HelpingToolExternalLinkItem
             href="https://www.suomi.fi/palveluhakemisto/osaamispolku"
             title={t('tool.tools.service-directory')}
-            iconRight={<JodOpenInNew className="text-accent" />}
+            iconRight={<JodOpenInNew className="text-accent" ariaLabel={t('external-link')} />}
             data-testid="additional-support-service-directory"
           />
         </ul>

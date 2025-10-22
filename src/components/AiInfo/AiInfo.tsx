@@ -20,7 +20,7 @@ export const AiInfo = () => {
         <Trans
           i18nKey="ai-info-tooltip.description"
           components={{
-            Icon: <JodOpenInNew size={18} />,
+            Icon: <JodOpenInNew size={18} ariaLabel={t('external-link')} />,
             CustomLink: <Link href={`/${language}/${t('slugs.ai-usage')}`} className="inline-flex underline" />,
           }}
         />
