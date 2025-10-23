@@ -14,12 +14,6 @@ import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import { getTypeSlug } from '../utils';
 
-const descriptionKeys = {
-  KAIKKI: 'profile.favorites.you-have-no-job-nor-education-opportunities',
-  TYOMAHDOLLISUUS: 'profile.favorites.you-have-no-job-opportunities',
-  KOULUTUSMAHDOLLISUUS: 'profile.favorites.you-have-no-education-opportunities',
-};
-
 const Favorites = () => {
   const {
     ammattiryhmaNimet,
@@ -58,6 +52,12 @@ const Favorites = () => {
   const educationFilterText = t('education-opportunities');
   const { lg } = useMediaQueries();
   const [showFilters, setShowFilters] = React.useState(false);
+
+  const descriptions = {
+    KAIKKI: t('profile.favorites.you-have-no-job-nor-education-opportunities'),
+    TYOMAHDOLLISUUS: t('profile.favorites.you-have-no-job-opportunities'),
+    KOULUTUSMAHDOLLISUUS: t('profile.favorites.you-have-no-education-opportunities'),
+  };
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value as MahdollisuusTyyppi;
@@ -194,7 +194,7 @@ const Favorites = () => {
         <p className="mt-2">{getFavoriteCountText}</p>
       ) : (
         <div className="mt-5 mb-6">
-          <EmptyState text={t(descriptionKeys[selectedFilter])} data-testid="favorites-empty-state" />
+          <EmptyState text={descriptions[selectedFilter]} data-testid="favorites-empty-state" />
         </div>
       )}
 

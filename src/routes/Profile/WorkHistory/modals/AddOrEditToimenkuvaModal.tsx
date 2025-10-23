@@ -65,7 +65,7 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
   return (
     <>
       <ModalHeader
-        text={t(toimenkuvaId ? 'work-history.edit-job-description' : 'work-history.add-new-job-description')}
+        text={toimenkuvaId ? t('work-history.edit-job-description') : t('work-history.add-new-job-description')}
       />
       <div className="mb-6 flex flex-col">
         <InputField

@@ -19,16 +19,6 @@ export const DEFAULT_PAGE_SIZE = 20;
 export const ESCO_SKILL_PREFIX = 'http://data.europa.eu/esco/skill/';
 export const ESCO_OCCUPATION_PREFIX = 'http://data.europa.eu/esco/occupation/';
 
-// Translation keys for form errors
-const FORM_ERROR_KEY = {
-  REQUIRED: 'error.form.required',
-  MAX: 'error.form.max',
-  MIN: 'error.form.min',
-  DATE: 'error.form.date',
-  URL: 'error.form.url',
-  DATE_RANGE: 'error.form.date-range',
-};
-
 export const LIMITS = {
   // Gathered from DTO @Size annotations
   TEXT_INPUT: 200,
@@ -36,16 +26,16 @@ export const LIMITS = {
 };
 
 export const formErrorMessage = {
-  max: (count: number) => ({ message: i18n.t(FORM_ERROR_KEY.MAX, { count }) }),
-  min: (count: number) => ({ message: i18n.t(FORM_ERROR_KEY.MIN, { count }) }),
-  required: () => ({ message: i18n.t(FORM_ERROR_KEY.REQUIRED) }),
-  url: () => ({ message: i18n.t(FORM_ERROR_KEY.URL) }),
-  date: () => i18n.t(FORM_ERROR_KEY.DATE),
+  max: (count: number) => ({ message: i18n.t('error.form.max', { count }) }),
+  min: (count: number) => ({ message: i18n.t('error.form.min', { count }) }),
+  required: () => ({ message: i18n.t('error.form.required') }),
+  url: () => ({ message: i18n.t('error.form.url') }),
+  date: () => i18n.t('error.form.date'),
   /**
    * Used to validate that the end date is after the start date
    * @param path Path to the field where the error message should appear.
    */
-  dateRange: (path: string[]) => ({ message: i18n.t(FORM_ERROR_KEY.DATE_RANGE), path }),
+  dateRange: (path: string[]) => ({ message: i18n.t('error.form.date-range'), path }),
 };
 
 // Commonly used form validation schemas

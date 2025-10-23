@@ -52,12 +52,36 @@ export const GroupBySource = ({
     return text.slice(0, maxLength) + '…';
   };
 
+  const linkLabels: Record<CompetenceSourceType, string> = {
+    TOIMENKUVA: t('profile.competences.move-to-type.TOIMENKUVA'),
+    KOULUTUS: t('profile.competences.move-to-type.KOULUTUS'),
+    PATEVYYS: t('profile.competences.move-to-type.PATEVYYS'),
+    MUU_OSAAMINEN: t('profile.competences.move-to-type.MUU_OSAAMINEN'),
+    KIINNOSTUS: '',
+  };
+
+  const accordionLabels: Record<CompetenceSourceType, string> = {
+    TOIMENKUVA: t('my-competences.by-TOIMENKUVA'),
+    KOULUTUS: t('my-competences.by-KOULUTUS'),
+    PATEVYYS: t('my-competences.by-PATEVYYS'),
+    MUU_OSAAMINEN: t('my-competences.by-MUU_OSAAMINEN'),
+    KIINNOSTUS: '',
+  };
+
+  const emptyStateLabels: Record<CompetenceSourceType, string> = {
+    TOIMENKUVA: t('my-competences.missing-TOIMENKUVA'),
+    KOULUTUS: t('my-competences.missing-KOULUTUS'),
+    PATEVYYS: t('my-competences.missing-PATEVYYS'),
+    MUU_OSAAMINEN: t('my-competences.missing-MUU_OSAAMINEN'),
+    KIINNOSTUS: '',
+  };
+
   const getLinkButton = (competence: CompetenceSourceType) =>
     competence && links[competence] ? (
       <Button
         LinkComponent={getLinkTo(links[competence])}
         key={competence}
-        label={t(`profile.competences.move-to-type.${competence}`)}
+        label={linkLabels[competence]}
         icon={<JodArrowRight />}
         iconSide="right"
         variant="white"
@@ -80,10 +104,10 @@ export const GroupBySource = ({
               underline
               title={
                 <div className={`truncate text-heading-3 ${getTextClassByCompetenceSourceType(competence)}`}>
-                  {t(`my-competences.by-${competence}`)}
+                  {accordionLabels[competence]}
                 </div>
               }
-              ariaLabel={t(`my-competences.by-${competence}`)}
+              ariaLabel={accordionLabels[competence]}
             >
               {(Array.isArray(filters[competence]) || localizedMuutOsaamisetVapaateksti.length > 0) &&
               filters[competence].some((filter) => filter.checked) ? (
@@ -136,7 +160,7 @@ export const GroupBySource = ({
               ) : (
                 <>
                   <div className="mt-6 mb-7">
-                    <EmptyState text={t(`my-competences.missing-${competence}`)} />
+                    <EmptyState text={emptyStateLabels[competence]} />
                   </div>
 
                   <div className="mt-5">{getLinkButton(competence)}</div>

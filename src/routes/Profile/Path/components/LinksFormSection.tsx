@@ -27,7 +27,7 @@ const LinksFormSection = ({ type, fieldName = 'linkit' }: LinksFormSectionProps)
   return (
     <div className="flex flex-col gap-5">
       <span className="text-form-label">
-        {t(`profile.paths.add-links-for-${type === 'KOULUTUS' ? 'education' : 'work'}`)}
+        {type === 'KOULUTUS' ? t(`profile.paths.add-links-for-education`) : t(`profile.paths.add-links-for-work`)}
       </span>
       {linkitFields.map((field, index) => (
         <div key={field.id} className="flex flex-col gap-5">

@@ -14,17 +14,26 @@ interface TitleCheckboxProps {
  */
 const TitleCheckbox = ({ type, checked, onChange }: TitleCheckboxProps) => {
   const { t, i18n } = useTranslation();
+
+  const labels: Record<keyof FiltersType, string> = {
+    TOIMENKUVA: t('types.competence.TOIMENKUVA'),
+    KOULUTUS: t('types.competence.KOULUTUS'),
+    PATEVYYS: t('types.competence.PATEVYYS'),
+    MUU_OSAAMINEN: t('types.competence.MUU_OSAAMINEN'),
+    KIINNOSTUS: t('types.competence.KIINNOSTUS'),
+  };
+
   return (
     <Checkbox
       label={
         <span className="flex items-center hyphens-auto" lang={i18n.language}>
           <div className={`mx-3 h-5 w-5 flex-none rounded-full ds-bg-tag-${OSAAMINEN_COLOR_MAP[type]}`} aria-hidden />
-          {t(`types.competence.${type}`)}
+          {labels[type]}
         </span>
       }
       checked={checked}
       onChange={onChange}
-      ariaLabel={t(`types.competence.${type}`)}
+      ariaLabel={labels[type]}
       name={t('profile.competences.do-filter')}
       value={type}
       className="min-h-7"

@@ -132,8 +132,6 @@ export const OsaamisSuosittelija = ({
     }
   };
 
-  const translationKey = React.useMemo(() => (mode === 'osaamiset' ? 'competence' : 'interest'), [mode]);
-
   return (
     <>
       <div className="mb-6">
@@ -158,7 +156,7 @@ export const OsaamisSuosittelija = ({
           <span>{mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}</span>
           {filteredEhdotetutOsaamiset.length > 0 && (
             <div className="font-arial text-body-sm text-secondary-gray mb-4">
-              {t(`osaamissuosittelija.${translationKey}.add`)}
+              {mode === 'osaamiset' ? t(`osaamissuosittelija.competence.add`) : t(`osaamissuosittelija.interest.add`)}
             </div>
           )}
         </div>
@@ -196,7 +194,13 @@ export const OsaamisSuosittelija = ({
             </ul>
           ) : (
             <div className="mt-4">
-              <EmptyState text={t(`osaamissuosittelija.${translationKey}.none-proposed`)} />
+              <EmptyState
+                text={
+                  mode === 'osaamiset'
+                    ? t(`osaamissuosittelija.competence.none-proposed`)
+                    : t(`osaamissuosittelija.interest.none-proposed`)
+                }
+              />
             </div>
           )}
         </div>
@@ -212,7 +216,9 @@ export const OsaamisSuosittelija = ({
               <span>{mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}</span>
               {value.length > 0 && (
                 <div className="font-arial text-body-sm text-secondary-gray mb-4">
-                  {t(`osaamissuosittelija.${translationKey}.remove`)}
+                  {mode === 'osaamiset'
+                    ? t(`osaamissuosittelija.competence.remove`)
+                    : t(`osaamissuosittelija.interest.remove`)}
                 </div>
               )}
             </div>
@@ -228,7 +234,13 @@ export const OsaamisSuosittelija = ({
                 </div>
               ) : (
                 <div className="mt-4">
-                  <EmptyState text={t(`osaamissuosittelija.${translationKey}.none-selected`)} />
+                  <EmptyState
+                    text={
+                      mode === 'osaamiset'
+                        ? t(`osaamissuosittelija.competence.none-selected`)
+                        : t(`osaamissuosittelija.interest.none-selected`)
+                    }
+                  />
                 </div>
               )}
             </div>
