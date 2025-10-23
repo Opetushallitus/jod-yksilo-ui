@@ -4,13 +4,13 @@ import FilterJobOpportunityType from '@/routes/Tool/components/filters/FilterJob
 import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType';
 import { FilterSijainti } from '@/routes/Tool/components/filters/FilterSijainti.tsx';
 import { useToolStore } from '@/stores/useToolStore';
+import { FilterName } from '@/stores/useToolStore/ToolStoreModel.ts';
 import { Accordion, Button, Modal } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import OpportunitiesSorting from './components/filters/OpportunitiesSorting';
 import OpportunityWeight from './components/filters/OpportunityWeight';
-import { FilterName } from '@/stores/useToolStore/ToolStoreModel.ts';
 
 const SettingsSection = ({ title, children }: { title: string; children: React.ReactNode }) => {
   return (
