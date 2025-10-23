@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write # Needed to interact with GitHub's OIDC Token endpoint
-      contents: read
+      contents: write
       actions: read
     environment: ${{ inputs.environment }}
     concurrency:
