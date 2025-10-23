@@ -20,18 +20,17 @@ const ignoredOperations: Partial<Record<keyof paths, Method>> = {
 };
 
 const showToast = (method: Method, response: Response) => {
-  const suffix = response.ok ? 'success' : 'failed';
   const toastFn = response.ok ? toast.success : toast.error;
 
   switch (method) {
     case 'DELETE':
-      toastFn(i18n.t(`toast.delete-${suffix}`));
+      toastFn(response.ok ? i18n.t(`toast.delete-success`) : i18n.t(`toast.delete-failed`));
       break;
     case 'POST':
-      toastFn(i18n.t(`toast.add-${suffix}`));
+      toastFn(response.ok ? i18n.t(`toast.add-success`) : i18n.t(`toast.add-failed`));
       break;
     default:
-      toastFn(i18n.t(`toast.update-${suffix}`));
+      toastFn(response.ok ? i18n.t(`toast.update-success`) : i18n.t(`toast.update-failed`));
       break;
   }
 };

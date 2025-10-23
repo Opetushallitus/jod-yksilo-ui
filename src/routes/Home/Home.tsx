@@ -10,12 +10,11 @@ import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link, useRouteLoaderData } from 'react-router';
 
-const FeatureBox = ({ title }: { title: string }) => {
-  const { t } = useTranslation();
+const FeatureBox = ({ title, content }: { title: string; content: string }) => {
   return (
     <div className="flex flex-col gap-5">
-      <h3 className="text-heading-3 sm:min-h-[54px]">{t(`home.features.${title}`)}</h3>
-      <p className="text-body-sm sm:mb-0 mb-5">{t(`home.features.${title}-content`)}</p>
+      <h3 className="text-heading-3 sm:min-h-[54px]">{title}</h3>
+      <p className="text-body-sm sm:mb-0 mb-5">{content}</p>
     </div>
   );
 };
@@ -30,7 +29,6 @@ const FullWidthContainer = ({ className = '', children }: ContainerProps) => (
   </div>
 );
 const Content = ({ className = '', title, children }: ContainerProps & { title?: string }) => {
-  const { t } = useTranslation();
   return (
     <div
       className={tc([
@@ -44,7 +42,7 @@ const Content = ({ className = '', title, children }: ContainerProps & { title?:
         className,
       ])}
     >
-      {title && <h2 className="text-heading-1">{t(`home.${title}`)}</h2>}
+      {title && <h2 className="text-heading-1">{title}</h2>}
       {children}
     </div>
   );
@@ -155,7 +153,7 @@ const Home = () => {
         />
       </CardContainer>
 
-      <Content title="beta">
+      <Content title={t('home.beta')}>
         <p className="text-body-lg max-w-[716px]">
           <Trans
             i18nKey="home.beta-content"
@@ -183,12 +181,24 @@ const Home = () => {
         </div>
       </Content>
 
-      <Content title="features.title">
+      <Content title={t('home.features.title')}>
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-6">
-          <FeatureBox title="map-own-competences" />
-          <FeatureBox title="education-to-increase-skills" />
-          <FeatureBox title="explore-job-opportunities" />
-          <FeatureBox title="map-opportunitites-to-change-jobs" />
+          <FeatureBox
+            title={t(`home.features.map-own-competences`)}
+            content={t('home.features.map-own-competences-content')}
+          />
+          <FeatureBox
+            title={t(`home.features.education-to-increase-skills`)}
+            content={t('home.features.education-to-increase-skills-content')}
+          />
+          <FeatureBox
+            title={t(`home.features.explore-job-opportunities`)}
+            content={t('home.features.explore-job-opportunities-content')}
+          />
+          <FeatureBox
+            title={t(`home.features.map-opportunitites-to-change-jobs`)}
+            content={t('home.features.map-opportunitites-to-change-jobs-content')}
+          />
         </div>
         <div className="text-body-lg">{t('home.use-tool-or-log-in')}</div>
         <div className="flex sm:flex-row flex-col gap-4">
@@ -225,7 +235,7 @@ const Home = () => {
         </div>
       </FullWidthContainer>
 
-      <Content title="how-competency-path-helps-you" className="mb-[128px] mt-11">
+      <Content title={t('home.how-competency-path-helps-you')} className="mb-[128px] mt-11">
         <p className="text-body-lg whitespace-pre-line max-w-[716px]">
           {t('home.how-competency-path-helps-you-content')}
         </p>

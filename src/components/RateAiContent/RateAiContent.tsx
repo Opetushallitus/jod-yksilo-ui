@@ -15,6 +15,25 @@ export const RateAiContent = ({ variant, area }: RateAiContentProps) => {
   } = useTranslation();
   const { id } = useParams();
 
+  const listTexts = {
+    kohtaanto: [
+      t('rate-ai-content.modal.description.list.kohtaanto.item1'),
+      t('rate-ai-content.modal.description.list.kohtaanto.item2'),
+      t('rate-ai-content.modal.description.list.kohtaanto.item3'),
+    ],
+    tyomahdollisuus: [
+      t('rate-ai-content.modal.description.list.tyomahdollisuus.item1'),
+      t('rate-ai-content.modal.description.list.tyomahdollisuus.item2'),
+      t('rate-ai-content.modal.description.list.tyomahdollisuus.item3'),
+    ],
+    koulutusmahdollisuus: [
+      t('rate-ai-content.modal.description.list.koulutusmahdollisuus.item1'),
+      t('rate-ai-content.modal.description.list.koulutusmahdollisuus.item2'),
+      t('rate-ai-content.modal.description.list.koulutusmahdollisuus.item3'),
+      t('rate-ai-content.modal.description.list.koulutusmahdollisuus.item4'),
+    ],
+  };
+
   return (
     <RateAiContentCard
       translations={{
@@ -36,11 +55,9 @@ export const RateAiContent = ({ variant, area }: RateAiContentProps) => {
             <>
               <p>{t(`rate-ai-content.modal.description.intro`)}</p>
               <ul className="ds:list-disc ds:ml-5">
-                {(t(`rate-ai-content.modal.description.list.${variant}`, { returnObjects: true }) as string[]).map(
-                  (item: string, index, array) => (
-                    <li key={item}>{`${item}${index === array.length - 1 ? '.' : ','}`}</li>
-                  ),
-                )}
+                {listTexts[variant].map((item: string, index, array) => (
+                  <li key={item}>{`${item}${index === array.length - 1 ? '.' : ','}`}</li>
+                ))}
               </ul>
               <p className="ds:mt-4">{t(`rate-ai-content.modal.description.question`)}</p>
               <p>{t(`rate-ai-content.modal.description.help`)}</p>

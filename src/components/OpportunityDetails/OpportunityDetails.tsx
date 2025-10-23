@@ -137,17 +137,27 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
 
   const typeTooltip = React.useMemo(() => {
     if (tyyppi === 'TYOMAHDOLLISUUS') {
+      const text = {
+        TMT: t('opportunity-tooltip.work.TMT'),
+        AMMATTITIETO: t('opportunity-tooltip.work.AMMATTITIETO'),
+      }[jobData.aineisto ?? 'TMT'];
+
       return (
         <div className="font-arial text-white leading-5 text-card-label">
           <p className="mb-2">{typeText}</p>
-          <p className="font-normal">{t(`opportunity-tooltip.work.${jobData.aineisto ?? 'TMT'}`)}</p>
+          <p className="font-normal">{text}</p>
         </div>
       );
     } else if (tyyppi === 'KOULUTUSMAHDOLLISUUS') {
+      const text = {
+        TUTKINTO: t('opportunity-tooltip.education.TUTKINTO'),
+        EI_TUTKINTO: t('opportunity-tooltip.education.EI_TUTKINTO'),
+      }[educationData.tyyppi];
+
       return (
         <div className="font-arial text-white leading-5 text-card-label">
           <p className="mb-2">{tyyppi}</p>
-          <p className="font-normal">{t(`opportunity-tooltip.education.${educationData.tyyppi}`)}</p>
+          <p className="font-normal">{text}</p>
         </div>
       );
     } else {

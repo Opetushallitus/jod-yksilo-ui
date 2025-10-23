@@ -24,13 +24,9 @@
     "education-opportunity": {
       "index": "education-opportunity"
     },
-    "how-do-i-give-feedback": "how-do-i-give-feedback",
-    "how-do-i-use-the-service": "how-do-i-use-the-service",
     "job-opportunity": {
       "index": "job-opportunity"
     },
-    "no-internet-connection": "no-internet-connection",
-    "privacy-policy": "privacy-policy",
     "profile": {
       "competences": "competences",
       "education-history": "education-history",
@@ -42,24 +38,10 @@
       "something-else": "something-else",
       "work-history": "work-history"
     },
-    "session-expired": "session-expired",
     "tool": {
       "competences": "competences",
-      "goals": "goals",
       "index": "tool",
-      "instructions": "instructions",
-      "interests": "interests",
-      "restrictions": "restrictions"
-    },
-    "user": "user",
-    "user-guide": {
-      "how-do-i-give-feedback": "how-do-i-give-feedback",
-      "how-do-i-use-the-service": "how-do-i-use-the-service",
-      "index": "user-guide",
-      "what-is-the-service": "what-is-the-service",
-      "where-can-i-get-more-help": "where-can-i-get-more-help",
-      "who-is-the-service-for": "who-is-the-service-for",
-      "who-provides-the-service": "who-provides-the-service"
+      "interests": "interests"
     }
   }
 }

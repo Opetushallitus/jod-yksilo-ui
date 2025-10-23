@@ -23,7 +23,7 @@ export const CompareCompetencesTable = ({ rows, className = '', mode = 'osaamine
               {t('competence')}
             </th>
             <th scope="col" className="text-center whitespace-nowrap pr-5 pb-3">
-              {t(mode === 'kiinnostus' ? 'your-interests' : 'your-competences')}
+              {mode === 'kiinnostus' ? t('your-interests') : t('your-competences')}
             </th>
           </tr>
         </thead>
