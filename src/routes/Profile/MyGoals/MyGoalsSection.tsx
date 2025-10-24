@@ -1,9 +1,8 @@
-import { components } from '@/api/schema';
-import { OpportunityCard } from '@/components';
+import type { components } from '@/api/schema';
+import { EducationOpportunityCard, JobOpportunityCard, type OpportunityCardProps } from '@/components';
 import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import loader from '@/routes/Profile/MyGoals/loader';
-import { getTypeSlug } from '@/routes/Profile/utils';
 import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { getLocalizedText } from '@/utils';
 import { Button } from '@jod/design-system';
@@ -22,15 +21,11 @@ interface MyGoalsSectionProps {
   paamaarat: components['schemas']['PaamaaraDto'][];
 }
 const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionProps) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { mahdollisuusDetails, upsertPaamaara } = usePaamaaratStore(
     useShallow((state) => ({ mahdollisuusDetails: state.mahdollisuusDetails, upsertPaamaara: state.upsertPaamaara })),
   );
   const { isPrd } = useEnvironment();
-
   const loaderData = useLoaderData<Awaited<ReturnType<typeof loader>>>();
 
   const getMahdollisuusDetails = React.useCallback(
@@ -68,30 +63,40 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
           const { mahdollisuusId, mahdollisuusTyyppi, id } = pm;
           const details = getMahdollisuusDetails(mahdollisuusId);
           const menuId = id ?? `menu-${i}`;
+          const cardBaseProps = {
+            description: getLocalizedText(details?.tiivistelma),
+            name: getLocalizedText(details?.otsikko),
+            from: 'goal' as const,
+            hideFavorite: true,
+            menuId,
+            menuContent: (
+              <MyGoalsOpportunityCardMenu
+                mahdollisuusId={mahdollisuusId}
+                mahdollisuusTyyppi={mahdollisuusTyyppi}
+                paamaaraId={id}
+                menuId={menuId}
+              />
+            ),
+          } as OpportunityCardProps;
           return details ? (
             <div key={pm.id ?? mahdollisuusId} className="flex flex-col gap-5 mb-9">
-              <OpportunityCard
-                to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${mahdollisuusId}`}
-                description={getLocalizedText(details.tiivistelma)}
-                from="goal"
-                ammattiryhma={details.ammattiryhma}
-                ammattiryhmaNimet={loaderData?.ammattiryhmaNimet}
-                name={getLocalizedText(details.otsikko)}
-                aineisto={details.aineisto}
-                tyyppi={details.tyyppi}
-                type={mahdollisuusTyyppi}
-                headingLevel="h3"
-                menuContent={
-                  <MyGoalsOpportunityCardMenu
-                    mahdollisuusId={mahdollisuusId}
-                    mahdollisuusTyyppi={mahdollisuusTyyppi}
-                    paamaaraId={id}
-                    menuId={menuId}
-                  />
-                }
-                menuId={menuId}
-                hideFavorite
-              />
+              {mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? (
+                <JobOpportunityCard
+                  {...cardBaseProps}
+                  to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${mahdollisuusId}`}
+                  aineisto={details.aineisto}
+                  ammattiryhma={details.ammattiryhma}
+                  ammattiryhmaNimet={loaderData?.ammattiryhmaNimet}
+                />
+              ) : (
+                <EducationOpportunityCard
+                  {...cardBaseProps}
+                  to={`/${i18n.language}/${t('slugs.education-opportunity.index')}/${mahdollisuusId}`}
+                  tyyppi={details.tyyppi}
+                  kesto={details.kesto}
+                  yleisinKoulutusala={details.yleisinKoulutusala}
+                />
+              )}
               <TavoiteInput paamaara={pm} />
               {!isPrd && pm.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' && (
                 <>

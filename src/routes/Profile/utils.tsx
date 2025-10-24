@@ -1,7 +1,5 @@
 import type { components } from '@/api/schema';
-import i18n from '@/i18n/config';
 import type { CompetenceSourceType } from '@/routes/Profile/Competences/constants';
-import type { MahdollisuusTyyppi } from '@/routes/types';
 import { cx } from '@jod/design-system';
 import { JSX } from 'react';
 import { Link, type LinkProps } from 'react-router';
@@ -64,9 +62,6 @@ export const generateProfileLink = (
 
 export const GENDER_VALUES = ['MIES', 'NAINEN'] as const;
 export type GenderValue = (typeof GENDER_VALUES)[number];
-
-export const getTypeSlug = (type: MahdollisuusTyyppi) =>
-  type === 'TYOMAHDOLLISUUS' ? i18n.t('slugs.job-opportunity.index') : i18n.t('slugs.education-opportunity.index');
 
 export type ProfileSectionType =
   | CompetenceSourceType

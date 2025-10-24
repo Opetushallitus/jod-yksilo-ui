@@ -1,6 +1,6 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
-import { FormError, OpportunityCard } from '@/components';
+import type { components } from '@/api/schema';
+import { EducationOpportunityCard, FormError, JobOpportunityCard, type OpportunityCardProps } from '@/components';
 import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
@@ -8,7 +8,7 @@ import { useModal } from '@/hooks/useModal';
 import VaiheCard from '@/routes/Profile/Path/VaiheCard';
 import ManualVaiheModal from '@/routes/Profile/Path/modal/ManualVaiheModal/ManualVaiheModal';
 import ProposeVaiheModal from '@/routes/Profile/Path/modal/ProposeVaiheModal/ProposeVaiheModal';
-import { generateProfileLink, getTypeSlug } from '@/routes/Profile/utils';
+import { generateProfileLink } from '@/routes/Profile/utils';
 import { usePolutStore } from '@/stores/usePolutStore';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -26,6 +26,8 @@ import { getDuration, mapOsaaminenToUri, type PolkuForm, type PolkuQueryParams, 
 const Path = () => {
   const loaderData = useLoaderData<Awaited<ReturnType<typeof loader>>>();
   const mahdollisuus = loaderData?.mahdollisuus;
+  const tyomahdollisuus = mahdollisuus as components['schemas']['TyomahdollisuusFullDto'];
+  const koulutusmahdollisuus = mahdollisuus as components['schemas']['KoulutusmahdollisuusFullDto'];
   const paamaara = loaderData?.paamaara;
 
   const {
@@ -334,8 +336,8 @@ const Path = () => {
     );
     const { months, years } = getDuration(startTime, endTime);
     return years === 0
-      ? t('profile.paths.n-months', { count: months })
-      : `${t('profile.paths.n-years', { count: years })} ${t('profile.paths.n-months', { count: months })}`;
+      ? t('n-months', { count: months })
+      : `${t('n-years', { count: years })} ${t('n-months', { count: months })}`;
   };
 
   const onIgnoreChange = async (osaaminenUri: string) => {
@@ -388,6 +390,14 @@ const Path = () => {
     navigate(route.to);
   };
 
+  const opportunityCardBaseProps = {
+    from: 'path' as const,
+    description: getLocalizedText(mahdollisuus?.tiivistelma),
+    name: getLocalizedText(mahdollisuus?.otsikko),
+    type: paamaara.mahdollisuusTyyppi,
+    hideFavorite: true,
+  } as OpportunityCardProps;
+
   return (
     <div>
       <FormProvider {...methods}>
@@ -422,21 +432,23 @@ const Path = () => {
               <span className="text-form-label">{t('profile.paths.goal')}</span>
               {paamaara ? (
                 <div className="flex flex-col gap-5 mb-9">
-                  <OpportunityCard
-                    to={`/${language}/${getTypeSlug(paamaara.mahdollisuusTyyppi)}/${mahdollisuusId}`}
-                    description={getLocalizedText(mahdollisuus?.tiivistelma)}
-                    name={getLocalizedText(mahdollisuus?.otsikko)}
-                    aineisto={(mahdollisuus as components['schemas']['TyomahdollisuusFullDto'])?.aineisto}
-                    tyyppi={(mahdollisuus as components['schemas']['KoulutusmahdollisuusFullDto'])?.tyyppi}
-                    type={paamaara.mahdollisuusTyyppi}
-                    ammattiryhma={
-                      paamaara.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
-                        ? (mahdollisuus as components['schemas']['TyomahdollisuusDto']).ammattiryhma
-                        : undefined
-                    }
-                    ammattiryhmaNimet={ammattiryhmaNimet}
-                    hideFavorite
-                  />
+                  {paamaara.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? (
+                    <JobOpportunityCard
+                      {...opportunityCardBaseProps}
+                      to={`/${language}/${t('slugs.job-opportunity.index')}/${mahdollisuusId}`}
+                      aineisto={tyomahdollisuus?.aineisto}
+                      ammattiryhmaNimet={ammattiryhmaNimet}
+                      ammattiryhma={loaderData.ammattiRyhmaData}
+                    />
+                  ) : (
+                    <EducationOpportunityCard
+                      {...opportunityCardBaseProps}
+                      to={`/${language}/${t('slugs.education-opportunity.index')}/${mahdollisuusId}`}
+                      tyyppi={koulutusmahdollisuus?.tyyppi}
+                      kesto={koulutusmahdollisuus?.kesto}
+                    />
+                  )}
+
                   {getLocalizedText(paamaara.tavoite) ? (
                     <>
                       <div className="text-form-label">{t('profile.my-goals.goal-description')}</div>

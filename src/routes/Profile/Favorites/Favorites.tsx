@@ -1,9 +1,15 @@
-import { MainLayout, OpportunityCard, SimpleNavigationList } from '@/components';
+import {
+  EducationOpportunityCard,
+  JobOpportunityCard,
+  MainLayout,
+  SimpleNavigationList,
+  type OpportunityCardProps,
+} from '@/components';
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
-import { filterValues } from '@/routes/Tool/utils.ts';
-import { MahdollisuusTyyppi } from '@/routes/types';
+import { filterValues } from '@/routes/Tool/utils';
+import type { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
 import { Button, EmptyState, Modal, Pagination, useMediaQueries } from '@jod/design-system';
@@ -12,7 +18,6 @@ import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
-import { getTypeSlug } from '../utils';
 
 const Favorites = () => {
   const {
@@ -42,11 +47,7 @@ const Favorites = () => {
       totalPages: state.totalPages,
     })),
   );
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
-
+  const { t, i18n } = useTranslation();
   const title = t('profile.favorites.title');
   const jobFilterText = t('job-opportunities');
   const educationFilterText = t('education-opportunities');
@@ -233,29 +234,40 @@ const Favorites = () => {
       <div className="flex flex-col gap-5 mb-8" data-testid="favorites-list">
         {favoritesPerType.map((mahdollisuus) => {
           const { id, mahdollisuusTyyppi, tyyppi, aineisto } = mahdollisuus;
-          return (
-            <OpportunityCard
+          const cardBaseProps = {
+            description: getLocalizedText(mahdollisuus.tiivistelma),
+            from: 'favorite' as const,
+            isFavorite: true,
+            isLoggedIn: true,
+            name: getLocalizedText(mahdollisuus.otsikko),
+            toggleFavorite: () => void deleteSuosikki(id),
+            menuId: id,
+            menuContent: (
+              <FavoritesOpportunityCardActionMenu
+                mahdollisuusId={id}
+                mahdollisuusTyyppi={mahdollisuusTyyppi}
+                menuId={id}
+              />
+            ),
+          } as OpportunityCardProps;
+
+          return mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? (
+            <JobOpportunityCard
+              {...cardBaseProps}
               key={id}
-              to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}?origin=favorites`}
-              description={getLocalizedText(mahdollisuus.tiivistelma)}
-              from="favorite"
+              to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}?origin=favorites`}
               ammattiryhma={mahdollisuus?.ammattiryhma}
               ammattiryhmaNimet={ammattiryhmaNimet}
-              isFavorite={true}
-              isLoggedIn={true}
-              name={getLocalizedText(mahdollisuus.otsikko)}
-              toggleFavorite={() => void deleteSuosikki(id)}
               aineisto={aineisto}
+            />
+          ) : (
+            <EducationOpportunityCard
+              {...cardBaseProps}
+              key={id}
+              to={`/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}?origin=favorites`}
               tyyppi={tyyppi}
-              type={mahdollisuusTyyppi}
-              menuContent={
-                <FavoritesOpportunityCardActionMenu
-                  mahdollisuusId={id}
-                  mahdollisuusTyyppi={mahdollisuusTyyppi}
-                  menuId={id}
-                />
-              }
-              menuId={id}
+              kesto={mahdollisuus.kesto}
+              yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
             />
           );
         })}

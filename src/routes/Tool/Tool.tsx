@@ -1,5 +1,5 @@
 import type { components } from '@/api/schema';
-import { Breadcrumb, OpportunityCard } from '@/components';
+import { Breadcrumb, EducationOpportunityCard, JobOpportunityCard, type OpportunityCardProps } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
@@ -141,34 +141,44 @@ const ExploreOpportunities = () => {
         {mixedMahdollisuudet.map((mahdollisuus) => {
           const { id, mahdollisuusTyyppi } = mahdollisuus;
           const ehdotus = mahdollisuusEhdotukset?.[id];
-          const isFavorite = suosikit?.find((s) => s.kohdeId === id) !== undefined;
-          const path =
-            mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
-              ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`
-              : `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}`;
 
-          return ehdotus ? (
-            <OpportunityCard
+          const baseCardProps = {
+            as: 'li',
+            from: 'tool',
+            isFavorite: suosikit?.find((s) => s.kohdeId === id) !== undefined,
+            isLoggedIn,
+            toggleFavorite: () => void toggleSuosikki(id, ehdotus.tyyppi),
+            name: getLocalizedText(mahdollisuus.otsikko),
+            description: getLocalizedText(mahdollisuus.tiivistelma),
+            matchValue: ehdotus?.pisteet,
+            matchLabel: t('fit'),
+            headingLevel: 'h3',
+            rateId: id,
+          } as OpportunityCardProps;
+
+          if (!ehdotus) {
+            return null;
+          }
+
+          return mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? (
+            <JobOpportunityCard
+              {...baseCardProps}
               key={id}
-              as="li"
-              from="tool"
-              to={path}
-              isFavorite={isFavorite}
-              isLoggedIn={isLoggedIn}
-              toggleFavorite={() => void toggleSuosikki(id, ehdotus.tyyppi)}
-              name={getLocalizedText(mahdollisuus.otsikko)}
-              description={getLocalizedText(mahdollisuus.tiivistelma)}
-              matchValue={ehdotus?.pisteet}
-              matchLabel={t('fit')}
-              headingLevel="h3"
+              to={`/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`}
               ammattiryhma={mahdollisuus.ammattiryhma}
               ammattiryhmaNimet={ammattiryhmaNimet}
               aineisto={mahdollisuus.aineisto}
-              tyyppi={mahdollisuus.tyyppi}
-              type={mahdollisuusTyyppi}
-              rateId={id}
             />
-          ) : null;
+          ) : (
+            <EducationOpportunityCard
+              {...baseCardProps}
+              key={id}
+              to={`/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}`}
+              kesto={mahdollisuus.kesto}
+              tyyppi={mahdollisuus.tyyppi}
+              yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
+            />
+          );
         })}
       </ul>
 
