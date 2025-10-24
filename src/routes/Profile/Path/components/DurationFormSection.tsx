@@ -1,5 +1,5 @@
 import { FormError } from '@/components';
-import { getDatePickerTranslations, type DatePickerTranslations } from '@/utils';
+import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { Datepicker } from '@jod/design-system';
 import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
@@ -22,9 +22,7 @@ const DurationFormSection = () => {
     void trigger(`loppuPvm`);
   }, [alkuPvm, trigger]);
 
-  const DatePickerTranslations = getDatePickerTranslations(
-    t('datepicker', { returnObjects: true }) as DatePickerTranslations,
-  );
+  const datePickerTranslations = useDatePickerTranslations();
 
   return (
     <div className="flex flex-row gap-5">
@@ -37,7 +35,7 @@ const DurationFormSection = () => {
               label={t('profile.paths.starts')}
               placeholder={t('date-placeholder')}
               requiredText={t('required')}
-              translations={DatePickerTranslations}
+              translations={datePickerTranslations}
             />
           )}
           name="alkuPvm"
@@ -53,7 +51,7 @@ const DurationFormSection = () => {
               label={t('profile.paths.ends')}
               placeholder={t('date-placeholder')}
               requiredText={t('required')}
-              translations={DatePickerTranslations}
+              translations={datePickerTranslations}
             />
           )}
           name="loppuPvm"

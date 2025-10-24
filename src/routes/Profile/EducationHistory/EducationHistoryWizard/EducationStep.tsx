@@ -1,6 +1,6 @@
 import { FormError, TouchedFormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
-import { type DatePickerTranslations, getDatePickerTranslations } from '@/utils';
+import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { Datepicker, InputField } from '@jod/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -23,6 +23,8 @@ const EducationStep = ({ type, koulutus, headerText }: EducationStepProps) => {
     trigger,
     formState: { errors, touchedFields },
   } = useFormContext<EducationHistoryForm>();
+
+  const datePickerTranslations = useDatePickerTranslations();
 
   return (
     <>
@@ -63,9 +65,7 @@ const EducationStep = ({ type, koulutus, headerText }: EducationStepProps) => {
                   trigger(`koulutukset.${koulutus}.loppuPvm`);
                 }}
                 placeholder={t('date-placeholder')}
-                translations={getDatePickerTranslations(
-                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
-                )}
+                translations={datePickerTranslations}
               />
             )}
             name={`koulutukset.${koulutus}.alkuPvm`}
@@ -84,9 +84,7 @@ const EducationStep = ({ type, koulutus, headerText }: EducationStepProps) => {
                 label={t('ended')}
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
-                translations={getDatePickerTranslations(
-                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
-                )}
+                translations={datePickerTranslations}
               />
             )}
             name={`koulutukset.${koulutus}.loppuPvm`}

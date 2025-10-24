@@ -1,6 +1,6 @@
 import { FormError, TouchedFormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
-import { type DatePickerTranslations, getDatePickerTranslations } from '@/utils';
+import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { Datepicker, InputField } from '@jod/design-system';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -25,7 +25,7 @@ const ActivityStep = ({ headerText, type, patevyys }: ActivityStepProps) => {
     trigger,
     formState: { errors, touchedFields },
   } = useFormContext<FreeTimeActivitiesForm>();
-
+  const datePickerTranslations = useDatePickerTranslations();
   const alkuPvm = watch(`patevyydet.${patevyys}.alkuPvm`);
   const loppuPvm = watch(`patevyydet.${patevyys}.loppuPvm`);
   React.useEffect(() => {
@@ -74,9 +74,7 @@ const ActivityStep = ({ headerText, type, patevyys }: ActivityStepProps) => {
                 }}
                 placeholder={t('date-placeholder')}
                 requiredText={t('required')}
-                translations={getDatePickerTranslations(
-                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
-                )}
+                translations={datePickerTranslations}
               />
             )}
             name={`patevyydet.${patevyys}.alkuPvm`}
@@ -95,9 +93,7 @@ const ActivityStep = ({ headerText, type, patevyys }: ActivityStepProps) => {
                 label={t('ended')}
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
-                translations={getDatePickerTranslations(
-                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
-                )}
+                translations={datePickerTranslations}
               />
             )}
             name={`patevyydet.${patevyys}.loppuPvm`}
