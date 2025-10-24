@@ -1,6 +1,6 @@
 import { FormError, TouchedFormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
-import { DatePickerTranslations, getDatePickerTranslations } from '@/utils';
+import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { Datepicker, InputField } from '@jod/design-system';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -19,6 +19,8 @@ const WorkplaceStep = ({ type, toimenkuva, headerText }: WorkplaceStepProps) => 
     i18n: { language },
   } = useTranslation();
   const { register, watch, control, trigger, formState } = useFormContext<WorkHistoryForm>();
+
+  const datePickerTranslations = useDatePickerTranslations();
   const errors = formState.errors;
   const alkuPvm = watch(`toimenkuvat.${toimenkuva}.alkuPvm`);
   const loppuPvm = watch(`toimenkuvat.${toimenkuva}.loppuPvm`);
@@ -69,9 +71,7 @@ const WorkplaceStep = ({ type, toimenkuva, headerText }: WorkplaceStepProps) => 
                 }}
                 placeholder={t('date-placeholder')}
                 requiredText={t('required')}
-                translations={getDatePickerTranslations(
-                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
-                )}
+                translations={datePickerTranslations}
               />
             )}
             name={`toimenkuvat.${toimenkuva}.alkuPvm`}
@@ -90,9 +90,7 @@ const WorkplaceStep = ({ type, toimenkuva, headerText }: WorkplaceStepProps) => 
                 label={t('ended')}
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
-                translations={getDatePickerTranslations(
-                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
-                )}
+                translations={datePickerTranslations}
               />
             )}
             name={`toimenkuvat.${toimenkuva}.loppuPvm`}

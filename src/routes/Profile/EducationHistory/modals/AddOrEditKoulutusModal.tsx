@@ -3,9 +3,10 @@ import type { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
+import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
-import { type DatePickerTranslations, getDatePickerTranslations, getLocalizedText } from '@/utils';
+import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -57,6 +58,8 @@ const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
     formState: { errors, touchedFields },
   } = useFormContext<KoulutusForm>();
 
+  const datePickerTranslations = useDatePickerTranslations();
+
   // For triggering "date-range" error when "alkuPvm" is set after "loppuPvm"
   const alkuPvm = watch('alkuPvm');
   React.useEffect(() => {
@@ -88,9 +91,7 @@ const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
                 label={t('started')}
                 {...field}
                 placeholder={t('date-placeholder')}
-                translations={getDatePickerTranslations(
-                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
-                )}
+                translations={datePickerTranslations}
               />
             )}
             name="alkuPvm"
@@ -105,9 +106,7 @@ const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
                 label={t('ended')}
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
-                translations={getDatePickerTranslations(
-                  t('datepicker', { returnObjects: true }) as DatePickerTranslations,
-                )}
+                translations={datePickerTranslations}
               />
             )}
             name="loppuPvm"
