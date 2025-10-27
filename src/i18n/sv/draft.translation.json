@@ -1,8 +1,17 @@
 {
   "filters": "Filter",
   "tool": {
+    "education-opportunity-duration": "Genomsnittlig varaktighet",
+    "education-opportunity-duration-tooltip": "Utbildningens längd anger hur länge utbildningen vanligtvis varar. Den uttrycks oftast i år eller månader och baseras på utbildningens omfattning samt studiernas framsteg i normal takt.",
+    "education-opportunity-koulutusala": "Det vanligaste utbildningsområdet",
+    "education-opportunity-koulutusala-tooltip": "Utbildningsområdet avser den grupp som utbildningar delas in i beroende på vilket vetenskapsområde, samhällsområde eller arbetslivsområde de är kopplade till.",
     "settings": {
       "controls": "Kontroller"
     }
-  }
+  },
+  "n-months-short": "{{count}} mån",
+  "n-months_one": "{{count}} månad",
+  "n-months_other": "{{count}} månader",
+  "n-years_one": "{{count}} år",
+  "n-years_other": "{{count}} år"
 }

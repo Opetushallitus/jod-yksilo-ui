@@ -248,6 +248,8 @@ const Favorites = () => {
               aineisto={aineisto}
               tyyppi={tyyppi}
               type={mahdollisuusTyyppi}
+              kesto={mahdollisuus.kesto}
+              yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
               menuContent={
                 <FavoritesOpportunityCardActionMenu
                   mahdollisuusId={id}

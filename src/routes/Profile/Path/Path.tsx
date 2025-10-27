@@ -1,5 +1,5 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { FormError, OpportunityCard } from '@/components';
 import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
 import { formErrorMessage, LIMITS } from '@/constants';
@@ -334,8 +334,8 @@ const Path = () => {
     );
     const { months, years } = getDuration(startTime, endTime);
     return years === 0
-      ? t('profile.paths.n-months', { count: months })
-      : `${t('profile.paths.n-years', { count: years })} ${t('profile.paths.n-months', { count: months })}`;
+      ? t('n-months', { count: months })
+      : `${t('n-years', { count: years })} ${t('n-months', { count: months })}`;
   };
 
   const onIgnoreChange = async (osaaminenUri: string) => {
@@ -429,12 +429,9 @@ const Path = () => {
                     aineisto={(mahdollisuus as components['schemas']['TyomahdollisuusFullDto'])?.aineisto}
                     tyyppi={(mahdollisuus as components['schemas']['KoulutusmahdollisuusFullDto'])?.tyyppi}
                     type={paamaara.mahdollisuusTyyppi}
-                    ammattiryhma={
-                      paamaara.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
-                        ? (mahdollisuus as components['schemas']['TyomahdollisuusDto']).ammattiryhma
-                        : undefined
-                    }
+                    ammattiryhma={loaderData.ammattiryhma}
                     ammattiryhmaNimet={ammattiryhmaNimet}
+                    kesto={(mahdollisuus as components['schemas']['KoulutusmahdollisuusFullDto'])?.kesto}
                     hideFavorite
                   />
                   {getLocalizedText(paamaara.tavoite) ? (

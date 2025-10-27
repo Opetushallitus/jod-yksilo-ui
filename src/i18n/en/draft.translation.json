@@ -1,8 +1,17 @@
 {
   "filters": "Filters",
   "tool": {
+    "education-opportunity-duration": "Average duration",
+    "education-opportunity-duration-tooltip": "The duration of the education opportunity indicates how long the education typically lasts. It is usually expressed in years or months and is based on the scope of the education and the normal pace of studies.",
+    "education-opportunity-koulutusala": "Most common field of education",
+    "education-opportunity-koulutusala-tooltip": "The field of education refers to the group into which educational programs are categorized based on the scientific, societal, or professional domain they relate to.",
     "settings": {
       "controls": "Controls"
     }
-  }
+  },
+  "n-months-short": "{{count}} mo",
+  "n-months_one": "{{count}} month",
+  "n-months_other": "{{count}} months",
+  "n-years_one": "{{count}} year",
+  "n-years_other": "{{count}} years"
 }
