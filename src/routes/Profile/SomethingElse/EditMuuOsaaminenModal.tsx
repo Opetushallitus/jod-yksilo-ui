@@ -82,11 +82,13 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
     void trigger();
   }, [trigger]);
 
+  const headerText = React.useMemo(() => {
+    return data.length > 0 ? t('profile.competences.edit') : t('profile.competences.add');
+  }, [data, t]);
+
   if (isLoading) {
     return null;
   }
-
-  const headerText = t('profile.competences.edit');
 
   return (
     <Modal

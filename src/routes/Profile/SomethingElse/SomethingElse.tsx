@@ -119,7 +119,7 @@ const SomethingElse = () => {
       </ul>
       <div className="flex pt-7 mb-8">
         <Button
-          variant="white"
+          variant="accent"
           label={muuOsaaminen.length > 0 ? t('profile.competences.edit') : t('profile.competences.add')}
           onClick={() => {
             showModal(EditMuuOsaaminenModal, { data: muuOsaaminen });
