@@ -31,7 +31,7 @@ const ProposeVaiheModal = ({ isOpen, onClose, vaiheIndex }: ProposeVaiheModalPro
     })),
   );
   const { t } = useTranslation();
-  const { suunnitelmaId, paamaaraId } = useParams<PolkuQueryParams>();
+  const { suunnitelmaId, tavoiteId } = useParams<PolkuQueryParams>();
   const { showDialog } = useModal();
 
   const formId = React.useId();
@@ -64,16 +64,16 @@ const ProposeVaiheModal = ({ isOpen, onClose, vaiheIndex }: ProposeVaiheModalPro
   });
 
   const onSubmit: FormSubmitHandler<VaiheForm> = async ({ data }: { data: VaiheForm }) => {
-    if (!data || !suunnitelmaId || !paamaaraId) {
+    if (!data || !suunnitelmaId || !tavoiteId) {
       close(true);
       return;
     }
 
     const apiCall = data.id
-      ? client.PUT('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}', {
+      ? client.PUT('/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}', {
           params: {
             path: {
-              id: paamaaraId,
+              id: tavoiteId,
               suunnitelmaId,
               vaiheId: data.id,
             },
@@ -84,10 +84,10 @@ const ProposeVaiheModal = ({ isOpen, onClose, vaiheIndex }: ProposeVaiheModalPro
             osaamiset: data.osaamiset?.map(mapOsaaminenToUri),
           },
         })
-      : client.POST('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}/vaiheet', {
+      : client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}/vaiheet', {
           params: {
             path: {
-              id: paamaaraId,
+              id: tavoiteId,
               suunnitelmaId,
             },
           },

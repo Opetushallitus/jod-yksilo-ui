@@ -3,22 +3,22 @@ import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import { components } from '@/api/schema';
 import { TypedMahdollisuus } from '@/routes/types';
-import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
+import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
-  const response = await client.GET('/api/profiili/paamaarat', { signal: request.signal });
-  const paamaarat = response.data ?? [];
-  const tyoPaamaarat = paamaarat.filter((item) => item.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS');
-  const koulutusPaamarat = paamaarat.filter((item) => item.mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS');
+  const response = await client.GET('/api/profiili/tavoitteet', { signal: request.signal });
+  const tavoitteet = response.data ?? [];
+  const tyotavoitteet = tavoitteet.filter((item) => item.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS');
+  const koulutusPaamarat = tavoitteet.filter((item) => item.mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS');
 
   let tyomahdollisuudetDetails: TypedMahdollisuus[] = [];
   let koulutusMahdollisuudetDetails: TypedMahdollisuus[] = [];
-  const mapToIds = (pm: components['schemas']['PaamaaraDto']) => pm.mahdollisuusId;
+  const mapToIds = (pm: components['schemas']['TavoiteDto']) => pm.mahdollisuusId;
 
-  if (tyoPaamaarat.length > 0) {
-    tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(tyoPaamaarat.map(mapToIds));
+  if (tyotavoitteet.length > 0) {
+    tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(tyotavoitteet.map(mapToIds));
   }
 
   if (koulutusPaamarat.length > 0) {
@@ -39,14 +39,14 @@ export default (async ({ request }) => {
   }
 
   const mahdollisuusDetails: TypedMahdollisuus[] = [...tyomahdollisuudetDetails, ...koulutusMahdollisuudetDetails];
-  const { setPaamaarat, setMahdollisuusDetails } = usePaamaaratStore.getState();
-  setPaamaarat(paamaarat);
+  const { setTavoitteet, setMahdollisuusDetails } = useTavoitteetStore.getState();
+  setTavoitteet(tavoitteet);
   setMahdollisuusDetails(mahdollisuusDetails);
 
   const { setExcludedIds, fetchSuosikit } = useSuosikitStore.getState();
-  const suosikitAlreadyInPaamaarat = paamaarat.map((pm) => pm.mahdollisuusId);
-  setExcludedIds(suosikitAlreadyInPaamaarat);
+  const suosikitAlreadyInTavoitteet = tavoitteet.map((pm) => pm.mahdollisuusId);
+  setExcludedIds(suosikitAlreadyInTavoitteet);
   await fetchSuosikit();
 
-  return { paamaarat, tyomahdollisuudetDetails, koulutusMahdollisuudetDetails, ammattiryhmaNimet };
+  return { tavoitteet, tyomahdollisuudetDetails, koulutusMahdollisuudetDetails, ammattiryhmaNimet };
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

@@ -1,7 +1,7 @@
 import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
-import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
+import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { Button, EmptyState, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -45,15 +45,15 @@ const MyGoals = () => {
     (state) => state.suosikit.filter((s) => !state.excludedIds.includes(s.kohdeId)).length === 0,
   );
 
-  const paamaarat = usePaamaaratStore((state) => state.paamaarat);
+  const tavoitteet = useTavoitteetStore((state) => state.tavoitteet);
 
   const { pitkanAikavalinTavoite, lyhyenAikavalinTavoite, muutTavoitteet } = React.useMemo(() => {
     return {
-      pitkanAikavalinTavoite: paamaarat.filter((p) => p.tyyppi === 'PITKA'),
-      lyhyenAikavalinTavoite: paamaarat.filter((p) => p.tyyppi === 'LYHYT'),
-      muutTavoitteet: paamaarat.filter((p) => p.tyyppi === 'MUU'),
+      pitkanAikavalinTavoite: tavoitteet.filter((p) => p.tyyppi === 'PITKA'),
+      lyhyenAikavalinTavoite: tavoitteet.filter((p) => p.tyyppi === 'LYHYT'),
+      muutTavoitteet: tavoitteet.filter((p) => p.tyyppi === 'MUU'),
     };
-  }, [paamaarat]);
+  }, [tavoitteet]);
 
   return (
     <MainLayout
@@ -65,7 +65,7 @@ const MyGoals = () => {
       }
     >
       <title>{title}</title>
-      <ProfileSectionTitle type="PAAMAARA" title={title} />
+      <ProfileSectionTitle type="TAVOITTEENI" title={title} />
       <div className="flex flex-col gap-4 mb-9 sm:text-body-lg text-body-lg-mobile">
         <p>{t('profile.my-goals.description')}</p>
         <p>{t('profile.my-goals.description-2')}</p>
@@ -75,18 +75,18 @@ const MyGoals = () => {
           title={t('profile.my-goals.long-term-goal')}
           description={t('profile.my-goals.long-term-goal-description')}
           icon={<AwardIcon color="gold" />}
-          paamaarat={pitkanAikavalinTavoite}
+          tavoitteet={pitkanAikavalinTavoite}
         />
         <MyGoalsSection
           title={t('profile.my-goals.short-term-goal')}
           description={t('profile.my-goals.short-term-goal-description')}
           icon={<AwardIcon color="silver" />}
-          paamaarat={lyhyenAikavalinTavoite}
+          tavoitteet={lyhyenAikavalinTavoite}
         />
         <MyGoalsSection
           title={t('profile.my-goals.other-goals')}
           description={t('profile.my-goals.other-goals-description')}
-          paamaarat={muutTavoitteet}
+          tavoitteet={muutTavoitteet}
         />
       </div>
       {suosikitIsEmpty && (

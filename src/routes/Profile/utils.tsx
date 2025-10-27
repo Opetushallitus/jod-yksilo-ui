@@ -73,7 +73,7 @@ export type ProfileSectionType =
   | 'SUOSIKKI'
   | 'KIINNOSTUS'
   | 'OSAAMISENI'
-  | 'PAAMAARA'
+  | 'TAVOITTEENI'
   | 'ASETUKSENI';
 
 export const getTextClassByCompetenceSourceType = (type: ProfileSectionType) =>
@@ -83,5 +83,5 @@ export const getTextClassByCompetenceSourceType = (type: ProfileSectionType) =>
     'text-secondary-1': type === 'PATEVYYS',
     'text-secondary-gray': type === 'MUU_OSAAMINEN',
     'text-secondary-3': type === 'KIINNOSTUS',
-    'text-secondary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'PAAMAARA', 'ASETUKSENI'].includes(type),
+    'text-secondary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'tavoite', 'ASETUKSENI'].includes(type),
   });

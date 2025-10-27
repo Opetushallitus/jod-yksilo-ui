@@ -46,6 +46,13 @@ Run the following command to update the JOD Design System to the latest version:
 npm update @jod/design-system
 ```
 
+If there is error from missing files run the following command in assets-folder
+
+```shell
+aws-vault exec okm-jod-sharedservices-c-acc
+aws s3 sync s3://jod-ui-assets .
+```
+
 ## Generating TypeScript types from OpenAPI schema
 
 Start the JOD Yksilö locally and make sure it is running on http://localhost:9080/. Then run the following command to generate TypeScript types from the OpenAPI schema:

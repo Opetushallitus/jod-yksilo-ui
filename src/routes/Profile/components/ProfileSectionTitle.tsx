@@ -21,7 +21,7 @@ export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType;
     KIINNOSTUS: <JodFavs />,
     SUOSIKKI: <JodFavorite />,
     OSAAMISENI: <JodCheckmarkAlt />,
-    PAAMAARA: null,
+    TAVOITTEENI: null,
     ASETUKSENI: null,
   };
 
@@ -31,7 +31,7 @@ export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType;
     'bg-secondary-1': type === 'PATEVYYS',
     'bg-secondary-gray': type === 'MUU_OSAAMINEN',
     'bg-secondary-3': type === 'KIINNOSTUS',
-    'bg-secondary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'PAAMAARA', 'ASETUKSENI'].includes(type),
+    'bg-secondary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'TAVOITTEENI', 'ASETUKSENI'].includes(type),
   });
 
   const showIcon = type && iconMap[type] !== null;

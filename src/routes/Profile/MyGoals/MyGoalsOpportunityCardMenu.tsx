@@ -1,9 +1,9 @@
 import { client } from '@/api/client';
 import { useModal } from '@/hooks/useModal';
-import { getPaamaaraTypeForMahdollisuus, PaamaaraTyyppi } from '@/routes/Profile/MyGoals/utils';
+import { getTavoiteTypeForMahdollisuus, TavoiteTyyppi } from '@/routes/Profile/MyGoals/utils';
 import { MahdollisuusTyyppi } from '@/routes/types';
-import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
+import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { PopupList, PopupListItem } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -41,18 +41,18 @@ const ListItem = ({
 const MyGoalsOpportunityCardMenu = ({
   mahdollisuusId,
   mahdollisuusTyyppi,
-  paamaaraId,
+  tavoiteId,
   menuId,
 }: {
   mahdollisuusId: string;
   mahdollisuusTyyppi: MahdollisuusTyyppi;
-  paamaaraId?: string;
+  tavoiteId?: string;
   menuId: string;
 }) => {
   const { t } = useTranslation();
   const { showDialog } = useModal();
 
-  const paamaaraType = getPaamaaraTypeForMahdollisuus(mahdollisuusId);
+  const tavoiteType = getTavoiteTypeForMahdollisuus(mahdollisuusId);
   const { fetchPage, pageSize, pageNr, excludedIds, setExcludedIds, pageData } = useSuosikitStore(
     useShallow((state) => ({
       pageData: state.pageData,
@@ -63,24 +63,24 @@ const MyGoalsOpportunityCardMenu = ({
       setExcludedIds: state.setExcludedIds,
     })),
   );
-  const { paamaarat, upsertPaamaara, deletePaamaara, mahdollisuusDetails, setMahdollisuusDetails } = usePaamaaratStore(
+  const { tavoitteet, upsertTavoite, deleteTavoite, mahdollisuusDetails, setMahdollisuusDetails } = useTavoitteetStore(
     useShallow((state) => ({
-      paamaarat: state.paamaarat,
-      upsertPaamaara: state.upsertPaamaara,
-      deletePaamaara: state.deletePaamaara,
+      tavoitteet: state.tavoitteet,
+      upsertTavoite: state.upsertTavoite,
+      deleteTavoite: state.deleteTavoite,
       setMahdollisuusDetails: state.setMahdollisuusDetails,
       mahdollisuusDetails: state.mahdollisuusDetails,
     })),
   );
 
-  const onDeletePaamaara = async (id: string) => {
-    const suosikkiId = paamaarat.find((paamaara) => paamaara.id === id)?.mahdollisuusId;
-    await deletePaamaara(id);
+  const onDeleteTavoite = async (id: string) => {
+    const suosikkiId = tavoitteet.find((tavoite) => tavoite.id === id)?.mahdollisuusId;
+    await deleteTavoite(id);
     setExcludedIds(excludedIds.filter((excludedId) => (suosikkiId ? excludedId !== suosikkiId : true)));
   };
 
-  const insertPaamaara = async (tyyppi: PaamaaraTyyppi) => {
-    const newPaamaara = {
+  const insertTavoite = async (tyyppi: TavoiteTyyppi) => {
+    const newTavoite = {
       tyyppi,
       mahdollisuusTyyppi,
       mahdollisuusId,
@@ -90,40 +90,40 @@ const MyGoalsOpportunityCardMenu = ({
         en: '',
       },
     };
-    const { data: id, error } = await client.POST('/api/profiili/paamaarat', {
-      body: newPaamaara,
+    const { data: id, error } = await client.POST('/api/profiili/tavoitteet', {
+      body: newTavoite,
     });
     if (!error) {
       // Add the new goal to excludedIds to prevent it from showing in the list and reload suosikit
       setExcludedIds([...excludedIds, mahdollisuusId]);
-      upsertPaamaara({ ...newPaamaara, id });
+      upsertTavoite({ ...newTavoite, id });
       await fetchPage({ page: pageNr, pageSize });
     }
   };
 
-  const updatePaamaara = async (tyyppi: PaamaaraTyyppi) => {
-    const paamaara = paamaarat.find((pm) => pm.id === paamaaraId);
+  const updateTavoite = async (tyyppi: TavoiteTyyppi) => {
+    const tavoite = tavoitteet.find((pm) => pm.id === tavoiteId);
 
-    if (paamaara && paamaaraId) {
-      const updatedPaamaara = { ...paamaara, tyyppi };
-      const { error } = await client.PUT('/api/profiili/paamaarat/{id}', {
-        body: updatedPaamaara,
-        params: { path: { id: paamaaraId } },
+    if (tavoite && tavoiteId) {
+      const updatedTavoite = { ...tavoite, tyyppi };
+      const { error } = await client.PUT('/api/profiili/tavoitteet/{id}', {
+        body: updatedTavoite,
+        params: { path: { id: tavoiteId } },
       });
       if (!error) {
-        upsertPaamaara(updatedPaamaara);
+        upsertTavoite(updatedTavoite);
       }
     }
   };
 
-  const setFavoriteAsGoal = async (tyyppi: PaamaaraTyyppi) => {
-    if (paamaaraId) {
-      await updatePaamaara(tyyppi);
+  const setFavoriteAsGoal = async (tyyppi: TavoiteTyyppi) => {
+    if (tavoiteId) {
+      await updateTavoite(tyyppi);
     } else {
-      await insertPaamaara(tyyppi);
+      await insertTavoite(tyyppi);
     }
 
-    // Find the details for the opportunity and put them to the paamaara store.
+    // Find the details for the opportunity and put them to the tavoite store.
     // This is needed to show the opportunity in the goals list without the need to fetch the details again.
     const details = pageData.find((item) => item.id === mahdollisuusId);
     if (details) {
@@ -131,9 +131,9 @@ const MyGoalsOpportunityCardMenu = ({
     }
   };
 
-  const canSetAsPaamaaraType = (targetTyyppi: PaamaaraTyyppi) => {
-    const targetSlotIsEmpty = !paamaarat.find((pm) => pm.tyyppi === targetTyyppi);
-    const canSetAsMuu = targetTyyppi === 'MUU' && paamaaraType !== 'MUU';
+  const canSetAsTavoiteType = (targetTyyppi: TavoiteTyyppi) => {
+    const targetSlotIsEmpty = !tavoitteet.find((pm) => pm.tyyppi === targetTyyppi);
+    const canSetAsMuu = targetTyyppi === 'MUU' && tavoiteType !== 'MUU';
     return canSetAsMuu || targetSlotIsEmpty;
   };
 
@@ -143,29 +143,29 @@ const MyGoalsOpportunityCardMenu = ({
         <ListItem
           label={t('profile.my-goals.set-long-term-goal')}
           onClick={() => void setFavoriteAsGoal('PITKA')}
-          disabled={!canSetAsPaamaaraType('PITKA')}
+          disabled={!canSetAsTavoiteType('PITKA')}
           testId="goals-set-long-term"
         />
         <ListItem
           label={t('profile.my-goals.set-short-term-goal')}
           onClick={() => void setFavoriteAsGoal('LYHYT')}
-          disabled={!canSetAsPaamaaraType('LYHYT')}
+          disabled={!canSetAsTavoiteType('LYHYT')}
           testId="goals-set-short-term"
         />
         <ListItem
           label={t('profile.my-goals.set-other-goal')}
           onClick={() => void setFavoriteAsGoal('MUU')}
-          disabled={!canSetAsPaamaaraType('MUU')}
+          disabled={!canSetAsTavoiteType('MUU')}
           testId="goals-set-other"
         />
-        {!!paamaaraId && (
+        {!!tavoiteId && (
           <ListItem
             label={t('profile.my-goals.delete-goal')}
             onClick={() => {
               showDialog({
                 title: t('profile.my-goals.delete-goal'),
                 description: t('profile.my-goals.delete-goal-description'),
-                onConfirm: () => onDeletePaamaara(paamaaraId),
+                onConfirm: () => onDeleteTavoite(tavoiteId),
               });
             }}
             testId="goals-delete"

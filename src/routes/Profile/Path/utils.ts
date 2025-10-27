@@ -10,7 +10,7 @@ export interface LinkData {
 export interface PolkuQueryParams {
   [key: string]: string | undefined;
   suunnitelmaId?: string;
-  paamaaraId?: string;
+  tavoiteId?: string;
   vaiheId?: string;
 }
 
