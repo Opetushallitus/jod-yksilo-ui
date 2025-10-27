@@ -4,15 +4,21 @@ import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } f
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import i18n from '@/i18n/config';
 import { EhdotusRecord, type OpportunitySortingValue, ehdotusDataToRecord, sortingValues } from '@/routes/Tool/utils';
-import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
+import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import {
   filterByAmmattiryhmat,
   filterByEducationType,
   filterByJobType,
   filterByRegion,
-} from '@/stores/useToolStore/filters.ts';
-import { DEFAULT_FILTERS, DEFAULT_SORTING, ToolFilters, ToolState } from '@/stores/useToolStore/ToolStoreModel.ts';
+} from '@/stores/useToolStore/filters';
+import {
+  DEFAULT_FILTERS,
+  DEFAULT_SORTING,
+  type ToolFilters,
+  type ToolState,
+} from '@/stores/useToolStore/ToolStoreModel';
 import { paginate } from '@/utils';
+import { mapKoulutusCodesToLabels } from '@/utils/codes/codes';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -157,7 +163,8 @@ export const useToolStore = create<ToolState>()(
         ) => {
           const ehdotukset = get().mahdollisuusEhdotukset;
           const koulutusmahdollisuusIds = pagedIds.filter((id) => ehdotukset[id].tyyppi === 'KOULUTUSMAHDOLLISUUS');
-          const koulutusmahdollisuudet = await getTypedKoulutusMahdollisuusDetails(koulutusmahdollisuusIds);
+          const koulutusmahdollisuudet =
+            await getTypedKoulutusMahdollisuusDetails(koulutusmahdollisuusIds).then(mapKoulutusCodesToLabels);
           sortedMixedMahdollisuudet.push(...koulutusmahdollisuudet);
           set({ koulutusmahdollisuudet });
         };

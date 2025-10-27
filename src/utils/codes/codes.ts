@@ -1,5 +1,5 @@
 import i18n, { type LangCode } from '@/i18n/config';
-import { type Codeset } from '@/routes/types';
+import type { Codeset, TypedMahdollisuus } from '@/routes/types';
 
 export interface Classification {
   localId: string;
@@ -114,8 +114,12 @@ export interface OpintopolkuKoodistoResponse {
   }[];
 }
 
+const CACHE_KEY = 'educationCodesetCache';
+const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+const cache: { code: string; value: string; timestamp: number }[] = [];
+
 /**
- * Gets education opportunity Jakauma details from virkailija opintopolku koodisto REST API
+ * Gets education opportunity Jakauma details from virkailija opintopolku koodisto REST API. Uses a simple localStorage based cache.
  * https://virkailija.opintopolku.fi/koodisto-service/swagger-ui/index.html#/koodisto-resource/searchKoodis
  * @param ids Array of koodiUris
  * @param getLatestVersion Whether to get the latest version of the codes, true by default.
@@ -127,25 +131,74 @@ export const getEducationCodesetValues = async (ids: string[], getLatestVersion 
   // is not stripped, the API will only return results for the first code in the list.
   // Also the #1 causes problems with URLSearchParams, as # will be encoded to %23 and the API will not recognize it.
   const strippedIds = ids.map((id) => id.split('#')[0]);
-  strippedIds.forEach((id) => codesUrl.searchParams.append('koodiUris', id));
+  try {
+    if (cache.length === 0) {
+      const storage = localStorage.getItem(CACHE_KEY);
+
+      if (storage) {
+        // Get data from storage and remove expired cache items
+        const now = Date.now();
+        const parsed = ((JSON.parse(storage) as { code: string; value: string; timestamp: number }[]) ?? []).filter(
+          (item) => now - item.timestamp <= CACHE_TTL_MS,
+        );
+
+        cache.push(...parsed);
+      }
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error loading education codeset cache from localStorage:', error);
+  }
+
+  const nonCachedIds = strippedIds.filter((id) => !cache.some((item) => item.code === id));
+
+  // All data found in cache, no need to fetch
+  if (nonCachedIds.length === 0) {
+    return strippedIds.map((id) => cache.find((item) => item.code === id) ?? { code: id, value: id });
+  }
+
+  for (const id of nonCachedIds) {
+    codesUrl.searchParams.append('koodiUris', id);
+  }
 
   if (getLatestVersion) {
     codesUrl.searchParams.append('koodiVersioSelection', 'LATEST');
   }
-
   const response = await fetch(codesUrl);
   const codes: OpintopolkuKoodistoResponse[] = (await response.json()) ?? [];
 
-  const codesets = strippedIds.map((id) => {
+  const fetched = nonCachedIds.map((id) => {
     const code = codes.find((c) => c.koodiUri === id);
 
     if (code) {
       const value = code.metadata.find((meta) => meta.kieli.toLocaleLowerCase() === i18n.language)?.nimi ?? id;
-      return { code: id, value };
+      return { code: id, value, timestamp: Date.now() };
     } else {
-      return { code: id, value: id };
+      return { code: id, value: id, timestamp: Date.now() };
     }
   });
 
-  return codesets;
+  // Put new items into cache and return results
+  cache.push(...fetched);
+
+  const removedDuplicates = Array.from(new Set(cache.map((item) => item.code))).map((code) => {
+    return cache.find((item) => item.code === code);
+  });
+  localStorage.setItem(CACHE_KEY, JSON.stringify(removedDuplicates));
+
+  return strippedIds.map((id) => cache.find((item) => item.code === id) ?? { code: id, value: id });
+};
+
+/**
+ * Maps the yleisinKoulutusala codes to their corresponding labels.
+ * @param opportunities TypedMahdollisuus array with yleisinKoulutusala codes
+ * @returns TypedMahdollisuus array with yleisinKoulutusala codes replaced with labels
+ */
+export const mapKoulutusCodesToLabels = async (opportunities: TypedMahdollisuus[]): Promise<TypedMahdollisuus[]> => {
+  const yleisinKoulutusalaCodes = opportunities.map((m) => m.yleisinKoulutusala).filter(Boolean) as string[];
+  const codeData = await getEducationCodesetValues(yleisinKoulutusalaCodes);
+  return opportunities.map((m) => ({
+    ...m,
+    yleisinKoulutusala: codeData.find((c) => c.code === m.yleisinKoulutusala?.replaceAll('#1', ''))?.value,
+  }));
 };

@@ -5,6 +5,7 @@ import type { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import { paginate, sortByProperty } from '@/utils';
+import { mapKoulutusCodesToLabels } from '@/utils/codes/codes';
 import type { PageChangeDetails } from '@jod/design-system';
 import { create } from 'zustand';
 
@@ -170,7 +171,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
       hasKoulutusMahdollisuus
         ? getTypedKoulutusMahdollisuusDetails(
             paginated.filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS').map((item) => item.kohdeId),
-          )
+          ).then(mapKoulutusCodesToLabels)
         : [],
     ]);
 

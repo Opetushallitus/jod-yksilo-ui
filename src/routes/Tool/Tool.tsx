@@ -15,6 +15,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useRouteLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
+import { getTypeSlug } from '../Profile/utils';
 import Competences from './Competences';
 import ToolAccordion from './components/ToolAccordion';
 import Interests from './Interests';
@@ -142,17 +143,13 @@ const ExploreOpportunities = () => {
           const { id, mahdollisuusTyyppi } = mahdollisuus;
           const ehdotus = mahdollisuusEhdotukset?.[id];
           const isFavorite = suosikit?.find((s) => s.kohdeId === id) !== undefined;
-          const path =
-            mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
-              ? `/${i18n.language}/${t('slugs.job-opportunity.index')}/${id}`
-              : `/${i18n.language}/${t('slugs.education-opportunity.index')}/${id}`;
 
           return ehdotus ? (
             <OpportunityCard
               key={id}
               as="li"
               from="tool"
-              to={path}
+              to={`/${i18n.language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}`}
               isFavorite={isFavorite}
               isLoggedIn={isLoggedIn}
               toggleFavorite={() => void toggleSuosikki(id, ehdotus.tyyppi)}
@@ -165,6 +162,7 @@ const ExploreOpportunities = () => {
               ammattiryhmaNimet={ammattiryhmaNimet}
               aineisto={mahdollisuus.aineisto}
               tyyppi={mahdollisuus.tyyppi}
+              yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
               type={mahdollisuusTyyppi}
               rateId={id}
             />

@@ -4,7 +4,7 @@ import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import MyGoalsOpportunityCardMenu from '@/routes/Profile/MyGoals/MyGoalsOpportunityCardMenu';
-import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
+import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
@@ -51,6 +51,7 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
   const filterMenuButtonRef = React.useRef<HTMLButtonElement>(null);
   const filterMenuRef = useMenuClickHandler(() => setFiltersOpen(false), filterMenuButtonRef);
   const {
+    ammattiryhmaNimet,
     fetchPage,
     fetchSuosikit,
     filters,
@@ -63,6 +64,7 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
     totalItems: totalFavorites,
   } = useSuosikitStore(
     useShallow((state) => ({
+      ammattiryhmaNimet: state.ammattiryhmaNimet,
       fetchPage: state.fetchPage,
       fetchSuosikit: state.fetchSuosikit,
       filters: state.filters,
@@ -194,8 +196,11 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
                     description={getLocalizedText(mahdollisuus.tiivistelma)}
                     name={getLocalizedText(mahdollisuus.otsikko)}
                     aineisto={mahdollisuus.aineisto}
+                    ammattiryhmaNimet={ammattiryhmaNimet}
                     tyyppi={mahdollisuus.tyyppi}
                     type={mahdollisuusTyyppi}
+                    kesto={mahdollisuus.kesto}
+                    yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
                     hideFavorite
                     menuContent={
                       <MyGoalsOpportunityCardMenu

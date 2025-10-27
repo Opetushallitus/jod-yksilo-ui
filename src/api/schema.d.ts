@@ -1464,6 +1464,7 @@ export interface components {
       tiivistelma?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       kesto?: components['schemas']['KestoJakaumaDto'];
+      yleisinKoulutusala?: string;
       aktiivinen?: boolean;
     };
     SivuDtoKoulutusmahdollisuusDto: {

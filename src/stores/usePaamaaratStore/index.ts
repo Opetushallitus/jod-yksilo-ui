@@ -1,6 +1,6 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
-import { TypedMahdollisuus } from '@/routes/types';
+import type { components } from '@/api/schema';
+import type { TypedMahdollisuus } from '@/routes/types';
 import { create } from 'zustand';
 
 type Paamaara = components['schemas']['PaamaaraDto'];
@@ -17,9 +17,7 @@ interface PaamaaratState {
 export const usePaamaaratStore = create<PaamaaratState>()((set, get) => ({
   paamaarat: [],
   mahdollisuusDetails: [],
-
   setMahdollisuusDetails: (state) => set({ mahdollisuusDetails: state }),
-
   setPaamaarat: (state) => set({ paamaarat: state }),
   upsertPaamaara: (paamaara) => {
     set((state) => {

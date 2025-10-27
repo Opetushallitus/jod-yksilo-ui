@@ -1,9 +1,8 @@
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
 import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import loader from '@/routes/Profile/MyGoals/loader';
-import { getTypeSlug } from '@/routes/Profile/utils';
 import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { getLocalizedText } from '@/utils';
 import { Button } from '@jod/design-system';
@@ -12,6 +11,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
+import { getTypeSlug } from '../utils';
 import MyGoalsOpportunityCardMenu from './MyGoalsOpportunityCardMenu';
 import TavoiteInput from './TavoiteInput';
 
@@ -80,6 +80,8 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                 aineisto={details.aineisto}
                 tyyppi={details.tyyppi}
                 type={mahdollisuusTyyppi}
+                kesto={details.kesto}
+                yleisinKoulutusala={details.yleisinKoulutusala}
                 headingLevel="h3"
                 menuContent={
                   <MyGoalsOpportunityCardMenu
