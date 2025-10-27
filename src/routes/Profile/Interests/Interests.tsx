@@ -83,6 +83,10 @@ const Interests = () => {
     }
   }, [fields]);
 
+  const isSkillsEmpty = sortedSkills.length === 0;
+  const isOccupationSkillsEmpty = sortedOccupations.length === 0;
+  const isAllSkillsEmpty = isSkillsEmpty && isOccupationSkillsEmpty;
+
   return (
     <MainLayout
       navChildren={
@@ -96,12 +100,12 @@ const Interests = () => {
       <ProfileSectionTitle type="KIINNOSTUS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.interests.description')}</p>
 
-      {sortedSkills.length === 0 && (
+      {isAllSkillsEmpty && (
         <div className="mt-6 mb-7">
           <EmptyState text={t('profile.interests.empty')} data-testid="interests-empty-state" />
         </div>
       )}
-      {sortedSkills.length > 0 && (
+      {!isSkillsEmpty && (
         <>
           <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
             {t('profile.interests.skills-that-interest-me')}
@@ -120,7 +124,7 @@ const Interests = () => {
           </ul>
         </>
       )}
-      {sortedOccupations.length > 0 && (
+      {!isOccupationSkillsEmpty && (
         <>
           <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray mt-8">
             {t('profile.interests.occupations-that-interest-me')}
@@ -142,7 +146,7 @@ const Interests = () => {
       <div className="flex pt-7 mb-8">
         <Button
           variant="accent"
-          label={t(sortedSkills.length > 0 ? 'profile.interests.edit-interests' : 'profile.interests.add-interests')}
+          label={isAllSkillsEmpty ? t('profile.interests.add-interests') : t('profile.interests.edit-interests')}
           onClick={() => {
             showModal(EditKiinnostusModal, { data: kiinnostukset });
           }}
