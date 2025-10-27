@@ -46,7 +46,7 @@ Run the following command to update the JOD Design System to the latest version:
 npm update @jod/design-system
 ```
 
-If there is error from missing files run the following command in assets-folder
+If there is error from missing files run the following commands in assets-folder
 
 ```shell
 aws-vault exec okm-jod-sharedservices-c-acc

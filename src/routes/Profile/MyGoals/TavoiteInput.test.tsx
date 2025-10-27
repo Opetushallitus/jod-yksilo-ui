@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { useTranslation } from 'react-i18next';
@@ -29,7 +28,7 @@ function doRender(goal = { id: 1, tavoite: { fi: 'alkuarvo', sv: 'startvärde' }
   });
   store.mockReturnValue(mockUpsertTavoite);
 
-  return render(<TavoiteInput goal={goal as components['schemas']['TavoiteDto']} />);
+  return render(<TavoiteInput goal={goal as any} />);
 }
 
 describe('TavoiteInput', () => {
