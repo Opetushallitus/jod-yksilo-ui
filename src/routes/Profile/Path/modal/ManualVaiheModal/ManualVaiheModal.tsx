@@ -28,7 +28,7 @@ const ManualVaiheModal = ({ isOpen, onClose, vaiheIndex }: ManualVaiheModalProps
     })),
   );
   const { t } = useTranslation();
-  const { suunnitelmaId, paamaaraId } = useParams<PolkuQueryParams>();
+  const { suunnitelmaId, tavoiteId } = useParams<PolkuQueryParams>();
   const { showDialog } = useModal();
 
   const formId = React.useId();
@@ -71,7 +71,7 @@ const ManualVaiheModal = ({ isOpen, onClose, vaiheIndex }: ManualVaiheModalProps
   useEscHandler(onClose, React.useId());
 
   const onSubmit: FormSubmitHandler<VaiheForm> = async ({ data }: { data: VaiheForm }) => {
-    if (!data || !suunnitelmaId || !paamaaraId) {
+    if (!data || !suunnitelmaId || !tavoiteId) {
       close();
       return;
     }
@@ -84,20 +84,20 @@ const ManualVaiheModal = ({ isOpen, onClose, vaiheIndex }: ManualVaiheModalProps
     };
 
     const apiCall = data.id
-      ? client.PUT('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}', {
+      ? client.PUT('/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}', {
           params: {
             path: {
-              id: paamaaraId,
+              id: tavoiteId,
               suunnitelmaId,
               vaiheId: data.id,
             },
           },
           body,
         })
-      : client.POST('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}/vaiheet', {
+      : client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}/vaiheet', {
           params: {
             path: {
-              id: paamaaraId,
+              id: tavoiteId,
               suunnitelmaId,
             },
           },

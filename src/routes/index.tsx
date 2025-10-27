@@ -120,13 +120,13 @@ const profileRoutes = supportedLanguageCodes.map(
               loader: withYksiloContext(goalsLoader),
             },
             {
-              id: `:paamaaraId/{slugs.profile.path}|${lng}`,
-              path: `:paamaaraId/${i18n.t('slugs.profile.path', { lng })}`,
+              id: `:tavoiteId/{slugs.profile.path}|${lng}`,
+              path: `:tavoiteId/${i18n.t('slugs.profile.path', { lng })}`,
               loader: withYksiloContext(newPolkuLoader),
             },
             {
-              id: `:paamaaraId/{slugs.profile.path}/:suunnitelmaId|${lng}`,
-              path: `:paamaaraId/${i18n.t('slugs.profile.path', { lng })}/:suunnitelmaId`,
+              id: `:tavoiteId/{slugs.profile.path}/:suunnitelmaId|${lng}`,
+              path: `:tavoiteId/${i18n.t('slugs.profile.path', { lng })}/:suunnitelmaId`,
               element: <Path />,
               loader: withYksiloContext(polkuLoader),
             },

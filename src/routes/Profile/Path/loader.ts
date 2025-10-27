@@ -8,20 +8,23 @@ import { removeDuplicates, sortByProperty } from '@/utils';
 import { LoaderFunction } from 'react-router';
 
 const loader = (async ({ request, params }) => {
-  const { paamaaraId, suunnitelmaId } = params;
+  const { tavoiteId, suunnitelmaId } = params;
   const polkuStore = usePolutStore.getState();
 
-  if (!paamaaraId || !suunnitelmaId) {
-    return { paamaara: null, mahdollisuus: null, vaaditutOsaamiset: [], profiiliOsaamiset: [], polku: null };
+  if (!tavoiteId || !suunnitelmaId) {
+    return { tavoite: null, mahdollisuus: null, vaaditutOsaamiset: [], profiiliOsaamiset: [], polku: null };
   }
 
   polkuStore.setPolutLoading(true);
   // Fetch polku/suunnitelma
-  const { data: polkuResponse, error } = await client.GET('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}', {
-    params: {
-      path: { id: paamaaraId, suunnitelmaId: suunnitelmaId },
+  const { data: polkuResponse, error } = await client.GET(
+    '/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}',
+    {
+      params: {
+        path: { id: tavoiteId, suunnitelmaId: suunnitelmaId },
+      },
     },
-  });
+  );
 
   if (!error) {
     // Denormalize vaiheet, populate osaamiset with OsaaminenDTO data
@@ -47,22 +50,22 @@ const loader = (async ({ request, params }) => {
     polkuStore.setOsaamisetFromVaiheet(vaiheet.flatMap((vaihe) => vaihe.osaamiset ?? []));
   }
 
-  const { data: paamaaratResponse = [] } = await client.GET('/api/profiili/paamaarat', { signal: request.signal });
-  const paamaara = paamaaratResponse.find((pm) => pm.id === paamaaraId);
+  const { data: tavoitteetResponse = [] } = await client.GET('/api/profiili/tavoitteet', { signal: request.signal });
+  const tavoite = tavoitteetResponse.find((pm) => pm.id === tavoiteId);
 
-  if (paamaara) {
+  if (tavoite) {
     const mahdollisuusOpts = {
       signal: request.signal,
-      params: { path: { id: paamaara.mahdollisuusId } },
+      params: { path: { id: tavoite.mahdollisuusId } },
     };
     const mahdollisuusFetch =
-      paamaara?.mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS'
+      tavoite?.mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS'
         ? client.GET('/api/koulutusmahdollisuudet/{id}', mahdollisuusOpts)
         : client.GET('/api/tyomahdollisuudet/{id}', mahdollisuusOpts);
 
     const { data: mahdollisuus } = await mahdollisuusFetch;
 
-    if (paamaara.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS') {
+    if (tavoite.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS') {
       const m = mahdollisuus as components['schemas']['TyomahdollisuusDto'];
       const ammattiryhmaNimet: Record<string, components['schemas']['LokalisoituTeksti']> = {};
       const ammattiryhmaUris = m.ammattiryhma?.uri ? [m.ammattiryhma.uri] : [];
@@ -91,7 +94,7 @@ const loader = (async ({ request, params }) => {
     polkuStore.setOsaamisetFromProfile(profiiliOsaamiset.map((osaaminen) => osaaminen.osaaminen));
     polkuStore.setPolutLoading(false);
 
-    return { paamaara, mahdollisuus, vaaditutOsaamiset, profiiliOsaamiset };
+    return { tavoite, mahdollisuus, vaaditutOsaamiset, profiiliOsaamiset };
   }
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
 export type PathLoaderData = Awaited<ReturnType<typeof loader>>;

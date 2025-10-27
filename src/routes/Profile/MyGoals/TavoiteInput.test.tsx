@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { client } from '@/api/client';
-import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
+import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { useTranslation } from 'react-i18next';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
@@ -9,26 +9,26 @@ import TavoiteInput from './TavoiteInput';
 vi.mock('react-i18next', () => ({
   useTranslation: vi.fn(),
 }));
-vi.mock('@/stores/usePaamaaratStore', () => ({
-  usePaamaaratStore: vi.fn(),
+vi.mock('@/stores/useTavoitteetStore', () => ({
+  useTavoitteetStore: vi.fn(),
 }));
 vi.mock('@/api/client', () => ({
   client: { PUT: vi.fn() },
 }));
 
-const mockUpsertPaamaara = vi.fn();
+const mockUpsertTavoite = vi.fn();
 const mockT = vi.fn().mockImplementation((key: string) => key);
 const mockLanguage = 'fi';
 
-function doRender(paamaara = { id: 1, tavoite: { fi: 'alkuarvo', sv: 'startvärde' } }) {
-  const store = usePaamaaratStore as unknown as Mock;
+function doRender(tavoite = { id: 1, tavoite: { fi: 'alkuarvo', sv: 'startvärde' } }) {
+  const store = useTavoitteetStore as unknown as Mock;
   (useTranslation as unknown as Mock).mockReturnValue({
     t: mockT,
     i18n: { language: mockLanguage },
   });
-  store.mockReturnValue(mockUpsertPaamaara);
+  store.mockReturnValue(mockUpsertTavoite);
 
-  return render(<TavoiteInput paamaara={paamaara as any} />);
+  return render(<TavoiteInput goal={tavoite as any} />);
 }
 
 describe('TavoiteInput', () => {
@@ -59,7 +59,7 @@ describe('TavoiteInput', () => {
 
     await waitFor(() => {
       expect(client.PUT).toHaveBeenCalledWith(
-        '/api/profiili/paamaarat/{id}',
+        '/api/profiili/tavoitteet/{id}',
         expect.objectContaining({
           body: expect.objectContaining({
             tavoite: expect.objectContaining({ fi: 'uusi arvo' }),
@@ -67,7 +67,7 @@ describe('TavoiteInput', () => {
           params: { path: { id: 1 } },
         }),
       );
-      expect(mockUpsertPaamaara).toHaveBeenCalled();
+      expect(mockUpsertTavoite).toHaveBeenCalled();
     });
   });
 
@@ -82,10 +82,10 @@ describe('TavoiteInput', () => {
         },
       },
     });
-    (usePaamaaratStore as unknown as Mock).mockReturnValue(mockUpsertPaamaara);
+    (useTavoitteetStore as unknown as Mock).mockReturnValue(mockUpsertTavoite);
 
     const { getByLabelText, rerender } = render(
-      <TavoiteInput paamaara={{ id: 1, tavoite: { fi: 'alkuarvo', sv: '' } } as any} />,
+      <TavoiteInput goal={{ id: 1, tavoite: { fi: 'alkuarvo', sv: '' } } as any} />,
     );
     const textarea = getByLabelText('profile.my-goals.goal-description');
     act(() => {
@@ -94,7 +94,7 @@ describe('TavoiteInput', () => {
 
     // Change language before debounce fires
     language = 'sv';
-    rerender(<TavoiteInput paamaara={{ id: 1, tavoite: { fi: 'alkuarvo', sv: '' } } as any} />);
+    rerender(<TavoiteInput goal={{ id: 1, tavoite: { fi: 'alkuarvo', sv: '' } } as any} />);
     await act(async () => {
       await vi.advanceTimersByTimeAsync(100);
     });
@@ -114,11 +114,11 @@ describe('TavoiteInput', () => {
       },
     });
 
-    const paamaara = { id: 1, tavoite: { fi: 'suomi', sv: 'ruotsi' } };
-    const { getByLabelText, rerender } = render(<TavoiteInput paamaara={paamaara as any} />);
+    const tavoite = { id: 1, tavoite: { fi: 'suomi', sv: 'ruotsi' } };
+    const { getByLabelText, rerender } = render(<TavoiteInput goal={tavoite as any} />);
     expect(getByLabelText('profile.my-goals.goal-description')).toHaveValue('suomi');
     language = 'sv';
-    rerender(<TavoiteInput paamaara={paamaara as any} />);
+    rerender(<TavoiteInput goal={tavoite as any} />);
     await waitFor(() => {
       expect(getByLabelText('profile.my-goals.goal-description')).toHaveValue('ruotsi');
     });

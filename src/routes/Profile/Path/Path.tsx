@@ -26,7 +26,7 @@ import { getDuration, mapOsaaminenToUri, type PolkuForm, type PolkuQueryParams, 
 const Path = () => {
   const loaderData = useLoaderData<Awaited<ReturnType<typeof loader>>>();
   const mahdollisuus = loaderData?.mahdollisuus;
-  const paamaara = loaderData?.paamaara;
+  const tavoite = loaderData?.tavoite;
 
   const {
     ammattiryhmaNimet,
@@ -54,7 +54,7 @@ const Path = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { suunnitelmaId, paamaaraId } = useParams<PolkuQueryParams>();
+  const { suunnitelmaId, tavoiteId } = useParams<PolkuQueryParams>();
   const revalidator = useRevalidator();
   const formId = React.useId();
   const [osaamisetFromVaiheetAndProfile, setOsaamisetFromVaiheetAndProfile] = React.useState<string[]>([]);
@@ -260,11 +260,11 @@ const Path = () => {
   const toggleVaiheCompleted = async (index: number) => {
     const vaihe = vaiheet[index];
 
-    await client.PUT('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}', {
+    await client.PUT('/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}', {
       params: {
         path: {
           vaiheId: vaihe.id!,
-          id: paamaaraId!,
+          id: tavoiteId!,
           suunnitelmaId: suunnitelmaId!,
         },
       },
@@ -293,15 +293,15 @@ const Path = () => {
       ...osaamisetFromProfile.map(mapOsaaminenToUri),
     ]);
   }, [osaamisetFromProfile, osaamisetFromVaiheet, vaaditutOsaamiset]);
-  const { mahdollisuusId } = paamaara ?? {};
+  const { mahdollisuusId } = tavoite ?? {};
 
   const save = async (data: PolkuForm) => {
-    if (!paamaaraId || !suunnitelmaId) {
+    if (!tavoiteId || !suunnitelmaId) {
       return;
     }
     globalThis._paq?.push(['trackEvent', 'yksilo.Polku', 'Muokkaus']);
-    await client.PUT('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}', {
-      params: { path: { id: paamaaraId, suunnitelmaId } },
+    await client.PUT('/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}', {
+      params: { path: { id: tavoiteId, suunnitelmaId } },
       body: {
         id: data.id,
         nimi: data.nimi,
@@ -316,7 +316,7 @@ const Path = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue, methods]);
 
-  if (!paamaara) {
+  if (!tavoite) {
     return null;
   }
 
@@ -420,27 +420,27 @@ const Path = () => {
             </div>
             <div className="flex flex-col gap-5 mb-5">
               <span className="text-form-label">{t('profile.paths.goal')}</span>
-              {paamaara ? (
+              {tavoite ? (
                 <div className="flex flex-col gap-5 mb-9">
                   <OpportunityCard
-                    to={`/${language}/${getTypeSlug(paamaara.mahdollisuusTyyppi)}/${mahdollisuusId}`}
+                    to={`/${language}/${getTypeSlug(tavoite.mahdollisuusTyyppi)}/${mahdollisuusId}`}
                     description={getLocalizedText(mahdollisuus?.tiivistelma)}
                     name={getLocalizedText(mahdollisuus?.otsikko)}
                     aineisto={(mahdollisuus as components['schemas']['TyomahdollisuusFullDto'])?.aineisto}
                     tyyppi={(mahdollisuus as components['schemas']['KoulutusmahdollisuusFullDto'])?.tyyppi}
-                    type={paamaara.mahdollisuusTyyppi}
+                    type={tavoite.mahdollisuusTyyppi}
                     ammattiryhma={
-                      paamaara.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
+                      tavoite.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
                         ? (mahdollisuus as components['schemas']['TyomahdollisuusDto']).ammattiryhma
                         : undefined
                     }
                     ammattiryhmaNimet={ammattiryhmaNimet}
                     hideFavorite
                   />
-                  {getLocalizedText(paamaara.tavoite) ? (
+                  {getLocalizedText(tavoite.tavoite) ? (
                     <>
                       <div className="text-form-label">{t('profile.my-goals.goal-description')}</div>
-                      <div>{getLocalizedText(paamaara.tavoite)}</div>
+                      <div>{getLocalizedText(tavoite.tavoite)}</div>
                     </>
                   ) : null}
                 </div>
@@ -556,7 +556,7 @@ const Path = () => {
               </table>
             </div>
             <DeletePolkuButton
-              paamaaraId={paamaaraId}
+              tavoiteId={tavoiteId}
               suunnitelmaId={suunnitelmaId}
               onDelete={closePolku}
               name={getLocalizedText(polku?.nimi)}

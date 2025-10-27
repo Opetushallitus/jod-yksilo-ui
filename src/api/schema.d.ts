@@ -112,7 +112,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/paamaarat/{id}': {
+  '/api/profiili/tavoitteet/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -120,36 +120,36 @@ export interface paths {
       cookie?: never;
     };
     get?: never;
-    /** Updates a paamaara */
-    put: operations['paamaaraUpdate'];
+    /** Updates a tavoite */
+    put: operations['tavoiteUpdate'];
     post?: never;
-    /** Deletes a paamaara */
-    delete: operations['paamaaraDelete'];
+    /** Deletes a tavoite */
+    delete: operations['tavoiteDelete'];
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}': {
+  '/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    /** Gets a suunnitelma of the paamaara */
+    /** Gets a suunnitelma of the tavoite */
     get: operations['polunSuunnitelmaGet'];
-    /** Updates a suunnitelma of the paamaara */
+    /** Updates a suunnitelma of the tavoite */
     put: operations['polunSuunnitelmaUpdate'];
     post?: never;
-    /** Deletes a suunnitelma of the paamaara */
+    /** Deletes a suunnitelma of the tavoite */
     delete: operations['polunSuunnitelmaDelete'];
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}': {
+  '/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}': {
     parameters: {
       query?: never;
       header?: never;
@@ -343,6 +343,58 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/profiili/tavoitteet': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Gets all tavoitteet */
+    get: operations['tavoiteFindAll'];
+    put?: never;
+    /** Adds a new tavoite */
+    post: operations['tavoiteAdd'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/tavoitteet/{id}/suunnitelmat': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Adds a new suunnitelma to the tavoite */
+    post: operations['polunSuunnitelmaAdd'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}/vaiheet': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Adds a new vaihe to the suunnitelma */
+    post: operations['polunVaiheAdd'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/suosikit': {
     parameters: {
       query?: never;
@@ -357,58 +409,6 @@ export interface paths {
     post: operations['yksilonSuosikkiAdd'];
     /** Deletes one of Yksilo's suosikki */
     delete: operations['yksilonSuosikkiDelete'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/profiili/paamaarat': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Gets all paamaarat */
-    get: operations['paamaaraFindAll'];
-    put?: never;
-    /** Adds a new paamaara */
-    post: operations['paamaaraAdd'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/profiili/paamaarat/{id}/suunnitelmat': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /** Adds a new suunnitelma to the paamaara */
-    post: operations['polunSuunnitelmaAdd'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}/vaiheet': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /** Adds a new vaihe to the suunnitelma */
-    post: operations['polunVaiheAdd'];
-    delete?: never;
     options?: never;
     head?: never;
     patch?: never;
@@ -908,7 +908,12 @@ export interface components {
       loppuPvm?: string;
       osaamiset?: string[];
     };
-    PaamaaraDto: {
+    PolunSuunnitelmaYhteenvetoDto: {
+      /** Format: uuid */
+      readonly id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+    };
+    TavoiteDto: {
       /** Format: uuid */
       readonly id?: string;
       /** @enum {string} */
@@ -921,11 +926,6 @@ export interface components {
       /** Format: date-time */
       readonly luotu?: string;
       readonly suunnitelmat?: components['schemas']['PolunSuunnitelmaYhteenvetoDto'][];
-    };
-    PolunSuunnitelmaYhteenvetoDto: {
-      /** Format: uuid */
-      readonly id?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
     };
     PolunSuunnitelmaUpdateDto: {
       /** Format: uuid */
@@ -988,6 +988,20 @@ export interface components {
       nimi: components['schemas']['LokalisoituTeksti'];
       toimenkuvat?: components['schemas']['ToimenkuvaDto'][];
     };
+    PolunSuunnitelmaDto: {
+      /** Format: uuid */
+      readonly id?: string;
+      nimi: components['schemas']['LokalisoituTeksti'];
+      readonly tavoite?: components['schemas']['TavoiteYhteenvetoDto'];
+      readonly vaiheet?: components['schemas']['PolunVaiheDto'][];
+      readonly osaamiset?: string[];
+      readonly ignoredOsaamiset?: string[];
+    };
+    TavoiteYhteenvetoDto: {
+      /** Format: uuid */
+      readonly id?: string;
+      tavoite?: components['schemas']['LokalisoituTeksti'];
+    };
     SuosikkiDto: {
       /** Format: uuid */
       readonly id?: string;
@@ -997,20 +1011,6 @@ export interface components {
       tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       /** Format: date-time */
       readonly luotu?: string;
-    };
-    PaamaaraYhteenvetoDto: {
-      /** Format: uuid */
-      readonly id?: string;
-      tavoite?: components['schemas']['LokalisoituTeksti'];
-    };
-    PolunSuunnitelmaDto: {
-      /** Format: uuid */
-      readonly id?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
-      readonly paamaara?: components['schemas']['PaamaaraYhteenvetoDto'];
-      readonly vaiheet?: components['schemas']['PolunVaiheDto'][];
-      readonly osaamiset?: string[];
-      readonly ignoredOsaamiset?: string[];
     };
     KoulutusKokonaisuusDto: {
       /** Format: uuid */
@@ -1106,14 +1106,6 @@ export interface components {
       /** Format: uri */
       uri?: string;
     };
-    ExtPaamaaraDto: {
-      /** @enum {string} */
-      tyyppi?: 'LYHYT' | 'PITKA' | 'MUU';
-      /** Format: uuid */
-      tyomahdollisuusId?: string;
-      /** Format: uuid */
-      koulutusmahdollisuusId?: string;
-    };
     ExtProfiiliDto: {
       /** Format: uuid */
       id?: string;
@@ -1129,9 +1121,17 @@ export interface components {
       osaamisKiinnostukset?: components['schemas']['ExtOsaamisKiinnostusDto'][];
       ammattiKiinnostukset?: components['schemas']['ExtAmmattiKiinnostusDto'][];
       suosikit?: components['schemas']['ExtSuosikkiDto'][];
-      paamaarat?: components['schemas']['ExtPaamaaraDto'][];
+      paamaarat?: components['schemas']['ExtTavoiteDto'][];
     };
     ExtSuosikkiDto: {
+      /** Format: uuid */
+      tyomahdollisuusId?: string;
+      /** Format: uuid */
+      koulutusmahdollisuusId?: string;
+    };
+    ExtTavoiteDto: {
+      /** @enum {string} */
+      tyyppi?: 'LYHYT' | 'PITKA' | 'MUU';
       /** Format: uuid */
       tyomahdollisuusId?: string;
       /** Format: uuid */
@@ -1298,20 +1298,6 @@ export interface components {
       vapaateksti?: components['schemas']['LokalisoituTeksti'];
       osaamiset?: string[];
     };
-    PaamaaraExportDto: {
-      /** Format: uuid */
-      id?: string;
-      /** Format: date-time */
-      luotu?: string;
-      /** @enum {string} */
-      tyyppi?: 'LYHYT' | 'PITKA' | 'MUU';
-      /** Format: uuid */
-      tyomahdollisuus?: string;
-      /** Format: uuid */
-      koulutusmahdollisuus?: string;
-      suunnitelmat?: components['schemas']['PolunSuunnitelmaExportDto'][];
-      tavoite?: components['schemas']['LokalisoituTeksti'];
-    };
     PatevyysExportDto: {
       /** Format: uuid */
       id?: string;
@@ -1349,6 +1335,20 @@ export interface components {
       loppuPvm?: string;
       osaamiset?: string[];
       valmis?: boolean;
+    };
+    TavoiteExportDto: {
+      /** Format: uuid */
+      id?: string;
+      /** Format: date-time */
+      luotu?: string;
+      /** @enum {string} */
+      tyyppi?: 'LYHYT' | 'PITKA' | 'MUU';
+      /** Format: uuid */
+      tyomahdollisuus?: string;
+      /** Format: uuid */
+      koulutusmahdollisuus?: string;
+      suunnitelmat?: components['schemas']['PolunSuunnitelmaExportDto'][];
+      tavoite?: components['schemas']['LokalisoituTeksti'];
     };
     ToimenkuvaExportDto: {
       /** Format: uuid */
@@ -1394,7 +1394,7 @@ export interface components {
       muuOsaaminen?: components['schemas']['MuuOsaaminenExportDto'];
       kiinnostukset?: components['schemas']['KiinnostuksetExportDto'];
       suosikit?: components['schemas']['YksilonSuosikkiExportDto'][];
-      paamaarat?: components['schemas']['PaamaaraExportDto'][];
+      tavoitteet?: components['schemas']['TavoiteExportDto'][];
     };
     YksilonSuosikkiExportDto: {
       /** Format: uuid */
@@ -1880,7 +1880,7 @@ export interface operations {
       };
     };
   };
-  paamaaraUpdate: {
+  tavoiteUpdate: {
     parameters: {
       query?: never;
       header?: never;
@@ -1891,7 +1891,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['PaamaaraDto'];
+        'application/json': components['schemas']['TavoiteDto'];
       };
     };
     responses: {
@@ -1904,7 +1904,7 @@ export interface operations {
       };
     };
   };
-  paamaaraDelete: {
+  tavoiteDelete: {
     parameters: {
       query?: never;
       header?: never;
@@ -2488,11 +2488,9 @@ export interface operations {
       };
     };
   };
-  yksilonSuosikkiFindAll: {
+  tavoiteFindAll: {
     parameters: {
-      query?: {
-        tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
-      };
+      query?: never;
       header?: never;
       path?: never;
       cookie?: never;
@@ -2505,12 +2503,12 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['SuosikkiDto'][];
+          'application/json': components['schemas']['TavoiteDto'][];
         };
       };
     };
   };
-  yksilonSuosikkiAdd: {
+  tavoiteAdd: {
     parameters: {
       query?: never;
       header?: never;
@@ -2519,71 +2517,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['SuosikkiDto'];
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': string;
-        };
-      };
-    };
-  };
-  yksilonSuosikkiDelete: {
-    parameters: {
-      query: {
-        id: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  paamaaraFindAll: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['PaamaaraDto'][];
-        };
-      };
-    };
-  };
-  paamaaraAdd: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['PaamaaraDto'];
+        'application/json': components['schemas']['TavoiteDto'];
       };
     };
     responses: {
@@ -2648,6 +2582,72 @@ export interface operations {
         content: {
           'application/json': string;
         };
+      };
+    };
+  };
+  yksilonSuosikkiFindAll: {
+    parameters: {
+      query?: {
+        tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SuosikkiDto'][];
+        };
+      };
+    };
+  };
+  yksilonSuosikkiAdd: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SuosikkiDto'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': string;
+        };
+      };
+    };
+  };
+  yksilonSuosikkiDelete: {
+    parameters: {
+      query: {
+        id: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };

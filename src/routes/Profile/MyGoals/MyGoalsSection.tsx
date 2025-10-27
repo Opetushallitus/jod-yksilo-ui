@@ -4,7 +4,7 @@ import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton'
 import { useEnvironment } from '@/hooks/useEnvironment';
 import loader from '@/routes/Profile/MyGoals/loader';
 import { getTypeSlug } from '@/routes/Profile/utils';
-import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
+import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLocalizedText } from '@/utils';
 import { Button } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
@@ -19,15 +19,15 @@ interface MyGoalsSectionProps {
   title: string;
   description: string;
   icon?: React.ReactNode;
-  paamaarat: components['schemas']['PaamaaraDto'][];
+  tavoitteet: components['schemas']['TavoiteDto'][];
 }
-const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionProps) => {
+const MyGoalsSection = ({ title, description, icon, tavoitteet }: MyGoalsSectionProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
-  const { mahdollisuusDetails, upsertPaamaara } = usePaamaaratStore(
-    useShallow((state) => ({ mahdollisuusDetails: state.mahdollisuusDetails, upsertPaamaara: state.upsertPaamaara })),
+  const { mahdollisuusDetails, upsertTavoite } = useTavoitteetStore(
+    useShallow((state) => ({ mahdollisuusDetails: state.mahdollisuusDetails, upsertTavoite: state.upsertTavoite })),
   );
   const { isPrd } = useEnvironment();
 
@@ -39,21 +39,21 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
   );
 
   const removePolkuFromStore = React.useCallback(
-    (paamaaraId?: string, suunnitelmaId?: string) => {
-      if (!paamaaraId || !suunnitelmaId) {
+    (tavoiteId?: string, suunnitelmaId?: string) => {
+      if (!tavoiteId || !suunnitelmaId) {
         return;
       }
 
-      const paamaara = paamaarat.find((paamaara) => paamaara.id === paamaaraId);
+      const tavoite = tavoitteet.find((tavoite) => tavoite.id === tavoiteId);
 
-      if (paamaara) {
-        upsertPaamaara({
-          ...paamaara,
-          suunnitelmat: paamaara.suunnitelmat?.filter((polku) => polku.id !== suunnitelmaId),
+      if (tavoite) {
+        upsertTavoite({
+          ...tavoite,
+          suunnitelmat: tavoite.suunnitelmat?.filter((polku) => polku.id !== suunnitelmaId),
         });
       }
     },
-    [paamaarat, upsertPaamaara],
+    [tavoitteet, upsertTavoite],
   );
 
   return (
@@ -64,7 +64,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
       </div>
       <p className={`${icon ? 'ml-8' : ''} text-body-lg font-medium mb-5`}>{description}</p>
       <div className="flex flex-col gap-5 mb-5">
-        {paamaarat.map((pm, i) => {
+        {tavoitteet.map((pm, i) => {
           const { mahdollisuusId, mahdollisuusTyyppi, id } = pm;
           const details = getMahdollisuusDetails(mahdollisuusId);
           const menuId = id ?? `menu-${i}`;
@@ -85,14 +85,14 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                   <MyGoalsOpportunityCardMenu
                     mahdollisuusId={mahdollisuusId}
                     mahdollisuusTyyppi={mahdollisuusTyyppi}
-                    paamaaraId={id}
+                    tavoiteId={id}
                     menuId={menuId}
                   />
                 }
                 menuId={menuId}
                 hideFavorite
               />
-              <TavoiteInput paamaara={pm} />
+              <TavoiteInput goal={pm} />
               {!isPrd && pm.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' && (
                 <>
                   <div className="text-form-label font-arial">{t('profile.my-goals.my-plan-towards-goal')}</div>
@@ -106,7 +106,7 @@ const MyGoalsSection = ({ title, description, icon, paamaarat }: MyGoalsSectionP
                           {getLocalizedText(polku.nimi)} <JodArrowRight />
                         </Link>
                         <DeletePolkuButton
-                          paamaaraId={pm.id}
+                          tavoiteId={pm.id}
                           suunnitelmaId={polku.id}
                           onDelete={() => removePolkuFromStore(pm.id, polku.id)}
                           name={polku.nimi}
