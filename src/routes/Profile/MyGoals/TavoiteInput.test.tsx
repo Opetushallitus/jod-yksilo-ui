@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { client } from '@/api/client';
+import { components } from '@/api/schema';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +21,7 @@ const mockUpsertTavoite = vi.fn();
 const mockT = vi.fn().mockImplementation((key: string) => key);
 const mockLanguage = 'fi';
 
-function doRender(tavoite = { id: 1, tavoite: { fi: 'alkuarvo', sv: 'startvärde' } }) {
+function doRender(goal = { id: 1, tavoite: { fi: 'alkuarvo', sv: 'startvärde' } }) {
   const store = useTavoitteetStore as unknown as Mock;
   (useTranslation as unknown as Mock).mockReturnValue({
     t: mockT,
@@ -28,7 +29,7 @@ function doRender(tavoite = { id: 1, tavoite: { fi: 'alkuarvo', sv: 'startvärde
   });
   store.mockReturnValue(mockUpsertTavoite);
 
-  return render(<TavoiteInput goal={tavoite as any} />);
+  return render(<TavoiteInput goal={goal as components['schemas']['TavoiteDto']} />);
 }
 
 describe('TavoiteInput', () => {

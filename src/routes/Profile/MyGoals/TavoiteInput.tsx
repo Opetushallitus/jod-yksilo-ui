@@ -101,7 +101,7 @@ const TavoiteInput = ({ goal }: TavoiteInputProps) => {
         setLoading(true);
         await client.PUT('/api/profiili/tavoitteet/{id}', {
           body: newTavoite,
-          params: { path: { id: tavoite.id } },
+          params: { path: { id: goal.id } },
         });
         setLoading(false);
         setSaved(true);
