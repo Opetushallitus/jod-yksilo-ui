@@ -25,16 +25,10 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
   const [error, setError] = React.useState<Error | undefined>(undefined);
   const [tableRows, setTableRows] = React.useState<ExperienceTableRowData[]>([]);
   const cancelButtonRef = React.useRef<HTMLButtonElement>(null);
+  const hasFetchedRef = React.useRef<boolean>(false);
 
   const modalId = React.useId();
   useEscHandler(() => cancelButtonRef.current?.click(), modalId);
-
-  React.useEffect(() => {
-    if (isOpen) {
-      fetchAndSetEducationHistories();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
 
   const handleGetKoulutusDataFailure = (error: Error | undefined) => {
     setKoskiData(undefined);
@@ -62,6 +56,13 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
       setIsFetching(false);
     }
   }, []);
+
+  React.useEffect(() => {
+    if (isOpen && !hasFetchedRef.current) {
+      hasFetchedRef.current = true;
+      fetchAndSetEducationHistories();
+    }
+  }, [isOpen, fetchAndSetEducationHistories]);
 
   const convertKoskiDataToExperienceTableRows = (koskiData: components['schemas']['KoulutusDto'][] | undefined) => {
     const koulutusKokonaisuudet = new Map<string, Koulutus[]>();
