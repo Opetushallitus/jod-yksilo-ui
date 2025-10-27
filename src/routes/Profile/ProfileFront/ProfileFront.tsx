@@ -39,8 +39,8 @@ const ProfileFront = () => {
 
       {!isLoading && !data.tervetuloapolku && <WelcomePathModal yksiloData={data} />}
 
-      <div className="mb-8 text-body-md flex flex-col gap-7">
-        <p className="text-body-lg">{t('profile.preferences.you-are-signed-in')}</p>
+      <div className="mb-8 text-body-md flex flex-col gap-7 font-arial">
+        <p className="text-body-lg font-poppins">{t('profile.preferences.you-are-signed-in')}</p>
         <ul>
           <ListItem label={t('profile.preferences.list-1-item-1')} />
           <ListItem label={t('profile.preferences.list-1-item-2')} />
