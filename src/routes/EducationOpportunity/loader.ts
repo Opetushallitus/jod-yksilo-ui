@@ -1,11 +1,12 @@
 import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
-import type { EducationCodeSetValues, Jakauma, KoulutusmahdollisuusJakaumat } from '@/routes/types';
+import type { Jakauma, KoulutusmahdollisuusJakaumat } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { sortByProperty } from '@/utils';
 import { getEducationCodesetValues } from '@/utils/codes/codes';
 import { LoaderFunction } from 'react-router';
+import { type EducationCodeSetValues } from '../../utils/jakaumaUtils';
 
 const loader = (async ({ request, params, context }) => {
   if (!params.id) {

@@ -1,76 +1,121 @@
+import { NOT_AVAILABLE_LABEL } from '@/constants';
 import type { LoaderData as EducationLoaderData } from '@/routes/EducationOpportunity/loader';
 import type { LoaderData as JobLoaderData } from '@/routes/JobOpportunity/loader';
 import type {
-  EducationCodeSetKeys,
-  EducationCodeSetValues,
+  JakaumaDisplayValueTranslations,
   JakaumaKey,
-  JobCodesetKeys,
-  JobCodesetValues,
   KoulutusmahdollisuusJakaumat,
   TyomahdollisuusJakaumat,
 } from '@/routes/types';
 import { parseBoolean } from '@/utils';
+import {
+  isBooleanJakaumaKey,
+  isEducationCodeSetKey,
+  isJakaumaLabelKey,
+  isJobCodeSetKey,
+  type EducationCodeSetValues,
+  type JobCodesetValues,
+} from '@/utils/jakaumaUtils';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 
-type JakaumaListProps =
-  | {
-      /** Jakaumat from opportunity */
-      jakaumat: TyomahdollisuusJakaumat | KoulutusmahdollisuusJakaumat;
-      /** Name of the jakauma */
-      name: JakaumaKey;
-      /** Keys that correspond to boolean like values, eg "true", 1 etc. */
-      booleanKeys?: JakaumaKey[];
-      /** Values that can be displayed as is */
-      codesAsValue?: JakaumaKey[];
-      /** Values that use the JSON codeset files. If codesetKeys is defined, codesetValues must be defined as well. */
-      codesetKeys: JakaumaKey[];
-      /** Values associated with the codeset */
-      codesetValues: JobCodesetValues | EducationCodeSetValues;
-      /** Type of the jakauma */
-      type: 'job' | 'education';
-    }
-  | {
-      jakaumat: TyomahdollisuusJakaumat | KoulutusmahdollisuusJakaumat;
-      name: JakaumaKey;
-      booleanKeys?: JakaumaKey[];
-      codesAsValue?: JakaumaKey[];
-      codesetKeys?: never;
-      codesetValues?: never;
-      type: 'job' | 'education';
-    };
+interface EducationJakaumaListProps {
+  jakaumat: KoulutusmahdollisuusJakaumat;
+  name: JakaumaKey;
+  codesetValues: EducationCodeSetValues;
+  type: 'education';
+}
 
-const JakaumaList = ({
-  name,
-  jakaumat,
-  codesetKeys = [],
-  booleanKeys = [],
-  codesAsValue = [],
-  codesetValues,
-  type,
-}: JakaumaListProps) => {
+interface JobJakaumaListProps {
+  jakaumat: TyomahdollisuusJakaumat;
+  name: JakaumaKey;
+  codesetValues: JobCodesetValues;
+  type: 'job';
+}
+
+type JakaumaListProps = EducationJakaumaListProps | JobJakaumaListProps;
+
+const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) => {
   const { t } = useTranslation();
 
+  const jakaumaDisplayValueTranslations: JakaumaDisplayValueTranslations = React.useMemo(
+    () => ({
+      maksullisuus: {
+        lukuvuosimaksu: t('jakauma-values.maksullisuus.lukuvuosimaksu'),
+        maksullinen: t('jakauma-values.maksullisuus.maksullinen'),
+        maksuton: t('jakauma-values.maksullisuus.maksuton'),
+      },
+      palkanPeruste: {
+        OTHER: t('jakauma-values.palkanPeruste.OTHER'),
+        PIECE_WORK: t('jakauma-values.palkanPeruste.PIECE_WORK'),
+        PROVISION: t('jakauma-values.palkanPeruste.PROVISION'),
+        SALARY: t('jakauma-values.palkanPeruste.SALARY'),
+        SALARY_PROVISION: t('jakauma-values.palkanPeruste.SALARY_PROVISION'),
+        TIME_RATE: t('jakauma-values.palkanPeruste.TIME_RATE'),
+        TIME_RATE_PROVISION: t('jakauma-values.palkanPeruste.TIME_RATE_PROVISION'),
+      },
+      palvelussuhde: {
+        COMMISSION: t('jakauma-values.palvelussuhde.COMMISSION'),
+        EMPLOYMENT: t('jakauma-values.palvelussuhde.EMPLOYMENT'),
+        ENTREPRENEURSHIP: t('jakauma-values.palvelussuhde.ENTREPRENEURSHIP'),
+        SERVICE_IN_PUBLIC_ADMINISTRATION: t('jakauma-values.palvelussuhde.SERVICE_IN_PUBLIC_ADMINISTRATION'),
+      },
+      tyoaika: {
+        FULLTIME: t('jakauma-values.tyoaika.FULLTIME'),
+        PARTTIME: t('jakauma-values.tyoaika.PARTTIME'),
+      },
+      tyonJatkuvuus: {
+        PERMANENT: t('jakauma-values.tyonJatkuvuus.PERMANENT'),
+        TEMPORARY: t('jakauma-values.tyonJatkuvuus.TEMPORARY'),
+      },
+    }),
+    [t],
+  );
+
+  const jakaumaHeadingTranslations = React.useMemo(
+    () => ({
+      aika: t('jakauma.aika'),
+      ajokortti: t('jakauma.ajokortti'),
+      ammatti: t('jakauma.ammatti'),
+      kielitaito: t('jakauma.kielitaito'),
+      kortitJaLuvat: t('jakauma.kortitJaLuvat'),
+      koulutusala: t('jakauma.koulutusala'),
+      koulutusaste: t('jakauma.koulutusaste'),
+      kunta: t('jakauma.kunta'),
+      maa: t('jakauma.maa'),
+      maakunta: t('jakauma.maakunta'),
+      maksullisuus: t('jakauma.maksullisuus'),
+      matkustusvaatimus: t('jakauma.matkustusvaatimus'),
+      opetustapa: t('jakauma.opetustapa'),
+      osaaminen: t('jakauma.osaaminen'),
+      palkanPeruste: t('jakauma.palkanPeruste'),
+      palvelussuhde: t('jakauma.palvelussuhde'),
+      rikosrekisteriote: t('jakauma.rikosrekisteriote'),
+      sijaintiJoustava: t('jakauma.sijaintiJoustava'),
+      tyoaika: t('jakauma.tyoaika'),
+      tyokieli: t('jakauma.tyokieli'),
+      tyonJatkuvuus: t('jakauma.tyonJatkuvuus'),
+    }),
+    [t],
+  );
+
   const getDisplayValue = (arvo: string) => {
-    if (codesetValues && codesetKeys.includes(name)) {
-      if (type === 'education') {
-        // The version part (#1) is included in the arvo, but not in the code.koodiUri, so it needs to be stripped.
-        const strippedArvo = arvo.split('#')[0];
-        return (
-          (codesetValues as EducationCodeSetValues)[name as EducationCodeSetKeys]?.find((v) => v.code === strippedArvo)
-            ?.value ?? strippedArvo
-        );
-      } else if (type === 'job') {
-        return (codesetValues as JobCodesetValues)[name as JobCodesetKeys]?.find((v) => v.code === arvo)?.value ?? arvo;
-      }
-      return arvo;
-    } else if (booleanKeys.includes(name)) {
+    if (codesetValues && type === 'education' && isEducationCodeSetKey(name)) {
+      // The version part (#1) is included in the arvo, but not in the code.koodiUri, so it needs to be stripped.
+      const strippedArvo = arvo.split('#')[0];
+      return codesetValues[name]?.find((v) => v.code === strippedArvo)?.value ?? strippedArvo;
+    } else if (codesetValues && type === 'job' && isJobCodeSetKey(name)) {
+      return codesetValues[name]?.find((v) => v.code === arvo)?.value ?? arvo;
+    } else if (isBooleanJakaumaKey(name)) {
       return parseBoolean(arvo) === true ? t('is-required') : t('is-not-required');
-    } else if (codesAsValue.includes(name)) {
-      return arvo;
-    } else {
-      return t(`jakauma-values.${name}.${arvo}`);
+    } else if (isJakaumaLabelKey(name)) {
+      const translations = jakaumaDisplayValueTranslations[name];
+      if (translations && arvo in translations) {
+        return translations[arvo as keyof typeof translations];
+      }
     }
+    return arvo;
   };
 
   const jakauma = jakaumat[name as keyof typeof jakaumat];
@@ -78,23 +123,35 @@ const JakaumaList = ({
 
   return (
     <div className="md:col-span-1 col-span-2 border-l-2 border-border-gray pl-4">
-      <h4 className="text-heading-4 pb-2">{t(`jakauma.${name}`)}</h4>
+      <h4 className="text-heading-4 pb-2">{jakaumaHeadingTranslations[name]}</h4>
       {isEmpty ? (
         <div className="flex flex-col gap-3">
-          <p className="text-heading-2 text-accent">---</p>
-          <span className="text-body-sm text-secondary-gray font-arial">{t('job-opportunity.of-job-ads')}</span>
+          <p className="text-heading-2 text-accent" data-testid={`${name}-distribution-empty-label`}>
+            {NOT_AVAILABLE_LABEL}
+          </p>
+          <span
+            className="text-body-sm text-secondary-gray font-arial"
+            data-testid={`${name}-distribution-total-label`}
+          >
+            {t('job-opportunity.of-job-ads')}
+          </span>
         </div>
       ) : (
         <ul>
           {jakauma.arvot.map((arvo) => (
             <li key={arvo.arvo} className="flex flex-col gap-3">
               <div className="flex text-heading-2 text-accent gap-3 items-start">
-                <span>{Math.round(arvo.osuus)}%</span>
-                <span className="first-letter:capitalize">{getDisplayValue(arvo.arvo)}</span>
+                <span data-testid={`${name}-distribution-${arvo.arvo}-percentage`}>{Math.round(arvo.osuus)}%</span>
+                <span data-testid={`${name}-distribution-${arvo.arvo}-label`} className="first-letter:capitalize">
+                  {getDisplayValue(arvo.arvo)}
+                </span>
               </div>
             </li>
           ))}
-          <li className="text-body-sm text-secondary-gray font-arial mt-4">
+          <li
+            className="text-body-sm text-secondary-gray font-arial mt-4"
+            data-testid={`${name}-distribution-total-label`}
+          >
             {type === 'job' ? t('job-opportunity.of-job-ads') : t('education-opportunity.of-educations')}
           </li>
         </ul>
@@ -105,30 +162,10 @@ const JakaumaList = ({
 
 export const EducationJakaumaList = ({ name }: { name: JakaumaKey }) => {
   const { jakaumat, codesetValues } = useLoaderData<EducationLoaderData>();
-  return (
-    <JakaumaList
-      jakaumat={jakaumat}
-      name={name}
-      codesAsValue={['kunta', 'koulutusala', 'opetustapa', 'aika']}
-      codesetValues={codesetValues}
-      codesetKeys={['aika', 'opetustapa', 'koulutusala']}
-      type="education"
-    />
-  );
+  return <JakaumaList jakaumat={jakaumat} name={name} codesetValues={codesetValues} type="education" />;
 };
 
 export const JobJakaumaList = ({ name }: { name: JakaumaKey }) => {
   const { jakaumat, codesetValues } = useLoaderData<JobLoaderData>();
-
-  return (
-    <JakaumaList
-      name={name}
-      jakaumat={jakaumat}
-      booleanKeys={['rikosrekisteriote', 'matkustusvaatimus', 'sijaintiJoustava']}
-      codesAsValue={['ajokortti', 'kielitaito']}
-      codesetKeys={['maa', 'maakunta', 'kunta', 'tyokieli']}
-      codesetValues={codesetValues}
-      type="job"
-    />
-  );
+  return <JakaumaList name={name} jakaumat={jakaumat} codesetValues={codesetValues} type="job" />;
 };

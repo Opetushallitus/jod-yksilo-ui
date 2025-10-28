@@ -303,11 +303,10 @@ export const AddOrEditPatevyysModal = ({
   };
 
   const headerText = React.useMemo(() => {
-    const editCompetencesSlug = 'free-time-activities.edit-activity';
     if (step === 0) {
-      return t(patevyysId ? editCompetencesSlug : 'free-time-activities.add-new-activity');
+      return patevyysId ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-activity');
     }
-    return t(patevyysId ? editCompetencesSlug : 'free-time-activities.identify-proficiencies');
+    return patevyysId ? t('free-time-activities.edit-activity') : t('free-time-activities.identify-proficiencies');
   }, [patevyysId, step, t]);
 
   React.useEffect(() => {

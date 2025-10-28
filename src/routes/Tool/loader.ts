@@ -3,8 +3,8 @@ import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
 import { useToolStore } from '@/stores/useToolStore';
 import type { LoaderFunction } from 'react-router';
+import { JobCodesetValues } from '../../utils/jakaumaUtils';
 import { type CompetencesLoaderData, getCompetenceData } from '../Profile/Competences/loader';
-import type { JobCodesetValues } from '../types';
 
 export type ToolLoaderData = {
   isLoggedIn: boolean;

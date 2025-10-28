@@ -1,5 +1,6 @@
 import i18n, { type LangCode } from '@/i18n/config';
-import type { Codeset, TypedMahdollisuus } from '@/routes/types';
+import { TypedMahdollisuus } from '@/routes/types';
+import type { Codeset } from '@/utils/jakaumaUtils';
 
 export interface Classification {
   localId: string;
