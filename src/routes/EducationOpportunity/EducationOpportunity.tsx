@@ -47,7 +47,11 @@ const EducationOpportunity = () => {
     [osaamiset, language, kartoitetutKiinnostuksetUris],
   );
 
-  const opintopolkuUrl = React.useMemo(() => new URL(`https://opintopolku.fi/konfo/${language}/haku`).href, [language]);
+  const title = getLocalizedText(koulutusmahdollisuus.otsikko);
+  const opintopolkuUrl = React.useMemo(
+    () => new URL(encodeURI(`https://opintopolku.fi/konfo/${language}/haku/${title}`)).href,
+    [language, title],
+  );
 
   const sections: OpportunityDetailsSection[] = [
     {
