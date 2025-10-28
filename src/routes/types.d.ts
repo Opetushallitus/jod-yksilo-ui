@@ -65,13 +65,13 @@ interface CodeSetValue {
 }
 export type JakaumaKey = keyof KoulutusmahdollisuusJakaumat | keyof TyomahdollisuusJakaumat;
 
-export type EducationCodeSetKeys = Required<
-  Extract<keyof KoulutusmahdollisuusJakaumat, 'aika' | 'opetustapa' | 'koulutusala'>
->;
-export type EducationCodeSetValues = Record<EducationCodeSetKeys, CodeSetValue[]>;
-
-export type JobCodesetKeys = Required<
-  Extract<keyof TyomahdollisuusJakaumat, 'maa' | 'maakunta' | 'kunta' | 'tyokieli'>
->;
-export type JobCodesetValues = Record<JobCodesetKeys, CodeSetValue[]>;
-export type Codeset = JobCodesetKeys | EducationCodeSetKeys;
+export interface JakaumaDisplayValueTranslations {
+  maksullisuus: Record<'lukuvuosimaksu' | 'maksullinen' | 'maksuton', string>;
+  palkanPeruste: Record<
+    'OTHER' | 'PIECE_WORK' | 'PROVISION' | 'SALARY' | 'SALARY_PROVISION' | 'TIME_RATE' | 'TIME_RATE_PROVISION',
+    string
+  >;
+  palvelussuhde: Record<'COMMISSION' | 'EMPLOYMENT' | 'ENTREPRENEURSHIP' | 'SERVICE_IN_PUBLIC_ADMINISTRATION', string>;
+  tyoaika: Record<'FULLTIME' | 'PARTTIME', string>;
+  tyonJatkuvuus: Record<'PERMANENT' | 'TEMPORARY', string>;
+}

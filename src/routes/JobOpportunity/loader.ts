@@ -2,11 +2,12 @@ import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
-import type { Codeset, Jakauma, JobCodesetValues, TyomahdollisuusJakaumat } from '@/routes/types';
+import type { Jakauma, TyomahdollisuusJakaumat } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { sortByProperty } from '@/utils';
 import { getCodesetValue } from '@/utils/codes/codes';
 import { LoaderFunction } from 'react-router';
+import type { Codeset, JobCodesetValues } from '../../utils/jakaumaUtils';
 
 const loader = (async ({ request, params, context }) => {
   if (!params.id) {
