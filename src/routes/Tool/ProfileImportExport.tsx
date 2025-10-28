@@ -195,7 +195,13 @@ const CompetenceImport = () => {
       ...storeOsaamiset.filter((o) => o.tyyppi === 'KARTOITETTU'),
     ];
 
-    setOsaamiset([...removeDuplicates(currentAndImportedSkills, 'id')]);
+    // Remove duplicates per category, so that the same competence can be visible under different categories,
+    // but not multiple times under the same category.
+    const filtered = Array.from(
+      new Map(currentAndImportedSkills.map((item) => [item.id + item.tyyppi, item])).values(),
+    );
+
+    setOsaamiset(filtered);
 
     if (currentAndImportedSkills.some((o) => o.tyyppi === 'MUU_OSAAMINEN')) {
       const { data } = await client.GET('/api/profiili/muu-osaaminen');

@@ -44,7 +44,7 @@ const CompetenceCategory = ({
 }) => {
   return (
     <div className="flex flex-wrap gap-3">
-      {<AddedTags osaamiset={osaamiset} onClick={onChange} lahdetyyppi={lahdeTyyppi} />}
+      <AddedTags osaamiset={osaamiset} onClick={onChange} lahdetyyppi={lahdeTyyppi} />
     </div>
   );
 };

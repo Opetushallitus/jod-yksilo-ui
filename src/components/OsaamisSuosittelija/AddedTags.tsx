@@ -1,4 +1,4 @@
-import { OsaaminenValue } from '@/components';
+import type { OsaaminenValue } from '@/components';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
@@ -11,7 +11,8 @@ interface AddedTagProps {
 }
 const AddedTags = ({ osaamiset, lahdetyyppi, onClick }: AddedTagProps) =>
   osaamiset.map((osaaminen) => {
-    let sourceType;
+    type TagProps = React.ComponentProps<typeof Tag>;
+    let sourceType: TagProps['sourceType'];
 
     if (lahdetyyppi) {
       sourceType = OSAAMINEN_COLOR_MAP[lahdetyyppi];
@@ -23,7 +24,7 @@ const AddedTags = ({ osaamiset, lahdetyyppi, onClick }: AddedTagProps) =>
 
     return (
       <Tag
-        key={osaaminen.id}
+        key={osaaminen.id + sourceType}
         label={getLocalizedText(osaaminen.nimi)}
         tooltip={getLocalizedText(osaaminen.kuvaus)}
         sourceType={sourceType}
