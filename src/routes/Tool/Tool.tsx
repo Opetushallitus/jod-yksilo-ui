@@ -162,6 +162,7 @@ const ExploreOpportunities = () => {
               ammattiryhmaNimet={ammattiryhmaNimet}
               aineisto={mahdollisuus.aineisto}
               tyyppi={mahdollisuus.tyyppi}
+              kesto={mahdollisuus.kesto}
               yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
               type={mahdollisuusTyyppi}
               rateId={id}
