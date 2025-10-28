@@ -5,6 +5,7 @@ import { CounselingBanner } from '@/components/CounselingBanner/CounselingBanner
 import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
+import { NOT_AVAILABLE_LABEL } from '@/constants';
 import { useToolStore } from '@/stores/useToolStore';
 import { formatDate, getLocalizedText, hashString, sortByProperty } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
@@ -116,21 +117,21 @@ const JobOpportunity = () => {
               <div className="flex sm:flex-row flex-col justify-around text-center gap-9 sm:my-8 my-4">
                 <div>
                   <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
-                    {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka || '---'} €
+                    {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka ?? NOT_AVAILABLE_LABEL} €
                   </h4>
                   <p>{t('job-opportunity.salary-data.lowest-decile')}</p>
                 </div>
 
                 <div>
                   <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
-                    {tyomahdollisuus?.palkkatiedot?.mediaaniPalkka || '---'} €
+                    {tyomahdollisuus?.palkkatiedot?.mediaaniPalkka ?? NOT_AVAILABLE_LABEL} €
                   </h4>
                   <p>{t('job-opportunity.salary-data.median')}</p>
                 </div>
 
                 <div>
                   <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
-                    {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka || '---'} €
+                    {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka ?? NOT_AVAILABLE_LABEL} €
                   </h4>
                   <p>{t('job-opportunity.salary-data.highest-decile')}</p>
                 </div>

@@ -1,11 +1,12 @@
 import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
+import { getTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import { osaamiset } from '@/api/osaamiset';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import i18n from '@/i18n/config';
 import { usePolutStore } from '@/stores/usePolutStore';
 import { removeDuplicates, sortByProperty } from '@/utils';
-import { LoaderFunction } from 'react-router';
+import type { LoaderFunction } from 'react-router';
 
 const loader = (async ({ request, params }) => {
   const { tavoiteId, suunnitelmaId } = params;
@@ -65,10 +66,15 @@ const loader = (async ({ request, params }) => {
 
     const { data: mahdollisuus } = await mahdollisuusFetch;
 
+    // Have to get ammattiryhmä basic DTO data separately, as mahdollisuus details endpoint only returns uri,
+    // This data is used to populate the ammatiryhmä name and median salary in UI.
+    let ammattiryhma: components['schemas']['AmmattiryhmaBasicDto'] | undefined;
+
     if (tavoite.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS') {
-      const m = mahdollisuus as components['schemas']['TyomahdollisuusDto'];
+      const m = mahdollisuus as components['schemas']['TyomahdollisuusFullDto'];
       const ammattiryhmaNimet: Record<string, components['schemas']['LokalisoituTeksti']> = {};
-      const ammattiryhmaUris = m.ammattiryhma?.uri ? [m.ammattiryhma.uri] : [];
+      ammattiryhma = (await getTyoMahdollisuusDetails([m.id]).then((details) => details[0])).ammattiryhma;
+      const ammattiryhmaUris = ammattiryhma?.uri ? [ammattiryhma.uri] : [];
 
       if (ammattiryhmaUris.length > 0) {
         const ammattiryhmat = await ammatit.find(ammattiryhmaUris);
@@ -94,7 +100,7 @@ const loader = (async ({ request, params }) => {
     polkuStore.setOsaamisetFromProfile(profiiliOsaamiset.map((osaaminen) => osaaminen.osaaminen));
     polkuStore.setPolutLoading(false);
 
-    return { tavoite, mahdollisuus, vaaditutOsaamiset, profiiliOsaamiset };
+    return { tavoite, mahdollisuus, vaaditutOsaamiset, profiiliOsaamiset, ammattiryhma };
   }
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
 export type PathLoaderData = Awaited<ReturnType<typeof loader>>;

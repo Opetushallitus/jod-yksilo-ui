@@ -1,8 +1,17 @@
 {
   "filters": "Suodattimet",
   "tool": {
+    "education-opportunity-duration": "Keskimääräinen kesto",
+    "education-opportunity-duration-tooltip": "Koulutuksen kesto kertoo, kuinka kauan koulutus tavallisesti kestää. Se ilmaistaan yleensä vuosina tai kuukausina ja perustuu koulutuksen laajuuteen ja opintojen etenemiseen normaalissa tahdissa.",
+    "education-opportunity-koulutusala": "Yleisin koulutusala",
+    "education-opportunity-koulutusala-tooltip": "Koulutusala tarkoittaa ryhmää, johon koulutukset jaotellaan sen mukaan, mihin tieteen, yhteiskunnan tai työelämän alaan ne liittyvät.",
     "settings": {
       "controls": "Säätimet"
     }
-  }
+  },
+  "n-months-short": "{{count}} kk",
+  "n-months_one": "{{count}} kuukausi",
+  "n-months_other": "{{count}} kuukautta",
+  "n-years_one": "{{count}} vuosi",
+  "n-years_other": "{{count}} vuotta"
 }

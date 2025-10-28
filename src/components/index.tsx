@@ -12,5 +12,5 @@ export { HelpingToolLinkItem, HelpingToolProfileLinkItem } from './HelpingToolsC
 export type { HelpingToolLinkItemProps, HelpingToolProfileLinkItemProps } from './HelpingToolsContent';
 export { MainLayout } from './MainLayout/MainLayout';
 export { SimpleNavigationList } from './MainLayout/SimpleNavigationList';
-export { OpportunityCard } from './OpportunityCard/OpportunityCard';
+export { OpportunityCard, type OpportunityCardProps } from './OpportunityCard';
 export { OsaamisSuosittelija, type Osaaminen, type OsaaminenValue } from './OsaamisSuosittelija/OsaamisSuosittelija';

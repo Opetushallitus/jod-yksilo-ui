@@ -1,17 +1,16 @@
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { FavoriteToggle } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDropdown';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
-import type { MahdollisuusTyyppi } from '@/routes/types';
-import { getLocalizedText } from '@/utils';
-import { cx } from '@jod/design-system';
-import { JodInfo } from '@jod/design-system/icons';
+import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
+import { tidyClasses as tc } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router';
-import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
+import { EducationOpportunityCard } from './EducationOpportunityCard';
+import { JobOpportunityCard } from './JobOpportunityCard';
 
 type FavoriteProps =
   | {
@@ -39,35 +38,32 @@ type MenuProps =
       menuId?: never;
     };
 
-type OpportunityCardProps = {
-  ammattiryhma?: components['schemas']['AmmattiryhmaBasicDto'];
+export type EducationOpportunityData = Pick<TypedMahdollisuus, 'kesto' | 'tyyppi' | 'yleisinKoulutusala'>;
+export type JobOpportunityData = Pick<TypedMahdollisuus, 'aineisto' | 'ammattiryhma'> & {
   ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
+};
+
+interface BaseProps {
   as?: React.ElementType;
   to?: string;
   name: string;
   description: string;
-  aineisto?: components['schemas']['TyomahdollisuusDto']['aineisto'];
+  cardTypeTitle?: string;
   matchValue?: number;
   matchLabel?: string;
   type: MahdollisuusTyyppi;
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   from?: 'tool' | 'favorite' | 'path' | 'goal';
-  tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
   rateId?: string;
-} & FavoriteProps &
-  MenuProps;
+  children?: React.ReactNode;
+  matchValueBgColorClassName?: string;
+}
 
-const OpportunityDetail = ({ title, value, icon }: { title: string; value: string; icon: React.ReactNode }) => {
-  return (
-    <div className="flex flex-col">
-      <div className="text-body-xs flex gap-4 items-center">
-        <span>{title}:</span>
-        {icon}
-      </div>
-      <div className="text-heading-3 text-secondary-1-dark">{value}</div>
-    </div>
-  );
-};
+export type OpportunityCardProps = BaseProps &
+  FavoriteProps &
+  MenuProps &
+  JobOpportunityData &
+  EducationOpportunityData;
 
 interface ActionsSectionProps {
   hideFavorite: boolean;
@@ -99,18 +95,16 @@ const ActionsSection = ({
   );
 };
 
-export const OpportunityCard = ({
+export const OpportunityCardWrapper = ({
   as: Component = 'div',
+  children,
   to,
   from,
   description,
-  ammattiryhma,
-  ammattiryhmaNimet,
+  cardTypeTitle,
   matchLabel,
   matchValue,
   name,
-  aineisto,
-  tyyppi,
   type,
   toggleFavorite,
   isFavorite,
@@ -118,6 +112,7 @@ export const OpportunityCard = ({
   hideFavorite,
   headingLevel,
   menuContent,
+  matchValueBgColorClassName = 'bg-secondary-4-dark',
   menuId,
   rateId,
 }: OpportunityCardProps) => {
@@ -150,13 +145,6 @@ export const OpportunityCard = ({
     }
   };
 
-  const cardTypeTitle = React.useMemo(() => {
-    if (type === 'TYOMAHDOLLISUUS') {
-      return t(`opportunity-type.work.${aineisto || 'TMT'}`);
-    } else {
-      return t(`opportunity-type.education.${tyyppi || 'EI_TUTKINTO'}`);
-    }
-  }, [type, t, aineisto, tyyppi]);
   return (
     <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border" data-testid="opportunity-card">
       <div className="order-2 flex flex-col">
@@ -190,48 +178,7 @@ export const OpportunityCard = ({
           </TitleTag>
         )}
         <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
-        <div className="flex flex-col mt-5 gap-3">
-          {type === 'TYOMAHDOLLISUUS' && ammattiryhma ? (
-            <>
-              <OpportunityDetail
-                title={t('tool.job-opportunity-is-part-of-group')}
-                value={
-                  ammattiryhmaNimet !== undefined && ammattiryhma?.uri
-                    ? getLocalizedText(ammattiryhmaNimet[ammattiryhma.uri])
-                    : ''
-                }
-                icon={
-                  <TooltipWrapper
-                    tooltipPlacement="top"
-                    tooltipContent={
-                      <div className="text-body-xs max-w-[290px] leading-5">
-                        {t('tool.job-opportunity-is-part-of-group-tooltip')}
-                      </div>
-                    }
-                  >
-                    <JodInfo size={18} className="text-[#999]" />
-                  </TooltipWrapper>
-                }
-              />
-              <OpportunityDetail
-                title={t('tool.job-opportunity-median-salary')}
-                value={`${ammattiryhma.mediaaniPalkka?.toString() || '---'} ${t('tool.salary-suffix')}`}
-                icon={
-                  <TooltipWrapper
-                    tooltipPlacement="top"
-                    tooltipContent={
-                      <div className="text-body-xs max-w-[290px] leading-5">
-                        {t('tool.job-opportunity-median-salary-tooltip')}
-                      </div>
-                    }
-                  >
-                    <JodInfo size={18} className="text-[#999]" />
-                  </TooltipWrapper>
-                }
-              />
-            </>
-          ) : null}
-        </div>
+        <div className="flex flex-col mt-5 gap-3">{children}</div>
       </div>
       <div
         className={`flex flex-col sm:flex-row items-start sm:items-center gap-x-7 gap-y-5 mb-5 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
@@ -239,10 +186,10 @@ export const OpportunityCard = ({
       >
         {typeof matchValue === 'number' && matchLabel && (
           <div
-            className={cx('flex flex-nowrap gap-x-3 items-center px-4 text-white rounded-full select-none', {
-              'bg-[#AD4298]': type === 'TYOMAHDOLLISUUS',
-              'bg-[#00818A]': type === 'KOULUTUSMAHDOLLISUUS',
-            })}
+            className={tc([
+              'flex flex-nowrap gap-x-3 items-center px-4 text-white rounded-full select-none',
+              matchValueBgColorClassName,
+            ])}
             data-testid="opportunity-card-match"
           >
             <span className="text-heading-2-mobile leading-8">{Math.round(matchValue * 100)}%</span>
@@ -260,5 +207,23 @@ export const OpportunityCard = ({
         />
       </div>
     </Component>
+  );
+};
+
+export const OpportunityCard = (props: OpportunityCardProps) => {
+  return props.type === 'KOULUTUSMAHDOLLISUUS' ? (
+    <EducationOpportunityCard
+      {...props}
+      tyyppi={props.tyyppi}
+      kesto={props.kesto}
+      yleisinKoulutusala={props.yleisinKoulutusala}
+    />
+  ) : (
+    <JobOpportunityCard
+      {...props}
+      aineisto={props.aineisto}
+      ammattiryhma={props.ammattiryhma}
+      ammattiryhmaNimet={props.ammattiryhmaNimet}
+    />
   );
 };

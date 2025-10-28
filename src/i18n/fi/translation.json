@@ -692,10 +692,6 @@
       "goal": "Päämäärä",
       "has-competence": "Osaan",
       "ignore": "Älä huomioi",
-      "n-months_one": "{{count}} kuukausi",
-      "n-months_other": "{{count}} kuukautta",
-      "n-years_one": "{{count}} vuosi",
-      "n-years_other": "{{count}} vuotta",
       "of-education": "Koulutuksen",
       "of-work": "Työharjoittelun",
       "phase-n-details": "Vaiheen {{count}} tiedot",
@@ -785,16 +781,16 @@
             "item2": "koulutusmahdollisuudet",
             "item3": "mahdollisuuksien sopivuuden laskeminen"
           },
-          "tyomahdollisuus": {
-            "item1": "mahdollisuuden nimi",
-            "item2": "kuvaus",
-            "item3": "työpaikkailmoitusten erityispiirteet"
-          },
           "koulutusmahdollisuus": {
             "item1": "mahdollisuuden nimi",
             "item2": "kuvaus",
             "item3": "osaamiset",
             "item4": "koulutuksen erityispiirteet"
+          },
+          "tyomahdollisuus": {
+            "item1": "mahdollisuuden nimi",
+            "item2": "kuvaus",
+            "item3": "työpaikkailmoitusten erityispiirteet"
           }
         },
         "question": "Voisitko kertoa tarkemmin, mikä ei toiminut?"

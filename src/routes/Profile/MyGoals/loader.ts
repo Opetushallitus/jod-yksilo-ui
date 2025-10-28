@@ -5,6 +5,7 @@ import { components } from '@/api/schema';
 import { TypedMahdollisuus } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
+import { mapKoulutusCodesToLabels } from '@/utils/codes/codes';
 import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
@@ -22,7 +23,9 @@ export default (async ({ request }) => {
   }
 
   if (koulutusPaamarat.length > 0) {
-    koulutusMahdollisuudetDetails = await getTypedKoulutusMahdollisuusDetails(koulutusPaamarat.map(mapToIds));
+    koulutusMahdollisuudetDetails = await getTypedKoulutusMahdollisuusDetails(koulutusPaamarat.map(mapToIds)).then(
+      mapKoulutusCodesToLabels,
+    );
   }
 
   const ammattiryhmaNimet: Record<string, components['schemas']['LokalisoituTeksti']> = {};

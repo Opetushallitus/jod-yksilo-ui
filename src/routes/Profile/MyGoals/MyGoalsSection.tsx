@@ -1,4 +1,4 @@
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
 import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
 import { useEnvironment } from '@/hooks/useEnvironment';
@@ -80,6 +80,8 @@ const MyGoalsSection = ({ title, description, icon, tavoitteet }: MyGoalsSection
                 aineisto={details.aineisto}
                 tyyppi={details.tyyppi}
                 type={mahdollisuusTyyppi}
+                kesto={details.kesto}
+                yleisinKoulutusala={details.yleisinKoulutusala}
                 headingLevel="h3"
                 menuContent={
                   <MyGoalsOpportunityCardMenu
