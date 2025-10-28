@@ -46,18 +46,18 @@ const VaiheCardMenu = ({
   const { t } = useTranslation();
   const revalidator = useRevalidator();
   const { showDialog } = useModal();
-  const { suunnitelmaId, paamaaraId } = useParams<PolkuQueryParams>();
+  const { suunnitelmaId, tavoiteId } = useParams<PolkuQueryParams>();
 
   const deleteVaihe = async () => {
-    if (!paamaaraId || !suunnitelmaId) {
+    if (!tavoiteId || !suunnitelmaId) {
       return;
     }
 
-    await client.DELETE(`/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}`, {
+    await client.DELETE(`/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}`, {
       params: {
         path: {
           vaiheId: vaiheId,
-          id: paamaaraId,
+          id: tavoiteId,
           suunnitelmaId,
         },
       },

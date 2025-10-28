@@ -5,8 +5,8 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import MyGoalsOpportunityCardMenu from '@/routes/Profile/MyGoals/MyGoalsOpportunityCardMenu';
 import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
-import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
+import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLocalizedText } from '@/utils';
 import { Button, Modal, PageChangeDetails, Pagination, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -78,7 +78,7 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
     })),
   );
 
-  const paamaarat = usePaamaaratStore((state) => state.paamaarat);
+  const tavoitteet = useTavoitteetStore((state) => state.tavoitteet);
   const [listItems, setListItems] = React.useState<TypedMahdollisuus[]>([]);
 
   const goalsId = React.useId();
@@ -110,14 +110,14 @@ const AddGoalModal = ({ isOpen, onClose }: AddGoalModalProps) => {
 
   // Show only items that are not already in goals
   React.useEffect(() => {
-    setListItems(favoritesPerType.filter((item) => !paamaarat.find((pm) => pm.mahdollisuusId === item.id)));
-  }, [favoritesPerType, paamaarat]);
+    setListItems(favoritesPerType.filter((item) => !tavoitteet.find((pm) => pm.mahdollisuusId === item.id)));
+  }, [favoritesPerType, tavoitteet]);
 
   // Initial fetch. Fetch suosikit in case päämäärät have been updated, otherwise
   // page data won't be updated correctly.
   React.useEffect(() => {
     const fetchData = async () => {
-      const newExcludeIds = paamaarat.map((pm) => pm.mahdollisuusId);
+      const newExcludeIds = tavoitteet.map((pm) => pm.mahdollisuusId);
       const previousExcludedIds = [...excludedIds];
 
       if (previousExcludedIds.length !== newExcludeIds.length) {

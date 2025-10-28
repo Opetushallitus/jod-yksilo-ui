@@ -7,21 +7,21 @@ import { useTranslation } from 'react-i18next';
 
 interface DeletePolkuButtonProps {
   name?: string | components['schemas']['LokalisoituTeksti'];
-  paamaaraId?: string;
+  tavoiteId?: string;
   suunnitelmaId?: string;
   className?: string;
   onDelete?: () => void;
 }
-const DeletePolkuButton = ({ paamaaraId, suunnitelmaId, className, name, onDelete }: DeletePolkuButtonProps) => {
+const DeletePolkuButton = ({ tavoiteId, suunnitelmaId, className, name, onDelete }: DeletePolkuButtonProps) => {
   const { t } = useTranslation();
   const { showDialog } = useModal();
 
   const deletePolku = async () => {
-    if (!paamaaraId || !suunnitelmaId) {
+    if (!tavoiteId || !suunnitelmaId) {
       return;
     }
-    const { error } = await client.DELETE('/api/profiili/paamaarat/{id}/suunnitelmat/{suunnitelmaId}', {
-      params: { path: { id: paamaaraId, suunnitelmaId } },
+    const { error } = await client.DELETE('/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}', {
+      params: { path: { id: tavoiteId, suunnitelmaId } },
     });
 
     if (!error) {
@@ -31,7 +31,7 @@ const DeletePolkuButton = ({ paamaaraId, suunnitelmaId, className, name, onDelet
 
   const polkuName = typeof name === 'string' ? name : getLocalizedText(name);
 
-  return paamaaraId && suunnitelmaId ? (
+  return tavoiteId && suunnitelmaId ? (
     <div className={className ?? ''}>
       <Button
         label={t('profile.paths.delete-path')}

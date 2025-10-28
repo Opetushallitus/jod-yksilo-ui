@@ -3,7 +3,7 @@ import { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
-import { usePaamaaratStore } from '@/stores/usePaamaaratStore';
+import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Textarea } from '@jod/design-system';
 import React from 'react';
@@ -12,13 +12,13 @@ import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
 interface TavoiteInputProps {
-  paamaara: components['schemas']['PaamaaraDto'];
+  goal: components['schemas']['TavoiteDto'];
 }
 
 /**
  * Input field for goal description
  */
-const TavoiteInput = ({ paamaara }: TavoiteInputProps) => {
+const TavoiteInput = ({ goal }: TavoiteInputProps) => {
   const {
     t,
     i18n: { language },
@@ -26,9 +26,9 @@ const TavoiteInput = ({ paamaara }: TavoiteInputProps) => {
   const [saved, setSaved] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const saveText = loading ? t('save-in-progress') : t('saved');
-  const tavoite = React.useMemo(() => paamaara.tavoite ?? {}, [paamaara]);
+  const tavoite = React.useMemo(() => goal.tavoite ?? {}, [goal]);
   const [debouncedValue, inputValue, setDebouncedValue] = useDebounceState(tavoite[language] || '', 1000);
-  const updatePaamaara = usePaamaaratStore((state) => state.upsertPaamaara);
+  const updateTavoite = useTavoitteetStore((state) => state.upsertTavoite);
 
   const methods = useForm<{
     tavoite: components['schemas']['LokalisoituTeksti'];
@@ -90,26 +90,26 @@ const TavoiteInput = ({ paamaara }: TavoiteInputProps) => {
       }
       if (Object.keys(errors).length > 0) {
         setSaved(false);
-      } else if (paamaara.id && debouncedValue !== tavoite[language]) {
-        const newPaamaara = {
-          ...paamaara,
+      } else if (goal.id && debouncedValue !== tavoite[language]) {
+        const newTavoite = {
+          ...goal,
           tavoite: {
-            ...paamaara.tavoite,
+            ...goal.tavoite,
             [language]: debouncedValue,
           },
         };
         setLoading(true);
-        await client.PUT('/api/profiili/paamaarat/{id}', {
-          body: newPaamaara,
-          params: { path: { id: paamaara.id } },
+        await client.PUT('/api/profiili/tavoitteet/{id}', {
+          body: newTavoite,
+          params: { path: { id: goal.id } },
         });
         setLoading(false);
         setSaved(true);
-        updatePaamaara(newPaamaara);
+        updateTavoite(newTavoite);
       }
     };
     save();
-  }, [debouncedValue, errors, paamaara, tavoite, updatePaamaara, language]);
+  }, [debouncedValue, errors, tavoite, goal, updateTavoite, language]);
 
   const formId = React.useId();
   return (
