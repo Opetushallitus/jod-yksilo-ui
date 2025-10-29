@@ -28,11 +28,14 @@ export const osaamiset = {
       key,
       combiner,
       async (chunk, signal) => {
+        let skillsResult;
         const skills = chunk.filter((uri) => !uri.startsWith(ESCO_OCCUPATION_PREFIX));
-        const skillsResult = await client.GET('/api/osaamiset', {
-          signal,
-          params: { query: { uri: skills, sivu: 0, koko: skills.length } },
-        });
+        if (skills.length > 0) {
+          skillsResult = await client.GET('/api/osaamiset', {
+            signal,
+            params: { query: { uri: skills, sivu: 0, koko: skills.length } },
+          });
+        }
 
         let occupationsResult;
         const occupations = chunk.filter((uri) => uri.startsWith(ESCO_OCCUPATION_PREFIX));
@@ -48,7 +51,7 @@ export const osaamiset = {
             kuvaus: osaaminen.kuvaus ?? {},
           }));
         }
-        return [...(skillsResult.data?.sisalto ?? []), ...(occupationsResult ?? [])];
+        return [...(skillsResult?.data?.sisalto ?? []), ...(occupationsResult ?? [])];
       },
       signal,
     );
