@@ -122,7 +122,7 @@ const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) 
   const isEmpty = !jakauma?.arvot || jakauma?.arvot.length === 0;
 
   return (
-    <div className="md:col-span-1 col-span-2 border-l-2 border-border-gray pl-4">
+    <div className="md:col-span-1 print:col-span-1 col-span-2 border-l-2 border-border-gray pl-4">
       <h4 className="text-heading-4 pb-2">{jakaumaHeadingTranslations[name]}</h4>
       {isEmpty ? (
         <div className="flex flex-col gap-3">
