@@ -1,10 +1,5 @@
 {
   "add-favorite": "Tallenna suosikiksi",
-  "ai-info-tooltip": {
-    "aria-description": "Tietoa tekoälyn käytöstä",
-    "description": "Olemme käyttäneet tämän sisällön luomisessa hyödyksi kielimallia. Lisää tietoa voit lukea <CustomLink>Tekoäly ja Osaamispolku<Icon></Icon></CustomLink>-sivulta.",
-    "title": "Tekoälyn avulla generoitu sisältö"
-  },
   "allow": "Salli",
   "beta": {
     "note": {

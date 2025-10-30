@@ -183,10 +183,10 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           <IconHeading
             icon={<TitleIcon tyyppi={tyyppi} aineisto={jobData.aineisto} />}
             title={
-              <span>
-                {title}
-                {showAiInfoInTitle && <span className="relative print:hidden ml-2">{<AiInfo />}</span>}
-              </span>
+              <div className="flex">
+                <div>{title}</div>
+                {showAiInfoInTitle && <div className="mt-[-2%] ml-1 print:hidden">{<AiInfo type="opportunity" />}</div>}
+              </div>
             }
             dataTestId="opportunity-details-title"
           />
@@ -233,7 +233,6 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
               appendix={section.titleAppendix}
               heading="h2"
               className={`text-heading-2 ${(section.showNavTitle ?? true) ? 'mb-3' : 'text-transparent text-[0px] size-0'}`}
-              hasAiContent={section.showAiInfoInTitle}
             />
             <div className="flex flex-row justify-between">{section.content}</div>
             {(section.showDivider ?? true) && <div className="border-b border-border-gray" />}

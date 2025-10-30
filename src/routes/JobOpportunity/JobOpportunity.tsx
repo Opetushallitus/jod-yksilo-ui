@@ -1,5 +1,5 @@
 import tmtLogo from '@/../assets/tyomarkkinatori.svg';
-import { AiInfo } from '@/components';
+import { AiInfo } from '@/components/AiInfo/AiInfo';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import { CounselingCard } from '@/components/CounselingCard/CounselingCard';
 import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
@@ -200,7 +200,13 @@ const JobOpportunity = () => {
     },
   ];
   return (
-    <OpportunityDetails data={tyomahdollisuus} isLoggedIn={isLoggedIn} tyyppi="TYOMAHDOLLISUUS" sections={sections} />
+    <OpportunityDetails
+      data={tyomahdollisuus}
+      isLoggedIn={isLoggedIn}
+      tyyppi="TYOMAHDOLLISUUS"
+      sections={sections}
+      showAiInfoInTitle={tyomahdollisuus.aineisto === 'TMT'}
+    />
   );
 };
 

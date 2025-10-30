@@ -1,5 +1,5 @@
 import type { components } from '@/api/schema';
-import { Breadcrumb, OpportunityCard } from '@/components';
+import { AiInfo, Breadcrumb, OpportunityCard } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
@@ -94,7 +94,7 @@ const ExploreOpportunities = () => {
 
   return (
     <>
-      <div className="sticky top-[120px] lg:top-[66px] z-10 bg-bg-gray -mx-1 px-1 lg:pt-4">
+      <div className="sticky top-[120px] lg:top-[66px] not:lg:z-10 bg-bg-gray -mx-1 px-1 lg:pt-4">
         <div className="flex items-center justify-end h-9 lg:pb-4 not-lg:bg-white not-lg:w-full lg:justify-between not-lg:mb-3 not-lg:px-4">
           {lg && (
             <h2 id="opportunities-title" tabIndex={-1} className="text-heading-2-mobile sm:text-heading-2">
@@ -304,8 +304,9 @@ const Tool = () => {
       <div className="mb-6">
         <Breadcrumb />
       </div>
-      <div>
+      <div className="flex">
         <IconHeading icon={<JodCompass className="text-white" />} title={t('tool.title')} dataTestId="tool-title" />
+        <div className="ml-1 print:hidden">{<AiInfo />}</div>
       </div>
       <p className="text-body-lg-mobile sm:text-body-lg mb-7 sm:mb-9 max-w-[700px]" ref={scrollRef}>
         {t('tool.description')}
