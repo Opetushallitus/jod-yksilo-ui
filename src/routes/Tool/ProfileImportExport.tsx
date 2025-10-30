@@ -195,11 +195,18 @@ const CompetenceImport = () => {
       ...storeOsaamiset.filter((o) => o.tyyppi === 'KARTOITETTU'),
     ];
 
-    // Remove duplicates per category, so that the same competence can be visible under different categories,
-    // but not multiple times under the same category.
+    // Count occurrences for each id
+    const occurrences = currentAndImportedSkills.reduce(
+      (acc, item) => {
+        acc[item.id] = (acc[item.id] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+    // Remove duplicates and sort by occurrence count
     const filtered = Array.from(
       new Map(currentAndImportedSkills.map((item) => [item.id + item.tyyppi, item])).values(),
-    );
+    ).sort((a, b) => occurrences[b.id] - occurrences[a.id]);
 
     setOsaamiset(filtered);
 
