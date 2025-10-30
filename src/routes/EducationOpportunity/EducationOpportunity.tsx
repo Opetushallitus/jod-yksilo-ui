@@ -1,5 +1,6 @@
 import opintopolkuLogo from '@/../assets/opintopolku.svg';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
+import { CounselingCard } from '@/components/CounselingCard/CounselingCard';
 import { EducationJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
@@ -18,7 +19,7 @@ import { useShallow } from 'zustand/shallow';
 const EducationOpportunity = () => {
   const { jakaumat, koulutusmahdollisuus, osaamiset, isLoggedIn } = useLoaderData<LoaderData>();
   const { kuvaus, kesto } = koulutusmahdollisuus;
-  const { sm } = useMediaQueries();
+  const { sm, lg } = useMediaQueries();
   const {
     t,
     i18n: { language },
@@ -77,7 +78,9 @@ const EducationOpportunity = () => {
         <div className="flex flex-col gap-6 grow">
           <span className="font-arial">{t('education-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} mode="kiinnostus" />
-          {!sm && <RateAiContent variant="koulutusmahdollisuus" area="Koulutusmahdollisuus" />}
+          {!lg && koulutusmahdollisuus.tyyppi === 'EI_TUTKINTO' && (
+            <RateAiContent variant="koulutusmahdollisuus" area="Koulutusmahdollisuus" />
+          )}
         </div>
       ),
     },
@@ -87,22 +90,33 @@ const EducationOpportunity = () => {
       showInDevOnly: false,
       showDivider: sm,
       content: (
-        <div className="bg-white p-6 flex flex-col gap-7 mb-8">
-          <h3 className="sm:text-heading-2 text-heading-2-mobile">
-            {t('education-opportunity.education-characteristics')}
-          </h3>
-          <div className="grid w-full grow grid-cols-2 gap-6">
-            {(Object.keys(jakaumat) as JakaumaKey[])
-              .filter((key) => !['osaaminen', 'ammatti'].includes(key))
-              .map((key) => (
-                <EducationJakaumaList key={key} name={key} />
-              ))}
+        <div className="flex flex-col w-full">
+          <div
+            className="bg-white p-6 flex flex-col gap-7 lg:mb-9 mb-7"
+            data-testid="education-opportunity-statistics-section"
+          >
+            <h3 className="sm:text-heading-2 text-heading-2-mobile">
+              {t('education-opportunity.education-characteristics')}
+            </h3>
+            <div className="grid w-full grow grid-cols-2 gap-6">
+              {(Object.keys(jakaumat) as JakaumaKey[])
+                .filter((key) => !['osaaminen', 'ammatti'].includes(key))
+                .map((key) => (
+                  <EducationJakaumaList key={key} name={key} />
+                ))}
+            </div>
           </div>
+          {!lg && (
+            <div className="mb-9">
+              <CounselingCard />
+            </div>
+          )}
         </div>
       ),
     },
     {
       navTitle: t('education-opportunity.open-educations'),
+      showDivider: false,
       showNavTitle: false,
       content: (
         <div className="flex flex-col w-full mb-9" data-testid="education-opportunity-opintopolku-section">

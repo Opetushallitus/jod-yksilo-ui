@@ -26,7 +26,7 @@ interface LanguageOptions {
   value: LanguageValue;
 }
 
-const Separator = () => <hr aria-hidden className="ds:my-4 ds:h-1 ds:bg-bg-gray-2 ds:border-0" />;
+const Separator = () => <hr aria-hidden className="my-4 h-1 bg-bg-gray-2 border-0" />;
 
 interface InfoBlockProps {
   label: string;

@@ -1,9 +1,9 @@
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
+import { JodOpenInNew } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
 
-export const CounselingBanner = () => {
+export const CounselingCard = () => {
   const { t, i18n } = useTranslation();
 
   const links: Record<string, string> = {
@@ -12,23 +12,20 @@ export const CounselingBanner = () => {
     en: 'https://www.suomi.fi/service-catalog/osaamispolku',
   };
   const link = links[i18n.language] || links.fi;
+
   return (
-    <div className="bg-secondary-3 flex flex-col rounded-lg h-[271px] p-6 mt-4">
-      <div className="flex items-start mb-2">
-        <h2 className="text-heading-2 text-white mr-2">{t('service-catalog.header')}</h2>
-      </div>
-      <div className="flex items-center mb-2">
-        <p className="text-body-lg text-white">{t('service-catalog.description')}</p>
-      </div>
-      <div className="bg-white flex items-center justify-between w-fit h-9 rounded-[30px] mt-auto whitespace-nowrap">
+    <div className="flex flex-col bg-secondary-3 rounded-lg p-6 gap-3 text-white">
+      <h2 className="text-heading-2">{t('service-catalog.header')}</h2>
+      <div className="flex flex-col gap-6">
+        <p className="text-body-lg">{t('service-catalog.description')}</p>
         <Button
           label={t('move-to-service')}
           iconSide="right"
-          icon={<JodArrowRight size={24} />}
+          icon={<JodOpenInNew size={24} ariaLabel={t('external-link')} />}
           variant="white"
           LinkComponent={getLinkTo(link, { useAnchor: true, target: '_blank' })}
           data-testid="counseling-banner-button"
-        ></Button>
+        />
       </div>
     </div>
   );
