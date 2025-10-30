@@ -1,16 +1,16 @@
 {
   "ai-info-tooltip": {
     "aria-description": "Tietoa tekoälyn käytöstä",
-    "description-intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi kielimallia seuraavissa kohdissa:",
-    "description-1-item-1": "työmahdollisuudet,",
-    "description-1-item-2": "koulutusmahdollisuudet,",
-    "description-1-item-3": "mahdollisuuksien sopivuuden laskeminen.",
-    "description-2-item-1": "mahdollisuuden nimi,",
-    "description-2-item-2": "kuvaus",
-    "description-2-item-3": "osaamiset",
-    "description-2-item-4": "työpaikkailmoitusten erityispiirteet.",
-    "description-summary": "Lisää tietoa voit lukea <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink> -sivulta.",
-    "title": "Tekoälyn avulla generoitua sisältöä"
+    "description-opportunity-intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi kielimallia seuraavissa kohdissa:",
+    "description-tool-intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi tekoälyä seuraavissa kohdissa:",
+    "description-tool-item-1": "muut työmahdollisuudet",
+    "description-tool-item-2": "koulutusmahdollisuudet",
+    "description-tool-item-3": "yksilölliset ehdotukset sinulle sopivista mahdollisuuksista",
+    "description-opportunity-item-1": "mahdollisuuden nimi",
+    "description-opportunity-item-2": "kuvaus",
+    "description-opportunity-item-3": "yleisimmät työtehtävät",
+    "description-summary": "Lue lisää: <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink>",
+    "title": "Tekoälyn avulla luotua sisältöä"
   },
   "filters": "Suodattimet",
   "tool": {
