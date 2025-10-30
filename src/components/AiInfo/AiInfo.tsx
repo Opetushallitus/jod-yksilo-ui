@@ -38,6 +38,9 @@ export const AiInfo = ({ type = 'tool' }: AiInfoProps) => {
                 <li>{t('ai-info-tooltip.description-opportunity-item-2')}</li>
                 {type === 'job-opportunity' && <li>{t('ai-info-tooltip.description-opportunity-item-3')}</li>}
               </ul>
+              {type === 'education-opportunity' && (
+                <p className="mt-2">{t('ai-info-tooltip.description-opportunity-education-note')}</p>
+              )}
             </div>
           )}
         </div>
