@@ -6,7 +6,7 @@ const Link = ({ children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElemen
   return <a {...rest}>{children}</a>;
 };
 interface AiInfoProps {
-  type?: 'tool' | 'opportunity';
+  type?: 'tool' | 'education-opportunity' | 'job-opportunity';
 }
 
 // Wrapper component for DS AiInfoButton
@@ -21,20 +21,24 @@ export const AiInfo = ({ type = 'tool' }: AiInfoProps) => {
       <p className="font-semibold">{t('ai-info-tooltip.title')}</p>
       <div>
         <div>
-          {t('ai-info-tooltip.description-intro')}
           {type === 'tool' ? (
-            <ul className="list-disc ml-4">
-              <li>{t('ai-info-tooltip.description-1-item-1')}</li>
-              <li>{t('ai-info-tooltip.description-1-item-2')}</li>
-              <li>{t('ai-info-tooltip.description-1-item-3')}</li>
-            </ul>
+            <div>
+              {t('ai-info-tooltip.description-tool-intro')}
+              <ul className="list-disc ml-4">
+                <li>{t('ai-info-tooltip.description-tool-item-1')}</li>
+                <li>{t('ai-info-tooltip.description-tool-item-2')}</li>
+                <li>{t('ai-info-tooltip.description-tool-item-3')}</li>
+              </ul>
+            </div>
           ) : (
-            <ul className="list-disc ml-4">
-              <li>{t('ai-info-tooltip.description-2-item-1')}</li>
-              <li>{t('ai-info-tooltip.description-2-item-2')}</li>
-              <li>{t('ai-info-tooltip.description-2-item-3')}</li>
-              <li>{t('ai-info-tooltip.description-2-item-4')}</li>
-            </ul>
+            <div>
+              {t('ai-info-tooltip.description-opportunity-intro')}
+              <ul className="list-disc ml-4">
+                <li>{t('ai-info-tooltip.description-opportunity-item-1')}</li>
+                <li>{t('ai-info-tooltip.description-opportunity-item-2')}</li>
+                {type === 'job-opportunity' && <li>{t('ai-info-tooltip.description-opportunity-item-3')}</li>}
+              </ul>
+            </div>
           )}
         </div>
         <br />

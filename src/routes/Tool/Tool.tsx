@@ -306,7 +306,7 @@ const Tool = () => {
       </div>
       <div className="flex">
         <IconHeading icon={<JodCompass className="text-white" />} title={t('tool.title')} dataTestId="tool-title" />
-        <div className="ml-1 print:hidden">{<AiInfo />}</div>
+        <div className="ml-1 print:hidden">{<AiInfo type="tool" />}</div>
       </div>
       <p className="text-body-lg-mobile sm:text-body-lg mb-7 sm:mb-9 max-w-[700px]" ref={scrollRef}>
         {t('tool.description')}

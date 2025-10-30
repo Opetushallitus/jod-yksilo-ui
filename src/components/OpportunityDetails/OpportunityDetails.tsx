@@ -185,7 +185,11 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
             title={
               <div className="flex">
                 <div>{title}</div>
-                {showAiInfoInTitle && <div className="mt-[-2%] ml-1 print:hidden">{<AiInfo type="opportunity" />}</div>}
+                {showAiInfoInTitle && (
+                  <div className="mt-[-2%] ml-1 print:hidden">
+                    {<AiInfo type={tyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'education-opportunity' : 'job-opportunity'} />}
+                  </div>
+                )}
               </div>
             }
             dataTestId="opportunity-details-title"
