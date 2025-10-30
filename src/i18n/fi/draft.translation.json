@@ -9,6 +9,7 @@
     "description-opportunity-item-1": "mahdollisuuden nimi",
     "description-opportunity-item-2": "kuvaus",
     "description-opportunity-item-3": "yleisimmät työtehtävät",
+    "description-opportunity-education-note": "Olemme hyödyntäneet tekoälyä myös osaamisten tunnistamisessa koulutusmahdollisuuksille.",
     "description-summary": "Lue lisää: <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink>",
     "title": "Tekoälyn avulla luotua sisältöä"
   },
