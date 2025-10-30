@@ -22,7 +22,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
-import { CounselingBanner } from '../CounselingBanner/CounselingBanner';
+import { CounselingCard } from '../CounselingCard/CounselingCard';
 import { IconHeading } from '../IconHeading';
 import { RateAiContent } from '../RateAiContent/RateAiContent';
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
@@ -122,18 +122,18 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
       })),
     };
     return (
-      <>
-        <PageNavigation menuSection={menuSection} activeIndicator="dot" className={'mb-4'} />
-        {jobData.aineisto === 'TMT' && (
+      <div className="flex flex-col gap-6">
+        <PageNavigation menuSection={menuSection} activeIndicator="dot" />
+        {(jobData.aineisto === 'TMT' || educationData.tyyppi === 'EI_TUTKINTO') && (
           <RateAiContent
             variant={tyyppi === 'TYOMAHDOLLISUUS' ? 'tyomahdollisuus' : 'koulutusmahdollisuus'}
             area={tyyppi === 'TYOMAHDOLLISUUS' ? 'Työmahdollisuus' : 'Koulutusmahdollisuus'}
           />
         )}
-        <CounselingBanner />
-      </>
+        <CounselingCard />
+      </div>
     );
-  }, [t, sections, filterDevSections, tyyppi, jobData.aineisto]);
+  }, [t, sections, filterDevSections, tyyppi, jobData.aineisto, educationData.tyyppi]);
 
   const typeTooltip = React.useMemo(() => {
     if (tyyppi === 'TYOMAHDOLLISUUS') {

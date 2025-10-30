@@ -217,12 +217,12 @@ const YourInfo = () => {
         <AdditionalSupport />
       </ToolAccordion>
 
-      <RateAiContent variant="kohtaanto" area="Kohtaanto työkalu" />
+      <RateAiContent variant="kohtaanto" area="Kohtaanto työkalu" size="md" />
 
-      <div className="flex flex-col rounded-lg p-6 gap-5 mt-4 bg-secondary-1-dark-2">
-        <div className="text-heading-2 text-white mr-2">{t('profile.banner.title')}</div>
-        <p className="text-body-lg text-white">{t('profile.banner.description')}</p>
-        <div className="mt-4">
+      <div className="flex flex-col bg-secondary-1-dark-2 rounded-md px-5 py-6 gap-3 text-white">
+        <h2 className="text-heading-2">{t('profile.banner.title')}</h2>
+        <div className="flex flex-col gap-6">
+          <p className="text-body-lg">{t('profile.banner.description')}</p>
           <Button
             label={t('profile.banner.link-text')}
             variant="white"

@@ -1,7 +1,7 @@
 import tmtLogo from '@/../assets/tyomarkkinatori.svg';
 import { AiInfo } from '@/components';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
-import { CounselingBanner } from '@/components/CounselingBanner/CounselingBanner';
+import { CounselingCard } from '@/components/CounselingCard/CounselingCard';
 import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
@@ -22,7 +22,7 @@ const JobOpportunity = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { sm } = useMediaQueries();
+  const { lg } = useMediaQueries();
   const { tyomahdollisuus, osaamiset, isLoggedIn, ammattiryhma } = useLoaderData<LoaderData>();
   const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
   const competencesTableData = React.useMemo(
@@ -82,10 +82,9 @@ const JobOpportunity = () => {
         <div className="flex flex-col gap-6 mb-9 grow">
           <span className="font-arial">{t('job-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} />
-          {!sm && (
+          {!lg && (
             <>
               {tyomahdollisuus.aineisto === 'TMT' && <RateAiContent variant="tyomahdollisuus" area="Työmahdollisuus" />}
-              <CounselingBanner />
             </>
           )}
         </div>
@@ -149,20 +148,30 @@ const JobOpportunity = () => {
       navTitle: t('job-opportunity.job-advertisement-characteristics'),
       showNavTitle: false,
       content: (
-        <div className="bg-white p-6 flex flex-col gap-6 mb-9">
-          <div className="flex items-center gap-4">
-            <h3 className="text-heading-3">{t('job-opportunity.job-advertisement-characteristics')}</h3>
-            <AiInfo />
-          </div>
-          <p className="font-arial">{t('job-opportunity.job-advertisement-characteristics-description')}</p>
+        <div className="flex flex-col w-full">
+          <div
+            className="bg-white p-6 flex flex-col gap-6 lg:mb-9 mb-7"
+            data-testid="job-opportunity-statistics-section"
+          >
+            <div className="flex items-center gap-4">
+              <h3 className="text-heading-3">{t('job-opportunity.job-advertisement-characteristics')}</h3>
+              <AiInfo />
+            </div>
+            <p className="font-arial">{t('job-opportunity.job-advertisement-characteristics-description')}</p>
 
-          <div className="grid w-full grow grid-cols-2 gap-7">
-            <JobJakaumaList name="tyonJatkuvuus" />
-            <JobJakaumaList name="kielitaito" />
-            <JobJakaumaList name="koulutusala" />
-            <JobJakaumaList name="ajokortti" />
-            <JobJakaumaList name="rikosrekisteriote" />
+            <div className="grid w-full grow grid-cols-2 gap-7">
+              <JobJakaumaList name="tyonJatkuvuus" />
+              <JobJakaumaList name="kielitaito" />
+              <JobJakaumaList name="koulutusala" />
+              <JobJakaumaList name="ajokortti" />
+              <JobJakaumaList name="rikosrekisteriote" />
+            </div>
           </div>
+          {!lg && (
+            <div className="mb-9">
+              <CounselingCard />
+            </div>
+          )}
         </div>
       ),
     },

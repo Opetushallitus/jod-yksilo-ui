@@ -6,9 +6,10 @@ import { useParams } from 'react-router';
 interface RateAiContentProps {
   variant: 'kohtaanto' | 'tyomahdollisuus' | 'koulutusmahdollisuus';
   area: 'Kohtaanto työkalu' | 'Työmahdollisuus' | 'Koulutusmahdollisuus';
+  size?: React.ComponentProps<typeof RateAiContentCard>['size'];
 }
 
-export const RateAiContent = ({ variant, area }: RateAiContentProps) => {
+export const RateAiContent = ({ variant, area, size }: RateAiContentProps) => {
   const {
     t,
     i18n: { language },
@@ -54,12 +55,12 @@ export const RateAiContent = ({ variant, area }: RateAiContentProps) => {
           description: (
             <>
               <p>{t(`rate-ai-content.modal.description.intro`)}</p>
-              <ul className="ds:list-disc ds:ml-5">
+              <ul className="list-disc ml-5">
                 {listTexts[variant].map((item: string, index, array) => (
                   <li key={item}>{`${item}${index === array.length - 1 ? '.' : ','}`}</li>
                 ))}
               </ul>
-              <p className="ds:mt-4">{t(`rate-ai-content.modal.description.question`)}</p>
+              <p className="mt-4">{t(`rate-ai-content.modal.description.question`)}</p>
               <p>{t(`rate-ai-content.modal.description.help`)}</p>
             </>
           ),
@@ -102,6 +103,8 @@ export const RateAiContent = ({ variant, area }: RateAiContentProps) => {
           toast.error(t('rate-ai-content.toast-error'));
         }
       }}
+      size={size}
+      dataTestId="rate-ai-content"
     />
   );
 };
