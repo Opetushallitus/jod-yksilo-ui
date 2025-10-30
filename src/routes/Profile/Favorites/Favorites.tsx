@@ -2,7 +2,6 @@ import { MainLayout, OpportunityCard, SimpleNavigationList } from '@/components'
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
-import { filterValues } from '@/routes/Tool/utils.ts';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
@@ -149,16 +148,6 @@ const Favorites = () => {
     }
   }, [getFavoriteCountsForKaikki, selectedFilter, t]);
 
-  const getFilterValueForTools = React.useMemo(() => {
-    if (selectedFilter === 'TYOMAHDOLLISUUS') {
-      return filterValues.TYOMAHDOLLISUUS;
-    }
-    if (selectedFilter === 'KOULUTUSMAHDOLLISUUS') {
-      return filterValues.KOULUTUSMAHDOLLISUUS;
-    }
-    return filterValues.ALL;
-  }, [selectedFilter]);
-
   return (
     <MainLayout
       navChildren={
@@ -172,7 +161,7 @@ const Favorites = () => {
               handleFilterChange={handleFilterChange}
             />
           </SimpleNavigationList>
-          <ToolCard testId="favorites-go-to-tool" linkParams={`origin=favorites&filter=${getFilterValueForTools}`} />
+          <ToolCard testId="favorites-go-to-tool" />
         </div>
       }
     >
