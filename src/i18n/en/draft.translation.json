@@ -1,17 +1,32 @@
 {
   "filters": "Filters",
-  "tool": {
-    "education-opportunity-duration": "Average duration",
-    "education-opportunity-duration-tooltip": "The duration of the education opportunity indicates how long the education typically lasts. It is usually expressed in years or months and is based on the scope of the education and the normal pace of studies.",
-    "education-opportunity-koulutusala": "Most common field of education",
-    "education-opportunity-koulutusala-tooltip": "The field of education refers to the group into which educational programs are categorized based on the scientific, societal, or professional domain they relate to.",
-    "settings": {
-      "controls": "Controls"
-    }
-  },
   "n-months-short": "{{count}} mo",
   "n-months_one": "{{count}} month",
   "n-months_other": "{{count}} months",
   "n-years_one": "{{count}} year",
-  "n-years_other": "{{count}} years"
+  "n-years_other": "{{count}} years",
+  "tool": {
+    "competency-profile": {
+      "help": "Import competences from your competence profile to your overall data view. You can utilize previously saved competences when exploring opportunities. You can import all competences or only those you want."
+    },
+    "education-opportunity-duration": "Average duration",
+    "education-opportunity-duration-tooltip": "The duration of the education opportunity indicates how long the education typically lasts. It is usually expressed in years or months and is based on the scope of the education and the normal pace of studies.",
+    "education-opportunity-koulutusala": "Most common field of education",
+    "education-opportunity-koulutusala-tooltip": "The field of education refers to the group into which educational programs are categorized based on the scientific, societal, or professional domain they relate to.",
+    "info-overview": {
+      "mapped-interests": "Mapped interests"
+    },
+    "my-own-data": {
+      "competences": {
+        "import": {
+          "confirm-description": "Import competences from your competence profile to your overall data view. Select the competences you want from the list below.",
+          "failure-toast": "Import failed — please try again",
+          "success-toast": "Data imported successfully to the overall view"
+        }
+      }
+    },
+    "settings": {
+      "controls": "Controls"
+    }
+  }
 }

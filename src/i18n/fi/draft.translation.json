@@ -2,30 +2,45 @@
   "ai-info-tooltip": {
     "aria-description": "Tietoa tekoälyn käytöstä",
     "description-opportunity-intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi kielimallia seuraavissa kohdissa:",
-    "description-tool-intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi tekoälyä seuraavissa kohdissa:",
-    "description-tool-item-1": "muut työmahdollisuudet",
-    "description-tool-item-2": "koulutusmahdollisuudet",
-    "description-tool-item-3": "yksilölliset ehdotukset sinulle sopivista mahdollisuuksista",
     "description-opportunity-item-1": "mahdollisuuden nimi",
     "description-opportunity-item-2": "kuvaus",
     "description-opportunity-item-3": "yleisimmät työtehtävät",
     "description-opportunity-education-note": "Olemme hyödyntäneet tekoälyä myös osaamisten tunnistamisessa koulutusmahdollisuuksille.",
     "description-summary": "Lue lisää: <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink>",
+    "description-tool-intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi tekoälyä seuraavissa kohdissa:",
+    "description-tool-item-1": "muut työmahdollisuudet",
+    "description-tool-item-2": "koulutusmahdollisuudet",
+    "description-tool-item-3": "yksilölliset ehdotukset sinulle sopivista mahdollisuuksista",
     "title": "Tekoälyn avulla luotua sisältöä"
   },
   "filters": "Suodattimet",
-  "tool": {
-    "education-opportunity-duration": "Keskimääräinen kesto",
-    "education-opportunity-duration-tooltip": "Koulutuksen kesto kertoo, kuinka kauan koulutus tavallisesti kestää. Se ilmaistaan yleensä vuosina tai kuukausina ja perustuu koulutuksen laajuuteen ja opintojen etenemiseen normaalissa tahdissa.",
-    "education-opportunity-koulutusala": "Yleisin koulutusala",
-    "education-opportunity-koulutusala-tooltip": "Koulutusala tarkoittaa ryhmää, johon koulutukset jaotellaan sen mukaan, mihin tieteen, yhteiskunnan tai työelämän alaan ne liittyvät.",
-    "settings": {
-      "controls": "Säätimet"
-    }
-  },
   "n-months-short": "{{count}} kk",
   "n-months_one": "{{count}} kuukausi",
   "n-months_other": "{{count}} kuukautta",
   "n-years_one": "{{count}} vuosi",
-  "n-years_other": "{{count}} vuotta"
+  "n-years_other": "{{count}} vuotta",
+  "tool": {
+    "competency-profile": {
+      "help": "Tuo osaamisia osaamisprofiilistasi tietojesi kokonaiskuvaan. Voit hyödyntää aiemmin tallentamiasi osaamisia mahdollisuuksien kartoittamisessa. Voit tuoda kaikki osaamiset tai vain ne, jotka haluat."
+    },
+    "education-opportunity-duration": "Keskimääräinen kesto",
+    "education-opportunity-duration-tooltip": "Koulutuksen kesto kertoo, kuinka kauan koulutus tavallisesti kestää. Se ilmaistaan yleensä vuosina tai kuukausina ja perustuu koulutuksen laajuuteen ja opintojen etenemiseen normaalissa tahdissa.",
+    "education-opportunity-koulutusala": "Yleisin koulutusala",
+    "education-opportunity-koulutusala-tooltip": "Koulutusala tarkoittaa ryhmää, johon koulutukset jaotellaan sen mukaan, mihin tieteen, yhteiskunnan tai työelämän alaan ne liittyvät.",
+    "info-overview": {
+      "mapped-interests": "Kartoitetut kiinnostukset"
+    },
+    "my-own-data": {
+      "competences": {
+        "import": {
+          "confirm-description": "Tuo osaamisia osaamisprofiilistasi tietojesi kokonaiskuvaan. Valitse haluamasi osaamiset alla olevasta listasta.",
+          "failure-toast": "Tietojen tuonti epäonnistui — yritä uudelleen",
+          "success-toast": "Tiedot tuotu onnistuneesti kokonaiskuvaan"
+        }
+      }
+    },
+    "settings": {
+      "controls": "Säätimet"
+    }
+  }
 }
