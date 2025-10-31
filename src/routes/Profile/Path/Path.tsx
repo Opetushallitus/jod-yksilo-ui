@@ -481,7 +481,14 @@ const Path = () => {
             </div>
             {/* Osaamiset */}
             <div>
-              <table className="w-full" border={0} cellPadding={0} cellSpacing={0} data-testid="path-competences-table">
+              <table
+                className="w-full"
+                border={0}
+                cellPadding={0}
+                cellSpacing={0}
+                data-testid="path-competences-table"
+                aria-label={t('profile.paths.skill-progress')}
+              >
                 <thead className="bg-white">
                   <tr className="text-body-md text-left align-middle">
                     <th scope="col" className="font-arial text-form-label p-4">

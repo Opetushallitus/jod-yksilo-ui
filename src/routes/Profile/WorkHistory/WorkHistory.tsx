@@ -71,6 +71,7 @@ const WorkHistory = () => {
         </div>
       )}
       <ExperienceTable
+        ariaLabel={title}
         mainColumnHeader={t('work-history.workplace-or-job-description')}
         addNewLabel={t('work-history.add-new-workplace')}
         addNewNestedLabel={t('work-history.add-new-job-description')}

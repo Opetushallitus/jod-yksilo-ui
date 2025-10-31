@@ -23,6 +23,7 @@ interface ExperienceTableProps {
   checkboxColumnHeader?: string;
   onCheckboxChange?: (rowKey: string, checked: boolean) => void;
   onSubCheckboxChange?: (rowKey: string, subRowKey: string, checked: boolean) => void;
+  ariaLabel: string;
 }
 
 export const ExperienceTable = ({
@@ -45,6 +46,7 @@ export const ExperienceTable = ({
   checkboxColumnHeader,
   onCheckboxChange,
   onSubCheckboxChange,
+  ariaLabel,
 }: ExperienceTableProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
@@ -154,7 +156,14 @@ export const ExperienceTable = ({
   return (
     <div data-testid="experience-table">
       {rows.length > 0 && (
-        <table className="w-full" border={0} cellPadding={0} cellSpacing={0} data-testid="experience-table-grid">
+        <table
+          className="w-full"
+          border={0}
+          cellPadding={0}
+          cellSpacing={0}
+          data-testid="experience-table-grid"
+          aria-label={ariaLabel}
+        >
           <thead className="after:content-[''] after:block after:h-5">
             <tr className="border-b border-inactive-gray text-left text-body-md font-normal">
               <th scope="col" className="pr-7 pb-3">
