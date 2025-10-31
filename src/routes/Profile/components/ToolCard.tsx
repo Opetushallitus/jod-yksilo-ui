@@ -31,7 +31,7 @@ export const ToolCard = ({ testId = 'go-to-tool', linkParams, className, buttonV
           label={t('tool.banner.link-text')}
           variant={buttonVariant}
           size="lg"
-          LinkComponent={getLinkTo(to)}
+          linkComponent={getLinkTo(to)}
           iconSide="right"
           dataTestId={testId}
           icon={<JodArrowRight />}

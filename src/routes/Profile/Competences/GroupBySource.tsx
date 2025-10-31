@@ -79,7 +79,7 @@ export const GroupBySource = ({
   const getLinkButton = (competence: CompetenceSourceType) =>
     competence && links[competence] ? (
       <Button
-        LinkComponent={getLinkTo(links[competence])}
+        linkComponent={getLinkTo(links[competence])}
         key={competence}
         label={linkLabels[competence]}
         icon={<JodArrowRight />}

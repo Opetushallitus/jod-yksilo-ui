@@ -136,7 +136,7 @@ const Home = () => {
         <HeroCard
           buttonLabel={t('home.explore-opportunities')}
           content={t('home.card-1-content')}
-          LinkComponent={Link}
+          linkComponent={Link}
           size="sm"
           title={t('home.card-1-title')}
           to={toolLink}
@@ -145,7 +145,7 @@ const Home = () => {
         <HeroCard
           buttonLabel={t('home.create-own-profile')}
           content={t('home.card-2-content')}
-          LinkComponent={AuthNavLink(!data)}
+          linkComponent={AuthNavLink(!data)}
           size="sm"
           title={t('home.card-2-title')}
           to={t('slugs.profile.index')}
@@ -207,7 +207,7 @@ const Home = () => {
             variant="accent"
             icon={<JodArrowRight />}
             iconSide="right"
-            LinkComponent={getLinkTo(toolLink)}
+            linkComponent={getLinkTo(toolLink)}
             data-testid="home-explore-opportunities"
           />
           <Button
@@ -215,7 +215,7 @@ const Home = () => {
             variant="accent"
             icon={<JodArrowRight />}
             iconSide="right"
-            LinkComponent={AuthNavLink(!data, t('slugs.profile.index'))}
+            linkComponent={AuthNavLink(!data, t('slugs.profile.index'))}
             data-testid="home-create-profile"
           />
         </div>
@@ -230,7 +230,7 @@ const Home = () => {
             buttonLabel={t('home.go-to-service-directory')}
             to="https://www.suomi.fi/palveluhakemisto/osaamispolku"
             backgroundColor="#00818A"
-            LinkComponent={Link}
+            linkComponent={Link}
           />
         </div>
       </FullWidthContainer>
@@ -254,7 +254,7 @@ const Home = () => {
                 label={t('home.how-competency-path-helps-you-opintopolku-link')}
                 icon={<JodOpenInNew ariaLabel={t('external-link')} />}
                 iconSide="right"
-                LinkComponent={getLinkTo(`https://opintopolku.fi/konfo/${language}/`, {
+                linkComponent={getLinkTo(`https://opintopolku.fi/konfo/${language}/`, {
                   useAnchor: true,
                   target: '_blank',
                 })}
@@ -276,7 +276,7 @@ const Home = () => {
                 label={t('home.how-competency-path-helps-you-tmt-link')}
                 icon={<JodOpenInNew ariaLabel={t('external-link')} />}
                 iconSide="right"
-                LinkComponent={getLinkTo(`https://tyomarkkinatori.fi/${language === 'fi' ? '' : language}`, {
+                linkComponent={getLinkTo(`https://tyomarkkinatori.fi/${language === 'fi' ? '' : language}`, {
                   useAnchor: true,
                   target: '_blank',
                 })}
@@ -297,7 +297,7 @@ const Home = () => {
                 label={t('home.how-competency-path-helps-you-opinfi-link')}
                 icon={<JodOpenInNew ariaLabel={t('external-link')} />}
                 iconSide="right"
-                LinkComponent={getLinkTo(`https://opin.fi/${language === 'fi' ? '' : language}`, {
+                linkComponent={getLinkTo(`https://opin.fi/${language === 'fi' ? '' : language}`, {
                   useAnchor: true,
                   target: '_blank',
                 })}

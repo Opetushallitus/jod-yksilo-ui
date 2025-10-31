@@ -33,8 +33,10 @@ const ErrorBoundary = () => {
           label={t('return-home')}
           variant="accent"
           /* eslint-disable-next-line react/no-unstable-nested-components */
-          LinkComponent={({ children }: { children: React.ReactNode }) => (
-            <a href={`/yksilo/${i18n.language}`}>{children}</a>
+          linkComponent={({ children, className }) => (
+            <a href={`/yksilo/${i18n.language}`} className={className}>
+              {children}
+            </a>
           )}
         />
         <Button
@@ -44,7 +46,11 @@ const ErrorBoundary = () => {
           label={t('login')}
           variant="accent"
           /* eslint-disable-next-line react/no-unstable-nested-components */
-          LinkComponent={({ children }: { children: React.ReactNode }) => <a href={loginLink}>{children}</a>}
+          linkComponent={({ children, className }) => (
+            <a href={loginLink} className={className}>
+              {children}
+            </a>
+          )}
         />
       </div>
     </main>

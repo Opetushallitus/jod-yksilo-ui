@@ -27,7 +27,11 @@ const NoMatch = () => {
         label={t('return-home')}
         variant="accent"
         /* eslint-disable-next-line react/no-unstable-nested-components */
-        LinkComponent={({ children }: { children: React.ReactNode }) => <a href={`/yksilo/${language}`}>{children}</a>}
+        linkComponent={({ children, className }) => (
+          <a href={`/yksilo/${language}`} className={className}>
+            {children}
+          </a>
+        )}
       />
     </main>
   );
