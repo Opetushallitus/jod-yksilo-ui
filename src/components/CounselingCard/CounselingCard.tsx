@@ -23,7 +23,8 @@ export const CounselingCard = () => {
           iconSide="right"
           icon={<JodOpenInNew size={24} ariaLabel={t('external-link')} />}
           variant="white"
-          LinkComponent={getLinkTo(link, { useAnchor: true, target: '_blank' })}
+          linkComponent={getLinkTo(link, { useAnchor: true, target: '_blank' })}
+          className="w-fit"
           data-testid="counseling-banner-button"
         />
       </div>

@@ -120,7 +120,7 @@ const MyGoalsSection = ({ title, description, icon, tavoitteet }: MyGoalsSection
                         variant="accent"
                         label={t('profile.my-goals.create-new-path-for-goal')}
                         // eslint-disable-next-line react/no-unstable-nested-components
-                        LinkComponent={({ children }: { children: React.ReactNode }) => (
+                        linkComponent={({ children }: { children: React.ReactNode }) => (
                           <Link
                             to={`${pm.id}/${t('slugs.profile.path')}`}
                             onClick={() => {

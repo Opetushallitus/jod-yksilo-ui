@@ -52,7 +52,7 @@ const LoginPage = () => {
           <Button
             variant="accent"
             label={t('login-to-service')}
-            LinkComponent={getLinkTo(loginLink, { useAnchor: true })}
+            linkComponent={getLinkTo(loginLink, { useAnchor: true })}
             icon={<JodArrowRight />}
             iconSide="right"
             data-testid="landing-login"
@@ -84,7 +84,8 @@ const LoginPage = () => {
           label={t('privacy-policy')}
           icon={<JodArrowRight />}
           iconSide="right"
-          LinkComponent={getLinkTo(`/${language}/${t('slugs.privacy-and-cookies')}`, { useAnchor: true })}
+          linkComponent={getLinkTo(`/${language}/${t('slugs.privacy-and-cookies')}`, { useAnchor: true })}
+          className="w-fit"
         />
       </div>
     </MainLayout>
