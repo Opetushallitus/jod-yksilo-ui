@@ -11,8 +11,10 @@ import { useRouteLoaderData } from 'react-router';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 
-const DownloadLink = ({ children }: { children: React.ReactNode }) => (
-  <a href={`${import.meta.env.BASE_URL}api/profiili/yksilo/vienti`}>{children}</a>
+const DownloadLink = ({ children, className }: { children: React.ReactNode; className: string }) => (
+  <a href={`${import.meta.env.BASE_URL}api/profiili/yksilo/vienti`} className={className}>
+    {children}
+  </a>
 );
 
 const ToggleWithText = ({
@@ -156,7 +158,7 @@ const Preferences = () => {
         <Button
           variant="accent"
           label={t('preferences.download.action')}
-          LinkComponent={DownloadLink}
+          linkComponent={DownloadLink}
           data-testid="pref-download-data"
         />
       </section>

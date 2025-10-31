@@ -285,7 +285,7 @@ const ProfileImportExport = () => {
         iconSide="right"
         variant="gray"
         className="w-fit"
-        LinkComponent={getLinkTo(`/${language}/${t('slugs.profile.login')}`, {
+        linkComponent={getLinkTo(`/${language}/${t('slugs.profile.login')}`, {
           state: { callbackURL: t('slugs.tool.index') },
         })}
       />

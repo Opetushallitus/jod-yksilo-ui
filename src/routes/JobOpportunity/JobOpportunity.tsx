@@ -192,7 +192,7 @@ const JobOpportunity = () => {
               label={t('job-opportunity.tyomarkkinatori.button-label')}
               icon={<JodOpenInNew ariaLabel={t('external-link')} />}
               iconSide="right"
-              LinkComponent={getLinkTo(tmtUrl, { useAnchor: true, target: '_blank' })}
+              linkComponent={getLinkTo(tmtUrl, { useAnchor: true, target: '_blank' })}
             />
           </div>
         </div>

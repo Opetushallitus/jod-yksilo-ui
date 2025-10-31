@@ -227,10 +227,11 @@ const YourInfo = () => {
             label={t('profile.banner.link-text')}
             variant="white"
             size="lg"
-            LinkComponent={ProfileLinkComponent}
+            linkComponent={ProfileLinkComponent}
             iconSide="right"
             dataTestId="tool-go-to-profile"
             icon={<JodArrowRight />}
+            className="w-fit"
           />
         </div>
       </div>
