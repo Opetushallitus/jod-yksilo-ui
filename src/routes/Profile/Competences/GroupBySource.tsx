@@ -134,26 +134,30 @@ export const GroupBySource = ({
                     </ul>
                   )}
                   {competence === 'MUU_OSAAMINEN' && localizedMuutOsaamisetVapaateksti.length > 0 && (
-                    <div className="flex flex-col bg-white px-5 py-4 rounded gap-3 border-2 border-[#CCC]">
-                      <p className="text-help">{t('profile.something-else.free-form-description-of-my-interests')}</p>
-                      <p className="text-body-sm whitespace-pre-line">
-                        {localizedMuutOsaamisetVapaatekstiExpanded
-                          ? localizedMuutOsaamisetVapaateksti
-                          : getTruncatedText(localizedMuutOsaamisetVapaateksti)}
-                      </p>
-                      {shouldShowExpandButton && (
-                        <div>
-                          <button
-                            onClick={() =>
-                              setLocalizedMuutOsaamisetVapaatekstiExpanded((currentState) => !currentState)
-                            }
-                            className="text-body-sm text-accent hover:underline hover:cursor-pointer"
-                            data-testid="competences-freeform-toggle"
-                          >
-                            {localizedMuutOsaamisetVapaatekstiExpanded ? t('show-less') : t('show-more')}
-                          </button>
-                        </div>
-                      )}
+                    <div>
+                      <label className="ds:inline-block ds:mb-4 ds:align-top ds:text-form-label ds:font-arial ds:text-primary-gray">
+                        {t('profile.something-else.free-form-description-of-my-interests')}
+                      </label>
+                      <div className="flex flex-col bg-white px-5 py-4 rounded gap-3 border-2 border-primary-light-2">
+                        <p className="text-body-sm whitespace-pre-line">
+                          {localizedMuutOsaamisetVapaatekstiExpanded
+                            ? localizedMuutOsaamisetVapaateksti
+                            : getTruncatedText(localizedMuutOsaamisetVapaateksti)}
+                        </p>
+                        {shouldShowExpandButton && (
+                          <div>
+                            <button
+                              onClick={() =>
+                                setLocalizedMuutOsaamisetVapaatekstiExpanded((currentState) => !currentState)
+                              }
+                              className="text-body-sm text-accent hover:underline hover:cursor-pointer"
+                              data-testid="competences-freeform-toggle"
+                            >
+                              {localizedMuutOsaamisetVapaatekstiExpanded ? t('show-less') : t('show-more')}
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   )}
                   {getLinkButton(competence)}
