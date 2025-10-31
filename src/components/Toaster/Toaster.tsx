@@ -16,7 +16,7 @@ export const Toaster = () => {
   return (
     <div
       role="alert"
-      className={`fixed ${topClass} right-7 z-60 flex flex-col gap-4`}
+      className={`fixed ${topClass} right-7 z-60 flex flex-col gap-4 print:hidden`}
       onMouseEnter={startPause}
       onMouseLeave={endPause}
     >
