@@ -103,7 +103,7 @@ const MyGoalsSection = ({ title, description, icon, tavoitteet }: MyGoalsSection
                       <div className="flex flex-col gap-4" key={polku.id}>
                         <Link
                           to={`${pm.id}/${t('slugs.profile.path')}/${polku.id}`}
-                          className="text-accent flex gap-2 text-heading-4"
+                          className="text-accent flex gap-2 text-heading-4 w-fit"
                         >
                           {getLocalizedText(polku.nimi)} <JodArrowRight />
                         </Link>
@@ -120,12 +120,13 @@ const MyGoalsSection = ({ title, description, icon, tavoitteet }: MyGoalsSection
                         variant="accent"
                         label={t('profile.my-goals.create-new-path-for-goal')}
                         // eslint-disable-next-line react/no-unstable-nested-components
-                        LinkComponent={({ children }: { children: React.ReactNode }) => (
+                        linkComponent={({ children, className }: { children: React.ReactNode; className?: string }) => (
                           <Link
                             to={`${pm.id}/${t('slugs.profile.path')}`}
                             onClick={() => {
                               globalThis._paq?.push(['trackEvent', 'yksilo.Polku', 'Luonti']);
                             }}
+                            className={className}
                           >
                             {children}
                           </Link>

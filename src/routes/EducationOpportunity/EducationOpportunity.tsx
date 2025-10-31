@@ -132,7 +132,7 @@ const EducationOpportunity = () => {
               label={t('education-opportunity.opintopolku.button-label')}
               icon={<JodOpenInNew ariaLabel={t('external-link')} />}
               iconSide="right"
-              LinkComponent={getLinkTo(opintopolkuUrl, { useAnchor: true, target: '_blank' })}
+              linkComponent={getLinkTo(opintopolkuUrl, { useAnchor: true, target: '_blank' })}
             />
           </div>
         </div>
