@@ -219,6 +219,7 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
             {!isFetching && error && <div className="text-alert-text">{renderErrorMessage()}</div>}
             {!isFetching && (
               <ExperienceTable
+                ariaLabel={t('profile.education-history.title')}
                 mainColumnHeader={t('education-history.education-provider-or-education')}
                 rows={tableRows}
                 hideOsaamiset

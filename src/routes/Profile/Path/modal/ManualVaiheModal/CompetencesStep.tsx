@@ -73,7 +73,7 @@ const CompetencesStep = ({ vaiheIndex }: { vaiheIndex: number }) => {
       </h2>
       <p>{t('profile.paths.step-modal-description')}</p>
 
-      <table className="w-full">
+      <table className="w-full" aria-label={t('profile.paths.required-competence')}>
         <thead>
           <tr className="bg-white font-arial text-form-label text-left">
             <th className="p-4">{t('profile.paths.required-competence')}</th>

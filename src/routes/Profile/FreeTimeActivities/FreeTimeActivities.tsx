@@ -71,6 +71,7 @@ const FreeTimeActivities = () => {
       )}
 
       <ExperienceTable
+        ariaLabel={title}
         mainColumnHeader={t('free-time-activities.theme-or-activity')}
         addNewLabel={t('free-time-activities.add-new-free-time-activity')}
         addNewNestedLabel={t('free-time-activities.add-new-activity')}

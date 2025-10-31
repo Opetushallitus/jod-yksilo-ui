@@ -267,6 +267,7 @@ const EducationHistory = () => {
         </div>
       )}
       <ExperienceTable
+        ariaLabel={title}
         mainColumnHeader={t('education-history.education-provider-or-education')}
         addNewNestedLabel={t('education-history.add-studies-to-this-education')}
         rows={rows}
