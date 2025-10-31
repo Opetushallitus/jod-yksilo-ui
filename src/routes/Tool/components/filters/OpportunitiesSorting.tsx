@@ -12,7 +12,9 @@ const OpportunitiesSorting = () => {
   return (
     <RadioButtonGroup
       label={t('tool.your-opportunities.sorting.title')}
-      onChange={setSorting}
+      onChange={(value) =>
+        value === sortingValues.RELEVANCE || value === sortingValues.ALPHABET ? setSorting(value) : null
+      }
       value={sorting}
       hideLabel
     >

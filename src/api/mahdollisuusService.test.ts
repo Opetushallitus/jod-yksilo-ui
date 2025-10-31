@@ -16,7 +16,11 @@ vi.mock('@/api/client', () => ({
   },
 }));
 
-const mockSisalto = [{ id: '1', nimi: 'Test' }];
+let id = 0;
+// Use different ids for different tests to avoid cache interference between tests
+// Not really needed with getTyoMahdollisuusDetails and getKoulutusMahdollisuusDetails but keeps it consistent
+const getNextId = () => `${++id}`;
+const mockSisalto = (id: string) => [{ id, nimi: 'Test' }];
 
 describe('mahdollisuusService', () => {
   beforeEach(() => {
@@ -32,32 +36,70 @@ describe('mahdollisuusService', () => {
     });
 
     it('returns sisalto when no error', async () => {
-      GET.mockResolvedValue({ data: { sisalto: mockSisalto }, error: null });
-      const result = await getTyoMahdollisuusDetails(['1']);
-      expect(result).toEqual(mockSisalto);
+      const id = getNextId();
+      const sisalto = mockSisalto(id);
+      GET.mockResolvedValue({ data: { sisalto }, error: null });
+      const result = await getTyoMahdollisuusDetails([id]);
+      expect(result).toEqual(sisalto);
       expect(GET).toHaveBeenCalledWith('/api/tyomahdollisuudet', {
-        params: { query: { id: ['1'] } },
+        params: { query: { id: [id] } },
       });
     });
 
     it('returns empty array on error', async () => {
+      const id = getNextId();
       GET.mockResolvedValue({ data: null, error: 'error' });
-      const result = await getTyoMahdollisuusDetails(['1']);
+      const result = await getTyoMahdollisuusDetails([id]);
       expect(result).toEqual([]);
     });
   });
 
   describe('getTypedTyoMahdollisuusDetails', () => {
     it('maps mahdollisuusTyyppi correctly', async () => {
-      GET.mockResolvedValue({ data: { sisalto: mockSisalto }, error: null });
-      const result = await getTypedTyoMahdollisuusDetails(['1']);
+      const id = getNextId();
+      const sisalto = mockSisalto(id);
+      GET.mockResolvedValue({ data: { sisalto }, error: null });
+      const result = await getTypedTyoMahdollisuusDetails([id]);
       expect(result[0].mahdollisuusTyyppi).toBe('TYOMAHDOLLISUUS');
+      expect(client.GET).toHaveBeenCalledWith('/api/tyomahdollisuudet', {
+        params: { query: { id: [id] } },
+      });
     });
 
     it('returns empty array if no results', async () => {
+      const id = getNextId();
       GET.mockResolvedValue({ data: { sisalto: [] }, error: null });
-      const result = await getTypedTyoMahdollisuusDetails(['1']);
+      const result = await getTypedTyoMahdollisuusDetails([id]);
       expect(result).toEqual([]);
+    });
+
+    it('gets from cache on subsequent calls', async () => {
+      const id = getNextId();
+      const sisalto = mockSisalto(id);
+      GET.mockResolvedValue({ data: { sisalto }, error: null });
+
+      // First call to populate cache
+      const result1 = await getTypedTyoMahdollisuusDetails([id]);
+      expect(result1).toEqual(
+        sisalto.map((mahdollisuus) => ({
+          ...mahdollisuus,
+          mahdollisuusTyyppi: 'TYOMAHDOLLISUUS',
+        })),
+      );
+      expect(GET).toHaveBeenCalledTimes(1);
+
+      // Clear mock calls
+      GET.mockClear();
+
+      // Second call should hit cache
+      const result2 = await getTypedTyoMahdollisuusDetails([id]);
+      expect(result2).toEqual(
+        sisalto.map((mahdollisuus) => ({
+          ...mahdollisuus,
+          mahdollisuusTyyppi: 'TYOMAHDOLLISUUS',
+        })),
+      );
+      expect(GET).toHaveBeenCalledTimes(0);
     });
   });
 
@@ -68,32 +110,70 @@ describe('mahdollisuusService', () => {
     });
 
     it('returns sisalto when no error', async () => {
-      GET.mockResolvedValue({ data: { sisalto: mockSisalto }, error: null });
-      const result = await getKoulutusMahdollisuusDetails(['2']);
-      expect(result).toEqual(mockSisalto);
+      const id = getNextId();
+      const sisalto = mockSisalto(id);
+      GET.mockResolvedValue({ data: { sisalto }, error: null });
+      const result = await getKoulutusMahdollisuusDetails([id]);
+      expect(result).toEqual(sisalto);
       expect(client.GET).toHaveBeenCalledWith('/api/koulutusmahdollisuudet', {
-        params: { query: { id: ['2'] } },
+        params: { query: { id: [id] } },
       });
     });
 
     it('returns empty array on error', async () => {
+      const id = getNextId();
       GET.mockResolvedValue({ data: null, error: 'error' });
-      const result = await getKoulutusMahdollisuusDetails(['2']);
+      const result = await getKoulutusMahdollisuusDetails([id]);
       expect(result).toEqual([]);
     });
   });
 
   describe('getTypedKoulutusMahdollisuusDetails', () => {
     it('maps mahdollisuusTyyppi correctly', async () => {
-      GET.mockResolvedValue({ data: { sisalto: mockSisalto }, error: null });
-      const result = await getTypedKoulutusMahdollisuusDetails(['2']);
+      const id = getNextId();
+      const sisalto = mockSisalto(id);
+      GET.mockResolvedValue({ data: { sisalto }, error: null });
+      const result = await getTypedKoulutusMahdollisuusDetails([id]);
       expect(result[0].mahdollisuusTyyppi).toBe('KOULUTUSMAHDOLLISUUS');
+      expect(client.GET).toHaveBeenCalledWith('/api/koulutusmahdollisuudet', {
+        params: { query: { id: [id] } },
+      });
     });
 
     it('returns empty array if no results', async () => {
+      const id = getNextId();
       GET.mockResolvedValue({ data: { sisalto: [] }, error: null });
-      const result = await getTypedKoulutusMahdollisuusDetails(['2']);
+      const result = await getTypedKoulutusMahdollisuusDetails([id]);
       expect(result).toEqual([]);
+    });
+
+    it('gets from cache on subsequent calls', async () => {
+      const id = getNextId();
+      const sisalto = mockSisalto(id);
+      GET.mockResolvedValue({ data: { sisalto }, error: null });
+
+      // First call to populate cache
+      const result1 = await getTypedKoulutusMahdollisuusDetails([id]);
+      expect(result1).toEqual(
+        sisalto.map((mahdollisuus) => ({
+          ...mahdollisuus,
+          mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS',
+        })),
+      );
+      expect(GET).toHaveBeenCalledTimes(1);
+
+      // Clear mock calls
+      GET.mockClear();
+
+      // Second call should hit cache
+      const result2 = await getTypedKoulutusMahdollisuusDetails([id]);
+      expect(result2).toEqual(
+        sisalto.map((mahdollisuus) => ({
+          ...mahdollisuus,
+          mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS',
+        })),
+      );
+      expect(GET).toHaveBeenCalledTimes(0);
     });
   });
 });

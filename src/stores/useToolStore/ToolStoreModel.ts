@@ -1,7 +1,12 @@
-import { components } from '@/api/schema';
-import { OsaaminenValue } from '@/components';
-import { EhdotusRecord, OpportunityFilterValue, OpportunitySortingValue, sortingValues } from '@/routes/Tool/utils.ts';
-import { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
+import type { components } from '@/api/schema';
+import type { OsaaminenValue } from '@/components';
+import {
+  type EhdotusRecord,
+  type OpportunityFilterValue,
+  type OpportunitySortingValue,
+  sortingValues,
+} from '@/routes/Tool/utils.ts';
+import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 
 export type FilterName = keyof ToolFilters;
 export const DEFAULT_SORTING = sortingValues.RELEVANCE;
@@ -60,6 +65,7 @@ export interface ToolState {
   previousEhdotusUpdateLang: string;
   filters: ToolFilters;
   settingsHaveChanged?: boolean;
+  shouldFetchData: boolean;
   setArrayFilter: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;
   reset: () => void;
   resetSettings: () => void;
@@ -81,7 +87,7 @@ export interface ToolState {
   fetchMahdollisuudetPage: (signal?: AbortSignal, page?: number) => Promise<void>;
   updateEhdotuksetAndTyomahdollisuudet: (loggedIn: boolean) => Promise<void>;
 
-  setSorting: (state: string) => void;
+  setSorting: (state: OpportunitySortingValue) => void;
 
   virtualAssistantOpen: boolean;
   setVirtualAssistantOpen: (state: boolean) => void;

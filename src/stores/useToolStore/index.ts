@@ -3,7 +3,7 @@ import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import i18n from '@/i18n/config';
-import { EhdotusRecord, type OpportunitySortingValue, ehdotusDataToRecord, sortingValues } from '@/routes/Tool/utils';
+import { EhdotusRecord, ehdotusDataToRecord, sortingValues } from '@/routes/Tool/utils';
 import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import {
   filterByAmmattiryhmat,
@@ -52,6 +52,7 @@ export const useToolStore = create<ToolState>()(
       sorting: DEFAULT_SORTING,
       filters: DEFAULT_FILTERS,
       settingsHaveChanged: false,
+      shouldFetchData: true,
       previousEhdotusUpdateLang: '',
       reset: () => {
         set({
@@ -73,24 +74,25 @@ export const useToolStore = create<ToolState>()(
           filters: DEFAULT_FILTERS,
           sorting: DEFAULT_SORTING,
           settingsHaveChanged: true,
+          shouldFetchData: false,
         });
       },
       setTavoitteet: (state) => set({ tavoitteet: state }),
       setOsaamiset: (state) => {
-        set({ osaamiset: state });
+        set({ osaamiset: state, shouldFetchData: true, settingsHaveChanged: true });
       },
       setOsaamisetVapaateksti: (state) => {
-        set({ osaamisetVapaateksti: state });
+        set({ osaamisetVapaateksti: state, shouldFetchData: true, settingsHaveChanged: true });
       },
       setKiinnostukset: (state) => {
-        set({ kiinnostukset: state });
+        set({ kiinnostukset: state, shouldFetchData: true, settingsHaveChanged: true });
       },
       setKiinnostuksetVapaateksti: (state) => {
-        set({ kiinnostuksetVapaateksti: state });
+        set({ kiinnostuksetVapaateksti: state, shouldFetchData: true, settingsHaveChanged: true });
       },
       setSuosikit: (state) => set({ suosikit: state }),
       setOsaamisKiinnostusPainotus: (state: number) => {
-        set({ osaamisKiinnostusPainotus: state });
+        set({ osaamisKiinnostusPainotus: state, shouldFetchData: true, settingsHaveChanged: true });
       },
       updateEhdotukset: async (lang: string, signal?: AbortSignal) => {
         const {
@@ -131,6 +133,7 @@ export const useToolStore = create<ToolState>()(
               KOULUTUSMAHDOLLISUUS:
                 mahdollisuusData?.filter((m) => m.ehdotusMetadata?.tyyppi === 'KOULUTUSMAHDOLLISUUS').length ?? 0,
             },
+            shouldFetchData: false,
           });
         } catch (error) {
           if ((error as Error).name !== 'AbortError') {
@@ -240,6 +243,7 @@ export const useToolStore = create<ToolState>()(
             jobOpportunityType,
             educationOpportunityType,
           } = filters;
+
           if (Object.keys(ehdotukset).length === 0 || i18n.language !== get().previousEhdotusUpdateLang) {
             await get().updateEhdotukset(i18n.language, signal);
             set({ previousEhdotusUpdateLang: i18n.language });
@@ -277,13 +281,15 @@ export const useToolStore = create<ToolState>()(
       },
 
       updateEhdotuksetAndTyomahdollisuudet: async (loggedIn: boolean) => {
-        const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit } = get();
+        const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit, shouldFetchData } = get();
 
         abortController.abort();
         abortController = new AbortController();
         const signal = abortController.signal;
 
-        await updateEhdotukset(i18n.language, signal);
+        if (shouldFetchData) {
+          await updateEhdotukset(i18n.language, signal);
+        }
         await fetchMahdollisuudetPage(signal, 1);
         await updateSuosikit(loggedIn);
         set({ settingsHaveChanged: false });
@@ -333,7 +339,7 @@ export const useToolStore = create<ToolState>()(
       },
 
       setSorting: (state) => {
-        set({ sorting: state as OpportunitySortingValue, settingsHaveChanged: true });
+        set({ sorting: state, settingsHaveChanged: true });
       },
 
       setArrayFilter: (name, value) => {
