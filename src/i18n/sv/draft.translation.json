@@ -31,6 +31,9 @@
     },
     "settings": {
       "controls": "Kontroller"
+    },
+    "tools": {
+      "service-directory": "Väglednings- och rådgivningstjänster"
     }
   }
 }

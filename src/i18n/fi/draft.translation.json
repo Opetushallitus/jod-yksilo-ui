@@ -45,6 +45,9 @@
     },
     "settings": {
       "controls": "Säätimet"
+    },
+    "tools": {
+      "service-directory": "Ohjaus- ja neuvontapalveluja"
     }
   }
 }
