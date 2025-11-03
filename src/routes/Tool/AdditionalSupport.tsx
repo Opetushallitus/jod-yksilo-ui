@@ -79,7 +79,7 @@ const AdditionalSupport = () => {
           />
           <HelpingToolProfileLinkItem
             profileLink={freeTimeLink}
-            iconLeft={<IconWrapper color="#85C4EC" Icon={JodInterests} />}
+            iconLeft={<IconWrapper color="#006db3" Icon={JodInterests} />}
             title={t('tool.tools.free-time-activities')}
             iconRight={Arrow}
             data-testid="additional-support-something-else"
