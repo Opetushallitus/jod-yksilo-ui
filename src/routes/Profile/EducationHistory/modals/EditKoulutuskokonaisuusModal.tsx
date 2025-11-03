@@ -140,6 +140,7 @@ const EditKoulutuskokonaisuusModal = ({
               {...methods.register(`nimi.${language}` as const)}
               placeholder={t('profile.education-history.modals.workplace-placeholder')}
               requiredText={t('required')}
+              dataTestId="education-history-provider-input"
             />
             <FormError name={`nimi.${language}`} errors={errors} />
           </Form>
