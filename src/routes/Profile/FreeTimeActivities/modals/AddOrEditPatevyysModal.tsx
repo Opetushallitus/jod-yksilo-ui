@@ -74,6 +74,7 @@ const MainStep = ({ headerText }: { headerText: string }) => {
           {...register(`nimi.${language}` as const)}
           placeholder={t('profile.free-time-activities.modals.name-of-free-time-activity-placeholder')}
           requiredText={t('required')}
+          dataTestId="free-time-activities-activity-input"
         />
         <FormError name={`nimi.${language}`} errors={errors} />
       </div>
@@ -88,6 +89,7 @@ const MainStep = ({ headerText }: { headerText: string }) => {
                 placeholder={t('date-placeholder')}
                 requiredText={t('required')}
                 translations={datePickerTranslations}
+                dataTestId="free-time-activities-start-date"
               />
             )}
             name="alkuPvm"
@@ -103,6 +105,7 @@ const MainStep = ({ headerText }: { headerText: string }) => {
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
                 translations={datePickerTranslations}
+                dataTestId="free-time-activities-end-date"
               />
             )}
             name="loppuPvm"

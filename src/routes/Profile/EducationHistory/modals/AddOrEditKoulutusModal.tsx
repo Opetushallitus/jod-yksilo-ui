@@ -79,6 +79,7 @@ const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
           {...register(`nimi.${language}` as const)}
           placeholder={t('profile.education-history.modals.job-description-placeholder')}
           requiredText={t('required')}
+          dataTestId="education-history-degree-description-input"
         />
         <FormError name={`nimi.${language}`} errors={errors} />
       </div>
@@ -92,6 +93,7 @@ const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
                 {...field}
                 placeholder={t('date-placeholder')}
                 translations={datePickerTranslations}
+                dataTestId="education-history-start-date"
               />
             )}
             name="alkuPvm"
@@ -107,6 +109,7 @@ const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
                 translations={datePickerTranslations}
+                dataTestId="education-history-end-date"
               />
             )}
             name="loppuPvm"

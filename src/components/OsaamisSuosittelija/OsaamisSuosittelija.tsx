@@ -144,6 +144,7 @@ export const OsaamisSuosittelija = ({
           maxLength={LIMITS.TEXTAREA}
           label={textAreaLabel()}
           className={tc(['bg-bg-gray-2-25! placeholder:text-body-sm', textAreaClassName])}
+          dataTestId="osaamissuosittelija-textarea"
         />
       </div>
       <div className="mb-6 flex flex-col">
@@ -163,7 +164,7 @@ export const OsaamisSuosittelija = ({
 
         <div className="mb-6 overflow-y-auto max-h-[228px]">
           {filteredEhdotetutOsaamiset.length > 0 ? (
-            <ul className="flex flex-wrap gap-3">
+            <ul className="flex flex-wrap gap-3" data-testid="osaamissuosittelija-suggested-competences">
               {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen) => (
                 <li key={ehdotettuOsaaminen.id}>
                   <Tag
@@ -193,7 +194,7 @@ export const OsaamisSuosittelija = ({
               ))}
             </ul>
           ) : (
-            <div className="mt-4">
+            <div className="mt-4" data-testid="osaamissuosittelija-suggested-competences-empty">
               <EmptyState
                 text={
                   mode === 'osaamiset'
@@ -225,7 +226,7 @@ export const OsaamisSuosittelija = ({
 
             <div className="overflow-y-auto max-h-[228px]">
               {value.length > 0 ? (
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-3" data-testid="osaamissuosittelija-selected-competences">
                   <AddedTags
                     osaamiset={value}
                     onClick={removeOsaaminenById}
@@ -233,7 +234,7 @@ export const OsaamisSuosittelija = ({
                   />
                 </div>
               ) : (
-                <div className="mt-4">
+                <div className="mt-4" data-testid="osaamissuosittelija-selected-competences-empty">
                   <EmptyState
                     text={
                       mode === 'osaamiset'
