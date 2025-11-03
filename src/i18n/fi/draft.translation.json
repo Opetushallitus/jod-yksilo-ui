@@ -1,11 +1,11 @@
 {
   "ai-info-tooltip": {
     "aria-description": "Tietoa tekoälyn käytöstä",
+    "description-opportunity-education-note": "Olemme hyödyntäneet tekoälyä myös osaamisten tunnistamisessa koulutusmahdollisuuksille.",
     "description-opportunity-intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi kielimallia seuraavissa kohdissa:",
     "description-opportunity-item-1": "mahdollisuuden nimi",
     "description-opportunity-item-2": "kuvaus",
     "description-opportunity-item-3": "yleisimmät työtehtävät",
-    "description-opportunity-education-note": "Olemme hyödyntäneet tekoälyä myös osaamisten tunnistamisessa koulutusmahdollisuuksille.",
     "description-summary": "Lue lisää: <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink>",
     "description-tool-intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi tekoälyä seuraavissa kohdissa:",
     "description-tool-item-1": "muut työmahdollisuudet",
@@ -14,9 +14,13 @@
     "title": "Tekoälyn avulla luotua sisältöä"
   },
   "filters": "Suodattimet",
-  "n-months-short": "{{count}} kk",
+  "home": {
+    "go-to-service-directory": "Siirry Ohjaus- ja neuvontapalveluihin",
+    "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua ura- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut."
+  },
   "n-months_one": "{{count}} kuukausi",
   "n-months_other": "{{count}} kuukautta",
+  "n-months-short": "{{count}} kk",
   "n-years_one": "{{count}} vuosi",
   "n-years_other": "{{count}} vuotta",
   "tool": {
