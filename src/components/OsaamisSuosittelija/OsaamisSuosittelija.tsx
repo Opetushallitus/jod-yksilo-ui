@@ -157,7 +157,7 @@ export const OsaamisSuosittelija = ({
           maxLength={LIMITS.TEXTAREA}
           label={textAreaLabel()}
           className={tc(['bg-bg-gray-2-25! placeholder:text-body-sm', textAreaClassName])}
-          dataTestId="osaamissuosittelija-textarea"
+          testId="osaamissuosittelija-textarea"
         />
       </div>
       <div className="mb-6 flex flex-col">

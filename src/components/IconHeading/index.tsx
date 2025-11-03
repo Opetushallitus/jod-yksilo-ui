@@ -1,7 +1,7 @@
 export interface IconHeadingProps {
   icon: React.ReactNode;
   title: React.ReactNode;
-  dataTestId?: string;
+  testId?: string;
   bgClassName?: string;
   textClassName?: string;
 }
@@ -9,7 +9,7 @@ export interface IconHeadingProps {
 export const IconHeading = ({
   icon,
   title,
-  dataTestId,
+  testId,
   bgClassName = 'bg-secondary-1-dark-2',
   textClassName = 'text-secondary-1-dark-2',
 }: IconHeadingProps) => {
@@ -23,7 +23,7 @@ export const IconHeading = ({
         </span>
       )}
       <h1
-        data-testid={dataTestId}
+        data-testid={testId}
         className={`text-hero-mobile sm:text-hero hyphens-auto text-pretty break-words focus:outline-0 ${textClassName}`}
       >
         {title}

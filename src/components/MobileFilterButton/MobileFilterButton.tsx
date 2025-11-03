@@ -61,11 +61,11 @@ interface RoundButtonProps {
   icon: React.ReactNode;
   /** Background color */
   bgColor?: 'gray' | 'white';
-  dataTestId?: string;
+  testId?: string;
 }
 
 const RoundButton = ({
-  dataTestId,
+  testId,
   label,
   hideLabel = false,
   onClick,
@@ -85,7 +85,7 @@ const RoundButton = ({
       disabled={disabled}
       type="button"
       onClick={onClick}
-      data-testid={dataTestId}
+      data-testid={testId}
       className={tidyClasses([
         'cursor-pointer',
         disabled ? 'cursor-not-allowed opacity-50' : '',
