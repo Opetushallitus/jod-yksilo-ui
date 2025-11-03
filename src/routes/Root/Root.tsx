@@ -104,6 +104,7 @@ const Root = () => {
         id: sessionWarningNoteId,
         title: t('session.warning.title'),
         description: t('session.warning.description'),
+        ariaClose: t('close'),
         variant: 'warning',
         readMoreComponent: (
           <Button
@@ -130,6 +131,7 @@ const Root = () => {
         id: sessionExpiredNoteId,
         title: t('session.expired.title'),
         description: t('session.expired.description'),
+        ariaClose: t('close'),
         variant: 'error',
         permanent: true,
         readMoreComponent: (
@@ -190,6 +192,7 @@ const Root = () => {
     addNote({
       title: t(note.title),
       description: t(note.description),
+      ariaClose: t('close'),
       variant: 'error',
       permanent: note.permanent ?? false,
       id: note.title,
@@ -220,6 +223,7 @@ const Root = () => {
       addNote({
         title: t('beta.note.title'),
         description: t('beta.note.description'),
+        ariaClose: t('close'),
         variant: 'feedback',
         onCloseClick: () => {
           setVisibleBetaFeedback(false);
