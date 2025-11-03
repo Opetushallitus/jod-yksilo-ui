@@ -1,8 +1,12 @@
 {
   "filters": "Filter",
-  "n-months-short": "{{count}} mån",
+  "home": {
+    "go-to-service-directory": "Gå till väglednings- och rådgivningstjänster",
+    "need-personal-guidance-content": "De tjänster som finns tillgängliga inom väglednings- och rådgivningstjänster hjälper dig att överväga karriär- och utbildningsalternativ. Begränsa listan över tjänster baserat på de teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst."
+  },
   "n-months_one": "{{count}} månad",
   "n-months_other": "{{count}} månader",
+  "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
   "tool": {

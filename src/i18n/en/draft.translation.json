@@ -1,8 +1,12 @@
 {
   "filters": "Filters",
-  "n-months-short": "{{count}} mo",
+  "home": {
+    "go-to-service-directory": "Go to Guidance and counselling services",
+    "need-personal-guidance-content": "Guidance and counselling services help you reflect on career and education options. Narrow down the list of services based on themes that interest you and, for example, your place of residence to find the services that suit you best."
+  },
   "n-months_one": "{{count}} month",
   "n-months_other": "{{count}} months",
+  "n-months-short": "{{count}} mo",
   "n-years_one": "{{count}} year",
   "n-years_other": "{{count}} years",
   "tool": {

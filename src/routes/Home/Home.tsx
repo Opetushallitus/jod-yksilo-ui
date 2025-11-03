@@ -231,6 +231,7 @@ const Home = () => {
             to="https://www.suomi.fi/palveluhakemisto/osaamispolku"
             backgroundColor="#00818A"
             linkComponent={Link}
+            buttonIcon={<JodOpenInNew ariaLabel={t('external-link')} />}
           />
         </div>
       </FullWidthContainer>
