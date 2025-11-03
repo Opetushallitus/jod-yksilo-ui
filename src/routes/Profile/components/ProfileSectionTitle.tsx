@@ -28,7 +28,7 @@ export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType;
   const iconBg = cx({
     'bg-secondary-4-dark': type === 'TOIMENKUVA',
     'bg-secondary-2-dark': type === 'KOULUTUS',
-    'bg-secondary-1': type === 'PATEVYYS',
+    'bg-secondary-1-dark': type === 'PATEVYYS',
     'bg-secondary-gray': type === 'MUU_OSAAMINEN',
     'bg-secondary-3': type === 'KIINNOSTUS',
     'bg-secondary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'TAVOITTEENI', 'ASETUKSENI'].includes(type),

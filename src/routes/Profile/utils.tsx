@@ -80,7 +80,7 @@ export const getTextClassByCompetenceSourceType = (type: ProfileSectionType) =>
   cx({
     'text-secondary-4-dark': type === 'TOIMENKUVA',
     'text-secondary-2-dark': type === 'KOULUTUS',
-    'text-secondary-1': type === 'PATEVYYS',
+    'text-secondary-1-dark': type === 'PATEVYYS',
     'text-secondary-gray': type === 'MUU_OSAAMINEN',
     'text-secondary-3': type === 'KIINNOSTUS',
     'text-secondary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'tavoite', 'ASETUKSENI'].includes(type),
