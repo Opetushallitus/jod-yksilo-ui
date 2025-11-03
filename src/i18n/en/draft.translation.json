@@ -1,4 +1,5 @@
 {
+  "competences-identify-failed": "AI competence identification failed, please add competences by editing the education manually.",
   "filters": "Filters",
   "home": {
     "go-to-service-directory": "Go to Guidance and counselling services",

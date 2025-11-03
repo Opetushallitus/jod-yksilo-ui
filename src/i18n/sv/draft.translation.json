@@ -1,4 +1,5 @@
 {
+  "competences-identify-failed": "AI-kompetensidentifiering misslyckades, lägg till kompetenser genom att redigera utbildningen manuellt.",
   "filters": "Filter",
   "home": {
     "go-to-service-directory": "Gå till väglednings- och rådgivningstjänster",
