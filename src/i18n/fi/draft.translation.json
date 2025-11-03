@@ -13,6 +13,7 @@
     "description-tool-item-3": "yksilölliset ehdotukset sinulle sopivista mahdollisuuksista",
     "title": "Tekoälyn avulla luotua sisältöä"
   },
+  "competences-identify-failed": "Tekoälyn osaamistunnistus epäonnistui, lisää osaamisia käsin muokkaamalla koulutusta.",
   "filters": "Suodattimet",
   "home": {
     "go-to-service-directory": "Siirry Ohjaus- ja neuvontapalveluihin",
