@@ -57,7 +57,7 @@ export const generateMenuItems = (opts: GenerateMenuItemsOptions): MenuItem[] =>
   const menuItems: MenuItem[] = topLevelRoutes.map((route) => {
     const menuItem: MenuItem = {
       label: route.name,
-      LinkComponent: ({ children, className }: LinkComponent) => (
+      linkComponent: ({ children, className }: LinkComponent) => (
         <NavLinkBasedOnAuth
           className={className}
           to={route.path}
@@ -74,7 +74,7 @@ export const generateMenuItems = (opts: GenerateMenuItemsOptions): MenuItem[] =>
     if (subRoutesByParent[route.path]) {
       menuItem.childItems = subRoutesByParent[route.path].map((childRoute) => ({
         label: childRoute.name,
-        LinkComponent: ({ children, className }: LinkComponent) => (
+        linkComponent: ({ children, className }: LinkComponent) => (
           <NavLinkBasedOnAuth
             className={className}
             to={childRoute.path}
