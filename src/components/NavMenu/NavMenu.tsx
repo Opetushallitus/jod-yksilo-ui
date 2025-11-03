@@ -84,7 +84,7 @@ export const NavMenu = ({ open, onClose }: { open: boolean; onClose: () => void 
   return (
     <NavigationMenu
       open={open}
-      PortalLinkComponent={PortalLink}
+      portalLinkComponent={PortalLink}
       portalLinkLabel={t('competency-path-portal')}
       menuSection={menuSection}
       ariaCloseMenu={t('close-menu')}

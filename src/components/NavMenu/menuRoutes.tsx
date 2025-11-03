@@ -21,7 +21,7 @@ export const useMenuRoutes = (onClose: () => void) => {
       {
         label: t('front-page'),
         icon: <JodHome />,
-        LinkComponent: ({ children, className }: LinkComponent) => (
+        linkComponent: ({ children, className }: LinkComponent) => (
           <NavLink to={`/${language}`} className={className} lang={language} onClick={onClose}>
             {children}
           </NavLink>
@@ -30,7 +30,7 @@ export const useMenuRoutes = (onClose: () => void) => {
       },
       {
         label: t('navigation.main-section.tool-title'),
-        LinkComponent: ({ children, className }: LinkComponent) => (
+        linkComponent: ({ children, className }: LinkComponent) => (
           <NavLink to={`/${language}/${t('slugs.tool.index')}`} className={className} lang={language} onClick={onClose}>
             {children}
           </NavLink>
@@ -39,7 +39,7 @@ export const useMenuRoutes = (onClose: () => void) => {
       },
       {
         label: t('my-competence-profile'),
-        LinkComponent: ({ children, className }: LinkComponent) => (
+        linkComponent: ({ children, className }: LinkComponent) => (
           <NavLinkBasedOnAuth
             to={`${t('slugs.profile.index')}/${t('slugs.profile.front')}`}
             className={className}

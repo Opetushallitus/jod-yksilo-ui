@@ -118,7 +118,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
       title: t('on-this-page'),
       linkItems: sections.filter(filterDevSections).map((section) => ({
         label: section.navTitle,
-        LinkComponent: getLinkTo(`#${section.navTitle}`),
+        linkComponent: getLinkTo(`#${section.navTitle}`),
       })),
     };
     return (
