@@ -43,7 +43,7 @@ const WorkplaceStep = ({ type, toimenkuva, headerText }: WorkplaceStepProps) => 
             {...register(`nimi.${language}` as const)}
             placeholder={t('profile.work-history.modals.workplace-placeholder')}
             requiredText={t('required')}
-            dataTestId="work-history-workplace-input"
+            testId="work-history-workplace-input"
           />
           <FormError name={`nimi.${language}`} errors={errors} />
         </div>
@@ -55,7 +55,7 @@ const WorkplaceStep = ({ type, toimenkuva, headerText }: WorkplaceStepProps) => 
           requiredText={t('required')}
           placeholder={t('profile.work-history.modals.job-description-placeholder')}
           help={t('profile.work-history.modals.job-description-help')}
-          dataTestId="work-history-job-description-input"
+          testId="work-history-job-description-input"
         />
         <FormError name={`toimenkuvat.${toimenkuva}.nimi.${language}`} errors={errors} />
       </div>
@@ -74,7 +74,7 @@ const WorkplaceStep = ({ type, toimenkuva, headerText }: WorkplaceStepProps) => 
                 placeholder={t('date-placeholder')}
                 requiredText={t('required')}
                 translations={datePickerTranslations}
-                dataTestId="work-history-start-date"
+                testId="work-history-start-date"
               />
             )}
             name={`toimenkuvat.${toimenkuva}.alkuPvm`}
@@ -94,7 +94,7 @@ const WorkplaceStep = ({ type, toimenkuva, headerText }: WorkplaceStepProps) => 
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
                 translations={datePickerTranslations}
-                dataTestId="work-history-end-date"
+                testId="work-history-end-date"
               />
             )}
             name={`toimenkuvat.${toimenkuva}.loppuPvm`}

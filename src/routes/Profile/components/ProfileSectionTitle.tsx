@@ -42,7 +42,7 @@ export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType;
       title={title}
       bgClassName={iconBg}
       textClassName={getTextClassByCompetenceSourceType(type)}
-      dataTestId="profile-section-title"
+      testId="profile-section-title"
     />
   );
 };

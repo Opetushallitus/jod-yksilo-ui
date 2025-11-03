@@ -251,7 +251,7 @@ const YourInfo = () => {
             size="lg"
             linkComponent={ProfileLinkComponent}
             iconSide="right"
-            dataTestId="tool-go-to-profile"
+            testId="tool-go-to-profile"
             icon={<JodArrowRight />}
             className="w-fit"
           />
@@ -328,7 +328,7 @@ const Tool = () => {
         <Breadcrumb />
       </div>
       <div className="flex">
-        <IconHeading icon={<JodCompass className="text-white" />} title={t('tool.title')} dataTestId="tool-title" />
+        <IconHeading icon={<JodCompass className="text-white" />} title={t('tool.title')} testId="tool-title" />
         <div className="ml-1 print:hidden">{<AiInfo type="tool" />}</div>
       </div>
       <p className="text-body-lg-mobile sm:text-body-lg mb-7 sm:mb-9 max-w-[700px]" ref={scrollRef}>

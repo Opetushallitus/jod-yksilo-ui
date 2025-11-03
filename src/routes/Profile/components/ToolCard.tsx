@@ -33,7 +33,7 @@ export const ToolCard = ({ testId = 'go-to-tool', linkParams, className, buttonV
           size="lg"
           linkComponent={getLinkTo(to)}
           iconSide="right"
-          dataTestId={testId}
+          testId={testId}
           icon={<JodArrowRight />}
         />
       </div>

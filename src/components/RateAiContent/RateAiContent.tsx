@@ -104,7 +104,7 @@ export const RateAiContent = ({ variant, area, size }: RateAiContentProps) => {
         }
       }}
       size={size}
-      dataTestId="rate-ai-content"
+      testId="rate-ai-content"
     />
   );
 };

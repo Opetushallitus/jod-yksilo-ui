@@ -192,7 +192,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
                 )}
               </div>
             }
-            dataTestId="opportunity-details-title"
+            testId="opportunity-details-title"
           />
         </div>
 

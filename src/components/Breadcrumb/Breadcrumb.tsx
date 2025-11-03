@@ -110,7 +110,7 @@ export const Breadcrumb = () => {
       items={items}
       serviceVariant="yksilo"
       linkComponent={BreadcrumbLink}
-      dataTestId="breadcrumb"
+      testId="breadcrumb"
       ariaLabel={t('breadcrumb')}
     />
   );

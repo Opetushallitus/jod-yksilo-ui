@@ -34,7 +34,7 @@ const ProfileFront = () => {
       <IconHeading
         icon={<JodUser />}
         title={t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
-        dataTestId="profile-front-title"
+        testId="profile-front-title"
       />
 
       {!isLoading && !data.tervetuloapolku && <WelcomePathModal yksiloData={data} />}

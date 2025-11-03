@@ -77,7 +77,7 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
           requiredText={t('required')}
           placeholder={t('profile.work-history.modals.job-description-placeholder')}
           help={t('profile.work-history.modals.job-description-help')}
-          dataTestId="work-history-job-description-input"
+          testId="work-history-job-description-input"
         />
         <FormError name={`nimi.${language}`} errors={errors} />
       </div>
@@ -93,7 +93,7 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
                 placeholder={t('date-placeholder')}
                 requiredText={t('required')}
                 translations={datePickerTranslations}
-                dataTestId="work-history-start-date"
+                testId="work-history-start-date"
               />
             )}
           />
@@ -108,7 +108,7 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
                 translations={datePickerTranslations}
-                dataTestId="work-history-end-date"
+                testId="work-history-end-date"
               />
             )}
             name="loppuPvm"
