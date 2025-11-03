@@ -23,6 +23,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 const SUOSIKIT_PATH = '/api/profiili/suosikit';
+const DEFAULT_PAINOTUS = 50;
 
 let abortController = new AbortController();
 
@@ -36,9 +37,9 @@ export const useToolStore = create<ToolState>()(
       kiinnostuksetVapaateksti: undefined,
       suosikit: [],
       suosikitLoading: false,
-      osaamisKiinnostusPainotus: 50,
-      kiinnostusPainotus: 50,
-      rajoitePainotus: 50,
+      osaamisKiinnostusPainotus: DEFAULT_PAINOTUS,
+      kiinnostusPainotus: DEFAULT_PAINOTUS,
+      rajoitePainotus: DEFAULT_PAINOTUS,
       mahdollisuusEhdotukset: {},
       tyomahdollisuudet: [],
       koulutusmahdollisuudet: [],
@@ -67,6 +68,7 @@ export const useToolStore = create<ToolState>()(
           mixedMahdollisuudet: [],
           filters: DEFAULT_FILTERS,
           sorting: DEFAULT_SORTING,
+          osaamisKiinnostusPainotus: DEFAULT_PAINOTUS,
         });
       },
       resetSettings: () => {
@@ -75,6 +77,7 @@ export const useToolStore = create<ToolState>()(
           sorting: DEFAULT_SORTING,
           settingsHaveChanged: true,
           shouldFetchData: false,
+          osaamisKiinnostusPainotus: DEFAULT_PAINOTUS,
         });
       },
       setTavoitteet: (state) => set({ tavoitteet: state }),
