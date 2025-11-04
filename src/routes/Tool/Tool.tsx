@@ -194,23 +194,45 @@ const ProfileLinkComponent = ({ className, children }: { className?: string; chi
 
 const YourInfo = () => {
   const { t } = useTranslation();
+  const competenceOverviewRef = React.useRef<HTMLDivElement>(null);
+  const [overviewOpen, setOverviewOpen] = React.useState(false);
+  const onImportSuccess = () => {
+    setOverviewOpen(true);
+    setTimeout(() => {
+      if (competenceOverviewRef.current) {
+        competenceOverviewRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  };
 
   return (
     <>
-      <ToolAccordion title={t('interests')} description={t('tool.my-own-data.interests.description')}>
+      <ToolAccordion
+        title={t('tool.info-overview.mapped-interests')}
+        description={t('tool.my-own-data.interests.description')}
+      >
         <Interests />
       </ToolAccordion>
 
-      <ToolAccordion title={t('competences')} description={t('tool.my-own-data.competences.description')}>
+      <ToolAccordion
+        title={t('tool.info-overview.mapped-competences')}
+        description={t('tool.my-own-data.competences.description')}
+      >
         <Competences />
       </ToolAccordion>
 
-      <ToolAccordion title={t('tool.info-overview.title')} description={t('tool.info-overview.description')}>
+      <ToolAccordion
+        title={t('tool.info-overview.title')}
+        description={t('tool.info-overview.description')}
+        ref={competenceOverviewRef}
+        isOpen={overviewOpen}
+        setIsOpen={setOverviewOpen}
+      >
         <CategorizedCompetenceTagList />
       </ToolAccordion>
 
       <ToolAccordion title={t('tool.competency-profile.title')} description={t('tool.competency-profile.description')}>
-        <ProfileImportExport />
+        <ProfileImportExport onImportSuccess={onImportSuccess} />
       </ToolAccordion>
 
       <ToolAccordion title={t('tool.tools.title')} description={t('tool.tools.description')}>
