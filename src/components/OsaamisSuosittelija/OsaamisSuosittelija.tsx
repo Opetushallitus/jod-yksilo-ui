@@ -57,15 +57,20 @@ export const OsaamisSuosittelija = ({
   const [debouncedTaitosi, taitosi, setTaitosi] = useDebounceState('', 500);
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
-
+  const isFetching = React.useRef(false);
   const abortController = React.useRef<AbortController | null>(null);
+  const pendingTaitosi = React.useRef<string | null>(null);
 
   React.useEffect(() => {
-    abortController.current?.abort();
-    abortController.current = new AbortController();
-
     const fetchCompetences = async (value: string) => {
+      if (isFetching.current) {
+        pendingTaitosi.current = value; // Queue the latest value for next fetch
+        abortController.current?.abort();
+        abortController.current = new AbortController();
+        return;
+      }
       try {
+        isFetching.current = true;
         const ehdotus = await client.POST('/api/ehdotus/osaamiset', {
           body: { [i18n.language]: value },
           signal: abortController.current?.signal,
@@ -89,6 +94,14 @@ export const OsaamisSuosittelija = ({
         // Ignore abort errors
         if (!(error instanceof DOMException && error.name === 'AbortError')) {
           throw error;
+        }
+      } finally {
+        isFetching.current = false;
+        // If a new value was queued, fetch it now
+        if (pendingTaitosi.current && pendingTaitosi.current !== value) {
+          const nextValue = pendingTaitosi.current;
+          pendingTaitosi.current = null;
+          void fetchCompetences(nextValue);
         }
       }
     };
