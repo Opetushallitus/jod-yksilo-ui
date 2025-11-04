@@ -42,11 +42,7 @@ const CompetenceCategory = ({
   onChange: (id: string) => () => void;
   lahdeTyyppi?: OsaaminenLahdeTyyppi;
 }) => {
-  return (
-    <div className="flex flex-wrap gap-3">
-      <AddedTags osaamiset={osaamiset} onClick={onChange} lahdetyyppi={lahdeTyyppi} />
-    </div>
-  );
+  return <AddedTags osaamiset={osaamiset} onClick={onChange} lahdetyyppi={lahdeTyyppi} />;
 };
 
 /**
@@ -96,20 +92,30 @@ const CategorizedCompetenceTagList = () => {
   const combinedData = [...osaamiset, ...kiinnostukset];
   const hasProfileCompetences = combinedData.filter((o) => o.tyyppi && profileTypes.includes(o.tyyppi)).length > 0;
   const hasOtherData = osaamisetVapaateksti?.[language] || kiinnostuksetVapaateksti?.[language];
+  const mappedCompetencesId = React.useId();
+  const competencesFromProfileId = React.useId();
 
   return (
     <div className="flex flex-col">
-      <div className="text-heading-4 mt-5">{t('tool.info-overview.mapped-competences')}</div>
+      <div id={mappedCompetencesId} className="text-heading-4 mt-5">
+        {t('tool.info-overview.mapped-competences')}
+      </div>
       <div className="flex flex-col gap-4 mb-6">
         {hasMappedCompetences ? (
           <>
             <div className="font-arial text-body-sm text-secondary-gray">{t('tool.remove-competence-help')}</div>
-            {mappedCompetences.length > 0 && (
-              <CompetenceCategory osaamiset={mappedCompetences} onChange={removeOsaaminen} />
-            )}
-            {mappedInterests.length > 0 && (
-              <CompetenceCategory osaamiset={mappedInterests} onChange={removeKiinnostus} lahdeTyyppi="KIINNOSTUS" />
-            )}
+            <ul
+              data-testid="osaamissuosittelija-selected-competences"
+              aria-labelledby={mappedCompetencesId}
+              className="gap-3 flex flex-col flex-wrap"
+            >
+              {mappedCompetences.length > 0 && (
+                <CompetenceCategory osaamiset={mappedCompetences} onChange={removeOsaaminen} />
+              )}
+              {mappedInterests.length > 0 && (
+                <CompetenceCategory osaamiset={mappedInterests} onChange={removeKiinnostus} lahdeTyyppi="KIINNOSTUS" />
+              )}
+            </ul>
             <Button
               variant="plain"
               onClick={() => {
@@ -125,21 +131,23 @@ const CategorizedCompetenceTagList = () => {
           </div>
         )}
       </div>
-      <div className="text-heading-4">{t('tool.info-overview.data-from-profile')}</div>
+      <div id={competencesFromProfileId} className="text-heading-4">
+        {t('tool.info-overview.data-from-profile')}
+      </div>
       {hasProfileCompetences ? (
         <div className="flex flex-col gap-4">
           <div className="font-arial text-body-sm text-secondary-gray">{t('tool.remove-competence-help')}</div>
-          {profileTypes
-            .filter((type) => combinedData.some((o) => o.tyyppi === type))
-            .map((type) => (
-              <div key={type}>
+          <ul className="gap-3 flex flex-col flex-wrap" aria-labelledby={competencesFromProfileId}>
+            {profileTypes
+              .filter((type) => combinedData.some((o) => o.tyyppi === type))
+              .map((type) => (
                 <CompetenceCategory
                   key={type}
                   osaamiset={combinedData.filter(filterByType(type))}
                   onChange={type === 'KIINNOSTUS' ? removeKiinnostus : removeOsaaminen}
                 />
-              </div>
-            ))}
+              ))}
+          </ul>
           <Button
             variant="plain"
             onClick={() => {
