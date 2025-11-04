@@ -10,6 +10,7 @@ import { getLinkTo } from '@/utils/routeUtils';
 import { Button, ConfirmDialog } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
+import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
@@ -84,7 +85,7 @@ const CompetenceExport = () => {
   );
 };
 
-const CompetenceImport = () => {
+const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void }) => {
   const {
     t,
     i18n: { language },
@@ -152,79 +153,88 @@ const CompetenceImport = () => {
   }, [setKiinnostukset, setKiinnostuksetVapaateksti, storeKiinnostukset]);
 
   const onCompetenceImportConfirm = React.useCallback(async () => {
-    const mappedSelectedCompetences = FILTERS_ORDER.map((tyyppi) =>
-      (selectedFilters[tyyppi] ?? [])
-        .filter((sf) => sf.checked)
-        .map((f) => ({
-          id: f.value,
-          tyyppi: tyyppi,
-        })),
-    ).flat();
+    try {
+      const mappedSelectedCompetences = FILTERS_ORDER.map((tyyppi) =>
+        (selectedFilters[tyyppi] ?? [])
+          .filter((sf) => sf.checked)
+          .map((f) => ({
+            id: f.value,
+            tyyppi: tyyppi,
+          })),
+      ).flat();
 
-    const importedInterests = [
-      ...kiinnostukset
-        .filter((kiinnostus) =>
-          mappedSelectedCompetences.some((msc) => msc.tyyppi === 'KIINNOSTUS' && msc.id.includes(kiinnostus.uri)),
-        )
-        .map((k) => ({
-          id: k.uri,
-          nimi: k.nimi,
-          kuvaus: k.kuvaus,
-          tyyppi: 'KIINNOSTUS' as OsaaminenLahdeTyyppi,
-        })),
-    ];
+      const importedInterests = [
+        ...kiinnostukset
+          .filter((kiinnostus) =>
+            mappedSelectedCompetences.some((msc) => msc.tyyppi === 'KIINNOSTUS' && msc.id.includes(kiinnostus.uri)),
+          )
+          .map((k) => ({
+            id: k.uri,
+            nimi: k.nimi,
+            kuvaus: k.kuvaus,
+            tyyppi: 'KIINNOSTUS' as OsaaminenLahdeTyyppi,
+          })),
+      ];
 
-    const currentAndImportedSkills = [
-      ...osaamiset
-        .filter((osaaminen) => {
-          return mappedSelectedCompetences.some((msc) => {
-            if (msc.tyyppi === 'MUU_OSAAMINEN') {
-              return msc.id.includes(osaaminen.osaaminen.uri) && osaaminen.lahde.tyyppi === 'MUU_OSAAMINEN';
-            } else if (osaaminen.lahde.id) {
-              return msc.id.includes(osaaminen.lahde.id) && msc.tyyppi === osaaminen.lahde.tyyppi;
-            }
-            return false;
-          });
-        })
-        .map((skill) => ({
-          id: skill.osaaminen.uri,
-          nimi: skill.osaaminen.nimi,
-          kuvaus: skill.osaaminen.kuvaus,
-          tyyppi: skill.lahde.tyyppi,
-        })),
-      ...storeOsaamiset.filter((o) => o.tyyppi === 'KARTOITETTU'),
-    ];
+      const currentAndImportedSkills = [
+        ...osaamiset
+          .filter((osaaminen) => {
+            return mappedSelectedCompetences.some((msc) => {
+              if (msc.tyyppi === 'MUU_OSAAMINEN') {
+                return msc.id.includes(osaaminen.osaaminen.uri) && osaaminen.lahde.tyyppi === 'MUU_OSAAMINEN';
+              } else if (osaaminen.lahde.id) {
+                return msc.id.includes(osaaminen.lahde.id) && msc.tyyppi === osaaminen.lahde.tyyppi;
+              }
+              return false;
+            });
+          })
+          .map((skill) => ({
+            id: skill.osaaminen.uri,
+            nimi: skill.osaaminen.nimi,
+            kuvaus: skill.osaaminen.kuvaus,
+            tyyppi: skill.lahde.tyyppi,
+          })),
+        ...storeOsaamiset.filter((o) => o.tyyppi === 'KARTOITETTU'),
+      ];
 
-    // Count occurrences for each id
-    const occurrences = currentAndImportedSkills.reduce(
-      (acc, item) => {
-        acc[item.id] = (acc[item.id] || 0) + 1;
-        return acc;
-      },
-      {} as Record<string, number>,
-    );
-    // Remove duplicates and sort by occurrence count
-    const filtered = Array.from(
-      new Map(currentAndImportedSkills.map((item) => [item.id + item.tyyppi, item])).values(),
-    ).sort((a, b) => occurrences[b.id] - occurrences[a.id]);
+      // Count occurrences for each id
+      const occurrences = currentAndImportedSkills.reduce(
+        (acc, item) => {
+          acc[item.id] = (acc[item.id] || 0) + 1;
+          return acc;
+        },
+        {} as Record<string, number>,
+      );
+      // Remove duplicates and sort by occurrence count
+      const filtered = Array.from(
+        new Map(currentAndImportedSkills.map((item) => [item.id + item.tyyppi, item])).values(),
+      ).sort((a, b) => occurrences[b.id] - occurrences[a.id]);
 
-    setOsaamiset(filtered);
+      setOsaamiset(filtered);
 
-    if (currentAndImportedSkills.some((o) => o.tyyppi === 'MUU_OSAAMINEN')) {
-      const { data } = await client.GET('/api/profiili/muu-osaaminen');
-      setOsaamisetVapaateksti(data?.vapaateksti);
-    }
-    if (importedInterests.length > 0) {
-      await importKiinnostuksetFromProfile();
+      if (currentAndImportedSkills.some((o) => o.tyyppi === 'MUU_OSAAMINEN')) {
+        const { data } = await client.GET('/api/profiili/muu-osaaminen');
+        setOsaamisetVapaateksti(data?.vapaateksti);
+      }
+      if (importedInterests.length > 0) {
+        await importKiinnostuksetFromProfile();
+      }
+
+      toast.success(t('tool.my-own-data.competences.import.success-toast'));
+      onImportSuccess?.();
+    } catch (_error) {
+      toast.error(t('tool.my-own-data.competences.import.failure-toast'));
     }
   }, [
     importKiinnostuksetFromProfile,
     kiinnostukset,
+    onImportSuccess,
     osaamiset,
     selectedFilters,
     setOsaamiset,
     setOsaamisetVapaateksti,
     storeOsaamiset,
+    t,
   ]);
   // Have to render ConfirmDialog here instead of "showDialog" from the "useModal" hook because of the "content" prop.
   // When using "showDialog" and passing content that way, the dialog will not render any changes to content, like ticking the checkboxes.
@@ -258,7 +268,7 @@ const CompetenceImport = () => {
   );
 };
 
-const ProfileImportExport = () => {
+const ProfileImportExport = ({ onImportSuccess }: { onImportSuccess?: () => void }) => {
   const {
     t,
     i18n: { language },
@@ -270,7 +280,7 @@ const ProfileImportExport = () => {
     <div className="flex flex-col gap-6 whitespace-pre-line">
       <p className="font-arial text-body-md">{t('tool.competency-profile.help')}</p>
       <div className="flex flex-col gap-3">
-        <CompetenceImport />
+        <CompetenceImport onImportSuccess={onImportSuccess} />
         <CompetenceExport />
       </div>
     </div>

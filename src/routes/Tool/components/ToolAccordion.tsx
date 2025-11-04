@@ -6,19 +6,28 @@ const ToolAccordion = ({
   title,
   description,
   children,
+  ref,
+  isOpen: controlledIsOpen,
+  setIsOpen: controlledSetIsOpen,
 }: {
   children: React.ReactNode;
   title: string;
   description: string;
+  ref?: React.Ref<HTMLDivElement>;
+  setIsOpen?: (isOpen: boolean) => void;
+  isOpen?: boolean;
 }) => {
   const { t } = useTranslation();
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [internalIsOpen, setInternalIsOpen] = React.useState(false);
+  const isControlled = controlledIsOpen !== undefined;
+  const isOpen = isControlled ? controlledIsOpen : internalIsOpen;
+  const setIsOpen = isControlled && controlledSetIsOpen ? controlledSetIsOpen : setInternalIsOpen;
   const id = title.toLocaleLowerCase().replace(/\s+/g, '-');
   const triggerId = `accordion-${id}`;
   const contentId = `accordion-${id}-content`;
 
   return (
-    <div className="bg-white rounded py-6 px-5">
+    <div className="bg-white rounded py-6 px-5" ref={ref}>
       <Accordion
         ariaLabel={title}
         isOpen={isOpen}
