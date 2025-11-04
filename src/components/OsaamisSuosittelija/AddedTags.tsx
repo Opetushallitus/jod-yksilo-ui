@@ -23,15 +23,16 @@ const AddedTags = ({ osaamiset, lahdetyyppi, onClick }: AddedTagProps) =>
     }
 
     return (
-      <Tag
-        key={osaaminen.id + sourceType}
-        label={getLocalizedText(osaaminen.nimi)}
-        tooltip={getLocalizedText(osaaminen.kuvaus)}
-        sourceType={sourceType}
-        onClick={onClick(osaaminen.id)}
-        variant="added"
-        data-testid={`added-tag-${osaaminen.id}`}
-      />
+      <li key={osaaminen.id + sourceType}>
+        <Tag
+          label={getLocalizedText(osaaminen.nimi)}
+          tooltip={getLocalizedText(osaaminen.kuvaus)}
+          sourceType={sourceType}
+          onClick={onClick(osaaminen.id)}
+          variant="added"
+          data-testid={`added-tag-${osaaminen.id}`}
+        />
+      </li>
     );
   });
 

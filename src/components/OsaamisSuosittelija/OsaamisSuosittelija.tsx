@@ -58,6 +58,7 @@ export const OsaamisSuosittelija = ({
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const isFetching = React.useRef(false);
+  const addedTagsId = React.useId();
   const abortController = React.useRef<AbortController | null>(null);
   const pendingTaitosi = React.useRef<string | null>(null);
 
@@ -227,7 +228,9 @@ export const OsaamisSuosittelija = ({
                 tagHeadingClassName,
               ])}
             >
-              <span>{mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}</span>
+              <span id={addedTagsId}>
+                {mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}
+              </span>
               {value.length > 0 && (
                 <div className="font-arial text-body-sm text-secondary-gray mb-4">
                   {mode === 'osaamiset'
@@ -239,13 +242,17 @@ export const OsaamisSuosittelija = ({
 
             <div className="overflow-y-auto max-h-[228px]">
               {value.length > 0 ? (
-                <div className="flex flex-wrap gap-3" data-testid="osaamissuosittelija-selected-competences">
+                <ul
+                  className="flex flex-wrap gap-3"
+                  data-testid="osaamissuosittelija-selected-competences"
+                  aria-labelledby={addedTagsId}
+                >
                   <AddedTags
                     osaamiset={value}
                     onClick={removeOsaaminenById}
                     lahdetyyppi={mode === 'osaamiset' ? 'MUU_OSAAMINEN' : 'KIINNOSTUS'}
                   />
-                </div>
+                </ul>
               ) : (
                 <div className="mt-4" data-testid="osaamissuosittelija-selected-competences-empty">
                   <EmptyState
