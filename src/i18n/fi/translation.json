@@ -432,8 +432,6 @@
   },
   "my-competences-alphabetically": "Osaamiseni aakkosjärjestyksessä",
   "my-competences-by-sources": "Osaamiseni lähteiden mukaan",
-  "n-education-opportunities": "{{count}} koulutusmahdollisuutta",
-  "n-job-opportunities": "{{count}} työmahdollisuutta",
   "name": "Nimi",
   "navigation": {
     "external": {
@@ -481,16 +479,6 @@
     "work": {
       "AMMATTITIETO": "Ammatti on kokonaisuus keskenään hyvin samankaltaisista töistä. Se kuvaa, millaisia tehtäviä, taitoja ja vastuita työhön kuuluu. Samaan ammattiin kuuluvat työt ovat sisällöltään niin samanlaisia, että ne voidaan luokitella yhdeksi ammatiksi.",
       "TMT": "Työmahdollisuus on tekoälyn muodostama ryhmä samankaltaisista työpaikoista. Tekoäly lukee työpaikkailmoituksia ja tunnistaa niistä tarvittavat taidot, luvat, ajokortit ja mainitut ammatit. Ilmoitukset, joissa on riittävästi tietoa, ryhmitellään sisällön perusteella, jolloin syntyy työmahdollisuuksia – eli joukkoja töistä, joissa vaaditaan samanlaisia osaamisia ja ominaisuuksia."
-    }
-  },
-  "opportunity-type": {
-    "education": {
-      "EI_TUTKINTO": "Muu koulutus",
-      "TUTKINTO": "Tutkinto"
-    },
-    "work": {
-      "AMMATTITIETO": "Ammatti",
-      "TMT": "Muu työmahdollisuus"
     }
   },
   "osaamispolku": "Osaamispolku",
@@ -959,7 +947,6 @@
         "location": "Sijainti",
         "occupation-type": "Ylätason ammattiryhmä",
         "sorting": "Järjestys",
-        "title": "Yleiset säätimet",
         "weight": "Painotus"
       },
       "reset": "Poista valinnat",

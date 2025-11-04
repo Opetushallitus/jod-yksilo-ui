@@ -5,11 +5,23 @@
     "go-to-service-directory": "Go to Guidance and counselling services",
     "need-personal-guidance-content": "Guidance and counselling services help you reflect on career and education options. Narrow down the list of services based on themes that interest you and, for example, your place of residence to find the services that suit you best."
   },
+  "n-education-opportunities": "{{count}} / {{total}} education opportunities",
+  "n-job-opportunities": "{{count}} / {{total}} job opportunities",
   "n-months_one": "{{count}} month",
   "n-months_other": "{{count}} months",
   "n-months-short": "{{count}} mo",
   "n-years_one": "{{count}} year",
   "n-years_other": "{{count}} years",
+  "opportunity-type": {
+    "education": {
+      "EI_TUTKINTO": "Other education opportunities",
+      "TUTKINTO": "Degrees"
+    },
+    "work": {
+      "AMMATTITIETO": "Professions",
+      "TMT": "Job opportunities"
+    }
+  },
   "tool": {
     "competency-profile": {
       "help": "Import competences from your competence profile to your overall data view. You can utilize previously saved competences when exploring opportunities. You can import all competences or only those you want."

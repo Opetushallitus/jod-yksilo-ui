@@ -48,6 +48,8 @@ export const useToolStore = create<ToolState>()(
       ehdotuksetPageSize: DEFAULT_PAGE_SIZE,
       mahdollisuudetLoading: false,
       filteredMahdollisuudetCount: 0,
+      filteredKoulutusMahdollisuudetCount: 0,
+      filteredTyomahdollisuudetCount: 0,
       ehdotuksetPageNr: 1,
       ehdotuksetCount: { TYOMAHDOLLISUUS: 0, KOULUTUSMAHDOLLISUUS: 0 },
       sorting: DEFAULT_SORTING,
@@ -176,9 +178,22 @@ export const useToolStore = create<ToolState>()(
         };
 
         // apply ID sorting and filter
-        const allSortedIds = await filterEhdotukset(filters);
-        set({ filteredMahdollisuudetCount: allSortedIds.length });
-        set({ mahdollisuudetLoading: true });
+        const filteredEhdotukset = await filterEhdotukset(filters);
+        const allSortedIds = filteredEhdotukset.map(([key]) => key);
+        const filteredKoulutusMahdollisuudetCount = filteredEhdotukset.filter(
+          ([, meta]) => meta.tyyppi === 'KOULUTUSMAHDOLLISUUS',
+        ).length;
+        const filteredTyomahdollisuudetCount = filteredEhdotukset.filter(
+          ([, meta]) => meta.tyyppi === 'TYOMAHDOLLISUUS',
+        ).length;
+
+        set({
+          filteredKoulutusMahdollisuudetCount,
+          filteredTyomahdollisuudetCount,
+          filteredMahdollisuudetCount: allSortedIds.length,
+          mahdollisuudetLoading: true,
+        });
+
         try {
           const sortedMixedMahdollisuudet: TypedMahdollisuus[] = [];
 
@@ -278,8 +293,7 @@ export const useToolStore = create<ToolState>()(
               sorting === sortingValues.RELEVANCE
                 ? (metadataB?.pisteet ?? 0) - (metadataA?.pisteet ?? 0)
                 : (metadataA?.aakkosIndeksi ?? 0) - (metadataB?.aakkosIndeksi ?? 0),
-            )
-            .map(([key]) => key);
+            );
         }
       },
 
@@ -404,7 +418,10 @@ export const useToolStore = create<ToolState>()(
     {
       name: 'tool-storage',
       storage: createJSONStorage(() => sessionStorage),
-      version: 1,
+      version: 2,
+      migrate: () => {
+        sessionStorage.removeItem('tool-storage');
+      },
     },
   ),
 );

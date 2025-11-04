@@ -1,10 +1,11 @@
 import { useToolStore } from '@/stores/useToolStore';
 import { Checkbox } from '@jod/design-system';
+import { JodAi } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-const FilterOpporunityType = () => {
+export const FilterJobOpportunityType = () => {
   const { t } = useTranslation();
 
   const { filter, setFilter } = useToolStore(
@@ -14,7 +15,7 @@ const FilterOpporunityType = () => {
     })),
   );
   const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newFilter = event.target.value as string;
+    const newFilter = event.target.value;
     setFilter('jobOpportunityType', newFilter);
   };
 
@@ -35,7 +36,11 @@ const FilterOpporunityType = () => {
         ariaLabel={t('opportunity-type.work.TMT')}
         className="font-poppins!"
         checked={filter.includes('TMT')}
-        label={t('opportunity-type.work.TMT')}
+        label={
+          <span className="pl-4">
+            {t('opportunity-type.work.TMT')} <JodAi className="inline mb-1 ml-3" />
+          </span>
+        }
         name={t('opportunity-type.work.TMT')}
         onChange={onFilterChange}
         value="TMT"
@@ -44,5 +49,3 @@ const FilterOpporunityType = () => {
     </fieldset>
   );
 };
-
-export default FilterOpporunityType;

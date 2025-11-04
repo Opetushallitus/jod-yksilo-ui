@@ -61,6 +61,8 @@ export interface ToolState {
   ehdotuksetPageNr: number;
   ehdotuksetCount: Record<MahdollisuusTyyppi, number>;
   filteredMahdollisuudetCount: number;
+  filteredKoulutusMahdollisuudetCount: number;
+  filteredTyomahdollisuudetCount: number;
   sorting: OpportunitySortingValue;
   previousEhdotusUpdateLang: string;
   filters: ToolFilters;
