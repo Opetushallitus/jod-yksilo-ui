@@ -107,7 +107,7 @@ const CategorizedCompetenceTagList = () => {
             <ul
               data-testid="osaamissuosittelija-selected-competences"
               aria-labelledby={mappedCompetencesId}
-              className="gap-3 flex flex-col flex-wrap"
+              className="gap-3 flex flex-wrap"
             >
               {mappedCompetences.length > 0 && (
                 <CompetenceCategory osaamiset={mappedCompetences} onChange={removeOsaaminen} />
@@ -137,7 +137,7 @@ const CategorizedCompetenceTagList = () => {
       {hasProfileCompetences ? (
         <div className="flex flex-col gap-4">
           <div className="font-arial text-body-sm text-secondary-gray">{t('tool.remove-competence-help')}</div>
-          <ul className="gap-3 flex flex-col flex-wrap" aria-labelledby={competencesFromProfileId}>
+          <ul className="gap-3 flex flex-wrap" aria-labelledby={competencesFromProfileId}>
             {profileTypes
               .filter((type) => combinedData.some((o) => o.tyyppi === type))
               .map((type) => (
