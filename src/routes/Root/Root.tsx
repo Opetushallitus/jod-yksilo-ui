@@ -35,7 +35,6 @@ import {
   useLoaderData,
   useLocation,
   useMatch,
-  useNavigate,
 } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { LogoutFormContext } from '.';
@@ -62,14 +61,13 @@ const Root = () => {
   const resetToolStore = useToolStore((state) => state.reset);
   const { note, clearNote } = useNoteStore(useShallow((state) => ({ note: state.note, clearNote: state.clearNote })));
   const location = useLocation();
-  const navigate = useNavigate();
   const { addNote, removeNote } = useNoteStack();
   const [navMenuOpen, setNavMenuOpen] = React.useState(false);
   const [feedbackVisible, setFeedbackVisible] = React.useState(false);
   const logoutForm = React.useRef<HTMLFormElement>(null);
 
   const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
-  const hostname = window.location.hostname;
+  const hostname = globalThis.location.hostname;
   const menuButtonRef = React.useRef<HTMLButtonElement>(null);
   const { siteId, agent } = React.useMemo(() => {
     if (hostname === 'osaamispolku.fi') {
@@ -153,7 +151,9 @@ const Root = () => {
                 disable(); // Disables any future warnings or expirations
                 removeNote(sessionExpiredNoteId);
                 if (isOnProtectedRoute) {
-                  navigate(`/${language}`);
+                  globalThis.location.href = globalThis.location.origin + `/yksilo/${language}`;
+                } else {
+                  globalThis.location.reload();
                 }
               }}
             />
