@@ -56,19 +56,25 @@ export const FilterAmmattiryhma = () => {
     fillAmmattiryhmaNimet(upperLevelAmmattiryhmat);
   }, [fillAmmattiryhmaNimet, upperLevelAmmattiryhmat]);
 
+  const visibleAmmattiRyhmat = upperLevelAmmattiryhmat
+    .map((ar) => ({ id: ar, name: ammattiryhmaNimet?.[ar] }))
+    .filter((ar) => ar.name !== undefined)
+    .map((ar) => ({ name: getLocalizedText(ar.name), id: ar.id }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
   return (
     <fieldset className="flex flex-col gap-5">
       <legend className="text-heading-4-mobile sm:text-heading-4 mb-5 sr-only">{t('show')}</legend>
-      {upperLevelAmmattiryhmat.map((ar) => (
+      {visibleAmmattiRyhmat.map((ar) => (
         <Checkbox
-          key={ar}
-          ariaLabel={getLocalizedText(ammattiryhmaNimet?.[ar])}
+          key={ar.id}
+          ariaLabel={ar.name}
           className="font-poppins!"
-          checked={filter.ammattiryhmat?.includes(ar)}
-          label={getLocalizedText(ammattiryhmaNimet?.[ar])}
-          name={getLocalizedText(ammattiryhmaNimet?.[ar])}
+          checked={filter.ammattiryhmat?.includes(ar.id)}
+          label={ar.name}
+          name={ar.name}
           onChange={onFilterChange}
-          value={ar}
+          value={ar.id}
           data-testid="upper-level-ammattiryhma-filter"
         />
       ))}
