@@ -4,7 +4,7 @@ import { useLoginLink } from '@/hooks/useLoginLink';
 import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
+import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate, useRouteLoaderData } from 'react-router';
@@ -82,9 +82,13 @@ const LoginPage = () => {
           variant="plain"
           serviceVariant="yksilo"
           label={t('privacy-policy')}
-          icon={<JodArrowRight />}
+          icon={<JodOpenInNew ariaLabel={t('external-link')} />}
           iconSide="right"
-          linkComponent={getLinkTo(`/${language}/${t('slugs.privacy-and-cookies')}`, { useAnchor: true })}
+          linkComponent={getLinkTo(`/${language}/${t('slugs.privacy-and-cookies')}`, {
+            useAnchor: true,
+            target: '_blank',
+            rel: 'noopener noreferrer',
+          })}
           className="w-fit"
         />
       </div>
