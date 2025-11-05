@@ -27,7 +27,7 @@ const ErrorBoundary = () => {
       <p className="text-body-lg">{message}</p>
       <div className="flex gap-4">
         <Button
-          data-testid="error-boundary-home"
+          testId="error-boundary-home"
           icon={<JodHome />}
           iconSide="left"
           label={t('return-home')}
@@ -40,7 +40,7 @@ const ErrorBoundary = () => {
           )}
         />
         <Button
-          data-testid="error-boundary-login"
+          testId="error-boundary-login"
           icon={<JodUser />}
           iconSide="left"
           label={t('login')}

@@ -102,7 +102,7 @@ const Interests = () => {
 
       {isAllSkillsEmpty && (
         <div className="mt-6 mb-7">
-          <EmptyState text={t('profile.interests.empty')} data-testid="interests-empty-state" />
+          <EmptyState text={t('profile.interests.empty')} testId="interests-empty-state" />
         </div>
       )}
       {!isSkillsEmpty && (
@@ -150,7 +150,7 @@ const Interests = () => {
           onClick={() => {
             showModal(EditKiinnostusModal, { data: kiinnostukset });
           }}
-          data-testid="interests-edit-button"
+          testId="interests-edit-button"
         />
       </div>
       <Textarea
@@ -162,7 +162,7 @@ const Interests = () => {
           register(language).ref(e);
           ref.current = e;
         }}
-        data-testid="interests-freeform"
+        testId="interests-freeform"
       />
       {lg ? null : <ToolCard testId="interests-go-to-tool" className="mt-6" />}
     </MainLayout>

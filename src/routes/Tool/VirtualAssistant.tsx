@@ -126,7 +126,7 @@ export const VirtualAssistant = ({
           variant="white"
           size="sm"
           label={t('done')}
-          data-testid="va-done"
+          testId="va-done"
         />
       </div>
 
@@ -235,7 +235,7 @@ export const VirtualAssistant = ({
           maxLength={10000}
           hideLabel
           className="bg-[#F7F7F9]!"
-          data-testid="va-input"
+          testId="va-input"
         />
         <div className="flex justify-between">
           <Button
@@ -249,7 +249,7 @@ export const VirtualAssistant = ({
             label={t('tool.my-own-data.interests.virtual-assistant.intrests', {
               count: selectedKiinnostukset.length,
             })}
-            data-testid="va-open-selected-interests"
+            testId="va-open-selected-interests"
           />
           <Button
             disabled={value === ''}
@@ -257,7 +257,7 @@ export const VirtualAssistant = ({
             variant="accent"
             size="sm"
             label={t('tool.my-own-data.interests.virtual-assistant.send')}
-            data-testid="va-send"
+            testId="va-send"
           />
         </div>
       </div>

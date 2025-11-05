@@ -5,6 +5,7 @@ export interface HelpingToolLinkItemProps {
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
   title: string;
+  testId?: string;
 }
 
 export interface HelpingToolProfileLinkItemProps extends HelpingToolLinkItemProps {
@@ -20,6 +21,7 @@ export const HelpingToolProfileLinkItem = ({
   iconLeft,
   iconRight,
   title,
+  testId,
 }: HelpingToolProfileLinkItemProps) => {
   return (
     <HelpingToolLinkItem
@@ -30,6 +32,7 @@ export const HelpingToolProfileLinkItem = ({
       iconLeft={iconLeft}
       iconRight={iconRight}
       title={title}
+      testId={testId}
     />
   );
 };
@@ -59,9 +62,10 @@ export const HelpingToolLinkItem = ({
   iconLeft,
   iconRight,
   title,
+  testId,
 }: HelpingToolLinkItemProps & ComponentProp) => {
   return (
-    <li className="group">
+    <li className="group" data-testid={testId}>
       <Component>
         <div className="flex gap-x-3 items-center">
           {iconLeft ?? null}

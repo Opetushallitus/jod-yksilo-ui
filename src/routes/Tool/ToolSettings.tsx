@@ -47,19 +47,21 @@ const SettingsMenu = ({ ref, isModal }: Pick<ToolSettingsProps, 'ref' | 'isModal
         title={t('tool.settings.general.filter')}
         ref={ref}
         count={getFilterCount(['opportunityType', 'educationOpportunityType', 'jobOpportunityType', 'ammattiryhmat'])}
+        testId="filter-setting"
       >
         <FilterOpportunityType />
       </Setting>
-      <Setting title={t('tool.settings.general.weight')}>
+      <Setting title={t('tool.settings.general.weight')} testId="weight-setting">
         <OpportunityWeight />
       </Setting>
-      <Setting title={t('tool.settings.general.sorting')}>
+      <Setting title={t('tool.settings.general.sorting')} testId="sorting-setting">
         <OpportunitiesSorting />
       </Setting>
       <Setting
         title={t('tool.settings.general.location')}
         count={getFilterCount(['region'])}
         className="border-b-2 pb-3"
+        testId="location-setting"
       >
         <FilterSijainti />
       </Setting>
@@ -78,6 +80,7 @@ const ToolSettings = ({ ref, isOpen, onClose, isModal }: ToolSettingsProps) => {
         serviceVariant="yksilo"
         onClick={resetSettings}
         label={t('tool.settings.reset')}
+        testId="reset-settings-button"
       />
     </div>
   );
@@ -106,6 +109,7 @@ const ToolSettings = ({ ref, isOpen, onClose, isModal }: ToolSettingsProps) => {
           {resetSection('bg-bg-gray')}
         </div>
       }
+      testId="tool-settings"
     />
   ) : (
     <div className="bg-bg-gray-2 rounded mb-7 py-4 px-6 sm:text-body-sm text-body-sm-mobile flex flex-col gap-2 sticky top-[124px] z-10">

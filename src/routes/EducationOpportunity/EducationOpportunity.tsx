@@ -127,7 +127,7 @@ const EducationOpportunity = () => {
           <p>{t('education-opportunity.opintopolku.description')}</p>
           <div className="mt-7">
             <Button
-              data-testid="education-opportunity-open-opintopolku"
+              testId="education-opportunity-open-opintopolku"
               size="sm"
               label={t('education-opportunity.opintopolku.button-label')}
               icon={<JodOpenInNew ariaLabel={t('external-link')} />}

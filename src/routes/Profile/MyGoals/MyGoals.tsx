@@ -92,7 +92,7 @@ const MyGoals = () => {
       {suosikitIsEmpty && (
         <div className="flex flex-col gap-3 my-3">
           <div className="mt-6 mb-7">
-            <EmptyState text={t('profile.my-goals.no-favorites-selected')} data-testid="goals-empty-state" />
+            <EmptyState text={t('profile.my-goals.no-favorites-selected')} testId="goals-empty-state" />
           </div>
         </div>
       )}
@@ -103,7 +103,7 @@ const MyGoals = () => {
         }}
         label={t('profile.my-goals.add-favorites-to-goals')}
         disabled={suosikitIsEmpty}
-        data-testid="goals-add-favorites-button"
+        testId="goals-add-favorites-button"
       />
       {lg ? null : <ToolCard testId="goals-go-to-tool" className="mt-6" />}
     </MainLayout>

@@ -49,7 +49,7 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
           aria-haspopup="listbox"
           className={open ? 'text-accent' : ''}
           onClick={() => setOpen(!open)}
-          data-testid="more-actions-trigger"
+          testId="more-actions-trigger"
         />
       </div>
       {open && (

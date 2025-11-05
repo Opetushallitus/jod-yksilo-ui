@@ -34,7 +34,6 @@ const CompetencesStep = ({ patevyys, headerText }: CompetencesStepProps) => {
             value={value}
             sourceType="PATEVYYS"
             placeholder={t('profile.free-time-activities.modals.competences-placeholder')}
-            data-testid="free-time-competences-picker"
           />
         )}
       />

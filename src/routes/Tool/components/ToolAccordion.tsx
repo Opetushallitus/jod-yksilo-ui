@@ -9,6 +9,7 @@ const ToolAccordion = ({
   ref,
   isOpen: controlledIsOpen,
   setIsOpen: controlledSetIsOpen,
+  testId,
 }: {
   children: React.ReactNode;
   title: string;
@@ -16,6 +17,7 @@ const ToolAccordion = ({
   ref?: React.Ref<HTMLDivElement>;
   setIsOpen?: (isOpen: boolean) => void;
   isOpen?: boolean;
+  testId?: string;
 }) => {
   const { t } = useTranslation();
   const [internalIsOpen, setInternalIsOpen] = React.useState(false);
@@ -27,7 +29,7 @@ const ToolAccordion = ({
   const contentId = `accordion-${id}-content`;
 
   return (
-    <div className="bg-white rounded py-6 px-5" ref={ref}>
+    <div className="bg-white rounded py-6 px-5" ref={ref} data-testid={testId}>
       <Accordion
         ariaLabel={title}
         isOpen={isOpen}
@@ -46,6 +48,7 @@ const ToolAccordion = ({
           </>
         }
         initialState={false}
+        testId="tool-accordion-button"
       >
         <section className="pl-4" id={contentId} aria-labelledby={triggerId}>
           {children}

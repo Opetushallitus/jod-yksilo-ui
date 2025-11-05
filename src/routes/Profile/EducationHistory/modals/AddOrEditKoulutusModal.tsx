@@ -367,7 +367,7 @@ const AddOrEditKoulutusModal = ({
                     }),
                   });
                 }}
-                data-testid="education-history-delete"
+                testId="education-history-delete"
               />
             )}
           </div>
@@ -382,7 +382,7 @@ const AddOrEditKoulutusModal = ({
                 onClose();
               }}
               className="whitespace-nowrap"
-              data-testid="education-history-cancel"
+              testId="education-history-cancel"
             />
             {!isFirstStep && (
               <Button
@@ -391,7 +391,7 @@ const AddOrEditKoulutusModal = ({
                 disabled={!isValid}
                 onClick={previousStep}
                 className="whitespace-nowrap"
-                data-testid="education-history-previous"
+                testId="education-history-previous"
               />
             )}
             {!isLastStep && (
@@ -401,7 +401,7 @@ const AddOrEditKoulutusModal = ({
                 disabled={isLastStep || !isValid}
                 onClick={nextStep}
                 className="whitespace-nowrap"
-                data-testid="education-history-next"
+                testId="education-history-next"
               />
             )}
             {isLastStep && (
@@ -411,7 +411,7 @@ const AddOrEditKoulutusModal = ({
                 variant="white"
                 disabled={!isValid}
                 className="whitespace-nowrap"
-                data-testid="education-history-save"
+                testId="education-history-save"
               />
             )}
           </div>

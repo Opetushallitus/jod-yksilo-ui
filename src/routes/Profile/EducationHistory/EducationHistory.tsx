@@ -283,7 +283,7 @@ const EducationHistory = () => {
             onClick={() => {
               showModal(EducationHistoryWizard);
             }}
-            data-testid="education-history-add"
+            testId="education-history-add"
           />
         </div>
         <div>
@@ -297,7 +297,7 @@ const EducationHistory = () => {
               label={t('education-history.import-education-history')}
               onClick={openImportStartModal}
               disabled={isOsaamisetTunnistusOngoing}
-              data-testid="education-history-import"
+              testId="education-history-import"
             />
           </TooltipWrapper>
         </div>

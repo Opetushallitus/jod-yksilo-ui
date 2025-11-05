@@ -367,7 +367,7 @@ export const AddOrEditPatevyysModal = ({
                     }),
                   });
                 }}
-                data-testid="free-time-delete"
+                testId="free-time-delete"
               />
             )}
           </div>
@@ -382,7 +382,7 @@ export const AddOrEditPatevyysModal = ({
                 onClose();
               }}
               className="whitespace-nowrap"
-              data-testid="free-time-cancel"
+              testId="free-time-cancel"
             />
             {!isFirstStep && (
               <Button
@@ -391,7 +391,7 @@ export const AddOrEditPatevyysModal = ({
                 disabled={!isValid}
                 onClick={previousStep}
                 className="whitespace-nowrap"
-                data-testid="free-time-previous"
+                testId="free-time-previous"
               />
             )}
             {!isLastStep && (
@@ -401,7 +401,7 @@ export const AddOrEditPatevyysModal = ({
                 disabled={!isValid}
                 onClick={nextStep}
                 className="whitespace-nowrap"
-                data-testid="free-time-next"
+                testId="free-time-next"
               />
             )}
             {isLastStep && (
@@ -411,7 +411,7 @@ export const AddOrEditPatevyysModal = ({
                 variant="white"
                 disabled={!isValid}
                 className="whitespace-nowrap"
-                data-testid="free-time-save"
+                testId="free-time-save"
               />
             )}
           </div>

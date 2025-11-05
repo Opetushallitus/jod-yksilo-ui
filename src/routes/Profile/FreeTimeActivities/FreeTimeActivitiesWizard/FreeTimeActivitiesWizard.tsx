@@ -159,7 +159,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
     <Modal
       name={headerText}
       open={isOpen}
-      data-testid="free-time-wizard"
+      testId="free-time-wizard"
       fullWidthContent
       content={
         <FormProvider {...methods}>
@@ -224,7 +224,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 label={t('free-time-activities.add-new-activity')}
                 variant="white"
                 className="whitespace-nowrap"
-                data-testid="free-time-add-activity"
+                testId="free-time-add-activity"
               />
             )}
             {step !== steps && selectedPatevyys > 0 && (
@@ -239,7 +239,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 label={t('free-time-activities.delete-proficiency')}
                 variant="white-delete"
                 className="whitespace-nowrap"
-                data-testid="free-time-delete-activity"
+                testId="free-time-delete-activity"
               />
             )}
           </div>
@@ -254,7 +254,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
               label={t('cancel')}
               variant="white"
               className="whitespace-nowrap"
-              data-testid="free-time-cancel"
+              testId="free-time-cancel"
             />
             {step > 1 && (
               <Button
@@ -269,7 +269,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 icon={!sm ? <JodArrowLeft /> : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
-                data-testid="free-time-previous"
+                testId="free-time-previous"
               />
             )}
             {step < steps && (
@@ -286,7 +286,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
-                data-testid="free-time-next"
+                testId="free-time-next"
               />
             )}
             {step === steps && (
@@ -296,7 +296,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 variant="white"
                 disabled={!isValid}
                 className="whitespace-nowrap"
-                data-testid="free-time-save"
+                testId="free-time-save"
               />
             )}
           </div>

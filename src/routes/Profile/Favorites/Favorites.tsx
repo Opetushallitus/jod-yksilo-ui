@@ -175,7 +175,6 @@ const Favorites = () => {
           onClick={() => setShowFilters(true)}
           label={t('profile.favorites.show-filters')}
           hideAfterBreakpoint="lg"
-          data-testid="favorites-open-filters"
         />
       </div>
 
@@ -183,7 +182,7 @@ const Favorites = () => {
         <p className="mt-2">{getFavoriteCountText}</p>
       ) : (
         <div className="mt-5 mb-6">
-          <EmptyState text={descriptions[selectedFilter]} data-testid="favorites-empty-state" />
+          <EmptyState text={descriptions[selectedFilter]} testId="favorites-empty-state" />
         </div>
       )}
 
@@ -211,7 +210,7 @@ const Favorites = () => {
                   label={t('close')}
                   onClick={() => setShowFilters(false)}
                   className="whitespace-nowrap"
-                  data-testid="favorites-close-filters"
+                  testId="favorites-close-filters"
                 />
               </div>
             }
@@ -266,7 +265,7 @@ const Favorites = () => {
           }}
           totalItems={totalItems}
           type="button"
-          data-testid="favorites-pagination"
+          testId="favorites-pagination"
         />
       )}
       {lg ? null : <ToolCard testId="favorites-go-to-tool" className="mt-6" />}

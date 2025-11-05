@@ -288,7 +288,6 @@ const ProfileImportExport = ({ onImportSuccess }: { onImportSuccess?: () => void
     <div className="flex flex-col gap-6">
       <p className="font-arial">{t('tool.competency-profile.login-description')}</p>
       <Button
-        data-testid="tool-open-login"
         label={t('login-to-service')}
         size="sm"
         icon={<JodArrowRight />}
@@ -298,6 +297,7 @@ const ProfileImportExport = ({ onImportSuccess }: { onImportSuccess?: () => void
         linkComponent={getLinkTo(`/${language}/${t('slugs.profile.login')}`, {
           state: { callbackURL: t('slugs.tool.index') },
         })}
+        data-testid="tool-open-login"
       />
     </div>
   );

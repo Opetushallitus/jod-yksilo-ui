@@ -109,7 +109,7 @@ const ExploreOpportunities = () => {
               icon={settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
               iconSide="left"
               label={settingsOpen ? t('tool.settings.toggle-title-open') : toggleFiltersText}
-              data-testid="open-tool-settings"
+              testId="open-tool-settings"
               onClick={() => {
                 setSettingsOpen(!settingsOpen);
               }}
@@ -122,7 +122,7 @@ const ExploreOpportunities = () => {
                 onClick={() => onUpdateResults(isLoading)}
                 icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
                 iconSide={isLoading ? 'right' : undefined}
-                data-testid="update-opportunities"
+                testId="update-opportunities"
               />
             }
           </div>
@@ -210,6 +210,7 @@ const YourInfo = () => {
       <ToolAccordion
         title={t('tool.info-overview.mapped-interests')}
         description={t('tool.my-own-data.interests.description')}
+        testId="tool-interests-accordion"
       >
         <Interests />
       </ToolAccordion>
@@ -217,6 +218,7 @@ const YourInfo = () => {
       <ToolAccordion
         title={t('tool.info-overview.mapped-competences')}
         description={t('tool.my-own-data.competences.description')}
+        testId="tool-competences-accordion"
       >
         <Competences />
       </ToolAccordion>
@@ -227,15 +229,24 @@ const YourInfo = () => {
         ref={competenceOverviewRef}
         isOpen={overviewOpen}
         setIsOpen={setOverviewOpen}
+        testId="tool-overview-accordion"
       >
         <CategorizedCompetenceTagList />
       </ToolAccordion>
 
-      <ToolAccordion title={t('tool.competency-profile.title')} description={t('tool.competency-profile.description')}>
+      <ToolAccordion
+        title={t('tool.competency-profile.title')}
+        description={t('tool.competency-profile.description')}
+        testId="tool-profile-accordion"
+      >
         <ProfileImportExport onImportSuccess={onImportSuccess} />
       </ToolAccordion>
 
-      <ToolAccordion title={t('tool.tools.title')} description={t('tool.tools.description')}>
+      <ToolAccordion
+        title={t('tool.tools.title')}
+        description={t('tool.tools.description')}
+        testId="tool-tools-accordion"
+      >
         <AdditionalSupport />
       </ToolAccordion>
 

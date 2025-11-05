@@ -130,7 +130,7 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
               onClose();
             }}
             className="whitespace-nowrap"
-            data-testid="interests-cancel"
+            testId="interests-cancel"
           />
           <Button
             form={formId}
@@ -138,7 +138,7 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
             variant="white"
             disabled={!isValid}
             className="whitespace-nowrap"
-            data-testid="interests-save"
+            testId="interests-save"
           />
         </div>
       }

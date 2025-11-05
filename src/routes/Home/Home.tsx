@@ -208,7 +208,7 @@ const Home = () => {
             icon={<JodArrowRight />}
             iconSide="right"
             linkComponent={getLinkTo(toolLink)}
-            data-testid="home-explore-opportunities"
+            testId="home-explore-opportunities"
           />
           <Button
             label={t('home.create-own-profile')}
@@ -216,7 +216,7 @@ const Home = () => {
             icon={<JodArrowRight />}
             iconSide="right"
             linkComponent={AuthNavLink(!data, t('slugs.profile.index'))}
-            data-testid="home-create-profile"
+            testId="home-create-profile"
           />
         </div>
       </Content>
