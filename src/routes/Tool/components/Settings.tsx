@@ -8,6 +8,7 @@ export const Setting = ({
   ref,
   count,
   className,
+  testId,
 }: {
   title: string;
   /** Amount of selected settings/filters */
@@ -17,6 +18,7 @@ export const Setting = ({
   /** Ref is used to reference accordion open button for focusing */
   ref?: React.RefObject<HTMLSpanElement | null>;
   className?: string;
+  testId?: string;
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const titleText = title + (count ? ` (${count})` : '');
@@ -28,7 +30,7 @@ export const Setting = ({
     return <></>;
   }
   return (
-    <li className={`border-t-2 border-primary-light-2 pt-3 pl-3 ${className}`}>
+    <li className={`border-t-2 border-primary-light-2 pt-3 pl-3 ${className}`} data-testid={testId}>
       <Accordion
         triggerId={triggerId}
         ariaControls={contentId}

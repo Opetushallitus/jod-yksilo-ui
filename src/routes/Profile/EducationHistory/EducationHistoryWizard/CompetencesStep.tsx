@@ -29,12 +29,7 @@ const CompetencesStep = ({ koulutus, headerText }: CompetencesStepProps) => {
         control={control}
         name={`koulutukset.${koulutus}.osaamiset`}
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija
-            onChange={onChange}
-            value={value}
-            sourceType="KOULUTUS"
-            data-testid="education-competences-picker"
-          />
+          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="KOULUTUS" />
         )}
       />
     </>

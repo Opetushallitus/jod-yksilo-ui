@@ -75,7 +75,7 @@ export const FilterAmmattiryhma = () => {
           name={ar.name}
           onChange={onFilterChange}
           value={ar.id}
-          data-testid="upper-level-ammattiryhma-filter"
+          testId="upper-level-ammattiryhma-filter"
         />
       ))}
     </fieldset>

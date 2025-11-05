@@ -168,7 +168,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
     <Modal
       name={headerText}
       open={isOpen}
-      data-testid="education-history-wizard"
+      testId="education-history-wizard"
       fullWidthContent
       content={
         <FormProvider {...methods}>
@@ -233,7 +233,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 label={t('education-history.add-studies-to-this-education')}
                 variant="white"
                 className="whitespace-nowrap"
-                data-testid="education-history-add-degree"
+                testId="education-history-add-degree"
               />
             )}
             {step !== steps && selectedKoulutus > 0 && (
@@ -248,7 +248,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 label={t('education-history.delete-degree')}
                 variant="white-delete"
                 className="whitespace-nowrap"
-                data-testid="education-history-delete-degree"
+                testId="education-history-delete-degree"
               />
             )}
           </div>
@@ -267,7 +267,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 icon={!sm ? <JodArrowLeft /> : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
-                data-testid="education-history-previous"
+                testId="education-history-previous"
               />
             )}
             {step < steps && (
@@ -284,7 +284,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
-                data-testid="education-history-next"
+                testId="education-history-next"
               />
             )}
             {step === steps && (
@@ -294,7 +294,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 variant="white"
                 disabled={!isValid}
                 className="whitespace-nowrap"
-                data-testid="education-history-save"
+                testId="education-history-save"
               />
             )}
           </div>

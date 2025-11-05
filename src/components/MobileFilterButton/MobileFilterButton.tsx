@@ -41,7 +41,7 @@ export const FilterButton = ({
       hideLabel
       onClick={onClick}
       icon={<JodSettings />}
-      data-testid="mobile-filter-fab"
+      testId="mobile-filter-fab"
     />
   );
 };

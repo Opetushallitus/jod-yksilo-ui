@@ -172,7 +172,7 @@ export const ExperienceTableRow = ({
           }
         }}
         ariaLabel={t('choose') + ' ' + row.nimi[language]}
-        data-testid={`experience-row-checkbox-${row.key}`}
+        testId={`experience-row-checkbox-${row.key}`}
       />
     );
   };

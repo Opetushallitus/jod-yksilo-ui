@@ -22,13 +22,13 @@ const OpportunitiesSorting = () => {
         className="cursor-pointer mr-auto mb-2"
         label={t('tool.your-opportunities.sorting.by-relevance')}
         value={sortingValues.RELEVANCE}
-        data-testid="sorting-by-relevance"
+        testId="sorting-by-relevance"
       />
       <RadioButton
         className="cursor-pointer mr-auto"
         label={t('tool.your-opportunities.sorting.alphabetically')}
         value={sortingValues.ALPHABET}
-        data-testid="sorting-alphabetically"
+        testId="sorting-alphabetically"
       />
     </RadioButtonGroup>
   );

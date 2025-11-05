@@ -68,34 +68,35 @@ const AdditionalSupport = () => {
             iconLeft={<IconWrapper color="#AD4298" Icon={JodWork} />}
             iconRight={Arrow}
             title={t('tool.tools.work-history')}
-            data-testid="additional-support-work-history"
+            testId="additional-support-work-history"
           />
           <HelpingToolProfileLinkItem
             profileLink={educationLink}
             iconLeft={<IconWrapper color="#00818A" Icon={JodSkills} />}
             title={t('tool.tools.education-history')}
             iconRight={Arrow}
-            data-testid="additional-support-education-history"
+            testId="additional-support-education-history"
           />
           <HelpingToolProfileLinkItem
             profileLink={freeTimeLink}
             iconLeft={<IconWrapper color="#006db3" Icon={JodInterests} />}
             title={t('tool.tools.free-time-activities')}
             iconRight={Arrow}
-            data-testid="additional-support-something-else"
+            testId="additional-support-something-else"
           />
           <HelpingToolProfileLinkItem
             profileLink={somethingElseLink}
             iconLeft={<IconWrapper color="#6E6E6E" Icon={JodOther} />}
             title={t('tool.tools.something-else')}
             iconRight={Arrow}
+            testId="additional-support-free-time-activities"
           />
           <HelpingToolProfileLinkItem
             profileLink={interestsLink}
             iconLeft={<IconWrapper color="#EE7C45" Icon={JodFavs} />}
             title={t('profile.interests.title')}
             iconRight={Arrow}
-            data-testid="additional-support-interests"
+            testId="additional-support-interests"
           />
         </ul>
         <p className="text-body-sm sm:text-body-md mb-6 font-arial text-primary-gray">{t('tool.tools.help-text-2')}</p>
@@ -104,13 +105,13 @@ const AdditionalSupport = () => {
             href={`/urataidot/${lng}`}
             title={t('tool.tools.career-skills-self-assessment-tool')}
             iconRight={<JodOpenInNew className="text-accent" ariaLabel={t('external-link')} />}
-            data-testid="additional-support-career-skills"
+            testId="additional-support-career-skills"
           />
           <HelpingToolExternalLinkItem
             href="https://www.suomi.fi/palveluhakemisto/osaamispolku"
             title={t('tool.tools.service-directory')}
             iconRight={<JodOpenInNew className="text-accent" ariaLabel={t('external-link')} />}
-            data-testid="additional-support-service-directory"
+            testId="additional-support-service-directory"
           />
         </ul>
       </div>

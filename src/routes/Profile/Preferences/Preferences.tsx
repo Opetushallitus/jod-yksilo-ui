@@ -23,17 +23,19 @@ const ToggleWithText = ({
   checked,
   onChange,
   disabled = false,
+  testId,
 }: {
   title: string;
   description: string;
   checked: boolean;
   onChange: () => void;
   disabled: boolean;
+  testId?: string;
 }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex items-center justify-between gap-4 py-4 border-b border-[#CCC]">
+    <div className="flex items-center justify-between gap-4 py-4 border-b border-[#CCC]" data-testid={testId}>
       <div className="flex-1">
         <p className="text-form-label">{title}</p>
         <p className="text-help-mobile sm:text-help">{description}</p>
@@ -139,7 +141,7 @@ const Preferences = () => {
           checked={lupaLuovuttaaTiedotUlkopuoliselle}
           onChange={() => setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle)}
           disabled={updating}
-          data-testid="pref-share-third-parties"
+          testId="pref-share-third-parties"
         />
         <ToggleWithText
           title={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.title')}
@@ -149,7 +151,7 @@ const Preferences = () => {
             setLupaKayttaaTekoalynKoulutukseen(!lupaKayttaaTekoalynKoulutukseen);
           }}
           disabled={updating}
-          data-testid="pref-ai-training"
+          testId="pref-ai-training"
         />
       </section>
       <section className="mb-8">
@@ -159,7 +161,7 @@ const Preferences = () => {
           variant="accent"
           label={t('preferences.download.action')}
           linkComponent={DownloadLink}
-          data-testid="pref-download-data"
+          testId="pref-download-data"
         />
       </section>
       <section>
@@ -175,7 +177,7 @@ const Preferences = () => {
               onConfirm: deleteProfile,
             });
           }}
-          data-testid="pref-delete-profile"
+          testId="pref-delete-profile"
         />
       </section>
       {lg ? null : <ToolCard testId="preferences-go-to-tool" className="mt-6" />}

@@ -72,7 +72,7 @@ export const FilterOpportunityType = () => {
         name={filterValues.KOULUTUSMAHDOLLISUUS}
         onChange={onFilterChange}
         value={filterValues.KOULUTUSMAHDOLLISUUS}
-        data-testid="filter-education-opportunities"
+        testId="filter-education-opportunities"
       />
 
       <ul className="flex flex-col gap-3 ml-5">

@@ -166,7 +166,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
     <Modal
       name={headerText}
       open={isOpen}
-      data-testid="work-history-wizard"
+      testId="work-history-wizard"
       fullWidthContent
       content={
         <FormProvider {...methods}>
@@ -231,7 +231,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 label={t('work-history.add-new-job-description')}
                 variant="white"
                 className="whitespace-nowrap"
-                data-testid="work-history-add-job-description"
+                testId="work-history-add-job-description"
               />
             )}
             {step !== steps && selectedToimenkuva > 0 && (
@@ -246,12 +246,12 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 label={t('work-history.delete-job-description')}
                 variant="white-delete"
                 className="whitespace-nowrap"
-                data-testid="work-history-delete-job-description"
+                testId="work-history-delete-job-description"
               />
             )}
           </div>
           <div className="flex gap-5">
-            <Button onClick={() => onClose()} label={t('cancel')} variant="white" data-testid="work-history-cancel" />
+            <Button onClick={() => onClose()} label={t('cancel')} variant="white" testId="work-history-cancel" />
             {step > 1 && (
               <Button
                 onClick={() => {
@@ -265,7 +265,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 icon={!sm ? <JodArrowLeft /> : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
-                data-testid="work-history-previous"
+                testId="work-history-previous"
               />
             )}
             {step < steps && (
@@ -282,7 +282,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
-                data-testid="work-history-next"
+                testId="work-history-next"
               />
             )}
             {step === steps && (
@@ -292,7 +292,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 variant="white"
                 disabled={!isValid}
                 className="whitespace-nowrap"
-                data-testid="work-history-save"
+                testId="work-history-save"
               />
             )}
           </div>

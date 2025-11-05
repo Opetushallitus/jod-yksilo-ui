@@ -55,7 +55,7 @@ const LoginPage = () => {
             linkComponent={getLinkTo(loginLink, { useAnchor: true })}
             icon={<JodArrowRight />}
             iconSide="right"
-            data-testid="landing-login"
+            testId="landing-login"
           />
         </div>
         <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.login-page.profile-includes')}</h2>

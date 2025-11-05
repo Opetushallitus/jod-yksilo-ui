@@ -53,7 +53,7 @@ export const FilterSijainti = () => {
           name={maakunta[1]}
           onChange={onFilterChange}
           value={maakunta[0]}
-          data-testid="upper-level-ammattiryhma-filter"
+          testId="upper-level-ammattiryhma-filter"
         />
       ))}
     </fieldset>

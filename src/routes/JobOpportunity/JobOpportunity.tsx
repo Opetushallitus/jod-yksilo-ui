@@ -187,7 +187,7 @@ const JobOpportunity = () => {
           <p>{t('job-opportunity.tyomarkkinatori.description')}</p>
           <div className="mt-7">
             <Button
-              data-testid="job-opportunity-open-tyomarkkinatori"
+              testId="job-opportunity-open-tyomarkkinatori"
               size="sm"
               label={t('job-opportunity.tyomarkkinatori.button-label')}
               icon={<JodOpenInNew ariaLabel={t('external-link')} />}

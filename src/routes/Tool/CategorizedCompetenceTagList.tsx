@@ -123,6 +123,7 @@ const CategorizedCompetenceTagList = () => {
                 setKiinnostukset(kiinnostukset.filter((o) => o.tyyppi !== 'KARTOITETTU'));
               }}
               label={t('delete')}
+              data-testid="delete-selected-competences-button"
             />
           </>
         ) : (

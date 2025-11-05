@@ -29,12 +29,7 @@ const CompetencesStep = ({ toimenkuva, headerText }: CompetencesStepProps) => {
         control={control}
         name={`toimenkuvat.${toimenkuva}.osaamiset`}
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija
-            onChange={onChange}
-            value={value}
-            sourceType="TOIMENKUVA"
-            data-testid="work-history-competences-picker"
-          />
+          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="TOIMENKUVA" />
         )}
       />
     </>

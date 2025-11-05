@@ -414,7 +414,7 @@ const Path = () => {
                 {...methods.register(`nimi.${language}` as const)}
                 onBlur={methods.handleSubmit(save)}
                 requiredText={t('required')}
-                data-testid="path-plan-name"
+                testId="path-plan-name"
               />
               <FormError name={`nimi.${language}`} errors={methods.formState.errors} />
             </div>
@@ -455,7 +455,7 @@ const Path = () => {
                       ? [getFirstStep(), getLastStep()]
                       : [...vaiheet.map((vaihe, index) => getProgressStep(vaihe, index)), getLastStep()]
                   }
-                  data-testid="path-progress"
+                  testId="path-progress"
                 />
               </div>
             </div>
@@ -531,7 +531,7 @@ const Path = () => {
                                 }
                                 ariaLabel={name}
                                 onChange={() => onOsaaminenChange(uri)}
-                                data-testid={`path-has-competence-${i}`}
+                                testId={`path-has-competence-${i}`}
                               />
                             )}
                           />
@@ -548,7 +548,7 @@ const Path = () => {
                                 disabled={disabledIgnores.includes(uri)}
                                 ariaLabel={`${t('profile.paths.ignore')} ${name}`}
                                 onChange={() => onIgnoreChange(uri)}
-                                data-testid={`path-ignore-${i}`}
+                                testId={`path-ignore-${i}`}
                               />
                             )}
                           />

@@ -27,14 +27,14 @@ export const FavoriteToggle = ({ isFavorite, favoriteName, onToggleFavorite }: F
           onConfirm: onToggleFavorite,
         })
       }
-      data-testid="remove-favorite-button"
+      testId="remove-favorite-button"
     />
   ) : (
     <ActionButton
       label={t('add-favorite')}
       icon={<JodFavorite className="text-accent" />}
       onClick={onToggleFavorite}
-      data-testid="add-favorite-button"
+      testId="add-favorite-button"
     />
   );
 };

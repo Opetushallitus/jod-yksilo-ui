@@ -34,7 +34,7 @@ export const FilterEducationOpportunityType = () => {
         name={t('opportunity-type.education.TUTKINTO')}
         onChange={onFilterChange}
         value="TUTKINTO"
-        data-testid="filter-education-opportunity-tutkinto"
+        testId="filter-education-opportunity-tutkinto"
       />
       <Checkbox
         ariaLabel={t('opportunity-type.education.EI_TUTKINTO')}
@@ -48,7 +48,7 @@ export const FilterEducationOpportunityType = () => {
         name={t('opportunity-type.education.EI_TUTKINTO')}
         onChange={onFilterChange}
         value="EI_TUTKINTO"
-        data-testid="filter-education-opportunity-ei-tutkinto"
+        testId="filter-education-opportunity-ei-tutkinto"
       />
     </fieldset>
   );

@@ -98,7 +98,7 @@ const Competences = () => {
                   label={t('close')}
                   onClick={() => setShowFilters(false)}
                   className="whitespace-nowrap"
-                  data-testid="competences-close-filters"
+                  testId="competences-close-filters"
                 />
               </div>
             }
@@ -117,7 +117,6 @@ const Competences = () => {
                 onClick={() => setShowFilters(true)}
                 label={t('profile.competences.show-filters')}
                 hideAfterBreakpoint="lg"
-                data-testid="competences-open-filters"
               />
             }
             data-testid="competences-group-by-source"
@@ -132,11 +131,7 @@ const Competences = () => {
             osaamiset={osaamiset}
             isOsaaminenVisible={isOsaaminenVisible}
             mobileFilterOpenerComponent={
-              <FilterButton
-                onClick={() => setShowFilters(true)}
-                label={t('profile.competences.show-filters')}
-                data-testid="competences-open-filters"
-              />
+              <FilterButton onClick={() => setShowFilters(true)} label={t('profile.competences.show-filters')} />
             }
             data-testid="competences-group-by-alphabet"
           />

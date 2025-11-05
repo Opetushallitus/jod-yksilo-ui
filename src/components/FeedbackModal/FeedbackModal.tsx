@@ -142,7 +142,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
                 value={value}
                 onChange={onChange}
                 className="mb-6"
-                data-testid="feedback-section-group"
+                testId="feedback-section-group"
               >
                 <RadioButton label={t('feedback.sections.osaamispolkuni')} value="Osaamispolkuni" />
                 <RadioButton label={t('feedback.sections.ohjaajan-osio')} value="Ohjaajan osio" />
@@ -160,7 +160,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
                 value={value}
                 onChange={onChange}
                 className="mb-6"
-                data-testid="feedback-type-group"
+                testId="feedback-type-group"
               >
                 <RadioButton label={t('feedback.types.kehu')} value="Kehu" />
                 <RadioButton label={t('feedback.types.kehitysehdotus')} value="Kehitysehdotus" />
@@ -175,7 +175,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
             className="mb-9"
             rows={5}
             maxLength={MESSAGE_MAX_LENGTH}
-            data-testid="feedback-message"
+            testId="feedback-message"
             requiredText={t('required')}
           />
           <Controller
@@ -190,7 +190,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
                 checked={value}
                 onChange={onChange}
                 className={wantsContact ? 'mb-5' : 'mb-7'}
-                data-testid="feedback-wants-contact"
+                testId="feedback-wants-contact"
               />
             )}
           />
@@ -200,7 +200,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
               {...register('email')}
               className="mb-9"
               maxLength={EMAIL_MAX_LENGTH}
-              data-testid="feedback-email"
+              testId="feedback-email"
             />
           )}
           <hr className="h-1 bg-border-gray text-border-gray mb-7" />
@@ -263,7 +263,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
               onClose();
             }}
             className="whitespace-nowrap"
-            data-testid="feedback-cancel"
+            testId="feedback-cancel"
           />
           <Button
             variant="white"
@@ -271,11 +271,11 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
             className="whitespace-nowrap"
             disabled={!isValid || isSubmitting}
             form={formId}
-            data-testid="feedback-submit"
+            testId="feedback-submit"
           />
         </div>
       }
-      data-testid="feedback-modal"
+      testId="feedback-modal"
     />
   );
 };

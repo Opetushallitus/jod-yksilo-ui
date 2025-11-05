@@ -30,7 +30,7 @@ export const FilterJobOpportunityType = () => {
         name={t('opportunity-type.work.AMMATTITIETO')}
         onChange={onFilterChange}
         value="AMMATTITIETO"
-        data-testid="filter-job-opportunity-ammattitieto"
+        testId="filter-job-opportunity-ammattitieto"
       />
       <Checkbox
         ariaLabel={t('opportunity-type.work.TMT')}
@@ -44,7 +44,7 @@ export const FilterJobOpportunityType = () => {
         name={t('opportunity-type.work.TMT')}
         onChange={onFilterChange}
         value="TMT"
-        data-testid="filter-job-opportunity-tmt"
+        testId="filter-job-opportunity-tmt"
       />
     </fieldset>
   );

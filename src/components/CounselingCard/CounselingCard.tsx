@@ -25,7 +25,7 @@ export const CounselingCard = () => {
           variant="white"
           linkComponent={getLinkTo(link, { useAnchor: true, target: '_blank' })}
           className="w-fit"
-          data-testid="counseling-banner-button"
+          testId="counseling-banner-button"
         />
       </div>
     </div>
