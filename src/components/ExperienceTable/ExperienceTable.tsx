@@ -80,7 +80,7 @@ export const ExperienceTable = ({
       const someSubRowsChecked = row.subrows?.some((subRow) => subRow.checked) ?? false;
 
       newRowsCheckboxState.set(row.key, {
-        checked: row.checked ?? allSubRowsChecked,
+        checked: allSubRowsChecked,
         indeterminate: !allSubRowsChecked && someSubRowsChecked,
         subRows: subRowsMap,
       });
