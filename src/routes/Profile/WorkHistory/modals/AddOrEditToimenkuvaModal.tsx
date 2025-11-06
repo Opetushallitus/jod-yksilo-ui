@@ -6,7 +6,7 @@ import { formErrorMessage, LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, initializeLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -216,8 +216,8 @@ const AddOrEditToimenkuvaModal = ({
 
         return {
           id: toimenkuva?.id ?? '',
-          nimi: toimenkuva?.nimi ?? {},
-          kuvaus: toimenkuva?.kuvaus ?? {},
+          nimi: initializeLocalizedText(toimenkuva?.nimi),
+          kuvaus: initializeLocalizedText(toimenkuva?.kuvaus),
           alkuPvm: toimenkuva?.alkuPvm ?? '',
           loppuPvm: toimenkuva?.loppuPvm ?? '',
           osaamiset:

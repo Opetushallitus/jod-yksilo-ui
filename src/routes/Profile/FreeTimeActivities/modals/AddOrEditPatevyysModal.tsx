@@ -5,7 +5,7 @@ import { formErrorMessage, LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, initializeLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -221,8 +221,8 @@ export const AddOrEditPatevyysModal = ({
 
         return {
           id: patevyys?.id ?? '',
-          nimi: patevyys?.nimi ?? {},
-          kuvaus: patevyys?.kuvaus ?? {},
+          nimi: initializeLocalizedText(patevyys?.nimi),
+          kuvaus: initializeLocalizedText(patevyys?.kuvaus),
           alkuPvm: patevyys?.alkuPvm ?? '',
           loppuPvm: patevyys?.loppuPvm ?? '',
           osaamiset:

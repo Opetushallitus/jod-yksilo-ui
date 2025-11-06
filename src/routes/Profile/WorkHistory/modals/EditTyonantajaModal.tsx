@@ -4,7 +4,7 @@ import { FormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useModal } from '@/hooks/useModal';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, initializeLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -53,9 +53,10 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
     ),
     defaultValues: async () => {
       const { data: tyopaikka } = await client.GET(TYOPAIKKA_API_PATH, { params: { path: { id } } });
+
       return {
         id: tyopaikka?.id,
-        nimi: tyopaikka?.nimi ?? {},
+        nimi: initializeLocalizedText(tyopaikka?.nimi),
       };
     },
   });

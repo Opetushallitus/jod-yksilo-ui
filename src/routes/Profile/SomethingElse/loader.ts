@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
+import { initializeLocalizedText } from '@/utils';
 import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
@@ -8,6 +9,6 @@ export default (async ({ request }) => {
 
   return {
     muuOsaaminen: await osaamiset.find(data?.muuOsaaminen),
-    vapaateksti: data?.vapaateksti,
+    vapaateksti: initializeLocalizedText(data?.vapaateksti),
   };
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

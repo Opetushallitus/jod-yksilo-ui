@@ -1,20 +1,31 @@
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
+import { initializeLocalizedText } from '@/utils';
 import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
-  const { data: vapaaAjanToiminnot, error } = await client.GET('/api/profiili/vapaa-ajan-toiminnot', {
+  const { data = [], error } = await client.GET('/api/profiili/vapaa-ajan-toiminnot', {
     signal: request.signal,
   });
   if (error) {
     throw error;
   }
 
+  const vapaaAjanToiminnot = data.map((vapaaAjanToiminto) => ({
+    ...vapaaAjanToiminto,
+    nimi: initializeLocalizedText(vapaaAjanToiminto.nimi),
+    patevyydet: vapaaAjanToiminto.patevyydet?.map((patevyys) => ({
+      ...patevyys,
+      nimi: initializeLocalizedText(patevyys.nimi),
+      kuvaus: initializeLocalizedText(patevyys.kuvaus),
+    })),
+  }));
+
   const osaamisetMap = (
     await osaamiset.combine(
       vapaaAjanToiminnot
-        ?.map((vapaaAjanToiminto) => vapaaAjanToiminto.patevyydet ?? [])
+        .map((vapaaAjanToiminto) => vapaaAjanToiminto.patevyydet ?? [])
         .map((patevyys) => patevyys.map((p) => p.osaamiset ?? []))
         .flat()
         .flat() ?? [],
