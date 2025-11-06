@@ -1,20 +1,31 @@
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
+import { initializeLocalizedText } from '@/utils';
 import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
-  const { data: koulutuskokonaisuudet, error } = await client.GET('/api/profiili/koulutuskokonaisuudet', {
+  const { data = [], error } = await client.GET('/api/profiili/koulutuskokonaisuudet', {
     signal: request.signal,
   });
   if (error) {
     throw error;
   }
 
+  const koulutuskokonaisuudet = data.map((kk) => ({
+    ...kk,
+    nimi: initializeLocalizedText(kk.nimi),
+    koulutukset: kk.koulutukset?.map((koulutus) => ({
+      ...koulutus,
+      nimi: initializeLocalizedText(koulutus.nimi),
+      kuvaus: initializeLocalizedText(koulutus.kuvaus),
+    })),
+  }));
+
   const osaamisetMap = (
     await osaamiset.combine(
       koulutuskokonaisuudet
-        ?.map((koulutuskokonaisuus) => koulutuskokonaisuus.koulutukset ?? [])
+        .map((koulutuskokonaisuus) => koulutuskokonaisuus.koulutukset ?? [])
         .map((koulutus) => koulutus.map((k) => k.osaamiset ?? []))
         .flat()
         .flat() ?? [],

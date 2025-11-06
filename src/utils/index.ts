@@ -1,4 +1,4 @@
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import i18n from '@/i18n/config';
 import toast from 'react-hot-toast/headless';
@@ -154,4 +154,27 @@ export const parseBoolean = (value: unknown) => {
   } else {
     return false;
   }
+};
+
+/**
+ * Initializes a LokalisoituTeksti object. If item is undefined, it returns an empty object.
+ * If a localization for the specified (or current) language is missing, it copies the value from other language.
+ */
+export const initializeLocalizedText = (
+  item?: components['schemas']['LokalisoituTeksti'],
+  lang: string = i18n.language,
+): components['schemas']['LokalisoituTeksti'] => {
+  if (!item) {
+    return {};
+  }
+
+  if (!item[lang]) {
+    if (lang === 'fi') {
+      item.fi = item.sv ?? '';
+    }
+    if (lang === 'sv') {
+      item.sv = item.fi ?? '';
+    }
+  }
+  return item;
 };

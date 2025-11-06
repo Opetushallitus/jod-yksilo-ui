@@ -5,7 +5,7 @@ import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, initializeLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -63,7 +63,7 @@ const EditKoulutuskokonaisuusModal = ({
       });
       return {
         id: koulutus?.id,
-        nimi: koulutus?.nimi ?? {},
+        nimi: initializeLocalizedText(koulutus?.nimi),
       };
     },
   });
