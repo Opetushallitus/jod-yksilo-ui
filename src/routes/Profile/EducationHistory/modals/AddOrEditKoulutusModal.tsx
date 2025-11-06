@@ -196,10 +196,8 @@ const AddOrEditKoulutusModal = ({
                 .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
             ),
           kuvaus: z.object({}).catchall(z.string().min(1).or(z.literal(''))),
-          // eslint-disable-next-line sonarjs/deprecation
-          alkuPvm: z.string().date(formErrorMessage.date()).optional().or(z.literal('')),
-          // eslint-disable-next-line sonarjs/deprecation
-          loppuPvm: z.string().date().optional().or(z.literal('')),
+          alkuPvm: z.iso.date(formErrorMessage.date()).optional().or(z.literal('')),
+          loppuPvm: z.iso.date().optional().or(z.literal('')),
           osaamiset: z.array(
             z.object({
               id: z.string().min(1),
