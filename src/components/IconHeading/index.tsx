@@ -17,6 +17,7 @@ export const IconHeading = ({
     <div className="mb-6 sm:mb-6 flex gap-x-4 items-start">
       {icon && (
         <span
+          aria-hidden="true"
           className={`flex items-center justify-center size-9 aspect-square rounded-full text-white ${bgClassName} print:hidden`}
         >
           {icon}
