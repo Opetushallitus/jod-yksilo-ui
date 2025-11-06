@@ -78,7 +78,7 @@ export const useToolStore = create<ToolState>()(
           filters: DEFAULT_FILTERS,
           sorting: DEFAULT_SORTING,
           settingsHaveChanged: true,
-          shouldFetchData: false,
+          shouldFetchData: true,
           osaamisKiinnostusPainotus: DEFAULT_PAINOTUS,
         });
       },
