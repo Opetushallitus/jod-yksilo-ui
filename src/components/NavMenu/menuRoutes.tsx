@@ -57,7 +57,7 @@ export const useMenuRoutes = (onClose: () => void) => {
           pathPrefix: t('slugs.profile.index'),
           onClose,
         }),
-        selected: pathname === `/${language}/${t('slugs.profile.index')}`,
+        selected: pathname === `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
       },
     ];
   }, [t, pathname, language, profileRoutes, data, onClose]);
