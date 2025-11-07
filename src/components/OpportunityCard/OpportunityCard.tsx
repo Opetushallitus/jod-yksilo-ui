@@ -148,7 +148,6 @@ export const OpportunityCardWrapper = ({
   return (
     <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border" data-testid="opportunity-card">
       <div className="order-2 flex flex-col">
-        <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">{cardTypeTitle}</span>
         {to ? (
           <NavLink
             to={to}
@@ -164,6 +163,7 @@ export const OpportunityCardWrapper = ({
                 ]);
               }
             }}
+            className="order-2"
           >
             <TitleTag className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto text-secondary-1-dark hover:underline">
               {name}
@@ -177,8 +177,11 @@ export const OpportunityCardWrapper = ({
             {name}
           </TitleTag>
         )}
-        <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
-        <div className="flex flex-col mt-5 gap-3">{children}</div>
+        <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase order-1">
+          {cardTypeTitle}
+        </span>
+        <p className="order-3 font-arial text-body-md-mobile sm:text-body-md">{description}</p>
+        <div className="flex flex-col order-4 mt-5 gap-3">{children}</div>
       </div>
       <div
         className={`flex flex-col sm:flex-row items-start sm:items-center gap-x-7 gap-y-5 mb-5 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
