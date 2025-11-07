@@ -90,6 +90,11 @@ const SomethingElse = () => {
         </div>
       }
     >
+      {!lg && (
+        <div className="mb-6">
+          <ProfileNavigationList collapsed />
+        </div>
+      )}
       <title>{title}</title>
       <ProfileSectionTitle type="MUU_OSAAMINEN" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.something-else.description')}</p>

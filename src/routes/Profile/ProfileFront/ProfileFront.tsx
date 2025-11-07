@@ -30,6 +30,11 @@ const ProfileFront = () => {
         </div>
       }
     >
+      {!lg && (
+        <div className="mb-6">
+          <ProfileNavigationList collapsed />
+        </div>
+      )}
       <title>{t('profile.front.title')}</title>
       <IconHeading
         icon={<JodUser />}

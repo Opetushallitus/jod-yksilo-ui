@@ -165,6 +165,11 @@ const Favorites = () => {
         </div>
       }
     >
+      {!lg && (
+        <div className="mb-6">
+          <ProfileNavigationList collapsed />
+        </div>
+      )}
       <title>{title}</title>
       <ProfileSectionTitle type="SUOSIKKI" title={title} />
       <p className="mb-8 text-body-lg">{t('profile.favorites.description')}</p>
