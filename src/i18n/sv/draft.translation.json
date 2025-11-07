@@ -40,6 +40,10 @@
           "failure-toast": "Importen misslyckades — försök igen",
           "success-toast": "Data har importerats till översikten"
         }
+      },
+      "export": {
+        "confirm-description": "Välj de uppgifter du vill exportera till din kompetensprofil. Du hittar dem senare i kompetensprofilen under 'Övriga kompetenser' och 'Mina intressen'.",
+        "confirm-title": "Exportera data till profil"
       }
     },
     "settings": {
