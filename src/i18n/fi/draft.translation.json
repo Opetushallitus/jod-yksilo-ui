@@ -54,6 +54,10 @@
           "failure-toast": "Tietojen tuonti epäonnistui — yritä uudelleen",
           "success-toast": "Tiedot tuotu onnistuneesti kokonaiskuvaan"
         }
+      },
+      "export": {
+        "confirm-description": "Valitse mitkä tiedot haluat viedä osaamisprofiiliisi. Löydät ne jatkossa osaamisprofiilista kohdista “Muu osaaminen” ja “Kiinnostukseni”.",
+        "confirm-title": "Tietojen vienti profiiliin"
       }
     },
     "settings": {

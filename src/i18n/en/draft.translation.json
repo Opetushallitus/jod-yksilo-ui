@@ -40,6 +40,10 @@
           "failure-toast": "Import failed — please try again",
           "success-toast": "Data imported successfully to the overall view"
         }
+      },
+      "export": {
+        "confirm-description": "Select the data you want to export to your competence profile. You will find it later in the competence profile under 'Other Competences' and 'My Interests'.",
+        "confirm-title": "Export Data to Profile"
       }
     },
     "settings": {
