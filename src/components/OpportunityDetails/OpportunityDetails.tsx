@@ -70,7 +70,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
   const { isDev } = useEnvironment();
   const { t, i18n } = useTranslation();
   const title = getLocalizedText(data?.otsikko);
-  const { sm } = useMediaQueries();
+  const { sm, lg } = useMediaQueries();
   const { isSuosikki, toggleSuosikki } = useToolStore(
     useShallow((state) => ({
       isSuosikki: state.suosikit?.some((suosikki) => suosikki.kohdeId === data?.id),
@@ -113,14 +113,18 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
     }
   }, [tyyppi, t, jobData.aineisto, educationData.tyyppi]);
 
-  const navChildren = React.useMemo(() => {
-    const menuSection: MenuSection = {
+  const menuSection: MenuSection = React.useMemo(
+    () => ({
       title: t('on-this-page'),
       linkItems: sections.filter(filterDevSections).map((section) => ({
         label: section.navTitle,
         linkComponent: getLinkTo(`#${section.navTitle}`),
       })),
-    };
+    }),
+    [sections, filterDevSections, t],
+  );
+
+  const navChildren = React.useMemo(() => {
     return (
       <div className="flex flex-col gap-6">
         <PageNavigation menuSection={menuSection} activeIndicator="dot" />
@@ -133,7 +137,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
         <CounselingCard />
       </div>
     );
-  }, [t, sections, filterDevSections, tyyppi, jobData.aineisto, educationData.tyyppi]);
+  }, [menuSection, jobData.aineisto, educationData.tyyppi, tyyppi]);
 
   const typeTooltip = React.useMemo(() => {
     if (tyyppi === 'TYOMAHDOLLISUUS') {
@@ -196,7 +200,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           />
         </div>
 
-        <div className="flex justify-between flex-wrap gap-y-5 sm:mt-6 sm:mb-8">
+        <div className="flex justify-between flex-wrap gap-y-5 sm:my-6">
           {sm && OpportunityType}
 
           {/* Action bar */}
@@ -228,6 +232,11 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           </div>
         </div>
       </div>
+      {!lg && (
+        <div className="mb-8">
+          <PageNavigation menuSection={menuSection} activeIndicator="dot" collapsed />
+        </div>
+      )}
       {/* Sections */}
       {!!data &&
         sections.filter(filterDevSections).map((section) => (

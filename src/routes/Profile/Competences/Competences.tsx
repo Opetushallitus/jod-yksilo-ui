@@ -72,6 +72,11 @@ const Competences = () => {
         </div>
       }
     >
+      {!lg && (
+        <div className="mb-6">
+          <ProfileNavigationList collapsed />
+        </div>
+      )}
       <title>{title}</title>
       <ProfileSectionTitle type="OSAAMISENI" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.competences.description')}</p>

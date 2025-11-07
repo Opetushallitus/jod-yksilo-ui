@@ -64,6 +64,11 @@ const MyGoals = () => {
         </div>
       }
     >
+      {!lg && (
+        <div className="mb-6">
+          <ProfileNavigationList collapsed />
+        </div>
+      )}
       <title>{title}</title>
       <ProfileSectionTitle type="TAVOITTEENI" title={title} />
       <div className="flex flex-col gap-4 mb-9 sm:text-body-lg text-body-lg-mobile">

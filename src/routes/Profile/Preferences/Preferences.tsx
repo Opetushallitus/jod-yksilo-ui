@@ -125,6 +125,11 @@ const Preferences = () => {
         </div>
       }
     >
+      {!lg && (
+        <div className="mb-6">
+          <ProfileNavigationList collapsed />
+        </div>
+      )}
       <title>{title}</title>
       <ProfileSectionTitle type="ASETUKSENI" title={title} />
       <div className="mb-8 text-body-lg flex flex-col gap-7">

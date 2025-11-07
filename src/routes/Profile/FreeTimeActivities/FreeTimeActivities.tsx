@@ -60,6 +60,11 @@ const FreeTimeActivities = () => {
         </div>
       }
     >
+      {!lg && (
+        <div className="mb-6">
+          <ProfileNavigationList collapsed />
+        </div>
+      )}
       <title>{title}</title>
       <ProfileSectionTitle type="PATEVYYS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.free-time-activities.description')}</p>
