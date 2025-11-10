@@ -9,6 +9,7 @@ export const Setting = ({
   count,
   className,
   testId,
+  id,
 }: {
   title: string;
   /** Amount of selected settings/filters */
@@ -19,18 +20,18 @@ export const Setting = ({
   ref?: React.RefObject<HTMLSpanElement | null>;
   className?: string;
   testId?: string;
+  id?: string;
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const titleText = title + (count ? ` (${count})` : '');
-  const id = title.toLocaleLowerCase().replace(/\s+/g, '-');
-  const triggerId = `accordion-${id}`;
-  const contentId = `accordion-${id}-content`;
+  const triggerId = `accordion-${id ?? title.toLocaleLowerCase().replaceAll(/\s+/g, '-')}`;
+  const contentId = `${triggerId}-content`;
 
   if (hidden) {
     return <></>;
   }
   return (
-    <li className={`border-t-2 border-primary-light-2 pt-3 pl-3 ${className}`} data-testid={testId}>
+    <li className={`border-t-2 border-primary-light-2 pt-3 pl-3 ${className}`} data-testid={testId ?? triggerId}>
       <Accordion
         triggerId={triggerId}
         ariaControls={contentId}
