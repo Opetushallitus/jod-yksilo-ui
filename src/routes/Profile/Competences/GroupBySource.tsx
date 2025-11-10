@@ -1,6 +1,6 @@
 import type { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, removeDuplicatesByKey } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Accordion, Button, EmptyState, Tag } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
@@ -28,6 +28,11 @@ export const GroupBySource = ({
 
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
   const competencesSlug = 'slugs.profile.competences';
+
+  // Remove duplicate osaamiset per lähdetyyppi
+  const nonDuplicateOsaamiset = React.useMemo(() => {
+    return removeDuplicatesByKey(osaamiset, (o) => o.osaaminen.uri + o.lahde.tyyppi);
+  }, [osaamiset]);
 
   const links = React.useMemo(
     () => ({
@@ -98,29 +103,29 @@ export const GroupBySource = ({
         {mobileFilterOpenerComponent}
       </div>
 
-      {FILTERS_ORDER.filter((f) => f !== 'KIINNOSTUS').map((competence) => {
+      {FILTERS_ORDER.filter((f) => f !== 'KIINNOSTUS').map((sourceType) => {
         return (
-          <div key={competence} className="flex flex-col mb-11">
+          <div key={sourceType} className="flex flex-col mb-11">
             <Accordion
               underline
               title={
-                <div className={`truncate text-heading-3 ${getTextClassByCompetenceSourceType(competence)}`}>
-                  {accordionLabels[competence]}
+                <div className={`truncate text-heading-3 ${getTextClassByCompetenceSourceType(sourceType)}`}>
+                  {accordionLabels[sourceType]}
                 </div>
               }
-              ariaLabel={accordionLabels[competence]}
+              ariaLabel={accordionLabels[sourceType]}
             >
-              {(Array.isArray(filters[competence]) || localizedMuutOsaamisetVapaateksti.length > 0) &&
-              filters[competence].some((filter) => filter.checked) ? (
+              {(Array.isArray(filters[sourceType]) || localizedMuutOsaamisetVapaateksti.length > 0) &&
+              filters[sourceType].some((filter) => filter.checked) ? (
                 <div className="mt-5 flex flex-col gap-7">
-                  {osaamiset.filter(
-                    (val) => val.lahde.tyyppi === competence && isOsaaminenVisible(competence, val.lahde.id),
-                  ).length > 0 && (
+                  {nonDuplicateOsaamiset.some(
+                    (val) => val.lahde.tyyppi === sourceType && isOsaaminenVisible(sourceType, val.lahde.id),
+                  ) && (
                     <ul className="flex flex-wrap gap-4">
-                      {osaamiset.map((val) => {
+                      {nonDuplicateOsaamiset.map((val) => {
                         const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
                         const tooltip = val.osaaminen.kuvaus[locale];
-                        return val.lahde.tyyppi === competence && isOsaaminenVisible(competence, val.lahde.id) ? (
+                        return val.lahde.tyyppi === sourceType && isOsaaminenVisible(sourceType, val.lahde.id) ? (
                           <li key={val.id}>
                             <Tag
                               label={label}
@@ -133,7 +138,7 @@ export const GroupBySource = ({
                       })}
                     </ul>
                   )}
-                  {competence === 'MUU_OSAAMINEN' && localizedMuutOsaamisetVapaateksti.length > 0 && (
+                  {sourceType === 'MUU_OSAAMINEN' && localizedMuutOsaamisetVapaateksti.length > 0 && (
                     <div>
                       <label className="ds:inline-block ds:mb-4 ds:align-top ds:text-form-label ds:font-arial ds:text-primary-gray">
                         {t('profile.something-else.free-form-description-of-my-interests')}
@@ -160,15 +165,15 @@ export const GroupBySource = ({
                       </div>
                     </div>
                   )}
-                  {getLinkButton(competence)}
+                  {getLinkButton(sourceType)}
                 </div>
               ) : (
                 <>
                   <div className="mt-6 mb-7">
-                    <EmptyState text={emptyStateLabels[competence]} />
+                    <EmptyState text={emptyStateLabels[sourceType]} />
                   </div>
 
-                  <div className="mt-5">{getLinkButton(competence)}</div>
+                  <div className="mt-5">{getLinkButton(sourceType)}</div>
                 </>
               )}
             </Accordion>

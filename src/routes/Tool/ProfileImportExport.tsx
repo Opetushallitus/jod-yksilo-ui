@@ -5,7 +5,7 @@ import { useModal } from '@/hooks/useModal';
 import { CompetenceFilters } from '@/routes/Profile/Competences/CompetenceFilters';
 import { FILTERS_ORDER } from '@/routes/Profile/Competences/constants';
 import { useToolStore } from '@/stores/useToolStore';
-import { initializeLocalizedText, removeDuplicates } from '@/utils';
+import { initializeLocalizedText, removeDuplicatesByKey } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, ConfirmDialog } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
@@ -56,12 +56,12 @@ const CompetenceExport = () => {
       ...o,
       tyyppi: o.tyyppi === 'KARTOITETTU' ? 'MUU_OSAAMINEN' : o.tyyppi,
     }));
-    setOsaamiset(removeDuplicates(newOsaamiset, 'id'));
+    setOsaamiset(removeDuplicatesByKey(newOsaamiset, (o) => o.id));
     const newKiinnostukset = kiinnostukset.map((k) => ({
       ...k,
       tyyppi: k.tyyppi === 'KARTOITETTU' ? 'KIINNOSTUS' : k.tyyppi,
     }));
-    setKiinnostukset(removeDuplicates(newKiinnostukset, 'id'));
+    setKiinnostukset(removeDuplicatesByKey(newKiinnostukset, (k) => k.id));
   }, [kiinnostukset, osaamiset, setKiinnostukset, setOsaamiset]);
 
   return (
@@ -148,7 +148,7 @@ const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void })
       })),
       ...storeKiinnostukset.filter((o) => o.tyyppi === 'KARTOITETTU'),
     ];
-    setKiinnostukset(removeDuplicates(newKiinnostukset, 'id'));
+    setKiinnostukset(removeDuplicatesByKey(newKiinnostukset, (k) => k.id));
     setKiinnostuksetVapaateksti(initializeLocalizedText(data?.vapaateksti));
   }, [setKiinnostukset, setKiinnostuksetVapaateksti, storeKiinnostukset]);
 
@@ -206,9 +206,10 @@ const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void })
         {} as Record<string, number>,
       );
       // Remove duplicates and sort by occurrence count
-      const filtered = Array.from(
-        new Map(currentAndImportedSkills.map((item) => [item.id + item.tyyppi, item])).values(),
-      ).sort((a, b) => occurrences[b.id] - occurrences[a.id]);
+
+      const filtered = removeDuplicatesByKey(currentAndImportedSkills, (item) => item.id + item.tyyppi).sort(
+        (a, b) => occurrences[b.id] - occurrences[a.id],
+      );
 
       setOsaamiset(filtered);
 
