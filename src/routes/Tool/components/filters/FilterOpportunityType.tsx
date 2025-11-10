@@ -77,9 +77,11 @@ export const FilterOpportunityType = () => {
 
       <ul className="flex flex-col gap-3 ml-5">
         <Setting
+          id="education-opportunity-type"
           title={t('tool.settings.general.education-opportunity-type')}
           count={getFilterCount(['educationOpportunityType'])}
           className="border-b-2 pb-3"
+          testId="education-opportunity-type-setting"
         >
           <FilterEducationOpportunityType />
         </Setting>
@@ -97,10 +99,19 @@ export const FilterOpportunityType = () => {
       />
 
       <ul className="flex flex-col gap-3 ml-5">
-        <Setting title={t('tool.settings.general.job-opportunity-type')} count={getFilterCount(['jobOpportunityType'])}>
+        <Setting
+          id="job-opportunity-type"
+          title={t('tool.settings.general.job-opportunity-type')}
+          count={getFilterCount(['jobOpportunityType'])}
+          data-testid="job-opportunity-type-setting"
+        >
           <FilterJobOpportunityType />
         </Setting>
-        <Setting title={t('tool.settings.general.occupation-type')} count={getFilterCount(['ammattiryhmat'])}>
+        <Setting
+          title={t('tool.settings.general.occupation-type')}
+          count={getFilterCount(['ammattiryhmat'])}
+          data-testid="occupation-type-setting"
+        >
           <FilterAmmattiryhma />
         </Setting>
       </ul>
