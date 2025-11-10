@@ -1,4 +1,5 @@
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
+import { removeDuplicatesByKey } from '@/utils';
 import { Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -23,7 +24,7 @@ export const GroupByAlphabet = ({
 
   const getOsaaminenByLetter = React.useCallback(
     (letter: string) =>
-      osaamiset
+      removeDuplicatesByKey(osaamiset, (o) => o.osaaminen.uri + o.lahde.tyyppi) // Remove duplicates per lähdetyyppi
         .filter((val) => isOsaaminenVisible(val.lahde.tyyppi, val.lahde.id))
         .filter((val) => val.osaaminen.nimi[locale]?.toLocaleUpperCase().startsWith(letter))
         .sort((a, b) => a.osaaminen.nimi[locale].localeCompare(b.osaaminen.nimi[locale])),

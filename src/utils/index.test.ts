@@ -1,4 +1,4 @@
-import { formatDate, getLocalizedText, paginate, parseBoolean, removeDuplicates, sortByProperty } from '@/utils';
+import { formatDate, getLocalizedText, paginate, parseBoolean, removeDuplicatesByKey, sortByProperty } from '@/utils';
 import i18n from 'i18next';
 import { describe, expect, it } from 'vitest';
 
@@ -45,14 +45,14 @@ describe('utils', () => {
     });
   });
 
-  describe('removeDuplicates', () => {
+  describe('removeDuplicatesByKey', () => {
     it('should remove duplicates based on a top-level property', () => {
       const data = [
         { id: 1, name: 'Alice' },
         { id: 2, name: 'Bob' },
         { id: 3, name: 'Alice' },
       ];
-      const result = removeDuplicates(data, 'name');
+      const result = removeDuplicatesByKey(data, (d) => d.name);
       expect(result).toEqual([
         { id: 1, name: 'Alice' },
         { id: 2, name: 'Bob' },
@@ -65,7 +65,7 @@ describe('utils', () => {
         { id: 2, info: { name: 'Bob' } },
         { id: 3, info: { name: 'Alice' } },
       ];
-      const result = removeDuplicates(data, 'info.name');
+      const result = removeDuplicatesByKey(data, (d) => d.info.name);
       expect(result).toEqual([
         { id: 1, info: { name: 'Alice' } },
         { id: 2, info: { name: 'Bob' } },
@@ -74,7 +74,7 @@ describe('utils', () => {
 
     it('should handle an empty array', () => {
       const data: { id: number; name: string }[] = [];
-      const result = removeDuplicates(data, 'name');
+      const result = removeDuplicatesByKey(data, (d) => d.name);
       expect(result).toEqual([]);
     });
 
@@ -83,7 +83,7 @@ describe('utils', () => {
         { id: 1, name: 'Alice' },
         { id: 2, name: 'Bob' },
       ];
-      const result = removeDuplicates(data, 'name');
+      const result = removeDuplicatesByKey(data, (d) => d.name);
       expect(result).toEqual([
         { id: 1, name: 'Alice' },
         { id: 2, name: 'Bob' },
@@ -97,10 +97,25 @@ describe('utils', () => {
         { id: 3, info: { details: { name: 'Alice' } } },
         { id: 4, info: { details: { name: 'Alice' } } },
       ];
-      const result = removeDuplicates(data, 'info.details.name');
+      const result = removeDuplicatesByKey(data, (d) => d.info.details.name);
       expect(result).toEqual([
         { id: 1, info: { details: { name: 'Alice' } } },
         { id: 2, info: { details: { name: 'Bob' } } },
+      ]);
+    });
+
+    it('should handle filtering by multiple properties', () => {
+      const data = [
+        { id: 1, name: 'Alice', category: 'A' },
+        { id: 2, name: 'Bob', category: 'B' },
+        { id: 3, name: 'Alice', category: 'A' },
+        { id: 4, name: 'Alice', category: 'C' },
+      ];
+      const result = removeDuplicatesByKey(data, (d) => d.name + d.category);
+      expect(result).toEqual([
+        { id: 1, name: 'Alice', category: 'A' },
+        { id: 2, name: 'Bob', category: 'B' },
+        { id: 4, name: 'Alice', category: 'C' },
       ]);
     });
   });

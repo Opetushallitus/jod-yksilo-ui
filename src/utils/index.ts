@@ -53,16 +53,21 @@ export const getNestedProperty = <T>(obj: T, path: string) => {
 };
 
 /**
- * Removes duplicates from an array of objects based on a specified key.
- * Supports dot notation for nested properties.
- * @param array The array of objects.
- * @param key The key to check for duplicates, supports dot notation.
- * @returns A new array with duplicates removed.
+ * Removes duplicates from an array based on a key selector function.
+ * @param arr The array to deduplicate
+ * @param keySelector Function to select the key for each item
+ * @returns Array with duplicates removed
  */
-export const removeDuplicates = <T extends object>(array: T[], key: NestedKeyOf<T>) =>
-  array.filter(
-    (item, index, self) => index === self.findIndex((t) => getNestedProperty(t, key) === getNestedProperty(item, key)),
-  );
+export const removeDuplicatesByKey = <T, K>(arr: T[], keySelector: (item: T) => K): T[] => {
+  const seen = new Map<K, T>();
+  for (const item of arr) {
+    const key = keySelector(item);
+    if (!seen.has(key)) {
+      seen.set(key, item);
+    }
+  }
+  return Array.from(seen.values());
+};
 
 /**
  * Sorts an array of objects by a specified punction separated property path

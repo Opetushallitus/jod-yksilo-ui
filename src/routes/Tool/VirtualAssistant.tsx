@@ -1,10 +1,10 @@
 import { client } from '@/api/client';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useToolStore } from '@/stores/useToolStore';
-import { removeDuplicates } from '@/utils';
+import { removeDuplicatesByKey } from '@/utils';
 import { Button, Tag, Textarea, useMediaQueries } from '@jod/design-system';
 import { JodChatBot, JodClose } from '@jod/design-system/icons';
 import React, { Fragment } from 'react';
@@ -119,7 +119,7 @@ export const VirtualAssistant = ({
             }));
 
             const allKiinnostukset = [...toolStore.kiinnostukset, ...newKiinnostukset];
-            toolStore.setKiinnostukset([...removeDuplicates(allKiinnostukset, 'id')]);
+            toolStore.setKiinnostukset([...removeDuplicatesByKey(allKiinnostukset, (k) => k.id)]);
 
             setVirtualAssistantOpen(false);
           }}

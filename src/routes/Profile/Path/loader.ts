@@ -5,7 +5,7 @@ import { osaamiset } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
 import i18n from '@/i18n/config';
 import { usePolutStore } from '@/stores/usePolutStore';
-import { removeDuplicates, sortByProperty } from '@/utils';
+import { removeDuplicatesByKey, sortByProperty } from '@/utils';
 import type { LoaderFunction } from 'react-router';
 
 const loader = (async ({ request, params }) => {
@@ -94,8 +94,8 @@ const loader = (async ({ request, params }) => {
     polkuStore.setVaaditutOsaamiset([...vaaditutOsaamiset].sort(sortByProperty(`nimi.${i18n.language ?? 'fi'}`)));
 
     const { data: profiiliOsaamisetRes = [] } = await client.GET('/api/profiili/osaamiset', { signal: request.signal });
-    const profiiliOsaamiset = removeDuplicates(profiiliOsaamisetRes, 'osaaminen.uri').filter((osaaminen) =>
-      vaaditutOsaamiset.some((vaadittu) => vaadittu.uri === osaaminen.osaaminen.uri),
+    const profiiliOsaamiset = removeDuplicatesByKey(profiiliOsaamisetRes, (o) => o.osaaminen.uri).filter((o) =>
+      vaaditutOsaamiset.some((vaadittu) => vaadittu.uri === o.osaaminen.uri),
     );
     polkuStore.setOsaamisetFromProfile(profiiliOsaamiset.map((osaaminen) => osaaminen.osaaminen));
     polkuStore.setPolutLoading(false);
