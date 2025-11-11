@@ -59,22 +59,18 @@ export const OsaamisSuosittelija = ({
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const isFetching = React.useRef(false);
   const addedTagsId = React.useId();
-  const abortController = React.useRef<AbortController | null>(null);
   const pendingTaitosi = React.useRef<string | null>(null);
 
   React.useEffect(() => {
     const fetchCompetences = async (value: string) => {
       if (isFetching.current) {
         pendingTaitosi.current = value; // Queue the latest value for next fetch
-        abortController.current?.abort();
-        abortController.current = new AbortController();
         return;
       }
       try {
         isFetching.current = true;
         const ehdotus = await client.POST('/api/ehdotus/osaamiset', {
           body: { [i18n.language]: value },
-          signal: abortController.current?.signal,
         });
         setEhdotetutOsaamiset(
           await osaamiset.combine(
@@ -88,14 +84,8 @@ export const OsaamisSuosittelija = ({
                 osuvuus: e.osuvuus ?? 0,
               };
             },
-            abortController.current?.signal,
           ),
         );
-      } catch (error) {
-        // Ignore abort errors
-        if (!(error instanceof DOMException && error.name === 'AbortError')) {
-          throw error;
-        }
       } finally {
         isFetching.current = false;
         // If a new value was queued, fetch it now
