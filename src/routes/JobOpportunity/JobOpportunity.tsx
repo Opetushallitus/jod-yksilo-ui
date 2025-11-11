@@ -7,7 +7,7 @@ import OpportunityDetails, { type OpportunityDetailsSection } from '@/components
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { NOT_AVAILABLE_LABEL } from '@/constants';
 import { useToolStore } from '@/stores/useToolStore';
-import { formatDate, getLocalizedText, hashString, sortByProperty } from '@/utils';
+import { formatDate, getLocalizedText, hashString } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
@@ -18,19 +18,18 @@ import { useShallow } from 'zustand/shallow';
 import type { LoaderData } from './loader';
 
 const JobOpportunity = () => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const { lg } = useMediaQueries();
   const { tyomahdollisuus, osaamiset, isLoggedIn, ammattiryhma } = useLoaderData<LoaderData>();
   const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
   const competencesTableData = React.useMemo(
     () =>
-      osaamiset
-        .map((competence) => ({ ...competence, profiili: omatOsaamisetUris?.includes(competence.uri) }))
-        .sort(sortByProperty(`nimi.${language}`)),
-    [osaamiset, language, omatOsaamisetUris],
+      osaamiset.map((competence) => ({
+        ...competence,
+        profiili: omatOsaamisetUris?.includes(competence.uri),
+        esiintyvyys: tyomahdollisuus.jakaumat?.osaaminen?.arvot.find((arvo) => arvo.arvo === competence.uri)?.osuus,
+      })),
+    [osaamiset, omatOsaamisetUris, tyomahdollisuus.jakaumat],
   );
 
   const tyomahdollisuusTehtavat =

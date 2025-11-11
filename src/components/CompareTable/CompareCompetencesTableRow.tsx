@@ -1,12 +1,15 @@
 import { components } from '@/api/schema';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { getLocalizedText } from '@/utils';
 import { useTranslation } from 'react-i18next';
+import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
 export interface CompareCompetencesTableRowData {
   uri: string;
   nimi: components['schemas']['LokalisoituTeksti'];
   kuvaus: components['schemas']['LokalisoituTeksti'];
   profiili?: boolean;
+  esiintyvyys?: number;
 }
 
 interface CompareCompetencesTableRowProps {
@@ -16,13 +19,20 @@ interface CompareCompetencesTableRowProps {
 
 export const CompareCompetencesTableRow = ({ row, className }: CompareCompetencesTableRowProps) => {
   const { t } = useTranslation();
-
+  const { isDev } = useEnvironment();
   return (
     <tr className={className}>
-      <td className="w-full pl-5 pr-7 py-3 text-heading-5 hyphens-auto first-letter:uppercase">
-        {getLocalizedText(row.nimi)}
-      </td>
-
+      {isDev ? (
+        <TooltipWrapper tooltipContent={row.esiintyvyys} tooltipPlacement="top">
+          <td className="w-full pl-5 pr-7 py-3 text-heading-5 hyphens-auto first-letter:uppercase">
+            {getLocalizedText(row.nimi)}
+          </td>
+        </TooltipWrapper>
+      ) : (
+        <td className="w-full pl-5 pr-7 py-3 text-heading-5 hyphens-auto first-letter:uppercase">
+          {getLocalizedText(row.nimi)}
+        </td>
+      )}
       <td className="justify-items-center pr-5">
         {row.profiili && (
           <>
