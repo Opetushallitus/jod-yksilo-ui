@@ -1,31 +1,13 @@
 {
   "competences-identify-failed": "AI-kompetensidentifiering misslyckades, lägg till kompetenser genom att redigera utbildningen manuellt.",
   "filters": "Filter",
-  "home": {
-    "go-to-service-directory": "Gå till väglednings- och rådgivningstjänster",
-    "need-personal-guidance-content": "De tjänster som finns tillgängliga inom väglednings- och rådgivningstjänster hjälper dig att överväga karriär- och utbildningsalternativ. Begränsa listan över tjänster baserat på de teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst."
-  },
-  "n-education-opportunities": "{{count}} / {{total}} utbildningsmöjligheter",
-  "n-job-opportunities": "{{count}} / {{total}} jobbmöjligheter",
   "n-months_one": "{{count}} månad",
   "n-months_other": "{{count}} månader",
   "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
-  "opportunity-type": {
-    "education": {
-      "EI_TUTKINTO": "Andra utbildningsmöjligheter",
-      "TUTKINTO": "Examensprogram"
-    },
-    "work": {
-      "AMMATTITIETO": "Yrken",
-      "TMT": "Jobbmöjligheter"
-    }
-  },
+  "opportunity-type": {},
   "tool": {
-    "competency-profile": {
-      "help": "Importera kompetenser från din kompetensprofil till din översikt över data. Du kan använda tidigare sparade kompetenser när du utforskar möjligheter. Du kan importera alla kompetenser eller bara de du vill."
-    },
     "education-opportunity-duration": "Genomsnittlig varaktighet",
     "education-opportunity-duration-tooltip": "Utbildningens längd anger hur länge utbildningen vanligtvis varar. Den uttrycks oftast i år eller månader och baseras på utbildningens omfattning samt studiernas framsteg i normal takt.",
     "education-opportunity-koulutusala": "Det vanligaste utbildningsområdet",
@@ -48,9 +30,6 @@
     },
     "settings": {
       "controls": "Kontroller"
-    },
-    "tools": {
-      "service-directory": "Väglednings- och rådgivningstjänster"
     }
   }
 }

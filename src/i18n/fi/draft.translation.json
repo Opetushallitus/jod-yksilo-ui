@@ -1,6 +1,5 @@
 {
   "ai-info-tooltip": {
-    "aria-description": "Tietoa tekoälyn käytöstä",
     "description-opportunity-education-note": "Olemme hyödyntäneet tekoälyä myös osaamisten tunnistamisessa koulutusmahdollisuuksille.",
     "description-opportunity-intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi kielimallia seuraavissa kohdissa:",
     "description-opportunity-item-1": "mahdollisuuden nimi",
@@ -10,36 +9,16 @@
     "description-tool-intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi tekoälyä seuraavissa kohdissa:",
     "description-tool-item-1": "muut työmahdollisuudet",
     "description-tool-item-2": "koulutusmahdollisuudet",
-    "description-tool-item-3": "yksilölliset ehdotukset sinulle sopivista mahdollisuuksista",
-    "title": "Tekoälyn avulla luotua sisältöä"
+    "description-tool-item-3": "yksilölliset ehdotukset sinulle sopivista mahdollisuuksista"
   },
   "competences-identify-failed": "Tekoälyn osaamistunnistus epäonnistui, lisää osaamisia käsin muokkaamalla koulutusta.",
   "filters": "Suodattimet",
-  "home": {
-    "go-to-service-directory": "Siirry Ohjaus- ja neuvontapalveluihin",
-    "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua ura- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut."
-  },
-  "n-education-opportunities": "{{count}} / {{total}} koulutusmahdollisuutta",
-  "n-job-opportunities": "{{count}} / {{total}} työmahdollisuutta",
   "n-months_one": "{{count}} kuukausi",
   "n-months_other": "{{count}} kuukautta",
   "n-months-short": "{{count}} kk",
   "n-years_one": "{{count}} vuosi",
   "n-years_other": "{{count}} vuotta",
-  "opportunity-type": {
-    "education": {
-      "EI_TUTKINTO": "Muut koulutusmahdollisuudet",
-      "TUTKINTO": "Tutkinnot"
-    },
-    "work": {
-      "AMMATTITIETO": "Ammatit",
-      "TMT": "Työmahdollisuudet"
-    }
-  },
   "tool": {
-    "competency-profile": {
-      "help": "Tuo osaamisia osaamisprofiilistasi tietojesi kokonaiskuvaan. Voit hyödyntää aiemmin tallentamiasi osaamisia mahdollisuuksien kartoittamisessa. Voit tuoda kaikki osaamiset tai vain ne, jotka haluat."
-    },
     "education-opportunity-duration": "Keskimääräinen kesto",
     "education-opportunity-duration-tooltip": "Koulutuksen kesto kertoo, kuinka kauan koulutus tavallisesti kestää. Se ilmaistaan yleensä vuosina tai kuukausina ja perustuu koulutuksen laajuuteen ja opintojen etenemiseen normaalissa tahdissa.",
     "education-opportunity-koulutusala": "Yleisin koulutusala",
@@ -62,9 +41,6 @@
     },
     "settings": {
       "controls": "Säätimet"
-    },
-    "tools": {
-      "service-directory": "Ohjaus- ja neuvontapalveluja"
     }
   }
 }
