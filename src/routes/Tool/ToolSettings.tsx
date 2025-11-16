@@ -1,7 +1,7 @@
 import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType';
 import { useToolStore } from '@/stores/useToolStore';
 import { FilterName } from '@/stores/useToolStore/ToolStoreModel.ts';
-import { Button, Modal } from '@jod/design-system';
+import { Button, Modal, useNoteStack } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -84,6 +84,8 @@ const ToolSettings = ({ ref, isOpen, onClose, isModal }: ToolSettingsProps) => {
       />
     </div>
   );
+  const { permanentNotesHeight } = useNoteStack();
+  const top = `${124 + permanentNotesHeight}px`;
 
   return isModal ? (
     <Modal
@@ -112,7 +114,10 @@ const ToolSettings = ({ ref, isOpen, onClose, isModal }: ToolSettingsProps) => {
       testId="tool-settings"
     />
   ) : (
-    <div className="bg-bg-gray-2 rounded mb-7 py-4 px-6 sm:text-body-sm text-body-sm-mobile flex flex-col gap-2 sticky top-[124px] z-10">
+    <div
+      className="bg-bg-gray-2 rounded mb-7 py-4 px-6 sm:text-body-sm text-body-sm-mobile flex flex-col gap-2 sticky z-10"
+      style={{ top }}
+    >
       <SettingsMenu ref={ref} isModal={isModal} />
       {resetSection('bg-bg-gray-2')}
     </div>

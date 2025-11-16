@@ -5,8 +5,7 @@ import { Toaster } from '@/components/Toaster/Toaster';
 import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useSessionExpirationTimer } from '@/hooks/useSessionExpirationTimer';
-import { type LangCode, langLabels, supportedLanguageCodes } from '@/i18n/config';
-import { useNoteStore } from '@/stores/useNoteStore';
+import { langLabels, supportedLanguageCodes, type LangCode } from '@/i18n/config';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLinkTo } from '@/utils/routeUtils';
 import {
@@ -17,7 +16,6 @@ import {
   MatomoTracker,
   MenuButton,
   NavigationBar,
-  NoteStack,
   ServiceVariantProvider,
   SkipLink,
   useNoteStack,
@@ -36,7 +34,6 @@ import {
   useLocation,
   useMatch,
 } from 'react-router';
-import { useShallow } from 'zustand/shallow';
 import { LogoutFormContext } from '.';
 
 const agents = {
@@ -52,6 +49,38 @@ const agents = {
   },
 };
 
+const useAddBetaFeedbackNote = () => {
+  const { t } = useTranslation();
+  const { addPermanentNote } = useNoteStack();
+  const notesInitializedRef = React.useRef(false);
+
+  React.useEffect(() => {
+    if (notesInitializedRef.current) {
+      return;
+    }
+    addPermanentNote({
+      title: t('beta.note.title'),
+      description: t('beta.note.description'),
+      variant: 'feedback',
+      readMoreComponent: (
+        <Button
+          size="sm"
+          variant="white"
+          label={t('beta.note.to-feedback')}
+          icon={<JodOpenInNew ariaLabel={t('external-link')} />}
+          iconSide="right"
+          linkComponent={getLinkTo('https://link.webropolsurveys.com/S/F27EA876E86B2D74', {
+            useAnchor: true,
+            target: '_blank',
+          })}
+          className="whitespace-nowrap"
+        />
+      ),
+    });
+    notesInitializedRef.current = true;
+  }, [addPermanentNote, t]);
+};
+
 const Root = () => {
   const {
     t,
@@ -59,9 +88,8 @@ const Root = () => {
   } = useTranslation();
   const fetcher = useFetcher();
   const resetToolStore = useToolStore((state) => state.reset);
-  const { note, clearNote } = useNoteStore(useShallow((state) => ({ note: state.note, clearNote: state.clearNote })));
   const location = useLocation();
-  const { addNote, removeNote } = useNoteStack();
+  const { addPermanentNote, removePermanentNote, addTemporaryNote, removeTemporaryNote } = useNoteStack();
   const [navMenuOpen, setNavMenuOpen] = React.useState(false);
   const [feedbackVisible, setFeedbackVisible] = React.useState(false);
   const logoutForm = React.useRef<HTMLFormElement>(null);
@@ -91,18 +119,17 @@ const Root = () => {
     onExtended: () => {
       setTimeout(() => {
         // Wrapping the removal in timeout makes this more reliable, otherwise the note sometimes doesn't get removed
-        removeNote(sessionWarningNoteId);
+        removeTemporaryNote(sessionWarningNoteId);
       }, 50);
     },
     onWarning: () => {
       if (!isLoggedIn) {
         return;
       }
-      addNote({
+      addTemporaryNote({
         id: sessionWarningNoteId,
         title: t('session.warning.title'),
         description: t('session.warning.description'),
-        ariaClose: t('close'),
         variant: 'warning',
         readMoreComponent: (
           <Button
@@ -110,28 +137,27 @@ const Root = () => {
             variant="white"
             label={t('session.warning.continue')}
             onClick={async () => {
-              removeNote(sessionWarningNoteId);
+              removeTemporaryNote(sessionWarningNoteId);
               await extend();
             }}
           />
         ),
+        isCollapsed: false,
       });
     },
     onExpired: async () => {
       if (!isLoggedIn) {
         return;
       }
-      removeNote(sessionWarningNoteId);
+      removeTemporaryNote(sessionWarningNoteId);
       // Reload root loader, this should set CSRF data to null
       await fetcher.load(`/${language}`);
 
-      addNote({
+      addPermanentNote({
         id: sessionExpiredNoteId,
         title: t('session.expired.title'),
         description: t('session.expired.description'),
-        ariaClose: t('close'),
         variant: 'error',
-        permanent: true,
         readMoreComponent: (
           <div className="flex gap-4">
             <Button
@@ -149,7 +175,7 @@ const Root = () => {
               label={t('session.expired.continue')}
               onClick={() => {
                 disable(); // Disables any future warnings or expirations
-                removeNote(sessionExpiredNoteId);
+                removePermanentNote(sessionExpiredNoteId);
                 if (isOnProtectedRoute) {
                   globalThis.location.href = globalThis.location.origin + `/yksilo/${language}`;
                 } else {
@@ -162,6 +188,8 @@ const Root = () => {
       });
     },
   });
+
+  useAddBetaFeedbackNote();
 
   const logout = () => {
     resetToolStore();
@@ -185,22 +213,6 @@ const Root = () => {
   }, [location.pathname]);
 
   React.useEffect(() => {
-    if (!note) {
-      return;
-    }
-
-    addNote({
-      title: t(note.title),
-      description: t(note.description),
-      ariaClose: t('close'),
-      variant: 'error',
-      permanent: note.permanent ?? false,
-      id: note.title,
-    });
-    clearNote();
-  }, [addNote, clearNote, note, t]);
-
-  React.useEffect(() => {
     document.documentElement.setAttribute('lang', language);
   }, [language]);
 
@@ -215,38 +227,6 @@ const Root = () => {
   const userMenuProfileFrontUrl = `${t('slugs.profile.index')}/${t('slugs.profile.front')}`;
   const loginPageUrl = `/${language}/${t('slugs.profile.login')}`;
   const isProfileActive = !!useMatch(`/${language}/${t('slugs.profile.index')}/*`);
-
-  const [visibleBetaFeedback, setVisibleBetaFeedback] = React.useState(true);
-
-  React.useEffect(() => {
-    if (visibleBetaFeedback) {
-      addNote({
-        title: t('beta.note.title'),
-        description: t('beta.note.description'),
-        ariaClose: t('close'),
-        variant: 'feedback',
-        onCloseClick: () => {
-          setVisibleBetaFeedback(false);
-          removeNote('beta-feedback');
-        },
-        readMoreComponent: (
-          <Button
-            size="sm"
-            variant="white"
-            label={t('beta.note.to-feedback')}
-            icon={<JodOpenInNew ariaLabel={t('external-link')} />}
-            iconSide="right"
-            linkComponent={getLinkTo('https://link.webropolsurveys.com/S/F27EA876E86B2D74', {
-              useAnchor: true,
-              target: '_blank',
-            })}
-          />
-        ),
-        permanent: false,
-        id: 'beta-feedback',
-      });
-    }
-  }, [t, addNote, visibleBetaFeedback, removeNote]);
 
   return (
     <div className="flex flex-col min-h-screen bg-bg-gray" data-testid="app-root">
@@ -296,12 +276,14 @@ const Root = () => {
               {children as React.ReactNode}
             </Link>
           )}
-          showServiceBar
           serviceBarVariant="yksilo"
           serviceBarTitle={t('my-competence-path')}
+          translations={{
+            showAllNotesLabel: t('show-all'),
+            ariaLabelCloseNote: t('close'),
+          }}
+          testId="navigation-bar"
         />
-
-        <NoteStack showAllText={t('show-all')} />
       </header>
 
       <LogoutFormContext.Provider value={logoutForm.current}>

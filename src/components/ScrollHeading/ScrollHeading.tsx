@@ -1,4 +1,4 @@
-import { tidyClasses as tc } from '@jod/design-system';
+import { tidyClasses as tc, useNoteStack } from '@jod/design-system';
 import { JSX } from 'react';
 
 export interface ScrollHeadingProps {
@@ -10,9 +10,19 @@ export interface ScrollHeadingProps {
 export const ScrollHeading = ({ title, heading, className, appendix }: ScrollHeadingProps) => {
   const HeadingTag = heading as keyof JSX.IntrinsicElements;
   const appendixText = appendix ? ` — ${appendix}` : '';
+  const { permanentNotesHeight } = useNoteStack();
+  // navbar + service bar (closed) + permanent notes + main padding
+  const scrollMarginTop = `${64 + 4 + permanentNotesHeight + 64}px`;
+
   return (
     <div className={tc(`flex gap-3 ${className}`)}>
-      <HeadingTag id={title} className="scroll-mt-[96px] text-pretty hyphens-auto">
+      <HeadingTag
+        id={title}
+        className="text-pretty hyphens-auto"
+        style={{
+          scrollMarginTop,
+        }}
+      >
         {`${title}${appendixText}`}
       </HeadingTag>
     </div>

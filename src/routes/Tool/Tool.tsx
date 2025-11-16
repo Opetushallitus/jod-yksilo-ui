@@ -9,7 +9,7 @@ import AdditionalSupport from '@/routes/Tool/AdditionalSupport';
 import CategorizedCompetenceTagList from '@/routes/Tool/CategorizedCompetenceTagList';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
-import { Button, cx, Spinner, useMediaQueries } from '@jod/design-system';
+import { Button, cx, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
 import { JodArrowRight, JodClose, JodCompass, JodSettings } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -91,10 +91,12 @@ const ExploreOpportunities = () => {
   }, [getTotalFilterCount, t]);
 
   const updateButtonLabel = isLoading ? t('updating-list') : t('update');
+  const { permanentNotesHeight } = useNoteStack();
+  const top = `${(lg ? 66 : 120) + permanentNotesHeight}px`;
 
   return (
     <>
-      <div className="sticky top-[120px] lg:top-[66px] not:lg:z-10 bg-bg-gray -mx-1 px-1 lg:pt-4">
+      <div className="sticky not:lg:z-10 bg-bg-gray -mx-1 px-1 lg:pt-4" style={{ top }}>
         <div className="flex items-center justify-end h-9 lg:pb-4 not-lg:bg-white not-lg:w-full lg:justify-between not-lg:mb-3 not-lg:px-4">
           {lg && (
             <h2 id="opportunities-title" tabIndex={-1} className="text-heading-2-mobile sm:text-heading-2">
@@ -136,7 +138,10 @@ const ExploreOpportunities = () => {
       <ul
         id="tool-your-opportunities-list"
         ref={scrollRef}
-        className="flex flex-col gap-5 sm:gap-3 mb-8 scroll-mt-[96px]"
+        className="flex flex-col gap-5 sm:gap-3 mb-8"
+        style={{
+          scrollMarginTop: '140px',
+        }}
         data-testid="tool-opportunities-list"
       >
         {mixedMahdollisuudet.map((mahdollisuus) => {
@@ -333,8 +338,11 @@ const Tool = () => {
     [setTab, tabs.length],
   );
 
+  const { permanentNotesHeight } = useNoteStack();
+  const top = `${(lg ? 68 : 66) + permanentNotesHeight}px`;
+
   return (
-    <main role="main" id="jod-main" className="mx-auto w-full max-w-[1140px] px-5 pb-6 pt-7" data-testid="tool-main">
+    <main role="main" id="jod-main" className="mx-auto w-full max-w-[1140px] px-5 pb-6 pt-11" data-testid="tool-main">
       <div className="mb-6">
         <Breadcrumb />
       </div>
@@ -350,7 +358,12 @@ const Tool = () => {
         // Desktop
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-7">
           <div className="col-span-1 lg:col-span-5 max-h-fit">
-            <div className="sticky top-[68px] z-10 bg-bg-gray lg:pt-4">
+            <div
+              className="sticky z-10 bg-bg-gray lg:pt-4"
+              style={{
+                top,
+              }}
+            >
               <h2 className="sm:text-heading-2 text-heading-2-mobile h-9">{t('tool.my-own-data.title')}</h2>
             </div>
             <div className="flex flex-col gap-4">
@@ -369,7 +382,12 @@ const Tool = () => {
       ) : (
         // Mobile
         <>
-          <div className="sticky top-[66px] z-10 -mx-5 pt-4 bg-bg-gray">
+          <div
+            className="sticky z-10 -mx-5 pt-4 bg-bg-gray"
+            style={{
+              top,
+            }}
+          >
             <div role="tablist" className="flex text-button-sm select-none gap-3 px-5">
               {tabs.map((tab, index) => (
                 <button
