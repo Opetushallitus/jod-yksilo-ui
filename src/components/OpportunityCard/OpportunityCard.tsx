@@ -76,7 +76,8 @@ export type OpportunityCardProps = BaseProps &
   MenuProps &
   JobOpportunityData &
   CollapsibleProps &
-  EducationOpportunityData;
+  EducationOpportunityData &
+  ActionsSectionProps;
 
 interface ActionsSectionProps {
   hideFavorite: boolean;

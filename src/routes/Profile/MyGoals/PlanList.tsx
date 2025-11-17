@@ -63,7 +63,7 @@ export const PlanList = ({ pm, language, t, removeSuunnitelmaFromStore }: PlanLi
     'Y',
     'Z',
   ];
-  const planPrefix = (index) => {
+  const planPrefix = (index: number): React.JSX.Element => {
     const numberPrefix = Math.floor(index / planPrefixes.length);
     const letter = planPrefixes[index % planPrefixes.length];
     return (
@@ -114,7 +114,7 @@ export const PlanList = ({ pm, language, t, removeSuunnitelmaFromStore }: PlanLi
                   <DeleteSuunnitelmaButton
                     tavoiteId={pm.id}
                     suunnitelmaId={s.id}
-                    onDelete={() => removeSuunnitelmaFromStore(pm.id, s.id)}
+                    onDelete={() => removeSuunnitelmaFromStore(pm.id ?? '', s.id ?? '')}
                     name={s.nimi}
                   />
                 </div>
