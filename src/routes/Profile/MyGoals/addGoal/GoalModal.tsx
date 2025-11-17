@@ -43,7 +43,6 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
   const isUpdateMode = mode === 'UPDATE';
 
   const headerText = t(isUpdateMode ? 'profile.my-goals.update-modal-title' : 'profile.my-goals.add-modal-title');
-  console.log(tavoite);
   const initialGoalName = tavoite?.tavoite[i18n.language] ?? '';
   const initialGoalDescription = tavoite?.kuvaus[i18n.language] ?? '';
   const initialSelectedMahdollisuusId = tavoite?.mahdollisuusId ?? null;

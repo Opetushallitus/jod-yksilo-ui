@@ -97,7 +97,6 @@ const ActionsSection = ({
   name,
   actionButtonContent,
 }: ActionsSectionProps) => {
-  console.log(actionButtonContent);
   const nothingToShow = hideFavorite && !menuId && !menuContent && !actionButtonContent;
 
   return nothingToShow ? (
