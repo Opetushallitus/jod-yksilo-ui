@@ -10,7 +10,7 @@ import CategorizedCompetenceTagList from '@/routes/Tool/CategorizedCompetenceTag
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import { Button, cx, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
-import { JodArrowRight, JodClose, JodCompass, JodSettings } from '@jod/design-system/icons';
+import { JodArrowRight, JodClose, JodCompass, JodInfo, JodSettings } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useRouteLoaderData } from 'react-router';
@@ -350,9 +350,15 @@ const Tool = () => {
         <IconHeading icon={<JodCompass className="text-white" />} title={t('tool.title')} testId="tool-title" />
         <div className="ml-1 print:hidden">{<AiInfo type="tool" />}</div>
       </div>
-      <p className="text-body-lg-mobile sm:text-body-lg mb-7 sm:mb-9 max-w-[700px]" ref={scrollRef}>
+      <p className="text-body-lg-mobile sm:text-body-lg mb-6 max-w-[700px]" ref={scrollRef}>
         {t('tool.description')}
       </p>
+      <div className="flex bg-bg-gray-2 rounded-md max-w-xl py-5 pl-4 pr-6 items-start gap-4 text-secondary-1-dark-2 text-heading-4 mb-8">
+        <div>
+          <JodInfo />
+        </div>
+        <div>{t('tool.info')}</div>
+      </div>
       <title>{t('tool.title')}</title>
       {lg ? (
         // Desktop
