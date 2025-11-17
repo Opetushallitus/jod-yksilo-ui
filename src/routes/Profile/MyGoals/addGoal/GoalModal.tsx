@@ -101,7 +101,7 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
   // Update goalOptions and set selected possibility according to mode & tavoite
   React.useEffect(() => {
     const options = favoriteTyomahdollisuudet.filter(
-      (item) => !tavoitteet.find((pm) => pm.mahdollisuusId === item.id) || item.id == initialSelectedMahdollisuusId,
+      (item) => !tavoitteet.some((pm) => pm.mahdollisuusId === item.id) || item.id == initialSelectedMahdollisuusId,
     );
     setGoalOptions(options);
 
@@ -150,7 +150,7 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
 
     const response = await client.POST('/api/profiili/tavoitteet', { body: newTavoite });
     upsertTavoite({ ...newTavoite, id: response.data });
-    await refreshTavoitteet();
+    refreshTavoitteet();
     closeActiveModal();
   };
 
@@ -177,7 +177,7 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
       body: newTavoite,
     });
     upsertTavoite({ ...newTavoite, id: tavoite.id });
-    await refreshTavoitteet();
+    refreshTavoitteet();
     closeActiveModal();
   };
   const goalsId = React.useId();
@@ -259,18 +259,17 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
                         yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
                         hideFavorite
                         actionButtonContent={
-                          !isSelected ? (
-                            <ActionButton
-                              label={t('profile.my-goals.set-to-goal')}
-                              onClick={() => setSelectedMahdollisuus(mahdollisuus)}
-                              className={isSelected ? 'text-accent' : ''}
-                              icon={<JodFlag />}
-                            />
-                          ) : (
+                          isSelected ? (
                             <ActionButton
                               label={t('profile.my-goals.remove-from-goals')}
                               onClick={() => setSelectedMahdollisuus(null)}
                               className={'text-accent'}
+                              icon={<JodFlag />}
+                            />
+                          ) : (
+                            <ActionButton
+                              label={t('profile.my-goals.set-to-goal')}
+                              onClick={() => setSelectedMahdollisuus(mahdollisuus)}
                               icon={<JodFlag />}
                             />
                           )
@@ -328,7 +327,7 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
                 }}
                 label={t('previous')}
                 variant="white"
-                icon={!sm ? <JodArrowLeft /> : undefined}
+                icon={sm ? undefined : <JodArrowLeft />}
                 disabled={isSubmitting}
                 className="whitespace-nowrap"
                 data-testid="work-history-previous"

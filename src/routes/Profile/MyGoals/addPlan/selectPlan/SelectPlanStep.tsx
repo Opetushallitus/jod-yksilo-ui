@@ -2,7 +2,7 @@ import { ActionButton } from '@/components';
 import PlanOpportunityCard from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOpportunityCard.tsx';
 import PlanOptionFilters from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionFilters.tsx';
 import PlanOptionsPagination from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionsPagination.tsx';
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { Button, Spinner, useMediaQueries } from '@jod/design-system';
 import { JodAdd, JodClose, JodRemove, JodSettings } from '@jod/design-system/icons';
 import React from 'react';
@@ -92,11 +92,9 @@ const ExplorePlanOptions = () => {
           </div>
         </div>
         {settingsOpen && (
-          <>
-            <div className="flex-shrink-0 mb-4 px-1 lg:px-4 bg-bg-gray shadow-md rounded-md">
-              <PlanOptionFilters isOpen={settingsOpen} onClose={onCloseSettings} isModal={!lg} />
-            </div>
-          </>
+          <div className="flex-shrink-0 mb-4 px-1 lg:px-4 bg-bg-gray shadow-md rounded-md">
+            <PlanOptionFilters isOpen={settingsOpen} onClose={onCloseSettings} isModal={!lg} />
+          </div>
         )}
       </div>
 
@@ -111,28 +109,28 @@ const ExplorePlanOptions = () => {
         {koulutusMahdollisuudet.map((mahdollisuus) => {
           const { id } = mahdollisuus;
           const ehdotus = mahdollisuusEhdotukset?.[id];
-          const vaaditutOsaamisetUris: string[] = vaaditutOsaamiset.map((o) => o.uri);
+          const vaaditutOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
           const matchingOsaamiset = mahdollisuus?.jakaumat?.osaaminen?.arvot!.filter((a) => {
             const uri = a?.arvo;
-            return vaaditutOsaamisetUris.includes(uri as string);
+            return vaaditutOsaamisetUris.has(uri as string);
           }).length;
 
           return ehdotus ? (
             <PlanOpportunityCard
               key={id}
               actionButtonContent={
-                !selectedPlans?.includes(id) ? (
-                  <ActionButton
-                    label={t('profile.my-goals.choose-as-plan')}
-                    onClick={() => setSelectedPlans([...selectedPlans, id])}
-                    icon={<JodAdd />}
-                  />
-                ) : (
+                selectedPlans?.includes(id) ? (
                   <ActionButton
                     label={t('profile.my-goals.remove-from-plans')}
                     onClick={() => setSelectedPlans(selectedPlans?.filter((plan) => plan !== id))}
                     className={'text-accent'}
                     icon={<JodRemove />}
+                  />
+                ) : (
+                  <ActionButton
+                    label={t('profile.my-goals.choose-as-plan')}
+                    onClick={() => setSelectedPlans([...selectedPlans, id])}
+                    icon={<JodAdd />}
                   />
                 )
               }

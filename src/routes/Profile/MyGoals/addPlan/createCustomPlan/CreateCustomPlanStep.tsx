@@ -1,4 +1,4 @@
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { InputField, Textarea } from '@jod/design-system';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';

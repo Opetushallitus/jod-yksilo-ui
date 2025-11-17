@@ -1,4 +1,4 @@
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { Checkbox } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +14,7 @@ export const FilterEducationOpportunityType = () => {
     })),
   );
   const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newFilter = event.target.value as string;
+    const newFilter: string = event.target.value;
     setFilter('educationOpportunityType', newFilter);
   };
 

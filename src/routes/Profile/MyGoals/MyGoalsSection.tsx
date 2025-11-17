@@ -3,7 +3,7 @@ import { OpportunityCard } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import GoalModal from '@/routes/Profile/MyGoals/addGoal/GoalModal.tsx';
 import AddPlanModal from '@/routes/Profile/MyGoals/addPlan/AddPlanModal.tsx';
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import loader from '@/routes/Profile/MyGoals/loader';
 import { PlanList } from '@/routes/Profile/MyGoals/PlanList.tsx';
 import { getTypeSlug } from '@/routes/Profile/utils';

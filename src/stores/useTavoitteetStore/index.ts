@@ -9,8 +9,8 @@ export type Tavoite = components['schemas']['TavoiteDto'];
 interface TavoitteetState {
   tavoitteet: Tavoite[];
   setTavoitteet: (state: Tavoite[]) => void;
-  upsertTavoite: (tavoite: Tavoite) => void;
-  refreshTavoitteet: () => void;
+  upsertTavoite: (tavoite: Tavoite) => Promise<void>;
+  refreshTavoitteet: () => Promise<void>;
   deleteTavoite: (tavoiteId: string) => Promise<void>;
   mahdollisuusDetails: TypedMahdollisuus[];
   setMahdollisuusDetails: (state: TypedMahdollisuus[]) => void;

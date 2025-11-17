@@ -2,7 +2,7 @@ import { client } from '@/api/client.ts';
 import { useModal } from '@/hooks/useModal';
 import CreateCustomPlanStep from '@/routes/Profile/MyGoals/addPlan/createCustomPlan/CreateCustomPlanStep.tsx';
 import SelectCompetencesStep from '@/routes/Profile/MyGoals/addPlan/selectCompetences/SelectCompetencesStep.tsx';
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { Button, clamp, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -36,7 +36,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   );
 
   const onSubmit = async () => {
-    if (!tavoite || !tavoite.id) {
+    if (!tavoite?.id) {
       closeActiveModal();
       return;
     }
@@ -56,7 +56,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
       await client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
         params: {
           path: {
-            id: tavoite!.id!,
+            id: tavoite.id,
           },
         },
         body: {
@@ -125,47 +125,40 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
       }
       content={<WizardContent />}
       footer={
-        <>
-          <div className={`flex flex-row gap-5 flex-1 ${wizardStep === 0 ? 'justify-between' : 'justify-end'}`}>
-            {wizardStep === 0 && (
+        <div className={`flex flex-row gap-5 flex-1 ${wizardStep === 0 ? 'justify-between' : 'justify-end'}`}>
+          {wizardStep === 0 && (
+            <Button label={t('profile.my-goals.add-custom-plan')} variant="white" onClick={nextStep} iconSide="right" />
+          )}
+
+          <div className="flex flex-row gap-5">
+            <Button
+              label={t('cancel')}
+              variant="white"
+              onClick={() => {
+                showDialog({
+                  title: t('cancel'),
+                  description: t('profile.paths.cancel-confirmation-text'),
+                  confirmText: t('close'),
+                  cancelText: t('profile.paths.continue-editing'),
+                  onConfirm: cancel,
+                });
+              }}
+            />
+
+            {(wizardStep === 1 || wizardStep === 2) && (
+              <Button label={t('previous')} variant="white" onClick={previousStep} />
+            )}
+            {wizardStep === 1 && <Button label={t('next')} variant="accent" onClick={nextStep} />}
+            {(wizardStep === 0 || wizardStep === 2) && (
               <Button
-                label={t('profile.my-goals.add-custom-plan')}
-                variant="white"
-                onClick={nextStep}
-                iconSide="right"
+                label={t('save')}
+                disabled={(planNameEmpty() || selectedOsaamiset.length == 0) && selectedPlans.length == 0}
+                variant="accent"
+                onClick={() => onSubmit()}
               />
             )}
-
-            <div className="flex flex-row gap-5">
-              <Button
-                label={t('cancel')}
-                variant="white"
-                onClick={() => {
-                  showDialog({
-                    title: t('cancel'),
-                    description: t('profile.paths.cancel-confirmation-text'),
-                    confirmText: t('close'),
-                    cancelText: t('profile.paths.continue-editing'),
-                    onConfirm: cancel,
-                  });
-                }}
-              />
-
-              {(wizardStep === 1 || wizardStep === 2) && (
-                <Button label={t('previous')} variant="white" onClick={previousStep} />
-              )}
-              {wizardStep === 1 && <Button label={t('next')} variant="accent" onClick={nextStep} />}
-              {(wizardStep === 0 || wizardStep === 2) && (
-                <Button
-                  label={t('save')}
-                  disabled={(planNameEmpty() || selectedOsaamiset.length == 0) && selectedPlans.length == 0}
-                  variant="accent"
-                  onClick={() => onSubmit()}
-                />
-              )}
-            </div>
           </div>
-        </>
+        </div>
       }
     />
   );

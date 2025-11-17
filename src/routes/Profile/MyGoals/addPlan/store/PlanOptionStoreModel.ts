@@ -35,7 +35,6 @@ export interface AddPlanState {
   osaamiset: OsaaminenValue[];
   setPlanName: (planName: string) => void;
   setPlanDescription: (planDescription: string) => void;
-
   planName: components['schemas']['LokalisoituTeksti'];
   planDescription: components['schemas']['LokalisoituTeksti'];
   addSelectedOsaaminen: (osaaminenUri: {

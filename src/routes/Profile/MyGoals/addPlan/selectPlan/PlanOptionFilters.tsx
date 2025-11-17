@@ -1,5 +1,5 @@
 import { FilterEducationOpportunityType } from '@/routes/Profile/MyGoals/addPlan/selectPlan/FilterEducationOpportunityType.tsx';
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { FilterName } from '@/stores/useToolStore/ToolStoreModel.ts';
 import { Accordion, Button, Modal } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
@@ -33,7 +33,7 @@ const Setting = ({
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const titleText = title + (count ? ` (${count})` : '');
-  const id = title.toLocaleLowerCase().replace(/\s+/g, '-');
+  const id = title.toLocaleLowerCase().replaceAll(/\s+/g, '-');
   const triggerId = `accordion-${id}`;
   const contentId = `accordion-${id}-content`;
 

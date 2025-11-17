@@ -1,4 +1,4 @@
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { getLocalizedText } from '@/utils';
 import { EmptyState, Tag } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';

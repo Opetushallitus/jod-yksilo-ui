@@ -73,7 +73,7 @@ export const EducationOpportunityCard = ({
           </TooltipWrapper>
         }
       />
-      {rest.children as React.ReactNode}
+      {rest.children ?? <></>}
     </OpportunityCardWrapper>
   );
 };

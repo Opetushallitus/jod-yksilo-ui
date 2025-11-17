@@ -1,7 +1,7 @@
 import { client } from '@/api/client.ts';
 import { osaamiset as osaamisetService } from '@/api/osaamiset.ts';
 import type { components } from '@/api/schema';
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { KoulutusMahdollisuusFull } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel.ts';
 import type { KoulutusmahdollisuusJakaumat } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
@@ -27,7 +27,7 @@ const PlanOpportunityCard = React.memo(
     );
     const { t } = useTranslation();
     const { otsikko, kuvaus } = mahdollisuus;
-    const missingOsaamisetUris: string[] = vaaditutOsaamiset.map((o) => o.uri);
+    const missingOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
 
     const fetchOsaamiset = () =>
       client
@@ -40,7 +40,7 @@ const PlanOpportunityCard = React.memo(
           if (mahdollisuusOsaamiset.length === 0) {
             return null;
           }
-          const filteredUris = mahdollisuusOsaamiset.filter((uri) => missingOsaamisetUris.includes(uri));
+          const filteredUris = mahdollisuusOsaamiset.filter((uri) => missingOsaamisetUris.has(uri));
           return osaamisetService.find(filteredUris);
         })
         .then((data) => setOsaamiset(data!));
