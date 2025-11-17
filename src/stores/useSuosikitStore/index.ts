@@ -12,15 +12,13 @@ import { create } from 'zustand';
 interface FavoritesState {
   ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
   deleteSuosikki: (kohdeId: string) => Promise<void>;
-  excludedIds: string[];
   fetchPage: (details: PageChangeDetails) => Promise<void>;
-  fetchSuosikit: () => Promise<void>;
+  fetchSuosikit: (excludeIds?: string[]) => Promise<void>;
   filters: MahdollisuusTyyppi[];
   pageData: TypedMahdollisuus[];
   pageNr: number;
   pageSize: number;
   reset: () => void;
-  setExcludedIds: (state: string[]) => void;
   setFilters: (state: MahdollisuusTyyppi[]) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
   suosikit: components['schemas']['SuosikkiDto'][];
@@ -29,34 +27,9 @@ interface FavoritesState {
   totalPages: number;
 }
 
-const filterSuosikit = (
-  suosikit: components['schemas']['SuosikkiDto'][],
-  filters: MahdollisuusTyyppi[],
-  excludedIds: string[] = [],
-) => {
-  const withoutExcluded = suosikit.filter((item) => !excludedIds.includes(item.kohdeId));
-
-  if (filters.includes('TYOMAHDOLLISUUS') && filters.includes('KOULUTUSMAHDOLLISUUS')) {
-    return withoutExcluded;
-  } else if (filters.includes('TYOMAHDOLLISUUS')) {
-    return withoutExcluded.filter((item) => item.tyyppi === 'TYOMAHDOLLISUUS');
-  } else if (filters.includes('KOULUTUSMAHDOLLISUUS')) {
-    return withoutExcluded.filter((item) => item.tyyppi === 'KOULUTUSMAHDOLLISUUS');
-  }
-  return [];
-};
-
 const initialState: Pick<
   FavoritesState,
-  | 'suosikit'
-  | 'suosikitLoading'
-  | 'pageNr'
-  | 'totalItems'
-  | 'totalPages'
-  | 'pageSize'
-  | 'filters'
-  | 'pageData'
-  | 'excludedIds'
+  'suosikit' | 'suosikitLoading' | 'pageNr' | 'totalItems' | 'totalPages' | 'pageSize' | 'filters' | 'pageData'
 > = {
   suosikit: [],
   suosikitLoading: false,
@@ -66,7 +39,6 @@ const initialState: Pick<
   pageSize: DEFAULT_PAGE_SIZE,
   filters: ['TYOMAHDOLLISUUS', 'KOULUTUSMAHDOLLISUUS'],
   pageData: [],
-  excludedIds: [],
 };
 
 export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
@@ -77,7 +49,6 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
   },
   setSuosikit: (state) => set({ suosikit: state }),
   setFilters: (state) => set({ filters: state }),
-  setExcludedIds: (state) => set({ excludedIds: state }),
 
   deleteSuosikki: async (mahdollisuusId: string) => {
     const { suosikitLoading, suosikit, fetchSuosikit, pageData, pageNr, pageSize, fetchPage } = get();
@@ -116,12 +87,11 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
     set({ suosikitLoading: false });
   },
 
-  fetchSuosikit: async () => {
+  fetchSuosikit: async (excludedIds?: string[]) => {
     set({ suosikitLoading: true });
-    const { excludedIds = [] } = get();
     try {
       const { data = [] } = await client.GET('/api/profiili/suosikit');
-      const suosikit = [...data].filter((s) => !excludedIds.includes(s.kohdeId)).sort(sortByProperty('luotu'));
+      const suosikit = [...data].filter((s) => !excludedIds?.includes(s.kohdeId)).sort(sortByProperty('luotu'));
       set({ suosikit });
     } catch (_error) {
       set({ suosikit: get().suosikit ?? [] });
@@ -130,7 +100,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
   },
 
   fetchPage: async ({ page: requestedPage }: PageChangeDetails) => {
-    const { pageSize, suosikit, filters, excludedIds, pageData, pageNr } = get();
+    const { pageSize, suosikit, pageData, pageNr } = get();
     let safePageNr = requestedPage;
 
     // Do not fetch data for opportunities if there are no favorites
@@ -139,8 +109,7 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
       return;
     }
 
-    const filteredSuosikit = filterSuosikit(suosikit, filters, excludedIds);
-    const totalPages = Math.ceil(filteredSuosikit.length / pageSize);
+    const totalPages = Math.ceil(suosikit.length / pageSize);
 
     // If the page number is too high, set it to the last page
     if (safePageNr > totalPages) {
@@ -149,15 +118,14 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
 
     // If fetching the same page that is already fetched, check the excludedIds and update the current pageData.
     if (pageNr === requestedPage && pageData.length > 0) {
-      const newPageData = pageData.filter((item) => !excludedIds.includes(item.id));
       set({
-        pageData: newPageData,
+        pageData: pageData,
         pageNr: safePageNr,
-        totalItems: filteredSuosikit.length,
-        totalPages: Math.ceil(filteredSuosikit.length / pageSize),
+        totalItems: suosikit.length,
+        totalPages: Math.ceil(suosikit.length / pageSize),
       });
     }
-    const paginated = paginate(filteredSuosikit, safePageNr, pageSize);
+    const paginated = paginate(suosikit, safePageNr, pageSize);
     const hasTyomahdollisuus = paginated.findIndex((s) => s.tyyppi === 'TYOMAHDOLLISUUS') > -1;
     const hasKoulutusMahdollisuus = paginated.findIndex((s) => s.tyyppi === 'KOULUTUSMAHDOLLISUUS') > -1;
 
@@ -198,8 +166,8 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
       ammattiryhmaNimet,
       pageData: sortedResultBySuosikkiOrder,
       pageNr: safePageNr,
-      totalItems: filteredSuosikit.length,
-      totalPages: Math.ceil(filteredSuosikit.length / pageSize),
+      totalItems: pageData.length,
+      totalPages: Math.ceil(pageData.length / pageSize),
     });
   },
 }));

@@ -61,7 +61,7 @@ interface BaseProps {
   name: string;
   description: string;
   cardTypeTitle?: string;
-  matchValue?: number;
+  matchValue?: number | string;
   matchLabel?: string;
   type: MahdollisuusTyyppi;
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -82,6 +82,7 @@ interface ActionsSectionProps {
   hideFavorite: boolean;
   menuId?: string;
   menuContent?: React.ReactNode;
+  actionButtonContent?: React.ReactNode;
   isFavorite?: boolean;
   onToggleFavorite: () => void;
   name: string;
@@ -94,8 +95,11 @@ const ActionsSection = ({
   isFavorite,
   onToggleFavorite,
   name,
+  actionButtonContent,
 }: ActionsSectionProps) => {
-  const nothingToShow = hideFavorite && !menuId && !menuContent;
+  console.log(actionButtonContent);
+  const nothingToShow = hideFavorite && !menuId && !menuContent && !actionButtonContent;
+
   return nothingToShow ? (
     <></>
   ) : (
@@ -103,6 +107,7 @@ const ActionsSection = ({
       {!hideFavorite && (
         <FavoriteToggle isFavorite={!!isFavorite} onToggleFavorite={onToggleFavorite} favoriteName={name} />
       )}
+      {!!actionButtonContent && actionButtonContent}
       {menuId && menuContent && <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />}
     </div>
   );
@@ -124,6 +129,7 @@ export const OpportunityCardWrapper = ({
   isLoggedIn,
   hideFavorite,
   headingLevel,
+  actionButtonContent,
   menuContent,
   matchValueBgColorClassName = 'bg-secondary-4-dark',
   menuId,
@@ -229,6 +235,7 @@ export const OpportunityCardWrapper = ({
         isFavorite={isFavorite}
         onToggleFavorite={onToggleFavorite}
         name={name}
+        actionButtonContent={actionButtonContent}
       />
       {collapsible ? (
         <Accordion

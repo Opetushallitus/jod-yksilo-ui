@@ -46,10 +46,9 @@ export default (async ({ request }) => {
   setTavoitteet(tavoitteet);
   setMahdollisuusDetails(mahdollisuusDetails);
 
-  const { setExcludedIds, fetchSuosikit } = useSuosikitStore.getState();
+  const { fetchSuosikit } = useSuosikitStore.getState();
   const suosikitAlreadyInTavoitteet = tavoitteet.map((pm) => pm.mahdollisuusId);
-  setExcludedIds(suosikitAlreadyInTavoitteet);
-  await fetchSuosikit();
+  await fetchSuosikit(suosikitAlreadyInTavoitteet);
 
   return { tavoitteet, tyomahdollisuudetDetails, koulutusMahdollisuudetDetails, ammattiryhmaNimet };
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

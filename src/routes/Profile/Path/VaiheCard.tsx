@@ -59,9 +59,9 @@ const VaiheCard = ({ vaihe, totalSteps, setVaiheComplete, openVaiheModal }: Vaih
       </div>
       {/* Title & description */}
       <div className="flex flex-col gap-5">
-        {vaihe.mahdollisuusId ? (
+        {vaihe.koulutusmahdollisuusId ? (
           <Link
-            to={`/${language}/koulutusmahdollisuus/${vaihe.mahdollisuusId}`}
+            to={`/${language}/koulutusmahdollisuus/${vaihe.koulutusmahdollisuusId}`}
             className="text-heading-2 hover:text-accent hover:underline cursor-pointer"
           >
             {vaiheNimi}

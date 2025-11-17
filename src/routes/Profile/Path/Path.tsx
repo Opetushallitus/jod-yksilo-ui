@@ -1,13 +1,13 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { FormError, OpportunityCard } from '@/components';
-import DeletePolkuButton from '@/components/DeletePolkuButton/DeletePolkuButton';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { useModal } from '@/hooks/useModal';
+import DeleteSuunnitelmaButton from '@/routes/Profile/MyGoals/DeleteSuunnitelmaButton.tsx';
+import AddPlanModal from '@/routes/Profile/MyGoals/addPlan/AddPlanModal.tsx';
 import VaiheCard from '@/routes/Profile/Path/VaiheCard';
 import ManualVaiheModal from '@/routes/Profile/Path/modal/ManualVaiheModal/ManualVaiheModal';
-import ProposeVaiheModal from '@/routes/Profile/Path/modal/ProposeVaiheModal/ProposeVaiheModal';
 import { generateProfileLink, getTypeSlug } from '@/routes/Profile/utils';
 import { usePolutStore } from '@/stores/usePolutStore';
 import { getLocalizedText } from '@/utils';
@@ -113,7 +113,7 @@ const Path = () => {
 
   const openVaiheModal = (vaihe: VaiheForm, index: number) => {
     if (vaihe.lahde === 'EHDOTUS') {
-      showModal(ProposeVaiheModal, {
+      showModal(AddPlanModal, {
         vaiheIndex: index,
         onClose: onCloseModal,
       });
@@ -134,7 +134,7 @@ const Path = () => {
           variant="accent"
           label={t('profile.paths.propose-phase-to-me')}
           onClick={() => {
-            showModal(ProposeVaiheModal, {
+            showModal(AddPlanModal, {
               vaiheIndex: 0,
               onClose: onCloseModal,
             });
@@ -175,7 +175,7 @@ const Path = () => {
               disabled={percentage === 100}
               label={t('profile.paths.propose-phase-to-me')}
               onClick={() => {
-                showModal(ProposeVaiheModal, {
+                showModal(AddPlanModal, {
                   vaiheIndex: index + 1,
                   onClose: onCloseModal,
                 });
@@ -559,7 +559,7 @@ const Path = () => {
                 </tbody>
               </table>
             </div>
-            <DeletePolkuButton
+            <DeleteSuunnitelmaButton
               tavoiteId={tavoiteId}
               suunnitelmaId={suunnitelmaId}
               onDelete={closePolku}
