@@ -27,6 +27,7 @@ import { useShallow } from 'zustand/shallow';
 interface AddGoalModalProps {
   mode: 'ADD';
   isOpen: boolean;
+  tavoite: never;
 }
 
 interface UpdateGoalModalProps {
@@ -38,10 +39,8 @@ interface UpdateGoalModalProps {
 type GoalModalProps = AddGoalModalProps | UpdateGoalModalProps;
 
 const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
-  // MODE-DEPENDENT LOGIC AND INITIALIZATION ---------------------------
   const { t } = useTranslation();
   const isUpdateMode = mode === 'UPDATE';
-
   const headerText = t(isUpdateMode ? 'profile.my-goals.update-modal-title' : 'profile.my-goals.add-modal-title');
   const initialGoalName = tavoite?.tavoite[i18n.language] ?? '';
   const initialGoalDescription = tavoite?.kuvaus[i18n.language] ?? '';
@@ -152,7 +151,7 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
   };
 
   const updateTavoite = async () => {
-    if (!selectedMahdollisuus) return;
+    if (!selectedMahdollisuus || !tavoite.id) return;
 
     const newTavoite: components['schemas']['TavoiteDto'] = {
       id: tavoite.id,
@@ -164,7 +163,7 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
     };
 
     await client.PUT(`/api/profiili/tavoitteet/${tavoite.id}`, { body: newTavoite });
-    upsertTavoite({ ...newTavoite, id: tavoite!.id });
+    upsertTavoite({ ...newTavoite, id: tavoite.id });
     await refreshTavoitteet();
     closeActiveModal();
   };

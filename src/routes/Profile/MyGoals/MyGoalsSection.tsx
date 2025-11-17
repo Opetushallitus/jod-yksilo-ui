@@ -158,7 +158,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                         variant="white"
                         onClick={() => {
                           setTavoite(tavoite);
-                          showModal(GoalModal, { mode: 'UPDATE', goal: tavoite });
+                          showModal(GoalModal, { mode: 'UPDATE', tavoite: tavoite });
                         }}
                         label={t('profile.my-goals.modify-goal')}
                       />
