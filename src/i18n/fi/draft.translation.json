@@ -22,6 +22,9 @@
     "title": "Hups! Sivua ei löytynyt"
   },
   "profile": {
+    "competences": {
+      "info": "Voit valita itse mitä Osaamisprofiilin tiedoistasi hyödynnät mahdollisuuksien etsintään tuomalla ne käyttöösi Löydä mahdollisuuksia -sivulla."
+    },
     "my-goals": {
       "add-competence-description": "Lisää osaaminen +-merkistä",
       "add-custom-plan": "Luo oma",
@@ -69,6 +72,7 @@
     "education-opportunity-duration-tooltip": "Koulutuksen kesto kertoo, kuinka kauan koulutus tavallisesti kestää. Se ilmaistaan yleensä vuosina tai kuukausina ja perustuu koulutuksen laajuuteen ja opintojen etenemiseen normaalissa tahdissa.",
     "education-opportunity-koulutusala": "Yleisin koulutusala",
     "education-opportunity-koulutusala-tooltip": "Koulutusala tarkoittaa ryhmää, johon koulutukset jaotellaan sen mukaan, mihin tieteen, yhteiskunnan tai työelämän alaan ne liittyvät.",
+    "info": "Osaamisprofiilin tiedot eivät siirry suoraan tälle sivulle. Voit tuoda ne Osaamisprofiilisi-kohdasta. Kokeile erilaisia yhdistelmiä ja päivitä mahdollisuutesi.",
     "info-overview": {
       "mapped-interests": "Kartoitetut kiinnostukset"
     },
