@@ -5,12 +5,24 @@ import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDro
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
 import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
-import { tidyClasses as tc } from '@jod/design-system';
+import { Accordion, tidyClasses as tc } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router';
 import { EducationOpportunityCard } from './EducationOpportunityCard';
 import { JobOpportunityCard } from './JobOpportunityCard';
+
+type CollapsibleProps =
+  | {
+      /** Whether the card content is collapsible */
+      collapsible: true;
+      /** Whether the card content is initially collapsed */
+      initiallyCollapsed?: boolean;
+    }
+  | {
+      collapsible?: never;
+      initiallyCollapsed?: never;
+    };
 
 type FavoriteProps =
   | {
@@ -63,6 +75,7 @@ export type OpportunityCardProps = BaseProps &
   FavoriteProps &
   MenuProps &
   JobOpportunityData &
+  CollapsibleProps &
   EducationOpportunityData;
 
 interface ActionsSectionProps {
@@ -115,6 +128,8 @@ export const OpportunityCardWrapper = ({
   matchValueBgColorClassName = 'bg-secondary-4-dark',
   menuId,
   rateId,
+  collapsible,
+  initiallyCollapsed,
 }: OpportunityCardProps) => {
   const {
     t,
@@ -145,44 +160,44 @@ export const OpportunityCardWrapper = ({
     }
   };
 
-  return (
-    <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border" data-testid="opportunity-card">
-      <div className="order-2 flex flex-col">
-        {to ? (
-          <NavLink
-            to={to}
-            state={{ from }}
-            data-testid="opportunity-card-title-link"
-            onClick={() => {
-              if (rateId) {
-                globalThis._paq?.push([
-                  'trackEvent',
-                  type === 'TYOMAHDOLLISUUS' ? 'yksilo.Työmahdollisuus' : 'yksilo.Koulutusmahdollisuus',
-                  'Klikkaus',
-                  rateId,
-                ]);
-              }
-            }}
-            className="order-2"
-          >
-            <TitleTag className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto text-secondary-1-dark hover:underline">
-              {name}
-            </TitleTag>
-          </NavLink>
-        ) : (
-          <TitleTag
-            className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto"
-            data-testid="opportunity-card-title"
-          >
+  const titleContent = (
+    <>
+      {to ? (
+        <NavLink
+          to={to}
+          state={{ from }}
+          data-testid="opportunity-card-title-link"
+          onClick={() => {
+            if (rateId) {
+              globalThis._paq?.push([
+                'trackEvent',
+                type === 'TYOMAHDOLLISUUS' ? 'yksilo.Työmahdollisuus' : 'yksilo.Koulutusmahdollisuus',
+                'Klikkaus',
+                rateId,
+              ]);
+            }
+          }}
+          className="order-2"
+        >
+          <TitleTag className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto text-secondary-1-dark hover:underline">
             {name}
           </TitleTag>
-        )}
-        <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase order-1">
-          {cardTypeTitle}
-        </span>
-        <p className="order-3 font-arial text-body-md-mobile sm:text-body-md">{description}</p>
-        <div className="flex flex-col order-4 mt-5 gap-3">{children}</div>
-      </div>
+        </NavLink>
+      ) : (
+        <TitleTag
+          className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto"
+          data-testid="opportunity-card-title"
+        >
+          {name}
+        </TitleTag>
+      )}
+    </>
+  );
+
+  const content = (
+    <>
+      <p className="order-3 font-arial text-body-md-mobile sm:text-body-md">{description}</p>
+      <div className="flex flex-col order-4 mt-5 gap-3">{children}</div>
       <div
         className={`flex flex-col sm:flex-row items-start sm:items-center gap-x-7 gap-y-5 mb-5 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
         data-testid="opportunity-card-actions"
@@ -199,16 +214,50 @@ export const OpportunityCardWrapper = ({
             <span className="text-body-xs font-arial font-bold">{matchLabel}</span>
           </div>
         )}
-
-        <ActionsSection
-          hideFavorite={!!hideFavorite}
-          menuId={menuId}
-          menuContent={menuContent}
-          isFavorite={isFavorite}
-          onToggleFavorite={onToggleFavorite}
-          name={name}
-        />
       </div>
+    </>
+  );
+  const triggerId = `${name}-trigger`;
+  const contentId = `${name}-content`;
+
+  return (
+    <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border" data-testid="opportunity-card">
+      <ActionsSection
+        hideFavorite={!!hideFavorite}
+        menuId={menuId}
+        menuContent={menuContent}
+        isFavorite={isFavorite}
+        onToggleFavorite={onToggleFavorite}
+        name={name}
+      />
+      {collapsible ? (
+        <Accordion
+          initialState={initiallyCollapsed}
+          title={
+            <div className="flex flex-col">
+              <div className="order-2 flex flex-col w-fit">{titleContent}</div>
+              <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase pt-5 order-1">
+                {cardTypeTitle}
+              </span>
+            </div>
+          }
+          ariaLabel={name}
+          triggerId={triggerId}
+          ariaControls={contentId}
+        >
+          <section id={contentId} className="-mt-2 -mb-5">
+            {content}
+          </section>
+        </Accordion>
+      ) : (
+        <>
+          <div className="order-2 flex flex-col w-fit">{titleContent}</div>
+          <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase order-1">
+            {cardTypeTitle}
+          </span>
+          <>{content}</>
+        </>
+      )}
     </Component>
   );
 };
