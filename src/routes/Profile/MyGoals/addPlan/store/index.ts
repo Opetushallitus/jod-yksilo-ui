@@ -10,7 +10,7 @@ import {
   DEFAULT_SORTING,
   PlanFilters,
 } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel.ts';
-import { mapOsaaminenToUri } from '@/routes/Profile/Path/utils.ts';
+import { mapOsaaminenToUri } from '@/routes/Profile/MyGoals/utils.ts';
 import { ehdotusDataToRecord, EhdotusRecord } from '@/routes/Tool/utils.ts';
 import { filterByEducationType, filterByRegion } from '@/stores/useToolStore/filters.ts';
 import { paginate, removeDuplicatesByKey } from '@/utils';
