@@ -149,24 +149,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}/vaiheet/{vaiheId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    /** Updates a vaihe of the suunnitelma */
-    put: operations['polunVaiheUpdate'];
-    post?: never;
-    /** Deletes a vaihe of the suunnitelma */
-    delete: operations['polunVaiheDelete'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/profiili/muu-osaaminen': {
     parameters: {
       query?: never;
@@ -372,23 +354,6 @@ export interface paths {
     put?: never;
     /** Adds a new suunnitelma to the tavoite */
     post: operations['polunSuunnitelmaAdd'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}/vaiheet': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /** Adds a new vaihe to the suunnitelma */
-    post: operations['polunVaiheAdd'];
     delete?: never;
     options?: never;
     head?: never;
@@ -767,6 +732,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/koulutusmahdollisuudet/full': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['koulutusmahdollisuusFindAllFull'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/integraatiot/tmt/vienti/auktorisointi': {
     parameters: {
       query?: never;
@@ -869,10 +850,12 @@ export interface components {
       /** Format: email */
       email?: string;
     };
-    /** @example {
+    /**
+     * @example {
      *       "fi": "suomeksi",
      *       "sv": "på svenska"
-     *     } */
+     *     }
+     */
     LokalisoituTeksti: {
       [key: string]: string;
     };
@@ -912,6 +895,9 @@ export interface components {
       /** Format: uuid */
       readonly id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
+      kuvaus: components['schemas']['LokalisoituTeksti'];
+      /** Format: uuid */
+      koulutusmahdollisuusId?: string;
     };
     TavoiteDto: {
       /** Format: uuid */
@@ -919,39 +905,24 @@ export interface components {
       /** @enum {string} */
       tyyppi: 'LYHYT' | 'PITKA' | 'MUU';
       /** @enum {string} */
-      mahdollisuusTyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      mahdollisuusTyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       /** Format: uuid */
-      mahdollisuusId: string;
+      mahdollisuusId?: string;
       tavoite?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
       /** Format: date-time */
       readonly luotu?: string;
       readonly suunnitelmat?: components['schemas']['PolunSuunnitelmaYhteenvetoDto'][];
     };
-    PolunSuunnitelmaUpdateDto: {
-      /** Format: uuid */
-      id?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
-      osaamiset?: string[];
-      ignoredOsaamiset?: string[];
-    };
-    PolunVaiheDto: {
+    PolunSuunnitelmaDto: {
       /** Format: uuid */
       readonly id?: string;
-      /** @enum {string} */
-      lahde: 'EHDOTUS' | 'KAYTTAJA';
-      /** Format: uuid */
-      mahdollisuusId?: string;
-      /** @enum {string} */
-      tyyppi: 'KOULUTUS' | 'TYO';
-      nimi: components['schemas']['LokalisoituTeksti'];
+      nimi?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
-      linkit?: string[];
-      /** Format: date */
-      alkuPvm: string;
-      /** Format: date */
-      loppuPvm: string;
-      osaamiset?: string[];
-      valmis: boolean;
+      /** Format: uuid */
+      koulutusmahdollisuusId?: string;
+      readonly osaamiset?: string[];
+      readonly ignoredOsaamiset?: string[];
     };
     KoulutusKokonaisuusUpdateDto: {
       /** Format: uuid */
@@ -988,20 +959,6 @@ export interface components {
       nimi: components['schemas']['LokalisoituTeksti'];
       toimenkuvat?: components['schemas']['ToimenkuvaDto'][];
     };
-    PolunSuunnitelmaDto: {
-      /** Format: uuid */
-      readonly id?: string;
-      nimi: components['schemas']['LokalisoituTeksti'];
-      readonly tavoite?: components['schemas']['TavoiteYhteenvetoDto'];
-      readonly vaiheet?: components['schemas']['PolunVaiheDto'][];
-      readonly osaamiset?: string[];
-      readonly ignoredOsaamiset?: string[];
-    };
-    TavoiteYhteenvetoDto: {
-      /** Format: uuid */
-      readonly id?: string;
-      tavoite?: components['schemas']['LokalisoituTeksti'];
-    };
     SuosikkiDto: {
       /** Format: uuid */
       readonly id?: string;
@@ -1018,14 +975,18 @@ export interface components {
       nimi: components['schemas']['LokalisoituTeksti'];
       koulutukset?: components['schemas']['KoulutusDto'][];
     };
+    Keskustelu: {
+      /** Format: uuid */
+      id?: string;
+      kiinnostukset?: components['schemas']['Kiinnostus'][];
+      vastaus?: string;
+    };
     Kiinnostus: {
       /** Format: uri */
       esco_uri?: string;
       kuvaus?: string;
     };
-    ResponseWithId: {
-      /** Format: uuid */
-      id?: string;
+    Vastaus: {
       kiinnostukset?: components['schemas']['Kiinnostus'][];
       vastaus?: string;
     };
@@ -1130,11 +1091,19 @@ export interface components {
       koulutusmahdollisuusId?: string;
     };
     ExtTavoiteDto: {
-      /** @enum {string} */
+      /**
+       * @deprecated
+       * @description This field is deprecated. Tavoite type is not differentiated anymore
+       * @enum {string}
+       */
       tyyppi?: 'LYHYT' | 'PITKA' | 'MUU';
       /** Format: uuid */
       tyomahdollisuusId?: string;
-      /** Format: uuid */
+      /**
+       * Format: uuid
+       * @deprecated
+       * @description This field is deprecated. Tavoite can only be tyomahdollisuus
+       */
       koulutusmahdollisuusId?: string;
     };
     ExtYksilonOsaaminenDto: {
@@ -1313,28 +1282,8 @@ export interface components {
       /** Format: uuid */
       id?: string;
       nimi?: components['schemas']['LokalisoituTeksti'];
-      vaiheet?: components['schemas']['PolunVaiheExportDto'][];
       osaamiset?: string[];
       ignoredOsaamiset?: string[];
-    };
-    PolunVaiheExportDto: {
-      /** Format: uuid */
-      id?: string;
-      /** @enum {string} */
-      lahde?: 'EHDOTUS' | 'KAYTTAJA';
-      /** @enum {string} */
-      tyyppi?: 'KOULUTUS' | 'TYO';
-      /** Format: uuid */
-      mahdollisuusId?: string;
-      nimi?: components['schemas']['LokalisoituTeksti'];
-      kuvaus?: components['schemas']['LokalisoituTeksti'];
-      linkit?: string[];
-      /** Format: date */
-      alkuPvm?: string;
-      /** Format: date */
-      loppuPvm?: string;
-      osaamiset?: string[];
-      valmis?: boolean;
     };
     TavoiteExportDto: {
       /** Format: uuid */
@@ -1345,10 +1294,9 @@ export interface components {
       tyyppi?: 'LYHYT' | 'PITKA' | 'MUU';
       /** Format: uuid */
       tyomahdollisuus?: string;
-      /** Format: uuid */
-      koulutusmahdollisuus?: string;
       suunnitelmat?: components['schemas']['PolunSuunnitelmaExportDto'][];
       tavoite?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
     };
     ToimenkuvaExportDto: {
       /** Format: uuid */
@@ -1497,6 +1445,19 @@ export interface components {
       jakaumat?: {
         [key: string]: components['schemas']['JakaumaDto'];
       };
+    };
+    SivuDtoKoulutusmahdollisuusFullDto: {
+      sisalto: components['schemas']['KoulutusmahdollisuusFullDto'][];
+      /**
+       * Format: int64
+       * @example 30
+       */
+      maara: number;
+      /**
+       * Format: int32
+       * @example 3
+       */
+      sivuja: number;
     };
     AmmattiDto: {
       /** Format: uri */
@@ -1960,7 +1921,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['PolunSuunnitelmaUpdateDto'];
+        'application/json': components['schemas']['PolunSuunnitelmaDto'];
       };
     };
     responses: {
@@ -1980,54 +1941,6 @@ export interface operations {
       path: {
         id: string;
         suunnitelmaId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  polunVaiheUpdate: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-        suunnitelmaId: string;
-        vaiheId: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['PolunVaiheDto'];
-      };
-    };
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  polunVaiheDelete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-        suunnitelmaId: string;
-        vaiheId: string;
       };
       cookie?: never;
     };
@@ -2559,33 +2472,6 @@ export interface operations {
       };
     };
   };
-  polunVaiheAdd: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-        suunnitelmaId: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['PolunVaiheDto'];
-      };
-    };
-    responses: {
-      /** @description Created */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': string;
-        };
-      };
-    };
-  };
   yksilonSuosikkiFindAll: {
     parameters: {
       query?: {
@@ -2787,7 +2673,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['ResponseWithId'];
+          'application/json': components['schemas']['Keskustelu'];
         };
       };
     };
@@ -2813,7 +2699,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['ResponseWithId'];
+          'application/json': components['schemas']['Vastaus'];
         };
       };
     };
@@ -3205,6 +3091,30 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['KoulutusmahdollisuusFullDto'];
+        };
+      };
+    };
+  };
+  koulutusmahdollisuusFindAllFull: {
+    parameters: {
+      query?: {
+        sivu?: number;
+        koko?: number;
+        id?: string[];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SivuDtoKoulutusmahdollisuusFullDto'];
         };
       };
     };

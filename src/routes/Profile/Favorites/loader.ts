@@ -4,9 +4,8 @@ import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { LoaderFunction } from 'react-router';
 
 export default (async () => {
-  const { setExcludedIds, fetchSuosikit, fetchPage } = useSuosikitStore.getState();
+  const { fetchSuosikit, fetchPage } = useSuosikitStore.getState();
   // When navigating to favorites, reset excludedIds so that all favorites are shown
-  setExcludedIds([]);
   await fetchSuosikit();
   await fetchPage({ page: 1, pageSize: DEFAULT_PAGE_SIZE });
   return null;

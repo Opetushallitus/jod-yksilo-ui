@@ -1,4 +1,4 @@
-import { client } from '@/api/client';
+import { client } from '@/api/client.ts';
 import type { components } from '@/api/schema';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
@@ -12,7 +12,7 @@ interface DeletePolkuButtonProps {
   className?: string;
   onDelete?: () => void;
 }
-const DeletePolkuButton = ({ tavoiteId, suunnitelmaId, className, name, onDelete }: DeletePolkuButtonProps) => {
+const DeleteSuunnitelmaButton = ({ tavoiteId, suunnitelmaId, className, name, onDelete }: DeletePolkuButtonProps) => {
   const { t } = useTranslation();
   const { showDialog } = useModal();
 
@@ -29,17 +29,17 @@ const DeletePolkuButton = ({ tavoiteId, suunnitelmaId, className, name, onDelete
     }
   };
 
-  const polkuName = typeof name === 'string' ? name : getLocalizedText(name);
+  const suunnitelmaName = typeof name === 'string' ? name : getLocalizedText(name);
 
   return tavoiteId && suunnitelmaId ? (
     <div className={className ?? ''}>
       <Button
-        label={t('profile.paths.delete-path')}
+        label={t('profile.my-goals.delete-plan')}
         variant="white-delete"
         onClick={() => {
           showDialog({
-            title: t('profile.paths.delete-path'),
-            description: t('profile.paths.delete-path-description', { name: polkuName }),
+            title: t('profile.my-goals.delete-plan-title'),
+            description: t('profile.my-goals.delete-plan-description', { name: suunnitelmaName }),
             onConfirm: deletePolku,
           });
         }}
@@ -48,4 +48,4 @@ const DeletePolkuButton = ({ tavoiteId, suunnitelmaId, className, name, onDelete
   ) : null;
 };
 
-export default DeletePolkuButton;
+export default DeleteSuunnitelmaButton;

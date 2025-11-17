@@ -42,5 +42,37 @@
     "settings": {
       "controls": "Säätimet"
     }
+  },
+  "profile": {
+    "my-goals": {
+      "choose-as-plan": "Valitse suunnitelmaksi",
+      "remove-from-plans": "Poista suunnitelma",
+      "add-custom-plan": "Luo oma",
+      "add-new-plan-header": "Luo uusi suunnitelma",
+      "add-new-plan-description": "Punnitse eri koulutusmahdollisuuksia ja valitse yksi tai useampi vaihtoehtoiseksi suunnitelmaksi kohti tavoitettasi",
+      "add-custom-plan-header": "Luo oma suunnitelma",
+      "add-custom-plan-description": "Luo oma koulutussuunnitelma antamalla sille ensin nimi ja lyhyt kuvaus. Sen jälkeen valitse osaamiset, jotka haluat saavuttaa suunnitelman avulla.",
+      "delete-goal-description": "Haluatko varmasti poistaa tämän tavoitteen?",
+      "competences-for-goal": "Tavoitteeseen vaaditut osaamiset",
+      "add-competence to goal": "Lisää osaaminen +-merkistä",
+      "chosen-competences": "Omaan suunnitelmaan valitut osaamiset",
+      "no-chosen-competences": "Ei valittuja osaamisia",
+      "custom-plan-name": "Oman suunnitelman nimi",
+      "custom-plan-description": "Oman suunnitelman kuvaus",
+      "custom-plan-competences-description": "Valitse tavoitteeseen vaadittavista osaamisista ne, jotka aiot saavuttaa oman koulutussuunnitelmasi avulla.",
+      "required-competences": "Tavoitteeseen vaaditut osaamiset",
+      "add-competence-description": "Lisää osaaminen +-merkistä",
+      "selected-competences": "Omaan suunnitelmaan valitut osaamiset",
+      "remove-competence-description": "Poista osaaminen x-merkistä",
+      "update-modal-title": "Muokkaa tavoitetta",
+      "empty-plans": "Ei valittuja suunnitelmia",
+      "modify-goal": "Muokkaa tavoitetta",
+      "plan": "1 suunnitelma",
+      "plans": " suunnitelmaa",
+      "competences": "Osaamista",
+      "delete-plan": "Poista",
+      "delete-plan-title": "Poista suunnitelma",
+      "delete-plan-description": "Haluatko varmasti poistaa päämäärältä suunnitelman \"{{name}}\"?"
+    }
   }
 }
