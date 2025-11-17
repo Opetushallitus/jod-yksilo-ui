@@ -21,16 +21,22 @@ let abortController = new AbortController();
  * This store is used to handle state of AddPlanModal and its steps
  */
 const initialState = {
-  tavoitteet: {},
+  tavoite: null,
+  selectedPlans: [],
   osaamiset: [],
-  osaamisetVapaateksti: undefined,
-  kiinnostukset: [],
-  kiinnostuksetVapaateksti: undefined,
+  selectedOsaamiset: [],
+  vaaditutOsaamiset: [],
+  ehdotuksetLoading: false,
+  mahdollisuudetLoading: false,
+  tavoitteet: {},
+  filteredMahdollisuudetCount: 0,
+  previousEhdotusUpdateLang: i18n.language,
+
+  ehdotuksetPageSize: DEFAULT_PAGE_SIZE,
+  ehdotuksetPageNr: 0,
   mahdollisuusEhdotukset: {},
   tyomahdollisuudet: [],
   koulutusmahdollisuudet: [],
-  selectedPlans: [],
-  mixedMahdollisuudet: [],
   filters: DEFAULT_FILTERS,
   sorting: DEFAULT_SORTING,
   planName: {
@@ -45,21 +51,7 @@ const initialState = {
   },
 };
 export const addPlanStore = create<AddPlanState>((set, get) => ({
-  osaamiset: [],
-  selectedPlans: [],
-  selectedOsaamiset: [],
-  tavoite: {},
-  vaaditutOsaamiset: [],
-  mahdollisuusEhdotukset: {},
-  koulutusmahdollisuudet: [],
-  ehdotuksetLoading: false,
-  ehdotuksetPageSize: DEFAULT_PAGE_SIZE,
-  mahdollisuudetLoading: false,
-  filteredMahdollisuudetCount: 0,
-  ehdotuksetPageNr: 1,
-  filters: DEFAULT_FILTERS,
-  settingsHaveChanged: false,
-
+  ...initialState,
   reset: () => set(initialState),
   addSelectedOsaaminen: (osaaminenUri: components['schemas']['OsaaminenDto']) =>
     set({ selectedOsaamiset: [...get().selectedOsaamiset, osaaminenUri] }),
@@ -67,7 +59,6 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
     set({ selectedOsaamiset: get().selectedOsaamiset.filter((o) => o !== osaaminenUri) }),
   resetSettings: () => set({ filters: DEFAULT_FILTERS, sorting: DEFAULT_SORTING, settingsHaveChanged: true }),
   setSelectedPlans: (state) => set({ selectedPlans: state }),
-  setTavoitteet: (state) => set({ tavoitteet: state }),
   setOsaamiset: (state) => set({ osaamiset: state }),
   setPlanName: (newPlanNameValue: string) => {
     const currentLang = i18n.language;
@@ -90,11 +81,14 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
   },
   updateEhdotukset: async () => {
     set({ ehdotuksetLoading: true });
-    const mahdollisuusOpts = {
-      params: { path: { id: get().tavoite?.mahdollisuusId } },
-    };
 
-    const { data: tavoiteMahdollisuus } = await client.GET('/api/tyomahdollisuudet/{id}', mahdollisuusOpts);
+    const mahdollisuusId = get().tavoite?.mahdollisuusId;
+    if (!mahdollisuusId) {
+      return;
+    }
+    const { data: tavoiteMahdollisuus } = await client.GET('/api/tyomahdollisuudet/{id}', {
+      params: { path: { id: mahdollisuusId } },
+    });
     const vaaditutOsaamiset = await osaamiset.combine(
       tavoiteMahdollisuus?.jakaumat?.osaaminen?.arvot,
       (value) => value.arvo,
@@ -102,11 +96,18 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
     );
     set({ vaaditutOsaamiset });
     const { data: profiiliOsaamisetRes } = await client.GET('/api/profiili/osaamiset');
-    const profiiliOsaamiset = removeDuplicatesByKey(profiiliOsaamisetRes, (o) => o.osaaminen?.uri).filter((osaaminen) =>
-      vaaditutOsaamiset.some((vaadittu) => vaadittu.uri === osaaminen.osaaminen.uri),
+    // Type check forces this check. ui-code cant know if the list contains undefineds
+    const profiiliOsaamisetFiltered = profiiliOsaamisetRes?.filter(
+      (o): o is components['schemas']['YksilonOsaaminenDto'] => o != undefined,
+    );
+    const profiiliOsaamiset = removeDuplicatesByKey(profiiliOsaamisetFiltered ?? [], (o) => o?.osaaminen?.uri).filter(
+      (osaaminen) => vaaditutOsaamiset.some((vaadittu) => vaadittu.uri === osaaminen.osaaminen.uri),
     );
 
-    const missingOsaamiset = vaaditutOsaamiset.map(mapOsaaminenToUri).filter((uri) => !profiiliOsaamiset.includes(uri));
+    const missingOsaamiset = vaaditutOsaamiset
+      .map(mapOsaaminenToUri)
+      .filter((id): id is string => id != undefined)
+      .filter((uri) => !profiiliOsaamiset.map((o) => o?.osaaminen?.uri).includes(uri));
 
     try {
       const { data: mahdollisuusData } = await client.POST('/api/ehdotus/mahdollisuudet/polku', {
@@ -167,12 +168,14 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
         set({ previousEhdotusUpdateLang: i18n.language });
       }
       ehdotukset = get().mahdollisuusEhdotukset;
-      const alreadyChosenKoulutusmahdollisuudet = get().tavoite.suunnitelmat.map((s) => s.koulutusmahdollisuusId);
+      const alreadyChosenKoulutusmahdollisuudet = get()
+        .tavoite?.suunnitelmat?.filter((s) => !!s)
+        .map((s) => s.koulutusmahdollisuusId);
 
       return Object.entries(ehdotukset ?? [])
         .filter(
           ([key, ehdotusMetadata]) =>
-            !alreadyChosenKoulutusmahdollisuudet.includes(key) &&
+            !alreadyChosenKoulutusmahdollisuudet?.includes(key) &&
             filterByEducationType(educationOpportunityType, ehdotusMetadata) &&
             filterByRegion(region, ehdotusMetadata),
         )
@@ -193,7 +196,7 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
         mahdollisuudetLoading: false,
       });
     } catch {
-      set({ mixedMahdollisuudet: [], koulutusmahdollisuudet: [], tyomahdollisuudet: [], mahdollisuudetLoading: false });
+      set({ koulutusmahdollisuudet: [], mahdollisuudetLoading: false });
     }
   },
 

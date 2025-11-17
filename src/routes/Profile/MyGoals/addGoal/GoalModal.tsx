@@ -42,8 +42,8 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
   const { t } = useTranslation();
   const isUpdateMode = mode === 'UPDATE';
   const headerText = t(isUpdateMode ? 'profile.my-goals.update-modal-title' : 'profile.my-goals.add-modal-title');
-  const initialGoalName = tavoite?.tavoite[i18n.language] ?? '';
-  const initialGoalDescription = tavoite?.kuvaus[i18n.language] ?? '';
+  const initialGoalName = tavoite?.tavoite ? tavoite?.tavoite[i18n.language] : '';
+  const initialGoalDescription = tavoite?.kuvaus ? tavoite?.kuvaus[i18n.language] : '';
   const initialSelectedMahdollisuusId = tavoite?.mahdollisuusId ?? null;
 
   const { sm } = useMediaQueries();
@@ -107,7 +107,9 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
 
     if (isUpdateMode && initialSelectedMahdollisuusId) {
       const selected = options.find((o) => o.id === initialSelectedMahdollisuusId);
-      if (selected) setSelectedMahdollisuus(selected);
+      if (selected) {
+        setSelectedMahdollisuus(selected);
+      }
     } else {
       setSelectedMahdollisuus(null);
     }
@@ -134,7 +136,9 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
 
   // Separate insert handlers for add and update ------------------------
   const addTavoite = async () => {
-    if (!selectedMahdollisuus) return;
+    if (!selectedMahdollisuus) {
+      return;
+    }
 
     const newTavoite: components['schemas']['TavoiteDto'] = {
       tyyppi: 'MUU',
@@ -151,18 +155,27 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
   };
 
   const updateTavoite = async () => {
-    if (!selectedMahdollisuus || !tavoite.id) return;
+    if (!selectedMahdollisuus || !tavoite.id) {
+      return;
+    }
 
-    const newTavoite: components['schemas']['TavoiteDto'] = {
+    const newTavoite: Tavoite = {
       id: tavoite.id,
       tyyppi: 'MUU',
       mahdollisuusId: selectedMahdollisuus.id,
       mahdollisuusTyyppi: selectedMahdollisuus.mahdollisuusTyyppi,
       tavoite: { fi: goalName, sv: goalName, en: goalName },
       kuvaus: { fi: goalDescription, sv: goalDescription, en: goalDescription },
-    };
+    } as Tavoite;
 
-    await client.PUT(`/api/profiili/tavoitteet/${tavoite.id}`, { body: newTavoite });
+    await client.PUT(`/api/profiili/tavoitteet/{id}`, {
+      params: {
+        path: {
+          id: tavoite.id,
+        },
+      },
+      body: newTavoite,
+    });
     upsertTavoite({ ...newTavoite, id: tavoite.id });
     await refreshTavoitteet();
     closeActiveModal();
@@ -192,7 +205,6 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
                 <InputField
                   label={t('profile.my-goals.goal-name')}
                   requiredText={t('required')}
-                  required
                   value={goalName}
                   onChange={(e) => setGoalName(e.target.value)}
                 />
@@ -263,7 +275,6 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
                             />
                           )
                         }
-                        menuId={id}
                       />
                     );
                   })}
@@ -310,7 +321,9 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
             {step > 0 && (
               <Button
                 onClick={() => {
-                  if (isSubmitting) return;
+                  if (isSubmitting) {
+                    return;
+                  }
                   prevStep();
                 }}
                 label={t('previous')}
@@ -324,7 +337,9 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
             {step < steps && (
               <Button
                 onClick={() => {
-                  if (isSubmitting) return;
+                  if (isSubmitting) {
+                    return;
+                  }
                   nextStep();
                 }}
                 label={t('next')}

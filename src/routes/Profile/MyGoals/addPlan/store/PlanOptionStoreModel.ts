@@ -69,5 +69,5 @@ export interface AddPlanState {
   setSelectedPlans: (plans: string[]) => void;
   updateEhdotukset: (lang: string, signal?: AbortSignal) => Promise<void>;
   fetchMahdollisuudetPage: (signal?: AbortSignal, page?: number) => Promise<void>;
-  updateEhdotuksetAndMahdollisuudet: (loggedIn: boolean) => Promise<void>;
+  updateEhdotuksetAndMahdollisuudet: () => Promise<void>;
 }

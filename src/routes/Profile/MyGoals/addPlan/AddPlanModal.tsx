@@ -37,11 +37,15 @@ const AddPlanModal = ({ mahdollisuusId, isOpen, onClose }: AddPlanModalProps) =>
   );
 
   const onSubmit = async () => {
+    if (!tavoite || !tavoite.id) {
+      closeActiveModal();
+      return;
+    }
     for (const selectedplan of selectedPlans) {
       await client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
         params: {
           path: {
-            id: tavoite?.id,
+            id: tavoite.id,
           },
         },
         body: {
@@ -53,7 +57,7 @@ const AddPlanModal = ({ mahdollisuusId, isOpen, onClose }: AddPlanModalProps) =>
       await client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
         params: {
           path: {
-            id: tavoite?.id,
+            id: tavoite!.id!,
           },
         },
         body: {
@@ -68,11 +72,7 @@ const AddPlanModal = ({ mahdollisuusId, isOpen, onClose }: AddPlanModalProps) =>
   };
 
   const wizardComponents = React.useMemo(
-    () => [
-      (props) => <SelectPlanStep mahdollisuusId={mahdollisuusId} {...props} />,
-      (props) => <CreateCustomPlanStep {...props} />,
-      (props) => <SelectCompetencesStep {...props} />,
-    ],
+    () => [() => <SelectPlanStep />, () => <CreateCustomPlanStep />, () => <SelectCompetencesStep />],
     [mahdollisuusId],
   );
 

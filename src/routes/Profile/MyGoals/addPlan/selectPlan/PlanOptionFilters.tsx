@@ -64,7 +64,6 @@ const Setting = ({
 };
 
 export interface PlanOptionFiltersProps {
-  ref: React.RefObject<HTMLDivElement | null>;
   isOpen: boolean;
   onClose?: () => void;
   isModal?: boolean;
@@ -90,7 +89,7 @@ const SettingsMenu = () => {
   );
 };
 
-const PlanOptionFilters = ({ ref, isOpen, onClose, isModal }: PlanOptionFiltersProps) => {
+const PlanOptionFilters = ({ isOpen, onClose, isModal }: PlanOptionFiltersProps) => {
   const { t } = useTranslation();
   const resetSettings = addPlanStore((state) => state.resetSettings);
   const resetSection = (
@@ -125,14 +124,14 @@ const PlanOptionFilters = ({ ref, isOpen, onClose, isModal }: PlanOptionFiltersP
               label={t('save-and-close')}
             />
           )}
-          <SettingsMenu ref={ref} />
+          <SettingsMenu />
           {resetSection}
         </div>
       }
     />
   ) : (
     <div className="bg-bg-gray-2 rounded-t mb-7 py-4 px-6 sm:text-body-sm text-body-sm-mobile flex flex-col gap-6 sticky top-[124px] z-10">
-      <SettingsMenu ref={ref} />
+      <SettingsMenu />
       {resetSection}
     </div>
   );

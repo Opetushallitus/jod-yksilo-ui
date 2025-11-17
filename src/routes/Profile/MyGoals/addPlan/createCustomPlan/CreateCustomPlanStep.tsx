@@ -22,7 +22,6 @@ const CreateCustomPlanStep = () => {
         <InputField
           label={t('profile.my-goals.custom-plan-name')}
           requiredText={t('required')}
-          required={true}
           value={planName[i18n.language]}
           onChange={(e) => setPlanName(e.target.value)}
         />

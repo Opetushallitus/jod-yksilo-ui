@@ -55,13 +55,16 @@ export type JobOpportunityData = Pick<TypedMahdollisuus, 'aineisto' | 'ammattiry
   ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
 };
 
+interface CustomButtonProps {
+  actionButtonContent?: React.ReactNode;
+}
 interface BaseProps {
   as?: React.ElementType;
   to?: string;
   name: string;
   description: string;
   cardTypeTitle?: string;
-  matchValue?: number | string;
+  matchValue?: number;
   matchLabel?: string;
   type: MahdollisuusTyyppi;
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -74,10 +77,10 @@ interface BaseProps {
 export type OpportunityCardProps = BaseProps &
   FavoriteProps &
   MenuProps &
+  CustomButtonProps &
   JobOpportunityData &
   CollapsibleProps &
-  EducationOpportunityData &
-  ActionsSectionProps;
+  EducationOpportunityData;
 
 interface ActionsSectionProps {
   hideFavorite: boolean;
@@ -85,7 +88,7 @@ interface ActionsSectionProps {
   menuContent?: React.ReactNode;
   actionButtonContent?: React.ReactNode;
   isFavorite?: boolean;
-  onToggleFavorite: () => void;
+  onToggleFavorite?: () => void;
   name: string;
 }
 
@@ -105,7 +108,7 @@ const ActionsSection = ({
   ) : (
     <div className="grow flex flex-col sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end">
       {!hideFavorite && (
-        <FavoriteToggle isFavorite={!!isFavorite} onToggleFavorite={onToggleFavorite} favoriteName={name} />
+        <FavoriteToggle isFavorite={!!isFavorite} onToggleFavorite={() => onToggleFavorite?.()} favoriteName={name} />
       )}
       {!!actionButtonContent && actionButtonContent}
       {menuId && menuContent && <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />}
@@ -129,12 +132,12 @@ export const OpportunityCardWrapper = ({
   isLoggedIn,
   hideFavorite,
   headingLevel,
-  actionButtonContent,
   menuContent,
   matchValueBgColorClassName = 'bg-secondary-4-dark',
   menuId,
   rateId,
   collapsible,
+  actionButtonContent,
   initiallyCollapsed,
 }: OpportunityCardProps) => {
   const {

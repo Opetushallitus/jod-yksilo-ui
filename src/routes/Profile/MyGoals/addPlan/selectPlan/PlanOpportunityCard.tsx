@@ -2,7 +2,8 @@ import { client } from '@/api/client.ts';
 import { osaamiset as osaamisetService } from '@/api/osaamiset.ts';
 import type { components } from '@/api/schema';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store';
-import type { KoulutusmahdollisuusJakaumat, TypedMahdollisuus } from '@/routes/types';
+import { KoulutusMahdollisuusFull } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel.ts';
+import type { KoulutusmahdollisuusJakaumat } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
 import { Accordion, Tag, tidyClasses as tc } from '@jod/design-system';
 import React from 'react';
@@ -10,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 interface PlanOpportunityCardProps {
-  mahdollisuus: TypedMahdollisuus;
+  mahdollisuus: KoulutusMahdollisuusFull;
   actionButtonContent?: React.ReactNode;
   matchValue?: number | string;
   matchLabel?: string;
@@ -42,7 +43,7 @@ const PlanOpportunityCard = React.memo(
           const filteredUris = mahdollisuusOsaamiset.filter((uri) => missingOsaamisetUris.includes(uri));
           return osaamisetService.find(filteredUris);
         })
-        .then(setOsaamiset);
+        .then((data) => setOsaamiset(data!));
 
     const matchValueBgColorClassName = 'bg-secondary-3-dark';
 

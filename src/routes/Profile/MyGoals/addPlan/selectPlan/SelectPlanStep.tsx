@@ -1,11 +1,9 @@
 import { ActionButton } from '@/components';
-import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import PlanOpportunityCard from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOpportunityCard.tsx';
 import PlanOptionFilters from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionFilters.tsx';
 import PlanOptionsPagination from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionsPagination.tsx';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store';
-import { getLocalizedText } from '@/utils';
-import { Button, Spinner, Tag, useMediaQueries } from '@jod/design-system';
+import { Button, Spinner, useMediaQueries } from '@jod/design-system';
 import { JodAdd, JodClose, JodRemove, JodSettings } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -39,11 +37,10 @@ const ExplorePlanOptions = () => {
   const scrollRef = React.useRef<HTMLUListElement>(null);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const settingsButtonRef = React.useRef<HTMLButtonElement>(null);
-  const firstSettingRef = useMenuClickHandler(() => setSettingsOpen(false), settingsButtonRef);
   const { lg } = useMediaQueries();
 
   const onUpdateResults = async () => {
-    await updateEhdotuksetAndTyomahdollisuudet(true);
+    await updateEhdotuksetAndTyomahdollisuudet();
   };
 
   const onCloseSettings = () => {
@@ -97,7 +94,7 @@ const ExplorePlanOptions = () => {
         {settingsOpen && (
           <>
             <div className="flex-shrink-0 mb-4 px-1 lg:px-4 bg-bg-gray shadow-md rounded-md">
-              <PlanOptionFilters ref={firstSettingRef} isOpen={settingsOpen} onClose={onCloseSettings} isModal={!lg} />
+              <PlanOptionFilters isOpen={settingsOpen} onClose={onCloseSettings} isModal={!lg} />
             </div>
           </>
         )}
@@ -140,30 +137,9 @@ const ExplorePlanOptions = () => {
                 )
               }
               mahdollisuus={mahdollisuus}
-              name={getLocalizedText(mahdollisuus.otsikko)}
-              description={getLocalizedText(mahdollisuus.tiivistelma)}
               matchValue={matchingOsaamiset + '/' + vaaditutOsaamiset.length}
               matchLabel={t('profile.my-goals.competences')}
-              headingLevel="h3"
-            >
-              <ul>
-                {mahdollisuus.jakaumat?.osaaminen?.arvot.map((osaaminen) => {
-                  const matchingOsaamiset = vaaditutOsaamiset.filter((o) => o.uri == osaaminen.arvo);
-                  return matchingOsaamiset.map((mo) => (
-                    <li key={`li-${mo.uri}`} className="mt-2">
-                      <Tag
-                        className={'secondary-1'}
-                        key={mo.uri}
-                        label={getLocalizedText(mo.nimi)}
-                        tooltip={getLocalizedText(mo.kuvaus)}
-                        variant="presentation"
-                        testId={`added-tag-${mo.uri}`}
-                      />
-                    </li>
-                  ));
-                })}
-              </ul>
-            </PlanOpportunityCard>
+            />
           ) : null;
         })}
       </ul>

@@ -40,7 +40,11 @@ export const useTavoitteetStore = create<TavoitteetState>()((set, get) => ({
       };
     });
     const mapToIds = (pm: Tavoite) => pm.mahdollisuusId;
-    const tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(get().tavoitteet.map(mapToIds));
+    const tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(
+      get()
+        .tavoitteet.map(mapToIds)
+        .filter((id): id is string => id != undefined),
+    );
     get().setMahdollisuusDetails(tyomahdollisuudetDetails);
   },
   deleteTavoite: async (id: string) => {

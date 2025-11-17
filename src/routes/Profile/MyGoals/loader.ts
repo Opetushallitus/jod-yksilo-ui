@@ -19,13 +19,15 @@ export default (async ({ request }) => {
   const mapToIds = (pm: components['schemas']['TavoiteDto']) => pm.mahdollisuusId;
 
   if (tyotavoitteet.length > 0) {
-    tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(tyotavoitteet.map(mapToIds));
+    tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(
+      tyotavoitteet.map(mapToIds).filter((id): id is string => id != undefined),
+    );
   }
 
   if (koulutusPaamarat.length > 0) {
-    koulutusMahdollisuudetDetails = await getTypedKoulutusMahdollisuusDetails(koulutusPaamarat.map(mapToIds)).then(
-      mapKoulutusCodesToLabels,
-    );
+    koulutusMahdollisuudetDetails = await getTypedKoulutusMahdollisuusDetails(
+      koulutusPaamarat.map(mapToIds).filter((id): id is string => id != undefined),
+    ).then(mapKoulutusCodesToLabels);
   }
 
   const ammattiryhmaNimet: Record<string, components['schemas']['LokalisoituTeksti']> = {};
@@ -47,7 +49,9 @@ export default (async ({ request }) => {
   setMahdollisuusDetails(mahdollisuusDetails);
 
   const { fetchSuosikit } = useSuosikitStore.getState();
-  const suosikitAlreadyInTavoitteet = tavoitteet.map((pm) => pm.mahdollisuusId);
+  const suosikitAlreadyInTavoitteet = tavoitteet
+    .map((pm) => pm.mahdollisuusId)
+    .filter((id): id is string => id != undefined);
   await fetchSuosikit(suosikitAlreadyInTavoitteet);
 
   return { tavoitteet, tyomahdollisuudetDetails, koulutusMahdollisuudetDetails, ammattiryhmaNimet };

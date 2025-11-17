@@ -850,12 +850,10 @@ export interface components {
       /** Format: email */
       email?: string;
     };
-    /**
-     * @example {
+    /** @example {
      *       "fi": "suomeksi",
      *       "sv": "på svenska"
-     *     }
-     */
+     *     } */
     LokalisoituTeksti: {
       [key: string]: string;
     };

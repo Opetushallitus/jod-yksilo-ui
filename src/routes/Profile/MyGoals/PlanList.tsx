@@ -77,7 +77,7 @@ export const PlanList = ({ pm, language, t, removeSuunnitelmaFromStore }: PlanLi
     <div className="mt-8">
       <Accordion
         ariaLabel={title}
-        isOpenDefault={isOpen}
+        isOpen={isOpen}
         title={
           <h3 className="text-heading-3" aria-controls={accordionId}>
             {title}
