@@ -11,12 +11,11 @@ import { useShallow } from 'zustand/shallow';
 import SelectPlanStep from './selectPlan/SelectPlanStep.tsx';
 
 interface AddPlanModalProps {
-  mahdollisuusId: string;
   isOpen: boolean;
   onClose: (isCancel?: boolean) => void;
 }
 
-const AddPlanModal = ({ mahdollisuusId, isOpen, onClose }: AddPlanModalProps) => {
+const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   const { t } = useTranslation();
   const { showDialog, closeActiveModal } = useModal();
   const { tavoite, selectedPlans, selectedOsaamiset, planName, planDescription } = addPlanStore(
@@ -73,7 +72,7 @@ const AddPlanModal = ({ mahdollisuusId, isOpen, onClose }: AddPlanModalProps) =>
 
   const wizardComponents = React.useMemo(
     () => [() => <SelectPlanStep />, () => <CreateCustomPlanStep />, () => <SelectCompetencesStep />],
-    [mahdollisuusId],
+    [],
   );
 
   const [wizardStep, setWizardStep] = React.useState(0);
