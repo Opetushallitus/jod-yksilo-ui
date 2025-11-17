@@ -5,19 +5,11 @@ import type { components } from '@/api/schema';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, HeroCard, type LinkComponent, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
-import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
+import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link, useRouteLoaderData } from 'react-router';
 
-const FeatureBox = ({ title, content }: { title: string; content: string }) => {
-  return (
-    <div className="flex flex-col gap-5">
-      <h3 className="text-heading-3 sm:min-h-[54px]">{title}</h3>
-      <p className="text-body-sm sm:mb-0 mb-5">{content}</p>
-    </div>
-  );
-};
 interface ContainerProps {
   className?: string;
   children?: React.ReactNode;
@@ -181,46 +173,6 @@ const Home = () => {
         </div>
       </Content>
 
-      <Content title={t('home.features.title')}>
-        <div className="grid sm:grid-cols-3 grid-cols-1 gap-6">
-          <FeatureBox
-            title={t(`home.features.map-own-competences`)}
-            content={t('home.features.map-own-competences-content')}
-          />
-          <FeatureBox
-            title={t(`home.features.education-to-increase-skills`)}
-            content={t('home.features.education-to-increase-skills-content')}
-          />
-          <FeatureBox
-            title={t(`home.features.explore-job-opportunities`)}
-            content={t('home.features.explore-job-opportunities-content')}
-          />
-          <FeatureBox
-            title={t(`home.features.map-opportunitites-to-change-jobs`)}
-            content={t('home.features.map-opportunitites-to-change-jobs-content')}
-          />
-        </div>
-        <div className="text-body-lg">{t('home.use-tool-or-log-in')}</div>
-        <div className="flex sm:flex-row flex-col gap-4">
-          <Button
-            label={t('home.explore-opportunities')}
-            variant="accent"
-            icon={<JodArrowRight />}
-            iconSide="right"
-            linkComponent={getLinkTo(toolLink)}
-            testId="home-explore-opportunities"
-          />
-          <Button
-            label={t('home.create-own-profile')}
-            variant="accent"
-            icon={<JodArrowRight />}
-            iconSide="right"
-            linkComponent={AuthNavLink(!data, t('slugs.profile.index'))}
-            testId="home-create-profile"
-          />
-        </div>
-      </Content>
-
       <FullWidthContainer className="bg-[url(@/../assets/palveluhakemisto.jpg)] bg-cover bg-[50%_50%]">
         <div className="max-w-2xl">
           <HeroCard
@@ -236,7 +188,7 @@ const Home = () => {
         </div>
       </FullWidthContainer>
 
-      <Content title={t('home.how-competency-path-helps-you')} className="mb-[128px] mt-11">
+      <Content title={t('home.how-competency-path-helps-you')} className="mb-[208px] mt-11">
         <p className="text-body-lg whitespace-pre-line max-w-[716px]">
           {t('home.how-competency-path-helps-you-content')}
         </p>

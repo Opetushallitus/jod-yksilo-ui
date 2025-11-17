@@ -248,17 +248,6 @@
     "card-2-title": "Kirjaudu ja kartoita osaamistasi laajemmin",
     "create-own-profile": "Luo oma osaamisprofiilisi",
     "explore-opportunities": "Löydä mahdollisuuksia",
-    "features": {
-      "education-to-increase-skills": "Löytää koulutuksia osaamiseni kasvattamiseksi",
-      "education-to-increase-skills-content": "Tunnista vahvuutesi ja kiinnostuksesi, ja löydä sinulle sopivia koulutuksia sekä tallenna suosikkisi kirjautumalla palveluun.",
-      "explore-job-opportunities": "Tutkia työmahdollisuuksia osaamisellani",
-      "explore-job-opportunities-content": "Tunnista vahvuutesi ja löydä sinulle sopivia työmahdollisuuksia – voit myös tallentaa kiinnostavimmat vaihtoehdot kirjautumalla palveluun.",
-      "map-opportunitites-to-change-jobs": "Kartoittaa mahdollisuuksia alan vaihtamiseen",
-      "map-opportunitites-to-change-jobs-content": "Suunnittele koulutus- ja urapolkuasi, sekä seuraa edistymistäsi asettamasi päämäärän saavuttamiseen.",
-      "map-own-competences": "Kartoittaa omaa osaamista",
-      "map-own-competences-content": "Tunnista vahvuutesi ja kiinnostuksesi, ja näe kaikki osaamisesi sekä taustasi yhdessä paikassa.",
-      "title": "Osaamispolussa voit"
-    },
     "go-to-service-directory": "Siirry Ohjaus- ja neuvontapalveluihin",
     "hero-content": "Osaamispolussani voit kartoittaa omaa osaamistasi, löytää koulutuksia osaamisesi kasvattamiseksi, tutkia uramahdollisuuksia osaamisellasi ja kartoittaa mahdollisuuksia alan vaihtamiseen.",
     "hero-title": "Osaamispolkuni",
@@ -274,8 +263,7 @@
     "how-competency-path-helps-you-tmt-link": "Työmarkkinatorille",
     "how-competency-path-helps-you-tmt-title": "Työmarkkinatori",
     "need-personal-guidance": "Tarvitsetko henkilökohtaista ohjausta?",
-    "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua ura- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut.",
-    "use-tool-or-log-in": "Käytä työkalua tai kirjaudu sisään palveluun!"
+    "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua ura- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut."
   },
   "in-this-section": "Tässä osiossa",
   "interests": "Kartoita kiinnostuksesi",
