@@ -241,7 +241,8 @@
   "front-page": "Osaamispolkuni",
   "home": {
     "beta": "Osaamispolku on betatestausvaiheessa vuoden 2025 loppuun",
-    "beta-content": " <CustomLink>Lue lisää beta-vaiheesta<Icon></Icon></CustomLink> — mitä se sisältää ja mitä vielä on tulossa loppuvuoteen mennessä.",
+    "beta-content-1": "Tervetuloa kokeilemaan Osaamispolun beta-versiota. Kehitämme Osaamispolun toiminnallisuuksia sekä tekoälyn sinulle tarjoamien tulosten ja ehdotusten laatua jatkuvasti. Voit auttaa meitä kehitystyössä käyttämällä palvelua ja antamalla palautetta. Kehitetään Osaamispolusta yhdessä paras palvelu juuri sinulle!",
+    "beta-content-2": "Osaamispolun virallinen käyttö alkaa vuoden 2026 alussa. Pyrimme säilyttämään Beta-testausvaiheessa luodut osaamisprofiilit ja niiden tiedot palvelussa virallisen käytön alkaessa. <br/><br/>Lue lisää <CustomLink>ajankohtaisista asioista ja beta-vaiheesta<Icon></Icon></CustomLink> — kerromme täällä uutisista, uusista ja suunnitteilla olevista toiminnallisuuksista sekä Osaamispolkuun loppuvuoden aikana tulevista muutoksista.",
     "card-1-content": "Löydä koulutus- ja uramahdollisuuksia, jotka sopivat juuri sinulle. Käytä palvelua kirjautumatta nopeasti, voit myöhemmin kirjautua ja tallentaa tietosi.",
     "card-1-title": "Etsi sopivia koulutus -ja uramahdollisuuksia nopeasti",
     "card-2-content": "Kirjaudu palveluun ja tunnista vahvuutesi sekä kiinnostuksen kohteesi. Tallenna työ- ja koulutushistoriasi myöhempää käyttöä varten.",
@@ -252,15 +253,12 @@
     "hero-content": "Osaamispolussani voit kartoittaa omaa osaamistasi, löytää koulutuksia osaamisesi kasvattamiseksi, tutkia uramahdollisuuksia osaamisellasi ja kartoittaa mahdollisuuksia alan vaihtamiseen.",
     "hero-title": "Osaamispolkuni",
     "how-competency-path-helps-you": "Miten Osaamispolku auttaa sinua osana muita palveluita?",
-    "how-competency-path-helps-you-content": "Osaamispolku, Opintopolku, Työmarkkinatori ja Opin.fi muodostavat yhdessä palvelukokonaisuuden, joka tukee oppimista, urasuunnittelua ja työnhakua eri elämäntilanteissa. Jokaisella palvelulla on oma roolinsa, mutta yhdessä ne tarjoavat sinulle selkeän polun osaamisesi ja urasi kehittämiseen.\n\nOsaamispolussa voit tunnistaa omat vahvuudet ja kiinnostuksen kohteet sekä löytämään niihin sopivia koulutus- ja uramahdollisuuksia. Tämän jälkeen Opintopolku, Työmarkkinatori ja Opin.fi auttavat sinua hakeutumaan niihin.",
-    "how-competency-path-helps-you-opinfi-description": "Opin.fi on suomalaisten yliopistojen ja ammattikorkeakoulujen yhteinen palvelu, jossa avoimet opinnot ovat helposti saatavillasi",
-    "how-competency-path-helps-you-opinfi-link": "Opin.fi-palveluun",
+    "how-competency-path-helps-you-content": "Osaamispolku, Opintopolku, Työmarkkinatori ja Opin.fi muodostavat yhdessä palvelukokonaisuuden, joka tukee oppimista, urasuunnittelua ja työnhakua eri elämäntilanteissa. Jokaisella palvelulla on oma roolinsa, mutta yhdessä ne tarjoavat sinulle selkeän polun osaamisesi ja urasi kehittämiseen. <br/><br/>Jos etsit suuntaa tai omaa polkuasi, Osaamispolussa voit tunnistaa omat vahvuudet ja kiinnostukseksi sekä löytää niihin sopivia koulutus- ja uramahdollisuuksia. Kun olet selvittänyt miten haluat edetä, Opintopolku, Työmarkkinatori ja Opin.fi auttavat sinua hakeutumaan niihin.",
+    "how-competency-path-helps-you-opinfi-description": "Opin.fi on suomalaisten yliopistojen ja ammattikorkeakoulujen yhteinen palvelu, jossa avoimet opinnot ovat helposti saatavillasi.",
     "how-competency-path-helps-you-opinfi-title": "Opin.fi",
-    "how-competency-path-helps-you-opintopolku-description": "Opintopolku tarjoaa kattavat tiedot koulutuksista ja hakupalvelut eri koulutusasteille.\n\nOsaamispolun koulutusmahdollisuuksista voit siirtyä Opintopolkuun tutustumaan tarkemmin ja hakeutumaan koulutuksiin. Kirjautuessasi Osaamispolkuuni voit tuoda opintohistoriasi osaamisprofiililisi.",
-    "how-competency-path-helps-you-opintopolku-link": "Opintopolkuun",
+    "how-competency-path-helps-you-opintopolku-description": "Opintopolku tarjoaa kattavat tiedot koulutuksista ja hakupalvelut eri koulutusasteille.<br/><br/>Osaamispolun koulutusmahdollisuuksista voit siirtyä Opintopolkuun tutustumaan tarkemmin ja hakeutumaan koulutuksiin. Kirjautuessasi Osaamispolkuuni voit tuoda opintohistoriasi osaamisprofiililisi.",
     "how-competency-path-helps-you-opintopolku-title": "Opintopolku",
-    "how-competency-path-helps-you-tmt-description": "Työmarkkinatori kokoaa yhteen avoimet työpaikat ja tukee työnhakua sekä urasuunnittelua.\n\nOsaamispolun uramahdollisuuksista voit siirtyä Työmarkkinatorille tutustumaan ja hakemaan avoimia työpaikkoja. Tulevaisuudessa voit myös siirtää tietojasi Osaamispolun ja Työmarkkinatorin välillä.",
-    "how-competency-path-helps-you-tmt-link": "Työmarkkinatorille",
+    "how-competency-path-helps-you-tmt-description": "Työmarkkinatori kokoaa yhteen avoimet työpaikat ja tukee työnhakua sekä urasuunnittelua.<br/><br/>Osaamispolun uramahdollisuuksista voit siirtyä Työmarkkinatorille tutustumaan ja hakemaan avoimia työpaikkoja. Tulevaisuudessa voit myös siirtää tietojasi Osaamispolun ja Työmarkkinatorin välillä. ",
     "how-competency-path-helps-you-tmt-title": "Työmarkkinatori",
     "need-personal-guidance": "Tarvitsetko henkilökohtaista ohjausta?",
     "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua ura- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut."
@@ -771,16 +769,16 @@
             "item2": "koulutusmahdollisuudet",
             "item3": "mahdollisuuksien sopivuuden laskeminen"
           },
-          "tyomahdollisuus": {
-            "item1": "mahdollisuuden nimi",
-            "item2": "kuvaus",
-            "item3": "työpaikkailmoitusten erityispiirteet"
-          },
           "koulutusmahdollisuus": {
             "item1": "mahdollisuuden nimi",
             "item2": "kuvaus",
             "item3": "osaamiset",
             "item4": "koulutuksen erityispiirteet"
+          },
+          "tyomahdollisuus": {
+            "item1": "mahdollisuuden nimi",
+            "item2": "kuvaus",
+            "item3": "työpaikkailmoitusten erityispiirteet"
           }
         },
         "question": "Voisitko kertoa tarkemmin, mikä ei toiminut?"
