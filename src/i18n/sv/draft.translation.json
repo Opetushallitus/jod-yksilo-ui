@@ -7,6 +7,18 @@
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
   "opportunity-type": {},
+  "profile": {
+    "preferences": {
+      "list-2-item-1": "Spara karriär- och utbildningsmöjligheter som intresserar dig som favoriter",
+      "list-2-item-2": "Planera och följa upp dina egna utbildnings- och karriärstigar (kommer senare)",
+      "list-3-item-1": "Vilka uppgifter du sparar",
+      "list-3-item-2": "Vad dina uppgifter används för",
+      "list-3-item-3": "Vem som kan se din profil",
+      "list-3-item-4": "Hur andra kan utnyttja din profil",
+      "paragraph-2": "När du fyller i dessa uppgifter noggrant får du förslag på jobb och utbildningar som passar just dig.\n\nDu kan också:",
+      "paragraph-3": "Profilen är din!\n\nDu bestämmer:"
+    }
+  },
   "tool": {
     "education-opportunity-duration": "Genomsnittlig varaktighet",
     "education-opportunity-duration-tooltip": "Utbildningens längd anger hur länge utbildningen vanligtvis varar. Den uttrycks oftast i år eller månader och baseras på utbildningens omfattning samt studiernas framsteg i normal takt.",
