@@ -4,8 +4,12 @@ import { useModal } from '@/hooks/useModal';
 import GoalModal from '@/routes/Profile/MyGoals/addGoal/GoalModal.tsx';
 import AddPlanModal from '@/routes/Profile/MyGoals/addPlan/AddPlanModal.tsx';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
+import {
+  PlanCompetencesTable,
+  PlanWithCustomKey,
+} from '@/routes/Profile/MyGoals/compareCompetences/PlanCompetencesTable.tsx';
 import loader from '@/routes/Profile/MyGoals/loader';
-import { PlanList } from '@/routes/Profile/MyGoals/PlanList.tsx';
+import { planLetter, PlanList } from '@/routes/Profile/MyGoals/PlanList.tsx';
 import { getTypeSlug } from '@/routes/Profile/utils';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLocalizedText } from '@/utils';
@@ -151,6 +155,15 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                         showModal(AddPlanModal);
                       }}
                       label={t('profile.my-goals.add-new-plan-for-goal')}
+                    />
+
+                    <PlanCompetencesTable
+                      goal={tavoite}
+                      plans={tavoite.suunnitelmat!.map((s, index) => {
+                        const key = planLetter(index);
+                        return { ...s, displayKey: key } as PlanWithCustomKey;
+                      })}
+                      rows={[]}
                     />
 
                     <div className="w-full flex justify-between">

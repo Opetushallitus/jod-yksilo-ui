@@ -13,6 +13,37 @@ export interface PlanListProps {
   t: (key: string) => string;
   removeSuunnitelmaFromStore: (tavoiteId: string, suunnitelmaId: string) => void;
 }
+const planPrefixes = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z',
+];
+export const planLetter = (index: number) => {
+  return planPrefixes[index % planPrefixes.length];
+};
 
 export const PlanList = ({ pm, language, t, removeSuunnitelmaFromStore }: PlanListProps) => {
   const [isOpen, setIsOpen] = React.useState(true);
@@ -35,37 +66,10 @@ export const PlanList = ({ pm, language, t, removeSuunnitelmaFromStore }: PlanLi
     </div>
   );
   const divider = <div className="border-b border-border-gray" />;
-  const planPrefixes = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-  ];
+
   const planPrefix = (index: number): React.JSX.Element => {
     const numberPrefix = Math.floor(index / planPrefixes.length);
-    const letter = planPrefixes[index % planPrefixes.length];
+    const letter = planLetter(index);
     return (
       <span className="text-black">
         {numberPrefix > 0 ? numberPrefix : ''}

@@ -148,7 +148,9 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
             {(wizardStep === 1 || wizardStep === 2) && (
               <Button label={t('previous')} variant="white" onClick={previousStep} />
             )}
-            {wizardStep === 1 && <Button label={t('next')} variant="accent" onClick={nextStep} />}
+            {wizardStep === 1 && (
+              <Button label={t('next')} variant="accent" disabled={planNameEmpty()} onClick={nextStep} />
+            )}
             {(wizardStep === 0 || wizardStep === 2) && (
               <Button
                 label={t('save')}

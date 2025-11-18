@@ -901,8 +901,6 @@ export interface components {
       /** Format: uuid */
       readonly id?: string;
       /** @enum {string} */
-      tyyppi: 'LYHYT' | 'PITKA' | 'MUU';
-      /** @enum {string} */
       mahdollisuusTyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       /** Format: uuid */
       mahdollisuusId?: string;
@@ -911,6 +909,7 @@ export interface components {
       /** Format: date-time */
       readonly luotu?: string;
       readonly suunnitelmat?: components['schemas']['PolunSuunnitelmaYhteenvetoDto'][];
+      osaamiset?: string[];
     };
     PolunSuunnitelmaDto: {
       /** Format: uuid */
@@ -919,8 +918,7 @@ export interface components {
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       /** Format: uuid */
       koulutusmahdollisuusId?: string;
-      readonly osaamiset?: string[];
-      readonly ignoredOsaamiset?: string[];
+      osaamiset?: string[];
     };
     KoulutusKokonaisuusUpdateDto: {
       /** Format: uuid */
@@ -1280,16 +1278,16 @@ export interface components {
       /** Format: uuid */
       id?: string;
       nimi?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      /** Format: uuid */
+      koulutusmahdollisuusId?: string;
       osaamiset?: string[];
-      ignoredOsaamiset?: string[];
     };
     TavoiteExportDto: {
       /** Format: uuid */
       id?: string;
       /** Format: date-time */
       luotu?: string;
-      /** @enum {string} */
-      tyyppi?: 'LYHYT' | 'PITKA' | 'MUU';
       /** Format: uuid */
       tyomahdollisuus?: string;
       suunnitelmat?: components['schemas']['PolunSuunnitelmaExportDto'][];
