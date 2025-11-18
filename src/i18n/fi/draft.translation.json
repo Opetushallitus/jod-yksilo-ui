@@ -48,6 +48,7 @@
       "choose-as-plan": "Valitse suunnitelmaksi",
       "remove-from-plans": "Poista suunnitelma",
       "add-custom-plan": "Luo oma",
+      "competence-compare": "Osaamisvertailu",
       "add-new-plan-header": "Luo uusi suunnitelma",
       "add-new-plan-description": "Punnitse eri koulutusmahdollisuuksia ja valitse yksi tai useampi vaihtoehtoiseksi suunnitelmaksi kohti tavoitettasi",
       "add-custom-plan-header": "Luo oma suunnitelma",
@@ -70,6 +71,7 @@
       "plan": "1 suunnitelma",
       "plans": " suunnitelmaa",
       "competences": "Osaamista",
+      "own-competences": "Omat taidot",
       "delete-plan": "Poista",
       "delete-plan-title": "Poista suunnitelma",
       "delete-plan-description": "Haluatko varmasti poistaa päämäärältä suunnitelman \"{{name}}\"?"

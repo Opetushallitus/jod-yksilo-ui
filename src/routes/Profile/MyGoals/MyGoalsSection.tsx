@@ -156,10 +156,9 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                       }}
                       label={t('profile.my-goals.add-new-plan-for-goal')}
                     />
-
                     <PlanCompetencesTable
                       goal={tavoite}
-                      plans={tavoite.suunnitelmat!.map((s, index) => {
+                      plans={tavoite?.suunnitelmat?.map((s, index) => {
                         const key = planLetter(index);
                         return { ...s, displayKey: key } as PlanWithCustomKey;
                       })}

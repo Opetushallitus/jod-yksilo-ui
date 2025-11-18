@@ -1,10 +1,11 @@
+import { client } from '@/api/client.ts';
 import { osaamiset } from '@/api/osaamiset.ts';
 import { components } from '@/api/schema';
 import { planLetter } from '@/routes/Profile/MyGoals/PlanList.tsx';
 import { cx } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { CompetenceTableRow, PlanCompetencesTableRowData } from './CompetenceTableRow.tsx';
+import { PlanCompetenceRow, PlanCompetencesTableRowData } from './PlanCompetenceRow.tsx';
 
 const ROW_LIMIT = 10;
 export type PlanWithCustomKey = components['schemas']['PolunSuunnitelmaDto'] & { displayKey: string };
@@ -16,36 +17,51 @@ interface PlanCompetencesTableProps {
 export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
   const { t } = useTranslation();
   const [showAll, setShowAll] = React.useState(false);
-  const plans: PlanWithCustomKey[] = goal.suunnitelmat!.map((s, index) => {
-    const key = planLetter(index);
-    return { ...s, displayKey: key } as PlanWithCustomKey;
-  });
-  console.log(plans);
+  const plans = React.useMemo(() => {
+    if (!goal.suunnitelmat) {
+      return [];
+    }
+    // Recalculate plans only when goal changes
+    return goal?.suunnitelmat?.map((s, index) => {
+      const key = planLetter(index);
+      return { ...s, displayKey: key } as PlanWithCustomKey;
+    });
+  }, [goal]);
   const [vaaditutOsaamiset, setOsaamiset] = React.useState([]);
   React.useEffect(() => {
     const fetchOsaamiset = async () => {
+      const { data } = await client.GET('/api/profiili/osaamiset');
+      const omatOsaamisetUris = data.map((o) => o?.osaaminen?.uri);
       const response = await osaamiset.combine(
         goal?.osaamiset,
         (value) => value,
-        // eslint-disable-next-line sonarjs/no-nested-functions
-        (_, osaaminen) => ({ ...osaaminen, plans: plans.map((p) => p.osaamiset?.includes(osaaminen.uri)) }),
+        (_, osaaminen) => ({
+          ...osaaminen,
+          profiili: omatOsaamisetUris.includes(osaaminen.uri),
+          // eslint-disable-next-line sonarjs/no-nested-functions
+          plans: plans.map((p) => p.osaamiset?.includes(osaaminen.uri)),
+        }),
       );
       setOsaamiset(response);
     };
     fetchOsaamiset();
-  }, [goal?.osaamiset, plans]);
+  }, [goal.osaamiset, plans]);
 
-  console.log(vaaditutOsaamiset);
   return (
-    <div>
-      <table className="font-arial" data-testid="compare-competences-table" aria-label={t('competences')}>
+    <div className="mt-6">
+      <h3 className={'text-heading-3'}>{t('profile.my-goals.competence-compare')}</h3>
+      <table
+        className="font-arial mt-3"
+        data-testid="compare-competences-table"
+        aria-label={t('profile.my-goals.competence-compare')}
+      >
         <thead>
           <tr className="border-b border-inactive-gray text-form-label">
             <th scope="col" className="text-left pl-5 pr-7 pb-3">
               {t('competence')}
             </th>
             <th scope="col" className="text-center whitespace-nowrap pr-5 pb-3">
-              {t('your-competences')}
+              {t('profile.my-goals.own-competences')}
             </th>
             {plans.map((plan) => {
               return (
@@ -58,7 +74,7 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
         </thead>
         <tbody>
           {vaaditutOsaamiset.map((row, index) => (
-            <CompetenceTableRow
+            <PlanCompetenceRow
               key={row.uri}
               row={row}
               className={cx('odd:bg-bg-gray-2 even:bg-bg-gray', {
