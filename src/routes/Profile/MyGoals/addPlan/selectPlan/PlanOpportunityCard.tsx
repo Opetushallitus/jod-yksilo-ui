@@ -43,7 +43,7 @@ const PlanOpportunityCard = React.memo(
           const filteredUris = mahdollisuusOsaamiset.filter((uri) => missingOsaamisetUris.has(uri));
           return osaamisetService.find(filteredUris);
         })
-        .then((data) => setOsaamiset(data!));
+        .then((data) => setOsaamiset(data ?? []));
 
     const matchValueBgColorClassName = 'bg-secondary-3-dark';
 

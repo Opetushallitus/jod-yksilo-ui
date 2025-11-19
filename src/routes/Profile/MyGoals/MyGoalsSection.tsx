@@ -1,7 +1,7 @@
 import type { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
 import { useModal } from '@/hooks/useModal';
-import GoalModal from '@/routes/Profile/MyGoals/addGoal/GoalModal.tsx';
+import { GoalModal } from '@/routes/Profile/MyGoals/addGoal/GoalModal';
 import AddPlanModal from '@/routes/Profile/MyGoals/addPlan/AddPlanModal.tsx';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import loader from '@/routes/Profile/MyGoals/loader';
@@ -86,7 +86,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                 aria-controls={`accordion-content-${i}`}
                 id={`accordion-header-${i}`}
               >
-                <span>{tavoite.tavoite?.['fi'] ?? ''}</span>
+                <span>{getLocalizedText(tavoite.tavoite)}</span>
                 {isOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}
               </button>
 
@@ -135,9 +135,8 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                         hideFavorite
                       />
                       <PlanList
-                        pm={tavoite}
+                        goal={tavoite}
                         language={language}
-                        t={t}
                         removeSuunnitelmaFromStore={removeSuunnitelmaFromStore}
                       />
                     </>

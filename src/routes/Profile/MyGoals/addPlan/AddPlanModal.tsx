@@ -40,18 +40,6 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
       closeActiveModal();
       return;
     }
-    for (const selectedplan of selectedPlans) {
-      await client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
-        params: {
-          path: {
-            id: tavoite.id,
-          },
-        },
-        body: {
-          koulutusmahdollisuusId: selectedplan,
-        },
-      });
-    }
     if (selectedPlans.length == 0) {
       await client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
         params: {
@@ -65,6 +53,21 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
           osaamiset: selectedOsaamiset.map((o) => o.uri),
         },
       });
+    } else {
+      await Promise.all(
+        selectedPlans.map((selectedPlan) =>
+          client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
+            params: {
+              path: {
+                id: tavoite.id,
+              },
+            },
+            body: {
+              koulutusmahdollisuusId: selectedPlan,
+            },
+          }),
+        ),
+      );
     }
     await refreshTavoitteet();
     closeActiveModal();

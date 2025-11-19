@@ -7,7 +7,7 @@ import { useModal } from '@/hooks/useModal';
 import type { TypedMahdollisuus } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { Tavoite, useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, initializeLocalizedText } from '@/utils';
 import {
   Button,
   InputField,
@@ -19,7 +19,6 @@ import {
   WizardProgress,
 } from '@jod/design-system';
 import { JodArrowLeft, JodArrowRight, JodFlag } from '@jod/design-system/icons';
-import i18n from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -38,12 +37,12 @@ interface UpdateGoalModalProps {
 
 type GoalModalProps = AddGoalModalProps | UpdateGoalModalProps;
 
-const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
+export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
   const { t } = useTranslation();
   const isUpdateMode = mode === 'UPDATE';
   const headerText = t(isUpdateMode ? 'profile.my-goals.update-modal-title' : 'profile.my-goals.add-modal-title');
-  const initialGoalName = tavoite?.tavoite ? tavoite?.tavoite[i18n.language] : '';
-  const initialGoalDescription = tavoite?.kuvaus ? tavoite?.kuvaus[i18n.language] : '';
+  const initialGoalName = getLocalizedText(tavoite?.tavoite);
+  const initialGoalDescription = getLocalizedText(tavoite?.kuvaus);
   const initialSelectedMahdollisuusId = tavoite?.mahdollisuusId ?? null;
 
   const { sm } = useMediaQueries();
@@ -144,8 +143,8 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
       tyyppi: 'MUU',
       mahdollisuusId: selectedMahdollisuus.id,
       mahdollisuusTyyppi: selectedMahdollisuus.mahdollisuusTyyppi,
-      tavoite: { fi: goalName, sv: goalName, en: goalName },
-      kuvaus: { fi: goalDescription, sv: goalDescription, en: goalDescription },
+      tavoite: initializeLocalizedText(goalName),
+      kuvaus: initializeLocalizedText(goalDescription),
     };
 
     const response = await client.POST('/api/profiili/tavoitteet', { body: newTavoite });
@@ -330,7 +329,7 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
                 icon={sm ? undefined : <JodArrowLeft />}
                 disabled={isSubmitting}
                 className="whitespace-nowrap"
-                data-testid="work-history-previous"
+                data-testid="goal-modal-previous"
               />
             )}
             {step < steps && (

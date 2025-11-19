@@ -77,7 +77,7 @@ const ExplorePlanOptions = () => {
               icon={settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
               iconSide="left"
               label={settingsOpen ? t('tool.settings.toggle-title-open') : toggleFiltersText}
-              data-testid="open-tool-settings"
+              data-testid="open-select-plan"
               onClick={() => setSettingsOpen(!settingsOpen)}
             />
             <Button
@@ -100,11 +100,11 @@ const ExplorePlanOptions = () => {
 
       {/* Scrollable opportunity cards container */}
       <ul
-        id="tool-your-opportunities-list"
+        id="selectplan-education-opportunities-list"
         ref={scrollRef}
         className="flex flex-col gap-5 sm:gap-3 mb-8 overflow-y-auto flex-grow"
         style={{ minHeight: 0 }} // To allow flex-grow overflow scrolling properly inside container
-        data-testid="tool-opportunities-list"
+        data-testid="selectplan-opportunities-list"
       >
         {koulutusMahdollisuudet.map((mahdollisuus) => {
           const { id } = mahdollisuus;
@@ -142,7 +142,7 @@ const ExplorePlanOptions = () => {
         })}
       </ul>
 
-      <PlanOptionsPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="mb-7 flex-shrink-0" />
+      <PlanOptionsPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="mb-7 shrink-0" />
     </div>
   );
 };
