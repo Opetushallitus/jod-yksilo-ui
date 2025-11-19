@@ -138,7 +138,6 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
     if (!selectedMahdollisuus) {
       return;
     }
-
     const newTavoite: components['schemas']['TavoiteDto'] = {
       tyyppi: 'MUU',
       mahdollisuusId: selectedMahdollisuus.id,
@@ -148,8 +147,8 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
     };
 
     const response = await client.POST('/api/profiili/tavoitteet', { body: newTavoite });
-    upsertTavoite({ ...newTavoite, id: response.data });
-    refreshTavoitteet();
+    await upsertTavoite({ ...newTavoite, id: response.data });
+    await refreshTavoitteet();
     closeActiveModal();
   };
 
@@ -175,8 +174,8 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
       },
       body: newTavoite,
     });
-    upsertTavoite({ ...newTavoite, id: tavoite.id });
-    refreshTavoitteet();
+    await upsertTavoite({ ...newTavoite, id: tavoite.id });
+    await refreshTavoitteet();
     closeActiveModal();
   };
   const goalsId = React.useId();
