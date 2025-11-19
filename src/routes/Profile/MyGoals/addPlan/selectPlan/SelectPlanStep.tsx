@@ -103,7 +103,7 @@ const ExplorePlanOptions = () => {
       <ul
         id="selectplan-education-opportunities-list"
         ref={scrollRef}
-        className="flex flex-col gap-5 sm:gap-3 mb-8 overflow-y-auto flex-grow"
+        className="flex flex-col gap-5 sm:gap-3 mb-8 overflow-y-auto grow"
         style={{ minHeight: 0 }} // To allow flex-grow overflow scrolling properly inside container
         data-testid="selectplan-opportunities-list"
       >
@@ -136,7 +136,7 @@ const ExplorePlanOptions = () => {
                 )
               }
               mahdollisuus={mahdollisuus}
-              matchValue={matchingOsaamiset + '/' + vaaditutOsaamiset.length}
+              matchValue={`${matchingOsaamiset}/${vaaditutOsaamiset.length}`}
               matchLabel={t('profile.my-goals.competences')}
             />
           ) : null;

@@ -69,12 +69,10 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
     }));
   },
   setPlanDescription: (newPlanNameValue: string) => {
-    const currentLang = i18n.language;
-
     set((state) => ({
       planDescription: {
         ...state.planDescription, // keep other languages as is
-        [currentLang]: newPlanNameValue, // replace value only for current language
+        [i18n.language]: newPlanNameValue, // replace value only for current language
       },
     }));
   },

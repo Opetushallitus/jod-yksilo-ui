@@ -5,7 +5,7 @@ import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStor
 import { KoulutusMahdollisuusFull } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel.ts';
 import type { KoulutusmahdollisuusJakaumat } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
-import { Accordion, Tag, tidyClasses as tc } from '@jod/design-system';
+import { Accordion, Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -45,18 +45,13 @@ const PlanOpportunityCard = React.memo(
         })
         .then((data) => setOsaamiset(data ?? []));
 
-    const matchValueBgColorClassName = 'bg-secondary-3-dark';
-
     return (
       <div className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border">
         <div className="flex justify-between items-start mb-4">
           <div className="flex flex-col gap-1">
             {matchValue !== undefined && matchLabel && (
               <div
-                className={tc([
-                  'inline-flex items-center gap-2 p-3 text-white rounded-full select-none w-fit',
-                  matchValueBgColorClassName,
-                ])}
+                className="inline-flex items-center gap-2 p-3 text-white rounded-full select-none w-fit bg-secondary-3-dark"
                 data-testid="opportunity-card-match"
               >
                 <span className="text-heading-2-mobile">{matchValue}</span>
@@ -71,9 +66,7 @@ const PlanOpportunityCard = React.memo(
           {t(`opportunity-type.education.${mahdollisuus.tyyppi ?? 'EI_TUTKINTO'}`)}
         </span>
 
-        <span className="text-heading-2-mobile sm:text-heading-2 hyphens-auto">{getLocalizedText(otsikko)}</span>
-
-        <Accordion title={''} initialState={false} fetchData={fetchOsaamiset}>
+        <Accordion title={getLocalizedText(otsikko)} initialState={false} fetchData={fetchOsaamiset}>
           <p className="font-arial text-body-md-mobile sm:text-body-md mb-4">{getLocalizedText(kuvaus)}</p>
           <ul className="flex flex-row flex-wrap gap-3">
             {osaamiset.map((osaaminen) => (

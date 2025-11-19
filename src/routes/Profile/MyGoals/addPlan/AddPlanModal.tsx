@@ -131,7 +131,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
       footer={
         <div className={`flex flex-row gap-5 flex-1 ${wizardStep === 0 ? 'justify-between' : 'justify-end'}`}>
           {wizardStep === 0 && (
-            <Button label={t('profile.my-goals.add-custom-plan')} variant="white" onClick={nextStep} iconSide="right" />
+            <Button label={t('profile.my-goals.add-custom-plan')} variant="white" onClick={nextStep} />
           )}
 
           <div className="flex flex-row gap-5">
