@@ -48,10 +48,10 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
   }, [goal.osaamiset, plans]);
 
   return (
-    <div className="mt-6">
+    <div className="mt-6 overflow-x-auto max-w-full p-2">
       <h3 className={'text-heading-3'}>{t('profile.my-goals.competence-compare')}</h3>
       <table
-        className="font-arial mt-3"
+        className="font-arial mt-3 w-96"
         data-testid="compare-competences-table"
         aria-label={t('profile.my-goals.competence-compare')}
       >
