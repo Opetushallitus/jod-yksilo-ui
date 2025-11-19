@@ -5,6 +5,7 @@ import PlanOptionsPagination from '@/routes/Profile/MyGoals/addPlan/selectPlan/P
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { Button, Spinner, useMediaQueries } from '@jod/design-system';
 import { JodAdd, JodClose, JodRemove, JodSettings } from '@jod/design-system/icons';
+import i18n from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -157,7 +158,7 @@ const SelectPlanStep = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      await updateEhdotukset('fi');
+      await updateEhdotukset(i18n.language);
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps

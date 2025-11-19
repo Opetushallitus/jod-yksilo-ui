@@ -36,7 +36,8 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   );
 
   const onSubmit = async () => {
-    if (!tavoite?.id) {
+    const tavoiteId = tavoite?.id;
+    if (!tavoiteId) {
       closeActiveModal();
       return;
     }
@@ -44,7 +45,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
       await client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
         params: {
           path: {
-            id: tavoite.id,
+            id: tavoiteId,
           },
         },
         body: {
@@ -59,7 +60,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
           client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
             params: {
               path: {
-                id: tavoite?.id,
+                id: tavoiteId,
               },
             },
             body: {
