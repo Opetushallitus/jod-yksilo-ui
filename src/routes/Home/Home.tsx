@@ -3,8 +3,7 @@ import betaPlanImageMobile from '@/../assets/gra_front_timeline_mob_2.svg';
 import heroSrc from '@/../assets/yksilo-hero.jpg';
 import type { components } from '@/api/schema';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
-import { getLinkTo } from '@/utils/routeUtils';
-import { Button, HeroCard, type LinkComponent, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
+import { HeroCard, type LinkComponent, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -34,7 +33,7 @@ const Content = ({ className = '', title, children }: ContainerProps & { title?:
         className,
       ])}
     >
-      {title && <h2 className="text-heading-1">{title}</h2>}
+      {title && <h2 className="text-heading-1 max-w-[716px]">{title}</h2>}
       {children}
     </div>
   );
@@ -145,10 +144,10 @@ const Home = () => {
         />
       </CardContainer>
 
-      <Content title={t('home.beta')}>
+      <Content title={t('home.beta')} className="mb-9 md:mb-[80px]">
         <p className="text-body-lg max-w-[716px]">
           <Trans
-            i18nKey="home.beta-content"
+            i18nKey="home.beta-content-1"
             components={{
               Icon: <JodOpenInNew size={18} className="ml-1" ariaLabel={t('external-link')} />,
               CustomLink: (
@@ -171,6 +170,22 @@ const Home = () => {
             />
           }
         </div>
+        <p className="text-body-lg max-w-[716px]">
+          <Trans
+            i18nKey="home.beta-content-2"
+            components={{
+              Icon: <JodOpenInNew size={18} className="ml-1" ariaLabel={t('external-link')} />,
+              CustomLink: (
+                <Link
+                  to="https://wiki.eduuni.fi/spaces/JOD/pages/641042258/Osaamispolun+suljettu+betatestaus"
+                  className="inline-flex underline text-accent items-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              ),
+            }}
+          />
+        </p>
       </Content>
 
       <FullWidthContainer className="bg-[url(@/../assets/palveluhakemisto.jpg)] bg-cover bg-[50%_50%]">
@@ -188,74 +203,33 @@ const Home = () => {
         </div>
       </FullWidthContainer>
 
-      <Content title={t('home.how-competency-path-helps-you')} className="mb-[208px] mt-11">
+      <Content title={t('home.how-competency-path-helps-you')} className="mb-[208px] pt-0 mt-9 sm:mt-[80px]">
         <p className="text-body-lg whitespace-pre-line max-w-[716px]">
-          {t('home.how-competency-path-helps-you-content')}
+          <Trans i18nKey="home.how-competency-path-helps-you-content" />
         </p>
         <div className="flex flex-col sm:flex-row gap-7 sm:flex-wrap">
           <div className="flex flex-col gap-5 md:max-w-[320px]">
             <div className="md:text-heading-3 text-heading-3-mobile ">
               {t('home.how-competency-path-helps-you-opintopolku-title')}
             </div>
-            <div>{t('home.how-competency-path-helps-you-opintopolku-description')}</div>
-            <div className="mt-auto">
-              <Button
-                size="lg"
-                variant="accent"
-                className="mt-5"
-                serviceVariant="yksilo"
-                label={t('home.how-competency-path-helps-you-opintopolku-link')}
-                icon={<JodOpenInNew ariaLabel={t('external-link')} />}
-                iconSide="right"
-                linkComponent={getLinkTo(`https://opintopolku.fi/konfo/${language}/`, {
-                  useAnchor: true,
-                  target: '_blank',
-                })}
-              />
-            </div>
+            <p className="text-body-sm">
+              <Trans i18nKey="home.how-competency-path-helps-you-opintopolku-description" />
+            </p>
           </div>
 
           <div className="flex flex-col gap-5 md:max-w-[320px]">
             <div className="sm:text-heading-3 text-heading-3-mobile">
               {t('home.how-competency-path-helps-you-tmt-title')}
             </div>
-            <div>{t('home.how-competency-path-helps-you-tmt-description')}</div>
-            <div className="mt-auto">
-              <Button
-                size="lg"
-                variant="accent"
-                className="mt-5"
-                serviceVariant="yksilo"
-                label={t('home.how-competency-path-helps-you-tmt-link')}
-                icon={<JodOpenInNew ariaLabel={t('external-link')} />}
-                iconSide="right"
-                linkComponent={getLinkTo(`https://tyomarkkinatori.fi/${language === 'fi' ? '' : language}`, {
-                  useAnchor: true,
-                  target: '_blank',
-                })}
-              />
-            </div>
+            <p className="text-body-sm">
+              <Trans i18nKey="home.how-competency-path-helps-you-tmt-description" />
+            </p>
           </div>
           <div className="flex flex-col gap-5 md:max-w-[320px]">
             <div className="sm:text-heading-3 text-heading-3-mobile">
               {t('home.how-competency-path-helps-you-opinfi-title')}
             </div>
-            <div>{t('home.how-competency-path-helps-you-opinfi-description')}</div>
-            <div className="mt-auto">
-              <Button
-                size="lg"
-                variant="accent"
-                className="mt-5"
-                serviceVariant="yksilo"
-                label={t('home.how-competency-path-helps-you-opinfi-link')}
-                icon={<JodOpenInNew ariaLabel={t('external-link')} />}
-                iconSide="right"
-                linkComponent={getLinkTo(`https://opin.fi/${language === 'fi' ? '' : language}`, {
-                  useAnchor: true,
-                  target: '_blank',
-                })}
-              />
-            </div>
+            <p className="text-body-sm">{t('home.how-competency-path-helps-you-opinfi-description')}</p>
           </div>
         </div>
       </Content>
