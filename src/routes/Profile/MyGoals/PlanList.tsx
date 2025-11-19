@@ -65,7 +65,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
   ];
   const planPrefix = (index: number): React.JSX.Element => {
     if (planPrefixes.length == 0) {
-      return '';
+      return <></>;
     }
     const numberPrefix = Math.floor(index / planPrefixes.length);
     const letter = planPrefixes[index % planPrefixes.length];

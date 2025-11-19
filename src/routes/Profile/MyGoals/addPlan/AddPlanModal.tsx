@@ -59,7 +59,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
           client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
             params: {
               path: {
-                id: tavoite.id,
+                id: tavoite?.id,
               },
             },
             body: {
