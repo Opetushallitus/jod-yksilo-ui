@@ -82,11 +82,9 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
         ariaLabel={title}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title={
-          <h3 className="text-heading-3" aria-controls={accordionId}>
-            {title}
-          </h3>
-        }
+        triggerId={accordionId}
+        ariaControls={accordionId}
+        title={<h3 className="text-heading-3">{title}</h3>}
       >
         <section aria-labelledby={accordionId} id={accordionId}>
           <div className="flex flex-col gap-3 mt-2">
