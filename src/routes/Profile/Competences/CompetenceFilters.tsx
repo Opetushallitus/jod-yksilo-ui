@@ -23,6 +23,8 @@ const TitleCheckbox = ({ type, checked, onChange }: TitleCheckboxProps) => {
     KIINNOSTUS: t('types.competence.KIINNOSTUS'),
   };
 
+  const name = `do-filter-${type}`;
+
   return (
     <Checkbox
       label={
@@ -34,7 +36,7 @@ const TitleCheckbox = ({ type, checked, onChange }: TitleCheckboxProps) => {
       checked={checked}
       onChange={onChange}
       ariaLabel={labels[type]}
-      name={t('profile.competences.do-filter')}
+      name={name}
       value={type}
       className="min-h-7"
     />
