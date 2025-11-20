@@ -1,4 +1,3 @@
-import type { components } from '@/api/schema';
 import { FeedbackModal } from '@/components';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
@@ -52,13 +51,10 @@ const agents = {
 const useAddBetaFeedbackNote = () => {
   const { t } = useTranslation();
   const { addPermanentNote } = useNoteStack();
-  const notesInitializedRef = React.useRef(false);
 
   React.useEffect(() => {
-    if (notesInitializedRef.current) {
-      return;
-    }
-    addPermanentNote({
+    addPermanentNote(() => ({
+      id: 'beta-feedback-note',
       title: t('beta.note.title'),
       description: t('beta.note.description'),
       variant: 'feedback',
@@ -76,8 +72,7 @@ const useAddBetaFeedbackNote = () => {
           className="whitespace-nowrap"
         />
       ),
-    });
-    notesInitializedRef.current = true;
+    }));
   }, [addPermanentNote, t]);
 };
 
@@ -94,7 +89,7 @@ const Root = () => {
   const [feedbackVisible, setFeedbackVisible] = React.useState(false);
   const logoutForm = React.useRef<HTMLFormElement>(null);
 
-  const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
+  const data = useLoaderData();
   const hostname = globalThis.location.hostname;
   const menuButtonRef = React.useRef<HTMLButtonElement>(null);
   const { siteId, agent } = React.useMemo(() => {
@@ -126,7 +121,7 @@ const Root = () => {
       if (!isLoggedIn) {
         return;
       }
-      addTemporaryNote({
+      addTemporaryNote(() => ({
         id: sessionWarningNoteId,
         title: t('session.warning.title'),
         description: t('session.warning.description'),
@@ -143,7 +138,7 @@ const Root = () => {
           />
         ),
         isCollapsed: false,
-      });
+      }));
     },
     onExpired: async () => {
       if (!isLoggedIn) {
@@ -153,7 +148,7 @@ const Root = () => {
       // Reload root loader, this should set CSRF data to null
       await fetcher.load(`/${language}`);
 
-      addPermanentNote({
+      addPermanentNote(() => ({
         id: sessionExpiredNoteId,
         title: t('session.expired.title'),
         description: t('session.expired.description'),
@@ -185,7 +180,7 @@ const Root = () => {
             />
           </div>
         ),
-      });
+      }));
     },
   });
 
