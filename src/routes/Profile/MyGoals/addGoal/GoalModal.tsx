@@ -89,7 +89,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
 
   const [step, setStep] = React.useState(0);
   const steps = 1;
-  const [isSubmitting] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   // FILTER FAVORITE WORK OPPORTUNITIES -----------------------------------
   const favoriteTyomahdollisuudet = React.useMemo(
@@ -138,6 +138,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
     if (!selectedMahdollisuus) {
       return;
     }
+    setIsSubmitting(true);
     const newTavoite: components['schemas']['TavoiteDto'] = {
       tyyppi: 'MUU',
       mahdollisuusId: selectedMahdollisuus.id,
@@ -150,13 +151,14 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
     await upsertTavoite({ ...newTavoite, id: response.data });
     await refreshTavoitteet();
     closeActiveModal();
+    setIsSubmitting(false);
   };
 
   const updateTavoite = async () => {
     if (!selectedMahdollisuus || !tavoite.id) {
       return;
     }
-
+    setIsSubmitting(true);
     const newTavoite: Tavoite = {
       id: tavoite.id,
       tyyppi: 'MUU',
@@ -177,6 +179,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
     await upsertTavoite({ ...newTavoite, id: tavoite.id });
     await refreshTavoitteet();
     closeActiveModal();
+    setIsSubmitting(false);
   };
   const goalsId = React.useId();
   const insertTavoite = isUpdateMode ? updateTavoite : addTavoite;

@@ -20,6 +20,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   const { t } = useTranslation();
   const { showDialog, closeActiveModal } = useModal();
   const { sm } = useMediaQueries();
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const { tavoite, selectedPlans, selectedOsaamiset, planName, planDescription } = addPlanStore(
     useShallow((state) => ({
       tavoite: state.tavoite,
@@ -38,6 +39,8 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   );
 
   const onSubmit = async () => {
+    console.log('onSubmit');
+    setIsSubmitting(true);
     const tavoiteId = tavoite?.id;
     if (!tavoiteId) {
       closeActiveModal();
@@ -74,6 +77,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
     }
     await refreshTavoitteet();
     closeActiveModal();
+    setIsSubmitting(false);
   };
 
   const wizardComponents = [SelectPlanStep, CreateCustomPlanStep, SelectCompetencesStep];
@@ -169,7 +173,9 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
             {(wizardStep === 0 || wizardStep === 2) && (
               <Button
                 label={t('save')}
-                disabled={(planNameEmpty() || selectedOsaamiset.length == 0) && selectedPlans.length == 0}
+                disabled={
+                  isSubmitting || ((planNameEmpty() || selectedOsaamiset.length == 0) && selectedPlans.length == 0)
+                }
                 variant="accent"
                 onClick={() => onSubmit()}
               />
