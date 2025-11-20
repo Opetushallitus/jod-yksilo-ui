@@ -38,15 +38,18 @@ export const useSessionExpirationTimer = ({
     })),
   );
   const [disabled, setDisabled] = React.useState(false);
-  const [timeSinceSessionStart, setTimeSinceSessionStart] = React.useState(0);
   const intervalId = React.useRef<NodeJS.Timeout | undefined>(undefined);
   const warningShown = React.useRef(false);
   const expiredShown = React.useRef(false);
 
   // Reset note flags so that they can be shown again
   const resetNoteFlags = () => {
-    warningShown.current = false;
-    expiredShown.current = false;
+    if (warningShown.current) {
+      warningShown.current = false;
+    }
+    if (expiredShown.current) {
+      expiredShown.current = false;
+    }
   };
 
   // Start ticking interval after login
@@ -57,8 +60,36 @@ export const useSessionExpirationTimer = ({
 
     if (isLoggedIn && intervalId.current === undefined && !sessionExpired) {
       setSessionStartTime(Date.now());
-      intervalId.current = globalThis.setInterval(() => {
-        setTimeSinceSessionStart(getTimeSinceSessionStarted());
+
+      intervalId.current = globalThis.setInterval(async () => {
+        const timeSinceSessionStart = getTimeSinceSessionStarted();
+
+        if (disabled) {
+          return;
+        }
+
+        if (timeSinceSessionStart < warningTresholdMs) {
+          resetNoteFlags();
+        }
+
+        if (
+          timeSinceSessionStart >= warningTresholdMs &&
+          timeSinceSessionStart < sessionLengthMs &&
+          !warningShown.current
+        ) {
+          warningShown.current = true;
+          onWarning?.();
+        }
+
+        if (timeSinceSessionStart >= sessionLengthMs && !expiredShown.current) {
+          expiredShown.current = true;
+          await onExpired?.();
+          setSessionExpired(true);
+          if (intervalId.current !== undefined) {
+            clearInterval(intervalId.current);
+            intervalId.current = undefined;
+          }
+        }
       }, 1000);
     }
 
@@ -77,40 +108,6 @@ export const useSessionExpirationTimer = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn, disabled]);
 
-  // Session expiration threshold logic
-  React.useEffect(() => {
-    const expirationTimer = async () => {
-      if (disabled) {
-        return;
-      }
-
-      if (timeSinceSessionStart < warningTresholdMs) {
-        resetNoteFlags();
-      }
-
-      if (
-        timeSinceSessionStart >= warningTresholdMs &&
-        timeSinceSessionStart < sessionLengthMs &&
-        !warningShown.current
-      ) {
-        warningShown.current = true;
-        onWarning?.();
-      }
-
-      if (timeSinceSessionStart >= sessionLengthMs && !expiredShown.current) {
-        expiredShown.current = true;
-        await onExpired?.();
-        setSessionExpired(true);
-        if (intervalId.current !== undefined) {
-          clearInterval(intervalId.current);
-          intervalId.current = undefined;
-        }
-      }
-    };
-
-    expirationTimer();
-  }, [disabled, timeSinceSessionStart, warningTresholdMs, sessionLengthMs, onWarning, onExpired, setSessionExpired]);
-
   const extend = React.useCallback(async () => {
     if (disabled) {
       return;
@@ -118,7 +115,6 @@ export const useSessionExpirationTimer = ({
     await client.GET('/api/profiili/yksilo');
     resetNoteFlags();
     extendSession();
-    setTimeSinceSessionStart(0);
   }, [extendSession, disabled]);
 
   const disable = React.useCallback(() => {
@@ -132,13 +128,11 @@ export const useSessionExpirationTimer = ({
       clearInterval(intervalId.current);
       intervalId.current = undefined;
     }
-    setTimeSinceSessionStart(0);
   }, [setSessionExpired]);
 
   return {
     disabled,
     disable,
     extend,
-    timeSinceSessionStart,
   };
 };
