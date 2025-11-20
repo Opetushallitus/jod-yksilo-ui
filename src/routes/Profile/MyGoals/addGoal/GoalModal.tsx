@@ -7,7 +7,7 @@ import { useModal } from '@/hooks/useModal';
 import type { TypedMahdollisuus } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { Tavoite, useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { getLocalizedText, initializeLocalizedText } from '@/utils';
+import { getLocalizedText, stringToLocalizedText } from '@/utils';
 import {
   Button,
   InputField,
@@ -142,8 +142,8 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
       tyyppi: 'MUU',
       mahdollisuusId: selectedMahdollisuus.id,
       mahdollisuusTyyppi: selectedMahdollisuus.mahdollisuusTyyppi,
-      tavoite: initializeLocalizedText(goalName),
-      kuvaus: initializeLocalizedText(goalDescription),
+      tavoite: stringToLocalizedText(goalName),
+      kuvaus: stringToLocalizedText(goalDescription),
     };
 
     const response = await client.POST('/api/profiili/tavoitteet', { body: newTavoite });
@@ -162,8 +162,8 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
       tyyppi: 'MUU',
       mahdollisuusId: selectedMahdollisuus.id,
       mahdollisuusTyyppi: selectedMahdollisuus.mahdollisuusTyyppi,
-      tavoite: { fi: goalName, sv: goalName, en: goalName },
-      kuvaus: { fi: goalDescription, sv: goalDescription, en: goalDescription },
+      tavoite: stringToLocalizedText(goalName),
+      kuvaus: stringToLocalizedText(goalDescription),
     } as Tavoite;
 
     await client.PUT(`/api/profiili/tavoitteet/{id}`, {
@@ -194,7 +194,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
       open={isOpen}
       fullWidthContent
       content={
-        <>
+        <form>
           {basicInfoStep && (
             <div>
               <div className="bg-bg-gray pb-3 relative">
@@ -261,8 +261,8 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                             <ActionButton
                               label={t('profile.my-goals.remove-from-goals')}
                               onClick={() => setSelectedMahdollisuus(null)}
-                              className={'text-accent'}
-                              icon={<JodFlag />}
+                              className={'text-primary-gray'}
+                              icon={<JodFlag className={'text-accent'} />}
                             />
                           ) : (
                             <ActionButton
@@ -294,7 +294,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
               </div>
             </div>
           )}
-        </>
+        </form>
       }
       progress={
         <WizardProgress

@@ -183,3 +183,25 @@ export const initializeLocalizedText = (
   }
   return item;
 };
+
+export const stringToLocalizedText = (
+  item?: string,
+  lang: string = i18n.language,
+): components['schemas']['LokalisoituTeksti'] => {
+  if (!item) {
+    return { fi: '', sv: '', en: '' };
+  }
+
+  // Initialize with empty values first
+  const localizedText: components['schemas']['LokalisoituTeksti'] = { fi: '', sv: '', en: '' };
+
+  // Assign the string only to the current language's key
+  if (lang === 'fi' || lang === 'sv' || lang === 'en') {
+    localizedText[lang] = item;
+  } else {
+    // Optionally handle unexpected lang: default to 'en'
+    localizedText.fi = item;
+  }
+
+  return localizedText;
+};
