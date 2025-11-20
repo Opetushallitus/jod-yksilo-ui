@@ -63,7 +63,7 @@ const ExplorePlanOptions = () => {
   return (
     <div className="relative flex flex-col h-full z-20">
       {/* Sticky header remains */}
-      <div className="sticky top-0 z-40 bg-bg-gray px-1 lg:pt-4 flex-shrink-0">
+      <div className="sticky top-0 z-40 bg-bg-gray px-1 lg:pt-4 shrink-0">
         <div className="mb-2">
           <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-new-plan-header')}</h1>
           <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-new-plan-description')}</p>
@@ -93,7 +93,7 @@ const ExplorePlanOptions = () => {
           </div>
         </div>
         {settingsOpen && (
-          <div className="flex-shrink-0 mb-4 px-1 lg:px-4 bg-bg-gray shadow-md rounded-md">
+          <div className="shrink-0 mb-4 px-1 lg:px-4 bg-bg-gray shadow-md rounded-md">
             <PlanOptionFilters isOpen={settingsOpen} onClose={onCloseSettings} isModal={!lg} />
           </div>
         )}
