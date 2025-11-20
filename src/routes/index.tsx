@@ -206,6 +206,7 @@ const rootRoute: RouteObject = {
     ...jobOpportunityRoutes,
     ...educationOpportunityRoutes,
     ...profileLandingPageRoutes,
+    { path: '*', element: <NoMatch /> },
   ],
 };
 
@@ -215,5 +216,4 @@ export const routes: RouteObject[] = [
     loader: () => replace(`/${i18n.language}`),
   },
   rootRoute,
-  { path: '*', element: <NoMatch /> },
 ];

@@ -1,4 +1,16 @@
 {
+  "ai-info-tooltip": {
+    "description-opportunity-education-note": "Vi har också använt AI för att identifiera kompetenser för utbildningsmöjligheter.",
+    "description-opportunity-intro": "Vi har använt en språkmodell för att skapa innehållet på denna sida i följande delar:",
+    "description-opportunity-item-1": "möjlighetens namn",
+    "description-opportunity-item-2": "beskrivning",
+    "description-opportunity-item-3": "de vanligaste arbetsuppgifterna",
+    "description-summary": "Läs mer: <CustomLink>Om användningen av AI<Icon></Icon></CustomLink>",
+    "description-tool-intro": "Vi har använt AI för att skapa innehållet på denna sida i följande delar:",
+    "description-tool-item-1": "andra jobbmöjligheter",
+    "description-tool-item-2": "utbildningsmöjligheter",
+    "description-tool-item-3": "individuella förslag på möjligheter som passar dig"
+  },
   "competences-identify-failed": "AI-kompetensidentifiering misslyckades, lägg till kompetenser genom att redigera utbildningen manuellt.",
   "filters": "Filter",
   "n-months_one": "{{count}} månad",
@@ -6,7 +18,11 @@
   "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
-  "opportunity-type": {},
+  "no-match": {
+    "description": "Sidan du söker kunde inte hittas eller länken är föråldrad. Kontrollera adressen, öppna menyn eller gå till startsidan.",
+    "go-home": "Gå till startsidan",
+    "title": "Hoppsan! Sidan hittades inte"
+  },
   "profile": {
     "preferences": {
       "list-2-item-1": "Spara karriär- och utbildningsmöjligheter som intresserar dig som favoriter",
@@ -25,7 +41,9 @@
     "education-opportunity-koulutusala": "Det vanligaste utbildningsområdet",
     "education-opportunity-koulutusala-tooltip": "Utbildningsområdet avser den grupp som utbildningar delas in i beroende på vilket vetenskapsområde, samhällsområde eller arbetslivsområde de är kopplade till.",
     "info-overview": {
-      "mapped-interests": "Kartlagda intressen"
+      "mapped-interests": "Kartlagda intressen",
+      "other-data-from-profile": "Övriga importerade uppgifter från profilen",
+      "other-data-from-profile-description": "Dina texttillägg till andra kompetenser och intressen"
     },
     "my-own-data": {
       "competences": {
@@ -41,7 +59,10 @@
       }
     },
     "settings": {
-      "controls": "Kontroller"
+      "controls": "Kontroller",
+      "general": {
+        "location": "Plats"
+      }
     }
   }
 }

@@ -73,7 +73,7 @@ const ExploreOpportunities = () => {
       return;
     }
     globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Päivitys']);
-    await updateEhdotuksetAndTyomahdollisuudet(isLoggedIn);
+    await updateEhdotuksetAndTyomahdollisuudet(isLoggedIn, false);
   };
 
   const onCloseSettings = () => {

@@ -15,7 +15,7 @@ interface YksiloHandle {
 const useTypedMatches = () => useMatches() as UIMatch<unknown, YksiloHandle>[];
 
 export const Breadcrumb = () => {
-  const history = window.history;
+  const history = globalThis.history;
   const matches = useTypedMatches();
   const {
     t,
@@ -24,12 +24,10 @@ export const Breadcrumb = () => {
   const [items, setItems] = React.useState<BreadcrumbItem[]>([]);
 
   React.useEffect(() => {
-    const opts = { lng: language };
-
     const validMatches = matches.filter((m) => m.handle?.title || m.id === 'root' || m.handle?.type);
     const crumbs: BreadcrumbItem[] = [
       {
-        label: t('front-page', opts),
+        label: t('front-page'),
         to: `/${language}`,
       },
     ];
@@ -37,7 +35,7 @@ export const Breadcrumb = () => {
     const opportunityIndex = validMatches.findIndex(
       (item) => item?.handle?.type && ['jobOpportunity', 'educationOpportunity'].includes(item?.handle?.type),
     );
-    const opportunity = opportunityIndex !== -1 ? validMatches[opportunityIndex] : null;
+    const opportunity = opportunityIndex >= 0 ? validMatches[opportunityIndex] : null;
 
     /**
      * Gets the parent breadcrumbs for the opportunity based on the "from" parameter from state
@@ -46,26 +44,26 @@ export const Breadcrumb = () => {
     const getOpportunityParents = () => {
       const from: 'tool' | 'favorite' | 'path' | 'goal' = history.state?.usr?.from ?? 'tool';
       const profileIndex: BreadcrumbItem = {
-        label: t('profile.index', opts),
-        to: `/${language}/${t('slugs.profile.index', opts)}`,
+        label: t('profile.index'),
+        to: `/${language}/${t('slugs.profile.index')}`,
       };
 
       if (from === 'tool') {
-        return [{ label: t('tool.title', opts), to: `/${language}/${t('slugs.tool.index', opts)}` }];
+        return [{ label: t('tool.title'), to: `/${language}/${t('slugs.tool.index')}` }];
       } else if (from === 'favorite') {
         return [
           profileIndex,
           {
-            label: t('profile.favorites.title', opts),
-            to: `/${language}/${t('slugs.profile.index', opts)}/${t('slugs.profile.favorites', opts)}`,
+            label: t('profile.favorites.title'),
+            to: `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.favorites')}`,
           },
         ];
       } else if (from === 'goal') {
         return [
           profileIndex,
           {
-            label: t('profile.my-goals.title', opts),
-            to: `/${language}/${t('slugs.profile.index', opts)}/${t('slugs.profile.my-goals', opts)}`,
+            label: t('profile.my-goals.title'),
+            to: `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.my-goals')}`,
           },
         ];
       } else {
@@ -101,9 +99,8 @@ export const Breadcrumb = () => {
         }),
       );
     }
-    // Breadcrumb only needs to be initialized once per page load.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [matches]);
 
   return (
     <DSBreadCrumb

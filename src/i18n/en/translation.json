@@ -39,9 +39,7 @@
       "work-history": "work-history"
     },
     "tool": {
-      "competences": "competences",
-      "index": "tool",
-      "interests": "interests"
+      "index": "tool"
     }
   }
 }

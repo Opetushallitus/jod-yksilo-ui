@@ -18,6 +18,11 @@
   "n-months_other": "{{count}} kuukautta",
   "n-years_one": "{{count}} vuosi",
   "n-years_other": "{{count}} vuotta",
+  "no-match": {
+    "description": "Etsimääsi sivua ei löytynyt tai linkki on vanhentunut. Tarkista osoite, avaa valikko tai siirry etusivulle.",
+    "go-home": "Siirry etusivulle",
+    "title": "Hups! Sivua ei löytynyt"
+  },
   "profile": {
     "my-goals": {
       "add-competence to goal": "Lisää osaaminen +-merkistä",
