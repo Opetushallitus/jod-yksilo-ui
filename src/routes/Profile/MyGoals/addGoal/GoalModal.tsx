@@ -88,7 +88,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
   const [selectedMahdollisuus, setSelectedMahdollisuus] = React.useState<TypedMahdollisuus | null>(null);
 
   const [step, setStep] = React.useState(0);
-  const steps = 2;
+  const steps = 1;
   const [isSubmitting] = React.useState(false);
 
   // FILTER FAVORITE WORK OPPORTUNITIES -----------------------------------
