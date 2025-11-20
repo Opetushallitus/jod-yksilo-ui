@@ -24,6 +24,11 @@
   "n-months_other": "{{count}} months",
   "n-years_one": "{{count}} year",
   "n-years_other": "{{count}} years",
+  "no-match": {
+    "description": "The page you are looking for could not be found or the link is outdated. Please check the address, open the menu, or go to the homepage.",
+    "go-home": "Go to homepage",
+    "title": "Oops! Page not found"
+  },
   "opportunity-type": {
     "education": {
       "EI_TUTKINTO": "Other education opportunities",

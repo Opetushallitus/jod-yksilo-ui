@@ -18,6 +18,11 @@
   "n-months-short": "{{count}} kk",
   "n-years_one": "{{count}} vuosi",
   "n-years_other": "{{count}} vuotta",
+  "no-match": {
+    "description": "Etsimääsi sivua ei löytynyt tai linkki on vanhentunut. Tarkista osoite, avaa valikko tai siirry etusivulle.",
+    "go-home": "Siirry etusivulle",
+    "title": "Hups! Sivua ei löytynyt"
+  },
   "tool": {
     "education-opportunity-duration": "Keskimääräinen kesto",
     "education-opportunity-duration-tooltip": "Koulutuksen kesto kertoo, kuinka kauan koulutus tavallisesti kestää. Se ilmaistaan yleensä vuosina tai kuukausina ja perustuu koulutuksen laajuuteen ja opintojen etenemiseen normaalissa tahdissa.",

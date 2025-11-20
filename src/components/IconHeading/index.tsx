@@ -10,8 +10,8 @@ export const IconHeading = ({
   icon,
   title,
   testId,
-  bgClassName = 'bg-secondary-1-dark-2',
-  textClassName = 'text-secondary-1-dark-2',
+  bgClassName = 'bg-secondary-1-dark',
+  textClassName = 'text-secondary-1-dark',
 }: IconHeadingProps) => {
   return (
     <div className="mb-6 sm:mb-6 flex gap-x-4 items-start">
