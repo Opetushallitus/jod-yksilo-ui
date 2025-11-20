@@ -65,7 +65,7 @@ const useAddBetaFeedbackNote = () => {
           label={t('beta.note.to-feedback')}
           icon={<JodOpenInNew ariaLabel={t('external-link')} />}
           iconSide="right"
-          linkComponent={getLinkTo('https://link.webropolsurveys.com/S/F27EA876E86B2D74', {
+          linkComponent={getLinkTo('https://link.webropolsurveys.com/S/8AF8E63BF83D39FE', {
             useAnchor: true,
             target: '_blank',
           })}
