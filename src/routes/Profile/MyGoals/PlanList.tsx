@@ -90,8 +90,8 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
           <div className="flex flex-col gap-3 mt-2">
             {goal.suunnitelmat?.length === 0 && emptyPlans}
             {goal.suunnitelmat?.map((s, index) => (
-              <>
-                <div key={s.id} className="flex items-center justify-between gap-4">
+              <React.Fragment key={s.id}>
+                <div className="flex items-center justify-between gap-4">
                   {s.koulutusmahdollisuusId == null && (
                     <div>
                       <p className="text-heading-4 text-accent">
@@ -121,7 +121,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
                   />
                 </div>
                 {divider}
-              </>
+              </React.Fragment>
             ))}
           </div>
         </section>

@@ -112,7 +112,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
 
               {isOpen && (
                 <div
-                  id={`accordion-content-${i}`}
+                  id={`accordion-content-${tavoite.id}`}
                   role="region"
                   aria-labelledby={`accordion-header-${i}`}
                   className="p-4"
