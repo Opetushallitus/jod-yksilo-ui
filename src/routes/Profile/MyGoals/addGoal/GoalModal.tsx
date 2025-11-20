@@ -7,7 +7,7 @@ import { useModal } from '@/hooks/useModal';
 import type { TypedMahdollisuus } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { Tavoite, useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, stringToLocalizedText } from '@/utils';
 import {
   Button,
   InputField,
@@ -19,7 +19,6 @@ import {
   WizardProgress,
 } from '@jod/design-system';
 import { JodArrowLeft, JodArrowRight, JodFlag } from '@jod/design-system/icons';
-import i18n from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -38,12 +37,12 @@ interface UpdateGoalModalProps {
 
 type GoalModalProps = AddGoalModalProps | UpdateGoalModalProps;
 
-const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
+export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
   const { t } = useTranslation();
   const isUpdateMode = mode === 'UPDATE';
   const headerText = t(isUpdateMode ? 'profile.my-goals.update-modal-title' : 'profile.my-goals.add-modal-title');
-  const initialGoalName = tavoite?.tavoite ? tavoite?.tavoite[i18n.language] : '';
-  const initialGoalDescription = tavoite?.kuvaus ? tavoite?.kuvaus[i18n.language] : '';
+  const initialGoalName = getLocalizedText(tavoite?.tavoite);
+  const initialGoalDescription = getLocalizedText(tavoite?.kuvaus);
   const initialSelectedMahdollisuusId = tavoite?.mahdollisuusId ?? null;
 
   const { sm } = useMediaQueries();
@@ -90,7 +89,7 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
 
   const [step, setStep] = React.useState(0);
   const steps = 1;
-  const [isSubmitting] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   // FILTER FAVORITE WORK OPPORTUNITIES -----------------------------------
   const favoriteTyomahdollisuudet = React.useMemo(
@@ -139,33 +138,34 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
     if (!selectedMahdollisuus) {
       return;
     }
-
+    setIsSubmitting(true);
     const newTavoite: components['schemas']['TavoiteDto'] = {
       tyyppi: 'MUU',
       mahdollisuusId: selectedMahdollisuus.id,
       mahdollisuusTyyppi: selectedMahdollisuus.mahdollisuusTyyppi,
-      tavoite: { fi: goalName, sv: goalName, en: goalName },
-      kuvaus: { fi: goalDescription, sv: goalDescription, en: goalDescription },
+      tavoite: stringToLocalizedText(goalName),
+      kuvaus: stringToLocalizedText(goalDescription),
     };
 
     const response = await client.POST('/api/profiili/tavoitteet', { body: newTavoite });
-    upsertTavoite({ ...newTavoite, id: response.data });
-    refreshTavoitteet();
+    await upsertTavoite({ ...newTavoite, id: response.data });
+    await refreshTavoitteet();
     closeActiveModal();
+    setIsSubmitting(false);
   };
 
   const updateTavoite = async () => {
     if (!selectedMahdollisuus || !tavoite.id) {
       return;
     }
-
+    setIsSubmitting(true);
     const newTavoite: Tavoite = {
       id: tavoite.id,
       tyyppi: 'MUU',
       mahdollisuusId: selectedMahdollisuus.id,
       mahdollisuusTyyppi: selectedMahdollisuus.mahdollisuusTyyppi,
-      tavoite: { fi: goalName, sv: goalName, en: goalName },
-      kuvaus: { fi: goalDescription, sv: goalDescription, en: goalDescription },
+      tavoite: stringToLocalizedText(goalName),
+      kuvaus: stringToLocalizedText(goalDescription),
     } as Tavoite;
 
     await client.PUT(`/api/profiili/tavoitteet/{id}`, {
@@ -176,9 +176,10 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
       },
       body: newTavoite,
     });
-    upsertTavoite({ ...newTavoite, id: tavoite.id });
-    refreshTavoitteet();
+    await upsertTavoite({ ...newTavoite, id: tavoite.id });
+    await refreshTavoitteet();
     closeActiveModal();
+    setIsSubmitting(false);
   };
   const goalsId = React.useId();
   const insertTavoite = isUpdateMode ? updateTavoite : addTavoite;
@@ -196,10 +197,10 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
       open={isOpen}
       fullWidthContent
       content={
-        <>
+        <form>
           {basicInfoStep && (
             <div>
-              <div className="bg-bg-gray pb-3 relative">
+              <div className="pb-3 relative">
                 <h1 className="text-heading-1-mobile sm:text-heading-1">{headerText}</h1>
                 <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-modal-description')}</p>
                 <InputField
@@ -220,7 +221,7 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
           {chooseFavoriteStep && (
             <div id={goalsId}>
               <div>
-                <div className="bg-bg-gray pb-3 relative">
+                <div className="pb-3 relative">
                   <h1 className="text-heading-1-mobile sm:text-heading-1">
                     {t('profile.my-goals.choose-favorite-header')}
                   </h1>
@@ -263,8 +264,8 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
                             <ActionButton
                               label={t('profile.my-goals.remove-from-goals')}
                               onClick={() => setSelectedMahdollisuus(null)}
-                              className={'text-accent'}
-                              icon={<JodFlag />}
+                              className={'text-primary-gray'}
+                              icon={<JodFlag className={'text-accent'} />}
                             />
                           ) : (
                             <ActionButton
@@ -296,7 +297,7 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
               </div>
             </div>
           )}
-        </>
+        </form>
       }
       progress={
         <WizardProgress
@@ -305,7 +306,7 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
           completedText={t('wizard.completed')}
           currentText={t('wizard.current')}
           steps={2}
-          currentStep={step}
+          currentStep={step + 1}
         />
       }
       footer={
@@ -328,9 +329,10 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
                 label={t('previous')}
                 variant="white"
                 icon={sm ? undefined : <JodArrowLeft />}
+                iconSide={sm ? undefined : 'left'}
                 disabled={isSubmitting}
                 className="whitespace-nowrap"
-                data-testid="work-history-previous"
+                data-testid="goal-modal-previous"
               />
             )}
             {step < steps && (
@@ -343,11 +345,11 @@ const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
                 }}
                 label={t('next')}
                 variant="accent"
-                icon={<JodArrowRight />}
-                iconSide={sm ? 'right' : undefined}
+                icon={sm ? undefined : <JodArrowRight />}
+                iconSide={sm ? undefined : 'right'}
                 disabled={isSubmitting || !goalName}
                 className="whitespace-nowrap"
-                data-testid="work-history-next"
+                data-testid="goal-modal-next"
               />
             )}
             {(step === steps || isUpdateMode) && (

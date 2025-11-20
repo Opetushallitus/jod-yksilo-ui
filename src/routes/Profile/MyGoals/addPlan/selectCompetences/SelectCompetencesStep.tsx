@@ -18,9 +18,9 @@ const SelectCompetencesStep = () => {
   return (
     <div className="max-h-[80vh] overflow-y-auto p-4 w-full">
       <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-custom-plan-header')}</h1>
-      <p className="ds:mt-3">{t('profile.my-goals.custom-plan-competences-description')}</p>
+      <p className="mt-3">{t('profile.my-goals.custom-plan-competences-description')}</p>
 
-      <div className="ds:sm:mt-8 w-full">
+      <div className="sm:mt-8 w-full">
         <h2 className="text-heading-3">{t('profile.my-goals.required-competences')}</h2>
         <p className="text-secondary-gray text-body-sm">{t('profile.my-goals.add-competence-description')}</p>
         <ul className="flex flex-wrap gap-2 mt-2">
@@ -40,7 +40,7 @@ const SelectCompetencesStep = () => {
         </ul>
       </div>
 
-      <div className="ds:sm:mt-8 w-full">
+      <div className="sm:mt-8 w-full">
         <h2 className="text-heading-3">{t('profile.my-goals.selected-competences')}</h2>
         {selected.length == 0 && (
           <EmptyState text={t('profile.my-goals.no-chosen-competences')} testId="plan-competences-empty-state" />

@@ -37,7 +37,8 @@ const MyGoals = () => {
           <ProfileNavigationList collapsed />
         </div>
       )}
-      <title>{title}</title>
+
+      <title className="text-accent">{title}</title>
       <ProfileSectionTitle type="TAVOITTEENI" title={title} />
       <div className="flex flex-col gap-4 mb-9 sm:text-body-lg text-body-lg-mobile">
         <p>{t('profile.my-goals.description')}</p>

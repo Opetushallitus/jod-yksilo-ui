@@ -5,6 +5,7 @@ import PlanOptionsPagination from '@/routes/Profile/MyGoals/addPlan/selectPlan/P
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { Button, Spinner, useMediaQueries } from '@jod/design-system';
 import { JodAdd, JodClose, JodRemove, JodSettings } from '@jod/design-system/icons';
+import i18n from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -62,7 +63,7 @@ const ExplorePlanOptions = () => {
   return (
     <div className="relative flex flex-col h-full z-20">
       {/* Sticky header remains */}
-      <div className="sticky top-0 z-40 bg-bg-gray px-1 lg:pt-4 flex-shrink-0">
+      <div className="sticky top-0 z-40 bg-bg-gray px-1 lg:pt-4 shrink-0">
         <div className="mb-2">
           <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-new-plan-header')}</h1>
           <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-new-plan-description')}</p>
@@ -77,7 +78,7 @@ const ExplorePlanOptions = () => {
               icon={settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
               iconSide="left"
               label={settingsOpen ? t('tool.settings.toggle-title-open') : toggleFiltersText}
-              data-testid="open-tool-settings"
+              data-testid="open-select-plan"
               onClick={() => setSettingsOpen(!settingsOpen)}
             />
             <Button
@@ -87,12 +88,12 @@ const ExplorePlanOptions = () => {
               onClick={() => onUpdateResults()}
               icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
               iconSide={isLoading ? 'right' : undefined}
-              data-testid="update-opportunities"
+              data-testid="selectplan-update-opportunities"
             />
           </div>
         </div>
         {settingsOpen && (
-          <div className="flex-shrink-0 mb-4 px-1 lg:px-4 bg-bg-gray shadow-md rounded-md">
+          <div className="shrink-0 mb-4 px-1 lg:px-4 bg-bg-gray shadow-md rounded-md">
             <PlanOptionFilters isOpen={settingsOpen} onClose={onCloseSettings} isModal={!lg} />
           </div>
         )}
@@ -100,11 +101,11 @@ const ExplorePlanOptions = () => {
 
       {/* Scrollable opportunity cards container */}
       <ul
-        id="tool-your-opportunities-list"
+        id="selectplan-education-opportunities-list"
         ref={scrollRef}
-        className="flex flex-col gap-5 sm:gap-3 mb-8 overflow-y-auto flex-grow"
-        style={{ minHeight: 0 }} // To allow flex-grow overflow scrolling properly inside container
-        data-testid="tool-opportunities-list"
+        className="flex flex-col gap-5 sm:gap-3 mb-8 overflow-y-auto grow"
+        style={{ minHeight: 0 }}
+        data-testid="selectplan-opportunities-list"
       >
         {koulutusMahdollisuudet.map((mahdollisuus) => {
           const { id } = mahdollisuus;
@@ -135,14 +136,14 @@ const ExplorePlanOptions = () => {
                 )
               }
               mahdollisuus={mahdollisuus}
-              matchValue={matchingOsaamiset + '/' + vaaditutOsaamiset.length}
+              matchValue={`${matchingOsaamiset}/${vaaditutOsaamiset.length}`}
               matchLabel={t('profile.my-goals.competences')}
             />
           ) : null;
         })}
       </ul>
 
-      <PlanOptionsPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="mb-7 flex-shrink-0" />
+      <PlanOptionsPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="mb-7 shrink-0" />
     </div>
   );
 };
@@ -157,7 +158,7 @@ const SelectPlanStep = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      await updateEhdotukset('fi');
+      await updateEhdotukset(i18n.language);
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -73,7 +73,7 @@ export const EducationOpportunityCard = ({
           </TooltipWrapper>
         }
       />
-      {rest.children ?? <></>}
+      {rest.children}
     </OpportunityCardWrapper>
   );
 };

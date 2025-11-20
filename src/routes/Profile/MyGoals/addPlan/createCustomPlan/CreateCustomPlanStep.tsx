@@ -17,14 +17,16 @@ const CreateCustomPlanStep = () => {
   return (
     <div className="mb-2">
       <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-custom-plan-header')}</h1>
-      <p className="text-body-sm-mobile sm:text-body-sm ds:mt-3">{t('profile.my-goals.add-custom-plan-description')}</p>
-      <div className="ds:mt-3">
+      <p className="text-body-sm-mobile sm:text-body-sm mt-3">{t('profile.my-goals.add-custom-plan-description')}</p>
+      <div className="mt-6">
         <InputField
           label={t('profile.my-goals.custom-plan-name')}
           requiredText={t('required')}
           value={planName[i18n.language]}
           onChange={(e) => setPlanName(e.target.value)}
         />
+      </div>
+      <div className="mt-6">
         <Textarea
           label={t('profile.my-goals.custom-plan-description')}
           value={planDescription[i18n.language]}

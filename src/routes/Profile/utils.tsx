@@ -83,5 +83,5 @@ export const getTextClassByCompetenceSourceType = (type: ProfileSectionType) =>
     'text-secondary-1-dark': type === 'PATEVYYS',
     'text-secondary-gray': type === 'MUU_OSAAMINEN',
     'text-secondary-3': type === 'KIINNOSTUS',
-    'text-secondary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'tavoite', 'ASETUKSENI'].includes(type),
+    'text-secondary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'TAVOITTEENI', 'ASETUKSENI'].includes(type),
   });

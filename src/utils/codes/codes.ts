@@ -53,11 +53,11 @@ export interface ClassificationItem {
  * @returns
  */
 
-export const getCodesetValue = async (codeset: Codeset, code: string, lang: LangCode = 'fi') => {
+export const getCodesetValue = async (codeset: Codeset, code: string, lang: LangCode) => {
   const imported = await import(`./${codeset}_${lang}.json`);
 
   if (!Array.isArray(imported?.default)) {
-    const { hostname } = window.location;
+    const { hostname } = globalThis.location;
     if (import.meta.env.DEV || ['localhost', 'jodkehitys'].some((str) => hostname.includes(str))) {
       // eslint-disable-next-line no-console
       console.error(`Could not find codeset ${codeset} for language ${lang}!`);
@@ -69,34 +69,6 @@ export const getCodesetValue = async (codeset: Codeset, code: string, lang: Lang
   const entry = data.find((entry) => entry.code === code);
   const nameItem = entry?.classificationItemNames.find((item) => item.lang === lang);
   return nameItem?.name ?? code;
-};
-
-/**
- * Gets all values from a codeset JSON file.
- * @param codeset Codeset name, eg. 'maakunta'
- * @param lang Language code, default 'fi'
- * @returns Array of code and value pairs
- */
-export const getAllCodesetValues = async (codeset: Codeset, lang: LangCode = 'fi') => {
-  const imported = await import(`./${codeset}_${lang}.json`);
-
-  if (!Array.isArray(imported?.default)) {
-    const { hostname } = window.location;
-    if (import.meta.env.DEV || ['localhost', 'jodkehitys'].some((str) => hostname.includes(str))) {
-      // eslint-disable-next-line no-console
-      console.error(`Could not find codeset ${codeset} for language ${lang}!`);
-    }
-    return [];
-  }
-
-  const data = (imported.default ?? []) as ClassificationItem[];
-  return data.map((entry) => {
-    const nameItem = entry.classificationItemNames.find((item) => item.lang === lang);
-    return {
-      code: entry.code,
-      value: nameItem?.name ?? entry.code,
-    };
-  });
 };
 
 /**

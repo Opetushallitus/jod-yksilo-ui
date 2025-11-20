@@ -242,6 +242,8 @@
   "front-page": "Min kompetensstig",
   "home": {
     "beta": "Kompetensstigen är i betatestningsfasen fram till slutet av 2025",
+    "beta-content-1": "Välkommen att prova betaversionen av Kompetensstigen. Vi utvecklar kontinuerligt Kompetensstigens funktioner samt kvaliteten på de resultat och förslag som artificiell intelligens erbjuder dig. Du kan hjälpa oss i utvecklingsarbetet genom att använda tjänsten och ge respons. Låt oss tillsammans utveckla Kompetensstigen till den bästa tjänsten för dig!",
+    "beta-content-2": "Den officiella användningen av Kompetensstigen inleds i början av 2026. Vi strävar efter att bevara de kompetensprofiler som skapats i betatestningsfasen och deras uppgifter i tjänsten när den officiella användningen börjar. <br/><br/>Läs mer <CustomLink>om aktuella ärenden och betafasen<Icon></Icon></CustomLink> — här berättar vi om nyheter, nya och planerade funkt bioner och ändringar som genomförs i Kompetensstigen under slutet av året.",
     "card-1-content": "Hitta utbildnings- och karriärmöjligheter som passar just dig. Använd tjänsten snabbt utan att logga in, du kan senare logga in och spara dina uppgifter. \n",
     "card-1-title": "Hitta snabbt lämpliga utbildnings- och karriärmöjligheter",
     "card-2-content": "Logga in i tjänsten och identifiera dina styrkor och intressen. Spara din arbets- och utbildningshistorik för senare bruk.\n",
@@ -252,12 +254,12 @@
     "hero-content": "I Min kompetensstig kan du kartlägga din egen kompetens, hitta utbildningar för att öka din kompetens, undersöka karriärmöjligheter med din kompetens och kartlägga möjligheter att byta bransch.\n",
     "hero-title": "Min kompetensstig",
     "how-competency-path-helps-you": "Hur hjälper Kompetensstigen dig som en del av andra tjänster?",
-    "how-competency-path-helps-you-content": "Kompetensstigen, Studieinfo, Jobbmarknaden och Opin.fi bildar tillsammans en tjänstehelhet som stöder lärande, karriärplanering och jobbsökning i olika livssituationer. Varje tjänst spelar sin egen roll, men tillsammans erbjuder de dig en tydlig stig för utvecklingen av din kompetens och din karriär.\n\nI Kompetensstigen kan du identifiera dina egna styrkor och intressen och hitta utbildnings- och karriärmöjligheter som är lämpliga för dem. Därefter hjälper Studieinfo, Jobbmarknaden och Opin.fi dig att söka dig till dem.",
-    "how-competency-path-helps-you-opinfi-description": "Opin.fi är finländska universitets och yrkeshögskolors gemensamma tjänst där öppna studier är lätt tillgängliga för dig",
-    "how-competency-path-helps-you-opinfi-title": "Opin.fi/",
-    "how-competency-path-helps-you-opintopolku-description": "Studieinfo erbjuder omfattande information om utbildningar och ansökningstjänster för olika utbildningsnivåer.\n\nFrån utbildningsmöjligheterna i Kompetensstigen kan du förflytta dig till Studieinfo för att bekanta dig närmare med utbildningar och söka dig till dem. När du loggar in på Min kompetensstig kan du importera din studiehistorik till din kompetensprofil.",
+    "how-competency-path-helps-you-content": "Kompetensstigen, Studieinfo, Jobbmarknaden och Opin.fi bildar tillsammans en tjänstehelhet som stöder lärande, karriärplanering och jobbsökning i olika livssituationer. Varje tjänst spelar sin egen roll, men tillsammans erbjuder de dig en tydlig stig för utvecklingen av din kompetens och din karriär.<br/><br/>Om du letar efter en riktning eller din egen stig kan du identifiera dina egna styrkor och intressen i Kompetensstigen och hitta utbildnings- och karriärmöjligheter som är lämpliga för dem. När du har utrett hur du vill gå vidare, hjälper Studieinfo, Jobbmarknaden och Opin.fi dig att söka dig till dem.",
+    "how-competency-path-helps-you-opinfi-description": "Opin.fi är finländska universitets och yrkeshögskolors gemensamma tjänst där öppna studier är lätt tillgängliga för dig.",
+    "how-competency-path-helps-you-opinfi-title": "Opin.fi",
+    "how-competency-path-helps-you-opintopolku-description": "Studieinfo erbjuder omfattande information om utbildningar och ansökningstjänster för olika utbildningsnivåer.<br/><br/>Från utbildningsmöjligheterna i Kompetensstigen kan du förflytta dig till Studieinfo för att bekanta dig närmare med utbildningar och söka dig till dem. När du loggar in på Min kompetensstig kan du importera din studiehistorik till din kompetensprofil.",
     "how-competency-path-helps-you-opintopolku-title": "Studieinfo",
-    "how-competency-path-helps-you-tmt-description": "Jobbmarknaden samlar ihop lediga jobb och stöder arbetssökningen och karriärplaneringen.\n\nFrån Kompetensstigens karriärmöjligheter kan du förflytta dig till Jobbmarknaden för att bekanta dig med och söka lediga jobb. I framtiden kan du också överföra dina uppgifter mellan Kompetensstigen och Jobbmarknaden.",
+    "how-competency-path-helps-you-tmt-description": "Jobbmarknaden samlar ihop lediga jobb och stöder arbetssökningen och karriärplaneringen.<br/><br/>Från Kompetensstigens karriärmöjligheter kan du förflytta dig till Jobbmarknaden för att bekanta dig med och söka lediga jobb. I framtiden kan du också överföra dina uppgifter mellan Kompetensstigen och Jobbmarknaden. ",
     "how-competency-path-helps-you-tmt-title": "Jobbmarknaden",
     "need-personal-guidance": "Behöver du personlig vägledning?",
     "need-personal-guidance-content": "Tjänsterna som du kan hitta i väglednings- och rådgivningstjänster hjälper dig att fundera på dina karriär- och utbildningsalternativ. Begränsa listan över tjänster enligt teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst. \n"
@@ -681,7 +683,6 @@
       "n-years_other": "{{count}} år",
       "of-education": "Utbildningens",
       "of-work": "Arbetspraktikens",
-      "phase-n-details": "Uppgifter för steg {{count}}",
       "phase-nr": "Steg {{count}}",
       "phase-type": "Typ av steg",
       "plan": "Plan",
@@ -760,16 +761,16 @@
             "item2": "utbildningsmöjligheter",
             "item3": "beräkning av möjligheternas lämplighet"
           },
-          "tyomahdollisuus": {
-            "item1": "möjlighetens namn",
-            "item2": "beskrivning",
-            "item3": "platsannonsernas särdrag"
-          },
           "koulutusmahdollisuus": {
             "item1": "möjlighetens namn",
             "item2": "beskrivning",
             "item3": "kompetenser",
             "item4": "utbildningens särdrag"
+          },
+          "tyomahdollisuus": {
+            "item1": "möjlighetens namn",
+            "item2": "beskrivning",
+            "item3": "platsannonsernas särdrag"
           }
         },
         "question": "Kan du berätta närmare om vad som inte fungerade?"
@@ -817,6 +818,7 @@
   },
   "slugs": {
     "about-service": "information-om-tjansten",
+    "accessibility": "information-om-tillganglighet",
     "ai-usage": "information-om-anvandningen-av-artificiell-intelligens",
     "data-sources": "datakallor",
     "education-opportunity": {

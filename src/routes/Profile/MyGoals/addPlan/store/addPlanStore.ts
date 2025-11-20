@@ -61,21 +61,18 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
   setSelectedPlans: (state) => set({ selectedPlans: state }),
   setOsaamiset: (state) => set({ osaamiset: state }),
   setPlanName: (newPlanNameValue: string) => {
-    const currentLang = i18n.language;
     set((state) => ({
       planName: {
         ...state.planName, // keep other languages as is
-        [currentLang]: newPlanNameValue, // replace value only for current language
+        [i18n.language]: newPlanNameValue, // replace value only for current language
       },
     }));
   },
   setPlanDescription: (newPlanNameValue: string) => {
-    const currentLang = i18n.language;
-
     set((state) => ({
       planDescription: {
         ...state.planDescription, // keep other languages as is
-        [currentLang]: newPlanNameValue, // replace value only for current language
+        [i18n.language]: newPlanNameValue, // replace value only for current language
       },
     }));
   },

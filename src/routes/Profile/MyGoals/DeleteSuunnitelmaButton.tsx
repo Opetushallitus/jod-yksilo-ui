@@ -1,4 +1,4 @@
-import { client } from '@/api/client.ts';
+import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';

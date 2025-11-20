@@ -43,7 +43,7 @@ const SummaryStep = ({ headerText }: SummaryStepProps) => {
       </p>
       <div data-testid="education-history-summary-table">
         <ExperienceTable
-          ariaLabel={t('profile.education.title')}
+          ariaLabel={t('profile.education-history.title')}
           mainColumnHeader={t('education-history.education-provider-or-education')}
           rows={rows}
         />

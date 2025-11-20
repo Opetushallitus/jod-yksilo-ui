@@ -285,7 +285,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
         kotikunta: z.string().optional(),
         kotikuntaNimi: z.string(),
         aidinkieli: z.enum(LANGUAGE_VALUES),
-        email: z.email(t('feedback.errors.valid-sposti')).optional(),
+        email: z.email().optional(),
         allowSukupuoli: z.boolean(),
         sukupuoli: z.enum(GENDER_VALUES).or(z.undefined()),
         sukupuoliNimi: z.string(),

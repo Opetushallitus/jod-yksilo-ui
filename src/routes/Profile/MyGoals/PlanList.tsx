@@ -5,60 +5,29 @@ import { Accordion, EmptyState } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 export interface PlanListProps {
-  pm: components['schemas']['TavoiteDto'];
+  goal: components['schemas']['TavoiteDto'];
   language: string;
-  t: (key: string) => string;
   removeSuunnitelmaFromStore: (tavoiteId: string, suunnitelmaId: string) => void;
 }
-const planPrefixes = [
-  'A',
-  'B',
-  'C',
-  'D',
-  'E',
-  'F',
-  'G',
-  'H',
-  'I',
-  'J',
-  'K',
-  'L',
-  'M',
-  'N',
-  'O',
-  'P',
-  'Q',
-  'R',
-  'S',
-  'T',
-  'U',
-  'V',
-  'W',
-  'X',
-  'Y',
-  'Z',
-];
-export const planLetter = (index: number) => {
-  return planPrefixes[index % planPrefixes.length];
-};
 
-export const PlanList = ({ pm, language, t, removeSuunnitelmaFromStore }: PlanListProps) => {
+export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanListProps) => {
   const [isOpen, setIsOpen] = React.useState(true);
-
+  const { t } = useTranslation();
   React.useEffect(() => {
     const handleResize = () => {
-      const isMobile = window.matchMedia('(max-width: 767px)').matches;
+      const isMobile = globalThis.matchMedia('(max-width: 767px)').matches;
       setIsOpen(!isMobile);
     };
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    globalThis.addEventListener('resize', handleResize);
+    return () => globalThis.removeEventListener('resize', handleResize);
   }, []);
 
-  const accordionId = `suunnitelmat-${pm.id}`;
+  const accordionId = `suunnitelmat-${goal.id}`;
   const title = t('profile.my-goals.my-plan-towards-goal');
   const emptyPlans = (
     <div className="w-auto">
@@ -66,8 +35,38 @@ export const PlanList = ({ pm, language, t, removeSuunnitelmaFromStore }: PlanLi
     </div>
   );
   const divider = <div className="border-b border-border-gray" />;
-
+  const planPrefixes = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z',
+  ];
   const planPrefix = (index: number): React.JSX.Element => {
+    if (planPrefixes.length == 0) {
+      return <></>;
+    }
     const numberPrefix = Math.floor(index / planPrefixes.length);
     const letter = planLetter(index);
     return (
@@ -83,20 +82,18 @@ export const PlanList = ({ pm, language, t, removeSuunnitelmaFromStore }: PlanLi
         ariaLabel={title}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title={
-          <h3 className="text-heading-3" aria-controls={accordionId}>
-            {title}
-          </h3>
-        }
+        triggerId={accordionId}
+        ariaControls={accordionId}
+        title={<h3 className="text-heading-3">{title}</h3>}
       >
         <section aria-labelledby={accordionId} id={accordionId}>
           <div className="flex flex-col gap-3 mt-2">
-            {pm.suunnitelmat?.length === 0 && emptyPlans}
-            {pm.suunnitelmat?.map((s, index) => (
-              <>
-                <div key={s.id} className="flex items-center justify-between gap-4">
+            {goal.suunnitelmat?.length === 0 && emptyPlans}
+            {goal.suunnitelmat?.map((s, index) => (
+              <React.Fragment key={s.id}>
+                <div className="flex items-center justify-between gap-4">
                   {s.koulutusmahdollisuusId == null && (
-                    <div className="block">
+                    <div>
                       <p className="text-heading-4 text-accent">
                         {planPrefix(index)} {getLocalizedText(s.nimi)}
                       </p>
@@ -117,14 +114,14 @@ export const PlanList = ({ pm, language, t, removeSuunnitelmaFromStore }: PlanLi
                   )}
 
                   <DeleteSuunnitelmaButton
-                    tavoiteId={pm.id}
+                    tavoiteId={goal.id}
                     suunnitelmaId={s.id}
-                    onDelete={() => removeSuunnitelmaFromStore(pm.id ?? '', s.id ?? '')}
+                    onDelete={() => removeSuunnitelmaFromStore(goal.id ?? '', s.id ?? '')}
                     name={s.nimi}
                   />
                 </div>
                 {divider}
-              </>
+              </React.Fragment>
             ))}
           </div>
         </section>

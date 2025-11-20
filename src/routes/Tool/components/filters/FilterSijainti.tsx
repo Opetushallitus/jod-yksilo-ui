@@ -1,10 +1,12 @@
+import { LangCode } from '@/i18n/config';
 import { useToolStore } from '@/stores/useToolStore';
+import { getCodesetValue } from '@/utils/codes/codes';
 import { Checkbox } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-const maakuntaKoodit = [
+const maakuntaKoodit: [string, string][] = [
   ['01', 'Uusimaa'],
   ['02', 'Varsinais-Suomi'],
   ['04', 'Satakunta'],
@@ -25,10 +27,19 @@ const maakuntaKoodit = [
   ['19', 'Lappi'],
   ['20', 'Itä-Uusimaa'],
   ['21', 'Ahvenanmaa'],
-].sort((a, b) => a[1].localeCompare(b[1]));
+];
+
+const translateMaakunta = async ([code, defaultName]: [string, string], lang: LangCode): Promise<[string, string]> => {
+  const name = await getCodesetValue('maakunta', code, lang).catch(() => defaultName);
+  return name === code ? [code, defaultName] : [code, name];
+};
 
 export const FilterSijainti = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+  const [maakunnatList, setMaakunnatList] = React.useState<[string, string][]>([]);
   const { filter, setFilter } = useToolStore(
     useShallow((state) => ({
       filter: state.filters.region,
@@ -40,10 +51,19 @@ export const FilterSijainti = () => {
     setFilter('region', newFilter);
   };
 
+  React.useEffect(() => {
+    Promise.all(maakuntaKoodit.map((maakunta) => translateMaakunta(maakunta, language as LangCode))).then(
+      (translatedMaakunnat) => {
+        translatedMaakunnat.sort((a, b) => a[1].localeCompare(b[1]));
+        setMaakunnatList(translatedMaakunnat);
+      },
+    );
+  }, [language]);
+
   return (
     <fieldset className="flex flex-col gap-5">
       <legend className="text-heading-4-mobile sm:text-heading-4 mb-5 sr-only">{t('show')}</legend>
-      {maakuntaKoodit.map((maakunta) => (
+      {maakunnatList.map((maakunta) => (
         <Checkbox
           key={maakunta[1]}
           ariaLabel={maakunta[1]}

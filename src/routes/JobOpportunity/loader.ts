@@ -2,6 +2,7 @@ import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
+import i18n, { LangCode } from '@/i18n/config';
 import type { Jakauma, TyomahdollisuusJakaumat } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { sortByProperty } from '@/utils';
@@ -31,7 +32,7 @@ const loader = (async ({ request, params, context }) => {
   }
 
   const mapArvoToCodeValue = (codeset: Codeset) => (arvo: components['schemas']['ArvoDto']) =>
-    getCodesetValue(codeset, arvo.arvo).then((value) => ({ code: arvo.arvo, value }));
+    getCodesetValue(codeset, arvo.arvo, i18n.language as LangCode).then((value) => ({ code: arvo.arvo, value }));
 
   const codesetValues: JobCodesetValues = {
     kunta: jakaumat.kunta ? await Promise.all(jakaumat.kunta.arvot.map(mapArvoToCodeValue('kunta'))) : [],
