@@ -13,11 +13,16 @@
   },
   "competences-identify-failed": "AI-kompetensidentifiering misslyckades, lägg till kompetenser genom att redigera utbildningen manuellt.",
   "filters": "Filter",
-  "n-months-short": "{{count}} mån",
   "n-months_one": "{{count}} månad",
   "n-months_other": "{{count}} månader",
+  "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
+  "no-match": {
+    "description": "Sidan du söker kunde inte hittas eller länken är föråldrad. Kontrollera adressen, öppna menyn eller gå till startsidan.",
+    "go-home": "Gå till startsidan",
+    "title": "Hoppsan! Sidan hittades inte"
+  },
   "profile": {
     "preferences": {
       "list-2-item-1": "Spara karriär- och utbildningsmöjligheter som intresserar dig som favoriter",
