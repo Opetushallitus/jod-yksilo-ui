@@ -88,7 +88,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
   const [selectedMahdollisuus, setSelectedMahdollisuus] = React.useState<TypedMahdollisuus | null>(null);
 
   const [step, setStep] = React.useState(0);
-  const steps = 1;
+  const steps = 2;
   const [isSubmitting] = React.useState(false);
 
   // FILTER FAVORITE WORK OPPORTUNITIES -----------------------------------
@@ -197,7 +197,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
         <form>
           {basicInfoStep && (
             <div>
-              <div className="bg-bg-gray pb-3 relative">
+              <div className="pb-3 relative">
                 <h1 className="text-heading-1-mobile sm:text-heading-1">{headerText}</h1>
                 <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-modal-description')}</p>
                 <InputField
@@ -218,7 +218,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
           {chooseFavoriteStep && (
             <div id={goalsId}>
               <div>
-                <div className="bg-bg-gray pb-3 relative">
+                <div className="pb-3 relative">
                   <h1 className="text-heading-1-mobile sm:text-heading-1">
                     {t('profile.my-goals.choose-favorite-header')}
                   </h1>
@@ -303,7 +303,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
           completedText={t('wizard.completed')}
           currentText={t('wizard.current')}
           steps={2}
-          currentStep={step}
+          currentStep={step + 1}
         />
       }
       footer={
