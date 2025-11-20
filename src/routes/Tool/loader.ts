@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
+import i18n from '@/i18n/config';
 import { useToolStore } from '@/stores/useToolStore';
 import type { LoaderFunction } from 'react-router';
 import { JobCodesetValues } from '../../utils/jakaumaUtils';
@@ -29,9 +30,11 @@ export default (async ({ request, context }): Promise<ToolLoaderData> => {
     filters: {},
   };
 
+  const languageHasChanged = state.previousEhdotusUpdateLang !== i18n.language;
+
   // Load tyomahdollisuudet and ehdotukset if they are not already loaded
-  if (state.tyomahdollisuudet.length === 0) {
-    await state.updateEhdotuksetAndTyomahdollisuudet(isLoggedIn);
+  if (state.tyomahdollisuudet.length === 0 || languageHasChanged) {
+    await state.updateEhdotuksetAndTyomahdollisuudet(isLoggedIn, languageHasChanged);
   }
 
   // Load suosikit if the user is logged in

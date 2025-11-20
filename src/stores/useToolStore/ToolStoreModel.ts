@@ -87,7 +87,7 @@ export interface ToolState {
 
   updateEhdotukset: (lang: string, signal?: AbortSignal) => Promise<void>;
   fetchMahdollisuudetPage: (signal?: AbortSignal, page?: number) => Promise<void>;
-  updateEhdotuksetAndTyomahdollisuudet: (loggedIn: boolean) => Promise<void>;
+  updateEhdotuksetAndTyomahdollisuudet: (loggedIn: boolean, forceFetchData: boolean) => Promise<void>;
 
   setSorting: (state: OpportunitySortingValue) => void;
 
