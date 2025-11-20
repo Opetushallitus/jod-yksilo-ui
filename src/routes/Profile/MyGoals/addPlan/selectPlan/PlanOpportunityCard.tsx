@@ -63,7 +63,9 @@ const PlanOpportunityCard = React.memo(
           {actionButtonContent && <div className="ml-4">{actionButtonContent}</div>}
         </div>
         <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">
-          {t(`opportunity-type.education.${mahdollisuus.tyyppi ?? 'EI_TUTKINTO'}`)}
+          {mahdollisuus.tyyppi == 'TUTKINTO'
+            ? t(`opportunity-type.education.TUTKINTO'}`)
+            : t(`opportunity-type.education.EI_TUTKINTO'}`)}
         </span>
 
         <Accordion title={getLocalizedText(otsikko)} initialState={false} fetchData={fetchOsaamiset}>
