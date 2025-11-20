@@ -345,7 +345,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                 iconSide={sm ? 'right' : undefined}
                 disabled={isSubmitting || !goalName}
                 className="whitespace-nowrap"
-                data-testid="work-history-next"
+                data-testid="goal-modal-next"
               />
             )}
             {(step === steps || isUpdateMode) && (
