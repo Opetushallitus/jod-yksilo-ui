@@ -326,6 +326,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                 label={t('previous')}
                 variant="white"
                 icon={sm ? undefined : <JodArrowLeft />}
+                iconSide={sm ? undefined : 'left'}
                 disabled={isSubmitting}
                 className="whitespace-nowrap"
                 data-testid="goal-modal-previous"
@@ -341,8 +342,8 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                 }}
                 label={t('next')}
                 variant="accent"
-                icon={<JodArrowRight />}
-                iconSide={sm ? 'right' : undefined}
+                icon={sm ? undefined : <JodArrowRight />}
+                iconSide={sm ? undefined : 'right'}
                 disabled={isSubmitting || !goalName}
                 className="whitespace-nowrap"
                 data-testid="goal-modal-next"

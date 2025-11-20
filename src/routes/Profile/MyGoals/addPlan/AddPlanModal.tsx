@@ -4,7 +4,8 @@ import CreateCustomPlanStep from '@/routes/Profile/MyGoals/addPlan/createCustomP
 import SelectCompetencesStep from '@/routes/Profile/MyGoals/addPlan/selectCompetences/SelectCompetencesStep.tsx';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { Button, clamp, Modal, WizardProgress } from '@jod/design-system';
+import { Button, clamp, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -18,6 +19,7 @@ interface AddPlanModalProps {
 const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   const { t } = useTranslation();
   const { showDialog, closeActiveModal } = useModal();
+  const { sm } = useMediaQueries();
   const { tavoite, selectedPlans, selectedOsaamiset, planName, planDescription } = addPlanStore(
     useShallow((state) => ({
       tavoite: state.tavoite,
@@ -74,10 +76,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
     closeActiveModal();
   };
 
-  const wizardComponents = React.useMemo(
-    () => [() => <SelectPlanStep />, () => <CreateCustomPlanStep />, () => <SelectCompetencesStep />],
-    [],
-  );
+  const wizardComponents = [SelectPlanStep, CreateCustomPlanStep, SelectCompetencesStep];
 
   const [wizardStep, setWizardStep] = React.useState(0);
   const WizardContent = wizardComponents[wizardStep];
@@ -150,9 +149,23 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
             />
 
             {(wizardStep === 1 || wizardStep === 2) && (
-              <Button label={t('previous')} variant="white" onClick={previousStep} />
+              <Button
+                label={t('previous')}
+                variant="white"
+                onClick={previousStep}
+                icon={sm ? undefined : <JodArrowLeft />}
+                iconSide={sm ? undefined : 'left'}
+              />
             )}
-            {wizardStep === 1 && <Button label={t('next')} variant="accent" onClick={nextStep} />}
+            {wizardStep === 1 && (
+              <Button
+                label={t('next')}
+                variant="accent"
+                onClick={nextStep}
+                icon={sm ? undefined : <JodArrowRight />}
+                iconSide={sm ? undefined : 'right'}
+              />
+            )}
             {(wizardStep === 0 || wizardStep === 2) && (
               <Button
                 label={t('save')}
