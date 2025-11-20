@@ -1,4 +1,16 @@
 {
+  "ai-info-tooltip": {
+    "description-opportunity-education-note": "We have also utilized AI to identify competences for education opportunities.",
+    "description-opportunity-intro": "We have used a language model to create the content on this page in the following parts:",
+    "description-opportunity-item-1": "name of the opportunity",
+    "description-opportunity-item-2": "description",
+    "description-opportunity-item-3": "the most common tasks",
+    "description-summary": "Read more: <CustomLink>About the use of AI<Icon></Icon></CustomLink>",
+    "description-tool-intro": "We have used AI to create the content on this page in the following parts:",
+    "description-tool-item-1": "other job opportunities",
+    "description-tool-item-2": "education opportunities",
+    "description-tool-item-3": "individual suggestions for opportunities that suit you"
+  },
   "competences-identify-failed": "AI competence identification failed, please add competences by editing the education manually.",
   "filters": "Filters",
   "home": {
@@ -7,9 +19,9 @@
   },
   "n-education-opportunities": "{{count}} / {{total}} education opportunities",
   "n-job-opportunities": "{{count}} / {{total}} job opportunities",
+  "n-months-short": "{{count}} mo",
   "n-months_one": "{{count}} month",
   "n-months_other": "{{count}} months",
-  "n-months-short": "{{count}} mo",
   "n-years_one": "{{count}} year",
   "n-years_other": "{{count}} years",
   "opportunity-type": {
@@ -31,7 +43,9 @@
     "education-opportunity-koulutusala": "Most common field of education",
     "education-opportunity-koulutusala-tooltip": "The field of education refers to the group into which educational programs are categorized based on the scientific, societal, or professional domain they relate to.",
     "info-overview": {
-      "mapped-interests": "Mapped interests"
+      "mapped-interests": "Mapped interests",
+      "other-data-from-profile": "Other imported data from profile",
+      "other-data-from-profile-description": "Your text additions to other competences and interests"
     },
     "my-own-data": {
       "competences": {
@@ -47,7 +61,10 @@
       }
     },
     "settings": {
-      "controls": "Controls"
+      "controls": "Controls",
+      "general": {
+        "location": "Location"
+      }
     },
     "tools": {
       "service-directory": "Guidance and counseling services"

@@ -1,0 +1,7546 @@
+[
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/aa",
+    "level": 1,
+    "code": "aa",
+    "order": 10,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Afar"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ab",
+    "level": 1,
+    "code": "ab",
+    "order": 20,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Abkhazian;  Abkhaz"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ae",
+    "level": 1,
+    "code": "ae",
+    "order": 30,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Avestan"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/af",
+    "level": 1,
+    "code": "af",
+    "order": 40,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Afrikaans"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ak",
+    "level": 1,
+    "code": "ak",
+    "order": 50,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Akan"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/am",
+    "level": 1,
+    "code": "am",
+    "order": 60,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Amharic"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ar",
+    "level": 1,
+    "code": "ar",
+    "order": 70,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Arabic"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/an",
+    "level": 1,
+    "code": "an",
+    "order": 80,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Aragonese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/as",
+    "level": 1,
+    "code": "as",
+    "order": 90,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Assamese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/av",
+    "level": 1,
+    "code": "av",
+    "order": 100,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Avaric, Avar;  Avarish"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ay",
+    "level": 1,
+    "code": "ay",
+    "order": 110,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Aymara"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/az",
+    "level": 1,
+    "code": "az",
+    "order": 120,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Azerbaijani"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ba",
+    "level": 1,
+    "code": "ba",
+    "order": 130,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Bashkir"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/be",
+    "level": 1,
+    "code": "be",
+    "order": 140,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Belarusian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/bg",
+    "level": 1,
+    "code": "bg",
+    "order": 150,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Bulgarian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/bh",
+    "level": 1,
+    "code": "bh",
+    "order": 160,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Bihari languages"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/bi",
+    "level": 1,
+    "code": "bi",
+    "order": 170,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Bislama"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/bm",
+    "level": 1,
+    "code": "bm",
+    "order": 180,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Bambara"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/bn",
+    "level": 1,
+    "code": "bn",
+    "order": 190,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Bengali; (Bangla)"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/bo",
+    "level": 1,
+    "code": "bo",
+    "order": 200,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Tibetan"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/br",
+    "level": 1,
+    "code": "br",
+    "order": 210,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Breton"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/bs",
+    "level": 1,
+    "code": "bs",
+    "order": 220,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Bosnian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ca",
+    "level": 1,
+    "code": "ca",
+    "order": 230,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Catalan; Valencian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ce",
+    "level": 1,
+    "code": "ce",
+    "order": 240,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Chechen"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ch",
+    "level": 1,
+    "code": "ch",
+    "order": 250,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Chamorro"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/co",
+    "level": 1,
+    "code": "co",
+    "order": 260,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Corsican"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/cr",
+    "level": 1,
+    "code": "cr",
+    "order": 270,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Cree"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/cs",
+    "level": 1,
+    "code": "cs",
+    "order": 280,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Czech"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/cu",
+    "level": 1,
+    "code": "cu",
+    "order": 290,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Church Slavonic;  Church Slavic; Old Slavonic"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/cv",
+    "level": 1,
+    "code": "cv",
+    "order": 300,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Chuvash"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/cy",
+    "level": 1,
+    "code": "cy",
+    "order": 310,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Welsh"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/da",
+    "level": 1,
+    "code": "da",
+    "order": 320,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Danish"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/de",
+    "level": 1,
+    "code": "de",
+    "order": 330,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "German"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/dv",
+    "level": 1,
+    "code": "dv",
+    "order": 340,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Divehi;  Maldivian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/dz",
+    "level": 1,
+    "code": "dz",
+    "order": 350,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Dzongkha; Bhutani; Butanese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ee",
+    "level": 1,
+    "code": "ee",
+    "order": 360,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Ewe"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/el",
+    "level": 1,
+    "code": "el",
+    "order": 370,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Modern Greek (post 1453)"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/en",
+    "level": 1,
+    "code": "en",
+    "order": 380,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "English"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/eo",
+    "level": 1,
+    "code": "eo",
+    "order": 390,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Esperanto"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/es",
+    "level": 1,
+    "code": "es",
+    "order": 400,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Spanish, Castilian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/et",
+    "level": 1,
+    "code": "et",
+    "order": 410,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Estonian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/eu",
+    "level": 1,
+    "code": "eu",
+    "order": 420,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Basque"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/fa",
+    "level": 1,
+    "code": "fa",
+    "order": 430,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Persian, Farsi"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ff",
+    "level": 1,
+    "code": "ff",
+    "order": 440,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Fulah;  Fula; Fulani; Fulfulde; Peul"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/fi",
+    "level": 1,
+    "code": "fi",
+    "order": 450,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Finnish"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/fj",
+    "level": 1,
+    "code": "fj",
+    "order": 460,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Fijian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/fo",
+    "level": 1,
+    "code": "fo",
+    "order": 470,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Faroese; Faeroese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/fr",
+    "level": 1,
+    "code": "fr",
+    "order": 480,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "French"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/fy",
+    "level": 1,
+    "code": "fy",
+    "order": 490,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Western Frisian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ga",
+    "level": 1,
+    "code": "ga",
+    "order": 500,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Irish"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/gd",
+    "level": 1,
+    "code": "gd",
+    "order": 510,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Gaelic;  Scottish Gaelic"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/gl",
+    "level": 1,
+    "code": "gl",
+    "order": 520,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Galician; Gallegan"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/gn",
+    "level": 1,
+    "code": "gn",
+    "order": 530,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Guarani"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/gu",
+    "level": 1,
+    "code": "gu",
+    "order": 540,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Gujarati"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/gv",
+    "level": 1,
+    "code": "gv",
+    "order": 550,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Manx"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ha",
+    "level": 1,
+    "code": "ha",
+    "order": 560,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Hausa"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/he",
+    "level": 1,
+    "code": "he",
+    "order": 570,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Hebrew"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/hi",
+    "level": 1,
+    "code": "hi",
+    "order": 580,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Hindi"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ho",
+    "level": 1,
+    "code": "ho",
+    "order": 590,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Hiri Motu"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/hr",
+    "level": 1,
+    "code": "hr",
+    "order": 600,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Croatian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ht",
+    "level": 1,
+    "code": "ht",
+    "order": 610,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Haitian (Creole)"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/hu",
+    "level": 1,
+    "code": "hu",
+    "order": 620,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Hungarian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/hy",
+    "level": 1,
+    "code": "hy",
+    "order": 630,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Armenian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/hz",
+    "level": 1,
+    "code": "hz",
+    "order": 640,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Herero"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ia",
+    "level": 1,
+    "code": "ia",
+    "order": 650,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Interlingua (Int. Auxiliary Language Association)"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/id",
+    "level": 1,
+    "code": "id",
+    "order": 660,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Indonesian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ie",
+    "level": 1,
+    "code": "ie",
+    "order": 670,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Interlingue; Occidental"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ig",
+    "level": 1,
+    "code": "ig",
+    "order": 680,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Igbo"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ii",
+    "level": 1,
+    "code": "ii",
+    "order": 690,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Sichuan Yi, Nuosu"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ik",
+    "level": 1,
+    "code": "ik",
+    "order": 700,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Inupiaq"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/io",
+    "level": 1,
+    "code": "io",
+    "order": 710,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Ido"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/is",
+    "level": 1,
+    "code": "is",
+    "order": 720,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Icelandic"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/it",
+    "level": 1,
+    "code": "it",
+    "order": 730,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Italian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/iu",
+    "level": 1,
+    "code": "iu",
+    "order": 740,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Inuktitut"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ja",
+    "level": 1,
+    "code": "ja",
+    "order": 750,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Japanese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/jv",
+    "level": 1,
+    "code": "jv",
+    "order": 760,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Javanese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ka",
+    "level": 1,
+    "code": "ka",
+    "order": 770,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Georgian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/kg",
+    "level": 1,
+    "code": "kg",
+    "order": 780,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Kongo"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ki",
+    "level": 1,
+    "code": "ki",
+    "order": 790,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Kikuyu; Gikuyu"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/kj",
+    "level": 1,
+    "code": "kj",
+    "order": 800,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Kuanyama;  Kwanyama"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/kk",
+    "level": 1,
+    "code": "kk",
+    "order": 810,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Kazakh"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/kl",
+    "level": 1,
+    "code": "kl",
+    "order": 820,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Kalaallisut; Greenlandic"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/km",
+    "level": 1,
+    "code": "km",
+    "order": 830,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Central Khmer"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/kn",
+    "level": 1,
+    "code": "kn",
+    "order": 840,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Kannada"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ko",
+    "level": 1,
+    "code": "ko",
+    "order": 850,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Korean"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/kr",
+    "level": 1,
+    "code": "kr",
+    "order": 860,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Kanuri"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ks",
+    "level": 1,
+    "code": "ks",
+    "order": 870,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Kashmiri"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ku",
+    "level": 1,
+    "code": "ku",
+    "order": 880,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Kurdish"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/kv",
+    "level": 1,
+    "code": "kv",
+    "order": 890,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Komi"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/kw",
+    "level": 1,
+    "code": "kw",
+    "order": 900,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Cornish"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ky",
+    "level": 1,
+    "code": "ky",
+    "order": 910,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Kirghiz; Kyrgyz"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/la",
+    "level": 1,
+    "code": "la",
+    "order": 920,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Latin"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/lb",
+    "level": 1,
+    "code": "lb",
+    "order": 930,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Luxembourgish; Letzeburgesch"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/lg",
+    "level": 1,
+    "code": "lg",
+    "order": 940,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Ganda"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ln",
+    "level": 1,
+    "code": "ln",
+    "order": 950,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Lingala"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/li",
+    "level": 1,
+    "code": "li",
+    "order": 960,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Limburgan, Limburger, Limburgish"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/lo",
+    "level": 1,
+    "code": "lo",
+    "order": 970,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Lao"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/lt",
+    "level": 1,
+    "code": "lt",
+    "order": 980,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Lithuanian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/lu",
+    "level": 1,
+    "code": "lu",
+    "order": 990,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Luba-Katanga"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/lv",
+    "level": 1,
+    "code": "lv",
+    "order": 1000,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Latvian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/mg",
+    "level": 1,
+    "code": "mg",
+    "order": 1010,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Malagasy"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/mh",
+    "level": 1,
+    "code": "mh",
+    "order": 1020,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Marshallese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/mi",
+    "level": 1,
+    "code": "mi",
+    "order": 1030,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Maori"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/mk",
+    "level": 1,
+    "code": "mk",
+    "order": 1040,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Macedonian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ml",
+    "level": 1,
+    "code": "ml",
+    "order": 1050,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Malayalam"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/mn",
+    "level": 1,
+    "code": "mn",
+    "order": 1060,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Mongolian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/mr",
+    "level": 1,
+    "code": "mr",
+    "order": 1070,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Marathi"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ms",
+    "level": 1,
+    "code": "ms",
+    "order": 1080,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Malay"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/mt",
+    "level": 1,
+    "code": "mt",
+    "order": 1090,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Maltese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/my",
+    "level": 1,
+    "code": "my",
+    "order": 1100,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Burmese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/na",
+    "level": 1,
+    "code": "na",
+    "order": 1110,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Nauru"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/nb",
+    "level": 1,
+    "code": "nb",
+    "order": 1120,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Norwegian Bokmål"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/nd",
+    "level": 1,
+    "code": "nd",
+    "order": 1130,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "North Ndebele"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ne",
+    "level": 1,
+    "code": "ne",
+    "order": 1140,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Nepali"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ng",
+    "level": 1,
+    "code": "ng",
+    "order": 1150,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Ndonga"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/nl",
+    "level": 1,
+    "code": "nl",
+    "order": 1160,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Dutch"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/nn",
+    "level": 1,
+    "code": "nn",
+    "order": 1170,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Norwegian Nynorsk"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/no",
+    "level": 1,
+    "code": "no",
+    "order": 1180,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Norwegian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/nr",
+    "level": 1,
+    "code": "nr",
+    "order": 1190,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "South Ndebele"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/nv",
+    "level": 1,
+    "code": "nv",
+    "order": 1200,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Navajo;  Navaho"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ny",
+    "level": 1,
+    "code": "ny",
+    "order": 1210,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Chichewa;  Chewa;  Nyanja"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/oc",
+    "level": 1,
+    "code": "oc",
+    "order": 1220,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Occitan (post 1500)"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/oj",
+    "level": 1,
+    "code": "oj",
+    "order": 1230,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Ojibwa"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/om",
+    "level": 1,
+    "code": "om",
+    "order": 1240,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Oromo"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/or",
+    "level": 1,
+    "code": "or",
+    "order": 1250,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Oriya"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/os",
+    "level": 1,
+    "code": "os",
+    "order": 1260,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Ossetian;  Ossetic"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/pa",
+    "level": 1,
+    "code": "pa",
+    "order": 1270,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Panjabi;  Punjabi"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/pi",
+    "level": 1,
+    "code": "pi",
+    "order": 1280,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Pali"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/pl",
+    "level": 1,
+    "code": "pl",
+    "order": 1290,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Polish"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ps",
+    "level": 1,
+    "code": "ps",
+    "order": 1300,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Pushto; Pashto"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/pt",
+    "level": 1,
+    "code": "pt",
+    "order": 1310,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Portuguese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/qu",
+    "level": 1,
+    "code": "qu",
+    "order": 1320,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Quechua"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/rm",
+    "level": 1,
+    "code": "rm",
+    "order": 1330,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Romansh"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/rn",
+    "level": 1,
+    "code": "rn",
+    "order": 1340,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Rundi"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ro",
+    "level": 1,
+    "code": "ro",
+    "order": 1350,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Romanian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ru",
+    "level": 1,
+    "code": "ru",
+    "order": 1360,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Russian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/rw",
+    "level": 1,
+    "code": "rw",
+    "order": 1370,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Kinyarwanda"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sa",
+    "level": 1,
+    "code": "sa",
+    "order": 1380,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Sanskrit"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sc",
+    "level": 1,
+    "code": "sc",
+    "order": 1390,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Sardinian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sd",
+    "level": 1,
+    "code": "sd",
+    "order": 1400,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Sindhi"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/se",
+    "level": 1,
+    "code": "se",
+    "order": 1410,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Northern Sami"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sg",
+    "level": 1,
+    "code": "sg",
+    "order": 1420,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Sango"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/si",
+    "level": 1,
+    "code": "si",
+    "order": 1430,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Sinhala;  Sinhalese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sk",
+    "level": 1,
+    "code": "sk",
+    "order": 1440,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Slovak"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sl",
+    "level": 1,
+    "code": "sl",
+    "order": 1450,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Slovenian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sm",
+    "level": 1,
+    "code": "sm",
+    "order": 1460,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Samoan"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sn",
+    "level": 1,
+    "code": "sn",
+    "order": 1470,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Shona"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/so",
+    "level": 1,
+    "code": "so",
+    "order": 1480,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Somali"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sq",
+    "level": 1,
+    "code": "sq",
+    "order": 1490,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Albanian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sr",
+    "level": 1,
+    "code": "sr",
+    "order": 1500,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Serbian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ss",
+    "level": 1,
+    "code": "ss",
+    "order": 1510,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Swati"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/st",
+    "level": 1,
+    "code": "st",
+    "order": 1520,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Sotho, Southern"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/su",
+    "level": 1,
+    "code": "su",
+    "order": 1530,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Sundanese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sv",
+    "level": 1,
+    "code": "sv",
+    "order": 1540,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Swedish"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/sw",
+    "level": 1,
+    "code": "sw",
+    "order": 1550,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Swahili"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ta",
+    "level": 1,
+    "code": "ta",
+    "order": 1560,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Tamil"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/te",
+    "level": 1,
+    "code": "te",
+    "order": 1570,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Telugu"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/tg",
+    "level": 1,
+    "code": "tg",
+    "order": 1580,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Tajik"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/th",
+    "level": 1,
+    "code": "th",
+    "order": 1590,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Thai"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ti",
+    "level": 1,
+    "code": "ti",
+    "order": 1600,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Tigrinya"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/tk",
+    "level": 1,
+    "code": "tk",
+    "order": 1610,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Turkmen"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/tl",
+    "level": 1,
+    "code": "tl",
+    "order": 1620,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Tagalog"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/tn",
+    "level": 1,
+    "code": "tn",
+    "order": 1630,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Tswana"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/to",
+    "level": 1,
+    "code": "to",
+    "order": 1640,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Tonga (Tonga Islands)"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/tr",
+    "level": 1,
+    "code": "tr",
+    "order": 1650,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Turkish"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ts",
+    "level": 1,
+    "code": "ts",
+    "order": 1660,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Tsonga"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/tt",
+    "level": 1,
+    "code": "tt",
+    "order": 1670,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Tatar"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/tw",
+    "level": 1,
+    "code": "tw",
+    "order": 1680,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Twi"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ty",
+    "level": 1,
+    "code": "ty",
+    "order": 1690,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Tahitian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ug",
+    "level": 1,
+    "code": "ug",
+    "order": 1700,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Uighur; Uyghur"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/uk",
+    "level": 1,
+    "code": "uk",
+    "order": 1710,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Ukrainian"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ur",
+    "level": 1,
+    "code": "ur",
+    "order": 1720,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Urdu"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/uz",
+    "level": 1,
+    "code": "uz",
+    "order": 1730,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Uzbek"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/wa",
+    "level": 1,
+    "code": "wa",
+    "order": 1740,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Walloon"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/ve",
+    "level": 1,
+    "code": "ve",
+    "order": 1750,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Venda"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/vi",
+    "level": 1,
+    "code": "vi",
+    "order": 1760,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Vietnamese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/vo",
+    "level": 1,
+    "code": "vo",
+    "order": 1770,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Volapük"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/wo",
+    "level": 1,
+    "code": "wo",
+    "order": 1780,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Wolof"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/xh",
+    "level": 1,
+    "code": "xh",
+    "order": 1790,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Xhosa"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/yi",
+    "level": 1,
+    "code": "yi",
+    "order": 1800,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Yiddish"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/yo",
+    "level": 1,
+    "code": "yo",
+    "order": 1810,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Yoruba"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/za",
+    "level": 1,
+    "code": "za",
+    "order": 1820,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Zhuang; Chuang"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/zh",
+    "level": 1,
+    "code": "zh",
+    "order": 1830,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Chinese"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "kieli_1_20101115",
+      "internationalRecommendation": true,
+      "nationalRecommendation": false,
+      "classificationName": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "name": "Languages 2010"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "englanti",
+          "lang": "en",
+          "description": "ISO 639-1 (two alphabetical codes)"
+        }
+      ]
+    },
+    "localId": "kieli_1_20101115/zu",
+    "level": 1,
+    "code": "zu",
+    "order": 1840,
+    "modifiedDate": "2021-03-25T07:33:40Z",
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Zulu"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  }
+]
