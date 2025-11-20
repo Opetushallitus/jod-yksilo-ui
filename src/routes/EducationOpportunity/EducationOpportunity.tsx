@@ -4,6 +4,7 @@ import { CounselingCard } from '@/components/CounselingCard/CounselingCard';
 import { EducationJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import type { LoaderData } from '@/routes/EducationOpportunity/loader';
 import type { JakaumaKey } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
@@ -24,6 +25,7 @@ const EducationOpportunity = () => {
     t,
     i18n: { language },
   } = useTranslation();
+  const { isPrd } = useEnvironment();
 
   const duration = React.useMemo(() => {
     if (!kesto?.mediaani || kesto.mediaani === 0) {
@@ -103,7 +105,7 @@ const EducationOpportunity = () => {
             </h3>
             <div className="grid w-full grow grid-cols-2 gap-6">
               {(Object.keys(jakaumat) as JakaumaKey[])
-                .filter((key) => !['osaaminen', 'ammatti'].includes(key))
+                .filter((key) => !['osaaminen', 'ammatti', isPrd ? 'kunta' : undefined].includes(key))
                 .map((key) => (
                   <EducationJakaumaList key={key} name={key} />
                 ))}
