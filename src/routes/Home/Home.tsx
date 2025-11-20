@@ -102,7 +102,7 @@ const Home = () => {
 
   return (
     <main role="main" className="mx-auto w-full max-w-(--breakpoint-xl) bg-white" id="jod-main" data-testid="home-page">
-      <title>{t('osaamispolku')}</title>
+      <title>{t('my-competence-path')}</title>
 
       <img
         src={heroSrc}
