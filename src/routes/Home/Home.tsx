@@ -1,9 +1,8 @@
-import betaPlanImageDesktop from '@/../assets/gra_front_timeline_2.svg';
-import betaPlanImageMobile from '@/../assets/gra_front_timeline_mob_2.svg';
 import heroSrc from '@/../assets/yksilo-hero.jpg';
 import type { components } from '@/api/schema';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
-import { HeroCard, type LinkComponent, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
+import { TimelineImage } from '@/components/TimelineImage';
+import { HeroCard, type LinkComponent, tidyClasses as tc } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -82,7 +81,6 @@ const Home = () => {
     i18n: { language },
   } = useTranslation();
 
-  const { sm } = useMediaQueries();
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
   const firstCardRef = React.useRef<HTMLDivElement>(null);
 
@@ -161,15 +159,7 @@ const Home = () => {
             }}
           />
         </p>
-        <div className="flex justify-center aspect-auto">
-          {
-            <img
-              className="max-w-[372px] sm:max-w-full"
-              src={sm ? betaPlanImageDesktop : betaPlanImageMobile}
-              alt={t('home.beta')}
-            />
-          }
-        </div>
+        <TimelineImage />
         <p className="text-body-lg max-w-[716px]">
           <Trans
             i18nKey="home.beta-content-2"
