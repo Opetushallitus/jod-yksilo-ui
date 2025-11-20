@@ -88,7 +88,7 @@ const ExplorePlanOptions = () => {
               onClick={() => onUpdateResults()}
               icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
               iconSide={isLoading ? 'right' : undefined}
-              data-testid="update-opportunities"
+              data-testid="selectplan-update-opportunities"
             />
           </div>
         </div>
@@ -104,7 +104,7 @@ const ExplorePlanOptions = () => {
         id="selectplan-education-opportunities-list"
         ref={scrollRef}
         className="flex flex-col gap-5 sm:gap-3 mb-8 overflow-y-auto grow"
-        style={{ minHeight: 0 }} // To allow flex-grow overflow scrolling properly inside container
+        style={{ minHeight: 0 }}
         data-testid="selectplan-opportunities-list"
       >
         {koulutusMahdollisuudet.map((mahdollisuus) => {
