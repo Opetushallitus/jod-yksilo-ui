@@ -212,9 +212,11 @@ export const useToolStore = create<ToolState>()(
             }
           }
 
+          const allHavePisteet = sortedMixedMahdollisuudet.every((m) => ehdotukset[m.id]?.pisteet !== undefined);
+
           // Apply final sorting of page items based on selected sorting
           sortedMixedMahdollisuudet.sort((a, b) =>
-            sorting === sortingValues.RELEVANCE
+            sorting === sortingValues.RELEVANCE && allHavePisteet
               ? // sort by scores
                 (ehdotukset[b.id]?.pisteet ?? 0) - (ehdotukset[a.id]?.pisteet ?? 0)
               : // sort by backend provided lexicalOrder
@@ -268,6 +270,8 @@ export const useToolStore = create<ToolState>()(
           }
           ehdotukset = get().mahdollisuusEhdotukset;
 
+          const allHavePisteet = Object.values(ehdotukset).every((meta) => meta.pisteet !== undefined);
+
           return Object.entries(ehdotukset ?? [])
             .filter(([, meta]) => {
               // If filter is empty, return all items
@@ -290,21 +294,21 @@ export const useToolStore = create<ToolState>()(
               );
             })
             .sort(([, metadataA], [, metadataB]) =>
-              sorting === sortingValues.RELEVANCE
+              sorting === sortingValues.RELEVANCE && allHavePisteet
                 ? (metadataB?.pisteet ?? 0) - (metadataA?.pisteet ?? 0)
                 : (metadataA?.aakkosIndeksi ?? 0) - (metadataB?.aakkosIndeksi ?? 0),
             );
         }
       },
 
-      updateEhdotuksetAndTyomahdollisuudet: async (loggedIn: boolean) => {
+      updateEhdotuksetAndTyomahdollisuudet: async (loggedIn: boolean, forceFetchData = false) => {
         const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit, shouldFetchData } = get();
 
         abortController.abort();
         abortController = new AbortController();
         const signal = abortController.signal;
 
-        if (shouldFetchData) {
+        if (shouldFetchData || forceFetchData) {
           await updateEhdotukset(i18n.language, signal);
         }
         await fetchMahdollisuudetPage(signal, 1);
@@ -418,7 +422,7 @@ export const useToolStore = create<ToolState>()(
     {
       name: 'tool-storage',
       storage: createJSONStorage(() => sessionStorage),
-      version: 2,
+      version: 3,
       migrate: () => {
         sessionStorage.removeItem('tool-storage');
       },
