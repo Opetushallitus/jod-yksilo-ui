@@ -39,7 +39,6 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   );
 
   const onSubmit = async () => {
-    console.log('onSubmit');
     setIsSubmitting(true);
     const tavoiteId = tavoite?.id;
     if (!tavoiteId) {
