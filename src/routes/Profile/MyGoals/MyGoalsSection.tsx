@@ -90,24 +90,12 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                 {isOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}
               </button>
 
-              <p className="ds:text-primary-gray">{tavoite.kuvaus?.['fi'] ?? ''}</p>
+              <p className="ds:text-primary-gray">{getLocalizedText(tavoite.kuvaus) ?? ''}</p>
 
               {!isOpen && (
-                <>
-                  {tavoite.suunnitelmat?.length === 0 && (
-                    <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">
-                      {t('profile.my-goals.empty-plans')}
-                    </p>
-                  )}
-                  {tavoite.suunnitelmat?.length === 1 && (
-                    <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">{t('profile.my-goals.plan')}</p>
-                  )}
-                  {tavoite.suunnitelmat && tavoite.suunnitelmat.length > 1 && (
-                    <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">
-                      {tavoite.suunnitelmat.length + ' ' + t('profile.my-goals.plans')}
-                    </p>
-                  )}
-                </>
+                <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">
+                  {t('profile.my-goals.plan', { count: tavoite.suunnitelmat?.length ?? 0 })}
+                </p>
               )}
 
               {isOpen && (
