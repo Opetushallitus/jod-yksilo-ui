@@ -76,9 +76,6 @@
       "logged_in": "Osaamisprofiilin tiedot eivät siirry suoraan tälle sivulle. Voit tuoda ne Osaamisprofiilisi-kohdasta. Kokeile erilaisia yhdistelmiä ja päivitä mahdollisuutesi.",
       "logged_out": "Voit muokata valintojasi Tietojesi yhteenveto -kohdassa. Kokeile erilaisia yhdistelmiä ja päivitä mahdollisuutesi."
     },
-    "info-overview": {
-      "mapped-interests": "Kartoitetut kiinnostukset"
-    },
     "map-your-skills": "Kartoita osaamisesi",
     "my-own-data": {
       "competences": {

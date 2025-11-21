@@ -17,7 +17,10 @@
     "test:e2e": "playwright test",
     "prepare": "husky",
     "translations:export": "node ./scripts/translations/export-translations.js jod-yksilo-ui",
-    "translations:import": "node ./scripts/translations/import-translations.js jod-yksilo-ui"
+    "translations:import": "node ./scripts/translations/import-translations.js jod-yksilo-ui",
+    "translations:analyze": "node ./scripts/translations/analyze-translations.js",
+    "translations:check": "node ./scripts/translations/analyze-translations.js --ci --check-langs fi,sv",
+    "translations:report": "node ./scripts/translations/analyze-translations.js --list-unused --list-missing fi,sv"
   },
   "dependencies": {
     "@hookform/error-message": "^2.0.1",

@@ -95,7 +95,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
   };
 
   const doPrint = () => {
-    window.print();
+    globalThis.print();
   };
 
   const filterDevSections = React.useCallback(
@@ -105,9 +105,17 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
 
   const typeText = React.useMemo(() => {
     if (tyyppi === 'TYOMAHDOLLISUUS') {
-      return t(`opportunity-type.work.${jobData.aineisto ?? 'TMT'}`);
+      if (jobData.aineisto === 'AMMATTITIETO') {
+        return t('opportunity-type.work.AMMATTITIETO');
+      } else {
+        return t('opportunity-type.work.TMT');
+      }
     } else if (tyyppi === 'KOULUTUSMAHDOLLISUUS') {
-      return t(`opportunity-type.education.${educationData.tyyppi}`);
+      if (educationData.tyyppi === 'TUTKINTO') {
+        return t('opportunity-type.education.TUTKINTO');
+      } else {
+        return t('opportunity-type.education.EI_TUTKINTO');
+      }
     } else {
       return null;
     }

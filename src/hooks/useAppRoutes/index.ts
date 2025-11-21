@@ -58,16 +58,5 @@ export const useAppRoutes = () => {
     },
   ];
 
-  const toolRoutes = [
-    {
-      name: t('menus.tool-navigation.competences'),
-      path: t('slugs.tool.competences'),
-    },
-    {
-      name: t('menus.tool-navigation.interests'),
-      path: t('slugs.tool.interests'),
-    },
-  ];
-
-  return { profileRoutes, toolRoutes };
+  return { profileRoutes };
 };

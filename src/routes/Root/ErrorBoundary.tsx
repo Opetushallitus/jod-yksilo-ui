@@ -2,16 +2,12 @@ import { useLoginLink } from '@/hooks/useLoginLink';
 import { Button } from '@jod/design-system';
 import { JodHome, JodUser } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
-import { useRouteError } from 'react-router';
 
 const ErrorBoundary = () => {
   const { t, i18n } = useTranslation();
   const loginLink = useLoginLink();
-  const error = useRouteError() as Error;
   const title = t('error-boundary.title');
-  const message =
-    (error.message && i18n.exists(`error-boundary.${error.message}`) && t(`error-boundary.${error.message}`)) ||
-    t('error-boundary.unexpected');
+  const message = t('error-boundary.unexpected');
 
   return (
     <main
