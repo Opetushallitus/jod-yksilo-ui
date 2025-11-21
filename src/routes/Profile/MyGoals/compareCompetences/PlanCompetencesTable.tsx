@@ -2,6 +2,7 @@ import { client } from '@/api/client.ts';
 import { osaamiset } from '@/api/osaamiset.ts';
 import { components } from '@/api/schema';
 import { planLetter } from '@/routes/Profile/MyGoals/planLetterUtil.ts';
+import { isDefined } from '@/utils';
 import { cx } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +12,6 @@ const ROW_LIMIT = 10;
 export type PlanWithCustomKey = components['schemas']['PolunSuunnitelmaDto'] & { displayKey: string };
 interface PlanCompetencesTableProps {
   goal: components['schemas']['TavoiteDto'];
-  rows: PlanCompetencesTableRowData[];
 }
 
 export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
@@ -27,10 +27,13 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
       return { ...s, displayKey: key } as PlanWithCustomKey;
     });
   }, [goal]);
-  const [vaaditutOsaamiset, setOsaamiset] = React.useState([]);
+  const [vaaditutOsaamiset, setOsaamiset] = React.useState<PlanCompetencesTableRowData[]>([]);
   React.useEffect(() => {
     const fetchOsaamiset = async () => {
       const { data } = await client.GET('/api/profiili/osaamiset');
+      if (!data) {
+        return;
+      }
       const omatOsaamisetUris = data.map((o) => o?.osaaminen?.uri);
       const response = await osaamiset.combine(
         goal?.osaamiset,
@@ -39,7 +42,7 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
           ...osaaminen,
           profiili: omatOsaamisetUris.includes(osaaminen.uri),
           // eslint-disable-next-line sonarjs/no-nested-functions
-          plans: plans.map((p) => p.osaamiset?.includes(osaaminen.uri)),
+          plans: plans.map((p) => p.osaamiset?.includes(osaaminen.uri)).filter(isDefined),
         }),
       );
       setOsaamiset(response);

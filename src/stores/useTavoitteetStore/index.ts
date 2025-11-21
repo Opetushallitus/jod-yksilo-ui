@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService.ts';
 import { components } from '@/api/schema';
 import { TypedMahdollisuus } from '@/routes/types';
+import { isDefined } from '@/utils';
 import { create } from 'zustand';
 
 export type Tavoite = components['schemas']['TavoiteDto'];
@@ -41,9 +42,7 @@ export const useTavoitteetStore = create<TavoitteetState>()((set, get) => ({
     });
     const mapToIds = (pm: Tavoite) => pm.mahdollisuusId;
     const tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(
-      get()
-        .tavoitteet.map(mapToIds)
-        .filter((id): id is string => id != undefined),
+      get().tavoitteet.map(mapToIds).filter(isDefined),
     );
     get().setMahdollisuusDetails(tyomahdollisuudetDetails);
   },
