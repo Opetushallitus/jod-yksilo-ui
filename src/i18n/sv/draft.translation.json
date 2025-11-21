@@ -28,8 +28,8 @@
       "add-custom-plan-description": "Skapa en egen utbildningsplan genom att först ge den ett namn och en kort beskrivning. Välj sedan de kompetenser du vill uppnå med planen.",
       "add-custom-plan-header": "Skapa egen plan",
       "add-favorites-to-goals": "Lägg till favorit som mål",
-      "add-modal-title": "Skapa nytt mål",
       "add-modal-description": "Ge målet ett namn och en beskrivning. Namnet visas i listorna och i beskrivningen kan du beskriva mer utförligt vad du vill uppnå och eventuella begränsningar.",
+      "add-modal-title": "Skapa nytt mål",
       "add-new-plan-description": "Väg olika utbildningsmöjligheter och välj ett eller flera alternativ som alternativa planer mot ditt mål",
       "add-new-plan-for-goal": "Lägg till plan",
       "add-new-plan-header": "Skapa ny plan",
@@ -52,9 +52,9 @@
       "my-plan-towards-goal": "Planalternativ",
       "no-chosen-competences": "Inga valda kompetenser",
       "no-favorites-selected": "Du har inte lagt till några arbetsmöjligheter som favoriter eller så har de redan lagts till som mål.",
-      "plan_zero": "Inga valda planer",
-      "plan_one": "1 plan",
       "plan": "{{count}} planer",
+      "plan_one": "1 plan",
+      "plan_zero": "Inga valda planer",
       "remove-competence-description": "Ta bort kompetens från x-ikonen",
       "remove-from-goals": "Ta bort från mål",
       "remove-from-plans": "Ta bort plan",
@@ -88,6 +88,7 @@
       "competences": {
         "import": {
           "confirm-description": "Importera kompetenser från din kompetensprofil till din översikt över data. Välj de kompetenser du vill ha från listan nedan.",
+          "confirm-title": "Importera dina kompetenser från din kompetensprofil?",
           "failure-toast": "Importen misslyckades — försök igen",
           "success-toast": "Data har importerats till översikten"
         }
