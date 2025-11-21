@@ -81,7 +81,7 @@
         }
       },
       "export": {
-        "confirm-description": "Valitse mitkä tiedot haluat viedä osaamisprofiiliisi. Löydät ne jatkossa osaamisprofiilista kohdista “Muu osaaminen” ja “Kiinnostukseni”.",
+        "confirm-description": "Vie kaikki tiedot osaamisprofiiliisi. Löydät ne jatkossa osaamisprofiilista kohdista “Muu osaaminen” ja “Kiinnostukseni”.",
         "confirm-title": "Tietojen vienti profiiliin"
       }
     },
