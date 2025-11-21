@@ -33,44 +33,43 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
           : t('education-history-import.result-modal.failure')
       }
       open={isOpen}
+      fullWidthContent
       content={
         <div
           id={modalId}
-          className="fixed inset-0 flex items-center justify-center overflow-y-hidden pointer-events-none"
+          className="flex flex-col items-center justify-center pointer-events-auto px-5 absolute top-1/2 left-1/2 w-full -translate-1/2"
         >
-          <div className="flex flex-col items-center pointer-events-auto px-5">
-            {isSuccess ? (
-              <div className="flex flex-col items-start w-full">
-                <div className="w-full flex justify-center mb-4">
-                  <JodCheckCircle size={20} className="text-heading-1 text-success" />
-                </div>
-                <div className="mx-8 w-full flex flex-col">
-                  <ModalHeader text={t('education-history-import.result-modal.success')} />
-                  <p className="max-w-full break-words whitespace-pre-line">
-                    {t('education-history-import.result-modal.success-osaamiset-info')}
-                  </p>
-                  <a
-                    href={`/${language}/${t('slugs.ai-usage')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-button-md mt-4 text-accent hover:underline"
-                  >
-                    <div className="flex items-center gap-2">
-                      {t('education-history-import.result-modal.success-osaamiset-link-about-ai')}
-                      <JodArrowRight />
-                    </div>
-                  </a>
-                </div>
+          {isSuccess ? (
+            <div className="flex flex-col items-start">
+              <div className="w-full flex justify-center mb-4">
+                <JodCheckCircle size={20} className="text-heading-1 text-success" />
               </div>
-            ) : (
-              <>
-                <JodClose className="text-heading-1 text-alert-text mb-4" />
-                <h3 className="mb-5 sm:text-heading-2 text-heading-2-mobile">
-                  {errorText ?? t('education-history-import.result-modal.failure')}
-                </h3>
-              </>
-            )}
-          </div>
+              <div className="mx-8 w-full flex flex-col">
+                <ModalHeader text={t('education-history-import.result-modal.success')} />
+                <p className="max-w-full break-words whitespace-pre-line">
+                  {t('education-history-import.result-modal.success-osaamiset-info')}
+                </p>
+                <a
+                  href={`/${language}/${t('slugs.ai-usage')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-button-md mt-4 text-accent hover:underline"
+                >
+                  <div className="flex items-center gap-2">
+                    {t('education-history-import.result-modal.success-osaamiset-link-about-ai')}
+                    <JodArrowRight />
+                  </div>
+                </a>
+              </div>
+            </div>
+          ) : (
+            <>
+              <JodClose className="text-heading-1 text-alert-text mb-4" />
+              <h3 className="mb-5 sm:text-heading-2 text-heading-2-mobile">
+                {errorText ?? t('education-history-import.result-modal.failure')}
+              </h3>
+            </>
+          )}
         </div>
       }
       footer={
