@@ -20,8 +20,6 @@
   "n-education-opportunities": "{{count}} / {{total}} education opportunities",
   "n-job-opportunities": "{{count}} / {{total}} job opportunities",
   "n-months-short": "{{count}} mo",
-  "n-months_one": "{{count}} month",
-  "n-months_other": "{{count}} months",
   "n-years_one": "{{count}} year",
   "n-years_other": "{{count}} years",
   "no-match": {
