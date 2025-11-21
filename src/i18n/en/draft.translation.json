@@ -82,5 +82,8 @@
     "tools": {
       "service-directory": "Guidance and counseling services"
     }
+  },
+  "tooltip": {
+    "info": "Guide"
   }
 }
