@@ -7,7 +7,7 @@ export const useAppRoutes = () => {
 
   const profileRoutes = [
     {
-      name: t('profile.front.title'),
+      name: t('profile.index'),
       path: t('slugs.profile.front'),
       authRequired: true,
     },

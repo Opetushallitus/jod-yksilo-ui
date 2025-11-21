@@ -35,7 +35,7 @@ const ProfileFront = () => {
           <ProfileNavigationList collapsed />
         </div>
       )}
-      <title>{t('profile.front.title')}</title>
+      <title>{t('profile.index')}</title>
       <IconHeading
         icon={<JodUser />}
         title={t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
