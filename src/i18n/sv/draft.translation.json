@@ -94,7 +94,7 @@
         }
       },
       "export": {
-        "confirm-description": "Välj de uppgifter du vill exportera till din kompetensprofil. Du hittar dem senare i kompetensprofilen under 'Övriga kompetenser' och 'Mina intressen'.",
+        "confirm-description": "Exportera all information till din kompetensprofil. Du hittar dem senare i kompetensprofilen under 'Övriga kompetenser' och 'Mina intressen'.",
         "confirm-title": "Exportera data till profil"
       }
     },
