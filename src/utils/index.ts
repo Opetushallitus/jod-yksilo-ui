@@ -29,12 +29,20 @@ export const formatDate = (date: Date, type: 'short' | 'medium' = 'short') => {
 export const getLocalizedText = (
   entry?: components['schemas']['LokalisoituTeksti'] | Record<string, string | undefined>,
   lang = i18n.language,
-) =>
-  entry?.[lang]?.trim() ??
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  entry?.[i18n.options.fallbackLng]?.trim() ??
-  '';
+) => {
+  if (!entry) return '';
+
+  const primary = entry[lang]?.trim();
+  if (primary) return primary;
+
+  const fallbacks = Array.isArray(i18n.options.fallbackLng) ? i18n.options.fallbackLng : [i18n.options.fallbackLng];
+  for (const fallbackLang of fallbacks) {
+    const fallbackValue = entry[fallbackLang]?.trim();
+    if (fallbackValue) return fallbackValue;
+  }
+
+  return '';
+};
 
 type NestedKeyOf<ObjectType extends object> = {
   [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
