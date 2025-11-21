@@ -98,7 +98,7 @@ export const OsaamisSuosittelija = ({
     };
 
     // Do not fetch if the input is empty
-    if (debouncedTaitosi?.length > 0) {
+    if (debouncedTaitosi?.length > 2) {
       void fetchCompetences(debouncedTaitosi);
     } else {
       setEhdotetutOsaamiset([]);
