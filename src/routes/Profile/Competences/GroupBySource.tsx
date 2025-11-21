@@ -27,7 +27,7 @@ export const GroupBySource = ({
   } = useTranslation();
 
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
-  const competencesSlug = 'slugs.profile.competences';
+  const competencesSlug = t('slugs.profile.competences');
 
   // Remove duplicate osaamiset per lähdetyyppi
   const nonDuplicateOsaamiset = React.useMemo(() => {
@@ -36,13 +36,13 @@ export const GroupBySource = ({
 
   const links = React.useMemo(
     () => ({
-      TOIMENKUVA: generateProfileLink([competencesSlug, 'slugs.profile.work-history'], data, language, t).to,
-      KOULUTUS: generateProfileLink([competencesSlug, 'slugs.profile.education-history'], data, language, t).to,
-      PATEVYYS: generateProfileLink([competencesSlug, 'slugs.profile.free-time-activities'], data, language, t).to,
-      MUU_OSAAMINEN: generateProfileLink([competencesSlug, 'slugs.profile.something-else'], data, language, t).to,
+      TOIMENKUVA: generateProfileLink([competencesSlug, t('slugs.profile.work-history')], data, language, t).to,
+      KOULUTUS: generateProfileLink([competencesSlug, t('slugs.profile.education-history')], data, language, t).to,
+      PATEVYYS: generateProfileLink([competencesSlug, t('slugs.profile.free-time-activities')], data, language, t).to,
+      MUU_OSAAMINEN: generateProfileLink([competencesSlug, t('slugs.profile.something-else')], data, language, t).to,
       KIINNOSTUS: undefined,
     }),
-    [data, language, t],
+    [competencesSlug, data, language, t],
   );
 
   const localizedMuutOsaamisetVapaateksti = getLocalizedText(muutOsaamisetVapaateksti);

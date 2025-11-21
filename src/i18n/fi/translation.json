@@ -397,12 +397,6 @@
   "login-to-service": "Kirjaudu sisään",
   "logout": "Kirjaudu ulos",
   "menu": "Valikko",
-  "menus": {
-    "tool-navigation": {
-      "competences": "Mitä minä osaan",
-      "interests": "Mikä minua kiinnostaa"
-    }
-  },
   "more-actions": "Lisää valintoja",
   "move-to-service": "Siirry palveluun",
   "my-competence-path": "Osaamispolkuni",

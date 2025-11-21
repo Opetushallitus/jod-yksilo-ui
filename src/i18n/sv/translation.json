@@ -398,12 +398,6 @@
   "login-to-service": "Logga in",
   "logout": "Logga ut",
   "menu": "Meny",
-  "menus": {
-    "tool-navigation": {
-      "competences": "Vad jag kan",
-      "interests": "Vad jag är intresserad av"
-    }
-  },
   "more-actions": "Lägg till alternativ",
   "move-to-service": "Öppna tjänsten",
   "my-competence-path": "Min kompetensstig",

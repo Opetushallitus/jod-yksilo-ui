@@ -32,27 +32,27 @@ const AdditionalSupport = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const competencesSlug = 'slugs.profile.competences';
+  const competencesSlug = t('slugs.profile.competences');
 
   const { lng } = useParams();
   const educationLink = React.useMemo(
-    () => generateProfileLink([competencesSlug, 'slugs.profile.education-history'], data, language, t),
-    [data, language, t],
+    () => generateProfileLink([competencesSlug, t('slugs.profile.education-history')], data, language, t),
+    [competencesSlug, data, language, t],
   );
   const workLink = React.useMemo(
-    () => generateProfileLink([competencesSlug, 'slugs.profile.work-history'], data, language, t),
-    [data, language, t],
+    () => generateProfileLink([competencesSlug, t('slugs.profile.work-history')], data, language, t),
+    [competencesSlug, data, language, t],
   );
   const freeTimeLink = React.useMemo(
-    () => generateProfileLink([competencesSlug, 'slugs.profile.free-time-activities'], data, language, t),
-    [data, language, t],
+    () => generateProfileLink([competencesSlug, t('slugs.profile.free-time-activities')], data, language, t),
+    [competencesSlug, data, language, t],
   );
   const somethingElseLink = React.useMemo(
-    () => generateProfileLink([competencesSlug, 'slugs.profile.something-else'], data, language, t),
-    [data, language, t],
+    () => generateProfileLink([competencesSlug, t('slugs.profile.something-else')], data, language, t),
+    [competencesSlug, data, language, t],
   );
   const interestsLink = React.useMemo(
-    () => generateProfileLink(['slugs.profile.interests'], data, language, t),
+    () => generateProfileLink([t('slugs.profile.interests')], data, language, t),
     [data, language, t],
   );
 

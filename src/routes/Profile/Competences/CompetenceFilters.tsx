@@ -89,6 +89,15 @@ export const CompetenceFilters = ({
     setSelectedFilters(newFilter);
   };
 
+  const ariaLabels = React.useMemo(
+    () => ({
+      TOIMENKUVA: t('types.competence.TOIMENKUVA'),
+      KOULUTUS: t('types.competence.KOULUTUS'),
+      PATEVYYS: t('types.competence.PATEVYYS'),
+    }),
+    [t],
+  );
+
   return (
     // Height = viewport height - header and footer heights - padding
     <ul className="flex flex-col gap-y-3 py-4 max-h-[calc(100vh-296px-64px)] overflow-y-auto">
@@ -102,7 +111,7 @@ export const CompetenceFilters = ({
                   title={
                     <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
                   }
-                  ariaLabel={t(`types.competence.${key}`)}
+                  ariaLabel={ariaLabels[key]}
                 >
                   <ul className="gap-y-3 flex-col flex">
                     {selectedFilters[key]?.map((item, idx) => (

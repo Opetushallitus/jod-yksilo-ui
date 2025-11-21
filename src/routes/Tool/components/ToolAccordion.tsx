@@ -1,6 +1,5 @@
 import { Accordion } from '@jod/design-system';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 const ToolAccordion = ({
   title,
@@ -19,7 +18,6 @@ const ToolAccordion = ({
   isOpen?: boolean;
   testId?: string;
 }) => {
-  const { t } = useTranslation();
   const [internalIsOpen, setInternalIsOpen] = React.useState(false);
   const isControlled = controlledIsOpen !== undefined;
   const isOpen = isControlled ? controlledIsOpen : internalIsOpen;
@@ -39,10 +37,10 @@ const ToolAccordion = ({
         setIsOpen={setIsOpen}
         title={
           <>
-            <span className="flex flex-col text-left cursor-pointer w-full text-heading-3">{t(title)}</span>
+            <span className="flex flex-col text-left cursor-pointer w-full text-heading-3">{title}</span>
             {!isOpen && (
               <span className="font-arial text-body-sm text-secondary-gray text-pretty hyphens-auto">
-                {t(description)}
+                {description}
               </span>
             )}
           </>

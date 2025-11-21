@@ -30,7 +30,7 @@ export const generateProfileLink = (
   language: string,
   t: (key: string) => string,
 ): ProfileLink => {
-  const profilePageSlug = profilePageSlugs.map((slug) => t(slug)).join('/');
+  const profilePageSlug = profilePageSlugs.join('/');
   const callbackURL = `/${language}/${t('slugs.profile.index')}/${profilePageSlug}`;
   const landingPageURL = `/${language}/${t('slugs.profile.login')}`;
 
