@@ -14,8 +14,6 @@
   "competences-identify-failed": "AI-kompetensidentifiering misslyckades, lägg till kompetenser genom att redigera utbildningen manuellt.",
   "filters": "Filter",
   "n-months-short": "{{count}} mån",
-  "n-months_one": "{{count}} månad",
-  "n-months_other": "{{count}} månader",
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
   "no-match": {
@@ -66,8 +64,7 @@
       "remove-from-plans": "Ta bort plan",
       "required-competences": "Kompetenser som krävs för målet",
       "selected-competences": "Valda kompetenser i egen plan",
-      "set-to-goal": "Sätt som mål",
-      "update-modal-title": "Redigera mål"
+      "set-to-goal": "Sätt som mål"
     },
     "preferences": {
       "list-2-item-1": "Spara karriär- och utbildningsmöjligheter som intresserar dig som favoriter",
