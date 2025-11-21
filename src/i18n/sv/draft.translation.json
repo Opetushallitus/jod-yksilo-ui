@@ -28,17 +28,15 @@
       "add-custom-plan-description": "Skapa en egen utbildningsplan genom att först ge den ett namn och en kort beskrivning. Välj sedan de kompetenser du vill uppnå med planen.",
       "add-custom-plan-header": "Skapa egen plan",
       "add-favorites-to-goals": "Lägg till favorit som mål",
-      "add-modal-description": "Ge målet ett namn och en beskrivning. Namnet visas i listorna och i beskrivningen kan du beskriva mer utförligt vad du vill uppnå och eventuella begränsningar.",
       "add-modal-title": "Skapa nytt mål",
+      "add-modal-description": "Ge målet ett namn och en beskrivning. Namnet visas i listorna och i beskrivningen kan du beskriva mer utförligt vad du vill uppnå och eventuella begränsningar.",
       "add-new-plan-description": "Väg olika utbildningsmöjligheter och välj ett eller flera alternativ som alternativa planer mot ditt mål",
       "add-new-plan-for-goal": "Lägg till plan",
       "add-new-plan-header": "Skapa ny plan",
       "choose-as-plan": "Välj som plan",
       "choose-favorite-description": "Välj från dina favoriter ett yrke eller en arbetsmöjlighet som du vill sätta som mål",
       "choose-favorite-header": "Välj mål från favoriter",
-      "chosen-competences": "Valda kompetenser i egen plan",
       "competences": "Kompetenser",
-      "competences-for-goal": "Kompetenser som krävs för målet",
       "custom-plan-competences-description": "Välj de kompetenser som krävs för målet och som du planerar att uppnå med din egen utbildningsplan.",
       "custom-plan-description": "Egen plans beskrivning",
       "custom-plan-name": "Egen plans namn",
@@ -48,9 +46,7 @@
       "delete-plan-description": "Vill du verkligen ta bort planen \"{{name}}\" från målet?",
       "delete-plan-title": "Ta bort plan",
       "description": "På sidan Mina mål kan du ange utvecklingsmål relaterade till karriär eller utbildning. Målet baseras på dina valda favoriter, såsom ett intressant yrke eller en arbetsmöjlighet. För att nå målet kan du välja lämpliga utbildningsalternativ eller skapa en egen helhet.",
-
       "goal-description": "Målbeskrivning",
-      "goal-description-help": "Fundera på vad du vill ha ut av livet och i vilken riktning du vill utvecklas. Ett utbildnings- eller karriärmål kan vara ett specifikt yrke, en prestation eller något mer obestämt, som att hjälpa andra eller kreativt arbete. Målen hjälper till att styra din karriär. De leder dina insatser och beslut mot ditt mål och hjälper dig att hålla dig motiverad och fokuserad.",
       "goal-name": "Målnamn",
       "modify-goal": "Redigera mål",
       "my-plan-towards-goal": "Planalternativ",
@@ -64,7 +60,8 @@
       "remove-from-plans": "Ta bort plan",
       "required-competences": "Kompetenser som krävs för målet",
       "selected-competences": "Valda kompetenser i egen plan",
-      "set-to-goal": "Sätt som mål"
+      "set-to-goal": "Sätt som mål",
+      "update-modal-title": "Redigera målet"
     },
     "preferences": {
       "list-2-item-1": "Spara karriär- och utbildningsmöjligheter som intresserar dig som favoriter",

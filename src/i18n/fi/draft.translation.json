@@ -28,8 +28,8 @@
       "add-custom-plan-description": "Luo oma koulutussuunnitelma antamalla sille ensin nimi ja lyhyt kuvaus. Sen jälkeen valitse osaamiset, jotka haluat saavuttaa suunnitelman avulla.",
       "add-custom-plan-header": "Luo oma suunnitelma",
       "add-favorites-to-goals": "Lisää tavoite",
-      "add-modal-description": "Anna tavoitteelle nimi ja kuvaus. Nimi näkyy listoissa, ja kuvauksessa voit sanoittaa laajemmin, mitä haluat saavuttaa sekä mahdolliset rajaukset.",
       "add-modal-title": "Luo uusi tavoite",
+      "add-modal-description": "Anna tavoitteelle nimi ja kuvaus. Nimi näkyy listoissa, ja kuvauksessa voit sanoittaa laajemmin, mitä haluat saavuttaa sekä mahdolliset rajaukset.",
       "add-new-plan-description": "Punnitse eri koulutusmahdollisuuksia ja valitse yksi tai useampi vaihtoehtoiseksi suunnitelmaksi kohti tavoitettasi",
       "add-new-plan-for-goal": "Lisää suunnitelma",
       "add-new-plan-header": "Luo uusi suunnitelma",
@@ -60,7 +60,8 @@
       "remove-from-plans": "Poista suunnitelma",
       "required-competences": "Tavoitteeseen vaaditut osaamiset",
       "selected-competences": "Omaan suunnitelmaan valitut osaamiset",
-      "set-to-goal": "Aseta tavoitteeksi"
+      "set-to-goal": "Aseta tavoitteeksi",
+      "update-modal-title": "Muokkaa tavoitetta"
     }
   },
   "tool": {
