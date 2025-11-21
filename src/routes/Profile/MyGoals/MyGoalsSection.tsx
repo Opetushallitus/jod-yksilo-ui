@@ -13,7 +13,7 @@ import { planLetter } from '@/routes/Profile/MyGoals/planLetterUtil.ts';
 import { PlanList } from '@/routes/Profile/MyGoals/PlanList.tsx';
 import { getTypeSlug } from '@/routes/Profile/utils';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, initializeLocalizedText } from '@/utils';
 import { Button } from '@jod/design-system';
 import { JodCaretDown, JodCaretUp } from '@jod/design-system/icons';
 import React from 'react';
@@ -91,28 +91,16 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                 aria-controls={`accordion-content-${i}`}
                 id={`accordion-header-${i}`}
               >
-                <span>{getLocalizedText(tavoite.tavoite)}</span>
+                <span>{getLocalizedText(initializeLocalizedText(tavoite.tavoite))}</span>
                 {isOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}
               </button>
 
-              <p className="ds:text-primary-gray">{tavoite.kuvaus?.['fi'] ?? ''}</p>
+              <p className="ds:text-primary-gray">{getLocalizedText(initializeLocalizedText(tavoite.kuvaus)) ?? ''}</p>
 
               {!isOpen && (
-                <>
-                  {tavoite.suunnitelmat?.length === 0 && (
-                    <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">
-                      {t('profile.my-goals.empty-plans')}
-                    </p>
-                  )}
-                  {tavoite.suunnitelmat?.length === 1 && (
-                    <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">{t('profile.my-goals.plan')}</p>
-                  )}
-                  {tavoite.suunnitelmat && tavoite.suunnitelmat.length > 1 && (
-                    <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">
-                      {tavoite.suunnitelmat.length + ' ' + t('profile.my-goals.plans')}
-                    </p>
-                  )}
-                </>
+                <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">
+                  {t('profile.my-goals.plan', { count: tavoite.suunnitelmat?.length ?? 0 })}
+                </p>
               )}
 
               {isOpen && (

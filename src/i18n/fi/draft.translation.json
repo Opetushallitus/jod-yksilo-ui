@@ -28,16 +28,14 @@
       "add-custom-plan-description": "Luo oma koulutussuunnitelma antamalla sille ensin nimi ja lyhyt kuvaus. Sen jälkeen valitse osaamiset, jotka haluat saavuttaa suunnitelman avulla.",
       "add-custom-plan-header": "Luo oma suunnitelma",
       "add-favorites-to-goals": "Lisää tavoite",
-      "add-modal-description": "Anna tavoitteelle nimi ja kuvaus. Nimi näkyy listoissa, ja kuvauksessa voit sanoittaa laajemmin, mitä haluat saavuttaa sekä mahdolliset rajaukset.",
       "add-modal-title": "Luo uusi tavoite",
+      "add-modal-description": "Anna tavoitteelle nimi ja kuvaus. Nimi näkyy listoissa, ja kuvauksessa voit sanoittaa laajemmin, mitä haluat saavuttaa sekä mahdolliset rajaukset.",
       "add-new-plan-description": "Punnitse eri koulutusmahdollisuuksia ja valitse yksi tai useampi vaihtoehtoiseksi suunnitelmaksi kohti tavoitettasi",
       "add-new-plan-for-goal": "Lisää suunnitelma",
       "add-new-plan-header": "Luo uusi suunnitelma",
       "choose-as-plan": "Valitse suunnitelmaksi",
       "choose-favorite-description": "Valitse suosikeistasi ammatti tai työmahdollisuus, jonka haluat asettaa tavoitteeksi",
       "choose-favorite-header": "Valitse tavoite suosikeista",
-      "chosen-competences": "Omaan suunnitelmaan valitut osaamiset",
-      "competence-compare": "Osaamisvertailu",
       "competences": "Osaamista",
       "custom-plan-competences-description": "Valitse tavoitteeseen vaadittavista osaamisista ne, jotka aiot saavuttaa oman koulutussuunnitelmasi avulla.",
       "custom-plan-description": "Oman suunnitelman kuvaus",
@@ -48,22 +46,22 @@
       "delete-plan-description": "Haluatko varmasti poistaa tavoitteelta suunnitelman \"{{name}}\"?",
       "delete-plan-title": "Poista suunnitelma",
       "description": "Tavoitteeni-sivulla voit asettaa uraan tai kouluttautumiseen liittyviä kehittymistavoitteita. Tavoite perustuu valitsemiisi suosikkeihin, kuten kiinnostavaan ammattiin tai työmahdollisuuteen. Tavoitetta kohti pääsemiseksi voit valita siihen sopivia koulutusvaihtoehtoja tai muodostaa oman kokonaisuuden.",
-      "empty-plans": "Ei valittuja suunnitelmia",
       "goal-description": "Tavoitteen kuvaus",
       "goal-name": "Tavoitteen nimi",
       "modify-goal": "Muokkaa tavoitetta",
       "my-plan-towards-goal": "Suunnitelmavaihtoehdot",
       "no-chosen-competences": "Ei valittuja osaamisia",
       "no-favorites-selected": "Et ole lisännyt yhtään työmahdollisuutta suosikiksi, tai ne on jo lisätty tavoitteeksi.",
-      "own-competences": "Omat taidot",
-      "plan": "1 suunnitelma",
-      "plans": " suunnitelmaa",
+      "plan_zero": "Ei valittuja suunnitelmia",
+      "plan_one": "1 suunnitelma",
+      "plan_other": "{{count}} suunnitelmaa",
       "remove-competence-description": "Poista osaaminen x-merkistä",
       "remove-from-goals": "Poista tavoitteista",
       "remove-from-plans": "Poista suunnitelma",
       "required-competences": "Tavoitteeseen vaaditut osaamiset",
       "selected-competences": "Omaan suunnitelmaan valitut osaamiset",
-      "set-to-goal": "Aseta tavoitteeksi"
+      "set-to-goal": "Aseta tavoitteeksi",
+      "update-modal-title": "Muokkaa tavoitetta"
     }
   },
   "tool": {
@@ -83,7 +81,7 @@
         }
       },
       "export": {
-        "confirm-description": "Valitse mitkä tiedot haluat viedä osaamisprofiiliisi. Löydät ne jatkossa osaamisprofiilista kohdista “Muu osaaminen” ja “Kiinnostukseni”.",
+        "confirm-description": "Vie kaikki tiedot osaamisprofiiliisi. Löydät ne jatkossa osaamisprofiilista kohdista “Muu osaaminen” ja “Kiinnostukseni”.",
         "confirm-title": "Tietojen vienti profiiliin"
       }
     },

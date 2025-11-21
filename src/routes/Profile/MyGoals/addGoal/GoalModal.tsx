@@ -40,7 +40,7 @@ type GoalModalProps = AddGoalModalProps | UpdateGoalModalProps;
 export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
   const { t } = useTranslation();
   const isUpdateMode = mode === 'UPDATE';
-  const headerText = t(isUpdateMode ? 'profile.my-goals.update-modal-title' : 'profile.my-goals.add-modal-title');
+  const headerText = isUpdateMode ? t('profile.my-goals.update-modal-title') : t('profile.my-goals.add-modal-title');
   const initialGoalName = getLocalizedText(tavoite?.tavoite);
   const initialGoalDescription = getLocalizedText(tavoite?.kuvaus);
   const initialSelectedMahdollisuusId = tavoite?.mahdollisuusId ?? null;
