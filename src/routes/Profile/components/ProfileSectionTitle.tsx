@@ -5,6 +5,7 @@ import {
   JodCheckmarkAlt,
   JodFavorite,
   JodFavs,
+  JodFlag,
   JodInterests,
   JodOther,
   JodSkills,
@@ -21,7 +22,7 @@ export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType;
     KIINNOSTUS: <JodFavs />,
     SUOSIKKI: <JodFavorite />,
     OSAAMISENI: <JodCheckmarkAlt />,
-    TAVOITTEENI: null,
+    TAVOITTEENI: <JodFlag />,
     ASETUKSENI: null,
   };
 

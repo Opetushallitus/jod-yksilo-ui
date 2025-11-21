@@ -183,3 +183,20 @@ export const initializeLocalizedText = (
   }
   return item;
 };
+
+export const stringToLocalizedText = (
+  item?: string,
+  lang: string = i18n.language,
+): components['schemas']['LokalisoituTeksti'] => {
+  if (!item) {
+    return { fi: '', sv: '', en: '' };
+  }
+  const localizedText: components['schemas']['LokalisoituTeksti'] = { fi: '', sv: '', en: '' };
+  if (lang === 'fi' || lang === 'sv' || lang === 'en') {
+    localizedText[lang] = item;
+  } else {
+    localizedText.fi = item;
+  }
+
+  return localizedText;
+};

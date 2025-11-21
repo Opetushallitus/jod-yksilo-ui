@@ -55,6 +55,9 @@ export type JobOpportunityData = Pick<TypedMahdollisuus, 'aineisto' | 'ammattiry
   ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
 };
 
+interface CustomButtonProps {
+  actionButtonContent?: React.ReactNode;
+}
 interface BaseProps {
   as?: React.ElementType;
   to?: string;
@@ -74,6 +77,7 @@ interface BaseProps {
 export type OpportunityCardProps = BaseProps &
   FavoriteProps &
   MenuProps &
+  CustomButtonProps &
   JobOpportunityData &
   CollapsibleProps &
   EducationOpportunityData;
@@ -82,8 +86,9 @@ interface ActionsSectionProps {
   hideFavorite: boolean;
   menuId?: string;
   menuContent?: React.ReactNode;
+  actionButtonContent?: React.ReactNode;
   isFavorite?: boolean;
-  onToggleFavorite: () => void;
+  onToggleFavorite?: () => void;
   name: string;
 }
 
@@ -94,15 +99,18 @@ const ActionsSection = ({
   isFavorite,
   onToggleFavorite,
   name,
+  actionButtonContent,
 }: ActionsSectionProps) => {
-  const nothingToShow = hideFavorite && !menuId && !menuContent;
+  const nothingToShow = hideFavorite && !menuId && !menuContent && !actionButtonContent;
+
   return nothingToShow ? (
     <></>
   ) : (
     <div className="grow flex flex-col sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end">
       {!hideFavorite && (
-        <FavoriteToggle isFavorite={!!isFavorite} onToggleFavorite={onToggleFavorite} favoriteName={name} />
+        <FavoriteToggle isFavorite={!!isFavorite} onToggleFavorite={() => onToggleFavorite?.()} favoriteName={name} />
       )}
+      {!!actionButtonContent && actionButtonContent}
       {menuId && menuContent && <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />}
     </div>
   );
@@ -129,6 +137,7 @@ export const OpportunityCardWrapper = ({
   menuId,
   rateId,
   collapsible,
+  actionButtonContent,
   initiallyCollapsed,
 }: OpportunityCardProps) => {
   const {
@@ -229,6 +238,7 @@ export const OpportunityCardWrapper = ({
         isFavorite={isFavorite}
         onToggleFavorite={onToggleFavorite}
         name={name}
+        actionButtonContent={actionButtonContent}
       />
       {collapsible ? (
         <Accordion

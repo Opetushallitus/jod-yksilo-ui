@@ -8,7 +8,6 @@ import { favoritesLoader } from '@/routes/Profile/Favorites';
 import { loader as freeTimeActivitiesLoader } from '@/routes/Profile/FreeTimeActivities';
 import { Interests as ProfileInterests, interestsLoader } from '@/routes/Profile/Interests';
 import { MyGoals, goalsLoader } from '@/routes/Profile/MyGoals';
-import { Path, newPolkuLoader, polkuLoader } from '@/routes/Profile/Path';
 import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import { Tool, toolLoader } from '@/routes/Tool';
@@ -118,17 +117,6 @@ const profileRoutes = supportedLanguageCodes.map(
               index: true,
               element: <MyGoals />,
               loader: withYksiloContext(goalsLoader),
-            },
-            {
-              id: `:tavoiteId/{slugs.profile.path}|${lng}`,
-              path: `:tavoiteId/${i18n.t('slugs.profile.path', { lng })}`,
-              loader: withYksiloContext(newPolkuLoader),
-            },
-            {
-              id: `:tavoiteId/{slugs.profile.path}/:suunnitelmaId|${lng}`,
-              path: `:tavoiteId/${i18n.t('slugs.profile.path', { lng })}/:suunnitelmaId`,
-              element: <Path />,
-              loader: withYksiloContext(polkuLoader),
             },
           ],
         },

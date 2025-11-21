@@ -64,7 +64,7 @@ export const VirtualAssistant = ({
 
     const { data, error } = res;
     if (id === undefined) {
-      setId(data?.id);
+      setId(undefined);
     }
     setHistory((prevState) => ({
       ...prevState,

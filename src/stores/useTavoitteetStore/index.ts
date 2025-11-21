@@ -1,14 +1,16 @@
 import { client } from '@/api/client';
+import { getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService.ts';
 import { components } from '@/api/schema';
 import { TypedMahdollisuus } from '@/routes/types';
 import { create } from 'zustand';
 
-type Tavoite = components['schemas']['TavoiteDto'];
+export type Tavoite = components['schemas']['TavoiteDto'];
 
 interface TavoitteetState {
   tavoitteet: Tavoite[];
   setTavoitteet: (state: Tavoite[]) => void;
-  upsertTavoite: (tavoite: Tavoite) => void;
+  upsertTavoite: (tavoite: Tavoite) => Promise<void>;
+  refreshTavoitteet: () => Promise<void>;
   deleteTavoite: (tavoiteId: string) => Promise<void>;
   mahdollisuusDetails: TypedMahdollisuus[];
   setMahdollisuusDetails: (state: TypedMahdollisuus[]) => void;
@@ -19,11 +21,17 @@ export const useTavoitteetStore = create<TavoitteetState>()((set, get) => ({
   mahdollisuusDetails: [],
 
   setMahdollisuusDetails: (state) => set({ mahdollisuusDetails: state }),
-
+  refreshTavoitteet: async () => {
+    const response = await client.GET('/api/profiili/tavoitteet');
+    const tavoitteet = response.data ?? [];
+    get().setTavoitteet(tavoitteet);
+  },
   setTavoitteet: (state) => set({ tavoitteet: state }),
-  upsertTavoite: (tavoite) => {
+  upsertTavoite: async (tavoite) => {
     set((state) => {
-      const exists = state.tavoitteet.some((pm) => pm.mahdollisuusId === tavoite.mahdollisuusId);
+      const exists = state.tavoitteet.some(
+        (existingTavoite) => existingTavoite.mahdollisuusId === tavoite.mahdollisuusId,
+      );
 
       return {
         tavoitteet: exists
@@ -31,6 +39,13 @@ export const useTavoitteetStore = create<TavoitteetState>()((set, get) => ({
           : [...state.tavoitteet, { ...tavoite }],
       };
     });
+    const mapToIds = (pm: Tavoite) => pm.mahdollisuusId;
+    const tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(
+      get()
+        .tavoitteet.map(mapToIds)
+        .filter((id): id is string => id != undefined),
+    );
+    get().setMahdollisuusDetails(tyomahdollisuudetDetails);
   },
   deleteTavoite: async (id: string) => {
     const { error } = await client.DELETE('/api/profiili/tavoitteet/{id}', {

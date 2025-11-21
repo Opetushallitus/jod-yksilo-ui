@@ -68,6 +68,25 @@ export const getKoulutusMahdollisuusDetails = async (ids: string[]) => {
   return [];
 };
 
+export const getKoulutusMahdollisuusDetailsFullPage = async (ids: string[], pagesize: number) => {
+  if (ids.length === 0) {
+    return [];
+  }
+  const { data, error } = await client.GET('/api/koulutusmahdollisuudet/full', {
+    params: {
+      query: {
+        id: ids,
+        koko: pagesize,
+      },
+    },
+  });
+
+  if (!error) {
+    return data?.sisalto ?? [];
+  }
+  return [];
+};
+
 export const getTypedKoulutusMahdollisuusDetails = async (ids: string[]): Promise<TypedMahdollisuus[]> =>
   getUsingCache(ids, koulutusmahdollisuusCache, async (ids: string[]) =>
     (await getKoulutusMahdollisuusDetails(ids)).map((mahdollisuus) => ({
