@@ -32,7 +32,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
   const title = t('profile.my-goals.my-plan-towards-goal');
   const emptyPlans = (
     <div className="w-auto">
-      <EmptyState text={t('profile.my-goals.empty-plans')} />
+      <EmptyState text={t('profile.my-goals.plan_zero')} />
     </div>
   );
   const divider = <div className="border-b border-border-gray" />;
