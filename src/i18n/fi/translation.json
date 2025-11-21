@@ -425,25 +425,22 @@
     "external": {
       "ohjaaja": {
         "description": "Tietoja ja materiaaleja ohjaukseen",
-        "label": "Ohjaajan osio",
-        "url": "/ohjaaja/fi"
+        "label": "Ohjaajan osio"
       },
       "tietopalvelu": {
         "description": "Tietoa päätöksenteon tueksi",
-        "label": "Tietopalvelu",
-        "url": "/tietopalvelu/fi"
+        "label": "Tietopalvelu"
       },
       "title": "Osaamispolun sisältökokonaisuudet"
     },
     "extra": {
       "palveluhakemisto": {
         "label": "Ohjaus- ja neuvontapalveluja",
-        "url": "https://www.suomi.fi/palveluhakemisto/osaamispolku"
+        "url": "https://www.suomi.fi/aihe/ohjaus-ja-neuvontapalveluja/palvelut"
       },
       "title": "Muuta tukea pohdintaan",
       "urataidot": {
-        "label": "Urataitojen itsearviointi",
-        "url": "/urataidot/fi"
+        "label": "Urataitojen itsearviointi"
       }
     },
     "main-section": {
