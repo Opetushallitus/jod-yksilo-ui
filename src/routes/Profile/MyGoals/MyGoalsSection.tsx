@@ -9,7 +9,8 @@ import {
   PlanWithCustomKey,
 } from '@/routes/Profile/MyGoals/compareCompetences/PlanCompetencesTable.tsx';
 import loader from '@/routes/Profile/MyGoals/loader';
-import { planLetter, PlanList } from '@/routes/Profile/MyGoals/PlanList.tsx';
+import { planLetter } from '@/routes/Profile/MyGoals/planLetterUtil.ts';
+import { PlanList } from '@/routes/Profile/MyGoals/PlanList.tsx';
 import { getTypeSlug } from '@/routes/Profile/utils';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLocalizedText } from '@/utils';

@@ -1,7 +1,7 @@
 import { client } from '@/api/client.ts';
 import { osaamiset } from '@/api/osaamiset.ts';
 import { components } from '@/api/schema';
-import { planLetter } from '@/routes/Profile/MyGoals/PlanList.tsx';
+import { planLetter } from '@/routes/Profile/MyGoals/planLetterUtil.ts';
 import { cx } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
