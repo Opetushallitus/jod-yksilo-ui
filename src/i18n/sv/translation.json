@@ -426,25 +426,22 @@
     "external": {
       "ohjaaja": {
         "description": "Information och material för vägledning",
-        "label": "Vägledar-delen",
-        "url": "/vagledare/sv"
+        "label": "Vägledar-delen"
       },
       "tietopalvelu": {
         "description": "Information till stöd för beslutsfattande",
-        "label": "Informationstjänst",
-        "url": "/informationstjanst/sv"
+        "label": "Informationstjänst"
       },
       "title": "Uppsättningar av innehåll i Kompetensstigen"
     },
     "extra": {
       "palveluhakemisto": {
         "label": "Väglednings- och rådgivningstjänster",
-        "url": "https://www.suomi.fi/palveluhakemisto/osaamispolku"
+        "url": "https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster/service"
       },
       "title": "Annat stöd för reflektion",
       "urataidot": {
-        "label": "Självutvärdering av karriärkompetens",
-        "url": "/karriarkompetens/sv"
+        "label": "Självutvärdering av karriärkompetens"
       }
     },
     "main-section": {
