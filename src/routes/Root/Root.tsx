@@ -1,6 +1,7 @@
 import { FeedbackModal } from '@/components';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useSessionExpirationTimer } from '@/hooks/useSessionExpirationTimer';
@@ -21,6 +22,7 @@ import {
   UserButton,
 } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
+import i18n from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -34,19 +36,6 @@ import {
   useMatch,
 } from 'react-router';
 import { LogoutFormContext } from '.';
-
-const agents = {
-  test: {
-    fi: 'dea3919a-4f96-436e-a6bd-b24e4218da9f',
-    sv: 'fdc65221-a280-48b3-9dbc-9dea053a9cb4',
-    en: 'e78e5079-e789-4706-b0a2-e665eb87e7dd',
-  },
-  prod: {
-    fi: '2c134474-326f-4456-9139-8e585a569a9a',
-    sv: 'd41ea75b-628f-4420-9e4a-7431ffabb047',
-    en: '37f50124-4dec-4cab-8bc6-f8d2ea5bfe21',
-  },
-};
 
 const useAddBetaFeedbackNote = () => {
   const { t } = useTranslation();
@@ -93,13 +82,13 @@ const Root = () => {
   const data = useLoaderData();
   const hostname = globalThis.location.hostname;
   const menuButtonRef = React.useRef<HTMLButtonElement>(null);
-  const { siteId, agent } = React.useMemo(() => {
+  const { siteId } = React.useMemo(() => {
     if (hostname === 'osaamispolku.fi') {
-      return { siteId: 36, agent: agents.prod[language as keyof typeof agents.prod] };
+      return { siteId: 36 };
     } else if (hostname === 'jodtestaus.fi') {
-      return { siteId: 38, agent: agents.test[language as keyof typeof agents.test] };
+      return { siteId: 38 };
     } else {
-      return { siteId: 37, agent: agents.test[language as keyof typeof agents.test] };
+      return { siteId: 37 };
     }
   }, [hostname, language]);
 
@@ -191,6 +180,7 @@ const Root = () => {
     resetToolStore();
     logoutForm.current?.submit();
   };
+  const { isPrd } = useEnvironment();
 
   // Tries to focus the first h1 inside main content or the skip link if no h1 found
   React.useEffect(() => {
@@ -299,18 +289,7 @@ const Root = () => {
         </ServiceVariantProvider>
       </LogoutFormContext.Provider>
 
-      <Chatbot
-        agent={agent}
-        language={language}
-        header={t('chatbot.header')}
-        openWindowText={t('chatbot.open-window-text')}
-        agentName={t('chatbot.agent-name')}
-        errorMessage={t('chatbot.error-message')}
-        greeting={t('chatbot.greeting')}
-        textInputPlaceholder={t('chatbot.text-input-placeholder')}
-        disclaimer={t('chatbot.disclaimer')}
-        waitingmessage={t('chatbot.waiting-message')}
-      />
+      <Chatbot lang={i18n.language} environment={isPrd ? 'PROD' : 'TST'} />
 
       <Footer
         language={language}
