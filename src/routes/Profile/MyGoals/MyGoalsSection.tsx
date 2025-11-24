@@ -90,7 +90,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                 {isOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}
               </button>
 
-              <p className="ds:text-primary-gray">{getLocalizedText(tavoite.kuvaus) ?? ''}</p>
+              <p className="ds:text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
 
               {!isOpen && (
                 <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">

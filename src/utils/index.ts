@@ -30,7 +30,7 @@ export const formatDate = (date: Date, type: 'short' | 'medium' = 'short') => {
  */
 export const getLocalizedText = (
   entry?: components['schemas']['LokalisoituTeksti'] | Record<string, string | undefined>,
-) => {
+): string => {
   if (!entry) return '';
   const lang = i18n.language;
   const fallbackLang = i18n.options.fallbackLng as string | string[];
