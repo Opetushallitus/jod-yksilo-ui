@@ -31,8 +31,8 @@
       "add-custom-plan-description": "Luo oma koulutussuunnitelma antamalla sille ensin nimi ja lyhyt kuvaus. Sen jälkeen valitse osaamiset, jotka haluat saavuttaa suunnitelman avulla.",
       "add-custom-plan-header": "Luo oma suunnitelma",
       "add-favorites-to-goals": "Lisää tavoite",
-      "add-modal-title": "Luo uusi tavoite",
       "add-modal-description": "Anna tavoitteelle nimi ja kuvaus. Nimi näkyy listoissa, ja kuvauksessa voit sanoittaa laajemmin, mitä haluat saavuttaa sekä mahdolliset rajaukset.",
+      "add-modal-title": "Luo uusi tavoite",
       "add-new-plan-description": "Punnitse eri koulutusmahdollisuuksia ja valitse yksi tai useampi vaihtoehtoiseksi suunnitelmaksi kohti tavoitettasi",
       "add-new-plan-for-goal": "Lisää suunnitelma",
       "add-new-plan-header": "Luo uusi suunnitelma",
@@ -55,9 +55,9 @@
       "my-plan-towards-goal": "Suunnitelmavaihtoehdot",
       "no-chosen-competences": "Ei valittuja osaamisia",
       "no-favorites-selected": "Et ole lisännyt yhtään työmahdollisuutta suosikiksi, tai ne on jo lisätty tavoitteeksi.",
-      "plan_zero": "Ei valittuja suunnitelmia",
       "plan_one": "1 suunnitelma",
       "plan_other": "{{count}} suunnitelmaa",
+      "plan_zero": "Ei valittuja suunnitelmia",
       "remove-competence-description": "Poista osaaminen x-merkistä",
       "remove-from-goals": "Poista tavoitteista",
       "remove-from-plans": "Poista suunnitelma",
@@ -95,5 +95,6 @@
     "settings": {
       "controls": "Säätimet"
     }
-  }
+  },
+  "version": "Testausversio"
 }
