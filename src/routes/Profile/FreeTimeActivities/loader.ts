@@ -1,7 +1,7 @@
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
-import { initializeLocalizedText } from '@/utils';
+
 import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
@@ -14,11 +14,11 @@ export default (async ({ request }) => {
 
   const vapaaAjanToiminnot = data.map((vapaaAjanToiminto) => ({
     ...vapaaAjanToiminto,
-    nimi: initializeLocalizedText(vapaaAjanToiminto.nimi),
+    nimi: vapaaAjanToiminto.nimi,
     patevyydet: vapaaAjanToiminto.patevyydet?.map((patevyys) => ({
       ...patevyys,
-      nimi: initializeLocalizedText(patevyys.nimi),
-      kuvaus: initializeLocalizedText(patevyys.kuvaus),
+      nimi: patevyys.nimi,
+      kuvaus: patevyys.kuvaus,
     })),
   }));
 

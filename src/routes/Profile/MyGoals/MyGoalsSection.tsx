@@ -8,7 +8,7 @@ import loader from '@/routes/Profile/MyGoals/loader';
 import { PlanList } from '@/routes/Profile/MyGoals/PlanList.tsx';
 import { getTypeSlug } from '@/routes/Profile/utils';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { getLocalizedText, initializeLocalizedText } from '@/utils';
+import { getLocalizedText } from '@/utils';
 import { Button } from '@jod/design-system';
 import { JodCaretDown, JodCaretUp } from '@jod/design-system/icons';
 import React from 'react';
@@ -86,11 +86,11 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                 aria-controls={`accordion-content-${i}`}
                 id={`accordion-header-${i}`}
               >
-                <span>{getLocalizedText(initializeLocalizedText(tavoite.tavoite))}</span>
+                <span>{getLocalizedText(tavoite.tavoite)}</span>
                 {isOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}
               </button>
 
-              <p className="ds:text-primary-gray">{getLocalizedText(initializeLocalizedText(tavoite.kuvaus)) ?? ''}</p>
+              <p className="ds:text-primary-gray">{getLocalizedText(tavoite.kuvaus) ?? ''}</p>
 
               {!isOpen && (
                 <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">

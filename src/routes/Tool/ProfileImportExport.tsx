@@ -5,7 +5,7 @@ import { useModal } from '@/hooks/useModal';
 import { CompetenceFilters } from '@/routes/Profile/Competences/CompetenceFilters';
 import { FILTERS_ORDER } from '@/routes/Profile/Competences/constants';
 import { useToolStore } from '@/stores/useToolStore';
-import { initializeLocalizedText, removeDuplicatesByKey } from '@/utils';
+import { removeDuplicatesByKey } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, ConfirmDialog } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
@@ -149,7 +149,7 @@ const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void })
       ...storeKiinnostukset.filter((o) => o.tyyppi === 'KARTOITETTU'),
     ];
     setKiinnostukset(removeDuplicatesByKey(newKiinnostukset, (k) => k.id));
-    setKiinnostuksetVapaateksti(initializeLocalizedText(data?.vapaateksti));
+    setKiinnostuksetVapaateksti(data?.vapaateksti);
   }, [setKiinnostukset, setKiinnostuksetVapaateksti, storeKiinnostukset]);
 
   const onCompetenceImportConfirm = React.useCallback(async () => {
@@ -215,7 +215,7 @@ const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void })
 
       if (currentAndImportedSkills.some((o) => o.tyyppi === 'MUU_OSAAMINEN')) {
         const { data } = await client.GET('/api/profiili/muu-osaaminen');
-        setOsaamisetVapaateksti(initializeLocalizedText(data?.vapaateksti));
+        setOsaamisetVapaateksti(data?.vapaateksti);
       }
       if (importedInterests.length > 0) {
         await importKiinnostuksetFromProfile();

@@ -24,17 +24,37 @@ export const formatDate = (date: Date, type: 'short' | 'medium' = 'short') => {
  * Gets the localized text from "LokalisoituTeksti" object. Uses current i18next language by default.
  * @param entry Object with localized texts
  * @param lang Language code. Uses current i18next language by default.
+ * @param defaultLang
+ * @param supportedLanguages
  * @returns The text in current i18next language
  */
 export const getLocalizedText = (
   entry?: components['schemas']['LokalisoituTeksti'] | Record<string, string | undefined>,
   lang = i18n.language,
-) =>
-  entry?.[lang]?.trim() ??
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  entry?.[i18n.options.fallbackLng]?.trim() ??
-  '';
+  defaultLang = i18n.options.fallbackLng, // preferred fallback language
+  supportedLanguages = i18n.options.supportedLngs || [], // all supported languages
+) => {
+  if (!entry) return '';
+
+  // Try the requested language first
+  if (entry[lang]?.trim()) {
+    return entry[lang].trim();
+  }
+
+  // Try the preferred fallback language (defaultLang)
+  if (defaultLang && entry[defaultLang]?.trim()) {
+    return entry[defaultLang].trim();
+  }
+
+  // Then try all other supported languages as fallback except requested lang and defaultLang
+  for (const fallbackLang of supportedLanguages) {
+    if (fallbackLang !== lang && fallbackLang !== defaultLang && entry[fallbackLang]?.trim()) {
+      return entry[fallbackLang].trim();
+    }
+  }
+  // If nothing found, return empty string
+  return '';
+};
 
 type NestedKeyOf<ObjectType extends object> = {
   [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
@@ -159,29 +179,6 @@ export const parseBoolean = (value: unknown) => {
   } else {
     return false;
   }
-};
-
-/**
- * Initializes a LokalisoituTeksti object. If item is undefined, it returns an empty object.
- * If a localization for the specified (or current) language is missing, it copies the value from other language.
- */
-export const initializeLocalizedText = (
-  item?: components['schemas']['LokalisoituTeksti'],
-  lang: string = i18n.language,
-): components['schemas']['LokalisoituTeksti'] => {
-  if (!item) {
-    return {};
-  }
-
-  if (!item[lang]) {
-    if (lang === 'fi') {
-      item.fi = item.sv ?? '';
-    }
-    if (lang === 'sv') {
-      item.sv = item.fi ?? '';
-    }
-  }
-  return item;
 };
 
 export const stringToLocalizedText = (

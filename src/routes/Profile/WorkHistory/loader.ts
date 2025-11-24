@@ -1,7 +1,7 @@
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
-import { initializeLocalizedText } from '@/utils';
+
 import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
@@ -11,11 +11,11 @@ export default (async ({ request }) => {
   }
   const tyopaikat = data.map((tp) => ({
     ...tp,
-    nimi: initializeLocalizedText(tp.nimi),
+    nimi: tp.nimi,
     toimenkuvat: tp.toimenkuvat?.map((tk) => ({
       ...tk,
-      nimi: initializeLocalizedText(tk.nimi),
-      kuvaus: initializeLocalizedText(tk.kuvaus),
+      nimi: tk.nimi,
+      kuvaus: tk.kuvaus,
     })),
   }));
 

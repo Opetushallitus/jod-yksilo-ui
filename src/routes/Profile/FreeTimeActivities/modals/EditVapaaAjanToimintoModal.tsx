@@ -4,7 +4,7 @@ import { FormError } from '@/components';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
-import { getLocalizedText, initializeLocalizedText } from '@/utils';
+import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, InputField, Modal } from '@jod/design-system';
 import React from 'react';
@@ -59,7 +59,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
       });
       return {
         id: toiminto?.id,
-        nimi: initializeLocalizedText(toiminto?.nimi),
+        nimi: toiminto?.nimi,
       };
     },
   });
