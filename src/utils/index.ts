@@ -30,29 +30,30 @@ export const formatDate = (date: Date, type: 'short' | 'medium' = 'short') => {
  */
 export const getLocalizedText = (
   entry?: components['schemas']['LokalisoituTeksti'] | Record<string, string | undefined>,
-  lang = i18n.language,
-  defaultLang = i18n.options.fallbackLng, // preferred fallback language
-  supportedLanguages = i18n.options.supportedLngs || [], // all supported languages
 ) => {
   if (!entry) return '';
+  const lang = i18n.language;
+  const fallbackLang = i18n.options.fallbackLng as string | string[];
+  const supportedLanguages = i18n.options.supportedLngs || [];
 
-  // Try the requested language first
   if (entry[lang]?.trim()) {
     return entry[lang].trim();
   }
 
-  // Try the preferred fallback language (defaultLang)
-  if (defaultLang && entry[defaultLang]?.trim()) {
-    return entry[defaultLang].trim();
+  if (Array.isArray(fallbackLang)) {
+    for (const fbLang of fallbackLang) {
+      if (entry[fbLang]?.trim()) return entry[fbLang].trim();
+    }
+  } else if (entry[fallbackLang]?.trim()) {
+    return entry[fallbackLang].trim();
   }
 
-  // Then try all other supported languages as fallback except requested lang and defaultLang
-  for (const fallbackLang of supportedLanguages) {
-    if (fallbackLang !== lang && fallbackLang !== defaultLang && entry[fallbackLang]?.trim()) {
-      return entry[fallbackLang].trim();
+  for (const supportedLang of supportedLanguages) {
+    if (supportedLang !== lang && supportedLang !== fallbackLang && entry[supportedLang]?.trim()) {
+      return entry[supportedLang].trim();
     }
   }
-  // If nothing found, return empty string
+
   return '';
 };
 
