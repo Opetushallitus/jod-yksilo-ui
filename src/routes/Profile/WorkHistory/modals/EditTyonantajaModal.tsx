@@ -56,7 +56,7 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
 
       return {
         id: tyopaikka?.id,
-        nimi: tyopaikka?.nimi,
+        nimi: tyopaikka?.nimi ?? {},
       };
     },
   });

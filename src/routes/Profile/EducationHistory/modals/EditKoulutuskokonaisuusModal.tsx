@@ -63,7 +63,7 @@ const EditKoulutuskokonaisuusModal = ({
       });
       return {
         id: koulutus?.id,
-        nimi: koulutus?.nimi,
+        nimi: koulutus?.nimi ?? {},
       };
     },
   });

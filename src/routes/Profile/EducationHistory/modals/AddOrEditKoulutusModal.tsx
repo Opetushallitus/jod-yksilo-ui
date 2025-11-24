@@ -224,8 +224,8 @@ const AddOrEditKoulutusModal = ({
 
         return {
           id: koulutus?.id ?? '',
-          nimi: koulutus?.nimi,
-          kuvaus: koulutus?.kuvaus,
+          nimi: koulutus?.nimi ?? {},
+          kuvaus: koulutus?.kuvaus ?? {},
           alkuPvm: koulutus?.alkuPvm ?? '',
           loppuPvm: koulutus?.loppuPvm ?? '',
           osaamiset:

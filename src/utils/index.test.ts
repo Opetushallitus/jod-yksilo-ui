@@ -42,13 +42,13 @@ describe('utils', () => {
     it('should prefer fallBackLng if no localization is found', () => {
       const entry = { en: 'Hello', sv: 'Hej' };
       i18n.language = 'fi';
-      i18n.fallbackLng = 'sv';
+      i18n.options.fallbackLng = 'sv';
       expect(getLocalizedText(entry)).toBe('Hej');
     });
 
     it('should return the text in the given language', () => {
       const entry = { en: 'Hello', fi: 'Moro' };
-      expect(getLocalizedText(entry, 'en')).toBe('Hello');
+      expect(getLocalizedText(entry)).toBe('Hello');
     });
   });
 

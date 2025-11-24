@@ -219,8 +219,8 @@ export const AddOrEditPatevyysModal = ({
 
         return {
           id: patevyys?.id ?? '',
-          nimi: patevyys?.nimi,
-          kuvaus: patevyys?.kuvaus,
+          nimi: patevyys?.nimi ?? {},
+          kuvaus: patevyys?.kuvaus ?? {},
           alkuPvm: patevyys?.alkuPvm ?? '',
           loppuPvm: patevyys?.loppuPvm ?? '',
           osaamiset:

@@ -214,8 +214,8 @@ const AddOrEditToimenkuvaModal = ({
 
         return {
           id: toimenkuva?.id ?? '',
-          nimi: toimenkuva?.nimi,
-          kuvaus: toimenkuva?.kuvaus,
+          nimi: toimenkuva?.nimi ?? {},
+          kuvaus: toimenkuva?.kuvaus ?? {},
           alkuPvm: toimenkuva?.alkuPvm ?? '',
           loppuPvm: toimenkuva?.loppuPvm ?? '',
           osaamiset:

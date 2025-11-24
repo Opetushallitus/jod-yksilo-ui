@@ -59,7 +59,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
       });
       return {
         id: toiminto?.id,
-        nimi: toiminto?.nimi,
+        nimi: toiminto?.nimi ?? {},
       };
     },
   });
