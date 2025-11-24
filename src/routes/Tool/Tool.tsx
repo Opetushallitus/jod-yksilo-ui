@@ -1,6 +1,7 @@
 import type { components } from '@/api/schema';
 import { AiInfo, Breadcrumb, OpportunityCard } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
+import { InfoBox } from '@/components/InfoBox/InfoBox';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
@@ -10,7 +11,7 @@ import CategorizedCompetenceTagList from '@/routes/Tool/CategorizedCompetenceTag
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import { Button, cx, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
-import { JodArrowRight, JodClose, JodCompass, JodInfo, JodSettings } from '@jod/design-system/icons';
+import { JodArrowRight, JodClose, JodCompass, JodSettings } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useRouteLoaderData } from 'react-router';
@@ -283,6 +284,7 @@ const Tool = () => {
   const { lg } = useMediaQueries();
   const [currentTab, setCurrentTab] = React.useState<TabName>('info');
   const scrollRef = React.useRef<HTMLDivElement>(null);
+  const { isLoggedIn } = useLoaderData<ToolLoaderData>();
 
   const setTab = React.useCallback((tab: TabName) => {
     setCurrentTab(tab);
@@ -353,12 +355,7 @@ const Tool = () => {
       <p className="text-body-lg-mobile sm:text-body-lg mb-6 max-w-[700px]" ref={scrollRef}>
         {t('tool.description')}
       </p>
-      <div className="flex bg-bg-gray-2 rounded-md max-w-xl py-5 pl-4 pr-6 items-start gap-4 text-secondary-1-dark-2 text-heading-4 mb-8">
-        <div>
-          <JodInfo />
-        </div>
-        <div>{t('tool.info')}</div>
-      </div>
+      <InfoBox text={isLoggedIn ? t('tool.info.logged_in') : t('tool.info.logged_out')} />
       <title>{t('tool.title')}</title>
       {lg ? (
         // Desktop
