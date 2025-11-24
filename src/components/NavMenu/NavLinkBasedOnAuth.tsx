@@ -24,7 +24,6 @@ export const NavLinkBasedOnAuth = ({ shouldLogin, onClose, ...rest }: NavLinkBas
       state={{ callbackURL: pathTo }}
       to={`/${language}/${t('slugs.profile.login')}`}
       lang={language}
-      aria-label={t('login')}
       onClick={onClose}
     >
       {rest.children}
