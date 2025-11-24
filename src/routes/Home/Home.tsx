@@ -2,6 +2,7 @@ import heroSrc from '@/../assets/yksilo-hero.jpg';
 import type { components } from '@/api/schema';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { TimelineImage } from '@/components/TimelineImage';
+import { getLinkTo } from '@/utils/routeUtils';
 import { HeroCard, type LinkComponent, tidyClasses as tc } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
@@ -185,9 +186,13 @@ const Home = () => {
             content={t('home.need-personal-guidance-content')}
             title={t('home.need-personal-guidance')}
             buttonLabel={t('home.go-to-service-directory')}
-            to="https://www.suomi.fi/palveluhakemisto/osaamispolku"
+            to={t('navigation.extra.palveluhakemisto.url')}
             backgroundColor="#00818A"
-            linkComponent={Link}
+            linkComponent={getLinkTo(t('navigation.extra.palveluhakemisto.url'), {
+              useAnchor: true,
+              target: '_blank',
+              rel: 'noopener noreferrer',
+            })}
             buttonIcon={<JodOpenInNew ariaLabel={t('external-link')} />}
           />
         </div>

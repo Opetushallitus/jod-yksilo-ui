@@ -108,7 +108,7 @@ const AdditionalSupport = () => {
             testId="additional-support-career-skills"
           />
           <HelpingToolExternalLinkItem
-            href="https://www.suomi.fi/palveluhakemisto/osaamispolku"
+            href={t('navigation.extra.palveluhakemisto.url')}
             title={t('tool.tools.service-directory')}
             iconRight={<JodOpenInNew className="text-accent" ariaLabel={t('external-link')} />}
             testId="additional-support-service-directory"
