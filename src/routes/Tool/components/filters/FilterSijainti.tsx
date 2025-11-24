@@ -25,7 +25,6 @@ const maakuntaKoodit: [string, string][] = [
   ['17', 'Pohjois-Pohjanmaa'],
   ['18', 'Kainuu'],
   ['19', 'Lappi'],
-  ['20', 'Itä-Uusimaa'],
   ['21', 'Ahvenanmaa'],
 ];
 
