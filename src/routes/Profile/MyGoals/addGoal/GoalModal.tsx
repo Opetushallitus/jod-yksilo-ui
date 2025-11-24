@@ -140,7 +140,6 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
     }
     setIsSubmitting(true);
     const newTavoite: components['schemas']['TavoiteDto'] = {
-      tyyppi: 'MUU',
       mahdollisuusId: selectedMahdollisuus.id,
       mahdollisuusTyyppi: selectedMahdollisuus.mahdollisuusTyyppi,
       tavoite: stringToLocalizedText(goalName),

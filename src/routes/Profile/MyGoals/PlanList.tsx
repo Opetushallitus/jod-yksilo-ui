@@ -4,6 +4,7 @@ import { getLocalizedText } from '@/utils';
 import { Accordion, EmptyState } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 
+import { planLetter, planNumberPrefix } from '@/routes/Profile/MyGoals/planLetterUtil.ts';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
@@ -35,43 +36,13 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
     </div>
   );
   const divider = <div className="border-b border-border-gray" />;
-  const planPrefixes = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-  ];
+
   const planPrefix = (index: number): React.JSX.Element => {
-    if (planPrefixes.length == 0) {
-      return <></>;
-    }
-    const numberPrefix = Math.floor(index / planPrefixes.length);
-    const letter = planPrefixes[index % planPrefixes.length];
+    const numberPrefix = planNumberPrefix(index);
+    const letter = planLetter(index);
     return (
       <span className="text-black">
-        {numberPrefix > 0 ? numberPrefix : ''}
+        {numberPrefix && numberPrefix > 0 ? numberPrefix : ''}
         {letter}:
       </span>
     );
