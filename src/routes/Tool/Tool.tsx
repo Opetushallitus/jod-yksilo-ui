@@ -1,6 +1,7 @@
 import type { components } from '@/api/schema';
 import { AiInfo, Breadcrumb, OpportunityCard } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
+import { InfoBox } from '@/components/InfoBox/InfoBox';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
@@ -283,6 +284,7 @@ const Tool = () => {
   const { lg } = useMediaQueries();
   const [currentTab, setCurrentTab] = React.useState<TabName>('info');
   const scrollRef = React.useRef<HTMLDivElement>(null);
+  const { isLoggedIn } = useLoaderData<ToolLoaderData>();
 
   const setTab = React.useCallback((tab: TabName) => {
     setCurrentTab(tab);
@@ -350,9 +352,10 @@ const Tool = () => {
         <IconHeading icon={<JodCompass className="text-white" />} title={t('tool.title')} testId="tool-title" />
         <div className="ml-1 print:hidden">{<AiInfo type="tool" />}</div>
       </div>
-      <p className="text-body-lg-mobile sm:text-body-lg mb-7 sm:mb-9 max-w-[700px]" ref={scrollRef}>
+      <p className="text-body-lg-mobile sm:text-body-lg mb-6 max-w-[700px]" ref={scrollRef}>
         {t('tool.description')}
       </p>
+      <InfoBox text={isLoggedIn ? t('tool.info.logged_in') : t('tool.info.logged_out')} />
       <title>{t('tool.title')}</title>
       {lg ? (
         // Desktop

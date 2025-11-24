@@ -139,6 +139,7 @@ export const useToolStore = create<ToolState>()(
                 mahdollisuusData?.filter((m) => m.ehdotusMetadata?.tyyppi === 'KOULUTUSMAHDOLLISUUS').length ?? 0,
             },
             shouldFetchData: false,
+            previousEhdotusUpdateLang: i18n.language,
           });
         } catch (error) {
           if ((error as Error).name !== 'AbortError') {

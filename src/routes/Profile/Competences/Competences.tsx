@@ -1,4 +1,5 @@
 import { MainLayout } from '@/components';
+import { InfoBox } from '@/components/InfoBox/InfoBox';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
@@ -80,7 +81,7 @@ const Competences = () => {
       <title>{title}</title>
       <ProfileSectionTitle type="OSAAMISENI" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.competences.description')}</p>
-
+      <InfoBox text={t('profile.competences.info')} />
       <div>
         {!lg && (
           <Modal

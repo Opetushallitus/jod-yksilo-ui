@@ -37,6 +37,11 @@
       "TMT": "Job opportunities"
     }
   },
+  "profile": {
+    "competences": {
+      "info": "You can choose which information from your Competence Profile you want to use in exploring opportunities by importing it to the Find Opportunities page."
+    }
+  },
   "tool": {
     "competency-profile": {
       "help": "Import competences from your competence profile to your overall data view. You can utilize previously saved competences when exploring opportunities. You can import all competences or only those you want."
@@ -45,6 +50,10 @@
     "education-opportunity-duration-tooltip": "The duration of the education opportunity indicates how long the education typically lasts. It is usually expressed in years or months and is based on the scope of the education and the normal pace of studies.",
     "education-opportunity-koulutusala": "Most common field of education",
     "education-opportunity-koulutusala-tooltip": "The field of education refers to the group into which educational programs are categorized based on the scientific, societal, or professional domain they relate to.",
+    "info": {
+      "logged_in": "The information from your competence profile does not transfer directly to this page. You can import it from the Competence Profile section. Try different combinations and update your opportunities.",
+      "logged_out": "You can edit your selections in the Summary of Your Information section. Try different combinations and update your opportunities."
+    },
     "info-overview": {
       "mapped-interests": "Mapped interests",
       "other-data-from-profile": "Other imported data from profile",

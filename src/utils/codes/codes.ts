@@ -1,4 +1,4 @@
-import i18n, { type LangCode } from '@/i18n/config';
+import i18n, { supportedLanguageCodes, type LangCode } from '@/i18n/config';
 import { TypedMahdollisuus } from '@/routes/types';
 import type { Codeset } from '@/utils/jakaumaUtils';
 
@@ -87,9 +87,97 @@ export interface OpintopolkuKoodistoResponse {
   }[];
 }
 
+interface CachedCodeItem {
+  value: string;
+  timestamp: number;
+}
+type CodeItemCache = Record<string, CachedCodeItem>;
+
+type LocalizedCodeItemCache = Record<LangCode, CodeItemCache>;
+
+const isLocalizedCodeItemCache = (obj: unknown): obj is LocalizedCodeItemCache => {
+  if (typeof obj !== 'object' || obj === null) return false;
+  const objWithIndex = obj as Record<string, unknown>;
+  for (const key in objWithIndex) {
+    if (!supportedLanguageCodes.includes(key as LangCode)) return false;
+    if (!isCodeItemCache(objWithIndex[key])) return false;
+  }
+  return true;
+};
+
+const isCodeItemCache = (obj: unknown): obj is CodeItemCache => {
+  if (typeof obj !== 'object' || obj === null) return false;
+  const objWithIndex = obj as Record<string, unknown>;
+  for (const key in objWithIndex) {
+    const item = objWithIndex[key];
+    if (!isCachedCodeItem(item)) return false;
+  }
+  return true;
+};
+
+const isCachedCodeItem = (obj: unknown): obj is CachedCodeItem => {
+  return (
+    typeof obj === 'object' &&
+    obj !== null &&
+    'value' in obj &&
+    typeof (obj as CachedCodeItem).value === 'string' &&
+    'timestamp' in obj &&
+    typeof (obj as CachedCodeItem).timestamp === 'number'
+  );
+};
+
 const CACHE_KEY = 'educationCodesetCache';
 const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
-const cache: { code: string; value: string; timestamp: number }[] = [];
+const cache: LocalizedCodeItemCache = {
+  fi: {},
+  sv: {},
+  en: {},
+};
+
+const loadCacheFromStorage = () => {
+  try {
+    if (Object.keys(cache.fi).length > 0 || Object.keys(cache.sv).length > 0 || Object.keys(cache.en).length > 0)
+      return;
+
+    const storage = localStorage.getItem(CACHE_KEY);
+    if (!storage) return;
+
+    const parsed = JSON.parse(storage);
+    if (!isLocalizedCodeItemCache(parsed)) return;
+
+    const now = Date.now();
+    for (const langCode of Object.keys(parsed) as LangCode[]) {
+      if (supportedLanguageCodes.includes(langCode)) {
+        const codeItemCache = parsed[langCode];
+        cache[langCode] = Object.fromEntries(
+          Object.entries(codeItemCache).filter(([_, item]) => now - item.timestamp <= CACHE_TTL_MS),
+        );
+      }
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error loading education codeset cache from localStorage:', error);
+  }
+};
+
+const updateCache = (codes: OpintopolkuKoodistoResponse[], ids: string[]) => {
+  for (const id of ids) {
+    const code = codes.find((c) => c.koodiUri === id);
+    for (const metaData of code?.metadata ?? []) {
+      const metaLang = metaData.kieli.toLocaleLowerCase() as LangCode;
+      if (supportedLanguageCodes.includes(metaLang)) {
+        if (!cache[metaLang]) {
+          cache[metaLang] = {};
+        }
+        cache[metaLang][id] = {
+          value: metaData.nimi,
+          timestamp: Date.now(),
+        };
+      }
+    }
+  }
+  localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+};
 
 /**
  * Gets education opportunity Jakauma details from virkailija opintopolku koodisto REST API. Uses a simple localStorage based cache.
@@ -99,67 +187,32 @@ const cache: { code: string; value: string; timestamp: number }[] = [];
  * @returns Array of code and value pairs. Ids not found are returned with code as value.
  */
 export const getEducationCodesetValues = async (ids: string[], getLatestVersion = true) => {
-  const codesUrl = new URL('/koodisto-service/rest/json/searchKoodis', window.location.origin);
-  // Education codes have #1 at the end, which tells the version of the code. If the version
-  // is not stripped, the API will only return results for the first code in the list.
-  // Also the #1 causes problems with URLSearchParams, as # will be encoded to %23 and the API will not recognize it.
+  const lang = i18n.language as LangCode;
   const strippedIds = ids.map((id) => id.split('#')[0]);
-  try {
-    if (cache.length === 0) {
-      const storage = localStorage.getItem(CACHE_KEY);
 
-      if (storage) {
-        // Get data from storage and remove expired cache items
-        const now = Date.now();
-        const parsed = ((JSON.parse(storage) as { code: string; value: string; timestamp: number }[]) ?? []).filter(
-          (item) => now - item.timestamp <= CACHE_TTL_MS,
-        );
+  loadCacheFromStorage();
 
-        cache.push(...parsed);
-      }
-    }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Error loading education codeset cache from localStorage:', error);
-  }
+  const currentLangCache = cache[lang] ?? {};
+  const nonCachedIds = strippedIds.filter((id) => !currentLangCache[id]);
 
-  const nonCachedIds = strippedIds.filter((id) => !cache.some((item) => item.code === id));
-
-  // All data found in cache, no need to fetch
   if (nonCachedIds.length === 0) {
-    return strippedIds.map((id) => cache.find((item) => item.code === id) ?? { code: id, value: id });
+    return strippedIds.map((id) => ({ code: id, value: currentLangCache[id]?.value ?? id }));
   }
 
+  const codesUrl = new URL('/koodisto-service/rest/json/searchKoodis', globalThis.location.origin);
   for (const id of nonCachedIds) {
     codesUrl.searchParams.append('koodiUris', id);
   }
-
   if (getLatestVersion) {
     codesUrl.searchParams.append('koodiVersioSelection', 'LATEST');
   }
+
   const response = await fetch(codesUrl);
   const codes: OpintopolkuKoodistoResponse[] = (await response.json()) ?? [];
 
-  const fetched = nonCachedIds.map((id) => {
-    const code = codes.find((c) => c.koodiUri === id);
+  updateCache(codes, nonCachedIds);
 
-    if (code) {
-      const value = code.metadata.find((meta) => meta.kieli.toLocaleLowerCase() === i18n.language)?.nimi ?? id;
-      return { code: id, value, timestamp: Date.now() };
-    } else {
-      return { code: id, value: id, timestamp: Date.now() };
-    }
-  });
-
-  // Put new items into cache and return results
-  cache.push(...fetched);
-
-  const removedDuplicates = Array.from(new Set(cache.map((item) => item.code))).map((code) => {
-    return cache.find((item) => item.code === code);
-  });
-  localStorage.setItem(CACHE_KEY, JSON.stringify(removedDuplicates));
-
-  return strippedIds.map((id) => cache.find((item) => item.code === id) ?? { code: id, value: id });
+  return strippedIds.map((id) => ({ code: id, value: cache[lang]?.[id]?.value ?? id }));
 };
 
 /**
