@@ -48,6 +48,7 @@ describe('utils', () => {
 
     it('should return the text in the given language', () => {
       const entry = { en: 'Hello', fi: 'Moro' };
+      i18n.language = 'en';
       expect(getLocalizedText(entry)).toBe('Hello');
     });
   });
