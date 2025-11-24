@@ -61,7 +61,7 @@ const profileRoutes = supportedLanguageCodes.map(
           },
         },
         {
-          id: `{${competencesSlug}}/{slugs.profile.competences}|${lng}`,
+          id: `{${competencesSlug}}|${lng}`,
           path: i18n.t(competencesSlug, { lng }),
           loader: withYksiloContext(competencesLoader),
           element: <ProfileCompetences />,
