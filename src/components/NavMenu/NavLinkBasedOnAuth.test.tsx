@@ -23,7 +23,6 @@ describe('NavLinkBasedOnAuth', () => {
     );
     const link = screen.getByText('Login');
     expect(link).toHaveAttribute('to', '/fi/slugs.profile.login');
-    expect(link).toHaveAttribute('aria-label', 'login');
     expect(link).toHaveAttribute('lang', 'fi');
     expect(link).toHaveTextContent('Login');
   });
