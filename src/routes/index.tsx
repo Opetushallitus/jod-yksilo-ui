@@ -20,6 +20,7 @@ import { EducationHistory } from './Profile/EducationHistory';
 import { FreeTimeActivities } from './Profile/FreeTimeActivities';
 import ProfileFront from './Profile/ProfileFront/ProfileFront';
 import { ErrorBoundary, NoMatch, Root, loader as rootLoader } from './Root';
+import { ServiceBreak } from './ServiceBreak/ServiceBreak';
 
 const competencesSlug = 'slugs.profile.competences';
 
@@ -209,6 +210,22 @@ const rootRoute: RouteObject = {
     { path: '*', element: <NoMatch /> },
   ],
 };
+
+export const serviceBreakRoutes: RouteObject[] = [
+  {
+    path: '*',
+    loader: () => replace(`/service-break`),
+  },
+  {
+    id: `service-break`,
+    path: '/service-break',
+    element: (
+      <NoteStackProvider>
+        <ServiceBreak />,
+      </NoteStackProvider>
+    ),
+  },
+];
 
 export const routes: RouteObject[] = [
   {

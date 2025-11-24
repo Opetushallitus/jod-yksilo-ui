@@ -4,9 +4,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import { Metric } from 'web-vitals';
 import './i18n/config';
 import './index.css';
-import { routes } from './routes';
+import { routes, serviceBreakRoutes } from './routes';
 
-export const router = createBrowserRouter(routes, {
+const serviceBreakActive = false;
+export const router = createBrowserRouter(serviceBreakActive ? serviceBreakRoutes : routes, {
   basename: '/yksilo',
 });
 
