@@ -1,4 +1,5 @@
 import { MainLayout } from '@/components';
+import { InfoBox } from '@/components/InfoBox/InfoBox';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
@@ -8,7 +9,6 @@ import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
 import type { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
 import { sortByProperty } from '@/utils';
 import { Button, Modal, useMediaQueries } from '@jod/design-system';
-import { JodInfo } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
@@ -81,13 +81,7 @@ const Competences = () => {
       <title>{title}</title>
       <ProfileSectionTitle type="OSAAMISENI" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.competences.description')}</p>
-      <div className="flex bg-bg-gray-2 rounded-md max-w-xl py-5 pl-4 pr-6 items-start gap-4 text-secondary-1-dark-2 text-heading-4 mb-8">
-        <div>
-          <JodInfo />
-        </div>
-        <div>{t('profile.competences.info')}</div>
-      </div>
-
+      <InfoBox text={t('profile.competences.info')} />
       <div>
         {!lg && (
           <Modal
