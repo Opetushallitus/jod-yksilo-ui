@@ -214,7 +214,7 @@ const YourInfo = () => {
   return (
     <>
       <ToolAccordion
-        title={t('tool.info-overview.mapped-interests')}
+        title={t('interests')}
         description={t('tool.my-own-data.interests.description')}
         testId="tool-interests-accordion"
       >
@@ -222,7 +222,7 @@ const YourInfo = () => {
       </ToolAccordion>
 
       <ToolAccordion
-        title={t('tool.info-overview.mapped-competences')}
+        title={t('tool.map-your-skills')}
         description={t('tool.my-own-data.competences.description')}
         testId="tool-competences-accordion"
       >
