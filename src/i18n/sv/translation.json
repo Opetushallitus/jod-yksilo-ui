@@ -91,7 +91,7 @@
       "failure": "Det gick inte att lägga till utbildningshistorik.",
       "give-permission-failed": "Det gick inte att ge tillstånd. Försök på nytt senare.",
       "success": "Utbildningshistoriken lades till.",
-      "success-osaamiset-info": "Härnäst identifierar vi med hjälp av artificiell intelligens förslag på kompetens som utbildningarna producerar. Förslagen kan innehålla fel, så vi rekommenderar att du kontrollerar dem. Du kan ta bort och lägga till kompetenser genom att redigera utbildningsinformationen. Mer information om identifiering av kompetenser hittar du bakom länken nedan. \n",
+      "success-osaamiset-info": "Härnäst identifierar vi med hjälp av artificiell intelligens förslag på kompetens som utbildningarna producerar. Förslagen kan innehålla fel, så vi rekommenderar att du kontrollerar dem. Du kan ta bort och lägga till kompetenser genom att redigera utbildningsinformationen. Mer information om identifiering av kompetenser hittar du bakom länken nedan.\n",
       "success-osaamiset-link-about-ai": "Information om användningen av artificiell intelligens"
     },
     "start-modal": {
@@ -162,7 +162,7 @@
       "osaamispolkuni": "Min kompetensstig i Utbildningsstyrelsen,",
       "tietopalvelu": "Informationstjänsten, hela tjänsten och annan respons hos undervisnings- och kulturministeriet."
     },
-    "footer-info-1": "När du skickar respons sparar vi tjänstens statusinformation, till exempel från vilken vy responsen har skickats. Statusinformationen vidarebefordras inte till tredje part. Respons används för utveckling av tjänsten och frivilligt lämnade kontaktuppgifter används för att svara på respons.",
+    "footer-info-1": "När du skickar respons sparar vi tjänstens statusinformation, till exempel från vilken vy responsen har skickats. Statusinformationen vidarebefordras inte till tredje parter. Respons används för utveckling av tjänsten och frivilligt lämnade kontaktuppgifter används för att svara på respons.",
     "footer-info-heading": "Beroende på avsnitt behandlas respons på följande sätt:",
     "footer-privacy-heading": "Läs mer i responshanterarnas dataskyddsbeskrivningar:",
     "intro-1": "Ge respons om tjänsten eller rapportera ett tekniskt problem. På så sätt hjälper du oss i utvecklingen av tjänsterna.",
@@ -244,7 +244,7 @@
     "beta": "Kompetensstigen är i betatestningsfasen fram till slutet av 2025",
     "beta-content-1": "Välkommen att prova betaversionen av Kompetensstigen. Vi utvecklar kontinuerligt Kompetensstigens funktioner samt kvaliteten på de resultat och förslag som artificiell intelligens erbjuder dig. Du kan hjälpa oss i utvecklingsarbetet genom att använda tjänsten och ge respons. Låt oss tillsammans utveckla Kompetensstigen till den bästa tjänsten för dig!",
     "beta-content-2": "Den officiella användningen av Kompetensstigen inleds i början av 2026. Vi strävar efter att bevara de kompetensprofiler som skapats i betatestningsfasen och deras uppgifter i tjänsten när den officiella användningen börjar. <br/><br/>Läs mer <CustomLink>om aktuella ärenden och betafasen<Icon></Icon></CustomLink> — här berättar vi om nyheter, nya och planerade funkt bioner och ändringar som genomförs i Kompetensstigen under slutet av året.",
-    "card-1-content": "Hitta utbildnings- och karriärmöjligheter som passar just dig. Använd tjänsten snabbt utan att logga in, du kan senare logga in och spara dina uppgifter. \n",
+    "card-1-content": "Hitta utbildnings- och karriärmöjligheter som passar just dig. Använd tjänsten snabbt utan att logga in, du kan senare logga in och spara dina uppgifter.\n",
     "card-1-title": "Hitta snabbt lämpliga utbildnings- och karriärmöjligheter",
     "card-2-content": "Logga in i tjänsten och identifiera dina styrkor och intressen. Spara din arbets- och utbildningshistorik för senare bruk.\n",
     "card-2-title": "Logga in och kartlägg din kompetens i närmare detalj",
@@ -254,27 +254,27 @@
     "hero-content": "I Min kompetensstig kan du kartlägga din egen kompetens, hitta utbildningar för att öka din kompetens, undersöka karriärmöjligheter med din kompetens och kartlägga möjligheter att byta bransch.\n",
     "hero-title": "Min kompetensstig",
     "how-competency-path-helps-you": "Hur hjälper Kompetensstigen dig som en del av andra tjänster?",
-    "how-competency-path-helps-you-content": "Kompetensstigen, Studieinfo, Jobbmarknaden och Opin.fi bildar tillsammans en tjänstehelhet som stöder lärande, karriärplanering och jobbsökning i olika livssituationer. Varje tjänst spelar sin egen roll, men tillsammans erbjuder de dig en tydlig stig för utvecklingen av din kompetens och din karriär.<br/><br/>Om du letar efter en riktning eller din egen stig kan du identifiera dina egna styrkor och intressen i Kompetensstigen och hitta utbildnings- och karriärmöjligheter som är lämpliga för dem. När du har utrett hur du vill gå vidare, hjälper Studieinfo, Jobbmarknaden och Opin.fi dig att söka dig till dem.",
-    "how-competency-path-helps-you-opinfi-description": "Opin.fi är finländska universitets och yrkeshögskolors gemensamma tjänst där öppna studier är lätt tillgängliga för dig.",
-    "how-competency-path-helps-you-opinfi-title": "Opin.fi",
+    "how-competency-path-helps-you-content": "Kompetensstigen, Studieinfo, Jobbmarknaden och Opin.fi bildar tillsammans en tjänstehelhet som stöder lärande, karriärplanering och jobbsökning i olika livssituationer. Varje tjänst spelar sin egen roll, men tillsammans erbjuder de dig en tydlig stig för utvecklingen av din kompetens och din karriär.<br/><br/>I Kompetensstigen kan du identifiera dina egna styrkor och intressen och hitta utbildnings- och karriärmöjligheter som är lämpliga för dem. Därefter hjälper Studieinfo, Jobbmarknaden och Opin.fi dig att söka dig till dem.",
+    "how-competency-path-helps-you-opinfi-description": "Opin.fi är finländska universitets och yrkeshögskolors gemensamma tjänst där öppna studier är lätt tillgängliga för dig",
+    "how-competency-path-helps-you-opinfi-title": "Opin.fi/",
     "how-competency-path-helps-you-opintopolku-description": "Studieinfo erbjuder omfattande information om utbildningar och ansökningstjänster för olika utbildningsnivåer.<br/><br/>Från utbildningsmöjligheterna i Kompetensstigen kan du förflytta dig till Studieinfo för att bekanta dig närmare med utbildningar och söka dig till dem. När du loggar in på Min kompetensstig kan du importera din studiehistorik till din kompetensprofil.",
     "how-competency-path-helps-you-opintopolku-title": "Studieinfo",
-    "how-competency-path-helps-you-tmt-description": "Jobbmarknaden samlar ihop lediga jobb och stöder arbetssökningen och karriärplaneringen.<br/><br/>Från Kompetensstigens karriärmöjligheter kan du förflytta dig till Jobbmarknaden för att bekanta dig med och söka lediga jobb. I framtiden kan du också överföra dina uppgifter mellan Kompetensstigen och Jobbmarknaden. ",
+    "how-competency-path-helps-you-tmt-description": "Jobbmarknaden samlar ihop lediga jobb och stöder arbetssökningen och karriärplaneringen.<br/><br/>Från Kompetensstigens karriärmöjligheter kan du förflytta dig till Jobbmarknaden för att bekanta dig med och söka lediga jobb. I framtiden kan du också överföra dina uppgifter mellan Kompetensstigen och Jobbmarknaden.",
     "how-competency-path-helps-you-tmt-title": "Jobbmarknaden",
     "need-personal-guidance": "Behöver du personlig vägledning?",
-    "need-personal-guidance-content": "Tjänsterna som du kan hitta i väglednings- och rådgivningstjänster hjälper dig att fundera på dina karriär- och utbildningsalternativ. Begränsa listan över tjänster enligt teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst. \n"
+    "need-personal-guidance-content": "Tjänsterna som du kan hitta i väglednings- och rådgivningstjänster hjälper dig att fundera på dina karriär- och utbildningsalternativ. Begränsa listan över tjänster enligt teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst.\n"
   },
-  "in-this-section": "I det här avsnittet",
+  "in-this-section": "I den här delen",
   "interests": "Kartlägg dina intressen",
   "interests-of-your-choice": "Valda intressen",
   "introduction": {
     "step-1": {
-      "item-1": "Se all information om din kompetens och dina intressen på en och samma plats",
-      "item-2": "Spara din arbets- och utbildningshistorik och identifiera kompetens som erhållits från dem",
+      "item-1": "Se all information om ditt kunnande och dina intressen på en och samma plats",
+      "item-2": "Spara din arbets- och utbildningshistorik och identifiera kunnande som erhållits från dem",
       "item-3": "Importera dina uppgifter från andra tjänster (Min Studieinfo)",
       "item-4": "Använd din kompetensprofil för att hitta utbildnings- och karriärmöjligheter som passar just dig",
       "item-5": "Spara de mest intressanta utbildnings- och karriärmöjligheterna som favoriter",
-      "text-1": "När du är inloggad får du tillgång till en personlig kompetensprofil som hjälper dig att kartlägga och hantera din kompetens effektivt.\n",
+      "text-1": "När du är inloggad får du tillgång till en personlig kompetensprofil som hjälper dig att kartlägga och hantera ditt kunnande effektivt.\n",
       "title": "Välkommen att skapa din kompetensprofil!"
     },
     "step-2": {
@@ -296,9 +296,9 @@
     },
     "step-3": {
       "button-ok": "OK",
-      "item-1": "Identifiering av kompetenser från texter som användaren tillhandahållit (till exempel CV och utbildningsinformation)",
+      "item-1": "Identifiering av kunnande från texter som användaren tillhandahållit (till exempel CV och utbildningsinformation)",
       "item-2": "Skapande av karriär- och utbildningsmöjligheter genom att gruppera Jobbmarknadens platsannonser och Studieinfos utbildningsutbud",
-      "item-text": "I Kompetensstigen möjliggör artificiell intelligens: \n",
+      "item-text": "I Kompetensstigen möjliggör artificiell intelligens:\n",
       "text-1": "Vi använder artificiell intelligens för att erbjuda dig en personlig och självständig digital tjänst. Kom ihåg att artificiell intelligens ger dig råd och rekommendationer, men du fattar alltid de slutliga besluten själv. Använd ditt eget omdöme.",
       "text-2": "När du ser ikonen nedan, kan du klicka på den för att få mer information om användningen av artificiell intelligens. Mer information på sidan <CustomLink>Information om användningen av artificiell intelligens<Icon></Icon></CustomLink>.",
       "text-3": "Börja skapa din kompetensprofil och ta det första steget mot nya möjligheter!\t",
@@ -403,19 +403,19 @@
   "my-competence-path": "Min kompetensstig",
   "my-competence-profile": "Min kompetensprofil",
   "my-competences": {
-    "by-KOULUTUS": "Mina kompetenser från utbildningen",
-    "by-MUU_OSAAMINEN": "Mina övriga kompetenser",
-    "by-PATEVYYS": "Mina kompetenser från fritidsverksamhet",
-    "by-TOIMENKUVA": "Mina kompetenser från arbetsplatser",
-    "missing-KOULUTUS": "Inga kompetenser. Lägg till utbildningar.\n",
-    "missing-MUU_OSAAMINEN": "Inga kompetenser. Lägg till andra kompetenser.\n",
-    "missing-PATEVYYS": "Inga kompetenser. Lägg till fritidsverksamhet.\n",
-    "missing-TOIMENKUVA": "Inga kompetenser. Lägg till arbetsplatser.\n"
+    "by-KOULUTUS": "Mina kunskaper från utbildningen",
+    "by-MUU_OSAAMINEN": "Mitt övriga kunnande",
+    "by-PATEVYYS": "Mina kunskaper från fritidsverksamhet",
+    "by-TOIMENKUVA": "Mina kunskaper från arbetsplatser",
+    "missing-KOULUTUS": "Inga kunskaper. Lägg till utbildningar.\n",
+    "missing-MUU_OSAAMINEN": "Inga kunskaper. Lägg till andra kompetenser.\n",
+    "missing-PATEVYYS": "Inga kunskaper. Lägg till fritidsverksamhet.\n",
+    "missing-TOIMENKUVA": "Inga kunskaper. Lägg till arbetsplatser.\n"
   },
-  "my-competences-alphabetically": "Mina kompetenser i alfabetisk ordning",
-  "my-competences-by-sources": "Mina kompetenser enligt källor",
-  "n-education-opportunities": "{{count}} / {{total}} utbildningsmöjligheter",
-  "n-job-opportunities": "{{count}} / {{total}} karriärmöjligheter",
+  "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning",
+  "my-competences-by-sources": "Mina kunskaper enligt källor",
+  "n-education-opportunities": "{{count}} utbildningsmöjligheter",
+  "n-job-opportunities": "{{count}} karriärmöjligheter",
   "navigation": {
     "external": {
       "ohjaaja": {
@@ -444,11 +444,8 @@
     }
   },
   "next": "Nästa",
-  "no-competences": "Inga kompetenser",
-  "no-match": {
-    "description": "Sidan du sökte hittades inte.",
-    "title": "Sidan kunde inte hittas"
-  },
+  "no-competences": "Inga kunskaper",
+  "no-match": {},
   "on-this-page": "På denna sida",
   "open-submenu": "Öppna undermenyn",
   "opportunity-tooltip": {
@@ -474,11 +471,11 @@
   "osaamispolku": "Kompetensstigen",
   "osaamissuosittelija": {
     "competence": {
-      "add": "Lägg till en kompetens med +-tecknet.",
-      "identify": "Identifiera kompetenser",
-      "none-proposed": "Inga föreslagna kompetenser",
-      "none-selected": "Inga valda kompetenser",
-      "remove": "Ta bort en kompetens med x-tecknet."
+      "add": "Lägg till en kunskap med +-tecknet.",
+      "identify": "Identifiera kunskaper",
+      "none-proposed": "Inga föreslagna kunskaper",
+      "none-selected": "Inga valda kunskaper",
+      "remove": "Ta bort en kunskap med x-tecknet."
     },
     "interest": {
       "add": "Lägg till ett intresse med +-tecknet.",
@@ -530,9 +527,9 @@
       "title": "Min kompetensprofil"
     },
     "competences": {
-      "add": "Lägg till kompetenser",
-      "description": "Nedan hittar du alla kompetenser som du har lagt till i din kompetensprofil. Du kan själv välja hur dina kompetenser ska grupperas och presenteras.\n",
-      "edit": "Redigera kompetenser",
+      "add": "Lägg till kunskaper",
+      "description": "Nedan hittar du alla kunskaper som du har lagt till i din kompetensprofil. Du kan själv välja hur dina kunskaper ska grupperas och presenteras.\n",
+      "edit": "Redigera kunskaper",
       "group": "Ordna",
       "group-by-alphabet": "Alfabetiskt",
       "group-by-source": "Enligt källor",
@@ -544,10 +541,10 @@
         "TOIMENKUVA": "Öppna mina arbetsplatser\n"
       },
       "show-filters": "Visa filter",
-      "title": "Mina kompetenser"
+      "title": "Mina kunskaper"
     },
     "education-history": {
-      "description": "Nedan hittar du din utbildningshistorik. Du kan själv lägga till din utbildningshistorik och kartlägga dina relaterade kompetenser. Du kan också importera din utbildningshistorik från studieprestationerna i Min Studieinfo.\n",
+      "description": "Nedan hittar du din utbildningshistorik. Du kan själv lägga till din utbildningshistorik och kartlägga dina relaterade kunskaper. Du kan också importera din utbildningshistorik från studieprestationerna i Min Studieinfo.\n",
       "empty": "Du har ännu inte lagt till några utbildningar.",
       "modals": {
         "competences-description": "Berätta vad du lärde dig under utbildningen. Du kan också kopiera utbildningens innehållsbeskrivningar från någon annanstans, om de finns till exempel i studiehandboken, i beskrivningen på läroanstaltens webbplats eller i sociala medier.",
@@ -574,7 +571,7 @@
       "description": "Nedan hittar du din fritidsverksamhet. Fritidsverksamheten kan omfatta hobbyer, förtroendeuppdrag och olika behörigheter. Du kan själv lägga till dina fritidsverksamheter och kartlägga din relaterade kompetens.\n",
       "empty": "Du har ännu inte lagt till någon fritidsverksamhet.",
       "modals": {
-        "competences-description": "Beskriv din fritidsverksamhet. Skriv till exempel vad du har gjort eller vad det har innefattat. Vår kompetensidentifierare föreslår möjligheter på kompetenser som du fått och som du kan lägga till i din kompetensprofil.",
+        "competences-description": "Beskriv din fritidsverksamhet. Skriv till exempel vad du har gjort eller vad det har innefattat. Vår kompetensidentifierare föreslår möjligheter på kunskaper som du fått och som du kan lägga till i din kompetensprofil.",
         "competences-placeholder": "Jag lärde mig att identifiera människors kompetenser och uttrycka dem i ord...",
         "description": "Berätta här om din fritid. Fritidsverksamheten kan omfatta till exempel hobbyverksamhet, förtroendeuppdrag, olika behörigheter och annan merit. Fritidsaktiviteter skapar mycket kompetens för dig och vi hjälper dig att identifiera denna kompetens. Du kan anmäla fritidsaktiviteter per tema och bygga en vy över din fritidsverksamhet som passar dig.",
         "name-of-free-time-activity-placeholder": "Till exempel Dykningsresa/Sekreterare/Coachning",
@@ -592,17 +589,17 @@
       "free-form-description-of-my-interests": "Fritt formulerad beskrivning av mina intressen",
       "free-form-interests-description-guidance": "Du kan skriva och beskriva dina intressen med egna ord. Texten som du skriver sparas automatiskt. Om du använder tjänsten på finska, skriv på finska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.\n",
       "occupations-that-interest-me": "Yrken som intresserar mig",
-      "skills-that-interest-me": "Kompetenser som intresserar mig",
+      "skills-that-interest-me": "Kunskaper som intresserar mig",
       "title": "Mina intressen"
     },
     "login-page": {
-      "description": "Genom att logga in får du tillgång till en personlig kompetensprofil som hjälper dig att hantera och utnyttja din kompetens effektivt.\n",
-      "list-1-item-1": "Dina kompetenser: Spara din arbets- och utbildningshistorik samt dina prestationer.",
+      "description": "Genom att logga in får du tillgång till en personlig kompetensprofil som hjälper dig att hantera och utnyttja din kunskap effektivt.\n",
+      "list-1-item-1": "Dina kunskaper: Spara din arbets- och utbildningshistorik samt dina prestationer.",
       "list-1-item-2": "Dina intressen: Identifiera sådant som intresserar dig.",
       "list-1-item-3": "Favoritinnehåll: Spara och hantera utbildnings- och karriärmöjligheter som intresserar just dig.",
       "list-1-item-4": "Dina mål: Sätt upp mål och planera vägar för att nå dem.",
       "list-1-item-5": "Kompetensprofilens inställningar: Bestäm hur och var dina uppgifter används och vem du delar dem till.",
-      "list-2-item-1": "Du ser all information om din kompetens och dina intressen på en och samma plats.",
+      "list-2-item-1": "Du ser all information om din kunskap och dina intressen på en och samma plats.",
       "list-2-item-2": "Identifiera dina styrkor genom din arbets- och utbildningshistorik samt dina fritidsintressen.",
       "list-2-item-3": "Använd din kompetensprofil för att hitta utbildnings- och karriärmöjligheter som passar just dig.",
       "page-title": "Logga in i tjänsten\n",
@@ -613,14 +610,6 @@
       "title": "Skapa din egen kompetensprofil!"
     },
     "my-goals": {
-      "add-favorites-to-goals": "Lägg till favoriter som mål",
-      "add-modal-description": "Välj en lämplig utbildnings- eller karriärmöjlighet nedan och lägg till den som ett långsiktigt, kortsiktigt eller annat mål i menyn Lägg till alternativ.",
-      "delete-goal": "Ta bort från mål",
-      "delete-goal-description": "Är du säker på att du vill radera detta mål?",
-      "description": "På sidan Mina mål kan du sätta upp utvecklingsmål för din karriär eller utbildning. I Kompetensstigen byggs utbildnings- och karriärmålsättningar upp genom mål. Målet kan vara vilken utbildnings- eller karriärmöjlighet som helst som du har valt som din favorit.",
-      "goal-description": "Eget ändamål för målet",
-      "my-plan-towards-goal": "Min utbildnings- och karriärplan för målet",
-      "no-favorites-selected": "Du har inte lagt till några utbildnings- och karriärmöjligheter som favoriter eller så har de redan lagts till som mål.",
       "title": "Mina mål"
     },
     "paths": {
@@ -630,24 +619,24 @@
       "types": {}
     },
     "preferences": {
-      "list-1-item-1": "granska din kompetens som en sammanfattning på sidan Mina kompetenser",
-      "list-1-item-2": "spara din arbetshistorik och kartlägga den kompetens som erhållits från arbetet på sidan Mina arbetsplatser",
-      "list-1-item-3": "spara eller importera din utbildningshistorik och kartlägga den kompetens som erhållits från utbildningar på sidan Mina utbildningar",
+      "list-1-item-1": "granska dina kunskaper som en sammanfattning på sidan Mina kompetenser",
+      "list-1-item-2": "spara din arbetshistorik och kartlägga kunskaper som erhållits från arbetet på sidan Mina arbetsplatser",
+      "list-1-item-3": "spara eller importera din utbildningshistorik och kartlägga kunskaper som erhållits från utbildningar på sidan Mina utbildningar",
       "paragraph-4": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på lagen om den nationella informationsresursen för kompetenser. Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.\n",
       "paragraph-4-link": "Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.",
       "title": "Mina inställningar",
       "you-are-signed-in": "Kompetensprofilen är en plats där du kan spara och hantera dina uppgifter. I kompetensprofilen kan du:\n"
     },
     "something-else": {
-      "description": "Nedan hittar du dina övriga kompetenser. Du kan lägga till och ta bort kompetenser med redigera kompetenser-knappen.\t",
-      "empty": "Du har ännu inte lagt till några andra kompetenser.",
+      "description": "Nedan hittar du dina övriga kunskaper. Du kan lägga till och ta bort kompetenser med redigera kompetenser-knappen.\t",
+      "empty": "Du har ännu inte lagt till några andra kunskaper.",
       "free-form-description-of-my-interests": "Fritt formulerad beskrivning av min kompetens",
-      "free-form-interests-description-guidance": "Du kan skriva och beskriva din kompetens med egna ord. Om du använder tjänsten på finska, skriv på finska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.",
-      "my-other-comptetences": "Mina kompetenser",
-      "title": "Mina övriga kompetenser"
+      "free-form-interests-description-guidance": "Du kan skriva och beskriva ditt kunnande med egna ord. Om du använder tjänsten på finska, skriv på finska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.",
+      "my-other-comptetences": "Mina kunskaper",
+      "title": "Mina övriga kunskaper"
     },
     "work-history": {
-      "description": "Nedan hittar du din arbetshistorik. Du kan själv lägga till din arbetshistorik och kartlägga dina relaterade kompetenser.\n",
+      "description": "Nedan hittar du din arbetshistorik. Du kan själv lägga till din arbetshistorik och kartlägga dina relaterade kunskaper.\n",
       "empty": "Du har ännu inte lagt till arbetsplatser.",
       "modals": {
         "competences-description": "Ange fritt dina arbetsuppgifter i fältet Arbetsuppgifter. Du kan också kopiera dina arbetsuppgifter från någon annanstans, om de har angetts till exempel i en meritförteckning eller ett personalsystem eller om de finns sparade i sociala medier.",
@@ -660,7 +649,7 @@
       "title": "Mina arbetsplatser"
     }
   },
-  "proposed-competences": "Föreslagna kompetenser",
+  "proposed-competences": "Föreslagna kunskaper",
   "proposed-interests": "Föreslagna intressen",
   "rate-ai-content": {
     "dislike": "Jag gillar inte",
@@ -688,7 +677,7 @@
           "koulutusmahdollisuus": {
             "item1": "möjlighetens namn",
             "item2": "beskrivning",
-            "item3": "kompetenser",
+            "item3": "kunskaper",
             "item4": "utbildningens särdrag"
           },
           "tyomahdollisuus": {
@@ -710,7 +699,7 @@
   "remove-favorite": "Ta bort från favoriter",
   "remove-favorite-opportunity-confirmation": "Är du säker på att du vill ta bort möjligheten ”{{name}}” från dina favoriter?",
   "required": "obligatorisk",
-  "return-home": "Återgå till förstasidan",
+  "return-home": "Återgå till framsidan",
   "save": "Spara",
   "save-and-close": "Spara och stäng",
   "service-catalog": {
@@ -761,7 +750,7 @@
       "login": "logga-in",
       "my-goals": "mina-mal",
       "preferences": "mina-installningar",
-      "something-else": "ovriga-kompetenser",
+      "something-else": "ovriga-kunskaper",
       "work-history": "mina-arbetsplatser"
     },
     "tool": {
@@ -789,7 +778,7 @@
       "login-description": "Genom att logga in i tjänsten kan du importera dina uppgifter från kompetensprofilen och exportera dina uppgifter till kompetensprofilen. Om du ännu inte har en kompetensprofil kan du skapa en.\t",
       "title": "Din kompetensprofil"
     },
-    "description": "Fyll i dina intressen och kompetenser på den här sidan eller importera dem från din kompetensprofil. Du kan använda reglagen för att filtrera de möjligheter som föreslås för dig, till exempel enligt om du letar efter karriärmöjligheter med din nuvarande kompetens eller nya karriärer baserat på dina intressen. Testa och undersök olika kombinationer! Du kan spara dina uppgifter och de möjligheter som intresserar dig som favoriter genom att logga in på tjänsten.\n",
+    "description": "Fyll i dina intressen och kunskaper på den här sidan eller importera dem från din kompetensprofil. Du kan använda reglagen för att filtrera de möjligheter som föreslås för dig, till exempel enligt om du letar efter karriärmöjligheter med din nuvarande kompetens eller nya karriärer baserat på dina intressen. Testa och undersök olika kombinationer! Du kan spara dina uppgifter och de möjligheter som intresserar dig som favoriter genom att logga in på tjänsten.\n",
     "info-overview": {
       "data-from-profile": "Information som importerats från kompetensprofilen",
       "description": "Se all information som du har kartlagt och importerat från din profil och som påverkar de möjligheter som erbjuds dig.\n",
@@ -807,31 +796,31 @@
       "competences": {
         "description": "Beskriv dina färdigheter och välj de mest lämpliga kompetenserna utifrån vilka möjligheter kommer att föreslås för dig.\t",
         "import": {
-          "confirm-button": "Importera kompetenser",
-          "confirm-description": "Välj önskade kompetenser i listan nedan.",
-          "confirm-title": "Vill du importera dina kompetenser från din kompetensprofil?",
+          "confirm-button": "Importera kunskaper",
+          "confirm-description": "Välj önskade kunskaper i listan nedan.",
+          "confirm-title": "Vill du importera dina kunskaper från din kompetensprofil?",
           "import-button": "Importera information från profilen"
         },
         "textarea-placeholder": "Berätta med egna ord vad du kan. Du kan använda antingen enskilda ord, meningar eller längre texter.\t"
       },
       "export": {
         "confirm-button": "Spara till profilen",
-        "confirm-description": "Kompetenserna sparas i din kompetensprofil under Övriga kompetenser och Dina intressen.",
-        "confirm-title": "Vill du spara de kartlagda kompetenserna och intressena?",
+        "confirm-description": "Kunskaperna sparas i din kompetensprofil under Övriga kunskaper och Dina intressen.",
+        "confirm-title": "Vill du spara de kartlagda kunskaper och intressena?",
         "export-button": "Exportera uppgifter till profilen"
       },
       "goals": {
         "description": "I det här avsnittet kan du välja de resultat du vill ha från vår tjänst. Om du är osäker kan du hoppa över detta och bekanta dig med vår tjänst i egen takt. När du för muspekaren över ikonerna ser du en förklaring under dem om hur de påverkar slutresultatet.\n\nKlicka på ikonen om du vill välja den som mål. Klicka på ikonen på nytt för att ångra valet.",
-        "job-opportunities": "Undersöka karriärmöjligheter med min kompetens",
+        "job-opportunities": "Undersöka karriärmöjligheter med mitt kunnande",
         "job-opportunities-tooltip": "Öppna Dina möjligheter och välj först filtrera och sedan ”Visa i möjligheter – arbetsmöjligheter”. Du får en lista över karriärmöjligheter i Finland. Du kan också till exempel kartlägga dina intressen och se hur de påverkar utbildningsmöjligheterna som erbjuds dig.",
-        "map-competence": "Kartlägga min egen kompetens",
-        "map-competence-tooltip": "Öppna Kompetenser och kartlägg dina kompetenser! Mata in en beskrivning av dina kunskaper, färdigheter och erfarenheter och vår kompetensrekommenderare föreslår olika kompetenser för dig. Var stolt över dig själv, du kan förmodligen mer än du tror. Tänk på din utbildning, din arbetserfarenhet och dina hobbyer – all din kunskap och alla dina erfarenheter är viktiga.",
+        "map-competence": "Kartlägga mitt eget kunnande",
+        "map-competence-tooltip": "Öppna Kompetenser och kartlägg dina kunskaper! Mata in en beskrivning av dina kunskaper, färdigheter och erfarenheter och vår kompetensrekommenderare föreslår olika kunskaper för dig. Var stolt över dig själv, du kan förmodligen mer än du tror. Tänk på din utbildning, din arbetserfarenhet och dina hobbyer – all din kunskap och alla dina erfarenheter är viktiga.",
         "map-opportunities": "Kartlägga möjligheterna att byta bransch",
-        "map-opportunities-tooltip": "Logga in på din kompetensstig och skapa en kompetensprofil för dig själv! Skapa eller importera din arbets- och utbildningshistorik och berätta om dina hobbyer samt kartlägg din kompetens i anslutning till dem. Kartlägg också dina intressen. När du har gjort detta kan du importera dina uppgifter under Kompetenser och Intressen samt undersöka olika arbets- och utbildningsmöjligheter och spara dina favoriter i din kompetensprofil.",
+        "map-opportunities-tooltip": "Logga in på din kompetensstig och skapa en kompetensprofil för dig själv! Skapa eller importera din arbets- och utbildningshistorik och berätta om dina hobbyer samt kartlägg dina kunskaper i anslutning till dem. Kartlägg också dina intressen. När du har gjort detta kan du importera dina uppgifter under Kompetenser och Intressen samt undersöka olika arbets- och utbildningsmöjligheter och spara dina favoriter i din kompetensprofil.",
         "something-else": "Något annat, jag vet inte vad...",
         "something-else-tooltip": "Prova tjänsten och dess delar fritt och modigt! Genom tjänsten kan du identifiera, kartlägga och beskriva dina kunskaper, färdigheter och passioner och bygga en unik och personlig kompetensprofil som lyfter fram din verkliga potential. Du kan också bekanta dig med Finlands utbildningsutbud och arbetsmarknad genom att bläddra fritt eller granska individuellt riktade utbildnings- och karriärmöjligheter.",
         "title": "Vad jag vill",
-        "trainings": "Utbildningar för att öka min kompetens",
+        "trainings": "Utbildningar för att öka mitt kunnande",
         "trainings-tooltip": "Öppna Dina möjligheter och välj först filtrera och sedan ”Visa i möjligheter – utbildningsmöjligheter”. Du får en lista över de utbildningsmöjligheter som erbjuds i Finland. Du kan också till exempel kartlägga dina intressen under Intressen och se hur dina intressen påverkar de utbildningsmöjligheter som presenteras för dig."
       },
       "interests": {
@@ -852,7 +841,7 @@
       },
       "title": "Dina uppgifter"
     },
-    "remove-competence-help": "Ta bort en kompetens med x-tecknet.",
+    "remove-competence-help": "Ta bort en kunskap med x-tecknet.",
     "salary-suffix": "€/månad",
     "settings": {
       "general": {
@@ -876,7 +865,7 @@
       "help-text": "Som inloggad användare kan du kartlägga kompetenser och intressen mer detaljerat i kompetensprofilen.\n",
       "help-text-2": "Om du behöver hjälp med att fundera på din situation kan följande webbplatser hjälpa dig.\n",
       "service-directory": "Väglednings- och rådgivningstjänster",
-      "something-else": "Mina övriga kompetenser",
+      "something-else": "Mina övriga kunskaper",
       "title": "Stöd för reflektion",
       "work-history": "Mina arbetsplatser"
     },
@@ -893,7 +882,7 @@
     "competence": {
       "KIINNOSTUS": "Intresse",
       "KOULUTUS": "Utbildning",
-      "MUU_OSAAMINEN": "Annan kompetens",
+      "MUU_OSAAMINEN": "Annat kunnande ",
       "PATEVYYS": "Fritidsverksamhet",
       "TOIMENKUVA": "Arbetsplats"
     }
@@ -923,6 +912,6 @@
     "summary": "Sammanfattning",
     "workplace-or-job-description": "Arbetsplats/uppgiftsbeskrivning"
   },
-  "your-competences": "Egna kompetenser",
+  "your-competences": "Egna kunskaper",
   "your-interests": "Egna intressen"
 }

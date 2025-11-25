@@ -11,7 +11,6 @@
     "description-tool-item-2": "utbildningsmöjligheter",
     "description-tool-item-3": "individuella förslag på möjligheter som passar dig"
   },
-  "competences-identify-failed": "AI-kompetensidentifiering misslyckades, lägg till kompetenser genom att redigera utbildningen manuellt.",
   "filters": "Filter",
   "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
@@ -94,16 +93,11 @@
     "my-own-data": {
       "competences": {
         "import": {
-          "confirm-description": "Importera kompetenser från din kompetensprofil till din översikt över data. Välj de kompetenser du vill ha från listan nedan.",
-          "confirm-title": "Importera dina kompetenser från din kompetensprofil?",
           "failure-toast": "Importen misslyckades — försök igen",
           "success-toast": "Data har importerats till översikten"
         }
       },
-      "export": {
-        "confirm-description": "Exportera all information till din kompetensprofil. Du hittar dem senare i kompetensprofilen under 'Övriga kompetenser' och 'Mina intressen'.",
-        "confirm-title": "Exportera data till profil"
-      }
+      "export": {}
     },
     "settings": {
       "controls": "Kontroller",
