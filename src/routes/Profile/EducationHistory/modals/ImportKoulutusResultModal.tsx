@@ -35,16 +35,13 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
       open={isOpen}
       fullWidthContent
       content={
-        <div
-          id={modalId}
-          className="flex flex-col items-center justify-center pointer-events-auto px-5 absolute top-1/2 left-1/2 w-full -translate-1/2"
-        >
+        <div id={modalId} className="flex flex-col items-center justify-center px-2 sm:px-5 sm:mt-11 mt-6">
           {isSuccess ? (
             <div className="flex flex-col items-start">
               <div className="w-full flex justify-center mb-4">
                 <JodCheckCircle size={20} className="text-heading-1 text-success" />
               </div>
-              <div className="mx-8 w-full flex flex-col">
+              <div className="lg:px-8 flex flex-col sm:self-center sm:w-3/4 w-full">
                 <ModalHeader text={t('education-history-import.result-modal.success')} />
                 <p className="max-w-full break-words whitespace-pre-line">
                   {t('education-history-import.result-modal.success-osaamiset-info')}
