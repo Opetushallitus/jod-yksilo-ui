@@ -53,12 +53,101 @@ function readExcelFile(filePath) {
   return xlsx.utils.sheet_to_json(worksheet);
 }
 
+// Function to remove trailing characters if they weren't in original
+function removeUnwantedTrailing(text, originalText) {
+  // Remove trailing tabs if original didn't have them
+  const originalEndsWithTab = originalText && typeof originalText === 'string' && originalText.endsWith('\t');
+  if (!originalEndsWithTab && text.endsWith('\t')) {
+    // Find the last non-tab character
+    let i = text.length - 1;
+    while (i >= 0 && text[i] === '\t') {
+      i--;
+    }
+    return text.substring(0, i + 1);
+  }
+  return text;
+}
+
+// Function to handle text without newlines
+function handleTextWithoutNewlines(text, originalText) {
+  const originalEndsWithNewline = originalText && typeof originalText === 'string' && originalText.endsWith('\n');
+  return originalEndsWithNewline ? text + '\n' : text;
+}
+
+// Function to handle text with only trailing newlines
+function handleTrailingNewlines(text, originalText) {
+  const originalEndsWithNewline = originalText && typeof originalText === 'string' && originalText.endsWith('\n');
+  const trimmedText = text.trimEnd();
+  return originalEndsWithNewline ? trimmedText + '\n' : trimmedText;
+}
+
+// Function to handle text with br tags
+function handleBrTags(text, originalText) {
+  const originalEndsWithNewline = originalText && typeof originalText === 'string' && originalText.endsWith('\n');
+  const trimmedText = text.trimEnd();
+  let result = trimmedText.replaceAll('\n', '<br/>');
+  if (originalEndsWithNewline) {
+    result += '\n';
+  }
+  return result;
+}
+
+// Function to handle text with newlines in the middle
+function handleMiddleNewlines(text, originalText) {
+  const originalEndsWithNewline = originalText && typeof originalText === 'string' && originalText.endsWith('\n');
+  const trimmedText = text.trimEnd();
+
+  if (originalEndsWithNewline && !text.endsWith('\n')) {
+    return trimmedText + '\n';
+  }
+  return text;
+}
+
+// Function to clean translation text
+function cleanTranslationText(text, originalText) {
+  if (typeof text !== 'string') {
+    return text;
+  }
+
+  // Remove unwanted trailing characters
+  text = removeUnwantedTrailing(text, originalText);
+
+  // Check if text has newlines
+  const hasNewlines = text.includes('\n');
+
+  if (!hasNewlines) {
+    return handleTextWithoutNewlines(text, originalText);
+  }
+
+  // Count newlines (excluding trailing ones)
+  const trimmedText = text.trimEnd();
+  const newlineCount = (trimmedText.match(/\n/g) || []).length;
+
+  // If there are no newlines in the middle (only at the end)
+  if (newlineCount === 0) {
+    return handleTrailingNewlines(text, originalText);
+  }
+
+  // Check if original text uses <br/> tags
+  if (originalText && typeof originalText === 'string' && originalText.includes('<br/>')) {
+    return handleBrTags(text, originalText);
+  }
+
+  // If there are newlines in the middle, preserve them
+  return handleMiddleNewlines(text, originalText);
+}
+
 // Function to get translation object by language
-function getTranslationObjectByLang(excelDataArray, lang) {
+function getTranslationObjectByLang(excelDataArray, lang, existingTranslations, draftTranslations) {
   const result = {};
+  const flatExisting = flattenTranslations(existingTranslations);
+  const flatDraft = flattenTranslations(draftTranslations);
+
   for (const row of excelDataArray) {
     if (row[lang]) {
-      result[row.Key] = row[lang];
+      const key = row.Key;
+      const originalText = flatExisting[key] || flatDraft[key];
+      result[key] = cleanTranslationText(row[lang], originalText);
     }
   }
 
@@ -109,6 +198,26 @@ function readTranslations(lang, file) {
   return {};
 }
 
+// Function to sort object keys alphabetically (recursively)
+function sortObjectKeys(obj) {
+  if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) {
+    return obj;
+  }
+
+  const sorted = {};
+  const compareKeys = (a, b) => {
+    if (a === b) return 0;
+    return a > b ? 1 : -1;
+  };
+
+  const keys = Object.keys(obj).sort(compareKeys);
+  for (const key of keys) {
+    sorted[key] = sortObjectKeys(obj[key]);
+  }
+
+  return sorted;
+}
+
 // Function to write JSON translation files
 function writeTranslations(lang, file, data) {
   const langDir = path.join(translationsDir, lang);
@@ -116,24 +225,143 @@ function writeTranslations(lang, file, data) {
     fs.mkdirSync(langDir, { recursive: true });
   }
   const translationPath = path.join(langDir, file);
+  const sortedData = sortObjectKeys(data);
   //note: add a newline at the end of the file same weay as Prettier does it
-  fs.writeFileSync(translationPath, `${JSON.stringify(data, null, 2)}\n`, 'utf-8');
+  fs.writeFileSync(translationPath, `${JSON.stringify(sortedData, null, 2)}\n`, 'utf-8');
 }
 
-function removeImportedDraftKeys(draftTranslations, importedFlatKeys) {
+function keyPathExists(obj, keys) {
+  let current = obj;
+  for (const [index, key] of keys.entries()) {
+    if (index === keys.length - 1) {
+      return key in current;
+    }
+    if (current && typeof current[key] === 'object') {
+      current = current[key];
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+
+function flattenTranslations(obj, prefix = '') {
+  const result = {};
+  for (const key in obj) {
+    if (!obj.hasOwnProperty(key)) continue;
+    const newKey = prefix ? `${prefix}.${key}` : key;
+    if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
+      Object.assign(result, flattenTranslations(obj[key], newKey));
+    } else {
+      result[newKey] = obj[key];
+    }
+  }
+  return result;
+}
+
+function setValueAtPath(obj, keys, value) {
+  let current = obj;
+  for (const [index, key] of keys.entries()) {
+    if (index === keys.length - 1) {
+      current[key] = value;
+    } else {
+      if (!current[key]) {
+        current[key] = {};
+      }
+      current = current[key];
+    }
+  }
+}
+
+function removeKeyAtPath(obj, keys) {
+  let current = obj;
+  for (const [index, key] of keys.entries()) {
+    if (index === keys.length - 1) {
+      delete current[key];
+    } else {
+      current = current[key];
+    }
+  }
+}
+
+function updateExistingTranslations(existingTranslations, importedFlatTranslations) {
+  // Update only keys that already exist in existingTranslations
+  for (const [flatKey, value] of Object.entries(importedFlatTranslations)) {
+    const keys = flatKey.split('.');
+
+    if (keyPathExists(existingTranslations, keys)) {
+      setValueAtPath(existingTranslations, keys, value);
+    }
+  }
+}
+
+function addKeysFromDraft(existingTranslations, importedFlatTranslations, draftTranslations) {
+  // Add keys from importedFlatTranslations that exist in draft
+  // (moving them from draft to translation.json)
+  const flatDraft = flattenTranslations(draftTranslations);
+
+  for (const [flatKey, value] of Object.entries(importedFlatTranslations)) {
+    const keys = flatKey.split('.');
+
+    // If key is in draft (regardless if it's in existingTranslations), add/update it
+    if (flatKey in flatDraft) {
+      setValueAtPath(existingTranslations, keys, value);
+    }
+  }
+}
+
+function filterExistingKeys(importedFlatTranslations, existingTranslations, draftTranslations) {
+  // Flatten both existing translation files
+  const flatExisting = flattenTranslations(existingTranslations);
+  const flatDraft = flattenTranslations(draftTranslations);
+
+  // Only keep keys from Excel that exist in either translation.json or draft.translation.json
+  const filtered = {};
+  for (const [key, value] of Object.entries(importedFlatTranslations)) {
+    if (key in flatExisting || key in flatDraft) {
+      filtered[key] = value;
+    }
+  }
+
+  return filtered;
+}
+
+function removeImportedKeysFromDraft(draftTranslations, importedFlatKeys, existingTranslations) {
+  // Remove keys from draft.translation.json ONLY if they are in Excel
+  // AND will be added to translation.json
+  const flatExisting = flattenTranslations(existingTranslations);
+
   for (const flatKey of importedFlatKeys) {
     const keys = flatKey.split('.');
-    let current = draftTranslations;
-    for (const [index, key] of keys.entries()) {
-      if (current && key in current) {
-        if (index === keys.length - 1) {
-          delete current[key];
-        } else {
-          current = current[key];
-        }
-      } else {
-        break; // Key path does not exist, exit early
+
+    // Only remove from draft if:
+    // 1. Key exists in draft
+    // 2. Key will be in translation.json (either already there or being added)
+    if (keyPathExists(draftTranslations, keys) && flatKey in flatExisting) {
+      removeKeyAtPath(draftTranslations, keys);
+    }
+  }
+}
+
+function moveDuplicateKeysBackToDraft(existingTranslations, draftTranslations, importedFlatKeys) {
+  // Find keys that exist in both translations.json and draft.translation.json
+  // but are NOT in Excel - move them from translations.json to draft.translation.json
+  const flatExisting = flattenTranslations(existingTranslations);
+  const flatDraft = flattenTranslations(draftTranslations);
+  const importedKeysSet = new Set(importedFlatKeys);
+
+  for (const [flatKey, value] of Object.entries(flatExisting)) {
+    // If key exists in both files and is NOT in Excel
+    if (flatKey in flatDraft && !importedKeysSet.has(flatKey)) {
+      const keys = flatKey.split('.');
+
+      // Add to draft if not already there (might have been removed)
+      if (!keyPathExists(draftTranslations, keys)) {
+        setValueAtPath(draftTranslations, keys, value);
       }
+
+      // Remove from existing translations
+      removeKeyAtPath(existingTranslations, keys);
     }
   }
 }
@@ -154,11 +382,37 @@ const translationFile = 'translation.json';
 const draftTranslationFile = 'draft.translation.json';
 
 for (const lang of languages) {
-  const flatTranslations = getTranslationObjectByLang(excelDataArray, lang);
-  const unflattenedTranslations = unflattenTranslations(flatTranslations);
-  writeTranslations(lang, translationFile, unflattenedTranslations);
+  // Read existing translations first (needed for cleanTranslationText)
+  const existingTranslations = readTranslations(lang, translationFile);
   const draftTranslations = readTranslations(lang, draftTranslationFile);
-  removeImportedDraftKeys(draftTranslations, Object.keys(flatTranslations));
+
+  const importedFlatTranslations = getTranslationObjectByLang(
+    excelDataArray,
+    lang,
+    existingTranslations,
+    draftTranslations,
+  );
+
+  // Only keep keys from Excel that already exist in either file
+  const filteredFlatTranslations = filterExistingKeys(
+    importedFlatTranslations,
+    existingTranslations,
+    draftTranslations,
+  );
+
+  // Move duplicate keys back to draft if they are not in Excel
+  moveDuplicateKeysBackToDraft(existingTranslations, draftTranslations, Object.keys(filteredFlatTranslations));
+
+  // Update translation.json with filtered keys (preserve existing structure)
+  updateExistingTranslations(existingTranslations, filteredFlatTranslations);
+
+  // Add keys from draft to translation.json if they are in Excel
+  addKeysFromDraft(existingTranslations, filteredFlatTranslations, draftTranslations);
+
+  writeTranslations(lang, translationFile, existingTranslations);
+
+  // Remove imported keys from draft.translation.json (only if they are now in translation.json)
+  removeImportedKeysFromDraft(draftTranslations, Object.keys(filteredFlatTranslations), existingTranslations);
   writeTranslations(lang, draftTranslationFile, draftTranslations);
 }
 

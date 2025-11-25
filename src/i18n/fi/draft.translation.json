@@ -11,7 +11,6 @@
     "description-tool-item-2": "koulutusmahdollisuudet",
     "description-tool-item-3": "yksilölliset ehdotukset sinulle sopivista mahdollisuuksista"
   },
-  "competences-identify-failed": "Tekoälyn osaamistunnistus epäonnistui, lisää osaamisia käsin muokkaamalla koulutusta.",
   "filters": "Suodattimet",
   "n-months-short": "{{count}} kk",
   "n-years_one": "{{count}} vuosi",

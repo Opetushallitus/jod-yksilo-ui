@@ -18,7 +18,7 @@
     "agent-name": "Neuvontabotti",
     "disclaimer": "Älä syötä henkilötietojasi neuvontabotille.",
     "error-message": "Tapahtui jokin virhe.",
-    "greeting": "Hei, olen Osaamispolun neuvontabotti. Voin auttaa sinua Osaamispolkuun liittyvissä kysymyksissä.<br/><br/>Olen testiversio ja harjoittelen vielä, joten en osaa vastata kaikkiin kysymyksiin. Kysy silti, sillä opin koko ajan lisää. Esittämäsi kysymykset auttavat minua kehittymään.<br/><br/>Esitäthän yhden kysymyksen kerrallaan. Pidä kysymykset lyhyinä ja selkeinä, niin pystyn auttamaan paremmin. En muista aiempia kysymyksiä tai vastauksia. Miten voin auttaa?",
+    "greeting": "Hei, olen Osaamispolun neuvontabotti. Voin auttaa sinua Osaamispolkuun liittyvissä kysymyksissä.<br/><br/>Olen testiversio ja harjoittelen vielä, joten en osaa vastata kaikkiin kysymyksiin. Kysy silti, sillä opin koko ajan lisää. Esittämäsi kysymykset auttavat minua kehittymään.<br/><br/>Esitäthän yhden kysymyksen kerrallaan. Pidä kysymykset lyhyinä ja selkeinä, niin pystyn auttamaan paremmin. En muista aiempia kysymyksiä tai vastauksia. Ethän kirjoita henkilötietojasi chattiin. Miten voin auttaa?",
     "header": "Neuvontabotti",
     "open-window-text": "Kysy neuvoa",
     "text-input-placeholder": "Kirjoita kysymyksesi tähän",
@@ -30,6 +30,7 @@
   "compare": "Vertaile",
   "competence": "Osaaminen",
   "competences": "Kartoita osaamiset",
+  "competences-identify-failed": "Tekoälyn osaamistunnistus epäonnistui.",
   "competences-identifying": "Voit muokata koulutusta, kun osaamiset ovat latautuneet.",
   "competences-of-your-choice": "Valitut osaamiset",
   "competency-path-portal": "Osaamispolun etusivu",
@@ -253,12 +254,12 @@
     "hero-content": "Osaamispolussani voit kartoittaa omaa osaamistasi, löytää koulutuksia osaamisesi kasvattamiseksi, tutkia uramahdollisuuksia osaamisellasi ja kartoittaa mahdollisuuksia alan vaihtamiseen.",
     "hero-title": "Osaamispolkuni",
     "how-competency-path-helps-you": "Miten Osaamispolku auttaa sinua osana muita palveluita?",
-    "how-competency-path-helps-you-content": "Osaamispolku, Opintopolku, Työmarkkinatori ja Opin.fi muodostavat yhdessä palvelukokonaisuuden, joka tukee oppimista, urasuunnittelua ja työnhakua eri elämäntilanteissa. Jokaisella palvelulla on oma roolinsa, mutta yhdessä ne tarjoavat sinulle selkeän polun osaamisesi ja urasi kehittämiseen. <br/><br/>Jos etsit suuntaa tai omaa polkuasi, Osaamispolussa voit tunnistaa omat vahvuudet ja kiinnostukseksi sekä löytää niihin sopivia koulutus- ja uramahdollisuuksia. Kun olet selvittänyt miten haluat edetä, Opintopolku, Työmarkkinatori ja Opin.fi auttavat sinua hakeutumaan niihin.",
-    "how-competency-path-helps-you-opinfi-description": "Opin.fi on suomalaisten yliopistojen ja ammattikorkeakoulujen yhteinen palvelu, jossa avoimet opinnot ovat helposti saatavillasi.",
+    "how-competency-path-helps-you-content": "Osaamispolku, Opintopolku, Työmarkkinatori ja Opin.fi muodostavat yhdessä palvelukokonaisuuden, joka tukee oppimista, urasuunnittelua ja työnhakua eri elämäntilanteissa. Jokaisella palvelulla on oma roolinsa, mutta yhdessä ne tarjoavat sinulle selkeän polun osaamisesi ja urasi kehittämiseen.<br/><br/>Osaamispolussa voit tunnistaa omat vahvuudet ja kiinnostuksen kohteet sekä löytämään niihin sopivia koulutus- ja uramahdollisuuksia. Tämän jälkeen Opintopolku, Työmarkkinatori ja Opin.fi auttavat sinua hakeutumaan niihin.",
+    "how-competency-path-helps-you-opinfi-description": "Opin.fi on suomalaisten yliopistojen ja ammattikorkeakoulujen yhteinen palvelu, jossa avoimet opinnot ovat helposti saatavillasi",
     "how-competency-path-helps-you-opinfi-title": "Opin.fi",
     "how-competency-path-helps-you-opintopolku-description": "Opintopolku tarjoaa kattavat tiedot koulutuksista ja hakupalvelut eri koulutusasteille.<br/><br/>Osaamispolun koulutusmahdollisuuksista voit siirtyä Opintopolkuun tutustumaan tarkemmin ja hakeutumaan koulutuksiin. Kirjautuessasi Osaamispolkuuni voit tuoda opintohistoriasi osaamisprofiililisi.",
     "how-competency-path-helps-you-opintopolku-title": "Opintopolku",
-    "how-competency-path-helps-you-tmt-description": "Työmarkkinatori kokoaa yhteen avoimet työpaikat ja tukee työnhakua sekä urasuunnittelua.<br/><br/>Osaamispolun uramahdollisuuksista voit siirtyä Työmarkkinatorille tutustumaan ja hakemaan avoimia työpaikkoja. Tulevaisuudessa voit myös siirtää tietojasi Osaamispolun ja Työmarkkinatorin välillä. ",
+    "how-competency-path-helps-you-tmt-description": "Työmarkkinatori kokoaa yhteen avoimet työpaikat ja tukee työnhakua sekä urasuunnittelua.<br/><br/>Osaamispolun uramahdollisuuksista voit siirtyä Työmarkkinatorille tutustumaan ja hakemaan avoimia työpaikkoja. Tulevaisuudessa voit myös siirtää tietojasi Osaamispolun ja Työmarkkinatorin välillä.",
     "how-competency-path-helps-you-tmt-title": "Työmarkkinatori",
     "need-personal-guidance": "Tarvitsetko henkilökohtaista ohjausta?",
     "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua ura- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut."
@@ -297,10 +298,10 @@
       "button-ok": "OK",
       "item-1": "Osaamisten tunnistamisen käyttäjän antamasta tekstistä (esim. CV ja koulutustiedot)",
       "item-2": "Ura- ja koulutusmahdollisuuksien luominen ryhmittelemällä Työmarkkinatorin työpaikkailmoituksia ja Opintopolun koulutustarjontaa",
-      "item-text": "Osaamispolussa tekoäly mahdollistaa: \n",
+      "item-text": "Osaamispolussa tekoäly mahdollistaa:\n",
       "text-1": "Hyödynnämme tekoälyä tarjoamaan sinulle personoitua ja itsenäistä digitaalista palvelua. Muista, että tekoäly tarjoaa ohjeita ja suosituksia, mutta lopulliset päätökset teet aina itse. Käytä omaa harkintaasi.",
       "text-2": "Kun näet alla olevan kuvakkeen, saat klikkaamalla sitä lisätietoa tekoälyn käytöstä. Lisätietoja <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink> -sivulla.",
-      "text-3": "Aloita osaamisprofiilisi luominen\u000bja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
+      "text-3": "Aloita osaamisprofiilisi luominen ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
       "title": "Tekoäly apunasi"
     }
   },
@@ -444,10 +445,6 @@
   },
   "next": "Seuraava",
   "no-competences": "Ei osaamisia",
-  "no-match": {
-    "description": "Hakemaasi sivua ei löytynyt.",
-    "title": "Sivua ei löytynyt"
-  },
   "on-this-page": "Tällä sivulla",
   "open-submenu": "Avaa alivalikko",
   "opportunity-tooltip": {
@@ -612,14 +609,6 @@
       "title": "Luo oma osaamisprofiilisi!"
     },
     "my-goals": {
-      "add-favorites-to-goals": "Lisää suosikkeja päämääräksi",
-      "add-modal-description": "Valitse alta sopiva koulutus- tai uramahdollisuussuosikkisi ja lisää se pitkän tai lyhyen aikavälin tai muuksi päämääräksi Lisää valintoja -valikosta.",
-      "delete-goal": "Poista päämääristä",
-      "delete-goal-description": "Haluatko varmasti poistaa tämän päämäärän?",
-      "description": "Päämääräni-sivulla voit asettaa uraan tai kouluttautumiseen liittyviä kehittymistavoitteita. Osaamispolussa koulutus- ja uratavoitteita rakennetaan päämäärien kautta. Päämäärä voi olla mikä tahansa koulutus- tai uramahdollisuus, jonka olet valinnut suosikiksesi.",
-      "goal-description": "Oma tavoite päämäärälle",
-      "my-plan-towards-goal": "Koulutus- ja urapolkusuunnitelmani päämäärään",
-      "no-favorites-selected": "Et ole lisännyt yhtään koulutus- ja uramahdollisuutta suosikiksi, tai ne on jo lisätty päämääräksi.",
       "title": "Tavoitteeni"
     },
     "paths": {
