@@ -22,15 +22,11 @@ export const CompareCompetencesTableRow = ({ row, className }: CompareCompetence
   const { isDev } = useEnvironment();
   return (
     <tr className={className}>
-      {isDev ? (
-        <TooltipWrapper tooltipContent={row.esiintyvyys} tooltipPlacement="top">
-          <td className="w-full pl-5 pr-7 py-3 text-heading-5 hyphens-auto first-letter:uppercase">
-            {getLocalizedText(row.nimi)}
-          </td>
-        </TooltipWrapper>
-      ) : (
+      {isDev && (
         <td className="w-full pl-5 pr-7 py-3 text-heading-5 hyphens-auto first-letter:uppercase">
-          {getLocalizedText(row.nimi)}
+          <TooltipWrapper tooltipContent={row.esiintyvyys} tooltipPlacement="top">
+            {getLocalizedText(row.nimi)}
+          </TooltipWrapper>
         </td>
       )}
       <td className="justify-items-center pr-5">
