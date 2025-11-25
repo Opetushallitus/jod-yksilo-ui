@@ -198,3 +198,11 @@ export const stringToLocalizedText = (
 
   return localizedText;
 };
+
+export const hasLocalizedText = (item?: components['schemas']['LokalisoituTeksti']): boolean => {
+  if (!item) {
+    return false;
+  }
+
+  return Object.values(item).some((text) => text?.trim().length > 0);
+};

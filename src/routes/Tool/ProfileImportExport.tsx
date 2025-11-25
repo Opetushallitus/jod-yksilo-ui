@@ -5,7 +5,7 @@ import { useModal } from '@/hooks/useModal';
 import { CompetenceFilters } from '@/routes/Profile/Competences/CompetenceFilters';
 import { FILTERS_ORDER } from '@/routes/Profile/Competences/constants';
 import { useToolStore } from '@/stores/useToolStore';
-import { removeDuplicatesByKey } from '@/utils';
+import { hasLocalizedText, removeDuplicatesByKey } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, ConfirmDialog } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
@@ -94,8 +94,6 @@ const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void })
   const {
     storeOsaamiset,
     storeKiinnostukset,
-    kiinnostuksetVapaateksti,
-    muutOsaamisetVapaateksti,
     setOsaamiset,
     setOsaamisetVapaateksti,
     setKiinnostukset,
@@ -113,8 +111,17 @@ const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void })
     })),
   );
   const locale = language as 'fi' | 'sv';
-  const { toimenkuvat, koulutukset, patevyydet, muutOsaamiset, osaamiset, isLoggedIn, kiinnostukset } =
-    useLoaderData<ToolLoaderData>();
+  const {
+    toimenkuvat,
+    koulutukset,
+    patevyydet,
+    muutOsaamiset,
+    muutOsaamisetVapaateksti,
+    osaamiset,
+    isLoggedIn,
+    kiinnostukset,
+    kiinnostuksetVapaateksti,
+  } = useLoaderData<ToolLoaderData>();
 
   const { selectedFilters, setSelectedFilters, filterKeys } = useInitializeFilters(
     locale,
@@ -205,19 +212,26 @@ const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void })
         },
         {} as Record<string, number>,
       );
-      // Remove duplicates and sort by occurrence count
 
+      // Remove duplicates and sort by occurrence count
       const filtered = removeDuplicatesByKey(currentAndImportedSkills, (item) => item.id + item.tyyppi).sort(
         (a, b) => occurrences[b.id] - occurrences[a.id],
       );
 
       setOsaamiset(filtered);
 
-      if (currentAndImportedSkills.some((o) => o.tyyppi === 'MUU_OSAAMINEN')) {
+      const hasMuutOsaamisetVapaateksti =
+        mappedSelectedCompetences.some((o) => o.tyyppi === 'MUU_OSAAMINEN' && o.id.length === 0) &&
+        hasLocalizedText(muutOsaamisetVapaateksti);
+      if (currentAndImportedSkills.some((o) => o.tyyppi === 'MUU_OSAAMINEN') || hasMuutOsaamisetVapaateksti) {
         const { data } = await client.GET('/api/profiili/muu-osaaminen');
         setOsaamisetVapaateksti(data?.vapaateksti);
       }
-      if (importedInterests.length > 0) {
+
+      const hasKiinnostuksetVapaateksti =
+        mappedSelectedCompetences.some((o) => o.tyyppi === 'KIINNOSTUS' && o.id.length === 0) &&
+        hasLocalizedText(kiinnostuksetVapaateksti);
+      if (importedInterests.length > 0 || hasKiinnostuksetVapaateksti) {
         await importKiinnostuksetFromProfile();
       }
 
@@ -229,6 +243,8 @@ const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void })
   }, [
     importKiinnostuksetFromProfile,
     kiinnostukset,
+    kiinnostuksetVapaateksti,
+    muutOsaamisetVapaateksti,
     onImportSuccess,
     osaamiset,
     selectedFilters,
