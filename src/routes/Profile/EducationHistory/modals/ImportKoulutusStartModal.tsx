@@ -38,24 +38,22 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
     <Modal
       name={t('education-history-import.start-modal.title')}
       open={isOpen}
+      fullWidthContent
       content={
-        <div
-          id={modalId}
-          className="flex flex-col items-center justify-center fixed inset-0 overflow-hidden pointer-events-none"
-        >
-          <div className="text-left max-w-lg px-5">
+        <div id={modalId} className="flex flex-col items-center px-2 sm:px-5 sm:mt-11 mt-6">
+          <div className="text-left w-full sm:max-w-3/4 sm:px-5">
             <ModalHeader text={t('education-history-import.start-modal.title')} />
-            <p className="mb-4 sm:text-body-md text-body-md-mobile">
+            <p className="mb-4 sm:text-body-md text-body-md-mobile font-arial">
               {t('education-history-import.start-modal.description')}
             </p>
-          </div>
-          <div className="mt-4 pointer-events-auto">
             <Button
-              variant="white"
+              variant="accent"
               label={t('education-history-import.start-modal.import-button')}
+              className="w-fit mt-7"
               onClick={triggerGivePermissionToImportKoulutusData}
             />
           </div>
+
           {error && (
             <p className="mt-4 text-alert-text">{t('education-history-import.start-modal.import-redirect-fail')}</p>
           )}
