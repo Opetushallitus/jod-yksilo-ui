@@ -20,6 +20,11 @@
     "go-home": "Siirry etusivulle",
     "title": "Hups! Sivua ei löytynyt"
   },
+  "opportunity-type": {
+    "work": {
+      "TMT": "Muu työmahdollisuus"
+    }
+  },
   "profile": {
     "competences": {
       "info": "Voit valita itse mitä Osaamisprofiilin tiedoistasi hyödynnät mahdollisuuksien etsintään tuomalla ne käyttöösi Löydä mahdollisuuksia -sivulla."
