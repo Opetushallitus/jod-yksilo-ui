@@ -1,6 +1,6 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
-import { initializeLocalizedText } from '@/utils';
+
 import type { LoaderFunction } from 'react-router';
 
 export interface CompetenceDataGroup {
@@ -61,21 +61,21 @@ export const getCompetenceData = async (request: Request, context: components['s
     const toimenkuvat =
       tyopaikatRes?.data?.map((tyopaikka) => ({
         id: tyopaikka.id,
-        nimi: initializeLocalizedText(tyopaikka.nimi),
+        nimi: tyopaikka.nimi,
         data: filterItems(osaaminenLahdeIds, tyopaikka.toimenkuvat),
       })) ?? [];
 
     const patevyydet =
       vapaaAjanToiminnotRes?.data?.map((toiminto) => ({
         id: toiminto.id,
-        nimi: initializeLocalizedText(toiminto.nimi),
+        nimi: toiminto.nimi,
         data: filterItems(osaaminenLahdeIds, toiminto.patevyydet),
       })) ?? [];
 
     const koulutukset =
       koulutRes?.data?.map((koulu) => ({
         id: koulu.id,
-        nimi: initializeLocalizedText(koulu.nimi),
+        nimi: koulu.nimi,
         data: filterItems(osaaminenLahdeIds, koulu.koulutukset),
       })) ?? [];
 

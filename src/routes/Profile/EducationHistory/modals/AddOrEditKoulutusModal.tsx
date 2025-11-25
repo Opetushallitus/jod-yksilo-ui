@@ -6,7 +6,7 @@ import { formErrorMessage, LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
-import { getLocalizedText, initializeLocalizedText } from '@/utils';
+import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
@@ -224,8 +224,8 @@ const AddOrEditKoulutusModal = ({
 
         return {
           id: koulutus?.id ?? '',
-          nimi: initializeLocalizedText(koulutus?.nimi),
-          kuvaus: initializeLocalizedText(koulutus?.kuvaus),
+          nimi: koulutus?.nimi ?? {},
+          kuvaus: koulutus?.kuvaus ?? {},
           alkuPvm: koulutus?.alkuPvm ?? '',
           loppuPvm: koulutus?.loppuPvm ?? '',
           osaamiset:

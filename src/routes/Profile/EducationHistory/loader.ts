@@ -1,7 +1,7 @@
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
-import { initializeLocalizedText } from '@/utils';
+
 import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
@@ -14,11 +14,11 @@ export default (async ({ request }) => {
 
   const koulutuskokonaisuudet = data.map((kk) => ({
     ...kk,
-    nimi: initializeLocalizedText(kk.nimi),
+    nimi: kk.nimi,
     koulutukset: kk.koulutukset?.map((koulutus) => ({
       ...koulutus,
-      nimi: initializeLocalizedText(koulutus.nimi),
-      kuvaus: initializeLocalizedText(koulutus.kuvaus),
+      nimi: koulutus.nimi,
+      kuvaus: koulutus.kuvaus,
     })),
   }));
 

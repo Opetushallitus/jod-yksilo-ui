@@ -33,15 +33,23 @@ describe('utils', () => {
       expect(getLocalizedText(entry)).toBe('Moro');
     });
 
-    it('should return an empty string if the text is not available in the current language', () => {
+    it('should return an string from supportedLngs if the text is not available in the current language', () => {
       const entry = { en: 'Hello' };
       i18n.language = 'fi';
-      expect(getLocalizedText(entry)).toBe('');
+      expect(getLocalizedText(entry)).toBe('Hello');
+    });
+
+    it('should prefer fallBackLng if no localization is found', () => {
+      const entry = { en: 'Hello', sv: 'Hej' };
+      i18n.language = 'fi';
+      i18n.options.fallbackLng = 'sv';
+      expect(getLocalizedText(entry)).toBe('Hej');
     });
 
     it('should return the text in the given language', () => {
       const entry = { en: 'Hello', fi: 'Moro' };
-      expect(getLocalizedText(entry, 'en')).toBe('Hello');
+      i18n.language = 'en';
+      expect(getLocalizedText(entry)).toBe('Hello');
     });
   });
 
