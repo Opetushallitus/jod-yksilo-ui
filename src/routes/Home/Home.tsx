@@ -33,7 +33,7 @@ const Content = ({ className = '', title, children }: ContainerProps & { title?:
         className,
       ])}
     >
-      {title && <h2 className="text-heading-1 max-w-[716px]">{title}</h2>}
+      {title && <h2 className="sm:text-heading-1 text-heading-1-mobile max-w-[716px]">{title}</h2>}
       {children}
     </div>
   );
