@@ -147,8 +147,10 @@ function findLineNumber(position, lines) {
  * Check if a dynamic key matches any exception
  */
 function isExceptionMatch(relativePath, codeLine) {
+  const normalizedPath = path.normalize(relativePath);
   return DYNAMIC_KEY_EXCEPTIONS.some((exception) => {
-    return relativePath.includes(exception.file) && exception.pattern.test(codeLine);
+    const normalizedExceptionPath = path.normalize(exception.file);
+    return normalizedPath.includes(normalizedExceptionPath) && exception.pattern.test(codeLine);
   });
 }
 
