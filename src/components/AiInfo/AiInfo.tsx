@@ -43,6 +43,7 @@ export const AiInfo = ({ type = 'tool' }: AiInfoProps) => {
               )}
             </div>
           )}
+          <p className="mt-2">{t('ai-info-tooltip.description-disclaimer')}</p>
         </div>
         <br />
         <Trans
