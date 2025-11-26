@@ -1,5 +1,6 @@
 {
   "ai-info-tooltip": {
+    "description-disclaimer": "Obs! Innehåll som har skapats med artificiell intelligens kan innehålla fel.",
     "description-opportunity-education-note": "Vi har också använt AI för att identifiera kompetenser för utbildningsmöjligheter.",
     "description-opportunity-intro": "Vi har använt en språkmodell för att skapa innehållet på denna sida i följande delar:",
     "description-opportunity-item-1": "möjlighetens namn",
