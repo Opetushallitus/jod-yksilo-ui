@@ -1,7 +1,6 @@
 import { FeedbackModal } from '@/components';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { Toaster } from '@/components/Toaster/Toaster';
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useSessionExpirationTimer } from '@/hooks/useSessionExpirationTimer';
@@ -22,7 +21,6 @@ import {
   UserButton,
 } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
-import i18n from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -180,7 +178,6 @@ const Root = () => {
     resetToolStore();
     logoutForm.current?.submit();
   };
-  const { isPrd } = useEnvironment();
 
   // Tries to focus the first h1 inside main content or the skip link if no h1 found
   React.useEffect(() => {
@@ -289,7 +286,7 @@ const Root = () => {
         </ServiceVariantProvider>
       </LogoutFormContext.Provider>
 
-      <Chatbot lang={i18n.language} environment={isPrd ? 'PROD' : 'TST'} />
+      <Chatbot />
 
       <Footer
         language={language}
