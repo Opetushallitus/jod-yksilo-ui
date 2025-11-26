@@ -90,7 +90,7 @@ const Root = () => {
     } else {
       return { siteId: 37 };
     }
-  }, [hostname, language]);
+  }, [hostname]);
 
   const { generateLocalizedPath } = useLocalizedRoutes();
   const isLoggedIn = !!data;
