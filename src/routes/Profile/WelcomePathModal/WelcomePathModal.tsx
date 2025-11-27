@@ -173,7 +173,7 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
                       value: 'fi',
                     },
                     {
-                      label: 'Sverige',
+                      label: 'Svenska',
                       value: 'sv',
                     },
                     {
