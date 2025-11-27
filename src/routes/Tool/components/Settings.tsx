@@ -5,6 +5,7 @@ export const Setting = ({
   title,
   children,
   hidden,
+  initiallyOpen,
   ref,
   count,
   className,
@@ -15,6 +16,7 @@ export const Setting = ({
   /** Amount of selected settings/filters */
   count?: number;
   hidden?: boolean;
+  initiallyOpen?: boolean;
   children: React.ReactNode;
   /** Ref is used to reference accordion open button for focusing */
   ref?: React.RefObject<HTMLSpanElement | null>;
@@ -22,7 +24,7 @@ export const Setting = ({
   testId?: string;
   id?: string;
 }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(initiallyOpen ?? false);
   const titleText = title + (count ? ` (${count})` : '');
   const triggerId = `accordion-${id ?? title.toLocaleLowerCase().replaceAll(/\s+/g, '-')}`;
   const contentId = `${triggerId}-content`;
@@ -41,7 +43,7 @@ export const Setting = ({
           </span>
         }
         ariaLabel={titleText}
-        initialState={false}
+        initialState={initiallyOpen ?? false}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       >
