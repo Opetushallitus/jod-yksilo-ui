@@ -30,6 +30,9 @@
     "competences": {
       "info": "Voit valita itse mitä Osaamisprofiilin tiedoistasi hyödynnät mahdollisuuksien etsintään tuomalla ne käyttöösi Löydä mahdollisuuksia -sivulla."
     },
+    "favorites": {
+      "link-to-opportunities": "Löydä mahdollisuuksia"
+    },
     "my-goals": {
       "add-competence-description": "Lisää osaaminen +-merkistä",
       "add-custom-plan": "Luo oma",
