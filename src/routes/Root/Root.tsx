@@ -160,7 +160,7 @@ const Root = () => {
                 disable(); // Disables any future warnings or expirations
                 removePermanentNote(sessionExpiredNoteId);
                 if (isOnProtectedRoute) {
-                  globalThis.location.href = globalThis.location.origin + `/yksilo/${language}`;
+                  globalThis.location.replace(globalThis.location.origin + `/yksilo/${language}`);
                 } else {
                   globalThis.location.reload();
                 }

@@ -23,6 +23,13 @@ export const withYksiloContext = (
 
     const { data = null } = (await authStore.yksiloPromise) as { data: components['schemas']['YksiloCsrfDto'] };
 
+    const isProtectedRoute = args.request.url.includes(`/${args.params.lng}/${i18n.t('slugs.profile.index')}`);
+
+    // This should prevent accessing protected routes when not logged in.
+    if (isProtectedRoute && !data) {
+      return replace('/');
+    }
+
     if (data) {
       registerCsrfMiddleware(data.csrf);
 
