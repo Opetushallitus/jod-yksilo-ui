@@ -37,7 +37,10 @@ interface JobJakaumaListProps {
 type JakaumaListProps = EducationJakaumaListProps | JobJakaumaListProps;
 
 const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
 
   const jakaumaDisplayValueTranslations: JakaumaDisplayValueTranslations = React.useMemo(
     () => ({
@@ -142,7 +145,11 @@ const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) 
             <li key={arvo.arvo} className="flex flex-col gap-3">
               <div className="flex text-heading-2 text-accent gap-3 items-start">
                 <span data-testid={`${name}-distribution-${arvo.arvo}-percentage`}>{Math.round(arvo.osuus)}%</span>
-                <span data-testid={`${name}-distribution-${arvo.arvo}-label`} className="first-letter:capitalize">
+                <span
+                  data-testid={`${name}-distribution-${arvo.arvo}-label`}
+                  className="first-letter:capitalize hyphens-auto wrap-anywhere"
+                  lang={language}
+                >
                   {getDisplayValue(arvo.arvo)}
                 </span>
               </div>
