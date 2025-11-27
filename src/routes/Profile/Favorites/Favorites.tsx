@@ -5,7 +5,9 @@ import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/Favor
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
+import { getLinkTo } from '@/utils/routeUtils';
 import { Button, EmptyState, Modal, Pagination, useMediaQueries } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -148,6 +150,8 @@ const Favorites = () => {
     }
   }, [getFavoriteCountsForKaikki, selectedFilter, t]);
 
+  const to = `/${language}/${t('slugs.tool.index')}`;
+
   return (
     <MainLayout
       navChildren={
@@ -273,6 +277,13 @@ const Favorites = () => {
           testId="favorites-pagination"
         />
       )}
+      <Button
+        variant="accent"
+        label={t('profile.favorites.link-to-opportunities')}
+        linkComponent={getLinkTo(to)}
+        icon={<JodArrowRight />}
+        iconSide="right"
+      />
       {lg ? null : <ToolCard testId="favorites-go-to-tool" className="mt-6" />}
     </MainLayout>
   );

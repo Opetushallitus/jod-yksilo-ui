@@ -25,6 +25,9 @@
     "competences": {
       "info": "Du kan själv välja vilken information från din kompetensprofil du vill använda när du söker möjligheter genom att importera den till sidan Hitta möjligheter."
     },
+    "favorites": {
+      "link-to-opportunities": "Hitta möjligheter"
+    },
     "my-goals": {
       "add-competence-description": "Lägg till kompetens från +-ikonen",
       "add-custom-plan": "Skapa egen",
