@@ -48,6 +48,7 @@ const SettingsMenu = ({ ref, isModal }: Pick<ToolSettingsProps, 'ref' | 'isModal
         ref={ref}
         count={getFilterCount(['opportunityType', 'educationOpportunityType', 'jobOpportunityType', 'ammattiryhmat'])}
         testId="filter-setting"
+        initiallyOpen
       >
         <FilterOpportunityType />
       </Setting>
