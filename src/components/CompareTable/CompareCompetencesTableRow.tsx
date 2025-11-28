@@ -17,18 +17,28 @@ interface CompareCompetencesTableRowProps {
   className?: string;
 }
 
+const WrapWithTooltipIfDev = ({
+  children,
+  tooltipContent,
+}: {
+  children: React.ReactNode;
+  tooltipContent: React.ReactNode;
+}) => {
+  const { isDev } = useEnvironment();
+  if (isDev) {
+    return <TooltipWrapper tooltipContent={tooltipContent}>{children}</TooltipWrapper>;
+  }
+  return <>{children}</>;
+};
+
 export const CompareCompetencesTableRow = ({ row, className }: CompareCompetencesTableRowProps) => {
   const { t } = useTranslation();
-  const { isDev } = useEnvironment();
   return (
     <tr className={className}>
-      {isDev && (
-        <td className="w-full pl-5 pr-7 py-3 text-heading-5 hyphens-auto first-letter:uppercase">
-          <TooltipWrapper tooltipContent={row.esiintyvyys} tooltipPlacement="top">
-            {getLocalizedText(row.nimi)}
-          </TooltipWrapper>
-        </td>
-      )}
+      <td className="w-full pl-5 pr-7 py-3 text-heading-5 hyphens-auto first-letter:uppercase">
+        <WrapWithTooltipIfDev tooltipContent={row.esiintyvyys}>{getLocalizedText(row.nimi)}</WrapWithTooltipIfDev>
+      </td>
+
       <td className="justify-items-center pr-5">
         {row.profiili && (
           <>
