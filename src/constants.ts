@@ -38,6 +38,7 @@ export const formErrorMessage = {
    * @param path Path to the field where the error message should appear.
    */
   dateRange: (path: string[]) => ({ message: i18n.t('error.form.date-range'), path }),
+  dateInThePast: () => ({ message: i18n.t('error.form.date-in-the-past') }),
 };
 
 // Commonly used form validation schemas

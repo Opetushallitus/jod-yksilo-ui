@@ -76,6 +76,7 @@ const Root = () => {
   const [navMenuOpen, setNavMenuOpen] = React.useState(false);
   const [feedbackVisible, setFeedbackVisible] = React.useState(false);
   const logoutForm = React.useRef<HTMLFormElement>(null);
+  const isCvPage = !!useMatch(`/${language}/cv/*`);
 
   const data = useLoaderData();
   const hostname = globalThis.location.hostname;
@@ -222,7 +223,9 @@ const Root = () => {
         </form>
         <NavigationBar
           logo={{ to: `/${language}`, language, srText: t('osaamispolku') }}
-          menuComponent={<MenuButton onClick={() => setNavMenuOpen(!navMenuOpen)} label={t('menu')} />}
+          menuComponent={
+            isCvPage ? null : <MenuButton onClick={() => setNavMenuOpen(!navMenuOpen)} label={t('menu')} />
+          }
           languageButtonComponent={
             <LanguageButton
               serviceVariant="yksilo"
@@ -239,20 +242,22 @@ const Root = () => {
             />
           }
           userButtonComponent={
-            <UserButton
-              serviceVariant="yksilo"
-              firstName={data?.etunimi}
-              isProfileActive={isProfileActive}
-              profileLabel={t('profile.index')}
-              // eslint-disable-next-line react/no-unstable-nested-components
-              profileLinkComponent={(props) => <NavLink to={userMenuProfileFrontUrl} {...props} />}
-              isLoggedIn={!!data?.csrf}
-              loginLabel={t('login')}
-              // eslint-disable-next-line react/no-unstable-nested-components
-              loginLinkComponent={(props) => <NavLink to={loginPageUrl} {...props} />}
-              logoutLabel={t('logout')}
-              onLogout={logout}
-            />
+            isCvPage ? null : (
+              <UserButton
+                serviceVariant="yksilo"
+                firstName={data?.etunimi}
+                isProfileActive={isProfileActive}
+                profileLabel={t('profile.index')}
+                // eslint-disable-next-line react/no-unstable-nested-components
+                profileLinkComponent={(props) => <NavLink to={userMenuProfileFrontUrl} {...props} />}
+                isLoggedIn={!!data?.csrf}
+                loginLabel={t('login')}
+                // eslint-disable-next-line react/no-unstable-nested-components
+                loginLinkComponent={(props) => <NavLink to={loginPageUrl} {...props} />}
+                logoutLabel={t('logout')}
+                onLogout={logout}
+              />
+            )
           }
           renderLink={({ to, className, children }) => (
             <Link to={to} className={className}>

@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { useModal } from '@/hooks/useModal';
 import { LogoutFormContext } from '@/routes/Root';
 import { useToolStore } from '@/stores/useToolStore';
@@ -8,6 +9,7 @@ import { Button, Toggle, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouteLoaderData } from 'react-router';
+import { ShareLinkSection } from '.';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 
@@ -36,7 +38,7 @@ const ToggleWithText = ({
 
   return (
     <div className="flex items-center justify-between gap-4 py-4 border-b border-[#CCC]" data-testid={testId}>
-      <div className="flex-1">
+      <div className="flex-1 font-arial">
         <p className="text-form-label">{title}</p>
         <p className="text-help-mobile sm:text-help">{description}</p>
       </div>
@@ -61,6 +63,7 @@ const Preferences = () => {
   const toolStore = useToolStore();
   const logoutForm = React.useContext(LogoutFormContext);
   const { showDialog } = useModal();
+  const { isPrd } = useEnvironment();
 
   const deleteProfile = async () => {
     toolStore.reset();
@@ -139,7 +142,7 @@ const Preferences = () => {
         <h3 className="text-heading-3-mobile sm:text-heading-3 mb-3">
           {t('preferences.data-disclosure-unanonymized.title')}
         </h3>
-        <p className="text-body-md mb-5">{t('preferences.data-disclosure-unanonymized.description')}</p>
+        <p className="font-arial text-body-md mb-5">{t('preferences.data-disclosure-unanonymized.description')}</p>
         <ToggleWithText
           title={t('preferences.data-disclosure-unanonymized.permission-education-and-planning.title')}
           description={t('preferences.data-disclosure-unanonymized.permission-education-and-planning.description')}
@@ -159,9 +162,15 @@ const Preferences = () => {
           testId="pref-ai-training"
         />
       </section>
+      {!isPrd && (
+        <>
+          <ShareLinkSection className="mb-8" />
+          <hr className="border-b-1 border-border-gray mb-7" />
+        </>
+      )}
       <section className="mb-8">
         <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.download.title')}</h2>
-        <p className="text-body-md mb-5">{t('preferences.download.description')}</p>
+        <p className="font-arial text-body-md mb-5">{t('preferences.download.description')}</p>
         <Button
           variant="accent"
           label={t('preferences.download.action')}
@@ -171,7 +180,7 @@ const Preferences = () => {
       </section>
       <section>
         <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.delete-profile.title')}</h2>
-        <p className="text-body-md mb-5">{t('preferences.delete-profile.description')}</p>
+        <p className="font-arial text-body-md mb-5">{t('preferences.delete-profile.description')}</p>
         <Button
           variant="white-delete"
           label={t('preferences.delete-profile.action')}

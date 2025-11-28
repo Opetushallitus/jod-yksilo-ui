@@ -4,9 +4,10 @@ import { Breadcrumb } from '../Breadcrumb/Breadcrumb';
 interface MainLayoutProps {
   children: React.ReactNode;
   navChildren?: React.ReactNode;
+  hideBreadcrumb?: boolean;
 }
 
-export const MainLayout = ({ children, navChildren }: MainLayoutProps) => {
+export const MainLayout = ({ children, navChildren, hideBreadcrumb = false }: MainLayoutProps) => {
   const { lg } = useMediaQueries();
 
   return (
@@ -14,7 +15,7 @@ export const MainLayout = ({ children, navChildren }: MainLayoutProps) => {
       className="mx-auto grid w-full max-w-[1140px] grow grid-cols-3 gap-6 px-5 pb-6 pt-11 sm:px-6 print:p-0"
       data-testid="main-layout"
     >
-      <Breadcrumb />
+      {!hideBreadcrumb && <Breadcrumb />}
 
       {lg && navChildren && (
         <aside className="order-last col-span-1 print:hidden" data-testid="sidebar">
