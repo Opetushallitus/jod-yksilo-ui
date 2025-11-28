@@ -6,7 +6,8 @@ import { formErrorMessage, LIMITS } from '@/constants';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, InputField, Modal } from '@jod/design-system';
+import { Button, InputField, Modal, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -34,6 +35,8 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const formId = React.useId();
   const { showDialog, closeActiveModal } = useModal();
+  const { sm } = useMediaQueries();
+
   const revalidator = useRevalidator();
   const methods = useForm<TyonantajaForm>({
     mode: 'onBlur',
@@ -160,6 +163,7 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
                   onConfirm: deleteTyopaikka,
                 });
               }}
+              size={sm ? 'lg' : 'sm'}
             />
           </div>
           <div className="flex flex-row gap-5">
@@ -173,8 +177,17 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
                 closeActiveModal();
               }}
               className="whitespace-nowrap"
+              size={sm ? 'lg' : 'sm'}
             />
-            <Button form={formId} label={t('save')} variant="white" disabled={!isValid} className="whitespace-nowrap" />
+            <Button
+              form={formId}
+              label={t('save')}
+              variant="accent"
+              disabled={!isValid}
+              className="whitespace-nowrap"
+              icon={sm ? undefined : <JodCheckmark />}
+              size={sm ? 'lg' : 'sm'}
+            />
           </div>
         </div>
       }
