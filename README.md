@@ -19,6 +19,7 @@ These instructions will get you a copy of the project up and running on your loc
 nvm install
 nvm use
 npm install
+npm exec allow-scripts run
 ```
 
 5. Take the steps in JOD Design System repository to get components of the design system work in hot reload mode.
