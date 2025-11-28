@@ -32,6 +32,14 @@
       "TMT": "Muu työmahdollisuus"
     }
   },
+  "osaamissuosittelija": {
+    "competence": {
+      "search-disclaimer": "Tekstiä käytetään osaamisten hakuun - sitä ei tallenneta"
+    },
+    "interest": {
+      "search-disclaimer": "Tekstiä käytetään kiinnostusten hakuun - sitä ei tallenneta"
+    }
+  },
   "profile": {
     "competences": {
       "info": "Voit valita itse mitä Osaamisprofiilin tiedoistasi hyödynnät mahdollisuuksien etsintään tuomalla ne käyttöösi Löydä mahdollisuuksia -sivulla."
