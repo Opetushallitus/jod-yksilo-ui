@@ -16,6 +16,7 @@ import { useLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import type { OsaaminenLahdeTyyppi } from '../types';
 import type { ToolLoaderData } from './loader';
+import { mergeUniqueValuesExcludingType } from './utils';
 
 const CompetenceExport = () => {
   const { t } = useTranslation();
@@ -146,42 +147,38 @@ const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void })
   const importKiinnostuksetFromProfile = React.useCallback(async () => {
     globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Profiilista tuonti']);
     const { data } = await client.GET('/api/profiili/kiinnostukset/osaamiset');
-    const newKiinnostukset = [
-      ...(await osaamisetService.find(data?.kiinnostukset)).map((k) => ({
-        id: k.uri,
-        nimi: k.nimi,
-        kuvaus: k.kuvaus,
-        tyyppi: 'KIINNOSTUS' as OsaaminenLahdeTyyppi,
-      })),
-      ...storeKiinnostukset.filter((o) => o.tyyppi === 'KARTOITETTU'),
-    ];
-    setKiinnostukset(removeDuplicatesByKey(newKiinnostukset, (k) => k.id));
+    const newKiinnostukset = (await osaamisetService.find(data?.kiinnostukset)).map((k) => ({
+      id: k.uri,
+      nimi: k.nimi,
+      kuvaus: k.kuvaus,
+      tyyppi: 'KIINNOSTUS' as OsaaminenLahdeTyyppi,
+    }));
+
+    setKiinnostukset(mergeUniqueValuesExcludingType(storeKiinnostukset, newKiinnostukset, 'KIINNOSTUS'));
     setKiinnostuksetVapaateksti(data?.vapaateksti);
   }, [setKiinnostukset, setKiinnostuksetVapaateksti, storeKiinnostukset]);
 
   const onCompetenceImportConfirm = React.useCallback(async () => {
     try {
-      const mappedSelectedCompetences = FILTERS_ORDER.map((tyyppi) =>
+      const mappedSelectedCompetences = FILTERS_ORDER.flatMap((tyyppi) =>
         (selectedFilters[tyyppi] ?? [])
           .filter((sf) => sf.checked)
           .map((f) => ({
             id: f.value,
             tyyppi: tyyppi,
           })),
-      ).flat();
+      );
 
-      const importedInterests = [
-        ...kiinnostukset
-          .filter((kiinnostus) =>
-            mappedSelectedCompetences.some((msc) => msc.tyyppi === 'KIINNOSTUS' && msc.id.includes(kiinnostus.uri)),
-          )
-          .map((k) => ({
-            id: k.uri,
-            nimi: k.nimi,
-            kuvaus: k.kuvaus,
-            tyyppi: 'KIINNOSTUS' as OsaaminenLahdeTyyppi,
-          })),
-      ];
+      const importedInterests = kiinnostukset
+        .filter((kiinnostus) =>
+          mappedSelectedCompetences.some((msc) => msc.tyyppi === 'KIINNOSTUS' && msc.id.includes(kiinnostus.uri)),
+        )
+        .map((k) => ({
+          id: k.uri,
+          nimi: k.nimi,
+          kuvaus: k.kuvaus,
+          tyyppi: 'KIINNOSTUS' as OsaaminenLahdeTyyppi,
+        }));
 
       const currentAndImportedSkills = [
         ...osaamiset

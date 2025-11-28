@@ -3,8 +3,10 @@ import { useEnvironment } from '@/hooks/useEnvironment';
 import { useToolStore } from '@/stores/useToolStore';
 import { Button } from '@jod/design-system';
 import { JodChatBot } from '@jod/design-system/icons';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
+import { mergeUniqueValuesExcludingType } from './utils';
 import { VirtualAssistant } from './VirtualAssistant';
 
 const Interests = () => {
@@ -37,6 +39,13 @@ const Interests = () => {
     }, 100);
   };
 
+  const onChange = React.useCallback(
+    (newValues: typeof kiinnostukset) => {
+      setKiinnostukset(mergeUniqueValuesExcludingType(kiinnostukset, newValues));
+    },
+    [kiinnostukset, setKiinnostukset],
+  );
+
   return (
     <div className={virtualAssistantClassNames}>
       {virtualAssistantOpen ? (
@@ -46,7 +55,7 @@ const Interests = () => {
       ) : (
         <>
           <OsaamisSuosittelija
-            onChange={setKiinnostukset}
+            onChange={onChange}
             value={kiinnostukset.filter((k) => k.tyyppi === 'KARTOITETTU')}
             mode="kiinnostukset"
             tagHeadingClassName="bg-white"
