@@ -432,6 +432,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/profiili/jakolinkki': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['jakolinkkiList'];
+    put?: never;
+    post: operations['jakolinkkiCreate'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch: operations['jakolinkkiUpdate'];
+    trace?: never;
+  };
   '/api/keskustelut': {
     parameters: {
       query?: never;
@@ -683,6 +699,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/profiili/jakolinkki/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['jakolinkkiGet'];
+    put?: never;
+    post?: never;
+    delete: operations['jakolinkkiDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/osaamiset': {
     parameters: {
       query?: never;
@@ -813,6 +845,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/cv/{ulkoinenJakolinkkiId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['publicJakolinkkiGetContent'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/ammatit': {
     parameters: {
       query?: never;
@@ -901,8 +949,6 @@ export interface components {
       /** Format: uuid */
       readonly id?: string;
       /** @enum {string} */
-      tyyppi: 'LYHYT' | 'PITKA' | 'MUU';
-      /** @enum {string} */
       mahdollisuusTyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       /** Format: uuid */
       mahdollisuusId?: string;
@@ -919,8 +965,7 @@ export interface components {
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       /** Format: uuid */
       koulutusmahdollisuusId?: string;
-      readonly osaamiset?: string[];
-      readonly ignoredOsaamiset?: string[];
+      osaamiset?: string[];
     };
     KoulutusKokonaisuusUpdateDto: {
       /** Format: uuid */
@@ -972,6 +1017,27 @@ export interface components {
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
       koulutukset?: components['schemas']['KoulutusDto'][];
+    };
+    JakolinkkiUpdateDto: {
+      /** Format: uuid */
+      readonly id?: string;
+      /** Format: uuid */
+      readonly ulkoinenId?: string;
+      nimi?: string;
+      /** Format: date-time */
+      voimassaAsti?: string;
+      muistiinpano?: string;
+      nimiJaettu?: boolean;
+      emailJaettu?: boolean;
+      kotikuntaJaettu?: boolean;
+      syntymavuosiJaettu?: boolean;
+      muuOsaaminenJaettu?: boolean;
+      kiinnostuksetJaettu?: boolean;
+      jaetutTyopaikat?: string[];
+      jaetutKoulutukset?: string[];
+      jaetutToiminnot?: string[];
+      jaetutSuosikit?: ('TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS')[];
+      jaetutTavoitteet?: string[];
     };
     Keskustelu: {
       /** Format: uuid */
@@ -1280,16 +1346,16 @@ export interface components {
       /** Format: uuid */
       id?: string;
       nimi?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      /** Format: uuid */
+      koulutusmahdollisuusId?: string;
       osaamiset?: string[];
-      ignoredOsaamiset?: string[];
     };
     TavoiteExportDto: {
       /** Format: uuid */
       id?: string;
       /** Format: date-time */
       luotu?: string;
-      /** @enum {string} */
-      tyyppi?: 'LYHYT' | 'PITKA' | 'MUU';
       /** Format: uuid */
       tyomahdollisuus?: string;
       suunnitelmat?: components['schemas']['PolunSuunnitelmaExportDto'][];
@@ -1456,6 +1522,23 @@ export interface components {
        * @example 3
        */
       sivuja: number;
+    };
+    JakolinkkiContentDto: {
+      /** Format: date-time */
+      voimassaAsti?: string;
+      etunimi?: string;
+      sukunimi?: string;
+      email?: string;
+      kotikunta?: string;
+      /** Format: int32 */
+      syntymavuosi?: number;
+      tyopaikat?: components['schemas']['TyopaikkaDto'][];
+      koulutusKokonaisuudet?: components['schemas']['KoulutusKokonaisuusDto'][];
+      toiminnot?: components['schemas']['ToimintoDto'][];
+      muuOsaaminen?: components['schemas']['MuuOsaaminenDto'];
+      suosikit?: components['schemas']['SuosikkiDto'][];
+      kiinnostukset?: components['schemas']['KiinnostuksetDto'];
+      tavoitteet?: components['schemas']['TavoiteDto'][];
     };
     AmmattiDto: {
       /** Format: uri */
@@ -2652,6 +2735,70 @@ export interface operations {
       };
     };
   };
+  jakolinkkiList: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['JakolinkkiUpdateDto'][];
+        };
+      };
+    };
+  };
+  jakolinkkiCreate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['JakolinkkiUpdateDto'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  jakolinkkiUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['JakolinkkiUpdateDto'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   keskusteluCreateKeskustelu: {
     parameters: {
       query?: never;
@@ -3023,6 +3170,48 @@ export interface operations {
       };
     };
   };
+  jakolinkkiGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['JakolinkkiUpdateDto'];
+        };
+      };
+    };
+  };
+  jakolinkkiDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   osaaminenFind: {
     parameters: {
       query?: {
@@ -3198,6 +3387,28 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['KoulutusDto'][];
+        };
+      };
+    };
+  };
+  publicJakolinkkiGetContent: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        ulkoinenJakolinkkiId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['JakolinkkiContentDto'];
         };
       };
     };
