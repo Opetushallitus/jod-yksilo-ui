@@ -134,6 +134,10 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
   const isCompetencesStep = React.useMemo(() => step !== steps && (step + 2) % 2 === 0, [step, steps]);
   const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
 
+  const hasPreviousStep = React.useMemo(() => step > 1, [step]);
+  const hasNextStep = React.useMemo(() => step < steps, [step, steps]);
+  const isLastStep = React.useMemo(() => step === steps, [step, steps]);
+
   const id = methods.watch('id');
   const patevyysId = methods.watch(`patevyydet.${selectedPatevyys}.id`);
 
@@ -153,7 +157,78 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
     return '';
   }, [id, patevyysId, isFirstStep, isActivityStep, isCompetencesStep, isSummaryStep, t]);
 
-  return !isLoading ? (
+  const onClickAddNewActivityHandler = React.useCallback(() => {
+    if (isSubmitting) {
+      return;
+    }
+    append({
+      nimi: {},
+      alkuPvm: '',
+      loppuPvm: '',
+      osaamiset: [],
+    });
+  }, [append, isSubmitting]);
+
+  const onClickDeleteActivityHandler = React.useCallback(() => {
+    if (isSubmitting) {
+      return;
+    }
+    setStep(selectedPatevyys * 2);
+    remove(selectedPatevyys);
+  }, [isSubmitting, remove, selectedPatevyys]);
+
+  const onClickCancelHandler = React.useCallback(() => {
+    if (isSubmitting) {
+      return;
+    }
+    onClose(true);
+  }, [isSubmitting, onClose]);
+
+  const onClickPreviousHandler = React.useCallback(() => {
+    if (isSubmitting) {
+      return;
+    }
+    setStep(step - 1);
+  }, [isSubmitting, step]);
+
+  const onClickNextHandler = React.useCallback(() => {
+    if (isSubmitting) {
+      return;
+    }
+    setStep(step + 1);
+  }, [isSubmitting, step]);
+
+  const StepComponent = React.useMemo(() => {
+    if (isActivityStep) {
+      return (
+        <div data-testid="free-time-step-activity">
+          <ActivityStep
+            headerText={headerText}
+            type={isFirstStep ? 'toiminta' : 'patevyys'}
+            patevyys={selectedPatevyys}
+          />
+        </div>
+      );
+    } else if (isCompetencesStep) {
+      return (
+        <div data-testid="free-time-step-competences">
+          <CompetencesStep headerText={headerText} patevyys={selectedPatevyys} />
+        </div>
+      );
+    } else if (isSummaryStep) {
+      return (
+        <div data-testid="free-time-step-summary">
+          <SummaryStep headerText={headerText} />
+        </div>
+      );
+    }
+    return <></>;
+  }, [headerText, isActivityStep, isCompetencesStep, isFirstStep, isSummaryStep, selectedPatevyys]);
+
+  if (isLoading) {
+    return null;
+  }
+  return (
     <Modal
       name={headerText}
       open={isOpen}
@@ -171,25 +246,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
               }
             }}
           >
-            {isActivityStep && (
-              <div data-testid="free-time-step-activity">
-                <ActivityStep
-                  headerText={headerText}
-                  type={isFirstStep ? 'toiminta' : 'patevyys'}
-                  patevyys={selectedPatevyys}
-                />
-              </div>
-            )}
-            {isCompetencesStep && (
-              <div data-testid="free-time-step-competences">
-                <CompetencesStep headerText={headerText} patevyys={selectedPatevyys} />
-              </div>
-            )}
-            {isSummaryStep && (
-              <div data-testid="free-time-step-summary">
-                <SummaryStep headerText={headerText} />
-              </div>
-            )}
+            {StepComponent}
           </Form>
         </FormProvider>
       }
@@ -206,102 +263,77 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
       footer={
         <div className="flex justify-between gap-5 flex-1" data-testid="free-time-wizard-footer">
           <div className="flex gap-5">
-            {step === steps && (
+            {isLastStep && (
               <Button
-                onClick={() => {
-                  if (isSubmitting) {
-                    return;
-                  }
-                  append({
-                    nimi: {},
-                    alkuPvm: '',
-                    loppuPvm: '',
-                    osaamiset: [],
-                  });
-                }}
+                onClick={onClickAddNewActivityHandler}
                 label={t('free-time-activities.add-new-activity')}
                 variant="white"
                 className="whitespace-nowrap"
                 testId="free-time-add-activity"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
             {step !== steps && selectedPatevyys > 0 && (
               <Button
-                onClick={() => {
-                  if (isSubmitting) {
-                    return;
-                  }
-                  setStep(selectedPatevyys * 2);
-                  remove(selectedPatevyys);
-                }}
+                onClick={onClickDeleteActivityHandler}
                 label={t('free-time-activities.delete-proficiency')}
                 variant="white-delete"
                 className="whitespace-nowrap"
                 testId="free-time-delete-activity"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
           </div>
           <div className="flex gap-5">
             <Button
-              onClick={() => {
-                if (isSubmitting) {
-                  return;
-                }
-                onClose(true);
-              }}
+              onClick={onClickCancelHandler}
               label={t('cancel')}
               variant="white"
               className="whitespace-nowrap"
               testId="free-time-cancel"
+              size={sm ? 'lg' : 'sm'}
             />
-            {step > 1 && (
+            {hasPreviousStep && (
               <Button
-                onClick={() => {
-                  if (isSubmitting) {
-                    return;
-                  }
-                  setStep(step - 1);
-                }}
+                onClick={onClickPreviousHandler}
                 label={t('previous')}
                 variant="white"
-                icon={!sm ? <JodArrowLeft /> : undefined}
+                icon={sm ? undefined : <JodArrowLeft />}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="free-time-previous"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
-            {step < steps && (
+            {hasNextStep && (
               <Button
-                onClick={() => {
-                  if (isSubmitting) {
-                    return;
-                  }
-                  setStep(step + 1);
-                }}
+                onClick={onClickNextHandler}
                 label={t('next')}
-                variant="white"
+                variant="accent"
                 icon={<JodArrowRight />}
                 iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="free-time-next"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
-            {step === steps && (
+            {isLastStep && (
               <Button
                 form={formId}
                 label={t('save')}
-                variant="white"
+                variant="accent"
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="free-time-save"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
           </div>
         </div>
       }
     />
-  ) : null;
+  );
 };
 
 export default FreeTimeActivitiesWizard;

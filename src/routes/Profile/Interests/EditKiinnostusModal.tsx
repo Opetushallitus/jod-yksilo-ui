@@ -4,7 +4,8 @@ import { type OsaaminenValue, OsaamisSuosittelija } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Modal } from '@jod/design-system';
+import { Button, Modal, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Controller, Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -24,6 +25,7 @@ interface KiinnostusForm {
 
 const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalProps) => {
   const { t } = useTranslation();
+  const { sm } = useMediaQueries();
   const revalidator = useRevalidator();
   // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -131,14 +133,17 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
             }}
             className="whitespace-nowrap"
             testId="interests-cancel"
+            size={sm ? 'lg' : 'sm'}
           />
           <Button
             form={formId}
             label={t('save')}
-            variant="white"
+            icon={sm ? undefined : <JodCheckmark />}
+            variant="accent"
             disabled={!isValid}
             className="whitespace-nowrap"
             testId="interests-save"
+            size={sm ? 'lg' : 'sm'}
           />
         </div>
       }

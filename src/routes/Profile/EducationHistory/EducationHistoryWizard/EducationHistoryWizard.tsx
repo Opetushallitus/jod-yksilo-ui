@@ -3,7 +3,7 @@ import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight } from '@jod/design-system/icons';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -232,6 +232,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 variant="white"
                 className="whitespace-nowrap"
                 testId="education-history-add-degree"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
             {step !== steps && selectedKoulutus > 0 && (
@@ -247,11 +248,18 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 variant="white-delete"
                 className="whitespace-nowrap"
                 testId="education-history-delete-degree"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
           </div>
           <div className="flex gap-5">
-            <Button onClick={onClose} label={t('cancel')} variant="white" data-testid="education-history-cancel" />
+            <Button
+              onClick={onClose}
+              label={t('cancel')}
+              variant="white"
+              data-testid="education-history-cancel"
+              size={sm ? 'lg' : 'sm'}
+            />
             {step > 1 && (
               <Button
                 onClick={() => {
@@ -262,10 +270,11 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 }}
                 label={t('previous')}
                 variant="white"
-                icon={!sm ? <JodArrowLeft /> : undefined}
+                icon={sm ? undefined : <JodArrowLeft />}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="education-history-previous"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
             {step < steps && (
@@ -277,22 +286,25 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                   setStep(step + 1);
                 }}
                 label={t('next')}
-                variant="white"
+                variant="accent"
                 icon={<JodArrowRight />}
                 iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="education-history-next"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
             {step === steps && (
               <Button
                 form={formId}
                 label={t('save')}
-                variant="white"
+                icon={sm ? undefined : <JodCheckmark />}
+                variant="accent"
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="education-history-save"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
           </div>
