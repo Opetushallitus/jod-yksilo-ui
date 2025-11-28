@@ -37,9 +37,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          sudo apt-get update
-          sudo apt-get install -y gh
-
           BASE_VERSION="rel-$(date -u +'%Y%m%d')"
           COMMIT_SHA="${GITHUB_SHA}"
 
