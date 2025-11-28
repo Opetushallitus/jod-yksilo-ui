@@ -138,7 +138,7 @@ export const OsaamisSuosittelija = ({
 
   return (
     <>
-      <div className="mb-6">
+      <div className="mb-4">
         <Textarea
           placeholder={textareaPlaceholder()}
           value={taitosi}
@@ -150,6 +150,13 @@ export const OsaamisSuosittelija = ({
           className={tc(['bg-bg-gray-2-25! placeholder:text-body-sm', textAreaClassName])}
           testId="osaamissuosittelija-textarea"
         />
+        {debouncedTaitosi.length > 0 && taitosi.length > 2 && (
+          <div className="font-arial text-secondary-gray mt-3 text-help">
+            {mode === 'osaamiset'
+              ? t('osaamissuosittelija.competence.search-disclaimer')
+              : t('osaamissuosittelija.interest.search-disclaimer')}
+          </div>
+        )}
       </div>
       <div className="mb-6 flex flex-col">
         <div
