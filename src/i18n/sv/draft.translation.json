@@ -21,6 +21,14 @@
     "go-home": "Gå till startsidan",
     "title": "Hoppsan! Sidan hittades inte"
   },
+  "osaamissuosittelija": {
+    "competence": {
+      "search-disclaimer": "Text som används för att söka efter kompetenser - den sparas inte"
+    },
+    "interest": {
+      "search-disclaimer": "Text som används för att söka efter intressen - den sparas inte"
+    }
+  },
   "profile": {
     "competences": {
       "info": "Du kan själv välja vilken information från din kompetensprofil du vill använda när du söker möjligheter genom att importera den till sidan Hitta möjligheter."
