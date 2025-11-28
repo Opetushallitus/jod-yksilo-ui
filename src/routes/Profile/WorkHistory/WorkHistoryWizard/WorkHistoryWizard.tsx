@@ -3,7 +3,7 @@ import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight } from '@jod/design-system/icons';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -230,6 +230,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 variant="white"
                 className="whitespace-nowrap"
                 testId="work-history-add-job-description"
+                size={!sm ? 'sm' : 'lg'}
               />
             )}
             {step !== steps && selectedToimenkuva > 0 && (
@@ -245,11 +246,18 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 variant="white-delete"
                 className="whitespace-nowrap"
                 testId="work-history-delete-job-description"
+                size={!sm ? 'sm' : 'lg'}
               />
             )}
           </div>
           <div className="flex gap-5">
-            <Button onClick={() => onClose()} label={t('cancel')} variant="white" testId="work-history-cancel" />
+            <Button
+              onClick={() => onClose()}
+              label={t('cancel')}
+              variant="white"
+              testId="work-history-cancel"
+              size={!sm ? 'sm' : 'lg'}
+            />
             {step > 1 && (
               <Button
                 onClick={() => {
@@ -264,6 +272,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="work-history-previous"
+                size={!sm ? 'sm' : 'lg'}
               />
             )}
             {step < steps && (
@@ -275,22 +284,25 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                   setStep(step + 1);
                 }}
                 label={t('next')}
-                variant="white"
+                variant="accent"
                 icon={<JodArrowRight />}
                 iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="work-history-next"
+                size={!sm ? 'sm' : 'lg'}
               />
             )}
             {step === steps && (
               <Button
                 form={formId}
                 label={t('save')}
-                variant="white"
+                icon={!sm ? <JodCheckmark /> : undefined}
+                variant="accent"
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="work-history-save"
+                size={!sm ? 'sm' : 'lg'}
               />
             )}
           </div>

@@ -8,7 +8,8 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
+import { Button, Datepicker, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import {
   Controller,
@@ -156,6 +157,7 @@ const AddOrEditToimenkuvaModal = ({
   const stepComponents = [MainStep, OsaamisetStep];
   const StepComponent = stepComponents[step];
   const revalidator = useRevalidator();
+  const { sm } = useMediaQueries();
 
   const nextStep = () => {
     if (isSubmitting) {
@@ -336,7 +338,7 @@ const AddOrEditToimenkuvaModal = ({
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between flex-1">
+        <div className="flex flex-row justify-between flex-1 gap-5">
           <div>
             {toimenkuvaId && (
               <Button
@@ -356,36 +358,50 @@ const AddOrEditToimenkuvaModal = ({
                     closeParentModal: true,
                   });
                 }}
+                size={!sm ? 'sm' : 'lg'}
               />
             )}
           </div>
           <div className="flex flex-row justify-between gap-5">
-            <Button label={t('cancel')} variant="white" onClick={onClose} className="whitespace-nowrap" />
+            <Button
+              label={t('cancel')}
+              variant="white"
+              onClick={onClose}
+              className="whitespace-nowrap"
+              size={!sm ? 'sm' : 'lg'}
+            />
             {!isFirstStep && (
               <Button
                 label={t('previous')}
                 variant="white"
+                icon={!sm ? <JodArrowLeft /> : undefined}
                 disabled={!isValid}
                 onClick={previousStep}
                 className="whitespace-nowrap"
+                size={!sm ? 'sm' : 'lg'}
               />
             )}
             {!isLastStep && (
               <Button
                 label={t('next')}
-                variant="white"
+                variant="accent"
+                icon={<JodArrowRight />}
+                iconSide={sm ? 'right' : undefined}
                 disabled={isLastStep || !isValid}
                 onClick={nextStep}
                 className="whitespace-nowrap"
+                size={!sm ? 'sm' : 'lg'}
               />
             )}
             {isLastStep && (
               <Button
                 form={formId}
                 label={t('save')}
-                variant="white"
+                icon={!sm ? <JodCheckmark /> : undefined}
+                variant="accent"
                 disabled={!isValid}
                 className="whitespace-nowrap"
+                size={!sm ? 'sm' : 'lg'}
               />
             )}
           </div>
