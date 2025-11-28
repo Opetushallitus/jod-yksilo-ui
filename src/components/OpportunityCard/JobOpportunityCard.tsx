@@ -15,9 +15,22 @@ type JobOpportunityCardProps = {
 
 export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, aineisto, ...rest }: JobOpportunityCardProps) => {
   const { t } = useTranslation();
-
   const cardTypeTitle =
     aineisto === 'AMMATTITIETO' ? t('opportunity-type.work.AMMATTITIETO') : t('opportunity-type.work.TMT');
+  let kohtaanto;
+  switch (ammattiryhma?.kohtaanto) {
+    case 'Ylitarjonta':
+      kohtaanto = t('job-opportunity.supply-and-demand.Ylitarjonta');
+      break;
+    case 'Tasapaino':
+      kohtaanto = t('job-opportunity.supply-and-demand.Tasapaino');
+      break;
+    case 'Alitarjonta':
+      kohtaanto = t('job-opportunity.supply-and-demand.Alitarjonta');
+      break;
+    default:
+      kohtaanto = NOT_AVAILABLE_LABEL; // or some default value
+  }
 
   return (
     <OpportunityCardWrapper
@@ -61,6 +74,22 @@ export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, aineisto, 
                 tooltipContent={
                   <div className="text-body-xs max-w-[290px] leading-5">
                     {t('tool.job-opportunity-median-salary-tooltip')}
+                  </div>
+                }
+              >
+                <JodInfo size={18} className="text-secondary-5-light-1" />
+              </TooltipWrapper>
+            }
+          />
+          <OpportunityDetail
+            title={t('job-opportunity.supply-and-demand-title')}
+            value={kohtaanto}
+            icon={
+              <TooltipWrapper
+                tooltipPlacement="top"
+                tooltipContent={
+                  <div className="text-body-xs max-w-[290px] leading-5">
+                    {t('job-opportunity.supply-and-demand-tooltip')}
                   </div>
                 }
               >
