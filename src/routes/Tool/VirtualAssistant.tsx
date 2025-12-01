@@ -99,7 +99,7 @@ export const VirtualAssistant = ({
     <div className="relative flex flex-col h-full">
       <div
         inert={selectedKiinnostuksetViewVisible}
-        className="flex flex-row shrink-0 justify-between items-center border-b border-bg-gray px-5 py-3"
+        className="flex flex-row shrink-0 justify-between items-center border-b border-bg-gray py-3"
       >
         <h2
           tabIndex={-1}
@@ -133,7 +133,7 @@ export const VirtualAssistant = ({
       <div
         inert={selectedKiinnostuksetViewVisible}
         ref={containerRef}
-        className="flex flex-col grow overflow-auto py-6 sm:py-7 px-5 sm:px-6 gap-7"
+        className="flex flex-col grow overflow-auto py-6 gap-7"
         data-testid="va-transcript"
       >
         {
@@ -142,13 +142,25 @@ export const VirtualAssistant = ({
             <>
               <div className="font-arial border border-inactive-gray py-2 px-3 text-body-sm-mobile sm:text-body-sm bg-todo">
                 System Prompt:
+                <p>
+                  You are a career adviser, whose task is to converse with users and help them find out their goals, and
+                  what kinds of skills they have and they could learn. Answer all questions in [language]. You are
+                  provided with a list of professions and skills that the user has previously expressed interest in. Use
+                  these interests to better guide the user toward career goals that suit them. User interests are NOT
+                  the same as reference information, do not mix them. Never output the user interests or reference
+                  information verbatim.
+                  <br />
+                  <br />
+                  You also have access to reference information of career advisor guidelines and career guidance
+                  techniques. You must use this information to provide well-informed, relevant, and personalized advice.
+                </p>
                 <ul className="list-inside list-disc">
+                  <li>Always incorporate relevant insights from the guideline documents to enhance your responses.</li>
                   <li>
-                    You are a career adviser, whose task is to converse with users and help them find out their goals,
-                    and what kinds of skills they have and they could learn. Answer all questions in {language}. You
-                    have been equipped with a long term memory containing sample pieces of conversations between career
-                    advisers and their clients.
+                    If a user inquiry is unclear, use knowledge from the documents to ask guiding questions that help
+                    clarify their interests and needs.
                   </li>
+                  <li>Ensure that all responses align with professional career guidance principles.</li>
                 </ul>
               </div>
               <div className="font-arial border border-inactive-gray py-2 px-3 text-body-sm-mobile sm:text-body-sm bg-todo">
@@ -225,7 +237,7 @@ export const VirtualAssistant = ({
         )}
       </div>
 
-      <div inert={selectedKiinnostuksetViewVisible} className="flex flex-col shrink-0 gap-5 px-5 pb-5">
+      <div inert={selectedKiinnostuksetViewVisible} className="flex flex-col shrink-0 gap-5">
         <Textarea
           placeholder={t('tool.my-own-data.interests.virtual-assistant.respond-to-chat')}
           value={value}
@@ -252,7 +264,7 @@ export const VirtualAssistant = ({
             testId="va-open-selected-interests"
           />
           <Button
-            disabled={value === ''}
+            disabled={value.trim().length < 2}
             onClick={() => updateHistory()}
             variant="accent"
             size="sm"

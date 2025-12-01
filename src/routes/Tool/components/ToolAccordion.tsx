@@ -48,7 +48,7 @@ const ToolAccordion = ({
         initialState={false}
         testId="tool-accordion-button"
       >
-        <section className="pl-4" id={contentId} aria-labelledby={triggerId}>
+        <section id={contentId} aria-labelledby={triggerId}>
           {children}
         </section>
       </Accordion>
