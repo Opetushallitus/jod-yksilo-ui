@@ -135,49 +135,51 @@ const ExploreOpportunities = () => {
       {settingsOpen && (
         <ToolSettings ref={firstSettingRef} isOpen={settingsOpen} onClose={onCloseSettings} isModal={!lg} />
       )}
+      {isLoading ? null : (
+        <>
+          <ul
+            id="tool-your-opportunities-list"
+            ref={scrollRef}
+            className="flex flex-col gap-5 sm:gap-3 mb-8"
+            style={{
+              scrollMarginTop: '140px',
+            }}
+            data-testid="tool-opportunities-list"
+          >
+            {mixedMahdollisuudet.map((mahdollisuus) => {
+              const { id, mahdollisuusTyyppi } = mahdollisuus;
+              const ehdotus = mahdollisuusEhdotukset?.[id];
+              const isFavorite = suosikit?.find((s) => s.kohdeId === id) !== undefined;
 
-      <ul
-        id="tool-your-opportunities-list"
-        ref={scrollRef}
-        className="flex flex-col gap-5 sm:gap-3 mb-8"
-        style={{
-          scrollMarginTop: '140px',
-        }}
-        data-testid="tool-opportunities-list"
-      >
-        {mixedMahdollisuudet.map((mahdollisuus) => {
-          const { id, mahdollisuusTyyppi } = mahdollisuus;
-          const ehdotus = mahdollisuusEhdotukset?.[id];
-          const isFavorite = suosikit?.find((s) => s.kohdeId === id) !== undefined;
-
-          return ehdotus ? (
-            <OpportunityCard
-              key={id}
-              as="li"
-              from="tool"
-              to={`/${i18n.language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}`}
-              isFavorite={isFavorite}
-              isLoggedIn={isLoggedIn}
-              toggleFavorite={() => void toggleSuosikki(id, ehdotus.tyyppi)}
-              name={getLocalizedText(mahdollisuus.otsikko)}
-              description={getLocalizedText(mahdollisuus.tiivistelma)}
-              matchValue={ehdotus?.pisteet}
-              matchLabel={t('fit')}
-              headingLevel="h3"
-              ammattiryhma={mahdollisuus.ammattiryhma}
-              ammattiryhmaNimet={ammattiryhmaNimet}
-              aineisto={mahdollisuus.aineisto}
-              tyyppi={mahdollisuus.tyyppi}
-              kesto={mahdollisuus.kesto}
-              yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
-              type={mahdollisuusTyyppi}
-              rateId={id}
-            />
-          ) : null;
-        })}
-      </ul>
-
-      <YourOpportunitiesPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="mb-7" />
+              return ehdotus ? (
+                <OpportunityCard
+                  key={id}
+                  as="li"
+                  from="tool"
+                  to={`/${i18n.language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}`}
+                  isFavorite={isFavorite}
+                  isLoggedIn={isLoggedIn}
+                  toggleFavorite={() => void toggleSuosikki(id, ehdotus.tyyppi)}
+                  name={getLocalizedText(mahdollisuus.otsikko)}
+                  description={getLocalizedText(mahdollisuus.tiivistelma)}
+                  matchValue={ehdotus?.pisteet}
+                  matchLabel={t('fit')}
+                  headingLevel="h3"
+                  ammattiryhma={mahdollisuus.ammattiryhma}
+                  ammattiryhmaNimet={ammattiryhmaNimet}
+                  aineisto={mahdollisuus.aineisto}
+                  tyyppi={mahdollisuus.tyyppi}
+                  kesto={mahdollisuus.kesto}
+                  yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
+                  type={mahdollisuusTyyppi}
+                  rateId={id}
+                />
+              ) : null;
+            })}
+          </ul>
+          <YourOpportunitiesPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="mb-7" />
+        </>
+      )}
     </>
   );
 };
