@@ -7,7 +7,7 @@ import OpportunityDetails, { type OpportunityDetailsSection } from '@/components
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { NOT_AVAILABLE_LABEL } from '@/constants';
 import { useToolStore } from '@/stores/useToolStore';
-import { formatDate, getLocalizedText, hashString } from '@/utils';
+import { formatDate, getLocalizedText, getTranslation, hashString } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
@@ -33,8 +33,8 @@ const JobOpportunity = () => {
   );
 
   const tyomahdollisuusTehtavat =
-    getLocalizedText(tyomahdollisuus?.tehtavat) !== ''
-      ? getLocalizedText(tyomahdollisuus?.tehtavat)
+    getTranslation(tyomahdollisuus?.tehtavat) !== ''
+      ? getTranslation(tyomahdollisuus?.tehtavat)
           .split('\n')
           .sort((a: string, b: string) => a.localeCompare(b))
       : [];
@@ -91,8 +91,8 @@ const JobOpportunity = () => {
     },
     {
       navTitle: t('job-opportunity.professional-group'),
-      titleAppendix: getLocalizedText(ammattiryhma?.nimi),
-      content: <div className="font-arial">{getLocalizedText(ammattiryhma?.kuvaus)}</div>,
+      titleAppendix: getTranslation(ammattiryhma?.nimi),
+      content: <div className="font-arial">{getTranslation(ammattiryhma?.kuvaus)}</div>,
       showDivider: false,
     },
     {

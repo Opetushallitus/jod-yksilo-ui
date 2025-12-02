@@ -57,6 +57,13 @@ export const getLocalizedText = (
   return '';
 };
 
+export const getTranslation = (
+  entry?: components['schemas']['LokalisoituTeksti'],
+  lang: string = i18n.language,
+): string => {
+  return entry?.[lang]?.trim() ?? '';
+};
+
 type NestedKeyOf<ObjectType extends object> = {
   [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
     ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}`
