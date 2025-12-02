@@ -42,7 +42,7 @@ const LoginPage = () => {
   return (
     <MainLayout>
       <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1" data-testid="landing-title">
+      <h1 className="mb-5 text-heading-2 sm:text-heading-1 focus:outline-0" data-testid="landing-title">
         {t('profile.login-page.title')}
       </h1>
 
