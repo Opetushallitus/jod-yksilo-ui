@@ -28,7 +28,7 @@ export const TooltipWrapper = ({
     <Tooltip open={tooltipOpen} placement={tooltipPlacement} data-testid="tooltip">
       <TooltipContent
         id={contentId}
-        className={`bg-black text-white rounded-xl p-5 z-50 text-body-sm sm:text-body-md font-arial ${sizeClassName}`}
+        className={`max-w-[290px] bg-black text-white rounded-xl p-5 z-50 text-body-sm sm:text-body-md font-arial ${sizeClassName}`}
         data-testid="tooltip-content"
       >
         {tooltipContent}
