@@ -6,7 +6,6 @@ import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
-import type { CompetencesLoaderData } from '@/routes/Profile/Competences/loader';
 import { sortByProperty } from '@/utils';
 import { Button, Modal, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -17,8 +16,7 @@ import { ToolCard } from '../components/ToolCard';
 import { type CompetenceSourceType, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
 
 const Competences = () => {
-  const { osaamiset, toimenkuvat, koulutukset, patevyydet, muutOsaamiset, muutOsaamisetVapaateksti } =
-    useLoaderData() as CompetencesLoaderData;
+  const { osaamiset, toimenkuvat, koulutukset, patevyydet, muutOsaamiset, muutOsaamisetVapaateksti } = useLoaderData();
   const {
     t,
     i18n: { language },
@@ -31,7 +29,6 @@ const Competences = () => {
   const { isDev } = useEnvironment();
 
   const { selectedFilters, setSelectedFilters, filterKeys } = useInitializeFilters(
-    locale,
     {
       TOIMENKUVA: [],
       KOULUTUS: [],

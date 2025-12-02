@@ -5,7 +5,7 @@ export const GROUP_BY_THEME = 'b';
 export const GROUP_BY_ALPHABET = 'c';
 
 export interface FilterData {
-  label: string;
+  label: Record<string, string | undefined>;
   value: string[];
   checked: boolean;
 }
