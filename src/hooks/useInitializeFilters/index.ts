@@ -15,8 +15,8 @@ export interface FilterData {
   kiinnostuksetVapaateksti?: components['schemas']['LokalisoituTeksti'];
 }
 
-const mapExperienceToFilter = (locale: string) => (currentFilters: FiltersType) => (experience: Kokemus) => ({
-  label: experience.nimi[locale] ?? '',
+const mapExperienceToFilter = (currentFilters: FiltersType) => (experience: Kokemus) => ({
+  label: experience.nimi,
   value: [experience.id ?? experience.uri ?? ''],
   checked:
     currentFilters?.['MUU_OSAAMINEN']?.find((item) => (experience.id ? item.value.includes(experience.id) : false))
@@ -25,17 +25,15 @@ const mapExperienceToFilter = (locale: string) => (currentFilters: FiltersType) 
 });
 
 const mapCompetenceDataGroupToFilter =
-  (locale: string) => (currentFilters: FiltersType, type: CompetenceSourceType) => (cdg: CompetenceDataGroup) => ({
-    label: cdg.nimi[locale] ?? '',
+  (currentFilters: FiltersType, type: CompetenceSourceType) => (cdg: CompetenceDataGroup) => ({
+    label: cdg.nimi,
     value: cdg.data?.map((d) => d.id ?? '') ?? [],
     checked:
       currentFilters?.[type]?.find((filter) => (cdg.id ? filter.value.includes(cdg.id) : false))?.checked ?? true,
     competences: cdg.data?.flatMap((d) => d.osaamiset ?? []) ?? [],
   });
 
-const initFilters = (locale: string, selectedFilters: FiltersType, data: FilterData): FiltersType => {
-  const mapCompetenceDataGroup = mapCompetenceDataGroupToFilter(locale);
-  const mapExperience = mapExperienceToFilter(locale);
+const initFilters = (selectedFilters: FiltersType, data: FilterData): FiltersType => {
   const {
     toimenkuvat,
     muutOsaamiset,
@@ -50,13 +48,13 @@ const initFilters = (locale: string, selectedFilters: FiltersType, data: FilterD
   const localizedKiinnostuksetVapaateksti = getLocalizedText(kiinnostuksetVapaateksti);
 
   const initialFilters: FiltersType = {
-    TOIMENKUVA: toimenkuvat.map(mapCompetenceDataGroup(selectedFilters, 'TOIMENKUVA')),
-    KOULUTUS: koulutukset.map(mapCompetenceDataGroup(selectedFilters, 'KOULUTUS')),
-    PATEVYYS: patevyydet.map(mapCompetenceDataGroup(selectedFilters, 'PATEVYYS')),
+    TOIMENKUVA: toimenkuvat.map(mapCompetenceDataGroupToFilter(selectedFilters, 'TOIMENKUVA')),
+    KOULUTUS: koulutukset.map(mapCompetenceDataGroupToFilter(selectedFilters, 'KOULUTUS')),
+    PATEVYYS: patevyydet.map(mapCompetenceDataGroupToFilter(selectedFilters, 'PATEVYYS')),
     MUU_OSAAMINEN: [
-      ...muutOsaamiset.map(mapExperience(selectedFilters)),
+      ...muutOsaamiset.map(mapExperienceToFilter(selectedFilters)),
       {
-        label: '',
+        label: {},
         value: [],
         checked: localizedMuutOsaamisetVapaateksti.length > 0,
         competences: [],
@@ -67,9 +65,9 @@ const initFilters = (locale: string, selectedFilters: FiltersType, data: FilterD
   // Handle optional filters
   if (kiinnostukset) {
     initialFilters.KIINNOSTUS = [
-      ...kiinnostukset.map(mapExperience(selectedFilters)),
+      ...kiinnostukset.map(mapExperienceToFilter(selectedFilters)),
       {
-        label: '',
+        label: {},
         value: [],
         checked: localizedKiinnostuksetVapaateksti.length > 0,
         competences: [],
@@ -80,15 +78,12 @@ const initFilters = (locale: string, selectedFilters: FiltersType, data: FilterD
   return initialFilters;
 };
 
-export const useInitializeFilters = (locale: string, initialSelectedFilters: FiltersType, data: FilterData) => {
+export const useInitializeFilters = (initialSelectedFilters: FiltersType, data: FilterData) => {
   const [initialized, setInitialized] = React.useState(false);
   const [filterKeys, setFilterKeys] = React.useState<(keyof FiltersType)[]>([]);
   const [selectedFilters, setSelectedFilters] = React.useState<FiltersType>(initialSelectedFilters);
 
-  const initializeFilters = React.useCallback(
-    () => initFilters(locale, selectedFilters, data),
-    [data, locale, selectedFilters],
-  );
+  const initializeFilters = React.useCallback(() => initFilters(selectedFilters, data), [data, selectedFilters]);
 
   React.useEffect(() => {
     if (!initialized) {

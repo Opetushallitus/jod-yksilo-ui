@@ -1,5 +1,6 @@
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import type { CompetenceSourceType, FiltersType } from '@/routes/Profile/Competences/constants';
+import { getLocalizedText } from '@/utils';
 import { Accordion, Checkbox } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -71,7 +72,7 @@ export const CompetenceFilters = ({
   // Check if any filter of a specific type is checked
   const isFilterTypeChecked = (type: CompetenceSourceType) => {
     const filter = selectedFilters[type];
-    return filter ? ((filter.length > 0 && filter.some((item) => item.checked)) ?? false) : false;
+    return filter?.some((item) => item.checked) === true;
   };
 
   // Toggle all filters of a specific type
@@ -82,9 +83,9 @@ export const CompetenceFilters = ({
     // If there are any checked items, uncheck all, otherwise check all
     const targetState = !isFilterTypeChecked(type);
 
-    newFilter[type]?.forEach((item) => {
+    for (const item of newFilter[type] ?? []) {
       item.checked = targetState;
-    });
+    }
 
     setSelectedFilters(newFilter);
   };
@@ -115,11 +116,11 @@ export const CompetenceFilters = ({
                 >
                   <ul className="gap-y-3 flex-col flex">
                     {selectedFilters[key]?.map((item, idx) => (
-                      <li className="pl-6" key={item.label}>
+                      <li className="pl-6" key={getLocalizedText(item.label)}>
                         <Checkbox
-                          name={item.label}
-                          ariaLabel={`${key} ${item.label}`}
-                          label={item.label}
+                          name={getLocalizedText(item.label)}
+                          ariaLabel={`${key} ${getLocalizedText(item.label)}`}
+                          label={getLocalizedText(item.label)}
                           checked={item.checked}
                           onChange={toggleSingleFilter(key, idx)}
                           value={JSON.stringify(item.value)}

@@ -87,10 +87,7 @@ const CompetenceExport = () => {
 };
 
 const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void }) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const {
     storeOsaamiset,
@@ -111,7 +108,6 @@ const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void })
       setKiinnostuksetVapaateksti: state.setKiinnostuksetVapaateksti,
     })),
   );
-  const locale = language as 'fi' | 'sv';
   const {
     toimenkuvat,
     koulutukset,
@@ -125,7 +121,6 @@ const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => void })
   } = useLoaderData<ToolLoaderData>();
 
   const { selectedFilters, setSelectedFilters, filterKeys } = useInitializeFilters(
-    locale,
     {
       TOIMENKUVA: [],
       KOULUTUS: [],
