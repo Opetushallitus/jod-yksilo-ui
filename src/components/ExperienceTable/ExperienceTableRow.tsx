@@ -40,6 +40,7 @@ interface ExperienceTableRowProps {
   actionLabel?: string;
   showCheckbox?: boolean;
   checked?: boolean;
+  isPrinting?: boolean;
   indeterminate?: boolean;
   onCheckboxChange?: (checked: boolean) => void;
 }
@@ -71,6 +72,7 @@ export const ExperienceTableRow = ({
   useConfirm,
   confirmTitle,
   confirmDescription,
+  isPrinting,
   actionLabel,
   showCheckbox,
   checked,
@@ -82,9 +84,8 @@ export const ExperienceTableRow = ({
     i18n: { language },
   } = useTranslation();
   const { sm } = useMediaQueries();
-
-  const [isOpen, setIsOpen] = React.useState(false);
-
+  const [isOpen, setIsOpen] = React.useState(isPrinting ?? false);
+  const tagsVisibleState = isPrinting || isOpen;
   const osaamisetCountTotal =
     row.osaamiset.length > 0 ? t('count-competences', { count: row.osaamiset.length }) : t('no-competences');
 
@@ -187,14 +188,14 @@ export const ExperienceTableRow = ({
     if (row.osaamiset.length > 0) {
       return (
         <button
-          aria-expanded={isOpen}
-          aria-label={t(isOpen ? 'close' : 'open')}
+          aria-expanded={tagsVisibleState}
+          aria-label={t(tagsVisibleState ? 'close' : 'open')}
           onClick={() => setIsOpen(!isOpen)}
           className={`cursor-pointer flex gap-x-2 items-center ${sm ? 'text-nowrap pr-2' : 'pr-7'}`}
           data-testid={`experience-row-competences-toggle-${row.key}`}
         >
           {osaamisetCountTotal}
-          {isOpen ? <JodCaretUp /> : <JodCaretDown />}
+          {tagsVisibleState ? <JodCaretUp /> : <JodCaretDown />}
         </button>
       );
     }
@@ -251,7 +252,7 @@ export const ExperienceTableRow = ({
         {showCheckbox && <td>{renderCheckbox()}</td>}
       </tr>
       <tr>
-        {isOpen && !showCheckbox && (
+        {tagsVisibleState && !showCheckbox && (
           <td colSpan={5} className={`w-full ${last ? 'px-5 pt-5' : 'p-5'}`.trim()}>
             <ul className="flex flex-wrap gap-3" aria-label={t('competences')}>
               {sortedCompetences.map((competence) => (

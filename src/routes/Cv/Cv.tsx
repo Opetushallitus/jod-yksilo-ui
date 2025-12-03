@@ -8,8 +8,17 @@ import { JodArrowRight, JodInfo, JodInfoFilled, JodPrint, JodUser } from '@jod/d
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
+import { getTypeSlug } from '../Profile/utils';
+import type { TypedMahdollisuus } from '../types';
 import { ContentSection } from './ContentSection';
 import type { CvLoaderData } from './loader';
+
+// Component to insert a page break when printing. There is a known and long-standing issue with Firefox where
+// page breaks do not work as expected, so page breaks are omitted in Firefox by using break-after-auto class.
+const PageBreak = () => {
+  const isFirefox = typeof navigator !== 'undefined' && /firefox/i.test(navigator.userAgent);
+  return <div className={isFirefox ? 'print:break-after-auto' : 'print:break-after-page'} aria-hidden />;
+};
 
 const BasicInfoDetail = ({ data, title }: { data?: string | number; title: string }) =>
   data ? (
@@ -22,6 +31,19 @@ const BasicInfoDetail = ({ data, title }: { data?: string | number; title: strin
 const Cv = () => {
   const { t, i18n } = useTranslation();
   const { lg } = useMediaQueries();
+  const [isPrinting, setIsPrinting] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleBeforePrint = () => setIsPrinting(true);
+    const handleAfterPrint = () => setIsPrinting(false);
+    window.addEventListener('beforeprint', handleBeforePrint);
+    window.addEventListener('afterprint', handleAfterPrint);
+    return () => {
+      window.removeEventListener('beforeprint', handleBeforePrint);
+      window.removeEventListener('afterprint', handleAfterPrint);
+    };
+  }, []);
+
   const {
     ammattiryhmaNimet,
     data,
@@ -94,12 +116,18 @@ const Cv = () => {
       label={t('print')}
       icon={<JodPrint className="text-accent" />}
       onClick={() => {
-        globalThis.print();
+        if (isPrinting) {
+          return;
+        }
+        setIsPrinting(true);
+        setTimeout(() => {
+          globalThis.print();
+        });
       }}
     />
   );
   const osaamispolkuBox = (
-    <div className="flex flex-col rounded-lg p-6 gap-5 bg-secondary-1-dark-2">
+    <div className="flex flex-col rounded-lg p-6 gap-5 bg-secondary-1-dark-2 print:hidden">
       <div className="text-heading-2 text-white mr-2">{t('osaamispolku')}</div>
       <p className="text-body-lg text-white">{t('cv.osaamispolku-description')}</p>
       <div className="mt-4">
@@ -116,6 +144,25 @@ const Cv = () => {
     </div>
   );
 
+  const renderOpportunityCard = (mahdollisuus: TypedMahdollisuus) => (
+    <OpportunityCard
+      collapsible
+      initiallyCollapsed={!isPrinting && mahdollisuus.id !== firstSuosikkiId}
+      key={mahdollisuus.id}
+      hideFavorite
+      description={getLocalizedText(mahdollisuus.tiivistelma)}
+      to={`/${i18n.language}/${getTypeSlug(mahdollisuus.mahdollisuusTyyppi)}/${mahdollisuus.id}`}
+      ammattiryhma={mahdollisuus?.ammattiryhma}
+      ammattiryhmaNimet={ammattiryhmaNimet}
+      name={getLocalizedText(mahdollisuus.otsikko)}
+      aineisto={mahdollisuus.aineisto}
+      tyyppi={mahdollisuus.tyyppi}
+      type={mahdollisuus.mahdollisuusTyyppi}
+      kesto={mahdollisuus.kesto}
+      yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
+    />
+  );
+
   return (
     <MainLayout
       hideBreadcrumb
@@ -129,10 +176,10 @@ const Cv = () => {
       <title>{title}</title>
       <IconHeading icon={<JodUser />} title={title} testId="cv-title" />
 
-      {!lg && <div className="mb-6">{printButton}</div>}
+      {!lg && <div className="mb-6 print:hidden">{printButton}</div>}
 
       {!lg && menuSection.linkItems.length > 0 && (
-        <div className="mb-8">
+        <div className="mb-8 print:hidden">
           <PageNavigation menuSection={menuSection} collapsed />
         </div>
       )}
@@ -181,12 +228,15 @@ const Cv = () => {
               <div>
                 <ExperienceTable
                   rows={tyopaikkaTableRows}
+                  isPrinting={isPrinting}
                   mainColumnHeader={t('work-history.workplace-or-job-description')}
                   ariaLabel={t('cv.competence.work')}
                 />
               </div>
             </div>
           )}
+
+          {data.tyopaikat && data.tyopaikat.length > 0 && <PageBreak />}
 
           {/* Koulutukset */}
           {data?.koulutusKokonaisuudet && data.koulutusKokonaisuudet.length > 0 && (
@@ -195,12 +245,15 @@ const Cv = () => {
               <div>
                 <ExperienceTable
                   rows={koulutusTableRows}
+                  isPrinting={isPrinting}
                   mainColumnHeader={t('education-history.education-provider-or-education')}
                   ariaLabel={t('cv.competence.education')}
                 />
               </div>
             </div>
           )}
+
+          {data?.koulutusKokonaisuudet && data.koulutusKokonaisuudet.length > 0 && <PageBreak />}
 
           {/* Vapaa-ajan toiminnot */}
           {data?.toiminnot && data.toiminnot.length > 0 && (
@@ -209,6 +262,7 @@ const Cv = () => {
               <div>
                 <ExperienceTable
                   rows={toiminnotTableRows}
+                  isPrinting={isPrinting}
                   mainColumnHeader={t('free-time-activities.theme-or-activity')}
                   ariaLabel={t('cv.competence.activities')}
                 />
@@ -216,41 +270,47 @@ const Cv = () => {
             </div>
           )}
 
+          {data?.toiminnot && data.toiminnot.length > 0 && <PageBreak />}
           {/* Muu osaaminen */}
-          {data?.muuOsaaminen && (
-            <>
-              <h3 className="text-heading-2 mb-5">{t('cv.competence.something-else')}</h3>
-              <div className="border-b-2 border-border-gray pb-3 mb-5">{t('cv.competence.title')}</div>
-              <div className="mb-8">
-                <ul className="flex flex-row flex-wrap gap-3">
-                  {muuOsaaminen.map((osaaminen) => (
-                    <li key={osaaminen.uri}>
-                      <Tag label={getLocalizedText(osaaminen.nimi)} variant="presentation" sourceType="jotain-muuta" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {getLocalizedText(muuOsaaminenVapaateksti) && (
+          {(Array.isArray(data?.muuOsaaminen?.muuOsaaminen) && data?.muuOsaaminen?.muuOsaaminen.length > 0) ||
+            (data?.muuOsaaminen?.vapaateksti && (
+              <>
+                <h3 className="text-heading-2 mb-5">{t('cv.competence.something-else')}</h3>
+                <div className="border-b-2 border-border-gray pb-3 mb-5">{t('cv.competence.title')}</div>
                 <div className="mb-8">
-                  <h4 className="sm:text-heading-3 text-heading-3-mobile mb-4">
-                    {t('cv.competence.something-else-freetext')}
-                  </h4>
-                  <p className="sm:text-body-md text-body-md-mobile font-arial">
-                    {getLocalizedText(muuOsaaminenVapaateksti)}
-                  </p>
+                  <ul className="flex flex-row flex-wrap gap-3">
+                    {muuOsaaminen.map((osaaminen) => (
+                      <li key={osaaminen.uri}>
+                        <Tag
+                          label={getLocalizedText(osaaminen.nimi)}
+                          variant="presentation"
+                          sourceType="jotain-muuta"
+                        />
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              )}
-            </>
-          )}
+
+                {getLocalizedText(muuOsaaminenVapaateksti) && (
+                  <div className="mb-8">
+                    <h4 className="sm:text-heading-3 text-heading-3-mobile mb-4">
+                      {t('cv.competence.something-else-freetext')}
+                    </h4>
+                    <p className="sm:text-body-md text-body-md-mobile font-arial">
+                      {getLocalizedText(muuOsaaminenVapaateksti)}
+                    </p>
+                  </div>
+                )}
+              </>
+            ))}
         </ContentSection>
       )}
 
-      <div className="print:break-before-page" />
+      {(data?.muuOsaaminen?.muuOsaaminen?.length || !!data?.muuOsaaminen?.vapaateksti) && <PageBreak />}
 
       {/* Kiinnostukset */}
       {hasAnyKiinnostukset && (
-        <ContentSection title={t('cv.interests.title')}>
+        <ContentSection title={t('cv.interests.title')} isPrinting={isPrinting}>
           <p className="mb-8 sm:text-body-md text-body-md-mobile font-arial">{t('cv.interests.description')}</p>
 
           {kiinnostavatOsaamiset && kiinnostavatOsaamiset.length > 0 && (
@@ -294,7 +354,7 @@ const Cv = () => {
         </ContentSection>
       )}
 
-      <div className="print:break-before-page" />
+      {hasAnyKiinnostukset && <PageBreak />}
 
       {/* Suosikit */}
       {hasAnySuosikit && (
@@ -304,25 +364,8 @@ const Cv = () => {
           {tyopaikkaSuosikit && tyopaikkaSuosikit.length > 0 && (
             <>
               <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.favorites.job-opportunities')}</h3>
-              <div className="flex flex-col gap-4 mb-8">
-                {tyopaikkaSuosikit.map((mahdollisuus) => (
-                  <OpportunityCard
-                    collapsible
-                    initiallyCollapsed={mahdollisuus.id !== firstSuosikkiId}
-                    key={mahdollisuus.id}
-                    hideFavorite
-                    description={getLocalizedText(mahdollisuus.tiivistelma)}
-                    ammattiryhma={mahdollisuus?.ammattiryhma}
-                    ammattiryhmaNimet={ammattiryhmaNimet}
-                    name={getLocalizedText(mahdollisuus.otsikko)}
-                    aineisto={mahdollisuus.aineisto}
-                    tyyppi={mahdollisuus.tyyppi}
-                    type={mahdollisuus.mahdollisuusTyyppi}
-                    kesto={mahdollisuus.kesto}
-                    yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
-                  />
-                ))}
-              </div>
+              <div className="flex flex-col gap-4 mb-8">{tyopaikkaSuosikit.map(renderOpportunityCard)}</div>
+              <PageBreak />
             </>
           )}
 
@@ -331,31 +374,12 @@ const Cv = () => {
               <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">
                 {t('cv.favorites.education-opportunities')}
               </h3>
-              <div className="flex flex-col gap-4">
-                {koulutusSuosikit.map((mahdollisuus) => (
-                  <OpportunityCard
-                    collapsible
-                    initiallyCollapsed={mahdollisuus.id !== firstSuosikkiId}
-                    key={mahdollisuus.id}
-                    hideFavorite
-                    description={getLocalizedText(mahdollisuus.tiivistelma)}
-                    ammattiryhma={mahdollisuus?.ammattiryhma}
-                    ammattiryhmaNimet={ammattiryhmaNimet}
-                    name={getLocalizedText(mahdollisuus.otsikko)}
-                    aineisto={mahdollisuus.aineisto}
-                    tyyppi={mahdollisuus.tyyppi}
-                    type={mahdollisuus.mahdollisuusTyyppi}
-                    kesto={mahdollisuus.kesto}
-                    yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
-                  />
-                ))}
-              </div>
+              <div className="flex flex-col gap-4">{koulutusSuosikit.map(renderOpportunityCard)}</div>
+              <PageBreak />
             </>
           )}
         </ContentSection>
       )}
-
-      <div className="print:break-before-page" />
 
       {tavoitteet && tavoitteet.length > 0 && (
         <ContentSection title={t('cv.goals.title')} className="my-8">
@@ -371,22 +395,11 @@ const Cv = () => {
                     title={getLocalizedText(tavoite.tavoite)}
                     ariaLabel={getLocalizedText(tavoite.tavoite)}
                     collapsedContent={summary}
-                    initialState={tavoite.id === firstTavoiteId}
+                    initialState={isPrinting || tavoite.id === firstTavoiteId}
+                    isOpen={isPrinting || undefined}
                   >
                     <div className="-mt-2">{summary}</div>
-                    <OpportunityCard
-                      key={tavoite.id}
-                      hideFavorite
-                      description={getLocalizedText(mahdollisuus?.tiivistelma)}
-                      ammattiryhma={mahdollisuus?.ammattiryhma}
-                      ammattiryhmaNimet={ammattiryhmaNimet}
-                      name={getLocalizedText(mahdollisuus?.otsikko)}
-                      aineisto={mahdollisuus?.aineisto}
-                      tyyppi={mahdollisuus?.tyyppi}
-                      kesto={mahdollisuus?.kesto}
-                      type={mahdollisuus?.mahdollisuusTyyppi ?? 'KOULUTUSMAHDOLLISUUS'}
-                      yleisinKoulutusala={mahdollisuus?.yleisinKoulutusala}
-                    />
+                    {renderOpportunityCard(mahdollisuus!)}
 
                     {tavoite.suunnitelmat && tavoite.suunnitelmat.length > 0 && (
                       <div className="mt-8">
@@ -400,8 +413,7 @@ const Cv = () => {
                               <span className="text-primary-gray after:content-[':'] after:mr-2">
                                 {alphabet[index % alphabet.length]}
                               </span>
-                              <span className="text-accent">{getLocalizedText(s.nimi)}</span>
-                              <span className="text-accent ml-3">{<JodArrowRight />}</span>
+                              <span className="text-primary-gray">{getLocalizedText(s.nimi)}</span>
                             </div>
                           </div>
                         ))}
