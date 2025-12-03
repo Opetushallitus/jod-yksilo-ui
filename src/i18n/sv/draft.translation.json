@@ -188,8 +188,8 @@
     "education-opportunity-koulutusala": "Det vanligaste utbildningsområdet",
     "education-opportunity-koulutusala-tooltip": "Utbildningsområdet avser den grupp som utbildningar delas in i beroende på vilket vetenskapsområde, samhällsområde eller arbetslivsområde de är kopplade till.",
     "info": {
-      "logged_in": "Uppgifterna i din kompetensprofil överförs inte direkt till den här sidan. Du kan importera dem från avsnittet Din kompetensprofil. Prova olika kombinationer och uppdatera dina möjligheter.",
-      "logged_out": "Du kan redigera dina val i avsnittet Sammanfattning av dina uppgifter. Prova olika kombinationer och uppdatera dina möjligheter."
+      "logged-in": "Uppgifterna i din kompetensprofil överförs inte direkt till den här sidan. Du kan importera dem från avsnittet Din kompetensprofil. Prova olika kombinationer och uppdatera dina möjligheter.",
+      "logged-out": "Du kan redigera dina val i avsnittet Sammanfattning av dina uppgifter. Prova olika kombinationer och uppdatera dina möjligheter."
     },
     "info-overview": {
       "other-data-from-profile": "Övriga importerade uppgifter från profilen",
