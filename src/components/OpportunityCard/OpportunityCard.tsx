@@ -242,7 +242,7 @@ export const OpportunityCardWrapper = ({
       />
       {collapsible ? (
         <Accordion
-          initialState={initiallyCollapsed}
+          initialState={!initiallyCollapsed}
           title={
             <div className="flex flex-col">
               <div className="order-2 flex flex-col w-fit">{titleContent}</div>

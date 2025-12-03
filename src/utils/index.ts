@@ -3,20 +3,26 @@ import { DEFAULT_PAGE_SIZE } from '@/constants';
 import i18n from '@/i18n/config';
 import toast from 'react-hot-toast/headless';
 
-export const formatDate = (date: Date, type: 'short' | 'medium' = 'short') => {
+/**
+ * Formats a date to a string representation.
+ * Types: short: MM/YYYY, medium: DD.MM.YYYY
+ * @param date Date object to format
+ * @param type short | medium
+ * @returns Formatted date string
+ */
+export const formatDate = (date: Date, type: 'short' | 'medium' = 'short'): string => {
   const month = date.getMonth();
   const fullYear = date.getFullYear();
   const day = date.getDate();
 
   if (isNaN(month) && isNaN(fullYear)) {
     return '';
+  } else if (type === 'short') {
+    return `${month + 1}/${fullYear}`;
+  } else if (type === 'medium') {
+    return `${day}.${month + 1}.${fullYear}`;
   } else {
-    if (type === 'short') {
-      return `${month + 1}/${fullYear}`;
-    }
-    if (type === 'medium') {
-      return `${day}.${month + 1}.${fullYear}`;
-    }
+    return '';
   }
 };
 
@@ -215,3 +221,13 @@ export const hasLocalizedText = (item?: components['schemas']['LokalisoituTeksti
 
   return Object.values(item).some((text) => text?.trim().length > 0);
 };
+
+/**
+ * Converts spaces to hyphens and lowercases the string. Good for generating IDs.
+ * Example: "My Section Title" -> "my-section-title"
+ * @param str The input string
+ * @returns The hyphenized string
+ */
+// SonarQube: Using replace here is intentional to collapse all whitespace into a single hyphen.
+// sonarjs/no-replace-all
+export const hyphenize = (str: string) => str.trim().replace(/\s+/g, '-').toLowerCase();

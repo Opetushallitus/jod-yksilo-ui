@@ -10,7 +10,6 @@ import {
   DEFAULT_SORTING,
   PlanFilters,
 } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel.ts';
-import { mapOsaaminenToUri } from '@/routes/Profile/MyGoals/utils.ts';
 import { ehdotusDataToRecord, EhdotusRecord } from '@/routes/Tool/utils.ts';
 import { filterByEducationType, filterByRegion } from '@/stores/useToolStore/filters.ts';
 import { paginate, removeDuplicatesByKey } from '@/utils';
@@ -102,7 +101,7 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
     );
 
     const missingOsaamiset = vaaditutOsaamiset
-      .map(mapOsaaminenToUri)
+      .map((osaaminen) => osaaminen.uri)
       .filter((id): id is string => id != undefined)
       .filter((uri) => !profiiliOsaamiset.map((o) => o?.osaaminen?.uri).includes(uri));
 
