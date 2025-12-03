@@ -1,4 +1,12 @@
-import { formatDate, getLocalizedText, paginate, parseBoolean, removeDuplicatesByKey, sortByProperty } from '@/utils';
+import {
+  formatDate,
+  getLocalizedText,
+  hyphenize,
+  paginate,
+  parseBoolean,
+  removeDuplicatesByKey,
+  sortByProperty,
+} from '@/utils';
 import i18n from 'i18next';
 import { describe, expect, it } from 'vitest';
 
@@ -23,6 +31,34 @@ describe('utils', () => {
       const invalidDate = new Date('invalid');
       const formattedDate = formatDate(invalidDate);
       expect(formattedDate).toEqual('');
+    });
+  });
+
+  describe('hyphenize', () => {
+    it('converts spaces to hyphens and lowercases the string', () => {
+      expect(hyphenize('My Section Title')).toBe('my-section-title');
+      expect(hyphenize('Another Example Here')).toBe('another-example-here');
+    });
+
+    it('handles multiple spaces', () => {
+      expect(hyphenize('A   B    C')).toBe('a-b-c');
+    });
+
+    it('handles already hyphenized and lowercase strings', () => {
+      expect(hyphenize('already-hyphenized')).toBe('already-hyphenized');
+      expect(hyphenize('lowercase')).toBe('lowercase');
+    });
+
+    it('handles empty string', () => {
+      expect(hyphenize('')).toBe('');
+    });
+
+    it('trims strings with leading/trailing spaces', () => {
+      expect(hyphenize('  Leading and trailing  ')).toBe('leading-and-trailing');
+    });
+
+    it('handles strings with only spaces', () => {
+      expect(hyphenize('     ')).toBe('');
     });
   });
 

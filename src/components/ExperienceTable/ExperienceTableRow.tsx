@@ -120,13 +120,13 @@ export const ExperienceTableRow = ({
   );
 
   const rowAction = (
-    onRowClick: (row: ExperienceTableRowData) => void,
+    onRowClick: ((row: ExperienceTableRowData) => void) | undefined,
     selectedRow: ExperienceTableRowData,
     useConfirm?: boolean,
     rowActionElement?: React.ReactNode,
     actionLabel?: string,
   ) => {
-    return (
+    return onRowClick ? (
       <TooltipWrapper
         tooltipPlacement="top"
         tooltipContent={t('competences-identifying')}
@@ -153,7 +153,7 @@ export const ExperienceTableRow = ({
           )}
         </button>
       </TooltipWrapper>
-    );
+    ) : null;
   };
 
   const renderCheckbox = () => {
@@ -184,7 +184,7 @@ export const ExperienceTableRow = ({
     if (osaamisetTunnistusEpaonnistui && row.osaamiset.length === 0) {
       return renderCompetencesDetectFailure();
     }
-    if (onRowClick && row.osaamiset.length > 0) {
+    if (row.osaamiset.length > 0) {
       return (
         <button
           aria-expanded={isOpen}
@@ -193,8 +193,8 @@ export const ExperienceTableRow = ({
           className={`cursor-pointer flex gap-x-2 items-center ${sm ? 'text-nowrap pr-2' : 'pr-7'}`}
           data-testid={`experience-row-competences-toggle-${row.key}`}
         >
-          {isOpen ? <JodCaretUp /> : <JodCaretDown />}
           {osaamisetCountTotal}
+          {isOpen ? <JodCaretUp /> : <JodCaretDown />}
         </button>
       );
     }
@@ -216,7 +216,7 @@ export const ExperienceTableRow = ({
       return <td className="text-body-md text-nowrap text-center">{renderCompetencesDetectFailure()}</td>;
     }
     return sm ? (
-      <td className={`text-body-md text-nowrap ${onRowClick ? 'pr-7 pl-[28px]' : 'pr-5'.trim()}`}>
+      <td className={`text-body-md text-nowrap ${onRowClick ? 'pr-7' : 'pr-5'.trim()}`}>
         <span className="pr-2">{osaamisetCountTotal}</span>
       </td>
     ) : (

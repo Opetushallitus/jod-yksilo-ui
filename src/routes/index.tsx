@@ -14,10 +14,12 @@ import { Tool, toolLoader } from '@/routes/Tool';
 import { NoteStackProvider } from '@jod/design-system';
 import { type RouteObject, replace } from 'react-router';
 import { withYksiloContext } from '../auth';
+import { Cv, cvLoader } from './Cv';
 import { Home } from './Home';
 import { Favorites, LandingPage, Preferences, Profile, SomethingElse } from './Profile';
 import { EducationHistory } from './Profile/EducationHistory';
 import { FreeTimeActivities } from './Profile/FreeTimeActivities';
+import { profilePreferencesLoader } from './Profile/Preferences';
 import ProfileFront from './Profile/ProfileFront/ProfileFront';
 import { ErrorBoundary, NoMatch, Root, loader as rootLoader } from './Root';
 import { ServiceBreak } from './ServiceBreak/ServiceBreak';
@@ -51,6 +53,7 @@ const profileRoutes = supportedLanguageCodes.map(
           handle: {
             title: i18n.t('profile.preferences.title', { lng }),
           },
+          loader: withYksiloContext(profilePreferencesLoader),
         },
         {
           id: `{slugs.profile.favorites}|${lng}`,
@@ -185,6 +188,19 @@ const educationOpportunityRoutes = supportedLanguageCodes.map(
     }) as RouteObject,
 );
 
+const cvRoutes: RouteObject[] =
+  globalThis.location.hostname === 'osaamispolku.fi'
+    ? []
+    : supportedLanguageCodes.map(
+        (lng) =>
+          ({
+            id: `cv/:ulkoinenJakolinkkiId|${lng}`,
+            path: 'cv/:ulkoinenJakolinkkiId',
+            element: <Cv />,
+            loader: cvLoader,
+          }) as RouteObject,
+      );
+
 const rootRoute: RouteObject = {
   id: 'root',
   path: '/:lng',
@@ -202,6 +218,7 @@ const rootRoute: RouteObject = {
       index: true,
       element: <Home />,
     },
+    ...cvRoutes,
     ...profileRoutes,
     ...toolRoutes,
     ...jobOpportunityRoutes,

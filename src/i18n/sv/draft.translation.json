@@ -12,6 +12,51 @@
     "description-tool-item-2": "utbildningsmöjligheter",
     "description-tool-item-3": "individuella förslag på möjligheter som passar dig"
   },
+  "competences-identify-failed": "AI-kompetensidentifiering misslyckades, lägg till kompetenser genom att redigera utbildningen manuellt.",
+  "cv": {
+    "basic-info": {
+      "birthyear": "Födelseår",
+      "email": "E-post",
+      "home-city": "Hemstad",
+      "person": "Person",
+      "title": "Grundläggande information"
+    },
+    "competence": {
+      "activities": "Fritidsaktiviteter",
+      "description": "Detta avsnitt samlar användarens kompetenser från olika källor: arbetsplatser, utbildningar, fritidsaktiviteter och annan kompetens. Du kan granska kompetenserna närmare genom att öppna sektionerna. I slutet finns användarens egen fria beskrivning relaterad till kompetenser.",
+      "education": "Utbildningar",
+      "something-else": "Annan kompetens",
+      "something-else-freetext": "Fri beskrivning av kompetens",
+      "title": "Kompetens",
+      "work": "Arbetsplatser"
+    },
+    "favorites": {
+      "description": "Jobb- och utbildningsmöjligheter som användaren sparat, samlade som favoriter på ett ställe.",
+      "education-opportunities": "Utbildningsmöjligheter",
+      "job-opportunities": "Karriärmöjligheter",
+      "title": "Mina favoriter"
+    },
+    "goals": {
+      "options": "Planalternativ",
+      "title": "Mina mål"
+    },
+    "ingress": "Ägaren av kompetensvägsprofilen har delat denna länk så att du kan se deras information. Länken är giltig till och med {{date}}.",
+    "interests": {
+      "competences": "Intressanta kompetenser",
+      "description": "Detta avsnitt samlar användarens intressen: intressanta kompetenser och yrken samt användarens egen fria beskrivning relaterad till intressen.",
+      "freetext": "Fri beskrivning av intressen",
+      "occupations": "Intressanta yrken",
+      "title": "Intressen"
+    },
+    "move-to-service": "Gå till tjänsten",
+    "osaamispolku-description": "Livet förändras – och vi finns här för att stötta dig. Oavsett om du byter bransch, lär dig något nytt eller förbättrar din vardag, ger vi dig lättförståelig information och inspiration för att stötta din egen väg.",
+    "title": "Kompetensprofil"
+  },
+  "error": {
+    "form": {
+      "date-in-the-past": "Datumet kan inte vara i det förflutna"
+    }
+  },
   "filters": "Filter",
   "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
@@ -27,6 +72,53 @@
     },
     "interest": {
       "search-disclaimer": "Text som används för att söka efter intressen - den sparas inte"
+    }
+  },
+  "preferences": {
+    "share": {
+      "copy-failure": "Kopiering av länken misslyckades",
+      "copy-link": "Kopiera länk",
+      "copy-success": "Länken har kopierats till urklipp",
+      "create-new-link": "Skapa ny delningslänk",
+      "delete-confirm-description": "Är du säker på att du vill ta bort delningslänken?",
+      "delete-confirm-title": "Ta bort delningslänk",
+      "delete-link": "Ta bort länk",
+      "description": "Med en delningslänk kan du dela din information med valda personer. Du bestämmer själv vilken information du vill dela med länken. Mottagaren behöver inte logga in på Osaamispolku-tjänsten.\n\nObservera att vem som helst som fått länken kan öppna den så länge din skapade delningslänk är giltig. Dela länken endast med betrodda parter eller personer som du vill ska kunna se din delade information. Du kan när som helst ta bort länken du skapat. Efter borttagning kan din information inte längre ses via länken.",
+      "edit-link": "Redigera",
+      "link-has-expired": "Länken har gått ut.",
+      "modal": {
+        "basic-info": {
+          "birthyear": "Födelseår",
+          "description": "Ge länken ett namn (alias) om du vill och ange dess giltighetstid. Du kan också lägga till en anteckning om vem länken är avsedd för. Den information som ska delas väljs i nästa steg.",
+          "email": "E-post",
+          "home-city": "Hemstad",
+          "name": "Namn",
+          "title": "Grundläggande information"
+        },
+        "data-to-share": {
+          "activities": "Mina fritidsaktiviteter",
+          "description": "Välj vilken information du vill dela. Grundläggande information ingår alltid. Du kan också välja att dela dina arbetsplatser, utbildningar, favoriter och planer.",
+          "education": "Min utbildning",
+          "favorite-education-opportunities": "Utbildningsmöjligheter",
+          "favorite-job-opportunities": "Karriärmöjligheter",
+          "favorites": "Mina favoriter",
+          "goals": "Mina mål",
+          "interests": "Mina intressen",
+          "something-else": "Annan kompetens",
+          "work": "Mina arbetsplatser"
+        },
+        "description": "Anteckning",
+        "description-placeholder": "T.ex. för vem länken är avsedd",
+        "expires-on": "Giltig till",
+        "name": "Länkens namn",
+        "name-placeholder": "T.ex. länk till Matti Meikäläinens profil",
+        "title-add": "Skapa delningslänk",
+        "title-edit": "Redigera delningslänk"
+      },
+      "no-links": "Inga delningslänkar",
+      "preview": "Förhandsgranska",
+      "title": "Dela din kompetensprofil",
+      "valid-until": "Giltig till: {{date}}"
     }
   },
   "profile": {

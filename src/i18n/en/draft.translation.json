@@ -13,6 +13,50 @@
     "description-tool-item-3": "individual suggestions for opportunities that suit you"
   },
   "competences-identify-failed": "AI competence identification failed, please add competences by editing the education manually.",
+  "cv": {
+    "basic-info": {
+      "birthyear": "Year of birth",
+      "email": "Email",
+      "home-city": "Home city",
+      "person": "Person",
+      "title": "Basic information"
+    },
+    "competence": {
+      "activities": "Leisure activities",
+      "description": "This section compiles the user's competences from different sources: workplaces, education, leisure activities, and other competences. You can view competences in more detail by expanding the sections. At the end, there is the user's own free-form description related to competences.",
+      "education": "Education",
+      "something-else": "Other competences",
+      "something-else-freetext": "Free description of competences",
+      "title": "Competence",
+      "work": "Workplaces"
+    },
+    "favorites": {
+      "description": "Job and education opportunities saved by the user, collected as favorites in one place.",
+      "education-opportunities": "Education opportunities",
+      "job-opportunities": "Job opportunities",
+      "title": "My favorites"
+    },
+    "goals": {
+      "options": "Goal plans",
+      "title": "Goals"
+    },
+    "ingress": "The owner of the competence path profile has shared this link so you can view their information. The link is valid until {{date}}.",
+    "interests": {
+      "competences": "Interesting competences",
+      "description": "This section compiles the user's interests: interesting competences and professions, as well as the user's own free-form description related to interests.",
+      "freetext": "Free description of interests",
+      "occupations": "Interesting professions",
+      "title": "Interests"
+    },
+    "move-to-service": "Go to service",
+    "osaamispolku-description": "Life changes – and we are here to support you. Whether you are changing fields, learning something new, or improving your everyday life, we provide you with easily understandable information and inspiration to support your own path.",
+    "title": "Competence profile"
+  },
+  "error": {
+    "form": {
+      "date-in-the-past": "The date cannot be in the past"
+    }
+  },
   "filters": "Filters",
   "home": {
     "go-to-service-directory": "Go to Guidance and counselling services",
@@ -44,6 +88,53 @@
     },
     "interest": {
       "search-disclaimer": "Text used for searching interests - it is not saved"
+    }
+  },
+  "preferences": {
+    "share": {
+      "copy-failure": "Failed to copy the link",
+      "copy-link": "Copy link",
+      "copy-success": "Link copied to clipboard",
+      "create-new-link": "Create new share link",
+      "delete-confirm-description": "Are you sure you want to delete the share link?",
+      "delete-confirm-title": "Delete share link",
+      "delete-link": "Delete link",
+      "description": "With a share link, you can share your information with people you choose. You decide what information you want to share with the link. The recipient does not need to log in to the Osaamispolku service.\n\nPlease note that anyone who receives the link can open it as long as the share link you created is valid. Only share the link with trusted parties or individuals whom you want to be able to view your shared information. You can delete the link you created at any time. After deletion, your information can no longer be viewed via the link.",
+      "edit-link": "Edit",
+      "link-has-expired": "The link has expired.",
+      "modal": {
+        "basic-info": {
+          "birthyear": "Year of birth",
+          "description": "Optionally give the link a name (alias) and set its validity period. You can also add a note about who the link is intended for. The information to be shared is selected in the next step.",
+          "email": "Email",
+          "home-city": "Home city",
+          "name": "Name",
+          "title": "Basic information"
+        },
+        "data-to-share": {
+          "activities": "My leisure activities",
+          "description": "Select what information you want to share. Basic information is always included. You can also choose to share your workplaces, education, favorites, and plans.",
+          "education": "My education",
+          "favorite-education-opportunities": "Education opportunities",
+          "favorite-job-opportunities": "Job opportunities",
+          "favorites": "My favorites",
+          "goals": "My goals",
+          "interests": "My interests",
+          "something-else": "Other competences",
+          "work": "My workplaces"
+        },
+        "description": "Note",
+        "description-placeholder": "E.g. who the link is for",
+        "expires-on": "Valid until",
+        "name": "Link name",
+        "name-placeholder": "E.g. Matti Meikäläinen's profile link",
+        "title-add": "Create share link",
+        "title-edit": "Edit share link"
+      },
+      "no-links": "No share links",
+      "preview": "Preview",
+      "title": "Share your competence profile",
+      "valid-until": "Valid until: {{date}}"
     }
   },
   "profile": {
