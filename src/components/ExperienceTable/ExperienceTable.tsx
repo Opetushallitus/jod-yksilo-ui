@@ -24,6 +24,7 @@ interface ExperienceTableProps {
   onCheckboxChange?: (rowKey: string, checked: boolean) => void;
   onSubCheckboxChange?: (rowKey: string, subRowKey: string, checked: boolean) => void;
   ariaLabel: string;
+  isPrinting?: boolean;
 }
 
 export const ExperienceTable = ({
@@ -47,6 +48,7 @@ export const ExperienceTable = ({
   onCheckboxChange,
   onSubCheckboxChange,
   ariaLabel,
+  isPrinting = false,
 }: ExperienceTableProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
@@ -210,6 +212,7 @@ export const ExperienceTable = ({
                   rowActionElement={rowActionElement}
                   useConfirm={useConfirm}
                   confirmTitle={confirmTitle}
+                  isPrinting={isPrinting}
                   confirmDescription={confirmRowDescription}
                   actionLabel={actionLabel}
                   showCheckbox={showCheckbox}
@@ -236,6 +239,7 @@ export const ExperienceTable = ({
                     showCheckbox={showCheckbox}
                     checked={rowsCheckboxState.get(row.key)?.subRows.get(subrow.key) ?? false}
                     onCheckboxChange={(checked) => handleSubCheckboxChange(row, subrow, checked)}
+                    isPrinting={isPrinting}
                   />
                 ))}
                 {onAddNestedRowClick && addNewNestedLabel && (

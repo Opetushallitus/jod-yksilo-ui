@@ -6,8 +6,9 @@ interface ContentSectionProps {
   children: React.ReactNode;
   title: string;
   className?: string;
+  isPrinting?: boolean;
 }
-export const ContentSection = ({ children, title, className = '' }: ContentSectionProps) => {
+export const ContentSection = ({ children, title, className = '', isPrinting = false }: ContentSectionProps) => {
   const { lg } = useMediaQueries();
   const titleElement: React.ReactNode = <ScrollHeading title={title} heading="h2" className="text-heading-2" />;
   const triggerId = `cv-section-${hyphenize(title)}`;
@@ -21,6 +22,7 @@ export const ContentSection = ({ children, title, className = '' }: ContentSecti
   ) : (
     <Accordion
       ariaLabel={title}
+      isOpen={isPrinting || undefined}
       title={titleElement}
       className={tc([className, 'mb-8'])}
       triggerId={triggerId}
