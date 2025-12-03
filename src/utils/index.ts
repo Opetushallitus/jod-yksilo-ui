@@ -70,6 +70,8 @@ type NestedKeyOf<ObjectType extends object> = {
     : `${Key}`;
 }[keyof ObjectType & (string | number)];
 
+export const isDefined = <T>(item: T | undefined): item is T => item !== undefined;
+
 /**
  * Accesses a nested property using dot notation.
  * @param obj The object to access.

@@ -4,6 +4,7 @@ import { useModal } from '@/hooks/useModal';
 import { GoalModal } from '@/routes/Profile/MyGoals/addGoal/GoalModal';
 import AddPlanModal from '@/routes/Profile/MyGoals/addPlan/AddPlanModal.tsx';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
+import { PlanCompetencesTable } from '@/routes/Profile/MyGoals/compareCompetences/PlanCompetencesTable.tsx';
 import loader from '@/routes/Profile/MyGoals/loader';
 import { PlanList } from '@/routes/Profile/MyGoals/PlanList.tsx';
 import { getTypeSlug } from '@/routes/Profile/utils';
@@ -139,6 +140,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                       }}
                       label={t('profile.my-goals.add-new-plan-for-goal')}
                     />
+                    <PlanCompetencesTable goal={tavoite} />
 
                     <div className="w-full flex justify-between">
                       <Button
