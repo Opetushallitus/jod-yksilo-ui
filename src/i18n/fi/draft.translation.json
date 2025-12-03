@@ -21,6 +21,24 @@
     "go-home": "Siirry etusivulle",
     "title": "Hups! Sivua ei löytynyt"
   },
+  "job-opportunity": {
+    "employment-data": {
+      "title": "Työllisyysnäkymä",
+
+      "description": "Työllisyysnäkymä tarkastelee työllistymismahdollisuuksia ammattiryhmässä. Tavoitteena on muodostaa yleiskuva tilanteesta. Tietoja on koottu muista palveluista, joissa voi tutustua niihin tarkemmin. Lisätietoa työllisyysnäkymästä saat Osaamispolun ",
+      "description-tietopalvelu-link": "tietopalvelusta",
+      "supply-and-demand": "Kysynnän ja tarjonnan tilanne",
+      "supply-and-demand-subtitle": "Ammattiryhmässä voi olla ylitarjontaa, tasapainotila tai työvoimapulaa. Lisää tietoa työllisyysnäkymästä löydät ",
+      "supply-and-demand-subtitle-tmt-link": "työmarkkinatorilta"
+    },
+    "supply-and-demand-title": "Työllisyysnäkymä",
+    "supply-and-demand-tooltip": "Tämänhetkinen työllisyysnäkymä työmahdollisuuden ammattiryhmälle.",
+    "supply-and-demand": {
+      "Ylitarjonta": "Ylitarjonta",
+      "Tasapaino": "Tasapaino",
+      "Alitarjonta": "Työvoimapula"
+    }
+  },
   "opportunity-type": {
     "work": {
       "TMT": "Muu työmahdollisuus"

@@ -21,6 +21,24 @@
     "go-home": "Gå till startsidan",
     "title": "Hoppsan! Sidan hittades inte"
   },
+  "job-opportunity": {
+    "employment-data": {
+      "title": "Sysselsättningsutsikter",
+      "description": "Sysselsättningsutsikterna granskar anställningsmöjligheterna inom yrkesgruppen. Målet är att ge en allmän bild av situationen. Uppgifterna har samlats från andra tjänster där du kan bekanta dig närmare med dem. Mer information om sysselsättningsutsikterna hittar du på Kompetensstigen.",
+      "description-tietopalvelu-link": "informationsservicen",
+      "supply-and-demand": "Utbud och efterfrågan",
+      "supply-and-demand-subtitle": "Inom yrkesgruppen kan det förekomma överutbud, balans eller arbetskraftsbrist. Mer information om sysselsättningsutsikterna hittar du på",
+      "supply-and-demand-subtitle-tmt-link": "arbetsmarknadsportalen"
+    },
+    "supply-and-demand-title": "Sysselsättningsutsikter",
+    "supply-and-demand-tooltip": "Den aktuella sysselsättningsutsikten för yrkesgruppen inom arbetstillfället.",
+    "supply-and-demand": {
+      "Ylitarjonta": "Överutbud",
+      "Tasapaino": "Balans",
+      "Alitarjonta": "Arbetskraftsbrist"
+    }
+  },
+
   "profile": {
     "competences": {
       "info": "Du kan själv välja vilken information från din kompetensprofil du vill använda när du söker möjligheter genom att importera den till sidan Hitta möjligheter."

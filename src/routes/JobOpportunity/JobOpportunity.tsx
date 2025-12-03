@@ -7,13 +7,13 @@ import OpportunityDetails, { type OpportunityDetailsSection } from '@/components
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { NOT_AVAILABLE_LABEL } from '@/constants';
 import { useToolStore } from '@/stores/useToolStore';
-import { formatDate, getLocalizedText, hashString } from '@/utils';
+import { getLocalizedText, hashString } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import type { LoaderData } from './loader';
 
@@ -106,36 +106,85 @@ const JobOpportunity = () => {
             <h3 className="text-heading-3">{t('job-opportunity.salary-data.title')}</h3>
           </div>
 
-          {tyomahdollisuus?.palkkatiedot ? (
+          {tyomahdollisuus?.ammattiryhma ? (
             <>
-              <p className="text-secondary-gray">
-                {formatDate(new Date(tyomahdollisuus?.palkkatiedot?.tiedotHaettu), 'medium')}
-              </p>
-
               <div className="flex sm:flex-row flex-col justify-around text-center gap-9 sm:my-8 my-4">
                 <div>
                   <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
-                    {tyomahdollisuus?.palkkatiedot?.alinDesiiliPalkka ?? NOT_AVAILABLE_LABEL} €
+                    {tyomahdollisuus?.ammattiryhma?.alinDesiiliPalkka ?? NOT_AVAILABLE_LABEL} €
                   </h4>
                   <p>{t('job-opportunity.salary-data.lowest-decile')}</p>
                 </div>
 
                 <div>
                   <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
-                    {tyomahdollisuus?.palkkatiedot?.mediaaniPalkka ?? NOT_AVAILABLE_LABEL} €
+                    {tyomahdollisuus?.ammattiryhma?.mediaaniPalkka ?? NOT_AVAILABLE_LABEL} €
                   </h4>
                   <p>{t('job-opportunity.salary-data.median')}</p>
                 </div>
 
                 <div>
                   <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
-                    {tyomahdollisuus?.palkkatiedot?.ylinDesiiliPalkka ?? NOT_AVAILABLE_LABEL} €
+                    {tyomahdollisuus?.ammattiryhma?.ylinDesiiliPalkka ?? NOT_AVAILABLE_LABEL} €
                   </h4>
                   <p>{t('job-opportunity.salary-data.highest-decile')}</p>
                 </div>
               </div>
 
               <p>{t('job-opportunity.salary-data.description')}</p>
+            </>
+          ) : (
+            <p>{t('job-opportunity.salary-data.not-available')}</p>
+          )}
+        </div>
+      ),
+    },
+    {
+      navTitle: t('job-opportunity.employment-data.title'),
+      showDivider: false,
+      showNavTitle: false,
+      showAiInfoInTitle: false,
+      content: (
+        <div className="bg-white p-6">
+          <div className="flex justify-start">
+            <h2 className="text-heading-2">{t('job-opportunity.employment-data.title')}</h2>
+          </div>
+
+          <p className="mt-3">
+            {t('job-opportunity.employment-data.description')}
+            <Link to={'https://osaamispolku.fi/tietopalvelu'}>
+              <span className="text-accent underline inline-flex items-center gap-1">
+                {t('job-opportunity.employment-data.description-tietopalvelu-link')}
+                <JodOpenInNew
+                  className="align-middle"
+                  ariaLabel={t('job-opportunity.employment-data.supply-and-demand-subtitle-tmt-link')}
+                />
+              </span>
+            </Link>
+          </p>
+
+          {tyomahdollisuus?.ammattiryhma ? (
+            <>
+              <div className="flex sm:my-8 my-4">
+                <div>
+                  <p className="font-bold text-">{t('job-opportunity.employment-data.supply-and-demand')}</p>
+                  <h4 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent">
+                    {tyomahdollisuus?.ammattiryhma?.kohtaanto ?? NOT_AVAILABLE_LABEL}
+                  </h4>
+                  <p className="text-secondary-gray mt-3 text-[14px]">
+                    {t('job-opportunity.employment-data.supply-and-demand-subtitle')}
+                    <Link to={'https://tyomarkkinatori.fi/henkiloasiakkaat'}>
+                      <span className="text-accent underline inline-flex items-center gap-1">
+                        {t('job-opportunity.employment-data.supply-and-demand-subtitle-tmt-link')}
+                        <JodOpenInNew
+                          className="align-middle"
+                          ariaLabel={t('job-opportunity.employment-data.supply-and-demand-subtitle-tmt-link')}
+                        />
+                      </span>
+                    </Link>
+                  </p>
+                </div>
+              </div>
             </>
           ) : (
             <p>{t('job-opportunity.salary-data.not-available')}</p>
