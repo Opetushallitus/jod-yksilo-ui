@@ -154,8 +154,8 @@
     "education-opportunity-koulutusala": "Most common field of education",
     "education-opportunity-koulutusala-tooltip": "The field of education refers to the group into which educational programs are categorized based on the scientific, societal, or professional domain they relate to.",
     "info": {
-      "logged_in": "The information from your competence profile does not transfer directly to this page. You can import it from the Competence Profile section. Try different combinations and update your opportunities.",
-      "logged_out": "You can edit your selections in the Summary of Your Information section. Try different combinations and update your opportunities."
+      "logged-in": "The information from your competence profile does not transfer directly to this page. You can import it from the Competence Profile section. Try different combinations and update your opportunities.",
+      "logged-out": "You can edit your selections in the Summary of Your Information section. Try different combinations and update your opportunities."
     },
     "info-overview": {
       "other-data-from-profile": "Other imported data from profile",

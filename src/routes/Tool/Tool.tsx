@@ -357,7 +357,7 @@ const Tool = () => {
       <p className="text-body-lg-mobile sm:text-body-lg mb-6 max-w-[700px]" ref={scrollRef}>
         {t('tool.description')}
       </p>
-      <InfoBox text={isLoggedIn ? t('tool.info.logged_in') : t('tool.info.logged_out')} />
+      <InfoBox text={isLoggedIn ? t('tool.info.logged-in') : t('tool.info.logged-out')} />
       <title>{t('tool.title')}</title>
       {lg ? (
         // Desktop
