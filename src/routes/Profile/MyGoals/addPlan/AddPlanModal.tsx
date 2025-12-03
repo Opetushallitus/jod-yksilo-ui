@@ -165,6 +165,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
                 label={t('next')}
                 variant="accent"
                 onClick={nextStep}
+                disabled={planNameEmpty()}
                 icon={sm ? undefined : <JodArrowRight />}
                 iconSide={sm ? undefined : 'right'}
               />

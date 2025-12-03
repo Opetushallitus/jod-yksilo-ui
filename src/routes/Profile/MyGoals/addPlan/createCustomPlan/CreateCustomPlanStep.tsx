@@ -30,6 +30,7 @@ const CreateCustomPlanStep = () => {
         <Textarea
           label={t('profile.my-goals.custom-plan-description')}
           value={planDescription[i18n.language]}
+          maxLength={500}
           onChange={(e) => setPlanDescription(e.target.value)}
         />
       </div>

@@ -5,6 +5,7 @@ import { components } from '@/api/schema';
 import { TypedMahdollisuus } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
+import { isDefined } from '@/utils';
 import { mapKoulutusCodesToLabels } from '@/utils/codes/codes';
 import { LoaderFunction } from 'react-router';
 
@@ -19,14 +20,12 @@ export default (async ({ request }) => {
   const mapToIds = (pm: components['schemas']['TavoiteDto']) => pm.mahdollisuusId;
 
   if (tyotavoitteet.length > 0) {
-    tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(
-      tyotavoitteet.map(mapToIds).filter((id): id is string => id != undefined),
-    );
+    tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(tyotavoitteet.map(mapToIds).filter(isDefined));
   }
 
   if (koulutusPaamarat.length > 0) {
     koulutusMahdollisuudetDetails = await getTypedKoulutusMahdollisuusDetails(
-      koulutusPaamarat.map(mapToIds).filter((id): id is string => id != undefined),
+      koulutusPaamarat.map(mapToIds).filter(isDefined),
     ).then(mapKoulutusCodesToLabels);
   }
 
