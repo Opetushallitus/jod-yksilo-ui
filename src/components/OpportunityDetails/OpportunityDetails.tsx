@@ -195,14 +195,14 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           <IconHeading
             icon={<TitleIcon tyyppi={tyyppi} aineisto={jobData.aineisto} />}
             title={
-              <div className="flex">
-                <div>{title}</div>
+              <>
+                {title}
                 {showAiInfoInTitle && (
-                  <div className="mt-[-2%] ml-1 print:hidden">
+                  <div className="ml-2 print:hidden inline *:align-top">
                     {<AiInfo type={tyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'education-opportunity' : 'job-opportunity'} />}
                   </div>
                 )}
-              </div>
+              </>
             }
             testId="opportunity-details-title"
           />
