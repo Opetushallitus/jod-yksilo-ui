@@ -200,6 +200,14 @@ const ProfileLinkComponent = ({ className, children }: { className?: string; chi
   );
 };
 
+const YourInfoGroup = ({ children }: { children: React.ReactNode }) => {
+  return <div className="flex flex-col gap-4 lg:gap-3 lg:bg-[#CCD1D8] lg:rounded-[12px] lg:p-3">{children}</div>;
+};
+const YourInfoGroupSeparator = () => {
+  const { lg } = useMediaQueries();
+  return lg ? null : <div className="border-t-4 border-primary-light-2 mx-5" />;
+};
+
 const YourInfo = () => {
   const { t } = useTranslation();
   const competenceOverviewRef = React.useRef<HTMLDivElement>(null);
@@ -215,52 +223,63 @@ const YourInfo = () => {
 
   return (
     <>
-      <ToolAccordion
-        title={t('interests')}
-        description={t('tool.my-own-data.interests.description')}
-        testId="tool-interests-accordion"
-      >
-        <Interests />
-      </ToolAccordion>
+      <YourInfoGroup>
+        <ToolAccordion
+          title={t('interests')}
+          description={t('tool.my-own-data.interests.description')}
+          testId="tool-interests-accordion"
+        >
+          <Interests />
+        </ToolAccordion>
 
-      <ToolAccordion
-        title={t('tool.map-your-skills')}
-        description={t('tool.my-own-data.competences.description')}
-        testId="tool-competences-accordion"
-      >
-        <Competences />
-      </ToolAccordion>
+        <ToolAccordion
+          title={t('tool.map-your-skills')}
+          description={t('tool.my-own-data.competences.description')}
+          testId="tool-competences-accordion"
+        >
+          <Competences />
+        </ToolAccordion>
 
-      <ToolAccordion
-        title={t('tool.info-overview.title')}
-        description={t('tool.info-overview.description')}
-        ref={competenceOverviewRef}
-        isOpen={overviewOpen}
-        setIsOpen={setOverviewOpen}
-        testId="tool-overview-accordion"
-      >
-        <CategorizedCompetenceTagList />
-      </ToolAccordion>
+        <ToolAccordion
+          title={t('tool.competency-profile.title')}
+          description={t('tool.competency-profile.description')}
+          testId="tool-profile-accordion"
+        >
+          <ProfileImportExport onImportSuccess={onImportSuccess} />
+        </ToolAccordion>
+      </YourInfoGroup>
 
-      <ToolAccordion
-        title={t('tool.competency-profile.title')}
-        description={t('tool.competency-profile.description')}
-        testId="tool-profile-accordion"
-      >
-        <ProfileImportExport onImportSuccess={onImportSuccess} />
-      </ToolAccordion>
+      <YourInfoGroupSeparator />
 
-      <ToolAccordion
-        title={t('tool.tools.title')}
-        description={t('tool.tools.description')}
-        testId="tool-tools-accordion"
-      >
-        <AdditionalSupport />
-      </ToolAccordion>
+      <YourInfoGroup>
+        <ToolAccordion
+          title={t('tool.info-overview.title')}
+          description={t('tool.info-overview.description')}
+          ref={competenceOverviewRef}
+          isOpen={overviewOpen}
+          setIsOpen={setOverviewOpen}
+          testId="tool-overview-accordion"
+        >
+          <CategorizedCompetenceTagList />
+        </ToolAccordion>
+      </YourInfoGroup>
 
-      <RateAiContent variant="kohtaanto" area="Kohtaanto työkalu" size="md" />
+      <YourInfoGroupSeparator />
 
-      <div className="flex flex-col bg-secondary-1-dark-2 rounded-md px-5 py-6 gap-3 text-white">
+      <YourInfoGroup>
+        <ToolAccordion
+          title={t('tool.tools.title')}
+          description={t('tool.tools.description')}
+          testId="tool-tools-accordion"
+        >
+          <AdditionalSupport />
+        </ToolAccordion>
+      </YourInfoGroup>
+      <div className="lg:mx-3">
+        <RateAiContent variant="kohtaanto" area="Kohtaanto työkalu" size="md" />
+      </div>
+
+      <div className="flex flex-col bg-secondary-1-dark-2 rounded-md px-5 py-6 gap-3 text-white lg:mx-3">
         <h2 className="text-heading-2">{t('profile.banner.title')}</h2>
         <div className="flex flex-col gap-6">
           <p className="text-body-lg">{t('profile.banner.description')}</p>
@@ -371,7 +390,7 @@ const Tool = () => {
             >
               <h2 className="sm:text-heading-2 text-heading-2-mobile h-9">{t('tool.my-own-data.title')}</h2>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 -mx-3">
               <YourInfo />
             </div>
           </div>
