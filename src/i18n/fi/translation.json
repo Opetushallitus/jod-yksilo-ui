@@ -771,8 +771,7 @@
     "competency-profile": {
       "description": "Tuo osaamisprofiilista tietojasi, joiden perusteella sinulle ehdotetaan mahdollisuuksia.",
       "help": "Voit valita itse mitä tietoja tuot. Osaamisprofiilista tuodut tiedot näkyvät tietojesi yhteenvedossa. Muista päivittää mahdollisuutesi tietojen tuonnin jälkeen.\t\n\nVoit päivittää osaamisprofiilisi tällä sivulla kartoittamilla tiedoilla. Löydät ne jatkossa osaamisprofiilista Muu osaaminen ja Kiinnostukseni-kohdista.",
-      "login-description": "Kirjautumalla palveluun voit tuoda tietojasi osaamisprofiilista ja viedä tietojasi osaamisprofiiliin. Jos sinulla ei vielä ole ole osaamisprofiilia, voit luoda sen.",
-      "title": "Osaamisprofiilisi"
+      "login-description": "Kirjautumalla palveluun voit tuoda tietojasi osaamisprofiilista ja viedä tietojasi osaamisprofiiliin. Jos sinulla ei vielä ole ole osaamisprofiilia, voit luoda sen."
     },
     "description": "Täytä tälle sivulle kiinnostuksiasi ja osaamisiasi tai tuo ne osaamisprofiilistasi. Voit suodattaa säätimillä sinulle ehdotettuja mahdollisuuksia esimerkiksi sen mukaan, etsitkö uramahdollisuuksia nykyisellä osaamisellasi tai uusia uria kiinnostuksiesi perusteella. Kokeile ja tutki erilaisia yhdistelmiä! Voit tallentaa tietosi ja sinua kiinnostavat mahdollisuudet suosikiksesi kirjautumalla palveluun.",
     "info-overview": {

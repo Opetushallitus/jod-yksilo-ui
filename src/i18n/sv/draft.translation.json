@@ -183,6 +183,9 @@
     }
   },
   "tool": {
+    "competency-profile": {
+      "title": "Importera från kompetensprofilen"
+    },
     "education-opportunity-duration": "Genomsnittlig varaktighet",
     "education-opportunity-duration-tooltip": "Utbildningens längd anger hur länge utbildningen vanligtvis varar. Den uttrycks oftast i år eller månader och baseras på utbildningens omfattning samt studiernas framsteg i normal takt.",
     "education-opportunity-koulutusala": "Det vanligaste utbildningsområdet",

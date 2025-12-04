@@ -183,6 +183,9 @@
     }
   },
   "tool": {
+    "competency-profile": {
+      "title": "Tuo osaamisprofiilista"
+    },
     "education-opportunity-duration": "Keskimääräinen kesto",
     "education-opportunity-duration-tooltip": "Koulutuksen kesto kertoo, kuinka kauan koulutus tavallisesti kestää. Se ilmaistaan yleensä vuosina tai kuukausina ja perustuu koulutuksen laajuuteen ja opintojen etenemiseen normaalissa tahdissa.",
     "education-opportunity-koulutusala": "Yleisin koulutusala",

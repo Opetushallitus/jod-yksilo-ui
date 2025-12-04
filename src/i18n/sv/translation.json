@@ -765,8 +765,7 @@
     "competency-profile": {
       "description": "Importera dina uppgifter från kompetensprofilen och få förslag på möjligheter utifrån dem.\t",
       "help": "Du kan själv välja vilka uppgifter du vill importera. Uppgifterna som importerats från kompetensprofilen visas i sammanfattningen av dina uppgifter. Kom ihåg att uppdatera dina möjligheter efter att du har importerat uppgifter.\t\n\nDu kan uppdatera din kompetensprofil med uppgifterna som kartläggs på den här sidan. Du hittar dem i fortsättningen i kompetensprofilen under Annan kompetens och Mina intressen.\t",
-      "login-description": "Genom att logga in i tjänsten kan du importera dina uppgifter från kompetensprofilen och exportera dina uppgifter till kompetensprofilen. Om du ännu inte har en kompetensprofil kan du skapa en.\t",
-      "title": "Din kompetensprofil"
+      "login-description": "Genom att logga in i tjänsten kan du importera dina uppgifter från kompetensprofilen och exportera dina uppgifter till kompetensprofilen. Om du ännu inte har en kompetensprofil kan du skapa en.\t"
     },
     "description": "Fyll i dina intressen och kunskaper på den här sidan eller importera dem från din kompetensprofil. Du kan använda reglagen för att filtrera de möjligheter som föreslås för dig, till exempel enligt om du letar efter karriärmöjligheter med din nuvarande kompetens eller nya karriärer baserat på dina intressen. Testa och undersök olika kombinationer! Du kan spara dina uppgifter och de möjligheter som intresserar dig som favoriter genom att logga in på tjänsten.\n",
     "info-overview": {
