@@ -301,14 +301,36 @@ const YourInfo = () => {
 
 const Tool = () => {
   type TabName = 'info' | 'opportunities';
+  const STORAGE_KEY = 'jod_tool_last_active_tab';
+  const DEFAULT_TAB: TabName = 'info';
+
   const { t } = useTranslation();
   const { lg } = useMediaQueries();
-  const [currentTab, setCurrentTab] = React.useState<TabName>('info');
+  const savedTab: TabName = React.useMemo(() => {
+    try {
+      const stored = globalThis.sessionStorage.getItem(STORAGE_KEY) as TabName;
+      return stored ?? DEFAULT_TAB;
+    } catch {
+      return DEFAULT_TAB;
+    }
+  }, [STORAGE_KEY]);
+
+  const [currentTab, setCurrentTab] = React.useState<TabName>(savedTab);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const { isLoggedIn } = useLoaderData<ToolLoaderData>();
 
+  React.useEffect(() => {
+    const validTabs: TabName[] = ['info', 'opportunities'];
+
+    if (savedTab && validTabs.includes(savedTab)) {
+      setCurrentTab(savedTab);
+    }
+  }, [savedTab]);
+
   const setTab = React.useCallback((tab: TabName) => {
     setCurrentTab(tab);
+    globalThis.sessionStorage.setItem(STORAGE_KEY, tab);
+
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: 'smooth' });
     } else {
