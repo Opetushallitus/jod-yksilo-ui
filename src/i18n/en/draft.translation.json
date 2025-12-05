@@ -135,6 +135,24 @@
       "preview": "Preview",
       "title": "Share your competence profile",
       "valid-until": "Valid until: {{date}}"
+    },
+    "tmt-import-export": {
+      "continue-to-tmt": "Continue to Job Market Finland",
+      "description": "You can import and export your data between Osaamispolku and Job Market Finland. The data is not updated automatically; you decide what information you want to share between the services. The data you import will be available in your competence profile. Please check the imported data. You can also edit your data if you wish.",
+      "errors": {
+        "unknown": "An unknown error occurred in the service"
+      },
+      "export-button": "Export your data",
+      "export-modal": {
+        "step-1-description": "You can export information from your competence profile to your Job Market Finland jobseeker profile. Export requires logging in to Job Market Finland and a separate authorization. No data will be exported without your permission, and you decide what information you share.",
+        "title": "Export data to Job Market Finland"
+      },
+      "import-button": "Import your data",
+      "import-modal": {
+        "step-1-description": "You can import information from your Job Market Finland jobseeker profile to your competence profile. Import requires logging in to Job Market Finland and a separate authorization. No data will be fetched without your permission, and you decide what information you share.",
+        "title": "Import data from Job Market Finland"
+      },
+      "title": "Import and export your data"
     }
   },
   "profile": {

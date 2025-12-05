@@ -129,6 +129,24 @@
       "preview": "Esikatselu",
       "title": "Jaa osaamisprofiilisi",
       "valid-until": "Viimeinen voimassaolopäivä: {{date}}"
+    },
+    "tmt-import-export": {
+      "continue-to-tmt": "Jatka Työmarkkinatoriin",
+      "description": "Voit tuoda ja viedä tietojasi Osaamispolun ja Työmarkkinatorin välillä. Tiedot eivät päivity automaattisesti, vaan päätät itse mitä tietoa haluat jakaa palveluiden välillä. Tuomasi tiedot löytyvät jatkossa osaamisprofiilistasi. Tarkista tuodut tiedot. Voit myös halutessasi muokata tietojasi.",
+      "export-button": "Vie tietojasi",
+      "export-modal": {
+        "step-1-description": "Voit viedä osaamisprofiilistasi tietoja Työmarkkinatorin työnhakuprofiiliin. Vienti edellyttää kirjautumista Työmarkkinatoriin ja erillistä valtuutusta. Tietoja ei viedä ilman lupaasi, ja päätät itse, mitä tietoja jaat.",
+        "title": "Tietojen vienti Työmarkkinatoriin"
+      },
+      "errors": {
+        "unknown": "Palvelussa on tunnistamaton virhe"
+      },
+      "import-button": "Tuo tietojasi",
+      "import-modal": {
+        "step-1-description": "Voit tuoda tietoja Työmarkkinatorin työnhakuprofiilista osaamisprofiiliisi.Tuonti edellyttää kirjautumista Työmarkkinatoriin ja erillistä valtuutusta.Tietoja ei haeta ilman lupaasi, ja päätät itse, mitä tietoja jaat.",
+        "title": "Tietojen tuonti Työmarkkinatorista"
+      },
+      "title": "Tuo ja vie tietojasi"
     }
   },
   "profile": {
@@ -152,8 +170,8 @@
       "choose-as-plan": "Valitse suunnitelmaksi",
       "choose-favorite-description": "Valitse suosikeistasi ammatti tai työmahdollisuus, jonka haluat asettaa tavoitteeksi",
       "choose-favorite-header": "Valitse tavoite suosikeista",
-      "competences": "Osaamista",
       "competence-compare": "Osaamisvertailu",
+      "competences": "Osaamista",
       "custom-plan-competences-description": "Valitse tavoitteeseen vaadittavista osaamisista ne, jotka aiot saavuttaa oman koulutussuunnitelmasi avulla.",
       "custom-plan-description": "Oman suunnitelman kuvaus",
       "custom-plan-name": "Oman suunnitelman nimi",

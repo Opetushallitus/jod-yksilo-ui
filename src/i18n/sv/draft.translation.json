@@ -119,6 +119,24 @@
       "preview": "Förhandsgranska",
       "title": "Dela din kompetensprofil",
       "valid-until": "Giltig till: {{date}}"
+    },
+    "tmt-import-export": {
+      "continue-to-tmt": "Fortsätt till Työmarkkinator",
+      "description": "Du kan importera och exportera dina uppgifter mellan Kompetensstigen och Työmarkkinator. Uppgifterna uppdateras inte automatiskt, utan du bestämmer själv vilken information du vill dela mellan tjänsterna. De importerade uppgifterna finns sedan i din kompetensprofil. Kontrollera de importerade uppgifterna. Du kan också redigera dina uppgifter om du vill.",
+      "errors": {
+        "unknown": "Ett okänt fel har uppstått i tjänsten"
+      },
+      "export-button": "Exportera dina uppgifter",
+      "export-modal": {
+        "step-1-description": "Du kan exportera information från din kompetensprofil till Työmarkkinators arbetssökarprofil. Exporten kräver inloggning på Työmarkkinator och separat auktorisering. Ingen information exporteras utan ditt tillstånd, och du bestämmer själv vilken information du delar.",
+        "title": "Exportera information till Työmarkkinator"
+      },
+      "import-button": "Importera dina uppgifter",
+      "import-modal": {
+        "step-1-description": "Du kan importera information från Työmarkkinators arbetssökarprofil till din kompetensprofil. Importen kräver inloggning på Työmarkkinator och separat auktorisering. Ingen information hämtas utan ditt tillstånd, och du bestämmer själv vilken information du delar.",
+        "title": "Importera information från Työmarkkinator"
+      },
+      "title": "Importera och exportera dina uppgifter"
     }
   },
   "profile": {
@@ -142,8 +160,8 @@
       "choose-as-plan": "Välj som plan",
       "choose-favorite-description": "Välj från dina favoriter ett yrke eller en arbetsmöjlighet som du vill sätta som mål",
       "choose-favorite-header": "Välj mål från favoriter",
-      "competences": "Kompetenser",
       "competence-compare": "Kompetensjämförelse",
+      "competences": "Kompetenser",
       "custom-plan-competences-description": "Välj de kompetenser som krävs för målet och som du planerar att uppnå med din egen utbildningsplan.",
       "custom-plan-description": "Egen plans beskrivning",
       "custom-plan-name": "Egen plans namn",
