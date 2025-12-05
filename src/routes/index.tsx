@@ -11,6 +11,7 @@ import { MyGoals, goalsLoader } from '@/routes/Profile/MyGoals';
 import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import { Tool, toolLoader } from '@/routes/Tool';
+import { isFeatureEnabled } from '@/utils/features';
 import { NoteStackProvider } from '@jod/design-system';
 import { type RouteObject, replace } from 'react-router';
 import { withYksiloContext } from '../auth';
@@ -188,10 +189,9 @@ const educationOpportunityRoutes = supportedLanguageCodes.map(
     }) as RouteObject,
 );
 
-const cvRoutes: RouteObject[] =
-  globalThis.location.hostname === 'osaamispolku.fi'
-    ? []
-    : supportedLanguageCodes.map(
+const getCvRoute = (): RouteObject[] =>
+  isFeatureEnabled('JAKOLINKKI')
+    ? supportedLanguageCodes.map(
         (lng) =>
           ({
             id: `cv/:ulkoinenJakolinkkiId|${lng}`,
@@ -199,9 +199,10 @@ const cvRoutes: RouteObject[] =
             element: <Cv />,
             loader: cvLoader,
           }) as RouteObject,
-      );
+      )
+    : [];
 
-const rootRoute: RouteObject = {
+const getRootRoute = (): RouteObject => ({
   id: 'root',
   path: '/:lng',
   loader: withYksiloContext(rootLoader, false),
@@ -218,7 +219,7 @@ const rootRoute: RouteObject = {
       index: true,
       element: <Home />,
     },
-    ...cvRoutes,
+    ...getCvRoute(),
     ...profileRoutes,
     ...toolRoutes,
     ...jobOpportunityRoutes,
@@ -226,7 +227,7 @@ const rootRoute: RouteObject = {
     ...profileLandingPageRoutes,
     { path: '*', element: <NoMatch /> },
   ],
-};
+});
 
 export const serviceBreakRoutes: RouteObject[] = [
   {
@@ -244,10 +245,10 @@ export const serviceBreakRoutes: RouteObject[] = [
   },
 ];
 
-export const routes: RouteObject[] = [
+export const getRoutes = (): RouteObject[] => [
   {
     path: '/',
     loader: () => replace(`/${i18n.language}`),
   },
-  rootRoute,
+  getRootRoute(),
 ];

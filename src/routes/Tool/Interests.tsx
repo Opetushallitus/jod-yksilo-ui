@@ -1,6 +1,6 @@
 import { OsaamisSuosittelija } from '@/components';
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { useToolStore } from '@/stores/useToolStore';
+import { isFeatureEnabled } from '@/utils/features';
 import { Button } from '@jod/design-system';
 import { JodChatBot } from '@jod/design-system/icons';
 import React from 'react';
@@ -11,7 +11,6 @@ import { VirtualAssistant } from './VirtualAssistant';
 
 const Interests = () => {
   const { t } = useTranslation();
-  const { isPrd } = useEnvironment();
   const { setKiinnostukset, virtualAssistantOpen, kiinnostukset, setVirtualAssistantOpen } = useToolStore(
     useShallow((state) => ({
       setKiinnostukset: state.setKiinnostukset,
@@ -61,7 +60,7 @@ const Interests = () => {
             tagHeadingClassName="bg-white"
             hideTextAreaLabel
           />
-          {!isPrd && (
+          {isFeatureEnabled('VIRTUAALIOHJAAJA') && (
             <div className="pt-5">
               <Button
                 data-testid="interests-open-virtual-assistant"
