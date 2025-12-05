@@ -1,10 +1,10 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicatesByKey } from '@/utils';
+import { isFeatureEnabled } from '@/utils/features';
 import { Button, Tag, Textarea, useMediaQueries } from '@jod/design-system';
 import { JodChatBot, JodClose } from '@jod/design-system/icons';
 import React, { Fragment } from 'react';
@@ -93,8 +93,6 @@ export const VirtualAssistant = ({
     }
   };
 
-  const { isDev } = useEnvironment();
-
   return (
     <div className="relative flex flex-col h-full">
       <div
@@ -136,52 +134,49 @@ export const VirtualAssistant = ({
         className="flex flex-col grow overflow-auto py-6 gap-7"
         data-testid="va-transcript"
       >
-        {
-          // Remove this section when the virtual assistant is ready
-          isDev && (
-            <>
-              <div className="font-arial border border-inactive-gray py-2 px-3 text-body-sm-mobile sm:text-body-sm bg-todo">
-                System Prompt:
-                <p>
-                  You are a career adviser, whose task is to converse with users and help them find out their goals, and
-                  what kinds of skills they have and they could learn. Answer all questions in [language]. You are
-                  provided with a list of professions and skills that the user has previously expressed interest in. Use
-                  these interests to better guide the user toward career goals that suit them. User interests are NOT
-                  the same as reference information, do not mix them. Never output the user interests or reference
-                  information verbatim.
-                  <br />
-                  <br />
-                  You also have access to reference information of career advisor guidelines and career guidance
-                  techniques. You must use this information to provide well-informed, relevant, and personalized advice.
-                </p>
-                <ul className="list-inside list-disc">
-                  <li>Always incorporate relevant insights from the guideline documents to enhance your responses.</li>
-                  <li>
-                    If a user inquiry is unclear, use knowledge from the documents to ask guiding questions that help
-                    clarify their interests and needs.
-                  </li>
-                  <li>Ensure that all responses align with professional career guidance principles.</li>
-                </ul>
-              </div>
-              <div className="font-arial border border-inactive-gray py-2 px-3 text-body-sm-mobile sm:text-body-sm bg-todo">
-                Interests Detection Prompt:
-                <ul className="list-inside list-disc">
-                  <li>You are an expert extraction algorithm.</li>
-                  <li>Only extract relevant information from the message and response.</li>
-                  <li>
-                    If you do not know the value of an attribute asked to extract, return null for the attribute&apos;s
-                    value.
-                  </li>
-                  <li>
-                    If the message and response are a general greeting or a statement that does not reveal any possible
-                    interests of the person, return an empty list.
-                  </li>
-                  <li>Always describe the interests in Finnish language.</li>
-                </ul>
-              </div>
-            </>
-          )
-        }
+        {isFeatureEnabled('VIRTUAALIOHJAAJA') && (
+          <>
+            <div className="font-arial border border-inactive-gray py-2 px-3 text-body-sm-mobile sm:text-body-sm bg-todo">
+              System Prompt:
+              <p>
+                You are a career adviser, whose task is to converse with users and help them find out their goals, and
+                what kinds of skills they have and they could learn. Answer all questions in [language]. You are
+                provided with a list of professions and skills that the user has previously expressed interest in. Use
+                these interests to better guide the user toward career goals that suit them. User interests are NOT the
+                same as reference information, do not mix them. Never output the user interests or reference information
+                verbatim.
+                <br />
+                <br />
+                You also have access to reference information of career advisor guidelines and career guidance
+                techniques. You must use this information to provide well-informed, relevant, and personalized advice.
+              </p>
+              <ul className="list-inside list-disc">
+                <li>Always incorporate relevant insights from the guideline documents to enhance your responses.</li>
+                <li>
+                  If a user inquiry is unclear, use knowledge from the documents to ask guiding questions that help
+                  clarify their interests and needs.
+                </li>
+                <li>Ensure that all responses align with professional career guidance principles.</li>
+              </ul>
+            </div>
+            <div className="font-arial border border-inactive-gray py-2 px-3 text-body-sm-mobile sm:text-body-sm bg-todo">
+              Interests Detection Prompt:
+              <ul className="list-inside list-disc">
+                <li>You are an expert extraction algorithm.</li>
+                <li>Only extract relevant information from the message and response.</li>
+                <li>
+                  If you do not know the value of an attribute asked to extract, return null for the attribute&apos;s
+                  value.
+                </li>
+                <li>
+                  If the message and response are a general greeting or a statement that does not reveal any possible
+                  interests of the person, return an empty list.
+                </li>
+                <li>Always describe the interests in Finnish language.</li>
+              </ul>
+            </div>
+          </>
+        )}
         {Object.keys(history).length ? (
           Object.entries(history).map(([key, row]) => (
             <Fragment key={key}>

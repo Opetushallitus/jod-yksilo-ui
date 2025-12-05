@@ -1,5 +1,7 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react-swc';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, searchForWorkspaceRoot } from 'vite';
 import { configDefaults } from 'vitest/config';
@@ -10,7 +12,21 @@ const target = process.env.API_BASE_URL ?? 'http://localhost:9080';
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/yksilo/',
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    {
+      name: 'serve-features-json',
+      configureServer(server) {
+        server.middlewares.use('/yksilo/config/features.json', (_, res) => {
+          const featuresPath = join(process.cwd(), 'config', 'features.json');
+          const content = readFileSync(featuresPath, 'utf-8');
+          res.setHeader('Content-Type', 'application/json');
+          res.end(content);
+        });
+      },
+    },
+  ],
   test: {
     environment: 'jsdom',
     globals: true,
@@ -74,6 +90,11 @@ export default defineConfig({
       '/api/integraatiot/koski/koulutukset': {
         target,
         xfwd: true,
+      },
+      '/yksilo/config/features.json': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        rewrite: () => '/config/features.json',
       },
       '/urataidot': {
         target: 'http://localhost:5173',

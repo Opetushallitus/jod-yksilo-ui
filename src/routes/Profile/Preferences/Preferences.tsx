@@ -1,10 +1,10 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { useModal } from '@/hooks/useModal';
 import { LogoutFormContext } from '@/routes/Root';
 import { useToolStore } from '@/stores/useToolStore';
+import { isFeatureEnabled } from '@/utils/features';
 import { Button, Toggle, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -63,7 +63,6 @@ const Preferences = () => {
   const toolStore = useToolStore();
   const logoutForm = React.useContext(LogoutFormContext);
   const { showDialog } = useModal();
-  const { isPrd } = useEnvironment();
 
   const deleteProfile = async () => {
     toolStore.reset();
@@ -162,7 +161,7 @@ const Preferences = () => {
           testId="pref-ai-training"
         />
       </section>
-      {!isPrd && (
+      {isFeatureEnabled('JAKOLINKKI') && (
         <>
           <ShareLinkSection className="mb-8" />
           <hr className="border-b-1 border-border-gray mb-7" />
