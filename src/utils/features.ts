@@ -1,4 +1,4 @@
-type Feature = 'VIRTUAALIOHJAAJA' | 'JAKOLINKKI';
+type Feature = 'VIRTUAALIOHJAAJA' | 'JAKOLINKKI' | 'TMT_INTEGRATION';
 
 //Default to false
 const features: Record<Feature, boolean> = {} as Record<Feature, boolean>;

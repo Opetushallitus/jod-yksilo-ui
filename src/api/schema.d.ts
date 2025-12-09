@@ -482,7 +482,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/integraatiot/tmt/vienti/{id}': {
+  '/api/integraatiot/tmt/vienti': {
     parameters: {
       query?: never;
       header?: never;
@@ -491,7 +491,7 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    post: operations['tmtExportExport'];
+    post: operations['tmtProfileExport'];
     delete?: never;
     options?: never;
     head?: never;
@@ -780,30 +780,14 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/integraatiot/tmt/vienti/auktorisointi': {
+  '/api/integraatiot/tmt/haku': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    get: operations['tmtExportAuthorize'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/integraatiot/tmt/vienti/auktorisointi/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['tmtExportResponse'];
+    get: operations['tmtProfileFetch'];
     put?: never;
     post?: never;
     delete?: never;
@@ -944,6 +928,7 @@ export interface components {
       kuvaus: components['schemas']['LokalisoituTeksti'];
       /** Format: uuid */
       koulutusmahdollisuusId?: string;
+      osaamiset?: string[];
     };
     TavoiteDto: {
       /** Format: uuid */
@@ -1523,6 +1508,11 @@ export interface components {
        * @example 3
        */
       sivuja: number;
+    };
+    TmtImportDto: {
+      tyopaikat?: string[];
+      koulutuskokonaisuudet?: string[];
+      toiminnot?: string[];
     };
     JakolinkkiContentDto: {
       /** Format: date-time */
@@ -2850,13 +2840,11 @@ export interface operations {
       };
     };
   };
-  tmtExportExport: {
+  tmtProfileExport: {
     parameters: {
       query?: never;
       header?: never;
-      path: {
-        id: string;
-      };
+      path?: never;
       cookie?: never;
     };
     requestBody?: never;
@@ -3307,11 +3295,9 @@ export interface operations {
       };
     };
   };
-  tmtExportAuthorize: {
+  tmtProfileFetch: {
     parameters: {
-      query: {
-        callback: string;
-      };
+      query?: never;
       header?: never;
       path?: never;
       cookie?: never;
@@ -3323,29 +3309,9 @@ export interface operations {
         headers: {
           [name: string]: unknown;
         };
-        content?: never;
-      };
-    };
-  };
-  tmtExportResponse: {
-    parameters: {
-      query?: {
-        token?: string;
-      };
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
+        content: {
+          'application/json': components['schemas']['TmtImportDto'];
         };
-        content?: never;
       };
     };
   };

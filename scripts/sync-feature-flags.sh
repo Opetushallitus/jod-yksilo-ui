@@ -16,6 +16,7 @@ VALID_FEATURES=(
   "TAVOITE"
   "KOSKI"
   "JAKOLINKKI"
+  "TMT_INTEGRATION" 
 )
 
 # Colors for output

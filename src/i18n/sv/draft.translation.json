@@ -136,6 +136,34 @@
       "preview": "Förhandsgranska",
       "title": "Dela din kompetensprofil",
       "valid-until": "Giltig till: {{date}}"
+    },
+    "tmt-import-export": {
+      "continue-to-tmt": "Fortsätt till Jobbmarknaden",
+      "description": "Du kan importera och exportera dina uppgifter mellan Osaamispolku och Jobbmarknaden. Uppgifterna uppdateras inte automatiskt, utan du bestämmer själv vilken information du vill dela mellan tjänsterna. De importerade uppgifterna finns sedan i din kompetensprofil. Kontrollera de importerade uppgifterna. Du kan också redigera dina uppgifter om du vill.",
+      "export": {
+        "button-label": "Exportera dina uppgifter",
+        "errors": {
+          "bad-request": "Ett fel uppstod vid hanteringen av auktoriseringen.",
+          "forbidden": "Ett fel uppstod vid hanteringen av auktoriseringen.",
+          "not-found": "Användaren hittades inte i Jobbmarknaden.",
+          "unknown": "Ett okänt fel uppstod i tjänsten."
+        },
+        "modal": {
+          "step-1-description": "Du kan exportera information från din kompetensprofil till din jobbsökarprofil i Jobbmarknaden. Exporten kräver inloggning i Jobbmarknaden och separat auktorisering. Ingen information exporteras utan ditt tillstånd, och du bestämmer själv vilken information du delar.",
+          "step-2-description": "Inloggningen till Jobbmarknaden lyckades och auktoriseringen är klar. Exporten av din kompetensprofil pågår.<br/><br/>Om du vill kan du gå till <CustomLink>Jobbmarknaden för att se dina uppgifter<Icon></Icon></CustomLink>",
+          "title": "Exportera uppgifter till Jobbmarknaden",
+          "tmt-url": "https://tyomarkkinatori.fi/sv/personkunder"
+        },
+        "success": "Dina uppgifter har exporterats till Jobbmarknaden."
+      },
+      "import": {
+        "button-label": "Importera dina uppgifter",
+        "modal": {
+          "step-1-description": "Du kan importera information från din jobbsökarprofil i Jobbmarknaden till din kompetensprofil. Importen kräver inloggning i Työmarkkinatori och separat auktorisering. Ingen information hämtas utan ditt tillstånd, och du bestämmer själv vilken information du delar.",
+          "title": "Importera uppgifter från Työmarkkinatori"
+        }
+      },
+      "title": "Importera och exportera dina uppgifter"
     }
   },
   "profile": {

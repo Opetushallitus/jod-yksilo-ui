@@ -17,6 +17,8 @@ export type ConfirmDialogWrapperProps = Omit<ConfirmDialogProps, 'children'> & {
   content?: React.ReactNode | (() => React.ReactNode);
   /** onConfirm handler. If it's a promise/async function, it will be awaited and a loading spinner will be shown in the confirm button */
   onConfirm?: () => MaybePromise<void>;
+  /** Whether to hide the secondary (cancel) button */
+  hideSecondaryButton?: boolean;
 };
 
 /**
@@ -41,6 +43,7 @@ export const ConfirmDialogWrapper = ({
   cancelText,
   confirmText,
   variant = 'destructive',
+  hideSecondaryButton,
   closeParentModal,
   onConfirm,
   footer,
@@ -54,16 +57,18 @@ export const ConfirmDialogWrapper = ({
   // eslint-disable-next-line react/no-unstable-nested-components
   const DefaultFooter = (hideDialog: () => void) => (
     <>
-      <Button
-        label={cancelText ?? defaultCancelText}
-        onClick={() => {
-          if (loading) {
-            return;
-          }
-          hideDialog();
-          closeActiveModal();
-        }}
-      />
+      {!hideSecondaryButton && (
+        <Button
+          label={cancelText ?? defaultCancelText}
+          onClick={() => {
+            if (loading) {
+              return;
+            }
+            hideDialog();
+            closeActiveModal();
+          }}
+        />
+      )}
       <Button
         label={confirmText ?? defaultConfirmText}
         iconSide="right"
