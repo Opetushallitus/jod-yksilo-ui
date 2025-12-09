@@ -148,6 +148,34 @@
       "preview": "Preview",
       "title": "Share your competence profile",
       "valid-until": "Valid until: {{date}}"
+    },
+    "tmt-import-export": {
+      "continue-to-tmt": "Continue to Job Market Finland",
+      "description": "You can import and export your data between Osaamispolku and Työmarkkinatori. The data does not update automatically; you decide what information you want to share between the services. Imported data will be found in your competence profile. Check the imported data. You can also edit your data if you wish.",
+      "export": {
+        "button-label": "Export your data",
+        "errors": {
+          "bad-request": "An error occurred while processing the authorization.",
+          "forbidden": "An error occurred while processing the authorization.",
+          "not-found": "User not found in Job Market Finland.",
+          "unknown": "An unknown error occurred in the service."
+        },
+        "modal": {
+          "step-1-description": "You can export information from your competence profile to your Job Market Finland jobseeker profile. Export requires logging in to Job Market Finland and a separate authorization. No data will be exported without your permission, and you decide what information to share.",
+          "step-2-description": "Authentication to Job Market Finland was successful and authorization is in place. Exporting your competence profile data is in progress.<br/><br/>If you wish, go to <CustomLink>Job Market Finland to view your data<Icon></Icon></CustomLink>",
+          "title": "Export data to Job Market Finland",
+          "tmt-url": "https://tyomarkkinatori.fi/en/personal-customers"
+        },
+        "success": "Your data was successfully exported to Job Market Finland."
+      },
+      "import": {
+        "button-label": "Import your data",
+        "modal": {
+          "step-1-description": "You can import information from your Job Market Finland jobseeker profile to your competence profile. Import requires logging in to Job Market Finland and a separate authorization. No data will be fetched without your permission, and you decide what information to share.",
+          "title": "Import data from Job Market Finland"
+        }
+      },
+      "title": "Import and export your data"
     }
   },
   "profile": {

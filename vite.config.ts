@@ -59,6 +59,10 @@ export default defineConfig({
         target,
         xfwd: true,
       },
+      '/yksilo/oauth2': {
+        target,
+        xfwd: true,
+      },
       '/yksilo/login': {
         target,
         xfwd: true,

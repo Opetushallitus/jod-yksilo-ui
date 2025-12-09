@@ -142,6 +142,34 @@
       "preview": "Esikatselu",
       "title": "Jaa osaamisprofiilisi",
       "valid-until": "Viimeinen voimassaolopäivä: {{date}}"
+    },
+    "tmt-import-export": {
+      "continue-to-tmt": "Jatka Työmarkkinatoriin",
+      "description": "Voit tuoda ja viedä tietojasi Osaamispolun ja Työmarkkinatorin välillä. Tiedot eivät päivity automaattisesti, vaan päätät itse mitä tietoa haluat jakaa palveluiden välillä. Tuomasi tiedot löytyvät jatkossa osaamisprofiilistasi. Tarkista tuodut tiedot. Voit myös halutessasi muokata tietojasi.",
+      "export": {
+        "button-label": "Vie tietojasi",
+        "errors": {
+          "bad-request": "Valtuutuksen käsittelyssä tapahtui virhe.",
+          "forbidden": "Valtuutuksen käsittelyssä tapahtui virhe.",
+          "not-found": "Käyttäjää ei löydy Työmarkkinatorista.",
+          "unknown": "Palvelussa on tunnistamaton virhe"
+        },
+        "modal": {
+          "step-1-description": "Voit viedä osaamisprofiilistasi tietoja Työmarkkinatorin työnhakuprofiiliin. Vienti edellyttää kirjautumista Työmarkkinatoriin ja erillistä valtuutusta. Tietoja ei viedä ilman lupaasi, ja päätät itse, mitä tietoja jaat.",
+          "step-2-description": "Tunnistautuminen Työmarkkinatoriin on tehty onnistuneesti ja valtuutus on kunnossa. Osaamisprofiilisi tietojen vienti on käynnissä.<br/><br/>Siirry halutessasi <CustomLink>Työmarkkinatorille tarkastelemaan tietojasi<Icon></Icon></CustomLink>",
+          "title": "Tietojen vienti Työmarkkinatoriin",
+          "tmt-url": "https://tyomarkkinatori.fi"
+        },
+        "success": "Tietojesi vienti Työmarkkinatoriin onnistui"
+      },
+      "import": {
+        "button-label": "Tuo tietojasi",
+        "modal": {
+          "step-1-description": "Voit tuoda tietoja Työmarkkinatorin työnhakuprofiilista osaamisprofiiliisi.Tuonti edellyttää kirjautumista Työmarkkinatoriin ja erillistä valtuutusta.Tietoja ei haeta ilman lupaasi, ja päätät itse, mitä tietoja jaat.",
+          "title": "Tietojen tuonti Työmarkkinatorista"
+        }
+      },
+      "title": "Tuo ja vie tietojasi"
     }
   },
   "profile": {
