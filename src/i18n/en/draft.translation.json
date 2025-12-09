@@ -52,12 +52,19 @@
     "osaamispolku-description": "Life changes – and we are here to support you. Whether you are changing fields, learning something new, or improving your everyday life, we provide you with easily understandable information and inspiration to support your own path.",
     "title": "Competence profile"
   },
+  "education-history": {
+    "add-studies-to-this-education-button": "Add studies"
+  },
   "error": {
     "form": {
       "date-in-the-past": "The date cannot be in the past"
     }
   },
   "filters": "Filters",
+  "free-time-activities": {
+    "add-new-activity-button": "Add activity",
+    "delete-free-time-activity-button": "Delete activity"
+  },
   "home": {
     "go-to-service-directory": "Go to Guidance and counselling services",
     "need-personal-guidance-content": "Guidance and counselling services help you reflect on career and education options. Narrow down the list of services based on themes that interest you and, for example, your place of residence to find the services that suit you best."
@@ -187,5 +194,9 @@
   },
   "tooltip": {
     "info": "Guide"
+  },
+  "work-history": {
+    "add-new-job-description-button": "Add new",
+    "delete-job-description-button": "Delete"
   }
 }

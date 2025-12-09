@@ -52,12 +52,19 @@
     "osaamispolku-description": "Livet förändras – och vi finns här för att stötta dig. Oavsett om du byter bransch, lär dig något nytt eller förbättrar din vardag, ger vi dig lättförståelig information och inspiration för att stötta din egen väg.",
     "title": "Kompetensprofil"
   },
+  "education-history": {
+    "add-studies-to-this-education-button": "Lägg studier"
+  },
   "error": {
     "form": {
       "date-in-the-past": "Datumet kan inte vara i det förflutna"
     }
   },
   "filters": "Filter",
+  "free-time-activities": {
+    "add-new-activity-button": "Lägg aktivitet",
+    "delete-free-time-activity-button": "Ta bort"
+  },
   "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
@@ -142,8 +149,8 @@
       "choose-as-plan": "Välj som plan",
       "choose-favorite-description": "Välj från dina favoriter ett yrke eller en arbetsmöjlighet som du vill sätta som mål",
       "choose-favorite-header": "Välj mål från favoriter",
-      "competences": "Kompetenser",
       "competence-compare": "Kompetensjämförelse",
+      "competences": "Kompetenser",
       "custom-plan-competences-description": "Välj de kompetenser som krävs för målet och som du planerar att uppnå med din egen utbildningsplan.",
       "custom-plan-description": "Egen plans beskrivning",
       "custom-plan-name": "Egen plans namn",
@@ -218,5 +225,9 @@
   "tooltip": {
     "info": "Guide"
   },
-  "version": "Testversion"
+  "version": "Testversion",
+  "work-history": {
+    "add-new-job-description-button": "Lägg ny",
+    "delete-job-description-button": "Ta bort"
+  }
 }

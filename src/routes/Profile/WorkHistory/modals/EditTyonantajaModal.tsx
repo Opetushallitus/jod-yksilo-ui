@@ -146,7 +146,7 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
       }
       footer={
         <div className="flex flex-row justify-between flex-1">
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-row gap-3">
             <Button
               className="whitespace-nowrap"
               variant="white-delete"
@@ -166,7 +166,7 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
               size={sm ? 'lg' : 'sm'}
             />
           </div>
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-row gap-3">
             <Button
               label={t('cancel')}
               variant="white"

@@ -211,8 +211,8 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
         />
       }
       footer={
-        <div className="flex justify-between gap-5 flex-1" data-testid="work-history-wizard-footer">
-          <div className="flex gap-5">
+        <div className="flex justify-between gap-3 flex-1" data-testid="work-history-wizard-footer">
+          <div className="flex gap-3">
             {step === steps && (
               <Button
                 onClick={() => {
@@ -226,7 +226,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                     osaamiset: [],
                   });
                 }}
-                label={t('work-history.add-new-job-description')}
+                label={t('work-history.add-new-job-description-button')}
                 variant="white"
                 className="whitespace-nowrap"
                 testId="work-history-add-job-description"
@@ -250,7 +250,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
               />
             )}
           </div>
-          <div className="flex gap-5">
+          <div className="flex gap-3">
             <Button
               onClick={() => onClose()}
               label={t('cancel')}
@@ -285,8 +285,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
                 }}
                 label={t('next')}
                 variant="accent"
-                icon={<JodArrowRight />}
-                iconSide={sm ? 'right' : undefined}
+                icon={sm ? undefined : <JodArrowRight />}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="work-history-next"

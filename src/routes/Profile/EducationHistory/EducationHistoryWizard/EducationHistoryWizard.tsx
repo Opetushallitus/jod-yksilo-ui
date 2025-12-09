@@ -213,8 +213,8 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
         />
       }
       footer={
-        <div className="flex justify-between gap-5 flex-1" data-testid="education-history-wizard-footer">
-          <div className="flex gap-5">
+        <div className="flex justify-between gap-3 flex-1" data-testid="education-history-wizard-footer">
+          <div className="flex gap-3">
             {step === steps && (
               <Button
                 onClick={() => {
@@ -228,7 +228,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                     osaamiset: [],
                   });
                 }}
-                label={t('education-history.add-studies-to-this-education')}
+                label={t('education-history.add-studies-to-this-education-button')}
                 variant="white"
                 className="whitespace-nowrap"
                 testId="education-history-add-degree"
@@ -252,7 +252,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
               />
             )}
           </div>
-          <div className="flex gap-5">
+          <div className="flex gap-3">
             <Button
               onClick={onClose}
               label={t('cancel')}
@@ -287,8 +287,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
                 }}
                 label={t('next')}
                 variant="accent"
-                icon={<JodArrowRight />}
-                iconSide={sm ? 'right' : undefined}
+                icon={sm ? undefined : <JodArrowRight />}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="education-history-next"

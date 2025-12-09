@@ -120,7 +120,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-end gap-5 flex-1">
+        <div className="flex flex-row justify-end gap-3 flex-1">
           <Button
             label={t('cancel')}
             variant="white"

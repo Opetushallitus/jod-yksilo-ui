@@ -3,7 +3,7 @@ import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight } from '@jod/design-system/icons';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -261,12 +261,12 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
         />
       }
       footer={
-        <div className="flex justify-between gap-5 flex-1" data-testid="free-time-wizard-footer">
-          <div className="flex gap-5">
+        <div className="flex justify-between gap-3 flex-1" data-testid="free-time-wizard-footer">
+          <div className="flex gap-3">
             {isLastStep && (
               <Button
                 onClick={onClickAddNewActivityHandler}
-                label={t('free-time-activities.add-new-activity')}
+                label={t('free-time-activities.add-new-activity-button')}
                 variant="white"
                 className="whitespace-nowrap"
                 testId="free-time-add-activity"
@@ -284,7 +284,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
               />
             )}
           </div>
-          <div className="flex gap-5">
+          <div className="flex gap-3">
             <Button
               onClick={onClickCancelHandler}
               label={t('cancel')}
@@ -310,8 +310,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 onClick={onClickNextHandler}
                 label={t('next')}
                 variant="accent"
-                icon={<JodArrowRight />}
-                iconSide={sm ? 'right' : undefined}
+                icon={sm ? undefined : <JodArrowRight />}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="free-time-next"
@@ -323,6 +322,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
                 form={formId}
                 label={t('save')}
                 variant="accent"
+                icon={sm ? undefined : <JodCheckmark />}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="free-time-save"
