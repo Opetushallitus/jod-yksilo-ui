@@ -8,7 +8,8 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
+import { Button, Datepicker, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import {
   Controller,
@@ -151,6 +152,7 @@ const AddOrEditKoulutusModal = ({
 }: AddOrEditKoulutusModalProps) => {
   const { t } = useTranslation();
   const revalidator = useRevalidator();
+  const { sm } = useMediaQueries();
 
   if (!id) {
     onClose();
@@ -315,7 +317,10 @@ const AddOrEditKoulutusModal = ({
     ? t('education-history.edit-degree-or-education')
     : t('education-history.add-studies-to-education');
 
-  return !isLoading ? (
+  if (isLoading) {
+    return <></>;
+  }
+  return (
     <Modal
       name={title}
       open={isOpen}
@@ -346,7 +351,7 @@ const AddOrEditKoulutusModal = ({
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between flex-1">
+        <div className="flex flex-row justify-between flex-1 gap-3">
           <div>
             {koulutusId && (
               <Button
@@ -366,10 +371,11 @@ const AddOrEditKoulutusModal = ({
                   });
                 }}
                 testId="education-history-delete"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
           </div>
-          <div className="flex flex-row justify-between gap-5">
+          <div className="flex flex-row justify-between gap-3">
             <Button
               label={t('cancel')}
               variant="white"
@@ -381,43 +387,48 @@ const AddOrEditKoulutusModal = ({
               }}
               className="whitespace-nowrap"
               testId="education-history-cancel"
+              size={sm ? 'lg' : 'sm'}
             />
             {!isFirstStep && (
               <Button
                 label={t('previous')}
                 variant="white"
+                icon={sm ? undefined : <JodArrowLeft />}
                 disabled={!isValid}
                 onClick={previousStep}
                 className="whitespace-nowrap"
                 testId="education-history-previous"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
             {!isLastStep && (
               <Button
                 label={t('next')}
-                variant="white"
+                variant="accent"
+                icon={sm ? undefined : <JodArrowRight />}
                 disabled={isLastStep || !isValid}
                 onClick={nextStep}
                 className="whitespace-nowrap"
                 testId="education-history-next"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
             {isLastStep && (
               <Button
                 form={formId}
                 label={t('save')}
-                variant="white"
+                variant="accent"
+                icon={sm ? undefined : <JodCheckmark />}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="education-history-save"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
           </div>
         </div>
       }
     />
-  ) : (
-    <></>
   );
 };
 

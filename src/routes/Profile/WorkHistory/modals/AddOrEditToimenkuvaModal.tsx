@@ -341,13 +341,13 @@ const AddOrEditToimenkuvaModal = ({
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between flex-1 gap-5">
+        <div className="flex flex-row justify-between flex-1 gap-3">
           <div>
             {toimenkuvaId && (
               <Button
                 className="whitespace-nowrap"
                 variant="white-delete"
-                label={`${t('work-history.delete-job-description')}`}
+                label={`${t('work-history.delete-job-description-button')}`}
                 onClick={() => {
                   if (isSubmitting) {
                     return;
@@ -365,7 +365,7 @@ const AddOrEditToimenkuvaModal = ({
               />
             )}
           </div>
-          <div className="flex flex-row justify-between gap-5">
+          <div className="flex flex-row justify-between gap-3">
             <Button
               label={t('cancel')}
               variant="white"
@@ -388,8 +388,7 @@ const AddOrEditToimenkuvaModal = ({
               <Button
                 label={t('next')}
                 variant="accent"
-                icon={<JodArrowRight />}
-                iconSide={sm ? 'right' : undefined}
+                icon={sm ? undefined : <JodArrowRight />}
                 disabled={isLastStep || !isValid}
                 onClick={nextStep}
                 className="whitespace-nowrap"

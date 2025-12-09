@@ -7,7 +7,8 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, InputField, Modal } from '@jod/design-system';
+import { Button, InputField, Modal, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -36,6 +37,7 @@ const EditKoulutuskokonaisuusModal = ({
     i18n: { language },
   } = useTranslation();
   const { showDialog } = useModal();
+  const { sm } = useMediaQueries();
 
   // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -148,7 +150,7 @@ const EditKoulutuskokonaisuusModal = ({
       }
       footer={
         <div className="flex flex-row justify-between flex-1">
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-row gap-3">
             <Button
               variant="white-delete"
               label={`${t('education-history.delete-education-history')}`}
@@ -164,9 +166,10 @@ const EditKoulutuskokonaisuusModal = ({
                   }),
                 });
               }}
+              size={sm ? 'lg' : 'sm'}
             />
           </div>
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-row gap-3">
             <Button
               label={t('cancel')}
               variant="white"
@@ -176,8 +179,16 @@ const EditKoulutuskokonaisuusModal = ({
                 }
                 onClose();
               }}
+              size={sm ? 'lg' : 'sm'}
             />
-            <Button form={formId} label={t('save')} variant="white" disabled={!isValid} />
+            <Button
+              form={formId}
+              label={t('save')}
+              variant="accent"
+              icon={sm ? undefined : <JodCheckmark />}
+              disabled={!isValid}
+              size={sm ? 'lg' : 'sm'}
+            />
           </div>
         </div>
       }

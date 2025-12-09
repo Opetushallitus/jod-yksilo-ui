@@ -7,7 +7,8 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Datepicker, InputField, Modal, WizardProgress } from '@jod/design-system';
+import { Button, Datepicker, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import {
   Controller,
@@ -152,6 +153,7 @@ export const AddOrEditPatevyysModal = ({
   // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const revalidator = useRevalidator();
+  const { sm } = useMediaQueries();
 
   if (!id) {
     onClose();
@@ -316,7 +318,11 @@ export const AddOrEditPatevyysModal = ({
 
   const { showDialog } = useModal();
 
-  return !isLoading ? (
+  if (isLoading) {
+    return <></>;
+  }
+
+  return (
     <Modal
       name={headerText}
       open={isOpen}
@@ -347,7 +353,7 @@ export const AddOrEditPatevyysModal = ({
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between flex-1">
+        <div className="flex flex-row justify-between flex-1 gap-3">
           <div>
             {patevyysId && (
               <Button
@@ -366,10 +372,11 @@ export const AddOrEditPatevyysModal = ({
                   });
                 }}
                 testId="free-time-delete"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
           </div>
-          <div className="flex flex-row justify-between gap-5">
+          <div className="flex flex-row justify-between gap-3">
             <Button
               label={t('cancel')}
               variant="white"
@@ -381,42 +388,48 @@ export const AddOrEditPatevyysModal = ({
               }}
               className="whitespace-nowrap"
               testId="free-time-cancel"
+              size={sm ? 'lg' : 'sm'}
             />
             {!isFirstStep && (
               <Button
                 label={t('previous')}
                 variant="white"
+                icon={sm ? undefined : <JodArrowLeft />}
                 disabled={!isValid}
                 onClick={previousStep}
                 className="whitespace-nowrap"
                 testId="free-time-previous"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
             {!isLastStep && (
               <Button
                 label={t('next')}
-                variant="white"
+                variant="accent"
+                icon={sm ? undefined : <JodArrowRight />}
+                iconSide={sm ? 'right' : undefined}
                 disabled={!isValid}
                 onClick={nextStep}
                 className="whitespace-nowrap"
                 testId="free-time-next"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
             {isLastStep && (
               <Button
                 form={formId}
                 label={t('save')}
-                variant="white"
+                variant="accent"
+                icon={sm ? undefined : <JodCheckmark />}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="free-time-save"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
           </div>
         </div>
       }
     />
-  ) : (
-    <></>
   );
 };

@@ -51,12 +51,19 @@
     "osaamispolku-description": "Elämä muuttuu – ja me olemme mukana tukemassa sinua. Olitpa vaihtamassa alaa, oppimassa uutta tai parantamassa arkeasi, saat meiltä helposti ymmärrettävää tietoa ja inspiraatiota oman polkusi tueksi.",
     "title": "Osaamisprofiili"
   },
+  "education-history": {
+    "add-studies-to-this-education-button": "Lisää opinto"
+  },
   "error": {
     "form": {
       "date-in-the-past": "Päivämäärä ei voi olla menneisyydessä"
     }
   },
   "filters": "Suodattimet",
+  "free-time-activities": {
+    "add-new-activity-button": "Lisää toiminto",
+    "delete-free-time-activity-button": "Poista toiminto"
+  },
   "home": {
     "go-to-service-directory": "Siirry Ohjaus- ja neuvontapalveluihin",
     "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua ura- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut."
@@ -152,8 +159,8 @@
       "choose-as-plan": "Valitse suunnitelmaksi",
       "choose-favorite-description": "Valitse suosikeistasi ammatti tai työmahdollisuus, jonka haluat asettaa tavoitteeksi",
       "choose-favorite-header": "Valitse tavoite suosikeista",
-      "competences": "Osaamista",
       "competence-compare": "Osaamisvertailu",
+      "competences": "Osaamista",
       "custom-plan-competences-description": "Valitse tavoitteeseen vaadittavista osaamisista ne, jotka aiot saavuttaa oman koulutussuunnitelmasi avulla.",
       "custom-plan-description": "Oman suunnitelman kuvaus",
       "custom-plan-name": "Oman suunnitelman nimi",
@@ -219,5 +226,9 @@
   "tooltip": {
     "info": "Ohje"
   },
-  "version": "Testausversio"
+  "version": "Testausversio",
+  "work-history": {
+    "add-new-job-description-button": "Lisää uusi",
+    "delete-job-description-button": "Poista"
+  }
 }

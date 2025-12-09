@@ -6,7 +6,8 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, InputField, Modal } from '@jod/design-system';
+import { Button, InputField, Modal, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -34,6 +35,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
   // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const revalidator = useRevalidator();
+  const { sm } = useMediaQueries();
 
   const formId = React.useId();
   useEscHandler(onClose, formId);
@@ -151,12 +153,12 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between flex-1">
+        <div className="flex flex-row justify-between flex-1 gap-3">
           <div>
             <Button
               className="whitespace-nowrap"
               variant="white-delete"
-              label={`${t('free-time-activities.delete-free-time-activity')}`}
+              label={`${t('free-time-activities.delete-free-time-activity-button')}`}
               onClick={() => {
                 if (isSubmitting) {
                   return;
@@ -173,9 +175,10 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
                 });
               }}
               testId="free-time-delete-activity"
+              size={sm ? 'lg' : 'sm'}
             />
           </div>
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-row gap-3">
             <Button
               label={t('cancel')}
               variant="white"
@@ -187,14 +190,17 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
               }}
               className="whitespace-nowrap"
               testId="free-time-cancel"
+              size={sm ? 'lg' : 'sm'}
             />
             <Button
               form={formId}
               label={t('save')}
-              variant="white"
+              variant="accent"
+              icon={sm ? undefined : <JodCheckmark />}
               disabled={!isValid}
               className="whitespace-nowrap"
               testId="free-time-save"
+              size={sm ? 'lg' : 'sm'}
             />
           </div>
         </div>
