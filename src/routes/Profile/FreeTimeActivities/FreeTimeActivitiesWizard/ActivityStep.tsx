@@ -1,5 +1,4 @@
 import { FormError, TouchedFormError } from '@/components';
-import { ModalHeader } from '@/components/ModalHeader';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { Datepicker, InputField } from '@jod/design-system';
 import React from 'react';
@@ -10,10 +9,9 @@ import type { FreeTimeActivitiesForm } from './utils';
 interface ActivityStepProps {
   type: 'toiminta' | 'patevyys';
   patevyys: number;
-  headerText: string;
 }
 
-const ActivityStep = ({ headerText, type, patevyys }: ActivityStepProps) => {
+const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
   const {
     t,
     i18n: { language },
@@ -36,7 +34,6 @@ const ActivityStep = ({ headerText, type, patevyys }: ActivityStepProps) => {
 
   return (
     <>
-      <ModalHeader text={headerText} testId="free-time-step-title" />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.free-time-activities.modals.description')}
       </p>

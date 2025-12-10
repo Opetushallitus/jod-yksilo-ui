@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { FormError } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
@@ -125,6 +126,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
     <Modal
       name={t('free-time-activities.edit-free-time-theme')}
       open={isOpen}
+      topSlot={<ModalHeader text={t('free-time-activities.edit-free-time-theme')} />}
       content={
         <FormProvider {...methods}>
           <Form
@@ -137,10 +139,6 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
               }
             }}
           >
-            <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-              {t('free-time-activities.edit-free-time-theme')}
-            </h2>
-
             <InputField
               label={t('free-time-activities.name-of-free-time-theme')}
               {...methods.register(`nimi.${language}` as const)}

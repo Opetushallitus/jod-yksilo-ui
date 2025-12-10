@@ -1,5 +1,4 @@
 import { FormError, TouchedFormError } from '@/components';
-import { ModalHeader } from '@/components/ModalHeader';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { Datepicker, InputField } from '@jod/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -9,10 +8,9 @@ import type { EducationHistoryForm } from './utils';
 interface EducationStepProps {
   type: 'oppilaitos' | 'koulutus';
   koulutus: number;
-  headerText: string;
 }
 
-const EducationStep = ({ type, koulutus, headerText }: EducationStepProps) => {
+const EducationStep = ({ type, koulutus }: EducationStepProps) => {
   const {
     t,
     i18n: { language },
@@ -28,7 +26,6 @@ const EducationStep = ({ type, koulutus, headerText }: EducationStepProps) => {
 
   return (
     <>
-      <ModalHeader text={headerText} testId="education-step-title" />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.education-history.modals.description')}
       </p>
