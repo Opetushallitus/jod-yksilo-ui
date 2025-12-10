@@ -203,6 +203,15 @@
     },
     "map-your-skills": "Kartoita osaamisesi",
     "my-own-data": {
+      "interests": {
+        "virtual-assistant": {
+          "conversation": "Keskustelu",
+          "description": "Hei! Olen botti ja autan sinua löytämään kiinnostuksen kohteitasi. Keskustele kanssani, niin saat ehdotuksia, joista voit valita sinulle sopivimmat.",
+          "respond-to-chat": "Vastaa botille...",
+          "start": "Aloitetaan – kerro ensin, mikä asia kiinnostaa sinua juuri nyt?",
+          "x-interests-added": "{{count}} kiinnostusta lisätty"
+        }
+      },
       "competences": {
         "import": {
           "confirm-description": "Tuo osaamisia osaamisprofiilistasi tietojesi kokonaiskuvaan. Valitse haluamasi osaamiset alla olevasta listasta.",

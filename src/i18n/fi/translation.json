@@ -56,7 +56,6 @@
   "description": "Kuvaus",
   "disallow": "En salli",
   "do-filter": "Suodata",
-  "done": "Valmis",
   "duration": "Kesto",
   "edit": "Muokkaa",
   "education-history": {
@@ -821,11 +820,9 @@
         "conversational-virtual-assistant": "Tunnista kiinnostuksia tekoälyllä",
         "description": "Kuvaile kiinnostuksesi ja valitse sopivimmat ehdotukset, joiden perusteella sinulle ehdotetaan mahdollisuuksia.",
         "virtual-assistant": {
-          "add": "Lisää kiinnostus klikkaamalla '+'-merkkiä osaamisen vieressä ja tarkastele valintoja alhaalla Kiinnostukset-napista.",
-          "close-selected-interests": "Sulje valitut kiinnostukset",
           "description": "Aloita kiinnostusten kartoitus keskustelemalla tekoälyn kanssa. Vastaamalla kysymyksiin saat tietoa kiinnostuksistasi ja niiden perusteella voimme tarjota sinulle sopivia kiinnostuksen kohteita.",
           "error": "Virhe vastauksen muodostamisessa. Yritä uudestaan samalla tai uuden syötteen kanssa.",
-          "intrests": "Kiinnostukset ({{count}})",
+          "intrests": "Kiinnostukset",
           "loading": "Vastausta ladataan... Ole hyvä ja odota hetki.",
           "respond-to-chat": "Vastaa chatille",
           "selected-interests": "Valitut kiinnostukset",

@@ -56,7 +56,6 @@
   "description": "Beskrivning",
   "disallow": "Tillåter inte",
   "do-filter": "Filtrera",
-  "done": "Slutförd",
   "duration": "Längd",
   "edit": "Redigera",
   "education-history": {
@@ -816,11 +815,9 @@
         "conversational-virtual-assistant": "Identifiera intressen med artificiell intelligens",
         "description": "Beskriv dina intressen och välj de mest lämpliga förslagen utifrån vilka möjligheter kommer att föreslås för dig.\t",
         "virtual-assistant": {
-          "add": "Lägg till ett intresse genom att klicka på +-tecknet bredvid kompetensen och granska valen längst ned via Intressen-knappen.",
-          "close-selected-interests": "Stäng valda intressen",
           "description": "Börja kartlägga intressen genom att diskutera med artificiell intelligens. Genom att svara på frågorna får du information om dina intressen och utifrån dem kan vi erbjuda dig lämpliga intressen.",
           "error": "Fel vid generering av svar. Försök igen med samma eller ny input.",
-          "intrests": "Intressen ({{count}})",
+          "intrests": "Intressen",
           "loading": "Hämtar svar... Vänligen vänta ett ögonblick.",
           "respond-to-chat": "Svara till chatten",
           "selected-interests": "Valda intressen",
