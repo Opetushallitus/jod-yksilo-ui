@@ -46,7 +46,7 @@ interface KoulutusForm {
 
 const KOULUTUKSET_API_PATH = '/api/profiili/koulutuskokonaisuudet/{id}/koulutukset';
 
-const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
+const MainStep = () => {
   const {
     t,
     i18n: { language },
@@ -69,11 +69,6 @@ const MainStep = ({ koulutusId }: { koulutusId?: string }) => {
 
   return (
     <>
-      <ModalHeader
-        text={
-          koulutusId ? t('education-history.edit-degree-or-education') : t('education-history.add-studies-to-education')
-        }
-      />
       <div className="mb-6">
         <InputField
           label={t('education-history.name-of-degree-or-education')}
@@ -330,6 +325,15 @@ const AddOrEditKoulutusModal = ({
           currentText={t('wizard.current')}
           steps={stepComponents.length}
           currentStep={step + 1}
+        />
+      }
+      topSlot={
+        <ModalHeader
+          text={
+            koulutusId
+              ? t('education-history.edit-degree-or-education')
+              : t('education-history.add-studies-to-education')
+          }
         />
       }
       content={

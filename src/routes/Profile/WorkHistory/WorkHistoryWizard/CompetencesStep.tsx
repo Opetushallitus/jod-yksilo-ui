@@ -1,15 +1,13 @@
 import { OsaamisSuosittelija } from '@/components';
-import { ModalHeader } from '@/components/ModalHeader';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { WorkHistoryForm } from './utils';
 
 interface CompetencesStepProps {
   toimenkuva: number;
-  headerText: string;
 }
 
-const CompetencesStep = ({ toimenkuva, headerText }: CompetencesStepProps) => {
+const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
   const {
     t,
     i18n: { language },
@@ -18,7 +16,6 @@ const CompetencesStep = ({ toimenkuva, headerText }: CompetencesStepProps) => {
 
   return (
     <>
-      <ModalHeader text={headerText} testId="work-history-competences-title" />
       <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
         {getValues(`nimi.${language}`)} - {getValues(`toimenkuvat.${toimenkuva}.nimi.${language}`)}
       </h3>

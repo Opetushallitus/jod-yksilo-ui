@@ -124,6 +124,7 @@ const EditKoulutuskokonaisuusModal = ({
     <Modal
       name={t('education-history.edit-education')}
       open={isOpen}
+      topSlot={<ModalHeader text={t('education-history.edit-education')} testId="edit-education-modal-title" />}
       content={
         <FormProvider {...methods}>
           <Form
@@ -136,7 +137,6 @@ const EditKoulutuskokonaisuusModal = ({
               }
             }}
           >
-            <ModalHeader text={t('education-history.edit-education')} testId="edit-education-modal-title" />
             <InputField
               label={t('education-history.educational-institution-or-education-provider')}
               {...methods.register(`nimi.${language}` as const)}
