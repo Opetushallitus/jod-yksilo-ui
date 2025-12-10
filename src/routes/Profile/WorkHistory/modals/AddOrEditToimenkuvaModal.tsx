@@ -46,7 +46,7 @@ interface ToimenkuvaForm {
 
 const TOIMENKUVAT_API_PATH = '/api/profiili/tyopaikat/{id}/toimenkuvat';
 
-const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
+const MainStep = () => {
   const {
     t,
     i18n: { language },
@@ -68,9 +68,6 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
   }, [alkuPvm, trigger]);
   return (
     <>
-      <ModalHeader
-        text={toimenkuvaId ? t('work-history.edit-job-description') : t('work-history.add-new-job-description')}
-      />
       <div className="mb-6 flex flex-col">
         <InputField
           label={t('work-history.job-description')}
@@ -121,12 +118,11 @@ const MainStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
   );
 };
 
-const OsaamisetStep = ({ toimenkuvaId }: { toimenkuvaId?: string }) => {
+const OsaamisetStep = () => {
   const { t } = useTranslation();
   const { control } = useFormContext<ToimenkuvaForm>();
   return (
     <>
-      <ModalHeader text={toimenkuvaId ? t('profile.competences.edit') : t('work-history.identify-competences')} />
       <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.work-history.modals.competences-description')}</p>
       <Controller
         control={control}
@@ -305,7 +301,12 @@ const AddOrEditToimenkuvaModal = ({
 
   const { showDialog } = useModal();
 
-  const headerText = t(toimenkuvaId ? 'work-history.edit-job-description' : 'work-history.add-new-job-description');
+  const headerText = React.useMemo(() => {
+    if (isFirstStep) {
+      return t(toimenkuvaId ? 'work-history.edit-job-description' : 'work-history.add-new-job-description');
+    }
+    return t(toimenkuvaId ? 'profile.competences.edit' : 'work-history.identify-competences');
+  }, [isFirstStep, t, toimenkuvaId]);
 
   if (isLoading) {
     return <></>;
@@ -324,6 +325,7 @@ const AddOrEditToimenkuvaModal = ({
           currentStep={step + 1}
         />
       }
+      topSlot={<ModalHeader text={headerText} />}
       content={
         <FormProvider {...methods}>
           <Form
@@ -336,7 +338,7 @@ const AddOrEditToimenkuvaModal = ({
               }
             }}
           >
-            <StepComponent toimenkuvaId={toimenkuvaId} />
+            <StepComponent />
           </Form>
         </FormProvider>
       }

@@ -46,7 +46,7 @@ interface PatevyysForm {
 
 const PATEVYYDET_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet'; // /{patevyysId}
 
-const MainStep = ({ headerText }: { headerText: string }) => {
+const MainStep = () => {
   const {
     t,
     i18n: { language },
@@ -69,7 +69,6 @@ const MainStep = ({ headerText }: { headerText: string }) => {
 
   return (
     <>
-      <ModalHeader text={headerText} />
       <div className="mb-6">
         <InputField
           label={t('free-time-activities.name-of-free-time-activity')}
@@ -119,12 +118,11 @@ const MainStep = ({ headerText }: { headerText: string }) => {
   );
 };
 
-const OsaamisetStep = ({ headerText }: { patevyysId?: string; headerText: string }) => {
+const OsaamisetStep = () => {
   const { t } = useTranslation();
   const { control } = useFormContext<PatevyysForm>();
   return (
     <>
-      <ModalHeader text={headerText} />
       <p className="mb-7 text-body-sm font-arial sm:mb-9">
         {t('profile.free-time-activities.modals.competences-description')}
       </p>
@@ -337,6 +335,7 @@ export const AddOrEditPatevyysModal = ({
           currentStep={step + 1}
         />
       }
+      topSlot={<ModalHeader text={headerText} />}
       content={
         <FormProvider {...methods}>
           <Form
@@ -349,7 +348,7 @@ export const AddOrEditPatevyysModal = ({
               }
             }}
           >
-            <StepComponent patevyysId={patevyysId} headerText={headerText} />
+            <StepComponent />
           </Form>
         </FormProvider>
       }

@@ -97,6 +97,7 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
     <Modal
       name={headerText}
       open={isOpen}
+      topSlot={<ModalHeader text={headerText} testId="edit-interests-title" />}
       content={
         <FormProvider {...methods}>
           <Form
@@ -109,7 +110,6 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
               }
             }}
           >
-            <ModalHeader text={headerText} testId="edit-interests-title" />
             <Controller
               control={methods.control}
               name="kiinnostukset"
