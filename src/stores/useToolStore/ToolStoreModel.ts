@@ -19,6 +19,8 @@ export interface ToolFilters {
   ammattiryhmat: string[];
   jobOpportunityType: string[];
   educationOpportunityType: string[];
+  minDuration: number | null;
+  maxDuration: number | null;
 }
 
 export const DEFAULT_FILTERS: ToolFilters = {
@@ -27,6 +29,8 @@ export const DEFAULT_FILTERS: ToolFilters = {
   ammattiryhmat: [],
   jobOpportunityType: [],
   educationOpportunityType: [],
+  minDuration: null,
+  maxDuration: null,
 };
 
 export type ArrayFilters = Extract<
@@ -66,6 +70,7 @@ export interface ToolState {
   sorting: OpportunitySortingValue;
   previousEhdotusUpdateLang: string;
   filters: ToolFilters;
+  setDurationFilter: (minDuration: number, maxDuration: number) => void;
   settingsHaveChanged?: boolean;
   shouldFetchData: boolean;
   setArrayFilter: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;

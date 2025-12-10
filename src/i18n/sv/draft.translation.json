@@ -218,7 +218,8 @@
     "settings": {
       "controls": "Kontroller",
       "general": {
-        "location": "Plats"
+        "location": "Plats",
+        "duration": "Längd"
       }
     }
   },

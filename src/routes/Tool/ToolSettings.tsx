@@ -36,9 +36,19 @@ const SettingsMenu = ({ ref, isModal }: Pick<ToolSettingsProps, 'ref' | 'isModal
   const filters = useToolStore((state) => state.filters);
 
   const getFilterCount = (filterList: FilterName[]) => {
-    return filters ? filterList.reduce((sum, filter) => sum + (filters[filter]?.length ?? 0), 0) : 0;
-  };
+    if (!filters) return 0;
 
+    return filterList.reduce((sum, filter) => {
+      const value = filters[filter];
+      if (Array.isArray(value)) {
+        return sum + value.length;
+      } else if (typeof value === 'number') {
+        return sum + value;
+      } else {
+        return sum;
+      }
+    }, 0);
+  };
   const SettingsContainer = isModal ? ModalSettingsSection : SettingsSection;
 
   return (
