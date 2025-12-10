@@ -1,5 +1,4 @@
 import { FormError, TouchedFormError } from '@/components';
-import { ModalHeader } from '@/components/ModalHeader';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { Datepicker, InputField } from '@jod/design-system';
 import React from 'react';
@@ -10,10 +9,9 @@ import { WorkHistoryForm } from './utils';
 interface WorkplaceStepProps {
   type: 'tyopaikka' | 'toimenkuva';
   toimenkuva: number;
-  headerText: string;
 }
 
-const WorkplaceStep = ({ type, toimenkuva, headerText }: WorkplaceStepProps) => {
+const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
   const {
     t,
     i18n: { language },
@@ -32,7 +30,6 @@ const WorkplaceStep = ({ type, toimenkuva, headerText }: WorkplaceStepProps) => 
 
   return (
     <>
-      <ModalHeader text={headerText} testId="work-history-step-title" />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.work-history.modals.description')}
       </p>

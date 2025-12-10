@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -166,6 +167,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
       open={isOpen}
       testId="work-history-wizard"
       fullWidthContent
+      topSlot={<ModalHeader text={headerText} />}
       content={
         <FormProvider {...methods}>
           <Form
@@ -180,21 +182,17 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
           >
             {isWorkplaceStep && (
               <div data-testid="work-history-step-workplace">
-                <WorkplaceStep
-                  headerText={headerText}
-                  type={isFirstStep ? 'tyopaikka' : 'toimenkuva'}
-                  toimenkuva={selectedToimenkuva}
-                />
+                <WorkplaceStep type={isFirstStep ? 'tyopaikka' : 'toimenkuva'} toimenkuva={selectedToimenkuva} />
               </div>
             )}
             {isCompetencesStep && (
               <div data-testid="work-history-step-competences">
-                <CompetencesStep headerText={headerText} toimenkuva={selectedToimenkuva} />
+                <CompetencesStep toimenkuva={selectedToimenkuva} />
               </div>
             )}
             {isSummaryStep && (
               <div data-testid="work-history-step-summary">
-                <SummaryStep headerText={headerText} />
+                <SummaryStep />
               </div>
             )}
           </Form>

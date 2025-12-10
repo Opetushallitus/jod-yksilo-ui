@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -202,11 +203,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
     if (isActivityStep) {
       return (
         <div data-testid="free-time-step-activity">
-          <ActivityStep
-            headerText={headerText}
-            type={isFirstStep ? 'toiminta' : 'patevyys'}
-            patevyys={selectedPatevyys}
-          />
+          <ActivityStep type={isFirstStep ? 'toiminta' : 'patevyys'} patevyys={selectedPatevyys} />
         </div>
       );
     } else if (isCompetencesStep) {
@@ -218,7 +215,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
     } else if (isSummaryStep) {
       return (
         <div data-testid="free-time-step-summary">
-          <SummaryStep headerText={headerText} />
+          <SummaryStep />
         </div>
       );
     }
@@ -234,6 +231,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
       open={isOpen}
       testId="free-time-wizard"
       fullWidthContent
+      topSlot={<ModalHeader text={headerText} testId="free-time-step-title" />}
       content={
         <FormProvider {...methods}>
           <Form

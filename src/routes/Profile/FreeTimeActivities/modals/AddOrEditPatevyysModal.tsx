@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { useEscHandler } from '@/hooks/useEscHandler';
@@ -45,7 +46,7 @@ interface PatevyysForm {
 
 const PATEVYYDET_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet'; // /{patevyysId}
 
-const MainStep = ({ headerText }: { headerText: string }) => {
+const MainStep = () => {
   const {
     t,
     i18n: { language },
@@ -68,7 +69,6 @@ const MainStep = ({ headerText }: { headerText: string }) => {
 
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{headerText}</h2>
       <div className="mb-6">
         <InputField
           label={t('free-time-activities.name-of-free-time-activity')}
@@ -118,12 +118,11 @@ const MainStep = ({ headerText }: { headerText: string }) => {
   );
 };
 
-const OsaamisetStep = ({ headerText }: { patevyysId?: string; headerText: string }) => {
+const OsaamisetStep = () => {
   const { t } = useTranslation();
   const { control } = useFormContext<PatevyysForm>();
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{headerText}</h2>
       <p className="mb-7 text-body-sm font-arial sm:mb-9">
         {t('profile.free-time-activities.modals.competences-description')}
       </p>
@@ -336,6 +335,7 @@ export const AddOrEditPatevyysModal = ({
           currentStep={step + 1}
         />
       }
+      topSlot={<ModalHeader text={headerText} />}
       content={
         <FormProvider {...methods}>
           <Form
@@ -348,7 +348,7 @@ export const AddOrEditPatevyysModal = ({
               }
             }}
           >
-            <StepComponent patevyysId={patevyysId} headerText={headerText} />
+            <StepComponent />
           </Form>
         </FormProvider>
       }
