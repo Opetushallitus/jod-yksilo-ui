@@ -1,5 +1,4 @@
 import { OsaamisSuosittelija } from '@/components';
-import { ModalHeader } from '@/components/ModalHeader';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import type { FreeTimeActivitiesForm } from './utils';
@@ -9,7 +8,7 @@ interface CompetencesStepProps {
   headerText: string;
 }
 
-const CompetencesStep = ({ patevyys, headerText }: CompetencesStepProps) => {
+const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
   const {
     t,
     i18n: { language },
@@ -18,7 +17,6 @@ const CompetencesStep = ({ patevyys, headerText }: CompetencesStepProps) => {
 
   return (
     <>
-      <ModalHeader text={headerText} testId="free-time-competences-title" />
       <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
         {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}
       </h3>

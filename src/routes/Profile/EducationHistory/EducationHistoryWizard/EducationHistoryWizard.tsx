@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -168,6 +169,8 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
       open={isOpen}
       testId="education-history-wizard"
       fullWidthContent
+      topSlot={<ModalHeader text={headerText} />}
+      className="sm:!h-[700px]"
       content={
         <FormProvider {...methods}>
           <Form
@@ -182,21 +185,17 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
           >
             {isEducationStep && (
               <div data-testid="education-step-education">
-                <EducationStep
-                  headerText={headerText}
-                  type={isFirstStep ? 'oppilaitos' : 'koulutus'}
-                  koulutus={selectedKoulutus}
-                />
+                <EducationStep type={isFirstStep ? 'oppilaitos' : 'koulutus'} koulutus={selectedKoulutus} />
               </div>
             )}
             {isCompetencesStep && (
               <div data-testid="education-step-competences">
-                <CompetencesStep headerText={headerText} koulutus={selectedKoulutus} />
+                <CompetencesStep koulutus={selectedKoulutus} />
               </div>
             )}
             {isSummaryStep && (
               <div data-testid="education-step-summary">
-                <SummaryStep headerText={headerText} />
+                <SummaryStep />
               </div>
             )}
           </Form>

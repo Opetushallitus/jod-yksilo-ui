@@ -323,6 +323,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
     <Modal
       name={headerText}
       open={showWelcomePathModal}
+      className="sm:!h-[980px]"
       content={
         <FormProvider {...methods}>
           <Form

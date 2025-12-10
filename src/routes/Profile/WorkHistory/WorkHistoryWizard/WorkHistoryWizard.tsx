@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -102,30 +103,33 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
     control: methods.control,
     name: 'toimenkuvat',
   });
-  const onSubmit: FormSubmitHandler<WorkHistoryForm> = async ({ data }: { data: WorkHistoryForm }) => {
-    if (isSubmitting) {
-      return;
-    }
+  const onSubmit: FormSubmitHandler<WorkHistoryForm> = React.useCallback(
+    async ({ data }: { data: WorkHistoryForm }) => {
+      if (isSubmitting) {
+        return;
+      }
 
-    try {
-      setIsSubmitting(true);
-      await client.POST('/api/profiili/tyopaikat', {
-        body: {
-          nimi: data.nimi,
-          toimenkuvat: data.toimenkuvat.map((toimenkuva) => ({
-            nimi: toimenkuva.nimi,
-            alkuPvm: toimenkuva.alkuPvm,
-            loppuPvm: toimenkuva.loppuPvm,
-            osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
-          })),
-        },
-      });
-      await revalidator.revalidate();
-      onClose();
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+      try {
+        setIsSubmitting(true);
+        await client.POST('/api/profiili/tyopaikat', {
+          body: {
+            nimi: data.nimi,
+            toimenkuvat: data.toimenkuvat.map((toimenkuva) => ({
+              nimi: toimenkuva.nimi,
+              alkuPvm: toimenkuva.alkuPvm,
+              loppuPvm: toimenkuva.loppuPvm,
+              osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
+            })),
+          },
+        });
+        await revalidator.revalidate();
+        onClose();
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [isSubmitting, revalidator, onClose],
+  );
 
   const [steps, setSteps] = React.useState(1);
   React.useEffect(() => {
@@ -156,6 +160,157 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
     return '';
   }, [id, toimenkuvaId, isFirstStep, isWorkplaceStep, isCompetencesStep, isSummaryStep, t]);
 
+  const topSlot = React.useMemo(() => <ModalHeader text={headerText} />, [headerText]);
+
+  const content = React.useMemo(
+    () => (
+      <FormProvider {...methods}>
+        <Form
+          id={formId}
+          onSubmit={onSubmit}
+          onKeyDown={(event) => {
+            // Prevent form submission on Enter
+            if (event.key === 'Enter') {
+              event.preventDefault();
+            }
+          }}
+        >
+          {isWorkplaceStep && (
+            <div data-testid="work-history-step-workplace">
+              <WorkplaceStep type={isFirstStep ? 'tyopaikka' : 'toimenkuva'} toimenkuva={selectedToimenkuva} />
+            </div>
+          )}
+          {isCompetencesStep && (
+            <div data-testid="work-history-step-competences">
+              <CompetencesStep toimenkuva={selectedToimenkuva} />
+            </div>
+          )}
+          {isSummaryStep && (
+            <div data-testid="work-history-step-summary">
+              <SummaryStep />
+            </div>
+          )}
+        </Form>
+      </FormProvider>
+    ),
+    [methods, formId, onSubmit, isWorkplaceStep, isFirstStep, selectedToimenkuva, isCompetencesStep, isSummaryStep],
+  );
+
+  const progress = React.useMemo(
+    () => (
+      <WizardProgress
+        labelText={t('wizard.label')}
+        stepText={t('wizard.step')}
+        completedText={t('wizard.completed')}
+        currentText={t('wizard.current')}
+        steps={steps}
+        currentStep={step}
+      />
+    ),
+    [t, steps, step],
+  );
+
+  const footer = React.useMemo(
+    () => (
+      <div className="flex justify-between gap-3 flex-1" data-testid="work-history-wizard-footer">
+        <div className="flex gap-3">
+          {step === steps && (
+            <Button
+              onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
+                append({
+                  nimi: {},
+                  alkuPvm: '',
+                  loppuPvm: '',
+                  osaamiset: [],
+                });
+              }}
+              label={t('work-history.add-new-job-description-button')}
+              variant="white"
+              className="whitespace-nowrap"
+              testId="work-history-add-job-description"
+              size={sm ? 'lg' : 'sm'}
+            />
+          )}
+          {step !== steps && selectedToimenkuva > 0 && (
+            <Button
+              onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
+                setStep(selectedToimenkuva * 2);
+                remove(selectedToimenkuva);
+              }}
+              label={t('work-history.delete-job-description')}
+              variant="white-delete"
+              className="whitespace-nowrap"
+              testId="work-history-delete-job-description"
+              size={sm ? 'lg' : 'sm'}
+            />
+          )}
+        </div>
+        <div className="flex gap-3">
+          <Button
+            onClick={() => onClose()}
+            label={t('cancel')}
+            variant="white"
+            testId="work-history-cancel"
+            size={sm ? 'lg' : 'sm'}
+          />
+          {step > 1 && (
+            <Button
+              onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
+                setStep(step - 1);
+              }}
+              label={t('previous')}
+              variant="white"
+              icon={sm ? undefined : <JodArrowLeft />}
+              disabled={!isValid}
+              className="whitespace-nowrap"
+              testId="work-history-previous"
+              size={sm ? 'lg' : 'sm'}
+            />
+          )}
+          {step < steps && (
+            <Button
+              onClick={() => {
+                if (isSubmitting) {
+                  return;
+                }
+                setStep(step + 1);
+              }}
+              label={t('next')}
+              variant="accent"
+              icon={sm ? undefined : <JodArrowRight />}
+              disabled={!isValid}
+              className="whitespace-nowrap"
+              testId="work-history-next"
+              size={sm ? 'lg' : 'sm'}
+            />
+          )}
+          {step === steps && (
+            <Button
+              form={formId}
+              label={t('save')}
+              icon={sm ? undefined : <JodCheckmark />}
+              variant="accent"
+              disabled={!isValid}
+              className="whitespace-nowrap"
+              testId="work-history-save"
+              size={sm ? 'lg' : 'sm'}
+            />
+          )}
+        </div>
+      </div>
+    ),
+    [step, steps, isSubmitting, append, t, sm, selectedToimenkuva, remove, setStep, onClose, isValid, formId],
+  );
+
   if (isLoading) {
     return null;
   }
@@ -166,147 +321,11 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
       open={isOpen}
       testId="work-history-wizard"
       fullWidthContent
-      content={
-        <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-          >
-            {isWorkplaceStep && (
-              <div data-testid="work-history-step-workplace">
-                <WorkplaceStep
-                  headerText={headerText}
-                  type={isFirstStep ? 'tyopaikka' : 'toimenkuva'}
-                  toimenkuva={selectedToimenkuva}
-                />
-              </div>
-            )}
-            {isCompetencesStep && (
-              <div data-testid="work-history-step-competences">
-                <CompetencesStep headerText={headerText} toimenkuva={selectedToimenkuva} />
-              </div>
-            )}
-            {isSummaryStep && (
-              <div data-testid="work-history-step-summary">
-                <SummaryStep headerText={headerText} />
-              </div>
-            )}
-          </Form>
-        </FormProvider>
-      }
-      progress={
-        <WizardProgress
-          labelText={t('wizard.label')}
-          stepText={t('wizard.step')}
-          completedText={t('wizard.completed')}
-          currentText={t('wizard.current')}
-          steps={steps}
-          currentStep={step}
-        />
-      }
-      footer={
-        <div className="flex justify-between gap-3 flex-1" data-testid="work-history-wizard-footer">
-          <div className="flex gap-3">
-            {step === steps && (
-              <Button
-                onClick={() => {
-                  if (isSubmitting) {
-                    return;
-                  }
-                  append({
-                    nimi: {},
-                    alkuPvm: '',
-                    loppuPvm: '',
-                    osaamiset: [],
-                  });
-                }}
-                label={t('work-history.add-new-job-description-button')}
-                variant="white"
-                className="whitespace-nowrap"
-                testId="work-history-add-job-description"
-                size={sm ? 'lg' : 'sm'}
-              />
-            )}
-            {step !== steps && selectedToimenkuva > 0 && (
-              <Button
-                onClick={() => {
-                  if (isSubmitting) {
-                    return;
-                  }
-                  setStep(selectedToimenkuva * 2);
-                  remove(selectedToimenkuva);
-                }}
-                label={t('work-history.delete-job-description')}
-                variant="white-delete"
-                className="whitespace-nowrap"
-                testId="work-history-delete-job-description"
-                size={sm ? 'lg' : 'sm'}
-              />
-            )}
-          </div>
-          <div className="flex gap-3">
-            <Button
-              onClick={() => onClose()}
-              label={t('cancel')}
-              variant="white"
-              testId="work-history-cancel"
-              size={sm ? 'lg' : 'sm'}
-            />
-            {step > 1 && (
-              <Button
-                onClick={() => {
-                  if (isSubmitting) {
-                    return;
-                  }
-                  setStep(step - 1);
-                }}
-                label={t('previous')}
-                variant="white"
-                icon={sm ? undefined : <JodArrowLeft />}
-                disabled={!isValid}
-                className="whitespace-nowrap"
-                testId="work-history-previous"
-                size={sm ? 'lg' : 'sm'}
-              />
-            )}
-            {step < steps && (
-              <Button
-                onClick={() => {
-                  if (isSubmitting) {
-                    return;
-                  }
-                  setStep(step + 1);
-                }}
-                label={t('next')}
-                variant="accent"
-                icon={sm ? undefined : <JodArrowRight />}
-                disabled={!isValid}
-                className="whitespace-nowrap"
-                testId="work-history-next"
-                size={sm ? 'lg' : 'sm'}
-              />
-            )}
-            {step === steps && (
-              <Button
-                form={formId}
-                label={t('save')}
-                icon={sm ? undefined : <JodCheckmark />}
-                variant="accent"
-                disabled={!isValid}
-                className="whitespace-nowrap"
-                testId="work-history-save"
-                size={sm ? 'lg' : 'sm'}
-              />
-            )}
-          </div>
-        </div>
-      }
+      topSlot={topSlot}
+      content={content}
+      progress={progress}
+      footer={footer}
+      className="sm:!h-[700px]"
     />
   );
 };
