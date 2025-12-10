@@ -170,6 +170,15 @@
     },
     "map-your-skills": "Map your skills",
     "my-own-data": {
+      "interests": {
+        "virtual-assistant": {
+          "conversation": "Conversation",
+          "description": "Hi! I am a bot and I help you find your interests. Talk to me and you will get suggestions that you can choose the ones that suit you best.",
+          "respond-to-chat": "Respond to the bot...",
+          "start": "Let's get started – first, tell me what interests you right now?",
+          "x-interests-added": "{{count}} interests added"
+        }
+      },
       "competences": {
         "import": {
           "confirm-description": "Import competences from your competence profile to your overall data view. Select the competences you want from the list below.",

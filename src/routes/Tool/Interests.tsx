@@ -1,42 +1,20 @@
 import { OsaamisSuosittelija } from '@/components';
 import { useToolStore } from '@/stores/useToolStore';
 import { isFeatureEnabled } from '@/utils/features';
-import { Button } from '@jod/design-system';
-import { JodChatBot } from '@jod/design-system/icons';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 import { mergeUniqueValuesExcludingType } from './utils';
 import { VirtualAssistant } from './VirtualAssistant';
 
 const Interests = () => {
-  const { t } = useTranslation();
-  const { setKiinnostukset, virtualAssistantOpen, kiinnostukset, setVirtualAssistantOpen } = useToolStore(
+  const { setKiinnostukset, kiinnostukset } = useToolStore(
     useShallow((state) => ({
       setKiinnostukset: state.setKiinnostukset,
       setKiinnostuksetVapaateksti: state.setKiinnostuksetVapaateksti,
       kiinnostukset: state.kiinnostukset,
       kiinnostuksetVapaateksti: state.kiinnostuksetVapaateksti,
-      virtualAssistantOpen: state.virtualAssistantOpen,
-      setVirtualAssistantOpen: state.setVirtualAssistantOpen,
     })),
   );
-
-  // 100vh - header height - padding
-  const virtualAssistantClassNames = virtualAssistantOpen ? 'h-[calc(100vh-96px-40px)]' : '';
-
-  const scrollToTitle = () => {
-    setTimeout(() => {
-      const titleElement = document.getElementById('kiinnostuksetTitle');
-
-      if (titleElement) {
-        titleElement.scrollIntoView({ behavior: 'smooth' });
-        titleElement.focus();
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }, 100);
-  };
 
   const onChange = React.useCallback(
     (newValues: typeof kiinnostukset) => {
@@ -46,39 +24,15 @@ const Interests = () => {
   );
 
   return (
-    <div className={virtualAssistantClassNames}>
-      {virtualAssistantOpen ? (
-        <div className="bg-white rounded h-full flex flex-col">
-          <VirtualAssistant setVirtualAssistantOpen={setVirtualAssistantOpen} />
-        </div>
-      ) : (
-        <>
-          <OsaamisSuosittelija
-            onChange={onChange}
-            value={kiinnostukset.filter((k) => k.tyyppi === 'KARTOITETTU')}
-            mode="kiinnostukset"
-            tagHeadingClassName="bg-white"
-            hideTextAreaLabel
-          />
-          {isFeatureEnabled('VIRTUAALIOHJAAJA') && (
-            <div className="pt-5">
-              <Button
-                data-testid="interests-open-virtual-assistant"
-                label={t('tool.my-own-data.interests.conversational-virtual-assistant')}
-                variant="gray"
-                size="sm"
-                className="w-fit"
-                icon={<JodChatBot />}
-                iconSide="right"
-                onClick={() => {
-                  setVirtualAssistantOpen(true);
-                  scrollToTitle();
-                }}
-              />
-            </div>
-          )}
-        </>
-      )}
+    <div>
+      <OsaamisSuosittelija
+        onChange={onChange}
+        value={kiinnostukset.filter((k) => k.tyyppi === 'KARTOITETTU')}
+        mode="kiinnostukset"
+        tagHeadingClassName="bg-white"
+        hideTextAreaLabel
+      />
+      {isFeatureEnabled('VIRTUAALIOHJAAJA') && <VirtualAssistant />}
     </div>
   );
 };

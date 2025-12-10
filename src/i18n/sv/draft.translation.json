@@ -207,6 +207,15 @@
     },
     "map-your-skills": "Kartlägg dina färdigheter",
     "my-own-data": {
+      "interests": {
+        "virtual-assistant": {
+          "conversation": "Konversation",
+          "description": "Hej! Jag är en bot och hjälper dig att hitta dina intressen. Prata med mig så får du förslag som du kan välja de som passar dig bäst.",
+          "respond-to-chat": "Svara till boten...",
+          "start": "Låt oss börja – berätta först vad som intresserar dig just nu?",
+          "x-interests-added": "{{count}} intressen tillagda"
+        }
+      },
       "competences": {
         "import": {
           "failure-toast": "Importen misslyckades — försök igen",

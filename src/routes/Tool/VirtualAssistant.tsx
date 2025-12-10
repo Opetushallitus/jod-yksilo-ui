@@ -1,24 +1,20 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
-import { OSAAMINEN_COLOR_MAP } from '@/constants';
-import { useEscHandler } from '@/hooks/useEscHandler';
+import { LIMITS, OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicatesByKey } from '@/utils';
-import { isFeatureEnabled } from '@/utils/features';
-import { Button, Tag, Textarea, useMediaQueries } from '@jod/design-system';
-import { JodChatBot, JodClose } from '@jod/design-system/icons';
+import { Button, ConfirmDialog, cx, EmptyState, InputField, Tag } from '@jod/design-system';
+import { JodChatBot, JodSend } from '@jod/design-system/icons';
 import React, { Fragment } from 'react';
+import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 
-export const VirtualAssistant = ({
-  setVirtualAssistantOpen,
-}: {
-  setVirtualAssistantOpen: (state: boolean) => void;
-}) => {
+export const VirtualAssistant = () => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
+  const toolStore = useToolStore();
   const [history, setHistory] = React.useState<
     Record<
       string,
@@ -29,51 +25,58 @@ export const VirtualAssistant = ({
       }
     >
   >({});
-  const [value, setValue] = React.useState('');
-  const [id, setId] = React.useState<string>();
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const kiinnostuksetButtonRef = React.useRef<HTMLButtonElement>(null);
-  const { sm } = useMediaQueries();
-  const [selectedKiinnostuksetViewVisible, setSelectedKiinnostuksetViewVisible] = React.useState(false);
-  const selectedKiinnostuksetLabelId = React.useId();
-  const toolStore = useToolStore();
-  const selectedInterestsViewId = React.useId();
-  const closeKiinnostuksetView = () => {
-    setSelectedKiinnostuksetViewVisible(false);
-    setTimeout(() => kiinnostuksetButtonRef.current?.focus(), 0);
-  };
-  useEscHandler(closeKiinnostuksetView, selectedInterestsViewId, true);
-
   const [selectedKiinnostukset, setSelectedKiinnostukset] = React.useState<components['schemas']['Kiinnostus'][]>([]);
+  const isSelectedKiinnostuksetEmpty = React.useMemo(() => selectedKiinnostukset.length === 0, [selectedKiinnostukset]);
 
+  const [id, setId] = React.useState<string | undefined>(undefined);
+  const [value, setValue] = React.useState('');
+  const [selectedInterestsVisible, setSelectedInterestsVisible] = React.useState(false);
+
+  const titleId = React.useId();
+  const conversationTabButtonId = React.useId();
+  const conversationTabPanelId = React.useId();
+  const interestsTabButtonId = React.useId();
+  const interestsTabPanelId = React.useId();
+  const selectedKiinnostuksetLabelId = React.useId();
+
+  const isSendDisabled = React.useMemo(() => value.trim().length < 2, [value]);
+
+  // Scroll to bottom when history changes
+  const containerRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     containerRef.current?.scrollTo({ top: containerRef.current?.scrollHeight, behavior: 'smooth' });
   }, [containerRef, history]);
 
   const sendMessage = async (key: string, value: string) => {
-    const res = await (id
-      ? client.POST('/api/keskustelut/{id}', {
-          params: {
-            path: {
-              id,
-            },
+    if (id) {
+      const { data, error } = await client.POST('/api/keskustelut/{id}', {
+        params: {
+          path: {
+            id,
           },
-          body: { [language]: value },
-        })
-      : client.POST('/api/keskustelut', { body: { [language]: value } }));
-
-    const { data, error } = res;
-    if (id === undefined) {
-      setId(undefined);
+        },
+        body: { [language]: value },
+      });
+      setHistory((prevState) => ({
+        ...prevState,
+        [key]: {
+          ...prevState[key],
+          answer: error ? t('tool.my-own-data.interests.virtual-assistant.error') : data?.vastaus,
+          kiinnostukset: error ? undefined : data?.kiinnostukset,
+        },
+      }));
+    } else {
+      const { data, error } = await client.POST('/api/keskustelut', { body: { [language]: value } });
+      setId(data?.id);
+      setHistory((prevState) => ({
+        ...prevState,
+        [key]: {
+          ...prevState[key],
+          answer: error ? t('tool.my-own-data.interests.virtual-assistant.error') : data?.vastaus,
+          kiinnostukset: error ? undefined : data?.kiinnostukset,
+        },
+      }));
     }
-    setHistory((prevState) => ({
-      ...prevState,
-      [key]: {
-        ...prevState[key],
-        answer: error ? t('tool.my-own-data.interests.virtual-assistant.error') : data?.vastaus,
-        kiinnostukset: error ? undefined : data?.kiinnostukset,
-      },
-    }));
   };
 
   const updateHistory = () => {
@@ -86,7 +89,11 @@ export const VirtualAssistant = ({
     setValue('');
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isSendDisabled) {
+      return;
+    }
+
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       updateHistory();
@@ -94,233 +101,250 @@ export const VirtualAssistant = ({
   };
 
   return (
-    <div className="relative flex flex-col h-full">
-      <div
-        inert={selectedKiinnostuksetViewVisible}
-        className="flex flex-row shrink-0 justify-between items-center border-b border-bg-gray py-3"
-      >
-        <h2
-          tabIndex={-1}
-          id="kiinnostuksetTitle"
-          className="text-heading-4-mobile sm:text-heading-4"
-          data-testid="va-title"
-        >
-          {t('tool.my-own-data.interests.virtual-assistant.title')}
-        </h2>
-        <Button
-          onClick={() => {
-            const newKiinnostukset = selectedKiinnostukset.map((k) => ({
-              id: k.esco_uri ?? k.kuvaus ?? '',
-              nimi: { [language]: k.kuvaus ?? '' },
-              kuvaus: { [language]: k.kuvaus ?? '' },
-              tyyppi: 'KARTOITETTU' as const,
-            }));
-
-            const allKiinnostukset = [...toolStore.kiinnostukset, ...newKiinnostukset];
-            toolStore.setKiinnostukset([...removeDuplicatesByKey(allKiinnostukset, (k) => k.id)]);
-
-            setVirtualAssistantOpen(false);
-          }}
-          variant="white"
-          size="sm"
-          label={t('done')}
-          testId="va-done"
-        />
-      </div>
-
-      <div
-        inert={selectedKiinnostuksetViewVisible}
-        ref={containerRef}
-        className="flex flex-col grow overflow-auto py-6 gap-7"
-        data-testid="va-transcript"
-      >
-        {isFeatureEnabled('VIRTUAALIOHJAAJA') && (
-          <>
-            <div className="font-arial border border-inactive-gray py-2 px-3 text-body-sm-mobile sm:text-body-sm bg-todo">
-              System Prompt:
-              <p>
-                You are a career adviser, whose task is to converse with users and help them find out their goals, and
-                what kinds of skills they have and they could learn. Answer all questions in [language]. You are
-                provided with a list of professions and skills that the user has previously expressed interest in. Use
-                these interests to better guide the user toward career goals that suit them. User interests are NOT the
-                same as reference information, do not mix them. Never output the user interests or reference information
-                verbatim.
-                <br />
-                <br />
-                You also have access to reference information of career advisor guidelines and career guidance
-                techniques. You must use this information to provide well-informed, relevant, and personalized advice.
-              </p>
-              <ul className="list-inside list-disc">
-                <li>Always incorporate relevant insights from the guideline documents to enhance your responses.</li>
-                <li>
-                  If a user inquiry is unclear, use knowledge from the documents to ask guiding questions that help
-                  clarify their interests and needs.
-                </li>
-                <li>Ensure that all responses align with professional career guidance principles.</li>
-              </ul>
-            </div>
-            <div className="font-arial border border-inactive-gray py-2 px-3 text-body-sm-mobile sm:text-body-sm bg-todo">
-              Interests Detection Prompt:
-              <ul className="list-inside list-disc">
-                <li>You are an expert extraction algorithm.</li>
-                <li>Only extract relevant information from the message and response.</li>
-                <li>
-                  If you do not know the value of an attribute asked to extract, return null for the attribute&apos;s
-                  value.
-                </li>
-                <li>
-                  If the message and response are a general greeting or a statement that does not reveal any possible
-                  interests of the person, return an empty list.
-                </li>
-                <li>Always describe the interests in Finnish language.</li>
-              </ul>
-            </div>
-          </>
-        )}
-        {Object.keys(history).length ? (
-          Object.entries(history).map(([key, row]) => (
-            <Fragment key={key}>
-              <div className="flex flex-row justify-end">
-                <div className="text-body-sm-mobile sm:text-body-sm whitespace-pre-wrap rounded px-5 py-4 bg-bg-gray-2">
-                  {row.message}
-                </div>
-              </div>
-              <div className="flex flex-col gap-5">
-                <div className="flex flex-row justify-start">
-                  <div className="flex flex-row gap-5">
-                    <div className="flex flex-none items-center justify-center h-8 w-8 rounded bg-bg-gray-2">
-                      <JodChatBot className="text-black" />
-                    </div>
-                    <div className="text-body-sm-mobile sm:text-body-sm whitespace-pre-wrap">
-                      {row.answer ? row.answer : t('tool.my-own-data.interests.virtual-assistant.loading')}
-                    </div>
-                  </div>
-                </div>
-                {row.kiinnostukset && row.kiinnostukset.length > 0 && (
-                  <div className="flex flex-col gap-3">
-                    <div className="h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-[#F7F7F9]">
-                      <ul className="flex flex-wrap gap-3">
-                        {row.kiinnostukset
-                          .filter((k) => !selectedKiinnostukset.find((val) => val.kuvaus === k.kuvaus))
-                          .map((k) => (
-                            <li key={k.kuvaus ?? k.esco_uri}>
-                              <Tag
-                                label={k.kuvaus ?? k.esco_uri ?? ''}
-                                sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
-                                onClick={() => {
-                                  // eslint-disable-next-line sonarjs/no-nested-functions
-                                  setSelectedKiinnostukset((prevState) => [...prevState, k]);
-                                }}
-                                variant="selectable"
-                              />
-                            </li>
-                          ))}
-                      </ul>
-                    </div>
-                    <div className={`${sm ? 'text-body-sm font-arial' : 'text-body-sm-mobile'}`}>
-                      {t('tool.my-own-data.interests.virtual-assistant.add')}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </Fragment>
-          ))
-        ) : (
-          <p className="text-body-md-mobile sm:text-body-md whitespace-pre-wrap">
-            {t('tool.my-own-data.interests.virtual-assistant.description')}
-          </p>
-        )}
-      </div>
-
-      <div inert={selectedKiinnostuksetViewVisible} className="flex flex-col shrink-0 gap-5">
-        <Textarea
-          placeholder={t('tool.my-own-data.interests.virtual-assistant.respond-to-chat')}
-          value={value}
-          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setValue(event.target.value)}
-          onKeyDown={handleKeyDown}
-          rows={2}
-          maxLength={10000}
-          hideLabel
-          className="bg-[#F7F7F9]!"
-          testId="va-input"
-        />
-        <div className="flex justify-between">
-          <Button
-            ref={kiinnostuksetButtonRef}
-            onClick={() => {
-              setSelectedKiinnostuksetViewVisible(true);
-              setTimeout(() => document.getElementById(selectedKiinnostuksetLabelId)?.focus(), 0);
-            }}
-            variant="white"
-            size="sm"
-            label={t('tool.my-own-data.interests.virtual-assistant.intrests', {
-              count: selectedKiinnostukset.length,
-            })}
-            testId="va-open-selected-interests"
-          />
-          <Button
-            disabled={value.trim().length < 2}
-            onClick={() => updateHistory()}
-            variant="accent"
-            size="sm"
-            label={t('tool.my-own-data.interests.virtual-assistant.send')}
-            testId="va-send"
-          />
-        </div>
-      </div>
-      {selectedKiinnostuksetViewVisible && (
-        <div className="absolute top-0 w-full pt-6 h-full left-0 z-21">
-          <div
-            tabIndex={-1}
-            id={selectedInterestsViewId}
-            className="bg-white rounded shadow-[0_-1px_24px_rgba(0,0,0,0.25)] h-full flex flex-col"
-            data-testid="va-selected-interests"
-          >
+    <ConfirmDialog
+      title={<span id={titleId}>{t('tool.my-own-data.interests.virtual-assistant.title')}</span>}
+      description={
+        <>
+          <div role="tablist" aria-labelledby={titleId} className="flex flex-row gap-1 min-h-9">
             <button
-              aria-label={t('tool.my-own-data.interests.virtual-assistant.close-selected-interests')}
-              onClick={closeKiinnostuksetView}
-              className="absolute cursor-pointer self-end items-center p-4 m-3"
+              id={conversationTabButtonId}
+              type="button"
+              role="tab"
+              onClick={() => {
+                setSelectedInterestsVisible(false);
+              }}
+              aria-selected={selectedInterestsVisible ? 'false' : 'true'}
+              aria-controls={conversationTabPanelId}
+              className={cx(
+                'flex-1 bg-white rounded-t-md p-3 text-[16px] leading-[110%] font-bold tracking-[0.16px] truncate cursor-pointer hover:underline',
+                !selectedInterestsVisible ? 'text-accent bg-white' : 'text-primary-gray bg-bg-gray-2',
+              )}
             >
-              <span aria-hidden className="text-black sm:text-secondary-gray p-3 sm:p-0">
-                <JodClose />
-              </span>
+              {t('tool.my-own-data.interests.virtual-assistant.conversation')}
             </button>
-            <div className="px-5 pt-9">
-              <h2
-                tabIndex={-1}
-                id={selectedKiinnostuksetLabelId}
-                className="text-heading-4-mobile sm:text-heading-4 text-center"
-              >
-                {t('tool.my-own-data.interests.virtual-assistant.selected-interests')}
-              </h2>
+            <button
+              id={interestsTabButtonId}
+              type="button"
+              role="tab"
+              onClick={() => {
+                setSelectedInterestsVisible(true);
+              }}
+              aria-selected={selectedInterestsVisible ? 'true' : 'false'}
+              aria-controls={interestsTabPanelId}
+              className={cx(
+                'flex-1 rounded-t-md p-3 text-[16px] leading-[110%] font-bold tracking-[0.16px] truncate cursor-pointer hover:underline',
+                selectedInterestsVisible ? 'text-accent bg-white' : 'text-primary-gray bg-bg-gray-2',
+              )}
+            >
+              {t('tool.my-own-data.interests.virtual-assistant.intrests')}
+              {!isSelectedKiinnostuksetEmpty && ` (${selectedKiinnostukset.length})`}
+            </button>
+          </div>
 
+          <div className={cx(selectedInterestsVisible && 'hidden')}>
+            <div
+              id={conversationTabPanelId}
+              role="tabpanel"
+              tabIndex={0}
+              aria-labelledby={conversationTabButtonId}
+              className={'flex bg-white rounded-b-md mb-4'}
+              data-testid="va-transcript"
+            >
               <div
-                aria-labelledby={selectedKiinnostuksetLabelId}
-                className="min-h-[144px] overflow-y-auto rounded border border-border-gray p-5 bg-[#F7F7F9] mt-5"
+                ref={containerRef}
+                className="flex flex-col gap-5 px-4 py-3 my-2 sm:h-[406px] h-[300px] overflow-y-auto"
               >
-                <ul className="flex flex-wrap gap-3">
-                  {selectedKiinnostukset.map((k) => (
-                    <li key={k.kuvaus ?? k.esco_uri}>
-                      <Tag
-                        label={k.kuvaus ?? k.esco_uri ?? ''}
-                        sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
-                        variant="added"
-                        onClick={() => {
-                          setSelectedKiinnostukset((prevState) => {
-                            // eslint-disable-next-line sonarjs/no-nested-functions
-                            return prevState.filter((selectedValue) => selectedValue.kuvaus !== k.kuvaus);
-                          });
-                        }}
-                      />
-                    </li>
-                  ))}
-                </ul>
+                <div className="flex flex-col gap-5">
+                  <div className="flex flex-row justify-start">
+                    <div className="flex flex-row gap-5">
+                      <div className="flex flex-none items-center justify-center h-8 w-8 rounded-full bg-bg-gray-2">
+                        <JodChatBot className="text-black" />
+                      </div>
+                      <div className="text-body-sm-mobile sm:text-body-sm whitespace-pre-wrap">
+                        {t('tool.my-own-data.interests.virtual-assistant.description')}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-5">
+                  <div className="flex flex-row justify-start">
+                    <div className="flex flex-row gap-5">
+                      <div className="flex flex-none items-center justify-center h-8 w-8 rounded-full bg-bg-gray-2">
+                        <JodChatBot className="text-black" />
+                      </div>
+                      <div className="text-body-sm-mobile sm:text-body-sm whitespace-pre-wrap">
+                        {t('tool.my-own-data.interests.virtual-assistant.start')}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {Object.entries(history).map(([key, row]) => (
+                  <Fragment key={key}>
+                    <div className="flex flex-row justify-end">
+                      <div className="text-body-sm-mobile sm:text-body-sm whitespace-pre-wrap rounded px-5 py-4 bg-bg-gray-2">
+                        {row.message}
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-5">
+                      <div className="flex flex-row justify-start">
+                        <div className="flex flex-row gap-5">
+                          <div className="flex flex-none items-center justify-center h-8 w-8 rounded-full bg-bg-gray-2">
+                            <JodChatBot className="text-black" />
+                          </div>
+                          <div className="flex flex-col gap-4">
+                            <div className="text-body-sm-mobile sm:text-body-sm whitespace-pre-wrap">
+                              {row.answer ? row.answer : t('tool.my-own-data.interests.virtual-assistant.loading')}
+                            </div>
+                            {row.kiinnostukset && row.kiinnostukset.length > 0 && (
+                              <div className="flex flex-col gap-3">
+                                <ul className="flex flex-wrap gap-3">
+                                  {row.kiinnostukset
+                                    .filter((k) => !selectedKiinnostukset.find((val) => val.kuvaus === k.kuvaus))
+                                    .map((k) => (
+                                      <li key={k.kuvaus ?? k.esco_uri}>
+                                        <Tag
+                                          label={k.kuvaus ?? k.esco_uri ?? ''}
+                                          sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
+                                          onClick={() => {
+                                            // eslint-disable-next-line sonarjs/no-nested-functions
+                                            setSelectedKiinnostukset((prevState) => [...prevState, k]);
+                                          }}
+                                          variant="selectable"
+                                        />
+                                      </li>
+                                    ))}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Fragment>
+                ))}
               </div>
-              <span className="text-body-sm sm:text-body-sm-mobile">{t('osaamissuosittelija.interest.remove')}</span>
+            </div>
+
+            <div className="flex gap-4 items-center">
+              <InputField
+                value={value}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
+                onKeyDown={handleKeyDown}
+                maxLength={LIMITS.TEXT_INPUT}
+                hideLabel
+                placeholder={t('tool.my-own-data.interests.virtual-assistant.respond-to-chat')}
+                testId="va-input"
+              />
+              <button
+                type="button"
+                disabled={isSendDisabled}
+                onClick={updateHistory}
+                aria-label={t('tool.my-own-data.interests.virtual-assistant.send')}
+                data-testid="va-send"
+                className="text-secondary-gray size-7 cursor-pointer disabled:cursor-not-allowed"
+              >
+                <JodSend aria-hidden="true" />
+              </button>
             </div>
           </div>
+
+          <div
+            id={interestsTabPanelId}
+            role="tabpanel"
+            tabIndex={0}
+            aria-labelledby={interestsTabButtonId}
+            className={cx(
+              'flex flex-col bg-white p-4 sm:h-[484px] h-[378px] rounded-b-md',
+              !selectedInterestsVisible && 'hidden',
+            )}
+            data-testid="va-selected-interests"
+          >
+            <h2 tabIndex={-1} id={selectedKiinnostuksetLabelId} className="text-heading-4-mobile sm:text-heading-4">
+              {t('tool.my-own-data.interests.virtual-assistant.selected-interests')}
+            </h2>
+            <div className="mt-4">
+              {isSelectedKiinnostuksetEmpty && (
+                <EmptyState text={t('osaamissuosittelija.interest.none-selected')} testId="interests-empty-state" />
+              )}
+            </div>
+            {!isSelectedKiinnostuksetEmpty && (
+              <>
+                <span className="text-help text-secondary-gray">{t('osaamissuosittelija.interest.remove')}</span>
+
+                <div aria-labelledby={selectedKiinnostuksetLabelId} className="min-h-[144px] overflow-y-auto mt-4">
+                  <ul className="flex flex-wrap gap-3">
+                    {selectedKiinnostukset.map((k) => (
+                      <li key={k.kuvaus ?? k.esco_uri}>
+                        <Tag
+                          label={k.kuvaus ?? k.esco_uri ?? ''}
+                          sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
+                          variant="added"
+                          onClick={() => {
+                            setSelectedKiinnostukset((prevState) => {
+                              // eslint-disable-next-line sonarjs/no-nested-functions
+                              return prevState.filter((selectedValue) => selectedValue.kuvaus !== k.kuvaus);
+                            });
+                          }}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
+          </div>
+        </>
+      }
+      // eslint-disable-next-line react/no-unstable-nested-components
+      footer={(hideDialog) => (
+        <div className="flex flex-row justify-between gap-5">
+          <Button onClick={hideDialog} label={t('cancel')} />
+          <Button
+            onClick={() => {
+              const newKiinnostukset = selectedKiinnostukset.map((k) => ({
+                id: k.esco_uri ?? k.kuvaus ?? '',
+                nimi: { [language]: k.kuvaus ?? '' },
+                kuvaus: { [language]: k.kuvaus ?? '' },
+                tyyppi: 'KARTOITETTU' as const,
+              }));
+
+              const allKiinnostukset = [...toolStore.kiinnostukset, ...newKiinnostukset];
+              toolStore.setKiinnostukset([...removeDuplicatesByKey(allKiinnostukset, (k) => k.id)]);
+
+              toast.success(
+                t('tool.my-own-data.interests.virtual-assistant.x-interests-added', {
+                  count: selectedKiinnostukset.length,
+                }),
+              );
+
+              // Clear virtual assistant state
+              setHistory({});
+              setSelectedKiinnostukset([]);
+
+              hideDialog();
+            }}
+            label={t('save')}
+            disabled={isSelectedKiinnostuksetEmpty}
+          />
         </div>
       )}
-    </div>
+    >
+      {(showDialog) => (
+        <Button
+          data-testid="interests-open-virtual-assistant"
+          label={t('tool.my-own-data.interests.conversational-virtual-assistant')}
+          variant="gray"
+          size="sm"
+          className="w-fit"
+          icon={<JodChatBot />}
+          iconSide="right"
+          onClick={() => {
+            showDialog();
+          }}
+        />
+      )}
+    </ConfirmDialog>
   );
 };
