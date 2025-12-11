@@ -65,9 +65,19 @@
     "add-new-activity-button": "Lägg aktivitet",
     "delete-free-time-activity-button": "Ta bort"
   },
+  "home": {
+    "need-personal-guidance-content": "I väglednings- och rådgivningstjänster hittar du stöd för att fundera över karriär- och utbildningsalternativ. Begränsa listan över tjänster för att hitta de som passar dig bäst."
+  },
   "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
+  "navigation": {
+    "extra": {
+      "palveluhakemisto": {
+        "url": "https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster/service"
+      }
+    }
+  },
   "no-match": {
     "description": "Sidan du söker kunde inte hittas eller länken är föråldrad. Kontrollera adressen, öppna menyn eller gå till startsidan.",
     "go-home": "Gå till startsidan",
@@ -129,10 +139,20 @@
     }
   },
   "profile": {
+    "banner": {
+      "description": "Logga in i tjänsten och skapa din kompetensprofil. På så sätt sparas din information säkert.",
+      "link-text": "Logga in i tjänsten",
+      "title": "Skapa din egen kompetensprofil"
+    },
     "competences": {
       "info": "Du kan själv välja vilken information från din kompetensprofil du vill använda när du söker möjligheter genom att importera den till sidan Hitta möjligheter."
     },
     "favorites": {
+      "goals-card": {
+        "description": "Gör dina favoriter till mål och skapa planer för att uppnå dem.",
+        "link-text": "Skapa mål",
+        "title": "Sätt upp mål och gör planer"
+      },
       "link-to-opportunities": "Hitta möjligheter"
     },
     "my-goals": {
@@ -160,6 +180,10 @@
       "delete-plan-description": "Vill du verkligen ta bort planen \"{{name}}\" från målet?",
       "delete-plan-title": "Ta bort plan",
       "description": "På sidan Mina mål kan du ange utvecklingsmål relaterade till karriär eller utbildning. Målet baseras på dina valda favoriter, såsom ett intressant yrke eller en arbetsmöjlighet. För att nå målet kan du välja lämpliga utbildningsalternativ eller skapa en egen helhet.",
+      "favorites-card": {
+        "description": "Utforska utbildnings- och karriärmöjligheter. Lägg till de mest intressanta som favoriter och gör dem till dina egna mål.",
+        "title": "Hitta dina favoriter"
+      },
       "goal-description": "Målbeskrivning",
       "goal-name": "Målnamn",
       "modify-goal": "Redigera mål",
@@ -190,6 +214,11 @@
     }
   },
   "tool": {
+    "banner": {
+      "description": "Hitta dina utbildnings- och karriärmöjligheter med den information du har valt. Prova och utforska olika alternativ.",
+      "link-text": "Hitta möjligheter",
+      "title": "Utforska dina alternativ"
+    },
     "competency-profile": {
       "title": "Importera från kompetensprofilen"
     },

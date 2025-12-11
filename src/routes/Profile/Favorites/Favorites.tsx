@@ -2,18 +2,43 @@ import { MainLayout, OpportunityCard, SimpleNavigationList } from '@/components'
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
-import { MahdollisuusTyyppi } from '@/routes/types';
+import type { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
-import { Button, EmptyState, Modal, Pagination, useMediaQueries } from '@jod/design-system';
+import { Button, EmptyState, Modal, Pagination, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
-import { ToolCard } from '../components/ToolCard';
 import { getTypeSlug } from '../utils';
+
+const GoalsCard = ({ testId, className = '' }: { testId: string; className?: string }) => {
+  const { t, i18n } = useTranslation();
+  const to = `/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.my-goals')}`;
+
+  return (
+    <div
+      className={tc(`flex flex-col bg-secondary-1-dark-2 rounded-lg p-6 gap-3 text-white ${className}`)}
+      data-testid={testId}
+    >
+      <h2 className="text-heading-2">{t('profile.favorites.goals-card.title')}</h2>
+      <div className="flex flex-col gap-6">
+        <p className="text-body-lg">{t('profile.favorites.goals-card.description')}</p>
+        <Button
+          label={t('profile.favorites.goals-card.link-text')}
+          iconSide="right"
+          icon={<JodArrowRight />}
+          variant="white"
+          linkComponent={getLinkTo(to)}
+          className="w-fit"
+          testId="goals-card-button"
+        />
+      </div>
+    </div>
+  );
+};
 
 const Favorites = () => {
   const {
@@ -165,7 +190,7 @@ const Favorites = () => {
               handleFilterChange={handleFilterChange}
             />
           </SimpleNavigationList>
-          <ToolCard testId="favorites-go-to-tool" />
+          <GoalsCard testId="favorites-go-to-goals" />
         </div>
       }
     >
@@ -284,7 +309,7 @@ const Favorites = () => {
         icon={<JodArrowRight />}
         iconSide="right"
       />
-      {lg ? null : <ToolCard testId="favorites-go-to-tool" className="mt-6" />}
+      {lg ? null : <GoalsCard testId="favorites-go-to-goals" className="mt-6" />}
     </MainLayout>
   );
 };

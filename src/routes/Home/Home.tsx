@@ -185,13 +185,12 @@ const Home = () => {
             size="sm"
             content={t('home.need-personal-guidance-content')}
             title={t('home.need-personal-guidance')}
-            buttonLabel={t('home.go-to-service-directory')}
+            buttonLabel={t('move-to-service')}
             to={t('navigation.extra.palveluhakemisto.url')}
-            backgroundColor="#00818A"
+            backgroundColor="var(--ds-color-secondary-2-dark)"
             linkComponent={getLinkTo(t('navigation.extra.palveluhakemisto.url'), {
               useAnchor: true,
               target: '_blank',
-              rel: 'noopener noreferrer',
             })}
             buttonIcon={<JodOpenInNew ariaLabel={t('external-link')} />}
           />

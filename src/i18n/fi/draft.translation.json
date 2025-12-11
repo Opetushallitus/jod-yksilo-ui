@@ -65,14 +65,20 @@
     "delete-free-time-activity-button": "Poista toiminto"
   },
   "home": {
-    "go-to-service-directory": "Siirry Ohjaus- ja neuvontapalveluihin",
-    "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua ura- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut."
+    "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löydät tukea ura- ja koulutusvaihtoehtoihin liittyvään pohdintaan. Rajaa palveluiden listaa, jotta löydät sinulle parhaiten sopivat palvelut."
   },
   "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
   "n-job-opportunities": "Uramahdollisuudet {{count}} / {{total}}",
   "n-months-short": "{{count}} kk",
   "n-years_one": "{{count}} vuosi",
   "n-years_other": "{{count}} vuotta",
+  "navigation": {
+    "extra": {
+      "palveluhakemisto": {
+        "url": "https://www.suomi.fi/aihe/ohjaus-ja-neuvontapalveluja/palvelut"
+      }
+    }
+  },
   "no-match": {
     "description": "Etsimääsi sivua ei löytynyt tai linkki on vanhentunut. Tarkista osoite, avaa valikko tai siirry etusivulle.",
     "go-home": "Siirry etusivulle",
@@ -139,10 +145,20 @@
     }
   },
   "profile": {
+    "banner": {
+      "description": "Kirjaudu palveluun ja tee osaamisprofiilisi. Näin tietosi pysyvät tallessa.",
+      "link-text": "Kirjaudu palveluun",
+      "title": "Luo oma osaamisprofiili"
+    },
     "competences": {
       "info": "Voit valita itse mitä Osaamisprofiilin tiedoistasi hyödynnät mahdollisuuksien etsintään tuomalla ne käyttöösi Löydä mahdollisuuksia -sivulla."
     },
     "favorites": {
+      "goals-card": {
+        "description": "Tee suosikeistasi tavoitteita ja rakenna suunnitelmia niiden saavuttamiseksi.",
+        "link-text": "Luo tavoite",
+        "title": "Aseta tavoitteita ja tee suunnitelmia"
+      },
       "link-to-opportunities": "Löydä mahdollisuuksia"
     },
     "my-goals": {
@@ -170,6 +186,10 @@
       "delete-plan-description": "Haluatko varmasti poistaa tavoitteelta suunnitelman \"{{name}}\"?",
       "delete-plan-title": "Poista suunnitelma",
       "description": "Tavoitteeni-sivulla voit asettaa uraan tai kouluttautumiseen liittyviä kehittymistavoitteita. Tavoite perustuu valitsemiisi suosikkeihin, kuten kiinnostavaan ammattiin tai työmahdollisuuteen. Tavoitetta kohti pääsemiseksi voit valita siihen sopivia koulutusvaihtoehtoja tai muodostaa oman kokonaisuuden.",
+      "favorites-card": {
+        "description": "Tutustu koulutus- ja uramahdollisuuksiin. Lisää kiinnostavimmat suosikeiksesi ja tee niistä omat tavoitteesi.",
+        "title": "Löydä omat suosikkisi"
+      },
       "goal-description": "Tavoitteen kuvaus",
       "goal-name": "Tavoitteen nimi",
       "modify-goal": "Muokkaa tavoitetta",
@@ -190,6 +210,11 @@
     }
   },
   "tool": {
+    "banner": {
+      "description": "Löydä koulutus- ja uramahdollisuuksiasi valitsemillasi tiedoilla. Kokeile ja tutki erilaisia vaihtoehtoja.",
+      "link-text": "Löydä mahdollisuuksia",
+      "title": "Tutki vaihtoehtojasi"
+    },
     "competency-profile": {
       "title": "Tuo osaamisprofiilista"
     },
