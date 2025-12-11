@@ -1,3 +1,4 @@
+import { osaamiset } from '@/api/osaamiset';
 import { ExperienceTable, type ExperienceTableRowData } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import React from 'react';
@@ -16,23 +17,46 @@ const SummaryStep = ({ headerText }: SummaryStepProps) => {
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>([]);
 
   React.useEffect(() => {
-    const koulutuskokonaisuus = watch();
-    setRows(
-      getEducationHistoryTableRows([
-        {
-          nimi: koulutuskokonaisuus.nimi,
-          koulutukset: koulutuskokonaisuus.koulutukset.map(
-            (koulutus) =>
-              ({
-                nimi: koulutus.nimi,
-                alkuPvm: koulutus.alkuPvm,
-                loppuPvm: koulutus.loppuPvm,
-                osaamiset: koulutus.osaamiset.map((osaaminen) => osaaminen.id),
-              }) as Koulutus,
-          ),
-        },
-      ]),
-    );
+    const fetchRows = async () => {
+      const koulutuskokonaisuus = watch();
+
+      const uris = koulutuskokonaisuus.koulutukset.flatMap((koulutus) =>
+        // eslint-disable-next-line sonarjs/no-nested-functions
+        koulutus.osaamiset.map((osaaminen) => osaaminen.id),
+      );
+      const osaamisetData = await osaamiset.find(uris);
+      const osaamisetMap: Record<string, { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> }> =
+        osaamisetData.reduce(
+          (acc, osaaminen) => {
+            acc[osaaminen.uri] = { id: osaaminen.uri, nimi: osaaminen.nimi, kuvaus: osaaminen.kuvaus };
+            return acc;
+          },
+          {} as Record<string, { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> }>,
+        );
+
+      setRows(
+        getEducationHistoryTableRows(
+          [
+            {
+              nimi: koulutuskokonaisuus.nimi,
+              koulutukset: koulutuskokonaisuus.koulutukset.map(
+                (koulutus) =>
+                  ({
+                    nimi: koulutus.nimi,
+                    alkuPvm: koulutus.alkuPvm,
+                    loppuPvm: koulutus.loppuPvm,
+                    // eslint-disable-next-line sonarjs/no-nested-functions
+                    osaamiset: koulutus.osaamiset.map((osaaminen) => osaaminen.id),
+                  }) as Koulutus,
+              ),
+            },
+          ],
+          osaamisetMap,
+        ),
+      );
+    };
+
+    void fetchRows();
   }, [watch]);
 
   return (
