@@ -1,6 +1,7 @@
 import { ActionButton } from '@/components/ActionButton/ActionButton';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
+import { cx } from '@jod/design-system';
 import { JodMore } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -47,7 +48,7 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
           aria-controls={menuId}
           aria-expanded={open}
           aria-haspopup="listbox"
-          className={open ? 'text-accent' : ''}
+          className={cx({ 'bg-bg-gray': true, 'text-accent': open })}
           onClick={() => setOpen(!open)}
           testId="more-actions-trigger"
         />

@@ -10,22 +10,15 @@ import { useToolStore } from '@/stores/useToolStore';
 import { copyToClipboard, getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { type MenuSection, PageNavigation, useMediaQueries } from '@jod/design-system';
-import {
-  JodBuild,
-  JodCertificate,
-  JodInfoFilled,
-  JodPrint,
-  JodShare,
-  JodWorkPossibilities,
-} from '@jod/design-system/icons';
+import { JodPrint, JodShare } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { CounselingCard } from '../CounselingCard/CounselingCard';
-import { IconHeading } from '../IconHeading';
+import { OpportunityType } from '../OpportunityType/OpportunityType';
 import { RateAiContent } from '../RateAiContent/RateAiContent';
-import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
+import { TitleIcon } from '../TitleIcon/TitleIcon';
 
 export interface OpportunityDetailsSection {
   navTitle: string;
@@ -38,23 +31,6 @@ export interface OpportunityDetailsSection {
   showDivider?: boolean;
   showNavTitle?: boolean;
 }
-
-const TitleIcon = ({
-  tyyppi,
-  aineisto,
-}: {
-  tyyppi: MahdollisuusTyyppi;
-  aineisto: 'AMMATTITIETO' | 'TMT' | undefined;
-}) => {
-  if (tyyppi === 'TYOMAHDOLLISUUS') {
-    return aineisto === 'AMMATTITIETO' ? (
-      <JodBuild className="text-white" />
-    ) : (
-      <JodWorkPossibilities className="text-white" />
-    );
-  }
-  return <JodCertificate className="text-white" />;
-};
 
 export interface OpportunityDetailsProps {
   data: components['schemas']['KoulutusmahdollisuusFullDto'] | components['schemas']['TyomahdollisuusFullDto'];
@@ -70,7 +46,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
   const { isDev } = useEnvironment();
   const { t, i18n } = useTranslation();
   const title = getLocalizedText(data?.otsikko);
-  const { sm, lg } = useMediaQueries();
+  const { lg } = useMediaQueries();
   const { isSuosikki, toggleSuosikki } = useToolStore(
     useShallow((state) => ({
       isSuosikki: state.suosikit?.some((suosikki) => suosikki.kohdeId === data?.id),
@@ -103,24 +79,6 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
     [isDev],
   );
 
-  const typeText = React.useMemo(() => {
-    if (tyyppi === 'TYOMAHDOLLISUUS') {
-      if (jobData.aineisto === 'AMMATTITIETO') {
-        return t('opportunity-type.work.AMMATTITIETO');
-      } else {
-        return t('opportunity-type.work.TMT');
-      }
-    } else if (tyyppi === 'KOULUTUSMAHDOLLISUUS') {
-      if (educationData.tyyppi === 'TUTKINTO') {
-        return t('opportunity-type.education.TUTKINTO');
-      } else {
-        return t('opportunity-type.education.EI_TUTKINTO');
-      }
-    } else {
-      return null;
-    }
-  }, [tyyppi, t, jobData.aineisto, educationData.tyyppi]);
-
   const menuSection: MenuSection = React.useMemo(
     () => ({
       title: t('on-this-page'),
@@ -147,99 +105,51 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
     );
   }, [menuSection, jobData.aineisto, educationData.tyyppi, tyyppi]);
 
-  const typeTooltip = React.useMemo(() => {
-    if (tyyppi === 'TYOMAHDOLLISUUS') {
-      const text = {
-        TMT: t('opportunity-tooltip.work.TMT'),
-        AMMATTITIETO: t('opportunity-tooltip.work.AMMATTITIETO'),
-      }[jobData.aineisto ?? 'TMT'];
-
-      return (
-        <div className="font-arial text-white leading-5 text-card-label">
-          <p className="mb-2">{typeText}</p>
-          <p className="font-normal">{text}</p>
-        </div>
-      );
-    } else if (tyyppi === 'KOULUTUSMAHDOLLISUUS') {
-      const text = {
-        TUTKINTO: t('opportunity-tooltip.education.TUTKINTO'),
-        EI_TUTKINTO: t('opportunity-tooltip.education.EI_TUTKINTO'),
-      }[educationData.tyyppi];
-
-      return (
-        <div className="font-arial text-white leading-5 text-card-label">
-          <p className="mb-2">{tyyppi}</p>
-          <p className="font-normal">{text}</p>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }, [tyyppi, jobData.aineisto, educationData.tyyppi, t, typeText]);
-
-  const OpportunityType = typeText ? (
-    <div className="uppercase text-body-sm font-semibold text-primary-gray flex items-center gap-3 mb-4 sm:mb-0">
-      {typeText}
-      <TooltipWrapper tooltipPlacement="top" tooltipContent={typeTooltip}>
-        <JodInfoFilled className="text-secondary-gray" />
-      </TooltipWrapper>
-    </div>
-  ) : null;
-
   return (
     <MainLayout navChildren={navChildren}>
       {title ? <title>{title}</title> : null}
-      <div className="flex flex-col">
-        {!sm && OpportunityType}
-        <div>
-          <IconHeading
-            icon={<TitleIcon tyyppi={tyyppi} aineisto={jobData.aineisto} />}
-            title={
-              <>
-                {title}
-                {showAiInfoInTitle && (
-                  <div className="ml-2 print:hidden inline *:align-top">
-                    {<AiInfo type={tyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'education-opportunity' : 'job-opportunity'} />}
-                  </div>
-                )}
-              </>
-            }
-            testId="opportunity-details-title"
+      <OpportunityHeader
+        title={title}
+        tyyppi={educationData.tyyppi}
+        mahdollisuusTyyppi={tyyppi}
+        aineisto={jobData.aineisto}
+        showAiInfoInTitle={showAiInfoInTitle}
+      />
+      {/* Action bar */}
+      <div className="flex flex-col sm:flex-row gap-3 my-6 md:mt-7 md:mb-8 md:justify-end items-start print:hidden">
+        <FavoriteToggle
+          isFavorite={isLoggedIn && !!data?.id && isSuosikki}
+          favoriteName={data?.otsikko}
+          onToggleFavorite={() =>
+            !isLoggedIn
+              ? showDialog({
+                  title: t('login'),
+                  description: t('login-for-favorites'),
+                  closeParentModal: true,
+                  footer: createLoginDialogFooter(t, loginLink, closeAllModals),
+                })
+              : handleToggleFavorite()
+          }
+          bgClassName="bg-bg-gray-2"
+        />
+        {isDev && (
+          <ActionButton
+            label={t('share')}
+            icon={<JodShare className="text-accent" />}
+            onClick={() => void copyToClipboard(window.location.href)}
+            className="bg-bg-gray-2"
           />
-        </div>
-
-        <div className="flex justify-between flex-wrap gap-y-5 sm:my-6">
-          {sm && OpportunityType}
-
-          {/* Action bar */}
-          <div className="flex flex-col sm:flex-row sm:gap-7 gap-3 sm:my-0 my-6 print:hidden">
-            <FavoriteToggle
-              isFavorite={isLoggedIn && !!data?.id && isSuosikki}
-              favoriteName={data?.otsikko}
-              onToggleFavorite={() =>
-                !isLoggedIn
-                  ? showDialog({
-                      title: t('login'),
-                      description: t('login-for-favorites'),
-                      closeParentModal: true,
-                      footer: createLoginDialogFooter(t, loginLink, closeAllModals),
-                    })
-                  : handleToggleFavorite()
-              }
-            />
-            {isDev && (
-              <ActionButton
-                label={t('share')}
-                icon={<JodShare className="text-accent" />}
-                onClick={() => void copyToClipboard(window.location.href)}
-              />
-            )}
-            {!!window.print && (
-              <ActionButton label={t('print')} icon={<JodPrint className="text-accent" />} onClick={doPrint} />
-            )}
-          </div>
-        </div>
+        )}
+        {!!globalThis.print && (
+          <ActionButton
+            label={t('print')}
+            icon={<JodPrint className="text-accent" />}
+            onClick={doPrint}
+            className="bg-bg-gray-2"
+          />
+        )}
       </div>
+
       {!lg && (
         <div className="mb-8">
           <PageNavigation menuSection={menuSection} activeIndicator="dot" collapsed />
@@ -260,6 +170,48 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           </div>
         ))}
     </MainLayout>
+  );
+};
+
+interface OpportunityHeaderProps {
+  title: string;
+  mahdollisuusTyyppi: MahdollisuusTyyppi;
+  aineisto?: components['schemas']['TyomahdollisuusDto']['aineisto'];
+  tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
+  showAiInfoInTitle?: boolean;
+}
+
+const OpportunityHeader = ({
+  title,
+  mahdollisuusTyyppi,
+  aineisto,
+  tyyppi,
+  showAiInfoInTitle = false,
+}: OpportunityHeaderProps) => {
+  return (
+    <div className="flex flex-row">
+      <div className="flex items-center justify-center size-9 aspect-square rounded-full text-white bg-secondary-1-dark-2 print:hidden">
+        <TitleIcon tyyppi={mahdollisuusTyyppi} aineisto={aineisto} />
+      </div>
+      <div className="ml-4 flex flex-col justify-center">
+        <OpportunityType mahdollisuusTyyppi={mahdollisuusTyyppi} aineisto={aineisto} tyyppi={tyyppi} showTypeTooltip />
+        <h1
+          data-testid={'opportunity-heading-title'}
+          className={`text-heading-1-mobile leading-7 sm:text-heading-1 sm:leading-[36px] hyphens-auto text-secondary-1-dark-2 text-pretty break-words focus:outline-0`}
+        >
+          {title}
+          {showAiInfoInTitle && (
+            <div className="ml-2 print:hidden inline *:align-top">
+              {
+                <AiInfo
+                  type={mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'education-opportunity' : 'job-opportunity'}
+                />
+              }
+            </div>
+          )}
+        </h1>
+      </div>
+    </div>
   );
 };
 

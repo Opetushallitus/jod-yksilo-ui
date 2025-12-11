@@ -9,9 +9,10 @@ interface FavoriteToggleProps {
   isFavorite?: boolean;
   favoriteName?: string | components['schemas']['LokalisoituTeksti'];
   onToggleFavorite: () => void;
+  bgClassName?: string;
 }
 
-export const FavoriteToggle = ({ isFavorite, favoriteName, onToggleFavorite }: FavoriteToggleProps) => {
+export const FavoriteToggle = ({ isFavorite, favoriteName, onToggleFavorite, bgClassName }: FavoriteToggleProps) => {
   const { t } = useTranslation();
   const { showDialog } = useModal();
   const name = typeof favoriteName === 'string' ? favoriteName : getLocalizedText(favoriteName);
@@ -28,6 +29,7 @@ export const FavoriteToggle = ({ isFavorite, favoriteName, onToggleFavorite }: F
         })
       }
       testId="remove-favorite-button"
+      className={`${bgClassName}`}
     />
   ) : (
     <ActionButton
@@ -35,6 +37,7 @@ export const FavoriteToggle = ({ isFavorite, favoriteName, onToggleFavorite }: F
       icon={<JodFavorite className="text-accent" />}
       onClick={onToggleFavorite}
       testId="add-favorite-button"
+      className={`${bgClassName}`}
     />
   );
 };

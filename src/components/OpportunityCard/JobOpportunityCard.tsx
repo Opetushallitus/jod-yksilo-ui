@@ -5,7 +5,8 @@ import { JodInfo } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 import { OpportunityCardWrapper, type OpportunityCardProps } from './OpportunityCard';
-import { OpportunityDetail } from './components/OpportunityDetails';
+import { OpportunityDetail } from './components/OpportunityDetail';
+import { OpportunityDetailsWrapper } from './components/OpportunityDetailsWrapper';
 
 type JobOpportunityCardProps = {
   ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
@@ -16,18 +17,10 @@ type JobOpportunityCardProps = {
 export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, aineisto, ...rest }: JobOpportunityCardProps) => {
   const { t } = useTranslation();
 
-  const cardTypeTitle =
-    aineisto === 'AMMATTITIETO' ? t('opportunity-type.work.AMMATTITIETO') : t('opportunity-type.work.TMT');
-
   return (
-    <OpportunityCardWrapper
-      {...rest}
-      type="TYOMAHDOLLISUUS"
-      matchValueBgColorClassName="bg-secondary-4-dark"
-      cardTypeTitle={cardTypeTitle}
-    >
+    <OpportunityCardWrapper {...rest} type="TYOMAHDOLLISUUS">
       {ammattiryhma ? (
-        <>
+        <OpportunityDetailsWrapper>
           <OpportunityDetail
             title={t('tool.job-opportunity-is-part-of-group')}
             value={
@@ -68,7 +61,7 @@ export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, aineisto, 
               </TooltipWrapper>
             }
           />
-        </>
+        </OpportunityDetailsWrapper>
       ) : null}
     </OpportunityCardWrapper>
   );

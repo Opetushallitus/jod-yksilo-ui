@@ -5,10 +5,12 @@ import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDro
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
 import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
-import { Accordion, tidyClasses as tc } from '@jod/design-system';
+import { Accordion } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router';
+import { OpportunityType } from '../OpportunityType/OpportunityType';
+import { TitleIcon } from '../TitleIcon/TitleIcon';
 import { EducationOpportunityCard } from './EducationOpportunityCard';
 import { JobOpportunityCard } from './JobOpportunityCard';
 
@@ -63,7 +65,6 @@ interface BaseProps {
   to?: string;
   name: string;
   description: string;
-  cardTypeTitle?: string;
   matchValue?: number;
   matchLabel?: string;
   type: MahdollisuusTyyppi;
@@ -71,7 +72,6 @@ interface BaseProps {
   from?: 'tool' | 'favorite' | 'path' | 'goal';
   rateId?: string;
   children?: React.ReactNode;
-  matchValueBgColorClassName?: string;
 }
 
 export type OpportunityCardProps = BaseProps &
@@ -90,6 +90,8 @@ interface ActionsSectionProps {
   isFavorite?: boolean;
   onToggleFavorite?: () => void;
   name: string;
+  matchValue?: number;
+  matchLabel?: string;
 }
 
 const ActionsSection = ({
@@ -100,18 +102,44 @@ const ActionsSection = ({
   onToggleFavorite,
   name,
   actionButtonContent,
+  matchValue,
+  matchLabel,
 }: ActionsSectionProps) => {
-  const nothingToShow = hideFavorite && !menuId && !menuContent && !actionButtonContent;
+  const hasMatchInfo = typeof matchValue === 'number' && matchLabel;
+  const nothingToShow = hideFavorite && !menuId && !menuContent && !actionButtonContent && !hasMatchInfo;
 
   return nothingToShow ? (
     <></>
   ) : (
-    <div className="grow flex flex-col sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end">
-      {!hideFavorite && (
-        <FavoriteToggle isFavorite={!!isFavorite} onToggleFavorite={() => onToggleFavorite?.()} favoriteName={name} />
+    <div className="flex flex-row justify-between items-center mb-3">
+      {hasMatchInfo ? (
+        <div
+          className={'flex flex-col sm:flex-row flex-nowrap gap-x-2 items-center select-none'}
+          data-testid="opportunity-card-match"
+        >
+          <span className="text-accent text-[30px] sm:text-[34px] leading-[32px] sm:leading-[35px] font-[400]">
+            {Math.round(matchValue * 100)}%
+          </span>
+          <span className="text-body-xs font-semibold text-primary-gray">{matchLabel}</span>
+        </div>
+      ) : (
+        <div></div>
       )}
-      {!!actionButtonContent && actionButtonContent}
-      {menuId && menuContent && <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />}
+      <div
+        className="flex sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end items-center"
+        data-testid="opportunity-card-actions"
+      >
+        {!hideFavorite && (
+          <FavoriteToggle
+            isFavorite={!!isFavorite}
+            onToggleFavorite={() => onToggleFavorite?.()}
+            favoriteName={name}
+            bgClassName="bg-bg-gray"
+          />
+        )}
+        {!!actionButtonContent && actionButtonContent}
+        {menuId && menuContent && <MoreActionsDropdown menuId={menuId} menuContent={menuContent} />}
+      </div>
     </div>
   );
 };
@@ -122,7 +150,6 @@ export const OpportunityCardWrapper = ({
   to,
   from,
   description,
-  cardTypeTitle,
   matchLabel,
   matchValue,
   name,
@@ -133,12 +160,13 @@ export const OpportunityCardWrapper = ({
   hideFavorite,
   headingLevel,
   menuContent,
-  matchValueBgColorClassName = 'bg-secondary-4-dark',
   menuId,
   rateId,
   collapsible,
   actionButtonContent,
   initiallyCollapsed,
+  aineisto,
+  tyyppi,
 }: OpportunityCardProps) => {
   const {
     t,
@@ -151,7 +179,6 @@ export const OpportunityCardWrapper = ({
       : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
   });
   const { showDialog, closeAllModals } = useModal();
-  const TitleTag = headingLevel || 'span';
 
   const onToggleFavorite = () => {
     if (hideFavorite) {
@@ -169,6 +196,97 @@ export const OpportunityCardWrapper = ({
     }
   };
 
+  const content = (
+    <>
+      <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
+      <div className="flex flex-col mt-3 gap-3">{children}</div>
+    </>
+  );
+
+  const triggerId = `${name}-trigger`;
+  const contentId = `${name}-content`;
+
+  return (
+    <Component
+      className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border gap-y-4"
+      data-testid="opportunity-card"
+    >
+      <ActionsSection
+        hideFavorite={!!hideFavorite}
+        menuId={menuId}
+        menuContent={menuContent}
+        isFavorite={isFavorite}
+        onToggleFavorite={onToggleFavorite}
+        name={name}
+        actionButtonContent={actionButtonContent}
+        matchValue={matchValue}
+        matchLabel={matchLabel}
+      />
+      {collapsible ? (
+        <Accordion
+          initialState={!initiallyCollapsed}
+          title={
+            <div className="flex flex-col">
+              <OpportunityCardHeader
+                to={to}
+                name={name}
+                mahdollisuusTyyppi={type}
+                headingLevel={headingLevel}
+                from={from}
+                rateId={rateId}
+                aineisto={aineisto}
+                tyyppi={tyyppi}
+              />
+            </div>
+          }
+          ariaLabel={name}
+          triggerId={triggerId}
+          ariaControls={contentId}
+        >
+          <section id={contentId} className="mt-3">
+            {content}
+          </section>
+        </Accordion>
+      ) : (
+        <>
+          <OpportunityCardHeader
+            to={to}
+            name={name}
+            mahdollisuusTyyppi={type}
+            headingLevel={headingLevel}
+            from={from}
+            rateId={rateId}
+            aineisto={aineisto}
+            tyyppi={tyyppi}
+          />
+          <>{content}</>
+        </>
+      )}
+    </Component>
+  );
+};
+
+const OpportunityCardHeader = ({
+  to,
+  name,
+  mahdollisuusTyyppi,
+  headingLevel,
+  from,
+  rateId,
+  aineisto,
+  tyyppi,
+}: {
+  to?: string;
+  name: string;
+  mahdollisuusTyyppi: MahdollisuusTyyppi;
+  headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  from?: 'tool' | 'favorite' | 'path' | 'goal';
+  rateId?: string;
+  aineisto?: components['schemas']['TyomahdollisuusDto']['aineisto'];
+  tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
+}) => {
+  const TitleTag = headingLevel || 'span';
+
   const titleContent = (
     <>
       {to ? (
@@ -180,7 +298,7 @@ export const OpportunityCardWrapper = ({
             if (rateId) {
               globalThis._paq?.push([
                 'trackEvent',
-                type === 'TYOMAHDOLLISUUS' ? 'yksilo.Työmahdollisuus' : 'yksilo.Koulutusmahdollisuus',
+                mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? 'yksilo.Työmahdollisuus' : 'yksilo.Koulutusmahdollisuus',
                 'Klikkaus',
                 rateId,
               ]);
@@ -188,13 +306,13 @@ export const OpportunityCardWrapper = ({
           }}
           className="order-2"
         >
-          <TitleTag className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto text-secondary-1-dark hover:underline">
+          <TitleTag className="text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto text-secondary-1-dark hover:underline">
             {name}
           </TitleTag>
         </NavLink>
       ) : (
         <TitleTag
-          className="mb-2 text-heading-2-mobile sm:text-heading-2 hyphens-auto"
+          className="text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto"
           data-testid="opportunity-card-title"
         >
           {name}
@@ -203,72 +321,16 @@ export const OpportunityCardWrapper = ({
     </>
   );
 
-  const content = (
-    <>
-      <p className="order-3 font-arial text-body-md-mobile sm:text-body-md">{description}</p>
-      <div className="flex flex-col order-4 mt-5 gap-3">{children}</div>
-      <div
-        className={`flex flex-col sm:flex-row items-start sm:items-center gap-x-7 gap-y-5 mb-5 ${typeof matchValue === 'number' && matchLabel ? 'justify-between' : 'justify-end'}`}
-        data-testid="opportunity-card-actions"
-      >
-        {typeof matchValue === 'number' && matchLabel && (
-          <div
-            className={tc([
-              'flex flex-nowrap gap-x-3 items-center px-4 text-white rounded-full select-none',
-              matchValueBgColorClassName,
-            ])}
-            data-testid="opportunity-card-match"
-          >
-            <span className="text-heading-2-mobile leading-8">{Math.round(matchValue * 100)}%</span>
-            <span className="text-body-xs font-arial font-bold">{matchLabel}</span>
-          </div>
-        )}
-      </div>
-    </>
-  );
-  const triggerId = `${name}-trigger`;
-  const contentId = `${name}-content`;
-
   return (
-    <Component className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border" data-testid="opportunity-card">
-      <ActionsSection
-        hideFavorite={!!hideFavorite}
-        menuId={menuId}
-        menuContent={menuContent}
-        isFavorite={isFavorite}
-        onToggleFavorite={onToggleFavorite}
-        name={name}
-        actionButtonContent={actionButtonContent}
-      />
-      {collapsible ? (
-        <Accordion
-          initialState={!initiallyCollapsed}
-          title={
-            <div className="flex flex-col">
-              <div className="order-2 flex flex-col w-fit">{titleContent}</div>
-              <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase pt-5 order-1">
-                {cardTypeTitle}
-              </span>
-            </div>
-          }
-          ariaLabel={name}
-          triggerId={triggerId}
-          ariaControls={contentId}
-        >
-          <section id={contentId} className="-mt-2 -mb-5">
-            {content}
-          </section>
-        </Accordion>
-      ) : (
-        <>
-          <div className="order-2 flex flex-col w-fit">{titleContent}</div>
-          <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase order-1">
-            {cardTypeTitle}
-          </span>
-          <>{content}</>
-        </>
-      )}
-    </Component>
+    <div className="flex flex-row">
+      <div className="flex items-center justify-center size-8 aspect-square rounded-full text-white bg-secondary-1-dark-2 print:hidden">
+        <TitleIcon tyyppi={mahdollisuusTyyppi} aineisto={aineisto} />
+      </div>
+      <div className="ml-4 flex flex-col justify-center">
+        <OpportunityType mahdollisuusTyyppi={mahdollisuusTyyppi} aineisto={aineisto} tyyppi={tyyppi} />
+        {titleContent}
+      </div>
+    </div>
   );
 };
 
