@@ -5,7 +5,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 import { OpportunityCardWrapper, type OpportunityCardProps } from './OpportunityCard';
-import { OpportunityDetail } from './components/OpportunityDetails';
+import { OpportunityDetail } from './components/OpportunityDetail';
+import { OpportunityDetailsWrapper } from './components/OpportunityDetailsWrapper';
 
 type EducationOpportunityCardProps = {
   kesto?: components['schemas']['KoulutusmahdollisuusFullDto']['kesto'];
@@ -31,48 +32,42 @@ export const EducationOpportunityCard = ({
       : t('n-years', { count: Math.round(kesto.mediaani / 12) });
   }, [kesto?.mediaani, t]);
 
-  const cardTypeTitle =
-    tyyppi === 'TUTKINTO' ? t('opportunity-type.education.TUTKINTO') : t('opportunity-type.education.EI_TUTKINTO');
-
   return (
-    <OpportunityCardWrapper
-      {...rest}
-      type="KOULUTUSMAHDOLLISUUS"
-      matchValueBgColorClassName="bg-secondary-2-dark"
-      cardTypeTitle={cardTypeTitle}
-    >
-      <OpportunityDetail
-        title={t('tool.education-opportunity-duration')}
-        value={duration}
-        icon={
-          <TooltipWrapper
-            tooltipPlacement="top"
-            tooltipContent={
-              <div className="text-body-xs max-w-[290px] leading-5">
-                {t('tool.education-opportunity-duration-tooltip')}
-              </div>
-            }
-          >
-            <JodInfo size={18} className="text-secondary-5-light-1" />
-          </TooltipWrapper>
-        }
-      />
-      <OpportunityDetail
-        title={t('tool.education-opportunity-koulutusala')}
-        value={yleisinKoulutusala ?? NOT_AVAILABLE_LABEL}
-        icon={
-          <TooltipWrapper
-            tooltipPlacement="top"
-            tooltipContent={
-              <div className="text-body-xs max-w-[290px] leading-5">
-                {t('tool.education-opportunity-koulutusala-tooltip')}
-              </div>
-            }
-          >
-            <JodInfo size={18} className="text-secondary-5-light-1" />
-          </TooltipWrapper>
-        }
-      />
+    <OpportunityCardWrapper {...rest} type="KOULUTUSMAHDOLLISUUS">
+      <OpportunityDetailsWrapper>
+        <OpportunityDetail
+          title={t('tool.education-opportunity-duration')}
+          value={duration}
+          icon={
+            <TooltipWrapper
+              tooltipPlacement="top"
+              tooltipContent={
+                <div className="text-body-xs max-w-[290px] leading-5">
+                  {t('tool.education-opportunity-duration-tooltip')}
+                </div>
+              }
+            >
+              <JodInfo size={18} className="text-secondary-5-light-1" />
+            </TooltipWrapper>
+          }
+        />
+        <OpportunityDetail
+          title={t('tool.education-opportunity-koulutusala')}
+          value={yleisinKoulutusala ?? NOT_AVAILABLE_LABEL}
+          icon={
+            <TooltipWrapper
+              tooltipPlacement="top"
+              tooltipContent={
+                <div className="text-body-xs max-w-[290px] leading-5">
+                  {t('tool.education-opportunity-koulutusala-tooltip')}
+                </div>
+              }
+            >
+              <JodInfo size={18} className="text-secondary-5-light-1" />
+            </TooltipWrapper>
+          }
+        />
+      </OpportunityDetailsWrapper>
       {rest.children}
     </OpportunityCardWrapper>
   );

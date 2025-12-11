@@ -18,7 +18,7 @@ import {
   useMediaQueries,
   WizardProgress,
 } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight, JodFlag } from '@jod/design-system/icons';
+import { JodArrowLeft, JodArrowRight, JodFlag, JodFlagFilled } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -263,14 +263,15 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                             <ActionButton
                               label={t('profile.my-goals.remove-from-goals')}
                               onClick={() => setSelectedMahdollisuus(null)}
-                              className={'text-primary-gray'}
-                              icon={<JodFlag className={'text-accent'} />}
+                              icon={<JodFlagFilled className={'text-accent'} />}
+                              className="bg-bg-gray"
                             />
                           ) : (
                             <ActionButton
                               label={t('profile.my-goals.set-to-goal')}
                               onClick={() => setSelectedMahdollisuus(mahdollisuus)}
-                              icon={<JodFlag />}
+                              icon={<JodFlag className={'text-accent'} />}
+                              className="bg-bg-gray"
                             />
                           )
                         }
