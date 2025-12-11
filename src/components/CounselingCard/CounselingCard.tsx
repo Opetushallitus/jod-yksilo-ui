@@ -7,14 +7,14 @@ export const CounselingCard = () => {
   const { t, i18n } = useTranslation();
 
   const links: Record<string, string> = {
-    fi: 'https://www.suomi.fi/aihe/ohjaus-ja-neuvontapalveluja',
-    sv: 'https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster',
+    fi: 'https://www.suomi.fi/aihe/ohjaus-ja-neuvontapalveluja/palvelut',
+    sv: 'https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster/service',
     en: 'https://www.suomi.fi/service-catalog/osaamispolku',
   };
   const link = links[i18n.language] || links.fi;
 
   return (
-    <div className="flex flex-col bg-secondary-3-dark rounded-lg p-6 gap-3 text-white">
+    <div className="flex flex-col bg-secondary-2-dark rounded-lg p-6 gap-3 text-white">
       <h2 className="text-heading-2">{t('service-catalog.header')}</h2>
       <div className="flex flex-col gap-6">
         <p className="text-body-lg">{t('service-catalog.description')}</p>

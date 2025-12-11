@@ -66,14 +66,20 @@
     "delete-free-time-activity-button": "Delete activity"
   },
   "home": {
-    "go-to-service-directory": "Go to Guidance and counselling services",
-    "need-personal-guidance-content": "Guidance and counselling services help you reflect on career and education options. Narrow down the list of services based on themes that interest you and, for example, your place of residence to find the services that suit you best."
+    "need-personal-guidance-content": "In guidance and counseling services, you will find support for considering career and education options. Narrow down the list of services to find the ones that suit you best."
   },
   "n-education-opportunities": "{{count}} / {{total}} education opportunities",
   "n-job-opportunities": "{{count}} / {{total}} job opportunities",
   "n-months-short": "{{count}} mo",
   "n-years_one": "{{count}} year",
   "n-years_other": "{{count}} years",
+  "navigation": {
+    "extra": {
+      "palveluhakemisto": {
+        "url": "https://www.suomi.fi/aihe/ohjaus-ja-neuvontapalveluja/palvelut"
+      }
+    }
+  },
   "no-match": {
     "description": "The page you are looking for could not be found or the link is outdated. Please check the address, open the menu, or go to the homepage.",
     "go-home": "Go to homepage",
@@ -145,14 +151,35 @@
     }
   },
   "profile": {
+    "banner": {
+      "description": "Login to the service and create your competence profile. This way, your information will be saved securely.",
+      "link-text": "Login to service",
+      "title": "Create your own competence profile"
+    },
     "competences": {
       "info": "You can choose which information from your Competence Profile you want to use in exploring opportunities by importing it to the Find Opportunities page."
     },
     "favorites": {
+      "goals-card": {
+        "description": "Turn your favorites into goals and build plans to achieve them.",
+        "link-text": "Create goal",
+        "title": "Set goals and make plans"
+      },
       "link-to-opportunities": "Find opportunities"
+    },
+    "my-goals": {
+      "favorites-card": {
+        "description": "Explore education and career opportunities. Add the most interesting ones to your favorites and make them your own goals.",
+        "title": "Find your favorites"
+      }
     }
   },
   "tool": {
+    "banner": {
+      "description": "Find your education and career opportunities with the information you have selected. Try and explore different options.",
+      "link-text": "Find opportunities",
+      "title": "Explore your options"
+    },
     "competency-profile": {
       "help": "Import competences from your competence profile to your overall data view. You can utilize previously saved competences when exploring opportunities. You can import all competences or only those you want."
     },
