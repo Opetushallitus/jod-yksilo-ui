@@ -188,6 +188,7 @@ export const ExperienceTableRow = ({
     if (row.osaamiset.length > 0) {
       return (
         <button
+          type="button"
           aria-expanded={tagsVisibleState}
           aria-label={t(tagsVisibleState ? 'close' : 'open')}
           onClick={() => setIsOpen(!isOpen)}

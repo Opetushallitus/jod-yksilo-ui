@@ -1,3 +1,4 @@
+import { osaamiset } from '@/api/osaamiset';
 import { ExperienceTable, type ExperienceTableRowData } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import React from 'react';
@@ -16,23 +17,46 @@ const SummaryStep = ({ headerText }: SummaryStepProps) => {
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>([]);
 
   React.useEffect(() => {
-    const freeTimeActivity = watch();
-    setRows(
-      getFreeTimeActivitiesTableRows([
-        {
-          nimi: freeTimeActivity.nimi,
-          patevyydet: freeTimeActivity.patevyydet.map(
-            (patevyys) =>
-              ({
-                nimi: patevyys.nimi,
-                alkuPvm: patevyys.alkuPvm,
-                loppuPvm: patevyys.loppuPvm,
-                osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),
-              }) as Patevyys,
-          ),
-        },
-      ]),
-    );
+    const fetchRows = async () => {
+      const freeTimeActivity = watch();
+
+      const uris = freeTimeActivity.patevyydet.flatMap((patevyys) =>
+        // eslint-disable-next-line sonarjs/no-nested-functions
+        patevyys.osaamiset.map((osaaminen) => osaaminen.id),
+      );
+      const osaamisetData = await osaamiset.find(uris);
+      const osaamisetMap: Record<string, { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> }> =
+        osaamisetData.reduce(
+          (acc, osaaminen) => {
+            acc[osaaminen.uri] = { id: osaaminen.uri, nimi: osaaminen.nimi, kuvaus: osaaminen.kuvaus };
+            return acc;
+          },
+          {} as Record<string, { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> }>,
+        );
+
+      setRows(
+        getFreeTimeActivitiesTableRows(
+          [
+            {
+              nimi: freeTimeActivity.nimi,
+              patevyydet: freeTimeActivity.patevyydet.map(
+                (patevyys) =>
+                  ({
+                    nimi: patevyys.nimi,
+                    alkuPvm: patevyys.alkuPvm,
+                    loppuPvm: patevyys.loppuPvm,
+                    // eslint-disable-next-line sonarjs/no-nested-functions
+                    osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),
+                  }) as Patevyys,
+              ),
+            },
+          ],
+          osaamisetMap,
+        ),
+      );
+    };
+
+    void fetchRows();
   }, [watch]);
 
   return (
