@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { osaamiset } from '@/api/osaamiset.ts';
 import type { components } from '@/api/schema';
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
@@ -214,7 +215,21 @@ const EducationHistory = () => {
         }
 
         const koulutukset: components['schemas']['KoulutusDto'][] = data;
-        const responseMap = new Map(koulutukset.map((koulutus) => [koulutus.id, koulutus]));
+
+        const uris = koulutukset
+          .map((koulutus) => koulutus.osaamiset)
+          .filter((osaaminen) => osaaminen !== undefined)
+          .flat();
+        const osaamisetData = await osaamiset.find(uris);
+        const osaamisetMap = new Map(osaamisetData.map((osaaminen) => [osaaminen.uri, osaaminen]));
+
+        const responseMap = new Map(
+          koulutukset.map((koulutus) => [
+            koulutus.id,
+            // eslint-disable-next-line sonarjs/no-nested-functions
+            { ...koulutus, osaamiset: koulutus.osaamiset?.map((uri) => osaamisetMap.get(uri)) ?? [] },
+          ]),
+        );
 
         // @ts-expect-error - Map keys are handled correctly at runtime
         const updatedRows = rows.map((row) => updateRowSubrows(row, updateSubrow, responseMap));
