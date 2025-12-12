@@ -139,29 +139,38 @@
     },
     "tmt-import-export": {
       "continue-to-tmt": "Fortsätt till Jobbmarknaden",
-      "description": "Du kan importera och exportera dina uppgifter mellan Osaamispolku och Jobbmarknaden. Uppgifterna uppdateras inte automatiskt, utan du bestämmer själv vilken information du vill dela mellan tjänsterna. De importerade uppgifterna finns sedan i din kompetensprofil. Kontrollera de importerade uppgifterna. Du kan också redigera dina uppgifter om du vill.",
+      "description": "Du kan importera och exportera dina uppgifter mellan Kompetensvägen och Jobbmarknaden. Uppgifterna uppdateras inte automatiskt, utan du bestämmer själv vilken information du vill överföra mellan tjänsterna.<br/><br/>Importerade uppgifter finns i din kompetensprofil. Exporterade uppgifter finns i din jobbsökarprofil på Jobbmarknaden. Kontrollera och redigera uppgifterna vid behov.<br/><br/><CustomLink>Gå till Jobbmarknaden för att se dina uppgifter<Icon></Icon></CustomLink>.",
+      "errors": {
+        "forbidden": "Ett fel uppstod vid hanteringen av auktoriseringen.",
+        "not-found": "Användaren hittades inte i Jobbmarknaden.",
+        "unknown": "Ett okänt fel uppstod i tjänsten."
+      },
       "export": {
+        "authorization-cancelled": "Exporten av dina uppgifter avbröts",
+        "authorization-failed": "Exporten av dina uppgifter har misslyckats",
         "button-label": "Exportera dina uppgifter",
-        "errors": {
-          "bad-request": "Ett fel uppstod vid hanteringen av auktoriseringen.",
-          "forbidden": "Ett fel uppstod vid hanteringen av auktoriseringen.",
-          "not-found": "Användaren hittades inte i Jobbmarknaden.",
-          "unknown": "Ett okänt fel uppstod i tjänsten."
-        },
+        "error-note-title": "Exporten av dina uppgifter misslyckades",
+        "in-progress": "Dina uppgifter exporteras",
         "modal": {
           "step-1-description": "Du kan exportera information från din kompetensprofil till din jobbsökarprofil i Jobbmarknaden. Exporten kräver inloggning i Jobbmarknaden och separat auktorisering. Ingen information exporteras utan ditt tillstånd, och du bestämmer själv vilken information du delar.",
-          "step-2-description": "Inloggningen till Jobbmarknaden lyckades och auktoriseringen är klar. Exporten av din kompetensprofil pågår.<br/><br/>Om du vill kan du gå till <CustomLink>Jobbmarknaden för att se dina uppgifter<Icon></Icon></CustomLink>",
+          "step-2-description": "Inloggningen till Jobbmarknaden lyckades och auktoriseringen är klar.<br/><br/>Exporten av din kompetensprofil pågår. Du kan stänga denna avisering.",
           "title": "Exportera uppgifter till Jobbmarknaden",
           "tmt-url": "https://tyomarkkinatori.fi/sv/personkunder"
         },
         "success": "Dina uppgifter har exporterats till Jobbmarknaden."
       },
       "import": {
+        "authorization-cancelled": "Importen av dina uppgifter avbröts",
+        "authorization-failed": "Importen av dina uppgifter har misslyckats",
         "button-label": "Importera dina uppgifter",
+        "error-note-title": "Importen av dina uppgifter misslyckades",
+        "in-progress": "Dina uppgifter importeras",
         "modal": {
-          "step-1-description": "Du kan importera information från din jobbsökarprofil i Jobbmarknaden till din kompetensprofil. Importen kräver inloggning i Työmarkkinatori och separat auktorisering. Ingen information hämtas utan ditt tillstånd, och du bestämmer själv vilken information du delar.",
+          "step-1-description": "Du kan importera information från din jobbsökarprofil i Jobbmarknaden till din kompetensprofil. Importen kräver inloggning i Jobbmarknaden och separat auktorisering. Ingen information hämtas utan ditt tillstånd, och du bestämmer själv vilken information du delar.",
+          "step-2-description": "Inloggningen till Jobbmarknaden lyckades och auktoriseringen är klar. Importen av din kompetensprofil pågår.",
           "title": "Importera uppgifter från Työmarkkinatori"
-        }
+        },
+        "success": "Dina uppgifter har importerats från Jobbmarknaden."
       },
       "title": "Importera och exportera dina uppgifter"
     }
@@ -264,6 +273,13 @@
     },
     "map-your-skills": "Kartlägg dina färdigheter",
     "my-own-data": {
+      "competences": {
+        "import": {
+          "failure-toast": "Importen misslyckades — försök igen",
+          "success-toast": "Data har importerats till översikten"
+        }
+      },
+      "export": {},
       "interests": {
         "virtual-assistant": {
           "conversation": "Konversation",
@@ -272,14 +288,7 @@
           "start": "Låt oss börja – berätta först vad som intresserar dig just nu?",
           "x-interests-added": "{{count}} intressen tillagda"
         }
-      },
-      "competences": {
-        "import": {
-          "failure-toast": "Importen misslyckades — försök igen",
-          "success-toast": "Data har importerats till översikten"
-        }
-      },
-      "export": {}
+      }
     },
     "settings": {
       "controls": "Kontroller",
@@ -356,6 +365,7 @@
   "tooltip": {
     "info": "Guide"
   },
+  "try-again": "Försök igen",
   "version": "Testversion",
   "work-history": {
     "add-new-job-description-button": "Lägg ny",
