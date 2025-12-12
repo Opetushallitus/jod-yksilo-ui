@@ -142,6 +142,43 @@
       "preview": "Esikatselu",
       "title": "Jaa osaamisprofiilisi",
       "valid-until": "Viimeinen voimassaolopäivä: {{date}}"
+    },
+    "tmt-import-export": {
+      "continue-to-tmt": "Jatka Työmarkkinatoriin",
+      "description": "Voit tuoda ja viedä tietojasi Osaamispolun ja Työmarkkinatorin välillä. Tiedot eivät päivity automaattisesti, vaan päätät itse mitä tietoa haluat siirtää palveluiden välillä.<br/><br/>Tuomasi tiedot löytyvät osaamisprofiilistasi. Viemäsi tiedot löytyvät Työmarkkinatorin työnhakuprofiilistasi. Tarkista tiedot ja muokkaa niitä tarvittaessa.<br/><br/><CustomLink>Siirry Työmarkkinatoriin tarkastelemaan tietojasi<Icon></Icon></CustomLink>.",
+      "errors": {
+        "forbidden": "Valtuutuksen käsittelyssä tapahtui virhe.",
+        "not-found": "Käyttäjää ei löydy Työmarkkinatorista.",
+        "unknown": "Palvelussa on tunnistamaton virhe"
+      },
+      "export": {
+        "authorization-cancelled": "Tietojen vienti keskeytettiin",
+        "authorization-failed": "Tietojen vienti epäonnistui",
+        "button-label": "Vie tietojasi",
+        "error-note-title": "Tietojen vienti epäonnistui",
+        "in-progress": "Tietojasi viedään",
+        "modal": {
+          "step-1-description": "Voit viedä osaamisprofiilistasi tietoja Työmarkkinatorin työnhakuprofiiliin. Vienti edellyttää kirjautumista Työmarkkinatoriin ja erillistä valtuutusta. Tietoja ei viedä ilman lupaasi, ja päätät itse, mitä tietoja jaat.",
+          "step-2-description": "Tunnistautuminen Työmarkkinatoriin on tehty onnistuneesti ja valtuutus on kunnossa.<br/><br/>Osaamisprofiilisi tietojen vienti on käynnissä. Voit sulkea tämän ilmoituksen.",
+          "title": "Tietojen vienti Työmarkkinatoriin",
+          "tmt-url": "https://tyomarkkinatori.fi"
+        },
+        "success": "Tietojesi vienti Työmarkkinatoriin onnistui"
+      },
+      "import": {
+        "authorization-cancelled": "Tietojen tuonti keskeytettiin",
+        "authorization-failed": "Tietojen tuonti epäonnistui",
+        "button-label": "Tuo tietojasi",
+        "error-note-title": "Tietojen tuonti epäonnistui",
+        "in-progress": "Tietojasi tuodaan",
+        "modal": {
+          "step-1-description": "Voit tuoda tietoja Työmarkkinatorin työnhakuprofiilista osaamisprofiiliisi.Tuonti edellyttää kirjautumista Työmarkkinatoriin ja erillistä valtuutusta. Tietoja ei haeta ilman lupaasi, ja päätät itse, mitä tietoja jaat.",
+          "step-2-description": "Tunnistautuminen Työmarkkinatoriin on tehty onnistuneesti ja valtuutus on kunnossa. Osaamisprofiilisi tietojen tuonti on käynnissä.",
+          "title": "Tietojen tuonti Työmarkkinatorista"
+        },
+        "success": "Tietojesi tuonti Työmarkkinatorista onnistui"
+      },
+      "title": "Tuo ja vie tietojasi"
     }
   },
   "profile": {
@@ -228,15 +265,6 @@
     },
     "map-your-skills": "Kartoita osaamisesi",
     "my-own-data": {
-      "interests": {
-        "virtual-assistant": {
-          "conversation": "Keskustelu",
-          "description": "Hei! Olen botti ja autan sinua löytämään kiinnostuksen kohteitasi. Keskustele kanssani, niin saat ehdotuksia, joista voit valita sinulle sopivimmat.",
-          "respond-to-chat": "Vastaa botille...",
-          "start": "Aloitetaan – kerro ensin, mikä asia kiinnostaa sinua juuri nyt?",
-          "x-interests-added": "{{count}} kiinnostusta lisätty"
-        }
-      },
       "competences": {
         "import": {
           "confirm-description": "Tuo osaamisia osaamisprofiilistasi tietojesi kokonaiskuvaan. Valitse haluamasi osaamiset alla olevasta listasta.",
@@ -247,6 +275,15 @@
       "export": {
         "confirm-description": "Vie kaikki tiedot osaamisprofiiliisi. Löydät ne jatkossa osaamisprofiilista kohdista “Muu osaaminen” ja “Kiinnostukseni”.",
         "confirm-title": "Tietojen vienti profiiliin"
+      },
+      "interests": {
+        "virtual-assistant": {
+          "conversation": "Keskustelu",
+          "description": "Hei! Olen botti ja autan sinua löytämään kiinnostuksen kohteitasi. Keskustele kanssani, niin saat ehdotuksia, joista voit valita sinulle sopivimmat.",
+          "respond-to-chat": "Vastaa botille...",
+          "start": "Aloitetaan – kerro ensin, mikä asia kiinnostaa sinua juuri nyt?",
+          "x-interests-added": "{{count}} kiinnostusta lisätty"
+        }
       }
     },
     "settings": {
@@ -260,6 +297,7 @@
   "tooltip": {
     "info": "Ohje"
   },
+  "try-again": "Yritä uudelleen",
   "version": "Testausversio",
   "work-history": {
     "add-new-job-description-button": "Lisää uusi",

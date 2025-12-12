@@ -482,7 +482,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/integraatiot/tmt/vienti/{id}': {
+  '/api/integraatiot/tmt/vienti': {
     parameters: {
       query?: never;
       header?: never;
@@ -491,7 +491,23 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    post: operations['tmtExportExport'];
+    post: operations['tmtProfileExport'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/integraatiot/tmt/haku': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['tmtProfileImportProfile'];
     delete?: never;
     options?: never;
     head?: never;
@@ -780,38 +796,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/integraatiot/tmt/vienti/auktorisointi': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['tmtExportAuthorize'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/integraatiot/tmt/vienti/auktorisointi/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['tmtExportResponse'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/integraatiot/koski/osaamiset/tunnistus': {
     parameters: {
       query?: never;
@@ -944,6 +928,7 @@ export interface components {
       kuvaus: components['schemas']['LokalisoituTeksti'];
       /** Format: uuid */
       koulutusmahdollisuusId?: string;
+      osaamiset?: string[];
     };
     TavoiteDto: {
       /** Format: uuid */
@@ -1054,6 +1039,11 @@ export interface components {
     Vastaus: {
       kiinnostukset?: components['schemas']['Kiinnostus'][];
       vastaus?: string;
+    };
+    TmtImportDto: {
+      tyopaikat?: string[];
+      koulutuskokonaisuudet?: string[];
+      toiminnot?: string[];
     };
     Ehdotus: {
       /** Format: uri */
@@ -2850,13 +2840,11 @@ export interface operations {
       };
     };
   };
-  tmtExportExport: {
+  tmtProfileExport: {
     parameters: {
       query?: never;
       header?: never;
-      path: {
-        id: string;
-      };
+      path?: never;
       cookie?: never;
     };
     requestBody?: never;
@@ -2867,6 +2855,26 @@ export interface operations {
           [name: string]: unknown;
         };
         content?: never;
+      };
+    };
+  };
+  tmtProfileImportProfile: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['TmtImportDto'];
+        };
       };
     };
   };
@@ -3304,48 +3312,6 @@ export interface operations {
         content: {
           'application/json': components['schemas']['SivuDtoKoulutusmahdollisuusFullDto'];
         };
-      };
-    };
-  };
-  tmtExportAuthorize: {
-    parameters: {
-      query: {
-        callback: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  tmtExportResponse: {
-    parameters: {
-      query?: {
-        token?: string;
-      };
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
       };
     };
   };

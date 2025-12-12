@@ -9,7 +9,7 @@ import { Button, Toggle, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouteLoaderData } from 'react-router';
-import { ShareLinkSection } from '.';
+import { ShareLinkSection, TmtImportExport } from '.';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 
@@ -18,6 +18,8 @@ const DownloadLink = ({ children, className }: { children: React.ReactNode; clas
     {children}
   </a>
 );
+
+const Divider = () => <hr className="border-b-1 border-border-gray my-7" />;
 
 const ToggleWithText = ({
   title,
@@ -161,10 +163,16 @@ const Preferences = () => {
           testId="pref-ai-training"
         />
       </section>
+      {isFeatureEnabled('TMT_INTEGRATION') && (
+        <>
+          <TmtImportExport />
+          <Divider />
+        </>
+      )}
       {isFeatureEnabled('JAKOLINKKI') && (
         <>
           <ShareLinkSection className="mb-8" />
-          <hr className="border-b-1 border-border-gray mb-7" />
+          <Divider />
         </>
       )}
       <section className="mb-8">
