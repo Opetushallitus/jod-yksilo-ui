@@ -1,4 +1,7 @@
-import heroSrc from '@/../assets/yksilo-hero.jpg';
+import heroSrc1 from '@/../assets/yksilo-hero-1.jpg';
+import heroSrc2 from '@/../assets/yksilo-hero-2.jpg';
+import heroSrc3 from '@/../assets/yksilo-hero-3.jpg';
+import heroSrc4 from '@/../assets/yksilo-hero-4.jpg';
 import type { components } from '@/api/schema';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { TimelineImage } from '@/components/TimelineImage';
@@ -97,6 +100,13 @@ const Home = () => {
       resizeObserver.observe(firstCardRef.current);
       return () => resizeObserver.disconnect();
     }
+  }, []);
+
+  // Rotate hero image weekly
+  const heroSrc = React.useMemo(() => {
+    const heroImages = [heroSrc1, heroSrc2, heroSrc3, heroSrc4];
+    const weekNumber = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
+    return heroImages[weekNumber % heroImages.length];
   }, []);
 
   const toolLink = `/${language}/${t('slugs.tool.index')}`;
