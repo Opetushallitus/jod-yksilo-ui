@@ -252,6 +252,7 @@
     "settings": {
       "controls": "Säätimet",
       "general": {
+        "duration": "Kesto",
         "education-opportunity-type": "Koulutusmahdollisuuksien tyyppi",
         "job-opportunity-type": "Uramahdollisuuksien tyyppi"
       }

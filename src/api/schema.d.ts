@@ -944,6 +944,7 @@ export interface components {
       kuvaus: components['schemas']['LokalisoituTeksti'];
       /** Format: uuid */
       koulutusmahdollisuusId?: string;
+      osaamiset?: string[];
     };
     TavoiteDto: {
       /** Format: uuid */
@@ -1089,6 +1090,8 @@ export interface components {
       /** @enum {string} */
       koulutusmahdollisuusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
       maakunnat?: string[];
+      /** Format: double */
+      kesto?: number;
       /** Format: double */
       pisteet?: number;
       /** @enum {string} */

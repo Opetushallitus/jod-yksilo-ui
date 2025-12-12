@@ -1,4 +1,5 @@
 import { components } from '@/api/schema';
+import { maxKestoValue } from '@/routes/Tool/components/filters/FilterKesto.tsx';
 
 export function filterByRegion(regions: string[], meta: components['schemas']['EhdotusMetadata']): boolean {
   if (regions.length === 0 || meta.tyyppi !== 'TYOMAHDOLLISUUS') {
@@ -6,6 +7,32 @@ export function filterByRegion(regions: string[], meta: components['schemas']['E
   }
   return regions.some((r) => meta.maakunnat?.includes(r));
 }
+
+export function filterByKesto(
+  minduration: number | null,
+  maxduration: number | null,
+  meta: components['schemas']['EhdotusMetadata'],
+): boolean {
+  if (meta.tyyppi !== 'KOULUTUSMAHDOLLISUUS') {
+    return true;
+  }
+  const effectiveMin = minduration ?? 0;
+  const effectiveMax = maxduration ?? maxKestoValue;
+
+  // if all durations are included, we also want to include koulutusmahdollisuudet with undefined duration
+  if (effectiveMin === 0 && effectiveMax === maxKestoValue) {
+    return true;
+  }
+  if (effectiveMin === maxKestoValue) {
+    return (meta.kesto ?? 0) >= 6;
+  }
+  if (meta.kesto == null) {
+    return false;
+  }
+
+  return meta.kesto >= effectiveMin && meta.kesto <= effectiveMax;
+}
+
 export function filterByEducationType(
   educationOpportunityType: string[],
   meta: components['schemas']['EhdotusMetadata'],
