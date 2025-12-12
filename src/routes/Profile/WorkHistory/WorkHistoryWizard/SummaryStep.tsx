@@ -1,3 +1,4 @@
+import { osaamiset } from '@/api/osaamiset';
 import { ExperienceTable, type ExperienceTableRowData } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import React from 'react';
@@ -16,23 +17,44 @@ const SummaryStep = ({ headerText }: SummaryStepProps) => {
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>([]);
 
   React.useEffect(() => {
-    const tyopaikka = watch();
-    setRows(
-      getWorkHistoryTableRows([
-        {
-          nimi: tyopaikka.nimi,
-          toimenkuvat: tyopaikka.toimenkuvat.map(
-            (toimenkuva) =>
-              ({
-                nimi: toimenkuva.nimi,
-                alkuPvm: toimenkuva.alkuPvm,
-                loppuPvm: toimenkuva.loppuPvm,
-                osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
-              }) as Toimenkuva,
-          ),
-        },
-      ]),
-    );
+    const fetchRows = async () => {
+      const tyopaikka = watch();
+
+      // eslint-disable-next-line sonarjs/no-nested-functions
+      const uris = tyopaikka.toimenkuvat.flatMap((toimenkuva) => toimenkuva.osaamiset.map((osaaminen) => osaaminen.id));
+      const osaamisetData = await osaamiset.find(uris);
+      const osaamisetMap: Record<string, { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> }> =
+        osaamisetData.reduce(
+          (acc, osaaminen) => {
+            acc[osaaminen.uri] = { id: osaaminen.uri, nimi: osaaminen.nimi, kuvaus: osaaminen.kuvaus };
+            return acc;
+          },
+          {} as Record<string, { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> }>,
+        );
+
+      setRows(
+        getWorkHistoryTableRows(
+          [
+            {
+              nimi: tyopaikka.nimi,
+              toimenkuvat: tyopaikka.toimenkuvat.map(
+                (toimenkuva) =>
+                  ({
+                    nimi: toimenkuva.nimi,
+                    alkuPvm: toimenkuva.alkuPvm,
+                    loppuPvm: toimenkuva.loppuPvm,
+                    // eslint-disable-next-line sonarjs/no-nested-functions
+                    osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
+                  }) as Toimenkuva,
+              ),
+            },
+          ],
+          osaamisetMap,
+        ),
+      );
+    };
+
+    void fetchRows();
   }, [watch]);
 
   return (
