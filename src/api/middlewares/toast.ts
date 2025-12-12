@@ -18,6 +18,7 @@ const ignoredOperations: Partial<Record<keyof paths, Method>> = {
   '/api/keskustelut/{id}': 'POST',
   '/api/ehdotus/mahdollisuudet/polku': 'POST',
   '/api/integraatiot/tmt/vienti': 'POST',
+  '/api/integraatiot/tmt/haku': 'POST',
 };
 
 const showToast = (method: Method, response: Response) => {

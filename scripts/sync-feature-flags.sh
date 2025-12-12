@@ -4,6 +4,7 @@ set -e -o pipefail
 
 # Feature flag management script for AWS SSM Parameter Store and S3
 # Usage: ./scripts/sync-feature-flags.sh FEATURE_NAME <true|false> [FEATURE_NAME <true|false> ...]
+# Usage (Git Bash on Windows): MSYS_NO_PATHCONV=1 ./scripts/sync-feature-flags.sh FEATURE_NAME <true|false> [FEATURE_NAME <true|false> ...]
 
 # Configuration
 SSM_PREFIX="/jod/config/jod.feature.flags"
@@ -51,18 +52,25 @@ function print_usage() {
   echo ""
   echo "  # Set multiple features at once:"
   echo "  $0 VIRTUAALIOHJAAJA true KOSKI false POLKU true"
+  return
 }
 
 function log_info() {
-  echo -e "${GREEN}[INFO]${NC} $1"
+  local msg="$1"
+  echo -e "${GREEN}[INFO]${NC} $msg"
+  return
 }
 
 function log_warn() {
-  echo -e "${YELLOW}[WARN]${NC} $1"
+  local msg="$1"
+  echo -e "${YELLOW}[WARN]${NC} $msg"
+  return
 }
 
 function log_error() {
-  echo -e "${RED}[ERROR]${NC} $1" >&2
+  local msg="$1"
+  echo -e "${RED}[ERROR]${NC} $msg" >&2
+  return
 }
 
 function validate_feature() {
@@ -125,6 +133,7 @@ function set_ssm_parameter() {
     > /dev/null
 
   log_info "Successfully updated SSM parameter: $param_name"
+  return
 }
 
 function get_feature_value() {
@@ -146,6 +155,7 @@ function get_feature_value() {
   else
     echo "true"
   fi
+  return
 }
 
 function generate_features_json() {
@@ -174,8 +184,8 @@ function generate_features_json() {
   # Close JSON object
   echo "" >> "$tmp_file"
   echo "}" >> "$tmp_file"
-
   echo "$tmp_file"
+  return
 }
 
 function upload_to_s3() {
@@ -189,6 +199,17 @@ function upload_to_s3() {
   log_info "JSON content:"
   cat "$json_file" | sed 's/^/  /'
 
+  # Debug: print json_file path before conversion
+  log_info "json_file before path conversion: $json_file"
+
+  # Only convert if path looks like a Windows path (e.g., C:\...) and running on MSYS/Cygwin
+  if ([[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && [[ "$json_file" =~ ^[A-Za-z]:\\ ]]); then
+    json_file=$(cygpath -u "$json_file" 2>/dev/null || echo "$json_file")
+    log_info "json_file after cygpath conversion: $json_file"
+  fi
+
+  log_info "Uploading file: $json_file to S3 URI: $s3_uri"
+
   aws s3 cp "$json_file" "$s3_uri" \
     --content-type "application/json" \
     --cache-control "max-age=60, must-revalidate" \
@@ -197,12 +218,14 @@ function upload_to_s3() {
 
   log_info "Successfully uploaded to S3: $s3_uri"
   log_info "Cache-Control set to: max-age=60, must-revalidate"
+  return
 }
 
 # Main script
 function main() {
   # Check for help flag
-  if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  local first_arg="$1"
+  if [[ "$first_arg" == "-h" || "$first_arg" == "--help" ]]; then
     print_usage
     exit 0
   fi
@@ -276,8 +299,13 @@ function main() {
   echo ""
 
   # Generate features.json with all feature flags
-  local json_file=$(generate_features_json)
+  local tmp_json_file
+  tmp_json_file=$(generate_features_json)
   echo ""
+
+  # Move the file to the current working directory for compatibility
+  local json_file="./features.json"
+  mv "$tmp_json_file" "$json_file"
 
   # Upload to S3
   upload_to_s3 "$json_file" "$bucket"
@@ -295,6 +323,8 @@ function main() {
   else
     log_info "Generated features.json from current SSM values and uploaded to S3"
   fi
+
+  return
 }
 
 # Run main function

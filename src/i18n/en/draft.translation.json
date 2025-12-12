@@ -151,27 +151,35 @@
     },
     "tmt-import-export": {
       "continue-to-tmt": "Continue to Job Market Finland",
-      "description": "You can import and export your data between Osaamispolku and Työmarkkinatori. The data does not update automatically; you decide what information you want to share between the services. Imported data will be found in your competence profile. Check the imported data. You can also edit your data if you wish.",
+      "description": "You can import and export your data between Competence Path and Job Market Finland. The data does not update automatically; you decide what information you want to transfer between the services.<br/><br/>Imported data can be found in your competence profile. Exported data can be found in your Job Market Finland jobseeker profile. Check and edit the data as needed.<br/><br/><CustomLink>Go to Job Market Finland to view your data<Icon></Icon></CustomLink>.",
+      "errors": {
+        "forbidden": "An error occurred while processing the authorization.",
+        "not-found": "User not found in Job Market Finland.",
+        "unknown": "An unknown error occurred in the service."
+      },
       "export": {
+        "authorization-cancelled": "Data export was cancelled",
+        "authorization-failed": "Data export has failed",
         "button-label": "Export your data",
-        "errors": {
-          "bad-request": "An error occurred while processing the authorization.",
-          "forbidden": "An error occurred while processing the authorization.",
-          "not-found": "User not found in Job Market Finland.",
-          "unknown": "An unknown error occurred in the service."
-        },
+        "error-note-title": "Error during data export",
+        "in-progress": "Exporting",
         "modal": {
           "step-1-description": "You can export information from your competence profile to your Job Market Finland jobseeker profile. Export requires logging in to Job Market Finland and a separate authorization. No data will be exported without your permission, and you decide what information to share.",
-          "step-2-description": "Authentication to Job Market Finland was successful and authorization is in place. Exporting your competence profile data is in progress.<br/><br/>If you wish, go to <CustomLink>Job Market Finland to view your data<Icon></Icon></CustomLink>",
+          "step-2-description": "Authentication to Job Market Finland was successful and authorization is in place.<br/><br/>Exporting your competence profile data is in progress. You can close this notification.",
           "title": "Export data to Job Market Finland",
           "tmt-url": "https://tyomarkkinatori.fi/en/personal-customers"
         },
         "success": "Your data was successfully exported to Job Market Finland."
       },
       "import": {
+        "authorization-cancelled": "Data import was cancelled",
+        "authorization-failed": "Data import has failed",
         "button-label": "Import your data",
+        "error-note-title": "Error during data import",
+        "in-progress": "Importing",
         "modal": {
           "step-1-description": "You can import information from your Job Market Finland jobseeker profile to your competence profile. Import requires logging in to Job Market Finland and a separate authorization. No data will be fetched without your permission, and you decide what information to share.",
+          "step-2-description": "Authentication to Job Market Finland was successful and authorization is in place. Importing your competence profile data is in progress.",
           "title": "Import data from Job Market Finland"
         }
       },
@@ -225,15 +233,6 @@
     },
     "map-your-skills": "Map your skills",
     "my-own-data": {
-      "interests": {
-        "virtual-assistant": {
-          "conversation": "Conversation",
-          "description": "Hi! I am a bot and I help you find your interests. Talk to me and you will get suggestions that you can choose the ones that suit you best.",
-          "respond-to-chat": "Respond to the bot...",
-          "start": "Let's get started – first, tell me what interests you right now?",
-          "x-interests-added": "{{count}} interests added"
-        }
-      },
       "competences": {
         "import": {
           "confirm-description": "Import competences from your competence profile to your overall data view. Select the competences you want from the list below.",
@@ -244,6 +243,15 @@
       "export": {
         "confirm-description": "Select the data you want to export to your competence profile. You will find it later in the competence profile under 'Other Competences' and 'My Interests'.",
         "confirm-title": "Export Data to Profile"
+      },
+      "interests": {
+        "virtual-assistant": {
+          "conversation": "Conversation",
+          "description": "Hi! I am a bot and I help you find your interests. Talk to me and you will get suggestions that you can choose the ones that suit you best.",
+          "respond-to-chat": "Respond to the bot...",
+          "start": "Let's get started – first, tell me what interests you right now?",
+          "x-interests-added": "{{count}} interests added"
+        }
       }
     },
     "settings": {
@@ -324,6 +332,7 @@
   "tooltip": {
     "info": "Guide"
   },
+  "try-again": "Try again",
   "work-history": {
     "add-new-job-description-button": "Add new",
     "delete-job-description-button": "Delete"
