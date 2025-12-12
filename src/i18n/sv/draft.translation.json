@@ -258,6 +258,71 @@
       "general": {
         "location": "Plats"
       }
+    },
+    "tour": {
+      "buttons": {
+        "done": "Hitta möjligheter",
+        "next": "Nästa",
+        "previous": "Föregående"
+      },
+      "desktop": {
+        "step-1": {
+          "description": "Börja med att kartlägga dina intressen och kompetenser genom att välja de mest lämpliga alternativen som föreslås baserat på din input.<br/>Du kan också importera information från din kompetensprofil om du har skapat en sådan. Att använda kompetensprofilen kräver inloggning.",
+          "title": "Välj först med vilka uppgifter du söker möjligheter"
+        },
+        "step-2": {
+          "description": "I sammanfattningen av dina uppgifter ser du all information som används för att hitta möjligheter som passar dig. Du kan ta bort uppgifter som du inte vill ta hänsyn till.",
+          "title": "Granska och redigera dina valda uppgifter"
+        },
+        "step-3": {
+          "description": "Tryck på Uppdatera-knappen när du har valt alla uppgifter du vill ha. Kom ihåg att uppdatera listan varje gång du ändrar dina uppgifter.",
+          "title": "Uppdatera möjligheter med dina uppgifter"
+        },
+        "step-4": {
+          "description": "I möjligheterna ser du yrken, arbetsmöjligheter, examina och andra utbildningar ordnade enligt lämplighet beräknad baserat på dina uppgifter. Utforska dem närmare genom att klicka på möjlighetens namn. Du kan spara favoriter genom att logga in.",
+          "title": "Utforska och bekanta dig med dina möjligheter"
+        },
+        "step-5": {
+          "description": "Du kan filtrera och sortera listan över möjligheter med kontrollerna. På så sätt får du bättre fram alternativ som passar dina behov. Du kan också justera hur mycket dina valda intressen väger och hur mycket kompetenser väger i beräkningen av lämplighet.",
+          "title": "Använd kontroller för att beakta dina behov"
+        },
+        "step-6": {
+          "description": "Redigera dina uppgifter och prova olika kombinationer av intressen och kompetenser. Om detta känns svårt kan hjälp finnas i länkarna under Stöd för reflektion.<br/>Genom att logga in kan du spara dina uppgifter till din kompetensprofil från Importera från kompetensprofilen.",
+          "title": "Testa och utforska olika kombinationer"
+        }
+      },
+      "mobile": {
+        "step-1": {
+          "description": "Verktygets funktioner är uppdelade på två flikar. Välj de uppgifter som ska användas i verktyget på fliken Dina uppgifter. Granska utbildnings- och karriärmöjligheter som föreslås för dig baserat på dem på fliken Dina möjligheter.",
+          "title": "Flikarna Dina uppgifter och Dina möjligheter"
+        },
+        "step-2": {
+          "description": "Börja med att kartlägga dina intressen och kompetenser genom att välja de mest lämpliga alternativen som föreslås baserat på din input.<br/>Du kan också importera information från din kompetensprofil om du har skapat en sådan. Att använda kompetensprofilen kräver inloggning.",
+          "title": "Välj först med vilka uppgifter du söker möjligheter"
+        },
+        "step-3": {
+          "description": "I sammanfattningen av dina uppgifter ser du all information som används för att hitta möjligheter som passar dig. Du kan ta bort uppgifter som du inte vill ta hänsyn till.",
+          "title": "Granska och redigera dina valda uppgifter"
+        },
+        "step-4": {
+          "description": "När du har valt dina önskade uppgifter, gå till fliken Dina möjligheter och tryck på Uppdatera-knappen. Kom ihåg att uppdatera listan varje gång du ändrar dina uppgifter.",
+          "title": "Uppdatera möjligheter med dina uppgifter"
+        },
+        "step-5": {
+          "description": "I möjligheterna ser du yrken, arbetsmöjligheter, examina och andra utbildningar ordnade enligt lämplighet beräknad baserat på dina uppgifter. Utforska dem närmare genom att klicka på möjlighetens namn. Du kan spara favoriter genom att logga in.",
+          "title": "Utforska och bekanta dig med dina möjligheter"
+        },
+        "step-6": {
+          "description": "Du kan filtrera och sortera listan över möjligheter med kontrollerna. På så sätt får du bättre fram alternativ som passar dina behov. Du kan också justera hur mycket dina valda intressen väger och hur mycket kompetenser väger i beräkningen av lämplighet.",
+          "title": "Använd kontroller för att beakta dina behov"
+        },
+        "step-7": {
+          "description": "Redigera dina uppgifter och prova olika kombinationer av intressen och kompetenser på fliken Dina uppgifter. Om detta känns svårt kan hjälp finnas i länkarna under Stöd för reflektion.<br/>Genom att logga in kan du spara dina uppgifter till din kompetensprofil från Importera från kompetensprofilen.",
+          "title": "Testa och utforska olika kombinationer"
+        }
+      },
+      "view-guided-tour": "Se verktygets <StartTour>guidade genomgång</StartTour>",
+      "view-guided-tour-label": "Starta verktygets guidade genomgång"
     }
   },
   "tooltip": {
