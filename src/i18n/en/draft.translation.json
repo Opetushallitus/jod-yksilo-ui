@@ -224,6 +224,71 @@
         "location": "Location"
       }
     },
+    "tour": {
+      "buttons": {
+        "done": "Find opportunities",
+        "next": "Next",
+        "previous": "Previous"
+      },
+      "desktop": {
+        "step-1": {
+          "description": "Start by mapping your interests and competences by selecting the most suitable options from the suggestions based on your input.<br/>You can also import data from your competence profile if you have created one. Using the competence profile requires logging in.",
+          "title": "First choose what data to use for finding opportunities"
+        },
+        "step-2": {
+          "description": "In the summary of your data, you can see all the information used to find suitable opportunities for you. You can remove data that you don't want to take into account.",
+          "title": "View and edit your selected data"
+        },
+        "step-3": {
+          "description": "Press the Update button when you have selected all the data you want. Remember to update the list whenever you change your data.",
+          "title": "Update opportunities with your data"
+        },
+        "step-4": {
+          "description": "In opportunities, you'll see professions, job opportunities, degrees, and other education organized by suitability calculated based on your data. Explore them in more detail by clicking on the opportunity name. You can save favorites by logging in.",
+          "title": "Explore and familiarize yourself with your opportunities"
+        },
+        "step-5": {
+          "description": "You can filter and sort the list of opportunities using the controls. This way you can better highlight options that suit your needs. You can also adjust how much weight is given to your selected interests and how much to competences in the suitability calculation.",
+          "title": "Use controls to account for your needs"
+        },
+        "step-6": {
+          "description": "Edit your data and try different combinations of interests and competences. If this feels difficult, help may be found in the links under Support for Reflection.<br/>By logging in, you can save your data to your competence profile via Import from Competence Profile.",
+          "title": "Try and explore different combinations"
+        }
+      },
+      "mobile": {
+        "step-1": {
+          "description": "The tool's functions are divided into two tabs. Select the data to be used in the tool on the Your Data tab. View education and career opportunities suggested for you based on that data on the Your Opportunities tab.",
+          "title": "Your Data and Your Opportunities tabs"
+        },
+        "step-2": {
+          "description": "Start by mapping your interests and competences by selecting the most suitable options from the suggestions based on your input.<br/>You can also import data from your competence profile if you have created one. Using the competence profile requires logging in.",
+          "title": "First choose what data to use for finding opportunities"
+        },
+        "step-3": {
+          "description": "In the summary of your data, you can see all the information used to find suitable opportunities for you. You can remove data that you don't want to take into account.",
+          "title": "View and edit your selected data"
+        },
+        "step-4": {
+          "description": "When you have selected the data you want, go to the Your Opportunities tab and press the Update button. Remember to update the list whenever you change your data.",
+          "title": "Update opportunities with your data"
+        },
+        "step-5": {
+          "description": "In opportunities, you'll see professions, job opportunities, degrees, and other education organized by suitability calculated based on your data. Explore them in more detail by clicking on the opportunity name. You can save favorites by logging in.",
+          "title": "Explore and familiarize yourself with your opportunities"
+        },
+        "step-6": {
+          "description": "You can filter and sort the list of opportunities using the controls. This way you can better highlight options that suit your needs. You can also adjust how much weight is given to your selected interests and how much to competences in the suitability calculation.",
+          "title": "Use controls to account for your needs"
+        },
+        "step-7": {
+          "description": "Edit your data and try different combinations of interests and competences on the Your Data tab. If this feels difficult, help may be found in the links under Support for Reflection.<br/>By logging in, you can save your data to your competence profile via Import from Competence Profile.",
+          "title": "Try and explore different combinations"
+        }
+      },
+      "view-guided-tour": "View the tool's <StartTour>guided tour</StartTour>",
+      "view-guided-tour-label": "Start the tool's guided tour"
+    },
     "tools": {
       "service-directory": "Guidance and counseling services"
     }
