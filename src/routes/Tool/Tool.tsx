@@ -21,6 +21,7 @@ import Competences from './Competences';
 import ToolAccordion from './components/ToolAccordion';
 import Interests from './Interests';
 import type { ToolLoaderData } from './loader';
+import { OnboardingTour } from './OnboardingTour';
 import ProfileImportExport from './ProfileImportExport';
 import ToolSettings from './ToolSettings';
 import YourOpportunitiesPagination from './YourOpportunitiesPagination';
@@ -200,8 +201,12 @@ const ProfileLinkComponent = ({ className, children }: { className?: string; chi
   );
 };
 
-const YourInfoGroup = ({ children }: { children: React.ReactNode }) => {
-  return <div className="flex flex-col gap-4 lg:gap-3 lg:bg-[#CCD1D8] lg:rounded-[12px] lg:p-3">{children}</div>;
+const YourInfoGroup = ({ id, children }: { id: string; children: React.ReactNode }) => {
+  return (
+    <div id={id} className="flex flex-col gap-4 lg:gap-3 lg:bg-[#CCD1D8] lg:rounded-[12px] lg:p-3">
+      {children}
+    </div>
+  );
 };
 const YourInfoGroupSeparator = () => {
   const { lg } = useMediaQueries();
@@ -223,58 +228,60 @@ const YourInfo = () => {
 
   return (
     <>
-      <YourInfoGroup>
-        <ToolAccordion
-          title={t('interests')}
-          description={t('tool.my-own-data.interests.description')}
-          testId="tool-interests-accordion"
-        >
-          <Interests />
-        </ToolAccordion>
+      <div id="tool-your-info" className="flex flex-col gap-4">
+        <YourInfoGroup id="tool-your-info-group-1">
+          <ToolAccordion
+            title={t('interests')}
+            description={t('tool.my-own-data.interests.description')}
+            testId="tool-interests-accordion"
+          >
+            <Interests />
+          </ToolAccordion>
 
-        <ToolAccordion
-          title={t('tool.map-your-skills')}
-          description={t('tool.my-own-data.competences.description')}
-          testId="tool-competences-accordion"
-        >
-          <Competences />
-        </ToolAccordion>
+          <ToolAccordion
+            title={t('tool.map-your-skills')}
+            description={t('tool.my-own-data.competences.description')}
+            testId="tool-competences-accordion"
+          >
+            <Competences />
+          </ToolAccordion>
 
-        <ToolAccordion
-          title={t('tool.competency-profile.title')}
-          description={t('tool.competency-profile.description')}
-          testId="tool-profile-accordion"
-        >
-          <ProfileImportExport onImportSuccess={onImportSuccess} />
-        </ToolAccordion>
-      </YourInfoGroup>
+          <ToolAccordion
+            title={t('tool.competency-profile.title')}
+            description={t('tool.competency-profile.description')}
+            testId="tool-profile-accordion"
+          >
+            <ProfileImportExport onImportSuccess={onImportSuccess} />
+          </ToolAccordion>
+        </YourInfoGroup>
 
-      <YourInfoGroupSeparator />
+        <YourInfoGroupSeparator />
 
-      <YourInfoGroup>
-        <ToolAccordion
-          title={t('tool.info-overview.title')}
-          description={t('tool.info-overview.description')}
-          ref={competenceOverviewRef}
-          isOpen={overviewOpen}
-          setIsOpen={setOverviewOpen}
-          testId="tool-overview-accordion"
-        >
-          <CategorizedCompetenceTagList />
-        </ToolAccordion>
-      </YourInfoGroup>
+        <YourInfoGroup id="tool-your-info-group-2">
+          <ToolAccordion
+            title={t('tool.info-overview.title')}
+            description={t('tool.info-overview.description')}
+            ref={competenceOverviewRef}
+            isOpen={overviewOpen}
+            setIsOpen={setOverviewOpen}
+            testId="tool-overview-accordion"
+          >
+            <CategorizedCompetenceTagList />
+          </ToolAccordion>
+        </YourInfoGroup>
 
-      <YourInfoGroupSeparator />
+        <YourInfoGroupSeparator />
 
-      <YourInfoGroup>
-        <ToolAccordion
-          title={t('tool.tools.title')}
-          description={t('tool.tools.description')}
-          testId="tool-tools-accordion"
-        >
-          <AdditionalSupport />
-        </ToolAccordion>
-      </YourInfoGroup>
+        <YourInfoGroup id="tool-your-info-group-3">
+          <ToolAccordion
+            title={t('tool.tools.title')}
+            description={t('tool.tools.description')}
+            testId="tool-tools-accordion"
+          >
+            <AdditionalSupport />
+          </ToolAccordion>
+        </YourInfoGroup>
+      </div>
       <div className="lg:mx-3">
         <RateAiContent variant="kohtaanto" area="Kohtaanto työkalu" size="md" />
       </div>
@@ -318,6 +325,7 @@ const Tool = () => {
   const [currentTab, setCurrentTab] = React.useState<TabName>(savedTab);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const { isLoggedIn } = useLoaderData<ToolLoaderData>();
+  const [onboardingTourActive, setOnboardingTourActive] = React.useState(false);
 
   React.useEffect(() => {
     const validTabs: TabName[] = ['info', 'opportunities'];
@@ -327,16 +335,19 @@ const Tool = () => {
     }
   }, [savedTab]);
 
-  const setTab = React.useCallback((tab: TabName) => {
-    setCurrentTab(tab);
-    globalThis.sessionStorage.setItem(STORAGE_KEY, tab);
+  const setTab = React.useCallback(
+    (tab: TabName) => {
+      setCurrentTab(tab);
+      globalThis.sessionStorage.setItem(STORAGE_KEY, tab);
 
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, []);
+      if (scrollRef.current && onboardingTourActive) {
+        scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    },
+    [onboardingTourActive],
+  );
 
   const tabs = React.useMemo(() => {
     const tabs = [
@@ -397,6 +408,7 @@ const Tool = () => {
       </div>
       <p className="text-body-lg-mobile sm:text-body-lg mb-6 max-w-[700px]" ref={scrollRef}>
         {t('tool.description')}
+        <OnboardingTour setOnboardingTourActive={setOnboardingTourActive} setCurrentTab={setCurrentTab} />
       </p>
       <InfoBox text={isLoggedIn ? t('tool.info.logged-in') : t('tool.info.logged-out')} />
       <title>{t('tool.title')}</title>
@@ -434,7 +446,7 @@ const Tool = () => {
               top,
             }}
           >
-            <div role="tablist" className="flex text-button-sm select-none gap-3 px-5">
+            <div id="tool-tabs" role="tablist" className="flex text-button-sm select-none gap-3 px-5">
               {tabs.map((tab, index) => (
                 <button
                   type="button"
