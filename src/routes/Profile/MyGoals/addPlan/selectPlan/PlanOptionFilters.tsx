@@ -1,6 +1,6 @@
 import { FilterEducationOpportunityType } from '@/routes/Profile/MyGoals/addPlan/selectPlan/FilterEducationOpportunityType.tsx';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
-import { FilterName } from '@/stores/useToolStore/ToolStoreModel.ts';
+import { FilterName } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel.ts';
 import { Accordion, Button, Modal } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
 import React from 'react';

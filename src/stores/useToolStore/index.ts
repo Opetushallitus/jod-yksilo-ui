@@ -9,6 +9,7 @@ import {
   filterByAmmattiryhmat,
   filterByEducationType,
   filterByJobType,
+  filterByKesto,
   filterByRegion,
 } from '@/stores/useToolStore/filters';
 import {
@@ -263,6 +264,8 @@ export const useToolStore = create<ToolState>()(
             ammattiryhmat,
             jobOpportunityType,
             educationOpportunityType,
+            minDuration,
+            maxDuration,
           } = filters;
 
           if (Object.keys(ehdotukset).length === 0 || i18n.language !== get().previousEhdotusUpdateLang) {
@@ -291,7 +294,8 @@ export const useToolStore = create<ToolState>()(
                 filterByJobType(jobOpportunityType, meta) &&
                 filterByEducationType(educationOpportunityType, meta) &&
                 filterByAmmattiryhmat(ammattiryhmat, meta) &&
-                filterByRegion(region, meta)
+                filterByRegion(region, meta) &&
+                filterByKesto(minDuration, maxDuration, meta)
               );
             })
             .sort(([, metadataA], [, metadataB]) =>
@@ -362,6 +366,17 @@ export const useToolStore = create<ToolState>()(
 
       setSorting: (state) => {
         set({ sorting: state, settingsHaveChanged: true });
+      },
+
+      setDurationFilter: (minDuration: number, maxDuration: number) => {
+        set((state) => ({
+          settingsHaveChanged: true,
+          filters: {
+            ...state.filters,
+            minDuration,
+            maxDuration,
+          },
+        }));
       },
 
       setArrayFilter: (name, value) => {
