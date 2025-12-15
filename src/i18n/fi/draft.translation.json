@@ -289,6 +289,16 @@
     "settings": {
       "controls": "Säätimet",
       "general": {
+        "duration": "Kesto",
+        "duration-value": {
+          "3-years": "3v",
+          "6plus-years": "6v+",
+          "day": "1pvä",
+          "max-aria-label": "Maksimikesto, 6v ja pidempään kestävät koulutukset",
+          "min-aria-label": "Minimikesto, ml. vain 1 päivän koulutukset",
+          "month": "1kk",
+          "year": "1v"
+        },
         "education-opportunity-type": "Koulutusmahdollisuuksien tyyppi",
         "job-opportunity-type": "Uramahdollisuuksien tyyppi"
       }

@@ -418,8 +418,9 @@ function analyzeLanguage(lang, codeKeys, translationsByLang) {
   const expectedKeys = buildExpectedKeys(codeKeys, translations);
   const missing = findMissingTranslations(expectedKeys, translationKeys);
   const unused = findUnusedTranslations(translationKeys, codeKeys, keyToFile);
+  const sortErrors = checkTranslationFileSorted(lang);
 
-  return { missing, unused, translations };
+  return { missing, unused, translations, sortErrors };
 }
 
 function analyzeTranslations() {
@@ -625,15 +626,17 @@ function printDynamicKeys(results) {
 function hasTranslationIssues(results, checkLangs) {
   let hasMissingKeys = false;
   let hasUnusedKeys = false;
+  let sortErrors = false;
 
   for (const lang of checkLangs) {
     if (results[lang]) {
       if (results[lang].missing.length > 0) hasMissingKeys = true;
       if (results[lang].unused.length > 0) hasUnusedKeys = true;
+      if (results[lang].sortErrors) sortErrors = true;
     }
   }
 
-  return { hasMissingKeys, hasUnusedKeys };
+  return { hasMissingKeys, hasUnusedKeys, sortErrors };
 }
 
 /**
@@ -655,6 +658,48 @@ function printCIFailure(hasDynamicKeys, hasMissingKeys, hasUnusedKeys, results, 
   console.log('\nRun without --ci flag for detailed information.\n');
 }
 
+/*** Check if translation file is sorted alphabetically (recursively) */
+function checkTranslationFileSorted(lang) {
+  const langDir = path.join(I18N_DIR, lang);
+  const filesToCheck = ['translation.json', 'draft.translation.json']
+    .map((f) => path.join(langDir, f))
+    .filter(fs.existsSync);
+
+  /** Recursively check object key order */
+  function isSorted(obj, basePath = '') {
+    const keys = Object.keys(obj);
+    const sortedKeys = [...keys].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+    const sorted = JSON.stringify(keys) === JSON.stringify(sortedKeys);
+
+    const unsortedPaths = [];
+    if (!sorted) {
+      unsortedPaths.push(basePath || '(root)');
+    }
+    for (const key of keys) {
+      if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
+        const nested = isSorted(obj[key], basePath ? `${basePath}.${key}` : key);
+        unsortedPaths.push(...nested);
+      }
+    }
+    return unsortedPaths;
+  }
+
+  let hasUnsorted = false;
+  for (const file of filesToCheck) {
+    const content = JSON.parse(fs.readFileSync(file, 'utf-8'));
+    const unsortedPaths = isSorted(content);
+    if (unsortedPaths.length > 0) {
+      hasUnsorted = true;
+      console.log(`❌ ${lang}/${path.basename(file)} is not sorted:`);
+      for (const p of unsortedPaths) console.log(`   - ${p}`);
+    } else {
+      console.log(`✅ ${lang}/${path.basename(file)} is properly sorted`);
+    }
+  }
+
+  return hasUnsorted;
+}
+
 /**
  * Check CI mode and return exit code
  */
@@ -664,9 +709,8 @@ function checkCIMode(results) {
   }
 
   const hasDynamicKeys = results.dynamicKeys && results.dynamicKeys.length > 0;
-  const { hasMissingKeys, hasUnusedKeys } = hasTranslationIssues(results, checkLangs);
-
-  if (hasDynamicKeys || hasMissingKeys || hasUnusedKeys) {
+  const { hasMissingKeys, hasUnusedKeys, sortErrors } = hasTranslationIssues(results, checkLangs);
+  if (hasDynamicKeys || hasMissingKeys || hasUnusedKeys || sortErrors) {
     printCIFailure(hasDynamicKeys, hasMissingKeys, hasUnusedKeys, results, checkLangs);
     return 1;
   }

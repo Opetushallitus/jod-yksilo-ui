@@ -293,6 +293,16 @@
     "settings": {
       "controls": "Kontroller",
       "general": {
+        "duration": "Längd",
+        "duration-value": {
+          "3-years": "3år",
+          "6plus-years": "6år+",
+          "day": "1d",
+          "max-aria-label": "Maximilängd, 6 år och längre utbildningar",
+          "min-aria-label": "Minimilängd, inkl. endast 1-dagars utbildningar",
+          "month": "1mån",
+          "year": "1år"
+        },
         "location": "Plats"
       }
     },

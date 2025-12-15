@@ -1080,6 +1080,8 @@ export interface components {
       koulutusmahdollisuusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
       maakunnat?: string[];
       /** Format: double */
+      kesto?: number;
+      /** Format: double */
       pisteet?: number;
       /** @enum {string} */
       trendi?: 'NOUSEVA' | 'LASKEVA';

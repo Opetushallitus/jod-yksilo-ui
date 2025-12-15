@@ -1,3 +1,4 @@
+import { FilterKesto } from '@/routes/Tool/components/filters/FilterKesto.tsx';
 import type { MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import type { FilterName } from '@/stores/useToolStore/ToolStoreModel';
@@ -32,7 +33,18 @@ export const FilterOpportunityType = () => {
   const filters = useToolStore((state) => state.filters);
 
   const getFilterCount = (filterList: FilterName[]) => {
-    return filters ? filterList.reduce((sum, filter) => sum + (filters[filter]?.length ?? 0), 0) : 0;
+    if (!filters) return 0;
+
+    return filterList.reduce((sum, filter) => {
+      const value = filters[filter];
+      if (Array.isArray(value)) {
+        return sum + value.length;
+      } else if (typeof value === 'number') {
+        return sum + 1;
+      } else {
+        return sum;
+      }
+    }, 0);
   };
 
   React.useEffect(() => {
@@ -80,10 +92,19 @@ export const FilterOpportunityType = () => {
           id="education-opportunity-type"
           title={t('tool.settings.general.education-opportunity-type')}
           count={getFilterCount(['educationOpportunityType'])}
-          className="border-b-2 pb-3"
+          className="pb-3"
           testId="education-opportunity-type-setting"
         >
           <FilterEducationOpportunityType />
+        </Setting>
+        <Setting
+          id="duration-filter"
+          title={t('tool.settings.general.duration')}
+          count={filters.maxDuration || filters.minDuration ? 1 : 0}
+          className="pb-3"
+          testId="duration-filter-setting"
+        >
+          <FilterKesto />
         </Setting>
       </ul>
 

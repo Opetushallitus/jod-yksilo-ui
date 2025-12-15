@@ -260,6 +260,9 @@
         "location": "Location"
       }
     },
+    "tools": {
+      "service-directory": "Guidance and counseling services"
+    },
     "tour": {
       "buttons": {
         "done": "Find opportunities",
@@ -324,9 +327,6 @@
       },
       "view-guided-tour": "View the tool's <StartTour>guided tour</StartTour>",
       "view-guided-tour-label": "Start the tool's guided tour"
-    },
-    "tools": {
-      "service-directory": "Guidance and counseling services"
     }
   },
   "tooltip": {
