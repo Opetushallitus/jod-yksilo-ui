@@ -272,37 +272,33 @@ const Cv = () => {
 
           {data?.toiminnot && data.toiminnot.length > 0 && <PageBreak />}
           {/* Muu osaaminen */}
-          {(Array.isArray(data?.muuOsaaminen?.muuOsaaminen) && data?.muuOsaaminen?.muuOsaaminen.length > 0) ||
-            (data?.muuOsaaminen?.vapaateksti && (
-              <>
-                <h3 className="text-heading-2 mb-5">{t('cv.competence.something-else')}</h3>
-                <div className="border-b-2 border-border-gray pb-3 mb-5">{t('cv.competence.title')}</div>
-                <div className="mb-8">
-                  <ul className="flex flex-row flex-wrap gap-3">
-                    {muuOsaaminen.map((osaaminen) => (
-                      <li key={osaaminen.uri}>
-                        <Tag
-                          label={getLocalizedText(osaaminen.nimi)}
-                          variant="presentation"
-                          sourceType="jotain-muuta"
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+          {((Array.isArray(data?.muuOsaaminen?.muuOsaaminen) && data?.muuOsaaminen?.muuOsaaminen.length > 0) ||
+            data?.muuOsaaminen?.vapaateksti) && (
+            <>
+              <h3 className="text-heading-2 mb-5">{t('cv.competence.something-else')}</h3>
+              <div className="border-b-2 border-border-gray pb-3 mb-5">{t('cv.competence.title')}</div>
+              <div className="mb-8">
+                <ul className="flex flex-row flex-wrap gap-3">
+                  {muuOsaaminen.map((osaaminen) => (
+                    <li key={osaaminen.uri}>
+                      <Tag label={getLocalizedText(osaaminen.nimi)} variant="presentation" sourceType="jotain-muuta" />
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                {getLocalizedText(muuOsaaminenVapaateksti) && (
-                  <div className="mb-8">
-                    <h4 className="sm:text-heading-3 text-heading-3-mobile mb-4">
-                      {t('cv.competence.something-else-freetext')}
-                    </h4>
-                    <p className="sm:text-body-md text-body-md-mobile font-arial">
-                      {getLocalizedText(muuOsaaminenVapaateksti)}
-                    </p>
-                  </div>
-                )}
-              </>
-            ))}
+              {getLocalizedText(muuOsaaminenVapaateksti) && (
+                <div className="mb-8">
+                  <h4 className="sm:text-heading-3 text-heading-3-mobile mb-4">
+                    {t('cv.competence.something-else-freetext')}
+                  </h4>
+                  <p className="sm:text-body-md text-body-md-mobile font-arial">
+                    {getLocalizedText(muuOsaaminenVapaateksti)}
+                  </p>
+                </div>
+              )}
+            </>
+          )}
         </ContentSection>
       )}
 
