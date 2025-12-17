@@ -38,6 +38,11 @@ export const FilterKesto = () => {
       index: 3,
       months: 36,
     },
+    // There is 2 entries for index 4. Index 4 can be 6 years or maxKestoValue, depending if its minDuration or maxDuration
+    {
+      index: 4,
+      months: 6 * 12, // 6 years
+    },
     {
       index: 4,
       months: maxKestoValue,
