@@ -4,7 +4,6 @@
     "aria-description": "Information om användningen av artificiell intelligens",
     "title": "Innehåll genererat med hjälp av artificiell intelligens"
   },
-  "allow": "Tillåt",
   "beta": {
     "note": {
       "description": "Berätta vad du tycker och hjälp oss att förbättra tjänsten.",
@@ -54,7 +53,6 @@
   },
   "delete": "Ta bort",
   "description": "Beskrivning",
-  "disallow": "Tillåter inte",
   "do-filter": "Filtrera",
   "duration": "Längd",
   "edit": "Redigera",
@@ -266,16 +264,6 @@
       "title": "Välkommen att skapa din kompetensprofil!"
     },
     "step-2": {
-      "birthyear": "Födelseår",
-      "choose-mother-tongue": "Välj modersmål",
-      "email": "E-postadress",
-      "gender": "Kön",
-      "gender-female": "Kvinna",
-      "gender-male": "Man",
-      "gender-other": "Annat",
-      "home-city": "Hemkommun",
-      "i-allow": "Jag tillåter",
-      "mother-tongue": "Modersmål",
       "text-1": "Kontrollera och komplettera dina uppgifter som hämtats från befolkningsdatasystemet.",
       "text-2": "Du kan välja om du vill lämna ut dina uppgifter för användning i tjänsten. Senare kan du själv definiera och redigera i inställningarna hur och var dina uppgifter används.",
       "text-3": "Bra att veta om ditt dataskydd",

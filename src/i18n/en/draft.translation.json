@@ -57,7 +57,8 @@
   },
   "error": {
     "form": {
-      "date-in-the-past": "The date cannot be in the past"
+      "date-in-the-past": "The date cannot be in the past",
+      "email": "Check the email address"
     }
   },
   "filters": "Filters",
@@ -68,6 +69,8 @@
   "home": {
     "need-personal-guidance-content": "In guidance and counseling services, you will find support for considering career and education options. Narrow down the list of services to find the ones that suit you best."
   },
+  "i-allow": "I allow",
+  "i-disallow": "I do not allow",
   "n-education-opportunities": "{{count}} / {{total}} education opportunities",
   "n-job-opportunities": "{{count}} / {{total}} job opportunities",
   "n-months-short": "{{count}} mo",
@@ -103,7 +106,22 @@
       "search-disclaimer": "Text used for searching interests - it is not saved"
     }
   },
+  "personal-details": {
+    "birthyear": "Year of birth",
+    "choose-mother-tongue": "Choose mother tongue",
+    "email": "Email address",
+    "gender": "Gender",
+    "gender-female": "Female",
+    "gender-male": "Male",
+    "gender-other": "Other",
+    "home-city": "Home city",
+    "mother-tongue": "Mother tongue"
+  },
   "preferences": {
+    "personal-details": {
+      "description": "You can edit your mother tongue and email address.",
+      "title": "Information retrieved from the population information system"
+    },
     "share": {
       "copy-failure": "Failed to copy the link",
       "copy-link": "Copy link",
