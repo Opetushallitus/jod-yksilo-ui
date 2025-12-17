@@ -59,11 +59,11 @@ const TmtImportExport = () => {
 
       toast.error(toastMsg);
       setAuthorized(false);
+      cleanUrl();
     } else if (params.has('authorized')) {
       setAuthorized(true);
+      cleanUrl();
     }
-
-    cleanUrl();
   }, [search, t, cleanUrl]);
 
   const getErrorTranslation = React.useCallback(
