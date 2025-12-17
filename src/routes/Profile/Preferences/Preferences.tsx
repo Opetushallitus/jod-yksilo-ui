@@ -5,21 +5,18 @@ import { useModal } from '@/hooks/useModal';
 import { LogoutFormContext } from '@/routes/Root';
 import { useToolStore } from '@/stores/useToolStore';
 import { isFeatureEnabled } from '@/utils/features';
-import { Button, Toggle, useMediaQueries } from '@jod/design-system';
+import { Button, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouteLoaderData } from 'react-router';
-import { ShareLinkSection, TmtImportExport } from '.';
-import { ProfileNavigationList, ProfileSectionTitle } from '../components';
-import { ToolCard } from '../components/ToolCard';
+import { PersonalDetails, ShareLinkSection, TmtImportExport } from '.';
+import { Divider, ProfileNavigationList, ProfileSectionTitle, ToggleAllow, ToolCard } from '../components';
 
 const DownloadLink = ({ children, className }: { children: React.ReactNode; className: string }) => (
   <a href={`${import.meta.env.BASE_URL}api/profiili/yksilo/vienti`} className={className}>
     {children}
   </a>
 );
-
-const Divider = () => <hr className="border-b-1 border-border-gray my-7" />;
 
 const ToggleWithText = ({
   title,
@@ -36,8 +33,6 @@ const ToggleWithText = ({
   disabled: boolean;
   testId?: string;
 }) => {
-  const { t } = useTranslation();
-
   return (
     <div className="flex items-center justify-between gap-4 py-4 border-b border-[#CCC]" data-testid={testId}>
       <div className="flex-1 font-arial">
@@ -45,14 +40,7 @@ const ToggleWithText = ({
         <p className="text-help-mobile sm:text-help">{description}</p>
       </div>
       <div className="flex items-center gap-3">
-        <p aria-hidden="true">{checked ? t('allow') : t('disallow')}</p>
-        <Toggle
-          serviceVariant="yksilo"
-          checked={checked}
-          disabled={disabled}
-          onChange={onChange}
-          ariaLabel={checked ? t('allow') : t('disallow')}
-        />
+        <ToggleAllow checked={checked} disabled={disabled} onChange={onChange} />
       </div>
     </div>
   );
@@ -62,12 +50,13 @@ const Preferences = () => {
   const { t } = useTranslation();
   const { lg } = useMediaQueries();
   const title = t('profile.preferences.title');
-  const toolStore = useToolStore();
+  const resetToolStore = useToolStore((state) => state.reset);
   const logoutForm = React.useContext(LogoutFormContext);
   const { showDialog } = useModal();
+  const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
 
   const deleteProfile = async () => {
-    toolStore.reset();
+    resetToolStore();
     const deletionInput = document.createElement('input');
     deletionInput.type = 'hidden';
     deletionInput.name = 'deletion';
@@ -75,8 +64,6 @@ const Preferences = () => {
     logoutForm?.appendChild(deletionInput);
     logoutForm?.submit();
   };
-
-  const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
 
   const [lupaLuovuttaaTiedotUlkopuoliselle, setLupaLuovuttaaTiedotUlkopuoliselle] = React.useState(
     data?.lupaLuovuttaaTiedotUlkopuoliselle ?? false,
@@ -163,16 +150,19 @@ const Preferences = () => {
           testId="pref-ai-training"
         />
       </section>
+      <section className="mb-8">
+        <PersonalDetails />
+      </section>
       {isFeatureEnabled('TMT_INTEGRATION') && (
         <>
           <TmtImportExport />
-          <Divider />
+          <Divider className="my-7" />
         </>
       )}
       {isFeatureEnabled('JAKOLINKKI') && (
         <>
           <ShareLinkSection className="mb-8" />
-          <Divider />
+          <Divider className="my-7" />
         </>
       )}
       <section className="mb-8">

@@ -57,7 +57,8 @@
   },
   "error": {
     "form": {
-      "date-in-the-past": "Datumet kan inte vara i det förflutna"
+      "date-in-the-past": "Datumet kan inte vara i det förflutna",
+      "email": "Kontrollera e-postadressen"
     }
   },
   "filters": "Filter",
@@ -68,6 +69,8 @@
   "home": {
     "need-personal-guidance-content": "I väglednings- och rådgivningstjänster hittar du stöd för att fundera över karriär- och utbildningsalternativ. Begränsa listan över tjänster för att hitta de som passar dig bäst."
   },
+  "i-allow": "Jag tillåter",
+  "i-disallow": "Jag tillåter inte",
   "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
@@ -91,7 +94,22 @@
       "search-disclaimer": "Text som används för att söka efter intressen - den sparas inte"
     }
   },
+  "personal-details": {
+    "birthyear": "Födelseår",
+    "choose-mother-tongue": "Välj modersmål",
+    "email": "E-postadress",
+    "gender": "Kön",
+    "gender-female": "Kvinna",
+    "gender-male": "Man",
+    "gender-other": "Annat",
+    "home-city": "Hemkommun",
+    "mother-tongue": "Modersmål"
+  },
   "preferences": {
+    "personal-details": {
+      "description": "Du kan redigera modersmål och e-postadress.",
+      "title": "Uppgifter hämtade från befolkningsdatasystemet"
+    },
     "share": {
       "copy-failure": "Kopiering av länken misslyckades",
       "copy-link": "Kopiera länk",

@@ -30,11 +30,11 @@ export const useYksiloData = () => {
   const sukupuoliText = (sukupuoli: GenderValue | undefined) => {
     switch (sukupuoli) {
       case 'MIES':
-        return t('introduction.step-2.gender-male');
+        return t('personal-details.gender-male');
       case 'NAINEN':
-        return t('introduction.step-2.gender-female');
+        return t('personal-details.gender-female');
       default:
-        return t('introduction.step-2.gender-other');
+        return t('personal-details.gender-other');
     }
   };
 

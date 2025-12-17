@@ -28,6 +28,7 @@ export const LIMITS = {
 export const NOT_AVAILABLE_LABEL = '---'; // Label to use when data is not available, especially in opportunity cards
 
 export const formErrorMessage = {
+  email: () => ({ message: i18n.t('error.form.email') }),
   max: (count: number) => ({ message: i18n.t('error.form.max', { count }) }),
   min: (count: number) => ({ message: i18n.t('error.form.min', { count }) }),
   required: () => ({ message: i18n.t('error.form.required') }),

@@ -4,7 +4,6 @@
     "aria-description": "Tietoa tekoälyn käytöstä",
     "title": "Tekoälyn avulla generoitu sisältö"
   },
-  "allow": "Salli",
   "beta": {
     "note": {
       "description": "Kerro mielipiteesi ja auta meitä kehittämään palvelua.",
@@ -54,7 +53,6 @@
   },
   "delete": "Poista",
   "description": "Kuvaus",
-  "disallow": "En salli",
   "do-filter": "Suodata",
   "duration": "Kesto",
   "edit": "Muokkaa",
@@ -266,16 +264,7 @@
       "title": "Tervetuloa luomaan osaamisprofiilisi!"
     },
     "step-2": {
-      "birthyear": "Syntymävuosi",
       "choose-mother-tongue": "Valitse äidinkieli",
-      "email": "Sähköposti",
-      "gender": "Sukupuoli",
-      "gender-female": "Nainen",
-      "gender-male": "Mies",
-      "gender-other": "Muu",
-      "home-city": "Kotikunta",
-      "i-allow": "Sallin",
-      "mother-tongue": "Äidinkieli",
       "text-1": "Tarkista ja täydennä väestötietojärjestelmästä haetut tietosi.",
       "text-2": "Voit valita, luovutatko tietosi palvelun käyttöön. Myöhemmin voit itse määritellä ja muokata, miten ja missä tietojasi käytetään asetuksissa.",
       "text-3": "Hyvä tietää tietosuojastasi",

@@ -56,7 +56,8 @@
   },
   "error": {
     "form": {
-      "date-in-the-past": "Päivämäärä ei voi olla menneisyydessä"
+      "date-in-the-past": "Päivämäärä ei voi olla menneisyydessä",
+      "email": "Tarkista sähköpostiosoite"
     }
   },
   "filters": "Suodattimet",
@@ -67,6 +68,8 @@
   "home": {
     "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löydät tukea ura- ja koulutusvaihtoehtoihin liittyvään pohdintaan. Rajaa palveluiden listaa, jotta löydät sinulle parhaiten sopivat palvelut."
   },
+  "i-allow": "Sallin",
+  "i-disallow": "En salli",
   "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
   "n-job-opportunities": "Uramahdollisuudet {{count}} / {{total}}",
   "n-months-short": "{{count}} kk",
@@ -97,7 +100,22 @@
       "search-disclaimer": "Tekstiä käytetään kiinnostusten hakuun - sitä ei tallenneta"
     }
   },
+  "personal-details": {
+    "birthyear": "Syntymävuosi",
+    "choose-mother-tongue": "Valitse äidinkieli",
+    "email": "Sähköpostiosoite",
+    "gender": "Sukupuoli",
+    "gender-female": "Nainen",
+    "gender-male": "Mies",
+    "gender-other": "Muu",
+    "home-city": "Kotipaikka",
+    "mother-tongue": "Äidinkieli"
+  },
   "preferences": {
+    "personal-details": {
+      "description": "Voit muokata äidinkieltä ja sähköpostiosoitettasi.",
+      "title": "Väestötietojärjestelmästä haetut tiedot"
+    },
     "share": {
       "copy-failure": "Linkin kopiointi epäonnistui",
       "copy-link": "Kopioi linkki",

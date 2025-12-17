@@ -1,17 +1,17 @@
 import { client } from '@/api/client';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
-import { YksiloData } from '@/hooks/useYksiloData';
+import type { YksiloData } from '@/hooks/useYksiloData';
 import { LANGUAGE_VALUES, type LanguageValue } from '@/i18n/config';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Combobox, InputField, Modal, Toggle, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { Button, Combobox, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import { JodAi, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import {
   Controller,
   Form,
   FormProvider,
-  FormSubmitHandler,
+  type FormSubmitHandler,
   useForm,
   useFormContext,
   useFormState,
@@ -19,6 +19,7 @@ import {
 import { Trans, useTranslation } from 'react-i18next';
 import { useRevalidator } from 'react-router';
 import z from 'zod';
+import { PersonalDetailsInfoBlock, ToggleAllow } from '../components';
 import { GENDER_VALUES } from '../utils';
 
 interface LanguageOptions {
@@ -28,52 +29,8 @@ interface LanguageOptions {
 
 const Separator = () => <hr aria-hidden className="my-4 h-1 bg-bg-gray-2 border-0" />;
 
-interface InfoBlockProps {
-  label: string;
-  info?: string;
-  interactiveComponent: React.ReactNode;
-  orientation?: 'horizontal' | 'vertical';
-}
-
 const Link = ({ children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
   return <a {...rest}>{children}</a>;
-};
-
-interface ToggleAllowProps {
-  checked: boolean;
-  onChange: (val: boolean) => void;
-}
-
-const ToggleAllow = ({ onChange, checked }: ToggleAllowProps) => {
-  const { t } = useTranslation();
-  return (
-    <>
-      <span className="text-body-md-mobile sm:text-body-md text-secondary-gray font-arial">
-        {t('introduction.step-2.i-allow')}
-      </span>
-      <Toggle
-        type="button"
-        serviceVariant="yksilo"
-        checked={checked}
-        onChange={onChange}
-        ariaLabel={t('introduction.step-2.i-allow')}
-      />
-    </>
-  );
-};
-
-const InfoBlock = ({ label, info, interactiveComponent, orientation = 'horizontal' }: InfoBlockProps) => {
-  const orientationClassname = orientation === 'horizontal' ? 'flex-row' : 'flex-col';
-
-  return (
-    <div className={`flex ${orientationClassname} space-between gap-3`}>
-      <div className="flex flex-col flex-1 gap-1">
-        <span className="text-form-label font-arial">{label}</span>
-        {info && <span className="text-body-md-mobile sm:text-body-md text-secondary-gray font-arial">{info}</span>}
-      </div>
-      <div className="flex flex-2 items-center gap-3 justify-end">{interactiveComponent}</div>
-    </div>
-  );
 };
 
 const StepWelcome = () => {
@@ -100,8 +57,6 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
     i18n: { language },
   } = useTranslation();
   const { sm } = useMediaQueries();
-  const orientation = sm ? 'horizontal' : 'vertical';
-
   const { register, control, trigger } = useFormContext<YksiloData>();
 
   return (
@@ -111,8 +66,8 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
       <p className="text-body-md-mobile sm:text-body-md mb-7 font-arial">{t('introduction.step-2.text-2')}</p>
       <div>
         <Separator />
-        <InfoBlock
-          label={t('introduction.step-2.birthyear')}
+        <PersonalDetailsInfoBlock
+          label={t('personal-details.birthyear')}
           info={`${data.syntymavuosi}`}
           interactiveComponent={
             <Controller
@@ -120,13 +75,13 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
               render={({ field: { onChange, value }, field }) => (
                 <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
               )}
-              name={'allowSyntymavuosi'}
+              name="allowSyntymavuosi"
             />
           }
         />
         <Separator />
-        <InfoBlock
-          label={t('introduction.step-2.home-city')}
+        <PersonalDetailsInfoBlock
+          label={t('personal-details.home-city')}
           info={data.kotikuntaNimi}
           interactiveComponent={
             <Controller
@@ -134,13 +89,13 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
               render={({ field: { onChange, value }, field }) => (
                 <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
               )}
-              name={'allowKotikunta'}
+              name="allowKotikunta"
             />
           }
         />
         <Separator />
-        <InfoBlock
-          label={t('introduction.step-2.gender')}
+        <PersonalDetailsInfoBlock
+          label={t('personal-details.gender')}
           info={data.sukupuoliNimi}
           interactiveComponent={
             <Controller
@@ -148,14 +103,14 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
               render={({ field: { onChange, value }, field }) => (
                 <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
               )}
-              name={'allowSukupuoli'}
+              name="allowSukupuoli"
             />
           }
         />
         <Separator />
-        <InfoBlock
-          label={t('introduction.step-2.mother-tongue')}
-          orientation={orientation}
+        <PersonalDetailsInfoBlock
+          label={t('personal-details.mother-tongue')}
+          stack={!sm}
           interactiveComponent={
             <Controller
               control={control}
@@ -163,7 +118,7 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
                 <Combobox<LanguageValue, LanguageOptions>
                   className="w-full"
                   {...field}
-                  label={t('introduction.step-2.choose-mother-tongue')}
+                  label={t('personal-details.choose-mother-tongue')}
                   hideLabel
                   selected={value}
                   defaultValue={data.aidinkieli}
@@ -185,17 +140,17 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
                     onChange(val);
                     trigger('aidinkieli');
                   }}
-                  placeholder={t('introduction.step-2.choose-mother-tongue')}
+                  placeholder={t('personal-details.choose-mother-tongue')}
                 />
               )}
-              name={'aidinkieli'}
+              name="aidinkieli"
             />
           }
         />
         <Separator />
-        <InfoBlock
-          label={t('introduction.step-2.email')}
-          orientation={orientation}
+        <PersonalDetailsInfoBlock
+          label={t('personal-details.email')}
+          stack={!sm}
           interactiveComponent={
             <InputField {...register('email')} hideLabel={true} placeholder="matti.meikalainen@suomi.fi" />
           }
