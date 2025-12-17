@@ -33,7 +33,7 @@ export const EducationOpportunityCard = ({
   }, [kesto?.mediaani, t]);
 
   return (
-    <OpportunityCardWrapper {...rest} type="KOULUTUSMAHDOLLISUUS">
+    <OpportunityCardWrapper tyyppi={tyyppi} {...rest} type="KOULUTUSMAHDOLLISUUS">
       <OpportunityDetailsWrapper>
         <OpportunityDetail
           title={t('tool.education-opportunity-duration')}

@@ -18,7 +18,7 @@ export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, aineisto, 
   const { t } = useTranslation();
 
   return (
-    <OpportunityCardWrapper {...rest} type="TYOMAHDOLLISUUS">
+    <OpportunityCardWrapper aineisto={aineisto} {...rest} type="TYOMAHDOLLISUUS">
       {ammattiryhma ? (
         <OpportunityDetailsWrapper>
           <OpportunityDetail
