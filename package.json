@@ -27,7 +27,7 @@
     "@hookform/resolvers": "^5.2.1",
     "@jod/design-system": "github:Opetushallitus/jod-design-system#main",
     "driver.js": "^1.4.0",
-    "i18next": "^25.3.6",
+    "i18next": "^25.7.2",
     "openapi-fetch": "^0.14.0",
     "openapi-typescript-fetch": "^2.2.1",
     "react": "^19.1.1",
