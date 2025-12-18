@@ -197,10 +197,7 @@
       "link-text": "Löydä mahdollisuuksia",
       "title": "Tutki vaihtoehtojasi"
     },
-    "info": {
-      "logged-in": "Osaamisprofiilin tiedot eivät siirry suoraan tälle sivulle. Voit tuoda ne Osaamisprofiilisi-kohdasta. Kokeile erilaisia yhdistelmiä ja päivitä mahdollisuutesi.",
-      "logged-out": "Voit muokata valintojasi Tietojesi yhteenveto -kohdassa. Kokeile erilaisia yhdistelmiä ja päivitä mahdollisuutesi."
-    },
+    "description": "Täytä tälle sivulle tietojasi kartoittamalla kiinnostuksiasi ja osaamiasi tai tuomalla niitä osaamisprofiilistasi. Kokeile erilaisia yhdistelmiä ja päivitä mahdollisuutesi tiedoillasi.",
     "my-own-data": {
       "interests": {
         "virtual-assistant": {
@@ -290,7 +287,7 @@
           "title": "Kokeile ja tutki erilaisia yhdistelmiä"
         }
       },
-      "view-guided-tour": "Katso työkalun <StartTour>opastettu esittely</StartTour>",
+      "view-guided-tour": "Katso vinkit käyttöön!",
       "view-guided-tour-label": "Käynnistä työkalun opastettu esittely"
     }
   },

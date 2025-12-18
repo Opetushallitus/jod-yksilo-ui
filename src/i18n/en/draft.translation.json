@@ -192,10 +192,7 @@
       "link-text": "Find opportunities",
       "title": "Explore your options"
     },
-    "info": {
-      "logged-in": "The information from your competence profile does not transfer directly to this page. You can import it from the Competence Profile section. Try different combinations and update your opportunities.",
-      "logged-out": "You can edit your selections in the Summary of Your Information section. Try different combinations and update your opportunities."
-    },
+    "description": "Fill in your information on this page by mapping your interests and competences or by importing them from your competence profile. Try different combinations and update your opportunities with your data.",
     "my-own-data": {
       "interests": {
         "virtual-assistant": {
@@ -283,7 +280,7 @@
           "title": "Try and explore different combinations"
         }
       },
-      "view-guided-tour": "View the tool's <StartTour>guided tour</StartTour>",
+      "view-guided-tour": "View tips for use!",
       "view-guided-tour-label": "Start the tool's guided tour"
     }
   },

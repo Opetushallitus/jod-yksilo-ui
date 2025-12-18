@@ -1,7 +1,6 @@
 import type { components } from '@/api/schema';
 import { AiInfo, Breadcrumb, OpportunityCard } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
-import { InfoBox } from '@/components/InfoBox/InfoBox';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
@@ -324,7 +323,6 @@ const Tool = () => {
 
   const [currentTab, setCurrentTab] = React.useState<TabName>(savedTab);
   const scrollRef = React.useRef<HTMLDivElement>(null);
-  const { isLoggedIn } = useLoaderData<ToolLoaderData>();
   const [onboardingTourActive, setOnboardingTourActive] = React.useState(false);
 
   React.useEffect(() => {
@@ -410,7 +408,6 @@ const Tool = () => {
         {t('tool.description')}
         <OnboardingTour setOnboardingTourActive={setOnboardingTourActive} setCurrentTab={setCurrentTab} />
       </p>
-      <InfoBox text={isLoggedIn ? t('tool.info.logged-in') : t('tool.info.logged-out')} />
       <title>{t('tool.title')}</title>
       {lg ? (
         // Desktop

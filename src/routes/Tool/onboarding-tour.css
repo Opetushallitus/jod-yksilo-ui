@@ -1,0 +1,124 @@
+@import 'driver.js/dist/driver.css';
+
+.driver-popover {
+  background-color: var(--color-primary-gray);
+  color: var(--color-white);
+  padding: var(--spacing-4);
+  border-radius: var(--radius);
+  max-width: 310px;
+
+  .driver-popover-close-btn {
+    color: var(--color-white);
+    width: var(--spacing-5);
+    height: var(--spacing-5);
+    right: var(--spacing-4);
+    top: var(--spacing-4);
+  }
+
+  .driver-popover-title {
+    color: var(--color-white);
+    font-family: var(--font-arial);
+    font-size: var(--text-card-label);
+    line-height: var(--spacing-5);
+    margin-right: var(--spacing-5);
+    font-weight: var(--tw-font-weight, var(--text-card-label--font-weight));
+  }
+  .driver-popover-description {
+    color: var(--color-white);
+    font-family: var(--font-arial);
+    font-size: var(--text-card-label);
+    line-height: var(--spacing-5);
+    font-weight: var(--font-weight-normal);
+  }
+  .driver-popover-progress-text {
+    color: var(--color-white);
+    font-family: var(--font-arial);
+    font-size: var(--text-card-label);
+    line-height: var(--spacing-5);
+    font-weight: var(--font-weight-normal);
+  }
+
+  .driver-popover-navigation-btns > button {
+    color: var(--color-white);
+    font-family: var(--font-arial);
+    font-size: var(--text-card-label);
+    line-height: var(--spacing-5);
+    font-weight: var(--tw-font-weight, var(--text-card-label--font-weight));
+    text-shadow: none;
+    border-style: none;
+    background-color: transparent;
+  }
+
+  .driver-popover-arrow {
+    &.driver-popover-arrow-side-left {
+      border-left-color: var(--color-primary-gray);
+    }
+    &.driver-popover-arrow-side-right {
+      border-right-color: var(--color-primary-gray);
+    }
+    &.driver-popover-arrow-side-top {
+      border-top-color: var(--color-primary-gray);
+    }
+    &.driver-popover-arrow-side-bottom {
+      border-bottom-color: var(--color-primary-gray);
+    }
+  }
+}
+
+@keyframes showA {
+  0%,
+  33% {
+    opacity: 1;
+  }
+  34%,
+  92% {
+    opacity: 0;
+  }
+  93%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes showB {
+  0%,
+  33% {
+    opacity: 0;
+  }
+  34%,
+  92% {
+    opacity: 1;
+  }
+  93%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes waveRotate {
+  0%,
+  33% {
+    transform: rotate(0deg);
+  }
+
+  43% {
+    transform: rotate(-15deg);
+  }
+  53% {
+    transform: rotate(15deg);
+  }
+  63% {
+    transform: rotate(-15deg);
+  }
+  73% {
+    transform: rotate(15deg);
+  }
+  83% {
+    transform: rotate(0deg);
+  }
+
+  93%,
+  100% {
+    transform: rotate(0deg);
+  }
+}

@@ -744,7 +744,6 @@
       "login-description": "Genom att logga in i tjänsten kan du importera dina uppgifter från kompetensprofilen och exportera dina uppgifter till kompetensprofilen. Om du ännu inte har en kompetensprofil kan du skapa en.\t",
       "title": "Din kompetensprofil"
     },
-    "description": "Fyll i dina intressen och kunskaper på den här sidan eller importera dem från din kompetensprofil. Du kan använda reglagen för att filtrera de möjligheter som föreslås för dig, till exempel enligt om du letar efter karriärmöjligheter med din nuvarande kompetens eller nya karriärer baserat på dina intressen. Testa och undersök olika kombinationer! Du kan spara dina uppgifter och de möjligheter som intresserar dig som favoriter genom att logga in på tjänsten.\n",
     "info-overview": {
       "data-from-profile": "Information som importerats från kompetensprofilen",
       "description": "Se all information som du har kartlagt och importerat från din profil och som påverkar de möjligheter som erbjuds dig.\n",

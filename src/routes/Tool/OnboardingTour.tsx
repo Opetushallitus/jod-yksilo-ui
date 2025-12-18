@@ -1,9 +1,10 @@
 import { useMediaQueries } from '@jod/design-system';
-import { JodRemove } from '@jod/design-system/icons';
+import { JodRemove, JodWavingHand, JodWavingHandModified } from '@jod/design-system/icons';
 import { driver, PopoverDOM, type DriveStep } from 'driver.js';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import './onboarding-tour.css';
 
 interface OnboardingTourProps {
   setOnboardingTourActive: (active: boolean) => void;
@@ -68,9 +69,12 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
           },
         },
         {
+          element: '#tool-your-info',
           popover: {
             title: t('tool.tour.desktop.step-6.title'),
             description: t('tool.tour.desktop.step-6.description'),
+            side: 'right',
+            align: 'center',
           },
         },
       ];
@@ -198,6 +202,7 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
       nextBtnText: t('tool.tour.buttons.next'),
       prevBtnText: t('tool.tour.buttons.previous'),
       steps: steps,
+      overlayOpacity: 0.25,
       onDestroyed: () => {
         setOnboardingTourActive(false);
       },
@@ -223,19 +228,21 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
   }, [lg]);
 
   return (
-    <span className="block mt-3">
-      <Trans
-        i18nKey="tool.tour.view-guided-tour"
-        components={{
-          StartTour: (
-            <button
-              className="cursor-pointer text-accent"
-              onClick={startTour}
-              aria-label={t('tool.tour.view-guided-tour-label')}
-            />
-          ),
-        }}
-      />
+    <span className="block mt-6">
+      <button
+        className="cursor-pointer bg-bg-gray-2 text-accent flex items-center gap-3 px-3 py-2 rounded-sm"
+        onClick={startTour}
+        aria-label={t('tool.tour.view-guided-tour-label')}
+      >
+        <div className="relative w-6 h-6">
+          <JodWavingHand size={24} className="absolute inset-0 w-full h-full animate-[showA_3s_infinite]" />
+          <JodWavingHandModified
+            size={24}
+            className="absolute inset-0 w-full h-full origin-[35%_75%] [animation:showB_3s_infinite,waveRotate_3s_infinite_ease-in-out]"
+          />
+        </div>
+        <div>{t('tool.tour.view-guided-tour')}</div>
+      </button>
     </span>
   );
 };
