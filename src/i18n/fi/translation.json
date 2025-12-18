@@ -807,7 +807,6 @@
       "login-description": "Kirjautumalla palveluun voit tuoda tietojasi osaamisprofiilista ja viedä tietojasi osaamisprofiiliin. Jos sinulla ei vielä ole ole osaamisprofiilia, voit luoda sen.",
       "title": "Osaamisprofiilisi"
     },
-    "description": "Täytä tälle sivulle kiinnostuksiasi ja osaamisiasi tai tuo ne osaamisprofiilistasi. Voit suodattaa säätimillä sinulle ehdotettuja mahdollisuuksia esimerkiksi sen mukaan, etsitkö uramahdollisuuksia nykyisellä osaamisellasi tai uusia uria kiinnostuksiesi perusteella. Kokeile ja tutki erilaisia yhdistelmiä! Voit tallentaa tietosi ja sinua kiinnostavat mahdollisuudet suosikiksesi kirjautumalla palveluun.",
     "education-opportunity-duration": "Keskimääräinen kesto",
     "education-opportunity-duration-tooltip": "Koulutuksen kesto kertoo, kuinka kauan koulutus tavallisesti kestää. Se ilmaistaan yleensä vuosina tai kuukausina ja perustuu koulutuksen laajuuteen ja opintojen etenemiseen normaalissa tahdissa.",
     "education-opportunity-koulutusala": "Yleisin koulutusala",
