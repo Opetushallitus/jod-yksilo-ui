@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import { Metric } from 'web-vitals';
 import './i18n/config';
 import './index.css';
-import { getRoutes, serviceBreakRoutes } from './routes';
+import { getRoutes } from './routes';
 import { loadFeatures } from './utils/features';
 
 try {
@@ -14,8 +14,7 @@ try {
   // If feature loading fails, the app will continue to work with default disabled features.
 }
 
-const serviceBreakActive = false;
-export const router = createBrowserRouter(serviceBreakActive ? serviceBreakRoutes : getRoutes(), {
+export const router = createBrowserRouter(getRoutes(), {
   basename: '/yksilo',
 });
 
