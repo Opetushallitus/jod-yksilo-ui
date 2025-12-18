@@ -166,29 +166,6 @@ function getTranslationObjectByLang(excelDataArray, lang, existingTranslations, 
   return sortedResult;
 }
 
-// Function to unflatten translations
-function unflattenTranslations(flatTranslations) {
-  const result = {};
-
-  for (const [flatKey, value] of Object.entries(flatTranslations)) {
-    const keys = flatKey.split('.');
-    let current = result;
-
-    for (const [index, key] of keys.entries()) {
-      if (index === keys.length - 1) {
-        current[key] = value;
-      } else {
-        if (!current[key]) {
-          current[key] = {};
-        }
-        current = current[key];
-      }
-    }
-  }
-
-  return result;
-}
-
 function readTranslations(lang, file) {
   const translationPath = path.join(translationsDir, lang, file);
   if (fs.existsSync(translationPath)) {
@@ -295,21 +272,6 @@ function updateExistingTranslations(existingTranslations, importedFlatTranslatio
   }
 }
 
-function addKeysFromDraft(existingTranslations, importedFlatTranslations, draftTranslations) {
-  // Add keys from importedFlatTranslations that exist in draft
-  // (moving them from draft to translation.json)
-  const flatDraft = flattenTranslations(draftTranslations);
-
-  for (const [flatKey, value] of Object.entries(importedFlatTranslations)) {
-    const keys = flatKey.split('.');
-
-    // If key is in draft (regardless if it's in existingTranslations), add/update it
-    if (flatKey in flatDraft) {
-      setValueAtPath(existingTranslations, keys, value);
-    }
-  }
-}
-
 function filterExistingKeys(importedFlatTranslations, existingTranslations, draftTranslations) {
   // Flatten both existing translation files
   const flatExisting = flattenTranslations(existingTranslations);
@@ -381,6 +343,10 @@ const languages = ['fi', 'sv', 'en'];
 const translationFile = 'translation.json';
 const draftTranslationFile = 'draft.translation.json';
 
+// Read Finnish translations once to use as reference for which keys to import
+const fiTranslations = readTranslations('fi', translationFile);
+const fiDraftTranslations = readTranslations('fi', draftTranslationFile);
+
 for (const lang of languages) {
   // Read existing translations first (needed for cleanTranslationText)
   const existingTranslations = readTranslations(lang, translationFile);
@@ -393,12 +359,8 @@ for (const lang of languages) {
     draftTranslations,
   );
 
-  // Only keep keys from Excel that already exist in either file
-  const filteredFlatTranslations = filterExistingKeys(
-    importedFlatTranslations,
-    existingTranslations,
-    draftTranslations,
-  );
+  // Only keep keys from Excel that exist in Finnish translation files (use Finnish as reference)
+  const filteredFlatTranslations = filterExistingKeys(importedFlatTranslations, fiTranslations, fiDraftTranslations);
 
   // Move duplicate keys back to draft if they are not in Excel
   moveDuplicateKeysBackToDraft(existingTranslations, draftTranslations, Object.keys(filteredFlatTranslations));
@@ -406,8 +368,14 @@ for (const lang of languages) {
   // Update translation.json with filtered keys (preserve existing structure)
   updateExistingTranslations(existingTranslations, filteredFlatTranslations);
 
-  // Add keys from draft to translation.json if they are in Excel
-  addKeysFromDraft(existingTranslations, filteredFlatTranslations, draftTranslations);
+  // Add all keys from filteredFlatTranslations that are in Finnish files (not just in current language's draft)
+  // This ensures that all keys in Finnish translation files are added to other languages too
+  for (const [flatKey, value] of Object.entries(filteredFlatTranslations)) {
+    const keys = flatKey.split('.');
+    if (!keyPathExists(existingTranslations, keys)) {
+      setValueAtPath(existingTranslations, keys, value);
+    }
+  }
 
   writeTranslations(lang, translationFile, existingTranslations);
 
