@@ -497,11 +497,6 @@
   "print": "Skriv ut",
   "privacy-policy": "Dataskyddsbeskrivning",
   "profile": {
-    "banner": {
-      "description": "Spara och redigera identifierade kompetenser i din profil.",
-      "link-text": "Öppna profilen",
-      "title": "Min kompetensprofil"
-    },
     "competences": {
       "add": "Lägg till kunskaper",
       "description": "Nedan hittar du alla kunskaper som du har lagt till i din kompetensprofil. Du kan själv välja hur dina kunskaper ska grupperas och presenteras.\n",
@@ -743,15 +738,11 @@
     "update-success": "Uppdateringen lyckades"
   },
   "tool": {
-    "banner": {
-      "description": "Hitta utbildnings- och karriärmöjligheter enkelt. Testa olika kombinationer genom att importera information från kompetensprofilen.\n",
-      "link-text": "Leta efter möjligheter",
-      "title": "Leta efter möjligheter"
-    },
     "competency-profile": {
       "description": "Importera dina uppgifter från kompetensprofilen och få förslag på möjligheter utifrån dem.\t",
       "help": "Du kan själv välja vilka uppgifter du vill importera. Uppgifterna som importerats från kompetensprofilen visas i sammanfattningen av dina uppgifter. Kom ihåg att uppdatera dina möjligheter efter att du har importerat uppgifter.\t\n\nDu kan uppdatera din kompetensprofil med uppgifterna som kartläggs på den här sidan. Du hittar dem i fortsättningen i kompetensprofilen under Annan kompetens och Mina intressen.\t",
-      "login-description": "Genom att logga in i tjänsten kan du importera dina uppgifter från kompetensprofilen och exportera dina uppgifter till kompetensprofilen. Om du ännu inte har en kompetensprofil kan du skapa en.\t"
+      "login-description": "Genom att logga in i tjänsten kan du importera dina uppgifter från kompetensprofilen och exportera dina uppgifter till kompetensprofilen. Om du ännu inte har en kompetensprofil kan du skapa en.\t",
+      "title": "Din kompetensprofil"
     },
     "description": "Fyll i dina intressen och kunskaper på den här sidan eller importera dem från din kompetensprofil. Du kan använda reglagen för att filtrera de möjligheter som föreslås för dig, till exempel enligt om du letar efter karriärmöjligheter med din nuvarande kompetens eller nya karriärer baserat på dina intressen. Testa och undersök olika kombinationer! Du kan spara dina uppgifter och de möjligheter som intresserar dig som favoriter genom att logga in på tjänsten.\n",
     "info-overview": {
@@ -802,11 +793,9 @@
         "conversational-virtual-assistant": "Identifiera intressen med artificiell intelligens",
         "description": "Beskriv dina intressen och välj de mest lämpliga förslagen utifrån vilka möjligheter kommer att föreslås för dig.\t",
         "virtual-assistant": {
-          "description": "Börja kartlägga intressen genom att diskutera med artificiell intelligens. Genom att svara på frågorna får du information om dina intressen och utifrån dem kan vi erbjuda dig lämpliga intressen.",
           "error": "Fel vid generering av svar. Försök igen med samma eller ny input.",
-          "intrests": "Intressen",
+          "intrests": "Intressen ({{count}})",
           "loading": "Hämtar svar... Vänligen vänta ett ögonblick.",
-          "respond-to-chat": "Svara till chatten",
           "selected-interests": "Valda intressen",
           "send": "Skicka",
           "title": "Kartläggning av intressen"

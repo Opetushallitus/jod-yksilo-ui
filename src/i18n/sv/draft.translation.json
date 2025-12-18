@@ -12,7 +12,6 @@
     "description-tool-item-2": "utbildningsmöjligheter",
     "description-tool-item-3": "individuella förslag på möjligheter som passar dig"
   },
-  "competences-identify-failed": "AI-kompetensidentifiering misslyckades, lägg till kompetenser genom att redigera utbildningen manuellt.",
   "cv": {
     "basic-info": {
       "birthyear": "Födelseår",
@@ -66,21 +65,11 @@
     "add-new-activity-button": "Lägg aktivitet",
     "delete-free-time-activity-button": "Ta bort"
   },
-  "home": {
-    "need-personal-guidance-content": "I väglednings- och rådgivningstjänster hittar du stöd för att fundera över karriär- och utbildningsalternativ. Begränsa listan över tjänster för att hitta de som passar dig bäst."
-  },
   "i-allow": "Jag tillåter",
   "i-disallow": "Jag tillåter inte",
   "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
-  "navigation": {
-    "extra": {
-      "palveluhakemisto": {
-        "url": "https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster/service"
-      }
-    }
-  },
   "no-match": {
     "description": "Sidan du söker kunde inte hittas eller länken är föråldrad. Kontrollera adressen, öppna menyn eller gå till startsidan.",
     "go-home": "Gå till startsidan",
@@ -274,9 +263,6 @@
       "link-text": "Hitta möjligheter",
       "title": "Utforska dina alternativ"
     },
-    "competency-profile": {
-      "title": "Importera från kompetensprofilen"
-    },
     "education-opportunity-duration": "Genomsnittlig varaktighet",
     "education-opportunity-duration-tooltip": "Utbildningens längd anger hur länge utbildningen vanligtvis varar. Den uttrycks oftast i år eller månader och baseras på utbildningens omfattning samt studiernas framsteg i normal takt.",
     "education-opportunity-koulutusala": "Det vanligaste utbildningsområdet",
@@ -297,7 +283,6 @@
           "success-toast": "Data har importerats till översikten"
         }
       },
-      "export": {},
       "interests": {
         "virtual-assistant": {
           "conversation": "Konversation",
