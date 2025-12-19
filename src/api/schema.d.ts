@@ -4,22 +4,6 @@
  */
 
 export interface paths {
-  '/api/profiili/yksilo': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['yksiloGet'];
-    put: operations['yksiloUpdate'];
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/profiili/yksilo/tiedot-ja-luvat': {
     parameters: {
       query?: never;
@@ -563,66 +547,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/external-api/v1/tyomahdollisuudet': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get all työmahdollisuudet paged of by page and size
-     * @description Returns all työmahdollisuudet basic information in JSON-format.
-     */
-    get: operations['externalApiV1FindTyoMahdollisuudet'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/external-api/v1/profiilit': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get all profiilit paged of by page and size
-     * @description Returns all profiilit basic information in JSON-format.
-     */
-    get: operations['externalApiV1FindProfiilit'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/external-api/v1/koulutusmahdollisuudet': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get all koulutusmahdollisuudet paged of by page and size
-     * @description Returns all koulutusmahdollisuudet basic information in JSON-format.
-     */
-    get: operations['externalApiV1FindKoulutusMahdollisuudet'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/tyomahdollisuudet': {
     parameters: {
       query?: never;
@@ -655,6 +579,22 @@ export interface paths {
      * @description Returns one työmahdollisuus full content by id
      */
     get: operations['tyomahdollisuusFindById'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/yksilo': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['yksiloGet'];
     put?: never;
     post?: never;
     delete?: never;
@@ -1092,126 +1032,6 @@ export interface components {
       /** Format: int32 */
       aakkosIndeksi: number;
     };
-    ExtTyoMahdollisuusDto: {
-      /** Format: uuid */
-      id?: string;
-      otsikko?: components['schemas']['LokalisoituTeksti'];
-      tiivistelma?: components['schemas']['LokalisoituTeksti'];
-      kuvaus?: components['schemas']['LokalisoituTeksti'];
-      /** Format: uri */
-      ammattiryhma?: string;
-      aktiivinen?: boolean;
-    };
-    SivuDtoExtTyoMahdollisuusDto: {
-      sisalto: components['schemas']['ExtTyoMahdollisuusDto'][];
-      /**
-       * Format: int64
-       * @example 30
-       */
-      maara: number;
-      /**
-       * Format: int32
-       * @example 3
-       */
-      sivuja: number;
-    };
-    ExtAmmattiKiinnostusDto: {
-      /** Format: uri */
-      uri?: string;
-      koodi?: string;
-    };
-    ExtOsaamisKiinnostusDto: {
-      /** Format: uri */
-      uri?: string;
-    };
-    ExtProfiiliDto: {
-      /** Format: uuid */
-      id?: string;
-      /** Format: int32 */
-      syntymavuosi?: number;
-      /** @enum {string} */
-      sukupuoli?: 'MIES' | 'NAINEN';
-      kotikunta?: string;
-      aidinkieli?: string;
-      /** @enum {string} */
-      valittuKieli?: 'fi' | 'sv' | 'en';
-      yksilonOsaamiset?: components['schemas']['ExtYksilonOsaaminenDto'][];
-      osaamisKiinnostukset?: components['schemas']['ExtOsaamisKiinnostusDto'][];
-      ammattiKiinnostukset?: components['schemas']['ExtAmmattiKiinnostusDto'][];
-      suosikit?: components['schemas']['ExtSuosikkiDto'][];
-      paamaarat?: components['schemas']['ExtTavoiteDto'][];
-    };
-    ExtSuosikkiDto: {
-      /** Format: uuid */
-      tyomahdollisuusId?: string;
-      /** Format: uuid */
-      koulutusmahdollisuusId?: string;
-    };
-    ExtTavoiteDto: {
-      /**
-       * @deprecated
-       * @description This field is deprecated. Tavoite type is not differentiated anymore
-       * @enum {string}
-       */
-      tyyppi?: 'LYHYT' | 'PITKA' | 'MUU';
-      /** Format: uuid */
-      tyomahdollisuusId?: string;
-      /**
-       * Format: uuid
-       * @deprecated
-       * @description This field is deprecated. Tavoite can only be tyomahdollisuus
-       */
-      koulutusmahdollisuusId?: string;
-    };
-    ExtYksilonOsaaminenDto: {
-      /** @enum {string} */
-      lahde?: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
-      /** Format: uri */
-      uri?: string;
-    };
-    SivuDtoExtProfiiliDto: {
-      sisalto: components['schemas']['ExtProfiiliDto'][];
-      /**
-       * Format: int64
-       * @example 30
-       */
-      maara: number;
-      /**
-       * Format: int32
-       * @example 3
-       */
-      sivuja: number;
-    };
-    ExtKoulutusMahdollisuusDto: {
-      /** Format: uuid */
-      id?: string;
-      otsikko?: components['schemas']['LokalisoituTeksti'];
-      tiivistelma?: components['schemas']['LokalisoituTeksti'];
-      kuvaus?: components['schemas']['LokalisoituTeksti'];
-      kesto?: components['schemas']['KestoJakauma'];
-      aktiivinen?: boolean;
-    };
-    KestoJakauma: {
-      /** Format: double */
-      minimi?: number;
-      /** Format: double */
-      mediaani?: number;
-      /** Format: double */
-      maksimi?: number;
-    };
-    SivuDtoExtKoulutusMahdollisuusDto: {
-      sisalto: components['schemas']['ExtKoulutusMahdollisuusDto'][];
-      /**
-       * Format: int64
-       * @example 30
-       */
-      maara: number;
-      /**
-       * Format: int32
-       * @example 3
-       */
-      sivuja: number;
-    };
     AmmattiryhmaBasicDto: {
       /** Format: uri */
       uri?: string;
@@ -1292,8 +1112,6 @@ export interface components {
       sukunimi?: string;
       csrf: components['schemas']['CsrfTokenDto'];
       tervetuloapolku?: boolean;
-      lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
-      lupaKayttaaTekoalynKoulutukseen?: boolean;
     };
     KiinnostuksetExportDto: {
       vapaateksti?: components['schemas']['LokalisoituTeksti'];
@@ -1562,48 +1380,6 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  yksiloGet: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['YksiloCsrfDto'];
-        };
-      };
-    };
-  };
-  yksiloUpdate: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['YksiloDto'];
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
   yksiloGetTiedotJaLuvat: {
     parameters: {
       query?: never;
@@ -2956,80 +2732,6 @@ export interface operations {
       };
     };
   };
-  externalApiV1FindTyoMahdollisuudet: {
-    parameters: {
-      query?: {
-        sivu?: number;
-        koko?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['SivuDtoExtTyoMahdollisuusDto'];
-        };
-      };
-    };
-  };
-  externalApiV1FindProfiilit: {
-    parameters: {
-      query?: {
-        sivu?: number;
-        koko?: number;
-        /**
-         * @description Only get profiles modified after this timestamp
-         * @example 2025-07-03T09:00:00Z
-         */
-        muokattuJalkeen?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['SivuDtoExtProfiiliDto'];
-        };
-      };
-    };
-  };
-  externalApiV1FindKoulutusMahdollisuudet: {
-    parameters: {
-      query?: {
-        sivu?: number;
-        koko?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['SivuDtoExtKoulutusMahdollisuusDto'];
-        };
-      };
-    };
-  };
   tyomahdollisuusFindAll: {
     parameters: {
       query?: {
@@ -3072,6 +2774,26 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['TyomahdollisuusFullDto'];
+        };
+      };
+    };
+  };
+  yksiloGet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['YksiloCsrfDto'];
         };
       };
     };
