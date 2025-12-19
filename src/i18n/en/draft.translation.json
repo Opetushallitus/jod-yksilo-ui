@@ -204,6 +204,7 @@
         }
       }
     },
+    "opportunities-loaded": "Opportunities loaded. {{count}} results.",
     "settings": {
       "general": {
         "duration": "Duration",
@@ -282,7 +283,8 @@
       },
       "view-guided-tour": "View tips for use!",
       "view-guided-tour-label": "Start the tool's guided tour"
-    }
+    },
+    "updating": "Updating opportunities…"
   },
   "tooltip": {
     "info": "Guide"

@@ -290,6 +290,7 @@
         }
       }
     },
+    "opportunities-loaded": "Möjligheter laddade. Totalt {{count}} möjligheter hittades.",
     "settings": {
       "controls": "Kontroller",
       "general": {
@@ -370,7 +371,8 @@
       },
       "view-guided-tour": "Titta på verktygets tips!",
       "view-guided-tour-label": "Starta verktygets guidade genomgång"
-    }
+    },
+    "updating": "Laddar möjligheter…"
   },
   "tooltip": {
     "info": "Guide"
