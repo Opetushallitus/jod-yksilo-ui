@@ -2,6 +2,7 @@ import type { components } from '@/api/schema';
 import { AiInfo, Breadcrumb, OpportunityCard } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
+import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
@@ -34,6 +35,7 @@ const ExploreOpportunities = () => {
     suosikit,
     filters,
     isLoading,
+    totalItems,
     updateEhdotuksetAndTyomahdollisuudet,
     toggleSuosikki,
   } = useToolStore(
@@ -44,6 +46,7 @@ const ExploreOpportunities = () => {
       suosikit: state.suosikit,
       filters: state.filters,
       isLoading: state.ehdotuksetLoading || state.mahdollisuudetLoading,
+      totalItems: state.filteredMahdollisuudetCount,
       toggleSuosikki: state.toggleSuosikki,
       updateEhdotuksetAndTyomahdollisuudet: state.updateEhdotuksetAndTyomahdollisuudet,
     })),
@@ -92,6 +95,7 @@ const ExploreOpportunities = () => {
   }, [getTotalFilterCount, t]);
 
   const updateButtonLabel = isLoading ? t('updating-list') : t('update');
+  const statusText = isLoading ? t('tool.updating') : t('tool.opportunities-loaded', { count: totalItems });
   const { permanentNotesHeight } = useNoteStack();
   const top = `${(lg ? 66 : 120) + permanentNotesHeight}px`;
 
@@ -135,51 +139,63 @@ const ExploreOpportunities = () => {
       {settingsOpen && (
         <ToolSettings ref={firstSettingRef} isOpen={settingsOpen} onClose={onCloseSettings} isModal={!lg} />
       )}
-      {isLoading ? null : (
-        <>
-          <ul
-            id="tool-your-opportunities-list"
-            ref={scrollRef}
-            className="flex flex-col gap-5 sm:gap-3 mb-8"
-            style={{
-              scrollMarginTop: '140px',
-            }}
-            data-testid="tool-opportunities-list"
-          >
-            {mixedMahdollisuudet.map((mahdollisuus) => {
-              const { id, mahdollisuusTyyppi } = mahdollisuus;
-              const ehdotus = mahdollisuusEhdotukset?.[id];
-              const isFavorite = suosikit?.find((s) => s.kohdeId === id) !== undefined;
 
-              return ehdotus ? (
-                <OpportunityCard
-                  key={id}
-                  as="li"
-                  from="tool"
-                  to={`/${i18n.language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}`}
-                  isFavorite={isFavorite}
-                  isLoggedIn={isLoggedIn}
-                  toggleFavorite={() => void toggleSuosikki(id, ehdotus.tyyppi)}
-                  name={getLocalizedText(mahdollisuus.otsikko)}
-                  description={getLocalizedText(mahdollisuus.tiivistelma)}
-                  matchValue={ehdotus?.pisteet}
-                  matchLabel={t('fit')}
-                  headingLevel="h3"
-                  ammattiryhma={mahdollisuus.ammattiryhma}
-                  ammattiryhmaNimet={ammattiryhmaNimet}
-                  aineisto={mahdollisuus.aineisto}
-                  tyyppi={mahdollisuus.tyyppi}
-                  kesto={mahdollisuus.kesto}
-                  yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
-                  type={mahdollisuusTyyppi}
-                  rateId={id}
-                />
-              ) : null;
-            })}
-          </ul>
-          <YourOpportunitiesPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="mb-7" />
-        </>
-      )}
+      <section aria-busy={isLoading}>
+        <div role="status" aria-live="polite" className="sr-only">
+          {statusText}
+        </div>
+
+        {isLoading ? (
+          <div aria-hidden="true" className="flex flex-col gap-5 sm:gap-3 mb-8">
+            <OpportunityCardSkeleton />
+            <OpportunityCardSkeleton />
+          </div>
+        ) : (
+          <>
+            <ul
+              id="tool-your-opportunities-list"
+              ref={scrollRef}
+              className="flex flex-col gap-5 sm:gap-3 mb-8"
+              style={{
+                scrollMarginTop: '140px',
+              }}
+              data-testid="tool-opportunities-list"
+            >
+              {mixedMahdollisuudet.map((mahdollisuus) => {
+                const { id, mahdollisuusTyyppi } = mahdollisuus;
+                const ehdotus = mahdollisuusEhdotukset?.[id];
+                const isFavorite = suosikit?.find((s) => s.kohdeId === id) !== undefined;
+
+                return ehdotus ? (
+                  <OpportunityCard
+                    key={id}
+                    as="li"
+                    from="tool"
+                    to={`/${i18n.language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}`}
+                    isFavorite={isFavorite}
+                    isLoggedIn={isLoggedIn}
+                    toggleFavorite={() => void toggleSuosikki(id, ehdotus.tyyppi)}
+                    name={getLocalizedText(mahdollisuus.otsikko)}
+                    description={getLocalizedText(mahdollisuus.tiivistelma)}
+                    matchValue={ehdotus?.pisteet}
+                    matchLabel={t('fit')}
+                    headingLevel="h3"
+                    ammattiryhma={mahdollisuus.ammattiryhma}
+                    ammattiryhmaNimet={ammattiryhmaNimet}
+                    aineisto={mahdollisuus.aineisto}
+                    tyyppi={mahdollisuus.tyyppi}
+                    kesto={mahdollisuus.kesto}
+                    yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
+                    type={mahdollisuusTyyppi}
+                    rateId={id}
+                  />
+                ) : null;
+              })}
+            </ul>
+            <YourOpportunitiesPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="mb-7" />
+          </>
+        )}
+      </section>
     </>
   );
 };

@@ -209,6 +209,7 @@
         }
       }
     },
+    "opportunities-loaded": "Mahdollisuudet ladattu. Löydettiin yhteensä {{count}} mahdollisuutta.",
     "settings": {
       "general": {
         "duration": "Kesto",
@@ -289,7 +290,8 @@
       },
       "view-guided-tour": "Katso vinkit käyttöön!",
       "view-guided-tour-label": "Käynnistä työkalun opastettu esittely"
-    }
+    },
+    "updating": "Ladataan mahdollisuuksia…"
   },
   "tooltip": {
     "info": "Ohje"
