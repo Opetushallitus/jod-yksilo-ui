@@ -1,5 +1,3 @@
-import { client } from '@/api/client';
-import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { LogoutFormContext } from '@/routes/Root';
@@ -8,43 +6,14 @@ import { isFeatureEnabled } from '@/utils/features';
 import { Button, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRouteLoaderData } from 'react-router';
 import { PersonalDetails, ShareLinkSection, TmtImportExport } from '.';
-import { Divider, ProfileNavigationList, ProfileSectionTitle, ToggleAllow, ToolCard } from '../components';
+import { Divider, ProfileNavigationList, ProfileSectionTitle, ToolCard } from '../components';
 
 const DownloadLink = ({ children, className }: { children: React.ReactNode; className: string }) => (
   <a href={`${import.meta.env.BASE_URL}api/profiili/yksilo/vienti`} className={className}>
     {children}
   </a>
 );
-
-const ToggleWithText = ({
-  title,
-  description,
-  checked,
-  onChange,
-  disabled = false,
-  testId,
-}: {
-  title: string;
-  description: string;
-  checked: boolean;
-  onChange: () => void;
-  disabled: boolean;
-  testId?: string;
-}) => {
-  return (
-    <div className="flex items-center justify-between gap-4 py-4 border-b border-[#CCC]" data-testid={testId}>
-      <div className="flex-1 font-arial">
-        <p className="text-form-label">{title}</p>
-        <p className="text-help-mobile sm:text-help">{description}</p>
-      </div>
-      <div className="flex items-center gap-3">
-        <ToggleAllow checked={checked} disabled={disabled} onChange={onChange} />
-      </div>
-    </div>
-  );
-};
 
 const Preferences = () => {
   const { t } = useTranslation();
@@ -53,7 +22,6 @@ const Preferences = () => {
   const resetToolStore = useToolStore((state) => state.reset);
   const logoutForm = React.useContext(LogoutFormContext);
   const { showDialog } = useModal();
-  const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
 
   const deleteProfile = async () => {
     resetToolStore();
@@ -64,48 +32,6 @@ const Preferences = () => {
     logoutForm?.appendChild(deletionInput);
     logoutForm?.submit();
   };
-
-  const [lupaLuovuttaaTiedotUlkopuoliselle, setLupaLuovuttaaTiedotUlkopuoliselle] = React.useState(
-    data?.lupaLuovuttaaTiedotUlkopuoliselle ?? false,
-  );
-  const [lupaKayttaaTekoalynKoulutukseen, setLupaKayttaaTekoalynKoulutukseen] = React.useState(
-    data?.lupaKayttaaTekoalynKoulutukseen ?? false,
-  );
-  const [updating, setUpdating] = React.useState<boolean>(false);
-
-  // Store previous values for comparison to determine actual change
-  const prevValues = React.useRef({
-    lupaLuovuttaaTiedotUlkopuoliselle,
-    lupaKayttaaTekoalynKoulutukseen,
-  });
-
-  const isEqual = (a: object, b: object) => JSON.stringify(a) === JSON.stringify(b);
-
-  // Effect to call update only when data change (and not on first render)
-  React.useEffect(() => {
-    const currentValues = {
-      lupaLuovuttaaTiedotUlkopuoliselle,
-      lupaKayttaaTekoalynKoulutukseen,
-    };
-
-    if (!isEqual(prevValues.current, currentValues)) {
-      // Values changed, call update endpoint
-      setUpdating(true);
-      client
-        .PUT('/api/profiili/yksilo', {
-          body: {
-            tervetuloapolku: data?.tervetuloapolku ?? false,
-            lupaLuovuttaaTiedotUlkopuoliselle: currentValues.lupaLuovuttaaTiedotUlkopuoliselle,
-            lupaKayttaaTekoalynKoulutukseen: currentValues.lupaKayttaaTekoalynKoulutukseen,
-          },
-        })
-        .finally(() => {
-          setUpdating(false);
-        });
-
-      prevValues.current = currentValues;
-    }
-  }, [lupaLuovuttaaTiedotUlkopuoliselle, lupaKayttaaTekoalynKoulutukseen, data?.tervetuloapolku]);
 
   return (
     <MainLayout
@@ -126,33 +52,9 @@ const Preferences = () => {
       <div className="mb-8 text-body-lg flex flex-col gap-7">
         <p>{t('preferences.description')}</p>
       </div>
-      <section className="mb-8">
-        <h3 className="text-heading-3-mobile sm:text-heading-3 mb-3">
-          {t('preferences.data-disclosure-unanonymized.title')}
-        </h3>
-        <p className="font-arial text-body-md mb-5">{t('preferences.data-disclosure-unanonymized.description')}</p>
-        <ToggleWithText
-          title={t('preferences.data-disclosure-unanonymized.permission-education-and-planning.title')}
-          description={t('preferences.data-disclosure-unanonymized.permission-education-and-planning.description')}
-          checked={lupaLuovuttaaTiedotUlkopuoliselle}
-          onChange={() => setLupaLuovuttaaTiedotUlkopuoliselle(!lupaLuovuttaaTiedotUlkopuoliselle)}
-          disabled={updating}
-          testId="pref-share-third-parties"
-        />
-        <ToggleWithText
-          title={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.title')}
-          description={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.description')}
-          checked={lupaKayttaaTekoalynKoulutukseen}
-          onChange={() => {
-            setLupaKayttaaTekoalynKoulutukseen(!lupaKayttaaTekoalynKoulutukseen);
-          }}
-          disabled={updating}
-          testId="pref-ai-training"
-        />
-      </section>
-      <section className="mb-8">
-        <PersonalDetails />
-      </section>
+
+      <PersonalDetails />
+
       {isFeatureEnabled('TMT_INTEGRATION') && (
         <>
           <TmtImportExport />
