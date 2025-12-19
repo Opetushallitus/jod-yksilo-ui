@@ -24,7 +24,7 @@ export const ModalHeader = ({ text, className = '', testId, focusOnMount = true 
 
   return (
     <h2
-      className={tidyClasses(`mb-6 text-black text-hero-mobile sm:text-hero focus:outline-0 ${className}`)}
+      className={tidyClasses(`text-black text-heading-2-mobile sm:text-hero focus:outline-0 ${className}`)}
       data-testid={testId}
       ref={ref}
     >

@@ -96,6 +96,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
     <Modal
       name={headerText}
       open={isOpen}
+      topSlot={<ModalHeader text={headerText} testId="edit-other-competences" />}
       content={
         <FormProvider {...methods}>
           <Form
@@ -108,7 +109,6 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
               }
             }}
           >
-            <ModalHeader text={headerText} testId="edit-other-competences" />
             <Controller
               control={methods.control}
               name="osaamiset"
