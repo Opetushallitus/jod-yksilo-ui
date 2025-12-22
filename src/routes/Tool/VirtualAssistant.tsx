@@ -100,6 +100,12 @@ export const VirtualAssistant = () => {
     }
   };
 
+  // Clear virtual assistant state
+  const clearState = () => {
+    setHistory({});
+    setSelectedKiinnostukset([]);
+  };
+
   return (
     <ConfirmDialog
       title={<span id={titleId}>{t('tool.my-own-data.interests.virtual-assistant.title')}</span>}
@@ -300,7 +306,13 @@ export const VirtualAssistant = () => {
       // eslint-disable-next-line react/no-unstable-nested-components
       footer={(hideDialog) => (
         <div className="flex flex-row justify-between gap-5">
-          <Button onClick={hideDialog} label={t('cancel')} />
+          <Button
+            onClick={() => {
+              clearState();
+              hideDialog();
+            }}
+            label={t('cancel')}
+          />
           <Button
             onClick={() => {
               const newKiinnostukset = selectedKiinnostukset.map((k) => ({
@@ -319,10 +331,7 @@ export const VirtualAssistant = () => {
                 }),
               );
 
-              // Clear virtual assistant state
-              setHistory({});
-              setSelectedKiinnostukset([]);
-
+              clearState();
               hideDialog();
             }}
             label={t('save')}

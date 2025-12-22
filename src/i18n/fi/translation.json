@@ -865,7 +865,7 @@
         "description": "Kuvaile kiinnostuksesi ja valitse sopivimmat ehdotukset, joiden perusteella sinulle ehdotetaan mahdollisuuksia.",
         "virtual-assistant": {
           "error": "Virhe vastauksen muodostamisessa. Yritä uudestaan samalla tai uuden syötteen kanssa.",
-          "intrests": "Kiinnostukset ({{count}})",
+          "intrests": "Kiinnostukset",
           "loading": "Vastausta ladataan... Ole hyvä ja odota hetki.",
           "selected-interests": "Valitut kiinnostukset",
           "send": "Lähetä",

@@ -793,7 +793,7 @@
         "description": "Beskriv dina intressen och välj de mest lämpliga förslagen utifrån vilka möjligheter kommer att föreslås för dig.\t",
         "virtual-assistant": {
           "error": "Fel vid generering av svar. Försök igen med samma eller ny input.",
-          "intrests": "Intressen ({{count}})",
+          "intrests": "Intressen",
           "loading": "Hämtar svar... Vänligen vänta ett ögonblick.",
           "selected-interests": "Valda intressen",
           "send": "Skicka",
