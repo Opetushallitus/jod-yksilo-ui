@@ -190,13 +190,12 @@ export const ExperienceTableRow = ({
         <button
           type="button"
           aria-expanded={tagsVisibleState}
-          aria-label={t(tagsVisibleState ? 'close' : 'open')}
           onClick={() => setIsOpen(!isOpen)}
           className={`cursor-pointer flex gap-x-2 items-center ${sm ? 'text-nowrap pr-2' : 'pr-7'}`}
           data-testid={`experience-row-competences-toggle-${row.key}`}
         >
           {osaamisetCountTotal}
-          {tagsVisibleState ? <JodCaretUp /> : <JodCaretDown />}
+          {tagsVisibleState ? <JodCaretUp aria-hidden="true" /> : <JodCaretDown aria-hidden="true" />}
         </button>
       );
     }
