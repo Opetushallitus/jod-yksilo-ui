@@ -1,5 +1,5 @@
 import { client } from '@/api/client';
-import type { components } from '@/api/schema';
+import { osaamiset } from '@/api/osaamiset';
 import { LIMITS, OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicatesByKey } from '@/utils';
@@ -21,11 +21,21 @@ export const VirtualAssistant = () => {
       {
         message?: string;
         answer?: string;
-        kiinnostukset?: components['schemas']['Kiinnostus'][];
+        kiinnostukset?: {
+          uri: string;
+          nimi: Record<string, string>;
+          kuvaus: Record<string, string>;
+        }[];
       }
     >
   >({});
-  const [selectedKiinnostukset, setSelectedKiinnostukset] = React.useState<components['schemas']['Kiinnostus'][]>([]);
+  const [selectedKiinnostukset, setSelectedKiinnostukset] = React.useState<
+    {
+      uri: string;
+      nimi: Record<string, string>;
+      kuvaus: Record<string, string>;
+    }[]
+  >([]);
   const isSelectedKiinnostuksetEmpty = React.useMemo(() => selectedKiinnostukset.length === 0, [selectedKiinnostukset]);
 
   const [id, setId] = React.useState<string | undefined>(undefined);
@@ -57,23 +67,59 @@ export const VirtualAssistant = () => {
         },
         body: { [language]: value },
       });
+
+      // Fetch osaamiset for the returned kiinnostukset
+      const osaamisetData = await osaamiset.find(data?.kiinnostukset?.map((k) => k.esco_uri!) ?? []);
+      const osaamisetMap = osaamisetData.reduce(
+        (acc, osaaminen) => {
+          acc[osaaminen.uri] = osaaminen;
+          return acc;
+        },
+        {} as Record<
+          string,
+          {
+            uri: string;
+            nimi: Record<string, string>;
+            kuvaus: Record<string, string>;
+          }
+        >,
+      );
+
       setHistory((prevState) => ({
         ...prevState,
         [key]: {
           ...prevState[key],
           answer: error ? t('tool.my-own-data.interests.virtual-assistant.error') : data?.vastaus,
-          kiinnostukset: error ? undefined : data?.kiinnostukset,
+          kiinnostukset: error ? undefined : data?.kiinnostukset?.map((k) => osaamisetMap[k.esco_uri!]),
         },
       }));
     } else {
       const { data, error } = await client.POST('/api/keskustelut', { body: { [language]: value } });
+
+      // Fetch osaamiset for the returned kiinnostukset
+      const osaamisetData = await osaamiset.find(data?.kiinnostukset?.map((k) => k.esco_uri!) ?? []);
+      const osaamisetMap = osaamisetData.reduce(
+        (acc, osaaminen) => {
+          acc[osaaminen.uri] = osaaminen;
+          return acc;
+        },
+        {} as Record<
+          string,
+          {
+            uri: string;
+            nimi: Record<string, string>;
+            kuvaus: Record<string, string>;
+          }
+        >,
+      );
+
       setId(data?.id);
       setHistory((prevState) => ({
         ...prevState,
         [key]: {
           ...prevState[key],
           answer: error ? t('tool.my-own-data.interests.virtual-assistant.error') : data?.vastaus,
-          kiinnostukset: error ? undefined : data?.kiinnostukset,
+          kiinnostukset: error ? undefined : data?.kiinnostukset?.map((k) => osaamisetMap[k.esco_uri!]),
         },
       }));
     }
@@ -207,11 +253,11 @@ export const VirtualAssistant = () => {
                               <div className="flex flex-col gap-3">
                                 <ul className="flex flex-wrap gap-3">
                                   {row.kiinnostukset
-                                    .filter((k) => !selectedKiinnostukset.find((val) => val.kuvaus === k.kuvaus))
+                                    .filter((k) => !selectedKiinnostukset.find((val) => val.uri === k.uri))
                                     .map((k) => (
-                                      <li key={k.kuvaus ?? k.esco_uri}>
+                                      <li key={k.uri}>
                                         <Tag
-                                          label={k.kuvaus ?? k.esco_uri ?? ''}
+                                          label={k.nimi[language] ?? k.uri}
                                           sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
                                           onClick={() => {
                                             // eslint-disable-next-line sonarjs/no-nested-functions
@@ -282,9 +328,9 @@ export const VirtualAssistant = () => {
                 <div aria-labelledby={selectedKiinnostuksetLabelId} className="min-h-[144px] overflow-y-auto mt-4">
                   <ul className="flex flex-wrap gap-3">
                     {selectedKiinnostukset.map((k) => (
-                      <li key={k.kuvaus ?? k.esco_uri}>
+                      <li key={k.uri}>
                         <Tag
-                          label={k.kuvaus ?? k.esco_uri ?? ''}
+                          label={k.nimi[language] ?? k.uri}
                           sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
                           variant="added"
                           onClick={() => {
@@ -316,9 +362,9 @@ export const VirtualAssistant = () => {
           <Button
             onClick={() => {
               const newKiinnostukset = selectedKiinnostukset.map((k) => ({
-                id: k.esco_uri ?? k.kuvaus ?? '',
-                nimi: { [language]: k.kuvaus ?? '' },
-                kuvaus: { [language]: k.kuvaus ?? '' },
+                id: k.uri,
+                nimi: k.nimi,
+                kuvaus: k.kuvaus,
                 tyyppi: 'KARTOITETTU' as const,
               }));
 
