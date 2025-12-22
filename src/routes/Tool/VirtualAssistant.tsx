@@ -89,7 +89,9 @@ export const VirtualAssistant = () => {
         ...prevState,
         [key]: {
           ...prevState[key],
-          answer: error ? t('tool.my-own-data.interests.virtual-assistant.error') : data?.vastaus,
+          answer: error
+            ? t('tool.my-own-data.interests.virtual-assistant.error')
+            : removeTags(['reference_information', 'user_interests'], data?.vastaus),
           kiinnostukset: error ? undefined : data?.kiinnostukset?.map((k) => osaamisetMap[k.esco_uri!]),
         },
       }));
@@ -118,7 +120,9 @@ export const VirtualAssistant = () => {
         ...prevState,
         [key]: {
           ...prevState[key],
-          answer: error ? t('tool.my-own-data.interests.virtual-assistant.error') : data?.vastaus,
+          answer: error
+            ? t('tool.my-own-data.interests.virtual-assistant.error')
+            : removeTags(['reference_information', 'user_interests'], data?.vastaus),
           kiinnostukset: error ? undefined : data?.kiinnostukset?.map((k) => osaamisetMap[k.esco_uri!]),
         },
       }));
@@ -150,6 +154,12 @@ export const VirtualAssistant = () => {
   const clearState = () => {
     setHistory({});
     setSelectedKiinnostukset([]);
+  };
+
+  const removeTags = (tagNames: string[], value?: string) => {
+    const pattern = tagNames.map((tag) => `<\\s*${tag}\\b[^>]*>[\\s\\S]*?<\\/\\s*${tag}\\s*>`).join('|');
+    const regex = new RegExp(pattern, 'gi');
+    return value?.replace(regex, '');
   };
 
   return (
