@@ -868,7 +868,7 @@
         "description": "Describe your interests and select the most suitable suggestions to be used as the basis for suggesting opportunities to you.",
         "virtual-assistant": {
           "error": "An error occurred while generating the response. Please try again with the same or a new input.",
-          "intrests": "Interests ({{count}})",
+          "intrests": "Interests",
           "loading": "Loading answer... Please wait for a moment.",
           "selected-interests": "Selected interests",
           "send": "Submit",
