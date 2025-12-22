@@ -1,27 +1,21 @@
 import { components } from '@/api/schema';
 import { OsaaminenValue } from '@/components';
-import { EhdotusRecord, OpportunityFilterValue, OpportunitySortingValue, sortingValues } from '@/routes/Tool/utils.ts';
+import { EhdotusRecord, OpportunitySortingValue, sortingValues } from '@/routes/Tool/utils.ts';
 import { Tavoite } from '@/stores/useTavoitteetStore';
 
 export type FilterName = keyof PlanFilters;
 export const DEFAULT_SORTING = sortingValues.RELEVANCE;
 
 export interface PlanFilters {
-  /** Mahdollisuustyyppi */
-  opportunityType: OpportunityFilterValue[];
-  /** Maakunta */
-  region: string[];
-  ammattiryhmat: string[];
-  jobOpportunityType: string[];
   educationOpportunityType: string[];
+  minDuration: number | null;
+  maxDuration: number | null;
 }
 
 export const DEFAULT_FILTERS: PlanFilters = {
-  opportunityType: [],
-  region: [],
-  ammattiryhmat: [],
-  jobOpportunityType: [],
   educationOpportunityType: [],
+  minDuration: null,
+  maxDuration: null,
 };
 
 export type ArrayFilters = Extract<
@@ -59,6 +53,7 @@ export interface AddPlanState {
   sorting: OpportunitySortingValue;
   previousEhdotusUpdateLang: string;
   filters: PlanFilters;
+  setDurationFilter: (minDuration: number, maxDuration: number) => void;
   settingsHaveChanged?: boolean;
   setArrayFilter: (name: ArrayFilters, value: PlanFilters[ArrayFilters][number]) => void;
   reset: () => void;

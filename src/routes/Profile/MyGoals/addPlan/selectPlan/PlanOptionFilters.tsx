@@ -1,4 +1,5 @@
 import { FilterEducationOpportunityType } from '@/routes/Profile/MyGoals/addPlan/selectPlan/FilterEducationOpportunityType.tsx';
+import { FilterKesto } from '@/routes/Profile/MyGoals/addPlan/selectPlan/FilterKesto.tsx';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { FilterName } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel.ts';
 import { Accordion, Button, Modal } from '@jod/design-system';
@@ -74,7 +75,18 @@ const SettingsMenu = () => {
   const filters = addPlanStore((state) => state.filters);
 
   const getFilterCount = (filterList: FilterName[]) => {
-    return filters ? filterList.reduce((sum, filter) => sum + (filters[filter]?.length ?? 0), 0) : 0;
+    if (!filters) return 0;
+
+    return filterList.reduce((sum, filter) => {
+      const value = filters[filter];
+      if (Array.isArray(value)) {
+        return sum + value.length;
+      } else if (typeof value === 'number') {
+        return sum + value;
+      } else {
+        return sum;
+      }
+    }, 0);
   };
 
   return (
@@ -84,6 +96,9 @@ const SettingsMenu = () => {
         count={getFilterCount(['educationOpportunityType'])}
       >
         <FilterEducationOpportunityType />
+      </Setting>
+      <Setting title={t('tool.settings.general.duration')}>
+        <FilterKesto />
       </Setting>
     </SettingsSection>
   );
@@ -130,7 +145,7 @@ const PlanOptionFilters = ({ isOpen, onClose, isModal }: PlanOptionFiltersProps)
       }
     />
   ) : (
-    <div className="bg-bg-gray-2 rounded-t mb-7 py-4 px-6 sm:text-body-sm text-body-sm-mobile flex flex-col gap-6 sticky top-[124px] z-10">
+    <div className="bg-bg-gray-2 rounded-t py-4 px-6 sm:text-body-sm text-body-sm-mobile flex flex-col gap-6 sticky top-[124px] z-10">
       <SettingsMenu />
       {resetSection}
     </div>
