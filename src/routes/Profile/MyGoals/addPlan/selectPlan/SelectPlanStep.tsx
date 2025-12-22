@@ -4,7 +4,7 @@ import PlanOptionFilters from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanO
 import PlanOptionsPagination from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionsPagination.tsx';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { Button, Spinner, useMediaQueries } from '@jod/design-system';
-import { JodAdd, JodClose, JodRemove, JodSettings } from '@jod/design-system/icons';
+import { JodClose, JodRoute, JodSettings } from '@jod/design-system/icons';
 import i18n from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -125,13 +125,13 @@ const ExplorePlanOptions = () => {
                     label={t('profile.my-goals.remove-from-plans')}
                     onClick={() => setSelectedPlans(selectedPlans?.filter((plan) => plan !== id))}
                     className={'text-accent'}
-                    icon={<JodRemove />}
+                    icon={<JodRoute />}
                   />
                 ) : (
                   <ActionButton
                     label={t('profile.my-goals.choose-as-plan')}
                     onClick={() => setSelectedPlans([...selectedPlans, id])}
-                    icon={<JodAdd />}
+                    icon={<JodRoute />}
                   />
                 )
               }
