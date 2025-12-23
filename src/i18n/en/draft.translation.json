@@ -102,7 +102,7 @@
         },
         "data-to-share": {
           "activities": "My leisure activities",
-          "description": "Select what information you want to share. Basic information is always included. You can also choose to share your workplaces, education, favorites, and plans.",
+          "description": "Choose which information you want to share. You can choose to share basic information and additionally decide whether to share your workplace, education, favorites, and plans.",
           "education": "My education",
           "favorite-education-opportunities": "Education opportunities",
           "favorite-job-opportunities": "Job opportunities",
