@@ -121,7 +121,7 @@
         },
         "data-to-share": {
           "activities": "Mina fritidsaktiviteter",
-          "description": "Välj vilken information du vill dela. Grundläggande information ingår alltid. Du kan också välja att dela dina arbetsplatser, utbildningar, favoriter och planer.",
+          "description": "Välj vilka uppgifter du vill dela. Du kan välja att dela grundläggande uppgifter samt dessutom om din arbetsplats, utbildning, favoriter och planer ska delas.",
           "education": "Min utbildning",
           "favorite-education-opportunities": "Utbildningsmöjligheter",
           "favorite-job-opportunities": "Karriärmöjligheter",

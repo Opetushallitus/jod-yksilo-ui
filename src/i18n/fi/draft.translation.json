@@ -107,7 +107,7 @@
         },
         "data-to-share": {
           "activities": "Vapaa-ajan toimintoni",
-          "description": "Valitse, mitä tietoja haluat jakaa. Perustiedot sisältyvät aina jakoon. Voit lisäksi valita, jaetaanko työpaikkasi, koulutuksesi, suosikkisi ja suunnitelmasi.",
+          "description": "Valitse, mitä tietoja haluat jakaa. Voit halutessasi jakaa perustietosi sekä lisäksi valita, jaetaanko työpaikkasi, koulutuksesi, suosikkisi ja suunnitelmasi.",
           "education": "Koulutukseni",
           "favorite-education-opportunities": "Koulutusmahdollisuudet",
           "favorite-job-opportunities": "Uramahdollisuudet",
