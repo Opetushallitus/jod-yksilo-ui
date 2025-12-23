@@ -4,7 +4,7 @@ import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Accordion, Button, type MenuSection, PageNavigation, Tag, useMediaQueries } from '@jod/design-system';
-import { JodArrowRight, JodInfo, JodInfoFilled, JodPrint, JodUser } from '@jod/design-system/icons';
+import { JodArrowRight, JodInfo, JodPrint, JodUser } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
@@ -206,15 +206,7 @@ const Cv = () => {
       {lg && <div className="sm:text-body-lg text-body-lg-mobile mb-6">{t('cv.ingress', { date: voimassaAsti })}</div>}
 
       {/* Action bar */}
-      {lg && !!globalThis.print && (
-        <div className="flex justify-between items-center mb-8 print:hidden">
-          <div className="flex gap-3 items-center">
-            <span className="text-primary-gray text-body-sm font-bold">{title.toLocaleUpperCase()}</span>
-            <JodInfoFilled className="text-secondary-gray" />
-          </div>
-          {printButton}
-        </div>
-      )}
+      {lg && !!globalThis.print && <div className="flex justify-end items-center mb-8 print:hidden">{printButton}</div>}
 
       {/* Osaaminen */}
       {hasAnyOsaaminen && (
