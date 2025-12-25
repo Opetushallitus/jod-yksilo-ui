@@ -256,6 +256,8 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                         tyyppi={mahdollisuus.tyyppi}
                         type={mahdollisuusTyyppi}
                         kesto={mahdollisuus.kesto}
+                        initiallyCollapsed={true}
+                        collapsible={true}
                         yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
                         hideFavorite
                         actionButtonContent={

@@ -21,7 +21,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   const { showDialog, closeActiveModal } = useModal();
   const { sm } = useMediaQueries();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const { tavoite, selectedPlans, selectedOsaamiset, planName, planDescription } = addPlanStore(
+  const { tavoite, selectedPlans, selectedOsaamiset, planName, planDescription, setSelectedPlans } = addPlanStore(
     useShallow((state) => ({
       tavoite: state.tavoite,
       selectedOsaamiset: state.selectedOsaamiset,
@@ -133,7 +133,14 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
       footer={
         <div className={`flex flex-row gap-5 flex-1 ${wizardStep === 0 ? 'justify-between' : 'justify-end'}`}>
           {wizardStep === 0 && (
-            <Button label={t('profile.my-goals.add-custom-plan')} variant="white" onClick={nextStep} />
+            <Button
+              label={t('profile.my-goals.add-custom-plan')}
+              variant="white"
+              onClick={() => {
+                setSelectedPlans([]);
+                nextStep();
+              }}
+            />
           )}
 
           <div className="flex flex-row gap-5">

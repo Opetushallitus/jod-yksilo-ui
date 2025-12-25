@@ -11,7 +11,7 @@ import {
   PlanFilters,
 } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel.ts';
 import { ehdotusDataToRecord, EhdotusRecord } from '@/routes/Tool/utils.ts';
-import { filterByEducationType, filterByRegion } from '@/stores/useToolStore/filters.ts';
+import { filterByEducationType, filterByKesto } from '@/stores/useToolStore/filters.ts';
 import { paginate, removeDuplicatesByKey } from '@/utils';
 import { create } from 'zustand';
 
@@ -59,6 +59,17 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
   resetSettings: () => set({ filters: DEFAULT_FILTERS, sorting: DEFAULT_SORTING, settingsHaveChanged: true }),
   setSelectedPlans: (state) => set({ selectedPlans: state }),
   setOsaamiset: (state) => set({ osaamiset: state }),
+  setDurationFilter: (minDuration: number, maxDuration: number) => {
+    set((state) => ({
+      settingsHaveChanged: true,
+      filters: {
+        ...state.filters,
+        minDuration,
+        maxDuration,
+      },
+    }));
+  },
+
   setPlanName: (newPlanNameValue: string) => {
     set((state) => ({
       planName: {
@@ -158,7 +169,7 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
     }
 
     async function filterEhdotukset(filters: PlanFilters) {
-      const { region, educationOpportunityType } = filters;
+      const { minDuration, maxDuration, educationOpportunityType } = filters;
       if (Object.keys(ehdotukset).length === 0 || i18n.language !== get().previousEhdotusUpdateLang) {
         await get().updateEhdotukset(i18n.language, signal);
         set({ previousEhdotusUpdateLang: i18n.language });
@@ -173,7 +184,7 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
           ([key, ehdotusMetadata]) =>
             !alreadyChosenKoulutusmahdollisuudet?.includes(key) &&
             filterByEducationType(educationOpportunityType, ehdotusMetadata) &&
-            filterByRegion(region, ehdotusMetadata),
+            filterByKesto(minDuration, maxDuration, ehdotusMetadata),
         )
         .sort(([, a], [, b]) => (b?.pisteet ?? 0) - (a?.pisteet ?? 0))
         .map(([key]) => key);
