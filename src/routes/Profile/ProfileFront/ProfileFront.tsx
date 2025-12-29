@@ -1,10 +1,10 @@
 import type { components } from '@/api/schema';
-import { MainLayout } from '@/components';
+import { ExternalLink, MainLayout } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { useYksiloData } from '@/hooks/useYksiloData';
 import { useMediaQueries } from '@jod/design-system';
 import { JodUser } from '@jod/design-system/icons';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useRouteLoaderData } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import { ToolCard } from '../components/ToolCard';
@@ -64,15 +64,19 @@ const ProfileFront = () => {
           <ListItem label={t('profile.preferences.list-3-item-4')} />
         </ul>
         <p>
-          {t('profile.preferences.paragraph-4')}
-          <a
-            href={`/${language}/${t('slugs.privacy-and-cookies')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent hover:underline"
-          >
-            {t('profile.preferences.paragraph-4-link')}
-          </a>
+          <Trans
+            i18nKey="profile.preferences.paragraph-4"
+            components={{
+              CustomLink: (
+                <ExternalLink
+                  href={`/${language}/${t('slugs.privacy-and-cookies')}`}
+                  className="text-accent hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              ),
+            }}
+          />
         </p>
       </div>
       {lg ? null : <ToolCard testId="profile-front-go-to-tool" className="mt-6" />}

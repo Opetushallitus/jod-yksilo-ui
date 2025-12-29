@@ -5,6 +5,7 @@ export { CheckboxAccordion } from './CheckboxAccordion';
 export { ConfirmDialogWrapper, type ConfirmDialogWrapperProps } from './ConfirmDialogWrapper/ConfirmDialogWrapper';
 export { ExperienceTable } from './ExperienceTable/ExperienceTable';
 export { type ExperienceTableRowData } from './ExperienceTable/ExperienceTableRow';
+export { ExternalLink } from './ExternalLink/ExternalLink';
 export { FavoriteToggle } from './FavoriteToggle/FavoriteToggle';
 export { FeedbackModal } from './FeedbackModal/FeedbackModal';
 export { FormError } from './FormError/FormError';

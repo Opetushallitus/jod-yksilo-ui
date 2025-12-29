@@ -13,13 +13,6 @@ import type { TypedMahdollisuus } from '../types';
 import { ContentSection } from './ContentSection';
 import type { CvLoaderData } from './loader';
 
-// Component to insert a page break when printing. There is a known and long-standing issue with Firefox where
-// page breaks do not work as expected, so page breaks are omitted in Firefox by using break-after-auto class.
-const PageBreak = () => {
-  const isFirefox = typeof navigator !== 'undefined' && /firefox/i.test(navigator.userAgent);
-  return <div className={isFirefox ? 'print:break-after-auto' : 'print:break-after-page'} aria-hidden />;
-};
-
 const BasicInfoDetail = ({ data, title }: { data?: string | number; title: string }) =>
   data ? (
     <div className="flex flex-wrap">
@@ -215,7 +208,7 @@ const Cv = () => {
 
           {/* Työpaikat */}
           {data?.tyopaikat && data.tyopaikat.length > 0 && (
-            <div className="mb-8">
+            <div className="mb-8 break-after-page">
               <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.competence.work')}</h3>
               <div>
                 <ExperienceTable
@@ -228,11 +221,9 @@ const Cv = () => {
             </div>
           )}
 
-          {data.tyopaikat && data.tyopaikat.length > 0 && <PageBreak />}
-
           {/* Koulutukset */}
           {data?.koulutusKokonaisuudet && data.koulutusKokonaisuudet.length > 0 && (
-            <div className="mb-8">
+            <div className="mb-8 break-after-page">
               <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.competence.education')}</h3>
               <div>
                 <ExperienceTable
@@ -245,11 +236,9 @@ const Cv = () => {
             </div>
           )}
 
-          {data?.koulutusKokonaisuudet && data.koulutusKokonaisuudet.length > 0 && <PageBreak />}
-
           {/* Vapaa-ajan toiminnot */}
           {data?.toiminnot && data.toiminnot.length > 0 && (
-            <div className="mb-8">
+            <div className="mb-8 break-after-page">
               <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.competence.activities')}</h3>
               <div>
                 <ExperienceTable
@@ -262,11 +251,10 @@ const Cv = () => {
             </div>
           )}
 
-          {data?.toiminnot && data.toiminnot.length > 0 && <PageBreak />}
           {/* Muu osaaminen */}
           {((Array.isArray(data?.muuOsaaminen?.muuOsaaminen) && data?.muuOsaaminen?.muuOsaaminen.length > 0) ||
             data?.muuOsaaminen?.vapaateksti) && (
-            <>
+            <div className="break-after-page">
               <h3 className="text-heading-2 mb-5">{t('cv.competence.something-else')}</h3>
               <div className="border-b-2 border-border-gray pb-3 mb-5">{t('cv.competence.title')}</div>
               <div className="mb-8">
@@ -289,16 +277,14 @@ const Cv = () => {
                   </p>
                 </div>
               )}
-            </>
+            </div>
           )}
         </ContentSection>
       )}
 
-      {(data?.muuOsaaminen?.muuOsaaminen?.length || !!data?.muuOsaaminen?.vapaateksti) && <PageBreak />}
-
       {/* Kiinnostukset */}
       {hasAnyKiinnostukset && (
-        <ContentSection title={t('cv.interests.title')} isPrinting={isPrinting}>
+        <ContentSection title={t('cv.interests.title')} isPrinting={isPrinting} className="break-before-page">
           <p className="mb-8 sm:text-body-md text-body-md-mobile font-arial">{t('cv.interests.description')}</p>
 
           {kiinnostavatOsaamiset && kiinnostavatOsaamiset.length > 0 && (
@@ -342,18 +328,15 @@ const Cv = () => {
         </ContentSection>
       )}
 
-      {hasAnyKiinnostukset && <PageBreak />}
-
       {/* Suosikit */}
       {hasAnySuosikit && (
-        <ContentSection title={t('cv.favorites.title')} className="my-8">
+        <ContentSection title={t('cv.favorites.title')} className="my-8 break-before-page">
           <p className="mb-8">{t('cv.favorites.description')}</p>
 
           {tyopaikkaSuosikit && tyopaikkaSuosikit.length > 0 && (
             <>
               <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.favorites.job-opportunities')}</h3>
               <div className="flex flex-col gap-4 mb-8">{tyopaikkaSuosikit.map(renderOpportunityCard)}</div>
-              <PageBreak />
             </>
           )}
 
@@ -363,14 +346,13 @@ const Cv = () => {
                 {t('cv.favorites.education-opportunities')}
               </h3>
               <div className="flex flex-col gap-4">{koulutusSuosikit.map(renderOpportunityCard)}</div>
-              <PageBreak />
             </>
           )}
         </ContentSection>
       )}
 
       {tavoitteet && tavoitteet.length > 0 && (
-        <ContentSection title={t('cv.goals.title')} className="my-8">
+        <ContentSection title={t('cv.goals.title')} className="my-8 break-before-page">
           <div className="flex flex-col gap-4">
             {tavoitteet.map((tavoite) => {
               const mahdollisuus = tavoitteet.find((tm) => tm.id === tavoite.id)?.tavoiteDetails;

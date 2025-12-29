@@ -15,3 +15,8 @@
     text-transform: uppercase;
   }
 }
+
+@page {
+  size: A4;
+  margin: 15mm;
+}

@@ -91,7 +91,7 @@ const PersonalDetails = () => {
         </h3>
         <p className="font-arial text-body-md mb-5">{t('preferences.data-disclosure-unanonymized.description')}</p>
         <div
-          className="flex items-center justify-between gap-4 py-4 border-b border-[#CCC]"
+          className="flex items-center justify-between gap-4 py-4 border-b-2 border-[#CCC]"
           data-testid="pref-share-third-parties"
         >
           <div className="flex-1 font-arial">
@@ -114,7 +114,7 @@ const PersonalDetails = () => {
           </div>
         </div>
         <div
-          className="flex items-center justify-between gap-4 py-4 border-b border-[#CCC]"
+          className="flex items-center justify-between gap-4 py-4 border-b-2 border-[#CCC]"
           data-testid="pref-ai-training"
         >
           <div className="flex-1 font-arial">

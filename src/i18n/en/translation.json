@@ -658,8 +658,7 @@
       "list-3-item-4": "How can others use your profile",
       "paragraph-2": "By filling in this information carefully, you will receive suggestions for jobs and educations that are right for you.\n\nYou can also:",
       "paragraph-3": "Your profile is yours!\n\nYou decide:",
-      "paragraph-4": "The processing of competence profile data is based on the Act on the national digital service package for continuous learning. Read more about the grounds for data processing in the privacy policy.",
-      "paragraph-4-link": "Read more about the grounds for data processing in the privacy policy.",
+      "paragraph-4": "The processing of competence profile data is based on the Act on the national digital service package for continuous learning. <CustomLink>Read more about the grounds for data processing in the privacy policy.</CustomLink>",
       "title": "My settings",
       "you-are-signed-in": "The competence Profile is where you can save and manage your own information. In the competence profile, you can:"
     },
