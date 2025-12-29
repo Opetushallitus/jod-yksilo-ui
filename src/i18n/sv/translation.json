@@ -593,8 +593,7 @@
       "list-1-item-1": "granska dina kunskaper som en sammanfattning på sidan Mina kompetenser",
       "list-1-item-2": "spara din arbetshistorik och kartlägga kunskaper som erhållits från arbetet på sidan Mina arbetsplatser",
       "list-1-item-3": "spara eller importera din utbildningshistorik och kartlägga kunskaper som erhållits från utbildningar på sidan Mina utbildningar",
-      "paragraph-4": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på lagen om den nationella informationsresursen för kompetenser. Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.\n",
-      "paragraph-4-link": "Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.",
+      "paragraph-4": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på lagen om den nationella informationsresursen för kompetenser. <CustomLink>Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.</CustomLink>",
       "title": "Mina inställningar",
       "you-are-signed-in": "Kompetensprofilen är en plats där du kan spara och hantera dina uppgifter. I kompetensprofilen kan du:\n"
     },
