@@ -47,6 +47,7 @@
   "error": {
     "form": {
       "date-in-the-past": "Päivämäärä ei voi olla menneisyydessä",
+      "date-too-far": "Päivämäärä on liian kaukana tulevaisuudessa",
       "email": "Tarkista sähköpostiosoite"
     }
   },

@@ -40,6 +40,7 @@ export const formErrorMessage = {
    */
   dateRange: (path: string[]) => ({ message: i18n.t('error.form.date-range'), path }),
   dateInThePast: () => ({ message: i18n.t('error.form.date-in-the-past') }),
+  dateTooFar: () => ({ message: i18n.t('error.form.date-too-far') }),
 };
 
 // Commonly used form validation schemas

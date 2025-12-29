@@ -47,6 +47,7 @@
   "error": {
     "form": {
       "date-in-the-past": "The date cannot be in the past",
+      "date-too-far": "The date is too far in the future",
       "email": "Check the email address"
     }
   },

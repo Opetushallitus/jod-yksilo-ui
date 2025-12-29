@@ -57,6 +57,7 @@
   "error": {
     "form": {
       "date-in-the-past": "Datumet kan inte vara i det förflutna",
+      "date-too-far": "Datumet ligger för långt i framtiden",
       "email": "Kontrollera e-postadressen"
     }
   },
