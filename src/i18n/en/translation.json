@@ -377,7 +377,7 @@
       "url": "https://tyomarkkinatori.fi/en/personal-customers/vacancies"
     }
   },
-  "language-selection": "Language of use",
+  "language-selection": "Language",
   "link-copied": "Link copied!",
   "link-copy-failed": "Failed to copy link",
   "login": "Log in",
@@ -421,7 +421,7 @@
     "extra": {
       "palveluhakemisto": {
         "label": "Guidance and advisory services",
-        "url": "https://www.suomi.fi/aihe/ohjaus-ja-neuvontapalveluja"
+        "url": "https://www.suomi.fi/topic/guidance-and-counselling-services"
       },
       "title": "Other support for reflection",
       "urataidot": {
@@ -580,7 +580,7 @@
       "free-form-interests-description-guidance": "You can write and describe your interests in your own words. The text you enter is saved automatically. If you use the service in Finnish, please write in Finnish. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
       "occupations-that-interest-me": "Occupations that interest me",
       "skills-that-interest-me": "Competencies that interest me",
-      "title": "My interests:"
+      "title": "My interests"
     },
     "login-page": {
       "description": "By logging in, you will have access to a personal competence profile that will help you manage and use your competence efficiently.",
@@ -682,7 +682,7 @@
         "summary-description": "You can edit the job descriptions after importing them into Competency Path in your competence profile under My jobs.",
         "workplace-placeholder": "E.g. Workplace Ltd"
       },
-      "title": "My job"
+      "title": "My jobs"
     }
   },
   "proposed-competences": "Suggested competences",
@@ -764,17 +764,17 @@
     "main": "Go to main content"
   },
   "slugs": {
-    "about-service": "information-about-service",
-    "accessibility": "information-about-accessibility",
-    "ai-usage": "information-about-the-use-of-artificial-alu",
-    "data-sources": "information-sources",
+    "about-service": "about-service",
+    "accessibility": "about-accessibility",
+    "ai-usage": "about-the-use-of-ai",
+    "data-sources": "data-sources",
     "education-opportunity": {
       "index": "training-opportunity"
     },
     "job-opportunity": {
       "index": "career-opportunity"
     },
-    "privacy-and-cookies": "privacy-policy-and-cookies",
+    "privacy-and-cookies": "privacy-notice-and-cookies",
     "profile": {
       "competences": "my-competence",
       "education-history": "my-education",
@@ -905,7 +905,7 @@
       "service-directory": "Guidance and advisory services",
       "something-else": "My other competences",
       "title": "Support for reflection",
-      "work-history": "My job"
+      "work-history": "My jobs"
     },
     "your-opportunities": {
       "sorting": {
