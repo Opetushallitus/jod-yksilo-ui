@@ -20,3 +20,9 @@
   size: A4;
   margin: 15mm;
 }
+
+@media print {
+  #ai-agent-component-root {
+    display: none;
+  }
+}
