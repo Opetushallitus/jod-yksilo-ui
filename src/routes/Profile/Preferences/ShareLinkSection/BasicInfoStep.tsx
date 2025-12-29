@@ -2,6 +2,7 @@ import { FormError, TouchedFormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { Datepicker, InputField, Textarea, useMediaQueries } from '@jod/design-system';
+import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import type { ShareLinkForm } from './types';
@@ -13,9 +14,22 @@ export const BasicInfoStep = ({ title }: { title: string }) => {
     register,
     trigger,
     formState: { errors, touchedFields },
+    watch,
   } = useFormContext<ShareLinkForm>();
   const datePickerTranslations = useDatePickerTranslations();
   const { sm } = useMediaQueries();
+
+  const voimassaAsti = watch('voimassaAsti');
+  React.useEffect(() => {
+    if (voimassaAsti) {
+      trigger();
+    }
+  }, [voimassaAsti, trigger]);
+
+  const minDate = new Date();
+  const maxDate = new Date(minDate);
+  maxDate.setUTCFullYear(maxDate.getUTCFullYear() + 1);
+  maxDate.setUTCDate(maxDate.getUTCDate() - 1);
 
   return (
     <>
@@ -44,12 +58,12 @@ export const BasicInfoStep = ({ title }: { title: string }) => {
                 label={t('preferences.share.modal.expires-on')}
                 onBlur={() => {
                   field.onBlur();
-                  trigger(`voimassaAsti`);
                 }}
                 placeholder={t('date-placeholder')}
                 requiredText={t('required')}
                 translations={datePickerTranslations}
-                minDate={new Date()}
+                minDate={minDate}
+                maxDate={maxDate}
                 testId="share-link-expires-on"
               />
             )}

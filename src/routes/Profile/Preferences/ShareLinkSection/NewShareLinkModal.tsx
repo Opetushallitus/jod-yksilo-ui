@@ -38,16 +38,27 @@ export const NewShareLinkModal = ({ isOpen, onClose, id }: NewShareLinkModalProp
         id: z.string().optional(),
         nimi: z.string().optional(),
         muistiinpano: z.string().optional(),
-        voimassaAsti: FORM_SCHEMA.pvm.nonoptional(formErrorMessage.required()).refine((val) => {
-          if (!val) {
-            return false;
-          }
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
-          const inputDate = new Date(val);
-          inputDate.setHours(0, 0, 0, 0);
-          return inputDate >= today;
-        }, formErrorMessage.dateInThePast()),
+        voimassaAsti: FORM_SCHEMA.pvm
+          .nonoptional(formErrorMessage.required())
+          .refine((val) => {
+            if (!val) {
+              return false;
+            }
+            const today = new Date();
+            today.setUTCHours(0, 0, 0, 0);
+            const inputDate = new Date(val + 'T00:00:00Z');
+            return inputDate >= today;
+          }, formErrorMessage.dateInThePast())
+          .refine((val) => {
+            if (!val) {
+              return true;
+            }
+            const now = new Date();
+            const limit = new Date(now);
+            limit.setUTCFullYear(limit.getUTCFullYear() + 1);
+            const inputDate = new Date(val + 'T23:59:59.999Z');
+            return inputDate <= limit;
+          }, formErrorMessage.dateTooFar()),
         nimiJaettu: z.boolean().optional(),
         emailJaettu: z.boolean().optional(),
         kotikuntaJaettu: z.boolean().optional(),
