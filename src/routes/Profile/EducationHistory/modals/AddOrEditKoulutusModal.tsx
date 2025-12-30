@@ -127,9 +127,7 @@ const OsaamisetStep = ({ koulutusId }: { koulutusId?: string }) => {
   const { control } = useFormContext<KoulutusForm>();
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">
-        {t(koulutusId ? 'profile.competences.edit' : 'education-history.identify-competences')}
-      </h2>
+      <ModalHeader text={koulutusId ? t('profile.competences.edit') : t('education-history.identify-competences')} />
       <p className="mb-7 text-body-sm font-arial sm:mb-9">
         {t('profile.education-history.modals.competences-description')}
       </p>
