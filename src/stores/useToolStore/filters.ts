@@ -30,8 +30,10 @@ export function filterByKesto(
   if (meta.kesto == null) {
     return false;
   }
-
-  return meta.kesto >= effectiveMin && meta.kesto <= effectiveMax;
+  return (
+    ((meta.kestoMaksimi && meta.kestoMaksimi >= effectiveMin) || meta.kesto >= effectiveMin) &&
+    ((meta.kestoMinimi && meta.kestoMinimi <= effectiveMax) || meta.kesto <= effectiveMax)
+  );
 }
 
 export function filterByEducationType(

@@ -1024,6 +1024,10 @@ export interface components {
       /** Format: double */
       kesto?: number;
       /** Format: double */
+      kestoMinimi?: number;
+      /** Format: double */
+      kestoMaksimi?: number;
+      /** Format: double */
       pisteet?: number;
       /** @enum {string} */
       trendi?: 'NOUSEVA' | 'LASKEVA';
