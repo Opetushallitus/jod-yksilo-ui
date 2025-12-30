@@ -59,7 +59,53 @@ export const OsaamisSuosittelija = ({
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const isFetching = React.useRef(false);
   const addedTagsId = React.useId();
+  const suggestedTagsId = React.useId();
   const pendingTaitosi = React.useRef<string | null>(null);
+  const suggestedTagsRef = React.useRef<HTMLUListElement>(null);
+  const selectedTagsRef = React.useRef<HTMLUListElement>(null);
+  const lastClickedIndexRef = React.useRef<{ index: number; group: 'suggested' | 'selected' } | null>(null);
+
+  // Set roving tabindex for suggested tags
+  React.useEffect(() => {
+    if (suggestedTagsRef.current) {
+      const buttons = suggestedTagsRef.current.querySelectorAll('button');
+      buttons.forEach((button, index) => {
+        button.setAttribute('tabindex', index === 0 ? '0' : '-1');
+      });
+
+      // Focus previous button after adding a competence
+      if (lastClickedIndexRef.current?.group === 'suggested' && buttons.length > 0) {
+        // If clicked was first (index 0), focus the new first (still 0)
+        // Otherwise focus the previous one (index - 1)
+        const prevIndex =
+          lastClickedIndexRef.current.index === 0 ? 0 : Math.max(0, lastClickedIndexRef.current.index - 1);
+        const prevButton = buttons[prevIndex];
+        prevButton?.focus();
+        lastClickedIndexRef.current = null;
+      }
+    }
+  }, [filteredEhdotetutOsaamiset]);
+
+  // Set roving tabindex for selected tags
+  React.useEffect(() => {
+    if (selectedTagsRef.current) {
+      const buttons = selectedTagsRef.current.querySelectorAll('button');
+      buttons.forEach((button, index) => {
+        button.setAttribute('tabindex', index === 0 ? '0' : '-1');
+      });
+
+      // Focus previous button after removing a competence
+      if (lastClickedIndexRef.current?.group === 'selected' && buttons.length > 0) {
+        // If removed was first (index 0), focus the new first (still 0)
+        // Otherwise focus the previous one (index - 1)
+        const prevIndex =
+          lastClickedIndexRef.current.index === 0 ? 0 : Math.max(0, lastClickedIndexRef.current.index - 1);
+        const prevButton = buttons[prevIndex];
+        prevButton?.focus();
+        lastClickedIndexRef.current = null;
+      }
+    }
+  }, [value]);
 
   React.useEffect(() => {
     const fetchCompetences = async (value: string) => {
@@ -122,6 +168,8 @@ export const OsaamisSuosittelija = ({
   };
 
   const removeOsaaminenById = (id: string) => () => {
+    const index = value.findIndex((val) => val.id === id);
+    lastClickedIndexRef.current = { index, group: 'selected' };
     onChange(value.filter((val) => val.id !== id));
   };
 
@@ -133,6 +181,45 @@ export const OsaamisSuosittelija = ({
       return t('osaamissuosittelija.competence.identify');
     } else {
       return t('osaamissuosittelija.interest.identify');
+    }
+  };
+
+  const handleKeyboardNavigation = (event: React.KeyboardEvent<HTMLUListElement>, items: readonly unknown[]) => {
+    if (items.length === 0) {
+      return;
+    }
+
+    const currentList = event.currentTarget;
+    const buttons = Array.from(currentList.querySelectorAll('button'));
+
+    if (buttons.length === 0) {
+      return;
+    }
+
+    const currentIndex = buttons.indexOf(document.activeElement as HTMLButtonElement);
+    let nextIndex = -1;
+
+    switch (event.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault();
+        nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % buttons.length;
+        break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault();
+        nextIndex = currentIndex === -1 ? buttons.length - 1 : (currentIndex - 1 + buttons.length) % buttons.length;
+        break;
+      default:
+        return;
+    }
+
+    if (nextIndex !== -1) {
+      // Update tabindex for roving tabindex pattern
+      buttons.forEach((button, index) => {
+        button.setAttribute('tabindex', index === nextIndex ? '0' : '-1');
+      });
+      buttons[nextIndex]?.focus();
     }
   };
 
@@ -165,7 +252,7 @@ export const OsaamisSuosittelija = ({
             tagHeadingClassName,
           ])}
         >
-          <span>{mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}</span>
+          <span id={suggestedTagsId}>{mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}</span>
           {filteredEhdotetutOsaamiset.length > 0 && (
             <div className="font-arial text-body-sm text-secondary-gray mb-4">
               {mode === 'osaamiset' ? t(`osaamissuosittelija.competence.add`) : t(`osaamissuosittelija.interest.add`)}
@@ -175,8 +262,16 @@ export const OsaamisSuosittelija = ({
 
         <div className="mb-6 overflow-y-auto max-h-[228px]">
           {filteredEhdotetutOsaamiset.length > 0 ? (
-            <ul className="flex flex-wrap gap-3" data-testid="osaamissuosittelija-suggested-competences">
-              {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen) => (
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+            <ul
+              ref={suggestedTagsRef}
+              className="flex flex-wrap gap-3"
+              data-testid="osaamissuosittelija-suggested-competences"
+              role="group"
+              onKeyDown={(e) => handleKeyboardNavigation(e, filteredEhdotetutOsaamiset)}
+              aria-labelledby={suggestedTagsId}
+            >
+              {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen, index) => (
                 <li key={ehdotettuOsaaminen.id}>
                   <Tag
                     label={getLocalizedText(ehdotettuOsaaminen.nimi)}
@@ -189,6 +284,7 @@ export const OsaamisSuosittelija = ({
                         return; // Prevent adding duplicates by rapid clicking
                       }
 
+                      lastClickedIndexRef.current = { index, group: 'suggested' };
                       onChange([
                         ...value,
                         {
@@ -239,9 +335,13 @@ export const OsaamisSuosittelija = ({
 
             <div className="overflow-y-auto max-h-[228px]">
               {value.length > 0 ? (
+                // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
                 <ul
+                  ref={selectedTagsRef}
                   className="flex flex-wrap gap-3"
                   data-testid="osaamissuosittelija-selected-competences"
+                  role="group"
+                  onKeyDown={(e) => handleKeyboardNavigation(e, value)}
                   aria-labelledby={addedTagsId}
                 >
                   <AddedTags
