@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { useEscHandler } from '@/hooks/useEscHandler';
@@ -68,7 +69,7 @@ const MainStep = ({ headerText }: { headerText: string }) => {
 
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{headerText}</h2>
+      <ModalHeader text={headerText} />
       <div className="mb-6">
         <InputField
           label={t('free-time-activities.name-of-free-time-activity')}
@@ -123,7 +124,7 @@ const OsaamisetStep = ({ headerText }: { patevyysId?: string; headerText: string
   const { control } = useFormContext<PatevyysForm>();
   return (
     <>
-      <h2 className="mb-4 text-heading-3 text-black sm:mb-5 sm:text-heading-2">{headerText}</h2>
+      <ModalHeader text={headerText} />
       <p className="mb-7 text-body-sm font-arial sm:mb-9">
         {t('profile.free-time-activities.modals.competences-description')}
       </p>
