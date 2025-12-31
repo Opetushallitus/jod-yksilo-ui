@@ -30,6 +30,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
     // Find new IDs (created jakolinkki)
     const newIds = currentIds.filter((id) => !prevIds.includes(id));
     if (newIds.length > 0) {
+      // eslint-disable-next-line react-hooks/immutability
       setOpenAccordions((prev) => {
         const updated = Array.from(new Set([...prev, ...newIds]));
         sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(updated));

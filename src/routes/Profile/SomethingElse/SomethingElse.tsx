@@ -48,6 +48,7 @@ const SomethingElse = () => {
       z.object({}).catchall(z.string().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
     ),
   });
+  // eslint-disable-next-line react-hooks/incompatible-library
   const fields = watch();
 
   React.useEffect(() => {

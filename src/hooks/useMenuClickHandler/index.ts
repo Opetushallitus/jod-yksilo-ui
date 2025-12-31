@@ -18,6 +18,7 @@ export const useMenuClickHandler = (
     if (element.id.includes('ds-confirm-dialog-panel')) {
       return true;
     } else if (element.parentElement) {
+      // eslint-disable-next-line react-hooks/immutability
       return isPartOfConfirmationDialog(element.parentElement);
     } else {
       return false;
