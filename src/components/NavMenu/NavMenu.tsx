@@ -97,6 +97,8 @@ export const NavMenu = ({ open, onClose }: { open: boolean; onClose: () => void 
       serviceVariant="yksilo"
       externalLinkIconAriaLabel={t('external-link')}
       testId="nav-menu"
+      ariaLabel={t('navigation-menu')}
+      navigationAriaLabel={t('main-navigation')}
     />
   );
 };
