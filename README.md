@@ -50,6 +50,7 @@ npm update @jod/design-system
 If there is error from missing files run the following commands in assets-folder
 
 ```shell
+cd assets
 aws-vault exec okm-jod-sharedservices-c-acc
 aws s3 sync s3://jod-ui-assets .
 ```

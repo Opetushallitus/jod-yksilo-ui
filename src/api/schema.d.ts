@@ -1037,6 +1037,7 @@ export interface components {
       uri?: string;
       /** Format: int32 */
       mediaaniPalkka?: number;
+      kohtaanto?: string;
     };
     SivuDtoTyomahdollisuusDto: {
       sisalto: components['schemas']['TyomahdollisuusDto'][];
@@ -1062,6 +1063,17 @@ export interface components {
       aineisto?: 'TMT' | 'AMMATTITIETO';
       aktiivinen?: boolean;
     };
+    AmmattiryhmaFullDto: {
+      /** Format: uri */
+      uri?: string;
+      /** Format: int32 */
+      mediaaniPalkka?: number;
+      /** Format: int32 */
+      ylinDesiiliPalkka?: number;
+      /** Format: int32 */
+      alinDesiiliPalkka?: number;
+      kohtaanto?: string;
+    };
     ArvoDto: {
       arvo: string;
       /** Format: double */
@@ -1074,16 +1086,6 @@ export interface components {
       tyhjia: number;
       arvot: components['schemas']['ArvoDto'][];
     };
-    PalkkaDataDto: {
-      /** Format: date-time */
-      tiedotHaettu: string;
-      /** Format: int32 */
-      mediaaniPalkka?: number;
-      /** Format: int32 */
-      ylinDesiiliPalkka?: number;
-      /** Format: int32 */
-      alinDesiiliPalkka?: number;
-    };
     TyomahdollisuusFullDto: {
       /** Format: uuid */
       id: string;
@@ -1092,9 +1094,7 @@ export interface components {
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       tehtavat?: components['schemas']['LokalisoituTeksti'];
       yleisetVaatimukset?: components['schemas']['LokalisoituTeksti'];
-      /** Format: uri */
-      ammattiryhma?: string;
-      palkkatiedot?: components['schemas']['PalkkaDataDto'];
+      ammattiryhma?: components['schemas']['AmmattiryhmaFullDto'];
       /** @enum {string} */
       aineisto?: 'TMT' | 'AMMATTITIETO';
       aktiivinen?: boolean;

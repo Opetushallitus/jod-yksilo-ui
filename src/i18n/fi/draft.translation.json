@@ -61,6 +61,21 @@
   "i-allow": "Sallin",
   "i-disallow": "En salli",
   "main-navigation": "Päänavigaatio",
+  "job-opportunity": {
+    "employment-data": {
+      "description": "Työllisyysnäkymä tarkastelee työllistymismahdollisuuksia ammattiryhmässä. Tavoitteena on muodostaa yleiskuva tilanteesta. Tietoja on koottu muista palveluista, joissa voi tutustua niihin tarkemmin. Lisätietoa työllisyysnäkymästä saat Osaamispolun <CustomLink>tietopalvelusta<Icon></Icon></CustomLink>",
+      "supply-and-demand": "Kysynnän ja tarjonnan tilanne",
+      "supply-and-demand-subtitle": "Ammattiryhmässä voi olla ylitarjontaa, tasapainotila tai työvoimapulaa. Lisää tietoa työllisyysnäkymästä löydät <CustomLink>työmarkkinatorilta<Icon></Icon></CustomLink>",
+      "title": "Työllisyysnäkymä"
+    },
+    "supply-and-demand": {
+      "Alitarjonta": "Työvoimapula",
+      "Tasapaino": "Tasapaino",
+      "Ylitarjonta": "Ylitarjonta"
+    },
+    "supply-and-demand-title": "Työllisyysnäkymä",
+    "supply-and-demand-tooltip": "Tämänhetkinen työllisyysnäkymä työmahdollisuuden ammattiryhmälle."
+  },
   "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
   "n-job-opportunities": "Uramahdollisuudet {{count}} / {{total}}",
   "navigation-menu": "Valikko",
