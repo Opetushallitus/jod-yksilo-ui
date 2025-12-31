@@ -57,8 +57,6 @@
   },
   "i-allow": "I allow",
   "i-disallow": "I do not allow",
-  "main-navigation": "Main navigation",
-  "navigation-menu": "Menu",
   "job-opportunity": {
     "employment-data": {
       "description": "The employment outlook examines job opportunities within the occupational group. The goal is to form a general picture of the situation. The data has been compiled from other services where you can explore them in more detail. Additional information on the employment outlook is available from the Osaamispolku <CustomLink>information service<Icon></Icon></CustomLink>",
@@ -74,6 +72,8 @@
     "supply-and-demand-title": "Employment outlook",
     "supply-and-demand-tooltip": "Current employment outlook for the occupational group of the job opportunity."
   },
+  "main-navigation": "Main navigation",
+  "navigation-menu": "Menu",
   "osaamissuosittelija": {
     "competence": {
       "search-disclaimer": "Text used for searching competences - it is not saved"

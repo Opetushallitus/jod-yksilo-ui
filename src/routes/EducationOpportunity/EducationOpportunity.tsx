@@ -27,6 +27,7 @@ const EducationOpportunity = () => {
   } = useTranslation();
   const { isPrd } = useEnvironment();
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const duration = React.useMemo(() => {
     if (!kesto?.mediaani || kesto.mediaani === 0) {
       return null;

@@ -69,10 +69,10 @@ const Cv = () => {
   const hasAnyBasicInfo = Boolean(personName || data?.syntymavuosi || data?.email || kotikunta);
   const hasAnyOsaaminen = Boolean(
     data?.tyopaikat?.length ||
-      data?.koulutusKokonaisuudet?.length ||
-      data?.toiminnot?.length ||
-      muuOsaaminen?.length ||
-      getLocalizedText(muuOsaaminenVapaateksti),
+    data?.koulutusKokonaisuudet?.length ||
+    data?.toiminnot?.length ||
+    muuOsaaminen?.length ||
+    getLocalizedText(muuOsaaminenVapaateksti),
   );
   const hasAnyKiinnostukset = Boolean(
     kiinnostavatOsaamiset?.length || kiinnostavatAmmatit?.length || getLocalizedText(kiinnostuksetVapaateksti),

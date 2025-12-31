@@ -39,6 +39,7 @@ const JobOpportunity = () => {
           .sort((a: string, b: string) => a.localeCompare(b))
       : [];
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const tmtUrl = React.useMemo(() => {
     const url = new URL(t('job-opportunity.tyomarkkinatori.url'));
 
