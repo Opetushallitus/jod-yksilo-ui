@@ -60,8 +60,10 @@
   },
   "i-allow": "Sallin",
   "i-disallow": "En salli",
+  "main-navigation": "Päänavigaatio",
   "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
   "n-job-opportunities": "Uramahdollisuudet {{count}} / {{total}}",
+  "navigation-menu": "Valikko",
   "osaamissuosittelija": {
     "competence": {
       "search-disclaimer": "Tekstiä käytetään osaamisten hakuun - sitä ei tallenneta"

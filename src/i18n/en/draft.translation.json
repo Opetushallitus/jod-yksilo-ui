@@ -57,6 +57,8 @@
   },
   "i-allow": "I allow",
   "i-disallow": "I do not allow",
+  "main-navigation": "Main navigation",
+  "navigation-menu": "Menu",
   "osaamissuosittelija": {
     "competence": {
       "search-disclaimer": "Text used for searching competences - it is not saved"
