@@ -48,8 +48,10 @@ const ExplorePlanOptions = () => {
     setSettingsOpen(false);
   };
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const getTotalFilterCount = React.useCallback(() => {
     return Object.values(filters).reduce((total, filter) => total + (filter?.length ?? 0), 0);
+    // eslint-disable-next-line react-hooks/preserve-manual-memoization
   }, [filters]);
 
   const toggleFiltersText = React.useMemo(() => {

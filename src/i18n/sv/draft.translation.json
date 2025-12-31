@@ -68,7 +68,6 @@
   },
   "i-allow": "Jag tillåter",
   "i-disallow": "Jag tillåter inte",
-  "main-navigation": "Huvudnavigering",
   "job-opportunity": {
     "employment-data": {
       "description": "Sysselsättningsutsikterna granskar anställningsmöjligheterna inom yrkesgruppen. Målet är att ge en allmän bild av situationen. Uppgifterna har samlats från andra tjänster där du kan bekanta dig närmare med dem. Mer information om sysselsättningsutsikterna hittar du på Kompetensstigen <CustomLink>informationsservicen<Icon></Icon></CustomLink>",
@@ -84,6 +83,7 @@
     "supply-and-demand-title": "Sysselsättningsutsikter",
     "supply-and-demand-tooltip": "Den aktuella sysselsättningsutsikten för yrkesgruppen inom arbetstillfället."
   },
+  "main-navigation": "Huvudnavigering",
   "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
