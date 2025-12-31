@@ -22,6 +22,7 @@ export const EducationOpportunityCard = ({
 }: EducationOpportunityCardProps) => {
   const { t } = useTranslation();
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const duration = React.useMemo(() => {
     if (!kesto?.mediaani || kesto.mediaani === 0) {
       return NOT_AVAILABLE_LABEL;

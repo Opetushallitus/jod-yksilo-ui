@@ -460,6 +460,7 @@ const Tool = () => {
             }}
           >
             <div id="tool-tabs" role="tablist" className="flex text-button-sm select-none gap-3 px-5">
+              {/* eslint-disable-next-line react-hooks/refs */}
               {tabs.map((tab, index) => (
                 <button
                   type="button"
