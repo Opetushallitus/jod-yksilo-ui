@@ -1,6 +1,6 @@
+import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { type PageChangeDetails, Pagination, useMediaQueries } from '@jod/design-system';
-import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 interface PlanOptionsPaginationProps {
@@ -10,7 +10,6 @@ interface PlanOptionsPaginationProps {
 }
 
 const PlanOptionsPagination = ({ scrollRef, className, ariaLabel }: PlanOptionsPaginationProps) => {
-  const { t } = useTranslation();
   const {
     ehdotuksetPageNr,
     ehdotuksetPageSize,
@@ -50,6 +49,8 @@ const PlanOptionsPagination = ({ scrollRef, className, ariaLabel }: PlanOptionsP
     }
   };
 
+  const paginationTranslations = usePaginationTranslations();
+
   return koulutusMahdollisuudet.length > 0 ? (
     <div className={className} data-testid="tool-pagination">
       <Pagination
@@ -59,10 +60,7 @@ const PlanOptionsPagination = ({ scrollRef, className, ariaLabel }: PlanOptionsP
         ariaLabel={ariaLabel}
         pageSize={ehdotuksetPageSize}
         siblingCount={sm ? 1 : 0}
-        translations={{
-          nextTriggerLabel: t('pagination.next'),
-          prevTriggerLabel: t('pagination.previous'),
-        }}
+        translations={paginationTranslations}
         totalItems={totalItems}
         onPageChange={(data) => void onPageChange(data)}
       />

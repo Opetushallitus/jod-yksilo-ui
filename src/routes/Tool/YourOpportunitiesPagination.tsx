@@ -1,6 +1,6 @@
+import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
 import { useToolStore } from '@/stores/useToolStore';
 import { type PageChangeDetails, Pagination, useMediaQueries } from '@jod/design-system';
-import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 interface YourOpportunitiesPaginationProps {
@@ -10,7 +10,6 @@ interface YourOpportunitiesPaginationProps {
 }
 
 const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOpportunitiesPaginationProps) => {
-  const { t } = useTranslation();
   const {
     ehdotuksetPageNr,
     ehdotuksetPageSize,
@@ -50,6 +49,8 @@ const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOp
     }
   };
 
+  const paginationTranslations = usePaginationTranslations();
+
   return mixedMahdollisuudet.length > 0 ? (
     <div className={className} data-testid="tool-pagination">
       <Pagination
@@ -59,10 +60,7 @@ const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOp
         ariaLabel={ariaLabel}
         pageSize={ehdotuksetPageSize}
         siblingCount={sm ? 1 : 0}
-        translations={{
-          nextTriggerLabel: t('pagination.next'),
-          prevTriggerLabel: t('pagination.previous'),
-        }}
+        translations={paginationTranslations}
         totalItems={totalItems}
         onPageChange={(data) => void onPageChange(data)}
       />

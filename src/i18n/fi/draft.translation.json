@@ -41,6 +41,14 @@
     "osaamispolku-description": "Elämä muuttuu – ja me olemme mukana tukemassa sinua. Olitpa vaihtamassa alaa, oppimassa uutta tai parantamassa arkeasi, saat meiltä helposti ymmärrettävää tietoa ja inspiraatiota oman polkusi tueksi.",
     "title": "Osaamisprofiili"
   },
+  "datepicker": {
+    "aria-roledescription": {
+      "datepicker": "Päivämäärän valitsin",
+      "decade": "kalenterivuosikymmen",
+      "month": "kalenterikuukausi",
+      "year": "kalenterivuosi"
+    }
+  },
   "education-history": {
     "add-studies-to-this-education-button": "Lisää opinto"
   },
@@ -60,7 +68,6 @@
   },
   "i-allow": "Sallin",
   "i-disallow": "En salli",
-  "main-navigation": "Päänavigaatio",
   "job-opportunity": {
     "employment-data": {
       "description": "Työllisyysnäkymä tarkastelee työllistymismahdollisuuksia ammattiryhmässä. Tavoitteena on muodostaa yleiskuva tilanteesta. Tietoja on koottu muista palveluista, joissa voi tutustua niihin tarkemmin. Lisätietoa työllisyysnäkymästä saat Osaamispolun <CustomLink>tietopalvelusta<Icon></Icon></CustomLink>",
@@ -76,6 +83,7 @@
     "supply-and-demand-title": "Työllisyysnäkymä",
     "supply-and-demand-tooltip": "Tämänhetkinen työllisyysnäkymä työmahdollisuuden ammattiryhmälle."
   },
+  "main-navigation": "Päänavigaatio",
   "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
   "n-job-opportunities": "Uramahdollisuudet {{count}} / {{total}}",
   "navigation-menu": "Valikko",
@@ -86,6 +94,9 @@
     "interest": {
       "search-disclaimer": "Tekstiä käytetään kiinnostusten hakuun - sitä ei tallenneta"
     }
+  },
+  "pagination": {
+    "itemLabel": "Sivu {{page}}"
   },
   "personal-details": {
     "birthyear": "Syntymävuosi",

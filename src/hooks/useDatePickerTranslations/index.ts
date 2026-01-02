@@ -33,5 +33,11 @@ export const useDatePickerTranslations = (): ComponentProps<typeof Datepicker>['
     prevTrigger: (view) => translations[view].prev,
     dayCell: (state): string => `${translations.actions.select} ${state.formattedDate}`,
     trigger: (open): string => (open ? translations.actions.close : translations.actions.open),
+    roleDescriptions: {
+      datepicker: t('datepicker.aria-roledescription.datepicker'),
+      calendarMonth: t('datepicker.aria-roledescription.month'),
+      calendarYear: t('datepicker.aria-roledescription.year'),
+      calendarDecade: t('datepicker.aria-roledescription.decade'),
+    },
   };
 };
