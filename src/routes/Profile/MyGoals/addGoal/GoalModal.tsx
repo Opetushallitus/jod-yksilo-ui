@@ -4,6 +4,7 @@ import { ActionButton, OpportunityCard } from '@/components';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton.tsx';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
+import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
 import type { TypedMahdollisuus } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { Tavoite, useTavoitteetStore } from '@/stores/useTavoitteetStore';
@@ -185,6 +186,8 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
 
   useEscHandler(insertTavoite, goalsId);
 
+  const paginationTranslations = usePaginationTranslations();
+
   // STEP CONDITIONS ------------------------------------------------------
   const basicInfoStep = step === 0;
   const chooseFavoriteStep = step === 1;
@@ -287,10 +290,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                         onPageChange={onPageChange}
                         pageSize={pageSize}
                         siblingCount={sm ? 1 : 0}
-                        translations={{
-                          nextTriggerLabel: t('pagination.next'),
-                          prevTriggerLabel: t('pagination.previous'),
-                        }}
+                        translations={paginationTranslations}
                         totalItems={totalFavorites}
                       />
                     </div>

@@ -51,6 +51,14 @@
     "osaamispolku-description": "Livet förändras – och vi finns här för att stötta dig. Oavsett om du byter bransch, lär dig något nytt eller förbättrar din vardag, ger vi dig lättförståelig information och inspiration för att stötta din egen väg.",
     "title": "Kompetensprofil"
   },
+  "datepicker": {
+    "aria-roledescription": {
+      "datepicker": "Datumväljare",
+      "decade": "kalenderdecennium",
+      "month": "kalendermånad",
+      "year": "kalenderår"
+    }
+  },
   "education-history": {
     "add-studies-to-this-education-button": "Lägg studier"
   },
@@ -68,7 +76,6 @@
   },
   "i-allow": "Jag tillåter",
   "i-disallow": "Jag tillåter inte",
-  "main-navigation": "Huvudnavigering",
   "job-opportunity": {
     "employment-data": {
       "description": "Sysselsättningsutsikterna granskar anställningsmöjligheterna inom yrkesgruppen. Målet är att ge en allmän bild av situationen. Uppgifterna har samlats från andra tjänster där du kan bekanta dig närmare med dem. Mer information om sysselsättningsutsikterna hittar du på Kompetensstigen <CustomLink>informationsservicen<Icon></Icon></CustomLink>",
@@ -84,6 +91,7 @@
     "supply-and-demand-title": "Sysselsättningsutsikter",
     "supply-and-demand-tooltip": "Den aktuella sysselsättningsutsikten för yrkesgruppen inom arbetstillfället."
   },
+  "main-navigation": "Huvudnavigering",
   "n-months-short": "{{count}} mån",
   "n-years_one": "{{count}} år",
   "n-years_other": "{{count}} år",
@@ -100,6 +108,9 @@
     "interest": {
       "search-disclaimer": "Text som används för att söka efter intressen - den sparas inte"
     }
+  },
+  "pagination": {
+    "itemLabel": "Sida {{page}}"
   },
   "personal-details": {
     "birthyear": "Födelseår",

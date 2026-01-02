@@ -1,6 +1,7 @@
 import { MainLayout, OpportunityCard, SimpleNavigationList } from '@/components';
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
+import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
 import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
 import type { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
@@ -177,6 +178,8 @@ const Favorites = () => {
 
   const to = `/${language}/${t('slugs.tool.index')}`;
 
+  const paginationTranslations = usePaginationTranslations();
+
   return (
     <MainLayout
       navChildren={
@@ -293,10 +296,7 @@ const Favorites = () => {
           }}
           pageSize={pageSize}
           siblingCount={1}
-          translations={{
-            nextTriggerLabel: t('pagination.next'),
-            prevTriggerLabel: t('pagination.previous'),
-          }}
+          translations={paginationTranslations}
           totalItems={totalItems}
           type="button"
           testId="favorites-pagination"
