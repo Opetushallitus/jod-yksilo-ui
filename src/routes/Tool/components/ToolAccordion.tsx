@@ -13,7 +13,7 @@ const ToolAccordion = ({
 }: {
   children: React.ReactNode;
   title: string;
-  description: string;
+  description?: string;
   ref?: React.Ref<HTMLDivElement>;
   setIsOpen?: (isOpen: boolean) => void;
   isOpen?: boolean;
@@ -38,7 +38,9 @@ const ToolAccordion = ({
         title={title}
         initialState={false}
         collapsedContent={
-          <span className="font-arial text-body-sm text-secondary-gray text-pretty hyphens-auto">{description}</span>
+          description && (
+            <span className="font-arial text-body-sm text-secondary-gray text-pretty hyphens-auto">{description}</span>
+          )
         }
         testId="tool-accordion-button"
       >

@@ -245,27 +245,15 @@ const YourInfo = () => {
     <>
       <div id="tool-your-info" className="flex flex-col gap-4">
         <YourInfoGroup id="tool-your-info-group-1">
-          <ToolAccordion
-            title={t('interests')}
-            description={t('tool.my-own-data.interests.description')}
-            testId="tool-interests-accordion"
-          >
+          <ToolAccordion title={t('interests')} testId="tool-interests-accordion">
             <Interests />
           </ToolAccordion>
 
-          <ToolAccordion
-            title={t('tool.map-your-skills')}
-            description={t('tool.my-own-data.competences.description')}
-            testId="tool-competences-accordion"
-          >
+          <ToolAccordion title={t('tool.map-your-skills')} testId="tool-competences-accordion">
             <Competences />
           </ToolAccordion>
 
-          <ToolAccordion
-            title={t('tool.competency-profile.title')}
-            description={t('tool.competency-profile.description')}
-            testId="tool-profile-accordion"
-          >
+          <ToolAccordion title={t('tool.competency-profile.title')} testId="tool-profile-accordion">
             <ProfileImportExport onImportSuccess={onImportSuccess} />
           </ToolAccordion>
         </YourInfoGroup>
@@ -275,7 +263,6 @@ const YourInfo = () => {
         <YourInfoGroup id="tool-your-info-group-2">
           <ToolAccordion
             title={t('tool.info-overview.title')}
-            description={t('tool.info-overview.description')}
             ref={competenceOverviewRef}
             isOpen={overviewOpen}
             setIsOpen={setOverviewOpen}
@@ -288,11 +275,7 @@ const YourInfo = () => {
         <YourInfoGroupSeparator />
 
         <YourInfoGroup id="tool-your-info-group-3">
-          <ToolAccordion
-            title={t('tool.tools.title')}
-            description={t('tool.tools.description')}
-            testId="tool-tools-accordion"
-          >
+          <ToolAccordion title={t('tool.tools.title')} testId="tool-tools-accordion">
             <AdditionalSupport />
           </ToolAccordion>
         </YourInfoGroup>
@@ -453,12 +436,7 @@ const Tool = () => {
       ) : (
         // Mobile
         <>
-          <div
-            className="sticky z-10 -mx-5 pt-4 bg-bg-gray"
-            style={{
-              top,
-            }}
-          >
+          <div className="sticky z-10 -mx-5 pt-4 bg-bg-gray" style={{ top }}>
             <div id="tool-tabs" role="tablist" className="flex text-button-sm select-none gap-3 px-5">
               {/* eslint-disable-next-line react-hooks/refs */}
               {tabs.map((tab, index) => (
