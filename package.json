@@ -74,7 +74,7 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.0",
     "vite": "^7.2.7",
-    "vitest": "^3.2.4",
+    "vitest": "^4.0.16",
     "xlsx": "file:vendor/xlsx-0.20.3.tgz"
   },
   "lavamoat": {
