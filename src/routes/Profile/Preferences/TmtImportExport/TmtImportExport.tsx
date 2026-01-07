@@ -18,7 +18,10 @@ interface ResultRefType {
 const STORAGE_KEY = 'tmtOperation' as const;
 
 const TmtImportExport = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { showDialog, closeAllModals } = useModal();
   const { pathname, search } = useLocation();
   const navigate = useNavigate();
@@ -108,10 +111,10 @@ const TmtImportExport = () => {
       variant: 'normal',
       onConfirm: async () => {
         sessionStorage.setItem(STORAGE_KEY, 'import');
-        globalThis.location.href = `/yksilo/oauth2/authorization/tmt-haku?callback=${callbackUrl}`;
+        globalThis.location.href = `/yksilo/oauth2/authorization/tmt-haku?callback=${callbackUrl}&lang=${language}`;
       },
     });
-  }, [callbackUrl, importPending, showDialog, t]);
+  }, [callbackUrl, importPending, showDialog, t, language]);
 
   const startExport = React.useCallback(() => {
     if (exportPending) {
@@ -125,10 +128,10 @@ const TmtImportExport = () => {
       variant: 'normal',
       onConfirm: async () => {
         sessionStorage.setItem(STORAGE_KEY, 'export');
-        globalThis.location.href = `/yksilo/oauth2/authorization/tmt-vienti?callback=${callbackUrl}`;
+        globalThis.location.href = `/yksilo/oauth2/authorization/tmt-vienti?callback=${callbackUrl}&lang=${language}`;
       },
     });
-  }, [callbackUrl, exportPending, showDialog, t]);
+  }, [callbackUrl, exportPending, showDialog, t, language]);
 
   // For triggering the export modals' 2nd phase after successful authorization.
   // If authentication is successful, the TMT export endpoint is immidiately called.
