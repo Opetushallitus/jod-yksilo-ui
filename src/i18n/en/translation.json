@@ -803,7 +803,6 @@
   },
   "tool": {
     "competency-profile": {
-      "description": "Import your information from the competence profile to be suggested opportunities for you.",
       "help": "You can choose what data you import. The data imported from the competence profile will be visible in the summary of your data. Remember to update your opportunities after importing the data.\t\n\nYou can update your competence profile with the information mapped out on this page. Going forward, you will find them in the competence profile under Other competences and My interests.",
       "login-description": "By logging in to the service, you can import your data from the competence profile and include your data in the competence profile. If you don't have a competence profile yet, you can create one.",
       "title": "Your competence profile"
@@ -815,7 +814,6 @@
     "education-opportunity-koulutusala-tooltip": "The field of education refers to a group to which education is divided according to the field of science, society or working life to which it relates.",
     "info-overview": {
       "data-from-profile": "Data imported from then competence profile",
-      "description": "See all the information you mapped out and imported from your profile that affects the opportunities offered to you.",
       "mapped-competences": "Mapped data",
       "no-competences-from-profile": "No data imported from profile",
       "no-mapped-competences": "No data entered",
@@ -831,7 +829,6 @@
     "my-own-data": {
       "cancel-text": "No, cancel",
       "competences": {
-        "description": "Word your skills and select the most suitable competencies based on which opportunities will be suggested to you.",
         "import": {
           "confirm-button": "Import competences",
           "confirm-description": "Bring competences from your competence profile to the overview of your data. Select your desired competences from the list below.",
@@ -864,7 +861,6 @@
       },
       "interests": {
         "conversational-virtual-assistant": "Identify interests with AI",
-        "description": "Describe your interests and select the most suitable suggestions to be used as the basis for suggesting opportunities to you.",
         "virtual-assistant": {
           "error": "An error occurred while generating the response. Please try again with the same or a new input.",
           "intrests": "Interests",
@@ -896,7 +892,6 @@
     "title": "Find opportunities",
     "tools": {
       "career-skills-self-assessment-tool": "Tool for a self-assessment of career skills",
-      "description": "Sites and tools that can help you to reflect on your situation.",
       "education-history": "My education",
       "free-time-activities": "My recreational activities",
       "help-text": "As a logged-in user, you can map out competences and interests in more detail in the competence profile.",

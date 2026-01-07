@@ -801,7 +801,6 @@
   },
   "tool": {
     "competency-profile": {
-      "description": "Tuo osaamisprofiilista tietojasi, joiden perusteella sinulle ehdotetaan mahdollisuuksia.",
       "help": "Voit valita itse mitä tietoja tuot. Osaamisprofiilista tuodut tiedot näkyvät tietojesi yhteenvedossa. Muista päivittää mahdollisuutesi tietojen tuonnin jälkeen.\t\n\nVoit päivittää osaamisprofiilisi tällä sivulla kartoittamilla tiedoilla. Löydät ne jatkossa osaamisprofiilista Muu osaaminen ja Kiinnostukseni-kohdista.",
       "login-description": "Kirjautumalla palveluun voit tuoda tietojasi osaamisprofiilista ja viedä tietojasi osaamisprofiiliin. Jos sinulla ei vielä ole ole osaamisprofiilia, voit luoda sen.",
       "title": "Osaamisprofiilisi"
@@ -812,7 +811,6 @@
     "education-opportunity-koulutusala-tooltip": "Koulutusala tarkoittaa ryhmää, johon koulutukset jaotellaan sen mukaan, mihin tieteen, yhteiskunnan tai työelämän alaan ne liittyvät.",
     "info-overview": {
       "data-from-profile": "Osaamisprofiilista tuodut tiedot",
-      "description": "Näe kaikki kartoittamasi ja profiilista tuomasi tiedot, jotka vaikuttavat sinulle tarjottaviin mahdollisuuksiin.",
       "mapped-competences": "Kartoitetut tiedot",
       "no-competences-from-profile": "Ei profiilista tuotuja tietoja",
       "no-mapped-competences": "Ei syötettyjä tietoja",
@@ -828,7 +826,6 @@
     "my-own-data": {
       "cancel-text": "Ei, peruuta",
       "competences": {
-        "description": "Sanoita taitosi ja valitse sopivimmat osaamiset, joiden perusteella sinulle ehdotetaan mahdollisuuksia.",
         "import": {
           "confirm-button": "Tuo osaamiset",
           "confirm-description": "Tuo osaamisia osaamisprofiilistasi tietojesi kokonaiskuvaan. Valitse haluamasi osaamiset alla olevasta listasta.",
@@ -861,7 +858,6 @@
       },
       "interests": {
         "conversational-virtual-assistant": "Tunnista kiinnostuksia tekoälyllä",
-        "description": "Kuvaile kiinnostuksesi ja valitse sopivimmat ehdotukset, joiden perusteella sinulle ehdotetaan mahdollisuuksia.",
         "virtual-assistant": {
           "error": "Virhe vastauksen muodostamisessa. Yritä uudestaan samalla tai uuden syötteen kanssa.",
           "intrests": "Kiinnostukset",
@@ -891,7 +887,6 @@
     "title": "Löydä mahdollisuuksia",
     "tools": {
       "career-skills-self-assessment-tool": "Urataitojen itsearviointityökalu",
-      "description": "Sivustoja ja apuvälineitä, joista voi olla apua sinulle tilanteesi pohdintaan.",
       "education-history": "Koulutukseni",
       "free-time-activities": "Vapaa-ajan toimintoni",
       "help-text": "Kirjautuneena käyttäjänä voit kartoittaa osaamisia ja kiinnostuksia tarkemmin osaamisprofiilissa.",
