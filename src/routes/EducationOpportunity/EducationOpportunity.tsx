@@ -56,8 +56,10 @@ const EducationOpportunity = () => {
 
   const title = getLocalizedText(koulutusmahdollisuus.otsikko);
   const opintopolkuUrl = React.useMemo(
-    () => new URL(encodeURI(`https://opintopolku.fi/konfo/${language}/haku/${title}`)).href,
-    [language, title],
+    () =>
+      new URL(encodeURI(`https://${isPrd ? 'opintopolku.fi' : 'testiopintopolku.fi'}/konfo/${language}/haku/${title}`))
+        .href,
+    [language, title, isPrd],
   );
 
   const sections: OpportunityDetailsSection[] = [
