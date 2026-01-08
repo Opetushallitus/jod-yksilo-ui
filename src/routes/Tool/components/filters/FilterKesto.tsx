@@ -67,12 +67,14 @@ export const FilterKesto = () => {
   };
 
   return (
-    <RangeSlider
-      markers={values}
-      value={[monthsToIndex(filters.minDuration) ?? 0, monthsToIndex(filters.maxDuration) ?? 4]}
-      onValueChange={durationChange}
-      minValueDescription={t('tool.settings.general.duration-value.min-aria-label')}
-      maxValueDescription={t('tool.settings.general.duration-value.max-aria-label')}
-    />
+    <div className="mt-3">
+      <RangeSlider
+        markers={values}
+        value={[monthsToIndex(filters.minDuration) ?? 0, monthsToIndex(filters.maxDuration) ?? 4]}
+        onValueChange={durationChange}
+        minValueDescription={t('tool.settings.general.duration-value.min-aria-label')}
+        maxValueDescription={t('tool.settings.general.duration-value.max-aria-label')}
+      />
+    </div>
   );
 };

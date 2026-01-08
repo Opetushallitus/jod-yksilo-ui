@@ -822,10 +822,12 @@ export interface components {
       /** Format: email */
       email?: string;
     };
-    /** @example {
+    /**
+     * @example {
      *       "fi": "suomeksi",
      *       "sv": "på svenska"
-     *     } */
+     *     }
+     */
     LokalisoituTeksti: {
       [key: string]: string;
     };
@@ -951,7 +953,7 @@ export interface components {
       readonly ulkoinenId?: string;
       nimi?: string;
       /** Format: date-time */
-      voimassaAsti?: string;
+      voimassaAsti: string;
       muistiinpano?: string;
       nimiJaettu?: boolean;
       emailJaettu?: boolean;
@@ -1065,13 +1067,15 @@ export interface components {
     };
     AmmattiryhmaFullDto: {
       /** Format: uri */
-      uri?: string;
+      ammattiryhma?: string;
       /** Format: int32 */
       mediaaniPalkka?: number;
       /** Format: int32 */
       ylinDesiiliPalkka?: number;
       /** Format: int32 */
       alinDesiiliPalkka?: number;
+      /** Format: int32 */
+      tyollisetKokoMaa?: number;
       kohtaanto?: string;
     };
     ArvoDto: {
