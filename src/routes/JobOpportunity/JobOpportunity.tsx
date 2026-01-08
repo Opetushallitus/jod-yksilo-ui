@@ -163,32 +163,40 @@ const JobOpportunity = () => {
                   />
                 ),
               }}
-            ></Trans>
+            />
           </p>
 
           {tyomahdollisuus?.ammattiryhma ? (
-            <div className="flex sm:my-8 my-4">
-              <div>
-                <p className="font-bold">{t('job-opportunity.employment-data.supply-and-demand')}</p>
-                <h3 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent">
-                  {tyomahdollisuus?.ammattiryhma?.kohtaanto ?? NOT_AVAILABLE_LABEL}
-                </h3>
-                <span className="text-secondary-gray">
-                  <Trans
-                    i18nKey="job-opportunity.employment-data.supply-and-demand-subtitle"
-                    components={{
-                      Icon: <JodOpenInNew ariaLabel={t('external-link')} />,
-                      CustomLink: (
-                        <Link
-                          to={'https://tyomarkkinatori.fi/henkiloasiakkaat'}
-                          className="inline-flex underline text-accent items-center"
-                        />
-                      ),
-                    }}
-                  ></Trans>
-                </span>
+            <>
+              <div className="flex sm:my-8 my-4">
+                <div>
+                  <p className="font-bold">{t('job-opportunity.employment-data.supply-and-demand')}</p>
+                  <h3 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent">
+                    {tyomahdollisuus?.ammattiryhma?.kohtaanto ?? NOT_AVAILABLE_LABEL}
+                  </h3>
+                  <span className="text-secondary-gray">
+                    <Trans
+                      i18nKey="job-opportunity.employment-data.supply-and-demand-subtitle"
+                      components={{
+                        Icon: <JodOpenInNew ariaLabel={t('external-link')} />,
+                        CustomLink: (
+                          <Link
+                            to={'https://tyomarkkinatori.fi/henkiloasiakkaat'}
+                            className="inline-flex underline text-accent items-center"
+                          />
+                        ),
+                      }}
+                    />
+                  </span>
+                </div>
               </div>
-            </div>
+              <div>
+                <p className="font-bold">{t('job-opportunity.employment-data.employed-title')}</p>
+                <h3 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent">
+                  {tyomahdollisuus?.ammattiryhma?.tyollisetKokoMaa ?? NOT_AVAILABLE_LABEL}
+                </h3>
+              </div>
+            </>
           ) : (
             <p>{t('job-opportunity.salary-data.not-available')}</p>
           )}
