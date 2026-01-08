@@ -15,6 +15,7 @@ export const VirtualAssistant = () => {
     i18n: { language },
   } = useTranslation();
   const toolStore = useToolStore();
+  const [controller, setController] = React.useState<AbortController>(new AbortController());
   const [history, setHistory] = React.useState<
     Record<
       string,
@@ -66,6 +67,7 @@ export const VirtualAssistant = () => {
           },
         },
         body: { [language]: value },
+        signal: controller.signal,
       });
 
       // Fetch osaamiset for the returned kiinnostukset
@@ -96,7 +98,10 @@ export const VirtualAssistant = () => {
         },
       }));
     } else {
-      const { data, error } = await client.POST('/api/keskustelut', { body: { [language]: value } });
+      const { data, error } = await client.POST('/api/keskustelut', {
+        body: { [language]: value },
+        signal: controller.signal,
+      });
 
       // Fetch osaamiset for the returned kiinnostukset
       const osaamisetData = await osaamiset.find(data?.kiinnostukset?.map((k) => k.esco_uri!) ?? []);
@@ -152,6 +157,10 @@ export const VirtualAssistant = () => {
 
   // Clear virtual assistant state
   const clearState = () => {
+    controller.abort();
+    setController(new AbortController());
+    setValue('');
+    setId(undefined);
     setHistory({});
     setSelectedKiinnostukset([]);
   };
