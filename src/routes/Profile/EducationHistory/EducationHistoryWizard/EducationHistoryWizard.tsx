@@ -170,7 +170,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
       testId="education-history-wizard"
       fullWidthContent
       topSlot={<ModalHeader text={headerText} />}
-      className="sm:!h-[700px]"
+      className="sm:!h-full"
       content={
         <FormProvider {...methods}>
           <Form

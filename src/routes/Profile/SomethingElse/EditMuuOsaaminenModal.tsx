@@ -97,6 +97,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
       name={headerText}
       open={isOpen}
       topSlot={<ModalHeader text={headerText} testId="edit-other-competences" />}
+      className="sm:!h-full"
       content={
         <FormProvider {...methods}>
           <Form
