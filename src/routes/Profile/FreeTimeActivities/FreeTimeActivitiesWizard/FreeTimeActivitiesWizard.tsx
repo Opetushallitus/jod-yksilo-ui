@@ -232,7 +232,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
       testId="free-time-wizard"
       fullWidthContent
       topSlot={<ModalHeader text={headerText} testId="free-time-step-title" />}
-      className="sm:!h-[700px]"
+      className="sm:!h-full"
       content={
         <FormProvider {...methods}>
           <Form

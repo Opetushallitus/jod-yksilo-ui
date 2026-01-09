@@ -98,6 +98,7 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
       name={headerText}
       open={isOpen}
       topSlot={<ModalHeader text={headerText} testId="edit-interests-title" />}
+      className="sm:!h-full"
       content={
         <FormProvider {...methods}>
           <Form
