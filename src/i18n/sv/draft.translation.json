@@ -62,6 +62,15 @@
   "education-history": {
     "add-studies-to-this-education-button": "Lägg studier"
   },
+  "education-opportunity": {
+    "duration": {
+      "of-month_one": "{{count}} månad",
+      "of-month_other": "{{count}} månader",
+      "of-year": "{{count}} år",
+      "range": "Varaktigheten kan variera mellan {{min}} och {{max}}.",
+      "years-and-months": "{{years}} och {{months}}"
+    }
+  },
   "error": {
     "form": {
       "date-in-the-past": "Datumet kan inte vara i det förflutna",
