@@ -52,6 +52,14 @@
   "education-history": {
     "add-studies-to-this-education-button": "Lisää opinto"
   },
+  "education-opportunity": {
+    "duration": {
+      "of-month": "{{count}} kuukauden",
+      "of-year": "{{count}} vuoden",
+      "range": "Kesto voi vaihdella {{min}} ja {{max}} välillä.",
+      "years-and-months": "{{years}} ja {{months}}"
+    }
+  },
   "error": {
     "form": {
       "date-in-the-past": "Päivämäärä ei voi olla menneisyydessä",

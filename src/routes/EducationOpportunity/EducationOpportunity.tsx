@@ -16,6 +16,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
+import { getDurationText } from './utils';
 
 const EducationOpportunity = () => {
   const { jakaumat, koulutusmahdollisuus, osaamiset, isLoggedIn } = useLoaderData<LoaderData>();
@@ -26,17 +27,6 @@ const EducationOpportunity = () => {
     i18n: { language },
   } = useTranslation();
   const { isPrd } = useEnvironment();
-
-  // eslint-disable-next-line react-hooks/preserve-manual-memoization
-  const duration = React.useMemo(() => {
-    if (!kesto?.mediaani || kesto.mediaani === 0) {
-      return null;
-    }
-
-    return kesto?.mediaani < 12
-      ? t('education-opportunity.duration.average-months', { count: kesto.mediaani })
-      : t('education-opportunity.duration.average-years', { count: Math.round(kesto.mediaani / 12) });
-  }, [kesto?.mediaani, t]);
 
   const kartoitetutKiinnostuksetUris = useToolStore(
     useShallow((state) =>
@@ -62,6 +52,8 @@ const EducationOpportunity = () => {
     [language, title, isPrd],
   );
 
+  const durationText = getDurationText(kesto);
+
   const sections: OpportunityDetailsSection[] = [
     {
       navTitle: t('description'),
@@ -69,12 +61,12 @@ const EducationOpportunity = () => {
       showDivider: false,
       content: <p className="text-body-md font-arial">{getLocalizedText(kuvaus)}</p>,
     },
-    ...(duration
+    ...(durationText
       ? [
           {
             navTitle: t('duration'),
             showDivider: false,
-            content: <p className="text-body-md font-arial">{duration}</p>,
+            content: <p className="text-body-md font-arial">{durationText}</p>,
           } as OpportunityDetailsSection,
         ]
       : []),

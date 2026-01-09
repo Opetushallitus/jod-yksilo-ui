@@ -52,6 +52,16 @@
   "education-history": {
     "add-studies-to-this-education-button": "Add studies"
   },
+  "education-opportunity": {
+    "duration": {
+      "of-month_one": "{{count}} month",
+      "of-month_other": "{{count}} months",
+      "of-year_one": "{{count}} year",
+      "of-year_other": "{{count}} years",
+      "range": "Duration may vary between {{min}} and {{max}}.",
+      "years-and-months": "{{years}} and {{months}}"
+    }
+  },
   "error": {
     "form": {
       "date-in-the-past": "The date cannot be in the past",
