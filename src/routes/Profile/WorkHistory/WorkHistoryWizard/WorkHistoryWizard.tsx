@@ -162,39 +162,28 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
 
   const topSlot = React.useMemo(() => <ModalHeader text={headerText} />, [headerText]);
 
-  const content = React.useMemo(
-    () => (
-      <FormProvider {...methods}>
-        <Form
-          id={formId}
-          onSubmit={onSubmit}
-          onKeyDown={(event) => {
-            // Prevent form submission on Enter
-            if (event.key === 'Enter') {
-              event.preventDefault();
-            }
-          }}
-        >
-          {isWorkplaceStep && (
-            <div data-testid="work-history-step-workplace">
-              <WorkplaceStep type={isFirstStep ? 'tyopaikka' : 'toimenkuva'} toimenkuva={selectedToimenkuva} />
-            </div>
-          )}
-          {isCompetencesStep && (
-            <div data-testid="work-history-step-competences">
-              <CompetencesStep toimenkuva={selectedToimenkuva} />
-            </div>
-          )}
-          {isSummaryStep && (
-            <div data-testid="work-history-step-summary">
-              <SummaryStep />
-            </div>
-          )}
-        </Form>
-      </FormProvider>
-    ),
-    [methods, formId, onSubmit, isWorkplaceStep, isFirstStep, selectedToimenkuva, isCompetencesStep, isSummaryStep],
-  );
+  const StepComponent = React.useMemo(() => {
+    if (isWorkplaceStep) {
+      return (
+        <div data-testid="work-history-step-workplace">
+          <WorkplaceStep type={isFirstStep ? 'tyopaikka' : 'toimenkuva'} toimenkuva={selectedToimenkuva} />
+        </div>
+      );
+    } else if (isCompetencesStep) {
+      return (
+        <div data-testid="work-history-step-competences">
+          <CompetencesStep toimenkuva={selectedToimenkuva} />
+        </div>
+      );
+    } else if (isSummaryStep) {
+      return (
+        <div data-testid="work-history-step-summary">
+          <SummaryStep />
+        </div>
+      );
+    }
+    return <></>;
+  }, [isWorkplaceStep, isFirstStep, selectedToimenkuva, isCompetencesStep, isSummaryStep]);
 
   const progress = React.useMemo(
     () => (
@@ -322,7 +311,22 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
       testId="work-history-wizard"
       fullWidthContent
       topSlot={topSlot}
-      content={content}
+      content={
+        <FormProvider {...methods}>
+          <Form
+            id={formId}
+            onSubmit={onSubmit}
+            onKeyDown={(event) => {
+              // Prevent form submission on Enter
+              if (event.key === 'Enter') {
+                event.preventDefault();
+              }
+            }}
+          >
+            {StepComponent}
+          </Form>
+        </FormProvider>
+      }
       progress={progress}
       footer={footer}
       className="sm:!h-full"
