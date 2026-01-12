@@ -38,8 +38,10 @@ const ExploreOpportunities = () => {
     totalItems,
     updateEhdotuksetAndTyomahdollisuudet,
     toggleSuosikki,
+    settingsHaveChanged,
   } = useToolStore(
     useShallow((state) => ({
+      settingsHaveChanged: state.settingsHaveChanged,
       ammattiryhmaNimet: state.ammattiryhmaNimet,
       mahdollisuusEhdotukset: state.mahdollisuusEhdotukset,
       mixedMahdollisuudet: state.mixedMahdollisuudet,
@@ -127,6 +129,7 @@ const ExploreOpportunities = () => {
                 label={updateButtonLabel}
                 variant="accent"
                 onClick={() => onUpdateResults(isLoading)}
+                disabled={!settingsHaveChanged}
                 icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
                 iconSide={isLoading ? 'right' : undefined}
                 testId="update-opportunities"
