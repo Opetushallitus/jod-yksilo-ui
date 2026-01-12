@@ -208,9 +208,18 @@
   },
   "profile": {
     "banner": {
-      "description": "Kirjaudu palveluun ja tee osaamisprofiilisi. Näin tietosi pysyvät tallessa.",
-      "link-text": "Kirjaudu palveluun",
-      "title": "Luo oma osaamisprofiili"
+      "description": {
+        "logged-in": "Tallenna ja muokkaa tunnistamiasi osaamisia profiilissasi. Profiilista löydät myös suosikkisi ja tavoitteesi.",
+        "unlogged": "Kirjaudu palveluun ja tee osaamisprofiilisi. Näin tietosi pysyvät tallessa."
+      },
+      "link-text": {
+        "logged-in": "Siirry profiiliin",
+        "unlogged": "Kirjaudu palveluun"
+      },
+      "title": {
+        "logged-in": "Oma Osaamisprofiili",
+        "unlogged": "Luo oma osaamisprofiili"
+      }
     },
     "favorites": {
       "goals-card": {
