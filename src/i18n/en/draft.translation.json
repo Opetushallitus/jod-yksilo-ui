@@ -205,9 +205,18 @@
   },
   "profile": {
     "banner": {
-      "description": "Login to the service and create your competence profile. This way, your information will be saved securely.",
-      "link-text": "Login to service",
-      "title": "Create your own competence profile"
+      "description": {
+        "logged-in": "Save and edit the competences you have identified in your profile. You will also find your favorites and goals in the profile.",
+        "unlogged": "Login to the service and create your competence profile. This way, your information will be saved securely."
+      },
+      "link-text": {
+        "logged-in": "Go to profile",
+        "unlogged": "Login to service"
+      },
+      "title": {
+        "logged-in": "My Competence Profile",
+        "unlogged": "Create your own competence profile"
+      }
     },
     "favorites": {
       "goals-card": {

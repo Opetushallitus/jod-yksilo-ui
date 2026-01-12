@@ -223,9 +223,18 @@
   },
   "profile": {
     "banner": {
-      "description": "Logga in i tjänsten och skapa din kompetensprofil. På så sätt sparas din information säkert.",
-      "link-text": "Logga in i tjänsten",
-      "title": "Skapa din egen kompetensprofil"
+      "description": {
+        "logged-in": "Spara och redigera de kompetenser du har identifierat i din profil. I profilen hittar du också dina favoriter och mål.",
+        "unlogged": "Logga in i tjänsten och skapa din kompetensprofil. På så sätt sparas din information säkert."
+      },
+      "link-text": {
+        "logged-in": "Gå till profilen",
+        "unlogged": "Logga in i tjänsten"
+      },
+      "title": {
+        "logged-in": "Min kompetensprofil",
+        "unlogged": "Skapa din egen kompetensprofil"
+      }
     },
     "competences": {
       "info": "Du kan själv välja vilken information från din kompetensprofil du vill använda när du söker möjligheter genom att importera den till sidan Hitta möjligheter."
