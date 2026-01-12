@@ -11,9 +11,15 @@ import { getFreeTimeActivitiesTableRows } from '../Profile/FreeTimeActivities/ut
 import { getWorkHistoryTableRows } from '../Profile/WorkHistory/utils';
 import { arrayToIdMap, osaaminenCombiner } from './utils';
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 const loader = (async ({ request, params }) => {
+  const ulkoinenJakolinkkiId = new URL(request.url).searchParams.get('token');
+  if (!ulkoinenJakolinkkiId) {
+    throw redirect(`/${params.lng}/404`);
+  }
+
   const { data, response, error } = await client.GET('/api/cv/{ulkoinenJakolinkkiId}', {
-    params: { path: { ulkoinenJakolinkkiId: params.ulkoinenJakolinkkiId! } },
+    params: { path: { ulkoinenJakolinkkiId } },
     signal: request.signal,
   });
 

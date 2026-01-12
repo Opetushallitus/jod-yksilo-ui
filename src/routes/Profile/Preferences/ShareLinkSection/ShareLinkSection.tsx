@@ -94,7 +94,8 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
         ) : (
           <ul className="flex flex-col gap-7">
             {jakolinkit.map((linkki) => {
-              const url = new URL(`${location.origin}/yksilo/${i18n.language}/cv/${linkki.ulkoinenId}`);
+              const url = new URL(`${location.origin}/yksilo/${i18n.language}/cv`);
+              url.searchParams.set('token', linkki.ulkoinenId!);
               const date = linkki.voimassaAsti ? new Date(linkki.voimassaAsti) : null;
               const expired = date ? date < new Date() : false;
               const dateStr = date ? formatDate(date, 'medium') : null;
@@ -184,7 +185,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                           className="whitespace-nowrap w-fit"
                           label={t('preferences.share.preview')}
                           iconSide="right"
-                          linkComponent={getLinkTo(url, { useAnchor: true, target: '_blank' })}
+                          linkComponent={getLinkTo(url.href, { useAnchor: true, target: '_blank' })}
                           icon={<JodOpenInNew ariaLabel={t('external-link')} />}
                           disabled={expired}
                         />

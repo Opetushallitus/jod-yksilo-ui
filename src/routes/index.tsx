@@ -193,8 +193,8 @@ const getCvRoute = (): RouteObject[] =>
     ? supportedLanguageCodes.map(
         (lng) =>
           ({
-            id: `cv/:ulkoinenJakolinkkiId|${lng}`,
-            path: 'cv/:ulkoinenJakolinkkiId',
+            id: `cv|${lng}`,
+            path: 'cv',
             element: <Cv />,
             loader: cvLoader,
           }) as RouteObject,
