@@ -76,7 +76,7 @@ const Root = () => {
   const [navMenuOpen, setNavMenuOpen] = React.useState(false);
   const [feedbackVisible, setFeedbackVisible] = React.useState(false);
   const logoutForm = React.useRef<HTMLFormElement>(null);
-  const isCvPage = !!useMatch(`/${language}/cv/*`);
+  const isCvPage = !!useMatch(`/${language}/cv`);
 
   const data = useLoaderData();
   const hostname = globalThis.location.hostname;
