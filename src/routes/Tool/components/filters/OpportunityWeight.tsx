@@ -54,7 +54,7 @@ const OpportunityWeight = () => {
   return (
     <div data-testid="tool-opportunity-slider" className="pt-4">
       <Slider
-        label={t('competences')}
+        label={t('map-competences')}
         rightLabel={t('interests')}
         onValueChange={(val) => setOsaamisKiinnostusPainotus(val)}
         value={painotus.value}
