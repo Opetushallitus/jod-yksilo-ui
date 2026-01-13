@@ -315,6 +315,7 @@ const AddOrEditToimenkuvaModal = ({
     <Modal
       name={headerText}
       open={isOpen}
+      className="sm:!h-full"
       progress={
         <WizardProgress
           labelText={t('wizard.label')}
