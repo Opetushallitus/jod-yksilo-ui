@@ -325,6 +325,7 @@ export const AddOrEditPatevyysModal = ({
     <Modal
       name={headerText}
       open={isOpen}
+      className="sm:!h-full"
       progress={
         <WizardProgress
           labelText={t('wizard.label')}
