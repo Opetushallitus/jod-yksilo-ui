@@ -54,7 +54,7 @@ const loader = (async ({ request, params, context }) => {
       (value, occupation) => ({ ...occupation, osuus: value.osuus }),
       request.signal,
     ),
-    ammatit.get(tyomahdollisuus?.ammattiryhma?.ammattiryhma ?? '', request.signal),
+    ammatit.get(tyomahdollisuus?.ammattiryhma?.uri ?? '', request.signal),
   ]);
 
   if (context) {
