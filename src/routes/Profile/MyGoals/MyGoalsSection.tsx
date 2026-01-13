@@ -27,9 +27,10 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
     i18n: { language },
   } = useTranslation();
 
-  const { mahdollisuusDetails, upsertTavoite, deleteTavoite } = useTavoitteetStore(
+  const { mahdollisuusDetails, isLoading, upsertTavoite, deleteTavoite } = useTavoitteetStore(
     useShallow((state) => ({
       mahdollisuusDetails: state.mahdollisuusDetails,
+      isLoading: state.isLoading,
       upsertTavoite: state.upsertTavoite,
       deleteTavoite: state.deleteTavoite,
     })),
@@ -138,6 +139,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                         setTavoite(tavoite);
                         showModal(AddPlanModal);
                       }}
+                      disabled={isLoading}
                       label={t('profile.my-goals.add-new-plan-for-goal')}
                     />
                     <PlanCompetencesTable goal={tavoite} />
@@ -149,21 +151,20 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                           setTavoite(tavoite);
                           showModal(GoalModal, { mode: 'UPDATE', tavoite: tavoite });
                         }}
+                        disabled={isLoading}
                         label={t('profile.my-goals.modify-goal')}
                       />
-
                       <Button
                         label={t('profile.my-goals.delete-goal')}
                         variant="white-delete"
                         onClick={() => {
-                          if (!tavoite.id) return;
                           showDialog({
                             title: t('profile.my-goals.delete-goal'),
                             description: t('profile.my-goals.delete-goal-description'),
                             onConfirm: () => deleteTavoite(tavoite.id!),
                           });
                         }}
-                        disabled={!tavoite.id}
+                        disabled={!tavoite.id || isLoading}
                         testId="goals-delete"
                       />
                     </div>

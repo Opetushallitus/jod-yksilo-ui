@@ -182,7 +182,7 @@ const Cv = () => {
         <>
           <ScrollHeading title={t('cv.basic-info.title')} heading="h2" className="text-transparent text-[0px] size-0" />
           <div className="bg-bg-gray-2 p-5 rounded-md flex flex-row mb-6">
-            <div className="shrink-1 items-start pr-5">
+            <div className="shrink items-start pr-5">
               <JodInfo className="text-secondary-1-dark-2" />
             </div>
             <dl className="flex flex-col sm:text-heading-4 text-heading-4-mobile flex-wrap">
