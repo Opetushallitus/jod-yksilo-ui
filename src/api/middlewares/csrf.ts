@@ -3,27 +3,30 @@ import { client } from '../client';
 import type { components } from '../schema';
 
 type CsrfDTO = components['schemas']['CsrfTokenDto'];
-const csrfMiddleware = (csrf: CsrfDTO): Middleware => ({
-  onRequest({ request }) {
-    request.headers.set(csrf.headerName, csrf.token);
-    return request;
-  },
-});
+const csrfMiddleware = (csrf: CsrfDTO): Middleware => {
+  const { headerName, token } = csrf;
+  return {
+    onRequest({ request }) {
+      request.headers.set(headerName, token);
+      return request;
+    },
+  };
+};
 
-let registeredCsrfMiddleware: CsrfDTO | null = null;
+let registeredCsrfMiddleware: Middleware | undefined = undefined;
 
 export const registerCsrfMiddleware = (csrf: CsrfDTO) => {
   if (registeredCsrfMiddleware) {
     unregisterCsrfMiddleware();
   }
 
-  client.use(csrfMiddleware(csrf));
-  registeredCsrfMiddleware = csrf;
+  registeredCsrfMiddleware = csrfMiddleware(csrf);
+  client.use(registeredCsrfMiddleware);
 };
 
 export const unregisterCsrfMiddleware = () => {
   if (registeredCsrfMiddleware) {
-    client.eject(csrfMiddleware(registeredCsrfMiddleware));
-    registeredCsrfMiddleware = null;
+    client.eject(registeredCsrfMiddleware);
+    registeredCsrfMiddleware = undefined;
   }
 };
