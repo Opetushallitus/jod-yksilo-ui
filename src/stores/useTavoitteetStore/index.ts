@@ -9,54 +9,71 @@ export type Tavoite = components['schemas']['TavoiteDto'];
 
 interface TavoitteetState {
   tavoitteet: Tavoite[];
+  mahdollisuusDetails: TypedMahdollisuus[];
+  isLoading: boolean;
   setTavoitteet: (state: Tavoite[]) => void;
   upsertTavoite: (tavoite: Tavoite) => Promise<void>;
   refreshTavoitteet: () => Promise<void>;
   deleteTavoite: (tavoiteId: string) => Promise<void>;
-  mahdollisuusDetails: TypedMahdollisuus[];
   setMahdollisuusDetails: (state: TypedMahdollisuus[]) => void;
 }
 
 export const useTavoitteetStore = create<TavoitteetState>()((set, get) => ({
   tavoitteet: [],
   mahdollisuusDetails: [],
+  isLoading: false,
 
   setMahdollisuusDetails: (state) => set({ mahdollisuusDetails: state }),
   refreshTavoitteet: async () => {
-    const response = await client.GET('/api/profiili/tavoitteet');
-    const tavoitteet = response.data ?? [];
-    get().setTavoitteet(tavoitteet);
+    try {
+      set({ isLoading: true });
+      const response = await client.GET('/api/profiili/tavoitteet');
+      const tavoitteet = response.data ?? [];
+      get().setTavoitteet(tavoitteet);
+    } finally {
+      set({ isLoading: false });
+    }
   },
   setTavoitteet: (state) => set({ tavoitteet: state }),
   upsertTavoite: async (tavoite) => {
-    set((state) => {
-      const exists = state.tavoitteet.some(
-        (existingTavoite) => existingTavoite.mahdollisuusId === tavoite.mahdollisuusId,
-      );
+    try {
+      set({ isLoading: true });
+      set((state) => {
+        const exists = state.tavoitteet.some(
+          (existingTavoite) => existingTavoite.mahdollisuusId === tavoite.mahdollisuusId,
+        );
 
-      return {
-        tavoitteet: exists
-          ? state.tavoitteet.map((pm) => (pm.mahdollisuusId === tavoite.mahdollisuusId ? { ...tavoite } : pm))
-          : [...state.tavoitteet, { ...tavoite }],
-      };
-    });
-    const mapToIds = (pm: Tavoite) => pm.mahdollisuusId;
-    const tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(
-      get().tavoitteet.map(mapToIds).filter(isDefined),
-    );
-    get().setMahdollisuusDetails(tyomahdollisuudetDetails);
+        return {
+          tavoitteet: exists
+            ? state.tavoitteet.map((pm) => (pm.mahdollisuusId === tavoite.mahdollisuusId ? { ...tavoite } : pm))
+            : [...state.tavoitteet, { ...tavoite }],
+        };
+      });
+      const mapToIds = (pm: Tavoite) => pm.mahdollisuusId;
+      const tyomahdollisuudetDetails = await getTypedTyoMahdollisuusDetails(
+        get().tavoitteet.map(mapToIds).filter(isDefined),
+      );
+      get().setMahdollisuusDetails(tyomahdollisuudetDetails);
+    } finally {
+      set({ isLoading: false });
+    }
   },
   deleteTavoite: async (id: string) => {
-    const { error } = await client.DELETE('/api/profiili/tavoitteet/{id}', {
-      params: {
-        path: { id },
-      },
-    });
-
-    if (!error) {
-      set({
-        tavoitteet: get().tavoitteet.filter((pm) => pm.id !== id),
+    try {
+      set({ isLoading: true });
+      const { error } = await client.DELETE('/api/profiili/tavoitteet/{id}', {
+        params: {
+          path: { id },
+        },
       });
+
+      if (!error) {
+        set({
+          tavoitteet: get().tavoitteet.filter((pm) => pm.id !== id),
+        });
+      }
+    } finally {
+      set({ isLoading: false });
     }
   },
 }));
