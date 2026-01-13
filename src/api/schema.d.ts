@@ -1040,7 +1040,7 @@ export interface components {
     };
     AmmattiryhmaBasicDto: {
       /** Format: uri */
-      uri?: string;
+      uri: string;
       /** Format: int32 */
       mediaaniPalkka?: number;
       kohtaanto?: string;
@@ -1071,7 +1071,7 @@ export interface components {
     };
     AmmattiryhmaFullDto: {
       /** Format: uri */
-      ammattiryhma?: string;
+      uri: string;
       /** Format: int32 */
       mediaaniPalkka?: number;
       /** Format: int32 */

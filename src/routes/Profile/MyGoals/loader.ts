@@ -32,8 +32,7 @@ export default (async ({ request }) => {
   const ammattiryhmaNimet: Record<string, components['schemas']['LokalisoituTeksti']> = {};
   const ammattiryhmaUris = [...tyomahdollisuudetDetails, ...koulutusMahdollisuudetDetails]
     .filter((m) => m.ammattiryhma?.uri && !ammattiryhmaNimet?.[m.ammattiryhma.uri])
-    .map((m) => m.ammattiryhma!.uri)
-    .filter((uri): uri is string => uri !== undefined);
+    .map((m) => m.ammattiryhma!.uri);
 
   if (ammattiryhmaUris.length > 0) {
     const ammattiryhmat = await ammatit.find(ammattiryhmaUris);
