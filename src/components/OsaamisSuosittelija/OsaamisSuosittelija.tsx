@@ -6,6 +6,7 @@ import { ESCO_SKILL_PREFIX, LIMITS, OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
+import { animateElementToTarget } from '@/utils/animations';
 import { EmptyState, Tag, Textarea, tidyClasses as tc } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -40,6 +41,8 @@ interface OsaamisSuosittelijaProps {
   hideSelected?: boolean;
   /** Should the text area be displayed */
   hideTextAreaLabel?: boolean;
+  /** Should animations be used when adding/removing tags */
+  useAnimations?: boolean;
 }
 
 export const OsaamisSuosittelija = ({
@@ -52,6 +55,7 @@ export const OsaamisSuosittelija = ({
   placeholder,
   hideSelected = false,
   hideTextAreaLabel = false,
+  useAnimations = false,
 }: OsaamisSuosittelijaProps) => {
   const { i18n, t } = useTranslation();
   const [debouncedTaitosi, taitosi, setTaitosi] = useDebounceState('', 500);
@@ -63,7 +67,9 @@ export const OsaamisSuosittelija = ({
   const pendingTaitosi = React.useRef<string | null>(null);
   const suggestedTagsRef = React.useRef<HTMLUListElement>(null);
   const selectedTagsRef = React.useRef<HTMLUListElement>(null);
+  const selectedAreaRef = React.useRef<HTMLDivElement>(null); // For animation target
   const lastClickedIndexRef = React.useRef<{ index: number; group: 'suggested' | 'selected' } | null>(null);
+  const [skillsToAdd, setSkillsToAdd] = React.useState<string[]>([]);
 
   // Set roving tabindex for suggested tags
   React.useEffect(() => {
@@ -167,11 +173,16 @@ export const OsaamisSuosittelija = ({
     }
   };
 
-  const removeOsaaminenById = (id: string) => () => {
-    const index = value.findIndex((val) => val.id === id);
-    lastClickedIndexRef.current = { index, group: 'selected' };
-    onChange(value.filter((val) => val.id !== id));
-  };
+  const removeOsaaminenById = React.useCallback(
+    (ids: string[]) => () => {
+      // Assume that last clicked osaaminen is the first one on the list
+      const id = ids[0];
+      lastClickedIndexRef.current = { index: value.findIndex((val) => val.id === id), group: 'selected' };
+      const valueWithoutRemoved = value.filter((val) => !ids.includes(val.id));
+      onChange(valueWithoutRemoved);
+    },
+    [onChange, value],
+  );
 
   const textAreaLabel = () => {
     if (hideTextAreaLabel) {
@@ -265,7 +276,7 @@ export const OsaamisSuosittelija = ({
             // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <ul
               ref={suggestedTagsRef}
-              className="flex flex-wrap gap-3"
+              className="flex flex-wrap gap-3 p-1"
               data-testid="osaamissuosittelija-suggested-competences"
               role="group"
               onKeyDown={(e) => handleKeyboardNavigation(e, filteredEhdotetutOsaamiset)}
@@ -275,25 +286,41 @@ export const OsaamisSuosittelija = ({
                 <li key={ehdotettuOsaaminen.id}>
                   <Tag
                     label={getLocalizedText(ehdotettuOsaaminen.nimi)}
-                    tooltip={getLocalizedText(ehdotettuOsaaminen.kuvaus)}
+                    tooltip={
+                      // Do not show tooltip if user has clicked to add the skill
+                      skillsToAdd.includes(ehdotettuOsaaminen.id)
+                        ? undefined
+                        : getLocalizedText(ehdotettuOsaaminen.kuvaus)
+                    }
                     sourceType={
                       mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
                     }
-                    onClick={() => {
+                    onClick={(e) => {
                       if (ehdotettuOsaaminen.id && value.find((val) => val.id === ehdotettuOsaaminen.id)) {
                         return; // Prevent adding duplicates by rapid clicking
                       }
 
                       lastClickedIndexRef.current = { index, group: 'suggested' };
+                      skillsToAdd.push(ehdotettuOsaaminen.id);
+
+                      // Call onChange before animation, otherwise only the first value will be added when selecting competences rapidly.
+                      // To compensate, animation delay is added in AddedTags component.
                       onChange([
-                        ...value,
                         {
                           id: ehdotettuOsaaminen.id,
                           nimi: ehdotettuOsaaminen.nimi,
                           kuvaus: ehdotettuOsaaminen.kuvaus,
                           tyyppi: sourceType,
                         },
+                        ...value,
                       ]);
+
+                      if (useAnimations) {
+                        animateElementToTarget(e.currentTarget, selectedAreaRef.current!, () => {
+                          // eslint-disable-next-line sonarjs/no-nested-functions
+                          setSkillsToAdd((prev) => prev.filter((id) => id !== ehdotettuOsaaminen.id));
+                        });
+                      }
                     }}
                     variant="selectable"
                   />
@@ -333,12 +360,12 @@ export const OsaamisSuosittelija = ({
               )}
             </div>
 
-            <div className="overflow-y-auto max-h-[228px]">
+            <div className="overflow-y-auto max-h-[228px]" ref={selectedAreaRef}>
               {value.length > 0 ? (
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
                 <ul
                   ref={selectedTagsRef}
-                  className="flex flex-wrap gap-3"
+                  className="flex flex-wrap gap-3 p-1"
                   data-testid="osaamissuosittelija-selected-competences"
                   role="group"
                   onKeyDown={(e) => handleKeyboardNavigation(e, value)}
@@ -348,6 +375,7 @@ export const OsaamisSuosittelija = ({
                     osaamiset={value}
                     onClick={removeOsaaminenById}
                     lahdetyyppi={mode === 'osaamiset' ? 'MUU_OSAAMINEN' : 'KIINNOSTUS'}
+                    useAnimations={useAnimations}
                   />
                 </ul>
               ) : (

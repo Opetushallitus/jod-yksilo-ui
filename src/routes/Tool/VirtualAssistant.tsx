@@ -3,6 +3,7 @@ import { osaamiset } from '@/api/osaamiset';
 import { LIMITS, OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicatesByKey } from '@/utils';
+import { animateElementToTarget, animateHideElement } from '@/utils/animations';
 import { Button, ConfirmDialog, cx, EmptyState, InputField, Tag } from '@jod/design-system';
 import { JodChatBot, JodSend } from '@jod/design-system/icons';
 import React, { Fragment } from 'react';
@@ -48,9 +49,10 @@ export const VirtualAssistant = () => {
   const conversationTabPanelId = React.useId();
   const interestsTabButtonId = React.useId();
   const interestsTabPanelId = React.useId();
+  const interestsTabButtonRef = React.useRef<HTMLButtonElement>(null);
   const selectedKiinnostuksetLabelId = React.useId();
-
   const isSendDisabled = React.useMemo(() => value.trim().length < 2, [value]);
+  const [tagsPendingRemoval, setTagsPendingRemoval] = React.useState<string[]>([]);
 
   // Scroll to bottom when history changes
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -62,9 +64,7 @@ export const VirtualAssistant = () => {
     if (id) {
       const { data, error } = await client.POST('/api/keskustelut/{id}', {
         params: {
-          path: {
-            id,
-          },
+          path: { id },
         },
         body: { [language]: value },
         signal: controller.signal,
@@ -182,7 +182,13 @@ export const VirtualAssistant = () => {
               type="button"
               role="tab"
               onClick={() => {
+                // When switching to conversation tab, remove tags pending removal.
+                // Otherwise they would remain in selections if tab is switched before animation ends.
                 setSelectedInterestsVisible(false);
+                setSelectedKiinnostukset((prevState) => {
+                  return prevState.filter((k) => !tagsPendingRemoval.includes(k.uri));
+                });
+                setTagsPendingRemoval([]);
               }}
               aria-selected={selectedInterestsVisible ? 'false' : 'true'}
               aria-controls={conversationTabPanelId}
@@ -195,6 +201,7 @@ export const VirtualAssistant = () => {
             </button>
             <button
               id={interestsTabButtonId}
+              ref={interestsTabButtonRef}
               type="button"
               role="tab"
               onClick={() => {
@@ -278,9 +285,10 @@ export const VirtualAssistant = () => {
                                         <Tag
                                           label={k.nimi[language] ?? k.uri}
                                           sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
-                                          onClick={() => {
+                                          onClick={(e) => {
+                                            animateElementToTarget(e.currentTarget, interestsTabButtonRef.current!);
                                             // eslint-disable-next-line sonarjs/no-nested-functions
-                                            setSelectedKiinnostukset((prevState) => [...prevState, k]);
+                                            setSelectedKiinnostukset((prevState) => [k, ...prevState]);
                                           }}
                                           variant="selectable"
                                         />
@@ -352,10 +360,15 @@ export const VirtualAssistant = () => {
                           label={k.nimi[language] ?? k.uri}
                           sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
                           variant="added"
-                          onClick={() => {
-                            setSelectedKiinnostukset((prevState) => {
+                          onClick={(e) => {
+                            setTagsPendingRemoval((prev) => [...prev, k.uri]);
+                            animateHideElement(e.currentTarget, () => {
                               // eslint-disable-next-line sonarjs/no-nested-functions
-                              return prevState.filter((selectedValue) => selectedValue.kuvaus !== k.kuvaus);
+                              setSelectedKiinnostukset((prevState) => {
+                                return prevState.filter((selectedValue) => selectedValue.kuvaus !== k.kuvaus);
+                              });
+                              // eslint-disable-next-line sonarjs/no-nested-functions
+                              setTagsPendingRemoval((prev) => prev.filter((uri) => uri !== k.uri));
                             });
                           }}
                         />

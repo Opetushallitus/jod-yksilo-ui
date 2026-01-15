@@ -25,6 +25,7 @@ const Competences = () => {
       value={osaamiset.filter((o) => o.tyyppi === 'KARTOITETTU')}
       tagHeadingClassName="bg-white"
       hideTextAreaLabel
+      useAnimations
     />
   );
 };

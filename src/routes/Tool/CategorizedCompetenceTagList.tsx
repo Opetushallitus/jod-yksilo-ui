@@ -39,7 +39,7 @@ const CompetenceCategory = ({
   lahdeTyyppi,
 }: {
   osaamiset: OsaaminenValue[];
-  onChange: (id: string) => () => void;
+  onChange: (ids: string[]) => () => void;
   lahdeTyyppi?: OsaaminenLahdeTyyppi;
 }) => {
   return <AddedTags osaamiset={osaamiset} onClick={onChange} lahdetyyppi={lahdeTyyppi} />;
@@ -76,14 +76,14 @@ const CategorizedCompetenceTagList = () => {
   );
 
   const filterByType = (type: OsaaminenLahdeTyyppi) => (val: OsaaminenValue) => val.tyyppi === type;
-  const filterOsaaminenById = (id: string) => (value: OsaaminenValue) => value.id !== id;
+  const filterOsaaminenById = (ids: string[]) => (value: OsaaminenValue) => !ids.includes(value.id);
   const mappedInterests = React.useMemo(() => kiinnostukset.filter(filterByType('KARTOITETTU')), [kiinnostukset]);
   const mappedCompetences = React.useMemo(() => osaamiset.filter(filterByType('KARTOITETTU')), [osaamiset]);
 
-  const removeCompetenceByType = (type: 'osaaminen' | 'kiinnostus') => (id: string) => () => {
+  const removeCompetenceByType = (type: 'osaaminen' | 'kiinnostus') => (ids: string[]) => () => {
     const data = type === 'kiinnostus' ? kiinnostukset : osaamiset;
     const setData = type === 'kiinnostus' ? setKiinnostukset : setOsaamiset;
-    setData(data.filter(filterOsaaminenById(id)));
+    setData(data.filter(filterOsaaminenById(ids)));
   };
   const removeOsaaminen = removeCompetenceByType('osaaminen');
   const removeKiinnostus = removeCompetenceByType('kiinnostus');
