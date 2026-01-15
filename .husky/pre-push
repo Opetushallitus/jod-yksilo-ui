@@ -20,6 +20,7 @@ for COMMIT in $NEW_COMMITS; do
   fi
 done
 
+cd "$(git rev-parse --show-toplevel)" || exit 1
 npm run translations:check || (echo '\n (⊙＿⊙) Translation check failed! Fix dynamic keys, missing or unused translations.\n'; false)
 npm run test:unit || (echo '\n (⊙＿⊙) Your forgot to run unit tests!\n'; false)
 npm run build || (echo '\n (⊙＿⊙) Your forgot to run build!\n'; false)
