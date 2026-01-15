@@ -283,7 +283,7 @@ export const OsaamisSuosittelija = ({
               aria-labelledby={suggestedTagsId}
             >
               {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen, index) => (
-                <li key={ehdotettuOsaaminen.id}>
+                <li key={ehdotettuOsaaminen.id} className="max-w-full">
                   <Tag
                     label={getLocalizedText(ehdotettuOsaaminen.nimi)}
                     tooltip={
@@ -374,7 +374,7 @@ export const OsaamisSuosittelija = ({
                   <AddedTags
                     osaamiset={value}
                     onClick={removeOsaaminenById}
-                    lahdetyyppi={mode === 'osaamiset' ? 'MUU_OSAAMINEN' : 'KIINNOSTUS'}
+                    lahdetyyppi={mode === 'osaamiset' ? sourceType : 'KIINNOSTUS'}
                     useAnimations={useAnimations}
                   />
                 </ul>
