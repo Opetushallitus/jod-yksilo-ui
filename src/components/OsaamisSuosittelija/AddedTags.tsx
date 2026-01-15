@@ -60,7 +60,7 @@ const AddedTags = ({ osaamiset, lahdetyyppi, onClick, useAnimations = false }: A
     return (
       <li
         key={osaaminen.id + sourceType}
-        className={cx({
+        className={cx('max-w-full', {
           'scale-100 opacity-100 transition-all duration-300 delay-500': useAnimations && isVisible,
           'scale-0 opacity-0 h-0': useAnimations && !isVisible,
         })}
