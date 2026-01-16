@@ -27,7 +27,7 @@ export interface ExperienceTableRowData {
 interface ExperienceTableRowProps {
   row: ExperienceTableRowData;
   nested?: boolean;
-  last?: boolean;
+  isOdd?: boolean;
   onRowClick?: (row: ExperienceTableRowData) => void;
   className?: string;
   hideOsaamiset?: boolean;
@@ -49,11 +49,11 @@ const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData 
   const text = getLocalizedText(row?.nimi);
 
   return nested ? (
-    <p className="pl-5 pr-7 pt-2 text-body-sm font-bold sm:font-normal sm:text-body-md sm:py-2 hyphens-auto [overflow-wrap:anywhere]">
+    <p className="pl-3 sm:pl-5 pr-3 sm:pr-7 pt-2 text-body-md font-normal sm:py-2 hyphens-auto [overflow-wrap:anywhere]">
       {text}
     </p>
   ) : (
-    <p className="pl-5 pr-7 pt-2 text-heading-4 sm:text-heading-3 sm:pt-1 sm:pb-[3px] hyphens-auto [overflow-wrap:anywhere]">
+    <p className="pl-3 sm:pl-5 pr-3 sm:pr-7 pt-2 font-poppins text-heading-4 sm:pt-1 sm:pb-[3px] hyphens-auto [overflow-wrap:anywhere]">
       {text}
     </p>
   );
@@ -62,7 +62,7 @@ const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData 
 export const ExperienceTableRow = ({
   row,
   nested,
-  last = false,
+  isOdd,
   className,
   onRowClick,
   hideOsaamiset,
@@ -86,8 +86,7 @@ export const ExperienceTableRow = ({
   const { sm } = useMediaQueries();
   const [isOpen, setIsOpen] = React.useState(isPrinting ?? false);
   const tagsVisibleState = isPrinting || isOpen;
-  const osaamisetCountTotal =
-    row.osaamiset.length > 0 ? t('count-competences', { count: row.osaamiset.length }) : t('no-competences');
+  const osaamisetCountTotal = row.osaamiset.length;
 
   const renderCompetencesDetectFailure = () => {
     return (
@@ -133,26 +132,30 @@ export const ExperienceTableRow = ({
         tooltipContent={t('competences-identifying')}
         tooltipOpen={osaamisetOdottaaTunnistusta ? undefined : false}
       >
-        <button
-          aria-label={actionLabel ?? t('edit')}
-          aria-haspopup="dialog"
-          onClick={() =>
-            useConfirm
-              ? onShowDialog(() => {
-                  onRowClick(selectedRow);
-                })
-              : onRowClick(selectedRow)
-          }
-          className="cursor-pointer flex size-7 items-center justify-center"
-          disabled={osaamisetOdottaaTunnistusta}
-          title={osaamisetOdottaaTunnistusta ? t('competences-identifying') : undefined}
-          type="button"
-          data-testid={`experience-row-edit-${selectedRow.key}`}
-        >
-          {rowActionElement || (
-            <JodEdit className={osaamisetOdottaaTunnistusta ? 'text-[#83AED3]' : 'text-secondary-gray'} />
-          )}
-        </button>
+        <div className="flex justify-end">
+          <button
+            aria-label={actionLabel ?? t('edit')}
+            aria-haspopup="dialog"
+            onClick={() =>
+              useConfirm
+                ? onShowDialog(() => {
+                    onRowClick(selectedRow);
+                  })
+                : onRowClick(selectedRow)
+            }
+            className={`cursor-pointer flex size-7 items-center justify-center rounded-full mr-2 sm:m-3 ${isOdd ? 'hover:bg-secondary-5-light-3 active:bg-secondary-5-light-3' : 'hover:bg-bg-gray-2 active:bg-bg-gray-2'}`}
+            disabled={osaamisetOdottaaTunnistusta}
+            title={osaamisetOdottaaTunnistusta ? t('competences-identifying') : undefined}
+            type="button"
+            data-testid={`experience-row-edit-${selectedRow.key}`}
+          >
+            {rowActionElement || (
+              <JodEdit
+                className={osaamisetOdottaaTunnistusta ? 'text-[#83AED3]' : 'text-secondary-gray hover:text-accent'}
+              />
+            )}
+          </button>
+        </div>
       </TooltipWrapper>
     ) : null;
   };
@@ -160,6 +163,7 @@ export const ExperienceTableRow = ({
   const renderCheckbox = () => {
     return (
       <Checkbox
+        className="flex justify-center pr-3 sm:pr-0"
         name={`checkbox-${row.key}`}
         value={row.key}
         checked={checked ?? row?.checked ?? false}
@@ -191,7 +195,7 @@ export const ExperienceTableRow = ({
           type="button"
           aria-expanded={tagsVisibleState}
           onClick={() => setIsOpen(!isOpen)}
-          className={`cursor-pointer flex gap-x-2 items-center ${sm ? 'text-nowrap pr-2' : 'pr-7'}`}
+          className={`cursor-pointer flex gap-x-2 items-center justify-self-end text-secondary-gray ${sm ? 'text-nowrap sm:pr-2' : 'pr-7'}`}
           data-testid={`experience-row-competences-toggle-${row.key}`}
         >
           {osaamisetCountTotal}
@@ -202,7 +206,12 @@ export const ExperienceTableRow = ({
     if (!sm) {
       return <span className="pl-[28px] pr-7">{osaamisetCountTotal}</span>;
     }
-    return <span className={`text-nowrap pr-2 ${onRowClick ? 'pl-[28px]' : ''}`.trim()}>{osaamisetCountTotal}</span>;
+    return (
+      <span className="flex gap-x-2 flex-row text-nowrap sm:pr-2 text-secondary-gray justify-end">
+        {osaamisetCountTotal}
+        <span className="size-6 block"></span>
+      </span>
+    );
   };
 
   const renderOsaamisetCell = (sm: boolean) => {
@@ -217,12 +226,21 @@ export const ExperienceTableRow = ({
       return <td className="text-body-md text-nowrap text-center">{renderCompetencesDetectFailure()}</td>;
     }
     return sm ? (
-      <td className={`text-body-md text-nowrap ${onRowClick ? 'pr-7' : 'pr-5'.trim()}`}>
-        <span className="pr-2">{osaamisetCountTotal}</span>
+      <td className={`text-body-md text-end text-nowrap ${onRowClick ? 'sm:pr-7 pr-0' : 'pr-5'.trim()}`}>
+        <button
+          type="button"
+          aria-expanded={tagsVisibleState}
+          onClick={() => setIsOpen(!isOpen)}
+          className={`cursor-pointer flex gap-x-2 items-center justify-self-end text-secondary-gray ${sm ? 'text-nowrap sm:pr-2' : 'pr-7'}`}
+          data-testid={`experience-row-competences-toggle-${row.key}`}
+        >
+          <span className="text-secondary-gray">{osaamisetCountTotal}</span>
+          <span className="pl-6"></span>
+        </button>
       </td>
     ) : (
       <td>
-        <span className="text-body-sm text-nowrap pl-[28px] pr-7">{osaamisetCountTotal}</span>
+        <span className="text-body-md text-end text-nowrap pl-[28px] pr-7">{osaamisetCountTotal}</span>
       </td>
     );
   };
@@ -230,15 +248,15 @@ export const ExperienceTableRow = ({
   return nested ? (
     <>
       <tr key={row.key} className={className}>
-        <td className="w-full">
+        <td className="w-full" colSpan={sm ? 1 : 3}>
           <Title row={row} nested />
           {!sm && (
-            <div className="flex flex-wrap gap-x-5 pb-2 pl-5 pr-7 text-body-sm">
+            <div className="flex flex-wrap gap-x-5 pb-2 pl-3 sm:pl-5 pr-7 text-body-md">
               {row.alkuPvm && formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
             </div>
           )}
         </td>
-        {!hideOsaamiset && !sm && <td className="text-nowrap text-body-sm">{renderOsaamisetNestedCell(!sm)}</td>}
+        {!hideOsaamiset && !sm && <td className="text-nowrap text-body-md">{renderOsaamisetNestedCell(!sm)}</td>}
         {sm && (
           <>
             <td className="text-body-md pr-7">{!row.hideRowDetails && row.alkuPvm && formatDate(row.alkuPvm)}</td>
@@ -253,7 +271,7 @@ export const ExperienceTableRow = ({
       </tr>
       <tr>
         {tagsVisibleState && !showCheckbox && (
-          <td colSpan={5} className={`w-full ${last ? 'px-5 pt-5' : 'p-5'}`.trim()}>
+          <td colSpan={5} className={`${className} w-full px-4 pt-3 pb-5`.trim()}>
             <ul className="flex flex-wrap gap-3" aria-label={t('competences')}>
               {sortedCompetences.map((competence) => (
                 <li key={competence.id}>
@@ -272,10 +290,10 @@ export const ExperienceTableRow = ({
     </>
   ) : (
     <tr key={row.key} className={className}>
-      <td className="w-full">
+      <td className="w-full" colSpan={sm ? 1 : 3}>
         <Title row={row} />
         {!sm && (
-          <div className="flex flex-wrap gap-x-5 pb-2 pl-5 pr-7 text-body-sm">
+          <div className="flex flex-wrap gap-x-5 pb-2 pl-3 sm:pl-5 pr-7 text-secondary-gray text-body-md">
             <span>
               {row.alkuPvm && formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
             </span>
@@ -285,10 +303,10 @@ export const ExperienceTableRow = ({
       {!sm && !hideOsaamiset && renderOsaamisetCell(!sm)}
       {sm && (
         <>
-          <td className="text-body-md pr-7" colSpan={row.loppuPvm ? 1 : 2}>
+          <td className="text-body-md pr-7 text-secondary-gray" colSpan={row.loppuPvm ? 1 : 2}>
             {row.alkuPvm && formatDate(row.alkuPvm)}
           </td>
-          {row.loppuPvm && <td className="text-body-md pr-7">{formatDate(row.loppuPvm)}</td>}
+          {row.loppuPvm && <td className="text-body-md pr-7 text-secondary-gray">{formatDate(row.loppuPvm)}</td>}
           {!hideOsaamiset && renderOsaamisetCell(sm)}
         </>
       )}

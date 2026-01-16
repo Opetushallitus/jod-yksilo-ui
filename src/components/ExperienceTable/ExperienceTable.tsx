@@ -159,7 +159,7 @@ export const ExperienceTable = ({
     <div data-testid="experience-table">
       {rows.length > 0 && (
         <table
-          className="w-full"
+          className="w-full font-arial"
           border={0}
           cellPadding={0}
           cellSpacing={0}
@@ -167,29 +167,36 @@ export const ExperienceTable = ({
           aria-label={ariaLabel}
         >
           <thead className="after:content-[''] after:block after:h-5">
-            <tr className="border-b border-inactive-gray text-left text-body-md font-normal">
-              <th scope="col" className="pr-7 pb-3">
+            <tr className="border-b border-inactive-gray text-left text-body-md">
+              <th scope="col" colSpan={sm ? 1 : 3} className="pr-7 pb-3 font-normal pl-4">
                 {mainColumnHeader}
               </th>
+
               {sm && (
                 <>
-                  <th scope="col" className="pr-7 pb-3">
+                  <th scope="col" className="pr-7 pb-3 font-normal">
                     {t('started')}
                   </th>
-                  <th scope="col" className="pr-7 pb-3">
+                  <th scope="col" className="pr-7 pb-3 font-normal">
                     {t('ended')}
                   </th>
-                  {!hideOsaamiset && (
-                    <th scope="col" className={`pb-3 ${onNestedRowClick ? 'pr-7' : 'pr-5'}`.trim()}>
-                      {t('competences')}
-                    </th>
-                  )}
-                  {showCheckbox && (
-                    <th scope="col" className="pr-5 pb-3">
-                      {checkboxColumnHeader}
-                    </th>
-                  )}
                 </>
+              )}
+
+              {!hideOsaamiset && (
+                <th
+                  scope="col"
+                  colSpan={sm ? 1 : 2}
+                  className={`text-end pb-3 font-normal ${onNestedRowClick ? 'pr-7' : 'pr-5'}`.trim()}
+                >
+                  {t('competences')}
+                </th>
+              )}
+
+              {sm && showCheckbox && (
+                <th scope="col" className="pr-5 pb-3">
+                  {checkboxColumnHeader}
+                </th>
               )}
             </tr>
           </thead>
@@ -224,9 +231,9 @@ export const ExperienceTable = ({
                   <ExperienceTableRow
                     key={subrow.key}
                     row={subrow}
-                    last={i === row.subrows!.length - 1}
                     onRowClick={onNestedRowClick}
-                    className={i % 2 !== 0 ? 'bg-white bg-opacity-60' : 'bg-bg-gray'}
+                    isOdd={i % 2 !== 0}
+                    className={i % 2 !== 0 ? 'bg-bg-gray-2' : 'bg-bg-gray'}
                     nested
                     hideOsaamiset={hideOsaamiset}
                     osaamisetOdottaaTunnistusta={subrow.osaamisetOdottaaTunnistusta}
