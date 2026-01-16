@@ -116,15 +116,22 @@ const EditKoulutuskokonaisuusModal = ({
     void trigger();
   }, [trigger]);
 
+  const headerText = React.useMemo(() => t('education-history.edit-education'), [t]);
+
+  const topSlot = React.useMemo(
+    () => <ModalHeader text={headerText} testId="edit-koulutuskokonaisuus-modal-header" />,
+    [headerText],
+  );
+
   if (isLoading) {
     return null;
   }
 
   return (
     <Modal
-      name={t('education-history.edit-education')}
+      name={headerText}
       open={isOpen}
-      topSlot={<ModalHeader text={t('education-history.edit-education')} testId="edit-education-modal-title" />}
+      topSlot={topSlot}
       content={
         <FormProvider {...methods}>
           <Form

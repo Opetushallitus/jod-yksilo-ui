@@ -88,6 +88,8 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
     return data.length > 0 ? t('profile.competences.edit') : t('profile.competences.add');
   }, [data, t]);
 
+  const topSlot = React.useMemo(() => <ModalHeader text={headerText} testId="edit-other-competences" />, [headerText]);
+
   if (isLoading) {
     return null;
   }
@@ -96,8 +98,8 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
     <Modal
       name={headerText}
       open={isOpen}
-      topSlot={<ModalHeader text={headerText} testId="edit-other-competences" />}
-      className="sm:!h-full"
+      topSlot={topSlot}
+      className="sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form

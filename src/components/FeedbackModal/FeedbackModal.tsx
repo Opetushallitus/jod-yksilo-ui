@@ -118,13 +118,18 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
     }
   };
 
+  const topSlot = React.useMemo(
+    () => <h2 className="sm:text-heading-1 text-heading-1-mobile mb-5">{t('feedback.title')}</h2>,
+    [t],
+  );
+
   return (
     <Modal
       name={t('feedback.title')}
       open={isOpen}
       onClose={onClose}
       fullWidthContent
-      topSlot={<h2 className="sm:text-heading-1 text-heading-1-mobile mb-5">{t('feedback.title')}</h2>}
+      topSlot={topSlot}
       content={
         <Form id={formId} control={control} onSubmit={onSubmit} data-testid="feedback-form">
           <p className="sm:text-body-md text-body-md-mobile mb-9">

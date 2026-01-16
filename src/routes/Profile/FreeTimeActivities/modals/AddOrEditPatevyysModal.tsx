@@ -305,11 +305,16 @@ export const AddOrEditPatevyysModal = ({
   };
 
   const headerText = React.useMemo(() => {
-    if (step === 0) {
+    if (isFirstStep) {
       return patevyysId ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-activity');
     }
     return patevyysId ? t('free-time-activities.edit-activity') : t('free-time-activities.identify-proficiencies');
-  }, [patevyysId, step, t]);
+  }, [isFirstStep, t, patevyysId]);
+
+  const topSlot = React.useMemo(
+    () => <ModalHeader text={headerText} step={step} testId="add-or-edit-patevyys-modal-header" />,
+    [headerText, step],
+  );
 
   React.useEffect(() => {
     void trigger();
@@ -325,7 +330,7 @@ export const AddOrEditPatevyysModal = ({
     <Modal
       name={headerText}
       open={isOpen}
-      className="sm:!h-full"
+      className="sm:h-full!"
       progress={
         <WizardProgress
           labelText={t('wizard.label')}
@@ -336,7 +341,7 @@ export const AddOrEditPatevyysModal = ({
           currentStep={step + 1}
         />
       }
-      topSlot={<ModalHeader text={headerText} />}
+      topSlot={topSlot}
       content={
         <FormProvider {...methods}>
           <Form

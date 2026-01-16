@@ -160,7 +160,10 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
     return '';
   }, [id, toimenkuvaId, isFirstStep, isWorkplaceStep, isCompetencesStep, isSummaryStep, t]);
 
-  const topSlot = React.useMemo(() => <ModalHeader text={headerText} />, [headerText]);
+  const topSlot = React.useMemo(
+    () => <ModalHeader text={headerText} step={step} testId="work-history-wizard-header" />,
+    [headerText, step],
+  );
 
   const StepComponent = React.useMemo(() => {
     if (isWorkplaceStep) {
@@ -329,7 +332,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
       }
       progress={progress}
       footer={footer}
-      className="sm:!h-full"
+      className="sm:h-full!"
     />
   );
 };

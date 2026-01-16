@@ -308,6 +308,11 @@ const AddOrEditToimenkuvaModal = ({
     return t(toimenkuvaId ? 'profile.competences.edit' : 'work-history.identify-competences');
   }, [isFirstStep, t, toimenkuvaId]);
 
+  const topSlot = React.useMemo(
+    () => <ModalHeader text={headerText} step={step} testId="add-or-edit-toimenkuva-modal-header" />,
+    [headerText, step],
+  );
+
   if (isLoading) {
     return <></>;
   }
@@ -315,7 +320,7 @@ const AddOrEditToimenkuvaModal = ({
     <Modal
       name={headerText}
       open={isOpen}
-      className="sm:!h-full"
+      className="sm:h-full!"
       progress={
         <WizardProgress
           labelText={t('wizard.label')}
@@ -326,7 +331,7 @@ const AddOrEditToimenkuvaModal = ({
           currentStep={step + 1}
         />
       }
-      topSlot={<ModalHeader text={headerText} />}
+      topSlot={topSlot}
       content={
         <FormProvider {...methods}>
           <Form
