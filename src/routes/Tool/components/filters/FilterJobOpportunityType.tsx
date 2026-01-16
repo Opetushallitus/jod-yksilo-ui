@@ -8,14 +8,19 @@ import { useShallow } from 'zustand/shallow';
 export const FilterJobOpportunityType = () => {
   const { t } = useTranslation();
 
-  const { filter, setFilter } = useToolStore(
+  const { filter, setFilter, addToArray } = useToolStore(
     useShallow((state) => ({
       filter: state.filters.jobOpportunityType,
       setFilter: state.setArrayFilter,
+      addToArray: state.addToArray,
     })),
   );
   const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFilter = event.target.value;
+    if (!filter.includes(newFilter)) {
+      // this is only true if setFilter is adding stuff
+      addToArray('opportunityType', 'TYOMAHDOLLISUUS');
+    }
     setFilter('jobOpportunityType', newFilter);
   };
 

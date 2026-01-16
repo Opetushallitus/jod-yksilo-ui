@@ -16,11 +16,11 @@ export interface ToolFilters {
   opportunityType: OpportunityFilterValue[];
   /** Maakunta */
   region: string[];
-  ammattiryhmat: string[];
-  jobOpportunityType: string[];
   educationOpportunityType: string[];
   minDuration: number | null;
   maxDuration: number | null;
+  jobOpportunityType: string[];
+  ammattiryhmat: string[];
 }
 
 export const DEFAULT_FILTERS: ToolFilters = {
@@ -73,6 +73,7 @@ export interface ToolState {
   setDurationFilter: (minDuration: number, maxDuration: number) => void;
   settingsHaveChanged?: boolean;
   shouldFetchData: boolean;
+  addToArray: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;
   setArrayFilter: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;
   reset: () => void;
   resetSettings: () => void;
