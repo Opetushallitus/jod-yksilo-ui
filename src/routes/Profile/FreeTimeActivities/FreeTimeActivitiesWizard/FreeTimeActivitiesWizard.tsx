@@ -222,6 +222,11 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
     return <></>;
   }, [isActivityStep, isCompetencesStep, isFirstStep, isSummaryStep, selectedPatevyys]);
 
+  const topSlot = React.useMemo(
+    () => <ModalHeader text={headerText} step={step} testId="free-time-step-title" />,
+    [headerText, step],
+  );
+
   if (isLoading) {
     return null;
   }
@@ -231,8 +236,8 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
       open={isOpen}
       testId="free-time-wizard"
       fullWidthContent
-      topSlot={<ModalHeader text={headerText} testId="free-time-step-title" />}
-      className="sm:!h-full"
+      topSlot={topSlot}
+      className="sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form

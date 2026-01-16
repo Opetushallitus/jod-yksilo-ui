@@ -89,6 +89,8 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
     return data.length > 0 ? t('profile.interests.edit-interests') : t('profile.interests.add-interests');
   }, [data, t]);
 
+  const topSlot = React.useMemo(() => <ModalHeader text={headerText} testId="edit-interests-title" />, [headerText]);
+
   if (isLoading) {
     return null;
   }
@@ -97,8 +99,8 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
     <Modal
       name={headerText}
       open={isOpen}
-      topSlot={<ModalHeader text={headerText} testId="edit-interests-title" />}
-      className="sm:!h-full"
+      topSlot={topSlot}
+      className="sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form

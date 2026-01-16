@@ -8,19 +8,17 @@ export interface ModalHeaderProps {
   className?: string;
   /** Test id for querying in tests */
   testId?: string;
-  /** Whether to focus the header when mounted. Default true */
-  focusOnMount?: boolean;
+  /** Current step number for multi-step modals */
+  step?: number;
 }
 
-export const ModalHeader = ({ text, className = '', testId, focusOnMount = true }: ModalHeaderProps) => {
+export const ModalHeader = ({ text, className = '', testId, step }: ModalHeaderProps) => {
   const ref = React.useRef<HTMLHeadingElement>(null);
 
   React.useEffect(() => {
-    if (focusOnMount) {
-      ref.current?.setAttribute('tabIndex', '-1');
-      setTimeout(() => ref.current?.focus(), 1);
-    }
-  }, [focusOnMount]);
+    ref.current?.setAttribute('tabIndex', '-1');
+    setTimeout(() => ref.current?.focus(), 1);
+  }, [step]);
 
   return (
     <h2

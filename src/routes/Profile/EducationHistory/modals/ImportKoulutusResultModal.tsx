@@ -43,7 +43,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
               </div>
               <div className="lg:px-8 flex flex-col sm:self-center sm:w-3/4 w-full">
                 <ModalHeader text={t('education-history-import.result-modal.success')} />
-                <p className="max-w-full break-words whitespace-pre-line">
+                <p className="max-w-full wrap-break-word whitespace-pre-line">
                   {t('education-history-import.result-modal.success-osaamiset-info')}
                 </p>
                 <a

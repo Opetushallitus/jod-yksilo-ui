@@ -159,6 +159,11 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
     return '';
   }, [id, koulutusId, isFirstStep, isEducationStep, isCompetencesStep, isSummaryStep, t]);
 
+  const topSlot = React.useMemo(
+    () => <ModalHeader text={headerText} step={step} testId="education-history-wizard-header" />,
+    [headerText, step],
+  );
+
   if (isLoading) {
     return null;
   }
@@ -169,8 +174,8 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
       open={isOpen}
       testId="education-history-wizard"
       fullWidthContent
-      topSlot={<ModalHeader text={headerText} />}
-      className="sm:!h-full"
+      topSlot={topSlot}
+      className="sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form

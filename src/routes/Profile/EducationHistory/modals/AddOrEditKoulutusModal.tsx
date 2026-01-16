@@ -117,12 +117,11 @@ const MainStep = () => {
   );
 };
 
-const OsaamisetStep = ({ koulutusId }: { koulutusId?: string }) => {
+const OsaamisetStep = () => {
   const { t } = useTranslation();
   const { control } = useFormContext<KoulutusForm>();
   return (
     <>
-      <ModalHeader text={koulutusId ? t('profile.competences.edit') : t('education-history.identify-competences')} />
       <p className="mb-7 text-body-sm font-arial sm:mb-9">
         {t('profile.education-history.modals.competences-description')}
       </p>
@@ -306,18 +305,29 @@ const AddOrEditKoulutusModal = ({
     void trigger();
   }, [trigger]);
 
-  const title = koulutusId
-    ? t('education-history.edit-degree-or-education')
-    : t('education-history.add-studies-to-education');
+  const headerText = React.useMemo(() => {
+    if (isFirstStep) {
+      return koulutusId
+        ? t('education-history.edit-degree-or-education')
+        : t('education-history.add-studies-to-education');
+    }
+    return koulutusId ? t('profile.competences.edit') : t('education-history.identify-competences');
+  }, [isFirstStep, t, koulutusId]);
+
+  const topSlot = React.useMemo(
+    () => <ModalHeader text={headerText} step={step} testId="add-or-edit-koulutus-modal-header" />,
+    [headerText, step],
+  );
 
   if (isLoading) {
     return <></>;
   }
+
   return (
     <Modal
-      name={title}
+      name={headerText}
       open={isOpen}
-      className="sm:!h-full"
+      className="sm:h-full!"
       progress={
         <WizardProgress
           labelText={t('wizard.label')}
@@ -328,15 +338,7 @@ const AddOrEditKoulutusModal = ({
           currentStep={step + 1}
         />
       }
-      topSlot={
-        <ModalHeader
-          text={
-            koulutusId
-              ? t('education-history.edit-degree-or-education')
-              : t('education-history.add-studies-to-education')
-          }
-        />
-      }
+      topSlot={topSlot}
       content={
         <FormProvider {...methods}>
           <Form
@@ -349,7 +351,7 @@ const AddOrEditKoulutusModal = ({
               }
             }}
           >
-            <StepComponent koulutusId={koulutusId} />
+            <StepComponent />
           </Form>
         </FormProvider>
       }

@@ -118,6 +118,15 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
 
   const { showDialog } = useModal();
 
+  const headerText = React.useMemo(() => {
+    return t('free-time-activities.edit-free-time-theme');
+  }, [t]);
+
+  const topSlot = React.useMemo(
+    () => <ModalHeader text={headerText} testId="edit-vapaa-ajan-toiminto-modal-header" />,
+    [headerText],
+  );
+
   if (isLoading) {
     return null;
   }
@@ -126,7 +135,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
     <Modal
       name={t('free-time-activities.edit-free-time-theme')}
       open={isOpen}
-      topSlot={<ModalHeader text={t('free-time-activities.edit-free-time-theme')} />}
+      topSlot={topSlot}
       content={
         <FormProvider {...methods}>
           <Form
