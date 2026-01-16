@@ -67,7 +67,6 @@ const ExplorePlanOptions = () => {
       {/* Sticky header remains */}
       <div className="sticky top-0 z-40 bg-bg-gray px-1 lg:pt-4 shrink-0">
         <div className="mb-2">
-          <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-new-plan-header')}</h1>
           <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-new-plan-description')}</p>
         </div>
 
