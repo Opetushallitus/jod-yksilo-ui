@@ -398,6 +398,27 @@ export const useToolStore = create<ToolState>()(
         }));
       },
 
+      addToArray: (name, value) => {
+        const { filters } = get();
+        // Init if not exists
+        if (!filters[name]) {
+          filters[name] = [];
+        }
+        set((state) => {
+          const currentArray = (state.filters[name] as string[]) ?? [];
+          if (value && !currentArray.includes(value)) {
+            return {
+              settingsHaveChanged: true,
+              filters: {
+                ...state.filters,
+                [name]: [...currentArray, value],
+              },
+            };
+          }
+          return state; // No change if value falsy or already exists
+        });
+      },
+
       addAmmattiryhmaToFilter: (ammattiryhma: string) => {
         set((state) => ({
           settingsHaveChanged: true,

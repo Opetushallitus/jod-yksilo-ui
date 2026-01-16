@@ -14,10 +14,11 @@ export const FilterKesto = () => {
     { label: t('tool.settings.general.duration-value.3-years'), value: 3 },
     { label: t('tool.settings.general.duration-value.6plus-years'), value: 4 },
   ];
-  const { filters, setDurationFilters } = useToolStore(
+  const { filters, setDurationFilters, addToArray } = useToolStore(
     useShallow((state) => ({
       filters: state.filters,
       setDurationFilters: state.setDurationFilter,
+      addToArray: state.addToArray,
     })),
   );
 
@@ -51,6 +52,9 @@ export const FilterKesto = () => {
   const durationChange = (value: [number, number]) => {
     const minMonths = indexToMinMonths(value[0]);
     const maxMonths = indexToMonth(value[1]) ?? maxKestoValue;
+    if (!!minMonths || !!maxMonths) {
+      addToArray('opportunityType', 'KOULUTUSMAHDOLLISUUS');
+    }
     setDurationFilters(minMonths, maxMonths);
   };
   const monthsToIndex = (months: number | null): number | undefined => {

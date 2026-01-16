@@ -33,7 +33,9 @@ export const FilterOpportunityType = () => {
   const filters = useToolStore((state) => state.filters);
 
   const getFilterCount = (filterList: FilterName[]) => {
-    if (!filters) return 0;
+    if (!filters) {
+      return 0;
+    }
 
     return filterList.reduce((sum, filter) => {
       const value = filters[filter];

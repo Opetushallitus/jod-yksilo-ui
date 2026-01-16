@@ -7,22 +7,30 @@ import { useShallow } from 'zustand/shallow';
 
 export const FilterAmmattiryhma = () => {
   const { t } = useTranslation();
-  const { fillAmmattiryhmaNimet, ammattiryhmaNimet, filter, addAmmattiryhmaFilter, removeAmmattiryhmaFromFilter } =
-    useToolStore(
-      useShallow((state) => ({
-        fillAmmattiryhmaNimet: state.fillAmmattiryhmaNimet,
-        filter: state.filters,
-        ammattiryhmaNimet: state.ammattiryhmaNimet,
-        addAmmattiryhmaFilter: state.addAmmattiryhmaToFilter,
-        removeAmmattiryhmaFromFilter: state.removeAmmattiryhmaFromFilter,
-      })),
-    );
+  const {
+    fillAmmattiryhmaNimet,
+    addToArray,
+    ammattiryhmaNimet,
+    filter,
+    addAmmattiryhmaFilter,
+    removeAmmattiryhmaFromFilter,
+  } = useToolStore(
+    useShallow((state) => ({
+      fillAmmattiryhmaNimet: state.fillAmmattiryhmaNimet,
+      filter: state.filters,
+      ammattiryhmaNimet: state.ammattiryhmaNimet,
+      addAmmattiryhmaFilter: state.addAmmattiryhmaToFilter,
+      removeAmmattiryhmaFromFilter: state.removeAmmattiryhmaFromFilter,
+      addToArray: state.addToArray,
+    })),
+  );
   const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const ammattiRyhma = event.target.value;
     if (filter.ammattiryhmat.includes(ammattiRyhma)) {
       removeAmmattiryhmaFromFilter(ammattiRyhma);
     } else {
       addAmmattiryhmaFilter(ammattiRyhma);
+      addToArray('opportunityType', 'TYOMAHDOLLISUUS');
     }
   };
 
