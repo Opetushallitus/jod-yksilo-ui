@@ -5,7 +5,7 @@ import { components } from '@/api/schema';
 import { TypedMahdollisuus } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { isDefined } from '@/utils';
+import { isDefined, sortByProperty } from '@/utils';
 import { mapKoulutusCodesToLabels } from '@/utils/codes/codes';
 import { LoaderFunction } from 'react-router';
 
@@ -43,7 +43,14 @@ export default (async ({ request }) => {
 
   const mahdollisuusDetails: TypedMahdollisuus[] = [...tyomahdollisuudetDetails, ...koulutusMahdollisuudetDetails];
   const { setTavoitteet, setMahdollisuusDetails } = useTavoitteetStore.getState();
-  setTavoitteet(tavoitteet);
+  setTavoitteet(
+    [...tavoitteet]
+      .map((t) => ({
+        ...t,
+        suunnitelmat: t.suunnitelmat?.sort(sortByProperty('luotu')),
+      }))
+      .sort(sortByProperty('luotu')),
+  );
   setMahdollisuusDetails(mahdollisuusDetails);
 
   const { fetchSuosikit } = useSuosikitStore.getState();
