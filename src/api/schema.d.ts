@@ -871,6 +871,8 @@ export interface components {
       /** Format: uuid */
       koulutusmahdollisuusId?: string;
       osaamiset?: string[];
+      /** Format: date-time */
+      luotu?: string;
     };
     TavoiteDto: {
       /** Format: uuid */
@@ -894,6 +896,8 @@ export interface components {
       /** Format: uuid */
       koulutusmahdollisuusId?: string;
       osaamiset?: string[];
+      /** Format: date-time */
+      luotu?: string;
     };
     KoulutusKokonaisuusUpdateDto: {
       /** Format: uuid */
@@ -1169,6 +1173,8 @@ export interface components {
       /** Format: uuid */
       koulutusmahdollisuusId?: string;
       osaamiset?: string[];
+      /** Format: date-time */
+      luotu?: string;
     };
     TavoiteExportDto: {
       /** Format: uuid */
