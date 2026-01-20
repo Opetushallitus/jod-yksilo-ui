@@ -22,7 +22,7 @@
     "favorites": {
       "description": "Käyttäjän tallentamat työ- ja koulutusmahdollisuudet koottuna suosikeiksi yhdessä paikassa.",
       "education-opportunities": "Koulutusmahdollisuudet",
-      "job-opportunities": "Uramahdollisuudet",
+      "job-opportunities": "Työmahdollisuudet",
       "title": "Suosikkini"
     },
     "goals": {
@@ -94,7 +94,7 @@
   },
   "main-navigation": "Päänavigaatio",
   "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
-  "n-job-opportunities": "Uramahdollisuudet {{count}} / {{total}}",
+  "n-job-opportunities": "Työmahdollisuudet {{count}} / {{total}}",
   "navigation-menu": "Valikko",
   "osaamissuosittelija": {
     "competence": {
@@ -148,7 +148,7 @@
           "description": "Valitse, mitä tietoja haluat jakaa. Voit halutessasi jakaa perustietosi sekä lisäksi valita, jaetaanko työpaikkasi, koulutuksesi, suosikkisi ja suunnitelmasi.",
           "education": "Koulutukseni",
           "favorite-education-opportunities": "Koulutusmahdollisuudet",
-          "favorite-job-opportunities": "Uramahdollisuudet",
+          "favorite-job-opportunities": "Työmahdollisuudet",
           "favorites": "Suosikkini",
           "goals": "Tavoitteeni",
           "interests": "Kiinnostukseni",
@@ -232,7 +232,7 @@
     "my-goals": {
       "competence-compare": "Osaamisvertailu",
       "favorites-card": {
-        "description": "Tutustu koulutus- ja uramahdollisuuksiin. Lisää kiinnostavimmat suosikeiksesi ja tee niistä omat tavoitteesi.",
+        "description": "Tutustu koulutus- ja työmahdollisuuksiin. Lisää kiinnostavimmat suosikeiksesi ja tee niistä omat tavoitteesi.",
         "title": "Löydä omat suosikkisi"
       },
       "own-competences": "Omat taidot"
@@ -240,7 +240,7 @@
   },
   "tool": {
     "banner": {
-      "description": "Löydä koulutus- ja uramahdollisuuksiasi valitsemillasi tiedoilla. Kokeile ja tutki erilaisia vaihtoehtoja.",
+      "description": "Löydä koulutus- ja työmahdollisuuksiasi valitsemillasi tiedoilla. Kokeile ja tutki erilaisia vaihtoehtoja.",
       "link-text": "Löydä mahdollisuuksia",
       "title": "Tutki vaihtoehtojasi"
     },
@@ -270,7 +270,7 @@
           "year": "1v"
         },
         "education-opportunity-type": "Koulutusmahdollisuuksien tyyppi",
-        "job-opportunity-type": "Uramahdollisuuksien tyyppi"
+        "job-opportunity-type": "Työmahdollisuuksien tyyppi"
       }
     },
     "tour": {
@@ -307,7 +307,7 @@
       },
       "mobile": {
         "step-1": {
-          "description": "Työkalun toiminnot on jaettu kahdelle välilehdelle.Valitse työkalussa käytettävät tiedot Tietosi-välilehdellä. Tarkastele niiden perusteella sinulle ehdotettuja koulutus- ja uramahdollisuuksia Mahdollisuutesi-välilehdellä.",
+          "description": "Työkalun toiminnot on jaettu kahdelle välilehdelle.Valitse työkalussa käytettävät tiedot Tietosi-välilehdellä. Tarkastele niiden perusteella sinulle ehdotettuja koulutus- ja työmahdollisuuksia Mahdollisuutesi-välilehdellä.",
           "title": "Tietosi- ja mahdollisuutesi-välilehdet"
         },
         "step-2": {
