@@ -1082,8 +1082,7 @@ export interface components {
       ylinDesiiliPalkka?: number;
       /** Format: int32 */
       alinDesiiliPalkka?: number;
-      /** Format: int32 */
-      tyollisetKokoMaa?: number;
+      tyollisyysData?: components['schemas']['TyollisyysDto'];
       kohtaanto?: string;
     };
     ArvoDto: {
@@ -1097,6 +1096,16 @@ export interface components {
       /** Format: int32 */
       tyhjia: number;
       arvot: components['schemas']['ArvoDto'][];
+    };
+    KoulutusAlaDto: {
+      koodi?: string;
+      /** Format: double */
+      osuus?: number;
+    };
+    TyollisyysDto: {
+      /** Format: int32 */
+      tyollisetKokoMaa?: number;
+      koulutusalaTyollisyydet?: components['schemas']['KoulutusAlaDto'][];
     };
     TyomahdollisuusFullDto: {
       /** Format: uuid */
