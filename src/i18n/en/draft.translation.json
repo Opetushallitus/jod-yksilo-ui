@@ -229,11 +229,19 @@
       "link-to-opportunities": "Find opportunities"
     },
     "my-goals": {
+      "add-favorites-to-goals": "Add new goal",
+      "add-plan-failed": "Failed to add plan – please try again",
+      "add-plan-success": "Plan added",
       "competence-compare": "Compare competences",
+      "delete-plan-failed": "Failed to delete plan – please try again",
+      "delete-plan-success": "Plan deleted",
+      "edit-plan-failed": "Failed to update plan – please try again",
+      "edit-plan-success": "Plan updated",
       "favorites-card": {
         "description": "Explore education and career opportunities. Add the most interesting ones to your favorites and make them your own goals.",
         "title": "Find your favorites"
       },
+      "no-favorites-selected": "Add favorites first, from which you can create goals.",
       "own-competences": "My competences"
     }
   },

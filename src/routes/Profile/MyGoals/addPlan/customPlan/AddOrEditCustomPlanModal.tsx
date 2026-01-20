@@ -9,6 +9,7 @@ import { Button, clamp, Modal, Spinner, useMediaQueries, WizardProgress } from '
 import { JodArrowLeft, JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState, useWatch } from 'react-hook-form';
+import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import z from 'zod';
 import { useShallow } from 'zustand/shallow';
@@ -118,7 +119,7 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }:
     };
 
     if (suunnitelmaId) {
-      await client.PUT('/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}', {
+      const { error } = await client.PUT('/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}', {
         params: {
           path: {
             id: tavoiteId,
@@ -130,8 +131,13 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }:
           id: data.id,
         },
       });
+      if (error) {
+        toast.error(t('profile.my-goals.edit-plan-failed'));
+      } else {
+        toast.success(t('profile.my-goals.edit-plan-success'));
+      }
     } else {
-      await client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
+      const { error } = await client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
         params: {
           path: {
             id: tavoiteId,
@@ -139,6 +145,12 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }:
         },
         body,
       });
+
+      if (error) {
+        toast.error(t('profile.my-goals.add-plan-failed'));
+      } else {
+        toast.success(t('profile.my-goals.add-plan-success'));
+      }
     }
 
     await refreshTavoitteet();
