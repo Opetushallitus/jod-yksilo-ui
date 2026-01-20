@@ -914,7 +914,6 @@
   },
   "update": "Päivitä",
   "updating-list": "Päivitetään",
-  "version": "Testausversio",
   "welcome": "Hei {{name}} - tervetuloa osaamisprofiiliisi!",
   "without-category": "{{header}} ilman kategoriaa",
   "wizard": {

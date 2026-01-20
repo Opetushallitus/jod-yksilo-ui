@@ -267,7 +267,6 @@ const Root = () => {
           serviceBarVariant="yksilo"
           serviceBarTitle={t('my-competence-path')}
           translations={{
-            versionLabel: t('version'),
             showAllNotesLabel: t('show-all'),
             ariaLabelCloseNote: t('close'),
           }}
