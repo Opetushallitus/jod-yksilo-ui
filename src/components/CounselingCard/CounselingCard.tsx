@@ -7,9 +7,9 @@ export const CounselingCard = () => {
   const { t, i18n } = useTranslation();
 
   const links: Record<string, string> = {
-    fi: 'https://www.suomi.fi/aihe/ohjaus-ja-neuvontapalveluja/palvelut',
-    sv: 'https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster/service',
-    en: 'https://www.suomi.fi/service-catalog/osaamispolku',
+    fi: 'https://www.suomi.fi/aihe/ohjaus-ja-neuvontapalveluja',
+    sv: 'https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster',
+    en: 'https://www.suomi.fi/topic/guidance-and-counselling-services',
   };
   const link = links[i18n.language] || links.fi;
 
