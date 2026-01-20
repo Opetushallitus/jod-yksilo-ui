@@ -4,6 +4,7 @@ import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStor
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { Button, Modal, WizardProgress } from '@jod/design-system';
 import React from 'react';
+import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 import AddOrEditCustomPlanModal from './customPlan/AddOrEditCustomPlanModal';
@@ -39,20 +40,28 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
       closeActiveModal();
       return;
     }
-    await Promise.all(
-      selectedPlans.map((selectedPlan) =>
-        client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
-          params: {
-            path: {
-              id: tavoiteId,
+
+    try {
+      await Promise.all(
+        selectedPlans.map(async (koulutusmahdollisuusId) => {
+          const { error } = await client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
+            params: {
+              path: {
+                id: tavoiteId,
+              },
             },
-          },
-          body: {
-            koulutusmahdollisuusId: selectedPlan,
-          },
+            body: { koulutusmahdollisuusId },
+          });
+
+          if (error) {
+            throw error;
+          }
         }),
-      ),
-    );
+      );
+      toast.success(t('profile.my-goals.add-plan-success'));
+    } catch (_error) {
+      toast.error(t('profile.my-goals.add-plan-failed'));
+    }
     await refreshTavoitteet();
     closeActiveModal();
     setIsSubmitting(false);
@@ -63,7 +72,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   };
 
   const currentHeaderText = React.useMemo(() => {
-    return t('profile.paths.step-n-details', { count: 3 });
+    return t('profile.paths.step-n-details', { count: 1 });
   }, [t]);
 
   return (

@@ -232,11 +232,19 @@
       "link-to-opportunities": "Löydä mahdollisuuksia"
     },
     "my-goals": {
+      "add-favorites-to-goals": "Lisää uusi tavoite",
+      "add-plan-failed": "Suunnitelman lisäys epäonnistui – yritä uudelleen",
+      "add-plan-success": "Suunnitelma lisätty",
       "competence-compare": "Osaamisvertailu",
+      "delete-plan-failed": "Suunnitelman poisto epäonnistui – yritä uudelleen",
+      "delete-plan-success": "Suunnitelma poistettu",
+      "edit-plan-failed": "Suunnitelman päivitys epäonnistui – yritä uudelleen",
+      "edit-plan-success": "Suunnitelma päivitetty",
       "favorites-card": {
-        "description": "Tutustu koulutus- ja työmahdollisuuksiin. Lisää kiinnostavimmat suosikeiksesi ja tee niistä omat tavoitteesi.",
+        "description": "Tutksustu koulutus- ja työmahdollisuuksiin. Lisää kiinnostavimmat suosikeiksesi ja tee niistä omat tavoitteesi.",
         "title": "Löydä omat suosikkisi"
       },
+      "no-favorites-selected": "Lisää ensin suosikkeja, joista voit luoda tavoitteita.",
       "own-competences": "Omat taidot"
     }
   },

@@ -3,6 +3,7 @@ import type { components } from '@/api/schema';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { Button } from '@jod/design-system';
+import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 
 interface DeletePolkuButtonProps {
@@ -24,7 +25,10 @@ const DeleteSuunnitelmaButton = ({ tavoiteId, suunnitelmaId, className, name, on
       params: { path: { id: tavoiteId, suunnitelmaId } },
     });
 
-    if (!error) {
+    if (error) {
+      toast.error(t('profile.my-goals.delete-plan-failed'));
+    } else {
+      toast.success(t('profile.my-goals.delete-plan-success'));
       onDelete?.();
     }
   };

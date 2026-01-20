@@ -11,14 +11,16 @@ const isModifyingMethod = (method: string): method is Method => {
   return modifyingMethods.includes(method as Method);
 };
 
-const ignoredOperations: Partial<Record<keyof paths, Method>> = {
-  '/api/ehdotus/osaamiset': 'POST',
-  '/api/ehdotus/mahdollisuudet': 'POST',
-  '/api/keskustelut': 'POST',
-  '/api/keskustelut/{id}': 'POST',
-  '/api/ehdotus/mahdollisuudet/polku': 'POST',
-  '/api/integraatiot/tmt/vienti': 'POST',
-  '/api/integraatiot/tmt/haku': 'POST',
+const ignoredOperations: Partial<Record<keyof paths, Method[]>> = {
+  '/api/ehdotus/osaamiset': ['POST'],
+  '/api/ehdotus/mahdollisuudet': ['POST'],
+  '/api/keskustelut': ['POST'],
+  '/api/keskustelut/{id}': ['POST'],
+  '/api/ehdotus/mahdollisuudet/polku': ['POST'],
+  '/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}': ['DELETE', 'PUT'],
+  '/api/profiili/tavoitteet/{id}/suunnitelmat': ['POST'],
+  '/api/integraatiot/tmt/vienti': ['POST'],
+  '/api/integraatiot/tmt/haku': ['POST'],
 };
 
 const showToast = (method: Method, response: Response) => {
@@ -45,12 +47,17 @@ const stripUrlPrefix = (url: string): string => {
 export const toastMiddleware: Middleware = {
   onResponse({ response, request }) {
     const strippedUrl = stripUrlPrefix(request.url);
-    // Regular expression to detect UUID at the end of the path
-    const uuidRegex = /\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
-    const urlWithoutUUID = strippedUrl.replace(uuidRegex, '/{id}') as keyof paths;
-    const ignoredPathMethod = ignoredOperations[urlWithoutUUID];
+    // Regular expression to detect UUIDs in the URL
+    const uuidRegex = /\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/g;
+    // Replace all UUID matches with /{uuid}
+    const normalizedUrl = strippedUrl.replaceAll(uuidRegex, '/{uuid}');
+    // Create a copy of ignoredOperations with all parameterized segments like /{someId} replaced with /{uuid} for comparison
+    const normalizedIgnoredOperations = Object.fromEntries(
+      Object.entries(ignoredOperations).map(([key, value]) => [key.replaceAll(/\/\{[^}]+\}/g, '/{uuid}'), value]),
+    );
 
-    if (isModifyingMethod(request.method) && request.method !== ignoredPathMethod) {
+    const ignoredPathMethods = normalizedIgnoredOperations[normalizedUrl] ?? [];
+    if (isModifyingMethod(request.method) && !ignoredPathMethods?.includes(request.method)) {
       showToast(request.method, response);
     }
     return response;
