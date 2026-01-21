@@ -271,10 +271,10 @@ export const ExperienceTableRow = ({
       </tr>
       <tr>
         {tagsVisibleState && !showCheckbox && (
-          <td colSpan={5} className={`${className} w-full px-4 pt-3 pb-5`.trim()}>
+          <td colSpan={5} className={`${className} w-full max-w-0 px-4 pt-3 pb-5`.trim()}>
             <ul className="flex flex-wrap gap-3" aria-label={t('competences')}>
               {sortedCompetences.map((competence) => (
-                <li key={competence.id}>
+                <li key={competence.id} className="max-w-full">
                   <Tag
                     label={getLocalizedText(competence.nimi)}
                     tooltip={getLocalizedText(competence.kuvaus)}

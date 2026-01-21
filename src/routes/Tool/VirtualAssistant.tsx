@@ -266,38 +266,34 @@ export const VirtualAssistant = () => {
                       </div>
                     </div>
                     <div className="flex flex-col gap-5">
-                      <div className="flex flex-row justify-start">
-                        <div className="flex flex-row gap-5">
-                          <div className="flex flex-none items-center justify-center h-8 w-8 rounded-full bg-bg-gray-2">
-                            <JodChatBot className="text-black" />
+                      <div className="flex flex-row gap-5">
+                        <div className="flex flex-none items-center justify-center h-8 w-8 rounded-full bg-bg-gray-2">
+                          <JodChatBot className="text-black" />
+                        </div>
+                        <div className="flex flex-col gap-4 min-w-0">
+                          <div className="text-body-sm-mobile sm:text-body-sm whitespace-pre-wrap">
+                            {row.answer ? row.answer : t('tool.my-own-data.interests.virtual-assistant.loading')}
                           </div>
-                          <div className="flex flex-col gap-4">
-                            <div className="text-body-sm-mobile sm:text-body-sm whitespace-pre-wrap">
-                              {row.answer ? row.answer : t('tool.my-own-data.interests.virtual-assistant.loading')}
-                            </div>
-                            {row.kiinnostukset && row.kiinnostukset.length > 0 && (
-                              <div className="flex flex-col gap-3">
-                                <ul className="flex flex-wrap gap-3">
-                                  {row.kiinnostukset
-                                    .filter((k) => !selectedKiinnostukset.find((val) => val.uri === k.uri))
-                                    .map((k) => (
-                                      <li key={k.uri}>
-                                        <Tag
-                                          label={k.nimi[language] ?? k.uri}
-                                          sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
-                                          onClick={(e) => {
-                                            animateElementToTarget(e.currentTarget, interestsTabButtonRef.current!);
-                                            // eslint-disable-next-line sonarjs/no-nested-functions
-                                            setSelectedKiinnostukset((prevState) => [k, ...prevState]);
-                                          }}
-                                          variant="selectable"
-                                        />
-                                      </li>
-                                    ))}
-                                </ul>
-                              </div>
-                            )}
-                          </div>
+                          {row.kiinnostukset && row.kiinnostukset.length > 0 && (
+                            <ul className="flex flex-wrap gap-3">
+                              {row.kiinnostukset
+                                .filter((k) => !selectedKiinnostukset.find((val) => val.uri === k.uri))
+                                .map((k) => (
+                                  <li key={k.uri} className="max-w-full">
+                                    <Tag
+                                      label={k.nimi[language] ?? k.uri}
+                                      sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
+                                      onClick={(e) => {
+                                        animateElementToTarget(e.currentTarget, interestsTabButtonRef.current!);
+                                        // eslint-disable-next-line sonarjs/no-nested-functions
+                                        setSelectedKiinnostukset((prevState) => [k, ...prevState]);
+                                      }}
+                                      variant="selectable"
+                                    />
+                                  </li>
+                                ))}
+                            </ul>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -355,7 +351,7 @@ export const VirtualAssistant = () => {
                 <div aria-labelledby={selectedKiinnostuksetLabelId} className="min-h-[144px] overflow-y-auto mt-4">
                   <ul className="flex flex-wrap gap-3">
                     {selectedKiinnostukset.map((k) => (
-                      <li key={k.uri}>
+                      <li key={k.uri} className="max-w-full">
                         <Tag
                           label={k.nimi[language] ?? k.uri}
                           sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}

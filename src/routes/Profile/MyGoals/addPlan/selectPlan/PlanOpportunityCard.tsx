@@ -72,7 +72,7 @@ const PlanOpportunityCard = React.memo(
           <p className="font-arial text-body-md-mobile sm:text-body-md mb-4">{getLocalizedText(kuvaus)}</p>
           <ul className="flex flex-row flex-wrap gap-3">
             {osaamiset.map((osaaminen) => (
-              <li key={osaaminen.uri}>
+              <li key={osaaminen.uri} className="max-w-full">
                 <Tag
                   label={getLocalizedText(osaaminen.nimi)}
                   tooltip={getLocalizedText(osaaminen.kuvaus)}

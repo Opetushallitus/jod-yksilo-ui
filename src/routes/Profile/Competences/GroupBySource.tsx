@@ -126,7 +126,7 @@ export const GroupBySource = ({
                         const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
                         const tooltip = val.osaaminen.kuvaus[locale];
                         return val.lahde.tyyppi === sourceType && isOsaaminenVisible(sourceType, val.lahde.id) ? (
-                          <li key={val.id}>
+                          <li key={val.id} className="max-w-full">
                             <Tag
                               label={label}
                               tooltip={tooltip}

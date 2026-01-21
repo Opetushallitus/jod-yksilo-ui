@@ -35,7 +35,7 @@ const SelectCompetencesStep = () => {
           {vaaditutOsaamiset
             .filter((vo) => !valitutOsaamiset.some((field) => field.uri === vo.uri))
             .map((o) => (
-              <li key={o.uri}>
+              <li key={o.uri} className="max-w-full">
                 <Tag
                   onClick={() => append(o)}
                   label={getLocalizedText(o.nimi)}
@@ -58,7 +58,7 @@ const SelectCompetencesStep = () => {
             <p className="text-secondary-gray text-body-sm">{t('profile.my-goals.remove-competence-description')}</p>
             <ul className="flex flex-wrap gap-2 mt-3">
               {valitutOsaamiset.map((o, i) => (
-                <li key={o.id}>
+                <li key={o.id} className="max-w-full">
                   <Tag
                     onClick={() => remove(i)}
                     label={getLocalizedText(o.nimi)}
