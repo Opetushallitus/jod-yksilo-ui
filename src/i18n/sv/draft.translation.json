@@ -83,6 +83,17 @@
     "add-new-activity-button": "Lägg aktivitet",
     "delete-free-time-activity-button": "Ta bort"
   },
+  "home": {
+    "personal-guidance": {
+      "content": "Tjänsterna som du kan hitta i väglednings- och rådgivningstjänsterna hjälper dig att fundera på dina arbets- och utbildningsalternativ. Begränsa listan över tjänster enligt teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst.",
+      "link-text": "Gå till Väglednings- och rådgivningstjänster",
+      "title": "Behöver du personlig vägledning?"
+    },
+    "welcome": {
+      "content": "Kompetensstigen-tjänsten har lanserats. Tjänsten utvecklas kontinuerligt baserat på användarfeedback. Funktioner kan förändras och nya funktioner kommer att läggas till regelbundet – tack för att du är med på resan!",
+      "title": "Välkommen till Kompetensstigen!"
+    }
+  },
   "i-allow": "Jag tillåter",
   "i-disallow": "Jag tillåter inte",
   "job-opportunity": {

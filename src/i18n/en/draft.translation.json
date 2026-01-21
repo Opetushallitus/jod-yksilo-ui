@@ -73,6 +73,17 @@
     "add-new-activity-button": "Add activity",
     "delete-free-time-activity-button": "Delete activity"
   },
+  "home": {
+    "personal-guidance": {
+      "content": "The services found under guidance and counselling services help you consider your work and education options. Narrow the list of services based on themes that interest you and, for example, where you live to find the most suitable services for you.",
+      "link-text": "Go to Guidance and counseling services",
+      "title": "Do you need personal guidance?"
+    },
+    "welcome": {
+      "content": "Competency Path service has been launched. The service is continuously developed based on user feedback. Features may change and new functionalities will be added regularly – thank you for being part of the journey!",
+      "title": "Welcome to Competency Path!"
+    }
+  },
   "i-allow": "I allow",
   "i-disallow": "I do not allow",
   "job-opportunity": {
