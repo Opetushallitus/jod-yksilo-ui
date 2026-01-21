@@ -4,12 +4,11 @@ import heroSrc3 from '@/../assets/yksilo-hero-3.jpg';
 import heroSrc4 from '@/../assets/yksilo-hero-4.jpg';
 import type { components } from '@/api/schema';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
-import { TimelineImage } from '@/components/TimelineImage';
 import { getLinkTo } from '@/utils/routeUtils';
 import { HeroCard, type LinkComponent, tidyClasses as tc } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { Link, useRouteLoaderData } from 'react-router';
 
 interface ContainerProps {
@@ -153,49 +152,17 @@ const Home = () => {
         />
       </CardContainer>
 
-      <Content title={t('home.beta')} className="mb-9 md:mb-[80px]">
-        <p className="text-body-lg max-w-[716px]">
-          <Trans
-            i18nKey="home.beta-content-1"
-            components={{
-              Icon: <JodOpenInNew size={18} className="ml-1" ariaLabel={t('external-link')} />,
-              CustomLink: (
-                <Link
-                  to="https://wiki.eduuni.fi/spaces/JOD/pages/641042258/Osaamispolun+suljettu+betatestaus"
-                  className="inline-flex underline text-accent items-center"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              ),
-            }}
-          />
-        </p>
-        <TimelineImage />
-        <p className="text-body-lg max-w-[716px]">
-          <Trans
-            i18nKey="home.beta-content-2"
-            components={{
-              Icon: <JodOpenInNew size={18} className="ml-1" ariaLabel={t('external-link')} />,
-              CustomLink: (
-                <Link
-                  to="https://wiki.eduuni.fi/spaces/JOD/pages/641042258/Osaamispolun+suljettu+betatestaus"
-                  className="inline-flex underline text-accent items-center"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              ),
-            }}
-          />
-        </p>
+      <Content title={t('home.welcome.title')} className="mb-9 md:mb-[80px]">
+        <p className="text-body-lg max-w-[716px]">{t('home.welcome.content')}</p>
       </Content>
 
       <FullWidthContainer className="bg-[url(@/../assets/palveluhakemisto.jpg)] bg-cover bg-[50%_50%]">
         <div className="max-w-2xl">
           <HeroCard
             size="sm"
-            content={t('home.need-personal-guidance-content')}
-            title={t('home.need-personal-guidance')}
-            buttonLabel={t('move-to-service')}
+            content={t('home.personal-guidance.content')}
+            title={t('home.personal-guidance.title')}
+            buttonLabel={t('home.personal-guidance.link-text')}
             to={t('navigation.extra.palveluhakemisto.url')}
             backgroundColor="var(--ds-color-secondary-2-dark)"
             linkComponent={getLinkTo(t('navigation.extra.palveluhakemisto.url'), {
@@ -206,37 +173,6 @@ const Home = () => {
           />
         </div>
       </FullWidthContainer>
-
-      <Content title={t('home.how-competency-path-helps-you')} className="mb-[208px] pt-0 mt-9 sm:mt-[80px]">
-        <p className="text-body-lg whitespace-pre-line max-w-[716px]">
-          <Trans i18nKey="home.how-competency-path-helps-you-content" />
-        </p>
-        <div className="flex flex-col sm:flex-row gap-7 sm:flex-wrap">
-          <div className="flex flex-col gap-5 md:max-w-[320px]">
-            <div className="md:text-heading-3 text-heading-3-mobile ">
-              {t('home.how-competency-path-helps-you-opintopolku-title')}
-            </div>
-            <p className="text-body-sm">
-              <Trans i18nKey="home.how-competency-path-helps-you-opintopolku-description" />
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-5 md:max-w-[320px]">
-            <div className="sm:text-heading-3 text-heading-3-mobile">
-              {t('home.how-competency-path-helps-you-tmt-title')}
-            </div>
-            <p className="text-body-sm">
-              <Trans i18nKey="home.how-competency-path-helps-you-tmt-description" />
-            </p>
-          </div>
-          <div className="flex flex-col gap-5 md:max-w-[320px]">
-            <div className="sm:text-heading-3 text-heading-3-mobile">
-              {t('home.how-competency-path-helps-you-opinfi-title')}
-            </div>
-            <p className="text-body-sm">{t('home.how-competency-path-helps-you-opinfi-description')}</p>
-          </div>
-        </div>
-      </Content>
     </main>
   );
 };

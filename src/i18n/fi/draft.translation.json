@@ -72,7 +72,16 @@
     "delete-free-time-activity-button": "Poista toiminto"
   },
   "home": {
-    "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löydät tukea työ- ja koulutusvaihtoehtoihin liittyvään pohdintaan. Rajaa palveluiden listaa, jotta löydät sinulle parhaiten sopivat palvelut."
+    "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löydät tukea ura- ja koulutusvaihtoehtoihin liittyvään pohdintaan. Rajaa palveluiden listaa, jotta löydät sinulle parhaiten sopivat palvelut.",
+    "personal-guidance": {
+      "content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua työ- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut.",
+      "link-text": "Siirry Ohjaus- ja neuvontapalveluihin",
+      "title": "Tarvitsetko henkilökohtaista ohjausta?"
+    },
+    "welcome": {
+      "content": "Osaamispolku-palvelu on julkaistu. Palvelua kehitetään edelleen käyttäjäpalautteen pohjalta. Toiminnot voivat muuttua ja uusia ominaisuuksia tulee lisää säännöllisesti – kiitos kun olet mukana matkassa!",
+      "title": "Tervetuloa Osaamispolkuun!"
+    }
   },
   "i-allow": "Sallin",
   "i-disallow": "En salli",
