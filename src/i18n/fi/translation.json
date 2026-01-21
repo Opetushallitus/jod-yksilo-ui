@@ -257,7 +257,7 @@
     "how-competency-path-helps-you-tmt-description": "Työmarkkinatori kokoaa yhteen avoimet työpaikat ja tukee työnhakua sekä urasuunnittelua.<br/><br/>Osaamispolun työmahdollisuuksista voit siirtyä Työmarkkinatorille tutustumaan ja hakemaan avoimia työpaikkoja. Tulevaisuudessa voit myös siirtää tietojasi Osaamispolun ja Työmarkkinatorin välillä.",
     "how-competency-path-helps-you-tmt-title": "Työmarkkinatori",
     "need-personal-guidance": "Tarvitsetko henkilökohtaista ohjausta?",
-    "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua ura- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut."
+    "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua työ- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut."
   },
   "in-this-section": "Tässä osiossa",
   "interests": "Kartoita kiinnostuksesi",
@@ -282,7 +282,7 @@
     "step-3": {
       "button-ok": "OK",
       "item-1": "Osaamisten tunnistamisen käyttäjän antamasta tekstistä (esim. CV ja koulutustiedot)",
-      "item-2": "Ura- ja koulutusmahdollisuuksien luominen ryhmittelemällä Työmarkkinatorin työpaikkailmoituksia ja Opintopolun koulutustarjontaa",
+      "item-2": "Työ- ja koulutusmahdollisuuksien luominen ryhmittelemällä Työmarkkinatorin työpaikkailmoituksia ja Opintopolun koulutustarjontaa",
       "item-text": "Osaamispolussa tekoäly mahdollistaa:\n",
       "text-1": "Hyödynnämme tekoälyä tarjoamaan sinulle personoitua ja itsenäistä digitaalista palvelua. Muista, että tekoäly tarjoaa ohjeita ja suosituksia, mutta lopulliset päätökset teet aina itse. Käytä omaa harkintaasi.",
       "text-2": "Kun näet alla olevan kuvakkeen, saat klikkaamalla sitä lisätietoa tekoälyn käytöstä. Lisätietoja <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink> -sivulla.",
@@ -547,7 +547,7 @@
       "show-filters": "Näytä suodattimet",
       "title": "Suosikkini",
       "you-have-no-education-opportunities": "Ei suosikkeja. Lisää koulutusmahdollisuuksia suosikeiksi.",
-      "you-have-no-job-nor-education-opportunities": "Ei suosikkeja. Lisää ura- ja koulutusmahdollisuuksia suosikeiksi.",
+      "you-have-no-job-nor-education-opportunities": "Ei suosikkeja. Lisää työ- ja koulutusmahdollisuuksia suosikeiksi.",
       "you-have-no-job-opportunities": "Ei suosikkeja. Lisää työmahdollisuuksia suosikeiksi.",
       "you-have-saved-education-opportunities": "Olet tallentanut {{educationOpportunitiesCount}} koulutusmahdollisuutta.",
       "you-have-saved-job-opportunities": "Olet tallentanut {{jobOpportunitiesCount}} työmahdollisuutta.",
@@ -767,7 +767,7 @@
       "index": "koulutusmahdollisuus"
     },
     "job-opportunity": {
-      "index": "työmahdollisuus"
+      "index": "tyomahdollisuus"
     },
     "privacy-and-cookies": "tietosuojaseloste-ja-evasteet",
     "profile": {
