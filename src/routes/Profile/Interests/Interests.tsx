@@ -118,7 +118,7 @@ const Interests = () => {
           </h2>
           <ul className="flex flex-wrap gap-3">
             {sortedSkills.map((val) => (
-              <li key={val.uri}>
+              <li key={val.uri} className="max-w-full">
                 <Tag
                   label={getLocalizedText(val.nimi)}
                   tooltip={getLocalizedText(val.kuvaus)}
@@ -137,7 +137,7 @@ const Interests = () => {
           </h2>
           <ul className="flex flex-wrap gap-3">
             {sortedOccupations.map((val) => (
-              <li key={val.uri}>
+              <li key={val.uri} className="max-w-full">
                 <Tag
                   label={getLocalizedText(val.nimi)}
                   tooltip={getLocalizedText(val.kuvaus)}

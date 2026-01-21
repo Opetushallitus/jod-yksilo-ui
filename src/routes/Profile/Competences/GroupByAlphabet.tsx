@@ -47,7 +47,7 @@ export const GroupByAlphabet = ({
                   const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
                   const tooltip = val.osaaminen.kuvaus[locale];
                   return (
-                    <li key={val.id}>
+                    <li key={val.id} className="max-w-full">
                       <Tag
                         label={label}
                         tooltip={tooltip}

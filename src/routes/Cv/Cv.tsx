@@ -260,7 +260,7 @@ const Cv = () => {
               <div className="mb-8">
                 <ul className="flex flex-row flex-wrap gap-3">
                   {muuOsaaminen.map((osaaminen) => (
-                    <li key={osaaminen.uri}>
+                    <li key={osaaminen.uri} className="max-w-full">
                       <Tag label={getLocalizedText(osaaminen.nimi)} variant="presentation" sourceType="jotain-muuta" />
                     </li>
                   ))}
@@ -293,7 +293,7 @@ const Cv = () => {
               <div className="mb-8">
                 <ul className="flex flex-row flex-wrap gap-3">
                   {kiinnostavatOsaamiset?.map((osaaminen) => (
-                    <li key={osaaminen.uri}>
+                    <li key={osaaminen.uri} className="max-w-full">
                       <Tag label={getLocalizedText(osaaminen.nimi)} variant="presentation" sourceType="kiinnostus" />
                     </li>
                   ))}
@@ -308,7 +308,7 @@ const Cv = () => {
               <div className="mb-8">
                 <ul className="flex flex-row flex-wrap gap-3">
                   {kiinnostavatAmmatit?.map((ammatti) => (
-                    <li key={ammatti.uri}>
+                    <li key={ammatti.uri} className="max-w-full">
                       <Tag label={getLocalizedText(ammatti.nimi)} variant="presentation" sourceType="kiinnostus" />
                     </li>
                   ))}

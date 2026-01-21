@@ -113,7 +113,7 @@ const SomethingElse = () => {
       )}
       <ul className="flex flex-wrap gap-3" data-testid="something-else-tags">
         {sortedData.map((val) => (
-          <li key={val.uri}>
+          <li key={val.uri} className="max-w-full">
             <Tag
               label={getLocalizedText(val.nimi)}
               tooltip={getLocalizedText(val.kuvaus)}
