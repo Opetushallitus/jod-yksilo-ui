@@ -14,13 +14,6 @@
     "description-tool-item-3": "individual suggestions concerning opportunities that suit you",
     "title": "AI-generated content"
   },
-  "beta": {
-    "note": {
-      "description": "Tell us what you think and help us to improve the service.",
-      "title": "Try the service",
-      "to-feedback": "Go to the survey"
-    }
-  },
   "breadcrumb": "Trail of breadcrumbs",
   "cancel": "Cancel",
   "choose": "Select",
