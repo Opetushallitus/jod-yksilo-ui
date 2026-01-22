@@ -85,6 +85,21 @@ const JobOpportunity = () => {
     return url.href;
   }, [ammattiryhma, t]);
 
+  let kohtaanto;
+  switch (tyomahdollisuus?.ammattiryhma?.kohtaanto) {
+    case 'Ylitarjonta':
+      kohtaanto = t('job-opportunity.supply-and-demand.Ylitarjonta');
+      break;
+    case 'Tasapaino':
+      kohtaanto = t('job-opportunity.supply-and-demand.Tasapaino');
+      break;
+    case 'Alitarjonta':
+      kohtaanto = t('job-opportunity.supply-and-demand.Alitarjonta');
+      break;
+    default:
+      kohtaanto = NOT_AVAILABLE_LABEL; // or some default value
+  }
+
   const sections: OpportunityDetailsSection[] = [
     {
       navTitle: t('description'),
@@ -206,9 +221,7 @@ const JobOpportunity = () => {
               <div className="flex sm:my-8 my-4">
                 <div>
                   <p className="font-bold">{t('job-opportunity.employment-data.supply-and-demand')}</p>
-                  <h3 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent">
-                    {tyomahdollisuus?.ammattiryhma?.kohtaanto ?? NOT_AVAILABLE_LABEL}
-                  </h3>
+                  <h3 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent">{kohtaanto}</h3>
                   <span className="text-secondary-gray">
                     <Trans
                       i18nKey="job-opportunity.employment-data.supply-and-demand-subtitle"
