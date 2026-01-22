@@ -4,13 +4,6 @@
     "aria-description": "Information om användningen av artificiell intelligens",
     "title": "Innehåll genererat med hjälp av artificiell intelligens"
   },
-  "beta": {
-    "note": {
-      "description": "Berätta vad du tycker och hjälp oss att förbättra tjänsten.",
-      "title": "Prova tjänsten",
-      "to-feedback": "Öppna enkäten"
-    }
-  },
   "breadcrumb": "Synlig sökväg",
   "cancel": "Avbryt",
   "choose": "Välj",

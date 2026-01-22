@@ -20,7 +20,6 @@ import {
   useNoteStack,
   UserButton,
 } from '@jod/design-system';
-import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -34,35 +33,6 @@ import {
   useMatch,
 } from 'react-router';
 import { LogoutFormContext } from '.';
-
-const useAddBetaFeedbackNote = () => {
-  const { t } = useTranslation();
-  const { addTemporaryNote } = useNoteStack();
-
-  React.useEffect(() => {
-    addTemporaryNote(() => ({
-      id: 'beta-feedback-note',
-      title: t('beta.note.title'),
-      description: t('beta.note.description'),
-      variant: 'feedback',
-      readMoreComponent: (
-        <Button
-          size="sm"
-          variant="white"
-          label={t('beta.note.to-feedback')}
-          icon={<JodOpenInNew ariaLabel={t('external-link')} />}
-          iconSide="right"
-          linkComponent={getLinkTo('https://link.webropolsurveys.com/S/8AF8E63BF83D39FE', {
-            useAnchor: true,
-            target: '_blank',
-          })}
-          className="whitespace-nowrap"
-        />
-      ),
-      isCollapsed: false,
-    }));
-  }, [addTemporaryNote, t]);
-};
 
 const Root = () => {
   const {
@@ -172,8 +142,6 @@ const Root = () => {
       }));
     },
   });
-
-  useAddBetaFeedbackNote();
 
   const logout = () => {
     resetToolStore();
