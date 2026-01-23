@@ -1102,10 +1102,16 @@ export interface components {
       /** Format: double */
       osuus?: number;
     };
+    KoulutusAsteDto: {
+      koulutusasteKoodi?: string;
+      /** Format: double */
+      osuus?: number;
+    };
     TyollisyysDto: {
       /** Format: int32 */
       tyollisetKokoMaa?: number;
       koulutusalaTyollisyydet?: components['schemas']['KoulutusAlaDto'][];
+      koulutusasteTyollisyydet?: components['schemas']['KoulutusAsteDto'][];
     };
     TyomahdollisuusFullDto: {
       /** Format: uuid */
