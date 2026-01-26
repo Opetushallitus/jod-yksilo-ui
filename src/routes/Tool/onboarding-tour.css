@@ -13,6 +13,12 @@
     height: var(--spacing-5);
     right: var(--spacing-4);
     top: var(--spacing-4);
+    padding-right: var(--spacing-1);
+
+    &:focus-visible {
+      outline: var(--spacing-1) solid var(--color-border-gray);
+      outline-offset: var(--spacing-1);
+    }
   }
 
   .driver-popover-title {
@@ -47,6 +53,11 @@
     text-shadow: none;
     border-style: none;
     background-color: transparent;
+
+    &:focus-visible {
+      outline: var(--spacing-1) solid var(--color-border-gray);
+      outline-offset: var(--spacing-1);
+    }
   }
 
   .driver-popover-arrow {
