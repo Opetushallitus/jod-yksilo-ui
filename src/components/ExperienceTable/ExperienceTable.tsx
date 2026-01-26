@@ -209,6 +209,7 @@ export const ExperienceTable = ({
                   </tr>
                 )}
                 <ExperienceTableRow
+                  openFromTopLevel
                   key={row.key}
                   row={row}
                   onRowClick={onRowClick}
