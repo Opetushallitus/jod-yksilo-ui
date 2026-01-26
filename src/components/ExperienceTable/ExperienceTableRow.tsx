@@ -27,6 +27,7 @@ export interface ExperienceTableRowData {
 interface ExperienceTableRowProps {
   row: ExperienceTableRowData;
   nested?: boolean;
+  openFromTopLevel?: boolean;
   isOdd?: boolean;
   onRowClick?: (row: ExperienceTableRowData) => void;
   className?: string;
@@ -47,21 +48,57 @@ interface ExperienceTableRowProps {
 
 const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData }) => {
   const text = getLocalizedText(row?.nimi);
+  const baseClasses = 'pl-3 sm:pl-5 pr-3 sm:pr-7 pt-2 hyphens-auto [overflow-wrap:anywhere]';
 
-  return nested ? (
-    <p className="pl-3 sm:pl-5 pr-3 sm:pr-7 pt-2 text-body-md font-normal sm:py-2 hyphens-auto [overflow-wrap:anywhere]">
-      {text}
-    </p>
-  ) : (
-    <p className="pl-3 sm:pl-5 pr-3 sm:pr-7 pt-2 font-poppins text-heading-4 sm:pt-1 sm:pb-[3px] hyphens-auto [overflow-wrap:anywhere]">
-      {text}
-    </p>
-  );
+  if (nested) {
+    return <p className={`${baseClasses} font-normal text-body-md sm:py-2`}>{text}</p>;
+  }
+  return <p className={`${baseClasses} font-poppins text-heading-4 sm:pt-1 sm:pb-[3px]`}>{text}</p>;
 };
+
+const DateRange = ({ alkuPvm, loppuPvm, className = '' }: { alkuPvm?: Date; loppuPvm?: Date; className?: string }) => (
+  <div className={className}>
+    {alkuPvm && formatDate(alkuPvm)} – {loppuPvm && formatDate(loppuPvm)}
+  </div>
+);
+
+const CompetencesRow = ({
+  tagsVisibleState,
+  showCheckbox,
+  className,
+  t,
+  sortedCompetences,
+}: {
+  tagsVisibleState: boolean;
+  showCheckbox?: boolean;
+  className?: string;
+  t: (key: string) => string;
+  sortedCompetences: ExperienceTableRowData['osaamiset'];
+}) => (
+  <tr>
+    {tagsVisibleState && !showCheckbox && (
+      <td colSpan={5} className={`${className} w-full max-w-0 px-4 pt-3 pb-5`.trim()}>
+        <ul className="flex flex-wrap gap-3" aria-label={t('competences')}>
+          {sortedCompetences.map((competence) => (
+            <li key={competence.id} className="max-w-full">
+              <Tag
+                label={getLocalizedText(competence.nimi)}
+                tooltip={getLocalizedText(competence.kuvaus)}
+                variant="presentation"
+                sourceType={competence.sourceType ?? 'jotain-muuta'}
+              />
+            </li>
+          ))}
+        </ul>
+      </td>
+    )}
+  </tr>
+);
 
 export const ExperienceTableRow = ({
   row,
   nested,
+  openFromTopLevel = false,
   isOdd,
   className,
   onRowClick,
@@ -245,59 +282,59 @@ export const ExperienceTableRow = ({
     );
   };
 
-  return nested ? (
-    <>
-      <tr key={row.key} className={className}>
-        <td className="w-full" colSpan={sm ? 1 : 3}>
-          <Title row={row} nested />
-          {!sm && (
-            <div className="flex flex-wrap gap-x-5 pb-2 pl-3 sm:pl-5 pr-7 text-body-md">
-              {row.alkuPvm && formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
-            </div>
-          )}
-        </td>
-        {!hideOsaamiset && !sm && <td className="text-nowrap text-body-md">{renderOsaamisetNestedCell(!sm)}</td>}
-        {sm && (
-          <>
-            <td className="text-body-md pr-7">{!row.hideRowDetails && row.alkuPvm && formatDate(row.alkuPvm)}</td>
-            <td className="text-body-md pr-7">{!row.hideRowDetails && row.loppuPvm && formatDate(row.loppuPvm)}</td>
-            {!hideOsaamiset && (
-              <td className={`text-body-md ${onRowClick ? 'pr-7' : 'pr-5'}`.trim()}>{renderOsaamisetNestedCell(sm)}</td>
+  const isExpandableRow = nested || openFromTopLevel;
+  const commonTextStyles = `pr-7 text-body-md ${!nested ? 'text-secondary-gray' : ''}`;
+
+  if (isExpandableRow) {
+    return (
+      <>
+        <tr key={row.key} className={className}>
+          <td className="w-full" colSpan={sm ? 1 : 3}>
+            <Title row={row} nested={nested} />
+            {!sm && (
+              <DateRange
+                alkuPvm={row.alkuPvm}
+                loppuPvm={row.loppuPvm}
+                className={`flex flex-wrap gap-x-5 pb-2 pl-3 sm:pl-5 ${commonTextStyles}`}
+              />
             )}
-          </>
-        )}
-        {onRowClick && <td>{rowAction(onRowClick, row, useConfirm, rowActionElement, actionLabel)}</td>}
-        {showCheckbox && <td>{renderCheckbox()}</td>}
-      </tr>
-      <tr>
-        {tagsVisibleState && !showCheckbox && (
-          <td colSpan={5} className={`${className} w-full max-w-0 px-4 pt-3 pb-5`.trim()}>
-            <ul className="flex flex-wrap gap-3" aria-label={t('competences')}>
-              {sortedCompetences.map((competence) => (
-                <li key={competence.id} className="max-w-full">
-                  <Tag
-                    label={getLocalizedText(competence.nimi)}
-                    tooltip={getLocalizedText(competence.kuvaus)}
-                    variant="presentation"
-                    sourceType={competence.sourceType ?? 'jotain-muuta'}
-                  />
-                </li>
-              ))}
-            </ul>
           </td>
-        )}
-      </tr>
-    </>
-  ) : (
+          {!hideOsaamiset && !sm && <td className="text-nowrap text-body-md">{renderOsaamisetNestedCell(!sm)}</td>}
+          {sm && (
+            <>
+              <td className={commonTextStyles}>{!row.hideRowDetails && row.alkuPvm && formatDate(row.alkuPvm)}</td>
+              <td className={commonTextStyles}>{!row.hideRowDetails && row.loppuPvm && formatDate(row.loppuPvm)}</td>
+              {!hideOsaamiset && (
+                <td className={`text-body-md ${onRowClick ? 'pr-7' : 'pr-5'}`.trim()}>
+                  {renderOsaamisetNestedCell(sm)}
+                </td>
+              )}
+            </>
+          )}
+          {onRowClick && <td>{rowAction(onRowClick, row, useConfirm, rowActionElement, actionLabel)}</td>}
+          {showCheckbox && <td>{renderCheckbox()}</td>}
+        </tr>
+        <CompetencesRow
+          tagsVisibleState={tagsVisibleState}
+          showCheckbox={showCheckbox}
+          className={className}
+          t={t}
+          sortedCompetences={sortedCompetences}
+        />
+      </>
+    );
+  }
+
+  return (
     <tr key={row.key} className={className}>
       <td className="w-full" colSpan={sm ? 1 : 3}>
         <Title row={row} />
         {!sm && (
-          <div className="flex flex-wrap gap-x-5 pb-2 pl-3 sm:pl-5 pr-7 text-secondary-gray text-body-md">
-            <span>
-              {row.alkuPvm && formatDate(row.alkuPvm)} – {row.loppuPvm && formatDate(row.loppuPvm)}
-            </span>
-          </div>
+          <DateRange
+            alkuPvm={row.alkuPvm}
+            loppuPvm={row.loppuPvm}
+            className="flex flex-wrap gap-x-5 pb-2 pl-3 sm:pl-5 pr-7 text-secondary-gray text-body-md"
+          />
         )}
       </td>
       {!sm && !hideOsaamiset && renderOsaamisetCell(!sm)}
