@@ -1,3 +1,4 @@
+import { formErrorMessage } from '@/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Checkbox, InputField, Modal, RadioButton, RadioButtonGroup, Textarea } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
@@ -58,6 +59,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
   const { t } = useTranslation();
 
   const { control, register, watch, reset } = useForm({
+    mode: 'onBlur',
     resolver: zodResolver(Feedback),
     defaultValues: {
       section,
@@ -67,7 +69,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
       wantsContact: false,
     },
   });
-  const { isValid } = useFormState({ control });
+  const { isValid, errors } = useFormState({ control });
   const wantsContact = watch('wantsContact');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
@@ -174,15 +176,17 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
               </RadioButtonGroup>
             )}
           />
-          <Textarea
-            label={t('feedback.message-label')}
-            {...register('message')}
-            className="mb-9"
-            rows={5}
-            maxLength={MESSAGE_MAX_LENGTH}
-            testId="feedback-message"
-            requiredText={t('required')}
-          />
+          <div className="mb-9">
+            <Textarea
+              label={t('feedback.message-label')}
+              {...register('message')}
+              rows={5}
+              maxLength={MESSAGE_MAX_LENGTH}
+              requiredText={t('required')}
+              errorMessage={errors.message ? formErrorMessage.required().message : undefined}
+              testId="feedback-message"
+            />
+          </div>
           <Controller
             control={control}
             name="wantsContact"
@@ -200,13 +204,16 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
             )}
           />
           {wantsContact && (
-            <InputField
-              label={t('feedback.email-label')}
-              {...register('email')}
-              className="mb-9"
-              maxLength={EMAIL_MAX_LENGTH}
-              testId="feedback-email"
-            />
+            <div className="mb-9">
+              <InputField
+                label={t('feedback.email-label')}
+                {...register('email')}
+                maxLength={EMAIL_MAX_LENGTH}
+                requiredText={t('required')}
+                errorMessage={errors.email ? formErrorMessage.email().message : undefined}
+                testId="feedback-email"
+              />
+            </div>
           )}
           <hr className="h-1 bg-border-gray text-border-gray mb-7" />
           <div className="sm:text-body-md text-body-md-mobile">
