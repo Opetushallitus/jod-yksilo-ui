@@ -100,6 +100,7 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
       name={headerText}
       open={isOpen}
       topSlot={topSlot}
+      fullWidthContent
       className="sm:h-full!"
       content={
         <FormProvider {...methods}>

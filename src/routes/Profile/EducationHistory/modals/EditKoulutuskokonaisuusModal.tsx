@@ -132,6 +132,8 @@ const EditKoulutuskokonaisuusModal = ({
       name={headerText}
       open={isOpen}
       topSlot={topSlot}
+      fullWidthContent
+      className="sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form

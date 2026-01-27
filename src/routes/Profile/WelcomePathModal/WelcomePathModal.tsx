@@ -323,7 +323,8 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
     <Modal
       name={headerText}
       open={showWelcomePathModal}
-      className="sm:!h-[980px]"
+      fullWidthContent
+      className="sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form
@@ -336,7 +337,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
               }
             }}
           >
-            <div ref={scrollRef}>
+            <div ref={scrollRef} className="w-2/3">
               {isFirstStep && <StepWelcome />}
               {isInfoStep && <StepInformation data={yksiloData} />}
               {isAiStep && <StepAi />}

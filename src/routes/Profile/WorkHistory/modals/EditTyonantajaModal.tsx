@@ -120,6 +120,8 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
     <Modal
       name={t('work-history.edit-workplace')}
       open={isOpen}
+      fullWidthContent
+      className="sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form

@@ -136,6 +136,8 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
       name={t('free-time-activities.edit-free-time-theme')}
       open={isOpen}
       topSlot={topSlot}
+      fullWidthContent
+      className="sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form
