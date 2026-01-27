@@ -215,8 +215,13 @@ export const ExperienceTable = ({
                   onRowClick={onRowClick}
                   className="bg-white border-spacing-x-2"
                   hideOsaamiset={hideOsaamiset}
-                  osaamisetOdottaaTunnistusta={row.osaamisetOdottaaTunnistusta}
-                  osaamisetTunnistusEpaonnistui={row.osaamisetTunnistusEpaonnistui}
+                  osaamisetOdottaaTunnistusta={
+                    row.subrows?.some((subrow) => subrow.osaamisetOdottaaTunnistusta) ?? row.osaamisetOdottaaTunnistusta
+                  }
+                  osaamisetTunnistusEpaonnistui={
+                    row.subrows?.some((subrow) => subrow.osaamisetTunnistusEpaonnistui) ??
+                    row.osaamisetTunnistusEpaonnistui
+                  }
                   rowActionElement={rowActionElement}
                   useConfirm={useConfirm}
                   confirmTitle={confirmTitle}
