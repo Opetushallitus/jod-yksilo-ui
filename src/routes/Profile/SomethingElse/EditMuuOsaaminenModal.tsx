@@ -99,6 +99,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
       name={headerText}
       open={isOpen}
       topSlot={topSlot}
+      fullWidthContent
       className="sm:h-full!"
       content={
         <FormProvider {...methods}>

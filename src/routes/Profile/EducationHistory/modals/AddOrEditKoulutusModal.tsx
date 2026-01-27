@@ -327,6 +327,7 @@ const AddOrEditKoulutusModal = ({
     <Modal
       name={headerText}
       open={isOpen}
+      fullWidthContent
       className="sm:h-full!"
       progress={
         <WizardProgress

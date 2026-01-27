@@ -172,6 +172,8 @@ export const NewShareLinkModal = ({ isOpen, onClose, id }: NewShareLinkModalProp
     <Modal
       name={modalTitle}
       open={isOpen}
+      fullWidthContent
+      className="sm:h-full!"
       testId="share-link-wizard"
       content={
         <FormProvider {...methods}>
