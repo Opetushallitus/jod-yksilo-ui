@@ -19,6 +19,10 @@ export type ConfirmDialogWrapperProps = Omit<ConfirmDialogProps, 'children'> & {
   onConfirm?: () => MaybePromise<void>;
   /** Whether to hide the secondary (cancel) button */
   hideSecondaryButton?: boolean;
+  /** Callback for when the cancel button is clicked */
+  onCancel?: () => void;
+  /** Icon for the confirm button */
+  confirmButtonIcon?: React.ReactNode;
 };
 
 /**
@@ -45,7 +49,9 @@ export const ConfirmDialogWrapper = ({
   variant = 'destructive',
   hideSecondaryButton,
   closeParentModal,
+  confirmButtonIcon,
   onConfirm,
+  onCancel,
   footer,
   content,
 }: ConfirmDialogWrapperProps) => {
@@ -64,6 +70,7 @@ export const ConfirmDialogWrapper = ({
             if (loading) {
               return;
             }
+            onCancel?.();
             hideDialog();
             closeActiveModal();
           }}
@@ -72,7 +79,7 @@ export const ConfirmDialogWrapper = ({
       <Button
         label={confirmText ?? defaultConfirmText}
         iconSide="right"
-        icon={loading ? <Spinner size={24} color="white" /> : undefined}
+        icon={loading ? <Spinner size={24} color="white" /> : confirmButtonIcon}
         onClick={async () => {
           if (loading) {
             return;

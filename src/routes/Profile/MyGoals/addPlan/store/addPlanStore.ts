@@ -1,17 +1,17 @@
-import { client } from '@/api/client.ts';
-import { getKoulutusMahdollisuusDetailsFullPage } from '@/api/mahdollisuusService.ts';
-import { osaamiset } from '@/api/osaamiset.ts';
-import { components } from '@/api/schema';
-import { DEFAULT_PAGE_SIZE } from '@/constants.ts';
-import i18n from '@/i18n/config.ts';
+import { client } from '@/api/client';
+import { getKoulutusMahdollisuusDetailsFullPage } from '@/api/mahdollisuusService';
+import { osaamiset } from '@/api/osaamiset';
+import type { components } from '@/api/schema';
+import { DEFAULT_PAGE_SIZE } from '@/constants';
+import i18n from '@/i18n/config';
 import {
-  AddPlanState,
+  type AddPlanState,
   DEFAULT_FILTERS,
   DEFAULT_SORTING,
-  PlanFilters,
-} from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel.ts';
-import { ehdotusDataToRecord, EhdotusRecord } from '@/routes/Tool/utils.ts';
-import { filterByEducationType, filterByKesto } from '@/stores/useToolStore/filters.ts';
+  type PlanFilters,
+} from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel';
+import { ehdotusDataToRecord, type EhdotusRecord } from '@/routes/Tool/utils';
+import { filterByEducationType, filterByKesto } from '@/stores/useToolStore/filters';
 import { paginate, removeDuplicatesByKey } from '@/utils';
 import { create } from 'zustand';
 
@@ -23,39 +23,26 @@ const initialState = {
   tavoite: null,
   selectedPlans: [],
   osaamiset: [],
-  selectedOsaamiset: [],
   vaaditutOsaamiset: [],
   ehdotuksetLoading: false,
   mahdollisuudetLoading: false,
   tavoitteet: {},
   filteredMahdollisuudetCount: 0,
   previousEhdotusUpdateLang: i18n.language,
+  initialPlanListLoaded: false,
 
   ehdotuksetPageSize: DEFAULT_PAGE_SIZE,
+  settingsHaveChanged: false,
   ehdotuksetPageNr: 0,
   mahdollisuusEhdotukset: {},
   tyomahdollisuudet: [],
   koulutusmahdollisuudet: [],
   filters: DEFAULT_FILTERS,
   sorting: DEFAULT_SORTING,
-  planName: {
-    fi: '',
-    sv: '',
-    en: '',
-  },
-  planDescription: {
-    fi: '',
-    sv: '',
-    en: '',
-  },
 };
 export const addPlanStore = create<AddPlanState>((set, get) => ({
   ...initialState,
   reset: () => set(initialState),
-  addSelectedOsaaminen: (osaaminenUri: components['schemas']['OsaaminenDto']) =>
-    set({ selectedOsaamiset: [...get().selectedOsaamiset, osaaminenUri] }),
-  removeSelectedOsaaminen: (osaaminenUri: components['schemas']['OsaaminenDto']) =>
-    set({ selectedOsaamiset: get().selectedOsaamiset.filter((o) => o !== osaaminenUri) }),
   resetSettings: () => set({ filters: DEFAULT_FILTERS, sorting: DEFAULT_SORTING, settingsHaveChanged: true }),
   setSelectedPlans: (state) => set({ selectedPlans: state }),
   setOsaamiset: (state) => set({ osaamiset: state }),
@@ -69,27 +56,10 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
       },
     }));
   },
-
-  setPlanName: (newPlanNameValue: string) => {
-    set((state) => ({
-      planName: {
-        ...state.planName, // keep other languages as is
-        [i18n.language]: newPlanNameValue, // replace value only for current language
-      },
-    }));
-  },
-  setPlanDescription: (newPlanNameValue: string) => {
-    set((state) => ({
-      planDescription: {
-        ...state.planDescription, // keep other languages as is
-        [i18n.language]: newPlanNameValue, // replace value only for current language
-      },
-    }));
-  },
   updateEhdotukset: async () => {
     set({ ehdotuksetLoading: true });
-
     const mahdollisuusId = get().tavoite?.mahdollisuusId;
+
     if (!mahdollisuusId) {
       return;
     }
@@ -125,12 +95,14 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
       set({
         mahdollisuusEhdotukset,
         ehdotuksetLoading: false,
+        initialPlanListLoaded: true,
       });
     } catch (error) {
       if ((error as Error).name !== 'AbortError') {
         set({
           mahdollisuusEhdotukset: {},
           ehdotuksetLoading: false,
+          initialPlanListLoaded: true,
         });
       }
     }
@@ -149,9 +121,10 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
     abortController = new AbortController();
     const signal = abortController.signal;
 
+    set({ ehdotuksetLoading: true, mahdollisuudetLoading: true });
     await updateEhdotukset(i18n.language, signal);
     await fetchMahdollisuudetPage(signal, 1);
-    set({ settingsHaveChanged: false });
+    set({ settingsHaveChanged: false, ehdotuksetLoading: false, mahdollisuudetLoading: false });
   },
 
   fetchMahdollisuudetPage: async (signal, newPage = 1) => {

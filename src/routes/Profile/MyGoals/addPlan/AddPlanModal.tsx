@@ -2,7 +2,7 @@ import { client } from '@/api/client';
 import { useModal } from '@/hooks/useModal';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { Button, Modal, WizardProgress } from '@jod/design-system';
+import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import React from 'react';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
@@ -19,19 +19,15 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   const { t } = useTranslation();
   const { showDialog, showModal, closeActiveModal } = useModal();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const { sm } = useMediaQueries();
   const { tavoite, selectedPlans } = addPlanStore(
     useShallow((state) => ({
       tavoite: state.tavoite,
-      selectedOsaamiset: state.selectedOsaamiset,
       selectedPlans: state.selectedPlans,
     })),
   );
 
-  const { refreshTavoitteet } = useTavoitteetStore(
-    useShallow((state) => ({
-      refreshTavoitteet: state.refreshTavoitteet,
-    })),
-  );
+  const refreshTavoitteet = useTavoitteetStore((state) => state.refreshTavoitteet);
 
   const onSubmit = async () => {
     setIsSubmitting(true);
@@ -81,17 +77,16 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
       open={isOpen}
       topSlot={<h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-new-plan-header')}</h1>}
       fullWidthContent
+      className="h-full"
       progress={
-        <div className="relative z-30">
-          <WizardProgress
-            labelText={t('wizard.label')}
-            stepText={t('wizard.step')}
-            completedText={t('wizard.completed')}
-            currentText={t('wizard.current')}
-            steps={1}
-            currentStep={1}
-          />
-        </div>
+        <WizardProgress
+          labelText={t('wizard.label')}
+          stepText={t('wizard.step')}
+          completedText={t('wizard.completed')}
+          currentText={t('wizard.current')}
+          steps={1}
+          currentStep={1}
+        />
       }
       content={<SelectPlanStep />}
       footer={
@@ -99,11 +94,11 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
           <Button
             label={t('profile.my-goals.add-custom-plan')}
             variant="white"
+            size={sm ? 'lg' : 'sm'}
+            className="h-5"
             onClick={() => {
               closeActiveModal();
-              showModal(AddOrEditCustomPlanModal, {
-                tavoiteId: tavoite?.id,
-              });
+              showModal(AddOrEditCustomPlanModal, { tavoite });
             }}
           />
 
@@ -111,6 +106,8 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
             <Button
               label={t('cancel')}
               variant="white"
+              size={sm ? 'lg' : 'sm'}
+              className="h-5"
               onClick={() => {
                 showDialog({
                   title: t('cancel'),
@@ -125,6 +122,8 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
             <Button
               label={t('save')}
               disabled={isSubmitting || selectedPlans.length === 0}
+              size={sm ? 'lg' : 'sm'}
+              className="h-5"
               variant="accent"
               onClick={onSubmit}
             />

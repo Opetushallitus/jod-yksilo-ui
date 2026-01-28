@@ -1,8 +1,8 @@
 import { client } from '@/api/client';
-import { getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService.ts';
-import { components } from '@/api/schema';
-import { TypedMahdollisuus } from '@/routes/types';
-import { isDefined } from '@/utils';
+import { getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
+import type { components } from '@/api/schema';
+import type { TypedMahdollisuus } from '@/routes/types';
+import { isDefined, sortByProperty } from '@/utils';
 import { create } from 'zustand';
 
 export type Tavoite = components['schemas']['TavoiteDto'];
@@ -29,7 +29,14 @@ export const useTavoitteetStore = create<TavoitteetState>()((set, get) => ({
       set({ isLoading: true });
       const response = await client.GET('/api/profiili/tavoitteet');
       const tavoitteet = response.data ?? [];
-      get().setTavoitteet(tavoitteet);
+      get().setTavoitteet(
+        [...tavoitteet]
+          .map((t) => ({
+            ...t,
+            suunnitelmat: t.suunnitelmat?.sort(sortByProperty('luotu')),
+          }))
+          .sort(sortByProperty('luotu')),
+      );
     } finally {
       set({ isLoading: false });
     }
