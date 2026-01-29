@@ -202,11 +202,10 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
     <Modal
       name={t('education-history-import.summary-modal.title')}
       open={isOpen}
+      topSlot={<ModalHeader text={t('education-history-import.summary-modal.title')} testId="education-step-title" />}
       content={
         <div id={modalId} className="flex flex-col">
           <div className="text-left">
-            <ModalHeader text={t('education-history-import.summary-modal.title')} testId="education-step-title" />
-
             <p className="mb-4 sm:text-body-md text-body-md-mobile">
               {t('education-history-import.summary-modal.description')}
             </p>

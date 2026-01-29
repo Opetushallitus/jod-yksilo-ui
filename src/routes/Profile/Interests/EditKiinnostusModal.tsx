@@ -118,7 +118,13 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
               control={methods.control}
               name="kiinnostukset"
               render={({ field: { onChange, value } }) => (
-                <OsaamisSuosittelija onChange={onChange} value={value} sourceType="KIINNOSTUS" mode="kiinnostukset" />
+                <OsaamisSuosittelija
+                  onChange={onChange}
+                  value={value}
+                  sourceType="KIINNOSTUS"
+                  mode="kiinnostukset"
+                  textAreaClassName="max-w-modal-content!"
+                />
               )}
             />
           </Form>

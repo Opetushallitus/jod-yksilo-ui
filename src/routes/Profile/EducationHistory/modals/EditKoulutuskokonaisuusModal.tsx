@@ -152,6 +152,7 @@ const EditKoulutuskokonaisuusModal = ({
               placeholder={t('profile.education-history.modals.workplace-placeholder')}
               requiredText={t('required')}
               testId="education-history-provider-input"
+              className="max-w-modal-content"
             />
             <FormError name={`nimi.${language}`} errors={errors} />
           </Form>

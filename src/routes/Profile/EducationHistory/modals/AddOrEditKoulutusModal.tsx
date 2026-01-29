@@ -68,7 +68,7 @@ const MainStep = () => {
   }, [alkuPvm, trigger]);
 
   return (
-    <>
+    <div className="max-w-modal-content">
       <div className="mb-6">
         <InputField
           label={t('education-history.name-of-degree-or-education')}
@@ -113,7 +113,7 @@ const MainStep = () => {
           <FormError name="loppuPvm" errors={errors} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -122,14 +122,19 @@ const OsaamisetStep = () => {
   const { control } = useFormContext<KoulutusForm>();
   return (
     <>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9">
+      <p className="mb-7 text-body-sm font-arial sm:mb-9 max-w-modal-content">
         {t('profile.education-history.modals.competences-description')}
       </p>
       <Controller
         control={control}
         name={'osaamiset'}
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="KOULUTUS" />
+          <OsaamisSuosittelija
+            onChange={onChange}
+            value={value}
+            sourceType="KOULUTUS"
+            textAreaClassName="max-w-modal-content!"
+          />
         )}
       />
     </>

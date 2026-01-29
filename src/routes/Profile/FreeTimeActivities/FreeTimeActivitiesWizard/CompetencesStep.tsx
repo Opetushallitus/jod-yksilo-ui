@@ -16,12 +16,14 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
 
   return (
     <>
-      <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
-        {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}
-      </h3>
-      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
-        {t('profile.free-time-activities.modals.competences-description')}
-      </p>
+      <div className="max-w-modal-content">
+        <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
+          {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}
+        </h3>
+        <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
+          {t('profile.free-time-activities.modals.competences-description')}
+        </p>
+      </div>
       <Controller
         control={control}
         name={`patevyydet.${patevyys}.osaamiset`}
@@ -31,6 +33,7 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
             value={value}
             sourceType="PATEVYYS"
             placeholder={t('profile.free-time-activities.modals.competences-placeholder')}
+            textAreaClassName="max-w-modal-content!"
           />
         )}
       />

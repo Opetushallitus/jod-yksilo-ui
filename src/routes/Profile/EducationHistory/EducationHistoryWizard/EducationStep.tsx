@@ -25,7 +25,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
   const datePickerTranslations = useDatePickerTranslations();
 
   return (
-    <>
+    <div className="max-w-modal-content">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.education-history.modals.description')}
       </p>
@@ -89,7 +89,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
           <FormError name={`koulutukset.${koulutus}.loppuPvm`} errors={errors} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

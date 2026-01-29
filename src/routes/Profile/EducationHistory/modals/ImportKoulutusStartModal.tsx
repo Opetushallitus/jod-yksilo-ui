@@ -39,10 +39,10 @@ const ImportKoulutusStartModal = ({ isOpen, onClose }: ImportKoulutusStartModalP
       name={t('education-history-import.start-modal.title')}
       open={isOpen}
       fullWidthContent
+      topSlot={<ModalHeader text={t('education-history-import.start-modal.title')} />}
       content={
         <div id={modalId} className="flex flex-col items-center px-2 sm:px-5 sm:mt-11 mt-6">
           <div className="text-left w-full sm:max-w-3/4 sm:px-5">
-            <ModalHeader text={t('education-history-import.start-modal.title')} />
             <p className="mb-4 sm:text-body-md text-body-md-mobile font-arial">
               {t('education-history-import.start-modal.description')}
             </p>

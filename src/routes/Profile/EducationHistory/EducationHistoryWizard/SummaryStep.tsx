@@ -55,7 +55,7 @@ const SummaryStep = () => {
   }, [watch]);
 
   return (
-    <>
+    <div className="max-w-modal-content">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.education-history.modals.summary-description')}
       </p>
@@ -66,7 +66,7 @@ const SummaryStep = () => {
           rows={rows}
         />
       </div>
-    </>
+    </div>
   );
 };
 
