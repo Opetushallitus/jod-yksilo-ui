@@ -227,7 +227,7 @@
         "modal": {
           "step-1-description": "Du kan importera information från din jobbsökarprofil i Jobbmarknaden till din kompetensprofil. Importen kräver inloggning i Jobbmarknaden och separat auktorisering. Ingen information hämtas utan ditt tillstånd, och du bestämmer själv vilken information du delar.",
           "step-2-description": "Inloggningen till Jobbmarknaden lyckades och auktoriseringen är klar. Importen av din kompetensprofil pågår.",
-          "title": "Importera uppgifter från Työmarkkinatori"
+          "title": "Importera uppgifter från Jobbmarknaden"
         },
         "success": "Dina uppgifter har importerats från Jobbmarknaden."
       },
