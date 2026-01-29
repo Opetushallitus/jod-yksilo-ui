@@ -16,17 +16,24 @@ const CompetencesStep = ({ koulutus }: CompetencesStepProps) => {
 
   return (
     <>
-      <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
-        {getValues(`nimi.${language}`)} - {getValues(`koulutukset.${koulutus}.nimi.${language}`)}
-      </h3>
-      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
-        {t('profile.education-history.modals.competences-description')}
-      </p>
+      <div className="max-w-modal-content">
+        <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
+          {getValues(`nimi.${language}`)} - {getValues(`koulutukset.${koulutus}.nimi.${language}`)}
+        </h3>
+        <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
+          {t('profile.education-history.modals.competences-description')}
+        </p>
+      </div>
       <Controller
         control={control}
         name={`koulutukset.${koulutus}.osaamiset`}
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="KOULUTUS" />
+          <OsaamisSuosittelija
+            onChange={onChange}
+            value={value}
+            sourceType="KOULUTUS"
+            textAreaClassName="max-w-modal-content!"
+          />
         )}
       />
     </>

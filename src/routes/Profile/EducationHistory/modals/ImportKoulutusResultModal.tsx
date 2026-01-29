@@ -34,6 +34,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
       }
       open={isOpen}
       fullWidthContent
+      topSlot={<ModalHeader text={t('education-history-import.result-modal.success')} />}
       content={
         <div id={modalId} className="flex flex-col items-center justify-center px-2 sm:px-5 sm:mt-11 mt-6">
           {isSuccess ? (
@@ -42,7 +43,6 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
                 <JodCheckCircle size={20} className="text-heading-1 text-success" />
               </div>
               <div className="lg:px-8 flex flex-col sm:self-center sm:w-3/4 w-full">
-                <ModalHeader text={t('education-history-import.result-modal.success')} />
                 <p className="max-w-full wrap-break-word whitespace-pre-line">
                   {t('education-history-import.result-modal.success-osaamiset-info')}
                 </p>

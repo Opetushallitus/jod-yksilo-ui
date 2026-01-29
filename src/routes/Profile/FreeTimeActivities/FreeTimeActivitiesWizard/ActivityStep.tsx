@@ -33,7 +33,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
   }, [alkuPvm, loppuPvm, trigger]);
 
   return (
-    <>
+    <div className="max-w-modal-content">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.free-time-activities.modals.description')}
       </p>
@@ -102,7 +102,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
           <FormError name={`patevyydet.${patevyys}.loppuPvm`} errors={errors} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

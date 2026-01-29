@@ -29,7 +29,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
   }, [alkuPvm, loppuPvm, trigger]);
 
   return (
-    <>
+    <div className="max-w-modal-content">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.work-history.modals.description')}
       </p>
@@ -99,7 +99,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
           <FormError name={`toimenkuvat.${toimenkuva}.loppuPvm`} errors={errors} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

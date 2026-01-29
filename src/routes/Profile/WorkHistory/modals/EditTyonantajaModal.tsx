@@ -121,6 +121,7 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
       name={t('work-history.edit-workplace')}
       open={isOpen}
       fullWidthContent
+      topSlot={<ModalHeader text={t('work-history.edit-workplace')} testId="work-history-edit-workplace-title" />}
       className="sm:h-full!"
       content={
         <FormProvider {...methods}>
@@ -133,8 +134,8 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
                 event.preventDefault();
               }
             }}
+            className="max-w-modal-content"
           >
-            <ModalHeader text={t('work-history.edit-workplace')} testId="work-history-edit-workplace-title" />
             <InputField
               label={t('work-history.employer')}
               {...methods.register(`nimi.${language}` as const)}

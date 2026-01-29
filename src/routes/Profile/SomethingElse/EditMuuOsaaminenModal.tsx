@@ -117,7 +117,12 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
               control={methods.control}
               name="osaamiset"
               render={({ field: { onChange, value } }) => (
-                <OsaamisSuosittelija onChange={onChange} value={value} sourceType="MUU_OSAAMINEN" />
+                <OsaamisSuosittelija
+                  onChange={onChange}
+                  value={value}
+                  sourceType="MUU_OSAAMINEN"
+                  textAreaClassName="max-w-modal-content!"
+                />
               )}
             />
           </Form>

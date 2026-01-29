@@ -149,6 +149,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
                 event.preventDefault();
               }
             }}
+            className="max-w-modal-content"
           >
             <InputField
               label={t('free-time-activities.name-of-free-time-theme')}

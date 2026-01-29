@@ -67,7 +67,7 @@ const MainStep = () => {
     void trigger('loppuPvm');
   }, [alkuPvm, trigger]);
   return (
-    <>
+    <div className="max-w-modal-content">
       <div className="mb-6 flex flex-col">
         <InputField
           label={t('work-history.job-description')}
@@ -114,7 +114,7 @@ const MainStep = () => {
           <FormError name="loppuPvm" errors={errors} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -123,12 +123,19 @@ const OsaamisetStep = () => {
   const { control } = useFormContext<ToimenkuvaForm>();
   return (
     <>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9">{t('profile.work-history.modals.competences-description')}</p>
+      <p className="mb-7 text-body-sm font-arial sm:mb-9 max-w-modal-content">
+        {t('profile.work-history.modals.competences-description')}
+      </p>
       <Controller
         control={control}
         name="osaamiset"
         render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija onChange={onChange} value={value} sourceType="TOIMENKUVA" />
+          <OsaamisSuosittelija
+            onChange={onChange}
+            value={value}
+            sourceType="TOIMENKUVA"
+            textAreaClassName="max-w-modal-content!"
+          />
         )}
       />
     </>
