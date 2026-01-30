@@ -90,6 +90,8 @@
     "employment-data": {
       "description": "The employment outlook examines job opportunities within the occupational group. The goal is to form a general picture of the situation. The data has been compiled from other services where you can explore them in more detail. Additional information on the employment outlook is available from the Osaamispolku <CustomLink>information service<Icon></Icon></CustomLink>",
       "employed-by-koulutusala": "Employed persons by field of education",
+      "employed-by-koulutusaste": "Employed persons by education level",
+      "employed-by-region": "Employed persons by region",
       "employed-title": "Number of employed persons in the whole of Finland",
       "supply-and-demand": "Supply and demand situation",
       "supply-and-demand-subtitle": "The occupational group may have oversupply, balance, or labor shortage. More information on the employment outlook can be found from the <CustomLink>labor market monitor<Icon></Icon></CustomLink>",
