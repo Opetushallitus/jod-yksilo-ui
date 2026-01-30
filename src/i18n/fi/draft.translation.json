@@ -89,6 +89,7 @@
     "employment-data": {
       "description": "Työllisyysnäkymä tarkastelee työllistymismahdollisuuksia ammattiryhmässä. Tavoitteena on muodostaa yleiskuva tilanteesta. Tietoja on koottu muista palveluista, joissa voi tutustua niihin tarkemmin. Lisätietoa työllisyysnäkymästä saat Osaamispolun <CustomLink>tietopalvelusta<Icon></Icon></CustomLink>",
       "employed-by-koulutusala": "Työlliset koulutusaloittain",
+      "employed-by-koulutusaste": "Työlliset koulutusasteittain",
       "employed-title": "Työllisten määrä koko Suomessa",
       "supply-and-demand": "Kysynnän ja tarjonnan tilanne",
       "supply-and-demand-subtitle": "Ammattiryhmässä voi olla ylitarjontaa, tasapainotila tai työvoimapulaa. Lisää tietoa työllisyysnäkymästä löydät <CustomLink>työmarkkinatorilta<Icon></Icon></CustomLink>",

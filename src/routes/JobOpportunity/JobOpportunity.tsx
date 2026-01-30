@@ -23,7 +23,12 @@ interface Koulutusala {
   osuus: number;
 }
 
+interface KoulutusasteTyollisyys {
+  title: string;
+  osuus: number;
+}
 const koulutusalaPrefix = 'kansallinenkoulutusluokitus2016koulutusalataso1_';
+const koulutusastePrefix = 'kansallinenkoulutusluokitus2016koulutusastetaso1_';
 const JobOpportunity = () => {
   const { t } = useTranslation();
   const { lg } = useMediaQueries();
@@ -39,6 +44,7 @@ const JobOpportunity = () => {
     [osaamiset, omatOsaamisetUris, tyomahdollisuus.jakaumat],
   );
   const [koulutusalat, setKoulutusalat] = React.useState<Koulutusala[]>([]);
+  const [koulutusasteet, setKoulutusasteet] = React.useState<Koulutusala[]>([]);
 
   React.useEffect(() => {
     const fetchKoulutusalat = async () => {
@@ -62,11 +68,41 @@ const JobOpportunity = () => {
         }
         return { title, osuus };
       });
+
       setKoulutusalat(newKoulutusalat);
     };
     setKoulutusalat([]);
     fetchKoulutusalat();
   }, [tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusalaTyollisyydet, t]);
+
+  React.useEffect(() => {
+    const fetchKoulutusasteet = async () => {
+      if (!tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet) {
+        return;
+      }
+      const res = await getEducationCodesetValues(
+        tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet?.map(
+          (ka) => koulutusastePrefix + ka.koulutusasteKoodi,
+        ),
+      );
+      const newKoulutusasteet: KoulutusasteTyollisyys[] = res.map((ka) => {
+        let title = ka.value;
+        const koodi = ka.code.replace(koulutusastePrefix, '');
+        const osuus =
+          tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet?.find(
+            // eslint-disable-next-line sonarjs/no-nested-functions
+            (kat) => kat.koulutusasteKoodi === koodi,
+          )?.osuus ?? 0;
+        if (title === koulutusastePrefix + '-2') {
+          title = t('job-opportunity.employment-data.unknown-ala');
+        }
+        return { title, osuus };
+      });
+      setKoulutusasteet(newKoulutusasteet);
+    };
+    setKoulutusasteet([]);
+    fetchKoulutusasteet();
+  }, [tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet, t]);
 
   const tyomahdollisuusTehtavat =
     getTranslation(tyomahdollisuus?.tehtavat) !== ''
@@ -249,6 +285,22 @@ const JobOpportunity = () => {
                   <p className="font-bold mb-3">{t('job-opportunity.employment-data.employed-by-koulutusala')}</p>
                   <div className="space-y-2">
                     {koulutusalat
+                      .slice()
+                      .sort((a, b) => b.osuus - a.osuus)
+                      .filter((ka) => ka.osuus > 0)
+                      .map((ka) => (
+                        <div key={`${ka.title}-${ka.osuus}`} className="flex items-center py-2">
+                          <span className="text-heading-3 text-accent font-semibold min-w-[80px]">{ka.osuus}%</span>
+                          <span className=" flex ml-3 flex-1">{ka.title}</span>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+
+                <div className="mt-7">
+                  <p className="font-bold mb-3">{t('job-opportunity.employment-data.employed-by-koulutusaste')}</p>
+                  <div className="space-y-2">
+                    {koulutusasteet
                       .slice()
                       .sort((a, b) => b.osuus - a.osuus)
                       .filter((ka) => ka.osuus > 0)
