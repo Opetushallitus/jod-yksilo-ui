@@ -4,8 +4,10 @@ import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, EmptyState, tidyClasses, useMediaQueries } from '@jod/design-system';
-import { JodOpenInNew } from '@jod/design-system/icons';
+import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import GoalModal from './addGoal/GoalModal';
@@ -40,10 +42,12 @@ const GuidanceCard = ({ testId, className = '' }: { testId: string; className?: 
 };
 
 const MyGoals = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { lg } = useMediaQueries();
   const title = t('profile.my-goals.title');
-  const { showModal } = useModal();
+  const { showModal, showDialog } = useModal();
+  const [suosikitDialogShown, setSuosikitDialogShown] = React.useState(false);
+  const navigate = useNavigate();
 
   const tavoitteet = useTavoitteetStore((state) => state.tavoitteet);
   const suosikitIsEmpty = useSuosikitStore((state) => {
@@ -52,6 +56,25 @@ const MyGoals = () => {
     );
     return choosableSuosikit.length === 0;
   });
+
+  React.useEffect(() => {
+    if (suosikitIsEmpty && !suosikitDialogShown) {
+      showDialog({
+        title: t('profile.my-goals.add-favorites-dialog-title'),
+        description: t('profile.my-goals.add-favorites-dialog-description'),
+        confirmText: t('profile.my-goals.add-favorites-dialog-action'),
+        variant: 'normal',
+        confirmButtonIcon: <JodArrowRight />,
+        onConfirm: () => {
+          navigate(`/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.favorites')}`);
+          setSuosikitDialogShown(true);
+        },
+        onCancel: () => {
+          setSuosikitDialogShown(true);
+        },
+      });
+    }
+  }, [i18n.language, navigate, showDialog, suosikitDialogShown, suosikitIsEmpty, t]);
 
   return (
     <MainLayout
@@ -73,19 +96,20 @@ const MyGoals = () => {
         </div>
       )}
 
-      <title className="text-accent">{title}</title>
+      <title>{title}</title>
       <ProfileSectionTitle type="TAVOITTEENI" title={title} />
-      <div className="flex flex-col gap-4 mb-9 sm:text-body-lg text-body-lg-mobile">
+      <div className="sm:text-body-lg text-body-lg-mobile mb-7">
         <p>{t('profile.my-goals.description')}</p>
       </div>
-      <div className="flex flex-col gap-5">
-        <MyGoalsSection tavoitteet={tavoitteet} />
-      </div>
+      {tavoitteet.length > 0 && <MyGoalsSection tavoitteet={tavoitteet} />}
+      {!suosikitIsEmpty && tavoitteet.length === 0 && (
+        <div className="mb-6">
+          <EmptyState text={t('profile.my-goals.no-goals-created')} testId="goals-empty-state" />
+        </div>
+      )}
       {suosikitIsEmpty && (
-        <div className="flex flex-col gap-3 my-3">
-          <div className="mt-6 mb-7">
-            <EmptyState text={t('profile.my-goals.no-favorites-selected')} testId="goals-empty-state" />
-          </div>
+        <div className="mb-[180px]">
+          <EmptyState text={t('profile.my-goals.no-favorites-selected')} testId="goals-empty-state" />
         </div>
       )}
       <Button

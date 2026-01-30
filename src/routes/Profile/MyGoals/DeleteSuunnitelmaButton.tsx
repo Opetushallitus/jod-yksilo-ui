@@ -2,7 +2,7 @@ import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
-import { Button } from '@jod/design-system';
+import { Button, useMediaQueries } from '@jod/design-system';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +16,7 @@ interface DeletePolkuButtonProps {
 const DeleteSuunnitelmaButton = ({ tavoiteId, suunnitelmaId, className, name, onDelete }: DeletePolkuButtonProps) => {
   const { t } = useTranslation();
   const { showDialog } = useModal();
+  const { sm } = useMediaQueries();
 
   const deletePolku = async () => {
     if (!tavoiteId || !suunnitelmaId) {
@@ -40,6 +41,8 @@ const DeleteSuunnitelmaButton = ({ tavoiteId, suunnitelmaId, className, name, on
       <Button
         label={t('profile.my-goals.delete-plan')}
         variant="white-delete"
+        size={sm ? 'lg' : 'sm'}
+        className="h-5"
         onClick={() => {
           showDialog({
             title: t('profile.my-goals.delete-plan-title'),
