@@ -100,6 +100,7 @@
     "employment-data": {
       "description": "Sysselsättningsutsikterna granskar anställningsmöjligheterna inom yrkesgruppen. Målet är att ge en allmän bild av situationen. Uppgifterna har samlats från andra tjänster där du kan bekanta dig närmare med dem. Mer information om sysselsättningsutsikterna hittar du på Kompetensstigen <CustomLink>informationsservicen<Icon></Icon></CustomLink>",
       "employed-by-koulutusala": "Sysselsatta efter utbildningsområde",
+      "employed-by-koulutusaste": "Sysselsatta efter utbildningsnivå",
       "employed-title": "Antalet sysselsatta i hela Finland",
       "supply-and-demand": "Utbud och efterfrågan",
       "supply-and-demand-subtitle": "Inom yrkesgruppen kan det förekomma överutbud, balans eller arbetskraftsbrist. Mer information om sysselsättningsutsikterna hittar du på <CustomLink>arbetsmarknadsportale<Icon></Icon></CustomLink>",
