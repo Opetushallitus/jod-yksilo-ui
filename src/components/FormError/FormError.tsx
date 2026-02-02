@@ -18,7 +18,7 @@ export const FormError = ({ name, errors }: FormErrorProps) =>
       name={name}
       errors={errors}
       render={({ message }) => (
-        <span className="text-alert" data-testid={`form-error-${name.replace(/\./g, '-')}`}>
+        <span className="text-alert font-arial text-form-error" data-testid={`form-error-${name.replace(/\./g, '-')}`}>
           {message}
         </span>
       )}

@@ -51,6 +51,7 @@
     "osaamispolku-description": "Livet förändras – och vi finns här för att stötta dig. Oavsett om du byter bransch, lär dig något nytt eller förbättrar din vardag, ger vi dig lättförståelig information och inspiration för att stötta din egen väg.",
     "title": "Kompetensprofil"
   },
+  "date-or-continues-placeholder": "dd.mm.åååå",
   "datepicker": {
     "aria-roledescription": {
       "datepicker": "Datumväljare",

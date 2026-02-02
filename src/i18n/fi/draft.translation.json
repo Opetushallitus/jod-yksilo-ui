@@ -41,6 +41,7 @@
     "osaamispolku-description": "Elämä muuttuu – ja me olemme mukana tukemassa sinua. Olitpa vaihtamassa alaa, oppimassa uutta tai parantamassa arkeasi, saat meiltä helposti ymmärrettävää tietoa ja inspiraatiota oman polkusi tueksi.",
     "title": "Osaamisprofiili"
   },
+  "date-or-continues-placeholder": "pp.kk.vvvv",
   "datepicker": {
     "aria-roledescription": {
       "datepicker": "Päivämäärän valitsin",

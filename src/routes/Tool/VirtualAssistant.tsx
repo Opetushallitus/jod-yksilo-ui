@@ -393,6 +393,7 @@ export const VirtualAssistant = () => {
                 placeholder={t('tool.my-own-data.interests.virtual-assistant.respond-to-chat')}
                 className="p-4! text-[16px]! leading-[18px]!"
                 testId="va-input"
+                widthVariant="full"
               />
               <button
                 type="button"

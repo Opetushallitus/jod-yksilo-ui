@@ -1,5 +1,4 @@
 import { FormError, TouchedFormError } from '@/components';
-import { ModalHeader } from '@/components/ModalHeader';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { Datepicker, InputField, Textarea, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -7,7 +6,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import type { ShareLinkForm } from './types';
 
-export const BasicInfoStep = ({ title }: { title: string }) => {
+export const BasicInfoStep = () => {
   const { t } = useTranslation();
   const {
     control,
@@ -33,7 +32,6 @@ export const BasicInfoStep = ({ title }: { title: string }) => {
 
   return (
     <>
-      <ModalHeader text={title} testId="share-link-modal-title" />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('preferences.share.modal.basic-info.description')}
       </p>

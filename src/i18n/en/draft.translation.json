@@ -41,6 +41,7 @@
     "osaamispolku-description": "Life changes – and we are here to support you. Whether you are changing fields, learning something new, or improving your everyday life, we provide you with easily understandable information and inspiration to support your own path.",
     "title": "Competence profile"
   },
+  "date-or-continues-placeholder": "dd.mm.yyyy",
   "datepicker": {
     "aria-roledescription": {
       "datepicker": "Datepicker",
