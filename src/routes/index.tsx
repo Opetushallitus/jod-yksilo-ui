@@ -23,6 +23,7 @@ import { FreeTimeActivities } from './Profile/FreeTimeActivities';
 import { profilePreferencesLoader } from './Profile/Preferences';
 import ProfileFront from './Profile/ProfileFront/ProfileFront';
 import { ErrorBoundary, NoMatch, Root, loader as rootLoader } from './Root';
+import { Search } from './Search';
 
 const competencesSlug = 'slugs.profile.competences';
 
@@ -201,6 +202,18 @@ const getCvRoute = (): RouteObject[] =>
       )
     : [];
 
+const searchRoutes = supportedLanguageCodes.map(
+  (lng) =>
+    ({
+      id: `{slugs.search}|${lng}`,
+      path: i18n.t('slugs.search', { lng }),
+      element: <Search />,
+      handle: {
+        title: i18n.t('search.title', { lng }),
+      },
+    }) as RouteObject,
+);
+
 const getRootRoute = (): RouteObject => ({
   id: 'root',
   path: '/:lng',
@@ -224,6 +237,7 @@ const getRootRoute = (): RouteObject => ({
     ...jobOpportunityRoutes,
     ...educationOpportunityRoutes,
     ...profileLandingPageRoutes,
+    ...searchRoutes,
     { path: '*', element: <NoMatch /> },
   ],
 });

@@ -258,6 +258,25 @@
       "own-competences": "My competences"
     }
   },
+  "search": {
+    "description": "You can search for opportunities using free text search. You can influence the visibility of results by filtering the list.",
+    "filters": "Filters",
+    "no-results": "No results found for the search term.",
+    "profile-card-description": "Log in and create your own competence profile. This way your information is saved.",
+    "profile-card-title": "Create your own competence profile",
+    "results-found-short_one": "1 result",
+    "results-found-short_other": "{{count}} results",
+    "results-found_one": "Showing 1 result",
+    "results-found_other": "Showing {{count}} results",
+    "search": "Search",
+    "search-placeholder": "Enter a search term",
+    "title": "Search opportunities",
+    "tool-card-description": "Switch from search to a more personalized view. Explore opportunities based on your competences and interests.",
+    "tool-card-title": "Explore opportunities"
+  },
+  "slugs": {
+    "search": "search"
+  },
   "tool": {
     "banner": {
       "description": "Find your education and career opportunities with the information you have selected. Try and explore different options.",

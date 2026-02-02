@@ -69,7 +69,7 @@ interface BaseProps {
   matchLabel?: string;
   type: MahdollisuusTyyppi;
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  from?: 'tool' | 'favorite' | 'path' | 'goal';
+  from?: 'tool' | 'favorite' | 'path' | 'goal' | 'search';
   rateId?: string;
   children?: React.ReactNode;
 }
@@ -280,7 +280,7 @@ const OpportunityCardHeader = ({
   name: string;
   mahdollisuusTyyppi: MahdollisuusTyyppi;
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  from?: 'tool' | 'favorite' | 'path' | 'goal';
+  from?: 'tool' | 'favorite' | 'path' | 'goal' | 'search';
   rateId?: string;
   aineisto?: components['schemas']['TyomahdollisuusDto']['aineisto'];
   tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
@@ -306,13 +306,13 @@ const OpportunityCardHeader = ({
           }}
           className="order-2"
         >
-          <TitleTag className="text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto text-secondary-1-dark hover:underline">
+          <TitleTag className="text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto text-secondary-1-dark hover:underline pb-2">
             {name}
           </TitleTag>
         </NavLink>
       ) : (
         <TitleTag
-          className="text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto"
+          className="text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto pb-2"
           data-testid="opportunity-card-title"
         >
           {name}

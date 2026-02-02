@@ -7,10 +7,11 @@ const Link = ({ children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElemen
 };
 interface AiInfoProps {
   type?: 'tool' | 'education-opportunity' | 'job-opportunity';
+  size?: number;
 }
 
 // Wrapper component for DS AiInfoButton
-export const AiInfo = ({ type = 'tool' }: AiInfoProps) => {
+export const AiInfo = ({ type = 'tool', size }: AiInfoProps) => {
   const {
     t,
     i18n: { language },
@@ -59,5 +60,5 @@ export const AiInfo = ({ type = 'tool' }: AiInfoProps) => {
     </div>
   );
 
-  return <AiInfoButton tooltipContent={tooltipContent} ariaLabel={t('ai-info-tooltip.aria-description')} />;
+  return <AiInfoButton size={size} tooltipContent={tooltipContent} ariaLabel={t('ai-info-tooltip.aria-description')} />;
 };
