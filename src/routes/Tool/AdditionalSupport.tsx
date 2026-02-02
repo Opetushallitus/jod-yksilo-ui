@@ -14,17 +14,7 @@ import {
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams, useRouteLoaderData } from 'react-router';
-
-const IconWrapper = ({ color, Icon }: { color: string; Icon: React.ComponentType<{ size: number }> }) => {
-  return (
-    <div
-      className="rounded rounded-full size-7 text-white flex items-center justify-center"
-      style={{ backgroundColor: color }}
-    >
-      <Icon size={18} />
-    </div>
-  );
-};
+import { IconWrapper } from './components/IconWrapper';
 
 const AdditionalSupport = () => {
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;

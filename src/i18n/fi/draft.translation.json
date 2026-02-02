@@ -263,6 +263,15 @@
       "link-text": "Löydä mahdollisuuksia",
       "title": "Tutki vaihtoehtojasi"
     },
+    "competency-profile": {
+      "delete-all": "Poista kaikki",
+      "delete-text": "Poista teksti",
+      "export-help": "Voit myös tallentaa tällä sivulla kartoittamasi tiedot osaamisprofiiliisi. Löydät ne jatkossa osaamisprofiilin kohdista Muu osaaminen ja Kiinnostukseni.",
+      "import-help": "Voit itse valita, mitkä tiedot tuot osaamisprofiilistasi tälle sivulle. Voit poistaa tai täydentää tietoja kartoittamalla osaamisiasi tai kiinnostuksiasi.",
+      "login-description": "Voit tuoda tietoja osaamisprofiilistasi ja tallentaa tietoja osaamisprofiiliisi. Jos sinulla ei vielä ole osaamisprofiilia, voit luoda sen kirjautumalla palveluun.",
+      "login-to-service": "Kirjaudu palveluun",
+      "sections-intro": "Osaamisprofiilissa voit kartoittaa osaamisiasi ja kiinnostuksiasi tarkemmin seuraavilla tavoilla:"
+    },
     "description": "Täytä tälle sivulle tietojasi kartoittamalla kiinnostuksiasi ja osaamistasi tai tuomalla niitä osaamisprofiilistasi. Kokeile erilaisia yhdistelmiä ja päivitä mahdollisuutesi tiedoillasi.",
     "my-own-data": {
       "interests": {
@@ -290,7 +299,8 @@
         },
         "education-opportunity-type": "Koulutusmahdollisuuksien tyyppi",
         "job-opportunity-type": "Työmahdollisuuksien tyyppi"
-      }
+      },
+      "toggle-title-open": "Päivitä ja sulje"
     },
     "tour": {
       "buttons": {
@@ -304,15 +314,37 @@
           "title": "Valitse ensin millä tiedoilla etsit mahdollisuuksia"
         },
         "step-2": {
-          "description": "Tietojesi yhteenvedossa näet kaikki ne tiedot, joita käytetään sinulle sopivien mahdollisuuksien löytämiseen. Voit poistaa tietoja, joita et halua ottaa huomioon.",
-          "title": "Katso ja muokkaa valitsemiasi tietoja"
+          "description": "Paina Päivitä mahdollisuutesi -painiketta, kun olet valinnut haluamasi tiedot. Painamalla painiketta tietojasi käsitellään automaattisesti. Muista päivittää lista aina, kun muutat tietojasi.",
+          "title": "Päivitä mahdollisuudet tiedoillasi"
         },
         "step-3": {
-          "description": "Paina Päivitä-painiketta, kun olet valinnut kaikki haluamasi tiedot. Muista päivittää lista aina, kun muutat  tietojasi.",
+          "description": "Mahdollisuuksissa näet ammatit, työmahdollisuudet, tutkinnot ja muut koulutukset järjestettynä tietojesi perusteella lasketun sopivuuden mukaan. Tutustu niihin tarkemmin klikkaamalla mahdollisuuden nimeä. Voit tallentaa suosikkeja kirjautumalla.",
+          "title": "Tutki ja tutustu mahdollisuuksiisi"
+        },
+        "step-4": {
+          "description": "Voit suodattaa ja järjestää mahdollisuuksien listaa säätimillä. Näin saat paremmin esiin omiin tarpeisiisi sopivia vaihtoehtoja. Voit myös säätää kuinka paljon sopivuuden laskemisessa painotetaan valitsemiasi kiinnostuksia ja kuinka paljon osaamisia.",
+          "title": "Käytä säätimiä tarpeidesi huomioimiseen"
+        },
+        "step-5": {
+          "description": "Muokkaa tietojasi ja kokeile erilaisia kiinnostusten ja osaamisten yhdistelmiä. Jos tämä tuntuu vaikealta, apua voi löytyä Tukea pohdintaa -kohdan linkeistä.<br/>Kirjautumalla  voit tallentaa tietosi osaamisprofiiliisi Tuo osaamisprofiilista -kohdasta.",
+          "title": "Kokeile ja tutki erilaisia yhdistelmiä"
+        }
+      },
+      "mobile": {
+        "step-1": {
+          "description": "Sivun toiminnot on jaettu kahdelle välilehdelle. Valitse käytettävät tiedot Tietosi-välilehdellä. Tarkastele niiden perusteella sinulle ehdotettuja koulutus- ja työmahdollisuuksia Mahdollisuutesi-välilehdellä.",
+          "title": "Tietosi- ja mahdollisuutesi-välilehdet"
+        },
+        "step-2": {
+          "description": "Aloita kartoittamalla kiinnostuksesi ja osaamisesi valitsemalla syötteesi perusteella ehdotetuista vaihtoehdoista sopivimmat.<br/>Voit myös tuoda tietoja osaamisprofiilistasi, jos olet sellaisen tehnyt. Osaamisprofiilin käyttö vaatii kirjautumisen.",
+          "title": "Valitse ensin millä tiedoilla etsit mahdollisuuksia"
+        },
+        "step-3": {
+          "description": "Paina Päivitä mahdollisuutesi -painiketta, kun olet valinnut haluamasi tiedot. Painamalla painiketta tietojasi käsitellään automaattisesti. Muista päivittää lista aina, kun muutat tietojasi.",
           "title": "Päivitä mahdollisuudet tiedoillasi"
         },
         "step-4": {
-          "description": "Mahdollisuuksissa näet ammatit, työmahdollisuudet, tutkinnot ja muut koulutukset järjestettynä tietojesi perusteella lasketun sopivuuden mukaan. Tutustu niihin tarkemmin klikkaamalla mahdollisuuden nimeä. Voit tallentaa suosikkeja kirjautumalla.",
+          "description": "Siirry Mahdollisuutesi-välilehdelle. Mahdollisuuksissa näet ammatit, työmahdollisuudet, tutkinnot ja muut koulutukset järjestettynä tietojesi perusteella lasketun sopivuuden mukaan. Tutustu niihin tarkemmin klikkaamalla mahdollisuuden nimeä. Voit tallentaa suosikkeja kirjautumalla.",
           "title": "Tutki ja tutustu mahdollisuuksiisi"
         },
         "step-5": {
@@ -324,39 +356,10 @@
           "title": "Kokeile ja tutki erilaisia yhdistelmiä"
         }
       },
-      "mobile": {
-        "step-1": {
-          "description": "Työkalun toiminnot on jaettu kahdelle välilehdelle.Valitse työkalussa käytettävät tiedot Tietosi-välilehdellä. Tarkastele niiden perusteella sinulle ehdotettuja koulutus- ja työmahdollisuuksia Mahdollisuutesi-välilehdellä.",
-          "title": "Tietosi- ja mahdollisuutesi-välilehdet"
-        },
-        "step-2": {
-          "description": "Aloita kartoittamalla kiinnostuksesi ja osaamisesi valitsemalla syötteesi perusteella ehdotetuista vaihtoehdoista sopivimmat.<br/>Voit myös tuoda tietoja osaamisprofiilistasi, jos olet sellaisen tehnyt. Osaamisprofiilin käyttö vaatii kirjautumisen.",
-          "title": "Valitse ensin millä tiedoilla etsit mahdollisuuksia"
-        },
-        "step-3": {
-          "description": "Tietojesi yhteenvedossa näet kaikki ne tiedot, joita käytetään sinulle sopivien mahdollisuuksien löytämiseen. Voit poistaa tietoja, joita et halua ottaa huomioon.",
-          "title": "Katso ja muokkaa valitsemiasi tietoja"
-        },
-        "step-4": {
-          "description": "Kun olet valinnut haluamasi tiedot, siirry Mahdollisuutesi-välilehdelle ja paina Päivitä-painiketta. Muista päivittää lista aina, kun muutat  tietojasi.",
-          "title": "Päivitä mahdollisuudet tiedoillasi"
-        },
-        "step-5": {
-          "description": "Mahdollisuuksissa näet ammatit, työmahdollisuudet, tutkinnot ja muut koulutukset järjestettynä tietojesi perusteella lasketun sopivuuden mukaan. Tutustu niihin tarkemmin klikkaamalla mahdollisuuden nimeä. Voit tallentaa suosikkeja kirjautumalla.",
-          "title": "Tutki ja tutustu mahdollisuuksiisi"
-        },
-        "step-6": {
-          "description": "Voit suodattaa ja järjestää mahdollisuuksien listaa säätimillä. Näin saat paremmin esiin omiin tarpeisiisi sopivia  vaihtoehtoja. Voit myös säätää kuinka paljon sopivuuden laskemisessa painotetaan valitsemiasi kiinnostuksia ja kuinka paljon osaamisia.",
-          "title": "Käytä säätimiä tarpeidesi huomioimiseen"
-        },
-        "step-7": {
-          "description": "Muokkaa tietojasi ja kokeile erilaisia kiinnostusten ja osaamisten yhdistelmiä Tietosi-välilehdellä. Jos tämä tuntuu vaikealta, apua voi löytyä Tukea pohdintaa -kohdan linkeistä.<br/>Kirjautumalla  voit tallentaa tietosi osaamisprofiiliisi Tuo osaamisprofiilista -kohdasta.",
-          "title": "Kokeile ja tutki erilaisia yhdistelmiä"
-        }
-      },
       "view-guided-tour": "Katso vinkit käyttöön!",
       "view-guided-tour-label": "Käynnistä työkalun opastettu esittely"
     },
+    "update-tooltip-info": "Painamalla Päivitä mahdollisuutesi -painiketta tietojasi käsitellään automaattisesti. Näytämme sinulle mahdollisuudet sen mukaan, miten hyvin ne sopivat antamiisi tietoihin.",
     "updating": "Ladataan mahdollisuuksia…"
   },
   "tooltip": {

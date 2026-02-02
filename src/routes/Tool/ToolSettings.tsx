@@ -115,7 +115,7 @@ const ToolSettings = ({ ref, isOpen, onClose, isModal }: ToolSettingsProps) => {
               onClick={onClose}
               iconSide="left"
               icon={<JodClose className="text-accent" />}
-              label={t('save-and-close')}
+              label={t('tool.settings.toggle-title-open')}
             />
           )}
           <SettingsMenu ref={ref} isModal={isModal} />

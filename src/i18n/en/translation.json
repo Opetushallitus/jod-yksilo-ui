@@ -780,9 +780,8 @@
   },
   "tool": {
     "competency-profile": {
-      "help": "You can choose what data you import. The data imported from the competence profile will be visible in the summary of your data. Remember to update your opportunities after importing the data.\t\n\nYou can update your competence profile with the information mapped out on this page. Going forward, you will find them in the competence profile under Other competences and My interests.",
-      "login-description": "By logging in to the service, you can import your data from the competence profile and include your data in the competence profile. If you don't have a competence profile yet, you can create one.",
-      "title": "Your competence profile"
+      "title": "Import from competence profile ({{count}})",
+      "title_zero": "Import from competence profile"
     },
     "description": "Fill in your interests and competences on this page or import them from your competence profile. You can use the controls to filter the opportunities suggested to you, for example, based on whether you are looking for career opportunities with your current skills or new careers based on your interests. Experiment and explore different combinations! You can save your information and opportunities of interest to your favourites by logging in to the service.",
     "education-opportunity-duration": "Average duration",
@@ -791,18 +790,18 @@
     "education-opportunity-koulutusala-tooltip": "The field of education refers to a group to which education is divided according to the field of science, society or working life to which it relates.",
     "info-overview": {
       "data-from-profile": "Data imported from then competence profile",
-      "mapped-competences": "Mapped data",
       "no-competences-from-profile": "No data imported from profile",
-      "no-mapped-competences": "No data entered",
       "other-data-from-profile": "Other data imported from profile",
-      "other-data-from-profile-description": "Your text addition to other competences and interests",
-      "title": "Summary of your information"
+      "other-data-from-profile-description": "Your text addition to other competences and interests"
     },
+    "interests": "Map out your interests ({{count}})",
+    "interests_zero": "Map out your interests",
     "job-opportunity-is-part-of-group": "Career opportunity belongs to an occupational group",
     "job-opportunity-is-part-of-group-tooltip": "Occupations and career opportunities are grouped into occupational groups. Occupational groups are used to compile statistics on the occupational structure of the population, and they are created using a professional classification that helps to compare statistics nationally and internationally.",
     "job-opportunity-median-salary": "Median salary",
     "job-opportunity-median-salary-tooltip": "Median salary refers to the sum of wages and salaries divided into two equal groups: one-half earn less and one-half earn more than the median salary. It describes the \"typical\" salary better than the average salary, as it is not distorted by individual extremely high or low salaries.",
-    "map-your-skills": "Map out your skills",
+    "map-your-skills": "Map out your skills ({{count}})",
+    "map-your-skills_zero": "Map out your skills",
     "my-own-data": {
       "cancel-text": "No, cancel",
       "competences": {
@@ -821,20 +820,6 @@
         "confirm-description": "Export all data to your competence profile. Going forward, you will find them in the competence profile under “Other competence” and “My interests”.",
         "confirm-title": "Export data to profile",
         "export-button": "Export data to profile"
-      },
-      "goals": {
-        "description": "In this section, you can select the results from our service that meet your wishes. If you are unsure, you can skip this and explore our service at your own pace. When you hover the mouse pointer over the icons, you will see an explanation below them about how they affect the end result.\n\nClick an icon to select it as your goal. Click an icon again to cancel the selection.",
-        "job-opportunities": "Explore career opportunities with my expertise",
-        "job-opportunities-tooltip": "Go to Your opportunities and select filter and “Show in opportunities – job opportunities”. You will receive a list of career opportunities in Finland. You can also, for example, map out your interests and see how these interests affect the education opportunities offered to you.",
-        "map-competence": "Map my own competence",
-        "map-competence-tooltip": "Go to the Competences section and map out your competences! Simply enter a description of your knowledge, skills and experience and our competence recommendation tool will suggest different competences. Be proud of yourself, you probably know more than you think. Think about your education, exports and hobbies – all of your knowledge and experience is important.",
-        "map-opportunities": "Explore career change opportunities.",
-        "map-opportunities-tooltip": "Log in to your Competency Path and create a competence profile for yourself! Create or import your work and education history and tell us about your hobbies and map your related competence. Also map out your interests. Once you have done this, you will be able to import your information under Competences and Interests and explore different job and education opportunities and save the preferred ones as favourites in your competence profile.",
-        "something-else": "Something else, I don't know what...",
-        "something-else-tooltip": "Experiment with the service and its sections freely and boldly! Through the service, you can identify, map out and word your competences, skills and passions and build a unique and distinctive competence profile that reveals your true potential. You can also explore Finland’s education offering and job market by browsing freely or individually targeted education and career opportunities.",
-        "title": "What I want",
-        "trainings": "Education to improve my skills",
-        "trainings-tooltip": "Go to the Your opportunities section and select filter and “Show in opportunities – education opportunities”. You will receive a list of education opportunities offered in Finland. You can also, for example, map out your interests in the Interests section and see how your interests affect the training opportunities presented to you."
       },
       "interests": {
         "conversational-virtual-assistant": "Identify interests with AI",
@@ -863,8 +848,7 @@
         "weight": "Weighting"
       },
       "reset": "Clear selections",
-      "toggle-title-closed": "Display controls",
-      "toggle-title-open": "Hide controls"
+      "toggle-title-closed": "Display controls"
     },
     "title": "Find opportunities",
     "tools": {

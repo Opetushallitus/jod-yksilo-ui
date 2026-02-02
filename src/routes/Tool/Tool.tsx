@@ -4,14 +4,14 @@ import { IconHeading } from '@/components/IconHeading';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
+import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import AdditionalSupport from '@/routes/Tool/AdditionalSupport';
-import CategorizedCompetenceTagList from '@/routes/Tool/CategorizedCompetenceTagList';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
-import { Button, cx, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
-import { JodArrowRight, JodClose, JodCompass, JodSettings } from '@jod/design-system/icons';
+import { Button, cx, Spinner, tidyClasses, useMediaQueries, useNoteStack } from '@jod/design-system';
+import { JodArrowRight, JodClose, JodCompass, JodInfo, JodSettings } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useRouteLoaderData } from 'react-router';
@@ -19,6 +19,7 @@ import { useShallow } from 'zustand/shallow';
 import { getTypeSlug } from '../Profile/utils';
 import Competences from './Competences';
 import ToolAccordion from './components/ToolAccordion';
+import { useTool } from './hook/useTool';
 import Interests from './Interests';
 import type { ToolLoaderData } from './loader';
 import { OnboardingTour } from './OnboardingTour';
@@ -36,12 +37,10 @@ const ExploreOpportunities = () => {
     filters,
     isLoading,
     totalItems,
-    updateEhdotuksetAndTyomahdollisuudet,
     toggleSuosikki,
-    settingsHaveChanged,
+    updateEhdotuksetAndTyomahdollisuudet,
   } = useToolStore(
     useShallow((state) => ({
-      settingsHaveChanged: state.settingsHaveChanged,
       ammattiryhmaNimet: state.ammattiryhmaNimet,
       mahdollisuusEhdotukset: state.mahdollisuusEhdotukset,
       mixedMahdollisuudet: state.mixedMahdollisuudet,
@@ -74,16 +73,17 @@ const ExploreOpportunities = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settingsOpen]);
 
-  const onUpdateResults = async (loading: boolean) => {
-    if (loading) {
-      return;
-    }
-    globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Päivitys']);
-    await updateEhdotuksetAndTyomahdollisuudet(isLoggedIn, false);
+  const onCloseSettings = () => {
+    updateEhdotuksetAndTyomahdollisuudet(isLoggedIn, false);
+    setSettingsOpen(false);
   };
 
-  const onCloseSettings = () => {
-    setSettingsOpen(false);
+  const onToggleSettings = () => {
+    if (settingsOpen) {
+      onCloseSettings();
+    } else {
+      setSettingsOpen(true);
+    }
   };
 
   const getTotalFilterCount = React.useCallback(() => {
@@ -91,12 +91,13 @@ const ExploreOpportunities = () => {
   }, [filters]);
 
   const toggleFiltersText = React.useMemo(() => {
+    if (settingsOpen) return t('tool.settings.toggle-title-open');
+
     const count = getTotalFilterCount();
     const filterCount = count > 0 ? ` (${count})` : '';
     return `${t('tool.settings.toggle-title-closed')}${filterCount}`;
-  }, [getTotalFilterCount, t]);
+  }, [getTotalFilterCount, settingsOpen, t]);
 
-  const updateButtonLabel = isLoading ? t('updating-list') : t('update');
   const statusText = isLoading ? t('tool.updating') : t('tool.opportunities-loaded', { count: totalItems });
   const { permanentNotesHeight } = useNoteStack();
   const top = `${(lg ? 66 : 120) + permanentNotesHeight}px`;
@@ -111,30 +112,18 @@ const ExploreOpportunities = () => {
             </h2>
           )}
           <div className="flex gap-6 h-fit">
-            <Button
-              variant="plain"
-              size="sm"
-              className="text-black!"
-              icon={settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
-              iconSide="left"
-              label={settingsOpen ? t('tool.settings.toggle-title-open') : toggleFiltersText}
-              testId="open-tool-settings"
-              onClick={() => {
-                setSettingsOpen(!settingsOpen);
-              }}
-            />
-            {
-              <Button
-                size={lg ? 'lg' : 'sm'}
-                label={updateButtonLabel}
-                variant="accent"
-                onClick={() => onUpdateResults(isLoading)}
-                disabled={!settingsHaveChanged}
-                icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
-                iconSide={isLoading ? 'right' : undefined}
-                testId="update-opportunities"
-              />
-            }
+            <button
+              aria-label={toggleFiltersText}
+              className={tidyClasses(
+                `cursor-pointer flex items-center gap-x-3 text-nowrap rounded-2xl px-5 py-1 font-semibold text-[14px] leading-[18px] hover:underline bg-bg-gray-2`,
+              )}
+              onClick={onToggleSettings}
+              type="button"
+              data-testid="open-tool-settings"
+            >
+              {settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
+              {toggleFiltersText}
+            </button>
           </div>
         </div>
       </div>
@@ -158,7 +147,7 @@ const ExploreOpportunities = () => {
             <ul
               id="tool-your-opportunities-list"
               ref={scrollRef}
-              className="flex flex-col gap-5 sm:gap-3 mb-8"
+              className="flex flex-col gap-5 sm:gap-3"
               style={{
                 scrollMarginTop: '140px',
               }}
@@ -195,6 +184,9 @@ const ExploreOpportunities = () => {
                 ) : null;
               })}
             </ul>
+
+            {!lg && <UpdateEhdotuksetAndTyomahdollisuudetButton className="mt-5 mb-8 border-t-2 border-bg-gray" />}
+
             <YourOpportunitiesPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="mb-7" />
           </>
         )}
@@ -219,12 +211,76 @@ const ProfileLinkComponent = ({ className, children }: { className?: string; chi
   );
 };
 
-const YourInfoGroup = ({ id, children }: { id: string; children: React.ReactNode }) => {
+const UpdateEhdotuksetAndTyomahdollisuudetButton = ({ id, className }: { id?: string; className?: string }) => {
+  const { t } = useTranslation();
+  const { isLoggedIn } = useLoaderData<ToolLoaderData>();
+  const { settingsHaveChanged, isLoading, updateEhdotuksetAndTyomahdollisuudet } = useToolStore(
+    useShallow((state) => ({
+      settingsHaveChanged: state.settingsHaveChanged,
+      isLoading: state.ehdotuksetLoading || state.mahdollisuudetLoading,
+      updateEhdotuksetAndTyomahdollisuudet: state.updateEhdotuksetAndTyomahdollisuudet,
+    })),
+  );
+
+  const buttonRef = React.useRef<HTMLDivElement>(null);
+  const [isSticky, setIsSticky] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!buttonRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // When element is intersecting with viewport from bottom, it's not sticky
+        setIsSticky(!entry.isIntersecting);
+      },
+      { threshold: [1], rootMargin: '0px 0px -1px 0px' },
+    );
+
+    observer.observe(buttonRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const onUpdateResults = async (loading: boolean) => {
+    if (loading) {
+      return;
+    }
+    globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Päivitys']);
+    await updateEhdotuksetAndTyomahdollisuudet(isLoggedIn, false);
+  };
+
+  const updateButtonLabel = isLoading ? t('updating-list') : t('update');
   return (
-    <div id={id} className="flex flex-col gap-4 lg:gap-3 lg:bg-[#CCD1D8] lg:rounded-[12px] lg:p-3">
-      {children}
+    <div
+      ref={buttonRef}
+      id={id}
+      className={`sticky bottom-0 ${isSticky ? 'rounded-t-none' : 'rounded-t-md'} rounded-b-md bg-white py-5 flex justify-center items-center ${className}`}
+    >
+      <div className="flex items-center gap-2 py-2">
+        <Button
+          size="sm"
+          label={updateButtonLabel}
+          variant="accent"
+          onClick={() => onUpdateResults(isLoading)}
+          disabled={!settingsHaveChanged}
+          icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
+          iconSide={isLoading ? 'right' : undefined}
+          testId="update-opportunities"
+        />
+
+        <TooltipWrapper
+          tooltipPlacement="top"
+          tooltipContent={<div className="text-body-xs max-w-[290px] leading-5">{t('tool.update-tooltip-info')}</div>}
+        >
+          <JodInfo size={18} className="text-secondary-gray" />
+        </TooltipWrapper>
+      </div>
     </div>
   );
+};
+
+const YourInfoGroup = ({ children }: { children: React.ReactNode }) => {
+  return <div className="flex flex-col gap-4 lg:gap-3 lg:bg-[#CCD1D8] lg:rounded-[12px] lg:p-3">{children}</div>;
 };
 const YourInfoGroupSeparator = () => {
   const { lg } = useMediaQueries();
@@ -232,53 +288,48 @@ const YourInfoGroupSeparator = () => {
 };
 
 const YourInfo = () => {
+  const { lg } = useMediaQueries();
   const { t } = useTranslation();
   const { isLoggedIn } = useLoaderData<ToolLoaderData>();
-  const competenceOverviewRef = React.useRef<HTMLDivElement>(null);
-  const [overviewOpen, setOverviewOpen] = React.useState(false);
-  const onImportSuccess = () => {
-    setOverviewOpen(true);
-    setTimeout(() => {
-      if (competenceOverviewRef.current) {
-        competenceOverviewRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  };
+
+  const { mappedKiinnostukset, mappedOsaamiset, profileCompetencesCount } = useTool();
+
+  const kiinnostuksetCount = mappedKiinnostukset.length;
+  const osaamisetCount = mappedOsaamiset.length;
 
   return (
     <>
       <div id="tool-your-info" className="flex flex-col gap-4">
-        <YourInfoGroup id="tool-your-info-group-1">
-          <ToolAccordion title={t('interests')} testId="tool-interests-accordion">
-            <Interests />
-          </ToolAccordion>
+        <YourInfoGroup>
+          <div id="tool-your-info-group-1" className="flex flex-col gap-4 lg:gap-3">
+            <ToolAccordion title={t('tool.interests', { count: kiinnostuksetCount })} testId="tool-interests-accordion">
+              <Interests />
+            </ToolAccordion>
 
-          <ToolAccordion title={t('tool.map-your-skills')} testId="tool-competences-accordion">
-            <Competences />
-          </ToolAccordion>
+            <ToolAccordion
+              title={t('tool.map-your-skills', { count: osaamisetCount })}
+              testId="tool-competences-accordion"
+            >
+              <Competences />
+            </ToolAccordion>
 
-          <ToolAccordion title={t('tool.competency-profile.title')} testId="tool-profile-accordion">
-            <ProfileImportExport onImportSuccess={onImportSuccess} />
-          </ToolAccordion>
+            <ToolAccordion
+              title={t('tool.competency-profile.title', { count: profileCompetencesCount })}
+              testId="tool-profile-accordion"
+            >
+              <ProfileImportExport />
+            </ToolAccordion>
+          </div>
+
+          <UpdateEhdotuksetAndTyomahdollisuudetButton
+            id="tool-update-opportunities-button"
+            className={cx('border-t-2 rounded', lg && 'border-primary-light-2', !lg && 'border-bg-gray')}
+          />
         </YourInfoGroup>
 
         <YourInfoGroupSeparator />
 
-        <YourInfoGroup id="tool-your-info-group-2">
-          <ToolAccordion
-            title={t('tool.info-overview.title')}
-            ref={competenceOverviewRef}
-            isOpen={overviewOpen}
-            setIsOpen={setOverviewOpen}
-            testId="tool-overview-accordion"
-          >
-            <CategorizedCompetenceTagList />
-          </ToolAccordion>
-        </YourInfoGroup>
-
-        <YourInfoGroupSeparator />
-
-        <YourInfoGroup id="tool-your-info-group-3">
+        <YourInfoGroup>
           <ToolAccordion title={t('tool.tools.title')} testId="tool-tools-accordion">
             <AdditionalSupport />
           </ToolAccordion>
@@ -339,6 +390,49 @@ const Tool = () => {
       setCurrentTab(savedTab);
     }
   }, [savedTab]);
+
+  /**
+   * Hide AI chatbot from the Tool page
+   */
+  React.useEffect(() => {
+    let chatBotElement = document.getElementById('ai-agent-component-root');
+    let originalDisplay = '';
+
+    if (chatBotElement) {
+      // Chatbot already exists, hide it immediately
+      originalDisplay = chatBotElement.style.display || '';
+      chatBotElement.style.display = 'none';
+    } else {
+      // Chatbot doesn't exist yet - wait for it with MutationObserver
+      const observer = new MutationObserver(() => {
+        chatBotElement = document.getElementById('ai-agent-component-root');
+        if (chatBotElement) {
+          originalDisplay = chatBotElement.style.display || '';
+          chatBotElement.style.display = 'none';
+        }
+      });
+
+      // Observe the entire document for child additions
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+
+      return () => {
+        observer.disconnect();
+        if (chatBotElement) {
+          chatBotElement.style.display = originalDisplay;
+        }
+      };
+    }
+
+    // Cleanup when component unmounts
+    return () => {
+      if (chatBotElement) {
+        chatBotElement.style.display = originalDisplay;
+      }
+    };
+  }, []);
 
   const setTab = React.useCallback(
     (tab: TabName) => {
@@ -421,7 +515,7 @@ const Tool = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-7">
           <div className="col-span-1 lg:col-span-5 max-h-fit">
             <div
-              className="sticky z-10 bg-bg-gray lg:pt-4"
+              className="sticky z-10 bg-bg-gray lg:pt-4 lg:-mx-3 lg:px-3"
               style={{
                 top,
               }}

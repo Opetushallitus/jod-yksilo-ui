@@ -778,9 +778,8 @@
   },
   "tool": {
     "competency-profile": {
-      "help": "Voit valita itse mitä tietoja tuot. Osaamisprofiilista tuodut tiedot näkyvät tietojesi yhteenvedossa. Muista päivittää mahdollisuutesi tietojen tuonnin jälkeen.\t\n\nVoit päivittää osaamisprofiilisi tällä sivulla kartoittamilla tiedoilla. Löydät ne jatkossa osaamisprofiilista Muu osaaminen ja Kiinnostukseni-kohdista.",
-      "login-description": "Kirjautumalla palveluun voit tuoda tietojasi osaamisprofiilista ja viedä tietojasi osaamisprofiiliin. Jos sinulla ei vielä ole ole osaamisprofiilia, voit luoda sen.",
-      "title": "Osaamisprofiilisi"
+      "title": "Tuo osaamisprofiilista ({{count}})",
+      "title_zero": "Tuo osaamisprofiilista"
     },
     "education-opportunity-duration": "Keskimääräinen kesto",
     "education-opportunity-duration-tooltip": "Koulutuksen kesto kertoo, kuinka kauan koulutus tavallisesti kestää. Se ilmaistaan yleensä vuosina tai kuukausina ja perustuu koulutuksen laajuuteen ja opintojen etenemiseen normaalissa tahdissa.",
@@ -788,18 +787,18 @@
     "education-opportunity-koulutusala-tooltip": "Koulutusala tarkoittaa ryhmää, johon koulutukset jaotellaan sen mukaan, mihin tieteen, yhteiskunnan tai työelämän alaan ne liittyvät.",
     "info-overview": {
       "data-from-profile": "Osaamisprofiilista tuodut tiedot",
-      "mapped-competences": "Kartoitetut tiedot",
       "no-competences-from-profile": "Ei profiilista tuotuja tietoja",
-      "no-mapped-competences": "Ei syötettyjä tietoja",
       "other-data-from-profile": "Profiilista tuodut muut tiedot",
-      "other-data-from-profile-description": "Tekstilisäyksesi muihin osaamisiin ja kiinnostuksiin",
-      "title": "Tietojesi yhteenveto"
+      "other-data-from-profile-description": "Tekstilisäyksesi muihin osaamisiin ja kiinnostuksiin"
     },
+    "interests": "Kartoita kiinnostuksesi ({{count}})",
+    "interests_zero": "Kartoita kiinnostuksesi",
     "job-opportunity-is-part-of-group": "Työmahdollisuus kuuluu ammattiryhmään",
     "job-opportunity-is-part-of-group-tooltip": "Ammatteja ja työmahdollisuuksia ryhmitellään ammattiryhmiin. Ammattiryhmiä käytetään väestön ammattirakenteen tilastoinnissa, ja niiden luomiseen käytetään ammattiluokitusta, joka auttaa vertailemaan tilastoja kansallisesti ja kansainvälisesti.",
     "job-opportunity-median-salary": "Mediaanipalkka",
     "job-opportunity-median-salary-tooltip": "Mediaanipalkka tarkoittaa palkkaa, joka jakaa palkansaajat kahteen yhtä suureen ryhmään: puolet ansaitsee vähemmän ja puolet enemmän kuin mediaanipalkan verran. Se kuvaa paremmin \"tyypillistä\" palkkaa kuin keskiarvo, koska se ei vääristy yksittäisten erittäin suurten tai pienten palkkojen takia.",
-    "map-your-skills": "Kartoita osaamisesi",
+    "map-your-skills": "Kartoita osaamisesi ({{count}})",
+    "map-your-skills_zero": "Kartoita osaamisesi",
     "my-own-data": {
       "cancel-text": "Ei, peruuta",
       "competences": {
@@ -818,20 +817,6 @@
         "confirm-description": "Vie kaikki tiedot osaamisprofiiliisi. Löydät ne jatkossa osaamisprofiilista kohdista “Muu osaaminen” ja “Kiinnostukseni”.",
         "confirm-title": "Tietojen vienti profiiliin",
         "export-button": "Vie tietoja profiiliin"
-      },
-      "goals": {
-        "description": "Tässä osiossa voit valita toiveidesi mukaiset tulokset palvelustamme. Jos olet epävarma, voit ohittaa tämän ja tutustua palveluumme omaan tahtiisi. Kun liikutat hiirtä kuvakkeiden ylle, näet niiden alla olevan selityksen siitä, miten ne vaikuttavat lopputulokseen.\n\nNapsauta kuvaketta, jos haluat valita sen tavoitteeksesi. Voit peruuttaa valinnan napsauttamalla kuvaketta uudelleen.",
-        "job-opportunities": "Tutkia työmahdollisuuksia osaamisellani",
-        "job-opportunities-tooltip": "Siirry Mahdollisuutesi-kohtaan ja valitse suodata ja \"Näytä mahdollisuuksissa – työmahdollisuudet\". Saat listan Suomessa olevista työmahdollisuuksista. Voit myös esimerkiksi kartoittaa kiinnostuksen kohteitasi ja katsoa, miten kiinnostuksen kohteet vaikuttavat sinulle tarjottaviin koulutusmahdollisuuksiin.",
-        "map-competence": "Kartoittaa omaa osaamistani",
-        "map-competence-tooltip": "Siirry Osaamiset-kohtaan ja kartoita osaamisesi! Syötä vain kuvaus tiedoistasi, taidoistasi ja kokemuksistasi ja osaamissuosittelijamme ehdottaa sinulle erilaisia osaamisia. Ole ylpeä itsestäsi, sillä osaat todennäköisesti enemmän kuin ajattelet. Mieti koulutustasi, työkokemustasi ja harrastuksiasi – kaikki tietosi ja kokemuksesi ovat tärkeitä.",
-        "map-opportunities": "Kartoittaa mahdollisuuksia alan vaihtamiseen",
-        "map-opportunities-tooltip": "Kirjaudu sisään Osaamispolkuusi ja luo itsellesi osaamisprofiili! Luo tai tuo työ- ja koulutushistoriasi ja kerro harrastuksistasi sekä kartoita niihin liittyvää osaamistasi. Kartoita myös kiinnostuksen kohteitasi. Tämän tehtyäsi voit tuoda tietosi Osaamiset ja Kiinnostukset -kohdissa ja tutkia erilaisia työ- sekä koulutusmahdollisuuksia ja tallentaa itsellesi mieluisimmat suosikeiksi osaamisprofiiliisi.",
-        "something-else": "Jotain muuta, en tiedä mitä...",
-        "something-else-tooltip": "Kokeile palvelua ja sen osioita vapaasti ja rohkeasti! Palvelun kautta voit tunnistaa, kartoittaa ja sanoittaa osaamisesi, taitosi ja intohimosi ja rakentaa ainutlaatuisen ja omannäköisen osaamisprofiilin, joka tuo esiin todellisen potentiaalisi. Voit myös tutustua Suomen koulutustarjontaan ja työmarkkinoihin selailemalla vapaasti tai yksilöllisesti kohdennettuja koulutus- ja työmahdollisuuksia.",
-        "title": "Mitä minä haluan",
-        "trainings": "Koulutuksia osaamiseni kasvattamiseksi",
-        "trainings-tooltip": "Siirry Mahdollisuutesi-kohtaan ja valitse suodata ja \"Näytä mahdollisuuksissa – koulutusmahdollisuudet\". Saat listan Suomessa tarjotuista koulutusmahdollisuuksista. Voit myös esimerkiksi kartoittaa kiinnostuksen kohteitasi Kiinnostukset-kohdassa ja katsoa, miten kiinnostuksen kohteesi vaikuttavat sinulle esitettäviin koulutusmahdollisuuksiin."
       },
       "interests": {
         "conversational-virtual-assistant": "Tunnista kiinnostuksia tekoälyllä",
@@ -858,8 +843,7 @@
         "weight": "Painotus"
       },
       "reset": "Poista valinnat",
-      "toggle-title-closed": "Näytä säätimet",
-      "toggle-title-open": "Piilota säätimet"
+      "toggle-title-closed": "Näytä säätimet"
     },
     "title": "Löydä mahdollisuuksia",
     "tools": {
@@ -891,7 +875,7 @@
       "TOIMENKUVA": "Työpaikka"
     }
   },
-  "update": "Päivitä",
+  "update": "Päivitä mahdollisuutesi",
   "updating-list": "Päivitetään",
   "welcome": "Hei {{name}} - tervetuloa osaamisprofiiliisi!",
   "without-category": "{{header}} ilman kategoriaa",

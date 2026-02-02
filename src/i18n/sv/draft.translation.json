@@ -330,6 +330,15 @@
       "link-text": "Hitta möjligheter",
       "title": "Utforska dina alternativ"
     },
+    "competency-profile": {
+      "delete-all": "Ta bort alla",
+      "delete-text": "Ta bort text",
+      "export-help": "Du kan också spara den information du har kartlagt på denna sida till din kompetensprofil. Framöver hittar du dem i kompetensprofilen under Annan kompetens och Mina intressen.",
+      "import-help": "Du kan välja vilka uppgifter du importerar från din kompetensprofil till denna sida. Du kan ta bort eller komplettera informationen genom att kartlägga dina kompetenser eller intressen.",
+      "login-description": "Du kan importera data från din kompetensprofil och spara data till din kompetensprofil. Om du inte har en kompetensprofil än kan du skapa en genom att logga in i tjänsten.",
+      "login-to-service": "Logga in i tjänsten",
+      "sections-intro": "I kompetensprofilen kan du kartlägga dina kompetenser och intressen mer i detalj på följande sätt:"
+    },
     "description": "Fyll i din information på denna sida genom att kartlägga dina intressen och färdigheter eller genom att importera dem från din kompetensprofil. Prova olika kombinationer och uppdatera dina möjligheter med dina uppgifter.",
     "education-opportunity-duration": "Genomsnittlig varaktighet",
     "education-opportunity-duration-tooltip": "Utbildningens längd anger hur länge utbildningen vanligtvis varar. Den uttrycks oftast i år eller månader och baseras på utbildningens omfattning samt studiernas framsteg i normal takt.",
@@ -339,7 +348,6 @@
       "other-data-from-profile": "Övriga importerade uppgifter från profilen",
       "other-data-from-profile-description": "Dina texttillägg till andra kompetenser och intressen"
     },
-    "map-your-skills": "Kartlägg dina färdigheter",
     "my-own-data": {
       "competences": {
         "import": {
@@ -372,7 +380,8 @@
           "year": "1år"
         },
         "location": "Plats"
-      }
+      },
+      "toggle-title-open": "Uppdatera och stäng"
     },
     "tour": {
       "buttons": {
@@ -386,15 +395,37 @@
           "title": "Välj först med vilka uppgifter du söker möjligheter"
         },
         "step-2": {
-          "description": "I sammanfattningen av dina uppgifter ser du all information som används för att hitta möjligheter som passar dig. Du kan ta bort uppgifter som du inte vill ta hänsyn till.",
-          "title": "Granska och redigera dina valda uppgifter"
-        },
-        "step-3": {
           "description": "Tryck på Uppdatera-knappen när du har valt alla uppgifter du vill ha. Kom ihåg att uppdatera listan varje gång du ändrar dina uppgifter.",
           "title": "Uppdatera möjligheter med dina uppgifter"
         },
-        "step-4": {
+        "step-3": {
           "description": "I möjligheterna ser du yrken, arbetsmöjligheter, examina och andra utbildningar ordnade enligt lämplighet beräknad baserat på dina uppgifter. Utforska dem närmare genom att klicka på möjlighetens namn. Du kan spara favoriter genom att logga in.",
+          "title": "Utforska och bekanta dig med dina möjligheter"
+        },
+        "step-4": {
+          "description": "Du kan filtrera och sortera listan över möjligheter med kontrollerna. På så sätt får du bättre fram alternativ som passar dina behov. Du kan också justera hur mycket dina valda intressen väger och hur mycket kompetenser väger i beräkningen av lämplighet.",
+          "title": "Använd kontroller för att beakta dina behov"
+        },
+        "step-5": {
+          "description": "Redigera dina uppgifter och prova olika kombinationer av intressen och kompetenser. Om detta känns svårt kan hjälp finnas i länkarna under Stöd för reflektion.<br/>Genom att logga in kan du spara dina uppgifter till din kompetensprofil från Importera från kompetensprofilen.",
+          "title": "Testa och utforska olika kombinationer"
+        }
+      },
+      "mobile": {
+        "step-1": {
+          "description": "Sidans funktioner är uppdelade på två flikar. Välj de uppgifter du vill använda på fliken Dina uppgifter. Granska de utbildnings- och arbetsmöjligheter som föreslås för dig baserat på dem på fliken Dina möjligheter.",
+          "title": "Flikarna Dina uppgifter och Dina möjligheter"
+        },
+        "step-2": {
+          "description": "Börja med att kartlägga dina intressen och kompetenser genom att välja de mest lämpliga alternativen som föreslås baserat på din input.<br/>Du kan också importera information från din kompetensprofil om du har skapat en sådan. Att använda kompetensprofilen kräver inloggning.",
+          "title": "Välj först med vilka uppgifter du söker möjligheter"
+        },
+        "step-3": {
+          "description": "Tryck på Uppdatera dina möjligheter-knappen när du har valt alla uppgifter du vill ha. Genom att trycka på knappen behandlas dina uppgifter automatiskt. Kom ihåg att uppdatera listan varje gång du ändrar dina uppgifter.",
+          "title": "Uppdatera möjligheter med dina uppgifter"
+        },
+        "step-4": {
+          "description": "Gå till fliken Dina möjligheter. I möjligheterna ser du yrken, arbetsmöjligheter, examina och andra utbildningar ordnade enligt lämplighet beräknad baserat på dina uppgifter. Utforska dem närmare genom att klicka på möjlighetens namn. Du kan spara favoriter genom att logga in.",
           "title": "Utforska och bekanta dig med dina möjligheter"
         },
         "step-5": {
@@ -406,39 +437,10 @@
           "title": "Testa och utforska olika kombinationer"
         }
       },
-      "mobile": {
-        "step-1": {
-          "description": "Verktygets funktioner är uppdelade på två flikar. Välj de uppgifter som ska användas i verktyget på fliken Dina uppgifter. Granska utbildnings- och karriärmöjligheter som föreslås för dig baserat på dem på fliken Dina möjligheter.",
-          "title": "Flikarna Dina uppgifter och Dina möjligheter"
-        },
-        "step-2": {
-          "description": "Börja med att kartlägga dina intressen och kompetenser genom att välja de mest lämpliga alternativen som föreslås baserat på din input.<br/>Du kan också importera information från din kompetensprofil om du har skapat en sådan. Att använda kompetensprofilen kräver inloggning.",
-          "title": "Välj först med vilka uppgifter du söker möjligheter"
-        },
-        "step-3": {
-          "description": "I sammanfattningen av dina uppgifter ser du all information som används för att hitta möjligheter som passar dig. Du kan ta bort uppgifter som du inte vill ta hänsyn till.",
-          "title": "Granska och redigera dina valda uppgifter"
-        },
-        "step-4": {
-          "description": "När du har valt dina önskade uppgifter, gå till fliken Dina möjligheter och tryck på Uppdatera-knappen. Kom ihåg att uppdatera listan varje gång du ändrar dina uppgifter.",
-          "title": "Uppdatera möjligheter med dina uppgifter"
-        },
-        "step-5": {
-          "description": "I möjligheterna ser du yrken, arbetsmöjligheter, examina och andra utbildningar ordnade enligt lämplighet beräknad baserat på dina uppgifter. Utforska dem närmare genom att klicka på möjlighetens namn. Du kan spara favoriter genom att logga in.",
-          "title": "Utforska och bekanta dig med dina möjligheter"
-        },
-        "step-6": {
-          "description": "Du kan filtrera och sortera listan över möjligheter med kontrollerna. På så sätt får du bättre fram alternativ som passar dina behov. Du kan också justera hur mycket dina valda intressen väger och hur mycket kompetenser väger i beräkningen av lämplighet.",
-          "title": "Använd kontroller för att beakta dina behov"
-        },
-        "step-7": {
-          "description": "Redigera dina uppgifter och prova olika kombinationer av intressen och kompetenser på fliken Dina uppgifter. Om detta känns svårt kan hjälp finnas i länkarna under Stöd för reflektion.<br/>Genom att logga in kan du spara dina uppgifter till din kompetensprofil från Importera från kompetensprofilen.",
-          "title": "Testa och utforska olika kombinationer"
-        }
-      },
       "view-guided-tour": "Titta på verktygets tips!",
       "view-guided-tour-label": "Starta verktygets guidade genomgång"
     },
+    "update-tooltip-info": "Genom att trycka på knappen Uppdatera dina möjligheter behandlas dina uppgifter automatiskt. Vi visar dig möjligheter baserat på hur väl de matchar den information du lämnar.",
     "updating": "Laddar möjligheter…"
   },
   "tooltip": {

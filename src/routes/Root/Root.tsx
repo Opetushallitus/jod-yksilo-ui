@@ -5,6 +5,7 @@ import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useSessionExpirationTimer } from '@/hooks/useSessionExpirationTimer';
 import { langLabels, supportedLanguageCodes, type LangCode } from '@/i18n/config';
+import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLinkTo } from '@/utils/routeUtils';
 import {
@@ -104,6 +105,9 @@ const Root = () => {
         return;
       }
       removeTemporaryNote(sessionWarningNoteId);
+      // Clear stores to avoid stale data
+      useToolStore.getState().reset();
+      useSuosikitStore.getState().reset();
       // Reload root loader, this should set CSRF data to null
       await fetcher.load(`/${language}`);
 

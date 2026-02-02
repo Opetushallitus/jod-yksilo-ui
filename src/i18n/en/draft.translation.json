@@ -262,6 +262,15 @@
       "link-text": "Find opportunities",
       "title": "Explore your options"
     },
+    "competency-profile": {
+      "delete-all": "Delete all",
+      "delete-text": "Delete text",
+      "export-help": "You can also save the information you have mapped on this page to your competence profile. Going forward, you will find them in the competence profile under Other competences and My interests.",
+      "import-help": "You can choose what data you import from your competence profile to this page. You can delete or supplement the information by mapping your competences or interests.",
+      "login-description": "You can import data from your competence profile and save data to your competence profile. If you do not yet have a competence profile, you can create one by logging in.",
+      "login-to-service": "Login to service",
+      "sections-intro": "In the competence profile, you can map your competences and interests in more detail in the following ways:"
+    },
     "description": "Fill in your information on this page by mapping your interests and skills or by importing them from your competence profile. Try different combinations and update your opportunities with your data.",
     "my-own-data": {
       "interests": {
@@ -287,7 +296,8 @@
           "month": "1mo",
           "year": "1y"
         }
-      }
+      },
+      "toggle-title-open": "Update and close"
     },
     "tour": {
       "buttons": {
@@ -301,15 +311,37 @@
           "title": "First choose what data to use for finding opportunities"
         },
         "step-2": {
-          "description": "In the summary of your data, you can see all the information used to find suitable opportunities for you. You can remove data that you don't want to take into account.",
-          "title": "View and edit your selected data"
-        },
-        "step-3": {
           "description": "Press the Update button when you have selected all the data you want. Remember to update the list whenever you change your data.",
           "title": "Update opportunities with your data"
         },
-        "step-4": {
+        "step-3": {
           "description": "In opportunities, you'll see professions, job opportunities, degrees, and other education organized by suitability calculated based on your data. Explore them in more detail by clicking on the opportunity name. You can save favorites by logging in.",
+          "title": "Explore and familiarize yourself with your opportunities"
+        },
+        "step-4": {
+          "description": "You can filter and sort the list of opportunities using the controls. This way you can better highlight options that suit your needs. You can also adjust how much weight is given to your selected interests and how much to competences in the suitability calculation.",
+          "title": "Use controls to account for your needs"
+        },
+        "step-5": {
+          "description": "Edit your data and try different combinations of interests and competences. If this feels difficult, help may be found in the links under Support for Reflection.<br/>By logging in, you can save your data to your competence profile via Import from Competence Profile.",
+          "title": "Try and explore different combinations"
+        }
+      },
+      "mobile": {
+        "step-1": {
+          "description": "The page's functions are divided into two tabs. Select the data to be used on the Your Data tab. View the education and job opportunities suggested for you based on them on the Your Opportunities tab.",
+          "title": "Your Data and Your Opportunities tabs"
+        },
+        "step-2": {
+          "description": "Start by mapping your interests and competences by selecting the most suitable options from the suggestions based on your input.<br/>You can also import data from your competence profile if you have created one. Using the competence profile requires logging in.",
+          "title": "First choose what data to use for finding opportunities"
+        },
+        "step-3": {
+          "description": "Press the Update your opportunities button when you have selected all the data you want. By pressing the button, your data will be processed automatically. Remember to update the list whenever you change your data.",
+          "title": "Update opportunities with your data"
+        },
+        "step-4": {
+          "description": "Go to the Your Opportunities tab. In opportunities, you'll see professions, job opportunities, degrees, and other education organized by suitability calculated based on your data. Explore them in more detail by clicking on the opportunity name. You can save favorites by logging in.",
           "title": "Explore and familiarize yourself with your opportunities"
         },
         "step-5": {
@@ -321,39 +353,10 @@
           "title": "Try and explore different combinations"
         }
       },
-      "mobile": {
-        "step-1": {
-          "description": "The tool's functions are divided into two tabs. Select the data to be used in the tool on the Your Data tab. View education and career opportunities suggested for you based on that data on the Your Opportunities tab.",
-          "title": "Your Data and Your Opportunities tabs"
-        },
-        "step-2": {
-          "description": "Start by mapping your interests and competences by selecting the most suitable options from the suggestions based on your input.<br/>You can also import data from your competence profile if you have created one. Using the competence profile requires logging in.",
-          "title": "First choose what data to use for finding opportunities"
-        },
-        "step-3": {
-          "description": "In the summary of your data, you can see all the information used to find suitable opportunities for you. You can remove data that you don't want to take into account.",
-          "title": "View and edit your selected data"
-        },
-        "step-4": {
-          "description": "When you have selected the data you want, go to the Your Opportunities tab and press the Update button. Remember to update the list whenever you change your data.",
-          "title": "Update opportunities with your data"
-        },
-        "step-5": {
-          "description": "In opportunities, you'll see professions, job opportunities, degrees, and other education organized by suitability calculated based on your data. Explore them in more detail by clicking on the opportunity name. You can save favorites by logging in.",
-          "title": "Explore and familiarize yourself with your opportunities"
-        },
-        "step-6": {
-          "description": "You can filter and sort the list of opportunities using the controls. This way you can better highlight options that suit your needs. You can also adjust how much weight is given to your selected interests and how much to competences in the suitability calculation.",
-          "title": "Use controls to account for your needs"
-        },
-        "step-7": {
-          "description": "Edit your data and try different combinations of interests and competences on the Your Data tab. If this feels difficult, help may be found in the links under Support for Reflection.<br/>By logging in, you can save your data to your competence profile via Import from Competence Profile.",
-          "title": "Try and explore different combinations"
-        }
-      },
       "view-guided-tour": "View tips for use!",
       "view-guided-tour-label": "Start the tool's guided tour"
     },
+    "update-tooltip-info": "By pressing the Update your opportunities button, your data will be processed automatically. We will show you opportunities based on how well they match the information you provide.",
     "updating": "Updating opportunities…"
   },
   "tooltip": {
