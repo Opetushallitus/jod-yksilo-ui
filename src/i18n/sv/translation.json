@@ -715,21 +715,21 @@
   },
   "tool": {
     "competency-profile": {
-      "help": "Du kan själv välja vilka uppgifter du vill importera. Uppgifterna som importerats från kompetensprofilen visas i sammanfattningen av dina uppgifter. Kom ihåg att uppdatera dina möjligheter efter att du har importerat uppgifter.\t\n\nDu kan uppdatera din kompetensprofil med uppgifterna som kartläggs på den här sidan. Du hittar dem i fortsättningen i kompetensprofilen under Annan kompetens och Mina intressen.\t",
-      "login-description": "Genom att logga in i tjänsten kan du importera dina uppgifter från kompetensprofilen och exportera dina uppgifter till kompetensprofilen. Om du ännu inte har en kompetensprofil kan du skapa en.\t",
-      "title": "Din kompetensprofil"
+      "title": "Importera från kompetensprofil ({{count}})",
+      "title_zero": "Importera från kompetensprofil"
     },
     "info-overview": {
       "data-from-profile": "Information som importerats från kompetensprofilen",
-      "mapped-competences": "Kartlagda uppgifter",
-      "no-competences-from-profile": "Inga uppgifter importerade från profilen",
-      "no-mapped-competences": "Inga inmatade uppgifter",
-      "title": "Sammanfattning av dina uppgifter"
+      "no-competences-from-profile": "Inga uppgifter importerade från profilen"
     },
+    "interests": "Kartlägg dina intressen ({{count}})",
+    "interests_zero": "Kartlägg dina intressen",
     "job-opportunity-is-part-of-group": "Karriärmöjligheten tillhör en yrkesgrupp",
     "job-opportunity-is-part-of-group-tooltip": "Yrken och karriärmöjligheter grupperas i yrkesgrupper. Yrkesgrupper används i statistiken över befolkningens yrkesstruktur och för att skapa dem används en yrkesklassificering som hjälper till att jämföra statistiken nationellt och internationellt.",
     "job-opportunity-median-salary": "Medianlön",
     "job-opportunity-median-salary-tooltip": "Med medianlön avses den lön som delar in löntagarna i två lika stora grupper: hälften tjänar mindre och hälften mer än medianlönen. Den beskriver bättre den ”typiska” lönen än genomsnittet, eftersom den inte förvrängs av enskilda mycket höga eller mycket låga löner.",
+    "map-your-skills": "Kartlägg dina färdigheter ({{count}})",
+    "map-your-skills_zero": "Kartlägg dina färdigheter",
     "my-own-data": {
       "cancel-text": "Nej, avbryt",
       "competences": {
@@ -746,20 +746,6 @@
         "confirm-description": "Kunskaperna sparas i din kompetensprofil under Övriga kunskaper och Dina intressen.",
         "confirm-title": "Vill du spara de kartlagda kunskaper och intressena?",
         "export-button": "Exportera uppgifter till profilen"
-      },
-      "goals": {
-        "description": "I det här avsnittet kan du välja de resultat du vill ha från vår tjänst. Om du är osäker kan du hoppa över detta och bekanta dig med vår tjänst i egen takt. När du för muspekaren över ikonerna ser du en förklaring under dem om hur de påverkar slutresultatet.\n\nKlicka på ikonen om du vill välja den som mål. Klicka på ikonen på nytt för att ångra valet.",
-        "job-opportunities": "Undersöka karriärmöjligheter med mitt kunnande",
-        "job-opportunities-tooltip": "Öppna Dina möjligheter och välj först filtrera och sedan ”Visa i möjligheter – arbetsmöjligheter”. Du får en lista över karriärmöjligheter i Finland. Du kan också till exempel kartlägga dina intressen och se hur de påverkar utbildningsmöjligheterna som erbjuds dig.",
-        "map-competence": "Kartlägga mitt eget kunnande",
-        "map-competence-tooltip": "Öppna Kompetenser och kartlägg dina kunskaper! Mata in en beskrivning av dina kunskaper, färdigheter och erfarenheter och vår kompetensrekommenderare föreslår olika kunskaper för dig. Var stolt över dig själv, du kan förmodligen mer än du tror. Tänk på din utbildning, din arbetserfarenhet och dina hobbyer – all din kunskap och alla dina erfarenheter är viktiga.",
-        "map-opportunities": "Kartlägga möjligheterna att byta bransch",
-        "map-opportunities-tooltip": "Logga in på din kompetensstig och skapa en kompetensprofil för dig själv! Skapa eller importera din arbets- och utbildningshistorik och berätta om dina hobbyer samt kartlägg dina kunskaper i anslutning till dem. Kartlägg också dina intressen. När du har gjort detta kan du importera dina uppgifter under Kompetenser och Intressen samt undersöka olika arbets- och utbildningsmöjligheter och spara dina favoriter i din kompetensprofil.",
-        "something-else": "Något annat, jag vet inte vad...",
-        "something-else-tooltip": "Prova tjänsten och dess delar fritt och modigt! Genom tjänsten kan du identifiera, kartlägga och beskriva dina kunskaper, färdigheter och passioner och bygga en unik och personlig kompetensprofil som lyfter fram din verkliga potential. Du kan också bekanta dig med Finlands utbildningsutbud och arbetsmarknad genom att bläddra fritt eller granska individuellt riktade utbildnings- och karriärmöjligheter.",
-        "title": "Vad jag vill",
-        "trainings": "Utbildningar för att öka mitt kunnande",
-        "trainings-tooltip": "Öppna Dina möjligheter och välj först filtrera och sedan ”Visa i möjligheter – utbildningsmöjligheter”. Du får en lista över de utbildningsmöjligheter som erbjuds i Finland. Du kan också till exempel kartlägga dina intressen under Intressen och se hur dina intressen påverkar de utbildningsmöjligheter som presenteras för dig."
       },
       "interests": {
         "conversational-virtual-assistant": "Identifiera intressen med artificiell intelligens",
@@ -786,8 +772,7 @@
         "weight": "Prioritering"
       },
       "reset": "Ta bort valen",
-      "toggle-title-closed": "Visa reglage",
-      "toggle-title-open": "Dölj reglage"
+      "toggle-title-closed": "Visa reglage"
     },
     "title": "Hitta möjligheter",
     "tools": {

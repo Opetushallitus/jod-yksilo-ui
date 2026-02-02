@@ -1,16 +1,10 @@
 import { OsaamisSuosittelija } from '@/components';
-import { useToolStore } from '@/stores/useToolStore';
 import React from 'react';
-import { useShallow } from 'zustand/shallow';
+import { useTool } from './hook/useTool';
 import { mergeUniqueValuesExcludingType } from './utils';
 
 const Competences = () => {
-  const { osaamiset, setOsaamiset } = useToolStore(
-    useShallow((state) => ({
-      osaamiset: state.osaamiset,
-      setOsaamiset: state.setOsaamiset,
-    })),
-  );
+  const { osaamiset, setOsaamiset, mappedOsaamiset } = useTool();
 
   const onChange = React.useCallback(
     (newValues: typeof osaamiset) => {
@@ -22,7 +16,7 @@ const Competences = () => {
   return (
     <OsaamisSuosittelija
       onChange={onChange}
-      value={osaamiset.filter((o) => o.tyyppi === 'KARTOITETTU')}
+      value={mappedOsaamiset}
       tagHeadingClassName="bg-white"
       hideTextAreaLabel
       useAnimations

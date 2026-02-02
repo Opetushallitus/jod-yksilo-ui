@@ -33,7 +33,7 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
           },
         },
         {
-          element: '#tool-your-info-group-2',
+          element: '#tool-update-opportunities-button',
           popover: {
             title: t('tool.tour.desktop.step-2.title'),
             description: t('tool.tour.desktop.step-2.description'),
@@ -42,19 +42,10 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
           },
         },
         {
-          element: '[data-testid="update-opportunities"]',
+          element: '#tool-your-opportunities-list',
           popover: {
             title: t('tool.tour.desktop.step-3.title'),
             description: t('tool.tour.desktop.step-3.description'),
-            side: 'left',
-            align: 'center',
-          },
-        },
-        {
-          element: '#tool-your-opportunities-list',
-          popover: {
-            title: t('tool.tour.desktop.step-4.title'),
-            description: t('tool.tour.desktop.step-4.description'),
             side: 'top',
             align: 'start',
           },
@@ -62,8 +53,8 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
         {
           element: '[data-testid="open-tool-settings"]',
           popover: {
-            title: t('tool.tour.desktop.step-5.title'),
-            description: t('tool.tour.desktop.step-5.description'),
+            title: t('tool.tour.desktop.step-4.title'),
+            description: t('tool.tour.desktop.step-4.description'),
             side: 'left',
             align: 'start',
           },
@@ -71,8 +62,8 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
         {
           element: '#tool-your-info',
           popover: {
-            title: t('tool.tour.desktop.step-6.title'),
-            description: t('tool.tour.desktop.step-6.description'),
+            title: t('tool.tour.desktop.step-5.title'),
+            description: t('tool.tour.desktop.step-5.description'),
             side: 'right',
             align: 'center',
           },
@@ -106,7 +97,7 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
           },
         },
         {
-          element: '#tool-your-info-group-2',
+          element: '#tool-update-opportunities-button',
           popover: {
             title: t('tool.tour.mobile.step-3.title'),
             description: t('tool.tour.mobile.step-3.description'),
@@ -121,12 +112,18 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
           },
         },
         {
-          element: '[data-testid="update-opportunities"]',
+          element: '#tool-your-opportunities-list',
           popover: {
             title: t('tool.tour.mobile.step-4.title'),
             description: t('tool.tour.mobile.step-4.description'),
-            side: 'bottom',
-            align: 'end',
+            side: 'top',
+            align: 'center',
+            onPopoverRender: () => {
+              window.scrollTo({ top: 400, behavior: 'instant' });
+              setTimeout(() => {
+                tour.refresh();
+              }, 200);
+            },
             onPrevClick: () => {
               setCurrentTab('info');
               setTimeout(() => {
@@ -136,25 +133,10 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
           },
         },
         {
-          element: '#tool-your-opportunities-list',
+          element: '[data-testid="open-tool-settings"]',
           popover: {
             title: t('tool.tour.mobile.step-5.title'),
             description: t('tool.tour.mobile.step-5.description'),
-            side: 'top',
-            align: 'center',
-            onPopoverRender: () => {
-              window.scrollTo({ top: 400, behavior: 'instant' });
-              setTimeout(() => {
-                tour.refresh();
-              }, 200);
-            },
-          },
-        },
-        {
-          element: '[data-testid="open-tool-settings"]',
-          popover: {
-            title: t('tool.tour.mobile.step-6.title'),
-            description: t('tool.tour.mobile.step-6.description'),
             side: 'left',
             align: 'center',
             onNextClick: () => {
@@ -168,8 +150,8 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
         {
           element: '#tool-your-info',
           popover: {
-            title: t('tool.tour.mobile.step-7.title'),
-            description: t('tool.tour.mobile.step-7.description'),
+            title: t('tool.tour.mobile.step-6.title'),
+            description: t('tool.tour.mobile.step-6.description'),
             side: 'top',
             align: 'center',
             onPrevClick: () => {
