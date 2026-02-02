@@ -1,7 +1,6 @@
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { CheckboxAccordion } from '@/components/CheckboxAccordion';
-import { ModalHeader } from '@/components/ModalHeader';
 import { getLocalizedText } from '@/utils';
 import { Checkbox, Spinner } from '@jod/design-system';
 import React from 'react';
@@ -9,7 +8,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import type { ShareLinkForm } from './types';
 
-export const DataToShareStep = ({ title }: { title: string }) => {
+export const DataToShareStep = () => {
   const { t, i18n } = useTranslation();
   const [tyopaikat, setTyopaikat] = React.useState<components['schemas']['TyopaikkaDto'][]>([]);
   const [koulut, setKoulut] = React.useState<components['schemas']['KoulutusKokonaisuusDto'][]>([]);
@@ -258,7 +257,6 @@ export const DataToShareStep = ({ title }: { title: string }) => {
     </div>
   ) : (
     <>
-      <ModalHeader text={title} testId="share-link-modal-title" />
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('preferences.share.modal.data-to-share.description')}
       </p>

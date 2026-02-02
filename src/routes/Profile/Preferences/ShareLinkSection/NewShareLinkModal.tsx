@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
+import { ModalHeader } from '@/components/ModalHeader';
 import { FORM_SCHEMA, formErrorMessage } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import type { MahdollisuusTyyppi } from '@/routes/types';
@@ -175,12 +176,13 @@ export const NewShareLinkModal = ({ isOpen, onClose, id }: NewShareLinkModalProp
       fullWidthContent
       className="sm:h-full!"
       testId="share-link-wizard"
+      topSlot={<ModalHeader text={modalTitle} testId="share-link-modal-title" />}
       content={
         <FormProvider {...methods}>
           <Form
             id={formId}
             onSubmit={onSubmit}
-            className="pb-2"
+            className="pb-2 max-w-modal-content"
             onKeyDown={(event) => {
               // Prevent form submission on Enter
               if (event.key === 'Enter') {
@@ -188,8 +190,8 @@ export const NewShareLinkModal = ({ isOpen, onClose, id }: NewShareLinkModalProp
               }
             }}
           >
-            {step === 1 && <BasicInfoStep title={modalTitle} />}
-            {step === 2 && <DataToShareStep title={modalTitle} />}
+            {step === 1 && <BasicInfoStep />}
+            {step === 2 && <DataToShareStep />}
           </Form>
         </FormProvider>
       }

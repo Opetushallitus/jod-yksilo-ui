@@ -79,8 +79,8 @@ const MainStep = () => {
         />
         <FormError name={`nimi.${language}`} errors={errors} />
       </div>
-      <div className="mb-6 flex grow gap-6">
-        <div className="block w-full">
+      <div className="mb-6 flex grow gap-4">
+        <div className="flex flex-col flex-1 sm:block sm:max-w-input-short">
           <Controller
             control={control}
             render={({ field }) => (
@@ -96,7 +96,7 @@ const MainStep = () => {
           />
           <TouchedFormError touchedFields={touchedFields} fieldName="alkuPvm" errors={errors} />
         </div>
-        <div className="block w-full">
+        <div className="flex flex-col flex-1 sm:block sm:max-w-input-short">
           <Controller
             control={control}
             render={({ field }) => (
