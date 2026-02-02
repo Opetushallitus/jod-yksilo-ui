@@ -1,4 +1,4 @@
-import { MainLayout, OpportunityCard, SimpleNavigationList } from '@/components';
+import { FilterList, MainLayout, OpportunityCard } from '@/components';
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
@@ -185,14 +185,14 @@ const Favorites = () => {
       navChildren={
         <div className="flex flex-col gap-5">
           <ProfileNavigationList />
-          <SimpleNavigationList title={t('content')} backgroundClassName="bg-bg-gray-2" collapsible>
+          <FilterList title={t('content')} className="bg-bg-gray-2" collapsible>
             <MahdollisuusTyyppiFilter
               jobFilterText={jobFilterText}
               educationFilterText={educationFilterText}
               isFilterChecked={isFilterChecked}
               handleFilterChange={handleFilterChange}
             />
-          </SimpleNavigationList>
+          </FilterList>
           <GoalsCard testId="favorites-go-to-goals" />
         </div>
       }

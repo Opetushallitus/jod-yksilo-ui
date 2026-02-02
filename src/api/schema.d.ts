@@ -498,6 +498,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/haku': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['hakuSearch'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/ehdotus/osaamiset': {
     parameters: {
       query?: never;
@@ -990,6 +1006,27 @@ export interface components {
       tyopaikat?: string[];
       koulutuskokonaisuudet?: string[];
       toiminnot?: string[];
+    };
+    SearchRequest: {
+      query: string;
+    };
+    MahdollisuusDto: {
+      /** Format: uuid */
+      id?: string;
+      /** @enum {string} */
+      tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      ammattiryhma?: string;
+      /** @enum {string} */
+      aineisto?: 'TMT' | 'AMMATTITIETO';
+      /** @enum {string} */
+      koulutusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
+      maakunnat?: string[];
+      /** Format: double */
+      kesto?: number;
+      /** Format: double */
+      kestoMinimi?: number;
+      /** Format: double */
+      kestoMaksimi?: number;
     };
     Ehdotus: {
       /** Format: uri */
@@ -2687,6 +2724,30 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['TmtImportDto'];
+        };
+      };
+    };
+  };
+  hakuSearch: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SearchRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['MahdollisuusDto'][];
         };
       };
     };

@@ -109,6 +109,11 @@
   "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
   "n-job-opportunities": "Työmahdollisuudet {{count}} / {{total}}",
   "navigation-menu": "Valikko",
+  "opportunity-type": {
+    "education": {
+      "EI_TUTKINTO": "Muu koulutusmahdollisuus"
+    }
+  },
   "osaamissuosittelija": {
     "competence": {
       "search-disclaimer": "Tekstiä käytetään osaamisten hakuun - sitä ei tallenneta"
@@ -258,6 +263,25 @@
       "no-favorites-selected": "Lisää ensin suosikkeja, joista voit luoda tavoitteita.",
       "own-competences": "Omat taidot"
     }
+  },
+  "search": {
+    "description": "Voit hakea mahdollisuuksia käyttämällä vapaasanahakua. Tulosten näkyvyyteen voit vaikuttaa suodattamalla listaa.",
+    "filters": "Suodattimet",
+    "no-results": "Hakusanalla ei löytynyt tuloksia.",
+    "profile-card-description": "Kirjaudu ja luo oma osaamisprofiili. Näin tietosi pysyvät tallessa.",
+    "profile-card-title": "Luo oma osaamisprofiili",
+    "results-found-short_one": "1 tulos",
+    "results-found-short_other": "{{count}} tulosta",
+    "results-found_one": "Näytetään 1 tulos",
+    "results-found_other": "Näytetään {{count}} tulosta",
+    "search": "Hae",
+    "search-placeholder": "Kirjoita hakusana",
+    "title": "Hae mahdollisuuksia",
+    "tool-card-description": "Siirry hausta henkilö-kohtaisempaan näkymään. Kartoita mahdollisuuksia osaamisesi ja kiinnostuksiesi perusteella.",
+    "tool-card-title": "Kartoita mahdollisuuksia"
+  },
+  "slugs": {
+    "search": "haku"
   },
   "tool": {
     "banner": {

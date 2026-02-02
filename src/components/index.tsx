@@ -8,11 +8,11 @@ export { type ExperienceTableRowData } from './ExperienceTable/ExperienceTableRo
 export { ExternalLink } from './ExternalLink/ExternalLink';
 export { FavoriteToggle } from './FavoriteToggle/FavoriteToggle';
 export { FeedbackModal } from './FeedbackModal/FeedbackModal';
+export { FilterList } from './FilterList/FilterList';
 export { FormError } from './FormError/FormError';
 export { TouchedFormError } from './FormError/TouchedFormError';
 export { HelpingToolLinkItem, HelpingToolProfileLinkItem } from './HelpingToolsContent';
 export type { HelpingToolLinkItemProps, HelpingToolProfileLinkItemProps } from './HelpingToolsContent';
 export { MainLayout } from './MainLayout/MainLayout';
-export { SimpleNavigationList } from './MainLayout/SimpleNavigationList';
 export { OpportunityCard, type OpportunityCardProps } from './OpportunityCard';
 export { OsaamisSuosittelija, type Osaaminen, type OsaaminenValue } from './OsaamisSuosittelija/OsaamisSuosittelija';

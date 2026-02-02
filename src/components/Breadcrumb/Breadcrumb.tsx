@@ -42,7 +42,7 @@ export const Breadcrumb = () => {
      * @returns Breadcrumb items array
      */
     const getOpportunityParents = () => {
-      const from: 'tool' | 'favorite' | 'path' | 'goal' = history.state?.usr?.from ?? 'tool';
+      const from: 'tool' | 'favorite' | 'path' | 'goal' | 'search' = history.state?.usr?.from ?? 'tool';
       const profileIndex: BreadcrumbItem = {
         label: t('profile.index'),
         to: `/${language}/${t('slugs.profile.index')}`,
@@ -50,6 +50,8 @@ export const Breadcrumb = () => {
 
       if (from === 'tool') {
         return [{ label: t('tool.title'), to: `/${language}/${t('slugs.tool.index')}` }];
+      } else if (from === 'search') {
+        return [{ label: t('search.title'), to: `/${language}/${t('slugs.search')}` }];
       } else if (from === 'favorite') {
         return [
           profileIndex,
