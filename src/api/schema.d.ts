@@ -1102,10 +1102,22 @@ export interface components {
       /** Format: double */
       osuus?: number;
     };
+    KoulutusAsteDto: {
+      koulutusasteKoodi?: string;
+      /** Format: double */
+      osuus?: number;
+    };
+    MaakuntaDto: {
+      maakuntaKoodi?: string;
+      /** Format: double */
+      osuus?: number;
+    };
     TyollisyysDto: {
       /** Format: int32 */
       tyollisetKokoMaa?: number;
       koulutusalaTyollisyydet?: components['schemas']['KoulutusAlaDto'][];
+      koulutusasteTyollisyydet?: components['schemas']['KoulutusAsteDto'][];
+      maakuntaTyollisyydet?: components['schemas']['MaakuntaDto'][];
     };
     TyomahdollisuusFullDto: {
       /** Format: uuid */

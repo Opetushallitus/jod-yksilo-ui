@@ -6,6 +6,7 @@ import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { NOT_AVAILABLE_LABEL } from '@/constants';
+import Suomi from '@/routes/JobOpportunity/Suomi.tsx';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText, getTranslation, hashString } from '@/utils';
 import { getEducationCodesetValues } from '@/utils/codes/codes.ts';
@@ -23,9 +24,23 @@ interface Koulutusala {
   osuus: number;
 }
 
+interface KoulutusasteTyollisyys {
+  title: string;
+  osuus: number;
+}
+
+export interface MaakuntaTyollisyys {
+  code: string;
+  osuus: number;
+}
+
 const koulutusalaPrefix = 'kansallinenkoulutusluokitus2016koulutusalataso1_';
+const koulutusastePrefix = 'kansallinenkoulutusluokitus2016koulutusastetaso1_';
 const JobOpportunity = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { lg } = useMediaQueries();
   const { tyomahdollisuus, osaamiset, isLoggedIn, ammattiryhma } = useLoaderData<LoaderData>();
   const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
@@ -39,6 +54,8 @@ const JobOpportunity = () => {
     [osaamiset, omatOsaamisetUris, tyomahdollisuus.jakaumat],
   );
   const [koulutusalat, setKoulutusalat] = React.useState<Koulutusala[]>([]);
+  const [koulutusasteet, setKoulutusasteet] = React.useState<Koulutusala[]>([]);
+  const [maakunnat, setMaakunnat] = React.useState<MaakuntaTyollisyys[]>([]);
 
   React.useEffect(() => {
     const fetchKoulutusalat = async () => {
@@ -62,11 +79,57 @@ const JobOpportunity = () => {
         }
         return { title, osuus };
       });
+
       setKoulutusalat(newKoulutusalat);
     };
     setKoulutusalat([]);
     fetchKoulutusalat();
   }, [tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusalaTyollisyydet, t]);
+
+  React.useEffect(() => {
+    const fetchMaakunnat = async () => {
+      if (!tyomahdollisuus.ammattiryhma?.tyollisyysData?.maakuntaTyollisyydet) {
+        setMaakunnat([]);
+        return;
+      }
+      const promises = tyomahdollisuus.ammattiryhma.tyollisyysData.maakuntaTyollisyydet.map(async (ka) => {
+        return { code: ka.maakuntaKoodi ?? '', osuus: ka.osuus ?? 0 };
+      });
+
+      const maakuntaTyollisyydet = (await Promise.all(promises)) ?? [];
+      setMaakunnat(maakuntaTyollisyydet);
+    };
+    fetchMaakunnat();
+  }, [language, t, tyomahdollisuus.ammattiryhma?.tyollisyysData?.maakuntaTyollisyydet]);
+
+  React.useEffect(() => {
+    const fetchKoulutusasteet = async () => {
+      if (!tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet) {
+        return;
+      }
+      const res = await getEducationCodesetValues(
+        tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet?.map(
+          (ka) => koulutusastePrefix + ka.koulutusasteKoodi,
+        ),
+      );
+      const newKoulutusasteet: KoulutusasteTyollisyys[] = res.map((ka) => {
+        let title = ka.value;
+        const koodi = ka.code.replace(koulutusastePrefix, '');
+        const osuus =
+          tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet?.find(
+            // eslint-disable-next-line sonarjs/no-nested-functions
+            (kat) => kat.koulutusasteKoodi === koodi,
+          )?.osuus ?? 0;
+        if (title === koulutusastePrefix + '-2') {
+          title = t('job-opportunity.employment-data.unknown-ala');
+        }
+        return { title, osuus };
+      });
+      setKoulutusasteet(newKoulutusasteet);
+    };
+    setKoulutusasteet([]);
+    fetchKoulutusasteet();
+  }, [tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet, t]);
 
   const tyomahdollisuusTehtavat =
     getTranslation(tyomahdollisuus?.tehtavat) !== ''
@@ -210,6 +273,7 @@ const JobOpportunity = () => {
                   <Link
                     to={'https://osaamispolku.fi/tietopalvelu'}
                     className="inline-flex underline text-accent items-center"
+                    target="_blank"
                   />
                 ),
               }}
@@ -217,12 +281,15 @@ const JobOpportunity = () => {
           </p>
 
           {tyomahdollisuus?.ammattiryhma ? (
-            <>
-              <div className="flex sm:my-8 my-4">
-                <div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-7">
+              {/* Row 1: Supply and Demand - Full width */}
+              <div className="lg:col-span-2 col-start-1 max-w-full">
+                <div className="flex flex-col w-full">
                   <p className="font-bold">{t('job-opportunity.employment-data.supply-and-demand')}</p>
-                  <h3 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent">{kohtaanto}</h3>
-                  <span className="text-secondary-gray">
+                  <h3 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent break-words max-w-full">
+                    {kohtaanto}
+                  </h3>
+                  <span className="text-secondary-gray max-w-full">
                     <Trans
                       i18nKey="job-opportunity.employment-data.supply-and-demand-subtitle"
                       components={{
@@ -231,6 +298,7 @@ const JobOpportunity = () => {
                           <Link
                             to={'https://tyomarkkinatori.fi/henkiloasiakkaat'}
                             className="inline-flex underline text-accent items-center"
+                            target="_blank"
                           />
                         ),
                       }}
@@ -238,30 +306,61 @@ const JobOpportunity = () => {
                   </span>
                 </div>
               </div>
-              <div className="sm:flex-row flex-col">
-                <div>
+
+              {/* Left Column - Employed + Region */}
+              <div className="lg:col-span-1 space-y-8 w-full max-w-full">
+                {/* Employed amount */}
+                <div className="flex flex-col w-full">
                   <p className="font-bold">{t('job-opportunity.employment-data.employed-title')}</p>
-                  <h3 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent">
+                  <h3 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent break-words">
                     {tyomahdollisuus?.ammattiryhma?.tyollisyysData?.tyollisetKokoMaa ?? NOT_AVAILABLE_LABEL}
                   </h3>
                 </div>
-                <div className="mt-7">
+
+                {/* Region */}
+                <div className="flex flex-col w-full">
+                  <p className="font-bold mb-3">{t('job-opportunity.employment-data.employed-by-region')}</p>
+                  <Suomi data={maakunnat} />
+                </div>
+              </div>
+
+              {/* Right Column - Education data */}
+              <div className="lg:col-span-1 space-y-8 w-full max-w-full">
+                {/* Education field */}
+                <div className="flex flex-col w-full">
                   <p className="font-bold mb-3">{t('job-opportunity.employment-data.employed-by-koulutusala')}</p>
-                  <div className="space-y-2">
+                  <div className="space-y-2 w-full">
                     {koulutusalat
                       .slice()
                       .sort((a, b) => b.osuus - a.osuus)
                       .filter((ka) => ka.osuus > 0)
                       .map((ka) => (
-                        <div key={`${ka.title}-${ka.osuus}`} className="flex items-center py-2">
+                        <div key={`${ka.title}-${ka.osuus}`} className="flex items-center py-2 w-full">
                           <span className="text-heading-3 text-accent font-semibold min-w-[80px]">{ka.osuus}%</span>
-                          <span className=" flex ml-3 flex-1">{ka.title}</span>
+                          <span className="ml-3 flex-1 break-words">{ka.title}</span>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+
+                {/* Education level */}
+                <div className="flex flex-col w-full">
+                  <p className="font-bold mb-3">{t('job-opportunity.employment-data.employed-by-koulutusaste')}</p>
+                  <div className="space-y-2 w-full">
+                    {koulutusasteet
+                      .slice()
+                      .sort((a, b) => b.osuus - a.osuus)
+                      .filter((ka) => ka.osuus > 0)
+                      .map((ka) => (
+                        <div key={`${ka.title}-${ka.osuus}`} className="flex items-center py-2 w-full">
+                          <span className="text-heading-3 text-accent font-semibold min-w-[80px]">{ka.osuus}%</span>
+                          <span className="ml-3 flex-1 break-words">{ka.title}</span>
                         </div>
                       ))}
                   </div>
                 </div>
               </div>
-            </>
+            </div>
           ) : (
             <p>{t('job-opportunity.salary-data.not-available')}</p>
           )}
