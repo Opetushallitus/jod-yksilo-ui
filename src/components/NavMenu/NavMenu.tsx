@@ -73,10 +73,6 @@ export const NavMenu = ({ open, onClose }: { open: boolean; onClose: () => void 
           label: t('navigation.extra.palveluhakemisto.label'),
           url: t('navigation.extra.palveluhakemisto.url'),
         },
-        {
-          label: t('navigation.extra.urataidot.label'),
-          url: `/urataidot/${language}`,
-        },
       ],
     },
   ];
