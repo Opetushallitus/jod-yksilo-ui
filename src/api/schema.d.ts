@@ -140,10 +140,8 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** Gets all other osaaminen of the user */
-    get: operations['muuOsaaminenFindAll'];
-    /** Gets all other osaaminen of the user */
-    put: operations['muuOsaaminenUpdate'];
+    get: operations['muuOsaaminenGet'];
+    put: operations['muuOsaaminenUpdateOsaamiset'];
     post?: never;
     delete?: never;
     options?: never;
@@ -1118,7 +1116,7 @@ export interface components {
       /** Format: double */
       osuus?: number;
     };
-    KoulutusAsteDto: {
+    KoulutusasteDto: {
       koulutusasteKoodi?: string;
       /** Format: double */
       osuus?: number;
@@ -1132,7 +1130,7 @@ export interface components {
       /** Format: int32 */
       tyollisetKokoMaa?: number;
       koulutusalaTyollisyydet?: components['schemas']['KoulutusAlaDto'][];
-      koulutusasteTyollisyydet?: components['schemas']['KoulutusAsteDto'][];
+      koulutusasteTyollisyydet?: components['schemas']['KoulutusasteDto'][];
       maakuntaTyollisyydet?: components['schemas']['MaakuntaDto'][];
     };
     TyomahdollisuusFullDto: {
@@ -1874,7 +1872,7 @@ export interface operations {
       };
     };
   };
-  muuOsaaminenFindAll: {
+  muuOsaaminenGet: {
     parameters: {
       query?: never;
       header?: never;
@@ -1894,7 +1892,7 @@ export interface operations {
       };
     };
   };
-  muuOsaaminenUpdate: {
+  muuOsaaminenUpdateOsaamiset: {
     parameters: {
       query?: never;
       header?: never;

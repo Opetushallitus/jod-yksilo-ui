@@ -261,6 +261,8 @@
   "search": {
     "description": "You can search for opportunities using free text search. You can influence the visibility of results by filtering the list.",
     "filters": "Filters",
+    "global-placeholder": "Search in sections",
+    "label": "Search in sections",
     "no-results": "No results found for the search term.",
     "profile-card-description": "Log in and create your own competence profile. This way your information is saved.",
     "profile-card-title": "Create your own competence profile",

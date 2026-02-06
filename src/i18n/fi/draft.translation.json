@@ -267,6 +267,8 @@
   "search": {
     "description": "Voit hakea mahdollisuuksia käyttämällä vapaasanahakua. Tulosten näkyvyyteen voit vaikuttaa suodattamalla listaa.",
     "filters": "Suodattimet",
+    "global-placeholder": "Hae Yksilön osioista",
+    "label": "Hae Yksilön osiosta",
     "no-results": "Hakusanalla ei löytynyt tuloksia.",
     "profile-card-description": "Kirjaudu ja luo oma osaamisprofiili. Näin tietosi pysyvät tallessa.",
     "profile-card-title": "Luo oma osaamisprofiili",

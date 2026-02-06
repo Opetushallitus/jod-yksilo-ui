@@ -1,5 +1,6 @@
 import { FeedbackModal } from '@/components';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
+import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
 import { useLoginLink } from '@/hooks/useLoginLink';
@@ -46,6 +47,7 @@ const Root = () => {
   const { addPermanentNote, removePermanentNote, addTemporaryNote, removeTemporaryNote } = useNoteStack();
   const [navMenuOpen, setNavMenuOpen] = React.useState(false);
   const [feedbackVisible, setFeedbackVisible] = React.useState(false);
+  const [searchInputVisible, setSearchInputVisible] = React.useState(false);
   const logoutForm = React.useRef<HTMLFormElement>(null);
   const isCvPage = !!useMatch(`/${language}/cv`);
 
@@ -238,6 +240,9 @@ const Root = () => {
           )}
           serviceBarVariant="yksilo"
           serviceBarTitle={t('my-competence-path')}
+          serviceBarContent={
+            <SearchBar searchInputVisible={searchInputVisible} setSearchInputVisible={setSearchInputVisible} />
+          }
           translations={{
             showAllNotesLabel: t('show-all'),
             ariaLabelCloseNote: t('close'),

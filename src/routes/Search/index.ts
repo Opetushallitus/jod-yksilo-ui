@@ -1,1 +1,4 @@
-export { default as Search } from './Search';
+import Search from './Search';
+import loader from './loader';
+
+export { Search, loader as searchLoader };

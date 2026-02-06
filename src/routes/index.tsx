@@ -23,7 +23,7 @@ import { FreeTimeActivities } from './Profile/FreeTimeActivities';
 import { profilePreferencesLoader } from './Profile/Preferences';
 import ProfileFront from './Profile/ProfileFront/ProfileFront';
 import { ErrorBoundary, NoMatch, Root, loader as rootLoader } from './Root';
-import { Search } from './Search';
+import { Search, searchLoader } from './Search';
 
 const competencesSlug = 'slugs.profile.competences';
 
@@ -209,10 +209,11 @@ const searchRoutes = (): RouteObject[] =>
           ({
             id: `{slugs.search}|${lng}`,
             path: i18n.t('slugs.search', { lng }),
-            element: <Search />,
             handle: {
               title: i18n.t('search.title', { lng }),
             },
+            element: <Search />,
+            loader: searchLoader,
           }) as RouteObject,
       )
     : [];
