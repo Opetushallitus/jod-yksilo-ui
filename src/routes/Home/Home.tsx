@@ -5,7 +5,7 @@ import heroSrc4 from '@/../assets/yksilo-hero-4.jpg';
 import type { components } from '@/api/schema';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { getLinkTo } from '@/utils/routeUtils';
-import { HeroCard, type LinkComponent, tidyClasses as tc } from '@jod/design-system';
+import { HeroCard, type LinkComponent, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -84,6 +84,8 @@ const Home = () => {
     i18n: { language },
   } = useTranslation();
 
+  const { sm } = useMediaQueries();
+
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
   const firstCardRef = React.useRef<HTMLDivElement>(null);
 
@@ -110,6 +112,11 @@ const Home = () => {
 
   const toolLink = `/${language}/${t('slugs.tool.index')}`;
 
+  const heroHeight = React.useMemo(() => {
+    return window.innerHeight - 68;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.innerWidth]);
+
   return (
     <main role="main" className="mx-auto w-full max-w-(--breakpoint-xl) bg-white" id="jod-main" data-testid="home-page">
       <title>{t('my-competence-path')}</title>
@@ -118,7 +125,8 @@ const Home = () => {
         src={heroSrc}
         alt=""
         role="none"
-        className="w-(--breakpoint-xl) sm:h-[617px] h-[calc(100vh-104px)] object-cover xl:object-[50%_50%] lg:object-[60%_50%] md:object-[67%_50%] sm:object-[71%_50%] object-[72%_50%]"
+        className="w-(--breakpoint-xl) sm:h-[617px] object-cover xl:object-[50%_50%] lg:object-[60%_50%] md:object-[67%_50%] sm:object-[71%_50%] object-[72%_50%] pointer-events-none select-none touch-none"
+        style={sm ? undefined : { height: heroHeight }}
         data-testid="home-hero"
       />
 
