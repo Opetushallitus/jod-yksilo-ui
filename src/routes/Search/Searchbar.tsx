@@ -22,7 +22,7 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const queryParams = new URLSearchParams();
-    queryParams.set('s', query);
+    queryParams.set('q', query);
     navigate(`/${language}/${t('slugs.search')}?${queryParams.toString()}`);
     search(query);
   };

@@ -14,6 +14,8 @@ export const SearchInput = ({ value, onChange }: SearchInputProps) => {
       <input
         id="search-input"
         type="text"
+        minLength={3}
+        maxLength={400}
         value={value}
         onChange={onChange}
         placeholder={t('search.global-placeholder')}

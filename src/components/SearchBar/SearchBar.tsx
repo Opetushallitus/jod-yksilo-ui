@@ -33,7 +33,7 @@ export const SearchBar = ({ searchInputVisible, setSearchInputVisible }: SearchB
     e.preventDefault();
     globalThis._paq?.push(['trackEvent', 'yksilo.Haku', 'Hakusana', searchValue]);
     const queryParams = new URLSearchParams();
-    queryParams.set('s', searchValue);
+    queryParams.set('q', searchValue);
     navigate(`/${language}/${t('slugs.search')}?${queryParams.toString()}`);
     setTimeout(() => {
       setSearchValue('');
