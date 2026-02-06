@@ -498,22 +498,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/haku': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['hakuSearch'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/ehdotus/osaamiset': {
     parameters: {
       query?: never;
@@ -695,6 +679,22 @@ export interface paths {
       cookie?: never;
     };
     get: operations['osaaminenFind'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/mahdollisuudet/haku': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['mahdollisuudetHakuSearch'];
     put?: never;
     post?: never;
     delete?: never;
@@ -1006,27 +1006,6 @@ export interface components {
       tyopaikat?: string[];
       koulutuskokonaisuudet?: string[];
       toiminnot?: string[];
-    };
-    SearchRequest: {
-      query: string;
-    };
-    MahdollisuusDto: {
-      /** Format: uuid */
-      id?: string;
-      /** @enum {string} */
-      tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
-      ammattiryhma?: string;
-      /** @enum {string} */
-      aineisto?: 'TMT' | 'AMMATTITIETO';
-      /** @enum {string} */
-      koulutusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
-      maakunnat?: string[];
-      /** Format: double */
-      kesto?: number;
-      /** Format: double */
-      kestoMinimi?: number;
-      /** Format: double */
-      kestoMaksimi?: number;
     };
     Ehdotus: {
       /** Format: uri */
@@ -1341,6 +1320,24 @@ export interface components {
        * @example 3
        */
       sivuja: number;
+    };
+    MahdollisuusDto: {
+      /** Format: uuid */
+      id?: string;
+      /** @enum {string} */
+      tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      ammattiryhma?: string;
+      /** @enum {string} */
+      aineisto?: 'TMT' | 'AMMATTITIETO';
+      /** @enum {string} */
+      koulutusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
+      maakunnat?: string[];
+      /** Format: double */
+      kesto?: number;
+      /** Format: double */
+      kestoMinimi?: number;
+      /** Format: double */
+      kestoMaksimi?: number;
     };
     KestoJakaumaDto: {
       /** Format: double */
@@ -2728,30 +2725,6 @@ export interface operations {
       };
     };
   };
-  hakuSearch: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['SearchRequest'];
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['MahdollisuusDto'][];
-        };
-      };
-    };
-  };
   osaamisetEhdotusCreateEhdotus: {
     parameters: {
       query?: never;
@@ -3061,6 +3034,29 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['SivuDtoOsaaminenDto'];
+        };
+      };
+    };
+  };
+  mahdollisuudetHakuSearch: {
+    parameters: {
+      query: {
+        kieli?: 'fi' | 'sv' | 'en';
+        teksti: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['MahdollisuusDto'][];
         };
       };
     };

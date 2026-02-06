@@ -668,7 +668,7 @@ function checkTranslationFileSorted(lang) {
   /** Recursively check object key order */
   function isSorted(obj, basePath = '') {
     const keys = Object.keys(obj);
-    const sortedKeys = [...keys].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+    const sortedKeys = [...keys].sort();
     const sorted = JSON.stringify(keys) === JSON.stringify(sortedKeys);
 
     const unsortedPaths = [];

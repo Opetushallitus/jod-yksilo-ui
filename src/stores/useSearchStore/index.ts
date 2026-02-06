@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import type { components } from '@/api/schema';
+import i18n from '@/i18n/config';
 import type { OpportunitySortingValue } from '@/routes/Tool/utils';
 import type { TypedMahdollisuus } from '@/routes/types';
 import { DEFAULT_SORTING } from '@/stores/useToolStore/ToolStoreModel';
@@ -146,8 +147,13 @@ export const useSearchStore = create<SearchStoreState>()(
         // Abort previous request if exists
         abortController.abort();
         abortController = new AbortController();
-        const { data = [], error } = await client.POST('/api/haku', {
-          body: { query },
+        const { data = [], error } = await client.GET('/api/mahdollisuudet/haku', {
+          params: {
+            query: {
+              kieli: i18n.language as 'fi' | 'sv' | 'en',
+              teksti: query.trim(),
+            },
+          },
           signal: abortController.signal,
         });
 
