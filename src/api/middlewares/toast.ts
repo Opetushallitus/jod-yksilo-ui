@@ -12,7 +12,6 @@ const isModifyingMethod = (method: string): method is Method => {
 };
 
 const ignoredOperations: Partial<Record<keyof paths, Method[]>> = {
-  '/api/haku': ['POST'],
   '/api/ehdotus/osaamiset': ['POST'],
   '/api/ehdotus/mahdollisuudet': ['POST'],
   '/api/keskustelut': ['POST'],

@@ -202,17 +202,20 @@ const getCvRoute = (): RouteObject[] =>
       )
     : [];
 
-const searchRoutes = supportedLanguageCodes.map(
-  (lng) =>
-    ({
-      id: `{slugs.search}|${lng}`,
-      path: i18n.t('slugs.search', { lng }),
-      element: <Search />,
-      handle: {
-        title: i18n.t('search.title', { lng }),
-      },
-    }) as RouteObject,
-);
+const searchRoutes = (): RouteObject[] =>
+  isFeatureEnabled('MAHDOLLISUUDET_HAKU')
+    ? supportedLanguageCodes.map(
+        (lng) =>
+          ({
+            id: `{slugs.search}|${lng}`,
+            path: i18n.t('slugs.search', { lng }),
+            element: <Search />,
+            handle: {
+              title: i18n.t('search.title', { lng }),
+            },
+          }) as RouteObject,
+      )
+    : [];
 
 const getRootRoute = (): RouteObject => ({
   id: 'root',
@@ -237,7 +240,7 @@ const getRootRoute = (): RouteObject => ({
     ...jobOpportunityRoutes,
     ...educationOpportunityRoutes,
     ...profileLandingPageRoutes,
-    ...searchRoutes,
+    ...searchRoutes(),
     { path: '*', element: <NoMatch /> },
   ],
 });
