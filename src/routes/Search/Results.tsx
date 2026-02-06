@@ -29,9 +29,9 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
 
   return (
     <section aria-busy={isLoading}>
-      <div role="status" aria-live="polite" className="sr-only">
+      <output aria-live="polite" className="sr-only">
         {statusText}
-      </div>
+      </output>
       {isLoading && (
         <div aria-hidden="true" className="flex flex-col gap-5 sm:gap-3 mb-8">
           <OpportunityCardSkeleton />

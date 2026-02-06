@@ -329,6 +329,8 @@
   "search": {
     "description": "Du kan söka efter möjligheter med hjälp av fritextsökning. Du kan påverka synligheten av resultaten genom att filtrera listan.",
     "filters": "Filter",
+    "global-placeholder": "Sök i sektioner",
+    "label": "Sök i sektioner",
     "no-results": "Inga resultat hittades för sökordet.",
     "profile-card-description": "Logga in och skapa din egen kompetensprofil. På så sätt sparas din information.",
     "profile-card-title": "Skapa din egen kompetensprofil",

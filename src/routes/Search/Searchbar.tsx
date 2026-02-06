@@ -2,11 +2,16 @@ import { useSearchStore } from '@/stores/useSearchStore';
 import { JodClose, JodSearch } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 
 export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement | null> }) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const formId = React.useId();
+  const navigate = useNavigate();
   const { search, setQuery, query } = useSearchStore(
     useShallow((state) => ({
       search: state.search,
@@ -16,6 +21,9 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
   );
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const queryParams = new URLSearchParams();
+    queryParams.set('s', query);
+    navigate(`/${language}/${t('slugs.search')}?${queryParams.toString()}`);
     search(query);
   };
   return (
