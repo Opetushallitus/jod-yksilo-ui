@@ -240,13 +240,13 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoite, suunnitelmaId }: A
         <div className="flex flex-row gap-5 flex-1 justify-end">
           <div className="flex flex-row gap-5">
             <Button
-              label={t('cancel')}
+              label={t('common:cancel')}
               variant="white"
               className="h-5"
               size={sm ? 'lg' : 'sm'}
               onClick={() => {
                 showDialog({
-                  title: t('cancel'),
+                  title: t('common:cancel'),
                   description: t('profile.paths.cancel-confirmation-text'),
                   confirmText: t('close'),
                   cancelText: t('profile.paths.continue-editing'),

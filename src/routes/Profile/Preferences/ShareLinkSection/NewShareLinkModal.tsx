@@ -208,7 +208,12 @@ export const NewShareLinkModal = ({ isOpen, onClose, id }: NewShareLinkModalProp
       footer={
         <div className="flex justify-between gap-5 flex-1" data-testid="share-link-wizard-footer">
           <div className="flex gap-5 ml-auto">
-            <Button onClick={() => onClose(true)} label={t('cancel')} variant="white" testId="share-link-cancel" />
+            <Button
+              onClick={() => onClose(true)}
+              label={t('common:cancel')}
+              variant="white"
+              testId="share-link-cancel"
+            />
             {step > 1 && (
               <Button
                 onClick={() => {

@@ -189,7 +189,7 @@ export const OpportunityCardWrapper = ({
 
     if (!isLoggedIn) {
       showDialog({
-        title: t('login'),
+        title: t('common:login'),
         description: t('login-for-favorites'),
         footer: createLoginDialogFooter(t, loginLink, closeAllModals),
       });

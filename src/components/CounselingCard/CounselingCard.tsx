@@ -21,7 +21,7 @@ export const CounselingCard = () => {
         <Button
           label={t('move-to-service')}
           iconSide="right"
-          icon={<JodOpenInNew size={24} ariaLabel={t('external-link')} />}
+          icon={<JodOpenInNew size={24} ariaLabel={t('common:external-link')} />}
           variant="white"
           linkComponent={getLinkTo(link, { useAnchor: true, target: '_blank' })}
           className="w-fit"

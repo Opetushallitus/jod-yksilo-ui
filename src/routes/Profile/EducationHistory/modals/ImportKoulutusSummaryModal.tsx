@@ -236,7 +236,7 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
               className="whitespace-nowrap"
               ref={cancelButtonRef}
               variant="white"
-              label={t('cancel')}
+              label={t('common:cancel')}
               onClick={() => {
                 if (error) {
                   closeActiveModal();

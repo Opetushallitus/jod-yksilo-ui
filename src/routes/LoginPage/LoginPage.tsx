@@ -82,9 +82,9 @@ const LoginPage = () => {
           variant="plain"
           serviceVariant="yksilo"
           label={t('privacy-policy')}
-          icon={<JodOpenInNew ariaLabel={t('external-link')} />}
+          icon={<JodOpenInNew ariaLabel={t('common:external-link')} />}
           iconSide="right"
-          linkComponent={getLinkTo(`/${language}/${t('slugs.privacy-and-cookies')}`, {
+          linkComponent={getLinkTo(`/${language}/${t('common:slugs.privacy-and-cookies')}`, {
             useAnchor: true,
             target: '_blank',
             rel: 'noopener noreferrer',

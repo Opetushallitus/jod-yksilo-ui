@@ -163,10 +163,10 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
         <Trans
           i18nKey="introduction.step-2.text-4"
           components={{
-            Icon: <JodOpenInNew ariaLabel={t('external-link')} />,
+            Icon: <JodOpenInNew ariaLabel={t('common:external-link')} />,
             CustomLink: (
               <Link
-                href={`/${language}/${t('slugs.privacy-and-cookies')}`}
+                href={`/${language}/${t('common:slugs.privacy-and-cookies')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex text-accent hover:underline"
@@ -199,10 +199,10 @@ const StepAi = () => {
           <Trans
             i18nKey="introduction.step-3.text-2"
             components={{
-              Icon: <JodOpenInNew ariaLabel={t('external-link')} />,
+              Icon: <JodOpenInNew ariaLabel={t('common:external-link')} />,
               CustomLink: (
                 <Link
-                  href={`/${language}/${t('slugs.ai-usage')}`}
+                  href={`/${language}/${t('common:slugs.ai-usage')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex text-accent hover:underline"

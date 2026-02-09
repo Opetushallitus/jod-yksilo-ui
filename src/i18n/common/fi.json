@@ -1,0 +1,145 @@
+{
+  "breadcrumb": "Murupolku",
+  "cancel": "Peruuta",
+  "close-menu": "Sulje valikko",
+  "competency-path-portal": "Osaamispolun etusivu",
+  "delete": "Poista",
+  "error-boundary": {
+    "session-expired": "Istuntosi on vanhentunut. Sinun täytyy kirjautua palveluun uudelleen tai käyttää palvelua ilman kirjautumista.",
+    "title": "Tapahtui virhe",
+    "unexpected": "Tapahtui odottamaton virhe. Tämä voi johtua verkkoyhteyden katkeamisesta tai palvelun virheestä."
+  },
+  "error": {
+    "form": {
+      "email": "Tarkista sähköpostiosoite",
+      "required": "Pakollinen kenttä"
+    }
+  },
+  "external-link": "Linkki johtaa palvelun ulkopuolelle",
+  "feedback": {
+    "cancel": "Peruuta",
+    "email-label": "Sähköpostiosoite",
+    "error": "Palautteen lähettäminen epäonnistui. Yritä myöhemmin uudelleen.",
+    "footer-handled": {
+      "ohjaajan": "Ohjaajan osio KEHA-keskuksessa,",
+      "osaamispolkuni": "Osaamispolkuni Opetushallituksessa,",
+      "tietopalvelu": "Tietopalvelu, koko palvelu ja muu palaute opetus- ja kulttuuriministeriössä."
+    },
+    "footer-info-1": "Kun lähetät palautetta, tallennamme palvelun tilatiedon, kuten mistä näkymästä palaute on lähetetty. Tilatietoa ei välitetä eteenpäin kolmansille osapuolille. Palautteita käytetään palvelun kehittämiseen ja vapaaehtoisesti jätettäviä yhteystietoja palautteisiin vastaamiseen.",
+    "footer-info-heading": "Palaute käsitellään osiosta riippuen seuraavasti:",
+    "footer-privacy-heading": "Lue lisää palautteiden käsittelijöiden tietosuojaseloisteista:",
+    "intro-1": "Anna palautetta palvelusta tai ilmoita teknisestä ongelmasta. Näin autat meitä palveluiden kehittämisessä.",
+    "intro-2": "Jos raportoit häiriötilanteesta, meitä auttaisi, että kerrot siitä mahdollisimman tarkasti.",
+    "intro-privacy": "Älä kirjoita palautteeseen henkilökohtaisia tietoja, kuten henkilötunnusta tai terveystietoja. Täytähän kaikki kentät, jotta voimme käsitellä palautteesi.",
+    "linkHrefs": {
+      "keha": "https://tyomarkkinatori.fi/tietoa-palvelusta/tietosuoja-ja-kayttoehdot/tietosuojaselosteet",
+      "okm": "https://okm.fi/tietoa-sivustosta#henkilotiedot",
+      "oph": "https://www.oph.fi/fi/tietosuoja"
+    },
+    "links": {
+      "keha": "KEHA-keskuksen Asiakas- ja neuvontapalveluiden tietosuojaseloste",
+      "okm": "Opetus- ja kulttuuriministeriön tietosuojaseloste",
+      "oph": "Opetushallituksen tietosuojakäytäntö"
+    },
+    "message-label": "Palaute",
+    "section-question": "Mitä osiota palautteesi koskee?",
+    "sections": {
+      "koko-palvelu": "Koko palvelu tai muu palaute",
+      "ohjaajan-osio": "Ohjaajan osio",
+      "osaamispolkuni": "Osaamispolkuni",
+      "tietopalvelu": "Tietopalvelu"
+    },
+    "submit": "Lähetä",
+    "success": "Kiitos palautteestasi! Palautteesi auttaa meitä parantamaan palvelua.",
+    "title": "Anna palautetta",
+    "type-question": "Minkälaista palautetta haluat antaa?",
+    "types": {
+      "kehitysehdotus": "Kehitysehdotus",
+      "kehu": "Kehu",
+      "moite": "Moite",
+      "vika": "Tekninen vika tai ongelma"
+    },
+    "wants-contact": "Haluan, että minuun otetaan yhteyttä."
+  },
+  "footer": {
+    "cooperation-title": "Osaamispolku on toteutettu yhteistyössä seuraavien tahojen toimesta",
+    "copyright": "© Osaamispolku 2026. Kaikki oikeudet pidätetään.",
+    "feedback-button-label": "Anna palautetta",
+    "feedback-content": "Haluamme kehittää Osaamispolkua vastaamaan paremmin juuri sinun tarpeitasi. Anna meille palautetta ja huomioimme sen kehitystyössä.",
+    "feedback-title": "Kerro meille, mitä pidit palvelusta!",
+    "funding-title": "Palvelu on rahoitettu EU:n elpymis- ja palautumistukivälineellä (RRF)",
+    "logos": {
+      "keha-label": "KEHA-keskus",
+      "okm-label": "Opetus- ja kulttuuriministeriö",
+      "oph-label": "Opetushallitus",
+      "tem-label": "Työ- ja elinkeinoministeriö"
+    },
+    "more-info-description": "Mietityttääkö tietosuoja tai tekoälyn hyödyntäminen palvelussa? Alta löydät kootusti yleistä tietoa palvelusta ja sen käytöstä.",
+    "more-info-links": {
+      "about-service": "Tietoa palvelusta",
+      "accessibility": "Tietoa saavutettavuudesta",
+      "ai-usage": "Tietoa tekoälyn käytöstä",
+      "data-sources": "Datalähteet",
+      "privacy-and-cookies": "Tietosuojaseloste ja evästeet"
+    },
+    "more-info-title": "Haluatko tietää lisää Osaamispolusta?"
+  },
+  "language-selection": "Käyttökieli",
+  "login": "Kirjaudu",
+  "logout": "Kirjaudu ulos",
+  "main-navigation": "Päänavigaatio",
+  "menu": "Valikko",
+  "navigation": {
+    "external": {
+      "ohjaaja": {
+        "description": "Tietoja ja materiaaleja ohjaukseen",
+        "label": "Ohjaajan osio"
+      },
+      "tietopalvelu": {
+        "description": "Tietoa päätöksenteon tueksi",
+        "label": "Tietopalvelu"
+      },
+      "title": "Osaamispolun sisältökokonaisuudet",
+      "yksilo": {
+        "description": "Henkilökohtainen osaamispolku",
+        "label": "Osaamispolkuni"
+      }
+    },
+    "extra": {
+      "palveluhakemisto": {
+        "label": "Ohjaus- ja neuvontapalveluja",
+        "url": "https://www.suomi.fi/aihe/ohjaus-ja-neuvontapalveluja"
+      },
+      "title": "Muuta tukea pohdintaan",
+      "urataidot": {
+        "label": "Urataitojen itsearviointi"
+      }
+    }
+  },
+  "navigation-menu": "Valikko",
+  "no-match": {
+    "description": "Etsimääsi sivua ei löytynyt tai linkki on vanhentunut. Tarkista osoite, avaa valikko tai siirry etusivulle.",
+    "go-home": "Siirry etusivulle",
+    "title": "Hups! Sivua ei löytynyt"
+  },
+  "note": {
+    "close": "Sulje"
+  },
+  "open-submenu": "Avaa alivalikko",
+  "osaamispolku": "Osaamispolku",
+  "print": "Tulosta",
+  "required": "pakollinen",
+  "return-home": "Palaa etusivulle",
+  "share": "Jaa",
+  "show-all": "Näytä kaikki",
+  "skiplinks": {
+    "main": "Siirry pääsisältöön"
+  },
+  "slugs": {
+    "about-service": "tietoa-palvelusta",
+    "accessibility": "tietoa-saavutettavuudesta",
+    "ai-usage": "tietoa-tekoalyn-kaytosta",
+    "data-sources": "datalahteet",
+    "privacy-and-cookies": "tietosuojaseloste-ja-evasteet"
+  }
+}

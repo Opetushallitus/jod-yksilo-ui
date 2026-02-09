@@ -50,9 +50,13 @@ export const AiInfo = ({ type = 'tool', size }: AiInfoProps) => {
         <Trans
           i18nKey="ai-info-tooltip.description-summary"
           components={{
-            Icon: <JodOpenInNew size={18} ariaLabel={t('external-link')} />,
+            Icon: <JodOpenInNew size={18} ariaLabel={t('common:external-link')} />,
             CustomLink: (
-              <Link href={`/${language}/${t('slugs.ai-usage')}`} className="inline-flex underline" target="_blank" />
+              <Link
+                href={`/${language}/${t('common:slugs.ai-usage')}`}
+                className="inline-flex underline"
+                target="_blank"
+              />
             ),
           }}
         ></Trans>

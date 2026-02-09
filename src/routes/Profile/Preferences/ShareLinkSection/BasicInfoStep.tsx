@@ -58,7 +58,7 @@ export const BasicInfoStep = () => {
                   field.onBlur();
                 }}
                 placeholder={t('date-placeholder')}
-                requiredText={t('required')}
+                requiredText={t('common:required')}
                 translations={datePickerTranslations}
                 minDate={minDate}
                 maxDate={maxDate}

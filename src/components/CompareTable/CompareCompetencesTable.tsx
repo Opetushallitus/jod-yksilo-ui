@@ -45,7 +45,7 @@ export const CompareCompetencesTable = ({ rows, mode = 'osaaminen' }: CompareCom
           className="text-accent text-button-sm sm:text-button-sm mt-6 sm:px-5 font-poppins cursor-pointer print:hidden"
           data-testid="compare-competences-toggle"
         >
-          {showAll ? t('show-less') : t('show-all')}
+          {showAll ? t('show-less') : t('common:show-all')}
         </button>
       )}
     </div>

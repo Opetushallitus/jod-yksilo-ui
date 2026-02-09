@@ -291,7 +291,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
           <div className="flex gap-3">
             <Button
               onClick={onClickCancelHandler}
-              label={t('cancel')}
+              label={t('common:cancel')}
               variant="white"
               className="whitespace-nowrap"
               testId="free-time-cancel"

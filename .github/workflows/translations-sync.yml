@@ -1,0 +1,37 @@
+name: Sync Translations to Tolgee
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  sync-translations:
+    name: Push translations and tag keys
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/jod
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts && npm exec allow-scripts run
+
+      - name: Push translations to Tolgee
+        env:
+          TOLGEE_API_KEY: ${{ secrets.TOLGEE_API_KEY }}
+        run: npm run translations:push
+
+      - name: Manage Tolgee tags
+        env:
+          TOLGEE_API_KEY: ${{ secrets.TOLGEE_API_KEY }}
+          GITHUB_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: npm run translations:tag

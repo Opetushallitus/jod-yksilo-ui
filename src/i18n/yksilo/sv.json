@@ -2,29 +2,80 @@
   "add-favorite": "Spara som favorit",
   "ai-info-tooltip": {
     "aria-description": "Information om användningen av artificiell intelligens",
+    "description-disclaimer": "Obs! Innehåll som har skapats med artificiell intelligens kan innehålla fel.",
+    "description-opportunity-education-note": "Vi har också använt AI för att identifiera kompetenser för utbildningsmöjligheter.",
+    "description-opportunity-intro": "Vi har använt en språkmodell för att skapa innehållet på denna sida i följande delar:",
+    "description-opportunity-item-1": "möjlighetens namn",
+    "description-opportunity-item-2": "beskrivning",
+    "description-opportunity-item-3": "de vanligaste arbetsuppgifterna",
+    "description-summary": "Läs mer: <CustomLink>Om användningen av AI<Icon></Icon></CustomLink>",
+    "description-tool-intro": "Vi har använt AI för att skapa innehållet på denna sida i följande delar:",
+    "description-tool-item-1": "andra jobbmöjligheter",
+    "description-tool-item-2": "utbildningsmöjligheter",
+    "description-tool-item-3": "individuella förslag på möjligheter som passar dig",
     "title": "Innehåll genererat med hjälp av artificiell intelligens"
   },
-  "breadcrumb": "Synlig sökväg",
-  "cancel": "Avbryt",
   "choose": "Välj",
   "close": "Stäng",
-  "close-menu": "Stäng menyn",
   "compare": "Jämför",
   "competence": "Kompetens",
   "competences": "Kompetenser",
   "competences-identify-failed": "Kompetensidentifiering med artificiell intelligens misslyckades.",
   "competences-identifying": "Du kan redigera utbildningen efter att kompetenserna har laddats.",
   "competences-of-your-choice": "Valda kompetenser",
-  "competency-path-portal": "Kompetensstigens startsida",
   "content": "Innehåll",
   "create-path": "Skapa stig",
-  "date-or-continues-placeholder": "dd.mm.åååå eller fortsätter",
-  "date-placeholder": "dd.mm.åååå",
+  "cv": {
+    "basic-info": {
+      "birthyear": "Födelseår",
+      "email": "E-post",
+      "home-city": "Hemstad",
+      "person": "Person",
+      "title": "Grundläggande information"
+    },
+    "competence": {
+      "activities": "Fritidsaktiviteter",
+      "description": "Detta avsnitt samlar användarens kompetenser från olika källor: arbetsplatser, utbildningar, fritidsaktiviteter och annan kompetens. Du kan granska kompetenserna närmare genom att öppna sektionerna. I slutet finns användarens egen fria beskrivning relaterad till kompetenser.",
+      "education": "Utbildningar",
+      "something-else": "Annan kompetens",
+      "something-else-freetext": "Fri beskrivning av kompetens",
+      "title": "Kompetens",
+      "work": "Arbetsplatser"
+    },
+    "favorites": {
+      "description": "Jobb- och utbildningsmöjligheter som användaren sparat, samlade som favoriter på ett ställe.",
+      "education-opportunities": "Utbildningsmöjligheter",
+      "job-opportunities": "Karriärmöjligheter",
+      "title": "Mina favoriter"
+    },
+    "goals": {
+      "options": "Planalternativ",
+      "title": "Mina mål"
+    },
+    "ingress": "Ägaren av kompetensvägsprofilen har delat denna länk så att du kan se deras information. Länken är giltig till och med {{date}}.",
+    "interests": {
+      "competences": "Intressanta kompetenser",
+      "description": "Detta avsnitt samlar användarens intressen: intressanta kompetenser och yrken samt användarens egen fria beskrivning relaterad till intressen.",
+      "freetext": "Fri beskrivning av intressen",
+      "occupations": "Intressanta yrken",
+      "title": "Intressen"
+    },
+    "move-to-service": "Gå till tjänsten",
+    "osaamispolku-description": "Livet förändras – och vi finns här för att stötta dig. Oavsett om du byter bransch, lär dig något nytt eller förbättrar din vardag, ger vi dig lättförståelig information och inspiration för att stötta din egen väg.",
+    "title": "Kompetensprofil"
+  },
+  "date-or-continues-placeholder": "dd.mm.åååå",
   "datepicker": {
     "actions": {
       "close": "Stäng kalendern",
       "open": "Öppna kalendern",
       "select": "Välj"
+    },
+    "aria-roledescription": {
+      "datepicker": "Datumväljare",
+      "decade": "kalenderdecennium",
+      "month": "kalendermånad",
+      "year": "kalenderår"
     },
     "day": {
       "next": "Byt till nästa månad",
@@ -42,7 +93,7 @@
       "view": "Växla till dagsvy"
     }
   },
-  "delete": "Ta bort",
+  "date-placeholder": "dd.mm.åååå",
   "description": "Beskrivning",
   "do-filter": "Filtrera",
   "duration": "Längd",
@@ -51,14 +102,15 @@
     "add-new-education": "Lägg till ny utbildning",
     "add-studies-to-education": "Lägg till studier i utbildningen",
     "add-studies-to-this-education": "Lägg till studier i den här utbildningen",
+    "add-studies-to-this-education-button": "Lägg studier",
     "confirm-delete-degree": "Är du säker på att du vill ta bort examen ”{{name}}”? Om utbildningen efter raderingen inte längre innehåller några examina, raderas även utbildningen.",
     "confirm-delete-education-history": "Är du säker på att du vill ta bort utbildningen ”{{name}}”?",
     "delete-degree": "Ta bort examen",
     "delete-education-history": "Ta bort utbildning",
     "edit-degree-or-education": "Redigera examen eller utbildning",
     "edit-education": "Redigera utbildning",
-    "education-provider-or-education": "Utbildningsanordnare/utbildning",
     "educational-institution-or-education-provider": "Läroanstalt eller utbildningsanordnare",
+    "education-provider-or-education": "Utbildningsanordnare/utbildning",
     "identify-competences": "Identifiera kompetenser",
     "import-education-history": "Importera min utbildningshistorik",
     "name-of-degree-or-education": "Namn på examen eller utbildning",
@@ -84,8 +136,8 @@
         "title": "Avbryt import"
       },
       "data-load-failed": "Laddning av uppgifter misslyckades. Försök på nytt senare.",
-      "data-load-no-data": "Utbildningsinformation hittades inte eller så har du inte rätt att granska informationen.",
       "data-loading": "Hämtar information från Studieinfo...",
+      "data-load-no-data": "Utbildningsinformation hittades inte eller så har du inte rätt att granska informationen.",
       "description": "Du kan redigera utbildningarna efter att du har importerat dem till Kompetensstigen under utbildningar i din kompetensprofil.\n",
       "table-header-checkbox": "Importera valda",
       "title": "Sammanfattning",
@@ -102,7 +154,12 @@
       "average-months_one": "Den genomsnittliga längden på utbildningen är {{count}} månad.",
       "average-months_other": "Den genomsnittliga längden på utbildningen är {{count}} månader.",
       "average-years_one": "Den genomsnittliga längden på utbildningen är {{count}} år.",
-      "average-years_other": "Den genomsnittliga längden på utbildningen är {{count}} år."
+      "average-years_other": "Den genomsnittliga längden på utbildningen är {{count}} år.",
+      "of-month_one": "{{count}} månad",
+      "of-month_other": "{{count}} månader",
+      "of-year": "{{count}} år",
+      "range": "Varaktigheten kan variera mellan {{min}} och {{max}}.",
+      "years-and-months": "{{years}} och {{months}}"
     },
     "education-characteristics": "Utbildningens särdrag",
     "of-educations": "av anmälda utbildningar.",
@@ -118,95 +175,27 @@
   "error": {
     "form": {
       "date": "Kontrollera datum",
+      "date-in-the-past": "Datumet kan inte vara i det förflutna",
       "date-range": "Startdatum kan inte vara efter slutdatum",
+      "date-too-far": "Datumet ligger för långt i framtiden",
       "max": "Maximilängden är {{count}} tecken",
-      "min_many": "Minimilängden är {{count}} tecken",
-      "min_one": "Minimilängden är {{count}} tecken",
-      "required": "Obligatoriskt fält",
+      "min_many": "Minimilängden är {{count, number}} tecken",
+      "min_one": "Minimilängden är {{count, number}} tecken",
+      "min_other": "",
       "url": "Kontrollera webbadressen"
     }
   },
-  "error-boundary": {
-    "title": "Ett fel inträffade",
-    "unexpected": "Ett oväntat fel har inträffat. Detta kan bero på avbrott i nätförbindelsen eller ett fel i tjänsten."
-  },
-  "external-link": "Länken leder dig utanför tjänsten",
-  "feedback": {
-    "cancel": "Avbryt",
-    "email-label": "E-postadress",
-    "error": "Det gick inte att skicka respons. Försök på nytt senare.",
-    "footer-handled": {
-      "ohjaajan": "Vägledarens avsnitt på UF-centret,",
-      "osaamispolkuni": "Min kompetensstig i Utbildningsstyrelsen,",
-      "tietopalvelu": "Informationstjänsten, hela tjänsten och annan respons hos undervisnings- och kulturministeriet."
-    },
-    "footer-info-1": "När du skickar respons sparar vi tjänstens statusinformation, till exempel från vilken vy responsen har skickats. Statusinformationen vidarebefordras inte till tredje parter. Respons används för utveckling av tjänsten och frivilligt lämnade kontaktuppgifter används för att svara på respons.",
-    "footer-info-heading": "Beroende på avsnitt behandlas respons på följande sätt:",
-    "footer-privacy-heading": "Läs mer i responshanterarnas dataskyddsbeskrivningar:",
-    "intro-1": "Ge respons om tjänsten eller rapportera ett tekniskt problem. På så sätt hjälper du oss i utvecklingen av tjänsterna.",
-    "intro-2": "Om du rapporterar en störning skulle det hjälpa oss om du berättar om den så noggrant som möjligt.",
-    "intro-privacy": "Skriv inga personuppgifter i responsen, såsom personbeteckning eller hälsouppgifter. Vänligen fyll i alla fält så att vi kan behandla din respons.",
-    "linkHrefs": {
-      "keha": "https://tyomarkkinatori.fi/sv/information-om-tjansten/dataskydds-och-registerbeskrivning-och-anvandarvillkor/dataskyddsbeskrivningar",
-      "okm": "https://okm.fi/sv/information-om-webbtjanst",
-      "oph": "https://www.oph.fi/sv/integritetspolicy"
-    },
-    "links": {
-      "keha": "Dataskyddsbeskrivning för UF-centrets kund- och rådgivningstjänster",
-      "okm": "Undervisnings- och kulturministeriets dataskyddsbeskrivning",
-      "oph": "Utbildningsstyrelsens integritetspolicy"
-    },
-    "message-label": "Respons",
-    "section-question": "Vilket avsnitt gäller din respons?",
-    "sections": {
-      "koko-palvelu": "Hela tjänsten eller annan respons",
-      "ohjaajan-osio": "Vägledar-delen",
-      "osaamispolkuni": "Min kompetensstig",
-      "tietopalvelu": "Informationstjänst"
-    },
-    "submit": "Skicka",
-    "success": "Tack för din respons! Din respons hjälper oss att förbättra tjänsten.",
-    "title": "Ge respons",
-    "type-question": "Vilken typ av respons vill du ge?",
-    "types": {
-      "kehitysehdotus": "Utvecklingsförslag",
-      "kehu": "Beröm",
-      "moite": "Kritik",
-      "vika": "Tekniskt fel eller problem"
-    },
-    "wants-contact": "Jag vill bli kontaktad."
-  },
+  "filters": "Filter",
   "fit": "Lämplighet",
-  "footer": {
-    "cooperation-title": "Kompetensstigen har genomförts i samarbete mellan följande parter:",
-    "copyright": "© Kompetensstigen 2026. Alla rättigheter förbehålls.",
-    "feedback-button-label": "Ge respons",
-    "feedback-content": "Vi vill utveckla Kompetensstigen så att den bättre motsvarar just dina behov. Ge oss respons, vi beaktar den i utvecklingsarbetet.",
-    "feedback-title": "Berätta för oss vad du tyckte om tjänsten!",
-    "funding-title": "Finansieringen av tjänsten kommer från EU:s facilitet för återhämtning och resiliens (RRF)",
-    "logos": {
-      "keha-label": "UF-centret",
-      "okm-label": "Undervisnings- och kulturministeriet",
-      "oph-label": "Utbildningsstyrelsen",
-      "tem-label": "Arbets- och näringsministeriet"
-    },
-    "more-info-description": "Funderar du på dataskyddet eller hur artificiell intelligens används i tjänsten? Nedan hittar du allmän information om tjänsten och dess användning.",
-    "more-info-links": {
-      "about-service": "Information om tjänsten",
-      "accessibility": "Tillgänglighetsutlåtande",
-      "ai-usage": "Information om användningen av artificiell intelligens",
-      "data-sources": "Datakällor",
-      "privacy-and-cookies": "Dataskyddsbeskrivning och cookies"
-    },
-    "more-info-title": "Vill du veta mer om Kompetensstigen?"
-  },
   "found": "Hittades",
   "free-time-activities": {
     "add-new-activity": "Lägg till ny funktion",
+    "add-new-activity-button": "Lägg aktivitet",
     "add-new-free-time-activity": "Lägg till ny fritidsverksamhet",
     "confirm-delete-free-time-activity": "Är du säker på att du vill ta bort fritidsverksamheten ”{{name}}”? Om fritidsverksamheten efter raderingen inte är kopplad till några behörigheter, raderas även fritidsfunktionen.",
     "confirm-delete-proficiency": "Är du säker på att du vill ta bort behörigheten ”{{name}}”?",
     "delete-free-time-activity": "Ta bort fritidsverksamhet",
+    "delete-free-time-activity-button": "Ta bort",
     "delete-proficiency": "Ta bort behörighet",
     "edit-activity": "Redigera fritidsverksamhet",
     "edit-free-time-theme": "Redigera fritidstema",
@@ -228,11 +217,22 @@
     "hero-content": "I Min kompetensstig kan du kartlägga din egen kompetens, hitta utbildningar för att öka din kompetens, undersöka karriärmöjligheter med din kompetens och kartlägga möjligheter att byta bransch.\n",
     "hero-title": "Min kompetensstig",
     "need-personal-guidance": "Behöver du personlig vägledning?",
-    "need-personal-guidance-content": "Tjänsterna som du kan hitta i väglednings- och rådgivningstjänster hjälper dig att fundera på dina karriär- och utbildningsalternativ. Begränsa listan över tjänster enligt teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst.\n"
+    "need-personal-guidance-content": "Tjänsterna som du kan hitta i väglednings- och rådgivningstjänster hjälper dig att fundera på dina karriär- och utbildningsalternativ. Begränsa listan över tjänster enligt teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst.\n",
+    "personal-guidance": {
+      "content": "Tjänsterna som du kan hitta i väglednings- och rådgivningstjänsterna hjälper dig att fundera på dina arbets- och utbildningsalternativ. Begränsa listan över tjänster enligt teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst.",
+      "link-text": "Gå till Väglednings- och rådgivningstjänster",
+      "title": "Behöver du personlig vägledning?"
+    },
+    "welcome": {
+      "content": "Kompetensstigen-tjänsten har lanserats. Tjänsten utvecklas kontinuerligt baserat på användarfeedback. Funktioner kan förändras och nya funktioner kommer att läggas till regelbundet – tack för att du är med på resan!",
+      "title": "Välkommen till Kompetensstigen!"
+    }
   },
-  "in-this-section": "I den här delen",
+  "i-allow": "Jag tillåter",
+  "i-disallow": "Jag tillåter inte",
   "interests": "Kartlägg dina intressen",
   "interests-of-your-choice": "Valda intressen",
+  "in-this-section": "I den här delen",
   "introduction": {
     "step-1": {
       "item-1": "Se all information om ditt kunnande och dina intressen på en och samma plats",
@@ -322,6 +322,17 @@
       "description": "Vi har identifierat kompetenser som kan erhållas via karriärmöjligheten.",
       "title": "Kompetenser"
     },
+    "employment-data": {
+      "description": "Sysselsättningsutsikterna granskar anställningsmöjligheterna inom yrkesgruppen. Målet är att ge en allmän bild av situationen. Uppgifterna har samlats från andra tjänster där du kan bekanta dig närmare med dem. Mer information om sysselsättningsutsikterna hittar du på Kompetensstigen <CustomLink>informationsservicen<Icon></Icon></CustomLink>",
+      "employed-by-koulutusala": "Sysselsatta efter utbildningsområde",
+      "employed-by-koulutusaste": "Sysselsatta efter utbildningsnivå",
+      "employed-by-region": "Sysselsatta per landskap",
+      "employed-title": "Antalet sysselsatta i hela Finland",
+      "supply-and-demand": "Utbud och efterfrågan",
+      "supply-and-demand-subtitle": "Inom yrkesgruppen kan det förekomma överutbud, balans eller arbetskraftsbrist. Mer information om sysselsättningsutsikterna hittar du på <CustomLink>arbetsmarknadsportale<Icon></Icon></CustomLink>",
+      "title": "Sysselsättningsutsikter",
+      "unknown-ala": "Okänd"
+    },
     "job-advertisement-characteristics": "Platsannonsernas särdrag",
     "job-advertisement-characteristics-description": "Jobbmarknadens platsannonser från 2021–2024 har använts för att bilda information.",
     "most-common-job-tasks": {
@@ -338,6 +349,13 @@
       "not-available": "Löneuppgifter är inte tillgängliga för yrkesgruppen.",
       "title": "Löneuppgifter"
     },
+    "supply-and-demand": {
+      "Alitarjonta": "Arbetskraftsbrist",
+      "Tasapaino": "Balans",
+      "Ylitarjonta": "Överutbud"
+    },
+    "supply-and-demand-title": "Sysselsättningsutsikter",
+    "supply-and-demand-tooltip": "Den aktuella sysselsättningsutsikten för yrkesgruppen inom arbetstillfället.",
     "tyomarkkinatori": {
       "banner-alt-text": "Jobbmarknaden",
       "button-label": "Öppna Jobbmarknaden",
@@ -346,19 +364,16 @@
       "url": "https://tyomarkkinatori.fi/sv/personkunder/lediga-arbetsplatser"
     }
   },
-  "language-selection": "Språk",
   "link-copied": "Länken kopierad!",
   "link-copy-failed": "Länken kunde inte kopieras",
-  "login": "Logga in",
   "login-for-favorites": "Logga in på Kompetensstigen för att spara favoriter och granska dem senare.",
   "login-to-service": "Logga in",
-  "logout": "Logga ut",
   "map-competences": "Kartlägg kompetenser",
-  "menu": "Meny",
   "more-actions": "Lägg till alternativ",
   "move-to-service": "Öppna tjänsten",
   "my-competence-path": "Min kompetensstig",
   "my-competence-profile": "Min kompetensprofil",
+  "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning",
   "my-competences": {
     "by-KOULUTUS": "Mina kunskaper från utbildningen",
     "by-MUU_OSAAMINEN": "Mitt övriga kunnande",
@@ -369,38 +384,20 @@
     "missing-PATEVYYS": "Inga kunskaper. Lägg till fritidsverksamhet.\n",
     "missing-TOIMENKUVA": "Inga kunskaper. Lägg till arbetsplatser.\n"
   },
-  "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning",
   "my-competences-by-sources": "Mina kunskaper enligt källor",
-  "n-education-opportunities": "{{count}} utbildningsmöjligheter",
-  "n-job-opportunities": "{{count}} karriärmöjligheter",
   "navigation": {
-    "external": {
-      "ohjaaja": {
-        "description": "Information och material för vägledning",
-        "label": "Vägledar-delen"
-      },
-      "tietopalvelu": {
-        "description": "Information till stöd för beslutsfattande",
-        "label": "Informationstjänst"
-      },
-      "title": "Uppsättningar av innehåll i Kompetensstigen"
-    },
-    "extra": {
-      "palveluhakemisto": {
-        "label": "Väglednings- och rådgivningstjänster",
-        "url": "https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster"
-      },
-      "title": "Annat stöd för reflektion"
-    },
     "main-section": {
       "title": "Personlig kompetensstig",
       "tool-title": "Hitta möjligheter"
     }
   },
+  "n-education-opportunities": "{{count}} utbildningsmöjligheter",
   "next": "Nästa",
-  "no-match": {},
+  "n-job-opportunities": "{{count}} karriärmöjligheter",
+  "n-months-short": "{{count}} mån",
+  "n-years_one": "{{count}} år",
+  "n-years_other": "{{count}} år",
   "on-this-page": "På denna sida",
-  "open-submenu": "Öppna undermenyn",
   "opportunity-tooltip": {
     "education": {
       "EI_TUTKINTO": "Övrig utbildning är utbildning som inte leder till examen. Den kan utveckla kompetens för till exempel arbetslivet eller personliga behov. Artificiell intelligens grupperar dessa utbildningar utifrån de färdigheter som man lär sig och utbildningsområdet.",
@@ -421,14 +418,14 @@
       "TMT": "Annan karriärmöjlighet"
     }
   },
-  "osaamispolku": "Kompetensstigen",
   "osaamissuosittelija": {
     "competence": {
       "add": "Lägg till en kunskap med +-tecknet.",
       "identify": "Identifiera kunskaper",
       "none-proposed": "Inga föreslagna kunskaper",
       "none-selected": "Inga valda kunskaper",
-      "remove": "Ta bort en kunskap med x-tecknet."
+      "remove": "Ta bort en kunskap med x-tecknet.",
+      "search-disclaimer": "Text som används för att söka efter kompetenser - den sparas inte"
     },
     "interest": {
       "add": "Lägg till ett intresse med +-tecknet.",
@@ -436,13 +433,26 @@
       "none-proposed": "Inga föreslagna intressen",
       "none-selected": "Inga valda intressen",
       "remove": "Ta bort ett intresset med x-tecknet.",
+      "search-disclaimer": "Text som används för att söka efter intressen - den sparas inte",
       "textarea-placeholder": "Berätta med egna ord vad du är intresserad av. Du kan använda antingen enskilda ord, meningar eller längre texter.\t"
     }
   },
   "pagination": {
     "bottom": "Sidindelningen nedan",
+    "itemLabel": "Sida {{page}}",
     "next": "Gå till följande sida",
     "previous": "Gå till föregående sida"
+  },
+  "personal-details": {
+    "birthyear": "Födelseår",
+    "choose-mother-tongue": "Välj modersmål",
+    "email": "E-postadress",
+    "gender": "Kön",
+    "gender-female": "Kvinna",
+    "gender-male": "Man",
+    "gender-other": "Annat",
+    "home-city": "Hemkommun",
+    "mother-tongue": "Modersmål"
   },
   "preferences": {
     "data-disclosure-unanonymized": {
@@ -468,12 +478,111 @@
       "action": "Ladda ner uppgifterna i min kompetensprofil (JSON)",
       "description": "Du kan ladda ner all information som sparats i din kompetensprofil till din egen enhet. Uppgifternas laddas i ett maskinläsbart JSON-format. JSON är ett enkelt och lätt öppet filformat för informationsförmedling och lagring.",
       "title": "Ladda din kompetensprofil"
+    },
+    "personal-details": {
+      "description": "Du kan redigera modersmål och e-postadress.",
+      "title": "Uppgifter hämtade från befolkningsdatasystemet"
+    },
+    "share": {
+      "copy-failure": "Kopiering av länken misslyckades",
+      "copy-link": "Kopiera länk",
+      "copy-success": "Länken har kopierats till urklipp",
+      "create-new-link": "Skapa ny delningslänk",
+      "delete-confirm-description": "Är du säker på att du vill ta bort delningslänken?",
+      "delete-confirm-title": "Ta bort delningslänk",
+      "delete-link": "Ta bort länk",
+      "description": "Med en delningslänk kan du dela din information med valda personer. Du bestämmer själv vilken information du vill dela med länken. Mottagaren behöver inte logga in på Osaamispolku-tjänsten.\n\nObservera att vem som helst som fått länken kan öppna den så länge din skapade delningslänk är giltig. Dela länken endast med betrodda parter eller personer som du vill ska kunna se din delade information. Du kan när som helst ta bort länken du skapat. Efter borttagning kan din information inte längre ses via länken.",
+      "edit-link": "Redigera",
+      "link-has-expired": "Länken har gått ut.",
+      "modal": {
+        "basic-info": {
+          "birthyear": "Födelseår",
+          "description": "Ge länken ett namn (alias) om du vill och ange dess giltighetstid. Du kan också lägga till en anteckning om vem länken är avsedd för. Den information som ska delas väljs i nästa steg.",
+          "email": "E-post",
+          "home-city": "Hemstad",
+          "name": "Namn",
+          "title": "Grundläggande information"
+        },
+        "data-to-share": {
+          "activities": "Mina fritidsaktiviteter",
+          "description": "Välj vilka uppgifter du vill dela. Du kan välja att dela grundläggande uppgifter samt dessutom om din arbetsplats, utbildning, favoriter och planer ska delas.",
+          "education": "Min utbildning",
+          "favorite-education-opportunities": "Utbildningsmöjligheter",
+          "favorite-job-opportunities": "Karriärmöjligheter",
+          "favorites": "Mina favoriter",
+          "goals": "Mina mål",
+          "interests": "Mina intressen",
+          "something-else": "Annan kompetens",
+          "work": "Mina arbetsplatser"
+        },
+        "description": "Anteckning",
+        "description-placeholder": "T.ex. för vem länken är avsedd",
+        "expires-on": "Giltig till",
+        "name": "Länkens namn",
+        "name-placeholder": "T.ex. länk till Matti Meikäläinens profil",
+        "title-add": "Skapa delningslänk",
+        "title-edit": "Redigera delningslänk"
+      },
+      "no-links": "Inga delningslänkar",
+      "preview": "Förhandsgranska",
+      "title": "Dela din kompetensprofil",
+      "valid-until": "Giltig till: {{date}}"
+    },
+    "tmt-import-export": {
+      "continue-to-tmt": "Fortsätt till Jobbmarknaden",
+      "description": "Du kan importera och exportera dina uppgifter mellan Kompetensvägen och Jobbmarknaden. Uppgifterna uppdateras inte automatiskt, utan du bestämmer själv vilken information du vill överföra mellan tjänsterna.<br/><br/>Importerade uppgifter finns i din kompetensprofil. Exporterade uppgifter finns i din jobbsökarprofil på Jobbmarknaden. Kontrollera och redigera uppgifterna vid behov.<br/><br/><CustomLink>Gå till Jobbmarknaden för att se dina uppgifter<Icon></Icon></CustomLink>.",
+      "errors": {
+        "forbidden": "Ett fel uppstod vid hanteringen av auktoriseringen.",
+        "not-found": "Användaren hittades inte i Jobbmarknaden.",
+        "unknown": "Ett okänt fel uppstod i tjänsten."
+      },
+      "export": {
+        "authorization-cancelled": "Exporten av dina uppgifter avbröts",
+        "authorization-failed": "Exporten av dina uppgifter har misslyckats",
+        "button-label": "Exportera dina uppgifter",
+        "error-note-title": "Exporten av dina uppgifter misslyckades",
+        "in-progress": "Dina uppgifter exporteras",
+        "modal": {
+          "step-1-description": "Du kan exportera information från din kompetensprofil till din jobbsökarprofil i Jobbmarknaden. Exporten kräver inloggning i Jobbmarknaden och separat auktorisering. Ingen information exporteras utan ditt tillstånd, och du bestämmer själv vilken information du delar.",
+          "step-2-description": "Inloggningen till Jobbmarknaden lyckades och auktoriseringen är klar.<br/><br/>Exporten av din kompetensprofil pågår. Du kan stänga denna avisering.",
+          "title": "Exportera uppgifter till Jobbmarknaden",
+          "tmt-url": "https://tyomarkkinatori.fi/sv/personkunder"
+        },
+        "success": "Dina uppgifter har exporterats till Jobbmarknaden."
+      },
+      "import": {
+        "authorization-cancelled": "Importen av dina uppgifter avbröts",
+        "authorization-failed": "Importen av dina uppgifter har misslyckats",
+        "button-label": "Importera dina uppgifter",
+        "error-note-title": "Importen av dina uppgifter misslyckades",
+        "in-progress": "Dina uppgifter importeras",
+        "modal": {
+          "step-1-description": "Du kan importera information från din jobbsökarprofil i Jobbmarknaden till din kompetensprofil. Importen kräver inloggning i Jobbmarknaden och separat auktorisering. Ingen information hämtas utan ditt tillstånd, och du bestämmer själv vilken information du delar.",
+          "step-2-description": "Inloggningen till Jobbmarknaden lyckades och auktoriseringen är klar. Importen av din kompetensprofil pågår.",
+          "title": "Importera uppgifter från Jobbmarknaden"
+        },
+        "success": "Dina uppgifter har importerats från Jobbmarknaden."
+      },
+      "title": "Importera och exportera dina uppgifter"
     }
   },
   "previous": "Föregående",
-  "print": "Skriv ut",
   "privacy-policy": "Dataskyddsbeskrivning",
   "profile": {
+    "banner": {
+      "description": {
+        "logged-in": "Spara och redigera de kompetenser du har identifierat i din profil. I profilen hittar du också dina favoriter och mål.",
+        "unlogged": "Logga in i tjänsten och skapa din kompetensprofil. På så sätt sparas din information säkert."
+      },
+      "link-text": {
+        "logged-in": "Gå till profilen",
+        "unlogged": "Logga in i tjänsten"
+      },
+      "title": {
+        "logged-in": "Min kompetensprofil",
+        "unlogged": "Skapa din egen kompetensprofil"
+      }
+    },
     "competences": {
       "add": "Lägg till kunskaper",
       "description": "Nedan hittar du alla kunskaper som du har lagt till i din kompetensprofil. Du kan själv välja hur dina kunskaper ska grupperas och presenteras.\n",
@@ -482,6 +591,7 @@
       "group-by-alphabet": "Alfabetiskt",
       "group-by-source": "Enligt källor",
       "group-by-theme": "Enligt tema",
+      "info": "Du kan själv välja vilken information från din kompetensprofil du vill använda när du söker möjligheter genom att importera den till sidan Hitta möjligheter.",
       "move-to-type": {
         "KOULUTUS": "Öppna mina utbildningar",
         "MUU_OSAAMINEN": "Öppna mina andra kompetenser",
@@ -505,7 +615,13 @@
     },
     "favorites": {
       "description": "Här hittar du utbildnings- och karriärmöjligheter som du har sparat som favoriter. Du kan själv välja hur du vill gruppera dina favoriter. Favoriter sparas på sidan Hitta möjligheter. Du kan utnyttja dina favoriter på sidan Mål.\n",
+      "goals-card": {
+        "description": "Gör dina favoriter till mål och skapa planer för att uppnå dem.",
+        "link-text": "Skapa mål",
+        "title": "Sätt upp mål och gör planer"
+      },
       "job-and-education-opportunities": "Utbildnings- och karriärmöjligheter",
+      "link-to-opportunities": "Hitta möjligheter",
       "show-filters": "Visa filter",
       "title": "Mina favoriter",
       "you-have-no-education-opportunities": "Inga favoriter. Lägg till utbildningsmöjligheter som favoriter.",
@@ -558,18 +674,84 @@
       "title": "Skapa din egen kompetensprofil!"
     },
     "my-goals": {
-      "title": "Mina mål"
+      "add-competence-description": "Lägg till kompetens från +-ikonen",
+      "add-custom-plan": "Skapa egen",
+      "add-custom-plan-description": "Skapa en egen utbildningsplan genom att först ge den ett namn och en kort beskrivning. Välj sedan de kompetenser du vill uppnå med planen.",
+      "add-custom-plan-header": "Skapa egen plan",
+      "add-favorites-dialog-action": "Lägg till favoriter",
+      "add-favorites-dialog-description": "Du kan inte skapa ett mål än eftersom du inte har några favoriter sparade. Lägg först till yrken eller jobbmöjligheter som intresserar dig i dina favoriter – sedan kan du sätta mål från dem.",
+      "add-favorites-dialog-title": "Lägg till favoriter först",
+      "add-favorites-to-goals": "Lägg till nytt mål",
+      "add-modal-description": "Ge målet ett namn och en beskrivning. Namnet visas i listorna och i beskrivningen kan du beskriva mer utförligt vad du vill uppnå och eventuella begränsningar.",
+      "add-modal-title": "Skapa nytt mål",
+      "add-new-plan-description": "Väg olika utbildningsmöjligheter och välj ett eller flera alternativ som alternativa planer mot ditt mål",
+      "add-new-plan-for-goal": "Lägg till plan",
+      "add-new-plan-header": "Skapa ny plan",
+      "add-plan-failed": "Misslyckades med att lägga till planen – försök igen",
+      "add-plan-success": "Planen har lagts till",
+      "adjust-list": "Justera listan",
+      "choose-as-plan": "Välj som plan",
+      "choose-favorite-description": "Välj från dina favoriter ett yrke eller en arbetsmöjlighet som du vill sätta som mål",
+      "choose-favorite-header": "Välj mål från favoriter",
+      "competence-compare": "Kompetensjämförelse",
+      "competences": "Kompetenser",
+      "custom-plan-competences-description": "Välj de kompetenser som krävs för målet och som du planerar att uppnå med din egen utbildningsplan.",
+      "custom-plan-description": "Egen plans beskrivning",
+      "custom-plan-name": "Egen plans namn",
+      "delete-goal": "Ta bort mål",
+      "delete-goal-description": "Vill du verkligen ta bort detta mål?",
+      "delete-plan": "Ta bort",
+      "delete-plan-description": "Vill du verkligen ta bort planen \"{{name}}\" från målet?",
+      "delete-plan-failed": "Misslyckades med att ta bort planen – försök igen",
+      "delete-plan-success": "Planen har tagits bort",
+      "delete-plan-title": "Ta bort plan",
+      "description": "På sidan Mina mål kan du ange utvecklingsmål relaterade till karriär eller utbildning. Målet baseras på dina valda favoriter, såsom ett intressant yrke eller en arbetsmöjlighet. För att nå målet kan du välja lämpliga utbildningsalternativ eller skapa en egen helhet.",
+      "edit-plan-failed": "Misslyckades med att uppdatera planen – försök igen",
+      "edit-plan-success": "Planen har uppdaterats",
+      "favorites-card": {
+        "description": "Utforska utbildnings- och karriärmöjligheter. Lägg till de mest intressanta som favoriter och gör dem till dina egna mål.",
+        "title": "Hitta dina favoriter"
+      },
+      "goal": "Mål",
+      "goal-description": "Målbeskrivning",
+      "goal-name": "Målnamn",
+      "modify-goal": "Redigera mål",
+      "my-plan-towards-goal": "Planalternativ",
+      "no-chosen-competences": "Inga valda kompetenser",
+      "no-favorites-selected": "Lägg först till favoriter som du kan skapa mål från.",
+      "no-filtered-results": "Inga utbildningsmöjligheter. Justera filtren för att se alternativ.",
+      "no-goals-created": "Du har inte lagt till några mål än.",
+      "n-plans_one": "1 plan",
+      "n-plans_other": "{{count}} planer",
+      "n-plans_zero": "Inga valda planer",
+      "own-competences": "Egna kompetenser",
+      "plan_other": "Plan",
+      "remove-competence-description": "Ta bort kompetens från x-ikonen",
+      "remove-from-goals": "Ta bort från mål",
+      "remove-from-plans": "Ta bort plan",
+      "required-competences": "Kompetenser som krävs för målet",
+      "selected-competences": "Valda kompetenser i egen plan",
+      "set-to-goal": "Sätt som mål",
+      "title": "Mina mål",
+      "update-modal-title": "Redigera målet"
     },
     "paths": {
       "cancel-confirmation-text": "Blanketten har osparade ändringar, är du säker på att du vill avbryta?",
       "continue-editing": "Fortsätt redigera",
-      "step-n-details": "Uppgifter för steg {{count}}",
-      "types": {}
+      "step-n-details": "Uppgifter för steg {{count}}"
     },
     "preferences": {
       "list-1-item-1": "granska dina kunskaper som en sammanfattning på sidan Mina kompetenser",
       "list-1-item-2": "spara din arbetshistorik och kartlägga kunskaper som erhållits från arbetet på sidan Mina arbetsplatser",
       "list-1-item-3": "spara eller importera din utbildningshistorik och kartlägga kunskaper som erhållits från utbildningar på sidan Mina utbildningar",
+      "list-2-item-1": "Spara karriär- och utbildningsmöjligheter som intresserar dig som favoriter",
+      "list-2-item-2": "Planera och följa upp dina egna utbildnings- och karriärstigar (kommer senare)",
+      "list-3-item-1": "Vilka uppgifter du sparar",
+      "list-3-item-2": "Vad dina uppgifter används för",
+      "list-3-item-3": "Vem som kan se din profil",
+      "list-3-item-4": "Hur andra kan utnyttja din profil",
+      "paragraph-2": "När du fyller i dessa uppgifter noggrant får du förslag på jobb och utbildningar som passar just dig.\n\nDu kan också:",
+      "paragraph-3": "Profilen är din!\n\nDu bestämmer:",
       "paragraph-4": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på lagen om den nationella informationsresursen för kompetenser. <CustomLink>Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.</CustomLink>",
       "title": "Mina inställningar",
       "you-are-signed-in": "Kompetensprofilen är en plats där du kan spara och hantera dina uppgifter. I kompetensprofilen kan du:\n"
@@ -645,10 +827,22 @@
   },
   "remove-favorite": "Ta bort från favoriter",
   "remove-favorite-opportunity-confirmation": "Är du säker på att du vill ta bort möjligheten ”{{name}}” från dina favoriter?",
-  "required": "obligatorisk",
-  "return-home": "Återgå till framsidan",
   "save": "Spara",
   "save-and-close": "Spara och stäng",
+  "search": {
+    "description": "Du kan söka efter möjligheter med hjälp av fritextsökning. Du kan påverka synligheten av resultaten genom att filtrera listan.",
+    "filters": "Filter",
+    "global-placeholder": "Sök möjligheter",
+    "label": "Sök möjligheter",
+    "no-results": "Inga resultat hittades för sökordet.",
+    "results-found_one": "Visar 1 resultat",
+    "results-found_other": "Visar {{count}} resultat",
+    "results-found-short_one": "1 resultat",
+    "results-found-short_other": "{{count}} resultat",
+    "search": "Sök",
+    "search-placeholder": "Skriv ett sökord",
+    "title": "Sök möjligheter"
+  },
   "service-catalog": {
     "description": "Du hittar en vägledningstjänst som passar dina behov här.",
     "header": "Behöver du råd och vägledning för att hitta din egen riktning?"
@@ -666,26 +860,16 @@
       "title": "Din session går snart ut"
     }
   },
-  "share": "Dela",
   "show": "Visa",
-  "show-all": "Visa alla",
   "show-less": "Visa mindre",
   "show-more": "Visa mer",
-  "skiplinks": {
-    "main": "Gå till huvudinnehållet"
-  },
   "slugs": {
-    "about-service": "information-om-tjansten",
-    "accessibility": "information-om-tillganglighet",
-    "ai-usage": "information-om-anvandningen-av-artificiell-intelligens",
-    "data-sources": "datakallor",
     "education-opportunity": {
       "index": "utbildningsmojlighet"
     },
     "job-opportunity": {
       "index": "karriarmojlighet"
     },
-    "privacy-and-cookies": "dataskyddsbeskrivning-och-cookies",
     "profile": {
       "competences": "mina-kompetenser",
       "education-history": "mina-utbildningar",
@@ -700,6 +884,7 @@
       "something-else": "ovriga-kunskaper",
       "work-history": "mina-arbetsplatser"
     },
+    "search": "sok",
     "tool": {
       "index": "verktyg"
     }
@@ -714,13 +899,32 @@
     "update-success": "Uppdateringen lyckades"
   },
   "tool": {
+    "banner": {
+      "description": "Hitta dina utbildnings- och karriärmöjligheter med den information du har valt. Prova och utforska olika alternativ.",
+      "link-text": "Hitta möjligheter",
+      "title": "Utforska dina alternativ"
+    },
     "competency-profile": {
+      "delete-all": "Ta bort alla",
+      "delete-text": "Ta bort text",
+      "export-help": "Du kan också spara den information du har kartlagt på denna sida till din kompetensprofil. Framöver hittar du dem i kompetensprofilen under Annan kompetens och Mina intressen.",
+      "import-help": "Du kan välja vilka uppgifter du importerar från din kompetensprofil till denna sida. Du kan ta bort eller komplettera informationen genom att kartlägga dina kompetenser eller intressen.",
+      "login-description": "Du kan importera data från din kompetensprofil och spara data till din kompetensprofil. Om du inte har en kompetensprofil än kan du skapa en genom att logga in i tjänsten.",
+      "login-to-service": "Logga in i tjänsten",
+      "sections-intro": "I kompetensprofilen kan du kartlägga dina kompetenser och intressen mer i detalj på följande sätt:",
       "title": "Importera från kompetensprofil ({{count}})",
       "title_zero": "Importera från kompetensprofil"
     },
+    "description": "Fyll i din information på denna sida genom att kartlägga dina intressen och färdigheter eller genom att importera dem från din kompetensprofil. Prova olika kombinationer och uppdatera dina möjligheter med dina uppgifter.",
+    "education-opportunity-duration": "Genomsnittlig varaktighet",
+    "education-opportunity-duration-tooltip": "Utbildningens längd anger hur länge utbildningen vanligtvis varar. Den uttrycks oftast i år eller månader och baseras på utbildningens omfattning samt studiernas framsteg i normal takt.",
+    "education-opportunity-koulutusala": "Det vanligaste utbildningsområdet",
+    "education-opportunity-koulutusala-tooltip": "Utbildningsområdet avser den grupp som utbildningar delas in i beroende på vilket vetenskapsområde, samhällsområde eller arbetslivsområde de är kopplade till.",
     "info-overview": {
       "data-from-profile": "Information som importerats från kompetensprofilen",
-      "no-competences-from-profile": "Inga uppgifter importerade från profilen"
+      "no-competences-from-profile": "Inga uppgifter importerade från profilen",
+      "other-data-from-profile": "Övriga importerade uppgifter från profilen",
+      "other-data-from-profile-description": "Dina texttillägg till andra kompetenser och intressen"
     },
     "interests": "Kartlägg dina intressen ({{count}})",
     "interests_zero": "Kartlägg dina intressen",
@@ -737,7 +941,9 @@
           "confirm-button": "Importera kunskaper",
           "confirm-description": "Välj önskade kunskaper i listan nedan.",
           "confirm-title": "Vill du importera dina kunskaper från din kompetensprofil?",
-          "import-button": "Importera information från profilen"
+          "failure-toast": "Importen misslyckades — försök igen",
+          "import-button": "Importera information från profilen",
+          "success-toast": "Data har importerats till översikten"
         },
         "textarea-placeholder": "Berätta med egna ord vad du kan. Du kan använda antingen enskilda ord, meningar eller längre texter.\t"
       },
@@ -750,29 +956,48 @@
       "interests": {
         "conversational-virtual-assistant": "Identifiera intressen med artificiell intelligens",
         "virtual-assistant": {
+          "conversation": "Konversation",
+          "description": "Hej! Jag är en bot och hjälper dig att hitta dina intressen. Prata med mig så får du förslag som du kan välja de som passar dig bäst.",
           "error": "Fel vid generering av svar. Försök igen med samma eller ny input.",
           "intrests": "Intressen",
           "loading": "Hämtar svar... Vänligen vänta ett ögonblick.",
+          "respond-to-chat": "Svara till boten...",
           "selected-interests": "Valda intressen",
           "send": "Skicka",
-          "title": "Kartläggning av intressen"
+          "start": "Låt oss börja – berätta först vad som intresserar dig just nu?",
+          "title": "Kartläggning av intressen",
+          "x-interests-added": "{{count}} intressen tillagda"
         }
       },
       "title": "Dina uppgifter"
     },
+    "opportunities-loaded": "Möjligheter laddade. Totalt {{count}} möjligheter hittades.",
     "remove-competence-help": "Ta bort en kunskap med x-tecknet.",
     "salary-suffix": "€/månad",
     "settings": {
+      "controls": "Kontroller",
       "general": {
+        "duration": "Längd",
+        "duration-value": {
+          "3-years": "3år",
+          "6plus-years": "6år+",
+          "day": "1d",
+          "max-aria-label": "Maximilängd, 6 år och längre utbildningar",
+          "min-aria-label": "Minimilängd, inkl. endast 1-dagars utbildningar",
+          "month": "1mån",
+          "year": "1år"
+        },
         "education-opportunity-type": "Typ",
         "filter": "Filtrering",
         "job-opportunity-type": "Typ",
+        "location": "Plats",
         "occupation-type": "Yrkesgrupp på högre nivå",
         "sorting": "Ordning",
         "weight": "Prioritering"
       },
       "reset": "Ta bort valen",
-      "toggle-title-closed": "Visa reglage"
+      "toggle-title-closed": "Visa reglage",
+      "toggle-title-open": "Uppdatera och stäng"
     },
     "title": "Hitta möjligheter",
     "tools": {
@@ -786,6 +1011,65 @@
       "title": "Stöd för reflektion",
       "work-history": "Mina arbetsplatser"
     },
+    "tour": {
+      "buttons": {
+        "done": "Hitta möjligheter",
+        "next": "Nästa",
+        "previous": "Föregående"
+      },
+      "desktop": {
+        "step-1": {
+          "description": "Börja med att kartlägga dina intressen och kompetenser genom att välja de mest lämpliga alternativen som föreslås baserat på din input.<br/>Du kan också importera information från din kompetensprofil om du har skapat en sådan. Att använda kompetensprofilen kräver inloggning.",
+          "title": "Välj först med vilka uppgifter du söker möjligheter"
+        },
+        "step-2": {
+          "description": "Tryck på Uppdatera-knappen när du har valt alla uppgifter du vill ha. Kom ihåg att uppdatera listan varje gång du ändrar dina uppgifter.",
+          "title": "Uppdatera möjligheter med dina uppgifter"
+        },
+        "step-3": {
+          "description": "I möjligheterna ser du yrken, arbetsmöjligheter, examina och andra utbildningar ordnade enligt lämplighet beräknad baserat på dina uppgifter. Utforska dem närmare genom att klicka på möjlighetens namn. Du kan spara favoriter genom att logga in.",
+          "title": "Utforska och bekanta dig med dina möjligheter"
+        },
+        "step-4": {
+          "description": "Du kan filtrera och sortera listan över möjligheter med kontrollerna. På så sätt får du bättre fram alternativ som passar dina behov. Du kan också justera hur mycket dina valda intressen väger och hur mycket kompetenser väger i beräkningen av lämplighet.",
+          "title": "Använd kontroller för att beakta dina behov"
+        },
+        "step-5": {
+          "description": "Redigera dina uppgifter och prova olika kombinationer av intressen och kompetenser. Om detta känns svårt kan hjälp finnas i länkarna under Stöd för reflektion.<br/>Genom att logga in kan du spara dina uppgifter till din kompetensprofil från Importera från kompetensprofilen.",
+          "title": "Testa och utforska olika kombinationer"
+        }
+      },
+      "mobile": {
+        "step-1": {
+          "description": "Sidans funktioner är uppdelade på två flikar. Välj de uppgifter du vill använda på fliken Dina uppgifter. Granska de utbildnings- och arbetsmöjligheter som föreslås för dig baserat på dem på fliken Dina möjligheter.",
+          "title": "Flikarna Dina uppgifter och Dina möjligheter"
+        },
+        "step-2": {
+          "description": "Börja med att kartlägga dina intressen och kompetenser genom att välja de mest lämpliga alternativen som föreslås baserat på din input.<br/>Du kan också importera information från din kompetensprofil om du har skapat en sådan. Att använda kompetensprofilen kräver inloggning.",
+          "title": "Välj först med vilka uppgifter du söker möjligheter"
+        },
+        "step-3": {
+          "description": "Tryck på Uppdatera dina möjligheter-knappen när du har valt alla uppgifter du vill ha. Genom att trycka på knappen behandlas dina uppgifter automatiskt. Kom ihåg att uppdatera listan varje gång du ändrar dina uppgifter.",
+          "title": "Uppdatera möjligheter med dina uppgifter"
+        },
+        "step-4": {
+          "description": "Gå till fliken Dina möjligheter. I möjligheterna ser du yrken, arbetsmöjligheter, examina och andra utbildningar ordnade enligt lämplighet beräknad baserat på dina uppgifter. Utforska dem närmare genom att klicka på möjlighetens namn. Du kan spara favoriter genom att logga in.",
+          "title": "Utforska och bekanta dig med dina möjligheter"
+        },
+        "step-5": {
+          "description": "Du kan filtrera och sortera listan över möjligheter med kontrollerna. På så sätt får du bättre fram alternativ som passar dina behov. Du kan också justera hur mycket dina valda intressen väger och hur mycket kompetenser väger i beräkningen av lämplighet.",
+          "title": "Använd kontroller för att beakta dina behov"
+        },
+        "step-6": {
+          "description": "Redigera dina uppgifter och prova olika kombinationer av intressen och kompetenser. Om detta känns svårt kan hjälp finnas i länkarna under Stöd för reflektion.<br/>Genom att logga in kan du spara dina uppgifter till din kompetensprofil från Importera från kompetensprofilen.",
+          "title": "Testa och utforska olika kombinationer"
+        }
+      },
+      "view-guided-tour": "Titta på verktygets tips!",
+      "view-guided-tour-label": "Starta verktygets guidade genomgång"
+    },
+    "update-tooltip-info": "Genom att trycka på knappen Uppdatera dina möjligheter behandlas dina uppgifter automatiskt. Vi visar dig möjligheter baserat på hur väl de matchar den information du lämnar.",
+    "updating": "Laddar möjligheter…",
     "your-opportunities": {
       "sorting": {
         "alphabetically": "I alfabetisk ordning",
@@ -795,6 +1079,10 @@
       "title": "Dina möjligheter"
     }
   },
+  "tooltip": {
+    "info": "Guide"
+  },
+  "try-again": "Försök igen",
   "types": {
     "competence": {
       "KIINNOSTUS": "Intresse",
@@ -805,6 +1093,7 @@
     }
   },
   "update": "Uppdatera",
+  "update-short": "Uppdatera",
   "updating-list": "Uppdateras",
   "welcome": "Hej {{name}} - välkommen till din kompetensprofil!",
   "without-category": "{{header}} utan kategori",
@@ -816,10 +1105,12 @@
   },
   "work-history": {
     "add-new-job-description": "Lägg till ny uppgiftsbeskrivning",
+    "add-new-job-description-button": "Lägg ny",
     "add-new-workplace": "Lägg till ny arbetsplats",
     "confirm-delete-job-description": "Är du säker på att du vill ta bort uppgiftsbeskrivningen ”{{name}}”? Om arbetsplatsen efter raderingen inte längre innehåller några uppgiftsbeskrivningar, raderas även arbetsplatsen.",
     "confirm-delete-work-history": "Är du säker på att du vill ta bort arbetsplatsen ”{{name}}”?",
     "delete-job-description": "Ta bort uppgiftsbeskrivning",
+    "delete-job-description-button": "Ta bort",
     "delete-work-history": "Ta bort arbetsplats",
     "edit-job-description": "Redigera uppgiftsbeskrivning",
     "edit-workplace": "Redigera arbetsplats",

@@ -17,7 +17,7 @@ const CreateCustomPlanStep = () => {
       <div className="mt-6">
         <InputField
           label={t('profile.my-goals.custom-plan-name')}
-          requiredText={t('required')}
+          requiredText={t('common:required')}
           errorMessage={errors?.nimi?.[i18n.language]?.message}
           {...register(`nimi.${i18n.language}`)}
         />

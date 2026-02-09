@@ -8,97 +8,77 @@
  * 1. Missing translations (keys in code but not in translation files)
  * 2. Unused translations (keys in translation files but not used in code)
  * 3. Dynamic translation keys (cannot be statically analyzed)
+ * 4. Duplicate keys across namespaces
  *
  * Supports i18next plural forms (_one, _other, _many, _few, _zero)
  *
+ * Exit codes:
+ *   0 - All checks passed (unused translations are OK)
+ *   1 - Critical issues found (missing translations, dynamic keys, or duplicate keys)
+ *
  * Usage:
  *   node scripts/translations/analyze-translations.js
- *   node scripts/translations/analyze-translations.js --list-unused
- *   node scripts/translations/analyze-translations.js --list-missing fi,en
- *   node scripts/translations/analyze-translations.js --list-unused --list-missing fi,en,sv
- *   node scripts/translations/analyze-translations.js --ci --check-langs fi,sv
- *
- * CI Mode:
- *   --ci                       Exit with code 1 if issues found (for git hooks/CI)
- *   --check-langs fi,sv        Languages to check in CI mode (default: fi,sv)
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { DYNAMIC_KEY_EXCEPTIONS } from './exceptions.js';
+import {
+  PLURAL_SUFFIXES,
+  extractStaticKeys,
+  flattenObject,
+  getBaseKey,
+  isPluralKey,
+  processDynamicKeys,
+} from './translation-utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Configuration
 const LANGUAGES = ['fi', 'en', 'sv'];
-const PLURAL_SUFFIXES = ['_one', '_other', '_many', '_few', '_zero'];
 const SRC_DIR = path.join(__dirname, '../../src');
-const I18N_DIR = path.join(SRC_DIR, 'i18n');
+const I18N_BASE_DIR = path.join(SRC_DIR, 'i18n');
 const CODE_EXTENSIONS = ['.ts', '.tsx'];
 
-// Parse command line arguments
-const args = process.argv.slice(2);
-const listUnused = args.includes('--list-unused');
-const listMissingArg = args.find((arg) => arg.startsWith('--list-missing'));
-const listMissingLangs = listMissingArg
-  ? (args[args.indexOf(listMissingArg) + 1] || 'fi,en,sv').split(',').map((l) => l.trim())
-  : null;
-const ciMode = args.includes('--ci');
-const checkLangsArg = args.find((arg) => arg.startsWith('--check-langs'));
-const checkLangs = checkLangsArg ? args[args.indexOf(checkLangsArg) + 1].split(',').map((l) => l.trim()) : ['fi', 'sv'];
-
 /**
- * Flatten nested JSON object to dot notation
- * Example: { a: { b: 'value' } } => { 'a.b': 'value' }
+ * Load Tolgee configuration
  */
-function flattenObject(obj, prefix = '') {
-  const result = {};
-
-  for (const key in obj) {
-    if (!obj.hasOwnProperty(key)) continue;
-
-    const newKey = prefix ? `${prefix}.${key}` : key;
-
-    if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
-      Object.assign(result, flattenObject(obj[key], newKey));
-    } else {
-      result[newKey] = obj[key];
-    }
+function loadTolgeeConfig() {
+  const configPath = path.join(__dirname, '../../.tolgeerc.json');
+  if (fs.existsSync(configPath)) {
+    const content = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+    return content;
   }
-
-  return result;
+  return { defaultNamespace: 'yksilo' }; // fallback
 }
 
 /**
- * Load and merge translation files for a language
- * Returns { translations, keyToFile } where keyToFile maps each key to its source file
+ * Get namespaces from i18n directory
  */
-function loadTranslations(lang) {
+function getNamespaces() {
+  const items = fs.readdirSync(I18N_BASE_DIR, { withFileTypes: true });
+  return items.filter((item) => item.isDirectory()).map((item) => item.name);
+}
+
+/**
+ * Load and merge translation files for a language and namespace
+ * Returns { translations, keyToFile } where keyToFile maps 'namespace:key' to its source file
+ */
+function loadTranslations(lang, namespace) {
   const translations = {};
   const keyToFile = {};
-  const langDir = path.join(I18N_DIR, lang);
 
   // Load main translation file
-  const mainFile = path.join(langDir, 'translation.json');
+  const mainFile = path.join(I18N_BASE_DIR, namespace, `${lang}.json`);
   if (fs.existsSync(mainFile)) {
     const content = JSON.parse(fs.readFileSync(mainFile, 'utf-8'));
     const flattened = flattenObject(content);
-    Object.assign(translations, flattened);
+    // Prefix keys with namespace
     for (const key of Object.keys(flattened)) {
-      keyToFile[key] = 'translation.json';
-    }
-  }
-
-  // Load draft translation file (overrides main)
-  const draftFile = path.join(langDir, 'draft.translation.json');
-  if (fs.existsSync(draftFile)) {
-    const content = JSON.parse(fs.readFileSync(draftFile, 'utf-8'));
-    const flattened = flattenObject(content);
-    Object.assign(translations, flattened);
-    for (const key of Object.keys(flattened)) {
-      keyToFile[key] = 'draft.translation.json';
+      const namespacedKey = `${namespace}:${key}`;
+      translations[namespacedKey] = flattened[key];
+      keyToFile[namespacedKey] = `${namespace}/${lang}.json`;
     }
   }
 
@@ -129,166 +109,15 @@ function getAllFiles(dir, extensions, fileList = []) {
 }
 
 /**
- * Find line number for a position in content
- */
-function findLineNumber(position, lines) {
-  let lineNum = 1;
-  let charCount = 0;
-  for (let i = 0; i < lines.length; i++) {
-    charCount += lines[i].length + 1; // +1 for newline
-    if (charCount > position) {
-      return i + 1;
-    }
-  }
-  return lineNum;
-}
-
-/**
- * Check if a dynamic key matches any exception
- */
-function isExceptionMatch(relativePath, codeLine) {
-  const normalizedPath = path.normalize(relativePath);
-  return DYNAMIC_KEY_EXCEPTIONS.some((exception) => {
-    const normalizedExceptionPath = path.normalize(exception.file);
-    return normalizedPath.includes(normalizedExceptionPath) && exception.pattern.test(codeLine);
-  });
-}
-
-/**
- * Process dynamic key matches for a file
- */
-function processDynamicKeys(content, relativePath, lines, dynamicPatterns) {
-  const dynamicKeys = [];
-  const dynamicMatches = new Set();
-
-  for (const { pattern, name } of dynamicPatterns) {
-    let match;
-    while ((match = pattern.exec(content)) !== null) {
-      const lineNum = findLineNumber(match.index, lines);
-      const codeLine = lines[lineNum - 1].trim();
-
-      if (isExceptionMatch(relativePath, codeLine)) {
-        continue;
-      }
-
-      const matchId = `${relativePath}:${lineNum}:${codeLine}`;
-      if (!dynamicMatches.has(matchId)) {
-        dynamicMatches.add(matchId);
-        dynamicKeys.push({
-          file: relativePath,
-          line: lineNum,
-          code: codeLine.length > 100 ? codeLine.substring(0, 100) + '...' : codeLine,
-          type: name,
-        });
-      }
-    }
-  }
-
-  return dynamicKeys;
-}
-
-/**
- * Extract static translation keys from content
- */
-function extractStaticKeys(content, relativePath, patterns) {
-  const keysMap = new Map();
-
-  for (const pattern of patterns) {
-    let match;
-    while ((match = pattern.exec(content)) !== null) {
-      const key = match[1];
-
-      // Skip if key contains template literals or variables
-      if (key.includes('${') || key.includes('`')) {
-        continue;
-      }
-
-      if (!keysMap.has(key)) {
-        keysMap.set(key, []);
-      }
-      keysMap.get(key).push(relativePath);
-    }
-  }
-
-  return keysMap;
-}
-
-/**
- * Get regex patterns for static keys
- */
-function getStaticKeyPatterns() {
-  return [
-    // t('key') or t("key") - including with options
-    /\bt\s*\(\s*['"`]([^'"`]+)['"`]/g,
-
-    // i18n.t('key') or i18n.t("key")
-    /i18n\.t\s*\(\s*['"`]([^'"`]+)['"`]/g,
-
-    // <Trans i18nKey="key" /> or <Trans i18nKey='key' />
-    /i18nKey\s*=\s*['"`]([^'"`]+)['"`]/g,
-
-    // i18n.exists('key')
-    /i18n\.exists\s*\(\s*['"`]([^'"`]+)['"`]/g,
-  ];
-}
-
-/**
- * Get regex patterns for dynamic keys
- */
-function getDynamicKeyPatterns() {
-  return [
-    // t(`template ${var}`) - template literals with interpolation
-    {
-      pattern: /\bt\s*\(\s*`[^`]*\$\{[^`]*`/g,
-      name: 't() with template literal',
-    },
-    // t('string' + anything) or t("string" + anything) - string concatenation
-    {
-      pattern: /\bt\s*\(\s*['"][^'"]*['"]\s*\+/g,
-      name: 't() with string concatenation',
-    },
-    // t(variable) or t(variable, options) - direct variable usage
-    // Matches t(variable) or t(variable.property) with or without options
-    {
-      pattern: /\bt\s*\(\s*[a-zA-Z_$][a-zA-Z0-9_$.]*\s*[,)]/g,
-      name: 't() with variable',
-    },
-    // i18n.t with template literals
-    {
-      pattern: /i18n\.t\s*\(\s*`[^`]*\$\{[^`]*`/g,
-      name: 'i18n.t() with template literal',
-    },
-    // i18n.t with concatenation
-    {
-      pattern: /i18n\.t\s*\(\s*['"][^'"]*['"]\s*\+/g,
-      name: 'i18n.t() with string concatenation',
-    },
-    // i18n.t(variable) or i18n.t(variable, options)
-    {
-      pattern: /i18n\.t\s*\(\s*[a-zA-Z_$][a-zA-Z0-9_$.]*\s*[,)]/g,
-      name: 'i18n.t() with variable',
-    },
-    // <Trans i18nKey={variable} />
-    {
-      pattern: /i18nKey\s*=\s*\{[^}]+\}/g,
-      name: '<Trans i18nKey={...} />',
-    },
-  ];
-}
-
-/**
  * Extract translation keys from code
  * Returns { keysMap, dynamicKeys }
- * - keysMap: Map of key -> [files where it's used]
+ * - keysMap: Map of 'namespace:key' -> [files where it's used]
  * - dynamicKeys: Array of { file, line, code } for dynamic translation keys
  */
-function extractKeysFromCode() {
+function extractKeysFromCode(defaultNamespace) {
   const allKeysMap = new Map();
   const allDynamicKeys = [];
   const files = getAllFiles(SRC_DIR, CODE_EXTENSIONS);
-
-  const patterns = getStaticKeyPatterns();
-  const dynamicPatterns = getDynamicKeyPatterns();
 
   for (const file of files) {
     const content = fs.readFileSync(file, 'utf-8');
@@ -296,16 +125,16 @@ function extractKeysFromCode() {
     const lines = content.split('\n');
 
     // Process dynamic keys
-    const dynamicKeys = processDynamicKeys(content, relativePath, lines, dynamicPatterns);
+    const dynamicKeys = processDynamicKeys(content, relativePath, lines);
     allDynamicKeys.push(...dynamicKeys);
 
     // Extract static keys
-    const keysMap = extractStaticKeys(content, relativePath, patterns);
-    for (const [key, files] of keysMap.entries()) {
+    const keysMap = extractStaticKeys(content, relativePath, defaultNamespace, lines);
+    for (const [key, usages] of keysMap.entries()) {
       if (!allKeysMap.has(key)) {
         allKeysMap.set(key, []);
       }
-      allKeysMap.get(key).push(...files);
+      allKeysMap.get(key).push(...usages);
     }
   }
 
@@ -313,28 +142,10 @@ function extractKeysFromCode() {
 }
 
 /**
- * Get base key without plural suffix
- */
-function getBaseKey(key) {
-  for (const suffix of PLURAL_SUFFIXES) {
-    if (key.endsWith(suffix)) {
-      return key.slice(0, -suffix.length);
-    }
-  }
-  return key;
-}
-
-/**
- * Check if a key is a plural form
- */
-function isPluralKey(key) {
-  return PLURAL_SUFFIXES.some((suffix) => key.endsWith(suffix));
-}
-
-/**
  * Get all plural variants for a base key that exist in translations
+ * Works with namespace:key format and translation object
  */
-function getPluralVariants(baseKey, translations) {
+function getAllPluralVariants(baseKey, translations) {
   const variants = [];
   for (const suffix of PLURAL_SUFFIXES) {
     const pluralKey = baseKey + suffix;
@@ -346,16 +157,13 @@ function getPluralVariants(baseKey, translations) {
 }
 
 /**
- * Analyze translations
- */
-/**
  * Build expected keys for a language
  */
 function buildExpectedKeys(codeKeys, translations) {
   const expectedKeys = new Map();
 
   for (const [key, files] of codeKeys.entries()) {
-    const pluralVariants = getPluralVariants(key, translations);
+    const pluralVariants = getAllPluralVariants(key, translations);
 
     if (pluralVariants.length > 0) {
       // If plural variants exist, we expect all of them (not the base key)
@@ -377,9 +185,9 @@ function buildExpectedKeys(codeKeys, translations) {
 function findMissingTranslations(expectedKeys, translationKeys) {
   const missing = [];
 
-  for (const [key, files] of expectedKeys.entries()) {
+  for (const [key, usages] of expectedKeys.entries()) {
     if (!translationKeys.has(key)) {
-      missing.push({ key, files: [...new Set(files)] });
+      missing.push({ key, usages });
     }
   }
 
@@ -418,26 +226,97 @@ function analyzeLanguage(lang, codeKeys, translationsByLang) {
   const expectedKeys = buildExpectedKeys(codeKeys, translations);
   const missing = findMissingTranslations(expectedKeys, translationKeys);
   const unused = findUnusedTranslations(translationKeys, codeKeys, keyToFile);
-  const sortErrors = checkTranslationFileSorted(lang);
 
-  return { missing, unused, translations, sortErrors };
+  return { missing, unused, translations };
+}
+
+/**
+ * Group keys by namespace from namespace:key format
+ */
+function groupKeysByNamespace(keys) {
+  const grouped = {};
+
+  for (const [fullKey, value] of keys.entries()) {
+    const colonIndex = fullKey.indexOf(':');
+    if (colonIndex > 0) {
+      const namespace = fullKey.substring(0, colonIndex);
+      const key = fullKey.substring(colonIndex + 1);
+
+      if (!grouped[namespace]) {
+        grouped[namespace] = new Map();
+      }
+      grouped[namespace].set(key, value);
+    }
+  }
+
+  return grouped;
+}
+
+/**
+ * Find duplicate keys across namespaces
+ */
+function findDuplicateKeysAcrossNamespaces(translationsByLang) {
+  const keyToNamespaces = {};
+
+  // Collect all keys and which namespaces they appear in
+  for (const lang of LANGUAGES) {
+    const { translations } = translationsByLang[lang];
+
+    for (const fullKey of Object.keys(translations)) {
+      const colonIndex = fullKey.indexOf(':');
+      if (colonIndex > 0) {
+        const namespace = fullKey.substring(0, colonIndex);
+        const key = fullKey.substring(colonIndex + 1);
+
+        if (!keyToNamespaces[key]) {
+          keyToNamespaces[key] = new Set();
+        }
+        keyToNamespaces[key].add(namespace);
+      }
+    }
+  }
+
+  // Find keys that appear in multiple namespaces
+  const duplicates = [];
+  for (const [key, namespaces] of Object.entries(keyToNamespaces)) {
+    if (namespaces.size > 1) {
+      duplicates.push({ key, namespaces: Array.from(namespaces).sort() });
+    }
+  }
+
+  return duplicates;
 }
 
 function analyzeTranslations() {
   console.log('🔍 Analyzing translation keys...\n');
 
+  // Load Tolgee configuration
+  const tolgeeConfig = loadTolgeeConfig();
+  const defaultNamespace = tolgeeConfig.defaultNamespace;
+  console.log(`📝 Default namespace: ${defaultNamespace}\n`);
+
   // Extract keys from code
-  const { keysMap: codeKeys, dynamicKeys } = extractKeysFromCode();
+  const { keysMap: codeKeys, dynamicKeys } = extractKeysFromCode(defaultNamespace);
   console.log(`Found ${codeKeys.size} unique translation keys in code`);
   if (dynamicKeys.length > 0) {
     console.log(`⚠️  Found ${dynamicKeys.length} dynamic translation key(s) that cannot be analyzed`);
   }
   console.log('');
 
-  // Load translations for all languages
+  // Get namespaces and load translations for all languages and namespaces
+  const namespaces = getNamespaces();
+  console.log(`📁 Found namespaces: ${namespaces.join(', ')}\n`);
+
   const translationsByLang = {};
   for (const lang of LANGUAGES) {
-    translationsByLang[lang] = loadTranslations(lang);
+    translationsByLang[lang] = { translations: {}, keyToFile: {} };
+
+    for (const namespace of namespaces) {
+      const { translations, keyToFile } = loadTranslations(lang, namespace);
+      Object.assign(translationsByLang[lang].translations, translations);
+      Object.assign(translationsByLang[lang].keyToFile, keyToFile);
+    }
+
     console.log(`Loaded ${Object.keys(translationsByLang[lang].translations).length} translation keys for ${lang}`);
   }
   console.log('');
@@ -448,154 +327,258 @@ function analyzeTranslations() {
     results[lang] = analyzeLanguage(lang, codeKeys, translationsByLang);
   }
 
+  // Find duplicate keys across namespaces
+  results.duplicates = findDuplicateKeysAcrossNamespaces(translationsByLang);
+
+  // Group code keys by namespace for statistics
+  results.codeKeysByNamespace = groupKeysByNamespace(codeKeys);
+
+  // Count unique keys (without namespace prefix) in code
+  const uniqueKeysInCode = new Set();
+  for (const fullKey of codeKeys.keys()) {
+    const colonIndex = fullKey.indexOf(':');
+    if (colonIndex > 0) {
+      const key = fullKey.substring(colonIndex + 1);
+      uniqueKeysInCode.add(key);
+    }
+  }
+  results.uniqueKeyCount = uniqueKeysInCode.size;
+  results.totalKeyCount = codeKeys.size;
+
+  // Count translations in files (using first language as reference since all should have same keys)
+  const firstLang = LANGUAGES[0];
+  const translationKeys = Object.keys(translationsByLang[firstLang].translations);
+  results.totalTranslationCount = translationKeys.length;
+
+  // Count translations per namespace
+  results.translationsByNamespace = {};
+  for (const fullKey of translationKeys) {
+    const colonIndex = fullKey.indexOf(':');
+    if (colonIndex > 0) {
+      const namespace = fullKey.substring(0, colonIndex);
+      if (!results.translationsByNamespace[namespace]) {
+        results.translationsByNamespace[namespace] = 0;
+      }
+      results.translationsByNamespace[namespace]++;
+    }
+  }
+
   return results;
 }
 
 /**
- * Print results
- */
-/**
- * Print summary table
+ * Print summary statistics
  */
 function printSummary(results) {
   console.log('═══════════════════════════════════════════════════════════════');
   console.log('                    TRANSLATION ANALYSIS REPORT                ');
   console.log('═══════════════════════════════════════════════════════════════\n');
 
-  console.log('📊 SUMMARY\n');
+  console.log('📊 KEY STATISTICS\n');
+  console.log(`Total translation keys in code: ${results.totalKeyCount}`);
+  console.log(`Unique keys (without namespace): ${results.uniqueKeyCount}\n`);
+
+  console.log('Keys per namespace:');
+  for (const [namespace, keys] of Object.entries(results.codeKeysByNamespace)) {
+    console.log(`  • ${namespace}: ${keys.size} keys`);
+  }
+  console.log('');
+
+  console.log(`Total translations in files: ${results.totalTranslationCount}`);
+  console.log('Translations per namespace:');
+  for (const [namespace, count] of Object.entries(results.translationsByNamespace)) {
+    console.log(`  • ${namespace}: ${count} translations`);
+  }
+
+  // Show note if translation count differs from code key count
+  if (results.totalTranslationCount !== results.totalKeyCount) {
+    const difference = results.totalTranslationCount - results.totalKeyCount;
+    console.log(`\nℹ️  Note: Translation count differs from code keys by ${Math.abs(difference)} entries.`);
+    console.log('   This can be due to:');
+    console.log('   - Plural forms in translations (_one, _other, etc.)');
+    console.log('   - Unused translations (may be used in production or other contexts)');
+  }
+  console.log('');
+}
+
+/**
+ * Calculate namespace statistics
+ */
+function calculateNamespaceStats(results, namespace) {
+  const stats = {};
+  for (const lang of LANGUAGES) {
+    const { missing, unused } = results[lang];
+
+    const missingInNamespace = missing.filter((m) => m.key.startsWith(`${namespace}:`));
+    const unusedInNamespace = unused.filter((u) => u.key.startsWith(`${namespace}:`));
+
+    stats[lang] = {
+      missing: missingInNamespace.length,
+      unused: unusedInNamespace.length,
+      missingKeys: missingInNamespace,
+      unusedKeys: unusedInNamespace,
+    };
+  }
+  return stats;
+}
+
+/**
+ * Print namespace statistics table
+ */
+function printNamespaceStatsTable(stats) {
   console.log('┌──────────┬─────────────────────┬─────────────────────┐');
   console.log('│ Language │ Missing Translations│ Unused Translations │');
   console.log('├──────────┼─────────────────────┼─────────────────────┤');
 
   for (const lang of LANGUAGES) {
-    const { missing, unused } = results[lang];
     console.log(
-      `│   ${lang.toUpperCase()}     │         ${String(missing.length).padStart(3)}         │         ${String(unused.length).padStart(3)}         │`,
+      `│   ${lang.toUpperCase()}     │         ${String(stats[lang].missing).padStart(3)}         │         ${String(stats[lang].unused).padStart(3)}         │`,
     );
   }
-
   console.log('└──────────┴─────────────────────┴─────────────────────┘\n');
 }
 
 /**
- * Group keys by base key for plural forms
+ * Collect all missing items for namespace
  */
-function groupKeysByBase(items) {
-  const grouped = {};
+function collectMissingItems(stats) {
+  const allMissing = new Set();
+  const missingItems = [];
 
-  for (const item of items) {
-    const key = item.key;
-    const baseKey = getBaseKey(key);
-
-    if (!grouped[baseKey]) {
-      grouped[baseKey] = { keys: [], files: new Set() };
-    }
-
-    grouped[baseKey].keys.push(key);
-
-    if (item.file) {
-      grouped[baseKey].files.add(item.file);
-    }
-
-    if (item.files) {
-      for (const f of item.files) {
-        grouped[baseKey].files.add(f);
+  for (const lang of LANGUAGES) {
+    for (const item of stats[lang].missingKeys) {
+      allMissing.add(item.key);
+      if (!missingItems.some((m) => m.key === item.key)) {
+        missingItems.push(item);
       }
     }
   }
 
-  return grouped;
+  return { allMissing, missingItems };
 }
 
 /**
- * Format key display with plural forms
+ * Print missing keys for namespace
  */
-function formatKeyDisplay(baseKey, keys) {
-  if (keys.length === 1) {
-    return `  • ${keys[0]}`;
-  }
-  const pluralForms = keys.map((k) => k.replace(baseKey, '')).join(', ');
-  return `  • ${baseKey} (plural forms: ${pluralForms})`;
-}
+function printMissingKeys(stats, missingItems) {
+  for (const item of missingItems.sort((a, b) => a.key.localeCompare(b.key))) {
+    const keyWithoutNs = item.key.substring(item.key.indexOf(':') + 1);
 
-/**
- * Format file list display
- */
-function formatFileList(files, showFiles, lang) {
-  if (!showFiles || files.size === 0) {
-    return null;
-  }
+    // Show which languages are missing this key
+    const missingLangs = LANGUAGES.filter((lang) => stats[lang].missingKeys.some((m) => m.key === item.key));
 
-  const filesList = [...files].slice(0, 3).join(', ');
-  const moreCount = files.size > 3 ? ` +${files.size - 3} more` : '';
-  const prefix = lang ? `${lang}/` : '';
-  const label = showFiles === 'found' ? 'Found in' : 'Used in';
+    console.log(`  • ${keyWithoutNs}`);
+    if (missingLangs.length > 0) {
+      console.log(`    Missing in: ${missingLangs.join(', ')}`);
+    }
 
-  return `    ${label}: ${prefix}${filesList}${moreCount}`;
-}
-
-/**
- * Print grouped keys with their files
- */
-function printGroupedKeys(grouped, showFiles, lang = null) {
-  for (const [baseKey, { keys, files }] of Object.entries(grouped)) {
-    console.log(formatKeyDisplay(baseKey, keys));
-
-    const fileList = formatFileList(files, showFiles, lang);
-    if (fileList) {
-      console.log(fileList);
+    // Show usage locations (limit to first 3)
+    if (item.usages && item.usages.length > 0) {
+      const usagesToShow = item.usages.slice(0, 3);
+      console.log(`    Used in:`);
+      for (const usage of usagesToShow) {
+        console.log(`      ${usage.file}:${usage.line}`);
+        console.log(`        ${usage.code}`);
+      }
+      if (item.usages.length > 3) {
+        console.log(`      ... and ${item.usages.length - 3} more location(s)`);
+      }
     }
   }
+  console.log('');
 }
 
 /**
- * Print unused translations section
+ * Collect all unused keys for namespace
  */
-function printUnusedTranslations(results) {
-  console.log('\n📝 UNUSED TRANSLATIONS (keys in translation files but not used in code)\n');
-
+function collectUnusedKeys(stats) {
+  const allUnused = new Set();
   for (const lang of LANGUAGES) {
-    const { unused } = results[lang];
-    if (unused.length > 0) {
-      console.log(`\n${lang.toUpperCase()} (${unused.length} unused keys):`);
-      console.log('─'.repeat(70));
+    for (const item of stats[lang].unusedKeys) {
+      allUnused.add(item.key);
+    }
+  }
+  return allUnused;
+}
 
-      const grouped = groupKeysByBase(unused);
-      printGroupedKeys(grouped, 'found', lang);
+/**
+ * Print unused keys for namespace
+ */
+function printUnusedKeys(allUnused) {
+  console.log(`ℹ️  UNUSED KEYS (${allUnused.size}):\n`);
+  for (const key of Array.from(allUnused).sort()) {
+    const keyWithoutNs = key.substring(key.indexOf(':') + 1);
+    console.log(`  • ${keyWithoutNs}`);
+  }
+  console.log('');
+}
+
+/**
+ * Print namespace analysis
+ */
+function printNamespaceAnalysis(results) {
+  console.log('═══════════════════════════════════════════════════════════════');
+  console.log('                    PER-NAMESPACE ANALYSIS                     ');
+  console.log('═══════════════════════════════════════════════════════════════\n');
+
+  for (const namespace of Object.keys(results.codeKeysByNamespace)) {
+    console.log(`\n📦 NAMESPACE: ${namespace}\n`);
+    console.log('─'.repeat(70));
+
+    const stats = calculateNamespaceStats(results, namespace);
+    printNamespaceStatsTable(stats);
+
+    // Handle missing keys
+    const { allMissing, missingItems } = collectMissingItems(stats);
+
+    if (allMissing.size > 0) {
+      console.log(`⚠️  MISSING KEYS (${allMissing.size}):\n`);
+      printMissingKeys(stats, missingItems);
+    }
+
+    // Handle unused keys
+    const allUnused = collectUnusedKeys(stats);
+
+    if (allUnused.size > 0) {
+      printUnusedKeys(allUnused);
     }
   }
 }
 
 /**
- * Print missing translations section
+ * Print duplicate keys warning
  */
-function printMissingTranslations(results) {
-  console.log('\n\n⚠️  MISSING TRANSLATIONS (keys in code but not in translation files)\n');
-
-  for (const lang of LANGUAGES) {
-    if (!listMissingLangs.includes(lang)) continue;
-
-    const { missing } = results[lang];
-    if (missing.length > 0) {
-      console.log(`\n${lang.toUpperCase()} (${missing.length} missing keys):`);
-      console.log('─'.repeat(70));
-
-      const grouped = groupKeysByBase(missing);
-      printGroupedKeys(grouped, 'used');
-    }
-  }
-}
-
-/**
- * Print dynamic keys section
- */
-function printDynamicKeys(results) {
-  if (!results.dynamicKeys || results.dynamicKeys.length === 0 || ciMode) {
+function printDuplicates(results) {
+  if (results.duplicates.length === 0) {
     return;
   }
 
-  console.log('⚠️  DYNAMIC TRANSLATION KEYS (cannot be statically analyzed)\n');
-  console.log(`Found ${results.dynamicKeys.length} dynamic translation key(s):\n`);
+  console.log('\n═══════════════════════════════════════════════════════════════');
+  console.log('                    DUPLICATE KEYS WARNING                     ');
+  console.log('═══════════════════════════════════════════════════════════════\n');
+
+  console.log(`⚠️  Found ${results.duplicates.length} key(s) that exist in multiple namespaces:\n`);
+
+  for (const { key, namespaces } of results.duplicates) {
+    console.log(`  • ${key}`);
+    console.log(`    Appears in: ${namespaces.join(', ')}`);
+  }
+  console.log('');
+}
+
+/**
+ * Print dynamic keys warning
+ */
+function printDynamicKeys(results) {
+  if (!results.dynamicKeys || results.dynamicKeys.length === 0) {
+    return;
+  }
+
+  console.log('═══════════════════════════════════════════════════════════════');
+  console.log('                    DYNAMIC KEYS WARNING                       ');
+  console.log('═══════════════════════════════════════════════════════════════\n');
+
+  console.log(`⚠️  Found ${results.dynamicKeys.length} dynamic translation key(s):\n`);
 
   // Group by file
   const byFile = {};
@@ -616,106 +599,50 @@ function printDynamicKeys(results) {
   }
 
   console.log('💡 Dynamic keys use variables or string concatenation, making static analysis');
-  console.log('   impossible. Consider using static keys when possible.\n');
+  console.log('   impossible. Please use static keys only.\n');
+}
+
+/**
+ * Print final status and return exit code
+ */
+function printFinalStatus(results) {
+  console.log('═══════════════════════════════════════════════════════════════');
+  console.log('                         FINAL STATUS                          ');
   console.log('═══════════════════════════════════════════════════════════════\n');
-}
 
-/**
- * Check if results have any issues for checked languages
- */
-function hasTranslationIssues(results, checkLangs) {
-  let hasMissingKeys = false;
-  let hasUnusedKeys = false;
-  let sortErrors = false;
-
-  for (const lang of checkLangs) {
-    if (results[lang]) {
-      if (results[lang].missing.length > 0) hasMissingKeys = true;
-      if (results[lang].unused.length > 0) hasUnusedKeys = true;
-      if (results[lang].sortErrors) sortErrors = true;
-    }
-  }
-
-  return { hasMissingKeys, hasUnusedKeys, sortErrors };
-}
-
-/**
- * Print CI validation failure message
- */
-function printCIFailure(hasDynamicKeys, hasMissingKeys, hasUnusedKeys, results, checkLangs) {
-  console.log('❌ Translation validation failed!\n');
-
-  if (hasDynamicKeys) {
-    console.log(`   • ${results.dynamicKeys.length} dynamic translation key(s) found`);
-  }
-  if (hasMissingKeys) {
-    console.log(`   • Missing translations in: ${checkLangs.join(', ')}`);
-  }
-  if (hasUnusedKeys) {
-    console.log(`   • Unused translations in: ${checkLangs.join(', ')}`);
-  }
-
-  console.log('\nRun without --ci flag for detailed information.\n');
-}
-
-/*** Check if translation file is sorted alphabetically (recursively) */
-function checkTranslationFileSorted(lang) {
-  const langDir = path.join(I18N_DIR, lang);
-  const filesToCheck = ['translation.json', 'draft.translation.json']
-    .map((f) => path.join(langDir, f))
-    .filter(fs.existsSync);
-
-  /** Recursively check object key order */
-  function isSorted(obj, basePath = '') {
-    const keys = Object.keys(obj);
-    const sortedKeys = [...keys].sort();
-    const sorted = JSON.stringify(keys) === JSON.stringify(sortedKeys);
-
-    const unsortedPaths = [];
-    if (!sorted) {
-      unsortedPaths.push(basePath || '(root)');
-    }
-    for (const key of keys) {
-      if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
-        const nested = isSorted(obj[key], basePath ? `${basePath}.${key}` : key);
-        unsortedPaths.push(...nested);
-      }
-    }
-    return unsortedPaths;
-  }
-
-  let hasUnsorted = false;
-  for (const file of filesToCheck) {
-    const content = JSON.parse(fs.readFileSync(file, 'utf-8'));
-    const unsortedPaths = isSorted(content);
-    if (unsortedPaths.length > 0) {
-      hasUnsorted = true;
-      console.log(`❌ ${lang}/${path.basename(file)} is not sorted:`);
-      for (const p of unsortedPaths) console.log(`   - ${p}`);
-    } else {
-      console.log(`✅ ${lang}/${path.basename(file)} is properly sorted`);
-    }
-  }
-
-  return hasUnsorted;
-}
-
-/**
- * Check CI mode and return exit code
- */
-function checkCIMode(results) {
-  if (!ciMode) {
-    return 0;
-  }
-
+  const hasMissingKeys = LANGUAGES.some((lang) => results[lang].missing.length > 0);
   const hasDynamicKeys = results.dynamicKeys && results.dynamicKeys.length > 0;
-  const { hasMissingKeys, hasUnusedKeys, sortErrors } = hasTranslationIssues(results, checkLangs);
-  if (hasDynamicKeys || hasMissingKeys || hasUnusedKeys || sortErrors) {
-    printCIFailure(hasDynamicKeys, hasMissingKeys, hasUnusedKeys, results, checkLangs);
+  const hasDuplicates = results.duplicates && results.duplicates.length > 0;
+
+  const hasErrors = hasMissingKeys || hasDynamicKeys || hasDuplicates;
+
+  if (hasErrors) {
+    console.log('❌ VALIDATION FAILED\n');
+
+    if (hasMissingKeys) {
+      const totalMissing = LANGUAGES.reduce((sum, lang) => sum + results[lang].missing.length, 0);
+      console.log(`   • Missing translations: ${totalMissing} keys missing from translation files`);
+    }
+    if (hasDynamicKeys) {
+      console.log(`   • Dynamic keys: ${results.dynamicKeys.length} dynamic translation keys found`);
+    }
+    if (hasDuplicates) {
+      console.log(`   • Duplicate keys: ${results.duplicates.length} keys exist in multiple namespaces`);
+    }
+
+    console.log('\n');
     return 1;
   }
 
-  console.log(`✅ Translation validation passed for languages: ${checkLangs.join(', ')}\n`);
+  const totalUnused = LANGUAGES.reduce((sum, lang) => sum + results[lang].unused.length, 0);
+  if (totalUnused > 0) {
+    console.log('✅ VALIDATION PASSED\n');
+    console.log(`ℹ️  Note: ${totalUnused} unused translation(s) found in translation files.`);
+    console.log('   This is OK - translations may be used in production or other contexts.\n');
+  } else {
+    console.log('✅ VALIDATION PASSED\n');
+  }
+
   return 0;
 }
 
@@ -724,27 +651,10 @@ function checkCIMode(results) {
  */
 function printResults(results) {
   printSummary(results);
-
-  if (listUnused) {
-    printUnusedTranslations(results);
-  }
-
-  if (listMissingLangs) {
-    printMissingTranslations(results);
-  }
-
-  console.log('\n═══════════════════════════════════════════════════════════════\n');
-
+  printNamespaceAnalysis(results);
+  printDuplicates(results);
   printDynamicKeys(results);
-
-  // Show help if no detailed flags were used
-  if (!listUnused && !listMissingLangs && !ciMode) {
-    console.log('💡 TIP: Use flags to see detailed lists:');
-    console.log('   --list-unused              List all unused translation keys');
-    console.log('   --list-missing fi,en,sv    List missing keys for specified languages\n');
-  }
-
-  return checkCIMode(results);
+  return printFinalStatus(results);
 }
 
 // Main execution

@@ -133,7 +133,7 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
       footer={
         <div className="flex flex-row justify-end gap-5 flex-1">
           <Button
-            label={t('cancel')}
+            label={t('common:cancel')}
             variant="white"
             onClick={() => {
               if (isSubmitting) {

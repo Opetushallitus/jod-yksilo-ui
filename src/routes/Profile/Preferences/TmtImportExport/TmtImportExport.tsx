@@ -107,7 +107,7 @@ const TmtImportExport = () => {
       title: t('preferences.tmt-import-export.import.modal.title'),
       description: t('preferences.tmt-import-export.import.modal.step-1-description'),
       confirmText: t('preferences.tmt-import-export.continue-to-tmt'),
-      cancelText: t('cancel'),
+      cancelText: t('common:cancel'),
       variant: 'normal',
       onConfirm: async () => {
         sessionStorage.setItem(STORAGE_KEY, 'import');
@@ -124,7 +124,7 @@ const TmtImportExport = () => {
       title: t('preferences.tmt-import-export.export.modal.title'),
       description: t('preferences.tmt-import-export.export.modal.step-1-description'),
       confirmText: t('preferences.tmt-import-export.continue-to-tmt'),
-      cancelText: t('cancel'),
+      cancelText: t('common:cancel'),
       variant: 'normal',
       onConfirm: async () => {
         sessionStorage.setItem(STORAGE_KEY, 'export');
@@ -281,7 +281,7 @@ const TmtImportExport = () => {
         <Trans
           i18nKey="preferences.tmt-import-export.description"
           components={{
-            Icon: <JodOpenInNew size={18} className="ml-1" ariaLabel={t('external-link')} />,
+            Icon: <JodOpenInNew size={18} className="ml-1" ariaLabel={t('common:external-link')} />,
             CustomLink: (
               <Link
                 to={t('preferences.tmt-import-export.export.modal.tmt-url')}

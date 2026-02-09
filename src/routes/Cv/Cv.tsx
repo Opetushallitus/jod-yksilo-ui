@@ -106,7 +106,7 @@ const Cv = () => {
 
   const printButton = (
     <ActionButton
-      label={t('print')}
+      label={t('common:print')}
       icon={<JodPrint className="text-accent" />}
       onClick={() => {
         if (isPrinting) {
@@ -121,7 +121,7 @@ const Cv = () => {
   );
   const osaamispolkuBox = (
     <div className="flex flex-col rounded-lg p-6 gap-5 bg-secondary-1-dark-2 print:hidden">
-      <div className="text-heading-2 text-white mr-2">{t('osaamispolku')}</div>
+      <div className="text-heading-2 text-white mr-2">{t('common:osaamispolku')}</div>
       <p className="text-body-lg text-white">{t('cv.osaamispolku-description')}</p>
       <div className="mt-4">
         <Button

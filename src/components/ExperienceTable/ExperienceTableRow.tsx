@@ -138,10 +138,10 @@ export const ExperienceTableRow = ({
   const { showDialog } = useModal();
   const onShowDialog = (onConfirm: () => void) => {
     showDialog({
-      title: confirmTitle ?? t('delete'),
+      title: confirmTitle ?? t('common:delete'),
       description: confirmDescription ?? '',
-      confirmText: t('delete'),
-      cancelText: t('cancel'),
+      confirmText: t('common:delete'),
+      cancelText: t('common:cancel'),
       variant: 'destructive',
       onConfirm: () => {
         setTimeout(() => {

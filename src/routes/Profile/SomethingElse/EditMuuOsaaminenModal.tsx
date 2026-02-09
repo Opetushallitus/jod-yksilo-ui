@@ -131,7 +131,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
       footer={
         <div className="flex flex-row justify-end gap-3 flex-1">
           <Button
-            label={t('cancel')}
+            label={t('common:cancel')}
             variant="white"
             onClick={() => {
               if (isSubmitting) {

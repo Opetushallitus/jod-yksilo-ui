@@ -101,75 +101,81 @@ Useful browser extension to use
 
 ### Overview
 
-This project manages translations using JSON files and an Excel-based workflow.  
-The Excel files are generated from existing JSON translation files, sent for translation, and then imported back to update the source files.  
-This process keeps all texts synchronized, tracks changes efficiently, and simplifies communication with translation services.
+This project uses [Tolgee](https://tolgee.io) for translation management. Translation keys are stored in JSON files and automatically synchronized with the Tolgee platform via GitHub Actions. Tolgee provides a web interface for managing translations, collaborating with translators, and tracking translation status.
 
 ---
 
 ### File Structure
 
-Each language has **two translation files**:
+Translation files are organized by namespace and language:
 
-- **`translations.json`** - Contains approved translations provided by the translation service.
-- **`draft.translations.json`** – Contains new or modified texts that have not yet been professionally translated.
+```
+src/i18n/
+  yksilo/          # Default namespace for JOD Yksilo page specific translations
+    fi.json
+    en.json
+    sv.json
+  common/           # Shared translations across JOD projects
+    fi.json
+    en.json
+    sv.json
+```
 
-All new or updated texts must be translated directly into the `draft.translations.json` files (manually or with AI assistance).  
-No changes should ever be made directly to `translations.json`.
+- **`yksilo`** - Contains JOD Yksilo page specific translations (default namespace)
+- **`common`** - Contains shared translations used across multiple JOD projects. Reference these in code with `common:` prefix (e.g., `t('common:myKey')`)
 
 ---
 
-### Process
+### Developer Workflow
 
-#### 1. During Development
+#### 1. Before Starting Work on a New Feature
 
-- Add all new and modified texts to `draft.translations.json`.
-- Always provide translations for the new or changed texts.
-- Do not edit `translations.json` manually.
-
-#### 2. When Requesting Translations (Export to Excel)
-
-- Generate Excel files for translators using:
-
-  ```bash
-  npm run translations:export
-  ```
-
-- The script merges `translations.json` and `draft.translations.json`, ensuring all Finnish texts are included and modified texts override existing ones.
-
-- The generated Excel file appears in:
-
-```
-translation-export/
-```
-
-- Send the Excel file(s) to the translation.
-
-#### 3. When Receiving Translated Excel Files (Import Back)
-
-- Place the returned Excel file(s) into:
-
-```
-translations-import/
-```
-
-- Import the translations with:
+Fetch the latest translations from Tolgee CDN to ensure you have up-to-date translations:
 
 ```bash
-npm run translations:import
+npm run translations:fetch
 ```
 
-- The script updates all `translations.json` files based on the Excel content.
+**Always run this when developing features that involve translation changes.**
 
-- It then removes only the imported translation keys from `draft.translations.json`, leaving other draft entries intact.
-  This prevents the loss of new or modified texts that were added while the Excel file was being processed by the translation service.
+#### 2. During Development
+
+- Add translation keys to your code using i18next hooks (e.g., `useTranslation()`)
+- Add the Finnish source text and all translations (fi, en, sv) to the appropriate JSON file in `src/i18n/`
+- Use AI assistance or other tools to help with translations
+- For `common` namespace keys, reference them in code with `common:` prefix: `t('common:myKey')`
+- Run `npm run translations:check` to verify that all keys are properly defined
+
+**Important:** Never delete translation keys from JSON files manually. Deprecated keys are automatically managed by GitHub Actions.
+
+#### 3. After Merging to Main
+
+GitHub Actions automatically handles:
+
+1. **Push translations to Tolgee** - New translation keys are uploaded to Tolgee platform. Existing keys are not modified or deleted.
+2. **Tag management** - The `manage-tags` script runs automatically:
+   - Unused keys are marked as deprecated in Tolgee
+   - JIRA ticket tags are automatically added (if ticket ID can be parsed from branch or commit) to track when changes reach production
+   - Keys can be safely removed from Tolgee once verified in production
+
+**Note:** Updates to existing translations and key deletions must be done directly in the Tolgee platform.
+
+### Available Commands
+
+| Command                      | Purpose                                                                          |
+| ---------------------------- | -------------------------------------------------------------------------------- |
+| `npm run translations:check` | Analyze translation keys and detect missing or unused keys                       |
+| `npm run translations:fetch` | Download latest translations from Tolgee CDN (run before feature work)           |
+| `npm run translations:push`  | Manually upload new keys to Tolgee (requires TOLGEE_API_KEY, GitHub Actions)     |
+| `npm run translations:tag`   | Manually tag translation keys by usage (requires TOLGEE_API_KEY, GitHub Actions) |
 
 ---
 
-### Summary
+### Configuration
 
-| Step           | Action                                                   | Command                       | Result                                                                                |
-| -------------- | -------------------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------- |
-| 1. Development | Add and translate new texts in `draft.translations.json` | –                             | Drafts updated                                                                        |
-| 2. Export      | Generate Excel for translation                           | `npm run translations:export` | Excel in `translation-export/`                                                        |
-| 3. Import      | Import completed translations                            | `npm run translations:import` | Updates translations.json and removes only imported keys from draft.translations.json |
+Tolgee configuration is stored in [.tolgeerc.json](.tolgeerc.json). This file defines:
+
+- Project ID and credentials
+- Namespaces and languages
+- File paths and patterns
+- Push/pull settings

@@ -209,7 +209,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                 </p>
                 <InputField
                   label={t('profile.my-goals.goal-name')}
-                  requiredText={t('required')}
+                  requiredText={t('common:required')}
                   value={goalName}
                   className="mb-6 sm:max-w-[384px]"
                   onChange={(e) => setGoalName(e.target.value)}
@@ -324,7 +324,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
         <div className="flex justify-end gap-5 flex-1" data-testid="add-goal-footer">
           <div className="flex gap-5 justify-end">
             <Button
-              label={t('cancel')}
+              label={t('common:cancel')}
               onClick={() => closeActiveModal()}
               variant="white"
               size={sm ? 'lg' : 'sm'}

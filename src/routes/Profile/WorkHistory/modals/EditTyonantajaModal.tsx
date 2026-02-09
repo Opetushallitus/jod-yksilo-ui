@@ -140,7 +140,7 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
               label={t('work-history.employer')}
               {...methods.register(`nimi.${language}` as const)}
               placeholder={t('profile.work-history.modals.workplace-placeholder')}
-              requiredText={t('required')}
+              requiredText={t('common:required')}
               testId="work-history-employer-input"
             />
             <FormError name={`nimi.${language}`} errors={errors} />
@@ -171,7 +171,7 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
           </div>
           <div className="flex flex-row gap-3">
             <Button
-              label={t('cancel')}
+              label={t('common:cancel')}
               variant="white"
               onClick={() => {
                 if (isSubmitting) {

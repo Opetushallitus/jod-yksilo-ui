@@ -268,7 +268,7 @@ const JobOpportunity = () => {
             <Trans
               i18nKey="job-opportunity.employment-data.description"
               components={{
-                Icon: <JodOpenInNew ariaLabel={t('external-link')} />,
+                Icon: <JodOpenInNew ariaLabel={t('common:external-link')} />,
                 CustomLink: (
                   <Link
                     to={'https://osaamispolku.fi/tietopalvelu'}
@@ -293,7 +293,7 @@ const JobOpportunity = () => {
                     <Trans
                       i18nKey="job-opportunity.employment-data.supply-and-demand-subtitle"
                       components={{
-                        Icon: <JodOpenInNew ariaLabel={t('external-link')} />,
+                        Icon: <JodOpenInNew ariaLabel={t('common:external-link')} />,
                         CustomLink: (
                           <Link
                             to={'https://tyomarkkinatori.fi/henkiloasiakkaat'}
@@ -413,7 +413,7 @@ const JobOpportunity = () => {
               testId="job-opportunity-open-tyomarkkinatori"
               size="sm"
               label={t('job-opportunity.tyomarkkinatori.button-label')}
-              icon={<JodOpenInNew ariaLabel={t('external-link')} />}
+              icon={<JodOpenInNew ariaLabel={t('common:external-link')} />}
               iconSide="right"
               linkComponent={getLinkTo(tmtUrl, { useAnchor: true, target: '_blank' })}
             />

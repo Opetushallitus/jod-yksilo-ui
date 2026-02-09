@@ -1,0 +1,145 @@
+{
+  "breadcrumb": "Synlig sökväg",
+  "cancel": "Avbryt",
+  "close-menu": "Stäng menyn",
+  "competency-path-portal": "Kompetensstigens ingångssida",
+  "delete": "Ta bort",
+  "error-boundary": {
+    "session-expired": "Din session har gått ut. Du måste logga in på tjänsten igen eller använda tjänsten utan att logga in.",
+    "title": "Ett fel inträffade",
+    "unexpected": "Ett oväntat fel har inträffat. Detta kan bero på avbrott i nätförbindelsen eller ett fel i tjänsten."
+  },
+  "error": {
+    "form": {
+      "email": "Kontrollera e-postadressen",
+      "required": "Obligatoriskt fält"
+    }
+  },
+  "external-link": "Länken leder dig utanför tjänsten",
+  "feedback": {
+    "cancel": "Avbryt",
+    "email-label": "E-postadress",
+    "error": "Det gick inte att skicka respons. Försök på nytt senare.",
+    "footer-handled": {
+      "ohjaajan": "Vägledarens avsnitt på UF-centret,",
+      "osaamispolkuni": "Min kompetensstig i Utbildningsstyrelsen,",
+      "tietopalvelu": "Informationstjänsten, hela tjänsten och annan respons hos undervisnings- och kulturministeriet."
+    },
+    "footer-info-1": "När du skickar respons sparar vi tjänstens statusinformation, till exempel från vilken vy responsen har skickats. Statusinformationen vidarebefordras inte till tredje parter. Respons används för utveckling av tjänsten och frivilligt lämnade kontaktuppgifter används för att svara på respons.",
+    "footer-info-heading": "Beroende på avsnitt behandlas respons på följande sätt:",
+    "footer-privacy-heading": "Läs mer i responshanterarnas dataskyddsbeskrivningar:",
+    "intro-1": "Ge respons om tjänsten eller rapportera ett tekniskt problem. På så sätt hjälper du oss i utvecklingen av tjänsterna.",
+    "intro-2": "Om du rapporterar en störning skulle det hjälpa oss om du berättar om den så noggrant som möjligt.",
+    "intro-privacy": "Skriv inga personuppgifter i responsen, såsom personbeteckning eller hälsouppgifter. Vänligen fyll i alla fält så att vi kan behandla din respons.",
+    "linkHrefs": {
+      "keha": "https://tyomarkkinatori.fi/sv/information-om-tjansten/dataskydds-och-registerbeskrivning-och-anvandarvillkor/dataskyddsbeskrivningar",
+      "okm": "https://okm.fi/sv/information-om-webbtjanst",
+      "oph": "https://www.oph.fi/sv/integritetspolicy"
+    },
+    "links": {
+      "keha": "Dataskyddsbeskrivning för UF-centrets kund- och rådgivningstjänster",
+      "okm": "Undervisnings- och kulturministeriets dataskyddsbeskrivning",
+      "oph": "Utbildningsstyrelsens integritetspolicy"
+    },
+    "message-label": "Respons",
+    "section-question": "Vilket avsnitt gäller din respons?",
+    "sections": {
+      "koko-palvelu": "Hela tjänsten eller annan respons",
+      "ohjaajan-osio": "Vägledar-delen",
+      "osaamispolkuni": "Min kompetensstig",
+      "tietopalvelu": "Informationstjänst"
+    },
+    "submit": "Skicka",
+    "success": "Tack för din respons! Din respons hjälper oss att förbättra tjänsten.",
+    "title": "Ge respons",
+    "type-question": "Vilken typ av respons vill du ge?",
+    "types": {
+      "kehitysehdotus": "Utvecklingsförslag",
+      "kehu": "Beröm",
+      "moite": "Kritik",
+      "vika": "Tekniskt fel eller problem"
+    },
+    "wants-contact": "Jag vill bli kontaktad."
+  },
+  "footer": {
+    "cooperation-title": "Kompetensstigen har genomförts i samarbete med följande parter",
+    "copyright": "© Kompetensstigen 2026. Alla rättigheter förbehålls.",
+    "feedback-button-label": "Ge respons",
+    "feedback-content": "Vi vill utveckla Kompetensstigen så att den bättre motsvarar just dina behov. Ge oss respons, vi beaktar den i utvecklingsarbetet.",
+    "feedback-title": "Berätta för oss vad du tyckte om tjänsten!",
+    "funding-title": "Finansieringen av projekten kommer från EU:s facilitet för återhämtning och resiliens (RRF)",
+    "logos": {
+      "keha-label": "UF-centret",
+      "okm-label": "Undervisnings- och kulturministeriet",
+      "oph-label": "Utbildningsstyrelsen",
+      "tem-label": "Arbets- och näringsministeriet"
+    },
+    "more-info-description": "Undrar du på dataskyddet eller hur artificiell intelligens används i tjänsten? Nedan hittar du en sammanställning av allmän information om tjänsten och dess användning.",
+    "more-info-links": {
+      "about-service": "Information om tjänsten",
+      "accessibility": "Information om tillgänglighet",
+      "ai-usage": "Information om användningen av artificiell intelligens",
+      "data-sources": "Informationskällor",
+      "privacy-and-cookies": "Dataskyddsbeskrivning och cookies"
+    },
+    "more-info-title": "Vill du veta mer om Kompetensstigen?"
+  },
+  "language-selection": "Språk",
+  "login": "Logga in",
+  "logout": "Logga ut",
+  "main-navigation": "Huvudnavigering",
+  "menu": "Meny",
+  "navigation": {
+    "external": {
+      "ohjaaja": {
+        "description": "Information och material för vägledning",
+        "label": "Vägledar-delen"
+      },
+      "tietopalvelu": {
+        "description": "Information till stöd för beslutsfattande",
+        "label": "Informationstjänst"
+      },
+      "title": "Uppsättningar av innehåll i Kompetensstigen",
+      "yksilo": {
+        "description": "Personlig kompetensstig",
+        "label": "Min kompetensstig"
+      }
+    },
+    "extra": {
+      "palveluhakemisto": {
+        "label": "Väglednings- och rådgivningstjänster",
+        "url": "https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster"
+      },
+      "title": "Annat stöd för reflektion",
+      "urataidot": {
+        "label": "Självutvärdering av karriärkompetens"
+      }
+    }
+  },
+  "navigation-menu": "Meny",
+  "no-match": {
+    "description": "Sidan du söker kunde inte hittas eller länken är föråldrad. Kontrollera adressen, öppna menyn eller gå till startsidan.",
+    "go-home": "Gå till startsidan",
+    "title": "Hoppsan! Sidan hittades inte"
+  },
+  "note": {
+    "close": "Stäng"
+  },
+  "open-submenu": "Öppna undermenyn",
+  "osaamispolku": "Min kompetensstig",
+  "print": "Skriv ut",
+  "required": "obligatorisk",
+  "return-home": "Återgå till förstasidan",
+  "share": "Dela",
+  "show-all": "Visa alla",
+  "skiplinks": {
+    "main": "Gå till huvudinnehållet"
+  },
+  "slugs": {
+    "about-service": "information-om-tjansten",
+    "accessibility": "information-om-tillganglighet",
+    "ai-usage": "information-om-anvandningen-av-artificiell-intelligens",
+    "data-sources": "datakallor",
+    "privacy-and-cookies": "dataskyddsbeskrivning-och-cookies"
+  }
+}

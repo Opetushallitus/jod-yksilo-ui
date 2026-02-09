@@ -155,7 +155,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
               label={t('free-time-activities.name-of-free-time-theme')}
               {...methods.register(`nimi.${language}` as const)}
               placeholder={t('profile.free-time-activities.modals.name-of-free-time-theme-placeholder')}
-              requiredText={t('required')}
+              requiredText={t('common:required')}
               testId="free-time-activities-theme-input"
             />
             <FormError name={`nimi.${language}`} errors={errors} />
@@ -180,8 +180,8 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
                   }),
                   onConfirm: deleteToiminto,
                   variant: 'destructive',
-                  confirmText: t('delete'),
-                  cancelText: t('cancel'),
+                  confirmText: t('common:delete'),
+                  cancelText: t('common:cancel'),
                 });
               }}
               testId="free-time-delete-activity"
@@ -190,7 +190,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
           </div>
           <div className="flex flex-row gap-3">
             <Button
-              label={t('cancel')}
+              label={t('common:cancel')}
               variant="white"
               onClick={() => {
                 if (isSubmitting) {

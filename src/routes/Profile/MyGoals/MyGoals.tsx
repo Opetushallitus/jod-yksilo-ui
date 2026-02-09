@@ -27,9 +27,9 @@ const GuidanceCard = ({ testId, className = '' }: { testId: string; className?: 
         <Button
           label={t('move-to-service')}
           iconSide="right"
-          icon={<JodOpenInNew ariaLabel={t('external-link')} />}
+          icon={<JodOpenInNew ariaLabel={t('common:external-link')} />}
           variant="white"
-          linkComponent={getLinkTo(t('navigation.extra.palveluhakemisto.url'), {
+          linkComponent={getLinkTo(t('common:navigation.extra.palveluhakemisto.url'), {
             useAnchor: true,
             target: '_blank',
           })}
