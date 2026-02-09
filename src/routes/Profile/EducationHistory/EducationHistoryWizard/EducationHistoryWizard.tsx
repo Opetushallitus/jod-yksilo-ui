@@ -259,7 +259,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
           <div className="flex gap-3">
             <Button
               onClick={onClose}
-              label={t('cancel')}
+              label={t('common:cancel')}
               variant="white"
               data-testid="education-history-cancel"
               size={sm ? 'lg' : 'sm'}

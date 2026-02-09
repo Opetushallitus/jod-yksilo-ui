@@ -171,13 +171,13 @@ const Home = () => {
             content={t('home.personal-guidance.content')}
             title={t('home.personal-guidance.title')}
             buttonLabel={t('home.personal-guidance.link-text')}
-            to={t('navigation.extra.palveluhakemisto.url')}
+            to={t('common:navigation.extra.palveluhakemisto.url')}
             backgroundColor="var(--ds-color-secondary-2-dark)"
-            linkComponent={getLinkTo(t('navigation.extra.palveluhakemisto.url'), {
+            linkComponent={getLinkTo(t('common:navigation.extra.palveluhakemisto.url'), {
               useAnchor: true,
               target: '_blank',
             })}
-            buttonIcon={<JodOpenInNew ariaLabel={t('external-link')} />}
+            buttonIcon={<JodOpenInNew ariaLabel={t('common:external-link')} />}
           />
         </div>
       </FullWidthContainer>

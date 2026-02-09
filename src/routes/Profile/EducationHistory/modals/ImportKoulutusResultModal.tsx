@@ -47,7 +47,7 @@ const ImportKoulutusResultModal = ({ isOpen, onClose, isSuccess, errorText }: Im
                   {t('education-history-import.result-modal.success-osaamiset-info')}
                 </p>
                 <a
-                  href={`/${language}/${t('slugs.ai-usage')}`}
+                  href={`/${language}/${t('common:slugs.ai-usage')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-button-md mt-4 text-accent hover:underline"

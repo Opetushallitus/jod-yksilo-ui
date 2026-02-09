@@ -25,8 +25,6 @@ import ProfileFront from './Profile/ProfileFront/ProfileFront';
 import { ErrorBoundary, NoMatch, Root, loader as rootLoader } from './Root';
 import { Search, searchLoader } from './Search';
 
-const competencesSlug = 'slugs.profile.competences';
-
 const profileRoutes = supportedLanguageCodes.map(
   (lng) =>
     ({
@@ -66,8 +64,8 @@ const profileRoutes = supportedLanguageCodes.map(
           },
         },
         {
-          id: `{${competencesSlug}}|${lng}`,
-          path: i18n.t(competencesSlug, { lng }),
+          id: `{${'slugs.profile.competences'}}|${lng}`,
+          path: i18n.t('slugs.profile.competences', { lng }),
           loader: withYksiloContext(competencesLoader),
           element: <ProfileCompetences />,
           handle: {
@@ -75,8 +73,8 @@ const profileRoutes = supportedLanguageCodes.map(
           },
         },
         {
-          id: `{${competencesSlug}}/{slugs.profile.work-history}|${lng}`,
-          path: `${i18n.t(competencesSlug, { lng })}/${i18n.t('slugs.profile.work-history', { lng })}`,
+          id: `{${'slugs.profile.competences'}}/{slugs.profile.work-history}|${lng}`,
+          path: `${i18n.t('slugs.profile.competences', { lng })}/${i18n.t('slugs.profile.work-history', { lng })}`,
           loader: withYksiloContext(workHistoryLoader),
           element: <WorkHistory />,
           handle: {
@@ -84,8 +82,8 @@ const profileRoutes = supportedLanguageCodes.map(
           },
         },
         {
-          id: `{${competencesSlug}}/{slugs.profile.education-history}|${lng}`,
-          path: `${i18n.t(competencesSlug, { lng })}/${i18n.t('slugs.profile.education-history', { lng })}`,
+          id: `{${'slugs.profile.competences'}}/{slugs.profile.education-history}|${lng}`,
+          path: `${i18n.t('slugs.profile.competences', { lng })}/${i18n.t('slugs.profile.education-history', { lng })}`,
           loader: withYksiloContext(educationHistoryLoader),
           element: <EducationHistory />,
           handle: {
@@ -93,8 +91,8 @@ const profileRoutes = supportedLanguageCodes.map(
           },
         },
         {
-          id: `{${competencesSlug}}/{slugs.profile.free-time-activities}|${lng}`,
-          path: `${i18n.t(competencesSlug, { lng })}/${i18n.t('slugs.profile.free-time-activities', { lng })}`,
+          id: `{${'slugs.profile.competences'}}/{slugs.profile.free-time-activities}|${lng}`,
+          path: `${i18n.t('slugs.profile.competences', { lng })}/${i18n.t('slugs.profile.free-time-activities', { lng })}`,
           loader: withYksiloContext(freeTimeActivitiesLoader),
           element: <FreeTimeActivities />,
           handle: {
@@ -102,8 +100,8 @@ const profileRoutes = supportedLanguageCodes.map(
           },
         },
         {
-          id: `{${competencesSlug}}/{slugs.profile.something-else}|${lng}`,
-          path: `${i18n.t(competencesSlug, { lng })}/${i18n.t('slugs.profile.something-else', { lng })}`,
+          id: `{${'slugs.profile.competences'}}/{slugs.profile.something-else}|${lng}`,
+          path: `${i18n.t('slugs.profile.competences', { lng })}/${i18n.t('slugs.profile.something-else', { lng })}`,
           element: <SomethingElse />,
           loader: withYksiloContext(muuOsaaminenLoader),
           handle: {

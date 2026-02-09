@@ -123,7 +123,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           onToggleFavorite={() =>
             !isLoggedIn
               ? showDialog({
-                  title: t('login'),
+                  title: t('common:login'),
                   description: t('login-for-favorites'),
                   closeParentModal: true,
                   footer: createLoginDialogFooter(t, loginLink, closeAllModals),
@@ -134,7 +134,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
         />
         {isDev && (
           <ActionButton
-            label={t('share')}
+            label={t('common:share')}
             icon={<JodShare className="text-accent" />}
             onClick={() => void copyToClipboard(window.location.href)}
             className="bg-bg-gray-2"
@@ -142,7 +142,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
         )}
         {!!globalThis.print && (
           <ActionButton
-            label={t('print')}
+            label={t('common:print')}
             icon={<JodPrint className="text-accent" />}
             onClick={doPrint}
             className="bg-bg-gray-2"

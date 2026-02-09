@@ -6,8 +6,8 @@ import { useTranslation } from 'react-i18next';
 const ErrorBoundary = () => {
   const { t, i18n } = useTranslation();
   const loginLink = useLoginLink();
-  const title = t('error-boundary.title');
-  const message = t('error-boundary.unexpected');
+  const title = t('common:error-boundary.title');
+  const message = t('common:error-boundary.unexpected');
 
   return (
     <main
@@ -26,7 +26,7 @@ const ErrorBoundary = () => {
           testId="error-boundary-home"
           icon={<JodHome />}
           iconSide="left"
-          label={t('return-home')}
+          label={t('common:return-home')}
           variant="accent"
           /* eslint-disable-next-line react/no-unstable-nested-components */
           linkComponent={({ children, className }) => (
@@ -39,7 +39,7 @@ const ErrorBoundary = () => {
           testId="error-boundary-login"
           icon={<JodUser />}
           iconSide="left"
-          label={t('login')}
+          label={t('common:login')}
           variant="accent"
           /* eslint-disable-next-line react/no-unstable-nested-components */
           linkComponent={({ children, className }) => (

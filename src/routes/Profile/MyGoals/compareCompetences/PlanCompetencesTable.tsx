@@ -90,7 +90,7 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
       </table>
       {vaaditutOsaamiset.length > ROW_LIMIT && (
         <Button
-          label={showAll ? t('show-less') : t('show-all')}
+          label={showAll ? t('show-less') : t('common:show-all')}
           onClick={() => setShowAll((previous) => !previous)}
           variant="plain"
           className="mt-6 print:hidden"

@@ -72,7 +72,7 @@ const MainStep = () => {
         <InputField
           label={t('work-history.job-description')}
           {...register(`nimi.${language}` as const)}
-          requiredText={t('required')}
+          requiredText={t('common:required')}
           placeholder={t('profile.work-history.modals.job-description-placeholder')}
           help={t('profile.work-history.modals.job-description-help')}
           testId="work-history-job-description-input"
@@ -89,7 +89,7 @@ const MainStep = () => {
                 label={t('started')}
                 {...field}
                 placeholder={t('date-placeholder')}
-                requiredText={t('required')}
+                requiredText={t('common:required')}
                 translations={datePickerTranslations}
                 testId="work-history-start-date"
               />
@@ -383,7 +383,7 @@ const AddOrEditToimenkuvaModal = ({
           </div>
           <div className="flex flex-row justify-between gap-3">
             <Button
-              label={t('cancel')}
+              label={t('common:cancel')}
               variant="white"
               onClick={onClose}
               className="whitespace-nowrap"

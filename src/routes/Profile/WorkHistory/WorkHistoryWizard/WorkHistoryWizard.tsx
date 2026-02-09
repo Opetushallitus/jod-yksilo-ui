@@ -246,7 +246,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
         <div className="flex gap-3">
           <Button
             onClick={() => onClose()}
-            label={t('cancel')}
+            label={t('common:cancel')}
             variant="white"
             testId="work-history-cancel"
             size={sm ? 'lg' : 'sm'}

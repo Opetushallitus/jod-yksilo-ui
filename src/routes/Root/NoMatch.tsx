@@ -10,7 +10,7 @@ const NoMatch = () => {
     i18n: { language },
   } = useTranslation();
 
-  const title = t('no-match.title');
+  const title = t('common:no-match.title');
 
   return (
     <>
@@ -19,9 +19,9 @@ const NoMatch = () => {
         <div className="mx-auto grid w-full max-w-[1140px] grow grid-cols-3 gap-6 px-5 pt-[88px] pb-[96px] sm:px-6">
           <div className="col-span-3 flex flex-col lg:col-span-2">
             <IconHeading icon={<JodError />} title={title} />
-            <p className="text-body-lg mb-11">{t('no-match.description')}</p>
+            <p className="text-body-lg mb-11">{t('common:no-match.description')}</p>
             <Button
-              label={t('no-match.go-home')}
+              label={t('common:no-match.go-home')}
               serviceVariant="yksilo"
               variant="accent"
               /* eslint-disable-next-line react/no-unstable-nested-components */

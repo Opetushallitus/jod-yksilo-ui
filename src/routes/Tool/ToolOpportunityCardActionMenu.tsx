@@ -63,7 +63,7 @@ const ToolOpportunityCardActionMenu = ({
             onClick={() => copyToClipboard(window.location.origin + '/yksilo' + opportunityUrl)}
             className="cursor-pointer w-full"
           >
-            <PopupListItem>{t('share')}</PopupListItem>
+            <PopupListItem>{t('common:share')}</PopupListItem>
           </button>
         </li>
       </ul>

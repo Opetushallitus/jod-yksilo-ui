@@ -74,7 +74,7 @@ const MainStep = () => {
           label={t('education-history.name-of-degree-or-education')}
           {...register(`nimi.${language}` as const)}
           placeholder={t('profile.education-history.modals.job-description-placeholder')}
-          requiredText={t('required')}
+          requiredText={t('common:required')}
           testId="education-history-degree-description-input"
         />
         <FormError name={`nimi.${language}`} errors={errors} />
@@ -388,7 +388,7 @@ const AddOrEditKoulutusModal = ({
           </div>
           <div className="flex flex-row justify-between gap-3">
             <Button
-              label={t('cancel')}
+              label={t('common:cancel')}
               variant="white"
               onClick={() => {
                 if (isSubmitting) {

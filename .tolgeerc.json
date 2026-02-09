@@ -1,0 +1,18 @@
+{
+  "$schema": "https://docs.tolgee.io/cli-schema.json",
+  "projectId": 27621,
+  "format": "JSON_I18NEXT",
+  "patterns": ["./src/**/*.ts?(x)"],
+  "extractor": "./extractor.ts",
+  "defaultNamespace": "yksilo",
+  "push": {
+    "filesTemplate": "./src/i18n/{namespace}/{languageTag}.json",
+    "language": ["en", "fi", "sv"],
+    "namespaces": ["yksilo", "common"],
+    "forceMode": "KEEP"
+  },
+  "pull": {
+    "path": "./src/i18n/",
+    "namespaces": ["yksilo", "common"]
+  }
+}

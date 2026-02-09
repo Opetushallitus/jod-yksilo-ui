@@ -104,13 +104,13 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
 
           <div className="flex flex-row gap-5">
             <Button
-              label={t('cancel')}
+              label={t('common:cancel')}
               variant="white"
               size={sm ? 'lg' : 'sm'}
               className="h-5"
               onClick={() => {
                 showDialog({
-                  title: t('cancel'),
+                  title: t('common:cancel'),
                   description: t('profile.paths.cancel-confirmation-text'),
                   confirmText: t('close'),
                   cancelText: t('profile.paths.continue-editing'),

@@ -135,7 +135,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                     showDialog({
                       title: t('preferences.share.delete-confirm-title'),
                       description: t('preferences.share.delete-confirm-description'),
-                      confirmText: t('delete'),
+                      confirmText: t('common:delete'),
                       onConfirm: async () => {
                         await client.DELETE('/api/profiili/jakolinkki/{id}', {
                           params: { path: { id: linkki.id! } },
@@ -186,7 +186,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                           label={t('preferences.share.preview')}
                           iconSide="right"
                           linkComponent={getLinkTo(url.href, { useAnchor: true, target: '_blank' })}
-                          icon={<JodOpenInNew ariaLabel={t('external-link')} />}
+                          icon={<JodOpenInNew ariaLabel={t('common:external-link')} />}
                           disabled={expired}
                         />
                         {deleteButton}

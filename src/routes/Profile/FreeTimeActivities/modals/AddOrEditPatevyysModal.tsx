@@ -74,7 +74,7 @@ const MainStep = () => {
           label={t('free-time-activities.name-of-free-time-activity')}
           {...register(`nimi.${language}` as const)}
           placeholder={t('profile.free-time-activities.modals.name-of-free-time-activity-placeholder')}
-          requiredText={t('required')}
+          requiredText={t('common:required')}
           testId="free-time-activities-activity-input"
         />
         <FormError name={`nimi.${language}`} errors={errors} />
@@ -88,7 +88,7 @@ const MainStep = () => {
                 label={t('started')}
                 {...field}
                 placeholder={t('date-placeholder')}
-                requiredText={t('required')}
+                requiredText={t('common:required')}
                 translations={datePickerTranslations}
                 testId="free-time-activities-start-date"
               />
@@ -386,7 +386,7 @@ export const AddOrEditPatevyysModal = ({
           </div>
           <div className="flex flex-row justify-between gap-3">
             <Button
-              label={t('cancel')}
+              label={t('common:cancel')}
               variant="white"
               onClick={() => {
                 if (isSubmitting) {

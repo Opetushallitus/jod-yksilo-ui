@@ -150,7 +150,7 @@ const EditKoulutuskokonaisuusModal = ({
               label={t('education-history.educational-institution-or-education-provider')}
               {...methods.register(`nimi.${language}` as const)}
               placeholder={t('profile.education-history.modals.workplace-placeholder')}
-              requiredText={t('required')}
+              requiredText={t('common:required')}
               testId="education-history-provider-input"
               className="max-w-modal-content"
             />
@@ -181,7 +181,7 @@ const EditKoulutuskokonaisuusModal = ({
           </div>
           <div className="flex flex-row gap-3">
             <Button
-              label={t('cancel')}
+              label={t('common:cancel')}
               variant="white"
               onClick={() => {
                 if (isSubmitting) {

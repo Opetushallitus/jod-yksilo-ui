@@ -43,7 +43,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
             label={t('free-time-activities.name-of-free-time-theme')}
             {...register(`nimi.${language}` as const)}
             placeholder={t('profile.free-time-activities.modals.name-of-free-time-theme-placeholder')}
-            requiredText={t('required')}
+            requiredText={t('common:required')}
             testId="free-time-activities-theme-input"
           />
           <FormError name={`nimi.${language}`} errors={errors} />
@@ -54,7 +54,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
           label={t('free-time-activities.name-of-free-time-activity')}
           {...register(`patevyydet.${patevyys}.nimi.${language}` as const)}
           placeholder={t('profile.free-time-activities.modals.name-of-free-time-activity-placeholder')}
-          requiredText={t('required')}
+          requiredText={t('common:required')}
           testId="free-time-activities-activity-input"
         />
         <FormError name={`patevyydet.${patevyys}.nimi.${language}`} errors={errors} />
@@ -72,7 +72,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
                   trigger(`patevyydet.${patevyys}.loppuPvm`);
                 }}
                 placeholder={t('date-placeholder')}
-                requiredText={t('required')}
+                requiredText={t('common:required')}
                 translations={datePickerTranslations}
                 testId="free-time-activities-start-date"
               />

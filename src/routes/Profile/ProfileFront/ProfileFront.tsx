@@ -69,7 +69,7 @@ const ProfileFront = () => {
             components={{
               CustomLink: (
                 <ExternalLink
-                  href={`/${language}/${t('slugs.privacy-and-cookies')}`}
+                  href={`/${language}/${t('common:slugs.privacy-and-cookies')}`}
                   className="text-accent hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"

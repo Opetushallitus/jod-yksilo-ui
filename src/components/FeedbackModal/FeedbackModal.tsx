@@ -111,23 +111,23 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
 
       // Wait a moment before showing success message
       await new Promise((resolve) => setTimeout(resolve, 50));
-      toast.success(t('feedback.success'));
+      toast.success(t('common:feedback.success'));
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setIsSubmitting(false);
-      toast.error(t('feedback.error'));
+      toast.error(t('common:feedback.error'));
     }
   };
 
   const topSlot = React.useMemo(
-    () => <h2 className="sm:text-heading-1 text-heading-1-mobile mb-5">{t('feedback.title')}</h2>,
+    () => <h2 className="sm:text-heading-1 text-heading-1-mobile mb-5">{t('common:feedback.title')}</h2>,
     [t],
   );
 
   return (
     <Modal
-      name={t('feedback.title')}
+      name={t('common:feedback.title')}
       open={isOpen}
       onClose={onClose}
       fullWidthContent
@@ -141,26 +141,26 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
           className="max-w-modal-content"
         >
           <p className="sm:text-body-md text-body-md-mobile mb-9">
-            {t('feedback.intro-1')} {t('feedback.intro-2')}
+            {t('common:feedback.intro-1')} {t('common:feedback.intro-2')}
             <br />
             <br />
-            {t('feedback.intro-privacy')}
+            {t('common:feedback.intro-privacy')}
           </p>
           <Controller
             control={control}
             name="section"
             render={({ field: { value, onChange } }) => (
               <RadioButtonGroup
-                label={t('feedback.section-question')}
+                label={t('common:feedback.section-question')}
                 value={value}
                 onChange={onChange}
                 className="mb-6"
                 testId="feedback-section-group"
               >
-                <RadioButton label={t('feedback.sections.osaamispolkuni')} value="Osaamispolkuni" />
-                <RadioButton label={t('feedback.sections.ohjaajan-osio')} value="Ohjaajan osio" />
-                <RadioButton label={t('feedback.sections.tietopalvelu')} value="Tietopalvelu" />
-                <RadioButton label={t('feedback.sections.koko-palvelu')} value="Koko palvelu tai muu palaute" />
+                <RadioButton label={t('common:feedback.sections.osaamispolkuni')} value="Osaamispolkuni" />
+                <RadioButton label={t('common:feedback.sections.ohjaajan-osio')} value="Ohjaajan osio" />
+                <RadioButton label={t('common:feedback.sections.tietopalvelu')} value="Tietopalvelu" />
+                <RadioButton label={t('common:feedback.sections.koko-palvelu')} value="Koko palvelu tai muu palaute" />
               </RadioButtonGroup>
             )}
           />
@@ -169,26 +169,26 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
             name="type"
             render={({ field: { value, onChange } }) => (
               <RadioButtonGroup
-                label={t('feedback.type-question')}
+                label={t('common:feedback.type-question')}
                 value={value}
                 onChange={onChange}
                 className="mb-6"
                 testId="feedback-type-group"
               >
-                <RadioButton label={t('feedback.types.kehu')} value="Kehu" />
-                <RadioButton label={t('feedback.types.kehitysehdotus')} value="Kehitysehdotus" />
-                <RadioButton label={t('feedback.types.moite')} value="Moite" />
-                <RadioButton label={t('feedback.types.vika')} value="Tekninen vika tai ongelma" />
+                <RadioButton label={t('common:feedback.types.kehu')} value="Kehu" />
+                <RadioButton label={t('common:feedback.types.kehitysehdotus')} value="Kehitysehdotus" />
+                <RadioButton label={t('common:feedback.types.moite')} value="Moite" />
+                <RadioButton label={t('common:feedback.types.vika')} value="Tekninen vika tai ongelma" />
               </RadioButtonGroup>
             )}
           />
           <div className="mb-9">
             <Textarea
-              label={t('feedback.message-label')}
+              label={t('common:feedback.message-label')}
               {...register('message')}
               rows={5}
               maxLength={MESSAGE_MAX_LENGTH}
-              requiredText={t('required')}
+              requiredText={t('common:required')}
               errorMessage={errors.message ? formErrorMessage.required().message : undefined}
               testId="feedback-message"
             />
@@ -198,8 +198,8 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
             name="wantsContact"
             render={({ field: { name, value, onChange } }) => (
               <Checkbox
-                label={t('feedback.wants-contact')}
-                ariaLabel={t('feedback.wants-contact')}
+                label={t('common:feedback.wants-contact')}
+                ariaLabel={t('common:feedback.wants-contact')}
                 name={name}
                 value="yes"
                 checked={value}
@@ -212,10 +212,10 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
           {wantsContact && (
             <div className="mb-9">
               <InputField
-                label={t('feedback.email-label')}
+                label={t('common:feedback.email-label')}
                 {...register('email')}
                 maxLength={EMAIL_MAX_LENGTH}
-                requiredText={t('required')}
+                requiredText={t('common:required')}
                 errorMessage={errors.email ? formErrorMessage.email().message : undefined}
                 testId="feedback-email"
               />
@@ -223,48 +223,48 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
           )}
           <hr className="h-1 bg-border-gray text-border-gray mb-7" />
           <div className="sm:text-body-md text-body-md-mobile">
-            <p>{t('feedback.footer-info-1')}</p>
+            <p>{t('common:feedback.footer-info-1')}</p>
             <br />
-            <p>{t('feedback.footer-info-heading')}</p>
+            <p>{t('common:feedback.footer-info-heading')}</p>
             <ul className="list-disc list-outside ml-7">
-              <li>{t('feedback.footer-handled.osaamispolkuni')}</li>
-              <li>{t('feedback.footer-handled.ohjaajan')}</li>
-              <li>{t('feedback.footer-handled.tietopalvelu')}</li>
+              <li>{t('common:feedback.footer-handled.osaamispolkuni')}</li>
+              <li>{t('common:feedback.footer-handled.ohjaajan')}</li>
+              <li>{t('common:feedback.footer-handled.tietopalvelu')}</li>
             </ul>
             <br />
-            <p>{t('feedback.footer-privacy-heading')}</p>
+            <p>{t('common:feedback.footer-privacy-heading')}</p>
             <ul className="list-disc list-outside ml-7">
               <li>
                 <a
-                  href={t('feedback.linkHrefs.oph')}
+                  href={t('common:feedback.linkHrefs.oph')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex text-accent hover:underline"
                 >
-                  {t('feedback.links.oph')}
-                  <JodOpenInNew ariaLabel={t('external-link')} />
+                  {t('common:feedback.links.oph')}
+                  <JodOpenInNew ariaLabel={t('common:external-link')} />
                 </a>
               </li>
               <li>
                 <a
-                  href={t('feedback.linkHrefs.keha')}
+                  href={t('common:feedback.linkHrefs.keha')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex text-accent hover:underline"
                 >
-                  {t('feedback.links.keha')}
-                  <JodOpenInNew ariaLabel={t('external-link')} />
+                  {t('common:feedback.links.keha')}
+                  <JodOpenInNew ariaLabel={t('common:external-link')} />
                 </a>
               </li>
               <li>
                 <a
-                  href={t('feedback.linkHrefs.okm')}
+                  href={t('common:feedback.linkHrefs.okm')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex text-accent hover:underline"
                 >
-                  {t('feedback.links.okm')}
-                  <JodOpenInNew ariaLabel={t('external-link')} />
+                  {t('common:feedback.links.okm')}
+                  <JodOpenInNew ariaLabel={t('common:external-link')} />
                 </a>
               </li>
             </ul>
@@ -275,7 +275,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
         <div className="flex justify-end flex-1 gap-4">
           <Button
             variant="white"
-            label={t('feedback.cancel')}
+            label={t('common:feedback.cancel')}
             onClick={() => {
               reset();
               onClose();
@@ -285,7 +285,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
           />
           <Button
             variant="white"
-            label={t('feedback.submit')}
+            label={t('common:feedback.submit')}
             className="whitespace-nowrap"
             disabled={!isValid || isSubmitting}
             form={formId}

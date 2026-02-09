@@ -139,7 +139,7 @@ const PlanOptionFilters = ({ isOpen, onClose, isModal }: PlanOptionFiltersProps)
       footer={
         !sm && (
           <div className="flex flex-row gap-5 flex-1 justify-end">
-            <Button label={t('cancel')} variant="white" onClick={onClose} size="sm" />
+            <Button label={t('common:cancel')} variant="white" onClick={onClose} size="sm" />
             <Button label={t('save')} variant="accent" onClick={onClose} size="sm" />
           </div>
         )

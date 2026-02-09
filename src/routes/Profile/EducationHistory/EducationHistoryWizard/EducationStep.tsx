@@ -35,7 +35,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
             label={t('education-history.educational-institution-or-education-provider')}
             {...register(`nimi.${language}` as const)}
             placeholder={t('profile.education-history.modals.workplace-placeholder')}
-            requiredText={t('required')}
+            requiredText={t('common:required')}
           />
           <FormError name={`nimi.${language}`} errors={errors} />
         </div>
@@ -45,7 +45,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
           label={t('education-history.name-of-degree-or-education')}
           {...register(`koulutukset.${koulutus}.nimi.${language}` as const)}
           placeholder={t('profile.education-history.modals.job-description-placeholder')}
-          requiredText={t('required')}
+          requiredText={t('common:required')}
         />
         <FormError name={`koulutukset.${koulutus}.nimi.${language}`} errors={errors} />
       </div>

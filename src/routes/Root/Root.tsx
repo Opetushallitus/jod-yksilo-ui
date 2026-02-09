@@ -176,11 +176,20 @@ const Root = () => {
   }, [language]);
 
   const moreInfoLinks = [
-    { href: `/${language}/${t('slugs.about-service')}`, label: t('footer.more-info-links.about-service') },
-    { href: `/${language}/${t('slugs.privacy-and-cookies')}`, label: t('footer.more-info-links.privacy-and-cookies') },
-    { href: `/${language}/${t('slugs.data-sources')}`, label: t('footer.more-info-links.data-sources') },
-    { href: `/${language}/${t('slugs.ai-usage')}`, label: t('footer.more-info-links.ai-usage') },
-    { href: `/${language}/${t('slugs.accessibility')}`, label: t('footer.more-info-links.accessibility') },
+    {
+      href: `/${language}/${t('common:slugs.about-service')}`,
+      label: t('common:footer.more-info-links.about-service'),
+    },
+    {
+      href: `/${language}/${t('common:slugs.privacy-and-cookies')}`,
+      label: t('common:footer.more-info-links.privacy-and-cookies'),
+    },
+    { href: `/${language}/${t('common:slugs.data-sources')}`, label: t('common:footer.more-info-links.data-sources') },
+    { href: `/${language}/${t('common:slugs.ai-usage')}`, label: t('common:footer.more-info-links.ai-usage') },
+    {
+      href: `/${language}/${t('common:slugs.accessibility')}`,
+      label: t('common:footer.more-info-links.accessibility'),
+    },
   ];
 
   const userMenuProfileFrontUrl = `${t('slugs.profile.index')}/${t('slugs.profile.front')}`;
@@ -214,15 +223,15 @@ const Root = () => {
     <div className="flex flex-col min-h-screen bg-bg-gray" data-testid="app-root">
       <link rel="manifest" href={`/manifest-${language}.json`} crossOrigin="use-credentials" />
       <header role="banner" className="sticky top-0 z-30 print:hidden" data-testid="app-header">
-        <SkipLink hash="#jod-main" label={t('skiplinks.main')} />
+        <SkipLink hash="#jod-main" label={t('common:skiplinks.main')} />
         <form action="/yksilo/logout" method="POST" hidden ref={logoutForm}>
           <input type="hidden" name="_csrf" value={data?.csrf.token} />
           <input type="hidden" name="lang" value={language} />
         </form>
         <NavigationBar
-          logo={{ to: `/${language}`, language, srText: t('osaamispolku') }}
+          logo={{ to: `/${language}`, language, srText: t('common:osaamispolku') }}
           menuComponent={
-            isCvPage ? null : <MenuButton onClick={() => setNavMenuOpen(!navMenuOpen)} label={t('menu')} />
+            isCvPage ? null : <MenuButton onClick={() => setNavMenuOpen(!navMenuOpen)} label={t('common:menu')} />
           }
           languageButtonComponent={
             <LanguageButton
@@ -249,10 +258,10 @@ const Root = () => {
                 // eslint-disable-next-line react/no-unstable-nested-components
                 profileLinkComponent={(props) => <NavLink to={userMenuProfileFrontUrl} {...props} />}
                 isLoggedIn={!!data?.csrf}
-                loginLabel={t('login')}
+                loginLabel={t('common:login')}
                 // eslint-disable-next-line react/no-unstable-nested-components
                 loginLinkComponent={(props) => <NavLink to={loginPageUrl} {...props} />}
-                logoutLabel={t('logout')}
+                logoutLabel={t('common:logout')}
                 onLogout={logout}
               />
             )
@@ -268,7 +277,7 @@ const Root = () => {
             <SearchBar searchInputVisible={searchInputVisible} setSearchInputVisible={setSearchInputVisible} />
           }
           translations={{
-            showAllNotesLabel: t('show-all'),
+            showAllNotesLabel: t('common:show-all'),
             ariaLabelCloseNote: t('close'),
           }}
           testId="navigation-bar"
@@ -296,22 +305,22 @@ const Root = () => {
 
       <Footer
         language={language}
-        okmLabel={t('footer.logos.okm-label')}
-        temLabel={t('footer.logos.tem-label')}
-        ophLabel={t('footer.logos.oph-label')}
-        kehaLabel={t('footer.logos.keha-label')}
-        cooperationTitle={t('footer.cooperation-title')}
-        fundingTitle={t('footer.funding-title')}
-        moreInfoTitle={t('footer.more-info-title')}
-        moreInfoDescription={t('footer.more-info-description')}
+        okmLabel={t('common:footer.logos.okm-label')}
+        temLabel={t('common:footer.logos.tem-label')}
+        ophLabel={t('common:footer.logos.oph-label')}
+        kehaLabel={t('common:footer.logos.keha-label')}
+        cooperationTitle={t('common:footer.cooperation-title')}
+        fundingTitle={t('common:footer.funding-title')}
+        moreInfoTitle={t('common:footer.more-info-title')}
+        moreInfoDescription={t('common:footer.more-info-description')}
         moreInfoLinks={moreInfoLinks}
-        feedbackTitle={t('footer.feedback-title')}
-        feedbackContent={t('footer.feedback-content')}
-        feedbackButtonLabel={t('footer.feedback-button-label')}
+        feedbackTitle={t('common:footer.feedback-title')}
+        feedbackContent={t('common:footer.feedback-content')}
+        feedbackButtonLabel={t('common:footer.feedback-button-label')}
         feedbackOnClick={() => setFeedbackVisible(true)}
         feedbackBgImageClassName="bg-[url(@/../assets/feedback.jpg)] bg-cover bg-[50%_50%]"
-        copyright={t('footer.copyright')}
-        externalLinkIconAriaLabel={t('external-link')}
+        copyright={t('common:footer.copyright')}
+        externalLinkIconAriaLabel={t('common:external-link')}
         testId="footer"
       />
       <FeedbackModal

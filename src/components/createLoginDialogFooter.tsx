@@ -18,7 +18,7 @@ export const createLoginDialogFooter = (t: (key: string) => string, loginLink: s
             testId="login-dialog-cancel"
           />
           <Button
-            label={t('login')}
+            label={t('common:login')}
             variant="accent"
             linkComponent={getLinkTo(loginLink, { useAnchor: true })}
             className="whitespace-nowrap"

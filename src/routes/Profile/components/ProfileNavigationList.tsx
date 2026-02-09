@@ -29,7 +29,7 @@ export const ProfileNavigationList = ({ collapsed, activeIndicator }: ProfileNav
   };
   return (
     <PageNavigation
-      openSubMenuLabel={t('open-submenu')}
+      openSubMenuLabel={t('common:open-submenu')}
       menuSection={menuSection}
       collapsed={collapsed}
       activeIndicator={activeIndicator}

@@ -61,7 +61,7 @@ const FavoritesOpportunityCardActionMenu = ({
             className="cursor-pointer w-full"
             data-testid="opportunity-action-share"
           >
-            <PopupListItem>{t('share')}</PopupListItem>
+            <PopupListItem>{t('common:share')}</PopupListItem>
           </button>
         </li>
       </ul>

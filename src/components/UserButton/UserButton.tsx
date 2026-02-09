@@ -63,7 +63,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
               <PopupListItem>{t('profile.index')}</PopupListItem>
             </NavLink>
             <button type="button" onClick={onLogout} className="cursor-pointer w-full" data-testid="user-menu-logout">
-              <PopupListItem classNames="w-full">{t('logout')}</PopupListItem>
+              <PopupListItem classNames="w-full">{t('common:logout')}</PopupListItem>
             </button>
           </PopupList>
         </div>
@@ -81,7 +81,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
       data-testid="user-login-link"
     >
       <JodUser className="mx-auto" />
-      <span className="whitespace-nowrap md:text-[14px] sm:text-[12px] text-[10px]">{t('login')}</span>
+      <span className="whitespace-nowrap md:text-[14px] sm:text-[12px] text-[10px]">{t('common:login')}</span>
     </Link>
   );
 };

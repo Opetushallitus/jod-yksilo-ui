@@ -415,7 +415,7 @@ export const VirtualAssistant = () => {
                 clearState();
                 setIsOpen(false);
               }}
-              label={t('cancel')}
+              label={t('common:cancel')}
               size={sm ? 'lg' : 'sm'}
             />
             <Button

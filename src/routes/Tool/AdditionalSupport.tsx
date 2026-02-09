@@ -94,13 +94,13 @@ const AdditionalSupport = () => {
           <HelpingToolExternalLinkItem
             href={`/urataidot/${lng}`}
             title={t('tool.tools.career-skills-self-assessment-tool')}
-            iconRight={<JodOpenInNew className="text-accent" ariaLabel={t('external-link')} />}
+            iconRight={<JodOpenInNew className="text-accent" ariaLabel={t('common:external-link')} />}
             testId="additional-support-career-skills"
           />
           <HelpingToolExternalLinkItem
-            href={t('navigation.extra.palveluhakemisto.url')}
+            href={t('common:navigation.extra.palveluhakemisto.url')}
             title={t('tool.tools.service-directory')}
-            iconRight={<JodOpenInNew className="text-accent" ariaLabel={t('external-link')} />}
+            iconRight={<JodOpenInNew className="text-accent" ariaLabel={t('common:external-link')} />}
             testId="additional-support-service-directory"
           />
         </ul>
