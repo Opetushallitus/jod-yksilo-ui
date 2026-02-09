@@ -1,5 +1,5 @@
 import { useModal } from '@/hooks/useModal';
-import { Button, ConfirmDialog, Spinner } from '@jod/design-system';
+import { Button, ConfirmDialog, Spinner, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -19,6 +19,10 @@ export type ConfirmDialogWrapperProps = Omit<ConfirmDialogProps, 'children'> & {
   onConfirm?: () => MaybePromise<void>;
   /** Whether to hide the secondary (cancel) button */
   hideSecondaryButton?: boolean;
+  /** Callback for when the cancel button is clicked */
+  onCancel?: () => void;
+  /** Icon for the confirm button */
+  confirmButtonIcon?: React.ReactNode;
 };
 
 /**
@@ -45,12 +49,15 @@ export const ConfirmDialogWrapper = ({
   variant = 'destructive',
   hideSecondaryButton,
   closeParentModal,
+  confirmButtonIcon,
   onConfirm,
+  onCancel,
   footer,
   content,
 }: ConfirmDialogWrapperProps) => {
   const { closeActiveModal, closeAllModals } = useModal();
   const { t } = useTranslation();
+  const { sm } = useMediaQueries();
   const defaultCancelText = t('cancel');
   const defaultConfirmText = title as string;
   const [loading, setLoading] = React.useState(false);
@@ -60,10 +67,13 @@ export const ConfirmDialogWrapper = ({
       {!hideSecondaryButton && (
         <Button
           label={cancelText ?? defaultCancelText}
+          size={sm ? 'lg' : 'sm'}
+          className="not-sm:h-5"
           onClick={() => {
             if (loading) {
               return;
             }
+            onCancel?.();
             hideDialog();
             closeActiveModal();
           }}
@@ -72,7 +82,9 @@ export const ConfirmDialogWrapper = ({
       <Button
         label={confirmText ?? defaultConfirmText}
         iconSide="right"
-        icon={loading ? <Spinner size={24} color="white" /> : undefined}
+        icon={loading ? <Spinner size={24} color="white" /> : confirmButtonIcon}
+        size={sm ? 'lg' : 'sm'}
+        className="not-sm:h-5"
         onClick={async () => {
           if (loading) {
             return;

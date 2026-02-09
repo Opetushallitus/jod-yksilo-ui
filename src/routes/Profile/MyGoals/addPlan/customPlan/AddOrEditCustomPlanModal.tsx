@@ -6,13 +6,13 @@ import { useModal } from '@/hooks/useModal';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, clamp, Modal, Spinner, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import z from 'zod';
 import { useShallow } from 'zustand/shallow';
+import { addPlanStore } from '../store/addPlanStore';
 import CreateCustomPlanStep from './CustomPlanStep';
 import SelectCompetencesStep from './SelectCompetencesStep';
 
@@ -30,16 +30,23 @@ export interface OmaSuunnitelmaForm {
 interface AddOrEditCustomPlanModalProps {
   isOpen: boolean;
   onClose: (isCancel?: boolean) => void;
-  tavoiteId: string;
+  tavoite?: components['schemas']['TavoiteDto'] | null;
   suunnitelmaId?: string;
 }
 
-const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }: AddOrEditCustomPlanModalProps) => {
-  const { t } = useTranslation();
+const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoite, suunnitelmaId }: AddOrEditCustomPlanModalProps) => {
+  const { t, i18n } = useTranslation();
   const { showDialog, closeActiveModal } = useModal();
   const { sm, md } = useMediaQueries();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const { updateEhdotukset, vaaditutOsaamiset, setTavoite } = addPlanStore(
+    useShallow((state) => ({
+      updateEhdotukset: state.updateEhdotukset,
+      vaaditutOsaamiset: state.vaaditutOsaamiset,
+      setTavoite: state.setTavoite,
+    })),
+  );
 
   const methods = useForm<OmaSuunnitelmaForm>({
     mode: 'onBlur',
@@ -66,10 +73,16 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }:
       }),
     ),
     defaultValues: async () => {
-      if (suunnitelmaId) {
+      if (vaaditutOsaamiset.length === 0 && tavoite) {
+        setIsLoading(true);
+        setTavoite(tavoite);
+        await updateEhdotukset(i18n.language);
+      }
+
+      if (suunnitelmaId && tavoite?.id) {
         setIsLoading(true);
         const { data: suunnitelma } = await client.GET('/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}', {
-          params: { path: { id: tavoiteId, suunnitelmaId } },
+          params: { path: { id: tavoite.id, suunnitelmaId } },
         });
 
         const osaamiset =
@@ -90,6 +103,7 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }:
             })) ?? [],
         };
       } else {
+        setIsLoading(false);
         return {
           id: '',
           nimi: {},
@@ -100,15 +114,11 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }:
     },
   });
 
-  const { refreshTavoitteet } = useTavoitteetStore(
-    useShallow((state) => ({
-      refreshTavoitteet: state.refreshTavoitteet,
-    })),
-  );
+  const refreshTavoitteet = useTavoitteetStore((state) => state.refreshTavoitteet);
 
   const onSubmit: FormSubmitHandler<OmaSuunnitelmaForm> = async ({ data }: { data: OmaSuunnitelmaForm }) => {
     setIsSubmitting(true);
-    if (!tavoiteId) {
+    if (!tavoite?.id) {
       closeActiveModal();
       return;
     }
@@ -122,7 +132,7 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }:
       const { error } = await client.PUT('/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}', {
         params: {
           path: {
-            id: tavoiteId,
+            id: tavoite.id,
             suunnitelmaId,
           },
         },
@@ -140,7 +150,7 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }:
       const { error } = await client.POST('/api/profiili/tavoitteet/{id}/suunnitelmat', {
         params: {
           path: {
-            id: tavoiteId,
+            id: tavoite.id,
           },
         },
         body,
@@ -214,17 +224,17 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }:
         </div>
       }
       content={
-        isLoading ? (
-          <div className="flex items-center justify-start h-[128px]">
-            <Spinner size={64} color="accent" />
-          </div>
-        ) : (
-          <FormProvider {...methods}>
-            <Form id={formId} onSubmit={onSubmit}>
+        <FormProvider {...methods}>
+          <Form id={formId} onSubmit={onSubmit}>
+            {isLoading ? (
+              <div className="flex items-center justify-center min-h-[128px]">
+                <Spinner size={64} color="accent" />
+              </div>
+            ) : (
               <WizardContent />
-            </Form>
-          </FormProvider>
-        )
+            )}
+          </Form>
+        </FormProvider>
       }
       footer={
         <div className="flex flex-row gap-5 flex-1 justify-end">
@@ -232,6 +242,8 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }:
             <Button
               label={t('cancel')}
               variant="white"
+              className="h-5"
+              size={sm ? 'lg' : 'sm'}
               onClick={() => {
                 showDialog({
                   title: t('cancel'),
@@ -247,26 +259,28 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoiteId, suunnitelmaId }:
               <Button
                 label={t('previous')}
                 variant="white"
+                className="h-5"
+                size={sm ? 'lg' : 'sm'}
                 onClick={previousStep}
-                icon={sm ? undefined : <JodArrowLeft />}
-                iconSide={sm ? undefined : 'left'}
               />
             )}
             {wizardStep === 0 && (
               <Button
                 label={t('next')}
                 variant="accent"
+                className="h-5"
+                size={sm ? 'lg' : 'sm'}
                 onClick={() => {
                   nextStep();
                 }}
                 disabled={!isValid}
-                icon={sm ? undefined : <JodArrowRight />}
-                iconSide={sm ? undefined : 'right'}
               />
             )}
             {wizardStep === 1 && (
               <Button
                 label={t('save')}
+                size={sm ? 'lg' : 'sm'}
+                className="h-5"
                 disabled={isSubmitting || osaamiset.length === 0}
                 variant="accent"
                 form={formId}

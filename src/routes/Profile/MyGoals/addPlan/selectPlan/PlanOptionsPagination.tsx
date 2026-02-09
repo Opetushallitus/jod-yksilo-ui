@@ -52,7 +52,7 @@ const PlanOptionsPagination = ({ scrollRef, className, ariaLabel }: PlanOptionsP
   const paginationTranslations = usePaginationTranslations();
 
   return koulutusMahdollisuudet.length > 0 ? (
-    <div className={className} data-testid="tool-pagination">
+    <div className={className} data-testid="add-plan-pagination">
       <Pagination
         currentPage={ehdotuksetPageNr}
         serviceVariant="yksilo"

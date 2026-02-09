@@ -5,6 +5,16 @@ import { Tavoite } from '@/stores/useTavoitteetStore';
 
 export type FilterName = keyof PlanFilters;
 export const DEFAULT_SORTING = sortingValues.RELEVANCE;
+export const MAX_KESTO_VALUE = 1000;
+export const MIN_KESTO_VALUE = 0;
+
+export const getKestoCount = (minDuration: number | null, maxDuration: number | null) => {
+  const sixYears = 6 * 12;
+  const isMinValue = minDuration === MIN_KESTO_VALUE || minDuration === null;
+  const isMaxValue = maxDuration === MAX_KESTO_VALUE || maxDuration === null || maxDuration === sixYears;
+  const isDefaultValue = isMinValue && isMaxValue;
+  return isDefaultValue ? 0 : 1;
+};
 
 export interface PlanFilters {
   educationOpportunityType: string[];
@@ -24,24 +34,10 @@ export type ArrayFilters = Extract<
 >;
 export type KoulutusMahdollisuusFull = components['schemas']['KoulutusmahdollisuusFullDto'];
 export interface AddPlanState {
+  initialPlanListLoaded: boolean;
   tavoite: Tavoite | null;
   selectedPlans: string[];
   osaamiset: OsaaminenValue[];
-  setPlanName: (planName: string) => void;
-  setPlanDescription: (planDescription: string) => void;
-  planName: components['schemas']['LokalisoituTeksti'];
-  planDescription: components['schemas']['LokalisoituTeksti'];
-  addSelectedOsaaminen: (osaaminenUri: {
-    uri: string;
-    nimi: components['schemas']['LokalisoituTeksti'];
-    kuvaus: components['schemas']['LokalisoituTeksti'];
-  }) => void;
-  removeSelectedOsaaminen: (osaaminenUri: {
-    uri: string;
-    nimi: components['schemas']['LokalisoituTeksti'];
-    kuvaus: components['schemas']['LokalisoituTeksti'];
-  }) => void;
-  selectedOsaamiset: components['schemas']['OsaaminenDto'][];
   vaaditutOsaamiset: components['schemas']['OsaaminenDto'][];
   mahdollisuusEhdotukset: EhdotusRecord;
   koulutusmahdollisuudet: KoulutusMahdollisuusFull[];

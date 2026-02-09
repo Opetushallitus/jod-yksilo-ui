@@ -47,20 +47,18 @@ const PlanOpportunityCard = React.memo(
 
     return (
       <div className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border">
-        <div className="flex justify-between items-start mb-4">
-          <div className="flex flex-col gap-1">
-            {matchValue !== undefined && matchLabel && (
-              <div
-                className="inline-flex items-center gap-2 p-3 text-white rounded-full select-none w-fit bg-secondary-3-dark"
-                data-testid="opportunity-card-match"
-              >
-                <span className="text-heading-2-mobile">{matchValue}</span>
-                <span className="text-heading-2-mobile font-arial">{matchLabel}</span>
-              </div>
-            )}
-          </div>
+        <div className="flex sm:flex-row flex-col gap-3 sm:justify-between sm:items-start mb-4">
+          {matchValue !== undefined && matchLabel && (
+            <div
+              className="inline-flex items-center gap-3 text-white rounded-full select-none w-fit bg-secondary-3-dark px-4 py-1 tracking-wide order-2 sm:order-1"
+              data-testid="opportunity-card-match"
+            >
+              <span className="sm:text-heading-2 text-heading-2-mobile">{matchValue}</span>
+              <span className="text-attrib-value font-arial">{matchLabel}</span>
+            </div>
+          )}
 
-          {actionButtonContent && <div className="ml-4">{actionButtonContent}</div>}
+          {actionButtonContent && <div className="sm:ml-4 order-1 sm:order-2">{actionButtonContent}</div>}
         </div>
         <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">
           {mahdollisuus.tyyppi == 'TUTKINTO'

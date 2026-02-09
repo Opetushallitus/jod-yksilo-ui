@@ -165,8 +165,8 @@ export const useSuosikitStore = create<FavoritesState>()((set, get) => ({
       ammattiryhmaNimet,
       pageData: sortedResultBySuosikkiOrder,
       pageNr: safePageNr,
-      totalItems: pageData.length,
-      totalPages: Math.ceil(pageData.length / pageSize),
+      totalItems: suosikit.length,
+      totalPages: Math.ceil(suosikit.length / pageSize),
     });
   },
 }));

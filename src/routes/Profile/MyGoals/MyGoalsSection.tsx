@@ -2,15 +2,15 @@ import type { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { GoalModal } from '@/routes/Profile/MyGoals/addGoal/GoalModal';
-import AddPlanModal from '@/routes/Profile/MyGoals/addPlan/AddPlanModal.tsx';
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
-import { PlanCompetencesTable } from '@/routes/Profile/MyGoals/compareCompetences/PlanCompetencesTable.tsx';
+import AddPlanModal from '@/routes/Profile/MyGoals/addPlan/AddPlanModal';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
+import { PlanCompetencesTable } from '@/routes/Profile/MyGoals/compareCompetences/PlanCompetencesTable';
 import loader from '@/routes/Profile/MyGoals/loader';
-import { PlanList } from '@/routes/Profile/MyGoals/PlanList.tsx';
+import { PlanList } from '@/routes/Profile/MyGoals/PlanList';
 import { getTypeSlug } from '@/routes/Profile/utils';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { getLocalizedText } from '@/utils';
-import { Button } from '@jod/design-system';
+import { getLocalizedText, sortByProperty } from '@/utils';
+import { Button, useMediaQueries } from '@jod/design-system';
 import { JodCaretDown, JodCaretUp } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -22,10 +22,8 @@ interface MyGoalsSectionProps {
 }
 
 const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { sm } = useMediaQueries();
 
   const { mahdollisuusDetails, isLoading, upsertTavoite, deleteTavoite } = useTavoitteetStore(
     useShallow((state) => ({
@@ -51,21 +49,17 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
       if (tavoite) {
         upsertTavoite({
           ...tavoite,
-          suunnitelmat: tavoite.suunnitelmat?.filter((s) => s?.id !== suunnitelmaId),
+          suunnitelmat: tavoite.suunnitelmat?.filter((s) => s?.id !== suunnitelmaId).sort(sortByProperty('luotu')),
         });
       }
     },
     [tavoitteet, upsertTavoite],
   );
 
-  const { setTavoite } = addPlanStore(
-    useShallow((state) => ({
-      setTavoite: state.setTavoite,
-    })),
-  );
+  const setTavoite = addPlanStore((state) => state.setTavoite);
 
   // Accordion: index of open item, null = all closed
-  const [openIndex, setOpenIndex] = React.useState<number | null>(null);
+  const [openIndex, setOpenIndex] = React.useState<number | null>(0);
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -83,7 +77,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
               {/* Accordion header */}
               <button
                 onClick={() => toggleAccordion(i)}
-                className="flex justify-between items-center text-heading-2 cursor-pointer bg-transparent hover:bg-gray-100 rounded"
+                className="flex justify-between items-center text-heading-2 cursor-pointer"
                 aria-expanded={isOpen}
                 aria-controls={`accordion-content-${i}`}
                 id={`accordion-header-${i}`}
@@ -96,7 +90,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
 
               {!isOpen && (
                 <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">
-                  {t('profile.my-goals.plan', { count: tavoite.suunnitelmat?.length ?? 0 })}
+                  {t('profile.my-goals.n-plans', { count: tavoite.suunnitelmat?.length ?? 0 })}
                 </p>
               )}
 
@@ -110,7 +104,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                   {details && mahdollisuusTyyppi && (
                     <>
                       <OpportunityCard
-                        to={`/${language}/${getTypeSlug(mahdollisuusTyyppi)}/${mahdollisuusId ?? ''}`}
+                        to={`/${i18n.language}/${getTypeSlug(mahdollisuusTyyppi)}/${mahdollisuusId ?? ''}`}
                         description={getLocalizedText(details.tiivistelma)}
                         from="goal"
                         ammattiryhma={details.ammattiryhma}
@@ -126,7 +120,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                       />
                       <PlanList
                         goal={tavoite}
-                        language={language}
+                        language={i18n.language}
                         removeSuunnitelmaFromStore={removeSuunnitelmaFromStore}
                       />
                     </>
@@ -135,6 +129,8 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                   <div className="mt-9 flex flex-col items-start gap-3">
                     <Button
                       variant="white"
+                      size={sm ? 'lg' : 'sm'}
+                      className="not-sm:h-5"
                       onClick={() => {
                         setTavoite(tavoite);
                         showModal(AddPlanModal);
@@ -147,16 +143,20 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                     <div className="w-full flex justify-between">
                       <Button
                         variant="white"
+                        size={sm ? 'lg' : 'sm'}
+                        className="not-sm:h-5"
                         onClick={() => {
                           setTavoite(tavoite);
                           showModal(GoalModal, { mode: 'UPDATE', tavoite: tavoite });
                         }}
                         disabled={isLoading}
-                        label={t('profile.my-goals.modify-goal')}
+                        label={sm ? t('profile.my-goals.modify-goal') : t('edit')}
                       />
                       <Button
                         label={t('profile.my-goals.delete-goal')}
                         variant="white-delete"
+                        size={sm ? 'lg' : 'sm'}
+                        className="not-sm:h-5"
                         onClick={() => {
                           showDialog({
                             title: t('profile.my-goals.delete-goal'),

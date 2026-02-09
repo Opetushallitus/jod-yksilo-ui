@@ -72,6 +72,7 @@ interface BaseProps {
   from?: 'tool' | 'favorite' | 'path' | 'goal' | 'search';
   rateId?: string;
   children?: React.ReactNode;
+  hideIcon?: boolean;
 }
 
 export type OpportunityCardProps = BaseProps &
@@ -154,6 +155,7 @@ export const OpportunityCardWrapper = ({
   matchValue,
   name,
   type,
+  hideIcon,
   toggleFavorite,
   isFavorite,
   isLoggedIn,
@@ -232,6 +234,7 @@ export const OpportunityCardWrapper = ({
                 name={name}
                 mahdollisuusTyyppi={type}
                 headingLevel={headingLevel}
+                hideIcon={hideIcon}
                 from={from}
                 rateId={rateId}
                 aineisto={aineisto}
@@ -257,6 +260,7 @@ export const OpportunityCardWrapper = ({
             from={from}
             rateId={rateId}
             aineisto={aineisto}
+            hideIcon={hideIcon}
             tyyppi={tyyppi}
           />
           <>{content}</>
@@ -274,6 +278,7 @@ const OpportunityCardHeader = ({
   from,
   rateId,
   aineisto,
+  hideIcon,
   tyyppi,
 }: {
   to?: string;
@@ -282,6 +287,7 @@ const OpportunityCardHeader = ({
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   from?: 'tool' | 'favorite' | 'path' | 'goal' | 'search';
   rateId?: string;
+  hideIcon?: boolean;
   aineisto?: components['schemas']['TyomahdollisuusDto']['aineisto'];
   tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
 }) => {
@@ -323,9 +329,11 @@ const OpportunityCardHeader = ({
 
   return (
     <div className="flex flex-row">
-      <div className="flex items-center justify-center size-8 aspect-square rounded-full text-white bg-secondary-1-dark-2 print:hidden">
-        <TitleIcon tyyppi={mahdollisuusTyyppi} aineisto={aineisto} />
-      </div>
+      {!hideIcon && (
+        <div className="flex items-center justify-center size-8 aspect-square rounded-full text-white bg-secondary-1-dark-2 print:hidden">
+          <TitleIcon tyyppi={mahdollisuusTyyppi} aineisto={aineisto} />
+        </div>
+      )}
       <div className="ml-4 flex flex-col justify-center">
         <OpportunityType mahdollisuusTyyppi={mahdollisuusTyyppi} aineisto={aineisto} tyyppi={tyyppi} />
         {titleContent}
