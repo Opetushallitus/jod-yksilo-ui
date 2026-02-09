@@ -330,20 +330,16 @@
   "search": {
     "description": "Du kan söka efter möjligheter med hjälp av fritextsökning. Du kan påverka synligheten av resultaten genom att filtrera listan.",
     "filters": "Filter",
-    "global-placeholder": "Sök i sektioner",
-    "label": "Sök i sektioner",
+    "global-placeholder": "Sök möjligheter",
+    "label": "Sök möjligheter",
     "no-results": "Inga resultat hittades för sökordet.",
-    "profile-card-description": "Logga in och skapa din egen kompetensprofil. På så sätt sparas din information.",
-    "profile-card-title": "Skapa din egen kompetensprofil",
     "results-found-short_one": "1 resultat",
     "results-found-short_other": "{{count}} resultat",
     "results-found_one": "Visar 1 resultat",
     "results-found_other": "Visar {{count}} resultat",
     "search": "Sök",
     "search-placeholder": "Skriv ett sökord",
-    "title": "Sök möjligheter",
-    "tool-card-description": "Gå från sökningen till en mer personlig vy. Utforska möjligheter baserat på din kompetens och dina intressen.",
-    "tool-card-title": "Utforska möjligheter"
+    "title": "Sök möjligheter"
   },
   "slugs": {
     "search": "sok"
