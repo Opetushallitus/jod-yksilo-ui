@@ -249,9 +249,13 @@
       "link-to-opportunities": "Löydä mahdollisuuksia"
     },
     "my-goals": {
+      "add-favorites-dialog-action": "Lisää suosikkeja",
+      "add-favorites-dialog-description": "Et voi vielä luoda tavoitetta, koska sinulla ei ole yhtään suosikkia tallennettuna. Lisää ensin sinua kiinnostavia ammatteja tai työmahdollisuuksia suosikkeihin – voit sen jälkeen asettaa niistä tavoitteita.",
+      "add-favorites-dialog-title": "Lisää ensin suosikkeja",
       "add-favorites-to-goals": "Lisää uusi tavoite",
       "add-plan-failed": "Suunnitelman lisäys epäonnistui – yritä uudelleen",
       "add-plan-success": "Suunnitelma lisätty",
+      "adjust-list": "Säädä listaa",
       "competence-compare": "Osaamisvertailu",
       "delete-plan-failed": "Suunnitelman poisto epäonnistui – yritä uudelleen",
       "delete-plan-success": "Suunnitelma poistettu",
@@ -261,8 +265,16 @@
         "description": "Tutksustu koulutus- ja työmahdollisuuksiin. Lisää kiinnostavimmat suosikeiksesi ja tee niistä omat tavoitteesi.",
         "title": "Löydä omat suosikkisi"
       },
+      "goal": "Tavoite",
+      "n-plans_one": "1 suunnitelma",
+      "n-plans_other": "{{count}} suunnitelmaa",
+      "n-plans_zero": "Ei valittuja suunnitelmia",
       "no-favorites-selected": "Lisää ensin suosikkeja, joista voit luoda tavoitteita.",
-      "own-competences": "Omat taidot"
+      "no-filtered-results": "Ei koulutusmahdollisuuksia. Muokkaa säätimiä nähdäksesi vaihtoehtoja.",
+      "no-goals-created": "Et ole vielä lisännyt tavoitteita.",
+      "own-competences": "Omat taidot",
+      "plan": "Suunnitelma",
+      "remove-from-goals": "Poista tavoite"
     }
   },
   "search": {
@@ -391,6 +403,7 @@
     "info": "Ohje"
   },
   "try-again": "Yritä uudelleen",
+  "update-short": "Päivitä",
   "work-history": {
     "add-new-job-description-button": "Lisää uusi",
     "delete-job-description-button": "Poista"

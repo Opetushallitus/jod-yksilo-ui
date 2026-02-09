@@ -243,10 +243,15 @@
       "link-to-opportunities": "Find opportunities"
     },
     "my-goals": {
+      "add-favorites-dialog-action": "Add favorites",
+      "add-favorites-dialog-description": "You cannot create a goal yet because you do not have any favorites saved. First, add professions or job opportunities that interest you to your favorites – then you can set goals from them.",
+      "add-favorites-dialog-title": "Add favorites first",
       "add-favorites-to-goals": "Add new goal",
       "add-plan-failed": "Failed to add plan – please try again",
       "add-plan-success": "Plan added",
+      "adjust-list": "Adjust list",
       "competence-compare": "Compare competences",
+      "custom-plan-competences-description": "Create your own education plan by first giving it a name and a short description. Then select the competences you want to achieve with the plan.",
       "delete-plan-failed": "Failed to delete plan – please try again",
       "delete-plan-success": "Plan deleted",
       "edit-plan-failed": "Failed to update plan – please try again",
@@ -255,8 +260,15 @@
         "description": "Explore education and career opportunities. Add the most interesting ones to your favorites and make them your own goals.",
         "title": "Find your favorites"
       },
+      "goal": "Goal",
+      "n-plans_one": "1 plan",
+      "n-plans_other": "{{count}} plans",
+      "n-plans_zero": "No selected plans",
       "no-favorites-selected": "Add favorites first, from which you can create goals.",
-      "own-competences": "My competences"
+      "no-filtered-results": "No education opportunities. Adjust the filters to see options.",
+      "no-goals-created": "You have not added any goals yet.",
+      "own-competences": "My competences",
+      "plan": "Plan"
     }
   },
   "search": {
@@ -383,6 +395,7 @@
     "info": "Guide"
   },
   "try-again": "Try again",
+  "update-short": "Update",
   "work-history": {
     "add-new-job-description-button": "Add new",
     "delete-job-description-button": "Delete"

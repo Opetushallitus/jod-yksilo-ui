@@ -1,25 +1,25 @@
 import { client } from '@/api/client.ts';
-import { components } from '@/api/schema';
+import type { components } from '@/api/schema';
 import { ActionButton, OpportunityCard } from '@/components';
-import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton.tsx';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
 import type { TypedMahdollisuus } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
-import { Tavoite, useTavoitteetStore } from '@/stores/useTavoitteetStore';
+import { type Tavoite, useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLocalizedText, stringToLocalizedText } from '@/utils';
 import {
   Button,
   InputField,
   Modal,
-  PageChangeDetails,
+  type PageChangeDetails,
   Pagination,
   Textarea,
+  tidyClasses,
   useMediaQueries,
   WizardProgress,
 } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight, JodFlag, JodFlagFilled } from '@jod/design-system/icons';
+import { JodFlag, JodFlagFilled } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -41,12 +41,11 @@ type GoalModalProps = AddGoalModalProps | UpdateGoalModalProps;
 export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
   const { t } = useTranslation();
   const isUpdateMode = mode === 'UPDATE';
-  const headerText = isUpdateMode ? t('profile.my-goals.update-modal-title') : t('profile.my-goals.add-modal-title');
   const initialGoalName = getLocalizedText(tavoite?.tavoite);
   const initialGoalDescription = getLocalizedText(tavoite?.kuvaus);
   const initialSelectedMahdollisuusId = tavoite?.mahdollisuusId ?? null;
 
-  const { sm } = useMediaQueries();
+  const { sm, lg } = useMediaQueries();
   const { closeActiveModal } = useModal();
 
   // Stores and state from zustand
@@ -79,8 +78,6 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
   );
 
   // REACT STATE ---------------------------------------------------------
-  const [filtersOpen, setFiltersOpen] = React.useState(false);
-  const filterMenuButtonRef = React.useRef<HTMLButtonElement>(null);
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
   const [goalName, setGoalName] = React.useState(initialGoalName);
@@ -191,24 +188,30 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
   // STEP CONDITIONS ------------------------------------------------------
   const basicInfoStep = step === 0;
   const chooseFavoriteStep = step === 1;
+  const addOrEditTitle =
+    mode === 'ADD' ? t('profile.my-goals.add-modal-title') : t('profile.my-goals.update-modal-title');
+  const headerText = basicInfoStep ? addOrEditTitle : t('profile.my-goals.choose-favorite-header');
 
   // RENDER ----------------------------------------------------------------
   return (
     <Modal
       name={headerText}
       open={isOpen}
-      fullWidthContent
+      fullWidthContent={!lg}
+      topSlot={<h1 className="text-heading-1-mobile sm:text-heading-1">{headerText}</h1>}
       content={
-        <form>
+        <form className="pb-1">
           {basicInfoStep && (
             <div>
-              <div className="pb-3 relative">
-                <h1 className="text-heading-1-mobile sm:text-heading-1">{headerText}</h1>
-                <p className="text-body-sm-mobile sm:text-body-sm">{t('profile.my-goals.add-modal-description')}</p>
+              <div className="flex flex-col">
+                <p className="text-body-sm-mobile sm:text-body-sm font-arial mb-7">
+                  {t('profile.my-goals.add-modal-description')}
+                </p>
                 <InputField
                   label={t('profile.my-goals.goal-name')}
                   requiredText={t('required')}
                   value={goalName}
+                  className="mb-6 sm:max-w-[384px]"
                   onChange={(e) => setGoalName(e.target.value)}
                 />
                 <Textarea
@@ -222,26 +225,10 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
 
           {chooseFavoriteStep && (
             <div id={goalsId}>
-              <div>
-                <div className="pb-3 relative">
-                  <h1 className="text-heading-1-mobile sm:text-heading-1">
-                    {t('profile.my-goals.choose-favorite-header')}
-                  </h1>
-                  <p className="text-body-sm-mobile sm:text-body-sm">
-                    {t('profile.my-goals.choose-favorite-description')}
-                  </p>
-                  {totalFavorites > 0 && (
-                    <div className="flex justify-end p-3">
-                      <FilterButton
-                        onClick={() => setFiltersOpen(!filtersOpen)}
-                        label={t('do-filter')}
-                        hideAfterBreakpoint="lg"
-                        ref={filterMenuButtonRef}
-                        inline
-                      />
-                    </div>
-                  )}
-                </div>
+              <div className="pb-3">
+                <p className="text-body-sm-mobile sm:text-body-sm font-arial">
+                  {t('profile.my-goals.choose-favorite-description')}
+                </p>
               </div>
               <div className="flex flex-row mt-6 gap-5" ref={scrollRef}>
                 <div className="flex flex-col gap-3 w-full">
@@ -259,24 +246,46 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                         tyyppi={mahdollisuus.tyyppi}
                         type={mahdollisuusTyyppi}
                         kesto={mahdollisuus.kesto}
-                        initiallyCollapsed={true}
-                        collapsible={true}
                         yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
+                        initiallyCollapsed
+                        collapsible
                         hideFavorite
+                        hideIcon={!sm}
                         actionButtonContent={
                           isSelected ? (
-                            <ActionButton
-                              label={t('profile.my-goals.remove-from-goals')}
-                              onClick={() => setSelectedMahdollisuus(null)}
-                              icon={<JodFlagFilled className={'text-accent'} />}
-                              className="bg-bg-gray"
-                            />
+                            <div className="flex sm:gap-4 not-sm:justify-between items-center">
+                              <span
+                                className={tidyClasses([
+                                  'flex',
+                                  'items-center',
+                                  'justify-center',
+                                  'bg-secondary-3',
+                                  'text-primary-gray',
+                                  'text-heading-4',
+                                  'rounded',
+                                  'px-3',
+                                  'pb-1',
+                                  'text-[14px]',
+                                  'uppercase',
+                                  'sm:order-1',
+                                  'not-sm:ml-3',
+                                  'order-2',
+                                ])}
+                              >
+                                {t('profile.my-goals.goal')}
+                              </span>
+                              <ActionButton
+                                label={t('profile.my-goals.remove-from-goals')}
+                                onClick={() => setSelectedMahdollisuus(null)}
+                                className="order-1 sm:order-2 not-sm:px-0!"
+                                icon={<JodFlagFilled className="text-accent" />}
+                              />
+                            </div>
                           ) : (
                             <ActionButton
                               label={t('profile.my-goals.set-to-goal')}
                               onClick={() => setSelectedMahdollisuus(mahdollisuus)}
-                              icon={<JodFlag className={'text-accent'} />}
-                              className="bg-bg-gray"
+                              icon={<JodFlag className="text-accent" />}
                             />
                           )
                         }
@@ -312,13 +321,15 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
         />
       }
       footer={
-        <div className="flex justify-end gap-5 flex-1" data-testid="work-history-wizard-footer">
+        <div className="flex justify-end gap-5 flex-1" data-testid="add-goal-footer">
           <div className="flex gap-5 justify-end">
             <Button
               label={t('cancel')}
               onClick={() => closeActiveModal()}
               variant="white"
-              data-testid="cancel-add-goal"
+              size={sm ? 'lg' : 'sm'}
+              className="whitespace-nowrap h-5"
+              data-testid="add-goal-modal-cancel"
             />
             {step > 0 && (
               <Button
@@ -330,11 +341,10 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                 }}
                 label={t('previous')}
                 variant="white"
-                icon={sm ? undefined : <JodArrowLeft />}
-                iconSide={sm ? undefined : 'left'}
                 disabled={isSubmitting}
-                className="whitespace-nowrap"
-                data-testid="goal-modal-previous"
+                size={sm ? 'lg' : 'sm'}
+                className="whitespace-nowrap h-5"
+                data-testid="add-goal-modal-previous"
               />
             )}
             {step < steps && (
@@ -347,11 +357,10 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                 }}
                 label={t('next')}
                 variant="accent"
-                icon={sm ? undefined : <JodArrowRight />}
-                iconSide={sm ? undefined : 'right'}
                 disabled={isSubmitting || !goalName}
-                className="whitespace-nowrap"
-                data-testid="goal-modal-next"
+                size={sm ? 'lg' : 'sm'}
+                className="whitespace-nowrap h-5"
+                data-testid="add-goal-modal-next"
               />
             )}
             {(step === steps || isUpdateMode) && (
@@ -362,8 +371,9 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                 }}
                 variant="accent"
                 disabled={isSubmitting || !selectedMahdollisuus || !goalName}
-                className="whitespace-nowrap"
-                data-testid="save-new-goal"
+                size={sm ? 'lg' : 'sm'}
+                className="whitespace-nowrap h-5"
+                data-testid="add-goal-modal-save"
               />
             )}
           </div>

@@ -1,12 +1,12 @@
-import { client } from '@/api/client.ts';
-import { osaamiset } from '@/api/osaamiset.ts';
+import { client } from '@/api/client';
+import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
-import { planLetter } from '@/routes/Profile/MyGoals/planLetterUtil.ts';
+import { planLetter } from '@/routes/Profile/MyGoals/planLetterUtil';
 import { isDefined } from '@/utils';
-import { cx } from '@jod/design-system';
+import { Button, cx } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { PlanCompetenceRow, PlanCompetencesTableRowData } from './PlanCompetenceRow.tsx';
+import { PlanCompetenceRow, PlanCompetencesTableRowData } from './PlanCompetenceRow';
 
 const ROW_LIMIT = 10;
 export type PlanWithCustomKey = components['schemas']['PolunSuunnitelmaDto'] & { displayKey: string };
@@ -89,13 +89,13 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
         </tbody>
       </table>
       {vaaditutOsaamiset.length > ROW_LIMIT && (
-        <button
+        <Button
+          label={showAll ? t('show-less') : t('show-all')}
           onClick={() => setShowAll((previous) => !previous)}
-          className="text-accent text-button-sm sm:text-button-sm mt-6 sm:px-5 font-poppins cursor-pointer print:hidden"
-          data-testid="compare-competences-toggle"
-        >
-          {showAll ? t('show-less') : t('show-all')}
-        </button>
+          variant="plain"
+          className="mt-6 print:hidden"
+          testId="compare-competences-toggle"
+        />
       )}
     </div>
   );
