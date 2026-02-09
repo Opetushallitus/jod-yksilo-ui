@@ -36,7 +36,7 @@ const PlanOpportunityCard = React.memo(
         })
         .then(({ data }) => {
           const jakaumat = (data?.jakaumat ?? []) as unknown as KoulutusmahdollisuusJakaumat;
-          const mahdollisuusOsaamiset = (jakaumat.osaaminen.arvot ?? []).map((x) => x.arvo);
+          const mahdollisuusOsaamiset = (jakaumat.osaaminen?.arvot ?? []).map((x) => x.arvo);
           if (mahdollisuusOsaamiset.length === 0) {
             return null;
           }

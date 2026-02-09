@@ -2,7 +2,7 @@ import { components } from '@/api/schema';
 import { maxKestoValue } from '@/routes/Tool/components/filters/FilterKesto.tsx';
 
 export function filterByRegion(regions: string[], meta: components['schemas']['EhdotusMetadata']): boolean {
-  if (regions.length === 0 || meta.tyyppi !== 'TYOMAHDOLLISUUS') {
+  if (regions.length === 0) {
     return true;
   }
   return regions.some((r) => meta.maakunnat?.includes(r));

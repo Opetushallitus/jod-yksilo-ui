@@ -458,7 +458,7 @@ export const useToolStore = create<ToolState>()(
     {
       name: 'tool-storage',
       storage: createJSONStorage(() => sessionStorage),
-      version: 3,
+      version: 4,
       migrate: () => {
         sessionStorage.removeItem('tool-storage');
       },

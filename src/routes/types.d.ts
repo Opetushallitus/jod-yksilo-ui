@@ -52,12 +52,13 @@ export interface TyomahdollisuusJakaumat {
 }
 
 export interface KoulutusmahdollisuusJakaumat {
-  aika: Jakauma;
-  koulutusala: Jakauma;
-  kunta: Jakauma;
-  maksullisuus: Jakauma;
-  opetustapa: Jakauma;
-  osaaminen: Jakauma;
+  aika?: Jakauma;
+  koulutusala?: Jakauma;
+  kunta?: Jakauma;
+  maakunta?: Jakauma;
+  maksullisuus?: Jakauma;
+  opetustapa?: Jakauma;
+  osaaminen?: Jakauma;
 }
 interface CodeSetValue {
   code: string;
