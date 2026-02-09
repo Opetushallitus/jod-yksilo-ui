@@ -268,20 +268,16 @@
   "search": {
     "description": "Voit hakea mahdollisuuksia käyttämällä vapaasanahakua. Tulosten näkyvyyteen voit vaikuttaa suodattamalla listaa.",
     "filters": "Suodattimet",
-    "global-placeholder": "Hae Yksilön osioista",
-    "label": "Hae Yksilön osiosta",
+    "global-placeholder": "Hae mahdollisuuksia",
+    "label": "Hae mahdollisuuksia",
     "no-results": "Hakusanalla ei löytynyt tuloksia.",
-    "profile-card-description": "Kirjaudu ja luo oma osaamisprofiili. Näin tietosi pysyvät tallessa.",
-    "profile-card-title": "Luo oma osaamisprofiili",
     "results-found-short_one": "1 tulos",
     "results-found-short_other": "{{count}} tulosta",
     "results-found_one": "Näytetään 1 tulos",
     "results-found_other": "Näytetään {{count}} tulosta",
     "search": "Hae",
     "search-placeholder": "Kirjoita hakusana",
-    "title": "Hae mahdollisuuksia",
-    "tool-card-description": "Siirry hausta henkilö-kohtaisempaan näkymään. Kartoita mahdollisuuksia osaamisesi ja kiinnostuksiesi perusteella.",
-    "tool-card-title": "Kartoita mahdollisuuksia"
+    "title": "Hae mahdollisuuksia"
   },
   "slugs": {
     "search": "haku"

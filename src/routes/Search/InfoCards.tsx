@@ -8,19 +8,22 @@ import { ToolCard } from '../Profile/components';
 export const InfoCards = () => {
   const { t, i18n } = useTranslation();
 
-  const loginData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
+  const isLoggedIn = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
+
   return (
     <div className="flex flex-col gap-6">
-      <ToolCard title={t('search.tool-card-title')} description={t('search.tool-card-description')} />
+      <ToolCard />
       <HeroCard
-        title={t('search.profile-card-title')}
-        content={t('search.profile-card-description')}
+        title={isLoggedIn ? t('profile.banner.title.logged-in') : t('profile.banner.title.unlogged')}
+        content={isLoggedIn ? t('profile.banner.description.logged-in') : t('profile.banner.description.unlogged')}
         size="sm"
-        buttonLabel={t('home.create-own-profile')}
+        buttonLabel={isLoggedIn ? t('profile.banner.link-text.logged-in') : t('profile.banner.link-text.unlogged')}
         backgroundColor="var(--ds-color-secondary-1-dark)"
         to={t('slugs.profile.index')}
         linkComponent={getLinkTo(
-          loginData ? `/${i18n.language}/${t('slugs.profile.index')}` : `/${i18n.language}/${t('slugs.profile.login')}`,
+          isLoggedIn
+            ? `/${i18n.language}/${t('slugs.profile.index')}`
+            : `/${i18n.language}/${t('slugs.profile.login')}`,
         )}
       />
     </div>
