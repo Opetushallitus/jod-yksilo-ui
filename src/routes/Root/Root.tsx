@@ -8,6 +8,7 @@ import { useSessionExpirationTimer } from '@/hooks/useSessionExpirationTimer';
 import { langLabels, supportedLanguageCodes, type LangCode } from '@/i18n/config';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useToolStore } from '@/stores/useToolStore';
+import { getNotifications } from '@/utils/notifications';
 import { getLinkTo } from '@/utils/routeUtils';
 import {
   Button,
@@ -185,6 +186,29 @@ const Root = () => {
   const userMenuProfileFrontUrl = `${t('slugs.profile.index')}/${t('slugs.profile.front')}`;
   const loginPageUrl = `/${language}/${t('slugs.profile.login')}`;
   const isProfileActive = !!useMatch(`/${language}/${t('slugs.profile.index')}/*`);
+
+  React.useEffect(() => {
+    getNotifications().forEach((notification) => {
+      addTemporaryNote(() => ({
+        id: notification.id,
+        title: notification.title[language as LangCode],
+        description: notification.description[language as LangCode],
+        variant: notification.variant,
+        readMoreComponent: notification.link ? (
+          <Button
+            size="sm"
+            variant="white"
+            label={notification.link.label[language as LangCode]}
+            linkComponent={getLinkTo(notification.link.url[language as LangCode], {
+              useAnchor: true,
+              target: '_blank',
+            })}
+          />
+        ) : undefined,
+        isCollapsed: false,
+      }));
+    });
+  }, [addTemporaryNote, t, language]);
 
   return (
     <div className="flex flex-col min-h-screen bg-bg-gray" data-testid="app-root">
