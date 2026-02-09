@@ -15,16 +15,15 @@ describe('filterByRegion', () => {
     const result = filterByRegion([], createMeta('TYOMAHDOLLISUUS'));
     expect(result).toBe(true);
   });
-  it('should return true when meta.tyyppi is not TYOMAHDOLLISUUS', () => {
-    const result = filterByRegion(['01'], createMeta('KOULUTUSMAHDOLLISUUS'));
-    expect(result).toBe(true);
-  });
   it('should return true when meta.maakunnat includes one of the regions', () => {
     const result = filterByRegion(['01', '02'], { ...createMeta('TYOMAHDOLLISUUS'), maakunnat: ['03', '02', '05'] });
     expect(result).toBe(true);
   });
   it('should return false when meta.maakunnat does not include any of the regions', () => {
-    const result = filterByRegion(['01', '04'], { ...createMeta('TYOMAHDOLLISUUS'), maakunnat: ['03', '02', '05'] });
+    const result = filterByRegion(['01', '04'], {
+      ...createMeta('KOULUTUSMAHDOLLISUUS'),
+      maakunnat: ['03', '02', '05'],
+    });
     expect(result).toBe(false);
   });
 });

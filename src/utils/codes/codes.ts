@@ -44,31 +44,64 @@ export interface ClassificationItem {
 // https://stat.fi/fi/luokitukset/kunta/kunta_1_20250101
 // https://stat.fi/fi/luokitukset/valtio/valtio_2_20120101
 
+// Lazy cache: Map<Codeset, Map<LangCode, Promise<Map<code, value>>>>
+const codesetCache = new Map<Codeset, Map<LangCode, Promise<Map<string, string>>>>();
+
+/**
+ * Lazily loads and caches a codeset for a given language.
+ * Returns a promise that resolves to a Map of code -> value.
+ * @param codeset Codeset name
+ * @param lang Language code
+ * @returns Promise resolving to Map<code, value>
+ */
+export const getCodeset = (codeset: Codeset, lang: LangCode): Promise<Map<string, string>> => {
+  let langMap = codesetCache.get(codeset);
+  if (!langMap) {
+    langMap = new Map<LangCode, Promise<Map<string, string>>>();
+    codesetCache.set(codeset, langMap);
+  }
+
+  let cachedPromise = langMap.get(lang);
+  if (!cachedPromise) {
+    cachedPromise = import(`./${codeset}_${lang}.json`).then((imported) => {
+      const codeMap = new Map<string, string>();
+
+      if (!Array.isArray(imported?.default)) {
+        const { hostname } = globalThis.location;
+        if (import.meta.env.DEV || ['localhost', 'jodkehitys'].some((str) => hostname.includes(str))) {
+          // eslint-disable-next-line no-console
+          console.error(`Could not find codeset ${codeset} for language ${lang}!`);
+        }
+        return codeMap;
+      }
+
+      const data = (imported.default ?? []) as ClassificationItem[];
+      for (const entry of data) {
+        const nameItem = entry.classificationItemNames.find((item) => item.lang === lang);
+        if (nameItem?.name) {
+          codeMap.set(entry.code, nameItem.name);
+        }
+      }
+      return codeMap;
+    });
+    langMap.set(lang, cachedPromise);
+  }
+
+  return cachedPromise;
+};
+
 /**
  * Fetches a value from a codeset JSON file.
  * File must be named as `${CODESET NAME}_${LANG}.json`.
+ * Uses lazy caching via getCodeSet.
  * @param codeset Codeset name
  * @param code Code
  * @param lang Language code
- * @returns
+ * @returns The localized value for the code, or the code itself if not found
  */
-
 export const getCodesetValue = async (codeset: Codeset, code: string, lang: LangCode) => {
-  const imported = await import(`./${codeset}_${lang}.json`);
-
-  if (!Array.isArray(imported?.default)) {
-    const { hostname } = globalThis.location;
-    if (import.meta.env.DEV || ['localhost', 'jodkehitys'].some((str) => hostname.includes(str))) {
-      // eslint-disable-next-line no-console
-      console.error(`Could not find codeset ${codeset} for language ${lang}!`);
-    }
-    return code;
-  }
-
-  const data = (imported.default ?? []) as ClassificationItem[];
-  const entry = data.find((entry) => entry.code === code);
-  const nameItem = entry?.classificationItemNames.find((item) => item.lang === lang);
-  return nameItem?.name ?? code;
+  const codeMap = await getCodeset(codeset, lang);
+  return codeMap.get(code) ?? code;
 };
 
 /**

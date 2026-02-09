@@ -10,7 +10,13 @@ const makeEducationKeysArray = <T extends readonly (keyof KoulutusmahdollisuusJa
   return arr;
 };
 
-const EducationCodeSetKeysArray = makeEducationKeysArray(['aika', 'opetustapa', 'koulutusala'] as const);
+const EducationCodeSetKeysArray = makeEducationKeysArray([
+  'aika',
+  'opetustapa',
+  'koulutusala',
+  'kunta',
+  'maakunta',
+] as const);
 export type EducationCodeSetKey = (typeof EducationCodeSetKeysArray)[number];
 
 export const isEducationCodeSetKey = (key: JakaumaKey): key is EducationCodeSetKey => {
@@ -18,7 +24,7 @@ export const isEducationCodeSetKey = (key: JakaumaKey): key is EducationCodeSetK
 };
 export type EducationCodeSetValues = Record<EducationCodeSetKey, CodeSetValue[]>;
 
-const EducationCodesAsValue = makeEducationKeysArray(['kunta', 'koulutusala', 'opetustapa', 'aika'] as const);
+const EducationCodesAsValue = makeEducationKeysArray(['koulutusala', 'opetustapa', 'aika'] as const);
 
 export type EducationCodesAsValue = (typeof EducationCodesAsValue)[number];
 
