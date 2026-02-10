@@ -377,7 +377,7 @@ const ProfileImportExport = ({ onImportSuccess }: { onImportSuccess?: () => void
   const { isLoggedIn } = useLoaderData<ToolLoaderData>();
 
   const Authenticated =
-    hasProfileCompetences && hasOtherProfileData ? AuthenticatedWithDataState : AuthenticatedEmptyState;
+    hasProfileCompetences || hasOtherProfileData ? AuthenticatedWithDataState : AuthenticatedEmptyState;
 
   return isLoggedIn ? <Authenticated onImportSuccess={onImportSuccess} /> : <Unauthenticated />;
 };
