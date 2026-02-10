@@ -4,8 +4,8 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import type { YksiloData } from '@/hooks/useYksiloData';
 import { LANGUAGE_VALUES, type LanguageValue } from '@/i18n/config';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Combobox, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodAi, JodOpenInNew } from '@jod/design-system/icons';
+import { AiInfoButton, Button, Combobox, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import {
   Controller,
@@ -214,7 +214,7 @@ const StepAi = () => {
       </p>
 
       <div className="mb-11">
-        <JodAi size={52} className="text-secondary-gray" />
+        <AiInfoButton size={52} />
       </div>
       <p className="text-body-lg-mobile sm:text-body-lg font-semibold mb-5">{t('introduction.step-3.text-3')}</p>
     </>
