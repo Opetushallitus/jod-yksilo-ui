@@ -187,7 +187,7 @@ const ExploreOpportunities = () => {
 
             {!lg && <UpdateEhdotuksetAndTyomahdollisuudetButton className="mt-5 mb-8 border-t-2 border-bg-gray" />}
 
-            <YourOpportunitiesPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="mb-7" />
+            <YourOpportunitiesPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} className="my-7" />
           </>
         )}
       </section>
