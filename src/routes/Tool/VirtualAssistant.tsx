@@ -99,7 +99,7 @@ export const VirtualAssistant = () => {
       });
 
       // Fetch osaamiset for the returned kiinnostukset
-      const osaamisetData = await osaamiset.find(data?.kiinnostukset?.map((k) => k.esco_uri!) ?? []);
+      const osaamisetData = await osaamiset.find(data?.ehdotukset ?? []);
       const osaamisetMap = osaamisetData.reduce(
         (acc, osaaminen) => {
           acc[osaaminen.uri] = osaaminen;
@@ -122,17 +122,22 @@ export const VirtualAssistant = () => {
           answer: error
             ? t('tool.my-own-data.interests.virtual-assistant.error')
             : removeTags(['reference_information', 'user_interests'], data?.vastaus),
-          kiinnostukset: error ? undefined : data?.kiinnostukset?.map((k) => osaamisetMap[k.esco_uri!]),
+          kiinnostukset: error ? undefined : data?.ehdotukset?.map((k) => osaamisetMap[k]),
         },
       }));
     } else {
       const { data, error } = await client.POST('/api/keskustelut', {
-        body: { [language]: value },
+        body: {
+          tila: 'KIINNOSTUKSET',
+          viesti: {
+            [language]: value,
+          },
+        },
         signal: controller.signal,
       });
 
       // Fetch osaamiset for the returned kiinnostukset
-      const osaamisetData = await osaamiset.find(data?.kiinnostukset?.map((k) => k.esco_uri!) ?? []);
+      const osaamisetData = await osaamiset.find(data?.ehdotukset ?? []);
       const osaamisetMap = osaamisetData.reduce(
         (acc, osaaminen) => {
           acc[osaaminen.uri] = osaaminen;
@@ -156,7 +161,7 @@ export const VirtualAssistant = () => {
           answer: error
             ? t('tool.my-own-data.interests.virtual-assistant.error')
             : removeTags(['reference_information', 'user_interests'], data?.vastaus),
-          kiinnostukset: error ? undefined : data?.kiinnostukset?.map((k) => osaamisetMap[k.esco_uri!]),
+          kiinnostukset: error ? undefined : data?.ehdotukset?.map((k) => osaamisetMap[k]),
         },
       }));
     }
