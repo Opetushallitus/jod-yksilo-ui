@@ -1,8 +1,9 @@
 import { components } from '@/api/schema';
 import { type MahdollisuusTyyppi } from '@/routes/types';
-import { JodInfo } from '@jod/design-system/icons';
+import { JodInfo, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
 interface OpportunityTypeProps {
@@ -13,7 +14,21 @@ interface OpportunityTypeProps {
 }
 
 export const OpportunityType = ({ mahdollisuusTyyppi, aineisto, tyyppi, showTypeTooltip }: OpportunityTypeProps) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+
+  const getAmmattitietoUrl = React.useCallback(() => {
+    switch (language) {
+      case 'sv':
+        return 'https://tyomarkkinatori.fi/sv/yrkesinfo';
+      case 'en':
+        return 'https://tyomarkkinatori.fi/en/professional-information';
+      default:
+        return 'https://tyomarkkinatori.fi/henkiloasiakkaat/ammattitieto';
+    }
+  }, [language]);
 
   const typeText = React.useMemo(() => {
     if (mahdollisuusTyyppi === 'TYOMAHDOLLISUUS') {
@@ -37,7 +52,22 @@ export const OpportunityType = ({ mahdollisuusTyyppi, aineisto, tyyppi, showType
     if (mahdollisuusTyyppi === 'TYOMAHDOLLISUUS') {
       const text = {
         TMT: t('opportunity-tooltip.work.TMT'),
-        AMMATTITIETO: t('opportunity-tooltip.work.AMMATTITIETO'),
+        AMMATTITIETO: (
+          <Trans
+            i18nKey="opportunity-tooltip.work.AMMATTITIETO"
+            components={{
+              Icon: <JodOpenInNew ariaLabel={t('common:external-link')} size={18} />,
+              CustomLink: (
+                <Link
+                  to={getAmmattitietoUrl()}
+                  className="inline-flex underline items-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              ),
+            }}
+          />
+        ),
       }[aineisto ?? 'TMT'];
 
       return (
@@ -61,7 +91,7 @@ export const OpportunityType = ({ mahdollisuusTyyppi, aineisto, tyyppi, showType
     } else {
       return null;
     }
-  }, [tyyppi, aineisto, mahdollisuusTyyppi, t, typeText]);
+  }, [mahdollisuusTyyppi, tyyppi, t, getAmmattitietoUrl, aineisto, typeText]);
 
   return typeText ? (
     <div className="uppercase text-body-xs font-medium text-primary-gray flex items-center gap-2">

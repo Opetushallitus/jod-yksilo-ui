@@ -405,7 +405,7 @@
       "TUTKINTO": "Examensutbildning är utbildning som leder till en officiell examen. Artificiell intelligens grupperar dessa utbildningar enligt vilka färdigheter som man lär sig i dem och vilket utbildningsområde och vilken officiell examensklassificering de tillhör."
     },
     "work": {
-      "AMMATTITIETO": "Yrket är en helhet som bildas av mycket likartade arbeten. Det beskriver vilka uppgifter, färdigheter och ansvarsområden som ingår i arbetet. Arbeten som hör till samma yrke har ett så likartat innehåll att de kan klassificeras som ett och samma yrke.",
+      "AMMATTITIETO": "Uppgifterna om yrken hämtas från Jobbmarknadens tjänst Yrkesinfo. I Yrkesinfo hittar du beskrivningar av yrken och yrkesområden, och dessutom kan du läsa intervjuer med personer som arbetar inom olika yrken. Vi kompletterar yrkesinformationen med relevanta uppgifter från platsannonser.<br><br><CustomLink>Bekanta dig med yrkesinfo på Jobbmarknaden<Icon></Icon></CustomLink>",
       "TMT": "En arbetsmöjlighet är en grupp liknande jobb som bildats av artificiell intelligens. Artificiell intelligens läser platsannonser och identifierar nödvändiga färdigheter, tillstånd, körkort och nämnda yrken i dem. Annonser med tillräcklig information grupperas enligt innehåll, vilket skapar arbetsmöjligheter – det vill säga grupper av jobb som kräver liknande kompetenser och egenskaper."
     }
   },
