@@ -70,6 +70,37 @@ export const OsaamisSuosittelija = ({
   const selectedAreaRef = React.useRef<HTMLDivElement>(null); // For animation target
   const lastClickedIndexRef = React.useRef<{ index: number; group: 'suggested' | 'selected' } | null>(null);
   const [skillsToAdd, setSkillsToAdd] = React.useState<string[]>([]);
+  const textareaContainerRef = React.useRef<HTMLDivElement>(null);
+
+  // Scroll textarea to top when focused
+  React.useEffect(() => {
+    const container = textareaContainerRef.current;
+    if (!container) return;
+
+    const textarea = container.querySelector('textarea');
+    if (!textarea) return;
+
+    const handleFocus = () => {
+      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    textarea.addEventListener('focus', handleFocus);
+    return () => textarea.removeEventListener('focus', handleFocus);
+  }, []);
+
+  // Scroll textarea to top when results appear
+  React.useEffect(() => {
+    const container = textareaContainerRef.current;
+    if (!container) return;
+
+    const textarea = container.querySelector('textarea');
+    if (!textarea) return;
+
+    // Only scroll if textarea is focused and we have results
+    if (document.activeElement === textarea && filteredEhdotetutOsaamiset.length > 0) {
+      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [filteredEhdotetutOsaamiset]);
 
   // Set roving tabindex for suggested tags
   React.useEffect(() => {
@@ -236,7 +267,7 @@ export const OsaamisSuosittelija = ({
 
   return (
     <>
-      <div className="mb-4">
+      <div className="mb-4" ref={textareaContainerRef}>
         <Textarea
           placeholder={textareaPlaceholder()}
           value={taitosi}
@@ -271,7 +302,7 @@ export const OsaamisSuosittelija = ({
           )}
         </div>
 
-        <div className="mb-6 overflow-y-auto max-h-[228px]">
+        <div className="mb-4 overflow-y-auto min-h-[40px] h-[100px] max-h-[228px] sm:max-h-[25dvh]">
           {filteredEhdotetutOsaamiset.length > 0 ? (
             // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <ul
@@ -360,7 +391,10 @@ export const OsaamisSuosittelija = ({
               )}
             </div>
 
-            <div className="overflow-y-auto max-h-[228px]" ref={selectedAreaRef}>
+            <div
+              className="overflow-y-auto min-h-[40px] h-[100px] max-h-[228px] sm:max-h-[25dvh] "
+              ref={selectedAreaRef}
+            >
               {value.length > 0 ? (
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
                 <ul
