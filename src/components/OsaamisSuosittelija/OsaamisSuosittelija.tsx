@@ -259,7 +259,7 @@ export const OsaamisSuosittelija = ({
       <div className="mb-6 flex flex-col">
         <div
           className={tc([
-            'sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold sticky top-0',
+            'sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold sticky top-0 bg-bg-gray',
             tagHeadingClassName,
           ])}
         >
@@ -344,7 +344,7 @@ export const OsaamisSuosittelija = ({
           <>
             <div
               className={tc([
-                'sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold sticky top-0',
+                'sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold sticky top-0 bg-bg-gray',
                 tagHeadingClassName,
               ])}
             >
