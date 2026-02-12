@@ -404,7 +404,7 @@
       "TUTKINTO": "Tutkintokoulutus on koulutus, joka johtaa viralliseen tutkintoon. Tekoäly ryhmittelee nämä koulutukset sen mukaan, mitä taitoja niissä opitaan ja mihin koulutusalaan ja viralliseen tutkintoluokitukseen ne kuuluvat."
     },
     "work": {
-      "AMMATTITIETO": "Ammatti on kokonaisuus keskenään hyvin samankaltaisista töistä. Se kuvaa, millaisia tehtäviä, taitoja ja vastuita työhön kuuluu. Samaan ammattiin kuuluvat työt ovat sisällöltään niin samanlaisia, että ne voidaan luokitella yhdeksi ammatiksi.",
+      "AMMATTITIETO": "Ammatin tiedot haetaan näkyville Työmarkkinatorin Ammattitieto-palvelusta. Ammattitiedosta löytyy ammattien ja ammattialojen kuvauksia, minkä lisäksi voit lukea eri ammateissa toimivien haastatteluja. Täydennämme ammattien tietoja ammatteihin sopivilla työpaikkailmoitustiedoilla.<br><br><CustomLink>Tutustu ammattitietoon Työmarkkinatorilla<Icon></Icon></CustomLink>",
       "TMT": "Työmahdollisuus on tekoälyn muodostama ryhmä samankaltaisista työpaikoista. Tekoäly lukee työpaikkailmoituksia ja tunnistaa niistä tarvittavat taidot, luvat, ajokortit ja mainitut ammatit. Ilmoitukset, joissa on riittävästi tietoa, ryhmitellään sisällön perusteella, jolloin syntyy työmahdollisuuksia – eli joukkoja töistä, joissa vaaditaan samanlaisia osaamisia ja ominaisuuksia."
     }
   },
