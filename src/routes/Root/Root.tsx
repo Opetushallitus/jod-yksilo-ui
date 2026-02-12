@@ -20,6 +20,7 @@ import {
   NavigationBar,
   ServiceVariantProvider,
   SkipLink,
+  useMediaQueries,
   useNoteStack,
   UserButton,
 } from '@jod/design-system';
@@ -71,6 +72,8 @@ const Root = () => {
   const sessionWarningNoteId = 'session-expiration-warning';
   const sessionExpiredNoteId = 'session-expired';
   const isOnProtectedRoute = useMatch(`/${language}/${t('slugs.profile.index')}/*`);
+  const { sm } = useMediaQueries();
+  const showServiceName = sm || !searchInputVisible;
 
   const { extend, disable } = useSessionExpirationTimer({
     isLoggedIn: isLoggedIn,
@@ -272,7 +275,7 @@ const Root = () => {
             </Link>
           )}
           serviceBarVariant="yksilo"
-          serviceBarTitle={t('my-competence-path')}
+          serviceBarTitle={showServiceName ? t('my-competence-path') : undefined}
           serviceBarContent={
             <SearchBar searchInputVisible={searchInputVisible} setSearchInputVisible={setSearchInputVisible} />
           }
