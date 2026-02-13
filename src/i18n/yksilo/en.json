@@ -283,6 +283,7 @@
     "palvelussuhde": "Employment",
     "rikosrekisteriote": "Criminal record extract",
     "sijaintiJoustava": "Flexible location",
+    "toimiala": "Industry",
     "tyoaika": "Working hours",
     "tyokieli": "Working language",
     "tyonJatkuvuus": "Form and continuity of employment relationship"
@@ -990,6 +991,7 @@
         },
         "education-opportunity-type": "Type",
         "filter": "Filtering",
+        "industries": "Industries",
         "job-opportunity-type": "Type",
         "location": "Location",
         "occupation-type": "Upper-level occupational group",

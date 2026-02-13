@@ -99,6 +99,7 @@ const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) 
       tyoaika: t('jakauma.tyoaika'),
       tyokieli: t('jakauma.tyokieli'),
       tyonJatkuvuus: t('jakauma.tyonJatkuvuus'),
+      toimiala: t('jakauma.toimiala'),
     }),
     [t],
   );

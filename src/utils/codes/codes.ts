@@ -1,6 +1,11 @@
 import i18n, { supportedLanguageCodes, type LangCode } from '@/i18n/config';
 import { TypedMahdollisuus } from '@/routes/types';
 import type { Codeset } from '@/utils/jakaumaUtils';
+/**
+ Toimiala contains data from here https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/toimiala_1_20080101/classificationItems?content=data&meta=max&lang=fi.
+ It is shortened to contain only necessary levels by following command: jq '[.[] | select(.level <= 2)]' toimiala_fi.json > toimiala_fi_small.json
+ */
+import toimialaData from './toimiala_fi.json';
 
 export interface Classification {
   localId: string;
@@ -24,7 +29,7 @@ export interface ClassificationItem {
   level: number;
   code: string;
   order: number;
-  modifiedDate: string;
+  modifiedDate?: string;
   parentItemLocalId: string | null;
   parentCode: string | null;
   classificationItemNames: {
@@ -43,6 +48,7 @@ export interface ClassificationItem {
 // https://stat.fi/fi/luokitukset/kieli/kieli_1_20101115
 // https://stat.fi/fi/luokitukset/kunta/kunta_1_20250101
 // https://stat.fi/fi/luokitukset/valtio/valtio_2_20120101
+// https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/toimiala_1_20080101/classificationItems
 
 // Lazy cache: Map<Codeset, Map<LangCode, Promise<Map<code, value>>>>
 const codesetCache = new Map<Codeset, Map<LangCode, Promise<Map<string, string>>>>();
@@ -104,6 +110,15 @@ export const getCodesetValue = async (codeset: Codeset, code: string, lang: Lang
   return codeMap.get(code) ?? code;
 };
 
+export const getToimiala = (code: string): Partial<ClassificationItem> | undefined => {
+  const entry = toimialaData.find((obj) => {
+    if (!obj || typeof obj !== 'object') return false;
+    const o = obj as Record<string, unknown>;
+    return typeof o.code === 'string' && o.code === code;
+  }) as Partial<ClassificationItem> | undefined;
+  return entry;
+};
+
 /**
  * Minimal interface for opintopolku koodisto service response
  */
@@ -124,26 +139,37 @@ interface CachedCodeItem {
   value: string;
   timestamp: number;
 }
+
 type CodeItemCache = Record<string, CachedCodeItem>;
 
 type LocalizedCodeItemCache = Record<LangCode, CodeItemCache>;
 
 const isLocalizedCodeItemCache = (obj: unknown): obj is LocalizedCodeItemCache => {
-  if (typeof obj !== 'object' || obj === null) return false;
+  if (typeof obj !== 'object' || obj === null) {
+    return false;
+  }
   const objWithIndex = obj as Record<string, unknown>;
   for (const key in objWithIndex) {
-    if (!supportedLanguageCodes.includes(key as LangCode)) return false;
-    if (!isCodeItemCache(objWithIndex[key])) return false;
+    if (!supportedLanguageCodes.includes(key as LangCode)) {
+      return false;
+    }
+    if (!isCodeItemCache(objWithIndex[key])) {
+      return false;
+    }
   }
   return true;
 };
 
 const isCodeItemCache = (obj: unknown): obj is CodeItemCache => {
-  if (typeof obj !== 'object' || obj === null) return false;
+  if (typeof obj !== 'object' || obj === null) {
+    return false;
+  }
   const objWithIndex = obj as Record<string, unknown>;
   for (const key in objWithIndex) {
     const item = objWithIndex[key];
-    if (!isCachedCodeItem(item)) return false;
+    if (!isCachedCodeItem(item)) {
+      return false;
+    }
   }
   return true;
 };
@@ -169,14 +195,19 @@ const cache: LocalizedCodeItemCache = {
 
 const loadCacheFromStorage = () => {
   try {
-    if (Object.keys(cache.fi).length > 0 || Object.keys(cache.sv).length > 0 || Object.keys(cache.en).length > 0)
+    if (Object.keys(cache.fi).length > 0 || Object.keys(cache.sv).length > 0 || Object.keys(cache.en).length > 0) {
       return;
+    }
 
     const storage = localStorage.getItem(CACHE_KEY);
-    if (!storage) return;
+    if (!storage) {
+      return;
+    }
 
     const parsed = JSON.parse(storage);
-    if (!isLocalizedCodeItemCache(parsed)) return;
+    if (!isLocalizedCodeItemCache(parsed)) {
+      return;
+    }
 
     const now = Date.now();
     for (const langCode of Object.keys(parsed) as LangCode[]) {

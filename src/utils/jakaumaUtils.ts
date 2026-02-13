@@ -36,7 +36,7 @@ const makeJobKeysArray = <T extends readonly (keyof TyomahdollisuusJakaumat)[]>(
   return arr;
 };
 
-const JobCodeSetKeysArray = makeJobKeysArray(['maa', 'maakunta', 'kunta', 'tyokieli'] as const);
+const JobCodeSetKeysArray = makeJobKeysArray(['maa', 'maakunta', 'kunta', 'tyokieli', 'toimiala'] as const);
 export type JobCodesetKey = (typeof JobCodeSetKeysArray)[number];
 
 export const isJobCodeSetKey = (key: JakaumaKey): key is JobCodesetKey => {

@@ -1,5 +1,6 @@
 import { components } from '@/api/schema';
 import { maxKestoValue } from '@/routes/Tool/components/filters/FilterKesto.tsx';
+import { getToimiala } from '@/utils/codes/codes.ts';
 
 export function filterByRegion(regions: string[], meta: components['schemas']['EhdotusMetadata']): boolean {
   if (regions.length === 0) {
@@ -71,4 +72,23 @@ export function filterByAmmattiryhmat(
   // Ammattiryhmat are in form C1, and meta.ammattiryhma is in format C1234
   // If meta.ammattiryhma starts with category code, it belongs to that category
   return ammattiryhmat.some((ar) => meta.ammattiryhma?.startsWith(ar));
+}
+
+export function filterByToimialat(toimialaFilters: string[], meta: components['schemas']['EhdotusMetadata']): boolean {
+  if (toimialaFilters.length === 0 || meta.tyyppi !== 'TYOMAHDOLLISUUS') {
+    return true;
+  }
+  if (!meta.toimialat) {
+    return false;
+  }
+
+  const filterSet = new Set(toimialaFilters);
+  const uniqueUpperLevels = new Set(meta.toimialat.map((ta) => ta.substring(0, 2)));
+  for (const upperLevel of uniqueUpperLevels) {
+    const toimiala = getToimiala(upperLevel);
+    if (toimiala?.parentCode && filterSet.has(toimiala.parentCode)) {
+      return true;
+    }
+  }
+  return false;
 }

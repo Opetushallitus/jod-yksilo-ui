@@ -1039,6 +1039,7 @@ export interface components {
       /** @enum {string} */
       koulutusmahdollisuusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
       maakunnat?: string[];
+      toimialat?: string[];
       /** Format: double */
       kesto?: number;
       /** Format: double */

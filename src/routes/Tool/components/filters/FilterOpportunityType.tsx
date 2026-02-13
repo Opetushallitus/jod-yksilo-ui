@@ -1,4 +1,5 @@
 import { FilterKesto } from '@/routes/Tool/components/filters/FilterKesto.tsx';
+import { FilterToimiala } from '@/routes/Tool/components/filters/FilterToimiala.tsx';
 import type { MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import type { FilterName } from '@/stores/useToolStore/ToolStoreModel';
@@ -136,6 +137,13 @@ export const FilterOpportunityType = () => {
           data-testid="occupation-type-setting"
         >
           <FilterAmmattiryhma />
+        </Setting>
+        <Setting
+          title={t('tool.settings.general.industries')}
+          count={getFilterCount(['toimialat'])}
+          data-testid="industry-setting"
+        >
+          <FilterToimiala />
         </Setting>
       </ul>
     </fieldset>

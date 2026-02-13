@@ -3,7 +3,7 @@ import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import i18n from '@/i18n/config';
-import { EhdotusRecord, ehdotusDataToRecord, sortingValues } from '@/routes/Tool/utils';
+import { ehdotusDataToRecord, EhdotusRecord, sortingValues } from '@/routes/Tool/utils';
 import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import {
   filterByAmmattiryhmat,
@@ -11,6 +11,7 @@ import {
   filterByJobType,
   filterByKesto,
   filterByRegion,
+  filterByToimialat,
 } from '@/stores/useToolStore/filters';
 import {
   DEFAULT_FILTERS,
@@ -260,6 +261,7 @@ export const useToolStore = create<ToolState>()(
           const {
             opportunityType: filter,
             region,
+            toimialat,
             ammattiryhmat,
             jobOpportunityType,
             educationOpportunityType,
@@ -294,6 +296,7 @@ export const useToolStore = create<ToolState>()(
                 filterByEducationType(educationOpportunityType, meta) &&
                 filterByAmmattiryhmat(ammattiryhmat, meta) &&
                 filterByRegion(region, meta) &&
+                filterByToimialat(toimialat, meta) &&
                 filterByKesto(minDuration, maxDuration, meta)
               );
             })
@@ -458,7 +461,7 @@ export const useToolStore = create<ToolState>()(
     {
       name: 'tool-storage',
       storage: createJSONStorage(() => sessionStorage),
-      version: 4,
+      version: 5,
       migrate: () => {
         sessionStorage.removeItem('tool-storage');
       },

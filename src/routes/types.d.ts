@@ -49,6 +49,7 @@ export interface TyomahdollisuusJakaumat {
   tyoaika: Jakauma;
   tyokieli: Jakauma;
   tyonJatkuvuus: Jakauma;
+  toimiala: Jakauma;
 }
 
 export interface KoulutusmahdollisuusJakaumat {
