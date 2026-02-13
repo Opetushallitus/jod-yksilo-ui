@@ -958,7 +958,7 @@
         "conversational-virtual-assistant": "Identify interests with AI",
         "virtual-assistant": {
           "conversation": "Conversation",
-          "description": "Hi! I am a bot and I help you find your interests. Talk to me and you will get suggestions that you can choose the ones that suit you best.",
+          "description": "Hi! I am a bot and I help you find your interests. Talk to me and you will get suggestions that you can choose the ones that suit you best. Do not enter personal information to the bot.",
           "error": "An error occurred while generating the response. Please try again with the same or a new input.",
           "intrests": "Interests",
           "loading": "Loading answer... Please wait for a moment.",

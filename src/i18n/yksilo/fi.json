@@ -956,7 +956,7 @@
         "conversational-virtual-assistant": "Tunnista kiinnostuksia tekoälyllä",
         "virtual-assistant": {
           "conversation": "Keskustelu",
-          "description": "Hei! Olen botti ja autan sinua löytämään kiinnostuksen kohteitasi. Keskustele kanssani, niin saat ehdotuksia, joista voit valita sinulle sopivimmat.",
+          "description": "Hei! Olen botti ja autan sinua löytämään kiinnostuksen kohteitasi. Keskustele kanssani, niin saat ehdotuksia, joista voit valita sinulle sopivimmat. Älä syötä henkilötietojasi botille.",
           "error": "Virhe vastauksen muodostamisessa. Yritä uudestaan samalla tai uuden syötteen kanssa.",
           "intrests": "Kiinnostukset",
           "loading": "Vastausta ladataan... Ole hyvä ja odota hetki.",

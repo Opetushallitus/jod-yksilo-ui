@@ -957,7 +957,7 @@
         "conversational-virtual-assistant": "Identifiera intressen med artificiell intelligens",
         "virtual-assistant": {
           "conversation": "Konversation",
-          "description": "Hej! Jag är en bot och hjälper dig att hitta dina intressen. Prata med mig så får du förslag som du kan välja de som passar dig bäst.",
+          "description": "Hej! Jag är en bot och hjälper dig att hitta dina intressen. Prata med mig så får du förslag som du kan välja de som passar dig bäst. Ange inte personuppgifter till boten.",
           "error": "Fel vid generering av svar. Försök igen med samma eller ny input.",
           "intrests": "Intressen",
           "loading": "Hämtar svar... Vänligen vänta ett ögonblick.",
