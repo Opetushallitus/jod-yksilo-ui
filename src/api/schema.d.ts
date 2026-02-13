@@ -439,7 +439,6 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    /** Creates a keskustelu */
     post: operations['keskusteluCreateKeskustelu'];
     delete?: never;
     options?: never;
@@ -456,7 +455,6 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    /** Continues a keskustelu */
     post: operations['keskusteluContinueKeskustelu'];
     delete?: never;
     options?: never;
@@ -985,20 +983,20 @@ export interface components {
       jaetutSuosikit?: ('TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS')[];
       jaetutTavoitteet?: string[];
     };
+    UusiKeskustelu: {
+      viesti: components['schemas']['LokalisoituTeksti'];
+      /** @enum {string} */
+      tila: 'KIINNOSTUKSET' | 'OSAAMINEN';
+    };
     Keskustelu: {
       /** Format: uuid */
-      id?: string;
-      kiinnostukset?: components['schemas']['Kiinnostus'][];
-      vastaus?: string;
-    };
-    Kiinnostus: {
-      /** Format: uri */
-      esco_uri?: string;
-      kuvaus?: string;
+      readonly id?: string;
+      vastaus: string;
+      ehdotukset?: string[];
     };
     Vastaus: {
-      kiinnostukset?: components['schemas']['Kiinnostus'][];
-      vastaus?: string;
+      readonly vastaus: string;
+      ehdotukset?: string[];
     };
     TmtImportDto: {
       tyopaikat?: string[];
@@ -2645,7 +2643,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['LokalisoituTeksti'];
+        'application/json': components['schemas']['UusiKeskustelu'];
       };
     };
     responses: {
