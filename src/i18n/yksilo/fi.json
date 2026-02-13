@@ -281,6 +281,7 @@
     "palvelussuhde": "Palvelussuhde",
     "rikosrekisteriote": "Rikosrekisteriote",
     "sijaintiJoustava": "Joustava sijainti",
+    "toimiala": "Toimiala",
     "tyoaika": "Työaika",
     "tyokieli": "Työkieli",
     "tyonJatkuvuus": "Työsuhteen muoto ja jatkuvuus"
@@ -988,6 +989,7 @@
         },
         "education-opportunity-type": "Koulutusmahdollisuuksien tyyppi",
         "filter": "Suodatus",
+        "industries": "Toimialat",
         "job-opportunity-type": "Työmahdollisuuksien tyyppi",
         "location": "Sijainti",
         "occupation-type": "Ylätason ammattiryhmä",

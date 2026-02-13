@@ -39,6 +39,7 @@ const loader = (async ({ request, params, context }) => {
     maa: jakaumat.maa ? await Promise.all(jakaumat.maa.arvot.map(mapArvoToCodeValue('maa'))) : [],
     maakunta: jakaumat.maakunta ? await Promise.all(jakaumat.maakunta.arvot.map(mapArvoToCodeValue('maakunta'))) : [],
     tyokieli: jakaumat.tyokieli ? await Promise.all(jakaumat.tyokieli.arvot.map(mapArvoToCodeValue('tyokieli'))) : [],
+    toimiala: jakaumat.toimiala ? await Promise.all(jakaumat.toimiala.arvot.map(mapArvoToCodeValue('toimiala'))) : [],
   };
 
   const [competences, occupations, occupationGroup] = await Promise.all([

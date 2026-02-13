@@ -282,6 +282,7 @@
     "palvelussuhde": "Anställningsförhållande",
     "rikosrekisteriote": "Straffregisterutdrag",
     "sijaintiJoustava": "Flexibel placering",
+    "toimiala": "Bransch",
     "tyoaika": "Arbetstid",
     "tyokieli": "Arbetsspråk",
     "tyonJatkuvuus": "Anställningsförhållandets form och kontinuitet"
@@ -989,6 +990,7 @@
         },
         "education-opportunity-type": "Typ",
         "filter": "Filtrering",
+        "industries": "Branscher",
         "job-opportunity-type": "Typ",
         "location": "Plats",
         "occupation-type": "Yrkesgrupp på högre nivå",
