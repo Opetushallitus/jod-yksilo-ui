@@ -25,6 +25,7 @@ vi.mock('react-i18next', () => ({
     t: (key: string) => key,
     i18n: { language: 'en' },
   })),
+  Trans: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 
 vi.mock('@/utils', () => ({
