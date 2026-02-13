@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "engines": {
-    "node": "^22.0.0"
+    "node": "^24.0.0"
   },
   "license": "EUPL-1.2",
   "scripts": {
@@ -24,7 +24,7 @@
   "dependencies": {
     "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^5.2.2",
-    "@jod/design-system": "github:Opetushallitus/jod-design-system#main",
+    "@jod/design-system": "https://github.com/Opetushallitus/jod-design-system/releases/download/rel-20260213-1/jod-design-system-0.0.0.tgz",
     "driver.js": "^1.4.0",
     "i18next": "^25.7.3",
     "i18next-chained-backend": "^5.0.2",
