@@ -41,11 +41,11 @@ Third-party assets such as images, fonts, and icons are stored in a S3 bucket. G
 
 ## Updating JOD Design System
 
-Run the following command to update the JOD Design System to the latest version:
+To update the JOD Design System to the latest version:
 
-```shell
-npm update @jod/design-system
-```
+1. Check the latest release in the [JOD Design System GitHub repository](https://github.com/Opetushallitus/jod-design-system/releases)
+2. Update the `@jod/design-system` dependency URL in `package.json` to point to the latest release `.tgz` file
+3. Run `npm install` to install the updated version
 
 If there is error from missing files run the following commands in assets-folder
 
