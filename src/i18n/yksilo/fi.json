@@ -1016,7 +1016,8 @@
       "buttons": {
         "done": "Löydä mahdollisuuksia",
         "next": "Seuraava",
-        "previous": "Edellinen"
+        "previous": "Edellinen",
+        "close": "Sulje"
       },
       "desktop": {
         "step-1": {

@@ -60,6 +60,13 @@
     }
   }
 
+  .driver-popover-navigation-btns > .driver-popover-next-btn {
+    background-color: var(--color-white);
+    padding: var(--spacing-1) var(--spacing-4);
+    border-radius: var(--radius-lg);
+    color: var(--color-primary-gray);
+  }
+
   .driver-popover-arrow {
     &.driver-popover-arrow-side-left {
       border-left-color: var(--color-primary-gray);

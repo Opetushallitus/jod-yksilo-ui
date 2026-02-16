@@ -180,7 +180,7 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
       showProgress: true,
       disableActiveInteraction: true,
       progressText: '{{current}}/{{total}}',
-      doneBtnText: t('tool.tour.buttons.done'),
+      doneBtnText: t('tool.tour.buttons.close'),
       nextBtnText: t('tool.tour.buttons.next'),
       prevBtnText: t('tool.tour.buttons.previous'),
       steps: steps,
