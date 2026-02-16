@@ -168,7 +168,11 @@ const JobOpportunity = () => {
       navTitle: t('description'),
       showDivider: false,
       showAiInfoInTitle: true,
-      content: <p className="text-body-lg font-arial">{getLocalizedText(tyomahdollisuus?.kuvaus)}</p>,
+      content: (
+        <p className="text-body-md font-arial whitespace-pre-line">
+          {getLocalizedText(tyomahdollisuus?.kuvaus).replace(/\n\n\n+/g, '\n\n')}
+        </p>
+      ),
     },
     {
       navTitle: t('job-opportunity.most-common-job-tasks.title'),

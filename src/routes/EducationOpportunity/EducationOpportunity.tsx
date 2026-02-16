@@ -59,7 +59,7 @@ const EducationOpportunity = () => {
       navTitle: t('description'),
       showAiInfoInTitle: true,
       showDivider: false,
-      content: <p className="text-body-md font-arial">{getLocalizedText(kuvaus)}</p>,
+      content: <p className="text-body-md font-arial whitespace-pre-line">{getLocalizedText(kuvaus)}</p>,
     },
     ...(durationText
       ? [
