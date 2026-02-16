@@ -1018,7 +1018,8 @@
       "buttons": {
         "done": "Find opportunities",
         "next": "Next",
-        "previous": "Previous"
+        "previous": "Previous",
+        "close": "Close"
       },
       "desktop": {
         "step-1": {

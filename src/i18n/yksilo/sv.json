@@ -1017,7 +1017,8 @@
       "buttons": {
         "done": "Hitta möjligheter",
         "next": "Nästa",
-        "previous": "Föregående"
+        "previous": "Föregående",
+        "close": "Stäng"
       },
       "desktop": {
         "step-1": {
