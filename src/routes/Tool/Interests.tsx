@@ -16,7 +16,7 @@ const Interests = () => {
   );
 
   return (
-    <div>
+    <>
       <OsaamisSuosittelija
         onChange={onChange}
         value={mappedKiinnostukset}
@@ -25,8 +25,8 @@ const Interests = () => {
         hideTextAreaLabel
         useAnimations
       />
-      {isFeatureEnabled('VIRTUAALIOHJAAJA') && <VirtualAssistant />}
-    </div>
+      {isFeatureEnabled('VIRTUAALIOHJAAJA') && <VirtualAssistant type="interests" />}
+    </>
   );
 };
 

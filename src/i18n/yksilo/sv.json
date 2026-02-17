@@ -65,6 +65,7 @@
     "title": "Kompetensprofil"
   },
   "date-or-continues-placeholder": "dd.mm.åååå",
+  "date-placeholder": "dd.mm.åååå",
   "datepicker": {
     "actions": {
       "close": "Stäng kalendern",
@@ -93,7 +94,6 @@
       "view": "Växla till dagsvy"
     }
   },
-  "date-placeholder": "dd.mm.åååå",
   "description": "Beskrivning",
   "do-filter": "Filtrera",
   "duration": "Längd",
@@ -103,14 +103,14 @@
     "add-studies-to-education": "Lägg till studier i utbildningen",
     "add-studies-to-this-education": "Lägg till studier i den här utbildningen",
     "add-studies-to-this-education-button": "Lägg studier",
-    "confirm-delete-degree": "Är du säker på att du vill ta bort examen ”{{name}}”? Om utbildningen efter raderingen inte längre innehåller några examina, raderas även utbildningen.",
-    "confirm-delete-education-history": "Är du säker på att du vill ta bort utbildningen ”{{name}}”?",
+    "confirm-delete-degree": "Är du säker på att du vill ta bort examen \"{{name}}\"? Om utbildningen efter raderingen inte längre innehåller några examina, raderas även utbildningen.",
+    "confirm-delete-education-history": "Är du säker på att du vill ta bort utbildningen \"{{name}}\"?",
     "delete-degree": "Ta bort examen",
     "delete-education-history": "Ta bort utbildning",
     "edit-degree-or-education": "Redigera examen eller utbildning",
     "edit-education": "Redigera utbildning",
-    "educational-institution-or-education-provider": "Läroanstalt eller utbildningsanordnare",
     "education-provider-or-education": "Utbildningsanordnare/utbildning",
+    "educational-institution-or-education-provider": "Läroanstalt eller utbildningsanordnare",
     "identify-competences": "Identifiera kompetenser",
     "import-education-history": "Importera min utbildningshistorik",
     "name-of-degree-or-education": "Namn på examen eller utbildning",
@@ -125,7 +125,7 @@
       "success-osaamiset-link-about-ai": "Information om användningen av artificiell intelligens"
     },
     "start-modal": {
-      "description": "Du kan importera din utbildningshistorik till din kompetensprofil när du har gett tillstånd i Studieinfo. Klicka på ”Öppna Studieinfo” för att ge tillstånd att importera uppgifter. När du har gett ditt tillstånd återgår du automatiskt till tjänsten. När du har återgått till tjänsten kan du välja vilka utbildningar du vill importera.\n",
+      "description": "Du kan importera din utbildningshistorik till din kompetensprofil när du har gett tillstånd i Studieinfo. Klicka på \"Öppna Studieinfo\" för att ge tillstånd att importera uppgifter. När du har gett ditt tillstånd återgår du automatiskt till tjänsten. När du har återgått till tjänsten kan du välja vilka utbildningar du vill importera.\n",
       "import-button": "Öppna Studieinfo",
       "import-redirect-fail": "Det gick inte att öppna Studieinfo. Vänligen försök igen.",
       "title": "Importera din utbildningshistorik från Koski-tjänsten"
@@ -136,8 +136,8 @@
         "title": "Avbryt import"
       },
       "data-load-failed": "Laddning av uppgifter misslyckades. Försök på nytt senare.",
-      "data-loading": "Hämtar information från Studieinfo...",
       "data-load-no-data": "Utbildningsinformation hittades inte eller så har du inte rätt att granska informationen.",
+      "data-loading": "Hämtar information från Studieinfo...",
       "description": "Du kan redigera utbildningarna efter att du har importerat dem till Kompetensstigen under utbildningar i din kompetensprofil.\n",
       "table-header-checkbox": "Importera valda",
       "title": "Sammanfattning",
@@ -192,8 +192,8 @@
     "add-new-activity": "Lägg till ny funktion",
     "add-new-activity-button": "Lägg aktivitet",
     "add-new-free-time-activity": "Lägg till ny fritidsverksamhet",
-    "confirm-delete-free-time-activity": "Är du säker på att du vill ta bort fritidsverksamheten ”{{name}}”? Om fritidsverksamheten efter raderingen inte är kopplad till några behörigheter, raderas även fritidsfunktionen.",
-    "confirm-delete-proficiency": "Är du säker på att du vill ta bort behörigheten ”{{name}}”?",
+    "confirm-delete-free-time-activity": "Är du säker på att du vill ta bort fritidsverksamheten \"{{name}}\"? Om fritidsverksamheten efter raderingen inte är kopplad till några behörigheter, raderas även fritidsfunktionen.",
+    "confirm-delete-proficiency": "Är du säker på att du vill ta bort behörigheten \"{{name}}\"?",
     "delete-free-time-activity": "Ta bort fritidsverksamhet",
     "delete-free-time-activity-button": "Ta bort",
     "delete-proficiency": "Ta bort behörighet",
@@ -230,9 +230,9 @@
   },
   "i-allow": "Jag tillåter",
   "i-disallow": "Jag tillåter inte",
+  "in-this-section": "I den här delen",
   "interests": "Kartlägg dina intressen",
   "interests-of-your-choice": "Valda intressen",
-  "in-this-section": "I den här delen",
   "introduction": {
     "step-1": {
       "item-1": "Se all information om ditt kunnande och dina intressen på en och samma plats",
@@ -374,7 +374,6 @@
   "move-to-service": "Öppna tjänsten",
   "my-competence-path": "Min kompetensstig",
   "my-competence-profile": "Min kompetensprofil",
-  "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning",
   "my-competences": {
     "by-KOULUTUS": "Mina kunskaper från utbildningen",
     "by-MUU_OSAAMINEN": "Mitt övriga kunnande",
@@ -385,19 +384,20 @@
     "missing-PATEVYYS": "Inga kunskaper. Lägg till fritidsverksamhet.\n",
     "missing-TOIMENKUVA": "Inga kunskaper. Lägg till arbetsplatser.\n"
   },
+  "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning",
   "my-competences-by-sources": "Mina kunskaper enligt källor",
+  "n-education-opportunities": "{{count}} utbildningsmöjligheter",
+  "n-job-opportunities": "{{count}} karriärmöjligheter",
+  "n-months-short": "{{count}} mån",
+  "n-years_one": "{{count}} år",
+  "n-years_other": "{{count}} år",
   "navigation": {
     "main-section": {
       "title": "Personlig kompetensstig",
       "tool-title": "Hitta möjligheter"
     }
   },
-  "n-education-opportunities": "{{count}} utbildningsmöjligheter",
   "next": "Nästa",
-  "n-job-opportunities": "{{count}} karriärmöjligheter",
-  "n-months-short": "{{count}} mån",
-  "n-years_one": "{{count}} år",
-  "n-years_other": "{{count}} år",
   "on-this-page": "På denna sida",
   "opportunity-tooltip": {
     "education": {
@@ -718,15 +718,14 @@
       "goal-name": "Målnamn",
       "modify-goal": "Redigera mål",
       "my-plan-towards-goal": "Planalternativ",
+      "n-plans_one": "1 plan",
+      "n-plans_other": "{{count}} planer",
+      "n-plans_zero": "Inga valda planer",
       "no-chosen-competences": "Inga valda kompetenser",
       "no-favorites-selected": "Lägg först till favoriter som du kan skapa mål från.",
       "no-filtered-results": "Inga utbildningsmöjligheter. Justera filtren för att se alternativ.",
       "no-goals-created": "Du har inte lagt till några mål än.",
-      "n-plans_one": "1 plan",
-      "n-plans_other": "{{count}} planer",
-      "n-plans_zero": "Inga valda planer",
       "own-competences": "Egna kompetenser",
-      "plan_other": "Plan",
       "remove-competence-description": "Ta bort kompetens från x-ikonen",
       "remove-from-goals": "Ta bort från mål",
       "remove-from-plans": "Ta bort plan",
@@ -827,7 +826,7 @@
     "toast-error": "Det gick inte att skicka respons – försök igen"
   },
   "remove-favorite": "Ta bort från favoriter",
-  "remove-favorite-opportunity-confirmation": "Är du säker på att du vill ta bort möjligheten ”{{name}}” från dina favoriter?",
+  "remove-favorite-opportunity-confirmation": "Är du säker på att du vill ta bort möjligheten \"{{name}}\" från dina favoriter?",
   "save": "Spara",
   "save-and-close": "Spara och stäng",
   "search": {
@@ -938,6 +937,15 @@
     "my-own-data": {
       "cancel-text": "Nej, avbryt",
       "competences": {
+        "virtual-assistant": {
+          "open": "Identifiera kunskaper med artificiell intelligens",
+          "description": "Hej! Jag är en bot och hjälper dig att hitta dina kunskaper. Prata med mig så får du förslag som du kan välja de som passar dig bäst. Ange inte personuppgifter till boten.",
+          "selected-tab": "Kunskaper",
+          "selected": "Valda kunskaper",
+          "start": "Låt oss börja – berätta först vad du kan just nu?",
+          "title": "Kartläggning av kunskaper",
+          "x-competences-added": "{{count}} kunskaper tillagda"
+        },
         "import": {
           "confirm-button": "Importera kunskaper",
           "confirm-description": "Välj önskade kunskaper i listan nedan.",
@@ -955,20 +963,23 @@
         "export-button": "Exportera uppgifter till profilen"
       },
       "interests": {
-        "conversational-virtual-assistant": "Identifiera intressen med artificiell intelligens",
         "virtual-assistant": {
-          "conversation": "Konversation",
-          "description": "Hej! Jag är en bot och hjälper dig att hitta dina intressen. Prata med mig så får du förslag som du kan välja de som passar dig bäst.",
-          "error": "Fel vid generering av svar. Försök igen med samma eller ny input.",
-          "intrests": "Intressen",
-          "loading": "Hämtar svar... Vänligen vänta ett ögonblick.",
-          "respond-to-chat": "Svara till boten...",
-          "selected-interests": "Valda intressen",
-          "send": "Skicka",
+          "open": "Identifiera intressen med artificiell intelligens",
+          "description": "Hej! Jag är en bot och hjälper dig att hitta dina intressen. Prata med mig så får du förslag som du kan välja de som passar dig bäst. Ange inte personuppgifter till boten.",
+          "selected-tab": "Intressen",
+          "selected": "Valda intressen",
           "start": "Låt oss börja – berätta först vad som intresserar dig just nu?",
           "title": "Kartläggning av intressen",
           "x-interests-added": "{{count}} intressen tillagda"
         }
+      },
+      "virtual-assistant": {
+        "conversation": "Konversation",
+        "error": "Fel vid generering av svar. Försök igen med samma eller ny input.",
+        "loading": "Hämtar svar... Vänligen vänta ett ögonblick.",
+        "respond-to-chat": "Svara till boten...",
+        "send": "Skicka",
+        "start": "Låt oss börja – berätta först vad som intresserar dig just nu?"
       },
       "title": "Dina uppgifter"
     },
@@ -1015,10 +1026,10 @@
     },
     "tour": {
       "buttons": {
+        "close": "Stäng",
         "done": "Hitta möjligheter",
         "next": "Nästa",
-        "previous": "Föregående",
-        "close": "Stäng"
+        "previous": "Föregående"
       },
       "desktop": {
         "step-1": {
@@ -1110,8 +1121,8 @@
     "add-new-job-description": "Lägg till ny uppgiftsbeskrivning",
     "add-new-job-description-button": "Lägg ny",
     "add-new-workplace": "Lägg till ny arbetsplats",
-    "confirm-delete-job-description": "Är du säker på att du vill ta bort uppgiftsbeskrivningen ”{{name}}”? Om arbetsplatsen efter raderingen inte längre innehåller några uppgiftsbeskrivningar, raderas även arbetsplatsen.",
-    "confirm-delete-work-history": "Är du säker på att du vill ta bort arbetsplatsen ”{{name}}”?",
+    "confirm-delete-job-description": "Är du säker på att du vill ta bort uppgiftsbeskrivningen \"{{name}}\"? Om arbetsplatsen efter raderingen inte längre innehåller några uppgiftsbeskrivningar, raderas även arbetsplatsen.",
+    "confirm-delete-work-history": "Är du säker på att du vill ta bort arbetsplatsen \"{{name}}\"?",
     "delete-job-description": "Ta bort uppgiftsbeskrivning",
     "delete-job-description-button": "Ta bort",
     "delete-work-history": "Ta bort arbetsplats",
