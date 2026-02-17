@@ -26,7 +26,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@jod/design-system": "https://github.com/Opetushallitus/jod-design-system/releases/download/rel-20260213-1/jod-design-system-0.0.0.tgz",
     "driver.js": "^1.4.0",
-    "i18next": "^25.7.3",
+    "i18next": "^25.8.4",
     "i18next-chained-backend": "^5.0.2",
     "i18next-http-backend": "^3.0.2",
     "i18next-resources-to-backend": "^1.2.1",
