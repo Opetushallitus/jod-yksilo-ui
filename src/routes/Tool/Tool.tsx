@@ -100,7 +100,7 @@ const ExploreOpportunities = () => {
 
   const statusText = isLoading ? t('tool.updating') : t('tool.opportunities-loaded', { count: totalItems });
   const { permanentNotesHeight } = useNoteStack();
-  const top = `${(lg ? 66 : 120) + permanentNotesHeight}px`;
+  const top = `${(lg ? 68 : 120) + permanentNotesHeight}px`;
 
   return (
     <>

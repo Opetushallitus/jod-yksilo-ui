@@ -1,7 +1,9 @@
 import { OsaamisSuosittelija } from '@/components';
+import { isFeatureEnabled } from '@/utils/features';
 import React from 'react';
 import { useTool } from './hook/useTool';
 import { mergeUniqueValuesExcludingType } from './utils';
+import { VirtualAssistant } from './VirtualAssistant';
 
 const Competences = () => {
   const { osaamiset, setOsaamiset, mappedOsaamiset } = useTool();
@@ -14,13 +16,16 @@ const Competences = () => {
   );
 
   return (
-    <OsaamisSuosittelija
-      onChange={onChange}
-      value={mappedOsaamiset}
-      tagHeadingClassName="bg-white"
-      hideTextAreaLabel
-      useAnimations
-    />
+    <>
+      <OsaamisSuosittelija
+        onChange={onChange}
+        value={mappedOsaamiset}
+        tagHeadingClassName="bg-white"
+        hideTextAreaLabel
+        useAnimations
+      />
+      {isFeatureEnabled('VIRTUAALIOHJAAJA') && <VirtualAssistant type="competences" />}
+    </>
   );
 };
 
