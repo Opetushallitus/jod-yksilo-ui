@@ -91,17 +91,19 @@ const CategorizedCompetenceTagList = () => {
               </li>
             ))}
           </ul>
-          <Button
-            variant="plain"
-            onClick={() => {
-              setOsaamiset(osaamiset.filter((o) => o.tyyppi && !PROFILE_TYPES.includes(o.tyyppi)));
-              setKiinnostukset(
-                kiinnostukset.filter((o) => o.tyyppi && ![...PROFILE_TYPES, 'KIINNOSTUS'].includes(o.tyyppi)),
-              );
-            }}
-            className="ml-2"
-            label={t('tool.competency-profile.delete-all')}
-          />
+          {osaamiset.length + kiinnostukset.length > 1 && (
+            <Button
+              variant="plain"
+              onClick={() => {
+                setOsaamiset(osaamiset.filter((o) => o.tyyppi && !PROFILE_TYPES.includes(o.tyyppi)));
+                setKiinnostukset(
+                  kiinnostukset.filter((o) => o.tyyppi && ![...PROFILE_TYPES, 'KIINNOSTUS'].includes(o.tyyppi)),
+                );
+              }}
+              className="ml-2"
+              label={t('tool.competency-profile.delete-all')}
+            />
+          )}
         </div>
       ) : (
         <div className="mt-4">
