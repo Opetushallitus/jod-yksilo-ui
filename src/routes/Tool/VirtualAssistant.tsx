@@ -38,7 +38,7 @@ const MessageBubble = ({ message, isUser }: { message: string; isUser: boolean }
 };
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
-export const VirtualAssistant = ({ type }: { type: 'competences' | 'interests' }) => {
+export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'interests'; className?: string }) => {
   const {
     t,
     i18n: { language },
@@ -215,7 +215,7 @@ export const VirtualAssistant = ({ type }: { type: 'competences' | 'interests' }
   const topSlot = React.useMemo(() => <ModalHeader text={headerText} />, [headerText]);
 
   return (
-    <>
+    <div className={className}>
       <Button
         label={
           type === 'competences'
@@ -489,6 +489,6 @@ export const VirtualAssistant = ({ type }: { type: 'competences' | 'interests' }
           </div>
         }
       />
-    </>
+    </div>
   );
 };
