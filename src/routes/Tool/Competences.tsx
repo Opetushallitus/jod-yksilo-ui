@@ -28,7 +28,7 @@ const Competences = () => {
         useAnimations
         scrollOnFocus={false}
       />
-      {osaamiset.length > 1 && (
+      {mappedOsaamiset.length > 1 && (
         <Button
           variant="plain"
           onClick={() => {

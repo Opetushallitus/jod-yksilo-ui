@@ -945,6 +945,8 @@
           "confirm-title": "Import data from profile",
           "failure-toast": "Data import failed — please try again",
           "import-button": "Import information from profile",
+          "no-data-description": "You have not yet saved any information to your competence profile. Add information to make use of it in finding opportunities.",
+          "no-data-title": "No data in competence profile",
           "success-toast": "Data successfully imported"
         },
         "textarea-placeholder": "Report your skills in your own words. You can use either individual words, sentences or longer texts.",
@@ -966,7 +968,9 @@
         "confirm-button": "Export",
         "confirm-description": "Select which data you want to export to your competence profile.",
         "confirm-title": "Export data to profile",
-        "export-button": "Export data to profile"
+        "export-button": "Export data to profile",
+        "no-data-description": "You have not yet mapped out your competences or interests. Add information to make use of it in your competence profile.",
+        "no-data-title": "No mapped data"
       },
       "interests": {
         "conversational-virtual-assistant": "Identify interests with AI",
@@ -1122,11 +1126,12 @@
   "try-again": "Try again",
   "types": {
     "competence": {
-      "KIINNOSTUS": "Interest",
-      "KOULUTUS": "Education",
-      "MUU_OSAAMINEN": "Other competence",
-      "PATEVYYS": "Recreational activity",
-      "TOIMENKUVA": "Job"
+      "KIINNOSTUS": "My interests",
+      "KOULUTUS": "My education",
+      "MUU_OSAAMINEN": "My other competences",
+      "PATEVYYS": "My recreational activities",
+      "TOIMENKUVA": "My job",
+      "OSAAMINEN": "My competences"
     }
   },
   "update": "Update",
