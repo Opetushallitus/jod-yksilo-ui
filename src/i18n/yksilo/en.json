@@ -65,7 +65,6 @@
     "title": "Competence profile"
   },
   "date-or-continues-placeholder": "dd.mm.yyyy",
-  "date-placeholder": "dd.mm.yyyy",
   "datepicker": {
     "actions": {
       "close": "Close calendar",
@@ -94,6 +93,7 @@
       "view": "Switch to day view"
     }
   },
+  "date-placeholder": "dd.mm.yyyy",
   "description": "Description",
   "do-filter": "Filter",
   "duration": "Duration",
@@ -109,8 +109,8 @@
     "delete-education-history": "Delete education",
     "edit-degree-or-education": "Edit degree or education",
     "edit-education": "Edit education",
-    "education-provider-or-education": "Education organiser / education",
     "educational-institution-or-education-provider": "Educational institution or education organiser",
+    "education-provider-or-education": "Education organiser / education",
     "identify-competences": "Identify competences",
     "import-education-history": "Import my education history",
     "name-of-degree-or-education": "Name of degree or education",
@@ -136,8 +136,8 @@
         "title": "Cancel import"
       },
       "data-load-failed": "Failed to load data. Please try again later.",
-      "data-load-no-data": "The education data could not be found or you do not have permission to view the data.",
       "data-loading": "Loading information from Studyinfo...",
+      "data-load-no-data": "The education data could not be found or you do not have permission to view the data.",
       "description": "You can edit your education after importing it to Competency Path in the education section of your competence profile.",
       "table-header-checkbox": "Import selected",
       "title": "Summary",
@@ -231,9 +231,9 @@
   },
   "i-allow": "I allow",
   "i-disallow": "I do not allow",
-  "in-this-section": "In this section",
   "interests": "Map out your interests",
   "interests-of-your-choice": "Selected interests",
+  "in-this-section": "In this section",
   "introduction": {
     "step-1": {
       "item-1": "See all information related to your competences and interests in one place",
@@ -375,6 +375,7 @@
   "move-to-service": "Go to service",
   "my-competence-path": "My Competency Path",
   "my-competence-profile": "My competence profile",
+  "my-competences-alphabetically": "My competences in alphabetical order",
   "my-competences": {
     "by-KOULUTUS": "My competences accumulated from education",
     "by-MUU_OSAAMINEN": "My other competences",
@@ -385,20 +386,19 @@
     "missing-PATEVYYS": "No competences. Go to add recreational activities.",
     "missing-TOIMENKUVA": "No competences. Go to add jobs."
   },
-  "my-competences-alphabetically": "My competences in alphabetical order",
   "my-competences-by-sources": "My competence based on sources",
-  "n-education-opportunities": "{{count}} of {{total}} education opportunities",
-  "n-job-opportunities": "{{count}} of {{total}} career opportunities",
-  "n-months-short": "{{count}} months",
-  "n-years_one": "{{count}} year",
-  "n-years_other": "{{count}} years",
   "navigation": {
     "main-section": {
       "title": "Personal Competency Path",
       "tool-title": "Find opportunities"
     }
   },
+  "n-education-opportunities": "{{count}} of {{total}} education opportunities",
   "next": "Next",
+  "n-job-opportunities": "{{count}} of {{total}} career opportunities",
+  "n-months-short": "{{count}} months",
+  "n-years_one": "{{count}} year",
+  "n-years_other": "{{count}} years",
   "on-this-page": "On this page",
   "opportunity-tooltip": {
     "education": {
@@ -719,14 +719,15 @@
       "goal-name": "Name of the goal",
       "modify-goal": "Edit goal",
       "my-plan-towards-goal": "Plan options",
-      "n-plans_one": "1 plan",
-      "n-plans_other": "{{count}} plans",
-      "n-plans_zero": "No selected plans",
       "no-chosen-competences": "No selected competences",
       "no-favorites-selected": "Add favorites first, from which you can create goals.",
       "no-filtered-results": "No education opportunities. Adjust the filters to see options.",
       "no-goals-created": "You have not added any goals yet.",
+      "n-plans_one": "1 plan",
+      "n-plans_other": "{{count}} plans",
+      "n-plans_zero": "No selected plans",
       "own-competences": "My competences",
+      "plan": "Plan",
       "remove-competence-description": "Remove competence by clicking the x character",
       "remove-from-goals": "Remove from goals",
       "remove-from-plans": "Delete plan",
@@ -938,15 +939,6 @@
     "my-own-data": {
       "cancel-text": "No, cancel",
       "competences": {
-        "virtual-assistant": {
-          "open": "Identify competences with AI",
-          "description": "Hi! I am a bot and I help you find your competences. Talk to me and you will get suggestions that you can choose the ones that suit you best. Do not enter personal information to the bot.",
-          "selected-tab": "Competences",
-          "selected": "Selected competences",
-          "start": "Let's get started – first, tell me what competences you have right now?",
-          "title": "Mapping out competences",
-          "x-competences-added": "{{count}} competences added"
-        },
         "import": {
           "confirm-button": "Import competences",
           "confirm-description": "Bring competences from your competence profile to the overview of your data. Select your desired competences from the list below.",
@@ -955,7 +947,17 @@
           "import-button": "Import information from profile",
           "success-toast": "Data successfully imported to the overview"
         },
-        "textarea-placeholder": "Report your skills in your own words. You can use either individual words, sentences or longer texts."
+        "textarea-placeholder": "Report your skills in your own words. You can use either individual words, sentences or longer texts.",
+        "virtual-assistant": {
+          "description": "Hi! I am a bot and I help you find your competences. Talk to me and you will get suggestions that you can choose the ones that suit you best. Do not enter personal information to the bot.",
+          "open": "Identify competences with AI",
+          "selected": "Selected competences",
+          "selected-tab": "Competences",
+          "start": "Let's get started – first, tell me what competences you have right now?",
+          "title": "Mapping out competences",
+          "x-added": "{{count}} competences added",
+          "x-competences-added": "{{count}} competences added"
+        }
       },
       "export": {
         "confirm-button": "Save to profile",
@@ -964,24 +966,33 @@
         "export-button": "Export data to profile"
       },
       "interests": {
+        "conversational-virtual-assistant": "Identify interests with AI",
         "virtual-assistant": {
-          "open": "Identify interests with AI",
+          "conversation": "Conversation",
           "description": "Hi! I am a bot and I help you find your interests. Talk to me and you will get suggestions that you can choose the ones that suit you best. Do not enter personal information to the bot.",
-          "selected-tab": "Interests",
+          "error": "An error occurred while generating the response. Please try again with the same or a new input.",
+          "intrests": "Interests",
+          "loading": "Loading answer... Please wait for a moment.",
+          "open": "Identify interests with AI",
+          "respond-to-chat": "Respond to the bot...",
           "selected": "Selected interests",
+          "selected-interests": "Selected interests",
+          "selected-tab": "Interests",
+          "send": "Submit",
           "start": "Let's get started – first, tell me what interests you right now?",
           "title": "Mapping out interests",
+          "x-added": "{{count}} interests added",
           "x-interests-added": "{{count}} interests added"
         }
       },
+      "title": "Your information",
       "virtual-assistant": {
         "conversation": "Conversation",
         "error": "An error occurred while generating the response. Please try again with the same or a new input.",
         "loading": "Loading answer... Please wait for a moment.",
         "respond-to-chat": "Respond to the bot...",
         "send": "Submit"
-      },
-      "title": "Your information"
+      }
     },
     "opportunities-loaded": "Opportunities loaded. {{count}} results.",
     "remove-competence-help": "Remove a competence by clicking 'x'.",
@@ -1009,8 +1020,11 @@
         "weight": "Weighting"
       },
       "reset": "Clear selections",
+      "toggle-close": "Close controls",
+      "toggle-open": "Display controls",
       "toggle-title-closed": "Display controls",
-      "toggle-title-open": "Update and close"
+      "toggle-title-open": "Update and close",
+      "toggle-update-close": "Update and close"
     },
     "title": "Find opportunities",
     "tools": {

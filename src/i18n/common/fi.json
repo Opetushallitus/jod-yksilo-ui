@@ -22,7 +22,7 @@
     "error": "Palautteen lähettäminen epäonnistui. Yritä myöhemmin uudelleen.",
     "footer-handled": {
       "ohjaajan": "Ohjaajan osio KEHA-keskuksessa,",
-      "osaamispolkuni": "Osaamispolkuni Opetushallituksessa,",
+      "osaamispolkuni": "Oma Osaamispolku Opetushallituksessa,",
       "tietopalvelu": "Tietopalvelu, koko palvelu ja muu palaute opetus- ja kulttuuriministeriössä."
     },
     "footer-info-1": "Kun lähetät palautetta, tallennamme palvelun tilatiedon, kuten mistä näkymästä palaute on lähetetty. Tilatietoa ei välitetä eteenpäin kolmansille osapuolille. Palautteita käytetään palvelun kehittämiseen ja vapaaehtoisesti jätettäviä yhteystietoja palautteisiin vastaamiseen.",
@@ -46,7 +46,7 @@
     "sections": {
       "koko-palvelu": "Koko palvelu tai muu palaute",
       "ohjaajan-osio": "Ohjaajan osio",
-      "osaamispolkuni": "Osaamispolkuni",
+      "osaamispolkuni": "Oma Osaamispolku",
       "tietopalvelu": "Tietopalvelu"
     },
     "submit": "Lähetä",
@@ -102,7 +102,7 @@
       "title": "Osaamispolun sisältökokonaisuudet",
       "yksilo": {
         "description": "Henkilökohtainen osaamispolku",
-        "label": "Osaamispolkuni"
+        "label": "Oma Osaamispolku"
       }
     },
     "extra": {

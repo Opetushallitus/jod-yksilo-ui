@@ -5,6 +5,7 @@ import { Button, Modal, useNoteStack } from '@jod/design-system';
 import { JodClose } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
 import { FilterSijainti } from './components/filters/FilterSijainti';
 import OpportunitiesSorting from './components/filters/OpportunitiesSorting';
 import OpportunityWeight from './components/filters/OpportunityWeight';
@@ -82,7 +83,9 @@ const SettingsMenu = ({ ref, isModal }: Pick<ToolSettingsProps, 'ref' | 'isModal
 
 const ToolSettings = ({ ref, isOpen, onClose, isModal }: ToolSettingsProps) => {
   const { t } = useTranslation();
-  const resetSettings = useToolStore((state) => state.resetSettings);
+  const [resetSettings, settingsHaveChanged] = useToolStore(
+    useShallow((state) => [state.resetSettings, state.settingsHaveChanged]),
+  );
   const resetSection = (className: string) => (
     <div className={`sticky bottom-0 px-4 py-2 ${className}`}>
       <Button
@@ -115,7 +118,7 @@ const ToolSettings = ({ ref, isOpen, onClose, isModal }: ToolSettingsProps) => {
               onClick={onClose}
               iconSide="left"
               icon={<JodClose className="text-accent" />}
-              label={t('tool.settings.toggle-title-open')}
+              label={settingsHaveChanged ? t('tool.settings.toggle-update-close') : t('tool.settings.toggle-close')}
             />
           )}
           <SettingsMenu ref={ref} isModal={isModal} />

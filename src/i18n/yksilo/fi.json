@@ -65,7 +65,6 @@
     "title": "Osaamisprofiili"
   },
   "date-or-continues-placeholder": "pp.kk.vvvv",
-  "date-placeholder": "pp.kk.vvvv",
   "datepicker": {
     "actions": {
       "close": "Sulje kalenteri",
@@ -94,6 +93,7 @@
       "view": "Vaihda päivänäkymään"
     }
   },
+  "date-placeholder": "pp.kk.vvvv",
   "description": "Kuvaus",
   "do-filter": "Suodata",
   "duration": "Kesto",
@@ -109,8 +109,8 @@
     "delete-education-history": "Poista koulutus",
     "edit-degree-or-education": "Muokkaa tutkintoa tai koulutusta",
     "edit-education": "Muokkaa koulutusta",
-    "education-provider-or-education": "Koulutuksen järjestäjä / koulutus",
     "educational-institution-or-education-provider": "Oppilaitos tai koulutuksen järjestäjä",
+    "education-provider-or-education": "Koulutuksen järjestäjä / koulutus",
     "identify-competences": "Tunnista osaamisia",
     "import-education-history": "Tuo koulutushistoriani",
     "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi",
@@ -136,8 +136,8 @@
         "title": "Peruuta tuonti"
       },
       "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
-      "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
       "data-loading": "Ladataan tietoja Opintopolusta...",
+      "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
       "description": "Voit muokata koulutuksia tuotuasi ne Osaamipolkuun osaamisprofiilisi koulutukset-kohdasta.",
       "table-header-checkbox": "Tuo valitut",
       "title": "Yhteenveto",
@@ -205,7 +205,7 @@
     "summary": "Yhteenveto",
     "theme-or-activity": "Teema / Toiminto"
   },
-  "front-page": "Osaamispolkuni",
+  "front-page": "Oma Osaamispolku",
   "home": {
     "card-1-content": "Löydä koulutus- ja työmahdollisuuksia, jotka sopivat juuri sinulle. Käytä palvelua kirjautumatta nopeasti, voit myöhemmin kirjautua ja tallentaa tietosi.",
     "card-1-title": "Etsi sopivia koulutus- ja työmahdollisuuksia nopeasti",
@@ -214,7 +214,7 @@
     "create-own-profile": "Luo oma osaamisprofiilisi",
     "explore-opportunities": "Löydä mahdollisuuksia",
     "hero-content": "Osaamispolussani voit kartoittaa omaa osaamistasi, löytää koulutuksia osaamisesi kasvattamiseksi, tutkia työmahdollisuuksia osaamisellasi ja kartoittaa mahdollisuuksia alan vaihtamiseen.",
-    "hero-title": "Osaamispolkuni",
+    "hero-title": "Oma Osaamispolku",
     "need-personal-guidance": "Tarvitsetko henkilökohtaista ohjausta?",
     "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löydät tukea ura- ja koulutusvaihtoehtoihin liittyvään pohdintaan. Rajaa palveluiden listaa, jotta löydät sinulle parhaiten sopivat palvelut.",
     "personal-guidance": {
@@ -229,9 +229,9 @@
   },
   "i-allow": "Sallin",
   "i-disallow": "En salli",
-  "in-this-section": "Tässä osiossa",
   "interests": "Kartoita kiinnostuksesi",
   "interests-of-your-choice": "Valitut kiinnostuksen kohteet",
+  "in-this-section": "Tässä osiossa",
   "introduction": {
     "step-1": {
       "item-1": "Näe kaikki osaamiseesi ja kiinnostuksiisi liittyvät tiedot kootusti yhdestä paikasta",
@@ -371,8 +371,9 @@
   "map-competences": "Kartoita osaamiset",
   "more-actions": "Lisää valintoja",
   "move-to-service": "Siirry palveluun",
-  "my-competence-path": "Osaamispolkuni",
+  "my-competence-path": "Oma Osaamispolku",
   "my-competence-profile": "Osaamisprofiilini",
+  "my-competences-alphabetically": "Osaamiseni aakkosjärjestyksessä",
   "my-competences": {
     "by-KOULUTUS": "Koulutuksesta kertynyt osaamiseni",
     "by-MUU_OSAAMINEN": "Muut osaamiseni",
@@ -383,20 +384,19 @@
     "missing-PATEVYYS": "Ei osaamisia. Siirry lisäämään vapaa-ajan toimintoja.",
     "missing-TOIMENKUVA": "Ei osaamisia. Siirry lisäämään työpaikkoja."
   },
-  "my-competences-alphabetically": "Osaamiseni aakkosjärjestyksessä",
   "my-competences-by-sources": "Osaamiseni lähteiden mukaan",
-  "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
-  "n-job-opportunities": "Työmahdollisuudet {{count}} / {{total}}",
-  "n-months-short": "{{count}} kk",
-  "n-years_one": "{{count}} vuosi",
-  "n-years_other": "{{count}} vuotta",
   "navigation": {
     "main-section": {
       "title": "Henkilökohtainen osaamispolku",
       "tool-title": "Löydä mahdollisuuksia"
     }
   },
+  "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
   "next": "Seuraava",
+  "n-job-opportunities": "Työmahdollisuudet {{count}} / {{total}}",
+  "n-months-short": "{{count}} kk",
+  "n-years_one": "{{count}} vuosi",
+  "n-years_other": "{{count}} vuotta",
   "on-this-page": "Tällä sivulla",
   "opportunity-tooltip": {
     "education": {
@@ -717,14 +717,15 @@
       "goal-name": "Tavoitteen nimi",
       "modify-goal": "Muokkaa tavoitetta",
       "my-plan-towards-goal": "Suunnitelmavaihtoehdot",
-      "n-plans_one": "1 suunnitelma",
-      "n-plans_other": "{{count}} suunnitelmaa",
-      "n-plans_zero": "Ei valittuja suunnitelmia",
       "no-chosen-competences": "Ei valittuja osaamisia",
       "no-favorites-selected": "Lisää ensin suosikkeja, joista voit luoda tavoitteita.",
       "no-filtered-results": "Ei koulutusmahdollisuuksia. Muokkaa säätimiä nähdäksesi vaihtoehtoja.",
       "no-goals-created": "Et ole vielä lisännyt tavoitteita.",
+      "n-plans_one": "1 suunnitelma",
+      "n-plans_other": "{{count}} suunnitelmaa",
+      "n-plans_zero": "Ei valittuja suunnitelmia",
       "own-competences": "Omat taidot",
+      "plan": "Suunnitelma",
       "remove-competence-description": "Poista osaaminen x-merkistä",
       "remove-from-goals": "Poista tavoite",
       "remove-from-plans": "Poista suunnitelma",
@@ -936,15 +937,6 @@
     "my-own-data": {
       "cancel-text": "Ei, peruuta",
       "competences": {
-        "virtual-assistant": {
-          "open": "Tunnista osaamisia tekoälyllä",
-          "description": "Hei! Olen botti ja autan sinua löytämään osaamisesi. Keskustele kanssani, niin saat ehdotuksia, joista voit valita sinulle sopivimmat. Älä syötä henkilötietojasi botille.",
-          "selected-tab": "Osaamiset",
-          "selected": "Valitut osaamiset",
-          "start": "Aloitetaan – kerro ensin, mitä asioita osaat tai mitä olet tehnyt.",
-          "title": "Osaamisten kartoitus",
-          "x-interests-added": "{{count}} osaamista lisätty"
-        },
         "import": {
           "confirm-button": "Tuo osaamiset",
           "confirm-description": "Tuo osaamisia osaamisprofiilistasi tietojesi kokonaiskuvaan. Valitse haluamasi osaamiset alla olevasta listasta.",
@@ -953,7 +945,17 @@
           "import-button": "Tuo tietoja profiilista",
           "success-toast": "Tiedot tuotu onnistuneesti kokonaiskuvaan"
         },
-        "textarea-placeholder": "Kerro omin sanoin mitä osaat. Voit käyttää joko yksittäisiä sanoja, lauseita tai pidempiä tekstejä."
+        "textarea-placeholder": "Kerro omin sanoin mitä osaat. Voit käyttää joko yksittäisiä sanoja, lauseita tai pidempiä tekstejä.",
+        "virtual-assistant": {
+          "description": "Hei! Olen botti ja autan sinua löytämään osaamisesi. Keskustele kanssani, niin saat ehdotuksia, joista voit valita sinulle sopivimmat. Älä syötä henkilötietojasi botille.",
+          "open": "Tunnista osaamisia tekoälyllä",
+          "selected": "Valitut osaamiset",
+          "selected-tab": "Osaamiset",
+          "start": "Aloitetaan – kerro ensin, mitä asioita osaat tai mitä olet tehnyt.",
+          "title": "Osaamisten kartoitus",
+          "x-added": "{{count}} osaamista lisätty",
+          "x-interests-added": "{{count}} osaamista lisätty"
+        }
       },
       "export": {
         "confirm-button": "Tallenna profiiliin",
@@ -962,24 +964,33 @@
         "export-button": "Vie tietoja profiiliin"
       },
       "interests": {
+        "conversational-virtual-assistant": "Tunnista kiinnostuksia tekoälyllä",
         "virtual-assistant": {
-          "open": "Tunnista kiinnostuksia tekoälyllä",
+          "conversation": "Keskustelu",
           "description": "Hei! Olen botti ja autan sinua löytämään kiinnostuksen kohteitasi. Keskustele kanssani, niin saat ehdotuksia, joista voit valita sinulle sopivimmat. Älä syötä henkilötietojasi botille.",
-          "selected-tab": "Kiinnostukset",
+          "error": "Virhe vastauksen muodostamisessa. Yritä uudestaan samalla tai uuden syötteen kanssa.",
+          "intrests": "Kiinnostukset",
+          "loading": "Vastausta ladataan... Ole hyvä ja odota hetki.",
+          "open": "Tunnista kiinnostuksia tekoälyllä",
+          "respond-to-chat": "Vastaa botille...",
           "selected": "Valitut kiinnostukset",
+          "selected-interests": "Valitut kiinnostukset",
+          "selected-tab": "Kiinnostukset",
+          "send": "Lähetä",
           "start": "Aloitetaan – kerro ensin, mikä asia kiinnostaa sinua juuri nyt?",
           "title": "Kiinnostusten kartoitus",
+          "x-added": "{{count}} kiinnostusta lisätty",
           "x-interests-added": "{{count}} kiinnostusta lisätty"
         }
       },
+      "title": "Tietosi",
       "virtual-assistant": {
         "conversation": "Keskustelu",
         "error": "Virhe vastauksen muodostamisessa. Yritä uudestaan samalla tai uuden syötteen kanssa.",
         "loading": "Vastausta ladataan... Ole hyvä ja odota hetki.",
         "respond-to-chat": "Vastaa botille...",
         "send": "Lähetä"
-      },
-      "title": "Tietosi"
+      }
     },
     "opportunities-loaded": "Mahdollisuudet ladattu. Löydettiin yhteensä {{count}} mahdollisuutta.",
     "remove-competence-help": "Poista osaaminen x-merkistä.",
@@ -1007,8 +1018,11 @@
         "weight": "Painotus"
       },
       "reset": "Poista valinnat",
+      "toggle-close": "Sulje säätimet",
+      "toggle-open": "Näytä säätimet",
       "toggle-title-closed": "Näytä säätimet",
-      "toggle-title-open": "Päivitä ja sulje"
+      "toggle-title-open": "Päivitä ja sulje",
+      "toggle-update-close": "Päivitä ja sulje"
     },
     "title": "Löydä mahdollisuuksia",
     "tools": {
