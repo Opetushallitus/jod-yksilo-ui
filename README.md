@@ -47,14 +47,6 @@ To update the JOD Design System to the latest version:
 2. Update the `@jod/design-system` dependency URL in `package.json` to point to the latest release `.tgz` file
 3. Run `npm install` to install the updated version
 
-If there is error from missing files run the following commands in assets-folder
-
-```shell
-cd assets
-aws-vault exec okm-jod-sharedservices-c-acc
-aws s3 sync s3://jod-ui-assets .
-```
-
 ## Generating TypeScript types from OpenAPI schema
 
 Start the JOD Yksilö backend locally and make sure it is running on http://localhost:9080/. Then run the following command to generate TypeScript types from the OpenAPI schema:
