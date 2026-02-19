@@ -944,6 +944,8 @@
           "confirm-title": "Importera uppgifter från profilen",
           "failure-toast": "Importen misslyckades — försök igen",
           "import-button": "Importera information från profilen",
+          "no-data-description": "Du har ännu inte sparat någon information i din kompetensprofil. Lägg till information för att kunna använda den vid sökning efter möjligheter.",
+          "no-data-title": "Ingen data i kompetensprofilen",
           "success-toast": "Data har importerats"
         },
         "textarea-placeholder": "Berätta med egna ord vad du kan. Du kan använda antingen enskilda ord, meningar eller längre texter.\t",
@@ -965,7 +967,9 @@
         "confirm-button": "Exportera",
         "confirm-description": "Välj vilka uppgifter du vill exportera till din kompetensprofil.",
         "confirm-title": "Exportera uppgifter till profilen",
-        "export-button": "Exportera uppgifter till profilen"
+        "export-button": "Exportera uppgifter till profilen",
+        "no-data-description": "Du har ännu inte kartlagt dina kompetenser eller intressen. Lägg till information för att kunna använda den i din kompetensprofil.",
+        "no-data-title": "Ingen kartlagd data"
       },
       "interests": {
         "conversational-virtual-assistant": "Identifiera intressen med artificiell intelligens",
@@ -1122,11 +1126,12 @@
   "try-again": "Försök igen",
   "types": {
     "competence": {
-      "KIINNOSTUS": "Intresse",
-      "KOULUTUS": "Utbildning",
-      "MUU_OSAAMINEN": "Annat kunnande ",
-      "PATEVYYS": "Fritidsverksamhet",
-      "TOIMENKUVA": "Arbetsplats"
+      "KIINNOSTUS": "Mina intressen",
+      "KOULUTUS": "Min utbildning",
+      "MUU_OSAAMINEN": "Mina övriga kunskaper",
+      "PATEVYYS": "Min fritidsverksamhet",
+      "TOIMENKUVA": "Min arbetsplats",
+      "OSAAMINEN": "Mina kunskaper"
     }
   },
   "update": "Uppdatera",

@@ -1,4 +1,3 @@
-import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import type { CompetenceSourceType, FiltersType } from '@/routes/Profile/Competences/constants';
 import { getLocalizedText } from '@/utils';
 import { Accordion, Checkbox } from '@jod/design-system';
@@ -8,13 +7,14 @@ import { useTranslation } from 'react-i18next';
 interface TitleCheckboxProps {
   type: keyof FiltersType;
   checked: boolean;
+  disabled?: boolean;
   onChange: () => void;
 }
 /**
  * This component is used as the top level filter title. It toggles all filters of a specific type.
  */
-const TitleCheckbox = ({ type, checked, onChange }: TitleCheckboxProps) => {
-  const { t, i18n } = useTranslation();
+const TitleCheckbox = ({ type, checked, disabled, onChange }: TitleCheckboxProps) => {
+  const { t } = useTranslation();
 
   const labels: Record<keyof FiltersType, string> = {
     TOIMENKUVA: t('types.competence.TOIMENKUVA'),
@@ -28,18 +28,14 @@ const TitleCheckbox = ({ type, checked, onChange }: TitleCheckboxProps) => {
 
   return (
     <Checkbox
-      label={
-        <span className="flex items-center hyphens-auto" lang={i18n.language}>
-          <div className={`mx-3 h-5 w-5 flex-none rounded-full ds-bg-tag-${OSAAMINEN_COLOR_MAP[type]}`} aria-hidden />
-          {labels[type]}
-        </span>
-      }
+      label={labels[type]}
       checked={checked}
       onChange={onChange}
       ariaLabel={labels[type]}
       name={name}
       value={type}
       className="min-h-7"
+      disabled={disabled}
     />
   );
 };
@@ -58,6 +54,10 @@ export const CompetenceFilters = ({
   ignoredFilterKeys = [],
 }: CompetenceFiltersProps) => {
   const { t } = useTranslation();
+
+  const [accordionState, setAccordionState] = React.useState<Record<string, boolean>>(
+    filterKeys.filter((key) => !ignoredFilterKeys.includes(key)).reduce((acc, key) => ({ ...acc, [key]: true }), {}),
+  );
 
   // Toggle single filter item
   const toggleSingleFilter = (type: CompetenceSourceType, index: number) => () => {
@@ -100,23 +100,24 @@ export const CompetenceFilters = ({
   );
 
   return (
-    // Height = viewport height - header and footer heights - padding
-    <ul className="flex flex-col gap-y-3 py-4 max-h-[calc(100vh-296px-64px)] overflow-y-auto">
+    <ul className="flex flex-col gap-y-3 py-4 overflow-y-auto">
       {filterKeys
         .filter((key) => !ignoredFilterKeys.includes(key))
         .map((key) => (
           <React.Fragment key={key}>
-            {key !== 'MUU_OSAAMINEN' && key !== 'KIINNOSTUS' ? (
-              <li>
+            {key !== 'MUU_OSAAMINEN' && key !== 'KIINNOSTUS' && selectedFilters[key]?.length > 0 ? (
+              <li className="pb-3">
                 <Accordion
                   title={
                     <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
                   }
                   ariaLabel={ariaLabels[key]}
+                  isOpen={accordionState[key]}
+                  setIsOpen={(open) => setAccordionState((prev) => ({ ...prev, [key]: open }))}
                 >
-                  <ul className="gap-y-3 flex-col flex">
+                  <ul className="gap-y-4 flex-col flex mt-4">
                     {selectedFilters[key]?.map((item, idx) => (
-                      <li className="pl-6" key={getLocalizedText(item.label)}>
+                      <li className="pl-7" key={getLocalizedText(item.label)}>
                         <Checkbox
                           name={getLocalizedText(item.label)}
                           ariaLabel={`${key} ${getLocalizedText(item.label)}`}
@@ -131,8 +132,13 @@ export const CompetenceFilters = ({
                 </Accordion>
               </li>
             ) : (
-              <li>
-                <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
+              <li className="pb-3">
+                <TitleCheckbox
+                  type={key}
+                  checked={isFilterTypeChecked(key)}
+                  onChange={toggleFiltersByType(key)}
+                  disabled={selectedFilters[key]?.length === 0}
+                />
               </li>
             )}
           </React.Fragment>

@@ -53,12 +53,16 @@ const initFilters = (selectedFilters: FiltersType, data: FilterData): FiltersTyp
     PATEVYYS: patevyydet.map(mapCompetenceDataGroupToFilter(selectedFilters, 'PATEVYYS')),
     MUU_OSAAMINEN: [
       ...muutOsaamiset.map(mapExperienceToFilter(selectedFilters)),
-      {
-        label: {},
-        value: [],
-        checked: localizedMuutOsaamisetVapaateksti.length > 0,
-        competences: [],
-      },
+      ...(localizedMuutOsaamisetVapaateksti.length > 0
+        ? [
+            {
+              label: {},
+              value: [],
+              checked: true,
+              competences: [],
+            },
+          ]
+        : []),
     ],
   };
 
@@ -66,12 +70,16 @@ const initFilters = (selectedFilters: FiltersType, data: FilterData): FiltersTyp
   if (kiinnostukset) {
     initialFilters.KIINNOSTUS = [
       ...kiinnostukset.map(mapExperienceToFilter(selectedFilters)),
-      {
-        label: {},
-        value: [],
-        checked: localizedKiinnostuksetVapaateksti.length > 0,
-        competences: [],
-      },
+      ...(localizedKiinnostuksetVapaateksti.length > 0
+        ? [
+            {
+              label: {},
+              value: [],
+              checked: true,
+              competences: [],
+            },
+          ]
+        : []),
     ];
   }
 
@@ -79,24 +87,17 @@ const initFilters = (selectedFilters: FiltersType, data: FilterData): FiltersTyp
 };
 
 export const useInitializeFilters = (initialSelectedFilters: FiltersType, data: FilterData) => {
-  const [initialized, setInitialized] = React.useState(false);
-  const [filterKeys, setFilterKeys] = React.useState<(keyof FiltersType)[]>([]);
-  const [selectedFilters, setSelectedFilters] = React.useState<FiltersType>(initialSelectedFilters);
+  const [selectedFilters, setSelectedFilters] = React.useState<FiltersType>(() =>
+    initFilters(initialSelectedFilters, data),
+  );
 
-  const initializeFilters = React.useCallback(() => initFilters(selectedFilters, data), [data, selectedFilters]);
-
-  React.useEffect(() => {
-    if (!initialized) {
-      const initialFilters = initializeFilters();
-      setSelectedFilters(initialFilters);
-      setFilterKeys(
-        [...(Object.keys(initialFilters) as (keyof FiltersType)[])].sort(
-          (a, b) => FILTERS_ORDER.indexOf(a) - FILTERS_ORDER.indexOf(b),
-        ),
-      );
-      setInitialized(true);
-    }
-  }, [initialized, initializeFilters]);
+  const filterKeys = React.useMemo(
+    () =>
+      [...(Object.keys(selectedFilters) as (keyof FiltersType)[])].sort(
+        (a, b) => FILTERS_ORDER.indexOf(a) - FILTERS_ORDER.indexOf(b),
+      ),
+    [selectedFilters],
+  );
 
   return { selectedFilters, setSelectedFilters, filterKeys };
 };

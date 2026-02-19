@@ -29,7 +29,7 @@ const Interests = () => {
         useAnimations
         scrollOnFocus={false}
       />
-      {kiinnostukset.length > 1 && (
+      {mappedKiinnostukset.length > 1 && (
         <Button
           variant="plain"
           onClick={() => {

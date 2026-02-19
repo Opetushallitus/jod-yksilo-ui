@@ -10,7 +10,7 @@ const isPromise = (func: (() => Promise<void>) | (() => void)) => {
 type ConfirmDialogProps = React.ComponentProps<typeof ConfirmDialog>;
 type MaybePromise<T> = T | Promise<T>;
 
-export type ConfirmDialogWrapperProps = Omit<ConfirmDialogProps, 'children'> & {
+export type ConfirmDialogWrapperProps = Omit<ConfirmDialogProps, 'children' | 'content'> & {
   /** Closes parent modals on confirmation */
   closeParentModal?: boolean;
   /** Content component for the ConfirmationDialog */

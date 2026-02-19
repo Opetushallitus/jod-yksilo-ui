@@ -943,6 +943,8 @@
           "confirm-title": "Tietojen tuonti profiilista",
           "failure-toast": "Tietojen tuonti epäonnistui — yritä uudelleen",
           "import-button": "Tuo tietoja profiilista",
+          "no-data-description": "Et ole vielä tallentanut tietoja osaamisprofiiliin. Lisää tietoja, jotta voit hyödyntää niitä mahdollisuuksien löytämisessä.",
+          "no-data-title": "Ei tietoja osaamisprofiilissa",
           "success-toast": "Tiedot tuotu onnistuneesti"
         },
         "textarea-placeholder": "Kerro omin sanoin mitä osaat. Voit käyttää joko yksittäisiä sanoja, lauseita tai pidempiä tekstejä.",
@@ -963,7 +965,9 @@
         "confirm-button": "Vie",
         "confirm-description": "Valitse mitkä tiedot haluat viedä osaamisprofiiliisi.",
         "confirm-title": "Tietojen vienti profiiliin",
-        "export-button": "Vie tietoja profiiliin"
+        "export-button": "Vie tietoja profiiliin",
+        "no-data-description": "Et ole vielä kartoittanut osaamisiasi tai kiinnostuksiasi. Lisää tietoja, jotta voit hyödyntää niitä osaamisprofiilissasi.",
+        "no-data-title": "Ei kartoitettuja tietoja"
       },
       "interests": {
         "conversational-virtual-assistant": "Tunnista kiinnostuksia tekoälyllä",
@@ -1119,11 +1123,12 @@
   "try-again": "Yritä uudelleen",
   "types": {
     "competence": {
-      "KIINNOSTUS": "Kiinnostus",
-      "KOULUTUS": "Koulutus",
-      "MUU_OSAAMINEN": "Muu osaaminen",
-      "PATEVYYS": "Vapaa-ajan toiminto",
-      "TOIMENKUVA": "Työpaikka"
+      "KIINNOSTUS": "Kiinnostukseni",
+      "KOULUTUS": "Koulutukseni",
+      "MUU_OSAAMINEN": "Muu osaamiseni",
+      "PATEVYYS": "Vapaa-ajan toimintoni",
+      "TOIMENKUVA": "Työpaikkani",
+      "OSAAMINEN": "Osaamiseni"
     }
   },
   "update": "Päivitä mahdollisuutesi",
