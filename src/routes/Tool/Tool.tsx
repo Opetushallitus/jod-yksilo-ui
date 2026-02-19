@@ -10,7 +10,7 @@ import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 import AdditionalSupport from '@/routes/Tool/AdditionalSupport';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
-import { Button, cx, Spinner, tidyClasses, useMediaQueries, useNoteStack } from '@jod/design-system';
+import { Button, cx, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
 import { JodArrowRight, JodClose, JodCompass, JodInfo, JodSettings } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -37,6 +37,7 @@ const ExploreOpportunities = () => {
     filters,
     isLoading,
     totalItems,
+    settingsHaveChanged,
     toggleSuosikki,
     updateEhdotuksetAndTyomahdollisuudet,
   } = useToolStore(
@@ -48,6 +49,7 @@ const ExploreOpportunities = () => {
       filters: state.filters,
       isLoading: state.ehdotuksetLoading || state.mahdollisuudetLoading,
       totalItems: state.filteredMahdollisuudetCount,
+      settingsHaveChanged: state.settingsHaveChanged,
       toggleSuosikki: state.toggleSuosikki,
       updateEhdotuksetAndTyomahdollisuudet: state.updateEhdotuksetAndTyomahdollisuudet,
     })),
@@ -91,12 +93,18 @@ const ExploreOpportunities = () => {
   }, [filters]);
 
   const toggleFiltersText = React.useMemo(() => {
-    if (settingsOpen) return t('tool.settings.toggle-title-open');
+    if (settingsOpen) {
+      if (settingsHaveChanged) {
+        return t('tool.settings.toggle-update-close');
+      } else {
+        return t('tool.settings.toggle-close');
+      }
+    }
 
     const count = getTotalFilterCount();
     const filterCount = count > 0 ? ` (${count})` : '';
-    return `${t('tool.settings.toggle-title-closed')}${filterCount}`;
-  }, [getTotalFilterCount, settingsOpen, t]);
+    return `${t('tool.settings.toggle-open')}${filterCount}`;
+  }, [getTotalFilterCount, settingsOpen, settingsHaveChanged, t]);
 
   const statusText = isLoading ? t('tool.updating') : t('tool.opportunities-loaded', { count: totalItems });
   const { permanentNotesHeight } = useNoteStack();
@@ -112,18 +120,18 @@ const ExploreOpportunities = () => {
             </h2>
           )}
           <div className="flex gap-6 h-fit">
-            <button
+            <Button
               aria-label={toggleFiltersText}
-              className={tidyClasses(
-                `cursor-pointer flex items-center gap-x-3 text-nowrap rounded-2xl px-5 py-1 font-semibold text-[14px] leading-[18px] hover:underline bg-bg-gray-2`,
-              )}
+              label={toggleFiltersText}
+              variant="gray"
+              size="sm"
+              serviceVariant="yksilo"
               onClick={onToggleSettings}
-              type="button"
               data-testid="open-tool-settings"
-            >
-              {settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
-              {toggleFiltersText}
-            </button>
+              icon={settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
+              iconSide="left"
+              className="bg-bg-gray-2!"
+            />
           </div>
         </div>
       </div>
