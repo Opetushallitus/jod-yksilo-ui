@@ -1,10 +1,8 @@
 import { AiInfoButton } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import { Trans, useTranslation } from 'react-i18next';
+import { AnchorLink } from '../AnchorLink/AnchorLink';
 
-const Link = ({ children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
-  return <a {...rest}>{children}</a>;
-};
 interface AiInfoProps {
   type?: 'tool' | 'education-opportunity' | 'job-opportunity';
   size?: number;
@@ -52,7 +50,7 @@ export const AiInfo = ({ type = 'tool', size }: AiInfoProps) => {
           components={{
             Icon: <JodOpenInNew size={18} ariaLabel={t('common:external-link')} />,
             CustomLink: (
-              <Link
+              <AnchorLink
                 href={`/${language}/${t('common:slugs.ai-usage')}`}
                 className="inline-flex underline"
                 target="_blank"

@@ -949,12 +949,14 @@
         "virtual-assistant": {
           "description": "Hei! Olen botti ja autan sinua löytämään osaamisesi. Keskustele kanssani, niin saat ehdotuksia, joista voit valita sinulle sopivimmat. Älä syötä henkilötietojasi botille.",
           "open": "Tunnista osaamisia tekoälyllä",
+          "open-tooltip": {
+            "description-1": "Voit kartoittaa osaamistasi myös keskustelemalla tekoälyn kanssa. Tekoäly auttaa sinua pohtimaan, mitä asioita osaat ja mistä olet kiinnostunut, ja se voi ehdottaa sinulle sopivia vaihtoehtoja."
+          },
           "selected": "Valitut osaamiset",
           "selected-tab": "Osaamiset",
           "start": "Aloitetaan – kerro ensin, mitä asioita osaat tai mitä olet tehnyt.",
           "title": "Osaamisten kartoitus",
-          "x-added": "{{count}} osaamista lisätty",
-          "x-interests-added": "{{count}} osaamista lisätty"
+          "x-added": "{{count}} osaamista lisätty"
         }
       },
       "export": {
@@ -972,6 +974,9 @@
           "intrests": "Kiinnostukset",
           "loading": "Vastausta ladataan... Ole hyvä ja odota hetki.",
           "open": "Tunnista kiinnostuksia tekoälyllä",
+          "open-tooltip": {
+            "description-1": "Voit kartoittaa kiinnostuksistasi myös keskustelemalla tekoälyn kanssa. Tekoäly auttaa sinua pohtimaan, mitä asioita osaat ja mistä olet kiinnostunut, ja se voi ehdottaa sinulle sopivia vaihtoehtoja."
+          },
           "respond-to-chat": "Vastaa botille...",
           "selected": "Valitut kiinnostukset",
           "selected-interests": "Valitut kiinnostukset",
@@ -979,8 +984,7 @@
           "send": "Lähetä",
           "start": "Aloitetaan – kerro ensin, mikä asia kiinnostaa sinua juuri nyt?",
           "title": "Kiinnostusten kartoitus",
-          "x-added": "{{count}} kiinnostusta lisätty",
-          "x-interests-added": "{{count}} kiinnostusta lisätty"
+          "x-added": "{{count}} kiinnostusta lisätty"
         }
       },
       "title": "Tietosi",
@@ -988,6 +992,10 @@
         "conversation": "Keskustelu",
         "error": "Virhe vastauksen muodostamisessa. Yritä uudestaan samalla tai uuden syötteen kanssa.",
         "loading": "Vastausta ladataan... Ole hyvä ja odota hetki.",
+        "open-tooltip": {
+          "description-2": "Käytämme suuria kielimalleja, jotka ymmärtävät kirjoittamasi viestit ja vastaavat niihin hyödyllisellä tavalla. Tekoäly voi käyttää apunaan myös ohjausalan materiaaleja sekä tietoa eri ammateista ja osaamisista.",
+          "title": "Tekoälyavusteinen kartoitus"
+        },
         "respond-to-chat": "Vastaa botille...",
         "send": "Lähetä"
       }

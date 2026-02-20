@@ -951,6 +951,9 @@
         "virtual-assistant": {
           "description": "Hi! I am a bot and I help you find your competences. Talk to me and you will get suggestions that you can choose the ones that suit you best. Do not enter personal information to the bot.",
           "open": "Identify competences with AI",
+          "open-tooltip": {
+            "description-1": "You can explore your skills by talking with artificial intelligence. AI helps you think about what you can do and what you are interested in, and it can suggest options that suit you."
+          },
           "selected": "Selected competences",
           "selected-tab": "Competences",
           "start": "Let's get started – first, tell me what competences you have right now?",
@@ -974,6 +977,9 @@
           "intrests": "Interests",
           "loading": "Loading answer... Please wait for a moment.",
           "open": "Identify interests with AI",
+          "open-tooltip": {
+            "description-1": "You can explore your interests by talking with artificial intelligence. AI helps you think about what you can do and what you are interested in, and it can suggest options that suit you."
+          },
           "respond-to-chat": "Respond to the bot...",
           "selected": "Selected interests",
           "selected-interests": "Selected interests",
@@ -981,8 +987,7 @@
           "send": "Submit",
           "start": "Let's get started – first, tell me what interests you right now?",
           "title": "Mapping out interests",
-          "x-added": "{{count}} interests added",
-          "x-interests-added": "{{count}} interests added"
+          "x-added": "{{count}} interests added"
         }
       },
       "title": "Your information",
@@ -990,6 +995,10 @@
         "conversation": "Conversation",
         "error": "An error occurred while generating the response. Please try again with the same or a new input.",
         "loading": "Loading answer... Please wait for a moment.",
+        "open-tooltip": {
+          "description-2": "We use large language models that understand what you write and respond in a helpful way. The AI can also use guidance materials and information about different professions and skills.",
+          "title": "AI‑assisted mapping"
+        },
         "respond-to-chat": "Respond to the bot...",
         "send": "Submit"
       }
