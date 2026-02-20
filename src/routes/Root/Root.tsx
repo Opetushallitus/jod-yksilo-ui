@@ -8,6 +8,7 @@ import { useSessionExpirationTimer } from '@/hooks/useSessionExpirationTimer';
 import { langLabels, supportedLanguageCodes, type LangCode } from '@/i18n/config';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useToolStore } from '@/stores/useToolStore';
+import { isFeatureEnabled } from '@/utils/features';
 import { getNotifications } from '@/utils/notifications';
 import { getLinkTo } from '@/utils/routeUtils';
 import {
@@ -277,7 +278,9 @@ const Root = () => {
           serviceBarVariant="yksilo"
           serviceBarTitle={showServiceName ? t('my-competence-path') : undefined}
           serviceBarContent={
-            <SearchBar searchInputVisible={searchInputVisible} setSearchInputVisible={setSearchInputVisible} />
+            isFeatureEnabled('MAHDOLLISUUDET_HAKU') ? (
+              <SearchBar searchInputVisible={searchInputVisible} setSearchInputVisible={setSearchInputVisible} />
+            ) : undefined
           }
           translations={{
             showAllNotesLabel: t('common:show-all'),

@@ -935,15 +935,15 @@
     "map-your-skills": "Kartoita osaamisesi ({{count}})",
     "map-your-skills_zero": "Kartoita osaamisesi",
     "my-own-data": {
-      "cancel-text": "Ei, peruuta",
+      "cancel-text": "Peruuta",
       "competences": {
         "import": {
-          "confirm-button": "Tuo osaamiset",
-          "confirm-description": "Tuo osaamisia osaamisprofiilistasi tietojesi kokonaiskuvaan. Valitse haluamasi osaamiset alla olevasta listasta.",
-          "confirm-title": "Haluatko tuoda osaamisesi osaamisprofiilistasi?",
+          "confirm-button": "Tuo",
+          "confirm-description": "Valitse mitkä tiedot haluat tuoda osaamisprofiilistasi.",
+          "confirm-title": "Tietojen tuonti profiilista",
           "failure-toast": "Tietojen tuonti epäonnistui — yritä uudelleen",
           "import-button": "Tuo tietoja profiilista",
-          "success-toast": "Tiedot tuotu onnistuneesti kokonaiskuvaan"
+          "success-toast": "Tiedot tuotu onnistuneesti"
         },
         "textarea-placeholder": "Kerro omin sanoin mitä osaat. Voit käyttää joko yksittäisiä sanoja, lauseita tai pidempiä tekstejä.",
         "virtual-assistant": {
@@ -958,8 +958,8 @@
         }
       },
       "export": {
-        "confirm-button": "Tallenna profiiliin",
-        "confirm-description": "Vie kaikki tiedot osaamisprofiiliisi. Löydät ne jatkossa osaamisprofiilista kohdista \"Muu osaaminen\" ja \"Kiinnostukseni\".",
+        "confirm-button": "Vie",
+        "confirm-description": "Valitse mitkä tiedot haluat viedä osaamisprofiiliisi.",
         "confirm-title": "Tietojen vienti profiiliin",
         "export-button": "Vie tietoja profiiliin"
       },
