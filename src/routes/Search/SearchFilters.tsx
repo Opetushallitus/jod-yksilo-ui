@@ -64,7 +64,7 @@ const FiltersContent = () => {
     return <>{translations[key]}</>;
   };
   return (
-    <ul title={t('search.filters')}>
+    <ul>
       {Object.keys(filters).map((filterKey) => (
         <li key={filterKey} className="mb-6 last:mb-0">
           <Checkbox
@@ -93,7 +93,7 @@ export const SearchFilters = () => {
   if (sm) {
     return (
       <div className="bg-white rounded-md p-6 flex flex-col select-none gap-6">
-        <span className="sm:text-body-sm text-body-sm-mobile">{t('search.filters')}</span>
+        <h2 className="sm:text-body-sm text-body-sm-mobile">{t('search.filters')}</h2>
         <FiltersContent />
       </div>
     );
