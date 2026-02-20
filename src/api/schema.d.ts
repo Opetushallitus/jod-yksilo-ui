@@ -1320,15 +1320,16 @@ export interface components {
     };
     MahdollisuusDto: {
       /** Format: uuid */
-      id?: string;
+      id: string;
       /** @enum {string} */
-      tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
       ammattiryhma?: string;
       /** @enum {string} */
       aineisto?: 'TMT' | 'AMMATTITIETO';
       /** @enum {string} */
       koulutusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
       maakunnat?: string[];
+      toimialat?: string[];
       /** Format: double */
       kesto?: number;
       /** Format: double */

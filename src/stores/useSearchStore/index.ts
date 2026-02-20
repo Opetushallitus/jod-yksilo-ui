@@ -79,21 +79,18 @@ export const useSearchStore = create<SearchStoreState>()(
           resultsPageSize,
         );
 
-        const tyomahdollisuusIds = ids
-          .filter((id) => filteredMetadata.find((item) => item.id === id)?.tyyppi === 'TYOMAHDOLLISUUS')
-          .filter(Boolean)
-          .map((id) => id as string);
+        const tyomahdollisuusIds = ids.filter(
+          (id) => filteredMetadata.find((item) => item.id === id)?.tyyppi === 'TYOMAHDOLLISUUS',
+        );
 
-        const koulutusmahdollisuusIds = ids
-          .filter((id) => filteredMetadata.find((item) => item.id === id)?.tyyppi === 'KOULUTUSMAHDOLLISUUS')
-          .filter(Boolean)
-          .map((id) => id as string);
+        const koulutusmahdollisuusIds = ids.filter(
+          (id) => filteredMetadata.find((item) => item.id === id)?.tyyppi === 'KOULUTUSMAHDOLLISUUS',
+        );
 
-        const tyomahdollisuudet =
-          tyomahdollisuusIds.length > 0 ? await getTypedTyoMahdollisuusDetails(tyomahdollisuusIds) : [];
-
-        const koulutusmahdollisuudet =
-          koulutusmahdollisuusIds.length > 0 ? await getTypedKoulutusMahdollisuusDetails(koulutusmahdollisuusIds) : [];
+        const [tyomahdollisuudet, koulutusmahdollisuudet] = await Promise.all([
+          getTypedTyoMahdollisuusDetails(tyomahdollisuusIds),
+          getTypedKoulutusMahdollisuusDetails(koulutusmahdollisuusIds),
+        ]);
 
         const koulutusalaNimet =
           koulutusmahdollisuusIds.length > 0
@@ -102,11 +99,16 @@ export const useSearchStore = create<SearchStoreState>()(
               ).then((res) => res.map((r) => ({ code: `${r.code}#1`, value: r.value })))
             : [];
 
+        // Re-order results to match the original backend ranking (ids order)
+        const allResults = tyomahdollisuudet.concat(koulutusmahdollisuudet);
+        const resultsById = new Map(allResults.map((item) => [item.id, item]));
+        const orderedResults = ids.map((id) => resultsById.get(id)).filter((item) => item !== undefined);
+
         set({
           isLoading: false,
           resultsPageNr: pageNr,
           koulutusalaNimet,
-          filteredResults: tyomahdollisuudet.concat(koulutusmahdollisuudet),
+          filteredResults: orderedResults,
         });
       },
       applyFilters: () => {
