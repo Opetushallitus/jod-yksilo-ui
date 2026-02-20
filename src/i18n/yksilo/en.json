@@ -937,15 +937,15 @@
     "map-your-skills": "Map out your skills ({{count}})",
     "map-your-skills_zero": "Map out your skills",
     "my-own-data": {
-      "cancel-text": "No, cancel",
+      "cancel-text": "Cancel",
       "competences": {
         "import": {
-          "confirm-button": "Import competences",
-          "confirm-description": "Bring competences from your competence profile to the overview of your data. Select your desired competences from the list below.",
-          "confirm-title": "Do you want to import your competences from your competence profile?",
-          "failure-toast": "Data import failed – please try again",
+          "confirm-button": "Import",
+          "confirm-description": "Select which data you want to import from your competence profile.",
+          "confirm-title": "Import data from profile",
+          "failure-toast": "Data import failed — please try again",
           "import-button": "Import information from profile",
-          "success-toast": "Data successfully imported to the overview"
+          "success-toast": "Data successfully imported"
         },
         "textarea-placeholder": "Report your skills in your own words. You can use either individual words, sentences or longer texts.",
         "virtual-assistant": {
@@ -960,8 +960,8 @@
         }
       },
       "export": {
-        "confirm-button": "Save to profile",
-        "confirm-description": "Export all data to your competence profile. Going forward, you will find them in the competence profile under \"Other competence\" and \"My interests\".",
+        "confirm-button": "Export",
+        "confirm-description": "Select which data you want to export to your competence profile.",
         "confirm-title": "Export data to profile",
         "export-button": "Export data to profile"
       },
