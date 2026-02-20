@@ -1,4 +1,5 @@
 import { client } from '@/api/client';
+import { AnchorLink } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import type { YksiloData } from '@/hooks/useYksiloData';
@@ -28,10 +29,6 @@ interface LanguageOptions {
 }
 
 const Separator = () => <hr aria-hidden className="my-4 h-1 bg-bg-gray-2 border-0" />;
-
-const Link = ({ children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
-  return <a {...rest}>{children}</a>;
-};
 
 const StepWelcome = () => {
   const { t } = useTranslation();
@@ -165,7 +162,7 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
           components={{
             Icon: <JodOpenInNew ariaLabel={t('common:external-link')} />,
             CustomLink: (
-              <Link
+              <AnchorLink
                 href={`/${language}/${t('common:slugs.privacy-and-cookies')}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -201,7 +198,7 @@ const StepAi = () => {
             components={{
               Icon: <JodOpenInNew ariaLabel={t('common:external-link')} />,
               CustomLink: (
-                <Link
+                <AnchorLink
                   href={`/${language}/${t('common:slugs.ai-usage')}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -214,7 +211,7 @@ const StepAi = () => {
       </p>
 
       <div className="mb-11">
-        <AiInfoButton size={52} />
+        <AiInfoButton size={52} className="mb-2" />
       </div>
       <p className="text-body-lg-mobile sm:text-body-lg font-semibold mb-5">{t('introduction.step-3.text-3')}</p>
     </>
