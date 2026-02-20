@@ -1,5 +1,6 @@
 export { ActionButton } from './ActionButton/ActionButton';
 export { AiInfo } from './AiInfo/AiInfo';
+export { AnchorLink } from './AnchorLink/AnchorLink';
 export { Breadcrumb } from './Breadcrumb/Breadcrumb';
 export { CheckboxAccordion } from './CheckboxAccordion';
 export { ConfirmDialogWrapper, type ConfirmDialogWrapperProps } from './ConfirmDialogWrapper/ConfirmDialogWrapper';

@@ -950,6 +950,9 @@
         "virtual-assistant": {
           "description": "Hej! Jag är en bot och hjälper dig att hitta dina kunskaper. Prata med mig så får du förslag som du kan välja de som passar dig bäst. Ange inte personuppgifter till boten.",
           "open": "Identifiera kunskaper med artificiell intelligens",
+          "open-tooltip": {
+            "description-1": "Du kan kartlägga din kompetens också genom att samtala med artificiell intelligens. AI hjälper dig att fundera på vad du kan och vad du är intresserad av, och den kan föreslå alternativ som passar dig."
+          },
           "selected": "Valda kunskaper",
           "selected-tab": "Kunskaper",
           "start": "Låt oss börja – berätta först vad du kan just nu?",
@@ -973,6 +976,9 @@
           "intrests": "Intressen",
           "loading": "Hämtar svar... Vänligen vänta ett ögonblick.",
           "open": "Identifiera intressen med artificiell intelligens",
+          "open-tooltip": {
+            "description-1": "Du kan kartlägga dina intressen också genom att samtala med artificiell intelligens. AI hjälper dig att fundera på vad du kan och vad du är intresserad av, och den kan föreslå alternativ som passar dig."
+          },
           "respond-to-chat": "Svara till boten...",
           "selected": "Valda intressen",
           "selected-interests": "Valda intressen",
@@ -980,8 +986,7 @@
           "send": "Skicka",
           "start": "Låt oss börja – berätta först vad som intresserar dig just nu?",
           "title": "Kartläggning av intressen",
-          "x-added": "{{count}} intressen tillagda",
-          "x-interests-added": "{{count}} intressen tillagda"
+          "x-added": "{{count}} intressen tillagda"
         }
       },
       "title": "Dina uppgifter",
@@ -989,6 +994,10 @@
         "conversation": "Konversation",
         "error": "Fel vid generering av svar. Försök igen med samma eller ny input.",
         "loading": "Hämtar svar... Vänligen vänta ett ögonblick.",
+        "open-tooltip": {
+          "description-2": "Vi använder stora språkmodeller som förstår det du skriver och svarar på ett användbart sätt. AI kan också använda material inom vägledning samt information om olika yrken och kompetenser.",
+          "title": "AI‑assisterad kartläggning"
+        },
         "respond-to-chat": "Svara till boten...",
         "send": "Skicka",
         "start": "Låt oss börja – berätta först vad som intresserar dig just nu?"
