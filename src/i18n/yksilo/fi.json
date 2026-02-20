@@ -1069,13 +1069,23 @@
     "title": "Löydä mahdollisuuksia",
     "tools": {
       "career-skills-self-assessment-tool": "Urataitojen itsearviointityökalu",
+      "compass-additional-resource": "<CustomLink>Osaamistarvekompassi<Icon></Icon></CustomLink> tarjoaa tietoa työelämän osaamistarpeista.",
+      "compass-url": "https://www.osaamistarvekompassi.fi",
+      "counseling-additional-resource": "<CustomLink>Ohjaus- ja neuvontapalveluja<Icon></Icon></CustomLink> kokoaa palvelut, joista saat tukea ura- ja koulutusvaihtoehtoihin liittyvään pohdintaan, joka auttaa sinua arvioimaan ja kehittämään urasuunnittelutaitojasi.",
+      "counseling-url": "https://www.suomi.fi/aihe/ohjaus-ja-neuvontapalveluja",
+      "description": "Tutustu seuraaviin sivustoihin, jos tarvitset apua tilanteesi pohdintaan:",
       "education-history": "Koulutukseni",
       "free-time-activities": "Vapaa-ajan toimintoni",
+      "guidance-practitioner-additional-resource": "Voit myös tutustua itsenäisesti <CustomLink>Osaamispolun ohjaajan osion materiaaleihin.<Icon></Icon></CustomLink>",
+      "guidance-practitioner-url": "https://osaamispolku.fi/ohjaaja",
       "help-text": "Kirjautuneena käyttäjänä voit kartoittaa osaamisia ja kiinnostuksia tarkemmin osaamisprofiilissa.",
       "help-text-2": "Jos tarvitset apua tilanteesi pohdintaan seuraavat sivustot voivat auttaa sinua.",
+      "reveal-your-skills-additional-resource": "<CustomLink>Osaaminen näkyviin<Icon></Icon></CustomLink> innostaa ja kannustaa ihmisiä ja yhteisöjä huomaamaan osaamistaan sekä herättää keskustelua osaamisen huomaamisen merkityksestä.",
+      "reveal-your-skills-url": "https://www.jotpa.fi/fi/tietoa-meista/hankkeet-ja-projektit/osaaminen-nakyviin",
       "service-directory": "Ohjaus- ja neuvontapalveluja",
       "something-else": "Muut osaamiseni",
       "title": "Tukea pohdintaan",
+      "urataidot-additional-resource": "<CustomLink>Urataitojen itsearviointi<Icon></Icon></CustomLink> on digitaalinen työkalu, joka auttaa sinua arvioimaan ja kehittämään urasuunnittelutaitojasi.",
       "work-history": "Työpaikkani"
     },
     "tour": {

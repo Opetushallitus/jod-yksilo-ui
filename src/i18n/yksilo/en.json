@@ -1071,13 +1071,23 @@
     "title": "Find opportunities",
     "tools": {
       "career-skills-self-assessment-tool": "Tool for a self-assessment of career skills",
+      "compass-additional-resource": "<CustomLink>The Skills Needs Compass<Icon></Icon></CustomLink> provides information on the competence needs of working life.",
+      "compass-url": "https://www.osaamistarvekompassi.fi",
+      "counseling-additional-resource": "<CustomLink>Guidance and counselling services<Icon></Icon></CustomLink> bring together services where you can receive support in reflecting on career and education options, helping you evaluate and develop your career planning skills.",
+      "counseling-url": "https://www.suomi.fi/topic/guidance-and-counselling-services",
+      "description": "Familiarize yourself with the following websites if you need help reflecting on your situation:",
       "education-history": "My education",
       "free-time-activities": "My recreational activities",
+      "guidance-practitioner-additional-resource": "You can also independently explore the <CustomLink>materials in the Osaamispolku Guidance practitioner section.<Icon></Icon></CustomLink>",
+      "guidance-practitioner-url": "https://osaamispolku.fi/ohjaaja",
       "help-text": "As a logged-in user, you can map out competences and interests in more detail in the competence profile.",
       "help-text-2": "If you need help considering your situation, the following websites can help you.",
+      "reveal-your-skills-additional-resource": "<CustomLink>Reveal Your Skills<Icon></Icon></CustomLink> inspires and encourages individuals and communities to recognize their skills and sparks discussion about the importance of recognizing competence.",
+      "reveal-your-skills-url": "https://www.jotpa.fi/en/about-us/projects/reveal-your-skills",
       "service-directory": "Guidance and advisory services",
       "something-else": "My other competences",
       "title": "Support for reflection",
+      "urataidot-additional-resource": "<CustomLink>Career skills self-assessment<Icon></Icon></CustomLink> is a digital tool that helps you evaluate and develop your career planning skills.",
       "work-history": "My jobs"
     },
     "tour": {

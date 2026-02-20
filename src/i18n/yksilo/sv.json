@@ -1071,13 +1071,23 @@
     "title": "Hitta möjligheter",
     "tools": {
       "career-skills-self-assessment-tool": "Verktyg för självutvärdering av karriärkompetens",
+      "compass-additional-resource": "<CustomLink>Kompetensbehovs­kompassen<Icon></Icon></CustomLink> erbjuder information om arbetslivets kompetensbehov.",
+      "compass-url": "https://www.osaamistarvekompassi.fi",
+      "counseling-additional-resource": "<CustomLink>Väglednings- och rådgivningstjänster<Icon></Icon></CustomLink> samlar tjänster där du kan få stöd i att reflektera över karriär- och utbildningsalternativ, vilket hjälper dig att bedöma och utveckla dina färdigheter i karriärplanering.",
+      "counseling-url": "https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster",
+      "description": "Bekanta dig med följande webbplatser om du behöver hjälp med att reflektera över din situation:",
       "education-history": "Mina utbildningar",
       "free-time-activities": "Min fritidsverksamhet",
+      "guidance-practitioner-additional-resource": "Du kan också självständigt ta del av <CustomLink>materialet i Kompetensstigens Vägledar-delen.<Icon></Icon></CustomLink>",
+      "guidance-practitioner-url": "https://osaamispolku.fi/ohjaaja",
       "help-text": "Som inloggad användare kan du kartlägga kompetenser och intressen mer detaljerat i kompetensprofilen.\n",
       "help-text-2": "Om du behöver hjälp med att fundera på din situation kan följande webbplatser hjälpa dig.\n",
+      "reveal-your-skills-additional-resource": "<CustomLink>Upptäck ditt kunnande<Icon></Icon></CustomLink> inspirerar och uppmuntrar människor och gemenskaper att uppmärksamma sin kompetens samt väcker diskussion om betydelsen av att synliggöra kompetens.",
+      "reveal-your-skills-url": "https://www.jotpa.fi/sv/om-oss/projekt/upptack-ditt-kunnande",
       "service-directory": "Väglednings- och rådgivningstjänster",
       "something-else": "Mina övriga kunskaper",
       "title": "Stöd för reflektion",
+      "urataidot-additional-resource": "<CustomLink>Självutvärdering av karriärkompetenser<Icon></Icon></CustomLink> är ett digitalt verktyg som hjälper dig att bedöma och utveckla dina färdigheter i karriärplanering.",
       "work-history": "Mina arbetsplatser"
     },
     "tour": {
