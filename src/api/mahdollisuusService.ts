@@ -12,6 +12,9 @@ const getUsingCache = async (
   cache: Record<string, TypedMahdollisuus>,
   fetcher: (ids: string[]) => Promise<TypedMahdollisuus[]>,
 ): Promise<TypedMahdollisuus[]> => {
+  if (ids.length === 0) {
+    return [];
+  }
   const idsToFetch = ids.filter((id) => !cache[id]);
   let fetchedItems: TypedMahdollisuus[] = [];
   if (idsToFetch.length > 0) {
