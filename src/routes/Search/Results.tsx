@@ -59,7 +59,6 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
                 <OpportunityCard
                   key={id}
                   hideFavorite
-                  collapsible
                   as="li"
                   from="search"
                   to={`/${i18n.language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}`}
