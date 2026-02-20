@@ -138,11 +138,11 @@ export const useSearchStore = create<SearchStoreState>()(
         return filteredMetadata;
       },
       search: async (query: string) => {
-        if (!query || query.trim() === '') {
+        if (!query || query === '') {
           return;
         }
 
-        set({ query: query.trim(), hasSearchedOnce: true, isLoading: true });
+        set({ query, hasSearchedOnce: true, isLoading: true });
 
         // Abort previous request if exists
         abortController.abort();
@@ -151,7 +151,7 @@ export const useSearchStore = create<SearchStoreState>()(
           params: {
             query: {
               kieli: i18n.language as 'fi' | 'sv' | 'en',
-              teksti: query.trim(),
+              teksti: query,
             },
           },
           signal: abortController.signal,

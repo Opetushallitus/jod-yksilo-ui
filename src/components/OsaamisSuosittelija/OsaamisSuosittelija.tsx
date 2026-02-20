@@ -181,7 +181,7 @@ export const OsaamisSuosittelija = ({
     };
 
     // Do not fetch if the input is empty
-    if (debouncedTaitosi?.length > 2) {
+    if (debouncedTaitosi?.trim()?.length > 2) {
       void fetchCompetences(debouncedTaitosi);
     } else {
       setEhdotetutOsaamiset([]);
@@ -279,7 +279,7 @@ export const OsaamisSuosittelija = ({
           className={tc(['bg-bg-gray-2-25! placeholder:text-body-sm', textAreaClassName])}
           testId="osaamissuosittelija-textarea"
         />
-        {debouncedTaitosi.length > 0 && taitosi.length > 2 && (
+        {debouncedTaitosi.trim().length > 0 && taitosi.trim().length > 2 && (
           <div className="font-arial text-secondary-gray mt-3 text-help">
             {mode === 'osaamiset'
               ? t('osaamissuosittelija.competence.search-disclaimer')
