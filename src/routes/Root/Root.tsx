@@ -73,6 +73,7 @@ const Root = () => {
   const sessionWarningNoteId = 'session-expiration-warning';
   const sessionExpiredNoteId = 'session-expired';
   const isOnProtectedRoute = useMatch(`/${language}/${t('slugs.profile.index')}/*`);
+  const isOnSearchPage = useMatch(`/${language}/${t('slugs.search')}/*`);
   const { sm } = useMediaQueries();
   const showServiceName = sm || !searchInputVisible;
 
@@ -278,9 +279,11 @@ const Root = () => {
           serviceBarVariant="yksilo"
           serviceBarTitle={showServiceName ? t('my-competence-path') : undefined}
           serviceBarContent={
-            isFeatureEnabled('MAHDOLLISUUDET_HAKU') ? (
-              <SearchBar searchInputVisible={searchInputVisible} setSearchInputVisible={setSearchInputVisible} />
-            ) : undefined
+            isFeatureEnabled('MAHDOLLISUUDET_HAKU')
+              ? !isOnSearchPage && (
+                  <SearchBar searchInputVisible={searchInputVisible} setSearchInputVisible={setSearchInputVisible} />
+                )
+              : undefined
           }
           translations={{
             showAllNotesLabel: t('common:show-all'),
