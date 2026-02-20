@@ -1,15 +1,16 @@
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
+import { AnchorLink } from '@/components/AnchorLink/AnchorLink';
 import { ModalHeader } from '@/components/ModalHeader';
 import { LIMITS, OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicatesByKey } from '@/utils';
 import { animateElementToTarget, animateHideElement } from '@/utils/animations';
-import { Button, cx, EmptyState, InputField, Modal, Tag, useMediaQueries } from '@jod/design-system';
-import { JodAiGradient, JodSend } from '@jod/design-system/icons';
+import { AiInfoButton, Button, cx, EmptyState, InputField, Modal, Tag, useMediaQueries } from '@jod/design-system';
+import { JodOpenInNew, JodSend } from '@jod/design-system/icons';
 import React, { Fragment } from 'react';
 import toast from 'react-hot-toast/headless';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 const MessageBubble = ({ message, isUser }: { message: string; isUser: boolean }) => {
   return (
@@ -214,6 +215,33 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
       : t('tool.my-own-data.interests.virtual-assistant.title');
   const topSlot = React.useMemo(() => <ModalHeader text={headerText} />, [headerText]);
 
+  const tooltipContent = (
+    <div className="flex flex-col text-body-xs max-w-[290px] gap-3 leading-5">
+      <p className="font-semibold">{t('tool.my-own-data.virtual-assistant.open-tooltip.title')}</p>
+      <p>
+        {type === 'competences'
+          ? t('tool.my-own-data.competences.virtual-assistant.open-tooltip.description-1')
+          : t('tool.my-own-data.interests.virtual-assistant.open-tooltip.description-1')}
+      </p>
+      <p>{t('tool.my-own-data.virtual-assistant.open-tooltip.description-2')}</p>
+      <p>
+        <Trans
+          i18nKey="ai-info-tooltip.description-summary"
+          components={{
+            Icon: <JodOpenInNew size={18} ariaLabel={t('common:external-link')} />,
+            CustomLink: (
+              <AnchorLink
+                href={`/${language}/${t('common:slugs.ai-usage')}`}
+                className="inline-flex underline"
+                target="_blank"
+              />
+            ),
+          }}
+        />
+      </p>
+    </div>
+  );
+
   return (
     <div className={className}>
       <Button
@@ -224,7 +252,13 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
         }
         variant="gray"
         size="sm"
-        icon={<JodAiGradient />}
+        icon={
+          <AiInfoButton
+            tooltipContent={tooltipContent}
+            ariaLabel={t('ai-info-tooltip.aria-description')}
+            placement="top"
+          />
+        }
         iconSide="right"
         onClick={() => setIsOpen(true)}
         data-testid="open-va"
