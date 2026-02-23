@@ -26,6 +26,7 @@ const Competences = () => {
         tagHeadingClassName="bg-white"
         hideTextAreaLabel
         useAnimations
+        scrollOnFocus={false}
       />
       {osaamiset.length > 1 && (
         <Button

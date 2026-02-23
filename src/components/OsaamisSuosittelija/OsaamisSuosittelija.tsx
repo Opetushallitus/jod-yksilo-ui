@@ -43,6 +43,8 @@ interface OsaamisSuosittelijaProps {
   hideTextAreaLabel?: boolean;
   /** Should animations be used when adding/removing tags */
   useAnimations?: boolean;
+  /** Should the textarea scroll when focused or results appear */
+  scrollOnFocus?: boolean;
 }
 
 export const OsaamisSuosittelija = ({
@@ -56,6 +58,7 @@ export const OsaamisSuosittelija = ({
   hideSelected = false,
   hideTextAreaLabel = false,
   useAnimations = false,
+  scrollOnFocus = true,
 }: OsaamisSuosittelijaProps) => {
   const { i18n, t } = useTranslation();
   const [debouncedTaitosi, taitosi, setTaitosi] = useDebounceState('', 500);
@@ -74,11 +77,19 @@ export const OsaamisSuosittelija = ({
 
   // Scroll textarea to top when focused
   React.useEffect(() => {
+    if (!scrollOnFocus) {
+      return;
+    }
+
     const container = textareaContainerRef.current;
-    if (!container) return;
+    if (!container) {
+      return;
+    }
 
     const textarea = container.querySelector('textarea');
-    if (!textarea) return;
+    if (!textarea) {
+      return;
+    }
 
     const handleFocus = () => {
       container.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -86,21 +97,29 @@ export const OsaamisSuosittelija = ({
 
     textarea.addEventListener('focus', handleFocus);
     return () => textarea.removeEventListener('focus', handleFocus);
-  }, []);
+  }, [scrollOnFocus]);
 
   // Scroll textarea to top when results appear
   React.useEffect(() => {
+    if (!scrollOnFocus) {
+      return;
+    }
+
     const container = textareaContainerRef.current;
-    if (!container) return;
+    if (!container) {
+      return;
+    }
 
     const textarea = container.querySelector('textarea');
-    if (!textarea) return;
+    if (!textarea) {
+      return;
+    }
 
     // Only scroll if textarea is focused and we have results
     if (document.activeElement === textarea && filteredEhdotetutOsaamiset.length > 0) {
       container.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  }, [filteredEhdotetutOsaamiset]);
+  }, [scrollOnFocus, filteredEhdotetutOsaamiset]);
 
   // Set roving tabindex for suggested tags
   React.useEffect(() => {
