@@ -14,6 +14,7 @@ export const SearchInput = ({ value, onChange }: SearchInputProps) => {
       <input
         id="search-input"
         type="text"
+        required
         minLength={3}
         maxLength={400}
         value={value}
