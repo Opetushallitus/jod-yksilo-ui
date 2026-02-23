@@ -35,6 +35,7 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
             name="search"
             className="font-arial grow w-full mr-3 placeholder:text-inactive-gray placeholder:text-body-md focus:outline-2 focus:outline-accent pl-3 outline-accent outline-offset-6 rounded-l-xs mx-1"
             placeholder={t('search.search-placeholder')}
+            required
             minLength={3}
             maxLength={400}
             onChange={(e) => {
