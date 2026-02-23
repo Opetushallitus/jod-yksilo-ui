@@ -27,6 +27,7 @@ const Interests = () => {
         tagHeadingClassName="bg-white"
         hideTextAreaLabel
         useAnimations
+        scrollOnFocus={false}
       />
       {kiinnostukset.length > 1 && (
         <Button
