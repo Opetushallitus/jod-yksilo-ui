@@ -66,7 +66,13 @@ const PlanOpportunityCard = React.memo(
             : t(`opportunity-type.education.EI_TUTKINTO`)}
         </span>
 
-        <Accordion title={getLocalizedText(otsikko)} initialState={false} fetchData={fetchOsaamiset}>
+        <Accordion
+          title={getLocalizedText(otsikko)}
+          initialState={false}
+          fetchData={fetchOsaamiset}
+          ellipsis={false}
+          caretPosition="top"
+        >
           <p className="font-arial text-body-md-mobile sm:text-body-md mb-4">{getLocalizedText(kuvaus)}</p>
           <ul className="flex flex-row flex-wrap gap-3">
             {osaamiset.map((osaaminen) => (
