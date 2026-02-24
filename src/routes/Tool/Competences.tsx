@@ -38,7 +38,7 @@ const Competences = () => {
           label={t('tool.competency-profile.delete-all')}
         />
       )}
-      {isFeatureEnabled('VIRTUAALIOHJAAJA') && <VirtualAssistant type="competences" className="mt-6" />}
+      {isFeatureEnabled('VIRTUAALIOHJAAJA_OSAAMISET') && <VirtualAssistant type="competences" className="mt-6" />}
     </>
   );
 };
