@@ -8,12 +8,7 @@ import { getRoutes } from './routes';
 import { loadFeatures } from './utils/features';
 import { loadNotifications } from './utils/notifications';
 
-try {
-  await Promise.all([loadFeatures(), loadNotifications()]);
-} catch (_) {
-  // It's safe to ignore this error.
-  // If feature loading fails, the app will continue to work with default disabled features and no notifications.
-}
+await Promise.all([loadFeatures(), loadNotifications()]);
 
 export const router = createBrowserRouter(getRoutes(), {
   basename: '/yksilo',
