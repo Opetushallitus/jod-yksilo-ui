@@ -7,7 +7,7 @@ import { useDebounceState } from '@/hooks/useDebounceState';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
 import { animateElementToTarget } from '@/utils/animations';
-import { EmptyState, Tag, Textarea, tidyClasses as tc } from '@jod/design-system';
+import { EmptyState, Tag, Textarea, cx, tidyClasses as tc } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 export interface Osaaminen {
@@ -45,6 +45,8 @@ interface OsaamisSuosittelijaProps {
   useAnimations?: boolean;
   /** Should the textarea scroll when focused or results appear */
   scrollOnFocus?: boolean;
+  /** Add spacing and height adjustments for tags. Used in wizards along with the scrollOnFocus */
+  isTagSpacing?: boolean;
 }
 
 export const OsaamisSuosittelija = ({
@@ -59,6 +61,7 @@ export const OsaamisSuosittelija = ({
   hideTextAreaLabel = false,
   useAnimations = false,
   scrollOnFocus = true,
+  isTagSpacing = true,
 }: OsaamisSuosittelijaProps) => {
   const { i18n, t } = useTranslation();
   const [debouncedTaitosi, taitosi, setTaitosi] = useDebounceState('', 500);
@@ -321,7 +324,12 @@ export const OsaamisSuosittelija = ({
           )}
         </div>
 
-        <div className="mb-4 overflow-y-auto min-h-[40px] h-[100px] max-h-[228px] sm:max-h-[25dvh]">
+        <div
+          className={cx(
+            'overflow-y-auto max-h-[228px]',
+            isTagSpacing ? 'min-h-8 h-[100px] sm:max-h-[25dvh] mb-4' : 'mb-6',
+          )}
+        >
           {filteredEhdotetutOsaamiset.length > 0 ? (
             // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <ul
@@ -411,7 +419,7 @@ export const OsaamisSuosittelija = ({
             </div>
 
             <div
-              className="overflow-y-auto min-h-[40px] h-[100px] max-h-[228px] sm:max-h-[25dvh] "
+              className={cx('overflow-y-auto max-h-[228px]', isTagSpacing && 'min-h-8 h-[100px] sm:max-h-[25dvh]')}
               ref={selectedAreaRef}
             >
               {value.length > 0 ? (

@@ -28,6 +28,7 @@ const Interests = () => {
         hideTextAreaLabel
         useAnimations
         scrollOnFocus={false}
+        isTagSpacing={false}
       />
       {mappedKiinnostukset.length > 1 && (
         <Button
