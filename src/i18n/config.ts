@@ -1,7 +1,5 @@
 import i18n, { type Resource } from 'i18next';
-import ChainedBackend from 'i18next-chained-backend';
 import HttpBackend from 'i18next-http-backend';
-import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next';
 
 import commonEn from './common/en.json';
@@ -30,7 +28,7 @@ const bundledResources: Record<string, Resource> = {
 };
 
 await i18n
-  .use(ChainedBackend)
+  .use(HttpBackend)
   .use(initReactI18next)
   .init({
     lng: defaultLang,
@@ -40,18 +38,24 @@ await i18n
     fallbackLng: defaultLang,
     preload: supportedLanguageCodes,
     backend: {
-      backends: [HttpBackend, resourcesToBackend((lng: string, ns: string) => bundledResources[lng]?.[ns])],
-      backendOptions: [
-        {
-          loadPath: '/yksilo/i18n/{{ns}}/{{lng}}.json',
-        },
-      ],
+      loadPath: '/yksilo/i18n/{{ns}}/{{lng}}.json',
     },
-    interpolation: {
-      escapeValue: false,
-    },
+    interpolation: { escapeValue: false },
     returnEmptyString: false,
     saveMissing: false,
   });
+
+// Add bundled as fallback
+for (const lng of supportedLanguageCodes) {
+  for (const ns of ['yksilo', 'common']) {
+    i18n.addResourceBundle(
+      lng,
+      ns,
+      bundledResources[lng]?.[ns] ?? {},
+      true, // deep merge
+      false, // do not overwrite HTTP values
+    );
+  }
+}
 
 export default i18n;
