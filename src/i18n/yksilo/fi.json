@@ -373,7 +373,7 @@
   "move-to-service": "Siirry palveluun",
   "my-competence-path": "Oma Osaamispolku",
   "my-competence-profile": "Osaamisprofiilini",
-  "my-competences-alphabetically": "Osaamiseni aakkosjärjestyksessä",
+  "my-competences-alphabetically": "Osaamiseni aakkosittain A — Ö",
   "my-competences": {
     "by-KOULUTUS": "Koulutuksesta kertynyt osaamiseni",
     "by-MUU_OSAAMINEN": "Muut osaamiseni",
@@ -384,7 +384,7 @@
     "missing-PATEVYYS": "Ei osaamisia. Siirry lisäämään vapaa-ajan toimintoja.",
     "missing-TOIMENKUVA": "Ei osaamisia. Siirry lisäämään työpaikkoja."
   },
-  "my-competences-by-sources": "Osaamiseni lähteiden mukaan",
+  "my-competences-by-sources": "Osaamiseni teeman mukaan",
   "navigation": {
     "main-section": {
       "title": "Henkilökohtainen osaamispolku",
@@ -587,9 +587,14 @@
       "add": "Lisää osaamisia",
       "description": "Löydät alta kaikki osaamisesi, jotka olet lisännyt osaamisprofiiliisi. Osaamisesi ryhmittelyn ja esitystavan voit valita itse.",
       "edit": "Muokkaa osaamisia",
+      "freeform": {
+        "description": "Voit kuvata osaamistasi omin sanoin. Jos käytät palvelua suomeksi, kirjoita suomeksi. Älä kirjoita kuvaukseen henkilötietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietoja.",
+        "header": "Tekstikuvaus osaamisistani",
+        "placeholder": "Kerro omin sanoin, mitä muuta osaat"
+      },
       "group": "Järjestele",
-      "group-by-alphabet": "Aakkosellisesti",
-      "group-by-source": "Lähteiden mukaan",
+      "group-by-alphabet": "Aakkosittain A – Ö",
+      "group-by-source": "Teeman mukaan",
       "group-by-theme": "Teemoittain",
       "info": "Voit valita itse mitä Osaamisprofiilin tiedoistasi hyödynnät mahdollisuuksien etsintään tuomalla ne käyttöösi Löydä mahdollisuuksia -sivulla.",
       "move-to-type": {
@@ -631,6 +636,10 @@
       "you-have-saved-job-opportunities": "Olet tallentanut {{jobOpportunitiesCount}} työmahdollisuutta.",
       "you-have-saved-opportunities": "Olet tallentanut {{jobOpportunitiesCount}} työmahdollisuutta ja {{educationOpportunitiesCount}} koulutusmahdollisuutta."
     },
+    "free-form-input": {
+      "label": "Vapaamuotoinen kuvaus",
+      "help": "Teksti tallentuu automaattisesti."
+    },
     "free-time-activities": {
       "description": "Löydät alta vapaa-ajan toimintosi. Vapaa-ajan toimintoja voivat olla harrastukset, luottamustoimet sekä erilaiset pätevyydet. Voit lisätä itse vapaa-ajan toimintojasi sekä kartoittaa niihin liittyviä osaamisiasi.",
       "empty": "Et ole vielä lisännyt vapaa-ajan toimintoja.",
@@ -650,6 +659,11 @@
       "description": "Löydät alta kaikki kiinnostuksen kohteesi, jotka olet lisännyt osaamisprofiiliisi. Kiinnostuksen kohteet ryhmitellään tyypin mukaan.",
       "edit-interests": "Muokkaa kiinnostuksia",
       "empty": "Et ole vielä lisännyt kiinnostuksia.",
+      "freeform": {
+        "header": "Tekstikuvaus kiinnostuksistani",
+        "description": "Voit halutessasi kuvata kiinnostuksiasi omin sanoin. Kirjoita suomeksi, jos käytät palvelua suomeksi. Älä kirjoita kuvaukseen henkilötietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietoja.",
+        "placeholder": "Kerro omin sanoin, mikä muu sinua kiinnostaa"
+      },
       "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus kiinnostuksistani",
       "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin kiinnostuksiasi. Kirjoittamasi teksti tallentuu automaattisesti. Jos käytät palvelua suomeksi, kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten esimerkiksi henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.\n",
       "occupations-that-interest-me": "Ammatit, jotka kiinnostavat minua",
@@ -924,7 +938,7 @@
       "data-from-profile": "Osaamisprofiilista tuodut tiedot",
       "no-competences-from-profile": "Ei profiilista tuotuja tietoja",
       "other-data-from-profile": "Profiilista tuodut muut tiedot",
-      "other-data-from-profile-description": "Tekstilisäyksesi muihin osaamisiin ja kiinnostuksiin"
+      "other-data-from-profile-description": "Tekstilisäyksesi osaamisiin ja kiinnostuksiin"
     },
     "interests": "Kartoita kiinnostuksesi ({{count}})",
     "interests_zero": "Kartoita kiinnostuksesi",
@@ -958,7 +972,8 @@
           "selected-tab": "Osaamiset",
           "start": "Aloitetaan – kerro ensin, mitä asioita osaat tai mitä olet tehnyt.",
           "title": "Osaamisten kartoitus",
-          "x-added": "{{count}} osaamista lisätty"
+          "x-added": "{{count}} osaamista lisätty",
+          "x-interests-added": "{{count}} osaamista lisätty"
         }
       },
       "export": {
@@ -988,7 +1003,8 @@
           "send": "Lähetä",
           "start": "Aloitetaan – kerro ensin, mikä asia kiinnostaa sinua juuri nyt?",
           "title": "Kiinnostusten kartoitus",
-          "x-added": "{{count}} kiinnostusta lisätty"
+          "x-added": "{{count}} kiinnostusta lisätty",
+          "x-interests-added": "{{count}} kiinnostusta lisätty"
         }
       },
       "title": "Tietosi",

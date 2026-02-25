@@ -1,7 +1,7 @@
+import { client } from '@/api/client';
 import { MainLayout } from '@/components';
 import { InfoBox } from '@/components/InfoBox/InfoBox';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
@@ -12,8 +12,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { FreeFormTextInputBlock } from '../components/FreeFormTextInputBlock';
 import { ToolCard } from '../components/ToolCard';
-import { type CompetenceSourceType, GROUP_BY_ALPHABET, GROUP_BY_SOURCE, GROUP_BY_THEME } from './constants';
+import { type CompetenceSourceType, GROUP_BY_ALPHABET, GROUP_BY_SOURCE } from './constants';
 
 const Competences = () => {
   const { osaamiset, toimenkuvat, koulutukset, patevyydet, muutOsaamiset, muutOsaamisetVapaateksti } = useLoaderData();
@@ -26,7 +27,6 @@ const Competences = () => {
   const locale = language as 'fi' | 'sv';
   const [showFilters, setShowFilters] = React.useState(false);
   const { lg } = useMediaQueries();
-  const { isDev } = useEnvironment();
 
   const { selectedFilters, setSelectedFilters, filterKeys } = useInitializeFilters(
     {
@@ -113,7 +113,6 @@ const Competences = () => {
             filterKeys={filterKeys}
             locale={locale}
             osaamiset={sortedOsaamiset}
-            muutOsaamisetVapaateksti={muutOsaamisetVapaateksti}
             isOsaaminenVisible={isOsaaminenVisible}
             mobileFilterOpenerComponent={
               <FilterButton
@@ -125,7 +124,6 @@ const Competences = () => {
             data-testid="competences-group-by-source"
           />
         )}
-        {isDev && groupBy === GROUP_BY_THEME && <></>}
         {groupBy === GROUP_BY_ALPHABET && (
           <GroupByAlphabet
             filters={selectedFilters}
@@ -139,6 +137,21 @@ const Competences = () => {
             data-testid="competences-group-by-alphabet"
           />
         )}
+        <div className="mb-7">
+          <FreeFormTextInputBlock
+            header={t('profile.competences.freeform.header')}
+            description={t('profile.competences.freeform.description')}
+            placeholder={t('profile.competences.freeform.placeholder')}
+            testId="competences-freeform"
+            text={muutOsaamisetVapaateksti}
+            onChange={async (value) => {
+              await client.PUT('/api/profiili/muu-osaaminen/vapaateksti', {
+                body: value,
+              });
+            }}
+            collapsible
+          />
+        </div>
       </div>
       {lg ? null : <ToolCard testId="competences-go-to-tool" className="mt-6" />}
     </MainLayout>

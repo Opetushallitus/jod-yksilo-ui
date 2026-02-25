@@ -375,7 +375,7 @@
   "move-to-service": "Go to service",
   "my-competence-path": "My Competency Path",
   "my-competence-profile": "My competence profile",
-  "my-competences-alphabetically": "My competences in alphabetical order",
+  "my-competences-alphabetically": "My competences alphabetically A — Z",
   "my-competences": {
     "by-KOULUTUS": "My competences accumulated from education",
     "by-MUU_OSAAMINEN": "My other competences",
@@ -386,7 +386,7 @@
     "missing-PATEVYYS": "No competences. Go to add recreational activities.",
     "missing-TOIMENKUVA": "No competences. Go to add jobs."
   },
-  "my-competences-by-sources": "My competence based on sources",
+  "my-competences-by-sources": "My competences by theme",
   "navigation": {
     "main-section": {
       "title": "Personal Competency Path",
@@ -589,9 +589,14 @@
       "add": "Add competences",
       "description": "Below, you will find all of your competences that you have added to your competence profile. You can choose the grouping and presentation of your competence yourself.",
       "edit": "Edit competences",
+      "freeform": {
+        "description": "You can describe your competences in your own words. If you use the service in English, write in English. Do not include personal information such as social security numbers, usernames, or health information.",
+        "header": "Text description of my competences",
+        "placeholder": "Describe in your own words what else you can do"
+      },
       "group": "Sort",
-      "group-by-alphabet": "Alphabetically",
-      "group-by-source": "By source",
+      "group-by-alphabet": "Alphabetical order A – Z",
+      "group-by-source": "By theme",
       "group-by-theme": "By theme",
       "info": "You can choose which of your Competence profile data you use to search for opportunities by accessing them on the Find opportunities page.",
       "move-to-type": {
@@ -633,6 +638,10 @@
       "you-have-saved-job-opportunities": "You have saved {{jobOpportunitiesCount}} career opportunities.",
       "you-have-saved-opportunities": "You have saved {{jobOpportunitiesCount}} career opportunities and {{educationOpportunitiesCount}} education opportunities."
     },
+    "free-form-input": {
+      "label": "Free-form description",
+      "help": "The text is saved automatically."
+    },
     "free-time-activities": {
       "description": "Find your recreational activities below. Recreational activities may include hobbies, positions of trust and various qualifications. You can add recreational activities yourself and map out the related competences.",
       "empty": "You have not yet added any recreational activities.",
@@ -652,6 +661,11 @@
       "description": "Below, you will find all of your interests that you have added to your competence profile. The interests are grouped by type.",
       "edit-interests": "Edit interests",
       "empty": "You have not added any interests yet.",
+      "freeform": {
+        "header": "Free-form description of my interests",
+        "description": "You can write and describe your interests in your own words. The text you enter is saved automatically. If you use the service in English, please write in English. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
+        "placeholder": "Describe in your own words what else interests you"
+      },
       "free-form-description-of-my-interests": "Free text description of my interests",
       "free-form-interests-description-guidance": "You can write and describe your interests in your own words. The text you enter is saved automatically. If you use the service in Finnish, please write in Finnish. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
       "occupations-that-interest-me": "Occupations that interest me",
@@ -926,7 +940,7 @@
       "data-from-profile": "Data imported from then competence profile",
       "no-competences-from-profile": "No data imported from profile",
       "other-data-from-profile": "Other data imported from profile",
-      "other-data-from-profile-description": "Your text addition to other competences and interests"
+      "other-data-from-profile-description": "Your text addition to competences and interests"
     },
     "interests": "Map out your interests ({{count}})",
     "interests_zero": "Map out your interests",
@@ -991,7 +1005,8 @@
           "send": "Submit",
           "start": "Let's get started – first, tell me what interests you right now?",
           "title": "Mapping out interests",
-          "x-added": "{{count}} interests added"
+          "x-added": "{{count}} interests added",
+          "x-interests-added": "{{count}} interests added"
         }
       },
       "title": "Your information",

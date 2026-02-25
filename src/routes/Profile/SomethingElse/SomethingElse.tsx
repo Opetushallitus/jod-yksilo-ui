@@ -1,18 +1,11 @@
-import { client } from '@/api/client';
-import type { OsaaminenDto } from '@/api/osaamiset';
-import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
-import { formErrorMessage, LIMITS } from '@/constants';
 import { useModal } from '@/hooks/useModal';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, EmptyState, Tag, Textarea, useMediaQueries } from '@jod/design-system';
+import { Button, EmptyState, Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
-import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
-import { z } from 'zod';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 
@@ -24,63 +17,12 @@ const SomethingElse = () => {
   const title = t('profile.something-else.title');
   const { showModal } = useModal();
   const { lg } = useMediaQueries();
-  const { muuOsaaminen, vapaateksti } = useLoaderData() as {
-    muuOsaaminen: OsaaminenDto[];
-    vapaateksti: components['schemas']['LokalisoituTeksti'];
-  };
+  const { muuOsaaminen } = useLoaderData();
 
   const sortedData = React.useMemo(
     () => [...muuOsaaminen].sort(sortByProperty(`nimi.${language}`)),
     [muuOsaaminen, language],
   );
-
-  const ref = React.useRef<HTMLTextAreaElement>(null);
-  const {
-    register,
-    formState: { isDirty, errors },
-    reset,
-    getValues,
-    setValue,
-    watch,
-  } = useForm<components['schemas']['LokalisoituTeksti']>({
-    defaultValues: vapaateksti,
-    resolver: zodResolver(
-      z.object({}).catchall(z.string().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
-    ),
-  });
-  // eslint-disable-next-line react-hooks/incompatible-library
-  const fields = watch();
-
-  React.useEffect(() => {
-    const timer = setTimeout(async () => {
-      if (!isDirty || Object.keys(errors).length > 0) {
-        return;
-      }
-
-      await client.PUT('/api/profiili/muu-osaaminen/vapaateksti', {
-        body: fields,
-      });
-
-      reset(fields);
-    }, 1000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [fields, errors, isDirty, reset]);
-
-  React.useEffect(() => {
-    setValue(language, vapaateksti?.[language] ?? '');
-    reset(getValues());
-  }, [language, vapaateksti, getValues, reset, setValue]);
-
-  React.useEffect(() => {
-    if (ref.current) {
-      ref.current.style.height = 'auto';
-      ref.current.style.overflow = 'hidden';
-      ref.current.style.height = `${ref.current.scrollHeight}px`;
-    }
-  }, [fields]);
 
   return (
     <MainLayout
@@ -133,17 +75,6 @@ const SomethingElse = () => {
           data-testid="something-else-edit"
         />
       </div>
-      <Textarea
-        label={t('profile.something-else.free-form-description-of-my-interests')}
-        help={t('profile.something-else.free-form-interests-description-guidance')}
-        maxLength={LIMITS.TEXTAREA}
-        {...register(language)}
-        ref={(e) => {
-          register(language).ref(e);
-          ref.current = e;
-        }}
-        data-testid="something-else-freeform"
-      />
       {lg ? null : <ToolCard testId="something-else-go-to-tool" className="mt-6" />}
     </MainLayout>
   );

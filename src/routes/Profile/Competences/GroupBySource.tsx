@@ -1,6 +1,6 @@
 import type { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
-import { getLocalizedText, removeDuplicatesByKey } from '@/utils';
+import { removeDuplicatesByKey } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Accordion, Button, EmptyState, Tag } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
@@ -14,13 +14,9 @@ export const GroupBySource = ({
   filters,
   locale,
   osaamiset,
-  muutOsaamisetVapaateksti,
   isOsaaminenVisible,
   mobileFilterOpenerComponent,
-}: GroupByProps &
-  MobileFilterButton & {
-    muutOsaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'];
-  }) => {
+}: GroupByProps & MobileFilterButton) => {
   const {
     t,
     i18n: { language },
@@ -44,18 +40,6 @@ export const GroupBySource = ({
     }),
     [competencesSlug, data, language, t],
   );
-
-  const localizedMuutOsaamisetVapaateksti = getLocalizedText(muutOsaamisetVapaateksti);
-  const [localizedMuutOsaamisetVapaatekstiExpanded, setLocalizedMuutOsaamisetVapaatekstiExpanded] =
-    React.useState(false);
-  const localizedMuutOsaamisetVapaatekstiMaxLength = 180;
-  const shouldShowExpandButton = localizedMuutOsaamisetVapaateksti.length > localizedMuutOsaamisetVapaatekstiMaxLength;
-
-  // Helper to truncate text
-  const getTruncatedText = (text: string, maxLength = localizedMuutOsaamisetVapaatekstiMaxLength) => {
-    if (!text || text.length <= maxLength) return text;
-    return text.slice(0, maxLength) + '…';
-  };
 
   const linkLabels: Record<CompetenceSourceType, string> = {
     TOIMENKUVA: t('profile.competences.move-to-type.TOIMENKUVA'),
@@ -115,8 +99,7 @@ export const GroupBySource = ({
               }
               ariaLabel={accordionLabels[sourceType]}
             >
-              {(Array.isArray(filters[sourceType]) || localizedMuutOsaamisetVapaateksti.length > 0) &&
-              filters[sourceType].some((filter) => filter.checked) ? (
+              {Array.isArray(filters[sourceType]) && filters[sourceType].some((filter) => filter.checked) ? (
                 <div className="mt-5 flex flex-col gap-7">
                   {nonDuplicateOsaamiset.some(
                     (val) => val.lahde.tyyppi === sourceType && isOsaaminenVisible(sourceType, val.lahde.id),
@@ -138,33 +121,7 @@ export const GroupBySource = ({
                       })}
                     </ul>
                   )}
-                  {sourceType === 'MUU_OSAAMINEN' && localizedMuutOsaamisetVapaateksti.length > 0 && (
-                    <div>
-                      <label className="ds:inline-block ds:mb-4 ds:align-top ds:text-form-label ds:font-arial ds:text-primary-gray">
-                        {t('profile.something-else.free-form-description-of-my-interests')}
-                      </label>
-                      <div className="flex flex-col bg-white px-5 py-4 rounded gap-3 border-2 border-primary-light-2">
-                        <p className="text-body-sm whitespace-pre-line">
-                          {localizedMuutOsaamisetVapaatekstiExpanded
-                            ? localizedMuutOsaamisetVapaateksti
-                            : getTruncatedText(localizedMuutOsaamisetVapaateksti)}
-                        </p>
-                        {shouldShowExpandButton && (
-                          <div>
-                            <button
-                              onClick={() =>
-                                setLocalizedMuutOsaamisetVapaatekstiExpanded((currentState) => !currentState)
-                              }
-                              className="text-body-sm text-accent hover:underline hover:cursor-pointer"
-                              data-testid="competences-freeform-toggle"
-                            >
-                              {localizedMuutOsaamisetVapaatekstiExpanded ? t('show-less') : t('show-more')}
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
+
                   {getLinkButton(sourceType)}
                 </div>
               ) : (
