@@ -374,7 +374,7 @@
   "move-to-service": "Öppna tjänsten",
   "my-competence-path": "Min kompetensstig",
   "my-competence-profile": "Min kompetensprofil",
-  "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning",
+  "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning A — Ö",
   "my-competences": {
     "by-KOULUTUS": "Mina kunskaper från utbildningen",
     "by-MUU_OSAAMINEN": "Mitt övriga kunnande",
@@ -385,7 +385,7 @@
     "missing-PATEVYYS": "Inga kunskaper. Lägg till fritidsverksamhet.\n",
     "missing-TOIMENKUVA": "Inga kunskaper. Lägg till arbetsplatser.\n"
   },
-  "my-competences-by-sources": "Mina kunskaper enligt källor",
+  "my-competences-by-sources": "Mina kunskaper efter tema",
   "navigation": {
     "main-section": {
       "title": "Personlig kompetensstig",
@@ -588,9 +588,14 @@
       "add": "Lägg till kunskaper",
       "description": "Nedan hittar du alla kunskaper som du har lagt till i din kompetensprofil. Du kan själv välja hur dina kunskaper ska grupperas och presenteras.\n",
       "edit": "Redigera kunskaper",
+      "freeform": {
+        "description": "Du kan skriva och beskriva dina kunskaper med egna ord. Om du använder tjänsten på svenska, skriv på svenska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.",
+        "header": "Fritt formulerad beskrivning av min kompetens",
+        "placeholder": "Beskriv med egna ord vad annat du kan"
+      },
       "group": "Ordna",
-      "group-by-alphabet": "Alfabetiskt",
-      "group-by-source": "Enligt källor",
+      "group-by-alphabet": "Alfabetisk ordning A – Ö",
+      "group-by-source": "Enligt tema",
       "group-by-theme": "Enligt tema",
       "info": "Du kan själv välja vilken information från din kompetensprofil du vill använda när du söker möjligheter genom att importera den till sidan Hitta möjligheter.",
       "move-to-type": {
@@ -632,6 +637,10 @@
       "you-have-saved-job-opportunities": "Du har sparat {{jobOpportunitiesCount}} karriärmöjligheter.",
       "you-have-saved-opportunities": "Du har sparat {{jobOpportunitiesCount}} karriärmöjligheter och {{educationOpportunitiesCount}} utbildningsmöjligheter."
     },
+    "free-form-input": {
+      "label": "Fritt formulerad beskrivning",
+      "help": "Texten sparas automatiskt."
+    },
     "free-time-activities": {
       "description": "Nedan hittar du din fritidsverksamhet. Fritidsverksamheten kan omfatta hobbyer, förtroendeuppdrag och olika behörigheter. Du kan själv lägga till dina fritidsverksamheter och kartlägga din relaterade kompetens.\n",
       "empty": "Du har ännu inte lagt till någon fritidsverksamhet.",
@@ -647,10 +656,15 @@
     },
     "index": "Min kompetensprofil",
     "interests": {
-      "add-interests": "Lägg till intressen\n",
-      "description": "Nedan hittar du alla dina intressen som du har lagt till i din kompetensprofil. Intressen grupperas enligt typ.\n",
+      "add-interests": "Lägg till intressen",
+      "description": "Nedan hittar du alla dina intressen som du har lagt till i din kompetensprofil. Intressen grupperas enligt typ.",
       "edit-interests": "Redigera intressen",
-      "empty": "Du har ännu inte lagt till några intressen.\n",
+      "empty": "Du har ännu inte lagt till några intressen.",
+      "freeform": {
+        "header": "Fritt formulerad beskrivning av mina intressen",
+        "description": "Du kan skriva och beskriva dina intressen med egna ord. Texten du skriver sparas automatiskt. Om du använder tjänsten på svenska, skriv på svenska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.",
+        "placeholder": "Beskriv med egna ord vad annat som intresserar dig"
+      },
       "free-form-description-of-my-interests": "Fritt formulerad beskrivning av mina intressen",
       "free-form-interests-description-guidance": "Du kan skriva och beskriva dina intressen med egna ord. Texten som du skriver sparas automatiskt. Om du använder tjänsten på finska, skriv på finska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.\n",
       "occupations-that-interest-me": "Yrken som intresserar mig",
@@ -925,7 +939,7 @@
       "data-from-profile": "Information som importerats från kompetensprofilen",
       "no-competences-from-profile": "Inga uppgifter importerade från profilen",
       "other-data-from-profile": "Övriga importerade uppgifter från profilen",
-      "other-data-from-profile-description": "Dina texttillägg till andra kompetenser och intressen"
+      "other-data-from-profile-description": "Dina texttillägg till kompetenser och intressen"
     },
     "interests": "Kartlägg dina intressen ({{count}})",
     "interests_zero": "Kartlägg dina intressen",
@@ -990,7 +1004,8 @@
           "send": "Skicka",
           "start": "Låt oss börja – berätta först vad som intresserar dig just nu?",
           "title": "Kartläggning av intressen",
-          "x-added": "{{count}} intressen tillagda"
+          "x-added": "{{count}} intressen tillagda",
+          "x-interests-added": "{{count}} intressen tillagda"
         }
       },
       "title": "Dina uppgifter",

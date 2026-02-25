@@ -1,6 +1,6 @@
 import type { CompetenceSourceType, FiltersType } from '@/routes/Profile/Competences/constants';
 import { getLocalizedText } from '@/utils';
-import { Accordion, Checkbox } from '@jod/design-system';
+import { Accordion, Checkbox, cx } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -8,13 +8,22 @@ interface TitleCheckboxProps {
   type: keyof FiltersType;
   checked: boolean;
   disabled?: boolean;
+  showColorIndicator?: boolean;
   onChange: () => void;
 }
+
+const getFilterColorClassName = (type: keyof FiltersType) =>
+  cx({
+    'bg-secondary-4': type === 'TOIMENKUVA',
+    'bg-secondary-2': type === 'KOULUTUS',
+    'bg-secondary-1': type === 'PATEVYYS',
+    'bg-secondary-5-light-1': type === 'MUU_OSAAMINEN',
+  });
 /**
  * This component is used as the top level filter title. It toggles all filters of a specific type.
  */
-const TitleCheckbox = ({ type, checked, disabled, onChange }: TitleCheckboxProps) => {
-  const { t } = useTranslation();
+const TitleCheckbox = ({ type, checked, disabled, showColorIndicator, onChange }: TitleCheckboxProps) => {
+  const { t, i18n } = useTranslation();
 
   const labels: Record<keyof FiltersType, string> = {
     TOIMENKUVA: t('types.competence.TOIMENKUVA'),
@@ -28,7 +37,16 @@ const TitleCheckbox = ({ type, checked, disabled, onChange }: TitleCheckboxProps
 
   return (
     <Checkbox
-      label={labels[type]}
+      label={
+        showColorIndicator ? (
+          <span className="flex items-center hyphens-auto" lang={i18n.language}>
+            <div className={`mx-3 h-5 w-5 flex-none rounded-full ${getFilterColorClassName(type)}`} aria-hidden />
+            {labels[type]}
+          </span>
+        ) : (
+          labels[type]
+        )
+      }
       checked={checked}
       onChange={onChange}
       ariaLabel={labels[type]}
@@ -45,6 +63,7 @@ export interface CompetenceFiltersProps {
   selectedFilters: FiltersType;
   setSelectedFilters: (value: FiltersType) => void;
   ignoredFilterKeys?: (keyof FiltersType)[];
+  showColorIndicator?: boolean;
 }
 
 export const CompetenceFilters = ({
@@ -52,6 +71,7 @@ export const CompetenceFilters = ({
   selectedFilters,
   setSelectedFilters,
   ignoredFilterKeys = [],
+  showColorIndicator,
 }: CompetenceFiltersProps) => {
   const { t } = useTranslation();
 
@@ -109,7 +129,12 @@ export const CompetenceFilters = ({
               <li className="pb-3">
                 <Accordion
                   title={
-                    <TitleCheckbox type={key} checked={isFilterTypeChecked(key)} onChange={toggleFiltersByType(key)} />
+                    <TitleCheckbox
+                      type={key}
+                      checked={isFilterTypeChecked(key)}
+                      onChange={toggleFiltersByType(key)}
+                      showColorIndicator={showColorIndicator}
+                    />
                   }
                   ariaLabel={ariaLabels[key]}
                   isOpen={accordionState[key]}
@@ -138,6 +163,7 @@ export const CompetenceFilters = ({
                   checked={isFilterTypeChecked(key)}
                   onChange={toggleFiltersByType(key)}
                   disabled={selectedFilters[key]?.length === 0}
+                  showColorIndicator={showColorIndicator}
                 />
               </li>
             )}

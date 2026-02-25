@@ -23,7 +23,7 @@ export const FilterList = ({
         <Accordion
           ariaLabel={title}
           title={
-            <TitleTag className="text-heading-3" aria-controls={id}>
+            <TitleTag className="text-body-sm-mobile" aria-controls={id}>
               {title}
             </TitleTag>
           }
@@ -34,7 +34,7 @@ export const FilterList = ({
         </Accordion>
       ) : (
         <>
-          <TitleTag className="hyphens-auto text-heading-3">{title}</TitleTag>
+          <TitleTag className="hyphens-auto text-body-sm-mobile">{title}</TitleTag>
           {children}
         </>
       )}

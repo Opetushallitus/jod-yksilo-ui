@@ -1,8 +1,7 @@
 import { components } from '@/api/schema';
 
-export const GROUP_BY_SOURCE = 'a';
-export const GROUP_BY_THEME = 'b';
-export const GROUP_BY_ALPHABET = 'c';
+export const GROUP_BY_SOURCE = 'GROUP_BY_SOURCE';
+export const GROUP_BY_ALPHABET = 'GROUP_BY_ALPHABET';
 
 export interface FilterData {
   label: Record<string, string | undefined>;
