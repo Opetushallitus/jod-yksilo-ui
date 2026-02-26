@@ -8,7 +8,7 @@ import { useEnvironment } from '@/hooks/useEnvironment';
 import type { LoaderData } from '@/routes/EducationOpportunity/loader';
 import type { JakaumaKey } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, normalizeMultilineText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
@@ -59,7 +59,11 @@ const EducationOpportunity = () => {
       navTitle: t('description'),
       showAiInfoInTitle: true,
       showDivider: false,
-      content: <p className="text-body-md font-arial whitespace-pre-line">{getLocalizedText(kuvaus)}</p>,
+      content: (
+        <p className="text-body-md font-arial whitespace-pre-line">
+          {normalizeMultilineText(getLocalizedText(kuvaus))}
+        </p>
+      ),
     },
     ...(durationText
       ? [

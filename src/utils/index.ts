@@ -231,3 +231,10 @@ export const hasLocalizedText = (item?: components['schemas']['LokalisoituTeksti
 // SonarQube: Using replace here is intentional to collapse all whitespace into a single hyphen.
 // sonarjs/no-replace-all
 export const hyphenize = (str: string) => str.trim().replace(/\s+/g, '-').toLowerCase();
+
+/**
+ * Normalizes multiline text by collapsing multiple consecutive newlines into a maximum of two.
+ * @param text The input text
+ * @returns The normalized text
+ */
+export const normalizeMultilineText = (text = '') => text.replace(/\n{3,}/g, '\n\n');

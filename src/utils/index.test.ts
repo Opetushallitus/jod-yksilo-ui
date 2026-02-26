@@ -2,6 +2,7 @@ import {
   formatDate,
   getLocalizedText,
   hyphenize,
+  normalizeMultilineText,
   paginate,
   parseBoolean,
   removeDuplicatesByKey,
@@ -323,5 +324,34 @@ describe('utils', () => {
         expect(parseBoolean(value)).toBe(false);
       });
     });
+  });
+});
+
+describe('normalizeMultilineText', () => {
+  it('should return the same string if there are no multiple newlines', () => {
+    const input = 'Hello\nWorld';
+    expect(normalizeMultilineText(input)).toBe('Hello\nWorld');
+  });
+
+  it('should collapse three or more consecutive newlines to two', () => {
+    const input = 'Line1\n\n\nLine2';
+    expect(normalizeMultilineText(input)).toBe('Line1\n\nLine2');
+  });
+
+  it('should collapse more than three consecutive newlines to two', () => {
+    const input = 'A\n\n\n\n\nB';
+    expect(normalizeMultilineText(input)).toBe('A\n\nB');
+  });
+
+  it('should handle empty string', () => {
+    expect(normalizeMultilineText('')).toBe('');
+  });
+
+  it('should handle string with only newlines', () => {
+    expect(normalizeMultilineText('\n\n\n\n')).toBe('\n\n');
+  });
+
+  it('should handle undefined input', () => {
+    expect(normalizeMultilineText()).toBe('');
   });
 });

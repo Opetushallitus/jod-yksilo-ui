@@ -8,7 +8,7 @@ import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
 import { NOT_AVAILABLE_LABEL } from '@/constants';
 import Suomi from '@/routes/JobOpportunity/Suomi.tsx';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText, getTranslation, hashString } from '@/utils';
+import { getLocalizedText, getTranslation, hashString, normalizeMultilineText } from '@/utils';
 import { getEducationCodesetValues } from '@/utils/codes/codes.ts';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, useMediaQueries } from '@jod/design-system';
@@ -170,7 +170,7 @@ const JobOpportunity = () => {
       showAiInfoInTitle: true,
       content: (
         <p className="text-body-md font-arial whitespace-pre-line">
-          {getLocalizedText(tyomahdollisuus?.kuvaus).replace(/\n\n\n+/g, '\n\n')}
+          {normalizeMultilineText(getLocalizedText(tyomahdollisuus?.kuvaus))}
         </p>
       ),
     },
