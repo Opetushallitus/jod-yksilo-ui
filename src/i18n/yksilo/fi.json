@@ -65,7 +65,6 @@
     "title": "Osaamisprofiili"
   },
   "date-or-continues-placeholder": "pp.kk.vvvv",
-  "date-placeholder": "pp.kk.vvvv",
   "datepicker": {
     "actions": {
       "close": "Sulje kalenteri",
@@ -94,6 +93,7 @@
       "view": "Vaihda päivänäkymään"
     }
   },
+  "date-placeholder": "pp.kk.vvvv",
   "description": "Kuvaus",
   "do-filter": "Suodata",
   "duration": "Kesto",
@@ -110,8 +110,8 @@
     "delete-education-history": "Poista koulutus",
     "edit-degree-or-education": "Muokkaa tutkintoa tai koulutusta",
     "edit-education": "Muokkaa koulutusta",
-    "education-provider-or-education": "Koulutuksen järjestäjä / koulutus",
     "educational-institution-or-education-provider": "Oppilaitos tai koulutuksen järjestäjä",
+    "education-provider-or-education": "Koulutuksen järjestäjä / koulutus",
     "identify-competences": "Tunnista osaamisia",
     "import-education-history": "Tuo koulutushistoriani",
     "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi",
@@ -123,10 +123,13 @@
       "give-permission-failed": "Luvan antaminen epäonnistui. Yritä myöhemmin uudelleen.",
       "identify": "Tunnistetaan",
       "no-identify": "Ei tunnisteta",
+      "success": "Koulutushistoria lisätty onnistuneesti.",
       "success-osaamiset-info": "Koulutushistoriasi on lisätty onnistuneesti.<br><br><strong>Haluatko, että tunnistamme koulutuksistasi osaamisehdotuksia automaattisesti tekoälyn avulla?</strong><br><br>Ehdotukset voivat sisältää virheitä, joten suosittelemme tarkistamaan ne. Voit muokata osaamisia myöhemmin lisäämällä tai poistamalla niitä koulutuksen tiedoissa.",
+      "success-osaamiset-link-about-ai": "Tietoa tekoälyn käytöstä",
       "title": "Tunnistetaanko osaamisiasi?<AiIcon></AiIcon>"
     },
     "start-modal": {
+      "description": "Voit tuoda koulutushistoriasi osaamisprofiiliisi, kun olet antanut luvan Opintopolussa. Paina \"Siirry Opintopolkuun\", niin voit myöntää luvan tietojen tuontiin. Luvan antamisen jälkeen palaat automaattisesti takaisin palveluun. Palattuasi voit valita, mitkä koulutukset haluat tuoda.",
       "description-1": "Oma Opintopolun omat opintosuoritukseni -osiosta löydät suorittamasi opinnot ja tutkinnot, jotka on tallennettu valtakunnallisiin opinto-, koulutus- ja tutkintorekistereihin. Voit siirtää nämä tiedot osaamisprofiilisi sekä kartoittaa niistä kertynyttä osaamista.<br><CustomLink>Lue lisää Omista opintosuorituksistasi Opintopolussa<Icon></Icon>.</CustomLink>",
       "description-2": "Voit tuoda omat opintosuorituksesi osaamisprofiiliisi koulutushistoria -osioon, kun annat siihen luvan Opintopolussa. Valitse Siirry Opintopolkuun ja anna lupa tietojen tuontiin. Tämän jälkeen palaat automaattisesti takaisin palveluun. Palattuasi voit valita mitkä koulutukset haluat tuoda.",
       "import-button": "Siirry Opintopolkuun",
@@ -139,10 +142,11 @@
         "title": "Peruuta tuonti"
       },
       "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
-      "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
       "data-loading": "Ladataan tietoja...",
+      "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
       "description": "Tässä näkymässä voit valita, mitkä koulutukset haluat tuoda. Tuonnin jälkeen voit muokata ja täydentää tietoja Koulutukseni-näkymässä.",
       "error-title": "Tietojen tuonti epäonnistui",
+      "table-header-checkbox": "Tuo valitut",
       "title": "Koulutushistoriasi",
       "wrong-person": "Kirjaudu ulos ja takaisin sisään ja yritä uudelleen."
     }
@@ -232,9 +236,9 @@
   },
   "i-allow": "Sallin",
   "i-disallow": "En salli",
-  "in-this-section": "Tässä osiossa",
   "interests": "Kartoita kiinnostuksesi",
   "interests-of-your-choice": "Valitut kiinnostuksen kohteet",
+  "in-this-section": "Tässä osiossa",
   "introduction": {
     "step-1": {
       "item-1": "Näe kaikki osaamiseesi ja kiinnostuksiisi liittyvät tiedot kootusti yhdestä paikasta",
@@ -394,7 +398,12 @@
       "tool-title": "Löydä mahdollisuuksia"
     }
   },
+  "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
   "next": "Seuraava",
+  "n-job-opportunities": "Työmahdollisuudet {{count}} / {{total}}",
+  "n-months-short": "{{count}} kk",
+  "n-years_one": "{{count}} vuosi",
+  "n-years_other": "{{count}} vuotta",
   "on-this-page": "Tällä sivulla",
   "opportunity-tooltip": {
     "education": {
@@ -729,13 +738,13 @@
       "goal-name": "Tavoitteen nimi",
       "modify-goal": "Muokkaa tavoitetta",
       "my-plan-towards-goal": "Suunnitelmavaihtoehdot",
-      "n-plans_one": "1 suunnitelma",
-      "n-plans_other": "{{count}} suunnitelmaa",
-      "n-plans_zero": "Ei valittuja suunnitelmia",
       "no-chosen-competences": "Ei valittuja osaamisia",
       "no-favorites-selected": "Lisää ensin suosikkeja, joista voit luoda tavoitteita.",
       "no-filtered-results": "Ei koulutusmahdollisuuksia. Muokkaa säätimiä nähdäksesi vaihtoehtoja.",
       "no-goals-created": "Et ole vielä lisännyt tavoitteita.",
+      "n-plans_one": "1 suunnitelma",
+      "n-plans_other": "{{count}} suunnitelmaa",
+      "n-plans_zero": "Ei valittuja suunnitelmia",
       "own-competences": "Omat taidot",
       "plan": "Suunnitelma",
       "remove-competence-description": "Poista osaaminen x-merkistä",
@@ -847,10 +856,10 @@
     "global-placeholder": "Hae mahdollisuuksia",
     "label": "Hae mahdollisuuksia",
     "no-results": "Hakusanalla ei löytynyt tuloksia.",
-    "results-found-short_one": "1 tulos",
-    "results-found-short_other": "{{count}} tulosta",
     "results-found_one": "Näytetään 1 tulos",
     "results-found_other": "Näytetään {{count}} tulosta",
+    "results-found-short_one": "1 tulos",
+    "results-found-short_other": "{{count}} tulosta",
     "search": "Hae",
     "search-placeholder": "Kirjoita hakusana",
     "title": "Hae mahdollisuuksia"
