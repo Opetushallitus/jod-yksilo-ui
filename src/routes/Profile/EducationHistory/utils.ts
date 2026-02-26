@@ -81,16 +81,28 @@ const mapKoulutusToRow = (
       kuvaus: Record<string, string>;
     }
   >,
-): ExperienceTableRowData => ({
-  key: koulutus.id ?? crypto.randomUUID(),
-  nimi: koulutus.nimi,
-  alkuPvm: koulutus.alkuPvm ? new Date(koulutus.alkuPvm) : undefined,
-  loppuPvm: koulutus.loppuPvm ? new Date(koulutus.loppuPvm) : undefined,
-  osaamiset: koulutus.osaamiset.map((id) => ({
-    ...(osaamisetMap ? osaamisetMap[id] : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
-    sourceType: 'koulutus',
-  })),
-  checked: true,
-  osaamisetOdottaaTunnistusta: koulutus.osaamisetOdottaaTunnistusta,
-  osaamisetTunnistusEpaonnistui: koulutus.osaamisetTunnistusEpaonnistui,
-});
+): ExperienceTableRowData => {
+  const data: ExperienceTableRowData = {
+    key: koulutus.id ?? crypto.randomUUID(),
+    nimi: koulutus.nimi,
+    alkuPvm: koulutus.alkuPvm ? new Date(koulutus.alkuPvm) : undefined,
+    loppuPvm: koulutus.loppuPvm ? new Date(koulutus.loppuPvm) : undefined,
+    osaamiset: koulutus.osaamiset.map((id) => ({
+      ...(osaamisetMap
+        ? osaamisetMap[id]
+        : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
+      sourceType: 'koulutus',
+    })),
+    checked: true,
+  };
+
+  if (typeof koulutus.osaamisetOdottaaTunnistusta === 'boolean') {
+    data.osaamisetOdottaaTunnistusta = koulutus.osaamisetOdottaaTunnistusta;
+  }
+
+  if (typeof koulutus.osaamisetTunnistusEpaonnistui === 'boolean') {
+    data.osaamisetTunnistusEpaonnistui = koulutus.osaamisetTunnistusEpaonnistui;
+  }
+
+  return data;
+};

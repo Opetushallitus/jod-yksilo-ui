@@ -40,6 +40,7 @@ export const TooltipWrapper = ({
         {tooltipContent}
       </TooltipContent>
       <TooltipTrigger
+        asChild
         data-testid="tooltip-trigger"
         className="select-none"
         tabIndex={0}

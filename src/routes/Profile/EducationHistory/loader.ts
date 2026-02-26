@@ -1,8 +1,8 @@
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
-
 import { LoaderFunction } from 'react-router';
+import type { Koulutuskokonaisuus } from './utils';
 
 export default (async ({ request }) => {
   const { data = [], error } = await client.GET('/api/profiili/koulutuskokonaisuudet', {
@@ -53,5 +53,15 @@ export default (async ({ request }) => {
     return acc;
   }, {});
 
-  return { koulutuskokonaisuudet, osaamisetMap };
+  return { koulutuskokonaisuudet, osaamisetMap } as {
+    koulutuskokonaisuudet: Koulutuskokonaisuus[];
+    osaamisetMap: Record<
+      string,
+      {
+        id: string;
+        nimi: Record<string, string>;
+        kuvaus: Record<string, string>;
+      }
+    >;
+  };
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

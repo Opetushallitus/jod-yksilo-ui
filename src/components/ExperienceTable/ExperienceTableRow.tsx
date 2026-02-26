@@ -2,7 +2,7 @@ import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useModal } from '@/hooks/useModal';
 import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
 import { Checkbox, Spinner, Tag, useMediaQueries } from '@jod/design-system';
-import { JodCaretDown, JodCaretUp, JodEdit, JodError } from '@jod/design-system/icons';
+import { JodCaretDown, JodCaretUp, JodEdit, JodError, JodErrorTriangle } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -44,6 +44,10 @@ interface ExperienceTableRowProps {
   isPrinting?: boolean;
   indeterminate?: boolean;
   onCheckboxChange?: (checked: boolean) => void;
+  /** Imported koulutukset whose osaamiset needs to be checked by the user */
+  koulutuksetThatNeedUserVerification?: string[];
+  /** Function to mark the osaamiset of a specific koulutus as verified */
+  verifyKoulutusOsaamiset?: (koulutusId: string) => void;
 }
 
 const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData }) => {
@@ -115,6 +119,8 @@ export const ExperienceTableRow = ({
   checked,
   indeterminate,
   onCheckboxChange,
+  koulutuksetThatNeedUserVerification,
+  verifyKoulutusOsaamiset,
 }: ExperienceTableRowProps) => {
   const {
     t,
@@ -124,12 +130,13 @@ export const ExperienceTableRow = ({
   const [isOpen, setIsOpen] = React.useState(isPrinting ?? false);
   const tagsVisibleState = isPrinting || isOpen;
   const osaamisetCountTotal = row.osaamiset.length;
+  const osaamisetNeedsToBeVerified = koulutuksetThatNeedUserVerification?.includes(row.key);
 
   const renderCompetencesDetectFailure = () => {
     return (
       <div className="flex justify-start items-center">
         <TooltipWrapper tooltipContent={t('competences-identify-failed')} tooltipPlacement="top">
-          <JodError className="text-alert" />
+          <JodErrorTriangle className="text-alert" />
         </TooltipWrapper>
       </div>
     );
@@ -213,7 +220,7 @@ export const ExperienceTableRow = ({
             setIsOpen((prev) => !prev); // Ensure state rerenders
           }
         }}
-        ariaLabel={t('choose') + ' ' + row.nimi[language]}
+        ariaLabel={`${t('choose')} ${row.nimi[language]}`}
         testId={`experience-row-checkbox-${row.key}`}
       />
     );
@@ -226,16 +233,23 @@ export const ExperienceTableRow = ({
     if (osaamisetTunnistusEpaonnistui && row.osaamiset.length === 0) {
       return renderCompetencesDetectFailure();
     }
+
     if (row.osaamiset.length > 0) {
       return (
         <button
           type="button"
           aria-expanded={tagsVisibleState}
-          onClick={() => setIsOpen(!isOpen)}
-          className={`cursor-pointer flex gap-x-2 items-center justify-self-end text-secondary-gray ${sm ? 'text-nowrap sm:pr-2' : 'pr-7'}`}
+          onClick={() => {
+            if (osaamisetNeedsToBeVerified) {
+              verifyKoulutusOsaamiset?.(row.key);
+            }
+            setIsOpen(!isOpen);
+          }}
+          className={`cursor-pointer flex gap-x-2 items-center justify-self-end text-secondary-gray ${sm ? 'text-nowrap sm:pr-2' : 'pr-7'} w-full`}
           data-testid={`experience-row-competences-toggle-${row.key}`}
         >
-          {osaamisetCountTotal}
+          {osaamisetNeedsToBeVerified && <JodError className="text-secondary-3" />}
+          {<span className="ml-auto">{osaamisetCountTotal}</span>}
           {tagsVisibleState ? <JodCaretUp aria-hidden="true" /> : <JodCaretDown aria-hidden="true" />}
         </button>
       );

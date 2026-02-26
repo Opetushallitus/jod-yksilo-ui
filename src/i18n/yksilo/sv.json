@@ -65,6 +65,7 @@
     "title": "Kompetensprofil"
   },
   "date-or-continues-placeholder": "dd.mm.åååå",
+  "date-placeholder": "dd.mm.åååå",
   "datepicker": {
     "actions": {
       "close": "Stäng kalendern",
@@ -93,7 +94,6 @@
       "view": "Växla till dagsvy"
     }
   },
-  "date-placeholder": "dd.mm.åååå",
   "description": "Beskrivning",
   "do-filter": "Filtrera",
   "duration": "Längd",
@@ -103,14 +103,15 @@
     "add-studies-to-education": "Lägg till studier i utbildningen",
     "add-studies-to-this-education": "Lägg till studier i den här utbildningen",
     "add-studies-to-this-education-button": "Lägg studier",
+    "check-identified-osaamiset": "Kontrollera automatiskt identifierade kompetenser",
     "confirm-delete-degree": "Är du säker på att du vill ta bort examen \"{{name}}\"? Om utbildningen efter raderingen inte längre innehåller några examina, raderas även utbildningen.",
     "confirm-delete-education-history": "Är du säker på att du vill ta bort utbildningen \"{{name}}\"?",
     "delete-degree": "Ta bort examen",
     "delete-education-history": "Ta bort utbildning",
     "edit-degree-or-education": "Redigera examen eller utbildning",
     "edit-education": "Redigera utbildning",
-    "educational-institution-or-education-provider": "Läroanstalt eller utbildningsanordnare",
     "education-provider-or-education": "Utbildningsanordnare/utbildning",
+    "educational-institution-or-education-provider": "Läroanstalt eller utbildningsanordnare",
     "identify-competences": "Identifiera kompetenser",
     "import-education-history": "Importera min utbildningshistorik",
     "name-of-degree-or-education": "Namn på examen eller utbildning",
@@ -120,15 +121,17 @@
     "result-modal": {
       "failure": "Det gick inte att lägga till utbildningshistorik.",
       "give-permission-failed": "Det gick inte att ge tillstånd. Försök på nytt senare.",
-      "success": "Utbildningshistoriken lades till.",
-      "success-osaamiset-info": "Härnäst identifierar vi med hjälp av artificiell intelligens förslag på kompetens som utbildningarna producerar. Förslagen kan innehålla fel, så vi rekommenderar att du kontrollerar dem. Du kan ta bort och lägga till kompetenser genom att redigera utbildningsinformationen. Mer information om identifiering av kompetenser hittar du bakom länken nedan.\n",
-      "success-osaamiset-link-about-ai": "Information om användningen av artificiell intelligens"
+      "identify": "Identifiera",
+      "no-identify": "Identifieras inte",
+      "success-osaamiset-info": "Din utbildningshistorik har lagts till framgångsrikt.<br><br><strong>Vill du att vi automatiskt identifierar kompetensförslag från dina utbildningar med hjälp av artificiell intelligens?</strong><br><br>Förslagen kan innehålla fel, så vi rekommenderar att du kontrollerar dem. Du kan redigera kompetenser senare genom att lägga till eller ta bort dem i utbildningsinformationen.",
+      "title": "Ska dina kompetenser identifieras?<AiIcon></AiIcon>"
     },
     "start-modal": {
-      "description": "Du kan importera din utbildningshistorik till din kompetensprofil när du har gett tillstånd i Studieinfo. Klicka på \"Öppna Studieinfo\" för att ge tillstånd att importera uppgifter. När du har gett ditt tillstånd återgår du automatiskt till tjänsten. När du har återgått till tjänsten kan du välja vilka utbildningar du vill importera.\n",
+      "description-1": "I delen Mina studieprestationer i Min Studieinfo hittar du de studier och examina du har slutfört och som har sparats i de nationella studie-, utbildnings- och examensregistren. Du kan överföra dessa uppgifter till din kompetensprofil och kartlägga den kompetens som de ger. Läs mer om dina studieprestationer i Studieinfo.<br><CustomLink>Läs mer om dina studieprestationer i Studieinfo<Icon></Icon>.</CustomLink>",
+      "description-2": "Du kan importera dina studieprestationer till avsnittet Utbildningshistorik i din kompetensprofil genom att ge tillstånd till detta i Studieinfo. Välj Gå till Studieinfo och ge tillstånd att hämta uppgifterna. Därefter återvänder du automatiskt till tjänsten. När du har återvänt kan du välja vilka utbildningar du vill importera.",
       "import-button": "Öppna Studieinfo",
       "import-redirect-fail": "Det gick inte att öppna Studieinfo. Vänligen försök igen.",
-      "title": "Importera din utbildningshistorik från Koski-tjänsten"
+      "title": "Importera din utbildningshistorik"
     },
     "summary-modal": {
       "cancel-modal": {
@@ -136,11 +139,11 @@
         "title": "Avbryt import"
       },
       "data-load-failed": "Laddning av uppgifter misslyckades. Försök på nytt senare.",
-      "data-loading": "Hämtar information från Studieinfo...",
       "data-load-no-data": "Utbildningsinformation hittades inte eller så har du inte rätt att granska informationen.",
-      "description": "Du kan redigera utbildningarna efter att du har importerat dem till Kompetensstigen under utbildningar i din kompetensprofil.\n",
-      "table-header-checkbox": "Importera valda",
-      "title": "Sammanfattning",
+      "data-loading": "Hämtar information...",
+      "description": "I den här vyn kan du välja vilka utbildningar du vill importera. Efter importen kan du redigera och komplettera informationen i vyn Mina utbildningar.",
+      "error-title": "Misslyckades med att importera data",
+      "title": "Din utbildningshistorik",
       "wrong-person": "Logga ut och logga sedan in på nytt och försök igen."
     }
   },
@@ -230,9 +233,9 @@
   },
   "i-allow": "Jag tillåter",
   "i-disallow": "Jag tillåter inte",
+  "in-this-section": "I den här delen",
   "interests": "Kartlägg dina intressen",
   "interests-of-your-choice": "Valda intressen",
-  "in-this-section": "I den här delen",
   "introduction": {
     "step-1": {
       "item-1": "Se all information om ditt kunnande och dina intressen på en och samma plats",
@@ -392,12 +395,7 @@
       "tool-title": "Hitta möjligheter"
     }
   },
-  "n-education-opportunities": "{{count}} utbildningsmöjligheter",
   "next": "Nästa",
-  "n-job-opportunities": "{{count}} karriärmöjligheter",
-  "n-months-short": "{{count}} mån",
-  "n-years_one": "{{count}} år",
-  "n-years_other": "{{count}} år",
   "on-this-page": "På denna sida",
   "opportunity-tooltip": {
     "education": {
@@ -608,7 +606,7 @@
       "title": "Mina kunskaper"
     },
     "education-history": {
-      "description": "Nedan hittar du din utbildningshistorik. Du kan själv lägga till din utbildningshistorik och kartlägga dina relaterade kunskaper. Du kan också importera din utbildningshistorik från studieprestationerna i Min Studieinfo.\n",
+      "description": "Nedan hittar du din utbildningshistorik. Du kan själv lägga till uppgifter i din utbildningshistorik och kartlägga den kompetens som är kopplad till dem. Du kan också importera dina egna studieprestationer från de nationella studie-, utbildnings- och examensregistren som en del av din utbildningshistorik (Studieinfo)",
       "empty": "Du har ännu inte lagt till några utbildningar.",
       "modals": {
         "competences-description": "Berätta vad du lärde dig under utbildningen. Du kan också kopiera utbildningens innehållsbeskrivningar från någon annanstans, om de finns till exempel i studiehandboken, i beskrivningen på läroanstaltens webbplats eller i sociala medier.",
@@ -638,8 +636,8 @@
       "you-have-saved-opportunities": "Du har sparat {{jobOpportunitiesCount}} karriärmöjligheter och {{educationOpportunitiesCount}} utbildningsmöjligheter."
     },
     "free-form-input": {
-      "label": "Fritt formulerad beskrivning",
-      "help": "Texten sparas automatiskt."
+      "help": "Texten sparas automatiskt.",
+      "label": "Fritt formulerad beskrivning"
     },
     "free-time-activities": {
       "description": "Nedan hittar du din fritidsverksamhet. Fritidsverksamheten kan omfatta hobbyer, förtroendeuppdrag och olika behörigheter. Du kan själv lägga till dina fritidsverksamheter och kartlägga din relaterade kompetens.\n",
@@ -661,8 +659,8 @@
       "edit-interests": "Redigera intressen",
       "empty": "Du har ännu inte lagt till några intressen.",
       "freeform": {
-        "header": "Fritt formulerad beskrivning av mina intressen",
         "description": "Du kan skriva och beskriva dina intressen med egna ord. Texten du skriver sparas automatiskt. Om du använder tjänsten på svenska, skriv på svenska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.",
+        "header": "Fritt formulerad beskrivning av mina intressen",
         "placeholder": "Beskriv med egna ord vad annat som intresserar dig"
       },
       "free-form-description-of-my-interests": "Fritt formulerad beskrivning av mina intressen",
@@ -732,13 +730,13 @@
       "goal-name": "Målnamn",
       "modify-goal": "Redigera mål",
       "my-plan-towards-goal": "Planalternativ",
+      "n-plans_one": "1 plan",
+      "n-plans_other": "{{count}} planer",
+      "n-plans_zero": "Inga valda planer",
       "no-chosen-competences": "Inga valda kompetenser",
       "no-favorites-selected": "Lägg först till favoriter som du kan skapa mål från.",
       "no-filtered-results": "Inga utbildningsmöjligheter. Justera filtren för att se alternativ.",
       "no-goals-created": "Du har inte lagt till några mål än.",
-      "n-plans_one": "1 plan",
-      "n-plans_other": "{{count}} planer",
-      "n-plans_zero": "Inga valda planer",
       "own-competences": "Egna kompetenser",
       "plan": "Plan",
       "remove-competence-description": "Ta bort kompetens från x-ikonen",
@@ -850,10 +848,10 @@
     "global-placeholder": "Sök möjligheter",
     "label": "Sök möjligheter",
     "no-results": "Inga resultat hittades för sökordet.",
-    "results-found_one": "Visar 1 resultat",
-    "results-found_other": "Visar {{count}} resultat",
     "results-found-short_one": "1 resultat",
     "results-found-short_other": "{{count}} resultat",
+    "results-found_one": "Visar 1 resultat",
+    "results-found_other": "Visar {{count}} resultat",
     "search": "Sök",
     "search-placeholder": "Skriv ett sökord",
     "title": "Sök möjligheter"
@@ -1144,9 +1142,9 @@
       "KIINNOSTUS": "Mina intressen",
       "KOULUTUS": "Min utbildning",
       "MUU_OSAAMINEN": "Mina övriga kunskaper",
+      "OSAAMINEN": "Mina kunskaper",
       "PATEVYYS": "Min fritidsverksamhet",
-      "TOIMENKUVA": "Min arbetsplats",
-      "OSAAMINEN": "Mina kunskaper"
+      "TOIMENKUVA": "Min arbetsplats"
     }
   },
   "update": "Uppdatera",
