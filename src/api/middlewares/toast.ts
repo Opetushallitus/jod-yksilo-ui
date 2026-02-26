@@ -19,6 +19,8 @@ const ignoredOperations: Partial<Record<keyof paths, Method[]>> = {
   '/api/ehdotus/mahdollisuudet/polku': ['POST'],
   '/api/profiili/tavoitteet/{id}/suunnitelmat/{suunnitelmaId}': ['DELETE', 'PUT'],
   '/api/profiili/tavoitteet/{id}/suunnitelmat': ['POST'],
+  '/api/profiili/tavoitteet': ['POST'],
+  '/api/profiili/tavoitteet/{id}': ['PUT', 'DELETE'],
   '/api/integraatiot/tmt/vienti': ['POST'],
   '/api/integraatiot/tmt/haku': ['POST'],
 };

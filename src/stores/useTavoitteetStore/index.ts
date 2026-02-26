@@ -1,8 +1,10 @@
 import { client } from '@/api/client';
 import { getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import type { components } from '@/api/schema';
+import i18n from '@/i18n/config';
 import type { TypedMahdollisuus } from '@/routes/types';
 import { isDefined, sortByProperty } from '@/utils';
+import toast from 'react-hot-toast/headless';
 import { create } from 'zustand';
 
 export type Tavoite = components['schemas']['TavoiteDto'];
@@ -78,6 +80,9 @@ export const useTavoitteetStore = create<TavoitteetState>()((set, get) => ({
         set({
           tavoitteet: get().tavoitteet.filter((pm) => pm.id !== id),
         });
+        toast.success(i18n.t('profile.my-goals.delete-goal-success'));
+      } else {
+        toast.error(i18n.t('profile.my-goals.delete-goal-failed'));
       }
     } finally {
       set({ isLoading: false });
