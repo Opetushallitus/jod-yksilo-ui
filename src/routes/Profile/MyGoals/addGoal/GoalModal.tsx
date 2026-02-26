@@ -21,6 +21,7 @@ import {
 } from '@jod/design-system';
 import { JodFlag, JodFlagFilled } from '@jod/design-system/icons';
 import React from 'react';
+import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
@@ -144,10 +145,17 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
       kuvaus: stringToLocalizedText(goalDescription),
     };
 
-    const response = await client.POST('/api/profiili/tavoitteet', { body: newTavoite });
+    const { data, error } = await client.POST('/api/profiili/tavoitteet', { body: newTavoite });
+
+    if (error) {
+      toast.error(t('profile.my-goals.add-goal-failed'));
+    } else {
+      await upsertTavoite({ ...newTavoite, id: data });
+      await refreshTavoitteet();
+      toast.success(t('profile.my-goals.add-goal-success'));
+    }
+
     closeActiveModal();
-    await upsertTavoite({ ...newTavoite, id: response.data });
-    await refreshTavoitteet();
     setIsSubmitting(false);
   };
 
@@ -165,7 +173,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
       kuvaus: stringToLocalizedText(goalDescription),
     } as Tavoite;
 
-    await client.PUT(`/api/profiili/tavoitteet/{id}`, {
+    const { error } = await client.PUT(`/api/profiili/tavoitteet/{id}`, {
       params: {
         path: {
           id: tavoite.id,
@@ -173,9 +181,15 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
       },
       body: newTavoite,
     });
+
+    if (error) {
+      toast.error(t('profile.my-goals.edit-goal-failed'));
+    } else {
+      await upsertTavoite({ ...newTavoite, id: tavoite.id });
+      await refreshTavoitteet();
+      toast.success(t('profile.my-goals.edit-goal-success'));
+    }
     closeActiveModal();
-    await upsertTavoite({ ...newTavoite, id: tavoite.id });
-    await refreshTavoitteet();
     setIsSubmitting(false);
   };
   const goalsId = React.useId();
@@ -363,7 +377,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                 data-testid="add-goal-modal-next"
               />
             )}
-            {(step === steps || isUpdateMode) && (
+            {step === steps && (
               <Button
                 label={t('save')}
                 onClick={async () => {
