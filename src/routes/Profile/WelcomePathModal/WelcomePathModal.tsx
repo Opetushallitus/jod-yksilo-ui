@@ -3,9 +3,8 @@ import { AnchorLink } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import type { YksiloData } from '@/hooks/useYksiloData';
-import { LANGUAGE_VALUES, type LanguageValue } from '@/i18n/config';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AiInfoButton, Button, Combobox, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { AiInfoButton, Button, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import {
@@ -23,11 +22,6 @@ import z from 'zod';
 import { PersonalDetailsInfoBlock, ToggleAllow } from '../components';
 import { GENDER_VALUES } from '../utils';
 
-interface LanguageOptions {
-  label: string;
-  value: LanguageValue;
-}
-
 const Separator = () => <hr aria-hidden className="my-4 h-1 bg-bg-gray-2 border-0" />;
 
 const StepWelcome = () => {
@@ -35,7 +29,6 @@ const StepWelcome = () => {
 
   return (
     <>
-      <ModalHeader text={t('introduction.step-1.title')} className="text-heading-1-mobile sm:text-heading-1 mb-5" />
       <p className="text-body-lg-mobile sm:text-body-lg font-medium mb-7 sm:mb-8">{t('introduction.step-1.text-1')}</p>
       <ul className="text-body-md-mobile sm:text-body-md list-disc list-inside mb-7 font-arial">
         <li>{t('introduction.step-1.item-1')}</li>
@@ -54,11 +47,10 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
     i18n: { language },
   } = useTranslation();
   const { sm } = useMediaQueries();
-  const { register, control, trigger } = useFormContext<YksiloData>();
+  const { register, control } = useFormContext<YksiloData>();
 
   return (
     <>
-      <ModalHeader text={t('introduction.step-2.title')} className="text-heading-1-mobile sm:text-heading-1 mb-5" />
       <p className="text-body-lg-mobile sm:text-body-lg font-medium mb-2">{t('introduction.step-2.text-1')}</p>
       <p className="text-body-md-mobile sm:text-body-md mb-7 font-arial">{t('introduction.step-2.text-2')}</p>
       <div>
@@ -106,46 +98,6 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
         />
         <Separator />
         <PersonalDetailsInfoBlock
-          label={t('personal-details.mother-tongue')}
-          stack={!sm}
-          interactiveComponent={
-            <Controller
-              control={control}
-              render={({ field: { onChange, value }, field }) => (
-                <Combobox<LanguageValue, LanguageOptions>
-                  className="w-full"
-                  {...field}
-                  label={t('personal-details.choose-mother-tongue')}
-                  hideLabel
-                  selected={value}
-                  defaultValue={data.aidinkieli}
-                  options={[
-                    {
-                      label: 'Suomi',
-                      value: 'fi',
-                    },
-                    {
-                      label: 'Svenska',
-                      value: 'sv',
-                    },
-                    {
-                      label: 'English',
-                      value: 'en',
-                    },
-                  ]}
-                  onChange={(val) => {
-                    onChange(val);
-                    trigger('aidinkieli');
-                  }}
-                  placeholder={t('personal-details.choose-mother-tongue')}
-                />
-              )}
-              name="aidinkieli"
-            />
-          }
-        />
-        <Separator />
-        <PersonalDetailsInfoBlock
           label={t('personal-details.email')}
           stack={!sm}
           interactiveComponent={
@@ -184,7 +136,6 @@ const StepAi = () => {
 
   return (
     <>
-      <ModalHeader text={t('introduction.step-3.title')} className="text-heading-1-mobile sm:text-heading-1 mb-5" />
       <p className="text-body-lg-mobile sm:text-body-lg font-medium mb-5 sm:mb-8">{t('introduction.step-3.text-1')}</p>
       <p className="text-body-md-mobile sm:text-body-md">{t('introduction.step-3.item-text')}</p>
       <ul className="text-body-md-mobile sm:text-body-md list-disc list-inside ml-5 mb-7">
@@ -236,7 +187,6 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
         allowKotikunta: z.boolean(),
         kotikunta: z.string().optional(),
         kotikuntaNimi: z.string(),
-        aidinkieli: z.enum(LANGUAGE_VALUES),
         email: z.email().optional(),
         allowSukupuoli: z.boolean(),
         sukupuoli: z.enum(GENDER_VALUES).or(z.undefined()),
@@ -251,7 +201,6 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
         allowKotikunta: true,
         kotikunta: yksiloData.kotikunta, // koodi
         kotikuntaNimi: yksiloData.kotikuntaNimi,
-        aidinkieli: yksiloData.aidinkieli,
         email: yksiloData.email,
         allowSukupuoli: true,
         sukupuoli: yksiloData.sukupuoli,
@@ -271,7 +220,6 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
         tervetuloapolku: true,
         syntymavuosi: data.allowSyntymavuosi ? data.syntymavuosi : undefined,
         kotikunta: data.allowKotikunta ? data.kotikunta : undefined,
-        aidinkieli: data.aidinkieli,
         sukupuoli: data.allowSukupuoli ? data.sukupuoli : undefined,
         email: data.email,
       },
@@ -322,6 +270,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
       open={showWelcomePathModal}
       fullWidthContent
       className="sm:h-full!"
+      topSlot={<ModalHeader text={headerText} className="text-heading-1-mobile sm:text-heading-1 mb-5" />}
       content={
         <FormProvider {...methods}>
           <Form

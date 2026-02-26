@@ -16,7 +16,6 @@ export interface YksiloData {
   kotikunta?: string; // koodi
   kotikuntaNimi: string;
   allowKotikunta: boolean;
-  aidinkieli: LanguageValue;
   email?: string;
 }
 
@@ -67,7 +66,6 @@ export const useYksiloData = () => {
       kotikunta: apiData?.kotikunta,
       kotikuntaNimi: kotikuntaNimi || '',
       allowKotikunta: true,
-      aidinkieli: language,
       email: apiData?.email,
     } as YksiloData,
     isLoading,
