@@ -21,7 +21,6 @@ import {
   useFormState,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
 interface AddOrEditKoulutusModalProps {
@@ -148,7 +147,6 @@ const AddOrEditKoulutusModal = ({
   koulutusId,
 }: AddOrEditKoulutusModalProps) => {
   const { t } = useTranslation();
-  const revalidator = useRevalidator();
   const { sm } = useMediaQueries();
 
   if (!id) {
@@ -288,7 +286,6 @@ const AddOrEditKoulutusModal = ({
           },
         });
       }
-      await revalidator.revalidate();
       onClose();
     } finally {
       setIsSubmitting(false);
@@ -302,7 +299,6 @@ const AddOrEditKoulutusModal = ({
     await client.DELETE(`${KOULUTUKSET_API_PATH}/{koulutusId}`, {
       params: { path: { id, koulutusId: koulutusId! } },
     });
-    await revalidator.revalidate();
     onClose();
   };
 

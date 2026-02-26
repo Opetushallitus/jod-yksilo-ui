@@ -293,8 +293,7 @@ const Root = () => {
         />
       </header>
 
-      {/* eslint-disable-next-line react-hooks/refs */}
-      <LogoutFormContext.Provider value={logoutForm.current}>
+      <LogoutFormContext.Provider value={logoutForm}>
         <NavMenu
           open={navMenuOpen}
           onClose={() => {

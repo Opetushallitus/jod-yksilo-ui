@@ -1,24 +1,37 @@
 import { client } from '@/api/client';
 import { ErrorResponse } from '@/api/errorResponse';
 import type { components } from '@/api/schema';
-import { ExperienceTable, type ExperienceTableRowData } from '@/components';
+import { AiInfo, type ExperienceTableRowData } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
-import { getEducationHistoryTableRows, type Koulutus } from '@/routes/Profile/EducationHistory/utils.ts';
-import { Button, Modal, Spinner } from '@jod/design-system';
+import {
+  getEducationHistoryTableRows,
+  type Koulutus,
+  type Koulutuskokonaisuus,
+} from '@/routes/Profile/EducationHistory/utils';
+import { Button, Modal, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
+import { EducationImportTable } from '../EducationImportTable';
 
 interface ImportKoulutusSummaryModalProps {
   isOpen: boolean;
   onSuccessful: () => void;
-  onFailure: () => void;
+  openImportStartModal: () => void;
+  logout: () => void;
 }
 
-const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportKoulutusSummaryModalProps) => {
+const ImportKoulutusSummaryModal = ({
+  isOpen,
+  onSuccessful,
+  openImportStartModal,
+  logout,
+}: ImportKoulutusSummaryModalProps) => {
   const { t } = useTranslation();
   const { showDialog, closeActiveModal } = useModal();
+  const { addTemporaryNote } = useNoteStack();
+  const { sm } = useMediaQueries();
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
   const [isSaving, setIsSaving] = React.useState<boolean>(false);
   const [koskiData, setKoskiData] = React.useState<components['schemas']['KoulutusDto'][] | undefined>(undefined);
@@ -41,7 +54,7 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
     setKoskiData(undefined);
     setError(undefined);
     try {
-      const { data, error } = await client.GET('/api/integraatiot/koski/koulutukset', {});
+      const { data, error } = await client.GET('/api/integraatiot/koski/koulutukset');
 
       if (error) {
         handleGetKoulutusDataFailure(error);
@@ -65,7 +78,9 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
   }, [isOpen, fetchAndSetEducationHistories]);
 
   const convertKoskiDataToExperienceTableRows = (koskiData: components['schemas']['KoulutusDto'][] | undefined) => {
-    const koulutusKokonaisuudet = new Map<string, Koulutus[]>();
+    // Group koulutukset by their nimi to form koulutuskokonaisuudet
+    const groupedKoulutukset = new Map<string, Koulutus[]>();
+
     koskiData?.forEach((k) => {
       const key = JSON.stringify(k.nimi);
       const koulutus = {
@@ -76,13 +91,14 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
         osaamiset: [],
         checked: true,
       };
-      if (koulutusKokonaisuudet.has(key)) {
-        koulutusKokonaisuudet.get(key)?.push(koulutus);
+      if (groupedKoulutukset.has(key)) {
+        groupedKoulutukset.get(key)?.push(koulutus);
       } else {
-        koulutusKokonaisuudet.set(key, [koulutus]);
+        groupedKoulutukset.set(key, [koulutus]);
       }
     });
-    const koulutuskokonaisuudet = Array.from(koulutusKokonaisuudet)
+
+    const koulutuskokonaisuudet: Koulutuskokonaisuus[] = Array.from(groupedKoulutukset)
       .map((entry) => ({ key: entry[0], koulutukset: entry[1] }))
       .map((o, i) => ({
         nimi: JSON.parse(o.key),
@@ -125,13 +141,18 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
     return matchEducation.checked;
   };
 
-  const createKoulutusKokonaisuudet = () => {
+  const createKoulutusKokonaisuudet = (skipOsaamistenTunnistus = false) => {
     const koulutusKokonaisuudet = new Map<string, Koulutus[]>();
 
     koskiData?.forEach((data) => {
       const key = JSON.stringify(data.nimi);
       if (!isChecked(key, data)) {
         return;
+      }
+
+      if (skipOsaamistenTunnistus) {
+        data.osaamisetOdottaaTunnistusta = undefined;
+        data.osaamisetTunnistusEpaonnistui = undefined;
       }
 
       const koulutus = createKoulutus(data);
@@ -146,13 +167,13 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
     return koulutusKokonaisuudet;
   };
 
-  const saveSelectedKoulutus = async () => {
+  const saveSelectedKoulutus = async (skipOsaamistenTunnistus = false) => {
     if (isSaving) {
       return;
     }
     setIsSaving(true);
     try {
-      const koulutusKokonaisuudet = createKoulutusKokonaisuudet();
+      const koulutusKokonaisuudet = createKoulutusKokonaisuudet(skipOsaamistenTunnistus);
       const body: {
         nimi: Record<string, string>;
         koulutukset: Koulutus[];
@@ -163,69 +184,120 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
           koulutukset,
         });
       }
-      await client.POST('/api/profiili/koulutuskokonaisuudet/tuonti', {
-        body,
-      });
+
+      let apiCall;
+
+      if (skipOsaamistenTunnistus) {
+        apiCall = Promise.all(
+          body.map((koulutus) =>
+            client.POST('/api/profiili/koulutuskokonaisuudet', {
+              body: koulutus,
+            }),
+          ),
+        );
+      } else {
+        apiCall = client.POST('/api/profiili/koulutuskokonaisuudet/tuonti', {
+          body,
+        });
+      }
+
+      await apiCall;
       closeActiveModal();
       onSuccessful();
     } catch (_) {
       closeActiveModal();
-      onFailure();
+      addTemporaryNote(() => ({
+        title: t('education-history-import.summary-modal.error-title'),
+        description: t('education-history-import.result-modal.failure'),
+        variant: 'warning',
+        isCollapsed: false,
+      }));
     }
     setIsSaving(false);
   };
+
+  React.useEffect(() => {
+    if (error) {
+      const { errorCode } = error as unknown as ErrorResponse;
+
+      const getErrorMessage = () => {
+        if (errorCode === 'DATA_NOT_FOUND') {
+          return t('education-history-import.summary-modal.data-load-no-data');
+        }
+        if (errorCode === 'WRONG_PERSON') {
+          return t('education-history-import.summary-modal.wrong-person');
+        }
+        return t('education-history-import.summary-modal.data-load-failed');
+      };
+
+      const getReadMoreComponent = () => {
+        if (errorCode === 'WRONG_PERSON') {
+          return (
+            <Button
+              variant="white"
+              size="sm"
+              label={t('common:logout')}
+              onClick={() => {
+                logout();
+              }}
+            />
+          );
+        } else if (errorCode !== 'DATA_NOT_FOUND') {
+          return (
+            <Button
+              variant="white"
+              size="sm"
+              label={t('try-again')}
+              onClick={() => {
+                openImportStartModal();
+              }}
+            />
+          );
+        }
+
+        return null;
+      };
+
+      closeActiveModal();
+      addTemporaryNote(() => ({
+        title: t('education-history-import.summary-modal.error-title'),
+        description: getErrorMessage(),
+        variant: 'warning',
+        isCollapsed: false,
+        readMoreComponent: getReadMoreComponent(),
+      }));
+    }
+  }, [error, closeActiveModal, addTemporaryNote, t, openImportStartModal, logout]);
 
   if (!isOpen) {
     return null;
   }
 
-  const renderErrorMessage = () => {
-    return (
-      <>
-        {(() => {
-          const errorResponse = error as unknown as ErrorResponse;
-          if (errorResponse) {
-            if (errorResponse.errorCode === 'DATA_NOT_FOUND') {
-              return <p>{t('education-history-import.summary-modal.data-load-no-data')}</p>;
-            }
-            if (errorResponse.errorCode === 'WRONG_PERSON') {
-              return <p>{t('education-history-import.summary-modal.wrong-person')}</p>;
-            }
-            return <p>{t('education-history-import.summary-modal.data-load-failed')}</p>;
-          }
-        })()}
-      </>
-    );
-  };
-
   return (
     <Modal
       name={t('education-history-import.summary-modal.title')}
       open={isOpen}
-      topSlot={<ModalHeader text={t('education-history-import.summary-modal.title')} testId="education-step-title" />}
+      fullWidthContent
+      topSlot={
+        <ModalHeader text={t('education-history-import.summary-modal.title')} testId="education-summary-title" />
+      }
       content={
-        <div id={modalId} className="flex flex-col">
-          <div className="text-left">
-            <p className="mb-4 sm:text-body-md text-body-md-mobile">
+        <div id={modalId} className="flex flex-col sm:h-[890px]">
+          <div>
+            <p className="sm:mb-8 mb-5 sm:text-body-md text-body-md-mobile font-arial">
               {t('education-history-import.summary-modal.description')}
             </p>
             {isFetching && (
-              <div className="flex">
-                <Spinner className="mr-5 mb-5" size={24} color={'accent'} />
-                {t('education-history-import.summary-modal.data-loading')}
+              <div className="flex bg-bg-gray-2 rounded w-fit items-center p-4">
+                <span>
+                  <Spinner className="mr-5" size={24} color="black" />
+                </span>
+                <span className="text-primary-gray font-arial text-body-sm">
+                  {t('education-history-import.summary-modal.data-loading')}
+                </span>
               </div>
             )}
-            {!isFetching && error && <div className="text-alert-text">{renderErrorMessage()}</div>}
-            {!isFetching && (
-              <ExperienceTable
-                ariaLabel={t('profile.education-history.title')}
-                mainColumnHeader={t('education-history.education-provider-or-education')}
-                rows={tableRows}
-                hideOsaamiset
-                showCheckbox={true}
-                checkboxColumnHeader={t('education-history-import.summary-modal.table-header-checkbox')}
-              />
-            )}
+            {!isFetching && !error && <EducationImportTable rows={tableRows} />}
           </div>
         </div>
       }
@@ -235,6 +307,7 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
             <Button
               className="whitespace-nowrap"
               ref={cancelButtonRef}
+              size={sm ? 'lg' : 'sm'}
               variant="white"
               label={t('common:cancel')}
               onClick={() => {
@@ -252,9 +325,34 @@ const ImportKoulutusSummaryModal = ({ isOpen, onSuccessful, onFailure }: ImportK
 
             <Button
               label={t('save')}
-              variant="white"
+              variant="accent"
               disabled={!koskiData}
-              onClick={saveSelectedKoulutus}
+              size={sm ? 'lg' : 'sm'}
+              onClick={() => {
+                closeActiveModal();
+                showDialog({
+                  title: (
+                    <span className="inline-flex gap-2">
+                      <Trans
+                        i18nKey="education-history-import.result-modal.title"
+                        components={{
+                          AiIcon: <AiInfo />,
+                        }}
+                      />
+                    </span>
+                  ),
+                  description: <Trans i18nKey="education-history-import.result-modal.success-osaamiset-info" />,
+                  confirmText: t('education-history-import.result-modal.identify'),
+                  cancelText: t('education-history-import.result-modal.no-identify'),
+                  variant: 'normal',
+                  onConfirm: () => {
+                    saveSelectedKoulutus(false);
+                  },
+                  onCancel: () => {
+                    saveSelectedKoulutus(true);
+                  },
+                });
+              }}
               className="whitespace-nowrap"
             />
           </div>

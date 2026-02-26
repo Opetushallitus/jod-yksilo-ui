@@ -1,49 +1,75 @@
-import { client } from '@/api/client';
-import { osaamiset } from '@/api/osaamiset.ts';
-import type { components } from '@/api/schema';
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
+import { useEnvironment } from '@/hooks/useEnvironment/index';
 import { useModal } from '@/hooks/useModal';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal';
-import { Button, EmptyState, useMediaQueries } from '@jod/design-system';
+import { LogoutFormContext } from '@/routes/Root';
+import { Button, EmptyState, useMediaQueries, useNoteStack } from '@jod/design-system';
+import { JodError, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData, useRevalidator, useSearchParams } from 'react-router';
+import toast from 'react-hot-toast/headless';
+import { Trans, useTranslation } from 'react-i18next';
+import { Link, useLoaderData, useRevalidator, useSearchParams } from 'react-router';
 import { ProfileSectionTitle } from '../components';
-import { ProfileNavigationList } from '../components/index.tsx';
-import { ToolCard } from '../components/ToolCard.tsx';
+import { ProfileNavigationList } from '../components/index';
+import { ToolCard } from '../components/ToolCard';
+import loader from './loader';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
-import ImportKoulutusResultModal from './modals/ImportKoulutusResultModal';
-import ImportKoulutusStartModal from './modals/ImportKoulutusStartModal';
-import { getEducationHistoryTableRows, type Koulutuskokonaisuus } from './utils';
+import { usePollOsaamisetTunnistus } from './usePollOsaamisetTunnistus';
+import { getEducationHistoryTableRows } from './utils';
 
 const EducationHistory = () => {
-  const { koulutuskokonaisuudet, osaamisetMap } = useLoaderData() as {
-    koulutuskokonaisuudet: Koulutuskokonaisuus[];
-    osaamisetMap: Record<
-      string,
-      {
-        id: string;
-        nimi: Record<string, string>;
-        kuvaus: Record<string, string>;
-      }
-    >;
-  };
-  const { t } = useTranslation();
+  const { koulutuskokonaisuudet, osaamisetMap } = useLoaderData<Awaited<ReturnType<typeof loader>>>();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { lg } = useMediaQueries();
   const title = t('profile.education-history.title');
-
+  const logoutForm = React.useContext(LogoutFormContext);
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>(
     getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap),
   );
   const revalidator = useRevalidator(); // For reloading data after modal close
-  const [importResultErrorText, setImportResultErrorText] = React.useState<string | undefined>(undefined);
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [isOsaamisetTunnistusOngoing, setIsOsaamisetTunnistusOngoing] = React.useState(true);
-  const { showModal } = useModal();
+  const { showModal, showDialog } = useModal();
+  const [baselineKoulutusIds, setBaselineKoulutusIds] = React.useState<string[] | null>(null);
+  const [koulutuksetThatNeedUserVerification, setKoulutuksetThatNeedUserVerification] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    const importedData = Array.from(
+      rows
+        .flatMap((row) =>
+          row.subrows?.filter((sr) => sr.osaamisetOdottaaTunnistusta === false).flatMap((k) => [row.key, k.key]),
+        )
+        .filter(Boolean) as string[],
+    );
+
+    if (baselineKoulutusIds === null) {
+      setBaselineKoulutusIds(importedData);
+    } else {
+      const newKoulutuksetThatNeedUserVerification = importedData.filter((id) => !baselineKoulutusIds.includes(id));
+
+      setKoulutuksetThatNeedUserVerification(newKoulutuksetThatNeedUserVerification);
+    }
+  }, [rows, baselineKoulutusIds]);
+
+  // Init
+  React.useEffect(() => {
+    const importedData = Array.from(
+      koulutuskokonaisuudet
+        .flatMap((kk) =>
+          kk.koulutukset.filter((k) => k.osaamisetOdottaaTunnistusta === false).flatMap((k) => [kk.id, k.id]),
+        )
+        .filter(Boolean) as string[],
+    );
+
+    setBaselineKoulutusIds(importedData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   React.useEffect(() => {
     setRows(getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap));
@@ -55,6 +81,40 @@ const EducationHistory = () => {
     );
     setIsOsaamisetTunnistusOngoing(isIdentifyingCompetence);
   }, [rows]);
+
+  const verifyKoulutusOsaamiset = React.useCallback(
+    (id: string) => {
+      const toVerifyKoulutusIds: string[] = [id];
+      const koulutuskokonaisuus = koulutuskokonaisuudet.find((kk) => kk.id === id);
+
+      // When verifying a koulutuskokonaisuus, all nested koulutus osaamiset are also considered as verified
+      if (koulutuskokonaisuus) {
+        const nestedKoulutusIds = koulutuskokonaisuus.koulutukset.map((k) => k.id) as string[];
+        toVerifyKoulutusIds.push(...nestedKoulutusIds);
+      } else {
+        // Set parent as verified if all koulutukset have been verified
+        const parentKoulutusKokonaisuus = koulutuskokonaisuudet.find((kk) => kk.koulutukset.some((k) => k.id === id));
+        const unverifiedNestedKoulutukset =
+          parentKoulutusKokonaisuus?.koulutukset
+            .filter((k) => koulutuksetThatNeedUserVerification.includes(k.id!))
+            .filter((k) => k.id !== id).length === 0;
+
+        if (parentKoulutusKokonaisuus && unverifiedNestedKoulutukset) {
+          toVerifyKoulutusIds.push(parentKoulutusKokonaisuus.id!);
+        }
+      }
+
+      setKoulutuksetThatNeedUserVerification((prev) =>
+        prev.filter((koulutusId) => !toVerifyKoulutusIds.includes(koulutusId)),
+      );
+      setBaselineKoulutusIds((prev) => [...(prev ?? []), ...toVerifyKoulutusIds]);
+    },
+    [koulutuksetThatNeedUserVerification, koulutuskokonaisuudet],
+  );
+
+  const logout = React.useCallback(() => {
+    logoutForm?.current?.submit();
+  }, [logoutForm]);
 
   const onRowClick = (row: ExperienceTableRowData) => {
     showModal(EditKoulutuskokonaisuusModal, {
@@ -71,6 +131,9 @@ const EducationHistory = () => {
       showModal(AddOrEditKoulutusModal, {
         koulutuskokonaisuusId: koulutus.id,
         koulutusId: row.key,
+        onClose: () => {
+          void refreshData();
+        },
       });
     }
   };
@@ -83,184 +146,86 @@ const EducationHistory = () => {
     showModal(AddOrEditKoulutusModal, { koulutuskokonaisuusId: row.key });
   };
 
-  const openImportStartModal = () => {
+  const { isPrd } = useEnvironment();
+  const opintopolkuUrl = React.useMemo(() => {
+    const base = `https://${isPrd ? 'opintopolku.fi' : 'testiopintopolku.fi'}/konfo/${language}/sivu/`;
+    let path = '';
+
+    if (language === 'sv') {
+      path = 'min-studieinfo#mina-studieprestationer';
+    } else if (language === 'en') {
+      path = 'my-studyinfo#my-completed-studies';
+    } else {
+      path = 'oma-opintopolku#omat-opintosuoritukseni';
+    }
+
+    return new URL(encodeURI(`${base}${path}`)).href;
+  }, [language, isPrd]);
+
+  const openImportStartModal = React.useCallback(() => {
     globalThis._paq?.push(['trackEvent', 'yksilo.Rajapinnat', 'Koski tuonti']);
-    setImportResultErrorText(undefined);
-    showModal(ImportKoulutusStartModal);
-  };
 
-  const openImportResultModal = React.useCallback(
-    (result: boolean) => {
-      showModal(ImportKoulutusResultModal, {
-        isSuccess: result,
-        onClose: () => {
-          void refreshData();
-        },
-        errorText: importResultErrorText,
-      });
-    },
-    [importResultErrorText, refreshData, showModal],
-  );
+    showDialog({
+      variant: 'normal',
+      title: t('education-history-import.start-modal.title'),
+      confirmText: t('education-history-import.start-modal.import-button'),
+      description: (
+        <div className="text-body-md-mobile sm:text-body-md font-arial flex flex-col text-primary-gray">
+          <Trans
+            i18nKey="education-history-import.start-modal.description-1"
+            components={{
+              Icon: <JodOpenInNew ariaLabel={t('common:external-link')} />,
+              CustomLink: <Link to={opintopolkuUrl} className="inline-flex text-accent items-center" target="_blank" />,
+            }}
+          />
+          <p className="mt-7">
+            <Trans i18nKey="education-history-import.start-modal.description-2" />
+          </p>
+        </div>
+      ),
+      onConfirm: () => {
+        globalThis._paq?.push(['trackEvent', 'yksilo.Rajapinnat', 'Koski tuonti - siirry Opintopolkuun']);
+        const currentUrl = encodeURIComponent(globalThis.location.href);
 
-  const openImportSummaryModal = React.useCallback(() => {
-    showModal(ImportKoulutusSummaryModal, {
-      onSuccessful: () => {
-        refreshData();
-        openImportResultModal(true);
-      },
-      onFailure: () => {
-        openImportResultModal(false);
+        try {
+          globalThis.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}&lang=${language}`;
+        } catch (_error) {
+          globalThis._paq?.push([
+            'trackEvent',
+            'yksilo.Rajapinnat',
+            'Koski tuonti - siirtyminen Opintopolkuun epäonnistui',
+          ]);
+          toast.error(t('education-history-import.start-modal.import-redirect-fail'));
+        }
       },
     });
-  }, [showModal, refreshData, openImportResultModal]);
+  }, [language, opintopolkuUrl, showDialog, t]);
+
+  const { addTemporaryNote } = useNoteStack();
 
   React.useEffect(() => {
     const result = searchParams.get('koski');
     if (result) {
       setSearchParams({});
       if (result === 'authorized') {
-        openImportSummaryModal();
-      } else if (result === 'error') {
-        setImportResultErrorText(t('education-history-import.result-modal.give-permission-failed'));
-        openImportResultModal(false);
-      }
-    }
-  }, [openImportResultModal, openImportSummaryModal, searchParams, setSearchParams, t]);
-
-  const updateRowSubrows = <ContextType,>(
-    row: ExperienceTableRowData,
-    transformSubrow: (subrow: ExperienceTableRowData, context: ContextType) => ExperienceTableRowData,
-    context: ContextType,
-  ): ExperienceTableRowData => {
-    if (!row.subrows?.length) {
-      return row;
-    }
-
-    return {
-      ...row,
-      subrows: row.subrows.map((subrow) => transformSubrow(subrow, context)),
-    };
-  };
-
-  const updateSubrow = (
-    subrow: ExperienceTableRowData,
-    responseMap: Map<string, components['schemas']['KoulutusDto']>,
-  ): ExperienceTableRowData => {
-    const responseItem = responseMap.get(subrow.key);
-
-    return responseItem
-      ? {
-          ...subrow,
-          osaamiset: (responseItem.osaamiset ?? []) as never,
-          osaamisetOdottaaTunnistusta: responseItem.osaamisetOdottaaTunnistusta,
-          osaamisetTunnistusEpaonnistui: responseItem.osaamisetTunnistusEpaonnistui,
-        }
-      : subrow;
-  };
-
-  const updateSubrowWithTunnistusStatus = (
-    subrow: ExperienceTableRowData,
-    rowIdsForOsaamisetTunnistus: string[],
-  ): ExperienceTableRowData => {
-    return rowIdsForOsaamisetTunnistus.includes(subrow.key)
-      ? {
-          ...subrow,
-          osaamisetTunnistusEpaonnistui: true,
-        }
-      : subrow;
-  };
-
-  const usePollOsaamisetTunnistus = (
-    isOsaamisetTunnistusOngoing: boolean,
-    rows: ExperienceTableRowData[],
-    setRows: React.Dispatch<React.SetStateAction<ExperienceTableRowData[]>>,
-    revalidator: ReturnType<typeof useRevalidator>,
-  ) => {
-    const [isPolling, setIsPolling] = React.useState(false);
-    const [error, setError] = React.useState<Error | null>(null);
-
-    const rowIdsForOsaamisetTunnistus = rows.flatMap((row) =>
-      row.osaamisetOdottaaTunnistusta && row.subrows?.length
-        ? row.subrows.filter((subRow) => subRow.osaamisetOdottaaTunnistusta).map((subRow) => subRow.key)
-        : [],
-    );
-
-    const fetchOsaamisetTunnistus = React.useCallback(async () => {
-      if (isPolling || !isOsaamisetTunnistusOngoing || rowIdsForOsaamisetTunnistus.length === 0) {
-        return;
-      }
-
-      setIsPolling(true);
-
-      let hasError = false;
-      try {
-        const { data, error } = await client.GET('/api/integraatiot/koski/osaamiset/tunnistus', {
-          params: {
-            query: {
-              ids: rowIdsForOsaamisetTunnistus,
-            },
+        showModal(ImportKoulutusSummaryModal, {
+          onSuccessful: () => {
+            void refreshData();
           },
+          openImportStartModal,
+          logout,
         });
-
-        if (error) {
-          hasError = true;
-          setError(error);
-          return;
-        }
-
-        if (!data) {
-          hasError = true;
-          setError(new Error('API returned empty response'));
-          return;
-        }
-
-        const koulutukset: components['schemas']['KoulutusDto'][] = data;
-
-        const uris = koulutukset
-          .map((koulutus) => koulutus.osaamiset)
-          .filter((osaaminen) => osaaminen !== undefined)
-          .flat();
-        const osaamisetData = await osaamiset.find(uris);
-        const osaamisetMap = new Map(osaamisetData.map((osaaminen) => [osaaminen.uri, osaaminen]));
-
-        const responseMap = new Map(
-          koulutukset.map((koulutus) => [
-            koulutus.id,
-            // eslint-disable-next-line sonarjs/no-nested-functions
-            { ...koulutus, osaamiset: koulutus.osaamiset?.map((uri) => osaamisetMap.get(uri)) ?? [] },
-          ]),
-        );
-
-        // @ts-expect-error - Map keys are handled correctly at runtime
-        const updatedRows = rows.map((row) => updateRowSubrows(row, updateSubrow, responseMap));
-        setRows(updatedRows);
-
-        const remainingIds = rowIdsForOsaamisetTunnistus.filter((id) => !responseMap.has(id));
-        if (remainingIds.length === 0) {
-          revalidator.revalidate();
-        }
-      } catch (err) {
-        hasError = true;
-        setError(err instanceof Error ? err : new Error(String(err)));
-      } finally {
-        if (hasError) {
-          const updatedRowsToFailed = rows.map((row) =>
-            updateRowSubrows(row, updateSubrowWithTunnistusStatus, rowIdsForOsaamisetTunnistus),
-          );
-          setRows(updatedRowsToFailed);
-        }
-
-        setIsPolling(false);
+      } else if (result === 'error') {
+        addTemporaryNote(() => ({
+          title: t('education-history-import.summary-modal.error-title'),
+          description: t('education-history-import.result-modal.give-permission-failed'),
+          variant: 'warning',
+          isCollapsed: false,
+        }));
       }
-    }, [rows, setRows, revalidator, isPolling, isOsaamisetTunnistusOngoing, rowIdsForOsaamisetTunnistus]);
+    }
+  }, [addTemporaryNote, logout, openImportStartModal, refreshData, searchParams, setSearchParams, showModal, t]);
 
-    // Set up polling with an appropriate retry strategy
-    React.useEffect(() => {
-      const interval = error ? 15_000 : 5000;
-      const intervalId = setInterval(fetchOsaamisetTunnistus, interval);
-      return () => clearInterval(intervalId);
-    }, [fetchOsaamisetTunnistus, error]);
-  };
   usePollOsaamisetTunnistus(isOsaamisetTunnistusOngoing, rows, setRows, revalidator);
 
   return (
@@ -281,8 +246,17 @@ const EducationHistory = () => {
       <ProfileSectionTitle type="KOULUTUS" title={title} />
       <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>
 
+      {koulutuksetThatNeedUserVerification.length > 0 && (
+        <div className="bg-bg-gray-2 rounded-md px-5 py-3 flex items-center w-fit mb-5">
+          <JodError className="text-secondary-3 mr-3" />
+          <span className="font-arial text-primary-gray text-body-sm">
+            {t('education-history.check-identified-osaamiset')}
+          </span>
+        </div>
+      )}
+
       {rows.length === 0 && (
-        <div className="mt-6 mb-7" data-testid="education-history-empty-state">
+        <div className="mt-6 mb-11" data-testid="education-history-empty-state">
           <EmptyState text={t('profile.education-history.empty')} />
         </div>
       )}
@@ -291,6 +265,8 @@ const EducationHistory = () => {
         mainColumnHeader={t('education-history.education-provider-or-education')}
         addNewNestedLabel={t('education-history.add-studies-to-this-education')}
         rows={rows}
+        koulutuksetThatNeedUserVerification={koulutuksetThatNeedUserVerification}
+        verifyKoulutusOsaamiset={verifyKoulutusOsaamiset}
         onRowClick={onRowClick}
         onNestedRowClick={onNestedRowClick}
         onAddNestedRowClick={onAddNestedRowClick}

@@ -25,6 +25,10 @@ interface ExperienceTableProps {
   onSubCheckboxChange?: (rowKey: string, subRowKey: string, checked: boolean) => void;
   ariaLabel: string;
   isPrinting?: boolean;
+  /** Imported koulutukset whose osaamiset needs to be checked by the user */
+  koulutuksetThatNeedUserVerification?: string[];
+  /** Function to mark the osaamiset of a specific koulutus as verified */
+  verifyKoulutusOsaamiset?: (koulutusId: string) => void;
 }
 
 export const ExperienceTable = ({
@@ -47,6 +51,8 @@ export const ExperienceTable = ({
   checkboxColumnHeader,
   onCheckboxChange,
   onSubCheckboxChange,
+  koulutuksetThatNeedUserVerification,
+  verifyKoulutusOsaamiset,
   ariaLabel,
   isPrinting = false,
 }: ExperienceTableProps) => {
@@ -232,6 +238,8 @@ export const ExperienceTable = ({
                   checked={rowsCheckboxState.get(row.key)?.checked ?? false}
                   indeterminate={rowsCheckboxState.get(row.key)?.indeterminate ?? false}
                   onCheckboxChange={(checked) => handleParentCheckboxChange(row, checked)}
+                  koulutuksetThatNeedUserVerification={koulutuksetThatNeedUserVerification}
+                  verifyKoulutusOsaamiset={verifyKoulutusOsaamiset}
                 />
                 {row.subrows?.map((subrow, i) => (
                   <ExperienceTableRow
@@ -253,6 +261,8 @@ export const ExperienceTable = ({
                     checked={rowsCheckboxState.get(row.key)?.subRows.get(subrow.key) ?? false}
                     onCheckboxChange={(checked) => handleSubCheckboxChange(row, subrow, checked)}
                     isPrinting={isPrinting}
+                    koulutuksetThatNeedUserVerification={koulutuksetThatNeedUserVerification}
+                    verifyKoulutusOsaamiset={verifyKoulutusOsaamiset}
                   />
                 ))}
                 {onAddNestedRowClick && addNewNestedLabel && (

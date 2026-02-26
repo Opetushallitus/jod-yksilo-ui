@@ -29,8 +29,8 @@ const Preferences = () => {
     deletionInput.type = 'hidden';
     deletionInput.name = 'deletion';
     deletionInput.value = 'true';
-    logoutForm?.appendChild(deletionInput);
-    logoutForm?.submit();
+    logoutForm?.current?.appendChild(deletionInput);
+    logoutForm?.current?.submit();
   };
 
   return (

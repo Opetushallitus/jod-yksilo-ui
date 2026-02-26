@@ -65,6 +65,7 @@
     "title": "Competence profile"
   },
   "date-or-continues-placeholder": "dd.mm.yyyy",
+  "date-placeholder": "dd.mm.yyyy",
   "datepicker": {
     "actions": {
       "close": "Close calendar",
@@ -93,7 +94,6 @@
       "view": "Switch to day view"
     }
   },
-  "date-placeholder": "dd.mm.yyyy",
   "description": "Description",
   "do-filter": "Filter",
   "duration": "Duration",
@@ -103,14 +103,15 @@
     "add-studies-to-education": "Add studies to education",
     "add-studies-to-this-education": "Add studies to this education",
     "add-studies-to-this-education-button": "Add studies",
+    "check-identified-osaamiset": "Check automatically identified competences",
     "confirm-delete-degree": "Are you sure you want to delete the degree \"{{name}}\"? If there are no more degrees associated with the education after deletion, the education will also be deleted.",
     "confirm-delete-education-history": "Are you sure you want to delete the education \"{{name}}\"?",
     "delete-degree": "Delete degree",
     "delete-education-history": "Delete education",
     "edit-degree-or-education": "Edit degree or education",
     "edit-education": "Edit education",
-    "educational-institution-or-education-provider": "Educational institution or education organiser",
     "education-provider-or-education": "Education organiser / education",
+    "educational-institution-or-education-provider": "Educational institution or education organiser",
     "identify-competences": "Identify competences",
     "import-education-history": "Import my education history",
     "name-of-degree-or-education": "Name of degree or education",
@@ -120,15 +121,17 @@
     "result-modal": {
       "failure": "Failed to add education history.",
       "give-permission-failed": "Failed to grant permission. Please try again later.",
-      "success": "Education history added successfully.",
-      "success-osaamiset-info": "Next, we will identify suggestions for competence provided by education using artificial intelligence. The suggestions may contain errors, so we recommend that you check the suggestions. You can delete or add competences by editing the education information. Please follow the link below for more information on identifying competences.",
-      "success-osaamiset-link-about-ai": "About the use of artificial intelligence"
+      "identify": "Identify",
+      "no-identify": "Do not identify",
+      "success-osaamiset-info": "Education history added successfully.<br><br><strong>Do you want us to automatically identify competence suggestions from your education using artificial intelligence?</strong><br><br>The suggestions may contain errors, so we recommend checking them. You can edit competences later by adding or removing them in the education details.",
+      "title": "Identify your competences?<AiIcon></AiIcon>"
     },
     "start-modal": {
-      "description": "You can import your education history to your competence profile once you have granted permission in Studyinfo. Click \"Go to Studyinfo\" to grant permission to import data. After granting permission, you will automatically return to the service. Once you return, you can choose which educations you want to import.",
+      "description-1": "In the My completed studies section of My Studyinfo, you can find the studies and qualifications you have completed, which have been stored in the national study, education and qualification registers. You can transfer this information to your competence profile and review the skills accumulated from them.<br><CustomLink>Read more about your study records in Studyinfo<Icon></Icon>.</CustomLink>",
+      "description-2": "You can import your study records into the Education History section of your competence profile by granting permission in Studyinfo. Select Go to Studyinfo and allow the data transfer. After this, you will automatically return to the service. Once you return, you can choose which studies you want to import.",
       "import-button": "Go to Studyinfo",
       "import-redirect-fail": "Failed to go to Studyinfo. Please try again.",
-      "title": "Import your education history from the Koski service"
+      "title": "Import your education history"
     },
     "summary-modal": {
       "cancel-modal": {
@@ -136,11 +139,11 @@
         "title": "Cancel import"
       },
       "data-load-failed": "Failed to load data. Please try again later.",
-      "data-loading": "Loading information from Studyinfo...",
       "data-load-no-data": "The education data could not be found or you do not have permission to view the data.",
-      "description": "You can edit your education after importing it to Competency Path in the education section of your competence profile.",
-      "table-header-checkbox": "Import selected",
-      "title": "Summary",
+      "data-loading": "Loading information...",
+      "description": "In this view, you can select which educations you want to import. After the import, you can edit and complete the information in the My Educations view.",
+      "error-title": "Failed to import data",
+      "title": "Your education history",
       "wrong-person": "Please log out and log in again and try again."
     }
   },
@@ -231,9 +234,9 @@
   },
   "i-allow": "I allow",
   "i-disallow": "I do not allow",
+  "in-this-section": "In this section",
   "interests": "Map out your interests",
   "interests-of-your-choice": "Selected interests",
-  "in-this-section": "In this section",
   "introduction": {
     "step-1": {
       "item-1": "See all information related to your competences and interests in one place",
@@ -393,12 +396,7 @@
       "tool-title": "Find opportunities"
     }
   },
-  "n-education-opportunities": "{{count}} of {{total}} education opportunities",
   "next": "Next",
-  "n-job-opportunities": "{{count}} of {{total}} career opportunities",
-  "n-months-short": "{{count}} months",
-  "n-years_one": "{{count}} year",
-  "n-years_other": "{{count}} years",
   "on-this-page": "On this page",
   "opportunity-tooltip": {
     "education": {
@@ -609,7 +607,7 @@
       "title": "My competence"
     },
     "education-history": {
-      "description": "You can find your study history below. You can add your own educational history and map out your related competences. You can also import your educational history from your own study credits in My Studyinfo.",
+      "description": "Below you can find your education history. You can add entries to your education history yourself and identify the competencies related to them. You can also import your study records from the national study, education and qualification registers as part of your education history (Studyinfo).",
       "empty": "You have not yet added educations.",
       "modals": {
         "competences-description": "Explain what you learned in the education. You can also copy the content descriptions of the education from elsewhere if they have been recorded, for example, in the study guide, the description of the educational institution’s website or are stored in social media services.",
@@ -639,8 +637,8 @@
       "you-have-saved-opportunities": "You have saved {{jobOpportunitiesCount}} career opportunities and {{educationOpportunitiesCount}} education opportunities."
     },
     "free-form-input": {
-      "label": "Free-form description",
-      "help": "The text is saved automatically."
+      "help": "The text is saved automatically.",
+      "label": "Free-form description"
     },
     "free-time-activities": {
       "description": "Find your recreational activities below. Recreational activities may include hobbies, positions of trust and various qualifications. You can add recreational activities yourself and map out the related competences.",
@@ -662,8 +660,8 @@
       "edit-interests": "Edit interests",
       "empty": "You have not added any interests yet.",
       "freeform": {
-        "header": "Free-form description of my interests",
         "description": "You can write and describe your interests in your own words. The text you enter is saved automatically. If you use the service in English, please write in English. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
+        "header": "Free-form description of my interests",
         "placeholder": "Describe in your own words what else interests you"
       },
       "free-form-description-of-my-interests": "Free text description of my interests",
@@ -733,13 +731,13 @@
       "goal-name": "Name of the goal",
       "modify-goal": "Edit goal",
       "my-plan-towards-goal": "Plan options",
+      "n-plans_one": "1 plan",
+      "n-plans_other": "{{count}} plans",
+      "n-plans_zero": "No selected plans",
       "no-chosen-competences": "No selected competences",
       "no-favorites-selected": "Add favorites first, from which you can create goals.",
       "no-filtered-results": "No education opportunities. Adjust the filters to see options.",
       "no-goals-created": "You have not added any goals yet.",
-      "n-plans_one": "1 plan",
-      "n-plans_other": "{{count}} plans",
-      "n-plans_zero": "No selected plans",
       "own-competences": "My competences",
       "plan": "Plan",
       "remove-competence-description": "Remove competence by clicking the x character",
@@ -851,10 +849,10 @@
     "global-placeholder": "Search opportunities",
     "label": "Search opportunities",
     "no-results": "No results found for the search term.",
-    "results-found_one": "Showing 1 result",
-    "results-found_other": "Showing {{count}} results",
     "results-found-short_one": "1 result",
     "results-found-short_other": "{{count}} results",
+    "results-found_one": "Showing 1 result",
+    "results-found_other": "Showing {{count}} results",
     "search": "Search",
     "search-placeholder": "Enter a search term",
     "title": "Search opportunities"
@@ -1144,9 +1142,9 @@
       "KIINNOSTUS": "My interests",
       "KOULUTUS": "My education",
       "MUU_OSAAMINEN": "My other competences",
+      "OSAAMINEN": "My competences",
       "PATEVYYS": "My recreational activities",
-      "TOIMENKUVA": "My job",
-      "OSAAMINEN": "My competences"
+      "TOIMENKUVA": "My jobs"
     }
   },
   "update": "Update",
