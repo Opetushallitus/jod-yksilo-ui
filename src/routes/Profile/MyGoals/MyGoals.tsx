@@ -58,7 +58,7 @@ const MyGoals = () => {
   });
 
   React.useEffect(() => {
-    if (suosikitIsEmpty && !suosikitDialogShown) {
+    if (suosikitIsEmpty && !suosikitDialogShown && tavoitteet.length === 0) {
       showDialog({
         title: t('profile.my-goals.add-favorites-dialog-title'),
         description: t('profile.my-goals.add-favorites-dialog-description'),
@@ -74,7 +74,7 @@ const MyGoals = () => {
         },
       });
     }
-  }, [i18n.language, navigate, showDialog, suosikitDialogShown, suosikitIsEmpty, t]);
+  }, [i18n.language, navigate, showDialog, suosikitDialogShown, suosikitIsEmpty, t, tavoitteet.length]);
 
   return (
     <MainLayout

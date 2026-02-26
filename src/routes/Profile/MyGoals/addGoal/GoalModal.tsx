@@ -145,9 +145,9 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
     };
 
     const response = await client.POST('/api/profiili/tavoitteet', { body: newTavoite });
+    closeActiveModal();
     await upsertTavoite({ ...newTavoite, id: response.data });
     await refreshTavoitteet();
-    closeActiveModal();
     setIsSubmitting(false);
   };
 
@@ -173,9 +173,9 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
       },
       body: newTavoite,
     });
+    closeActiveModal();
     await upsertTavoite({ ...newTavoite, id: tavoite.id });
     await refreshTavoitteet();
-    closeActiveModal();
     setIsSubmitting(false);
   };
   const goalsId = React.useId();
