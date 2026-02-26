@@ -5,7 +5,7 @@ import PlanOpportunityCard from '@/routes/Profile/MyGoals/addPlan/selectPlan/Pla
 import PlanOptionFilters from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionFilters.tsx';
 import PlanOptionsPagination from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionsPagination.tsx';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
-import { Button, cx, EmptyState, Spinner, tidyClasses, useMediaQueries } from '@jod/design-system';
+import { Button, cx, EmptyState, tidyClasses, useMediaQueries } from '@jod/design-system';
 import { JodClose, JodRoute, JodSettings } from '@jod/design-system/icons';
 import i18n from 'i18next';
 import React from 'react';
@@ -50,7 +50,7 @@ const SelectPlanStep = () => {
   const scrollRef = React.useRef<HTMLUListElement>(null);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const settingsButtonRef = React.useRef<HTMLButtonElement>(null);
-  const { lg, sm } = useMediaQueries();
+  const { lg } = useMediaQueries();
   const { showModal } = useModal();
 
   React.useEffect(() => {
@@ -68,6 +68,10 @@ const SelectPlanStep = () => {
   };
 
   const onCloseSettings = () => {
+    const hasChanges = addPlanStore.getState().settingsHaveChanged;
+    if (hasChanges) {
+      onUpdateResults();
+    }
     setSettingsOpen(false);
   };
 
@@ -76,17 +80,21 @@ const SelectPlanStep = () => {
     return Object.values(filters).reduce((total, filter) => total + (filter?.length ?? 0), 0) + kestoCount;
   }, [filters]);
 
+  const filterLabel = React.useMemo(() => {
+    if (settingsOpen) {
+      return settingsHaveChanged ? t('tool.settings.toggle-update-close') : t('tool.settings.toggle-close');
+    }
+    return t('tool.settings.toggle-open');
+  }, [settingsOpen, settingsHaveChanged, t]);
+
   const toggleFiltersText = React.useMemo(() => {
-    const labelText = sm ? t('tool.settings.toggle-title-closed') : t('tool.settings.controls');
+    if (settingsOpen) {
+      return filterLabel;
+    }
     const count = getTotalFilterCount();
     const filterCount = count > 0 ? ` (${count})` : '';
-    return labelText + filterCount;
-  }, [getTotalFilterCount, sm, t]);
-
-  const updateButtonLabel = React.useMemo(() => {
-    const shortOrFullLabel = sm ? t('update') : t('update-short');
-    return isLoading ? t('updating-list') : shortOrFullLabel;
-  }, [isLoading, sm, t]);
+    return filterLabel + filterCount;
+  }, [getTotalFilterCount, filterLabel, settingsOpen]);
 
   return (
     <div className="relative flex flex-col h-full z-20">
@@ -98,34 +106,27 @@ const SelectPlanStep = () => {
           </p>
         </div>
 
-        <div className="flex gap-6 lg:justify-end justify-between h-9 sm:mt-5 lg:pb-4 not-lg:w-full not-lg:mb-3 items-center">
+        <div className="flex justify-end h-9 sm:mt-5 lg:pb-4 not-lg:mb-3 items-center mr-6">
           <Button
             variant="plain"
-            size="sm"
+            size={lg ? 'lg' : 'sm'}
             className="text-primary-gray!"
             ref={settingsButtonRef}
             icon={settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
             iconSide="left"
-            label={settingsOpen ? t('tool.settings.toggle-title-open') : toggleFiltersText}
+            disabled={isLoading}
+            label={toggleFiltersText}
             data-testid="open-select-plan-filters"
             onClick={() => {
               if (lg) {
+                if (settingsOpen && settingsHaveChanged) {
+                  onUpdateResults();
+                }
                 setSettingsOpen(!settingsOpen);
               } else {
-                showModal(PlanOptionFilters, { isModal: true });
+                showModal(PlanOptionFilters, { isModal: true, onClose: onCloseSettings });
               }
             }}
-          />
-          <Button
-            size={lg ? 'lg' : 'sm'}
-            className="h-5"
-            label={updateButtonLabel}
-            variant="accent"
-            disabled={isLoading || !settingsHaveChanged}
-            onClick={() => onUpdateResults()}
-            icon={isLoading ? <Spinner color="white" size={20} /> : undefined}
-            iconSide={isLoading ? 'right' : undefined}
-            data-testid="selectplan-update-opportunities"
           />
         </div>
         {settingsOpen && lg && (

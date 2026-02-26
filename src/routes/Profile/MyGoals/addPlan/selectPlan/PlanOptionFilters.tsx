@@ -115,7 +115,18 @@ const SettingsMenu = () => {
 const PlanOptionFilters = ({ isOpen, onClose, isModal }: PlanOptionFiltersProps) => {
   const { t } = useTranslation();
   const resetSettings = addPlanStore((state) => state.resetSettings);
+  const filters = addPlanStore((state) => state.filters);
   const { sm } = useMediaQueries();
+
+  const filtersOnOpenRef = React.useRef(filters);
+  React.useEffect(() => {
+    if (isOpen) {
+      filtersOnOpenRef.current = filters;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
+  const hasFilterChanges = JSON.stringify(filters) !== JSON.stringify(filtersOnOpenRef.current);
   const resetSection = (
     <div className="sticky bottom-0 py-2">
       <Button
@@ -135,12 +146,17 @@ const PlanOptionFilters = ({ isOpen, onClose, isModal }: PlanOptionFiltersProps)
       onClose={onClose}
       topSlot={<h2 className="sm:text-heading-3 text-heading-3-mobile">{t('profile.my-goals.adjust-list')}</h2>}
       fullWidthContent
-      className="h-full"
+      className="h-[90dvh]!"
       footer={
         !sm && (
           <div className="flex flex-row gap-5 flex-1 justify-end">
             <Button label={t('common:cancel')} variant="white" onClick={onClose} size="sm" />
-            <Button label={t('save')} variant="accent" onClick={onClose} size="sm" />
+            <Button
+              label={hasFilterChanges ? t('update-short') : t('close')}
+              variant="accent"
+              onClick={onClose}
+              size="sm"
+            />
           </div>
         )
       }

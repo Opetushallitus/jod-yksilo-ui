@@ -2,7 +2,7 @@ import { client } from '@/api/client';
 import { useModal } from '@/hooks/useModal';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { Button, Modal, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
@@ -75,19 +75,9 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
     <Modal
       name={currentHeaderText}
       open={isOpen}
-      topSlot={<h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-new-plan-header')}</h1>}
+      topSlot={<h1 className="text-heading-2-mobile sm:text-heading-1">{t('profile.my-goals.add-new-plan-header')}</h1>}
       fullWidthContent
-      className="h-full"
-      progress={
-        <WizardProgress
-          labelText={t('wizard.label')}
-          stepText={t('wizard.step')}
-          completedText={t('wizard.completed')}
-          currentText={t('wizard.current')}
-          steps={1}
-          currentStep={1}
-        />
-      }
+      className="sm:h-full!"
       content={<SelectPlanStep />}
       footer={
         <div className="flex flex-row gap-5 flex-1 justify-between">
