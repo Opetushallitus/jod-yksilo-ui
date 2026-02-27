@@ -43,6 +43,7 @@ await i18n
     interpolation: { escapeValue: false },
     returnEmptyString: false,
     saveMissing: false,
+    ...(process.env.VITEST || process.env.PLAYWRIGHT ? { maxRetries: 0 } : {}),
   });
 
 // Add bundled as fallback
