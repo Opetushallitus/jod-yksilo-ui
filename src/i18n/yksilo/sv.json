@@ -745,7 +745,7 @@
       "no-goals-created": "Du har inte lagt till några mål än.",
       "n-plans_one": "1 plan",
       "n-plans_other": "{{count}} planer",
-      "n-plans_zero": "Inga valda planer",
+      "n-plans_zero": "Du har inte lagt till några planer ännu",
       "own-competences": "Egna kompetenser",
       "plan": "Plan",
       "remove-competence-description": "Ta bort kompetens från x-ikonen",

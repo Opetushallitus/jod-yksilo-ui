@@ -746,7 +746,7 @@
       "no-goals-created": "You have not added any goals yet.",
       "n-plans_one": "1 plan",
       "n-plans_other": "{{count}} plans",
-      "n-plans_zero": "No selected plans",
+      "n-plans_zero": "You haven’t added any plans yet",
       "own-competences": "My competences",
       "plan": "Plan",
       "remove-competence-description": "Remove competence by clicking the x character",

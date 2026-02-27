@@ -744,7 +744,7 @@
       "no-goals-created": "Et ole vielä lisännyt tavoitteita.",
       "n-plans_one": "1 suunnitelma",
       "n-plans_other": "{{count}} suunnitelmaa",
-      "n-plans_zero": "Ei valittuja suunnitelmia",
+      "n-plans_zero": "Et ole vielä lisännyt suunnitelmia",
       "own-competences": "Omat taidot",
       "plan": "Suunnitelma",
       "remove-competence-description": "Poista osaaminen x-merkistä",
