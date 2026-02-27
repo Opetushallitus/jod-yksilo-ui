@@ -1,4 +1,4 @@
-import i18n, { type Resource } from 'i18next';
+import i18n, { type InitOptions, type Resource } from 'i18next';
 import HttpBackend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 
@@ -43,8 +43,8 @@ await i18n
     interpolation: { escapeValue: false },
     returnEmptyString: false,
     saveMissing: false,
-    ...(process.env.VITEST || process.env.PLAYWRIGHT ? { maxRetries: 0 } : {}),
-  });
+    maxRetries: 0,
+  } as InitOptions);
 
 // Add bundled as fallback
 for (const lng of supportedLanguageCodes) {
