@@ -19,7 +19,7 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
       query: state.query,
     })),
   );
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
     const queryParams = new URLSearchParams();
     queryParams.set('q', query);
