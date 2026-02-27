@@ -27,7 +27,7 @@ export const SearchBar = ({ searchInputVisible, setSearchInputVisible }: SearchB
     setSearchValue(event.target.value);
   };
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = (e: React.SubmitEvent) => {
     if (isSearching) return;
     setIsSearching(true);
     e.preventDefault();
