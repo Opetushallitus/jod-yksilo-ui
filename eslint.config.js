@@ -100,5 +100,30 @@ export default [
       ...hooksPlugin.configs.recommended.rules,
     },
   },
+  // Do not allow process.env in client code, as it is not replaced by Vite and will cause errors in the browser. Use import.meta.env instead.
+  {
+    files: ['src/**/*.{ts,tsx,js,jsx}'],
+    rules: {
+      'no-restricted-properties': [
+        'error',
+        {
+          object: 'process',
+          property: 'env',
+          message: 'Use import.meta.env in Vite client code instead of process.env.',
+        },
+      ],
+    },
+  },
+  // Allow process.env in config and scripts files
+  {
+    files: ['vite.config.*', 'vitest.config.*', 'playwright.config.*', 'scripts/**/*'],
+    languageOptions: {
+      sourceType: 'module',
+      ecmaVersion: 'latest',
+    },
+    rules: {
+      'no-restricted-properties': 'off',
+    },
+  },
   eslintConfigPrettier, // must be last, override other configs
 ];
