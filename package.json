@@ -28,7 +28,7 @@
     "driver.js": "^1.4.0",
     "i18next": "^25.7.4",
     "i18next-http-backend": "^3.0.2",
-    "openapi-fetch": "^0.15.0",
+    "openapi-fetch": "^0.17.0",
     "openapi-typescript-fetch": "^2.2.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
