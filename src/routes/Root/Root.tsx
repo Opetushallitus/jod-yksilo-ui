@@ -130,10 +130,7 @@ const Root = () => {
               size="sm"
               variant="white"
               label={t('session.expired.login')}
-              linkComponent={getLinkTo(loginLink, {
-                useAnchor: true,
-                target: '_blank',
-              })}
+              linkComponent={getLinkTo(loginLink, { useAnchor: true })}
             />
             <Button
               size="sm"
