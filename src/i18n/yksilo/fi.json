@@ -610,6 +610,7 @@
         "PATEVYYS": "Siirry vapaa-ajan toimintoihini",
         "TOIMENKUVA": "Siirry työpaikkoihini"
       },
+      "order-by": "Järjestä",
       "show-filters": "Näytä suodattimet",
       "title": "Osaamiseni"
     },
