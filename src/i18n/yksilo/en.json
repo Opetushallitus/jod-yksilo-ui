@@ -612,6 +612,7 @@
         "PATEVYYS": "Go to my recreational activities",
         "TOIMENKUVA": "Go to my jobs"
       },
+      "order-by": "Sort",
       "show-filters": "Show filters",
       "title": "My competence"
     },

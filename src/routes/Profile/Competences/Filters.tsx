@@ -24,12 +24,12 @@ export const Filters = ({ filterKeys, selectedFilters, setSelectedFilters, group
           showColorIndicator
         />
       </FilterList>
-      <FilterList title={t('profile.competences.title')} className={sm ? 'bg-bg-gray-2' : 'bg-bg-gray'}>
+      <FilterList title={t('profile.competences.order-by')} className={sm ? 'bg-bg-gray-2' : 'bg-bg-gray'}>
         <RadioButtonGroup
           value={groupBy}
           onChange={setGroupBy}
           className="py-4"
-          label={t('profile.competences.group')}
+          label={t('profile.competences.order-by')}
           hideLabel
         >
           <RadioButton label={t('profile.competences.group-by-source')} value={GROUP_BY_SOURCE} />
