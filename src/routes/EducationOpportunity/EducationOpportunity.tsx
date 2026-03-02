@@ -16,11 +16,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
+import { OpintopolkuKoulutusList } from './OpintopolkuKoulutusList';
 import { getDurationText } from './utils';
 
 const EducationOpportunity = () => {
   const { jakaumat, koulutusmahdollisuus, osaamiset, isLoggedIn } = useLoaderData<LoaderData>();
-  const { kuvaus, kesto } = koulutusmahdollisuus;
+  const { kuvaus, kesto, koulutukset } = koulutusmahdollisuus;
   const { sm, lg } = useMediaQueries();
   const {
     t,
@@ -139,6 +140,7 @@ const EducationOpportunity = () => {
               linkComponent={getLinkTo(opintopolkuUrl, { useAnchor: true, target: '_blank' })}
             />
           </div>
+          <OpintopolkuKoulutusList koulutukset={koulutukset} />
         </div>
       ),
     },

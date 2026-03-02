@@ -85,6 +85,10 @@ export default defineConfig({
         target: 'https://virkailija.opintopolku.fi',
         changeOrigin: true,
       },
+      '/konfo-backend/external/koulutus/': {
+        target: 'https://testiopintopolku.fi',
+        changeOrigin: true,
+      },
       '/yksilo/api': {
         target,
         xfwd: true,
