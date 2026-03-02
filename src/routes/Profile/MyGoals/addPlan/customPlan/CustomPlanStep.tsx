@@ -13,7 +13,9 @@ const CreateCustomPlanStep = () => {
 
   return (
     <div className="mb-2">
-      <p className="text-body-sm-mobile sm:text-body-sm mt-3">{t('profile.my-goals.add-custom-plan-description')}</p>
+      <p className="font-arial text-body-md-mobile sm:text-body-md mt-3">
+        {t('profile.my-goals.add-custom-plan-description')}
+      </p>
       <div className="mt-6">
         <InputField
           label={t('profile.my-goals.custom-plan-name')}
