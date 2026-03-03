@@ -1,8 +1,7 @@
 import { client } from '@/api/client';
 import { formErrorMessage } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
-import type { LanguageValue } from '@/i18n/config';
-import { Combobox, InputField, useMediaQueries } from '@jod/design-system';
+import { InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
@@ -14,7 +13,6 @@ const PersonalDetails = () => {
   const { yksiloData: data, kotikuntaLabel } = useLoaderData<PreferencesLoaderData>();
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
-  const [aidinkieli, setAidinkieli] = React.useState<LanguageValue>(data?.aidinkieli as LanguageValue);
   const [debouncedEmail, email, setEmail] = useDebounceState<string>(data?.email || '', 500);
   const [emailValid, setEmailValid] = React.useState<boolean | undefined>(undefined);
   const [lastSavedEmail, setLastSavedEmail] = React.useState<string>(data?.email || '');
@@ -32,12 +30,11 @@ const PersonalDetails = () => {
   const getPayload = React.useCallback(() => {
     return {
       ...data,
-      aidinkieli: aidinkieli,
       email: lastSavedEmail,
       lupaLuovuttaaTiedotUlkopuoliselle,
       lupaKayttaaTekoalynKoulutukseen,
     };
-  }, [aidinkieli, data, lastSavedEmail, lupaLuovuttaaTiedotUlkopuoliselle, lupaKayttaaTekoalynKoulutukseen]);
+  }, [data, lastSavedEmail, lupaLuovuttaaTiedotUlkopuoliselle, lupaKayttaaTekoalynKoulutukseen]);
 
   const persist = React.useCallback(
     async (body = getPayload()) => {
@@ -163,32 +160,6 @@ const PersonalDetails = () => {
             <Divider className="my-4" />
           </>
         )}
-        <PersonalDetailsInfoBlock
-          label={t('personal-details.mother-tongue')}
-          stack={!sm}
-          interactiveComponent={
-            <Combobox<LanguageValue, { label: string; value: LanguageValue }>
-              className="w-full"
-              label={t('personal-details.choose-mother-tongue')}
-              hideLabel
-              selected={aidinkieli}
-              defaultValue={data?.aidinkieli as LanguageValue}
-              options={[
-                { label: 'Suomi', value: 'fi' },
-                { label: 'Svenska', value: 'sv' },
-                { label: 'English', value: 'en' },
-              ]}
-              onChange={(val) => {
-                if (val) {
-                  setAidinkieli(val);
-                  persist({ ...getPayload(), aidinkieli: val });
-                }
-              }}
-              placeholder={t('personal-details.choose-mother-tongue')}
-            />
-          }
-        />
-        <Divider className="my-4" />
         <PersonalDetailsInfoBlock
           label={t('personal-details.email')}
           stack={!sm}
