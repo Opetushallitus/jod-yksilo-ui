@@ -148,7 +148,7 @@ const EducationOpportunity = () => {
     <OpportunityDetails
       data={koulutusmahdollisuus}
       isLoggedIn={isLoggedIn}
-      tyyppi="KOULUTUSMAHDOLLISUUS"
+      mahdollisuusTyyppi="KOULUTUSMAHDOLLISUUS"
       sections={sections}
       showAiInfoInTitle
     />

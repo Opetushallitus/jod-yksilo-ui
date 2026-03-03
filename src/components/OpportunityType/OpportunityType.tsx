@@ -1,5 +1,4 @@
-import { components } from '@/api/schema';
-import { type MahdollisuusTyyppi } from '@/routes/types';
+import type { MahdollisuusAlityyppi } from '@/routes/types';
 import { JodInfo, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -7,13 +6,11 @@ import { Link } from 'react-router';
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
 interface OpportunityTypeProps {
-  mahdollisuusTyyppi: MahdollisuusTyyppi;
-  aineisto?: components['schemas']['TyomahdollisuusDto']['aineisto'];
-  tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
+  mahdollisuusAlityyppi: MahdollisuusAlityyppi;
   showTypeTooltip?: boolean;
 }
 
-export const OpportunityType = ({ mahdollisuusTyyppi, aineisto, tyyppi, showTypeTooltip }: OpportunityTypeProps) => {
+export const OpportunityType = ({ mahdollisuusAlityyppi, showTypeTooltip }: OpportunityTypeProps) => {
   const {
     t,
     i18n: { language },
@@ -31,28 +28,22 @@ export const OpportunityType = ({ mahdollisuusTyyppi, aineisto, tyyppi, showType
   }, [language]);
 
   const typeText = React.useMemo(() => {
-    if (mahdollisuusTyyppi === 'TYOMAHDOLLISUUS') {
-      if (aineisto === 'AMMATTITIETO') {
+    switch (mahdollisuusAlityyppi) {
+      case 'AMMATTI':
         return t('opportunity-type.work.AMMATTITIETO');
-      } else {
+      case 'MUU_TYOMAHDOLLISUUS':
         return t('opportunity-type.work.TMT');
-      }
-    } else if (mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS') {
-      if (tyyppi === 'TUTKINTO') {
+      case 'TUTKINTO':
         return t('opportunity-type.education.TUTKINTO');
-      } else {
+      case 'MUU_KOULUTUS':
         return t('opportunity-type.education.EI_TUTKINTO');
-      }
-    } else {
-      return null;
     }
-  }, [tyyppi, t, aineisto, mahdollisuusTyyppi]);
+  }, [mahdollisuusAlityyppi, t]);
 
-  const typeTooltip = React.useMemo(() => {
-    if (mahdollisuusTyyppi === 'TYOMAHDOLLISUUS') {
-      const text = {
-        TMT: t('opportunity-tooltip.work.TMT'),
-        AMMATTITIETO: (
+  const tooltipText = React.useMemo(() => {
+    switch (mahdollisuusAlityyppi) {
+      case 'AMMATTI':
+        return (
           <Trans
             i18nKey="opportunity-tooltip.work.AMMATTITIETO"
             components={{
@@ -67,31 +58,24 @@ export const OpportunityType = ({ mahdollisuusTyyppi, aineisto, tyyppi, showType
               ),
             }}
           />
-        ),
-      }[aineisto ?? 'TMT'];
-
-      return (
-        <div className="font-arial text-white leading-5 text-card-label">
-          <p className="mb-2">{typeText}</p>
-          <p className="font-normal">{text}</p>
-        </div>
-      );
-    } else if (mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' && tyyppi) {
-      const text = {
-        TUTKINTO: t('opportunity-tooltip.education.TUTKINTO'),
-        EI_TUTKINTO: t('opportunity-tooltip.education.EI_TUTKINTO'),
-      }[tyyppi];
-
-      return (
-        <div className="font-arial text-white leading-5 text-card-label">
-          <p className="mb-2">{typeText}</p>
-          <p className="font-normal">{text}</p>
-        </div>
-      );
-    } else {
-      return null;
+        );
+      case 'MUU_TYOMAHDOLLISUUS':
+        return <>{t('opportunity-tooltip.work.TMT')}</>;
+      case 'TUTKINTO':
+        return <>{t('opportunity-tooltip.education.TUTKINTO')}</>;
+      case 'MUU_KOULUTUS':
+        return <>{t('opportunity-tooltip.education.EI_TUTKINTO')}</>;
     }
-  }, [mahdollisuusTyyppi, tyyppi, t, getAmmattitietoUrl, aineisto, typeText]);
+  }, [mahdollisuusAlityyppi, getAmmattitietoUrl, t]);
+
+  const typeTooltip = React.useMemo(() => {
+    return (
+      <div className="font-arial text-white leading-5 text-card-label">
+        <p className="mb-2">{typeText}</p>
+        <p className="font-normal">{tooltipText}</p>
+      </div>
+    );
+  }, [typeText, tooltipText]);
 
   return typeText ? (
     <div className="uppercase text-body-xs font-medium text-primary-gray flex items-center gap-2">

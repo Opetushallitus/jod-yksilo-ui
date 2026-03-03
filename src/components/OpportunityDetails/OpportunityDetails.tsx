@@ -5,7 +5,8 @@ import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
-import { type MahdollisuusTyyppi } from '@/routes/types';
+import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
+import type { MahdollisuusAlityyppi, MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { copyToClipboard, getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
@@ -35,14 +36,20 @@ export interface OpportunityDetailsSection {
 export interface OpportunityDetailsProps {
   data: components['schemas']['KoulutusmahdollisuusFullDto'] | components['schemas']['TyomahdollisuusFullDto'];
   isLoggedIn: boolean;
-  tyyppi: MahdollisuusTyyppi;
+  mahdollisuusTyyppi: MahdollisuusTyyppi;
   sections: OpportunityDetailsSection[];
   showAiInfoInTitle?: boolean;
 }
 /**
  * A generic component for displaying details of an education or job opportunity.
  */
-const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTitle }: OpportunityDetailsProps) => {
+const OpportunityDetails = ({
+  data,
+  isLoggedIn,
+  mahdollisuusTyyppi,
+  sections,
+  showAiInfoInTitle,
+}: OpportunityDetailsProps) => {
   const { isDev } = useEnvironment();
   const { t, i18n } = useTranslation();
   const title = getLocalizedText(data?.otsikko);
@@ -53,8 +60,8 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
       toggleSuosikki: state.toggleSuosikki,
     })),
   );
-  const jobData = data as components['schemas']['TyomahdollisuusFullDto'];
-  const educationData = data as components['schemas']['KoulutusmahdollisuusFullDto'];
+
+  const mahdollisuusAlityyppi = getMahdollisuusAlityyppi({ mahdollisuusTyyppi, ...data });
 
   const { showDialog, closeAllModals } = useModal();
   const { state } = useLocation();
@@ -66,7 +73,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
 
   const handleToggleFavorite = async () => {
     if (data?.id) {
-      await toggleSuosikki(data.id, tyyppi);
+      await toggleSuosikki(data.id, mahdollisuusTyyppi);
     }
   };
 
@@ -94,25 +101,24 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
     return (
       <div className="flex flex-col gap-6">
         <PageNavigation menuSection={menuSection} activeIndicator="dot" />
-        {(jobData.aineisto === 'TMT' || educationData.tyyppi === 'EI_TUTKINTO') && (
+        {(mahdollisuusAlityyppi === 'MUU_TYOMAHDOLLISUUS' || mahdollisuusAlityyppi === 'MUU_KOULUTUS') && (
           <RateAiContent
-            variant={tyyppi === 'TYOMAHDOLLISUUS' ? 'tyomahdollisuus' : 'koulutusmahdollisuus'}
-            area={tyyppi === 'TYOMAHDOLLISUUS' ? 'Työmahdollisuus' : 'Koulutusmahdollisuus'}
+            variant={mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? 'tyomahdollisuus' : 'koulutusmahdollisuus'}
+            area={mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? 'Työmahdollisuus' : 'Koulutusmahdollisuus'}
           />
         )}
         <CounselingCard />
       </div>
     );
-  }, [menuSection, jobData.aineisto, educationData.tyyppi, tyyppi]);
+  }, [menuSection, mahdollisuusAlityyppi, mahdollisuusTyyppi]);
 
   return (
     <MainLayout navChildren={navChildren}>
       {title ? <title>{title}</title> : null}
       <OpportunityHeader
         title={title}
-        tyyppi={educationData.tyyppi}
-        mahdollisuusTyyppi={tyyppi}
-        aineisto={jobData.aineisto}
+        mahdollisuusTyyppi={mahdollisuusTyyppi}
+        mahdollisuusAlityyppi={mahdollisuusAlityyppi}
         showAiInfoInTitle={showAiInfoInTitle}
       />
       {/* Action bar */}
@@ -121,14 +127,14 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           isFavorite={isLoggedIn && !!data?.id && isSuosikki}
           favoriteName={data?.otsikko}
           onToggleFavorite={() =>
-            !isLoggedIn
-              ? showDialog({
+            isLoggedIn
+              ? handleToggleFavorite()
+              : showDialog({
                   title: t('common:login'),
                   description: t('login-for-favorites'),
                   closeParentModal: true,
                   footer: createLoginDialogFooter(t, loginLink, closeAllModals),
                 })
-              : handleToggleFavorite()
           }
           bgClassName="bg-bg-gray-2"
         />
@@ -136,7 +142,7 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
           <ActionButton
             label={t('common:share')}
             icon={<JodShare className="text-accent" />}
-            onClick={() => void copyToClipboard(window.location.href)}
+            onClick={() => void copyToClipboard(globalThis.location.href)}
             className="bg-bg-gray-2"
           />
         )}
@@ -176,28 +182,32 @@ const OpportunityDetails = ({ data, isLoggedIn, tyyppi, sections, showAiInfoInTi
 interface OpportunityHeaderProps {
   title: string;
   mahdollisuusTyyppi: MahdollisuusTyyppi;
-  aineisto?: components['schemas']['TyomahdollisuusDto']['aineisto'];
-  tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
+  mahdollisuusAlityyppi: MahdollisuusAlityyppi;
   showAiInfoInTitle?: boolean;
 }
 
 const OpportunityHeader = ({
   title,
   mahdollisuusTyyppi,
-  aineisto,
-  tyyppi,
+  mahdollisuusAlityyppi,
   showAiInfoInTitle = false,
 }: OpportunityHeaderProps) => {
+  const bgColorClassName =
+    mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'bg-secondary-2-dark' : 'bg-secondary-4-dark-2';
+  const textColorClassName =
+    mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'text-secondary-2-dark' : 'text-secondary-4-dark-2';
   return (
     <div className="flex flex-row">
-      <div className="flex items-center justify-center size-9 aspect-square rounded-full text-white bg-secondary-1-dark-2 print:hidden">
-        <TitleIcon tyyppi={mahdollisuusTyyppi} aineisto={aineisto} />
+      <div
+        className={`flex items-center justify-center size-9 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
+      >
+        <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
       </div>
       <div className="ml-4 flex flex-col justify-center">
-        <OpportunityType mahdollisuusTyyppi={mahdollisuusTyyppi} aineisto={aineisto} tyyppi={tyyppi} showTypeTooltip />
+        <OpportunityType mahdollisuusAlityyppi={mahdollisuusAlityyppi} showTypeTooltip />
         <h1
           data-testid={'opportunity-heading-title'}
-          className={`text-heading-1-mobile leading-7 sm:text-heading-1 sm:leading-[36px] hyphens-auto text-secondary-1-dark-2 text-pretty break-words focus:outline-0`}
+          className={`text-heading-1-mobile leading-7 sm:text-heading-1 sm:leading-[36px] hyphens-auto ${textColorClassName} text-pretty break-words focus:outline-0`}
         >
           {title}
           {showAiInfoInTitle && (

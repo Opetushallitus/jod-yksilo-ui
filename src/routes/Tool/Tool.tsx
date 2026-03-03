@@ -25,6 +25,7 @@ import type { ToolLoaderData } from './loader';
 import { OnboardingTour } from './OnboardingTour';
 import ProfileImportExport from './ProfileImportExport';
 import ToolSettings from './ToolSettings';
+import { getMahdollisuusAlityyppi } from './utils';
 import YourOpportunitiesPagination from './YourOpportunitiesPagination';
 
 const ExploreOpportunities = () => {
@@ -182,11 +183,10 @@ const ExploreOpportunities = () => {
                     headingLevel="h3"
                     ammattiryhma={mahdollisuus.ammattiryhma}
                     ammattiryhmaNimet={ammattiryhmaNimet}
-                    aineisto={mahdollisuus.aineisto}
-                    tyyppi={mahdollisuus.tyyppi}
                     kesto={mahdollisuus.kesto}
                     yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
-                    type={mahdollisuusTyyppi}
+                    mahdollisuusTyyppi={mahdollisuusTyyppi}
+                    mahdollisuusAlityyppi={getMahdollisuusAlityyppi(mahdollisuus)}
                     rateId={id}
                   />
                 ) : null;

@@ -4,7 +4,7 @@ import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDropdown';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
-import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
+import type { MahdollisuusAlityyppi, MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import { Accordion } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -52,8 +52,8 @@ type MenuProps =
       menuId?: never;
     };
 
-export type EducationOpportunityData = Pick<TypedMahdollisuus, 'kesto' | 'tyyppi' | 'yleisinKoulutusala'>;
-export type JobOpportunityData = Pick<TypedMahdollisuus, 'aineisto' | 'ammattiryhma'> & {
+export type EducationOpportunityData = Pick<TypedMahdollisuus, 'kesto' | 'yleisinKoulutusala'>;
+export type JobOpportunityData = Pick<TypedMahdollisuus, 'ammattiryhma'> & {
   ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
 };
 
@@ -67,7 +67,8 @@ interface BaseProps {
   description: string;
   matchValue?: number;
   matchLabel?: string;
-  type: MahdollisuusTyyppi;
+  mahdollisuusTyyppi: MahdollisuusTyyppi;
+  mahdollisuusAlityyppi: MahdollisuusAlityyppi;
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   from?: 'tool' | 'favorite' | 'path' | 'goal' | 'search';
   rateId?: string;
@@ -154,7 +155,8 @@ export const OpportunityCardWrapper = ({
   matchLabel,
   matchValue,
   name,
-  type,
+  mahdollisuusTyyppi,
+  mahdollisuusAlityyppi,
   hideIcon,
   toggleFavorite,
   isFavorite,
@@ -167,8 +169,6 @@ export const OpportunityCardWrapper = ({
   collapsible,
   actionButtonContent,
   initiallyCollapsed,
-  aineisto,
-  tyyppi,
 }: OpportunityCardProps) => {
   const {
     t,
@@ -187,14 +187,14 @@ export const OpportunityCardWrapper = ({
       return;
     }
 
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
+      toggleFavorite?.();
+    } else {
       showDialog({
         title: t('common:login'),
         description: t('login-for-favorites'),
         footer: createLoginDialogFooter(t, loginLink, closeAllModals),
       });
-    } else {
-      toggleFavorite?.();
     }
   };
 
@@ -232,13 +232,12 @@ export const OpportunityCardWrapper = ({
               <OpportunityCardHeader
                 to={to}
                 name={name}
-                mahdollisuusTyyppi={type}
+                mahdollisuusTyyppi={mahdollisuusTyyppi}
+                mahdollisuusAlityyppi={mahdollisuusAlityyppi}
                 headingLevel={headingLevel}
                 hideIcon={hideIcon}
                 from={from}
                 rateId={rateId}
-                aineisto={aineisto}
-                tyyppi={tyyppi}
               />
             </div>
           }
@@ -255,13 +254,12 @@ export const OpportunityCardWrapper = ({
           <OpportunityCardHeader
             to={to}
             name={name}
-            mahdollisuusTyyppi={type}
+            mahdollisuusTyyppi={mahdollisuusTyyppi}
+            mahdollisuusAlityyppi={mahdollisuusAlityyppi}
             headingLevel={headingLevel}
             from={from}
             rateId={rateId}
-            aineisto={aineisto}
             hideIcon={hideIcon}
-            tyyppi={tyyppi}
           />
           <>{content}</>
         </>
@@ -274,24 +272,27 @@ const OpportunityCardHeader = ({
   to,
   name,
   mahdollisuusTyyppi,
+  mahdollisuusAlityyppi,
   headingLevel,
   from,
   rateId,
-  aineisto,
   hideIcon,
-  tyyppi,
 }: {
   to?: string;
   name: string;
   mahdollisuusTyyppi: MahdollisuusTyyppi;
+  mahdollisuusAlityyppi: MahdollisuusAlityyppi;
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   from?: 'tool' | 'favorite' | 'path' | 'goal' | 'search';
   rateId?: string;
   hideIcon?: boolean;
-  aineisto?: components['schemas']['TyomahdollisuusDto']['aineisto'];
-  tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
 }) => {
   const TitleTag = headingLevel || 'span';
+
+  const bgColorClassName =
+    mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'bg-secondary-2-dark' : 'bg-secondary-4-dark-2';
+  const textColorClassName =
+    mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'text-secondary-2-dark' : 'text-secondary-4-dark-2';
 
   const titleContent = (
     <>
@@ -312,13 +313,15 @@ const OpportunityCardHeader = ({
           }}
           className="order-2"
         >
-          <TitleTag className="text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto text-secondary-1-dark hover:underline pb-2">
+          <TitleTag
+            className={`text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto ${textColorClassName} hover:underline pb-2`}
+          >
             {name}
           </TitleTag>
         </NavLink>
       ) : (
         <TitleTag
-          className="text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto pb-2"
+          className={`text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto pb-2 ${textColorClassName}`}
           data-testid="opportunity-card-title"
         >
           {name}
@@ -330,12 +333,14 @@ const OpportunityCardHeader = ({
   return (
     <div className="flex flex-row">
       {!hideIcon && (
-        <div className="flex items-center justify-center size-8 aspect-square rounded-full text-white bg-secondary-1-dark-2 print:hidden">
-          <TitleIcon tyyppi={mahdollisuusTyyppi} aineisto={aineisto} />
+        <div
+          className={`flex items-center justify-center size-8 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
+        >
+          <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
         </div>
       )}
       <div className="ml-4 flex flex-col justify-center">
-        <OpportunityType mahdollisuusTyyppi={mahdollisuusTyyppi} aineisto={aineisto} tyyppi={tyyppi} />
+        <OpportunityType mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
         {titleContent}
       </div>
     </div>
@@ -343,19 +348,9 @@ const OpportunityCardHeader = ({
 };
 
 export const OpportunityCard = (props: OpportunityCardProps) => {
-  return props.type === 'KOULUTUSMAHDOLLISUUS' ? (
-    <EducationOpportunityCard
-      {...props}
-      tyyppi={props.tyyppi}
-      kesto={props.kesto}
-      yleisinKoulutusala={props.yleisinKoulutusala}
-    />
+  return props.mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? (
+    <EducationOpportunityCard {...props} />
   ) : (
-    <JobOpportunityCard
-      {...props}
-      aineisto={props.aineisto}
-      ammattiryhma={props.ammattiryhma}
-      ammattiryhmaNimet={props.ammattiryhmaNimet}
-    />
+    <JobOpportunityCard {...props} />
   );
 };

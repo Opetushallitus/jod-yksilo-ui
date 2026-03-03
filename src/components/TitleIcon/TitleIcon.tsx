@@ -1,19 +1,14 @@
-import { type MahdollisuusTyyppi } from '@/routes/types';
-import { JodBuild, JodCertificate, JodWorkPossibilities } from '@jod/design-system/icons';
+import { type MahdollisuusAlityyppi } from '@/routes/types';
+import { JodBuild, JodCertificate, JodGuide, JodWorkPossibilities } from '@jod/design-system/icons';
 
-export const TitleIcon = ({
-  tyyppi,
-  aineisto,
-}: {
-  tyyppi: MahdollisuusTyyppi;
-  aineisto: 'AMMATTITIETO' | 'TMT' | undefined;
-}) => {
-  if (tyyppi === 'TYOMAHDOLLISUUS') {
-    return aineisto === 'AMMATTITIETO' ? (
-      <JodBuild className="text-white" />
-    ) : (
-      <JodWorkPossibilities className="text-white" />
-    );
-  }
-  return <JodCertificate className="text-white" />;
+const ICONS: Record<MahdollisuusAlityyppi, React.ElementType> = {
+  AMMATTI: JodBuild,
+  MUU_TYOMAHDOLLISUUS: JodWorkPossibilities,
+  TUTKINTO: JodCertificate,
+  MUU_KOULUTUS: JodGuide,
+};
+
+export const TitleIcon = ({ mahdollisuusAlityyppi }: { mahdollisuusAlityyppi: MahdollisuusAlityyppi }) => {
+  const IconComponent = ICONS[mahdollisuusAlityyppi];
+  return <IconComponent className="text-white" />;
 };

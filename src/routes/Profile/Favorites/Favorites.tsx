@@ -3,6 +3,7 @@ import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
 import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
+import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
 import type { MahdollisuusTyyppi } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
@@ -257,7 +258,7 @@ const Favorites = () => {
 
       <div className="flex flex-col gap-5 mb-8" data-testid="favorites-list">
         {favoritesPerType.map((mahdollisuus) => {
-          const { id, mahdollisuusTyyppi, tyyppi, aineisto } = mahdollisuus;
+          const { id, mahdollisuusTyyppi } = mahdollisuus;
           return (
             <OpportunityCard
               key={id}
@@ -270,9 +271,8 @@ const Favorites = () => {
               isLoggedIn={true}
               name={getLocalizedText(mahdollisuus.otsikko)}
               toggleFavorite={() => void deleteSuosikki(id)}
-              aineisto={aineisto}
-              tyyppi={tyyppi}
-              type={mahdollisuusTyyppi}
+              mahdollisuusTyyppi={mahdollisuusTyyppi}
+              mahdollisuusAlityyppi={getMahdollisuusAlityyppi(mahdollisuus)}
               kesto={mahdollisuus.kesto}
               yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
               menuContent={

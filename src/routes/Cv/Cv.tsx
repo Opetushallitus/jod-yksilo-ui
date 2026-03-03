@@ -9,6 +9,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 import { getTypeSlug } from '../Profile/utils';
+import { getMahdollisuusAlityyppi } from '../Tool/utils';
 import type { TypedMahdollisuus } from '../types';
 import { ContentSection } from './ContentSection';
 import type { CvLoaderData } from './loader';
@@ -148,9 +149,8 @@ const Cv = () => {
       ammattiryhma={mahdollisuus?.ammattiryhma}
       ammattiryhmaNimet={ammattiryhmaNimet}
       name={getLocalizedText(mahdollisuus.otsikko)}
-      aineisto={mahdollisuus.aineisto}
-      tyyppi={mahdollisuus.tyyppi}
-      type={mahdollisuus.mahdollisuusTyyppi}
+      mahdollisuusTyyppi={mahdollisuus.mahdollisuusTyyppi}
+      mahdollisuusAlityyppi={getMahdollisuusAlityyppi(mahdollisuus)}
       kesto={mahdollisuus.kesto}
       yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
     />

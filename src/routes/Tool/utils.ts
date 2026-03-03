@@ -1,5 +1,5 @@
 import type { components } from '@/api/schema';
-import type { MahdollisuusTyyppi } from '@/routes/types';
+import type { MahdollisuusAlityyppi, MahdollisuusTyyppi } from '@/routes/types';
 
 export type EhdotusRecord = Record<string, components['schemas']['EhdotusMetadata']>;
 
@@ -57,4 +57,22 @@ export const mergeUniqueValuesExcludingType = <T extends { id: string; tyyppi?: 
 
   // Remove items of excluded type from current values and merge with unique new values
   return [...currentValues.filter((item) => item.tyyppi !== excludedType), ...uniqueNewValues];
+};
+
+export const getMahdollisuusAlityyppi = (mahdollisuus: {
+  mahdollisuusTyyppi?: string;
+  aineisto?: string;
+  tyyppi?: string;
+}): MahdollisuusAlityyppi => {
+  if (mahdollisuus.mahdollisuusTyyppi === 'TYOMAHDOLLISUUS') {
+    if (mahdollisuus.aineisto === 'AMMATTITIETO') {
+      return 'AMMATTI';
+    } else {
+      return 'MUU_TYOMAHDOLLISUUS';
+    }
+  } else if (mahdollisuus.tyyppi === 'TUTKINTO') {
+    return 'TUTKINTO';
+  } else {
+    return 'MUU_KOULUTUS';
+  }
 };

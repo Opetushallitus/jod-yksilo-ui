@@ -430,7 +430,7 @@ const JobOpportunity = () => {
     <OpportunityDetails
       data={tyomahdollisuus}
       isLoggedIn={isLoggedIn}
-      tyyppi="TYOMAHDOLLISUUS"
+      mahdollisuusTyyppi="TYOMAHDOLLISUUS"
       sections={sections}
       showAiInfoInTitle={tyomahdollisuus.aineisto === 'TMT'}
     />
