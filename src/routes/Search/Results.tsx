@@ -7,6 +7,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 import { getTypeSlug } from '../Profile/utils';
+import { getMahdollisuusAlityyppi } from '../Tool/utils';
 import { SearchFilters } from './SearchFilters';
 
 export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement | null> }) => {
@@ -66,11 +67,10 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
                   description={getLocalizedText(mahdollisuus.tiivistelma)}
                   headingLevel="h3"
                   ammattiryhma={mahdollisuus.ammattiryhma}
-                  aineisto={mahdollisuus.aineisto}
-                  tyyppi={mahdollisuus.tyyppi}
                   kesto={mahdollisuus.kesto}
                   yleisinKoulutusala={koulutusalaNimet.find((n) => n.code === mahdollisuus?.yleisinKoulutusala)?.value}
-                  type={mahdollisuusTyyppi}
+                  mahdollisuusTyyppi={mahdollisuusTyyppi}
+                  mahdollisuusAlityyppi={getMahdollisuusAlityyppi(mahdollisuus)}
                 />
               );
             })}

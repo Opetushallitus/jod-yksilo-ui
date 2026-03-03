@@ -10,16 +10,10 @@ import { OpportunityDetailsWrapper } from './components/OpportunityDetailsWrappe
 
 type EducationOpportunityCardProps = {
   kesto?: components['schemas']['KoulutusmahdollisuusFullDto']['kesto'];
-  tyyppi?: components['schemas']['KoulutusmahdollisuusDto']['tyyppi'];
   yleisinKoulutusala?: string;
 } & OpportunityCardProps;
 
-export const EducationOpportunityCard = ({
-  kesto,
-  tyyppi,
-  yleisinKoulutusala,
-  ...rest
-}: EducationOpportunityCardProps) => {
+export const EducationOpportunityCard = ({ kesto, yleisinKoulutusala, ...rest }: EducationOpportunityCardProps) => {
   const { t } = useTranslation();
 
   // eslint-disable-next-line react-hooks/preserve-manual-memoization
@@ -34,7 +28,7 @@ export const EducationOpportunityCard = ({
   }, [kesto?.mediaani, t]);
 
   return (
-    <OpportunityCardWrapper tyyppi={tyyppi} {...rest} type="KOULUTUSMAHDOLLISUUS">
+    <OpportunityCardWrapper {...rest}>
       <OpportunityDetailsWrapper>
         <OpportunityDetail
           title={t('tool.education-opportunity-duration')}

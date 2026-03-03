@@ -8,6 +8,7 @@ import { PlanCompetencesTable } from '@/routes/Profile/MyGoals/compareCompetence
 import loader from '@/routes/Profile/MyGoals/loader';
 import { PlanList } from '@/routes/Profile/MyGoals/PlanList';
 import { getTypeSlug } from '@/routes/Profile/utils';
+import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { Button, useMediaQueries } from '@jod/design-system';
@@ -111,9 +112,8 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                         ammattiryhma={details.ammattiryhma}
                         ammattiryhmaNimet={loaderData?.ammattiryhmaNimet}
                         name={getLocalizedText(details.otsikko)}
-                        aineisto={details.aineisto}
-                        tyyppi={details.tyyppi}
-                        type={mahdollisuusTyyppi}
+                        mahdollisuusTyyppi={mahdollisuusTyyppi}
+                        mahdollisuusAlityyppi={getMahdollisuusAlityyppi(details)}
                         kesto={details.kesto}
                         yleisinKoulutusala={details.yleisinKoulutusala}
                         headingLevel="h3"

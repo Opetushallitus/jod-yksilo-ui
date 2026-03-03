@@ -4,6 +4,7 @@ import { ActionButton, OpportunityCard } from '@/components';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useModal } from '@/hooks/useModal';
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
+import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
 import type { TypedMahdollisuus } from '@/routes/types';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { type Tavoite, useTavoitteetStore } from '@/stores/useTavoitteetStore';
@@ -254,11 +255,10 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                         key={id}
                         description={getLocalizedText(mahdollisuus.tiivistelma)}
                         name={getLocalizedText(mahdollisuus.otsikko)}
-                        aineisto={mahdollisuus.aineisto}
                         ammattiryhma={mahdollisuus.ammattiryhma}
                         ammattiryhmaNimet={ammattiryhmaNimet}
-                        tyyppi={mahdollisuus.tyyppi}
-                        type={mahdollisuusTyyppi}
+                        mahdollisuusTyyppi={mahdollisuusTyyppi}
+                        mahdollisuusAlityyppi={getMahdollisuusAlityyppi(mahdollisuus)}
                         kesto={mahdollisuus.kesto}
                         yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
                         initiallyCollapsed

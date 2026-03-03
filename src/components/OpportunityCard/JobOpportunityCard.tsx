@@ -11,10 +11,9 @@ import { OpportunityDetailsWrapper } from './components/OpportunityDetailsWrappe
 type JobOpportunityCardProps = {
   ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
   ammattiryhma?: components['schemas']['AmmattiryhmaBasicDto'];
-  aineisto?: components['schemas']['TyomahdollisuusDto']['aineisto'];
 } & OpportunityCardProps;
 
-export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, aineisto, ...rest }: JobOpportunityCardProps) => {
+export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, ...rest }: JobOpportunityCardProps) => {
   const { t } = useTranslation();
   let kohtaanto;
   switch (ammattiryhma?.kohtaanto) {
@@ -32,7 +31,7 @@ export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, aineisto, 
   }
 
   return (
-    <OpportunityCardWrapper aineisto={aineisto} {...rest} type="TYOMAHDOLLISUUS">
+    <OpportunityCardWrapper {...rest}>
       {ammattiryhma ? (
         <OpportunityDetailsWrapper>
           <OpportunityDetail
