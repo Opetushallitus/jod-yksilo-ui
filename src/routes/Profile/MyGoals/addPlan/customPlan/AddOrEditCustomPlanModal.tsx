@@ -6,6 +6,7 @@ import { useModal } from '@/hooks/useModal';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, clamp, Modal, Spinner, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast/headless';
@@ -208,9 +209,8 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoite, suunnitelmaId }: A
       name={currentHeaderText}
       open={isOpen}
       fullWidthContent={!md || wizardStep === 1}
-      topSlot={
-        <h1 className="text-heading-1-mobile sm:text-heading-1">{t('profile.my-goals.add-custom-plan-header')}</h1>
-      }
+      className="sm:h-full!"
+      topSlot={<h1 className="text-heading-2-mobile sm:text-hero">{t('profile.my-goals.add-custom-plan-header')}</h1>}
       progress={
         <div className="relative z-30">
           <WizardProgress
@@ -242,7 +242,7 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoite, suunnitelmaId }: A
             <Button
               label={t('common:cancel')}
               variant="white"
-              className="h-5"
+              className="whitespace-nowrap"
               size={sm ? 'lg' : 'sm'}
               onClick={() => {
                 showDialog({
@@ -253,37 +253,42 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoite, suunnitelmaId }: A
                   onConfirm: cancel,
                 });
               }}
+              testId="custom-plan-cancel"
             />
 
             {wizardStep === 1 && (
               <Button
                 label={t('previous')}
                 variant="white"
-                className="h-5"
+                className="whitespace-nowrap"
                 size={sm ? 'lg' : 'sm'}
                 onClick={previousStep}
+                icon={sm ? undefined : <JodArrowLeft />}
+                testId="custom-plan-previous"
               />
             )}
             {wizardStep === 0 && (
               <Button
                 label={t('next')}
                 variant="accent"
-                className="h-5"
+                className="whitespace-nowrap"
                 size={sm ? 'lg' : 'sm'}
-                onClick={() => {
-                  nextStep();
-                }}
+                icon={sm ? undefined : <JodArrowRight />}
+                onClick={nextStep}
                 disabled={!isValid}
+                testId="custom-plan-next"
               />
             )}
             {wizardStep === 1 && (
               <Button
-                label={t('save')}
-                size={sm ? 'lg' : 'sm'}
-                className="h-5"
-                disabled={isSubmitting || osaamiset.length === 0}
-                variant="accent"
                 form={formId}
+                label={t('save')}
+                variant="accent"
+                className="whitespace-nowrap"
+                size={sm ? 'lg' : 'sm'}
+                icon={sm ? undefined : <JodCheckmark />}
+                disabled={isSubmitting || osaamiset.length === 0}
+                testId="custom-plan-save"
               />
             )}
           </div>
