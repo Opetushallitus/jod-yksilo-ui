@@ -14,7 +14,7 @@ import { Button, useMediaQueries } from '@jod/design-system';
 import { JodCaretDown, JodCaretUp } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useRevalidator } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 
 interface MyGoalsSectionProps {
@@ -24,6 +24,7 @@ interface MyGoalsSectionProps {
 const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
   const { t, i18n } = useTranslation();
   const { sm } = useMediaQueries();
+  const revalidator = useRevalidator();
 
   const { mahdollisuusDetails, isLoading, upsertTavoite, deleteTavoite } = useTavoitteetStore(
     useShallow((state) => ({
@@ -130,7 +131,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                     <Button
                       variant="white"
                       size={sm ? 'lg' : 'sm'}
-                      className="not-sm:h-5"
+                      className="whitespace-nowrap"
                       onClick={() => {
                         setTavoite(tavoite);
                         showModal(AddPlanModal);
@@ -144,7 +145,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                       <Button
                         variant="white"
                         size={sm ? 'lg' : 'sm'}
-                        className="not-sm:h-5"
+                        className="whitespace-nowrap"
                         onClick={() => {
                           setTavoite(tavoite);
                           showModal(GoalModal, { mode: 'UPDATE', tavoite: tavoite });
@@ -156,12 +157,15 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                         label={t('profile.my-goals.delete-goal')}
                         variant="white-delete"
                         size={sm ? 'lg' : 'sm'}
-                        className="not-sm:h-5"
+                        className="whitespace-nowrap"
                         onClick={() => {
                           showDialog({
                             title: t('profile.my-goals.delete-goal'),
                             description: t('profile.my-goals.delete-goal-description'),
-                            onConfirm: () => deleteTavoite(tavoite.id!),
+                            onConfirm: async () => {
+                              await deleteTavoite(tavoite.id!);
+                              await revalidator.revalidate();
+                            },
                           });
                         }}
                         disabled={!tavoite.id || isLoading}

@@ -3,6 +3,7 @@ import { useModal } from '@/hooks/useModal';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { Button, Modal, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
@@ -75,7 +76,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
     <Modal
       name={currentHeaderText}
       open={isOpen}
-      topSlot={<h1 className="text-heading-2-mobile sm:text-heading-1">{t('profile.my-goals.add-new-plan-header')}</h1>}
+      topSlot={<h1 className="text-heading-2-mobile sm:text-hero">{t('profile.my-goals.add-new-plan-header')}</h1>}
       fullWidthContent
       className="sm:h-full!"
       content={<SelectPlanStep />}
@@ -85,7 +86,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
             label={t('profile.my-goals.add-custom-plan')}
             variant="white"
             size={sm ? 'lg' : 'sm'}
-            className="h-5"
+            className="whitespace-nowrap"
             onClick={() => {
               closeActiveModal();
               showModal(AddOrEditCustomPlanModal, { tavoite });
@@ -97,7 +98,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
               label={t('common:cancel')}
               variant="white"
               size={sm ? 'lg' : 'sm'}
-              className="h-5"
+              className="whitespace-nowrap"
               onClick={() => {
                 showDialog({
                   title: t('common:cancel'),
@@ -113,7 +114,8 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
               label={t('save')}
               disabled={isSubmitting || selectedPlans.length === 0}
               size={sm ? 'lg' : 'sm'}
-              className="h-5"
+              icon={sm ? undefined : <JodCheckmark />}
+              className="whitespace-nowrap"
               variant="accent"
               onClick={onSubmit}
             />

@@ -19,7 +19,7 @@ import {
   useMediaQueries,
   WizardProgress,
 } from '@jod/design-system';
-import { JodFlag, JodFlagFilled } from '@jod/design-system/icons';
+import { JodArrowLeft, JodArrowRight, JodCheckmark, JodFlag, JodFlagFilled } from '@jod/design-system/icons';
 import React from 'react';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
@@ -212,7 +212,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
       name={headerText}
       open={isOpen}
       fullWidthContent={!lg}
-      topSlot={<h1 className="text-heading-1-mobile sm:text-heading-1">{headerText}</h1>}
+      topSlot={<h1 className="text-heading-2-mobile sm:text-hero">{headerText}</h1>}
       content={
         <form className="pb-1">
           {basicInfoStep && (
@@ -342,7 +342,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
               onClick={() => closeActiveModal()}
               variant="white"
               size={sm ? 'lg' : 'sm'}
-              className="whitespace-nowrap h-5"
+              className="whitespace-nowrap"
               data-testid="add-goal-modal-cancel"
             />
             {step > 0 && (
@@ -357,7 +357,8 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                 variant="white"
                 disabled={isSubmitting}
                 size={sm ? 'lg' : 'sm'}
-                className="whitespace-nowrap h-5"
+                className="whitespace-nowrap"
+                icon={sm ? undefined : <JodArrowLeft />}
                 data-testid="add-goal-modal-previous"
               />
             )}
@@ -373,7 +374,8 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                 variant="accent"
                 disabled={isSubmitting || !goalName}
                 size={sm ? 'lg' : 'sm'}
-                className="whitespace-nowrap h-5"
+                className="whitespace-nowrap"
+                icon={sm ? undefined : <JodArrowRight />}
                 data-testid="add-goal-modal-next"
               />
             )}
@@ -386,7 +388,8 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
                 variant="accent"
                 disabled={isSubmitting || !selectedMahdollisuus || !goalName}
                 size={sm ? 'lg' : 'sm'}
-                className="whitespace-nowrap h-5"
+                icon={sm ? undefined : <JodCheckmark />}
+                className="whitespace-nowrap"
                 data-testid="add-goal-modal-save"
               />
             )}
