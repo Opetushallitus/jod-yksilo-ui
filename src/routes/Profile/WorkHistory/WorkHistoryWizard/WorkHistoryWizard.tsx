@@ -328,7 +328,7 @@ const WorkHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
       }
       progress={progress}
       footer={footer}
-      className="sm:h-full!"
+      className="h-[90vh]! sm:h-full!"
     />
   );
 };

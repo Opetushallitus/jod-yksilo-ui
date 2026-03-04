@@ -89,7 +89,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
               )}
 
               <div
-                className={cx('flex gap-2', {
+                className={cx('flex gap-3', {
                   'justify-end': s.koulutusmahdollisuusId,
                   'not-sm:justify-between': !s.koulutusmahdollisuusId,
                 })}
@@ -122,7 +122,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
     </div>
   );
   return (
-    <div className="mt-8">
+    <div className="mt-8 pl-3 sm:pl-4">
       {sm ? (
         <div className="flex flex-col">
           <h3 className="text-heading-3">{title}</h3>

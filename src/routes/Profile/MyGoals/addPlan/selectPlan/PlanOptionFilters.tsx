@@ -6,7 +6,7 @@ import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStor
 import { MAX_KESTO_VALUE, MIN_KESTO_VALUE } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel';
 import { Setting } from '@/routes/Tool/components/Setting';
 import { getFilterCount, noFiltersSelected } from '@/utils/FilterUtils';
-import { Button, cx, Modal, useMediaQueries } from '@jod/design-system';
+import { Button, Modal, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -30,14 +30,8 @@ const SettingsMenu = () => {
   };
 
   return (
-    <div className="bg-bg-gray w-full sm:text-body-sm text-body-sm-mobile flex flex-col gap-2 max-h-full">
-      <ul
-        className={cx('mt-4', {
-          // For shifting the scrollbar to the right
-          'w-2/3': sm,
-          '-mr-3 pr-3': !sm,
-        })}
-      >
+    <div className="bg-bg-gray sm:text-body-sm text-body-sm-mobile flex flex-col gap-2 max-h-full">
+      <ul>
         <Setting
           title={t('tool.settings.general.education-opportunity-type')}
           count={getFilterCount(filters, ['educationOpportunityType'])}
@@ -83,7 +77,7 @@ const PlanOptionFilters = ({ onConfirm, ...rest }: PlanOptionFiltersProps) => {
       fullWidthContent
       className="h-[90dvh]!"
       content={
-        <div className="bg-bg-gray w-full sm:text-body-sm text-body-sm-mobile flex flex-col gap-6">
+        <div className="bg-bg-gray sm:text-body-sm text-body-sm-mobile flex flex-col gap-6 max-w-modal-content box-content px-5 sm:pl-9">
           <SettingsMenu />
         </div>
       }

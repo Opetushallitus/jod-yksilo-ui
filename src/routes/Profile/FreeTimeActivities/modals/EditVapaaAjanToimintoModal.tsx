@@ -135,7 +135,7 @@ export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }:
       {...rest}
       topSlot={topSlot}
       fullWidthContent
-      className="sm:h-full!"
+      className="h-[90vh]! sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form
@@ -147,7 +147,7 @@ export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }:
                 event.preventDefault();
               }
             }}
-            className="max-w-modal-content"
+            className="max-w-modal-content box-content px-5 md:px-9"
           >
             <InputField
               label={t('free-time-activities.name-of-free-time-theme')}

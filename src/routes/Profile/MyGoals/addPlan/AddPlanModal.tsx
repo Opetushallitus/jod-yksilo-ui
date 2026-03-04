@@ -130,39 +130,35 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
       {...rest}
       topSlot={<h2 className="text-heading-2-mobile sm:text-hero">{t('profile.my-goals.add-new-plan-header')}</h2>}
       fullWidthContent
-      className="sm:h-full!"
+      className="h-[90vh]! sm:h-full!"
       content={
-        <div>
-          <div
-            className={cx('mt-4', {
-              // For shifting the scrollbar to the right
-              'w-2/3': sm,
-              '-mr-3 pr-3': !sm,
-            })}
-          >
+        <div className="">
+          <div>
             <div className="relative flex flex-col h-full z-20">
-              <p className="text-body-sm-mobile sm:text-body-sm font-arial bg-bg-gray">
-                {t('profile.my-goals.add-new-plan-description')}
-              </p>
-              <div className="sticky top-0 z-40 bg-bg-gray px-1">
-                <div className="flex justify-end mb-3 items-center">
-                  <Button
-                    variant="gray"
-                    size="sm"
-                    className="bg-bg-gray-2!"
-                    ariaHaspopup="dialog"
-                    ref={settingsButtonRef}
-                    icon={<JodSettings className="text-accent!" />}
-                    iconSide="left"
-                    disabled={isLoading}
-                    label={toggleFiltersText}
-                    data-testid="open-select-plan-filters"
-                    onClick={() => {
-                      showModal(PlanOptionFilters, {
-                        onConfirm: onUpdateSettings,
-                      });
-                    }}
-                  />
+              <div className="max-w-modal-content box-content px-5 md:px-9">
+                <p className="text-body-sm-mobile sm:text-body-sm font-arial bg-bg-gray">
+                  {t('profile.my-goals.add-new-plan-description')}
+                </p>
+                <div className="sticky top-0 z-40 bg-bg-gray px-1">
+                  <div className="flex justify-end mb-3 items-center">
+                    <Button
+                      variant="gray"
+                      size="sm"
+                      className="bg-bg-gray-2!"
+                      ariaHaspopup="dialog"
+                      ref={settingsButtonRef}
+                      icon={<JodSettings className="text-accent!" />}
+                      iconSide="left"
+                      disabled={isLoading}
+                      label={toggleFiltersText}
+                      data-testid="open-select-plan-filters"
+                      onClick={() => {
+                        showModal(PlanOptionFilters, {
+                          onConfirm: onUpdateSettings,
+                        });
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -170,7 +166,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
               <ul
                 id="selectplan-education-opportunities-list"
                 ref={scrollRef}
-                className={cx('flex flex-col gap-5 sm:gap-3 p-2 pt-0', {
+                className={cx('flex flex-col gap-4 py-2 max-w-modal-content box-content pt-0 md:pl-9', {
                   'overflow-y-auto': !isLoading,
                   'overflow-hidden': isLoading,
                 })}
@@ -203,7 +199,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                         key={id}
                         actionButtonContent={
                           selectedPlans?.includes(id) ? (
-                            <div className="flex sm:gap-4 not-sm:justify-between items-center">
+                            <div className="flex flex-col sm:flex-row gap-4 not-sm:justify-between sm:items-center">
                               <span
                                 className={tidyClasses([
                                   'flex',
@@ -216,9 +212,9 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                                   'px-3',
                                   'pb-1',
                                   'text-[14px]',
-                                  'uppercase',
-                                  'sm:order-1',
                                   'order-2',
+                                  'sm:order-1',
+                                  'uppercase',
                                 ])}
                               >
                                 {t('profile.my-goals.plan')}
@@ -226,13 +222,13 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                               <ActionButton
                                 label={t('profile.my-goals.remove-from-plans')}
                                 onClick={() => setSelectedPlans(selectedPlans?.filter((plan) => plan !== id))}
-                                className="order-1 sm:order-2 not-sm:px-0!"
+                                className="bg-bg-gray order-1 sm:order-2"
                                 icon={<JodRoute className="text-accent" />}
                               />
                             </div>
                           ) : (
                             <ActionButton
-                              className="px-0!"
+                              className="bg-bg-gray"
                               label={t('profile.my-goals.choose-as-plan')}
                               onClick={() => setSelectedPlans([...selectedPlans, id])}
                               icon={<JodRoute className="text-accent" />}
@@ -246,7 +242,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                     ) : null;
                   })}
               </ul>
-              <div className="my-4">
+              <div className="my-4 px-5 md:pl-9">
                 <PlanOptionsPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} />
               </div>
             </div>

@@ -31,55 +31,57 @@ const ProfileFront = () => {
       }
     >
       {!lg && (
-        <div className="mb-6">
+        <div className="mb-6 px-5 sm:px-6">
           <ProfileNavigationList collapsed />
         </div>
       )}
       <title>{t('profile.index')}</title>
-      <IconHeading
-        icon={<JodUser />}
-        title={t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
-        testId="profile-front-title"
-      />
+      <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
+        <IconHeading
+          icon={<JodUser />}
+          title={t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
+          testId="profile-front-title"
+        />
 
-      {!isLoading && !data.tervetuloapolku && <WelcomePathModal yksiloData={data} />}
+        {!isLoading && !data.tervetuloapolku && <WelcomePathModal yksiloData={data} />}
 
-      <div className="mb-8 text-body-md flex flex-col gap-7 font-arial">
-        <p className="text-body-lg font-poppins">{t('profile.preferences.you-are-signed-in')}</p>
-        <ul>
-          <ListItem label={t('profile.preferences.list-1-item-1')} />
-          <ListItem label={t('profile.preferences.list-1-item-2')} />
-          <ListItem label={t('profile.preferences.list-1-item-3')} />
-        </ul>
-        <p className="whitespace-pre-line">{t('profile.preferences.paragraph-2')}</p>
-        <ul>
-          <ListItem label={t('profile.preferences.list-2-item-1')} />
-          <ListItem label={t('profile.preferences.list-2-item-2')} />
-        </ul>
-        <p className="whitespace-pre-line">{t('profile.preferences.paragraph-3')}</p>
-        <ul>
-          <ListItem label={t('profile.preferences.list-3-item-1')} />
-          <ListItem label={t('profile.preferences.list-3-item-2')} />
-          <ListItem label={t('profile.preferences.list-3-item-3')} />
-          <ListItem label={t('profile.preferences.list-3-item-4')} />
-        </ul>
-        <p>
-          <Trans
-            i18nKey="profile.preferences.paragraph-4"
-            components={{
-              CustomLink: (
-                <ExternalLink
-                  href={`/${language}/${t('common:slugs.privacy-and-cookies')}`}
-                  className="text-accent hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              ),
-            }}
-          />
-        </p>
+        <div className="mb-8 text-body-md flex flex-col gap-7 font-arial">
+          <p className="text-body-lg font-poppins">{t('profile.preferences.you-are-signed-in')}</p>
+          <ul>
+            <ListItem label={t('profile.preferences.list-1-item-1')} />
+            <ListItem label={t('profile.preferences.list-1-item-2')} />
+            <ListItem label={t('profile.preferences.list-1-item-3')} />
+          </ul>
+          <p className="whitespace-pre-line">{t('profile.preferences.paragraph-2')}</p>
+          <ul>
+            <ListItem label={t('profile.preferences.list-2-item-1')} />
+            <ListItem label={t('profile.preferences.list-2-item-2')} />
+          </ul>
+          <p className="whitespace-pre-line">{t('profile.preferences.paragraph-3')}</p>
+          <ul>
+            <ListItem label={t('profile.preferences.list-3-item-1')} />
+            <ListItem label={t('profile.preferences.list-3-item-2')} />
+            <ListItem label={t('profile.preferences.list-3-item-3')} />
+            <ListItem label={t('profile.preferences.list-3-item-4')} />
+          </ul>
+          <p>
+            <Trans
+              i18nKey="profile.preferences.paragraph-4"
+              components={{
+                CustomLink: (
+                  <ExternalLink
+                    href={`/${language}/${t('common:slugs.privacy-and-cookies')}`}
+                    className="text-accent hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                ),
+              }}
+            />
+          </p>
+        </div>
+        {lg ? null : <ToolCard testId="profile-front-go-to-tool" className="mt-6" />}
       </div>
-      {lg ? null : <ToolCard testId="profile-front-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };
