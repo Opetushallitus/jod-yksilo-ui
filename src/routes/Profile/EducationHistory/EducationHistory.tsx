@@ -143,7 +143,12 @@ const EducationHistory = () => {
   }, [revalidator]);
 
   const onAddNestedRowClick = (row: ExperienceTableRowData) => {
-    showModal(AddOrEditKoulutusModal, { koulutuskokonaisuusId: row.key });
+    showModal(AddOrEditKoulutusModal, {
+      koulutuskokonaisuusId: row.key,
+      onClose: () => {
+        void refreshData();
+      },
+    });
   };
 
   const { isPrd } = useEnvironment();
