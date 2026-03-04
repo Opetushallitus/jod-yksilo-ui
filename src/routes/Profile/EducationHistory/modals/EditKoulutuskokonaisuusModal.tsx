@@ -143,6 +143,7 @@ const EditKoulutuskokonaisuusModal = ({
                 event.preventDefault();
               }
             }}
+            className="max-w-modal-content box-content px-5 md:px-9"
           >
             <InputField
               label={t('education-history.educational-institution-or-education-provider')}

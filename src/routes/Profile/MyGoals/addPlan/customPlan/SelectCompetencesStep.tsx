@@ -132,7 +132,7 @@ const SelectCompetencesStep = () => {
   }, [valitutOsaamiset]);
 
   return (
-    <div className="overflow-y-auto w-full">
+    <div className="overflow-y-auto max-w-modal-content box-content px-5 md:px-9">
       <p className="font-arial mb-6">{t('profile.my-goals.custom-plan-competences-description')}</p>
 
       <div className="sm:mt-6 w-full">

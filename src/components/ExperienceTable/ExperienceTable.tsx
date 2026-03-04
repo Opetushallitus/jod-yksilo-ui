@@ -1,4 +1,4 @@
-import { Button, useMediaQueries } from '@jod/design-system';
+import { Button, cx, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ExperienceTableRow, type ExperienceTableRowData } from './ExperienceTableRow';
@@ -29,6 +29,8 @@ interface ExperienceTableProps {
   koulutuksetThatNeedUserVerification?: string[];
   /** Function to mark the osaamiset of a specific koulutus as verified */
   verifyKoulutusOsaamiset?: (koulutusId: string) => void;
+  /** Is it used inside of Modal component? */
+  insideModal?: boolean;
 }
 
 export const ExperienceTable = ({
@@ -55,6 +57,7 @@ export const ExperienceTable = ({
   verifyKoulutusOsaamiset,
   ariaLabel,
   isPrinting = false,
+  insideModal = false,
 }: ExperienceTableProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
@@ -161,6 +164,8 @@ export const ExperienceTable = ({
   const uncategorizedRows = rows.filter((row) => !row.subrows);
   const categorizedRows = rows.filter((row) => row.subrows);
 
+  const thPadding = insideModal ? 'md:pl-6' : 'sm:pl-6';
+
   return (
     <div data-testid="experience-table">
       {rows.length > 0 && (
@@ -174,7 +179,7 @@ export const ExperienceTable = ({
         >
           <thead className="after:content-[''] after:block after:h-5">
             <tr className="border-b border-inactive-gray text-left text-body-md">
-              <th scope="col" colSpan={sm ? 1 : 3} className="pr-7 pb-3 font-normal pl-4">
+              <th scope="col" colSpan={sm ? 1 : 3} className={cx('pr-7 pb-3 font-normal pl-5', thPadding)}>
                 {mainColumnHeader}
               </th>
 
@@ -215,6 +220,7 @@ export const ExperienceTable = ({
                   </tr>
                 )}
                 <ExperienceTableRow
+                  insideModal={insideModal}
                   openFromTopLevel
                   key={row.key}
                   row={row}
@@ -243,6 +249,7 @@ export const ExperienceTable = ({
                 />
                 {row.subrows?.map((subrow, i) => (
                   <ExperienceTableRow
+                    insideModal={insideModal}
                     key={subrow.key}
                     row={subrow}
                     onRowClick={onNestedRowClick}
@@ -269,7 +276,7 @@ export const ExperienceTable = ({
                   <tr>
                     <td
                       colSpan={5}
-                      className={`pt-5 ${categorizedRows.length - 1 === index ? 'pb-7 sm:pb-11' : 'pb-7'}`.trim()}
+                      className={`px-5 sm:px-6 pt-5 ${categorizedRows.length - 1 === index ? 'pb-7 sm:pb-11' : 'pb-7'}`.trim()}
                     >
                       <Button
                         variant="white"
@@ -297,6 +304,7 @@ export const ExperienceTable = ({
             )}
             {uncategorizedRows.map((row) => (
               <ExperienceTableRow
+                insideModal={insideModal}
                 key={row.key}
                 row={row}
                 onRowClick={onRowClick}
@@ -315,7 +323,7 @@ export const ExperienceTable = ({
         </table>
       )}
       {onAddClick && addNewLabel && (
-        <div className="mb-[84px]">
+        <div className="mb-[84px] px-5 sm:px-6">
           <Button
             ariaHaspopup="dialog"
             variant="accent"

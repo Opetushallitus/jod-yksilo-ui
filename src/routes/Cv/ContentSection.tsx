@@ -19,7 +19,7 @@ export const ContentSection = ({ children, title, className = '', isPrinting = f
 
   return lg ? (
     <div className={tc([className, 'flex flex-col gap-5'])}>
-      {titleElement}
+      <div className="lg:pl-6">{titleElement}</div>
       {children}
     </div>
   ) : (
@@ -28,6 +28,7 @@ export const ContentSection = ({ children, title, className = '', isPrinting = f
       isOpen={isPrinting || undefined}
       title={titleElement}
       className={tc([className, 'mb-8'])}
+      titleClassName="px-5 sm:px-6"
       triggerId={triggerId}
       ariaControls={contentId}
     >

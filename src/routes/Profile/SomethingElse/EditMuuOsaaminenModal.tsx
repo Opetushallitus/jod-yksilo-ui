@@ -99,7 +99,7 @@ const EditMuuOsaaminenModal = ({ onClose, data, ...rest }: EditMuuOsaaminenModal
       {...rest}
       topSlot={topSlot}
       fullWidthContent
-      className="sm:h-full!"
+      className="h-[90vh]! sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form
@@ -111,6 +111,7 @@ const EditMuuOsaaminenModal = ({ onClose, data, ...rest }: EditMuuOsaaminenModal
                 event.preventDefault();
               }
             }}
+            className="px-5 md:px-9"
           >
             <Controller
               control={methods.control}

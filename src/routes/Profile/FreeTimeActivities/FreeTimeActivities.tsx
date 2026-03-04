@@ -61,20 +61,21 @@ const FreeTimeActivities = () => {
       }
     >
       {!lg && (
-        <div className="mb-6">
+        <div className="mb-6 px-5 sm:px-6">
           <ProfileNavigationList collapsed />
         </div>
       )}
       <title>{title}</title>
-      <ProfileSectionTitle type="PATEVYYS" title={title} />
-      <p className="mb-5 text-body-lg">{t('profile.free-time-activities.description')}</p>
+      <div className="px-5 sm:px-6">
+        <ProfileSectionTitle type="PATEVYYS" title={title} />
+        <p className="mb-5 text-body-lg">{t('profile.free-time-activities.description')}</p>
 
-      {rows.length === 0 && (
-        <div className="mt-6 mb-7" data-testid="free-time-empty-state">
-          <EmptyState text={t('profile.free-time-activities.empty')} />
-        </div>
-      )}
-
+        {rows.length === 0 && (
+          <div className="mt-6 mb-7" data-testid="free-time-empty-state">
+            <EmptyState text={t('profile.free-time-activities.empty')} />
+          </div>
+        )}
+      </div>
       <ExperienceTable
         ariaLabel={title}
         mainColumnHeader={t('free-time-activities.theme-or-activity')}
@@ -88,7 +89,11 @@ const FreeTimeActivities = () => {
         onNestedRowClick={onNestedRowClick}
         onAddNestedRowClick={onAddNestedRowClick}
       />
-      {lg ? null : <ToolCard testId="free-time-go-to-tool" className="mt-6" />}
+      {lg ? null : (
+        <div className="px-5">
+          <ToolCard testId="free-time-go-to-tool" className="mt-6" />
+        </div>
+      )}
     </MainLayout>
   );
 };

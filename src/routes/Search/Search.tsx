@@ -23,16 +23,18 @@ const Search = () => {
         </div>
       }
     >
-      <IconHeading icon={<JodSearch className="text-white" />} title={t('search.title')} testId="search-title" />
-      <title>{t('search.title')}</title>
-      <p className="text-body-lg-mobile sm:text-body-lg mb-6 max-w-[700px]">{t('search.description')}</p>
-      <SearchBar scrollRef={scrollRef} />
-      <SearchResults scrollRef={scrollRef} />
-      {!sm && (
-        <div className="mt-6">
-          <InfoCards />
-        </div>
-      )}
+      <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
+        <IconHeading icon={<JodSearch className="text-white" />} title={t('search.title')} testId="search-title" />
+        <title>{t('search.title')}</title>
+        <p className="text-body-lg-mobile sm:text-body-lg mb-6 max-w-[700px]">{t('search.description')}</p>
+        <SearchBar scrollRef={scrollRef} />
+        <SearchResults scrollRef={scrollRef} />
+        {!sm && (
+          <div className="mt-6">
+            <InfoCards />
+          </div>
+        )}
+      </div>
     </MainLayout>
   );
 };

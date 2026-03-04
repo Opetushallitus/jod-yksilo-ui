@@ -36,7 +36,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
   }, [alkuPvm, loppuPvm, trigger]);
 
   return (
-    <div className="max-w-modal-content">
+    <div className="max-w-modal-content box-content px-5 md:px-9">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.education-history.modals.description')}
       </p>
@@ -60,8 +60,8 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
         />
         <FormError name={`koulutukset.${koulutus}.nimi.${language}`} errors={errors} />
       </div>
-      <div className="mb-6 flex grow gap-6">
-        <div className="block w-full">
+      <div className="mb-6 flex grow gap-4">
+        <div className="w-full sm:max-w-input-short">
           <Controller
             control={control}
             render={({ field: { onBlur }, field }) => (
@@ -84,7 +84,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
             errors={errors}
           />
         </div>
-        <div className="block w-full">
+        <div className="w-full sm:max-w-input-short">
           <Controller
             control={control}
             render={({ field }) => (

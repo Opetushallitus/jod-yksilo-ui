@@ -12,8 +12,8 @@ const CreateCustomPlanStep = () => {
   } = useFormContext<OmaSuunnitelmaForm>();
 
   return (
-    <div className="mb-2">
-      <p className="font-arial text-body-md-mobile sm:text-body-md mt-3">
+    <div className="mb-2 max-w-modal-content box-content px-5 md:px-9">
+      <p className="font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.my-goals.add-custom-plan-description')}
       </p>
       <div className="mt-6">

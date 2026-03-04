@@ -44,82 +44,84 @@ const Interests = () => {
       }
     >
       {!lg && (
-        <div className="mb-6">
+        <div className="mb-6 px-5 sm:px-6">
           <ProfileNavigationList collapsed />
         </div>
       )}
       <title>{title}</title>
-      <ProfileSectionTitle type="KIINNOSTUS" title={title} />
-      <p className="mb-5 text-body-lg">{t('profile.interests.description')}</p>
-      {isAllSkillsEmpty && (
-        <div className="mt-6 mb-7">
-          <EmptyState text={t('profile.interests.empty')} testId="interests-empty-state" />
+      <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
+        <ProfileSectionTitle type="KIINNOSTUS" title={title} />
+        <p className="mb-5 text-body-lg">{t('profile.interests.description')}</p>
+        {isAllSkillsEmpty && (
+          <div className="mt-6 mb-7">
+            <EmptyState text={t('profile.interests.empty')} testId="interests-empty-state" />
+          </div>
+        )}
+        {!isSkillsEmpty && (
+          <>
+            <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
+              {t('profile.interests.skills-that-interest-me')}
+            </h2>
+            <ul className="flex flex-wrap gap-3">
+              {sortedSkills.map((val) => (
+                <li key={val.uri} className="max-w-full">
+                  <Tag
+                    label={getLocalizedText(val.nimi)}
+                    tooltip={getLocalizedText(val.kuvaus)}
+                    variant="presentation"
+                    sourceType="kiinnostus"
+                  />
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+        {!isOccupationSkillsEmpty && (
+          <>
+            <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray mt-8">
+              {t('profile.interests.occupations-that-interest-me')}
+            </h2>
+            <ul className="flex flex-wrap gap-3">
+              {sortedOccupations.map((val) => (
+                <li key={val.uri} className="max-w-full">
+                  <Tag
+                    label={getLocalizedText(val.nimi)}
+                    tooltip={getLocalizedText(val.kuvaus)}
+                    variant="presentation"
+                    sourceType="kiinnostus"
+                  />
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+        <div className="flex pt-7 mb-7">
+          <Button
+            variant="accent"
+            ariaHaspopup="dialog"
+            label={isAllSkillsEmpty ? t('profile.interests.add-interests') : t('profile.interests.edit-interests')}
+            onClick={() => {
+              showModal(EditKiinnostusModal, { data: kiinnostukset });
+            }}
+            testId="interests-edit-button"
+          />
         </div>
-      )}
-      {!isSkillsEmpty && (
-        <>
-          <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
-            {t('profile.interests.skills-that-interest-me')}
-          </h2>
-          <ul className="flex flex-wrap gap-3">
-            {sortedSkills.map((val) => (
-              <li key={val.uri} className="max-w-full">
-                <Tag
-                  label={getLocalizedText(val.nimi)}
-                  tooltip={getLocalizedText(val.kuvaus)}
-                  variant="presentation"
-                  sourceType="kiinnostus"
-                />
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-      {!isOccupationSkillsEmpty && (
-        <>
-          <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray mt-8">
-            {t('profile.interests.occupations-that-interest-me')}
-          </h2>
-          <ul className="flex flex-wrap gap-3">
-            {sortedOccupations.map((val) => (
-              <li key={val.uri} className="max-w-full">
-                <Tag
-                  label={getLocalizedText(val.nimi)}
-                  tooltip={getLocalizedText(val.kuvaus)}
-                  variant="presentation"
-                  sourceType="kiinnostus"
-                />
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-      <div className="flex pt-7 mb-7">
-        <Button
-          variant="accent"
-          ariaHaspopup="dialog"
-          label={isAllSkillsEmpty ? t('profile.interests.add-interests') : t('profile.interests.edit-interests')}
-          onClick={() => {
-            showModal(EditKiinnostusModal, { data: kiinnostukset });
-          }}
-          testId="interests-edit-button"
-        />
+        <div className="mb-7">
+          <FreeFormTextInputBlock
+            header={t('profile.interests.freeform.header')}
+            description={t('profile.interests.freeform.description')}
+            placeholder={t('profile.interests.freeform.placeholder')}
+            text={vapaateksti}
+            onChange={async (value) => {
+              await client.PUT('/api/profiili/kiinnostukset/vapaateksti', {
+                body: value,
+              });
+            }}
+            testId="interests-freeform"
+          />
+        </div>
+        {lg ? null : <ToolCard testId="interests-go-to-tool" className="mt-6" />}
       </div>
-      <div className="mb-7">
-        <FreeFormTextInputBlock
-          header={t('profile.interests.freeform.header')}
-          description={t('profile.interests.freeform.description')}
-          placeholder={t('profile.interests.freeform.placeholder')}
-          text={vapaateksti}
-          onChange={async (value) => {
-            await client.PUT('/api/profiili/kiinnostukset/vapaateksti', {
-              body: value,
-            });
-          }}
-          testId="interests-freeform"
-        />
-      </div>
-      {lg ? null : <ToolCard testId="interests-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };

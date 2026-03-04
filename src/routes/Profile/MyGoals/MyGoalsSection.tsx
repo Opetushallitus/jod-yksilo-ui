@@ -61,7 +61,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
 
   return (
     <div className="mb-5">
-      <div className="flex flex-col mb-5 gap-6">
+      <div className="flex flex-col mb-5 gap-6 px-5 sm:px-6 lg:pr-0 lg:pl-6">
         {tavoitteet.map((tavoite, i) => {
           const { mahdollisuusId, mahdollisuusTyyppi } = tavoite;
           const details = getMahdollisuusDetails(mahdollisuusId);
@@ -85,76 +85,78 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                   </div>
                 }
               >
-                <section id={contentId} className="p-4">
-                  <p className="text-primary-gray pb-4 -ml-4 -mt-2">{getLocalizedText(tavoite.kuvaus)}</p>
-                  {details && mahdollisuusTyyppi && (
-                    <>
-                      <OpportunityCard
-                        to={`/${i18n.language}/${getTypeSlug(mahdollisuusTyyppi)}/${mahdollisuusId ?? ''}`}
-                        description={getLocalizedText(details.tiivistelma)}
-                        from="goal"
-                        ammattiryhma={details.ammattiryhma}
-                        ammattiryhmaNimet={loaderData?.ammattiryhmaNimet}
-                        name={getLocalizedText(details.otsikko)}
-                        mahdollisuusTyyppi={mahdollisuusTyyppi}
-                        mahdollisuusAlityyppi={getMahdollisuusAlityyppi(details)}
-                        kesto={details.kesto}
-                        yleisinKoulutusala={details.yleisinKoulutusala}
-                        headingLevel="h3"
-                        hideFavorite
-                      />
-                      <PlanList
-                        goal={tavoite}
-                        language={i18n.language}
-                        removeSuunnitelmaFromStore={removeSuunnitelmaFromStore}
-                      />
-                    </>
-                  )}
+                <section id={contentId}>
+                  <p className="text-primary-gray mt-3">{getLocalizedText(tavoite.kuvaus)}</p>
+                  <div className="p-4">
+                    {details && mahdollisuusTyyppi && (
+                      <>
+                        <OpportunityCard
+                          to={`/${i18n.language}/${getTypeSlug(mahdollisuusTyyppi)}/${mahdollisuusId ?? ''}`}
+                          description={getLocalizedText(details.tiivistelma)}
+                          from="goal"
+                          ammattiryhma={details.ammattiryhma}
+                          ammattiryhmaNimet={loaderData?.ammattiryhmaNimet}
+                          name={getLocalizedText(details.otsikko)}
+                          mahdollisuusTyyppi={mahdollisuusTyyppi}
+                          mahdollisuusAlityyppi={getMahdollisuusAlityyppi(details)}
+                          kesto={details.kesto}
+                          yleisinKoulutusala={details.yleisinKoulutusala}
+                          headingLevel="h3"
+                          hideFavorite
+                        />
+                        <PlanList
+                          goal={tavoite}
+                          language={i18n.language}
+                          removeSuunnitelmaFromStore={removeSuunnitelmaFromStore}
+                        />
+                      </>
+                    )}
 
-                  <div className="mt-9 flex flex-col items-start gap-3">
-                    <Button
-                      variant="white"
-                      ariaHaspopup="dialog"
-                      size={sm ? 'lg' : 'sm'}
-                      onClick={() => {
-                        setTavoite(tavoite);
-                        showModal(AddPlanModal);
-                      }}
-                      disabled={isLoading}
-                      label={t('profile.my-goals.add-new-plan-for-goal')}
-                    />
-                    <PlanCompetencesTable goal={tavoite} />
-
-                    <div className="w-full flex justify-between">
+                    <div className="mt-9 flex flex-col items-start gap-3 pl-3 sm:pl-4">
                       <Button
                         variant="white"
                         ariaHaspopup="dialog"
                         size={sm ? 'lg' : 'sm'}
                         onClick={() => {
                           setTavoite(tavoite);
-                          showModal(GoalModal, { mode: 'UPDATE', tavoite: tavoite });
+                          showModal(AddPlanModal);
                         }}
                         disabled={isLoading}
-                        label={sm ? t('profile.my-goals.modify-goal') : t('edit')}
+                        label={t('profile.my-goals.add-new-plan-for-goal')}
                       />
-                      <Button
-                        label={t('profile.my-goals.delete-goal')}
-                        variant="white-delete"
-                        size={sm ? 'lg' : 'sm'}
-                        ariaHaspopup="dialog"
-                        onClick={() => {
-                          showDialog({
-                            title: t('profile.my-goals.delete-goal'),
-                            description: t('profile.my-goals.delete-goal-description'),
-                            onConfirm: async () => {
-                              await deleteTavoite(tavoite.id!);
-                              await revalidator.revalidate();
-                            },
-                          });
-                        }}
-                        disabled={!tavoite.id || isLoading}
-                        testId="goals-delete"
-                      />
+                      <PlanCompetencesTable goal={tavoite} />
+
+                      <div className="w-full flex justify-between">
+                        <Button
+                          variant="white"
+                          ariaHaspopup="dialog"
+                          size={sm ? 'lg' : 'sm'}
+                          onClick={() => {
+                            setTavoite(tavoite);
+                            showModal(GoalModal, { mode: 'UPDATE', tavoite: tavoite });
+                          }}
+                          disabled={isLoading}
+                          label={sm ? t('profile.my-goals.modify-goal') : t('edit')}
+                        />
+                        <Button
+                          label={t('profile.my-goals.delete-goal')}
+                          variant="white-delete"
+                          size={sm ? 'lg' : 'sm'}
+                          ariaHaspopup="dialog"
+                          onClick={() => {
+                            showDialog({
+                              title: t('profile.my-goals.delete-goal'),
+                              description: t('profile.my-goals.delete-goal-description'),
+                              onConfirm: async () => {
+                                await deleteTavoite(tavoite.id!);
+                                await revalidator.revalidate();
+                              },
+                            });
+                          }}
+                          disabled={!tavoite.id || isLoading}
+                          testId="goals-delete"
+                        />
+                      </div>
                     </div>
                   </div>
                 </section>

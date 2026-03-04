@@ -283,20 +283,26 @@ const ImportKoulutusSummaryModal = ({
       content={
         <div id={modalId} className="flex flex-col sm:h-[890px]">
           <div>
-            <p className="sm:mb-8 mb-5 sm:text-body-md text-body-md-mobile font-arial">
-              {t('education-history-import.summary-modal.description')}
-            </p>
-            {isFetching && (
-              <div className="flex bg-bg-gray-2 rounded w-fit items-center p-4">
-                <span>
-                  <Spinner className="mr-5" size={24} color="black" />
-                </span>
-                <span className="text-primary-gray font-arial text-body-sm">
-                  {t('education-history-import.summary-modal.data-loading')}
-                </span>
+            <div className="max-w-modal-content box-content px-5 md:px-9">
+              <p className="sm:mb-8 mb-5 sm:text-body-md text-body-md-mobile font-arial">
+                {t('education-history-import.summary-modal.description')}
+              </p>
+              {isFetching && (
+                <div className="flex bg-bg-gray-2 rounded w-fit items-center p-4">
+                  <span>
+                    <Spinner className="mr-5" size={24} color="black" />
+                  </span>
+                  <span className="text-primary-gray font-arial text-body-sm">
+                    {t('education-history-import.summary-modal.data-loading')}
+                  </span>
+                </div>
+              )}
+            </div>
+            {!isFetching && !error && (
+              <div className="max-w-modal-content">
+                <EducationImportTable rows={tableRows} />{' '}
               </div>
             )}
-            {!isFetching && !error && <EducationImportTable rows={tableRows} />}
           </div>
         </div>
       }

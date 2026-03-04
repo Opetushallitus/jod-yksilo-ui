@@ -269,7 +269,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
       name={headerText}
       open={showWelcomePathModal}
       fullWidthContent
-      className="sm:h-full!"
+      className="h-[90vh]! sm:h-full!"
       topSlot={<ModalHeader text={headerText} className="text-heading-1-mobile sm:text-heading-1 mb-5" />}
       content={
         <FormProvider {...methods}>
@@ -283,7 +283,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
               }
             }}
           >
-            <div ref={scrollRef} className="sm:w-modal-content">
+            <div ref={scrollRef} className="max-w-modal-content box-content px-5 md:px-9">
               {isFirstStep && <StepWelcome />}
               {isInfoStep && <StepInformation data={yksiloData} />}
               {isAiStep && <StepAi />}
