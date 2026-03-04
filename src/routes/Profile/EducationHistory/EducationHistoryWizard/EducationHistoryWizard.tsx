@@ -171,7 +171,7 @@ const EducationHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
       testId="education-history-wizard"
       fullWidthContent
       topSlot={topSlot}
-      className="sm:h-full!"
+      className="h-[90vh]! sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form

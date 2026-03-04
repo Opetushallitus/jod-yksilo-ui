@@ -36,7 +36,7 @@ interface AddOrEditCustomPlanModalProps extends ModalComponentProps {
 const AddOrEditCustomPlanModal = ({ tavoite, suunnitelmaId, ...rest }: AddOrEditCustomPlanModalProps) => {
   const { t, i18n } = useTranslation();
   const { showDialog, closeActiveModal } = useModal();
-  const { sm, md } = useMediaQueries();
+  const { sm } = useMediaQueries();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const { updateEhdotukset, vaaditutOsaamiset, setTavoite } = addPlanStore(
@@ -198,8 +198,8 @@ const AddOrEditCustomPlanModal = ({ tavoite, suunnitelmaId, ...rest }: AddOrEdit
     <Modal
       name={currentHeaderText}
       {...rest}
-      fullWidthContent={!md || wizardStep === 1}
-      className="sm:h-full!"
+      fullWidthContent
+      className="h-[90vh]! sm:h-full!"
       topSlot={<h1 className="text-heading-2-mobile sm:text-hero">{t('profile.my-goals.add-custom-plan-header')}</h1>}
       progress={
         <div className="relative z-30">

@@ -116,68 +116,72 @@ const OpportunityDetails = ({
   return (
     <MainLayout navChildren={navChildren}>
       {title ? <title>{title}</title> : null}
-      <OpportunityHeader
-        title={title}
-        mahdollisuusTyyppi={mahdollisuusTyyppi}
-        mahdollisuusAlityyppi={mahdollisuusAlityyppi}
-        showAiInfoInTitle={showAiInfoInTitle}
-      />
-      {/* Action bar */}
-      <div className="flex flex-col sm:flex-row gap-3 my-6 md:mt-7 md:mb-8 md:justify-end items-start print:hidden">
-        <FavoriteToggle
-          isFavorite={isLoggedIn && !!data?.id && isSuosikki}
-          opensDialog={!isLoggedIn}
-          favoriteName={data?.otsikko}
-          onToggleFavorite={() =>
-            isLoggedIn
-              ? handleToggleFavorite()
-              : showDialog({
-                  title: t('common:login'),
-                  description: t('login-for-favorites'),
-                  closeParentModal: true,
-                  footer: createLoginDialogFooter(t, loginLink, closeAllModals),
-                })
-          }
-          className="bg-bg-gray-2"
+      <div className="px-5 sm:px-6 lg:pr-0">
+        <OpportunityHeader
+          title={title}
+          mahdollisuusTyyppi={mahdollisuusTyyppi}
+          mahdollisuusAlityyppi={mahdollisuusAlityyppi}
+          showAiInfoInTitle={showAiInfoInTitle}
         />
-        {isDev && (
-          <ActionButton
-            label={t('common:share')}
-            icon={<JodShare className="text-accent" />}
-            onClick={() => void copyToClipboard(globalThis.location.href)}
+        {/* Action bar */}
+        <div className="flex flex-col sm:flex-row gap-3 my-6 md:mt-7 md:mb-8 md:justify-end items-start print:hidden">
+          <FavoriteToggle
+            isFavorite={isLoggedIn && !!data?.id && isSuosikki}
+            opensDialog={!isLoggedIn}
+            favoriteName={data?.otsikko}
+            onToggleFavorite={() =>
+              isLoggedIn
+                ? handleToggleFavorite()
+                : showDialog({
+                    title: t('common:login'),
+                    description: t('login-for-favorites'),
+                    closeParentModal: true,
+                    footer: createLoginDialogFooter(t, loginLink, closeAllModals),
+                  })
+            }
             className="bg-bg-gray-2"
           />
-        )}
-        {!!globalThis.print && (
-          <ActionButton
-            label={t('common:print')}
-            aria-haspopup="dialog"
-            icon={<JodPrint className="text-accent" />}
-            onClick={doPrint}
-            className="bg-bg-gray-2"
-          />
-        )}
-      </div>
 
-      {!lg && (
-        <div className="mb-8">
-          <PageNavigation menuSection={menuSection} activeIndicator="dot" collapsed />
-        </div>
-      )}
-      {/* Sections */}
-      {!!data &&
-        sections.filter(filterDevSections).map((section) => (
-          <div key={section.navTitle} className="flex flex-col mb-7">
-            <ScrollHeading
-              title={section.navTitle}
-              appendix={section.titleAppendix}
-              heading="h2"
-              className={`text-heading-2 ${(section.showNavTitle ?? true) ? 'mb-3' : 'text-transparent text-[0px] size-0'}`}
+          {isDev && (
+            <ActionButton
+              label={t('common:share')}
+              icon={<JodShare className="text-accent" />}
+              onClick={() => void copyToClipboard(globalThis.location.href)}
+              className="bg-bg-gray-2"
             />
-            <div className="flex flex-row justify-between">{section.content}</div>
-            {(section.showDivider ?? true) && <div className="border-b border-border-gray" />}
+          )}
+
+          {!!globalThis.print && (
+            <ActionButton
+              label={t('common:print')}
+              aria-haspopup="dialog"
+              icon={<JodPrint className="text-accent" />}
+              onClick={doPrint}
+              className="bg-bg-gray-2"
+            />
+          )}
+        </div>
+
+        {!lg && (
+          <div className="mb-8">
+            <PageNavigation menuSection={menuSection} activeIndicator="dot" collapsed />
           </div>
-        ))}
+        )}
+        {/* Sections */}
+        {!!data &&
+          sections.filter(filterDevSections).map((section) => (
+            <div key={section.navTitle} className="flex flex-col mb-7">
+              <ScrollHeading
+                title={section.navTitle}
+                appendix={section.titleAppendix}
+                heading="h2"
+                className={`text-heading-2 ${(section.showNavTitle ?? true) ? 'mb-3' : 'text-transparent text-[0px] size-0'}`}
+              />
+              <div className="flex flex-row justify-between">{section.content}</div>
+              {(section.showDivider ?? true) && <div className="border-b border-border-gray" />}
+            </div>
+          ))}
+      </div>
     </MainLayout>
   );
 };
@@ -210,7 +214,7 @@ const OpportunityHeader = ({
         <OpportunityType mahdollisuusAlityyppi={mahdollisuusAlityyppi} showTypeTooltip />
         <h1
           data-testid={'opportunity-heading-title'}
-          className={`text-heading-1-mobile leading-7 sm:text-heading-1 sm:leading-[36px] hyphens-auto ${textColorClassName} text-pretty break-words focus:outline-0`}
+          className={`text-heading-1-mobile leading-7 sm:text-heading-1 sm:leading-[36px] hyphens-auto ${textColorClassName} text-pretty wrap-break-word focus:outline-0`}
         >
           {title}
           {showAiInfoInTitle && (

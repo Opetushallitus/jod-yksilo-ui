@@ -233,7 +233,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
       testId="free-time-wizard"
       fullWidthContent
       topSlot={topSlot}
-      className="sm:h-full!"
+      className="h-[90vh]! sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form

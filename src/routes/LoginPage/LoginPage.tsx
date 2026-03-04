@@ -41,56 +41,60 @@ const LoginPage = () => {
 
   return (
     <MainLayout>
-      <title>{title}</title>
-      <h1 className="mb-5 text-heading-2 sm:text-heading-1 focus:outline-0" data-testid="landing-title">
-        {t('profile.login-page.title')}
-      </h1>
+      <div className="px-5 sm:px-6">
+        <title>{title}</title>
+        <h1 className="mb-5 text-heading-2 sm:text-heading-1 focus:outline-0" data-testid="landing-title">
+          {t('profile.login-page.title')}
+        </h1>
 
-      <div className="mb-8 text-body-md flex flex-col gap-6">
-        <p className="whitespace-pre-line sm:text-body-lg text-body-lg-mobile">{t('profile.login-page.description')}</p>
-        <div>
+        <div className="mb-8 text-body-md flex flex-col gap-6">
+          <p className="whitespace-pre-line sm:text-body-lg text-body-lg-mobile">
+            {t('profile.login-page.description')}
+          </p>
+          <div>
+            <Button
+              variant="accent"
+              label={t('login-to-service')}
+              linkComponent={getLinkTo(loginLink, { useAnchor: true })}
+              icon={<JodArrowRight />}
+              iconSide="right"
+              testId="landing-login"
+            />
+          </div>
+          <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.login-page.profile-includes')}</h2>
+
+          <ul>
+            <ListItem label={t('profile.login-page.list-1-item-1')} />
+            <ListItem label={t('profile.login-page.list-1-item-2')} />
+            <ListItem label={t('profile.login-page.list-1-item-3')} />
+            <ListItem label={t('profile.login-page.list-1-item-4')} />
+            <ListItem label={t('profile.login-page.list-1-item-5')} />
+          </ul>
+          <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.login-page.paragraph-2')}</h2>
+          <ul>
+            <ListItem label={t('profile.login-page.list-2-item-1')} />
+            <ListItem label={t('profile.login-page.list-2-item-2')} />
+            <ListItem label={t('profile.login-page.list-2-item-3')} />
+          </ul>
+          <p className="font-arial">{t('profile.login-page.paragraph-3')}</p>
+        </div>
+
+        <div className="mb-8 flex flex-col gap-7">
+          <p className="font-arial">{t('profile.login-page.paragraph-4')}</p>
           <Button
-            variant="accent"
-            label={t('login-to-service')}
-            linkComponent={getLinkTo(loginLink, { useAnchor: true })}
-            icon={<JodArrowRight />}
+            variant="plain"
+            serviceVariant="yksilo"
+            label={t('privacy-policy')}
+            icon={<JodOpenInNew ariaLabel={t('common:external-link')} />}
             iconSide="right"
-            testId="landing-login"
+            linkComponent={getLinkTo(`/${language}/${t('common:slugs.privacy-and-cookies')}`, {
+              useAnchor: true,
+              target: '_blank',
+              rel: 'noopener noreferrer',
+            })}
+            className="w-fit"
           />
         </div>
-        <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.login-page.profile-includes')}</h2>
-
-        <ul>
-          <ListItem label={t('profile.login-page.list-1-item-1')} />
-          <ListItem label={t('profile.login-page.list-1-item-2')} />
-          <ListItem label={t('profile.login-page.list-1-item-3')} />
-          <ListItem label={t('profile.login-page.list-1-item-4')} />
-          <ListItem label={t('profile.login-page.list-1-item-5')} />
-        </ul>
-        <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.login-page.paragraph-2')}</h2>
-        <ul>
-          <ListItem label={t('profile.login-page.list-2-item-1')} />
-          <ListItem label={t('profile.login-page.list-2-item-2')} />
-          <ListItem label={t('profile.login-page.list-2-item-3')} />
-        </ul>
-        <p className="font-arial">{t('profile.login-page.paragraph-3')}</p>
-      </div>
-
-      <div className="mb-8 flex flex-col gap-7">
-        <p className="font-arial">{t('profile.login-page.paragraph-4')}</p>
-        <Button
-          variant="plain"
-          serviceVariant="yksilo"
-          label={t('privacy-policy')}
-          icon={<JodOpenInNew ariaLabel={t('common:external-link')} />}
-          iconSide="right"
-          linkComponent={getLinkTo(`/${language}/${t('common:slugs.privacy-and-cookies')}`, {
-            useAnchor: true,
-            target: '_blank',
-            rel: 'noopener noreferrer',
-          })}
-          className="w-fit"
-        />
       </div>
     </MainLayout>
   );

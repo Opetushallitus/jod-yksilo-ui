@@ -15,15 +15,13 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
   const { getValues, control } = useFormContext<FreeTimeActivitiesForm>();
 
   return (
-    <>
-      <div className="max-w-modal-content">
-        <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
-          {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}
-        </h3>
-        <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
-          {t('profile.free-time-activities.modals.competences-description')}
-        </p>
-      </div>
+    <div className="max-w-modal-content box-content px-5 md:px-9">
+      <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
+        {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}
+      </h3>
+      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
+        {t('profile.free-time-activities.modals.competences-description')}
+      </p>
       <Controller
         control={control}
         name={`patevyydet.${patevyys}.osaamiset`}
@@ -37,7 +35,7 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
           />
         )}
       />
-    </>
+    </div>
   );
 };
 

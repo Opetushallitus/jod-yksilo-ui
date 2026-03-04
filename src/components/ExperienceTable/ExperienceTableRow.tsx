@@ -1,7 +1,7 @@
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useModal } from '@/hooks/useModal';
 import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
-import { Checkbox, Spinner, Tag, useMediaQueries } from '@jod/design-system';
+import { Checkbox, cx, Spinner, Tag, useMediaQueries } from '@jod/design-system';
 import { JodCaretDown, JodCaretUp, JodEdit, JodError, JodErrorTriangle } from '@jod/design-system/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -48,16 +48,30 @@ interface ExperienceTableRowProps {
   koulutuksetThatNeedUserVerification?: string[];
   /** Function to mark the osaamiset of a specific koulutus as verified */
   verifyKoulutusOsaamiset?: (koulutusId: string) => void;
+  /** Is it used inside of Modal component? */
+  insideModal?: boolean;
 }
 
-const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData }) => {
+const Title = ({
+  nested,
+  row,
+  insideModal,
+}: {
+  nested?: boolean;
+  row: ExperienceTableRowData;
+  insideModal?: boolean;
+}) => {
+  const modalPadding = insideModal ? 'md:pl-6' : 'sm:pl-6';
+
   const text = getLocalizedText(row?.nimi);
   const baseClasses = 'pl-3 sm:pl-5 pr-3 sm:pr-7 pt-2 hyphens-auto [overflow-wrap:anywhere]';
 
   if (nested) {
-    return <p className={`${baseClasses} font-normal text-body-md sm:py-2`}>{text}</p>;
+    return <p className={cx(baseClasses, 'font-normal text-body-md sm:py-2', 'pl-5', modalPadding)}>{text}</p>;
   }
-  return <p className={`${baseClasses} font-poppins text-heading-4 sm:pt-1 sm:pb-[3px]`}>{text}</p>;
+  return (
+    <p className={cx(baseClasses, 'font-poppins text-heading-4 sm:pt-1 sm:pb-[3px]', 'pl-5', modalPadding)}>{text}</p>
+  );
 };
 
 const DateRange = ({ alkuPvm, loppuPvm, className = '' }: { alkuPvm?: Date; loppuPvm?: Date; className?: string }) => (
@@ -121,6 +135,7 @@ export const ExperienceTableRow = ({
   onCheckboxChange,
   koulutuksetThatNeedUserVerification,
   verifyKoulutusOsaamiset,
+  insideModal = false,
 }: ExperienceTableRowProps) => {
   const {
     t,
@@ -321,12 +336,12 @@ export const ExperienceTableRow = ({
       <>
         <tr key={row.key} className={className}>
           <td className="w-full" colSpan={sm ? 1 : 3}>
-            <Title row={row} nested={nested} />
+            <Title row={row} nested={nested} insideModal={insideModal} />
             {!sm && (
               <DateRange
                 alkuPvm={row.alkuPvm}
                 loppuPvm={row.loppuPvm}
-                className={`flex flex-wrap gap-x-5 pb-2 pl-3 sm:pl-5 ${commonTextStyles}`}
+                className={`flex flex-wrap gap-x-5 pb-2 pl-5 sm:pl-6 ${commonTextStyles}`}
               />
             )}
           </td>
@@ -359,7 +374,7 @@ export const ExperienceTableRow = ({
   return (
     <tr key={row.key} className={className}>
       <td className="w-full" colSpan={sm ? 1 : 3}>
-        <Title row={row} />
+        <Title row={row} insideModal={insideModal} />
         {!sm && (
           <DateRange
             alkuPvm={row.alkuPvm}
