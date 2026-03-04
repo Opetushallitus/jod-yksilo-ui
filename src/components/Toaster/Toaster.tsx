@@ -26,7 +26,7 @@ export const Toaster = () => {
       {safeToasts
         .filter((toast) => toast.visible)
         .map((toast) => (
-          <div key={toast.id} className="toast-in">
+          <div key={toast.id} className="toast-in" data-toast-id={toast.id}>
             <Toast text={toast.message} variant={toast.type === 'error' ? 'error' : 'success'} />
           </div>
         ))}
