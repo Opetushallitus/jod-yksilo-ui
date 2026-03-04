@@ -121,7 +121,7 @@ const Cv = () => {
     />
   );
   const osaamispolkuBox = (
-    <div className="flex flex-col rounded-lg p-6 gap-5 bg-secondary-1-dark-2 print:hidden">
+    <div className="flex flex-col rounded-lg p-6 gap-5 bg-secondary-1-dark-2 print:hidden mx-5 sm:mx-6 lg:mx-0">
       <div className="text-heading-2 text-white mr-2">{t('common:osaamispolku')}</div>
       <p className="text-body-lg text-white">{t('cv.osaamispolku-description')}</p>
       <div className="mt-4">
@@ -167,19 +167,21 @@ const Cv = () => {
       }
     >
       <title>{title}</title>
-      <IconHeading icon={<JodUser />} title={title} testId="cv-title" />
+      <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
+        <IconHeading icon={<JodUser />} title={title} testId="cv-title" />
 
-      {!lg && <div className="mb-6 print:hidden">{printButton}</div>}
+        {!lg && <div className="mb-6 print:hidden">{printButton}</div>}
 
-      {!lg && menuSection.linkItems.length > 0 && (
-        <div className="mb-8 print:hidden">
-          <PageNavigation menuSection={menuSection} collapsed />
-        </div>
-      )}
+        {!lg && menuSection.linkItems.length > 0 && (
+          <div className="mb-8 print:hidden">
+            <PageNavigation menuSection={menuSection} collapsed />
+          </div>
+        )}
+      </div>
 
       {/* Basic info box */}
       {hasAnyBasicInfo && (
-        <>
+        <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
           <ScrollHeading title={t('cv.basic-info.title')} heading="h2" className="text-transparent text-[0px] size-0" />
           <div className="bg-bg-gray-2 p-5 rounded-md flex flex-row mb-6">
             <div className="shrink items-start pr-5">
@@ -192,11 +194,13 @@ const Cv = () => {
               <BasicInfoDetail data={kotikunta} title={t('cv.basic-info.home-city')} />
             </dl>
           </div>
-        </>
+        </div>
       )}
 
       {/* Ingress */}
-      {lg && <div className="sm:text-body-lg text-body-lg-mobile mb-6">{t('cv.ingress', { date: voimassaAsti })}</div>}
+      {lg && (
+        <div className="sm:text-body-lg text-body-lg-mobile mb-6 pl-6">{t('cv.ingress', { date: voimassaAsti })}</div>
+      )}
 
       {/* Action bar */}
       {lg && !!globalThis.print && <div className="flex justify-end items-center mb-8 print:hidden">{printButton}</div>}
@@ -204,12 +208,16 @@ const Cv = () => {
       {/* Osaaminen */}
       {hasAnyOsaaminen && (
         <ContentSection title={t('cv.competence.title')}>
-          <div className="mb-6 sm:text-body-md text-body-md-mobile font-arial">{t('cv.competence.description')}</div>
+          <div className="mb-6 sm:text-body-md text-body-md-mobile font-arial px-5 sm:px-6 lg:pr-0 lg:pl-6">
+            {t('cv.competence.description')}
+          </div>
 
           {/* Työpaikat */}
           {data?.tyopaikat && data.tyopaikat.length > 0 && (
             <div className="mb-8 break-after-page">
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.competence.work')}</h3>
+              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5 px-5 sm:px-6 lg:pr-0 lg:pl-6">
+                {t('cv.competence.work')}
+              </h3>
               <div>
                 <ExperienceTable
                   rows={tyopaikkaTableRows}
@@ -224,7 +232,9 @@ const Cv = () => {
           {/* Koulutukset */}
           {data?.koulutusKokonaisuudet && data.koulutusKokonaisuudet.length > 0 && (
             <div className="mb-8 break-after-page">
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.competence.education')}</h3>
+              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5 px-5 sm:px-6 lg:pr-0 lg:pl-6">
+                {t('cv.competence.education')}
+              </h3>
               <div>
                 <ExperienceTable
                   rows={koulutusTableRows}
@@ -239,7 +249,9 @@ const Cv = () => {
           {/* Vapaa-ajan toiminnot */}
           {data?.toiminnot && data.toiminnot.length > 0 && (
             <div className="mb-8 break-after-page">
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.competence.activities')}</h3>
+              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5 px-5 sm:px-6 lg:pr-0 lg:pl-6">
+                {t('cv.competence.activities')}
+              </h3>
               <div>
                 <ExperienceTable
                   rows={toiminnotTableRows}
@@ -254,7 +266,7 @@ const Cv = () => {
           {/* Muu osaaminen */}
           {((Array.isArray(data?.muuOsaaminen?.muuOsaaminen) && data?.muuOsaaminen?.muuOsaaminen.length > 0) ||
             data?.muuOsaaminen?.vapaateksti) && (
-            <div className="break-after-page">
+            <div className="break-after-page px-5 sm:px-6 lg:pr-0 lg:pl-6">
               <h3 className="text-heading-2 mb-5">{t('cv.competence.something-else')}</h3>
               <div className="border-b-2 border-border-gray pb-3 mb-5">{t('cv.competence.title')}</div>
               <div className="mb-8">
@@ -285,67 +297,71 @@ const Cv = () => {
       {/* Kiinnostukset */}
       {hasAnyKiinnostukset && (
         <ContentSection title={t('cv.interests.title')} isPrinting={isPrinting} className="break-before-page">
-          <p className="mb-8 sm:text-body-md text-body-md-mobile font-arial">{t('cv.interests.description')}</p>
+          <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
+            <p className="mb-8 sm:text-body-md text-body-md-mobile font-arial">{t('cv.interests.description')}</p>
 
-          {kiinnostavatOsaamiset && kiinnostavatOsaamiset.length > 0 && (
-            <>
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.interests.competences')}</h3>
-              <div className="mb-8">
-                <ul className="flex flex-row flex-wrap gap-3">
-                  {kiinnostavatOsaamiset?.map((osaaminen) => (
-                    <li key={osaaminen.uri} className="max-w-full">
-                      <Tag label={getLocalizedText(osaaminen.nimi)} variant="presentation" sourceType="kiinnostus" />
-                    </li>
-                  ))}
-                </ul>
+            {kiinnostavatOsaamiset && kiinnostavatOsaamiset.length > 0 && (
+              <>
+                <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.interests.competences')}</h3>
+                <div className="mb-8">
+                  <ul className="flex flex-row flex-wrap gap-3">
+                    {kiinnostavatOsaamiset?.map((osaaminen) => (
+                      <li key={osaaminen.uri} className="max-w-full">
+                        <Tag label={getLocalizedText(osaaminen.nimi)} variant="presentation" sourceType="kiinnostus" />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
+
+            {kiinnostavatAmmatit && kiinnostavatAmmatit.length > 0 && (
+              <>
+                <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.interests.occupations')}</h3>
+                <div className="mb-8">
+                  <ul className="flex flex-row flex-wrap gap-3">
+                    {kiinnostavatAmmatit?.map((ammatti) => (
+                      <li key={ammatti.uri} className="max-w-full">
+                        <Tag label={getLocalizedText(ammatti.nimi)} variant="presentation" sourceType="kiinnostus" />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
+
+            {getLocalizedText(kiinnostuksetVapaateksti) && (
+              <div>
+                <h4 className="sm:text-heading-3 text-heading-3-mobile mb-4">{t('cv.interests.freetext')}</h4>
+                <p className="sm:text-body-md text-body-md-mobile font-arial">
+                  {getLocalizedText(kiinnostuksetVapaateksti)}
+                </p>
               </div>
-            </>
-          )}
-
-          {kiinnostavatAmmatit && kiinnostavatAmmatit.length > 0 && (
-            <>
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.interests.occupations')}</h3>
-              <div className="mb-8">
-                <ul className="flex flex-row flex-wrap gap-3">
-                  {kiinnostavatAmmatit?.map((ammatti) => (
-                    <li key={ammatti.uri} className="max-w-full">
-                      <Tag label={getLocalizedText(ammatti.nimi)} variant="presentation" sourceType="kiinnostus" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </>
-          )}
-
-          {getLocalizedText(kiinnostuksetVapaateksti) && (
-            <div>
-              <h4 className="sm:text-heading-3 text-heading-3-mobile mb-4">{t('cv.interests.freetext')}</h4>
-              <p className="sm:text-body-md text-body-md-mobile font-arial">
-                {getLocalizedText(kiinnostuksetVapaateksti)}
-              </p>
-            </div>
-          )}
+            )}
+          </div>
         </ContentSection>
       )}
 
       {/* Suosikit */}
       {hasAnySuosikit && (
         <ContentSection title={t('cv.favorites.title')} className="my-8 break-before-page">
-          <p className="mb-8">{t('cv.favorites.description')}</p>
+          <p className="mb-8 px-5 sm:px-6 lg:pr-0 lg:pl-6">{t('cv.favorites.description')}</p>
 
           {tyopaikkaSuosikit && tyopaikkaSuosikit.length > 0 && (
             <>
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.favorites.job-opportunities')}</h3>
-              <div className="flex flex-col gap-4 mb-8">{tyopaikkaSuosikit.map(renderOpportunityCard)}</div>
+              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5 px-5 sm:px-6 lg:pr-0 lg:pl-6">
+                {t('cv.favorites.job-opportunities')}
+              </h3>
+              <div className="flex flex-col gap-4 mb-8 lg:pl-6">{tyopaikkaSuosikit.map(renderOpportunityCard)}</div>
             </>
           )}
 
           {koulutusSuosikit && koulutusSuosikit.length > 0 && (
             <>
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">
+              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5 px-5 sm:px-6 lg:pr-0 lg:pl-6">
                 {t('cv.favorites.education-opportunities')}
               </h3>
-              <div className="flex flex-col gap-4">{koulutusSuosikit.map(renderOpportunityCard)}</div>
+              <div className="flex flex-col gap-4 lg:pl-6">{koulutusSuosikit.map(renderOpportunityCard)}</div>
             </>
           )}
         </ContentSection>
@@ -367,28 +383,31 @@ const Cv = () => {
                     collapsedContent={summary}
                     initialState={isPrinting || tavoite.id === firstTavoiteId}
                     isOpen={isPrinting || undefined}
+                    className="px-5 sm:px-6 lg:pr-0 lg:pl-6"
                   >
                     <div className="-mt-2">{summary}</div>
-                    {renderOpportunityCard(mahdollisuus!)}
+                    <div className="px-4">
+                      {renderOpportunityCard(mahdollisuus!)}
 
-                    {tavoite.suunnitelmat && tavoite.suunnitelmat.length > 0 && (
-                      <div className="mt-8">
-                        <h2 className="sm:text-heading-2 text-heading-2-mobile mb-4">{t('cv.goals.options')}</h2>
-                        {tavoite.suunnitelmat?.map((s, index) => (
-                          <div
-                            key={s.id}
-                            className="sm:text-heading-4-lg text-heading-4-mobile not-last:border-b-2 not-last:border-border-gray py-4"
-                          >
-                            <div className="flex items-center">
-                              <span className="text-primary-gray after:content-[':'] after:mr-2">
-                                {alphabet[index % alphabet.length]}
-                              </span>
-                              <span className="text-primary-gray">{getLocalizedText(s.nimi)}</span>
+                      {tavoite.suunnitelmat && tavoite.suunnitelmat.length > 0 && (
+                        <div className="mt-8">
+                          <h2 className="sm:text-heading-2 text-heading-2-mobile mb-4">{t('cv.goals.options')}</h2>
+                          {tavoite.suunnitelmat?.map((s, index) => (
+                            <div
+                              key={s.id}
+                              className="sm:text-heading-4-lg text-heading-4-mobile not-last:border-b-2 not-last:border-border-gray py-4"
+                            >
+                              <div className="flex items-center">
+                                <span className="text-primary-gray after:content-[':'] after:mr-2">
+                                  {alphabet[index % alphabet.length]}
+                                </span>
+                                <span className="text-primary-gray">{getLocalizedText(s.nimi)}</span>
+                              </div>
                             </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </Accordion>
                 </React.Fragment>
               );

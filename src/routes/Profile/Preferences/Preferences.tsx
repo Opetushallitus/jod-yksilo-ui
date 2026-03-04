@@ -43,57 +43,59 @@ const Preferences = () => {
       }
     >
       {!lg && (
-        <div className="mb-6">
+        <div className="mb-6 px-5 sm:px-6">
           <ProfileNavigationList collapsed />
         </div>
       )}
       <title>{title}</title>
-      <ProfileSectionTitle type="ASETUKSENI" title={title} />
-      <div className="mb-8 text-body-lg flex flex-col gap-7">
-        <p>{t('preferences.description')}</p>
+      <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
+        <ProfileSectionTitle type="ASETUKSENI" title={title} />
+        <div className="mb-8 text-body-lg flex flex-col gap-7">
+          <p>{t('preferences.description')}</p>
+        </div>
+
+        <PersonalDetails />
+
+        {isFeatureEnabled('TMT_INTEGRATION') && (
+          <>
+            <TmtImportExport />
+            <Divider className="my-7" />
+          </>
+        )}
+        {isFeatureEnabled('JAKOLINKKI') && (
+          <>
+            <ShareLinkSection className="mb-8" />
+            <Divider className="my-7" />
+          </>
+        )}
+        <section className="mb-8">
+          <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.download.title')}</h2>
+          <p className="font-arial text-body-md mb-5">{t('preferences.download.description')}</p>
+          <Button
+            variant="accent"
+            label={t('preferences.download.action')}
+            linkComponent={DownloadLink}
+            testId="pref-download-data"
+          />
+        </section>
+        <section>
+          <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.delete-profile.title')}</h2>
+          <p className="font-arial text-body-md mb-5">{t('preferences.delete-profile.description')}</p>
+          <Button
+            variant="white-delete"
+            label={t('preferences.delete-profile.action')}
+            onClick={() => {
+              showDialog({
+                title: t('preferences.delete-profile.action'),
+                description: t('preferences.delete-profile.confirm'),
+                onConfirm: deleteProfile,
+              });
+            }}
+            testId="pref-delete-profile"
+          />
+        </section>
+        {lg ? null : <ToolCard testId="preferences-go-to-tool" className="mt-6" />}
       </div>
-
-      <PersonalDetails />
-
-      {isFeatureEnabled('TMT_INTEGRATION') && (
-        <>
-          <TmtImportExport />
-          <Divider className="my-7" />
-        </>
-      )}
-      {isFeatureEnabled('JAKOLINKKI') && (
-        <>
-          <ShareLinkSection className="mb-8" />
-          <Divider className="my-7" />
-        </>
-      )}
-      <section className="mb-8">
-        <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.download.title')}</h2>
-        <p className="font-arial text-body-md mb-5">{t('preferences.download.description')}</p>
-        <Button
-          variant="accent"
-          label={t('preferences.download.action')}
-          linkComponent={DownloadLink}
-          testId="pref-download-data"
-        />
-      </section>
-      <section>
-        <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.delete-profile.title')}</h2>
-        <p className="font-arial text-body-md mb-5">{t('preferences.delete-profile.description')}</p>
-        <Button
-          variant="white-delete"
-          label={t('preferences.delete-profile.action')}
-          onClick={() => {
-            showDialog({
-              title: t('preferences.delete-profile.action'),
-              description: t('preferences.delete-profile.confirm'),
-              onConfirm: deleteProfile,
-            });
-          }}
-          testId="pref-delete-profile"
-        />
-      </section>
-      {lg ? null : <ToolCard testId="preferences-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };

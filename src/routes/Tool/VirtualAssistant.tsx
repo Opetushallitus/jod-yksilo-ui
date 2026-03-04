@@ -270,7 +270,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
         className="sm:h-full!"
         topSlot={topSlot}
         content={
-          <div className="flex flex-col h-full min-h-[45dvh] mb-4">
+          <div className="flex flex-col h-full min-h-[45dvh] mb-4 px-5 md:px-9">
             <div role="tablist" aria-labelledby={titleId} className="flex flex-row gap-1 min-h-9">
               <button
                 id={conversationTabButtonId}

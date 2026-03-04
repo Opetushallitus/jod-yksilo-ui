@@ -55,12 +55,13 @@ const SummaryStep = () => {
   }, [watch]);
 
   return (
-    <div className="max-w-modal-content">
-      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
+    <div>
+      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md max-w-modal-content box-content px-5 md:px-9">
         {t('profile.education-history.modals.summary-description')}
       </p>
-      <div data-testid="education-history-summary-table">
+      <div data-testid="education-history-summary-table" className="max-w-modal-content box-content md:px-6">
         <ExperienceTable
+          insideModal
           ariaLabel={t('profile.education-history.title')}
           mainColumnHeader={t('education-history.education-provider-or-education')}
           rows={rows}

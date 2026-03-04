@@ -243,28 +243,30 @@ const EducationHistory = () => {
       }
     >
       {!lg && (
-        <div className="mb-6">
+        <div className="mb-6 px-5 sm:px-6">
           <ProfileNavigationList collapsed />
         </div>
       )}
       <title>{title}</title>
-      <ProfileSectionTitle type="KOULUTUS" title={title} />
-      <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>
+      <div className="px-5 sm:px-6">
+        <ProfileSectionTitle type="KOULUTUS" title={title} />
+        <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>
 
-      {koulutuksetThatNeedUserVerification.length > 0 && (
-        <div className="bg-bg-gray-2 rounded-md px-5 py-3 flex items-center w-fit mb-5">
-          <JodError className="text-secondary-3 mr-3" />
-          <span className="font-arial text-primary-gray text-body-sm">
-            {t('education-history.check-identified-osaamiset')}
-          </span>
-        </div>
-      )}
+        {koulutuksetThatNeedUserVerification.length > 0 && (
+          <div className="bg-bg-gray-2 rounded-md px-5 py-3 flex items-center w-fit mb-5">
+            <JodError className="text-secondary-3 mr-3" />
+            <span className="font-arial text-primary-gray text-body-sm">
+              {t('education-history.check-identified-osaamiset')}
+            </span>
+          </div>
+        )}
 
-      {rows.length === 0 && (
-        <div className="mt-6 mb-11" data-testid="education-history-empty-state">
-          <EmptyState text={t('profile.education-history.empty')} />
-        </div>
-      )}
+        {rows.length === 0 && (
+          <div className="mt-6 mb-11" data-testid="education-history-empty-state">
+            <EmptyState text={t('profile.education-history.empty')} />
+          </div>
+        )}
+      </div>
       <ExperienceTable
         ariaLabel={title}
         mainColumnHeader={t('education-history.education-provider-or-education')}
@@ -276,7 +278,7 @@ const EducationHistory = () => {
         onNestedRowClick={onNestedRowClick}
         onAddNestedRowClick={onAddNestedRowClick}
       />
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 px-5 sm:px-6">
         <div className="mb-[84px]">
           <Button
             variant="accent"
@@ -303,7 +305,11 @@ const EducationHistory = () => {
           </TooltipWrapper>
         </div>
       </div>
-      {lg ? null : <ToolCard testId="education-history-go-to-tool" className="mt-6" />}
+      {lg ? null : (
+        <div className="px-5">
+          <ToolCard testId="education-history-go-to-tool" className="mt-6" />{' '}
+        </div>
+      )}
     </MainLayout>
   );
 };

@@ -29,7 +29,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
   }, [alkuPvm, loppuPvm, trigger]);
 
   return (
-    <div className="max-w-modal-content">
+    <div className="max-w-modal-content box-content px-5 md:px-9">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.work-history.modals.description')}
       </p>
@@ -56,8 +56,8 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
         />
         <FormError name={`toimenkuvat.${toimenkuva}.nimi.${language}`} errors={errors} />
       </div>
-      <div className="mb-6 flex grow gap-6">
-        <div className="block w-full" data-testid="work-history-started-field">
+      <div className="mb-6 flex grow gap-4">
+        <div className="block w-full sm:max-w-input-short" data-testid="work-history-started-field">
           <Controller
             control={control}
             render={({ field: { onBlur }, field }) => (
@@ -82,7 +82,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
             errors={errors}
           />
         </div>
-        <div className="block w-full" data-testid="work-history-ended-field">
+        <div className="block w-full sm:max-w-input-short" data-testid="work-history-ended-field">
           <Controller
             control={control}
             render={({ field }) => (
