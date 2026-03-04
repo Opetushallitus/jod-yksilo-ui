@@ -216,7 +216,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
       content={
         <form className="pb-1">
           {basicInfoStep && (
-            <div>
+            <div className="px-5 sm:px-9">
               <div className="flex flex-col">
                 <p className="text-body-sm-mobile sm:text-body-sm font-arial mb-7">
                   {t('profile.my-goals.add-modal-description')}
@@ -239,7 +239,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
 
           {chooseFavoriteStep && (
             <div id={goalsId}>
-              <div className="pb-3">
+              <div className="pb-3 px-5 sm:px-9">
                 <p className="text-body-sm-mobile sm:text-body-sm font-arial">
                   {t('profile.my-goals.choose-favorite-description')}
                 </p>

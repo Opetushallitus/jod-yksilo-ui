@@ -100,7 +100,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                   id={`accordion-content-${tavoite.id}`}
                   role="region"
                   aria-labelledby={`accordion-header-${i}`}
-                  className="p-4"
+                  className="py-4"
                 >
                   {details && mahdollisuusTyyppi && (
                     <>

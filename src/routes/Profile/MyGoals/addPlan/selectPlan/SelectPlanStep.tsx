@@ -1,4 +1,3 @@
-import { ActionButton } from '@/components';
 import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
 import { useModal } from '@/hooks/useModal';
 import PlanOpportunityCard from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOpportunityCard.tsx';
@@ -47,7 +46,7 @@ const SelectPlanStep = () => {
     })),
   );
 
-  const scrollRef = React.useRef<HTMLUListElement>(null);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const settingsButtonRef = React.useRef<HTMLButtonElement>(null);
   const { lg } = useMediaQueries();
@@ -99,18 +98,18 @@ const SelectPlanStep = () => {
   return (
     <div className="relative flex flex-col h-full z-20">
       {/* Sticky header remains */}
-      <div className="sticky top-0 z-40 bg-bg-gray px-1 lg:pt-4">
+      <div className="sticky top-0 z-40 bg-bg-gray lg:pt-4 px-5 sm:px-9">
         <div className="mb-2">
           <p className="text-body-sm-mobile sm:text-body-sm font-arial">
             {t('profile.my-goals.add-new-plan-description')}
           </p>
         </div>
 
-        <div className="flex justify-end h-9 sm:mt-5 lg:pb-4 not-lg:mb-3 items-center mr-6">
+        <div className="flex justify-end sm:mt-5 lg:pb-4 not-lg:mb-3 items-center">
           <Button
-            variant="plain"
-            size={lg ? 'lg' : 'sm'}
-            className="text-primary-gray!"
+            variant="gray"
+            size="sm"
+            className="bg-bg-gray-2!"
             ref={settingsButtonRef}
             icon={settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
             iconSide="left"
@@ -137,82 +136,90 @@ const SelectPlanStep = () => {
       </div>
 
       {/* Scrollable opportunity cards container */}
-      <ul
-        id="selectplan-education-opportunities-list"
+      <div
         ref={scrollRef}
-        className={cx('flex flex-col gap-5 sm:gap-3 mb-8 p-2 pt-0', {
+        className={cx('flex flex-col pt-0 sm:px-9', {
           'overflow-y-auto': !isLoading,
           'overflow-hidden': isLoading,
         })}
-        data-testid="selectplan-opportunities-list"
       >
-        {isLoading &&
-          Array.from({ length: ehdotuksetPageSize }, (_, index) => <OpportunityCardSkeleton key={index} small />)}
-        {!isLoading && koulutusMahdollisuudet.length === 0 && (
-          <div className="flex justify-center mt-6">
-            <EmptyState text={t('profile.my-goals.no-filtered-results')} />
-          </div>
-        )}
-        {!isLoading &&
-          koulutusMahdollisuudet.map((mahdollisuus) => {
-            const { id } = mahdollisuus;
-            const ehdotus = mahdollisuusEhdotukset?.[id];
-            const vaaditutOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
-            const matchingOsaamiset = mahdollisuus?.jakaumat?.osaaminen?.arvot!.filter((a) => {
-              const uri = a?.arvo;
-              return vaaditutOsaamisetUris.has(uri as string);
-            }).length;
+        <ul
+          id="selectplan-education-opportunities-list"
+          className="flex flex-col gap-3 sm:gap-4"
+          data-testid="selectplan-opportunities-list"
+        >
+          {isLoading &&
+            Array.from({ length: ehdotuksetPageSize }, (_, index) => <OpportunityCardSkeleton key={index} small />)}
+          {!isLoading && koulutusMahdollisuudet.length === 0 && (
+            <div className="flex justify-center mt-6">
+              <EmptyState text={t('profile.my-goals.no-filtered-results')} />
+            </div>
+          )}
+          {!isLoading &&
+            koulutusMahdollisuudet.map((mahdollisuus) => {
+              const { id } = mahdollisuus;
+              const ehdotus = mahdollisuusEhdotukset?.[id];
+              const vaaditutOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
+              const matchingOsaamiset = mahdollisuus?.jakaumat?.osaaminen?.arvot!.filter((a) => {
+                const uri = a?.arvo;
+                return vaaditutOsaamisetUris.has(uri as string);
+              }).length;
 
-            return ehdotus ? (
-              <PlanOpportunityCard
-                key={id}
-                actionButtonContent={
-                  selectedPlans?.includes(id) ? (
-                    <div className="flex sm:gap-4 not-sm:justify-between items-center">
-                      <span
-                        className={tidyClasses([
-                          'flex',
-                          'items-center',
-                          'justify-center',
-                          'bg-secondary-3',
-                          'text-primary-gray',
-                          'text-heading-4',
-                          'rounded',
-                          'px-3',
-                          'pb-1',
-                          'text-[14px]',
-                          'uppercase',
-                          'sm:order-1',
-                          'order-2',
-                        ])}
-                      >
-                        {t('profile.my-goals.plan')}
-                      </span>
-                      <ActionButton
-                        label={t('profile.my-goals.remove-from-plans')}
-                        onClick={() => setSelectedPlans(selectedPlans?.filter((plan) => plan !== id))}
-                        className="order-1 sm:order-2 not-sm:px-0!"
+              return ehdotus ? (
+                <PlanOpportunityCard
+                  key={id}
+                  actionButtonContent={
+                    selectedPlans?.includes(id) ? (
+                      <div className="flex sm:gap-4 not-sm:justify-between items-center">
+                        <span
+                          className={tidyClasses([
+                            'flex',
+                            'items-center',
+                            'justify-center',
+                            'bg-secondary-3',
+                            'text-primary-gray',
+                            'text-card-label',
+                            'rounded',
+                            'px-3',
+                            'pb-1',
+                            'uppercase',
+                            'sm:order-1',
+                            'order-2',
+                            'h-7',
+                          ])}
+                        >
+                          {t('profile.my-goals.plan')}
+                        </span>
+                        <Button
+                          size={'sm'}
+                          label={t('profile.my-goals.remove-from-plans')}
+                          onClick={() => setSelectedPlans(selectedPlans?.filter((plan) => plan !== id))}
+                          icon={<JodRoute className="text-accent" />}
+                          iconSide="left"
+                          className="order-1 sm:order-2 bg-bg-gray! text-[12px]!"
+                        />
+                      </div>
+                    ) : (
+                      <Button
+                        size={'sm'}
+                        label={t('profile.my-goals.choose-as-plan')}
                         icon={<JodRoute className="text-accent" />}
+                        iconSide="left"
+                        onClick={() => setSelectedPlans([...selectedPlans, id])}
+                        className="bg-bg-gray! text-[12px]!"
                       />
-                    </div>
-                  ) : (
-                    <ActionButton
-                      className="px-0!"
-                      label={t('profile.my-goals.choose-as-plan')}
-                      onClick={() => setSelectedPlans([...selectedPlans, id])}
-                      icon={<JodRoute className="text-accent" />}
-                    />
-                  )
-                }
-                mahdollisuus={mahdollisuus}
-                matchValue={`${matchingOsaamiset}/${vaaditutOsaamiset.length}`}
-                matchLabel={t('profile.my-goals.competences')}
-              />
-            ) : null;
-          })}
-      </ul>
-      <div className="mt-auto">
-        <PlanOptionsPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} />
+                    )
+                  }
+                  mahdollisuus={mahdollisuus}
+                  matchValue={`${matchingOsaamiset}/${vaaditutOsaamiset.length}`}
+                  matchLabel={t('profile.my-goals.competences')}
+                />
+              ) : null;
+            })}
+        </ul>
+        {!isLoading && koulutusMahdollisuudet.length > 0 && (
+          <PlanOptionsPagination className="my-7 sm:my-8" scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} />
+        )}
       </div>
     </div>
   );

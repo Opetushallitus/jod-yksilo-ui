@@ -225,7 +225,7 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoite, suunnitelmaId }: A
       }
       content={
         <FormProvider {...methods}>
-          <Form id={formId} onSubmit={onSubmit}>
+          <Form id={formId} onSubmit={onSubmit} className="px-5 sm:px-9">
             {isLoading ? (
               <div className="flex items-center justify-center min-h-[128px]">
                 <Spinner size={64} color="accent" />
