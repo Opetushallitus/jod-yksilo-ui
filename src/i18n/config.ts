@@ -44,6 +44,7 @@ await i18n
     returnEmptyString: false,
     saveMissing: false,
     maxRetries: 0,
+    showSupportNotice: false,
   } as InitOptions);
 
 // Add bundled as fallback

@@ -13,6 +13,7 @@ S3_PATH="yksilo/config/features.json"
 # Valid features from Feature.java enum
 VALID_FEATURES=(
   "VIRTUAALIOHJAAJA"
+  "VIRTUAALIOHJAAJA_OSAAMISET"
   "POLKU"
   "TAVOITE"
   "KOSKI"
