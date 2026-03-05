@@ -174,7 +174,7 @@ export const ExperienceTable = ({
         >
           <thead className="after:content-[''] after:block after:h-5">
             <tr className="border-b border-inactive-gray text-left text-body-md">
-              <th scope="col" colSpan={sm ? 1 : 3} className="pr-7 pb-3 font-normal pl-4">
+              <th scope="col" colSpan={sm ? 1 : 3} className="pr-7 pb-3 font-normal pl-5">
                 {mainColumnHeader}
               </th>
 
@@ -269,7 +269,7 @@ export const ExperienceTable = ({
                   <tr>
                     <td
                       colSpan={5}
-                      className={`pt-5 ${categorizedRows.length - 1 === index ? 'pb-7 sm:pb-11' : 'pb-7'}`.trim()}
+                      className={`px-5 sm:px-6 pt-5 ${categorizedRows.length - 1 === index ? 'pb-7 sm:pb-11' : 'pb-7'}`.trim()}
                     >
                       <Button
                         variant="white"
@@ -314,7 +314,7 @@ export const ExperienceTable = ({
         </table>
       )}
       {onAddClick && addNewLabel && (
-        <div className="mb-[84px]">
+        <div className="mb-[84px] px-5 sm:px-6">
           <Button variant="accent" label={addNewLabel} onClick={onAddClick} testId="experience-table-add" />
         </div>
       )}

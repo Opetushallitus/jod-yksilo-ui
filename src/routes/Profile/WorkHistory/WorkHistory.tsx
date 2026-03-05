@@ -62,19 +62,21 @@ const WorkHistory = () => {
       }
     >
       {!lg && (
-        <div className="mb-6">
+        <div className="mb-6 px-5">
           <ProfileNavigationList collapsed />
         </div>
       )}
       <title>{title}</title>
-      <ProfileSectionTitle type="TOIMENKUVA" title={title} />
-      <p className="mb-5 text-body-lg">{t('profile.work-history.description')}</p>
+      <div className="px-5 sm:px-6">
+        <ProfileSectionTitle type="TOIMENKUVA" title={title} />
+        <p className="mb-5 text-body-lg">{t('profile.work-history.description')}</p>
 
-      {rows.length === 0 && (
-        <div className="mt-6 mb-7" data-testid="work-history-empty-state">
-          <EmptyState text={t('profile.work-history.empty')} />
-        </div>
-      )}
+        {rows.length === 0 && (
+          <div className="mt-6 mb-7" data-testid="work-history-empty-state">
+            <EmptyState text={t('profile.work-history.empty')} />
+          </div>
+        )}
+      </div>
       <ExperienceTable
         ariaLabel={title}
         mainColumnHeader={t('work-history.workplace-or-job-description')}
@@ -88,7 +90,12 @@ const WorkHistory = () => {
         onNestedRowClick={onNestedRowClick}
         onAddNestedRowClick={onAddNestedRowClick}
       />
-      {lg ? null : <ToolCard testId="work-history-go-to-tool" className="mt-6" />}
+      {lg ? null : (
+        <div className="px-5">
+          {' '}
+          <ToolCard testId="work-history-go-to-tool" className="mt-6" />
+        </div>
+      )}
     </MainLayout>
   );
 };

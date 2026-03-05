@@ -55,9 +55,9 @@ const Title = ({ nested, row }: { nested?: boolean; row: ExperienceTableRowData 
   const baseClasses = 'pl-3 sm:pl-5 pr-3 sm:pr-7 pt-2 hyphens-auto [overflow-wrap:anywhere]';
 
   if (nested) {
-    return <p className={`${baseClasses} font-normal text-body-md sm:py-2`}>{text}</p>;
+    return <p className={`${baseClasses} font-normal text-body-md sm:py-2 pl-5`}>{text}</p>;
   }
-  return <p className={`${baseClasses} font-poppins text-heading-4 sm:pt-1 sm:pb-[3px]`}>{text}</p>;
+  return <p className={`${baseClasses} font-poppins text-heading-4 sm:pt-1 sm:pb-[3px] pl-5`}>{text}</p>;
 };
 
 const DateRange = ({ alkuPvm, loppuPvm, className = '' }: { alkuPvm?: Date; loppuPvm?: Date; className?: string }) => (
@@ -309,7 +309,7 @@ export const ExperienceTableRow = ({
               <DateRange
                 alkuPvm={row.alkuPvm}
                 loppuPvm={row.loppuPvm}
-                className={`flex flex-wrap gap-x-5 pb-2 pl-3 sm:pl-5 ${commonTextStyles}`}
+                className={`flex flex-wrap gap-x-5 pb-2 pl-5 sm:pl-6 ${commonTextStyles}`}
               />
             )}
           </td>
