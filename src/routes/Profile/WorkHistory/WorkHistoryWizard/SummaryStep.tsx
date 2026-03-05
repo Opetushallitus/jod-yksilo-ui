@@ -54,7 +54,7 @@ const SummaryStep = () => {
 
   return (
     <div className="max-w-modal-content">
-      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
+      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md px-5 sm:px-6">
         {t('profile.work-history.modals.summary-description')}
       </p>
       <div data-testid="work-history-summary-table">

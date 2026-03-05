@@ -29,7 +29,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
   }, [alkuPvm, loppuPvm, trigger]);
 
   return (
-    <div className="max-w-modal-content">
+    <div className="max-w-modal-content px-5 sm:px-6">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.work-history.modals.description')}
       </p>

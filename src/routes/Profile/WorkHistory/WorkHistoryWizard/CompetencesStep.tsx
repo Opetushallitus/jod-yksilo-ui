@@ -16,7 +16,7 @@ const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
 
   return (
     <>
-      <div className="max-w-modal-content">
+      <div className="max-w-modal-content px-5 sm:px-6">
         <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
           {getValues(`nimi.${language}`)} - {getValues(`toimenkuvat.${toimenkuva}.nimi.${language}`)}
         </h3>
@@ -24,18 +24,20 @@ const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
           {t('profile.work-history.modals.competences-description')}
         </p>
       </div>
-      <Controller
-        control={control}
-        name={`toimenkuvat.${toimenkuva}.osaamiset`}
-        render={({ field: { onChange, value } }) => (
-          <OsaamisSuosittelija
-            onChange={onChange}
-            value={value}
-            sourceType="TOIMENKUVA"
-            textAreaClassName="max-w-modal-content!"
-          />
-        )}
-      />
+      <div className="px-5 sm:px-6">
+        <Controller
+          control={control}
+          name={`toimenkuvat.${toimenkuva}.osaamiset`}
+          render={({ field: { onChange, value } }) => (
+            <OsaamisSuosittelija
+              onChange={onChange}
+              value={value}
+              sourceType="TOIMENKUVA"
+              textAreaClassName="max-w-modal-content!"
+            />
+          )}
+        />
+      </div>
     </>
   );
 };

@@ -351,6 +351,7 @@ const AddOrEditToimenkuvaModal = ({
                 event.preventDefault();
               }
             }}
+            className="px-5 sm:px-6"
           >
             <StepComponent />
           </Form>

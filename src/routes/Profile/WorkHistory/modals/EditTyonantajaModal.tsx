@@ -134,7 +134,7 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
                 event.preventDefault();
               }
             }}
-            className="max-w-modal-content"
+            className="max-w-modal-content px-5 sm:px-6"
           >
             <InputField
               label={t('work-history.employer')}

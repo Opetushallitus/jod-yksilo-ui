@@ -332,7 +332,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
       }
       progress={progress}
       footer={footer}
-      className="sm:h-full!"
+      className="h-full!"
     />
   );
 };
