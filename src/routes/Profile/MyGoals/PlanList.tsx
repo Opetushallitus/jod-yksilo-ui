@@ -122,7 +122,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
     </div>
   );
   return (
-    <div className="mt-8">
+    <div className="mt-8 px-5">
       {sm ? (
         <div className="flex flex-col">
           <h3 className="text-heading-3">{title}</h3>

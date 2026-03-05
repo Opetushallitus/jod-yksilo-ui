@@ -91,24 +91,26 @@ const MyGoals = () => {
       }
     >
       {!lg && (
-        <div className="mb-6">
+        <div className="mb-6 px-5">
           <ProfileNavigationList collapsed />
         </div>
       )}
 
       <title>{title}</title>
-      <ProfileSectionTitle type="TAVOITTEENI" title={title} />
-      <div className="sm:text-body-lg text-body-lg-mobile mb-7">
-        <p>{t('profile.my-goals.description')}</p>
+      <div className="px-5">
+        <ProfileSectionTitle type="TAVOITTEENI" title={title} />
+        <div className="sm:text-body-lg text-body-lg-mobile mb-7">
+          <p>{t('profile.my-goals.description')}</p>
+        </div>
       </div>
       {tavoitteet.length > 0 && <MyGoalsSection tavoitteet={tavoitteet} />}
       {!suosikitIsEmpty && tavoitteet.length === 0 && (
-        <div className="mb-6">
+        <div className="mb-6 px-5">
           <EmptyState text={t('profile.my-goals.no-goals-created')} testId="goals-empty-state" />
         </div>
       )}
       {suosikitIsEmpty && (
-        <div className="mb-[180px]">
+        <div className="mb-[180px] px-5">
           <EmptyState text={t('profile.my-goals.no-favorites-selected')} testId="goals-empty-state" />
         </div>
       )}
@@ -120,9 +122,10 @@ const MyGoals = () => {
         label={t('profile.my-goals.add-favorites-to-goals')}
         disabled={suosikitIsEmpty}
         testId="goals-add-favorites-button"
+        className="mx-5"
       />
       {lg ? null : (
-        <div className="flex flex-col gap-4 mt-6">
+        <div className="flex flex-col gap-4 mt-6 px-5">
           <ToolCard
             testId="goals-go-to-tool"
             title={t('profile.my-goals.favorites-card.title')}

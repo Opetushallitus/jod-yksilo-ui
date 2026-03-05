@@ -76,31 +76,32 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
           return (
             <div key={tavoite.id ?? mahdollisuusId ?? i} className="flex flex-col">
               {/* Accordion header */}
-              <button
-                onClick={() => toggleAccordion(i)}
-                className="flex justify-between items-center text-heading-2 cursor-pointer"
-                aria-expanded={isOpen}
-                aria-controls={`accordion-content-${i}`}
-                id={`accordion-header-${i}`}
-              >
-                <span>{getLocalizedText(tavoite.tavoite)}</span>
-                {isOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}
-              </button>
+              <div className="px-5">
+                <button
+                  onClick={() => toggleAccordion(i)}
+                  className="flex justify-between items-center text-heading-2 cursor-pointer w-full"
+                  aria-expanded={isOpen}
+                  aria-controls={`accordion-content-${i}`}
+                  id={`accordion-header-${i}`}
+                >
+                  <span>{getLocalizedText(tavoite.tavoite)}</span>
+                  {isOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}
+                </button>
 
-              <p className="ds:text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
+                <p className="ds:text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
 
-              {!isOpen && (
-                <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">
-                  {t('profile.my-goals.n-plans', { count: tavoite.suunnitelmat?.length ?? 0 })}
-                </p>
-              )}
-
+                {!isOpen && (
+                  <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">
+                    {t('profile.my-goals.n-plans', { count: tavoite.suunnitelmat?.length ?? 0 })}
+                  </p>
+                )}
+              </div>
               {isOpen && (
                 <div
                   id={`accordion-content-${tavoite.id}`}
                   role="region"
                   aria-labelledby={`accordion-header-${i}`}
-                  className="py-4"
+                  className="py-4 sm:px-5"
                 >
                   {details && mahdollisuusTyyppi && (
                     <>
@@ -127,7 +128,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                     </>
                   )}
 
-                  <div className="mt-9 flex flex-col items-start gap-3">
+                  <div className="mt-9 flex flex-col items-start gap-3 px-5">
                     <Button
                       variant="white"
                       size={sm ? 'lg' : 'sm'}

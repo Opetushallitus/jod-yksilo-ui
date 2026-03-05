@@ -70,90 +70,92 @@ const Competences = () => {
         </div>
       }
     >
-      {!lg && (
-        <div className="mb-6">
-          <ProfileNavigationList collapsed />
-        </div>
-      )}
-      <title>{title}</title>
-      <ProfileSectionTitle type="OSAAMISENI" title={title} />
-      <p className="mb-5 text-body-lg">{t('profile.competences.description')}</p>
-      <InfoBox text={t('profile.competences.info')} />
-      <div>
+      <div className="px-5 sm:px-6">
         {!lg && (
-          <Modal
-            name={t('filters')}
-            open={showFilters}
-            onClose={() => setShowFilters(false)}
-            content={
-              <Filters
-                filterKeys={filterKeys}
-                groupBy={groupBy}
-                selectedFilters={selectedFilters}
-                setGroupBy={setGroupBy}
-                setSelectedFilters={setSelectedFilters}
-              />
-            }
-            footer={
-              <div className="flex flex-row justify-end gap-4 flex-1">
-                <Button
-                  variant="white"
-                  label={t('close')}
-                  onClick={() => setShowFilters(false)}
-                  className="whitespace-nowrap"
-                  testId="competences-close-filters"
+          <div className="mb-6">
+            <ProfileNavigationList collapsed />
+          </div>
+        )}
+        <title>{title}</title>
+        <ProfileSectionTitle type="OSAAMISENI" title={title} />
+        <p className="mb-5 text-body-lg">{t('profile.competences.description')}</p>
+        <InfoBox text={t('profile.competences.info')} />
+        <div>
+          {!lg && (
+            <Modal
+              name={t('filters')}
+              open={showFilters}
+              onClose={() => setShowFilters(false)}
+              content={
+                <Filters
+                  filterKeys={filterKeys}
+                  groupBy={groupBy}
+                  selectedFilters={selectedFilters}
+                  setGroupBy={setGroupBy}
+                  setSelectedFilters={setSelectedFilters}
                 />
-              </div>
-            }
-          />
-        )}
-        {groupBy === GROUP_BY_SOURCE && (
-          <GroupBySource
-            filters={selectedFilters}
-            filterKeys={filterKeys}
-            locale={locale}
-            osaamiset={sortedOsaamiset}
-            isOsaaminenVisible={isOsaaminenVisible}
-            mobileFilterOpenerComponent={
-              <FilterButton
-                onClick={() => setShowFilters(true)}
-                label={t('profile.competences.show-filters')}
-                hideAfterBreakpoint="lg"
-              />
-            }
-            data-testid="competences-group-by-source"
-          />
-        )}
-        {groupBy === GROUP_BY_ALPHABET && (
-          <GroupByAlphabet
-            filters={selectedFilters}
-            filterKeys={filterKeys}
-            locale={locale}
-            osaamiset={osaamiset}
-            isOsaaminenVisible={isOsaaminenVisible}
-            mobileFilterOpenerComponent={
-              <FilterButton onClick={() => setShowFilters(true)} label={t('profile.competences.show-filters')} />
-            }
-            data-testid="competences-group-by-alphabet"
-          />
-        )}
-        <div className="mb-7">
-          <FreeFormTextInputBlock
-            header={t('profile.competences.freeform.header')}
-            description={t('profile.competences.freeform.description')}
-            placeholder={t('profile.competences.freeform.placeholder')}
-            testId="competences-freeform"
-            text={muutOsaamisetVapaateksti}
-            onChange={async (value) => {
-              await client.PUT('/api/profiili/muu-osaaminen/vapaateksti', {
-                body: value,
-              });
-            }}
-            collapsible
-          />
+              }
+              footer={
+                <div className="flex flex-row justify-end gap-4 flex-1">
+                  <Button
+                    variant="white"
+                    label={t('close')}
+                    onClick={() => setShowFilters(false)}
+                    className="whitespace-nowrap"
+                    testId="competences-close-filters"
+                  />
+                </div>
+              }
+            />
+          )}
+          {groupBy === GROUP_BY_SOURCE && (
+            <GroupBySource
+              filters={selectedFilters}
+              filterKeys={filterKeys}
+              locale={locale}
+              osaamiset={sortedOsaamiset}
+              isOsaaminenVisible={isOsaaminenVisible}
+              mobileFilterOpenerComponent={
+                <FilterButton
+                  onClick={() => setShowFilters(true)}
+                  label={t('profile.competences.show-filters')}
+                  hideAfterBreakpoint="lg"
+                />
+              }
+              data-testid="competences-group-by-source"
+            />
+          )}
+          {groupBy === GROUP_BY_ALPHABET && (
+            <GroupByAlphabet
+              filters={selectedFilters}
+              filterKeys={filterKeys}
+              locale={locale}
+              osaamiset={osaamiset}
+              isOsaaminenVisible={isOsaaminenVisible}
+              mobileFilterOpenerComponent={
+                <FilterButton onClick={() => setShowFilters(true)} label={t('profile.competences.show-filters')} />
+              }
+              data-testid="competences-group-by-alphabet"
+            />
+          )}
+          <div className="mb-7">
+            <FreeFormTextInputBlock
+              header={t('profile.competences.freeform.header')}
+              description={t('profile.competences.freeform.description')}
+              placeholder={t('profile.competences.freeform.placeholder')}
+              testId="competences-freeform"
+              text={muutOsaamisetVapaateksti}
+              onChange={async (value) => {
+                await client.PUT('/api/profiili/muu-osaaminen/vapaateksti', {
+                  body: value,
+                });
+              }}
+              collapsible
+            />
+          </div>
         </div>
+        {lg ? null : <ToolCard testId="competences-go-to-tool" className="mt-6" />}
       </div>
-      {lg ? null : <ToolCard testId="competences-go-to-tool" className="mt-6" />}
     </MainLayout>
   );
 };
