@@ -64,8 +64,8 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
         const ModalComponent = modal.Component;
         // Only the top modal is open/interactable
         const isActive = idx === modals.length - 1;
-        const handleClose = () => {
-          modal.props?.onClose?.();
+        const handleClose = (...args: unknown[]) => {
+          modal.props?.onClose?.(...args);
           closeActiveModal();
         };
         return (

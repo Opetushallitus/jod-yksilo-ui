@@ -1,15 +1,21 @@
 import { client } from '@/api/client';
+import { ActionButton } from '@/components';
+import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
 import { useModal } from '@/hooks/useModal';
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
+import PlanOpportunityCard from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOpportunityCard.tsx';
+import PlanOptionFilters from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionFilters.tsx';
+import PlanOptionsPagination from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionsPagination.tsx';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { Button, Modal, useMediaQueries } from '@jod/design-system';
-import { JodCheckmark } from '@jod/design-system/icons';
+import { Button, cx, EmptyState, Modal, tidyClasses, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark, JodRoute, JodSettings } from '@jod/design-system/icons';
+import i18n from 'i18next';
 import React from 'react';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 import AddOrEditCustomPlanModal from './customPlan/AddOrEditCustomPlanModal';
-import SelectPlanStep from './selectPlan/SelectPlanStep';
+import { getKestoCount } from './store/PlanOptionStoreModel';
 
 interface AddPlanModalProps {
   isOpen: boolean;
@@ -21,10 +27,34 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   const { showDialog, showModal, closeActiveModal } = useModal();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const { sm } = useMediaQueries();
-  const { tavoite, selectedPlans } = addPlanStore(
+
+  const {
+    tavoite,
+    mahdollisuusEhdotukset,
+    koulutusMahdollisuudet,
+    filters,
+    isLoading,
+    updateEhdotuksetAndTyomahdollisuudet,
+    selectedPlans,
+    setSelectedPlans,
+    vaaditutOsaamiset,
+    updateEhdotukset,
+    // settingsHaveChanged,
+    initialPlanListLoaded,
+  } = addPlanStore(
     useShallow((state) => ({
       tavoite: state.tavoite,
+      initialPlanListLoaded: state.initialPlanListLoaded,
+      vaaditutOsaamiset: state.vaaditutOsaamiset,
+      mahdollisuusEhdotukset: state.mahdollisuusEhdotukset,
+      koulutusMahdollisuudet: state.koulutusmahdollisuudet,
+      filters: state.filters,
       selectedPlans: state.selectedPlans,
+      setSelectedPlans: state.setSelectedPlans,
+      isLoading: state.ehdotuksetLoading || state.mahdollisuudetLoading,
+      updateEhdotuksetAndTyomahdollisuudet: state.updateEhdotuksetAndMahdollisuudet,
+      updateEhdotukset: state.updateEhdotukset,
+      // settingsHaveChanged: state.settingsHaveChanged,
     })),
   );
 
@@ -72,14 +102,170 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
     return t('profile.paths.step-n-details', { count: 1 });
   }, [t]);
 
+  const scrollRef = React.useRef<HTMLUListElement>(null);
+  const settingsButtonRef = React.useRef<HTMLButtonElement>(null);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      await updateEhdotukset(i18n.language);
+    };
+    if (!initialPlanListLoaded) {
+      fetchData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialPlanListLoaded]);
+
+  const onUpdateResults = async () => {
+    await updateEhdotuksetAndTyomahdollisuudet();
+  };
+
+  const onCloseSettings = (cancel: boolean) => {
+    if (cancel) {
+      return;
+    }
+    const hasChanges = addPlanStore.getState().settingsHaveChanged;
+    if (hasChanges) {
+      onUpdateResults();
+    }
+  };
+
+  const getTotalFilterCount = React.useCallback(() => {
+    const kestoCount = getKestoCount(filters.minDuration, filters.maxDuration);
+    return Object.values(filters).reduce((total, filter) => total + (filter?.length ?? 0), 0) + kestoCount;
+  }, [filters]);
+
+  const toggleFiltersText = React.useMemo(() => {
+    const count = getTotalFilterCount();
+    const filterCount = count > 0 ? ` (${count})` : '';
+    return t('tool.settings.toggle-open') + filterCount;
+  }, [getTotalFilterCount, t]);
+
   return (
     <Modal
       name={currentHeaderText}
       open={isOpen}
-      topSlot={<h1 className="text-heading-2-mobile sm:text-hero">{t('profile.my-goals.add-new-plan-header')}</h1>}
+      topSlot={<h2 className="text-heading-2-mobile sm:text-hero">{t('profile.my-goals.add-new-plan-header')}</h2>}
       fullWidthContent
       className="sm:h-full!"
-      content={<SelectPlanStep />}
+      content={
+        <div>
+          <div
+            className={cx('mt-4', {
+              // For shifting the scrollbar to the right
+              'w-2/3': sm,
+              '-mr-3 pr-3': !sm,
+            })}
+          >
+            <div className="relative flex flex-col h-full z-20">
+              <div className="sticky top-4 z-40 bg-bg-gray px-1">
+                <p className="text-body-sm-mobile sm:text-body-sm font-arial bg-bg-gray -mt-4">
+                  {t('profile.my-goals.add-new-plan-description')}
+                </p>
+                <div className="flex justify-end mb-3 items-center">
+                  <Button
+                    variant="gray"
+                    size="sm"
+                    className="whitespace-nowrap bg-bg-gray-2!"
+                    ref={settingsButtonRef}
+                    icon={<JodSettings className="text-accent!" />}
+                    iconSide="left"
+                    disabled={isLoading}
+                    label={toggleFiltersText}
+                    data-testid="open-select-plan-filters"
+                    onClick={() => {
+                      showModal(PlanOptionFilters, { onClose: onCloseSettings });
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Scrollable opportunity cards container */}
+              <ul
+                id="selectplan-education-opportunities-list"
+                ref={scrollRef}
+                className={cx('flex flex-col gap-5 sm:gap-3 p-2 pt-0', {
+                  'overflow-y-auto': !isLoading,
+                  'overflow-hidden': isLoading,
+                })}
+                data-testid="selectplan-opportunities-list"
+              >
+                {isLoading && (
+                  <>
+                    <OpportunityCardSkeleton small />
+                    <OpportunityCardSkeleton small />
+                  </>
+                )}
+
+                {!isLoading && koulutusMahdollisuudet.length === 0 && (
+                  <div className="flex justify-center mt-6">
+                    <EmptyState text={t('profile.my-goals.no-filtered-results')} />
+                  </div>
+                )}
+                {!isLoading &&
+                  koulutusMahdollisuudet.map((mahdollisuus) => {
+                    const { id } = mahdollisuus;
+                    const ehdotus = mahdollisuusEhdotukset?.[id];
+                    const vaaditutOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
+                    const matchingOsaamiset = mahdollisuus?.jakaumat?.osaaminen?.arvot!.filter((a) => {
+                      const uri = a?.arvo;
+                      return vaaditutOsaamisetUris.has(uri as string);
+                    }).length;
+
+                    return ehdotus ? (
+                      <PlanOpportunityCard
+                        key={id}
+                        actionButtonContent={
+                          selectedPlans?.includes(id) ? (
+                            <div className="flex sm:gap-4 not-sm:justify-between items-center">
+                              <span
+                                className={tidyClasses([
+                                  'flex',
+                                  'items-center',
+                                  'justify-center',
+                                  'bg-secondary-3',
+                                  'text-primary-gray',
+                                  'text-heading-4',
+                                  'rounded',
+                                  'px-3',
+                                  'pb-1',
+                                  'text-[14px]',
+                                  'uppercase',
+                                  'sm:order-1',
+                                  'order-2',
+                                ])}
+                              >
+                                {t('profile.my-goals.plan')}
+                              </span>
+                              <ActionButton
+                                label={t('profile.my-goals.remove-from-plans')}
+                                onClick={() => setSelectedPlans(selectedPlans?.filter((plan) => plan !== id))}
+                                className="order-1 sm:order-2 not-sm:px-0!"
+                                icon={<JodRoute className="text-accent" />}
+                              />
+                            </div>
+                          ) : (
+                            <ActionButton
+                              className="px-0!"
+                              label={t('profile.my-goals.choose-as-plan')}
+                              onClick={() => setSelectedPlans([...selectedPlans, id])}
+                              icon={<JodRoute className="text-accent" />}
+                            />
+                          )
+                        }
+                        mahdollisuus={mahdollisuus}
+                        matchValue={`${matchingOsaamiset}/${vaaditutOsaamiset.length}`}
+                        matchLabel={t('profile.my-goals.competences')}
+                      />
+                    ) : null;
+                  })}
+              </ul>
+              <div className="my-4">
+                <PlanOptionsPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} />
+              </div>
+            </div>
+          </div>
+        </div>
+      }
       footer={
         <div className="flex flex-row gap-5 flex-1 justify-between">
           <Button

@@ -52,7 +52,7 @@ const OpportunityWeight = () => {
   ]);
 
   return (
-    <div data-testid="tool-opportunity-slider" className="pt-4">
+    <div data-testid="tool-opportunity-slider" className="pt-4 not-sm:mb-5">
       <Slider
         label={t('map-competences')}
         rightLabel={t('interests')}
