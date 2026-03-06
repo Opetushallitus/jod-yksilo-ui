@@ -90,6 +90,7 @@ export interface ToolState {
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
   updateSuosikit: (loggedIn: boolean) => Promise<void>;
   toggleSuosikki: (kohdeId: string, tyyppi: MahdollisuusTyyppi) => Promise<void>;
+  setFilters: (filters: ToolFilters) => void;
 
   setOsaamisKiinnostusPainotus: (state: number) => void;
 

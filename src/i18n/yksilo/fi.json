@@ -1039,6 +1039,7 @@
     "salary-suffix": "€/kk",
     "settings": {
       "controls": "Säätimet",
+      "modal-title": "Säädä mahdollisuuksia",
       "general": {
         "duration": "Kesto",
         "duration-value": {

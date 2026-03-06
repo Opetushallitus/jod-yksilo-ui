@@ -1041,6 +1041,7 @@
     "salary-suffix": "€/month",
     "settings": {
       "controls": "Controls",
+      "modal-title": "Adjust opportunities",
       "general": {
         "duration": "Duration",
         "duration-value": {

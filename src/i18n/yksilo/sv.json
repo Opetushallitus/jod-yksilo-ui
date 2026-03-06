@@ -1041,6 +1041,7 @@
     "salary-suffix": "€/månad",
     "settings": {
       "controls": "Kontroller",
+      "modal-title": "Justera möjligheter",
       "general": {
         "duration": "Längd",
         "duration-value": {
