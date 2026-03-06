@@ -138,7 +138,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
           control={control}
           onSubmit={onSubmit}
           data-testid="feedback-form"
-          className="max-w-modal-content"
+          className="max-w-modal-content px-5 sm:px-6"
         >
           <p className="sm:text-body-md text-body-md-mobile mb-9">
             {t('common:feedback.intro-1')} {t('common:feedback.intro-2')}
