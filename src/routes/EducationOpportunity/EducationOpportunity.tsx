@@ -3,7 +3,7 @@ import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompet
 import { CounselingCard } from '@/components/CounselingCard/CounselingCard';
 import { EducationJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
-import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
+import { RateContent } from '@/components/RateContent/RateContent';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import type { LoaderData } from '@/routes/EducationOpportunity/loader';
 import type { JakaumaKey } from '@/routes/types';
@@ -84,7 +84,7 @@ const EducationOpportunity = () => {
           <span className="font-arial">{t('education-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} mode="kiinnostus" />
           {!lg && koulutusmahdollisuus.tyyppi === 'EI_TUTKINTO' && (
-            <RateAiContent variant="koulutusmahdollisuus" area="Koulutusmahdollisuus" />
+            <RateContent variant="koulutusmahdollisuus" area="Koulutusmahdollisuus" />
           )}
         </div>
       ),

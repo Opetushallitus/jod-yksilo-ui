@@ -1,15 +1,16 @@
-import { RateAiContentCard } from '@jod/design-system';
+import { RateContentCard } from '@jod/design-system';
+import React from 'react';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 
-interface RateAiContentProps {
-  variant: 'kohtaanto' | 'tyomahdollisuus' | 'koulutusmahdollisuus';
+interface RateContentProps {
+  variant: 'kohtaanto' | 'tyomahdollisuus' | 'ammatti' | 'koulutusmahdollisuus';
   area: 'Kohtaanto työkalu' | 'Työmahdollisuus' | 'Koulutusmahdollisuus';
-  size?: React.ComponentProps<typeof RateAiContentCard>['size'];
+  size?: React.ComponentProps<typeof RateContentCard>['size'];
 }
 
-export const RateAiContent = ({ variant, area, size }: RateAiContentProps) => {
+export const RateContent = ({ variant, area, size }: RateContentProps) => {
   const {
     t,
     i18n: { language },
@@ -35,15 +36,27 @@ export const RateAiContent = ({ variant, area, size }: RateAiContentProps) => {
     ],
   };
 
+  const title = React.useMemo(() => {
+    if (variant === 'kohtaanto') {
+      return t('rate-ai-content.kohtaanto.header');
+    }
+    if (variant === 'ammatti') {
+      return t('rate-ai-content.ammatti.header');
+    }
+    return t('rate-ai-content.mahdollisuus.header');
+  }, [variant, t]);
+
+  const content = React.useMemo(() => {
+    return variant === 'ammatti' ? t('rate-ai-content.ammatti.body') : t('rate-ai-content.mahdollisuus.body');
+  }, [variant, t]);
+
   return (
-    <RateAiContentCard
+    <RateContentCard
       translations={{
         card: {
-          title:
-            variant === 'kohtaanto' ? t('rate-ai-content.kohtaanto.header') : t('rate-ai-content.mahdollisuus.header'),
-          aiLabel: t('rate-ai-content.icon'),
-          content:
-            variant === 'kohtaanto' ? t('rate-ai-content.kohtaanto.body') : t('rate-ai-content.mahdollisuus.body'),
+          title,
+          aiLabel: variant !== 'ammatti' ? t('rate-ai-content.icon') : undefined,
+          content,
           likeLabel: t('rate-ai-content.like'),
           dislikeLabel: t('rate-ai-content.dislike'),
         },
@@ -52,18 +65,24 @@ export const RateAiContent = ({ variant, area, size }: RateAiContentProps) => {
           send: t('rate-ai-content.modal.send'),
           sending: t('rate-ai-content.modal.sending'),
           title: t('rate-ai-content.modal.header'),
-          description: (
-            <>
-              <p>{t(`rate-ai-content.modal.description.intro`)}</p>
-              <ul className="list-disc ml-5">
-                {listTexts[variant].map((item: string, index, array) => (
-                  <li key={item}>{`${item}${index === array.length - 1 ? '.' : ','}`}</li>
-                ))}
-              </ul>
-              <p className="mt-4">{t(`rate-ai-content.modal.description.question`)}</p>
-              <p>{t(`rate-ai-content.modal.description.help`)}</p>
-            </>
-          ),
+          description:
+            variant === 'ammatti' ? (
+              <>
+                <p>{t(`rate-ai-content.modal.description.question`)}</p>
+                <p>{t(`rate-ai-content.modal.description.help-ammatti`)}</p>
+              </>
+            ) : (
+              <>
+                <p>{t(`rate-ai-content.modal.description.intro`)}</p>
+                <ul className="list-disc ml-5">
+                  {listTexts[variant].map((item: string, index, array) => (
+                    <li key={item}>{`${item}${index === array.length - 1 ? '.' : ','}`}</li>
+                  ))}
+                </ul>
+                <p className="mt-4">{t(`rate-ai-content.modal.description.question`)}</p>
+                <p>{t(`rate-ai-content.modal.description.help`)}</p>
+              </>
+            ),
           placeholder: t('rate-ai-content.modal.placeholder'),
         },
       }}
@@ -104,7 +123,8 @@ export const RateAiContent = ({ variant, area, size }: RateAiContentProps) => {
         }
       }}
       size={size}
-      testId="rate-ai-content"
+      className={variant === 'ammatti' ? 'bg-secondary-1-dark-2!' : undefined}
+      testId="rate-content"
     />
   );
 };

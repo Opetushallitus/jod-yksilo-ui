@@ -18,7 +18,7 @@ import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { CounselingCard } from '../CounselingCard/CounselingCard';
 import { OpportunityType } from '../OpportunityType/OpportunityType';
-import { RateAiContent } from '../RateAiContent/RateAiContent';
+import { RateContent } from '../RateContent/RateContent';
 import { TitleIcon } from '../TitleIcon/TitleIcon';
 
 export interface OpportunityDetailsSection {
@@ -98,12 +98,16 @@ const OpportunityDetails = ({
   );
 
   const navChildren = React.useMemo(() => {
+    const jobVariant = mahdollisuusAlityyppi === 'MUU_TYOMAHDOLLISUUS' ? 'tyomahdollisuus' : 'ammatti';
+    const variant = mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? jobVariant : 'koulutusmahdollisuus';
     return (
       <div className="flex flex-col gap-6">
         <PageNavigation menuSection={menuSection} activeIndicator="dot" />
-        {(mahdollisuusAlityyppi === 'MUU_TYOMAHDOLLISUUS' || mahdollisuusAlityyppi === 'MUU_KOULUTUS') && (
-          <RateAiContent
-            variant={mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? 'tyomahdollisuus' : 'koulutusmahdollisuus'}
+        {(mahdollisuusAlityyppi === 'MUU_TYOMAHDOLLISUUS' ||
+          mahdollisuusAlityyppi === 'AMMATTI' ||
+          mahdollisuusAlityyppi === 'MUU_KOULUTUS') && (
+          <RateContent
+            variant={variant}
             area={mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? 'Työmahdollisuus' : 'Koulutusmahdollisuus'}
           />
         )}

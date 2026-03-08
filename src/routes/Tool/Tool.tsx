@@ -3,7 +3,7 @@ import { AiInfo, Breadcrumb, OpportunityCard } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
-import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
+import { RateContent } from '@/components/RateContent/RateContent';
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
@@ -344,7 +344,7 @@ const YourInfo = () => {
         </YourInfoGroup>
       </div>
       <div className="lg:mx-3">
-        <RateAiContent variant="kohtaanto" area="Kohtaanto työkalu" size="md" />
+        <RateContent variant="kohtaanto" area="Kohtaanto työkalu" size="md" />
       </div>
 
       <div className="flex flex-col bg-secondary-1-dark-2 rounded-md px-5 py-6 gap-3 text-white lg:mx-3">
