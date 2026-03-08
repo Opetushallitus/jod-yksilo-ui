@@ -812,6 +812,10 @@
   "rate-ai-content": {
     "dislike": "Jag gillar inte",
     "icon": "Innehåll genererat av artificiell intelligens",
+    "ammatti": {
+      "body": "På den här sidan har yrkesinformation kombinerats med statistik. Berätta för oss hur vi lyckades.",
+      "header": "Utvärdera yrket"
+    },
     "kohtaanto": {
       "body": "På den här sidan föreslår vi lämpliga möjligheter utifrån de uppgifter som du har angett. Berätta hur vi lyckades.",
       "header": "Utvärdera de möjligheter som föreslås för dig"
@@ -826,6 +830,7 @@
       "description": {
         "help": "Din respons hjälper oss att utveckla både innehållets kvalitet och den artificiella intelligensens funktion.",
         "intro": "Vi har använt artificiell intelligens för att skapa innehållet på denna sida på följande ställen:",
+        "help-ammatti": "Din respons hjälper oss att utveckla både innehållets kvalitet och tjänstens funktion.",
         "list": {
           "kohtaanto": {
             "item1": "karriärmöjligheter",

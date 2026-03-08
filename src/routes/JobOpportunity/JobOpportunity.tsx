@@ -4,7 +4,7 @@ import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompet
 import { CounselingCard } from '@/components/CounselingCard/CounselingCard';
 import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
-import { RateAiContent } from '@/components/RateAiContent/RateAiContent';
+import { RateContent } from '@/components/RateContent/RateContent';
 import { NOT_AVAILABLE_LABEL } from '@/constants';
 import Suomi from '@/routes/JobOpportunity/Suomi.tsx';
 import { useToolStore } from '@/stores/useToolStore';
@@ -200,9 +200,10 @@ const JobOpportunity = () => {
           <span className="font-arial">{t('job-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} />
           {!lg && (
-            <>
-              {tyomahdollisuus.aineisto === 'TMT' && <RateAiContent variant="tyomahdollisuus" area="Työmahdollisuus" />}
-            </>
+            <RateContent
+              variant={tyomahdollisuus.aineisto === 'TMT' ? 'tyomahdollisuus' : 'ammatti'}
+              area="Työmahdollisuus"
+            />
           )}
         </div>
       ),

@@ -813,6 +813,10 @@
   "rate-ai-content": {
     "dislike": "I don't like it",
     "icon": "AI-generated content",
+    "ammatti": {
+      "body": "On this page, occupational information has been combined with statistical data. Tell us how we did.",
+      "header": "Evaluate the profession"
+    },
     "kohtaanto": {
       "body": "Based on the information you have entered, this page suggests options that are suitable for you. Tell us how we succeeded.",
       "header": "Evaluate the opportunities suggested to you"
@@ -827,6 +831,7 @@
       "description": {
         "help": "Your feedback helps us to improve both the quality of the content and the functionality of AI.",
         "intro": "We have used artificial intelligence to create the content on this page in the following areas:",
+        "help-ammatti": "Your feedback helps us to improve both the quality of the content and the functionality of the service.",
         "list": {
           "kohtaanto": {
             "item1": "career opportunities",

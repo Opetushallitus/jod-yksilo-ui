@@ -811,6 +811,10 @@
   "rate-ai-content": {
     "dislike": "En tykkää",
     "icon": "Tekoälyn tuottamaa sisältöä",
+    "ammatti": {
+      "body": "Tällä sivulla on yhdistetty ammattitietoa tilastotietoihin. Kerro meille, miten onnistuimme.",
+      "header": "Arvioi ammattia"
+    },
     "kohtaanto": {
       "body": "Tällä sivulla ehdotetaan syöttämiesi tietojen perusteella sinulle sopivia mahdollisuuksia. Kerro, miten onnistuimme.",
       "header": "Arvioi sinulle ehdotettuja mahdollisuuksia"
@@ -825,6 +829,7 @@
       "description": {
         "help": "Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
         "intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi tekoälyä seuraavissa kohdissa:",
+        "help-ammatti": "Palautteesi auttaa meitä kehittämään sekä sisällön laatua että palvelun toimintaa.",
         "list": {
           "kohtaanto": {
             "item1": "työmahdollisuudet",
