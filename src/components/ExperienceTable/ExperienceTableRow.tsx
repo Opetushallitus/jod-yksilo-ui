@@ -4,7 +4,7 @@ import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
 import { Checkbox, Spinner, Tag, useMediaQueries } from '@jod/design-system';
 import { JodCaretDown, JodCaretUp, JodEdit, JodError, JodErrorTriangle } from '@jod/design-system/icons';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 export interface ExperienceTableRowData {
   checked?: boolean;
@@ -248,7 +248,17 @@ export const ExperienceTableRow = ({
           className={`cursor-pointer flex gap-x-2 items-center justify-self-end text-secondary-gray ${sm ? 'text-nowrap sm:pr-2' : 'pr-7'} w-full`}
           data-testid={`experience-row-competences-toggle-${row.key}`}
         >
-          {osaamisetNeedsToBeVerified && <JodError className="text-secondary-3" />}
+          {osaamisetNeedsToBeVerified && (
+            <TooltipWrapper
+              className="text-[12px]! leading-5!"
+              tooltipContent={<Trans i18nKey="education-history-import.check-detected-competences-tooltip" />}
+              tooltipPlacement="top"
+            >
+              <span>
+                <JodError className="text-secondary-3!" />
+              </span>
+            </TooltipWrapper>
+          )}
           {<span className="ml-auto">{osaamisetCountTotal}</span>}
           {tagsVisibleState ? <JodCaretUp aria-hidden="true" /> : <JodCaretDown aria-hidden="true" />}
         </button>

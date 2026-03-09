@@ -336,7 +336,7 @@ const ImportKoulutusSummaryModal = ({
                       <Trans
                         i18nKey="education-history-import.result-modal.title"
                         components={{
-                          AiIcon: <AiInfo />,
+                          AiIcon: <AiInfo type="education-import" />,
                         }}
                       />
                     </span>
