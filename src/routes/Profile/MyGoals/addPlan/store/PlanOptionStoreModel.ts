@@ -54,6 +54,7 @@ export interface AddPlanState {
   setArrayFilter: (name: ArrayFilters, value: PlanFilters[ArrayFilters][number]) => void;
   reset: () => void;
   resetSettings: () => void;
+  setFilters: (filters: PlanFilters) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
   setTavoite: (tavoite: components['schemas']['TavoiteDto']) => void;
   setSelectedPlans: (plans: string[]) => void;

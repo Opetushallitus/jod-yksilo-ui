@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { filterValues, type OpportunityFilterValue } from '../../utils';
-import { Setting } from '../Settings';
+import { Setting } from '../Setting';
 import { FilterAmmattiryhma } from './FilterAmmattiryhma';
 import { FilterEducationOpportunityType } from './FilterEducationOpportunityType';
 import { FilterJobOpportunityType } from './FilterJobOpportunityType';

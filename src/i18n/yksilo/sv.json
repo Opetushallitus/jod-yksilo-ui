@@ -130,7 +130,7 @@
     },
     "start-modal": {
       "description": "Du kan importera din utbildningshistorik till din kompetensprofil när du har gett tillstånd i Studieinfo. Klicka på \"Öppna Studieinfo\" för att ge tillstånd att importera uppgifter. När du har gett ditt tillstånd återgår du automatiskt till tjänsten. När du har återgått till tjänsten kan du välja vilka utbildningar du vill importera.\n",
-      "description-1": "I delen Mina studieprestationer i Min Studieinfo hittar du de studier och examina du har slutfört och som har sparats i de nationella studie-, utbildnings- och examensregistren. Du kan överföra dessa uppgifter till din kompetensprofil och kartlägga den kompetens som de ger. Läs mer om dina studieprestationer i Studieinfo.<br><CustomLink>Läs mer om dina studieprestationer i Studieinfo<Icon></Icon>.</CustomLink>",
+      "description-1": "I delen Mina studieprestationer i Min Studieinfo hittar du de studier och examina du har slutfört och som har sparats i de nationella studie-, utbildnings- och examensregistren. Du kan överföra dessa uppgifter till din kompetensprofil och kartlägga den kompetens som de ger.<br><CustomLink>Läs mer om dina studieprestationer i Studieinfo<Icon></Icon>.</CustomLink>",
       "description-2": "Du kan importera dina studieprestationer till avsnittet Utbildningshistorik i din kompetensprofil genom att ge tillstånd till detta i Studieinfo. Välj Gå till Studieinfo och ge tillstånd att hämta uppgifterna. Därefter återvänder du automatiskt till tjänsten. När du har återvänt kan du välja vilka utbildningar du vill importera.",
       "import-button": "Öppna Studieinfo",
       "import-redirect-fail": "Det gick inte att öppna Studieinfo. Vänligen försök igen.",
@@ -810,12 +810,12 @@
   "proposed-competences": "Föreslagna kunskaper",
   "proposed-interests": "Föreslagna intressen",
   "rate-ai-content": {
-    "dislike": "Jag gillar inte",
-    "icon": "Innehåll genererat av artificiell intelligens",
     "ammatti": {
       "body": "På den här sidan har yrkesinformation kombinerats med statistik. Berätta för oss hur vi lyckades.",
       "header": "Utvärdera yrket"
     },
+    "dislike": "Jag gillar inte",
+    "icon": "Innehåll genererat av artificiell intelligens",
     "kohtaanto": {
       "body": "På den här sidan föreslår vi lämpliga möjligheter utifrån de uppgifter som du har angett. Berätta hur vi lyckades.",
       "header": "Utvärdera de möjligheter som föreslås för dig"
@@ -829,8 +829,8 @@
       "close": "Stäng",
       "description": {
         "help": "Din respons hjälper oss att utveckla både innehållets kvalitet och den artificiella intelligensens funktion.",
-        "intro": "Vi har använt artificiell intelligens för att skapa innehållet på denna sida på följande ställen:",
         "help-ammatti": "Din respons hjälper oss att utveckla både innehållets kvalitet och tjänstens funktion.",
+        "intro": "Vi har använt artificiell intelligens för att skapa innehållet på denna sida på följande ställen:",
         "list": {
           "kohtaanto": {
             "item1": "karriärmöjligheter",
@@ -1046,6 +1046,7 @@
     "salary-suffix": "€/månad",
     "settings": {
       "controls": "Kontroller",
+      "modal-title": "Justera möjligheter",
       "general": {
         "duration": "Längd",
         "duration-value": {
@@ -1069,6 +1070,8 @@
       "reset": "Ta bort valen",
       "toggle-close": "Stäng reglage",
       "toggle-open": "Visa reglage",
+      "toggle-open_zero": "Visa reglage",
+      "toggle-open_other": "Visa reglage ({{count}})",
       "toggle-title-closed": "Visa reglage",
       "toggle-title-open": "Uppdatera och stäng",
       "toggle-update-close": "Uppdatera och stäng"

@@ -369,7 +369,12 @@ export const useToolStore = create<ToolState>()(
       setSorting: (state) => {
         set({ sorting: state, settingsHaveChanged: true });
       },
-
+      setFilters: (state) => {
+        set({ filters: state });
+      },
+      setSettingsHaveChanged: (state) => {
+        set({ settingsHaveChanged: state });
+      },
       setDurationFilter: (minDuration: number, maxDuration: number) => {
         set((state) => ({
           settingsHaveChanged: true,

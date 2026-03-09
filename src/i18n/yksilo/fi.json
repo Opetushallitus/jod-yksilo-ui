@@ -809,12 +809,12 @@
   "proposed-competences": "Ehdotetut osaamiset",
   "proposed-interests": "Ehdotetut kiinnostukset",
   "rate-ai-content": {
-    "dislike": "En tykkää",
-    "icon": "Tekoälyn tuottamaa sisältöä",
     "ammatti": {
       "body": "Tällä sivulla on yhdistetty ammattitietoa tilastotietoihin. Kerro meille, miten onnistuimme.",
       "header": "Arvioi ammattia"
     },
+    "dislike": "En tykkää",
+    "icon": "Tekoälyn tuottamaa sisältöä",
     "kohtaanto": {
       "body": "Tällä sivulla ehdotetaan syöttämiesi tietojen perusteella sinulle sopivia mahdollisuuksia. Kerro, miten onnistuimme.",
       "header": "Arvioi sinulle ehdotettuja mahdollisuuksia"
@@ -828,8 +828,8 @@
       "close": "Sulje",
       "description": {
         "help": "Palautteesi auttaa meitä kehittämään sekä sisällön laatua että tekoälyn toimintaa.",
-        "intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi tekoälyä seuraavissa kohdissa:",
         "help-ammatti": "Palautteesi auttaa meitä kehittämään sekä sisällön laatua että palvelun toimintaa.",
+        "intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi tekoälyä seuraavissa kohdissa:",
         "list": {
           "kohtaanto": {
             "item1": "työmahdollisuudet",
@@ -1044,6 +1044,7 @@
     "salary-suffix": "€/kk",
     "settings": {
       "controls": "Säätimet",
+      "modal-title": "Säädä mahdollisuuksia",
       "general": {
         "duration": "Kesto",
         "duration-value": {
@@ -1067,6 +1068,8 @@
       "reset": "Poista valinnat",
       "toggle-close": "Sulje säätimet",
       "toggle-open": "Näytä säätimet",
+      "toggle-open_zero": "Näytä säätimet",
+      "toggle-open_other": "Näytä säätimet ({{count}})",
       "toggle-title-closed": "Näytä säätimet",
       "toggle-title-open": "Päivitä ja sulje",
       "toggle-update-close": "Päivitä ja sulje"

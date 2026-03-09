@@ -811,12 +811,12 @@
   "proposed-competences": "Suggested competences",
   "proposed-interests": "Suggested interests",
   "rate-ai-content": {
-    "dislike": "I don't like it",
-    "icon": "AI-generated content",
     "ammatti": {
       "body": "On this page, occupational information has been combined with statistical data. Tell us how we did.",
       "header": "Evaluate the profession"
     },
+    "dislike": "I don't like it",
+    "icon": "AI-generated content",
     "kohtaanto": {
       "body": "Based on the information you have entered, this page suggests options that are suitable for you. Tell us how we succeeded.",
       "header": "Evaluate the opportunities suggested to you"
@@ -830,8 +830,8 @@
       "close": "Close",
       "description": {
         "help": "Your feedback helps us to improve both the quality of the content and the functionality of AI.",
-        "intro": "We have used artificial intelligence to create the content on this page in the following areas:",
         "help-ammatti": "Your feedback helps us to improve both the quality of the content and the functionality of the service.",
+        "intro": "We have used artificial intelligence to create the content on this page in the following areas:",
         "list": {
           "kohtaanto": {
             "item1": "career opportunities",
@@ -1046,6 +1046,7 @@
     "salary-suffix": "€/month",
     "settings": {
       "controls": "Controls",
+      "modal-title": "Adjust opportunities",
       "general": {
         "duration": "Duration",
         "duration-value": {
@@ -1069,6 +1070,8 @@
       "reset": "Clear selections",
       "toggle-close": "Close controls",
       "toggle-open": "Display controls",
+      "toggle-open_zero": "Display controls",
+      "toggle-open_other": "Display controls ({{count}})",
       "toggle-title-closed": "Display controls",
       "toggle-title-open": "Update and close",
       "toggle-update-close": "Update and close"
