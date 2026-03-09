@@ -179,7 +179,7 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
       set({ koulutusmahdollisuudet: [], mahdollisuudetLoading: false });
     }
   },
-
+  setFilters: (filters) => set({ filters }),
   setArrayFilter: (name, value) => {
     const { filters } = get();
     if (!filters[name]) {

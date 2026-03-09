@@ -74,6 +74,7 @@ export interface ToolState {
   filters: ToolFilters;
   setDurationFilter: (minDuration: number, maxDuration: number) => void;
   settingsHaveChanged?: boolean;
+  setSettingsHaveChanged: (state?: boolean) => void;
   shouldFetchData: boolean;
   addToArray: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;
   setArrayFilter: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;
@@ -90,6 +91,7 @@ export interface ToolState {
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
   updateSuosikit: (loggedIn: boolean) => Promise<void>;
   toggleSuosikki: (kohdeId: string, tyyppi: MahdollisuusTyyppi) => Promise<void>;
+  setFilters: (state: ToolFilters) => void;
 
   setOsaamisKiinnostusPainotus: (state: number) => void;
 

@@ -5,13 +5,12 @@ import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
 import { RateContent } from '@/components/RateContent/RateContent';
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
-import { useInteractionMethod } from '@/hooks/useInteractionMethod';
-import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
+import { useModal } from '@/hooks/useModal';
 import AdditionalSupport from '@/routes/Tool/AdditionalSupport';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import { Button, cx, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
-import { JodArrowRight, JodClose, JodCompass, JodInfo, JodSettings } from '@jod/design-system/icons';
+import { JodArrowRight, JodCompass, JodInfo, JodSettings } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useRouteLoaderData } from 'react-router';
@@ -38,7 +37,6 @@ const ExploreOpportunities = () => {
     filters,
     isLoading,
     totalItems,
-    settingsHaveChanged,
     toggleSuosikki,
     updateEhdotuksetAndTyomahdollisuudet,
   } = useToolStore(
@@ -50,7 +48,6 @@ const ExploreOpportunities = () => {
       filters: state.filters,
       isLoading: state.ehdotuksetLoading || state.mahdollisuudetLoading,
       totalItems: state.filteredMahdollisuudetCount,
-      settingsHaveChanged: state.settingsHaveChanged,
       toggleSuosikki: state.toggleSuosikki,
       updateEhdotuksetAndTyomahdollisuudet: state.updateEhdotuksetAndTyomahdollisuudet,
     })),
@@ -58,35 +55,14 @@ const ExploreOpportunities = () => {
 
   const scrollRef = React.useRef<HTMLUListElement>(null);
   const { isLoggedIn } = useLoaderData<ToolLoaderData>();
-  const [settingsOpen, setSettingsOpen] = React.useState(false);
-  const settingsButtonRef = React.useRef<HTMLButtonElement>(null);
-  const firstSettingRef = useMenuClickHandler(() => setSettingsOpen(false), settingsButtonRef);
-  const isMouseInteraction = useInteractionMethod();
+  const { showModal } = useModal();
   const { lg } = useMediaQueries();
 
-  // Move focus to menu content when opened
-  React.useEffect(() => {
-    globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Säätimet']);
-    if (settingsOpen && !isMouseInteraction && firstSettingRef.current) {
-      const firstChild = firstSettingRef.current.querySelector('button');
-      if (firstChild) {
-        (firstChild as HTMLElement).focus();
-      }
+  const onCloseSettings = (cancel: boolean) => {
+    if (cancel) {
+      return;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [settingsOpen]);
-
-  const onCloseSettings = () => {
     updateEhdotuksetAndTyomahdollisuudet(isLoggedIn, false);
-    setSettingsOpen(false);
-  };
-
-  const onToggleSettings = () => {
-    if (settingsOpen) {
-      onCloseSettings();
-    } else {
-      setSettingsOpen(true);
-    }
   };
 
   const getTotalFilterCount = React.useCallback(() => {
@@ -94,18 +70,8 @@ const ExploreOpportunities = () => {
   }, [filters]);
 
   const toggleFiltersText = React.useMemo(() => {
-    if (settingsOpen) {
-      if (settingsHaveChanged) {
-        return t('tool.settings.toggle-update-close');
-      } else {
-        return t('tool.settings.toggle-close');
-      }
-    }
-
-    const count = getTotalFilterCount();
-    const filterCount = count > 0 ? ` (${count})` : '';
-    return `${t('tool.settings.toggle-open')}${filterCount}`;
-  }, [getTotalFilterCount, settingsOpen, settingsHaveChanged, t]);
+    return t('tool.settings.toggle-open', { count: getTotalFilterCount() });
+  }, [getTotalFilterCount, t]);
 
   const statusText = isLoading ? t('tool.updating') : t('tool.opportunities-loaded', { count: totalItems });
   const { permanentNotesHeight } = useNoteStack();
@@ -127,19 +93,20 @@ const ExploreOpportunities = () => {
               variant="gray"
               size="sm"
               serviceVariant="yksilo"
-              onClick={onToggleSettings}
+              onClick={() => {
+                globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Säätimet']);
+                showModal(ToolSettings, {
+                  onClose: onCloseSettings,
+                });
+              }}
               data-testid="open-tool-settings"
-              icon={settingsOpen ? <JodClose className="text-accent!" /> : <JodSettings className="text-accent!" />}
+              icon={<JodSettings className="text-accent!" />}
               iconSide="left"
               className="bg-bg-gray-2!"
             />
           </div>
         </div>
       </div>
-
-      {settingsOpen && (
-        <ToolSettings ref={firstSettingRef} isOpen={settingsOpen} onClose={onCloseSettings} isModal={!lg} />
-      )}
 
       <section aria-busy={isLoading}>
         <div role="status" aria-live="polite" className="sr-only">
