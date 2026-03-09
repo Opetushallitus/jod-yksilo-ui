@@ -118,6 +118,7 @@
     "summary": "Sammanfattning"
   },
   "education-history-import": {
+    "check-detected-competences-tooltip": "<strong>Kontrollera automatiskt identifierade kompetenser</strong><br><br>Kompetenserna i denna utbildning har identifierats automatiskt med hjälp av artificiell intelligens. Vi rekommenderar att du kontrollerar dem.",
     "result-modal": {
       "failure": "Det gick inte att lägga till utbildningshistorik.",
       "give-permission-failed": "Det gick inte att ge tillstånd. Försök på nytt senare.",
@@ -126,7 +127,8 @@
       "success": "Utbildningshistoriken lades till.",
       "success-osaamiset-info": "Din utbildningshistorik har lagts till framgångsrikt.<br><br><strong>Vill du att vi automatiskt identifierar kompetensförslag från dina utbildningar med hjälp av artificiell intelligens?</strong><br><br>Förslagen kan innehålla fel, så vi rekommenderar att du kontrollerar dem. Du kan redigera kompetenser senare genom att lägga till eller ta bort dem i utbildningsinformationen.",
       "success-osaamiset-link-about-ai": "Information om användningen av artificiell intelligens",
-      "title": "Ska dina kompetenser identifieras?<AiIcon></AiIcon>"
+      "title": "Ska dina kompetenser identifieras?<AiIcon></AiIcon>",
+      "tooltip": "Vi använder artificiell intelligens för att identifiera kompetenser. AI jämför ord och fraser med kända färdigheter och väljer de som bäst matchar informationen som hämtats från KOSKI-tjänsten.<br><br>Observera! AI kan göra misstag. Funktionen utvecklas fortfarande och identifierar inte alltid kompetenser från utbildningar korrekt."
     },
     "start-modal": {
       "description": "Du kan importera din utbildningshistorik till din kompetensprofil när du har gett tillstånd i Studieinfo. Klicka på \"Öppna Studieinfo\" för att ge tillstånd att importera uppgifter. När du har gett ditt tillstånd återgår du automatiskt till tjänsten. När du har återgått till tjänsten kan du välja vilka utbildningar du vill importera.\n",

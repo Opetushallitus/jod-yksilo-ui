@@ -118,6 +118,7 @@
     "summary": "Summary"
   },
   "education-history-import": {
+    "check-detected-competences-tooltip": "<strong>Check automatically identified competences</strong><br><br>The competences in this education have been automatically identified using artificial intelligence. We recommend that you review them.",
     "result-modal": {
       "failure": "Failed to add education history.",
       "give-permission-failed": "Failed to grant permission. Please try again later.",
@@ -126,7 +127,8 @@
       "success": "Education history added successfully.",
       "success-osaamiset-info": "Education history added successfully.<br><br><strong>Do you want us to automatically identify competence suggestions from your education using artificial intelligence?</strong><br><br>The suggestions may contain errors, so we recommend checking them. You can edit competences later by adding or removing them in the education details.",
       "success-osaamiset-link-about-ai": "About the use of artificial intelligence",
-      "title": "Identify your competences?<AiIcon></AiIcon>"
+      "title": "Identify your competences?<AiIcon></AiIcon>",
+      "tooltip": "We use artificial intelligence to identify competences. The AI compares words and phrases to known skills and selects those that best match the information retrieved from the KOSKI service.<br><br>Note! The AI may make mistakes. The feature is still being developed, and it does not always correctly identify competences from education."
     },
     "start-modal": {
       "description": "You can import your education history to your competence profile once you have granted permission in Studyinfo. Click \"Go to Studyinfo\" to grant permission to import data. After granting permission, you will automatically return to the service. Once you return, you can choose which educations you want to import.",
