@@ -244,25 +244,25 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
 
   return (
     <div className={className}>
-      <Button
-        label={
-          type === 'competences'
-            ? t('tool.my-own-data.competences.virtual-assistant.open')
-            : t('tool.my-own-data.interests.virtual-assistant.open')
-        }
-        variant="gray"
-        size="sm"
-        icon={
-          <AiInfoButton
-            tooltipContent={tooltipContent}
-            ariaLabel={t('ai-info-tooltip.aria-description')}
-            placement="top"
-          />
-        }
-        iconSide="right"
-        onClick={() => setIsOpen(true)}
-        data-testid="open-va"
-      />
+      <div className="flex gap-3">
+        <Button
+          label={
+            type === 'competences'
+              ? t('tool.my-own-data.competences.virtual-assistant.open')
+              : t('tool.my-own-data.interests.virtual-assistant.open')
+          }
+          variant="gray"
+          size="sm"
+          iconSide="right"
+          onClick={() => setIsOpen(true)}
+          data-testid="open-va"
+        />
+        <AiInfoButton
+          tooltipContent={tooltipContent}
+          ariaLabel={t('ai-info-tooltip.aria-description')}
+          placement="top"
+        />
+      </div>
       <Modal
         name={headerText}
         open={isOpen}
@@ -270,7 +270,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
         className="sm:h-full!"
         topSlot={topSlot}
         content={
-          <div className="flex flex-col h-full min-h-[45dvh]">
+          <div className="flex flex-col h-full min-h-[45dvh] mb-4">
             <div role="tablist" aria-labelledby={titleId} className="flex flex-row gap-1 min-h-9">
               <button
                 id={conversationTabButtonId}
