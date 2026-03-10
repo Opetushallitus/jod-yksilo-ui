@@ -122,7 +122,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
           ...prevState[key],
           answer: error
             ? t('tool.my-own-data.virtual-assistant.error')
-            : removeTags(['reference_information', 'user_interests'], data?.vastaus),
+            : removeTags(['reference_information', 'user_interests', 'user_skills'], data?.vastaus),
           kiinnostukset: error ? undefined : data?.ehdotukset?.map((k) => osaamisetMap[k]),
         },
       }));
@@ -370,7 +370,11 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
                                   <li key={k.uri} className="max-w-full">
                                     <Tag
                                       label={k.nimi[language] ?? k.uri}
-                                      sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
+                                      sourceType={
+                                        type === 'competences'
+                                          ? OSAAMINEN_COLOR_MAP['MUU_OSAAMINEN']
+                                          : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
+                                      }
                                       onClick={(e) => {
                                         animateElementToTarget(e.currentTarget, selectedTabButtonRef.current!);
                                         // eslint-disable-next-line sonarjs/no-nested-functions
@@ -428,7 +432,11 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
                         <li key={k.uri} className="max-w-full">
                           <Tag
                             label={k.nimi[language] ?? k.uri}
-                            sourceType={OSAAMINEN_COLOR_MAP['KIINNOSTUS']}
+                            sourceType={
+                              type === 'competences'
+                                ? OSAAMINEN_COLOR_MAP['MUU_OSAAMINEN']
+                                : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
+                            }
                             variant="added"
                             onClick={(e) => {
                               setTagsPendingRemoval((prev) => [...prev, k.uri]);
