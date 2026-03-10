@@ -58,10 +58,7 @@ const ExploreOpportunities = () => {
   const { showModal } = useModal();
   const { lg } = useMediaQueries();
 
-  const onCloseSettings = (cancel: boolean) => {
-    if (cancel) {
-      return;
-    }
+  const onUpdate = () => {
     updateEhdotuksetAndTyomahdollisuudet(isLoggedIn, false);
   };
 
@@ -96,7 +93,7 @@ const ExploreOpportunities = () => {
               onClick={() => {
                 globalThis._paq?.push(['trackEvent', 'yksilo.Kartoitustyökalut', 'Klikkaus', 'Säätimet']);
                 showModal(ToolSettings, {
-                  onClose: onCloseSettings,
+                  onUpdate,
                 });
               }}
               data-testid="open-tool-settings"

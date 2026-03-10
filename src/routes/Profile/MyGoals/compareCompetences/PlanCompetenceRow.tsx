@@ -11,28 +11,28 @@ interface CompareCompetencesTableRowProps {
 
 export const PlanCompetenceRow = ({ row, className }: CompareCompetencesTableRowProps) => {
   const { t } = useTranslation();
-  const emptyCell = <td className="justify-items-center pr-5"></td>;
-  const foundCell = (bgClass?: string) => (
-    <td className=" justify-center items-center h-full">
+  const emptyCell = (key: string) => <td key={key} className="justify-items-center pr-5"></td>;
+  const foundCell = (key: string, bgClass?: string) => (
+    <td key={key} className=" justify-center items-center h-full">
       <div role="img" aria-label={t('found')} className={`size-4 rounded-full mt-4 ${bgClass ?? ''}`} />
       <div aria-hidden className="hidden print:block">
         {t('found')}
       </div>
     </td>
   );
-  const foundOrEmptyCell = (found: boolean, bgClass?: string) => {
+  const foundOrEmptyCell = (key: string, found: boolean, bgClass?: string) => {
     if (found) {
-      return foundCell(bgClass);
+      return foundCell(key, bgClass);
     }
-    return emptyCell;
+    return emptyCell(key);
   };
   return (
     <tr className={className}>
       <td className="w-full pl-5 pr-7 py-3 text-heading-5 hyphens-auto first-letter:uppercase">
         {getLocalizedText(row.nimi)}
       </td>
-      {foundOrEmptyCell(row.profiili, 'bg-secondary-1')}
-      {row.plans.map((hasOsaaminen) => foundOrEmptyCell(hasOsaaminen, 'bg-secondary-2'))}
+      {foundOrEmptyCell('profile', row.profiili, 'bg-secondary-1')}
+      {row.plans.map((hasOsaaminen, index) => foundOrEmptyCell(`plan${index}`, hasOsaaminen, 'bg-secondary-2'))}
     </tr>
   );
 };

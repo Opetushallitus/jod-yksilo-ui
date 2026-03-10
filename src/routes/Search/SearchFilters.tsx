@@ -1,18 +1,18 @@
 import { AiInfo } from '@/components';
-import { useModal } from '@/hooks/useModal';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { useSearchStore } from '@/stores/useSearchStore';
 import { Button, Checkbox, Modal, useMediaQueries } from '@jod/design-system';
 import { JodSettings } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-const FiltersModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+const FiltersModal = ({ onClose, ...rest }: ModalComponentProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
   return (
     <Modal
-      open={isOpen && !sm}
-      onClose={onClose}
+      {...rest}
+      open={rest.open && !sm}
       topSlot={<span className="sm:text-heading-2 text-heading-2-mobile">{t('search.filters')}</span>}
       content={
         <div className="mt-5">

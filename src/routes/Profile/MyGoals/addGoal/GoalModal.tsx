@@ -2,7 +2,7 @@ import { client } from '@/api/client.ts';
 import type { components } from '@/api/schema';
 import { ActionButton, OpportunityCard } from '@/components';
 import { useEscHandler } from '@/hooks/useEscHandler';
-import { useModal } from '@/hooks/useModal';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
 import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
 import type { TypedMahdollisuus } from '@/routes/types';
@@ -26,21 +26,19 @@ import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-interface AddGoalModalProps {
+interface AddGoalModalProps extends ModalComponentProps {
   mode: 'ADD';
-  isOpen: boolean;
   tavoite: never;
 }
 
-interface UpdateGoalModalProps {
+interface UpdateGoalModalProps extends ModalComponentProps {
   mode: 'UPDATE';
-  isOpen: boolean;
   tavoite: Tavoite;
 }
 
 type GoalModalProps = AddGoalModalProps | UpdateGoalModalProps;
 
-export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => {
+export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) => {
   const { t } = useTranslation();
   const isUpdateMode = mode === 'UPDATE';
   const initialGoalName = getLocalizedText(tavoite?.tavoite);
@@ -211,7 +209,7 @@ export const GoalModal = ({ mode = 'ADD', isOpen, tavoite }: GoalModalProps) => 
   return (
     <Modal
       name={headerText}
-      open={isOpen}
+      {...rest}
       fullWidthContent={!lg}
       topSlot={<h1 className="text-heading-2-mobile sm:text-hero">{headerText}</h1>}
       content={

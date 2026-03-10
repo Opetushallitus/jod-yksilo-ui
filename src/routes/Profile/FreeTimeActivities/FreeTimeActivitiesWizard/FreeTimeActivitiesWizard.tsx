@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { ModalComponentProps } from '@/hooks/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
@@ -15,12 +16,7 @@ import CompetencesStep from './CompetencesStep';
 import SummaryStep from './SummaryStep';
 import type { FreeTimeActivitiesForm } from './utils';
 
-interface FreeTimeActivitiesWizardProps {
-  isOpen: boolean;
-  onClose: (isCancel?: boolean) => void;
-}
-
-const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardProps) => {
+const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
   // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
@@ -182,7 +178,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
     if (isSubmitting) {
       return;
     }
-    onClose(true);
+    onClose();
   }, [isSubmitting, onClose]);
 
   const onClickPreviousHandler = React.useCallback(() => {
@@ -233,7 +229,7 @@ const FreeTimeActivitiesWizard = ({ isOpen, onClose }: FreeTimeActivitiesWizardP
   return (
     <Modal
       name={headerText}
-      open={isOpen}
+      {...rest}
       testId="free-time-wizard"
       fullWidthContent
       topSlot={topSlot}

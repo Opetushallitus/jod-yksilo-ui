@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { ModalComponentProps } from '@/hooks/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
@@ -15,12 +16,7 @@ import SummaryStep from './SummaryStep';
 import WorkplaceStep from './WorkplaceStep';
 import type { WorkHistoryForm } from './utils';
 
-interface WorkHistoryWizardProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
+const WorkHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
   // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
@@ -310,7 +306,7 @@ const WorkHistoryWizard = ({ isOpen, onClose }: WorkHistoryWizardProps) => {
   return (
     <Modal
       name={headerText}
-      open={isOpen}
+      {...rest}
       testId="work-history-wizard"
       fullWidthContent
       topSlot={topSlot}

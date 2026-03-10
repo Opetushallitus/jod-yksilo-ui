@@ -1,3 +1,5 @@
+import { useModal } from '@/hooks/useModal';
+import { ModalComponentProps } from '@/hooks/useModal/utils';
 import { FilterEducationOpportunityType } from '@/routes/Profile/MyGoals/addPlan/selectPlan/FilterEducationOpportunityType';
 import { FilterKesto } from '@/routes/Profile/MyGoals/addPlan/selectPlan/FilterKesto';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
@@ -9,9 +11,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-export interface PlanOptionFiltersProps {
-  isOpen: boolean;
-  onClose: (cancel: boolean) => void;
+export interface PlanOptionFiltersProps extends ModalComponentProps {
+  onConfirm: () => void;
 }
 const SettingsMenu = () => {
   const { t } = useTranslation();
@@ -52,7 +53,7 @@ const SettingsMenu = () => {
   );
 };
 
-const PlanOptionFilters = ({ isOpen, onClose }: PlanOptionFiltersProps) => {
+const PlanOptionFilters = ({ onConfirm, ...rest }: PlanOptionFiltersProps) => {
   const { t } = useTranslation();
   const { resetSettings, setFilters } = addPlanStore(
     useShallow((state) => ({ resetSettings: state.resetSettings, setFilters: state.setFilters })),
@@ -62,17 +63,18 @@ const PlanOptionFilters = ({ isOpen, onClose }: PlanOptionFiltersProps) => {
   const [initialFilters] = React.useState(filters);
   const filtersHaveChanged = JSON.stringify(filters) !== JSON.stringify(initialFilters);
   const titleRef = React.useRef<HTMLHeadingElement>(null);
+  const { closeActiveModal } = useModal();
 
   React.useEffect(() => {
-    if (isOpen && titleRef.current) {
+    if (rest.open && titleRef.current) {
       titleRef.current.focus();
     }
-  }, [isOpen]);
+  }, [rest.open]);
 
   return (
     <Modal
       name={t('tool.settings.controls')}
-      open={isOpen}
+      {...rest}
       topSlot={
         <h2 ref={titleRef} tabIndex={-1} className="sm:text-hero text-heading-2-mobile focus-visible:outline-0">
           {t('profile.my-goals.adjust-list')}
@@ -104,7 +106,7 @@ const PlanOptionFilters = ({ isOpen, onClose }: PlanOptionFiltersProps) => {
               variant="white"
               onClick={() => {
                 setFilters(initialFilters);
-                onClose(true);
+                closeActiveModal();
               }}
               size={sm ? 'lg' : 'sm'}
             />
@@ -113,7 +115,10 @@ const PlanOptionFilters = ({ isOpen, onClose }: PlanOptionFiltersProps) => {
               variant="accent"
               className="whitespace-nowrap"
               disabled={!filtersHaveChanged}
-              onClick={() => onClose(false)}
+              onClick={() => {
+                onConfirm();
+                closeActiveModal();
+              }}
               size={sm ? 'lg' : 'sm'}
             />
           </div>

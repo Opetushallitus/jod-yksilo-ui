@@ -1,7 +1,7 @@
 import { client } from '@/api/client';
 import { ActionButton } from '@/components';
 import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
-import { useModal } from '@/hooks/useModal';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import PlanOpportunityCard from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOpportunityCard.tsx';
 import PlanOptionFilters from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionFilters.tsx';
 import PlanOptionsPagination from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionsPagination.tsx';
@@ -17,12 +17,7 @@ import { useShallow } from 'zustand/shallow';
 import AddOrEditCustomPlanModal from './customPlan/AddOrEditCustomPlanModal';
 import { getKestoCount } from './store/PlanOptionStoreModel';
 
-interface AddPlanModalProps {
-  isOpen: boolean;
-  onClose: (isCancel?: boolean) => void;
-}
-
-const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
+const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
   const { t } = useTranslation();
   const { showDialog, showModal, closeActiveModal } = useModal();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -92,10 +87,6 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
     setIsSubmitting(false);
   };
 
-  const close = (isCancel = false) => {
-    onClose(isCancel);
-  };
-
   const currentHeaderText = React.useMemo(() => {
     return t('profile.paths.step-n-details', { count: 1 });
   }, [t]);
@@ -117,10 +108,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
     await updateEhdotuksetAndTyomahdollisuudet();
   };
 
-  const onCloseSettings = (cancel: boolean) => {
-    if (cancel) {
-      return;
-    }
+  const onUpdateSettings = () => {
     const hasChanges = addPlanStore.getState().settingsHaveChanged;
     if (hasChanges) {
       onUpdateResults();
@@ -139,7 +127,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
   return (
     <Modal
       name={currentHeaderText}
-      open={isOpen}
+      {...rest}
       topSlot={<h2 className="text-heading-2-mobile sm:text-hero">{t('profile.my-goals.add-new-plan-header')}</h2>}
       fullWidthContent
       className="sm:h-full!"
@@ -169,7 +157,9 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
                     label={toggleFiltersText}
                     data-testid="open-select-plan-filters"
                     onClick={() => {
-                      showModal(PlanOptionFilters, { onClose: onCloseSettings });
+                      showModal(PlanOptionFilters, {
+                        onConfirm: onUpdateSettings,
+                      });
                     }}
                   />
                 </div>
@@ -287,7 +277,7 @@ const AddPlanModal = ({ isOpen, onClose }: AddPlanModalProps) => {
                   description: t('profile.paths.cancel-confirmation-text'),
                   confirmText: t('close'),
                   cancelText: t('profile.paths.continue-editing'),
-                  onConfirm: () => close(true),
+                  onConfirm: onClose,
                 });
               }}
             />

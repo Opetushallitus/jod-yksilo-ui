@@ -133,7 +133,7 @@
     "start-modal": {
       "description": "Voit tuoda koulutushistoriasi osaamisprofiiliisi, kun olet antanut luvan Opintopolussa. Paina \"Siirry Opintopolkuun\", niin voit myöntää luvan tietojen tuontiin. Luvan antamisen jälkeen palaat automaattisesti takaisin palveluun. Palattuasi voit valita, mitkä koulutukset haluat tuoda.",
       "description-1": "Oma Opintopolun omat opintosuoritukseni -osiosta löydät suorittamasi opinnot ja tutkinnot, jotka on tallennettu valtakunnallisiin opinto-, koulutus- ja tutkintorekistereihin. Voit siirtää nämä tiedot osaamisprofiilisi sekä kartoittaa niistä kertynyttä osaamista.<br><CustomLink>Lue lisää Omista opintosuorituksistasi Opintopolussa<Icon></Icon>.</CustomLink>",
-      "description-2": "Voit tuoda omat opintosuorituksesi osaamisprofiiliisi koulutushistoria -osioon, kun annat siihen luvan Opintopolussa. Valitse Siirry Opintopolkuun ja anna lupa tietojen tuontiin. Tämän jälkeen palaat automaattisesti takaisin palveluun. Palattuasi voit valita mitkä koulutukset haluat tuoda.",
+      "description-2": "Voit tuoda omat opintosuorituksesi osaamisprofiiliisi koulutushistoria -osioon, kun annat siihen luvan Opintopolussa.<br>Valitse <strong>Siirry Opintopolkuun</strong> ja anna lupa tietojen tuontiin. Tämän jälkeen palaat automaattisesti takaisin palveluun. Palattuasi voit valita mitkä koulutukset haluat tuoda.",
       "import-button": "Siirry Opintopolkuun",
       "import-redirect-fail": "Siirtyminen Opintopolkuun epäonnistui. Yritä uudelleen.",
       "title": "Tuo koulutushistoriasi"

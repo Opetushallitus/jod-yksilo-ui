@@ -50,6 +50,8 @@ export const ConfirmDialogWrapper = ({
   hideSecondaryButton,
   closeParentModal,
   confirmButtonIcon,
+  animationMode,
+  shouldRenderBackdrop,
   onConfirm,
   onCancel,
   footer,
@@ -123,6 +125,8 @@ export const ConfirmDialogWrapper = ({
       description={description}
       content={typeof content === 'function' ? content() : content}
       footer={footer ?? DefaultFooter}
+      animationMode={animationMode}
+      shouldRenderBackdrop={shouldRenderBackdrop}
     >
       {ShowDialogWrapper}
     </ConfirmDialog>

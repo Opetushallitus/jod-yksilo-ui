@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { ModalComponentProps } from '@/hooks/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
@@ -15,12 +16,7 @@ import EducationStep from './EducationStep';
 import SummaryStep from './SummaryStep';
 import type { EducationHistoryForm } from './utils';
 
-interface EducationHistoryWizardProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps) => {
+const EducationHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
   const { t } = useTranslation();
 
   const { sm } = useMediaQueries();
@@ -171,7 +167,7 @@ const EducationHistoryWizard = ({ isOpen, onClose }: EducationHistoryWizardProps
   return (
     <Modal
       name={headerText}
-      open={isOpen}
+      {...rest}
       testId="education-history-wizard"
       fullWidthContent
       topSlot={topSlot}

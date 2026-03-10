@@ -3,6 +3,7 @@ import type { OsaaminenDto } from '@/api/osaamiset';
 import { type OsaaminenValue, OsaamisSuosittelija } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { ModalComponentProps } from '@/hooks/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries } from '@jod/design-system';
 import { JodCheckmark } from '@jod/design-system/icons';
@@ -12,9 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
-interface EditMuuOsaaminenModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+interface EditMuuOsaaminenModalProps extends ModalComponentProps {
   data: OsaaminenDto[];
 }
 
@@ -23,7 +22,7 @@ interface OsaamisetForm {
   osaamiset: OsaaminenValue[];
 }
 
-const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalProps) => {
+const EditMuuOsaaminenModal = ({ onClose, data, ...rest }: EditMuuOsaaminenModalProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
   const revalidator = useRevalidator();
@@ -97,7 +96,7 @@ const EditMuuOsaaminenModal = ({ isOpen, onClose, data }: EditMuuOsaaminenModalP
   return (
     <Modal
       name={headerText}
-      open={isOpen}
+      {...rest}
       topSlot={topSlot}
       fullWidthContent
       className="sm:h-full!"
