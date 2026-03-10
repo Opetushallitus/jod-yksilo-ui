@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 
 interface RateContentProps {
-  variant: 'kohtaanto' | 'tyomahdollisuus' | 'ammatti' | 'koulutusmahdollisuus';
+  variant: 'kohtaanto' | 'tyomahdollisuus' | 'ammatti' | 'koulutusmahdollisuus' | 'tutkinto';
   area: 'Kohtaanto työkalu' | 'Työmahdollisuus' | 'Koulutusmahdollisuus';
   size?: React.ComponentProps<typeof RateContentCard>['size'];
 }
@@ -33,6 +33,10 @@ export const RateContent = ({ variant, area, size }: RateContentProps) => {
       t('rate-ai-content.modal.description.list.koulutusmahdollisuus.item2'),
       t('rate-ai-content.modal.description.list.koulutusmahdollisuus.item3'),
       t('rate-ai-content.modal.description.list.koulutusmahdollisuus.item4'),
+    ],
+    tutkinto: [
+      t('rate-ai-content.modal.description.list.tutkinto.item1'),
+      t('rate-ai-content.modal.description.list.tutkinto.item2'),
     ],
   };
 

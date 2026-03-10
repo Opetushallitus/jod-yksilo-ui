@@ -99,18 +99,15 @@ const OpportunityDetails = ({
 
   const navChildren = React.useMemo(() => {
     const jobVariant = mahdollisuusAlityyppi === 'MUU_TYOMAHDOLLISUUS' ? 'tyomahdollisuus' : 'ammatti';
-    const variant = mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? jobVariant : 'koulutusmahdollisuus';
+    const educationVariant = mahdollisuusAlityyppi === 'TUTKINTO' ? 'tutkinto' : 'koulutusmahdollisuus';
+    const variant = mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? jobVariant : educationVariant;
     return (
       <div className="flex flex-col gap-6">
         <PageNavigation menuSection={menuSection} activeIndicator="dot" />
-        {(mahdollisuusAlityyppi === 'MUU_TYOMAHDOLLISUUS' ||
-          mahdollisuusAlityyppi === 'AMMATTI' ||
-          mahdollisuusAlityyppi === 'MUU_KOULUTUS') && (
-          <RateContent
-            variant={variant}
-            area={mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? 'Työmahdollisuus' : 'Koulutusmahdollisuus'}
-          />
-        )}
+        <RateContent
+          variant={variant}
+          area={mahdollisuusTyyppi === 'TYOMAHDOLLISUUS' ? 'Työmahdollisuus' : 'Koulutusmahdollisuus'}
+        />
         <CounselingCard />
       </div>
     );

@@ -83,8 +83,11 @@ const EducationOpportunity = () => {
         <div className="flex flex-col gap-6 grow">
           <span className="font-arial">{t('education-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} mode="kiinnostus" />
-          {!lg && koulutusmahdollisuus.tyyppi === 'EI_TUTKINTO' && (
-            <RateContent variant="koulutusmahdollisuus" area="Koulutusmahdollisuus" />
+          {!lg && (
+            <RateContent
+              variant={koulutusmahdollisuus.tyyppi === 'TUTKINTO' ? 'tutkinto' : 'koulutusmahdollisuus'}
+              area="Koulutusmahdollisuus"
+            />
           )}
         </div>
       ),
