@@ -4,8 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 export const maxKestoValue = 1000;
+const minKestoValue = 0;
+const sixYearsInMonths = 6 * 12;
+
 export const FilterKesto = () => {
-  const minKestoValue = 0;
   const { t } = useTranslation();
   const values = [
     { label: t('tool.settings.general.duration-value.day'), value: 0 },
@@ -14,6 +16,8 @@ export const FilterKesto = () => {
     { label: t('tool.settings.general.duration-value.3-years'), value: 3 },
     { label: t('tool.settings.general.duration-value.6plus-years'), value: 4 },
   ];
+  const minMonthsByIndex = [minKestoValue, 1, 12, 36, sixYearsInMonths];
+  const maxMonthsByIndex = [minKestoValue, 1, 12, 36, maxKestoValue];
   const { filters, setDurationFilters, addToArray } = useToolStore(
     useShallow((state) => ({
       filters: state.filters,
@@ -21,60 +25,35 @@ export const FilterKesto = () => {
       addToArray: state.addToArray,
     })),
   );
-
-  const indexToMonths = [
-    {
-      index: 0,
-      months: minKestoValue,
-    },
-    {
-      index: 1,
-      months: 1,
-    },
-    {
-      index: 2,
-      months: 12,
-    },
-    {
-      index: 3,
-      months: 36,
-    },
-    // There is 2 entries for index 4. Index 4 can be 6 years or maxKestoValue, depending if its minDuration or maxDuration
-    {
-      index: 4,
-      months: 6 * 12, // 6 years
-    },
-    {
-      index: 4,
-      months: maxKestoValue,
-    },
-  ];
   const durationChange = (value: [number, number]) => {
-    const minMonths = indexToMinMonths(value[0]);
-    const maxMonths = indexToMonth(value[1]) ?? maxKestoValue;
-    if (!!minMonths || !!maxMonths) {
+    const minMonths = minMonthsByIndex[value[0]] ?? minKestoValue;
+    const maxMonths = maxMonthsByIndex[value[1]] ?? maxKestoValue;
+    const isDefaultRange = minMonths === minKestoValue && maxMonths === maxKestoValue;
+    if (!isDefaultRange) {
       addToArray('opportunityType', 'KOULUTUSMAHDOLLISUUS');
     }
     setDurationFilters(minMonths, maxMonths);
   };
-  const monthsToIndex = (months: number | null): number | undefined => {
-    return indexToMonths.find((im) => im.months === months)?.index;
+  const minMonthsToIndex = (months: number | null): number | undefined => {
+    if (months === null) {
+      return undefined;
+    }
+    const index = minMonthsByIndex.indexOf(months);
+    return index === -1 ? undefined : index;
   };
-  const indexToMonth = (index: number | null): number | undefined => {
-    return indexToMonths.find((im) => im.index === index)?.months;
-  };
-  const indexToMinMonths = (index: number | null): number => {
-    const minMonths = indexToMonth(index) ?? minKestoValue;
-    const sixYears = 6 * 12;
-    // Min months cant be over six years
-    return Math.min(minMonths, sixYears);
+  const maxMonthsToIndex = (months: number | null): number | undefined => {
+    if (months === null) {
+      return undefined;
+    }
+    const index = maxMonthsByIndex.indexOf(months);
+    return index === -1 ? undefined : index;
   };
 
   return (
     <div className="mt-3">
       <RangeSlider
         markers={values}
-        value={[monthsToIndex(filters.minDuration) ?? 0, monthsToIndex(filters.maxDuration) ?? 4]}
+        value={[minMonthsToIndex(filters.minDuration) ?? 0, maxMonthsToIndex(filters.maxDuration) ?? 4]}
         onValueChange={durationChange}
         minValueDescription={t('tool.settings.general.duration-value.min-aria-label')}
         maxValueDescription={t('tool.settings.general.duration-value.max-aria-label')}

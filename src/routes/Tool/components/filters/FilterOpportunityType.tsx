@@ -103,7 +103,7 @@ export const FilterOpportunityType = () => {
         <Setting
           id="duration-filter"
           title={t('tool.settings.general.duration')}
-          count={filters.maxDuration || filters.minDuration ? 1 : 0}
+          count={filters.maxDuration !== null || filters.minDuration !== null ? 1 : 0}
           className="pb-3"
           testId="duration-filter-setting"
         >
