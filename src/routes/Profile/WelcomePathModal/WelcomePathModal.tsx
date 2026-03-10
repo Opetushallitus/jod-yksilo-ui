@@ -5,7 +5,7 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import type { YksiloData } from '@/hooks/useYksiloData';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AiInfoButton, Button, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodOpenInNew } from '@jod/design-system/icons';
+import { JodArrowLeft, JodArrowRight, JodCheckmark, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import {
   Controller,
@@ -173,7 +173,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
   const [showWelcomePathModal, setShowWelcomePathModal] = React.useState(true);
   const [step, setStep] = React.useState(1);
   const { t } = useTranslation();
-
+  const { sm } = useMediaQueries();
   const formId = React.useId();
 
   const methods = useForm<YksiloData>({
@@ -283,7 +283,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
               }
             }}
           >
-            <div ref={scrollRef} className="w-2/3">
+            <div ref={scrollRef} className="sm:w-modal-content">
               {isFirstStep && <StepWelcome />}
               {isInfoStep && <StepInformation data={yksiloData} />}
               {isAiStep && <StepAi />}
@@ -296,6 +296,8 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
           {step > 1 && (
             <Button
               label={t('previous')}
+              icon={sm ? undefined : <JodArrowLeft />}
+              size={sm ? 'lg' : 'sm'}
               onClick={() => {
                 setStep((value) => value - 1);
                 onStepChange();
@@ -310,11 +312,20 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
               }}
               label={t('next')}
               variant="accent"
+              size={sm ? 'lg' : 'sm'}
+              icon={sm ? undefined : <JodArrowRight />}
               disabled={isInfoStep && !isValid}
-              className="whitespace-nowrap"
             />
           )}
-          {step === totalSteps && <Button form={formId} variant="accent" label={t('introduction.step-3.button-ok')} />}
+          {step === totalSteps && (
+            <Button
+              form={formId}
+              variant="accent"
+              label={t('introduction.step-3.button-ok')}
+              size={sm ? 'lg' : 'sm'}
+              icon={sm ? undefined : <JodCheckmark />}
+            />
+          )}
         </div>
       }
       progress={

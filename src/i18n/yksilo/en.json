@@ -1046,7 +1046,6 @@
     "salary-suffix": "€/month",
     "settings": {
       "controls": "Controls",
-      "modal-title": "Adjust opportunities",
       "general": {
         "duration": "Duration",
         "duration-value": {
@@ -1067,11 +1066,12 @@
         "sorting": "Order",
         "weight": "Weighting"
       },
+      "modal-title": "Adjust opportunities",
       "reset": "Clear selections",
       "toggle-close": "Close controls",
       "toggle-open": "Display controls",
-      "toggle-open_zero": "Display controls",
       "toggle-open_other": "Display controls ({{count}})",
+      "toggle-open_zero": "Display controls",
       "toggle-title-closed": "Display controls",
       "toggle-title-open": "Update and close",
       "toggle-update-close": "Update and close"

@@ -1046,7 +1046,6 @@
     "salary-suffix": "€/månad",
     "settings": {
       "controls": "Kontroller",
-      "modal-title": "Justera möjligheter",
       "general": {
         "duration": "Längd",
         "duration-value": {
@@ -1067,11 +1066,12 @@
         "sorting": "Ordning",
         "weight": "Prioritering"
       },
+      "modal-title": "Justera möjligheter",
       "reset": "Ta bort valen",
       "toggle-close": "Stäng reglage",
       "toggle-open": "Visa reglage",
-      "toggle-open_zero": "Visa reglage",
       "toggle-open_other": "Visa reglage ({{count}})",
+      "toggle-open_zero": "Visa reglage",
       "toggle-title-closed": "Visa reglage",
       "toggle-title-open": "Uppdatera och stäng",
       "toggle-update-close": "Uppdatera och stäng"
