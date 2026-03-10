@@ -4,7 +4,7 @@ import type { components } from '@/api/schema';
 import { AiInfo, type ExperienceTableRowData } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
-import { useModal } from '@/hooks/useModal';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import {
   getEducationHistoryTableRows,
   type Koulutus,
@@ -15,18 +15,17 @@ import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { EducationImportTable } from '../EducationImportTable';
 
-interface ImportKoulutusSummaryModalProps {
-  isOpen: boolean;
+interface ImportKoulutusSummaryModalProps extends ModalComponentProps {
   onSuccessful: () => void;
   openImportStartModal: () => void;
   logout: () => void;
 }
 
 const ImportKoulutusSummaryModal = ({
-  isOpen,
   onSuccessful,
   openImportStartModal,
   logout,
+  ...rest
 }: ImportKoulutusSummaryModalProps) => {
   const { t } = useTranslation();
   const { showDialog, closeActiveModal } = useModal();
@@ -71,11 +70,11 @@ const ImportKoulutusSummaryModal = ({
   }, []);
 
   React.useEffect(() => {
-    if (isOpen && !hasFetchedRef.current) {
+    if (rest.open && !hasFetchedRef.current) {
       hasFetchedRef.current = true;
       fetchAndSetEducationHistories();
     }
-  }, [isOpen, fetchAndSetEducationHistories]);
+  }, [rest.open, fetchAndSetEducationHistories]);
 
   const convertKoskiDataToExperienceTableRows = (koskiData: components['schemas']['KoulutusDto'][] | undefined) => {
     // Group koulutukset by their nimi to form koulutuskokonaisuudet
@@ -269,14 +268,14 @@ const ImportKoulutusSummaryModal = ({
     }
   }, [error, closeActiveModal, addTemporaryNote, t, openImportStartModal, logout]);
 
-  if (!isOpen) {
+  if (!rest.open) {
     return null;
   }
 
   return (
     <Modal
       name={t('education-history-import.summary-modal.title')}
-      open={isOpen}
+      {...rest}
       fullWidthContent
       topSlot={
         <ModalHeader text={t('education-history-import.summary-modal.title')} testId="education-summary-title" />

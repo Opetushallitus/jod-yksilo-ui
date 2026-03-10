@@ -133,7 +133,7 @@
     "start-modal": {
       "description": "Du kan importera din utbildningshistorik till din kompetensprofil när du har gett tillstånd i Studieinfo. Klicka på \"Öppna Studieinfo\" för att ge tillstånd att importera uppgifter. När du har gett ditt tillstånd återgår du automatiskt till tjänsten. När du har återgått till tjänsten kan du välja vilka utbildningar du vill importera.\n",
       "description-1": "I delen Mina studieprestationer i Min Studieinfo hittar du de studier och examina du har slutfört och som har sparats i de nationella studie-, utbildnings- och examensregistren. Du kan överföra dessa uppgifter till din kompetensprofil och kartlägga den kompetens som de ger.<br><CustomLink>Läs mer om dina studieprestationer i Studieinfo<Icon></Icon>.</CustomLink>",
-      "description-2": "Du kan importera dina studieprestationer till avsnittet Utbildningshistorik i din kompetensprofil genom att ge tillstånd till detta i Studieinfo. Välj Gå till Studieinfo och ge tillstånd att hämta uppgifterna. Därefter återvänder du automatiskt till tjänsten. När du har återvänt kan du välja vilka utbildningar du vill importera.",
+      "description-2": "Du kan importera dina studieprestationer till avsnittet Utbildningshistorik i din kompetensprofil genom att ge tillstånd till detta i Studieinfo.<br>Välj <strong>Gå till Studieinfo</strong> och ge tillstånd att hämta uppgifterna. Därefter återvänder du automatiskt till tjänsten. När du har återvänt kan du välja vilka utbildningar du vill importera.",
       "import-button": "Öppna Studieinfo",
       "import-redirect-fail": "Det gick inte att öppna Studieinfo. Vänligen försök igen.",
       "title": "Importera din utbildningshistorik"

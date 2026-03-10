@@ -4,7 +4,7 @@ import { FormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
-import { useModal } from '@/hooks/useModal';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, InputField, Modal, useMediaQueries } from '@jod/design-system';
@@ -15,9 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
-interface EditVapaaAjanToimintoProps {
-  isOpen: boolean;
-  onClose: () => void;
+interface EditVapaaAjanToimintoProps extends ModalComponentProps {
   toimintoId: string;
 }
 
@@ -28,7 +26,7 @@ export interface VapaaAjanToimintoForm {
 
 const VAPAA_AJAN_TOIMINTO_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}';
 
-export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: EditVapaaAjanToimintoProps) => {
+export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }: EditVapaaAjanToimintoProps) => {
   const {
     t,
     i18n: { language },
@@ -134,7 +132,7 @@ export const EditVapaaAjanToimintoModal = ({ isOpen, onClose, toimintoId: id }: 
   return (
     <Modal
       name={t('free-time-activities.edit-free-time-theme')}
-      open={isOpen}
+      {...rest}
       topSlot={topSlot}
       fullWidthContent
       className="sm:h-full!"

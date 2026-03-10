@@ -3,6 +3,7 @@ import type { components } from '@/api/schema';
 import { ModalHeader } from '@/components/ModalHeader';
 import { FORM_SCHEMA, formErrorMessage } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { ModalComponentProps } from '@/hooks/useModal';
 import type { MahdollisuusTyyppi } from '@/routes/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
@@ -16,12 +17,10 @@ import { BasicInfoStep } from './BasicInfoStep';
 import { DataToShareStep } from './DataToShareStep';
 import type { ShareLinkForm } from './types';
 
-interface NewShareLinkModalProps {
-  isOpen: boolean;
-  onClose: (isCancel?: boolean) => void;
+interface NewShareLinkModalProps extends ModalComponentProps {
   id?: string;
 }
-export const NewShareLinkModal = ({ isOpen, onClose, id }: NewShareLinkModalProps) => {
+export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
   // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
@@ -29,7 +28,7 @@ export const NewShareLinkModal = ({ isOpen, onClose, id }: NewShareLinkModalProp
   const [step, setStep] = React.useState(1);
   const revalidator = useRevalidator();
   const formId = React.useId();
-  useEscHandler(() => onClose(true), formId);
+  useEscHandler(() => onClose(), formId);
 
   const methods = useForm<ShareLinkForm>({
     mode: 'onBlur',
@@ -105,6 +104,7 @@ export const NewShareLinkModal = ({ isOpen, onClose, id }: NewShareLinkModalProp
           nimiJaettu: false,
           emailJaettu: false,
           kotikuntaJaettu: false,
+          syntymavuosiJaettu: false,
           muuOsaaminenJaettu: false,
           kiinnostuksetJaettu: false,
           jaetutTyopaikat: [],
@@ -172,7 +172,7 @@ export const NewShareLinkModal = ({ isOpen, onClose, id }: NewShareLinkModalProp
   return (
     <Modal
       name={modalTitle}
-      open={isOpen}
+      {...rest}
       fullWidthContent
       className="sm:h-full!"
       testId="share-link-wizard"
@@ -208,12 +208,7 @@ export const NewShareLinkModal = ({ isOpen, onClose, id }: NewShareLinkModalProp
       footer={
         <div className="flex justify-between gap-5 flex-1" data-testid="share-link-wizard-footer">
           <div className="flex gap-5 ml-auto">
-            <Button
-              onClick={() => onClose(true)}
-              label={t('common:cancel')}
-              variant="white"
-              testId="share-link-cancel"
-            />
+            <Button onClick={() => onClose()} label={t('common:cancel')} variant="white" testId="share-link-cancel" />
             {step > 1 && (
               <Button
                 onClick={() => {

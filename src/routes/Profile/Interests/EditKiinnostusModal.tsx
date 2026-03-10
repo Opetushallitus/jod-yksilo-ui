@@ -3,6 +3,7 @@ import type { components } from '@/api/schema';
 import { type OsaaminenValue, OsaamisSuosittelija } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { ModalComponentProps } from '@/hooks/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries } from '@jod/design-system';
 import { JodCheckmark } from '@jod/design-system/icons';
@@ -12,9 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
-interface EditKiinnostusModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+interface EditKiinnostusModalProps extends ModalComponentProps {
   data: components['schemas']['OsaaminenDto'][];
 }
 
@@ -23,7 +22,7 @@ interface KiinnostusForm {
   kiinnostukset: OsaaminenValue[];
 }
 
-const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalProps) => {
+const EditInterestModal = ({ onClose, data = [], ...rest }: EditKiinnostusModalProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
   const revalidator = useRevalidator();
@@ -98,7 +97,7 @@ const EditInterestModal = ({ isOpen, onClose, data = [] }: EditKiinnostusModalPr
   return (
     <Modal
       name={headerText}
-      open={isOpen}
+      {...rest}
       topSlot={topSlot}
       fullWidthContent
       className="sm:h-full!"

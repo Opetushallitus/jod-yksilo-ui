@@ -4,7 +4,7 @@ import { FormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
-import { useModal } from '@/hooks/useModal';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, InputField, Modal, useMediaQueries } from '@jod/design-system';
@@ -14,9 +14,7 @@ import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 're
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-interface EditKoulutuskokonaisuusModalProps {
-  isOpen: boolean;
-  onClose: React.Dispatch<React.SetStateAction<void>>;
+interface EditKoulutuskokonaisuusModalProps extends ModalComponentProps {
   koulutuskokonaisuusId: string;
 }
 
@@ -28,9 +26,9 @@ interface KoulutuskokonaisuusForm {
 const KOULUTUSKOKONAISUUS_API_PATH = '/api/profiili/koulutuskokonaisuudet/{id}';
 
 const EditKoulutuskokonaisuusModal = ({
-  isOpen,
   onClose,
   koulutuskokonaisuusId: id,
+  ...rest
 }: EditKoulutuskokonaisuusModalProps) => {
   const {
     t,
@@ -130,7 +128,7 @@ const EditKoulutuskokonaisuusModal = ({
   return (
     <Modal
       name={headerText}
-      open={isOpen}
+      {...rest}
       topSlot={topSlot}
       fullWidthContent
       className="sm:h-full!"

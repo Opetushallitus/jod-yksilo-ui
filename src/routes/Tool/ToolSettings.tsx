@@ -1,3 +1,4 @@
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType';
 import { useToolStore } from '@/stores/useToolStore';
 import { getFilterCount, noFiltersSelected } from '@/utils/FilterUtils';
@@ -10,11 +11,10 @@ import OpportunitiesSorting from './components/filters/OpportunitiesSorting';
 import OpportunityWeight from './components/filters/OpportunityWeight';
 import { Setting } from './components/Setting';
 
-export interface ToolSettingsProps {
-  isOpen: boolean;
-  onClose: (cancel: boolean) => void;
+export interface ToolSettingsProps extends ModalComponentProps {
+  onUpdate: () => void;
 }
-const ToolSettings = ({ isOpen, onClose }: ToolSettingsProps) => {
+const ToolSettings = ({ onUpdate, ...rest }: ToolSettingsProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
   const { resetSettings, filters, setFilters, sorting, setSorting, settingsHaveChanged, setSettingsHaveChanged } =
@@ -29,6 +29,7 @@ const ToolSettings = ({ isOpen, onClose }: ToolSettingsProps) => {
         setSettingsHaveChanged: state.setSettingsHaveChanged,
       })),
     );
+  const { closeActiveModal } = useModal();
   const [initialFilters] = React.useState(filters);
   const [initialSorting] = React.useState(sorting);
   const [initialSettingsHaveChanged] = React.useState(settingsHaveChanged);
@@ -39,7 +40,7 @@ const ToolSettings = ({ isOpen, onClose }: ToolSettingsProps) => {
   return (
     <Modal
       name={t('tool.settings.controls')}
-      open={isOpen}
+      {...rest}
       className="sm:h-full!"
       fullWidthContent
       topSlot={<h2 className="sm:text-hero text-heading-2-mobile">{t('tool.settings.modal-title')}</h2>}
@@ -100,8 +101,7 @@ const ToolSettings = ({ isOpen, onClose }: ToolSettingsProps) => {
               size={sm ? 'lg' : 'sm'}
               className="whitespace-nowrap"
               onClick={() => {
-                onClose(true);
-
+                closeActiveModal();
                 // Revert user changes to filters and sorting on cancel
                 setFilters(initialFilters);
                 setSorting(initialSorting);
@@ -115,7 +115,10 @@ const ToolSettings = ({ isOpen, onClose }: ToolSettingsProps) => {
               size={sm ? 'lg' : 'sm'}
               disabled={!filtersHaveChanged && !sortingHasChanged}
               className="whitespace-nowrap"
-              onClick={() => onClose(false)}
+              onClick={() => {
+                closeActiveModal();
+                onUpdate();
+              }}
               label={t('update-short')}
             />
           </div>

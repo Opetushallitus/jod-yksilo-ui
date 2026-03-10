@@ -5,7 +5,7 @@ import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { useEscHandler } from '@/hooks/useEscHandler';
-import { useModal } from '@/hooks/useModal';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Datepicker, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
@@ -24,9 +24,7 @@ import { useTranslation } from 'react-i18next';
 import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
-interface AddOrEditPatevyysModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+interface AddOrEditPatevyysModalProps extends ModalComponentProps {
   toimintoId: string;
   patevyysId?: string;
 }
@@ -144,10 +142,10 @@ const OsaamisetStep = () => {
 };
 
 export const AddOrEditPatevyysModal = ({
-  isOpen,
   onClose,
   toimintoId: id,
   patevyysId,
+  ...rest
 }: AddOrEditPatevyysModalProps) => {
   const { t } = useTranslation();
   // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
@@ -330,7 +328,7 @@ export const AddOrEditPatevyysModal = ({
   return (
     <Modal
       name={headerText}
-      open={isOpen}
+      {...rest}
       fullWidthContent
       className="sm:h-full!"
       progress={

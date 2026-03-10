@@ -133,7 +133,7 @@
     "start-modal": {
       "description": "You can import your education history to your competence profile once you have granted permission in Studyinfo. Click \"Go to Studyinfo\" to grant permission to import data. After granting permission, you will automatically return to the service. Once you return, you can choose which educations you want to import.",
       "description-1": "In the My completed studies section of My Studyinfo, you can find the studies and qualifications you have completed, which have been stored in the national study, education and qualification registers. You can transfer this information to your competence profile and review the skills accumulated from them.<br><CustomLink>Read more about your study records in Studyinfo<Icon></Icon>.</CustomLink>",
-      "description-2": "You can import your study records into the Education History section of your competence profile by granting permission in Studyinfo. Select Go to Studyinfo and allow the data transfer. After this, you will automatically return to the service. Once you return, you can choose which studies you want to import.",
+      "description-2": "You can import your study records into the Education History section of your competence profile by granting permission in Studyinfo.<br>Select <strong>Go to Studyinfo</strong> and allow the data transfer. After this, you will automatically return to the service. Once you return, you can choose which studies you want to import.",
       "import-button": "Go to Studyinfo",
       "import-redirect-fail": "Failed to go to Studyinfo. Please try again.",
       "title": "Import your education history"

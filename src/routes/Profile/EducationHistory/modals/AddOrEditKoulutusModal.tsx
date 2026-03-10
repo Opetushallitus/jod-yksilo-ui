@@ -5,7 +5,7 @@ import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { useEscHandler } from '@/hooks/useEscHandler';
-import { useModal } from '@/hooks/useModal';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Datepicker, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
@@ -23,9 +23,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-interface AddOrEditKoulutusModalProps {
-  isOpen: boolean;
-  onClose: React.Dispatch<React.SetStateAction<void>>;
+interface AddOrEditKoulutusModalProps extends ModalComponentProps {
   koulutuskokonaisuusId: string;
   koulutusId?: string;
 }
@@ -141,10 +139,10 @@ const OsaamisetStep = () => {
 };
 
 const AddOrEditKoulutusModal = ({
-  isOpen,
   onClose,
   koulutuskokonaisuusId: id,
   koulutusId,
+  ...rest
 }: AddOrEditKoulutusModalProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
@@ -327,7 +325,7 @@ const AddOrEditKoulutusModal = ({
   return (
     <Modal
       name={headerText}
-      open={isOpen}
+      {...rest}
       fullWidthContent
       className="sm:h-full!"
       progress={

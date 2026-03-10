@@ -3,7 +3,7 @@ import type { components } from '@/api/schema';
 import { FormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { useModal } from '@/hooks/useModal';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, InputField, Modal, useMediaQueries } from '@jod/design-system';
@@ -14,8 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
-interface EditTyonantajaModalProps {
-  isOpen: boolean;
+interface EditTyonantajaModalProps extends ModalComponentProps {
   tyopaikkaId: string;
 }
 
@@ -26,7 +25,7 @@ interface TyonantajaForm {
 
 const TYOPAIKKA_API_PATH = '/api/profiili/tyopaikat/{id}';
 
-const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalProps) => {
+const EditTyonantajaModal = ({ tyopaikkaId: id, ...rest }: EditTyonantajaModalProps) => {
   const {
     t,
     i18n: { language },
@@ -119,10 +118,10 @@ const EditTyonantajaModal = ({ isOpen, tyopaikkaId: id }: EditTyonantajaModalPro
   return (
     <Modal
       name={t('work-history.edit-workplace')}
-      open={isOpen}
       fullWidthContent
       topSlot={<ModalHeader text={t('work-history.edit-workplace')} testId="work-history-edit-workplace-title" />}
       className="sm:h-full!"
+      {...rest}
       content={
         <FormProvider {...methods}>
           <Form

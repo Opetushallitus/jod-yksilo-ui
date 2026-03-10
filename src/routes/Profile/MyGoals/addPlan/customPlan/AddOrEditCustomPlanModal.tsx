@@ -2,7 +2,7 @@ import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
 import { formErrorMessage, LIMITS } from '@/constants';
-import { useModal } from '@/hooks/useModal';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, clamp, Modal, Spinner, useMediaQueries, WizardProgress } from '@jod/design-system';
@@ -28,14 +28,12 @@ export interface OmaSuunnitelmaForm {
   }[];
 }
 
-interface AddOrEditCustomPlanModalProps {
-  isOpen: boolean;
-  onClose: (isCancel?: boolean) => void;
+interface AddOrEditCustomPlanModalProps extends ModalComponentProps {
   tavoite?: components['schemas']['TavoiteDto'] | null;
   suunnitelmaId?: string;
 }
 
-const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoite, suunnitelmaId }: AddOrEditCustomPlanModalProps) => {
+const AddOrEditCustomPlanModal = ({ tavoite, suunnitelmaId, ...rest }: AddOrEditCustomPlanModalProps) => {
   const { t, i18n } = useTranslation();
   const { showDialog, closeActiveModal } = useModal();
   const { sm, md } = useMediaQueries();
@@ -186,14 +184,6 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoite, suunnitelmaId }: A
     setStep(wizardStep - 1);
   };
 
-  const close = (isCancel = false) => {
-    onClose(isCancel);
-  };
-
-  const cancel = () => {
-    close(true);
-  };
-
   const currentHeaderText = React.useMemo(() => {
     return t('profile.paths.step-n-details', { count: wizardStep + 1 });
   }, [t, wizardStep]);
@@ -207,7 +197,7 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoite, suunnitelmaId }: A
   return (
     <Modal
       name={currentHeaderText}
-      open={isOpen}
+      {...rest}
       fullWidthContent={!md || wizardStep === 1}
       className="sm:h-full!"
       topSlot={<h1 className="text-heading-2-mobile sm:text-hero">{t('profile.my-goals.add-custom-plan-header')}</h1>}
@@ -250,7 +240,9 @@ const AddOrEditCustomPlanModal = ({ isOpen, onClose, tavoite, suunnitelmaId }: A
                   description: t('profile.paths.cancel-confirmation-text'),
                   confirmText: t('close'),
                   cancelText: t('profile.paths.continue-editing'),
-                  onConfirm: cancel,
+                  onConfirm: () => {
+                    closeActiveModal();
+                  },
                 });
               }}
               testId="custom-plan-cancel"
