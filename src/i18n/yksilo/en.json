@@ -846,6 +846,10 @@
             "item3": "competences",
             "item4": "education special features"
           },
+          "tutkinto": {
+            "item1": "opportunity name",
+            "item2": "description"
+          },
           "tyomahdollisuus": {
             "item1": "opportunity name",
             "item2": "description",
@@ -1072,6 +1076,7 @@
       "reset": "Clear selections",
       "toggle-close": "Close controls",
       "toggle-open": "Display controls",
+      "toggle-open_one": "Display controls ({{count}})",
       "toggle-open_other": "Display controls ({{count}})",
       "toggle-open_zero": "Display controls",
       "toggle-title-closed": "Display controls",

@@ -845,6 +845,10 @@
             "item3": "kunskaper",
             "item4": "utbildningens särdrag"
           },
+          "tutkinto": {
+            "item1": "möjlighetens namn",
+            "item2": "beskrivning"
+          },
           "tyomahdollisuus": {
             "item1": "möjlighetens namn",
             "item2": "beskrivning",
@@ -1072,6 +1076,7 @@
       "reset": "Ta bort valen",
       "toggle-close": "Stäng reglage",
       "toggle-open": "Visa reglage",
+      "toggle-open_one": "Visa reglage ({{count}})",
       "toggle-open_other": "Visa reglage ({{count}})",
       "toggle-open_zero": "Visa reglage",
       "toggle-title-closed": "Visa reglage",
