@@ -1044,7 +1044,6 @@
     "salary-suffix": "€/kk",
     "settings": {
       "controls": "Säätimet",
-      "modal-title": "Säädä mahdollisuuksia",
       "general": {
         "duration": "Kesto",
         "duration-value": {
@@ -1065,11 +1064,12 @@
         "sorting": "Järjestys",
         "weight": "Painotus"
       },
+      "modal-title": "Säädä mahdollisuuksia",
       "reset": "Poista valinnat",
       "toggle-close": "Sulje säätimet",
       "toggle-open": "Näytä säätimet",
-      "toggle-open_zero": "Näytä säätimet",
       "toggle-open_other": "Näytä säätimet ({{count}})",
+      "toggle-open_zero": "Näytä säätimet",
       "toggle-title-closed": "Näytä säätimet",
       "toggle-title-open": "Päivitä ja sulje",
       "toggle-update-close": "Päivitä ja sulje"
