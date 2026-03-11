@@ -276,7 +276,7 @@
   "jakauma": {
     "aika": "Time",
     "ajokortti": "Driver’s licence",
-    "ammatti": "Occupation",
+    "ammatti": "Profession",
     "kielitaito": "Language skills",
     "kortitJaLuvat": "Cards and permits",
     "koulutusala": "Required field of education",
@@ -425,7 +425,7 @@
       "TUTKINTO": "Degree"
     },
     "work": {
-      "AMMATTITIETO": "Occupation",
+      "AMMATTITIETO": "Profession",
       "TMT": "Other career opportunity"
     }
   },
@@ -491,7 +491,7 @@
       "title": "Download your competence profile"
     },
     "personal-details": {
-      "description": "You can edit your mother tongue and email address.",
+      "description": "You can edit your email address.",
       "title": "Information retrieved from the population information system"
     },
     "share": {
@@ -966,7 +966,7 @@
     "interests": "Map out your interests ({{count}})",
     "interests_zero": "Map out your interests",
     "job-opportunity-is-part-of-group": "Career opportunity belongs to an occupational group",
-    "job-opportunity-is-part-of-group-tooltip": "Occupations and career opportunities are grouped into occupational groups. Occupational groups are used to compile statistics on the occupational structure of the population, and they are created using a professional classification that helps to compare statistics nationally and internationally.",
+    "job-opportunity-is-part-of-group-tooltip": "Professions and career opportunities are grouped into occupational groups. Occupational groups are used to compile statistics on the occupational structure of the population, and they are created using a professional classification that helps to compare statistics nationally and internationally.",
     "job-opportunity-median-salary": "Median salary",
     "job-opportunity-median-salary-tooltip": "Median salary refers to the sum of wages and salaries divided into two equal groups: one-half earn less and one-half earn more than the median salary. It describes the \"typical\" salary better than the average salary, as it is not distorted by individual extremely high or low salaries.",
     "map-your-skills": "Map out your skills ({{count}})",
@@ -1053,9 +1053,9 @@
         "duration-value": {
           "3-years": "3y",
           "6plus-years": "6y+",
-          "day": "1day",
+          "day": "0day",
           "max-aria-label": "Maximum duration, education lasting 6 years or longer",
-          "min-aria-label": "Minimum duration, including only 1-day education",
+          "min-aria-label": "Minimum duration",
           "month": "1mo",
           "year": "1y"
         },

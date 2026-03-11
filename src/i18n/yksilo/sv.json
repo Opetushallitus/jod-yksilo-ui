@@ -490,7 +490,7 @@
       "title": "Ladda din kompetensprofil"
     },
     "personal-details": {
-      "description": "Du kan redigera modersmål och e-postadress.",
+      "description": "Du kan redigera e-postadress.",
       "title": "Uppgifter hämtade från befolkningsdatasystemet"
     },
     "share": {
@@ -1053,9 +1053,9 @@
         "duration-value": {
           "3-years": "3år",
           "6plus-years": "6år+",
-          "day": "1d",
+          "day": "0d",
           "max-aria-label": "Maximilängd, 6 år och längre utbildningar",
-          "min-aria-label": "Minimilängd, inkl. endast 1-dagars utbildningar",
+          "min-aria-label": "Minimilängd",
           "month": "1mån",
           "year": "1år"
         },
