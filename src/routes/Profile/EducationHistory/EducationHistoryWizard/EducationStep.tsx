@@ -1,6 +1,7 @@
 import { FormError, TouchedFormError } from '@/components';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { Datepicker, InputField } from '@jod/design-system';
+import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import type { EducationHistoryForm } from './utils';
@@ -19,10 +20,20 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
     register,
     control,
     trigger,
+    watch,
     formState: { errors, touchedFields },
   } = useFormContext<EducationHistoryForm>();
 
   const datePickerTranslations = useDatePickerTranslations();
+
+  // For triggering "date-range" error when "alkuPvm" is set after "loppuPvm"
+  const alkuPvm = watch(`koulutukset.${koulutus}.alkuPvm`);
+  const loppuPvm = watch(`koulutukset.${koulutus}.loppuPvm`);
+  React.useEffect(() => {
+    if (alkuPvm || loppuPvm) {
+      trigger();
+    }
+  }, [alkuPvm, loppuPvm, trigger]);
 
   return (
     <div className="max-w-modal-content">
