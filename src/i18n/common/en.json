@@ -82,7 +82,12 @@
       "data-sources": "Data sources",
       "privacy-and-cookies": "Privacy policy and cookies"
     },
-    "more-info-title": "Do you want to know more about Competency Path?"
+    "more-info-title": "Do you want to know more about Competency Path?",
+    "social-media": {
+      "facebook": "Competency Path Facebook",
+      "linkedin": "Competency Path LinkedIn",
+      "instagram": "Competency Path Instagram"
+    }
   },
   "language-selection": "Language",
   "login": "Log in",
