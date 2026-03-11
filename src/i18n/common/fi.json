@@ -82,7 +82,12 @@
       "data-sources": "Datalähteet",
       "privacy-and-cookies": "Tietosuojaseloste ja evästeet"
     },
-    "more-info-title": "Haluatko tietää lisää Osaamispolusta?"
+    "more-info-title": "Haluatko tietää lisää Osaamispolusta?",
+    "social-media": {
+      "facebook": "Osaamispolku Facebook",
+      "linkedin": "Osaamispolku LinkedIn",
+      "instagram": "Osaamispolku Instagram"
+    }
   },
   "language-selection": "Käyttökieli",
   "login": "Kirjaudu",

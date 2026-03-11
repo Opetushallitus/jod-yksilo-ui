@@ -82,7 +82,12 @@
       "data-sources": "Informationskällor",
       "privacy-and-cookies": "Dataskyddsbeskrivning och cookies"
     },
-    "more-info-title": "Vill du veta mer om Kompetensstigen?"
+    "more-info-title": "Vill du veta mer om Kompetensstigen?",
+    "social-media": {
+      "facebook": "Kompetensstigen Facebook",
+      "linkedin": "Kompetensstigen LinkedIn",
+      "instagram": "Kompetensstigen Instagram"
+    }
   },
   "language-selection": "Språk",
   "login": "Logga in",
