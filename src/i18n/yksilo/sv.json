@@ -134,7 +134,7 @@
       "description": "Du kan importera din utbildningshistorik till din kompetensprofil när du har gett tillstånd i Studieinfo. Klicka på \"Öppna Studieinfo\" för att ge tillstånd att importera uppgifter. När du har gett ditt tillstånd återgår du automatiskt till tjänsten. När du har återgått till tjänsten kan du välja vilka utbildningar du vill importera.\n",
       "description-1": "I delen Mina studieprestationer i Min Studieinfo hittar du de studier och examina du har slutfört och som har sparats i de nationella studie-, utbildnings- och examensregistren. Du kan överföra dessa uppgifter till din kompetensprofil och kartlägga den kompetens som de ger.<br><CustomLink>Läs mer om dina studieprestationer i Studieinfo<Icon></Icon>.</CustomLink>",
       "description-2": "Du kan importera dina studieprestationer till avsnittet Utbildningshistorik i din kompetensprofil genom att ge tillstånd till detta i Studieinfo.<br>Välj <strong>Gå till Studieinfo</strong> och ge tillstånd att hämta uppgifterna. Därefter återvänder du automatiskt till tjänsten. När du har återvänt kan du välja vilka utbildningar du vill importera.",
-      "import-button": "Öppna Studieinfo",
+      "import-button": "Gå till Studieinfo",
       "import-redirect-fail": "Det gick inte att öppna Studieinfo. Vänligen försök igen.",
       "title": "Importera din utbildningshistorik"
     },
@@ -175,7 +175,7 @@
     "open-educations": "Öppna utbildningar",
     "opintopolku": {
       "banner-alt-text": "Studieinfo",
-      "button-label": "Öppna Studieinfo",
+      "button-label": "Gå till Studieinfo",
       "description": "Du kan söka efter utbildningar i Studieinfo med namnet på denna möjlighet. Bekanta dig med alternativen och hitta utbildningar som passar dig.",
       "title": "Öppna utbildningar hittar du behändigt i Studieinfo"
     }
@@ -845,6 +845,10 @@
             "item3": "kunskaper",
             "item4": "utbildningens särdrag"
           },
+          "tutkinto": {
+            "item1": "möjlighetens namn",
+            "item2": "beskrivning"
+          },
           "tyomahdollisuus": {
             "item1": "möjlighetens namn",
             "item2": "beskrivning",
@@ -1072,6 +1076,7 @@
       "reset": "Ta bort valen",
       "toggle-close": "Stäng reglage",
       "toggle-open": "Visa reglage",
+      "toggle-open_one": "Visa reglage ({{count}})",
       "toggle-open_other": "Visa reglage ({{count}})",
       "toggle-open_zero": "Visa reglage",
       "toggle-title-closed": "Visa reglage",

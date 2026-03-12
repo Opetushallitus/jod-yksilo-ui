@@ -68,6 +68,7 @@ const SomethingElse = () => {
       <div className="flex pt-7 mb-8">
         <Button
           variant="accent"
+          ariaHaspopup="dialog"
           label={muuOsaaminen.length > 0 ? t('profile.competences.edit') : t('profile.competences.add')}
           onClick={() => {
             showModal(EditMuuOsaaminenModal, { data: muuOsaaminen });

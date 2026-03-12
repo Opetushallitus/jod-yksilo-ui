@@ -255,6 +255,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
           size="sm"
           iconSide="right"
           onClick={() => setIsOpen(true)}
+          ariaHaspopup="dialog"
           data-testid="open-va"
         />
         <AiInfoButton

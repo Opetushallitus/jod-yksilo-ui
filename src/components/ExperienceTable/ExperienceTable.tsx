@@ -274,6 +274,7 @@ export const ExperienceTable = ({
                       <Button
                         variant="white"
                         size="sm"
+                        ariaHaspopup="dialog"
                         label={addNewNestedLabel}
                         onClick={() => onAddNestedRowClick(row)}
                       />
@@ -315,7 +316,13 @@ export const ExperienceTable = ({
       )}
       {onAddClick && addNewLabel && (
         <div className="mb-[84px]">
-          <Button variant="accent" label={addNewLabel} onClick={onAddClick} testId="experience-table-add" />
+          <Button
+            ariaHaspopup="dialog"
+            variant="accent"
+            label={addNewLabel}
+            onClick={onAddClick}
+            testId="experience-table-add"
+          />
         </div>
       )}
     </div>

@@ -766,7 +766,7 @@
       "update-modal-title": "Muokkaa tavoitetta"
     },
     "paths": {
-      "cancel-confirmation-text": "Lomakkeella on tallentamattomia muutoksia, haluatko varmasti poistua.",
+      "cancel-confirmation-text": "Lomakkeella on tallentamattomia muutoksia, haluatko varmasti poistua?",
       "continue-editing": "Jatka muokkaamista",
       "step-n-details": "Vaiheen {{count}} tiedot"
     },
@@ -843,6 +843,10 @@
             "item2": "kuvaus",
             "item3": "osaamiset",
             "item4": "koulutuksen erityispiirteet"
+          },
+          "tutkinto": {
+            "item1": "mahdollisuuden nimi",
+            "item2": "kuvaus"
           },
           "tyomahdollisuus": {
             "item1": "mahdollisuuden nimi",
@@ -1070,6 +1074,7 @@
       "reset": "Poista valinnat",
       "toggle-close": "Sulje säätimet",
       "toggle-open": "Näytä säätimet",
+      "toggle-open_one": "Näytä säätimet ({{count}})",
       "toggle-open_other": "Näytä säätimet ({{count}})",
       "toggle-open_zero": "Näytä säätimet",
       "toggle-title-closed": "Näytä säätimet",

@@ -129,6 +129,7 @@ const OpportunityDetails = ({
       <div className="flex flex-col sm:flex-row gap-3 my-6 md:mt-7 md:mb-8 md:justify-end items-start print:hidden">
         <FavoriteToggle
           isFavorite={isLoggedIn && !!data?.id && isSuosikki}
+          opensDialog={!isLoggedIn}
           favoriteName={data?.otsikko}
           onToggleFavorite={() =>
             isLoggedIn
@@ -140,7 +141,7 @@ const OpportunityDetails = ({
                   footer: createLoginDialogFooter(t, loginLink, closeAllModals),
                 })
           }
-          bgClassName="bg-bg-gray-2"
+          className="bg-bg-gray-2"
         />
         {isDev && (
           <ActionButton
@@ -153,6 +154,7 @@ const OpportunityDetails = ({
         {!!globalThis.print && (
           <ActionButton
             label={t('common:print')}
+            aria-haspopup="dialog"
             icon={<JodPrint className="text-accent" />}
             onClick={doPrint}
             className="bg-bg-gray-2"

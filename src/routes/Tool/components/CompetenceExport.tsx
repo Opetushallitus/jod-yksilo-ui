@@ -95,6 +95,7 @@ export const CompetenceExport = () => {
   return (
     <Button
       variant="gray"
+      ariaHaspopup="dialog"
       className="w-fit"
       label={t('tool.my-own-data.export.export-button')}
       data-testid="competence-export-button"

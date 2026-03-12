@@ -102,6 +102,7 @@ export const SearchFilters = () => {
   return (
     <Button
       variant="white"
+      ariaHaspopup="dialog"
       onClick={() => showModal(FiltersModal)}
       label={t('search.filters')}
       icon={<JodSettings className="text-primary-gray" />}
