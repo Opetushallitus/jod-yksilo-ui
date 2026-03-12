@@ -82,6 +82,7 @@ const Preferences = () => {
         <p className="font-arial text-body-md mb-5">{t('preferences.delete-profile.description')}</p>
         <Button
           variant="white-delete"
+          ariaHaspopup="dialog"
           label={t('preferences.delete-profile.action')}
           onClick={() => {
             showDialog({

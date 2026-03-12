@@ -301,6 +301,7 @@ const TmtImportExport = () => {
               : t('preferences.tmt-import-export.import.button-label')
           }
           variant="accent"
+          ariaHaspopup="dialog"
           onClick={startImport}
           icon={importPending ? <Spinner size={24} color="white" /> : undefined}
           iconSide={importPending ? 'right' : undefined}
@@ -313,6 +314,7 @@ const TmtImportExport = () => {
               : t('preferences.tmt-import-export.export.button-label')
           }
           variant="white"
+          ariaHaspopup="dialog"
           onClick={startExport}
           icon={exportPending ? <Spinner size={24} color="accent" /> : undefined}
           iconSide={exportPending ? 'right' : undefined}

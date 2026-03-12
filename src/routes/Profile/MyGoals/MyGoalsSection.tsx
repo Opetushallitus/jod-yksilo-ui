@@ -130,8 +130,8 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                   <div className="mt-9 flex flex-col items-start gap-3">
                     <Button
                       variant="white"
+                      ariaHaspopup="dialog"
                       size={sm ? 'lg' : 'sm'}
-                      className="whitespace-nowrap"
                       onClick={() => {
                         setTavoite(tavoite);
                         showModal(AddPlanModal);
@@ -144,8 +144,8 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                     <div className="w-full flex justify-between">
                       <Button
                         variant="white"
+                        ariaHaspopup="dialog"
                         size={sm ? 'lg' : 'sm'}
-                        className="whitespace-nowrap"
                         onClick={() => {
                           setTavoite(tavoite);
                           showModal(GoalModal, { mode: 'UPDATE', tavoite: tavoite });
@@ -157,7 +157,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                         label={t('profile.my-goals.delete-goal')}
                         variant="white-delete"
                         size={sm ? 'lg' : 'sm'}
-                        className="whitespace-nowrap"
+                        ariaHaspopup="dialog"
                         onClick={() => {
                           showDialog({
                             title: t('profile.my-goals.delete-goal'),

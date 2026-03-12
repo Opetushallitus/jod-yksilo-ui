@@ -230,6 +230,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
   return (
     <Button
       data-testid="competence-import-button"
+      ariaHaspopup="dialog"
       className="w-fit"
       label={t('tool.my-own-data.competences.import.import-button')}
       disabled={!isLoggedIn}

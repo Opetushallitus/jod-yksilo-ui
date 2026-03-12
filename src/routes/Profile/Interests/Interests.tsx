@@ -97,6 +97,7 @@ const Interests = () => {
       <div className="flex pt-7 mb-7">
         <Button
           variant="accent"
+          ariaHaspopup="dialog"
           label={isAllSkillsEmpty ? t('profile.interests.add-interests') : t('profile.interests.edit-interests')}
           onClick={() => {
             showModal(EditKiinnostusModal, { data: kiinnostukset });
