@@ -1,22 +1,30 @@
-import { tidyClasses as tc, Tooltip, TooltipContent, TooltipTrigger } from '@jod/design-system';
+import { cx, tidyClasses as tc, Tooltip, TooltipContent, TooltipTrigger } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const TooltipWrapper = ({
   children,
+  enabled = true,
   tooltipOpen,
   tooltipContent,
   tooltipPlacement = 'bottom',
   className = '',
+  triggerClassName,
 }: {
   children: React.ReactNode;
+  enabled?: boolean;
   tooltipContent: React.ReactNode;
   tooltipOpen?: boolean;
   tooltipPlacement?: React.ComponentProps<typeof Tooltip>['placement'];
   className?: string;
+  triggerClassName?: string;
 }) => {
   const contentId = React.useId();
   const { t } = useTranslation();
+
+  if (!enabled) {
+    return <>{children}</>;
+  }
 
   return (
     <Tooltip open={tooltipOpen} placement={tooltipPlacement} data-testid="tooltip">
@@ -42,7 +50,7 @@ export const TooltipWrapper = ({
       <TooltipTrigger
         asChild
         data-testid="tooltip-trigger"
-        className="select-none"
+        className={cx('select-none', triggerClassName)}
         tabIndex={0}
         aria-roledescription={t('tooltip.info')}
         aria-describedby={contentId}
