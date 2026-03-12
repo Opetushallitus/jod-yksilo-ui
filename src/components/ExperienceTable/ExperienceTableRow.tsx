@@ -163,6 +163,12 @@ export const ExperienceTableRow = ({
     [row.osaamiset, language],
   );
 
+  const triggerClassName = React.useMemo(
+    () =>
+      `cursor-pointer flex size-7 items-center justify-center rounded-full mr-2 sm:m-3 ${isOdd ? 'hover:bg-secondary-5-light-3 active:bg-secondary-5-light-3' : 'hover:bg-bg-gray-2 active:bg-bg-gray-2'}`,
+    [isOdd],
+  );
+
   const rowAction = (
     onRowClick: ((row: ExperienceTableRowData) => void) | undefined,
     selectedRow: ExperienceTableRowData,
@@ -171,15 +177,16 @@ export const ExperienceTableRow = ({
     actionLabel?: string,
   ) => {
     return onRowClick ? (
-      <TooltipWrapper
-        tooltipPlacement="top"
-        tooltipContent={t('competences-identifying')}
-        tooltipOpen={osaamisetOdottaaTunnistusta ? undefined : false}
-      >
-        <div className="flex justify-end">
+      <div className="flex justify-end">
+        <TooltipWrapper
+          tooltipPlacement="top"
+          tooltipContent={t('competences-identifying')}
+          enabled={osaamisetOdottaaTunnistusta}
+          triggerClassName={triggerClassName}
+        >
           <button
             aria-label={actionLabel ?? t('edit')}
-            aria-haspopup="dialog"
+            aria-haspopup={osaamisetOdottaaTunnistusta ? 'dialog' : undefined}
             onClick={() =>
               useConfirm
                 ? onShowDialog(() => {
@@ -187,7 +194,7 @@ export const ExperienceTableRow = ({
                   })
                 : onRowClick(selectedRow)
             }
-            className={`cursor-pointer flex size-7 items-center justify-center rounded-full mr-2 sm:m-3 ${isOdd ? 'hover:bg-secondary-5-light-3 active:bg-secondary-5-light-3' : 'hover:bg-bg-gray-2 active:bg-bg-gray-2'}`}
+            className={triggerClassName}
             disabled={osaamisetOdottaaTunnistusta}
             title={osaamisetOdottaaTunnistusta ? t('competences-identifying') : undefined}
             type="button"
@@ -199,8 +206,8 @@ export const ExperienceTableRow = ({
               />
             )}
           </button>
-        </div>
-      </TooltipWrapper>
+        </TooltipWrapper>
+      </div>
     ) : null;
   };
 
