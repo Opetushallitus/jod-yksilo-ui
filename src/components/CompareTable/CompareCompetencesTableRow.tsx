@@ -26,7 +26,11 @@ const WrapWithTooltipIfDev = ({
 }) => {
   const { isDev } = useEnvironment();
   if (isDev) {
-    return <TooltipWrapper tooltipContent={tooltipContent}>{children}</TooltipWrapper>;
+    return (
+      <TooltipWrapper tooltipContent={tooltipContent}>
+        <span>{children}</span>
+      </TooltipWrapper>
+    );
   }
   return <>{children}</>;
 };
