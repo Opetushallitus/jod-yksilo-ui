@@ -61,9 +61,12 @@ const MainStep = () => {
 
   // For triggering "date-range" error when "alkuPvm" is set after "loppuPvm"
   const alkuPvm = watch('alkuPvm');
+  const loppuPvm = watch('loppuPvm');
   React.useEffect(() => {
-    void trigger('loppuPvm');
-  }, [alkuPvm, trigger]);
+    if (alkuPvm || loppuPvm) {
+      trigger();
+    }
+  }, [alkuPvm, loppuPvm, trigger]);
 
   return (
     <div className="max-w-modal-content">
