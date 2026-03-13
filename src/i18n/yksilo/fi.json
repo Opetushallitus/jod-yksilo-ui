@@ -1,5 +1,6 @@
 {
   "add-favorite": "Tallenna suosikiksi",
+  "ai-icon-alt": "Tekoälyn avulla generoitu sisältö",
   "ai-info-tooltip": {
     "aria-description": "Tietoa tekoälyn käytöstä",
     "description-disclaimer": "Huom! Tekoälyllä tuotettu sisältö saattaa sisältää virheitä.",
