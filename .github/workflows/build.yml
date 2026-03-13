@@ -14,11 +14,11 @@ jobs:
     permissions:
       id-token: write # Needed to interact with GitHub's OIDC Token endpoint
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: lts/krypton
           cache: npm
@@ -36,7 +36,7 @@ jobs:
         run: npx vitest --coverage.enabled true
 
       - name: Upload Vitest report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: coverage
@@ -44,7 +44,7 @@ jobs:
           retention-days: 30
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::${{ secrets.JOD_UTIL_AWS_ACCOUNT_ID }}:role/${{ secrets.JOD_UTIL_AWS_GITHUB_ROLE_NAME}}
           aws-region: eu-west-1
@@ -66,22 +66,20 @@ jobs:
       #   run: npx playwright test
 
       # - name: Upload Playwright report
-      #   uses: actions/upload-artifact@v4
+      #   uses: actions/upload-artifact@v6
       #   if: always()
       #   with:
       #     name: playwright-report
       #     path: playwright-report/
       #     retention-days: 30
 
-      # SonarCloud analysis
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v7
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Upload dist artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: dist
           path: dist/
