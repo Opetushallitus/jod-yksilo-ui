@@ -1038,6 +1038,7 @@ export interface components {
       koulutusmahdollisuusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
       maakunnat?: string[];
       toimialat?: string[];
+      koulutusalat?: string[];
       /** Format: double */
       kesto?: number;
       /** Format: double */
@@ -1330,6 +1331,7 @@ export interface components {
       koulutusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
       maakunnat?: string[];
       toimialat?: string[];
+      koulutusalat?: string[];
       /** Format: double */
       kesto?: number;
       /** Format: double */

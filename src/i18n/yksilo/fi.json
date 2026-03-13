@@ -1062,6 +1062,7 @@
           "year": "1v"
         },
         "education-opportunity-type": "Koulutusmahdollisuuksien tyyppi",
+        "field-of-education": "Koulutusala",
         "filter": "Suodatus",
         "industries": "Toimialat",
         "job-opportunity-type": "Työmahdollisuuksien tyyppi",

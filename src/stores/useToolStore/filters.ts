@@ -1,6 +1,6 @@
 import { components } from '@/api/schema';
-import { maxKestoValue } from '@/routes/Tool/components/filters/FilterKesto.tsx';
-import { getToimiala } from '@/utils/codes/codes.ts';
+import { maxKestoValue } from '@/routes/Tool/components/filters/FilterKesto';
+import { getKoulutusala, getToimiala } from '@/utils/codes/codes';
 
 export function filterByRegion(regions: string[], meta: components['schemas']['EhdotusMetadata']): boolean {
   if (regions.length === 0) {
@@ -87,6 +87,46 @@ export function filterByToimialat(toimialaFilters: string[], meta: components['s
   for (const upperLevel of uniqueUpperLevels) {
     const toimiala = getToimiala(upperLevel);
     if (toimiala?.parentCode && filterSet.has(toimiala.parentCode)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/*
+ * There are two formats for koulutusala codes in mahdollisuudet metadata:
+ * kansallinenkoulutusluokitus2016koulutusalataso1_00#1
+ * kansallinenkoulutusluokitus2016koulutusalataso2_051#1
+ */
+const KOULUTUSALA_KOODI_REGEX = /^kansallinenkoulutusluokitus2016koulutusalataso\d+_(\d+)#\d+$/;
+
+const parseKoulutusalaCode = (code: string): string | null => {
+  const match = KOULUTUSALA_KOODI_REGEX.exec(code);
+  return match ? match[1] : null;
+};
+
+export function filterByKoulutusalat(
+  koulutusalaFilters: string[],
+  meta: components['schemas']['EhdotusMetadata'],
+): boolean {
+  if (koulutusalaFilters.length === 0 || meta.tyyppi !== 'KOULUTUSMAHDOLLISUUS') {
+    return true;
+  }
+  if (!meta.koulutusalat) {
+    return false;
+  }
+
+  const filterSet = new Set(koulutusalaFilters);
+
+  const uniqueKoulutusalaCodes = new Set(
+    meta.koulutusalat.map(parseKoulutusalaCode).filter((code): code is string => code !== null),
+  );
+  for (const code of uniqueKoulutusalaCodes) {
+    if (filterSet.has(code)) {
+      return true;
+    }
+    const koulutusala = getKoulutusala(code);
+    if (koulutusala?.parentCode && filterSet.has(koulutusala.parentCode)) {
       return true;
     }
   }

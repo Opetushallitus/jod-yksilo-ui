@@ -1,0 +1,1802 @@
+[
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/00",
+    "level": 1,
+    "code": "00",
+    "order": 10,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Yleissivistävä koulutus"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/001",
+    "level": 2,
+    "code": "001",
+    "order": 20,
+    "parentItemLocalId": "koulutusala_1_20160101/00",
+    "parentCode": "00",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Yleissivistävä koulutus"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/01",
+    "level": 1,
+    "code": "01",
+    "order": 40,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Kasvatusalat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/011",
+    "level": 2,
+    "code": "011",
+    "order": 50,
+    "parentItemLocalId": "koulutusala_1_20160101/01",
+    "parentCode": "01",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Kasvatusalat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/02",
+    "level": 1,
+    "code": "02",
+    "order": 120,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Humanistiset ja taidealat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/020",
+    "level": 2,
+    "code": "020",
+    "order": 130,
+    "parentItemLocalId": "koulutusala_1_20160101/02",
+    "parentCode": "02",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Humanistiset ja taidealat, yleiset koulutusohjelmat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/021",
+    "level": 2,
+    "code": "021",
+    "order": 150,
+    "parentItemLocalId": "koulutusala_1_20160101/02",
+    "parentCode": "02",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Taidealat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/022",
+    "level": 2,
+    "code": "022",
+    "order": 230,
+    "parentItemLocalId": "koulutusala_1_20160101/02",
+    "parentCode": "02",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Humanistiset alat (paitsi kielet)"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/023",
+    "level": 2,
+    "code": "023",
+    "order": 280,
+    "parentItemLocalId": "koulutusala_1_20160101/02",
+    "parentCode": "02",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Kielet"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/03",
+    "level": 1,
+    "code": "03",
+    "order": 310,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Yhteiskunnalliset alat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/031",
+    "level": 2,
+    "code": "031",
+    "order": 320,
+    "parentItemLocalId": "koulutusala_1_20160101/03",
+    "parentCode": "03",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Yhteiskuntatieteet"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/032",
+    "level": 2,
+    "code": "032",
+    "order": 390,
+    "parentItemLocalId": "koulutusala_1_20160101/03",
+    "parentCode": "03",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Viestintä ja informaatiotieteet"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/04",
+    "level": 1,
+    "code": "04",
+    "order": 420,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Kauppa, hallinto ja oikeustieteet"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/041",
+    "level": 2,
+    "code": "041",
+    "order": 430,
+    "parentItemLocalId": "koulutusala_1_20160101/04",
+    "parentCode": "04",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Kauppa ja hallinto"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/042",
+    "level": 2,
+    "code": "042",
+    "order": 520,
+    "parentItemLocalId": "koulutusala_1_20160101/04",
+    "parentCode": "04",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Oikeustieteet"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/05",
+    "level": 1,
+    "code": "05",
+    "order": 540,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Luonnontieteet"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/050",
+    "level": 2,
+    "code": "050",
+    "order": 550,
+    "parentItemLocalId": "koulutusala_1_20160101/05",
+    "parentCode": "05",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Luonnontieteet, yleiset koulutusohjelmat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/051",
+    "level": 2,
+    "code": "051",
+    "order": 570,
+    "parentItemLocalId": "koulutusala_1_20160101/05",
+    "parentCode": "05",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Biologia ja biotieteet"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/052",
+    "level": 2,
+    "code": "052",
+    "order": 600,
+    "parentItemLocalId": "koulutusala_1_20160101/05",
+    "parentCode": "05",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Ympäristöalat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/053",
+    "level": 2,
+    "code": "053",
+    "order": 640,
+    "parentItemLocalId": "koulutusala_1_20160101/05",
+    "parentCode": "05",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Fysikaaliset tieteet,kemia ja geotieteet"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/054",
+    "level": 2,
+    "code": "054",
+    "order": 680,
+    "parentItemLocalId": "koulutusala_1_20160101/05",
+    "parentCode": "05",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Matematiikka ja tilastotiede"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/06",
+    "level": 1,
+    "code": "06",
+    "order": 710,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Tietojenkäsittely ja tietoliikenne (ICT)"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/061",
+    "level": 2,
+    "code": "061",
+    "order": 720,
+    "parentItemLocalId": "koulutusala_1_20160101/06",
+    "parentCode": "06",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Tietojenkäsittely ja tietoliikenne (ICT)"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/07",
+    "level": 1,
+    "code": "07",
+    "order": 740,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Tekniikan alat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/071",
+    "level": 2,
+    "code": "071",
+    "order": 750,
+    "parentItemLocalId": "koulutusala_1_20160101/07",
+    "parentCode": "07",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Kone-, prosessi-, energia- ja sähkötekniikka"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/072",
+    "level": 2,
+    "code": "072",
+    "order": 840,
+    "parentItemLocalId": "koulutusala_1_20160101/07",
+    "parentCode": "07",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Materiaali- ja prosessitekniikka"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/073",
+    "level": 2,
+    "code": "073",
+    "order": 890,
+    "parentItemLocalId": "koulutusala_1_20160101/07",
+    "parentCode": "07",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Arkkitehtuuri ja rakentaminen"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/08",
+    "level": 1,
+    "code": "08",
+    "order": 920,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Maa- ja metsätalousalat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/080",
+    "level": 2,
+    "code": "080",
+    "order": 930,
+    "parentItemLocalId": "koulutusala_1_20160101/08",
+    "parentCode": "08",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Maa- ja metsätalousalat, yleiset koulutusohjelmat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/081",
+    "level": 2,
+    "code": "081",
+    "order": 950,
+    "parentItemLocalId": "koulutusala_1_20160101/08",
+    "parentCode": "08",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Maatalous"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/082",
+    "level": 2,
+    "code": "082",
+    "order": 990,
+    "parentItemLocalId": "koulutusala_1_20160101/08",
+    "parentCode": "08",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Metsätalous"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/083",
+    "level": 2,
+    "code": "083",
+    "order": 1030,
+    "parentItemLocalId": "koulutusala_1_20160101/08",
+    "parentCode": "08",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Kalatalous"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/084",
+    "level": 2,
+    "code": "084",
+    "order": 1050,
+    "parentItemLocalId": "koulutusala_1_20160101/08",
+    "parentCode": "08",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Eläinlääketiede"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/09",
+    "level": 1,
+    "code": "09",
+    "order": 1070,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Terveys- ja hyvinvointialat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/090",
+    "level": 2,
+    "code": "090",
+    "order": 1080,
+    "parentItemLocalId": "koulutusala_1_20160101/09",
+    "parentCode": "09",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Terveys- ja hyvinvointialat, yleiset koulutusohjelmat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/091",
+    "level": 2,
+    "code": "091",
+    "order": 1100,
+    "parentItemLocalId": "koulutusala_1_20160101/09",
+    "parentCode": "09",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Terveys"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/092",
+    "level": 2,
+    "code": "092",
+    "order": 1180,
+    "parentItemLocalId": "koulutusala_1_20160101/09",
+    "parentCode": "09",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Hyvinvointi"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/10",
+    "level": 1,
+    "code": "10",
+    "order": 1240,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Palvelualat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/100",
+    "level": 2,
+    "code": "100",
+    "order": 1250,
+    "parentItemLocalId": "koulutusala_1_20160101/10",
+    "parentCode": "10",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Palvelualat, yleiset koulutusohjelmat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/101",
+    "level": 2,
+    "code": "101",
+    "order": 1270,
+    "parentItemLocalId": "koulutusala_1_20160101/10",
+    "parentCode": "10",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Henkilökohtaiset palvelut"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/103",
+    "level": 2,
+    "code": "103",
+    "order": 1350,
+    "parentItemLocalId": "koulutusala_1_20160101/10",
+    "parentCode": "10",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Turvallisuuspalvelut"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/104",
+    "level": 2,
+    "code": "104",
+    "order": 1390,
+    "parentItemLocalId": "koulutusala_1_20160101/10",
+    "parentCode": "10",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Kuljetuspalvelut"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/99",
+    "level": 1,
+    "code": "99",
+    "order": 1420,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Muut tai tuntemattomat koulutusalat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/999",
+    "level": 2,
+    "code": "999",
+    "order": 1430,
+    "parentItemLocalId": "koulutusala_1_20160101/99",
+    "parentCode": "99",
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Muut tai tuntemattomat koulutusalat"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  },
+  {
+    "classification": {
+      "localId": "koulutusala_1_20160101",
+      "internationalRecommendation": true,
+      "nationalRecommendation": true,
+      "classificationName": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "name": "Kansallinen koulutusala 2016"
+        }
+      ],
+      "classificationDescription": [
+        {
+          "langName": "suomi",
+          "lang": "fi",
+          "description": "Kansallisen koulutusluokituksen koulutusala. Käytössä tilastovuodesta 2016 alkaen. "
+        }
+      ]
+    },
+    "localId": "koulutusala_1_20160101/SS",
+    "level": 1,
+    "code": "SS",
+    "order": 1460,
+    "parentItemLocalId": null,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "suomi",
+        "lang": "fi",
+        "name": "Koulutusalat yhteensä"
+      }
+    ],
+    "explanatoryNotes": [],
+    "classificationIndexEntry": [
+      {
+        "text": []
+      }
+    ]
+  }
+]
