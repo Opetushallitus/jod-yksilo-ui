@@ -17,25 +17,38 @@ export interface ToolSettingsProps extends ModalComponentProps {
 const ToolSettings = ({ onUpdate, ...rest }: ToolSettingsProps) => {
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
-  const { resetSettings, filters, setFilters, sorting, setSorting, settingsHaveChanged, setSettingsHaveChanged } =
-    useToolStore(
-      useShallow((state) => ({
-        resetSettings: state.resetSettings,
-        filters: state.filters,
-        setFilters: state.setFilters,
-        sorting: state.sorting,
-        setSorting: state.setSorting,
-        settingsHaveChanged: state.settingsHaveChanged,
-        setSettingsHaveChanged: state.setSettingsHaveChanged,
-      })),
-    );
+  const {
+    resetSettings,
+    filters,
+    setFilters,
+    sorting,
+    setSorting,
+    settingsHaveChanged,
+    setSettingsHaveChanged,
+    osaamisKiinnostusPainotus,
+    setOsaamisKiinnostusPainotus,
+  } = useToolStore(
+    useShallow((state) => ({
+      resetSettings: state.resetSettings,
+      filters: state.filters,
+      setFilters: state.setFilters,
+      sorting: state.sorting,
+      setSorting: state.setSorting,
+      settingsHaveChanged: state.settingsHaveChanged,
+      setSettingsHaveChanged: state.setSettingsHaveChanged,
+      osaamisKiinnostusPainotus: state.osaamisKiinnostusPainotus,
+      setOsaamisKiinnostusPainotus: state.setOsaamisKiinnostusPainotus,
+    })),
+  );
   const { closeActiveModal } = useModal();
   const [initialFilters] = React.useState(filters);
   const [initialSorting] = React.useState(sorting);
+  const [initialOsaamisKiinnostusPainotus] = React.useState(osaamisKiinnostusPainotus);
   const [initialSettingsHaveChanged] = React.useState(settingsHaveChanged);
 
   const filtersHaveChanged = JSON.stringify(filters) !== JSON.stringify(initialFilters);
   const sortingHasChanged = sorting !== initialSorting;
+  const osaamisKiinnostusPainotusHasChanged = osaamisKiinnostusPainotus !== initialOsaamisKiinnostusPainotus;
 
   return (
     <Modal
@@ -106,6 +119,7 @@ const ToolSettings = ({ onUpdate, ...rest }: ToolSettingsProps) => {
                 setFilters(initialFilters);
                 setSorting(initialSorting);
                 setSettingsHaveChanged(initialSettingsHaveChanged);
+                setOsaamisKiinnostusPainotus(initialOsaamisKiinnostusPainotus);
               }}
               label={t('common:cancel')}
               testId="reset-settings-button"
@@ -113,7 +127,7 @@ const ToolSettings = ({ onUpdate, ...rest }: ToolSettingsProps) => {
             <Button
               variant="accent"
               size={sm ? 'lg' : 'sm'}
-              disabled={!filtersHaveChanged && !sortingHasChanged}
+              disabled={!filtersHaveChanged && !sortingHasChanged && !osaamisKiinnostusPainotusHasChanged}
               className="whitespace-nowrap"
               onClick={() => {
                 closeActiveModal();
