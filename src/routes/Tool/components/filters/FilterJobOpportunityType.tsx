@@ -43,7 +43,7 @@ export const FilterJobOpportunityType = () => {
         checked={filter.includes('TMT')}
         label={
           <span className="pl-4">
-            {t('opportunity-type.work.TMT')} <JodAi className="inline mb-1 ml-3" />
+            {t('opportunity-type.work.TMT')} <JodAi className="inline mb-1 ml-3" aria-label={t('ai-icon-alt')} />
           </span>
         }
         name={t('opportunity-type.work.TMT')}
