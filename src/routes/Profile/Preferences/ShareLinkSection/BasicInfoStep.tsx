@@ -31,7 +31,7 @@ export const BasicInfoStep = () => {
   maxDate.setUTCDate(maxDate.getUTCDate() - 1);
 
   return (
-    <>
+    <div className="max-w-modal-content box-content px-5 md:px-9">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('preferences.share.modal.basic-info.description')}
       </p>
@@ -79,6 +79,6 @@ export const BasicInfoStep = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };

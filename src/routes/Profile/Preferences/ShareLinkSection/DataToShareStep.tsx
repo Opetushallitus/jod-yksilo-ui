@@ -256,7 +256,7 @@ export const DataToShareStep = () => {
       <Spinner size={48} color="accent" />
     </div>
   ) : (
-    <>
+    <div className="max-w-modal-content px-5 md:px-9">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('preferences.share.modal.data-to-share.description')}
       </p>
@@ -476,6 +476,6 @@ export const DataToShareStep = () => {
           </ul>
         </CheckboxAccordion>
       </div>
-    </>
+    </div>
   );
 };

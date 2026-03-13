@@ -330,7 +330,7 @@ const AddOrEditToimenkuvaModal = ({
       name={headerText}
       {...rest}
       fullWidthContent
-      className="sm:h-full!"
+      className="h-[90vh]! sm:h-full!"
       progress={
         <WizardProgress
           labelText={t('wizard.label')}
@@ -353,6 +353,7 @@ const AddOrEditToimenkuvaModal = ({
                 event.preventDefault();
               }
             }}
+            className="px-5 md:px-9"
           >
             <StepComponent />
           </Form>

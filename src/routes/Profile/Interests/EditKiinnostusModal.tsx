@@ -100,7 +100,7 @@ const EditInterestModal = ({ onClose, data = [], ...rest }: EditKiinnostusModalP
       {...rest}
       topSlot={topSlot}
       fullWidthContent
-      className="sm:h-full!"
+      className="h-[90vh]! sm:h-full!"
       content={
         <FormProvider {...methods}>
           <Form
@@ -112,6 +112,7 @@ const EditInterestModal = ({ onClose, data = [], ...rest }: EditKiinnostusModalP
                 event.preventDefault();
               }
             }}
+            className="px-5 md:px-9"
           >
             <Controller
               control={methods.control}

@@ -4,7 +4,7 @@ import { type PageChangeDetails, Pagination, useMediaQueries } from '@jod/design
 import { useShallow } from 'zustand/shallow';
 
 interface PlanOptionsPaginationProps {
-  scrollRef: React.RefObject<HTMLUListElement | null>;
+  scrollRef: React.RefObject<HTMLDivElement | null>;
   className?: string;
   ariaLabel?: string;
 }
