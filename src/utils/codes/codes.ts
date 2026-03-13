@@ -6,6 +6,11 @@ import type { Codeset } from '@/utils/jakaumaUtils';
  It is shortened to contain only necessary levels by following command: jq '[.[] | select(.level <= 2)]' toimiala_fi.json > toimiala_fi_small.json
  */
 import toimialaData from './toimiala_fi.json';
+/**
+ Koulutusala contains data from here https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/koulutusala_1_20160101/classificationItems?content=data&meta=max&lang=fi&format=json.
+ It is shortened to contain only necessary levels by following command: jq '[.[] | select(.level <= 2)]' koulutusala_fi.json > koulutusala_fi_small.json
+ */
+import koulutusalaData from './koulutusala_fi.json';
 
 export interface Classification {
   localId: string;
@@ -112,6 +117,15 @@ export const getCodesetValue = async (codeset: Codeset, code: string, lang: Lang
 
 export const getToimiala = (code: string): Partial<ClassificationItem> | undefined => {
   const entry = toimialaData.find((obj) => {
+    if (!obj || typeof obj !== 'object') return false;
+    const o = obj as Record<string, unknown>;
+    return typeof o.code === 'string' && o.code === code;
+  }) as Partial<ClassificationItem> | undefined;
+  return entry;
+};
+
+export const getKoulutusala = (code: string): Partial<ClassificationItem> | undefined => {
+  const entry = koulutusalaData.find((obj) => {
     if (!obj || typeof obj !== 'object') return false;
     const o = obj as Record<string, unknown>;
     return typeof o.code === 'string' && o.code === code;

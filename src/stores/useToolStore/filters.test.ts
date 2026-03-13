@@ -1,12 +1,14 @@
 import { components } from '@/api/schema';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   filterByAmmattiryhmat,
   filterByEducationType,
   filterByJobType,
+  filterByKoulutusalat,
   filterByRegion,
   filterByToimialat,
 } from './filters';
+
 const createMeta = (
   tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS',
   koulutusmahdollisuusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO',
@@ -19,8 +21,10 @@ const createMeta = (
 // Mock the getToimiala function
 vi.mock('../../utils/codes/codes.ts', () => ({
   getToimiala: vi.fn(),
+  getKoulutusala: vi.fn(),
 }));
 const mockGetToimiala = vi.mocked((await import('../../utils/codes/codes.ts')).getToimiala);
+const mockGetKoulutusala = vi.mocked((await import('../../utils/codes/codes.ts')).getKoulutusala);
 
 describe('filterByToimialat', () => {
   const createFullMeta = (
@@ -128,6 +132,51 @@ describe('filterByToimialat', () => {
     expect(result).toBe(false);
     expect(mockGetToimiala).toHaveBeenCalledWith('81');
     expect(mockGetToimiala).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('filterByKoulutusalat', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should return true when koulutusalaFilters is empty', () => {
+    const result = filterByKoulutusalat([], createMeta('KOULUTUSMAHDOLLISUUS'));
+    expect(result).toBe(true);
+  });
+  it('should return true when meta.tyyppi is not KOULUTUSMAHDOLLISUUS', () => {
+    const result = filterByKoulutusalat(['A'], createMeta('TYOMAHDOLLISUUS'));
+    expect(result).toBe(true);
+  });
+  it('should return true when meta.koulutusalat includes one of the koulutusalat', () => {
+    const result = filterByKoulutusalat(['01', '02'], {
+      ...createMeta('KOULUTUSMAHDOLLISUUS'),
+      koulutusalat: ['kansallinenkoulutusluokitus2016koulutusalataso1_01#1'],
+    });
+    expect(result).toBe(true);
+  });
+  it('should return false when meta.koulutusalat does not include any of the koulutusalat', () => {
+    const result = filterByKoulutusalat(['01', '02'], {
+      ...createMeta('KOULUTUSMAHDOLLISUUS'),
+      koulutusalat: ['kansallinenkoulutusluokitus2016koulutusalataso1_03#1'],
+    });
+    expect(result).toBe(false);
+  });
+  it('should return true when parent code of meta.koulutusalat matches one of the koulutusalat', () => {
+    mockGetKoulutusala.mockReturnValue({ parentCode: '01' });
+    const result = filterByKoulutusalat(['01'], {
+      ...createMeta('KOULUTUSMAHDOLLISUUS'),
+      koulutusalat: ['kansallinenkoulutusluokitus2016koulutusalataso2_051#1'],
+    });
+    expect(result).toBe(true);
+  });
+  it('should return false when parent code of meta.koulutusalat does not match any of the koulutusalat', () => {
+    mockGetKoulutusala.mockReturnValue({ parentCode: '03' });
+    const result = filterByKoulutusalat(['01', '02'], {
+      ...createMeta('KOULUTUSMAHDOLLISUUS'),
+      koulutusalat: ['kansallinenkoulutusluokitus2016koulutusalataso2_051#1'],
+    });
+    expect(result).toBe(false);
   });
 });
 

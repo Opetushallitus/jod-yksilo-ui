@@ -1064,6 +1064,7 @@
           "year": "1y"
         },
         "education-opportunity-type": "Type",
+        "field-of-education": "Field of education",
         "filter": "Filtering",
         "industries": "Industries",
         "job-opportunity-type": "Type",

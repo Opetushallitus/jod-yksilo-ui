@@ -22,6 +22,7 @@ export interface ToolFilters {
   jobOpportunityType: string[];
   ammattiryhmat: string[];
   toimialat: string[];
+  koulutusalat: string[];
 }
 
 export const DEFAULT_FILTERS: ToolFilters = {
@@ -33,11 +34,12 @@ export const DEFAULT_FILTERS: ToolFilters = {
   minDuration: null,
   maxDuration: null,
   toimialat: [],
+  koulutusalat: [],
 };
 
 export type ArrayFilters = Extract<
   FilterName,
-  'opportunityType' | 'region' | 'jobOpportunityType' | 'educationOpportunityType' | 'toimialat'
+  'opportunityType' | 'region' | 'jobOpportunityType' | 'educationOpportunityType' | 'toimialat' | 'koulutusalat'
 >;
 
 export interface ToolState {

@@ -10,6 +10,7 @@ import {
   filterByEducationType,
   filterByJobType,
   filterByKesto,
+  filterByKoulutusalat,
   filterByRegion,
   filterByToimialat,
 } from '@/stores/useToolStore/filters';
@@ -262,6 +263,7 @@ export const useToolStore = create<ToolState>()(
             opportunityType: filter,
             region,
             toimialat,
+            koulutusalat,
             ammattiryhmat,
             jobOpportunityType,
             educationOpportunityType,
@@ -297,6 +299,7 @@ export const useToolStore = create<ToolState>()(
                 filterByAmmattiryhmat(ammattiryhmat, meta) &&
                 filterByRegion(region, meta) &&
                 filterByToimialat(toimialat, meta) &&
+                filterByKoulutusalat(koulutusalat, meta) &&
                 filterByKesto(minDuration, maxDuration, meta)
               );
             })
@@ -466,7 +469,7 @@ export const useToolStore = create<ToolState>()(
     {
       name: 'tool-storage',
       storage: createJSONStorage(() => sessionStorage),
-      version: 5,
+      version: 6,
       migrate: () => {
         sessionStorage.removeItem('tool-storage');
       },
