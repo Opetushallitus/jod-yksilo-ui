@@ -766,7 +766,7 @@
       "update-modal-title": "Muokkaa tavoitetta"
     },
     "paths": {
-      "cancel-confirmation-text": "Lomakkeella on tallentamattomia muutoksia, haluatko varmasti poistua.",
+      "cancel-confirmation-text": "Lomakkeella on tallentamattomia muutoksia, haluatko varmasti poistua?",
       "continue-editing": "Jatka muokkaamista",
       "step-n-details": "Vaiheen {{count}} tiedot"
     },
