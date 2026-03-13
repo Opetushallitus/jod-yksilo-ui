@@ -33,7 +33,8 @@ export const FilterEducationOpportunityType = () => {
         checked={filter.includes('TUTKINTO')}
         label={
           <span className="pl-4">
-            {t('opportunity-type.education.TUTKINTO')} <JodAi className="inline mb-1 ml-3" />
+            {t('opportunity-type.education.TUTKINTO')}{' '}
+            <JodAi className="inline mb-1 ml-3" aria-label={t('ai-icon-alt')} />
           </span>
         }
         name={t('opportunity-type.education.TUTKINTO')}
@@ -47,7 +48,8 @@ export const FilterEducationOpportunityType = () => {
         checked={filter.includes('EI_TUTKINTO')}
         label={
           <span className="pl-4">
-            {t('opportunity-type.education.EI_TUTKINTO')} <JodAi className="inline mb-1 ml-3" />
+            {t('opportunity-type.education.EI_TUTKINTO')}{' '}
+            <JodAi className="inline mb-1 ml-3" aria-label={t('ai-icon-alt')} />
           </span>
         }
         name={t('opportunity-type.education.EI_TUTKINTO')}
