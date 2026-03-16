@@ -109,7 +109,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                 <Button
                   size="sm"
                   variant="white"
-                  className="whitespace-nowrap w-fit"
+                  className="w-fit"
                   label={t('preferences.share.copy-link')}
                   disabled={expired}
                   onClick={async () => {
@@ -129,7 +129,8 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                 <Button
                   size="sm"
                   variant="white-delete"
-                  className={`whitespace-nowrap w-fit ${sm && !expired ? 'ml-auto' : ''}`}
+                  ariaHaspopup="dialog"
+                  className={`w-fit ${sm && !expired ? 'ml-auto' : ''}`}
                   label={t('preferences.share.delete-link')}
                   onClick={() => {
                     showDialog({
@@ -170,8 +171,9 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                         {copyButton}
                         <Button
                           size="sm"
+                          ariaHaspopup="dialog"
                           variant="white"
-                          className="whitespace-nowrap w-fit"
+                          className="w-fit"
                           label={t('preferences.share.edit-link')}
                           onClick={() =>
                             showModal(NewShareLinkModal, {
@@ -182,7 +184,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                         <Button
                           size="sm"
                           variant="white"
-                          className="whitespace-nowrap w-fit"
+                          className="w-fit"
                           label={t('preferences.share.preview')}
                           iconSide="right"
                           linkComponent={getLinkTo(url.href, { useAnchor: true, target: '_blank' })}

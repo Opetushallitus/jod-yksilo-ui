@@ -149,7 +149,8 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                   <Button
                     variant="gray"
                     size="sm"
-                    className="whitespace-nowrap bg-bg-gray-2!"
+                    className="bg-bg-gray-2!"
+                    ariaHaspopup="dialog"
                     ref={settingsButtonRef}
                     icon={<JodSettings className="text-accent!" />}
                     iconSide="left"
@@ -256,9 +257,9 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
         <div className="flex flex-row gap-5 flex-1 justify-between">
           <Button
             label={t('profile.my-goals.add-custom-plan')}
+            ariaHaspopup="dialog"
             variant="white"
             size={sm ? 'lg' : 'sm'}
-            className="whitespace-nowrap"
             onClick={() => {
               closeActiveModal();
               showModal(AddOrEditCustomPlanModal, { tavoite });
@@ -270,7 +271,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
               label={t('common:cancel')}
               variant="white"
               size={sm ? 'lg' : 'sm'}
-              className="whitespace-nowrap"
+              ariaHaspopup="dialog"
               onClick={() => {
                 showDialog({
                   title: t('common:cancel'),

@@ -280,6 +280,7 @@ const EducationHistory = () => {
         <div className="mb-[84px]">
           <Button
             variant="accent"
+            ariaHaspopup="dialog"
             label={t('education-history.add-new-education')}
             onClick={() => {
               showModal(EducationHistoryWizard);
@@ -294,6 +295,7 @@ const EducationHistory = () => {
             tooltipOpen={isOsaamisetTunnistusOngoing ? undefined : false}
           >
             <Button
+              ariaHaspopup="dialog"
               variant="white"
               label={t('education-history.import-education-history')}
               onClick={openImportStartModal}

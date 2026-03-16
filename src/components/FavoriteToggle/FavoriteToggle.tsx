@@ -9,10 +9,17 @@ interface FavoriteToggleProps {
   isFavorite?: boolean;
   favoriteName?: string | components['schemas']['LokalisoituTeksti'];
   onToggleFavorite: () => void;
-  bgClassName?: string;
+  opensDialog?: boolean;
+  className?: string;
 }
 
-export const FavoriteToggle = ({ isFavorite, favoriteName, onToggleFavorite, bgClassName }: FavoriteToggleProps) => {
+export const FavoriteToggle = ({
+  isFavorite,
+  favoriteName,
+  onToggleFavorite,
+  className,
+  opensDialog,
+}: FavoriteToggleProps) => {
   const { t } = useTranslation();
   const { showDialog } = useModal();
   const name = typeof favoriteName === 'string' ? favoriteName : getLocalizedText(favoriteName);
@@ -21,6 +28,7 @@ export const FavoriteToggle = ({ isFavorite, favoriteName, onToggleFavorite, bgC
     <ActionButton
       label={t('remove-favorite')}
       icon={<JodFavoriteFilled className="text-accent" aria-hidden />}
+      aria-haspopup="dialog"
       onClick={() =>
         showDialog({
           title: t('remove-favorite'),
@@ -29,15 +37,16 @@ export const FavoriteToggle = ({ isFavorite, favoriteName, onToggleFavorite, bgC
         })
       }
       testId="remove-favorite-button"
-      className={`${bgClassName}`}
+      className={className}
     />
   ) : (
     <ActionButton
       label={t('add-favorite')}
       icon={<JodFavorite className="text-accent" />}
       onClick={onToggleFavorite}
+      aria-haspopup={opensDialog ? 'dialog' : undefined}
       testId="add-favorite-button"
-      className={`${bgClassName}`}
+      className={className}
     />
   );
 };

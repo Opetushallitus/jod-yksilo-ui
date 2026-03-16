@@ -87,6 +87,7 @@ const ExploreOpportunities = () => {
             <Button
               aria-label={toggleFiltersText}
               label={toggleFiltersText}
+              ariaHaspopup="dialog"
               variant="gray"
               size="sm"
               serviceVariant="yksilo"
