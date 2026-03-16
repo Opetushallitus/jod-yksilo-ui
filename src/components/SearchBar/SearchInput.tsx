@@ -2,16 +2,18 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface SearchInputProps {
+  ref?: React.Ref<HTMLInputElement>;
   value?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const SearchInput = ({ value, onChange }: SearchInputProps) => {
+export const SearchInput = ({ ref, value, onChange }: SearchInputProps) => {
   const { t } = useTranslation();
 
   return (
     <div className="search-input-wrapper" data-testid="searchbar-input-wrapper">
       <input
+        ref={ref}
         id="search-input"
         type="text"
         required
