@@ -91,6 +91,7 @@ interface ActionsSectionProps {
   actionButtonContent?: React.ReactNode;
   isFavorite?: boolean;
   onToggleFavorite?: () => void;
+  isLoggedIn?: boolean;
   name: string;
   matchValue?: number;
   matchLabel?: string;
@@ -104,6 +105,7 @@ const ActionsSection = ({
   onToggleFavorite,
   name,
   actionButtonContent,
+  isLoggedIn,
   matchValue,
   matchLabel,
 }: ActionsSectionProps) => {
@@ -119,7 +121,7 @@ const ActionsSection = ({
           className={'flex flex-col sm:flex-row flex-nowrap gap-x-2 items-center select-none'}
           data-testid="opportunity-card-match"
         >
-          <span className="text-accent text-[30px] sm:text-[34px] leading-[32px] sm:leading-[35px] font-[400]">
+          <span className="text-accent text-[30px] sm:text-[34px] leading-7 sm:leading-[35px] font-normal">
             {Math.round(matchValue * 100)}%
           </span>
           <span className="text-body-xs font-semibold text-primary-gray">{matchLabel}</span>
@@ -136,7 +138,8 @@ const ActionsSection = ({
             isFavorite={!!isFavorite}
             onToggleFavorite={() => onToggleFavorite?.()}
             favoriteName={name}
-            bgClassName="bg-bg-gray"
+            opensDialog={!isLoggedIn}
+            className="bg-bg-gray"
           />
         )}
         {!!actionButtonContent && actionButtonContent}
@@ -220,6 +223,7 @@ export const OpportunityCardWrapper = ({
         isFavorite={isFavorite}
         onToggleFavorite={onToggleFavorite}
         name={name}
+        isLoggedIn={isLoggedIn}
         actionButtonContent={actionButtonContent}
         matchValue={matchValue}
         matchLabel={matchLabel}

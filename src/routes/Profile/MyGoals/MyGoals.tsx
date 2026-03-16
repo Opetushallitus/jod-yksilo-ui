@@ -114,6 +114,7 @@ const MyGoals = () => {
       )}
       <Button
         variant="accent"
+        ariaHaspopup="dialog"
         onClick={() => {
           showModal(GoalModal, { mode: 'ADD' });
         }}

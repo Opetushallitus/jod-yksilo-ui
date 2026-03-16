@@ -214,6 +214,7 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
       <button
         className="cursor-pointer bg-bg-gray-2 text-accent flex items-center gap-3 px-3 py-2 rounded-sm"
         onClick={startTour}
+        aria-haspopup="true"
         aria-label={t('tool.tour.view-guided-tour-label')}
       >
         <div className="relative w-6 h-6">
