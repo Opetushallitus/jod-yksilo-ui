@@ -110,4 +110,20 @@ describe('Breadcrumb', () => {
     render(<Breadcrumb />);
     expect(screen.getByTestId('ds-breadcrumb')).toHaveTextContent('front-page');
   });
+
+  it('adds competences breadcrumb as parent for work history page', () => {
+    (useMatches as any).mockReturnValue([
+      { id: 'root', pathname: '/fi', handle: { title: 'front-page' } },
+      { id: 'profile', pathname: '/fi/profile', handle: { title: 'profile.index' } },
+      {
+        id: '{slugs.profile.competences}/{slugs.profile.work-history}|fi',
+        pathname: '/fi/profile/osaamiseni/tyopaikkani',
+        handle: { title: 'profile.work-history.title' },
+      },
+    ]);
+    render(<Breadcrumb />);
+    expect(screen.getByTestId('ds-breadcrumb')).toHaveTextContent(
+      'front-page' + 'profile.index' + 'profile.competences.title' + 'profile.work-history.title',
+    );
+  });
 });
