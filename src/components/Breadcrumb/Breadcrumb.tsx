@@ -14,6 +14,42 @@ interface YksiloHandle {
 
 const useTypedMatches = () => useMatches() as UIMatch<unknown, YksiloHandle>[];
 
+// Some profile subpages live under the competences URL segment without producing a parent route match.
+// Inject the missing "Osaamiseni" crumb
+const injectProfileCompetencesParent = (
+  items: BreadcrumbItem[],
+  language: string,
+  t: (key: string) => string,
+  matches: UIMatch<unknown, YksiloHandle>[],
+) => {
+  const PROFILE_COMPETENCES_ROUTE_ID = '{slugs.profile.competences}';
+
+  const competencesRouteIndex = matches.findIndex(
+    (match) =>
+      match.id.includes(PROFILE_COMPETENCES_ROUTE_ID) && match.id !== `${PROFILE_COMPETENCES_ROUTE_ID}|${language}`,
+  );
+
+  if (competencesRouteIndex < 0) {
+    return items;
+  }
+
+  const profileIndex = items.findIndex((item) => item.label === t('profile.index'));
+  const hasCompetencesCrumb = items.some((item) => item.label === t('profile.competences.title'));
+
+  if (profileIndex < 0 || hasCompetencesCrumb) {
+    return items;
+  }
+
+  const competencesPath = `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.competences')}`;
+  const nextItems = [...items];
+  nextItems.splice(profileIndex + 1, 0, {
+    label: t('profile.competences.title'),
+    to: competencesPath,
+  });
+
+  return nextItems;
+};
+
 export const Breadcrumb = () => {
   const history = globalThis.history;
   const matches = useTypedMatches();
@@ -91,15 +127,15 @@ export const Breadcrumb = () => {
 
       setItems(crumbs);
     } else {
-      setItems(
-        validMatches.map((match) => {
-          const isRoot = match.id === 'root';
-          return {
-            label: isRoot ? t('front-page') : match.handle?.title || '',
-            to: match.pathname,
-          };
-        }),
-      );
+      const mappedItems = validMatches.map((match) => {
+        const isRoot = match.id === 'root';
+        return {
+          label: isRoot ? t('front-page') : match.handle?.title || '',
+          to: match.pathname,
+        };
+      });
+
+      setItems(injectProfileCompetencesParent(mappedItems, language, t, validMatches));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matches]);
