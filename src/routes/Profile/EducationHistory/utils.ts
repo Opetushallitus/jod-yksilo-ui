@@ -4,6 +4,7 @@ import { sortByProperty } from '@/utils';
 export interface Koulutus {
   id?: string;
   nimi: Record<string, string>;
+  kuvaus?: Record<string, string>;
   alkuPvm?: string;
   loppuPvm?: string;
   osaamiset: string[];
@@ -85,6 +86,7 @@ const mapKoulutusToRow = (
   const data: ExperienceTableRowData = {
     key: koulutus.id ?? crypto.randomUUID(),
     nimi: koulutus.nimi,
+    kuvaus: koulutus.kuvaus,
     alkuPvm: koulutus.alkuPvm ? new Date(koulutus.alkuPvm) : undefined,
     loppuPvm: koulutus.loppuPvm ? new Date(koulutus.loppuPvm) : undefined,
     osaamiset: koulutus.osaamiset.map((id) => ({

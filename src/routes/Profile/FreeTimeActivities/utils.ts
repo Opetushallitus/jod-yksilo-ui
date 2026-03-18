@@ -4,6 +4,7 @@ import { sortByProperty } from '@/utils';
 export interface Patevyys {
   id?: string;
   nimi: Record<string, string>;
+  kuvaus?: Record<string, string>;
   alkuPvm: string;
   loppuPvm?: string;
   osaamiset: string[];
@@ -70,6 +71,7 @@ const mapPatevyysToRow = (
 ): ExperienceTableRowData => ({
   key: patevyys.id ?? crypto.randomUUID(),
   nimi: patevyys.nimi,
+  kuvaus: patevyys.kuvaus,
   alkuPvm: new Date(patevyys.alkuPvm),
   loppuPvm: patevyys.loppuPvm ? new Date(patevyys.loppuPvm) : undefined,
   osaamiset: patevyys.osaamiset.map((id) => ({

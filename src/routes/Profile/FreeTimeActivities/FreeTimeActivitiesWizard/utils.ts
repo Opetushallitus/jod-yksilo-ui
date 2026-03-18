@@ -6,6 +6,7 @@ export interface FreeTimeActivitiesForm {
   patevyydet: {
     id?: string;
     nimi: components['schemas']['LokalisoituTeksti'];
+    kuvaus: components['schemas']['LokalisoituTeksti'];
     alkuPvm: string;
     loppuPvm?: string;
     osaamiset: {

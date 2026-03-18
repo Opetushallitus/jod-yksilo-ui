@@ -273,14 +273,15 @@ describe('useToolStore', () => {
         expect.objectContaining({
           body: {
             osaamiset: [mockOsaamiset[0].id, mockOsaamiset[1].id],
-            osaamisetText: mockOsaamisetVapaateksti.fi,
+            osaamisetVapaateksti: mockOsaamisetVapaateksti.fi,
             osaamisPainotus: 0.9,
             kiinnostukset: [mockKiinnostukset[0].id, mockKiinnostukset[1].id],
-            kiinnostuksetText: mockKiinnostuksetVapaateksti.fi,
+            kiinnostuksetVapaateksti: mockKiinnostuksetVapaateksti.fi,
             kiinnostusPainotus: 0.1,
             escoListPainotus: 0.5,
             openTextPainotus: 0.5,
             rajoitePainotus: 0.5,
+            kuvaukset: [],
           },
           headers: { 'Content-Language': 'fi' },
           signal: undefined,

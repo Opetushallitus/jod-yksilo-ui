@@ -56,6 +56,9 @@ const WorkHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
                     .nonempty(formErrorMessage.required())
                     .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
                 ),
+              kuvaus: z
+                .object({})
+                .catchall(z.string().trim().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
               alkuPvm: z.iso.date(formErrorMessage.date()).nonempty(formErrorMessage.required()),
               loppuPvm: z.iso.date(formErrorMessage.date()).optional().or(z.literal('')),
               osaamiset: z.array(
@@ -83,6 +86,7 @@ const WorkHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
         toimenkuvat: [
           {
             nimi: {},
+            kuvaus: {},
             alkuPvm: '',
             loppuPvm: '',
             osaamiset: [],
@@ -112,6 +116,7 @@ const WorkHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
             nimi: data.nimi,
             toimenkuvat: data.toimenkuvat.map((toimenkuva) => ({
               nimi: toimenkuva.nimi,
+              kuvaus: toimenkuva.kuvaus,
               alkuPvm: toimenkuva.alkuPvm,
               loppuPvm: toimenkuva.loppuPvm,
               osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
@@ -210,6 +215,7 @@ const WorkHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
                 }
                 append({
                   nimi: {},
+                  kuvaus: {},
                   alkuPvm: '',
                   loppuPvm: '',
                   osaamiset: [],
