@@ -10,6 +10,7 @@ export interface ExperienceTableRowData {
   checked?: boolean;
   key: string;
   nimi: Record<string, string>;
+  kuvaus?: Record<string, string>;
   alkuPvm?: Date;
   hideRowDetails?: boolean;
   loppuPvm?: Date;
@@ -65,6 +66,29 @@ const DateRange = ({ alkuPvm, loppuPvm, className = '' }: { alkuPvm?: Date; lopp
     {alkuPvm && formatDate(alkuPvm)} – {loppuPvm && formatDate(loppuPvm)}
   </div>
 );
+
+const FreeFormTextRow = ({
+  row,
+  visibleState,
+  className,
+}: {
+  row: ExperienceTableRowData;
+  visibleState: boolean;
+  className?: string;
+}) => {
+  const freeFormText = getLocalizedText(row.kuvaus);
+  if (!freeFormText || !visibleState) {
+    return;
+  }
+
+  return (
+    <tr>
+      <td colSpan={5} className={`${className} w-full px-3 sm:px-5 py-2 sm:py-3`.trim()}>
+        <p className="text-primary-gray text-body-md text-pretty hyphens-auto wrap-break-word">{freeFormText}</p>
+      </td>
+    </tr>
+  );
+};
 
 const CompetencesRow = ({
   tagsVisibleState,
@@ -241,7 +265,7 @@ export const ExperienceTableRow = ({
       return renderCompetencesDetectFailure();
     }
 
-    if (row.osaamiset.length > 0) {
+    if (row.osaamiset.length > 0 || getLocalizedText(row.kuvaus)) {
       return (
         <button
           type="button"
@@ -345,6 +369,7 @@ export const ExperienceTableRow = ({
           {onRowClick && <td>{rowAction(onRowClick, row, useConfirm, rowActionElement, actionLabel)}</td>}
           {showCheckbox && <td>{renderCheckbox()}</td>}
         </tr>
+        <FreeFormTextRow row={row} visibleState={tagsVisibleState} className={className} />
         <CompetencesRow
           tagsVisibleState={tagsVisibleState}
           showCheckbox={showCheckbox}
