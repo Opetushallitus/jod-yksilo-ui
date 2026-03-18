@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
+import { getLocalizedText } from '@/utils';
 
 import type { LoaderFunction } from 'react-router';
 
@@ -27,13 +28,20 @@ export interface CompetencesLoaderData {
     - koulut -> koulutukset
     - vapaaAjanToiminnot -> patevyydet
 
-  Each item in competences will be compared against "osaamiset" response, which contains all the competences for the user and nonmatching are filtered out.
+  Each item in competences will be compared against "osaamiset" response,
+  which contains all the competences for the user and nonmatching are filtered out.
   This is done to make. The resulting data will be used to populate the Competences page.
+
+  The kuvaus field is a special case, as it can contain free text that the user has added.
+  This is not tied to any category and should be included in the results if it exists,
+  even if it doesn't match any of the competences from the "osaamiset" response.
 
   Muu osaaminen is a special case, as it's not tied to any category.
 */
-const filterItems = <T extends { id?: string }>(osaaminenLahdeIds: string[], items: T[] = []): T[] =>
-  items.filter((item) => item.id && osaaminenLahdeIds.includes(item.id));
+const filterItems = <T extends { id?: string; kuvaus?: components['schemas']['LokalisoituTeksti'] }>(
+  osaaminenLahdeIds: string[],
+  items: T[] = [],
+): T[] => items.filter((item) => (item.id && osaaminenLahdeIds.includes(item.id)) || getLocalizedText(item.kuvaus));
 
 /**
  * Get competence data for the user. This is in a separate function as this exact data is also needed in tool loader.

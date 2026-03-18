@@ -1,6 +1,8 @@
 import { FormError, TouchedFormError } from '@/components';
+import { LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
-import { Datepicker, InputField } from '@jod/design-system';
+import { isFeatureEnabled } from '@/utils/features';
+import { Datepicker, InputField, Textarea } from '@jod/design-system';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -102,6 +104,13 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
           <FormError name={`patevyydet.${patevyys}.loppuPvm`} errors={errors} />
         </div>
       </div>
+      {isFeatureEnabled('KOHTAANTO_KUVAUKSET') && (
+        <Textarea
+          label={t('profile.free-form-input.label')}
+          {...register(`patevyydet.${patevyys}.kuvaus.${language}` as const)}
+          maxLength={LIMITS.TEXTAREA}
+        />
+      )}
     </div>
   );
 };

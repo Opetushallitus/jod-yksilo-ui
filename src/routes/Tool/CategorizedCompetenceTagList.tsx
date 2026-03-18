@@ -70,8 +70,19 @@ const CategorizedCompetenceTagList = () => {
     setOsaamisetVapaateksti,
     kiinnostuksetVapaateksti,
     setKiinnostuksetVapaateksti,
+    kuvaukset,
+    setKuvaukset,
   } = useTool();
   const competencesFromProfileId = React.useId();
+
+  const mappedKuvaukset = React.useMemo(
+    () =>
+      (kuvaukset ?? []).map((k, index) => ({
+        key: `free-form-text-${index}`,
+        data: k,
+      })),
+    [kuvaukset],
+  );
 
   return (
     <div className="flex flex-col">
@@ -117,6 +128,16 @@ const CategorizedCompetenceTagList = () => {
             {t('tool.info-overview.other-data-from-profile-description')}
           </div>
           <div className="flex flex-col gap-4">
+            {mappedKuvaukset
+              .filter((teksti) => teksti.data[language])
+              .map((teksti) => (
+                <FreeFormText
+                  key={teksti.key}
+                  description={teksti.data[language]}
+                  onChange={() => setKuvaukset(mappedKuvaukset.filter((k) => k.key !== teksti.key).map((k) => k.data))}
+                />
+              ))}
+
             {osaamisetVapaateksti?.[language] && (
               <FreeFormText
                 description={osaamisetVapaateksti[language]}

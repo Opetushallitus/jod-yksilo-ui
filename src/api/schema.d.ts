@@ -1011,17 +1011,18 @@ export interface components {
     };
     LuoEhdotusDto: {
       osaamiset?: string[];
-      osaamisetText?: string;
+      osaamisetVapaateksti?: string;
       /** Format: double */
       osaamisPainotus?: number;
       kiinnostukset?: string[];
-      kiinnostuksetText?: string;
+      kiinnostuksetVapaateksti?: string;
       /** Format: double */
       kiinnostusPainotus?: number;
       /** Format: double */
       escoListPainotus?: number;
       /** Format: double */
       openTextPainotus?: number;
+      kuvaukset?: string[];
     };
     EhdotusDto: {
       /** Format: uuid */

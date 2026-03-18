@@ -55,6 +55,9 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
                     .nonempty(formErrorMessage.required())
                     .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
                 ),
+              kuvaus: z
+                .object({})
+                .catchall(z.string().trim().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
               alkuPvm: z.iso.date(formErrorMessage.date()).nonempty(formErrorMessage.required()),
               loppuPvm: z.iso.date(formErrorMessage.date()).optional().or(z.literal('')),
               osaamiset: z.array(
@@ -80,6 +83,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
         patevyydet: [
           {
             nimi: {},
+            kuvaus: {},
             alkuPvm: '',
             loppuPvm: '',
             osaamiset: [],
@@ -108,6 +112,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
           nimi: data.nimi,
           patevyydet: data.patevyydet.map((patevyys) => ({
             nimi: patevyys.nimi,
+            kuvaus: patevyys.kuvaus,
             alkuPvm: patevyys.alkuPvm,
             loppuPvm: patevyys.loppuPvm,
             osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),
@@ -160,6 +165,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
     }
     append({
       nimi: {},
+      kuvaus: {},
       alkuPvm: '',
       loppuPvm: '',
       osaamiset: [],

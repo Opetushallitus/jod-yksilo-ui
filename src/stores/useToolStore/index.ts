@@ -38,6 +38,7 @@ export const useToolStore = create<ToolState>()(
       osaamiset: [],
       kiinnostukset: [],
       kiinnostuksetVapaateksti: undefined,
+      kuvaukset: [],
       suosikit: [],
       suosikitLoading: false,
       osaamisKiinnostusPainotus: DEFAULT_PAINOTUS,
@@ -98,6 +99,9 @@ export const useToolStore = create<ToolState>()(
       setKiinnostuksetVapaateksti: (state) => {
         set({ kiinnostuksetVapaateksti: state, shouldFetchData: true, settingsHaveChanged: true });
       },
+      setKuvaukset: (state) => {
+        set({ kuvaukset: state, shouldFetchData: true, settingsHaveChanged: true });
+      },
       setSuosikit: (state) => set({ suosikit: state }),
       setOsaamisKiinnostusPainotus: (state: number) => {
         set({ osaamisKiinnostusPainotus: state, shouldFetchData: true, settingsHaveChanged: true });
@@ -110,6 +114,7 @@ export const useToolStore = create<ToolState>()(
           kiinnostuksetVapaateksti,
           osaamisKiinnostusPainotus,
           rajoitePainotus,
+          kuvaukset,
         } = get();
 
         set({ ehdotuksetLoading: true });
@@ -117,14 +122,15 @@ export const useToolStore = create<ToolState>()(
           const { data: mahdollisuusData } = await client.POST('/api/ehdotus/mahdollisuudet', {
             body: {
               osaamiset: osaamiset.map((item) => item.id),
-              osaamisetText: osaamisetVapaateksti?.[lang],
+              osaamisetVapaateksti: osaamisetVapaateksti?.[lang],
               osaamisPainotus: (100 - osaamisKiinnostusPainotus) / 100,
               kiinnostukset: kiinnostukset.map((item) => item.id),
-              kiinnostuksetText: kiinnostuksetVapaateksti?.[lang],
+              kiinnostuksetVapaateksti: kiinnostuksetVapaateksti?.[lang],
               kiinnostusPainotus: osaamisKiinnostusPainotus / 100,
               escoListPainotus: 0.5,
               openTextPainotus: 0.5,
               rajoitePainotus: rajoitePainotus / 100,
+              kuvaukset: kuvaukset?.filter((k) => k[lang]).map((k) => k[lang]) ?? [],
             },
             signal,
             headers: { 'Content-Language': lang },
