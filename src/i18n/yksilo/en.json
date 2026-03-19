@@ -92,7 +92,8 @@
       "next": "Switch to next decade",
       "prev": "Switch to previous decade",
       "view": "Switch to day view"
-    }
+    },
+    "selectedDayPrefix": "Selected."
   },
   "date-placeholder": "dd.mm.yyyy",
   "description": "Description",

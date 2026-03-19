@@ -92,7 +92,8 @@
       "next": "Byt till nästa årtionde",
       "prev": "Byt till föregående årtionde",
       "view": "Växla till dagsvy"
-    }
+    },
+    "selectedDayPrefix": "Vald."
   },
   "date-placeholder": "dd.mm.åååå",
   "description": "Beskrivning",
