@@ -26,7 +26,6 @@ const Interests = () => {
         mode="kiinnostukset"
         tagHeadingClassName="bg-white"
         hideTextAreaLabel
-        useAnimations
         scrollOnFocus={false}
         isTagSpacing={false}
       />

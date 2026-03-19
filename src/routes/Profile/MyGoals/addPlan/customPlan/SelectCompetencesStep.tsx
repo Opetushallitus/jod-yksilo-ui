@@ -1,5 +1,7 @@
 import type { components } from '@/api/schema';
+import AddedTags from '@/components/OsaamisSuosittelija/AddedTags';
 import { getLocalizedText } from '@/utils';
+import { animateElementToTarget } from '@/utils/animations';
 import { EmptyState, Tag } from '@jod/design-system';
 import React from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
@@ -13,7 +15,8 @@ const SelectCompetencesStep = () => {
   const requiredTagsId = React.useId();
   const addedTagsId = React.useId();
   const requiredTagsRef = React.useRef<HTMLUListElement>(null);
-  const selectedTagsRef = React.useRef<HTMLUListElement>(null);
+  const selectedTagsRef = React.useRef<HTMLDivElement>(null);
+  const [skillsToAdd, setSkillsToAdd] = React.useState<string[]>([]);
   const [filteredVaaditutOsaamiset, setFilteredVaaditutOsaamiset] = React.useState<
     components['schemas']['OsaaminenDto'][]
   >([]);
@@ -73,6 +76,18 @@ const SelectCompetencesStep = () => {
       buttons[nextIndex]?.focus();
     }
   };
+
+  const removeOsaaminenById = React.useCallback(
+    (ids: string[]) => () => {
+      // Assume that last clicked osaaminen is the first one on the list
+      const id = ids[0];
+
+      const idx = valitutOsaamiset.findIndex((val) => val.uri === id);
+      lastClickedIndexRef.current = { index: idx, group: 'selected' };
+      remove(idx);
+    },
+    [remove, valitutOsaamiset],
+  );
 
   // Set roving tabindex for required tags
   React.useEffect(() => {
@@ -141,9 +156,19 @@ const SelectCompetencesStep = () => {
             {filteredVaaditutOsaamiset.map((o) => (
               <li key={o.uri} className="max-w-full">
                 <Tag
-                  onClick={() => append(o)}
+                  onClick={(e) => {
+                    skillsToAdd.push(o.uri);
+                    append(o);
+                    animateElementToTarget(e.currentTarget, selectedTagsRef.current!, () => {
+                      // eslint-disable-next-line sonarjs/no-nested-functions
+                      setSkillsToAdd((prev) => prev.filter((uri) => uri !== o.uri));
+                    });
+                  }}
                   label={getLocalizedText(o.nimi)}
-                  tooltip={getLocalizedText(o.kuvaus)}
+                  tooltip={
+                    // Do not show tooltip if user has clicked to add the skill
+                    skillsToAdd.includes(o.uri) ? undefined : getLocalizedText(o.kuvaus)
+                  }
                   variant="selectable"
                   sourceType="koulutus"
                 />
@@ -157,31 +182,34 @@ const SelectCompetencesStep = () => {
         <h2 id={addedTagsId} className="font-arial sm:text-heading-3 text-heading-3-mobile">
           {t('profile.my-goals.selected-competences')}
         </h2>
-        {valitutOsaamiset.length === 0 && (
-          <EmptyState text={t('profile.my-goals.no-chosen-competences')} testId="plan-competences-empty-state" />
-        )}
-        {valitutOsaamiset.length > 0 && (
-          <>
-            <p className="text-secondary-gray text-body-sm font-arial mb-4">
-              {t('profile.my-goals.remove-competence-description')}
-            </p>
-            <div className="overflow-y-auto max-h-[228px] min-h-8 h-[154px] sm:max-h-[25dvh]">
-              <ul ref={selectedTagsRef} className="flex flex-wrap gap-3 p-1" role="group" aria-labelledby={addedTagsId}>
-                {valitutOsaamiset.map((o, i) => (
-                  <li key={o.id} className="max-w-full">
-                    <Tag
-                      onClick={() => remove(i)}
-                      label={getLocalizedText(o.nimi)}
-                      tooltip={getLocalizedText(o.kuvaus)}
-                      variant="added"
-                      sourceType="koulutus"
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </>
-        )}
+        <div ref={selectedTagsRef}>
+          {valitutOsaamiset.length === 0 && (
+            <EmptyState text={t('profile.my-goals.no-chosen-competences')} testId="plan-competences-empty-state" />
+          )}
+          {valitutOsaamiset.length > 0 && (
+            <>
+              <p className="text-secondary-gray text-body-sm font-arial mb-4">
+                {t('profile.my-goals.remove-competence-description')}
+              </p>
+              <div className="overflow-y-auto max-h-[228px] min-h-8 h-[154px] sm:max-h-[25dvh]">
+                {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+                <ul
+                  className="flex flex-wrap gap-3 p-1"
+                  role="group"
+                  aria-labelledby={addedTagsId}
+                  onKeyDown={(e) => handleKeyboardNavigation(e, valitutOsaamiset)}
+                >
+                  <AddedTags
+                    osaamiset={valitutOsaamiset.map((o) => ({ id: o.uri, nimi: o.nimi, kuvaus: o.kuvaus }))}
+                    onClick={removeOsaaminenById}
+                    lahdetyyppi="KOULUTUS"
+                    useAnimations
+                  />
+                </ul>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

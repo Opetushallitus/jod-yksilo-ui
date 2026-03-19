@@ -25,7 +25,6 @@ const Competences = () => {
         value={mappedOsaamiset}
         tagHeadingClassName="bg-white"
         hideTextAreaLabel
-        useAnimations
         scrollOnFocus={false}
         isTagSpacing={false}
       />
