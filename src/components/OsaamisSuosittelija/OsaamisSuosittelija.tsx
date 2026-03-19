@@ -59,7 +59,7 @@ export const OsaamisSuosittelija = ({
   placeholder,
   hideSelected = false,
   hideTextAreaLabel = false,
-  useAnimations = false,
+  useAnimations = true,
   scrollOnFocus = true,
   isTagSpacing = true,
 }: OsaamisSuosittelijaProps) => {
