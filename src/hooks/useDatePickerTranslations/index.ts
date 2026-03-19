@@ -25,13 +25,19 @@ export const useDatePickerTranslations = (): ComponentProps<typeof Datepicker>['
       view: t('datepicker.year.view'),
       prev: t('datepicker.year.prev'),
     },
+    selectedDayPrefix: t('datepicker.selectedDayPrefix'),
   };
 
   return {
     nextTrigger: (view) => translations[view].next,
     viewTrigger: (view) => translations[view].view,
     prevTrigger: (view) => translations[view].prev,
-    dayCell: (state): string => `${translations.actions.select} ${state.formattedDate}`,
+    dayCell: (state): string => {
+      const baseLabel = `${translations.actions.select} ${state.formattedDate}`;
+      return state.selected && translations.selectedDayPrefix
+        ? `${translations.selectedDayPrefix} ${baseLabel}`
+        : baseLabel;
+    },
     trigger: (open): string => (open ? translations.actions.close : translations.actions.open),
     roleDescriptions: {
       datepicker: t('datepicker.aria-roledescription.datepicker'),
