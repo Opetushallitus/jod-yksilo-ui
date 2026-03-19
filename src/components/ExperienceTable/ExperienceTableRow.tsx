@@ -181,7 +181,7 @@ export const ExperienceTableRow = ({
         <TooltipWrapper
           tooltipPlacement="top"
           tooltipContent={t('competences-identifying')}
-          enabled={osaamisetOdottaaTunnistusta}
+          enabled={osaamisetOdottaaTunnistusta ?? false}
           triggerClassName={triggerClassName}
         >
           <button
