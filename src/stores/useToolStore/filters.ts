@@ -29,7 +29,7 @@ export function filterByKesto(
     return (meta.kesto ?? 0) >= sixYears;
   }
   if (meta.kesto == null) {
-    return false;
+    return true;
   }
   return (
     ((meta.kestoMaksimi && meta.kestoMaksimi >= effectiveMin) || meta.kesto >= effectiveMin) &&

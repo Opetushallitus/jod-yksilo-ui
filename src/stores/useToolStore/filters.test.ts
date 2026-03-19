@@ -4,6 +4,7 @@ import {
   filterByAmmattiryhmat,
   filterByEducationType,
   filterByJobType,
+  filterByKesto,
   filterByKoulutusalat,
   filterByRegion,
   filterByToimialat,
@@ -227,6 +228,18 @@ describe('filterByEducationType', () => {
   it('should return false when EI_TUTKINTO is selected but meta is TUTKINTO type', () => {
     const result = filterByEducationType(['EI_TUTKINTO'], createMeta('KOULUTUSMAHDOLLISUUS', 'TUTKINTO'));
     expect(result).toBe(false);
+  });
+});
+
+describe('filterByKesto', () => {
+  it('should return true for koulutusmahdollisuus without duration when filter is 0 to 0', () => {
+    const result = filterByKesto(0, 0, createMeta('KOULUTUSMAHDOLLISUUS'));
+    expect(result).toBe(true);
+  });
+
+  it('should return true for koulutusmahdollisuus without duration when a duration range is selected', () => {
+    const result = filterByKesto(1, 12, createMeta('KOULUTUSMAHDOLLISUUS'));
+    expect(result).toBe(true);
   });
 });
 
