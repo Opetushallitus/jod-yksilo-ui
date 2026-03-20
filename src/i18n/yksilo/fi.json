@@ -410,7 +410,7 @@
   "on-this-page": "Tällä sivulla",
   "opportunity-tooltip": {
     "education": {
-      "EI_TUTKINTO": "Muu koulutus on koulutus, joka ei johda tutkintoon. Se voi kehittää osaamista esimerkiksi työelämää varten tai henkilökohtaisiin tarpeisiin. Tekoäly ryhmittelee nämä koulutukset opittavien taitojen ja koulutusalan perusteella.",
+      "EI_TUTKINTO": "Muu koulutusmahdollisuus on koulutus, joka ei johda tutkintoon. Se voi kehittää osaamista esimerkiksi työelämää varten tai henkilökohtaisiin tarpeisiin. Tekoäly ryhmittelee nämä koulutukset opittavien taitojen ja koulutusalan perusteella.",
       "TUTKINTO": "Tutkintokoulutus on koulutus, joka johtaa viralliseen tutkintoon. Tekoäly ryhmittelee nämä koulutukset sen mukaan, mitä taitoja niissä opitaan ja mihin koulutusalaan ja viralliseen tutkintoluokitukseen ne kuuluvat."
     },
     "work": {
@@ -420,7 +420,7 @@
   },
   "opportunity-type": {
     "education": {
-      "EI_TUTKINTO": "Muu koulutus",
+      "EI_TUTKINTO": "Muu koulutusmahdollisuus",
       "TUTKINTO": "Tutkinto"
     },
     "work": {

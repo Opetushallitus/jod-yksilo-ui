@@ -203,6 +203,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
       </div>
       <Button
         label={t('preferences.share.create-new-link')}
+        ariaHaspopup="dialog"
         variant="accent"
         onClick={() => showModal(NewShareLinkModal)}
       />
