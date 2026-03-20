@@ -92,7 +92,8 @@
       "next": "Vaihda seuraavaan vuosikymmeneen",
       "prev": "Vaihda edelliseen vuosikymmeneen",
       "view": "Vaihda päivänäkymään"
-    }
+    },
+    "selectedDayPrefix": "Valittuna."
   },
   "date-placeholder": "pp.kk.vvvv",
   "description": "Kuvaus",
