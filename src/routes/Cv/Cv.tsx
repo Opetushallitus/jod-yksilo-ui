@@ -1,7 +1,7 @@
 import { ActionButton, ExperienceTable, MainLayout, OpportunityCard } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, hyphenize } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Accordion, Button, type MenuSection, PageNavigation, Tag, useMediaQueries } from '@jod/design-system';
 import { JodArrowRight, JodInfo, JodPrint, JodUser } from '@jod/design-system/icons';
@@ -21,6 +21,8 @@ const BasicInfoDetail = ({ data, title }: { data?: string | number; title: strin
       <dd className="text-secondary-1-dark-2">{`${data}`}</dd>
     </div>
   ) : null;
+
+const getCvSectionAnchorId = (title: string) => `cv-heading-${hyphenize(title)}`;
 
 const Cv = () => {
   const { t, i18n } = useTranslation();
@@ -98,7 +100,7 @@ const Cv = () => {
       title: t('on-this-page'),
       linkItems: availableMenuItemLabels.map((label) => ({
         label,
-        linkComponent: getLinkTo(`#${label}`),
+        linkComponent: getLinkTo(`#${getCvSectionAnchorId(label)}`, { useAnchor: true }),
       })),
     }),
     [availableMenuItemLabels, t],
@@ -180,7 +182,12 @@ const Cv = () => {
       {/* Basic info box */}
       {hasAnyBasicInfo && (
         <>
-          <ScrollHeading title={t('cv.basic-info.title')} heading="h2" className="text-transparent text-[0px] size-0" />
+          <ScrollHeading
+            id={getCvSectionAnchorId(t('cv.basic-info.title'))}
+            title={t('cv.basic-info.title')}
+            heading="h2"
+            className="text-transparent text-[0px] size-0"
+          />
           <div className="bg-bg-gray-2 p-5 rounded-md flex flex-row mb-6">
             <div className="shrink items-start pr-5">
               <JodInfo className="text-secondary-1-dark-2" />

@@ -10,7 +10,10 @@ interface ContentSectionProps {
 }
 export const ContentSection = ({ children, title, className = '', isPrinting = false }: ContentSectionProps) => {
   const { lg } = useMediaQueries();
-  const titleElement: React.ReactNode = <ScrollHeading title={title} heading="h2" className="text-heading-2" />;
+  const headingId = `cv-heading-${hyphenize(title)}`;
+  const titleElement: React.ReactNode = (
+    <ScrollHeading id={headingId} title={title} heading="h2" className="text-heading-2" />
+  );
   const triggerId = `cv-section-${hyphenize(title)}`;
   const contentId = `cv-content-${hyphenize(title)}`;
 
