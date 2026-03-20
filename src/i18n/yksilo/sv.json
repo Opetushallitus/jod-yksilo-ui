@@ -411,7 +411,7 @@
   "on-this-page": "På denna sida",
   "opportunity-tooltip": {
     "education": {
-      "EI_TUTKINTO": "Övrig utbildning är utbildning som inte leder till examen. Den kan utveckla kompetens för till exempel arbetslivet eller personliga behov. Artificiell intelligens grupperar dessa utbildningar utifrån de färdigheter som man lär sig och utbildningsområdet.",
+      "EI_TUTKINTO": "Annan utbildningsmöjlighet är utbildning som inte leder till examen. Den kan utveckla kompetens för till exempel arbetslivet eller personliga behov. Artificiell intelligens grupperar dessa utbildningar utifrån de färdigheter som man lär sig och utbildningsområdet.",
       "TUTKINTO": "Examensutbildning är utbildning som leder till en officiell examen. Artificiell intelligens grupperar dessa utbildningar enligt vilka färdigheter som man lär sig i dem och vilket utbildningsområde och vilken officiell examensklassificering de tillhör."
     },
     "work": {
@@ -421,12 +421,12 @@
   },
   "opportunity-type": {
     "education": {
-      "EI_TUTKINTO": "Övrig utbildning",
+      "EI_TUTKINTO": "Annan utbildningsmöjlighet",
       "TUTKINTO": "Examen"
     },
     "work": {
       "AMMATTITIETO": "Yrke",
-      "TMT": "Annan karriärmöjlighet"
+      "TMT": "Annan arbetsmöjlighet"
     }
   },
   "osaamissuosittelija": {
@@ -719,7 +719,7 @@
       "add-plan-success": "Planen har lagts till",
       "adjust-list": "Justera listan",
       "choose-as-plan": "Välj som plan",
-      "choose-favorite-description": "Välj från dina favoriter ett yrke eller en arbetsmöjlighet som du vill sätta som mål",
+      "choose-favorite-description": "Välj yrke eller arbetsmöjlighet från dina favoriter som du vill ställa in som mål",
       "choose-favorite-header": "Välj mål från favoriter",
       "competence-compare": "Kompetensjämförelse",
       "competences": "Kompetenser",
@@ -909,7 +909,7 @@
       "index": "utbildningsmojlighet"
     },
     "job-opportunity": {
-      "index": "karriarmojlighet"
+      "index": "arbetsmojlighet"
     },
     "profile": {
       "competences": "mina-kompetenser",
@@ -969,7 +969,7 @@
     },
     "interests": "Kartlägg dina intressen ({{count}})",
     "interests_zero": "Kartlägg dina intressen",
-    "job-opportunity-is-part-of-group": "Karriärmöjligheten tillhör en yrkesgrupp",
+    "job-opportunity-is-part-of-group": "Arbetsmöjlighet ingår i yrkesgruppen",
     "job-opportunity-is-part-of-group-tooltip": "Yrken och karriärmöjligheter grupperas i yrkesgrupper. Yrkesgrupper används i statistiken över befolkningens yrkesstruktur och för att skapa dem används en yrkesklassificering som hjälper till att jämföra statistiken nationellt och internationellt.",
     "job-opportunity-median-salary": "Medianlön",
     "job-opportunity-median-salary-tooltip": "Med medianlön avses den lön som delar in löntagarna i två lika stora grupper: hälften tjänar mindre och hälften mer än medianlönen. Den beskriver bättre den ”typiska” lönen än genomsnittet, eftersom den inte förvrängs av enskilda mycket höga eller mycket låga löner.",

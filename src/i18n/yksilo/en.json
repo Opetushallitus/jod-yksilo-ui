@@ -352,7 +352,7 @@
     },
     "of-job-ads": "of advertised jobs.",
     "open-jobs": "Vacancies",
-    "professional-group": "Professional group",
+    "professional-group": "Occupational group",
     "salary-data": {
       "description": "Salary information has been retrieved for the professional group from the income register. Median refers to the middle value observation of the arranged group. This means that one-half of the professional group earns more than the median and one-half less than the median. In addition, the best-earning 10% and the least-earning 10% are displayed.",
       "highest-decile": "Top 10%",
@@ -412,7 +412,7 @@
   "on-this-page": "On this page",
   "opportunity-tooltip": {
     "education": {
-      "EI_TUTKINTO": "Other education refers to education that does not lead to a degree. It can develop competence for working life or personal needs, for example. Artificial intelligence groups these educations based on the skills learned and the field of education.",
+      "EI_TUTKINTO": "Other learning opportunity refers to education that does not lead to a degree. It can develop competence for working life or personal needs, for example. Artificial intelligence groups these educations based on the skills learned and the field of education.",
       "TUTKINTO": "Degree programme refers to education leading to an official degree. Artificial intelligence groups these educations according to the skills learned and their field of education and official degree classification."
     },
     "work": {
@@ -422,12 +422,12 @@
   },
   "opportunity-type": {
     "education": {
-      "EI_TUTKINTO": "Other education",
+      "EI_TUTKINTO": "Other learning opportunity",
       "TUTKINTO": "Degree"
     },
     "work": {
       "AMMATTITIETO": "Profession",
-      "TMT": "Other career opportunity"
+      "TMT": "Other employment opportunity"
     }
   },
   "osaamissuosittelija": {
@@ -720,7 +720,7 @@
       "add-plan-success": "Plan added",
       "adjust-list": "Adjust list",
       "choose-as-plan": "Select as plan",
-      "choose-favorite-description": "From your favourites, select the occupation or job opportunity you want to set as a goal",
+      "choose-favorite-description": "Choose a profession or employment opportunity from your favorites that you want to set as a goal",
       "choose-favorite-header": "Select goal from favourites",
       "competence-compare": "Compare competences",
       "competences": "Competences",
@@ -907,10 +907,10 @@
   "show-more": "Show more",
   "slugs": {
     "education-opportunity": {
-      "index": "training-opportunity"
+      "index": "learning-opportunity"
     },
     "job-opportunity": {
-      "index": "career-opportunity"
+      "index": "employment-opportunity"
     },
     "profile": {
       "competences": "my-competence",
@@ -970,7 +970,7 @@
     },
     "interests": "Map out your interests ({{count}})",
     "interests_zero": "Map out your interests",
-    "job-opportunity-is-part-of-group": "Career opportunity belongs to an occupational group",
+    "job-opportunity-is-part-of-group": "Employment opportunity is part of the occupational group",
     "job-opportunity-is-part-of-group-tooltip": "Professions and career opportunities are grouped into occupational groups. Occupational groups are used to compile statistics on the occupational structure of the population, and they are created using a professional classification that helps to compare statistics nationally and internationally.",
     "job-opportunity-median-salary": "Median salary",
     "job-opportunity-median-salary-tooltip": "Median salary refers to the sum of wages and salaries divided into two equal groups: one-half earn less and one-half earn more than the median salary. It describes the \"typical\" salary better than the average salary, as it is not distorted by individual extremely high or low salaries.",
