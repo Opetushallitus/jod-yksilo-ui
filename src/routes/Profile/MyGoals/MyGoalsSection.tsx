@@ -11,8 +11,7 @@ import { getTypeSlug } from '@/routes/Profile/utils';
 import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLocalizedText, sortByProperty } from '@/utils';
-import { Button, useMediaQueries } from '@jod/design-system';
-import { JodCaretDown, JodCaretUp } from '@jod/design-system/icons';
+import { Accordion, Button, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useRevalidator } from 'react-router';
@@ -60,49 +59,34 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
 
   const setTavoite = addPlanStore((state) => state.setTavoite);
 
-  // Accordion: index of open item, null = all closed
-  const [openIndex, setOpenIndex] = React.useState<number | null>(0);
-  const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
     <div className="mb-5">
       <div className="flex flex-col mb-5 gap-6">
         {tavoitteet.map((tavoite, i) => {
           const { mahdollisuusId, mahdollisuusTyyppi } = tavoite;
           const details = getMahdollisuusDetails(mahdollisuusId);
-          const isOpen = openIndex === i;
+          const id = tavoite.id ?? mahdollisuusId ?? i;
+          const triggerId = `accordion-header-${id}`;
+          const contentId = `accordion-content-${id}`;
 
           return (
-            <div key={tavoite.id ?? mahdollisuusId ?? i} className="flex flex-col">
-              {/* Accordion header */}
-              <button
-                onClick={() => toggleAccordion(i)}
-                className="flex justify-between items-center text-heading-2 cursor-pointer"
-                aria-expanded={isOpen}
-                aria-controls={`accordion-content-${i}`}
-                id={`accordion-header-${i}`}
+            <div key={id} className="flex flex-col">
+              <Accordion
+                triggerId={triggerId}
+                ariaControls={contentId}
+                initialState={i === 0} // Open the first accordion by default
+                title={getLocalizedText(tavoite.tavoite)}
+                collapsedContent={
+                  <div className="flex flex-col mt-2">
+                    <p className="text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
+                    <p className="text-secondary-gray sm:text-body-sm font-semibold">
+                      {t('profile.my-goals.n-plans', { count: tavoite.suunnitelmat?.length ?? 0 })}
+                    </p>
+                  </div>
+                }
               >
-                <span>{getLocalizedText(tavoite.tavoite)}</span>
-                {isOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}
-              </button>
-
-              <p className="ds:text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
-
-              {!isOpen && (
-                <p className="text-secondary-gray ds:sm:text-body-sm font-semibold">
-                  {t('profile.my-goals.n-plans', { count: tavoite.suunnitelmat?.length ?? 0 })}
-                </p>
-              )}
-
-              {isOpen && (
-                <div
-                  id={`accordion-content-${tavoite.id}`}
-                  role="region"
-                  aria-labelledby={`accordion-header-${i}`}
-                  className="p-4"
-                >
+                <section id={contentId} className="p-4">
+                  <p className="text-primary-gray pb-4 -ml-4 -mt-2">{getLocalizedText(tavoite.kuvaus)}</p>
                   {details && mahdollisuusTyyppi && (
                     <>
                       <OpportunityCard
@@ -173,8 +157,8 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                       />
                     </div>
                   </div>
-                </div>
-              )}
+                </section>
+              </Accordion>
             </div>
           );
         })}
