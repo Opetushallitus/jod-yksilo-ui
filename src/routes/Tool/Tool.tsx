@@ -97,7 +97,7 @@ const ExploreOpportunities = () => {
                   onUpdate,
                 });
               }}
-              data-testid="open-tool-settings"
+              testId="open-tool-settings"
               icon={<JodSettings className="text-accent!" />}
               iconSide="left"
               className="bg-bg-gray-2!"
