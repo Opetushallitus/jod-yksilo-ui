@@ -24,20 +24,24 @@ export const useTool = () => {
     osaamisetVapaateksti,
     kiinnostukset,
     kiinnostuksetVapaateksti,
+    kuvaukset,
     setOsaamiset,
     setOsaamisetVapaateksti,
     setKiinnostukset,
     setKiinnostuksetVapaateksti,
+    setKuvaukset,
   } = useToolStore(
     useShallow((state) => ({
       osaamiset: state.osaamiset,
       osaamisetVapaateksti: state.osaamisetVapaateksti,
       kiinnostukset: state.kiinnostukset,
       kiinnostuksetVapaateksti: state.kiinnostuksetVapaateksti,
+      kuvaukset: state.kuvaukset,
       setOsaamiset: state.setOsaamiset,
       setOsaamisetVapaateksti: state.setOsaamisetVapaateksti,
       setKiinnostukset: state.setKiinnostukset,
       setKiinnostuksetVapaateksti: state.setKiinnostuksetVapaateksti,
+      setKuvaukset: state.setKuvaukset,
     })),
   );
 
@@ -54,7 +58,10 @@ export const useTool = () => {
     {} as Record<(typeof PROFILE_TYPES)[number], OsaaminenValue[]>,
   );
   const hasProfileCompetences = Object.keys(profileCompetencesByType).length > 0;
-  const hasOtherProfileData = osaamisetVapaateksti?.[language] || kiinnostuksetVapaateksti?.[language];
+  const hasOtherProfileData =
+    osaamisetVapaateksti?.[language] ||
+    kiinnostuksetVapaateksti?.[language] ||
+    (kuvaukset?.length && kuvaukset?.length > 0);
   const profileCompetencesCount =
     combinedData.filter((item) => item.tyyppi && PROFILE_TYPES.includes(item.tyyppi)).length +
     (osaamisetVapaateksti?.[language] ? 1 : 0) +
@@ -79,10 +86,12 @@ export const useTool = () => {
     osaamisetVapaateksti,
     kiinnostukset,
     kiinnostuksetVapaateksti,
+    kuvaukset,
     setOsaamiset,
     setOsaamisetVapaateksti,
     setKiinnostukset,
     setKiinnostuksetVapaateksti,
+    setKuvaukset,
     removeOsaaminen,
     removeKiinnostus,
   };

@@ -7,8 +7,9 @@ import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
+import { isFeatureEnabled } from '@/utils/features';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Datepicker, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { Button, Datepicker, InputField, Modal, Textarea, useMediaQueries, WizardProgress } from '@jod/design-system';
 import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import {
@@ -116,6 +117,13 @@ const MainStep = () => {
           <FormError name="loppuPvm" errors={errors} />
         </div>
       </div>
+      {isFeatureEnabled('KOHTAANTO_KUVAUKSET') && (
+        <Textarea
+          label={t('profile.free-form-input.label')}
+          {...register(`kuvaus.${language}` as const)}
+          maxLength={LIMITS.TEXTAREA}
+        />
+      )}
     </div>
   );
 };
@@ -195,7 +203,7 @@ const AddOrEditToimenkuvaModal = ({
                 .min(1, formErrorMessage.min(1))
                 .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
             ),
-          kuvaus: z.object({}).catchall(z.string().min(1).or(z.literal(''))),
+          kuvaus: z.object({}).catchall(z.string().trim().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
           alkuPvm: z.iso.date(formErrorMessage.date()).nonempty(formErrorMessage.required()),
           loppuPvm: z.iso.date(formErrorMessage.date()).optional().or(z.literal('')),
           osaamiset: z.array(
@@ -267,6 +275,7 @@ const AddOrEditToimenkuvaModal = ({
         body: {
           id: data.id,
           nimi: data.nimi,
+          kuvaus: data.kuvaus,
           alkuPvm: data.alkuPvm,
           loppuPvm: data.loppuPvm,
           osaamiset: data.osaamiset.map((o) => o.id),
@@ -277,6 +286,7 @@ const AddOrEditToimenkuvaModal = ({
         params: { path: { id } },
         body: {
           nimi: data.nimi,
+          kuvaus: data.kuvaus,
           alkuPvm: data.alkuPvm,
           loppuPvm: data.loppuPvm,
           osaamiset: data.osaamiset.map((o) => o.id),

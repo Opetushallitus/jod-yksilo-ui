@@ -1,12 +1,15 @@
 import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
+import { components } from '@/api/schema';
 import { type FilterData, useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { useModal } from '@/hooks/useModal';
 import { CompetenceFilters } from '@/routes/Profile/Competences/CompetenceFilters';
-import { FILTERS_ORDER, type FiltersType } from '@/routes/Profile/Competences/constants';
+import { CompetenceSourceType, FILTERS_ORDER, type FiltersType } from '@/routes/Profile/Competences/constants';
+import { CompetenceDataGroup } from '@/routes/Profile/Competences/loader';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { hasLocalizedText, removeDuplicatesByKey } from '@/utils';
+import { isFeatureEnabled } from '@/utils/features';
 import { Button } from '@jod/design-system';
 import React from 'react';
 import toast from 'react-hot-toast/headless';
@@ -33,6 +36,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
     setOsaamisetVapaateksti,
     setKiinnostukset,
     setKiinnostuksetVapaateksti,
+    setKuvaukset,
   } = useToolStore(
     useShallow((state) => ({
       kiinnostuksetVapaateksti: state.kiinnostuksetVapaateksti,
@@ -43,6 +47,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
       setOsaamisetVapaateksti: state.setOsaamisetVapaateksti,
       setKiinnostukset: state.setKiinnostukset,
       setKiinnostuksetVapaateksti: state.setKiinnostuksetVapaateksti,
+      setKuvaukset: state.setKuvaukset,
     })),
   );
   const {
@@ -92,6 +97,34 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
     setKiinnostuksetVapaateksti(data?.vapaateksti);
   }, [setKiinnostukset, setKiinnostuksetVapaateksti, storeKiinnostukset]);
 
+  const importKuvauksetFromProfile = React.useCallback(
+    (
+      mappedSelectedCompetences: {
+        id: string[];
+        tyyppi: CompetenceSourceType;
+      }[],
+      tyyppi: CompetenceSourceType,
+      competenceDataGroup: CompetenceDataGroup[],
+    ) =>
+      mappedSelectedCompetences
+        .filter((o) => o.tyyppi === tyyppi)
+        .flatMap((o) => o.id)
+        .map((id) => {
+          return competenceDataGroup
+            .flatMap(
+              (group) =>
+                group.data as {
+                  id?: string;
+                  kuvaus?: components['schemas']['LokalisoituTeksti'];
+                }[],
+            )
+            .find((item) => item?.id === id);
+        })
+        .filter((d) => d?.kuvaus)
+        .map((d) => d?.kuvaus as components['schemas']['LokalisoituTeksti']),
+    [],
+  );
+
   const onCompetenceImportConfirm = React.useCallback(async () => {
     try {
       const selectedFilters: FiltersType = selectedFiltersRef.current ?? {
@@ -101,6 +134,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
         MUU_OSAAMINEN: [],
         KIINNOSTUS: [],
       };
+
       const mappedSelectedCompetences = FILTERS_ORDER.flatMap((tyyppi) =>
         (selectedFilters[tyyppi] ?? [])
           .filter((sf) => sf.checked)
@@ -109,6 +143,14 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
             tyyppi: tyyppi,
           })),
       );
+
+      if (isFeatureEnabled('KOHTAANTO_KUVAUKSET')) {
+        setKuvaukset([
+          ...importKuvauksetFromProfile(mappedSelectedCompetences, 'TOIMENKUVA', toimenkuvat),
+          ...importKuvauksetFromProfile(mappedSelectedCompetences, 'KOULUTUS', koulutukset),
+          ...importKuvauksetFromProfile(mappedSelectedCompetences, 'PATEVYYS', patevyydet),
+        ]);
+      }
 
       const importedInterests = kiinnostukset
         .filter((kiinnostus) =>
@@ -187,8 +229,13 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
     osaamiset,
     setOsaamiset,
     setOsaamisetVapaateksti,
+    setKuvaukset,
     storeOsaamiset,
     t,
+    importKuvauksetFromProfile,
+    toimenkuvat,
+    koulutukset,
+    patevyydet,
   ]);
 
   // Memoized render function for dialog content to avoid "component during render" lint warning

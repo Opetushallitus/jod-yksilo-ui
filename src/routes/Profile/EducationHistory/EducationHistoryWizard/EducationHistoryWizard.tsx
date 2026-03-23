@@ -55,6 +55,9 @@ const EducationHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
                     .nonempty(formErrorMessage.required())
                     .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
                 ),
+              kuvaus: z
+                .object({})
+                .catchall(z.string().trim().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
               alkuPvm: z.iso.date(formErrorMessage.date()).optional().or(z.literal('')),
               loppuPvm: z.iso.date(formErrorMessage.date()).optional().or(z.literal('')),
               osaamiset: z.array(
@@ -82,6 +85,7 @@ const EducationHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
         koulutukset: [
           {
             nimi: {},
+            kuvaus: {},
             alkuPvm: '',
             loppuPvm: '',
             osaamiset: [],
@@ -111,6 +115,7 @@ const EducationHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
           nimi: data.nimi,
           koulutukset: data.koulutukset.map((koulutus) => ({
             nimi: koulutus.nimi,
+            kuvaus: koulutus.kuvaus,
             alkuPvm: koulutus.alkuPvm,
             loppuPvm: koulutus.loppuPvm,
             osaamiset: koulutus.osaamiset.map((osaaminen) => osaaminen.id),
@@ -223,6 +228,7 @@ const EducationHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
                   }
                   append({
                     nimi: {},
+                    kuvaus: {},
                     alkuPvm: '',
                     loppuPvm: '',
                     osaamiset: [],
