@@ -16,7 +16,7 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
 
   return (
     <div className="max-w-modal-content box-content px-5 md:px-9">
-      <h3 className="mb-6 font-poppins text-black text-heading-3-mobile sm:text-heading-3">
+      <h3 className="mb-6 font-poppins text-primary-gray text-heading-3-mobile sm:text-heading-3">
         {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}
       </h3>
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">

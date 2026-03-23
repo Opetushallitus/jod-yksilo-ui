@@ -237,7 +237,7 @@ const Root = () => {
   }, [addTemporaryNote, t, language]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-bg-gray" data-testid="app-root">
+    <div className="flex flex-col min-h-screen bg-bg-gray text-primary-gray" data-testid="app-root">
       <link rel="manifest" href={`/manifest-${language}.json`} crossOrigin="use-credentials" />
       <header role="banner" className="sticky top-0 z-30 print:hidden" data-testid="app-header">
         <SkipLink hash="#jod-main" label={t('common:skiplinks.main')} />

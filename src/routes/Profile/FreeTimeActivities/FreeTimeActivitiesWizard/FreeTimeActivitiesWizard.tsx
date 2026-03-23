@@ -251,6 +251,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
                 event.preventDefault();
               }
             }}
+            className="text-primary-gray"
           >
             {StepComponent}
           </Form>

@@ -22,7 +22,7 @@ export const ModalHeader = ({ text, className = '', testId, step }: ModalHeaderP
 
   return (
     <h2
-      className={tidyClasses(`text-black text-heading-2-mobile sm:text-hero focus:outline-0 ${className}`)}
+      className={tidyClasses(`text-primary-gray text-heading-2-mobile sm:text-hero focus:outline-0 ${className}`)}
       data-testid={testId}
       ref={ref}
     >
