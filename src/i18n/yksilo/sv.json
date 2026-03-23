@@ -88,12 +88,12 @@
       "prev": "Byt till föregående år",
       "view": "Byt till årsvy"
     },
+    "selectedDayPrefix": "Vald.",
     "year": {
       "next": "Byt till nästa årtionde",
       "prev": "Byt till föregående årtionde",
       "view": "Växla till dagsvy"
-    },
-    "selectedDayPrefix": "Vald."
+    }
   },
   "date-placeholder": "dd.mm.åååå",
   "description": "Beskrivning",
