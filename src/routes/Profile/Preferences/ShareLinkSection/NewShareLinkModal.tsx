@@ -7,7 +7,7 @@ import { ModalComponentProps } from '@/hooks/useModal';
 import type { MahdollisuusTyyppi } from '@/routes/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodArrowLeft } from '@jod/design-system/icons';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -174,7 +174,7 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
       name={modalTitle}
       {...rest}
       fullWidthContent
-      className="sm:h-full!"
+      className="h-[90vh]! sm:h-full!"
       testId="share-link-wizard"
       topSlot={<ModalHeader text={modalTitle} testId="share-link-modal-title" />}
       content={
@@ -182,7 +182,7 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
           <Form
             id={formId}
             onSubmit={onSubmit}
-            className="pb-2 max-w-modal-content"
+            className="pb-2"
             onKeyDown={(event) => {
               // Prevent form submission on Enter
               if (event.key === 'Enter') {
@@ -208,7 +208,13 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
       footer={
         <div className="flex justify-between gap-5 flex-1" data-testid="share-link-wizard-footer">
           <div className="flex gap-5 ml-auto">
-            <Button onClick={() => onClose()} label={t('common:cancel')} variant="white" testId="share-link-cancel" />
+            <Button
+              onClick={() => onClose()}
+              label={t('common:cancel')}
+              variant="white"
+              testId="share-link-cancel"
+              size={sm ? 'lg' : 'sm'}
+            />
             {step > 1 && (
               <Button
                 onClick={() => {
@@ -223,6 +229,7 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="share-link-previous"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
             {step < 2 && (
@@ -235,19 +242,23 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
                 }}
                 label={t('next')}
                 variant="accent"
+                icon={sm ? undefined : <JodArrowRight />}
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="share-link-next"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
             {step === 2 && (
               <Button
                 form={formId}
                 label={t('save')}
+                icon={sm ? undefined : <JodCheckmark />}
                 variant="accent"
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 testId="share-link-save"
+                size={sm ? 'lg' : 'sm'}
               />
             )}
           </div>

@@ -45,7 +45,7 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
   const initialGoalDescription = getLocalizedText(tavoite?.kuvaus);
   const initialSelectedMahdollisuusId = tavoite?.mahdollisuusId ?? null;
 
-  const { sm, lg } = useMediaQueries();
+  const { sm } = useMediaQueries();
   const { closeActiveModal } = useModal();
 
   // Stores and state from zustand
@@ -210,12 +210,13 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
     <Modal
       name={headerText}
       {...rest}
-      fullWidthContent={!lg}
+      fullWidthContent
       topSlot={<h1 className="text-heading-2-mobile sm:text-hero">{headerText}</h1>}
+      className="h-[90vh]! sm:h-full!"
       content={
         <form className="pb-1">
           {basicInfoStep && (
-            <div>
+            <div className="max-w-modal-content box-content px-5 md:px-9">
               <div className="flex flex-col">
                 <p className="text-body-sm-mobile sm:text-body-sm font-arial mb-7">
                   {t('profile.my-goals.add-modal-description')}
@@ -237,14 +238,12 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
           )}
 
           {chooseFavoriteStep && (
-            <div id={goalsId}>
-              <div className="pb-3">
-                <p className="text-body-sm-mobile sm:text-body-sm font-arial">
-                  {t('profile.my-goals.choose-favorite-description')}
-                </p>
-              </div>
+            <div id={goalsId} className="max-w-modal-content">
+              <p className="text-body-sm-mobile sm:text-body-sm font-arial w-full box-content px-5 md:px-9">
+                {t('profile.my-goals.choose-favorite-description')}
+              </p>
               <div className="flex flex-row mt-6 gap-5" ref={scrollRef}>
-                <div className="flex flex-col gap-3 w-full">
+                <div className="flex flex-col gap-3 w-full box-content md:pl-9">
                   {goalOptions.map((mahdollisuus) => {
                     const { id, mahdollisuusTyyppi } = mahdollisuus;
                     const isSelected = selectedMahdollisuus?.id === id;
@@ -305,7 +304,7 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
                     );
                   })}
                   {favoriteTyomahdollisuudet.length > 0 && (
-                    <div className="mt-5">
+                    <div className="my-5 px-5 sm:px-6">
                       <Pagination
                         currentPage={pageNr}
                         onPageChange={onPageChange}

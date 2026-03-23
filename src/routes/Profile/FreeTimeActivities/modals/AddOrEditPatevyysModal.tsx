@@ -81,7 +81,7 @@ const MainStep = () => {
         <FormError name={`nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-4">
-        <div className="flex flex-col flex-1 sm:block sm:max-w-input-short">
+        <div className="w-full sm:max-w-input-short">
           <Controller
             control={control}
             render={({ field }) => (
@@ -98,7 +98,7 @@ const MainStep = () => {
           />
           <TouchedFormError touchedFields={touchedFields} fieldName="alkuPvm" errors={errors} />
         </div>
-        <div className="flex flex-col flex-1 sm:block sm:max-w-input-short">
+        <div className="w-full sm:max-w-input-short">
           <Controller
             control={control}
             render={({ field }) => (
@@ -333,7 +333,7 @@ export const AddOrEditPatevyysModal = ({
       name={headerText}
       {...rest}
       fullWidthContent
-      className="sm:h-full!"
+      className="h-[90vh]! sm:h-full!"
       progress={
         <WizardProgress
           labelText={t('wizard.label')}
@@ -356,6 +356,7 @@ export const AddOrEditPatevyysModal = ({
                 event.preventDefault();
               }
             }}
+            className="px-5 md:px-9"
           >
             <StepComponent />
           </Form>

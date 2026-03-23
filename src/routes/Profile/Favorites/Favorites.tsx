@@ -199,31 +199,32 @@ const Favorites = () => {
       }
     >
       {!lg && (
-        <div className="mb-6">
+        <div className="mb-6 px-5 sm:px-6">
           <ProfileNavigationList collapsed />
         </div>
       )}
       <title>{title}</title>
-      <ProfileSectionTitle type="SUOSIKKI" title={title} />
-      <p className="mb-8 text-body-lg">{t('profile.favorites.description')}</p>
+      <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
+        <ProfileSectionTitle type="SUOSIKKI" title={title} />
+        <p className="mb-8 text-body-lg">{t('profile.favorites.description')}</p>
 
-      <div className="flex flex-row justify-between">
-        <h2 className="text-heading-2-mobile sm:text-heading-2">{subtitleToShow}</h2>
-        <FilterButton
-          onClick={() => setShowFilters(true)}
-          label={t('profile.favorites.show-filters')}
-          hideAfterBreakpoint="lg"
-        />
-      </div>
-
-      {getFavoriteCount() > 0 ? (
-        <p className="mt-2">{getFavoriteCountText}</p>
-      ) : (
-        <div className="mt-5 mb-6">
-          <EmptyState text={descriptions[selectedFilter]} testId="favorites-empty-state" />
+        <div className="flex flex-row justify-between">
+          <h2 className="text-heading-2-mobile sm:text-heading-2">{subtitleToShow}</h2>
+          <FilterButton
+            onClick={() => setShowFilters(true)}
+            label={t('profile.favorites.show-filters')}
+            hideAfterBreakpoint="lg"
+          />
         </div>
-      )}
 
+        {getFavoriteCount() > 0 ? (
+          <p className="mt-2">{getFavoriteCountText}</p>
+        ) : (
+          <div className="mt-5 mb-6">
+            <EmptyState text={descriptions[selectedFilter]} testId="favorites-empty-state" />
+          </div>
+        )}
+      </div>
       <div>
         {!lg && (
           <Modal
@@ -231,7 +232,7 @@ const Favorites = () => {
             open={showFilters}
             onClose={() => setShowFilters(false)}
             content={
-              <div className="py-6 px-[20px] bg-bg-gray">
+              <div className="py-6 bg-bg-gray px-5 md:px-9 ml-[20px]">
                 <span className="text-heading-3">{t('content')}</span>
                 <MahdollisuusTyyppiFilter
                   jobFilterText={jobFilterText}
@@ -256,7 +257,7 @@ const Favorites = () => {
         )}
       </div>
 
-      <div className="flex flex-col gap-5 mb-8" data-testid="favorites-list">
+      <div className="flex flex-col gap-5 mb-8 mt-3 sm:px-6 lg:pr-0 lg:pl-6" data-testid="favorites-list">
         {favoritesPerType.map((mahdollisuus) => {
           const { id, mahdollisuusTyyppi } = mahdollisuus;
           return (
@@ -287,29 +288,39 @@ const Favorites = () => {
           );
         })}
       </div>
-      {getFavoriteCount() > 0 && totalPages > 1 && (
-        <Pagination
-          currentPage={pageNr}
-          onPageChange={(data) => {
-            void fetchPage(data);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-          pageSize={pageSize}
-          siblingCount={1}
-          translations={paginationTranslations}
-          totalItems={totalItems}
-          type="button"
-          testId="favorites-pagination"
-        />
+      <div className="flex flex-col px-5 sm:px-6 gap-5 sm:gap-6">
+        {getFavoriteCount() > 0 && totalPages > 1 && (
+          <div>
+            <Pagination
+              currentPage={pageNr}
+              onPageChange={(data) => {
+                void fetchPage(data);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              pageSize={pageSize}
+              siblingCount={1}
+              translations={paginationTranslations}
+              totalItems={totalItems}
+              type="button"
+              testId="favorites-pagination"
+            />
+          </div>
+        )}
+        <div>
+          <Button
+            variant="accent"
+            label={t('profile.favorites.link-to-opportunities')}
+            linkComponent={getLinkTo(to)}
+            icon={<JodArrowRight />}
+            iconSide="right"
+          />
+        </div>
+      </div>
+      {lg ? null : (
+        <div className="px-5">
+          <GoalsCard testId="favorites-go-to-goals" className="mt-6" />
+        </div>
       )}
-      <Button
-        variant="accent"
-        label={t('profile.favorites.link-to-opportunities')}
-        linkComponent={getLinkTo(to)}
-        icon={<JodArrowRight />}
-        iconSide="right"
-      />
-      {lg ? null : <GoalsCard testId="favorites-go-to-goals" className="mt-6" />}
     </MainLayout>
   );
 };
