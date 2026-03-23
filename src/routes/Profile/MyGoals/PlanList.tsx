@@ -44,7 +44,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
     const numberPrefix = planNumberPrefix(index);
     const letter = planLetter(index);
     return (
-      <span className="text-black">
+      <span className="text-primary-gray">
         {numberPrefix && numberPrefix > 0 ? numberPrefix : ''}
         {letter}:
       </span>

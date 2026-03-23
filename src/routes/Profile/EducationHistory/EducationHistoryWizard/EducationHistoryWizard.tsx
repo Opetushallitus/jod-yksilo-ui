@@ -188,6 +188,7 @@ const EducationHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
                 event.preventDefault();
               }
             }}
+            className="text-primary-gray"
           >
             {isEducationStep && (
               <div data-testid="education-step-education">

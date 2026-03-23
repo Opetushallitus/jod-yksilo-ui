@@ -327,6 +327,7 @@ const WorkHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
                 event.preventDefault();
               }
             }}
+            className="text-primary-gray"
           >
             {StepComponent}
           </Form>

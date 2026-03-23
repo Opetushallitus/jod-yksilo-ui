@@ -42,7 +42,7 @@ export const CheckboxAccordion = ({
         onChange={onChange}
         value={label}
         ariaLabel={label}
-        className="shrink-1 mt-[5px] text-menu text-black"
+        className="shrink-1 mt-[5px] text-menu text-primary-gray"
         indeterminate={indeterminate}
         disabled={disabled}
       />

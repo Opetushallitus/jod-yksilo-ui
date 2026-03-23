@@ -328,7 +328,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
               <div
                 id={conversationTabPanelId}
                 ref={containerRef}
-                className="flex flex-col flex-1 overflow-y-auto"
+                className="flex flex-col flex-1 overflow-y-auto text-primary-gray"
                 data-testid="va-transcript"
               >
                 <div className="flex flex-col flex-1 gap-5 px-4 py-3 my-2">
@@ -401,7 +401,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
               tabIndex={0}
               aria-labelledby={selectedTabButtonId}
               className={cx(
-                'flex flex-col flex-1 min-h-0 overflow-y-auto bg-white p-4 sm:h-[484px] h-[378px] rounded-b-md',
+                'flex flex-col flex-1 min-h-0 overflow-y-auto bg-white p-4 sm:h-[484px] h-[378px] rounded-b-md text-primary-gray',
                 !selectedVisible && 'hidden',
               )}
               data-testid="va-selected"
