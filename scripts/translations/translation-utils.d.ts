@@ -16,13 +16,26 @@ export function findLineNumber(position: number, lines: string[]): number;
 export function isExceptionMatch(relativePath: string, codeLine: string): boolean;
 export function parseNamespaceKey(
   fullKey: string,
-  defaultNamespace?: string,
+  defaultNamespace: string,
 ): {
   namespace: string;
   key: string;
 };
 export function isPluralKey(key: string): boolean;
 export function getBaseKey(key: string): string;
+export function buildCodeKeysByNamespaceFromMap(codeKeys: Map<string, unknown>): Record<string, Set<string>>;
+export function isKeyPathUsedInNamespace(keyPath: string, usedKeysInNamespace: Set<string> | undefined): boolean;
+export function getNamespacesUsingKeyPath(
+  keyPath: string,
+  codeKeysByNamespace: Record<string, Set<string>>,
+  projectNamespaces: string[],
+): Set<string>;
+export function isKeyPathUsedInOtherProjectNamespace(
+  keyPath: string,
+  excludeNamespace: string,
+  codeKeysByNamespace: Record<string, Set<string>>,
+  projectNamespaces: string[],
+): boolean;
 export function loadAllTranslationKeys(i18nDir: string): Map<string, Set<string>>;
 export function getPluralVariants(
   baseKey: string,

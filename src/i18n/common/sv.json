@@ -136,6 +136,27 @@
   "print": "Skriv ut",
   "required": "obligatorisk",
   "return-home": "Återgå till förstasidan",
+  "session": {
+    "expired": {
+      "continue": "Fortsätt utan att logga in",
+      "login": "Logga in igen",
+      "modal": {
+        "description": "Tjänsten kan inte utföras eftersom din session har gått ut.",
+        "title": "Din session har gått ut"
+      },
+      "note": {
+        "description": "Hur vill du fortsätta?",
+        "title": "Din session har gått ut"
+      }
+    },
+    "warning": {
+      "continue": "Fortsätt användningen",
+      "note": {
+        "description": "Fortsätt använda tjänsten som inloggad.",
+        "title": "Din session går snart ut"
+      }
+    }
+  },
   "share": "Dela",
   "show-all": "Visa alla",
   "skiplinks": {

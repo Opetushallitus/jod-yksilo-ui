@@ -3,6 +3,7 @@ import { MainLayout } from '@/components';
 import { InfoBox } from '@/components/InfoBox/InfoBox';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
@@ -27,6 +28,7 @@ const Competences = () => {
   const locale = language as 'fi' | 'sv';
   const [showFilters, setShowFilters] = React.useState(false);
   const { lg } = useMediaQueries();
+  const guardedAction = useSessionGuardedAction();
 
   const { selectedFilters, setSelectedFilters, filterKeys } = useInitializeFilters(
     {
@@ -148,9 +150,11 @@ const Competences = () => {
               testId="competences-freeform"
               text={muutOsaamisetVapaateksti}
               onChange={async (value) => {
-                await client.PUT('/api/profiili/muu-osaaminen/vapaateksti', {
-                  body: value,
-                });
+                guardedAction(async () => {
+                  await client.PUT('/api/profiili/muu-osaaminen/vapaateksti', {
+                    body: value,
+                  });
+                })();
               }}
               collapsible
             />

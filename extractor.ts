@@ -1,5 +1,6 @@
 import type { ExtractedKey, ExtractionResult, ExtractOptions, Warning } from '@tolgee/cli/extractor';
 import path from 'node:path';
+import { getValidatedTranslationConfigFromCwd } from './scripts/translations/tolgee-config';
 import {
   extractStaticKeys as extractStaticKeysShared,
   getPluralVariants,
@@ -25,7 +26,12 @@ function extractStaticKeys(
   lines: string[],
   defaultNamespace: string | undefined,
 ): { keyName: string; namespace: string; line: number }[] {
-  const keysMap = extractStaticKeysShared(code, '', defaultNamespace || 'yksilo', lines);
+  const keysMap = extractStaticKeysShared(
+    code,
+    '',
+    defaultNamespace ?? getValidatedTranslationConfigFromCwd().defaultNamespace,
+    lines,
+  );
   const result = new Map<string, { namespace: string; line: number }>();
 
   // Convert to extractor format: store only first occurrence per key

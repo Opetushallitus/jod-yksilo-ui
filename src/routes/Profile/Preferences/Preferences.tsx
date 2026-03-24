@@ -1,5 +1,6 @@
 import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { LogoutFormContext } from '@/routes/Root';
 import { useToolStore } from '@/stores/useToolStore';
 import { isFeatureEnabled } from '@/utils/features';
@@ -22,6 +23,7 @@ const Preferences = () => {
   const resetToolStore = useToolStore((state) => state.reset);
   const logoutForm = React.useContext(LogoutFormContext);
   const { showDialog } = useModal();
+  const guardedAction = useSessionGuardedAction();
 
   const deleteProfile = async () => {
     resetToolStore();
@@ -85,13 +87,11 @@ const Preferences = () => {
             variant="white-delete"
             ariaHaspopup="dialog"
             label={t('preferences.delete-profile.action')}
-            onClick={() => {
-              showDialog({
-                title: t('preferences.delete-profile.action'),
-                description: t('preferences.delete-profile.confirm'),
-                onConfirm: deleteProfile,
-              });
-            }}
+            onClick={guardedAction(showDialog, {
+              title: t('preferences.delete-profile.action'),
+              description: t('preferences.delete-profile.confirm'),
+              onConfirm: deleteProfile,
+            })}
             testId="pref-delete-profile"
           />
         </section>

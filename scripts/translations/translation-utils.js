@@ -35,7 +35,6 @@ export function flattenObject(obj, prefix = '') {
   if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) {
     return result;
   }
-
   for (const key in obj) {
     if (!Object.hasOwn(obj, key)) continue;
 
@@ -167,7 +166,10 @@ export function isExceptionMatch(relativePath, codeLine) {
  * @param {string} defaultNamespace - Default namespace if not specified
  * @returns {{namespace: string, key: string}} - Parsed namespace and key
  */
-export function parseNamespaceKey(fullKey, defaultNamespace = 'yksilo') {
+export function parseNamespaceKey(fullKey, defaultNamespace) {
+  if (typeof defaultNamespace !== 'string' || defaultNamespace.trim() === '') {
+    throw new Error('parseNamespaceKey: defaultNamespace must be a non-empty string');
+  }
   if (fullKey.includes(':')) {
     const parts = fullKey.split(':');
     return {
@@ -205,6 +207,99 @@ export function getBaseKey(key) {
     }
   }
   return key;
+}
+
+/**
+ * Build namespace → set of key paths from code key map ('namespace:key' → usages).
+ *
+ * @param {Map<string, unknown>} codeKeys - Map from extractStaticKeys
+ * @returns {Record<string, Set<string>>}
+ */
+export function buildCodeKeysByNamespaceFromMap(codeKeys) {
+  const grouped = {};
+
+  for (const fullKey of codeKeys.keys()) {
+    const colonIndex = fullKey.indexOf(':');
+    if (colonIndex <= 0) {
+      continue;
+    }
+    const namespace = fullKey.substring(0, colonIndex);
+    const keyPath = fullKey.substring(colonIndex + 1);
+    if (!grouped[namespace]) {
+      grouped[namespace] = new Set();
+    }
+    grouped[namespace].add(keyPath);
+  }
+
+  return grouped;
+}
+
+/**
+ * Whether a key path appears used in code for a namespace (matches plural/base rules).
+ *
+ * @param {string} keyPath - Key after namespace prefix
+ * @param {Set<string>|undefined} usedKeysInNamespace
+ * @returns {boolean}
+ */
+export function isKeyPathUsedInNamespace(keyPath, usedKeysInNamespace) {
+  if (!usedKeysInNamespace) {
+    return false;
+  }
+  if (usedKeysInNamespace.has(keyPath)) {
+    return true;
+  }
+  if (isPluralKey(keyPath)) {
+    const baseKey = getBaseKey(keyPath);
+    if (usedKeysInNamespace.has(baseKey)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Namespaces (from projectNamespaces) where this key path is referenced in code.
+ *
+ * @param {string} keyPath
+ * @param {Record<string, Set<string>>} codeKeysByNamespace
+ * @param {string[]} projectNamespaces
+ * @returns {Set<string>}
+ */
+export function getNamespacesUsingKeyPath(keyPath, codeKeysByNamespace, projectNamespaces) {
+  const ns = new Set();
+  for (const namespace of projectNamespaces) {
+    const set = codeKeysByNamespace[namespace];
+    if (isKeyPathUsedInNamespace(keyPath, set)) {
+      ns.add(namespace);
+    }
+  }
+  return ns;
+}
+
+/**
+ * True if keyPath is used in code under any project namespace other than excludeNamespace.
+ *
+ * @param {string} keyPath
+ * @param {string} excludeNamespace
+ * @param {Record<string, Set<string>>} codeKeysByNamespace
+ * @param {string[]} projectNamespaces
+ * @returns {boolean}
+ */
+export function isKeyPathUsedInOtherProjectNamespace(
+  keyPath,
+  excludeNamespace,
+  codeKeysByNamespace,
+  projectNamespaces,
+) {
+  for (const ns of projectNamespaces) {
+    if (ns === excludeNamespace) {
+      continue;
+    }
+    if (isKeyPathUsedInNamespace(keyPath, codeKeysByNamespace[ns])) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**

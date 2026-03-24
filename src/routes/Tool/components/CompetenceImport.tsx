@@ -3,6 +3,7 @@ import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import { components } from '@/api/schema';
 import { type FilterData, useInitializeFilters } from '@/hooks/useInitializeFilters';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { CompetenceFilters } from '@/routes/Profile/Competences/CompetenceFilters';
 import { CompetenceSourceType, FILTERS_ORDER, type FiltersType } from '@/routes/Profile/Competences/constants';
 import { CompetenceDataGroup } from '@/routes/Profile/Competences/loader';
@@ -61,6 +62,8 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
     kiinnostukset,
     kiinnostuksetVapaateksti,
   } = useLoaderData<ToolLoaderData>();
+
+  const guardedAction = useSessionGuardedAction();
 
   const filterData: FilterData = React.useMemo(
     () => ({
@@ -283,7 +286,9 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
       disabled={!isLoggedIn}
       variant="gray"
       size="sm"
-      onClick={showImportDialog}
+      onClick={() => {
+        guardedAction(showImportDialog)();
+      }}
     />
   );
 };

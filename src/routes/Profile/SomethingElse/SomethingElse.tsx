@@ -1,5 +1,6 @@
 import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { Button, EmptyState, Tag, useMediaQueries } from '@jod/design-system';
@@ -18,6 +19,7 @@ const SomethingElse = () => {
   const { showModal } = useModal();
   const { lg } = useMediaQueries();
   const { muuOsaaminen } = useLoaderData();
+  const guardedAction = useSessionGuardedAction();
 
   const sortedData = React.useMemo(
     () => [...muuOsaaminen].sort(sortByProperty(`nimi.${language}`)),
@@ -72,9 +74,7 @@ const SomethingElse = () => {
             variant="accent"
             ariaHaspopup="dialog"
             label={muuOsaaminen.length > 0 ? t('profile.competences.edit') : t('profile.competences.add')}
-            onClick={() => {
-              showModal(EditMuuOsaaminenModal, { data: muuOsaaminen });
-            }}
+            onClick={guardedAction(showModal, EditMuuOsaaminenModal, { data: muuOsaaminen })}
             data-testid="something-else-edit"
           />
         </div>

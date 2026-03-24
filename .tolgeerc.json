@@ -5,6 +5,8 @@
   "patterns": ["./src/**/*.ts?(x)"],
   "extractor": "./extractor.ts",
   "defaultNamespace": "yksilo",
+  "sharedNamespace": "common",
+  "allowedCrossNamespaceDuplicates": [],
   "push": {
     "filesTemplate": "./src/i18n/{namespace}/{languageTag}.json",
     "language": ["en", "fi", "sv"],

@@ -4,10 +4,11 @@
  * Tolgee Tag Management Script
  *
  * This script manages tags in Tolgee for translation keys based on their usage in the project:
- * 1. Tags common namespace keys used in this project with the defaultNamespace tag (e.g., "ohjaaja")
- * 2. Removes the defaultNamespace tag from common namespace keys NOT used in this project
+ * 1. Tags shared-namespace keys (sharedNamespace in .tolgeerc.json) with the defaultNamespace tag (e.g., "ohjaaja")
+ * 2. Removes the defaultNamespace tag from shared-namespace keys NOT used in this project
  * 3. Tags unused keys in project namespaces with "deprecated" if they have no tags
  * 4. Removes "deprecated" tag if key is brought back into use
+ * 5. Tags keys as "deprecated" when unused in this namespace but the same key path is used in another project namespace (namespace migration)
  *
  * When tagging keys as deprecated, the script also adds a JIRA ticket ID tag if available.
  * This allows tracking which ticket deprecated the key and when it can be safely removed.
@@ -20,12 +21,18 @@
  * Usage:
  *   TOLGEE_API_KEY=your_api_key node scripts/translations/manage-tags.js
  *   TOLGEE_API_KEY=your_api_key JIRA_TICKET_ID=OPHJOD-1234 node scripts/translations/manage-tags.js
+ *
+ * Options:
+ *   --dry-run, -n   List planned tag changes only; do not call Tolgee to add or remove tags.
+ *                   Still requires TOLGEE_API_KEY to fetch current keys from Tolgee.
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { extractStaticKeys, getBaseKey, isPluralKey } from './translation-utils.js';
+import { JIRA_TICKET_PATTERN, processKeyTags } from './manage-tags-logic.js';
+import { getTolgeeConfigPathFromScriptsDir, readAndValidateTolgeeConfig } from './tolgee-config.js';
+import { buildCodeKeysByNamespaceFromMap, extractStaticKeys, isKeyPathUsedInNamespace } from './translation-utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,17 +41,6 @@ const __dirname = path.dirname(__filename);
 const TOLGEE_API_URL = 'https://app.tolgee.io';
 const SRC_DIR = path.join(__dirname, '../../src');
 const CODE_EXTENSIONS = ['.ts', '.tsx'];
-// JIRA ticket ID pattern (e.g., OPHJOD-1234)
-const JIRA_TICKET_PATTERN = /\b(OPHJOD-\d+)\b/;
-
-/**
- * Load Tolgee configuration
- */
-function loadTolgeeConfig() {
-  const configPath = path.join(__dirname, '../../.tolgeerc.json');
-  const content = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-  return content;
-}
 
 /**
  * Get all files with specific extensions recursively
@@ -93,28 +89,6 @@ function extractKeysFromCode(defaultNamespace) {
 }
 
 /**
- * Group keys by namespace
- */
-function groupKeysByNamespace(keys) {
-  const grouped = {};
-
-  for (const fullKey of keys.keys()) {
-    const colonIndex = fullKey.indexOf(':');
-    if (colonIndex > 0) {
-      const namespace = fullKey.substring(0, colonIndex);
-      const key = fullKey.substring(colonIndex + 1);
-
-      if (!grouped[namespace]) {
-        grouped[namespace] = new Set();
-      }
-      grouped[namespace].add(key);
-    }
-  }
-
-  return grouped;
-}
-
-/**
  * Get all translation keys from Tolgee via API
  */
 async function getTolgeeKeys(projectId, apiKey) {
@@ -148,6 +122,18 @@ async function getTolgeeKeys(projectId, apiKey) {
 }
 
 /**
+ * @param {string[]} newTagNames
+ * @param {Array<{ id: number; name: string }>} currentTags
+ * @returns {{ tagsToAdd: string[]; tagsToRemove: Array<{ id: number; name: string }> }}
+ */
+function computeTagDiff(newTagNames, currentTags = []) {
+  const currentTagNames = new Set(currentTags.map((t) => t.name));
+  const tagsToAdd = newTagNames.filter((name) => !currentTagNames.has(name));
+  const tagsToRemove = currentTags.filter((tag) => !newTagNames.includes(tag.name));
+  return { tagsToAdd, tagsToRemove };
+}
+
+/**
  * Update tags for a key - adds new tags and removes old ones
  * @param {number} projectId - Tolgee project ID
  * @param {string} apiKey - Tolgee API key
@@ -158,13 +144,7 @@ async function getTolgeeKeys(projectId, apiKey) {
  * @param {Array} currentTags - Current tags on the key (with id and name)
  */
 async function updateKeyTags(projectId, apiKey, keyId, keyName, namespace, newTagNames, currentTags = []) {
-  const currentTagNames = new Set(currentTags.map((t) => t.name));
-
-  // Find tags to add (in newTagNames but not in currentTagNames)
-  const tagsToAdd = newTagNames.filter((name) => !currentTagNames.has(name));
-
-  // Find tags to remove (in currentTagNames but not in newTagNames)
-  const tagsToRemove = currentTags.filter((tag) => !newTagNames.includes(tag.name));
+  const { tagsToAdd, tagsToRemove } = computeTagDiff(newTagNames, currentTags);
 
   // Add new tags
   for (const tagName of tagsToAdd) {
@@ -216,25 +196,8 @@ async function updateKeyTags(projectId, apiKey, keyId, keyName, namespace, newTa
 /**
  * Check if a key is used in code (accounting for plural forms)
  */
-function isKeyUsedInCode(keyName, namespace, usedKeysInNamespace) {
-  if (!usedKeysInNamespace) {
-    return false;
-  }
-
-  // Check if the key itself is used
-  if (usedKeysInNamespace.has(keyName)) {
-    return true;
-  }
-
-  // Check if this is a plural form and its base key is used
-  if (isPluralKey(keyName)) {
-    const baseKey = getBaseKey(keyName);
-    if (usedKeysInNamespace.has(baseKey)) {
-      return true;
-    }
-  }
-
-  return false;
+function isKeyUsedInCode(keyName, _namespace, usedKeysInNamespace) {
+  return isKeyPathUsedInNamespace(keyName, usedKeysInNamespace);
 }
 
 /**
@@ -274,110 +237,168 @@ async function getJiraTicketId() {
   return null;
 }
 
+function printScriptBanner(dryRun) {
+  console.log('🏷️  Tolgee Tag Management Script\n');
+  if (dryRun) {
+    console.log('⚠️  DRY RUN — tag changes will not be sent to Tolgee (read-only fetch).\n');
+  }
+}
+
+function printProjectConfigSummary(projectId, defaultNamespace, sharedNamespace, projectNamespaces) {
+  console.log(`📝 Project ID: ${projectId}`);
+  console.log(`📝 Default namespace: ${defaultNamespace}`);
+  console.log(`📝 Shared namespace: ${sharedNamespace}`);
+  console.log(`📝 Project namespaces: ${projectNamespaces.join(', ')}`);
+}
+
+function printJiraTicketLine(jiraTicketId) {
+  if (jiraTicketId) {
+    console.log(`🎫 JIRA Ticket: ${jiraTicketId}`);
+  } else {
+    console.log(`🎫 JIRA Ticket: Not detected (deprecated keys won't be tagged with ticket ID)`);
+  }
+  console.log('');
+}
+
+function logCodeKeysStats(codeKeys, codeKeysByNamespace) {
+  console.log(`   Found ${codeKeys.size} unique keys in code`);
+  for (const [namespace, keys] of Object.entries(codeKeysByNamespace)) {
+    console.log(`   • ${namespace}: ${keys.size} keys`);
+  }
+  console.log('');
+}
+
 /**
- * Process tag updates for a single key
+ * @returns {Promise<{ taggedCount: number; untaggedCount: number; deprecatedCount: number; undeprecatedCount: number } | null>}
  */
-function processKeyTags(keyNamespace, keyName, currentTags, isUsed, defaultNamespace, jiraTicketId = null) {
-  let newTags = [...currentTags];
-  let needsUpdate = false;
-  let taggedCount = 0;
-  let untaggedCount = 0;
-  let deprecatedCount = 0;
-  let undeprecatedCount = 0;
+async function applyTolgeeKeyTagChanges(tolgeeKey, options) {
+  const {
+    defaultNamespace,
+    projectNamespaces,
+    codeKeysByNamespace,
+    sharedNamespace,
+    jiraTicketId,
+    projectId,
+    apiKey,
+    dryRun,
+  } = options;
 
-  // Task 1: Tag common namespace keys used in this project with defaultNamespace tag
-  if (keyNamespace === 'common' && isUsed && !currentTags.includes(defaultNamespace)) {
-    console.log(`   + Adding "${defaultNamespace}" tag to common:${keyName}`);
-    newTags.push(defaultNamespace);
-    needsUpdate = true;
-    taggedCount++;
+  const keyNamespace = tolgeeKey.keyNamespace || defaultNamespace;
+  const keyName = tolgeeKey.keyName;
+  const keyId = tolgeeKey.keyId;
+  const currentTags = (tolgeeKey.keyTags || []).map((tag) => tag.name);
+
+  if (!projectNamespaces.includes(keyNamespace)) {
+    return null;
   }
 
-  // Task 2: Remove defaultNamespace tag from common namespace keys NOT used in this project
-  if (keyNamespace === 'common' && !isUsed && currentTags.includes(defaultNamespace)) {
-    console.log(`   - Removing "${defaultNamespace}" tag from common:${keyName}`);
-    newTags = newTags.filter((tag) => tag !== defaultNamespace);
-    needsUpdate = true;
-    untaggedCount++;
+  const isUsed = isKeyUsedInCode(keyName, keyNamespace, codeKeysByNamespace[keyNamespace]);
+  const result = processKeyTags({
+    keyNamespace,
+    keyName,
+    currentTags,
+    isUsed,
+    defaultNamespace,
+    sharedNamespace,
+    jiraTicketId,
+    codeKeysByNamespace,
+    projectNamespaces,
+  });
+
+  if (!result.needsUpdate) {
+    return null;
   }
 
-  // Task 3: Tag unused keys with "deprecated" if they have no tags (after removal)
-  if (!isUsed && newTags.length === 0) {
-    const ticketInfo = jiraTicketId ? ` (${jiraTicketId})` : '';
-    console.log(`   📌 Adding "deprecated" tag to ${keyNamespace}:${keyName}${ticketInfo}`);
-    newTags.push('deprecated');
-    // Also add JIRA ticket ID tag if available
-    if (jiraTicketId && !currentTags.includes(jiraTicketId)) {
-      newTags.push(jiraTicketId);
+  const currentKeyTags = tolgeeKey.keyTags || [];
+  if (dryRun) {
+    const { tagsToAdd, tagsToRemove } = computeTagDiff(result.newTags, currentKeyTags);
+    const parts = [];
+    if (tagsToAdd.length) {
+      parts.push(`add: ${tagsToAdd.join(', ')}`);
     }
-    needsUpdate = true;
-    deprecatedCount++;
+    if (tagsToRemove.length) {
+      parts.push(`remove: ${tagsToRemove.map((t) => t.name).join(', ')}`);
+    }
+    if (parts.length) {
+      console.log(`   [dry-run] ${keyNamespace}:${keyName} → ${parts.join(' | ')}`);
+    }
+  } else {
+    await updateKeyTags(projectId, apiKey, keyId, keyName, keyNamespace, result.newTags, currentKeyTags);
   }
 
-  // Task 4: Remove "deprecated" tag if key is brought back into use
-  if (isUsed && currentTags.includes('deprecated')) {
-    // Find all JIRA ticket tags that will be removed
-    const jiraTagsToRemove = currentTags.filter((tag) => JIRA_TICKET_PATTERN.test(tag));
-    const jiraInfo = jiraTagsToRemove.length > 0 ? ` and JIRA tag(s): ${jiraTagsToRemove.join(', ')}` : '';
-    console.log(`   ♻️  Removing "deprecated" tag from ${keyNamespace}:${keyName}${jiraInfo}`);
-    newTags = newTags.filter((tag) => tag !== 'deprecated');
-    // Also remove any JIRA ticket ID tags when undeprecating
-    newTags = newTags.filter((tag) => !JIRA_TICKET_PATTERN.test(tag));
-    needsUpdate = true;
-    undeprecatedCount++;
+  return {
+    taggedCount: result.taggedCount,
+    untaggedCount: result.untaggedCount,
+    deprecatedCount: result.deprecatedCount,
+    undeprecatedCount: result.undeprecatedCount,
+  };
+}
+
+function printTagRunSummary(dryRun, counts, sharedNamespace, defaultNamespace) {
+  const { taggedCount, untaggedCount, deprecatedCount, undeprecatedCount } = counts;
+
+  console.log('\n═══════════════════════════════════════════════════════════════');
+  console.log(
+    dryRun
+      ? '                    DRY RUN SUMMARY                         '
+      : '                         SUMMARY                               ',
+  );
+  console.log('═══════════════════════════════════════════════════════════════\n');
+
+  if (dryRun) {
+    console.log(`Would tag ${taggedCount} shared-namespace (${sharedNamespace}) key(s) with "${defaultNamespace}"`);
+    console.log(
+      `Would remove "${defaultNamespace}" tag from ${untaggedCount} shared-namespace (${sharedNamespace}) key(s)`,
+    );
+    console.log(`Would tag ${deprecatedCount} unused key(s) with "deprecated"`);
+    console.log(`Would remove "deprecated" tag from ${undeprecatedCount} key(s) brought back into use\n`);
+    console.log('Dry run finished — Tolgee was not modified.\n');
+    return;
   }
 
-  return { newTags, needsUpdate, taggedCount, untaggedCount, deprecatedCount, undeprecatedCount };
+  console.log(`✅ Tagged ${taggedCount} shared-namespace (${sharedNamespace}) key(s) with "${defaultNamespace}"`);
+  console.log(
+    `✅ Removed "${defaultNamespace}" tag from ${untaggedCount} shared-namespace (${sharedNamespace}) key(s)`,
+  );
+  console.log(`✅ Tagged ${deprecatedCount} unused key(s) with "deprecated"`);
+  console.log(`✅ Removed "deprecated" tag from ${undeprecatedCount} key(s) brought back into use\n`);
+  console.log('🎉 Done!\n');
 }
 
 async function main() {
-  console.log('🏷️  Tolgee Tag Management Script\n');
+  const argv = new Set(process.argv.slice(2));
+  const dryRun = argv.has('--dry-run') || argv.has('-n');
 
-  // Check for API key
+  printScriptBanner(dryRun);
+
   const apiKey = process.env.TOLGEE_API_KEY;
   if (!apiKey) {
     console.error('❌ Error: TOLGEE_API_KEY environment variable is required');
-    console.error('   Usage: TOLGEE_API_KEY=your_api_key node scripts/translations/manage-tags.js\n');
+    console.error('   Usage: TOLGEE_API_KEY=your_api_key node scripts/translations/manage-tags.js [--dry-run|-n]\n');
     process.exit(1);
   }
 
   try {
-    // Load configuration
-    const config = loadTolgeeConfig();
-    const projectId = config.projectId;
-    const defaultNamespace = config.defaultNamespace;
-    const projectNamespaces = config.pull.namespaces || ['yksilo', 'common'];
+    const validated = readAndValidateTolgeeConfig(getTolgeeConfigPathFromScriptsDir());
+    const projectId = validated.projectId;
+    const defaultNamespace = validated.defaultNamespace;
+    const sharedNamespace = validated.sharedNamespace;
+    const projectNamespaces = validated.projectNamespaces;
 
-    console.log(`📝 Project ID: ${projectId}`);
-    console.log(`📝 Default namespace: ${defaultNamespace}`);
-    console.log(`📝 Project namespaces: ${projectNamespaces.join(', ')}`);
+    printProjectConfigSummary(projectId, defaultNamespace, sharedNamespace, projectNamespaces);
 
-    // Detect JIRA ticket ID
     const jiraTicketId = await getJiraTicketId();
-    if (jiraTicketId) {
-      console.log(`🎫 JIRA Ticket: ${jiraTicketId}`);
-    } else {
-      console.log(`🎫 JIRA Ticket: Not detected (deprecated keys won't be tagged with ticket ID)`);
-    }
-    console.log('');
+    printJiraTicketLine(jiraTicketId);
 
-    // Extract keys used in code
     console.log('🔍 Extracting translation keys from code...');
     const codeKeys = extractKeysFromCode(defaultNamespace);
-    const codeKeysByNamespace = groupKeysByNamespace(codeKeys);
+    const codeKeysByNamespace = buildCodeKeysByNamespaceFromMap(codeKeys);
+    logCodeKeysStats(codeKeys, codeKeysByNamespace);
 
-    console.log(`   Found ${codeKeys.size} unique keys in code`);
-    for (const [namespace, keys] of Object.entries(codeKeysByNamespace)) {
-      console.log(`   • ${namespace}: ${keys.size} keys`);
-    }
-    console.log('');
-
-    // Fetch all keys from Tolgee
     console.log('🌐 Fetching translation keys from Tolgee...');
     const tolgeeKeys = await getTolgeeKeys(projectId, apiKey);
     console.log(`   Found ${tolgeeKeys.length} keys in Tolgee\n`);
 
-    // Process keys
     let taggedCount = 0;
     let untaggedCount = 0;
     let deprecatedCount = 0;
@@ -385,38 +406,33 @@ async function main() {
 
     console.log('📋 Processing translation keys...\n');
 
+    const tagOptions = {
+      defaultNamespace,
+      projectNamespaces,
+      codeKeysByNamespace,
+      sharedNamespace,
+      jiraTicketId,
+      projectId,
+      apiKey,
+      dryRun,
+    };
+
     for (const tolgeeKey of tolgeeKeys) {
-      const keyNamespace = tolgeeKey.keyNamespace || 'yksilo';
-      const keyName = tolgeeKey.keyName;
-      const keyId = tolgeeKey.keyId;
-      const currentTags = (tolgeeKey.keyTags || []).map((tag) => tag.name);
-
-      // Skip keys not in project namespaces
-      if (!projectNamespaces.includes(keyNamespace)) {
-        continue;
-      }
-
-      const isUsed = isKeyUsedInCode(keyName, keyNamespace, codeKeysByNamespace[keyNamespace]);
-      const result = processKeyTags(keyNamespace, keyName, currentTags, isUsed, defaultNamespace, jiraTicketId);
-
-      if (result.needsUpdate) {
-        taggedCount += result.taggedCount;
-        untaggedCount += result.untaggedCount;
-        deprecatedCount += result.deprecatedCount;
-        undeprecatedCount += result.undeprecatedCount;
-
-        await updateKeyTags(projectId, apiKey, keyId, keyName, keyNamespace, result.newTags, tolgeeKey.keyTags || []);
+      const delta = await applyTolgeeKeyTagChanges(tolgeeKey, tagOptions);
+      if (delta) {
+        taggedCount += delta.taggedCount;
+        untaggedCount += delta.untaggedCount;
+        deprecatedCount += delta.deprecatedCount;
+        undeprecatedCount += delta.undeprecatedCount;
       }
     }
 
-    console.log('\n═══════════════════════════════════════════════════════════════');
-    console.log('                         SUMMARY                               ');
-    console.log('═══════════════════════════════════════════════════════════════\n');
-    console.log(`✅ Tagged ${taggedCount} common namespace key(s) with "${defaultNamespace}"`);
-    console.log(`✅ Removed "${defaultNamespace}" tag from ${untaggedCount} common namespace key(s)`);
-    console.log(`✅ Tagged ${deprecatedCount} unused key(s) with "deprecated"`);
-    console.log(`✅ Removed "deprecated" tag from ${undeprecatedCount} key(s) brought back into use\n`);
-    console.log('🎉 Done!\n');
+    printTagRunSummary(
+      dryRun,
+      { taggedCount, untaggedCount, deprecatedCount, undeprecatedCount },
+      sharedNamespace,
+      defaultNamespace,
+    );
   } catch (error) {
     console.error('\n❌ Error:', error.message);
     console.error(error.stack);

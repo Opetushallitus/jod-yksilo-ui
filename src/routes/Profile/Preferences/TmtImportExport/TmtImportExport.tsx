@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { Button, Spinner, useNoteStack } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
@@ -98,12 +99,13 @@ const TmtImportExport = () => {
     [addTemporaryNote, t],
   );
 
+  const guardedAction = useSessionGuardedAction();
+
   const startImport = React.useCallback(() => {
     if (importPending) {
       return;
     }
-
-    showDialog({
+    guardedAction(showDialog, {
       title: t('preferences.tmt-import-export.import.modal.title'),
       description: t('preferences.tmt-import-export.import.modal.step-1-description'),
       confirmText: t('preferences.tmt-import-export.continue-to-tmt'),
@@ -113,14 +115,14 @@ const TmtImportExport = () => {
         sessionStorage.setItem(STORAGE_KEY, 'import');
         globalThis.location.href = `/yksilo/oauth2/authorization/tmt-haku?callback=${callbackUrl}&lang=${language}`;
       },
-    });
-  }, [callbackUrl, importPending, showDialog, t, language]);
+    })();
+  }, [importPending, guardedAction, showDialog, t, callbackUrl, language]);
 
   const startExport = React.useCallback(() => {
     if (exportPending) {
       return;
     }
-    showDialog({
+    guardedAction(showDialog, {
       title: t('preferences.tmt-import-export.export.modal.title'),
       description: t('preferences.tmt-import-export.export.modal.step-1-description'),
       confirmText: t('preferences.tmt-import-export.continue-to-tmt'),
@@ -130,8 +132,8 @@ const TmtImportExport = () => {
         sessionStorage.setItem(STORAGE_KEY, 'export');
         globalThis.location.href = `/yksilo/oauth2/authorization/tmt-vienti?callback=${callbackUrl}&lang=${language}`;
       },
-    });
-  }, [callbackUrl, exportPending, showDialog, t, language]);
+    })();
+  }, [exportPending, guardedAction, showDialog, t, callbackUrl, language]);
 
   // For triggering the export modals' 2nd phase after successful authorization.
   // If authentication is successful, the TMT export endpoint is immidiately called.

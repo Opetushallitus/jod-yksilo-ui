@@ -91,14 +91,14 @@ const Root = () => {
       }
       addTemporaryNote(() => ({
         id: sessionWarningNoteId,
-        title: t('session.warning.title'),
-        description: t('session.warning.description'),
+        title: t('common:session.warning.note.title'),
+        description: t('common:session.warning.note.description'),
         variant: 'warning',
         readMoreComponent: (
           <Button
             size="sm"
             variant="white"
-            label={t('session.warning.continue')}
+            label={t('common:session.warning.continue')}
             onClick={async () => {
               removeTemporaryNote(sessionWarningNoteId);
               await extend();
@@ -121,21 +121,21 @@ const Root = () => {
 
       addPermanentNote(() => ({
         id: sessionExpiredNoteId,
-        title: t('session.expired.title'),
-        description: t('session.expired.description'),
+        title: t('common:session.expired.note.title'),
+        description: t('common:session.expired.note.description'),
         variant: 'error',
         readMoreComponent: (
           <div className="flex gap-4">
             <Button
               size="sm"
               variant="white"
-              label={t('session.expired.login')}
+              label={t('common:session.expired.login')}
               linkComponent={getLinkTo(loginLink, { useAnchor: true })}
             />
             <Button
               size="sm"
               variant="white"
-              label={t('session.expired.continue')}
+              label={t('common:session.expired.continue')}
               onClick={() => {
                 disable(); // Disables any future warnings or expirations
                 removePermanentNote(sessionExpiredNoteId);
