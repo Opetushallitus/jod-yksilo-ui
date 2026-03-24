@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicatesByKey } from '@/utils';
 import { Button, Checkbox } from '@jod/design-system';
@@ -23,6 +24,8 @@ export const CompetenceExport = () => {
       setKiinnostukset: state.setKiinnostukset,
     })),
   );
+
+  const guardedAction = useSessionGuardedAction();
 
   const hasCompetencesToExport = React.useMemo(() => {
     return osaamiset.some((o) => o.tyyppi === 'KARTOITETTU') || kiinnostukset.some((k) => k.tyyppi === 'KARTOITETTU');
@@ -100,7 +103,9 @@ export const CompetenceExport = () => {
       label={t('tool.my-own-data.export.export-button')}
       data-testid="competence-export-button"
       size="sm"
-      onClick={showExportDialog}
+      onClick={() => {
+        guardedAction(showExportDialog)();
+      }}
     />
   );
 };

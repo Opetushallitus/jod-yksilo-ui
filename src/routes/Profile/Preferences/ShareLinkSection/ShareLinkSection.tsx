@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { formatDate } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Accordion, Button, EmptyState, useMediaQueries } from '@jod/design-system';
@@ -18,6 +19,7 @@ const SESSION_STORAGE_KEY = 'openShareLinkAccordions';
 const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
   const { t, i18n } = useTranslation();
   const { showModal, showDialog } = useModal();
+  const guardedAction = useSessionGuardedAction();
   const { sm } = useMediaQueries();
   const { jakolinkit } = useLoaderData<PreferencesLoaderData>();
   const previousJakolinkkiIds = React.useRef<string[]>(jakolinkit.map((j) => j.id!).filter(Boolean));
@@ -125,6 +127,18 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                 />
               );
 
+              const deleteDialogProps = {
+                title: t('preferences.share.delete-confirm-title'),
+                description: t('preferences.share.delete-confirm-description'),
+                confirmText: t('common:delete'),
+                onConfirm: async () => {
+                  await client.DELETE('/api/profiili/jakolinkki/{id}', {
+                    params: { path: { id: linkki.id! } },
+                  });
+                  deleteLocalJakolinkki(linkki.id!);
+                },
+              };
+
               const deleteButton = (
                 <Button
                   size="sm"
@@ -132,19 +146,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                   ariaHaspopup="dialog"
                   className={`w-fit ${sm && !expired ? 'ml-auto' : ''}`}
                   label={t('preferences.share.delete-link')}
-                  onClick={() => {
-                    showDialog({
-                      title: t('preferences.share.delete-confirm-title'),
-                      description: t('preferences.share.delete-confirm-description'),
-                      confirmText: t('common:delete'),
-                      onConfirm: async () => {
-                        await client.DELETE('/api/profiili/jakolinkki/{id}', {
-                          params: { path: { id: linkki.id! } },
-                        });
-                        deleteLocalJakolinkki(linkki.id!);
-                      },
-                    });
-                  }}
+                  onClick={guardedAction(showDialog, deleteDialogProps)}
                 />
               );
 
@@ -175,11 +177,9 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                           variant="white"
                           className="w-fit"
                           label={t('preferences.share.edit-link')}
-                          onClick={() =>
-                            showModal(NewShareLinkModal, {
-                              id: linkki.id,
-                            })
-                          }
+                          onClick={guardedAction(showModal, NewShareLinkModal, {
+                            id: linkki.id,
+                          })}
                         />
                         <Button
                           size="sm"
@@ -205,7 +205,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
         label={t('preferences.share.create-new-link')}
         ariaHaspopup="dialog"
         variant="accent"
-        onClick={() => showModal(NewShareLinkModal)}
+        onClick={guardedAction(showModal, NewShareLinkModal)}
       />
     </section>
   );

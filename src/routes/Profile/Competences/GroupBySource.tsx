@@ -1,5 +1,7 @@
 import type { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
+import { useShowSessionExpiredDialog } from '@/hooks/useShowSessionExpiredDialog';
+import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
 import { removeDuplicatesByKey } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Accordion, Button, EmptyState, Tag } from '@jod/design-system';
@@ -24,6 +26,8 @@ export const GroupBySource = ({
 
   const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
   const competencesSlug = t('slugs.profile.competences');
+  const isSessionExpired = useSessionExpirationStore((state) => state.sessionExpired);
+  const showSessionExpiredDialog = useShowSessionExpiredDialog();
 
   // Remove duplicate osaamiset per lähdetyyppi
   const nonDuplicateOsaamiset = React.useMemo(() => {
@@ -65,10 +69,24 @@ export const GroupBySource = ({
     KIINNOSTUS: '',
   };
 
-  const getLinkButton = (competence: CompetenceSourceType) =>
-    competence && links[competence] ? (
+  const getLinkButton = (competence: CompetenceSourceType) => {
+    const link = competence && links[competence];
+
+    if (!link) {
+      return null;
+    }
+
+    const buttonActionProps = isSessionExpired
+      ? {
+          onClick: showSessionExpiredDialog,
+        }
+      : {
+          linkComponent: getLinkTo(link),
+        };
+
+    return (
       <Button
-        linkComponent={getLinkTo(links[competence])}
+        {...buttonActionProps}
         key={competence}
         label={linkLabels[competence]}
         icon={<JodArrowRight />}
@@ -78,7 +96,8 @@ export const GroupBySource = ({
         className="w-fit"
         data-testid={`competences-move-to-${competence.toLowerCase()}`}
       />
-    ) : null;
+    );
+  };
 
   return (
     <>

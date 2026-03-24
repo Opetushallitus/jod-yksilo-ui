@@ -2,6 +2,7 @@ import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/comp
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useEnvironment } from '@/hooks/useEnvironment/index';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal';
@@ -38,6 +39,7 @@ const EducationHistory = () => {
   const { showModal, showDialog } = useModal();
   const [baselineKoulutusIds, setBaselineKoulutusIds] = React.useState<string[] | null>(null);
   const [koulutuksetThatNeedUserVerification, setKoulutuksetThatNeedUserVerification] = React.useState<string[]>([]);
+  const guardedAction = useSessionGuardedAction();
 
   React.useEffect(() => {
     const importedData = Array.from(
@@ -274,9 +276,9 @@ const EducationHistory = () => {
         rows={rows}
         koulutuksetThatNeedUserVerification={koulutuksetThatNeedUserVerification}
         verifyKoulutusOsaamiset={verifyKoulutusOsaamiset}
-        onRowClick={onRowClick}
-        onNestedRowClick={onNestedRowClick}
-        onAddNestedRowClick={onAddNestedRowClick}
+        onRowClick={(row) => guardedAction(onRowClick, row)()}
+        onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
+        onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}
       />
       <div className="flex space-x-4 px-5 sm:px-6">
         <div className="mb-[84px]">
@@ -284,9 +286,7 @@ const EducationHistory = () => {
             variant="accent"
             ariaHaspopup="dialog"
             label={t('education-history.add-new-education')}
-            onClick={() => {
-              showModal(EducationHistoryWizard);
-            }}
+            onClick={guardedAction(showModal, EducationHistoryWizard)}
             testId="education-history-add"
           />
         </div>
@@ -300,7 +300,7 @@ const EducationHistory = () => {
               ariaHaspopup="dialog"
               variant="white"
               label={t('education-history.import-education-history')}
-              onClick={openImportStartModal}
+              onClick={guardedAction(openImportStartModal)}
               disabled={isOsaamisetTunnistusOngoing}
               testId="education-history-import"
             />

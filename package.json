@@ -19,7 +19,8 @@
     "translations:check": "node ./scripts/translations/analyze-translations.js",
     "translations:fetch": "node ./scripts/translations/fetch-translations.js",
     "translations:push": "tolgee push",
-    "translations:tag": "node ./scripts/translations/manage-tags.js"
+    "translations:tag": "node ./scripts/translations/manage-tags.js",
+    "translations:tag:dry": "node ./scripts/translations/manage-tags.js --dry-run"
   },
   "dependencies": {
     "@hookform/error-message": "^2.0.1",

@@ -136,6 +136,27 @@
   "print": "Tulosta",
   "required": "pakollinen",
   "return-home": "Palaa etusivulle",
+  "session": {
+    "expired": {
+      "continue": "Jatka kirjautumatta",
+      "login": "Kirjaudu uudelleen",
+      "modal": {
+        "description": "Toiminnon suorittaminen ei ole mahdollista, koska istuntosi on aikakatkaistu.",
+        "title": "Istuntosi on aikakatkaistu"
+      },
+      "note": {
+        "description": "Miten haluat jatkaa?",
+        "title": "Istuntosi on aikakatkaistu"
+      }
+    },
+    "warning": {
+      "continue": "Jatka käyttöä",
+      "note": {
+        "description": "Jatka palvelun käyttöä kirjautuneena.",
+        "title": "Istuntosi päättyy pian"
+      }
+    }
+  },
   "share": "Jaa",
   "show-all": "Näytä kaikki",
   "skiplinks": {

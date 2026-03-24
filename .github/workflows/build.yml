@@ -32,6 +32,9 @@ jobs:
       - name: Run Prettier
         run: npx prettier . --check
 
+      - name: Run translations:check
+        run: npm run translations:check
+
       - name: Run Vitest unit tests
         run: npx vitest --coverage.enabled true
 

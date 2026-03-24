@@ -1,5 +1,6 @@
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
 import { EmptyState, useMediaQueries } from '@jod/design-system';
 import React from 'react';
@@ -28,6 +29,7 @@ const FreeTimeActivities = () => {
   const title = t('profile.free-time-activities.title');
   const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot, osaamisetMap));
   const { showModal } = useModal();
+  const guardedAction = useSessionGuardedAction();
 
   React.useEffect(() => {
     setRows(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot, osaamisetMap));
@@ -82,12 +84,10 @@ const FreeTimeActivities = () => {
         addNewLabel={t('free-time-activities.add-new-free-time-activity')}
         addNewNestedLabel={t('free-time-activities.add-new-activity')}
         rows={rows}
-        onAddClick={() => {
-          showModal(FreeTimeActivitiesWizard);
-        }}
-        onRowClick={onRowClick}
-        onNestedRowClick={onNestedRowClick}
-        onAddNestedRowClick={onAddNestedRowClick}
+        onAddClick={guardedAction(showModal, FreeTimeActivitiesWizard)}
+        onRowClick={(row) => guardedAction(onRowClick, row)()}
+        onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
+        onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}
       />
       {lg ? null : (
         <div className="px-5">

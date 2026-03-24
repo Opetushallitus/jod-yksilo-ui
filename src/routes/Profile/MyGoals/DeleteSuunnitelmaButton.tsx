@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { getLocalizedText } from '@/utils';
 import { Button, useMediaQueries } from '@jod/design-system';
 import toast from 'react-hot-toast/headless';
@@ -17,6 +18,7 @@ const DeleteSuunnitelmaButton = ({ tavoiteId, suunnitelmaId, className, name, on
   const { t } = useTranslation();
   const { showDialog } = useModal();
   const { sm } = useMediaQueries();
+  const guardedAction = useSessionGuardedAction();
 
   const deletePolku = async () => {
     if (!tavoiteId || !suunnitelmaId) {
@@ -43,13 +45,11 @@ const DeleteSuunnitelmaButton = ({ tavoiteId, suunnitelmaId, className, name, on
         variant="white-delete"
         size={sm ? 'lg' : 'sm'}
         className="h-5"
-        onClick={() => {
-          showDialog({
-            title: t('profile.my-goals.delete-plan-title'),
-            description: t('profile.my-goals.delete-plan-description', { name: suunnitelmaName }),
-            onConfirm: deletePolku,
-          });
-        }}
+        onClick={guardedAction(showDialog, {
+          title: t('profile.my-goals.delete-plan-title'),
+          description: t('profile.my-goals.delete-plan-description', { name: suunnitelmaName }),
+          onConfirm: deletePolku,
+        })}
       />
     </div>
   ) : null;

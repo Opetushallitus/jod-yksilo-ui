@@ -8,13 +8,16 @@
  * 1. Missing translations (keys in code but not in translation files)
  * 2. Unused translations (keys in translation files but not used in code)
  * 3. Dynamic translation keys (cannot be statically analyzed)
- * 4. Duplicate keys across namespaces
+ * 4. Duplicate keys across namespaces (fatal only if used in multiple namespaces in code, or unused in code; allowlist overrides)
  *
  * Supports i18next plural forms (_one, _other, _many, _few, _zero)
  *
  * Exit codes:
  *   0 - All checks passed (unused translations are OK)
  *   1 - Critical issues found (missing translations, dynamic keys, or duplicate keys)
+ *
+ * Optional .tolgeerc.json: "allowedCrossNamespaceDuplicates" — string key paths or
+ * { "key": "path", "namespaces": ["a","b"] } to allow JSON duplicates before code is updated.
  *
  * Usage:
  *   node scripts/translations/analyze-translations.js
@@ -23,11 +26,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getTolgeeConfigPathFromScriptsDir, readAndValidateTolgeeConfig } from './tolgee-config.js';
 import {
   PLURAL_SUFFIXES,
+  buildCodeKeysByNamespaceFromMap,
   extractStaticKeys,
   flattenObject,
   getBaseKey,
+  getNamespacesUsingKeyPath,
   isPluralKey,
   processDynamicKeys,
 } from './translation-utils.js';
@@ -42,23 +48,10 @@ const I18N_BASE_DIR = path.join(SRC_DIR, 'i18n');
 const CODE_EXTENSIONS = ['.ts', '.tsx'];
 
 /**
- * Load Tolgee configuration
+ * Locale-aware copy sort for namespace strings (deterministic comparisons / display).
  */
-function loadTolgeeConfig() {
-  const configPath = path.join(__dirname, '../../.tolgeerc.json');
-  if (fs.existsSync(configPath)) {
-    const content = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-    return content;
-  }
-  return { defaultNamespace: 'yksilo' }; // fallback
-}
-
-/**
- * Get namespaces from i18n directory
- */
-function getNamespaces() {
-  const items = fs.readdirSync(I18N_BASE_DIR, { withFileTypes: true });
-  return items.filter((item) => item.isDirectory()).map((item) => item.name);
+function sortStringsCopy(items) {
+  return [...items].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
 }
 
 /**
@@ -280,20 +273,102 @@ function findDuplicateKeysAcrossNamespaces(translationsByLang) {
   const duplicates = [];
   for (const [key, namespaces] of Object.entries(keyToNamespaces)) {
     if (namespaces.size > 1) {
-      duplicates.push({ key, namespaces: Array.from(namespaces).sort() });
+      duplicates.push({ key, namespaces: sortStringsCopy(namespaces) });
     }
   }
 
   return duplicates;
 }
 
+/**
+ * Tolgee allowlist: plain string matches duplicate key path.
+ */
+function allowlistStringMatches(entry, dupKey) {
+  return typeof entry === 'string' && entry === dupKey;
+}
+
+/**
+ * Tolgee allowlist: object { key, namespaces? } matches duplicate row.
+ */
+function allowlistObjectMatches(entry, dup, dupNsJoined) {
+  if (!entry || typeof entry !== 'object' || typeof entry.key !== 'string') {
+    return false;
+  }
+  if (entry.key !== dup.key) {
+    return false;
+  }
+  if (!entry.namespaces || entry.namespaces.length === 0) {
+    return true;
+  }
+  return sortStringsCopy(entry.namespaces).join(',') === dupNsJoined;
+}
+
+/**
+ * Tolgee allowlist entry: string key path, or { key, namespaces? } for JSON-first migration.
+ */
+function isDuplicateAllowedByConfig(dup, allowedList) {
+  if (!allowedList || !Array.isArray(allowedList)) {
+    return false;
+  }
+  const dupNsJoined = sortStringsCopy(dup.namespaces).join(',');
+  for (const entry of allowedList) {
+    if (allowlistStringMatches(entry, dup.key) || allowlistObjectMatches(entry, dup, dupNsJoined)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Classify one duplicate row for partition (fatal vs migration).
+ */
+function classifyDuplicatePartition(dup, codeKeysByNs, projectNamespaces, allowedList) {
+  if (isDuplicateAllowedByConfig(dup, allowedList)) {
+    return { kind: 'migration', record: { ...dup, reason: 'allowlist' } };
+  }
+  const namespacesInCode = getNamespacesUsingKeyPath(dup.key, codeKeysByNs, projectNamespaces);
+  if (namespacesInCode.size === 0 || namespacesInCode.size > 1) {
+    return { kind: 'fatal', record: dup };
+  }
+  return {
+    kind: 'migration',
+    record: {
+      ...dup,
+      namespacesInCode: sortStringsCopy(namespacesInCode),
+      reason: 'single-namespace-in-code',
+    },
+  };
+}
+
+/**
+ * Split raw JSON duplicates into fatal vs migration (allowed) using code references and allowlist.
+ */
+function partitionDuplicatesByCodeUsage(rawDuplicates, codeKeysByNs, projectNamespaces, allowedList) {
+  const fatal = [];
+  const migration = [];
+
+  for (const dup of rawDuplicates) {
+    const outcome = classifyDuplicatePartition(dup, codeKeysByNs, projectNamespaces, allowedList);
+    if (outcome.kind === 'fatal') {
+      fatal.push(outcome.record);
+    } else {
+      migration.push(outcome.record);
+    }
+  }
+
+  return { fatal, migration };
+}
+
 function analyzeTranslations() {
   console.log('🔍 Analyzing translation keys...\n');
 
-  // Load Tolgee configuration
-  const tolgeeConfig = loadTolgeeConfig();
-  const defaultNamespace = tolgeeConfig.defaultNamespace;
-  console.log(`📝 Default namespace: ${defaultNamespace}\n`);
+  const translationConfig = readAndValidateTolgeeConfig(getTolgeeConfigPathFromScriptsDir());
+  const defaultNamespace = translationConfig.defaultNamespace;
+  const allowedCrossNamespaceDuplicates = translationConfig.allowedCrossNamespaceDuplicates;
+  const namespaces = translationConfig.projectNamespaces;
+  console.log(`📝 Default namespace: ${defaultNamespace}`);
+  console.log(`📝 Shared namespace: ${translationConfig.sharedNamespace}`);
+  console.log(`📝 Project namespaces: ${namespaces.join(', ')}\n`);
 
   // Extract keys from code
   const { keysMap: codeKeys, dynamicKeys } = extractKeysFromCode(defaultNamespace);
@@ -302,10 +377,6 @@ function analyzeTranslations() {
     console.log(`⚠️  Found ${dynamicKeys.length} dynamic translation key(s) that cannot be analyzed`);
   }
   console.log('');
-
-  // Get namespaces and load translations for all languages and namespaces
-  const namespaces = getNamespaces();
-  console.log(`📁 Found namespaces: ${namespaces.join(', ')}\n`);
 
   const translationsByLang = {};
   for (const lang of LANGUAGES) {
@@ -327,8 +398,17 @@ function analyzeTranslations() {
     results[lang] = analyzeLanguage(lang, codeKeys, translationsByLang);
   }
 
-  // Find duplicate keys across namespaces
-  results.duplicates = findDuplicateKeysAcrossNamespaces(translationsByLang);
+  // Find duplicate keys across namespaces (fatal vs migration-in-progress)
+  const rawDuplicates = findDuplicateKeysAcrossNamespaces(translationsByLang);
+  const codeKeysByNs = buildCodeKeysByNamespaceFromMap(codeKeys);
+  const { fatal, migration } = partitionDuplicatesByCodeUsage(
+    rawDuplicates,
+    codeKeysByNs,
+    namespaces,
+    allowedCrossNamespaceDuplicates,
+  );
+  results.duplicates = fatal;
+  results.migrationDuplicates = migration;
 
   // Group code keys by namespace for statistics
   results.codeKeysByNamespace = groupKeysByNamespace(codeKeys);
@@ -506,7 +586,7 @@ function collectUnusedKeys(stats) {
  */
 function printUnusedKeys(allUnused) {
   console.log(`ℹ️  UNUSED KEYS (${allUnused.size}):\n`);
-  for (const key of Array.from(allUnused).sort()) {
+  for (const key of sortStringsCopy(allUnused)) {
     const keyWithoutNs = key.substring(key.indexOf(':') + 1);
     console.log(`  • ${keyWithoutNs}`);
   }
@@ -549,6 +629,27 @@ function printNamespaceAnalysis(results) {
  * Print duplicate keys warning
  */
 function printDuplicates(results) {
+  const migration = results.migrationDuplicates || [];
+
+  if (migration.length > 0) {
+    console.log('\n═══════════════════════════════════════════════════════════════');
+    console.log('          CROSS-NAMESPACE KEYS (OK — migration / allowlist)          ');
+    console.log('═══════════════════════════════════════════════════════════════\n');
+    console.log(
+      `ℹ️  ${migration.length} key(s) exist in multiple translation namespaces but code references at most one namespace (or are allowlisted). Not treated as errors.\n`,
+    );
+    for (const entry of migration) {
+      console.log(`  • ${entry.key}`);
+      console.log(`    Appears in: ${entry.namespaces.join(', ')}`);
+      if (entry.reason === 'allowlist') {
+        console.log(`    Reason: allowed via .tolgeerc.json (allowedCrossNamespaceDuplicates)`);
+      } else if (entry.namespacesInCode?.length) {
+        console.log(`    Referenced in code from: ${entry.namespacesInCode.join(', ')}`);
+      }
+    }
+    console.log('');
+  }
+
   if (results.duplicates.length === 0) {
     return;
   }
@@ -612,7 +713,7 @@ function printFinalStatus(results) {
 
   const hasMissingKeys = LANGUAGES.some((lang) => results[lang].missing.length > 0);
   const hasDynamicKeys = results.dynamicKeys && results.dynamicKeys.length > 0;
-  const hasDuplicates = results.duplicates && results.duplicates.length > 0;
+  const hasDuplicates = Array.isArray(results.duplicates) && results.duplicates.length > 0;
 
   const hasErrors = hasMissingKeys || hasDynamicKeys || hasDuplicates;
 

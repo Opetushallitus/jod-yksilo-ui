@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { formErrorMessage } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -25,6 +26,8 @@ const PersonalDetails = () => {
   const emailSchema = z.email(formErrorMessage.email()).nonoptional(formErrorMessage.required());
   // For tracking if user has interacted with the email field to prevent effect firing on mount
   const userInputRef = React.useRef(false);
+
+  const guardedAction = useSessionGuardedAction();
 
   // Prepare payload for persisting data.
   const getPayload = React.useCallback(() => {
@@ -102,11 +105,11 @@ const PersonalDetails = () => {
           <div className="flex items-center gap-3">
             <ToggleAllow
               checked={lupaLuovuttaaTiedotUlkopuoliselle}
-              onChange={() => {
+              onChange={guardedAction(() => {
                 const newValue = !lupaLuovuttaaTiedotUlkopuoliselle;
                 setLupaLuovuttaaTiedotUlkopuoliselle(newValue);
                 persist({ ...getPayload(), lupaLuovuttaaTiedotUlkopuoliselle: newValue });
-              }}
+              })}
             />
           </div>
         </div>
@@ -125,11 +128,11 @@ const PersonalDetails = () => {
           <div className="flex items-center gap-3">
             <ToggleAllow
               checked={lupaKayttaaTekoalynKoulutukseen}
-              onChange={() => {
+              onChange={guardedAction(() => {
                 const newValue = !lupaKayttaaTekoalynKoulutukseen;
                 setLupaKayttaaTekoalynKoulutukseen(newValue);
                 persist({ ...getPayload(), lupaKayttaaTekoalynKoulutukseen: newValue });
-              }}
+              })}
             />
           </div>
         </div>
@@ -170,9 +173,11 @@ const PersonalDetails = () => {
               placeholder="matti.meikalainen@suomi.fi"
               errorMessage={emailValid === false ? formErrorMessage.email().message : ''}
               onBlur={() => checkEmail(email)}
-              onChange={(e) => {
-                userInputRef.current = true;
-                setEmail(e.target.value);
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                guardedAction(() => {
+                  userInputRef.current = true;
+                  setEmail(e.target.value);
+                })();
               }}
             />
           }

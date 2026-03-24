@@ -1,5 +1,6 @@
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonantajaModal';
 import { WorkHistoryWizard } from '@/routes/Profile/WorkHistory/WorkHistoryWizard';
 import { EmptyState, useMediaQueries } from '@jod/design-system';
@@ -28,6 +29,7 @@ const WorkHistory = () => {
   const [rows, setRows] = React.useState(getWorkHistoryTableRows(tyopaikat, osaamisetMap));
   const { showModal } = useModal();
   const { lg } = useMediaQueries();
+  const guardedAction = useSessionGuardedAction();
 
   React.useEffect(() => {
     setRows(getWorkHistoryTableRows(tyopaikat, osaamisetMap));
@@ -83,12 +85,10 @@ const WorkHistory = () => {
         addNewLabel={t('work-history.add-new-workplace')}
         addNewNestedLabel={t('work-history.add-new-job-description')}
         rows={rows}
-        onAddClick={() => {
-          showModal(WorkHistoryWizard);
-        }}
-        onRowClick={onRowClick}
-        onNestedRowClick={onNestedRowClick}
-        onAddNestedRowClick={onAddNestedRowClick}
+        onAddClick={guardedAction(showModal, WorkHistoryWizard)}
+        onRowClick={(row) => guardedAction(onRowClick, row)()}
+        onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
+        onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}
       />
       {lg ? null : (
         <div className="px-5">

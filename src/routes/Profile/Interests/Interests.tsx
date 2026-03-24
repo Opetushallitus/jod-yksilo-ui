@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { MainLayout } from '@/components';
 import { ESCO_OCCUPATION_PREFIX } from '@/constants';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import EditKiinnostusModal from '@/routes/Profile/Interests/EditKiinnostusModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
 import { Button, EmptyState, Tag, useMediaQueries } from '@jod/design-system';
@@ -26,6 +27,7 @@ const Interests = () => {
     () => [...kiinnostukset].sort(sortByProperty(`nimi.${language}`)),
     [kiinnostukset, language],
   );
+  const guardedAction = useSessionGuardedAction();
 
   const sortedSkills = sortedData.filter((value) => !value.uri.startsWith(ESCO_OCCUPATION_PREFIX));
   const sortedOccupations = sortedData.filter((value) => value.uri.startsWith(ESCO_OCCUPATION_PREFIX));
@@ -102,9 +104,7 @@ const Interests = () => {
             variant="accent"
             ariaHaspopup="dialog"
             label={isAllSkillsEmpty ? t('profile.interests.add-interests') : t('profile.interests.edit-interests')}
-            onClick={() => {
-              showModal(EditKiinnostusModal, { data: kiinnostukset });
-            }}
+            onClick={guardedAction(showModal, EditKiinnostusModal, { data: kiinnostukset })}
             testId="interests-edit-button"
           />
         </div>
@@ -115,9 +115,11 @@ const Interests = () => {
             placeholder={t('profile.interests.freeform.placeholder')}
             text={vapaateksti}
             onChange={async (value) => {
-              await client.PUT('/api/profiili/kiinnostukset/vapaateksti', {
-                body: value,
-              });
+              guardedAction(async () => {
+                await client.PUT('/api/profiili/kiinnostukset/vapaateksti', {
+                  body: value,
+                });
+              })();
             }}
             testId="interests-freeform"
           />

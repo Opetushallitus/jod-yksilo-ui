@@ -136,6 +136,27 @@
   "print": "Print",
   "required": "mandatory",
   "return-home": "Return to the front page",
+  "session": {
+    "expired": {
+      "continue": "Continue without logging in",
+      "login": "Log in again",
+      "modal": {
+        "description": "The service cannot be performed because your session has expired.",
+        "title": "Your session has expired"
+      },
+      "note": {
+        "description": "How would you like to proceed?",
+        "title": "Your session has expired"
+      }
+    },
+    "warning": {
+      "continue": "Continue to use",
+      "note": {
+        "description": "Continue to use the service while logged in.",
+        "title": "Your session is about to expire"
+      }
+    }
+  },
   "share": "Share",
   "show-all": "Show all",
   "skiplinks": {

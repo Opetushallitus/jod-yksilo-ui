@@ -1,5 +1,5 @@
 import * as opintopolkuUtils from '@/utils/opintopolku';
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { OpintopolkuKoulutusList } from './OpintopolkuKoulutusList';
 
@@ -110,7 +110,7 @@ describe('OpintopolkuKoulutusList', () => {
     });
 
     const showMoreButton = screen.getByRole('button', { name: /show-more/i });
-    showMoreButton.click();
+    fireEvent.click(showMoreButton);
 
     await waitFor(() => {
       const items = screen.getAllByText('Test Koulutus');

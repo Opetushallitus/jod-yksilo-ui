@@ -1,5 +1,6 @@
 import type { components } from '@/api/schema';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import DeleteSuunnitelmaButton from '@/routes/Profile/MyGoals/DeleteSuunnitelmaButton';
 import { planLetter, planNumberPrefix } from '@/routes/Profile/MyGoals/planLetterUtil';
 import { getLocalizedText } from '@/utils';
@@ -30,6 +31,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
     </div>
   );
   const divider = <div className="border-b-2 border-border-gray" />;
+  const guardedAction = useSessionGuardedAction();
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -99,9 +101,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
                     label={t('edit')}
                     size={sm ? 'lg' : 'sm'}
                     className="h-5"
-                    onClick={() => {
-                      showModal(AddOrEditCustomPlanModal, { tavoite: goal, suunnitelmaId: s.id });
-                    }}
+                    onClick={guardedAction(showModal, AddOrEditCustomPlanModal, { tavoite: goal, suunnitelmaId: s.id })}
                     variant="white"
                   />
                 )}

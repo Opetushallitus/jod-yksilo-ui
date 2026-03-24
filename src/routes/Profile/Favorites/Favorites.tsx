@@ -2,9 +2,11 @@ import { FilterList, MainLayout, OpportunityCard } from '@/components';
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
 import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
 import type { MahdollisuusTyyppi } from '@/routes/types';
+import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
@@ -80,6 +82,8 @@ const Favorites = () => {
   const educationFilterText = t('education-opportunities');
   const { lg } = useMediaQueries();
   const [showFilters, setShowFilters] = React.useState(false);
+  const guardedAction = useSessionGuardedAction();
+  const isSessionExpired = useSessionExpirationStore((state) => state.sessionExpired);
 
   const descriptions = {
     KAIKKI: t('profile.favorites.you-have-no-job-nor-education-opportunities'),
@@ -269,9 +273,9 @@ const Favorites = () => {
               ammattiryhma={mahdollisuus?.ammattiryhma}
               ammattiryhmaNimet={ammattiryhmaNimet}
               isFavorite={true}
-              isLoggedIn={true}
+              isLoggedIn={!isSessionExpired}
               name={getLocalizedText(mahdollisuus.otsikko)}
-              toggleFavorite={() => void deleteSuosikki(id)}
+              toggleFavorite={guardedAction(deleteSuosikki, id)}
               mahdollisuusTyyppi={mahdollisuusTyyppi}
               mahdollisuusAlityyppi={getMahdollisuusAlityyppi(mahdollisuus)}
               kesto={mahdollisuus.kesto}
@@ -294,7 +298,7 @@ const Favorites = () => {
             <Pagination
               currentPage={pageNr}
               onPageChange={(data) => {
-                void fetchPage(data);
+                guardedAction(fetchPage, data)();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               pageSize={pageSize}

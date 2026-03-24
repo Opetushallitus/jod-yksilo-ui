@@ -1,5 +1,6 @@
 import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLinkTo } from '@/utils/routeUtils';
@@ -56,6 +57,8 @@ const MyGoals = () => {
     );
     return choosableSuosikit.length === 0;
   });
+
+  const guardedAction = useSessionGuardedAction();
 
   React.useEffect(() => {
     if (suosikitIsEmpty && !suosikitDialogShown && tavoitteet.length === 0) {
@@ -117,9 +120,7 @@ const MyGoals = () => {
       <Button
         variant="accent"
         ariaHaspopup="dialog"
-        onClick={() => {
-          showModal(GoalModal, { mode: 'ADD' });
-        }}
+        onClick={guardedAction(showModal, GoalModal, { mode: 'ADD' })}
         label={t('profile.my-goals.add-favorites-to-goals')}
         disabled={suosikitIsEmpty}
         testId="goals-add-favorites-button"
