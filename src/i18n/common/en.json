@@ -4,16 +4,16 @@
   "close-menu": "Close the menu",
   "competency-path-portal": "Front page of Competency Path",
   "delete": "Delete",
-  "error-boundary": {
-    "session-expired": "Your session has expired. You must log in to the service again or use the service without logging in.",
-    "title": "An error occurred",
-    "unexpected": "An unexpected error occurred. This may be due to a loss of network connection or a service error."
-  },
   "error": {
     "form": {
       "email": "Check the email address",
       "required": "Mandatory field"
     }
+  },
+  "error-boundary": {
+    "session-expired": "Your session has expired. You must log in to the service again or use the service without logging in.",
+    "title": "An error occurred",
+    "unexpected": "An unexpected error occurred. This may be due to a loss of network connection or a service error."
   },
   "external-link": "The link leads outside the service",
   "feedback": {
@@ -74,6 +74,7 @@
       "oph-label": "Finnish National Agency for Education",
       "tem-label": "Ministry of Economic Affairs and Employment"
     },
+    "more-info": "More information",
     "more-info-description": "Are you worried about data protection or the use of artificial intelligence in the service? Below, you will find a summary of general information about the service and its use.",
     "more-info-links": {
       "about-service": "About the service",
