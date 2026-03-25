@@ -66,6 +66,7 @@
     "title": "Kompetensprofil"
   },
   "date-or-continues-placeholder": "dd.mm.åååå",
+  "date-placeholder": "dd.mm.åååå",
   "datepicker": {
     "actions": {
       "close": "Stäng kalendern",
@@ -95,7 +96,6 @@
       "view": "Växla till dagsvy"
     }
   },
-  "date-placeholder": "dd.mm.åååå",
   "description": "Beskrivning",
   "do-filter": "Filtrera",
   "duration": "Längd",
@@ -112,8 +112,8 @@
     "delete-education-history": "Ta bort utbildning",
     "edit-degree-or-education": "Redigera examen eller utbildning",
     "edit-education": "Redigera utbildning",
-    "educational-institution-or-education-provider": "Läroanstalt eller utbildningsanordnare",
     "education-provider-or-education": "Utbildningsanordnare/utbildning",
+    "educational-institution-or-education-provider": "Läroanstalt eller utbildningsanordnare",
     "identify-competences": "Identifiera kompetenser",
     "import-education-history": "Importera min utbildningshistorik",
     "name-of-degree-or-education": "Namn på examen eller utbildning",
@@ -146,8 +146,8 @@
         "title": "Avbryt import"
       },
       "data-load-failed": "Laddning av uppgifter misslyckades. Försök på nytt senare.",
-      "data-loading": "Hämtar information...",
       "data-load-no-data": "Utbildningsinformation hittades inte eller så har du inte rätt att granska informationen.",
+      "data-loading": "Hämtar information...",
       "description": "I den här vyn kan du välja vilka utbildningar du vill importera. Efter importen kan du redigera och komplettera informationen i vyn Mina utbildningar.",
       "error-title": "Misslyckades med att importera data",
       "table-header-checkbox": "Importera valda",
@@ -239,11 +239,25 @@
       "title": "Välkommen till Kompetensstigen!"
     }
   },
+  "how-to-use": {
+    "create-profile-description": "I kompetensprofilen kan du spara din arbets- och utbildningshistorik och kartlägga ditt kunnande utifrån dem. Du kan spara favoriter, mål och planer. Du kan importera dina uppgifter från Jobbmarknaden och Studieinfo samt hantera användningen och delningen av dina uppgifter.",
+    "create-profile-disclaimer": "Obs! Innehåll som producerats med AI kan innehålla fel.",
+    "create-profile-more-info": "Läs mer: <CustomLink>Information om användningen av AI<Icon></Icon></CustomLink>",
+    "create-profile-title": "Logga in och skapa en kompetensprofil",
+    "education-history": "Utbildningshistorik",
+    "find-opportunities-description": "Med hjälp av AI skapar vi individuella förslag på möjligheter som passar dig. Vi visar möjligheter utifrån hur väl de motsvarar uppgifterna du har angett.",
+    "find-opportunities-title": "Hitta arbets- och utbildningsmöjligheter",
+    "find-opportunities-without-login-description": "Du kan kartlägga ditt kunnande och dina intressen utan att logga in och få förslag på möjligheter som passar dig utifrån de uppgifter du har angett.",
+    "find-opportunities-without-login-title": "Hitta möjligheter utan att logga in",
+    "find-with-words-description": "Sök arbets- och utbildningsmöjligheter med ordsökning, till exempel utifrån möjligheternas namn, beskrivning eller kunnande.",
+    "find-with-words-title": "Sök mer information med ordsökning",
+    "job-seeker-profile": "Jobbsökarprofil"
+  },
   "i-allow": "Jag tillåter",
   "i-disallow": "Jag tillåter inte",
+  "in-this-section": "I den här delen",
   "interests": "Kartlägg dina intressen",
   "interests-of-your-choice": "Valda intressen",
-  "in-this-section": "I den här delen",
   "introduction": {
     "step-1": {
       "item-1": "Se all information om ditt kunnande och dina intressen på en och samma plats",
@@ -385,7 +399,6 @@
   "move-to-service": "Öppna tjänsten",
   "my-competence-path": "Min kompetensstig",
   "my-competence-profile": "Min kompetensprofil",
-  "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning A — Ö",
   "my-competences": {
     "by-KOULUTUS": "Mina kunskaper från utbildningen",
     "by-MUU_OSAAMINEN": "Mitt övriga kunnande",
@@ -396,19 +409,20 @@
     "missing-PATEVYYS": "Inga kunskaper. Lägg till fritidsverksamhet.\n",
     "missing-TOIMENKUVA": "Inga kunskaper. Lägg till arbetsplatser.\n"
   },
+  "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning A — Ö",
   "my-competences-by-sources": "Mina kunskaper efter tema",
+  "n-education-opportunities": "{{count}} utbildningsmöjligheter",
+  "n-job-opportunities": "{{count}} karriärmöjligheter",
+  "n-months-short": "{{count}} mån",
+  "n-years_one": "{{count}} år",
+  "n-years_other": "{{count}} år",
   "navigation": {
     "main-section": {
       "title": "Personlig kompetensstig",
       "tool-title": "Hitta möjligheter"
     }
   },
-  "n-education-opportunities": "{{count}} utbildningsmöjligheter",
   "next": "Nästa",
-  "n-job-opportunities": "{{count}} karriärmöjligheter",
-  "n-months-short": "{{count}} mån",
-  "n-years_one": "{{count}} år",
-  "n-years_other": "{{count}} år",
   "on-this-page": "På denna sida",
   "opportunity-tooltip": {
     "education": {
@@ -672,13 +686,13 @@
       "description": "Nedan hittar du alla dina intressen som du har lagt till i din kompetensprofil. Intressen grupperas enligt typ.",
       "edit-interests": "Redigera intressen",
       "empty": "Du har ännu inte lagt till några intressen.",
+      "free-form-description-of-my-interests": "Fritt formulerad beskrivning av mina intressen",
+      "free-form-interests-description-guidance": "Du kan skriva och beskriva dina intressen med egna ord. Texten som du skriver sparas automatiskt. Om du använder tjänsten på finska, skriv på finska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.\n",
       "freeform": {
         "description": "Du kan skriva och beskriva dina intressen med egna ord. Texten du skriver sparas automatiskt. Om du använder tjänsten på svenska, skriv på svenska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.",
         "header": "Fritt formulerad beskrivning av mina intressen",
         "placeholder": "Beskriv med egna ord vad annat som intresserar dig"
       },
-      "free-form-description-of-my-interests": "Fritt formulerad beskrivning av mina intressen",
-      "free-form-interests-description-guidance": "Du kan skriva och beskriva dina intressen med egna ord. Texten som du skriver sparas automatiskt. Om du använder tjänsten på finska, skriv på finska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.\n",
       "occupations-that-interest-me": "Yrken som intresserar mig",
       "skills-that-interest-me": "Kunskaper som intresserar mig",
       "title": "Mina intressen"
@@ -750,13 +764,13 @@
       "goal-name": "Målnamn",
       "modify-goal": "Redigera mål",
       "my-plan-towards-goal": "Planalternativ",
+      "n-plans_one": "1 plan",
+      "n-plans_other": "{{count}} planer",
+      "n-plans_zero": "Du har inte lagt till några planer ännu",
       "no-chosen-competences": "Inga valda kompetenser",
       "no-favorites-selected": "Lägg först till favoriter som du kan skapa mål från.",
       "no-filtered-results": "Inga utbildningsmöjligheter. Justera filtren för att se alternativ.",
       "no-goals-created": "Du har inte lagt till några mål än.",
-      "n-plans_one": "1 plan",
-      "n-plans_other": "{{count}} planer",
-      "n-plans_zero": "Du har inte lagt till några planer ännu",
       "own-competences": "Egna kompetenser",
       "plan": "Plan",
       "remove-competence-description": "Ta bort kompetens från x-ikonen",

@@ -4,16 +4,16 @@
   "close-menu": "Sulje valikko",
   "competency-path-portal": "Osaamispolun etusivu",
   "delete": "Poista",
-  "error-boundary": {
-    "session-expired": "Istuntosi on vanhentunut. Sinun täytyy kirjautua palveluun uudelleen tai käyttää palvelua ilman kirjautumista.",
-    "title": "Tapahtui virhe",
-    "unexpected": "Tapahtui odottamaton virhe. Tämä voi johtua verkkoyhteyden katkeamisesta tai palvelun virheestä."
-  },
   "error": {
     "form": {
       "email": "Tarkista sähköpostiosoite",
       "required": "Pakollinen kenttä"
     }
+  },
+  "error-boundary": {
+    "session-expired": "Istuntosi on vanhentunut. Sinun täytyy kirjautua palveluun uudelleen tai käyttää palvelua ilman kirjautumista.",
+    "title": "Tapahtui virhe",
+    "unexpected": "Tapahtui odottamaton virhe. Tämä voi johtua verkkoyhteyden katkeamisesta tai palvelun virheestä."
   },
   "external-link": "Linkki johtaa palvelun ulkopuolelle",
   "feedback": {
@@ -94,6 +94,7 @@
   "logout": "Kirjaudu ulos",
   "main-navigation": "Päänavigaatio",
   "menu": "Valikko",
+  "more-info": "Lisätietoa",
   "navigation": {
     "external": {
       "ohjaaja": {
