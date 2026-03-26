@@ -60,6 +60,7 @@ const SomethingElse = () => {
               <Tag
                 label={getLocalizedText(val.nimi)}
                 tooltip={getLocalizedText(val.kuvaus)}
+                screenReaderTooltip={t('description-for', { description: getLocalizedText(val.kuvaus) })}
                 variant="presentation"
                 sourceType="jotain-muuta"
               />

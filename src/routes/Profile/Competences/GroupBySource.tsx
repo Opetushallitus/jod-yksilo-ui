@@ -113,6 +113,7 @@ export const GroupBySource = ({
                             <Tag
                               label={label}
                               tooltip={tooltip}
+                              screenReaderTooltip={t('description-for', { description: tooltip })}
                               variant="presentation"
                               sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
                             />

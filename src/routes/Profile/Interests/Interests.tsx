@@ -68,6 +68,7 @@ const Interests = () => {
                   <Tag
                     label={getLocalizedText(val.nimi)}
                     tooltip={getLocalizedText(val.kuvaus)}
+                    screenReaderTooltip={t('description-for', { description: getLocalizedText(val.kuvaus) })}
                     variant="presentation"
                     sourceType="kiinnostus"
                   />
@@ -87,6 +88,7 @@ const Interests = () => {
                   <Tag
                     label={getLocalizedText(val.nimi)}
                     tooltip={getLocalizedText(val.kuvaus)}
+                    screenReaderTooltip={t('description-for', { description: getLocalizedText(val.kuvaus) })}
                     variant="presentation"
                     sourceType="kiinnostus"
                   />

@@ -6,6 +6,7 @@ import { getLocalizedText } from '@/utils';
 import { animateHideElement } from '@/utils/animations';
 import { cx, Tag } from '@jod/design-system';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface AddedTagProps {
   onClick: (ids: string[]) => () => void;
@@ -16,6 +17,7 @@ interface AddedTagProps {
 const AddedTags = ({ osaamiset, lahdetyyppi, onClick, useAnimations = false }: AddedTagProps) => {
   const [shownIds, setShownIds] = React.useState<string[]>([]); // For handling newly added osaamiset
   const [debouncedIdsToBeRemoved, idsToBeRemoved, setIdsToBeRemoved] = useDebounceState<string[]>([], 300);
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     if (debouncedIdsToBeRemoved.length > 0) {
@@ -68,6 +70,7 @@ const AddedTags = ({ osaamiset, lahdetyyppi, onClick, useAnimations = false }: A
         <Tag
           label={getLocalizedText(osaaminen.nimi)}
           tooltip={idsToBeRemoved.includes(osaaminen.id) ? undefined : getLocalizedText(osaaminen.kuvaus)}
+          screenReaderTooltip={t('description-for', { description: getLocalizedText(osaaminen.kuvaus) })}
           sourceType={sourceType}
           onClick={(e) => {
             setIdsToBeRemoved([osaaminen.id, ...idsToBeRemoved]);

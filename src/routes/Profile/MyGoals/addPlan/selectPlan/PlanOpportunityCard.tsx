@@ -80,6 +80,7 @@ const PlanOpportunityCard = React.memo(
                 <Tag
                   label={getLocalizedText(osaaminen.nimi)}
                   tooltip={getLocalizedText(osaaminen.kuvaus)}
+                  screenReaderTooltip={t('description-for', { description: getLocalizedText(osaaminen.kuvaus) })}
                   variant="presentation"
                   sourceType="koulutus"
                 />

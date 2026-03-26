@@ -66,7 +66,6 @@
     "title": "Osaamisprofiili"
   },
   "date-or-continues-placeholder": "pp.kk.vvvv",
-  "date-placeholder": "pp.kk.vvvv",
   "datepicker": {
     "actions": {
       "close": "Sulje kalenteri",
@@ -96,7 +95,9 @@
       "view": "Vaihda päivänäkymään"
     }
   },
+  "date-placeholder": "pp.kk.vvvv",
   "description": "Kuvaus",
+  "description-for": "Kuvaus: {{description}}",
   "do-filter": "Suodata",
   "duration": "Kesto",
   "edit": "Muokkaa",
@@ -112,8 +113,8 @@
     "delete-education-history": "Poista koulutus",
     "edit-degree-or-education": "Muokkaa tutkintoa tai koulutusta",
     "edit-education": "Muokkaa koulutusta",
-    "education-provider-or-education": "Koulutuksen järjestäjä / koulutus",
     "educational-institution-or-education-provider": "Oppilaitos tai koulutuksen järjestäjä",
+    "education-provider-or-education": "Koulutuksen järjestäjä / koulutus",
     "identify-competences": "Tunnista osaamisia",
     "import-education-history": "Tuo koulutushistoriani",
     "name-of-degree-or-education": "Tutkinnon tai koulutuksen nimi",
@@ -146,8 +147,8 @@
         "title": "Peruuta tuonti"
       },
       "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
-      "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
       "data-loading": "Ladataan tietoja...",
+      "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
       "description": "Tässä näkymässä voit valita, mitkä koulutukset haluat tuoda. Tuonnin jälkeen voit muokata ja täydentää tietoja Koulutukseni-näkymässä.",
       "error-title": "Tietojen tuonti epäonnistui",
       "table-header-checkbox": "Tuo valitut",
@@ -254,9 +255,9 @@
   },
   "i-allow": "Sallin",
   "i-disallow": "En salli",
-  "in-this-section": "Tässä osiossa",
   "interests": "Kartoita kiinnostuksesi",
   "interests-of-your-choice": "Valitut kiinnostuksen kohteet",
+  "in-this-section": "Tässä osiossa",
   "introduction": {
     "step-1": {
       "item-1": "Näe kaikki osaamiseesi ja kiinnostuksiisi liittyvät tiedot kootusti yhdestä paikasta",
@@ -398,6 +399,7 @@
   "move-to-service": "Siirry palveluun",
   "my-competence-path": "Oma Osaamispolku",
   "my-competence-profile": "Osaamisprofiilini",
+  "my-competences-alphabetically": "Osaamiseni aakkosittain A — Ö",
   "my-competences": {
     "by-KOULUTUS": "Koulutuksesta kertynyt osaamiseni",
     "by-MUU_OSAAMINEN": "Muut osaamiseni",
@@ -408,20 +410,19 @@
     "missing-PATEVYYS": "Ei osaamisia. Siirry lisäämään vapaa-ajan toimintoja.",
     "missing-TOIMENKUVA": "Ei osaamisia. Siirry lisäämään työpaikkoja."
   },
-  "my-competences-alphabetically": "Osaamiseni aakkosittain A — Ö",
   "my-competences-by-sources": "Osaamiseni teeman mukaan",
-  "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
-  "n-job-opportunities": "Työmahdollisuudet {{count}} / {{total}}",
-  "n-months-short": "{{count}} kk",
-  "n-years_one": "{{count}} vuosi",
-  "n-years_other": "{{count}} vuotta",
   "navigation": {
     "main-section": {
       "title": "Henkilökohtainen osaamispolku",
       "tool-title": "Löydä mahdollisuuksia"
     }
   },
+  "n-education-opportunities": "Koulutusmahdollisuudet {{count}} / {{total}}",
   "next": "Seuraava",
+  "n-job-opportunities": "Työmahdollisuudet {{count}} / {{total}}",
+  "n-months-short": "{{count}} kk",
+  "n-years_one": "{{count}} vuosi",
+  "n-years_other": "{{count}} vuotta",
   "on-this-page": "Tällä sivulla",
   "opportunity-tooltip": {
     "education": {
@@ -685,13 +686,13 @@
       "description": "Löydät alta kaikki kiinnostuksen kohteesi, jotka olet lisännyt osaamisprofiiliisi. Kiinnostuksen kohteet ryhmitellään tyypin mukaan.",
       "edit-interests": "Muokkaa kiinnostuksia",
       "empty": "Et ole vielä lisännyt kiinnostuksia.",
-      "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus kiinnostuksistani",
-      "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin kiinnostuksiasi. Kirjoittamasi teksti tallentuu automaattisesti. Jos käytät palvelua suomeksi, kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten esimerkiksi henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.\n",
       "freeform": {
         "description": "Voit halutessasi kuvata kiinnostuksiasi omin sanoin. Kirjoita suomeksi, jos käytät palvelua suomeksi. Älä kirjoita kuvaukseen henkilötietoja, kuten henkilötunnusta, käyttäjätunnuksia tai terveystietoja.",
         "header": "Tekstikuvaus kiinnostuksistani",
         "placeholder": "Kerro omin sanoin, mikä muu sinua kiinnostaa"
       },
+      "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus kiinnostuksistani",
+      "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin kiinnostuksiasi. Kirjoittamasi teksti tallentuu automaattisesti. Jos käytät palvelua suomeksi, kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten esimerkiksi henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.\n",
       "occupations-that-interest-me": "Ammatit, jotka kiinnostavat minua",
       "skills-that-interest-me": "Osaamiset, jotka kiinnostavat minua",
       "title": "Kiinnostukseni"
@@ -763,13 +764,13 @@
       "goal-name": "Tavoitteen nimi",
       "modify-goal": "Muokkaa tavoitetta",
       "my-plan-towards-goal": "Suunnitelmavaihtoehdot",
-      "n-plans_one": "1 suunnitelma",
-      "n-plans_other": "{{count}} suunnitelmaa",
-      "n-plans_zero": "Et ole vielä lisännyt suunnitelmia",
       "no-chosen-competences": "Ei valittuja osaamisia",
       "no-favorites-selected": "Lisää ensin suosikkeja, joista voit luoda tavoitteita.",
       "no-filtered-results": "Ei koulutusmahdollisuuksia. Muokkaa säätimiä nähdäksesi vaihtoehtoja.",
       "no-goals-created": "Et ole vielä lisännyt tavoitteita.",
+      "n-plans_one": "1 suunnitelma",
+      "n-plans_other": "{{count}} suunnitelmaa",
+      "n-plans_zero": "Et ole vielä lisännyt suunnitelmia",
       "own-competences": "Omat taidot",
       "plan": "Suunnitelma",
       "remove-competence-description": "Poista osaaminen x-merkistä",
