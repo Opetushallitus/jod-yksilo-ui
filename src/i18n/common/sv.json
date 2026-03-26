@@ -4,16 +4,16 @@
   "close-menu": "Stäng menyn",
   "competency-path-portal": "Kompetensstigens ingångssida",
   "delete": "Ta bort",
+  "error-boundary": {
+    "session-expired": "Din session har gått ut. Du måste logga in på tjänsten igen eller använda tjänsten utan att logga in.",
+    "title": "Ett fel inträffade",
+    "unexpected": "Ett oväntat fel har inträffat. Detta kan bero på avbrott i nätförbindelsen eller ett fel i tjänsten."
+  },
   "error": {
     "form": {
       "email": "Kontrollera e-postadressen",
       "required": "Obligatoriskt fält"
     }
-  },
-  "error-boundary": {
-    "session-expired": "Din session har gått ut. Du måste logga in på tjänsten igen eller använda tjänsten utan att logga in.",
-    "title": "Ett fel inträffade",
-    "unexpected": "Ett oväntat fel har inträffat. Detta kan bero på avbrott i nätförbindelsen eller ett fel i tjänsten."
   },
   "external-link": "Länken leder dig utanför tjänsten",
   "feedback": {

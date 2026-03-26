@@ -108,34 +108,36 @@ const CompetencesRow = ({
   tagsVisibleState,
   showCheckbox,
   className,
-  t,
   sortedCompetences,
 }: {
   tagsVisibleState: boolean;
   showCheckbox?: boolean;
   className?: string;
-  t: (key: string) => string;
   sortedCompetences: ExperienceTableRowData['osaamiset'];
-}) => (
-  <tr>
-    {tagsVisibleState && !showCheckbox && (
-      <td colSpan={5} className={`${className} w-full max-w-0 px-4 pt-3 pb-5`.trim()}>
-        <ul className="flex flex-wrap gap-3" aria-label={t('competences')}>
-          {sortedCompetences.map((competence) => (
-            <li key={competence.id} className="max-w-full">
-              <Tag
-                label={getLocalizedText(competence.nimi)}
-                tooltip={getLocalizedText(competence.kuvaus)}
-                variant="presentation"
-                sourceType={competence.sourceType ?? 'jotain-muuta'}
-              />
-            </li>
-          ))}
-        </ul>
-      </td>
-    )}
-  </tr>
-);
+}) => {
+  const { t } = useTranslation();
+  return (
+    <tr>
+      {tagsVisibleState && !showCheckbox && (
+        <td colSpan={5} className={`${className} w-full max-w-0 px-4 pt-3 pb-5`.trim()}>
+          <ul className="flex flex-wrap gap-3" aria-label={t('competences')}>
+            {sortedCompetences.map((competence) => (
+              <li key={competence.id} className="max-w-full">
+                <Tag
+                  label={getLocalizedText(competence.nimi)}
+                  tooltip={getLocalizedText(competence.kuvaus)}
+                  screenReaderTooltip={t('description-for', { description: getLocalizedText(competence.kuvaus) })}
+                  variant="presentation"
+                  sourceType={competence.sourceType ?? 'jotain-muuta'}
+                />
+              </li>
+            ))}
+          </ul>
+        </td>
+      )}
+    </tr>
+  );
+};
 
 export const ExperienceTableRow = ({
   row,
@@ -389,7 +391,6 @@ export const ExperienceTableRow = ({
           tagsVisibleState={tagsVisibleState}
           showCheckbox={showCheckbox}
           className={className}
-          t={t}
           sortedCompetences={sortedCompetences}
         />
       </>

@@ -350,6 +350,9 @@ export const OsaamisSuosittelija = ({
                         ? undefined
                         : getLocalizedText(ehdotettuOsaaminen.kuvaus)
                     }
+                    screenReaderTooltip={t('description-for', {
+                      description: getLocalizedText(ehdotettuOsaaminen.kuvaus),
+                    })}
                     sourceType={
                       mode === 'osaamiset' ? OSAAMINEN_COLOR_MAP[sourceType] : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
                     }

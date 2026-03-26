@@ -169,6 +169,7 @@ const SelectCompetencesStep = () => {
                     // Do not show tooltip if user has clicked to add the skill
                     skillsToAdd.includes(o.uri) ? undefined : getLocalizedText(o.kuvaus)
                   }
+                  screenReaderTooltip={t('description-for', { description: getLocalizedText(o.kuvaus) })}
                   variant="selectable"
                   sourceType="koulutus"
                 />
