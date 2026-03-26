@@ -242,8 +242,8 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
               <p className="text-body-sm-mobile sm:text-body-sm font-arial w-full box-content px-5 md:px-9">
                 {t('profile.my-goals.choose-favorite-description')}
               </p>
-              <div className="flex flex-row mt-6 gap-5" ref={scrollRef}>
-                <div className="flex flex-col gap-3 w-full box-content md:pl-9">
+              <div className="flex flex-row mt-6 gap-5 w-full box-content md:pl-9" ref={scrollRef}>
+                <div className="flex flex-col gap-3 w-full">
                   {goalOptions.map((mahdollisuus) => {
                     const { id, mahdollisuusTyyppi } = mahdollisuus;
                     const isSelected = selectedMahdollisuus?.id === id;
@@ -264,7 +264,7 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
                         hideIcon={!sm}
                         actionButtonContent={
                           isSelected ? (
-                            <div className="flex sm:gap-4 not-sm:justify-between items-center">
+                            <div className="flex gap-4 not-sm:justify-between items-center">
                               <span
                                 className={tidyClasses([
                                   'flex',
@@ -288,12 +288,13 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
                               <ActionButton
                                 label={t('profile.my-goals.remove-from-goals')}
                                 onClick={() => setSelectedMahdollisuus(null)}
-                                className="order-1 sm:order-2 not-sm:px-0!"
+                                className="bg-bg-gray order-2 sm:order-1"
                                 icon={<JodFlagFilled className="text-accent" />}
                               />
                             </div>
                           ) : (
                             <ActionButton
+                              className="bg-bg-gray"
                               label={t('profile.my-goals.set-to-goal')}
                               onClick={() => setSelectedMahdollisuus(mahdollisuus)}
                               icon={<JodFlag className="text-accent" />}
@@ -304,7 +305,7 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
                     );
                   })}
                   {favoriteTyomahdollisuudet.length > 0 && (
-                    <div className="my-5 px-5 sm:px-6">
+                    <div className="my-5 px-5 sm:px-0">
                       <Pagination
                         currentPage={pageNr}
                         onPageChange={onPageChange}
