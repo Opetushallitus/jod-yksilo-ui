@@ -249,11 +249,11 @@
   },
   "how-to-use": {
     "create-profile-description": "Osaamisprofiilissa voit tallentaa työ- ja koulutushistoriaasi ja kartoittaa niiden pohjalta osaamisiasi. Voit tallentaa suosikkeja, tavoitteita ja suunnitelmia. Voit tuoda tietojasi Työmarkkinatorilta ja Opintopolusta, sekä hallita samalla tietojesi käyttöä ja jakamista.",
-    "create-profile-disclaimer": "Huom! Tekoälyllä tuotettu sisältö saattaa sisältää virheitä.",
-    "create-profile-more-info": "Lue lisää: <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink>",
     "create-profile-title": "Kirjaudu ja luo osaamisprofiili",
     "education-history": "Opintosuoritukset",
     "find-opportunities-description": "Muodostamme tekoälyn avulla yksilölliset ehdotukset sinulle sopivista mahdollisuuksista. Näytämme sinulle mahdollisuudet sen mukaan, miten hyvin ne sopivat antamiisi tietoihin.",
+    "find-opportunities-disclaimer": "Huom! Tekoälyllä tuotettu sisältö saattaa sisältää virheitä.",
+    "find-opportunities-more-info": "Lue lisää: <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink>",
     "find-opportunities-title": "Löydä työ- ja koulutusmahdollisuuksia",
     "find-opportunities-without-login-description": "Voit kartoittaa osaamistasi ja kiinnostuksen kohteitasi ilman kirjautumista sekä saada ehdotuksia sinulle sopivista mahdollisuuksista täyttämiesi tietojen perusteella.",
     "find-opportunities-without-login-title": "Löydä mahdollisuuksia kirjautumatta",

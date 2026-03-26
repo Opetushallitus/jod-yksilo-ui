@@ -251,11 +251,11 @@
   },
   "how-to-use": {
     "create-profile-description": "In the competence profile, you can save your work and education history and map your competences based on them. You can save favourites, goals and plans. You can import your data from Job Market Finland and Studyinfo and manage the use and sharing of your data.",
-    "create-profile-disclaimer": "Please note: AI-generated content may contain errors.",
-    "create-profile-more-info": "Read more: <CustomLink>Information on the use of AI<Icon></Icon></CustomLink>",
     "create-profile-title": "Log in and create a competence profile",
     "education-history": "Education history",
     "find-opportunities-description": "We use AI to create personalised suggestions for opportunities that suit you. We show opportunities based on how well they match the information you have provided.",
+    "find-opportunities-disclaimer": "Please note: AI-generated content may contain errors.",
+    "find-opportunities-more-info": "Read more: <CustomLink>Information on the use of AI<Icon></Icon></CustomLink>",
     "find-opportunities-title": "Find work and education opportunities",
     "find-opportunities-without-login-description": "You can map your skills and interests without logging in and receive suggestions for opportunities that suit you based on the information you provide.",
     "find-opportunities-without-login-title": "Find opportunities without logging in",

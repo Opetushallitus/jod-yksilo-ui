@@ -137,7 +137,23 @@ export function HowToUse() {
               </TooltipTrigger>
               <TooltipContent id={findOpportunitiesId}>
                 <p className="font-bold mb-2">{t('how-to-use.find-opportunities-title')}</p>
-                <p>{t('how-to-use.find-opportunities-description')}</p>
+                <p className="mb-3">{t('how-to-use.find-opportunities-description')}</p>
+                <p className="mb-2">{t('how-to-use.find-opportunities-disclaimer')}</p>
+                <p>
+                  <Trans
+                    i18nKey="how-to-use.find-opportunities-more-info"
+                    components={{
+                      Icon: <JodOpenInNew size={18} ariaLabel={t('common:external-link')} />,
+                      CustomLink: (
+                        <AnchorLink
+                          href={`/${language}/${t('common:slugs.ai-usage')}`}
+                          className="inline-flex underline"
+                          target="_blank"
+                        />
+                      ),
+                    }}
+                  />
+                </p>
               </TooltipContent>
             </Tooltip>
           </div>
@@ -164,23 +180,7 @@ export function HowToUse() {
                   </TooltipTrigger>
                   <TooltipContent id={createProfileId}>
                     <p className="font-bold mb-2">{t('how-to-use.create-profile-title')}</p>
-                    <p className="mb-3">{t('how-to-use.create-profile-description')}</p>
-                    <p className="mb-2">{t('how-to-use.create-profile-disclaimer')}</p>
-                    <p>
-                      <Trans
-                        i18nKey="how-to-use.create-profile-more-info"
-                        components={{
-                          Icon: <JodOpenInNew size={18} ariaLabel={t('common:external-link')} />,
-                          CustomLink: (
-                            <AnchorLink
-                              href={`/${language}/${t('common:slugs.ai-usage')}`}
-                              className="inline-flex underline"
-                              target="_blank"
-                            />
-                          ),
-                        }}
-                      />
-                    </p>
+                    <p>{t('how-to-use.create-profile-description')}</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
