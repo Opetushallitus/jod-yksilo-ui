@@ -250,11 +250,11 @@
   },
   "how-to-use": {
     "create-profile-description": "I kompetensprofilen kan du spara din arbets- och utbildningshistorik och kartlägga ditt kunnande utifrån dem. Du kan spara favoriter, mål och planer. Du kan importera dina uppgifter från Jobbmarknaden och Studieinfo samt hantera användningen och delningen av dina uppgifter.",
-    "create-profile-disclaimer": "Obs! Innehåll som producerats med AI kan innehålla fel.",
-    "create-profile-more-info": "Läs mer: <CustomLink>Information om användningen av AI<Icon></Icon></CustomLink>",
     "create-profile-title": "Logga in och skapa en kompetensprofil",
     "education-history": "Utbildningshistorik",
     "find-opportunities-description": "Med hjälp av AI skapar vi individuella förslag på möjligheter som passar dig. Vi visar möjligheter utifrån hur väl de motsvarar uppgifterna du har angett.",
+    "find-opportunities-disclaimer": "Obs! Innehåll som producerats med AI kan innehålla fel.",
+    "find-opportunities-more-info": "Läs mer: <CustomLink>Information om användningen av AI<Icon></Icon></CustomLink>",
     "find-opportunities-title": "Hitta arbets- och utbildningsmöjligheter",
     "find-opportunities-without-login-description": "Du kan kartlägga ditt kunnande och dina intressen utan att logga in och få förslag på möjligheter som passar dig utifrån de uppgifter du har angett.",
     "find-opportunities-without-login-title": "Hitta möjligheter utan att logga in",
