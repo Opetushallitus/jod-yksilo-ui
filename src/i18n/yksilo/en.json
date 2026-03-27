@@ -236,6 +236,14 @@
       "link-text": "Go to Guidance and counseling services",
       "title": "Do you need personal guidance?"
     },
+    "how-to-use": {
+      "title": "How to use My Competency Path",
+      "description-1": "In My Competency Path, you can map out your own competence and find work and education opportunities that suit your interests.",
+      "description-2": "Once you have identified your competences and interests, the service will suggest suitable work and education opportunities. You will also receive additional information, for example, about the job market and requirements in your field.",
+      "list-item-1": "You can use the service either logged in or without logging in.",
+      "list-item-2": "Without logging in, you can find work and education opportunities that match your competences and interests. Your information will not be saved in the service.",
+      "list-item-3": "As a logged-in user, you create a competence profile where you can import information from the Job Market Finland job seeker profile and Studyinfo study records. The competence profile allows you to make your competences visible, set goals, and make plans to achieve them."
+    },
     "welcome": {
       "content": "Competency Path service has been launched. The service is continuously developed based on user feedback. Features may change and new functionalities will be added regularly – thank you for being part of the journey!",
       "title": "Welcome to Competency Path!"
