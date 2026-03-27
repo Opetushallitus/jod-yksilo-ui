@@ -235,6 +235,14 @@
       "link-text": "Gå till Väglednings- och rådgivningstjänster",
       "title": "Behöver du personlig vägledning?"
     },
+    "how-to-use": {
+      "title": "Hur man använder Min kompetensstig",
+      "description-1": "I Min kompetensstig kan du kartlägga din egen kompetens och hitta arbets- och utbildningsmöjligheter som passar dina intressen.",
+      "description-2": "När du har identifierat dina kompetenser och intressen kommer tjänsten att föreslå lämpliga arbets- och utbildningsmöjligheter. Du får också ytterligare information, till exempel om arbetsmarknaden och krav inom ditt område.",
+      "list-item-1": "Du kan använda tjänsten antingen inloggad eller utan att logga in.",
+      "list-item-2": "Utan att logga in kan du hitta arbets- och utbildningsmöjligheter som matchar dina kompetenser och intressen. Din information sparas inte i tjänsten.",
+      "list-item-3": "Som inloggad användare skapar du en kompetensprofil där du kan importera information från Jobbmarknaden och Studieinfo. Kompetensprofilen gör det möjligt att synliggöra dina kompetenser, sätta mål och göra planer för att uppnå dem."
+    },
     "welcome": {
       "content": "Kompetensstigen-tjänsten har lanserats. Tjänsten utvecklas kontinuerligt baserat på användarfeedback. Funktioner kan förändras och nya funktioner kommer att läggas till regelbundet – tack för att du är med på resan!",
       "title": "Välkommen till Kompetensstigen!"

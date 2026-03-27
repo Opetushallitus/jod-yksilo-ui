@@ -223,16 +223,24 @@
     "card-1-title": "Etsi sopivia koulutus- ja työmahdollisuuksia nopeasti",
     "card-2-content": "Kirjaudu palveluun ja tunnista vahvuutesi sekä kiinnostuksen kohteesi. Tallenna työ- ja koulutushistoriasi myöhempää käyttöä varten.",
     "card-2-title": "Kirjaudu ja kartoita osaamistasi laajemmin",
-    "create-own-profile": "Luo oma osaamisprofiilisi",
+    "create-own-profile": "Luo oma osaamisprofiili",
     "explore-opportunities": "Löydä mahdollisuuksia",
     "hero-content": "Oma Osaamispolku -palvelussa voit kartoittaa omaa osaamistasi, löytää koulutuksia osaamisesi kasvattamiseksi, tutkia työmahdollisuuksia osaamisellasi ja kartoittaa mahdollisuuksia alan vaihtamiseen.",
     "hero-title": "Oma Osaamispolku",
     "need-personal-guidance": "Tarvitsetko henkilökohtaista ohjausta?",
     "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löydät tukea ura- ja koulutusvaihtoehtoihin liittyvään pohdintaan. Rajaa palveluiden listaa, jotta löydät sinulle parhaiten sopivat palvelut.",
     "personal-guidance": {
-      "content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua työ- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut.",
+      "content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua ura- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut.",
       "link-text": "Siirry Ohjaus- ja neuvontapalveluihin",
       "title": "Tarvitsetko henkilökohtaista ohjausta?"
+    },
+    "how-to-use": {
+      "title": "Miten käytät Oma Osaamispolkua",
+      "description-1": "Oma Osaamispolussa voit kartoittaa osaamiseesi ja kiinnostuksiisi sopivia työ- ja koulutusmahdollisuuksia.",
+      "description-2": "Kun olet tunnistanut osaamisesi ja kiinnostuksen kohteesi, palvelu ehdottaa sinulle sopivia työ- ja koulutusmahdollisuuksia. Saat myös lisätietoa esimerkiksi alan työtilanteesta ja vaatimuksista.",
+      "list-item-1": "Voit käyttää palvelua joko kirjautuneena tai kirjautumatta.",
+      "list-item-2": "Ilman kirjautumista voit löytää osaamiseesi ja kiinnostuksiisi sopivia työ- ja koulutusmahdollisuuksia. Tietosi eivät tallennu palveluun.",
+      "list-item-3": "Kirjautuneena käyttäjänä luot itsellesi osaamisprofiilin, johon voit tuodatietoja Työmarkkinatorin työnhakuprofiilista ja opintosuorituksia OmaOpintopolusta. Osaamisprofiilin avulla voit tehdä osaamisesi näkyväksi sekä asettaa tavoitteita ja tehdä suunnitelmia niiden saavuttamiseksi."
     },
     "welcome": {
       "content": "Osaamispolku-palvelu on julkaistu. Palvelua kehitetään edelleen käyttäjäpalautteen pohjalta. Toiminnot voivat muuttua ja uusia ominaisuuksia tulee lisää säännöllisesti – kiitos kun olet mukana matkassa!",
