@@ -834,8 +834,15 @@
       "title": "Mina arbetsplatser"
     }
   },
+  "proposals-loading": "Laddar förslag",
   "proposed-competences": "Föreslagna kunskaper",
+  "proposed-competences-found_zero": "Inga föreslagna kunskaper hittades",
+  "proposed-competences-found_one": "1 föreslagen kunskap hittades",
+  "proposed-competences-found_other": "{{count}} föreslagna kunskaper hittades",
   "proposed-interests": "Föreslagna intressen",
+  "proposed-interests-found_zero": "Inga föreslagna intressen hittades",
+  "proposed-interests-found_one": "1 föreslaget intresse hittades",
+  "proposed-interests-found_other": "{{count}} föreslagna intressen hittades",
   "rate-ai-content": {
     "ammatti": {
       "body": "På den här sidan har yrkesinformation kombinerats med statistik. Berätta för oss hur vi lyckades.",

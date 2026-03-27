@@ -835,8 +835,15 @@
       "title": "My jobs"
     }
   },
+  "proposals-loading": "Loading suggestions",
   "proposed-competences": "Suggested competences",
+  "proposed-competences-found_zero": "No suggested competences found",
+  "proposed-competences-found_one": "1 suggested competence found",
+  "proposed-competences-found_other": "{{count}} suggested competences found",
   "proposed-interests": "Suggested interests",
+  "proposed-interests-found_zero": "No suggested interests found",
+  "proposed-interests-found_one": "1 suggested interest found",
+  "proposed-interests-found_other": "{{count}} suggested interests found",
   "rate-ai-content": {
     "ammatti": {
       "body": "On this page, occupational information has been combined with statistical data. Tell us how we did.",

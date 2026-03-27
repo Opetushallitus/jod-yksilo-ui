@@ -62,12 +62,16 @@ export const OsaamisSuosittelija = ({
   useAnimations = true,
   scrollOnFocus = true,
   isTagSpacing = true,
+  // eslint-disable-next-line sonarjs/cognitive-complexity
 }: OsaamisSuosittelijaProps) => {
   const { i18n, t } = useTranslation();
   const [debouncedTaitosi, taitosi, setTaitosi] = useDebounceState('', 500);
   const [ehdotetutOsaamiset, setEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
   const [filteredEhdotetutOsaamiset, setFilteredEhdotetutOsaamiset] = React.useState<Osaaminen[]>([]);
-  const isFetching = React.useRef(false);
+  const [screenReaderResults, setScreenReaderResults] = React.useState('');
+  const [isFetching, setIsFetching] = React.useState(false);
+  const [hasFetched, setHasFetched] = React.useState(false); // To track if at least one fetch has been made, to avoid showing "0 results found" on initial render
+  const [resultChangeReason, setResultChangeReason] = React.useState<'fetch' | 'user' | null>(null); // To track if the change in results was caused by either user input or fetch results. Screen reader should only announce results found after fetch, not after user filtering.
   const addedTagsId = React.useId();
   const suggestedTagsId = React.useId();
   const pendingTaitosi = React.useRef<string | null>(null);
@@ -168,12 +172,12 @@ export const OsaamisSuosittelija = ({
 
   React.useEffect(() => {
     const fetchCompetences = async (value: string) => {
-      if (isFetching.current) {
+      if (isFetching) {
         pendingTaitosi.current = value; // Queue the latest value for next fetch
         return;
       }
       try {
-        isFetching.current = true;
+        setIsFetching(true);
         const ehdotus = await client.POST('/api/ehdotus/osaamiset', {
           body: { [i18n.language]: value },
         });
@@ -192,7 +196,9 @@ export const OsaamisSuosittelija = ({
           ),
         );
       } finally {
-        isFetching.current = false;
+        setIsFetching(false);
+        setHasFetched(true);
+        setResultChangeReason('fetch');
         // If a new value was queued, fetch it now
         if (pendingTaitosi.current && pendingTaitosi.current !== value) {
           const nextValue = pendingTaitosi.current;
@@ -202,12 +208,14 @@ export const OsaamisSuosittelija = ({
       }
     };
 
-    // Do not fetch if the input is empty
+    // Do not fetch if the input less than 3 characters, but clear suggestions if there are any
     if (debouncedTaitosi?.trim()?.length > 2) {
       void fetchCompetences(debouncedTaitosi);
     } else {
       setEhdotetutOsaamiset([]);
+      setHasFetched(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedTaitosi, i18n.language, mode]);
 
   React.useEffect(() => {
@@ -233,6 +241,7 @@ export const OsaamisSuosittelija = ({
       lastClickedIndexRef.current = { index: value.findIndex((val) => val.id === id), group: 'selected' };
       const valueWithoutRemoved = value.filter((val) => !ids.includes(val.id));
       onChange(valueWithoutRemoved);
+      setResultChangeReason('user');
     },
     [onChange, value],
   );
@@ -287,8 +296,26 @@ export const OsaamisSuosittelija = ({
     }
   };
 
+  React.useEffect(() => {
+    setScreenReaderResults('');
+
+    // Update the screen reader results count after a short delay to prevent announcing the previous count before the new one
+    const timeout = setTimeout(() => {
+      setScreenReaderResults(
+        mode === 'osaamiset'
+          ? t('proposed-competences-found', { count: filteredEhdotetutOsaamiset.length })
+          : t('proposed-interests-found', { count: filteredEhdotetutOsaamiset.length }),
+      );
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [isFetching, mode, filteredEhdotetutOsaamiset.length, t]);
+
   return (
     <>
+      <div aria-live="polite" role="status" className="sr-only">
+        {isFetching ? t('proposals-loading') : ''}
+        {hasFetched && !isFetching && resultChangeReason === 'fetch' ? screenReaderResults : ''}
+      </div>
       <div className="mb-4" ref={textareaContainerRef}>
         <Textarea
           placeholder={textareaPlaceholder()}
@@ -337,7 +364,9 @@ export const OsaamisSuosittelija = ({
               className="flex flex-wrap gap-3 p-1"
               data-testid="osaamissuosittelija-suggested-competences"
               role="group"
-              onKeyDown={(e) => handleKeyboardNavigation(e, filteredEhdotetutOsaamiset)}
+              onKeyDown={(e) => {
+                handleKeyboardNavigation(e, filteredEhdotetutOsaamiset);
+              }}
               aria-labelledby={suggestedTagsId}
             >
               {filteredEhdotetutOsaamiset.map((ehdotettuOsaaminen, index) => (
@@ -361,6 +390,7 @@ export const OsaamisSuosittelija = ({
                         return; // Prevent adding duplicates by rapid clicking
                       }
 
+                      setResultChangeReason('user');
                       lastClickedIndexRef.current = { index, group: 'suggested' };
                       skillsToAdd.push(ehdotettuOsaaminen.id);
 
