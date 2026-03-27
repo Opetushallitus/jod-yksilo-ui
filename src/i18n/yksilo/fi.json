@@ -833,8 +833,15 @@
       "title": "Työpaikkani"
     }
   },
+  "proposals-loading": "Ladataan ehdotuksia",
   "proposed-competences": "Ehdotetut osaamiset",
+  "proposed-competences-found_zero": "Ehdotettuja osaamisia ei löytynyt",
+  "proposed-competences-found_one": "1 ehdotettu osaaminen löytyi",
+  "proposed-competences-found_other": "{{count}} ehdotettua osaamista löytyi",
   "proposed-interests": "Ehdotetut kiinnostukset",
+  "proposed-interests-found_zero": "Ehdotettuja kiinnostuksia ei löytynyt",
+  "proposed-interests-found_one": "1 ehdotettu kiinnostus löytyi",
+  "proposed-interests-found_other": "{{count}} ehdotettua kiinnostusta löytyi",
   "rate-ai-content": {
     "ammatti": {
       "body": "Tällä sivulla on yhdistetty ammattitietoa tilastotietoihin. Kerro meille, miten onnistuimme.",
