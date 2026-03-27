@@ -62,6 +62,11 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
 
   const setTavoite = addPlanStore((state) => state.setTavoite);
 
+  const [openIndex, setOpenIndex] = React.useState<number | null>(0);
+  const toggleAccordion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
     <div className="mb-5">
       <div className="flex flex-col mb-5 gap-6 px-5 sm:px-6 lg:pr-0 lg:pl-6">
@@ -77,7 +82,8 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
               <Accordion
                 triggerId={triggerId}
                 ariaControls={contentId}
-                initialState={i === 0} // Open the first accordion by default
+                isOpen={openIndex === i}
+                setIsOpen={() => toggleAccordion(i)}
                 title={getLocalizedText(tavoite.tavoite)}
                 collapsedContent={
                   <div className="flex flex-col mt-2">
