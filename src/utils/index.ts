@@ -238,3 +238,50 @@ export const hyphenize = (str: string) => str.trim().replace(/\s+/g, '-').toLowe
  * @returns The normalized text
  */
 export const normalizeMultilineText = (text = '') => text.replace(/\n{3,}/g, '\n\n');
+
+/**
+ * Handles keyboard navigation for tag elements within a list.
+ * @param event The keyboard event
+ * @param items The list of items
+ */
+export const handleTagsKeyboardNavigation = (
+  event: React.KeyboardEvent<HTMLUListElement>,
+  items: readonly unknown[],
+) => {
+  if (items.length === 0) {
+    return;
+  }
+
+  const currentList = event.currentTarget;
+  const buttons = Array.from(currentList.querySelectorAll('button'));
+
+  if (buttons.length === 0) {
+    return;
+  }
+
+  const currentIndex = buttons.indexOf(document.activeElement as HTMLButtonElement);
+  let nextIndex = -1;
+
+  switch (event.key) {
+    case 'ArrowRight':
+    case 'ArrowDown':
+      event.preventDefault();
+      nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % buttons.length;
+      break;
+    case 'ArrowLeft':
+    case 'ArrowUp':
+      event.preventDefault();
+      nextIndex = currentIndex === -1 ? buttons.length - 1 : (currentIndex - 1 + buttons.length) % buttons.length;
+      break;
+    default:
+      return;
+  }
+
+  if (nextIndex !== -1) {
+    // Update tabindex for roving tabindex pattern
+    buttons.forEach((button, index) => {
+      button.setAttribute('tabindex', index === nextIndex ? '0' : '-1');
+    });
+    buttons[nextIndex]?.focus();
+  }
+};
