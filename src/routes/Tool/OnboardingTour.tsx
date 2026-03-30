@@ -118,12 +118,6 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
             description: t('tool.tour.mobile.step-4.description'),
             side: 'top',
             align: 'center',
-            onPopoverRender: () => {
-              window.scrollTo({ top: 400, behavior: 'instant' });
-              setTimeout(() => {
-                tour.refresh();
-              }, 200);
-            },
             onPrevClick: () => {
               setCurrentTab('info');
               setTimeout(() => {
@@ -160,12 +154,6 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
                 tour.movePrevious();
               }, WAIT_AFTER_TAB_CHANGE_MS);
             },
-            onPopoverRender: () => {
-              window.scrollTo({ top: 450, behavior: 'instant' });
-              setTimeout(() => {
-                tour.refresh();
-              }, 200);
-            },
           },
         },
       ];
@@ -192,6 +180,11 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
         popoverDom.closeButton.ariaLabel = t('close');
         const root = createRoot(popoverDom.closeButton);
         root.render(<JodRemove size={18} className="text-white!" />);
+      },
+      onHighlighted: (_element, _step, d) => {
+        if (!lg && (d.state.activeIndex === 3 || d.state.activeIndex === 5)) {
+          window.scrollTo({ top: 300, behavior: 'instant' });
+        }
       },
     });
     tour.drive();
