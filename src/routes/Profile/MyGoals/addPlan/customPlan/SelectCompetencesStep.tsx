@@ -1,6 +1,6 @@
 import type { components } from '@/api/schema';
 import AddedTags from '@/components/OsaamisSuosittelija/AddedTags';
-import { getLocalizedText } from '@/utils';
+import { getLocalizedText, handleTagsKeyboardNavigation } from '@/utils';
 import { animateElementToTarget } from '@/utils/animations';
 import { EmptyState, Tag } from '@jod/design-system';
 import React from 'react';
@@ -37,45 +37,6 @@ const SelectCompetencesStep = () => {
       ...vaaditutOsaamiset.filter((osaaminen) => !valitutOsaamiset.some((val) => val.uri === osaaminen.uri)),
     ]);
   }, [vaaditutOsaamiset, valitutOsaamiset]);
-
-  const handleKeyboardNavigation = (event: React.KeyboardEvent<HTMLUListElement>, items: readonly unknown[]) => {
-    if (items.length === 0) {
-      return;
-    }
-
-    const currentList = event.currentTarget;
-    const buttons = Array.from(currentList.querySelectorAll('button'));
-
-    if (buttons.length === 0) {
-      return;
-    }
-
-    const currentIndex = buttons.indexOf(document.activeElement as HTMLButtonElement);
-    let nextIndex = -1;
-
-    switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowDown':
-        event.preventDefault();
-        nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % buttons.length;
-        break;
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        event.preventDefault();
-        nextIndex = currentIndex === -1 ? buttons.length - 1 : (currentIndex - 1 + buttons.length) % buttons.length;
-        break;
-      default:
-        return;
-    }
-
-    if (nextIndex !== -1) {
-      // Update tabindex for roving tabindex pattern
-      buttons.forEach((button, index) => {
-        button.setAttribute('tabindex', index === nextIndex ? '0' : '-1');
-      });
-      buttons[nextIndex]?.focus();
-    }
-  };
 
   const removeOsaaminenById = React.useCallback(
     (ids: string[]) => () => {
@@ -151,14 +112,15 @@ const SelectCompetencesStep = () => {
             className="flex flex-wrap gap-3 p-1"
             role="group"
             aria-labelledby={requiredTagsId}
-            onKeyDown={(e) => handleKeyboardNavigation(e, filteredVaaditutOsaamiset)}
+            onKeyDown={(e) => handleTagsKeyboardNavigation(e, filteredVaaditutOsaamiset)}
           >
-            {filteredVaaditutOsaamiset.map((o) => (
+            {filteredVaaditutOsaamiset.map((o, index) => (
               <li key={o.uri} className="max-w-full">
                 <Tag
                   onClick={(e) => {
                     skillsToAdd.push(o.uri);
                     append(o);
+                    lastClickedIndexRef.current = { index, group: 'required' };
                     animateElementToTarget(e.currentTarget, selectedTagsRef.current!, () => {
                       // eslint-disable-next-line sonarjs/no-nested-functions
                       setSkillsToAdd((prev) => prev.filter((uri) => uri !== o.uri));
@@ -198,7 +160,7 @@ const SelectCompetencesStep = () => {
                   className="flex flex-wrap gap-3 p-1"
                   role="group"
                   aria-labelledby={addedTagsId}
-                  onKeyDown={(e) => handleKeyboardNavigation(e, valitutOsaamiset)}
+                  onKeyDown={(e) => handleTagsKeyboardNavigation(e, valitutOsaamiset)}
                 >
                   <AddedTags
                     osaamiset={valitutOsaamiset.map((o) => ({ id: o.uri, nimi: o.nimi, kuvaus: o.kuvaus }))}
