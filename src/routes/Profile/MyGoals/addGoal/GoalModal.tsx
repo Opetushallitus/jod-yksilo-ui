@@ -261,7 +261,6 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
                         initiallyCollapsed
                         collapsible
                         hideFavorite
-                        hideIcon={!sm}
                         actionButtonContent={
                           isSelected ? (
                             <div className="flex gap-4 not-sm:justify-between items-center">

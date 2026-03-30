@@ -1,8 +1,9 @@
-import { client } from '@/api/client.ts';
-import { osaamiset as osaamisetService } from '@/api/osaamiset.ts';
+import { client } from '@/api/client';
+import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
-import { KoulutusMahdollisuusFull } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel.ts';
+import { TitleIcon } from '@/components/TitleIcon/TitleIcon';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
+import { KoulutusMahdollisuusFull } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel';
 import type { KoulutusmahdollisuusJakaumat } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
 import { Accordion, Tag } from '@jod/design-system';
@@ -28,6 +29,8 @@ const PlanOpportunityCard = React.memo(
     const { t } = useTranslation();
     const { otsikko, kuvaus } = mahdollisuus;
     const missingOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
+
+    const bgColorClassName = mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'bg-secondary-2-dark' : 'bg-secondary-4-dark-2';
 
     const fetchOsaamiset = () =>
       client
@@ -60,11 +63,18 @@ const PlanOpportunityCard = React.memo(
 
           {actionButtonContent && <div className="order-1 sm:order-2">{actionButtonContent}</div>}
         </div>
-        <span className="font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">
-          {mahdollisuus.tyyppi == 'TUTKINTO'
-            ? t(`opportunity-type.education.TUTKINTO`)
-            : t(`opportunity-type.education.EI_TUTKINTO`)}
-        </span>
+        <div className="flex flex-row gap-3">
+          <div
+            className={`flex items-center justify-center size-7 sm:size-8 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
+          >
+            <TitleIcon mahdollisuusAlityyppi={mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'MUU_KOULUTUS' : 'TUTKINTO'} />
+          </div>
+          <span className="flex items-center font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">
+            {mahdollisuus.tyyppi == 'TUTKINTO'
+              ? t(`opportunity-type.education.TUTKINTO`)
+              : t(`opportunity-type.education.EI_TUTKINTO`)}
+          </span>
+        </div>
 
         <Accordion
           title={getLocalizedText(otsikko)}
