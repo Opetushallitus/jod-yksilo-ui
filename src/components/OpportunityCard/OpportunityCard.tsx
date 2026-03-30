@@ -5,7 +5,7 @@ import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDro
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
 import type { MahdollisuusAlityyppi, MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
-import { Accordion } from '@jod/design-system';
+import { Accordion, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router';
@@ -73,7 +73,6 @@ interface BaseProps {
   from?: 'tool' | 'favorite' | 'path' | 'goal' | 'search';
   rateId?: string;
   children?: React.ReactNode;
-  hideIcon?: boolean;
 }
 
 export type OpportunityCardProps = BaseProps &
@@ -115,7 +114,7 @@ const ActionsSection = ({
   return nothingToShow ? (
     <></>
   ) : (
-    <div className="flex flex-row justify-between items-center mb-3">
+    <div className="flex flex-row justify-between items-center sm:mb-3">
       {hasMatchInfo ? (
         <div
           className={'flex flex-col sm:flex-row flex-nowrap gap-x-2 items-center select-none'}
@@ -160,7 +159,6 @@ export const OpportunityCardWrapper = ({
   name,
   mahdollisuusTyyppi,
   mahdollisuusAlityyppi,
-  hideIcon,
   toggleFavorite,
   isFavorite,
   isLoggedIn,
@@ -204,7 +202,7 @@ export const OpportunityCardWrapper = ({
   const content = (
     <>
       <p className="font-arial text-body-md-mobile sm:text-body-md">{description}</p>
-      <div className="flex flex-col mt-3 gap-3">{children}</div>
+      <div className="flex flex-col gap-3">{children}</div>
     </>
   );
 
@@ -239,7 +237,6 @@ export const OpportunityCardWrapper = ({
                 mahdollisuusTyyppi={mahdollisuusTyyppi}
                 mahdollisuusAlityyppi={mahdollisuusAlityyppi}
                 headingLevel={headingLevel}
-                hideIcon={hideIcon}
                 from={from}
                 rateId={rateId}
               />
@@ -263,7 +260,6 @@ export const OpportunityCardWrapper = ({
             headingLevel={headingLevel}
             from={from}
             rateId={rateId}
-            hideIcon={hideIcon}
           />
           <>{content}</>
         </>
@@ -280,7 +276,6 @@ const OpportunityCardHeader = ({
   headingLevel,
   from,
   rateId,
-  hideIcon,
 }: {
   to?: string;
   name: string;
@@ -289,9 +284,9 @@ const OpportunityCardHeader = ({
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   from?: 'tool' | 'favorite' | 'path' | 'goal' | 'search';
   rateId?: string;
-  hideIcon?: boolean;
 }) => {
   const TitleTag = headingLevel || 'span';
+  const { sm } = useMediaQueries();
 
   const bgColorClassName =
     mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'bg-secondary-2-dark' : 'bg-secondary-4-dark-2';
@@ -334,15 +329,31 @@ const OpportunityCardHeader = ({
     </>
   );
 
+  if (!sm) {
+    return (
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-row gap-3">
+          <div
+            className={`flex items-center justify-center size-7 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
+          >
+            <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
+          </div>
+
+          <div className="flex justify-center">
+            <OpportunityType mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
+          </div>
+        </div>
+        <div>{titleContent}</div>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-row">
-      {!hideIcon && (
-        <div
-          className={`flex items-center justify-center size-8 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
-        >
-          <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
-        </div>
-      )}
+      <div
+        className={`flex items-center justify-center size-8 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
+      >
+        <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
+      </div>
       <div className="ml-4 flex flex-col justify-center">
         <OpportunityType mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
         {titleContent}
