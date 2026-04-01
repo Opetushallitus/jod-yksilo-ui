@@ -3,6 +3,28 @@
   "cancel": "Avbryt",
   "close-menu": "Stäng menyn",
   "competency-path-portal": "Kompetensstigens ingångssida",
+  "cookie-consent": {
+    "guard": {
+      "buttonLabel": "Öppna behörigheter och samtycken",
+      "description": "Visning av detta innehåll från en annan webbplats är blockerat tills du accepterar cookies som sätts av tredje part. Läs vår cookiepolicy.",
+      "title": "Vi bryr oss om din integritet"
+    },
+    "modal": {
+      "acceptAllLabel": "Acceptera alla",
+      "cookieCategoriesLabel": "Cookie-kategorier",
+      "cookiesCategoriesAnalytics": "Besöksuppföljning",
+      "cookiesCategoriesNecessary": "Nödvändiga cookies",
+      "cookiesCategoriesThirdParty": "Tredjepartsinnehåll",
+      "currentSelectionLabel": "Nuvarande val",
+      "declineOptionalLabel": "Acceptera endast nödvändiga",
+      "description": "Vi använder cookies för att säkerställa webbplatsens funktionalitet, analysera användning och visa valt innehåll. Nödvändiga cookies är alltid aktiverade. Cookies för besöksuppföljning och kvalitetskontroll aktiveras endast om du accepterar alla cookies.",
+      "hereLabel": "här",
+      "name": "Cookie-inställningar",
+      "readMoreHref": "/sv/dataskyddsbeskrivning-och-cookies",
+      "readMoreLabel": "Läs mer om våra cookies och vår integritetspolicy",
+      "title": "Vi använder cookies"
+    }
+  },
   "delete": "Ta bort",
   "error-boundary": {
     "session-expired": "Din session har gått ut. Du måste logga in på tjänsten igen eller använda tjänsten utan att logga in.",
@@ -62,6 +84,7 @@
     "wants-contact": "Jag vill bli kontaktad."
   },
   "footer": {
+    "cookie-settings-label": "Kakor inställningar",
     "cooperation-title": "Kompetensstigen-tjänsten har genomförts i samarbete av",
     "copyright": "© Kompetensstigen 2026. Alla rättigheter förbehålls.",
     "feedback-button-label": "Ge respons",

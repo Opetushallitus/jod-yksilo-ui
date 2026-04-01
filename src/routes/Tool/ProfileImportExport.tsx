@@ -1,16 +1,14 @@
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button } from '@jod/design-system';
 import { JodFavs, JodInterests, JodOther, JodSkills, JodWork } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
 import CategorizedCompetenceTagList from './CategorizedCompetenceTagList';
 import { CompetenceExport } from './components/CompetenceExport';
 import { CompetenceImport } from './components/CompetenceImport';
 import { IconWrapper } from './components/IconWrapper';
 import { useTool } from './hook/useTool';
-import type { ToolLoaderData } from './loader';
-
 const TextWithIconListItem = ({ text, icon }: { text: string; icon: React.ReactNode }) => {
   return (
     <li>
@@ -104,8 +102,7 @@ const AuthenticatedWithDataState = ({ onImportSuccess }: { onImportSuccess?: () 
 
 const ProfileImportExport = ({ onImportSuccess }: { onImportSuccess?: () => void }) => {
   const { hasProfileCompetences, hasOtherProfileData } = useTool();
-
-  const { isLoggedIn } = useLoaderData<ToolLoaderData>();
+  const isLoggedIn = useIsLoggedIn();
 
   const Authenticated =
     hasProfileCompetences || hasOtherProfileData ? AuthenticatedWithDataState : AuthenticatedEmptyState;

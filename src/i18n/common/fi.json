@@ -3,6 +3,28 @@
   "cancel": "Peruuta",
   "close-menu": "Sulje valikko",
   "competency-path-portal": "Osaamispolun etusivu",
+  "cookie-consent": {
+    "guard": {
+      "buttonLabel": "Avaa luvat ja suostumukset",
+      "description": "Tämän toiselta sivustolta olevan sisällön näyttäminen on estetty kunnes hyväksyt kolmansien osapuolien asettamat evästeet. Lue evästekäytäntömme.",
+      "title": "Välitämme yksityisyydestäsi"
+    },
+    "modal": {
+      "acceptAllLabel": "Hyväksy kaikki",
+      "cookieCategoriesLabel": "Evästekategoriat",
+      "cookiesCategoriesAnalytics": "Kävijäseuranta",
+      "cookiesCategoriesNecessary": "Välttämättömät evästeet",
+      "cookiesCategoriesThirdParty": "Kolmannen osapuolen sisältö",
+      "currentSelectionLabel": "Nykyinen valintasi",
+      "declineOptionalLabel": "Hyväksy vain välttämättömät",
+      "description": "Käytämme evästeitä sivuston toiminnan varmistamiseen, käytön analysointiin ja valitun sisällön näyttämiseen. Välttämättömät evästeet ovat aina käytössä. Kävijäseurannan ja laadunvalvonnan evästeet otetaan käyttöön vain, jos hyväksyt kaikki evästeet.",
+      "hereLabel": "täältä",
+      "name": "Evästeasetukset",
+      "readMoreHref": "/fi/tietosuojaseloste-ja-evasteet",
+      "readMoreLabel": "Lue lisää evästeistämme ja tietosuojakäytännöistämme",
+      "title": "Käytämme evästeitä"
+    }
+  },
   "delete": "Poista",
   "error-boundary": {
     "session-expired": "Istuntosi on vanhentunut. Sinun täytyy kirjautua palveluun uudelleen tai käyttää palvelua ilman kirjautumista.",
@@ -62,6 +84,7 @@
     "wants-contact": "Haluan, että minuun otetaan yhteyttä."
   },
   "footer": {
+    "cookie-settings-label": "Evästeasetukset",
     "cooperation-title": "Osaamispolku-palvelun ovat yhteistyössä toteuttaneet ",
     "copyright": "© Osaamispolku 2026. Kaikki oikeudet pidätetään.",
     "feedback-button-label": "Anna palautetta",

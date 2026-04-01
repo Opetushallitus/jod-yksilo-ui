@@ -4,9 +4,8 @@ import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
 import { useLoginLink } from '@/hooks/useLoginLink';
-import { useSessionExpirationTimer } from '@/hooks/useSessionExpirationTimer';
 import { langLabels, supportedLanguageCodes, type LangCode } from '@/i18n/config';
-import { useSuosikitStore } from '@/stores/useSuosikitStore';
+import { useIsLoggedIn, useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { isFeatureEnabled } from '@/utils/features';
 import { getNotifications } from '@/utils/notifications';
@@ -27,24 +26,15 @@ import {
 } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Link,
-  NavLink,
-  Outlet,
-  ScrollRestoration,
-  useFetcher,
-  useLoaderData,
-  useLocation,
-  useMatch,
-} from 'react-router';
+import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation, useMatch } from 'react-router';
 import { LogoutFormContext } from '.';
+import { useSessionManagerNotifications } from './useSessionManagerNotifications';
 
 const Root = () => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
-  const fetcher = useFetcher();
   const resetToolStore = useToolStore((state) => state.reset);
   const location = useLocation();
   const { addPermanentNote, removePermanentNote, addTemporaryNote, removeTemporaryNote } = useNoteStack();
@@ -68,93 +58,29 @@ const Root = () => {
   }, [hostname]);
 
   const { generateLocalizedPath } = useLocalizedRoutes();
-  const isLoggedIn = !!data;
+  const isLoggedIn = useIsLoggedIn();
+  const firstName = useSessionManagerStore((state) => state.user?.etunimi);
+  const csrfToken = useSessionManagerStore((state) => state.csrf?.token);
   const loginLink = useLoginLink({ callbackURL: location.pathname + location.search + location.hash });
-  const sessionWarningNoteId = 'session-expiration-warning';
-  const sessionExpiredNoteId = 'session-expired';
   const isOnProtectedRoute = useMatch(`/${language}/${t('slugs.profile.index')}/*`);
   const isOnSearchPage = useMatch(`/${language}/${t('slugs.search')}/*`);
   const { sm } = useMediaQueries();
   const showServiceName = sm || !searchInputVisible;
-
-  const { extend, disable } = useSessionExpirationTimer({
-    isLoggedIn: isLoggedIn,
-    onExtended: () => {
-      setTimeout(() => {
-        // Wrapping the removal in timeout makes this more reliable, otherwise the note sometimes doesn't get removed
-        removeTemporaryNote(sessionWarningNoteId);
-      }, 50);
-    },
-    onWarning: () => {
-      if (!isLoggedIn) {
-        return;
-      }
-      addTemporaryNote(() => ({
-        id: sessionWarningNoteId,
-        title: t('common:session.warning.note.title'),
-        description: t('common:session.warning.note.description'),
-        variant: 'warning',
-        readMoreComponent: (
-          <Button
-            size="sm"
-            variant="white"
-            label={t('common:session.warning.continue')}
-            onClick={async () => {
-              removeTemporaryNote(sessionWarningNoteId);
-              await extend();
-            }}
-          />
-        ),
-        isCollapsed: false,
-      }));
-    },
-    onExpired: async () => {
-      if (!isLoggedIn) {
-        return;
-      }
-      removeTemporaryNote(sessionWarningNoteId);
-      // Clear stores to avoid stale data
-      useToolStore.getState().reset();
-      useToolStore.getState().updateEhdotuksetAndTyomahdollisuudet(false, true);
-      useSuosikitStore.getState().reset();
-      // Reload root loader, this should set CSRF data to null
-      await fetcher.load(`/${language}`);
-
-      addPermanentNote(() => ({
-        id: sessionExpiredNoteId,
-        title: t('common:session.expired.note.title'),
-        description: t('common:session.expired.note.description'),
-        variant: 'error',
-        readMoreComponent: (
-          <div className="flex gap-4">
-            <Button
-              size="sm"
-              variant="white"
-              label={t('common:session.expired.login')}
-              linkComponent={getLinkTo(loginLink, { useAnchor: true })}
-            />
-            <Button
-              size="sm"
-              variant="white"
-              label={t('common:session.expired.continue')}
-              onClick={() => {
-                disable(); // Disables any future warnings or expirations
-                removePermanentNote(sessionExpiredNoteId);
-                if (isOnProtectedRoute) {
-                  globalThis.location.replace(globalThis.location.origin + `/yksilo/${language}`);
-                } else {
-                  globalThis.location.reload();
-                }
-              }}
-            />
-          </div>
-        ),
-      }));
-    },
+  useSessionManagerNotifications({
+    data,
+    language,
+    t,
+    loginLink,
+    isOnProtectedRoute: !!isOnProtectedRoute,
+    addPermanentNote,
+    removePermanentNote,
+    addTemporaryNote,
+    removeTemporaryNote,
   });
 
   const logout = () => {
     resetToolStore();
+    void useSessionManagerStore.getState().expireSession('logout');
     logoutForm.current?.submit();
   };
 
@@ -243,7 +169,7 @@ const Root = () => {
       <header role="banner" className="sticky top-0 z-30 print:hidden" data-testid="app-header">
         <SkipLink hash="#jod-main" label={t('common:skiplinks.main')} />
         <form action="/yksilo/logout" method="POST" hidden ref={logoutForm}>
-          <input type="hidden" name="_csrf" value={data?.csrf.token} />
+          <input type="hidden" name="_csrf" value={csrfToken ?? ''} />
           <input type="hidden" name="lang" value={language} />
         </form>
         <NavigationBar
@@ -270,12 +196,12 @@ const Root = () => {
             isCvPage ? null : (
               <UserButton
                 serviceVariant="yksilo"
-                firstName={data?.etunimi}
+                firstName={firstName}
                 isProfileActive={isProfileActive}
                 profileLabel={t('profile.index')}
                 // eslint-disable-next-line react/no-unstable-nested-components
                 profileLinkComponent={(props) => <NavLink to={userMenuProfileFrontUrl} {...props} />}
-                isLoggedIn={!!data?.csrf}
+                isLoggedIn={isLoggedIn}
                 loginLabel={t('common:login')}
                 // eslint-disable-next-line react/no-unstable-nested-components
                 loginLinkComponent={(props) => <NavLink to={loginPageUrl} {...props} />}

@@ -2,13 +2,13 @@ import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
 import i18n from '@/i18n/config';
+import { YksiloLoaderContext, yksiloLoaderContextHasSession } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import type { LoaderFunction } from 'react-router';
 import { JobCodesetValues } from '../../utils/jakaumaUtils';
 import { type CompetencesLoaderData, getCompetenceData } from '../Profile/Competences/loader';
 
 export type ToolLoaderData = {
-  isLoggedIn: boolean;
   kiinnostukset: components['schemas']['OsaaminenDto'][];
   kiinnostuksetVapaateksti?: components['schemas']['LokalisoituTeksti'];
   filters?: {
@@ -31,9 +31,8 @@ const getKiinnostukset = async (
 
 export default (async ({ request, context }): Promise<ToolLoaderData> => {
   const state = useToolStore.getState();
-  const isLoggedIn = !!context;
+  const hasSession = yksiloLoaderContextHasSession(context);
   const emptyData: ToolLoaderData = {
-    isLoggedIn: false,
     osaamiset: [],
     toimenkuvat: [],
     koulutukset: [],
@@ -48,11 +47,11 @@ export default (async ({ request, context }): Promise<ToolLoaderData> => {
   // Load tyomahdollisuudet and ehdotukset if they are not already loaded
   if (state.tyomahdollisuudet.length === 0 || languageHasChanged) {
     //We don't need to await this
-    state.updateEhdotuksetAndTyomahdollisuudet(isLoggedIn, languageHasChanged);
+    state.updateEhdotuksetAndTyomahdollisuudet(hasSession, languageHasChanged);
   }
 
   // Load suosikit if the user is logged in
-  if (isLoggedIn) {
+  if (hasSession) {
     const [suosikitResponse, competenceLoaderData, { kiinnostukset, kiinnostuksetVapaateksti }] = await Promise.all([
       client.GET('/api/profiili/suosikit', { signal: request.signal }),
       getCompetenceData(request, context),
@@ -60,8 +59,8 @@ export default (async ({ request, context }): Promise<ToolLoaderData> => {
     ]);
     state.setSuosikit(suosikitResponse.data ?? []);
 
-    return { isLoggedIn, kiinnostukset, filters: {}, kiinnostuksetVapaateksti, ...competenceLoaderData };
+    return { kiinnostukset, filters: {}, kiinnostuksetVapaateksti, ...competenceLoaderData };
   } else {
     return emptyData;
   }
-}) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
+}) satisfies LoaderFunction<YksiloLoaderContext>;

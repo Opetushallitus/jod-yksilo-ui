@@ -1,1 +1,1 @@
-export { authStore, withYksiloContext } from './auth';
+export { withYksiloContext } from './auth';

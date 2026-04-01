@@ -1,11 +1,10 @@
-import type { components } from '@/api/schema';
 import { ExternalLink, MainLayout } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { useYksiloData } from '@/hooks/useYksiloData';
+import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { useMediaQueries } from '@jod/design-system';
 import { JodUser } from '@jod/design-system/icons';
 import { Trans, useTranslation } from 'react-i18next';
-import { useRouteLoaderData } from 'react-router';
 import { ProfileNavigationList } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import WelcomePathModal from '../WelcomePathModal/WelcomePathModal';
@@ -18,7 +17,7 @@ const ProfileFront = () => {
     i18n: { language },
   } = useTranslation();
   const { lg } = useMediaQueries();
-  const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
+  const firstName = useSessionManagerStore((s) => s.user?.etunimi);
   const { data, isLoading } = useYksiloData();
 
   return (
@@ -39,7 +38,7 @@ const ProfileFront = () => {
       <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
         <IconHeading
           icon={<JodUser />}
-          title={t('welcome', { name: rootLoaderData.etunimi ?? 'Nimetön' })}
+          title={t('welcome', { name: firstName ?? 'Nimetön' })}
           testId="profile-front-title"
         />
 

@@ -1,11 +1,11 @@
-import type { components } from '@/api/schema';
 import { useAppRoutes } from '@/hooks/useAppRoutes';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { generateMenuItems } from '@/utils/routeUtils';
 import { LinkComponent, MenuItem } from '@jod/design-system';
 import { JodHome } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useLoaderData, useLocation } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 import { NavLinkBasedOnAuth } from './NavLinkBasedOnAuth';
 
 export const useMenuRoutes = (onClose: () => void) => {
@@ -14,7 +14,7 @@ export const useMenuRoutes = (onClose: () => void) => {
     i18n: { language },
   } = useTranslation();
   const { pathname } = useLocation();
-  const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
+  const isLoggedIn = useIsLoggedIn();
   const { profileRoutes } = useAppRoutes();
   const mainLevelMenuItems: MenuItem[] = React.useMemo(() => {
     return [
@@ -45,14 +45,14 @@ export const useMenuRoutes = (onClose: () => void) => {
             className={className}
             lang={language}
             onClose={onClose}
-            shouldLogin={!data}
+            shouldLogin={!isLoggedIn}
           >
             {children}
           </NavLinkBasedOnAuth>
         ),
         childItems: generateMenuItems({
           menuRoutes: profileRoutes.slice(1), // Exclude the first "Omat sivuni" route
-          loggedIn: !!data,
+          loggedIn: isLoggedIn,
           pathname,
           pathPrefix: t('slugs.profile.index'),
           onClose,
@@ -60,7 +60,7 @@ export const useMenuRoutes = (onClose: () => void) => {
         selected: pathname === `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
       },
     ];
-  }, [t, pathname, language, profileRoutes, data, onClose]);
+  }, [t, pathname, language, profileRoutes, isLoggedIn, onClose]);
 
   return mainLevelMenuItems;
 };

@@ -1,5 +1,5 @@
-import { components } from '@/api/schema';
 import i18n, { defaultLang, LangCode, supportedLanguageCodes } from '@/i18n/config';
+import { YksiloLoaderContext } from '@/stores/useSessionManagerStore';
 import { LoaderFunction, replace } from 'react-router';
 
 export default (async ({ params: { lng }, context }) => {
@@ -14,4 +14,4 @@ export default (async ({ params: { lng }, context }) => {
   }
 
   return context;
-}) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
+}) satisfies LoaderFunction<YksiloLoaderContext>;

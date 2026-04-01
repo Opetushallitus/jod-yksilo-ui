@@ -4,6 +4,7 @@ import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
 import i18n, { LangCode } from '@/i18n/config';
 import type { Jakauma, TyomahdollisuusJakaumat } from '@/routes/types';
+import { YksiloLoaderContext, yksiloLoaderContextHasSession } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { sortByProperty } from '@/utils';
 import { getCodesetValue } from '@/utils/codes/codes';
@@ -58,7 +59,7 @@ const loader = (async ({ request, params, context }) => {
     ammatit.get(tyomahdollisuus?.ammattiryhma?.uri ?? '', request.signal),
   ]);
 
-  if (context) {
+  if (yksiloLoaderContextHasSession(context)) {
     await useToolStore.getState().updateSuosikit(true);
   }
   return {
@@ -68,9 +69,8 @@ const loader = (async ({ request, params, context }) => {
     ammattiryhma: occupationGroup,
     jakaumat,
     codesetValues,
-    isLoggedIn: !!context,
   };
-}) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
+}) satisfies LoaderFunction<YksiloLoaderContext>;
 
 export type LoaderData = Awaited<ReturnType<typeof loader>>;
 export default loader;

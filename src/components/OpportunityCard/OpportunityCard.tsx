@@ -5,6 +5,7 @@ import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDro
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
 import type { MahdollisuusAlityyppi, MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
+import { useIsSessionExpired } from '@/stores/useSessionManagerStore';
 import { Accordion, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -182,13 +183,16 @@ export const OpportunityCardWrapper = ({
       : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
   });
   const { showDialog, closeAllModals } = useModal();
+  const isSessionExpired = useIsSessionExpired();
 
   const onToggleFavorite = () => {
     if (hideFavorite) {
       return;
     }
 
-    if (isLoggedIn) {
+    // When session has expired, parent often passes a guarded handler — still call it (session-expired UX),
+    // not the generic login dialog (isLoggedIn is false for both anonymous and expired).
+    if (isLoggedIn || isSessionExpired) {
       toggleFavorite?.();
     } else {
       showDialog({

@@ -1,4 +1,3 @@
-import type { components } from '@/api/schema';
 import { AiInfo, Breadcrumb, OpportunityCard } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
@@ -6,21 +5,21 @@ import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
 import { RateContent } from '@/components/RateContent/RateContent';
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import AdditionalSupport from '@/routes/Tool/AdditionalSupport';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
 import { Button, cx, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
 import { JodArrowRight, JodCompass, JodInfo, JodSettings } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useRouteLoaderData } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 import { getTypeSlug } from '../Profile/utils';
 import Competences from './Competences';
 import ToolAccordion from './components/ToolAccordion';
 import { useTool } from './hook/useTool';
 import Interests from './Interests';
-import type { ToolLoaderData } from './loader';
 import { OnboardingTour } from './OnboardingTour';
 import ProfileImportExport from './ProfileImportExport';
 import ToolSettings from './ToolSettings';
@@ -54,7 +53,8 @@ const ExploreOpportunities = () => {
   );
 
   const scrollRef = React.useRef<HTMLUListElement>(null);
-  const { isLoggedIn } = useLoaderData<ToolLoaderData>();
+  const isLoggedIn = useIsLoggedIn();
+  const guardedAction = useSessionGuardedAction();
   const { showModal } = useModal();
   const { lg } = useMediaQueries();
 
@@ -140,7 +140,7 @@ const ExploreOpportunities = () => {
                     to={`/${i18n.language}/${getTypeSlug(mahdollisuusTyyppi)}/${id}`}
                     isFavorite={isFavorite}
                     isLoggedIn={isLoggedIn}
-                    toggleFavorite={() => void toggleSuosikki(id, ehdotus.tyyppi)}
+                    toggleFavorite={guardedAction(toggleSuosikki, id, ehdotus.tyyppi)}
                     name={getLocalizedText(mahdollisuus.otsikko)}
                     description={getLocalizedText(mahdollisuus.tiivistelma)}
                     matchValue={ehdotus?.pisteet}
@@ -169,14 +169,14 @@ const ExploreOpportunities = () => {
 };
 
 const ProfileLinkComponent = ({ className, children }: { className?: string; children: React.ReactNode }) => {
-  const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
+  const isLoggedIn = useIsLoggedIn();
   const { t, i18n } = useTranslation();
 
   return (
     <NavLinkBasedOnAuth
       className={className}
       to={`${t('slugs.profile.index')}/${t('slugs.profile.front')}`}
-      shouldLogin={!rootLoaderData}
+      shouldLogin={!isLoggedIn}
       lang={i18n.language}
     >
       {children}
@@ -186,7 +186,7 @@ const ProfileLinkComponent = ({ className, children }: { className?: string; chi
 
 const UpdateEhdotuksetAndTyomahdollisuudetButton = ({ id, className }: { id?: string; className?: string }) => {
   const { t } = useTranslation();
-  const { isLoggedIn } = useLoaderData<ToolLoaderData>();
+  const isLoggedIn = useIsLoggedIn();
   const { settingsHaveChanged, isLoading, updateEhdotuksetAndTyomahdollisuudet } = useToolStore(
     useShallow((state) => ({
       settingsHaveChanged: state.settingsHaveChanged,
@@ -263,7 +263,7 @@ const YourInfoGroupSeparator = () => {
 const YourInfo = () => {
   const { lg } = useMediaQueries();
   const { t } = useTranslation();
-  const { isLoggedIn } = useLoaderData<ToolLoaderData>();
+  const isLoggedIn = useIsLoggedIn();
 
   const { mappedKiinnostukset, mappedOsaamiset, profileCompetencesCount } = useTool();
 

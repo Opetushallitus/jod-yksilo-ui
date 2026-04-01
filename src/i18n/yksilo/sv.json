@@ -228,20 +228,20 @@
     "explore-opportunities": "Hitta möjligheter",
     "hero-content": "I Min kompetensstig kan du kartlägga din egen kompetens, hitta utbildningar för att öka din kompetens, undersöka karriärmöjligheter med din kompetens och kartlägga möjligheter att byta bransch.\n",
     "hero-title": "Min kompetensstig",
+    "how-to-use": {
+      "description-1": "I Min kompetensstig kan du kartlägga din egen kompetens och hitta arbets- och utbildningsmöjligheter som passar dina intressen.",
+      "description-2": "När du har identifierat dina kompetenser och intressen kommer tjänsten att föreslå lämpliga arbets- och utbildningsmöjligheter. Du får också ytterligare information, till exempel om arbetsmarknaden och krav inom ditt område.",
+      "list-item-1": "Du kan använda tjänsten antingen inloggad eller utan att logga in.",
+      "list-item-2": "Utan att logga in kan du hitta arbets- och utbildningsmöjligheter som matchar dina kompetenser och intressen. Din information sparas inte i tjänsten.",
+      "list-item-3": "Som inloggad användare skapar du en kompetensprofil där du kan importera information från Jobbmarknaden och Studieinfo. Kompetensprofilen gör det möjligt att synliggöra dina kompetenser, sätta mål och göra planer för att uppnå dem.",
+      "title": "Hur man använder Min kompetensstig"
+    },
     "need-personal-guidance": "Behöver du personlig vägledning?",
     "need-personal-guidance-content": "Tjänsterna som du kan hitta i väglednings- och rådgivningstjänster hjälper dig att fundera på dina karriär- och utbildningsalternativ. Begränsa listan över tjänster enligt teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst.\n",
     "personal-guidance": {
       "content": "Tjänsterna som du kan hitta i väglednings- och rådgivningstjänsterna hjälper dig att fundera på dina arbets- och utbildningsalternativ. Begränsa listan över tjänster enligt teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst.",
       "link-text": "Gå till Väglednings- och rådgivningstjänster",
       "title": "Behöver du personlig vägledning?"
-    },
-    "how-to-use": {
-      "title": "Hur man använder Min kompetensstig",
-      "description-1": "I Min kompetensstig kan du kartlägga din egen kompetens och hitta arbets- och utbildningsmöjligheter som passar dina intressen.",
-      "description-2": "När du har identifierat dina kompetenser och intressen kommer tjänsten att föreslå lämpliga arbets- och utbildningsmöjligheter. Du får också ytterligare information, till exempel om arbetsmarknaden och krav inom ditt område.",
-      "list-item-1": "Du kan använda tjänsten antingen inloggad eller utan att logga in.",
-      "list-item-2": "Utan att logga in kan du hitta arbets- och utbildningsmöjligheter som matchar dina kompetenser och intressen. Din information sparas inte i tjänsten.",
-      "list-item-3": "Som inloggad användare skapar du en kompetensprofil där du kan importera information från Jobbmarknaden och Studieinfo. Kompetensprofilen gör det möjligt att synliggöra dina kompetenser, sätta mål och göra planer för att uppnå dem."
     },
     "welcome": {
       "content": "Kompetensstigen-tjänsten har lanserats. Tjänsten utvecklas kontinuerligt baserat på användarfeedback. Funktioner kan förändras och nya funktioner kommer att läggas till regelbundet – tack för att du är med på resan!",
@@ -250,6 +250,8 @@
   },
   "how-to-use": {
     "create-profile-description": "I kompetensprofilen kan du spara din arbets- och utbildningshistorik och kartlägga ditt kunnande utifrån dem. Du kan spara favoriter, mål och planer. Du kan importera dina uppgifter från Jobbmarknaden och Studieinfo samt hantera användningen och delningen av dina uppgifter.",
+    "create-profile-disclaimer": "Obs! Innehåll som producerats med AI kan innehålla fel.",
+    "create-profile-more-info": "Läs mer: <CustomLink>Information om användningen av AI<Icon></Icon></CustomLink>",
     "create-profile-title": "Logga in och skapa en kompetensprofil",
     "education-history": "Utbildningshistorik",
     "find-opportunities-description": "Med hjälp av AI skapar vi individuella förslag på möjligheter som passar dig. Vi visar möjligheter utifrån hur väl de motsvarar uppgifterna du har angett.",
@@ -836,13 +838,13 @@
   },
   "proposals-loading": "Laddar förslag",
   "proposed-competences": "Föreslagna kunskaper",
-  "proposed-competences-found_zero": "Inga föreslagna kunskaper hittades",
   "proposed-competences-found_one": "1 föreslagen kunskap hittades",
   "proposed-competences-found_other": "{{count}} föreslagna kunskaper hittades",
+  "proposed-competences-found_zero": "Inga föreslagna kunskaper hittades",
   "proposed-interests": "Föreslagna intressen",
-  "proposed-interests-found_zero": "Inga föreslagna intressen hittades",
   "proposed-interests-found_one": "1 föreslaget intresse hittades",
   "proposed-interests-found_other": "{{count}} föreslagna intressen hittades",
+  "proposed-interests-found_zero": "Inga föreslagna intressen hittades",
   "rate-ai-content": {
     "ammatti": {
       "body": "På den här sidan har yrkesinformation kombinerats med statistik. Berätta för oss hur vi lyckades.",

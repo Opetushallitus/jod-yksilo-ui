@@ -2,15 +2,15 @@ import heroSrc1 from '@/../assets/yksilo-hero-1.jpg';
 import heroSrc2 from '@/../assets/yksilo-hero-2.jpg';
 import heroSrc3 from '@/../assets/yksilo-hero-3.jpg';
 import heroSrc4 from '@/../assets/yksilo-hero-4.jpg';
-import type { components } from '@/api/schema';
 import { HowToUse } from '@/components/HowToUse/HowToUse';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { getLinkTo } from '@/utils/routeUtils';
 import { cx, HeroCard, type LinkComponent, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useRouteLoaderData } from 'react-router';
+import { Link } from 'react-router';
 
 interface ContainerProps {
   className?: string;
@@ -67,8 +67,7 @@ const Home = () => {
   } = useTranslation();
 
   const { sm } = useMediaQueries();
-
-  const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
+  const isLoggedIn = useIsLoggedIn();
   const firstCardRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -135,7 +134,7 @@ const Home = () => {
         <HeroCard
           buttonLabel={t('home.create-own-profile')}
           content={t('home.card-2-content')}
-          linkComponent={AuthNavLink(!data)}
+          linkComponent={AuthNavLink(!isLoggedIn)}
           size="sm"
           title={t('home.card-2-title')}
           to={t('slugs.profile.index')}

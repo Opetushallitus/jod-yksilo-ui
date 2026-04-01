@@ -1,15 +1,13 @@
-import type { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useShowSessionExpiredDialog } from '@/hooks/useShowSessionExpiredDialog';
-import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
+import { useIsSessionExpired, useYksiloProfileLinkData } from '@/stores/useSessionManagerStore';
 import { removeDuplicatesByKey } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Accordion, Button, EmptyState, Tag } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRouteLoaderData } from 'react-router';
 import { generateProfileLink, getTextClassByCompetenceSourceType } from '../utils';
 import { type CompetenceSourceType, FILTERS_ORDER, type GroupByProps, type MobileFilterButton } from './constants';
 
@@ -22,9 +20,9 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
     i18n: { language },
   } = useTranslation();
 
-  const data = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
+  const profileLinkData = useYksiloProfileLinkData();
   const competencesSlug = t('slugs.profile.competences');
-  const isSessionExpired = useSessionExpirationStore((state) => state.sessionExpired);
+  const isSessionExpired = useIsSessionExpired();
   const showSessionExpiredDialog = useShowSessionExpiredDialog();
 
   // Remove duplicate osaamiset per lähdetyyppi
@@ -34,13 +32,29 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
 
   const links = React.useMemo(
     () => ({
-      TOIMENKUVA: generateProfileLink([competencesSlug, t('slugs.profile.work-history')], data, language, t).to,
-      KOULUTUS: generateProfileLink([competencesSlug, t('slugs.profile.education-history')], data, language, t).to,
-      PATEVYYS: generateProfileLink([competencesSlug, t('slugs.profile.free-time-activities')], data, language, t).to,
-      MUU_OSAAMINEN: generateProfileLink([competencesSlug, t('slugs.profile.something-else')], data, language, t).to,
+      TOIMENKUVA: generateProfileLink([competencesSlug, t('slugs.profile.work-history')], profileLinkData, language, t)
+        .to,
+      KOULUTUS: generateProfileLink(
+        [competencesSlug, t('slugs.profile.education-history')],
+        profileLinkData,
+        language,
+        t,
+      ).to,
+      PATEVYYS: generateProfileLink(
+        [competencesSlug, t('slugs.profile.free-time-activities')],
+        profileLinkData,
+        language,
+        t,
+      ).to,
+      MUU_OSAAMINEN: generateProfileLink(
+        [competencesSlug, t('slugs.profile.something-else')],
+        profileLinkData,
+        language,
+        t,
+      ).to,
       KIINNOSTUS: undefined,
     }),
-    [competencesSlug, data, language, t],
+    [competencesSlug, profileLinkData, language, t],
   );
 
   const linkLabels: Record<CompetenceSourceType, string> = {
