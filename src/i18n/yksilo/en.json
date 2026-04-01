@@ -229,20 +229,20 @@
     "explore-opportunities": "Find opportunities",
     "hero-content": "In My Competency Path, you can map out your own competence, find education to increase your competence, explore career opportunities with your competence and map out opportunities to change occupation.",
     "hero-title": "My Competency Path",
+    "how-to-use": {
+      "description-1": "In My Competency Path, you can map out your own competence and find work and education opportunities that suit your interests.",
+      "description-2": "Once you have identified your competences and interests, the service will suggest suitable work and education opportunities. You will also receive additional information, for example, about the job market and requirements in your field.",
+      "list-item-1": "You can use the service either logged in or without logging in.",
+      "list-item-2": "Without logging in, you can find work and education opportunities that match your competences and interests. Your information will not be saved in the service.",
+      "list-item-3": "As a logged-in user, you create a competence profile where you can import information from the Job Market Finland job seeker profile and Studyinfo study records. The competence profile allows you to make your competences visible, set goals, and make plans to achieve them.",
+      "title": "How to use My Competency Path"
+    },
     "need-personal-guidance": "Do you need personal guidance?",
     "need-personal-guidance-content": "The services found under guidance and counselling services help you consider your career and education choices. Narrow the list of services based on themes that interest you and, for example, where you live to find the most suitable services for you.",
     "personal-guidance": {
       "content": "The services found under guidance and counselling services help you consider your work and education options. Narrow the list of services based on themes that interest you and, for example, where you live to find the most suitable services for you.",
       "link-text": "Go to Guidance and counseling services",
       "title": "Do you need personal guidance?"
-    },
-    "how-to-use": {
-      "title": "How to use My Competency Path",
-      "description-1": "In My Competency Path, you can map out your own competence and find work and education opportunities that suit your interests.",
-      "description-2": "Once you have identified your competences and interests, the service will suggest suitable work and education opportunities. You will also receive additional information, for example, about the job market and requirements in your field.",
-      "list-item-1": "You can use the service either logged in or without logging in.",
-      "list-item-2": "Without logging in, you can find work and education opportunities that match your competences and interests. Your information will not be saved in the service.",
-      "list-item-3": "As a logged-in user, you create a competence profile where you can import information from the Job Market Finland job seeker profile and Studyinfo study records. The competence profile allows you to make your competences visible, set goals, and make plans to achieve them."
     },
     "welcome": {
       "content": "Competency Path service has been launched. The service is continuously developed based on user feedback. Features may change and new functionalities will be added regularly – thank you for being part of the journey!",
@@ -251,6 +251,8 @@
   },
   "how-to-use": {
     "create-profile-description": "In the competence profile, you can save your work and education history and map your competences based on them. You can save favourites, goals and plans. You can import your data from Job Market Finland and Studyinfo and manage the use and sharing of your data.",
+    "create-profile-disclaimer": "Please note: AI-generated content may contain errors.",
+    "create-profile-more-info": "Read more: <CustomLink>Information on the use of AI<Icon></Icon></CustomLink>",
     "create-profile-title": "Log in and create a competence profile",
     "education-history": "Education history",
     "find-opportunities-description": "We use AI to create personalised suggestions for opportunities that suit you. We show opportunities based on how well they match the information you have provided.",
@@ -837,13 +839,13 @@
   },
   "proposals-loading": "Loading suggestions",
   "proposed-competences": "Suggested competences",
-  "proposed-competences-found_zero": "No suggested competences found",
   "proposed-competences-found_one": "1 suggested competence found",
   "proposed-competences-found_other": "{{count}} suggested competences found",
+  "proposed-competences-found_zero": "No suggested competences found",
   "proposed-interests": "Suggested interests",
-  "proposed-interests-found_zero": "No suggested interests found",
   "proposed-interests-found_one": "1 suggested interest found",
   "proposed-interests-found_other": "{{count}} suggested interests found",
+  "proposed-interests-found_zero": "No suggested interests found",
   "rate-ai-content": {
     "ammatti": {
       "body": "On this page, occupational information has been combined with statistical data. Tell us how we did.",

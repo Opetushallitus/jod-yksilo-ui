@@ -5,8 +5,10 @@ import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
 import type { MahdollisuusAlityyppi, MahdollisuusTyyppi } from '@/routes/types';
+import { useIsSessionExpired } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { copyToClipboard, getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
@@ -62,6 +64,13 @@ const OpportunityDetails = ({
   );
 
   const mahdollisuusAlityyppi = getMahdollisuusAlityyppi({ mahdollisuusTyyppi, ...data });
+  const guardedAction = useSessionGuardedAction();
+  const isSessionExpired = useIsSessionExpired();
+  const toggleFavoriteGuarded = guardedAction(() => {
+    if (data?.id) {
+      void toggleSuosikki(data.id, mahdollisuusTyyppi);
+    }
+  });
 
   const { showDialog, closeAllModals } = useModal();
   const { state } = useLocation();
@@ -70,12 +79,6 @@ const OpportunityDetails = ({
       ? `/${i18n.language}/${state?.callbackURL}`
       : `/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
   });
-
-  const handleToggleFavorite = async () => {
-    if (data?.id) {
-      await toggleSuosikki(data.id, mahdollisuusTyyppi);
-    }
-  };
 
   const doPrint = () => {
     globalThis.print();
@@ -130,8 +133,8 @@ const OpportunityDetails = ({
             opensDialog={!isLoggedIn}
             favoriteName={data?.otsikko}
             onToggleFavorite={() =>
-              isLoggedIn
-                ? handleToggleFavorite()
+              isLoggedIn || isSessionExpired
+                ? toggleFavoriteGuarded()
                 : showDialog({
                     title: t('common:login'),
                     description: t('login-for-favorites'),

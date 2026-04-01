@@ -1,44 +1,25 @@
-import { registerCsrfMiddleware } from '@/api/middlewares/csrf';
-import { components } from '@/api/schema';
 import i18n from '@/i18n/config';
+import { useSessionManagerStore, YksiloLoaderContext } from '@/stores/useSessionManagerStore';
 import { LoaderFunction, LoaderFunctionArgs, redirect, replace } from 'react-router';
-import { client } from '../api/client';
+import { hasWelcomePathBeenShown, markWelcomePathShown } from './welcomePathGate';
 
-let showed = false;
-
-export const authStore: {
-  yksiloPromise: Promise<unknown> | undefined;
-} = {
-  yksiloPromise: undefined,
-};
-
-export const withYksiloContext = (
-  load: LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>,
-  loginRequired = true,
-) => {
+export const withYksiloContext = (load: LoaderFunction<YksiloLoaderContext>, loginRequired = true) => {
   return async (args: LoaderFunctionArgs) => {
-    if (authStore.yksiloPromise === undefined) {
-      authStore.yksiloPromise = client.GET('/api/profiili/yksilo');
-    }
-
-    const { data = null } = (await authStore.yksiloPromise) as { data: components['schemas']['YksiloCsrfDto'] };
+    const yksilo = await useSessionManagerStore.getState().syncYksiloFromServer();
 
     const isProtectedRoute = args.request.url.includes(`/${args.params.lng}/${i18n.t('slugs.profile.index')}`);
 
-    // This should prevent accessing protected routes when not logged in.
-    if (isProtectedRoute && !data) {
+    if (isProtectedRoute && !yksilo) {
       return replace('/');
     }
 
-    if (data) {
-      registerCsrfMiddleware(data.csrf);
-
+    if (yksilo) {
       const { lng } = args.params;
       const url = `/${lng}/${i18n.t('slugs.profile.index', { lng })}`;
 
-      if (!data.tervetuloapolku && loginRequired) {
-        if (!showed) {
-          showed = true;
+      if (!yksilo.tervetuloapolku && loginRequired) {
+        if (!hasWelcomePathBeenShown()) {
+          markWelcomePathShown();
           return replace(url);
         }
       } else {
@@ -48,6 +29,6 @@ export const withYksiloContext = (
       }
     }
 
-    return !loginRequired || data ? await load({ ...args, context: data }) : redirect('/');
+    return !loginRequired || yksilo ? await load({ ...args, context: yksilo }) : redirect('/');
   };
 };

@@ -1,13 +1,12 @@
-import type { components } from '@/api/schema';
 import { MainLayout } from '@/components';
 import { useLoginLink } from '@/hooks/useLoginLink';
-import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button } from '@jod/design-system';
 import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate, useRouteLoaderData } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 const ListItem = ({ label }: { label: string }) => (
   <li className="list-disc ml-7 pl-4 sm:text-body-md text-body-md-mobile font-arial">{label}</li>
@@ -19,8 +18,7 @@ const LoginPage = () => {
     i18n: { language },
   } = useTranslation();
   const location = useLocation();
-  const sessionExpired = useSessionExpirationStore((state) => state.sessionExpired);
-  const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
+  const isLoggedIn = useIsLoggedIn();
   const navigate = useNavigate();
   const state = location.state;
 
@@ -32,10 +30,10 @@ const LoginPage = () => {
 
   // Redirect to root if already logged-in
   React.useEffect(() => {
-    if (rootLoaderData && !sessionExpired) {
+    if (isLoggedIn) {
       navigate('/');
     }
-  }, [rootLoaderData, navigate, sessionExpired]);
+  }, [isLoggedIn, navigate]);
 
   const title = t('profile.login-page.page-title');
 

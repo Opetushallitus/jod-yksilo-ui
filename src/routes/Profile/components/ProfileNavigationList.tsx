@@ -1,8 +1,8 @@
-import type { components } from '@/api/schema';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { generateMenuItems, type GenerateMenuItemsOptions, type MenuRoute } from '@/utils/routeUtils';
 import { MenuSection, PageNavigation } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useOutletContext, useRouteLoaderData } from 'react-router';
+import { useLocation, useOutletContext } from 'react-router';
 
 interface ProfileNavigationListProps {
   collapsed?: boolean;
@@ -11,7 +11,7 @@ interface ProfileNavigationListProps {
 export const ProfileNavigationList = ({ collapsed, activeIndicator }: ProfileNavigationListProps) => {
   const { t } = useTranslation();
   const routes = useOutletContext<MenuRoute[]>();
-  const rootLoaderData = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'];
+  const isLoggedIn = useIsLoggedIn();
   const { pathname } = useLocation();
 
   const generateRoutesOptions: GenerateMenuItemsOptions = {
@@ -19,7 +19,7 @@ export const ProfileNavigationList = ({ collapsed, activeIndicator }: ProfileNav
       ...route,
       authRequired: true,
     })),
-    loggedIn: !!rootLoaderData?.csrf,
+    loggedIn: isLoggedIn,
     pathname,
     pathPrefix: t('slugs.profile.index'),
   };

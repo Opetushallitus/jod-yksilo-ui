@@ -7,6 +7,7 @@ import OpportunityDetails, { type OpportunityDetailsSection } from '@/components
 import { RateContent } from '@/components/RateContent/RateContent';
 import { NOT_AVAILABLE_LABEL } from '@/constants';
 import Suomi from '@/routes/JobOpportunity/Suomi.tsx';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText, getTranslation, hashString, normalizeMultilineText } from '@/utils';
 import { getEducationCodesetValues } from '@/utils/codes/codes.ts';
@@ -42,7 +43,8 @@ const JobOpportunity = () => {
     i18n: { language },
   } = useTranslation();
   const { lg } = useMediaQueries();
-  const { tyomahdollisuus, osaamiset, isLoggedIn, ammattiryhma } = useLoaderData<LoaderData>();
+  const { tyomahdollisuus, osaamiset, ammattiryhma } = useLoaderData<LoaderData>();
+  const isLoggedIn = useIsLoggedIn();
   const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
   const competencesTableData = React.useMemo(
     () =>

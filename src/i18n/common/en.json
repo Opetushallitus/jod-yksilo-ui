@@ -3,6 +3,28 @@
   "cancel": "Cancel",
   "close-menu": "Close the menu",
   "competency-path-portal": "Front page of Competency Path",
+  "cookie-consent": {
+    "guard": {
+      "buttonLabel": "Open permissions and consents",
+      "description": "Displaying this content from another site is blocked until you accept cookies set by third parties. Read our cookie policy.",
+      "title": "We care about your privacy"
+    },
+    "modal": {
+      "acceptAllLabel": "Accept all",
+      "cookieCategoriesLabel": "Cookie categories",
+      "cookiesCategoriesAnalytics": "Visitor analytics",
+      "cookiesCategoriesNecessary": "Necessary cookies",
+      "cookiesCategoriesThirdParty": "Third-party content",
+      "currentSelectionLabel": "Current selection",
+      "declineOptionalLabel": "Accept only necessary",
+      "description": "We use cookies to ensure the functionality of the site, analyze usage, and display selected content. Necessary cookies are always enabled. Visitor tracking and quality control cookies are only enabled if you accept all cookies.",
+      "hereLabel": "here",
+      "name": "Cookie settings",
+      "readMoreHref": "/en/privacy-notice-and-cookies",
+      "readMoreLabel": "Read more about our cookies and privacy practices",
+      "title": "We use cookies"
+    }
+  },
   "delete": "Delete",
   "error-boundary": {
     "session-expired": "Your session has expired. You must log in to the service again or use the service without logging in.",
@@ -62,6 +84,7 @@
     "wants-contact": "I want to be contacted."
   },
   "footer": {
+    "cookie-settings-label": "Cookie settings",
     "cooperation-title": "The Competency Path service has been jointly implemented by",
     "copyright": "© Competency Path 2026. All rights reserved.",
     "feedback-button-label": "Give feedback",
@@ -74,6 +97,7 @@
       "oph-label": "Finnish National Agency for Education",
       "tem-label": "Ministry of Economic Affairs and Employment"
     },
+    "more-info": "More information",
     "more-info-description": "Are you worried about data protection or the use of artificial intelligence in the service? Below, you will find a summary of general information about the service and its use.",
     "more-info-links": {
       "about-service": "About the service",

@@ -227,20 +227,20 @@
     "explore-opportunities": "Löydä mahdollisuuksia",
     "hero-content": "Oma Osaamispolku -palvelussa voit kartoittaa omaa osaamistasi, löytää koulutuksia osaamisesi kasvattamiseksi, tutkia työmahdollisuuksia osaamisellasi ja kartoittaa mahdollisuuksia alan vaihtamiseen.",
     "hero-title": "Oma Osaamispolku",
+    "how-to-use": {
+      "description-1": "Oma Osaamispolussa voit kartoittaa osaamiseesi ja kiinnostuksiisi sopivia työ- ja koulutusmahdollisuuksia.",
+      "description-2": "Kun olet tunnistanut osaamisesi ja kiinnostuksen kohteesi, palvelu ehdottaa sinulle sopivia työ- ja koulutusmahdollisuuksia. Saat myös lisätietoa esimerkiksi alan työtilanteesta ja vaatimuksista.",
+      "list-item-1": "Voit käyttää palvelua joko kirjautuneena tai kirjautumatta.",
+      "list-item-2": "Ilman kirjautumista voit löytää osaamiseesi ja kiinnostuksiisi sopivia työ- ja koulutusmahdollisuuksia. Tietosi eivät tallennu palveluun.",
+      "list-item-3": "Kirjautuneena käyttäjänä luot itsellesi osaamisprofiilin, johon voit tuodatietoja Työmarkkinatorin työnhakuprofiilista ja opintosuorituksia OmaOpintopolusta. Osaamisprofiilin avulla voit tehdä osaamisesi näkyväksi sekä asettaa tavoitteita ja tehdä suunnitelmia niiden saavuttamiseksi.",
+      "title": "Miten käytät Oma Osaamispolkua"
+    },
     "need-personal-guidance": "Tarvitsetko henkilökohtaista ohjausta?",
     "need-personal-guidance-content": "Ohjaus- ja neuvontapalveluista löydät tukea ura- ja koulutusvaihtoehtoihin liittyvään pohdintaan. Rajaa palveluiden listaa, jotta löydät sinulle parhaiten sopivat palvelut.",
     "personal-guidance": {
       "content": "Ohjaus- ja neuvontapalveluista löytyvät palvelut auttavat sinua ura- ja koulutusvaihtoehtoihin liittyvässä pohdinnassa. Rajaa palveluiden listaa sinua kiinnostavien teemojen ja esimerkiksi asuinpaikkasi perusteella, jotta löydät sinulle parhaiten sopivat palvelut.",
       "link-text": "Siirry Ohjaus- ja neuvontapalveluihin",
       "title": "Tarvitsetko henkilökohtaista ohjausta?"
-    },
-    "how-to-use": {
-      "title": "Miten käytät Oma Osaamispolkua",
-      "description-1": "Oma Osaamispolussa voit kartoittaa osaamiseesi ja kiinnostuksiisi sopivia työ- ja koulutusmahdollisuuksia.",
-      "description-2": "Kun olet tunnistanut osaamisesi ja kiinnostuksen kohteesi, palvelu ehdottaa sinulle sopivia työ- ja koulutusmahdollisuuksia. Saat myös lisätietoa esimerkiksi alan työtilanteesta ja vaatimuksista.",
-      "list-item-1": "Voit käyttää palvelua joko kirjautuneena tai kirjautumatta.",
-      "list-item-2": "Ilman kirjautumista voit löytää osaamiseesi ja kiinnostuksiisi sopivia työ- ja koulutusmahdollisuuksia. Tietosi eivät tallennu palveluun.",
-      "list-item-3": "Kirjautuneena käyttäjänä luot itsellesi osaamisprofiilin, johon voit tuodatietoja Työmarkkinatorin työnhakuprofiilista ja opintosuorituksia OmaOpintopolusta. Osaamisprofiilin avulla voit tehdä osaamisesi näkyväksi sekä asettaa tavoitteita ja tehdä suunnitelmia niiden saavuttamiseksi."
     },
     "welcome": {
       "content": "Osaamispolku-palvelu on julkaistu. Palvelua kehitetään edelleen käyttäjäpalautteen pohjalta. Toiminnot voivat muuttua ja uusia ominaisuuksia tulee lisää säännöllisesti – kiitos kun olet mukana matkassa!",
@@ -249,6 +249,8 @@
   },
   "how-to-use": {
     "create-profile-description": "Osaamisprofiilissa voit tallentaa työ- ja koulutushistoriaasi ja kartoittaa niiden pohjalta osaamisiasi. Voit tallentaa suosikkeja, tavoitteita ja suunnitelmia. Voit tuoda tietojasi Työmarkkinatorilta ja Opintopolusta, sekä hallita samalla tietojesi käyttöä ja jakamista.",
+    "create-profile-disclaimer": "Huom! Tekoälyllä tuotettu sisältö saattaa sisältää virheitä.",
+    "create-profile-more-info": "Lue lisää: <CustomLink>Tietoa tekoälyn käytöstä<Icon></Icon></CustomLink>",
     "create-profile-title": "Kirjaudu ja luo osaamisprofiili",
     "education-history": "Opintosuoritukset",
     "find-opportunities-description": "Muodostamme tekoälyn avulla yksilölliset ehdotukset sinulle sopivista mahdollisuuksista. Näytämme sinulle mahdollisuudet sen mukaan, miten hyvin ne sopivat antamiisi tietoihin.",
@@ -835,13 +837,13 @@
   },
   "proposals-loading": "Ladataan ehdotuksia",
   "proposed-competences": "Ehdotetut osaamiset",
-  "proposed-competences-found_zero": "Ehdotettuja osaamisia ei löytynyt",
   "proposed-competences-found_one": "1 ehdotettu osaaminen löytyi",
   "proposed-competences-found_other": "{{count}} ehdotettua osaamista löytyi",
+  "proposed-competences-found_zero": "Ehdotettuja osaamisia ei löytynyt",
   "proposed-interests": "Ehdotetut kiinnostukset",
-  "proposed-interests-found_zero": "Ehdotettuja kiinnostuksia ei löytynyt",
   "proposed-interests-found_one": "1 ehdotettu kiinnostus löytyi",
   "proposed-interests-found_other": "{{count}} ehdotettua kiinnostusta löytyi",
+  "proposed-interests-found_zero": "Ehdotettuja kiinnostuksia ei löytynyt",
   "rate-ai-content": {
     "ammatti": {
       "body": "Tällä sivulla on yhdistetty ammattitietoa tilastotietoihin. Kerro meille, miten onnistuimme.",

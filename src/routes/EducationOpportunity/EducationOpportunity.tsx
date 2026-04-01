@@ -7,6 +7,7 @@ import { RateContent } from '@/components/RateContent/RateContent';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import type { LoaderData } from '@/routes/EducationOpportunity/loader';
 import type { JakaumaKey } from '@/routes/types';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText, normalizeMultilineText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
@@ -20,7 +21,8 @@ import { OpintopolkuKoulutusList } from './OpintopolkuKoulutusList';
 import { getDurationText } from './utils';
 
 const EducationOpportunity = () => {
-  const { jakaumat, koulutusmahdollisuus, osaamiset, isLoggedIn } = useLoaderData<LoaderData>();
+  const { jakaumat, koulutusmahdollisuus, osaamiset } = useLoaderData<LoaderData>();
+  const isLoggedIn = useIsLoggedIn();
   const { kuvaus, kesto, koulutukset } = koulutusmahdollisuus;
   const { sm, lg } = useMediaQueries();
   const {

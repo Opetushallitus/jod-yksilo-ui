@@ -1,4 +1,4 @@
-import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
+import { useIsSessionExpired } from '@/stores/useSessionManagerStore';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, NavLinkProps } from 'react-router';
@@ -15,7 +15,7 @@ export const NavLinkBasedOnAuth = ({ shouldLogin, onClose, ...rest }: NavLinkBas
   } = useTranslation();
 
   const pathTo = typeof rest.to === 'string' ? `${rest.to}` : `${rest.to.pathname}`;
-  const sessionExpired = useSessionExpirationStore((state) => state.sessionExpired);
+  const sessionExpired = useIsSessionExpired();
   const loginRequired = React.useMemo(() => sessionExpired || shouldLogin, [sessionExpired, shouldLogin]);
 
   return loginRequired ? (

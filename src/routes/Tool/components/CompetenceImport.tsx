@@ -8,6 +8,7 @@ import { CompetenceFilters } from '@/routes/Profile/Competences/CompetenceFilter
 import { CompetenceSourceType, FILTERS_ORDER, type FiltersType } from '@/routes/Profile/Competences/constants';
 import { CompetenceDataGroup } from '@/routes/Profile/Competences/loader';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { hasLocalizedText, removeDuplicatesByKey } from '@/utils';
 import { isFeatureEnabled } from '@/utils/features';
@@ -58,10 +59,10 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
     muutOsaamiset,
     muutOsaamisetVapaateksti,
     osaamiset,
-    isLoggedIn,
     kiinnostukset,
     kiinnostuksetVapaateksti,
   } = useLoaderData<ToolLoaderData>();
+  const isLoggedIn = useIsLoggedIn();
 
   const guardedAction = useSessionGuardedAction();
 

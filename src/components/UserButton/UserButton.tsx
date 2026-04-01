@@ -1,11 +1,10 @@
-import { components } from '@/api/schema';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
-import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
+import { useIsLoggedIn, useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { PopupList, PopupListItem, useMediaQueries } from '@jod/design-system';
 import { JodCaretDown, JodCaretUp, JodUser } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, NavLink, useLoaderData } from 'react-router';
+import { Link, NavLink } from 'react-router';
 
 interface UserButtonProps {
   onLogout: () => void;
@@ -19,9 +18,8 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
   } = useTranslation();
 
   const { md } = useMediaQueries();
-  const sessionExpired = useSessionExpirationStore((state) => state.sessionExpired);
-
-  const data = useLoaderData() as components['schemas']['YksiloCsrfDto'] | null;
+  const isLoggedIn = useIsLoggedIn();
+  const firstName = useSessionManagerStore((s) => s.user?.etunimi);
 
   const [userMenuOpen, setUserMenuOpen] = React.useState(false);
   const userMenuButtonRef = React.useRef<HTMLButtonElement>(null);
@@ -35,7 +33,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
   const landingPageUrl = `/${language}/${t('slugs.profile.login')}`;
   const carets = md ? <>{userMenuOpen ? <JodCaretUp size={20} /> : <JodCaretDown size={20} />}</> : null;
 
-  return data?.csrf && !sessionExpired ? (
+  return isLoggedIn ? (
     <div className="relative" data-testid="user-button">
       <button
         ref={userMenuButtonRef}
@@ -44,7 +42,7 @@ export const UserButton = ({ onLogout, onClick }: UserButtonProps) => {
         data-testid="user-button-trigger"
       >
         <JodUser className="mx-auto" />
-        <span className="whitespace-nowrap md:text-[14px] sm:text-[12px] text-[10px]">{data?.etunimi}</span>
+        <span className="whitespace-nowrap md:text-[14px] sm:text-[12px] text-[10px]">{firstName}</span>
         {carets}
       </button>
       {userMenuOpen && (

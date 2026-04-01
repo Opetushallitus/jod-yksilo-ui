@@ -1,5 +1,6 @@
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
+import { YksiloLoaderContext, yksiloLoaderContextHasSession } from '@/stores/useSessionManagerStore';
 import { getLocalizedText } from '@/utils';
 
 import type { LoaderFunction } from 'react-router';
@@ -46,11 +47,11 @@ const filterItems = <T extends { id?: string; kuvaus?: components['schemas']['Lo
 /**
  * Get competence data for the user. This is in a separate function as this exact data is also needed in tool loader.
  */
-export const getCompetenceData = async (request: Request, context: components['schemas']['YksiloCsrfDto'] | null) => {
-  const isLoggedIn = !!context;
+export const getCompetenceData = async (request: Request, context: YksiloLoaderContext) => {
+  const hasSession = yksiloLoaderContextHasSession(context);
 
   try {
-    const [osaamisetRes, tyopaikatRes, koulutRes, vapaaAjanToiminnotRes, muuOsaaminenRes] = isLoggedIn
+    const [osaamisetRes, tyopaikatRes, koulutRes, vapaaAjanToiminnotRes, muuOsaaminenRes] = hasSession
       ? await Promise.all([
           client.GET('/api/profiili/osaamiset', { signal: request.signal }),
           client.GET('/api/profiili/tyopaikat', { signal: request.signal }),
@@ -109,4 +110,4 @@ export const getCompetenceData = async (request: Request, context: components['s
 export default (async ({ request, context }) => {
   const data: CompetencesLoaderData = await getCompetenceData(request, context);
   return data;
-}) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
+}) satisfies LoaderFunction<YksiloLoaderContext>;

@@ -3,6 +3,7 @@ import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
 import i18n, { LangCode } from '@/i18n/config';
 import type { Jakauma, KoulutusmahdollisuusJakaumat } from '@/routes/types';
+import { YksiloLoaderContext, yksiloLoaderContextHasSession } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { sortByProperty } from '@/utils';
 import { getCodeset, getEducationCodesetValues } from '@/utils/codes/codes';
@@ -52,12 +53,12 @@ const loader = (async ({ request, params, context }) => {
     request.signal,
   );
 
-  if (context) {
+  if (yksiloLoaderContextHasSession(context)) {
     await useToolStore.getState().updateSuosikit(true);
   }
 
-  return { codesetValues, jakaumat, koulutusmahdollisuus, osaamiset, isLoggedIn: !!context };
-}) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
+  return { codesetValues, jakaumat, koulutusmahdollisuus, osaamiset };
+}) satisfies LoaderFunction<YksiloLoaderContext>;
 
 export type LoaderData = Awaited<ReturnType<typeof loader>>;
 export default loader;

@@ -1,14 +1,13 @@
-import type { components } from '@/api/schema';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { getLinkTo } from '@/utils/routeUtils';
 import { HeroCard } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
-import { useRouteLoaderData } from 'react-router';
 import { ToolCard } from '../Profile/components';
 
 export const InfoCards = () => {
   const { t, i18n } = useTranslation();
 
-  const isLoggedIn = useRouteLoaderData('root') as components['schemas']['YksiloCsrfDto'] | null;
+  const isLoggedIn = useIsLoggedIn();
 
   return (
     <div className="flex flex-col gap-6">

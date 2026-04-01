@@ -6,7 +6,7 @@ import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import FavoritesOpportunityCardActionMenu from '@/routes/Profile/Favorites/FavoritesOpportunityCardMenu';
 import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
 import type { MahdollisuusTyyppi } from '@/routes/types';
-import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
@@ -83,7 +83,7 @@ const Favorites = () => {
   const { lg } = useMediaQueries();
   const [showFilters, setShowFilters] = React.useState(false);
   const guardedAction = useSessionGuardedAction();
-  const isSessionExpired = useSessionExpirationStore((state) => state.sessionExpired);
+  const isLoggedIn = useIsLoggedIn();
 
   const descriptions = {
     KAIKKI: t('profile.favorites.you-have-no-job-nor-education-opportunities'),
@@ -273,7 +273,7 @@ const Favorites = () => {
               ammattiryhma={mahdollisuus?.ammattiryhma}
               ammattiryhmaNimet={ammattiryhmaNimet}
               isFavorite={true}
-              isLoggedIn={!isSessionExpired}
+              isLoggedIn={isLoggedIn}
               name={getLocalizedText(mahdollisuus.otsikko)}
               toggleFavorite={guardedAction(deleteSuosikki, id)}
               mahdollisuusTyyppi={mahdollisuusTyyppi}
