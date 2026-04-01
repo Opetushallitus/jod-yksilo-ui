@@ -115,6 +115,7 @@ const Root = () => {
       removeTemporaryNote(sessionWarningNoteId);
       // Clear stores to avoid stale data
       useToolStore.getState().reset();
+      useToolStore.getState().updateEhdotuksetAndTyomahdollisuudet(false, true);
       useSuosikitStore.getState().reset();
       // Reload root loader, this should set CSRF data to null
       await fetcher.load(`/${language}`);
