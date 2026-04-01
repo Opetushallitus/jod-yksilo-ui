@@ -14,6 +14,7 @@ const PersonalDetails = () => {
   const { yksiloData: data, kotikuntaLabel } = useLoaderData<PreferencesLoaderData>();
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
+  const emailFieldId = React.useId();
   const [debouncedEmail, email, setEmail] = useDebounceState<string>(data?.email || '', 500);
   const [emailValid, setEmailValid] = React.useState<boolean | undefined>(undefined);
   const [lastSavedEmail, setLastSavedEmail] = React.useState<string>(data?.email || '');
@@ -166,8 +167,10 @@ const PersonalDetails = () => {
         <PersonalDetailsInfoBlock
           label={t('personal-details.email')}
           stack={!sm}
+          htmlFor={emailFieldId}
           interactiveComponent={
             <InputField
+              id={emailFieldId}
               hideLabel
               value={email}
               placeholder="matti.meikalainen@suomi.fi"

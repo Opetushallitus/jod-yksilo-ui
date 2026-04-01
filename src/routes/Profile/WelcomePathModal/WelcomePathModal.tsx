@@ -48,6 +48,7 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
   } = useTranslation();
   const { sm } = useMediaQueries();
   const { register, control } = useFormContext<YksiloData>();
+  const emailFieldId = React.useId();
 
   return (
     <>
@@ -100,8 +101,14 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
         <PersonalDetailsInfoBlock
           label={t('personal-details.email')}
           stack={!sm}
+          htmlFor={emailFieldId}
           interactiveComponent={
-            <InputField {...register('email')} hideLabel={true} placeholder="matti.meikalainen@suomi.fi" />
+            <InputField
+              {...register('email')}
+              id={emailFieldId}
+              hideLabel={true}
+              placeholder="matti.meikalainen@suomi.fi"
+            />
           }
         />
         <Separator />
