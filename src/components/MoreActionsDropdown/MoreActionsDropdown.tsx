@@ -64,7 +64,7 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
             e.preventDefault();
             e.stopPropagation();
           }}
-          className="absolute left-0 right-0 sm:left-auto sm:-right-2 translate-y-[10px] cursor-auto z-50"
+          className="absolute right-0 sm:-right-2 translate-y-[10px] cursor-auto z-50 max-w-[calc(100vw-2rem)]"
           data-testid="more-actions-menu"
         >
           {menuContent}
