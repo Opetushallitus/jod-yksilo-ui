@@ -63,7 +63,6 @@ export const useToolStore = create<ToolState>()(
       previousEhdotusUpdateLang: '',
       reset: () => {
         set({
-          tavoitteet: {},
           osaamiset: [],
           osaamisetVapaateksti: undefined,
           kiinnostukset: [],
@@ -75,6 +74,7 @@ export const useToolStore = create<ToolState>()(
           filters: DEFAULT_FILTERS,
           sorting: DEFAULT_SORTING,
           osaamisKiinnostusPainotus: DEFAULT_PAINOTUS,
+          suosikit: [],
         });
       },
       resetSettings: () => {
@@ -86,7 +86,6 @@ export const useToolStore = create<ToolState>()(
           osaamisKiinnostusPainotus: DEFAULT_PAINOTUS,
         });
       },
-      setTavoitteet: (state) => set({ tavoitteet: state }),
       setOsaamiset: (state) => {
         set({ osaamiset: state, shouldFetchData: true, settingsHaveChanged: true });
       },

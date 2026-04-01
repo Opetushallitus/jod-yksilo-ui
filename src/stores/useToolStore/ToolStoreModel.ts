@@ -43,13 +43,6 @@ export type ArrayFilters = Extract<
 >;
 
 export interface ToolState {
-  tavoitteet: {
-    a?: boolean;
-    b?: boolean;
-    c?: boolean;
-    d?: boolean;
-    e?: boolean;
-  };
   ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
   osaamiset: OsaaminenValue[];
   osaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'];
@@ -86,7 +79,6 @@ export interface ToolState {
   addAmmattiryhmaToFilter: (ammattiryhma: string) => void;
   removeAmmattiryhmaFromFilter: (ammattiryhma: string) => void;
   fillAmmattiryhmaNimet: (uris: string[]) => Promise<void>;
-  setTavoitteet: (state: ToolState['tavoitteet']) => void;
   setOsaamiset: (state: OsaaminenValue[]) => void;
   setOsaamisetVapaateksti: (state?: components['schemas']['LokalisoituTeksti']) => void;
   setKiinnostukset: (state: OsaaminenValue[]) => void;
