@@ -12,16 +12,16 @@
     "modal": {
       "acceptAllLabel": "Hyväksy kaikki",
       "cookieCategoriesLabel": "Evästekategoriat",
-      "cookiesCategoriesAnalytics": "Kävijäseuranta",
       "cookiesCategoriesNecessary": "Välttämättömät evästeet",
       "cookiesCategoriesThirdParty": "Kolmannen osapuolen sisältö",
       "currentSelectionLabel": "Nykyinen valintasi",
       "declineOptionalLabel": "Hyväksy vain välttämättömät",
-      "description": "Käytämme evästeitä sivuston toiminnan varmistamiseen, käytön analysointiin ja valitun sisällön näyttämiseen. Välttämättömät evästeet ovat aina käytössä. Kävijäseurannan ja laadunvalvonnan evästeet otetaan käyttöön vain, jos hyväksyt kaikki evästeet.",
+      "description": "Käytämme evästeitä sivuston toiminnan varmistamiseen ja valitun sisällön näyttämiseen. Välttämättömät evästeet ovat aina käytössä.",
       "hereLabel": "täältä",
       "name": "Evästeasetukset",
       "readMoreHref": "/fi/tietosuojaseloste-ja-evasteet",
       "readMoreLabel": "Lue lisää evästeistämme ja tietosuojakäytännöistämme",
+      "statisticsDescription": "Seuraamme palvelun kävijämääriä Matomon avulla. Tähän ei kysytä erikseen suostumusta.",
       "title": "Käytämme evästeitä"
     }
   },

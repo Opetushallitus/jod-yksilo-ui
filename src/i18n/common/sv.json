@@ -12,16 +12,16 @@
     "modal": {
       "acceptAllLabel": "Acceptera alla",
       "cookieCategoriesLabel": "Cookie-kategorier",
-      "cookiesCategoriesAnalytics": "Besöksuppföljning",
       "cookiesCategoriesNecessary": "Nödvändiga cookies",
       "cookiesCategoriesThirdParty": "Tredjepartsinnehåll",
       "currentSelectionLabel": "Nuvarande val",
       "declineOptionalLabel": "Acceptera endast nödvändiga",
-      "description": "Vi använder cookies för att säkerställa webbplatsens funktionalitet, analysera användning och visa valt innehåll. Nödvändiga cookies är alltid aktiverade. Cookies för besöksuppföljning och kvalitetskontroll aktiveras endast om du accepterar alla cookies.",
+      "description": "Vi använder cookies för att säkerställa webbplatsens funktionalitet och visa valt innehåll. Nödvändiga cookies är alltid aktiverade.",
       "hereLabel": "här",
       "name": "Cookie-inställningar",
       "readMoreHref": "/sv/dataskyddsbeskrivning-och-cookies",
       "readMoreLabel": "Läs mer om våra cookies och vår integritetspolicy",
+      "statisticsDescription": "Seuraamme palvelun kävijämääriä Matomon avulla. Tähän ei kysytä erikseen suostumusta.",
       "title": "Vi använder cookies"
     }
   },

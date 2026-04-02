@@ -13,6 +13,7 @@ import { getLinkTo } from '@/utils/routeUtils';
 import {
   Button,
   Chatbot,
+  CookieConsentProvider,
   Footer,
   LanguageButton,
   MatomoTracker,
@@ -20,6 +21,7 @@ import {
   NavigationBar,
   ServiceVariantProvider,
   SkipLink,
+  useCookieConsent,
   useMediaQueries,
   useNoteStack,
   UserButton,
@@ -163,6 +165,15 @@ const Root = () => {
     });
   }, [addTemporaryNote, t, language]);
 
+  const { open: openCookieConsent } = isFeatureEnabled('EVASTESUOSTUMUS')
+    ? // eslint-disable-next-line react-hooks/rules-of-hooks
+      useCookieConsent()
+    : {
+        open: () => {
+          /* empty */
+        },
+      };
+
   return (
     <div className="flex flex-col min-h-screen bg-bg-gray text-primary-gray" data-testid="app-root">
       <link rel="manifest" href={`/manifest-${language}.json`} crossOrigin="use-credentials" />
@@ -270,6 +281,8 @@ const Root = () => {
         externalLinkIconAriaLabel={t('common:external-link')}
         socialMedia={socialMedia}
         testId="footer"
+        cookieSettingsLabel={isFeatureEnabled('EVASTESUOSTUMUS') ? t('common:footer.cookie-settings-label') : undefined}
+        onCookieSettingsClick={isFeatureEnabled('EVASTESUOSTUMUS') ? () => openCookieConsent() : undefined}
       />
       <FeedbackModal
         isOpen={feedbackVisible}
@@ -285,4 +298,40 @@ const Root = () => {
   );
 };
 
-export default Root;
+const RootWithCookieConsentProvider = () => {
+  const { t } = useTranslation();
+
+  return isFeatureEnabled('EVASTESUOSTUMUS') ? (
+    <CookieConsentProvider
+      serviceVariant="yksilo"
+      translations={{
+        guard: {
+          buttonLabel: t('common:cookie-consent.guard.buttonLabel'),
+          description: t('common:cookie-consent.guard.description'),
+          title: t('common:cookie-consent.guard.title'),
+        },
+        modal: {
+          acceptAllLabel: t('common:cookie-consent.modal.acceptAllLabel'),
+          cookieCategoriesLabel: t('common:cookie-consent.modal.cookieCategoriesLabel'),
+          cookiesCategoriesNecessary: t('common:cookie-consent.modal.cookiesCategoriesNecessary'),
+          cookiesCategoriesThirdParty: t('common:cookie-consent.modal.cookiesCategoriesThirdParty'),
+          currentSelectionLabel: t('common:cookie-consent.modal.currentSelectionLabel'),
+          declineOptionalLabel: t('common:cookie-consent.modal.declineOptionalLabel'),
+          description: t('common:cookie-consent.modal.description'),
+          hereLabel: t('common:cookie-consent.modal.hereLabel'),
+          name: t('common:cookie-consent.modal.name'),
+          readMoreHref: t('common:cookie-consent.modal.readMoreHref'),
+          readMoreLabel: t('common:cookie-consent.modal.readMoreLabel'),
+          statisticsDescription: t('common:cookie-consent.modal.statisticsDescription'),
+          title: t('common:cookie-consent.modal.title'),
+        },
+      }}
+    >
+      <Root />
+    </CookieConsentProvider>
+  ) : (
+    <Root />
+  );
+};
+
+export default RootWithCookieConsentProvider;
