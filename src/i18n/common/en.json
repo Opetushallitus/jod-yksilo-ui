@@ -12,16 +12,16 @@
     "modal": {
       "acceptAllLabel": "Accept all",
       "cookieCategoriesLabel": "Cookie categories",
-      "cookiesCategoriesAnalytics": "Visitor analytics",
       "cookiesCategoriesNecessary": "Necessary cookies",
       "cookiesCategoriesThirdParty": "Third-party content",
       "currentSelectionLabel": "Current selection",
       "declineOptionalLabel": "Accept only necessary",
-      "description": "We use cookies to ensure the functionality of the site, analyze usage, and display selected content. Necessary cookies are always enabled. Visitor tracking and quality control cookies are only enabled if you accept all cookies.",
+      "description": "We use cookies to ensure the functionality of the site and display selected content. Necessary cookies are always enabled.",
       "hereLabel": "here",
       "name": "Cookie settings",
       "readMoreHref": "/en/privacy-notice-and-cookies",
       "readMoreLabel": "Read more about our cookies and privacy practices",
+      "statisticsDescription": "We use Matomo to track the number of visitors to the service. This does not require separate consent.",
       "title": "We use cookies"
     }
   },
