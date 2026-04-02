@@ -901,6 +901,7 @@
   "save": "Tallenna",
   "save-and-close": "Tallenna ja sulje",
   "search": {
+    "clear": "Tyhjennä haku",
     "description": "Voit hakea mahdollisuuksia käyttämällä vapaasanahakua. Tulosten näkyvyyteen voit vaikuttaa suodattamalla listaa.",
     "filters": "Suodattimet",
     "global-placeholder": "Hae mahdollisuuksia",

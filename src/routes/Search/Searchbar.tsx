@@ -45,6 +45,7 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
           />
           <button
             type="button"
+            aria-label={t('search.clear')}
             className="shrink rounded-sm bg-bg-gray focus:outline-2 focus:outline-accent cursor-pointer size-7 justify-center flex items-center outline-accent outline-offset-2 ml-2"
             onClick={() => {
               setQuery('');
