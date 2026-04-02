@@ -165,14 +165,7 @@ const Root = () => {
     });
   }, [addTemporaryNote, t, language]);
 
-  const { open: openCookieConsent } = isFeatureEnabled('EVASTESUOSTUMUS')
-    ? // eslint-disable-next-line react-hooks/rules-of-hooks
-      useCookieConsent()
-    : {
-        open: () => {
-          /* empty */
-        },
-      };
+  const { open: openCookieConsent } = useCookieConsent();
 
   return (
     <div className="flex flex-col min-h-screen bg-bg-gray text-primary-gray" data-testid="app-root">
@@ -281,8 +274,8 @@ const Root = () => {
         externalLinkIconAriaLabel={t('common:external-link')}
         socialMedia={socialMedia}
         testId="footer"
-        cookieSettingsLabel={isFeatureEnabled('EVASTESUOSTUMUS') ? t('common:footer.cookie-settings-label') : undefined}
-        onCookieSettingsClick={isFeatureEnabled('EVASTESUOSTUMUS') ? () => openCookieConsent() : undefined}
+        cookieSettingsLabel={t('common:footer.cookie-settings-label')}
+        onCookieSettingsClick={() => openCookieConsent()}
       />
       <FeedbackModal
         isOpen={feedbackVisible}
@@ -301,7 +294,7 @@ const Root = () => {
 const RootWithCookieConsentProvider = () => {
   const { t } = useTranslation();
 
-  return isFeatureEnabled('EVASTESUOSTUMUS') ? (
+  return (
     <CookieConsentProvider
       serviceVariant="yksilo"
       translations={{
@@ -329,8 +322,6 @@ const RootWithCookieConsentProvider = () => {
     >
       <Root />
     </CookieConsentProvider>
-  ) : (
-    <Root />
   );
 };
 
