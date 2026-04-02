@@ -11,7 +11,7 @@ import { getMahdollisuusAlityyppi } from '../Tool/utils';
 import { SearchFilters } from './SearchFilters';
 
 export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement | null> }) => {
-  const { sm } = useMediaQueries();
+  const { lg } = useMediaQueries();
   const { isLoading, filteredResults, filteredMetadata, pageNr, pageSize, koulutusalaNimet, fetchPage } =
     useSearchStore(
       useShallow((state) => ({
@@ -43,10 +43,10 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
       {!isLoading && filteredResults.length > 0 && (
         <div className="flex flex-col">
           <div className="pb-5 font-arial flex justify-between items-center">
-            {sm
+            {lg
               ? t('search.results-found', { count: filteredMetadata.length })
               : t('search.results-found-short', { count: filteredMetadata.length })}
-            {!sm && <SearchFilters />}
+            {!lg && <SearchFilters />}
           </div>
           <ul
             id="search-your-opportunities-list"
@@ -81,7 +81,7 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
         <Pagination
           totalItems={filteredMetadata.length}
           pageSize={pageSize}
-          siblingCount={sm ? 2 : 1}
+          siblingCount={lg ? 2 : 1}
           currentPage={pageNr}
           translations={paginationTranslations}
           onPageChange={async (details) => {
