@@ -903,6 +903,7 @@
   "save": "Save",
   "save-and-close": "Save and close",
   "search": {
+    "clear": "Clear search",
     "description": "You can search for opportunities using free text search. You can influence the visibility of results by filtering the list.",
     "filters": "Filters",
     "global-placeholder": "Search opportunities",

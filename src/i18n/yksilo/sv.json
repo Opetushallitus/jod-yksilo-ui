@@ -902,6 +902,7 @@
   "save": "Spara",
   "save-and-close": "Spara och stäng",
   "search": {
+    "clear": "Rensa sökning",
     "description": "Du kan söka efter möjligheter med hjälp av fritextsökning. Du kan påverka synligheten av resultaten genom att filtrera listan.",
     "filters": "Filter",
     "global-placeholder": "Sök möjligheter",
