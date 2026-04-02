@@ -8,21 +8,21 @@ import { useShallow } from 'zustand/shallow';
 
 const FiltersModal = ({ onClose, ...rest }: ModalComponentProps) => {
   const { t } = useTranslation();
-  const { sm } = useMediaQueries();
+  const { lg, sm } = useMediaQueries();
   return (
     <Modal
       {...rest}
-      open={rest.open && !sm}
+      open={rest.open && !lg}
       topSlot={<span className="sm:text-heading-2 text-heading-2-mobile">{t('search.filters')}</span>}
+      className="h-fit!"
       content={
-        <div className="mt-5">
+        <div className="p-5 md:px-8 md:ml-3">
           <FiltersContent />
         </div>
       }
       footer={
         <div className="flex gap-4 ml-auto">
-          <Button size="sm" className="h-5" onClick={onClose} label={t('close')} variant="white" />
-          <Button size="sm" className="h-5" onClick={onClose} label={t('save-and-close')} variant="accent" />
+          <Button size={sm ? 'lg' : 'sm'} onClick={onClose} label={t('close')} variant="accent" />
         </div>
       }
       name={t('search.filters')}
@@ -88,9 +88,9 @@ const FiltersContent = () => {
 export const SearchFilters = () => {
   const { t } = useTranslation();
   const { showModal } = useModal();
-  const { sm } = useMediaQueries();
+  const { lg } = useMediaQueries();
 
-  if (sm) {
+  if (lg) {
     return (
       <div className="bg-white rounded-md p-6 flex flex-col select-none gap-6">
         <h2 className="sm:text-body-sm text-body-sm-mobile">{t('search.filters')}</h2>
