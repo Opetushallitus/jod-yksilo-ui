@@ -1,17 +1,17 @@
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
-import { getLocalizedText, handleTagsKeyboardNavigation } from '@/utils';
+import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
+import { getLocalizedText } from '@/utils';
 import { animateElementToTarget } from '@/utils/animations';
 import { cx, EmptyState, Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import AddedTags from './AddedTags';
-import type { LastClickedIndex, OsaaminenValue, OsaamisSuosittelijaProps } from './OsaamisSuosittelija';
+import type { OsaaminenValue, OsaamisSuosittelijaProps } from './OsaamisSuosittelija';
 
 interface TagAreasProps {
   ehdotetutOsaamiset: OsaaminenValue[];
   hideSelected?: OsaamisSuosittelijaProps['hideSelected'];
   isTagSpacing?: OsaamisSuosittelijaProps['isTagSpacing'];
-  lastClickedIndexRef: React.RefObject<LastClickedIndex>;
   mode: OsaamisSuosittelijaProps['mode'];
   sourceType: OsaamisSuosittelijaProps['sourceType'];
   tagHeadingClassName?: OsaamisSuosittelijaProps['tagHeadingClassName'];
@@ -24,7 +24,6 @@ export const TagAreas = ({
   ehdotetutOsaamiset,
   hideSelected,
   isTagSpacing,
-  lastClickedIndexRef,
   mode = 'osaamiset',
   sourceType = 'KARTOITETTU',
   tagHeadingClassName,
@@ -36,64 +35,34 @@ export const TagAreas = ({
   const { t } = useTranslation();
   const suggestedTagsId = React.useId();
   const addedTagsId = React.useId();
-  const selectedTagsRef = React.useRef<HTMLDivElement>(null); // For animation target
+  const selectedTagsContainerRef = React.useRef<HTMLDivElement>(null); // For animation target
   const [skillsToAdd, setSkillsToAdd] = React.useState<string[]>([]);
-  const suggestedTagsRef = React.useRef<HTMLUListElement>(null);
+
+  const {
+    ref: suggestedTagsRef,
+    handleKeyDown: handleSuggestedTagsKeyboardNavigation,
+    setLastClickedIndex: setLastSuggestedTagClickedIndex,
+  } = useArrowKeyControls(ehdotetutOsaamiset);
+
+  const {
+    ref: selectedTagsRef,
+    handleKeyDown: handleSelectedTagsKeyboardNavigation,
+    setLastClickedIndex: setLastSelectedTagClickedIndex,
+  } = useArrowKeyControls(value);
 
   const removeOsaaminenById = React.useCallback(
     (ids: string[]) => () => {
       // Assume that last clicked osaaminen is the first one on the list
       const id = ids[0];
-      lastClickedIndexRef.current = { index: value.findIndex((val) => val.id === id), group: 'selected' };
+      const indexInValue = value.findIndex((val) => val.id === id);
+
+      setLastSelectedTagClickedIndex(indexInValue);
       const valueWithoutRemoved = value.filter((val) => !ids.includes(val.id));
       onChange(valueWithoutRemoved);
       setResultChangeReason('user');
     },
-    [onChange, value, setResultChangeReason, lastClickedIndexRef],
+    [value, setLastSelectedTagClickedIndex, onChange, setResultChangeReason],
   );
-
-  // Set roving tabindex for suggested tags
-  React.useEffect(() => {
-    if (suggestedTagsRef.current) {
-      const buttons = suggestedTagsRef.current.querySelectorAll('button');
-      buttons.forEach((button, index) => {
-        button.setAttribute('tabindex', index === 0 ? '0' : '-1');
-      });
-
-      // Focus previous button after adding a competence
-      if (lastClickedIndexRef.current?.group === 'suggested' && buttons.length > 0) {
-        // If clicked was first (index 0), focus the new first (still 0)
-        // Otherwise focus the previous one (index - 1)
-        const prevIndex =
-          lastClickedIndexRef.current.index === 0 ? 0 : Math.max(0, lastClickedIndexRef.current.index - 1);
-        const prevButton = buttons[prevIndex];
-        prevButton?.focus();
-        lastClickedIndexRef.current = null;
-      }
-    }
-  }, [ehdotetutOsaamiset, lastClickedIndexRef]);
-
-  // Set roving tabindex for selected tags
-  React.useEffect(() => {
-    const selectedTagsListElement = selectedTagsRef.current?.querySelector('ul');
-    if (selectedTagsListElement) {
-      const buttons = selectedTagsListElement.querySelectorAll('button');
-      buttons.forEach((button, index) => {
-        button.setAttribute('tabindex', index === 0 ? '0' : '-1');
-      });
-
-      // Focus previous button after removing a competence
-      if (lastClickedIndexRef.current?.group === 'selected' && buttons.length > 0) {
-        // If removed was first (index 0), focus the new first (still 0)
-        // Otherwise focus the previous one (index - 1)
-        const prevIndex =
-          lastClickedIndexRef.current.index === 0 ? 0 : Math.max(0, lastClickedIndexRef.current.index - 1);
-        const prevButton = buttons[prevIndex];
-        prevButton?.focus();
-        lastClickedIndexRef.current = null;
-      }
-    }
-  }, [lastClickedIndexRef, value]);
 
   return (
     <>
@@ -123,9 +92,7 @@ export const TagAreas = ({
             className="flex flex-wrap gap-3 p-1"
             data-testid="osaamissuosittelija-suggested-competences"
             role="group"
-            onKeyDown={(e) => {
-              handleTagsKeyboardNavigation(e, ehdotetutOsaamiset);
-            }}
+            onKeyDown={handleSuggestedTagsKeyboardNavigation}
             aria-labelledby={suggestedTagsId}
           >
             {ehdotetutOsaamiset.map((ehdotettuOsaaminen, index) => (
@@ -150,7 +117,7 @@ export const TagAreas = ({
                     }
 
                     setResultChangeReason('user');
-                    lastClickedIndexRef.current = { index, group: 'suggested' };
+                    setLastSuggestedTagClickedIndex(index);
                     skillsToAdd.push(ehdotettuOsaaminen.id);
 
                     // Call onChange before animation, otherwise only the first value will be added when selecting competences rapidly.
@@ -166,7 +133,7 @@ export const TagAreas = ({
                     ]);
 
                     if (useAnimations) {
-                      animateElementToTarget(e.currentTarget, selectedTagsRef.current!, () => {
+                      animateElementToTarget(e.currentTarget, selectedTagsContainerRef.current!, () => {
                         // eslint-disable-next-line sonarjs/no-nested-functions
                         setSkillsToAdd((prev) => prev.filter((id) => id !== ehdotettuOsaaminen.id));
                       });
@@ -212,7 +179,7 @@ export const TagAreas = ({
 
           <div
             className={cx('overflow-y-auto max-h-[228px]', isTagSpacing && 'min-h-8 h-[100px] sm:max-h-[25dvh]')}
-            ref={selectedTagsRef}
+            ref={selectedTagsContainerRef}
           >
             {value.length > 0 ? (
               // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
@@ -220,7 +187,8 @@ export const TagAreas = ({
                 className="flex flex-wrap gap-3 p-1"
                 data-testid="osaamissuosittelija-selected-competences"
                 role="group"
-                onKeyDown={(e) => handleTagsKeyboardNavigation(e, value)}
+                onKeyDown={handleSelectedTagsKeyboardNavigation}
+                ref={selectedTagsRef}
                 aria-labelledby={addedTagsId}
               >
                 <AddedTags

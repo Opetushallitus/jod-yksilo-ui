@@ -1,4 +1,5 @@
 import { MainLayout } from '@/components';
+import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
@@ -25,6 +26,8 @@ const SomethingElse = () => {
     () => [...muuOsaaminen].sort(sortByProperty(`nimi.${language}`)),
     [muuOsaaminen, language],
   );
+
+  const { ref, handleKeyDown } = useArrowKeyControls(sortedData);
 
   return (
     <MainLayout
@@ -56,7 +59,8 @@ const SomethingElse = () => {
             {t('profile.something-else.my-other-comptetences')}
           </h2>
         )}
-        <ul className="flex flex-wrap gap-3" data-testid="something-else-tags">
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+        <ul ref={ref} className="flex flex-wrap gap-3" data-testid="something-else-tags" onKeyDown={handleKeyDown}>
           {sortedData.map((val) => (
             <li key={val.uri} className="max-w-full">
               <Tag

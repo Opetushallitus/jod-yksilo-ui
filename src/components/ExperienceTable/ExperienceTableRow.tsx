@@ -1,4 +1,5 @@
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
+import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useModal } from '@/hooks/useModal';
 import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
 import { Checkbox, cx, Spinner, Tag, useMediaQueries } from '@jod/design-system';
@@ -116,11 +117,13 @@ const CompetencesRow = ({
   sortedCompetences: ExperienceTableRowData['osaamiset'];
 }) => {
   const { t } = useTranslation();
+  const { ref, handleKeyDown } = useArrowKeyControls(sortedCompetences);
   return (
     <tr>
       {tagsVisibleState && !showCheckbox && (
         <td colSpan={5} className={`${className} w-full max-w-0 px-4 pt-3 pb-5`.trim()}>
-          <ul className="flex flex-wrap gap-3" aria-label={t('competences')}>
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+          <ul ref={ref} className="flex flex-wrap gap-3" aria-label={t('competences')} onKeyDown={handleKeyDown}>
             {sortedCompetences.map((competence) => (
               <li key={competence.id} className="max-w-full">
                 <Tag
