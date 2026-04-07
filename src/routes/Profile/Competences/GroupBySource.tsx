@@ -1,5 +1,6 @@
 import type { components } from '@/api/schema';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
+import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useShowSessionExpiredDialog } from '@/hooks/useShowSessionExpiredDialog';
 import { useSessionExpirationStore } from '@/stores/useSessionExpirationStore';
 import { removeDuplicatesByKey } from '@/utils';
@@ -10,15 +11,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouteLoaderData } from 'react-router';
 import { generateProfileLink, getTextClassByCompetenceSourceType } from '../utils';
-import { type CompetenceSourceType, FILTERS_ORDER, type GroupByProps, MobileFilterButton } from './constants';
+import { type CompetenceSourceType, FILTERS_ORDER, type GroupByProps, type MobileFilterButton } from './constants';
 
-export const GroupBySource = ({
-  filters,
-  locale,
-  osaamiset,
-  isOsaaminenVisible,
-  mobileFilterOpenerComponent,
-}: GroupByProps & MobileFilterButton) => {
+interface SourceSectionProps extends Omit<GroupByProps, 'filterKeys'> {
+  sourceType: Exclude<CompetenceSourceType, 'KIINNOSTUS'>;
+}
+const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisible }: SourceSectionProps) => {
   const {
     t,
     i18n: { language },
@@ -99,6 +97,69 @@ export const GroupBySource = ({
     );
   };
 
+  const { ref, handleKeyDown } = useArrowKeyControls(nonDuplicateOsaamiset);
+
+  return (
+    <div key={sourceType} className="flex flex-col mb-11">
+      <Accordion
+        underline
+        title={
+          <div className={`truncate text-heading-3 ${getTextClassByCompetenceSourceType(sourceType)}`}>
+            {accordionLabels[sourceType]}
+          </div>
+        }
+        ariaLabel={accordionLabels[sourceType]}
+      >
+        {Array.isArray(filters[sourceType]) && filters[sourceType].some((filter) => filter.checked) ? (
+          <div className="mt-5 flex flex-col gap-7">
+            {nonDuplicateOsaamiset.some(
+              (val) => val.lahde.tyyppi === sourceType && isOsaaminenVisible(sourceType, val.lahde.id),
+            ) && (
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+              <ul className="flex flex-wrap gap-4" ref={ref} onKeyDown={handleKeyDown}>
+                {nonDuplicateOsaamiset.map((val) => {
+                  const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
+                  const tooltip = val.osaaminen.kuvaus[locale];
+                  return val.lahde.tyyppi === sourceType && isOsaaminenVisible(sourceType, val.lahde.id) ? (
+                    <li key={val.id} className="max-w-full">
+                      <Tag
+                        label={label}
+                        tooltip={tooltip}
+                        screenReaderTooltip={t('description-for', { description: tooltip })}
+                        variant="presentation"
+                        sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
+                      />
+                    </li>
+                  ) : null;
+                })}
+              </ul>
+            )}
+
+            {getLinkButton(sourceType)}
+          </div>
+        ) : (
+          <>
+            <div className="mt-6 mb-7">
+              <EmptyState text={emptyStateLabels[sourceType]} />
+            </div>
+
+            <div className="mt-5">{getLinkButton(sourceType)}</div>
+          </>
+        )}
+      </Accordion>
+    </div>
+  );
+};
+
+export const GroupBySource = ({
+  filters,
+  locale,
+  osaamiset,
+  isOsaaminenVisible,
+  mobileFilterOpenerComponent,
+}: GroupByProps & MobileFilterButton) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="flex flex-row justify-between gap-5 mb-7">
@@ -108,53 +169,14 @@ export const GroupBySource = ({
 
       {FILTERS_ORDER.filter((f) => f !== 'KIINNOSTUS').map((sourceType) => {
         return (
-          <div key={sourceType} className="flex flex-col mb-11">
-            <Accordion
-              underline
-              title={
-                <div className={`truncate text-heading-3 ${getTextClassByCompetenceSourceType(sourceType)}`}>
-                  {accordionLabels[sourceType]}
-                </div>
-              }
-              ariaLabel={accordionLabels[sourceType]}
-            >
-              {Array.isArray(filters[sourceType]) && filters[sourceType].some((filter) => filter.checked) ? (
-                <div className="mt-5 flex flex-col gap-7">
-                  {nonDuplicateOsaamiset.some(
-                    (val) => val.lahde.tyyppi === sourceType && isOsaaminenVisible(sourceType, val.lahde.id),
-                  ) && (
-                    <ul className="flex flex-wrap gap-4">
-                      {nonDuplicateOsaamiset.map((val) => {
-                        const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
-                        const tooltip = val.osaaminen.kuvaus[locale];
-                        return val.lahde.tyyppi === sourceType && isOsaaminenVisible(sourceType, val.lahde.id) ? (
-                          <li key={val.id} className="max-w-full">
-                            <Tag
-                              label={label}
-                              tooltip={tooltip}
-                              screenReaderTooltip={t('description-for', { description: tooltip })}
-                              variant="presentation"
-                              sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
-                            />
-                          </li>
-                        ) : null;
-                      })}
-                    </ul>
-                  )}
-
-                  {getLinkButton(sourceType)}
-                </div>
-              ) : (
-                <>
-                  <div className="mt-6 mb-7">
-                    <EmptyState text={emptyStateLabels[sourceType]} />
-                  </div>
-
-                  <div className="mt-5">{getLinkButton(sourceType)}</div>
-                </>
-              )}
-            </Accordion>
-          </div>
+          <SourceSection
+            key={sourceType}
+            sourceType={sourceType}
+            osaamiset={osaamiset}
+            filters={filters}
+            locale={locale}
+            isOsaaminenVisible={isOsaaminenVisible}
+          />
         );
       })}
     </>

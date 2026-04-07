@@ -1,6 +1,7 @@
 import { ActionButton, ExperienceTable, MainLayout, OpportunityCard } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
+import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { getLocalizedText, hyphenize } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Accordion, Button, type MenuSection, PageNavigation, Tag, useMediaQueries } from '@jod/design-system';
@@ -158,6 +159,12 @@ const Cv = () => {
     />
   );
 
+  const { ref: muuOsaaminenRef, handleKeyDown: onMuuOsaaminenKeyDown } = useArrowKeyControls(muuOsaaminen);
+  const { ref: kiinnostavatAmmatitRef, handleKeyDown: onKiinnostavatAmmatitKeyDown } =
+    useArrowKeyControls(kiinnostavatAmmatit);
+  const { ref: kiinnostavatOsaamisetRef, handleKeyDown: onKiinnostavatOsaamisetKeyDown } =
+    useArrowKeyControls(kiinnostavatOsaamiset);
+
   return (
     <MainLayout
       hideBreadcrumb
@@ -277,7 +284,8 @@ const Cv = () => {
               <h3 className="text-heading-2 mb-5">{t('cv.competence.something-else')}</h3>
               <div className="border-b-2 border-border-gray pb-3 mb-5">{t('cv.competence.title')}</div>
               <div className="mb-8">
-                <ul className="flex flex-row flex-wrap gap-3">
+                {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+                <ul className="flex flex-row flex-wrap gap-3" ref={muuOsaaminenRef} onKeyDown={onMuuOsaaminenKeyDown}>
                   {muuOsaaminen.map((osaaminen) => (
                     <li key={osaaminen.uri} className="max-w-full">
                       <Tag label={getLocalizedText(osaaminen.nimi)} variant="presentation" sourceType="jotain-muuta" />
@@ -311,7 +319,12 @@ const Cv = () => {
               <>
                 <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.interests.competences')}</h3>
                 <div className="mb-8">
-                  <ul className="flex flex-row flex-wrap gap-3">
+                  {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+                  <ul
+                    className="flex flex-row flex-wrap gap-3"
+                    ref={kiinnostavatOsaamisetRef}
+                    onKeyDown={onKiinnostavatOsaamisetKeyDown}
+                  >
                     {kiinnostavatOsaamiset?.map((osaaminen) => (
                       <li key={osaaminen.uri} className="max-w-full">
                         <Tag label={getLocalizedText(osaaminen.nimi)} variant="presentation" sourceType="kiinnostus" />
@@ -326,7 +339,12 @@ const Cv = () => {
               <>
                 <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.interests.occupations')}</h3>
                 <div className="mb-8">
-                  <ul className="flex flex-row flex-wrap gap-3">
+                  {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+                  <ul
+                    className="flex flex-row flex-wrap gap-3"
+                    ref={kiinnostavatAmmatitRef}
+                    onKeyDown={onKiinnostavatAmmatitKeyDown}
+                  >
                     {kiinnostavatAmmatit?.map((ammatti) => (
                       <li key={ammatti.uri} className="max-w-full">
                         <Tag label={getLocalizedText(ammatti.nimi)} variant="presentation" sourceType="kiinnostus" />

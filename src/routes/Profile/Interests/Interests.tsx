@@ -1,6 +1,7 @@
 import { client } from '@/api/client';
 import { MainLayout } from '@/components';
 import { ESCO_OCCUPATION_PREFIX } from '@/constants';
+import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import EditKiinnostusModal from '@/routes/Profile/Interests/EditKiinnostusModal';
@@ -36,6 +37,8 @@ const Interests = () => {
   const isOccupationSkillsEmpty = sortedOccupations.length === 0;
   const isAllSkillsEmpty = isSkillsEmpty && isOccupationSkillsEmpty;
 
+  const { ref, handleKeyDown } = useArrowKeyControls(sortedSkills);
+
   return (
     <MainLayout
       navChildren={
@@ -64,7 +67,8 @@ const Interests = () => {
             <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
               {t('profile.interests.skills-that-interest-me')}
             </h2>
-            <ul className="flex flex-wrap gap-3">
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+            <ul ref={ref} className="flex flex-wrap gap-3" onKeyDown={handleKeyDown}>
               {sortedSkills.map((val) => (
                 <li key={val.uri} className="max-w-full">
                   <Tag

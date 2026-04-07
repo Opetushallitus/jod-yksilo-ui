@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
 import { TitleIcon } from '@/components/TitleIcon/TitleIcon';
+import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
 import { KoulutusMahdollisuusFull } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel';
 import type { KoulutusmahdollisuusJakaumat } from '@/routes/types';
@@ -48,6 +49,8 @@ const PlanOpportunityCard = React.memo(
         })
         .then((data) => setOsaamiset(data ?? []));
 
+    const { ref, handleKeyDown } = useArrowKeyControls(osaamiset);
+
     return (
       <div className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border">
         <div className="flex flex-row gap-3 justify-between sm:items-start mb-4">
@@ -84,7 +87,8 @@ const PlanOpportunityCard = React.memo(
           caretPosition="top"
         >
           <p className="font-arial text-body-md-mobile sm:text-body-md mb-4 mt-3">{getLocalizedText(kuvaus)}</p>
-          <ul className="flex flex-row flex-wrap gap-3">
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+          <ul className="flex flex-row flex-wrap gap-3" ref={ref} onKeyDown={handleKeyDown}>
             {osaamiset.map((osaaminen) => (
               <li key={osaaminen.uri} className="max-w-full">
                 <Tag

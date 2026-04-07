@@ -1,16 +1,23 @@
 import { client } from '@/api/client';
-import { osaamiset } from '@/api/osaamiset';
+import { type OsaaminenDto, osaamiset } from '@/api/osaamiset';
 import { AnchorLink } from '@/components/AnchorLink/AnchorLink';
 import { ModalHeader } from '@/components/ModalHeader';
 import { LIMITS, OSAAMINEN_COLOR_MAP } from '@/constants';
+import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicatesByKey } from '@/utils';
 import { animateElementToTarget, animateHideElement } from '@/utils/animations';
 import { AiInfoButton, Button, cx, EmptyState, InputField, Modal, Tag, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew, JodSend } from '@jod/design-system/icons';
-import React, { Fragment } from 'react';
+import React from 'react';
 import toast from 'react-hot-toast/headless';
 import { Trans, useTranslation } from 'react-i18next';
+
+interface MessageRow {
+  message: string;
+  answer?: string;
+  kiinnostukset?: OsaaminenDto[];
+}
 
 const MessageBubble = ({ message, isUser }: { message: string; isUser: boolean }) => {
   return (
@@ -38,6 +45,64 @@ const MessageBubble = ({ message, isUser }: { message: string; isUser: boolean }
   );
 };
 
+interface MessageContainerProps {
+  row: MessageRow;
+  type: 'competences' | 'interests';
+  selected: OsaaminenDto[];
+  setSelected: React.Dispatch<React.SetStateAction<OsaaminenDto[]>>;
+  animateTagToSelectedTab: (element: HTMLElement) => void;
+}
+const MessageContainer = ({ row, type, selected, setSelected, animateTagToSelectedTab }: MessageContainerProps) => {
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+  const { ref, handleKeyDown, setLastClickedIndex } = useArrowKeyControls(row.kiinnostukset ?? []);
+
+  return (
+    <>
+      <MessageBubble message={row.message} isUser={true} />
+      <MessageBubble
+        message={row.answer ? row.answer : t('tool.my-own-data.virtual-assistant.loading')}
+        isUser={false}
+      />
+      {row.kiinnostukset && row.kiinnostukset.length > 0 && (
+        <div className="flex flex-col gap-4">
+          <div className={'sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold'}>
+            <span>{type === 'competences' ? t('proposed-competences') : t('proposed-interests')}</span>
+            <div className="font-arial text-body-sm text-secondary-gray">{t(`osaamissuosittelija.interest.add`)}</div>
+          </div>
+          <div className="max-h-[228px] overflow-y-auto">
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+            <ul className="flex flex-wrap gap-3 p-1" ref={ref} onKeyDown={handleKeyDown}>
+              {row.kiinnostukset
+                .filter((k) => !selected.some((val) => val.uri === k.uri))
+                .map((k, index) => (
+                  <li key={k.uri} className="max-w-full">
+                    <Tag
+                      label={k.nimi[language] ?? k.uri}
+                      sourceType={
+                        type === 'competences'
+                          ? OSAAMINEN_COLOR_MAP['MUU_OSAAMINEN']
+                          : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
+                      }
+                      onClick={(e) => {
+                        animateTagToSelectedTab(e.currentTarget);
+                        setLastClickedIndex(index);
+                        setSelected((prev) => [k, ...prev]);
+                      }}
+                      variant="selectable"
+                    />
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
 // eslint-disable-next-line sonarjs/cognitive-complexity
 export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'interests'; className?: string }) => {
   const {
@@ -47,27 +112,8 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
   const { sm } = useMediaQueries();
   const toolStore = useToolStore();
   const [controller, setController] = React.useState<AbortController>(new AbortController());
-  const [history, setHistory] = React.useState<
-    Record<
-      string,
-      {
-        message: string;
-        answer?: string;
-        kiinnostukset?: {
-          uri: string;
-          nimi: Record<string, string>;
-          kuvaus: Record<string, string>;
-        }[];
-      }
-    >
-  >({});
-  const [selected, setSelected] = React.useState<
-    {
-      uri: string;
-      nimi: Record<string, string>;
-      kuvaus: Record<string, string>;
-    }[]
-  >([]);
+  const [history, setHistory] = React.useState<Record<string, MessageRow>>({});
+  const [selected, setSelected] = React.useState<OsaaminenDto[]>([]);
   const isSelectedEmpty = React.useMemo(() => selected.length === 0, [selected]);
 
   const [id, setId] = React.useState<string | undefined>(undefined);
@@ -83,6 +129,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
   const selectedLabelId = React.useId();
   const isSendDisabled = React.useMemo(() => value.trim().length < 2, [value]);
   const [tagsPendingRemoval, setTagsPendingRemoval] = React.useState<string[]>([]);
+  const messageContainerRef = React.useRef<HTMLDivElement>(null);
 
   // Scroll to bottom when history changes
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -107,14 +154,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
           acc[osaaminen.uri] = osaaminen;
           return acc;
         },
-        {} as Record<
-          string,
-          {
-            uri: string;
-            nimi: Record<string, string>;
-            kuvaus: Record<string, string>;
-          }
-        >,
+        {} as Record<string, OsaaminenDto>,
       );
       setHistory((prevState) => ({
         ...prevState,
@@ -144,14 +184,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
           acc[osaaminen.uri] = osaaminen;
           return acc;
         },
-        {} as Record<
-          string,
-          {
-            uri: string;
-            nimi: Record<string, string>;
-            kuvaus: Record<string, string>;
-          }
-        >,
+        {} as Record<string, OsaaminenDto>,
       );
 
       setId(data?.id);
@@ -207,6 +240,10 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
     return value?.replace(regex, '');
   };
 
+  const animateTagToSelectedTab = (element: HTMLElement) => {
+    animateElementToTarget(element, selectedTabButtonRef.current!);
+  };
+
   const [isOpen, setIsOpen] = React.useState(false);
 
   const headerText =
@@ -241,6 +278,12 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
       </p>
     </div>
   );
+
+  const {
+    ref: selectedTagsRef,
+    handleKeyDown: handleTagsKeyboardNavigation,
+    setLastClickedIndex,
+  } = useArrowKeyControls(selected);
 
   return (
     <div className={className}>
@@ -331,7 +374,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
                 className="flex flex-col flex-1 overflow-y-auto text-primary-gray"
                 data-testid="va-transcript"
               >
-                <div className="flex flex-col flex-1 gap-5 px-4 py-3 my-2">
+                <div className="flex flex-col flex-1 gap-5 px-4 py-3 my-2" ref={messageContainerRef}>
                   <MessageBubble
                     message={
                       type === 'competences'
@@ -349,47 +392,14 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
                     isUser={false}
                   />
                   {Object.entries(history).map(([key, row]) => (
-                    <Fragment key={key}>
-                      <MessageBubble message={row.message} isUser={true} />
-                      <MessageBubble
-                        message={row.answer ? row.answer : t('tool.my-own-data.virtual-assistant.loading')}
-                        isUser={false}
-                      />
-                      {row.kiinnostukset && row.kiinnostukset.length > 0 && (
-                        <div className="flex flex-col gap-4">
-                          <div className={'sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold'}>
-                            <span>{type === 'competences' ? t('proposed-competences') : t('proposed-interests')}</span>
-                            <div className="font-arial text-body-sm text-secondary-gray">
-                              {t(`osaamissuosittelija.interest.add`)}
-                            </div>
-                          </div>
-                          <div className="max-h-[228px] overflow-y-auto">
-                            <ul className="flex flex-wrap gap-3">
-                              {row.kiinnostukset
-                                .filter((k) => !selected.some((val) => val.uri === k.uri))
-                                .map((k) => (
-                                  <li key={k.uri} className="max-w-full">
-                                    <Tag
-                                      label={k.nimi[language] ?? k.uri}
-                                      sourceType={
-                                        type === 'competences'
-                                          ? OSAAMINEN_COLOR_MAP['MUU_OSAAMINEN']
-                                          : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
-                                      }
-                                      onClick={(e) => {
-                                        animateElementToTarget(e.currentTarget, selectedTabButtonRef.current!);
-                                        // eslint-disable-next-line sonarjs/no-nested-functions
-                                        setSelected((prevState) => [k, ...prevState]);
-                                      }}
-                                      variant="selectable"
-                                    />
-                                  </li>
-                                ))}
-                            </ul>
-                          </div>
-                        </div>
-                      )}
-                    </Fragment>
+                    <MessageContainer
+                      key={key}
+                      row={row}
+                      animateTagToSelectedTab={animateTagToSelectedTab}
+                      selected={selected}
+                      type={'competences'}
+                      setSelected={setSelected}
+                    />
                   ))}
                 </div>
               </div>
@@ -428,8 +438,13 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
                   <span className="text-help text-secondary-gray">{t('osaamissuosittelija.interest.remove')}</span>
 
                   <div aria-labelledby={selectedLabelId} className="min-h-[144px] overflow-y-auto mt-4">
-                    <ul className="flex flex-wrap gap-3">
-                      {selected.map((k) => (
+                    {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+                    <ul
+                      className="flex flex-wrap gap-3 p-1"
+                      ref={selectedTagsRef}
+                      onKeyDown={handleTagsKeyboardNavigation}
+                    >
+                      {selected.map((k, index) => (
                         <li key={k.uri} className="max-w-full">
                           <Tag
                             label={k.nimi[language] ?? k.uri}
@@ -446,6 +461,8 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
                                 setSelected((prevState) => {
                                   return prevState.filter((selectedValue) => selectedValue.kuvaus !== k.kuvaus);
                                 });
+
+                                setLastClickedIndex(index);
                                 // eslint-disable-next-line sonarjs/no-nested-functions
                                 setTagsPendingRemoval((prev) => prev.filter((uri) => uri !== k.uri));
                               });

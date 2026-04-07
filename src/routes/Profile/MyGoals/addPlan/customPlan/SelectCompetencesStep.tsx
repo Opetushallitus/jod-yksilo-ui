@@ -1,6 +1,7 @@
 import type { components } from '@/api/schema';
 import AddedTags from '@/components/OsaamisSuosittelija/AddedTags';
-import { getLocalizedText, handleTagsKeyboardNavigation } from '@/utils';
+import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
+import { getLocalizedText } from '@/utils';
 import { animateElementToTarget } from '@/utils/animations';
 import { EmptyState, Tag } from '@jod/design-system';
 import React from 'react';
@@ -14,13 +15,11 @@ const SelectCompetencesStep = () => {
   const vaaditutOsaamiset = addPlanStore((state) => state.vaaditutOsaamiset);
   const requiredTagsId = React.useId();
   const addedTagsId = React.useId();
-  const requiredTagsRef = React.useRef<HTMLUListElement>(null);
-  const selectedTagsRef = React.useRef<HTMLDivElement>(null);
+  const selectedTagsContainerRef = React.useRef<HTMLDivElement>(null); // For animation target
   const [skillsToAdd, setSkillsToAdd] = React.useState<string[]>([]);
   const [filteredVaaditutOsaamiset, setFilteredVaaditutOsaamiset] = React.useState<
     components['schemas']['OsaaminenDto'][]
   >([]);
-  const lastClickedIndexRef = React.useRef<{ index: number; group: 'required' | 'selected' } | null>(null);
 
   const { control } = useFormContext<OmaSuunnitelmaForm>();
   const {
@@ -38,59 +37,29 @@ const SelectCompetencesStep = () => {
     ]);
   }, [vaaditutOsaamiset, valitutOsaamiset]);
 
+  const {
+    ref: requiredTagsRef,
+    handleKeyDown: handleRequiredTagsKeyboardNavigation,
+    setLastClickedIndex: setLastRequiredTagClickedIndex,
+  } = useArrowKeyControls(filteredVaaditutOsaamiset);
+
+  const {
+    ref: selectedTagsRef,
+    handleKeyDown: handleSelectedTagsKeyboardNavigation,
+    setLastClickedIndex: setLastSelectedTagClickedIndex,
+  } = useArrowKeyControls(valitutOsaamiset);
+
   const removeOsaaminenById = React.useCallback(
     (ids: string[]) => () => {
       // Assume that last clicked osaaminen is the first one on the list
       const id = ids[0];
 
       const idx = valitutOsaamiset.findIndex((val) => val.uri === id);
-      lastClickedIndexRef.current = { index: idx, group: 'selected' };
+      setLastSelectedTagClickedIndex(idx);
       remove(idx);
     },
-    [remove, valitutOsaamiset],
+    [remove, setLastSelectedTagClickedIndex, valitutOsaamiset],
   );
-
-  // Set roving tabindex for required tags
-  React.useEffect(() => {
-    if (requiredTagsRef.current) {
-      const buttons = requiredTagsRef.current.querySelectorAll('button');
-      buttons.forEach((button, index) => {
-        button.setAttribute('tabindex', index === 0 ? '0' : '-1');
-      });
-
-      // Focus previous button after adding a competence
-      if (lastClickedIndexRef.current?.group === 'required' && buttons.length > 0) {
-        // If clicked was first (index 0), focus the new first (still 0)
-        // Otherwise focus the previous one (index - 1)
-        const prevIndex =
-          lastClickedIndexRef.current.index === 0 ? 0 : Math.max(0, lastClickedIndexRef.current.index - 1);
-        const prevButton = buttons[prevIndex];
-        prevButton?.focus();
-        lastClickedIndexRef.current = null;
-      }
-    }
-  }, [filteredVaaditutOsaamiset]);
-
-  // Set roving tabindex for selected tags
-  React.useEffect(() => {
-    if (selectedTagsRef.current) {
-      const buttons = selectedTagsRef.current.querySelectorAll('button');
-      buttons.forEach((button, index) => {
-        button.setAttribute('tabindex', index === 0 ? '0' : '-1');
-      });
-
-      // Focus previous button after removing a competence
-      if (lastClickedIndexRef.current?.group === 'selected' && buttons.length > 0) {
-        // If removed was first (index 0), focus the new first (still 0)
-        // Otherwise focus the previous one (index - 1)
-        const prevIndex =
-          lastClickedIndexRef.current.index === 0 ? 0 : Math.max(0, lastClickedIndexRef.current.index - 1);
-        const prevButton = buttons[prevIndex];
-        prevButton?.focus();
-        lastClickedIndexRef.current = null;
-      }
-    }
-  }, [valitutOsaamiset]);
 
   return (
     <div className="overflow-y-auto max-w-modal-content box-content px-5 md:px-9">
@@ -112,7 +81,7 @@ const SelectCompetencesStep = () => {
             className="flex flex-wrap gap-3 p-1"
             role="group"
             aria-labelledby={requiredTagsId}
-            onKeyDown={(e) => handleTagsKeyboardNavigation(e, filteredVaaditutOsaamiset)}
+            onKeyDown={handleRequiredTagsKeyboardNavigation}
           >
             {filteredVaaditutOsaamiset.map((o, index) => (
               <li key={o.uri} className="max-w-full">
@@ -120,8 +89,8 @@ const SelectCompetencesStep = () => {
                   onClick={(e) => {
                     skillsToAdd.push(o.uri);
                     append(o);
-                    lastClickedIndexRef.current = { index, group: 'required' };
-                    animateElementToTarget(e.currentTarget, selectedTagsRef.current!, () => {
+                    setLastRequiredTagClickedIndex(index);
+                    animateElementToTarget(e.currentTarget, selectedTagsContainerRef.current!, () => {
                       // eslint-disable-next-line sonarjs/no-nested-functions
                       setSkillsToAdd((prev) => prev.filter((uri) => uri !== o.uri));
                     });
@@ -145,7 +114,7 @@ const SelectCompetencesStep = () => {
         <h2 id={addedTagsId} className="font-arial sm:text-heading-3 text-heading-3-mobile">
           {t('profile.my-goals.selected-competences')}
         </h2>
-        <div ref={selectedTagsRef}>
+        <div ref={selectedTagsContainerRef}>
           {valitutOsaamiset.length === 0 && (
             <EmptyState text={t('profile.my-goals.no-chosen-competences')} testId="plan-competences-empty-state" />
           )}
@@ -157,10 +126,11 @@ const SelectCompetencesStep = () => {
               <div className="overflow-y-auto max-h-[228px] min-h-8 h-[154px] sm:max-h-[25dvh]">
                 {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
                 <ul
+                  ref={selectedTagsRef}
                   className="flex flex-wrap gap-3 p-1"
                   role="group"
                   aria-labelledby={addedTagsId}
-                  onKeyDown={(e) => handleTagsKeyboardNavigation(e, valitutOsaamiset)}
+                  onKeyDown={handleSelectedTagsKeyboardNavigation}
                 >
                   <AddedTags
                     osaamiset={valitutOsaamiset.map((o) => ({ id: o.uri, nimi: o.nimi, kuvaus: o.kuvaus }))}

@@ -17,8 +17,6 @@ export interface Osaaminen {
 }
 
 export type OsaaminenValue = Pick<Osaaminen, 'id' | 'nimi' | 'kuvaus' | 'tyyppi'>;
-export type LastClickedIndex = { index: number; group: 'suggested' | 'selected' } | null;
-
 type OsaamisSuosittelijaMode = 'osaamiset' | 'kiinnostukset';
 
 export interface OsaamisSuosittelijaProps {
@@ -71,8 +69,6 @@ export const OsaamisSuosittelija = ({
   const [hasFetched, setHasFetched] = React.useState(false); // To track if at least one fetch has been made, to avoid showing "0 results found" on initial render
   const [resultChangeReason, setResultChangeReason] = React.useState<'fetch' | 'user' | null>(null); // To track if the change in results was caused by either user input or fetch results. Screen reader should only announce results found after fetch, not after user filtering.
   const pendingTaitosi = React.useRef<string | null>(null);
-
-  const lastClickedIndexRef = React.useRef<LastClickedIndex>(null);
   const textareaContainerRef = React.useRef<HTMLDivElement>(null);
 
   // Scroll textarea to top when focused
@@ -245,7 +241,6 @@ export const OsaamisSuosittelija = ({
           ehdotetutOsaamiset={filteredEhdotetutOsaamiset}
           isTagSpacing={isTagSpacing}
           useAnimations={useAnimations}
-          lastClickedIndexRef={lastClickedIndexRef}
           setResultChangeReason={setResultChangeReason}
           hideSelected={hideSelected}
           tagHeadingClassName={tagHeadingClassName}
