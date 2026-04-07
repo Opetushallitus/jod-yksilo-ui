@@ -118,6 +118,14 @@ export function HowToUse() {
   const createProfileId = React.useId();
   const findWithWordsId = React.useId();
   const { opintopolkuLogo, tyomarkkinatoriLogo } = getLocalizedLogos(language);
+  const tooltipPortalRef = React.useRef<HTMLDivElement>(null);
+  const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(null);
+
+  React.useEffect(() => {
+    if (tooltipPortalRef.current) {
+      setPortalRoot(tooltipPortalRef.current);
+    }
+  }, []);
 
   return (
     <figure className="flex flex-col justify-center items-center">
@@ -129,13 +137,16 @@ export function HowToUse() {
               / {t('common:navigation.external.yksilo.label')}
             </div>
           </div>
-          <div className="bg-secondary-1-dark rounded-md p-5 text-white text-body-sm font-semibold text-center flex items-center justify-center gap-3">
-            {t('how-to-use.find-opportunities-title')}
+          <div
+            className="bg-secondary-1-dark rounded-md p-5 text-white text-body-sm font-semibold flex items-center justify-center"
+            ref={tooltipPortalRef}
+          >
+            <span className="mr-3">{t('how-to-use.find-opportunities-title')}</span>
             <Tooltip>
               <TooltipTrigger aria-label={t('common:more-info')} aria-describedby={findOpportunitiesId}>
                 <JodInfo />
               </TooltipTrigger>
-              <TooltipContent id={findOpportunitiesId}>
+              <TooltipContent id={findOpportunitiesId} portalRoot={portalRoot}>
                 <p className="font-bold mb-2">{t('how-to-use.find-opportunities-title')}</p>
                 <p className="mb-3">{t('how-to-use.find-opportunities-description')}</p>
                 <p className="mb-2">{t('how-to-use.find-opportunities-disclaimer')}</p>
