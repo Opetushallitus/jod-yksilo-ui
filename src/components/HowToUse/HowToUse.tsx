@@ -1,4 +1,12 @@
-import { LogoRgbFi, Tooltip, TooltipContent, TooltipTrigger, useMediaQueries } from '@jod/design-system';
+import {
+  LogoRgbEn,
+  LogoRgbFi,
+  LogoRgbSv,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  useMediaQueries,
+} from '@jod/design-system';
 import { JodInfo, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -15,7 +23,7 @@ import {
 const BlueArrows = () => {
   const { sm } = useMediaQueries();
   return sm ? (
-    <svg width="396" height="71" viewBox="0 0 396 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="396" height="71" viewBox="0 0 396 71" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-5">
       <g clipPath="url(#clip0_24362_51224)">
         <path d="M210.785 99.3945C210.785 52.8945 174.285 68.3945 192.851 26.3945" stroke="#85C4EC" strokeWidth="15" />
         <path d="M205.111 33.1498L180.113 26.0732L198.741 7.9613L205.111 33.1498Z" stroke="#85C4EC" strokeWidth="8" />
@@ -31,7 +39,7 @@ const BlueArrows = () => {
       </defs>
     </svg>
   ) : (
-    <svg width="274" height="72" viewBox="0 0 274 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="274" height="72" viewBox="0 0 274 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-5">
       <path d="M150.285 99.5664C150.285 53.0664 113.785 68.5664 132.351 26.5664" stroke="#85C4EC" strokeWidth="15" />
       <path d="M144.607 33.3217L119.609 26.2451L138.237 8.13317L144.607 33.3217Z" stroke="#85C4EC" strokeWidth="8" />
       <path d="M7.5 83.1719C7.5 32.6719 77 57.6719 90.2605 25.6719" stroke="#ADD8F2" strokeWidth="15" />
@@ -92,16 +100,19 @@ const getLocalizedLogos = (language: string) => {
   switch (language) {
     case 'sv':
       return {
+        osaamispolkuLogo: <LogoRgbSv size="26" />,
         opintopolkuLogo: <LogoOpintopolkuSv width="100%" className="h-7" />,
         tyomarkkinatoriLogo: <LogoTyomarkkinatoriSv width="100%" className="h-7" />,
       };
     case 'en':
       return {
+        osaamispolkuLogo: <LogoRgbEn size="26" />,
         opintopolkuLogo: <LogoOpintopolkuEn width="100%" className="h-7" />,
         tyomarkkinatoriLogo: <LogoTyomarkkinatoriEn width="100%" className="h-7" />,
       };
     default:
       return {
+        osaamispolkuLogo: <LogoRgbFi size="26" />,
         opintopolkuLogo: <LogoOpintopolkuFi width="100%" className="h-7" />,
         tyomarkkinatoriLogo: <LogoTyomarkkinatoriFi width="100%" className="h-7" />,
       };
@@ -117,7 +128,7 @@ export function HowToUse() {
   const findOpportunitiesWithoutLoginId = React.useId();
   const createProfileId = React.useId();
   const findWithWordsId = React.useId();
-  const { opintopolkuLogo, tyomarkkinatoriLogo } = getLocalizedLogos(language);
+  const { osaamispolkuLogo, opintopolkuLogo, tyomarkkinatoriLogo } = getLocalizedLogos(language);
   const tooltipPortalRef = React.useRef<HTMLDivElement>(null);
   const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(null);
 
@@ -132,7 +143,7 @@ export function HowToUse() {
       <div className="bg-white rounded-2xl border-4 border-secondary-1-light-3 px-4 py-2 pb-4 max-w-lg">
         <div className="flex flex-col flex-1">
           <div className="mb-3 flex gap-3 items-end">
-            <LogoRgbFi size="26" />
+            {osaamispolkuLogo}
             <div className="text-primary-gray sm:text-body-sm text-body-xs font-semibold sm:mb-0 mb-1">
               / {t('common:navigation.external.yksilo.label')}
             </div>
