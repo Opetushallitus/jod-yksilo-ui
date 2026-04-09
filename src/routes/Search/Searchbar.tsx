@@ -11,7 +11,9 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
     i18n: { language },
   } = useTranslation();
   const formId = React.useId();
+  const errorId = React.useId();
   const navigate = useNavigate();
+  const [submitError, setSubmitError] = React.useState<string | null>(null);
   const { search, setQuery, query } = useSearchStore(
     useShallow((state) => ({
       search: state.search,
@@ -21,27 +23,35 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
   );
   const onSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
+    const trimmedQuery = query.trim();
+    if (trimmedQuery.length < 3) {
+      setSubmitError(t('search.min-length', { count: 3 }));
+      return;
+    }
+
+    setSubmitError(null);
     const queryParams = new URLSearchParams();
-    queryParams.set('q', query);
+    queryParams.set('q', trimmedQuery);
     navigate(`/${language}/${t('slugs.search')}?${queryParams.toString()}`);
-    search(query);
+    search(trimmedQuery);
   };
   return (
-    <div className="flex flex-col gap-6 scroll-m-11 mb-5" ref={scrollRef}>
-      <form id={formId} className="flex items-center" onSubmit={onSubmit}>
+    <div className="flex flex-col gap-2 scroll-m-11 mb-5" ref={scrollRef}>
+      <form id={formId} className="flex items-center" onSubmit={onSubmit} noValidate>
         <div className="flex items-center w-full rounded-md border border-border-form bg-white text-primary-gray p-2">
           <input
             type="text"
             name="search"
             className="font-arial grow w-full mr-3 placeholder:text-inactive-gray placeholder:text-body-md focus:outline-2 focus:outline-accent pl-3 outline-accent outline-offset-6 rounded-l-xs mx-1"
             placeholder={t('search.search-placeholder')}
-            required
-            minLength={3}
             maxLength={400}
             onChange={(e) => {
               setQuery(e.target.value);
+              setSubmitError(null);
             }}
             value={query}
+            aria-invalid={!!submitError}
+            aria-describedby={submitError ? errorId : undefined}
           />
           <button
             type="button"
@@ -49,6 +59,7 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
             className="shrink rounded-sm bg-bg-gray focus:outline-2 focus:outline-accent cursor-pointer size-7 justify-center flex items-center outline-accent outline-offset-2 ml-2"
             onClick={() => {
               setQuery('');
+              setSubmitError(null);
             }}
           >
             <JodClose className="text-inactive-gray" />
@@ -62,6 +73,11 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
           </button>
         </div>
       </form>
+      {submitError && (
+        <div id={errorId} className="mt-2 block text-form-error text-alert-text-2 font-arial" role="alert">
+          {submitError}
+        </div>
+      )}
     </div>
   );
 };
