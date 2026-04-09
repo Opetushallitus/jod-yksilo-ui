@@ -11,6 +11,60 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 let abortController = new AbortController();
+const UNFILTERED_SEARCH_PAGE_SIZE = 500;
+
+interface UnfilteredPageResponse<T> {
+  data?: {
+    sisalto?: T[];
+    sivuja?: number;
+  };
+  error?: unknown;
+}
+
+const fetchAllUnfilteredPages = async <T>(
+  path: '/api/tyomahdollisuudet' | '/api/koulutusmahdollisuudet',
+  signal: AbortSignal,
+): Promise<T[]> => {
+  const firstPage = (await client.GET(path, {
+    params: {
+      query: {
+        sivu: 0,
+        koko: UNFILTERED_SEARCH_PAGE_SIZE,
+      },
+    },
+    signal,
+  })) as UnfilteredPageResponse<T>;
+
+  if (firstPage.error) {
+    return [];
+  }
+
+  const firstContent = firstPage.data?.sisalto ?? [];
+  const totalPages = firstPage.data?.sivuja ?? 1;
+
+  if (totalPages <= 1) {
+    return firstContent;
+  }
+
+  const remainingRequests = Array.from(
+    { length: totalPages - 1 },
+    (_, index) =>
+      client.GET(path, {
+        params: {
+          query: {
+            sivu: index + 1,
+            koko: UNFILTERED_SEARCH_PAGE_SIZE,
+          },
+        },
+        signal,
+      }) as Promise<UnfilteredPageResponse<T>>,
+  );
+
+  const remainingPages = await Promise.all(remainingRequests);
+  const remainingContent = remainingPages.flatMap((page) => page.data?.sisalto ?? []);
+
+  return firstContent.concat(remainingContent);
+};
 interface SearchStoreState {
   query: string;
   allMetadata: components['schemas']['MahdollisuusDto'][];
@@ -140,20 +194,54 @@ export const useSearchStore = create<SearchStoreState>()(
         return filteredMetadata;
       },
       search: async (query: string) => {
-        if (!query || query === '') {
-          return;
-        }
+        const trimmedQuery = query.trim();
+        const normalizedQuery = trimmedQuery.length >= 3 ? trimmedQuery : '';
 
-        set({ query, hasSearchedOnce: true, isLoading: true });
+        set({ query: normalizedQuery, hasSearchedOnce: true, isLoading: true });
 
         // Abort previous request if exists
         abortController.abort();
         abortController = new AbortController();
+
+        if (normalizedQuery === '') {
+          const [tyomahdollisuudet, koulutusmahdollisuudet] = await Promise.all([
+            fetchAllUnfilteredPages<components['schemas']['TyomahdollisuusDto']>(
+              '/api/tyomahdollisuudet',
+              abortController.signal,
+            ),
+            fetchAllUnfilteredPages<components['schemas']['KoulutusmahdollisuusDto']>(
+              '/api/koulutusmahdollisuudet',
+              abortController.signal,
+            ),
+          ]);
+
+          const allMetadata: components['schemas']['MahdollisuusDto'][] = [
+            ...tyomahdollisuudet.map((item) => ({
+              id: item.id,
+              tyyppi: 'TYOMAHDOLLISUUS' as const,
+              aineisto: item.aineisto,
+              ammattiryhma: item.ammattiryhma?.uri,
+            })),
+            ...koulutusmahdollisuudet.map((item) => ({
+              id: item.id,
+              tyyppi: 'KOULUTUSMAHDOLLISUUS' as const,
+              koulutusTyyppi: item.tyyppi,
+              kestoMinimi: item.kesto?.minimi,
+              kesto: item.kesto?.mediaani,
+              kestoMaksimi: item.kesto?.maksimi,
+            })),
+          ];
+
+          set({ allMetadata, isLoading: false });
+          await get().fetchPage(1);
+          return;
+        }
+
         const { data = [], error } = await client.GET('/api/mahdollisuudet/haku', {
           params: {
             query: {
               kieli: i18n.language as 'fi' | 'sv' | 'en',
-              teksti: query,
+              teksti: normalizedQuery,
             },
           },
           signal: abortController.signal,

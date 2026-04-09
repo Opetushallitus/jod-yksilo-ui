@@ -912,6 +912,7 @@
     "filters_zero": "Filter",
     "global-placeholder": "Sök möjligheter",
     "label": "Sök möjligheter",
+    "min-length": "Sökordet måste vara minst {{count}} tecken långt",
     "no-results": "Inga resultat hittades för sökordet.",
     "results-found_one": "Visar 1 resultat",
     "results-found_other": "Visar {{count}} resultat",

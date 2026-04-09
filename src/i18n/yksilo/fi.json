@@ -911,6 +911,7 @@
     "filters_zero": "Suodattimet",
     "global-placeholder": "Hae mahdollisuuksia",
     "label": "Hae mahdollisuuksia",
+    "min-length": "Hakusanassa on oltava vähintään {{count}} merkkiä",
     "no-results": "Hakusanalla ei löytynyt tuloksia.",
     "results-found_one": "Näytetään 1 tulos",
     "results-found_other": "Näytetään {{count}} tulosta",
