@@ -132,11 +132,11 @@ const Home = () => {
           backgroundColor="var(--ds-color-secondary-1-light-2)"
         />
         <HeroCard
-          buttonLabel={t('home.create-own-profile')}
-          content={t('home.card-2-content')}
+          buttonLabel={isLoggedIn ? t('profile.banner.link-text.logged-in') : t('home.create-own-profile')}
+          content={isLoggedIn ? t('profile.banner.description.logged-in') : t('home.card-2-content')}
           linkComponent={AuthNavLink(!isLoggedIn)}
           size="sm"
-          title={t('home.card-2-title')}
+          title={isLoggedIn ? t('profile.banner.title.logged-in') : t('home.card-2-title')}
           to={t('slugs.profile.index')}
           textColor="var(--ds-color-primary-gray)"
           backgroundColor="var(--ds-color-secondary-1-light-1)"
