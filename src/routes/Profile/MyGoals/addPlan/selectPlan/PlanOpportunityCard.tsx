@@ -32,6 +32,8 @@ const PlanOpportunityCard = React.memo(
     const missingOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
 
     const bgColorClassName = mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'bg-secondary-2-dark' : 'bg-secondary-4-dark-2';
+    const textColorClassName =
+      mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'text-secondary-2-dark!' : 'text-secondary-4-dark-2!';
 
     const fetchOsaamiset = () =>
       client
@@ -81,6 +83,7 @@ const PlanOpportunityCard = React.memo(
 
         <Accordion
           title={getLocalizedText(otsikko)}
+          className={textColorClassName}
           initialState={false}
           fetchData={fetchOsaamiset}
           ellipsis={false}
