@@ -105,6 +105,7 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
           interactiveComponent={
             <InputField
               {...register('email')}
+              requiredText={t('common:required')}
               id={emailFieldId}
               hideLabel={true}
               placeholder="matti.meikalainen@suomi.fi"
