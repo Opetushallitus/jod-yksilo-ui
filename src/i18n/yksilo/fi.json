@@ -801,17 +801,19 @@
       "list-1-item-1": "tarkastella osaamistasi yhteenvetona Osaamiseni-sivulla",
       "list-1-item-2": "tallentaa oman työhistoriasi ja kartoittaa niistä saatua osaamista Työpaikkani-sivulla",
       "list-1-item-3": "tallentaa tai tuoda oman koulutushistorian ja kartoittaa niistä saatua osaamista Koulutukseni-sivulla",
+      "list-1-title": "Osaamisprofiilissa voit:",
       "list-2-item-1": "Tallentaa sinua kiinnostavat työ- ja koulutusmahdollisuudet suosikkeihin",
       "list-2-item-2": "Suunnitella ja seurata omia koulutus- ja urapolkujasi (tulossa myöhemmin)",
+      "list-2-title": "Voit myös:",
       "list-3-item-1": "Mitä tietoja tallennat",
       "list-3-item-2": "Mihin tietojasi käytetään",
       "list-3-item-3": "Kuka voi nähdä profiilisi",
       "list-3-item-4": "Miten muut voivat hyödyntää profiiliasi",
-      "paragraph-2": "Kun täytät nämä tiedot huolellisesti, saat ehdotuksia töistä ja koulutuksista, jotka sopivat juuri sinulle.\n\nVoit myös:",
-      "paragraph-3": "Profiili on sinun!\n\nSinä päätät:",
+      "list-3-title": "Profiili on sinun! Sinä päätät:",
+      "paragraph-1": "Kun täytät nämä tiedot huolellisesti, saat ehdotuksia töistä ja koulutuksista, jotka sopivat juuri sinulle.",
       "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu lakiin valtakunnallisesta jatkuvan oppimisen digitaalisesta palvelukokonaisuudesta. <CustomLink>Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta.</CustomLink>",
       "title": "Asetukseni",
-      "you-are-signed-in": "Osaamisprofiili on paikka, jossa voit tallentaa ja hallita omia tietojasi. Osaamisprofiilissa voit:"
+      "ingress-text": "Osaamisprofiili on paikka, jossa voit tallentaa ja hallita omia tietojasi."
     },
     "something-else": {
       "description": "Löydät alta muut osaamisesi. Voit lisätä ja poistaa osaamisia muokkaa osaamisia -painikkeella.",

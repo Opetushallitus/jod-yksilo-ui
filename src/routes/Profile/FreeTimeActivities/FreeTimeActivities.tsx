@@ -70,7 +70,7 @@ const FreeTimeActivities = () => {
       <title>{title}</title>
       <div className="px-5 sm:px-6">
         <ProfileSectionTitle type="PATEVYYS" title={title} />
-        <p className="mb-5 text-body-lg">{t('profile.free-time-activities.description')}</p>
+        <p className="mb-7 text-body-lg-mobile sm:text-body-lg">{t('profile.free-time-activities.description')}</p>
 
         {rows.length === 0 && (
           <div className="mt-6 mb-7" data-testid="free-time-empty-state">

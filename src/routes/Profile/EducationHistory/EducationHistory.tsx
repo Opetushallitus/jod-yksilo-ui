@@ -252,7 +252,7 @@ const EducationHistory = () => {
       <title>{title}</title>
       <div className="px-5 sm:px-6">
         <ProfileSectionTitle type="KOULUTUS" title={title} />
-        <p className="mb-5 text-body-lg">{t('profile.education-history.description')}</p>
+        <p className="mb-7 text-body-lg-mobile sm:text-body-lg">{t('profile.education-history.description')}</p>
 
         {koulutuksetThatNeedUserVerification.length > 0 && (
           <div className="bg-bg-gray-2 rounded-md px-5 py-3 flex items-center w-fit mb-5">

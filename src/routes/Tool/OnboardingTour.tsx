@@ -203,7 +203,7 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
   }, [lg]);
 
   return (
-    <span className="block mt-6">
+    <span className="block mt-7">
       <button
         className="cursor-pointer bg-bg-gray-2 text-accent flex items-center gap-3 px-3 py-2 rounded-sm"
         onClick={startTour}

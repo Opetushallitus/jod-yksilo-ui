@@ -52,7 +52,7 @@ const Preferences = () => {
       <title>{title}</title>
       <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
         <ProfileSectionTitle type="ASETUKSENI" title={title} />
-        <div className="mb-8 text-body-lg flex flex-col gap-7">
+        <div className="mb-7 text-body-lg-mobile sm:text-body-lg flex flex-col gap-7">
           <p>{t('preferences.description')}</p>
         </div>
 

@@ -71,7 +71,7 @@ const WorkHistory = () => {
       <title>{title}</title>
       <div className="px-5 sm:px-6">
         <ProfileSectionTitle type="TOIMENKUVA" title={title} />
-        <p className="mb-5 text-body-lg">{t('profile.work-history.description')}</p>
+        <p className="mb-7 text-body-lg-mobile sm:text-body-lg">{t('profile.work-history.description')}</p>
 
         {rows.length === 0 && (
           <div className="mt-6 mb-7" data-testid="work-history-empty-state">

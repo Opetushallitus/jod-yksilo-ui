@@ -803,17 +803,19 @@
       "list-1-item-1": "view a summary of your competence on the My competences page",
       "list-1-item-2": "save your own work history and map the competence gained from it on the My jobs page",
       "list-1-item-3": "save or import your education history and map out the competence gained from it on the My education page",
+      "list-1-title": "In the competence profile, you can:",
       "list-2-item-1": "Saves work and education opportunities of interest as favourites",
       "list-2-item-2": "Plan and track your own education and career paths (coming later)",
+      "list-2-title": "You can also:",
       "list-3-item-1": "What data do you record about me",
       "list-3-item-2": "What is your data used for",
       "list-3-item-3": "Who can see your profile",
       "list-3-item-4": "How can others use your profile",
-      "paragraph-2": "By filling in this information carefully, you will receive suggestions for jobs and educations that are right for you.\n\nYou can also:",
-      "paragraph-3": "Your profile is yours!\n\nYou decide:",
+      "list-3-title": "Your profile is yours! You decide:",
+      "paragraph-1": "By filling in this information carefully, you will receive suggestions for jobs and educations that are right for you.",
       "paragraph-4": "The processing of competence profile data is based on the Act on the national digital service package for continuous learning. <CustomLink>Read more about the grounds for data processing in the privacy policy.</CustomLink>",
       "title": "My settings",
-      "you-are-signed-in": "The competence Profile is where you can save and manage your own information. In the competence profile, you can:"
+      "ingress-text": "The competence Profile is where you can save and manage your own information."
     },
     "something-else": {
       "description": "Find your other competences below. You can add and remove competences by clicking the Edit competences button.",
