@@ -313,11 +313,11 @@ const YourInfo = () => {
       </div>
 
       <div className="flex flex-col bg-secondary-1-dark-2 rounded-md px-5 py-6 gap-3 text-white lg:mx-3">
-        <h2 className="text-heading-2">
+        <h2 className=" text-heading-2-mobile sm:text-heading-2">
           {isLoggedIn ? t('profile.banner.title.logged-in') : t('profile.banner.title.unlogged')}
         </h2>
         <div className="flex flex-col gap-6">
-          <p className="text-body-lg">
+          <p className="text-body-lg-mobile sm:text-body-lg">
             {isLoggedIn ? t('profile.banner.description.logged-in') : t('profile.banner.description.unlogged')}
           </p>
           <Button

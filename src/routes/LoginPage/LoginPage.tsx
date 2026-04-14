@@ -41,12 +41,12 @@ const LoginPage = () => {
     <MainLayout>
       <div className="px-5 sm:px-6">
         <title>{title}</title>
-        <h1 className="mb-5 text-heading-2 sm:text-heading-1 focus:outline-0" data-testid="landing-title">
+        <h1 className="mb-6 text-hero-mobile sm:text-hero focus:outline-0" data-testid="landing-title">
           {t('profile.login-page.title')}
         </h1>
 
-        <div className="mb-8 text-body-md flex flex-col gap-6">
-          <p className="whitespace-pre-line sm:text-body-lg text-body-lg-mobile">
+        <div className="mb-8 text-body-md flex flex-col">
+          <p className="whitespace-pre-line sm:text-body-lg text-body-lg-mobile mb-7">
             {t('profile.login-page.description')}
           </p>
           <div>
@@ -59,7 +59,9 @@ const LoginPage = () => {
               testId="landing-login"
             />
           </div>
-          <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.login-page.profile-includes')}</h2>
+          <h2 className="text-heading-2-mobile sm:text-heading-2 mt-8 mb-5">
+            {t('profile.login-page.profile-includes')}
+          </h2>
 
           <ul>
             <ListItem label={t('profile.login-page.list-1-item-1')} />
@@ -68,17 +70,14 @@ const LoginPage = () => {
             <ListItem label={t('profile.login-page.list-1-item-4')} />
             <ListItem label={t('profile.login-page.list-1-item-5')} />
           </ul>
-          <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.login-page.paragraph-2')}</h2>
+          <h2 className="text-heading-2-mobile sm:text-heading-2 mt-8 mb-5">{t('profile.login-page.paragraph-2')}</h2>
           <ul>
             <ListItem label={t('profile.login-page.list-2-item-1')} />
             <ListItem label={t('profile.login-page.list-2-item-2')} />
             <ListItem label={t('profile.login-page.list-2-item-3')} />
           </ul>
-          <p className="font-arial">{t('profile.login-page.paragraph-3')}</p>
-        </div>
-
-        <div className="mb-8 flex flex-col gap-7">
-          <p className="font-arial">{t('profile.login-page.paragraph-4')}</p>
+          <p className="font-arial mt-6">{t('profile.login-page.paragraph-3')}</p>
+          <p className="font-arial mt-6">{t('profile.login-page.paragraph-4')}</p>
           <Button
             variant="plain"
             serviceVariant="yksilo"
@@ -90,7 +89,7 @@ const LoginPage = () => {
               target: '_blank',
               rel: 'noopener noreferrer',
             })}
-            className="w-fit"
+            className="w-fit mt-6"
           />
         </div>
       </div>

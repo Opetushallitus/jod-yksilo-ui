@@ -7,7 +7,7 @@ interface OpportunityDetailProps {
 export const OpportunityDetail = ({ title, value, icon }: OpportunityDetailProps) => {
   return (
     <div className="flex flex-col">
-      <div className="text-body-xs flex gap-4 items-center">
+      <div className="text-attrib-title font-arial flex gap-4 items-center">
         <span>{title}</span>
         {icon}
       </div>

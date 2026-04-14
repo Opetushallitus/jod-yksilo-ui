@@ -66,7 +66,7 @@ export const GroupByAlphabet = ({
   return (
     <div className="pb-9">
       <div className="flex flex-row justify-between gap-5">
-        <h2 className="mt-6 text-heading-2">{t('my-competences-alphabetically')}</h2>
+        <h2 className="mt-6 text-heading-2-mobile sm:text-heading-2">{t('my-competences-alphabetically')}</h2>
         {mobileFilterOpenerComponent}
       </div>
       {Array.from(alphabet)

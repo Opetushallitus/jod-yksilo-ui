@@ -21,13 +21,17 @@ const Wrapper = ({
   const desc = <div className="my-5 font-arial text-body-md max-w-input-long">{description}</div>;
 
   return collapsible ? (
-    <Accordion title={<h2 className="truncate text-heading-3">{header}</h2>} ariaLabel={header} underline>
+    <Accordion
+      title={<h2 className="truncate text-heading-3-mobile sm:text-heading-3">{header}</h2>}
+      ariaLabel={header}
+      underline
+    >
       {desc}
       {children}
     </Accordion>
   ) : (
     <div>
-      <h2 className="truncate text-heading-3 pb-3 border-b border-border-gray">{header}</h2>
+      <h2 className="truncate text-heading-3-mobile sm:text-heading-3 border-b border-border-gray">{header}</h2>
       {desc}
       {children}
     </div>

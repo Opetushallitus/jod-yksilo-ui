@@ -80,7 +80,7 @@ const Competences = () => {
         )}
         <title>{title}</title>
         <ProfileSectionTitle type="OSAAMISENI" title={title} />
-        <p className="mb-5 text-body-lg">{t('profile.competences.description')}</p>
+        <p className="mb-5 text-body-lg-mobile sm:text-body-lg">{t('profile.competences.description')}</p>
         <InfoBox text={t('profile.competences.info')} />
         <div>
           {!lg && (

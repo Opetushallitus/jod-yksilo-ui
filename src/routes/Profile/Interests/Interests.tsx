@@ -56,7 +56,7 @@ const Interests = () => {
       <title>{title}</title>
       <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
         <ProfileSectionTitle type="KIINNOSTUS" title={title} />
-        <p className="mb-5 text-body-lg">{t('profile.interests.description')}</p>
+        <p className="mb-7 text-body-lg-mobile sm:text-body-lg">{t('profile.interests.description')}</p>
         {isAllSkillsEmpty && (
           <div className="mt-6 mb-7">
             <EmptyState text={t('profile.interests.empty')} testId="interests-empty-state" />
@@ -64,7 +64,7 @@ const Interests = () => {
         )}
         {!isSkillsEmpty && (
           <>
-            <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
+            <h2 className="mb-5 text-heading-3-mobile sm:text-heading-3 border-b border-border-gray">
               {t('profile.interests.skills-that-interest-me')}
             </h2>
             {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
@@ -85,7 +85,7 @@ const Interests = () => {
         )}
         {!isOccupationSkillsEmpty && (
           <>
-            <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray mt-8">
+            <h2 className="mb-5 text-heading-3-mobile sm:text-heading-3 border-b border-border-gray mt-8">
               {t('profile.interests.occupations-that-interest-me')}
             </h2>
             <ul className="flex flex-wrap gap-3">

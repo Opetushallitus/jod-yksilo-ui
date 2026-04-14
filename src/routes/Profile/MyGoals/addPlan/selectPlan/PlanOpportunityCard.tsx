@@ -60,7 +60,7 @@ const PlanOpportunityCard = React.memo(
               data-testid="opportunity-card-match"
             >
               <span className="text-accent text-[30px] sm:text-[34px]">{matchValue}</span>
-              <span className="text-attrib-title font-semibold">{matchLabel}</span>
+              <span className="text-attrib-title font-arial font-semibold">{matchLabel}</span>
             </div>
           )}
 

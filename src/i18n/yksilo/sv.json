@@ -802,17 +802,19 @@
       "list-1-item-1": "granska dina kunskaper som en sammanfattning på sidan Mina kompetenser",
       "list-1-item-2": "spara din arbetshistorik och kartlägga kunskaper som erhållits från arbetet på sidan Mina arbetsplatser",
       "list-1-item-3": "spara eller importera din utbildningshistorik och kartlägga kunskaper som erhållits från utbildningar på sidan Mina utbildningar",
+      "list-1-title": "I kompetensprofilen kan du:",
       "list-2-item-1": "Spara karriär- och utbildningsmöjligheter som intresserar dig som favoriter",
       "list-2-item-2": "Planera och följa upp dina egna utbildnings- och karriärstigar (kommer senare)",
+      "list-2-title": "Du kan också:",
       "list-3-item-1": "Vilka uppgifter du sparar",
       "list-3-item-2": "Vad dina uppgifter används för",
       "list-3-item-3": "Vem som kan se din profil",
       "list-3-item-4": "Hur andra kan utnyttja din profil",
-      "paragraph-2": "När du fyller i dessa uppgifter noggrant får du förslag på jobb och utbildningar som passar just dig.\n\nDu kan också:",
-      "paragraph-3": "Profilen är din!\n\nDu bestämmer:",
+      "list-3-title": "Profilen är din! Du bestämmer:",
+      "paragraph-1": "När du fyller i dessa uppgifter noggrant får du förslag på jobb och utbildningar som passar just dig.",
       "paragraph-4": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på lagen om den nationella informationsresursen för kompetenser. <CustomLink>Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.</CustomLink>",
       "title": "Mina inställningar",
-      "you-are-signed-in": "Kompetensprofilen är en plats där du kan spara och hantera dina uppgifter. I kompetensprofilen kan du:\n"
+      "ingress-text": "Kompetensprofilen är en plats där du kan spara och hantera dina uppgifter."
     },
     "something-else": {
       "description": "Nedan hittar du dina övriga kunskaper. Du kan lägga till och ta bort kompetenser med redigera kompetenser-knappen.\t",

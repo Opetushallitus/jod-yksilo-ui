@@ -177,7 +177,7 @@ export const GroupBySource = ({
   return (
     <>
       <div className="flex flex-row justify-between gap-5 mb-7">
-        <h2 className="text-heading-2">{t('my-competences-by-sources')}</h2>
+        <h2 className="text-heading-2-mobile sm:text-heading-2">{t('my-competences-by-sources')}</h2>
         {mobileFilterOpenerComponent}
       </div>
 

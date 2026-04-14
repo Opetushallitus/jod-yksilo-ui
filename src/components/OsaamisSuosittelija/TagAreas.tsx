@@ -66,13 +66,10 @@ export const TagAreas = ({
 
   return (
     <>
-      <div
-        className={cx([
-          'sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold sticky top-0 bg-bg-gray text-primary-gray',
-          tagHeadingClassName,
-        ])}
-      >
-        <span id={suggestedTagsId}>{mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}</span>
+      <div className={cx(['sticky top-0 bg-bg-gray text-primary-gray', tagHeadingClassName])}>
+        <span id={suggestedTagsId} className="text-heading-4-mobile sm:text-heading-4">
+          {mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}
+        </span>
         {ehdotetutOsaamiset.length > 0 && (
           <div className="font-arial text-body-sm text-secondary-gray mb-4">
             {mode === 'osaamiset' ? t(`osaamissuosittelija.competence.add`) : t(`osaamissuosittelija.interest.add`)}
@@ -159,13 +156,8 @@ export const TagAreas = ({
 
       {!hideSelected && (
         <>
-          <div
-            className={cx([
-              'sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold sticky top-0 bg-bg-gray text-primary-gray',
-              tagHeadingClassName,
-            ])}
-          >
-            <span id={addedTagsId}>
+          <div className={cx(['sticky top-0 bg-bg-gray text-primary-gray', tagHeadingClassName])}>
+            <span id={addedTagsId} className="text-heading-4-mobile sm:text-heading-4">
               {mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}
             </span>
             {value.length > 0 && (

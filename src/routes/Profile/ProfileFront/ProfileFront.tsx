@@ -9,7 +9,7 @@ import { ProfileNavigationList } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import WelcomePathModal from '../WelcomePathModal/WelcomePathModal';
 
-const ListItem = ({ label }: { label: string }) => <li className="list-disc ml-7 pl-4">{label}</li>;
+const ListItem = ({ label }: { label: string }) => <li className="list-disc ml-6 ">{label}</li>;
 
 const ProfileFront = () => {
   const {
@@ -44,25 +44,35 @@ const ProfileFront = () => {
 
         {!isLoading && !data.tervetuloapolku && <WelcomePathModal yksiloData={data} />}
 
-        <div className="mb-8 text-body-md flex flex-col gap-7 font-arial">
-          <p className="text-body-lg font-poppins">{t('profile.preferences.you-are-signed-in')}</p>
-          <ul>
-            <ListItem label={t('profile.preferences.list-1-item-1')} />
-            <ListItem label={t('profile.preferences.list-1-item-2')} />
-            <ListItem label={t('profile.preferences.list-1-item-3')} />
-          </ul>
-          <p className="whitespace-pre-line">{t('profile.preferences.paragraph-2')}</p>
-          <ul>
-            <ListItem label={t('profile.preferences.list-2-item-1')} />
-            <ListItem label={t('profile.preferences.list-2-item-2')} />
-          </ul>
-          <p className="whitespace-pre-line">{t('profile.preferences.paragraph-3')}</p>
-          <ul>
-            <ListItem label={t('profile.preferences.list-3-item-1')} />
-            <ListItem label={t('profile.preferences.list-3-item-2')} />
-            <ListItem label={t('profile.preferences.list-3-item-3')} />
-            <ListItem label={t('profile.preferences.list-3-item-4')} />
-          </ul>
+        <div className="mb-8 text-body-md flex flex-col gap-6 font-arial">
+          <p className="text-body-lg-mobile sm:text-body-lg font-poppins mb-3">
+            {t('profile.preferences.ingress-text')}
+          </p>
+          <div>
+            <p>{t('profile.preferences.list-1-title')}</p>
+            <ul>
+              <ListItem label={t('profile.preferences.list-1-item-1')} />
+              <ListItem label={t('profile.preferences.list-1-item-2')} />
+              <ListItem label={t('profile.preferences.list-1-item-3')} />
+            </ul>
+          </div>
+          <p>{t('profile.preferences.paragraph-1')}</p>
+          <div>
+            <p>{t('profile.preferences.list-2-title')}</p>
+            <ul>
+              <ListItem label={t('profile.preferences.list-2-item-1')} />
+              <ListItem label={t('profile.preferences.list-2-item-2')} />
+            </ul>
+          </div>
+          <div>
+            <p>{t('profile.preferences.list-3-title')}</p>
+            <ul>
+              <ListItem label={t('profile.preferences.list-3-item-1')} />
+              <ListItem label={t('profile.preferences.list-3-item-2')} />
+              <ListItem label={t('profile.preferences.list-3-item-3')} />
+              <ListItem label={t('profile.preferences.list-3-item-4')} />
+            </ul>
+          </div>
           <p>
             <Trans
               i18nKey="profile.preferences.paragraph-4"

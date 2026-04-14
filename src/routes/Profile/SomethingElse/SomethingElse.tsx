@@ -46,7 +46,7 @@ const SomethingElse = () => {
       <title>{title}</title>
       <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
         <ProfileSectionTitle type="MUU_OSAAMINEN" title={title} />
-        <p className="mb-5 text-body-lg">{t('profile.something-else.description')}</p>
+        <p className="mb-7 text-body-lg-mobile sm:text-body-lg">{t('profile.something-else.description')}</p>
 
         {muuOsaaminen.length === 0 && (
           <div className="mt-6 mb-7" data-testid="something-else-empty-state">
@@ -55,7 +55,7 @@ const SomethingElse = () => {
         )}
 
         {muuOsaaminen.length > 0 && (
-          <h2 className="mb-5 pb-3 text-heading-3 border-b border-border-gray">
+          <h2 className="mb-5 text-heading-3-mobile sm:text-heading-3 border-b border-border-gray">
             {t('profile.something-else.my-other-comptetences')}
           </h2>
         )}

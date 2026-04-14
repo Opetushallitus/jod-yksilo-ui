@@ -317,14 +317,14 @@ const OpportunityCardHeader = ({
           className="order-2"
         >
           <TitleTag
-            className={`text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto ${textColorClassName} hover:underline pb-2`}
+            className={`text-card-heading-mobile sm:text-card-heading hyphens-auto ${textColorClassName} hover:underline pb-2`}
           >
             {name}
           </TitleTag>
         </NavLink>
       ) : (
         <TitleTag
-          className={`text-heading-2-mobile sm:text-heading-2 leading-6 hyphens-auto pb-2 ${textColorClassName}`}
+          className={`text-card-heading-mobile sm:text-card-heading hyphens-auto pb-2 ${textColorClassName}`}
           data-testid="opportunity-card-title"
         >
           {name}
