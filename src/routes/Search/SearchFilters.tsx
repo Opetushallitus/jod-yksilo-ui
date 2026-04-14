@@ -13,10 +13,10 @@ const FiltersModal = ({ onClose, ...rest }: ModalComponentProps) => {
     <Modal
       {...rest}
       open={rest.open && !lg}
-      topSlot={<span className="sm:text-heading-2 text-heading-2-mobile">{t('search.filters')}</span>}
+      topSlot={<span className="sm:text-heading-2 text-heading-2-mobile">{t('search.filters', { count: 0 })}</span>}
       className="h-fit!"
       content={
-        <div className="p-5 md:px-8 md:ml-3">
+        <div className="p-5 pb-6 md:px-8 md:ml-3">
           <FiltersContent />
         </div>
       }
@@ -25,7 +25,7 @@ const FiltersModal = ({ onClose, ...rest }: ModalComponentProps) => {
           <Button size={sm ? 'lg' : 'sm'} onClick={onClose} label={t('close')} variant="accent" />
         </div>
       }
-      name={t('search.filters')}
+      name={t('search.filters', { count: 0 })}
     />
   );
 };
@@ -70,7 +70,7 @@ const FiltersContent = () => {
           <Checkbox
             name={filterKey}
             value={filterKey}
-            className="font-poppins! gap-4 items-center"
+            className="gap-4 items-center"
             checked={filters[filterKey as keyof typeof filters]}
             label={getCheckboxLabel(filterKey as keyof typeof filters)}
             ariaLabel={translations[filterKey as keyof typeof filters]}
@@ -89,11 +89,13 @@ export const SearchFilters = () => {
   const { t } = useTranslation();
   const { showModal } = useModal();
   const { lg } = useMediaQueries();
+  const filters = useSearchStore((state) => state.filters);
+  const filtersCount = Object.values(filters).filter((value) => value === true).length;
 
   if (lg) {
     return (
       <div className="bg-white rounded-md p-6 flex flex-col select-none gap-6">
-        <h2 className="sm:text-body-sm text-body-sm-mobile">{t('search.filters')}</h2>
+        <h2 className="sm:text-body-sm text-body-sm-mobile">{t('search.filters', { count: 0 })}</h2>
         <FiltersContent />
       </div>
     );
@@ -104,7 +106,7 @@ export const SearchFilters = () => {
       variant="white"
       ariaHaspopup="dialog"
       onClick={() => showModal(FiltersModal)}
-      label={t('search.filters')}
+      label={t('search.filters', { count: filtersCount })}
       icon={<JodSettings className="text-primary-gray" />}
       className="text-primary-gray!"
       iconSide="left"

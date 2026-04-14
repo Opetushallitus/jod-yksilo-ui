@@ -905,7 +905,8 @@
   "search": {
     "clear": "Tyhjennä haku",
     "description": "Voit hakea mahdollisuuksia käyttämällä vapaasanahakua. Tulosten näkyvyyteen voit vaikuttaa suodattamalla listaa.",
-    "filters": "Suodattimet",
+    "filters": "Suodattimet ({{count}})",
+    "filters_zero": "Suodattimet",
     "global-placeholder": "Hae mahdollisuuksia",
     "label": "Hae mahdollisuuksia",
     "no-results": "Hakusanalla ei löytynyt tuloksia.",
