@@ -13,7 +13,7 @@ import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkH
 import { Tool, toolLoader } from '@/routes/Tool';
 import { isFeatureEnabled } from '@/utils/features';
 import { NoteStackProvider } from '@jod/design-system';
-import { type RouteObject, replace } from 'react-router';
+import { type RouteObject, redirect, replace } from 'react-router';
 import { withYksiloContext } from '../auth';
 import { Cv, cvLoader } from './Cv';
 import { Home } from './Home';
@@ -38,7 +38,7 @@ const profileRoutes = supportedLanguageCodes.map(
       children: [
         {
           index: true,
-          loader: () => replace(i18n.t('slugs.profile.front', { lng })),
+          loader: () => redirect(i18n.t('slugs.profile.front', { lng })),
         },
         {
           id: `{slugs.profile.front}|${lng}`,
