@@ -28,6 +28,10 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
   const paginationTranslations = usePaginationTranslations();
   const statusText = isLoading ? t('tool.updating') : t('tool.opportunities-loaded', { count: filteredResults.length });
 
+  const resultsCountText = lg
+    ? t('search.results-found', { count: filteredMetadata.length })
+    : t('search.results-found-short', { count: filteredMetadata.length });
+
   return (
     <section aria-busy={isLoading}>
       <output aria-live="polite" className="sr-only">
@@ -39,15 +43,18 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
           <OpportunityCardSkeleton />
         </div>
       )}
-      {!isLoading && filteredResults.length === 0 && <EmptyState text={t('search.no-results')} />}
+      <div className="pb-5 font-arial flex justify-between items-center gap-3">
+        {!isLoading && (
+          <>
+            {filteredResults.length === 0 && <EmptyState text={t('search.no-results')} />}
+            {filteredResults.length > 0 && <span className="h-8 flex items-center">{resultsCountText}</span>}
+          </>
+        )}
+        {!lg && <SearchFilters />}
+      </div>
+
       {!isLoading && filteredResults.length > 0 && (
         <div className="flex flex-col">
-          <div className="pb-5 font-arial flex justify-between items-center">
-            {lg
-              ? t('search.results-found', { count: filteredMetadata.length })
-              : t('search.results-found-short', { count: filteredMetadata.length })}
-            {!lg && <SearchFilters />}
-          </div>
           <ul
             id="search-your-opportunities-list"
             className="flex flex-col gap-5 sm:gap-3 mb-8"

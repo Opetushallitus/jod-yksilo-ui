@@ -906,7 +906,8 @@
   "search": {
     "clear": "Rensa sökning",
     "description": "Du kan söka efter möjligheter med hjälp av fritextsökning. Du kan påverka synligheten av resultaten genom att filtrera listan.",
-    "filters": "Filter",
+    "filters": "Filter ({{count}})",
+    "filters_zero": "Filter",
     "global-placeholder": "Sök möjligheter",
     "label": "Sök möjligheter",
     "no-results": "Inga resultat hittades för sökordet.",
