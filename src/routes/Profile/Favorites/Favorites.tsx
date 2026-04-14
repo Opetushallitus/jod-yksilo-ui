@@ -235,9 +235,9 @@ const Favorites = () => {
             name={t('filters')}
             open={showFilters}
             onClose={() => setShowFilters(false)}
+            topSlot={<span className="sm:text-heading-2 text-heading-2-mobile">{t('content')}</span>}
             content={
-              <div className="py-6 bg-bg-gray px-5 md:px-9 ml-[20px]">
-                <span className="text-heading-3">{t('content')}</span>
+              <div className="bg-bg-gray py-3 ml-5">
                 <MahdollisuusTyyppiFilter
                   jobFilterText={jobFilterText}
                   educationFilterText={educationFilterText}
@@ -249,7 +249,7 @@ const Favorites = () => {
             footer={
               <div className="flex flex-row justify-end gap-4 flex-1">
                 <Button
-                  variant="white"
+                  variant="accent"
                   label={t('close')}
                   onClick={() => setShowFilters(false)}
                   className="whitespace-nowrap"

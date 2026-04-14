@@ -28,7 +28,7 @@ export const FilterList = ({
             </TitleTag>
           }
         >
-          <section aria-labelledby={id} id={id}>
+          <section className="pt-4" aria-labelledby={id} id={id}>
             {children}
           </section>
         </Accordion>

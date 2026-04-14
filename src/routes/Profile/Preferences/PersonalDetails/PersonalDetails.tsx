@@ -172,6 +172,7 @@ const PersonalDetails = () => {
             <InputField
               id={emailFieldId}
               hideLabel
+              requiredText={t('common:required')}
               value={email}
               placeholder="matti.meikalainen@suomi.fi"
               errorMessage={emailValid === false ? formErrorMessage.email().message : ''}
