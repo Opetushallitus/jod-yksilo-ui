@@ -24,7 +24,6 @@ export type ProfileLink =
       }) => JSX.Element;
     };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const generateProfileLink = (
   profilePageSlugs: string[],
   data: { etunimi?: string; sukunimi?: string; csrf: components['schemas']['CsrfTokenDto'] } | null,
@@ -66,7 +65,6 @@ export const generateProfileLink = (
 export const GENDER_VALUES = ['MIES', 'NAINEN'] as const;
 export type GenderValue = (typeof GENDER_VALUES)[number];
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const getTypeSlug = (type: MahdollisuusTyyppi) =>
   type === 'TYOMAHDOLLISUUS' ? i18n.t('slugs.job-opportunity.index') : i18n.t('slugs.education-opportunity.index');
 
@@ -78,7 +76,6 @@ export type ProfileSectionType =
   | 'TAVOITTEENI'
   | 'ASETUKSENI';
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const getTextClassByCompetenceSourceType = (type: ProfileSectionType) =>
   cx({
     'text-secondary-4-dark': type === 'TOIMENKUVA',
