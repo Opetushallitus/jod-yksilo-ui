@@ -283,7 +283,14 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
     ref: selectedTagsRef,
     handleKeyDown: handleTagsKeyboardNavigation,
     setLastClickedIndex,
+    initRovingTabindex,
   } = useArrowKeyControls(selected);
+
+  React.useEffect(() => {
+    if (!isSelectedEmpty) {
+      initRovingTabindex();
+    }
+  }, [isSelectedEmpty, initRovingTabindex]);
 
   return (
     <div className={className}>

@@ -27,13 +27,17 @@ export const useArrowKeyControls = <T extends HTMLElement = HTMLUListElement>(it
     return elements;
   };
 
-  // Init roving tabindex on mount, run only once on mount.
-  React.useEffect(() => {
+  const initRovingTabindex = () => {
     const elements = getTagElements();
 
     elements.forEach((el, index) => {
       el.setAttribute('tabindex', index === activeIndex ? '0' : '-1');
     });
+  };
+
+  // Init roving tabindex on mount, run only once on mount.
+  React.useEffect(() => {
+    initRovingTabindex();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -101,5 +105,12 @@ export const useArrowKeyControls = <T extends HTMLElement = HTMLUListElement>(it
     }
   }, [lastClickedIndex, items.length, activeIndex]);
 
-  return { ref, handleKeyDown, activeIndex, setActiveIndex, setLastClickedIndex };
+  return {
+    ref,
+    handleKeyDown,
+    activeIndex,
+    setActiveIndex,
+    setLastClickedIndex,
+    initRovingTabindex,
+  };
 };

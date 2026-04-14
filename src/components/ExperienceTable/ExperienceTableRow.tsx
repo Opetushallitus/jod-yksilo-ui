@@ -117,7 +117,15 @@ const CompetencesRow = ({
   sortedCompetences: ExperienceTableRowData['osaamiset'];
 }) => {
   const { t } = useTranslation();
-  const { ref, handleKeyDown } = useArrowKeyControls(sortedCompetences);
+  const { ref, handleKeyDown, initRovingTabindex } = useArrowKeyControls(sortedCompetences);
+
+  // Since tags are not visible by default, we need to initialize roving tabindex when they become visible.
+  React.useEffect(() => {
+    if (tagsVisibleState) {
+      initRovingTabindex();
+    }
+  }, [initRovingTabindex, tagsVisibleState]);
+
   return (
     <tr>
       {tagsVisibleState && !showCheckbox && (
