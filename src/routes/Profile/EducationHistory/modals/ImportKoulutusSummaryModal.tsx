@@ -299,7 +299,7 @@ const ImportKoulutusSummaryModal = ({
               )}
             </div>
             {!isFetching && !error && (
-              <div className="max-w-modal-content">
+              <div className="max-w-modal-content box-content px-5 md:px-9">
                 <EducationImportTable rows={tableRows} />{' '}
               </div>
             )}
