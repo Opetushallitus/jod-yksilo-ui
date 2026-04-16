@@ -1,7 +1,9 @@
 import { client } from '@/api/client';
 import { AnchorLink } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
+import { formErrorMessage } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import type { YksiloData } from '@/hooks/useYksiloData';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AiInfoButton, Button, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
@@ -23,6 +25,21 @@ import { PersonalDetailsInfoBlock, ToggleAllow } from '../components';
 import { GENDER_VALUES } from '../utils';
 
 const Separator = () => <hr aria-hidden className="my-4 h-1 bg-bg-gray-2 border-0" />;
+
+const welcomePathSchema = z.object({
+  tervetuloapolku: z.boolean(),
+  allowSyntymavuosi: z.boolean(),
+  syntymavuosi: z.number().optional(),
+  allowKotikunta: z.boolean(),
+  kotikunta: z.string().optional(),
+  kotikuntaNimi: z.string(),
+  email: z.string().trim().min(1, formErrorMessage.required()).pipe(z.email(formErrorMessage.email())),
+  allowSukupuoli: z.boolean(),
+  sukupuoli: z.enum(GENDER_VALUES).or(z.undefined()),
+  sukupuoliNimi: z.string(),
+});
+
+type WelcomePathForm = z.infer<typeof welcomePathSchema>;
 
 const StepWelcome = () => {
   const { t } = useTranslation();
@@ -47,8 +64,15 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
     i18n: { language },
   } = useTranslation();
   const { sm } = useMediaQueries();
-  const { register, control } = useFormContext<YksiloData>();
+  const { control, register, trigger } = useFormContext<WelcomePathForm>();
+  const { errors } = useFormState({ control });
   const emailFieldId = React.useId();
+  const guardedAction = useSessionGuardedAction();
+  const emailField = register('email');
+
+  React.useEffect(() => {
+    void trigger('email');
+  }, [trigger]);
 
   return (
     <>
@@ -104,11 +128,21 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
           htmlFor={emailFieldId}
           interactiveComponent={
             <InputField
-              {...register('email')}
+              {...emailField}
               requiredText={t('common:required')}
+              errorMessage={errors.email?.message}
               id={emailFieldId}
               hideLabel={true}
               placeholder="matti.meikalainen@suomi.fi"
+              onBlur={(event) => {
+                emailField.onBlur(event);
+                void trigger('email');
+              }}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                guardedAction(() => {
+                  emailField.onChange(e);
+                })();
+              }}
             />
           }
         />
@@ -184,23 +218,10 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
   const { sm } = useMediaQueries();
   const formId = React.useId();
 
-  const methods = useForm<YksiloData>({
+  const methods = useForm<WelcomePathForm>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: zodResolver(
-      z.object({
-        tervetuloapolku: z.boolean(),
-        allowSyntymavuosi: z.boolean(),
-        syntymavuosi: z.number().optional(),
-        allowKotikunta: z.boolean(),
-        kotikunta: z.string().optional(),
-        kotikuntaNimi: z.string(),
-        email: z.email().optional(),
-        allowSukupuoli: z.boolean(),
-        sukupuoli: z.enum(GENDER_VALUES).or(z.undefined()),
-        sukupuoliNimi: z.string(),
-      }),
-    ),
+    resolver: zodResolver(welcomePathSchema),
     defaultValues: async () => {
       return Promise.resolve({
         tervetuloapolku: false,
@@ -209,7 +230,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
         allowKotikunta: true,
         kotikunta: yksiloData.kotikunta, // koodi
         kotikuntaNimi: yksiloData.kotikuntaNimi,
-        email: yksiloData.email,
+        email: yksiloData.email || '',
         allowSukupuoli: true,
         sukupuoli: yksiloData.sukupuoli,
         sukupuoliNimi: yksiloData.sukupuoliNimi,
@@ -218,11 +239,11 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
   });
 
   const revalidator = useRevalidator();
-  const { isValid, isLoading } = useFormState({
+  const { isLoading, isValid } = useFormState({
     control: methods.control,
   });
 
-  const onSubmit: FormSubmitHandler<YksiloData> = async ({ data }: { data: YksiloData }) => {
+  const onSubmit: FormSubmitHandler<WelcomePathForm> = async ({ data }: { data: WelcomePathForm }) => {
     await client.PUT('/api/profiili/yksilo/tiedot-ja-luvat', {
       body: {
         tervetuloapolku: true,
