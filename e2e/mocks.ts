@@ -1,6 +1,33 @@
 import { Page } from '@playwright/test';
 import type { components } from '../src/api/schema';
-import { userProfile } from './fixtures';
+import { featureFlags, userProfile } from './fixtures';
+
+export async function mockRedundantEndpoints(page: Page) {
+  await page.route('**/manifest-fi.json', async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({}),
+    });
+  });
+
+  const emptySvg = '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>';
+
+  await page.route('**/favicon*', async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'image/svg+xml',
+      body: emptySvg,
+    });
+  });
+  await page.route('**/apple-touch-icon.png', async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'image/svg+xml',
+      body: emptySvg,
+    });
+  });
+}
 
 export async function mockAuthenticatedUser(page: Page) {
   await page.route('**/api/profiili/yksilo', async (route) => {
@@ -8,6 +35,19 @@ export async function mockAuthenticatedUser(page: Page) {
       status: 200,
       contentType: 'application/json',
       body: JSON.stringify(userProfile),
+    });
+  });
+}
+
+export async function mockFeatureFlags(page: Page, flags: Record<string, boolean> = {}) {
+  await page.route('**/config/features.json', async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        ...featureFlags,
+        ...flags,
+      }),
     });
   });
 }
@@ -56,7 +96,14 @@ type ProfileWizardData = {
   nimi: components['schemas']['LokalisoituTeksti'];
 } & ProfileData;
 
-export async function mockProfileWizard(page: Page, profilePage: string, data: ProfileWizardData[]) {
+type ProfilePageName =
+  | 'tyopaikat'
+  | 'vapaa-ajan-toiminnot'
+  | 'koulutuskokonaisuudet'
+  | 'muu-osaaminen'
+  | 'kiinnostukset';
+
+export async function mockProfileWizard(page: Page, profilePage: ProfilePageName, data: ProfileWizardData[]) {
   await page.route(`**/api/profiili/${profilePage}/*`, async (route) => {
     const req = route.request();
     const method = req.method();
@@ -78,7 +125,11 @@ export async function mockProfileWizard(page: Page, profilePage: string, data: P
     }
 
     if (method === 'PUT') {
-      await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ success: true }) });
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ success: true }),
+      });
       return;
     }
 

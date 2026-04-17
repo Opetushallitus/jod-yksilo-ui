@@ -3,7 +3,7 @@ import AddedTags from '@/components/OsaamisSuosittelija/AddedTags';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { getLocalizedText } from '@/utils';
 import { animateElementToTarget } from '@/utils/animations';
-import { EmptyState, Tag } from '@jod/design-system';
+import { EmptyState, Tag, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -22,6 +22,7 @@ const SelectCompetencesStep = () => {
   >([]);
 
   const { control } = useFormContext<OmaSuunnitelmaForm>();
+  const { reduceMotion } = useMediaQueries();
   const {
     append,
     remove,
@@ -136,7 +137,7 @@ const SelectCompetencesStep = () => {
                     osaamiset={valitutOsaamiset.map((o) => ({ id: o.uri, nimi: o.nimi, kuvaus: o.kuvaus }))}
                     onClick={removeOsaaminenById}
                     lahdetyyppi="KOULUTUS"
-                    useAnimations
+                    useAnimations={!reduceMotion}
                   />
                 </ul>
               </div>

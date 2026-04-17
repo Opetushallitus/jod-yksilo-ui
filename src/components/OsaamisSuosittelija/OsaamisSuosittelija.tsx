@@ -4,7 +4,7 @@ import type { components } from '@/api/schema';
 import { ESCO_SKILL_PREFIX, LIMITS } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
-import { Textarea, cx } from '@jod/design-system';
+import { Textarea, cx, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TagAreas } from './TagAreas';
@@ -70,6 +70,8 @@ export const OsaamisSuosittelija = ({
   const [resultChangeReason, setResultChangeReason] = React.useState<'fetch' | 'user' | null>(null); // To track if the change in results was caused by either user input or fetch results. Screen reader should only announce results found after fetch, not after user filtering.
   const pendingTaitosi = React.useRef<string | null>(null);
   const textareaContainerRef = React.useRef<HTMLDivElement>(null);
+  const { reduceMotion } = useMediaQueries();
+  const shouldAnimate = reduceMotion ? false : useAnimations;
 
   // Scroll textarea to top when focused
   React.useEffect(() => {
@@ -240,7 +242,7 @@ export const OsaamisSuosittelija = ({
           onChange={onChange}
           ehdotetutOsaamiset={filteredEhdotetutOsaamiset}
           isTagSpacing={isTagSpacing}
-          useAnimations={useAnimations}
+          useAnimations={shouldAnimate}
           setResultChangeReason={setResultChangeReason}
           hideSelected={hideSelected}
           tagHeadingClassName={tagHeadingClassName}

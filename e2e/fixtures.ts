@@ -44,12 +44,15 @@ export const workHistoryItem = {
       nimi: {
         fi: 'Testaaja',
       },
+      kuvaus: {
+        fi: 'Työpaikan kuvaus',
+      },
       alkuPvm: '2001-01-01',
       loppuPvm: '',
       osaamiset: [
-        'http://data.europa.eu/esco/skill/d33b9bd2-6dcb-4abc-b3c2-96b8983d5c97',
-        'http://data.europa.eu/esco/skill/e286eddc-75e5-4ae3-966b-ec89c1c046ba',
         'http://data.europa.eu/esco/skill/41730268-d97a-42dd-b6e0-b117d9432eb5',
+        'http://data.europa.eu/esco/skill/e286eddc-75e5-4ae3-966b-ec89c1c046ba',
+        'http://data.europa.eu/esco/skill/d33b9bd2-6dcb-4abc-b3c2-96b8983d5c97',
       ],
     },
   ],
@@ -145,12 +148,15 @@ export const freetimeActivityItem = {
   patevyydet: [
     {
       nimi: { fi: 'Uima-altaan testaus' },
+      kuvaus: {
+        fi: 'Toiminnon kuvaus',
+      },
       alkuPvm: '2001-07-01',
       loppuPvm: '2001-07-30',
       osaamiset: [
-        'http://data.europa.eu/esco/skill/eb0d83b2-3aa4-4a36-a60a-99b6746429e2',
-        'http://data.europa.eu/esco/skill/9926889a-7074-4e37-acce-1271fe6c5a6f',
         'http://data.europa.eu/esco/skill/e93acbe5-535a-4927-9e7c-3b2e06ddfee8',
+        'http://data.europa.eu/esco/skill/9926889a-7074-4e37-acce-1271fe6c5a6f',
+        'http://data.europa.eu/esco/skill/eb0d83b2-3aa4-4a36-a60a-99b6746429e2',
       ],
     },
   ],
@@ -284,11 +290,14 @@ export const educationHistoryItem = {
     {
       nimi: { fi: 'Oppilas' },
       alkuPvm: '2001-01-01',
+      kuvaus: {
+        fi: 'Koulutuksen kuvaus',
+      },
       loppuPvm: '',
       osaamiset: [
-        'http://data.europa.eu/esco/skill/edff6d20-660d-4d33-b412-9a5b664a14be',
-        'http://data.europa.eu/esco/skill/31b67516-af16-4b97-8430-a8a8e0f84190',
         'http://data.europa.eu/esco/skill/7ee872de-db39-4ae3-8e19-75d1a2cdf697',
+        'http://data.europa.eu/esco/skill/31b67516-af16-4b97-8430-a8a8e0f84190',
+        'http://data.europa.eu/esco/skill/edff6d20-660d-4d33-b412-9a5b664a14be',
       ],
     },
   ],
@@ -316,3 +325,12 @@ export const educationHistory = [
     ],
   },
 ];
+
+export const featureFlags = {
+  KOHTAANTO_KUVAUKSET: true,
+  VIRTUAALIOHJAAJA: true,
+  VIRTUAALIOHJAAJA_OSAAMISET: true,
+  TMT_INTEGRATION: true,
+  JAKOLINKKI: true,
+  MAHDOLLISUUDET_HAKU: true,
+};

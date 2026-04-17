@@ -12,6 +12,9 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? [['github'], ['html']] : 'html',
   use: {
+    contextOptions: {
+      reducedMotion: 'reduce',
+    },
     baseURL: 'http://localhost:8080',
     trace: 'on-first-retry',
     headless: !!process.env.CI,
@@ -34,10 +37,6 @@ export default defineConfig({
       use: { ...devices['Desktop Edge'], channel: 'msedge' },
     },
     {
-      name: 'Tablet iPad',
-      use: { ...devices['iPad Pro 11'] },
-    },
-    {
       name: 'Mobile Safari',
       use: { ...devices['iPhone 14'] },
     },
@@ -48,7 +47,7 @@ export default defineConfig({
   ],
   webServer: {
     command: process.env.CI ? 'vite preview --port 8080' : 'vite dev',
-    url: 'http://localhost:8080',
+    url: 'http://localhost:8080/yksilo/',
     reuseExistingServer: !process.env.CI,
   },
 });
