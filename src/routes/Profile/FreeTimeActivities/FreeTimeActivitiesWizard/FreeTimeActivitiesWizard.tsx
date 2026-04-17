@@ -154,7 +154,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
       if (isFirstStep) {
         return id ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-free-time-activity');
       }
-      return patevyysId ? t('free-time-activities.edit-proficiency') : t('free-time-activities.add-new-activity');
+      return patevyysId ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-activity');
     }
     return '';
   }, [id, patevyysId, isFirstStep, isActivityStep, isCompetencesStep, isSummaryStep, t]);
@@ -283,7 +283,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
             {step !== steps && selectedPatevyys > 0 && (
               <Button
                 onClick={onClickDeleteActivityHandler}
-                label={t('free-time-activities.delete-proficiency')}
+                label={t('free-time-activities.delete-activity')}
                 variant="white-delete"
                 className="whitespace-nowrap"
                 testId="free-time-delete-activity"

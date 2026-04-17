@@ -166,14 +166,14 @@ export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }:
             <Button
               className="whitespace-nowrap"
               variant="white-delete"
-              label={`${t('free-time-activities.delete-free-time-activity-button')}`}
+              label={`${t('free-time-activities.delete-theme')}`}
               onClick={() => {
                 if (isSubmitting) {
                   return;
                 }
                 showDialog({
-                  title: t('free-time-activities.delete-free-time-activity'),
-                  description: t('free-time-activities.confirm-delete-free-time-activity', {
+                  title: t('free-time-activities.delete-theme'),
+                  description: t('free-time-activities.confirm-delete-theme', {
                     name: getLocalizedText(methods.getValues('nimi')),
                   }),
                   onConfirm: deleteToiminto,

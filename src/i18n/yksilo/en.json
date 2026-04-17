@@ -47,7 +47,7 @@
       "description": "Job and education opportunities saved by the user, collected as favorites in one place.",
       "education-opportunities": "Education opportunities",
       "job-opportunities": "Job opportunities",
-      "title": "My favorites"
+      "title": "Favourites"
     },
     "goals": {
       "options": "Goal plans",
@@ -204,15 +204,15 @@
   "free-time-activities": {
     "add-new-activity": "Add new activity",
     "add-new-activity-button": "Add activity",
-    "add-new-free-time-activity": "Add new recreational activity",
+    "add-new-free-time-activity": "Add new recreational theme",
+    "confirm-delete-activity": "Are you sure you want to delete the activity \"{{name}}\"?",
     "confirm-delete-free-time-activity": "Are you sure you want to delete the recreational activity \"{{name}}\"? If there are no more qualifications associated with the recreational activity after deletion, the recreational activity will also be deleted.",
-    "confirm-delete-proficiency": "Are you sure you want to delete the qualification \"{{name}}\"?",
+    "confirm-delete-theme": "Are you sure you want to delete the theme \"{{name}}\"?",
+    "delete-activity": "Delete qualification",
     "delete-free-time-activity": "Delete recreational activity",
-    "delete-free-time-activity-button": "Delete activity",
-    "delete-proficiency": "Delete qualification",
+    "delete-theme": "Delete theme",
     "edit-activity": "Edit recreational activity",
     "edit-free-time-theme": "Edit recreational theme",
-    "edit-proficiency": "Edit qualification",
     "identify-proficiencies": "Identify competences",
     "name-of-free-time-activity": "Recreational activity name",
     "name-of-free-time-theme": "Recreational theme name",
@@ -410,7 +410,7 @@
   "more-actions": "More Options",
   "move-to-service": "Go to service",
   "my-competence-path": "My Competency Path",
-  "my-competence-profile": "My competence profile",
+  "my-competence-profile": "Competence profile",
   "my-competences-alphabetically": "My competences alphabetically A — Z",
   "my-competences": {
     "by-KOULUTUS": "My competences accumulated from education",
@@ -547,9 +547,9 @@
           "education": "My education",
           "favorite-education-opportunities": "Education opportunities",
           "favorite-job-opportunities": "Job opportunities",
-          "favorites": "My favorites",
-          "goals": "My goals",
-          "interests": "My interests",
+          "favorites": "Favourites",
+          "goals": "Goals",
+          "interests": "Interests",
           "something-else": "Other competences",
           "work": "My workplaces"
         },
@@ -643,7 +643,7 @@
       },
       "order-by": "Sort",
       "show-filters": "Show filters",
-      "title": "My competence"
+      "title": "Competences"
     },
     "education-history": {
       "description": "Below you can find your education history. You can add entries to your education history yourself and identify the competencies related to them. You can also import your study records from the national study, education and qualification registers as part of your education history (Studyinfo).",
@@ -667,7 +667,7 @@
       "job-and-education-opportunities": "Education and career opportunities",
       "link-to-opportunities": "Find opportunities",
       "show-filters": "Show filters",
-      "title": "My favourites",
+      "title": "Favourites",
       "you-have-no-education-opportunities": "No favourites. Add education opportunities as favourites.",
       "you-have-no-job-nor-education-opportunities": "No favourites. Add career and education opportunities to your favourites.",
       "you-have-no-job-opportunities": "No favourites. Add career opportunities as favourites",
@@ -692,7 +692,7 @@
       },
       "title": "My recreational activities"
     },
-    "index": "My competence profile",
+    "index": "Competence profile",
     "interests": {
       "add-interests": "Add interests",
       "description": "Below, you will find all of your interests that you have added to your competence profile. The interests are grouped by type.",
@@ -707,7 +707,7 @@
       "free-form-interests-description-guidance": "You can write and describe your interests in your own words. The text you enter is saved automatically. If you use the service in Finnish, please write in Finnish. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
       "occupations-that-interest-me": "Occupations that interest me",
       "skills-that-interest-me": "Competencies that interest me",
-      "title": "My interests"
+      "title": "Interests"
     },
     "login-page": {
       "description": "By logging in, you will have access to a personal competence profile that will help you manage and use your competence efficiently.",
@@ -791,7 +791,7 @@
       "required-competences": "Competences required for the goal",
       "selected-competences": "Competences selected for my plan",
       "set-to-goal": "Set as goal",
-      "title": "My goals",
+      "title": "Goals",
       "update-modal-title": "Edit goal"
     },
     "paths": {
@@ -800,6 +800,7 @@
       "step-n-details": "Phase {{count}} details"
     },
     "preferences": {
+      "ingress-text": "The competence Profile is where you can save and manage your own information.",
       "list-1-item-1": "view a summary of your competence on the My competences page",
       "list-1-item-2": "save your own work history and map the competence gained from it on the My jobs page",
       "list-1-item-3": "save or import your education history and map out the competence gained from it on the My education page",
@@ -813,9 +814,11 @@
       "list-3-item-4": "How can others use your profile",
       "list-3-title": "Your profile is yours! You decide:",
       "paragraph-1": "By filling in this information carefully, you will receive suggestions for jobs and educations that are right for you.",
+      "paragraph-2": "By filling in this information carefully, you will receive suggestions for jobs and educations that are right for you.\n\nYou can also:",
+      "paragraph-3": "Your profile is yours!\n\nYou decide:",
       "paragraph-4": "The processing of competence profile data is based on the Act on the national digital service package for continuous learning. <CustomLink>Read more about the grounds for data processing in the privacy policy.</CustomLink>",
-      "title": "My settings",
-      "ingress-text": "The competence Profile is where you can save and manage your own information."
+      "title": "Settings",
+      "you-are-signed-in": "The competence Profile is where you can save and manage your own information. In the competence profile, you can:"
     },
     "something-else": {
       "description": "Find your other competences below. You can add and remove competences by clicking the Edit competences button.",
@@ -909,7 +912,7 @@
   "search": {
     "clear": "Clear search",
     "description": "You can search for opportunities using free text search. You can influence the visibility of results by filtering the list.",
-    "filters": "Filters ({{count}})",
+    "filters": "Filters",
     "filters_zero": "Filters",
     "global-placeholder": "Search opportunities",
     "label": "Search opportunities",

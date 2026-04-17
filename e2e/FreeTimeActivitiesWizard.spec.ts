@@ -29,9 +29,9 @@ test.beforeEach(async ({ page }) => {
 test('add new freetime activity', async ({ page, isMobile }) => {
   await mockProfileWizard(page, 'vapaa-ajan-toiminnot', []);
   // Open wizard
-  await page.getByRole('button', { name: 'Lisää uusi vapaa-ajan toiminto' }).click();
+  await page.getByRole('button', { name: 'Lisää uusi vapaa-ajan teema' }).click();
 
-  // "Lisää uusi vapaa-ajan toiminto"
+  // "Lisää uusi vapaa-ajan teema"
   await page.getByLabel('Vapaa-ajan teeman nimi').fill('Testaaminen');
   await page.getByLabel('Vapaa-ajan toiminnon nimi').fill('Uima-altaan testaus');
   await page.getByLabel('Alkoi').fill('01.07.2001');
@@ -82,7 +82,7 @@ test('add new freetime activity', async ({ page, isMobile }) => {
 test('delete freetime activity item', async ({ page }) => {
   // Edit the first item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
-  await page.getByRole('button', { name: 'Poista toiminto' }).click();
+  await page.getByRole('button', { name: 'Poista teema' }).click();
   const confirmButton = page.locator('button.ds\\:bg-alert', { hasText: 'Poista' }).last();
   await expect(confirmButton).toBeVisible();
 

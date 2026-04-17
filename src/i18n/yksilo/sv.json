@@ -47,7 +47,7 @@
       "description": "Jobb- och utbildningsmöjligheter som användaren sparat, samlade som favoriter på ett ställe.",
       "education-opportunities": "Utbildningsmöjligheter",
       "job-opportunities": "Karriärmöjligheter",
-      "title": "Mina favoriter"
+      "title": "Favoriter"
     },
     "goals": {
       "options": "Planalternativ",
@@ -203,15 +203,15 @@
   "free-time-activities": {
     "add-new-activity": "Lägg till ny funktion",
     "add-new-activity-button": "Lägg aktivitet",
-    "add-new-free-time-activity": "Lägg till ny fritidsverksamhet",
+    "add-new-free-time-activity": "Lägg till nytt fritidstema",
+    "confirm-delete-activity": "Är du säker på att du vill ta bort fritidsverksamhet \"{{name}}\"?",
     "confirm-delete-free-time-activity": "Är du säker på att du vill ta bort fritidsverksamheten \"{{name}}\"? Om fritidsverksamheten efter raderingen inte är kopplad till några behörigheter, raderas även fritidsfunktionen.",
-    "confirm-delete-proficiency": "Är du säker på att du vill ta bort behörigheten \"{{name}}\"?",
+    "confirm-delete-theme": "Är du säker på att du vill ta bort temat \"{{name}}\"?",
+    "delete-activity": "Ta bort behörighet",
     "delete-free-time-activity": "Ta bort fritidsverksamhet",
-    "delete-free-time-activity-button": "Ta bort",
-    "delete-proficiency": "Ta bort behörighet",
+    "delete-theme": "Ta bort tema",
     "edit-activity": "Redigera fritidsverksamhet",
     "edit-free-time-theme": "Redigera fritidstema",
-    "edit-proficiency": "Redigera behörighet",
     "identify-proficiencies": "Identifiera kompetenser",
     "name-of-free-time-activity": "Namn på fritidsverksamhet",
     "name-of-free-time-theme": "Namn på fritidstema",
@@ -409,7 +409,7 @@
   "more-actions": "Lägg till alternativ",
   "move-to-service": "Öppna tjänsten",
   "my-competence-path": "Min kompetensstig",
-  "my-competence-profile": "Min kompetensprofil",
+  "my-competence-profile": "Kompetensprofil",
   "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning A — Ö",
   "my-competences": {
     "by-KOULUTUS": "Mina kunskaper från utbildningen",
@@ -546,9 +546,9 @@
           "education": "Min utbildning",
           "favorite-education-opportunities": "Utbildningsmöjligheter",
           "favorite-job-opportunities": "Karriärmöjligheter",
-          "favorites": "Mina favoriter",
-          "goals": "Mina mål",
-          "interests": "Mina intressen",
+          "favorites": "Favoriter",
+          "goals": "Mål",
+          "interests": "Intressen",
           "something-else": "Annan kompetens",
           "work": "Mina arbetsplatser"
         },
@@ -642,7 +642,7 @@
       },
       "order-by": "Sortera",
       "show-filters": "Visa filter",
-      "title": "Mina kunskaper"
+      "title": "Kompetenser"
     },
     "education-history": {
       "description": "Nedan hittar du din utbildningshistorik. Du kan själv lägga till uppgifter i din utbildningshistorik och kartlägga den kompetens som är kopplad till dem. Du kan också importera dina egna studieprestationer från de nationella studie-, utbildnings- och examensregistren som en del av din utbildningshistorik (Studieinfo).",
@@ -666,7 +666,7 @@
       "job-and-education-opportunities": "Utbildnings- och karriärmöjligheter",
       "link-to-opportunities": "Hitta möjligheter",
       "show-filters": "Visa filter",
-      "title": "Mina favoriter",
+      "title": "Favoriter",
       "you-have-no-education-opportunities": "Inga favoriter. Lägg till utbildningsmöjligheter som favoriter.",
       "you-have-no-job-nor-education-opportunities": "Inga favoriter. Lägg till karriär- och utbildningsmöjligheter som favoriter.",
       "you-have-no-job-opportunities": "Inga favoriter. Lägg till karriärmöjligheter som favoriter.",
@@ -691,7 +691,7 @@
       },
       "title": "Min fritidsverksamhet"
     },
-    "index": "Min kompetensprofil",
+    "index": "Kompetensprofil",
     "interests": {
       "add-interests": "Lägg till intressen",
       "description": "Nedan hittar du alla dina intressen som du har lagt till i din kompetensprofil. Intressen grupperas enligt typ.",
@@ -706,7 +706,7 @@
       "free-form-interests-description-guidance": "Du kan skriva och beskriva dina intressen med egna ord. Texten som du skriver sparas automatiskt. Om du använder tjänsten på finska, skriv på finska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.\n",
       "occupations-that-interest-me": "Yrken som intresserar mig",
       "skills-that-interest-me": "Kunskaper som intresserar mig",
-      "title": "Mina intressen"
+      "title": "Intressen"
     },
     "login-page": {
       "description": "Genom att logga in får du tillgång till en personlig kompetensprofil som hjälper dig att hantera och utnyttja din kunskap effektivt.\n",
@@ -790,7 +790,7 @@
       "required-competences": "Kompetenser som krävs för målet",
       "selected-competences": "Valda kompetenser i egen plan",
       "set-to-goal": "Sätt som mål",
-      "title": "Mina mål",
+      "title": "Mål",
       "update-modal-title": "Redigera målet"
     },
     "paths": {
@@ -799,6 +799,7 @@
       "step-n-details": "Uppgifter för steg {{count}}"
     },
     "preferences": {
+      "ingress-text": "Kompetensprofilen är en plats där du kan spara och hantera dina uppgifter.",
       "list-1-item-1": "granska dina kunskaper som en sammanfattning på sidan Mina kompetenser",
       "list-1-item-2": "spara din arbetshistorik och kartlägga kunskaper som erhållits från arbetet på sidan Mina arbetsplatser",
       "list-1-item-3": "spara eller importera din utbildningshistorik och kartlägga kunskaper som erhållits från utbildningar på sidan Mina utbildningar",
@@ -812,9 +813,11 @@
       "list-3-item-4": "Hur andra kan utnyttja din profil",
       "list-3-title": "Profilen är din! Du bestämmer:",
       "paragraph-1": "När du fyller i dessa uppgifter noggrant får du förslag på jobb och utbildningar som passar just dig.",
+      "paragraph-2": "När du fyller i dessa uppgifter noggrant får du förslag på jobb och utbildningar som passar just dig.\n\nDu kan också:",
+      "paragraph-3": "Profilen är din!\n\nDu bestämmer:",
       "paragraph-4": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på lagen om den nationella informationsresursen för kompetenser. <CustomLink>Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.</CustomLink>",
-      "title": "Mina inställningar",
-      "ingress-text": "Kompetensprofilen är en plats där du kan spara och hantera dina uppgifter."
+      "title": "Inställningar",
+      "you-are-signed-in": "Kompetensprofilen är en plats där du kan spara och hantera dina uppgifter. I kompetensprofilen kan du:\n"
     },
     "something-else": {
       "description": "Nedan hittar du dina övriga kunskaper. Du kan lägga till och ta bort kompetenser med redigera kompetenser-knappen.\t",
@@ -908,7 +911,7 @@
   "search": {
     "clear": "Rensa sökning",
     "description": "Du kan söka efter möjligheter med hjälp av fritextsökning. Du kan påverka synligheten av resultaten genom att filtrera listan.",
-    "filters": "Filter ({{count}})",
+    "filters": "Filter",
     "filters_zero": "Filter",
     "global-placeholder": "Sök möjligheter",
     "label": "Sök möjligheter",
