@@ -1,22 +1,33 @@
-import { expect, Page, test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import {
   freetimeActivities,
   freetimeActivityItem,
   freetimeCompetences,
   suggestedFreetimeCompetences,
 } from './fixtures';
-import { mockAuthenticatedUser, mockProfileWizard, mockSelectedCompetences, mockSuggestedCompetences } from './mocks';
+import {
+  mockAuthenticatedUser,
+  mockFeatureFlags,
+  mockProfileWizard,
+  mockRedundantEndpoints,
+  mockSelectedCompetences,
+  mockSuggestedCompetences,
+} from './mocks';
 
-async function mockFreetimeActivities(page: Page, data = freetimeActivities) {
-  await mockProfileWizard(page, 'vapaa-ajan-toiminnot', data);
-}
-
-test('add new freetime activity', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
+  await mockRedundantEndpoints(page);
+  await mockFeatureFlags(page);
   await mockAuthenticatedUser(page);
-  await mockFreetimeActivities(page, []);
+  await mockSuggestedCompetences(page, suggestedFreetimeCompetences, freetimeCompetences);
+  await mockSelectedCompetences(page, freetimeCompetences);
+  await mockProfileWizard(page, 'vapaa-ajan-toiminnot', freetimeActivities);
 
   await page.goto('/yksilo/fi/omat-sivuni/osaamiseni/vapaa-ajan-toimintoni');
+  await page.getByText('Hyväksy kaikki').click();
+});
 
+test('add new freetime activity', async ({ page, isMobile }) => {
+  await mockProfileWizard(page, 'vapaa-ajan-toiminnot', []);
   // Open wizard
   await page.getByRole('button', { name: 'Lisää uusi vapaa-ajan toiminto' }).click();
 
@@ -25,14 +36,13 @@ test('add new freetime activity', async ({ page }) => {
   await page.getByLabel('Vapaa-ajan toiminnon nimi').fill('Uima-altaan testaus');
   await page.getByLabel('Alkoi').fill('01.07.2001');
   await page.getByLabel('Loppui').fill('30.07.2001');
+  await page.getByLabel('Vapaamuotoinen kuvaus').fill('Toiminnon kuvaus');
 
   await page.keyboard.press('Tab');
   await page.locator('button[aria-label*="Seuraava"]').click();
 
   // "Tunnista osaamisia"
-  await mockSuggestedCompetences(page, suggestedFreetimeCompetences, freetimeCompetences);
-  await mockSelectedCompetences(page, freetimeCompetences);
-  await page.getByLabel('Tunnista osaamisia').fill('uida');
+  await page.getByRole('textbox', { name: 'Tunnista osaamisia' }).fill('uida');
 
   await page.getByRole('button', { name: 'uida' }).click();
   await page.getByRole('button', { name: 'selviytyä merellä tilanteessa, jossa laiva joudutaan jättämään' }).click();
@@ -41,9 +51,24 @@ test('add new freetime activity', async ({ page }) => {
   await page.locator('button[aria-label*="Seuraava"]').click();
 
   // "Yhteenveto"
-  await expect(page.getByText('Testaaminen')).toBeVisible();
-  await expect(page.getByText('Uima-altaan testaus')).toBeVisible();
-  await expect(page.getByText('3 osaamista')).toHaveCount(2);
+  const rows = page.getByTestId('free-time-summary-table').locator('tbody tr');
+
+  if (isMobile) {
+    await expect(rows.nth(0).locator('td').nth(0)).toContainText('Testaaminen');
+    await expect(rows.nth(0).locator('td').nth(0)).toContainText('7/2001');
+    await expect(rows.nth(0).locator('td').nth(1)).toHaveText('3');
+  } else {
+    await expect(rows.nth(0).locator('td').nth(0)).toHaveText('Testaaminen');
+    await expect(rows.nth(0).locator('td').nth(1)).toHaveText('7/2001');
+    await expect(rows.nth(0).locator('td').nth(2)).toHaveText('7/2001');
+    await expect(rows.nth(0).locator('td').nth(3)).toHaveText('3');
+
+    // Second row is for osaamiset when they are uncollapsed, so we check the third row
+    await expect(rows.nth(2).locator('td').nth(0)).toHaveText('Uima-altaan testaus');
+    await expect(rows.nth(2).locator('td').nth(1)).toHaveText('7/2001');
+    await expect(rows.nth(2).locator('td').nth(2)).toHaveText('7/2001');
+    await expect(rows.nth(2).locator('td').nth(3)).toHaveText('3');
+  }
 
   const requestPromise = page.waitForRequest(
     (request) => request.url().includes('/api/profiili/vapaa-ajan-toiminnot') && request.method() === 'POST',
@@ -55,31 +80,24 @@ test('add new freetime activity', async ({ page }) => {
 });
 
 test('delete freetime activity item', async ({ page }) => {
-  await mockAuthenticatedUser(page);
-  await mockFreetimeActivities(page);
-
-  await page.goto('/yksilo/fi/omat-sivuni/osaamiseni/vapaa-ajan-toimintoni');
-
   // Edit the first item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
-  await page.getByRole('button', { name: 'Poista vapaa-ajan toiminto' }).click();
+  await page.getByRole('button', { name: 'Poista toiminto' }).click();
+  const confirmButton = page.locator('button.ds\\:bg-alert', { hasText: 'Poista' }).last();
+  await expect(confirmButton).toBeVisible();
 
-  const deleteRequestPromise = page.waitForRequest(
-    (request) => request.url().includes('/api/profiili/vapaa-ajan-toiminnot') && request.method() === 'DELETE',
-  );
-  await page.getByRole('button', { name: 'Poista' }).click();
-  const request = await deleteRequestPromise;
+  const [request] = await Promise.all([
+    page.waitForRequest(
+      (request) => request.url().includes('/api/profiili/vapaa-ajan-toiminnot') && request.method() === 'DELETE',
+    ),
+    confirmButton.click(),
+  ]);
   const expectedId = freetimeActivities[0].id;
   expect(request.url()).toContain('/api/profiili/vapaa-ajan-toiminnot/');
   expect(request.url()).toContain(expectedId);
 });
 
 test('edit freetime activity item', async ({ page }) => {
-  await mockAuthenticatedUser(page);
-  await mockFreetimeActivities(page);
-
-  await page.goto('/yksilo/fi/omat-sivuni/osaamiseni/vapaa-ajan-toimintoni');
-
   // Edit the first item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
 

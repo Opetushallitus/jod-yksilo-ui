@@ -1,33 +1,43 @@
-import { expect, Page, test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { competences, suggestedCompetences, workHistory, workHistoryItem } from './fixtures';
-import { mockAuthenticatedUser, mockProfileWizard, mockSelectedCompetences, mockSuggestedCompetences } from './mocks';
+import {
+  mockAuthenticatedUser,
+  mockFeatureFlags,
+  mockProfileWizard,
+  mockRedundantEndpoints,
+  mockSelectedCompetences,
+  mockSuggestedCompetences,
+} from './mocks';
 
-async function mockWorkHistory(page: Page, data = workHistory) {
-  await mockProfileWizard(page, 'tyopaikat', data);
-}
-
-test('add new workhistory', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
+  await mockRedundantEndpoints(page);
+  await mockFeatureFlags(page);
   await mockAuthenticatedUser(page);
-  await mockWorkHistory(page, []);
+  await mockSelectedCompetences(page, competences);
+  await mockSuggestedCompetences(page, suggestedCompetences, competences);
+  await mockProfileWizard(page, 'tyopaikat', workHistory);
 
   await page.goto('/yksilo/fi/omat-sivuni/osaamiseni/tyopaikkani');
+  await page.getByText('Hyväksy kaikki').click();
+});
 
+test('add new workhistory', async ({ page, isMobile }) => {
+  await mockProfileWizard(page, 'tyopaikat', []);
   // Open wizard
   await page.getByRole('button', { name: 'Lisää uusi työpaikka' }).click();
 
   // "Lisää uusi työpaikka" step
   await page.getByLabel('Työnantaja').fill('Testi Oy');
-  await page.getByLabel('Toimenkuva').fill('Testaaja');
+  await page.getByRole('textbox', { name: 'Toimenkuva' }).fill('Testaaja');
   await page.getByLabel('Alkoi').fill('01.01.2001');
+  await page.getByLabel('Vapaamuotoinen kuvaus').fill('Työpaikan kuvaus');
 
   await page.keyboard.press('Tab');
 
   await page.locator('button[aria-label*="Seuraava"]').click();
 
   // "Tunnista osaamisia" step
-  await mockSuggestedCompetences(page, suggestedCompetences, competences);
-  await mockSelectedCompetences(page, competences);
-  await page.getByLabel('Tunnista osaamisia').fill('kissa');
+  await page.getByRole('textbox', { name: 'Tunnista osaamisia' }).fill('kissa');
 
   await page.getByRole('button', { name: 'arvioida eläinten käyttäytymistä' }).click();
   await page.getByRole('button', { name: 'eläinten anatomia' }).click();
@@ -36,9 +46,24 @@ test('add new workhistory', async ({ page }) => {
   await page.locator('button[aria-label*="Seuraava"]').click();
 
   // "Yhteenveto" step
-  await expect(page.getByText('Testi Oy')).toBeVisible();
-  await expect(page.getByText('Testaaja')).toBeVisible();
-  await expect(page.getByText('3 osaamista')).toHaveCount(2);
+  const rows = page.getByTestId('work-history-summary-table').locator('tbody tr');
+
+  if (isMobile) {
+    await expect(rows.nth(0).locator('td').nth(0)).toContainText('Testi Oy');
+    await expect(rows.nth(0).locator('td').nth(0)).toContainText('1/2001');
+    await expect(rows.nth(0).locator('td').nth(1)).toHaveText('3');
+  } else {
+    await expect(rows.nth(0).locator('td').nth(0)).toHaveText('Testi Oy');
+    await expect(rows.nth(0).locator('td').nth(1)).toHaveText('1/2001');
+    await expect(rows.nth(0).locator('td').nth(2)).toBeEmpty();
+    await expect(rows.nth(0).locator('td').nth(3)).toHaveText('3');
+
+    // Second row is for osaamiset when they are uncollapsed, so we check the third row
+    await expect(rows.nth(2).locator('td').nth(0)).toHaveText('Testaaja');
+    await expect(rows.nth(2).locator('td').nth(1)).toHaveText('1/2001');
+    await expect(rows.nth(2).locator('td').nth(2)).toBeEmpty();
+    await expect(rows.nth(2).locator('td').nth(3)).toHaveText('3');
+  }
 
   const requestPromise = page.waitForRequest(
     (request) => request.url().includes('/api/profiili/tyopaikat') && request.method() === 'POST',
@@ -50,31 +75,24 @@ test('add new workhistory', async ({ page }) => {
 });
 
 test('delete workhistory item', async ({ page }) => {
-  await mockAuthenticatedUser(page);
-  await mockWorkHistory(page);
-
-  await page.goto('/yksilo/fi/omat-sivuni/osaamiseni/tyopaikkani');
-
   // Edit the first work history item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
   await page.getByRole('button', { name: 'Poista työpaikka' }).click();
+  const confirmButton = page.locator('button.ds\\:bg-alert', { hasText: 'Poista työpaikka' }).last();
+  await expect(confirmButton).toBeVisible();
 
-  const deleteRequestPromise = page.waitForRequest(
-    (request) => request.url().includes('/api/profiili/tyopaikat') && request.method() === 'DELETE',
-  );
-  await page.getByRole('button', { name: 'Poista työpaikka' }).click();
-  const request = await deleteRequestPromise;
+  const [request] = await Promise.all([
+    page.waitForRequest(
+      (request) => request.url().includes('/api/profiili/tyopaikat') && request.method() === 'DELETE',
+    ),
+    confirmButton.click(),
+  ]);
   const expectedId = workHistory[0].id;
   expect(request.url()).toContain('/api/profiili/tyopaikat/');
   expect(request.url()).toContain(expectedId);
 });
 
 test('edit workhistory item', async ({ page }) => {
-  await mockAuthenticatedUser(page);
-  await mockWorkHistory(page);
-
-  await page.goto('/yksilo/fi/omat-sivuni/osaamiseni/tyopaikkani');
-
   // Edit the first work history item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
 

@@ -1,22 +1,33 @@
-import { expect, Page, test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import {
   educationCompetences,
   educationHistory,
   educationHistoryItem,
   suggestedEducationCompetences,
 } from './fixtures';
-import { mockAuthenticatedUser, mockProfileWizard, mockSelectedCompetences, mockSuggestedCompetences } from './mocks';
+import {
+  mockAuthenticatedUser,
+  mockFeatureFlags,
+  mockProfileWizard,
+  mockRedundantEndpoints,
+  mockSelectedCompetences,
+  mockSuggestedCompetences,
+} from './mocks';
 
-async function mockEducationHistory(page: Page, data = educationHistory) {
-  await mockProfileWizard(page, 'koulutuskokonaisuudet', data);
-}
-
-test('add new education', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
+  await mockRedundantEndpoints(page);
+  await mockFeatureFlags(page);
   await mockAuthenticatedUser(page);
-  await mockEducationHistory(page, []);
+  await mockSuggestedCompetences(page, suggestedEducationCompetences, educationCompetences);
+  await mockSelectedCompetences(page, educationCompetences);
+  await mockProfileWizard(page, 'koulutuskokonaisuudet', educationHistory);
 
   await page.goto('/yksilo/fi/omat-sivuni/osaamiseni/koulutukseni');
+  await page.getByText('Hyväksy kaikki').click();
+});
 
+test('add new education', async ({ page, isMobile }) => {
+  await mockProfileWizard(page, 'koulutuskokonaisuudet', []);
   // Open wizard
   await page.getByRole('button', { name: 'Lisää uusi koulutus' }).click();
 
@@ -24,14 +35,13 @@ test('add new education', async ({ page }) => {
   await page.getByLabel('Oppilaitos tai koulutuksen järjestäjä').fill('Iso Opisto');
   await page.getByLabel('Tutkinnon tai koulutuksen nimi').fill('Oppilas');
   await page.getByLabel('Alkoi').fill('01.01.2001');
+  await page.getByLabel('Vapaamuotoinen kuvaus').fill('Koulutuksen kuvaus');
 
   await page.keyboard.press('Tab');
   await page.locator('button[aria-label*="Seuraava"]').click();
 
   // "Tunnista osaamisia" step
-  await mockSuggestedCompetences(page, suggestedEducationCompetences, educationCompetences);
-  await mockSelectedCompetences(page, educationCompetences);
-  await page.getByLabel('Tunnista osaamisia').fill('opetus');
+  await page.getByRole('textbox', { name: 'Tunnista osaamisia' }).fill('opetus');
 
   await page.getByRole('button', { name: 'opetussuunnitelman tavoitteet' }).click();
   await page.getByRole('button', { name: 'arviointiprosessit' }).click();
@@ -40,9 +50,23 @@ test('add new education', async ({ page }) => {
   await page.locator('button[aria-label*="Seuraava"]').click();
 
   // "Yhteenveto" step
-  await expect(page.getByText('Iso Opisto')).toBeVisible();
-  await expect(page.getByText('Oppilas')).toBeVisible();
-  await expect(page.getByText('3 osaamista')).toHaveCount(2);
+  const rows = page.getByTestId('education-history-summary-table').locator('tbody tr');
+  if (isMobile) {
+    await expect(rows.nth(0).locator('td').nth(0)).toContainText('Iso Opisto');
+    await expect(rows.nth(0).locator('td').nth(0)).toContainText('1/2001');
+    await expect(rows.nth(0).locator('td').nth(1)).toHaveText('3');
+  } else {
+    await expect(rows.nth(0).locator('td').nth(0)).toHaveText('Iso Opisto');
+    await expect(rows.nth(0).locator('td').nth(1)).toHaveText('1/2001');
+    await expect(rows.nth(0).locator('td').nth(2)).toBeEmpty();
+    await expect(rows.nth(0).locator('td').nth(3)).toHaveText('3');
+
+    // Second row is for osaamiset when they are uncollapsed, so we check the third row
+    await expect(rows.nth(2).locator('td').nth(0)).toHaveText('Oppilas');
+    await expect(rows.nth(2).locator('td').nth(1)).toHaveText('1/2001');
+    await expect(rows.nth(2).locator('td').nth(2)).toBeEmpty();
+    await expect(rows.nth(2).locator('td').nth(3)).toHaveText('3');
+  }
 
   const requestPromise = page.waitForRequest(
     (request) => request.url().includes('/api/profiili/koulutuskokonaisuudet') && request.method() === 'POST',
@@ -54,34 +78,27 @@ test('add new education', async ({ page }) => {
 });
 
 test('delete educationHistory item', async ({ page }) => {
-  await mockAuthenticatedUser(page);
-  await mockEducationHistory(page);
-
-  await page.goto('/yksilo/fi/omat-sivuni/osaamiseni/koulutukseni');
-
   // Edit the first item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
   await page.getByRole('button', { name: 'Poista koulutus' }).click();
+  const confirmButton = page.locator('button.ds\\:bg-alert', { hasText: 'Poista koulutus' }).last();
+  await expect(confirmButton).toBeVisible();
 
-  const deleteRequestPromise = page.waitForRequest(
-    (request) => request.url().includes('/api/profiili/koulutuskokonaisuudet') && request.method() === 'DELETE',
-  );
-  await page.getByRole('button', { name: 'Poista koulutus' }).click();
-  const request = await deleteRequestPromise;
+  const [request] = await Promise.all([
+    page.waitForRequest(
+      (request) => request.url().includes('/api/profiili/koulutuskokonaisuudet') && request.method() === 'DELETE',
+    ),
+    confirmButton.click(),
+  ]);
+
   const expectedId = educationHistory[0].id;
   expect(request.url()).toContain('/api/profiili/koulutuskokonaisuudet/');
   expect(request.url()).toContain(expectedId);
 });
 
 test('edit educationHistory item', async ({ page }) => {
-  await mockAuthenticatedUser(page);
-  await mockEducationHistory(page);
-
-  await page.goto('/yksilo/fi/omat-sivuni/osaamiseni/koulutukseni');
-
   // Edit the first item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
-
   await page.getByLabel('Oppilaitos tai koulutuksen järjestäjä').fill('Opisto');
 
   const requestPromise = page.waitForRequest(
