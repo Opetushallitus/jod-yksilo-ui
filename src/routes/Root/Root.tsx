@@ -32,6 +32,28 @@ import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation, u
 import { LogoutFormContext } from '.';
 import { useSessionManagerNotifications } from './useSessionManagerNotifications';
 
+const LanguageButtonWrapper = () => {
+  const {
+    i18n: { language },
+  } = useTranslation();
+  const { generateLocalizedPath } = useLocalizedRoutes();
+  return (
+    <LanguageButton
+      serviceVariant="yksilo"
+      testId="language-button"
+      language={language as LangCode}
+      supportedLanguageCodes={supportedLanguageCodes}
+      generateLocalizedPath={generateLocalizedPath}
+      linkComponent={Link}
+      translations={{
+        fi: { change: 'Vaihda kieli.', label: langLabels.fi },
+        sv: { change: 'Andra språk.', label: langLabels.sv },
+        en: { change: 'Change language.', label: langLabels.en },
+      }}
+    />
+  );
+};
+
 const Root = () => {
   const {
     t,
@@ -59,7 +81,6 @@ const Root = () => {
     }
   }, [hostname]);
 
-  const { generateLocalizedPath } = useLocalizedRoutes();
   const isLoggedIn = useIsLoggedIn();
   const firstName = useSessionManagerStore((state) => state.user?.etunimi);
   const csrfToken = useSessionManagerStore((state) => state.csrf?.token);
@@ -181,21 +202,7 @@ const Root = () => {
           menuComponent={
             isCvPage ? null : <MenuButton onClick={() => setNavMenuOpen(!navMenuOpen)} label={t('common:menu')} />
           }
-          languageButtonComponent={
-            <LanguageButton
-              serviceVariant="yksilo"
-              testId="language-button"
-              language={language as LangCode}
-              supportedLanguageCodes={supportedLanguageCodes}
-              generateLocalizedPath={generateLocalizedPath}
-              linkComponent={Link}
-              translations={{
-                fi: { change: 'Vaihda kieli.', label: langLabels.fi },
-                sv: { change: 'Andra språk.', label: langLabels.sv },
-                en: { change: 'Change language.', label: langLabels.en },
-              }}
-            />
-          }
+          languageButtonComponent={<LanguageButtonWrapper />}
           userButtonComponent={
             isCvPage ? null : (
               <UserButton
@@ -297,6 +304,7 @@ const RootWithCookieConsentProvider = () => {
   return (
     <CookieConsentProvider
       serviceVariant="yksilo"
+      languageButtonComponent={<LanguageButtonWrapper />}
       translations={{
         guard: {
           buttonLabel: t('common:cookie-consent.guard.buttonLabel'),
@@ -311,10 +319,10 @@ const RootWithCookieConsentProvider = () => {
           currentSelectionLabel: t('common:cookie-consent.modal.currentSelectionLabel'),
           declineOptionalLabel: t('common:cookie-consent.modal.declineOptionalLabel'),
           description: t('common:cookie-consent.modal.description'),
-          hereLabel: t('common:cookie-consent.modal.hereLabel'),
           name: t('common:cookie-consent.modal.name'),
           readMoreHref: t('common:cookie-consent.modal.readMoreHref'),
           readMoreLabel: t('common:cookie-consent.modal.readMoreLabel'),
+          externalLinkIconAriaLabel: t('common:external-link'),
           statisticsDescription: t('common:cookie-consent.modal.statisticsDescription'),
           title: t('common:cookie-consent.modal.title'),
         },
