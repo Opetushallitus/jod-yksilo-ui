@@ -83,7 +83,7 @@ const PlanOpportunityCard = React.memo(
 
         <Accordion
           title={getLocalizedText(otsikko)}
-          className={textColorClassName}
+          titleClassName={textColorClassName}
           initialState={false}
           fetchData={fetchOsaamiset}
           ellipsis={false}
