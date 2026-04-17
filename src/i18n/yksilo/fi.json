@@ -47,7 +47,7 @@
       "description": "Käyttäjän tallentamat työ- ja koulutusmahdollisuudet koottuna suosikeiksi yhdessä paikassa.",
       "education-opportunities": "Koulutusmahdollisuudet",
       "job-opportunities": "Työmahdollisuudet",
-      "title": "Suosikkini"
+      "title": "Suosikit"
     },
     "goals": {
       "options": "Suunnitelmavaihtoehdot",
@@ -202,15 +202,15 @@
   "free-time-activities": {
     "add-new-activity": "Lisää uusi toiminto",
     "add-new-activity-button": "Lisää toiminto",
-    "add-new-free-time-activity": "Lisää uusi vapaa-ajan toiminto",
+    "add-new-free-time-activity": "Lisää uusi vapaa-ajan teema",
+    "confirm-delete-activity": "Haluatko varmasti poistaa toiminnon \"{{name}}\"?",
     "confirm-delete-free-time-activity": "Haluatko varmasti poistaa vapaa-ajan toiminnon \"{{name}}\"? Jos vapaa-ajan toimintoon ei liity poiston jälkeen enää yhtään pätevyyttä, myös vapaa-ajan toiminto poistetaan.",
-    "confirm-delete-proficiency": "Haluatko varmasti poistaa pätevyyden \"{{name}}\"?",
+    "confirm-delete-theme": "Haluatko varmasti poistaa teeman \"{{name}}\"?",
+    "delete-activity": "Poista toiminto",
     "delete-free-time-activity": "Poista vapaa-ajan toiminto",
-    "delete-free-time-activity-button": "Poista toiminto",
-    "delete-proficiency": "Poista pätevyys",
+    "delete-theme": "Poista teema",
     "edit-activity": "Muokkaa vapaa-ajan toimintoa",
     "edit-free-time-theme": "Muokkaa vapaa-ajan teemaa",
-    "edit-proficiency": "Muokkaa pätevyyttä",
     "identify-proficiencies": "Tunnista osaamisia",
     "name-of-free-time-activity": "Vapaa-ajan toiminnon nimi",
     "name-of-free-time-theme": "Vapaa-ajan teeman nimi",
@@ -408,7 +408,7 @@
   "more-actions": "Lisää valintoja",
   "move-to-service": "Siirry palveluun",
   "my-competence-path": "Oma Osaamispolku",
-  "my-competence-profile": "Osaamisprofiilini",
+  "my-competence-profile": "Osaamisprofiili",
   "my-competences-alphabetically": "Osaamiseni aakkosittain A — Ö",
   "my-competences": {
     "by-KOULUTUS": "Koulutuksesta kertynyt osaamiseni",
@@ -545,9 +545,9 @@
           "education": "Koulutukseni",
           "favorite-education-opportunities": "Koulutusmahdollisuudet",
           "favorite-job-opportunities": "Työmahdollisuudet",
-          "favorites": "Suosikkini",
-          "goals": "Tavoitteeni",
-          "interests": "Kiinnostukseni",
+          "favorites": "Suosikit",
+          "goals": "Tavoitteet",
+          "interests": "Kiinnostukset",
           "something-else": "Muu osaamiseni",
           "work": "Työpaikkani"
         },
@@ -641,7 +641,7 @@
       },
       "order-by": "Järjestä",
       "show-filters": "Näytä suodattimet",
-      "title": "Osaamiseni"
+      "title": "Osaamiset"
     },
     "education-history": {
       "description": "Löydät alta koulutushistoriasi. Voit lisätä itse koulutushistoriaasi sekä kartoittaa niihin liittyviä osaamisia. Voit tuoda myös omat opintosuorituksesi valtakunnallisista opinto-, koulutus- ja tutkintorekistereistä osaksi koulutushistoriaasi (Opintopolku).",
@@ -665,7 +665,7 @@
       "job-and-education-opportunities": "Koulutus- ja työmahdollisuudet",
       "link-to-opportunities": "Löydä mahdollisuuksia",
       "show-filters": "Näytä suodattimet",
-      "title": "Suosikkini",
+      "title": "Suosikit",
       "you-have-no-education-opportunities": "Ei suosikkeja. Lisää koulutusmahdollisuuksia suosikeiksi.",
       "you-have-no-job-nor-education-opportunities": "Ei suosikkeja. Lisää työ- ja koulutusmahdollisuuksia suosikeiksi.",
       "you-have-no-job-opportunities": "Ei suosikkeja. Lisää työmahdollisuuksia suosikeiksi.",
@@ -690,7 +690,7 @@
       },
       "title": "Vapaa-ajan toimintoni"
     },
-    "index": "Osaamisprofiilini",
+    "index": "Osaamisprofiili",
     "interests": {
       "add-interests": "Lisää kiinnostuksia",
       "description": "Löydät alta kaikki kiinnostuksen kohteesi, jotka olet lisännyt osaamisprofiiliisi. Kiinnostuksen kohteet ryhmitellään tyypin mukaan.",
@@ -705,7 +705,7 @@
       "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin kiinnostuksiasi. Kirjoittamasi teksti tallentuu automaattisesti. Jos käytät palvelua suomeksi, kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten esimerkiksi henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.\n",
       "occupations-that-interest-me": "Ammatit, jotka kiinnostavat minua",
       "skills-that-interest-me": "Osaamiset, jotka kiinnostavat minua",
-      "title": "Kiinnostukseni"
+      "title": "Kiinnostukset"
     },
     "login-page": {
       "description": "Kirjautumalla sisään saat käyttöösi henkilökohtaisen osaamisprofiilin, joka auttaa sinua hallinnoimaan ja hyödyntämään osaamistasi tehokkaasti.",
@@ -789,7 +789,7 @@
       "required-competences": "Tavoitteeseen vaaditut osaamiset",
       "selected-competences": "Omaan suunnitelmaan valitut osaamiset",
       "set-to-goal": "Aseta tavoitteeksi",
-      "title": "Tavoitteeni",
+      "title": "Tavoitteet",
       "update-modal-title": "Muokkaa tavoitetta"
     },
     "paths": {
@@ -798,6 +798,7 @@
       "step-n-details": "Vaiheen {{count}} tiedot"
     },
     "preferences": {
+      "ingress-text": "Osaamisprofiili on paikka, jossa voit tallentaa ja hallita omia tietojasi.",
       "list-1-item-1": "tarkastella osaamistasi yhteenvetona Osaamiseni-sivulla",
       "list-1-item-2": "tallentaa oman työhistoriasi ja kartoittaa niistä saatua osaamista Työpaikkani-sivulla",
       "list-1-item-3": "tallentaa tai tuoda oman koulutushistorian ja kartoittaa niistä saatua osaamista Koulutukseni-sivulla",
@@ -811,9 +812,11 @@
       "list-3-item-4": "Miten muut voivat hyödyntää profiiliasi",
       "list-3-title": "Profiili on sinun! Sinä päätät:",
       "paragraph-1": "Kun täytät nämä tiedot huolellisesti, saat ehdotuksia töistä ja koulutuksista, jotka sopivat juuri sinulle.",
+      "paragraph-2": "Kun täytät nämä tiedot huolellisesti, saat ehdotuksia töistä ja koulutuksista, jotka sopivat juuri sinulle.\n\nVoit myös:",
+      "paragraph-3": "Profiili on sinun!\n\nSinä päätät:",
       "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu lakiin valtakunnallisesta jatkuvan oppimisen digitaalisesta palvelukokonaisuudesta. <CustomLink>Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta.</CustomLink>",
-      "title": "Asetukseni",
-      "ingress-text": "Osaamisprofiili on paikka, jossa voit tallentaa ja hallita omia tietojasi."
+      "title": "Asetukset",
+      "you-are-signed-in": "Osaamisprofiili on paikka, jossa voit tallentaa ja hallita omia tietojasi. Osaamisprofiilissa voit:"
     },
     "something-else": {
       "description": "Löydät alta muut osaamisesi. Voit lisätä ja poistaa osaamisia muokkaa osaamisia -painikkeella.",
@@ -907,7 +910,7 @@
   "search": {
     "clear": "Tyhjennä haku",
     "description": "Voit hakea mahdollisuuksia käyttämällä vapaasanahakua. Tulosten näkyvyyteen voit vaikuttaa suodattamalla listaa.",
-    "filters": "Suodattimet ({{count}})",
+    "filters": "Suodattimet",
     "filters_zero": "Suodattimet",
     "global-placeholder": "Hae mahdollisuuksia",
     "label": "Hae mahdollisuuksia",

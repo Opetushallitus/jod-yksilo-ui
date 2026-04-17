@@ -6,7 +6,7 @@
   "cookie-consent": {
     "guard": {
       "buttonLabel": "Avaa luvat ja suostumukset",
-      "description": "Tämän toiselta sivustolta olevan sisällön näyttäminen on estetty kunnes hyväksyt kolmansien osapuolien asettamat evästeet. Lue evästekäytäntömme.",
+      "description": "Tämän toiselta sivustolta olevan sisällön näyttäminen on estetty kunnes hyväksyt kolmansien osapuolien asettamat evästeet.",
       "title": "Välitämme yksityisyydestäsi"
     },
     "modal": {

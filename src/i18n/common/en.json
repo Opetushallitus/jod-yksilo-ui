@@ -6,7 +6,7 @@
   "cookie-consent": {
     "guard": {
       "buttonLabel": "Open permissions and consents",
-      "description": "Displaying this content from another site is blocked until you accept cookies set by third parties. Read our cookie policy.",
+      "description": "Displaying this content from another site is blocked until you accept cookies set by third parties.",
       "title": "We care about your privacy"
     },
     "modal": {

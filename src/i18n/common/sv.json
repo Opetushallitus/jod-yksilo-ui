@@ -6,7 +6,7 @@
   "cookie-consent": {
     "guard": {
       "buttonLabel": "Öppna behörigheter och samtycken",
-      "description": "Visning av detta innehåll från en annan webbplats är blockerat tills du accepterar cookies som sätts av tredje part. Läs vår cookiepolicy.",
+      "description": "Visning av detta innehåll från en annan webbplats är blockerat tills du accepterar cookies som sätts av tredje part.",
       "title": "Vi bryr oss om din integritet"
     },
     "modal": {
@@ -21,7 +21,7 @@
       "name": "Cookie-inställningar",
       "readMoreHref": "/sv/dataskyddsbeskrivning-och-cookies",
       "readMoreLabel": "Läs mer om våra cookies och vår integritetspolicy",
-      "statisticsDescription": "Seuraamme palvelun kävijämääriä Matomon avulla. Tähän ei kysytä erikseen suostumusta.",
+      "statisticsDescription": "Vi använder Matomo för att spåra antalet besökare på tjänsten. Detta kräver inget separat samtycke.",
       "title": "Vi använder cookies"
     }
   },

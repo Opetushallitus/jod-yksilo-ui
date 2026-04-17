@@ -320,7 +320,7 @@ export const AddOrEditPatevyysModal = ({
     if (isFirstStep) {
       return patevyysId ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-activity');
     }
-    return patevyysId ? t('free-time-activities.edit-activity') : t('free-time-activities.identify-proficiencies');
+    return patevyysId ? t('profile.competences.edit') : t('free-time-activities.identify-proficiencies');
   }, [isFirstStep, t, patevyysId]);
 
   const topSlot = React.useMemo(
@@ -378,15 +378,15 @@ export const AddOrEditPatevyysModal = ({
             {patevyysId && (
               <Button
                 variant="white-delete"
-                label={`${t('free-time-activities.delete-proficiency')}`}
+                label={`${t('free-time-activities.delete-activity')}`}
                 onClick={() => {
                   if (isSubmitting) {
                     return;
                   }
                   showDialog({
-                    title: t('free-time-activities.delete-proficiency'),
+                    title: t('free-time-activities.delete-activity'),
                     onConfirm: deletePatevyys,
-                    description: t('free-time-activities.confirm-delete-proficiency', {
+                    description: t('free-time-activities.confirm-delete-activity', {
                       name: getLocalizedText(methods.getValues('nimi')),
                     }),
                   });
