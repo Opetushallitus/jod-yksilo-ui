@@ -32,6 +32,8 @@ export interface OsaamisSuosittelijaProps {
   textAreaClassName?: string;
   /** Additional class name for the tag area headings (proposed & selected tags) */
   tagHeadingClassName?: string;
+  /** Heading level for the tag area headings (proposed & selected tags) */
+  tagHeadingLevel: 'h3' | 'h4';
   /** Placeholder text for the textarea */
   placeholder?: string;
   /** Should the selected competences be displayed */
@@ -53,6 +55,7 @@ export const OsaamisSuosittelija = ({
   mode = 'osaamiset',
   textAreaClassName = '',
   tagHeadingClassName = '',
+  tagHeadingLevel,
   placeholder,
   hideSelected = false,
   hideTextAreaLabel = false,
@@ -246,6 +249,7 @@ export const OsaamisSuosittelija = ({
           setResultChangeReason={setResultChangeReason}
           hideSelected={hideSelected}
           tagHeadingClassName={tagHeadingClassName}
+          tagHeadingLevel={tagHeadingLevel}
         />
       </div>
     </>

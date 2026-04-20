@@ -145,6 +145,7 @@ const OsaamisetStep = () => {
             sourceType="PATEVYYS"
             placeholder={t('profile.free-time-activities.modals.competences-placeholder')}
             textAreaClassName="max-w-modal-content!"
+            tagHeadingLevel="h3"
           />
         )}
       />

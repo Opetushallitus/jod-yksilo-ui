@@ -122,6 +122,7 @@ const EditMuuOsaaminenModal = ({ onClose, data, ...rest }: EditMuuOsaaminenModal
                   value={value}
                   sourceType="MUU_OSAAMINEN"
                   textAreaClassName="max-w-modal-content!"
+                  tagHeadingLevel="h3"
                 />
               )}
             />

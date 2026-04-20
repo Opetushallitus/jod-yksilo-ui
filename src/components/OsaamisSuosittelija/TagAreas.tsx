@@ -15,6 +15,7 @@ interface TagAreasProps {
   mode: OsaamisSuosittelijaProps['mode'];
   sourceType: OsaamisSuosittelijaProps['sourceType'];
   tagHeadingClassName?: OsaamisSuosittelijaProps['tagHeadingClassName'];
+  tagHeadingLevel: 'h3' | 'h4';
   useAnimations?: OsaamisSuosittelijaProps['useAnimations'];
   value: OsaamisSuosittelijaProps['value'];
   onChange: OsaamisSuosittelijaProps['onChange'];
@@ -27,6 +28,7 @@ export const TagAreas = ({
   mode = 'osaamiset',
   sourceType = 'KARTOITETTU',
   tagHeadingClassName,
+  tagHeadingLevel,
   useAnimations,
   value = [],
   onChange,
@@ -64,12 +66,14 @@ export const TagAreas = ({
     [value, setLastSelectedTagClickedIndex, onChange, setResultChangeReason],
   );
 
+  const Title = tagHeadingLevel;
+
   return (
     <>
       <div className={cx(['sticky top-0 bg-bg-gray text-primary-gray', tagHeadingClassName])}>
-        <span id={suggestedTagsId} className="text-heading-4-mobile sm:text-heading-4">
+        <Title id={suggestedTagsId} className="text-heading-4-mobile sm:text-heading-4">
           {mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}
-        </span>
+        </Title>
         {ehdotetutOsaamiset.length > 0 && (
           <div className="font-arial text-body-sm text-secondary-gray mb-4">
             {mode === 'osaamiset' ? t(`osaamissuosittelija.competence.add`) : t(`osaamissuosittelija.interest.add`)}
@@ -157,9 +161,9 @@ export const TagAreas = ({
       {!hideSelected && (
         <>
           <div className={cx(['sticky top-0 bg-bg-gray text-primary-gray', tagHeadingClassName])}>
-            <span id={addedTagsId} className="text-heading-4-mobile sm:text-heading-4">
+            <Title id={addedTagsId} className="text-heading-4-mobile sm:text-heading-4">
               {mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}
-            </span>
+            </Title>
             {value.length > 0 && (
               <div className="font-arial text-body-sm text-secondary-gray mb-4">
                 {mode === 'osaamiset'

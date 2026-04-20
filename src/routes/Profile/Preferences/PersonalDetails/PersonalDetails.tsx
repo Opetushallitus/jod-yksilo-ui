@@ -87,9 +87,9 @@ const PersonalDetails = () => {
   return (
     <>
       <section className="mb-8">
-        <h3 className="text-heading-3-mobile sm:text-heading-3 mb-3">
+        <h2 className="text-heading-3-mobile sm:text-heading-3 mb-3">
           {t('preferences.data-disclosure-unanonymized.title')}
-        </h3>
+        </h2>
         <p className="font-arial text-body-md mb-5">{t('preferences.data-disclosure-unanonymized.description')}</p>
         <div
           className="flex items-center justify-between gap-4 py-4 border-b-2 border-[#CCC]"

@@ -28,6 +28,7 @@ const Interests = () => {
         hideTextAreaLabel
         scrollOnFocus={false}
         isTagSpacing={false}
+        tagHeadingLevel="h3"
       />
       {mappedKiinnostukset.length > 1 && (
         <Button

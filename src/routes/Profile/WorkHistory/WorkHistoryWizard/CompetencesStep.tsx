@@ -31,6 +31,7 @@ const CompetencesStep = ({ toimenkuva }: CompetencesStepProps) => {
             value={value}
             sourceType="TOIMENKUVA"
             textAreaClassName="max-w-modal-content!"
+            tagHeadingLevel="h4"
           />
         )}
       />

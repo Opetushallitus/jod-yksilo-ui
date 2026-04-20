@@ -35,7 +35,7 @@ export const ToolCard = ({
 
   return (
     <div className={tc(`flex flex-col rounded-lg p-6 gap-5 bg-secondary-1-dark-2 ${className}`)}>
-      <div className="text-heading-2-mobile sm:text-heading-2 text-white mr-2">{title ?? t('tool.banner.title')}</div>
+      <h2 className="text-heading-2-mobile sm:text-heading-2 text-white mr-2">{title ?? t('tool.banner.title')}</h2>
       <p className="text-body-lg-mobile sm:text-body-lg text-white">{description ?? t('tool.banner.description')}</p>
       <div className="mt-4">
         <Button

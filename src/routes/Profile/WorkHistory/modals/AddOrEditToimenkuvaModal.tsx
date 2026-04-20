@@ -145,6 +145,7 @@ const OsaamisetStep = () => {
             value={value}
             sourceType="TOIMENKUVA"
             textAreaClassName="max-w-modal-content!"
+            tagHeadingLevel="h3"
           />
         )}
       />
