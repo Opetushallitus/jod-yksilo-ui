@@ -32,7 +32,7 @@ import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation, u
 import { LogoutFormContext } from '.';
 import { useSessionManagerNotifications } from './useSessionManagerNotifications';
 
-const LanguageButtonWrapper = () => {
+const LanguageButtonWrapper = ({ responsive }: { responsive?: boolean }) => {
   const {
     i18n: { language },
   } = useTranslation();
@@ -45,6 +45,7 @@ const LanguageButtonWrapper = () => {
       supportedLanguageCodes={supportedLanguageCodes}
       generateLocalizedPath={generateLocalizedPath}
       linkComponent={Link}
+      responsive={responsive}
       translations={{
         fi: { change: 'Vaihda kieli.', label: langLabels.fi },
         sv: { change: 'Andra språk.', label: langLabels.sv },
@@ -304,7 +305,7 @@ const RootWithCookieConsentProvider = () => {
   return (
     <CookieConsentProvider
       serviceVariant="yksilo"
-      languageButtonComponent={<LanguageButtonWrapper />}
+      languageButtonComponent={<LanguageButtonWrapper responsive={false} />}
       translations={{
         guard: {
           buttonLabel: t('common:cookie-consent.guard.buttonLabel'),
