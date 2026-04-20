@@ -32,6 +32,7 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
             sourceType="PATEVYYS"
             placeholder={t('profile.free-time-activities.modals.competences-placeholder')}
             textAreaClassName="max-w-modal-content!"
+            tagHeadingLevel="h4"
           />
         )}
       />

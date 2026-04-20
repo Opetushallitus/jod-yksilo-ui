@@ -34,6 +34,7 @@ const CompetencesStep = ({ koulutus }: CompetencesStepProps) => {
               value={value}
               sourceType="KOULUTUS"
               textAreaClassName="max-w-modal-content!"
+              tagHeadingLevel="h4"
             />
           )}
         />

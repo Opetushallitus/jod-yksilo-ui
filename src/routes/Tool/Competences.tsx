@@ -27,6 +27,7 @@ const Competences = () => {
         hideTextAreaLabel
         scrollOnFocus={false}
         isTagSpacing={false}
+        tagHeadingLevel="h3"
       />
       {mappedOsaamiset.length > 1 && (
         <Button

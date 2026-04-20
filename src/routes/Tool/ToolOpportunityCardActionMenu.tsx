@@ -1,4 +1,3 @@
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { MahdollisuusTyyppi } from '@/routes/types';
 import { copyToClipboard } from '@/utils';
 import { PopupList, PopupListItem } from '@jod/design-system';
@@ -25,7 +24,6 @@ const ToolOpportunityCardActionMenu = ({
     t,
     i18n: { language },
   } = useTranslation();
-  const { isDev } = useEnvironment();
 
   const compareTo =
     mahdollisuusTyyppi === 'TYOMAHDOLLISUUS'
@@ -38,10 +36,6 @@ const ToolOpportunityCardActionMenu = ({
           hash: t('education-opportunity.competences.route'),
         };
 
-  const mockOnClick = () => {
-    alert('todo');
-  };
-
   return (
     <PopupList>
       <ul id={menuId} className="flex flex-col gap-y-2 w-full">
@@ -50,13 +44,6 @@ const ToolOpportunityCardActionMenu = ({
             <PopupListItem>{t('compare')}</PopupListItem>
           </Link>
         </li>
-        {isDev && (
-          <li>
-            <Link to="#" onClick={mockOnClick} type="button" data-testid="opportunity-action-create-path">
-              <PopupListItem>TODO: {t('create-path')}</PopupListItem>
-            </Link>
-          </li>
-        )}
         <li>
           <button
             data-testid="opportunity-action-share"

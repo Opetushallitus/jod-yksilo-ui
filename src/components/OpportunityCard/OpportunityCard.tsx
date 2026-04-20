@@ -335,10 +335,11 @@ const OpportunityCardHeader = ({
 
   if (!sm) {
     return (
-      <div className="flex flex-col gap-2">
+      <h3 className="flex flex-col gap-2">
         <div className="flex flex-row gap-3">
           <div
             className={`flex items-center justify-center size-7 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
+            aria-hidden
           >
             <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
           </div>
@@ -348,13 +349,14 @@ const OpportunityCardHeader = ({
           </div>
         </div>
         <div>{titleContent}</div>
-      </div>
+      </h3>
     );
   }
   return (
-    <div className="flex flex-row">
+    <h3 className="flex flex-row">
       <div
         className={`flex items-center justify-center size-8 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
+        aria-hidden
       >
         <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
       </div>
@@ -362,7 +364,7 @@ const OpportunityCardHeader = ({
         <OpportunityType mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
         {titleContent}
       </div>
-    </div>
+    </h3>
   );
 };
 

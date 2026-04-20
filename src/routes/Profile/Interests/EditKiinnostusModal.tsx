@@ -124,6 +124,7 @@ const EditInterestModal = ({ onClose, data = [], ...rest }: EditKiinnostusModalP
                   sourceType="KIINNOSTUS"
                   mode="kiinnostukset"
                   textAreaClassName="max-w-modal-content!"
+                  tagHeadingLevel="h3"
                 />
               )}
             />
