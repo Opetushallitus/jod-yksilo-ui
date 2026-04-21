@@ -62,6 +62,29 @@ export const ExperienceTable = ({
   const { t } = useTranslation();
   const { sm } = useMediaQueries();
 
+  // Show ongoing rows without an end date first, then sort by latest end date and latest start date.
+  const sortRowsByLatestDate = React.useCallback((a: ExperienceTableRowData, b: ExperienceTableRowData) => {
+    if (!a.loppuPvm && b.loppuPvm) {
+      return -1;
+    }
+
+    if (a.loppuPvm && !b.loppuPvm) {
+      return 1;
+    }
+
+    const aEndDate = a.loppuPvm?.getTime() ?? 0;
+    const bEndDate = b.loppuPvm?.getTime() ?? 0;
+
+    if (aEndDate !== bEndDate) {
+      return bEndDate - aEndDate;
+    }
+
+    const aStartDate = a.alkuPvm?.getTime() ?? 0;
+    const bStartDate = b.alkuPvm?.getTime() ?? 0;
+
+    return bStartDate - aStartDate;
+  }, []);
+
   // To track Checkbox checked status with indeterminate state.
   const [rowsCheckboxState, setRowsCheckboxState] = React.useState<
     Map<
@@ -162,7 +185,17 @@ export const ExperienceTable = ({
   };
 
   const uncategorizedRows = rows.filter((row) => !row.subrows);
-  const categorizedRows = rows.filter((row) => row.subrows);
+  const categorizedRows = React.useMemo(
+    () =>
+      rows
+        .filter((row) => row.subrows)
+        .map((row) => ({
+          ...row,
+          subrows: [...(row.subrows ?? [])].sort(sortRowsByLatestDate),
+        }))
+        .sort(sortRowsByLatestDate),
+    [rows, sortRowsByLatestDate],
+  );
 
   const thPadding = insideModal ? 'md:pl-6' : 'sm:pl-6';
 
