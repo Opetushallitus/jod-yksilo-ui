@@ -61,7 +61,7 @@ const PlanOpportunityCard = React.memo(
               className="inline-flex items-center sm:gap-2 select-none w-fit tracking-wide sm:flex-row flex-col"
               data-testid="opportunity-card-match"
             >
-              <span className="text-accent text-[30px] sm:text-[34px]">{matchValue}</span>
+              <span className="text-accent text-[1.875rem] sm:text-[2.125rem]">{matchValue}</span>
               <span className="text-attrib-title font-arial font-semibold">{matchLabel}</span>
             </div>
           )}

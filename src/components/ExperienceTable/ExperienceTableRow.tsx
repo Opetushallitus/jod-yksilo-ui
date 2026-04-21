@@ -309,7 +309,7 @@ export const ExperienceTableRow = ({
         >
           {osaamisetNeedsToBeVerified && (
             <TooltipWrapper
-              className="text-[12px]! leading-5!"
+              className="text-[0.75rem]! leading-5!"
               tooltipContent={<Trans i18nKey="education-history-import.check-detected-competences-tooltip" />}
               tooltipPlacement="top"
             >

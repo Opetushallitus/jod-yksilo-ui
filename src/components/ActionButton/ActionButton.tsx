@@ -13,7 +13,7 @@ export const ActionButton = ({ label, icon, className = '', onClick, testId, ...
     <button
       aria-label={label}
       className={tc(
-        `cursor-pointer flex items-center gap-x-2 text-nowrap rounded-2xl pl-4 pr-5 py-1 font-semibold text-[12px] leading-[18px] hover:underline outline-accent ${className}`,
+        `cursor-pointer flex items-center gap-x-2 text-nowrap rounded-2xl pl-4 pr-5 py-1 font-semibold text-[0.75rem] leading-[1.125rem] hover:underline outline-accent ${className}`,
       )}
       onClick={onClick}
       type="button"

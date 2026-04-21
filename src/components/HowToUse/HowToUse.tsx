@@ -170,7 +170,7 @@ export function HowToUse() {
           </div>
           <div className="flex flex-col items-center">
             <BlueArrows />
-            <div className="flex flex-row gap-3 flex-1 text-primary-gray text-body-xs font-semibold sm:text-[12px] text-[10px] sm:text-left text-center">
+            <div className="flex flex-row gap-3 flex-1 text-primary-gray text-body-xs font-semibold sm:text-[0.75rem] text-[0.625rem] sm:text-left text-center">
               <div className="flex sm:flex-row flex-col justify-between items-center gap-2 flex-1 bg-secondary-1-light-2 p-4 rounded-md">
                 {t('how-to-use.find-opportunities-without-login-title')}
                 <Tooltip>
@@ -213,7 +213,7 @@ export function HowToUse() {
       </div>
       <div className="flex flex-col items-center -top-5 relative">
         <GrayArrows />
-        <div className="flex flex-row gap-3 text-primary-gray text-body-xs sm:text-[12px] text-[10px] font-semibold text-center">
+        <div className="flex flex-row gap-3 text-primary-gray text-body-xs sm:text-[0.75rem] text-[0.625rem] font-semibold text-center">
           <div className="flex flex-col justify-center items-center gap-3 flex-1 sm:w-[150px] w-[120px] bg-primary-light-2 p-5 rounded-md">
             {t('how-to-use.job-seeker-profile')}
             <div className="flex items-center">{tyomarkkinatoriLogo}</div>

@@ -217,7 +217,7 @@ const OpportunityHeader = ({
         <OpportunityType mahdollisuusAlityyppi={mahdollisuusAlityyppi} showTypeTooltip />
         <h1
           data-testid={'opportunity-heading-title'}
-          className={`text-heading-1-mobile leading-7 sm:text-heading-1 sm:leading-[36px] hyphens-auto ${textColorClassName} text-pretty wrap-break-word focus:outline-0`}
+          className={`text-heading-1-mobile leading-7 sm:text-heading-1 sm:leading-[2.25rem] hyphens-auto ${textColorClassName} text-pretty wrap-break-word focus:outline-0`}
         >
           {title}
           {showAiInfoInTitle && (
