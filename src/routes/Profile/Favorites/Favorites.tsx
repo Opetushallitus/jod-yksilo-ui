@@ -80,7 +80,7 @@ const Favorites = () => {
   const title = t('profile.favorites.title');
   const jobFilterText = t('job-opportunities');
   const educationFilterText = t('education-opportunities');
-  const { lg } = useMediaQueries();
+  const { sm, lg } = useMediaQueries();
   const [showFilters, setShowFilters] = React.useState(false);
   const guardedAction = useSessionGuardedAction();
   const isLoggedIn = useIsLoggedIn();
@@ -249,6 +249,7 @@ const Favorites = () => {
             footer={
               <div className="flex flex-row justify-end gap-4 flex-1">
                 <Button
+                  size={sm ? 'lg' : 'sm'}
                   variant="accent"
                   label={t('close')}
                   onClick={() => setShowFilters(false)}
