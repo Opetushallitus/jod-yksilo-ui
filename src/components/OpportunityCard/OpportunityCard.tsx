@@ -121,7 +121,7 @@ const ActionsSection = ({
           className={'flex flex-col sm:flex-row flex-nowrap gap-x-2 items-center select-none'}
           data-testid="opportunity-card-match"
         >
-          <span className="text-accent text-[30px] sm:text-[34px] leading-7 sm:leading-[35px] font-normal">
+          <span className="text-accent text-[1.875rem] sm:text-[2.125rem] leading-7 sm:leading-[2.1875rem] font-normal">
             {Math.round(matchValue * 100)}%
           </span>
           <span className="text-body-xs font-semibold text-primary-gray">{matchLabel}</span>

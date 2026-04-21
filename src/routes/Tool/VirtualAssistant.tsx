@@ -339,7 +339,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
                 aria-selected={selectedVisible ? 'false' : 'true'}
                 aria-controls={conversationTabPanelId}
                 className={cx(
-                  'flex-1 bg-white rounded-t-md p-3 text-[16px] leading-[110%] font-bold tracking-[0.16px] truncate cursor-pointer hover:underline',
+                  'flex-1 bg-white rounded-t-md p-3 text-[1rem] leading-[110%] font-bold tracking-[0.16px] truncate cursor-pointer hover:underline',
                   selectedVisible ? 'text-primary-gray bg-bg-gray-2' : 'text-accent bg-white',
                 )}
               >
@@ -356,7 +356,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
                 aria-selected={selectedVisible ? 'true' : 'false'}
                 aria-controls={selectedTabPanelId}
                 className={cx(
-                  'flex-1 rounded-t-md p-3 text-[16px] leading-[110%] font-bold tracking-[0.16px] truncate cursor-pointer hover:underline',
+                  'flex-1 rounded-t-md p-3 text-[1rem] leading-[110%] font-bold tracking-[0.16px] truncate cursor-pointer hover:underline',
                   selectedVisible ? 'text-accent bg-white' : 'text-primary-gray bg-bg-gray-2',
                 )}
               >
@@ -491,7 +491,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
                 maxLength={LIMITS.TEXT_INPUT}
                 hideLabel
                 placeholder={t('tool.my-own-data.virtual-assistant.respond-to-chat')}
-                className="p-4! text-[16px]! leading-[18px]!"
+                className="p-4! text-[1rem]! leading-[1.125rem]!"
                 testId="va-input"
                 widthVariant="full"
               />

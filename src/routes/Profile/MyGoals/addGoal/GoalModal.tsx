@@ -275,7 +275,7 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
                                   'rounded',
                                   'px-3',
                                   'pb-1',
-                                  'text-[14px]',
+                                  'text-[0.875rem]',
                                   'uppercase',
                                   'sm:order-1',
                                   'not-sm:ml-3',

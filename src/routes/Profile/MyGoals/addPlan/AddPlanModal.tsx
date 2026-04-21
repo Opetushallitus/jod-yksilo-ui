@@ -211,7 +211,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                                   'rounded',
                                   'px-3',
                                   'pb-1',
-                                  'text-[14px]',
+                                  'text-[0.875rem]',
                                   'order-2',
                                   'sm:order-1',
                                   'uppercase',
