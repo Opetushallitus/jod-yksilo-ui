@@ -1,11 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, useMatches, useParams } from 'react-router';
+import { generatePath, useMatches, useParams, useSearchParams } from 'react-router';
 
 export const useLocalizedRoutes = () => {
   const matches = useMatches();
   const params = useParams();
   const { t } = useTranslation();
+  const [searchParams] = useSearchParams();
 
   // Generate localized path in given language
   const generateLocalizedPath = React.useCallback(
@@ -26,10 +27,12 @@ export const useLocalizedRoutes = () => {
           pathnameParts.push(localizedPath);
         }
       });
-
-      return generatePath(`/${pathnameParts.join('/')}`, params);
+      const generatedPath = generatePath(`/${pathnameParts.join('/')}`, params);
+      const searchParamsString = searchParams.toString();
+      const qs = searchParamsString ? `?${searchParamsString}` : '';
+      return `${generatedPath}${qs}`;
     },
-    [matches, params, t],
+    [matches, params, searchParams, t],
   );
 
   return { generateLocalizedPath };
