@@ -8,6 +8,7 @@ import { useLocalizedRoutes } from './useLocalizedRoutes';
 vi.mock('react-router', () => ({
   useMatches: vi.fn(),
   useParams: vi.fn(),
+  useSearchParams: vi.fn(() => [new URLSearchParams()]),
   generatePath: vi.fn((path: string, params: Record<string, string>) => {
     Object.keys(params).forEach((key) => {
       path = path.replace(`:${key}`, params[key]);
