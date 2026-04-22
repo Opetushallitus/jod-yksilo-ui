@@ -115,6 +115,7 @@ const Home = () => {
         <HeroCard
           title={t('home.hero-title')}
           titleLevel={1}
+          titleClassName="text-hero-mobile sm:text-hero focus:outline-0"
           content={t('home.hero-content')}
           backgroundColor="var(--ds-color-secondary-1-dark-2)"
         />
