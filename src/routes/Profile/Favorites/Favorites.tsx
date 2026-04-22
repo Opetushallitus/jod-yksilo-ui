@@ -27,9 +27,9 @@ const GoalsCard = ({ testId, className = '' }: { testId: string; className?: str
       className={tc(`flex flex-col bg-secondary-1-dark-2 rounded-lg p-6 gap-3 text-white ${className}`)}
       data-testid={testId}
     >
-      <h2 className="text-heading-2">{t('profile.favorites.goals-card.title')}</h2>
+      <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.favorites.goals-card.title')}</h2>
       <div className="flex flex-col gap-6">
-        <p className="text-body-lg">{t('profile.favorites.goals-card.description')}</p>
+        <p className="text-body-lg-mobile sm:text-body-lg">{t('profile.favorites.goals-card.description')}</p>
         <Button
           label={t('profile.favorites.goals-card.link-text')}
           iconSide="right"
