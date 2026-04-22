@@ -22,80 +22,54 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
   const guardedAction = useSessionGuardedAction();
   const { sm } = useMediaQueries();
   const { jakolinkit } = useLoaderData<PreferencesLoaderData>();
-  const previousJakolinkkiIds = React.useRef<string[]>(jakolinkit.map((j) => j.id!).filter(Boolean));
+  const [jakolinkitState, setJakolinkitState] = React.useState(jakolinkit);
 
-  // Effect to open accordions for new jakolinkki after revalidation.
-  // Without this the newly created link's accordion would be closed.
-  React.useEffect(() => {
-    const currentIds = jakolinkit.map((j) => j.id!).filter(Boolean);
-    const prevIds = previousJakolinkkiIds.current;
-    // Find new IDs (created jakolinkki)
-    const newIds = currentIds.filter((id) => !prevIds.includes(id));
-    if (newIds.length > 0) {
-      // eslint-disable-next-line react-hooks/immutability
-      setOpenAccordions((prev) => {
-        const updated = Array.from(new Set([...prev, ...newIds]));
-        sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(updated));
-        return updated;
-      });
+  // Stores IDs of explicitly closed accordions; new links default to open
+  const [closedAccordions, setClosedAccordions] = React.useState<Set<string>>(() => {
+    try {
+      const stored = sessionStorage.getItem(SESSION_STORAGE_KEY);
+      return stored ? new Set<string>(JSON.parse(stored) as string[]) : new Set<string>();
+    } catch {
+      return new Set<string>();
     }
-    previousJakolinkkiIds.current = currentIds;
+  });
+
+  const toggleAccordion = (id: string) => (isOpen: boolean) => {
+    setClosedAccordions((prev) => {
+      const next = new Set(prev);
+      if (isOpen) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      try {
+        sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify([...next]));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  };
+
+  React.useEffect(() => {
+    setJakolinkitState(jakolinkit);
   }, [jakolinkit]);
 
   const deleteLocalJakolinkki = (id: string) => {
-    const index = jakolinkit.findIndex((j) => j.id === id);
-    if (index > -1) {
-      jakolinkit.splice(index, 1);
-    }
+    setJakolinkitState((prev) => prev.filter((j) => j.id !== id));
+    toggleAccordion(id)(true);
   };
-
-  const getInitialAccordionStatus = () => {
-    const stored = sessionStorage.getItem('openShareLinkAccordions');
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
-          return parsed as string[];
-        }
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Failed to parse openShareLinkAccordions from sessionStorage', e);
-      }
-    }
-
-    // If no stored value, open all non-expired links by default
-    const defaultValues = jakolinkit
-      .filter((link) => !link.voimassaAsti || new Date(link.voimassaAsti) >= new Date())
-      .map((linkki) => linkki.id!);
-
-    sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(defaultValues));
-    return defaultValues;
-  };
-
-  const [openAccordions, setOpenAccordions] = React.useState<string[]>(getInitialAccordionStatus());
-
-  const toggleAccordion = React.useCallback((id: string) => {
-    setOpenAccordions((prevOpenAccordions) => {
-      const newOpenAccordions = prevOpenAccordions.includes(id)
-        ? prevOpenAccordions.filter((accordionId) => accordionId !== id)
-        : [...prevOpenAccordions, id];
-      sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(newOpenAccordions));
-      return newOpenAccordions;
-    });
-  }, []);
-
-  const isAccordionOpen = React.useCallback((id: string) => openAccordions.includes(id), [openAccordions]);
 
   return (
     <section className={className} data-testid="share-link-section">
       <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.share.title')}</h2>
       <p className="font-arial text-body-md mb-5 whitespace-pre-wrap">{t('preferences.share.description')}</p>
       <div className="my-8">
-        {jakolinkit.length === 0 ? (
+        {jakolinkitState.length === 0 ? (
           <EmptyState text={t('preferences.share.no-links')} />
         ) : (
           <ul className="flex flex-col gap-7">
-            {jakolinkit.map((linkki) => {
+            {jakolinkitState.map((linkki) => {
               const url = new URL(`${location.origin}/yksilo/${i18n.language}/cv`);
               url.searchParams.set('token', linkki.ulkoinenId!);
               const date = linkki.voimassaAsti ? new Date(linkki.voimassaAsti) : null;
@@ -154,8 +128,8 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                 <li key={linkki.id} className={`border-l-2 border-border-gray pl-4 py-3 ${sm ? '' : '-ml-3'}`}>
                   <Accordion
                     title={linkki.nimi || url.href}
-                    isOpen={isAccordionOpen(linkki.id!)}
-                    setIsOpen={() => toggleAccordion(linkki.id!)}
+                    isOpen={!closedAccordions.has(linkki.id!)}
+                    setIsOpen={toggleAccordion(linkki.id!)}
                     collapsedContent={
                       <div className="flex flex-col gap-4">
                         {expirationText}
