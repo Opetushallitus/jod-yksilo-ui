@@ -33,24 +33,24 @@ export default defineConfig({
           res.setHeader('Content-Type', 'application/json');
           res.end(
             JSON.stringify([
-              {
-                id: 'test-notification',
-                title: { fi: 'Testi-ilmoitus', sv: 'Testnotis', en: 'Test notification' },
-                description: {
-                  fi: 'Tämä on testi-ilmoitus.',
-                  sv: 'Detta är en testnotis.',
-                  en: 'This is a test notification.',
-                },
-                variant: 'success' as const,
-                link: {
-                  label: { fi: 'Lue lisää', sv: 'Läs mer', en: 'Read more' },
-                  url: {
-                    fi: 'http://localhost:8080/yksilo/fi',
-                    sv: 'http://localhost:8080/yksilo/sv',
-                    en: 'http://localhost:8080/yksilo/en',
-                  },
-                },
-              },
+              // {
+              //   id: 'test-notification',
+              //   title: { fi: 'Testi-ilmoitus', sv: 'Testnotis', en: 'Test notification' },
+              //   description: {
+              //     fi: 'Tämä on testi-ilmoitus.',
+              //     sv: 'Detta är en testnotis.',
+              //     en: 'This is a test notification.',
+              //   },
+              //   variant: 'success' as const,
+              //   link: {
+              //     label: { fi: 'Lue lisää', sv: 'Läs mer', en: 'Read more' },
+              //     url: {
+              //       fi: 'http://localhost:8080/yksilo/fi',
+              //       sv: 'http://localhost:8080/yksilo/sv',
+              //       en: 'http://localhost:8080/yksilo/en',
+              //     },
+              //   },
+              // },
             ]),
           );
         });

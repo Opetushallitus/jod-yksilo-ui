@@ -302,16 +302,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
       topSlot={<ModalHeader text={headerText} className="text-heading-1-mobile sm:text-heading-1 mb-5" />}
       content={
         <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-          >
+          <Form id={formId} onSubmit={onSubmit}>
             <div ref={scrollRef} className="max-w-modal-content box-content px-5 md:px-9">
               {isFirstStep && <StepWelcome />}
               {isInfoStep && <StepInformation data={yksiloData} />}

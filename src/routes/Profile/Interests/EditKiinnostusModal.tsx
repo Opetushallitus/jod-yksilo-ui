@@ -103,17 +103,7 @@ const EditInterestModal = ({ onClose, data = [], ...rest }: EditKiinnostusModalP
       className="h-[90vh]! sm:h-full!"
       content={
         <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-            className="px-5 md:px-9"
-          >
+          <Form id={formId} onSubmit={onSubmit} className="px-5 md:px-9">
             <Controller
               control={methods.control}
               name="kiinnostukset"

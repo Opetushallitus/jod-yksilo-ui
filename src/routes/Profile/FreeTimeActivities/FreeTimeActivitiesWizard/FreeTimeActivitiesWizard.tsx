@@ -242,17 +242,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
       className="h-[90vh]! sm:h-full!"
       content={
         <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-            className="text-primary-gray"
-          >
+          <Form id={formId} onSubmit={onSubmit} className="text-primary-gray">
             {StepComponent}
           </Form>
         </FormProvider>
