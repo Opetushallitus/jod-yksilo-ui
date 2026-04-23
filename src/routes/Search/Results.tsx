@@ -11,7 +11,7 @@ import { getMahdollisuusAlityyppi } from '../Tool/utils';
 import { SearchFilters } from './SearchFilters';
 
 export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement | null> }) => {
-  const { lg } = useMediaQueries();
+  const { lg, reduceMotion } = useMediaQueries();
   const { isLoading, filteredResults, filteredMetadata, pageNr, pageSize, koulutusalaNimet, fetchPage } =
     useSearchStore(
       useShallow((state) => ({
@@ -92,7 +92,7 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
           currentPage={pageNr}
           translations={paginationTranslations}
           onPageChange={async (details) => {
-            scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+            scrollRef.current?.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth' });
             await fetchPage(details.page);
           }}
         />

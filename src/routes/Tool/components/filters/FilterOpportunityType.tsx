@@ -3,7 +3,7 @@ import { FilterToimiala } from '@/routes/Tool/components/filters/FilterToimiala.
 import type { MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { getFilterCount } from '@/utils/FilterUtils';
-import { Checkbox } from '@jod/design-system';
+import { Checkbox, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router';
@@ -18,6 +18,7 @@ import { FilterKoulutusala } from './FilterKoulutusala';
 export const FilterOpportunityType = () => {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
+  const { reduceMotion } = useMediaQueries();
 
   const { ehdotuksetCount, filter, setFilter, tyomahdollisuudetCount, koulutusmahdollisuudetCount } = useToolStore(
     useShallow((state) => ({
@@ -42,7 +43,7 @@ export const FilterOpportunityType = () => {
       }
       const opportunitiesTitleElement = document.getElementById('opportunities-title');
       if (opportunitiesTitleElement) {
-        opportunitiesTitleElement.scrollIntoView({ behavior: 'smooth' });
+        opportunitiesTitleElement.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth' });
         opportunitiesTitleElement.focus();
       }
       const url = new URL(globalThis.location.href);
