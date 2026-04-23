@@ -21,7 +21,7 @@ import { OpintopolkuKoulutusList } from './OpintopolkuKoulutusList';
 import { getDurationText } from './utils';
 
 const EducationOpportunity = () => {
-  const { jakaumat, koulutusmahdollisuus, osaamiset } = useLoaderData<LoaderData>();
+  const { jakaumat, koulutusmahdollisuus, osaamiset, profiiliKiinnostuksetUris } = useLoaderData<LoaderData>();
   const isLoggedIn = useIsLoggedIn();
   const { kuvaus, kesto, koulutukset } = koulutusmahdollisuus;
   const { sm, lg } = useMediaQueries();
@@ -36,15 +36,17 @@ const EducationOpportunity = () => {
       state.kiinnostukset.filter((k) => k.tyyppi === 'KARTOITETTU').map((osaaminen) => osaaminen.id),
     ),
   );
+
   const competencesTableData = React.useMemo(
     () =>
       osaamiset.map((competence) => ({
         ...competence,
-        profiili: kartoitetutKiinnostuksetUris?.includes(competence.uri),
+        profiili:
+          kartoitetutKiinnostuksetUris.includes(competence.uri) || profiiliKiinnostuksetUris.includes(competence.uri),
         esiintyvyys: koulutusmahdollisuus.jakaumat?.osaaminen?.arvot.find((arvo) => arvo.arvo === competence.uri)
           ?.osuus,
       })),
-    [osaamiset, kartoitetutKiinnostuksetUris, koulutusmahdollisuus.jakaumat],
+    [osaamiset, kartoitetutKiinnostuksetUris, profiiliKiinnostuksetUris, koulutusmahdollisuus.jakaumat],
   );
 
   const title = getLocalizedText(koulutusmahdollisuus.otsikko);

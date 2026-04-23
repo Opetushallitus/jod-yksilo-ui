@@ -59,8 +59,13 @@ const loader = (async ({ request, params, context }) => {
     ammatit.get(tyomahdollisuus?.ammattiryhma?.uri ?? '', request.signal),
   ]);
 
+  let profiiliOsaamisetUris: string[] = [];
   if (yksiloLoaderContextHasSession(context)) {
-    await useToolStore.getState().updateSuosikit(true);
+    const [, profiiliOsaamisetRes] = await Promise.all([
+      useToolStore.getState().updateSuosikit(true),
+      client.GET('/api/profiili/osaamiset', { signal: request.signal }),
+    ]);
+    profiiliOsaamisetUris = (profiiliOsaamisetRes.data ?? []).map((o) => o.osaaminen?.uri).filter(Boolean);
   }
   return {
     tyomahdollisuus,
@@ -69,6 +74,7 @@ const loader = (async ({ request, params, context }) => {
     ammattiryhma: occupationGroup,
     jakaumat,
     codesetValues,
+    profiiliOsaamisetUris,
   };
 }) satisfies LoaderFunction<YksiloLoaderContext>;
 
