@@ -138,17 +138,7 @@ export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }:
       className="h-[90vh]! sm:h-full!"
       content={
         <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-            className="max-w-modal-content box-content px-5 md:px-9"
-          >
+          <Form id={formId} onSubmit={onSubmit} className="max-w-modal-content box-content px-5 md:px-9">
             <InputField
               label={t('free-time-activities.name-of-free-time-theme')}
               {...methods.register(`nimi.${language}` as const)}

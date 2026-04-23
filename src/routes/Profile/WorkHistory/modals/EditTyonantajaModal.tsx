@@ -124,17 +124,7 @@ const EditTyonantajaModal = ({ tyopaikkaId: id, ...rest }: EditTyonantajaModalPr
       {...rest}
       content={
         <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-            className="max-w-modal-content box-content px-5 md:px-9"
-          >
+          <Form id={formId} onSubmit={onSubmit} className="max-w-modal-content box-content px-5 md:px-9">
             <InputField
               label={t('work-history.employer')}
               {...methods.register(`nimi.${language}` as const)}

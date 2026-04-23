@@ -318,17 +318,7 @@ const WorkHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
       topSlot={topSlot}
       content={
         <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-            className="text-primary-gray"
-          >
+          <Form id={formId} onSubmit={onSubmit} className="text-primary-gray">
             {StepComponent}
           </Form>
         </FormProvider>

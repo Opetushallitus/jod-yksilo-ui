@@ -179,17 +179,7 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
       topSlot={<ModalHeader text={modalTitle} testId="share-link-modal-title" />}
       content={
         <FormProvider {...methods}>
-          <Form
-            id={formId}
-            onSubmit={onSubmit}
-            className="pb-2"
-            onKeyDown={(event) => {
-              // Prevent form submission on Enter
-              if (event.key === 'Enter') {
-                event.preventDefault();
-              }
-            }}
-          >
+          <Form id={formId} onSubmit={onSubmit} className="pb-2">
             {step === 1 && <BasicInfoStep />}
             {step === 2 && <DataToShareStep />}
           </Form>
