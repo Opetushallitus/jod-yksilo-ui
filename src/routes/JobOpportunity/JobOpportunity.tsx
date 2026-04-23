@@ -43,17 +43,19 @@ const JobOpportunity = () => {
     i18n: { language },
   } = useTranslation();
   const { lg } = useMediaQueries();
-  const { tyomahdollisuus, osaamiset, ammattiryhma } = useLoaderData<LoaderData>();
+  const { tyomahdollisuus, osaamiset, ammattiryhma, profiiliOsaamisetUris } = useLoaderData<LoaderData>();
   const isLoggedIn = useIsLoggedIn();
-  const omatOsaamisetUris = useToolStore(useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)));
+  const kartoitetutOsaamisetUris = useToolStore(
+    useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)),
+  );
   const competencesTableData = React.useMemo(
     () =>
       osaamiset.map((competence) => ({
         ...competence,
-        profiili: omatOsaamisetUris?.includes(competence.uri),
+        profiili: kartoitetutOsaamisetUris.includes(competence.uri) || profiiliOsaamisetUris.includes(competence.uri),
         esiintyvyys: tyomahdollisuus.jakaumat?.osaaminen?.arvot.find((arvo) => arvo.arvo === competence.uri)?.osuus,
       })),
-    [osaamiset, omatOsaamisetUris, tyomahdollisuus.jakaumat],
+    [osaamiset, kartoitetutOsaamisetUris, profiiliOsaamisetUris, tyomahdollisuus.jakaumat],
   );
   const [koulutusalat, setKoulutusalat] = React.useState<Koulutusala[]>([]);
   const [koulutusasteet, setKoulutusasteet] = React.useState<Koulutusala[]>([]);

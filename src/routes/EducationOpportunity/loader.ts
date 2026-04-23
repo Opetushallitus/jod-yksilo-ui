@@ -53,11 +53,16 @@ const loader = (async ({ request, params, context }) => {
     request.signal,
   );
 
+  let profiiliKiinnostuksetUris: string[] = [];
   if (yksiloLoaderContextHasSession(context)) {
-    await useToolStore.getState().updateSuosikit(true);
+    const [, profiiliOsaamisetRes] = await Promise.all([
+      useToolStore.getState().updateSuosikit(true),
+      client.GET('/api/profiili/kiinnostukset/osaamiset', { signal: request.signal }),
+    ]);
+    profiiliKiinnostuksetUris = (profiiliOsaamisetRes.data?.kiinnostukset ?? []).filter(Boolean);
   }
 
-  return { codesetValues, jakaumat, koulutusmahdollisuus, osaamiset };
+  return { codesetValues, jakaumat, koulutusmahdollisuus, osaamiset, profiiliKiinnostuksetUris };
 }) satisfies LoaderFunction<YksiloLoaderContext>;
 
 export type LoaderData = Awaited<ReturnType<typeof loader>>;
