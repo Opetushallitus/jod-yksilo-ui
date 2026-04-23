@@ -109,7 +109,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
     t,
     i18n: { language },
   } = useTranslation();
-  const { sm } = useMediaQueries();
+  const { sm, reduceMotion } = useMediaQueries();
   const toolStore = useToolStore();
   const [controller, setController] = React.useState<AbortController>(new AbortController());
   const [history, setHistory] = React.useState<Record<string, MessageRow>>({});
@@ -134,8 +134,11 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
   // Scroll to bottom when history changes
   const containerRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
-    containerRef.current?.scrollTo({ top: containerRef.current?.scrollHeight, behavior: 'smooth' });
-  }, [containerRef, history]);
+    containerRef.current?.scrollTo({
+      top: containerRef.current?.scrollHeight,
+      behavior: reduceMotion ? 'instant' : 'smooth',
+    });
+  }, [containerRef, history, reduceMotion]);
 
   const sendMessage = async (key: string, value: string) => {
     if (id) {
@@ -241,7 +244,9 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
   };
 
   const animateTagToSelectedTab = (element: HTMLElement) => {
-    animateElementToTarget(element, selectedTabButtonRef.current!);
+    if (!reduceMotion) {
+      animateElementToTarget(element, selectedTabButtonRef.current!);
+    }
   };
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -291,6 +296,25 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
       initRovingTabindex();
     }
   }, [isSelectedEmpty, initRovingTabindex]);
+
+  const handleTagRemove = React.useCallback(
+    (e: React.MouseEvent<HTMLElement>, uri: string, index: number) => {
+      const onDone = () => {
+        // eslint-disable-next-line sonarjs/no-nested-functions
+        setSelected((prev) => prev.filter((s) => s.uri !== uri));
+        setLastClickedIndex(index);
+        // eslint-disable-next-line sonarjs/no-nested-functions
+        setTagsPendingRemoval((prev) => prev.filter((u) => u !== uri));
+      };
+      if (reduceMotion) {
+        onDone();
+      } else {
+        setTagsPendingRemoval((prev) => [...prev, uri]);
+        animateHideElement(e.currentTarget, onDone);
+      }
+    },
+    [reduceMotion, setLastClickedIndex],
+  );
 
   return (
     <div className={className}>
@@ -461,19 +485,7 @@ export const VirtualAssistant = ({ type, className }: { type: 'competences' | 'i
                                 : OSAAMINEN_COLOR_MAP['KIINNOSTUS']
                             }
                             variant="added"
-                            onClick={(e) => {
-                              setTagsPendingRemoval((prev) => [...prev, k.uri]);
-                              animateHideElement(e.currentTarget, () => {
-                                // eslint-disable-next-line sonarjs/no-nested-functions
-                                setSelected((prevState) => {
-                                  return prevState.filter((selectedValue) => selectedValue.kuvaus !== k.kuvaus);
-                                });
-
-                                setLastClickedIndex(index);
-                                // eslint-disable-next-line sonarjs/no-nested-functions
-                                setTagsPendingRemoval((prev) => prev.filter((uri) => uri !== k.uri));
-                              });
-                            }}
+                            onClick={(e) => handleTagRemove(e, k.uri, index)}
                           />
                         </li>
                       ))}

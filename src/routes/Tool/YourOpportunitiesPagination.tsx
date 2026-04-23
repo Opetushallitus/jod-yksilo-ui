@@ -27,28 +27,30 @@ const YourOpportunitiesPagination = ({ scrollRef, className, ariaLabel }: YourOp
       mixedMahdollisuudet: state.mixedMahdollisuudet,
     })),
   );
-  const { sm } = useMediaQueries();
+  const { sm, reduceMotion } = useMediaQueries();
 
   const onPageChange = async ({ page }: PageChangeDetails) => {
     if (mahdollisuudetLoading) {
       return;
     }
 
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'instant' : 'smooth' });
+    }
+
     await fetchMahdollisuudetPage(undefined, page);
 
     if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
       const focusableElements = scrollRef.current.querySelectorAll(
         'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])',
       );
       if (focusableElements.length > 0) {
         (focusableElements[0] as HTMLElement).focus();
       }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
-
   const paginationTranslations = usePaginationTranslations();
 
   return mixedMahdollisuudet.length > 0 ? (

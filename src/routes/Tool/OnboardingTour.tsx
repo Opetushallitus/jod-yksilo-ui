@@ -15,7 +15,7 @@ const tour = driver();
 const WAIT_AFTER_TAB_CHANGE_MS = 100;
 export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: OnboardingTourProps) => {
   const { t } = useTranslation();
-  const { lg } = useMediaQueries();
+  const { lg, reduceMotion } = useMediaQueries();
 
   const prevLg = React.useRef(lg);
 
@@ -164,7 +164,7 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
     setOnboardingTourActive(true);
     const steps = getSteps();
     tour.setConfig({
-      animate: true,
+      animate: !reduceMotion,
       showProgress: true,
       disableActiveInteraction: true,
       progressText: '{{current}}/{{total}}',
@@ -214,7 +214,7 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
           <JodWavingHand size={24} className="absolute inset-0 w-full h-full animate-[showA_3s_infinite]" />
           <JodWavingHandModified
             size={24}
-            className="absolute inset-0 w-full h-full origin-[35%_75%] [animation:showB_3s_infinite,waveRotate_3s_infinite_ease-in-out]"
+            className="absolute inset-0 w-full h-full origin-[35%_75%] animate-[showB_3s_infinite,waveRotate_3s_infinite_ease-in-out]"
           />
         </div>
         <div>{t('tool.tour.view-guided-tour')}</div>
