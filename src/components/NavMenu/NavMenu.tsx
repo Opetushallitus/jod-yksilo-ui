@@ -6,13 +6,13 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useMenuRoutes } from './menuRoutes';
 
-const PortalLink = ({ children, className }: LinkComponent) => {
+const PortalLink = ({ children, className, target, rel }: LinkComponent) => {
   const {
     i18n: { language },
   } = useTranslation();
 
   return (
-    <a href={`/${language}`} className={className}>
+    <a href={`/${language}`} className={className} target={target} rel={rel}>
       {children}
     </a>
   );
