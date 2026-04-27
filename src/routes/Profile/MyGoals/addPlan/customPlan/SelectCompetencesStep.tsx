@@ -80,7 +80,6 @@ const SelectCompetencesStep = () => {
           <ul
             ref={requiredTagsRef}
             className="flex flex-wrap gap-3 p-1"
-            role="group"
             aria-labelledby={requiredTagsId}
             onKeyDown={handleRequiredTagsKeyboardNavigation}
           >
@@ -129,7 +128,6 @@ const SelectCompetencesStep = () => {
                 <ul
                   ref={selectedTagsRef}
                   className="flex flex-wrap gap-3 p-1"
-                  role="group"
                   aria-labelledby={addedTagsId}
                   onKeyDown={handleSelectedTagsKeyboardNavigation}
                 >

@@ -91,7 +91,12 @@ const PlanOpportunityCard = React.memo(
         >
           <p className="font-arial text-body-md-mobile sm:text-body-md mb-4 mt-3">{getLocalizedText(kuvaus)}</p>
           {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-          <ul className="flex flex-row flex-wrap gap-3" ref={ref} onKeyDown={handleKeyDown}>
+          <ul
+            className="flex flex-row flex-wrap gap-3"
+            ref={ref}
+            onKeyDown={handleKeyDown}
+            aria-label={t('competences')}
+          >
             {osaamiset.map((osaaminen) => (
               <li key={osaaminen.uri} className="max-w-full">
                 <Tag
