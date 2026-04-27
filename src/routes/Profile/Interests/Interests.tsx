@@ -38,6 +38,7 @@ const Interests = () => {
   const isAllSkillsEmpty = isSkillsEmpty && isOccupationSkillsEmpty;
 
   const { ref, handleKeyDown } = useArrowKeyControls(sortedSkills);
+  const { ref: occupationsRef, handleKeyDown: onOccupationsKeyDown } = useArrowKeyControls(sortedOccupations);
 
   return (
     <MainLayout
@@ -88,7 +89,8 @@ const Interests = () => {
             <h2 className="mb-5 text-heading-3-mobile sm:text-heading-3 border-b border-border-gray mt-8">
               {t('profile.interests.occupations-that-interest-me')}
             </h2>
-            <ul className="flex flex-wrap gap-3">
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+            <ul ref={occupationsRef} className="flex flex-wrap gap-3" onKeyDown={onOccupationsKeyDown}>
               {sortedOccupations.map((val) => (
                 <li key={val.uri} className="max-w-full">
                   <Tag

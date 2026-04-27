@@ -92,7 +92,6 @@ export const TagAreas = ({
             ref={suggestedTagsRef}
             className="flex flex-wrap gap-3 p-1"
             data-testid="osaamissuosittelija-suggested-competences"
-            role="group"
             onKeyDown={handleSuggestedTagsKeyboardNavigation}
             aria-labelledby={suggestedTagsId}
           >
@@ -182,7 +181,6 @@ export const TagAreas = ({
               <ul
                 className="flex flex-wrap gap-3 p-1"
                 data-testid="osaamissuosittelija-selected-competences"
-                role="group"
                 onKeyDown={handleSelectedTagsKeyboardNavigation}
                 ref={selectedTagsRef}
                 aria-labelledby={addedTagsId}
