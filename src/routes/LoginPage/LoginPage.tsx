@@ -27,6 +27,7 @@ const LoginPage = () => {
       ? `/${language}/${state?.callbackURL}`
       : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
   });
+  const mpassidLoginLink = `${loginLink}&method=mpassid`;
 
   // Redirect to root if already logged-in
   React.useEffect(() => {
@@ -49,7 +50,7 @@ const LoginPage = () => {
           <p className="whitespace-pre-line sm:text-body-lg text-body-lg-mobile mb-7">
             {t('profile.login-page.description')}
           </p>
-          <div>
+          <div className="flex flex-col items-start gap-4">
             <Button
               variant="accent"
               label={t('login-to-service')}
@@ -57,6 +58,14 @@ const LoginPage = () => {
               icon={<JodArrowRight />}
               iconSide="right"
               testId="landing-login"
+            />
+            <Button
+              variant="white"
+              label={t('profile.login-page.login-with-mpassid')}
+              linkComponent={getLinkTo(mpassidLoginLink, { useAnchor: true })}
+              icon={<JodArrowRight />}
+              iconSide="right"
+              testId="landing-login-mpassid"
             />
           </div>
           <h2 className="text-heading-2-mobile sm:text-heading-2 mt-8 mb-5">
