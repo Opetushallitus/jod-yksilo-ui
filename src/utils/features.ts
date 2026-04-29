@@ -4,7 +4,8 @@ type Feature =
   | 'VIRTUAALIOHJAAJA_OSAAMISET'
   | 'JAKOLINKKI'
   | 'TMT_INTEGRATION'
-  | 'MAHDOLLISUUDET_HAKU';
+  | 'MAHDOLLISUUDET_HAKU'
+  | 'CV_IMPORT';
 
 //Default to false
 const features: Record<Feature, boolean> = {} as Record<Feature, boolean>;

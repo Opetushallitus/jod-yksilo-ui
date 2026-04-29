@@ -43,6 +43,7 @@ export const getWorkHistoryTableRows = (
       nimi: row.nimi,
       alkuPvm: new Date(alkuPvm),
       loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
+      checked: true,
       subrows: [...toimenkuvat]
         .sort(sortByProperty('alkuPvm'))
         .map((toimenkuva) => mapToimenkuvaToRow(toimenkuva, osaamisetMap)),
@@ -75,6 +76,7 @@ const mapToimenkuvaToRow = (
   kuvaus: toimenkuva.kuvaus,
   alkuPvm: new Date(toimenkuva.alkuPvm),
   loppuPvm: toimenkuva.loppuPvm ? new Date(toimenkuva.loppuPvm) : undefined,
+  checked: true,
   osaamiset: toimenkuva.osaamiset.map((id) => ({
     ...(osaamisetMap ? osaamisetMap[id] : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
     sourceType: 'tyopaikka',

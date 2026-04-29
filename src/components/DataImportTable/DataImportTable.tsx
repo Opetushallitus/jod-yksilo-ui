@@ -6,7 +6,12 @@ import { Checkbox, useMediaQueries } from '@jod/design-system';
 import { ExperienceTableRowData } from '@/components/ExperienceTable/ExperienceTableRow';
 import { formatDate, getLocalizedText } from '@/utils';
 
-export const EducationImportTable = ({ rows }: { rows: ExperienceTableRowData[] }) => {
+export interface DataImportTableProps {
+  rows: ExperienceTableRowData[];
+  toggleAllSelectionText: string;
+}
+
+export const DataImportTable = ({ rows, toggleAllSelectionText }: DataImportTableProps) => {
   const {
     t,
     i18n: { language },
@@ -60,9 +65,9 @@ export const EducationImportTable = ({ rows }: { rows: ExperienceTableRowData[] 
                   rerender();
                 }}
                 ariaLabel={t('choose')}
-                testId={`education-import-table-checkbox-toggle-all`}
+                testId={`data-import-table-checkbox-toggle-all`}
               />
-              {t('education-history.education-provider-or-education')}
+              {toggleAllSelectionText}
             </div>
           </th>
           {sm && (

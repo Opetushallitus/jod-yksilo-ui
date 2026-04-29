@@ -21,6 +21,7 @@ const YKSILO_DATA = {
   etunimi: 'Matti',
   sukunimi: 'Meikäläinen',
   tervetuloapolku: true,
+  toiminnot: ['PROFILE'] as ('PROFILE' | 'TMT' | 'KOSKI')[],
 };
 
 function getState() {

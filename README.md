@@ -63,7 +63,7 @@ To update the JOD Design System to the latest version:
 Start the JOD Yksilö backend locally and make sure it is running on http://localhost:9080/. Then run the following command to generate TypeScript types from the OpenAPI schema:
 
 ```shell
-npx openapi-typescript http://localhost:9080/yksilo/openapi/openapi.json/Yksilo -o src/api/schema.d.ts && npx oxfmt src/api/schema.d.ts --write
+npm run generate:schema
 ```
 
 Note that the backend needs to have all features enabled or the generated types may be incomplete.

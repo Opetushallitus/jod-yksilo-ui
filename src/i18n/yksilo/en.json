@@ -494,6 +494,56 @@
     "name": "Name"
   },
   "preferences": {
+    "cv-import": {
+      "attachment": {
+        "attach-file": "Attach file",
+        "attach-pdf": "Attach PDF file",
+        "delay-info": "Collecting data from your CV may take minutes.",
+        "description": "You can upload a ready-made CV to your Competence Profile. After uploading, you can view, edit, and delete information in the Work, Education, and Leisure Activities sections.<br/><br/>Data duplication is possible if you have previously entered the same information into your Competence Profile.",
+        "file-too-large": "File too large",
+        "invalid-file-type": "Invalid file type",
+        "title": "File upload"
+      },
+      "description": "You can update your information by uploading a pre-prepared CV as part of your Competence Profile.",
+      "failed": {
+        "description": "CV analysis failed. Please try again or check the file.",
+        "title": "Import failed"
+      },
+      "file-too-large": "The file is too large (max 2 MB).",
+      "import-data": "Import data",
+      "import-from-cv": "Import your data from CV",
+      "invalid-file-type": "Only PDF files are supported.",
+      "save": {
+        "failed": {
+          "description": "CV saving failed",
+          "title": "Save failed"
+        },
+        "success": {
+          "description": "CV saved successfully",
+          "title": "Save successful"
+        }
+      },
+      "summary": {
+        "activities": {
+          "loading": "Loading leisure activities",
+          "no-data": "No leisure activities identified",
+          "title": "Leisure activities"
+        },
+        "description": "Select which information you want to import from your CV. After importing, you can edit and complete the information in the Education, Work, and Leisure Activities sections.",
+        "education": {
+          "loading": "Loading education history",
+          "no-data": "No education data identified",
+          "title": "Education"
+        },
+        "title": "Select information to import",
+        "work": {
+          "loading": "Loading work history",
+          "no-data": "No work data identified",
+          "title": "Work"
+        }
+      },
+      "title": "Import data from CV"
+    },
     "data-disclosure-unanonymized": {
       "description": "Finnish National Agency for Education primarily uses anonymised data. This means that your personal data will be converted into a format that will no longer allow you to be identified. In this way, the data can be used, for example, for research or service development without identifying you. However, if you wish, you can also give permission to use your data in an identifiable form. This means that your data will remain in such a form that it can be linked to you. You can grant permission for each item separately and revoke permission at any time.",
       "permission-education-and-planning": {
@@ -517,6 +567,9 @@
       "action": "Download my competence profile data (JSON)",
       "description": "You can download all the data stored in your competence profile to your device. The data is generated in a machine-readable JSON format. JSON is a simple and lightweight open standard file format for data transfer and storage.",
       "title": "Download your competence profile"
+    },
+    "import-export": {
+      "title": "Import and export your data"
     },
     "personal-details": {
       "description": "You can edit your email address.",
@@ -602,7 +655,7 @@
         },
         "success": "Your data was successfully imported from Job Market Finland"
       },
-      "title": "Import and export your data"
+      "title": "Import and export data between Competence Path and Job Market Finland"
     }
   },
   "previous": "Previous",
