@@ -413,7 +413,7 @@
   "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning A — Ö",
   "my-competences": {
     "by-KOULUTUS": "Mina kunskaper från utbildningen",
-    "by-MUU_OSAAMINEN": "Mitt övriga kunnande",
+    "by-MUU_OSAAMINEN": "Annan kompetens",
     "by-PATEVYYS": "Mina kunskaper från fritidsverksamhet",
     "by-TOIMENKUVA": "Mina kunskaper från arbetsplatser",
     "missing-KOULUTUS": "Inga kunskaper. Lägg till utbildningar.\n",
@@ -489,7 +489,8 @@
     "gender-male": "Man",
     "gender-other": "Annat",
     "home-city": "Hemkommun",
-    "mother-tongue": "Modersmål"
+    "mother-tongue": "Modersmål",
+    "name": "Namn"
   },
   "preferences": {
     "data-disclosure-unanonymized": {
@@ -518,7 +519,7 @@
     },
     "personal-details": {
       "description": "Du kan redigera e-postadress.",
-      "title": "Uppgifter hämtade från befolkningsdatasystemet"
+      "title": "Personuppgifter"
     },
     "share": {
       "copy-failure": "Kopiering av länken misslyckades",
@@ -541,16 +542,16 @@
           "title": "Grundläggande information"
         },
         "data-to-share": {
-          "activities": "Mina fritidsaktiviteter",
+          "activities": "Fritidsaktiviteter",
           "description": "Välj vilka uppgifter du vill dela. Du kan välja att dela grundläggande uppgifter samt dessutom om din arbetsplats, utbildning, favoriter och planer ska delas.",
-          "education": "Min utbildning",
+          "education": "Utbildningar",
           "favorite-education-opportunities": "Utbildningsmöjligheter",
           "favorite-job-opportunities": "Karriärmöjligheter",
           "favorites": "Favoriter",
           "goals": "Mål",
           "interests": "Intressen",
           "something-else": "Annan kompetens",
-          "work": "Mina arbetsplatser"
+          "work": "Arbetsplatser"
         },
         "description": "Anteckning",
         "description-placeholder": "T.ex. för vem länken är avsedd",
@@ -654,7 +655,7 @@
         "summary-description": "Du kan redigera utbildningarna efter att du har importerat dem till Kompetensstigen under Mina utbildningar i din kompetensprofil.",
         "workplace-placeholder": "Till exempel Världens institut"
       },
-      "title": "Mina utbildningar"
+      "title": "Utbildningar"
     },
     "favorites": {
       "description": "Här hittar du utbildnings- och karriärmöjligheter som du har sparat som favoriter. Du kan själv välja hur du vill gruppera dina favoriter. Favoriter sparas på sidan Hitta möjligheter. Du kan utnyttja dina favoriter på sidan Mål.\n",
@@ -689,7 +690,7 @@
         "name-of-free-time-theme-placeholder": "Till exempel Dykning/Husbolagets styrelse/Motion",
         "summary-description": "Du kan redigera fritidsverksamheten efter att du har importerat den till Kompetensstigen under Min fritidsverksamhet i din kompetensprofil."
       },
-      "title": "Min fritidsverksamhet"
+      "title": "Fritidsaktiviteter"
     },
     "index": "Kompetensprofil",
     "interests": {
@@ -825,7 +826,7 @@
       "free-form-description-of-my-interests": "Fritt formulerad beskrivning av min kompetens",
       "free-form-interests-description-guidance": "Du kan skriva och beskriva ditt kunnande med egna ord. Om du använder tjänsten på finska, skriv på finska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.",
       "my-other-comptetences": "Mina kunskaper",
-      "title": "Mina övriga kunskaper"
+      "title": "Annan kompetens"
     },
     "work-history": {
       "description": "Nedan hittar du din arbetshistorik. Du kan själv lägga till din arbetshistorik och kartlägga dina relaterade kunskaper.\n",
@@ -838,7 +839,7 @@
         "summary-description": "Du kan redigera uppgiftsbeskrivningarna efter att du har importerat dem till Kompetensstigen under Mina arbetsplatser i din kompetensprofil.",
         "workplace-placeholder": "Till exempel arbetsplats Ab"
       },
-      "title": "Mina arbetsplatser"
+      "title": "Arbetsplatser"
     }
   },
   "proposals-loading": "Laddar förslag",
@@ -911,7 +912,7 @@
   "search": {
     "clear": "Rensa sökning",
     "description": "Du kan söka efter möjligheter med hjälp av fritextsökning. Du kan påverka synligheten av resultaten genom att filtrera listan.",
-    "filters": "Filter",
+    "filters": "Filter ({{count}})",
     "filters_zero": "Filter",
     "global-placeholder": "Sök möjligheter",
     "label": "Sök möjligheter",
@@ -1134,8 +1135,8 @@
       "counseling-additional-resource": "<CustomLink>Väglednings- och rådgivningstjänster<Icon></Icon></CustomLink> samlar tjänster där du kan få stöd i att reflektera över karriär- och utbildningsalternativ, vilket hjälper dig att bedöma och utveckla dina färdigheter i karriärplanering.",
       "counseling-url": "https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster",
       "description": "Bekanta dig med följande webbplatser om du behöver hjälp med att reflektera över din situation:",
-      "education-history": "Mina utbildningar",
-      "free-time-activities": "Min fritidsverksamhet",
+      "education-history": "Utbildningar",
+      "free-time-activities": "Fritidsaktiviteter",
       "guidance-practitioner-additional-resource": "Du kan också självständigt ta del av <CustomLink>materialet i Kompetensstigens Vägledar-delen.<Icon></Icon></CustomLink>",
       "guidance-practitioner-url": "https://osaamispolku.fi/ohjaaja",
       "help-text": "Som inloggad användare kan du kartlägga kompetenser och intressen mer detaljerat i kompetensprofilen.\n",
@@ -1143,10 +1144,10 @@
       "reveal-your-skills-additional-resource": "<CustomLink>Upptäck ditt kunnande<Icon></Icon></CustomLink> inspirerar och uppmuntrar människor och gemenskaper att uppmärksamma sin kompetens samt väcker diskussion om betydelsen av att synliggöra kompetens.",
       "reveal-your-skills-url": "https://www.jotpa.fi/sv/om-oss/projekt/upptack-ditt-kunnande",
       "service-directory": "Väglednings- och rådgivningstjänster",
-      "something-else": "Mina övriga kunskaper",
+      "something-else": "Annan kompetens",
       "title": "Stöd för reflektion",
       "urataidot-additional-resource": "<CustomLink>Självutvärdering av karriärkompetenser<Icon></Icon></CustomLink> är ett digitalt verktyg som hjälper dig att bedöma och utveckla dina färdigheter i karriärplanering.",
-      "work-history": "Mina arbetsplatser"
+      "work-history": "Arbetsplatser"
     },
     "tour": {
       "buttons": {
@@ -1224,11 +1225,11 @@
   "types": {
     "competence": {
       "KIINNOSTUS": "Mina intressen",
-      "KOULUTUS": "Min utbildning",
+      "KOULUTUS": "Utbildningar",
       "MUU_OSAAMINEN": "Mina övriga kunskaper",
       "OSAAMINEN": "Mina kunskaper",
-      "PATEVYYS": "Min fritidsverksamhet",
-      "TOIMENKUVA": "Min arbetsplats"
+      "PATEVYYS": "Fritidsaktiviteter",
+      "TOIMENKUVA": "Arbetsplatser"
     }
   },
   "update": "Uppdatera",

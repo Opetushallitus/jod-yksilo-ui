@@ -414,7 +414,7 @@
   "my-competences-alphabetically": "My competences alphabetically A — Z",
   "my-competences": {
     "by-KOULUTUS": "My competences accumulated from education",
-    "by-MUU_OSAAMINEN": "My other competences",
+    "by-MUU_OSAAMINEN": "Other competences",
     "by-PATEVYYS": "My competence accumulated from recreational activities",
     "by-TOIMENKUVA": "My competence accumulated from jobs",
     "missing-KOULUTUS": "No competences. Go to add education.",
@@ -490,7 +490,8 @@
     "gender-male": "Male",
     "gender-other": "Other",
     "home-city": "Home city",
-    "mother-tongue": "Mother tongue"
+    "mother-tongue": "Mother tongue",
+    "name": "Name"
   },
   "preferences": {
     "data-disclosure-unanonymized": {
@@ -519,7 +520,7 @@
     },
     "personal-details": {
       "description": "You can edit your email address.",
-      "title": "Information retrieved from the population information system"
+      "title": "Personal details"
     },
     "share": {
       "copy-failure": "Failed to copy the link",
@@ -542,16 +543,16 @@
           "title": "Basic information"
         },
         "data-to-share": {
-          "activities": "My leisure activities",
+          "activities": "Recreational activities",
           "description": "Choose which information you want to share. You can choose to share basic information and additionally decide whether to share your workplace, education, favorites, and plans.",
-          "education": "My education",
+          "education": "Education",
           "favorite-education-opportunities": "Education opportunities",
           "favorite-job-opportunities": "Job opportunities",
           "favorites": "Favourites",
           "goals": "Goals",
           "interests": "Interests",
           "something-else": "Other competences",
-          "work": "My workplaces"
+          "work": "Workplaces"
         },
         "description": "Note",
         "description-placeholder": "E.g. who the link is for",
@@ -655,7 +656,7 @@
         "summary-description": "You can edit the educations once you have imported them to Competency Path in your competence profile under My Education.",
         "workplace-placeholder": "E.g. World Institute"
       },
-      "title": "My education"
+      "title": "Education"
     },
     "favorites": {
       "description": "You can find your favourite career and education opportunities here. You can choose how you want to group your favourites. Favourites are saved on the Find opportunities page. You can use your favourites on the Goals page.",
@@ -690,7 +691,7 @@
         "name-of-free-time-theme-placeholder": "E.g. Diving/Housing company board/Exercise",
         "summary-description": "You can edit the recreational activities once you have imported them into the Competency Path in your competence profile under My recreational activities."
       },
-      "title": "My recreational activities"
+      "title": "Recreational activities"
     },
     "index": "Competence profile",
     "interests": {
@@ -826,7 +827,7 @@
       "free-form-description-of-my-interests": "Free text description of my competence",
       "free-form-interests-description-guidance": "You can write and describe your competence in your own words. If you use the service in Finnish, please write in Finnish. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
       "my-other-comptetences": "My competence",
-      "title": "My other competences"
+      "title": "Other competences"
     },
     "work-history": {
       "description": "You can find your work history below. You can add your own work history and map out your related competences.",
@@ -839,7 +840,7 @@
         "summary-description": "You can edit the job descriptions after importing them into Competency Path in your competence profile under My jobs.",
         "workplace-placeholder": "E.g. Workplace Ltd"
       },
-      "title": "My jobs"
+      "title": "Workplaces"
     }
   },
   "proposals-loading": "Loading suggestions",
@@ -912,7 +913,7 @@
   "search": {
     "clear": "Clear search",
     "description": "You can search for opportunities using free text search. You can influence the visibility of results by filtering the list.",
-    "filters": "Filters",
+    "filters": "Filters ({{count}})",
     "filters_zero": "Filters",
     "global-placeholder": "Search opportunities",
     "label": "Search opportunities",
@@ -1134,8 +1135,8 @@
       "counseling-additional-resource": "<CustomLink>Guidance and counselling services<Icon></Icon></CustomLink> bring together services where you can receive support in reflecting on career and education options, helping you evaluate and develop your career planning skills.",
       "counseling-url": "https://www.suomi.fi/topic/guidance-and-counselling-services",
       "description": "Familiarize yourself with the following websites if you need help reflecting on your situation:",
-      "education-history": "My education",
-      "free-time-activities": "My recreational activities",
+      "education-history": "Education",
+      "free-time-activities": "Recreational activities",
       "guidance-practitioner-additional-resource": "You can also independently explore the <CustomLink>materials in the Osaamispolku Guidance practitioner section.<Icon></Icon></CustomLink>",
       "guidance-practitioner-url": "https://osaamispolku.fi/ohjaaja",
       "help-text": "As a logged-in user, you can map out competences and interests in more detail in the competence profile.",
@@ -1143,10 +1144,10 @@
       "reveal-your-skills-additional-resource": "<CustomLink>Reveal Your Skills<Icon></Icon></CustomLink> inspires and encourages individuals and communities to recognize their skills and sparks discussion about the importance of recognizing competence.",
       "reveal-your-skills-url": "https://www.jotpa.fi/en/about-us/projects/reveal-your-skills",
       "service-directory": "Guidance and advisory services",
-      "something-else": "My other competences",
+      "something-else": "Other competences",
       "title": "Support for reflection",
       "urataidot-additional-resource": "<CustomLink>Career skills self-assessment<Icon></Icon></CustomLink> is a digital tool that helps you evaluate and develop your career planning skills.",
-      "work-history": "My jobs"
+      "work-history": "Workplaces"
     },
     "tour": {
       "buttons": {
@@ -1224,11 +1225,11 @@
   "types": {
     "competence": {
       "KIINNOSTUS": "My interests",
-      "KOULUTUS": "My education",
+      "KOULUTUS": "Education",
       "MUU_OSAAMINEN": "My other competences",
       "OSAAMINEN": "My competences",
-      "PATEVYYS": "My recreational activities",
-      "TOIMENKUVA": "My jobs"
+      "PATEVYYS": "Recreational activities",
+      "TOIMENKUVA": "Workplaces"
     }
   },
   "update": "Update",
