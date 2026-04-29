@@ -65,6 +65,23 @@
     "osaamispolku-description": "Life changes – and we are here to support you. Whether you are changing fields, learning something new, or improving your everyday life, we provide you with easily understandable information and inspiration to support your own path.",
     "title": "Competence profile"
   },
+  "cv-import": {
+    "analysing": "Analysing CV…",
+    "choose-file": "Select PDF",
+    "failed-description": "CV analysis failed. Please try again or check the file.",
+    "failed-title": "Import failed",
+    "file-too-large": "The file is too large (max 10 MB).",
+    "invalid-file-type": "Only PDF files are supported.",
+    "no-file-selected": "No file selected",
+    "result": {
+      "save-disabled": "The save function is not yet available."
+    },
+    "send-button": "Start import",
+    "start-description": "Upload your CV as a PDF. The service will analyse it and extract information into your profile.",
+    "title": "Import CV",
+    "trigger-label": "Import CV",
+    "uploading": "Uploading file…"
+  },
   "date-or-continues-placeholder": "dd.mm.yyyy",
   "datepicker": {
     "actions": {

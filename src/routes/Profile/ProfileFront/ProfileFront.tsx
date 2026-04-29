@@ -1,13 +1,16 @@
 import { ExternalLink, MainLayout } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
+import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { useYksiloData } from '@/hooks/useYksiloData';
 import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
-import { useMediaQueries } from '@jod/design-system';
+import { Button, useMediaQueries } from '@jod/design-system';
 import { JodUser } from '@jod/design-system/icons';
 import { Trans, useTranslation } from 'react-i18next';
 import { ProfileNavigationList } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import WelcomePathModal from '../WelcomePathModal/WelcomePathModal';
+import { CvImportModal } from './CvImport';
 
 const ListItem = ({ label }: { label: string }) => <li className="list-disc ml-6 ">{label}</li>;
 
@@ -19,6 +22,8 @@ const ProfileFront = () => {
   const { lg } = useMediaQueries();
   const firstName = useSessionManagerStore((s) => s.user?.etunimi);
   const { data, isLoading } = useYksiloData();
+  const { showModal } = useModal();
+  const guardedAction = useSessionGuardedAction();
 
   return (
     <MainLayout
@@ -43,6 +48,15 @@ const ProfileFront = () => {
         />
 
         {!isLoading && !data.tervetuloapolku && <WelcomePathModal yksiloData={data} />}
+
+        <div className="mb-6">
+          <Button
+            variant="white"
+            ariaHaspopup="dialog"
+            label={t('cv-import.trigger-label')}
+            onClick={guardedAction(showModal, CvImportModal)}
+          />
+        </div>
 
         <div className="mb-8 text-body-md flex flex-col gap-6 font-arial">
           <p className="text-body-lg-mobile sm:text-body-lg font-poppins mb-3">

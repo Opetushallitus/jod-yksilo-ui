@@ -65,6 +65,23 @@
     "osaamispolku-description": "Livet förändras – och vi finns här för att stötta dig. Oavsett om du byter bransch, lär dig något nytt eller förbättrar din vardag, ger vi dig lättförståelig information och inspiration för att stötta din egen väg.",
     "title": "Kompetensprofil"
   },
+  "cv-import": {
+    "analysing": "Analyserar CV…",
+    "choose-file": "Välj PDF",
+    "failed-description": "CV-analysen misslyckades. Försök igen eller kontrollera filen.",
+    "failed-title": "Import misslyckades",
+    "file-too-large": "Filen är för stor (max 10 MB).",
+    "invalid-file-type": "Endast PDF-filer stöds.",
+    "no-file-selected": "Ingen fil vald",
+    "result": {
+      "save-disabled": "Spara-funktionen är inte tillgänglig ännu."
+    },
+    "send-button": "Starta import",
+    "start-description": "Ladda upp ditt CV som PDF. Tjänsten analyserar det och extraherar information till din profil.",
+    "title": "Importera CV",
+    "trigger-label": "Importera CV",
+    "uploading": "Laddar upp fil…"
+  },
   "date-or-continues-placeholder": "dd.mm.åååå",
   "datepicker": {
     "actions": {

@@ -65,6 +65,23 @@
     "osaamispolku-description": "Elämä muuttuu – ja me olemme mukana tukemassa sinua. Olitpa vaihtamassa alaa, oppimassa uutta tai parantamassa arkeasi, saat meiltä helposti ymmärrettävää tietoa ja inspiraatiota oman polkusi tueksi.",
     "title": "Osaamisprofiili"
   },
+  "cv-import": {
+    "analysing": "Analysoidaan CV:tä…",
+    "choose-file": "Valitse PDF",
+    "failed-description": "CV:n analysointi epäonnistui. Yritä uudelleen tai tarkista tiedosto.",
+    "failed-title": "Tuonti epäonnistui",
+    "file-too-large": "Tiedosto on liian suuri (max 10 Mt).",
+    "invalid-file-type": "Vain PDF-tiedostot ovat tuettuja.",
+    "no-file-selected": "Ei valittua tiedostoa",
+    "result": {
+      "save-disabled": "Tallennustoiminto ei ole vielä käytettävissä."
+    },
+    "send-button": "Aloita tuonti",
+    "start-description": "Lataa CV PDF-muodossa. Palvelu analysoi sen ja poimii tiedot profiiliisi.",
+    "title": "Tuo CV",
+    "trigger-label": "Tuo CV",
+    "uploading": "Ladataan tiedostoa…"
+  },
   "date-or-continues-placeholder": "pp.kk.vvvv",
   "datepicker": {
     "actions": {
