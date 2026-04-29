@@ -280,7 +280,6 @@ describe('useToolStore', () => {
             kiinnostusPainotus: 0.1,
             escoListPainotus: 0.5,
             openTextPainotus: 0.5,
-            rajoitePainotus: 0.5,
             kuvaukset: [],
           },
           headers: { 'Content-Language': 'fi' },

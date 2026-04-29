@@ -48,11 +48,14 @@ export interface ToolState {
   osaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'];
   kiinnostukset: OsaaminenValue[];
   kiinnostuksetVapaateksti?: components['schemas']['LokalisoituTeksti'];
-  kuvaukset?: components['schemas']['LokalisoituTeksti'][];
+  kuvaukset: {
+    tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
+    id: string;
+    teksti: components['schemas']['LokalisoituTeksti'];
+  }[];
   suosikit: components['schemas']['SuosikkiDto'][];
   suosikitLoading: boolean;
   osaamisKiinnostusPainotus: number;
-  rajoitePainotus: number;
   mahdollisuusEhdotukset: EhdotusRecord;
   tyomahdollisuudet: TypedMahdollisuus[];
   koulutusmahdollisuudet: TypedMahdollisuus[];
@@ -83,7 +86,13 @@ export interface ToolState {
   setOsaamisetVapaateksti: (state?: components['schemas']['LokalisoituTeksti']) => void;
   setKiinnostukset: (state: OsaaminenValue[]) => void;
   setKiinnostuksetVapaateksti: (state?: components['schemas']['LokalisoituTeksti']) => void;
-  setKuvaukset: (state?: components['schemas']['LokalisoituTeksti'][]) => void;
+  setKuvaukset: (
+    state?: {
+      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
+      id: string;
+      teksti: components['schemas']['LokalisoituTeksti'];
+    }[],
+  ) => void;
   setSuosikit: (state: components['schemas']['SuosikkiDto'][]) => void;
   updateSuosikit: (loggedIn: boolean) => Promise<void>;
   toggleSuosikki: (kohdeId: string, tyyppi: MahdollisuusTyyppi) => Promise<void>;

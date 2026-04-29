@@ -107,7 +107,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
         id: string[];
         tyyppi: CompetenceSourceType;
       }[],
-      tyyppi: CompetenceSourceType,
+      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN',
       competenceDataGroup: CompetenceDataGroup[],
     ) =>
       mappedSelectedCompetences
@@ -124,8 +124,14 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
             )
             .find((item) => item?.id === id);
         })
-        .filter((d) => d?.kuvaus)
-        .map((d) => d?.kuvaus as components['schemas']['LokalisoituTeksti']),
+        .filter((d) => d?.id && d?.kuvaus)
+        .map((d) => {
+          return {
+            id: d!.id!,
+            tyyppi,
+            teksti: d!.kuvaus as components['schemas']['LokalisoituTeksti'],
+          };
+        }),
     [],
   );
 

@@ -1022,7 +1022,13 @@ export interface components {
       escoListPainotus?: number;
       /** Format: double */
       openTextPainotus?: number;
-      kuvaukset?: string[];
+      kuvaukset?: components['schemas']['LuoEhdotusKuvausDto'][];
+    };
+    LuoEhdotusKuvausDto: {
+      /** @enum {string} */
+      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
+      /** Format: uuid */
+      id: string;
     };
     EhdotusDto: {
       /** Format: uuid */
@@ -1032,28 +1038,28 @@ export interface components {
     EhdotusMetadata: {
       /** @enum {string} */
       tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
-      ammattiryhma?: string;
-      /** @enum {string} */
-      aineisto?: 'TMT' | 'AMMATTITIETO';
-      /** @enum {string} */
-      koulutusmahdollisuusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
-      maakunnat?: string[];
-      toimialat?: string[];
-      koulutusalat?: string[];
+      ammattiryhma?: string | null;
+      /** @enum {string|null} */
+      aineisto?: 'TMT' | 'AMMATTITIETO' | null;
+      /** @enum {string|null} */
+      koulutusmahdollisuusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO' | null;
+      maakunnat?: string[] | null;
+      toimialat?: string[] | null;
+      koulutusalat?: string[] | null;
       /** Format: double */
-      kesto?: number;
+      kesto?: number | null;
       /** Format: double */
-      kestoMinimi?: number;
+      kestoMinimi?: number | null;
       /** Format: double */
-      kestoMaksimi?: number;
+      kestoMaksimi?: number | null;
       /** Format: double */
-      pisteet?: number;
-      /** @enum {string} */
-      trendi?: 'NOUSEVA' | 'LASKEVA';
+      pisteet?: number | null;
+      /** @enum {string|null} */
+      trendi?: 'NOUSEVA' | 'LASKEVA' | null;
       /** Format: int64 */
-      osaamisia?: number;
+      osaamisia?: number | null;
       /** Format: int32 */
-      tyollisyysNakyma?: number;
+      tyollisyysNakyma?: number | null;
       /** Format: int32 */
       aakkosIndeksi: number;
     };

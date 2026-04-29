@@ -129,11 +129,11 @@ const CategorizedCompetenceTagList = () => {
           </div>
           <div className="flex flex-col gap-4">
             {mappedKuvaukset
-              .filter((teksti) => teksti.data[language])
+              .filter((kuvaus) => kuvaus.data.teksti[language])
               .map((teksti) => (
                 <FreeFormText
                   key={teksti.key}
-                  description={teksti.data[language]}
+                  description={teksti.data.teksti[language]}
                   onChange={() => setKuvaukset(mappedKuvaukset.filter((k) => k.key !== teksti.key).map((k) => k.data))}
                 />
               ))}
