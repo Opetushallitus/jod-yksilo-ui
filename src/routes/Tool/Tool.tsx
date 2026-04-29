@@ -143,7 +143,7 @@ const ExploreOpportunities = () => {
                     toggleFavorite={guardedAction(toggleSuosikki, id, ehdotus.tyyppi)}
                     name={getLocalizedText(mahdollisuus.otsikko)}
                     description={getLocalizedText(mahdollisuus.tiivistelma)}
-                    matchValue={ehdotus?.pisteet}
+                    matchValue={ehdotus?.pisteet ?? undefined}
                     matchLabel={t('fit')}
                     headingLevel="h3"
                     ammattiryhma={mahdollisuus.ammattiryhma}

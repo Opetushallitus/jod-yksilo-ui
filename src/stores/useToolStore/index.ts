@@ -43,7 +43,6 @@ export const useToolStore = create<ToolState>()(
       suosikitLoading: false,
       osaamisKiinnostusPainotus: DEFAULT_PAINOTUS,
       kiinnostusPainotus: DEFAULT_PAINOTUS,
-      rajoitePainotus: DEFAULT_PAINOTUS,
       mahdollisuusEhdotukset: {},
       tyomahdollisuudet: [],
       koulutusmahdollisuudet: [],
@@ -67,6 +66,7 @@ export const useToolStore = create<ToolState>()(
           osaamisetVapaateksti: undefined,
           kiinnostukset: [],
           kiinnostuksetVapaateksti: undefined,
+          kuvaukset: [],
           mahdollisuusEhdotukset: {},
           tyomahdollisuudet: [],
           koulutusmahdollisuudet: [],
@@ -112,7 +112,6 @@ export const useToolStore = create<ToolState>()(
           kiinnostukset,
           kiinnostuksetVapaateksti,
           osaamisKiinnostusPainotus,
-          rajoitePainotus,
           kuvaukset,
         } = get();
 
@@ -128,8 +127,12 @@ export const useToolStore = create<ToolState>()(
               kiinnostusPainotus: osaamisKiinnostusPainotus / 100,
               escoListPainotus: 0.5,
               openTextPainotus: 0.5,
-              rajoitePainotus: rajoitePainotus / 100,
-              kuvaukset: kuvaukset?.filter((k) => k[lang]).map((k) => k[lang]) ?? [],
+              kuvaukset: kuvaukset.map((k) => {
+                return {
+                  tyyppi: k.tyyppi,
+                  id: k.id,
+                };
+              }),
             },
             signal,
             headers: { 'Content-Language': lang },
