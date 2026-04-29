@@ -5,6 +5,7 @@ import { formErrorMessage } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import type { YksiloData } from '@/hooks/useYksiloData';
+import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AiInfoButton, Button, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
 import { JodArrowLeft, JodArrowRight, JodCheckmark, JodOpenInNew } from '@jod/design-system/icons';
@@ -64,11 +65,17 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
     i18n: { language },
   } = useTranslation();
   const { sm } = useMediaQueries();
+  const firstName = useSessionManagerStore((s) => s.user?.etunimi);
+  const lastName = useSessionManagerStore((s) => s.user?.sukunimi);
   const { control, register, trigger } = useFormContext<WelcomePathForm>();
   const { errors } = useFormState({ control });
   const emailFieldId = React.useId();
   const guardedAction = useSessionGuardedAction();
   const emailField = register('email');
+  const mpassid = React.useMemo(
+    () => !(data.syntymavuosi || data.kotikunta || data.sukupuoli),
+    [data.kotikunta, data.syntymavuosi, data.sukupuoli],
+  );
 
   React.useEffect(() => {
     void trigger('email');
@@ -76,51 +83,73 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
 
   return (
     <>
-      <p className="text-body-lg-mobile sm:text-body-lg font-medium mb-2">{t('introduction.step-2.text-1')}</p>
-      <p className="text-body-md-mobile sm:text-body-md mb-7 font-arial">{t('introduction.step-2.text-2')}</p>
+      {!mpassid && (
+        <p className="text-body-lg-mobile sm:text-body-lg font-medium mb-2">{t('introduction.step-2.text-1')}</p>
+      )}
+      {!mpassid && (
+        <p className="text-body-md-mobile sm:text-body-md mb-7 font-arial">{t('introduction.step-2.text-2')}</p>
+      )}
       <div>
-        <Separator />
-        <PersonalDetailsInfoBlock
-          label={t('personal-details.birthyear')}
-          info={`${data.syntymavuosi}`}
-          interactiveComponent={
-            <Controller
-              control={control}
-              render={({ field: { onChange, value }, field }) => (
-                <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
-              )}
-              name="allowSyntymavuosi"
+        {data.syntymavuosi && (
+          <>
+            <Separator />
+            <PersonalDetailsInfoBlock
+              label={t('personal-details.birthyear')}
+              info={`${data.syntymavuosi}`}
+              interactiveComponent={
+                <Controller
+                  control={control}
+                  render={({ field: { onChange, value }, field }) => (
+                    <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
+                  )}
+                  name="allowSyntymavuosi"
+                />
+              }
             />
-          }
-        />
-        <Separator />
-        <PersonalDetailsInfoBlock
-          label={t('personal-details.home-city')}
-          info={data.kotikuntaNimi}
-          interactiveComponent={
-            <Controller
-              control={control}
-              render={({ field: { onChange, value }, field }) => (
-                <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
-              )}
-              name="allowKotikunta"
+          </>
+        )}
+        {data.kotikuntaNimi && (
+          <>
+            <Separator />
+            <PersonalDetailsInfoBlock
+              label={t('personal-details.home-city')}
+              info={data.kotikuntaNimi}
+              interactiveComponent={
+                <Controller
+                  control={control}
+                  render={({ field: { onChange, value }, field }) => (
+                    <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
+                  )}
+                  name="allowKotikunta"
+                />
+              }
             />
-          }
-        />
-        <Separator />
-        <PersonalDetailsInfoBlock
-          label={t('personal-details.gender')}
-          info={data.sukupuoliNimi}
-          interactiveComponent={
-            <Controller
-              control={control}
-              render={({ field: { onChange, value }, field }) => (
-                <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
-              )}
-              name="allowSukupuoli"
+          </>
+        )}
+        {data.sukupuoli && (
+          <>
+            <Separator />
+            <PersonalDetailsInfoBlock
+              label={t('personal-details.gender')}
+              info={data.sukupuoliNimi}
+              interactiveComponent={
+                <Controller
+                  control={control}
+                  render={({ field: { onChange, value }, field }) => (
+                    <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
+                  )}
+                  name="allowSukupuoli"
+                />
+              }
             />
-          }
-        />
+          </>
+        )}
+        {firstName && lastName && (
+          <>
+            <Separator />
+            <PersonalDetailsInfoBlock label={t('personal-details.name')} info={`${firstName} ${lastName}`} />
+          </>
+        )}
         <Separator />
         <PersonalDetailsInfoBlock
           label={t('personal-details.email')}

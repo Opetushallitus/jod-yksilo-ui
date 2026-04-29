@@ -412,7 +412,7 @@
   "my-competences-alphabetically": "Osaamiseni aakkosittain A — Ö",
   "my-competences": {
     "by-KOULUTUS": "Koulutuksesta kertynyt osaamiseni",
-    "by-MUU_OSAAMINEN": "Muut osaamiseni",
+    "by-MUU_OSAAMINEN": "Muu osaaminen",
     "by-PATEVYYS": "Vapaa-ajan toiminnasta kertynyt osaamiseni",
     "by-TOIMENKUVA": "Työpaikoista kertynyt osaamiseni",
     "missing-KOULUTUS": "Ei osaamisia. Siirry lisäämään koulutuksia.",
@@ -488,7 +488,8 @@
     "gender-male": "Mies",
     "gender-other": "Muu",
     "home-city": "Kotipaikka",
-    "mother-tongue": "Äidinkieli"
+    "mother-tongue": "Äidinkieli",
+    "name": "Nimi"
   },
   "preferences": {
     "data-disclosure-unanonymized": {
@@ -517,7 +518,7 @@
     },
     "personal-details": {
       "description": "Voit muokata sähköpostiosoitettasi.",
-      "title": "Väestötietojärjestelmästä haetut tiedot"
+      "title": "Omat tiedot"
     },
     "share": {
       "copy-failure": "Linkin kopiointi epäonnistui",
@@ -540,16 +541,16 @@
           "title": "Perustiedot"
         },
         "data-to-share": {
-          "activities": "Vapaa-ajan toimintoni",
+          "activities": "Vapaa-ajan toiminnot",
           "description": "Valitse, mitä tietoja haluat jakaa. Voit halutessasi jakaa perustietosi sekä lisäksi valita, jaetaanko työpaikkasi, koulutuksesi, suosikkisi ja suunnitelmasi.",
-          "education": "Koulutukseni",
+          "education": "Koulutukset",
           "favorite-education-opportunities": "Koulutusmahdollisuudet",
           "favorite-job-opportunities": "Työmahdollisuudet",
           "favorites": "Suosikit",
           "goals": "Tavoitteet",
           "interests": "Kiinnostukset",
-          "something-else": "Muu osaamiseni",
-          "work": "Työpaikkani"
+          "something-else": "Muu osaaminen",
+          "work": "Työpaikat"
         },
         "description": "Muistiinpano",
         "description-placeholder": "Esim. kenelle linkki on tarkoitettu",
@@ -653,7 +654,7 @@
         "summary-description": "Voit muokata koulutuksia tuotuasi ne Osaamispolkuun osaamisprofiilissasi kohdassa Koulutukseni.",
         "workplace-placeholder": "Esim. Maailman opisto"
       },
-      "title": "Koulutukseni"
+      "title": "Koulutukset"
     },
     "favorites": {
       "description": "Suosikeiksi tallentamasi koulutus- ja työmahdollisuudet löytyvät täältä. Suosikkien ryhmittelyn voit valita itse. Suosikkeja tallennetaan Löydä mahdollisuuksia -sivulla. Voit hyödyntää suosikkejasi Tavoitteet-sivulla.",
@@ -688,7 +689,7 @@
         "name-of-free-time-theme-placeholder": "Esim. Sukeltaminen/Taloyhtiön hallitus/Liikunta",
         "summary-description": "Voit muokata vapaa-ajan toimintoja tuotuasi ne Osaamispolkuun osaamisprofiilissasi kohdassa Vapaa-ajan toimintoni."
       },
-      "title": "Vapaa-ajan toimintoni"
+      "title": "Vapaa-ajan toiminnot"
     },
     "index": "Osaamisprofiili",
     "interests": {
@@ -824,7 +825,7 @@
       "free-form-description-of-my-interests": "Vapaa tekstimuotoinen kuvaus osaamisestani",
       "free-form-interests-description-guidance": "Voit kirjoittaa ja kuvailla omin sanoin osaamistasi. Jos käytät palvelua suomeksi, kirjoita suomeksi. Älä kirjoita kuvaukseen henkilökohtaisia tietoja, kuten esimerkiksi henkilötunnusta, käyttäjätunnuksia tai terveystietojasi.",
       "my-other-comptetences": "Osaamiseni",
-      "title": "Muut osaamiseni"
+      "title": "Muu osaaminen"
     },
     "work-history": {
       "description": "Löydät alta työhistoriasi. Voit lisätä itse työhistoriaasi sekä kartoittaa niihin liittyviä osaamisiasi.",
@@ -837,7 +838,7 @@
         "summary-description": "Voit muokata toimenkuvia tuotuasi ne Osaamispolkuun osaamisprofiilissasi Työpaikkani-kohdassa.",
         "workplace-placeholder": "Esim. työpaikka Oy"
       },
-      "title": "Työpaikkani"
+      "title": "Työpaikat"
     }
   },
   "proposals-loading": "Ladataan ehdotuksia",
@@ -910,7 +911,7 @@
   "search": {
     "clear": "Tyhjennä haku",
     "description": "Voit hakea mahdollisuuksia käyttämällä vapaasanahakua. Tulosten näkyvyyteen voit vaikuttaa suodattamalla listaa.",
-    "filters": "Suodattimet",
+    "filters": "Suodattimet ({{count}})",
     "filters_zero": "Suodattimet",
     "global-placeholder": "Hae mahdollisuuksia",
     "label": "Hae mahdollisuuksia",
@@ -1132,8 +1133,8 @@
       "counseling-additional-resource": "<CustomLink>Ohjaus- ja neuvontapalveluja<Icon></Icon></CustomLink> kokoaa palvelut, joista saat tukea ura- ja koulutusvaihtoehtoihin liittyvään pohdintaan, joka auttaa sinua arvioimaan ja kehittämään urasuunnittelutaitojasi.",
       "counseling-url": "https://www.suomi.fi/aihe/ohjaus-ja-neuvontapalveluja",
       "description": "Tutustu seuraaviin sivustoihin, jos tarvitset apua tilanteesi pohdintaan:",
-      "education-history": "Koulutukseni",
-      "free-time-activities": "Vapaa-ajan toimintoni",
+      "education-history": "Koulutukset",
+      "free-time-activities": "Vapaa-ajan toiminnot",
       "guidance-practitioner-additional-resource": "Voit myös tutustua itsenäisesti <CustomLink>Osaamispolun ohjaajan osion materiaaleihin.<Icon></Icon></CustomLink>",
       "guidance-practitioner-url": "https://osaamispolku.fi/ohjaaja",
       "help-text": "Kirjautuneena käyttäjänä voit kartoittaa osaamisia ja kiinnostuksia tarkemmin osaamisprofiilissa.",
@@ -1141,10 +1142,10 @@
       "reveal-your-skills-additional-resource": "<CustomLink>Osaaminen näkyviin<Icon></Icon></CustomLink> innostaa ja kannustaa ihmisiä ja yhteisöjä huomaamaan osaamistaan sekä herättää keskustelua osaamisen huomaamisen merkityksestä.",
       "reveal-your-skills-url": "https://www.jotpa.fi/fi/tietoa-meista/hankkeet-ja-projektit/osaaminen-nakyviin",
       "service-directory": "Ohjaus- ja neuvontapalveluja",
-      "something-else": "Muut osaamiseni",
+      "something-else": "Muut osaaminen",
       "title": "Tukea pohdintaan",
       "urataidot-additional-resource": "<CustomLink>Urataitojen itsearviointi<Icon></Icon></CustomLink> on digitaalinen työkalu, joka auttaa sinua arvioimaan ja kehittämään urasuunnittelutaitojasi.",
-      "work-history": "Työpaikkani"
+      "work-history": "Työpaikat"
     },
     "tour": {
       "buttons": {
@@ -1222,11 +1223,11 @@
   "types": {
     "competence": {
       "KIINNOSTUS": "Kiinnostukseni",
-      "KOULUTUS": "Koulutukseni",
-      "MUU_OSAAMINEN": "Muu osaamiseni",
+      "KOULUTUS": "Koulutukset",
+      "MUU_OSAAMINEN": "Muu osaaminen",
       "OSAAMINEN": "Osaamiseni",
-      "PATEVYYS": "Vapaa-ajan toimintoni",
-      "TOIMENKUVA": "Työpaikkani"
+      "PATEVYYS": "Vapaa-ajan toiminnot",
+      "TOIMENKUVA": "Työpaikat"
     }
   },
   "update": "Päivitä mahdollisuutesi",

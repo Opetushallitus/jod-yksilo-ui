@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import { formErrorMessage } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
+import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { InputField, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -27,6 +28,13 @@ const PersonalDetails = () => {
   const emailSchema = z.email(formErrorMessage.email()).nonoptional(formErrorMessage.required());
   // For tracking if user has interacted with the email field to prevent effect firing on mount
   const userInputRef = React.useRef(false);
+
+  const firstName = useSessionManagerStore((s) => s.user?.etunimi);
+  const lastName = useSessionManagerStore((s) => s.user?.sukunimi);
+  const mpassid = React.useMemo(
+    () => !(data?.syntymavuosi || data?.kotikunta || data?.sukupuoli),
+    [data?.kotikunta, data?.syntymavuosi, data?.sukupuoli],
+  );
 
   const guardedAction = useSessionGuardedAction();
 
@@ -161,6 +169,12 @@ const PersonalDetails = () => {
         {data?.sukupuoli && (
           <>
             <PersonalDetailsInfoBlock label={t('personal-details.gender')} info={genderTranslation} />
+            <Divider className="my-4" />
+          </>
+        )}
+        {mpassid && (
+          <>
+            <PersonalDetailsInfoBlock label={t('personal-details.name')} info={`${firstName} ${lastName}`} />
             <Divider className="my-4" />
           </>
         )}
