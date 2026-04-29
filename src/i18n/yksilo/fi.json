@@ -492,6 +492,56 @@
     "name": "Nimi"
   },
   "preferences": {
+    "cv-import": {
+      "attachment": {
+        "attach-file": "Liitä tiedosto",
+        "attach-pdf": "Liitä PDF tiedosto",
+        "delay-info": "Tietojen kerääminen CV:stäsi voi kestää minuutteja.",
+        "description": "Voit ladata valmiin CV:n Osaamisprofiiliisi. Lataamisen jälkeen voit tarkastella, muokata ja poistaa tietoja Työpaikat, Koulutukset sekä Vapaa-ajan toiminnot-osioissa.<br/><br/>Tietojen monistuminen on mahdollista, jos olet aiemmin syöttänyt samoja tietoja Osaamisprofiiliisi.",
+        "file-too-large": "Liian suuri tiedosto",
+        "invalid-file-type": "Väärä tiedostotyyppi",
+        "title": "Tiedoston lataaminen"
+      },
+      "description": "Voit päivittää tietoja lataamalla ennakkoon laaditun CV:n osaksi Osaamisprofiiliasi.",
+      "failed": {
+        "description": "CV:n analysointi epäonnistui. Yritä uudelleen tai tarkista tiedosto.",
+        "title": "Tuonti epäonnistui"
+      },
+      "file-too-large": "Tiedosto on liian suuri (max 2 Mt).",
+      "import-data": "Tuo tiedot",
+      "import-from-cv": "Tuo tietosi CV:stä",
+      "invalid-file-type": "Vain PDF-tiedostot ovat tuettuja.",
+      "save": {
+        "failed": {
+          "description": "CV:n tallentaminen epäonnistui",
+          "title": "Tallennus epäonnistui"
+        },
+        "success": {
+          "description": "CV:n tallentaminen onnistui",
+          "title": "Tallennus onnistui"
+        }
+      },
+      "summary": {
+        "activities": {
+          "loading": "Kerätään vapaa-ajan toimintoja",
+          "no-data": "Vapaa-ajan toimintoja ei tunnistettu",
+          "title": "Vapaa-ajan toiminnot"
+        },
+        "description": "Valitse, mitkä tiedot haluat CV:stäsi tuoda. Tuonnin jälkeen voit muokata ja täydentää tietoja Koulutukset, Työpaikat ja Vapaa-ajan toiminnot -osioissa.",
+        "education": {
+          "loading": "Kerätään koulutushistoriatietoja",
+          "no-data": "Koulutustietoja ei tunnistettu",
+          "title": "Koulutukset"
+        },
+        "title": "Tuotavien tietojen valinta",
+        "work": {
+          "loading": "Kerätään työhistoriatietoja",
+          "no-data": "Työhistoriatietoja ei tunnistettu",
+          "title": "Työpaikat"
+        }
+      },
+      "title": "Tietojen tuonti CV:stä"
+    },
     "data-disclosure-unanonymized": {
       "description": "Opetushallitus käyttää ensisijaisesti anonymisoituja tietoja. Tämä tarkoittaa, että henkilötietosi muunnetaan sellaiseen muotoon, ettei sinua voi enää tunnistaa niistä. Näin tietoja voidaan käyttää esimerkiksi tutkimukseen tai palvelun kehittämiseen ilman, että sinut voidaan tunnistaa. Jos kuitenkin haluat, voit antaa luvan käyttää tietojasi myös tunnistettavassa muodossa. Tämä tarkoittaa, että tietosi säilyvät sellaisina, että ne voidaan yhdistää sinuun. Voit antaa luvan jokaiseen kohtaan erikseen ja perua luvan milloin tahansa.",
       "permission-education-and-planning": {
@@ -515,6 +565,9 @@
       "action": "Lataa osaamisprofiilini tiedot (JSON)",
       "description": "Voit ladata kaikki osaamisprofiiliisi tallennetut tiedot omalle laitteellesi. Tiedot muodostetaan koneluettavaan JSON-muotoon. JSON on yksinkertainen ja kevyt avoimen standardin tiedostomuoto tiedonvälitykseen ja tallennukseen.",
       "title": "Lataa osaamisprofiilisi"
+    },
+    "import-export": {
+      "title": "Tuo ja vie tietojasi"
     },
     "personal-details": {
       "description": "Voit muokata sähköpostiosoitettasi.",
@@ -600,7 +653,7 @@
         },
         "success": "Tietojesi tuonti Työmarkkinatorista onnistui"
       },
-      "title": "Tuo ja vie tietojasi"
+      "title": "Siirrä tietojasi Työmarkkinatorin ja Osaamispolun välillä"
     }
   },
   "previous": "Edellinen",

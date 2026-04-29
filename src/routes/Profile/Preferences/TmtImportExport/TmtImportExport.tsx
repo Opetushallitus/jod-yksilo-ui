@@ -280,7 +280,7 @@ const TmtImportExport = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <h2 className="text-heading-2-mobile sm:text-heading-2">{t('preferences.tmt-import-export.title')}</h2>
+      <h3 className="text-heading-3-mobile sm:text-heading-3">{t('preferences.tmt-import-export.title')}</h3>
       <div className="font-arial">
         <Trans
           i18nKey="preferences.tmt-import-export.description"

@@ -430,6 +430,42 @@ export interface paths {
     patch: operations['jakolinkkiUpdate'];
     trace?: never;
   };
+  '/api/profiili/cv': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['cvUpload'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/profiili/cv/{tehtavaId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['cvGetStatus'];
+    put?: never;
+    /**
+     * @description Tallentaa valitut koulutukset/toimenkuvat/toiminnot osaamisprofiiliin.
+     *     Onnistuneen tallennuksen jälkeen tehtävä poistetaan.
+     */
+    post: operations['cvSave'];
+    delete: operations['cvDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/keskustelut': {
     parameters: {
       query?: never;
@@ -819,7 +855,7 @@ export interface components {
   schemas: {
     YksiloDto: {
       /** @enum {string} */
-      readonly tunnisteTyyppi?: 'FIN' | 'EIDAS';
+      readonly tunnisteTyyppi?: 'FIN' | 'EIDAS' | 'ONR';
       tervetuloapolku?: boolean;
       lupaLuovuttaaTiedotUlkopuoliselle?: boolean;
       lupaKayttaaTekoalynKoulutukseen?: boolean;
@@ -983,6 +1019,28 @@ export interface components {
       jaetutSuosikit?: ('TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS')[];
       jaetutTavoitteet?: string[];
     };
+    CvTehtavaDto: {
+      /** Format: uuid */
+      id?: string;
+      /** @enum {string} */
+      tila?: 'ODOTTAA' | 'VALMIS' | 'EPAONNISTUNUT';
+      tulos?: components['schemas']['Tulos'];
+    };
+    Tulos: {
+      koulutuskokonaisuudet?: components['schemas']['KoulutusKokonaisuusDto'][];
+      tyopaikat?: components['schemas']['TyopaikkaDto'][];
+      toiminnot?: components['schemas']['ToimintoDto'][];
+    };
+    CvTehtavaSaveDto: {
+      koulutuskokonaisuudet?: components['schemas']['Valinta'][];
+      tyopaikat?: components['schemas']['Valinta'][];
+      toiminnot?: components['schemas']['Valinta'][];
+    };
+    Valinta: {
+      /** Format: uuid */
+      id: string;
+      lapset: string[];
+    };
     UusiKeskustelu: {
       viesti: components['schemas']['LokalisoituTeksti'];
       /** @enum {string} */
@@ -1038,28 +1096,28 @@ export interface components {
     EhdotusMetadata: {
       /** @enum {string} */
       tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
-      ammattiryhma?: string | null;
-      /** @enum {string|null} */
-      aineisto?: 'TMT' | 'AMMATTITIETO' | null;
-      /** @enum {string|null} */
-      koulutusmahdollisuusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO' | null;
-      maakunnat?: string[] | null;
-      toimialat?: string[] | null;
-      koulutusalat?: string[] | null;
+      ammattiryhma?: string;
+      /** @enum {string} */
+      aineisto?: 'TMT' | 'AMMATTITIETO';
+      /** @enum {string} */
+      koulutusmahdollisuusTyyppi?: 'TUTKINTO' | 'EI_TUTKINTO';
+      maakunnat?: string[];
+      toimialat?: string[];
+      koulutusalat?: string[];
       /** Format: double */
-      kesto?: number | null;
+      kesto?: number;
       /** Format: double */
-      kestoMinimi?: number | null;
+      kestoMinimi?: number;
       /** Format: double */
-      kestoMaksimi?: number | null;
+      kestoMaksimi?: number;
       /** Format: double */
-      pisteet?: number | null;
-      /** @enum {string|null} */
-      trendi?: 'NOUSEVA' | 'LASKEVA' | null;
+      pisteet?: number;
+      /** @enum {string} */
+      trendi?: 'NOUSEVA' | 'LASKEVA';
       /** Format: int64 */
-      osaamisia?: number | null;
+      osaamisia?: number;
       /** Format: int32 */
-      tyollisyysNakyma?: number | null;
+      tyollisyysNakyma?: number;
       /** Format: int32 */
       aakkosIndeksi: number;
     };
@@ -1164,8 +1222,9 @@ export interface components {
     YksiloCsrfDto: {
       etunimi?: string;
       sukunimi?: string;
-      csrf: components['schemas']['CsrfTokenDto'];
       tervetuloapolku?: boolean;
+      toiminnot: ('PROFILE' | 'TMT' | 'KOSKI')[];
+      csrf: components['schemas']['CsrfTokenDto'];
     };
     KiinnostuksetExportDto: {
       vapaateksti?: components['schemas']['LokalisoituTeksti'];
@@ -2637,6 +2696,98 @@ export interface operations {
     responses: {
       /** @description OK */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  cvUpload: {
+    parameters: {
+      query?: never;
+      header?: {
+        'Content-Language'?: 'fi' | 'sv' | 'en';
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/pdf': Blob;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['CvTehtavaDto'];
+        };
+      };
+    };
+  };
+  cvGetStatus: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        tehtavaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['CvTehtavaDto'];
+        };
+      };
+    };
+  };
+  cvSave: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        tehtavaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CvTehtavaSaveDto'];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  cvDelete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        tehtavaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
         headers: {
           [name: string]: unknown;
         };

@@ -21,6 +21,7 @@ describe('loader', () => {
           headerName: 'X-CSRF-Token',
           parameterName: '_csrf',
         },
+        toiminnot: [],
       },
       request: {} as Request,
       params: {

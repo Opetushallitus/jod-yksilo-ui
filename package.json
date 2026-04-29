@@ -12,6 +12,7 @@
     "preview": "vite preview",
     "test:unit": "vitest --run",
     "test:e2e": "playwright test",
+    "generate:schema": "node ./scripts/generate-schema.js && oxfmt src/api/schema.d.ts --write",
     "prepare": "husky",
     "translations:check": "node ./scripts/translations/analyze-translations.js",
     "translations:fetch": "node ./scripts/translations/fetch-translations.js",

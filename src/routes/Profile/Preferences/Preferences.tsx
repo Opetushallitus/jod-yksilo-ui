@@ -12,6 +12,7 @@ import { isFeatureEnabled } from '@/utils/features';
 
 import { PersonalDetails, ShareLinkSection, TmtImportExport } from '.';
 import { Divider, ProfileNavigationList, ProfileSectionTitle, ToolCard } from '../components';
+import { CvImport } from './CvImport/CvImport';
 
 const DownloadLink = ({ children, className }: { children: React.ReactNode; className: string }) => (
   <a href={`${import.meta.env.BASE_URL}api/profiili/yksilo/vienti`} className={className}>
@@ -27,6 +28,7 @@ const Preferences = () => {
   const logoutForm = React.useContext(LogoutFormContext);
   const { showDialog } = useModal();
   const guardedAction = useSessionGuardedAction();
+  const hasImportExportContent = isFeatureEnabled('TMT_INTEGRATION') || isFeatureEnabled('CV_IMPORT');
 
   const deleteProfile = async () => {
     resetToolStore();
@@ -61,12 +63,20 @@ const Preferences = () => {
 
         <PersonalDetails />
 
-        {isFeatureEnabled('TMT_INTEGRATION') && (
+        {hasImportExportContent && (
           <>
-            <TmtImportExport />
+            <section>
+              <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2">{t('preferences.import-export.title')}</h2>
+
+              <div className="flex flex-col gap-7">
+                {isFeatureEnabled('TMT_INTEGRATION') && <TmtImportExport />}
+                {isFeatureEnabled('CV_IMPORT') && <CvImport />}
+              </div>
+            </section>
             <Divider className="my-7" />
           </>
         )}
+
         {isFeatureEnabled('JAKOLINKKI') && (
           <>
             <ShareLinkSection className="mb-8" />

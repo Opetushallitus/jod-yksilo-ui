@@ -493,6 +493,56 @@
     "name": "Namn"
   },
   "preferences": {
+    "cv-import": {
+      "attachment": {
+        "attach-file": "Bifoga fil",
+        "attach-pdf": "Bifoga PDF-fil",
+        "delay-info": "Insamling av uppgifter från ditt CV kan ta några minuter.",
+        "description": "Du kan ladda upp ett färdigt CV till din kompetensprofil. Efter uppladdning kan du visa, redigera och ta bort information i avsnitten Arbete, Utbildning och Fritidsaktiviteter.<br/><br/>Dataduplicering är möjlig om du tidigare har angett samma information i din kompetensprofil.",
+        "file-too-large": "Fil för stor",
+        "invalid-file-type": "Ogiltig filtyp",
+        "title": "Filuppladdning"
+      },
+      "description": "Du kan uppdatera dina uppgifter genom att ladda upp ett förberett CV som en del av din kompetensprofil.",
+      "failed": {
+        "description": "CV-analys misslyckades. Försök igen eller kontrollera filen.",
+        "title": "Import misslyckades"
+      },
+      "file-too-large": "Filen är för stor (max 2 MB).",
+      "import-data": "Importera data",
+      "import-from-cv": "Importera dina uppgifter från CV",
+      "invalid-file-type": "Endast PDF-filer stöds.",
+      "save": {
+        "failed": {
+          "description": "CV-sparning misslyckades",
+          "title": "Sparning misslyckades"
+        },
+        "success": {
+          "description": "CV sparades framgångsrikt",
+          "title": "Sparning lyckades"
+        }
+      },
+      "summary": {
+        "activities": {
+          "loading": "Hämtar fritidsaktiviteter",
+          "no-data": "Inga fritidsaktiviteter identifierades",
+          "title": "Fritidsaktiviteter"
+        },
+        "description": "Välj vilka uppgifter du vill importera från ditt CV. Efter importen kan du redigera och komplettera informationen i avsnitten Utbildning, Arbete och Fritidsaktiviteter.",
+        "education": {
+          "loading": "Hämtar utbildningshistorik",
+          "no-data": "Ingen utbildningsdata identifierades",
+          "title": "Utbildning"
+        },
+        "title": "Välj information att importera",
+        "work": {
+          "loading": "Hämtar arbetslivserfarenhet",
+          "no-data": "Ingen arbetslivserfarenhet identifierades",
+          "title": "Arbete"
+        }
+      },
+      "title": "Importera uppgifter från CV"
+    },
     "data-disclosure-unanonymized": {
       "description": "Utbildningsstyrelsen använder i första hand anonymiserade uppgifter. Detta innebär att dina personuppgifter omvandlas till ett sådant format att du inte längre kan identifieras. På så sätt kan uppgifterna användas till exempel för forskning eller utveckling av tjänsten utan att du kan identifieras. Om du dock så önskar, kan du ge ditt samtycke till att dina uppgifter används även i ett identifierbart format. Detta innebär att dina uppgifter fortsättningsvis kan kopplas till dig. Du kan ge tillstånd för varje punkt separat och återkalla tillståndet när som helst.",
       "permission-education-and-planning": {
@@ -516,6 +566,9 @@
       "action": "Ladda ner uppgifterna i min kompetensprofil (JSON)",
       "description": "Du kan ladda ner all information som sparats i din kompetensprofil till din egen enhet. Uppgifternas laddas i ett maskinläsbart JSON-format. JSON är ett enkelt och lätt öppet filformat för informationsförmedling och lagring.",
       "title": "Ladda din kompetensprofil"
+    },
+    "import-export": {
+      "title": "Importera och exportera dina uppgifter"
     },
     "personal-details": {
       "description": "Du kan redigera e-postadress.",
@@ -601,7 +654,7 @@
         },
         "success": "Dina uppgifter har importerats från Jobbmarknaden."
       },
-      "title": "Importera och exportera dina uppgifter"
+      "title": "Importera och exportera uppgifter mellan Kompetensvägen och Jobbmarknaden"
     }
   },
   "previous": "Föregående",

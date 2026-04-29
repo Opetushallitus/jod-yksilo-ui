@@ -7,6 +7,7 @@ import { client } from '@/api/client';
 import { ErrorResponse } from '@/api/errorResponse';
 import type { components } from '@/api/schema';
 import { AiInfo, type ExperienceTableRowData } from '@/components';
+import { DataImportTable } from '@/components/DataImportTable/DataImportTable';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
@@ -15,8 +16,6 @@ import {
   type Koulutus,
   type Koulutuskokonaisuus,
 } from '@/routes/Profile/EducationHistory/utils';
-
-import { EducationImportTable } from '../EducationImportTable';
 
 interface ImportKoulutusSummaryModalProps extends ModalComponentProps {
   onSuccessful: () => void;
@@ -303,7 +302,10 @@ const ImportKoulutusSummaryModal = ({
             </div>
             {!isFetching && !error && (
               <div className="box-content max-w-modal-content px-5 md:px-9">
-                <EducationImportTable rows={tableRows} />{' '}
+                <DataImportTable
+                  rows={tableRows}
+                  toggleAllSelectionText={t('education-history.education-provider-or-education')}
+                />
               </div>
             )}
           </div>

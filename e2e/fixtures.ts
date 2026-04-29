@@ -331,4 +331,5 @@ export const featureFlags = {
   TMT_INTEGRATION: true,
   JAKOLINKKI: true,
   MAHDOLLISUUDET_HAKU: true,
+  CV_IMPORT: true,
 };
