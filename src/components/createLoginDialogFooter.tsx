@@ -2,7 +2,12 @@ import { getLinkTo } from '@/utils/routeUtils';
 import { Button } from '@jod/design-system';
 
 /** Creates a footer component to use with DS ConfirmDialog, used for dialogs that require user to log in before proceeding. */
-export const createLoginDialogFooter = (t: (key: string) => string, loginLink: string, onClose?: () => void) => {
+export const createLoginDialogFooter = (
+  t: (key: string) => string,
+  loginUrl: string,
+  callbackUrl: string,
+  onClose?: () => void,
+) => {
   const ConfirmDialogLoginFooter = (hideDialog: () => void) => {
     return (
       <div className="flex gap-4 flex-1">
@@ -20,7 +25,13 @@ export const createLoginDialogFooter = (t: (key: string) => string, loginLink: s
           <Button
             label={t('common:login')}
             variant="accent"
-            linkComponent={getLinkTo(loginLink, { useAnchor: true })}
+            linkComponent={getLinkTo(loginUrl, {
+              state: { callbackUrl },
+              onClick: () => {
+                hideDialog();
+                onClose?.();
+              },
+            })}
             className="whitespace-nowrap"
             testId="login-dialog-login"
           />

@@ -17,7 +17,7 @@ import { type RouteObject, redirect, replace } from 'react-router';
 import { withYksiloContext } from '../auth';
 import { Cv, cvLoader } from './Cv';
 import { Home } from './Home';
-import { Favorites, LandingPage, Preferences, Profile, SomethingElse } from './Profile';
+import { Favorites, LoginPage, Preferences, Profile, SomethingElse } from './Profile';
 import { EducationHistory } from './Profile/EducationHistory';
 import { FreeTimeActivities } from './Profile/FreeTimeActivities';
 import { profilePreferencesLoader } from './Profile/Preferences';
@@ -167,7 +167,7 @@ const profileLandingPageRoutes = supportedLanguageCodes.map(
     ({
       id: `{slugs.profile.login}|${lng}`,
       path: i18n.t('slugs.profile.login', { lng }),
-      element: <LandingPage />,
+      element: <LoginPage />,
       handle: {
         title: i18n.t('login-to-service', { lng }),
       },

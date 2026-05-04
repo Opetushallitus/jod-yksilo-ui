@@ -3,7 +3,6 @@ import { ActionButton, AiInfo, FavoriteToggle, MainLayout } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
-import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
@@ -53,7 +52,10 @@ const OpportunityDetails = ({
   showAiInfoInTitle,
 }: OpportunityDetailsProps) => {
   const { isDev } = useEnvironment();
-  const { t, i18n } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const title = getLocalizedText(data?.otsikko);
   const { lg } = useMediaQueries();
   const { isSuosikki, toggleSuosikki } = useToolStore(
@@ -73,12 +75,7 @@ const OpportunityDetails = ({
   });
 
   const { showDialog, closeAllModals } = useModal();
-  const { state } = useLocation();
-  const loginLink = useLoginLink({
-    callbackURL: state?.callbackURL
-      ? `/${i18n.language}/${state?.callbackURL}`
-      : `/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
-  });
+  const { pathname, search, hash, state } = useLocation();
 
   const doPrint = () => {
     globalThis.print();
@@ -139,7 +136,12 @@ const OpportunityDetails = ({
                     title: t('common:login'),
                     description: t('login-for-favorites'),
                     closeParentModal: true,
-                    footer: createLoginDialogFooter(t, loginLink, closeAllModals),
+                    footer: createLoginDialogFooter(
+                      t,
+                      `/${language}/${t('slugs.profile.login')}`,
+                      state?.callbackUrl ? `/${language}/${state?.callbackUrl}` : `${pathname}${search}${hash}`,
+                      closeAllModals,
+                    ),
                   })
             }
             className="bg-bg-gray-2"

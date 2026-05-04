@@ -2,7 +2,6 @@ import type { components } from '@/api/schema';
 import { FavoriteToggle } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDropdown';
-import { useLoginLink } from '@/hooks/useLoginLink';
 import { useModal } from '@/hooks/useModal';
 import type { MahdollisuusAlityyppi, MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import { useIsSessionExpired } from '@/stores/useSessionManagerStore';
@@ -176,12 +175,7 @@ export const OpportunityCardWrapper = ({
     t,
     i18n: { language },
   } = useTranslation();
-  const state = useLocation().state;
-  const loginLink = useLoginLink({
-    callbackURL: state?.callbackURL
-      ? `/${language}/${state?.callbackURL}`
-      : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
-  });
+  const { pathname, search, hash, state } = useLocation();
   const { showDialog, closeAllModals } = useModal();
   const isSessionExpired = useIsSessionExpired();
 
@@ -198,7 +192,12 @@ export const OpportunityCardWrapper = ({
       showDialog({
         title: t('common:login'),
         description: t('login-for-favorites'),
-        footer: createLoginDialogFooter(t, loginLink, closeAllModals),
+        footer: createLoginDialogFooter(
+          t,
+          `/${language}/${t('slugs.profile.login')}`,
+          state?.callbackUrl ? `/${language}/${state?.callbackUrl}` : `${pathname}${search}${hash}`,
+          closeAllModals,
+        ),
       });
     }
   };
