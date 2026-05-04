@@ -14,14 +14,14 @@ export const NavLinkBasedOnAuth = ({ shouldLogin, onClose, ...rest }: NavLinkBas
     i18n: { language },
   } = useTranslation();
 
-  const pathTo = typeof rest.to === 'string' ? `${rest.to}` : `${rest.to.pathname}`;
+  const to = `/${language}/${typeof rest.to === 'string' ? rest.to : rest.to.pathname}`;
   const sessionExpired = useIsSessionExpired();
   const loginRequired = React.useMemo(() => sessionExpired || shouldLogin, [sessionExpired, shouldLogin]);
 
   return loginRequired ? (
     <NavLink
       {...rest}
-      state={{ callbackURL: pathTo }}
+      state={{ callbackUrl: to }}
       to={`/${language}/${t('slugs.profile.login')}`}
       lang={language}
       onClick={onClose}
@@ -29,7 +29,7 @@ export const NavLinkBasedOnAuth = ({ shouldLogin, onClose, ...rest }: NavLinkBas
       {rest.children}
     </NavLink>
   ) : (
-    <NavLink {...rest} to={`/${language}/${pathTo}`} lang={language} onClick={onClose}>
+    <NavLink {...rest} to={to} lang={language} onClick={onClose}>
       {rest.children}
     </NavLink>
   );

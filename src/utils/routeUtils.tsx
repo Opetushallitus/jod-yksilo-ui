@@ -102,6 +102,7 @@ export interface LinkToOpts {
   rel?: string;
   queryParams?: Record<string, string>;
   state?: Record<string, unknown>;
+  onClick?: () => void;
 }
 /**
  * A function for creating DS style link components, to avoid creating components during runtime.
@@ -119,7 +120,7 @@ export const getLinkTo = (
         {children}
       </a>
     ) : (
-      <Link className={className} to={to} target={opts.target} rel={opts.rel} state={opts.state}>
+      <Link className={className} to={to} target={opts.target} rel={opts.rel} state={opts.state} onClick={opts.onClick}>
         {children}
       </Link>
     );

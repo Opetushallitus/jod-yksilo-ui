@@ -1,12 +1,11 @@
 import { MainLayout } from '@/components';
-import { useLoginLink } from '@/hooks/useLoginLink';
-import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
+import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button } from '@jod/design-system';
 import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 
 const ListItem = ({ label }: { label: string }) => (
   <li className="list-disc ml-7 pl-4 sm:text-body-md text-body-md-mobile font-arial">{label}</li>
@@ -17,23 +16,17 @@ const LoginPage = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const location = useLocation();
-  const isLoggedIn = useIsLoggedIn();
-  const navigate = useNavigate();
-  const state = location.state;
+  const expireSession = useSessionManagerStore((s) => s.expireSession);
 
-  const loginLink = useLoginLink({
-    callbackURL: state?.callbackURL
-      ? `/${language}/${state?.callbackURL}`
-      : `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`,
-  });
-
-  // Redirect to root if already logged-in
   React.useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/');
-    }
-  }, [isLoggedIn, navigate]);
+    expireSession('logout');
+  }, [expireSession]);
+
+  const location = useLocation();
+  const state = location.state;
+  const params = new URLSearchParams();
+  params.set('lang', language);
+  params.set('callback', state?.callbackUrl ?? `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`);
 
   const title = t('profile.login-page.page-title');
 
@@ -53,7 +46,9 @@ const LoginPage = () => {
             <Button
               variant="accent"
               label={t('login-to-service')}
-              linkComponent={getLinkTo(loginLink, { useAnchor: true })}
+              linkComponent={getLinkTo(`/yksilo/login?${params.toString()}`, {
+                useAnchor: true,
+              })}
               icon={<JodArrowRight />}
               iconSide="right"
               testId="landing-login"

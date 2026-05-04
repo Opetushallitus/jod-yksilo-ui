@@ -3,7 +3,6 @@ import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
-import { useLoginLink } from '@/hooks/useLoginLink';
 import { langLabels, supportedLanguageCodes, type LangCode } from '@/i18n/config';
 import { useIsLoggedIn, useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
@@ -85,7 +84,6 @@ const Root = () => {
   const isLoggedIn = useIsLoggedIn();
   const firstName = useSessionManagerStore((state) => state.user?.etunimi);
   const csrfToken = useSessionManagerStore((state) => state.csrf?.token);
-  const loginLink = useLoginLink({ callbackURL: location.pathname + location.search + location.hash });
   const isOnProtectedRoute = useMatch(`/${language}/${t('slugs.profile.index')}/*`);
   const isOnSearchPage = useMatch(`/${language}/${t('slugs.search')}/*`);
   const { sm } = useMediaQueries();
@@ -94,7 +92,7 @@ const Root = () => {
     data,
     language,
     t,
-    loginLink,
+    location,
     isOnProtectedRoute: !!isOnProtectedRoute,
     addPermanentNote,
     removePermanentNote,

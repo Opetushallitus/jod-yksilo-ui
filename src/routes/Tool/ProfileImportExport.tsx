@@ -38,7 +38,7 @@ const Unauthenticated = () => {
         variant="gray"
         className="w-fit"
         linkComponent={getLinkTo(`/${language}/${t('slugs.profile.login')}`, {
-          state: { callbackURL: t('slugs.tool.index') },
+          state: { callbackUrl: `/${language}/${t('slugs.tool.index')}` },
         })}
         data-testid="tool-open-login"
       />

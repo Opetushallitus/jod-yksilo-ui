@@ -31,7 +31,7 @@ export const generateProfileLink = (
   t: (key: string) => string,
 ): ProfileLink => {
   const profilePageSlug = profilePageSlugs.join('/');
-  const callbackURL = `/${language}/${t('slugs.profile.index')}/${profilePageSlug}`;
+  const callbackUrl = `/${language}/${t('slugs.profile.index')}/${profilePageSlug}`;
   const landingPageURL = `/${language}/${t('slugs.profile.login')}`;
 
   if (data) {
@@ -54,7 +54,7 @@ export const generateProfileLink = (
         className?: string;
         children: React.ReactNode;
       }) => (
-        <Link to={to} className={className} state={callbackURL}>
+        <Link to={to} className={className} state={callbackUrl}>
           {children}
         </Link>
       ),

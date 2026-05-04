@@ -1,11 +1,13 @@
-import { useLoginLink } from '@/hooks/useLoginLink';
 import { Button } from '@jod/design-system';
 import { JodHome, JodUser } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
 
 const ErrorBoundary = () => {
-  const { t, i18n } = useTranslation();
-  const loginLink = useLoginLink();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const title = t('common:error-boundary.title');
   const message = t('common:error-boundary.unexpected');
 
@@ -30,9 +32,9 @@ const ErrorBoundary = () => {
           variant="accent"
           /* eslint-disable-next-line react/no-unstable-nested-components */
           linkComponent={({ children, className }) => (
-            <a href={`/yksilo/${i18n.language}`} className={className}>
+            <Link to={`/${language}`} className={className}>
               {children}
-            </a>
+            </Link>
           )}
         />
         <Button
@@ -43,9 +45,9 @@ const ErrorBoundary = () => {
           variant="accent"
           /* eslint-disable-next-line react/no-unstable-nested-components */
           linkComponent={({ children, className }) => (
-            <a href={loginLink} className={className}>
+            <Link to={`/${language}/${t('slugs.profile.login')}`} className={className}>
               {children}
-            </a>
+            </Link>
           )}
         />
       </div>

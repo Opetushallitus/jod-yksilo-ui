@@ -1,10 +1,12 @@
 import type { components } from '@/api/schema';
+import i18n from '@/i18n/config';
 import { isSessionValidState, useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLinkTo } from '@/utils/routeUtils';
 import { Button, useNoteStack } from '@jod/design-system';
 import React from 'react';
+import { Location } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 
 type NoteActions = Pick<
@@ -16,7 +18,7 @@ interface UseSessionManagerNotificationsOptions extends NoteActions {
   data: components['schemas']['YksiloCsrfDto'] | null | undefined;
   language: string;
   t: (key: string) => string;
-  loginLink: string;
+  location: Location;
   isOnProtectedRoute: boolean;
 }
 
@@ -96,7 +98,7 @@ export const useSessionManagerNotifications = (options: UseSessionManagerNotific
     });
 
     setOnExpired(async (reason) => {
-      const { removeTemporaryNote, addPermanentNote, t, loginLink } = optsRef.current;
+      const { removeTemporaryNote, addPermanentNote, t, location } = optsRef.current;
       removeTemporaryNote(warningId);
       if (reason === 'logout') {
         optsRef.current.removePermanentNote(expiredId);
@@ -116,7 +118,9 @@ export const useSessionManagerNotifications = (options: UseSessionManagerNotific
               size="sm"
               variant="white"
               label={t('common:session.expired.login')}
-              linkComponent={getLinkTo(loginLink, { useAnchor: true })}
+              linkComponent={getLinkTo(`/${i18n.language}/${t('slugs.profile.login')}`, {
+                state: { callbackUrl: `${location.pathname}${location.search}${location.hash}` },
+              })}
             />
             <Button
               size="sm"
