@@ -37,6 +37,23 @@ export async function mockAuthenticatedUser(page: Page) {
       body: JSON.stringify(userProfile),
     });
   });
+  await page.route('**/api/profiili/yksilo/tiedot-ja-luvat', async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        allowKotikunta: true,
+        allowSyntymavuosi: true,
+        allowSukupuoli: true,
+        kotikunta: 'kunta_123',
+        kotikuntaNimi: 'Testikunta',
+        syntymavuosi: 1990,
+        sukupuoli: 'MIES',
+        sukupuoliNimi: 'Mies',
+        tervetuloapolku: true,
+      }),
+    });
+  });
 }
 
 export async function mockFeatureFlags(page: Page, flags: Record<string, boolean> = {}) {
