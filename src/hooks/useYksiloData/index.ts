@@ -2,6 +2,7 @@ import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import type { LanguageValue } from '@/i18n/config';
 import type { GenderValue } from '@/routes/Profile/utils';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { getCodesetValue } from '@/utils/codes/codes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -25,6 +26,7 @@ export const useYksiloData = () => {
   const [kotikuntaNimi, setKotikuntaNimi] = React.useState<string>('');
   const [isLoading, setIsLoading] = React.useState(true);
   const language = i18n.language as LanguageValue;
+  const isLoggedIn = useIsLoggedIn();
 
   const sukupuoliText = (sukupuoli: GenderValue | undefined) => {
     switch (sukupuoli) {
@@ -52,8 +54,10 @@ export const useYksiloData = () => {
   }, [language]);
 
   React.useEffect(() => {
-    fetchApiData();
-  }, [fetchApiData]);
+    if (isLoggedIn) {
+      fetchApiData();
+    }
+  }, [fetchApiData, isLoggedIn]);
 
   return {
     data: {

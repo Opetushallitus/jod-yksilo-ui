@@ -1,13 +1,11 @@
 import { ExternalLink, MainLayout } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
-import { useYksiloData } from '@/hooks/useYksiloData';
 import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { useMediaQueries } from '@jod/design-system';
 import { JodUser } from '@jod/design-system/icons';
 import { Trans, useTranslation } from 'react-i18next';
 import { ProfileNavigationList } from '../components';
 import { ToolCard } from '../components/ToolCard';
-import WelcomePathModal from '../WelcomePathModal/WelcomePathModal';
 
 const ListItem = ({ label }: { label: string }) => <li className="list-disc ml-6 ">{label}</li>;
 
@@ -18,7 +16,6 @@ const ProfileFront = () => {
   } = useTranslation();
   const { lg } = useMediaQueries();
   const firstName = useSessionManagerStore((s) => s.user?.etunimi);
-  const { data, isLoading } = useYksiloData();
 
   return (
     <MainLayout
@@ -41,8 +38,6 @@ const ProfileFront = () => {
           title={t('welcome', { name: firstName ?? 'Nimetön' })}
           testId="profile-front-title"
         />
-
-        {!isLoading && !data.tervetuloapolku && <WelcomePathModal yksiloData={data} />}
 
         <div className="mb-8 text-body-md flex flex-col gap-6 font-arial">
           <p className="text-body-lg-mobile sm:text-body-lg font-poppins mb-3">

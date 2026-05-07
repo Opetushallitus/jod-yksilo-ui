@@ -3,6 +3,7 @@ import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
+import { useYksiloData } from '@/hooks/useYksiloData';
 import { langLabels, supportedLanguageCodes, type LangCode } from '@/i18n/config';
 import { useIsLoggedIn, useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
@@ -29,6 +30,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation, useMatch } from 'react-router';
 import { LogoutFormContext } from '.';
+import WelcomePathModal from '../Profile/WelcomePathModal/WelcomePathModal';
 import { useSessionManagerNotifications } from './useSessionManagerNotifications';
 
 const LanguageButtonWrapper = ({ responsive }: { responsive?: boolean }) => {
@@ -135,8 +137,14 @@ const Root = () => {
       href: `/${language}/${t('common:slugs.privacy-and-cookies')}`,
       label: t('common:footer.more-info-links.privacy-and-cookies'),
     },
-    { href: `/${language}/${t('common:slugs.data-sources')}`, label: t('common:footer.more-info-links.data-sources') },
-    { href: `/${language}/${t('common:slugs.ai-usage')}`, label: t('common:footer.more-info-links.ai-usage') },
+    {
+      href: `/${language}/${t('common:slugs.data-sources')}`,
+      label: t('common:footer.more-info-links.data-sources'),
+    },
+    {
+      href: `/${language}/${t('common:slugs.ai-usage')}`,
+      label: t('common:footer.more-info-links.ai-usage'),
+    },
     {
       href: `/${language}/${t('common:slugs.accessibility')}`,
       label: t('common:footer.more-info-links.accessibility'),
@@ -186,6 +194,8 @@ const Root = () => {
   }, [addTemporaryNote, t, language]);
 
   const { open: openCookieConsent } = useCookieConsent();
+
+  const { data: yksiloData, isLoading } = useYksiloData();
 
   return (
     <div className="flex flex-col min-h-screen bg-bg-gray text-primary-gray" data-testid="app-root">
@@ -241,6 +251,8 @@ const Root = () => {
           testId="navigation-bar"
         />
       </header>
+
+      {!isLoading && !yksiloData.tervetuloapolku && isLoggedIn && <WelcomePathModal yksiloData={yksiloData} />}
 
       <LogoutFormContext.Provider value={logoutForm}>
         <NavMenu
