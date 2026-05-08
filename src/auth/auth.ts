@@ -1,6 +1,8 @@
+import { LoaderFunction, LoaderFunctionArgs, redirect, replace } from 'react-router';
+
 import i18n from '@/i18n/config';
 import { useSessionManagerStore, YksiloLoaderContext } from '@/stores/useSessionManagerStore';
-import { LoaderFunction, LoaderFunctionArgs, redirect, replace } from 'react-router';
+
 import { hasWelcomePathBeenShown, markWelcomePathShown } from './welcomePathGate';
 
 export const withYksiloContext = (load: LoaderFunction<YksiloLoaderContext>, loginRequired = true) => {

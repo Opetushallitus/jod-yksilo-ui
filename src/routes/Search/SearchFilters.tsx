@@ -1,10 +1,12 @@
+import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
+
+import { Button, Checkbox, Modal, useMediaQueries } from '@jod/design-system';
+import { JodSettings } from '@jod/design-system/icons';
+
 import { AiInfo } from '@/components';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { useSearchStore } from '@/stores/useSearchStore';
-import { Button, Checkbox, Modal, useMediaQueries } from '@jod/design-system';
-import { JodSettings } from '@jod/design-system/icons';
-import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
 
 const FiltersModal = ({ onClose, ...rest }: ModalComponentProps) => {
   const { t } = useTranslation();
@@ -13,15 +15,15 @@ const FiltersModal = ({ onClose, ...rest }: ModalComponentProps) => {
     <Modal
       {...rest}
       open={rest.open && !lg}
-      topSlot={<span className="sm:text-heading-2 text-heading-2-mobile">{t('search.filters', { count: 0 })}</span>}
+      topSlot={<span className="text-heading-2-mobile sm:text-heading-2">{t('search.filters', { count: 0 })}</span>}
       className="h-fit!"
       content={
-        <div className="p-5 pb-6 md:px-8 md:ml-3">
+        <div className="p-5 pb-6 md:ml-3 md:px-8">
           <FiltersContent />
         </div>
       }
       footer={
-        <div className="flex gap-4 ml-auto">
+        <div className="ml-auto flex gap-4">
           <Button size={sm ? 'lg' : 'sm'} onClick={onClose} label={t('close')} variant="accent" />
         </div>
       }
@@ -70,7 +72,7 @@ const FiltersContent = () => {
           <Checkbox
             name={filterKey}
             value={filterKey}
-            className="gap-4 items-center"
+            className="items-center gap-4"
             checked={filters[filterKey as keyof typeof filters]}
             label={getCheckboxLabel(filterKey as keyof typeof filters)}
             ariaLabel={translations[filterKey as keyof typeof filters]}
@@ -94,8 +96,8 @@ export const SearchFilters = () => {
 
   if (lg) {
     return (
-      <div className="bg-white rounded-md p-6 flex flex-col select-none gap-6">
-        <h2 className="sm:text-body-sm text-body-sm-mobile">{t('search.filters', { count: 0 })}</h2>
+      <div className="flex flex-col gap-6 rounded-md bg-white p-6 select-none">
+        <h2 className="text-body-sm-mobile sm:text-body-sm">{t('search.filters', { count: 0 })}</h2>
         <FiltersContent />
       </div>
     );

@@ -1,10 +1,12 @@
-import { LangCode } from '@/i18n/config';
-import { useToolStore } from '@/stores/useToolStore';
-import { maakuntaKoodit, translateMaakunta } from '@/utils/maakuntaUtils.ts';
-import { Checkbox } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
+
+import { Checkbox } from '@jod/design-system';
+
+import { LangCode } from '@/i18n/config';
+import { useToolStore } from '@/stores/useToolStore';
+import { maakuntaKoodit, translateMaakunta } from '@/utils/maakuntaUtils.ts';
 
 export const FilterSijainti = () => {
   const {
@@ -24,7 +26,7 @@ export const FilterSijainti = () => {
   };
 
   React.useEffect(() => {
-    Promise.all(maakuntaKoodit.map((maakunta) => translateMaakunta(maakunta, language as LangCode))).then(
+    void Promise.all(maakuntaKoodit.map((maakunta) => translateMaakunta(maakunta, language as LangCode))).then(
       (translatedMaakunnat) => {
         translatedMaakunnat.sort((a, b) => a[1].localeCompare(b[1]));
         setMaakunnatList(translatedMaakunnat);
@@ -34,7 +36,7 @@ export const FilterSijainti = () => {
 
   return (
     <fieldset className="flex flex-col gap-5">
-      <legend className="text-heading-4-mobile sm:text-heading-4 mb-5 sr-only">{t('show')}</legend>
+      <legend className="sr-only mb-5 text-heading-4-mobile sm:text-heading-4">{t('show')}</legend>
       {maakunnatList.map((maakunta) => (
         <Checkbox
           key={maakunta[1]}

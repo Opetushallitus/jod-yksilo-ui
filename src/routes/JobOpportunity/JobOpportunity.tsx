@@ -1,3 +1,11 @@
+import React from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+import { Link, useLoaderData } from 'react-router';
+import { useShallow } from 'zustand/shallow';
+
+import { Button, useMediaQueries } from '@jod/design-system';
+import { JodOpenInNew } from '@jod/design-system/icons';
+
 import tmtLogo from '@/../assets/tyomarkkinatori.svg';
 import { AiInfo } from '@/components/AiInfo/AiInfo';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
@@ -12,12 +20,7 @@ import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText, getTranslation, hashString, normalizeMultilineText } from '@/utils';
 import { getEducationCodesetValues } from '@/utils/codes/codes.ts';
 import { getLinkTo } from '@/utils/routeUtils';
-import { Button, useMediaQueries } from '@jod/design-system';
-import { JodOpenInNew } from '@jod/design-system/icons';
-import React from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import { Link, useLoaderData } from 'react-router';
-import { useShallow } from 'zustand/shallow';
+
 import type { LoaderData } from './loader';
 
 interface Koulutusala {
@@ -75,7 +78,6 @@ const JobOpportunity = () => {
         let title = ka.value;
         const koodi = ka.code.replace(koulutusalaPrefix, '');
         const osuus =
-          // eslint-disable-next-line sonarjs/no-nested-functions
           tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusalaTyollisyydet?.find((kat) => kat.koodi === koodi)
             ?.osuus ?? 0;
         if (title === koulutusalaPrefix + '-2') {
@@ -87,7 +89,7 @@ const JobOpportunity = () => {
       setKoulutusalat(newKoulutusalat);
     };
     setKoulutusalat([]);
-    fetchKoulutusalat();
+    void fetchKoulutusalat();
   }, [tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusalaTyollisyydet, t]);
 
   React.useEffect(() => {
@@ -103,7 +105,7 @@ const JobOpportunity = () => {
       const maakuntaTyollisyydet = (await Promise.all(promises)) ?? [];
       setMaakunnat(maakuntaTyollisyydet);
     };
-    fetchMaakunnat();
+    void fetchMaakunnat();
   }, [language, t, tyomahdollisuus.ammattiryhma?.tyollisyysData?.maakuntaTyollisyydet]);
 
   React.useEffect(() => {
@@ -121,7 +123,6 @@ const JobOpportunity = () => {
         const koodi = ka.code.replace(koulutusastePrefix, '');
         const osuus =
           tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet?.find(
-            // eslint-disable-next-line sonarjs/no-nested-functions
             (kat) => kat.koulutusasteKoodi === koodi,
           )?.osuus ?? 0;
         if (title === koulutusastePrefix + '-2') {
@@ -132,7 +133,7 @@ const JobOpportunity = () => {
       setKoulutusasteet(newKoulutusasteet);
     };
     setKoulutusasteet([]);
-    fetchKoulutusasteet();
+    void fetchKoulutusasteet();
   }, [tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet, t]);
 
   const tyomahdollisuusTehtavat =
@@ -173,7 +174,7 @@ const JobOpportunity = () => {
       showDivider: false,
       showAiInfoInTitle: true,
       content: (
-        <p className="text-body-md font-arial whitespace-pre-line">
+        <p className="font-arial text-body-md whitespace-pre-line">
           {normalizeMultilineText(getLocalizedText(tyomahdollisuus?.kuvaus))}
         </p>
       ),
@@ -183,12 +184,11 @@ const JobOpportunity = () => {
       showDivider: false,
       showAiInfoInTitle: true,
       content: (
-        <ul className="list-disc ml-7">
+        <ul className="ml-7 list-disc">
           {tyomahdollisuusTehtavat.map((value: string, index: number) => (
             <li
-              // eslint-disable-next-line react/no-array-index-key
               key={`${hashString(value)}-${index}`}
-              className="text-capitalize text-body-md font-arial text-primary-gray"
+              className="text-capitalize font-arial text-body-md text-primary-gray"
             >
               {value}
             </li>
@@ -200,7 +200,7 @@ const JobOpportunity = () => {
       navTitle: t('job-opportunity.competences.title'),
       showAiInfoInTitle: true,
       content: (
-        <div className="flex flex-col gap-6 mb-9 grow">
+        <div className="mb-9 flex grow flex-col gap-6">
           <span className="font-arial">{t('job-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} />
           {!lg && (
@@ -231,23 +231,23 @@ const JobOpportunity = () => {
 
           {tyomahdollisuus?.ammattiryhma ? (
             <>
-              <div className="flex sm:flex-row flex-col justify-around text-center gap-9 sm:my-8 my-4">
+              <div className="my-4 flex flex-col justify-around gap-9 text-center sm:my-8 sm:flex-row">
                 <div>
-                  <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                  <h4 className="text-heading-1-mobile text-accent sm:text-heading-1">
                     {tyomahdollisuus?.ammattiryhma?.alinDesiiliPalkka ?? NOT_AVAILABLE_LABEL} €
                   </h4>
                   <p>{t('job-opportunity.salary-data.lowest-decile')}</p>
                 </div>
 
                 <div>
-                  <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                  <h4 className="text-heading-1-mobile text-accent sm:text-heading-1">
                     {tyomahdollisuus?.ammattiryhma?.mediaaniPalkka ?? NOT_AVAILABLE_LABEL} €
                   </h4>
                   <p>{t('job-opportunity.salary-data.median')}</p>
                 </div>
 
                 <div>
-                  <h4 className="sm:text-heading-1 text-heading-1-mobile text-accent">
+                  <h4 className="text-heading-1-mobile text-accent sm:text-heading-1">
                     {tyomahdollisuus?.ammattiryhma?.ylinDesiiliPalkka ?? NOT_AVAILABLE_LABEL} €
                   </h4>
                   <p>{t('job-opportunity.salary-data.highest-decile')}</p>
@@ -281,7 +281,7 @@ const JobOpportunity = () => {
                 CustomLink: (
                   <Link
                     to={'https://osaamispolku.fi/tietopalvelu'}
-                    className="inline-flex underline text-accent items-center"
+                    className="inline-flex items-center text-accent underline"
                     target="_blank"
                   />
                 ),
@@ -290,15 +290,15 @@ const JobOpportunity = () => {
           </p>
 
           {tyomahdollisuus?.ammattiryhma ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-7">
+            <div className="lg:gap-12 mt-7 grid grid-cols-1 gap-8 lg:grid-cols-2">
               {/* Row 1: Supply and Demand - Full width */}
-              <div className="lg:col-span-2 col-start-1 max-w-full">
-                <div className="flex flex-col w-full">
+              <div className="col-start-1 max-w-full lg:col-span-2">
+                <div className="flex w-full flex-col">
                   <p className="font-bold">{t('job-opportunity.employment-data.supply-and-demand')}</p>
-                  <h3 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent break-words max-w-full">
+                  <h3 className="mt-3 max-w-full text-heading-1-mobile break-words text-accent sm:text-heading-1">
                     {kohtaanto}
                   </h3>
-                  <span className="text-secondary-gray max-w-full">
+                  <span className="max-w-full text-secondary-gray">
                     <Trans
                       i18nKey="job-opportunity.employment-data.supply-and-demand-subtitle"
                       components={{
@@ -306,7 +306,7 @@ const JobOpportunity = () => {
                         CustomLink: (
                           <Link
                             to={'https://tyomarkkinatori.fi/henkiloasiakkaat'}
-                            className="inline-flex underline text-accent items-center"
+                            className="inline-flex items-center text-accent underline"
                             target="_blank"
                           />
                         ),
@@ -317,35 +317,35 @@ const JobOpportunity = () => {
               </div>
 
               {/* Left Column - Employed + Region */}
-              <div className="lg:col-span-1 space-y-8 w-full max-w-full">
+              <div className="w-full max-w-full space-y-8 lg:col-span-1">
                 {/* Employed amount */}
-                <div className="flex flex-col w-full">
+                <div className="flex w-full flex-col">
                   <p className="font-bold">{t('job-opportunity.employment-data.employed-title')}</p>
-                  <h3 className="sm:text-heading-1 text-heading-1-mobile mt-3 text-accent break-words">
+                  <h3 className="mt-3 text-heading-1-mobile break-words text-accent sm:text-heading-1">
                     {tyomahdollisuus?.ammattiryhma?.tyollisyysData?.tyollisetKokoMaa ?? NOT_AVAILABLE_LABEL}
                   </h3>
                 </div>
 
                 {/* Region */}
-                <div className="flex flex-col w-full">
+                <div className="flex w-full flex-col">
                   <p className="font-bold mb-3">{t('job-opportunity.employment-data.employed-by-region')}</p>
                   <Suomi data={maakunnat} />
                 </div>
               </div>
 
               {/* Right Column - Education data */}
-              <div className="lg:col-span-1 space-y-8 w-full max-w-full">
+              <div className="w-full max-w-full space-y-8 lg:col-span-1">
                 {/* Education field */}
-                <div className="flex flex-col w-full">
+                <div className="flex w-full flex-col">
                   <p className="font-bold mb-3">{t('job-opportunity.employment-data.employed-by-koulutusala')}</p>
-                  <div className="space-y-2 w-full">
+                  <div className="w-full space-y-2">
                     {koulutusalat
                       .slice()
                       .sort((a, b) => b.osuus - a.osuus)
                       .filter((ka) => ka.osuus > 0)
                       .map((ka) => (
-                        <div key={`${ka.title}-${ka.osuus}`} className="flex items-center py-2 w-full">
-                          <span className="text-heading-3 text-accent font-semibold min-w-[80px]">{ka.osuus}%</span>
+                        <div key={`${ka.title}-${ka.osuus}`} className="flex w-full items-center py-2">
+                          <span className="font-semibold min-w-[80px] text-heading-3 text-accent">{ka.osuus}%</span>
                           <span className="ml-3 flex-1 break-words">{ka.title}</span>
                         </div>
                       ))}
@@ -353,16 +353,16 @@ const JobOpportunity = () => {
                 </div>
 
                 {/* Education level */}
-                <div className="flex flex-col w-full">
+                <div className="flex w-full flex-col">
                   <p className="font-bold mb-3">{t('job-opportunity.employment-data.employed-by-koulutusaste')}</p>
-                  <div className="space-y-2 w-full">
+                  <div className="w-full space-y-2">
                     {koulutusasteet
                       .slice()
                       .sort((a, b) => b.osuus - a.osuus)
                       .filter((ka) => ka.osuus > 0)
                       .map((ka) => (
-                        <div key={`${ka.title}-${ka.osuus}`} className="flex items-center py-2 w-full">
-                          <span className="text-heading-3 text-accent font-semibold min-w-[80px]">{ka.osuus}%</span>
+                        <div key={`${ka.title}-${ka.osuus}`} className="flex w-full items-center py-2">
+                          <span className="font-semibold min-w-[80px] text-heading-3 text-accent">{ka.osuus}%</span>
                           <span className="ml-3 flex-1 break-words">{ka.title}</span>
                         </div>
                       ))}
@@ -380,9 +380,9 @@ const JobOpportunity = () => {
       navTitle: t('job-opportunity.job-advertisement-characteristics'),
       showNavTitle: false,
       content: (
-        <div className="flex flex-col w-full">
+        <div className="flex w-full flex-col">
           <div
-            className="bg-white p-6 flex flex-col gap-6 lg:mb-9 mb-7"
+            className="mb-7 flex flex-col gap-6 bg-white p-6 lg:mb-9"
             data-testid="job-opportunity-statistics-section"
           >
             <div className="flex items-center gap-4">
@@ -411,11 +411,11 @@ const JobOpportunity = () => {
       navTitle: t('job-opportunity.open-jobs'),
       showNavTitle: false,
       content: (
-        <div className="flex flex-col w-full mb-9" data-testid="job-opportunity-tmt-section">
-          <div className="bg-[#442496] h-9 flex items-center pl-4 mb-7">
+        <div className="mb-9 flex w-full flex-col" data-testid="job-opportunity-tmt-section">
+          <div className="mb-7 flex h-9 items-center bg-[#442496] pl-4">
             <img src={tmtLogo} alt={t('job-opportunity.tyomarkkinatori.banner-alt-text')} className="h-7" />
           </div>
-          <h3 className="text-heading-2 mb-4">{t('job-opportunity.tyomarkkinatori.title')}</h3>
+          <h3 className="mb-4 text-heading-2">{t('job-opportunity.tyomarkkinatori.title')}</h3>
           <p>{t('job-opportunity.tyomarkkinatori.description')}</p>
           <div className="mt-7">
             <Button

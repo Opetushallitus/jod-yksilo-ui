@@ -1,13 +1,16 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
+
+import { Button, EmptyState, Tag, useMediaQueries } from '@jod/design-system';
+
 import { MainLayout } from '@/components';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import EditMuuOsaaminenModal from '@/routes/Profile/SomethingElse/EditMuuOsaaminenModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
-import { Button, EmptyState, Tag, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 
@@ -55,11 +58,10 @@ const SomethingElse = () => {
         )}
 
         {muuOsaaminen.length > 0 && (
-          <h2 className="mb-5 text-heading-3-mobile sm:text-heading-3 border-b border-border-gray">
+          <h2 className="mb-5 border-b border-border-gray text-heading-3-mobile sm:text-heading-3">
             {t('profile.something-else.my-other-comptetences')}
           </h2>
         )}
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <ul ref={ref} className="flex flex-wrap gap-3" data-testid="something-else-tags" onKeyDown={handleKeyDown}>
           {sortedData.map((val) => (
             <li key={val.uri} className="max-w-full">
@@ -73,7 +75,7 @@ const SomethingElse = () => {
             </li>
           ))}
         </ul>
-        <div className="flex pt-7 mb-8">
+        <div className="mb-8 flex pt-7">
           <Button
             variant="accent"
             ariaHaspopup="dialog"

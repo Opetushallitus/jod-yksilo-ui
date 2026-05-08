@@ -1,6 +1,9 @@
-import { animateElementToTarget } from '@/utils/animations';
-import { useMediaQueries } from '@jod/design-system';
 import React from 'react';
+
+import { useMediaQueries } from '@jod/design-system';
+
+import { animateElementToTarget } from '@/utils/animations';
+
 import type { VirtualAssistantVariant } from '../virtualAssistantTypes';
 import { useVirtualAssistantConversation } from './useVirtualAssistantConversation';
 import { useVirtualAssistantSelection } from './useVirtualAssistantSelection';

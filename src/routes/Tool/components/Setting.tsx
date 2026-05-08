@@ -1,6 +1,8 @@
-import { hyphenize } from '@/utils';
-import { Accordion, cx, useMediaQueries } from '@jod/design-system';
 import React from 'react';
+
+import { Accordion, cx, useMediaQueries } from '@jod/design-system';
+
+import { hyphenize } from '@/utils';
 
 interface SettingProps {
   title: string;
@@ -49,7 +51,7 @@ export const Setting = ({
         triggerId={triggerId}
         ariaControls={contentId}
         title={
-          <div ref={ref} className="text-left cursor-pointer p-1 text-body-sm" aria-controls={id}>
+          <div ref={ref} className="cursor-pointer p-1 text-left text-body-sm" aria-controls={id}>
             {titleText}
           </div>
         }
@@ -59,7 +61,7 @@ export const Setting = ({
         setIsOpen={setIsOpen}
       >
         {
-          <section className="pl-1 pt-1 mt-3" id={contentId} aria-labelledby={triggerId}>
+          <section className="mt-3 pt-1 pl-1" id={contentId} aria-labelledby={triggerId}>
             {children}
           </section>
         }

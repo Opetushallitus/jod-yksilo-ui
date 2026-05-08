@@ -1,9 +1,12 @@
-import { MainLayout } from '@/components';
-import { IconHeading } from '@/components/IconHeading';
-import { useMediaQueries } from '@jod/design-system';
-import { JodSearch } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { useMediaQueries } from '@jod/design-system';
+import { JodSearch } from '@jod/design-system/icons';
+
+import { MainLayout } from '@/components';
+import { IconHeading } from '@/components/IconHeading';
+
 import { InfoCards } from './InfoCards';
 import { SearchResults } from './Results';
 import { SearchBar } from './Searchbar';
@@ -26,7 +29,7 @@ const Search = () => {
       <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
         <IconHeading icon={<JodSearch className="text-white" />} title={t('search.title')} testId="search-title" />
         <title>{t('search.title')}</title>
-        <p className="text-body-lg-mobile sm:text-body-lg mb-6 max-w-[700px]">{t('search.description')}</p>
+        <p className="mb-6 max-w-[700px] text-body-lg-mobile sm:text-body-lg">{t('search.description')}</p>
         <SearchBar scrollRef={scrollRef} />
         <SearchResults scrollRef={scrollRef} />
         {!sm && (

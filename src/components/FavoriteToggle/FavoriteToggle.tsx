@@ -1,9 +1,11 @@
+import { useTranslation } from 'react-i18next';
+
+import { JodFavorite, JodFavoriteFilled } from '@jod/design-system/icons';
+
 import type { components } from '@/api/schema';
 import { ActionButton } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
-import { JodFavorite, JodFavoriteFilled } from '@jod/design-system/icons';
-import { useTranslation } from 'react-i18next';
 
 interface FavoriteToggleProps {
   isFavorite?: boolean;

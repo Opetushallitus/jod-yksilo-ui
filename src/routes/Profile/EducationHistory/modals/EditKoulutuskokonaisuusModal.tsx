@@ -1,3 +1,12 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import React from 'react';
+import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { z } from 'zod';
+
+import { Button, InputField, Modal, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark } from '@jod/design-system/icons';
+
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { FormError } from '@/components';
@@ -6,13 +15,6 @@ import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, InputField, Modal, useMediaQueries } from '@jod/design-system';
-import { JodCheckmark } from '@jod/design-system/icons';
-import React from 'react';
-import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { z } from 'zod';
 
 interface EditKoulutuskokonaisuusModalProps extends ModalComponentProps {
   koulutuskokonaisuusId: string;
@@ -134,7 +136,7 @@ const EditKoulutuskokonaisuusModal = ({
       className="sm:h-full!"
       content={
         <FormProvider {...methods}>
-          <Form id={formId} onSubmit={onSubmit} className="max-w-modal-content box-content px-5 md:px-9">
+          <Form id={formId} onSubmit={onSubmit} className="box-content max-w-modal-content px-5 md:px-9">
             <InputField
               label={t('education-history.educational-institution-or-education-provider')}
               {...methods.register(`nimi.${language}` as const)}
@@ -148,7 +150,7 @@ const EditKoulutuskokonaisuusModal = ({
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between flex-1">
+        <div className="flex flex-1 flex-row justify-between">
           <div className="flex flex-row gap-3">
             <Button
               variant="white-delete"

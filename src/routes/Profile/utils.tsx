@@ -1,10 +1,12 @@
+import { JSX } from 'react';
+import { Link, type LinkProps } from 'react-router';
+
+import { cx } from '@jod/design-system';
+
 import type { components } from '@/api/schema';
 import i18n from '@/i18n/config';
 import type { CompetenceSourceType } from '@/routes/Profile/Competences/constants';
 import type { MahdollisuusTyyppi } from '@/routes/types';
-import { cx } from '@jod/design-system';
-import { JSX } from 'react';
-import { Link, type LinkProps } from 'react-router';
 
 export type ProfileLink =
   | {

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+
 import { competences, suggestedCompetences, workHistory, workHistoryItem } from './fixtures';
 import {
   mockAuthenticatedUser,

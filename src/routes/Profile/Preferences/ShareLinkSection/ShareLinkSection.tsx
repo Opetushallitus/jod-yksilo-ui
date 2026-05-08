@@ -1,14 +1,17 @@
+import React from 'react';
+import toast from 'react-hot-toast/headless';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
+
+import { Accordion, Button, EmptyState, useMediaQueries } from '@jod/design-system';
+import { JodOpenInNew } from '@jod/design-system/icons';
+
 import { client } from '@/api/client';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { formatDate } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
-import { Accordion, Button, EmptyState, useMediaQueries } from '@jod/design-system';
-import { JodOpenInNew } from '@jod/design-system/icons';
-import React from 'react';
-import toast from 'react-hot-toast/headless';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+
 import type { PreferencesLoaderData } from '../loader';
 import { NewShareLinkModal } from './NewShareLinkModal';
 
@@ -62,8 +65,8 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
 
   return (
     <section className={className} data-testid="share-link-section">
-      <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.share.title')}</h2>
-      <p className="font-arial text-body-md mb-5 whitespace-pre-wrap">{t('preferences.share.description')}</p>
+      <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2">{t('preferences.share.title')}</h2>
+      <p className="mb-5 font-arial text-body-md whitespace-pre-wrap">{t('preferences.share.description')}</p>
       <div className="my-8">
         {jakolinkitState.length === 0 ? (
           <EmptyState text={t('preferences.share.no-links')} />
@@ -93,7 +96,6 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                       await navigator.clipboard.writeText(url.href);
                       toast.success(t('preferences.share.copy-success'));
                     } catch (err) {
-                      // eslint-disable-next-line no-console
                       console.error('Failed to copy to clipboard: ', err);
                       toast.error(t('preferences.share.copy-failure'));
                     }
@@ -125,7 +127,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
               );
 
               return (
-                <li key={linkki.id} className={`border-l-2 border-border-gray pl-4 py-3 ${sm ? '' : '-ml-3'}`}>
+                <li key={linkki.id} className={`border-l-2 border-border-gray py-3 pl-4 ${sm ? '' : '-ml-3'}`}>
                   <Accordion
                     title={linkki.nimi || url.href}
                     isOpen={!closedAccordions.has(linkki.id!)}
@@ -137,9 +139,9 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                       </div>
                     }
                   >
-                    <div className="text-secondary-gray text-body-sm -mt-2 font-arial">{url.href}</div>
+                    <div className="-mt-2 font-arial text-body-sm text-secondary-gray">{url.href}</div>
 
-                    <div className="flex flex-col gap-4 mt-4">
+                    <div className="mt-4 flex flex-col gap-4">
                       {linkki.muistiinpano && <div className="font-arial">{linkki.muistiinpano}</div>}
                       {expirationText}
 

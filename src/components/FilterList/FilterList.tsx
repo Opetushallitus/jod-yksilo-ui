@@ -18,7 +18,7 @@ export const FilterList = ({
   const TitleTag = headingLevel ?? 'h2';
   const id = title.toLocaleLowerCase().replace(/\s+/g, '-');
   return (
-    <div className={`rounded-md ${className} py-6 px-[20px]`.trim()}>
+    <div className={`rounded-md ${className} px-[20px] py-6`.trim()}>
       {collapsible ? (
         <Accordion
           ariaLabel={title}
@@ -34,7 +34,7 @@ export const FilterList = ({
         </Accordion>
       ) : (
         <>
-          <TitleTag className="hyphens-auto text-body-sm-mobile">{title}</TitleTag>
+          <TitleTag className="text-body-sm-mobile hyphens-auto">{title}</TitleTag>
           {children}
         </>
       )}

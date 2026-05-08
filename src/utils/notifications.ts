@@ -22,7 +22,6 @@ export const loadNotifications = async () => {
   } catch (error) {
     // It's safe to ignore this error.
     // If notification loading fails, the app will continue to work with no notifications.
-    /* eslint-disable-next-line no-console */
     console.warn('Failed to load notifications, using defaults', error);
   }
 };

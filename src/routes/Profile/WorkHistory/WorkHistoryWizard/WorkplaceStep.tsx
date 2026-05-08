@@ -1,11 +1,14 @@
+import React from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
+import { Datepicker, InputField, Textarea } from '@jod/design-system';
+
 import { FormError, TouchedFormError } from '@/components';
 import { LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { isFeatureEnabled } from '@/utils/features';
-import { Datepicker, InputField, Textarea } from '@jod/design-system';
-import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+
 import { WorkHistoryForm } from './utils';
 
 interface WorkplaceStepProps {
@@ -26,12 +29,12 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
   const loppuPvm = watch(`toimenkuvat.${toimenkuva}.loppuPvm`);
   React.useEffect(() => {
     if (alkuPvm || loppuPvm) {
-      trigger();
+      void trigger();
     }
   }, [alkuPvm, loppuPvm, trigger]);
 
   return (
-    <div className="max-w-modal-content box-content px-5 md:px-9">
+    <div className="box-content max-w-modal-content px-5 md:px-9">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.work-history.modals.description')}
       </p>
@@ -68,7 +71,7 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
                 {...field}
                 onBlur={() => {
                   onBlur();
-                  trigger(`toimenkuvat.${toimenkuva}.loppuPvm`);
+                  void trigger(`toimenkuvat.${toimenkuva}.loppuPvm`);
                 }}
                 placeholder={t('date-placeholder')}
                 requiredText={t('common:required')}

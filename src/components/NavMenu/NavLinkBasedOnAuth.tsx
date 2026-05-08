@@ -1,7 +1,8 @@
-import { useIsSessionExpired } from '@/stores/useSessionManagerStore';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, NavLinkProps } from 'react-router';
+
+import { useIsSessionExpired } from '@/stores/useSessionManagerStore';
 
 interface NavLinkBasedOnAuthProps extends NavLinkProps {
   shouldLogin: boolean;

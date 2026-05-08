@@ -1,11 +1,12 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import type { LanguageValue } from '@/i18n/config';
 import type { GenderValue } from '@/routes/Profile/utils';
 import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { getCodesetValue } from '@/utils/codes/codes';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 export interface YksiloData {
   tervetuloapolku: boolean;
@@ -55,7 +56,7 @@ export const useYksiloData = () => {
 
   React.useEffect(() => {
     if (isLoggedIn) {
-      fetchApiData();
+      void fetchApiData();
     }
   }, [fetchApiData, isLoggedIn]);
 

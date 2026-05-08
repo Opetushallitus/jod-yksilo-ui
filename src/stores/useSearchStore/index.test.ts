@@ -1,5 +1,7 @@
-import { client } from '@/api/client';
 import { beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
+
+import { client } from '@/api/client';
+
 import { useSearchStore } from '.';
 
 const mocks = vi.hoisted(() => ({

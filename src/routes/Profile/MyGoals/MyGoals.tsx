@@ -1,14 +1,17 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
+
+import { Button, EmptyState, tidyClasses, useMediaQueries } from '@jod/design-system';
+import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
+
 import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLinkTo } from '@/utils/routeUtils';
-import { Button, EmptyState, tidyClasses, useMediaQueries } from '@jod/design-system';
-import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import GoalModal from './addGoal/GoalModal';
@@ -19,7 +22,7 @@ const GuidanceCard = ({ testId, className = '' }: { testId: string; className?: 
 
   return (
     <div
-      className={tidyClasses(`flex flex-col bg-secondary-1-dark-2 rounded-lg p-6 gap-3 text-white ${className}`)}
+      className={tidyClasses(`flex flex-col gap-3 rounded-lg bg-secondary-1-dark-2 p-6 text-white ${className}`)}
       data-testid={testId}
     >
       <h2 className="text-heading-2">{t('home.need-personal-guidance')}</h2>
@@ -69,7 +72,7 @@ const MyGoals = () => {
         variant: 'normal',
         confirmButtonIcon: <JodArrowRight />,
         onConfirm: () => {
-          navigate(`/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.favorites')}`);
+          void navigate(`/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.favorites')}`);
           setSuosikitDialogShown(true);
         },
         onCancel: () => {
@@ -102,7 +105,7 @@ const MyGoals = () => {
       <title>{title}</title>
       <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
         <ProfileSectionTitle type="TAVOITTEENI" title={title} />
-        <div className="sm:text-body-lg text-body-lg-mobile mb-7">
+        <div className="mb-7 text-body-lg-mobile sm:text-body-lg">
           <p>{t('profile.my-goals.description')}</p>
         </div>
       </div>
@@ -124,10 +127,10 @@ const MyGoals = () => {
         label={t('profile.my-goals.add-favorites-to-goals')}
         disabled={suosikitIsEmpty}
         testId="goals-add-favorites-button"
-        className="ml-5 sm:ml-6 mt-7 sm:mt-9"
+        className="mt-7 ml-5 sm:mt-9 sm:ml-6"
       />
       {lg ? null : (
-        <div className="flex flex-col gap-4 mt-6 px-5 sm:px-6">
+        <div className="mt-6 flex flex-col gap-4 px-5 sm:px-6">
           <ToolCard
             testId="goals-go-to-tool"
             title={t('profile.my-goals.favorites-card.title')}

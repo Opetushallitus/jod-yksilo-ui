@@ -1,13 +1,16 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router';
+import { useShallow } from 'zustand/shallow';
+
+import { Checkbox, useMediaQueries } from '@jod/design-system';
+
 import { FilterKesto } from '@/routes/Tool/components/filters/FilterKesto.tsx';
 import { FilterToimiala } from '@/routes/Tool/components/filters/FilterToimiala.tsx';
 import type { MahdollisuusTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
 import { getFilterCount } from '@/utils/FilterUtils';
-import { Checkbox, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'react-router';
-import { useShallow } from 'zustand/shallow';
+
 import { filterValues, type OpportunityFilterValue } from '../../utils';
 import { Setting } from '../Setting';
 import { FilterAmmattiryhma } from './FilterAmmattiryhma';
@@ -50,7 +53,7 @@ export const FilterOpportunityType = () => {
       url.search = ''; // Clear search parameters
       globalThis.history.replaceState({}, '', url.toString());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, []);
 
   const getCheckboxLabel = (type: MahdollisuusTyyppi) =>
@@ -63,7 +66,7 @@ export const FilterOpportunityType = () => {
 
   return (
     <fieldset className="flex flex-col gap-5">
-      <legend className="text-heading-4-mobile sm:text-heading-4 mb-5 sr-only">{t('show')}</legend>
+      <legend className="sr-only mb-5 text-heading-4-mobile sm:text-heading-4">{t('show')}</legend>
       <Checkbox
         ariaLabel={getCheckboxLabel('KOULUTUSMAHDOLLISUUS')}
         className="font-poppins!"
@@ -75,7 +78,7 @@ export const FilterOpportunityType = () => {
         testId="filter-education-opportunities"
       />
 
-      <ul className="flex flex-col gap-3 ml-5">
+      <ul className="ml-5 flex flex-col gap-3">
         <Setting
           id="education-opportunity-type"
           title={t('tool.settings.general.education-opportunity-type')}
@@ -116,7 +119,7 @@ export const FilterOpportunityType = () => {
         data-testid="filter-job-opportunities"
       />
 
-      <ul className="flex flex-col gap-3 ml-5">
+      <ul className="ml-5 flex flex-col gap-3">
         <Setting
           id="job-opportunity-type"
           title={t('tool.settings.general.job-opportunity-type')}

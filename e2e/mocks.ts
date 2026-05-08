@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+
 import type { components } from '../src/api/schema';
 import { featureFlags, userProfile } from './fixtures';
 

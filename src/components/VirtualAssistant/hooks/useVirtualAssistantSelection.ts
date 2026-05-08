@@ -1,7 +1,8 @@
+import React from 'react';
+
 import { type OsaaminenDto } from '@/api/osaamiset';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { animateHideElement } from '@/utils/animations';
-import React from 'react';
 
 export const useVirtualAssistantSelection = (reduceMotion: boolean) => {
   const [selected, setSelected] = React.useState<OsaaminenDto[]>([]);

@@ -1,8 +1,10 @@
-import { osaamiset } from '@/api/osaamiset';
-import { ExperienceTable, type ExperienceTableRowData } from '@/components';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+
+import { osaamiset } from '@/api/osaamiset';
+import { ExperienceTable, type ExperienceTableRowData } from '@/components';
+
 import { Toimenkuva, getWorkHistoryTableRows } from '../utils';
 import { type WorkHistoryForm } from './utils';
 
@@ -15,7 +17,6 @@ const SummaryStep = () => {
     const fetchRows = async () => {
       const tyopaikka = watch();
 
-      // eslint-disable-next-line sonarjs/no-nested-functions
       const uris = tyopaikka.toimenkuvat.flatMap((toimenkuva) => toimenkuva.osaamiset.map((osaaminen) => osaaminen.id));
       const osaamisetData = await osaamiset.find(uris);
       const osaamisetMap: Record<string, { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> }> =
@@ -38,7 +39,6 @@ const SummaryStep = () => {
                     nimi: toimenkuva.nimi,
                     alkuPvm: toimenkuva.alkuPvm,
                     loppuPvm: toimenkuva.loppuPvm,
-                    // eslint-disable-next-line sonarjs/no-nested-functions
                     osaamiset: toimenkuva.osaamiset.map((osaaminen) => osaaminen.id),
                   }) as Toimenkuva,
               ),
@@ -54,10 +54,10 @@ const SummaryStep = () => {
 
   return (
     <div>
-      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md max-w-modal-content box-content px-5 md:px-9">
+      <p className="mb-6 box-content max-w-modal-content px-5 font-arial text-body-md-mobile sm:text-body-md md:px-9">
         {t('profile.work-history.modals.summary-description')}
       </p>
-      <div data-testid="work-history-summary-table" className="max-w-modal-content box-content md:px-6">
+      <div data-testid="work-history-summary-table" className="box-content max-w-modal-content md:px-6">
         <ExperienceTable
           insideModal
           ariaLabel={t('profile.work-history.title')}

@@ -1,12 +1,15 @@
-import type { components } from '@/api/schema';
-import { NOT_AVAILABLE_LABEL } from '@/constants';
-import { JodInfo } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { JodInfo } from '@jod/design-system/icons';
+
+import type { components } from '@/api/schema';
+import { NOT_AVAILABLE_LABEL } from '@/constants';
+
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
-import { OpportunityCardWrapper, type OpportunityCardProps } from './OpportunityCard';
 import { OpportunityDetail } from './components/OpportunityDetail';
 import { OpportunityDetailsWrapper } from './components/OpportunityDetailsWrapper';
+import { OpportunityCardWrapper, type OpportunityCardProps } from './OpportunityCard';
 
 type EducationOpportunityCardProps = {
   kesto?: components['schemas']['KoulutusmahdollisuusFullDto']['kesto'];
@@ -16,7 +19,6 @@ type EducationOpportunityCardProps = {
 export const EducationOpportunityCard = ({ kesto, yleisinKoulutusala, ...rest }: EducationOpportunityCardProps) => {
   const { t } = useTranslation();
 
-  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const duration = React.useMemo(() => {
     if (!kesto?.mediaani || kesto.mediaani === 0) {
       return NOT_AVAILABLE_LABEL;
@@ -37,7 +39,7 @@ export const EducationOpportunityCard = ({ kesto, yleisinKoulutusala, ...rest }:
             <TooltipWrapper
               tooltipPlacement="top"
               tooltipContent={
-                <div className="text-body-xs max-w-[290px] leading-5">
+                <div className="max-w-[290px] text-body-xs leading-5">
                   {t('tool.education-opportunity-duration-tooltip')}
                 </div>
               }
@@ -53,7 +55,7 @@ export const EducationOpportunityCard = ({ kesto, yleisinKoulutusala, ...rest }:
             <TooltipWrapper
               tooltipPlacement="top"
               tooltipContent={
-                <div className="text-body-xs max-w-[290px] leading-5">
+                <div className="max-w-[290px] text-body-xs leading-5">
                   {t('tool.education-opportunity-koulutusala-tooltip')}
                 </div>
               }

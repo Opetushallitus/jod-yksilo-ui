@@ -1,13 +1,16 @@
+import { Trans, useTranslation } from 'react-i18next';
+
+import { useMediaQueries } from '@jod/design-system';
+import { JodUser } from '@jod/design-system/icons';
+
 import { ExternalLink, MainLayout } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
-import { useMediaQueries } from '@jod/design-system';
-import { JodUser } from '@jod/design-system/icons';
-import { Trans, useTranslation } from 'react-i18next';
+
 import { ProfileNavigationList } from '../components';
 import { ToolCard } from '../components/ToolCard';
 
-const ListItem = ({ label }: { label: string }) => <li className="list-disc ml-6 ">{label}</li>;
+const ListItem = ({ label }: { label: string }) => <li className="ml-6 list-disc">{label}</li>;
 
 const ProfileFront = () => {
   const {
@@ -39,8 +42,8 @@ const ProfileFront = () => {
           testId="profile-front-title"
         />
 
-        <div className="mb-8 text-body-md flex flex-col gap-6 font-arial">
-          <p className="text-body-lg-mobile sm:text-body-lg font-poppins mb-3">
+        <div className="mb-8 flex flex-col gap-6 font-arial text-body-md">
+          <p className="mb-3 font-poppins text-body-lg-mobile sm:text-body-lg">
             {t('profile.preferences.ingress-text')}
           </p>
           <div>

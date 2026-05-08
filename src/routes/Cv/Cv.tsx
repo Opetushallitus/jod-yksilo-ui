@@ -1,14 +1,17 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
+
+import { Accordion, Button, type MenuSection, PageNavigation, Tag, useMediaQueries } from '@jod/design-system';
+import { JodArrowRight, JodInfo, JodPrint, JodUser } from '@jod/design-system/icons';
+
 import { ActionButton, ExperienceTable, MainLayout, OpportunityCard } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { getLocalizedText, hyphenize } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
-import { Accordion, Button, type MenuSection, PageNavigation, Tag, useMediaQueries } from '@jod/design-system';
-import { JodArrowRight, JodInfo, JodPrint, JodUser } from '@jod/design-system/icons';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+
 import { getTypeSlug } from '../Profile/utils';
 import { getMahdollisuusAlityyppi } from '../Tool/utils';
 import type { TypedMahdollisuus } from '../types';
@@ -18,7 +21,7 @@ import type { CvLoaderData } from './loader';
 const BasicInfoDetail = ({ data, title }: { data?: string | number; title: string }) =>
   data ? (
     <div className="flex flex-wrap">
-      <dt className="after:content-[':'] after:mr-2">{title}</dt>
+      <dt className="after:mr-2 after:content-[':']">{title}</dt>
       <dd className="text-secondary-1-dark-2">{`${data}`}</dd>
     </div>
   ) : null;
@@ -124,8 +127,8 @@ const Cv = () => {
     />
   );
   const osaamispolkuBox = (
-    <div className="flex flex-col rounded-lg p-6 gap-5 bg-secondary-1-dark-2 print:hidden mx-5 sm:mx-6 lg:mx-0">
-      <div className="text-heading-2 text-white mr-2">{t('common:osaamispolku')}</div>
+    <div className="mx-5 flex flex-col gap-5 rounded-lg bg-secondary-1-dark-2 p-6 sm:mx-6 lg:mx-0 print:hidden">
+      <div className="mr-2 text-heading-2 text-white">{t('common:osaamispolku')}</div>
       <p className="text-body-lg text-white">{t('cv.osaamispolku-description')}</p>
       <div className="mt-4">
         <Button
@@ -195,13 +198,13 @@ const Cv = () => {
             id={getCvSectionAnchorId(t('cv.basic-info.title'))}
             title={t('cv.basic-info.title')}
             heading="h2"
-            className="text-transparent text-[0px] size-0"
+            className="size-0 text-[0px] text-transparent"
           />
-          <div className="bg-bg-gray-2 p-5 rounded-md flex flex-row mb-6">
+          <div className="mb-6 flex flex-row rounded-md bg-bg-gray-2 p-5">
             <div className="shrink items-start pr-5">
               <JodInfo className="text-secondary-1-dark-2" />
             </div>
-            <dl className="flex flex-col sm:text-heading-4 text-heading-4-mobile flex-wrap">
+            <dl className="flex flex-col flex-wrap text-heading-4-mobile sm:text-heading-4">
               <BasicInfoDetail data={personName} title={t('cv.basic-info.person')} />
               <BasicInfoDetail data={data?.syntymavuosi} title={t('cv.basic-info.birthyear')} />
               <BasicInfoDetail data={data?.email} title={t('cv.basic-info.email')} />
@@ -213,23 +216,23 @@ const Cv = () => {
 
       {/* Ingress */}
       {lg && (
-        <div className="sm:text-body-lg text-body-lg-mobile mb-6 pl-6">{t('cv.ingress', { date: voimassaAsti })}</div>
+        <div className="mb-6 pl-6 text-body-lg-mobile sm:text-body-lg">{t('cv.ingress', { date: voimassaAsti })}</div>
       )}
 
       {/* Action bar */}
-      {lg && !!globalThis.print && <div className="flex justify-end items-center mb-8 print:hidden">{printButton}</div>}
+      {lg && !!globalThis.print && <div className="mb-8 flex items-center justify-end print:hidden">{printButton}</div>}
 
       {/* Osaaminen */}
       {hasAnyOsaaminen && (
         <ContentSection title={t('cv.competence.title')}>
-          <div className="mb-6 sm:text-body-md text-body-md-mobile font-arial px-5 sm:px-6 lg:pr-0 lg:pl-6">
+          <div className="mb-6 px-5 font-arial text-body-md-mobile sm:px-6 sm:text-body-md lg:pr-0 lg:pl-6">
             {t('cv.competence.description')}
           </div>
 
           {/* Työpaikat */}
           {data?.tyopaikat && data.tyopaikat.length > 0 && (
             <div className="mb-8 break-after-page">
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5 px-5 sm:px-6 lg:pr-0 lg:pl-6">
+              <h3 className="mb-5 px-5 text-heading-3-mobile sm:px-6 sm:text-heading-3 lg:pr-0 lg:pl-6">
                 {t('cv.competence.work')}
               </h3>
               <div>
@@ -246,7 +249,7 @@ const Cv = () => {
           {/* Koulutukset */}
           {data?.koulutusKokonaisuudet && data.koulutusKokonaisuudet.length > 0 && (
             <div className="mb-8 break-after-page">
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5 px-5 sm:px-6 lg:pr-0 lg:pl-6">
+              <h3 className="mb-5 px-5 text-heading-3-mobile sm:px-6 sm:text-heading-3 lg:pr-0 lg:pl-6">
                 {t('cv.competence.education')}
               </h3>
               <div>
@@ -263,7 +266,7 @@ const Cv = () => {
           {/* Vapaa-ajan toiminnot */}
           {data?.toiminnot && data.toiminnot.length > 0 && (
             <div className="mb-8 break-after-page">
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5 px-5 sm:px-6 lg:pr-0 lg:pl-6">
+              <h3 className="mb-5 px-5 text-heading-3-mobile sm:px-6 sm:text-heading-3 lg:pr-0 lg:pl-6">
                 {t('cv.competence.activities')}
               </h3>
               <div>
@@ -281,10 +284,9 @@ const Cv = () => {
           {((Array.isArray(data?.muuOsaaminen?.muuOsaaminen) && data?.muuOsaaminen?.muuOsaaminen.length > 0) ||
             data?.muuOsaaminen?.vapaateksti) && (
             <div className="break-after-page px-5 sm:px-6 lg:pr-0 lg:pl-6">
-              <h3 className="text-heading-2 mb-5">{t('cv.competence.something-else')}</h3>
-              <div className="border-b-2 border-border-gray pb-3 mb-5">{t('cv.competence.title')}</div>
+              <h3 className="mb-5 text-heading-2">{t('cv.competence.something-else')}</h3>
+              <div className="mb-5 border-b-2 border-border-gray pb-3">{t('cv.competence.title')}</div>
               <div className="mb-8">
-                {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
                 <ul className="flex flex-row flex-wrap gap-3" ref={muuOsaaminenRef} onKeyDown={onMuuOsaaminenKeyDown}>
                   {muuOsaaminen.map((osaaminen) => (
                     <li key={osaaminen.uri} className="max-w-full">
@@ -296,10 +298,10 @@ const Cv = () => {
 
               {getLocalizedText(muuOsaaminenVapaateksti) && (
                 <div className="mb-8">
-                  <h4 className="sm:text-heading-3 text-heading-3-mobile mb-4">
+                  <h4 className="mb-4 text-heading-3-mobile sm:text-heading-3">
                     {t('cv.competence.something-else-freetext')}
                   </h4>
-                  <p className="sm:text-body-md text-body-md-mobile font-arial">
+                  <p className="font-arial text-body-md-mobile sm:text-body-md">
                     {getLocalizedText(muuOsaaminenVapaateksti)}
                   </p>
                 </div>
@@ -313,13 +315,12 @@ const Cv = () => {
       {hasAnyKiinnostukset && (
         <ContentSection title={t('cv.interests.title')} isPrinting={isPrinting} className="break-before-page">
           <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
-            <p className="mb-8 sm:text-body-md text-body-md-mobile font-arial">{t('cv.interests.description')}</p>
+            <p className="mb-8 font-arial text-body-md-mobile sm:text-body-md">{t('cv.interests.description')}</p>
 
             {kiinnostavatOsaamiset && kiinnostavatOsaamiset.length > 0 && (
               <>
-                <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.interests.competences')}</h3>
+                <h3 className="mb-5 text-heading-3-mobile sm:text-heading-3">{t('cv.interests.competences')}</h3>
                 <div className="mb-8">
-                  {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
                   <ul
                     className="flex flex-row flex-wrap gap-3"
                     ref={kiinnostavatOsaamisetRef}
@@ -337,9 +338,8 @@ const Cv = () => {
 
             {kiinnostavatAmmatit && kiinnostavatAmmatit.length > 0 && (
               <>
-                <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5">{t('cv.interests.occupations')}</h3>
+                <h3 className="mb-5 text-heading-3-mobile sm:text-heading-3">{t('cv.interests.occupations')}</h3>
                 <div className="mb-8">
-                  {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
                   <ul
                     className="flex flex-row flex-wrap gap-3"
                     ref={kiinnostavatAmmatitRef}
@@ -357,8 +357,8 @@ const Cv = () => {
 
             {getLocalizedText(kiinnostuksetVapaateksti) && (
               <div>
-                <h4 className="sm:text-heading-3 text-heading-3-mobile mb-4">{t('cv.interests.freetext')}</h4>
-                <p className="sm:text-body-md text-body-md-mobile font-arial">
+                <h4 className="mb-4 text-heading-3-mobile sm:text-heading-3">{t('cv.interests.freetext')}</h4>
+                <p className="font-arial text-body-md-mobile sm:text-body-md">
                   {getLocalizedText(kiinnostuksetVapaateksti)}
                 </p>
               </div>
@@ -374,16 +374,16 @@ const Cv = () => {
 
           {tyopaikkaSuosikit && tyopaikkaSuosikit.length > 0 && (
             <>
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5 px-5 sm:px-6 lg:pr-0 lg:pl-6">
+              <h3 className="mb-5 px-5 text-heading-3-mobile sm:px-6 sm:text-heading-3 lg:pr-0 lg:pl-6">
                 {t('cv.favorites.job-opportunities')}
               </h3>
-              <div className="flex flex-col gap-4 mb-8 lg:pl-6">{tyopaikkaSuosikit.map(renderOpportunityCard)}</div>
+              <div className="mb-8 flex flex-col gap-4 lg:pl-6">{tyopaikkaSuosikit.map(renderOpportunityCard)}</div>
             </>
           )}
 
           {koulutusSuosikit && koulutusSuosikit.length > 0 && (
             <>
-              <h3 className="sm:text-heading-3 text-heading-3-mobile mb-5 px-5 sm:px-6 lg:pr-0 lg:pl-6">
+              <h3 className="mb-5 px-5 text-heading-3-mobile sm:px-6 sm:text-heading-3 lg:pr-0 lg:pl-6">
                 {t('cv.favorites.education-opportunities')}
               </h3>
               <div className="flex flex-col gap-4 lg:pl-6">{koulutusSuosikit.map(renderOpportunityCard)}</div>
@@ -398,7 +398,7 @@ const Cv = () => {
             {tavoitteet.map((tavoite) => {
               const mahdollisuus = tavoitteet.find((tm) => tm.id === tavoite.id)?.tavoiteDetails;
               const summary = (
-                <div className="font-arial text-body-md text-primary-gray mb-5">{getLocalizedText(tavoite.kuvaus)}</div>
+                <div className="mb-5 font-arial text-body-md text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</div>
               );
               return (
                 <React.Fragment key={tavoite.id}>
@@ -416,14 +416,14 @@ const Cv = () => {
 
                       {tavoite.suunnitelmat && tavoite.suunnitelmat.length > 0 && (
                         <div className="mt-8">
-                          <h2 className="sm:text-heading-2 text-heading-2-mobile mb-4">{t('cv.goals.options')}</h2>
+                          <h2 className="mb-4 text-heading-2-mobile sm:text-heading-2">{t('cv.goals.options')}</h2>
                           {tavoite.suunnitelmat?.map((s, index) => (
                             <div
                               key={s.id}
-                              className="sm:text-heading-4-lg text-heading-4-mobile not-last:border-b-2 not-last:border-border-gray py-4"
+                              className="sm:text-heading-4-lg py-4 text-heading-4-mobile not-last:border-b-2 not-last:border-border-gray"
                             >
                               <div className="flex items-center">
-                                <span className="text-primary-gray after:content-[':'] after:mr-2">
+                                <span className="text-primary-gray after:mr-2 after:content-[':']">
                                   {alphabet[index % alphabet.length]}
                                 </span>
                                 <span className="text-primary-gray">{getLocalizedText(s.nimi)}</span>

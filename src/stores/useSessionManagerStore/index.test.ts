@@ -11,6 +11,7 @@ vi.mock('@/auth/welcomePathGate', () => ({
 
 import { registerCsrfMiddleware, unregisterCsrfMiddleware } from '@/api/middlewares/csrf';
 import { resetWelcomePathGate } from '@/auth/welcomePathGate';
+
 import { isSessionExpiredState, isSessionValidState, storeHasActiveYksiloSession, useSessionManagerStore } from '.';
 
 const CSRF_TOKEN = { token: 'test-token', headerName: 'X-CSRF', parameterName: '_csrf' };
@@ -140,7 +141,7 @@ describe('useSessionManagerStore', () => {
       const originalStartTime = getState().sessionStartTime;
       vi.advanceTimersByTime(5000);
 
-      getState().extendSession();
+      void getState().extendSession();
 
       expect(getState().sessionStartTime).toBeGreaterThan(originalStartTime!);
       expect(getState().status).toBe('authenticated');
@@ -151,7 +152,7 @@ describe('useSessionManagerStore', () => {
       const onExtended = vi.fn();
       getState().setOnSessionExtended(onExtended);
 
-      getState().extendSession();
+      void getState().extendSession();
 
       expect(onExtended).toHaveBeenCalledOnce();
     });
@@ -262,7 +263,7 @@ describe('useSessionManagerStore', () => {
       vi.advanceTimersByTime(25 * 60 * 1000);
       expect(getState().status).toBe('warning');
 
-      getState().extendSession();
+      void getState().extendSession();
 
       vi.advanceTimersByTime(1000);
       expect(getState().status).toBe('authenticated');

@@ -23,7 +23,7 @@ export const VirtualAssistantModalContent = ({
   tabs,
 }: VirtualAssistantModalContentProps) => {
   return (
-    <div className="flex flex-col h-full min-h-[45dvh] mb-4 px-5 md:px-9">
+    <div className="mb-4 flex h-full min-h-[45dvh] flex-col px-5 md:px-9">
       <VirtualAssistantTabs type={type} selection={selection} tabs={tabs} />
       <ConversationTabPanel type={type} chat={chat} selection={selection} tabs={tabs} />
       <SelectedTabPanel type={type} selection={selection} tabs={tabs} />

@@ -2,6 +2,7 @@ import { renderHook } from '@testing-library/react';
 import { useTranslation } from 'react-i18next';
 import { useMatches, useParams } from 'react-router';
 import { Mock, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { useLocalizedRoutes } from './useLocalizedRoutes';
 
 // Mock the necessary hooks

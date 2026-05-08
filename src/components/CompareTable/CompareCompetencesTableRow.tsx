@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
+
 import { components } from '@/api/schema';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { getLocalizedText } from '@/utils';
-import { useTranslation } from 'react-i18next';
+
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
 export interface CompareCompetencesTableRowData {
@@ -39,14 +41,14 @@ export const CompareCompetencesTableRow = ({ row, className }: CompareCompetence
   const { t } = useTranslation();
   return (
     <tr className={className}>
-      <td className="w-full pl-5 pr-7 py-3 text-heading-5 hyphens-auto first-letter:uppercase">
+      <td className="w-full py-3 pr-7 pl-5 text-heading-5 hyphens-auto first-letter:uppercase">
         <WrapWithTooltipIfDev tooltipContent={row.esiintyvyys}>{getLocalizedText(row.nimi)}</WrapWithTooltipIfDev>
       </td>
 
       <td className="justify-items-center pr-5">
         {row.profiili && (
           <>
-            <div role="img" aria-label={t('found')} className="size-4 bg-secondary-1 rounded-full" />
+            <div role="img" aria-label={t('found')} className="size-4 rounded-full bg-secondary-1" />
             <div aria-hidden className="hidden print:block">
               {t('found')}
             </div>

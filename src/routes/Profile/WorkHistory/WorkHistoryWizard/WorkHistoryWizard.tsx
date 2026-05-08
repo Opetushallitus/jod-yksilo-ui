@@ -1,20 +1,23 @@
-import { client } from '@/api/client';
-import { ModalHeader } from '@/components/ModalHeader';
-import { formErrorMessage, LIMITS } from '@/constants';
-import { useEscHandler } from '@/hooks/useEscHandler';
-import { ModalComponentProps } from '@/hooks/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useFieldArray, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useRevalidator } from 'react-router';
 import { z } from 'zod';
+
+import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
+
+import { client } from '@/api/client';
+import { ModalHeader } from '@/components/ModalHeader';
+import { formErrorMessage, LIMITS } from '@/constants';
+import { useEscHandler } from '@/hooks/useEscHandler';
+import { ModalComponentProps } from '@/hooks/useModal';
+
 import CompetencesStep from './CompetencesStep';
 import SummaryStep from './SummaryStep';
-import WorkplaceStep from './WorkplaceStep';
 import type { WorkHistoryForm } from './utils';
+import WorkplaceStep from './WorkplaceStep';
 
 const WorkHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
   const { t } = useTranslation();
@@ -205,7 +208,7 @@ const WorkHistoryWizard = ({ onClose, ...rest }: ModalComponentProps) => {
 
   const footer = React.useMemo(
     () => (
-      <div className="flex justify-between gap-3 flex-1" data-testid="work-history-wizard-footer">
+      <div className="flex flex-1 justify-between gap-3" data-testid="work-history-wizard-footer">
         <div className="flex gap-3">
           {step === steps && (
             <Button

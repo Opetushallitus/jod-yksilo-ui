@@ -1,4 +1,5 @@
 import { ESCO_OCCUPATION_PREFIX } from '@/constants';
+
 import { client } from './client';
 import { combinerImpl } from './combinerImpl';
 import { components } from './schema';

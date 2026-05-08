@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom/vitest';
-
 import { vi } from 'vitest';
 
 // jsdom does not implement Element#scrollTo; components that call it need a noop/stub.

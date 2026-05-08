@@ -1,3 +1,11 @@
+import React from 'react';
+import toast from 'react-hot-toast/headless';
+import { Trans, useTranslation } from 'react-i18next';
+import { Link, useLoaderData, useRevalidator, useSearchParams } from 'react-router';
+
+import { Button, EmptyState, useMediaQueries, useNoteStack } from '@jod/design-system';
+import { JodError, JodOpenInNew } from '@jod/design-system/icons';
+
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useEnvironment } from '@/hooks/useEnvironment/index';
@@ -7,12 +15,7 @@ import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/Educat
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal';
 import { LogoutFormContext } from '@/routes/Root';
-import { Button, EmptyState, useMediaQueries, useNoteStack } from '@jod/design-system';
-import { JodError, JodOpenInNew } from '@jod/design-system/icons';
-import React from 'react';
-import toast from 'react-hot-toast/headless';
-import { Trans, useTranslation } from 'react-i18next';
-import { Link, useLoaderData, useRevalidator, useSearchParams } from 'react-router';
+
 import { ProfileSectionTitle } from '../components';
 import { ProfileNavigationList } from '../components/index';
 import { ToolCard } from '../components/ToolCard';
@@ -70,7 +73,7 @@ const EducationHistory = () => {
     );
 
     setBaselineKoulutusIds(importedData);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
@@ -177,12 +180,12 @@ const EducationHistory = () => {
       title: t('education-history-import.start-modal.title'),
       confirmText: t('education-history-import.start-modal.import-button'),
       description: (
-        <div className="text-body-md-mobile sm:text-body-md font-arial flex flex-col text-primary-gray">
+        <div className="flex flex-col font-arial text-body-md-mobile text-primary-gray sm:text-body-md">
           <Trans
             i18nKey="education-history-import.start-modal.description-1"
             components={{
               Icon: <JodOpenInNew ariaLabel={t('common:external-link')} />,
-              CustomLink: <Link to={opintopolkuUrl} className="inline-flex text-accent items-center" target="_blank" />,
+              CustomLink: <Link to={opintopolkuUrl} className="inline-flex items-center text-accent" target="_blank" />,
             }}
           />
           <p className="mt-7">
@@ -255,9 +258,9 @@ const EducationHistory = () => {
         <p className="mb-7 text-body-lg-mobile sm:text-body-lg">{t('profile.education-history.description')}</p>
 
         {koulutuksetThatNeedUserVerification.length > 0 && (
-          <div className="bg-bg-gray-2 rounded-md px-5 py-3 flex items-center w-fit mb-5">
-            <JodError className="text-secondary-3 mr-3" />
-            <span className="font-arial text-primary-gray text-body-sm">
+          <div className="mb-5 flex w-fit items-center rounded-md bg-bg-gray-2 px-5 py-3">
+            <JodError className="mr-3 text-secondary-3" />
+            <span className="font-arial text-body-sm text-primary-gray">
               {t('education-history.check-identified-osaamiset')}
             </span>
           </div>

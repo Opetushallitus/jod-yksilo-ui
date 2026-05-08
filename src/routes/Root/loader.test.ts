@@ -1,5 +1,7 @@
-import i18n from '@/i18n/config';
 import { describe, expect, it, vi } from 'vitest';
+
+import i18n from '@/i18n/config';
+
 import loader from './loader';
 
 describe('loader', () => {

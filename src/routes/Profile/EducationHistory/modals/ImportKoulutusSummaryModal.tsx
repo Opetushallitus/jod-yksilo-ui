@@ -1,3 +1,8 @@
+import React from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+
+import { Button, Modal, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import { ErrorResponse } from '@/api/errorResponse';
 import type { components } from '@/api/schema';
@@ -10,9 +15,7 @@ import {
   type Koulutus,
   type Koulutuskokonaisuus,
 } from '@/routes/Profile/EducationHistory/utils';
-import { Button, Modal, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
-import React from 'react';
-import { Trans, useTranslation } from 'react-i18next';
+
 import { EducationImportTable } from '../EducationImportTable';
 
 interface ImportKoulutusSummaryModalProps extends ModalComponentProps {
@@ -72,7 +75,7 @@ const ImportKoulutusSummaryModal = ({
   React.useEffect(() => {
     if (rest.open && !hasFetchedRef.current) {
       hasFetchedRef.current = true;
-      fetchAndSetEducationHistories();
+      void fetchAndSetEducationHistories();
     }
   }, [rest.open, fetchAndSetEducationHistories]);
 
@@ -283,23 +286,23 @@ const ImportKoulutusSummaryModal = ({
       content={
         <div id={modalId} className="flex flex-col sm:h-[890px]">
           <div>
-            <div className="max-w-modal-content box-content px-5 md:px-9">
-              <p className="sm:mb-8 mb-5 sm:text-body-md text-body-md-mobile font-arial">
+            <div className="box-content max-w-modal-content px-5 md:px-9">
+              <p className="mb-5 font-arial text-body-md-mobile sm:mb-8 sm:text-body-md">
                 {t('education-history-import.summary-modal.description')}
               </p>
               {isFetching && (
-                <div className="flex bg-bg-gray-2 rounded w-fit items-center p-4">
+                <div className="flex w-fit items-center rounded bg-bg-gray-2 p-4">
                   <span>
                     <Spinner className="mr-5" size={24} color="black" />
                   </span>
-                  <span className="text-primary-gray font-arial text-body-sm">
+                  <span className="font-arial text-body-sm text-primary-gray">
                     {t('education-history-import.summary-modal.data-loading')}
                   </span>
                 </div>
               )}
             </div>
             {!isFetching && !error && (
-              <div className="max-w-modal-content box-content px-5 md:px-9">
+              <div className="box-content max-w-modal-content px-5 md:px-9">
                 <EducationImportTable rows={tableRows} />{' '}
               </div>
             )}
@@ -307,7 +310,7 @@ const ImportKoulutusSummaryModal = ({
         </div>
       }
       footer={
-        <div className="flex flex-row justify-end flex-1">
+        <div className="flex flex-1 flex-row justify-end">
           <div id="buttonSection" className="flex flex-row justify-between gap-5">
             <Button
               className="whitespace-nowrap"
@@ -351,10 +354,10 @@ const ImportKoulutusSummaryModal = ({
                   cancelText: t('education-history-import.result-modal.no-identify'),
                   variant: 'normal',
                   onConfirm: () => {
-                    saveSelectedKoulutus(false);
+                    void saveSelectedKoulutus(false);
                   },
                   onCancel: () => {
-                    saveSelectedKoulutus(true);
+                    void saveSelectedKoulutus(true);
                   },
                 });
               }}

@@ -1,3 +1,11 @@
+import React from 'react';
+import toast from 'react-hot-toast/headless';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
+import { useShallow } from 'zustand/shallow';
+
+import { Button } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import { components } from '@/api/schema';
@@ -12,12 +20,7 @@ import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { hasLocalizedText, removeDuplicatesByKey } from '@/utils';
 import { isFeatureEnabled } from '@/utils/features';
-import { Button } from '@jod/design-system';
-import React from 'react';
-import toast from 'react-hot-toast/headless';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
-import { useShallow } from 'zustand/shallow';
+
 import type { ToolLoaderData } from '../loader';
 import { mergeUniqueValuesExcludingType } from '../utils';
 
@@ -335,7 +338,7 @@ const StatefulCompetenceImportFilters = ({
   React.useEffect(() => {
     onFiltersChange(selectedFilters);
     // We only want to report the initial filters on mount, not on every change, so we disable exhaustive-deps here.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, []);
 
   return (

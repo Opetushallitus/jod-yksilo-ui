@@ -1,20 +1,22 @@
-import { client } from '@/api/client';
-import type { components } from '@/api/schema';
-import { type OsaaminenValue, OsaamisSuosittelija } from '@/components';
-import { ModalHeader } from '@/components/ModalHeader';
-import { useEscHandler } from '@/hooks/useEscHandler';
-import { ModalComponentProps } from '@/hooks/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Modal, useMediaQueries } from '@jod/design-system';
-import { JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Controller, Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
+import { Button, Modal, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark } from '@jod/design-system/icons';
+
+import { client } from '@/api/client';
+import type { components } from '@/api/schema';
+import { type OsaaminenValue, OsaamisSuosittelija } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
+import { useEscHandler } from '@/hooks/useEscHandler';
+import { ModalComponentProps } from '@/hooks/useModal';
+
 interface EditKiinnostusModalProps extends ModalComponentProps {
-  data: components['schemas']['OsaaminenDto'][];
+  data?: components['schemas']['OsaaminenDto'][];
 }
 
 interface KiinnostusForm {
@@ -122,7 +124,7 @@ const EditInterestModal = ({ onClose, data = [], ...rest }: EditKiinnostusModalP
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-end gap-5 flex-1">
+        <div className="flex flex-1 flex-row justify-end gap-5">
           <Button
             label={t('common:cancel')}
             variant="white"

@@ -1,8 +1,11 @@
-import { type OsaaminenDto } from '@/api/osaamiset';
-import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
-import { Tag } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Tag } from '@jod/design-system';
+
+import { type OsaaminenDto } from '@/api/osaamiset';
+import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
+
 import { getVirtualAssistantConfig } from '../virtualAssistantConfig';
 import type { VirtualAssistantMessageRow, VirtualAssistantVariant } from '../virtualAssistantTypes';
 import { VirtualAssistantMessageBubble } from './VirtualAssistantMessageBubble';
@@ -38,12 +41,11 @@ export const VirtualAssistantMessageContainer = ({
       />
       {row.ehdotukset && row.ehdotukset.length > 0 && (
         <div className="flex flex-col gap-4">
-          <div className={'sm:text-heading-4 sm:font-arial text-heading-4-mobile font-bold'}>
+          <div className={'font-bold text-heading-4-mobile sm:font-arial sm:text-heading-4'}>
             <span>{config.labels.proposed}</span>
             <div className="font-arial text-body-sm text-secondary-gray">{t('osaamissuosittelija.interest.add')}</div>
           </div>
           <div className="max-h-[228px] overflow-y-auto">
-            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
             <ul className="flex flex-wrap gap-3 p-1" ref={ref} onKeyDown={handleKeyDown}>
               {row.ehdotukset
                 .filter((k) => !selected.some((val) => val.uri === k.uri))

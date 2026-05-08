@@ -1,8 +1,9 @@
-import { RateContentCard } from '@jod/design-system';
 import React from 'react';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
+
+import { RateContentCard } from '@jod/design-system';
 
 interface RateContentProps {
   variant: 'kohtaanto' | 'tyomahdollisuus' | 'ammatti' | 'koulutusmahdollisuus' | 'tutkinto';
@@ -78,7 +79,7 @@ export const RateContent = ({ variant, area, size }: RateContentProps) => {
             ) : (
               <>
                 <p>{t(`rate-ai-content.modal.description.intro`)}</p>
-                <ul className="list-disc ml-5">
+                <ul className="ml-5 list-disc">
                   {listTexts[variant].map((item: string, index, array) => (
                     <li key={item}>{`${item}${index === array.length - 1 ? '.' : ','}`}</li>
                   ))}
@@ -120,9 +121,7 @@ export const RateContent = ({ variant, area, size }: RateContentProps) => {
           }
 
           toast.success(t('rate-ai-content.toast'));
-
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (error) {
+        } catch {
           toast.error(t('rate-ai-content.toast-error'));
         }
       }}

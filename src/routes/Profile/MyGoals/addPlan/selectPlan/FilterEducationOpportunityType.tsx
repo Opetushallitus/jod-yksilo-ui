@@ -1,8 +1,10 @@
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
-import { Checkbox } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
+
+import { Checkbox } from '@jod/design-system';
+
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 
 export const FilterEducationOpportunityType = () => {
   const { t } = useTranslation();
@@ -20,7 +22,7 @@ export const FilterEducationOpportunityType = () => {
 
   return (
     <fieldset className="flex flex-col gap-5">
-      <legend className="text-heading-4-mobile sm:text-heading-4 mb-5 sr-only">{t('show')}</legend>
+      <legend className="sr-only mb-5 text-heading-4-mobile sm:text-heading-4">{t('show')}</legend>
       <Checkbox
         ariaLabel={t('opportunity-type.education.TUTKINTO')}
         className="font-poppins!"

@@ -1,7 +1,9 @@
-import { client } from '@/api/client';
-import { type OsaaminenDto, osaamiset } from '@/api/osaamiset';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { client } from '@/api/client';
+import { type OsaaminenDto, osaamiset } from '@/api/osaamiset';
+
 import { getVirtualAssistantConfig } from '../virtualAssistantConfig';
 import type { VirtualAssistantMessageRow, VirtualAssistantVariant } from '../virtualAssistantTypes';
 

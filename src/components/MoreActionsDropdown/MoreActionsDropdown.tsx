@@ -1,10 +1,12 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { cx } from '@jod/design-system';
+import { JodMore } from '@jod/design-system/icons';
+
 import { ActionButton } from '@/components/ActionButton/ActionButton';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
-import { cx } from '@jod/design-system';
-import { JodMore } from '@jod/design-system/icons';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuContent: React.ReactNode }) => {
   const { t } = useTranslation();
@@ -22,7 +24,7 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
         (firstChild as HTMLElement).focus();
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, [open]);
 
   const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
@@ -55,8 +57,7 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
       </div>
       {open && (
         /* Preventing the click through of the wrapper <div> if not able to click exactly at the list items */
-        /* eslint-disable jsx-a11y/click-events-have-key-events */
-        /* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
+        // oxlint-disable-next-line jsx_a11y/click-events-have-key-events jsx_a11y/no-static-element-interactions
         <div
           ref={menuContentRef}
           onBlur={handleBlur}
@@ -64,7 +65,7 @@ const MoreActionsDropdown = ({ menuId, menuContent }: { menuId: string; menuCont
             e.preventDefault();
             e.stopPropagation();
           }}
-          className="absolute right-0 sm:-right-2 translate-y-[10px] cursor-auto z-50 max-w-[calc(100vw-2rem)]"
+          className="absolute right-0 z-50 max-w-[calc(100vw-2rem)] translate-y-[10px] cursor-auto sm:-right-2"
           data-testid="more-actions-menu"
         >
           {menuContent}

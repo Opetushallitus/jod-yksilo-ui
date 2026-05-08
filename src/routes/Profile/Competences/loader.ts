@@ -1,9 +1,9 @@
+import type { LoaderFunction } from 'react-router';
+
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { YksiloLoaderContext, yksiloLoaderContextHasSession } from '@/stores/useSessionManagerStore';
 import { getLocalizedText } from '@/utils';
-
-import type { LoaderFunction } from 'react-router';
 
 export interface CompetenceDataGroup {
   id?: string;

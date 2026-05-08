@@ -1,3 +1,5 @@
+import { create } from 'zustand';
+
 import { client } from '@/api/client';
 import { getKoulutusMahdollisuusDetailsFullPage } from '@/api/mahdollisuusService';
 import { osaamiset } from '@/api/osaamiset';
@@ -13,7 +15,6 @@ import {
 import { ehdotusDataToRecord, type EhdotusRecord } from '@/routes/Tool/utils';
 import { filterByEducationType, filterByKesto } from '@/stores/useToolStore/filters';
 import { paginate, removeDuplicatesByKey } from '@/utils';
-import { create } from 'zustand';
 
 let abortController = new AbortController();
 /**
@@ -111,7 +112,7 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
   setTavoite: (tavoite: components['schemas']['TavoiteDto']) => {
     get().reset();
     set({ tavoite });
-    get().updateEhdotuksetAndMahdollisuudet();
+    void get().updateEhdotuksetAndMahdollisuudet();
   },
 
   updateEhdotuksetAndMahdollisuudet: async () => {

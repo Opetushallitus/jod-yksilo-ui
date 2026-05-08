@@ -1,3 +1,11 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
+import { useShallow } from 'zustand/shallow';
+
+import { Button, useMediaQueries } from '@jod/design-system';
+import { JodOpenInNew } from '@jod/design-system/icons';
+
 import opintopolkuLogo from '@/../assets/opintopolku.svg';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import { CounselingCard } from '@/components/CounselingCard/CounselingCard';
@@ -11,12 +19,7 @@ import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText, normalizeMultilineText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
-import { Button, useMediaQueries } from '@jod/design-system';
-import { JodOpenInNew } from '@jod/design-system/icons';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
-import { useShallow } from 'zustand/shallow';
+
 import { OpintopolkuKoulutusList } from './OpintopolkuKoulutusList';
 import { getDurationText } from './utils';
 
@@ -65,7 +68,7 @@ const EducationOpportunity = () => {
       showAiInfoInTitle: true,
       showDivider: false,
       content: (
-        <p className="text-body-md font-arial whitespace-pre-line">
+        <p className="font-arial text-body-md whitespace-pre-line">
           {normalizeMultilineText(getLocalizedText(kuvaus))}
         </p>
       ),
@@ -75,7 +78,7 @@ const EducationOpportunity = () => {
           {
             navTitle: t('duration'),
             showDivider: false,
-            content: <p className="text-body-md font-arial">{durationText}</p>,
+            content: <p className="font-arial text-body-md">{durationText}</p>,
           } as OpportunityDetailsSection,
         ]
       : []),
@@ -84,7 +87,7 @@ const EducationOpportunity = () => {
       showAiInfoInTitle: true,
       showDivider: false,
       content: (
-        <div className="flex flex-col gap-6 grow">
+        <div className="flex grow flex-col gap-6">
           <span className="font-arial">{t('education-opportunity.competences.description')}</span>
           <CompareCompetencesTable rows={competencesTableData} mode="kiinnostus" />
           {!lg && (
@@ -102,12 +105,12 @@ const EducationOpportunity = () => {
       showInDevOnly: false,
       showDivider: sm,
       content: (
-        <div className="flex flex-col w-full">
+        <div className="flex w-full flex-col">
           <div
-            className="bg-white p-6 flex flex-col gap-7 lg:mb-9 mb-7"
+            className="mb-7 flex flex-col gap-7 bg-white p-6 lg:mb-9"
             data-testid="education-opportunity-statistics-section"
           >
-            <h3 className="sm:text-heading-2 text-heading-2-mobile">
+            <h3 className="text-heading-2-mobile sm:text-heading-2">
               {t('education-opportunity.education-characteristics')}
             </h3>
             <div className="grid w-full grow grid-cols-2 gap-6">
@@ -131,11 +134,11 @@ const EducationOpportunity = () => {
       showDivider: false,
       showNavTitle: false,
       content: (
-        <div className="flex flex-col w-full mb-9" data-testid="education-opportunity-opintopolku-section">
-          <div className="bg-[#397B0F] h-9 flex items-center pl-4 mb-7">
+        <div className="mb-9 flex w-full flex-col" data-testid="education-opportunity-opintopolku-section">
+          <div className="mb-7 flex h-9 items-center bg-[#397B0F] pl-4">
             <img src={opintopolkuLogo} alt={t('education-opportunity.opintopolku.banner-alt-text')} className="h-6" />
           </div>
-          <h3 className="text-heading-2 mb-4">{t('education-opportunity.opintopolku.title')}</h3>
+          <h3 className="mb-4 text-heading-2">{t('education-opportunity.opintopolku.title')}</h3>
           <p>{t('education-opportunity.opintopolku.description')}</p>
           <div className="mt-7">
             <Button

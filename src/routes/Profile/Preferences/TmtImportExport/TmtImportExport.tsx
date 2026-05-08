@@ -1,12 +1,14 @@
-import { client } from '@/api/client';
-import { useModal } from '@/hooks/useModal';
-import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
-import { Button, Spinner, useNoteStack } from '@jod/design-system';
-import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import toast from 'react-hot-toast/headless';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate } from 'react-router';
+
+import { Button, Spinner, useNoteStack } from '@jod/design-system';
+import { JodOpenInNew } from '@jod/design-system/icons';
+
+import { client } from '@/api/client';
+import { useModal } from '@/hooks/useModal';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 
 type ErrorResponseType = { errorCode: string } | undefined;
 interface ResultRefType {
@@ -37,7 +39,7 @@ const TmtImportExport = () => {
 
   // Remove URL parameters after handling them
   const cleanUrl = React.useCallback(() => {
-    navigate(pathname, { replace: true, preventScrollReset: true });
+    void navigate(pathname, { replace: true, preventScrollReset: true });
   }, [navigate, pathname]);
 
   // Handle authorization status from URL params
@@ -201,7 +203,7 @@ const TmtImportExport = () => {
     };
 
     if (authorized && sessionStorage.getItem(STORAGE_KEY) === 'export' && !operationAttempted.current) {
-      doExport();
+      void doExport();
     }
   }, [authorized, cleanUrl, closeAllModals, getErrorTranslation, showDialog, showErrorNote, startExport, t]);
 
@@ -272,7 +274,7 @@ const TmtImportExport = () => {
     };
 
     if (authorized && sessionStorage.getItem(STORAGE_KEY) === 'import' && !operationAttempted.current) {
-      doImport();
+      void doImport();
     }
   }, [authorized, cleanUrl, closeAllModals, getErrorTranslation, showDialog, showErrorNote, startImport, t]);
 
@@ -287,7 +289,7 @@ const TmtImportExport = () => {
             CustomLink: (
               <Link
                 to={t('preferences.tmt-import-export.export.modal.tmt-url')}
-                className="inline-flex underline items-center"
+                className="inline-flex items-center underline"
                 target="_blank"
                 rel="noopener noreferrer"
               />
@@ -295,7 +297,7 @@ const TmtImportExport = () => {
           }}
         />
       </div>
-      <div className="flex gap-4 mt-7">
+      <div className="mt-7 flex gap-4">
         <Button
           label={
             importPending

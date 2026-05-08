@@ -1,3 +1,11 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router';
+import { useShallow } from 'zustand/shallow';
+
+import { type MenuSection, PageNavigation, useMediaQueries } from '@jod/design-system';
+import { JodPrint, JodShare } from '@jod/design-system/icons';
+
 import type { components } from '@/api/schema';
 import { ActionButton, AiInfo, FavoriteToggle, MainLayout } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
@@ -11,12 +19,7 @@ import { useIsSessionExpired } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { copyToClipboard, getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
-import { type MenuSection, PageNavigation, useMediaQueries } from '@jod/design-system';
-import { JodPrint, JodShare } from '@jod/design-system/icons';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router';
-import { useShallow } from 'zustand/shallow';
+
 import { CounselingCard } from '../CounselingCard/CounselingCard';
 import { OpportunityType } from '../OpportunityType/OpportunityType';
 import { RateContent } from '../RateContent/RateContent';
@@ -124,7 +127,7 @@ const OpportunityDetails = ({
           showAiInfoInTitle={showAiInfoInTitle}
         />
         {/* Action bar */}
-        <div className="flex flex-col sm:flex-row gap-3 my-6 md:mt-7 md:mb-8 md:justify-end items-start print:hidden">
+        <div className="my-6 flex flex-col items-start gap-3 sm:flex-row md:mt-7 md:mb-8 md:justify-end print:hidden">
           <FavoriteToggle
             isFavorite={isLoggedIn && !!data?.id && isSuosikki}
             opensDialog={!isLoggedIn}
@@ -175,12 +178,12 @@ const OpportunityDetails = ({
         {/* Sections */}
         {!!data &&
           sections.filter(filterDevSections).map((section) => (
-            <div key={section.navTitle} className="flex flex-col mb-7">
+            <div key={section.navTitle} className="mb-7 flex flex-col">
               <ScrollHeading
                 title={section.navTitle}
                 appendix={section.titleAppendix}
                 heading="h2"
-                className={`text-heading-2 ${(section.showNavTitle ?? true) ? 'mb-3' : 'text-transparent text-[0px] size-0'}`}
+                className={`text-heading-2 ${(section.showNavTitle ?? true) ? 'mb-3' : 'size-0 text-[0px] text-transparent'}`}
               />
               <div className="flex flex-row justify-between">{section.content}</div>
               {(section.showDivider ?? true) && <div className="border-b border-border-gray" />}
@@ -211,7 +214,7 @@ const OpportunityHeader = ({
   return (
     <div className="flex flex-row">
       <div
-        className={`flex items-center justify-center size-9 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
+        className={`flex aspect-square size-9 items-center justify-center rounded-full text-white ${bgColorClassName} print:hidden`}
       >
         <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
       </div>
@@ -219,11 +222,11 @@ const OpportunityHeader = ({
         <OpportunityType mahdollisuusAlityyppi={mahdollisuusAlityyppi} showTypeTooltip />
         <h1
           data-testid={'opportunity-heading-title'}
-          className={`text-heading-1-mobile leading-7 sm:text-heading-1 sm:leading-[2.25rem] hyphens-auto ${textColorClassName} text-pretty wrap-break-word focus:outline-0`}
+          className={`text-heading-1-mobile leading-7 hyphens-auto sm:text-heading-1 sm:leading-[2.25rem] ${textColorClassName} text-pretty wrap-break-word focus:outline-0`}
         >
           {title}
           {showAiInfoInTitle && (
-            <div className="ml-2 print:hidden inline *:align-top">
+            <div className="ml-2 inline *:align-top print:hidden">
               {
                 <AiInfo
                   type={mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'education-opportunity' : 'job-opportunity'}

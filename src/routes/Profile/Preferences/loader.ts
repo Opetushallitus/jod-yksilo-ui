@@ -1,10 +1,11 @@
+import type { LoaderFunction } from 'react-router';
+
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import i18n, { type LangCode } from '@/i18n/config';
 import { sortByProperty } from '@/utils';
 import { getCodesetValue } from '@/utils/codes/codes';
 import { isFeatureEnabled } from '@/utils/features';
-import type { LoaderFunction } from 'react-router';
 
 const loader = (async ({ request }) => {
   const [{ data: jakolinkit = [] }, { data: yksiloData }] = await Promise.all([

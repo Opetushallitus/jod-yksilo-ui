@@ -1,5 +1,6 @@
-import { type MahdollisuusAlityyppi } from '@/routes/types';
 import { JodBuild, JodCertificate, JodGuide, JodWorkPossibilities } from '@jod/design-system/icons';
+
+import { type MahdollisuusAlityyppi } from '@/routes/types';
 
 const ICONS: Record<MahdollisuusAlityyppi, React.ElementType> = {
   AMMATTI: JodBuild,

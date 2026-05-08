@@ -1,14 +1,4 @@
-import { client } from '@/api/client';
-import { AnchorLink } from '@/components';
-import { ModalHeader } from '@/components/ModalHeader';
-import { formErrorMessage } from '@/constants';
-import { useEscHandler } from '@/hooks/useEscHandler';
-import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
-import type { YksiloData } from '@/hooks/useYksiloData';
-import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AiInfoButton, Button, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight, JodCheckmark, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import {
   Controller,
@@ -22,10 +12,23 @@ import {
 import { Trans, useTranslation } from 'react-i18next';
 import { useRevalidator } from 'react-router';
 import z from 'zod';
+
+import { AiInfoButton, Button, InputField, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight, JodCheckmark, JodOpenInNew } from '@jod/design-system/icons';
+
+import { client } from '@/api/client';
+import { AnchorLink } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
+import { formErrorMessage } from '@/constants';
+import { useEscHandler } from '@/hooks/useEscHandler';
+import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
+import type { YksiloData } from '@/hooks/useYksiloData';
+import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
+
 import { PersonalDetailsInfoBlock, ToggleAllow } from '../components';
 import { GENDER_VALUES } from '../utils';
 
-const Separator = () => <hr aria-hidden className="my-4 h-1 bg-bg-gray-2 border-0" />;
+const Separator = () => <hr aria-hidden className="my-4 h-1 border-0 bg-bg-gray-2" />;
 
 const welcomePathSchema = z.object({
   tervetuloapolku: z.boolean(),
@@ -47,8 +50,8 @@ const StepWelcome = () => {
 
   return (
     <>
-      <p className="text-body-lg-mobile sm:text-body-lg font-medium mb-7 sm:mb-8">{t('introduction.step-1.text-1')}</p>
-      <ul className="text-body-md-mobile sm:text-body-md list-disc list-inside mb-7 font-arial">
+      <p className="font-medium mb-7 text-body-lg-mobile sm:mb-8 sm:text-body-lg">{t('introduction.step-1.text-1')}</p>
+      <ul className="mb-7 list-inside list-disc font-arial text-body-md-mobile sm:text-body-md">
         <li>{t('introduction.step-1.item-1')}</li>
         <li>{t('introduction.step-1.item-2')}</li>
         <li>{t('introduction.step-1.item-3')}</li>
@@ -84,10 +87,10 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
   return (
     <>
       {!mpassid && (
-        <p className="text-body-lg-mobile sm:text-body-lg font-medium mb-2">{t('introduction.step-2.text-1')}</p>
+        <p className="font-medium mb-2 text-body-lg-mobile sm:text-body-lg">{t('introduction.step-2.text-1')}</p>
       )}
       {!mpassid && (
-        <p className="text-body-md-mobile sm:text-body-md mb-7 font-arial">{t('introduction.step-2.text-2')}</p>
+        <p className="mb-7 font-arial text-body-md-mobile sm:text-body-md">{t('introduction.step-2.text-2')}</p>
       )}
       <div>
         {data.syntymavuosi && (
@@ -164,12 +167,12 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
               hideLabel={true}
               placeholder="matti.meikalainen@suomi.fi"
               onBlur={(event) => {
-                emailField.onBlur(event);
+                void emailField.onBlur(event);
                 void trigger('email');
               }}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 guardedAction(() => {
-                  emailField.onChange(e);
+                  void emailField.onChange(e);
                 })();
               }}
             />
@@ -178,8 +181,8 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
         <Separator />
       </div>
 
-      <p className="text-heading-3-mobile sm:text-heading-3 mt-8 mb-2">{t('introduction.step-2.text-3')}</p>
-      <p className="text-body-md-mobile sm:text-body-md font-arial mb-6">
+      <p className="mt-8 mb-2 text-heading-3-mobile sm:text-heading-3">{t('introduction.step-2.text-3')}</p>
+      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         <Trans
           i18nKey="introduction.step-2.text-4"
           components={{
@@ -207,13 +210,13 @@ const StepAi = () => {
 
   return (
     <>
-      <p className="text-body-lg-mobile sm:text-body-lg font-medium mb-5 sm:mb-8">{t('introduction.step-3.text-1')}</p>
+      <p className="font-medium mb-5 text-body-lg-mobile sm:mb-8 sm:text-body-lg">{t('introduction.step-3.text-1')}</p>
       <p className="text-body-md-mobile sm:text-body-md">{t('introduction.step-3.item-text')}</p>
-      <ul className="text-body-md-mobile sm:text-body-md list-disc list-inside ml-5 mb-7">
+      <ul className="mb-7 ml-5 list-inside list-disc text-body-md-mobile sm:text-body-md">
         <li>{t('introduction.step-3.item-1')}</li>
         <li>{t('introduction.step-3.item-2')}</li>
       </ul>
-      <p className="text-body-md-mobile sm:text-body-md mb-5">
+      <p className="mb-5 text-body-md-mobile sm:text-body-md">
         {
           <Trans
             i18nKey="introduction.step-3.text-2"
@@ -235,7 +238,7 @@ const StepAi = () => {
       <div className="mb-11">
         <AiInfoButton size={52} className="mb-2" />
       </div>
-      <p className="text-body-lg-mobile sm:text-body-lg font-semibold mb-5">{t('introduction.step-3.text-3')}</p>
+      <p className="font-semibold mb-5 text-body-lg-mobile sm:text-body-lg">{t('introduction.step-3.text-3')}</p>
     </>
   );
 };
@@ -328,11 +331,11 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
       open={showWelcomePathModal}
       fullWidthContent
       className="h-[90vh]! sm:h-full!"
-      topSlot={<ModalHeader text={headerText} className="text-heading-1-mobile sm:text-heading-1 mb-5" />}
+      topSlot={<ModalHeader text={headerText} className="mb-5 text-heading-1-mobile sm:text-heading-1" />}
       content={
         <FormProvider {...methods}>
           <Form id={formId} onSubmit={onSubmit}>
-            <div ref={scrollRef} className="max-w-modal-content box-content px-5 md:px-9">
+            <div ref={scrollRef} className="box-content max-w-modal-content px-5 md:px-9">
               {isFirstStep && <StepWelcome />}
               {isInfoStep && <StepInformation data={yksiloData} />}
               {isAiStep && <StepAi />}
@@ -341,7 +344,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-end gap-4 flex-1">
+        <div className="flex flex-1 flex-row justify-end gap-4">
           {step > 1 && (
             <Button
               label={t('previous')}
@@ -349,7 +352,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
               size={sm ? 'lg' : 'sm'}
               onClick={() => {
                 setStep((value) => value - 1);
-                onStepChange();
+                void onStepChange();
               }}
             />
           )}
@@ -357,7 +360,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
             <Button
               onClick={() => {
                 setStep(step + 1);
-                onStepChange();
+                void onStepChange();
               }}
               label={t('next')}
               variant="accent"

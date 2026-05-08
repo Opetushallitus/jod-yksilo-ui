@@ -1,3 +1,5 @@
+import { redirect, type LoaderFunction } from 'react-router';
+
 import { ammatit as ammatitService } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
@@ -5,13 +7,12 @@ import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import i18n, { LangCode } from '@/i18n/config';
 import { formatDate, sortByProperty } from '@/utils';
 import { getCodesetValue, mapKoulutusCodesToLabels } from '@/utils/codes/codes';
-import { redirect, type LoaderFunction } from 'react-router';
+
 import { getEducationHistoryTableRows } from '../Profile/EducationHistory/utils';
 import { getFreeTimeActivitiesTableRows } from '../Profile/FreeTimeActivities/utils';
 import { getWorkHistoryTableRows } from '../Profile/WorkHistory/utils';
 import { arrayToIdMap, osaaminenCombiner } from './utils';
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 const loader = (async ({ request, params }) => {
   const ulkoinenJakolinkkiId = new URL(request.url).searchParams.get('token');
   if (!ulkoinenJakolinkkiId) {

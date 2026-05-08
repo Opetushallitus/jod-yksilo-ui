@@ -19,18 +19,18 @@ export const PersonalDetailsInfoBlock = ({ label, info, interactiveComponent, st
   const rowOrCol = stack ? 'flex-col' : 'flex-row';
 
   return (
-    <div className={tc(['flex space-between gap-3', rowOrCol])}>
-      <div className="flex flex-col flex-1 gap-1">
+    <div className={tc(['space-between flex gap-3', rowOrCol])}>
+      <div className="flex flex-1 flex-col gap-1">
         {htmlFor ? (
-          <label htmlFor={htmlFor} className="text-form-label font-arial">
+          <label htmlFor={htmlFor} className="font-arial text-form-label">
             {label}
           </label>
         ) : (
-          <span className="text-form-label font-arial">{label}</span>
+          <span className="font-arial text-form-label">{label}</span>
         )}
-        {info && <span className="text-body-md-mobile sm:text-body-md text-secondary-gray font-arial">{info}</span>}
+        {info && <span className="font-arial text-body-md-mobile text-secondary-gray sm:text-body-md">{info}</span>}
       </div>
-      {interactiveComponent && <div className="flex flex-2 items-center gap-3 justify-end">{interactiveComponent}</div>}
+      {interactiveComponent && <div className="flex flex-2 items-center justify-end gap-3">{interactiveComponent}</div>}
     </div>
   );
 };

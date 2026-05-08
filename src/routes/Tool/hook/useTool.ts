@@ -1,8 +1,9 @@
+import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
+
 import { OsaaminenValue } from '@/components';
 import { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { useToolStore } from '@/stores/useToolStore';
-import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
 
 const filterByType = (type: OsaaminenLahdeTyyppi) => (val: OsaaminenValue) => val.tyyppi === type;
 const filterOsaaminenById = (ids: string[]) => (value: OsaaminenValue) => !ids.includes(value.id);

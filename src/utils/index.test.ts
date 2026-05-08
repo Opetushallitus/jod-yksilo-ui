@@ -1,3 +1,6 @@
+import i18n from 'i18next';
+import { describe, expect, it } from 'vitest';
+
 import {
   formatDate,
   getLocalizedText,
@@ -8,8 +11,6 @@ import {
   removeDuplicatesByKey,
   sortByProperty,
 } from '@/utils';
-import i18n from 'i18next';
-import { describe, expect, it } from 'vitest';
 
 const TEST_DATE_1 = '2021-01-01';
 const TEST_DATE_2 = '2022-01-01';

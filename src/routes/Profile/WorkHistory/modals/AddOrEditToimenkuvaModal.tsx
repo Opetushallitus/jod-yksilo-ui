@@ -1,16 +1,4 @@
-import { client } from '@/api/client';
-import type { components } from '@/api/schema';
-import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
-import { ModalHeader } from '@/components/ModalHeader';
-import { formErrorMessage, LIMITS } from '@/constants';
-import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
-import { useEscHandler } from '@/hooks/useEscHandler';
-import { ModalComponentProps, useModal } from '@/hooks/useModal';
-import { getLocalizedText } from '@/utils';
-import { isFeatureEnabled } from '@/utils/features';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Datepicker, InputField, Modal, Textarea, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import {
   Controller,
@@ -24,6 +12,20 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useRevalidator } from 'react-router';
 import { z } from 'zod';
+
+import { Button, Datepicker, InputField, Modal, Textarea, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
+
+import { client } from '@/api/client';
+import type { components } from '@/api/schema';
+import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
+import { formErrorMessage, LIMITS } from '@/constants';
+import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
+import { useEscHandler } from '@/hooks/useEscHandler';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
+import { getLocalizedText } from '@/utils';
+import { isFeatureEnabled } from '@/utils/features';
 
 interface AddOrEditToimenkuvaModalProps extends ModalComponentProps {
   tyopaikkaId: string;
@@ -65,7 +67,7 @@ const MainStep = () => {
   const loppuPvm = watch('loppuPvm');
   React.useEffect(() => {
     if (alkuPvm || loppuPvm) {
-      trigger();
+      void trigger();
     }
   }, [alkuPvm, loppuPvm, trigger]);
 
@@ -83,7 +85,7 @@ const MainStep = () => {
         <FormError name={`nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-4">
-        <div className="flex flex-col flex-1 sm:block sm:max-w-input-short">
+        <div className="flex flex-1 flex-col sm:block sm:max-w-input-short">
           <Controller
             control={control}
             name="alkuPvm"
@@ -100,7 +102,7 @@ const MainStep = () => {
           />
           <TouchedFormError touchedFields={touchedFields} fieldName="alkuPvm" errors={errors} />
         </div>
-        <div className="flex flex-col flex-1 sm:block sm:max-w-input-short">
+        <div className="flex flex-1 flex-col sm:block sm:max-w-input-short">
           <Controller
             control={control}
             render={({ field }) => (
@@ -133,7 +135,7 @@ const OsaamisetStep = () => {
   const { control } = useFormContext<ToimenkuvaForm>();
   return (
     <>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9 max-w-modal-content">
+      <p className="mb-7 max-w-modal-content font-arial text-body-sm sm:mb-9">
         {t('profile.work-history.modals.competences-description')}
       </p>
       <Controller
@@ -361,7 +363,7 @@ const AddOrEditToimenkuvaModal = ({
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between flex-1 gap-3">
+        <div className="flex flex-1 flex-row justify-between gap-3">
           <div>
             {toimenkuvaId && (
               <Button

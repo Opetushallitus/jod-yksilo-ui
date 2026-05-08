@@ -1,12 +1,15 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Button, useMediaQueries } from '@jod/design-system';
+
 import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { LogoutFormContext } from '@/routes/Root';
 import { useToolStore } from '@/stores/useToolStore';
 import { isFeatureEnabled } from '@/utils/features';
-import { Button, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+
 import { PersonalDetails, ShareLinkSection, TmtImportExport } from '.';
 import { Divider, ProfileNavigationList, ProfileSectionTitle, ToolCard } from '../components';
 
@@ -52,7 +55,7 @@ const Preferences = () => {
       <title>{title}</title>
       <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
         <ProfileSectionTitle type="ASETUKSENI" title={title} />
-        <div className="mb-7 text-body-lg-mobile sm:text-body-lg flex flex-col gap-7">
+        <div className="mb-7 flex flex-col gap-7 text-body-lg-mobile sm:text-body-lg">
           <p>{t('preferences.description')}</p>
         </div>
 
@@ -71,8 +74,8 @@ const Preferences = () => {
           </>
         )}
         <section className="mb-8">
-          <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.download.title')}</h2>
-          <p className="font-arial text-body-md mb-5">{t('preferences.download.description')}</p>
+          <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2">{t('preferences.download.title')}</h2>
+          <p className="mb-5 font-arial text-body-md">{t('preferences.download.description')}</p>
           <Button
             variant="accent"
             label={t('preferences.download.action')}
@@ -81,8 +84,8 @@ const Preferences = () => {
           />
         </section>
         <section>
-          <h2 className="text-heading-2-mobile sm:text-heading-2 mb-3">{t('preferences.delete-profile.title')}</h2>
-          <p className="font-arial text-body-md mb-5">{t('preferences.delete-profile.description')}</p>
+          <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2">{t('preferences.delete-profile.title')}</h2>
+          <p className="mb-5 font-arial text-body-md">{t('preferences.delete-profile.description')}</p>
           <Button
             variant="white-delete"
             ariaHaspopup="dialog"

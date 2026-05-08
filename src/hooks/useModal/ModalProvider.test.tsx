@@ -1,6 +1,8 @@
-import { useModal } from '@/hooks/useModal';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+
+import { useModal } from '@/hooks/useModal';
+
 import { ModalProvider } from './ModalProvider';
 
 const TestModal = vi.fn(({ open, onClose, label, animationMode }) => {

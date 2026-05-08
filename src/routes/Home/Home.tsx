@@ -1,3 +1,10 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
+
+import { cx, HeroCard, type LinkComponent, useMediaQueries } from '@jod/design-system';
+import { JodOpenInNew } from '@jod/design-system/icons';
+
 import heroSrc1 from '@/../assets/yksilo-hero-1.jpg';
 import heroSrc2 from '@/../assets/yksilo-hero-2.jpg';
 import heroSrc3 from '@/../assets/yksilo-hero-3.jpg';
@@ -6,11 +13,6 @@ import { HowToUse } from '@/components/HowToUse/HowToUse';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { getLinkTo } from '@/utils/routeUtils';
-import { cx, HeroCard, type LinkComponent, useMediaQueries } from '@jod/design-system';
-import { JodOpenInNew } from '@jod/design-system/icons';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
 
 interface ContainerProps {
   className?: string;
@@ -19,7 +21,7 @@ interface ContainerProps {
 
 const FullWidthContainer = ({ className = '', children }: ContainerProps) => (
   <div className={cx(['flex', 'justify-start', 'py-8', className])}>
-    <div className="w-[1092px] mx-auto px-5 sm:px-6 xl:px-0">{children}</div>
+    <div className="mx-auto w-[1092px] px-5 sm:px-6 xl:px-0">{children}</div>
   </div>
 );
 
@@ -95,8 +97,7 @@ const Home = () => {
 
   const heroHeight = React.useMemo(() => {
     return window.innerHeight - 68;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [window.innerWidth]);
+  }, []);
 
   return (
     <main role="main" className="mx-auto w-full max-w-(--breakpoint-xl) bg-white" id="jod-main" data-testid="home-page">
@@ -106,7 +107,7 @@ const Home = () => {
         src={heroSrc}
         alt=""
         role="none"
-        className="w-(--breakpoint-xl) sm:h-[617px] object-cover xl:object-[50%_50%] lg:object-[60%_50%] md:object-[67%_50%] sm:object-[71%_50%] object-[72%_50%] pointer-events-none select-none touch-none"
+        className="pointer-events-none w-(--breakpoint-xl) touch-none object-cover object-[72%_50%] select-none sm:h-[617px] sm:object-[71%_50%] md:object-[67%_50%] lg:object-[60%_50%] xl:object-[50%_50%]"
         style={sm ? undefined : { height: heroHeight }}
         data-testid="home-hero"
       />
@@ -156,11 +157,11 @@ const Home = () => {
           'gap-5 lg:gap-7',
         ])}
       >
-        <h2 className="sm:text-heading-1 text-heading-1-mobile max-w-[716px]">{t('home.how-to-use.title')}</h2>
-        <div className="flex flex-col lg:flex-row gap-7 lg:gap-8">
+        <h2 className="max-w-[716px] text-heading-1-mobile sm:text-heading-1">{t('home.how-to-use.title')}</h2>
+        <div className="flex flex-col gap-7 lg:flex-row lg:gap-8">
           <div className="font-arial text-body-md text-primary-gray">
             <p>{t('home.how-to-use.description-1')}</p>
-            <ul className="list-disc ml-6">
+            <ul className="ml-6 list-disc">
               <li>{t('home.how-to-use.list-item-1')}</li>
               <li>{t('home.how-to-use.list-item-2')}</li>
               <li>{t('home.how-to-use.list-item-3')}</li>

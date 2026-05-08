@@ -1,5 +1,6 @@
-import { useSearchStore } from '@/stores/useSearchStore';
 import { LoaderFunction } from 'react-router';
+
+import { useSearchStore } from '@/stores/useSearchStore';
 
 const loader = (async ({ request }) => {
   const { search, query } = useSearchStore.getState();

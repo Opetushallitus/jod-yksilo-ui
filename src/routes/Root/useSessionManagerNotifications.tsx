@@ -1,13 +1,15 @@
+import React from 'react';
+import { Location } from 'react-router';
+import { useShallow } from 'zustand/shallow';
+
+import { Button, useNoteStack } from '@jod/design-system';
+
 import type { components } from '@/api/schema';
 import i18n from '@/i18n/config';
 import { isSessionValidState, useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLinkTo } from '@/utils/routeUtils';
-import { Button, useNoteStack } from '@jod/design-system';
-import React from 'react';
-import { Location } from 'react-router';
-import { useShallow } from 'zustand/shallow';
 
 type NoteActions = Pick<
   ReturnType<typeof useNoteStack>,
@@ -105,7 +107,7 @@ export const useSessionManagerNotifications = (options: UseSessionManagerNotific
         return;
       }
       useToolStore.getState().reset();
-      useToolStore.getState().updateEhdotuksetAndTyomahdollisuudet(false, true);
+      void useToolStore.getState().updateEhdotuksetAndTyomahdollisuudet(false, true);
       useSuosikitStore.getState().reset();
       addPermanentNote(() => ({
         id: expiredId,

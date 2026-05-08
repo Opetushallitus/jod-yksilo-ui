@@ -1,6 +1,7 @@
-import { Datepicker } from '@jod/design-system';
 import { ComponentProps } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Datepicker } from '@jod/design-system';
 
 export const useDatePickerTranslations = (): ComponentProps<typeof Datepicker>['translations'] => {
   const { t } = useTranslation();

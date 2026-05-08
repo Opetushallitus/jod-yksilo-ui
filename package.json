@@ -1,30 +1,14 @@
 {
   "name": "@jod/yksilo-ui",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
-  "engines": {
-    "node": "^24.0.0",
-    "npm": ">=11.10.0"
-  },
-  "devEngines": {
-    "runtime": {
-      "name": "node",
-      "version": "^24.0.0",
-      "onFail": "error"
-    },
-    "packageManager": {
-      "name": "npm",
-      "version": ">=11.10.0",
-      "onFail": "error"
-    }
-  },
+  "private": true,
   "license": "EUPL-1.2",
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
-    "format": "prettier . --write",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "format": "oxfmt",
     "preview": "vite preview",
     "test:unit": "vitest --run",
     "test:e2e": "playwright test",
@@ -56,41 +40,48 @@
   },
   "devDependencies": {
     "@axe-core/react": "4.11.1",
-    "@eslint/js": "9.39.4",
     "@lavamoat/allow-scripts": "3.4.3",
     "@lavamoat/preinstall-always-fail": "2.1.1",
     "@playwright/test": "1.59.0",
-    "@singlestore/eslint-plugin-react-hooks-disable-import": "1.0.2",
     "@tailwindcss/vite": "4.2.2",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
     "@tolgee/cli": "2.16.1",
-    "@types/node": "25.5.0",
+    "@types/node": "24.1.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.1",
     "@vitest/coverage-v8": "4.1.2",
-    "eslint": "9.39.4",
-    "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-jsx-a11y": "6.10.2",
-    "eslint-plugin-react": "7.37.5",
-    "eslint-plugin-react-hooks": "7.0.1",
-    "eslint-plugin-react-refresh": "0.5.2",
-    "eslint-plugin-sonarjs": "3.0.7",
+    "eslint-plugin-sonarjs": "4.0.2",
     "globals": "17.4.0",
     "husky": "9.1.7",
     "jsdom": "27.4.0",
     "lint-staged": "16.4.0",
     "openapi-typescript": "7.13.0",
-    "prettier": "3.8.1",
-    "prettier-plugin-organize-imports": "4.3.0",
-    "prettier-plugin-tailwindcss": "0.7.2",
+    "oxfmt": "0.47.0",
+    "oxlint": "1.62.0",
+    "oxlint-tsgolint": "0.22.1",
     "tailwindcss": "4.2.2",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.58.0",
     "vite": "8.0.3",
     "vitest": "4.1.2",
     "xlsx": "file:vendor/xlsx-0.20.3.tgz"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": ">=11.10.0",
+      "onFail": "error"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "^24.0.0",
+      "onFail": "error"
+    }
+  },
+  "engines": {
+    "node": "^24.0.0",
+    "npm": ">=11.10.0"
   },
   "lavamoat": {
     "allowScripts": {

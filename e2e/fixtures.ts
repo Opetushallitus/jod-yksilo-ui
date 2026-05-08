@@ -1,5 +1,3 @@
-/* eslint-disable sonarjs/no-clear-text-protocols */
-
 export const userProfile = {
   csrf: {
     token: 'mock-csrf-token',

@@ -1,6 +1,8 @@
-import i18n from '@/i18n/config';
 import { Middleware } from 'openapi-fetch';
 import toast from 'react-hot-toast/headless';
+
+import i18n from '@/i18n/config';
+
 import { paths } from '../schema';
 
 const modifyingMethods = ['PUT', 'POST', 'DELETE', 'PATCH'] as const;

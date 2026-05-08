@@ -1,6 +1,7 @@
+import { LoaderFunction, replace } from 'react-router';
+
 import i18n, { defaultLang, LangCode, supportedLanguageCodes } from '@/i18n/config';
 import { YksiloLoaderContext } from '@/stores/useSessionManagerStore';
-import { LoaderFunction, replace } from 'react-router';
 
 export default (async ({ params: { lng }, context }) => {
   // Redirect if the language is not supported

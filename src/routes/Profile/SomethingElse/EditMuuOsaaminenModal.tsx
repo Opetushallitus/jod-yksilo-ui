@@ -1,17 +1,19 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import React from 'react';
+import { Controller, Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useRevalidator } from 'react-router';
+import { z } from 'zod';
+
+import { Button, Modal, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark } from '@jod/design-system/icons';
+
 import { client } from '@/api/client';
 import type { OsaaminenDto } from '@/api/osaamiset';
 import { type OsaaminenValue, OsaamisSuosittelija } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps } from '@/hooks/useModal';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Modal, useMediaQueries } from '@jod/design-system';
-import { JodCheckmark } from '@jod/design-system/icons';
-import React from 'react';
-import { Controller, Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { useRevalidator } from 'react-router';
-import { z } from 'zod';
 
 interface EditMuuOsaaminenModalProps extends ModalComponentProps {
   data: OsaaminenDto[];
@@ -120,7 +122,7 @@ const EditMuuOsaaminenModal = ({ onClose, data, ...rest }: EditMuuOsaaminenModal
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-end gap-3 flex-1">
+        <div className="flex flex-1 flex-row justify-end gap-3">
           <Button
             label={t('common:cancel')}
             variant="white"

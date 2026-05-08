@@ -24,13 +24,13 @@ export const FilterButton = ({
 
   return inline ? (
     <button
-      className="cursor-pointer text-form-label flex flex-row items-center gap-x-5"
+      className="flex cursor-pointer flex-row items-center gap-x-5 text-form-label"
       ref={ref}
       onClick={onClick}
       data-testid="mobile-filter-button"
     >
       <span className="font-arial">{label}</span>
-      <span className="flex bg-white rounded-full relative size-7 justify-center items-center">
+      <span className="relative flex size-7 items-center justify-center rounded-full bg-white">
         <JodSettings />
       </span>
     </button>

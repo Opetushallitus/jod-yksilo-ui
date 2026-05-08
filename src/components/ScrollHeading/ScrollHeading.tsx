@@ -1,5 +1,6 @@
-import { tidyClasses as tc, useNoteStack } from '@jod/design-system';
 import { JSX } from 'react';
+
+import { tidyClasses as tc, useNoteStack } from '@jod/design-system';
 
 export interface ScrollHeadingProps {
   title: string;

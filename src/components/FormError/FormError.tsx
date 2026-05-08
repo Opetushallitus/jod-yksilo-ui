@@ -1,6 +1,7 @@
-import { getNestedProperty } from '@/utils';
 import { ErrorMessage } from '@hookform/error-message';
 import { FieldErrors } from 'react-hook-form';
+
+import { getNestedProperty } from '@/utils';
 
 interface FormErrorProps {
   /** Field path, supports dot notation for nested fields */
@@ -18,7 +19,7 @@ export const FormError = ({ name, errors }: FormErrorProps) =>
       name={name}
       errors={errors}
       render={({ message }) => (
-        <span className="text-alert font-arial text-form-error" data-testid={`form-error-${name.replace(/\./g, '-')}`}>
+        <span className="font-arial text-form-error text-alert" data-testid={`form-error-${name.replace(/\./g, '-')}`}>
           {message}
         </span>
       )}

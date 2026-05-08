@@ -1,11 +1,12 @@
+import toast from 'react-hot-toast/headless';
+import { create } from 'zustand';
+
 import { client } from '@/api/client';
 import { getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import type { components } from '@/api/schema';
 import i18n from '@/i18n/config';
 import type { TypedMahdollisuus } from '@/routes/types';
 import { isDefined, sortByProperty } from '@/utils';
-import toast from 'react-hot-toast/headless';
-import { create } from 'zustand';
 
 export type Tavoite = components['schemas']['TavoiteDto'];
 

@@ -1,3 +1,7 @@
+import { type RouteObject, redirect, replace } from 'react-router';
+
+import { NoteStackProvider } from '@jod/design-system';
+
 import { ModalProvider } from '@/hooks/useModal/ModalProvider';
 import i18n, { supportedLanguageCodes } from '@/i18n/config';
 import { EducationOpportunity, educationOpportunityLoader } from '@/routes/EducationOpportunity';
@@ -12,8 +16,7 @@ import { muuOsaaminenLoader } from '@/routes/Profile/SomethingElse';
 import { WorkHistory, loader as workHistoryLoader } from '@/routes/Profile/WorkHistory';
 import { Tool, toolLoader } from '@/routes/Tool';
 import { isFeatureEnabled } from '@/utils/features';
-import { NoteStackProvider } from '@jod/design-system';
-import { type RouteObject, redirect, replace } from 'react-router';
+
 import { withYksiloContext } from '../auth';
 import { Cv, cvLoader } from './Cv';
 import { Home } from './Home';

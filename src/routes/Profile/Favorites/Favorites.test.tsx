@@ -1,8 +1,10 @@
-import { ModalProvider } from '@/hooks/useModal/ModalProvider';
-import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, Outlet, RouterProvider } from 'react-router';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
+
+import { ModalProvider } from '@/hooks/useModal/ModalProvider';
+import { useSuosikitStore } from '@/stores/useSuosikitStore';
+
 import Favorites from './Favorites';
 
 const mockRoutes = [{ path: '/favorites', label: 'Favorites', authRequired: true }];

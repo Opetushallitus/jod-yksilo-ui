@@ -1,16 +1,17 @@
 import i18n, { supportedLanguageCodes, type LangCode } from '@/i18n/config';
 import { TypedMahdollisuus } from '@/routes/types';
 import type { Codeset } from '@/utils/jakaumaUtils';
-/**
- Toimiala contains data from here https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/toimiala_1_20080101/classificationItems?content=data&meta=max&lang=fi.
- It is shortened to contain only necessary levels by following command: jq '[.[] | select(.level <= 2)]' toimiala_fi.json > toimiala_fi_small.json
- */
-import toimialaData from './toimiala_fi.json';
+
 /**
  Koulutusala contains data from here https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/koulutusala_1_20160101/classificationItems?content=data&meta=max&lang=fi&format=json.
  It is shortened to contain only necessary levels by following command: jq '[.[] | select(.level <= 2)]' koulutusala_fi.json > koulutusala_fi_small.json
  */
 import koulutusalaData from './koulutusala_fi.json';
+/**
+ Toimiala contains data from here https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/toimiala_1_20080101/classificationItems?content=data&meta=max&lang=fi.
+ It is shortened to contain only necessary levels by following command: jq '[.[] | select(.level <= 2)]' toimiala_fi.json > toimiala_fi_small.json
+ */
+import toimialaData from './toimiala_fi.json';
 
 export interface Classification {
   localId: string;
@@ -80,7 +81,6 @@ export const getCodeset = (codeset: Codeset, lang: LangCode): Promise<Map<string
       if (!Array.isArray(imported?.default)) {
         const { hostname } = globalThis.location;
         if (import.meta.env.DEV || ['localhost', 'jodkehitys'].some((str) => hostname.includes(str))) {
-          // eslint-disable-next-line no-console
           console.error(`Could not find codeset ${codeset} for language ${lang}!`);
         }
         return codeMap;
@@ -233,7 +233,6 @@ const loadCacheFromStorage = () => {
       }
     }
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Error loading education codeset cache from localStorage:', error);
   }
 };

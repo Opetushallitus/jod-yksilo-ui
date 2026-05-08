@@ -1,12 +1,15 @@
+import React from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
+import { EmptyState, Tag, useMediaQueries } from '@jod/design-system';
+
 import type { components } from '@/api/schema';
 import AddedTags from '@/components/OsaamisSuosittelija/AddedTags';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { getLocalizedText } from '@/utils';
 import { animateElementToTarget } from '@/utils/animations';
-import { EmptyState, Tag, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useFieldArray, useFormContext } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+
 import { addPlanStore } from '../store/addPlanStore';
 import type { OmaSuunnitelmaForm } from './AddOrEditCustomPlanModal';
 
@@ -63,20 +66,19 @@ const SelectCompetencesStep = () => {
   );
 
   return (
-    <div className="overflow-y-auto max-w-modal-content box-content px-5 md:px-9">
-      <p className="font-arial mb-6">{t('profile.my-goals.custom-plan-competences-description')}</p>
+    <div className="box-content max-w-modal-content overflow-y-auto px-5 md:px-9">
+      <p className="mb-6 font-arial">{t('profile.my-goals.custom-plan-competences-description')}</p>
 
-      <div className="sm:mt-6 w-full">
-        <div className="sm:text-heading-4 text-heading-4-mobile font-bold sticky top-0 bg-bg-gray font-arial">
-          <h2 id={requiredTagsId} className="sm:text-heading-3 text-heading-3-mobile">
+      <div className="w-full sm:mt-6">
+        <div className="font-bold sticky top-0 bg-bg-gray font-arial text-heading-4-mobile sm:text-heading-4">
+          <h2 id={requiredTagsId} className="text-heading-3-mobile sm:text-heading-3">
             {t('profile.my-goals.required-competences')}
           </h2>
-          <p className="text-secondary-gray text-body-sm font-arial mb-4">
+          <p className="mb-4 font-arial text-body-sm text-secondary-gray">
             {t('profile.my-goals.add-competence-description')}
           </p>
         </div>
-        <div className="overflow-y-auto max-h-[228px] min-h-8 h-[154px] sm:max-h-[25dvh] mb-4">
-          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+        <div className="mb-4 h-[154px] max-h-[228px] min-h-8 overflow-y-auto sm:max-h-[25dvh]">
           <ul
             ref={requiredTagsRef}
             className="flex flex-wrap gap-3 p-1"
@@ -91,7 +93,6 @@ const SelectCompetencesStep = () => {
                     append(o);
                     setLastRequiredTagClickedIndex(index);
                     animateElementToTarget(e.currentTarget, selectedTagsContainerRef.current!, () => {
-                      // eslint-disable-next-line sonarjs/no-nested-functions
                       setSkillsToAdd((prev) => prev.filter((uri) => uri !== o.uri));
                     });
                   }}
@@ -110,8 +111,8 @@ const SelectCompetencesStep = () => {
         </div>
       </div>
 
-      <div className="sm:mt-8 w-full mt-6">
-        <h2 id={addedTagsId} className="font-arial sm:text-heading-3 text-heading-3-mobile">
+      <div className="mt-6 w-full sm:mt-8">
+        <h2 id={addedTagsId} className="font-arial text-heading-3-mobile sm:text-heading-3">
           {t('profile.my-goals.selected-competences')}
         </h2>
         <div ref={selectedTagsContainerRef}>
@@ -120,11 +121,10 @@ const SelectCompetencesStep = () => {
           )}
           {valitutOsaamiset.length > 0 && (
             <>
-              <p className="text-secondary-gray text-body-sm font-arial mb-4">
+              <p className="mb-4 font-arial text-body-sm text-secondary-gray">
                 {t('profile.my-goals.remove-competence-description')}
               </p>
-              <div className="overflow-y-auto max-h-[228px] min-h-8 h-[154px] sm:max-h-[25dvh]">
-                {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+              <div className="h-[154px] max-h-[228px] min-h-8 overflow-y-auto sm:max-h-[25dvh]">
                 <ul
                   ref={selectedTagsRef}
                   className="flex flex-wrap gap-3 p-1"

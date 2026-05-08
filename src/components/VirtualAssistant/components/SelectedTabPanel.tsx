@@ -1,5 +1,7 @@
-import { cx, EmptyState, Tag } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
+
+import { cx, EmptyState, Tag } from '@jod/design-system';
+
 import type { useVirtualAssistantChat } from '../hooks/useVirtualAssistantChat';
 import { getVirtualAssistantConfig } from '../virtualAssistantConfig';
 import type { VirtualAssistantVariant } from '../virtualAssistantTypes';
@@ -29,7 +31,7 @@ export const SelectedTabPanel = ({ type, selection, tabs }: SelectedTabPanelProp
       tabIndex={0}
       aria-labelledby={selectedTabButtonId}
       className={cx(
-        'flex flex-col flex-1 min-h-0 overflow-y-auto bg-white p-4 sm:h-[484px] h-[378px] rounded-b-md text-primary-gray',
+        'flex h-[378px] min-h-0 flex-1 flex-col overflow-y-auto rounded-b-md bg-white p-4 text-primary-gray sm:h-[484px]',
         !selectedVisible && 'hidden',
       )}
       data-testid="va-selected"
@@ -46,8 +48,7 @@ export const SelectedTabPanel = ({ type, selection, tabs }: SelectedTabPanelProp
         <>
           <span className="text-help text-secondary-gray">{t('osaamissuosittelija.interest.remove')}</span>
 
-          <div aria-labelledby={selectedLabelId} className="min-h-[144px] overflow-y-auto mt-4">
-            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+          <div aria-labelledby={selectedLabelId} className="mt-4 min-h-[144px] overflow-y-auto">
             <ul className="flex flex-wrap gap-3 p-1" ref={selectedTagsRef} onKeyDown={handleTagsKeyboardNavigation}>
               {selected.map((k, index) => (
                 <li key={k.uri} className="max-w-full">

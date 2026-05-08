@@ -1,5 +1,6 @@
-import { Accordion, Checkbox } from '@jod/design-system';
 import React from 'react';
+
+import { Accordion, Checkbox } from '@jod/design-system';
 
 type CheckboxAccordionProps = {
   children?: React.ReactNode;
@@ -26,7 +27,6 @@ export const CheckboxAccordion = ({
   // Disable accordion toggle when checkbox is disabled
   const getSetIsOpen = () => {
     if (disabled) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
       return () => {};
     } else {
       return setIsOpen;
@@ -42,7 +42,7 @@ export const CheckboxAccordion = ({
         onChange={onChange}
         value={label}
         ariaLabel={label}
-        className="shrink-1 mt-[5px] text-menu text-primary-gray"
+        className="mt-[5px] shrink-1 text-menu text-primary-gray"
         indeterminate={indeterminate}
         disabled={disabled}
       />
@@ -51,7 +51,7 @@ export const CheckboxAccordion = ({
           triggerId={triggerId}
           initialState={initiallyOpen}
           title={
-            <span className={`text-form-label text-primary-gray font-arial ${disabled ? 'text-inactive-gray!' : ''}`}>
+            <span className={`font-arial text-form-label text-primary-gray ${disabled ? 'text-inactive-gray!' : ''}`}>
               {label}
             </span>
           }

@@ -1,5 +1,6 @@
-import { MahdollisuusTyyppi } from '@/routes/types';
 import { Checkbox } from '@jod/design-system';
+
+import { MahdollisuusTyyppi } from '@/routes/types';
 
 interface MahdollisuusTyyppiFilterProps {
   jobFilterText: string;

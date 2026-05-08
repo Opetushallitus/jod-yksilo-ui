@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { VirtualAssistant } from './VirtualAssistant';
 
 const mocks = vi.hoisted(() => ({

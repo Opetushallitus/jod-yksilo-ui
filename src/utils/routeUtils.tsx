@@ -1,8 +1,10 @@
-import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
-import i18n, { LangCode } from '@/i18n/config';
-import { LinkComponent, MenuItem } from '@jod/design-system';
 import React from 'react';
 import { Link } from 'react-router';
+
+import { LinkComponent, MenuItem } from '@jod/design-system';
+
+import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
+import i18n, { LangCode } from '@/i18n/config';
 
 export interface MenuRoute {
   authRequired?: boolean;

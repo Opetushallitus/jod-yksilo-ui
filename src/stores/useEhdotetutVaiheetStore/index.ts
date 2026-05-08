@@ -1,11 +1,13 @@
+import { create } from 'zustand/react';
+
+import { PageChangeDetails } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails } from '@/api/mahdollisuusService';
 import { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import { TypedMahdollisuus } from '@/routes/types';
 import { paginate, sortByProperty } from '@/utils';
-import { PageChangeDetails } from '@jod/design-system';
-import { create } from 'zustand/react';
 export interface EhdotetutVaiheetState {
   ehdotukset: components['schemas']['EhdotusDto'][];
   isLoading: boolean;

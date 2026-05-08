@@ -1,3 +1,9 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
+
+import { Button, EmptyState, Tag, useMediaQueries } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import { MainLayout } from '@/components';
 import { ESCO_OCCUPATION_PREFIX } from '@/constants';
@@ -6,10 +12,7 @@ import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import EditKiinnostusModal from '@/routes/Profile/Interests/EditKiinnostusModal';
 import { getLocalizedText, sortByProperty } from '@/utils';
-import { Button, EmptyState, Tag, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { FreeFormTextInputBlock } from '../components/FreeFormTextInputBlock';
 import { ToolCard } from '../components/ToolCard';
@@ -65,10 +68,9 @@ const Interests = () => {
         )}
         {!isSkillsEmpty && (
           <>
-            <h2 className="mb-5 text-heading-3-mobile sm:text-heading-3 border-b border-border-gray">
+            <h2 className="mb-5 border-b border-border-gray text-heading-3-mobile sm:text-heading-3">
               {t('profile.interests.skills-that-interest-me')}
             </h2>
-            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
             <ul ref={ref} className="flex flex-wrap gap-3" onKeyDown={handleKeyDown}>
               {sortedSkills.map((val) => (
                 <li key={val.uri} className="max-w-full">
@@ -86,10 +88,9 @@ const Interests = () => {
         )}
         {!isOccupationSkillsEmpty && (
           <>
-            <h2 className="mb-5 text-heading-3-mobile sm:text-heading-3 border-b border-border-gray mt-8">
+            <h2 className="mt-8 mb-5 border-b border-border-gray text-heading-3-mobile sm:text-heading-3">
               {t('profile.interests.occupations-that-interest-me')}
             </h2>
-            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
             <ul ref={occupationsRef} className="flex flex-wrap gap-3" onKeyDown={onOccupationsKeyDown}>
               {sortedOccupations.map((val) => (
                 <li key={val.uri} className="max-w-full">
@@ -105,7 +106,7 @@ const Interests = () => {
             </ul>
           </>
         )}
-        <div className="flex pt-7 mb-7">
+        <div className="mb-7 flex pt-7">
           <Button
             variant="accent"
             ariaHaspopup="dialog"

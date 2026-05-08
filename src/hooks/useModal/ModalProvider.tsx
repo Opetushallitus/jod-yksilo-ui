@@ -1,6 +1,9 @@
-import { ConfirmDialogWrapper, type ConfirmDialogWrapperProps } from '@/components';
-import { type AnimationMode } from '@jod/design-system';
 import React from 'react';
+
+import { type AnimationMode } from '@jod/design-system';
+
+import { ConfirmDialogWrapper, type ConfirmDialogWrapperProps } from '@/components';
+
 import { ModalContext } from './ModalContext';
 import type { ModalComponentType } from './utils';
 
@@ -44,9 +47,8 @@ const updateModalModes = (updated: ModalStackInternal<unknown>[]) => {
 };
 
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [modals, setModals] = React.useState<ModalStackInternal<any>[]>([]);
-  const timeoutIdsRef = React.useRef<Set<NodeJS.Timeout>>(new Set());
+  const timeoutIdsRef = React.useRef<Set<number>>(new Set());
 
   const showModal = React.useCallback(
     <P extends object>(Component: ModalComponentType<P>, props?: Omit<Partial<P>, 'isOpen'>) => {

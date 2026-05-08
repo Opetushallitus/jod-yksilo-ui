@@ -1,7 +1,8 @@
-import { Button } from '@jod/design-system';
-import { JodHome, JodUser } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+
+import { Button } from '@jod/design-system';
+import { JodHome, JodUser } from '@jod/design-system/icons';
 
 const ErrorBoundary = () => {
   const {
@@ -30,7 +31,6 @@ const ErrorBoundary = () => {
           iconSide="left"
           label={t('common:return-home')}
           variant="accent"
-          /* eslint-disable-next-line react/no-unstable-nested-components */
           linkComponent={({ children, className }) => (
             <Link to={`/${language}`} className={className}>
               {children}
@@ -43,7 +43,6 @@ const ErrorBoundary = () => {
           iconSide="left"
           label={t('common:login')}
           variant="accent"
-          /* eslint-disable-next-line react/no-unstable-nested-components */
           linkComponent={({ children, className }) => (
             <Link to={`/${language}/${t('slugs.profile.login')}`} className={className}>
               {children}

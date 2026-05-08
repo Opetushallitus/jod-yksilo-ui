@@ -1,4 +1,4 @@
-import WorkHistory from './WorkHistory';
 import loader from './loader';
+import WorkHistory from './WorkHistory';
 
 export { WorkHistory, loader };

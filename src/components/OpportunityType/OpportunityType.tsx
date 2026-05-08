@@ -1,8 +1,11 @@
-import type { MahdollisuusAlityyppi } from '@/routes/types';
-import { JodInfo, JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+
+import { JodInfo, JodOpenInNew } from '@jod/design-system/icons';
+
+import type { MahdollisuusAlityyppi } from '@/routes/types';
+
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
 interface OpportunityTypeProps {
@@ -51,7 +54,7 @@ export const OpportunityType = ({ mahdollisuusAlityyppi, showTypeTooltip }: Oppo
               CustomLink: (
                 <Link
                   to={getAmmattitietoUrl()}
-                  className="inline-flex underline items-center"
+                  className="inline-flex items-center underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 />
@@ -70,7 +73,7 @@ export const OpportunityType = ({ mahdollisuusAlityyppi, showTypeTooltip }: Oppo
 
   const typeTooltip = React.useMemo(() => {
     return (
-      <div className="font-arial text-white leading-5 text-card-label">
+      <div className="font-arial text-card-label leading-5 text-white">
         <p className="mb-2">{typeText}</p>
         <p className="font-normal">{tooltipText}</p>
       </div>
@@ -78,7 +81,7 @@ export const OpportunityType = ({ mahdollisuusAlityyppi, showTypeTooltip }: Oppo
   }, [typeText, tooltipText]);
 
   return typeText ? (
-    <div className="uppercase text-body-xs font-medium text-primary-gray flex items-center gap-2">
+    <div className="font-medium flex items-center gap-2 text-body-xs text-primary-gray uppercase">
       {typeText}
       {showTypeTooltip && (
         <TooltipWrapper tooltipPlacement="top" tooltipContent={typeTooltip}>

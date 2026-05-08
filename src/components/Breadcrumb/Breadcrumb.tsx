@@ -1,10 +1,13 @@
-import type { LoaderData as EducationOpportunityData } from '@/routes/EducationOpportunity/loader';
-import type { LoaderData as JobOpportunityData } from '@/routes/JobOpportunity/loader';
-import { getLocalizedText } from '@/utils';
-import { type BreadcrumbItem, Breadcrumb as DSBreadCrumb } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { UIMatch, useMatches } from 'react-router';
+
+import { type BreadcrumbItem, Breadcrumb as DSBreadCrumb } from '@jod/design-system';
+
+import type { LoaderData as EducationOpportunityData } from '@/routes/EducationOpportunity/loader';
+import type { LoaderData as JobOpportunityData } from '@/routes/JobOpportunity/loader';
+import { getLocalizedText } from '@/utils';
+
 import { BreadcrumbLink } from '../BreadcrumbLink/BreadcrumbLink';
 
 interface YksiloHandle {
@@ -137,7 +140,7 @@ export const Breadcrumb = () => {
 
       setItems(injectProfileCompetencesParent(mappedItems, language, t, validMatches));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, [matches]);
 
   return (

@@ -1,6 +1,7 @@
-import { useModal } from '@/hooks/useModal';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
+
+import { useModal } from '@/hooks/useModal';
 
 /**
  * Returns a function that opens the session expired dialog (login vs continue browsing).
@@ -24,7 +25,7 @@ export const useShowSessionExpiredDialog = () => {
       cancelText: t('common:session.expired.continue'),
       variant: 'normal',
       onConfirm: () => {
-        navigate(`/${language}/${t('slugs.profile.login')}`, {
+        void navigate(`/${language}/${t('slugs.profile.login')}`, {
           state: {
             callbackUrl: `${location.pathname}${location.search}${location.hash}`,
           },

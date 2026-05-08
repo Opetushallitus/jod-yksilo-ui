@@ -1,8 +1,11 @@
-import { LIMITS } from '@/constants';
-import { cx, InputField } from '@jod/design-system';
-import { JodSend } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { cx, InputField } from '@jod/design-system';
+import { JodSend } from '@jod/design-system/icons';
+
+import { LIMITS } from '@/constants';
+
 import type { useVirtualAssistantChat } from '../hooks/useVirtualAssistantChat';
 
 type VirtualAssistantChatState = ReturnType<typeof useVirtualAssistantChat>;
@@ -17,7 +20,7 @@ export const VirtualAssistantInput = ({ input, selectedVisible }: VirtualAssista
   const { handleInputKeyDown, isSendDisabled, setValue, updateHistory, value } = input;
 
   return (
-    <div className={cx('flex gap-4 items-center mb-1', selectedVisible && 'hidden')}>
+    <div className={cx('mb-1 flex items-center gap-4', selectedVisible && 'hidden')}>
       <InputField
         value={value}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
@@ -35,7 +38,7 @@ export const VirtualAssistantInput = ({ input, selectedVisible }: VirtualAssista
         onClick={updateHistory}
         aria-label={t('tool.my-own-data.virtual-assistant.send')}
         data-testid="va-send"
-        className="text-secondary-gray size-7 cursor-pointer disabled:cursor-not-allowed"
+        className="size-7 cursor-pointer text-secondary-gray disabled:cursor-not-allowed"
       >
         <JodSend aria-hidden="true" />
       </button>
