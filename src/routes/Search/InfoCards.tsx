@@ -1,7 +1,10 @@
+import { useTranslation } from 'react-i18next';
+
+import { HeroCard } from '@jod/design-system';
+
 import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { getLinkTo } from '@/utils/routeUtils';
-import { HeroCard } from '@jod/design-system';
-import { useTranslation } from 'react-i18next';
+
 import { ToolCard } from '../Profile/components';
 
 export const InfoCards = () => {

@@ -1,3 +1,6 @@
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+
 import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
@@ -22,8 +25,6 @@ import {
 } from '@/stores/useToolStore/ToolStoreModel';
 import { paginate } from '@/utils';
 import { mapKoulutusCodesToLabels } from '@/utils/codes/codes';
-import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
 
 const SUOSIKIT_PATH = '/api/profiili/suosikit';
 const DEFAULT_PAINOTUS = 50;
@@ -256,7 +257,6 @@ export const useToolStore = create<ToolState>()(
             mixedMahdollisuudet: sortedMixedMahdollisuudet,
           });
         } catch (_error) {
-          /* eslint-disable no-console */
           console.error(_error);
           set({
             mixedMahdollisuudet: [],
@@ -319,7 +319,7 @@ export const useToolStore = create<ToolState>()(
         }
       },
 
-      updateEhdotuksetAndTyomahdollisuudet: async (loggedIn: boolean, forceFetchData = false) => {
+      updateEhdotuksetAndTyomahdollisuudet: async (loggedIn: boolean, forceFetchData) => {
         const { updateEhdotukset, fetchMahdollisuudetPage, updateSuosikit, shouldFetchData } = get();
 
         abortController.abort();

@@ -1,5 +1,7 @@
-import { client } from '@/api/client';
 import { Mock, beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { client } from '@/api/client';
+
 import {
   getKoulutusMahdollisuusDetails,
   getTyoMahdollisuusDetails,

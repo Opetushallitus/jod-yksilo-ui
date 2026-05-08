@@ -1,11 +1,14 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Button, cx } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
 import { planLetter } from '@/routes/Profile/MyGoals/planLetterUtil';
 import { isDefined } from '@/utils';
-import { Button, cx } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+
 import { PlanCompetenceRow, PlanCompetencesTableRowData } from './PlanCompetenceRow';
 
 const ROW_LIMIT = 10;
@@ -42,34 +45,33 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
         (_, osaaminen) => ({
           ...osaaminen,
           profiili: omatOsaamisetUris.has(osaaminen.uri),
-          // eslint-disable-next-line sonarjs/no-nested-functions
           plans: plans.map((p) => p.osaamiset?.includes(osaaminen.uri)).filter(isDefined),
         }),
       );
       setVaaditutOsaamiset(response);
     };
-    fetchOsaamiset();
+    void fetchOsaamiset();
   }, [goal.osaamiset, plans]);
 
   return (
-    <div className="mt-6 overflow-x-auto max-w-full p-2">
+    <div className="mt-6 max-w-full overflow-x-auto p-2">
       <h3 className={'text-heading-3'}>{t('profile.my-goals.competence-compare')}</h3>
       <table
-        className="font-arial mt-3"
+        className="mt-3 font-arial"
         data-testid="compare-competences-table"
         aria-label={t('profile.my-goals.competence-compare')}
       >
         <thead>
           <tr className="border-b border-inactive-gray text-form-label">
-            <th scope="col" className="text-left pl-5 pr-7 pb-3">
+            <th scope="col" className="pr-7 pb-3 pl-5 text-left">
               {t('competence')}
             </th>
-            <th scope="col" className="text-center whitespace-nowrap pr-5 pb-3">
+            <th scope="col" className="pr-5 pb-3 text-center whitespace-nowrap">
               {t('profile.my-goals.own-competences')}
             </th>
             {plans.map((plan) => {
               return (
-                <th scope="col" key={`th-${plan.id}`} className="text-center whitespace-nowrap pr-5 pb-3">
+                <th scope="col" key={`th-${plan.id}`} className="pr-5 pb-3 text-center whitespace-nowrap">
                   {plan.displayKey}
                 </th>
               );

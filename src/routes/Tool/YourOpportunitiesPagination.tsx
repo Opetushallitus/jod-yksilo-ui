@@ -1,7 +1,9 @@
+import { useShallow } from 'zustand/shallow';
+
+import { type PageChangeDetails, Pagination, useMediaQueries } from '@jod/design-system';
+
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
 import { useToolStore } from '@/stores/useToolStore';
-import { type PageChangeDetails, Pagination, useMediaQueries } from '@jod/design-system';
-import { useShallow } from 'zustand/shallow';
 
 interface YourOpportunitiesPaginationProps {
   scrollRef: React.RefObject<HTMLUListElement | null>;

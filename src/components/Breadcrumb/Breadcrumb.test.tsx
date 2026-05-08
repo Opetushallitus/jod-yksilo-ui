@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen } from '@testing-library/react';
 import { useMatches } from 'react-router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { Breadcrumb } from './Breadcrumb';
 
 vi.mock('react-i18next', () => ({
@@ -11,7 +11,7 @@ vi.mock('react-i18next', () => ({
   }),
 }));
 vi.mock('react-router', () => ({
-  // eslint-disable-next-line jsx-a11y/anchor-has-content
+  // oxlint-disable-next-line jsx_a11y/anchor-has-content
   NavLink: (props: any) => <a {...props} />,
   useMatches: vi.fn(),
 }));
@@ -22,7 +22,6 @@ vi.mock('@jod/design-system', () => ({
   Breadcrumb: (props: any) => (
     <div data-testid="ds-breadcrumb">
       {props.items.map((item: any, idx: number) => (
-        // eslint-disable-next-line react/no-array-index-key
         <span key={idx}>{item.label}</span>
       ))}
     </div>

@@ -1,4 +1,4 @@
 {
-  "*.{ts,tsx,json,css,md,yml,yaml}": ["prettier --check"],
-  "*.{ts,tsx}": ["eslint --report-unused-disable-directives"]
+  "*.{js,jsx,ts,tsx,mjs,cjs}": "oxlint",
+  "*": "oxfmt --no-error-on-unmatched-pattern --check"
 }

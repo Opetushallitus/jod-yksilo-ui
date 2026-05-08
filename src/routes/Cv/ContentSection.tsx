@@ -1,6 +1,7 @@
+import { Accordion, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
+
 import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { hyphenize } from '@/utils';
-import { Accordion, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
 
 interface ContentSectionProps {
   children: React.ReactNode;

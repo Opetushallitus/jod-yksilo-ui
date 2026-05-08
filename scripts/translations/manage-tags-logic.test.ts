@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { JIRA_TICKET_PATTERN, processKeyTags, pushDeprecatedAndJira } from './manage-tags-logic.js';
 
 const baseInput = {

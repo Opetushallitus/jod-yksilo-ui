@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+
 import loader from './loader';
 
 const mocks = vi.hoisted(() => {

@@ -1,6 +1,8 @@
-import { hyphenize } from '@/utils';
-import { Accordion } from '@jod/design-system';
 import React from 'react';
+
+import { Accordion } from '@jod/design-system';
+
+import { hyphenize } from '@/utils';
 
 const ToolAccordion = ({
   title,
@@ -28,7 +30,7 @@ const ToolAccordion = ({
   const contentId = `accordion-${id}-content`;
 
   return (
-    <div className="bg-white rounded py-6 px-5" ref={ref} data-testid={testId}>
+    <div className="rounded bg-white px-5 py-6" ref={ref} data-testid={testId}>
       <Accordion
         isOpen={isOpen}
         caretPosition="top"
@@ -39,7 +41,7 @@ const ToolAccordion = ({
         initialState={false}
         collapsedContent={
           description && (
-            <span className="font-arial text-body-sm text-secondary-gray text-pretty hyphens-auto">{description}</span>
+            <span className="font-arial text-body-sm text-pretty hyphens-auto text-secondary-gray">{description}</span>
           )
         }
         testId="tool-accordion-button"

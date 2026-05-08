@@ -1,11 +1,13 @@
-import { components } from '@/api/schema';
-import { formErrorMessage, LIMITS } from '@/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Textarea } from '@jod/design-system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import z from 'zod';
+
+import { Textarea } from '@jod/design-system';
+
+import { components } from '@/api/schema';
+import { formErrorMessage, LIMITS } from '@/constants';
 
 interface FreeFormTextInputProps {
   text?: components['schemas']['LokalisoituTeksti'];
@@ -34,7 +36,6 @@ export const FreeFormTextInput = ({ text, onChange, testId, placeholder }: FreeF
       z.object({}).catchall(z.string().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
     ),
   });
-  // eslint-disable-next-line react-hooks/incompatible-library
   const fields = watch();
 
   React.useEffect(() => {

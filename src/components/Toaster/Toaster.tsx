@@ -1,5 +1,7 @@
-import { Toast, useNoteStack } from '@jod/design-system';
 import { Toast as ReactHotToast, useToaster } from 'react-hot-toast/headless';
+
+import { Toast, useNoteStack } from '@jod/design-system';
+
 import './toaster.css';
 
 type SafeToast = Omit<ReactHotToast, 'message'> & { message: string };

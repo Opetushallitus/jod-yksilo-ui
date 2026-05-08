@@ -1,13 +1,16 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Accordion, Button, EmptyState, Tag } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
+
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useShowSessionExpiredDialog } from '@/hooks/useShowSessionExpiredDialog';
 import { useIsSessionExpired, useYksiloProfileLinkData } from '@/stores/useSessionManagerStore';
 import { removeDuplicatesByKey } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
-import { Accordion, Button, EmptyState, Tag } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+
 import { generateProfileLink, getTextClassByCompetenceSourceType } from '../utils';
 import { type CompetenceSourceType, FILTERS_ORDER, type GroupByProps, type MobileFilterButton } from './constants';
 
@@ -114,7 +117,7 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
   const { ref, handleKeyDown } = useArrowKeyControls(nonDuplicateOsaamiset);
 
   return (
-    <div key={sourceType} className="flex flex-col mb-11">
+    <div key={sourceType} className="mb-11 flex flex-col">
       <Accordion
         underline
         title={
@@ -129,7 +132,6 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
             {nonDuplicateOsaamiset.some(
               (val) => val.lahde.tyyppi === sourceType && isOsaaminenVisible(sourceType, val.lahde.id),
             ) && (
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
               <ul className="flex flex-wrap gap-4" ref={ref} onKeyDown={handleKeyDown}>
                 {nonDuplicateOsaamiset.map((val) => {
                   const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
@@ -176,7 +178,7 @@ export const GroupBySource = ({
 
   return (
     <>
-      <div className="flex flex-row justify-between gap-5 mb-7">
+      <div className="mb-7 flex flex-row justify-between gap-5">
         <h2 className="text-heading-2-mobile sm:text-heading-2">{t('my-competences-by-sources')}</h2>
         {mobileFilterOpenerComponent}
       </div>

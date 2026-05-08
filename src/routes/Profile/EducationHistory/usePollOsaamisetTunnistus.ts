@@ -1,9 +1,10 @@
+import React from 'react';
+import { useRevalidator } from 'react-router';
+
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
 import { ExperienceTableRowData } from '@/components';
-import React from 'react';
-import { useRevalidator } from 'react-router';
 
 const updateRowSubrows = <ContextType>(
   row: ExperienceTableRowData,
@@ -150,7 +151,7 @@ export const usePollOsaamisetTunnistus = (
 
       const remainingIds = rowIdsForOsaamisetTunnistus.filter((id) => !responseMap.has(id));
       if (remainingIds.length === 0) {
-        revalidator.revalidate();
+        void revalidator.revalidate();
       }
     } catch (err) {
       hasError = true;

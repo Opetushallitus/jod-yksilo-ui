@@ -1,11 +1,14 @@
+import React from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
+import { Datepicker, InputField, Textarea } from '@jod/design-system';
+
 import { FormError, TouchedFormError } from '@/components';
 import { LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { isFeatureEnabled } from '@/utils/features';
-import { Datepicker, InputField, Textarea } from '@jod/design-system';
-import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+
 import type { EducationHistoryForm } from './utils';
 
 interface EducationStepProps {
@@ -33,12 +36,12 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
   const loppuPvm = watch(`koulutukset.${koulutus}.loppuPvm`);
   React.useEffect(() => {
     if (alkuPvm || loppuPvm) {
-      trigger();
+      void trigger();
     }
   }, [alkuPvm, loppuPvm, trigger]);
 
   return (
-    <div className="max-w-modal-content box-content px-5 md:px-9">
+    <div className="box-content max-w-modal-content px-5 md:px-9">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.education-history.modals.description')}
       </p>
@@ -72,7 +75,7 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
                 {...field}
                 onBlur={() => {
                   onBlur();
-                  trigger(`koulutukset.${koulutus}.loppuPvm`);
+                  void trigger(`koulutukset.${koulutus}.loppuPvm`);
                 }}
                 placeholder={t('date-placeholder')}
                 translations={datePickerTranslations}

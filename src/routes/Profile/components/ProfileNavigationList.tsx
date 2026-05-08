@@ -1,8 +1,10 @@
-import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
-import { generateMenuItems, type GenerateMenuItemsOptions, type MenuRoute } from '@/utils/routeUtils';
-import { MenuSection, PageNavigation } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useOutletContext } from 'react-router';
+
+import { MenuSection, PageNavigation } from '@jod/design-system';
+
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
+import { generateMenuItems, type GenerateMenuItemsOptions, type MenuRoute } from '@/utils/routeUtils';
 
 interface ProfileNavigationListProps {
   collapsed?: boolean;

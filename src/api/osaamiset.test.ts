@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { OsaaminenDto, osaamiset } from './osaamiset';
 
 const mocks = vi.hoisted(() => ({

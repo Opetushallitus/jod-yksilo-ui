@@ -1,5 +1,7 @@
-import { components } from '@/api/schema';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { components } from '@/api/schema';
+
 import {
   filterByAmmattiryhmat,
   filterByEducationType,

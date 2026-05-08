@@ -1,5 +1,7 @@
-import { components } from '@/api/schema';
 import { Accordion } from '@jod/design-system';
+
+import { components } from '@/api/schema';
+
 import { FreeFormTextInput } from './FreeFormTextInput';
 
 interface FreeFormTextInputBlockProps {
@@ -18,7 +20,7 @@ const Wrapper = ({
   collapsible,
   children,
 }: Omit<FreeFormTextInputBlockProps, 'text' | 'onChange' | 'testId'> & { children: React.ReactNode }) => {
-  const desc = <div className="my-5 font-arial text-body-md max-w-input-long">{description}</div>;
+  const desc = <div className="my-5 max-w-input-long font-arial text-body-md">{description}</div>;
 
   return collapsible ? (
     <Accordion
@@ -31,7 +33,7 @@ const Wrapper = ({
     </Accordion>
   ) : (
     <div>
-      <h2 className="truncate text-heading-3-mobile sm:text-heading-3 border-b border-border-gray">{header}</h2>
+      <h2 className="truncate border-b border-border-gray text-heading-3-mobile sm:text-heading-3">{header}</h2>
       {desc}
       {children}
     </div>

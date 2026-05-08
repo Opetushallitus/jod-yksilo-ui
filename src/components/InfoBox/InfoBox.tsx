@@ -1,5 +1,6 @@
-import { JodInfo } from '@jod/design-system/icons';
 import { useTranslation } from 'react-i18next';
+
+import { JodInfo } from '@jod/design-system/icons';
 
 interface InfoBoxProps {
   text: string | React.ReactNode;
@@ -10,7 +11,7 @@ export const InfoBox = ({ text }: InfoBoxProps) => {
   return (
     <section
       aria-label={t('tooltip.info')}
-      className="flex bg-bg-gray-2 rounded-md max-w-xl py-5 pl-4 pr-6 items-start gap-4 text-secondary-1-dark-2 text-heading-4 mb-8"
+      className="max-w-xl mb-8 flex items-start gap-4 rounded-md bg-bg-gray-2 py-5 pr-6 pl-4 text-heading-4 text-secondary-1-dark-2"
     >
       <div aria-hidden="true">
         <JodInfo />

@@ -1,7 +1,9 @@
+import { useShallow } from 'zustand/shallow';
+
+import { type PageChangeDetails, Pagination, useMediaQueries } from '@jod/design-system';
+
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
-import { type PageChangeDetails, Pagination, useMediaQueries } from '@jod/design-system';
-import { useShallow } from 'zustand/shallow';
 
 interface PlanOptionsPaginationProps {
   scrollRef: React.RefObject<HTMLUListElement | null>;

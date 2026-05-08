@@ -1,8 +1,10 @@
-import { osaamiset } from '@/api/osaamiset';
-import { ExperienceTable, type ExperienceTableRowData } from '@/components';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+
+import { osaamiset } from '@/api/osaamiset';
+import { ExperienceTable, type ExperienceTableRowData } from '@/components';
+
 import { Koulutus, getEducationHistoryTableRows } from '../utils';
 import { type EducationHistoryForm } from './utils';
 
@@ -16,7 +18,6 @@ const SummaryStep = () => {
       const koulutuskokonaisuus = watch();
 
       const uris = koulutuskokonaisuus.koulutukset.flatMap((koulutus) =>
-        // eslint-disable-next-line sonarjs/no-nested-functions
         koulutus.osaamiset.map((osaaminen) => osaaminen.id),
       );
       const osaamisetData = await osaamiset.find(uris);
@@ -40,7 +41,6 @@ const SummaryStep = () => {
                     nimi: koulutus.nimi,
                     alkuPvm: koulutus.alkuPvm,
                     loppuPvm: koulutus.loppuPvm,
-                    // eslint-disable-next-line sonarjs/no-nested-functions
                     osaamiset: koulutus.osaamiset.map((osaaminen) => osaaminen.id),
                   }) as Koulutus,
               ),
@@ -56,10 +56,10 @@ const SummaryStep = () => {
 
   return (
     <div>
-      <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md max-w-modal-content box-content px-5 md:px-9">
+      <p className="mb-6 box-content max-w-modal-content px-5 font-arial text-body-md-mobile sm:text-body-md md:px-9">
         {t('profile.education-history.modals.summary-description')}
       </p>
-      <div data-testid="education-history-summary-table" className="max-w-modal-content box-content md:px-6">
+      <div data-testid="education-history-summary-table" className="box-content max-w-modal-content md:px-6">
         <ExperienceTable
           insideModal
           ariaLabel={t('profile.education-history.title')}

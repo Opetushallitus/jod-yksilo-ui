@@ -1,5 +1,6 @@
-import { getLinkTo } from '@/utils/routeUtils';
 import { Button } from '@jod/design-system';
+
+import { getLinkTo } from '@/utils/routeUtils';
 
 /** Creates a footer component to use with DS ConfirmDialog, used for dialogs that require user to log in before proceeding. */
 export const createLoginDialogFooter = (
@@ -10,8 +11,8 @@ export const createLoginDialogFooter = (
 ) => {
   const ConfirmDialogLoginFooter = (hideDialog: () => void) => {
     return (
-      <div className="flex gap-4 flex-1">
-        <div className="flex gap-4 flex-1 justify-end">
+      <div className="flex flex-1 gap-4">
+        <div className="flex flex-1 justify-end gap-4">
           <Button
             label={t('tool.my-own-data.cancel-text')}
             variant="white"

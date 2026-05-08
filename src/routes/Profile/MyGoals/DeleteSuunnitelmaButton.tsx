@@ -1,11 +1,13 @@
+import toast from 'react-hot-toast/headless';
+import { useTranslation } from 'react-i18next';
+
+import { Button, useMediaQueries } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { getLocalizedText } from '@/utils';
-import { Button, useMediaQueries } from '@jod/design-system';
-import toast from 'react-hot-toast/headless';
-import { useTranslation } from 'react-i18next';
 
 interface DeletePolkuButtonProps {
   name?: string | components['schemas']['LokalisoituTeksti'];

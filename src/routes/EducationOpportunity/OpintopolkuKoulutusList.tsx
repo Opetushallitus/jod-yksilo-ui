@@ -1,10 +1,12 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Button, Spinner } from '@jod/design-system';
+import { JodOpenInNew, JodPathDuration } from '@jod/design-system/icons';
+
 import { components } from '@/api/schema';
 import i18n, { LangCode } from '@/i18n/config';
 import { getOpintopolkuKoulutus, OpintopolkuKoulutusResponse } from '@/utils/opintopolku';
-import { Button, Spinner } from '@jod/design-system';
-import { JodOpenInNew, JodPathDuration } from '@jod/design-system/icons';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 interface OpintopolkuKoulutusProps {
   oid: string;
@@ -53,7 +55,7 @@ const OpintopolkuKoulutus = ({ oid, title, description, credits, creditUnit }: O
   const plainDescription = stripHtmlTags(description);
 
   return (
-    <div className="flex flex-col gap-5 p-7 border-t-5 border-[#397B0F] rounded-md bg-white text-primary-gray">
+    <div className="flex flex-col gap-5 rounded-md border-t-5 border-[#397B0F] bg-white p-7 text-primary-gray">
       <h2 className="text-heading-2 hover:text-accent">
         <a
           href={`https://opintopolku.fi/konfo/${i18n.language}/koulutus/${oid}`}
@@ -62,14 +64,14 @@ const OpintopolkuKoulutus = ({ oid, title, description, credits, creditUnit }: O
         >
           {title}
           &nbsp;
-          <JodOpenInNew ariaLabel={t('common:external-link')} className="inline-flex align-middle mb-1" />
+          <JodOpenInNew ariaLabel={t('common:external-link')} className="mb-1 inline-flex align-middle" />
         </a>
       </h2>
-      <p className="text-body-md font-arial text-primary-gray line-clamp-3 whitespace-pre-line">{plainDescription}</p>
+      <p className="line-clamp-3 font-arial text-body-md whitespace-pre-line text-primary-gray">{plainDescription}</p>
       {credits && (
         <div className="flex items-center gap-2 text-secondary-gray">
           <JodPathDuration size={24} />
-          <span className="text-body-sm font-arial">
+          <span className="font-arial text-body-sm">
             {credits} {creditUnit}
           </span>
         </div>
@@ -158,7 +160,7 @@ export const OpintopolkuKoulutusList = ({
     // Fetch more if we don't have enough items for the next page + 1 to check hasMore
     const neededCount = PAGE_SIZE * newPage + 1;
     if (fetchedKoulutukset.length < neededCount && nextIndexRef.current < oids.length) {
-      fetchMore();
+      void fetchMore();
     }
   }, [page, fetchedKoulutukset.length, oids.length, fetchMore]);
 
@@ -172,12 +174,12 @@ export const OpintopolkuKoulutusList = ({
 
   React.useEffect(() => {
     if (fetchedKoulutukset.length === 0 && oids.length > 0 && !loading) {
-      fetchMore();
+      void fetchMore();
     }
   }, [fetchedKoulutukset.length, oids.length, loading, fetchMore]);
 
   return fetchedKoulutukset.length > 0 || loading ? (
-    <div className="flex flex-col gap-4 mt-9 pt-7 border-t-2 border-border-gray">
+    <div className="mt-9 flex flex-col gap-4 border-t-2 border-border-gray pt-7">
       {displayedKoulutukset.map((koulutus) => (
         <OpintopolkuKoulutus key={koulutus.oid} {...koulutus} />
       ))}

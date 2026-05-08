@@ -1,7 +1,9 @@
-import { useModal } from '@/hooks/useModal';
-import { Button, ConfirmDialog, Spinner, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Button, ConfirmDialog, Spinner, useMediaQueries } from '@jod/design-system';
+
+import { useModal } from '@/hooks/useModal';
 
 const isPromise = (func: (() => Promise<void>) | (() => void)) => {
   return func.constructor.name === 'AsyncFunction' || func instanceof Promise;
@@ -33,7 +35,7 @@ const ShowDialogWrapper = (showDialog: () => void) => {
   React.useEffect(() => {
     showDialog();
     // Ensure that this effect runs only once when the component mounts.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, []);
   return <></>;
 };
@@ -63,7 +65,6 @@ export const ConfirmDialogWrapper = ({
   const defaultCancelText = t('common:cancel');
   const defaultConfirmText = title as string;
   const [loading, setLoading] = React.useState(false);
-  // eslint-disable-next-line react/no-unstable-nested-components
   const DefaultFooter = (hideDialog: () => void) => (
     <>
       {!hideSecondaryButton && (

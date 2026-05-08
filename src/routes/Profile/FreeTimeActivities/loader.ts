@@ -1,8 +1,8 @@
+import { LoaderFunction } from 'react-router';
+
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
-
-import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
   const { data = [], error } = await client.GET('/api/profiili/vapaa-ajan-toiminnot', {

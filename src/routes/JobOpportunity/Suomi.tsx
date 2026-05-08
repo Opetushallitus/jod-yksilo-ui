@@ -1,8 +1,9 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { LangCode } from '@/i18n/config.ts';
 import { MaakuntaTyollisyys } from '@/routes/JobOpportunity/JobOpportunity.tsx';
 import { maakuntaKoodit, translateMaakunta } from '@/utils/maakuntaUtils.ts';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 interface Props {
   data: MaakuntaTyollisyys[];
@@ -62,7 +63,7 @@ const Suomi: React.FC<Props> = ({ data }: Props) => {
     i18n: { language },
   } = useTranslation();
   React.useEffect(() => {
-    Promise.all(maakuntaKoodit.map((maakunta) => translateMaakunta(maakunta, language as LangCode))).then(
+    void Promise.all(maakuntaKoodit.map((maakunta) => translateMaakunta(maakunta, language as LangCode))).then(
       (translatedMaakunnat) => {
         translatedMaakunnat.sort((a, b) => a[1].localeCompare(b[1]));
         setMaakunnatList(translatedMaakunnat);
@@ -705,7 +706,7 @@ const Suomi: React.FC<Props> = ({ data }: Props) => {
       {!!hoverTooltip?.visible && (
         <div
           id="custom-tooltip"
-          className="p-4 rounded-full"
+          className="rounded-full p-4"
           style={{
             position: 'fixed',
             zIndex: 1000,

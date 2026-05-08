@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { countFilteredEhdotukset, mergeUniqueValuesExcludingType } from './utils';
 
 type MahdollisuusTyyppi = 'KOULUTUSMAHDOLLISUUS' | 'TYOMAHDOLLISUUS';

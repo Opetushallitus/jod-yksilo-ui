@@ -1,7 +1,9 @@
-import { useToolStore } from '@/stores/useToolStore';
-import { RangeSlider } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
+
+import { RangeSlider } from '@jod/design-system';
+
+import { useToolStore } from '@/stores/useToolStore';
 
 export const maxKestoValue = 1000;
 const minKestoValue = 0;

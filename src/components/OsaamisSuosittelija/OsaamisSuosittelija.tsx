@@ -1,12 +1,15 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Textarea, cx, useMediaQueries } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
 import { ESCO_SKILL_PREFIX, LIMITS } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
-import { Textarea, cx, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+
 import { TagAreas } from './TagAreas';
 export interface Osaaminen {
   id: string;
@@ -167,7 +170,7 @@ export const OsaamisSuosittelija = ({
       setEhdotetutOsaamiset([]);
       setHasFetched(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, [debouncedTaitosi, i18n.language, mode]);
 
   React.useEffect(() => {
@@ -230,7 +233,7 @@ export const OsaamisSuosittelija = ({
           testId="osaamissuosittelija-textarea"
         />
         {debouncedTaitosi.trim().length > 0 && taitosi.trim().length > 2 && (
-          <div className="font-arial text-secondary-gray mt-3 text-help">
+          <div className="mt-3 font-arial text-help text-secondary-gray">
             {mode === 'osaamiset'
               ? t('osaamissuosittelija.competence.search-disclaimer')
               : t('osaamissuosittelija.interest.search-disclaimer')}

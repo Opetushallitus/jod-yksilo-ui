@@ -23,7 +23,7 @@ export const SearchInput = ({ ref, value, onChange }: SearchInputProps) => {
         autoComplete="off"
         aria-label={t('search.label')}
         role="searchbox"
-        className="border-2 border-white bg-white py-[10px] px-4 w-[250px] h-[34px] text-primary-gray focus:outline-2 focus:outline-accent placeholder:text-inactive-gray ds:font-arial ds:text-body-md"
+        className="ds:font-arial ds:text-body-md h-[34px] w-[250px] border-2 border-white bg-white px-4 py-[10px] text-primary-gray placeholder:text-inactive-gray focus:outline-2 focus:outline-accent"
         data-testid="searchbar-input"
       />
     </div>

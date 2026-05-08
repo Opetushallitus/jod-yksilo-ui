@@ -1,15 +1,7 @@
-import { FeedbackModal } from '@/components';
-import { NavMenu } from '@/components/NavMenu/NavMenu';
-import { SearchBar } from '@/components/SearchBar/SearchBar';
-import { Toaster } from '@/components/Toaster/Toaster';
-import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
-import { useYksiloData } from '@/hooks/useYksiloData';
-import { langLabels, supportedLanguageCodes, type LangCode } from '@/i18n/config';
-import { useIsLoggedIn, useSessionManagerStore } from '@/stores/useSessionManagerStore';
-import { useToolStore } from '@/stores/useToolStore';
-import { isFeatureEnabled } from '@/utils/features';
-import { getNotifications } from '@/utils/notifications';
-import { getLinkTo } from '@/utils/routeUtils';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation, useMatch } from 'react-router';
+
 import {
   Button,
   Chatbot,
@@ -26,9 +18,20 @@ import {
   useNoteStack,
   UserButton,
 } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link, NavLink, Outlet, ScrollRestoration, useLoaderData, useLocation, useMatch } from 'react-router';
+
+import { FeedbackModal } from '@/components';
+import { NavMenu } from '@/components/NavMenu/NavMenu';
+import { SearchBar } from '@/components/SearchBar/SearchBar';
+import { Toaster } from '@/components/Toaster/Toaster';
+import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
+import { useYksiloData } from '@/hooks/useYksiloData';
+import { langLabels, supportedLanguageCodes, type LangCode } from '@/i18n/config';
+import { useIsLoggedIn, useSessionManagerStore } from '@/stores/useSessionManagerStore';
+import { useToolStore } from '@/stores/useToolStore';
+import { isFeatureEnabled } from '@/utils/features';
+import { getNotifications } from '@/utils/notifications';
+import { getLinkTo } from '@/utils/routeUtils';
+
 import { LogoutFormContext } from '.';
 import WelcomePathModal from '../Profile/WelcomePathModal/WelcomePathModal';
 import { useSessionManagerNotifications } from './useSessionManagerNotifications';
@@ -198,7 +201,7 @@ const Root = () => {
   const { data: yksiloData, isLoading } = useYksiloData();
 
   return (
-    <div className="flex flex-col min-h-screen bg-bg-gray text-primary-gray" data-testid="app-root">
+    <div className="flex min-h-screen flex-col bg-bg-gray text-primary-gray" data-testid="app-root">
       <link rel="manifest" href={`/manifest-${language}.json`} crossOrigin="use-credentials" />
       <header role="banner" className="sticky top-0 z-30 print:hidden" data-testid="app-header">
         <SkipLink hash="#jod-main" label={t('common:skiplinks.main')} />
@@ -219,11 +222,9 @@ const Root = () => {
                 firstName={firstName}
                 isProfileActive={isProfileActive}
                 profileLabel={t('profile.index')}
-                // eslint-disable-next-line react/no-unstable-nested-components
                 profileLinkComponent={(props) => <NavLink to={userMenuProfileFrontUrl} {...props} />}
                 isLoggedIn={isLoggedIn}
                 loginLabel={t('common:login')}
-                // eslint-disable-next-line react/no-unstable-nested-components
                 loginLinkComponent={(props) => <NavLink to={loginPageUrl} {...props} />}
                 logoutLabel={t('common:logout')}
                 onLogout={logout}

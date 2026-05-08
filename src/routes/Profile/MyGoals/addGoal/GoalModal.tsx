@@ -1,14 +1,8 @@
-import { client } from '@/api/client.ts';
-import type { components } from '@/api/schema';
-import { ActionButton, OpportunityCard } from '@/components';
-import { useEscHandler } from '@/hooks/useEscHandler';
-import { ModalComponentProps, useModal } from '@/hooks/useModal';
-import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
-import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
-import type { TypedMahdollisuus } from '@/routes/types';
-import { useSuosikitStore } from '@/stores/useSuosikitStore';
-import { type Tavoite, useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { getLocalizedText, stringToLocalizedText } from '@/utils';
+import React from 'react';
+import toast from 'react-hot-toast/headless';
+import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
+
 import {
   Button,
   InputField,
@@ -21,10 +15,18 @@ import {
   WizardProgress,
 } from '@jod/design-system';
 import { JodArrowLeft, JodArrowRight, JodCheckmark, JodFlag, JodFlagFilled } from '@jod/design-system/icons';
-import React from 'react';
-import toast from 'react-hot-toast/headless';
-import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
+
+import { client } from '@/api/client.ts';
+import type { components } from '@/api/schema';
+import { ActionButton, OpportunityCard } from '@/components';
+import { useEscHandler } from '@/hooks/useEscHandler';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
+import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
+import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
+import type { TypedMahdollisuus } from '@/routes/types';
+import { useSuosikitStore } from '@/stores/useSuosikitStore';
+import { type Tavoite, useTavoitteetStore } from '@/stores/useTavoitteetStore';
+import { getLocalizedText, stringToLocalizedText } from '@/utils';
 
 interface AddGoalModalProps extends ModalComponentProps {
   mode: 'ADD';
@@ -38,7 +40,7 @@ interface UpdateGoalModalProps extends ModalComponentProps {
 
 type GoalModalProps = AddGoalModalProps | UpdateGoalModalProps;
 
-export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) => {
+export const GoalModal = ({ mode, tavoite, ...rest }: GoalModalProps) => {
   const { t } = useTranslation();
   const isUpdateMode = mode === 'UPDATE';
   const initialGoalName = getLocalizedText(tavoite?.tavoite);
@@ -118,8 +120,8 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
       await fetchSuosikit();
       await fetchPage({ page: 1, pageSize });
     };
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    void fetchData();
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, [tavoitteet]);
 
   // HANDLERS -------------------------------------------------------------
@@ -216,9 +218,9 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
       content={
         <form className="pb-1">
           {basicInfoStep && (
-            <div className="max-w-modal-content box-content px-5 md:px-9">
+            <div className="box-content max-w-modal-content px-5 md:px-9">
               <div className="flex flex-col">
-                <p className="text-body-sm-mobile sm:text-body-sm font-arial mb-7">
+                <p className="mb-7 font-arial text-body-sm-mobile sm:text-body-sm">
                   {t('profile.my-goals.add-modal-description')}
                 </p>
                 <InputField
@@ -239,11 +241,11 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
 
           {chooseFavoriteStep && (
             <div id={goalsId} className="max-w-modal-content">
-              <p className="text-body-sm-mobile sm:text-body-sm font-arial w-full box-content px-5 md:px-9">
+              <p className="box-content w-full px-5 font-arial text-body-sm-mobile sm:text-body-sm md:px-9">
                 {t('profile.my-goals.choose-favorite-description')}
               </p>
-              <div className="flex flex-row mt-6 gap-5 w-full box-content md:pl-9" ref={scrollRef}>
-                <div className="flex flex-col gap-3 w-full">
+              <div className="mt-6 box-content flex w-full flex-row gap-5 md:pl-9" ref={scrollRef}>
+                <div className="flex w-full flex-col gap-3">
                   {goalOptions.map((mahdollisuus) => {
                     const { id, mahdollisuusTyyppi } = mahdollisuus;
                     const isSelected = selectedMahdollisuus?.id === id;
@@ -263,7 +265,7 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
                         hideFavorite
                         actionButtonContent={
                           isSelected ? (
-                            <div className="flex gap-4 not-sm:justify-between items-center">
+                            <div className="flex items-center gap-4 not-sm:justify-between">
                               <span
                                 className={tidyClasses([
                                   'flex',
@@ -287,7 +289,7 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
                               <ActionButton
                                 label={t('profile.my-goals.remove-from-goals')}
                                 onClick={() => setSelectedMahdollisuus(null)}
-                                className="bg-bg-gray order-2 sm:order-1"
+                                className="order-2 bg-bg-gray sm:order-1"
                                 icon={<JodFlagFilled className="text-accent" />}
                               />
                             </div>
@@ -332,8 +334,8 @@ export const GoalModal = ({ mode = 'ADD', tavoite, ...rest }: GoalModalProps) =>
         />
       }
       footer={
-        <div className="flex justify-end gap-5 flex-1" data-testid="add-goal-footer">
-          <div className="flex gap-5 justify-end">
+        <div className="flex flex-1 justify-end gap-5" data-testid="add-goal-footer">
+          <div className="flex justify-end gap-5">
             <Button
               label={t('common:cancel')}
               onClick={() => closeActiveModal()}

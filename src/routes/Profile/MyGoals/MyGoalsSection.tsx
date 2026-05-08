@@ -1,3 +1,10 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData, useRevalidator } from 'react-router';
+import { useShallow } from 'zustand/shallow';
+
+import { Accordion, Button, useMediaQueries } from '@jod/design-system';
+
 import type { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
 import { useModal } from '@/hooks/useModal';
@@ -12,11 +19,6 @@ import { getTypeSlug } from '@/routes/Profile/utils';
 import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLocalizedText, sortByProperty } from '@/utils';
-import { Accordion, Button, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData, useRevalidator } from 'react-router';
-import { useShallow } from 'zustand/shallow';
 
 interface MyGoalsSectionProps {
   tavoitteet: components['schemas']['TavoiteDto'][];
@@ -51,7 +53,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
       if (!tavoiteId || !suunnitelmaId) return;
       const tavoite = tavoitteet.find((t) => t.id === tavoiteId);
       if (tavoite) {
-        upsertTavoite({
+        void upsertTavoite({
           ...tavoite,
           suunnitelmat: tavoite.suunnitelmat?.filter((s) => s?.id !== suunnitelmaId).sort(sortByProperty('luotu')),
         });
@@ -69,7 +71,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
 
   return (
     <div className="mb-5">
-      <div className="flex flex-col mb-5 gap-6 px-5 sm:px-6 lg:pr-0 lg:pl-6">
+      <div className="mb-5 flex flex-col gap-6 px-5 sm:px-6 lg:pr-0 lg:pl-6">
         {tavoitteet.map((tavoite, i) => {
           const { mahdollisuusId, mahdollisuusTyyppi } = tavoite;
           const details = getMahdollisuusDetails(mahdollisuusId);
@@ -86,16 +88,16 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                 setIsOpen={() => toggleAccordion(i)}
                 title={getLocalizedText(tavoite.tavoite)}
                 collapsedContent={
-                  <div className="flex flex-col mt-2">
+                  <div className="mt-2 flex flex-col">
                     <p className="text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
-                    <p className="text-secondary-gray sm:text-body-sm font-semibold">
+                    <p className="font-semibold text-secondary-gray sm:text-body-sm">
                       {t('profile.my-goals.n-plans', { count: tavoite.suunnitelmat?.length ?? 0 })}
                     </p>
                   </div>
                 }
               >
                 <section id={contentId}>
-                  <p className="text-primary-gray mt-3">{getLocalizedText(tavoite.kuvaus)}</p>
+                  <p className="mt-3 text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
                   <div className="p-4">
                     {details && mahdollisuusTyyppi && (
                       <>
@@ -135,7 +137,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                       />
                       <PlanCompetencesTable goal={tavoite} />
 
-                      <div className="w-full flex justify-between">
+                      <div className="flex w-full justify-between">
                         <Button
                           variant="white"
                           ariaHaspopup="dialog"

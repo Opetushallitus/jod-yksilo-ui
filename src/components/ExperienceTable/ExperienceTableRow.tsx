@@ -1,11 +1,13 @@
+import React from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+
+import { Checkbox, cx, Spinner, Tag, useMediaQueries } from '@jod/design-system';
+import { JodCaretDown, JodCaretUp, JodEdit, JodError, JodErrorTriangle } from '@jod/design-system/icons';
+
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useModal } from '@/hooks/useModal';
 import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
-import { Checkbox, cx, Spinner, Tag, useMediaQueries } from '@jod/design-system';
-import { JodCaretDown, JodCaretUp, JodEdit, JodError, JodErrorTriangle } from '@jod/design-system/icons';
-import React from 'react';
-import { Trans, useTranslation } from 'react-i18next';
 
 export interface ExperienceTableRowData {
   checked?: boolean;
@@ -98,8 +100,8 @@ const FreeFormTextRow = ({
 
   return (
     <tr>
-      <td colSpan={5} className={`${className} w-full px-3 sm:px-5 py-2 sm:py-3`.trim()}>
-        <p className="text-primary-gray text-body-md text-pretty hyphens-auto wrap-break-word">{freeFormText}</p>
+      <td colSpan={5} className={`${className} w-full px-3 py-2 sm:px-5 sm:py-3`.trim()}>
+        <p className="text-body-md text-pretty wrap-break-word hyphens-auto text-primary-gray">{freeFormText}</p>
       </td>
     </tr>
   );
@@ -130,7 +132,6 @@ const CompetencesRow = ({
     <tr>
       {tagsVisibleState && !showCheckbox && (
         <td colSpan={5} className={`${className} w-full max-w-0 px-4 pt-3 pb-5`.trim()}>
-          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
           <ul ref={ref} className="flex flex-wrap gap-3" aria-label={t('competences')} onKeyDown={handleKeyDown}>
             {sortedCompetences.map((competence) => (
               <li key={competence.id} className="max-w-full">
@@ -186,7 +187,7 @@ export const ExperienceTableRow = ({
 
   const renderCompetencesDetectFailure = () => {
     return (
-      <div className="flex justify-start items-center">
+      <div className="flex items-center justify-start">
         <TooltipWrapper tooltipContent={t('competences-identify-failed')} tooltipPlacement="top">
           <JodErrorTriangle className="text-alert" />
         </TooltipWrapper>
@@ -304,7 +305,7 @@ export const ExperienceTableRow = ({
             }
             setIsOpen(!isOpen);
           }}
-          className={`cursor-pointer flex gap-x-2 items-center justify-self-end text-secondary-gray ${sm ? 'text-nowrap sm:pr-2' : 'pr-7'} w-full`}
+          className={`flex cursor-pointer items-center gap-x-2 justify-self-end text-secondary-gray ${sm ? 'text-nowrap sm:pr-2' : 'pr-7'} w-full`}
           data-testid={`experience-row-competences-toggle-${row.key}`}
         >
           {osaamisetNeedsToBeVerified && (
@@ -324,12 +325,12 @@ export const ExperienceTableRow = ({
       );
     }
     if (!sm) {
-      return <span className="pl-[28px] pr-7">{osaamisetCountTotal}</span>;
+      return <span className="pr-7 pl-[28px]">{osaamisetCountTotal}</span>;
     }
     return (
-      <span className="flex gap-x-2 flex-row text-nowrap sm:pr-2 text-secondary-gray justify-end">
+      <span className="flex flex-row justify-end gap-x-2 text-nowrap text-secondary-gray sm:pr-2">
         {osaamisetCountTotal}
-        <span className="size-6 block"></span>
+        <span className="block size-6"></span>
       </span>
     );
   };
@@ -343,15 +344,15 @@ export const ExperienceTableRow = ({
       );
     }
     if (osaamisetTunnistusEpaonnistui && row.osaamiset.length === 0) {
-      return <td className="text-body-md text-nowrap text-center">{renderCompetencesDetectFailure()}</td>;
+      return <td className="text-center text-body-md text-nowrap">{renderCompetencesDetectFailure()}</td>;
     }
     return sm ? (
-      <td className={`text-body-md text-end text-nowrap ${onRowClick ? 'sm:pr-7 pr-0' : 'pr-5'.trim()}`}>
+      <td className={`text-end text-body-md text-nowrap ${onRowClick ? 'pr-0 sm:pr-7' : 'pr-5'.trim()}`}>
         <button
           type="button"
           aria-expanded={tagsVisibleState}
           onClick={() => setIsOpen(!isOpen)}
-          className={`cursor-pointer flex gap-x-2 items-center justify-self-end text-secondary-gray ${sm ? 'text-nowrap sm:pr-2' : 'pr-7'}`}
+          className={`flex cursor-pointer items-center gap-x-2 justify-self-end text-secondary-gray ${sm ? 'text-nowrap sm:pr-2' : 'pr-7'}`}
           data-testid={`experience-row-competences-toggle-${row.key}`}
         >
           <span className="text-secondary-gray">{osaamisetCountTotal}</span>
@@ -360,7 +361,7 @@ export const ExperienceTableRow = ({
       </td>
     ) : (
       <td>
-        <span className="text-body-md text-end text-nowrap pl-[28px] pr-7">{osaamisetCountTotal}</span>
+        <span className="pr-7 pl-[28px] text-end text-body-md text-nowrap">{osaamisetCountTotal}</span>
       </td>
     );
   };
@@ -382,7 +383,7 @@ export const ExperienceTableRow = ({
               />
             )}
           </td>
-          {!hideOsaamiset && !sm && <td className="text-nowrap text-body-md">{renderOsaamisetNestedCell(!sm)}</td>}
+          {!hideOsaamiset && !sm && <td className="text-body-md text-nowrap">{renderOsaamisetNestedCell(!sm)}</td>}
           {sm && (
             <>
               <td className={commonTextStyles}>{!row.hideRowDetails && row.alkuPvm && formatDate(row.alkuPvm)}</td>
@@ -416,17 +417,17 @@ export const ExperienceTableRow = ({
           <DateRange
             alkuPvm={row.alkuPvm}
             loppuPvm={row.loppuPvm}
-            className="flex flex-wrap gap-x-5 pb-2 pl-3 sm:pl-5 pr-7 text-secondary-gray text-body-md"
+            className="flex flex-wrap gap-x-5 pr-7 pb-2 pl-3 text-body-md text-secondary-gray sm:pl-5"
           />
         )}
       </td>
       {!sm && !hideOsaamiset && renderOsaamisetCell(!sm)}
       {sm && (
         <>
-          <td className="text-body-md pr-7 text-secondary-gray" colSpan={row.loppuPvm ? 1 : 2}>
+          <td className="pr-7 text-body-md text-secondary-gray" colSpan={row.loppuPvm ? 1 : 2}>
             {row.alkuPvm && formatDate(row.alkuPvm)}
           </td>
-          {row.loppuPvm && <td className="text-body-md pr-7 text-secondary-gray">{formatDate(row.loppuPvm)}</td>}
+          {row.loppuPvm && <td className="pr-7 text-body-md text-secondary-gray">{formatDate(row.loppuPvm)}</td>}
           {!hideOsaamiset && renderOsaamisetCell(sm)}
         </>
       )}

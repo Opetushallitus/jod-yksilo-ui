@@ -1,8 +1,9 @@
+import { create } from 'zustand';
+import { useShallow } from 'zustand/shallow';
+
 import { registerCsrfMiddleware, unregisterCsrfMiddleware } from '@/api/middlewares/csrf';
 import type { components } from '@/api/schema';
 import { resetWelcomePathGate } from '@/auth/welcomePathGate';
-import { create } from 'zustand';
-import { useShallow } from 'zustand/shallow';
 
 export type YksiloCsrfDto = components['schemas']['YksiloCsrfDto'];
 export type YksiloLoaderContext = YksiloCsrfDto | null;

@@ -1,9 +1,10 @@
+import React from 'react';
+
 import { components } from '@/api/schema';
 import { type CompetenceSourceType, FILTERS_ORDER, type FiltersType } from '@/routes/Profile/Competences/constants';
 import { CompetenceDataGroup } from '@/routes/Profile/Competences/loader';
 import type { Kokemus } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
-import React from 'react';
 
 export interface FilterData {
   toimenkuvat: CompetenceDataGroup[];

@@ -1,3 +1,9 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
+
+import { Accordion, Tag } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
@@ -7,10 +13,6 @@ import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStor
 import { KoulutusMahdollisuusFull } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel';
 import type { KoulutusmahdollisuusJakaumat } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
-import { Accordion, Tag } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
 
 interface PlanOpportunityCardProps {
   mahdollisuus: KoulutusMahdollisuusFull;
@@ -54,15 +56,15 @@ const PlanOpportunityCard = React.memo(
     const { ref, handleKeyDown } = useArrowKeyControls(osaamiset);
 
     return (
-      <div className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border">
-        <div className="flex flex-row gap-3 justify-between sm:items-start mb-4">
+      <div className="flex flex-col rounded bg-white p-5 shadow-border sm:p-6">
+        <div className="mb-4 flex flex-row justify-between gap-3 sm:items-start">
           {matchValue !== undefined && matchLabel && (
             <div
-              className="inline-flex items-center sm:gap-2 select-none w-fit tracking-wide sm:flex-row flex-col"
+              className="tracking-wide inline-flex w-fit flex-col items-center select-none sm:flex-row sm:gap-2"
               data-testid="opportunity-card-match"
             >
-              <span className="text-accent text-[1.875rem] sm:text-[2.125rem]">{matchValue}</span>
-              <span className="text-attrib-title font-arial font-semibold">{matchLabel}</span>
+              <span className="text-[1.875rem] text-accent sm:text-[2.125rem]">{matchValue}</span>
+              <span className="font-semibold font-arial text-attrib-title">{matchLabel}</span>
             </div>
           )}
 
@@ -70,11 +72,11 @@ const PlanOpportunityCard = React.memo(
         </div>
         <div className="flex flex-row gap-3">
           <div
-            className={`flex items-center justify-center size-7 sm:size-8 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
+            className={`flex aspect-square size-7 items-center justify-center rounded-full text-white sm:size-8 ${bgColorClassName} print:hidden`}
           >
             <TitleIcon mahdollisuusAlityyppi={mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'MUU_KOULUTUS' : 'TUTKINTO'} />
           </div>
-          <span className="flex items-center font-arial text-body-sm-mobile sm:text-body-sm leading-6 uppercase">
+          <span className="flex items-center font-arial text-body-sm-mobile leading-6 uppercase sm:text-body-sm">
             {mahdollisuus.tyyppi == 'TUTKINTO'
               ? t(`opportunity-type.education.TUTKINTO`)
               : t(`opportunity-type.education.EI_TUTKINTO`)}
@@ -89,8 +91,7 @@ const PlanOpportunityCard = React.memo(
           ellipsis={false}
           caretPosition="top"
         >
-          <p className="font-arial text-body-md-mobile sm:text-body-md mb-4 mt-3">{getLocalizedText(kuvaus)}</p>
-          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+          <p className="mt-3 mb-4 font-arial text-body-md-mobile sm:text-body-md">{getLocalizedText(kuvaus)}</p>
           <ul
             className="flex flex-row flex-wrap gap-3"
             ref={ref}

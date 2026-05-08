@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { getFilterCount, noFiltersSelected } from './FilterUtils';
 
 describe('getFilterCount', () => {
@@ -45,7 +46,6 @@ describe('noFiltersSelected', () => {
 
   it('returns true if filters is null or undefined', () => {
     expect(noFiltersSelected(undefined)).toBe(true);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect(noFiltersSelected(null as any)).toBe(true);
   });
 

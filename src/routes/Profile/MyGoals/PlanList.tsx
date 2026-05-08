@@ -1,14 +1,17 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
+
+import { Accordion, Button, cx, EmptyState, useMediaQueries } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
+
 import type { components } from '@/api/schema';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import DeleteSuunnitelmaButton from '@/routes/Profile/MyGoals/DeleteSuunnitelmaButton';
 import { planLetter, planNumberPrefix } from '@/routes/Profile/MyGoals/planLetterUtil';
 import { getLocalizedText } from '@/utils';
-import { Accordion, Button, cx, EmptyState, useMediaQueries } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+
 import AddOrEditCustomPlanModal from './addPlan/customPlan/AddOrEditCustomPlanModal';
 
 export interface PlanListProps {
@@ -54,33 +57,33 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
   };
 
   const content = (
-    <div className="flex flex-col gap-3 mt-2 justify-center">
+    <div className="mt-2 flex flex-col justify-center gap-3">
       {goal.suunnitelmat?.length === 0 && emptyPlans}
       {goal.suunnitelmat?.map((s, index) => {
         const description = getLocalizedText(s.kuvaus);
 
         return (
           <React.Fragment key={s.id}>
-            <div className="flex sm:flex-row flex-col sm:items-center justify-between gap-4">
+            <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
               {/* Custom plan */}
               {!s.koulutusmahdollisuusId && (
                 <div>
-                  <p className="text-heading-4 text-accent inline-flex gap-3">
+                  <p className="inline-flex gap-3 text-heading-4 text-accent">
                     <span>{planPrefix(index)}</span>
                     <span>{getLocalizedText(s.nimi)}</span>
                   </p>
-                  {description && <p className="text-body-sm mt-2 text-primary-gray">{description}</p>}
+                  {description && <p className="mt-2 text-body-sm text-primary-gray">{description}</p>}
                 </div>
               )}
               {/* Non-custom plan */}
               {s.koulutusmahdollisuusId && (
                 <Link
                   to={`/${language}/${t('slugs.education-opportunity.index')}/${s.koulutusmahdollisuusId}`}
-                  className="text-accent flex gap-2 text-heading-4 pr-5"
+                  className="flex gap-2 pr-5 text-heading-4 text-accent"
                 >
-                  <p className="text-heading-4 text-accent inline-flex gap-3">
+                  <p className="inline-flex gap-3 text-heading-4 text-accent">
                     <span>{planPrefix(index)}</span>
-                    <span className="flex gap-3 items-center">
+                    <span className="flex items-center gap-3">
                       <span>{getLocalizedText(s.nimi)}</span>
                       <span>
                         <JodArrowRight />

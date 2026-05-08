@@ -1,10 +1,13 @@
-import { ModalHeader } from '@/components/ModalHeader';
-import { useToolStore } from '@/stores/useToolStore';
-import { removeDuplicatesByKey } from '@/utils';
-import { AiInfoButton, Button, Modal } from '@jod/design-system';
 import React from 'react';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
+
+import { AiInfoButton, Button, Modal } from '@jod/design-system';
+
+import { ModalHeader } from '@/components/ModalHeader';
+import { useToolStore } from '@/stores/useToolStore';
+import { removeDuplicatesByKey } from '@/utils';
+
 import { VirtualAssistantModalContent } from './components/VirtualAssistantModalContent';
 import { VirtualAssistantTooltipContent } from './components/VirtualAssistantTooltipContent';
 import { useVirtualAssistantChat } from './hooks/useVirtualAssistantChat';
@@ -73,7 +76,7 @@ export const VirtualAssistant = ({ type, className }: { type: VirtualAssistantVa
           <VirtualAssistantModalContent type={type} chat={chat} input={input} selection={selection} tabs={tabs} />
         }
         footer={
-          <div className="flex flex-row justify-end flex-1 gap-3">
+          <div className="flex flex-1 flex-row justify-end gap-3">
             <Button
               onClick={() => {
                 clearState();

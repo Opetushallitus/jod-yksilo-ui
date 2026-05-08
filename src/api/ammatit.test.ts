@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { type AmmattiDto, ammatit } from './ammatit';
 type DtoType = Partial<AmmattiDto>;
 const mocks = vi.hoisted(() => ({

@@ -30,6 +30,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { JIRA_TICKET_PATTERN, processKeyTags } from './manage-tags-logic.js';
 import { getTolgeeConfigPathFromScriptsDir, readAndValidateTolgeeConfig } from './tolgee-config.js';
 import { buildCodeKeysByNamespaceFromMap, extractStaticKeys, isKeyPathUsedInNamespace } from './translation-utils.js';

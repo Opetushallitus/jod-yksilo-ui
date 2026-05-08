@@ -1,3 +1,7 @@
+import { create } from 'zustand';
+
+import type { PageChangeDetails } from '@jod/design-system';
+
 import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
@@ -6,8 +10,6 @@ import { DEFAULT_PAGE_SIZE } from '@/constants';
 import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import { paginate, sortByProperty } from '@/utils';
 import { mapKoulutusCodesToLabels } from '@/utils/codes/codes';
-import type { PageChangeDetails } from '@jod/design-system';
-import { create } from 'zustand';
 
 interface FavoritesState {
   ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;

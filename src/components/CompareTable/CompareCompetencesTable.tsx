@@ -1,6 +1,8 @@
-import { cx } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { cx } from '@jod/design-system';
+
 import { CompareCompetencesTableRow, CompareCompetencesTableRowData } from './CompareCompetencesTableRow';
 
 const ROW_LIMIT = 10;
@@ -19,10 +21,10 @@ export const CompareCompetencesTable = ({ rows, mode = 'osaaminen' }: CompareCom
       <table className="font-arial" data-testid="compare-competences-table" aria-label={t('map-competences')}>
         <thead>
           <tr className="border-b border-inactive-gray text-form-label">
-            <th scope="col" className="text-left pl-5 pr-7 pb-3">
+            <th scope="col" className="pr-7 pb-3 pl-5 text-left">
               {t('competence')}
             </th>
-            <th scope="col" className="text-center whitespace-nowrap pr-5 pb-3">
+            <th scope="col" className="pr-5 pb-3 text-center whitespace-nowrap">
               {mode === 'kiinnostus' ? t('your-interests') : t('your-competences')}
             </th>
           </tr>
@@ -42,7 +44,7 @@ export const CompareCompetencesTable = ({ rows, mode = 'osaaminen' }: CompareCom
       {rows.length > ROW_LIMIT && (
         <button
           onClick={() => setShowAll((previous) => !previous)}
-          className="text-accent text-button-sm sm:text-button-sm mt-6 sm:px-5 font-poppins cursor-pointer print:hidden"
+          className="mt-6 cursor-pointer font-poppins text-button-sm text-accent sm:px-5 sm:text-button-sm print:hidden"
           data-testid="compare-competences-toggle"
         >
           {showAll ? t('show-less') : t('common:show-all')}

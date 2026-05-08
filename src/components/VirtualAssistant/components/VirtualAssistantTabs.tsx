@@ -1,5 +1,7 @@
-import { cx } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
+
+import { cx } from '@jod/design-system';
+
 import type { useVirtualAssistantChat } from '../hooks/useVirtualAssistantChat';
 import { getVirtualAssistantConfig } from '../virtualAssistantConfig';
 import type { VirtualAssistantVariant } from '../virtualAssistantTypes';
@@ -28,7 +30,7 @@ export const VirtualAssistantTabs = ({ type, selection, tabs }: VirtualAssistant
   } = tabs;
 
   return (
-    <div role="tablist" aria-labelledby={titleId} className="flex flex-row gap-1 min-h-9">
+    <div role="tablist" aria-labelledby={titleId} className="flex min-h-9 flex-row gap-1">
       <button
         id={conversationTabButtonId}
         type="button"
@@ -43,8 +45,8 @@ export const VirtualAssistantTabs = ({ type, selection, tabs }: VirtualAssistant
         aria-selected={selectedVisible ? 'false' : 'true'}
         aria-controls={conversationTabPanelId}
         className={cx(
-          'flex-1 bg-white rounded-t-md p-3 text-[1rem] leading-[110%] font-bold tracking-[0.16px] truncate cursor-pointer hover:underline',
-          selectedVisible ? 'text-primary-gray bg-bg-gray-2' : 'text-accent bg-white',
+          'font-bold flex-1 cursor-pointer truncate rounded-t-md bg-white p-3 text-[1rem] leading-[110%] tracking-[0.16px] hover:underline',
+          selectedVisible ? 'bg-bg-gray-2 text-primary-gray' : 'bg-white text-accent',
         )}
       >
         {t('tool.my-own-data.virtual-assistant.conversation')}
@@ -60,8 +62,8 @@ export const VirtualAssistantTabs = ({ type, selection, tabs }: VirtualAssistant
         aria-selected={selectedVisible ? 'true' : 'false'}
         aria-controls={selectedTabPanelId}
         className={cx(
-          'flex-1 rounded-t-md p-3 text-[1rem] leading-[110%] font-bold tracking-[0.16px] truncate cursor-pointer hover:underline',
-          selectedVisible ? 'text-accent bg-white' : 'text-primary-gray bg-bg-gray-2',
+          'font-bold flex-1 cursor-pointer truncate rounded-t-md p-3 text-[1rem] leading-[110%] tracking-[0.16px] hover:underline',
+          selectedVisible ? 'bg-white text-accent' : 'bg-bg-gray-2 text-primary-gray',
         )}
       >
         {config.labels.selectedTab}

@@ -1,6 +1,8 @@
-import { Button, cx, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Button, cx, useMediaQueries } from '@jod/design-system';
+
 import { ExperienceTableRow, type ExperienceTableRowData } from './ExperienceTableRow';
 
 interface ExperienceTableProps {
@@ -210,18 +212,18 @@ export const ExperienceTable = ({
           data-testid="experience-table-grid"
           aria-label={ariaLabel}
         >
-          <thead className="after:content-[''] after:block after:h-5">
+          <thead className="after:block after:h-5 after:content-['']">
             <tr className="border-b border-inactive-gray text-left text-body-md">
-              <th scope="col" colSpan={sm ? 1 : 3} className={cx('pr-7 pb-3 font-normal pl-5', thPadding)}>
+              <th scope="col" colSpan={sm ? 1 : 3} className={cx('font-normal pr-7 pb-3 pl-5', thPadding)}>
                 {mainColumnHeader}
               </th>
 
               {sm && (
                 <>
-                  <th scope="col" className="pr-7 pb-3 font-normal">
+                  <th scope="col" className="font-normal pr-7 pb-3">
                     {t('started')}
                   </th>
-                  <th scope="col" className="pr-7 pb-3 font-normal">
+                  <th scope="col" className="font-normal pr-7 pb-3">
                     {t('ended')}
                   </th>
                 </>
@@ -231,7 +233,7 @@ export const ExperienceTable = ({
                 <th
                   scope="col"
                   colSpan={sm ? 1 : 2}
-                  className={`text-end pb-3 font-normal ${onNestedRowClick ? 'pr-7' : 'pr-5'}`.trim()}
+                  className={`font-normal pb-3 text-end ${onNestedRowClick ? 'pr-7' : 'pr-5'}`.trim()}
                 >
                   {t('competences')}
                 </th>
@@ -258,7 +260,7 @@ export const ExperienceTable = ({
                   key={row.key}
                   row={row}
                   onRowClick={onRowClick}
-                  className="bg-white border-spacing-x-2"
+                  className="border-spacing-x-2 bg-white"
                   hideOsaamiset={hideOsaamiset}
                   osaamisetOdottaaTunnistusta={
                     row.subrows?.some((subrow) => subrow.osaamisetOdottaaTunnistusta) ?? row.osaamisetOdottaaTunnistusta
@@ -309,7 +311,7 @@ export const ExperienceTable = ({
                   <tr>
                     <td
                       colSpan={5}
-                      className={`px-5 sm:px-6 pt-5 ${categorizedRows.length - 1 === index ? 'pb-7 sm:pb-11' : 'pb-7'}`.trim()}
+                      className={`px-5 pt-5 sm:px-6 ${categorizedRows.length - 1 === index ? 'pb-7 sm:pb-11' : 'pb-7'}`.trim()}
                     >
                       <Button
                         variant="white"
@@ -328,7 +330,7 @@ export const ExperienceTable = ({
               <tr>
                 <td
                   colSpan={5}
-                  className="border-b border-inactive-gray text-body-md pt-6"
+                  className="border-b border-inactive-gray pt-6 text-body-md"
                   data-testid="experience-table-uncategorized-title"
                 >
                   {t('without-category', { header: mainColumnHeader })}

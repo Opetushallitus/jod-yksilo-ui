@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it, vi } from 'vitest';
+
 import { formatMonths, getDurationText } from './utils';
 
 vi.mock('@/i18n/config', () => ({

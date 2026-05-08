@@ -1,3 +1,9 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
+
+import { Button, Modal, useMediaQueries } from '@jod/design-system';
+
 import { useModal } from '@/hooks/useModal';
 import { ModalComponentProps } from '@/hooks/useModal/utils';
 import { FilterEducationOpportunityType } from '@/routes/Profile/MyGoals/addPlan/selectPlan/FilterEducationOpportunityType';
@@ -6,10 +12,6 @@ import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStor
 import { MAX_KESTO_VALUE, MIN_KESTO_VALUE } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel';
 import { Setting } from '@/routes/Tool/components/Setting';
 import { getFilterCount, noFiltersSelected } from '@/utils/FilterUtils';
-import { Button, Modal, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
 
 export interface PlanOptionFiltersProps extends ModalComponentProps {
   onConfirm: () => void;
@@ -30,7 +32,7 @@ const SettingsMenu = () => {
   };
 
   return (
-    <div className="bg-bg-gray sm:text-body-sm text-body-sm-mobile flex flex-col gap-2 max-h-full">
+    <div className="flex max-h-full flex-col gap-2 bg-bg-gray text-body-sm-mobile sm:text-body-sm">
       <ul>
         <Setting
           title={t('tool.settings.general.education-opportunity-type')}
@@ -70,19 +72,19 @@ const PlanOptionFilters = ({ onConfirm, ...rest }: PlanOptionFiltersProps) => {
       name={t('tool.settings.controls')}
       {...rest}
       topSlot={
-        <h2 ref={titleRef} tabIndex={-1} className="sm:text-hero text-heading-2-mobile focus-visible:outline-0">
+        <h2 ref={titleRef} tabIndex={-1} className="text-heading-2-mobile focus-visible:outline-0 sm:text-hero">
           {t('profile.my-goals.adjust-list')}
         </h2>
       }
       fullWidthContent
       className="h-[90dvh]!"
       content={
-        <div className="bg-bg-gray sm:text-body-sm text-body-sm-mobile flex flex-col gap-6 max-w-modal-content box-content px-5 sm:pl-9">
+        <div className="box-content flex max-w-modal-content flex-col gap-6 bg-bg-gray px-5 text-body-sm-mobile sm:pl-9 sm:text-body-sm">
           <SettingsMenu />
         </div>
       }
       footer={
-        <div className="flex justify-between w-full items-center">
+        <div className="flex w-full items-center justify-between">
           <div>
             <Button
               variant="white"

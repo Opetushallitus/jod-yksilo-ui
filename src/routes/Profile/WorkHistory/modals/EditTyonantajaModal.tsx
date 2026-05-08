@@ -1,3 +1,13 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import React from 'react';
+import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useRevalidator } from 'react-router';
+import { z } from 'zod';
+
+import { Button, InputField, Modal, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark } from '@jod/design-system/icons';
+
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { FormError } from '@/components';
@@ -5,14 +15,6 @@ import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, InputField, Modal, useMediaQueries } from '@jod/design-system';
-import { JodCheckmark } from '@jod/design-system/icons';
-import React from 'react';
-import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { useRevalidator } from 'react-router';
-import { z } from 'zod';
 
 interface EditTyonantajaModalProps extends ModalComponentProps {
   tyopaikkaId: string;
@@ -124,7 +126,7 @@ const EditTyonantajaModal = ({ tyopaikkaId: id, ...rest }: EditTyonantajaModalPr
       {...rest}
       content={
         <FormProvider {...methods}>
-          <Form id={formId} onSubmit={onSubmit} className="max-w-modal-content box-content px-5 md:px-9">
+          <Form id={formId} onSubmit={onSubmit} className="box-content max-w-modal-content px-5 md:px-9">
             <InputField
               label={t('work-history.employer')}
               {...methods.register(`nimi.${language}` as const)}
@@ -137,7 +139,7 @@ const EditTyonantajaModal = ({ tyopaikkaId: id, ...rest }: EditTyonantajaModalPr
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between flex-1">
+        <div className="flex flex-1 flex-row justify-between">
           <div className="flex flex-row gap-3">
             <Button
               className="whitespace-nowrap"

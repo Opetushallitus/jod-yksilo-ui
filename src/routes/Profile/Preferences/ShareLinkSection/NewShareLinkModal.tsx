@@ -1,3 +1,13 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import React from 'react';
+import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useRevalidator } from 'react-router';
+import { z } from 'zod';
+
+import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
+
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
 import { ModalHeader } from '@/components/ModalHeader';
@@ -5,14 +15,7 @@ import { FORM_SCHEMA, formErrorMessage } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps } from '@/hooks/useModal';
 import type { MahdollisuusTyyppi } from '@/routes/types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Modal, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
-import React from 'react';
-import { Form, FormProvider, FormSubmitHandler, useForm, useFormState } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { useRevalidator } from 'react-router';
-import { z } from 'zod';
+
 import { BasicInfoStep } from './BasicInfoStep';
 import { DataToShareStep } from './DataToShareStep';
 import type { ShareLinkForm } from './types';
@@ -196,8 +199,8 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
         />
       }
       footer={
-        <div className="flex justify-between gap-5 flex-1" data-testid="share-link-wizard-footer">
-          <div className="flex gap-5 ml-auto">
+        <div className="flex flex-1 justify-between gap-5" data-testid="share-link-wizard-footer">
+          <div className="ml-auto flex gap-5">
             <Button
               onClick={() => onClose()}
               label={t('common:cancel')}

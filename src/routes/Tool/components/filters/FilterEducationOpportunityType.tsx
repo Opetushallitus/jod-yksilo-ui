@@ -1,9 +1,11 @@
-import { useToolStore } from '@/stores/useToolStore';
-import { Checkbox } from '@jod/design-system';
-import { JodAi } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
+
+import { Checkbox } from '@jod/design-system';
+import { JodAi } from '@jod/design-system/icons';
+
+import { useToolStore } from '@/stores/useToolStore';
 
 export const FilterEducationOpportunityType = () => {
   const { t } = useTranslation();
@@ -26,7 +28,7 @@ export const FilterEducationOpportunityType = () => {
 
   return (
     <fieldset className="flex flex-col gap-5">
-      <legend className="text-heading-4-mobile sm:text-heading-4 mb-5 sr-only">{t('show')}</legend>
+      <legend className="sr-only mb-5 text-heading-4-mobile sm:text-heading-4">{t('show')}</legend>
       <Checkbox
         ariaLabel={t('opportunity-type.education.TUTKINTO')}
         className="font-poppins!"
@@ -34,7 +36,7 @@ export const FilterEducationOpportunityType = () => {
         label={
           <span className="pl-4">
             {t('opportunity-type.education.TUTKINTO')}{' '}
-            <JodAi className="inline mb-1 ml-3" aria-label={t('ai-icon-alt')} />
+            <JodAi className="mb-1 ml-3 inline" aria-label={t('ai-icon-alt')} />
           </span>
         }
         name={t('opportunity-type.education.TUTKINTO')}
@@ -49,7 +51,7 @@ export const FilterEducationOpportunityType = () => {
         label={
           <span className="pl-4">
             {t('opportunity-type.education.EI_TUTKINTO')}{' '}
-            <JodAi className="inline mb-1 ml-3" aria-label={t('ai-icon-alt')} />
+            <JodAi className="mb-1 ml-3 inline" aria-label={t('ai-icon-alt')} />
           </span>
         }
         name={t('opportunity-type.education.EI_TUTKINTO')}

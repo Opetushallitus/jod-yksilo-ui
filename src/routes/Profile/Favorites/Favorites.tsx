@@ -1,3 +1,10 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
+
+import { Button, EmptyState, Modal, Pagination, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
+
 import { FilterList, MainLayout, OpportunityCard } from '@/components';
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
@@ -10,11 +17,7 @@ import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
-import { Button, EmptyState, Modal, Pagination, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
-import { JodArrowRight } from '@jod/design-system/icons';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
+
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { getTypeSlug } from '../utils';
 
@@ -24,7 +27,7 @@ const GoalsCard = ({ testId, className = '' }: { testId: string; className?: str
 
   return (
     <div
-      className={tc(`flex flex-col bg-secondary-1-dark-2 rounded-lg p-6 gap-3 text-white ${className}`)}
+      className={tc(`flex flex-col gap-3 rounded-lg bg-secondary-1-dark-2 p-6 text-white ${className}`)}
       data-testid={testId}
     >
       <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.favorites.goals-card.title')}</h2>
@@ -235,9 +238,9 @@ const Favorites = () => {
             name={t('filters')}
             open={showFilters}
             onClose={() => setShowFilters(false)}
-            topSlot={<span className="sm:text-heading-2 text-heading-2-mobile">{t('content')}</span>}
+            topSlot={<span className="text-heading-2-mobile sm:text-heading-2">{t('content')}</span>}
             content={
-              <div className="bg-bg-gray py-3 ml-5">
+              <div className="ml-5 bg-bg-gray py-3">
                 <MahdollisuusTyyppiFilter
                   jobFilterText={jobFilterText}
                   educationFilterText={educationFilterText}
@@ -247,7 +250,7 @@ const Favorites = () => {
               </div>
             }
             footer={
-              <div className="flex flex-row justify-end gap-4 flex-1">
+              <div className="flex flex-1 flex-row justify-end gap-4">
                 <Button
                   size={sm ? 'lg' : 'sm'}
                   variant="accent"
@@ -262,7 +265,7 @@ const Favorites = () => {
         )}
       </div>
 
-      <div className="flex flex-col gap-5 mb-8 mt-3 sm:px-6 lg:pr-0 lg:pl-6" data-testid="favorites-list">
+      <div className="mt-3 mb-8 flex flex-col gap-5 sm:px-6 lg:pr-0 lg:pl-6" data-testid="favorites-list">
         {favoritesPerType.map((mahdollisuus) => {
           const { id, mahdollisuusTyyppi } = mahdollisuus;
           return (
@@ -293,7 +296,7 @@ const Favorites = () => {
           );
         })}
       </div>
-      <div className="flex flex-col px-5 sm:px-6 gap-5 sm:gap-6">
+      <div className="flex flex-col gap-5 px-5 sm:gap-6 sm:px-6">
         {getFavoriteCount() > 0 && totalPages > 1 && (
           <div>
             <Pagination

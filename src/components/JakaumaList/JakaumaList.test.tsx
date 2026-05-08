@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import { useLoaderData } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
+
 import { EducationJakaumaList, JobJakaumaList } from './JakaumaList';
 
 vi.mock('react-i18next', () => ({

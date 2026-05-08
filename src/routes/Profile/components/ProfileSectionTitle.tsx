@@ -1,5 +1,5 @@
-import { IconHeading } from '@/components/IconHeading';
-import { getTextClassByCompetenceSourceType, type ProfileSectionType } from '@/routes/Profile/utils';
+import React from 'react';
+
 import { cx } from '@jod/design-system';
 import {
   JodCheckmarkAlt,
@@ -11,7 +11,9 @@ import {
   JodSkills,
   JodWork,
 } from '@jod/design-system/icons';
-import React from 'react';
+
+import { IconHeading } from '@/components/IconHeading';
+import { getTextClassByCompetenceSourceType, type ProfileSectionType } from '@/routes/Profile/utils';
 
 export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType; title: string }) => {
   const iconMap: Record<ProfileSectionType, React.ReactNode> = {

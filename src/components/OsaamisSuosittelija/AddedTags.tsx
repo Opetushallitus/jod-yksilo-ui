@@ -1,12 +1,14 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { cx, Tag } from '@jod/design-system';
+
 import type { OsaaminenValue } from '@/components';
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { getLocalizedText } from '@/utils';
 import { animateHideElement } from '@/utils/animations';
-import { cx, Tag } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 interface AddedTagProps {
   onClick: (ids: string[]) => () => void;
@@ -26,7 +28,7 @@ const AddedTags = ({ osaamiset, lahdetyyppi, onClick, useAnimations = false }: A
       setIdsToBeRemoved([]);
     }
     // Only run when debouncedIdsToBeRemoved changes
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, [debouncedIdsToBeRemoved]);
 
   // This effect handles adding new osaamiset with animation
@@ -63,8 +65,8 @@ const AddedTags = ({ osaamiset, lahdetyyppi, onClick, useAnimations = false }: A
       <li
         key={osaaminen.id + sourceType}
         className={cx('max-w-full', {
-          'scale-100 opacity-100 transition-all duration-300 delay-500': useAnimations && isVisible,
-          'scale-0 opacity-0 h-0': useAnimations && !isVisible,
+          'scale-100 opacity-100 transition-all delay-500 duration-300': useAnimations && isVisible,
+          'h-0 scale-0 opacity-0': useAnimations && !isVisible,
         })}
       >
         <Tag

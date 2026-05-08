@@ -1,9 +1,12 @@
-import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
-import { getLinkTo } from '@/utils/routeUtils';
-import { Button } from '@jod/design-system';
-import { JodFavs, JodInterests, JodOther, JodSkills, JodWork } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Button } from '@jod/design-system';
+import { JodFavs, JodInterests, JodOther, JodSkills, JodWork } from '@jod/design-system/icons';
+
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
+import { getLinkTo } from '@/utils/routeUtils';
+
 import CategorizedCompetenceTagList from './CategorizedCompetenceTagList';
 import { CompetenceExport } from './components/CompetenceExport';
 import { CompetenceImport } from './components/CompetenceImport';
@@ -12,7 +15,7 @@ import { useTool } from './hook/useTool';
 const TextWithIconListItem = ({ text, icon }: { text: string; icon: React.ReactNode }) => {
   return (
     <li>
-      <div className="flex gap-x-3 items-center">
+      <div className="flex items-center gap-x-3">
         {icon}
         <div className="text-heading-4">{text}</div>
       </div>
@@ -42,10 +45,10 @@ const Unauthenticated = () => {
         })}
         data-testid="tool-open-login"
       />
-      <p className="font-arial text-body-sm leading-5 text-secondary-gray mt-5">
+      <p className="mt-5 font-arial text-body-sm leading-5 text-secondary-gray">
         {t('tool.competency-profile.sections-intro')}
       </p>
-      <ul className="flex flex-col gap-3 my-3">
+      <ul className="my-3 flex flex-col gap-3">
         <TextWithIconListItem
           icon={<IconWrapper color="#AD4298" Icon={JodWork} />}
           text={t('tool.tools.work-history')}
@@ -75,12 +78,12 @@ const AuthenticatedEmptyState = ({ onImportSuccess }: { onImportSuccess?: () => 
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col gap-5 mb-3">
+    <div className="mb-3 flex flex-col gap-5">
       <p className="font-arial text-body-md leading-5 text-secondary-gray">
         {t('tool.competency-profile.import-help')}
       </p>
       <CompetenceImport onImportSuccess={onImportSuccess} />
-      <p className="font-arial text-body-md leading-5 text-secondary-gray mt-5">
+      <p className="mt-5 font-arial text-body-md leading-5 text-secondary-gray">
         {t('tool.competency-profile.export-help')}
       </p>
       <CompetenceExport />
@@ -92,7 +95,7 @@ const AuthenticatedWithDataState = ({ onImportSuccess }: { onImportSuccess?: () 
   return (
     <div className="flex flex-col gap-6 whitespace-pre-line">
       <CategorizedCompetenceTagList />
-      <div className="flex flex-row gap-3 mb-4">
+      <div className="mb-4 flex flex-row gap-3">
         <CompetenceImport onImportSuccess={onImportSuccess} />
         <CompetenceExport />
       </div>

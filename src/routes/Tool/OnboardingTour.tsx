@@ -1,9 +1,11 @@
-import { useMediaQueries } from '@jod/design-system';
-import { JodRemove, JodWavingHand, JodWavingHandModified } from '@jod/design-system/icons';
 import { driver, PopoverDOM, type DriveStep } from 'driver.js';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { useTranslation } from 'react-i18next';
+
+import { useMediaQueries } from '@jod/design-system';
+import { JodRemove, JodWavingHand, JodWavingHandModified } from '@jod/design-system/icons';
+
 import './onboarding-tour.css';
 
 interface OnboardingTourProps {
@@ -203,18 +205,18 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
   }, [lg]);
 
   return (
-    <span className="block mt-7">
+    <span className="mt-7 block">
       <button
-        className="cursor-pointer bg-bg-gray-2 text-accent flex items-center gap-3 px-3 py-2 rounded-sm"
+        className="flex cursor-pointer items-center gap-3 rounded-sm bg-bg-gray-2 px-3 py-2 text-accent"
         onClick={startTour}
         aria-haspopup="true"
         aria-label={t('tool.tour.view-guided-tour-label')}
       >
-        <div className="relative w-6 h-6">
-          <JodWavingHand size={24} className="absolute inset-0 w-full h-full animate-[showA_3s_infinite]" />
+        <div className="relative h-6 w-6">
+          <JodWavingHand size={24} className="absolute inset-0 h-full w-full animate-[showA_3s_infinite]" />
           <JodWavingHandModified
             size={24}
-            className="absolute inset-0 w-full h-full origin-[35%_75%] animate-[showB_3s_infinite,waveRotate_3s_infinite_ease-in-out]"
+            className="absolute inset-0 h-full w-full origin-[35%_75%] animate-[showB_3s_infinite,waveRotate_3s_infinite_ease-in-out]"
           />
         </div>
         <div>{t('tool.tour.view-guided-tour')}</div>

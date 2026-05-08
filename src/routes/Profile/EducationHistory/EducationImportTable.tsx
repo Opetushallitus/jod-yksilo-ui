@@ -1,8 +1,10 @@
-import { ExperienceTableRowData } from '@/components/ExperienceTable/ExperienceTableRow';
-import { formatDate, getLocalizedText } from '@/utils';
-import { Checkbox, useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Checkbox, useMediaQueries } from '@jod/design-system';
+
+import { ExperienceTableRowData } from '@/components/ExperienceTable/ExperienceTableRow';
+import { formatDate, getLocalizedText } from '@/utils';
 
 export const EducationImportTable = ({ rows }: { rows: ExperienceTableRowData[] }) => {
   const {
@@ -29,10 +31,10 @@ export const EducationImportTable = ({ rows }: { rows: ExperienceTableRowData[] 
       <thead>
         <tr>
           <th
-            className="text-left border-b-2 border-border-gray sm:text-heading-5 text-heading-5-mobile pb-4 sm:pl-5 pl-3"
+            className="border-b-2 border-border-gray pb-4 pl-3 text-left text-heading-5-mobile sm:pl-5 sm:text-heading-5"
             colSpan={sm ? 3 : 1}
           >
-            <div className="flex items-center sm:gap-x-5 gap-x-3">
+            <div className="flex items-center gap-x-3 sm:gap-x-5">
               <Checkbox
                 name="checkbox-toggle-all"
                 value="toggle-all"
@@ -65,10 +67,10 @@ export const EducationImportTable = ({ rows }: { rows: ExperienceTableRowData[] 
           </th>
           {sm && (
             <>
-              <th className="text-left border-b-2 border-border-gray sm:text-heading-5 text-heading-5-mobile pb-4 sm:px-6">
+              <th className="border-b-2 border-border-gray pb-4 text-left text-heading-5-mobile sm:px-6 sm:text-heading-5">
                 {t('started')}
               </th>
-              <th className="text-left border-b-2 border-border-gray sm:text-heading-5 text-heading-5-mobile pb-4 sm:pr-2">
+              <th className="border-b-2 border-border-gray pb-4 text-left text-heading-5-mobile sm:pr-2 sm:text-heading-5">
                 {t('ended')}
               </th>
             </>
@@ -80,11 +82,11 @@ export const EducationImportTable = ({ rows }: { rows: ExperienceTableRowData[] 
           <React.Fragment key={row.key}>
             <tr>
               <td
-                className="py-3 sm:pl-5 pl-3 sm:text-heading-4 text-heading-4-mobile bg-white font-poppins"
+                className="bg-white py-3 pl-3 font-poppins text-heading-4-mobile sm:pl-5 sm:text-heading-4"
                 colSpan={sm ? 3 : 1}
               >
                 <div className={`flex ${sm ? 'flex-row' : 'flex-col'}`}>
-                  <div className="flex items-center sm:gap-5 gap-3">
+                  <div className="flex items-center gap-3 sm:gap-5">
                     <Checkbox
                       name={`checkbox-${row.key}`}
                       value={row.key}
@@ -110,7 +112,7 @@ export const EducationImportTable = ({ rows }: { rows: ExperienceTableRowData[] 
                     {getLocalizedText(row.nimi)}
                   </div>
                   {!sm && (
-                    <div className="flex gap-2 text-secondary-gray text-body-md font-arial sm:ml-7 ml-6">
+                    <div className="ml-6 flex gap-2 font-arial text-body-md text-secondary-gray sm:ml-7">
                       <span>{row.alkuPvm ? formatDate(row.alkuPvm) : ''}</span>
                       <span>-</span>
                       <span>{row.loppuPvm ? formatDate(row.loppuPvm) : ''}</span>
@@ -120,10 +122,10 @@ export const EducationImportTable = ({ rows }: { rows: ExperienceTableRowData[] 
               </td>
               {sm && (
                 <>
-                  <td className="py-3 sm:text-heading-5 text-heading-5-mobile bg-white text-secondary-gray sm:px-6">
+                  <td className="bg-white py-3 text-heading-5-mobile text-secondary-gray sm:px-6 sm:text-heading-5">
                     {row.alkuPvm ? formatDate(row.alkuPvm) : ''}
                   </td>
-                  <td className="py-3 sm:text-heading-5 text-heading-5-mobile bg-white text-secondary-gray sm:pr-2">
+                  <td className="bg-white py-3 text-heading-5-mobile text-secondary-gray sm:pr-2 sm:text-heading-5">
                     {row.loppuPvm ? formatDate(row.loppuPvm) : ''}
                   </td>
                 </>
@@ -131,9 +133,9 @@ export const EducationImportTable = ({ rows }: { rows: ExperienceTableRowData[] 
             </tr>
             {(row.subrows ?? []).map((subrow, i) => (
               <tr key={subrow.key} className={i % 2 === 0 ? '' : 'bg-bg-gray-2'}>
-                <td className="py-3 sm:text-heading-5 text-heading-5-mobile sm:pl-9 pl-6" colSpan={sm ? 3 : 1}>
+                <td className="py-3 pl-6 text-heading-5-mobile sm:pl-9 sm:text-heading-5" colSpan={sm ? 3 : 1}>
                   <div className={`flex ${sm ? 'flex-row' : 'flex-col'}`}>
-                    <div className="flex items-center sm:gap-5 gap-3">
+                    <div className="flex items-center gap-3 sm:gap-5">
                       <Checkbox
                         name={`checkbox-${subrow.key}`}
                         value={subrow.key}
@@ -148,7 +150,7 @@ export const EducationImportTable = ({ rows }: { rows: ExperienceTableRowData[] 
                       {getLocalizedText(subrow.nimi)}
                     </div>
                     {!sm && (
-                      <div className="flex gap-2 sm:ml-7 ml-6">
+                      <div className="ml-6 flex gap-2 sm:ml-7">
                         <span>{subrow.alkuPvm ? formatDate(subrow.alkuPvm) : ''}</span>
                         <span>-</span>
                         <span>{subrow.loppuPvm ? formatDate(subrow.loppuPvm) : ''}</span>
@@ -158,10 +160,10 @@ export const EducationImportTable = ({ rows }: { rows: ExperienceTableRowData[] 
                 </td>
                 {sm && (
                   <>
-                    <td className="py-3 sm:text-heading-5 text-heading-5-mobile sm:px-6">
+                    <td className="py-3 text-heading-5-mobile sm:px-6 sm:text-heading-5">
                       {subrow.alkuPvm ? formatDate(subrow.alkuPvm) : ''}
                     </td>
-                    <td className="py-3 sm:text-heading-5 text-heading-5-mobile sm:pr-2">
+                    <td className="py-3 text-heading-5-mobile sm:pr-2 sm:text-heading-5">
                       {subrow.loppuPvm ? formatDate(subrow.loppuPvm) : ''}
                     </td>
                   </>

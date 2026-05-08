@@ -1,6 +1,7 @@
-import { cx, tidyClasses as tc, Tooltip, TooltipContent, TooltipTrigger } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { cx, tidyClasses as tc, Tooltip, TooltipContent, TooltipTrigger } from '@jod/design-system';
 
 export const TooltipWrapper = ({
   children,

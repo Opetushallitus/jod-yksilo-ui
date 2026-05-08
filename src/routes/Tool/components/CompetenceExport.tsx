@@ -1,12 +1,14 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
+
+import { Button, Checkbox } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { useToolStore } from '@/stores/useToolStore';
 import { removeDuplicatesByKey } from '@/utils';
-import { Button, Checkbox } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
 
 export const CompetenceExport = () => {
   const { t } = useTranslation();

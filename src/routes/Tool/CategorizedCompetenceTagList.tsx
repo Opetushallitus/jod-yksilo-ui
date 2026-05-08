@@ -1,9 +1,12 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Button, EmptyState } from '@jod/design-system';
+
 import AddedTags from '@/components/OsaamisSuosittelija/AddedTags';
 import type { OsaaminenValue } from '@/components/OsaamisSuosittelija/OsaamisSuosittelija';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
-import { Button, EmptyState } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+
 import { PROFILE_TYPES, useTool } from './hook/useTool';
 
 const freeFormTextExpandedLimit = 100;
@@ -22,7 +25,7 @@ const FreeFormText = ({ description, onChange }: { description: string; onChange
       {description.length > freeFormTextExpandedLimit && (
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="text-left text-body-sm cursor-pointer text-accent"
+          className="cursor-pointer text-left text-body-sm text-accent"
         >
           {t(isExpanded ? 'show-less' : 'show-more')}
         </button>
@@ -42,7 +45,7 @@ const CompetenceCategory = ({
   lahdeTyyppi?: OsaaminenLahdeTyyppi;
 }) => {
   return (
-    <ul className="gap-3 flex flex-wrap">
+    <ul className="flex flex-wrap gap-3">
       <AddedTags osaamiset={osaamiset} onClick={onChange} lahdetyyppi={lahdeTyyppi} />
     </ul>
   );
@@ -123,8 +126,8 @@ const CategorizedCompetenceTagList = () => {
       )}
       {hasOtherProfileData ? (
         <>
-          <div className="text-heading-4 mt-6">{t('tool.info-overview.other-data-from-profile')}</div>
-          <div className="font-arial text-body-sm text-secondary-gray mb-4">
+          <div className="mt-6 text-heading-4">{t('tool.info-overview.other-data-from-profile')}</div>
+          <div className="mb-4 font-arial text-body-sm text-secondary-gray">
             {t('tool.info-overview.other-data-from-profile-description')}
           </div>
           <div className="flex flex-col gap-4">

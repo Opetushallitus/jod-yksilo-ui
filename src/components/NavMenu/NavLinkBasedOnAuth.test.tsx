@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+
 import { NavLinkBasedOnAuth } from './NavLinkBasedOnAuth';
 
 vi.mock('react-i18next', () => ({
@@ -10,7 +11,6 @@ vi.mock('react-i18next', () => ({
 }));
 
 vi.mock('react-router', () => ({
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   NavLink: ({ children, ...props }: any) => <a {...props}>{children}</a>,
 }));
 

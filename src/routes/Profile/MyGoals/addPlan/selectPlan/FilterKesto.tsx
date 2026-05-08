@@ -1,7 +1,10 @@
-import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
-import { RangeSlider } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
+
+import { RangeSlider } from '@jod/design-system';
+
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
+
 import { MAX_KESTO_VALUE, MIN_KESTO_VALUE } from '../store/PlanOptionStoreModel';
 
 export const FilterKesto = () => {

@@ -1,3 +1,5 @@
+import { LoaderFunction } from 'react-router';
+
 import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
@@ -7,7 +9,7 @@ import { YksiloLoaderContext, yksiloLoaderContextHasSession } from '@/stores/use
 import { useToolStore } from '@/stores/useToolStore';
 import { sortByProperty } from '@/utils';
 import { getCodeset, getEducationCodesetValues } from '@/utils/codes/codes';
-import { LoaderFunction } from 'react-router';
+
 import { Codeset, type EducationCodeSetValues } from '../../utils/jakaumaUtils';
 
 const loader = (async ({ request, params, context }) => {

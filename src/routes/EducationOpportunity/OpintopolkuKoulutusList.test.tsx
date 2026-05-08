@@ -1,6 +1,8 @@
-import * as opintopolkuUtils from '@/utils/opintopolku';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
+import * as opintopolkuUtils from '@/utils/opintopolku';
+
 import { OpintopolkuKoulutusList } from './OpintopolkuKoulutusList';
 
 vi.mock('@/utils/opintopolku');

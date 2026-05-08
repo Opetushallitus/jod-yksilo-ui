@@ -1,3 +1,6 @@
+import React from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+
 import {
   LogoRgbEn,
   LogoRgbFi,
@@ -8,8 +11,7 @@ import {
   useMediaQueries,
 } from '@jod/design-system';
 import { JodInfo, JodOpenInNew } from '@jod/design-system/icons';
-import React from 'react';
-import { Trans, useTranslation } from 'react-i18next';
+
 import { AnchorLink } from '../AnchorLink/AnchorLink';
 import {
   LogoOpintopolkuEn,
@@ -131,16 +133,16 @@ export function HowToUse() {
   const { osaamispolkuLogo, opintopolkuLogo, tyomarkkinatoriLogo } = getLocalizedLogos(language);
 
   return (
-    <figure className="flex flex-col justify-center items-center">
-      <div className="bg-white rounded-2xl border-4 border-secondary-1-light-3 px-4 py-2 pb-4 max-w-lg">
-        <div className="flex flex-col flex-1">
-          <div className="mb-3 flex gap-3 items-end">
+    <figure className="flex flex-col items-center justify-center">
+      <div className="rounded-2xl max-w-lg border-4 border-secondary-1-light-3 bg-white px-4 py-2 pb-4">
+        <div className="flex flex-1 flex-col">
+          <div className="mb-3 flex items-end gap-3">
             {osaamispolkuLogo}
-            <div className="text-primary-gray sm:text-body-sm text-body-xs font-semibold sm:mb-0 mb-1">
+            <div className="font-semibold mb-1 text-body-xs text-primary-gray sm:mb-0 sm:text-body-sm">
               / {t('common:navigation.external.yksilo.label')}
             </div>
           </div>
-          <div className="bg-secondary-1-dark rounded-md p-5 text-white text-body-sm font-semibold flex items-center justify-center">
+          <div className="font-semibold flex items-center justify-center rounded-md bg-secondary-1-dark p-5 text-body-sm text-white">
             <span className="mr-3">{t('how-to-use.find-opportunities-title')}</span>
             <Tooltip>
               <TooltipTrigger aria-label={t('common:more-info')} aria-describedby={findOpportunitiesId}>
@@ -170,8 +172,8 @@ export function HowToUse() {
           </div>
           <div className="flex flex-col items-center">
             <BlueArrows />
-            <div className="flex flex-row gap-3 flex-1 text-primary-gray text-body-xs font-semibold sm:text-[0.75rem] text-[0.625rem] sm:text-left text-center">
-              <div className="flex sm:flex-row flex-col justify-between items-center gap-2 flex-1 bg-secondary-1-light-2 p-4 rounded-md">
+            <div className="font-semibold flex flex-1 flex-row gap-3 text-center text-body-xs text-[0.625rem] text-primary-gray sm:text-left sm:text-[0.75rem]">
+              <div className="flex flex-1 flex-col items-center justify-between gap-2 rounded-md bg-secondary-1-light-2 p-4 sm:flex-row">
                 {t('how-to-use.find-opportunities-without-login-title')}
                 <Tooltip>
                   <TooltipTrigger aria-label={t('common:more-info')} aria-describedby={findOpportunitiesWithoutLoginId}>
@@ -183,7 +185,7 @@ export function HowToUse() {
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <div className="flex sm:flex-row flex-col justify-between items-center gap-2 flex-1 bg-secondary-1-light-1 p-4 rounded-md">
+              <div className="flex flex-1 flex-col items-center justify-between gap-2 rounded-md bg-secondary-1-light-1 p-4 sm:flex-row">
                 {t('how-to-use.create-profile-title')}
                 <Tooltip>
                   <TooltipTrigger aria-label={t('common:more-info')} aria-describedby={createProfileId}>
@@ -195,7 +197,7 @@ export function HowToUse() {
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <div className="flex sm:flex-row flex-col justify-between items-center gap-2 flex-1 bg-secondary-1-light-2 p-4 rounded-md">
+              <div className="flex flex-1 flex-col items-center justify-between gap-2 rounded-md bg-secondary-1-light-2 p-4 sm:flex-row">
                 {t('how-to-use.find-with-words-title')}
                 <Tooltip>
                   <TooltipTrigger aria-label={t('common:more-info')} aria-describedby={findWithWordsId}>
@@ -211,14 +213,14 @@ export function HowToUse() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center -top-5 relative">
+      <div className="relative -top-5 flex flex-col items-center">
         <GrayArrows />
-        <div className="flex flex-row gap-3 text-primary-gray text-body-xs sm:text-[0.75rem] text-[0.625rem] font-semibold text-center">
-          <div className="flex flex-col justify-center items-center gap-3 flex-1 sm:w-[150px] w-[120px] bg-primary-light-2 p-5 rounded-md">
+        <div className="font-semibold flex flex-row gap-3 text-center text-body-xs text-[0.625rem] text-primary-gray sm:text-[0.75rem]">
+          <div className="flex w-[120px] flex-1 flex-col items-center justify-center gap-3 rounded-md bg-primary-light-2 p-5 sm:w-[150px]">
             {t('how-to-use.job-seeker-profile')}
             <div className="flex items-center">{tyomarkkinatoriLogo}</div>
           </div>
-          <div className="flex flex-col justify-center items-center gap-3 flex-1 sm:w-[150px] w-[120px] bg-primary-light-2 p-5 rounded-md">
+          <div className="flex w-[120px] flex-1 flex-col items-center justify-center gap-3 rounded-md bg-primary-light-2 p-5 sm:w-[150px]">
             {t('how-to-use.education-history')}
             <div className="flex items-center">{opintopolkuLogo}</div>
           </div>

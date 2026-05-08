@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
+
 import { generateMenuItems, type MenuRoute } from './routeUtils';
 
 vi.mock('@/components/NavMenu/NavLinkBasedOnAuth', () => ({
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   NavLinkBasedOnAuth: ({ children }: any) => children,
 }));
 

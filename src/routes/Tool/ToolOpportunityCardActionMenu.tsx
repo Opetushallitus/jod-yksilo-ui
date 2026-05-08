@@ -1,8 +1,10 @@
-import { MahdollisuusTyyppi } from '@/routes/types';
-import { copyToClipboard } from '@/utils';
-import { PopupList, PopupListItem } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+
+import { PopupList, PopupListItem } from '@jod/design-system';
+
+import { MahdollisuusTyyppi } from '@/routes/types';
+import { copyToClipboard } from '@/utils';
 
 interface OpportunityCardActionMenuProps {
   menuId: string;
@@ -38,7 +40,7 @@ const ToolOpportunityCardActionMenu = ({
 
   return (
     <PopupList>
-      <ul id={menuId} className="flex flex-col gap-y-2 w-full">
+      <ul id={menuId} className="flex w-full flex-col gap-y-2">
         <li>
           <Link to={compareTo} type="button" data-testid="opportunity-action-compare">
             <PopupListItem>{t('compare')}</PopupListItem>
@@ -48,7 +50,7 @@ const ToolOpportunityCardActionMenu = ({
           <button
             data-testid="opportunity-action-share"
             onClick={() => copyToClipboard(window.location.origin + '/yksilo' + opportunityUrl)}
-            className="cursor-pointer w-full"
+            className="w-full cursor-pointer"
           >
             <PopupListItem>{t('common:share')}</PopupListItem>
           </button>

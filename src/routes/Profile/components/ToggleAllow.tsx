@@ -1,5 +1,6 @@
-import { Toggle } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
+
+import { Toggle } from '@jod/design-system';
 
 interface ToggleAllowProps {
   /** Is the toggle checked/activated */
@@ -18,7 +19,7 @@ export const ToggleAllow = ({ checked, onChange, disabled = false, testId }: Tog
 
   return (
     <>
-      <span className="text-body-md-mobile sm:text-body-md text-secondary-gray font-arial" aria-hidden>
+      <span className="font-arial text-body-md-mobile text-secondary-gray sm:text-body-md" aria-hidden>
         {label}
       </span>
       <Toggle

@@ -1,7 +1,9 @@
-import { useMediaQueries } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMatches, useNavigate } from 'react-router';
+
+import { useMediaQueries } from '@jod/design-system';
+
 import { SearchButton } from './SearchButton';
 import { SearchInput } from './SearchInput';
 
@@ -10,7 +12,6 @@ interface SearchBarProps {
   setSearchInputVisible: (visible: boolean) => void;
 }
 
-// eslint-disable-next-line sonarjs/function-return-type
 export const SearchBar = ({ searchInputVisible, setSearchInputVisible }: SearchBarProps) => {
   const {
     t,
@@ -34,7 +35,7 @@ export const SearchBar = ({ searchInputVisible, setSearchInputVisible }: SearchB
     globalThis._paq?.push(['trackEvent', 'yksilo.Haku', 'Hakusana', searchValue]);
     const queryParams = new URLSearchParams();
     queryParams.set('q', searchValue);
-    navigate(`/${language}/${t('slugs.search')}?${queryParams.toString()}`);
+    void navigate(`/${language}/${t('slugs.search')}?${queryParams.toString()}`);
     setTimeout(() => {
       setSearchValue('');
       setIsSearching(false);
@@ -54,7 +55,7 @@ export const SearchBar = ({ searchInputVisible, setSearchInputVisible }: SearchB
   const searchForm = (
     <form
       id="search"
-      className="flex items-center gap-2 justify-end"
+      className="flex items-center justify-end gap-2"
       onSubmit={handleSearch}
       data-testid="searchbar-form"
     >
@@ -67,7 +68,7 @@ export const SearchBar = ({ searchInputVisible, setSearchInputVisible }: SearchB
 
   return (
     !hideSearch && (
-      <div className="print:hidden mb-2" data-testid="searchbar">
+      <div className="mb-2 print:hidden" data-testid="searchbar">
         {showSearchInput ? searchForm : toggleSearchButton}
       </div>
     )

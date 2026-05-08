@@ -1,7 +1,8 @@
+import toast from 'react-hot-toast/headless';
+
 import type { components } from '@/api/schema';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
 import i18n from '@/i18n/config';
-import toast from 'react-hot-toast/headless';
 
 /**
  * Formats a date to a string representation.

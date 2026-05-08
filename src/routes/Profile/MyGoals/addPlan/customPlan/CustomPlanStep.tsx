@@ -1,6 +1,8 @@
-import { InputField, Textarea } from '@jod/design-system';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+
+import { InputField, Textarea } from '@jod/design-system';
+
 import type { OmaSuunnitelmaForm } from './AddOrEditCustomPlanModal';
 
 const CreateCustomPlanStep = () => {
@@ -12,7 +14,7 @@ const CreateCustomPlanStep = () => {
   } = useFormContext<OmaSuunnitelmaForm>();
 
   return (
-    <div className="mb-2 max-w-modal-content box-content px-5 md:px-9">
+    <div className="mb-2 box-content max-w-modal-content px-5 md:px-9">
       <p className="font-arial text-body-md-mobile sm:text-body-md">
         {t('profile.my-goals.add-custom-plan-description')}
       </p>

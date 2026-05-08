@@ -1,11 +1,14 @@
-import { useAppRoutes } from '@/hooks/useAppRoutes';
-import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
-import { generateMenuItems } from '@/utils/routeUtils';
-import { LinkComponent, MenuItem } from '@jod/design-system';
-import { JodHome } from '@jod/design-system/icons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router';
+
+import { LinkComponent, MenuItem } from '@jod/design-system';
+import { JodHome } from '@jod/design-system/icons';
+
+import { useAppRoutes } from '@/hooks/useAppRoutes';
+import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
+import { generateMenuItems } from '@/utils/routeUtils';
+
 import { NavLinkBasedOnAuth } from './NavLinkBasedOnAuth';
 
 export const useMenuRoutes = (onClose: () => void) => {

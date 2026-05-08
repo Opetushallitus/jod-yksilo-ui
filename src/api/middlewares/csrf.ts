@@ -1,4 +1,5 @@
 import { Middleware } from 'openapi-fetch';
+
 import { client } from '../client';
 import type { components } from '../schema';
 

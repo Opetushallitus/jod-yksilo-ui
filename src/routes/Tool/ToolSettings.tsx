@@ -1,11 +1,14 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
+
+import { Button, Modal, useMediaQueries } from '@jod/design-system';
+
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType';
 import { useToolStore } from '@/stores/useToolStore';
 import { getFilterCount, noFiltersSelected } from '@/utils/FilterUtils';
-import { Button, Modal, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
+
 import { FilterSijainti } from './components/filters/FilterSijainti';
 import OpportunitiesSorting from './components/filters/OpportunitiesSorting';
 import OpportunityWeight from './components/filters/OpportunityWeight';
@@ -56,10 +59,10 @@ const ToolSettings = ({ onUpdate, ...rest }: ToolSettingsProps) => {
       {...rest}
       className="h-[90vh]! sm:h-full!"
       fullWidthContent
-      topSlot={<h2 className="sm:text-hero text-heading-2-mobile">{t('tool.settings.modal-title')}</h2>}
+      topSlot={<h2 className="text-heading-2-mobile sm:text-hero">{t('tool.settings.modal-title')}</h2>}
       content={
-        <div className="bg-bg-gray w-full sm:text-body-sm text-body-sm-mobile flex flex-col gap-2 max-h-full">
-          <ul className="box-content px-5 md:px-9 max-w-modal-content">
+        <div className="flex max-h-full w-full flex-col gap-2 bg-bg-gray text-body-sm-mobile sm:text-body-sm">
+          <ul className="box-content max-w-modal-content px-5 md:px-9">
             <Setting
               title={t('tool.settings.general.filter')}
               count={getFilterCount(filters, [
@@ -102,7 +105,7 @@ const ToolSettings = ({ onUpdate, ...rest }: ToolSettingsProps) => {
               disabled={noFiltersSelected(filters)}
             />
           </div>
-          <div className="flex gap-4 ml-auto">
+          <div className="ml-auto flex gap-4">
             <Button
               variant="white"
               size={sm ? 'lg' : 'sm'}

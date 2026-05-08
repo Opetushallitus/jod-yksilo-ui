@@ -1,10 +1,13 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { cx, EmptyState, Tag } from '@jod/design-system';
+
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { getLocalizedText } from '@/utils';
 import { animateElementToTarget } from '@/utils/animations';
-import { cx, EmptyState, Tag } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+
 import AddedTags from './AddedTags';
 import type { OsaaminenValue, OsaamisSuosittelijaProps } from './OsaamisSuosittelija';
 
@@ -75,19 +78,18 @@ export const TagAreas = ({
           {mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}
         </Title>
         {ehdotetutOsaamiset.length > 0 && (
-          <div className="font-arial text-body-sm text-secondary-gray mb-4">
+          <div className="mb-4 font-arial text-body-sm text-secondary-gray">
             {mode === 'osaamiset' ? t(`osaamissuosittelija.competence.add`) : t(`osaamissuosittelija.interest.add`)}
           </div>
         )}
       </div>
       <div
         className={cx(
-          'overflow-y-auto max-h-[228px]',
-          isTagSpacing ? 'min-h-8 h-[100px] sm:max-h-[25dvh] mb-4' : 'mb-6',
+          'max-h-[228px] overflow-y-auto',
+          isTagSpacing ? 'mb-4 h-[100px] min-h-8 sm:max-h-[25dvh]' : 'mb-6',
         )}
       >
         {ehdotetutOsaamiset.length > 0 ? (
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
           <ul
             ref={suggestedTagsRef}
             className="flex flex-wrap gap-3 p-1"
@@ -134,7 +136,6 @@ export const TagAreas = ({
 
                     if (useAnimations) {
                       animateElementToTarget(e.currentTarget, selectedTagsContainerRef.current!, () => {
-                        // eslint-disable-next-line sonarjs/no-nested-functions
                         setSkillsToAdd((prev) => prev.filter((id) => id !== ehdotettuOsaaminen.id));
                       });
                     }
@@ -164,7 +165,7 @@ export const TagAreas = ({
               {mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}
             </Title>
             {value.length > 0 && (
-              <div className="font-arial text-body-sm text-secondary-gray mb-4">
+              <div className="mb-4 font-arial text-body-sm text-secondary-gray">
                 {mode === 'osaamiset'
                   ? t(`osaamissuosittelija.competence.remove`)
                   : t(`osaamissuosittelija.interest.remove`)}
@@ -173,11 +174,10 @@ export const TagAreas = ({
           </div>
 
           <div
-            className={cx('overflow-y-auto max-h-[228px]', isTagSpacing && 'min-h-8 h-[100px] sm:max-h-[25dvh]')}
+            className={cx('max-h-[228px] overflow-y-auto', isTagSpacing && 'h-[100px] min-h-8 sm:max-h-[25dvh]')}
             ref={selectedTagsContainerRef}
           >
             {value.length > 0 ? (
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
               <ul
                 className="flex flex-wrap gap-3 p-1"
                 data-testid="osaamissuosittelija-selected-competences"

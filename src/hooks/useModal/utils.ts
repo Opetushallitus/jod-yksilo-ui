@@ -1,6 +1,8 @@
-import { ConfirmDialogWrapperProps } from '@/components';
-import { type AnimationMode } from '@jod/design-system';
 import React from 'react';
+
+import { type AnimationMode } from '@jod/design-system';
+
+import { ConfirmDialogWrapperProps } from '@/components';
 
 export interface ModalComponentProps {
   onClose: (...args: unknown[]) => void;

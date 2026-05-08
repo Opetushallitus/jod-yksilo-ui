@@ -1,10 +1,12 @@
-import { LangCode } from '@/i18n/config.ts';
-import { useToolStore } from '@/stores/useToolStore';
-import { getCodesetValue } from '@/utils/codes/codes.ts';
-import { Checkbox } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
+
+import { Checkbox } from '@jod/design-system';
+
+import { LangCode } from '@/i18n/config.ts';
+import { useToolStore } from '@/stores/useToolStore';
+import { getCodesetValue } from '@/utils/codes/codes.ts';
 
 const KOULUTUSALA_KOODIT: [string, string][] = [
   ['00', 'Yleissivistävä koulutus'],
@@ -51,17 +53,17 @@ export const FilterKoulutusala = () => {
   };
 
   React.useEffect(() => {
-    Promise.all(KOULUTUSALA_KOODIT.map((koulutusala) => translateKoulutusala(koulutusala, language as LangCode))).then(
-      (translatedKoulutusalat) => {
-        translatedKoulutusalat.sort((a, b) => a[1].localeCompare(b[1]));
-        setKoulutusalat(translatedKoulutusalat);
-      },
-    );
+    void Promise.all(
+      KOULUTUSALA_KOODIT.map((koulutusala) => translateKoulutusala(koulutusala, language as LangCode)),
+    ).then((translatedKoulutusalat) => {
+      translatedKoulutusalat.sort((a, b) => a[1].localeCompare(b[1]));
+      setKoulutusalat(translatedKoulutusalat);
+    });
   }, [language]);
 
   return (
     <fieldset className="flex flex-col gap-5">
-      <legend className="text-heading-4-mobile sm:text-heading-4 mb-5 sr-only">{t('show')}</legend>
+      <legend className="sr-only mb-5 text-heading-4-mobile sm:text-heading-4">{t('show')}</legend>
       {koulutusalat.map((koulutusala) => (
         <Checkbox
           key={koulutusala[0]}

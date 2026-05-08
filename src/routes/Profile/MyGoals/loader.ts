@@ -1,3 +1,5 @@
+import { LoaderFunction } from 'react-router';
+
 import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
@@ -7,7 +9,6 @@ import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { isDefined, sortByProperty } from '@/utils';
 import { mapKoulutusCodesToLabels } from '@/utils/codes/codes';
-import { LoaderFunction } from 'react-router';
 
 export default (async ({ request }) => {
   const response = await client.GET('/api/profiili/tavoitteet', { signal: request.signal });

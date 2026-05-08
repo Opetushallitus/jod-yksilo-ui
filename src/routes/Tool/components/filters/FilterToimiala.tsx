@@ -1,10 +1,12 @@
-import { LangCode } from '@/i18n/config.ts';
-import { useToolStore } from '@/stores/useToolStore';
-import { getCodesetValue } from '@/utils/codes/codes.ts';
-import { Checkbox } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
+
+import { Checkbox } from '@jod/design-system';
+
+import { LangCode } from '@/i18n/config.ts';
+import { useToolStore } from '@/stores/useToolStore';
+import { getCodesetValue } from '@/utils/codes/codes.ts';
 
 const toimialakoodit: [string, string][] = [
   ['A', 'Maatalous, metsätalous ja kalatalous'],
@@ -61,7 +63,7 @@ export const FilterToimiala = () => {
   };
 
   React.useEffect(() => {
-    Promise.all(toimialakoodit.map((toimiala) => translateToimiala(toimiala, language as LangCode))).then(
+    void Promise.all(toimialakoodit.map((toimiala) => translateToimiala(toimiala, language as LangCode))).then(
       (translatedToimialat) => {
         translatedToimialat.sort((a, b) => a[1].localeCompare(b[1]));
         setToimialat(translatedToimialat);
@@ -71,7 +73,7 @@ export const FilterToimiala = () => {
 
   return (
     <fieldset className="flex flex-col gap-5">
-      <legend className="text-heading-4-mobile sm:text-heading-4 mb-5 sr-only">{t('show')}</legend>
+      <legend className="sr-only mb-5 text-heading-4-mobile sm:text-heading-4">{t('show')}</legend>
       {toimialat.map((toimiala) => (
         <Checkbox
           key={toimiala[1]}

@@ -1,3 +1,3 @@
 export const OpportunityDetailsWrapper = ({ children }: { children: React.ReactNode }) => {
-  return <div className="flex gap-y-3 flex-col border-l-2 pl-4 border-border-form">{children}</div>;
+  return <div className="flex flex-col gap-y-3 border-l-2 border-border-form pl-4">{children}</div>;
 };

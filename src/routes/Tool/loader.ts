@@ -1,10 +1,12 @@
+import type { LoaderFunction } from 'react-router';
+
 import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
 import i18n from '@/i18n/config';
 import { YksiloLoaderContext, yksiloLoaderContextHasSession } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
-import type { LoaderFunction } from 'react-router';
+
 import { JobCodesetValues } from '../../utils/jakaumaUtils';
 import { type CompetencesLoaderData, getCompetenceData } from '../Profile/Competences/loader';
 
@@ -47,7 +49,7 @@ export default (async ({ request, context }): Promise<ToolLoaderData> => {
   // Load tyomahdollisuudet and ehdotukset if they are not already loaded
   if (state.tyomahdollisuudet.length === 0 || languageHasChanged) {
     //We don't need to await this
-    state.updateEhdotuksetAndTyomahdollisuudet(hasSession, languageHasChanged);
+    void state.updateEhdotuksetAndTyomahdollisuudet(hasSession, languageHasChanged);
   }
 
   // Load suosikit if the user is logged in

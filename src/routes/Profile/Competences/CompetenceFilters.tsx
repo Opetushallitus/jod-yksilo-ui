@@ -1,8 +1,10 @@
-import type { CompetenceSourceType, FiltersType } from '@/routes/Profile/Competences/constants';
-import { getLocalizedText } from '@/utils';
-import { Accordion, Checkbox, cx } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Accordion, Checkbox, cx } from '@jod/design-system';
+
+import type { CompetenceSourceType, FiltersType } from '@/routes/Profile/Competences/constants';
+import { getLocalizedText } from '@/utils';
 
 interface TitleCheckboxProps {
   type: keyof FiltersType;
@@ -120,7 +122,7 @@ export const CompetenceFilters = ({
   );
 
   return (
-    <ul className="flex flex-col gap-y-3 py-4 overflow-y-auto">
+    <ul className="flex flex-col gap-y-3 overflow-y-auto py-4">
       {filterKeys
         .filter((key) => !ignoredFilterKeys.includes(key))
         .map((key) => (
@@ -140,7 +142,7 @@ export const CompetenceFilters = ({
                   isOpen={accordionState[key]}
                   setIsOpen={(open) => setAccordionState((prev) => ({ ...prev, [key]: open }))}
                 >
-                  <ul className="gap-y-4 flex-col flex mt-4">
+                  <ul className="mt-4 flex flex-col gap-y-4">
                     {selectedFilters[key]?.map((item, idx) => (
                       <li className="pl-7" key={getLocalizedText(item.label)}>
                         <Checkbox

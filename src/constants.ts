@@ -1,8 +1,9 @@
-/* eslint-disable sonarjs/no-clear-text-protocols */
+import { z } from 'zod';
+
+import { Tag } from '@jod/design-system';
+
 import i18n from '@/i18n/config';
 import type { OsaaminenLahdeTyyppi } from '@/routes/types';
-import { Tag } from '@jod/design-system';
-import { z } from 'zod';
 
 type TagProps = React.ComponentProps<typeof Tag>;
 export const OSAAMINEN_COLOR_MAP: Record<OsaaminenLahdeTyyppi, NonNullable<TagProps['sourceType']>> = {

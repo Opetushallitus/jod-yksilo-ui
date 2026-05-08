@@ -1,16 +1,4 @@
-import { client } from '@/api/client';
-import type { components } from '@/api/schema';
-import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
-import { ModalHeader } from '@/components/ModalHeader';
-import { formErrorMessage, LIMITS } from '@/constants';
-import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
-import { useEscHandler } from '@/hooks/useEscHandler';
-import { ModalComponentProps, useModal } from '@/hooks/useModal';
-import { getLocalizedText } from '@/utils';
-import { isFeatureEnabled } from '@/utils/features';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Datepicker, InputField, Modal, Textarea, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import {
   Controller,
@@ -23,6 +11,20 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
+
+import { Button, Datepicker, InputField, Modal, Textarea, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
+
+import { client } from '@/api/client';
+import type { components } from '@/api/schema';
+import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
+import { formErrorMessage, LIMITS } from '@/constants';
+import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
+import { useEscHandler } from '@/hooks/useEscHandler';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
+import { getLocalizedText } from '@/utils';
+import { isFeatureEnabled } from '@/utils/features';
 
 interface AddOrEditKoulutusModalProps extends ModalComponentProps {
   koulutuskokonaisuusId: string;
@@ -64,7 +66,7 @@ const MainStep = () => {
   const loppuPvm = watch('loppuPvm');
   React.useEffect(() => {
     if (alkuPvm || loppuPvm) {
-      trigger();
+      void trigger();
     }
   }, [alkuPvm, loppuPvm, trigger]);
 
@@ -130,7 +132,7 @@ const OsaamisetStep = () => {
   const { control } = useFormContext<KoulutusForm>();
   return (
     <>
-      <p className="mb-7 text-body-sm font-arial sm:mb-9 max-w-modal-content">
+      <p className="mb-7 max-w-modal-content font-arial text-body-sm sm:mb-9">
         {t('profile.education-history.modals.competences-description')}
       </p>
       <Controller
@@ -361,7 +363,7 @@ const AddOrEditKoulutusModal = ({
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row justify-between flex-1 gap-3">
+        <div className="flex flex-1 flex-row justify-between gap-3">
           <div>
             {koulutusId && (
               <Button

@@ -1,3 +1,6 @@
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import type { components } from '@/api/schema';
@@ -7,8 +10,6 @@ import type { TypedMahdollisuus } from '@/routes/types';
 import { DEFAULT_SORTING } from '@/stores/useToolStore/ToolStoreModel';
 import { paginate } from '@/utils';
 import { getEducationCodesetValues } from '@/utils/codes/codes';
-import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
 
 let abortController = new AbortController();
 const UNFILTERED_SEARCH_PAGE_SIZE = 500;
@@ -103,7 +104,7 @@ export const useSearchStore = create<SearchStoreState>()(
       toggleFilter: (name) => {
         const { filters, fetchPage } = get();
         set({ filters: { ...filters, [name]: !filters[name] } });
-        fetchPage(1);
+        void fetchPage(1);
       },
       filters: {
         ammatti: false,
@@ -250,7 +251,6 @@ export const useSearchStore = create<SearchStoreState>()(
         if (error || !data || data.length === 0) {
           set({ isLoading: false, allMetadata: [], filteredResults: [], filteredMetadata: [] });
           if (error) {
-            // eslint-disable-next-line no-console
             console.error('Search error:', error);
           }
         }

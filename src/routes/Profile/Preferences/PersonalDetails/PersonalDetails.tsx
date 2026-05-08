@@ -1,13 +1,16 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
+import z from 'zod';
+
+import { InputField, useMediaQueries } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import { formErrorMessage } from '@/constants';
 import { useDebounceState } from '@/hooks/useDebounceState';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
-import { InputField, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
-import z from 'zod';
+
 import { Divider, PersonalDetailsInfoBlock, ToggleAllow } from '../../components';
 import type { PreferencesLoaderData } from '../loader';
 
@@ -75,11 +78,11 @@ const PersonalDetails = () => {
       // Keep track of last valid email so that rest of the data can be saved even if email is invalid
       setLastSavedEmail(debouncedEmail);
       setEmailValid(true);
-      persist({ ...getPayload(), email: debouncedEmail });
+      void persist({ ...getPayload(), email: debouncedEmail });
     }
 
     // This effect is for saving a valid debounced email only
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, [debouncedEmail]);
 
   const genderTranslation = React.useMemo(() => {
@@ -95,12 +98,12 @@ const PersonalDetails = () => {
   return (
     <>
       <section className="mb-8">
-        <h2 className="text-heading-3-mobile sm:text-heading-3 mb-3">
+        <h2 className="mb-3 text-heading-3-mobile sm:text-heading-3">
           {t('preferences.data-disclosure-unanonymized.title')}
         </h2>
-        <p className="font-arial text-body-md mb-5">{t('preferences.data-disclosure-unanonymized.description')}</p>
+        <p className="mb-5 font-arial text-body-md">{t('preferences.data-disclosure-unanonymized.description')}</p>
         <div
-          className="flex items-center justify-between gap-4 py-4 border-b-2 border-[#CCC]"
+          className="flex items-center justify-between gap-4 border-b-2 border-[#CCC] py-4"
           data-testid="pref-share-third-parties"
         >
           <div className="flex-1 font-arial">
@@ -117,13 +120,13 @@ const PersonalDetails = () => {
               onChange={guardedAction(() => {
                 const newValue = !lupaLuovuttaaTiedotUlkopuoliselle;
                 setLupaLuovuttaaTiedotUlkopuoliselle(newValue);
-                persist({ ...getPayload(), lupaLuovuttaaTiedotUlkopuoliselle: newValue });
+                void persist({ ...getPayload(), lupaLuovuttaaTiedotUlkopuoliselle: newValue });
               })}
             />
           </div>
         </div>
         <div
-          className="flex items-center justify-between gap-4 py-4 border-b-2 border-[#CCC]"
+          className="flex items-center justify-between gap-4 border-b-2 border-[#CCC] py-4"
           data-testid="pref-ai-training"
         >
           <div className="flex-1 font-arial">
@@ -140,7 +143,7 @@ const PersonalDetails = () => {
               onChange={guardedAction(() => {
                 const newValue = !lupaKayttaaTekoalynKoulutukseen;
                 setLupaKayttaaTekoalynKoulutukseen(newValue);
-                persist({ ...getPayload(), lupaKayttaaTekoalynKoulutukseen: newValue });
+                void persist({ ...getPayload(), lupaKayttaaTekoalynKoulutukseen: newValue });
               })}
             />
           </div>
@@ -149,7 +152,7 @@ const PersonalDetails = () => {
 
       <section className="mb-8">
         <h2 className="text-heading-2-mobile sm:text-heading-2">{t('preferences.personal-details.title')}</h2>
-        <div className="font-arial sm:text-body-md text-body-md-mobile mb-5">
+        <div className="mb-5 font-arial text-body-md-mobile sm:text-body-md">
           {t('preferences.personal-details.description')}
         </div>
 

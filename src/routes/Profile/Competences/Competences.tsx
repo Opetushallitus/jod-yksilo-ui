@@ -1,3 +1,9 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
+
+import { Button, Modal, useMediaQueries } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import { MainLayout } from '@/components';
 import { InfoBox } from '@/components/InfoBox/InfoBox';
@@ -8,10 +14,7 @@ import { Filters } from '@/routes/Profile/Competences/Filters';
 import { GroupByAlphabet } from '@/routes/Profile/Competences/GroupByAlphabet';
 import { GroupBySource } from '@/routes/Profile/Competences/GroupBySource';
 import { sortByProperty } from '@/utils';
-import { Button, Modal, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { FreeFormTextInputBlock } from '../components/FreeFormTextInputBlock';
 import { ToolCard } from '../components/ToolCard';
@@ -100,7 +103,7 @@ const Competences = () => {
                 </div>
               }
               footer={
-                <div className="flex flex-row justify-end gap-4 flex-1">
+                <div className="flex flex-1 flex-row justify-end gap-4">
                   <Button
                     variant="white"
                     label={t('close')}

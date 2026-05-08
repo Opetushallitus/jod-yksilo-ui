@@ -1,7 +1,9 @@
-import { AiInfoButton } from '@jod/design-system';
-import { JodOpenInNew } from '@jod/design-system/icons';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
+
+import { AiInfoButton } from '@jod/design-system';
+import { JodOpenInNew } from '@jod/design-system/icons';
+
 import { AnchorLink } from '../AnchorLink/AnchorLink';
 
 interface AiInfoProps {
@@ -25,7 +27,7 @@ export const AiInfo = ({ type = 'tool', size }: AiInfoProps) => {
       content = (
         <>
           {t('ai-info-tooltip.description-tool-intro')}
-          <ul className="list-disc ml-4">
+          <ul className="ml-4 list-disc">
             <li>{t('ai-info-tooltip.description-tool-item-1')}</li>
             <li>{t('ai-info-tooltip.description-tool-item-2')}</li>
             <li>{t('ai-info-tooltip.description-tool-item-3')}</li>
@@ -36,7 +38,7 @@ export const AiInfo = ({ type = 'tool', size }: AiInfoProps) => {
       content = (
         <>
           {t('ai-info-tooltip.description-opportunity-intro')}
-          <ul className="list-disc ml-4">
+          <ul className="ml-4 list-disc">
             <li>{t('ai-info-tooltip.description-opportunity-item-1')}</li>
             <li>{t('ai-info-tooltip.description-opportunity-item-2')}</li>
             {type === 'job-opportunity' && <li>{t('ai-info-tooltip.description-opportunity-item-3')}</li>}
@@ -53,7 +55,7 @@ export const AiInfo = ({ type = 'tool', size }: AiInfoProps) => {
   }, [t, type]);
 
   const tooltipContent = (
-    <div className="flex flex-col text-body-xs max-w-[290px] gap-3 leading-5">
+    <div className="flex max-w-[290px] flex-col gap-3 text-body-xs leading-5">
       <p className="font-semibold">{t('ai-info-tooltip.title')}</p>
       <div>
         <div>{tooltipTextContent}</div>

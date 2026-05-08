@@ -1,3 +1,5 @@
+import type { Middleware } from 'openapi-fetch';
+
 import {
   isSessionExpiredState,
   storeHasActiveYksiloSession,
@@ -5,7 +7,7 @@ import {
 } from '@/stores/useSessionManagerStore';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useToolStore } from '@/stores/useToolStore';
-import type { Middleware } from 'openapi-fetch';
+
 import { unregisterCsrfMiddleware } from './csrf';
 
 const IGNORED_403_SUFFIXES = ['/api/profiili/yksilo', '/api/integraatiot/koski/koulutukset'] as const;

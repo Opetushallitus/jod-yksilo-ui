@@ -1,7 +1,9 @@
-import { getLinkTo } from '@/utils/routeUtils';
+import { useTranslation } from 'react-i18next';
+
 import { Button, tidyClasses as tc } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
-import { useTranslation } from 'react-i18next';
+
+import { getLinkTo } from '@/utils/routeUtils';
 
 interface ToolCardProps {
   /** Class name for the banner wrapper element */
@@ -34,9 +36,9 @@ export const ToolCard = ({
     : `/${i18n.language}/${t('slugs.tool.index')}`;
 
   return (
-    <div className={tc(`flex flex-col rounded-lg p-6 gap-5 bg-secondary-1-dark-2 ${className}`)}>
-      <h2 className="text-heading-2-mobile sm:text-heading-2 text-white mr-2">{title ?? t('tool.banner.title')}</h2>
-      <p className="text-body-lg-mobile sm:text-body-lg text-white">{description ?? t('tool.banner.description')}</p>
+    <div className={tc(`flex flex-col gap-5 rounded-lg bg-secondary-1-dark-2 p-6 ${className}`)}>
+      <h2 className="mr-2 text-heading-2-mobile text-white sm:text-heading-2">{title ?? t('tool.banner.title')}</h2>
+      <p className="text-body-lg-mobile text-white sm:text-body-lg">{description ?? t('tool.banner.description')}</p>
       <div className="mt-4">
         <Button
           label={t('tool.banner.link-text')}

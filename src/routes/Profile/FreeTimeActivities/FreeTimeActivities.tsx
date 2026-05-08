@@ -1,11 +1,14 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
+
+import { EmptyState, useMediaQueries } from '@jod/design-system';
+
 import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
-import { EmptyState, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
+
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';

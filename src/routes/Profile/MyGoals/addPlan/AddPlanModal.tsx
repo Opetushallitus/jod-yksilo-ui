@@ -1,3 +1,12 @@
+import i18n from 'i18next';
+import React from 'react';
+import toast from 'react-hot-toast/headless';
+import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
+
+import { Button, cx, EmptyState, Modal, tidyClasses, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark, JodRoute, JodSettings } from '@jod/design-system/icons';
+
 import { client } from '@/api/client';
 import { ActionButton } from '@/components';
 import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
@@ -7,13 +16,7 @@ import PlanOptionFilters from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanO
 import PlanOptionsPagination from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionsPagination.tsx';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { Button, cx, EmptyState, Modal, tidyClasses, useMediaQueries } from '@jod/design-system';
-import { JodCheckmark, JodRoute, JodSettings } from '@jod/design-system/icons';
-import i18n from 'i18next';
-import React from 'react';
-import toast from 'react-hot-toast/headless';
-import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
+
 import AddOrEditCustomPlanModal from './customPlan/AddOrEditCustomPlanModal';
 import { getKestoCount } from './store/PlanOptionStoreModel';
 
@@ -99,9 +102,9 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
       await updateEhdotukset(i18n.language);
     };
     if (!initialPlanListLoaded) {
-      fetchData();
+      void fetchData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, [initialPlanListLoaded]);
 
   const onUpdateResults = async () => {
@@ -111,7 +114,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
   const onUpdateSettings = () => {
     const hasChanges = addPlanStore.getState().settingsHaveChanged;
     if (hasChanges) {
-      onUpdateResults();
+      void onUpdateResults();
     }
   };
 
@@ -134,13 +137,13 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
       content={
         <div className="">
           <div>
-            <div className="relative flex flex-col h-full z-20">
-              <div className="max-w-modal-content box-content px-5 md:px-9">
-                <p className="text-body-sm-mobile sm:text-body-sm font-arial bg-bg-gray">
+            <div className="relative z-20 flex h-full flex-col">
+              <div className="box-content max-w-modal-content px-5 md:px-9">
+                <p className="bg-bg-gray font-arial text-body-sm-mobile sm:text-body-sm">
                   {t('profile.my-goals.add-new-plan-description')}
                 </p>
                 <div className="sticky top-0 z-40 bg-bg-gray px-1">
-                  <div className="flex justify-end mb-3 items-center">
+                  <div className="mb-3 flex items-center justify-end">
                     <Button
                       variant="gray"
                       size="sm"
@@ -166,7 +169,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
               <ul
                 id="selectplan-education-opportunities-list"
                 ref={scrollRef}
-                className={cx('flex flex-col gap-4 py-2 max-w-modal-content box-content pt-0 md:pl-9', {
+                className={cx('box-content flex max-w-modal-content flex-col gap-4 py-2 pt-0 md:pl-9', {
                   'overflow-y-auto': !isLoading,
                   'overflow-hidden': isLoading,
                 })}
@@ -180,7 +183,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                 )}
 
                 {!isLoading && koulutusMahdollisuudet.length === 0 && (
-                  <div className="flex justify-center mt-6">
+                  <div className="mt-6 flex justify-center">
                     <EmptyState text={t('profile.my-goals.no-filtered-results')} />
                   </div>
                 )}
@@ -199,7 +202,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                         key={id}
                         actionButtonContent={
                           selectedPlans?.includes(id) ? (
-                            <div className="flex flex-col sm:flex-row gap-4 not-sm:justify-between sm:items-center">
+                            <div className="flex flex-col gap-4 not-sm:justify-between sm:flex-row sm:items-center">
                               <span
                                 className={tidyClasses([
                                   'flex',
@@ -222,7 +225,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                               <ActionButton
                                 label={t('profile.my-goals.remove-from-plans')}
                                 onClick={() => setSelectedPlans(selectedPlans?.filter((plan) => plan !== id))}
-                                className="bg-bg-gray order-1 sm:order-2"
+                                className="order-1 bg-bg-gray sm:order-2"
                                 icon={<JodRoute className="text-accent" />}
                               />
                             </div>
@@ -250,7 +253,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
         </div>
       }
       footer={
-        <div className="flex flex-row gap-5 flex-1 justify-between">
+        <div className="flex flex-1 flex-row justify-between gap-5">
           <Button
             label={t('profile.my-goals.add-custom-plan')}
             ariaHaspopup="dialog"

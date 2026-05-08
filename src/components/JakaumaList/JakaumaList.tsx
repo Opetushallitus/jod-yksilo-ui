@@ -1,3 +1,7 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
+
 import { NOT_AVAILABLE_LABEL } from '@/constants';
 import type { LoaderData as EducationLoaderData } from '@/routes/EducationOpportunity/loader';
 import type { LoaderData as JobLoaderData } from '@/routes/JobOpportunity/loader';
@@ -16,9 +20,6 @@ import {
   type EducationCodeSetValues,
   type JobCodesetValues,
 } from '@/utils/jakaumaUtils';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLoaderData } from 'react-router';
 
 interface EducationJakaumaListProps {
   jakaumat: KoulutusmahdollisuusJakaumat;
@@ -126,15 +127,15 @@ const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) 
   const isEmpty = !jakauma?.arvot || jakauma?.arvot.length === 0;
 
   return (
-    <div className="md:col-span-1 print:col-span-1 col-span-2 border-l-2 border-border-gray pl-4">
-      <h4 className="text-heading-4 pb-2">{jakaumaHeadingTranslations[name]}</h4>
+    <div className="col-span-2 border-l-2 border-border-gray pl-4 md:col-span-1 print:col-span-1">
+      <h4 className="pb-2 text-heading-4">{jakaumaHeadingTranslations[name]}</h4>
       {isEmpty ? (
         <div className="flex flex-col gap-3">
           <p className="text-heading-2 text-accent" data-testid={`${name}-distribution-empty-label`}>
             {NOT_AVAILABLE_LABEL}
           </p>
           <span
-            className="text-body-sm text-secondary-gray font-arial"
+            className="font-arial text-body-sm text-secondary-gray"
             data-testid={`${name}-distribution-total-label`}
           >
             {t('job-opportunity.of-job-ads')}
@@ -144,11 +145,11 @@ const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) 
         <ul>
           {jakauma.arvot.map((arvo) => (
             <li key={arvo.arvo} className="flex flex-col gap-3">
-              <div className="flex text-heading-2 text-accent gap-3 items-start">
+              <div className="flex items-start gap-3 text-heading-2 text-accent">
                 <span data-testid={`${name}-distribution-${arvo.arvo}-percentage`}>{Math.round(arvo.osuus)}%</span>
                 <span
                   data-testid={`${name}-distribution-${arvo.arvo}-label`}
-                  className="first-letter:capitalize hyphens-auto wrap-anywhere"
+                  className="wrap-anywhere hyphens-auto first-letter:capitalize"
                   lang={language}
                 >
                   {getDisplayValue(arvo.arvo)}
@@ -157,7 +158,7 @@ const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) 
             </li>
           ))}
           <li
-            className="text-body-sm text-secondary-gray font-arial mt-4"
+            className="mt-4 font-arial text-body-sm text-secondary-gray"
             data-testid={`${name}-distribution-total-label`}
           >
             {type === 'job' ? t('job-opportunity.of-job-ads') : t('education-opportunity.of-educations')}

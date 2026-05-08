@@ -1,6 +1,8 @@
-import { OsaamisSuosittelija } from '@/components';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+
+import { OsaamisSuosittelija } from '@/components';
+
 import type { FreeTimeActivitiesForm } from './utils';
 
 interface CompetencesStepProps {
@@ -15,8 +17,8 @@ const CompetencesStep = ({ patevyys }: CompetencesStepProps) => {
   const { getValues, control } = useFormContext<FreeTimeActivitiesForm>();
 
   return (
-    <div className="max-w-modal-content box-content px-5 md:px-9">
-      <h3 className="mb-6 font-poppins text-primary-gray text-heading-3-mobile sm:text-heading-3">
+    <div className="box-content max-w-modal-content px-5 md:px-9">
+      <h3 className="mb-6 font-poppins text-heading-3-mobile text-primary-gray sm:text-heading-3">
         {getValues(`nimi.${language}`)} - {getValues(`patevyydet.${patevyys}.nimi.${language}`)}
       </h3>
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">

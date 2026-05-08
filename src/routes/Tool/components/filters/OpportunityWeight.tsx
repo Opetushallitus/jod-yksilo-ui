@@ -1,8 +1,10 @@
-import { useToolStore } from '@/stores/useToolStore';
-import { Slider } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
+
+import { Slider } from '@jod/design-system';
+
+import { useToolStore } from '@/stores/useToolStore';
 
 const OpportunityWeight = () => {
   const {

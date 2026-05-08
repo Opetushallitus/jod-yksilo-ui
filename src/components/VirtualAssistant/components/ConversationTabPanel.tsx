@@ -1,5 +1,7 @@
-import { cx } from '@jod/design-system';
 import { useTranslation } from 'react-i18next';
+
+import { cx } from '@jod/design-system';
+
 import type { useVirtualAssistantChat } from '../hooks/useVirtualAssistantChat';
 import { getVirtualAssistantConfig } from '../virtualAssistantConfig';
 import type { VirtualAssistantVariant } from '../virtualAssistantTypes';
@@ -28,14 +30,14 @@ export const ConversationTabPanel = ({ type, chat, selection, tabs }: Conversati
       role="tabpanel"
       tabIndex={0}
       aria-labelledby={conversationTabButtonId}
-      className={cx('flex flex-col flex-1 min-h-0 py-2 bg-white rounded-b-md mb-4', selectedVisible && 'hidden')}
+      className={cx('mb-4 flex min-h-0 flex-1 flex-col rounded-b-md bg-white py-2', selectedVisible && 'hidden')}
     >
       <div
         ref={containerRef}
-        className="flex flex-col flex-1 overflow-y-auto text-primary-gray"
+        className="flex flex-1 flex-col overflow-y-auto text-primary-gray"
         data-testid="va-transcript"
       >
-        <div className="flex flex-col flex-1 gap-5 px-4 py-3 my-2" ref={messageContainerRef}>
+        <div className="my-2 flex flex-1 flex-col gap-5 px-4 py-3" ref={messageContainerRef}>
           <VirtualAssistantMessageBubble message={config.labels.description} isUser={false} />
           <VirtualAssistantMessageBubble message={config.labels.start} isUser={false} />
           {Object.entries(history).map(([key, row]) => (

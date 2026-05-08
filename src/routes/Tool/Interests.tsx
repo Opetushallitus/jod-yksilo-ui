@@ -1,8 +1,11 @@
-import { OsaamisSuosittelija } from '@/components';
-import { isFeatureEnabled } from '@/utils/features';
-import { Button } from '@jod/design-system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Button } from '@jod/design-system';
+
+import { OsaamisSuosittelija } from '@/components';
+import { isFeatureEnabled } from '@/utils/features';
+
 import VirtualAssistant from '../../components/VirtualAssistant';
 import { useTool } from './hook/useTool';
 import { mergeUniqueValuesExcludingType } from './utils';
@@ -36,7 +39,7 @@ const Interests = () => {
           onClick={() => {
             setKiinnostukset([]);
           }}
-          className="ml-2 mb-6"
+          className="mb-6 ml-2"
           label={t('tool.competency-profile.delete-all')}
         />
       )}

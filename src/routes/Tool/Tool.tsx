@@ -1,3 +1,10 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
+
+import { Button, cx, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
+import { JodArrowRight, JodCompass, JodInfo, JodSettings } from '@jod/design-system/icons';
+
 import { AiInfo, Breadcrumb, OpportunityCard } from '@/components';
 import { IconHeading } from '@/components/IconHeading';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
@@ -10,11 +17,7 @@ import AdditionalSupport from '@/routes/Tool/AdditionalSupport';
 import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText } from '@/utils';
-import { Button, cx, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
-import { JodArrowRight, JodCompass, JodInfo, JodSettings } from '@jod/design-system/icons';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
+
 import { getTypeSlug } from '../Profile/utils';
 import Competences from './Competences';
 import ToolAccordion from './components/ToolAccordion';
@@ -59,7 +62,7 @@ const ExploreOpportunities = () => {
   const { lg } = useMediaQueries();
 
   const onUpdate = () => {
-    updateEhdotuksetAndTyomahdollisuudet(isLoggedIn, false);
+    void updateEhdotuksetAndTyomahdollisuudet(isLoggedIn, false);
   };
 
   const getTotalFilterCount = React.useCallback(() => {
@@ -76,14 +79,14 @@ const ExploreOpportunities = () => {
 
   return (
     <>
-      <div className="sticky not:lg:z-10 bg-bg-gray -mx-1 px-1 lg:pt-4" style={{ top }}>
-        <div className="flex items-center justify-end h-9 lg:pb-4 not-lg:bg-white not-lg:w-full lg:justify-between not-lg:mb-3 not-lg:px-4">
+      <div className="not:lg:z-10 sticky -mx-1 bg-bg-gray px-1 lg:pt-4" style={{ top }}>
+        <div className="flex h-9 items-center justify-end not-lg:mb-3 not-lg:w-full not-lg:bg-white not-lg:px-4 lg:justify-between lg:pb-4">
           {lg && (
             <h2 id="opportunities-title" tabIndex={-1} className="text-heading-2-mobile sm:text-heading-2">
               {t('tool.your-opportunities.title')}
             </h2>
           )}
-          <div className="flex gap-6 h-fit">
+          <div className="flex h-fit gap-6">
             <Button
               aria-label={toggleFiltersText}
               label={toggleFiltersText}
@@ -112,7 +115,7 @@ const ExploreOpportunities = () => {
         </div>
 
         {isLoading ? (
-          <div aria-hidden="true" className="flex flex-col gap-5 sm:gap-3 mb-8">
+          <div aria-hidden="true" className="mb-8 flex flex-col gap-5 sm:gap-3">
             <OpportunityCardSkeleton />
             <OpportunityCardSkeleton />
           </div>
@@ -227,7 +230,7 @@ const UpdateEhdotuksetAndTyomahdollisuudetButton = ({ id, className }: { id?: st
     <div
       ref={buttonRef}
       id={id}
-      className={`sticky bottom-0 ${isSticky ? 'rounded-t-none' : 'rounded-t-md'} rounded-b-md bg-white py-5 flex justify-center items-center ${className}`}
+      className={`sticky bottom-0 ${isSticky ? 'rounded-t-none' : 'rounded-t-md'} flex items-center justify-center rounded-b-md bg-white py-5 ${className}`}
     >
       <div className="flex items-center gap-2 py-2">
         <Button
@@ -243,7 +246,7 @@ const UpdateEhdotuksetAndTyomahdollisuudetButton = ({ id, className }: { id?: st
 
         <TooltipWrapper
           tooltipPlacement="top"
-          tooltipContent={<div className="text-body-xs max-w-[290px] leading-5">{t('tool.update-tooltip-info')}</div>}
+          tooltipContent={<div className="max-w-[290px] text-body-xs leading-5">{t('tool.update-tooltip-info')}</div>}
         >
           <JodInfo size={18} className="text-secondary-gray" />
         </TooltipWrapper>
@@ -253,11 +256,11 @@ const UpdateEhdotuksetAndTyomahdollisuudetButton = ({ id, className }: { id?: st
 };
 
 const YourInfoGroup = ({ children }: { children: React.ReactNode }) => {
-  return <div className="flex flex-col gap-4 lg:gap-3 lg:bg-[#CCD1D8] lg:rounded-[12px] lg:p-3">{children}</div>;
+  return <div className="flex flex-col gap-4 lg:gap-3 lg:rounded-[12px] lg:bg-[#CCD1D8] lg:p-3">{children}</div>;
 };
 const YourInfoGroupSeparator = () => {
   const { lg } = useMediaQueries();
-  return lg ? null : <div className="border-t-4 border-primary-light-2 mx-5" />;
+  return lg ? null : <div className="mx-5 border-t-4 border-primary-light-2" />;
 };
 
 const YourInfo = () => {
@@ -296,7 +299,7 @@ const YourInfo = () => {
 
           <UpdateEhdotuksetAndTyomahdollisuudetButton
             id="tool-update-opportunities-button"
-            className={cx('border-t-2 rounded', lg && 'border-primary-light-2', !lg && 'border-bg-gray')}
+            className={cx('rounded border-t-2', lg && 'border-primary-light-2', !lg && 'border-bg-gray')}
           />
         </YourInfoGroup>
 
@@ -312,8 +315,8 @@ const YourInfo = () => {
         <RateContent variant="kohtaanto" area="Kohtaanto työkalu" size="md" />
       </div>
 
-      <div className="flex flex-col bg-secondary-1-dark-2 rounded-md px-5 py-6 gap-3 text-white lg:mx-3">
-        <h2 className=" text-heading-2-mobile sm:text-heading-2">
+      <div className="flex flex-col gap-3 rounded-md bg-secondary-1-dark-2 px-5 py-6 text-white lg:mx-3">
+        <h2 className="text-heading-2-mobile sm:text-heading-2">
           {isLoggedIn ? t('profile.banner.title.logged-in') : t('profile.banner.title.unlogged')}
         </h2>
         <div className="flex flex-col gap-6">
@@ -470,7 +473,7 @@ const Tool = () => {
   const top = `${(lg ? 68 : 66) + permanentNotesHeight}px`;
 
   return (
-    <main role="main" id="jod-main" className="mx-auto w-full max-w-[1140px] px-5 pb-6 pt-11" data-testid="tool-main">
+    <main role="main" id="jod-main" className="mx-auto w-full max-w-[1140px] px-5 pt-11 pb-6" data-testid="tool-main">
       <div className="mb-6">
         <Breadcrumb />
       </div>
@@ -478,7 +481,7 @@ const Tool = () => {
         <IconHeading icon={<JodCompass className="text-white" />} title={t('tool.title')} testId="tool-title" />
         <div className="ml-1 print:hidden">{<AiInfo type="tool" />}</div>
       </div>
-      <p className="text-body-lg-mobile sm:text-body-lg mb-6 max-w-[700px]" ref={scrollRef}>
+      <p className="mb-6 max-w-[700px] text-body-lg-mobile sm:text-body-lg" ref={scrollRef}>
         {t('tool.description')}
         <OnboardingTour setOnboardingTourActive={setOnboardingTourActive} setCurrentTab={setCurrentTab} />
       </p>
@@ -486,16 +489,16 @@ const Tool = () => {
       {lg ? (
         // Desktop
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-7">
-          <div className="col-span-1 lg:col-span-5 max-h-fit">
+          <div className="col-span-1 max-h-fit lg:col-span-5">
             <div
-              className="sticky z-10 bg-bg-gray lg:pt-4 lg:-mx-3 lg:px-3"
+              className="sticky z-10 bg-bg-gray lg:-mx-3 lg:px-3 lg:pt-4"
               style={{
                 top,
               }}
             >
-              <h2 className="sm:text-heading-2 text-heading-2-mobile h-9">{t('tool.my-own-data.title')}</h2>
+              <h2 className="h-9 text-heading-2-mobile sm:text-heading-2">{t('tool.my-own-data.title')}</h2>
             </div>
-            <div className="flex flex-col gap-4 -mx-3">
+            <div className="-mx-3 flex flex-col gap-4">
               <YourInfo />
             </div>
           </div>
@@ -511,9 +514,8 @@ const Tool = () => {
       ) : (
         // Mobile
         <>
-          <div className="sticky z-10 -mx-5 pt-4 bg-bg-gray" style={{ top }}>
-            <div id="tool-tabs" role="tablist" className="flex text-button-sm select-none gap-3 px-5">
-              {/* eslint-disable-next-line react-hooks/refs */}
+          <div className="sticky z-10 -mx-5 bg-bg-gray pt-4" style={{ top }}>
+            <div id="tool-tabs" role="tablist" className="flex gap-3 px-5 text-button-sm select-none">
               {tabs.map((tab, index) => (
                 <button
                   type="button"
@@ -526,7 +528,7 @@ const Tool = () => {
                   onKeyDown={(event) => onKeyDown(event, index)}
                   id={`tab-${tab.text}`}
                   aria-selected={tab.active}
-                  className={cx('flex justify-center items-center bg-white py-4 grow rounded-t cursor-pointer', {
+                  className={cx('flex grow cursor-pointer items-center justify-center rounded-t bg-white py-4', {
                     'text-accent': tab.active,
                     'bg-bg-gray-2': !tab.active,
                   })}
@@ -541,10 +543,10 @@ const Tool = () => {
             role="tabpanel"
             tabIndex={0}
             aria-labelledby="tab-1"
-            className={cx('flex flex-col w-full')}
+            className={cx('flex w-full flex-col')}
           >
             {currentTab === 'info' ? (
-              <div className="flex flex-col gap-5 -mx-5">
+              <div className="-mx-5 flex flex-col gap-5">
                 <YourInfo />
               </div>
             ) : (

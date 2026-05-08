@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { useArrowKeyControls } from './index';
 
 const TestButtonList = ({ initialItems }: { initialItems: string[] }) => {
@@ -12,7 +13,6 @@ const TestButtonList = ({ initialItems }: { initialItems: string[] }) => {
   const { ref, handleKeyDown, setLastClickedIndex } = useArrowKeyControls(items);
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <ul ref={ref} onKeyDown={handleKeyDown} data-testid="list">
       {items.map((item, i) => (
         <li key={item}>
@@ -36,7 +36,6 @@ const TestDivList = ({ initialItems }: { initialItems: string[] }) => {
   const { ref, handleKeyDown } = useArrowKeyControls(items);
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <ul ref={ref} onKeyDown={handleKeyDown} data-testid="list">
       {items.map((item) => (
         <li key={item}>

@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import { FieldErrors } from 'react-hook-form';
 import { describe, expect, it } from 'vitest';
+
 import { FormError } from './FormError';
 
 describe('FormError component', () => {

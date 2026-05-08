@@ -1,11 +1,14 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
+
+import { EmptyState, Pagination, useMediaQueries } from '@jod/design-system';
+
 import { OpportunityCard, OpportunityCardSkeleton } from '@/components/OpportunityCard';
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
 import { useSearchStore } from '@/stores/useSearchStore';
 import { getLocalizedText } from '@/utils';
-import { EmptyState, Pagination, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
+
 import { getTypeSlug } from '../Profile/utils';
 import { getMahdollisuusAlityyppi } from '../Tool/utils';
 import { SearchFilters } from './SearchFilters';
@@ -38,16 +41,16 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
         {statusText}
       </output>
       {isLoading && (
-        <div aria-hidden="true" className="flex flex-col gap-5 sm:gap-3 mb-8">
+        <div aria-hidden="true" className="mb-8 flex flex-col gap-5 sm:gap-3">
           <OpportunityCardSkeleton />
           <OpportunityCardSkeleton />
         </div>
       )}
-      <div className="pb-5 font-arial flex justify-between items-center gap-3">
+      <div className="flex items-center justify-between gap-3 pb-5 font-arial">
         {!isLoading && (
           <>
             {filteredResults.length === 0 && <EmptyState text={t('search.no-results')} />}
-            {filteredResults.length > 0 && <span className="h-8 flex items-center">{resultsCountText}</span>}
+            {filteredResults.length > 0 && <span className="flex h-8 items-center">{resultsCountText}</span>}
           </>
         )}
         {!lg && <SearchFilters />}
@@ -57,7 +60,7 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
         <div className="flex flex-col">
           <ul
             id="search-your-opportunities-list"
-            className="flex flex-col gap-5 sm:gap-3 mb-8"
+            className="mb-8 flex flex-col gap-5 sm:gap-3"
             data-testid="search-opportunities-list"
           >
             {filteredResults.map((mahdollisuus) => {

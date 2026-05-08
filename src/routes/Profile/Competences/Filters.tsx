@@ -1,7 +1,10 @@
+import { useTranslation } from 'react-i18next';
+
+import { RadioButton, RadioButtonGroup, useMediaQueries } from '@jod/design-system';
+
 import { FilterList } from '@/components';
 import { GROUP_BY_ALPHABET, GROUP_BY_SOURCE } from '@/routes/Profile/Competences/constants';
-import { RadioButton, RadioButtonGroup, useMediaQueries } from '@jod/design-system';
-import { useTranslation } from 'react-i18next';
+
 import { CompetenceFilters, type CompetenceFiltersProps } from './CompetenceFilters';
 
 interface FiltersProps extends CompetenceFiltersProps {

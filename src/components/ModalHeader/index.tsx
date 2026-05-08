@@ -1,5 +1,6 @@
-import { tidyClasses } from '@jod/design-system';
 import React from 'react';
+
+import { tidyClasses } from '@jod/design-system';
 
 export interface ModalHeaderProps {
   /** Header text */
@@ -22,7 +23,7 @@ export const ModalHeader = ({ text, className = '', testId, step }: ModalHeaderP
 
   return (
     <h2
-      className={tidyClasses(`text-primary-gray text-heading-2-mobile sm:text-hero focus:outline-0 ${className}`)}
+      className={tidyClasses(`text-heading-2-mobile text-primary-gray focus:outline-0 sm:text-hero ${className}`)}
       data-testid={testId}
       ref={ref}
     >

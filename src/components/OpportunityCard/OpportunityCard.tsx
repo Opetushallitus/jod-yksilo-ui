@@ -1,3 +1,9 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { NavLink, useLocation } from 'react-router';
+
+import { Accordion, useMediaQueries } from '@jod/design-system';
+
 import type { components } from '@/api/schema';
 import { FavoriteToggle } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
@@ -5,10 +11,7 @@ import MoreActionsDropdown from '@/components/MoreActionsDropdown/MoreActionsDro
 import { useModal } from '@/hooks/useModal';
 import type { MahdollisuusAlityyppi, MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
 import { useIsSessionExpired } from '@/stores/useSessionManagerStore';
-import { Accordion, useMediaQueries } from '@jod/design-system';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { NavLink, useLocation } from 'react-router';
+
 import { OpportunityType } from '../OpportunityType/OpportunityType';
 import { TitleIcon } from '../TitleIcon/TitleIcon';
 import { EducationOpportunityCard } from './EducationOpportunityCard';
@@ -114,22 +117,22 @@ const ActionsSection = ({
   return nothingToShow ? (
     <></>
   ) : (
-    <div className="flex flex-row justify-between items-center sm:mb-3">
+    <div className="flex flex-row items-center justify-between sm:mb-3">
       {hasMatchInfo ? (
         <div
-          className={'flex flex-col sm:flex-row flex-nowrap gap-x-2 items-center select-none'}
+          className={'flex flex-col flex-nowrap items-center gap-x-2 select-none sm:flex-row'}
           data-testid="opportunity-card-match"
         >
-          <span className="text-accent text-[1.875rem] sm:text-[2.125rem] leading-7 sm:leading-[2.1875rem] font-normal">
+          <span className="font-normal text-[1.875rem] leading-7 text-accent sm:text-[2.125rem] sm:leading-[2.1875rem]">
             {Math.round(matchValue * 100)}%
           </span>
-          <span className="text-body-xs font-semibold text-primary-gray">{matchLabel}</span>
+          <span className="font-semibold text-body-xs text-primary-gray">{matchLabel}</span>
         </div>
       ) : (
         <div></div>
       )}
       <div
-        className="flex sm:flex-row flex-wrap gap-x-5 gap-y-4 sm:gap-y-2 justify-end items-center"
+        className="flex flex-wrap items-center justify-end gap-x-5 gap-y-4 sm:flex-row sm:gap-y-2"
         data-testid="opportunity-card-actions"
       >
         {!hideFavorite && (
@@ -214,7 +217,7 @@ export const OpportunityCardWrapper = ({
 
   return (
     <Component
-      className="flex flex-col bg-white p-5 sm:p-6 rounded shadow-border gap-y-4"
+      className="flex flex-col gap-y-4 rounded bg-white p-5 shadow-border sm:p-6"
       data-testid="opportunity-card"
     >
       <ActionsSection
@@ -316,14 +319,14 @@ const OpportunityCardHeader = ({
           className="order-2"
         >
           <TitleTag
-            className={`text-card-heading-mobile sm:text-card-heading hyphens-auto ${textColorClassName} hover:underline pb-2`}
+            className={`text-card-heading-mobile hyphens-auto sm:text-card-heading ${textColorClassName} pb-2 hover:underline`}
           >
             {name}
           </TitleTag>
         </NavLink>
       ) : (
         <TitleTag
-          className={`text-card-heading-mobile sm:text-card-heading hyphens-auto pb-2 ${textColorClassName}`}
+          className={`pb-2 text-card-heading-mobile hyphens-auto sm:text-card-heading ${textColorClassName}`}
           data-testid="opportunity-card-title"
         >
           {name}
@@ -337,7 +340,7 @@ const OpportunityCardHeader = ({
       <h3 className="flex flex-col gap-2">
         <div className="flex flex-row gap-3">
           <div
-            className={`flex items-center justify-center size-7 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
+            className={`flex aspect-square size-7 items-center justify-center rounded-full text-white ${bgColorClassName} print:hidden`}
             aria-hidden
           >
             <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
@@ -354,7 +357,7 @@ const OpportunityCardHeader = ({
   return (
     <h3 className="flex flex-row">
       <div
-        className={`flex items-center justify-center size-8 aspect-square rounded-full text-white ${bgColorClassName} print:hidden`}
+        className={`flex aspect-square size-8 items-center justify-center rounded-full text-white ${bgColorClassName} print:hidden`}
         aria-hidden
       >
         <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />

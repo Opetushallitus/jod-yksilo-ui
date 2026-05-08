@@ -1,18 +1,21 @@
-import { client } from '@/api/client';
-import { osaamiset as osaamisetService } from '@/api/osaamiset';
-import type { components } from '@/api/schema';
-import { formErrorMessage, LIMITS } from '@/constants';
-import { ModalComponentProps, useModal } from '@/hooks/useModal';
-import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, clamp, Modal, Spinner, useMediaQueries, WizardProgress } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 import React from 'react';
 import { Form, FormProvider, FormSubmitHandler, useForm, useFormState, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import z from 'zod';
 import { useShallow } from 'zustand/shallow';
+
+import { Button, clamp, Modal, Spinner, useMediaQueries, WizardProgress } from '@jod/design-system';
+import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
+
+import { client } from '@/api/client';
+import { osaamiset as osaamisetService } from '@/api/osaamiset';
+import type { components } from '@/api/schema';
+import { formErrorMessage, LIMITS } from '@/constants';
+import { ModalComponentProps, useModal } from '@/hooks/useModal';
+import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
+
 import { addPlanStore } from '../store/addPlanStore';
 import CreateCustomPlanStep from './CustomPlanStep';
 import SelectCompetencesStep from './SelectCompetencesStep';
@@ -217,7 +220,7 @@ const AddOrEditCustomPlanModal = ({ tavoite, suunnitelmaId, ...rest }: AddOrEdit
         <FormProvider {...methods}>
           <Form id={formId} onSubmit={onSubmit}>
             {isLoading ? (
-              <div className="flex items-center justify-center min-h-[128px]">
+              <div className="flex min-h-[128px] items-center justify-center">
                 <Spinner size={64} color="accent" />
               </div>
             ) : (
@@ -227,7 +230,7 @@ const AddOrEditCustomPlanModal = ({ tavoite, suunnitelmaId, ...rest }: AddOrEdit
         </FormProvider>
       }
       footer={
-        <div className="flex flex-row gap-5 flex-1 justify-end">
+        <div className="flex flex-1 flex-row justify-end gap-5">
           <div className="flex flex-row gap-5">
             <Button
               label={t('common:cancel')}

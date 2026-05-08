@@ -1,11 +1,14 @@
+import React from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
+import { Checkbox, Spinner } from '@jod/design-system';
+
 import { client } from '@/api/client';
 import { components } from '@/api/schema';
 import { CheckboxAccordion } from '@/components/CheckboxAccordion';
 import { getLocalizedText } from '@/utils';
-import { Checkbox, Spinner } from '@jod/design-system';
-import React from 'react';
-import { useFieldArray, useFormContext } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+
 import type { ShareLinkForm } from './types';
 
 export const DataToShareStep = () => {
@@ -34,7 +37,7 @@ export const DataToShareStep = () => {
       ]);
       setIsLoading(false);
     };
-    fetchData();
+    void fetchData();
   }, []);
 
   const availableSuosikkiTypes = React.useMemo(() => Array.from(new Set(suosikit.map((s) => s.tyyppi))), [suosikit]);
@@ -98,7 +101,6 @@ export const DataToShareStep = () => {
 
   type ArrayFields = 'tyopaikat' | 'koulutukset' | 'toiminnot' | 'suosikit' | 'tavoitteet';
 
-  // eslint-disable-next-line sonarjs/cognitive-complexity
   const onChangeSingleSelection = (field: ArrayFields, id: string) => {
     switch (field) {
       case 'tyopaikat':
@@ -252,7 +254,7 @@ export const DataToShareStep = () => {
   const mapToIds = (data: { id?: string }) => ({ id: data.id! });
 
   return isLoading ? (
-    <div className="flex justify-center items-center w-full h-[128px]">
+    <div className="flex h-[128px] w-full items-center justify-center">
       <Spinner size={48} color="accent" />
     </div>
   ) : (
@@ -276,10 +278,10 @@ export const DataToShareStep = () => {
                 setValue(field, true);
               }
             }
-            trigger(basicInfoFields);
+            void trigger(basicInfoFields);
           }}
         >
-          <ul className="flex flex-col gap-5 mt-4">
+          <ul className="mt-4 flex flex-col gap-5">
             <li>
               <Checkbox
                 name="nimiJaettu"
@@ -331,7 +333,7 @@ export const DataToShareStep = () => {
           onChange={onChangeTopLevel('jaetutTyopaikat')}
           disabled={tyopaikat.length === 0}
         >
-          <ul className="flex flex-col gap-5 mt-4">
+          <ul className="mt-4 flex flex-col gap-5">
             {tyopaikat.map((tp) => (
               <li key={tp.id}>
                 <Checkbox
@@ -355,7 +357,7 @@ export const DataToShareStep = () => {
           onChange={onChangeTopLevel('jaetutKoulutukset')}
           disabled={koulut.length === 0}
         >
-          <ul className="flex flex-col gap-5 mt-4">
+          <ul className="mt-4 flex flex-col gap-5">
             {koulut.map((koulutus) => (
               <li key={koulutus.id}>
                 <Checkbox
@@ -379,7 +381,7 @@ export const DataToShareStep = () => {
           onChange={onChangeTopLevel('jaetutToiminnot')}
           disabled={toiminnot.length === 0}
         >
-          <ul className="flex flex-col gap-5 mt-4">
+          <ul className="mt-4 flex flex-col gap-5">
             {toiminnot.map((toiminto) => (
               <li key={toiminto.id}>
                 <Checkbox
@@ -429,7 +431,7 @@ export const DataToShareStep = () => {
           )}
           onChange={onChangeTopLevel('jaetutSuosikit')}
         >
-          <ul className="flex flex-col gap-5 mt-4">
+          <ul className="mt-4 flex flex-col gap-5">
             {availableSuosikkiTypes.map((suosikkiTyyppi) => {
               const label =
                 suosikkiTyyppi === 'TYOMAHDOLLISUUS'

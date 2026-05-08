@@ -1,4 +1,5 @@
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
+
 import type { VirtualAssistantVariant } from './virtualAssistantTypes';
 
 type Translate = (key: string, options?: { count: number }) => string;

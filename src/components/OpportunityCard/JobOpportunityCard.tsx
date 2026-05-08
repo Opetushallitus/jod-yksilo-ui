@@ -1,12 +1,15 @@
+import { useTranslation } from 'react-i18next';
+
+import { JodInfo } from '@jod/design-system/icons';
+
 import type { components } from '@/api/schema';
 import { NOT_AVAILABLE_LABEL } from '@/constants';
 import { getLocalizedText } from '@/utils';
-import { JodInfo } from '@jod/design-system/icons';
-import { useTranslation } from 'react-i18next';
+
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
-import { OpportunityCardWrapper, type OpportunityCardProps } from './OpportunityCard';
 import { OpportunityDetail } from './components/OpportunityDetail';
 import { OpportunityDetailsWrapper } from './components/OpportunityDetailsWrapper';
+import { OpportunityCardWrapper, type OpportunityCardProps } from './OpportunityCard';
 
 type JobOpportunityCardProps = {
   ammattiryhmaNimet?: Record<string, components['schemas']['LokalisoituTeksti']>;
@@ -45,7 +48,7 @@ export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, ...rest }:
               <TooltipWrapper
                 tooltipPlacement="top"
                 tooltipContent={
-                  <div className="text-body-xs max-w-[290px] leading-5">
+                  <div className="max-w-[290px] text-body-xs leading-5">
                     {t('tool.job-opportunity-is-part-of-group-tooltip')}
                   </div>
                 }
@@ -65,7 +68,7 @@ export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, ...rest }:
               <TooltipWrapper
                 tooltipPlacement="top"
                 tooltipContent={
-                  <div className="text-body-xs max-w-[290px] leading-5">
+                  <div className="max-w-[290px] text-body-xs leading-5">
                     {t('tool.job-opportunity-median-salary-tooltip')}
                   </div>
                 }
@@ -81,7 +84,7 @@ export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, ...rest }:
               <TooltipWrapper
                 tooltipPlacement="top"
                 tooltipContent={
-                  <div className="text-body-xs max-w-[290px] leading-5">
+                  <div className="max-w-[290px] text-body-xs leading-5">
                     {t('job-opportunity.supply-and-demand-tooltip')}
                   </div>
                 }
