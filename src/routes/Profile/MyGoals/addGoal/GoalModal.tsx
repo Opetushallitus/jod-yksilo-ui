@@ -263,6 +263,7 @@ export const GoalModal = ({ mode, tavoite, ...rest }: GoalModalProps) => {
                         initiallyCollapsed
                         collapsible
                         hideFavorite
+                        isActiveOpportunity={mahdollisuus.aktiivinen}
                         actionButtonContent={
                           isSelected ? (
                             <div className="flex items-center gap-4 not-sm:justify-between">

@@ -14,6 +14,7 @@ import { useIsSessionExpired } from '@/stores/useSessionManagerStore';
 
 import { OpportunityType } from '../OpportunityType/OpportunityType';
 import { TitleIcon } from '../TitleIcon/TitleIcon';
+import { InActiveTag } from './components/InActiveTag';
 import { EducationOpportunityCard } from './EducationOpportunityCard';
 import { JobOpportunityCard } from './JobOpportunityCard';
 
@@ -70,6 +71,7 @@ interface BaseProps {
   description: string;
   matchValue?: number;
   matchLabel?: string;
+  isActiveOpportunity?: boolean;
   mahdollisuusTyyppi: MahdollisuusTyyppi;
   mahdollisuusAlityyppi: MahdollisuusAlityyppi;
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -97,6 +99,7 @@ interface ActionsSectionProps {
   name: string;
   matchValue?: number;
   matchLabel?: string;
+  isActiveOpportunity?: boolean;
 }
 
 const ActionsSection = ({
@@ -110,6 +113,7 @@ const ActionsSection = ({
   isLoggedIn,
   matchValue,
   matchLabel,
+  isActiveOpportunity,
 }: ActionsSectionProps) => {
   const hasMatchInfo = typeof matchValue === 'number' && matchLabel;
   const nothingToShow = hideFavorite && !menuId && !menuContent && !actionButtonContent && !hasMatchInfo;
@@ -118,6 +122,7 @@ const ActionsSection = ({
     <></>
   ) : (
     <div className="flex flex-row items-center justify-between sm:mb-3">
+      {!isActiveOpportunity && <InActiveTag name={name} />}
       {hasMatchInfo ? (
         <div
           className={'flex flex-col flex-nowrap items-center gap-x-2 select-none sm:flex-row'}
@@ -162,6 +167,7 @@ export const OpportunityCardWrapper = ({
   name,
   mahdollisuusTyyppi,
   mahdollisuusAlityyppi,
+  isActiveOpportunity,
   toggleFavorite,
   isFavorite,
   isLoggedIn,
@@ -231,6 +237,7 @@ export const OpportunityCardWrapper = ({
         actionButtonContent={actionButtonContent}
         matchValue={matchValue}
         matchLabel={matchLabel}
+        isActiveOpportunity={isActiveOpportunity}
       />
       {collapsible ? (
         <Accordion

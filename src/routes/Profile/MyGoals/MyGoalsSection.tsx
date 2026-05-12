@@ -114,6 +114,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                           yleisinKoulutusala={details.yleisinKoulutusala}
                           headingLevel="h3"
                           hideFavorite
+                          isActiveOpportunity={details.aktiivinen}
                         />
                         <PlanList
                           goal={tavoite}

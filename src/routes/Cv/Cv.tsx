@@ -159,6 +159,7 @@ const Cv = () => {
       mahdollisuusAlityyppi={getMahdollisuusAlityyppi(mahdollisuus)}
       kesto={mahdollisuus.kesto}
       yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
+      isActiveOpportunity={mahdollisuus.aktiivinen}
     />
   );
 

@@ -281,6 +281,7 @@ const Favorites = () => {
               name={getLocalizedText(mahdollisuus.otsikko)}
               toggleFavorite={guardedAction(deleteSuosikki, id)}
               mahdollisuusTyyppi={mahdollisuusTyyppi}
+              isActiveOpportunity={mahdollisuus.aktiivinen}
               mahdollisuusAlityyppi={getMahdollisuusAlityyppi(mahdollisuus)}
               kesto={mahdollisuus.kesto}
               yleisinKoulutusala={mahdollisuus.yleisinKoulutusala}
