@@ -664,6 +664,8 @@
         "link-text": "Skapa mål",
         "title": "Sätt upp mål och gör planer"
       },
+      "inActiveTag": "Observera",
+      "inActiveTagTooltip": "Det innehåll som tjänsten föreslår har uppdaterats, vilket innebär att beskrivningen av den jobbmöjlighet eller det yrke som du har sparat kan ha ändrats. Du kan fortfarande använda den sparade favoritinformationen för att skapa ett mål. <CustomLink>Gör en sökning med favoritens titel</CustomLink> om du vill spara uppdaterad information bland dina favoriter.",
       "job-and-education-opportunities": "Utbildnings- och karriärmöjligheter",
       "link-to-opportunities": "Hitta möjligheter",
       "show-filters": "Visa filter",

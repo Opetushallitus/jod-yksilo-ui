@@ -50,6 +50,7 @@ export const getTypedTyoMahdollisuusDetails = async (ids: string[]): Promise<Typ
     (await getTyoMahdollisuusDetails(ids)).map((mahdollisuus) => ({
       ...mahdollisuus,
       mahdollisuusTyyppi: 'TYOMAHDOLLISUUS',
+      isActiveOpportunity: mahdollisuus.aktiivinen,
     })),
   );
 
@@ -95,5 +96,6 @@ export const getTypedKoulutusMahdollisuusDetails = async (ids: string[]): Promis
     (await getKoulutusMahdollisuusDetails(ids)).map((mahdollisuus) => ({
       ...mahdollisuus,
       mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS',
+      isActiveOpportunity: mahdollisuus.aktiivinen,
     })),
   );

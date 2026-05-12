@@ -663,6 +663,8 @@
         "link-text": "Luo tavoite",
         "title": "Aseta tavoitteita ja tee suunnitelmia"
       },
+      "inActiveTag": "Huomioitavaa",
+      "inActiveTagTooltip": "Palvelun ehdottama sisältö on päivitetty, minkä seurauksena tallentamasi työmahdollisuuden tai ammatin kuvaus on voinut muuttua. Voit silti käyttää suosikiksi tallennettua tietoa tavoitteen muodostamiseen. <CustomLink>Suorita haku suosikin otsikolla</CustomLink>, mikäli haluat tallentaa ajatasaisen tiedon suosikkeihin",
       "job-and-education-opportunities": "Koulutus- ja työmahdollisuudet",
       "link-to-opportunities": "Löydä mahdollisuuksia",
       "show-filters": "Näytä suodattimet",

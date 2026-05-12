@@ -666,6 +666,8 @@
         "title": "Set goals and make plans"
       },
       "job-and-education-opportunities": "Education and career opportunities",
+      "inActiveTag": "Please note",
+      "inActiveTagTooltip": "The content suggested by the service has been updated, which means that the description of the saved job opportunity or occupation may have changed. You can still use the information saved as a favorite to create a goal. <CustomLink>Perform a search using the favorite’s title</CustomLink> if you want to save the updated information to your favorites",
       "link-to-opportunities": "Find opportunities",
       "show-filters": "Show filters",
       "title": "Favourites",
