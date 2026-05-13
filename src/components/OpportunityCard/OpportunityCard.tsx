@@ -122,7 +122,7 @@ const ActionsSection = ({
     <></>
   ) : (
     <div className="flex flex-row items-center justify-between sm:mb-3">
-      {!isActiveOpportunity && <InActiveTag name={name} />}
+      {isActiveOpportunity === false && <InActiveTag name={name} />}
       {hasMatchInfo ? (
         <div
           className={'flex flex-col flex-nowrap items-center gap-x-2 select-none sm:flex-row'}

@@ -290,7 +290,9 @@ const YourInfo = () => {
             </ToolAccordion>
 
             <ToolAccordion
-              title={t('tool.competency-profile.title', { count: profileCompetencesCount })}
+              title={t('tool.competency-profile.title', {
+                count: profileCompetencesCount,
+              })}
               testId="tool-profile-accordion"
             >
               <ProfileImportExport />
@@ -528,7 +530,7 @@ const Tool = () => {
                   onKeyDown={(event) => onKeyDown(event, index)}
                   id={`tab-${tab.text}`}
                   aria-selected={tab.active}
-                  className={cx('flex grow cursor-pointer items-center justify-center rounded-t bg-white py-4', {
+                  className={cx('flex grow cursor-pointer items-center justify-center rounded-t-md bg-white py-4', {
                     'text-accent': tab.active,
                     'bg-bg-gray-2': !tab.active,
                   })}
