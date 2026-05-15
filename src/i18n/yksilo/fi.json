@@ -773,11 +773,18 @@
       "list-2-item-1": "Näet kaikki osaamiseesi ja kiinnostuksen kohteisiisi liittyvät tiedot yhdessä paikassa.",
       "list-2-item-2": "Tunnista vahvuutesi työ- ja koulutushistorian sekä vapaa-ajan harrastusten kautta.",
       "list-2-item-3": "Hyödynnä osaamisprofiiliasi juuri sinulle sopivien koulutus- ja työmahdollisuuksien etsimisessä.",
+      "login-heading": "Kirjaudu Osaamispolkuun",
+      "mpassid-button": "Kirjaudu",
+      "mpassid-description": "MPASSid:n avulla kirjaudut koulun antamilla tunnuksilla. Palvelu on suunnattu perus- ja toisen asteen sekä vapaan sivistystyön oppilaitoksille sekä varhaiskasvatuksen toimijoille.",
+      "mpassid-title": "MPASSid-kirjautuminen",
       "page-title": "Kirjaudu palveluun",
       "paragraph-2": "Miten osaamisprofiili auttaa sinua?",
       "paragraph-3": "Aloita luomalla osaamisprofiilisi ja ota ensimmäinen askel kohti uusia mahdollisuuksia!",
       "paragraph-4": "Osaamisprofiilin tietojen käsittely perustuu lakiin valtakunnallisesta jatkuvan oppimisen osaamistietovarannosta. Lue lisää tietojen käsittelyn perusteista tietosuojaselosteesta.",
       "profile-includes": "Mitä osaamisprofiili sisältää?",
+      "suomifi-button": "Tunnistaudu",
+      "suomifi-description": "Tunnistaudu käyttäen pankkitunnuksia tai mobiilivarmennetta, niin pääset muokkaamaan henkilökohtaista Osaamisprofiiliasi ja parantamaan palvelun ehdottamien sisältöjen sopivuutta.",
+      "suomifi-title": "Suomi.fi-tunnistus",
       "title": "Luo oma osaamisprofiilisi!"
     },
     "my-goals": {

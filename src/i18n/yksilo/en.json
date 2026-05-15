@@ -775,11 +775,18 @@
       "list-2-item-1": "You can see all of the information related to your competences and interests in one place.",
       "list-2-item-2": "Identify your strengths through your work and education history and leisure hobbies.",
       "list-2-item-3": "Use your competence profile to find the right education and career opportunities for you.",
+      "login-heading": "Log in to Competency Path",
+      "mpassid-button": "Log in",
+      "mpassid-description": "With MPASSid, you log in using your school credentials. The service is intended for primary, secondary and liberal adult education institutions and early childhood education providers.",
+      "mpassid-title": "MPASSid login",
       "page-title": "Log in to the service",
       "paragraph-2": "How can the competence profile help you?",
       "paragraph-3": "Start by creating your competence profile and take the first step towards new opportunities!",
       "paragraph-4": "The processing of competence profile data is based on the Act on the national competence database for continuous learning. Read more about the grounds for data processing in the privacy policy.",
       "profile-includes": "What competence profile includes?",
+      "suomifi-button": "Identify yourself",
+      "suomifi-description": "Identify yourself using online banking credentials or a mobile certificate to access and edit your personal Competence Profile and improve the relevance of content recommended by the service.",
+      "suomifi-title": "Suomi.fi identification",
       "title": "Create your own competence profile!"
     },
     "my-goals": {

@@ -9,8 +9,49 @@ import { MainLayout } from '@/components';
 import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { getLinkTo } from '@/utils/routeUtils';
 
+import { MpassidLogo } from './MpassidLogo';
+import { SuomifiLogo } from './SuomifiLogo';
+
 const ListItem = ({ label }: { label: string }) => (
   <li className="ml-7 list-disc pl-4 font-arial text-body-md-mobile sm:text-body-md">{label}</li>
+);
+
+const LoginCard = ({
+  title,
+  description,
+  logo: Logo,
+  buttonLabel,
+  buttonVariant,
+  linkComponent,
+}: {
+  title: string;
+  description: string;
+  logo: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  buttonLabel: string;
+  buttonVariant: 'accent' | 'white';
+  linkComponent: React.ComponentType<{
+    children: React.ReactNode;
+    className: string;
+    ariaLabel?: string;
+  }>;
+}) => (
+  <div className="flex flex-1 flex-col gap-6 rounded-md bg-bg-gray-2 px-5 py-6">
+    <div className="flex flex-1 flex-col gap-6">
+      <Logo height={32} className="w-fit" aria-hidden />
+      <div className="flex flex-col gap-3">
+        <h3 className="text-heading-2-mobile sm:text-heading-2">{title}</h3>
+        <p className="text-body-md-mobile sm:text-body-md">{description}</p>
+      </div>
+    </div>
+    <Button
+      variant={buttonVariant}
+      label={buttonLabel}
+      linkComponent={linkComponent}
+      icon={<JodArrowRight />}
+      iconSide="right"
+      className="w-fit"
+    />
+  </div>
 );
 
 const LoginPage = () => {
@@ -30,6 +71,9 @@ const LoginPage = () => {
   params.set('lang', language);
   params.set('callback', state?.callbackUrl ?? `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.front')}`);
 
+  const mpassidParams = new URLSearchParams(params);
+  mpassidParams.set('method', 'mpassid');
+
   const title = t('profile.login-page.page-title');
 
   return (
@@ -44,16 +88,27 @@ const LoginPage = () => {
           <p className="mb-7 text-body-lg-mobile whitespace-pre-line sm:text-body-lg">
             {t('profile.login-page.description')}
           </p>
-          <div>
-            <Button
-              variant="accent"
-              label={t('login-to-service')}
+          <h2 className="mb-5 text-heading-2-mobile sm:text-heading-2">{t('profile.login-page.login-heading')}</h2>
+          <div className="flex w-full flex-col gap-5 sm:flex-row">
+            <LoginCard
+              title={t('profile.login-page.suomifi-title')}
+              description={t('profile.login-page.suomifi-description')}
+              buttonLabel={t('profile.login-page.suomifi-button')}
+              buttonVariant="accent"
+              logo={SuomifiLogo}
               linkComponent={getLinkTo(`/yksilo/login?${params.toString()}`, {
                 useAnchor: true,
               })}
-              icon={<JodArrowRight />}
-              iconSide="right"
-              testId="landing-login"
+            />
+            <LoginCard
+              title={t('profile.login-page.mpassid-title')}
+              description={t('profile.login-page.mpassid-description')}
+              buttonLabel={t('profile.login-page.mpassid-button')}
+              buttonVariant="white"
+              logo={MpassidLogo}
+              linkComponent={getLinkTo(`/yksilo/login?${mpassidParams.toString()}`, {
+                useAnchor: true,
+              })}
             />
           </div>
           <h2 className="mt-8 mb-5 text-heading-2-mobile sm:text-heading-2">

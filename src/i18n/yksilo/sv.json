@@ -774,11 +774,18 @@
       "list-2-item-1": "Du ser all information om din kunskap och dina intressen på en och samma plats.",
       "list-2-item-2": "Identifiera dina styrkor genom din arbets- och utbildningshistorik samt dina fritidsintressen.",
       "list-2-item-3": "Använd din kompetensprofil för att hitta utbildnings- och karriärmöjligheter som passar just dig.",
+      "login-heading": "Logga in på Kompetensstigen",
+      "mpassid-button": "Logga in",
+      "mpassid-description": "Med MPASSid loggar du in med skolans inloggningsuppgifter. Tjänsten är avsedd för grund- och gymnasieskolor samt institutioner för liberal vuxenutbildning och aktörer inom småbarnspedagogik.",
+      "mpassid-title": "MPASSid-inloggning",
       "page-title": "Logga in i tjänsten\n",
       "paragraph-2": "Hur hjälper kompetensprofilen dig?",
       "paragraph-3": "Börja med att skapa din kompetensprofil och ta det första steget mot nya möjligheter!\n",
       "paragraph-4": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på lagen om den nationella informationsresursen för kompetenser. Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.\n",
       "profile-includes": "Vad innehåller kompetensprofilen?",
+      "suomifi-button": "Identifiera dig",
+      "suomifi-description": "Identifiera dig med nätbankskoder eller mobiltjänst för att komma åt och redigera din personliga kompetensprofil och förbättra relevansen av innehåll som tjänsten rekommenderar.",
+      "suomifi-title": "Suomi.fi-identifiering",
       "title": "Skapa din egen kompetensprofil!"
     },
     "my-goals": {
