@@ -535,6 +535,7 @@
           "no-data": "No education data identified",
           "title": "Education"
         },
+        "importing": "Importing data",
         "title": "Select information to import",
         "work": {
           "loading": "Loading work history",

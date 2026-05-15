@@ -84,7 +84,7 @@ const DateRange = ({ alkuPvm, loppuPvm, className = '' }: { alkuPvm?: Date; lopp
   </div>
 );
 
-const FreeFormTextRow = ({
+export const FreeFormTextRow = ({
   row,
   visibleState,
   className,
