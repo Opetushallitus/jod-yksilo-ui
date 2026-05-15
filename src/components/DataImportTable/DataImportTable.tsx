@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Checkbox, useMediaQueries } from '@jod/design-system';
 
-import { ExperienceTableRowData } from '@/components/ExperienceTable/ExperienceTableRow';
+import { ExperienceTableRowData, FreeFormTextRow } from '@/components/ExperienceTable/ExperienceTableRow';
 import { formatDate, getLocalizedText } from '@/utils';
 
 export interface DataImportTableProps {
@@ -137,43 +137,46 @@ export const DataImportTable = ({ rows, toggleAllSelectionText }: DataImportTabl
               )}
             </tr>
             {(row.subrows ?? []).map((subrow, i) => (
-              <tr key={subrow.key} className={i % 2 === 0 ? '' : 'bg-bg-gray-2'}>
-                <td className="py-3 pl-6 text-heading-5-mobile sm:pl-9 sm:text-heading-5" colSpan={sm ? 3 : 1}>
-                  <div className={`flex ${sm ? 'flex-row' : 'flex-col'}`}>
-                    <div className="flex items-center gap-3 sm:gap-5">
-                      <Checkbox
-                        name={`checkbox-${subrow.key}`}
-                        value={subrow.key}
-                        checked={subrow?.checked ?? false}
-                        onChange={(e) => {
-                          subrow.checked = e.target.checked;
-                          rerender();
-                        }}
-                        ariaLabel={`${t('choose')} ${subrow.nimi[language]}`}
-                        testId={`experience-row-checkbox-${subrow.key}`}
-                      />
-                      {getLocalizedText(subrow.nimi)}
-                    </div>
-                    {!sm && (
-                      <div className="ml-6 flex gap-2 sm:ml-7">
-                        <span>{subrow.alkuPvm ? formatDate(subrow.alkuPvm) : ''}</span>
-                        <span>-</span>
-                        <span>{subrow.loppuPvm ? formatDate(subrow.loppuPvm) : ''}</span>
+              <>
+                <tr key={subrow.key} className={i % 2 === 0 ? '' : 'bg-bg-gray-2'}>
+                  <td className="py-3 pl-6 text-heading-5-mobile sm:pl-9 sm:text-heading-5" colSpan={sm ? 3 : 1}>
+                    <div className={`flex ${sm ? 'flex-row' : 'flex-col'}`}>
+                      <div className="flex items-center gap-3 sm:gap-5">
+                        <Checkbox
+                          name={`checkbox-${subrow.key}`}
+                          value={subrow.key}
+                          checked={subrow?.checked ?? false}
+                          onChange={(e) => {
+                            subrow.checked = e.target.checked;
+                            rerender();
+                          }}
+                          ariaLabel={`${t('choose')} ${subrow.nimi[language]}`}
+                          testId={`experience-row-checkbox-${subrow.key}`}
+                        />
+                        {getLocalizedText(subrow.nimi)}
                       </div>
-                    )}
-                  </div>
-                </td>
-                {sm && (
-                  <>
-                    <td className="py-3 text-heading-5-mobile sm:px-6 sm:text-heading-5">
-                      {subrow.alkuPvm ? formatDate(subrow.alkuPvm) : ''}
-                    </td>
-                    <td className="py-3 text-heading-5-mobile sm:pr-2 sm:text-heading-5">
-                      {subrow.loppuPvm ? formatDate(subrow.loppuPvm) : ''}
-                    </td>
-                  </>
-                )}
-              </tr>
+                      {!sm && (
+                        <div className="ml-6 flex gap-2 sm:ml-7">
+                          <span>{subrow.alkuPvm ? formatDate(subrow.alkuPvm) : ''}</span>
+                          <span>-</span>
+                          <span>{subrow.loppuPvm ? formatDate(subrow.loppuPvm) : ''}</span>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                  {sm && (
+                    <>
+                      <td className="py-3 text-heading-5-mobile sm:px-6 sm:text-heading-5">
+                        {subrow.alkuPvm ? formatDate(subrow.alkuPvm) : ''}
+                      </td>
+                      <td className="py-3 text-heading-5-mobile sm:pr-2 sm:text-heading-5">
+                        {subrow.loppuPvm ? formatDate(subrow.loppuPvm) : ''}
+                      </td>
+                    </>
+                  )}
+                </tr>
+                {subrow.kuvaus && <FreeFormTextRow row={subrow} visibleState={true} />}
+              </>
             ))}
             <tr>
               <td colSpan={3} className="pb-6" />

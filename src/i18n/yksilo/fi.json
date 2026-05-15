@@ -533,6 +533,7 @@
           "no-data": "Koulutustietoja ei tunnistettu",
           "title": "Koulutukset"
         },
+        "importing": "Tuodaan tietoja",
         "title": "Tuotavien tietojen valinta",
         "work": {
           "loading": "Kerätään työhistoriatietoja",

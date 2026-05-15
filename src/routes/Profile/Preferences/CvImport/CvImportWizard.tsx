@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button, Modal, useMediaQueries, useNoteStack } from '@jod/design-system';
+import { Button, Modal, useMediaQueries, useNoteStack, WizardProgress } from '@jod/design-system';
 import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 
 import { ModalHeader } from '@/components/ModalHeader';
@@ -220,6 +220,20 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
     return <></>;
   }, [isAttachmentStep, isSummaryStep, selectedFile, fileError, fileInputRef, convertedData, isLoading, state.error]);
 
+  const progress = React.useMemo(
+    () => (
+      <WizardProgress
+        labelText={t('wizard.label')}
+        stepText={t('wizard.step')}
+        completedText={t('wizard.completed')}
+        currentText={t('wizard.current')}
+        steps={steps}
+        currentStep={step}
+      />
+    ),
+    [t, steps, step],
+  );
+
   return (
     <Modal
       name={t('preferences.cv-import.title')}
@@ -230,6 +244,7 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
       content={<div id={modalId}>{StepComponent}</div>}
       footer={footer}
       className="h-[90vh]! sm:h-full!"
+      progress={progress}
     />
   );
 };

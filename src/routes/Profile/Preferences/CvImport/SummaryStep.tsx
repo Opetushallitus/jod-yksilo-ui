@@ -8,35 +8,19 @@ import { DataImportTable } from '@/components/DataImportTable/DataImportTable';
 import type { CvImportConvertedData } from './utils';
 
 interface SectionProps {
-  isLoading: boolean;
   hasData: boolean;
   titleText: string;
-  loadingText: string;
   noDataText: string;
   toggleAllSelectionText: string;
   rows?: ExperienceTableRowData[];
 }
 
-const Section = ({
-  isLoading,
-  hasData,
-  titleText: titleKey,
-  loadingText,
-  noDataText,
-  toggleAllSelectionText,
-  rows,
-}: SectionProps) => {
+const Section = ({ hasData, titleText: titleKey, noDataText, toggleAllSelectionText, rows }: SectionProps) => {
   return (
     <div>
       <h2 className="mb-6 text-heading-2-mobile sm:text-heading-2">{titleKey}</h2>
-      {isLoading && (
-        <div className="flex flex-row gap-5">
-          <Spinner size={24} color="accent" />
-          <p className="text-body-md">{loadingText}</p>
-        </div>
-      )}
-      {!isLoading && hasData && rows && <DataImportTable rows={rows} toggleAllSelectionText={toggleAllSelectionText} />}
-      {!isLoading && !hasData && <EmptyState text={noDataText} />}
+      {hasData && rows && <DataImportTable rows={rows} toggleAllSelectionText={toggleAllSelectionText} />}
+      {!hasData && <EmptyState text={noDataText} />}
     </div>
   );
 };
@@ -54,33 +38,44 @@ const SummaryStep = ({ isLoading, convertedData }: SummaryStepProps) => {
       <p>
         <Trans i18nKey="preferences.cv-import.summary.description" />
       </p>
-      <Section
-        isLoading={isLoading}
-        hasData={Boolean(convertedData?.education.length)}
-        titleText={t('preferences.cv-import.summary.education.title')}
-        loadingText={t('preferences.cv-import.summary.education.loading')}
-        noDataText={t('preferences.cv-import.summary.education.no-data')}
-        toggleAllSelectionText={t('education-history.education-provider-or-education')}
-        rows={convertedData?.education}
-      />
-      <Section
-        isLoading={isLoading}
-        hasData={Boolean(convertedData?.work.length)}
-        titleText={t('preferences.cv-import.summary.work.title')}
-        loadingText={t('preferences.cv-import.summary.work.loading')}
-        noDataText={t('preferences.cv-import.summary.work.no-data')}
-        toggleAllSelectionText={t('work-history.workplace-or-job-description')}
-        rows={convertedData?.work}
-      />
-      <Section
-        isLoading={isLoading}
-        hasData={Boolean(convertedData?.activities.length)}
-        titleText={t('preferences.cv-import.summary.activities.title')}
-        loadingText={t('preferences.cv-import.summary.activities.loading')}
-        noDataText={t('preferences.cv-import.summary.activities.no-data')}
-        toggleAllSelectionText={t('free-time-activities.theme-or-activity')}
-        rows={convertedData?.activities}
-      />
+      {isLoading && (
+        <div>
+          <div className="mb-5 flex flex-row gap-5">
+            <h2 className="text-heading-2-mobile sm:text-heading-2">{t('preferences.cv-import.summary.importing')} </h2>
+            <Spinner size={24} color="accent" />
+          </div>
+          <ul className="ml-6 list-disc">
+            <li>{t('preferences.cv-import.summary.education.loading')}</li>
+            <li>{t('preferences.cv-import.summary.work.loading')}</li>
+            <li>{t('preferences.cv-import.summary.activities.loading')}</li>
+          </ul>
+        </div>
+      )}
+      {!isLoading && (
+        <>
+          <Section
+            hasData={Boolean(convertedData?.education.length)}
+            titleText={t('preferences.cv-import.summary.education.title')}
+            noDataText={t('preferences.cv-import.summary.education.no-data')}
+            toggleAllSelectionText={t('education-history.education-provider-or-education')}
+            rows={convertedData?.education}
+          />
+          <Section
+            hasData={Boolean(convertedData?.work.length)}
+            titleText={t('preferences.cv-import.summary.work.title')}
+            noDataText={t('preferences.cv-import.summary.work.no-data')}
+            toggleAllSelectionText={t('work-history.workplace-or-job-description')}
+            rows={convertedData?.work}
+          />
+          <Section
+            hasData={Boolean(convertedData?.activities.length)}
+            titleText={t('preferences.cv-import.summary.activities.title')}
+            noDataText={t('preferences.cv-import.summary.activities.no-data')}
+            toggleAllSelectionText={t('free-time-activities.theme-or-activity')}
+            rows={convertedData?.activities}
+          />
+        </>
+      )}
     </div>
   );
 };

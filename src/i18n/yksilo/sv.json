@@ -534,6 +534,7 @@
           "no-data": "Ingen utbildningsdata identifierades",
           "title": "Utbildning"
         },
+        "importing": "Importerar data",
         "title": "Välj information att importera",
         "work": {
           "loading": "Hämtar arbetslivserfarenhet",
