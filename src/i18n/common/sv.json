@@ -40,6 +40,7 @@
   "external-link": "Länken leder dig utanför tjänsten",
   "feedback": {
     "cancel": "Avbryt",
+    "close": "Stäng",
     "email-label": "E-postadress",
     "error": "Det gick inte att skicka respons. Försök på nytt senare.",
     "footer-handled": {
@@ -73,6 +74,8 @@
     },
     "submit": "Skicka",
     "success": "Tack för din respons! Din respons hjälper oss att förbättra tjänsten.",
+    "success-description": "Din feedback hjälper oss att förbättra tjänsten.",
+    "success-title": "Tack för din respons!",
     "title": "Ge respons",
     "type-question": "Vilken typ av respons vill du ge?",
     "types": {

@@ -40,6 +40,7 @@
   "external-link": "Linkki johtaa palvelun ulkopuolelle",
   "feedback": {
     "cancel": "Peruuta",
+    "close": "Sulje",
     "email-label": "Sähköpostiosoite",
     "error": "Palautteen lähettäminen epäonnistui. Yritä myöhemmin uudelleen.",
     "footer-handled": {
@@ -73,6 +74,8 @@
     },
     "submit": "Lähetä",
     "success": "Kiitos palautteestasi! Palautteesi auttaa meitä parantamaan palvelua.",
+    "success-description": "Palautteesi auttaa meitä parantamaan palvelua.",
+    "success-title": "Kiitos palautteestasi!",
     "title": "Anna palautetta",
     "type-question": "Minkälaista palautetta haluat antaa?",
     "types": {

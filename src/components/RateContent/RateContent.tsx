@@ -3,13 +3,37 @@ import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 
-import { RateContentCard } from '@jod/design-system';
+import { Button, RateContentCard, useMediaQueries } from '@jod/design-system';
+
+import { useModal } from '@/hooks/useModal/useModal';
 
 interface RateContentProps {
   variant: 'kohtaanto' | 'tyomahdollisuus' | 'ammatti' | 'koulutusmahdollisuus' | 'tutkinto';
   area: 'Kohtaanto työkalu' | 'Työmahdollisuus' | 'Koulutusmahdollisuus';
   size?: React.ComponentProps<typeof RateContentCard>['size'];
 }
+
+const RateContentSuccessFooter = ({
+  hideDialog,
+  closeActiveModal,
+  label,
+  size,
+}: {
+  hideDialog: () => void;
+  closeActiveModal: () => void;
+  label: string;
+  size: 'lg' | 'sm';
+}) => (
+  <Button
+    label={label}
+    size={size}
+    variant="accent"
+    onClick={() => {
+      hideDialog();
+      closeActiveModal();
+    }}
+  />
+);
 
 export const RateContent = ({ variant, area, size }: RateContentProps) => {
   const {
@@ -54,6 +78,21 @@ export const RateContent = ({ variant, area, size }: RateContentProps) => {
   const content = React.useMemo(() => {
     return variant === 'ammatti' ? t('rate-ai-content.ammatti.body') : t('rate-ai-content.mahdollisuus.body');
   }, [variant, t]);
+
+  const { showDialog, closeActiveModal } = useModal();
+  const { sm } = useMediaQueries();
+
+  const successFooter = React.useCallback(
+    (hideDialog: () => void) => (
+      <RateContentSuccessFooter
+        hideDialog={hideDialog}
+        closeActiveModal={closeActiveModal}
+        label={t('close')}
+        size={sm ? 'lg' : 'sm'}
+      />
+    ),
+    [closeActiveModal, t, sm],
+  );
 
   return (
     <RateContentCard
@@ -120,7 +159,11 @@ export const RateContent = ({ variant, area, size }: RateContentProps) => {
             throw new Error();
           }
 
-          toast.success(t('rate-ai-content.toast'));
+          showDialog({
+            title: t('rate-ai-content.toast'),
+            description: t('rate-ai-content.toast-description'),
+            footer: successFooter,
+          });
         } catch {
           toast.error(t('rate-ai-content.toast-error'));
         }
