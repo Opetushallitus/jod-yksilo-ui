@@ -40,6 +40,7 @@
   "external-link": "The link leads outside the service",
   "feedback": {
     "cancel": "Cancel",
+    "close": "Close",
     "email-label": "E-mail address",
     "error": "Failed to send feedback. Please try again later.",
     "footer-handled": {
@@ -73,6 +74,8 @@
     },
     "submit": "Submit",
     "success": "Thank you for your feedback! Your feedback will help us to improve the service.",
+    "success-description": "Your feedback helps us improve the service.",
+    "success-title": "Thank you for your feedback!",
     "title": "Give feedback",
     "type-question": "What kind of feedback would you like to give?",
     "types": {

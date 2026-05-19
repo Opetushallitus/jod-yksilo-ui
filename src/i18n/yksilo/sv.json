@@ -967,6 +967,7 @@
       "sending": "Skickar"
     },
     "toast": "Tack för din respons!",
+    "toast-description": "Din feedback hjälper oss att förbättra tjänsten.",
     "toast-error": "Det gick inte att skicka respons – försök igen"
   },
   "remove-favorite": "Ta bort från favoriter",

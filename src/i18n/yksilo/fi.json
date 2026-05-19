@@ -831,7 +831,7 @@
       "edit-plan-failed": "Suunnitelman päivitys epäonnistui – yritä uudelleen",
       "edit-plan-success": "Suunnitelma päivitetty",
       "favorites-card": {
-        "description": "Tutksustu koulutus- ja työmahdollisuuksiin. Lisää kiinnostavimmat suosikeiksesi ja tee niistä omat tavoitteesi.",
+        "description": "Tutustu koulutus- ja työmahdollisuuksiin. Lisää kiinnostavimmat suosikeiksesi ja tee niistä omat tavoitteesi.",
         "title": "Löydä omat suosikkisi"
       },
       "goal": "Tavoite",
@@ -966,6 +966,7 @@
       "sending": "Lähetetään"
     },
     "toast": "Kiitos palautteesta!",
+    "toast-description": "Palautteesi auttaa meitä parantamaan palvelua.",
     "toast-error": "Palautteen lähettäminen epäonnistui — yritä uudelleen"
   },
   "remove-favorite": "Poista suosikeista",
