@@ -702,6 +702,7 @@
     },
     "education-history": {
       "description": "Below you can find your education history. You can add entries to your education history yourself and identify the competencies related to them. You can also import your study records from the national study, education and qualification registers as part of your education history (Studyinfo).",
+      "description-generic": "Below you can find your education history. You can add entries to your education history yourself and identify the competencies related to them.",
       "empty": "You have not yet added educations.",
       "modals": {
         "competences-description": "Explain what you learned in the education. You can also copy the content descriptions of the education from elsewhere if they have been recorded, for example, in the study guide, the description of the educational institution’s website or are stored in social media services.",

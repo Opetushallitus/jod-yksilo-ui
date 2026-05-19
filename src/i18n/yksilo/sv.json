@@ -701,6 +701,7 @@
     },
     "education-history": {
       "description": "Nedan hittar du din utbildningshistorik. Du kan själv lägga till uppgifter i din utbildningshistorik och kartlägga den kompetens som är kopplad till dem. Du kan också importera dina egna studieprestationer från de nationella studie-, utbildnings- och examensregistren som en del av din utbildningshistorik (Studieinfo).",
+      "description-generic": "Nedan hittar du din utbildningshistorik. Du kan själv lägga till uppgifter i din utbildningshistorik och kartlägga den kompetens som är kopplad till dem.",
       "empty": "Du har ännu inte lagt till några utbildningar.",
       "modals": {
         "competences-description": "Berätta vad du lärde dig under utbildningen. Du kan också kopiera utbildningens innehållsbeskrivningar från någon annanstans, om de finns till exempel i studiehandboken, i beskrivningen på läroanstaltens webbplats eller i sociala medier.",

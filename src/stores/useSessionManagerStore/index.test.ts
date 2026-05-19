@@ -50,6 +50,7 @@ describe('useSessionManagerStore', () => {
       status: 'anonymous',
       csrf: undefined,
       user: undefined,
+      toiminnot: undefined,
       lastValidatedAt: undefined,
       disabled: false,
       onWarning: undefined,
@@ -76,6 +77,7 @@ describe('useSessionManagerStore', () => {
       expect(state.status).toBe('authenticated');
       expect(state.csrf).toEqual(CSRF_TOKEN);
       expect(state.user).toEqual({ etunimi: 'Matti', sukunimi: 'Meikäläinen' });
+      expect(state.toiminnot).toEqual(['PROFILE']);
       expect(state.sessionStartTime).toBeDefined();
       expect(state.lastValidatedAt).toBeDefined();
       expect(registerCsrfMiddleware).toHaveBeenCalledWith(CSRF_TOKEN);
@@ -97,6 +99,7 @@ describe('useSessionManagerStore', () => {
       expect(getState().status).toBe('anonymous');
       expect(getState().csrf).toBeUndefined();
       expect(getState().user).toBeUndefined();
+      expect(getState().toiminnot).toBeUndefined();
       expect(unregisterCsrfMiddleware).toHaveBeenCalled();
     });
 
@@ -169,6 +172,7 @@ describe('useSessionManagerStore', () => {
       expect(getState().disabled).toBe(true);
       expect(getState().csrf).toBeUndefined();
       expect(getState().user).toBeUndefined();
+      expect(getState().toiminnot).toBeUndefined();
       expect(unregisterCsrfMiddleware).toHaveBeenCalled();
       expect(resetWelcomePathGate).toHaveBeenCalled();
     });
@@ -203,6 +207,7 @@ describe('useSessionManagerStore', () => {
       expect(getState().disabled).toBe(false);
       expect(getState().csrf).toBeUndefined();
       expect(getState().user).toBeUndefined();
+      expect(getState().toiminnot).toBeUndefined();
     });
 
     it('passes logout reason to onExpired callback', async () => {
@@ -225,6 +230,7 @@ describe('useSessionManagerStore', () => {
       expect(getState().status).toBe('expired');
       expect(getState().disabled).toBe(true);
       expect(getState().csrf).toBeUndefined();
+      expect(getState().toiminnot).toBeUndefined();
       expect(unregisterCsrfMiddleware).toHaveBeenCalled();
       expect(resetWelcomePathGate).toHaveBeenCalled();
     });

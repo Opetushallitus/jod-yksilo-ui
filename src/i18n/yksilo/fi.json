@@ -700,6 +700,7 @@
     },
     "education-history": {
       "description": "Löydät alta koulutushistoriasi. Voit lisätä itse koulutushistoriaasi sekä kartoittaa niihin liittyviä osaamisia. Voit tuoda myös omat opintosuorituksesi valtakunnallisista opinto-, koulutus- ja tutkintorekistereistä osaksi koulutushistoriaasi (Opintopolku).",
+      "description-generic": "Löydät alta koulutushistoriasi. Voit lisätä itse koulutushistoriaasi sekä kartoittaa niihin liittyviä osaamisia.",
       "empty": "Et ole vielä lisännyt koulutuksia.",
       "modals": {
         "competences-description": "Kerro, mitä opit koulutuksessa. Voit myös kopioida koulutuksen sisältökuvauksia muualta, jos ne on kirjattu esimerkiksi opinto-oppaaseen, oppilaitoksen verkkosivun kuvaukseen tai ovat tallessa sosiaalisen median palveluissa.",

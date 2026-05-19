@@ -15,6 +15,7 @@ import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/Educat
 import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/modals/EditKoulutuskokonaisuusModal';
 import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals/ImportKoulutusSummaryModal';
 import { LogoutFormContext } from '@/routes/Root';
+import { useHasToiminto } from '@/stores/useSessionManagerStore';
 
 import { ProfileSectionTitle } from '../components';
 import { ProfileNavigationList } from '../components/index';
@@ -33,6 +34,7 @@ const EducationHistory = () => {
   const { lg } = useMediaQueries();
   const title = t('profile.education-history.title');
   const logoutForm = React.useContext(LogoutFormContext);
+  const hasKoskiToiminto = useHasToiminto('KOSKI');
   const [rows, setRows] = React.useState<ExperienceTableRowData[]>(
     getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap),
   );
@@ -255,7 +257,11 @@ const EducationHistory = () => {
       <title>{title}</title>
       <div className="px-5 sm:px-6">
         <ProfileSectionTitle type="KOULUTUS" title={title} />
-        <p className="mb-7 text-body-lg-mobile sm:text-body-lg">{t('profile.education-history.description')}</p>
+        <p className="mb-7 text-body-lg-mobile sm:text-body-lg">
+          {hasKoskiToiminto
+            ? t('profile.education-history.description')
+            : t('profile.education-history.description-generic')}
+        </p>
 
         {koulutuksetThatNeedUserVerification.length > 0 && (
           <div className="mb-5 flex w-fit items-center rounded-md bg-bg-gray-2 px-5 py-3">
@@ -293,22 +299,24 @@ const EducationHistory = () => {
             testId="education-history-add"
           />
         </div>
-        <div>
-          <TooltipWrapper
-            tooltipPlacement="top"
-            tooltipContent={t('competences-identifying')}
-            tooltipOpen={isOsaamisetTunnistusOngoing ? undefined : false}
-          >
-            <Button
-              ariaHaspopup="dialog"
-              variant="white"
-              label={t('education-history.import-education-history')}
-              onClick={guardedAction(openImportStartModal)}
-              disabled={isOsaamisetTunnistusOngoing}
-              testId="education-history-import"
-            />
-          </TooltipWrapper>
-        </div>
+        {hasKoskiToiminto && (
+          <div>
+            <TooltipWrapper
+              tooltipPlacement="top"
+              tooltipContent={t('competences-identifying')}
+              tooltipOpen={isOsaamisetTunnistusOngoing ? undefined : false}
+            >
+              <Button
+                ariaHaspopup="dialog"
+                variant="white"
+                label={t('education-history.import-education-history')}
+                onClick={guardedAction(openImportStartModal)}
+                disabled={isOsaamisetTunnistusOngoing}
+                testId="education-history-import"
+              />
+            </TooltipWrapper>
+          </div>
+        )}
       </div>
       {lg ? null : (
         <div className="px-5">
