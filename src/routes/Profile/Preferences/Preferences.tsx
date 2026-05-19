@@ -7,6 +7,7 @@ import { MainLayout } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { LogoutFormContext } from '@/routes/Root';
+import { useHasToiminto } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { isFeatureEnabled } from '@/utils/features';
 
@@ -28,7 +29,9 @@ const Preferences = () => {
   const logoutForm = React.useContext(LogoutFormContext);
   const { showDialog } = useModal();
   const guardedAction = useSessionGuardedAction();
-  const hasImportExportContent = isFeatureEnabled('TMT_INTEGRATION') || isFeatureEnabled('CV_IMPORT');
+  const hasTmtToiminto = useHasToiminto('TMT');
+  const hasImportExportContent =
+    (isFeatureEnabled('TMT_INTEGRATION') && hasTmtToiminto) || isFeatureEnabled('CV_IMPORT');
 
   const deleteProfile = async () => {
     resetToolStore();
@@ -69,7 +72,7 @@ const Preferences = () => {
               <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2">{t('preferences.import-export.title')}</h2>
 
               <div className="flex flex-col gap-7">
-                {isFeatureEnabled('TMT_INTEGRATION') && <TmtImportExport />}
+                {isFeatureEnabled('TMT_INTEGRATION') && hasTmtToiminto && <TmtImportExport />}
                 {isFeatureEnabled('CV_IMPORT') && <CvImport />}
               </div>
             </section>

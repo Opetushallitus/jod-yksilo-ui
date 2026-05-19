@@ -12,6 +12,8 @@ type SessionStatus = 'anonymous' | 'authenticated' | 'warning' | 'recovering' | 
 type SessionEvent = 'session:authenticated' | 'session:extended' | 'session:expired' | 'session:logout';
 type SessionExpireReason = 'timer' | 'server-403' | 'logout' | 'manual' | 'validation-failed';
 
+type Toiminto = components['schemas']['YksiloCsrfDto']['toiminnot'][number];
+
 interface SessionManagerState {
   sessionStartTime?: number;
   sessionLengthMs: number;
@@ -19,6 +21,7 @@ interface SessionManagerState {
   status: SessionStatus;
   csrf?: components['schemas']['CsrfTokenDto'];
   user?: { etunimi?: string; sukunimi?: string };
+  toiminnot?: Toiminto[];
   lastValidatedAt?: number;
   disabled: boolean;
   onWarning?: () => void;
@@ -113,6 +116,7 @@ export const useSessionManagerStore = create<SessionManagerState>()((set, get) =
           lastValidatedAt: undefined,
           csrf: undefined,
           user: undefined,
+          toiminnot: undefined,
         });
         if (reason === 'logout' || prevStatus !== 'expired') {
           void (async () => {
@@ -136,6 +140,7 @@ export const useSessionManagerStore = create<SessionManagerState>()((set, get) =
             sessionStartTime: Date.now(),
             csrf: data.csrf,
             user: { etunimi: data.etunimi, sukunimi: data.sukunimi },
+            toiminnot: data.toiminnot,
             lastValidatedAt: Date.now(),
           });
           get().start();
@@ -169,6 +174,7 @@ export const useSessionManagerStore = create<SessionManagerState>()((set, get) =
     status: 'anonymous',
     csrf: undefined,
     user: undefined,
+    toiminnot: undefined,
     lastValidatedAt: undefined,
     disabled: false,
     onWarning: undefined,
@@ -238,7 +244,7 @@ export const useSessionManagerStore = create<SessionManagerState>()((set, get) =
       warningShown = false;
       unregisterCsrfMiddleware();
       resetWelcomePathGate();
-      set({ disabled: true, status: 'expired', csrf: undefined, user: undefined });
+      set({ disabled: true, status: 'expired', csrf: undefined, user: undefined, toiminnot: undefined });
     },
     extendSession: () => {
       warningShown = false;
@@ -268,6 +274,7 @@ export const useSessionManagerStore = create<SessionManagerState>()((set, get) =
           sessionStartTime: undefined,
           csrf: undefined,
           user: undefined,
+          toiminnot: undefined,
           lastValidatedAt: undefined,
         });
         get().stop();
@@ -292,6 +299,7 @@ export const useSessionManagerStore = create<SessionManagerState>()((set, get) =
         sessionStartTime: Date.now(),
         csrf: data.csrf,
         user: { etunimi: data.etunimi, sukunimi: data.sukunimi },
+        toiminnot: data.toiminnot,
         lastValidatedAt: Date.now(),
       });
       emitSessionEvent('session:authenticated');
@@ -326,6 +334,7 @@ export const useSessionManagerStore = create<SessionManagerState>()((set, get) =
           sessionStartTime: Date.now(),
           csrf: data.csrf,
           user: { etunimi: data?.etunimi, sukunimi: data?.sukunimi },
+          toiminnot: data.toiminnot,
           lastValidatedAt: Date.now(),
         });
         emitSessionEvent('session:authenticated');
@@ -354,6 +363,7 @@ export const useSessionManagerStore = create<SessionManagerState>()((set, get) =
         lastValidatedAt: undefined,
         csrf: undefined,
         user: undefined,
+        toiminnot: undefined,
       });
       emitSessionEvent(reason === 'logout' ? 'session:logout' : 'session:expired');
       await get().onExpired?.(reason);
@@ -381,6 +391,8 @@ export function yksiloLoaderContextHasSession(ctx: YksiloLoaderContext): ctx is 
 
 export const useIsSessionExpired = () => useSessionManagerStore((state) => isSessionExpiredState(state.status));
 export const useIsLoggedIn = () => useSessionManagerStore((state) => storeHasActiveYksiloSession(state));
+export const useHasToiminto = (op: Toiminto) =>
+  useSessionManagerStore((state) => state.toiminnot?.includes(op) ?? false);
 
 /** Shape expected by `generateProfileLink` — null when not authenticated. */
 export const useYksiloProfileLinkData = () =>
