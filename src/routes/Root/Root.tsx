@@ -60,10 +60,8 @@ const LanguageButtonWrapper = ({ responsive }: { responsive?: boolean }) => {
 };
 
 const Root = () => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language;
   const resetToolStore = useToolStore((state) => state.reset);
   const location = useLocation();
   const { addPermanentNote, removePermanentNote, addTemporaryNote, removeTemporaryNote } = useNoteStack();
@@ -195,6 +193,36 @@ const Root = () => {
       }));
     });
   }, [addTemporaryNote, t, language]);
+
+  // Show a banner when the backend redirects here after a failed login,
+  React.useEffect(() => {
+    const url = new URL(globalThis.location.href);
+    const params = url.searchParams;
+    if (params.get('error') !== 'AUTHENTICATION_FAILURE') {
+      return;
+    }
+    const reason = params.get('reason');
+    const description =
+      reason === 'AUTHENTICATION_METHOD_NOT_ALLOWED'
+        ? t('common:session.auth-error.reason.method-not-allowed')
+        : undefined;
+    // Clean the params from the URL so a reload won't re-show the banner.
+    params.delete('error');
+    params.delete('reason');
+    const query = params.toString();
+    const cleaned = url.pathname + (query ? `?${query}` : '') + url.hash;
+    globalThis.history.replaceState(null, '', cleaned);
+
+    addTemporaryNote(() => ({
+      id: 'auth-error',
+      title: t('common:session.auth-error.title'),
+      description,
+      variant: 'error',
+      isCollapsed: false,
+    }));
+    // Run once on mount; intentionally no dependencies.
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
+  }, []);
 
   const { open: openCookieConsent } = useCookieConsent();
 

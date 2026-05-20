@@ -160,6 +160,13 @@
   "required": "obligatorisk",
   "return-home": "Återgå till förstasidan",
   "session": {
+    "auth-error": {
+      "description": "Inloggningen misslyckades. Försök igen.",
+      "reason": {
+        "method-not-allowed": "Den inloggningsmetod du valde är inte tillåten."
+      },
+      "title": "Inloggningen misslyckades"
+    },
     "expired": {
       "continue": "Fortsätt utan att logga in",
       "login": "Logga in igen",
