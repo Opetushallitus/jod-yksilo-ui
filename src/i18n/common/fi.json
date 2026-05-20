@@ -160,6 +160,13 @@
   "required": "pakollinen",
   "return-home": "Palaa etusivulle",
   "session": {
+    "auth-error": {
+      "description": "Kirjautuminen ei onnistunut. Yritä uudelleen.",
+      "reason": {
+        "method-not-allowed": "Valitsemasi kirjautumistapa ei ole sallittu."
+      },
+      "title": "Kirjautuminen epäonnistui"
+    },
     "expired": {
       "continue": "Jatka kirjautumatta",
       "login": "Kirjaudu uudelleen",

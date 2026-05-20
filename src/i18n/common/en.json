@@ -161,6 +161,13 @@
   "required": "mandatory",
   "return-home": "Return to the front page",
   "session": {
+    "auth-error": {
+      "description": "Login failed. Please try again.",
+      "reason": {
+        "method-not-allowed": "The login method you selected is not allowed."
+      },
+      "title": "Login failed"
+    },
     "expired": {
       "continue": "Continue without logging in",
       "login": "Log in again",
