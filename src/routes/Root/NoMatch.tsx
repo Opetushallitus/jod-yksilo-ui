@@ -1,10 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
-import { Button } from '@jod/design-system';
+import { Button, IconHeading } from '@jod/design-system';
 import { JodError } from '@jod/design-system/icons';
-
-import { IconHeading } from '@/components/IconHeading';
 
 const NoMatch = () => {
   const {

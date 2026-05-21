@@ -2,12 +2,19 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 
-import { Accordion, Button, type MenuSection, PageNavigation, Tag, useMediaQueries } from '@jod/design-system';
+import {
+  Accordion,
+  Button,
+  IconHeading,
+  type MenuSection,
+  PageNavigation,
+  ScrollHeading,
+  Tag,
+  useMediaQueries,
+} from '@jod/design-system';
 import { JodArrowRight, JodInfo, JodPrint, JodUser } from '@jod/design-system/icons';
 
 import { ActionButton, ExperienceTable, MainLayout, OpportunityCard } from '@/components';
-import { IconHeading } from '@/components/IconHeading';
-import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { getLocalizedText, hyphenize } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';

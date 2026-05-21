@@ -1,10 +1,9 @@
 import { Trans, useTranslation } from 'react-i18next';
 
-import { useMediaQueries } from '@jod/design-system';
+import { IconHeading, useMediaQueries } from '@jod/design-system';
 import { JodUser } from '@jod/design-system/icons';
 
 import { ExternalLink, MainLayout } from '@/components';
-import { IconHeading } from '@/components/IconHeading';
 import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
 
 import { ProfileNavigationList } from '../components';
