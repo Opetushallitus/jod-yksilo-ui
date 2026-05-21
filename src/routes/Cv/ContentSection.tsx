@@ -1,6 +1,5 @@
-import { Accordion, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
+import { Accordion, ScrollHeading, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
 
-import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { hyphenize } from '@/utils';
 
 interface ContentSectionProps {

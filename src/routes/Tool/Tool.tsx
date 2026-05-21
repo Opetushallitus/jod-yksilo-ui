@@ -2,11 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-import { Button, cx, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
+import { Button, cx, IconHeading, Spinner, useMediaQueries, useNoteStack } from '@jod/design-system';
 import { JodArrowRight, JodCompass, JodInfo, JodSettings } from '@jod/design-system/icons';
 
 import { AiInfo, Breadcrumb, OpportunityCard } from '@/components';
-import { IconHeading } from '@/components/IconHeading';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
 import { RateContent } from '@/components/RateContent/RateContent';

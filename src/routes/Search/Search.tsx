@@ -1,11 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useMediaQueries } from '@jod/design-system';
+import { IconHeading, useMediaQueries } from '@jod/design-system';
 import { JodSearch } from '@jod/design-system/icons';
 
 import { MainLayout } from '@/components';
-import { IconHeading } from '@/components/IconHeading';
 
 import { InfoCards } from './InfoCards';
 import { SearchResults } from './Results';

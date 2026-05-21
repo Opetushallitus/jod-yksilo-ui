@@ -3,13 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 
-import { type MenuSection, PageNavigation, useMediaQueries } from '@jod/design-system';
+import { type MenuSection, PageNavigation, ScrollHeading, useMediaQueries } from '@jod/design-system';
 import { JodPrint, JodShare } from '@jod/design-system/icons';
 
 import type { components } from '@/api/schema';
 import { ActionButton, AiInfo, FavoriteToggle, MainLayout } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
-import { ScrollHeading } from '@/components/ScrollHeading/ScrollHeading';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';

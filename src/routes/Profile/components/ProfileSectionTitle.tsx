@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cx } from '@jod/design-system';
+import { cx, IconHeading } from '@jod/design-system';
 import {
   JodCheckmarkAlt,
   JodFavorite,
@@ -12,7 +12,6 @@ import {
   JodWork,
 } from '@jod/design-system/icons';
 
-import { IconHeading } from '@/components/IconHeading';
 import { getTextClassByCompetenceSourceType, type ProfileSectionType } from '@/routes/Profile/utils';
 
 export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType; title: string }) => {
