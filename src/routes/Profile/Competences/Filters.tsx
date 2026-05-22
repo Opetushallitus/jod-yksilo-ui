@@ -14,11 +14,11 @@ interface FiltersProps extends CompetenceFiltersProps {
 
 export const Filters = ({ filterKeys, selectedFilters, setSelectedFilters, groupBy, setGroupBy }: FiltersProps) => {
   const { t } = useTranslation();
-  const { sm } = useMediaQueries();
+  const { lg } = useMediaQueries();
 
   return (
     <>
-      <FilterList title={t('do-filter')} className={sm ? 'bg-bg-gray-2' : 'bg-bg-gray'}>
+      <FilterList title={t('do-filter')} className={lg ? 'bg-bg-gray-2' : 'bg-bg-gray'}>
         <CompetenceFilters
           filterKeys={filterKeys}
           selectedFilters={selectedFilters}
@@ -27,7 +27,7 @@ export const Filters = ({ filterKeys, selectedFilters, setSelectedFilters, group
           showColorIndicator
         />
       </FilterList>
-      <FilterList title={t('profile.competences.order-by')} className={sm ? 'bg-bg-gray-2' : 'bg-bg-gray'}>
+      <FilterList title={t('profile.competences.order-by')} className={lg ? 'bg-bg-gray-2' : 'bg-bg-gray'}>
         <RadioButtonGroup
           value={groupBy}
           onChange={setGroupBy}
