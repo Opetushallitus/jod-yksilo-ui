@@ -697,7 +697,15 @@
       },
       "order-by": "Sortera",
       "show-filters": "Visa filter",
-      "title": "Kompetenser"
+      "title": "Kompetenser",
+      "tour": {
+        "step-1": {
+          "description": "Tjänsten föreslår kompetenser för dig baserat på den information du har lämnat. Välj de kompetenser som passar dig bäst. Du kan också redigera dina utbildningsuppgifter samtidigt.<br/><br/>Identifiering av kompetenser förbättrar träffsäkerheten i de utbildnings- och arbetsmöjligheter som föreslås för dig.",
+          "title": "Identifiering av kompetenser förbättrar träffsäkerheten i sökresultaten"
+        },
+        "view-guided-tour": "Tips för identifiering av kompetenser",
+        "view-guided-tour-label": "Starta den guidade visningen av kompetensidentifiering"
+      }
     },
     "education-history": {
       "description": "Nedan hittar du din utbildningshistorik. Du kan själv lägga till uppgifter i din utbildningshistorik och kartlägga den kompetens som är kopplad till dem. Du kan också importera dina egna studieprestationer från de nationella studie-, utbildnings- och examensregistren som en del av din utbildningshistorik (Studieinfo).",

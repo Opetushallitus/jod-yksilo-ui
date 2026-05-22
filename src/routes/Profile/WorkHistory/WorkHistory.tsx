@@ -10,6 +10,7 @@ import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonantajaModal';
 import { WorkHistoryWizard } from '@/routes/Profile/WorkHistory/WorkHistoryWizard';
 
+import { CompetencesTour } from '../CompetencesTour';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import AddOrEditToimenkuvaModal from './modals/AddOrEditToimenkuvaModal';
@@ -76,23 +77,29 @@ const WorkHistory = () => {
         <ProfileSectionTitle type="TOIMENKUVA" title={title} />
         <p className="mb-7 text-body-lg-mobile sm:text-body-lg">{t('profile.work-history.description')}</p>
 
-        {rows.length === 0 && (
+        {rows.length === 0 ? (
           <div className="mt-6 mb-7" data-testid="work-history-empty-state">
             <EmptyState text={t('profile.work-history.empty')} />
           </div>
+        ) : (
+          <div className="mb-7">
+            <CompetencesTour />
+          </div>
         )}
       </div>
-      <ExperienceTable
-        ariaLabel={title}
-        mainColumnHeader={t('work-history.workplace-or-job-description')}
-        addNewLabel={t('work-history.add-new-workplace')}
-        addNewNestedLabel={t('work-history.add-new-job-description')}
-        rows={rows}
-        onAddClick={guardedAction(showModal, WorkHistoryWizard)}
-        onRowClick={(row) => guardedAction(onRowClick, row)()}
-        onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
-        onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}
-      />
+      <div id="competences-tour-step-1">
+        <ExperienceTable
+          ariaLabel={title}
+          mainColumnHeader={t('work-history.workplace-or-job-description')}
+          addNewLabel={t('work-history.add-new-workplace')}
+          addNewNestedLabel={t('work-history.add-new-job-description')}
+          rows={rows}
+          onAddClick={guardedAction(showModal, WorkHistoryWizard)}
+          onRowClick={(row) => guardedAction(onRowClick, row)()}
+          onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
+          onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}
+        />
+      </div>
       {lg ? null : (
         <div className="px-5">
           <ToolCard testId="work-history-go-to-tool" className="mt-6" />

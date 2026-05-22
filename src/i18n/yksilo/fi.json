@@ -696,7 +696,15 @@
       },
       "order-by": "Järjestä",
       "show-filters": "Näytä suodattimet",
-      "title": "Osaamiset"
+      "title": "Osaamiset",
+      "tour": {
+        "step-1": {
+          "description": "Palvelu ehdottaa sinulle antamiesi tietojen perusteella osaamisia. Valitse itsellesi sopivimmat osaamiset. Voit samalla muokata koulutustietoja.<br/><br/>Osaamisten tunnistaminen parantaa sinulle ehdotettavien koulutus- ja työmahdollisuuksien osuvuutta.",
+          "title": "Osaamisten tunnistaminen parantaa hakutulosten osuvuutta"
+        },
+        "view-guided-tour": "Vinkit osaamisten tunnistamiseen",
+        "view-guided-tour-label": "Käynnistä osaamisten tunnistamisen opastettu esittely"
+      }
     },
     "education-history": {
       "description": "Löydät alta koulutushistoriasi. Voit lisätä itse koulutushistoriaasi sekä kartoittaa niihin liittyviä osaamisia. Voit tuoda myös omat opintosuorituksesi valtakunnallisista opinto-, koulutus- ja tutkintorekistereistä osaksi koulutushistoriaasi (Opintopolku).",

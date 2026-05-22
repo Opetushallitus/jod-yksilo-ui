@@ -9,6 +9,7 @@ import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
 
+import { CompetencesTour } from '../CompetencesTour';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
@@ -74,24 +75,29 @@ const FreeTimeActivities = () => {
       <div className="px-5 sm:px-6">
         <ProfileSectionTitle type="PATEVYYS" title={title} />
         <p className="mb-7 text-body-lg-mobile sm:text-body-lg">{t('profile.free-time-activities.description')}</p>
-
-        {rows.length === 0 && (
+        {rows.length === 0 ? (
           <div className="mt-6 mb-7" data-testid="free-time-empty-state">
             <EmptyState text={t('profile.free-time-activities.empty')} />
           </div>
+        ) : (
+          <div className="mb-7">
+            <CompetencesTour />
+          </div>
         )}
       </div>
-      <ExperienceTable
-        ariaLabel={title}
-        mainColumnHeader={t('free-time-activities.theme-or-activity')}
-        addNewLabel={t('free-time-activities.add-new-free-time-activity')}
-        addNewNestedLabel={t('free-time-activities.add-new-activity')}
-        rows={rows}
-        onAddClick={guardedAction(showModal, FreeTimeActivitiesWizard)}
-        onRowClick={(row) => guardedAction(onRowClick, row)()}
-        onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
-        onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}
-      />
+      <div id="competences-tour-step-1">
+        <ExperienceTable
+          ariaLabel={title}
+          mainColumnHeader={t('free-time-activities.theme-or-activity')}
+          addNewLabel={t('free-time-activities.add-new-free-time-activity')}
+          addNewNestedLabel={t('free-time-activities.add-new-activity')}
+          rows={rows}
+          onAddClick={guardedAction(showModal, FreeTimeActivitiesWizard)}
+          onRowClick={(row) => guardedAction(onRowClick, row)()}
+          onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
+          onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}
+        />
+      </div>
       {lg ? null : (
         <div className="px-5">
           <ToolCard testId="free-time-go-to-tool" className="mt-6" />
