@@ -103,6 +103,7 @@ const ImportKoulutusSummaryModal = ({
       .map((entry) => ({ key: entry[0], koulutukset: entry[1] }))
       .map((o, i) => ({
         nimi: JSON.parse(o.key),
+        tuontiLahde: 'KOSKI_TUONTI',
         id: `${i}`,
         koulutukset: o.koulutukset.map((koulutus) => ({
           id: koulutus.id,
@@ -177,11 +178,13 @@ const ImportKoulutusSummaryModal = ({
       const koulutusKokonaisuudet = createKoulutusKokonaisuudet(skipOsaamistenTunnistus);
       const body: {
         nimi: Record<string, string>;
+        tuontiLahde: components['schemas']['KoulutusKokonaisuusDto']['tuontiLahde'];
         koulutukset: Koulutus[];
       }[] = [];
       for (const [jsonNimi, koulutukset] of koulutusKokonaisuudet) {
         body.push({
           nimi: JSON.parse(jsonNimi) as Record<string, string>,
+          tuontiLahde: 'KOSKI_TUONTI',
           koulutukset,
         });
       }

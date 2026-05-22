@@ -38,6 +38,7 @@ const transformKoulutusKokonaisuusDto = (
 ): Koulutuskokonaisuus => ({
   id: dto.id,
   nimi: dto.nimi,
+  tuontiLahde: dto.tuontiLahde,
   koulutukset: (dto.koulutukset || []).map((k) => ({
     id: k.id,
     nimi: k.kuvaus || k.nimi || { fi: '', sv: '', en: '' },
@@ -57,6 +58,7 @@ const transformKoulutusKokonaisuusDto = (
 const transformTyopaikkaDto = (dto: components['schemas']['TyopaikkaDto']): Tyopaikka => ({
   id: dto.id,
   nimi: dto.nimi,
+  tuontiLahde: dto.tuontiLahde,
   toimenkuvat: (dto.toimenkuvat || []).map((t) => ({
     id: t.id,
     nimi: t.nimi,
@@ -112,6 +114,7 @@ const convertActivitiesToTableRows = (
     return {
       key: toiminto.id ?? crypto.randomUUID(),
       nimi: toiminto.nimi,
+      tuontiLahde: toiminto.tuontiLahde,
       subrows: patevyydet.map((p) => ({
         key: p.id ?? crypto.randomUUID(),
         nimi: p.nimi,

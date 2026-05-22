@@ -970,6 +970,8 @@ export interface components {
       /** Format: uuid */
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
+      /** @enum {string} */
+      tuontiLahde?: 'CV_TUONTI' | 'KOSKI_TUONTI' | 'TMT_TUONTI';
       patevyydet?: components['schemas']['PatevyysDto'][];
     };
     IdDtoUUID: {
@@ -980,6 +982,8 @@ export interface components {
       /** Format: uuid */
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
+      /** @enum {string} */
+      tuontiLahde?: 'CV_TUONTI' | 'KOSKI_TUONTI' | 'TMT_TUONTI';
       toimenkuvat?: components['schemas']['ToimenkuvaDto'][];
     };
     SuosikkiDto: {
@@ -996,6 +1000,8 @@ export interface components {
       /** Format: uuid */
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
+      /** @enum {string} */
+      tuontiLahde?: 'CV_TUONTI' | 'KOSKI_TUONTI' | 'TMT_TUONTI';
       koulutukset?: components['schemas']['KoulutusDto'][];
     };
     JakolinkkiUpdateDto: {
@@ -1249,6 +1255,8 @@ export interface components {
       /** Format: uuid */
       id?: string;
       nimi?: components['schemas']['LokalisoituTeksti'];
+      /** @enum {string} */
+      tuontiLahde?: 'CV_TUONTI' | 'KOSKI_TUONTI' | 'TMT_TUONTI';
       koulutukset?: components['schemas']['KoulutusExportDto'][];
     };
     MuuOsaaminenExportDto: {
@@ -1303,12 +1311,16 @@ export interface components {
       /** Format: uuid */
       id?: string;
       nimi?: components['schemas']['LokalisoituTeksti'];
+      /** @enum {string} */
+      tuontiLahde?: 'CV_TUONTI' | 'KOSKI_TUONTI' | 'TMT_TUONTI';
       patevyydet?: components['schemas']['PatevyysExportDto'][];
     };
     TyopaikkaExportDto: {
       /** Format: uuid */
       id?: string;
       nimi?: components['schemas']['LokalisoituTeksti'];
+      /** @enum {string} */
+      tuontiLahde?: 'CV_TUONTI' | 'KOSKI_TUONTI' | 'TMT_TUONTI';
       toimenkuvat?: components['schemas']['ToimenkuvaExportDto'][];
     };
     YksiloExportDto: {

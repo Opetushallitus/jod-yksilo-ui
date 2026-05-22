@@ -1303,6 +1303,11 @@
       "OSAAMINEN": "Mina kunskaper",
       "PATEVYYS": "Fritidsaktiviteter",
       "TOIMENKUVA": "Arbetsplatser"
+    },
+    "tuonti-lahde": {
+      "CV_TUONTI": "CV",
+      "KOSKI_TUONTI": "Studieinfo",
+      "TMT_TUONTI": "Jobbmarknaden"
     }
   },
   "update": "Uppdatera",

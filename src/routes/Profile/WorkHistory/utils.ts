@@ -1,3 +1,4 @@
+import type { components } from '@/api/schema';
 import { type ExperienceTableRowData } from '@/components';
 import { sortByProperty } from '@/utils';
 
@@ -13,6 +14,7 @@ export interface Toimenkuva {
 export interface Tyopaikka {
   id?: string;
   nimi: Record<string, string>;
+  tuontiLahde?: components['schemas']['TyopaikkaDto']['tuontiLahde'];
   toimenkuvat: Toimenkuva[];
 }
 
@@ -43,6 +45,7 @@ export const getWorkHistoryTableRows = (
       nimi: row.nimi,
       alkuPvm: new Date(alkuPvm),
       loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
+      tuontiLahde: row.tuontiLahde,
       checked: true,
       subrows: [...toimenkuvat]
         .sort(sortByProperty('alkuPvm'))
