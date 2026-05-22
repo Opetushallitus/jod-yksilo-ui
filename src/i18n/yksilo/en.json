@@ -698,7 +698,15 @@
       },
       "order-by": "Sort",
       "show-filters": "Show filters",
-      "title": "Competences"
+      "title": "Competences",
+      "tour": {
+        "step-1": {
+          "description": "The service suggests competences to you based on the information you have provided. Select the competences that suit you best. You can also edit your education data at the same time.<br/><br/>Identifying competences improves the relevance of the education and work opportunities suggested to you.",
+          "title": "Identifying competences improves the relevance of search results"
+        },
+        "view-guided-tour": "Tips for identifying competences",
+        "view-guided-tour-label": "Start the guided tour for competence identification"
+      }
     },
     "education-history": {
       "description": "Below you can find your education history. You can add entries to your education history yourself and identify the competencies related to them. You can also import your study records from the national study, education and qualification registers as part of your education history (Studyinfo).",

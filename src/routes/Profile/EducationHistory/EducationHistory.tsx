@@ -17,6 +17,7 @@ import ImportKoulutusSummaryModal from '@/routes/Profile/EducationHistory/modals
 import { LogoutFormContext } from '@/routes/Root';
 import { useHasToiminto } from '@/stores/useSessionManagerStore';
 
+import { CompetencesTour } from '../CompetencesTour';
 import { ProfileSectionTitle } from '../components';
 import { ProfileNavigationList } from '../components/index';
 import { ToolCard } from '../components/ToolCard';
@@ -272,23 +273,29 @@ const EducationHistory = () => {
           </div>
         )}
 
-        {rows.length === 0 && (
+        {rows.length === 0 ? (
           <div className="mt-6 mb-11" data-testid="education-history-empty-state">
             <EmptyState text={t('profile.education-history.empty')} />
           </div>
+        ) : (
+          <div className="mb-7">
+            <CompetencesTour />
+          </div>
         )}
       </div>
-      <ExperienceTable
-        ariaLabel={title}
-        mainColumnHeader={t('education-history.education-provider-or-education')}
-        addNewNestedLabel={t('education-history.add-studies-to-this-education')}
-        rows={rows}
-        koulutuksetThatNeedUserVerification={koulutuksetThatNeedUserVerification}
-        verifyKoulutusOsaamiset={verifyKoulutusOsaamiset}
-        onRowClick={(row) => guardedAction(onRowClick, row)()}
-        onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
-        onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}
-      />
+      <div id="competences-tour-step-1">
+        <ExperienceTable
+          ariaLabel={title}
+          mainColumnHeader={t('education-history.education-provider-or-education')}
+          addNewNestedLabel={t('education-history.add-studies-to-this-education')}
+          rows={rows}
+          koulutuksetThatNeedUserVerification={koulutuksetThatNeedUserVerification}
+          verifyKoulutusOsaamiset={verifyKoulutusOsaamiset}
+          onRowClick={(row) => guardedAction(onRowClick, row)()}
+          onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
+          onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}
+        />
+      </div>
       <div className="flex space-x-4 px-5 sm:px-6">
         <div className="mb-[84px]">
           <Button
