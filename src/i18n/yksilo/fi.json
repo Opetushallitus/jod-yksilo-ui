@@ -1301,6 +1301,11 @@
       "OSAAMINEN": "Osaamiseni",
       "PATEVYYS": "Vapaa-ajan toiminnot",
       "TOIMENKUVA": "Työpaikat"
+    },
+    "tuonti-lahde": {
+      "CV_TUONTI": "CV",
+      "KOSKI_TUONTI": "Opintopolku",
+      "TMT_TUONTI": "Työmarkkinatori"
     }
   },
   "update": "Päivitä mahdollisuutesi",

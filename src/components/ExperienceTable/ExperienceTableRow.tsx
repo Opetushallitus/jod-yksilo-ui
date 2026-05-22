@@ -4,10 +4,12 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Checkbox, cx, Spinner, Tag, useMediaQueries } from '@jod/design-system';
 import { JodCaretDown, JodCaretUp, JodEdit, JodError, JodErrorTriangle } from '@jod/design-system/icons';
 
-import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
+import type { components } from '@/api/schema';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useModal } from '@/hooks/useModal';
 import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
+
+import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 
 export interface ExperienceTableRowData {
   checked?: boolean;
@@ -26,6 +28,12 @@ export interface ExperienceTableRowData {
   }[];
   osaamisetOdottaaTunnistusta?: boolean;
   osaamisetTunnistusEpaonnistui?: boolean;
+  tuontiLahde?:
+    | components['schemas']['TyopaikkaDto']['tuontiLahde']
+    // oxlint-disable-next-line typescript/no-duplicate-type-constituents
+    | components['schemas']['KoulutusKokonaisuusDto']['tuontiLahde']
+    // oxlint-disable-next-line typescript/no-duplicate-type-constituents
+    | components['schemas']['ToimintoDto']['tuontiLahde'];
 }
 
 interface ExperienceTableRowProps {
@@ -56,6 +64,25 @@ interface ExperienceTableRowProps {
   insideModal?: boolean;
 }
 
+const TuontiLahdeTag = ({
+  row,
+  tuontiLahdeLabels,
+}: {
+  row: ExperienceTableRowData;
+  tuontiLahdeLabels: Record<string, string>;
+}) =>
+  row.tuontiLahde && (
+    <div
+      className={cx('font-normal rounded-xl px-4 py-2 font-arial text-[0.875rem] leading-5 text-nowrap', {
+        'bg-secondary-3-light-1 text-black': row.tuontiLahde === 'CV_TUONTI',
+        'bg-secondary-2-dark text-white': row.tuontiLahde === 'KOSKI_TUONTI',
+        'bg-secondary-4-dark-2 text-white': row.tuontiLahde === 'TMT_TUONTI',
+      })}
+    >
+      {tuontiLahdeLabels[row.tuontiLahde]}
+    </div>
+  );
+
 const Title = ({
   nested,
   row,
@@ -65,16 +92,32 @@ const Title = ({
   row: ExperienceTableRowData;
   insideModal?: boolean;
 }) => {
+  const { t } = useTranslation();
   const modalPadding = insideModal ? 'md:pl-6' : 'sm:pl-6';
 
   const text = getLocalizedText(row?.nimi);
   const baseClasses = 'pl-3 sm:pl-5 pr-3 sm:pr-7 pt-2 hyphens-auto [overflow-wrap:anywhere]';
+  const tuontiLahdeLabels = {
+    CV_TUONTI: t('types.tuonti-lahde.CV_TUONTI'),
+    KOSKI_TUONTI: t('types.tuonti-lahde.KOSKI_TUONTI'),
+    TMT_TUONTI: t('types.tuonti-lahde.TMT_TUONTI'),
+  };
 
   if (nested) {
     return <p className={cx(baseClasses, 'font-normal text-body-md sm:py-2', 'pl-5', modalPadding)}>{text}</p>;
   }
   return (
-    <p className={cx(baseClasses, 'font-poppins text-heading-4 sm:pt-1 sm:pb-[3px]', 'pl-5', modalPadding)}>{text}</p>
+    <div
+      className={cx(
+        baseClasses,
+        'flex items-center gap-5 font-poppins text-heading-4 sm:pt-1 sm:pb-[3px]',
+        'pl-5',
+        modalPadding,
+      )}
+    >
+      {text}
+      {<TuontiLahdeTag row={row} tuontiLahdeLabels={tuontiLahdeLabels} />}
+    </div>
   );
 };
 

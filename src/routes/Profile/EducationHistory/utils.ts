@@ -1,3 +1,4 @@
+import type { components } from '@/api/schema';
 import { type ExperienceTableRowData } from '@/components';
 import { sortByProperty } from '@/utils';
 
@@ -16,6 +17,7 @@ export interface Koulutus {
 export interface Koulutuskokonaisuus {
   id?: string;
   nimi: Record<string, string>;
+  tuontiLahde?: components['schemas']['KoulutusKokonaisuusDto']['tuontiLahde'];
   koulutukset: Koulutus[];
 }
 
@@ -53,6 +55,7 @@ export const getEducationHistoryTableRows = (
       nimi: row.nimi,
       alkuPvm: alkuPvm === Number.MAX_SAFE_INTEGER ? undefined : new Date(alkuPvm),
       loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
+      tuontiLahde: row.tuontiLahde,
       subrows: [...koulutukset]
         .sort(sortByProperty('alkuPvm'))
         .map((koulutus) => mapKoulutusToRow(koulutus, osaamisetMap)),

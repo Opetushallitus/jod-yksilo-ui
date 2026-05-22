@@ -1,3 +1,4 @@
+import type { components } from '@/api/schema';
 import { ExperienceTableRowData } from '@/components';
 import { sortByProperty } from '@/utils';
 
@@ -13,6 +14,7 @@ export interface Patevyys {
 export interface VapaaAjanToiminto {
   id?: string;
   nimi: Record<string, string>;
+  tuontiLahde?: components['schemas']['ToimintoDto']['tuontiLahde'];
   patevyydet: Patevyys[];
 }
 
@@ -43,6 +45,7 @@ export const getFreeTimeActivitiesTableRows = (
       nimi: row.nimi,
       alkuPvm: new Date(alkuPvm),
       loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
+      tuontiLahde: row.tuontiLahde,
       subrows: [...patevyydet]
         .sort(sortByProperty('alkuPvm'))
         .map((patevyys) => mapPatevyysToRow(patevyys, osaamisetMap)),

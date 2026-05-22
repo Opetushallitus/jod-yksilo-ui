@@ -1303,6 +1303,11 @@
       "OSAAMINEN": "My competences",
       "PATEVYYS": "Recreational activities",
       "TOIMENKUVA": "Workplaces"
+    },
+    "tuonti-lahde": {
+      "CV_TUONTI": "CV",
+      "KOSKI_TUONTI": "Studyinfo",
+      "TMT_TUONTI": "Job Market Finland"
     }
   },
   "update": "Update",
