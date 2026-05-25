@@ -20,7 +20,6 @@ import { client } from '@/api/client';
 import { AnchorLink } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage } from '@/constants';
-import { useEscHandler } from '@/hooks/useEscHandler';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import type { YksiloData } from '@/hooks/useYksiloData';
 import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
@@ -300,8 +299,6 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
       scrollRef.current?.scrollIntoView({ behavior: 'instant' });
     }
   };
-
-  useEscHandler(onClose, formId);
 
   const totalSteps = 3;
   const isFirstStep = React.useMemo(() => step === 1, [step]);
