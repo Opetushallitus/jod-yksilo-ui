@@ -2,10 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 
-import { Button, EmptyState, Tag, useMediaQueries } from '@jod/design-system';
+import { Button, EmptyState, MainLayout, Tag, useMediaQueries } from '@jod/design-system';
 
 import { client } from '@/api/client';
-import { MainLayout } from '@/components';
+import { Breadcrumb } from '@/components';
 import { ESCO_OCCUPATION_PREFIX } from '@/constants';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useModal } from '@/hooks/useModal';
@@ -45,6 +45,7 @@ const Interests = () => {
 
   return (
     <MainLayout
+      breadcrumbComponent={<Breadcrumb />}
       navChildren={
         <div className="flex flex-col gap-5">
           <ProfileNavigationList />

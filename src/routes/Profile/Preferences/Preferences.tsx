@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button, useMediaQueries } from '@jod/design-system';
+import { Button, MainLayout, useMediaQueries } from '@jod/design-system';
 
-import { MainLayout } from '@/components';
+import { Breadcrumb } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { LogoutFormContext } from '@/routes/Root';
@@ -45,6 +45,7 @@ const Preferences = () => {
 
   return (
     <MainLayout
+      breadcrumbComponent={<Breadcrumb />}
       navChildren={
         <div className="flex flex-col gap-5">
           <ProfileNavigationList />

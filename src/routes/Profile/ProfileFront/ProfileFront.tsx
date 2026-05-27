@@ -1,9 +1,9 @@
 import { Trans, useTranslation } from 'react-i18next';
 
-import { IconHeading, useMediaQueries } from '@jod/design-system';
+import { IconHeading, MainLayout, useMediaQueries } from '@jod/design-system';
 import { JodUser } from '@jod/design-system/icons';
 
-import { ExternalLink, MainLayout } from '@/components';
+import { Breadcrumb, ExternalLink } from '@/components';
 import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
 
 import { ProfileNavigationList } from '../components';
@@ -21,6 +21,7 @@ const ProfileFront = () => {
 
   return (
     <MainLayout
+      breadcrumbComponent={<Breadcrumb />}
       navChildren={
         <div className="flex flex-col gap-5">
           <ProfileNavigationList />

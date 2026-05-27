@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { IconHeading, useMediaQueries } from '@jod/design-system';
+import { IconHeading, MainLayout, useMediaQueries } from '@jod/design-system';
 import { JodSearch } from '@jod/design-system/icons';
 
-import { MainLayout } from '@/components';
+import { Breadcrumb } from '@/components';
 
 import { InfoCards } from './InfoCards';
 import { SearchResults } from './Results';
@@ -18,6 +18,7 @@ const Search = () => {
 
   return (
     <MainLayout
+      breadcrumbComponent={<Breadcrumb />}
       navChildren={
         <div className="flex flex-col gap-6">
           <SearchFilters />

@@ -2,10 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 
-import { Button, EmptyState, tidyClasses, useMediaQueries } from '@jod/design-system';
+import { Button, EmptyState, MainLayout, tidyClasses, useMediaQueries } from '@jod/design-system';
 import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
 
-import { MainLayout } from '@/components';
+import { Breadcrumb } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
@@ -84,6 +84,7 @@ const MyGoals = () => {
 
   return (
     <MainLayout
+      breadcrumbComponent={<Breadcrumb />}
       navChildren={
         <div className="flex flex-col gap-5">
           <ProfileNavigationList />

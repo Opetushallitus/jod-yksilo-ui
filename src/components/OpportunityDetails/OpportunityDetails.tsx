@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 
-import { type MenuSection, PageNavigation, ScrollHeading, useMediaQueries } from '@jod/design-system';
+import { MainLayout, type MenuSection, PageNavigation, ScrollHeading, useMediaQueries } from '@jod/design-system';
 import { JodPrint, JodShare } from '@jod/design-system/icons';
 
 import type { components } from '@/api/schema';
-import { ActionButton, AiInfo, FavoriteToggle, MainLayout } from '@/components';
+import { ActionButton, AiInfo, Breadcrumb, FavoriteToggle } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useModal } from '@/hooks/useModal';
@@ -116,7 +116,7 @@ const OpportunityDetails = ({
   }, [menuSection, mahdollisuusAlityyppi, mahdollisuusTyyppi]);
 
   return (
-    <MainLayout navChildren={navChildren}>
+    <MainLayout breadcrumbComponent={<Breadcrumb />} navChildren={navChildren}>
       {title ? <title>{title}</title> : null}
       <div className="px-5 sm:px-6 lg:pr-0">
         <OpportunityHeader

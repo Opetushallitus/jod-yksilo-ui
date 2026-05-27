@@ -6,6 +6,7 @@ import {
   Accordion,
   Button,
   IconHeading,
+  MainLayout,
   type MenuSection,
   PageNavigation,
   ScrollHeading,
@@ -14,7 +15,7 @@ import {
 } from '@jod/design-system';
 import { JodArrowRight, JodInfo, JodPrint, JodUser } from '@jod/design-system/icons';
 
-import { ActionButton, ExperienceTable, MainLayout, OpportunityCard } from '@/components';
+import { ActionButton, ExperienceTable, OpportunityCard } from '@/components';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { getLocalizedText, hyphenize } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
@@ -179,6 +180,7 @@ const Cv = () => {
   return (
     <MainLayout
       hideBreadcrumb
+      breadcrumbComponent={null}
       navChildren={
         <div className="flex flex-col gap-5">
           {menuSection.linkItems.length > 0 && <PageNavigation menuSection={menuSection} activeIndicator="dot" />}

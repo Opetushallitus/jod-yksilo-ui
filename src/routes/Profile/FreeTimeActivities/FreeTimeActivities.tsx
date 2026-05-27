@@ -2,9 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 
-import { EmptyState, useMediaQueries } from '@jod/design-system';
+import { EmptyState, MainLayout, useMediaQueries } from '@jod/design-system';
 
-import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
+import { Breadcrumb, ExperienceTable, type ExperienceTableRowData } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
@@ -59,6 +59,7 @@ const FreeTimeActivities = () => {
 
   return (
     <MainLayout
+      breadcrumbComponent={<Breadcrumb />}
       navChildren={
         <div className="flex flex-col gap-5">
           <ProfileNavigationList />

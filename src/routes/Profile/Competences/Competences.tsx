@@ -2,10 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 
-import { Button, Modal, useMediaQueries } from '@jod/design-system';
+import { Button, MainLayout, Modal, useMediaQueries } from '@jod/design-system';
 
 import { client } from '@/api/client';
-import { MainLayout } from '@/components';
+import { Breadcrumb } from '@/components';
 import { InfoBox } from '@/components/InfoBox/InfoBox';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { useInitializeFilters } from '@/hooks/useInitializeFilters';
@@ -61,6 +61,7 @@ const Competences = () => {
 
   return (
     <MainLayout
+      breadcrumbComponent={<Breadcrumb />}
       navChildren={
         <div className="flex flex-col gap-5">
           <ProfileNavigationList />
