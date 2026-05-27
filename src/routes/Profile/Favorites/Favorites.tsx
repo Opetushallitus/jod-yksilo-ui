@@ -2,10 +2,18 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-import { Button, EmptyState, Modal, Pagination, tidyClasses as tc, useMediaQueries } from '@jod/design-system';
+import {
+  Button,
+  EmptyState,
+  MainLayout,
+  Modal,
+  Pagination,
+  tidyClasses as tc,
+  useMediaQueries,
+} from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 
-import { FilterList, MainLayout, OpportunityCard } from '@/components';
+import { Breadcrumb, FilterList, OpportunityCard } from '@/components';
 import { MahdollisuusTyyppiFilter } from '@/components/MahdollisuusTyyppiFilter/MahdollisuusTyyppiFilter';
 import { FilterButton } from '@/components/MobileFilterButton/MobileFilterButton';
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
@@ -190,6 +198,7 @@ const Favorites = () => {
 
   return (
     <MainLayout
+      breadcrumbComponent={<Breadcrumb />}
       navChildren={
         <div className="flex flex-col gap-5">
           <ProfileNavigationList />

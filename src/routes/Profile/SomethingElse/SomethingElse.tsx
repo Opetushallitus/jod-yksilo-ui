@@ -2,9 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
 
-import { Button, EmptyState, Tag, useMediaQueries } from '@jod/design-system';
+import { Button, EmptyState, MainLayout, Tag, useMediaQueries } from '@jod/design-system';
 
-import { MainLayout } from '@/components';
+import { Breadcrumb } from '@/components';
 import { useArrowKeyControls } from '@/hooks/useArrowKeyControls';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
@@ -34,6 +34,7 @@ const SomethingElse = () => {
 
   return (
     <MainLayout
+      breadcrumbComponent={<Breadcrumb />}
       navChildren={
         <div className="flex flex-col gap-5">
           <ProfileNavigationList />

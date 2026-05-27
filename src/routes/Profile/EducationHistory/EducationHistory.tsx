@@ -3,10 +3,10 @@ import toast from 'react-hot-toast/headless';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link, useLoaderData, useRevalidator, useSearchParams } from 'react-router';
 
-import { Button, EmptyState, useMediaQueries, useNoteStack } from '@jod/design-system';
+import { Button, EmptyState, MainLayout, useMediaQueries, useNoteStack } from '@jod/design-system';
 import { JodError, JodOpenInNew } from '@jod/design-system/icons';
 
-import { ExperienceTable, MainLayout, type ExperienceTableRowData } from '@/components';
+import { Breadcrumb, ExperienceTable, type ExperienceTableRowData } from '@/components';
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useEnvironment } from '@/hooks/useEnvironment/index';
 import { useModal } from '@/hooks/useModal';
@@ -243,6 +243,7 @@ const EducationHistory = () => {
 
   return (
     <MainLayout
+      breadcrumbComponent={<Breadcrumb />}
       navChildren={
         <div className="flex flex-col gap-5">
           <ProfileNavigationList />

@@ -2,10 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 
-import { Button } from '@jod/design-system';
+import { Button, MainLayout } from '@jod/design-system';
 import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
 
-import { MainLayout } from '@/components';
+import { Breadcrumb } from '@/components';
 import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
 import { isFeatureEnabled } from '@/utils/features';
 import { getLinkTo } from '@/utils/routeUtils';
@@ -79,7 +79,7 @@ const LoginPage = () => {
   const title = t('profile.login-page.page-title');
 
   return (
-    <MainLayout>
+    <MainLayout breadcrumbComponent={<Breadcrumb />}>
       <div className="px-5 sm:px-6">
         <title>{title}</title>
         <h1 className="mb-6 text-hero-mobile focus:outline-0 sm:text-hero" data-testid="landing-title">
