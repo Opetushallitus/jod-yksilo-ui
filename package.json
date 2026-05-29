@@ -43,7 +43,7 @@
     "@axe-core/react": "4.11.1",
     "@lavamoat/allow-scripts": "3.4.3",
     "@lavamoat/preinstall-always-fail": "2.1.1",
-    "@playwright/test": "1.59.0",
+    "@playwright/test": "1.60.0",
     "@tailwindcss/vite": "4.2.2",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",

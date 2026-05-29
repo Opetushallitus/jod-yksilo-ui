@@ -63,13 +63,10 @@ jobs:
       - name: Run build
         run: npm run build
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 0
-
       - name: Run Playwright e2e tests
-        run: npx playwright test
+        uses: docker://mcr.microsoft.com/playwright:v1.60.0-noble
+        with:
+          args: bash -lc "export HOME=/root && npx playwright test"
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
