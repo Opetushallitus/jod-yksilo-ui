@@ -51,6 +51,7 @@ const ProfileFront = () => {
               <ListItem label={t('profile.preferences.list-1-item-1')} />
               <ListItem label={t('profile.preferences.list-1-item-2')} />
               <ListItem label={t('profile.preferences.list-1-item-3')} />
+              <ListItem label={t('profile.preferences.list-1-item-4')} />
             </ul>
           </div>
           <p>{t('profile.preferences.paragraph-1')}</p>
@@ -72,9 +73,17 @@ const ProfileFront = () => {
           </div>
           <p>
             <Trans
-              i18nKey="profile.preferences.paragraph-4"
+              i18nKey="profile.preferences.paragraph-3"
               components={{
                 CustomLink: (
+                  <ExternalLink
+                    href={t('profile.preferences.paragraph-3-link')}
+                    className="text-accent hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                ),
+                CustomLink2: (
                   <ExternalLink
                     href={`/${language}/${t('common:slugs.privacy-and-cookies')}`}
                     className="text-accent hover:underline"
