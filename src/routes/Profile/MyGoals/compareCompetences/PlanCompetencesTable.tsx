@@ -6,8 +6,9 @@ import { Button, cx } from '@jod/design-system';
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
 import { components } from '@/api/schema';
+import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { planLetter } from '@/routes/Profile/MyGoals/planLetterUtil';
-import { isDefined } from '@/utils';
+import { getLocalizedText, isDefined } from '@/utils';
 
 import { PlanCompetenceRow, PlanCompetencesTableRowData } from './PlanCompetenceRow';
 
@@ -54,7 +55,7 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
   }, [goal.osaamiset, plans]);
 
   return (
-    <div className="mt-6 max-w-full overflow-x-auto p-2">
+    <div className="mt-6 max-w-full overflow-x-auto py-2">
       <h3 className={'text-heading-3'}>{t('profile.my-goals.competence-compare')}</h3>
       <table
         className="mt-3 font-arial"
@@ -66,13 +67,20 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
             <th scope="col" className="pr-7 pb-3 pl-5 text-left">
               {t('competence')}
             </th>
-            <th scope="col" className="pr-5 pb-3 text-center whitespace-nowrap">
+            <th scope="col" className="px-3 pb-3 text-center whitespace-nowrap sm:px-4">
               {t('profile.my-goals.own-competences')}
             </th>
             {plans.map((plan) => {
               return (
-                <th scope="col" key={`th-${plan.id}`} className="pr-5 pb-3 text-center whitespace-nowrap">
-                  {plan.displayKey}
+                <th scope="col" key={`th-${plan.id}`} className="px-3 pb-3 text-center whitespace-nowrap sm:px-4">
+                  <TooltipWrapper
+                    tooltipPlacement="top"
+                    tooltipContent={
+                      <div className="max-w-[290px] text-body-xs leading-5">{getLocalizedText(plan.nimi)}</div>
+                    }
+                  >
+                    {plan.displayKey}
+                  </TooltipWrapper>
                 </th>
               );
             })}

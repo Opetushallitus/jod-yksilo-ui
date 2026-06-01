@@ -35,13 +35,19 @@ const SettingsMenu = () => {
     <div className="flex max-h-full flex-col gap-2 bg-bg-gray text-body-sm-mobile sm:text-body-sm">
       <ul>
         <Setting
+          initiallyOpen
           title={t('tool.settings.general.education-opportunity-type')}
           count={getFilterCount(filters, ['educationOpportunityType'])}
           hideTopBorder={!sm}
         >
           <FilterEducationOpportunityType />
         </Setting>
-        <Setting title={t('tool.settings.general.duration')} count={getKestoCount()} className="border-b-2 pb-3">
+        <Setting
+          initiallyOpen
+          title={t('tool.settings.general.duration')}
+          count={getKestoCount()}
+          className="border-b-2 pb-3"
+        >
           <FilterKesto />
         </Setting>
       </ul>
