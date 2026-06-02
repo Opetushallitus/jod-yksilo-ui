@@ -27,8 +27,8 @@ describe('loader', () => {
       params: {
         lng: 'sv',
       },
-      unstable_url: new URL('http://localhost'),
-      unstable_pattern: '',
+      url: new URL('http://localhost'),
+      pattern: '',
     });
 
     expect(spyChangeLanguage).toHaveBeenCalledWith('sv');

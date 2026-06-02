@@ -34,7 +34,7 @@ export const useDatePickerTranslations = (): ComponentProps<typeof Datepicker>['
     viewTrigger: (view) => translations[view].view,
     prevTrigger: (view) => translations[view].prev,
     dayCell: (state): string => {
-      const baseLabel = `${translations.actions.select} ${state.formattedDate}`;
+      const baseLabel = `${translations.actions.select} ${state.valueText}`;
       return state.selected && translations.selectedDayPrefix
         ? `${translations.selectedDayPrefix} ${baseLabel}`
         : baseLabel;
