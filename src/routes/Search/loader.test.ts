@@ -28,8 +28,8 @@ describe('search loader', () => {
       context: undefined,
       params: {},
       request,
-      unstable_url: new URL(request.url),
-      unstable_pattern: '',
+      url: new URL(request.url),
+      pattern: '',
     });
 
     expect(mocks.search).toHaveBeenCalledWith('');
@@ -42,8 +42,8 @@ describe('search loader', () => {
       context: undefined,
       params: {},
       request,
-      unstable_url: new URL(request.url),
-      unstable_pattern: '',
+      url: new URL(request.url),
+      pattern: '',
     });
 
     expect(mocks.search).toHaveBeenCalledWith('');
@@ -56,8 +56,8 @@ describe('search loader', () => {
       context: undefined,
       params: {},
       request,
-      unstable_url: new URL(request.url),
-      unstable_pattern: '',
+      url: new URL(request.url),
+      pattern: '',
     });
 
     expect(mocks.search).toHaveBeenCalledWith('abc');
