@@ -22,6 +22,7 @@ VALID_FEATURES=(
   "TMT_INTEGRATION"
   "MAHDOLLISUUDET_HAKU"
   "CV_IMPORT"
+  "MPASSID"
 )
 
 # Colors for output

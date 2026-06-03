@@ -7,6 +7,7 @@ import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
 
 import { MainLayout } from '@/components';
 import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
+import { isFeatureEnabled } from '@/utils/features';
 import { getLinkTo } from '@/utils/routeUtils';
 
 import { MpassidLogo } from './MpassidLogo';
@@ -64,6 +65,7 @@ const LoginPage = () => {
   React.useEffect(() => {
     void expireSession('logout');
   }, [expireSession]);
+  const isMpassidEnabled = isFeatureEnabled('MPASSID');
 
   const location = useLocation();
   const state = location.state;
@@ -100,16 +102,18 @@ const LoginPage = () => {
                 useAnchor: true,
               })}
             />
-            <LoginCard
-              title={t('profile.login-page.mpassid-title')}
-              description={t('profile.login-page.mpassid-description')}
-              buttonLabel={t('profile.login-page.mpassid-button')}
-              buttonVariant="white"
-              logo={MpassidLogo}
-              linkComponent={getLinkTo(`/yksilo/login?${mpassidParams.toString()}`, {
-                useAnchor: true,
-              })}
-            />
+            {isMpassidEnabled && (
+              <LoginCard
+                title={t('profile.login-page.mpassid-title')}
+                description={t('profile.login-page.mpassid-description')}
+                buttonLabel={t('profile.login-page.mpassid-button')}
+                buttonVariant="white"
+                logo={MpassidLogo}
+                linkComponent={getLinkTo(`/yksilo/login?${mpassidParams.toString()}`, {
+                  useAnchor: true,
+                })}
+              />
+            )}
           </div>
           <h2 className="mt-8 mb-5 text-heading-2-mobile sm:text-heading-2">
             {t('profile.login-page.profile-includes')}

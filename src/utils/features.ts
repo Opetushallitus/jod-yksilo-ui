@@ -5,7 +5,8 @@ type Feature =
   | 'JAKOLINKKI'
   | 'TMT_INTEGRATION'
   | 'MAHDOLLISUUDET_HAKU'
-  | 'CV_IMPORT';
+  | 'CV_IMPORT'
+  | 'MPASSID';
 
 //Default to false
 const features: Record<Feature, boolean> = {} as Record<Feature, boolean>;
