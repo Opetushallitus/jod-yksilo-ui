@@ -3,6 +3,7 @@
   "ai-icon-alt": "Tekoälyn avulla generoitu sisältö",
   "ai-info-tooltip": {
     "aria-description": "Tietoa tekoälyn käytöstä",
+    "description-cv-import": "Kun tuot CV:stäsi tiedot osaamisprofiiliisi, hyödynnämme tekoälyä tunnistaaksemme työ-, koulutushistoriasi ja vapaa-ajan toimintosi. Tekoäly lukee CV:si ja pyrkii keräämään ja tallentamaan tiedot osaamisprofiiliin sopivassa muodossa. Voit lopuksi tarkistaa tuonnin tulokset ja tarvittaessa voit jälkeenpäin myös muokata tietojasi vapaasti.",
     "description-disclaimer": "Huom! Tekoälyllä tuotettu sisältö saattaa sisältää virheitä.",
     "description-opportunity-education-note": "Olemme hyödyntäneet tekoälyä myös osaamisten tunnistamisessa koulutusmahdollisuuksille.",
     "description-opportunity-intro": "Olemme käyttäneet tämän sivun sisällön luomisessa hyödyksi kielimallia seuraavissa kohdissa:",
@@ -494,6 +495,7 @@
   "preferences": {
     "cv-import": {
       "attachment": {
+        "ai-info": "CV:stäsi tuodut tiedot käsitellään tekoälyn avulla osaamisprofiiliin sopivaan muotoon, minkä jälkeen voit tarkistaa ja muokata niitä vapaasti.",
         "attach-file": "Liitä tiedosto",
         "attach-pdf": "Liitä PDF tiedosto",
         "delay-info": "Tietojen kerääminen CV:stäsi voi kestää minuutteja.",

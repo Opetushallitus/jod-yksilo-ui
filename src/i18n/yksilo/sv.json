@@ -3,6 +3,7 @@
   "ai-icon-alt": "Innehåll skapat med artificiell intelligens",
   "ai-info-tooltip": {
     "aria-description": "Information om användningen av artificiell intelligens",
+    "description-cv-import": "När du importerar data från ditt CV till din kompetensprofil använder vi artificiell intelligens för att identifiera ditt arbete, utbildningshistorik och fritidsaktiviteter. AI:n läser ditt CV och försöker samla in och lagra informationen i ett format som är lämpligt för kompetensprofilen. Du kan granska importresultaten och, om det behövs, redigera din information fritt efteråt.",
     "description-disclaimer": "Obs! Innehåll som har skapats med artificiell intelligens kan innehålla fel.",
     "description-opportunity-education-note": "Vi har också använt AI för att identifiera kompetenser för utbildningsmöjligheter.",
     "description-opportunity-intro": "Vi har använt en språkmodell för att skapa innehållet på denna sida i följande delar:",
@@ -495,6 +496,7 @@
   "preferences": {
     "cv-import": {
       "attachment": {
+        "ai-info": "Data som importeras från ditt CV bearbetas med hjälp av artificiell intelligens för att passa din kompetensprofil, varefter du kan granska och redigera den fritt.",
         "attach-file": "Bifoga fil",
         "attach-pdf": "Bifoga PDF-fil",
         "delay-info": "Insamling av uppgifter från ditt CV kan ta några minuter.",

@@ -2,8 +2,9 @@ import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
 import { Button } from '@jod/design-system';
-import { JodArticle } from '@jod/design-system/icons';
+import { JodArticle, JodOpenInNew } from '@jod/design-system/icons';
 
+import { AnchorLink } from '@/components';
 import { InfoBox } from '@/components/InfoBox/InfoBox';
 
 import { ACCEPTED_MIME, MAX_PDF_BYTES } from './constants';
@@ -36,7 +37,10 @@ const AttachmentStep = ({
   fileInputRef,
   error,
 }: AttachmentStepProps) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
 
   const handlePickFile = () => {
     if (fileInputRef.current) {
@@ -70,9 +74,28 @@ const AttachmentStep = ({
 
   return (
     <div className="box-content flex max-w-modal-content flex-col px-5 font-arial md:px-9">
-      <p className="mb-7">
+      <p className="mb-6">
         <Trans i18nKey="preferences.cv-import.attachment.description" />
       </p>
+
+      <div className="mb-4">
+        <p>{t('preferences.cv-import.attachment.ai-info')}</p>
+        <br />
+        <Trans
+          i18nKey="ai-info-tooltip.description-summary"
+          components={{
+            Icon: <JodOpenInNew size={18} ariaLabel={t('common:external-link')} />,
+            CustomLink: (
+              <AnchorLink
+                href={`/${language}/${t('common:slugs.ai-usage')}`}
+                className="inline-flex underline"
+                target="_blank"
+              />
+            ),
+          }}
+        />
+      </div>
+
       <b className="mb-3">{t('preferences.cv-import.attachment.attach-pdf')}</b>
       <div className="space-between mb-6 flex flex-row items-center gap-6">
         <input ref={fileInputRef} type="file" accept={ACCEPTED_MIME} className="hidden" onChange={handleFileChange} />
