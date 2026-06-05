@@ -393,8 +393,7 @@ const JobOpportunity = () => {
 
             <div className="grid w-full grow grid-cols-2 gap-7">
               <JobJakaumaList name="tyonJatkuvuus" />
-              <JobJakaumaList name="kielitaito" />
-              <JobJakaumaList name="koulutusala" />
+              <JobJakaumaList name="tyokieli" />
               <JobJakaumaList name="ajokortti" />
               <JobJakaumaList name="rikosrekisteriote" />
             </div>
