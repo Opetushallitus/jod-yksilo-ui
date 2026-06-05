@@ -1309,8 +1309,11 @@
     },
     "tuonti-lahde": {
       "CV_TUONTI": "CV",
+      "CV_TUONTI_TOOLTIP": "Importerad med CV-import",
       "KOSKI_TUONTI": "Studieinfo",
-      "TMT_TUONTI": "Jobbmarknaden"
+      "KOSKI_TUONTI_TOOLTIP": "Importerad från Studieinfo.fi-tjänsten",
+      "TMT_TUONTI": "Jobbmarknaden",
+      "TMT_TUONTI_TOOLTIP": "Importerad från Jobbmarknaden-tjänsten"
     }
   },
   "update": "Uppdatera",

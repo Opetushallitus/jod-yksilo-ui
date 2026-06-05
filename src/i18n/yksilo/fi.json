@@ -1307,8 +1307,11 @@
     },
     "tuonti-lahde": {
       "CV_TUONTI": "CV",
+      "CV_TUONTI_TOOLTIP": "Tämä tieto on tuotu käyttäen CV tuontityökalua.",
       "KOSKI_TUONTI": "Opintopolku",
-      "TMT_TUONTI": "Työmarkkinatori"
+      "KOSKI_TUONTI_TOOLTIP": "Tämä tieto on tuotu Opintopolku.fi -palvelusta.",
+      "TMT_TUONTI": "Työmarkkinatori",
+      "TMT_TUONTI_TOOLTIP": "Tämä tieto on tuotu Työmarkkinatori-palvelusta."
     }
   },
   "update": "Päivitä mahdollisuutesi",

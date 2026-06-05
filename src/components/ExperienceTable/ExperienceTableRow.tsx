@@ -70,18 +70,30 @@ const TuontiLahdeTag = ({
 }: {
   row: ExperienceTableRowData;
   tuontiLahdeLabels: Record<string, string>;
-}) =>
-  row.tuontiLahde && (
-    <div
-      className={cx('font-normal rounded-xl px-4 py-2 font-arial text-[0.875rem] leading-5 text-nowrap', {
-        'bg-secondary-3-light-1 text-black': row.tuontiLahde === 'CV_TUONTI',
-        'bg-secondary-2-dark text-white': row.tuontiLahde === 'KOSKI_TUONTI',
-        'bg-secondary-4-dark-2 text-white': row.tuontiLahde === 'TMT_TUONTI',
-      })}
-    >
-      {tuontiLahdeLabels[row.tuontiLahde]}
-    </div>
+}) => {
+  const { t } = useTranslation();
+  const tooltipTexts = {
+    CV_TUONTI: t('types.tuonti-lahde.CV_TUONTI_TOOLTIP'),
+    KOSKI_TUONTI: t('types.tuonti-lahde.KOSKI_TUONTI_TOOLTIP'),
+    TMT_TUONTI: t('types.tuonti-lahde.TMT_TUONTI_TOOLTIP'),
+  };
+
+  return (
+    row.tuontiLahde && (
+      <TooltipWrapper
+        tooltipContent={tooltipTexts[row.tuontiLahde]}
+        tooltipPlacement="top"
+        triggerClassName={cx('font-normal rounded-xl px-4 py-2 font-arial text-[0.875rem] leading-5 text-nowrap', {
+          'bg-secondary-3-light-1 text-black': row.tuontiLahde === 'CV_TUONTI',
+          'bg-secondary-2-dark text-white': row.tuontiLahde === 'KOSKI_TUONTI',
+          'bg-secondary-4-dark-2 text-white': row.tuontiLahde === 'TMT_TUONTI',
+        })}
+      >
+        <div>{tuontiLahdeLabels[row.tuontiLahde]}</div>
+      </TooltipWrapper>
+    )
   );
+};
 
 const Title = ({
   nested,
