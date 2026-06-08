@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 import {
+  ActionButton,
   Button,
   InputField,
   Modal,
@@ -18,7 +19,7 @@ import { JodArrowLeft, JodArrowRight, JodCheckmark, JodFlag, JodFlagFilled } fro
 
 import { client } from '@/api/client.ts';
 import type { components } from '@/api/schema';
-import { ActionButton, OpportunityCard } from '@/components';
+import { OpportunityCard } from '@/components';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';

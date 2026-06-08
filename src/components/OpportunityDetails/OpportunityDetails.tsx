@@ -3,11 +3,18 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 
-import { MainLayout, type MenuSection, PageNavigation, ScrollHeading, useMediaQueries } from '@jod/design-system';
+import {
+  ActionButton,
+  MainLayout,
+  type MenuSection,
+  PageNavigation,
+  ScrollHeading,
+  useMediaQueries,
+} from '@jod/design-system';
 import { JodPrint, JodShare } from '@jod/design-system/icons';
 
 import type { components } from '@/api/schema';
-import { ActionButton, AiInfo, Breadcrumb, FavoriteToggle } from '@/components';
+import { AiInfo, Breadcrumb, FavoriteToggle } from '@/components';
 import { createLoginDialogFooter } from '@/components/createLoginDialogFooter';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useModal } from '@/hooks/useModal';

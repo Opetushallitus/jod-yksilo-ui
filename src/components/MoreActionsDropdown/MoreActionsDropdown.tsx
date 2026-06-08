@@ -1,10 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { cx } from '@jod/design-system';
+import { ActionButton, cx } from '@jod/design-system';
 import { JodMore } from '@jod/design-system/icons';
 
-import { ActionButton } from '@/components/ActionButton/ActionButton';
 import { useInteractionMethod } from '@/hooks/useInteractionMethod';
 import { useMenuClickHandler } from '@/hooks/useMenuClickHandler';
 

@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 
+import { ActionButton } from '@jod/design-system';
 import { JodFavorite, JodFavoriteFilled } from '@jod/design-system/icons';
 
 import type { components } from '@/api/schema';
-import { ActionButton } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 

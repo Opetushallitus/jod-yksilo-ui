@@ -4,11 +4,10 @@ import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-import { Button, cx, EmptyState, Modal, tidyClasses, useMediaQueries } from '@jod/design-system';
+import { ActionButton, Button, cx, EmptyState, Modal, tidyClasses, useMediaQueries } from '@jod/design-system';
 import { JodCheckmark, JodRoute, JodSettings } from '@jod/design-system/icons';
 
 import { client } from '@/api/client';
-import { ActionButton } from '@/components';
 import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import PlanOpportunityCard from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOpportunityCard.tsx';
