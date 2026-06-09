@@ -273,7 +273,7 @@ export const GoalModal = ({ mode, tavoite, ...rest }: GoalModalProps) => {
                                   'flex',
                                   'items-center',
                                   'justify-center',
-                                  'bg-secondary-3',
+                                  'bg-primary-3',
                                   'text-primary-gray',
                                   'text-heading-4',
                                   'rounded',

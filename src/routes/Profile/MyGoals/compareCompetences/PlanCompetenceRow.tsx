@@ -57,9 +57,9 @@ export const PlanCompetenceRow = ({ row, className }: CompareCompetencesTableRow
       <td className="w-full py-3 pr-7 pl-5 text-heading-5 hyphens-auto first-letter:uppercase">
         {getLocalizedText(row.nimi)}
       </td>
-      <FoundOrEmptyCell key="profile" found={row.profiili} bgClass="bg-secondary-1" />
+      <FoundOrEmptyCell key="profile" found={row.profiili} bgClass="bg-primary-1" />
       {row.plans.map((hasOsaaminen, index) => (
-        <FoundOrEmptyCell key={`plan${index}`} found={hasOsaaminen} bgClass="bg-secondary-2" addBorder />
+        <FoundOrEmptyCell key={`plan${index}`} found={hasOsaaminen} bgClass="bg-primary-2" addBorder />
       ))}
     </tr>
   );

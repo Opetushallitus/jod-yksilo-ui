@@ -11,7 +11,7 @@ export const OpportunityDetail = ({ title, value, icon }: OpportunityDetailProps
         <span>{title}</span>
         {icon}
       </div>
-      <div className="text-heading-3 text-secondary-1-dark">{value}</div>
+      <div className="text-heading-3 text-primary-1-dark">{value}</div>
     </div>
   );
 };

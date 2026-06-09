@@ -267,7 +267,7 @@ const EducationHistory = () => {
 
         {koulutuksetThatNeedUserVerification.length > 0 && (
           <div className="mb-5 flex w-fit items-center rounded-md bg-bg-gray-2 px-5 py-3">
-            <JodError className="mr-3 text-secondary-3" />
+            <JodError className="mr-3 text-primary-3" />
             <span className="font-arial text-body-sm text-primary-gray">
               {t('education-history.check-identified-osaamiset')}
             </span>

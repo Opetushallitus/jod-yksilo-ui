@@ -35,7 +35,7 @@ const GoalsCard = ({ testId, className = '' }: { testId: string; className?: str
 
   return (
     <div
-      className={tc(`flex flex-col gap-3 rounded-lg bg-secondary-1-dark-2 p-6 text-white ${className}`)}
+      className={tc(`flex flex-col gap-3 rounded-lg bg-primary-1-dark-2 p-6 text-white ${className}`)}
       data-testid={testId}
     >
       <h2 className="text-heading-2-mobile sm:text-heading-2">{t('profile.favorites.goals-card.title')}</h2>

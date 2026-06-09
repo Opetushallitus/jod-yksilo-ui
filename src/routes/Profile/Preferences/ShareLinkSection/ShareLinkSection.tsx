@@ -79,7 +79,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
               const expired = date ? date < new Date() : false;
               const dateStr = date ? formatDate(date, 'medium') : null;
               const expirationText = expired ? (
-                <div className="text-button-sm text-alert-text-2">{t('preferences.share.link-has-expired')}</div>
+                <div className="text-button-sm text-alert-2">{t('preferences.share.link-has-expired')}</div>
               ) : (
                 <div className="text-button-sm">{t('preferences.share.valid-until', { date: dateStr })}</div>
               );

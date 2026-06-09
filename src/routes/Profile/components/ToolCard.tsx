@@ -36,7 +36,7 @@ export const ToolCard = ({
     : `/${i18n.language}/${t('slugs.tool.index')}`;
 
   return (
-    <div className={tc(`flex flex-col gap-5 rounded-lg bg-secondary-1-dark-2 p-6 ${className}`)}>
+    <div className={tc(`flex flex-col gap-5 rounded-lg bg-primary-1-dark-2 p-6 ${className}`)}>
       <h2 className="mr-2 text-heading-2-mobile text-white sm:text-heading-2">{title ?? t('tool.banner.title')}</h2>
       <p className="text-body-lg-mobile text-white sm:text-body-lg">{description ?? t('tool.banner.description')}</p>
       <div className="mt-4">

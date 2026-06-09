@@ -84,7 +84,7 @@ test('delete freetime activity item', async ({ page }) => {
   // Edit the first item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
   await page.getByRole('button', { name: 'Poista teema' }).click();
-  const confirmButton = page.locator('button.ds\\:bg-alert', { hasText: 'Poista' }).last();
+  const confirmButton = page.locator('button.ds\\:bg-alert-1', { hasText: 'Poista' }).last();
   await expect(confirmButton).toBeVisible();
 
   const [request] = await Promise.all([

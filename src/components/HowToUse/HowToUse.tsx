@@ -134,7 +134,7 @@ export function HowToUse() {
 
   return (
     <figure className="flex flex-col items-center justify-center">
-      <div className="rounded-2xl max-w-lg border-4 border-secondary-1-light-3 bg-white px-4 py-2 pb-4">
+      <div className="rounded-2xl max-w-lg border-4 border-primary-1-light-3 bg-white px-4 py-2 pb-4">
         <div className="flex flex-1 flex-col">
           <div className="mb-3 flex items-end gap-3">
             {osaamispolkuLogo}
@@ -142,7 +142,7 @@ export function HowToUse() {
               / {t('common:navigation.external.yksilo.label')}
             </div>
           </div>
-          <div className="font-semibold flex items-center justify-center rounded-md bg-secondary-1-dark p-5 text-body-sm text-white">
+          <div className="font-semibold flex items-center justify-center rounded-md bg-primary-1-dark p-5 text-body-sm text-white">
             <span className="mr-3">{t('how-to-use.find-opportunities-title')}</span>
             <Tooltip>
               <TooltipTrigger aria-label={t('common:more-info')} aria-describedby={findOpportunitiesId}>
@@ -173,7 +173,7 @@ export function HowToUse() {
           <div className="flex flex-col items-center">
             <BlueArrows />
             <div className="font-semibold flex flex-1 flex-row gap-3 text-center text-body-xs text-[0.625rem] text-primary-gray sm:text-left sm:text-[0.75rem]">
-              <div className="flex flex-1 flex-col items-center justify-between gap-2 rounded-md bg-secondary-1-light-2 p-4 sm:flex-row">
+              <div className="flex flex-1 flex-col items-center justify-between gap-2 rounded-md bg-primary-1-light-2 p-4 sm:flex-row">
                 {t('how-to-use.find-opportunities-without-login-title')}
                 <Tooltip>
                   <TooltipTrigger aria-label={t('common:more-info')} aria-describedby={findOpportunitiesWithoutLoginId}>
@@ -185,7 +185,7 @@ export function HowToUse() {
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <div className="flex flex-1 flex-col items-center justify-between gap-2 rounded-md bg-secondary-1-light-1 p-4 sm:flex-row">
+              <div className="flex flex-1 flex-col items-center justify-between gap-2 rounded-md bg-primary-1-light-1 p-4 sm:flex-row">
                 {t('how-to-use.create-profile-title')}
                 <Tooltip>
                   <TooltipTrigger aria-label={t('common:more-info')} aria-describedby={createProfileId}>
@@ -197,7 +197,7 @@ export function HowToUse() {
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <div className="flex flex-1 flex-col items-center justify-between gap-2 rounded-md bg-secondary-1-light-2 p-4 sm:flex-row">
+              <div className="flex flex-1 flex-col items-center justify-between gap-2 rounded-md bg-primary-1-light-2 p-4 sm:flex-row">
                 {t('how-to-use.find-with-words-title')}
                 <Tooltip>
                   <TooltipTrigger aria-label={t('common:more-info')} aria-describedby={findWithWordsId}>
@@ -216,11 +216,11 @@ export function HowToUse() {
       <div className="relative -top-5 flex flex-col items-center">
         <GrayArrows />
         <div className="font-semibold flex flex-row gap-3 text-center text-body-xs text-[0.625rem] text-primary-gray sm:text-[0.75rem]">
-          <div className="flex w-[120px] flex-1 flex-col items-center justify-center gap-3 rounded-md bg-primary-light-2 p-5 sm:w-[150px]">
+          <div className="flex w-[120px] flex-1 flex-col items-center justify-center gap-3 rounded-md bg-primary-5-light-2 p-5 sm:w-[150px]">
             {t('how-to-use.job-seeker-profile')}
             <div className="flex items-center">{tyomarkkinatoriLogo}</div>
           </div>
-          <div className="flex w-[120px] flex-1 flex-col items-center justify-center gap-3 rounded-md bg-primary-light-2 p-5 sm:w-[150px]">
+          <div className="flex w-[120px] flex-1 flex-col items-center justify-center gap-3 rounded-md bg-primary-5-light-2 p-5 sm:w-[150px]">
             {t('how-to-use.education-history')}
             <div className="flex items-center">{opintopolkuLogo}</div>
           </div>

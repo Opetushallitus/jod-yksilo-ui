@@ -118,7 +118,7 @@ const Home = () => {
           titleLevel={1}
           titleClassName="text-hero-mobile sm:text-hero focus:outline-0"
           content={t('home.hero-content')}
-          backgroundColor="var(--ds-color-secondary-1-dark-2)"
+          backgroundColor="var(--ds-color-primary-1-dark-2)"
         />
       </CardContainer>
       <CardContainer>
@@ -130,7 +130,7 @@ const Home = () => {
           title={t('home.card-1-title')}
           to={toolLink}
           textColor="var(--ds-color-primary-gray)"
-          backgroundColor="var(--ds-color-secondary-1-light-2)"
+          backgroundColor="var(--ds-color-primary-1-light-2)"
         />
         <HeroCard
           buttonLabel={isLoggedIn ? t('profile.banner.link-text.logged-in') : t('home.create-own-profile')}
@@ -140,7 +140,7 @@ const Home = () => {
           title={isLoggedIn ? t('profile.banner.title.logged-in') : t('home.card-2-title')}
           to={t('slugs.profile.index')}
           textColor="var(--ds-color-primary-gray)"
-          backgroundColor="var(--ds-color-secondary-1-light-1)"
+          backgroundColor="var(--ds-color-primary-1-light-1)"
         />
       </CardContainer>
 
@@ -182,7 +182,7 @@ const Home = () => {
             title={t('home.personal-guidance.title')}
             buttonLabel={t('home.personal-guidance.link-text')}
             to={t('common:navigation.extra.palveluhakemisto.url')}
-            backgroundColor="var(--ds-color-secondary-2-dark)"
+            backgroundColor="var(--ds-color-primary-2-dark)"
             linkComponent={getLinkTo(t('common:navigation.extra.palveluhakemisto.url'), {
               useAnchor: true,
               target: '_blank',

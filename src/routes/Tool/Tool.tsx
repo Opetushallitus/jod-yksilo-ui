@@ -259,7 +259,7 @@ const YourInfoGroup = ({ children }: { children: React.ReactNode }) => {
 };
 const YourInfoGroupSeparator = () => {
   const { lg } = useMediaQueries();
-  return lg ? null : <div className="mx-5 border-t-4 border-primary-light-2" />;
+  return lg ? null : <div className="mx-5 border-t-4 border-primary-5-light-2" />;
 };
 
 const YourInfo = () => {
@@ -300,7 +300,7 @@ const YourInfo = () => {
 
           <UpdateEhdotuksetAndTyomahdollisuudetButton
             id="tool-update-opportunities-button"
-            className={cx('rounded border-t-2', lg && 'border-primary-light-2', !lg && 'border-bg-gray')}
+            className={cx('rounded border-t-2', lg && 'border-primary-5-light-2', !lg && 'border-bg-gray')}
           />
         </YourInfoGroup>
 
@@ -316,7 +316,7 @@ const YourInfo = () => {
         <RateContent variant="kohtaanto" area="Kohtaanto työkalu" size="md" />
       </div>
 
-      <div className="flex flex-col gap-3 rounded-md bg-secondary-1-dark-2 px-5 py-6 text-white lg:mx-3">
+      <div className="flex flex-col gap-3 rounded-md bg-primary-1-dark-2 px-5 py-6 text-white lg:mx-3">
         <h2 className="text-heading-2-mobile sm:text-heading-2">
           {isLoggedIn ? t('profile.banner.title.logged-in') : t('profile.banner.title.unlogged')}
         </h2>

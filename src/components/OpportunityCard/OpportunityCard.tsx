@@ -301,10 +301,9 @@ const OpportunityCardHeader = ({
   const TitleTag = headingLevel || 'span';
   const { sm } = useMediaQueries();
 
-  const bgColorClassName =
-    mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'bg-secondary-2-dark' : 'bg-secondary-4-dark-2';
+  const bgColorClassName = mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'bg-primary-2-dark' : 'bg-primary-4-dark-2';
   const textColorClassName =
-    mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'text-secondary-2-dark' : 'text-secondary-4-dark-2';
+    mahdollisuusTyyppi === 'KOULUTUSMAHDOLLISUUS' ? 'text-primary-2-dark' : 'text-primary-4-dark-2';
 
   const titleContent = (
     <>

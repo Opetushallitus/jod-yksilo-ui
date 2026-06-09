@@ -22,7 +22,7 @@ const GuidanceCard = ({ testId, className = '' }: { testId: string; className?: 
 
   return (
     <div
-      className={tidyClasses(`flex flex-col gap-3 rounded-lg bg-secondary-1-dark-2 p-6 text-white ${className}`)}
+      className={tidyClasses(`flex flex-col gap-3 rounded-lg bg-primary-1-dark-2 p-6 text-white ${className}`)}
       data-testid={testId}
     >
       <h2 className="text-heading-2">{t('home.need-personal-guidance')}</h2>

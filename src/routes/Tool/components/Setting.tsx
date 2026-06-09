@@ -42,7 +42,7 @@ export const Setting = ({
   return (
     <li
       className={cx(`py-3 ${className}`, {
-        'border-t-2 border-primary-light-2': !hideTopBorder,
+        'border-t-2 border-primary-5-light-2': !hideTopBorder,
         'pl-3': sm,
       })}
       data-testid={testId ?? triggerId}

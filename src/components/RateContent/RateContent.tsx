@@ -169,7 +169,7 @@ export const RateContent = ({ variant, area, size }: RateContentProps) => {
         }
       }}
       size={size}
-      className={variant === 'ammatti' ? 'bg-secondary-1-dark-2!' : undefined}
+      className={variant === 'ammatti' ? 'bg-primary-1-dark-2!' : undefined}
       testId="rate-content"
     />
   );

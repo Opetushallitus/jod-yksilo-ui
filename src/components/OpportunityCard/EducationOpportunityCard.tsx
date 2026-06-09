@@ -44,7 +44,7 @@ export const EducationOpportunityCard = ({ kesto, yleisinKoulutusala, ...rest }:
                 </div>
               }
             >
-              <JodInfo size={18} className="text-secondary-5-light-1" />
+              <JodInfo size={18} className="text-primary-5-light-1" />
             </TooltipWrapper>
           }
         />
@@ -60,7 +60,7 @@ export const EducationOpportunityCard = ({ kesto, yleisinKoulutusala, ...rest }:
                 </div>
               }
             >
-              <JodInfo size={18} className="text-secondary-5-light-1" />
+              <JodInfo size={18} className="text-primary-5-light-1" />
             </TooltipWrapper>
           }
         />

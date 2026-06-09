@@ -79,7 +79,7 @@ test('delete workhistory item', async ({ page }) => {
   // Edit the first work history item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
   await page.getByRole('button', { name: 'Poista työpaikka' }).click();
-  const confirmButton = page.locator('button.ds\\:bg-alert', { hasText: 'Poista työpaikka' }).last();
+  const confirmButton = page.locator('button.ds\\:bg-alert-1', { hasText: 'Poista työpaikka' }).last();
   await expect(confirmButton).toBeVisible();
 
   const [request] = await Promise.all([

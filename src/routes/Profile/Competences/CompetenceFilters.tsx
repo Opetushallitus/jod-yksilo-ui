@@ -16,10 +16,10 @@ interface TitleCheckboxProps {
 
 const getFilterColorClassName = (type: keyof FiltersType) =>
   cx({
-    'bg-secondary-4': type === 'TOIMENKUVA',
-    'bg-secondary-2': type === 'KOULUTUS',
-    'bg-secondary-1': type === 'PATEVYYS',
-    'bg-secondary-5-light-1': type === 'MUU_OSAAMINEN',
+    'bg-primary-4': type === 'TOIMENKUVA',
+    'bg-primary-2': type === 'KOULUTUS',
+    'bg-primary-1': type === 'PATEVYYS',
+    'bg-primary-5-light-1': type === 'MUU_OSAAMINEN',
   });
 /**
  * This component is used as the top level filter title. It toggles all filters of a specific type.
