@@ -33,9 +33,9 @@ const PlanOpportunityCard = React.memo(
     const { otsikko, kuvaus } = mahdollisuus;
     const missingOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
 
-    const bgColorClassName = mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'bg-secondary-2-dark' : 'bg-secondary-4-dark-2';
+    const bgColorClassName = mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'bg-primary-2-dark' : 'bg-primary-4-dark-2';
     const textColorClassName =
-      mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'text-secondary-2-dark!' : 'text-secondary-4-dark-2!';
+      mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'text-primary-2-dark!' : 'text-primary-4-dark-2!';
 
     const fetchOsaamiset = () =>
       client

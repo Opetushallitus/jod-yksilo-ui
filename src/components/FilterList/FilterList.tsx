@@ -12,7 +12,7 @@ export const FilterList = ({
   title,
   collapsible = false,
   children,
-  className = 'bg-secondary-1-25',
+  className = 'bg-bg-gray-2',
   headingLevel,
 }: FilterListProps) => {
   const TitleTag = headingLevel ?? 'h2';

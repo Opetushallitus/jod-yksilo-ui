@@ -31,7 +31,7 @@ const BasicInfoDetail = ({ data, title }: { data?: string | number; title: strin
   data ? (
     <div className="flex flex-wrap">
       <dt className="after:mr-2 after:content-[':']">{title}</dt>
-      <dd className="text-secondary-1-dark-2">{`${data}`}</dd>
+      <dd className="text-primary-1-dark-2">{`${data}`}</dd>
     </div>
   ) : null;
 
@@ -136,7 +136,7 @@ const Cv = () => {
     />
   );
   const osaamispolkuBox = (
-    <div className="mx-5 flex flex-col gap-5 rounded-lg bg-secondary-1-dark-2 p-6 sm:mx-6 lg:mx-0 print:hidden">
+    <div className="mx-5 flex flex-col gap-5 rounded-lg bg-primary-1-dark-2 p-6 sm:mx-6 lg:mx-0 print:hidden">
       <div className="mr-2 text-heading-2 text-white">{t('common:osaamispolku')}</div>
       <p className="text-body-lg text-white">{t('cv.osaamispolku-description')}</p>
       <div className="mt-4">
@@ -213,7 +213,7 @@ const Cv = () => {
           />
           <div className="mb-6 flex flex-row rounded-md bg-bg-gray-2 p-5">
             <div className="shrink items-start pr-5">
-              <JodInfo className="text-secondary-1-dark-2" />
+              <JodInfo className="text-primary-1-dark-2" />
             </div>
             <dl className="flex flex-col flex-wrap text-heading-4-mobile sm:text-heading-4">
               <BasicInfoDetail data={personName} title={t('cv.basic-info.person')} />

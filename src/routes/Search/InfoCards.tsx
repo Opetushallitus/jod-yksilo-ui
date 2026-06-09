@@ -20,7 +20,7 @@ export const InfoCards = () => {
         content={isLoggedIn ? t('profile.banner.description.logged-in') : t('profile.banner.description.unlogged')}
         size="sm"
         buttonLabel={isLoggedIn ? t('profile.banner.link-text.logged-in') : t('profile.banner.link-text.unlogged')}
-        backgroundColor="var(--ds-color-secondary-1-dark)"
+        backgroundColor="var(--ds-color-primary-1-dark)"
         to={t('slugs.profile.index')}
         linkComponent={getLinkTo(
           isLoggedIn

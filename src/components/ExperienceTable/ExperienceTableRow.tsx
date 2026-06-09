@@ -84,9 +84,9 @@ const TuontiLahdeTag = ({
         tooltipContent={tooltipTexts[row.tuontiLahde]}
         tooltipPlacement="top"
         triggerClassName={cx('font-normal rounded-xl px-4 py-2 font-arial text-[0.875rem] leading-5 text-nowrap', {
-          'bg-secondary-3-light-1 text-black': row.tuontiLahde === 'CV_TUONTI',
-          'bg-secondary-2-dark text-white': row.tuontiLahde === 'KOSKI_TUONTI',
-          'bg-secondary-4-dark-2 text-white': row.tuontiLahde === 'TMT_TUONTI',
+          'bg-primary-3-light-1 text-black': row.tuontiLahde === 'CV_TUONTI',
+          'bg-primary-2-dark text-white': row.tuontiLahde === 'KOSKI_TUONTI',
+          'bg-primary-4-dark-2 text-white': row.tuontiLahde === 'TMT_TUONTI',
         })}
       >
         <div>{tuontiLahdeLabels[row.tuontiLahde]}</div>
@@ -244,7 +244,7 @@ export const ExperienceTableRow = ({
     return (
       <div className="flex items-center justify-start">
         <TooltipWrapper tooltipContent={t('competences-identify-failed')} tooltipPlacement="top">
-          <JodErrorTriangle className="text-alert" />
+          <JodErrorTriangle className="text-alert-1" />
         </TooltipWrapper>
       </div>
     );
@@ -273,7 +273,7 @@ export const ExperienceTableRow = ({
 
   const triggerClassName = React.useMemo(
     () =>
-      `cursor-pointer flex size-7 items-center justify-center rounded-full mr-2 sm:m-3 ${isOdd ? 'hover:bg-secondary-5-light-3 active:bg-secondary-5-light-3' : 'hover:bg-bg-gray-2 active:bg-bg-gray-2'}`,
+      `cursor-pointer flex size-7 items-center justify-center rounded-full mr-2 sm:m-3 ${isOdd ? 'hover:bg-primary-5-light-3 active:bg-primary-5-light-3' : 'hover:bg-bg-gray-2 active:bg-bg-gray-2'}`,
     [isOdd],
   );
 
@@ -370,7 +370,7 @@ export const ExperienceTableRow = ({
               tooltipPlacement="top"
             >
               <span>
-                <JodError className="text-secondary-3!" />
+                <JodError className="text-primary-3!" />
               </span>
             </TooltipWrapper>
           )}

@@ -85,7 +85,7 @@ export const OpportunityType = ({ mahdollisuusAlityyppi, showTypeTooltip }: Oppo
       {typeText}
       {showTypeTooltip && (
         <TooltipWrapper tooltipPlacement="top" tooltipContent={typeTooltip}>
-          <JodInfo size={18} className="text-secondary-5-light-1" />
+          <JodInfo size={18} className="text-primary-5-light-1" />
         </TooltipWrapper>
       )}
     </div>

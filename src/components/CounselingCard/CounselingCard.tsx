@@ -16,7 +16,7 @@ export const CounselingCard = () => {
   const link = links[i18n.language] || links.fi;
 
   return (
-    <div className="flex flex-col gap-3 rounded-lg bg-secondary-2-dark p-6 text-white">
+    <div className="flex flex-col gap-3 rounded-lg bg-primary-2-dark p-6 text-white">
       <h2 className="text-heading-2">{t('service-catalog.header')}</h2>
       <div className="flex flex-col gap-6">
         <p className="text-body-lg">{t('service-catalog.description')}</p>

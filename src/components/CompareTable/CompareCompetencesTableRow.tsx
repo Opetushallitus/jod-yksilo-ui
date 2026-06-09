@@ -48,7 +48,7 @@ export const CompareCompetencesTableRow = ({ row, className }: CompareCompetence
       <td className="justify-items-center pr-5">
         {row.profiili && (
           <>
-            <div role="img" aria-label={t('found')} className="size-4 rounded-full bg-secondary-1" />
+            <div role="img" aria-label={t('found')} className="size-4 rounded-full bg-primary-1" />
             <div aria-hidden className="hidden print:block">
               {t('found')}
             </div>

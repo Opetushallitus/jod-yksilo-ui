@@ -40,7 +40,7 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
   return (
     <div className="mb-5 flex scroll-m-11 flex-col gap-2" ref={scrollRef}>
       <form id={formId} className="flex items-center" onSubmit={onSubmit} noValidate>
-        <div className="flex w-full items-center rounded-md border border-border-form bg-white p-2 text-primary-gray">
+        <div className="border-border-form flex w-full items-center rounded-md border bg-white p-2 text-primary-gray">
           <input
             type="text"
             name="search"
@@ -76,7 +76,7 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
         </div>
       </form>
       {submitError && (
-        <div id={errorId} className="mt-2 block font-arial text-form-error text-alert-text-2" role="alert">
+        <div id={errorId} className="mt-2 block font-arial text-form-error text-alert-2" role="alert">
           {submitError}
         </div>
       )}
