@@ -13,7 +13,7 @@ import { CompetencesTour } from '../CompetencesTour';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
-import { AddOrEditPatevyysModal } from './modals/AddOrEditPatevyysModal';
+import { AddOrEditToimintoModal } from './modals/AddOrEditToimintoModal';
 import { getFreeTimeActivitiesTableRows, type VapaaAjanToiminto } from './utils';
 
 const FreeTimeActivities = () => {
@@ -44,17 +44,17 @@ const FreeTimeActivities = () => {
   };
 
   const onNestedRowClick = (row: ExperienceTableRowData) => {
-    const teema = vapaaAjanTeemat.find((vat) => vat.patevyydet.find((p) => p.id === row.key));
+    const teema = vapaaAjanTeemat.find((vat) => vat.toiminnot.find((p) => p.id === row.key));
     if (teema?.id) {
-      showModal(AddOrEditPatevyysModal, {
+      showModal(AddOrEditToimintoModal, {
         teemaId: teema.id,
-        patevyysId: row.key,
+        toimintoId: row.key,
       });
     }
   };
 
   const onAddNestedRowClick = (row: ExperienceTableRowData) => {
-    showModal(AddOrEditPatevyysModal, { teemaId: row.key });
+    showModal(AddOrEditToimintoModal, { teemaId: row.key });
   };
 
   return (
@@ -74,7 +74,7 @@ const FreeTimeActivities = () => {
       )}
       <title>{title}</title>
       <div className="px-5 sm:px-6">
-        <ProfileSectionTitle type="PATEVYYS" title={title} />
+        <ProfileSectionTitle type="TOIMINTO" title={title} />
         <p className="mb-7 text-body-lg-mobile sm:text-body-lg">{t('profile.free-time-activities.description')}</p>
         {rows.length === 0 ? (
           <div className="mt-6 mb-7" data-testid="free-time-empty-state">

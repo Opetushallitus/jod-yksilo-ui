@@ -27,32 +27,32 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** Get the vapaa-ajan teema (including patevyydet) */
+    /** Get the vapaa-ajan teema (including toiminnot) */
     get: operations['teemaGet'];
     /** Updates the vapaa-ajan teema (shallow update) */
     put: operations['teemaUpdate'];
     post?: never;
-    /** Delete the vapaa-ajan teema (including all patevyydet) */
+    /** Delete the vapaa-ajan teema (including all toiminnot) */
     delete: operations['teemaDelete'];
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/vapaa-ajan-teemat/{id}/patevyydet/{patevyysId}': {
+  '/api/profiili/vapaa-ajan-teemat/{id}/toiminnot/{toimintoId}': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    /** Gets a patevyys of the vapaa-ajan teema */
-    get: operations['patevyysGet'];
-    /** Updates a patevyys of the vapaa-ajan teema (including osaamiset) */
-    put: operations['patevyysUpdate'];
+    /** Gets a toiminto of the vapaa-ajan teema */
+    get: operations['toimintoGet'];
+    /** Updates a toiminto of the vapaa-ajan teema (including osaamiset) */
+    put: operations['toimintoUpdate'];
     post?: never;
-    /** Deletes a patevyys of the vapaa-ajan teema (including all osaamiset). If the teema becomes empty, it will also be deleted. */
-    delete: operations['patevyysDelete'];
+    /** Deletes a toiminto of the vapaa-ajan teema (including all osaamiset). If the teema becomes empty, it will also be deleted. */
+    delete: operations['toimintoDelete'];
     options?: never;
     head?: never;
     patch?: never;
@@ -245,7 +245,7 @@ export interface paths {
     /** Get all vapaa-ajan teemat of the user */
     get: operations['teemaFindAll'];
     put?: never;
-    /** Adds a new vapaa-ajan teema (and optionally patevyydet) */
+    /** Adds a new vapaa-ajan teema (and optionally toiminnot) */
     post: operations['teemaAdd'];
     delete?: never;
     options?: never;
@@ -253,18 +253,18 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/vapaa-ajan-teemat/{id}/patevyydet': {
+  '/api/profiili/vapaa-ajan-teemat/{id}/toiminnot': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    /** Gets all patevyydet of the vapaa-ajan teema */
-    get: operations['patevyysFindAll'];
+    /** Gets all toiminnot of the vapaa-ajan teema */
+    get: operations['toimintoFindAll'];
     put?: never;
-    /** Adds a new patevyys to the vapaa-ajan teema */
-    post: operations['patevyysAdd'];
+    /** Adds a new toiminto to the vapaa-ajan teema */
+    post: operations['toimintoAdd'];
     delete?: never;
     options?: never;
     head?: never;
@@ -884,7 +884,7 @@ export interface components {
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
     };
-    PatevyysDto: {
+    ToimintoDto: {
       /** Format: uuid */
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
@@ -972,7 +972,7 @@ export interface components {
       nimi: components['schemas']['LokalisoituTeksti'];
       /** @enum {string} */
       tuontiLahde?: 'CV_TUONTI' | 'KOSKI_TUONTI' | 'TMT_TUONTI';
-      patevyydet?: components['schemas']['PatevyysDto'][];
+      toiminnot?: components['schemas']['ToimintoDto'][];
     };
     IdDtoUUID: {
       /** Format: uuid */
@@ -1090,7 +1090,7 @@ export interface components {
     };
     LuoEhdotusKuvausDto: {
       /** @enum {string} */
-      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
+      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'TOIMINTO' | 'MUU_OSAAMINEN';
       /** Format: uuid */
       id: string;
     };
@@ -1263,17 +1263,6 @@ export interface components {
       vapaateksti?: components['schemas']['LokalisoituTeksti'];
       osaamiset?: string[];
     };
-    PatevyysExportDto: {
-      /** Format: uuid */
-      id?: string;
-      /** Format: date */
-      alkuPvm?: string;
-      /** Format: date */
-      loppuPvm?: string;
-      nimi?: components['schemas']['LokalisoituTeksti'];
-      kuvaus?: components['schemas']['LokalisoituTeksti'];
-      osaamiset?: string[];
-    };
     PolunSuunnitelmaExportDto: {
       /** Format: uuid */
       id?: string;
@@ -1302,9 +1291,20 @@ export interface components {
       nimi?: components['schemas']['LokalisoituTeksti'];
       /** @enum {string} */
       tuontiLahde?: 'CV_TUONTI' | 'KOSKI_TUONTI' | 'TMT_TUONTI';
-      patevyydet?: components['schemas']['PatevyysExportDto'][];
+      toiminnot?: components['schemas']['ToimintoExportDto'][];
     };
     ToimenkuvaExportDto: {
+      /** Format: uuid */
+      id?: string;
+      /** Format: date */
+      alkuPvm?: string;
+      /** Format: date */
+      loppuPvm?: string;
+      nimi?: components['schemas']['LokalisoituTeksti'];
+      kuvaus?: components['schemas']['LokalisoituTeksti'];
+      osaamiset?: string[];
+    };
+    ToimintoExportDto: {
       /** Format: uuid */
       id?: string;
       /** Format: date */
@@ -1366,7 +1366,7 @@ export interface components {
     };
     OsaamisenLahdeDto: {
       /** @enum {string} */
-      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
+      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'TOIMINTO' | 'MUU_OSAAMINEN';
       /** Format: uuid */
       id?: string;
     };
@@ -1635,13 +1635,13 @@ export interface operations {
       };
     };
   };
-  patevyysGet: {
+  toimintoGet: {
     parameters: {
       query?: never;
       header?: never;
       path: {
         id: string;
-        patevyysId: string;
+        toimintoId: string;
       };
       cookie?: never;
     };
@@ -1653,24 +1653,24 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['PatevyysDto'];
+          'application/json': components['schemas']['ToimintoDto'];
         };
       };
     };
   };
-  patevyysUpdate: {
+  toimintoUpdate: {
     parameters: {
       query?: never;
       header?: never;
       path: {
         id: string;
-        patevyysId: string;
+        toimintoId: string;
       };
       cookie?: never;
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['PatevyysDto'];
+        'application/json': components['schemas']['ToimintoDto'];
       };
     };
     responses: {
@@ -1683,13 +1683,13 @@ export interface operations {
       };
     };
   };
-  patevyysDelete: {
+  toimintoDelete: {
     parameters: {
       query?: never;
       header?: never;
       path: {
         id: string;
-        patevyysId: string;
+        toimintoId: string;
       };
       cookie?: never;
     };
@@ -2259,7 +2259,7 @@ export interface operations {
       };
     };
   };
-  patevyysFindAll: {
+  toimintoFindAll: {
     parameters: {
       query?: never;
       header?: never;
@@ -2276,12 +2276,12 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['PatevyysDto'][];
+          'application/json': components['schemas']['ToimintoDto'][];
         };
       };
     };
   };
-  patevyysAdd: {
+  toimintoAdd: {
     parameters: {
       query?: never;
       header?: never;
@@ -2292,7 +2292,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['PatevyysDto'];
+        'application/json': components['schemas']['ToimintoDto'];
       };
     };
     responses: {
@@ -3060,7 +3060,7 @@ export interface operations {
   yksilonOsaaminenFind: {
     parameters: {
       query?: {
-        tyyppi?: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
+        tyyppi?: 'TOIMENKUVA' | 'KOULUTUS' | 'TOIMINTO' | 'MUU_OSAAMINEN';
         lahdeId?: string;
       };
       header?: never;

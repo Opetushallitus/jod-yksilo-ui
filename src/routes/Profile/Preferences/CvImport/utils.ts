@@ -96,7 +96,7 @@ export const convertTulosToTableRows = (
 };
 
 /**
- * Converts TeemaDto array to ExperienceTableRowData with patevyydet as subrows
+ * Converts TeemaDto array to ExperienceTableRowData with toiminnot as subrows
  */
 const convertActivitiesToTableRows = (
   teemat: components['schemas']['TeemaDto'][],
@@ -110,12 +110,12 @@ const convertActivitiesToTableRows = (
   >,
 ): ExperienceTableRowData[] => {
   return teemat.map((teema) => {
-    const patevyydet = teema.patevyydet || [];
+    const toiminnot = teema.toiminnot || [];
     return {
       key: teema.id ?? crypto.randomUUID(),
       nimi: teema.nimi,
       tuontiLahde: teema.tuontiLahde,
-      subrows: patevyydet.map((p) => ({
+      subrows: toiminnot.map((p) => ({
         key: p.id ?? crypto.randomUUID(),
         nimi: p.nimi,
         kuvaus: p.kuvaus,
@@ -129,7 +129,7 @@ const convertActivitiesToTableRows = (
         })),
         checked: true,
       })),
-      osaamiset: patevyydet
+      osaamiset: toiminnot
         .flatMap((p) => p.osaamiset || [])
         .map((id) => ({
           ...(osaamisetMap

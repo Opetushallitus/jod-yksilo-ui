@@ -25,7 +25,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
   // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [step, setStep] = React.useState(1);
-  const selectedPatevyys = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
+  const selectedToiminto = React.useMemo(() => (step + (step % 2)) / 2 - 1, [step]);
   const revalidator = useRevalidator();
   const formId = React.useId();
   useEscHandler(onClose, formId);
@@ -46,7 +46,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
                 .nonempty(formErrorMessage.required())
                 .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
             ),
-          patevyydet: z
+          toiminnot: z
             .object({
               id: z.string().optional(),
               nimi: z
@@ -73,17 +73,17 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
             })
             .array(),
         })
-        .refine((data) => data.patevyydet.length > 0) // At least one patevyys
+        .refine((data) => data.toiminnot.length > 0) // At least one toiminto
         .refine(
           (data) =>
-            data.patevyydet.every((patevyys) => (patevyys.loppuPvm ? patevyys.alkuPvm <= patevyys.loppuPvm : true)),
-          formErrorMessage.dateRange(['patevyydet', `${selectedPatevyys}`, 'loppuPvm']),
+            data.toiminnot.every((toiminto) => (toiminto.loppuPvm ? toiminto.alkuPvm <= toiminto.loppuPvm : true)),
+          formErrorMessage.dateRange(['toiminnot', `${selectedToiminto}`, 'loppuPvm']),
         ), // alkuPvm <= loppuPvm
     ),
     defaultValues: async () => {
       return Promise.resolve({
         nimi: {},
-        patevyydet: [
+        toiminnot: [
           {
             nimi: {},
             kuvaus: {},
@@ -101,7 +101,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
 
   const { fields, append, remove } = useFieldArray({
     control: methods.control,
-    name: 'patevyydet',
+    name: 'toiminnot',
   });
 
   const onSubmit: FormSubmitHandler<FreeTimeActivitiesForm> = async ({ data }: { data: FreeTimeActivitiesForm }) => {
@@ -113,12 +113,12 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
       await client.POST('/api/profiili/vapaa-ajan-teemat', {
         body: {
           nimi: data.nimi,
-          patevyydet: data.patevyydet.map((patevyys) => ({
-            nimi: patevyys.nimi,
-            kuvaus: patevyys.kuvaus,
-            alkuPvm: patevyys.alkuPvm,
-            loppuPvm: patevyys.loppuPvm,
-            osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),
+          toiminnot: data.toiminnot.map((toiminto) => ({
+            nimi: toiminto.nimi,
+            kuvaus: toiminto.kuvaus,
+            alkuPvm: toiminto.alkuPvm,
+            loppuPvm: toiminto.loppuPvm,
+            osaamiset: toiminto.osaamiset.map((osaaminen) => osaaminen.id),
           })),
         },
       });
@@ -144,23 +144,23 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
   const isLastStep = React.useMemo(() => step === steps, [step, steps]);
 
   const id = methods.watch('id');
-  const patevyysId = methods.watch(`patevyydet.${selectedPatevyys}.id`);
+  const toimintoId = methods.watch(`toiminnot.${selectedToiminto}.id`);
 
   const headerText = React.useMemo(() => {
     if (isSummaryStep) {
       return t('free-time-activities.summary');
     }
     if (isCompetencesStep) {
-      return patevyysId ? t('profile.competences.edit') : t('free-time-activities.identify-proficiencies');
+      return toimintoId ? t('profile.competences.edit') : t('free-time-activities.identify-proficiencies');
     }
     if (isActivityStep) {
       if (isFirstStep) {
         return id ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-free-time-activity');
       }
-      return patevyysId ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-activity');
+      return toimintoId ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-activity');
     }
     return '';
-  }, [id, patevyysId, isFirstStep, isActivityStep, isCompetencesStep, isSummaryStep, t]);
+  }, [id, toimintoId, isFirstStep, isActivityStep, isCompetencesStep, isSummaryStep, t]);
 
   const onClickAddNewActivityHandler = React.useCallback(() => {
     if (isSubmitting) {
@@ -179,9 +179,9 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
     if (isSubmitting) {
       return;
     }
-    setStep(selectedPatevyys * 2);
-    remove(selectedPatevyys);
-  }, [isSubmitting, remove, selectedPatevyys]);
+    setStep(selectedToiminto * 2);
+    remove(selectedToiminto);
+  }, [isSubmitting, remove, selectedToiminto]);
 
   const onClickCancelHandler = React.useCallback(() => {
     if (isSubmitting) {
@@ -208,13 +208,13 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
     if (isActivityStep) {
       return (
         <div data-testid="free-time-step-activity">
-          <ActivityStep type={isFirstStep ? 'toiminta' : 'patevyys'} patevyys={selectedPatevyys} />
+          <ActivityStep type={isFirstStep ? 'toiminta' : 'toiminto'} toiminto={selectedToiminto} />
         </div>
       );
     } else if (isCompetencesStep) {
       return (
         <div data-testid="free-time-step-competences">
-          <CompetencesStep patevyys={selectedPatevyys} />
+          <CompetencesStep toiminto={selectedToiminto} />
         </div>
       );
     } else if (isSummaryStep) {
@@ -225,7 +225,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
       );
     }
     return <></>;
-  }, [isActivityStep, isCompetencesStep, isFirstStep, isSummaryStep, selectedPatevyys]);
+  }, [isActivityStep, isCompetencesStep, isFirstStep, isSummaryStep, selectedToiminto]);
 
   const topSlot = React.useMemo(
     () => <ModalHeader text={headerText} step={step} testId="free-time-step-title" />,
@@ -273,7 +273,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
                 size={sm ? 'lg' : 'sm'}
               />
             )}
-            {step !== steps && selectedPatevyys > 0 && (
+            {step !== steps && selectedToiminto > 0 && (
               <Button
                 onClick={onClickDeleteActivityHandler}
                 label={t('free-time-activities.delete-activity')}

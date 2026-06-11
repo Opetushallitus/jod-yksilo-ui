@@ -23,7 +23,7 @@
   "dependencies": {
     "@hookform/error-message": "2.0.1",
     "@hookform/resolvers": "5.4.0",
-    "@jod/design-system": "https://github.com/Opetushallitus/jod-design-system/releases/download/rel-20260612-1/jod-design-system-0.0.0.tgz",
+    "@jod/design-system": "https://github.com/Opetushallitus/jod-design-system/releases/download/rel-20260701-1/jod-design-system-0.0.0.tgz",
     "driver.js": "1.4.0",
     "i18next": "26.2.0",
     "i18next-http-backend": "4.0.0",

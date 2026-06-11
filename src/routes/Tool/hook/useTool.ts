@@ -11,7 +11,7 @@ export const PROFILE_TYPES: OsaaminenLahdeTyyppi[] = [
   'KIINNOSTUS',
   'TOIMENKUVA',
   'KOULUTUS',
-  'PATEVYYS',
+  'TOIMINTO',
   'MUU_OSAAMINEN',
 ] as const;
 

@@ -18,7 +18,7 @@ const getFilterColorClassName = (type: keyof FiltersType) =>
   cx({
     'bg-primary-4': type === 'TOIMENKUVA',
     'bg-primary-2': type === 'KOULUTUS',
-    'bg-primary-1': type === 'PATEVYYS',
+    'bg-primary-1': type === 'TOIMINTO',
     'bg-primary-5-light-1': type === 'MUU_OSAAMINEN',
   });
 /**
@@ -30,7 +30,7 @@ const TitleCheckbox = ({ type, checked, disabled, showColorIndicator, onChange }
   const labels: Record<keyof FiltersType, string> = {
     TOIMENKUVA: t('types.competence.TOIMENKUVA'),
     KOULUTUS: t('types.competence.KOULUTUS'),
-    PATEVYYS: t('types.competence.PATEVYYS'),
+    TOIMINTO: t('types.competence.TOIMINTO'),
     MUU_OSAAMINEN: t('types.competence.MUU_OSAAMINEN'),
     KIINNOSTUS: t('types.competence.KIINNOSTUS'),
   };
@@ -116,7 +116,7 @@ export const CompetenceFilters = ({
     () => ({
       TOIMENKUVA: t('types.competence.TOIMENKUVA'),
       KOULUTUS: t('types.competence.KOULUTUS'),
-      PATEVYYS: t('types.competence.PATEVYYS'),
+      TOIMINTO: t('types.competence.TOIMINTO'),
     }),
     [t],
   );

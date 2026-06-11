@@ -49,7 +49,7 @@ export interface ToolState {
   kiinnostukset: OsaaminenValue[];
   kiinnostuksetVapaateksti?: components['schemas']['LokalisoituTeksti'];
   kuvaukset: {
-    tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
+    tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'TOIMINTO' | 'MUU_OSAAMINEN';
     id: string;
     teksti: components['schemas']['LokalisoituTeksti'];
   }[];
@@ -88,7 +88,7 @@ export interface ToolState {
   setKiinnostuksetVapaateksti: (state?: components['schemas']['LokalisoituTeksti']) => void;
   setKuvaukset: (
     state?: {
-      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN';
+      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'TOIMINTO' | 'MUU_OSAAMINEN';
       id: string;
       teksti: components['schemas']['LokalisoituTeksti'];
     }[],

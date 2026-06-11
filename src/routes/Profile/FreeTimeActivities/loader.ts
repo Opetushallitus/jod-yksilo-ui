@@ -15,18 +15,18 @@ export default (async ({ request }) => {
   const vapaaAjanTeemat = data.map((vapaaAjanTeema) => ({
     ...vapaaAjanTeema,
     nimi: vapaaAjanTeema.nimi,
-    patevyydet: vapaaAjanTeema.patevyydet?.map((patevyys) => ({
-      ...patevyys,
-      nimi: patevyys.nimi,
-      kuvaus: patevyys.kuvaus,
+    toiminnot: vapaaAjanTeema.toiminnot?.map((toiminto) => ({
+      ...toiminto,
+      nimi: toiminto.nimi,
+      kuvaus: toiminto.kuvaus,
     })),
   }));
 
   const osaamisetMap = (
     await osaamiset.combine(
       vapaaAjanTeemat
-        .map((vapaaAjanTeema) => vapaaAjanTeema.patevyydet ?? [])
-        .map((patevyys) => patevyys.map((p) => p.osaamiset ?? []))
+        .map((vapaaAjanTeema) => vapaaAjanTeema.toiminnot ?? [])
+        .map((toiminto) => toiminto.map((p) => p.osaamiset ?? []))
         .flat()
         .flat() ?? [],
       (e) => e,

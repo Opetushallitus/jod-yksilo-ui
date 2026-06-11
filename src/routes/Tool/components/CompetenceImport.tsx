@@ -58,7 +58,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
   const {
     toimenkuvat,
     koulutukset,
-    patevyydet,
+    toiminnot,
     muutOsaamiset,
     muutOsaamisetVapaateksti,
     osaamiset,
@@ -73,7 +73,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
     () => ({
       toimenkuvat,
       koulutukset,
-      patevyydet,
+      toiminnot,
       muutOsaamiset,
       kiinnostukset,
       muutOsaamisetVapaateksti,
@@ -82,7 +82,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
     [
       toimenkuvat,
       koulutukset,
-      patevyydet,
+      toiminnot,
       muutOsaamiset,
       kiinnostukset,
       muutOsaamisetVapaateksti,
@@ -110,7 +110,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
         id: string[];
         tyyppi: CompetenceSourceType;
       }[],
-      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'PATEVYYS' | 'MUU_OSAAMINEN',
+      tyyppi: 'TOIMENKUVA' | 'KOULUTUS' | 'TOIMINTO' | 'MUU_OSAAMINEN',
       competenceDataGroup: CompetenceDataGroup[],
     ) =>
       mappedSelectedCompetences
@@ -143,7 +143,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
       const selectedFilters: FiltersType = selectedFiltersRef.current ?? {
         TOIMENKUVA: [],
         KOULUTUS: [],
-        PATEVYYS: [],
+        TOIMINTO: [],
         MUU_OSAAMINEN: [],
         KIINNOSTUS: [],
       };
@@ -161,7 +161,8 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
         setKuvaukset([
           ...importKuvauksetFromProfile(mappedSelectedCompetences, 'TOIMENKUVA', toimenkuvat),
           ...importKuvauksetFromProfile(mappedSelectedCompetences, 'KOULUTUS', koulutukset),
-          ...importKuvauksetFromProfile(mappedSelectedCompetences, 'PATEVYYS', patevyydet),
+          ...importKuvauksetFromProfile(mappedSelectedCompetences, 'TOIMINTO', toiminnot),
+          ...importKuvauksetFromProfile(mappedSelectedCompetences, 'MUU_OSAAMINEN', muutOsaamiset),
         ]);
       }
 
@@ -248,7 +249,8 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
     importKuvauksetFromProfile,
     toimenkuvat,
     koulutukset,
-    patevyydet,
+    muutOsaamiset,
+    toiminnot,
   ]);
 
   // Memoized render function for dialog content to avoid "component during render" lint warning
@@ -318,7 +320,7 @@ const StatefulCompetenceImportFilters = ({
     {
       TOIMENKUVA: [],
       KOULUTUS: [],
-      PATEVYYS: [],
+      TOIMINTO: [],
       MUU_OSAAMINEN: [],
       KIINNOSTUS: [],
     },

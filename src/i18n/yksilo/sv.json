@@ -415,11 +415,11 @@
   "my-competences": {
     "by-KOULUTUS": "Mina kunskaper från utbildningen",
     "by-MUU_OSAAMINEN": "Annan kompetens",
-    "by-PATEVYYS": "Mina kunskaper från fritidsverksamhet",
+    "by-TOIMINTO": "Mina kunskaper från fritidsverksamhet",
     "by-TOIMENKUVA": "Mina kunskaper från arbetsplatser",
     "missing-KOULUTUS": "Inga kunskaper. Lägg till utbildningar.\n",
     "missing-MUU_OSAAMINEN": "Inga kunskaper. Lägg till andra kompetenser.\n",
-    "missing-PATEVYYS": "Inga kunskaper. Lägg till fritidsverksamhet.\n",
+    "missing-TOIMINTO": "Inga kunskaper. Lägg till fritidsverksamhet.\n",
     "missing-TOIMENKUVA": "Inga kunskaper. Lägg till arbetsplatser.\n"
   },
   "my-competences-by-sources": "Mina kunskaper efter tema",
@@ -694,7 +694,7 @@
       "move-to-type": {
         "KOULUTUS": "Öppna mina utbildningar",
         "MUU_OSAAMINEN": "Öppna mina andra kompetenser",
-        "PATEVYYS": "Öppna min fritidsverksamhet",
+        "TOIMINTO": "Öppna min fritidsverksamhet",
         "TOIMENKUVA": "Öppna mina arbetsplatser\n"
       },
       "order-by": "Sortera",
@@ -1313,7 +1313,7 @@
       "KOULUTUS": "Utbildningar",
       "MUU_OSAAMINEN": "Mina övriga kunskaper",
       "OSAAMINEN": "Mina kunskaper",
-      "PATEVYYS": "Fritidsaktiviteter",
+      "TOIMINTO": "Fritidsaktiviteter",
       "TOIMENKUVA": "Arbetsplatser"
     },
     "tuonti-lahde": {

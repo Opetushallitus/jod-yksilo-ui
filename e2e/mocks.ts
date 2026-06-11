@@ -95,17 +95,17 @@ export async function mockSuggestedCompetences(
 type ProfileData =
   | {
       toimenkuvat: components['schemas']['ToimenkuvaDto'][];
-      patevyydet?: never;
+      toiminnot?: never;
       koulutukset?: never;
     }
   | {
       toimenkuvat?: never;
-      patevyydet: components['schemas']['PatevyysDto'][];
+      toiminnot: components['schemas']['ToimintoDto'][];
       koulutukset?: never;
     }
   | {
       toimenkuvat?: never;
-      patevyydet?: never;
+      toiminnot?: never;
       koulutukset: components['schemas']['KoulutusDto'][];
     };
 

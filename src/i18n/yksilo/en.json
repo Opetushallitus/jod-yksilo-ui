@@ -416,11 +416,11 @@
   "my-competences": {
     "by-KOULUTUS": "My competences accumulated from education",
     "by-MUU_OSAAMINEN": "Other competences",
-    "by-PATEVYYS": "My competence accumulated from recreational activities",
+    "by-TOIMINTO": "My competence accumulated from recreational activities",
     "by-TOIMENKUVA": "My competence accumulated from jobs",
     "missing-KOULUTUS": "No competences. Go to add education.",
     "missing-MUU_OSAAMINEN": "No competences. Go to add other competences.",
-    "missing-PATEVYYS": "No competences. Go to add recreational activities.",
+    "missing-TOIMINTO": "No competences. Go to add recreational activities.",
     "missing-TOIMENKUVA": "No competences. Go to add jobs."
   },
   "my-competences-by-sources": "My competences by theme",
@@ -695,7 +695,7 @@
       "move-to-type": {
         "KOULUTUS": "Go to educations",
         "MUU_OSAAMINEN": "Go to my other competences",
-        "PATEVYYS": "Go to my recreational activities",
+        "TOIMINTO": "Go to my recreational activities",
         "TOIMENKUVA": "Go to my jobs"
       },
       "order-by": "Sort",
@@ -1313,7 +1313,7 @@
       "KOULUTUS": "Education",
       "MUU_OSAAMINEN": "My other competences",
       "OSAAMINEN": "My competences",
-      "PATEVYYS": "Recreational activities",
+      "TOIMINTO": "Recreational activities",
       "TOIMENKUVA": "Workplaces"
     },
     "tuonti-lahde": {

@@ -9,7 +9,7 @@ import { getLocalizedText } from '@/utils';
 export interface FilterData {
   toimenkuvat: CompetenceDataGroup[];
   koulutukset: CompetenceDataGroup[];
-  patevyydet: CompetenceDataGroup[];
+  toiminnot: CompetenceDataGroup[];
   muutOsaamiset: Kokemus[];
   kiinnostukset?: components['schemas']['OsaaminenDto'][];
   muutOsaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'];
@@ -42,7 +42,7 @@ const initFilters = (selectedFilters: FiltersType, data: FilterData): FiltersTyp
     muutOsaamisetVapaateksti,
     kiinnostuksetVapaateksti,
     koulutukset,
-    patevyydet,
+    toiminnot,
   } = data;
 
   const localizedMuutOsaamisetVapaateksti = getLocalizedText(muutOsaamisetVapaateksti);
@@ -51,7 +51,7 @@ const initFilters = (selectedFilters: FiltersType, data: FilterData): FiltersTyp
   const initialFilters: FiltersType = {
     TOIMENKUVA: toimenkuvat.map(mapCompetenceDataGroupToFilter(selectedFilters, 'TOIMENKUVA')),
     KOULUTUS: koulutukset.map(mapCompetenceDataGroupToFilter(selectedFilters, 'KOULUTUS')),
-    PATEVYYS: patevyydet.map(mapCompetenceDataGroupToFilter(selectedFilters, 'PATEVYYS')),
+    TOIMINTO: toiminnot.map(mapCompetenceDataGroupToFilter(selectedFilters, 'TOIMINTO')),
     MUU_OSAAMINEN: [
       ...muutOsaamiset.map(mapExperienceToFilter(selectedFilters)),
       ...(localizedMuutOsaamisetVapaateksti.length > 0

@@ -123,7 +123,7 @@ export const freetimeActivities = [
     nimi: {
       fi: 'Testaaminen',
     },
-    patevyydet: [
+    toiminnot: [
       {
         id: 'f873c947-9531-4249-9c4c-fd57faec6d92',
         nimi: {
@@ -143,7 +143,7 @@ export const freetimeActivities = [
 
 export const freetimeActivityItem = {
   nimi: { fi: 'Testaaminen' },
-  patevyydet: [
+  toiminnot: [
     {
       nimi: { fi: 'Uima-altaan testaus' },
       kuvaus: {

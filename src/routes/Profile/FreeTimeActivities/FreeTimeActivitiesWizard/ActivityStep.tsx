@@ -12,11 +12,11 @@ import { isFeatureEnabled } from '@/utils/features';
 import type { FreeTimeActivitiesForm } from './utils';
 
 interface ActivityStepProps {
-  type: 'toiminta' | 'patevyys';
-  patevyys: number;
+  type: 'toiminta' | 'toiminto';
+  toiminto: number;
 }
 
-const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
+const ActivityStep = ({ type, toiminto }: ActivityStepProps) => {
   const {
     t,
     i18n: { language },
@@ -29,8 +29,8 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
     formState: { errors, touchedFields },
   } = useFormContext<FreeTimeActivitiesForm>();
   const datePickerTranslations = useDatePickerTranslations();
-  const alkuPvm = watch(`patevyydet.${patevyys}.alkuPvm`);
-  const loppuPvm = watch(`patevyydet.${patevyys}.loppuPvm`);
+  const alkuPvm = watch(`toiminnot.${toiminto}.alkuPvm`);
+  const loppuPvm = watch(`toiminnot.${toiminto}.loppuPvm`);
   React.useEffect(() => {
     if (alkuPvm || loppuPvm) {
       void trigger();
@@ -57,12 +57,12 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
       <div className="mb-6" data-testid="free-time-activity-name-field">
         <InputField
           label={t('free-time-activities.name-of-free-time-activity')}
-          {...register(`patevyydet.${patevyys}.nimi.${language}` as const)}
+          {...register(`toiminnot.${toiminto}.nimi.${language}` as const)}
           placeholder={t('profile.free-time-activities.modals.name-of-free-time-activity-placeholder')}
           requiredText={t('common:required')}
           testId="free-time-activities-activity-input"
         />
-        <FormError name={`patevyydet.${patevyys}.nimi.${language}`} errors={errors} />
+        <FormError name={`toiminnot.${toiminto}.nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-4">
         <div className="w-full sm:max-w-input-short">
@@ -74,7 +74,7 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
                 {...field}
                 onBlur={() => {
                   onBlur();
-                  void trigger(`patevyydet.${patevyys}.loppuPvm`);
+                  void trigger(`toiminnot.${toiminto}.loppuPvm`);
                 }}
                 placeholder={t('date-placeholder')}
                 requiredText={t('common:required')}
@@ -82,13 +82,9 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
                 testId="free-time-activities-start-date"
               />
             )}
-            name={`patevyydet.${patevyys}.alkuPvm`}
+            name={`toiminnot.${toiminto}.alkuPvm`}
           />
-          <TouchedFormError
-            touchedFields={touchedFields}
-            fieldName={`patevyydet.${patevyys}.alkuPvm`}
-            errors={errors}
-          />
+          <TouchedFormError touchedFields={touchedFields} fieldName={`toiminnot.${toiminto}.alkuPvm`} errors={errors} />
         </div>
         <div className="w-full sm:max-w-input-short">
           <Controller
@@ -102,15 +98,15 @@ const ActivityStep = ({ type, patevyys }: ActivityStepProps) => {
                 testId="free-time-activities-end-date"
               />
             )}
-            name={`patevyydet.${patevyys}.loppuPvm`}
+            name={`toiminnot.${toiminto}.loppuPvm`}
           />
-          <FormError name={`patevyydet.${patevyys}.loppuPvm`} errors={errors} />
+          <FormError name={`toiminnot.${toiminto}.loppuPvm`} errors={errors} />
         </div>
       </div>
       {isFeatureEnabled('KOHTAANTO_KUVAUKSET') && (
         <Textarea
           label={t('profile.free-form-input.label')}
-          {...register(`patevyydet.${patevyys}.kuvaus.${language}` as const)}
+          {...register(`toiminnot.${toiminto}.kuvaus.${language}` as const)}
           maxLength={LIMITS.TEXTAREA}
         />
       )}

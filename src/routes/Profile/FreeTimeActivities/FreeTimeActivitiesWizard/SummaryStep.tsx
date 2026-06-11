@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { osaamiset } from '@/api/osaamiset';
 import { ExperienceTable, type ExperienceTableRowData } from '@/components';
 
-import { type Patevyys, getFreeTimeActivitiesTableRows } from '../utils';
+import { type Toiminto, getFreeTimeActivitiesTableRows } from '../utils';
 import type { FreeTimeActivitiesForm } from './utils';
 
 const SummaryStep = () => {
@@ -17,8 +17,8 @@ const SummaryStep = () => {
     const fetchRows = async () => {
       const freeTimeActivity = watch();
 
-      const uris = freeTimeActivity.patevyydet.flatMap((patevyys) =>
-        patevyys.osaamiset.map((osaaminen) => osaaminen.id),
+      const uris = freeTimeActivity.toiminnot.flatMap((toiminto) =>
+        toiminto.osaamiset.map((osaaminen) => osaaminen.id),
       );
       const osaamisetData = await osaamiset.find(uris);
       const osaamisetMap: Record<string, { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> }> =
@@ -35,14 +35,14 @@ const SummaryStep = () => {
           [
             {
               nimi: freeTimeActivity.nimi,
-              patevyydet: freeTimeActivity.patevyydet.map(
-                (patevyys) =>
+              toiminnot: freeTimeActivity.toiminnot.map(
+                (toiminto) =>
                   ({
-                    nimi: patevyys.nimi,
-                    alkuPvm: patevyys.alkuPvm,
-                    loppuPvm: patevyys.loppuPvm,
-                    osaamiset: patevyys.osaamiset.map((osaaminen) => osaaminen.id),
-                  }) as Patevyys,
+                    nimi: toiminto.nimi,
+                    alkuPvm: toiminto.alkuPvm,
+                    loppuPvm: toiminto.loppuPvm,
+                    osaamiset: toiminto.osaamiset.map((osaaminen) => osaaminen.id),
+                  }) as Toiminto,
               ),
             },
           ],

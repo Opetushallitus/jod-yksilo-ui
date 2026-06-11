@@ -23,7 +23,7 @@ test.beforeEach(async ({ page }) => {
   await mockSelectedCompetences(page, educationCompetences);
   await mockProfileWizard(page, 'koulutuskokonaisuudet', educationHistory);
 
-  await page.goto('/yksilo/fi/osaamisprofiili/osaamiset/koulutukseni');
+  await page.goto('/yksilo/fi/osaamisprofiili/osaamiset/koulutukset');
   await page.getByText('Hyväksy kaikki').click();
 });
 

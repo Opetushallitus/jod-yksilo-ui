@@ -18,7 +18,7 @@ export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType;
   const iconMap: Record<ProfileSectionType, React.ReactNode> = {
     TOIMENKUVA: <JodWork />,
     KOULUTUS: <JodSkills />,
-    PATEVYYS: <JodInterests />,
+    TOIMINTO: <JodInterests />,
     MUU_OSAAMINEN: <JodOther />,
     KIINNOSTUS: <JodFavs />,
     SUOSIKKI: <JodFavorite />,
@@ -30,7 +30,7 @@ export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType;
   const iconBg = cx({
     'bg-primary-4-dark': type === 'TOIMENKUVA',
     'bg-primary-2-dark': type === 'KOULUTUS',
-    'bg-primary-1-dark': type === 'PATEVYYS',
+    'bg-primary-1-dark': type === 'TOIMINTO',
     'bg-secondary-gray': type === 'MUU_OSAAMINEN',
     'bg-primary-3': type === 'KIINNOSTUS',
     'bg-primary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'TAVOITTEENI', 'ASETUKSENI'].includes(type),

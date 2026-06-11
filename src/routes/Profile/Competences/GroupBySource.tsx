@@ -43,7 +43,7 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
         language,
         t,
       ).to,
-      PATEVYYS: generateProfileLink(
+      TOIMINTO: generateProfileLink(
         [competencesSlug, t('slugs.profile.free-time-activities')],
         profileLinkData,
         language,
@@ -63,7 +63,7 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
   const linkLabels: Record<CompetenceSourceType, string> = {
     TOIMENKUVA: t('profile.competences.move-to-type.TOIMENKUVA'),
     KOULUTUS: t('profile.competences.move-to-type.KOULUTUS'),
-    PATEVYYS: t('profile.competences.move-to-type.PATEVYYS'),
+    TOIMINTO: t('profile.competences.move-to-type.TOIMINTO'),
     MUU_OSAAMINEN: t('profile.competences.move-to-type.MUU_OSAAMINEN'),
     KIINNOSTUS: '',
   };
@@ -71,7 +71,7 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
   const accordionLabels: Record<CompetenceSourceType, string> = {
     TOIMENKUVA: t('my-competences.by-TOIMENKUVA'),
     KOULUTUS: t('my-competences.by-KOULUTUS'),
-    PATEVYYS: t('my-competences.by-PATEVYYS'),
+    TOIMINTO: t('my-competences.by-TOIMINTO'),
     MUU_OSAAMINEN: t('my-competences.by-MUU_OSAAMINEN'),
     KIINNOSTUS: '',
   };
@@ -79,7 +79,7 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
   const emptyStateLabels: Record<CompetenceSourceType, string> = {
     TOIMENKUVA: t('my-competences.missing-TOIMENKUVA'),
     KOULUTUS: t('my-competences.missing-KOULUTUS'),
-    PATEVYYS: t('my-competences.missing-PATEVYYS'),
+    TOIMINTO: t('my-competences.missing-TOIMINTO'),
     MUU_OSAAMINEN: t('my-competences.missing-MUU_OSAAMINEN'),
     KIINNOSTUS: '',
   };

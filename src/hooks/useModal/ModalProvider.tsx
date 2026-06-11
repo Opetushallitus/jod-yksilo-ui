@@ -48,7 +48,7 @@ const updateModalModes = (updated: ModalStackInternal<unknown>[]) => {
 
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const [modals, setModals] = React.useState<ModalStackInternal<any>[]>([]);
-  const timeoutIdsRef = React.useRef<Set<NodeJS.Timeout>>(new Set());
+  const timeoutIdsRef = React.useRef<Set<ReturnType<typeof setTimeout>>>(new Set());
 
   const showModal = React.useCallback(
     <P extends object>(Component: ModalComponentType<P>, props?: Omit<Partial<P>, 'isOpen'>) => {
