@@ -84,8 +84,8 @@ const loader = (async ({ request, params }) => {
     const vapaaAikaOsaamisetMap = arrayToIdMap(
       await osaamisetService.combine(
         data.teemat
-          .map((teema) => teema.patevyydet ?? [])
-          .flatMap((patevyys) => patevyys.flatMap((p) => p.osaamiset ?? [])),
+          .map((teema) => teema.toiminnot ?? [])
+          .flatMap((toiminto) => toiminto.flatMap((t) => t.osaamiset ?? [])),
         (key) => key,
         osaaminenCombiner,
         request.signal,
@@ -93,9 +93,9 @@ const loader = (async ({ request, params }) => {
     );
     const teemat = data.teemat.map((teema) => ({
       ...teema,
-      patevyydet: (teema.patevyydet ?? []).map((patevyys) => ({
-        ...patevyys,
-        osaamiset: patevyys.osaamiset ?? [],
+      toiminnot: (teema.toiminnot ?? []).map((toiminto) => ({
+        ...toiminto,
+        osaamiset: toiminto.osaamiset ?? [],
       })),
     }));
     teematTableRows.push(...getFreeTimeActivitiesTableRows(teemat, vapaaAikaOsaamisetMap));

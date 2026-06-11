@@ -23,7 +23,7 @@ test.beforeEach(async ({ page }) => {
   await mockSelectedCompetences(page, freetimeCompetences);
   await mockProfileWizard(page, 'vapaa-ajan-teemat', freetimeActivities);
 
-  await page.goto('/yksilo/fi/osaamisprofiili/osaamiset/vapaa-ajan-teemat');
+  await page.goto('/yksilo/fi/osaamisprofiili/osaamiset/vapaa-ajan-toiminnot');
   await page.getByText('Hyväksy kaikki').click();
 });
 

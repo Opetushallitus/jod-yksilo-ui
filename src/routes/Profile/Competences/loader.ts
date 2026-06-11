@@ -10,7 +10,7 @@ export interface CompetenceDataGroup {
   nimi: components['schemas']['LokalisoituTeksti'];
   data?:
     | components['schemas']['ToimenkuvaDto'][]
-    | components['schemas']['PatevyysDto'][]
+    | components['schemas']['ToimintoDto'][]
     | components['schemas']['KoulutusDto'][];
 }
 
@@ -18,7 +18,7 @@ export interface CompetencesLoaderData {
   osaamiset: components['schemas']['YksilonOsaaminenDto'][];
   toimenkuvat: CompetenceDataGroup[];
   koulutukset: CompetenceDataGroup[];
-  patevyydet: CompetenceDataGroup[];
+  toiminnot: CompetenceDataGroup[];
   muutOsaamiset: components['schemas']['OsaaminenDto'][];
   muutOsaamisetVapaateksti?: components['schemas']['LokalisoituTeksti'];
 }
@@ -27,7 +27,7 @@ export interface CompetencesLoaderData {
   Each main category (työpaikka, koulu, vapaa-ajan toiminto) has its own array of competences:
     - tyopaikat -> toimenkuvat
     - koulut -> koulutukset
-    - vapaaAjanTeemat -> patevyydet
+    - vapaaAjanTeemat -> toiminnot
 
   Each item in competences will be compared against "osaamiset" response,
   which contains all the competences for the user and nonmatching are filtered out.
@@ -74,11 +74,11 @@ export const getCompetenceData = async (request: Request, context: YksiloLoaderC
         data: filterItems(osaaminenLahdeIds, tyopaikka.toimenkuvat),
       })) ?? [];
 
-    const patevyydet =
+    const toiminnot =
       vapaaAjanTeematRes?.data?.map((teema) => ({
         id: teema.id,
         nimi: teema.nimi,
-        data: filterItems(osaaminenLahdeIds, teema.patevyydet),
+        data: filterItems(osaaminenLahdeIds, teema.toiminnot),
       })) ?? [];
 
     const koulutukset =
@@ -92,7 +92,7 @@ export const getCompetenceData = async (request: Request, context: YksiloLoaderC
       osaamiset: osaamisetRes?.data ?? [],
       toimenkuvat,
       koulutukset,
-      patevyydet,
+      toiminnot,
       muutOsaamiset,
       muutOsaamisetVapaateksti,
     } as CompetencesLoaderData;
@@ -101,7 +101,7 @@ export const getCompetenceData = async (request: Request, context: YksiloLoaderC
       osaamiset: [],
       toimenkuvat: [],
       koulutukset: [],
-      patevyydet: [],
+      toiminnot: [],
       muutOsaamiset: [],
     } as CompetencesLoaderData;
   }

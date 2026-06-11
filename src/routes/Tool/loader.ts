@@ -38,7 +38,7 @@ export default (async ({ request, context }): Promise<ToolLoaderData> => {
     osaamiset: [],
     toimenkuvat: [],
     koulutukset: [],
-    patevyydet: [],
+    toiminnot: [],
     muutOsaamiset: [],
     kiinnostukset: [],
     filters: {},

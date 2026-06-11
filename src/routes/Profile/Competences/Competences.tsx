@@ -21,7 +21,7 @@ import { ToolCard } from '../components/ToolCard';
 import { type CompetenceSourceType, GROUP_BY_ALPHABET, GROUP_BY_SOURCE } from './constants';
 
 const Competences = () => {
-  const { osaamiset, toimenkuvat, koulutukset, patevyydet, muutOsaamiset, muutOsaamisetVapaateksti } = useLoaderData();
+  const { osaamiset, toimenkuvat, koulutukset, toiminnot, muutOsaamiset, muutOsaamisetVapaateksti } = useLoaderData();
   const {
     t,
     i18n: { language },
@@ -37,10 +37,10 @@ const Competences = () => {
     {
       TOIMENKUVA: [],
       KOULUTUS: [],
-      PATEVYYS: [],
+      TOIMINTO: [],
       MUU_OSAAMINEN: [],
     },
-    { toimenkuvat, koulutukset, patevyydet, muutOsaamiset, muutOsaamisetVapaateksti },
+    { toimenkuvat, koulutukset, toiminnot, muutOsaamiset, muutOsaamisetVapaateksti },
   );
 
   // Determines if osaamiset from a specific source should be visible. Id is the id of the source (eg. koulutus or toimenkuva).

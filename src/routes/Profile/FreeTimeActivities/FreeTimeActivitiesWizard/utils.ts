@@ -3,7 +3,7 @@ import { components } from '@/api/schema';
 export interface FreeTimeActivitiesForm {
   id?: string;
   nimi: components['schemas']['LokalisoituTeksti'];
-  patevyydet: {
+  toiminnot: {
     id?: string;
     nimi: components['schemas']['LokalisoituTeksti'];
     kuvaus: components['schemas']['LokalisoituTeksti'];

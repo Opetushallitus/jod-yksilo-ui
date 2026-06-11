@@ -18,7 +18,7 @@ test.beforeEach(async ({ page }) => {
   await mockSuggestedCompetences(page, suggestedCompetences, competences);
   await mockProfileWizard(page, 'tyopaikat', workHistory);
 
-  await page.goto('/yksilo/fi/osaamisprofiili/osaamiset/tyopaikkani');
+  await page.goto('/yksilo/fi/osaamisprofiili/osaamiset/tyopaikat');
   await page.getByText('Hyväksy kaikki').click();
 });
 

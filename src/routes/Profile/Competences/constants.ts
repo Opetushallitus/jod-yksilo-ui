@@ -9,12 +9,12 @@ export interface FilterData {
   checked: boolean;
 }
 
-export const FILTERS_ORDER = ['TOIMENKUVA', 'KOULUTUS', 'PATEVYYS', 'MUU_OSAAMINEN', 'KIINNOSTUS'] as const;
+export const FILTERS_ORDER = ['TOIMENKUVA', 'KOULUTUS', 'TOIMINTO', 'MUU_OSAAMINEN', 'KIINNOSTUS'] as const;
 export type CompetenceSourceType = (typeof FILTERS_ORDER)[number];
 export interface FiltersType {
   TOIMENKUVA: FilterData[];
   KOULUTUS: FilterData[];
-  PATEVYYS: FilterData[];
+  TOIMINTO: FilterData[];
   MUU_OSAAMINEN: FilterData[];
   KIINNOSTUS?: FilterData[];
 }

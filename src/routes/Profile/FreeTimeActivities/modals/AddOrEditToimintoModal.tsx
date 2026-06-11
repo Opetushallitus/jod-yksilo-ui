@@ -27,12 +27,12 @@ import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 import { isFeatureEnabled } from '@/utils/features';
 
-interface AddOrEditPatevyysModalProps extends ModalComponentProps {
+interface AddOrEditToimintoModalProps extends ModalComponentProps {
   teemaId: string;
-  patevyysId?: string;
+  toimintoId?: string;
 }
 
-interface PatevyysForm {
+interface ToimintoForm {
   id: string;
   nimi: components['schemas']['LokalisoituTeksti'];
   kuvaus: components['schemas']['LokalisoituTeksti'];
@@ -45,7 +45,7 @@ interface PatevyysForm {
   }[];
 }
 
-const PATEVYYDET_API_PATH = '/api/profiili/vapaa-ajan-teemat/{id}/patevyydet'; // /{patevyysId}
+const TOIMINNOT_API_PATH = '/api/profiili/vapaa-ajan-teemat/{id}/toiminnot'; // /{toimintoId}
 
 const MainStep = () => {
   const {
@@ -58,7 +58,7 @@ const MainStep = () => {
     watch,
     trigger,
     formState: { errors, touchedFields },
-  } = useFormContext<PatevyysForm>();
+  } = useFormContext<ToimintoForm>();
 
   const datePickerTranslations = useDatePickerTranslations();
 
@@ -131,7 +131,7 @@ const MainStep = () => {
 
 const OsaamisetStep = () => {
   const { t } = useTranslation();
-  const { control } = useFormContext<PatevyysForm>();
+  const { control } = useFormContext<ToimintoForm>();
   return (
     <>
       <p className="mb-7 max-w-modal-content font-arial text-body-sm sm:mb-9">
@@ -144,7 +144,7 @@ const OsaamisetStep = () => {
           <OsaamisSuosittelija
             onChange={onChange}
             value={value}
-            sourceType="PATEVYYS"
+            sourceType="TOIMINTO"
             placeholder={t('profile.free-time-activities.modals.competences-placeholder')}
             textAreaClassName="max-w-modal-content!"
             tagHeadingLevel="h3"
@@ -155,7 +155,7 @@ const OsaamisetStep = () => {
   );
 };
 
-export const AddOrEditPatevyysModal = ({ onClose, teemaId: id, patevyysId, ...rest }: AddOrEditPatevyysModalProps) => {
+export const AddOrEditToimintoModal = ({ onClose, teemaId: id, toimintoId, ...rest }: AddOrEditToimintoModalProps) => {
   const { t } = useTranslation();
   // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -187,7 +187,7 @@ export const AddOrEditPatevyysModal = ({ onClose, teemaId: id, patevyysId, ...re
   const isLastStep = step === stepComponents.length - 1;
   const isFirstStep = step === 0;
 
-  const methods = useForm<PatevyysForm>({
+  const methods = useForm<ToimintoForm>({
     mode: 'onBlur',
     resolver: zodResolver(
       z
@@ -216,24 +216,24 @@ export const AddOrEditPatevyysModal = ({ onClose, teemaId: id, patevyysId, ...re
         .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm, formErrorMessage.dateRange(['loppuPvm'])),
     ),
     defaultValues: async () => {
-      if (patevyysId) {
-        const [{ data: osaamiset }, { data: patevyys }] = await Promise.all([
+      if (toimintoId) {
+        const [{ data: osaamiset }, { data: toiminto }] = await Promise.all([
           client.GET('/api/profiili/osaamiset'),
-          client.GET(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
+          client.GET(`${TOIMINNOT_API_PATH}/{toimintoId}`, {
             params: {
-              path: { id, patevyysId },
+              path: { id, toimintoId },
             },
           }),
         ]);
 
         return {
-          id: patevyys?.id ?? '',
-          nimi: patevyys?.nimi ?? {},
-          kuvaus: patevyys?.kuvaus ?? {},
-          alkuPvm: patevyys?.alkuPvm ?? '',
-          loppuPvm: patevyys?.loppuPvm ?? '',
+          id: toiminto?.id ?? '',
+          nimi: toiminto?.nimi ?? {},
+          kuvaus: toiminto?.kuvaus ?? {},
+          alkuPvm: toiminto?.alkuPvm ?? '',
+          loppuPvm: toiminto?.loppuPvm ?? '',
           osaamiset:
-            patevyys?.osaamiset?.map((osaaminenId) => ({
+            toiminto?.osaamiset?.map((osaaminenId) => ({
               id: osaaminenId,
               nimi: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.nimi ?? {},
               kuvaus: osaamiset?.find((o) => o.osaaminen?.uri === osaaminenId)?.osaaminen?.kuvaus ?? {},
@@ -256,18 +256,18 @@ export const AddOrEditPatevyysModal = ({ onClose, teemaId: id, patevyysId, ...re
     control: methods.control,
   });
 
-  const onSubmit: FormSubmitHandler<PatevyysForm> = async ({ data }: { data: PatevyysForm }) => {
+  const onSubmit: FormSubmitHandler<ToimintoForm> = async ({ data }: { data: ToimintoForm }) => {
     if (isSubmitting) {
       return;
     }
     try {
       setIsSubmitting(true);
-      if (patevyysId) {
-        await client.PUT(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
+      if (toimintoId) {
+        await client.PUT(`${TOIMINNOT_API_PATH}/{toimintoId}`, {
           params: {
             path: {
               id,
-              patevyysId,
+              toimintoId,
             },
           },
           body: {
@@ -280,7 +280,7 @@ export const AddOrEditPatevyysModal = ({ onClose, teemaId: id, patevyysId, ...re
           },
         });
       } else {
-        await client.POST(PATEVYYDET_API_PATH, {
+        await client.POST(TOIMINNOT_API_PATH, {
           params: { path: { id } },
           body: {
             nimi: data.nimi,
@@ -298,14 +298,14 @@ export const AddOrEditPatevyysModal = ({ onClose, teemaId: id, patevyysId, ...re
     }
   };
 
-  const deletePatevyys = async () => {
+  const deleteToiminto = async () => {
     if (isSubmitting) {
       return;
     }
     try {
       setIsSubmitting(true);
-      await client.DELETE(`${PATEVYYDET_API_PATH}/{patevyysId}`, {
-        params: { path: { id, patevyysId: patevyysId! } },
+      await client.DELETE(`${TOIMINNOT_API_PATH}/{toimintoId}`, {
+        params: { path: { id, toimintoId: toimintoId! } },
       });
       await revalidator.revalidate();
       onClose();
@@ -316,13 +316,13 @@ export const AddOrEditPatevyysModal = ({ onClose, teemaId: id, patevyysId, ...re
 
   const headerText = React.useMemo(() => {
     if (isFirstStep) {
-      return patevyysId ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-activity');
+      return toimintoId ? t('free-time-activities.edit-activity') : t('free-time-activities.add-new-activity');
     }
-    return patevyysId ? t('profile.competences.edit') : t('free-time-activities.identify-proficiencies');
-  }, [isFirstStep, t, patevyysId]);
+    return toimintoId ? t('profile.competences.edit') : t('free-time-activities.identify-proficiencies');
+  }, [isFirstStep, t, toimintoId]);
 
   const topSlot = React.useMemo(
-    () => <ModalHeader text={headerText} step={step} testId="add-or-edit-patevyys-modal-header" />,
+    () => <ModalHeader text={headerText} step={step} testId="add-or-edit-toiminto-modal-header" />,
     [headerText, step],
   );
 
@@ -363,7 +363,7 @@ export const AddOrEditPatevyysModal = ({ onClose, teemaId: id, patevyysId, ...re
       footer={
         <div className="flex flex-1 flex-row justify-between gap-3">
           <div>
-            {patevyysId && (
+            {toimintoId && (
               <Button
                 variant="white-delete"
                 label={`${t('free-time-activities.delete-activity')}`}
@@ -373,7 +373,7 @@ export const AddOrEditPatevyysModal = ({ onClose, teemaId: id, patevyysId, ...re
                   }
                   showDialog({
                     title: t('free-time-activities.delete-activity'),
-                    onConfirm: deletePatevyys,
+                    onConfirm: deleteToiminto,
                     description: t('free-time-activities.confirm-delete-activity', {
                       name: getLocalizedText(methods.getValues('nimi')),
                     }),

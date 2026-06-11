@@ -414,11 +414,11 @@
   "my-competences": {
     "by-KOULUTUS": "Koulutuksesta kertynyt osaamiseni",
     "by-MUU_OSAAMINEN": "Muu osaaminen",
-    "by-PATEVYYS": "Vapaa-ajan toiminnasta kertynyt osaamiseni",
+    "by-TOIMINTO": "Vapaa-ajan toiminnasta kertynyt osaamiseni",
     "by-TOIMENKUVA": "Työpaikoista kertynyt osaamiseni",
     "missing-KOULUTUS": "Ei osaamisia. Siirry lisäämään koulutuksia.",
     "missing-MUU_OSAAMINEN": "Ei osaamisia. Siirry lisäämään muita osaamisia.",
-    "missing-PATEVYYS": "Ei osaamisia. Siirry lisäämään vapaa-ajan toimintoja.",
+    "missing-TOIMINTO": "Ei osaamisia. Siirry lisäämään vapaa-ajan toimintoja.",
     "missing-TOIMENKUVA": "Ei osaamisia. Siirry lisäämään työpaikkoja."
   },
   "my-competences-by-sources": "Osaamiseni teeman mukaan",
@@ -693,7 +693,7 @@
       "move-to-type": {
         "KOULUTUS": "Siirry koulutuksiini",
         "MUU_OSAAMINEN": "Siirry muihin osaamisiini",
-        "PATEVYYS": "Siirry vapaa-ajan toimintoihini",
+        "TOIMINTO": "Siirry vapaa-ajan toimintoihini",
         "TOIMENKUVA": "Siirry työpaikkoihini"
       },
       "order-by": "Järjestä",
@@ -1311,7 +1311,7 @@
       "KOULUTUS": "Koulutukset",
       "MUU_OSAAMINEN": "Muu osaaminen",
       "OSAAMINEN": "Osaamiseni",
-      "PATEVYYS": "Vapaa-ajan toiminnot",
+      "TOIMINTO": "Vapaa-ajan toiminnot",
       "TOIMENKUVA": "Työpaikat"
     },
     "tuonti-lahde": {
