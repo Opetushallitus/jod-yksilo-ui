@@ -110,7 +110,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
     }
     try {
       setIsSubmitting(true);
-      await client.POST('/api/profiili/vapaa-ajan-toiminnot', {
+      await client.POST('/api/profiili/vapaa-ajan-teemat', {
         body: {
           nimi: data.nimi,
           patevyydet: data.patevyydet.map((patevyys) => ({

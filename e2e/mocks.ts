@@ -114,12 +114,7 @@ type ProfileWizardData = {
   nimi: components['schemas']['LokalisoituTeksti'];
 } & ProfileData;
 
-type ProfilePageName =
-  | 'tyopaikat'
-  | 'vapaa-ajan-toiminnot'
-  | 'koulutuskokonaisuudet'
-  | 'muu-osaaminen'
-  | 'kiinnostukset';
+type ProfilePageName = 'tyopaikat' | 'vapaa-ajan-teemat' | 'koulutuskokonaisuudet' | 'muu-osaaminen' | 'kiinnostukset';
 
 export async function mockProfileWizard(page: Page, profilePage: ProfilePageName, data: ProfileWizardData[]) {
   await page.route(`**/api/profiili/${profilePage}/*`, async (route) => {

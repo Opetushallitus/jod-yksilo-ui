@@ -13,7 +13,7 @@ import { useCvUploadAndPoll } from './useCvUploadAndPoll';
 import { buildSaveDto, convertTulosToTableRows } from './utils';
 
 interface FooterButtonProps {
-  ref?: React.Ref<HTMLButtonElement>;
+  ref?: React.RefObject<HTMLButtonElement | null>;
   onClick: () => void;
   label: string;
   variant?: 'white' | 'red-delete' | 'white-delete' | 'accent' | 'plain' | 'gray';

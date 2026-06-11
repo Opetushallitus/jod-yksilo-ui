@@ -14,7 +14,7 @@ export interface Patevyys {
 export interface VapaaAjanToiminto {
   id?: string;
   nimi: Record<string, string>;
-  tuontiLahde?: components['schemas']['ToimintoDto']['tuontiLahde'];
+  tuontiLahde?: components['schemas']['TeemaDto']['tuontiLahde'];
   patevyydet: Patevyys[];
 }
 
@@ -53,7 +53,7 @@ export const getFreeTimeActivitiesTableRows = (
         ...(osaamisetMap
           ? osaamisetMap[id]
           : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
-        sourceType: 'vapaa-ajan-toiminto',
+        sourceType: 'vapaa-ajan-teema',
       })),
     };
     rows.push(rowData);
@@ -79,6 +79,6 @@ const mapPatevyysToRow = (
   loppuPvm: patevyys.loppuPvm ? new Date(patevyys.loppuPvm) : undefined,
   osaamiset: patevyys.osaamiset.map((id) => ({
     ...(osaamisetMap ? osaamisetMap[id] : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
-    sourceType: 'vapaa-ajan-toiminto',
+    sourceType: 'vapaa-ajan-teema',
   })),
 });

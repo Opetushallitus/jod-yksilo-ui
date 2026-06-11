@@ -1038,18 +1038,18 @@
       "index": "tyomahdollisuus"
     },
     "profile": {
-      "competences": "osaamiseni",
-      "education-history": "koulutukseni",
-      "favorites": "suosikkini",
-      "free-time-activities": "vapaa-ajan-toimintoni",
+      "competences": "osaamiset",
+      "education-history": "koulutukset",
+      "favorites": "suosikit",
+      "free-time-activities": "vapaa-ajan-toiminnot",
       "front": "etusivu",
-      "index": "omat-sivuni",
-      "interests": "kiinnostukseni",
+      "index": "osaamisprofiili",
+      "interests": "kiinnostukset",
       "login": "kirjaudu-sisaan",
-      "my-goals": "paamaarani",
-      "preferences": "asetukseni",
-      "something-else": "muut-osaamiset",
-      "work-history": "tyopaikkani"
+      "goals": "tavoitteet",
+      "preferences": "asetukset",
+      "something-else": "muu-osaaminen",
+      "work-history": "tyopaikat"
     },
     "search": "haku",
     "tool": {

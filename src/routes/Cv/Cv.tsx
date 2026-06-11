@@ -67,7 +67,7 @@ const Cv = () => {
     muuOsaaminen,
     muuOsaaminenVapaateksti,
     tavoitteet,
-    toiminnotTableRows,
+    teematTableRows,
     tyopaikkaSuosikit,
     tyopaikkaTableRows,
     voimassaAsti,
@@ -86,7 +86,7 @@ const Cv = () => {
   const hasAnyOsaaminen = Boolean(
     data?.tyopaikat?.length ||
     data?.koulutusKokonaisuudet?.length ||
-    data?.toiminnot?.length ||
+    data?.teemat?.length ||
     muuOsaaminen?.length ||
     getLocalizedText(muuOsaaminenVapaateksti),
   );
@@ -274,15 +274,15 @@ const Cv = () => {
             </div>
           )}
 
-          {/* Vapaa-ajan toiminnot */}
-          {data?.toiminnot && data.toiminnot.length > 0 && (
+          {/* Vapaa-ajan teemat */}
+          {data?.teemat && data.teemat.length > 0 && (
             <div className="mb-8 break-after-page">
               <h3 className="mb-5 px-5 text-heading-3-mobile sm:px-6 sm:text-heading-3 lg:pr-0 lg:pl-6">
                 {t('cv.competence.activities')}
               </h3>
               <div>
                 <ExperienceTable
-                  rows={toiminnotTableRows}
+                  rows={teematTableRows}
                   isPrinting={isPrinting}
                   mainColumnHeader={t('free-time-activities.theme-or-activity')}
                   ariaLabel={t('cv.competence.activities')}

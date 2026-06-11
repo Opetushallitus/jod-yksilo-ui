@@ -20,38 +20,38 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/vapaa-ajan-toiminnot/{id}': {
+  '/api/profiili/vapaa-ajan-teemat/{id}': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    /** Get the vapaa-ajan toiminto (including patevyydet) */
-    get: operations['toimintoGet'];
-    /** Updates the vapaa-ajan toiminto (shallow update) */
-    put: operations['toimintoUpdate'];
+    /** Get the vapaa-ajan teema (including patevyydet) */
+    get: operations['teemaGet'];
+    /** Updates the vapaa-ajan teema (shallow update) */
+    put: operations['teemaUpdate'];
     post?: never;
-    /** Delete the vapaa-ajan toiminto (including all patevyydet) */
-    delete: operations['toimintoDelete'];
+    /** Delete the vapaa-ajan teema (including all patevyydet) */
+    delete: operations['teemaDelete'];
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet/{patevyysId}': {
+  '/api/profiili/vapaa-ajan-teemat/{id}/patevyydet/{patevyysId}': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    /** Gets a patevyys of the vapaa-ajan toiminto */
+    /** Gets a patevyys of the vapaa-ajan teema */
     get: operations['patevyysGet'];
-    /** Updates a patevyys of the vapaa-ajan toiminto (including osaamiset) */
+    /** Updates a patevyys of the vapaa-ajan teema (including osaamiset) */
     put: operations['patevyysUpdate'];
     post?: never;
-    /** Deletes a patevyys of the vapaa-ajan toiminto (including all osaamiset). If the toiminto becomes empty, it will also be deleted. */
+    /** Deletes a patevyys of the vapaa-ajan teema (including all osaamiset). If the teema becomes empty, it will also be deleted. */
     delete: operations['patevyysDelete'];
     options?: never;
     head?: never;
@@ -235,35 +235,35 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/vapaa-ajan-toiminnot': {
+  '/api/profiili/vapaa-ajan-teemat': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    /** Get all vapaa-ajan toiminnot of the user */
-    get: operations['toimintoFindAll'];
+    /** Get all vapaa-ajan teemat of the user */
+    get: operations['teemaFindAll'];
     put?: never;
-    /** Adds a new vapaa-ajan toiminto (and optionally patevyydet) */
-    post: operations['toimintoAdd'];
+    /** Adds a new vapaa-ajan teema (and optionally patevyydet) */
+    post: operations['teemaAdd'];
     delete?: never;
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet': {
+  '/api/profiili/vapaa-ajan-teemat/{id}/patevyydet': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    /** Gets all patevyydet of the vapaa-ajan toiminto */
+    /** Gets all patevyydet of the vapaa-ajan teema */
     get: operations['patevyysFindAll'];
     put?: never;
-    /** Adds a new patevyys to the vapaa-ajan toiminto */
+    /** Adds a new patevyys to the vapaa-ajan teema */
     post: operations['patevyysAdd'];
     delete?: never;
     options?: never;
@@ -456,7 +456,7 @@ export interface paths {
     get: operations['cvGetStatus'];
     put?: never;
     /**
-     * @description Tallentaa valitut koulutukset/toimenkuvat/toiminnot osaamisprofiiliin.
+     * @description Tallentaa valitut työpaikat/koulutukset/teemat osaamisprofiiliin.
      *     Onnistuneen tallennuksen jälkeen tehtävä poistetaan.
      */
     post: operations['cvSave'];
@@ -879,7 +879,7 @@ export interface components {
     LokalisoituTeksti: {
       [key: string]: string;
     };
-    ToimintoUpdateDto: {
+    TeemaUpdateDto: {
       /** Format: uuid */
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
@@ -966,7 +966,7 @@ export interface components {
       osaamisetTunnistusEpaonnistui?: boolean;
       osasuoritukset?: string[];
     };
-    ToimintoDto: {
+    TeemaDto: {
       /** Format: uuid */
       id?: string;
       nimi: components['schemas']['LokalisoituTeksti'];
@@ -1021,7 +1021,7 @@ export interface components {
       kiinnostuksetJaettu?: boolean;
       jaetutTyopaikat?: string[];
       jaetutKoulutukset?: string[];
-      jaetutToiminnot?: string[];
+      jaetutTeemat?: string[];
       jaetutSuosikit?: ('TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS')[];
       jaetutTavoitteet?: string[];
     };
@@ -1029,18 +1029,18 @@ export interface components {
       /** Format: uuid */
       id?: string;
       /** @enum {string} */
-      tila?: 'ODOTTAA' | 'VALMIS' | 'EPAONNISTUNUT';
+      tila?: 'ODOTTAA' | 'VALMIS' | 'POISTETTU' | 'EPAONNISTUNUT';
       tulos?: components['schemas']['Tulos'];
     };
     Tulos: {
       koulutuskokonaisuudet?: components['schemas']['KoulutusKokonaisuusDto'][];
       tyopaikat?: components['schemas']['TyopaikkaDto'][];
-      toiminnot?: components['schemas']['ToimintoDto'][];
+      teemat?: components['schemas']['TeemaDto'][];
     };
     CvTehtavaSaveDto: {
       koulutuskokonaisuudet?: components['schemas']['Valinta'][];
       tyopaikat?: components['schemas']['Valinta'][];
-      toiminnot?: components['schemas']['Valinta'][];
+      teemat?: components['schemas']['Valinta'][];
     };
     Valinta: {
       /** Format: uuid */
@@ -1065,7 +1065,7 @@ export interface components {
     TmtImportDto: {
       tyopaikat?: string[];
       koulutuskokonaisuudet?: string[];
-      toiminnot?: string[];
+      teemat?: string[];
     };
     Ehdotus: {
       /** Format: uri */
@@ -1296,6 +1296,14 @@ export interface components {
       tavoite?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
     };
+    TeemaExportDto: {
+      /** Format: uuid */
+      id?: string;
+      nimi?: components['schemas']['LokalisoituTeksti'];
+      /** @enum {string} */
+      tuontiLahde?: 'CV_TUONTI' | 'KOSKI_TUONTI' | 'TMT_TUONTI';
+      patevyydet?: components['schemas']['PatevyysExportDto'][];
+    };
     ToimenkuvaExportDto: {
       /** Format: uuid */
       id?: string;
@@ -1306,14 +1314,6 @@ export interface components {
       nimi?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       osaamiset?: string[];
-    };
-    ToimintoExportDto: {
-      /** Format: uuid */
-      id?: string;
-      nimi?: components['schemas']['LokalisoituTeksti'];
-      /** @enum {string} */
-      tuontiLahde?: 'CV_TUONTI' | 'KOSKI_TUONTI' | 'TMT_TUONTI';
-      patevyydet?: components['schemas']['PatevyysExportDto'][];
     };
     TyopaikkaExportDto: {
       /** Format: uuid */
@@ -1340,7 +1340,7 @@ export interface components {
       email?: string;
       tyopaikat?: components['schemas']['TyopaikkaExportDto'][];
       koulutusKokonaisuudet?: components['schemas']['KoulutusKokonaisuusExportDto'][];
-      toiminnot?: components['schemas']['ToimintoExportDto'][];
+      teemat?: components['schemas']['TeemaExportDto'][];
       muuOsaaminen?: components['schemas']['MuuOsaaminenExportDto'];
       kiinnostukset?: components['schemas']['KiinnostuksetExportDto'];
       suosikit?: components['schemas']['YksilonSuosikkiExportDto'][];
@@ -1492,7 +1492,7 @@ export interface components {
       syntymavuosi?: number;
       tyopaikat?: components['schemas']['TyopaikkaDto'][];
       koulutusKokonaisuudet?: components['schemas']['KoulutusKokonaisuusDto'][];
-      toiminnot?: components['schemas']['ToimintoDto'][];
+      teemat?: components['schemas']['TeemaDto'][];
       muuOsaaminen?: components['schemas']['MuuOsaaminenDto'];
       suosikit?: components['schemas']['SuosikkiDto'][];
       kiinnostukset?: components['schemas']['KiinnostuksetDto'];
@@ -1569,7 +1569,7 @@ export interface operations {
       };
     };
   };
-  toimintoGet: {
+  teemaGet: {
     parameters: {
       query?: never;
       header?: never;
@@ -1586,12 +1586,12 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['ToimintoDto'];
+          'application/json': components['schemas']['TeemaDto'];
         };
       };
     };
   };
-  toimintoUpdate: {
+  teemaUpdate: {
     parameters: {
       query?: never;
       header?: never;
@@ -1602,7 +1602,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['ToimintoUpdateDto'];
+        'application/json': components['schemas']['TeemaUpdateDto'];
       };
     };
     responses: {
@@ -1615,7 +1615,7 @@ export interface operations {
       };
     };
   };
-  toimintoDelete: {
+  teemaDelete: {
     parameters: {
       query?: never;
       header?: never;
@@ -2215,7 +2215,7 @@ export interface operations {
       };
     };
   };
-  toimintoFindAll: {
+  teemaFindAll: {
     parameters: {
       query?: never;
       header?: never;
@@ -2230,12 +2230,12 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['ToimintoDto'][];
+          'application/json': components['schemas']['TeemaDto'][];
         };
       };
     };
   };
-  toimintoAdd: {
+  teemaAdd: {
     parameters: {
       query?: never;
       header?: never;
@@ -2244,7 +2244,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['ToimintoDto'];
+        'application/json': components['schemas']['TeemaDto'];
       };
     };
     responses: {

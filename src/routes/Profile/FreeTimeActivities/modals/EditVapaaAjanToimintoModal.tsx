@@ -17,18 +17,18 @@ import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
 
-interface EditVapaaAjanToimintoProps extends ModalComponentProps {
-  toimintoId: string;
+interface EditVapaaAjanTeemaProps extends ModalComponentProps {
+  teemaId: string;
 }
 
-export interface VapaaAjanToimintoForm {
-  id?: components['schemas']['ToimintoDto']['id'];
+export interface VapaaAjanTeemaForm {
+  id?: components['schemas']['TeemaDto']['id'];
   nimi: components['schemas']['LokalisoituTeksti'];
 }
 
-const VAPAA_AJAN_TOIMINTO_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}';
+const VAPAA_AJAN_TEEMA_API_PATH = '/api/profiili/vapaa-ajan-teemat/{id}';
 
-export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }: EditVapaaAjanToimintoProps) => {
+export const EditVapaaAjanTeemaModal = ({ onClose, teemaId: id, ...rest }: EditVapaaAjanTeemaProps) => {
   const {
     t,
     i18n: { language },
@@ -40,7 +40,7 @@ export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }:
 
   const formId = React.useId();
   useEscHandler(onClose, formId);
-  const methods = useForm<VapaaAjanToimintoForm>({
+  const methods = useForm<VapaaAjanTeemaForm>({
     mode: 'onBlur',
     resolver: zodResolver(
       z.object({
@@ -57,12 +57,12 @@ export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }:
       }),
     ),
     defaultValues: async () => {
-      const { data: toiminto } = await client.GET(VAPAA_AJAN_TOIMINTO_API_PATH, {
+      const { data: teema } = await client.GET(VAPAA_AJAN_TEEMA_API_PATH, {
         params: { path: { id } },
       });
       return {
-        id: toiminto?.id,
-        nimi: toiminto?.nimi ?? {},
+        id: teema?.id,
+        nimi: teema?.nimi ?? {},
       };
     },
   });
@@ -71,13 +71,13 @@ export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }:
     control: methods.control,
   });
 
-  const onSubmit: FormSubmitHandler<VapaaAjanToimintoForm> = async ({ data }: { data: VapaaAjanToimintoForm }) => {
+  const onSubmit: FormSubmitHandler<VapaaAjanTeemaForm> = async ({ data }: { data: VapaaAjanTeemaForm }) => {
     if (isSubmitting) {
       return;
     }
     try {
       setIsSubmitting(true);
-      await client.PUT(VAPAA_AJAN_TOIMINTO_API_PATH, {
+      await client.PUT(VAPAA_AJAN_TEEMA_API_PATH, {
         params: {
           path: {
             id: data.id!,
@@ -95,13 +95,13 @@ export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }:
     }
   };
 
-  const deleteToiminto = async () => {
+  const deleteTeema = async () => {
     if (isSubmitting) {
       return;
     }
     try {
       setIsSubmitting(true);
-      await client.DELETE(VAPAA_AJAN_TOIMINTO_API_PATH, {
+      await client.DELETE(VAPAA_AJAN_TEEMA_API_PATH, {
         params: { path: { id } },
       });
 
@@ -123,7 +123,7 @@ export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }:
   }, [t]);
 
   const topSlot = React.useMemo(
-    () => <ModalHeader text={headerText} testId="edit-vapaa-ajan-toiminto-modal-header" />,
+    () => <ModalHeader text={headerText} testId="edit-vapaa-ajan-teema-modal-header" />,
     [headerText],
   );
 
@@ -168,7 +168,7 @@ export const EditVapaaAjanToimintoModal = ({ onClose, toimintoId: id, ...rest }:
                   description: t('free-time-activities.confirm-delete-theme', {
                     name: getLocalizedText(methods.getValues('nimi')),
                   }),
-                  onConfirm: deleteToiminto,
+                  onConfirm: deleteTeema,
                   variant: 'destructive',
                   confirmText: t('common:delete'),
                   cancelText: t('common:cancel'),

@@ -27,7 +27,7 @@ export interface CompetencesLoaderData {
   Each main category (työpaikka, koulu, vapaa-ajan toiminto) has its own array of competences:
     - tyopaikat -> toimenkuvat
     - koulut -> koulutukset
-    - vapaaAjanToiminnot -> patevyydet
+    - vapaaAjanTeemat -> patevyydet
 
   Each item in competences will be compared against "osaamiset" response,
   which contains all the competences for the user and nonmatching are filtered out.
@@ -51,12 +51,12 @@ export const getCompetenceData = async (request: Request, context: YksiloLoaderC
   const hasSession = yksiloLoaderContextHasSession(context);
 
   try {
-    const [osaamisetRes, tyopaikatRes, koulutRes, vapaaAjanToiminnotRes, muuOsaaminenRes] = hasSession
+    const [osaamisetRes, tyopaikatRes, koulutRes, vapaaAjanTeematRes, muuOsaaminenRes] = hasSession
       ? await Promise.all([
           client.GET('/api/profiili/osaamiset', { signal: request.signal }),
           client.GET('/api/profiili/tyopaikat', { signal: request.signal }),
           client.GET('/api/profiili/koulutuskokonaisuudet', { signal: request.signal }),
-          client.GET('/api/profiili/vapaa-ajan-toiminnot', { signal: request.signal }),
+          client.GET('/api/profiili/vapaa-ajan-teemat', { signal: request.signal }),
           client.GET('/api/profiili/muu-osaaminen', { signal: request.signal }),
         ])
       : [null, null, null, null];
@@ -75,10 +75,10 @@ export const getCompetenceData = async (request: Request, context: YksiloLoaderC
       })) ?? [];
 
     const patevyydet =
-      vapaaAjanToiminnotRes?.data?.map((toiminto) => ({
-        id: toiminto.id,
-        nimi: toiminto.nimi,
-        data: filterItems(osaaminenLahdeIds, toiminto.patevyydet),
+      vapaaAjanTeematRes?.data?.map((teema) => ({
+        id: teema.id,
+        nimi: teema.nimi,
+        data: filterItems(osaaminenLahdeIds, teema.patevyydet),
       })) ?? [];
 
     const koulutukset =

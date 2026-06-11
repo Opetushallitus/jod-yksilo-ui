@@ -70,7 +70,7 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
         kiinnostuksetJaettu: z.boolean().optional(),
         jaetutTyopaikat: z.array(z.object({ itemId: z.string() })),
         jaetutKoulutukset: z.array(z.object({ itemId: z.string() })),
-        jaetutToiminnot: z.array(z.object({ itemId: z.string() })),
+        jaetutTeemat: z.array(z.object({ itemId: z.string() })),
         jaetutSuosikit: z.array(z.object({ itemId: z.string() })),
         jaetutTavoitteet: z.array(z.object({ itemId: z.string() })),
       }),
@@ -93,7 +93,7 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
           kiinnostuksetJaettu: data?.kiinnostuksetJaettu,
           jaetutTyopaikat: data?.jaetutTyopaikat?.map((itemId) => ({ itemId })) ?? [],
           jaetutKoulutukset: data?.jaetutKoulutukset?.map((itemId) => ({ itemId })) ?? [],
-          jaetutToiminnot: data?.jaetutToiminnot?.map((itemId) => ({ itemId })) ?? [],
+          jaetutTeemat: data?.jaetutTeemat?.map((itemId) => ({ itemId })) ?? [],
           jaetutSuosikit: data?.jaetutSuosikit?.map((itemId) => ({ itemId })) ?? [],
           jaetutTavoitteet: data?.jaetutTavoitteet?.map((itemId) => ({ itemId })) ?? [],
         };
@@ -112,7 +112,7 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
           kiinnostuksetJaettu: false,
           jaetutTyopaikat: [],
           jaetutKoulutukset: [],
-          jaetutToiminnot: [],
+          jaetutTeemat: [],
           jaetutSuosikit: [],
           jaetutTavoitteet: [],
         };
@@ -146,7 +146,7 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
         kiinnostuksetJaettu: data.kiinnostuksetJaettu,
         jaetutTyopaikat: data.jaetutTyopaikat?.map((item) => item.itemId),
         jaetutKoulutukset: data.jaetutKoulutukset?.map((item) => item.itemId),
-        jaetutToiminnot: data.jaetutToiminnot?.map((item) => item.itemId),
+        jaetutTeemat: data.jaetutTeemat?.map((item) => item.itemId),
         jaetutSuosikit: data.jaetutSuosikit?.map((item) => item.itemId as MahdollisuusTyyppi),
         jaetutTavoitteet: data.jaetutTavoitteet?.map((item) => item.itemId),
       };

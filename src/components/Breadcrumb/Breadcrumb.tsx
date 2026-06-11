@@ -18,7 +18,7 @@ interface YksiloHandle {
 const useTypedMatches = () => useMatches() as UIMatch<unknown, YksiloHandle>[];
 
 // Some profile subpages live under the competences URL segment without producing a parent route match.
-// Inject the missing "Osaamiseni" crumb
+// Inject the missing "Osaamiset" crumb
 const injectProfileCompetencesParent = (
   items: BreadcrumbItem[],
   language: string,
@@ -104,7 +104,7 @@ export const Breadcrumb = () => {
           profileIndex,
           {
             label: t('profile.my-goals.title'),
-            to: `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.my-goals')}`,
+            to: `/${language}/${t('slugs.profile.index')}/${t('slugs.profile.goals')}`,
           },
         ];
       } else {
