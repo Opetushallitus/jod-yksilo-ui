@@ -31,7 +31,7 @@ import { getTypeSlug } from '../utils';
 
 const GoalsCard = ({ testId, className = '' }: { testId: string; className?: string }) => {
   const { t, i18n } = useTranslation();
-  const to = `/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.my-goals')}`;
+  const to = `/${i18n.language}/${t('slugs.profile.index')}/${t('slugs.profile.goals')}`;
 
   return (
     <div

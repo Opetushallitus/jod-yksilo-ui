@@ -24,7 +24,7 @@ export interface ExperienceTableRowData {
     id: string;
     nimi: Record<string, string>;
     kuvaus: Record<string, string>;
-    sourceType: 'tyopaikka' | 'koulutus' | 'vapaa-ajan-toiminto';
+    sourceType: 'tyopaikka' | 'koulutus' | 'vapaa-ajan-teema';
   }[];
   osaamisetOdottaaTunnistusta?: boolean;
   osaamisetTunnistusEpaonnistui?: boolean;
@@ -33,7 +33,7 @@ export interface ExperienceTableRowData {
     // oxlint-disable-next-line typescript/no-duplicate-type-constituents
     | components['schemas']['KoulutusKokonaisuusDto']['tuontiLahde']
     // oxlint-disable-next-line typescript/no-duplicate-type-constituents
-    | components['schemas']['ToimintoDto']['tuontiLahde'];
+    | components['schemas']['TeemaDto']['tuontiLahde'];
 }
 
 interface ExperienceTableRowProps {

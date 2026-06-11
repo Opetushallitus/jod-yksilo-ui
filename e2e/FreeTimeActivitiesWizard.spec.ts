@@ -21,14 +21,14 @@ test.beforeEach(async ({ page }) => {
   await mockAuthenticatedUser(page);
   await mockSuggestedCompetences(page, suggestedFreetimeCompetences, freetimeCompetences);
   await mockSelectedCompetences(page, freetimeCompetences);
-  await mockProfileWizard(page, 'vapaa-ajan-toiminnot', freetimeActivities);
+  await mockProfileWizard(page, 'vapaa-ajan-teemat', freetimeActivities);
 
-  await page.goto('/yksilo/fi/omat-sivuni/osaamiseni/vapaa-ajan-toimintoni');
+  await page.goto('/yksilo/fi/osaamisprofiili/osaamiset/vapaa-ajan-teemat');
   await page.getByText('Hyväksy kaikki').click();
 });
 
 test('add new freetime activity', async ({ page, isMobile }) => {
-  await mockProfileWizard(page, 'vapaa-ajan-toiminnot', []);
+  await mockProfileWizard(page, 'vapaa-ajan-teemat', []);
   // Open wizard
   await page.getByRole('button', { name: 'Lisää uusi vapaa-ajan teema' }).click();
 
@@ -72,7 +72,7 @@ test('add new freetime activity', async ({ page, isMobile }) => {
   }
 
   const requestPromise = page.waitForRequest(
-    (request) => request.url().includes('/api/profiili/vapaa-ajan-toiminnot') && request.method() === 'POST',
+    (request) => request.url().includes('/api/profiili/vapaa-ajan-teemat') && request.method() === 'POST',
   );
   await page.getByRole('button', { name: 'Tallenna' }).click();
   const request = await requestPromise;
@@ -89,12 +89,12 @@ test('delete freetime activity item', async ({ page }) => {
 
   const [request] = await Promise.all([
     page.waitForRequest(
-      (request) => request.url().includes('/api/profiili/vapaa-ajan-toiminnot') && request.method() === 'DELETE',
+      (request) => request.url().includes('/api/profiili/vapaa-ajan-teemat') && request.method() === 'DELETE',
     ),
     confirmButton.click(),
   ]);
   const expectedId = freetimeActivities[0].id;
-  expect(request.url()).toContain('/api/profiili/vapaa-ajan-toiminnot/');
+  expect(request.url()).toContain('/api/profiili/vapaa-ajan-teemat/');
   expect(request.url()).toContain(expectedId);
 });
 
@@ -105,7 +105,7 @@ test('edit freetime activity item', async ({ page }) => {
   await page.getByLabel('Vapaa-ajan teeman nimi').fill('Testaus');
 
   const requestPromise = page.waitForRequest(
-    (request) => request.url().includes('/api/profiili/vapaa-ajan-toiminnot') && request.method() === 'PUT',
+    (request) => request.url().includes('/api/profiili/vapaa-ajan-teemat') && request.method() === 'PUT',
   );
   await page.getByRole('button', { name: 'Tallenna' }).click();
   const request = await requestPromise;

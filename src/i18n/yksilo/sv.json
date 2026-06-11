@@ -1039,18 +1039,18 @@
       "index": "arbetsmojlighet"
     },
     "profile": {
-      "competences": "mina-kompetenser",
-      "education-history": "mina-utbildningar",
-      "favorites": "mina-favoriter",
-      "free-time-activities": "min-fritidsverksamhet",
+      "competences": "kompetenser",
+      "education-history": "utbildningar",
+      "favorites": "favoriter",
+      "free-time-activities": "fritidsaktiviteter",
       "front": "startsida",
-      "index": "mina-sidor",
-      "interests": "mina-intressen",
+      "index": "kompetensprofil",
+      "interests": "intressen",
       "login": "logga-in",
-      "my-goals": "mina-mal",
-      "preferences": "mina-installningar",
-      "something-else": "ovriga-kunskaper",
-      "work-history": "mina-arbetsplatser"
+      "goals": "mal",
+      "preferences": "installningar",
+      "something-else": "annan-kompetens",
+      "work-history": "arbetsplatser"
     },
     "search": "sok",
     "tool": {

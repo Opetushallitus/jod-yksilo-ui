@@ -112,8 +112,8 @@ const profileRoutes = supportedLanguageCodes.map(
           },
         },
         {
-          id: `{slugs.profile.my-goals}|${lng}`,
-          path: i18n.t('slugs.profile.my-goals', { lng }),
+          id: `{slugs.profile.goals}|${lng}`,
+          path: i18n.t('slugs.profile.goals', { lng }),
           handle: {
             title: i18n.t('profile.my-goals.title', { lng }),
           },

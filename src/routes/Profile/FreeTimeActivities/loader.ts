@@ -5,17 +5,17 @@ import { osaamiset } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
 
 export default (async ({ request }) => {
-  const { data = [], error } = await client.GET('/api/profiili/vapaa-ajan-toiminnot', {
+  const { data = [], error } = await client.GET('/api/profiili/vapaa-ajan-teemat', {
     signal: request.signal,
   });
   if (error) {
     throw error;
   }
 
-  const vapaaAjanToiminnot = data.map((vapaaAjanToiminto) => ({
-    ...vapaaAjanToiminto,
-    nimi: vapaaAjanToiminto.nimi,
-    patevyydet: vapaaAjanToiminto.patevyydet?.map((patevyys) => ({
+  const vapaaAjanTeemat = data.map((vapaaAjanTeema) => ({
+    ...vapaaAjanTeema,
+    nimi: vapaaAjanTeema.nimi,
+    patevyydet: vapaaAjanTeema.patevyydet?.map((patevyys) => ({
       ...patevyys,
       nimi: patevyys.nimi,
       kuvaus: patevyys.kuvaus,
@@ -24,8 +24,8 @@ export default (async ({ request }) => {
 
   const osaamisetMap = (
     await osaamiset.combine(
-      vapaaAjanToiminnot
-        .map((vapaaAjanToiminto) => vapaaAjanToiminto.patevyydet ?? [])
+      vapaaAjanTeemat
+        .map((vapaaAjanTeema) => vapaaAjanTeema.patevyydet ?? [])
         .map((patevyys) => patevyys.map((p) => p.osaamiset ?? []))
         .flat()
         .flat() ?? [],
@@ -53,5 +53,5 @@ export default (async ({ request }) => {
     return acc;
   }, {});
 
-  return { vapaaAjanToiminnot, osaamisetMap };
+  return { vapaaAjanTeemat, osaamisetMap };
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;

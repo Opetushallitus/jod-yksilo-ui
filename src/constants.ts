@@ -9,7 +9,7 @@ type TagProps = React.ComponentProps<typeof Tag>;
 export const OSAAMINEN_COLOR_MAP: Record<OsaaminenLahdeTyyppi, NonNullable<TagProps['sourceType']>> = {
   TOIMENKUVA: 'tyopaikka',
   KOULUTUS: 'koulutus',
-  PATEVYYS: 'vapaa-ajan-toiminto',
+  PATEVYYS: 'vapaa-ajan-teema',
   MUU_OSAAMINEN: 'jotain-muuta',
   KIINNOSTUS: 'kiinnostus',
   KARTOITETTU: 'jotain-muuta',

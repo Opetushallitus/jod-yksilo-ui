@@ -11,7 +11,7 @@ export interface ShareLinkForm {
 
   jaetutTyopaikat: { itemId: string }[]; // ItemId = Tyopaikka ID
   jaetutKoulutukset: { itemId: string }[]; // ItemId = Koulutus ID
-  jaetutToiminnot: { itemId: string }[]; // ItemId = Toiminto ID
+  jaetutTeemat: { itemId: string }[]; // ItemId = Teema ID
   jaetutSuosikit: { itemId: string }[]; // ItemId = MahdollisuusTyyppi
   jaetutTavoitteet: { itemId: string }[]; // ItemId = Tavoite ID
 

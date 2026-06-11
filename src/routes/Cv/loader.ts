@@ -78,27 +78,27 @@ const loader = (async ({ request, params }) => {
     koulutusTableRows.push(...getEducationHistoryTableRows(koulutukset, koulutusOsaamisetMap));
   }
 
-  // Vapaa-ajan toiminnot
-  const toiminnotTableRows = [];
-  if (data.toiminnot) {
+  // Vapaa-ajan teemat
+  const teematTableRows = [];
+  if (data.teemat) {
     const vapaaAikaOsaamisetMap = arrayToIdMap(
       await osaamisetService.combine(
-        data.toiminnot
-          .map((toiminto) => toiminto.patevyydet ?? [])
+        data.teemat
+          .map((teema) => teema.patevyydet ?? [])
           .flatMap((patevyys) => patevyys.flatMap((p) => p.osaamiset ?? [])),
         (key) => key,
         osaaminenCombiner,
         request.signal,
       ),
     );
-    const toiminnot = data.toiminnot.map((toiminto) => ({
-      ...toiminto,
-      patevyydet: (toiminto.patevyydet ?? []).map((patevyys) => ({
+    const teemat = data.teemat.map((teema) => ({
+      ...teema,
+      patevyydet: (teema.patevyydet ?? []).map((patevyys) => ({
         ...patevyys,
         osaamiset: patevyys.osaamiset ?? [],
       })),
     }));
-    toiminnotTableRows.push(...getFreeTimeActivitiesTableRows(toiminnot, vapaaAikaOsaamisetMap));
+    teematTableRows.push(...getFreeTimeActivitiesTableRows(teemat, vapaaAikaOsaamisetMap));
   }
 
   // Muu osaaminen
@@ -171,7 +171,7 @@ const loader = (async ({ request, params }) => {
     muuOsaaminen,
     muuOsaaminenVapaateksti,
     tavoitteet,
-    toiminnotTableRows,
+    teematTableRows,
     tyopaikkaSuosikit,
     tyopaikkaTableRows,
     voimassaAsti,

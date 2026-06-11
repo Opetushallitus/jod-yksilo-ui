@@ -20,7 +20,7 @@ export const buildSaveDto = (data: CvImportConvertedData): components['schemas']
   return {
     koulutuskokonaisuudet: toValinta(data.education),
     tyopaikat: toValinta(data.work),
-    toiminnot: toValinta(data.activities),
+    teemat: toValinta(data.activities),
   };
 };
 
@@ -89,17 +89,17 @@ export const convertTulosToTableRows = (
 
   const work = tulos.tyopaikat ? getWorkHistoryTableRows(tulos.tyopaikat.map(transformTyopaikkaDto), osaamisetMap) : [];
 
-  // For activities, we need to convert ToimintoDto to a compatible format
-  const activities = tulos.toiminnot ? convertActivitiesToTableRows(tulos.toiminnot, osaamisetMap) : [];
+  // For activities, we need to convert TeemaDto to a compatible format
+  const activities = tulos.teemat ? convertActivitiesToTableRows(tulos.teemat, osaamisetMap) : [];
 
   return { education, work, activities };
 };
 
 /**
- * Converts ToimintoDto array to ExperienceTableRowData with patevyydet as subrows
+ * Converts TeemaDto array to ExperienceTableRowData with patevyydet as subrows
  */
 const convertActivitiesToTableRows = (
-  toiminnot: components['schemas']['ToimintoDto'][],
+  teemat: components['schemas']['TeemaDto'][],
   osaamisetMap?: Record<
     string,
     {
@@ -109,12 +109,12 @@ const convertActivitiesToTableRows = (
     }
   >,
 ): ExperienceTableRowData[] => {
-  return toiminnot.map((toiminto) => {
-    const patevyydet = toiminto.patevyydet || [];
+  return teemat.map((teema) => {
+    const patevyydet = teema.patevyydet || [];
     return {
-      key: toiminto.id ?? crypto.randomUUID(),
-      nimi: toiminto.nimi,
-      tuontiLahde: toiminto.tuontiLahde,
+      key: teema.id ?? crypto.randomUUID(),
+      nimi: teema.nimi,
+      tuontiLahde: teema.tuontiLahde,
       subrows: patevyydet.map((p) => ({
         key: p.id ?? crypto.randomUUID(),
         nimi: p.nimi,
@@ -125,7 +125,7 @@ const convertActivitiesToTableRows = (
           ...(osaamisetMap
             ? osaamisetMap[id]
             : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
-          sourceType: 'vapaa-ajan-toiminto' as const,
+          sourceType: 'vapaa-ajan-teema' as const,
         })),
         checked: true,
       })),
@@ -135,7 +135,7 @@ const convertActivitiesToTableRows = (
           ...(osaamisetMap
             ? osaamisetMap[id]
             : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
-          sourceType: 'vapaa-ajan-toiminto' as const,
+          sourceType: 'vapaa-ajan-teema' as const,
         })),
       checked: true,
     };

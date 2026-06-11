@@ -1040,18 +1040,18 @@
       "index": "employment-opportunity"
     },
     "profile": {
-      "competences": "my-competence",
-      "education-history": "my-education",
-      "favorites": "my-favourites",
-      "free-time-activities": "my-recreational-activities",
+      "competences": "competences",
+      "education-history": "education",
+      "favorites": "favourites",
+      "free-time-activities": "recreational-activities",
       "front": "front-page",
-      "index": "my-pages",
-      "interests": "my-interests",
+      "index": "competence-profile",
+      "interests": "interests",
       "login": "log-in",
-      "my-goals": "my-goal",
-      "preferences": "my-settings",
+      "goals": "goals",
+      "preferences": "settings",
       "something-else": "other-competences",
-      "work-history": "my-job"
+      "work-history": "workplaces"
     },
     "search": "search",
     "tool": {

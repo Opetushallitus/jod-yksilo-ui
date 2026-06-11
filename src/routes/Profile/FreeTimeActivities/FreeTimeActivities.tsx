@@ -7,7 +7,7 @@ import { EmptyState, MainLayout, useMediaQueries } from '@jod/design-system';
 import { Breadcrumb, ExperienceTable, type ExperienceTableRowData } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
-import { EditVapaaAjanToimintoModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
+import { EditVapaaAjanTeemaModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
 
 import { CompetencesTour } from '../CompetencesTour';
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
@@ -17,8 +17,8 @@ import { AddOrEditPatevyysModal } from './modals/AddOrEditPatevyysModal';
 import { getFreeTimeActivitiesTableRows, type VapaaAjanToiminto } from './utils';
 
 const FreeTimeActivities = () => {
-  const { vapaaAjanToiminnot, osaamisetMap } = useLoaderData() as {
-    vapaaAjanToiminnot: VapaaAjanToiminto[];
+  const { vapaaAjanTeemat, osaamisetMap } = useLoaderData() as {
+    vapaaAjanTeemat: VapaaAjanToiminto[];
     osaamisetMap: Record<
       string,
       {
@@ -31,30 +31,30 @@ const FreeTimeActivities = () => {
   const { t } = useTranslation();
   const { lg } = useMediaQueries();
   const title = t('profile.free-time-activities.title');
-  const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot, osaamisetMap));
+  const [rows, setRows] = React.useState(getFreeTimeActivitiesTableRows(vapaaAjanTeemat, osaamisetMap));
   const { showModal } = useModal();
   const guardedAction = useSessionGuardedAction();
 
   React.useEffect(() => {
-    setRows(getFreeTimeActivitiesTableRows(vapaaAjanToiminnot, osaamisetMap));
-  }, [vapaaAjanToiminnot, osaamisetMap]);
+    setRows(getFreeTimeActivitiesTableRows(vapaaAjanTeemat, osaamisetMap));
+  }, [vapaaAjanTeemat, osaamisetMap]);
 
   const onRowClick = (row: ExperienceTableRowData) => {
-    showModal(EditVapaaAjanToimintoModal, { toimintoId: row.key });
+    showModal(EditVapaaAjanTeemaModal, { teemaId: row.key });
   };
 
   const onNestedRowClick = (row: ExperienceTableRowData) => {
-    const toiminto = vapaaAjanToiminnot.find((vat) => vat.patevyydet.find((p) => p.id === row.key));
-    if (toiminto?.id) {
+    const teema = vapaaAjanTeemat.find((vat) => vat.patevyydet.find((p) => p.id === row.key));
+    if (teema?.id) {
       showModal(AddOrEditPatevyysModal, {
-        toimintoId: toiminto.id,
+        teemaId: teema.id,
         patevyysId: row.key,
       });
     }
   };
 
   const onAddNestedRowClick = (row: ExperienceTableRowData) => {
-    showModal(AddOrEditPatevyysModal, { toimintoId: row.key });
+    showModal(AddOrEditPatevyysModal, { teemaId: row.key });
   };
 
   return (

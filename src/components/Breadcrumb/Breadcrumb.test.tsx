@@ -116,7 +116,7 @@ describe('Breadcrumb', () => {
       { id: 'profile', pathname: '/fi/profile', handle: { title: 'profile.index' } },
       {
         id: '{slugs.profile.competences}/{slugs.profile.work-history}|fi',
-        pathname: '/fi/profile/osaamiseni/tyopaikkani',
+        pathname: '/fi/profile/osaamiset/tyopaikkani',
         handle: { title: 'profile.work-history.title' },
       },
     ]);

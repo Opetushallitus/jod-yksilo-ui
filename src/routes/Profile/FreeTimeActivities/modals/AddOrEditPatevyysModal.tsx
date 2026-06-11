@@ -28,7 +28,7 @@ import { getLocalizedText } from '@/utils';
 import { isFeatureEnabled } from '@/utils/features';
 
 interface AddOrEditPatevyysModalProps extends ModalComponentProps {
-  toimintoId: string;
+  teemaId: string;
   patevyysId?: string;
 }
 
@@ -45,7 +45,7 @@ interface PatevyysForm {
   }[];
 }
 
-const PATEVYYDET_API_PATH = '/api/profiili/vapaa-ajan-toiminnot/{id}/patevyydet'; // /{patevyysId}
+const PATEVYYDET_API_PATH = '/api/profiili/vapaa-ajan-teemat/{id}/patevyydet'; // /{patevyysId}
 
 const MainStep = () => {
   const {
@@ -155,12 +155,7 @@ const OsaamisetStep = () => {
   );
 };
 
-export const AddOrEditPatevyysModal = ({
-  onClose,
-  toimintoId: id,
-  patevyysId,
-  ...rest
-}: AddOrEditPatevyysModalProps) => {
+export const AddOrEditPatevyysModal = ({ onClose, teemaId: id, patevyysId, ...rest }: AddOrEditPatevyysModalProps) => {
   const { t } = useTranslation();
   // Using local state to prevent double submissions, as RHF isSubmitting is not reliable.
   const [isSubmitting, setIsSubmitting] = React.useState(false);

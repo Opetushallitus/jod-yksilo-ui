@@ -15,7 +15,7 @@ export const DataToShareStep = () => {
   const { t, i18n } = useTranslation();
   const [tyopaikat, setTyopaikat] = React.useState<components['schemas']['TyopaikkaDto'][]>([]);
   const [koulut, setKoulut] = React.useState<components['schemas']['KoulutusKokonaisuusDto'][]>([]);
-  const [toiminnot, setToiminnot] = React.useState<components['schemas']['ToimintoDto'][]>([]);
+  const [teemat, setTeemat] = React.useState<components['schemas']['TeemaDto'][]>([]);
   const [kiinnostukset, setKiinnostukset] = React.useState<components['schemas']['KiinnostuksetDto']>();
   const [muuOsaaminen, setMuuOsaaminen] = React.useState<components['schemas']['MuuOsaaminenDto']>();
   const [suosikit, setSuosikit] = React.useState<components['schemas']['SuosikkiDto'][]>([]);
@@ -29,7 +29,7 @@ export const DataToShareStep = () => {
       await Promise.all([
         client.GET('/api/profiili/tyopaikat').then((res) => setTyopaikat(res.data ?? [])),
         client.GET('/api/profiili/koulutuskokonaisuudet').then((res) => setKoulut(res.data ?? [])),
-        client.GET('/api/profiili/vapaa-ajan-toiminnot').then((res) => setToiminnot(res.data ?? [])),
+        client.GET('/api/profiili/vapaa-ajan-teemat').then((res) => setTeemat(res.data ?? [])),
         client.GET('/api/profiili/suosikit').then((res) => setSuosikit(res.data ?? [])),
         client.GET('/api/profiili/kiinnostukset/osaamiset').then((res) => setKiinnostukset(res.data)),
         client.GET('/api/profiili/muu-osaaminen').then((res) => setMuuOsaaminen(res.data)),
@@ -75,12 +75,12 @@ export const DataToShareStep = () => {
     name: 'jaetutKoulutukset',
   });
   const {
-    fields: jaetutToiminnotFields,
-    append: appendToiminnot,
-    remove: removeToiminnot,
+    fields: jaetutTeematFields,
+    append: appendTeemat,
+    remove: removeTeemat,
   } = useFieldArray({
     control,
-    name: 'jaetutToiminnot',
+    name: 'jaetutTeemat',
   });
   const {
     fields: jaetutSuosikitFields,
@@ -99,7 +99,7 @@ export const DataToShareStep = () => {
     name: 'jaetutTavoitteet',
   });
 
-  type ArrayFields = 'tyopaikat' | 'koulutukset' | 'toiminnot' | 'suosikit' | 'tavoitteet';
+  type ArrayFields = 'tyopaikat' | 'koulutukset' | 'teemat' | 'suosikit' | 'tavoitteet';
 
   const onChangeSingleSelection = (field: ArrayFields, id: string) => {
     switch (field) {
@@ -123,13 +123,13 @@ export const DataToShareStep = () => {
           }
         }
         break;
-      case 'toiminnot':
+      case 'teemat':
         {
-          const existingIndex = jaetutToiminnotFields.findIndex((item) => item.itemId === id);
+          const existingIndex = jaetutTeematFields.findIndex((item) => item.itemId === id);
           if (existingIndex > -1) {
-            removeToiminnot(existingIndex);
+            removeTeemat(existingIndex);
           } else {
-            appendToiminnot({ itemId: id });
+            appendTeemat({ itemId: id });
           }
         }
         break;
@@ -213,12 +213,12 @@ export const DataToShareStep = () => {
         jaetutKoulutuksetFields,
         koulut.map((koulutus) => ({ id: koulutus.id! })),
       );
-    } else if (field === 'jaetutToiminnot') {
+    } else if (field === 'jaetutTeemat') {
       handleTopLevelChange(
-        appendToiminnot,
-        removeToiminnot,
-        jaetutToiminnotFields,
-        toiminnot.map((toiminto) => ({ id: toiminto.id! })),
+        appendTeemat,
+        removeTeemat,
+        jaetutTeematFields,
+        teemat.map((teema) => ({ id: teema.id! })),
       );
     } else if (field === 'jaetutSuosikit') {
       handleTopLevelChange(
@@ -376,21 +376,21 @@ export const DataToShareStep = () => {
         <CheckboxAccordion
           initiallyOpen={false}
           label={t('preferences.share.modal.data-to-share.activities')}
-          checked={areAllChecked(jaetutToiminnotFields, toiminnot.map(mapToIds))}
-          indeterminate={areSomeChecked(jaetutToiminnotFields, toiminnot.map(mapToIds))}
-          onChange={onChangeTopLevel('jaetutToiminnot')}
-          disabled={toiminnot.length === 0}
+          checked={areAllChecked(jaetutTeematFields, teemat.map(mapToIds))}
+          indeterminate={areSomeChecked(jaetutTeematFields, teemat.map(mapToIds))}
+          onChange={onChangeTopLevel('jaetutTeemat')}
+          disabled={teemat.length === 0}
         >
           <ul className="mt-4 flex flex-col gap-5">
-            {toiminnot.map((toiminto) => (
-              <li key={toiminto.id}>
+            {teemat.map((teema) => (
+              <li key={teema.id}>
                 <Checkbox
-                  name={toiminto.nimi[i18n.language]}
-                  label={toiminto.nimi[i18n.language]}
-                  ariaLabel={toiminto.nimi[i18n.language]}
-                  value={toiminto.id!}
-                  checked={isChecked(jaetutToiminnotFields, toiminto.id!)}
-                  onChange={() => onChangeSingleSelection('toiminnot', toiminto.id!)}
+                  name={teema.nimi[i18n.language]}
+                  label={teema.nimi[i18n.language]}
+                  ariaLabel={teema.nimi[i18n.language]}
+                  value={teema.id!}
+                  checked={isChecked(jaetutTeematFields, teema.id!)}
+                  onChange={() => onChangeSingleSelection('teemat', teema.id!)}
                 />
               </li>
             ))}
