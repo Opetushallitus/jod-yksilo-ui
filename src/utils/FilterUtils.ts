@@ -9,6 +9,8 @@ export const getFilterCount = <T>(filters: T, filterList: (keyof T)[]) => {
       return sum + value.length;
     } else if (typeof value === 'number') {
       return sum + value;
+    } else if (typeof value === 'boolean') {
+      return sum + (value ? 1 : 0);
     } else {
       return sum;
     }
@@ -21,6 +23,8 @@ export const noFiltersSelected = <T>(filters: T) =>
       return value.length === 0;
     } else if (typeof value === 'number') {
       return value === 0;
+    } else if (typeof value === 'boolean') {
+      return !value;
     } else if (value === null) {
       return true;
     } else {

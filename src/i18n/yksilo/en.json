@@ -809,7 +809,7 @@
       "add-favorites-dialog-action": "Add favorites",
       "add-favorites-dialog-description": "You cannot create a goal yet because you do not have suitable favorites saved. First, add professions or job opportunities that interest you to your favorites – then you can set goals from them.",
       "add-favorites-dialog-title": "Add favorites first",
-      "add-favorites-to-goals": "Add new goal",
+      "add-favorites-to-goals": "Create new goal",
       "add-goal-failed": "Failed to create goal – please try again",
       "add-goal-success": "Goal created",
       "add-modal-description": "Enter a name and description for the goal. The name is shown in the lists, and you can use the description to more broadly describe what you want to achieve and any restrictions.",
@@ -824,6 +824,8 @@
       "choose-favorite-description": "Choose a profession or employment opportunity from your favorites that you want to set as a goal",
       "choose-favorite-header": "Select goal from favourites",
       "competence-compare": "Compare competences",
+      "competence-description": "On the left, the competences required for your goal are listed. On the right, you can see what you already know. The information is based on your profile data.",
+      "competence-requirement-for-goal": "Competence required for goal",
       "competences": "Competences",
       "custom-plan-competences-description": "Create your own option by first giving it a name and a short description. Then select the competences you want to achieve with the option.",
       "custom-plan-description": "Description of own option",
@@ -846,6 +848,13 @@
         "description": "Explore education and career opportunities. Add the most interesting ones to your favorites and make them your own goals.",
         "title": "Discover opportunities"
       },
+      "filters": {
+        "favorites": {
+          "checkbox-label": "Show favorites in the list",
+          "title": "Favorites"
+        },
+        "other-options-title": "Other options"
+      },
       "goal": "Goal",
       "goal-description": "Description of the goal",
       "goal-name": "Name of the goal",
@@ -854,7 +863,7 @@
       "no-chosen-competences": "No selected competences",
       "no-favorites-selected": "Add a profession or job opportunity to your favorites to create goals",
       "no-filtered-results": "No education opportunities. Adjust the filters to see options.",
-      "no-goals-created": "You have not added any goals yet.",
+      "no-goals-created": "You have not created any goals yet.",
       "n-plans_one": "1 education option",
       "n-plans_other": "{{count}} education options",
       "n-plans_zero": "You have not added any education options yet",

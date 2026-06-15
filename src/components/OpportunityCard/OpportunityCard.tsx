@@ -2,7 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router';
 
-import { Accordion, useMediaQueries } from '@jod/design-system';
+import { Accordion, cx, useMediaQueries } from '@jod/design-system';
+import { JodFlag } from '@jod/design-system/icons';
 
 import type { components } from '@/api/schema';
 import { FavoriteToggle } from '@/components';
@@ -78,6 +79,7 @@ interface BaseProps {
   from?: 'tool' | 'favorite' | 'path' | 'goal' | 'search';
   rateId?: string;
   children?: React.ReactNode;
+  borderClassName?: string;
 }
 
 export type OpportunityCardProps = BaseProps &
@@ -179,6 +181,7 @@ export const OpportunityCardWrapper = ({
   collapsible,
   actionButtonContent,
   initiallyCollapsed,
+  borderClassName,
 }: OpportunityCardProps) => {
   const {
     t,
@@ -223,7 +226,7 @@ export const OpportunityCardWrapper = ({
 
   return (
     <Component
-      className="flex flex-col gap-y-4 rounded bg-white p-5 shadow-border sm:p-6"
+      className={cx('flex flex-col gap-y-4 rounded bg-white p-5 sm:p-6', borderClassName ?? 'shadow-border')}
       data-testid="opportunity-card"
     >
       <ActionsSection
@@ -349,7 +352,7 @@ const OpportunityCardHeader = ({
             className={`flex aspect-square size-7 items-center justify-center rounded-full text-white ${bgColorClassName} print:hidden`}
             aria-hidden
           >
-            <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
+            {from === 'goal' ? <JodFlag /> : <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />}
           </div>
 
           <div className="flex justify-center">
@@ -366,7 +369,7 @@ const OpportunityCardHeader = ({
         className={`flex aspect-square size-8 items-center justify-center rounded-full text-white ${bgColorClassName} print:hidden`}
         aria-hidden
       >
-        <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />
+        {from === 'goal' ? <JodFlag /> : <TitleIcon mahdollisuusAlityyppi={mahdollisuusAlityyppi} />}
       </div>
       <div className="ml-4 flex flex-col justify-center">
         <OpportunityType mahdollisuusAlityyppi={mahdollisuusAlityyppi} />

@@ -4,16 +4,19 @@ import toast from 'react-hot-toast/headless';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-import { ActionButton, Button, cx, EmptyState, Modal, tidyClasses, useMediaQueries } from '@jod/design-system';
-import { JodCheckmark, JodRoute, JodSettings } from '@jod/design-system/icons';
+import { Button, cx, EmptyState, Modal, useMediaQueries } from '@jod/design-system';
+import { JodCheckmark, JodSettings } from '@jod/design-system/icons';
 
 import { client } from '@/api/client';
+import { getKoulutusMahdollisuusDetailsFullPage } from '@/api/mahdollisuusService';
 import { OpportunityCardSkeleton } from '@/components/OpportunityCard';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import PlanOpportunityCard from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOpportunityCard.tsx';
 import PlanOptionFilters from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionFilters.tsx';
 import PlanOptionsPagination from '@/routes/Profile/MyGoals/addPlan/selectPlan/PlanOptionsPagination.tsx';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
+import { KoulutusMahdollisuusFull } from '@/routes/Profile/MyGoals/addPlan/store/PlanOptionStoreModel';
+import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 
 import AddOrEditCustomPlanModal from './customPlan/AddOrEditCustomPlanModal';
@@ -54,6 +57,9 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
   );
 
   const refreshTavoitteet = useTavoitteetStore((state) => state.refreshTavoitteet);
+  const { suosikit, fetchSuosikit } = useSuosikitStore(
+    useShallow((state) => ({ suosikit: state.suosikit, fetchSuosikit: state.fetchSuosikit })),
+  );
 
   const onSubmit = async () => {
     setIsSubmitting(true);
@@ -106,6 +112,10 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
     // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, [initialPlanListLoaded]);
 
+  React.useEffect(() => {
+    void fetchSuosikit();
+  }, [fetchSuosikit]);
+
   const onUpdateResults = async () => {
     await updateEhdotuksetAndTyomahdollisuudet();
   };
@@ -119,12 +129,123 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
 
   const getTotalFilterCount = React.useCallback(() => {
     const kestoCount = getKestoCount(filters.minDuration, filters.maxDuration);
-    return Object.values(filters).reduce((total, filter) => total + (filter?.length ?? 0), 0) + kestoCount;
+    const arrayCount = filters.educationOpportunityType.length;
+    const favoritesCount = filters.showFavorites ? 1 : 0;
+    return arrayCount + kestoCount + favoritesCount;
   }, [filters]);
 
   const toggleFiltersText = React.useMemo(() => {
     return t('tool.settings.toggle-open', { count: getTotalFilterCount() });
   }, [getTotalFilterCount, t]);
+
+  const favoriteEducationOpportunityIds = React.useMemo(
+    () =>
+      new Set(
+        suosikit.filter((suosikki) => suosikki.tyyppi === 'KOULUTUSMAHDOLLISUUS').map((suosikki) => suosikki.kohdeId),
+      ),
+    [suosikit],
+  );
+
+  const [favoritePinnedMahdollisuudet, setFavoritePinnedMahdollisuudet] = React.useState<KoulutusMahdollisuusFull[]>(
+    [],
+  );
+
+  const alreadyPlannedIds = React.useMemo(
+    () => new Set(tavoite?.suunnitelmat?.map((s) => s.koulutusmahdollisuusId).filter(Boolean)),
+    [tavoite],
+  );
+
+  React.useEffect(() => {
+    if (!filters.showFavorites || favoriteEducationOpportunityIds.size === 0) {
+      setFavoritePinnedMahdollisuudet([]);
+      return;
+    }
+    const ids = [...favoriteEducationOpportunityIds].filter((id) => !alreadyPlannedIds.has(id));
+    if (ids.length === 0) {
+      setFavoritePinnedMahdollisuudet([]);
+      return;
+    }
+    let cancelled = false;
+    void getKoulutusMahdollisuusDetailsFullPage(ids, ids.length).then((data) => {
+      if (!cancelled) setFavoritePinnedMahdollisuudet(data);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [favoriteEducationOpportunityIds, filters.showFavorites, alreadyPlannedIds]);
+
+  const renderActionButtonContent = React.useCallback(
+    (id: string) =>
+      selectedPlans?.includes(id) ? (
+        <div className="flex flex-row items-center gap-4">
+          <span
+            className={cx([
+              'flex items-center justify-center px-3 pb-1',
+              'size-[20px] rounded-full bg-primary-2-dark',
+              'text-heading-4 text-[0.875rem] uppercase',
+            ])}
+          ></span>
+          <Button
+            size="sm"
+            variant="gray"
+            label={t('profile.my-goals.remove-from-plans')}
+            onClick={() => setSelectedPlans(selectedPlans?.filter((plan) => plan !== id))}
+          />
+        </div>
+      ) : (
+        <Button
+          size="sm"
+          variant="gray"
+          className="bg-bg-gray"
+          label={t('profile.my-goals.choose-as-plan')}
+          onClick={() => setSelectedPlans([...selectedPlans, id])}
+        />
+      ),
+    [selectedPlans, setSelectedPlans, t],
+  );
+
+  const renderPlanOpportunity = React.useCallback(
+    (mahdollisuus: (typeof koulutusMahdollisuudet)[number]) => {
+      const { id } = mahdollisuus;
+      const ehdotus = mahdollisuusEhdotukset?.[id];
+      if (!ehdotus) return null;
+
+      const vaaditutOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
+      const matchingOsaamiset = mahdollisuus?.jakaumat?.osaaminen?.arvot!.filter((a) =>
+        vaaditutOsaamisetUris.has(a?.arvo),
+      ).length;
+      return (
+        <PlanOpportunityCard
+          key={id}
+          actionButtonContent={renderActionButtonContent(id)}
+          selected={selectedPlans?.includes(id)}
+          mahdollisuus={mahdollisuus}
+          matchValue={`${matchingOsaamiset}/${vaaditutOsaamiset.length}`}
+          matchLabel={t('profile.my-goals.competences')}
+        />
+      );
+    },
+    [mahdollisuusEhdotukset, renderActionButtonContent, t, vaaditutOsaamiset, selectedPlans],
+  );
+
+  const renderFavoriteOpportunity = React.useCallback(
+    (mahdollisuus: KoulutusMahdollisuusFull) => {
+      const { id } = mahdollisuus;
+      const vaaditutOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
+      const matchingOsaamiset =
+        mahdollisuus?.jakaumat?.osaaminen?.arvot?.filter((a) => vaaditutOsaamisetUris.has(a?.arvo)).length ?? 0;
+      return (
+        <PlanOpportunityCard
+          key={id}
+          actionButtonContent={renderActionButtonContent(id)}
+          mahdollisuus={mahdollisuus}
+          matchValue={`${matchingOsaamiset}/${vaaditutOsaamiset.length}`}
+          matchLabel={t('profile.my-goals.competences')}
+        />
+      );
+    },
+    [renderActionButtonContent, t, vaaditutOsaamiset],
+  );
 
   return (
     <Modal
@@ -187,62 +308,21 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                   </div>
                 )}
                 {!isLoading &&
-                  koulutusMahdollisuudet.map((mahdollisuus) => {
-                    const { id } = mahdollisuus;
-                    const ehdotus = mahdollisuusEhdotukset?.[id];
-                    const vaaditutOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
-                    const matchingOsaamiset = mahdollisuus?.jakaumat?.osaaminen?.arvot!.filter((a) => {
-                      const uri = a?.arvo;
-                      return vaaditutOsaamisetUris.has(uri);
-                    }).length;
+                  (filters.showFavorites ? (
+                    <>
+                      <li className="font-semibold mb-2 font-arial text-body-md-mobile sm:text-body-md">
+                        {t('profile.my-goals.filters.favorites.title')}
+                      </li>
+                      {favoritePinnedMahdollisuudet.map(renderFavoriteOpportunity)}
 
-                    return ehdotus ? (
-                      <PlanOpportunityCard
-                        key={id}
-                        actionButtonContent={
-                          selectedPlans?.includes(id) ? (
-                            <div className="flex flex-col gap-4 not-sm:justify-between sm:flex-row sm:items-center">
-                              <span
-                                className={tidyClasses([
-                                  'flex',
-                                  'items-center',
-                                  'justify-center',
-                                  'bg-primary-3',
-                                  'text-primary-gray',
-                                  'text-heading-4',
-                                  'rounded',
-                                  'px-3',
-                                  'pb-1',
-                                  'text-[0.875rem]',
-                                  'order-2',
-                                  'sm:order-1',
-                                  'uppercase',
-                                ])}
-                              >
-                                {t('profile.my-goals.plan')}
-                              </span>
-                              <ActionButton
-                                label={t('profile.my-goals.remove-from-plans')}
-                                onClick={() => setSelectedPlans(selectedPlans?.filter((plan) => plan !== id))}
-                                className="order-1 bg-bg-gray sm:order-2"
-                                icon={<JodRoute className="text-accent" />}
-                              />
-                            </div>
-                          ) : (
-                            <ActionButton
-                              className="bg-bg-gray"
-                              label={t('profile.my-goals.choose-as-plan')}
-                              onClick={() => setSelectedPlans([...selectedPlans, id])}
-                              icon={<JodRoute className="text-accent" />}
-                            />
-                          )
-                        }
-                        mahdollisuus={mahdollisuus}
-                        matchValue={`${matchingOsaamiset}/${vaaditutOsaamiset.length}`}
-                        matchLabel={t('profile.my-goals.competences')}
-                      />
-                    ) : null;
-                  })}
+                      <li className="font-semibold mt-2 mb-2 font-arial text-body-md-mobile sm:text-body-md">
+                        {t('profile.my-goals.filters.other-options-title')}
+                      </li>
+                      {koulutusMahdollisuudet.map(renderPlanOpportunity)}
+                    </>
+                  ) : (
+                    koulutusMahdollisuudet.map(renderPlanOpportunity)
+                  ))}
               </ul>
               <div className="my-4 px-5 md:pl-9">
                 <PlanOptionsPagination scrollRef={scrollRef} ariaLabel={t('pagination.bottom')} />

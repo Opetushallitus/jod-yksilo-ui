@@ -20,12 +20,14 @@ export interface PlanFilters {
   educationOpportunityType: string[];
   minDuration: number | null;
   maxDuration: number | null;
+  showFavorites: boolean;
 }
 
 export const DEFAULT_FILTERS: PlanFilters = {
   educationOpportunityType: [],
   minDuration: null,
   maxDuration: null,
+  showFavorites: false,
 };
 
 export type ArrayFilters = Extract<
@@ -52,6 +54,7 @@ export interface AddPlanState {
   setDurationFilter: (minDuration: number, maxDuration: number) => void;
   settingsHaveChanged?: boolean;
   setArrayFilter: (name: ArrayFilters, value: PlanFilters[ArrayFilters][number]) => void;
+  setShowFavorites: (value: boolean) => void;
   reset: () => void;
   resetSettings: () => void;
   setFilters: (filters: PlanFilters) => void;

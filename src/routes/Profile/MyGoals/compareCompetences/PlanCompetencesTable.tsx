@@ -57,15 +57,16 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
   return (
     <div className="mt-6 max-w-full overflow-x-auto py-2">
       <h3 className={'text-heading-3'}>{t('profile.my-goals.competence-compare')}</h3>
+      <p className="py-5 font-arial text-help text-secondary-gray">{t('profile.my-goals.competence-description')}</p>
       <table
         className="mt-3 font-arial"
         data-testid="compare-competences-table"
         aria-label={t('profile.my-goals.competence-compare')}
       >
         <thead>
-          <tr className="border-b border-inactive-gray text-form-label">
-            <th scope="col" className="pr-7 pb-3 pl-5 text-left">
-              {t('competence')}
+          <tr className="border-b border-border-gray text-form-label">
+            <th scope="col" className="pr-7 pb-3 text-left">
+              {t('profile.my-goals.competence-requirement-for-goal')}
             </th>
             <th scope="col" className="px-3 pb-3 text-center whitespace-nowrap sm:px-4">
               {t('profile.my-goals.own-competences')}
@@ -73,14 +74,16 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
             {plans.map((plan) => {
               return (
                 <th scope="col" key={`th-${plan.id}`} className="px-3 pb-3 text-center whitespace-nowrap sm:px-4">
-                  <TooltipWrapper
-                    tooltipPlacement="top"
-                    tooltipContent={
-                      <div className="max-w-[290px] text-body-xs leading-5">{getLocalizedText(plan.nimi)}</div>
-                    }
-                  >
-                    {plan.displayKey}
-                  </TooltipWrapper>
+                  <div className="font-bold flex size-[20px] justify-center rounded-full bg-primary-2-dark text-body-xs text-white">
+                    <TooltipWrapper
+                      tooltipPlacement="top"
+                      tooltipContent={
+                        <div className="max-w-[290px] text-body-xs leading-5">{getLocalizedText(plan.nimi)}</div>
+                      }
+                    >
+                      {plan.displayKey}
+                    </TooltipWrapper>
+                  </div>
                 </th>
               );
             })}
@@ -91,7 +94,7 @@ export const PlanCompetencesTable = ({ goal }: PlanCompetencesTableProps) => {
             <PlanCompetenceRow
               key={row.uri}
               row={row}
-              className={cx('odd:bg-bg-gray-2 even:bg-bg-gray', {
+              className={cx('odd:bg-bg-gray even:bg-white', {
                 'hidden print:block': index >= ROW_LIMIT && !showAll,
               })}
             />

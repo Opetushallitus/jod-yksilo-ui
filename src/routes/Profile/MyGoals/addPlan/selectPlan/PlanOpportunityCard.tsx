@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
-import { Accordion, Tag } from '@jod/design-system';
+import { Accordion, cx, Tag } from '@jod/design-system';
 
 import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
@@ -19,10 +19,11 @@ interface PlanOpportunityCardProps {
   actionButtonContent?: React.ReactNode;
   matchValue?: number | string;
   matchLabel?: string;
+  selected?: boolean;
 }
 
 const PlanOpportunityCard = React.memo(
-  ({ mahdollisuus, actionButtonContent, matchLabel, matchValue }: PlanOpportunityCardProps) => {
+  ({ mahdollisuus, actionButtonContent, matchLabel, matchValue, selected }: PlanOpportunityCardProps) => {
     const [osaamiset, setOsaamiset] = React.useState<components['schemas']['OsaaminenDto'][]>([]);
     const { vaaditutOsaamiset } = addPlanStore(
       useShallow((state) => ({
@@ -32,10 +33,6 @@ const PlanOpportunityCard = React.memo(
     const { t } = useTranslation();
     const { otsikko, kuvaus } = mahdollisuus;
     const missingOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
-
-    const bgColorClassName = mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'bg-primary-2-dark' : 'bg-primary-4-dark-2';
-    const textColorClassName =
-      mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'text-primary-2-dark!' : 'text-primary-4-dark-2!';
 
     const fetchOsaamiset = () =>
       client
@@ -56,7 +53,11 @@ const PlanOpportunityCard = React.memo(
     const { ref, handleKeyDown } = useArrowKeyControls(osaamiset);
 
     return (
-      <div className="flex flex-col rounded bg-white p-5 shadow-border sm:p-6">
+      <div
+        className={cx('flex flex-col rounded bg-white p-5 shadow-border sm:p-6', {
+          'border-4 border-primary-2 p-4 sm:p-[20px]': selected,
+        })}
+      >
         <div className="mb-4 flex flex-row justify-between gap-3 sm:items-start">
           {matchValue !== undefined && matchLabel && (
             <div
@@ -72,7 +73,7 @@ const PlanOpportunityCard = React.memo(
         </div>
         <div className="flex flex-row gap-3">
           <div
-            className={`flex aspect-square size-7 items-center justify-center rounded-full text-white sm:size-8 ${bgColorClassName} print:hidden`}
+            className={`flex aspect-square size-7 items-center justify-center rounded-full bg-primary-2-dark text-white sm:size-8 print:hidden`}
           >
             <TitleIcon mahdollisuusAlityyppi={mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'MUU_KOULUTUS' : 'TUTKINTO'} />
           </div>
@@ -85,7 +86,7 @@ const PlanOpportunityCard = React.memo(
 
         <Accordion
           title={getLocalizedText(otsikko)}
-          titleClassName={textColorClassName}
+          titleClassName="text-primary-2-dark"
           initialState={false}
           fetchData={fetchOsaamiset}
           ellipsis={false}

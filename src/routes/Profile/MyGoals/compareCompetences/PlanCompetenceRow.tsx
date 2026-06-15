@@ -16,10 +16,7 @@ interface CellProps {
 }
 
 const EmptyCell = ({ key, addBorder }: CellProps) => (
-  <td
-    key={key}
-    className={cx('justify-items-center px-3 sm:px-4', { 'border-l border-secondary-gray': addBorder })}
-  ></td>
+  <td key={key} className={cx('justify-items-center px-3 sm:px-4', { 'border-l border-border-gray': addBorder })}></td>
 );
 
 const FoundCell = ({ key, bgClass, addBorder }: CellProps) => {
@@ -28,7 +25,7 @@ const FoundCell = ({ key, bgClass, addBorder }: CellProps) => {
     <td
       key={key}
       className={cx('justify-center justify-items-center px-3 sm:px-4', {
-        'border-l border-secondary-gray': addBorder,
+        'border-l border-border-gray': addBorder,
       })}
     >
       <div role="img" aria-label={t('found')} className={cx('size-4 rounded-full', bgClass)} />
