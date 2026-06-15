@@ -808,7 +808,7 @@
       "add-favorites-dialog-action": "Lägg till favoriter",
       "add-favorites-dialog-description": "Du kan inte skapa ett mål än eftersom du inte har några lämpliga favoriter sparade. Lägg först till yrken eller arbetsmöjligheter som intresserar dig i dina favoriter – sedan kan du sätta mål från dem.",
       "add-favorites-dialog-title": "Lägg till favoriter först",
-      "add-favorites-to-goals": "Lägg till nytt mål",
+      "add-favorites-to-goals": "Skapa nytt mål",
       "add-goal-failed": "Misslyckades med att skapa mål – försök igen",
       "add-goal-success": "Mål skapat",
       "add-modal-description": "Ge målet ett namn och en beskrivning. Namnet visas i listorna och i beskrivningen kan du beskriva mer utförligt vad du vill uppnå och eventuella begränsningar.",
@@ -823,6 +823,8 @@
       "choose-favorite-description": "Välj yrke eller arbetsmöjlighet från dina favoriter som du vill ställa in som mål",
       "choose-favorite-header": "Välj mål från favoriter",
       "competence-compare": "Kompetensjämförelse",
+      "competence-description": "Till vänster listas de kompetenser som krävs för ditt mål. Till höger kan du se vad du redan kan. Informationen baseras på dina profiluppgifter.",
+      "competence-requirement-for-goal": "Kompetenskrav för mål",
       "competences": "Kompetenser",
       "custom-plan-competences-description": "Välj de kompetenser som krävs för målet och som du planerar att uppnå med ditt eget utbildningsalternativ.",
       "custom-plan-description": "Eget utbildningsalternativs beskrivning",
@@ -845,6 +847,13 @@
         "description": "Utforska utbildnings- och karriärmöjligheter. Lägg till de mest intressanta som favoriter och gör dem till dina egna mål.",
         "title": "Upptäck möjligheter"
       },
+      "filters": {
+        "favorites": {
+          "checkbox-label": "Visa favoriter i listan",
+          "title": "Favoriter"
+        },
+        "other-options-title": "Övriga alternativ"
+      },
       "goal": "Mål",
       "goal-description": "Målbeskrivning",
       "goal-name": "Målnamn",
@@ -853,7 +862,7 @@
       "no-chosen-competences": "Inga valda kompetenser",
       "no-favorites-selected": "Lägg till ett yrke eller en arbetsmöjlighet som favorit för att skapa mål",
       "no-filtered-results": "Inga utbildningsmöjligheter. Justera filtren för att se alternativ.",
-      "no-goals-created": "Du har inte lagt till några mål än.",
+      "no-goals-created": "Du har inte skapat några mål ännu.",
       "n-plans_one": "1 utbildningsalternativ",
       "n-plans_other": "{{count}} utbildningsalternativ",
       "n-plans_zero": "Du har inte lagt till några utbildningsalternativ ännu",

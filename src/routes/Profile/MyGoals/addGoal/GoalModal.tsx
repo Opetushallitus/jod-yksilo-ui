@@ -11,11 +11,10 @@ import {
   type PageChangeDetails,
   Pagination,
   Textarea,
-  tidyClasses,
   useMediaQueries,
   WizardProgress,
 } from '@jod/design-system';
-import { JodArrowLeft, JodArrowRight, JodCheckmark, JodFlag, JodFlagFilled } from '@jod/design-system/icons';
+import { JodArrowLeft, JodArrowRight, JodCheckmark, JodFlagFilled } from '@jod/design-system/icons';
 
 import { client } from '@/api/client.ts';
 import type { components } from '@/api/schema';
@@ -268,39 +267,22 @@ export const GoalModal = ({ mode, tavoite, ...rest }: GoalModalProps) => {
                         actionButtonContent={
                           isSelected ? (
                             <div className="flex items-center gap-4 not-sm:justify-between">
-                              <span
-                                className={tidyClasses([
-                                  'flex',
-                                  'items-center',
-                                  'justify-center',
-                                  'bg-primary-3',
-                                  'text-primary-gray',
-                                  'text-heading-4',
-                                  'rounded',
-                                  'px-3',
-                                  'pb-1',
-                                  'text-[0.875rem]',
-                                  'uppercase',
-                                  'sm:order-1',
-                                  'not-sm:ml-3',
-                                  'order-2',
-                                ])}
-                              >
-                                {t('profile.my-goals.goal')}
-                              </span>
-                              <ActionButton
-                                label={t('profile.my-goals.remove-from-goals')}
-                                onClick={() => setSelectedMahdollisuus(null)}
-                                className="order-2 bg-bg-gray sm:order-1"
-                                icon={<JodFlagFilled className="text-accent" />}
-                              />
+                              <div className="flex flex-row gap-4">
+                                <JodFlagFilled className="text-accent" />
+                                <ActionButton
+                                  label={t('profile.my-goals.remove-from-goals')}
+                                  onClick={() => setSelectedMahdollisuus(null)}
+                                  className="bg-bg-gray"
+                                  icon={null}
+                                />
+                              </div>
                             </div>
                           ) : (
                             <ActionButton
-                              className="bg-bg-gray"
+                              className="h-6 bg-bg-gray"
                               label={t('profile.my-goals.set-to-goal')}
                               onClick={() => setSelectedMahdollisuus(mahdollisuus)}
-                              icon={<JodFlag className="text-accent" />}
+                              icon={null}
                             />
                           )
                         }

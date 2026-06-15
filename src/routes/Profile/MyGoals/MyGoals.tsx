@@ -110,26 +110,27 @@ const MyGoals = () => {
           <p>{t('profile.my-goals.description')}</p>
         </div>
       </div>
+      <div className="mb-6 flex flex-col items-start gap-7 px-5 sm:mb-7 sm:px-6 lg:pr-0 lg:pl-6">
+        <div className="flex flex-row gap-5 sm:gap-6">
+          <Button
+            variant="accent"
+            ariaHaspopup="dialog"
+            onClick={guardedAction(showModal, GoalModal, { mode: 'ADD' })}
+            label={t('profile.my-goals.add-favorites-to-goals')}
+            disabled={suosikitIsEmpty}
+            testId="goals-add-favorites-button"
+          />
+          {suosikitIsEmpty && (
+            <EmptyState text={t('profile.my-goals.no-favorites-selected')} testId="goals-empty-state" />
+          )}
+        </div>
+        {!suosikitIsEmpty && tavoitteet.length === 0 && (
+          <div>
+            <EmptyState text={t('profile.my-goals.no-goals-created')} testId="goals-empty-state" />
+          </div>
+        )}
+      </div>
       {tavoitteet.length > 0 && <MyGoalsSection tavoitteet={tavoitteet} />}
-      {!suosikitIsEmpty && tavoitteet.length === 0 && (
-        <div className="mb-6 px-5 sm:pl-6">
-          <EmptyState text={t('profile.my-goals.no-goals-created')} testId="goals-empty-state" />
-        </div>
-      )}
-      {suosikitIsEmpty && (
-        <div className="mb-[180px] px-5 sm:pl-6">
-          <EmptyState text={t('profile.my-goals.no-favorites-selected')} testId="goals-empty-state" />
-        </div>
-      )}
-      <Button
-        variant="accent"
-        ariaHaspopup="dialog"
-        onClick={guardedAction(showModal, GoalModal, { mode: 'ADD' })}
-        label={t('profile.my-goals.add-favorites-to-goals')}
-        disabled={suosikitIsEmpty}
-        testId="goals-add-favorites-button"
-        className="mt-7 ml-5 sm:mt-9 sm:ml-6"
-      />
       {lg ? null : (
         <div className="mt-6 flex flex-col gap-4 px-5 sm:px-6">
           <ToolCard

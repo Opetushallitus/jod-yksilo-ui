@@ -13,6 +13,8 @@ import { MAX_KESTO_VALUE, MIN_KESTO_VALUE } from '@/routes/Profile/MyGoals/addPl
 import { Setting } from '@/routes/Tool/components/Setting';
 import { getFilterCount, noFiltersSelected } from '@/utils/FilterUtils';
 
+import { FilterShowFavorites } from './FilterShowFavorites';
+
 export interface PlanOptionFiltersProps extends ModalComponentProps {
   onConfirm: () => void;
 }
@@ -42,13 +44,17 @@ const SettingsMenu = () => {
         >
           <FilterEducationOpportunityType />
         </Setting>
+        <Setting initiallyOpen title={t('tool.settings.general.duration')} count={getKestoCount()}>
+          <FilterKesto />
+        </Setting>
+
         <Setting
           initiallyOpen
-          title={t('tool.settings.general.duration')}
-          count={getKestoCount()}
+          title={t('profile.my-goals.filters.favorites.title')}
+          count={getFilterCount(filters, ['showFavorites'])}
           className="border-b-2 pb-3"
         >
-          <FilterKesto />
+          <FilterShowFavorites />
         </Setting>
       </ul>
     </div>
@@ -63,7 +69,12 @@ const PlanOptionFilters = ({ onConfirm, ...rest }: PlanOptionFiltersProps) => {
   const filters = addPlanStore((state) => state.filters);
   const { sm } = useMediaQueries();
   const [initialFilters] = React.useState(filters);
-  const filtersHaveChanged = JSON.stringify(filters) !== JSON.stringify(initialFilters);
+  const filtersHaveChanged =
+    filters.showFavorites !== initialFilters.showFavorites ||
+    filters.minDuration !== initialFilters.minDuration ||
+    filters.maxDuration !== initialFilters.maxDuration ||
+    filters.educationOpportunityType.length !== initialFilters.educationOpportunityType.length ||
+    filters.educationOpportunityType.some((v, i) => v !== initialFilters.educationOpportunityType[i]);
   const titleRef = React.useRef<HTMLHeadingElement>(null);
   const { closeActiveModal } = useModal();
 

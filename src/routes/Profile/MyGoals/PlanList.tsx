@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import { useShallow } from 'zustand/shallow';
 
 import { Accordion, Button, cx, EmptyState, useMediaQueries } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
@@ -8,10 +9,13 @@ import { JodArrowRight } from '@jod/design-system/icons';
 import type { components } from '@/api/schema';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
+import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
 import DeleteSuunnitelmaButton from '@/routes/Profile/MyGoals/DeleteSuunnitelmaButton';
 import { planLetter, planNumberPrefix } from '@/routes/Profile/MyGoals/planLetterUtil';
+import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
 import { getLocalizedText } from '@/utils';
 
+import AddPlanModal from './addPlan/AddPlanModal';
 import AddOrEditCustomPlanModal from './addPlan/customPlan/AddOrEditCustomPlanModal';
 
 export interface PlanListProps {
@@ -35,6 +39,13 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
   );
   const divider = <div className="border-b-2 border-border-gray" />;
   const guardedAction = useSessionGuardedAction();
+  const setTavoite = addPlanStore((state) => state.setTavoite);
+
+  const { isLoading } = useTavoitteetStore(
+    useShallow((state) => ({
+      isLoading: state.isLoading,
+    })),
+  );
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -49,16 +60,15 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
     const numberPrefix = planNumberPrefix(index);
     const letter = planLetter(index);
     return (
-      <span className="text-primary-gray">
+      <span className="font-bold flex size-[20px] items-center justify-center rounded-full bg-primary-2-dark px-3 text-body-xs text-white">
         {numberPrefix && numberPrefix > 0 ? numberPrefix : ''}
-        {letter}:
+        {letter}
       </span>
     );
   };
 
   const content = (
     <div className="mt-2 flex flex-col justify-center gap-3">
-      {goal.suunnitelmat?.length === 0 && emptyPlans}
       {goal.suunnitelmat?.map((s, index) => {
         const description = getLocalizedText(s.kuvaus);
 
@@ -69,10 +79,10 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
               {!s.koulutusmahdollisuusId && (
                 <div>
                   <p className="inline-flex gap-3 text-heading-4 text-accent">
-                    <span>{planPrefix(index)}</span>
+                    {planPrefix(index)}
                     <span>{getLocalizedText(s.nimi)}</span>
                   </p>
-                  {description && <p className="mt-2 text-body-sm text-primary-gray">{description}</p>}
+                  {description && <p className="mt-2 ml-6 font-arial text-body-sm text-primary-gray">{description}</p>}
                 </div>
               )}
               {/* Non-custom plan */}
@@ -82,7 +92,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
                   className="flex gap-2 pr-5 text-heading-4 text-accent"
                 >
                   <p className="inline-flex gap-3 text-heading-4 text-accent">
-                    <span>{planPrefix(index)}</span>
+                    {planPrefix(index)}
                     <span className="flex items-center gap-3">
                       <span>{getLocalizedText(s.nimi)}</span>
                       <span>
@@ -122,13 +132,29 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
           </React.Fragment>
         );
       })}
+      <div className="mt-3 flex flex-row items-start justify-between">
+        {goal.suunnitelmat?.length === 0 && emptyPlans}
+        <div className="flex flex-1 justify-end">
+          <Button
+            variant="accent"
+            ariaHaspopup="dialog"
+            size={'sm'}
+            onClick={guardedAction(() => {
+              setTavoite(goal);
+              showModal(AddPlanModal);
+            })}
+            disabled={isLoading}
+            label={t('profile.my-goals.add-new-plan-for-goal')}
+          />
+        </div>
+      </div>
     </div>
   );
   return (
     <div className="mt-8 pl-3 sm:pl-4">
       {sm ? (
         <div className="flex flex-col">
-          <h3 className="text-heading-3">{title}</h3>
+          <h3 className="mb-5 text-heading-3">{title}</h3>
           {content}
         </div>
       ) : (

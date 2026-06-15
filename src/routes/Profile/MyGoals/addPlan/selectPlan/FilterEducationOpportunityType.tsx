@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 import { Checkbox } from '@jod/design-system';
+import { JodAi } from '@jod/design-system/icons';
 
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore.ts';
 
@@ -27,7 +28,12 @@ export const FilterEducationOpportunityType = () => {
         ariaLabel={t('opportunity-type.education.TUTKINTO')}
         className="font-poppins!"
         checked={filter.includes('TUTKINTO')}
-        label={t('opportunity-type.education.TUTKINTO')}
+        label={
+          <span className="pl-4">
+            {t('opportunity-type.education.TUTKINTO')}{' '}
+            <JodAi className="mb-1 ml-3 inline" aria-label={t('ai-icon-alt')} />
+          </span>
+        }
         name={t('opportunity-type.education.TUTKINTO')}
         onChange={onFilterChange}
         value="TUTKINTO"
@@ -37,7 +43,12 @@ export const FilterEducationOpportunityType = () => {
         ariaLabel={t('opportunity-type.education.EI_TUTKINTO')}
         className="font-poppins!"
         checked={filter.includes('EI_TUTKINTO')}
-        label={t('opportunity-type.education.EI_TUTKINTO')}
+        label={
+          <span className="pl-4">
+            {t('opportunity-type.education.EI_TUTKINTO')}{' '}
+            <JodAi className="mb-1 ml-3 inline" aria-label={t('ai-icon-alt')} />
+          </span>
+        }
         name={t('opportunity-type.education.EI_TUTKINTO')}
         onChange={onFilterChange}
         value="EI_TUTKINTO"

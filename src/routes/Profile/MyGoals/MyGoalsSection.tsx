@@ -10,7 +10,6 @@ import { OpportunityCard } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { GoalModal } from '@/routes/Profile/MyGoals/addGoal/GoalModal';
-import AddPlanModal from '@/routes/Profile/MyGoals/addPlan/AddPlanModal';
 import { addPlanStore } from '@/routes/Profile/MyGoals/addPlan/store/addPlanStore';
 import { PlanCompetencesTable } from '@/routes/Profile/MyGoals/compareCompetences/PlanCompetencesTable';
 import loader from '@/routes/Profile/MyGoals/loader';
@@ -80,7 +79,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
           const contentId = `accordion-content-${id}`;
 
           return (
-            <div key={id} className="flex flex-col">
+            <div key={id} className="flex flex-col rounded bg-white p-5 sm:p-6">
               <Accordion
                 triggerId={triggerId}
                 ariaControls={contentId}
@@ -89,7 +88,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                 title={getLocalizedText(tavoite.tavoite)}
                 collapsedContent={
                   <div className="mt-2 flex flex-col">
-                    <p className="text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
+                    <p className="font-arial text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
                     <p className="font-semibold text-secondary-gray sm:text-body-sm">
                       {t('profile.my-goals.n-plans', { count: tavoite.suunnitelmat?.length ?? 0 })}
                     </p>
@@ -97,7 +96,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                 }
               >
                 <section id={contentId}>
-                  <p className="mt-3 text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
+                  <p className="mt-3 font-arial text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
                   <div className="p-4">
                     {details && mahdollisuusTyyppi && (
                       <>
@@ -115,6 +114,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                           headingLevel="h3"
                           hideFavorite
                           isActiveOpportunity={details.aktiivinen}
+                          borderClassName="border-2 border-border-gray"
                         />
                         <PlanList
                           goal={tavoite}
@@ -125,24 +125,12 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                     )}
 
                     <div className="mt-9 flex flex-col items-start gap-3 pl-3 sm:pl-4">
-                      <Button
-                        variant="white"
-                        ariaHaspopup="dialog"
-                        size={sm ? 'lg' : 'sm'}
-                        onClick={guardedAction(() => {
-                          setTavoite(tavoite);
-                          showModal(AddPlanModal);
-                        })}
-                        disabled={isLoading}
-                        label={t('profile.my-goals.add-new-plan-for-goal')}
-                      />
                       <PlanCompetencesTable goal={tavoite} />
-
-                      <div className="flex w-full justify-between">
+                      <div className="flex w-full justify-end gap-5">
                         <Button
-                          variant="white"
+                          variant="gray"
                           ariaHaspopup="dialog"
-                          size={sm ? 'lg' : 'sm'}
+                          size={'sm'}
                           onClick={guardedAction(() => {
                             setTavoite(tavoite);
                             showModal(GoalModal, { mode: 'UPDATE', tavoite: tavoite });
@@ -153,7 +141,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                         <Button
                           label={t('profile.my-goals.delete-goal')}
                           variant="white-delete"
-                          size={sm ? 'lg' : 'sm'}
+                          size={'sm'}
                           ariaHaspopup="dialog"
                           onClick={guardedAction(() => {
                             showDialog({

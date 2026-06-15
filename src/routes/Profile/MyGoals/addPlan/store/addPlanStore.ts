@@ -197,4 +197,12 @@ export const addPlanStore = create<AddPlanState>((set, get) => ({
       },
     }));
   },
+  setShowFavorites: (value: boolean) =>
+    set((state) => ({
+      settingsHaveChanged: true,
+      filters: {
+        ...state.filters,
+        showFavorites: value,
+      },
+    })),
 }));
