@@ -8,6 +8,7 @@ import { DataImportTable } from '@/components/DataImportTable/DataImportTable';
 import type { CvImportConvertedData } from './utils';
 
 interface SectionProps {
+  className?: string;
   hasData: boolean;
   titleText: string;
   noDataText: string;
@@ -15,9 +16,16 @@ interface SectionProps {
   rows?: ExperienceTableRowData[];
 }
 
-const Section = ({ hasData, titleText: titleKey, noDataText, toggleAllSelectionText, rows }: SectionProps) => {
+const Section = ({
+  className,
+  hasData,
+  titleText: titleKey,
+  noDataText,
+  toggleAllSelectionText,
+  rows,
+}: SectionProps) => {
   return (
-    <div>
+    <div className={className}>
       <h2 className="mb-6 text-heading-2-mobile sm:text-heading-2">{titleKey}</h2>
       {hasData && rows && <DataImportTable rows={rows} toggleAllSelectionText={toggleAllSelectionText} />}
       {!hasData && <EmptyState text={noDataText} />}
@@ -73,6 +81,7 @@ const SummaryStep = ({ isLoading, convertedData }: SummaryStepProps) => {
             noDataText={t('preferences.cv-import.summary.activities.no-data')}
             toggleAllSelectionText={t('free-time-activities.theme-or-activity')}
             rows={convertedData?.activities}
+            className="mb-8"
           />
         </>
       )}
