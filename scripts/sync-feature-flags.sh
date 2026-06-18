@@ -152,13 +152,11 @@ function get_feature_value() {
     --query 'Parameter.Value' \
     --output text 2>/dev/null || echo "")
 
-  # If parameter doesn't exist or is empty, default to "true"
-  if [[ -z "$value" || "$value" == "None" ]]; then
+  # If parameter doesn't exist or is empty, default to "false"
+  if [[ "$value" == "true" ]]; then
     echo "true"
-  elif [[ "$value" == "false" ]]; then
-    echo "false"
   else
-    echo "true"
+    echo "false"
   fi
   return
 }
