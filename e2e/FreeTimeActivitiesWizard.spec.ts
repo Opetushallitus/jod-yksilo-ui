@@ -45,7 +45,7 @@ test('add new freetime activity', async ({ page, isMobile }) => {
   // "Tunnista osaamisia"
   await page.getByRole('textbox', { name: 'Tunnista osaamisia' }).fill('uida');
 
-  await page.getByRole('button', { name: 'uida' }).click();
+  await page.getByRole('button', { name: 'uida' }).first().click();
   await page.getByRole('button', { name: 'selviytyä merellä tilanteessa, jossa laiva joudutaan jättämään' }).click();
   await page.getByRole('button', { name: 'maailmanlaajuinen merihätä- ja turvallisuusjärjestelmä' }).click();
 
