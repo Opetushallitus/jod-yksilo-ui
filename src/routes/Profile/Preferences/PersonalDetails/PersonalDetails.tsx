@@ -97,63 +97,8 @@ const PersonalDetails = () => {
 
   return (
     <>
-      <section className="mb-8" data-testid="data-disclosure-unanonymized-section">
-        <h2 className="mb-3 text-heading-3-mobile sm:text-heading-3" data-testid="data-disclosure-unanonymized-title">
-          {t('preferences.data-disclosure-unanonymized.title')}
-        </h2>
-        <p className="mb-5 font-arial text-body-md">{t('preferences.data-disclosure-unanonymized.description')}</p>
-        <div
-          className="flex items-center justify-between gap-4 border-b-2 border-[#CCC] py-4"
-          data-testid="pref-share-third-parties"
-        >
-          <div className="flex-1 font-arial">
-            <p className="text-form-label">
-              {t('preferences.data-disclosure-unanonymized.permission-education-and-planning.title')}
-            </p>
-            <p className="text-help-mobile sm:text-help">
-              {t('preferences.data-disclosure-unanonymized.permission-education-and-planning.description')}
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <ToggleAllow
-              checked={lupaLuovuttaaTiedotUlkopuoliselle}
-              onChange={guardedAction(() => {
-                const newValue = !lupaLuovuttaaTiedotUlkopuoliselle;
-                setLupaLuovuttaaTiedotUlkopuoliselle(newValue);
-                void persist({ ...getPayload(), lupaLuovuttaaTiedotUlkopuoliselle: newValue });
-              })}
-              testId="pref-share-third-parties-toggle"
-            />
-          </div>
-        </div>
-        <div
-          className="flex items-center justify-between gap-4 border-b-2 border-[#CCC] py-4"
-          data-testid="pref-ai-training"
-        >
-          <div className="flex-1 font-arial">
-            <p className="text-form-label">
-              {t('preferences.data-disclosure-unanonymized.permission-use-AI-education.title')}
-            </p>
-            <p className="text-help-mobile sm:text-help">
-              {t('preferences.data-disclosure-unanonymized.permission-use-AI-education.description')}
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <ToggleAllow
-              checked={lupaKayttaaTekoalynKoulutukseen}
-              onChange={guardedAction(() => {
-                const newValue = !lupaKayttaaTekoalynKoulutukseen;
-                setLupaKayttaaTekoalynKoulutukseen(newValue);
-                void persist({ ...getPayload(), lupaKayttaaTekoalynKoulutukseen: newValue });
-              })}
-              testId="pref-ai-training-toggle"
-            />
-          </div>
-        </div>
-      </section>
-
       <section className="mb-8" data-testid="personal-details-section">
-        <h2 className="text-heading-2-mobile sm:text-heading-2" data-testid="personal-details-title">
+        <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2" data-testid="personal-details-title">
           {t('preferences.personal-details.title')}
         </h2>
         <div className="mb-5 font-arial text-body-md-mobile sm:text-body-md">
@@ -208,7 +153,7 @@ const PersonalDetails = () => {
               requiredText={t('common:required')}
               value={email}
               placeholder="matti.meikalainen@suomi.fi"
-              errorMessage={emailValid === false ? formErrorMessage.email().message : ''}
+              errorMessage={emailValid === false ? formErrorMessage.email().message : undefined}
               onBlur={() => checkEmail(email)}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 guardedAction(() => {
@@ -220,6 +165,63 @@ const PersonalDetails = () => {
           }
           testId="email"
         />
+      </section>
+
+      <Divider className="mb-7" />
+
+      <section className="mb-8" data-testid="data-disclosure-unanonymized-section">
+        <h2 className="mb-3 text-heading-3-mobile sm:text-heading-3" data-testid="data-disclosure-unanonymized-title">
+          {t('preferences.data-disclosure-unanonymized.title')}
+        </h2>
+        <p className="mb-5 font-arial text-body-md">{t('preferences.data-disclosure-unanonymized.description')}</p>
+        <div
+          className="flex items-center justify-between gap-4 border-b-2 border-[#CCC] py-4"
+          data-testid="pref-share-third-parties"
+        >
+          <div className="flex-1 font-arial">
+            <p className="text-form-label">
+              {t('preferences.data-disclosure-unanonymized.permission-education-and-planning.title')}
+            </p>
+            <p className="text-help-mobile sm:text-help">
+              {t('preferences.data-disclosure-unanonymized.permission-education-and-planning.description')}
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <ToggleAllow
+              checked={lupaLuovuttaaTiedotUlkopuoliselle}
+              onChange={guardedAction(() => {
+                const newValue = !lupaLuovuttaaTiedotUlkopuoliselle;
+                setLupaLuovuttaaTiedotUlkopuoliselle(newValue);
+                void persist({ ...getPayload(), lupaLuovuttaaTiedotUlkopuoliselle: newValue });
+              })}
+              testId="pref-share-third-parties-toggle"
+            />
+          </div>
+        </div>
+        <div
+          className="flex items-center justify-between gap-4 border-b-2 border-[#CCC] py-4"
+          data-testid="pref-ai-training"
+        >
+          <div className="flex-1 font-arial">
+            <p className="text-form-label">
+              {t('preferences.data-disclosure-unanonymized.permission-use-AI-education.title')}
+            </p>
+            <p className="text-help-mobile sm:text-help">
+              {t('preferences.data-disclosure-unanonymized.permission-use-AI-education.description')}
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <ToggleAllow
+              checked={lupaKayttaaTekoalynKoulutukseen}
+              onChange={guardedAction(() => {
+                const newValue = !lupaKayttaaTekoalynKoulutukseen;
+                setLupaKayttaaTekoalynKoulutukseen(newValue);
+                void persist({ ...getPayload(), lupaKayttaaTekoalynKoulutukseen: newValue });
+              })}
+              testId="pref-ai-training-toggle"
+            />
+          </div>
+        </div>
       </section>
     </>
   );
