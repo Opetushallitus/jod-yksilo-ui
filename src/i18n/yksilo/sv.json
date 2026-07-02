@@ -564,7 +564,7 @@
       "description": "Du kan permanent radera hela din kompetensprofil och alla uppgifter som finns lagrade i den. Du kan inte ångra raderingen. Obs! Du kan radera en vägledarprofil i avsnittet för vägledare.",
       "title": "Ta bort din kompetensprofil"
     },
-    "description": "På den här sidan kan du hantera inställningarna för din kompetensprofil och bestämma hur dina uppgifter ska användas. Du kan dela din profil med en länk, hantera tillstånd för användning av uppgifterna, ladda ner dina profiluppgifter eller radera din profil helt och hållet. Du bestämmer vilka uppgifter som du delar och med vem.",
+    "description": "På den här sidan kan du hantera inställningarna för din kompetensprofil och bestämma hur dina uppgifter ska användas. Du kan hantera tillstånd för användning av uppgifterna, ladda ner dina profiluppgifter eller radera din profil helt och hållet. Du bestämmer vilka uppgifter som du delar och med vem.",
     "download": {
       "action": "Ladda ner uppgifterna i min kompetensprofil (JSON)",
       "description": "Du kan ladda ner all information som sparats i din kompetensprofil till din egen enhet. Uppgifternas laddas i ett maskinläsbart JSON-format. JSON är ett enkelt och lätt öppet filformat för informationsförmedling och lagring.",
@@ -624,7 +624,7 @@
     },
     "tmt-import-export": {
       "continue-to-tmt": "Fortsätt till Jobbmarknaden",
-      "description": "Du kan importera och exportera dina uppgifter mellan Kompetensvägen och Jobbmarknaden. Uppgifterna uppdateras inte automatiskt, utan du bestämmer själv vilken information du vill överföra mellan tjänsterna.<br/><br/>Importerade uppgifter finns i din kompetensprofil. Exporterade uppgifter finns i din jobbsökarprofil på Jobbmarknaden. Kontrollera och redigera uppgifterna vid behov.<br/><br/><CustomLink>Gå till Jobbmarknaden för att se dina uppgifter<Icon></Icon></CustomLink>.",
+      "description": "Du kan importera och exportera dina uppgifter mellan Kompetensvägen och Jobbmarknaden. Uppgifterna uppdateras inte automatiskt, utan du bestämmer själv vilken information du vill överföra mellan tjänsterna.<br/><br/>Importerade uppgifter finns i din kompetensprofil. Exporterade uppgifter finns i din jobbsökarprofil på Jobbmarknaden. Kontrollera och redigera uppgifterna vid behov.<br/><br/><CustomLink>Gå till Jobbmarknaden för att se dina uppgifter<Icon></Icon></CustomLink>",
       "errors": {
         "forbidden": "Ett fel uppstod vid hanteringen av auktoriseringen.",
         "not-found": "Användaren hittades inte i Jobbmarknaden.",
@@ -658,6 +658,11 @@
         "success": "Dina uppgifter har importerats från Jobbmarknaden."
       },
       "title": "Importera och exportera uppgifter mellan Kompetensvägen och Jobbmarknaden"
+    },
+    "koski-import": {
+      "title": "Importera min utbildningshistorik",
+      "description": "Du kan importera utbildningshistorikdata som sparats i de nationella studie-, utbildnings- och examensregistren som en del av Min kompetensstig.",
+      "button-label": "Importera min utbildningshistorik"
     }
   },
   "previous": "Föregående",
@@ -708,6 +713,10 @@
         "view-guided-tour": "Tips för identifiering av kompetenser",
         "view-guided-tour-label": "Starta den guidade visningen av kompetensidentifiering"
       }
+    },
+    "data-import-export": {
+      "title": "Importera och exportera data",
+      "description": "På den här sidan kan du hantera profilinställningarna för import och export av data. Du kan dela din profil via en länk och importera data från andra tjänster. Du bestämmer vilka uppgifter du delar och med vem."
     },
     "education-history": {
       "description": "Nedan hittar du din utbildningshistorik. Du kan själv lägga till uppgifter i din utbildningshistorik och kartlägga den kompetens som är kopplad till dem. Du kan också importera dina egna studieprestationer från de nationella studie-, utbildnings- och examensregistren som en del av din utbildningshistorik (Studieinfo).",
@@ -1041,6 +1050,7 @@
     "profile": {
       "competences": "kompetenser",
       "education-history": "utbildningar",
+      "data-import-export": "importera-och-exportera-data",
       "favorites": "favoriter",
       "free-time-activities": "fritidsaktiviteter",
       "front": "startsida",

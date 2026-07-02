@@ -52,6 +52,11 @@ export const useAppRoutes = () => {
       authRequired: true,
     },
     {
+      name: t('profile.data-import-export.title'),
+      path: t('slugs.profile.data-import-export'),
+      authRequired: true,
+    },
+    {
       name: t('profile.preferences.title'),
       path: t('slugs.profile.preferences'),
       authRequired: true,

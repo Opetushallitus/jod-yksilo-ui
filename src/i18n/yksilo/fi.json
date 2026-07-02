@@ -563,7 +563,7 @@
       "description": "Voit poistaa koko osaamisprofiilisi ja kaikki siihen tallennetut tiedot pysyvästi. Poistoa ei voi perua. Huom! Voit poistaa ohjaajan profiilin Ohjaajan osiosta.",
       "title": "Poista osaamisprofiilisi"
     },
-    "description": "Tällä sivulla voit hallita osaamisprofiilisi asetuksia ja päättää, miten tietojasi käytetään. Voit jakaa profiilisi linkin avulla, hallita lupia tietojen käyttöön, ladata profiilisi tiedot itsellesi tai poistaa profiilisi kokonaan. Sinä päätät, mitä tietoja jaat ja kenelle.",
+    "description": "Tällä sivulla voit hallita osaamisprofiilisi asetuksia ja päättää, miten tietojasi käytetään. Voit hallita lupia tietojen käyttöön, ladata profiilisi tiedot itsellesi tai poistaa profiilisi kokonaan. Sinä päätät, mitä tietoja jaat ja kenelle.",
     "download": {
       "action": "Lataa osaamisprofiilini tiedot (JSON)",
       "description": "Voit ladata kaikki osaamisprofiiliisi tallennetut tiedot omalle laitteellesi. Tiedot muodostetaan koneluettavaan JSON-muotoon. JSON on yksinkertainen ja kevyt avoimen standardin tiedostomuoto tiedonvälitykseen ja tallennukseen.",
@@ -623,7 +623,7 @@
     },
     "tmt-import-export": {
       "continue-to-tmt": "Jatka Työmarkkinatoriin",
-      "description": "Voit tuoda ja viedä tietojasi Osaamispolun ja Työmarkkinatorin välillä. Tiedot eivät päivity automaattisesti, vaan päätät itse mitä tietoa haluat siirtää palveluiden välillä.<br/><br/>Tuomasi tiedot löytyvät osaamisprofiilistasi. Viemäsi tiedot löytyvät Työmarkkinatorin työnhakuprofiilistasi. Tarkista tiedot ja muokkaa niitä tarvittaessa.<br/><br/><CustomLink>Siirry Työmarkkinatoriin tarkastelemaan tietojasi<Icon></Icon></CustomLink>.",
+      "description": "Voit tuoda ja viedä tietojasi Osaamispolun ja Työmarkkinatorin välillä. Tiedot eivät päivity automaattisesti, vaan päätät itse mitä tietoa haluat siirtää palveluiden välillä.<br/><br/>Tuomasi tiedot löytyvät osaamisprofiilistasi. Viemäsi tiedot löytyvät Työmarkkinatorin työnhakuprofiilistasi. Tarkista tiedot ja muokkaa niitä tarvittaessa.<br/><br/><CustomLink>Siirry Työmarkkinatoriin tarkastelemaan tietojasi<Icon></Icon></CustomLink>",
       "errors": {
         "forbidden": "Valtuutuksen käsittelyssä tapahtui virhe.",
         "not-found": "Käyttäjää ei löydy Työmarkkinatorista.",
@@ -657,6 +657,11 @@
         "success": "Tietojesi tuonti Työmarkkinatorista onnistui"
       },
       "title": "Siirrä tietojasi Työmarkkinatorin ja Osaamispolun välillä"
+    },
+    "koski-import": {
+      "title": "Tuo koulutushistoriani",
+      "description": "Voit tuoda valtakunnallisiin opinto-, koulutus- ja tutkintorekistereihin tallennettuja koulutushistoriatietojasi osaksi Oma Osaamispolkua.",
+      "button-label": "Tuo koulutushistoriani"
     }
   },
   "previous": "Edellinen",
@@ -707,6 +712,10 @@
         "view-guided-tour": "Vinkit osaamisten tunnistamiseen",
         "view-guided-tour-label": "Käynnistä osaamisten tunnistamisen opastettu esittely"
       }
+    },
+    "data-import-export": {
+      "title": "Tuo ja vie tietoja",
+      "description": "Tällä sivulla voit hallita profiilisi tietojen tuonti- ja vientiasetuksia.  Voit jakaa profiilisi linkin avulla sekä tuoda tietoja muista palveluista. Sinä päätät, mitä tietoja jaat ja kenelle."
     },
     "education-history": {
       "description": "Löydät alta koulutushistoriasi. Voit lisätä itse koulutushistoriaasi sekä kartoittaa niihin liittyviä osaamisia. Voit tuoda myös omat opintosuorituksesi valtakunnallisista opinto-, koulutus- ja tutkintorekistereistä osaksi koulutushistoriaasi (Opintopolku).",
@@ -1040,6 +1049,7 @@
     "profile": {
       "competences": "osaamiset",
       "education-history": "koulutukset",
+      "data-import-export": "tuo-ja-vie-tietoja",
       "favorites": "suosikit",
       "free-time-activities": "vapaa-ajan-toiminnot",
       "front": "etusivu",

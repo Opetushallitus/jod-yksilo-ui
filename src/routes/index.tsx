@@ -21,6 +21,7 @@ import { withYksiloContext } from '../auth';
 import { Cv, cvLoader } from './Cv';
 import { Home } from './Home';
 import { Favorites, LoginPage, Preferences, Profile, SomethingElse } from './Profile';
+import { DataImportExport, dataImportExportLoader } from './Profile/DataImportExport';
 import { EducationHistory } from './Profile/EducationHistory';
 import { FreeTimeActivities } from './Profile/FreeTimeActivities';
 import { profilePreferencesLoader } from './Profile/Preferences';
@@ -47,24 +48,6 @@ const profileRoutes = supportedLanguageCodes.map(
           id: `{slugs.profile.front}|${lng}`,
           path: i18n.t('slugs.profile.front', { lng }),
           element: <ProfileFront />,
-        },
-        {
-          id: `{slugs.profile.preferences}|${lng}`,
-          path: i18n.t('slugs.profile.preferences', { lng }),
-          element: <Preferences />,
-          handle: {
-            title: i18n.t('profile.preferences.title', { lng }),
-          },
-          loader: withYksiloContext(profilePreferencesLoader),
-        },
-        {
-          id: `{slugs.profile.favorites}|${lng}`,
-          path: i18n.t('slugs.profile.favorites', { lng }),
-          element: <Favorites />,
-          loader: withYksiloContext(favoritesLoader),
-          handle: {
-            title: i18n.t('profile.favorites.title', { lng }),
-          },
         },
         {
           id: `{${'slugs.profile.competences'}}|${lng}`,
@@ -112,6 +95,24 @@ const profileRoutes = supportedLanguageCodes.map(
           },
         },
         {
+          id: `{slugs.profile.interests}|${lng}`,
+          path: i18n.t('slugs.profile.interests', { lng }),
+          loader: withYksiloContext(interestsLoader),
+          element: <ProfileInterests />,
+          handle: {
+            title: i18n.t('profile.interests.title', { lng }),
+          },
+        },
+        {
+          id: `{slugs.profile.favorites}|${lng}`,
+          path: i18n.t('slugs.profile.favorites', { lng }),
+          element: <Favorites />,
+          loader: withYksiloContext(favoritesLoader),
+          handle: {
+            title: i18n.t('profile.favorites.title', { lng }),
+          },
+        },
+        {
           id: `{slugs.profile.goals}|${lng}`,
           path: i18n.t('slugs.profile.goals', { lng }),
           handle: {
@@ -127,13 +128,22 @@ const profileRoutes = supportedLanguageCodes.map(
           ],
         },
         {
-          id: `{slugs.profile.interests}|${lng}`,
-          path: i18n.t('slugs.profile.interests', { lng }),
-          loader: withYksiloContext(interestsLoader),
-          element: <ProfileInterests />,
+          id: `{slugs.profile.data-import-export}|${lng}`,
+          path: i18n.t('slugs.profile.data-import-export', { lng }),
+          element: <DataImportExport />,
           handle: {
-            title: i18n.t('profile.interests.title', { lng }),
+            title: i18n.t('profile.data-import-export.title', { lng }),
           },
+          loader: withYksiloContext(dataImportExportLoader),
+        },
+        {
+          id: `{slugs.profile.preferences}|${lng}`,
+          path: i18n.t('slugs.profile.preferences', { lng }),
+          element: <Preferences />,
+          handle: {
+            title: i18n.t('profile.preferences.title', { lng }),
+          },
+          loader: withYksiloContext(profilePreferencesLoader),
         },
       ],
     }) as RouteObject,

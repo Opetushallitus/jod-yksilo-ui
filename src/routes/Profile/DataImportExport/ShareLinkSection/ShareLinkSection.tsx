@@ -12,7 +12,7 @@ import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { formatDate } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 
-import type { PreferencesLoaderData } from '../loader';
+import type { DataImportExportLoaderData } from '../loader';
 import { NewShareLinkModal } from './NewShareLinkModal';
 
 interface ShareLinkSectionProps {
@@ -24,7 +24,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
   const { showModal, showDialog } = useModal();
   const guardedAction = useSessionGuardedAction();
   const { sm } = useMediaQueries();
-  const { jakolinkit } = useLoaderData<PreferencesLoaderData>();
+  const { jakolinkit } = useLoaderData<DataImportExportLoaderData>();
   const [jakolinkitState, setJakolinkitState] = React.useState(jakolinkit);
 
   // Stores IDs of explicitly closed accordions; new links default to open
@@ -67,7 +67,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
     <section className={className} data-testid="share-link-section">
       <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2">{t('preferences.share.title')}</h2>
       <p className="mb-5 font-arial text-body-md whitespace-pre-wrap">{t('preferences.share.description')}</p>
-      <div className="my-8">
+      <div className="my-6">
         {jakolinkitState.length === 0 ? (
           <EmptyState text={t('preferences.share.no-links')} testId="share-link-section-empty-state" />
         ) : (
@@ -109,7 +109,6 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
               );
 
               const deleteDialogProps = {
-                testId: 'share-link-section-delete-dialog',
                 title: t('preferences.share.delete-confirm-title'),
                 description: t('preferences.share.delete-confirm-description'),
                 confirmText: t('common:delete'),
@@ -119,6 +118,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                   });
                   deleteLocalJakolinkki(linkki.id!);
                 },
+                testId: 'share-link-section-delete-dialog',
               };
 
               const deleteButton = (
@@ -198,6 +198,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
       </div>
       <Button
         label={t('preferences.share.create-new-link')}
+        size="sm"
         ariaHaspopup="dialog"
         variant="accent"
         onClick={guardedAction(showModal, NewShareLinkModal)}

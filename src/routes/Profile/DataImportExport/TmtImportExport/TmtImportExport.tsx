@@ -283,8 +283,8 @@ const TmtImportExport = () => {
   }, [authorized, cleanUrl, closeAllModals, getErrorTranslation, showDialog, showErrorNote, startImport, t]);
 
   return (
-    <div className="flex flex-col gap-2">
-      <h3 className="text-heading-3-mobile sm:text-heading-3" data-testid="tmt-import-export-title">
+    <div>
+      <h3 className="mb-3 text-heading-3-mobile sm:text-heading-3" data-testid="tmt-import-export-title">
         {t('preferences.tmt-import-export.title')}
       </h3>
       <div className="font-arial">
@@ -295,7 +295,7 @@ const TmtImportExport = () => {
             CustomLink: (
               <Link
                 to={t('preferences.tmt-import-export.export.modal.tmt-url')}
-                className="inline-flex items-center underline"
+                className="inline-flex items-center text-accent hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               />
@@ -303,13 +303,14 @@ const TmtImportExport = () => {
           }}
         />
       </div>
-      <div className="mt-7 flex gap-4">
+      <div className="mt-6 flex gap-4">
         <Button
           label={
             importPending
               ? t('preferences.tmt-import-export.import.in-progress')
               : t('preferences.tmt-import-export.import.button-label')
           }
+          size="sm"
           variant="accent"
           ariaHaspopup="dialog"
           onClick={startImport}
@@ -324,6 +325,7 @@ const TmtImportExport = () => {
               ? t('preferences.tmt-import-export.export.in-progress')
               : t('preferences.tmt-import-export.export.button-label')
           }
+          size="sm"
           variant="white"
           ariaHaspopup="dialog"
           onClick={startExport}

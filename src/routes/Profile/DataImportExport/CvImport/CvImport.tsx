@@ -38,7 +38,7 @@ const TooltipContent = () => {
   );
 };
 
-export const CvImport = () => {
+const CvImport = () => {
   const { t } = useTranslation();
 
   const { showModal } = useModal();
@@ -52,10 +52,11 @@ export const CvImport = () => {
           <AiInfoButton tooltipContent={<TooltipContent />} ariaLabel={t('ai-info-tooltip.aria-description')} />
         </div>
       </h3>
-      <p className="mb-7 font-arial">{t('preferences.cv-import.description')}</p>
+      <p className="mb-6 font-arial">{t('preferences.cv-import.description')}</p>
 
       <Button
         label={t('preferences.cv-import.import-from-cv')}
+        size="sm"
         variant="accent"
         ariaHaspopup="dialog"
         onClick={guardedAction(showModal, CvImportWizard)}
@@ -64,3 +65,5 @@ export const CvImport = () => {
     </div>
   );
 };
+
+export default CvImport;

@@ -565,7 +565,7 @@
       "description": "You can permanently delete your entire competence profile and all information stored in it. The deletion cannot be reversed. Note! You can delete the guidance practitioner profile in the Guidance practitioner section.",
       "title": "Delete your competence profile"
     },
-    "description": "On this page you can manage your competence profile settings and decide how your data will be used. You can use the link to share your profile, manage permissions for data use, download your profile data or delete your profile completely. You decide what information you share and with whom.",
+    "description": "On this page you can manage your competence profile settings and decide how your data will be used. You can manage permissions for data use, download your profile data or delete your profile completely. You decide what information you share and with whom.",
     "download": {
       "action": "Download my competence profile data (JSON)",
       "description": "You can download all the data stored in your competence profile to your device. The data is generated in a machine-readable JSON format. JSON is a simple and lightweight open standard file format for data transfer and storage.",
@@ -625,7 +625,7 @@
     },
     "tmt-import-export": {
       "continue-to-tmt": "Continue to Job Market Finland",
-      "description": "You can import and export your data between Competence Path and Job Market Finland. The data does not update automatically; you decide what information you want to transfer between the services.<br/><br/>Imported data can be found in your competence profile. Exported data can be found in your Job Market Finland jobseeker profile. Check and edit the data as needed.<br/><br/><CustomLink>Go to Job Market Finland to view your data<Icon></Icon></CustomLink>.",
+      "description": "You can import and export your data between Competence Path and Job Market Finland. The data does not update automatically; you decide what information you want to transfer between the services.<br/><br/>Imported data can be found in your competence profile. Exported data can be found in your Job Market Finland jobseeker profile. Check and edit the data as needed.<br/><br/><CustomLink>Go to Job Market Finland to view your data<Icon></Icon></CustomLink>",
       "errors": {
         "forbidden": "An error occurred while processing the authorization.",
         "not-found": "User not found in Job Market Finland.",
@@ -659,6 +659,11 @@
         "success": "Your data was successfully imported from Job Market Finland"
       },
       "title": "Import and export data between Competence Path and Job Market Finland"
+    },
+    "koski-import": {
+      "title": "Import my education history",
+      "description": "You can import your education history data stored in the national study, education and qualification registers as part of My Competency Path.",
+      "button-label": "Import my education history"
     }
   },
   "previous": "Previous",
@@ -709,6 +714,10 @@
         "view-guided-tour": "Tips for identifying competences",
         "view-guided-tour-label": "Start the guided tour for competence identification"
       }
+    },
+    "data-import-export": {
+      "title": "Import and export data",
+      "description": "On this page, you can manage your profile's data import and export settings. You can share your profile via a link and import data from other services. You decide what data you share and with whom."
     },
     "education-history": {
       "description": "Below you can find your education history. You can add entries to your education history yourself and identify the competencies related to them. You can also import your study records from the national study, education and qualification registers as part of your education history (Studyinfo).",
@@ -1042,6 +1051,7 @@
     "profile": {
       "competences": "competences",
       "education-history": "education",
+      "data-import-export": "import-and-export-data",
       "favorites": "favourites",
       "free-time-activities": "recreational-activities",
       "front": "front-page",

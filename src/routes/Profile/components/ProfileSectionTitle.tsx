@@ -2,12 +2,14 @@ import React from 'react';
 
 import { cx, IconHeading } from '@jod/design-system';
 import {
+  JodCog,
   JodCheckmarkAlt,
   JodFavorite,
   JodFavs,
   JodFlag,
   JodInterests,
   JodOther,
+  JodShare,
   JodSkills,
   JodWork,
 } from '@jod/design-system/icons';
@@ -24,7 +26,8 @@ export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType;
     SUOSIKKI: <JodFavorite />,
     OSAAMISENI: <JodCheckmarkAlt />,
     TAVOITTEENI: <JodFlag />,
-    ASETUKSENI: null,
+    TUO_JA_VIE_TIETOJA: <JodShare />,
+    ASETUKSENI: <JodCog />,
   };
 
   const iconBg = cx({
@@ -33,7 +36,7 @@ export const ProfileSectionTitle = ({ type, title }: { type: ProfileSectionType;
     'bg-primary-1-dark': type === 'TOIMINTO',
     'bg-secondary-gray': type === 'MUU_OSAAMINEN',
     'bg-primary-3': type === 'KIINNOSTUS',
-    'bg-primary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'TAVOITTEENI', 'ASETUKSENI'].includes(type),
+    'bg-primary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'TAVOITTEENI', 'TUO_JA_VIE_TIETOJA', 'ASETUKSENI'].includes(type),
   });
 
   const showIcon = type && iconMap[type] !== null;
