@@ -204,47 +204,62 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
     [selectedPlans, setSelectedPlans, t],
   );
 
+  const vaaditutOsaamisetUris = React.useMemo(() => new Set(vaaditutOsaamiset.map((o) => o.uri)), [vaaditutOsaamiset]);
+
+  const getMatchCount = React.useCallback(
+    (mahdollisuus: { jakaumat?: { osaaminen?: { arvot?: { arvo?: string }[] | null } | null } | null }) =>
+      mahdollisuus?.jakaumat?.osaaminen?.arvot?.filter((v) => v?.arvo && vaaditutOsaamisetUris.has(v.arvo)).length ?? 0,
+    [vaaditutOsaamisetUris],
+  );
+
+  const matchCountsById = React.useMemo(() => {
+    return new Map(koulutusMahdollisuudet.map((m) => [m.id, getMatchCount(m)]));
+  }, [koulutusMahdollisuudet, getMatchCount]);
+
+  const sortedKoulutusMahdollisuudet = React.useMemo(() => {
+    return [...koulutusMahdollisuudet].sort(
+      (a, b) => (matchCountsById.get(b.id) ?? 0) - (matchCountsById.get(a.id) ?? 0),
+    );
+  }, [koulutusMahdollisuudet, matchCountsById]);
+
   const renderPlanOpportunity = React.useCallback(
     (mahdollisuus: (typeof koulutusMahdollisuudet)[number]) => {
       const { id } = mahdollisuus;
       const ehdotus = mahdollisuusEhdotukset?.[id];
       if (!ehdotus) return null;
 
-      const vaaditutOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
-      const matchingOsaamiset = mahdollisuus?.jakaumat?.osaaminen?.arvot!.filter((a) =>
-        vaaditutOsaamisetUris.has(a?.arvo),
-      ).length;
       return (
         <PlanOpportunityCard
           key={id}
           actionButtonContent={renderActionButtonContent(id)}
           selected={selectedPlans?.includes(id)}
           mahdollisuus={mahdollisuus}
-          matchValue={`${matchingOsaamiset}/${vaaditutOsaamiset.length}`}
+          matchValue={`${matchCountsById.get(id) ?? 0}/${vaaditutOsaamiset.length}`}
           matchLabel={t('profile.my-goals.competences')}
         />
       );
     },
-    [mahdollisuusEhdotukset, renderActionButtonContent, t, vaaditutOsaamiset, selectedPlans],
+    [mahdollisuusEhdotukset, renderActionButtonContent, t, vaaditutOsaamiset, selectedPlans, matchCountsById],
   );
+
+  const sortedFavoritePinnedMahdollisuudet = React.useMemo(() => {
+    return [...favoritePinnedMahdollisuudet].sort((a, b) => getMatchCount(b) - getMatchCount(a));
+  }, [favoritePinnedMahdollisuudet, getMatchCount]);
 
   const renderFavoriteOpportunity = React.useCallback(
     (mahdollisuus: KoulutusMahdollisuusFull) => {
       const { id } = mahdollisuus;
-      const vaaditutOsaamisetUris = new Set(vaaditutOsaamiset.map((o) => o.uri));
-      const matchingOsaamiset =
-        mahdollisuus?.jakaumat?.osaaminen?.arvot?.filter((a) => vaaditutOsaamisetUris.has(a?.arvo)).length ?? 0;
       return (
         <PlanOpportunityCard
           key={id}
           actionButtonContent={renderActionButtonContent(id)}
           mahdollisuus={mahdollisuus}
-          matchValue={`${matchingOsaamiset}/${vaaditutOsaamiset.length}`}
+          matchValue={`${getMatchCount(mahdollisuus)}/${vaaditutOsaamiset.length}`}
           matchLabel={t('profile.my-goals.competences')}
         />
       );
     },
-    [renderActionButtonContent, t, vaaditutOsaamiset],
+    [renderActionButtonContent, t, vaaditutOsaamiset, getMatchCount],
   );
 
   return (
@@ -302,7 +317,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                   </>
                 )}
 
-                {!isLoading && koulutusMahdollisuudet.length === 0 && (
+                {!isLoading && sortedKoulutusMahdollisuudet.length === 0 && (
                   <div className="mt-6 flex justify-center">
                     <EmptyState text={t('profile.my-goals.no-filtered-results')} />
                   </div>
@@ -313,15 +328,15 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                       <li className="font-semibold mb-2 font-arial text-body-md-mobile sm:text-body-md">
                         {t('profile.my-goals.filters.favorites.title')}
                       </li>
-                      {favoritePinnedMahdollisuudet.map(renderFavoriteOpportunity)}
+                      {sortedFavoritePinnedMahdollisuudet.map(renderFavoriteOpportunity)}
 
                       <li className="font-semibold mt-2 mb-2 font-arial text-body-md-mobile sm:text-body-md">
                         {t('profile.my-goals.filters.other-options-title')}
                       </li>
-                      {koulutusMahdollisuudet.map(renderPlanOpportunity)}
+                      {sortedKoulutusMahdollisuudet.map(renderPlanOpportunity)}
                     </>
                   ) : (
-                    koulutusMahdollisuudet.map(renderPlanOpportunity)
+                    sortedKoulutusMahdollisuudet.map(renderPlanOpportunity)
                   ))}
               </ul>
               <div className="my-4 px-5 md:pl-9">
