@@ -273,7 +273,6 @@ export const GoalModal = ({ mode, tavoite, ...rest }: GoalModalProps) => {
                                   label={t('profile.my-goals.remove-from-goals')}
                                   onClick={() => setSelectedMahdollisuus(null)}
                                   className="bg-bg-gray"
-                                  icon={null}
                                 />
                               </div>
                             </div>
@@ -282,7 +281,6 @@ export const GoalModal = ({ mode, tavoite, ...rest }: GoalModalProps) => {
                               className="h-6 bg-bg-gray"
                               label={t('profile.my-goals.set-to-goal')}
                               onClick={() => setSelectedMahdollisuus(mahdollisuus)}
-                              icon={null}
                             />
                           )
                         }
