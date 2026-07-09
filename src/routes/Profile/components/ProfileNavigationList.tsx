@@ -35,6 +35,7 @@ export const ProfileNavigationList = ({ collapsed, activeIndicator }: ProfileNav
       menuSection={menuSection}
       collapsed={collapsed}
       activeIndicator={activeIndicator}
+      testId="profile-navigation-list"
     />
   );
 };

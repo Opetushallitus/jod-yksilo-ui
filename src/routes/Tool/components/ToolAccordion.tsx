@@ -28,6 +28,7 @@ const ToolAccordion = ({
   const id = hyphenize(title);
   const triggerId = `accordion-${id}`;
   const contentId = `accordion-${id}-content`;
+  const getTestId = (postfix: string) => (testId ? `${testId}-${postfix}` : undefined);
 
   return (
     <div className="rounded bg-white px-5 py-6" ref={ref} data-testid={testId}>
@@ -44,9 +45,9 @@ const ToolAccordion = ({
             <span className="font-arial text-body-sm text-pretty hyphens-auto text-secondary-gray">{description}</span>
           )
         }
-        testId="tool-accordion-button"
+        testId={getTestId('accordion')}
       >
-        <section id={contentId} aria-labelledby={triggerId}>
+        <section id={contentId} aria-labelledby={triggerId} data-testid={getTestId('content-section')}>
           {children}
         </section>
       </Accordion>

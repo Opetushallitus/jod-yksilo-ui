@@ -67,6 +67,7 @@ const WorkHistory = () => {
           <ToolCard testId="work-history-go-to-tool" />
         </div>
       }
+      testId="work-history-page"
     >
       {!lg && (
         <div className="mb-6 px-5 sm:px-6">

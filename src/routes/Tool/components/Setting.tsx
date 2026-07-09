@@ -59,6 +59,7 @@ export const Setting = ({
         initialState={initiallyOpen ?? false}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+        testId={testId ? `${testId}-accordion` : undefined}
       >
         {
           <section className="mt-3 pt-1 pl-1" id={contentId} aria-labelledby={triggerId}>

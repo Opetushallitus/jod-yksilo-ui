@@ -136,7 +136,7 @@ describe('VirtualAssistant', () => {
 
   it('keeps send disabled until input has at least two non-whitespace characters', async () => {
     await openModal('competences');
-    const input = screen.getByTestId('va-input');
+    const input = screen.getByTestId('va-input-input');
     const send = screen.getByTestId('va-send');
 
     expect(send).toBeDisabled();
@@ -150,7 +150,7 @@ describe('VirtualAssistant', () => {
 
   it('sends message on button click, shows transcript, and loads proposals for competences', async () => {
     await openModal('competences');
-    const input = screen.getByTestId('va-input');
+    const input = screen.getByTestId('va-input-input');
     fireEvent.change(input, { target: { value: 'Ensimmäinen viesti' } });
     fireEvent.click(screen.getByTestId('va-send'));
 
@@ -179,7 +179,7 @@ describe('VirtualAssistant', () => {
 
   it('uses KIINNOSTUKSET tila and shows proposed interests heading for interests variant', async () => {
     await openModal('interests');
-    fireEvent.change(screen.getByTestId('va-input'), { target: { value: 'Kiinnostun musiikista' } });
+    fireEvent.change(screen.getByTestId('va-input-input'), { target: { value: 'Kiinnostun musiikista' } });
     fireEvent.click(screen.getByTestId('va-send'));
 
     await waitFor(() => {
@@ -197,11 +197,11 @@ describe('VirtualAssistant', () => {
 
   it('continues conversation with path including id after first reply', async () => {
     await openModal('competences');
-    fireEvent.change(screen.getByTestId('va-input'), { target: { value: 'Yksi' } });
+    fireEvent.change(screen.getByTestId('va-input-input'), { target: { value: 'Yksi' } });
     fireEvent.click(screen.getByTestId('va-send'));
     await waitFor(() => expect(screen.getByTestId('va-transcript')).toHaveTextContent('Assistant reply'));
 
-    fireEvent.change(screen.getByTestId('va-input'), { target: { value: 'Kaksi' } });
+    fireEvent.change(screen.getByTestId('va-input-input'), { target: { value: 'Kaksi' } });
     fireEvent.click(screen.getByTestId('va-send'));
 
     await waitFor(() => {
@@ -234,7 +234,7 @@ describe('VirtualAssistant', () => {
     });
 
     await openModal('competences');
-    fireEvent.change(screen.getByTestId('va-input'), { target: { value: 'Kysymys' } });
+    fireEvent.change(screen.getByTestId('va-input-input'), { target: { value: 'Kysymys' } });
     fireEvent.click(screen.getByTestId('va-send'));
 
     await waitFor(() => {
@@ -247,7 +247,7 @@ describe('VirtualAssistant', () => {
     mocks.postMock.mockResolvedValueOnce({ data: undefined, error: { status: 500 } });
 
     await openModal('interests');
-    fireEvent.change(screen.getByTestId('va-input'), { target: { value: 'Virhe' } });
+    fireEvent.change(screen.getByTestId('va-input-input'), { target: { value: 'Virhe' } });
     fireEvent.click(screen.getByTestId('va-send'));
 
     await waitFor(() => {
@@ -257,7 +257,7 @@ describe('VirtualAssistant', () => {
 
   it('sends on Enter without Shift when send is enabled', async () => {
     await openModal('competences');
-    const input = screen.getByTestId('va-input');
+    const input = screen.getByTestId('va-input-input');
     fireEvent.change(input, { target: { value: 'Enter lähettää' } });
     fireEvent.keyDown(input, { key: 'Enter', shiftKey: false });
 
@@ -268,7 +268,7 @@ describe('VirtualAssistant', () => {
 
   it('does not send on Shift+Enter', async () => {
     await openModal('competences');
-    const input = screen.getByTestId('va-input');
+    const input = screen.getByTestId('va-input-input');
     fireEvent.change(input, { target: { value: 'Rivi' } });
     fireEvent.keyDown(input, { key: 'Enter', shiftKey: true });
 
@@ -277,7 +277,7 @@ describe('VirtualAssistant', () => {
 
   it('adds proposal to selected tab and enables save', async () => {
     await openModal('competences');
-    fireEvent.change(screen.getByTestId('va-input'), { target: { value: 'Valinta' } });
+    fireEvent.change(screen.getByTestId('va-input-input'), { target: { value: 'Valinta' } });
     fireEvent.click(screen.getByTestId('va-send'));
     await waitFor(() => screen.getByRole('button', { name: 'Osaaminen 1' }));
 
@@ -294,7 +294,7 @@ describe('VirtualAssistant', () => {
 
   it('save merges competences into store and shows toast', async () => {
     await openModal('competences');
-    fireEvent.change(screen.getByTestId('va-input'), { target: { value: 'Tallenna testi' } });
+    fireEvent.change(screen.getByTestId('va-input-input'), { target: { value: 'Tallenna testi' } });
     fireEvent.click(screen.getByTestId('va-send'));
     await waitFor(() => screen.getByRole('button', { name: 'Osaaminen 1' }));
     fireEvent.click(screen.getByRole('button', { name: 'Osaaminen 1' }));
@@ -315,7 +315,7 @@ describe('VirtualAssistant', () => {
 
   it('save merges interests into store for interests variant', async () => {
     await openModal('interests');
-    fireEvent.change(screen.getByTestId('va-input'), { target: { value: 'Tallenna kiinnostus' } });
+    fireEvent.change(screen.getByTestId('va-input-input'), { target: { value: 'Tallenna kiinnostus' } });
     fireEvent.click(screen.getByTestId('va-send'));
     await waitFor(() => screen.getByRole('button', { name: 'Osaaminen 1' }));
     fireEvent.click(screen.getByRole('button', { name: 'Osaaminen 1' }));
@@ -331,7 +331,7 @@ describe('VirtualAssistant', () => {
 
   it('cancel closes modal and clears draft state on next open', async () => {
     await openModal('competences');
-    fireEvent.change(screen.getByTestId('va-input'), { target: { value: 'Luonnos' } });
+    fireEvent.change(screen.getByTestId('va-input-input'), { target: { value: 'Luonnos' } });
     fireEvent.click(screen.getByRole('button', { name: keys.cancel }));
 
     await waitFor(() => {
@@ -340,7 +340,7 @@ describe('VirtualAssistant', () => {
 
     fireEvent.click(screen.getByTestId('open-va'));
     expect(await screen.findByRole('dialog', { name: keys.competencesTitle })).toBeInTheDocument();
-    expect(screen.getByTestId('va-input')).toHaveValue('');
+    expect(screen.getByTestId('va-input-input')).toHaveValue('');
     expect(screen.getByTestId('va-transcript')).not.toHaveTextContent('Luonnos');
   });
 
@@ -353,7 +353,7 @@ describe('VirtualAssistant', () => {
     });
 
     await openModal('competences');
-    fireEvent.change(screen.getByTestId('va-input'), { target: { value: 'Kesken oleva kysymys' } });
+    fireEvent.change(screen.getByTestId('va-input-input'), { target: { value: 'Kesken oleva kysymys' } });
     fireEvent.click(screen.getByTestId('va-send'));
 
     await waitFor(() => {

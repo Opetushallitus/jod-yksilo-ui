@@ -381,9 +381,11 @@ const AddOrEditToimenkuvaModal = ({
                       name: getLocalizedText(methods.getValues('nimi')),
                     }),
                     closeParentModal: true,
+                    testId: 'delete-toimenkuva-dialog',
                   });
                 }}
                 size={sm ? 'lg' : 'sm'}
+                testId="delete-button"
               />
             )}
           </div>
@@ -394,6 +396,7 @@ const AddOrEditToimenkuvaModal = ({
               onClick={onClose}
               className="whitespace-nowrap"
               size={sm ? 'lg' : 'sm'}
+              testId="cancel-button"
             />
             {!isFirstStep && (
               <Button
@@ -404,6 +407,7 @@ const AddOrEditToimenkuvaModal = ({
                 onClick={previousStep}
                 className="whitespace-nowrap"
                 size={sm ? 'lg' : 'sm'}
+                testId="previous-button"
               />
             )}
             {!isLastStep && (
@@ -415,6 +419,7 @@ const AddOrEditToimenkuvaModal = ({
                 onClick={nextStep}
                 className="whitespace-nowrap"
                 size={sm ? 'lg' : 'sm'}
+                testId="next-button"
               />
             )}
             {isLastStep && (
@@ -426,11 +431,13 @@ const AddOrEditToimenkuvaModal = ({
                 disabled={!isValid}
                 className="whitespace-nowrap"
                 size={sm ? 'lg' : 'sm'}
+                testId="save-button"
               />
             )}
           </div>
         </div>
       }
+      testId={toimenkuvaId ? 'edit-toimenkuva-modal' : 'add-toimenkuva-modal'}
     />
   );
 };

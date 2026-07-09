@@ -81,7 +81,10 @@ export const OpportunityType = ({ mahdollisuusAlityyppi, showTypeTooltip }: Oppo
   }, [typeText, tooltipText]);
 
   return typeText ? (
-    <div className="font-medium flex items-center gap-2 text-body-xs text-primary-gray uppercase">
+    <div
+      className="font-medium flex items-center gap-2 text-body-xs text-primary-gray uppercase"
+      data-testid="opportunity-type"
+    >
       {typeText}
       {showTypeTooltip && (
         <TooltipWrapper tooltipPlacement="top" tooltipContent={typeTooltip}>

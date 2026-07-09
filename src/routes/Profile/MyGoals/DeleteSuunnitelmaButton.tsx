@@ -52,6 +52,7 @@ const DeleteSuunnitelmaButton = ({ tavoiteId, suunnitelmaId, className, name, on
           description: t('profile.my-goals.delete-plan-description', { name: suunnitelmaName }),
           onConfirm: deletePolku,
         })}
+        testId="delete-suunnitelma-button"
       />
     </div>
   ) : null;

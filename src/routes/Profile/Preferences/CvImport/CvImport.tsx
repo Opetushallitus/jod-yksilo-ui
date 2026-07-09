@@ -46,7 +46,7 @@ export const CvImport = () => {
 
   return (
     <div>
-      <h3 className="mb-3 text-heading-3-mobile sm:text-heading-3">
+      <h3 className="mb-3 text-heading-3-mobile sm:text-heading-3" data-testid="cv-import-title">
         {t('preferences.cv-import.title')}
         <div className="ml-2 inline *:align-top print:hidden">
           <AiInfoButton tooltipContent={<TooltipContent />} ariaLabel={t('ai-info-tooltip.aria-description')} />
@@ -59,6 +59,7 @@ export const CvImport = () => {
         variant="accent"
         ariaHaspopup="dialog"
         onClick={guardedAction(showModal, CvImportWizard)}
+        testId="cv-import-button"
       />
     </div>
   );

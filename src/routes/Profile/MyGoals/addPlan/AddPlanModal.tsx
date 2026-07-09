@@ -190,6 +190,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
             variant="gray"
             label={t('profile.my-goals.remove-from-plans')}
             onClick={() => setSelectedPlans(selectedPlans?.filter((plan) => plan !== id))}
+            testId="remove-from-plans-button"
           />
         </div>
       ) : (
@@ -199,6 +200,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
           className="bg-bg-gray"
           label={t('profile.my-goals.choose-as-plan')}
           onClick={() => setSelectedPlans([...selectedPlans, id])}
+          testId="choose-as-plan-button"
         />
       ),
     [selectedPlans, setSelectedPlans, t],
@@ -357,6 +359,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
               closeActiveModal();
               showModal(AddOrEditCustomPlanModal, { tavoite });
             }}
+            testId="add-custom-plan-button"
           />
 
           <div className="flex flex-row gap-5">
@@ -374,6 +377,7 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
                   onConfirm: onClose,
                 });
               }}
+              testId="cancel-button"
             />
 
             <Button
@@ -384,10 +388,12 @@ const AddPlanModal = ({ onClose, ...rest }: ModalComponentProps) => {
               className="whitespace-nowrap"
               variant="accent"
               onClick={onSubmit}
+              testId="save-button"
             />
           </div>
         </div>
       }
+      testId="add-plan-modal"
     />
   );
 };

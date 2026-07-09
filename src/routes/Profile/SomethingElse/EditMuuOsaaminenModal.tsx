@@ -134,6 +134,7 @@ const EditMuuOsaaminenModal = ({ onClose, data, ...rest }: EditMuuOsaaminenModal
             }}
             className="whitespace-nowrap"
             size={sm ? 'lg' : 'sm'}
+            testId="cancel-button"
           />
           <Button
             form={formId}
@@ -143,9 +144,11 @@ const EditMuuOsaaminenModal = ({ onClose, data, ...rest }: EditMuuOsaaminenModal
             disabled={!isValid}
             className="whitespace-nowrap"
             size={sm ? 'lg' : 'sm'}
+            testId="save-button"
           />
         </div>
       }
+      testId={data.length > 0 ? 'edit-other-competences' : 'add-other-competences'}
     />
   );
 };

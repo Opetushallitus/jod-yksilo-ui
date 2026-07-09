@@ -25,6 +25,7 @@ const Search = () => {
           <InfoCards />
         </div>
       }
+      testId="search"
     >
       <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
         <IconHeading icon={<JodSearch className="text-white" />} title={t('search.title')} testId="search-title" />

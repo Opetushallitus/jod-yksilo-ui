@@ -229,11 +229,13 @@ export const GoalModal = ({ mode, tavoite, ...rest }: GoalModalProps) => {
                   value={goalName}
                   className="mb-6 sm:max-w-[384px]"
                   onChange={(e) => setGoalName(e.target.value)}
+                  testId="goal-name"
                 />
                 <Textarea
                   label={t('profile.my-goals.goal-description')}
                   value={goalDescription}
                   onChange={(e) => setGoalDescription(e.target.value)}
+                  testId="goal-description"
                 />
               </div>
             </div>
@@ -377,6 +379,7 @@ export const GoalModal = ({ mode, tavoite, ...rest }: GoalModalProps) => {
           </div>
         </div>
       }
+      testId="add-goal-modal"
     />
   );
 };

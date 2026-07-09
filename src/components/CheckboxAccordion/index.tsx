@@ -6,6 +6,7 @@ type CheckboxAccordionProps = {
   children?: React.ReactNode;
   label: string;
   initiallyOpen?: boolean;
+  testId?: string;
 } & Omit<React.ComponentProps<typeof Checkbox>, 'value' | 'name' | 'ariaLabel'>;
 
 /**
@@ -19,10 +20,12 @@ export const CheckboxAccordion = ({
   initiallyOpen,
   disabled,
   indeterminate,
+  testId,
 }: CheckboxAccordionProps) => {
   const triggerId = `${label}-accordion`;
   const contentId = `${label}-content`;
   const [isOpen, setIsOpen] = React.useState(initiallyOpen ?? false);
+  const getTestId = (postfix: string) => (testId ? `${testId}-${postfix}` : undefined);
 
   // Disable accordion toggle when checkbox is disabled
   const getSetIsOpen = () => {
@@ -45,6 +48,7 @@ export const CheckboxAccordion = ({
         className="mt-[5px] shrink-1 text-menu text-primary-gray"
         indeterminate={indeterminate}
         disabled={disabled}
+        testId={getTestId('checkbox')}
       />
       <div className="w-full">
         <Accordion
@@ -59,8 +63,9 @@ export const CheckboxAccordion = ({
           ariaControls={contentId}
           setIsOpen={getSetIsOpen()}
           isOpen={isOpen}
+          testId={getTestId('accordion')}
         >
-          <section aria-labelledby={contentId} id={contentId} />
+          <section aria-labelledby={contentId} id={contentId} data-testid={getTestId('content')} />
           {children}
         </Accordion>
       </div>

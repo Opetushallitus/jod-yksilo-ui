@@ -78,6 +78,7 @@ const MyGoals = () => {
         onCancel: () => {
           setSuosikitDialogShown(true);
         },
+        testId: 'add-first-favorites-dialog',
       });
     }
   }, [i18n.language, navigate, showDialog, suosikitDialogShown, suosikitIsEmpty, t, tavoitteet.length]);
@@ -96,6 +97,7 @@ const MyGoals = () => {
           <GuidanceCard testId="goals-service-directory" />
         </div>
       }
+      testId="my-goals-page"
     >
       {!lg && (
         <div className="mb-6 px-5 sm:px-6">

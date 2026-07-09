@@ -126,6 +126,7 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
           </div>
         }
         ariaLabel={accordionLabels[sourceType]}
+        testId={`competences-accordion-${sourceType.toLowerCase()}`}
       >
         {Array.isArray(filters[sourceType]) && filters[sourceType].some((filter) => filter.checked) ? (
           <div className="mt-5 flex flex-col gap-7">
@@ -144,6 +145,7 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
                         screenReaderTooltip={t('description-for', { description: tooltip })}
                         variant="presentation"
                         sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
+                        testId={`competences-tag`}
                       />
                     </li>
                   ) : null;
@@ -179,7 +181,9 @@ export const GroupBySource = ({
   return (
     <>
       <div className="mb-7 flex flex-row justify-between gap-5">
-        <h2 className="text-heading-2-mobile sm:text-heading-2">{t('my-competences-by-sources')}</h2>
+        <h2 className="text-heading-2-mobile sm:text-heading-2" data-testid="competences-by-sources-title">
+          {t('my-competences-by-sources')}
+        </h2>
         {mobileFilterOpenerComponent}
       </div>
 

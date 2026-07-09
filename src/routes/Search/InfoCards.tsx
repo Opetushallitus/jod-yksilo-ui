@@ -27,6 +27,7 @@ export const InfoCards = () => {
             ? `/${i18n.language}/${t('slugs.profile.index')}`
             : `/${i18n.language}/${t('slugs.profile.login')}`,
         )}
+        testId="info-cards-hero-card"
       />
     </div>
   );

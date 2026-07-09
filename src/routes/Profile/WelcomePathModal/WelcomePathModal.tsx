@@ -102,11 +102,17 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value }, field }) => (
-                    <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
+                    <ToggleAllow
+                      {...field}
+                      onChange={(val: boolean) => onChange(val)}
+                      checked={value}
+                      testId="birthyear-toggle-button"
+                    />
                   )}
                   name="allowSyntymavuosi"
                 />
               }
+              testId="birthyear-field"
             />
           </>
         )}
@@ -120,11 +126,17 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value }, field }) => (
-                    <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
+                    <ToggleAllow
+                      {...field}
+                      onChange={(val: boolean) => onChange(val)}
+                      checked={value}
+                      testId="home-city-toggle-button"
+                    />
                   )}
                   name="allowKotikunta"
                 />
               }
+              testId="home-city-field"
             />
           </>
         )}
@@ -138,18 +150,28 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value }, field }) => (
-                    <ToggleAllow {...field} onChange={(val: boolean) => onChange(val)} checked={value} />
+                    <ToggleAllow
+                      {...field}
+                      onChange={(val: boolean) => onChange(val)}
+                      checked={value}
+                      testId="gender-toggle-button"
+                    />
                   )}
                   name="allowSukupuoli"
                 />
               }
+              testId="gender-field"
             />
           </>
         )}
         {firstName && lastName && (
           <>
             <Separator />
-            <PersonalDetailsInfoBlock label={t('personal-details.name')} info={`${firstName} ${lastName}`} />
+            <PersonalDetailsInfoBlock
+              label={t('personal-details.name')}
+              info={`${firstName} ${lastName}`}
+              testId="name-field"
+            />
           </>
         )}
         <Separator />
@@ -176,6 +198,7 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
               }}
             />
           }
+          testId="email-field"
         />
         <Separator />
       </div>
@@ -192,6 +215,7 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex text-accent hover:underline"
+                data-testid="privacy-and-cookies-link"
               />
             ),
           }}
@@ -227,6 +251,7 @@ const StepAi = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex text-accent hover:underline"
+                  data-testid="ai-usage-link"
                 />
               ),
             }}
@@ -328,7 +353,14 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
       open={showWelcomePathModal}
       fullWidthContent
       className="h-[90vh]! sm:h-full!"
-      topSlot={<ModalHeader text={headerText} className="mb-5 text-heading-1-mobile sm:text-heading-1" />}
+      testId="welcome-path-modal"
+      topSlot={
+        <ModalHeader
+          text={headerText}
+          className="mb-5 text-heading-1-mobile sm:text-heading-1"
+          testId={`welcome-path-modal-header-step-${step}`}
+        />
+      }
       content={
         <FormProvider {...methods}>
           <Form id={formId} onSubmit={onSubmit}>
@@ -351,6 +383,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
                 setStep((value) => value - 1);
                 void onStepChange();
               }}
+              testId="welcome-path-modal-previous-button"
             />
           )}
           {step < totalSteps && (
@@ -364,6 +397,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
               size={sm ? 'lg' : 'sm'}
               icon={sm ? undefined : <JodArrowRight />}
               disabled={isInfoStep && !isValid}
+              testId="welcome-path-modal-next-button"
             />
           )}
           {step === totalSteps && (
@@ -373,6 +407,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
               label={t('introduction.step-3.button-ok')}
               size={sm ? 'lg' : 'sm'}
               icon={sm ? undefined : <JodCheckmark />}
+              testId="welcome-path-modal-ok-button"
             />
           )}
         </div>

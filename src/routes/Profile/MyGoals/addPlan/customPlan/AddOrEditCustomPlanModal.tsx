@@ -289,6 +289,7 @@ const AddOrEditCustomPlanModal = ({ tavoite, suunnitelmaId, ...rest }: AddOrEdit
           </div>
         </div>
       }
+      testId={`${suunnitelmaId ? 'edit-custom-plan-modal' : 'add-custom-plan-modal'}`}
     />
   );
 };

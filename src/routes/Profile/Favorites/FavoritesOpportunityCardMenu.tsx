@@ -37,7 +37,7 @@ const FavoritesOpportunityCardActionMenu = ({
         };
 
   return (
-    <PopupList>
+    <PopupList testId="favorites-opportunity-card-menu">
       <ul id={menuId} className="flex w-full flex-col gap-y-2">
         <li>
           <Link to={compareTo} type="button" data-testid="opportunity-action-compare">

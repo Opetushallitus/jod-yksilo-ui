@@ -52,6 +52,7 @@ const Interests = () => {
           <ToolCard testId="interests-go-to-tool" />
         </div>
       }
+      testId="interests-page"
     >
       {!lg && (
         <div className="mb-6 px-5 sm:px-6">
@@ -69,10 +70,18 @@ const Interests = () => {
         )}
         {!isSkillsEmpty && (
           <>
-            <h2 className="mb-5 border-b border-border-gray text-heading-3-mobile sm:text-heading-3">
+            <h2
+              className="mb-5 border-b border-border-gray text-heading-3-mobile sm:text-heading-3"
+              data-testid="interests-skills-header"
+            >
               {t('profile.interests.skills-that-interest-me')}
             </h2>
-            <ul ref={ref} className="flex flex-wrap gap-3" onKeyDown={handleKeyDown}>
+            <ul
+              ref={ref}
+              className="flex flex-wrap gap-3"
+              onKeyDown={handleKeyDown}
+              data-testid="interests-skills-list"
+            >
               {sortedSkills.map((val) => (
                 <li key={val.uri} className="max-w-full">
                   <Tag
@@ -81,6 +90,7 @@ const Interests = () => {
                     screenReaderTooltip={t('description-for', { description: getLocalizedText(val.kuvaus) })}
                     variant="presentation"
                     sourceType="kiinnostus"
+                    testId="interest-tag"
                   />
                 </li>
               ))}
@@ -89,10 +99,18 @@ const Interests = () => {
         )}
         {!isOccupationSkillsEmpty && (
           <>
-            <h2 className="mt-8 mb-5 border-b border-border-gray text-heading-3-mobile sm:text-heading-3">
+            <h2
+              className="mt-8 mb-5 border-b border-border-gray text-heading-3-mobile sm:text-heading-3"
+              data-testid="interests-occupations-header"
+            >
               {t('profile.interests.occupations-that-interest-me')}
             </h2>
-            <ul ref={occupationsRef} className="flex flex-wrap gap-3" onKeyDown={onOccupationsKeyDown}>
+            <ul
+              ref={occupationsRef}
+              className="flex flex-wrap gap-3"
+              onKeyDown={onOccupationsKeyDown}
+              data-testid="interests-occupations-list"
+            >
               {sortedOccupations.map((val) => (
                 <li key={val.uri} className="max-w-full">
                   <Tag
@@ -101,6 +119,7 @@ const Interests = () => {
                     screenReaderTooltip={t('description-for', { description: getLocalizedText(val.kuvaus) })}
                     variant="presentation"
                     sourceType="kiinnostus"
+                    testId="interest-tag"
                   />
                 </li>
               ))}
@@ -113,7 +132,7 @@ const Interests = () => {
             ariaHaspopup="dialog"
             label={isAllSkillsEmpty ? t('profile.interests.add-interests') : t('profile.interests.edit-interests')}
             onClick={guardedAction(showModal, EditKiinnostusModal, { data: kiinnostukset })}
-            testId="interests-edit-button"
+            testId={kiinnostukset.length > 0 ? 'interests-edit-button' : 'interests-add-button'}
           />
         </div>
         <div className="mb-7">

@@ -123,7 +123,11 @@ const OpportunityDetails = ({
   }, [menuSection, mahdollisuusAlityyppi, mahdollisuusTyyppi]);
 
   return (
-    <MainLayout breadcrumbComponent={<Breadcrumb />} navChildren={navChildren}>
+    <MainLayout
+      breadcrumbComponent={<Breadcrumb />}
+      navChildren={navChildren}
+      testId={`${mahdollisuusTyyppi.toLowerCase()}-opportunity-details`}
+    >
       {title ? <title>{title}</title> : null}
       <div className="px-5 sm:px-6 lg:pr-0">
         <OpportunityHeader
@@ -162,6 +166,7 @@ const OpportunityDetails = ({
               icon={<JodShare className="text-accent" />}
               onClick={() => void copyToClipboard(globalThis.location.href)}
               className="bg-bg-gray-2"
+              testId="opportunity-details-share-button"
             />
           )}
 
@@ -172,6 +177,7 @@ const OpportunityDetails = ({
               icon={<JodPrint className="text-accent" />}
               onClick={doPrint}
               className="bg-bg-gray-2"
+              testId="opportunity-details-print-button"
             />
           )}
         </div>
@@ -184,7 +190,11 @@ const OpportunityDetails = ({
         {/* Sections */}
         {!!data &&
           sections.filter(filterDevSections).map((section) => (
-            <div key={section.navTitle} className="mb-7 flex flex-col">
+            <div
+              key={section.navTitle}
+              className="mb-7 flex flex-col"
+              data-testid={`${section.navTitle.toLowerCase()}-section`}
+            >
               <ScrollHeading
                 title={section.navTitle}
                 appendix={section.titleAppendix}

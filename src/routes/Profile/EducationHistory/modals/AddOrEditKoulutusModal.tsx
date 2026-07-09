@@ -121,6 +121,7 @@ const MainStep = () => {
           label={t('profile.free-form-input.label')}
           {...register(`kuvaus.${language}` as const)}
           maxLength={LIMITS.TEXTAREA}
+          testId="education-history-free-form-input"
         />
       )}
     </div>
@@ -380,6 +381,7 @@ const AddOrEditKoulutusModal = ({
                     description: t('education-history.confirm-delete-degree', {
                       name: getLocalizedText(methods.getValues('nimi')),
                     }),
+                    testId: 'delete-koulutus-dialog',
                   });
                 }}
                 testId="education-history-delete"
@@ -440,6 +442,7 @@ const AddOrEditKoulutusModal = ({
           </div>
         </div>
       }
+      testId={koulutusId ? 'edit-koulutus-modal' : 'add-koulutus-modal'}
     />
   );
 };

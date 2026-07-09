@@ -38,6 +38,7 @@ export const VirtualAssistantMessageContainer = ({
       <VirtualAssistantMessageBubble
         message={row.answer ? row.answer : t('tool.my-own-data.virtual-assistant.loading')}
         isUser={false}
+        testId={`${type}-virtual-assistant-message-bubble-answer${row.answer ? '' : '-loading'}`}
       />
       {row.ehdotukset && row.ehdotukset.length > 0 && (
         <div className="flex flex-col gap-4">
@@ -60,6 +61,7 @@ export const VirtualAssistantMessageContainer = ({
                         setSelected((prev) => [k, ...prev]);
                       }}
                       variant="selectable"
+                      testId="proposed-interest-tag"
                     />
                   </li>
                 ))}

@@ -18,7 +18,7 @@ export const Filters = ({ filterKeys, selectedFilters, setSelectedFilters, group
 
   return (
     <>
-      <FilterList title={t('do-filter')} className={lg ? 'bg-bg-gray-2' : 'bg-bg-gray'}>
+      <FilterList title={t('do-filter')} className={lg ? 'bg-bg-gray-2' : 'bg-bg-gray'} testId="filters-do-filter">
         <CompetenceFilters
           filterKeys={filterKeys}
           selectedFilters={selectedFilters}
@@ -27,7 +27,11 @@ export const Filters = ({ filterKeys, selectedFilters, setSelectedFilters, group
           showColorIndicator
         />
       </FilterList>
-      <FilterList title={t('profile.competences.order-by')} className={lg ? 'bg-bg-gray-2' : 'bg-bg-gray'}>
+      <FilterList
+        title={t('profile.competences.order-by')}
+        className={lg ? 'bg-bg-gray-2' : 'bg-bg-gray'}
+        testId="filters-order-by"
+      >
         <RadioButtonGroup
           value={groupBy}
           onChange={setGroupBy}
@@ -35,8 +39,16 @@ export const Filters = ({ filterKeys, selectedFilters, setSelectedFilters, group
           label={t('profile.competences.order-by')}
           hideLabel
         >
-          <RadioButton label={t('profile.competences.group-by-source')} value={GROUP_BY_SOURCE} />
-          <RadioButton label={t('profile.competences.group-by-alphabet')} value={GROUP_BY_ALPHABET} />
+          <RadioButton
+            label={t('profile.competences.group-by-source')}
+            value={GROUP_BY_SOURCE}
+            testId="filters-group-by-source-radio"
+          />
+          <RadioButton
+            label={t('profile.competences.group-by-alphabet')}
+            value={GROUP_BY_ALPHABET}
+            testId="filters-group-by-alphabet-radio"
+          />
         </RadioButtonGroup>
       </FilterList>
     </>

@@ -6,6 +6,7 @@ interface FilterListProps {
   children: React.ReactNode;
   className?: string;
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  testId?: string;
 }
 
 export const FilterList = ({
@@ -14,27 +15,32 @@ export const FilterList = ({
   children,
   className = 'bg-bg-gray-2',
   headingLevel,
+  testId,
 }: FilterListProps) => {
   const TitleTag = headingLevel ?? 'h2';
   const id = title.toLocaleLowerCase().replace(/\s+/g, '-');
+  const getTestId = (postfix: string) => (testId ? `${testId}-${postfix}` : undefined);
   return (
-    <div className={`rounded-md ${className} px-[20px] py-6`.trim()}>
+    <div className={`rounded-md ${className} px-[20px] py-6`.trim()} data-testid={testId}>
       {collapsible ? (
         <Accordion
           ariaLabel={title}
+          testId={getTestId('accordion')}
           title={
-            <TitleTag className="text-body-sm-mobile" aria-controls={id}>
+            <TitleTag className="text-body-sm-mobile" aria-controls={id} data-testid={getTestId('title')}>
               {title}
             </TitleTag>
           }
         >
-          <section className="pt-4" aria-labelledby={id} id={id}>
+          <section className="pt-4" aria-labelledby={id} id={id} data-testid={getTestId('content-section')}>
             {children}
           </section>
         </Accordion>
       ) : (
         <>
-          <TitleTag className="text-body-sm-mobile hyphens-auto">{title}</TitleTag>
+          <TitleTag className="text-body-sm-mobile hyphens-auto" data-testid={getTestId('title')}>
+            {title}
+          </TitleTag>
           {children}
         </>
       )}

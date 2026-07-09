@@ -34,7 +34,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
   const title = t('profile.my-goals.my-plan-towards-goal');
   const emptyPlans = (
     <div className="w-auto">
-      <EmptyState text={t('profile.my-goals.n-plans_zero')} />
+      <EmptyState text={t('profile.my-goals.n-plans_zero')} testId="empty-plans-state" />
     </div>
   );
   const divider = <div className="border-b-2 border-border-gray" />;
@@ -116,6 +116,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
                     className="h-5"
                     onClick={guardedAction(showModal, AddOrEditCustomPlanModal, { tavoite: goal, suunnitelmaId: s.id })}
                     variant="white"
+                    testId="edit-plan-button"
                   />
                 )}
 
@@ -145,6 +146,7 @@ export const PlanList = ({ goal, language, removeSuunnitelmaFromStore }: PlanLis
             })}
             disabled={isLoading}
             label={t('profile.my-goals.add-new-plan-for-goal')}
+            testId="add-new-plan-button"
           />
         </div>
       </div>

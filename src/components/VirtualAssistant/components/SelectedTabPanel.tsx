@@ -36,7 +36,12 @@ export const SelectedTabPanel = ({ type, selection, tabs }: SelectedTabPanelProp
       )}
       data-testid="va-selected"
     >
-      <h2 tabIndex={-1} id={selectedLabelId} className="text-heading-4-mobile sm:text-heading-4">
+      <h2
+        tabIndex={-1}
+        id={selectedLabelId}
+        className="text-heading-4-mobile sm:text-heading-4"
+        data-testid={`${type}-virtual-assistant-selected-tab-header`}
+      >
         {config.labels.selected}
       </h2>
       {isSelectedEmpty && (

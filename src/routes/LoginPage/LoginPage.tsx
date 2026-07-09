@@ -24,6 +24,7 @@ const LoginCard = ({
   buttonLabel,
   buttonVariant,
   linkComponent,
+  testId,
 }: {
   title: string;
   description: string;
@@ -35,13 +36,18 @@ const LoginCard = ({
     className: string;
     ariaLabel?: string;
   }>;
+  testId: string;
 }) => (
-  <div className="flex flex-1 flex-col gap-6 rounded-md bg-bg-gray-2 px-5 py-6">
+  <div className="flex flex-1 flex-col gap-6 rounded-md bg-bg-gray-2 px-5 py-6" data-testid={testId}>
     <div className="flex flex-1 flex-col gap-6">
       <Logo height={32} className="w-fit" aria-hidden />
       <div className="flex flex-col gap-3">
-        <h3 className="text-heading-2-mobile sm:text-heading-2">{title}</h3>
-        <p className="text-body-md-mobile sm:text-body-md">{description}</p>
+        <h3 className="text-heading-2-mobile sm:text-heading-2" data-testid={`${testId}-title`}>
+          {title}
+        </h3>
+        <p className="text-body-md-mobile sm:text-body-md" data-testid={`${testId}-description`}>
+          {description}
+        </p>
       </div>
     </div>
     <Button
@@ -51,6 +57,7 @@ const LoginCard = ({
       icon={<JodArrowRight />}
       iconSide="right"
       className="w-fit"
+      testId={`${testId}-link`}
     />
   </div>
 );
@@ -79,7 +86,7 @@ const LoginPage = () => {
   const title = t('profile.login-page.page-title');
 
   return (
-    <MainLayout breadcrumbComponent={<Breadcrumb />}>
+    <MainLayout breadcrumbComponent={<Breadcrumb />} testId="login-page">
       <div className="px-5 sm:px-6">
         <title>{title}</title>
         <h1 className="mb-6 text-hero-mobile focus:outline-0 sm:text-hero" data-testid="landing-title">
@@ -101,6 +108,7 @@ const LoginPage = () => {
               linkComponent={getLinkTo(`/yksilo/login?${params.toString()}`, {
                 useAnchor: true,
               })}
+              testId="login-page-suomifi"
             />
             {isMpassidEnabled && (
               <LoginCard
@@ -112,6 +120,7 @@ const LoginPage = () => {
                 linkComponent={getLinkTo(`/yksilo/login?${mpassidParams.toString()}`, {
                   useAnchor: true,
                 })}
+                testId="login-page-mpassid"
               />
             )}
           </div>
@@ -146,6 +155,7 @@ const LoginPage = () => {
               rel: 'noopener noreferrer',
             })}
             className="mt-6 w-fit"
+            testId="login-page-privacy-policy-link"
           />
         </div>
       </div>

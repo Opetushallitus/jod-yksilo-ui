@@ -76,6 +76,7 @@ export const FilterKesto = () => {
         onValueChange={onDurationChange}
         minValueDescription={t('tool.settings.general.duration-value.min-aria-label')}
         maxValueDescription={t('tool.settings.general.duration-value.max-aria-label')}
+        testId="select-plan-duration"
       />
     </div>
   );

@@ -331,9 +331,11 @@ const ImportKoulutusSummaryModal = ({
                     title: t('education-history-import.summary-modal.cancel-modal.title'),
                     description: t('education-history-import.summary-modal.cancel-modal.description'),
                     onConfirm: closeActiveModal,
+                    testId: 'cancel-import-koulutus-summary-dialog',
                   });
                 }
               }}
+              testId="cancel-button"
             />
 
             <Button
@@ -364,13 +366,16 @@ const ImportKoulutusSummaryModal = ({
                   onCancel: () => {
                     void saveSelectedKoulutus(true);
                   },
+                  testId: 'save-import-koulutus-summary-dialog',
                 });
               }}
               className="whitespace-nowrap"
+              testId="save-button"
             />
           </div>
         </div>
       }
+      testId="import-koulutus-summary-modal"
     />
   );
 };

@@ -57,19 +57,34 @@ const PlanOpportunityCard = React.memo(
         className={cx('flex flex-col rounded bg-white p-5 shadow-border sm:p-6', {
           'border-4 border-primary-2 p-4 sm:p-[20px]': selected,
         })}
+        data-testid="plan-opportunity-card"
       >
         <div className="mb-4 flex flex-row justify-between gap-3 sm:items-start">
           {matchValue !== undefined && matchLabel && (
             <div
               className="tracking-wide inline-flex w-fit flex-col items-center select-none sm:flex-row sm:gap-2"
-              data-testid="opportunity-card-match"
+              data-testid="plan-opportunity-card-match"
             >
-              <span className="text-[1.875rem] text-accent sm:text-[2.125rem]">{matchValue}</span>
-              <span className="font-semibold font-arial text-attrib-title">{matchLabel}</span>
+              <span
+                className="text-[1.875rem] text-accent sm:text-[2.125rem]"
+                data-testid="plan-opportunity-card-match-value"
+              >
+                {matchValue}
+              </span>
+              <span
+                className="font-semibold font-arial text-attrib-title"
+                data-testid="plan-opportunity-card-match-label"
+              >
+                {matchLabel}
+              </span>
             </div>
           )}
 
-          {actionButtonContent && <div className="order-1 sm:order-2">{actionButtonContent}</div>}
+          {actionButtonContent && (
+            <div className="order-1 sm:order-2" data-testid="plan-opportunity-card-action-button">
+              {actionButtonContent}
+            </div>
+          )}
         </div>
         <div className="flex flex-row gap-3">
           <div
@@ -77,7 +92,10 @@ const PlanOpportunityCard = React.memo(
           >
             <TitleIcon mahdollisuusAlityyppi={mahdollisuus.tyyppi === 'EI_TUTKINTO' ? 'MUU_KOULUTUS' : 'TUTKINTO'} />
           </div>
-          <span className="flex items-center font-arial text-body-sm-mobile leading-6 uppercase sm:text-body-sm">
+          <span
+            className="flex items-center font-arial text-body-sm-mobile leading-6 uppercase sm:text-body-sm"
+            data-testid="plan-opportunity-card-type"
+          >
             {mahdollisuus.tyyppi == 'TUTKINTO'
               ? t(`opportunity-type.education.TUTKINTO`)
               : t(`opportunity-type.education.EI_TUTKINTO`)}
@@ -91,6 +109,7 @@ const PlanOpportunityCard = React.memo(
           fetchData={fetchOsaamiset}
           ellipsis={false}
           caretPosition="top"
+          testId="plan-opportunity-card-competences"
         >
           <p className="mt-3 mb-4 font-arial text-body-md-mobile sm:text-body-md">{getLocalizedText(kuvaus)}</p>
           <ul
@@ -98,6 +117,7 @@ const PlanOpportunityCard = React.memo(
             ref={ref}
             onKeyDown={handleKeyDown}
             aria-label={t('competences')}
+            data-testid="plan-opportunity-card-competences-list"
           >
             {osaamiset.map((osaaminen) => (
               <li key={osaaminen.uri} className="max-w-full">
@@ -107,6 +127,7 @@ const PlanOpportunityCard = React.memo(
                   screenReaderTooltip={t('description-for', { description: getLocalizedText(osaaminen.kuvaus) })}
                   variant="presentation"
                   sourceType="koulutus"
+                  testId={`plan-opportunity-card-competence`}
                 />
               </li>
             ))}

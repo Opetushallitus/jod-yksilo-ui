@@ -116,7 +116,14 @@ const Title = ({
   };
 
   if (nested) {
-    return <p className={cx(baseClasses, 'font-normal text-body-md sm:py-2', 'pl-5', modalPadding)}>{text}</p>;
+    return (
+      <p
+        className={cx(baseClasses, 'font-normal text-body-md sm:py-2', 'pl-5', modalPadding)}
+        data-testid="experience-nested-row-title-text"
+      >
+        {text}
+      </p>
+    );
   }
   return (
     <div
@@ -126,6 +133,7 @@ const Title = ({
         'pl-5',
         modalPadding,
       )}
+      data-testid="experience-row-title-text"
     >
       {text}
       {<TuontiLahdeTag row={row} tuontiLahdeLabels={tuontiLahdeLabels} />}
@@ -154,8 +162,12 @@ export const FreeFormTextRow = ({
   }
 
   return (
-    <tr>
-      <td colSpan={5} className={`${className} w-full px-3 py-2 sm:px-5 sm:py-3`.trim()}>
+    <tr data-testid="experience-row-free-form-text-row">
+      <td
+        colSpan={5}
+        className={`${className} w-full px-3 py-2 sm:px-5 sm:py-3`.trim()}
+        data-testid="experience-row-free-form-text-cell"
+      >
         <p className="text-body-md text-pretty wrap-break-word hyphens-auto text-primary-gray">{freeFormText}</p>
       </td>
     </tr>
@@ -184,10 +196,16 @@ const CompetencesRow = ({
   }, [initRovingTabindex, tagsVisibleState]);
 
   return (
-    <tr>
+    <tr data-testid="experience-row-competences-row">
       {tagsVisibleState && !showCheckbox && (
         <td colSpan={5} className={`${className} w-full max-w-0 px-4 pt-3 pb-5`.trim()}>
-          <ul ref={ref} className="flex flex-wrap gap-3" aria-label={t('competences')} onKeyDown={handleKeyDown}>
+          <ul
+            ref={ref}
+            className="flex flex-wrap gap-3"
+            aria-label={t('competences')}
+            onKeyDown={handleKeyDown}
+            data-testid="experience-row-competences-list"
+          >
             {sortedCompetences.map((competence) => (
               <li key={competence.id} className="max-w-full">
                 <Tag
@@ -196,6 +214,7 @@ const CompetencesRow = ({
                   screenReaderTooltip={t('description-for', { description: getLocalizedText(competence.kuvaus) })}
                   variant="presentation"
                   sourceType={competence.sourceType ?? 'jotain-muuta'}
+                  testId={`competence-tag`}
                 />
               </li>
             ))}
@@ -242,7 +261,7 @@ export const ExperienceTableRow = ({
 
   const renderCompetencesDetectFailure = () => {
     return (
-      <div className="flex items-center justify-start">
+      <div className="flex items-center justify-start" data-testid="experience-row-competences-detect-failure">
         <TooltipWrapper tooltipContent={t('competences-identify-failed')} tooltipPlacement="top">
           <JodErrorTriangle className="text-alert-1" />
         </TooltipWrapper>
@@ -306,7 +325,7 @@ export const ExperienceTableRow = ({
             disabled={osaamisetOdottaaTunnistusta}
             title={osaamisetOdottaaTunnistusta ? t('competences-identifying') : undefined}
             type="button"
-            data-testid={`experience-row-edit-${selectedRow.key}`}
+            data-testid={`experience-row-edit`}
           >
             {rowActionElement || (
               <JodEdit
@@ -336,7 +355,7 @@ export const ExperienceTableRow = ({
           }
         }}
         ariaLabel={`${t('choose')} ${row.nimi[language]}`}
-        testId={`experience-row-checkbox-${row.key}`}
+        testId={`experience-row-checkbox`}
       />
     );
   };
@@ -361,7 +380,7 @@ export const ExperienceTableRow = ({
             setIsOpen(!isOpen);
           }}
           className={`flex cursor-pointer items-center gap-x-2 justify-self-end text-secondary-gray ${sm ? 'text-nowrap sm:pr-2' : 'pr-7'} w-full`}
-          data-testid={`experience-row-competences-toggle-${row.key}`}
+          data-testid={`experience-row-competences-toggle`}
         >
           {osaamisetNeedsToBeVerified && (
             <TooltipWrapper
@@ -393,29 +412,39 @@ export const ExperienceTableRow = ({
   const renderOsaamisetCell = (sm: boolean) => {
     if (osaamisetOdottaaTunnistusta) {
       return (
-        <td className={`text-body-md text-nowrap ${sm ? 'text-center' : ''}`}>
-          <Spinner size={24} color="accent" />
+        <td
+          className={`text-body-md text-nowrap ${sm ? 'text-center' : ''}`}
+          data-testid="experience-row-competences-cell"
+        >
+          <Spinner size={24} color="accent" testId="competences-spinner" />
         </td>
       );
     }
     if (osaamisetTunnistusEpaonnistui && row.osaamiset.length === 0) {
-      return <td className="text-center text-body-md text-nowrap">{renderCompetencesDetectFailure()}</td>;
+      return (
+        <td className="text-center text-body-md text-nowrap" data-testid="experience-row-competences-cell">
+          {renderCompetencesDetectFailure()}
+        </td>
+      );
     }
     return sm ? (
-      <td className={`text-end text-body-md text-nowrap ${onRowClick ? 'pr-0 sm:pr-7' : 'pr-5'.trim()}`}>
+      <td
+        className={`text-end text-body-md text-nowrap ${onRowClick ? 'pr-0 sm:pr-7' : 'pr-5'.trim()}`}
+        data-testid="experience-row-competences-cell"
+      >
         <button
           type="button"
           aria-expanded={tagsVisibleState}
           onClick={() => setIsOpen(!isOpen)}
           className={`flex cursor-pointer items-center gap-x-2 justify-self-end text-secondary-gray ${sm ? 'text-nowrap sm:pr-2' : 'pr-7'}`}
-          data-testid={`experience-row-competences-toggle-${row.key}`}
+          data-testid={`experience-row-competences-toggle`}
         >
           <span className="text-secondary-gray">{osaamisetCountTotal}</span>
           <span className="pl-6"></span>
         </button>
       </td>
     ) : (
-      <td>
+      <td data-testid="experience-row-competences-cell">
         <span className="pr-7 pl-[28px] text-end text-body-md text-nowrap">{osaamisetCountTotal}</span>
       </td>
     );
@@ -428,7 +457,7 @@ export const ExperienceTableRow = ({
     return (
       <>
         <tr key={row.key} className={className}>
-          <td className="w-full" colSpan={sm ? 1 : 3}>
+          <td className="w-full" colSpan={sm ? 1 : 3} data-testid="experience-row-title-cell">
             <Title row={row} nested={nested} insideModal={insideModal} />
             {!sm && (
               <DateRange
@@ -441,17 +470,28 @@ export const ExperienceTableRow = ({
           {!hideOsaamiset && !sm && <td className="text-body-md text-nowrap">{renderOsaamisetNestedCell(!sm)}</td>}
           {sm && (
             <>
-              <td className={commonTextStyles}>{!row.hideRowDetails && row.alkuPvm && formatDate(row.alkuPvm)}</td>
-              <td className={commonTextStyles}>{!row.hideRowDetails && row.loppuPvm && formatDate(row.loppuPvm)}</td>
+              <td className={commonTextStyles} data-testid="experience-row-started-cell">
+                {!row.hideRowDetails && row.alkuPvm && formatDate(row.alkuPvm)}
+              </td>
+              <td className={commonTextStyles} data-testid="experience-row-ended-cell">
+                {!row.hideRowDetails && row.loppuPvm && formatDate(row.loppuPvm)}
+              </td>
               {!hideOsaamiset && (
-                <td className={`text-body-md ${onRowClick ? 'pr-7' : 'pr-5'}`.trim()}>
+                <td
+                  className={`text-body-md ${onRowClick ? 'pr-7' : 'pr-5'}`.trim()}
+                  data-testid="experience-row-competences-cell"
+                >
                   {renderOsaamisetNestedCell(sm)}
                 </td>
               )}
             </>
           )}
-          {onRowClick && <td>{rowAction(onRowClick, row, useConfirm, rowActionElement, actionLabel)}</td>}
-          {showCheckbox && <td>{renderCheckbox()}</td>}
+          {onRowClick && (
+            <td data-testid="experience-row-action-cell">
+              {rowAction(onRowClick, row, useConfirm, rowActionElement, actionLabel)}
+            </td>
+          )}
+          {showCheckbox && <td data-testid="experience-row-checkbox-cell">{renderCheckbox()}</td>}
         </tr>
         <FreeFormTextRow row={row} visibleState={tagsVisibleState} className={className} />
         <CompetencesRow

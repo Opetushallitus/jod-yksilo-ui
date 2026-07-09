@@ -20,7 +20,7 @@ export const FilterShowFavorites = () => {
   };
 
   return (
-    <fieldset className="flex flex-col gap-5">
+    <fieldset className="flex flex-col gap-5" data-testid="filter-show-favorites">
       <legend className="sr-only mb-5 text-heading-4-mobile sm:text-heading-4">{t('show')}</legend>
       <Checkbox
         ariaLabel={t('profile.my-goals.filters.favorites.checkbox-label')}
@@ -30,7 +30,7 @@ export const FilterShowFavorites = () => {
         name={t('profile.my-goals.filters.favorites.checkbox-label')}
         onChange={onFilterChange}
         value="showFavorites"
-        data-testid="filter-show-favorites"
+        data-testid="show-favorites"
       />
     </fieldset>
   );

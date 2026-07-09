@@ -41,10 +41,16 @@ const SettingsMenu = () => {
           title={t('tool.settings.general.education-opportunity-type')}
           count={getFilterCount(filters, ['educationOpportunityType'])}
           hideTopBorder={!sm}
+          testId="filter-education-opportunity-type-setting"
         >
           <FilterEducationOpportunityType />
         </Setting>
-        <Setting initiallyOpen title={t('tool.settings.general.duration')} count={getKestoCount()}>
+        <Setting
+          initiallyOpen
+          title={t('tool.settings.general.duration')}
+          count={getKestoCount()}
+          testId="filter-duration-setting"
+        >
           <FilterKesto />
         </Setting>
 
@@ -53,6 +59,7 @@ const SettingsMenu = () => {
           title={t('profile.my-goals.filters.favorites.title')}
           count={getFilterCount(filters, ['showFavorites'])}
           className="border-b-2 pb-3"
+          testId="filter-show-favorites-setting"
         >
           <FilterShowFavorites />
         </Setting>
@@ -89,7 +96,12 @@ const PlanOptionFilters = ({ onConfirm, ...rest }: PlanOptionFiltersProps) => {
       name={t('tool.settings.controls')}
       {...rest}
       topSlot={
-        <h2 ref={titleRef} tabIndex={-1} className="text-heading-2-mobile focus-visible:outline-0 sm:text-hero">
+        <h2
+          ref={titleRef}
+          tabIndex={-1}
+          className="text-heading-2-mobile focus-visible:outline-0 sm:text-hero"
+          data-testid="plan-option-filters-title"
+        >
           {t('profile.my-goals.adjust-list')}
         </h2>
       }
@@ -110,6 +122,7 @@ const PlanOptionFilters = ({ onConfirm, ...rest }: PlanOptionFiltersProps) => {
               onClick={resetSettings}
               disabled={noFiltersSelected(filters)}
               label={t('tool.settings.reset')}
+              testId="reset-button"
             />
           </div>
           <div className="flex flex-row gap-5">
@@ -122,6 +135,7 @@ const PlanOptionFilters = ({ onConfirm, ...rest }: PlanOptionFiltersProps) => {
                 closeActiveModal();
               }}
               size={sm ? 'lg' : 'sm'}
+              testId="cancel-button"
             />
             <Button
               label={t('update-short')}
@@ -133,10 +147,12 @@ const PlanOptionFilters = ({ onConfirm, ...rest }: PlanOptionFiltersProps) => {
                 closeActiveModal();
               }}
               size={sm ? 'lg' : 'sm'}
+              testId="update-button"
             />
           </div>
         </div>
       }
+      testId="plan-option-filters"
     />
   );
 };

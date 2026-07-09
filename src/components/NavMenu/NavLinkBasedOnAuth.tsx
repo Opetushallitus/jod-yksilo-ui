@@ -7,9 +7,10 @@ import { useIsSessionExpired } from '@/stores/useSessionManagerStore';
 interface NavLinkBasedOnAuthProps extends NavLinkProps {
   shouldLogin: boolean;
   onClose?: () => void;
+  testId?: string;
 }
 
-export const NavLinkBasedOnAuth = ({ shouldLogin, onClose, ...rest }: NavLinkBasedOnAuthProps) => {
+export const NavLinkBasedOnAuth = ({ shouldLogin, onClose, testId, ...rest }: NavLinkBasedOnAuthProps) => {
   const {
     t,
     i18n: { language },
@@ -26,11 +27,18 @@ export const NavLinkBasedOnAuth = ({ shouldLogin, onClose, ...rest }: NavLinkBas
       to={`/${language}/${t('slugs.profile.login')}`}
       lang={language}
       onClick={onClose}
+      data-testid={testId ? `${testId}-unauthenticated` : undefined}
     >
       {rest.children}
     </NavLink>
   ) : (
-    <NavLink {...rest} to={to} lang={language} onClick={onClose}>
+    <NavLink
+      {...rest}
+      to={to}
+      lang={language}
+      onClick={onClose}
+      data-testid={testId ? `${testId}-authenticated` : undefined}
+    >
       {rest.children}
     </NavLink>
   );

@@ -26,7 +26,14 @@ const LetterSection = ({ letter, osaamiset, isOsaaminenVisible, locale }: Letter
 
   const { ref, handleKeyDown } = useArrowKeyControls(data);
   return (
-    <Accordion key={letter} title={letter} underline ariaLabel={letter} className="pt-6">
+    <Accordion
+      key={letter}
+      title={letter}
+      underline
+      ariaLabel={letter}
+      className="pt-6"
+      testId={`competences-accordion-${letter.toLowerCase()}`}
+    >
       <ul className="mt-4 flex flex-wrap gap-3" ref={ref} onKeyDown={handleKeyDown}>
         {data.map((val) => {
           const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
@@ -39,6 +46,7 @@ const LetterSection = ({ letter, osaamiset, isOsaaminenVisible, locale }: Letter
                 screenReaderTooltip={t('description-for', { description: tooltip })}
                 variant="presentation"
                 sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
+                testId="competences-tag"
               />
             </li>
           );
@@ -68,7 +76,9 @@ export const GroupByAlphabet = ({
   return (
     <div className="pb-9">
       <div className="flex flex-row justify-between gap-5">
-        <h2 className="mt-6 text-heading-2-mobile sm:text-heading-2">{t('my-competences-alphabetically')}</h2>
+        <h2 className="mt-6 text-heading-2-mobile sm:text-heading-2" data-testid="competences-alphabetically-title">
+          {t('my-competences-alphabetically')}
+        </h2>
         {mobileFilterOpenerComponent}
       </div>
       {Array.from(alphabet)

@@ -150,6 +150,7 @@ const EditInterestModal = ({ onClose, data = [], ...rest }: EditKiinnostusModalP
           />
         </div>
       }
+      testId={data.length > 0 ? 'edit-interests-modal' : 'add-interests-modal'}
     />
   );
 };

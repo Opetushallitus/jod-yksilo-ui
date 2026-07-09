@@ -71,7 +71,11 @@ const SelectCompetencesStep = () => {
 
       <div className="w-full sm:mt-6">
         <div className="font-bold sticky top-0 bg-bg-gray font-arial text-heading-4-mobile sm:text-heading-4">
-          <h2 id={requiredTagsId} className="text-heading-3-mobile sm:text-heading-3">
+          <h2
+            id={requiredTagsId}
+            className="text-heading-3-mobile sm:text-heading-3"
+            data-testid="required-competences-title"
+          >
             {t('profile.my-goals.required-competences')}
           </h2>
           <p className="mb-4 font-arial text-body-sm text-secondary-gray">
@@ -84,6 +88,7 @@ const SelectCompetencesStep = () => {
             className="flex flex-wrap gap-3 p-1"
             aria-labelledby={requiredTagsId}
             onKeyDown={handleRequiredTagsKeyboardNavigation}
+            data-testid="required-competences-list"
           >
             {filteredVaaditutOsaamiset.map((o, index) => (
               <li key={o.uri} className="max-w-full">
@@ -104,6 +109,7 @@ const SelectCompetencesStep = () => {
                   screenReaderTooltip={t('description-for', { description: getLocalizedText(o.kuvaus) })}
                   variant="selectable"
                   sourceType="koulutus"
+                  testId="required-competence"
                 />
               </li>
             ))}
@@ -112,7 +118,11 @@ const SelectCompetencesStep = () => {
       </div>
 
       <div className="mt-6 w-full sm:mt-8">
-        <h2 id={addedTagsId} className="font-arial text-heading-3-mobile sm:text-heading-3">
+        <h2
+          id={addedTagsId}
+          className="font-arial text-heading-3-mobile sm:text-heading-3"
+          data-testid="selected-competences-title"
+        >
           {t('profile.my-goals.selected-competences')}
         </h2>
         <div ref={selectedTagsContainerRef}>
@@ -130,6 +140,7 @@ const SelectCompetencesStep = () => {
                   className="flex flex-wrap gap-3 p-1"
                   aria-labelledby={addedTagsId}
                   onKeyDown={handleSelectedTagsKeyboardNavigation}
+                  data-testid="selected-competences-list"
                 >
                   <AddedTags
                     osaamiset={valitutOsaamiset.map((o) => ({ id: o.uri, nimi: o.nimi, kuvaus: o.kuvaus }))}

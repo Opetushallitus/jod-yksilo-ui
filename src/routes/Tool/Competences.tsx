@@ -40,6 +40,7 @@ const Competences = () => {
           }}
           className="ml-2"
           label={t('tool.competency-profile.delete-all')}
+          testId="competences-remove-all-button"
         />
       )}
       {isFeatureEnabled('VIRTUAALIOHJAAJA_OSAAMISET') && <VirtualAssistant type="competences" className="mt-6" />}
