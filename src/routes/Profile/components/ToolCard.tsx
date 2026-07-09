@@ -48,6 +48,7 @@ export const ToolCard = ({
           iconSide="right"
           testId={testId}
           icon={<JodArrowRight />}
+          data-testid="tool-card-button"
         />
       </div>
     </div>

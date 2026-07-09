@@ -155,6 +155,7 @@ const EditTyonantajaModal = ({ tyopaikkaId: id, ...rest }: EditTyonantajaModalPr
                     name: getLocalizedText(methods.getValues('nimi')),
                   }),
                   onConfirm: deleteTyopaikka,
+                  testId: 'delete-tyopaikka-dialog',
                 });
               }}
               size={sm ? 'lg' : 'sm'}
@@ -172,6 +173,7 @@ const EditTyonantajaModal = ({ tyopaikkaId: id, ...rest }: EditTyonantajaModalPr
               }}
               className="whitespace-nowrap"
               size={sm ? 'lg' : 'sm'}
+              testId="cancel-button"
             />
             <Button
               form={formId}
@@ -181,10 +183,12 @@ const EditTyonantajaModal = ({ tyopaikkaId: id, ...rest }: EditTyonantajaModalPr
               className="whitespace-nowrap"
               icon={sm ? undefined : <JodCheckmark />}
               size={sm ? 'lg' : 'sm'}
+              testId="save-button"
             />
           </div>
         </div>
       }
+      testId="edit-tyopaikka-modal"
     />
   );
 };

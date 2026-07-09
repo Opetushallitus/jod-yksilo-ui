@@ -214,16 +214,21 @@ export const ExperienceTable = ({
         >
           <thead className="after:block after:h-5 after:content-['']">
             <tr className="border-b border-inactive-gray text-left text-body-md">
-              <th scope="col" colSpan={sm ? 1 : 3} className={cx('font-normal pr-7 pb-3 pl-5', thPadding)}>
+              <th
+                scope="col"
+                colSpan={sm ? 1 : 3}
+                className={cx('font-normal pr-7 pb-3 pl-5', thPadding)}
+                data-testid="experience-table-main-column-header"
+              >
                 {mainColumnHeader}
               </th>
 
               {sm && (
                 <>
-                  <th scope="col" className="font-normal pr-7 pb-3">
+                  <th scope="col" className="font-normal pr-7 pb-3" data-testid="started-column-header">
                     {t('started')}
                   </th>
-                  <th scope="col" className="font-normal pr-7 pb-3">
+                  <th scope="col" className="font-normal pr-7 pb-3" data-testid="ended-column-header">
                     {t('ended')}
                   </th>
                 </>
@@ -234,13 +239,14 @@ export const ExperienceTable = ({
                   scope="col"
                   colSpan={sm ? 1 : 2}
                   className={`font-normal pb-3 text-end ${onNestedRowClick ? 'pr-7' : 'pr-5'}`.trim()}
+                  data-testid="competences-column-header"
                 >
                   {t('competences')}
                 </th>
               )}
 
               {sm && showCheckbox && (
-                <th scope="col" className="pr-5 pb-3">
+                <th scope="col" className="pr-5 pb-3" data-testid="checkbox-column-header">
                   {checkboxColumnHeader}
                 </th>
               )}

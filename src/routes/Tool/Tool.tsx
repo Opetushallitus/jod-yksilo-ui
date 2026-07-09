@@ -81,7 +81,12 @@ const ExploreOpportunities = () => {
       <div className="not:lg:z-10 sticky -mx-1 bg-bg-gray px-1 lg:pt-4" style={{ top }}>
         <div className="flex h-9 items-center justify-end not-lg:mb-3 not-lg:w-full not-lg:bg-white not-lg:px-4 lg:justify-between lg:pb-4">
           {lg && (
-            <h2 id="opportunities-title" tabIndex={-1} className="text-heading-2-mobile sm:text-heading-2">
+            <h2
+              id="opportunities-title"
+              tabIndex={-1}
+              className="text-heading-2-mobile sm:text-heading-2"
+              data-testid="opportunities-title"
+            >
               {t('tool.your-opportunities.title')}
             </h2>
           )}
@@ -108,7 +113,7 @@ const ExploreOpportunities = () => {
         </div>
       </div>
 
-      <section aria-busy={isLoading}>
+      <section aria-busy={isLoading} data-testid={isLoading ? 'opportunities-loading' : 'opportunities-loaded'}>
         <div role="status" aria-live="polite" className="sr-only">
           {statusText}
         </div>
@@ -180,6 +185,7 @@ const ProfileLinkComponent = ({ className, children }: { className?: string; chi
       to={`${t('slugs.profile.index')}/${t('slugs.profile.front')}`}
       shouldLogin={!isLoggedIn}
       lang={i18n.language}
+      testId="tool-go-to-profile-link"
     >
       {children}
     </NavLinkBasedOnAuth>
@@ -317,7 +323,7 @@ const YourInfo = () => {
       </div>
 
       <div className="flex flex-col gap-3 rounded-md bg-primary-1-dark-2 px-5 py-6 text-white lg:mx-3">
-        <h2 className="text-heading-2-mobile sm:text-heading-2">
+        <h2 className="text-heading-2-mobile sm:text-heading-2" data-testid="tool-go-to-profile-banner-title">
           {isLoggedIn ? t('profile.banner.title.logged-in') : t('profile.banner.title.unlogged')}
         </h2>
         <div className="flex flex-col gap-6">
@@ -497,7 +503,9 @@ const Tool = () => {
                 top,
               }}
             >
-              <h2 className="h-9 text-heading-2-mobile sm:text-heading-2">{t('tool.my-own-data.title')}</h2>
+              <h2 className="h-9 text-heading-2-mobile sm:text-heading-2" data-testid="tool-my-own-data-title">
+                {t('tool.my-own-data.title')}
+              </h2>
             </div>
             <div className="-mx-3 flex flex-col gap-4">
               <YourInfo />
@@ -505,7 +513,12 @@ const Tool = () => {
           </div>
           <div className="col-span-1 lg:col-span-7">
             {!lg && (
-              <h2 id="opportunities-title" tabIndex={-1} className="text-heading-3-mobile sm:text-heading-3">
+              <h2
+                id="opportunities-title"
+                tabIndex={-1}
+                className="text-heading-3-mobile sm:text-heading-3"
+                data-testid="tool-your-opportunities-title"
+              >
                 {t('tool.your-opportunities.title')}
               </h2>
             )}
@@ -545,6 +558,7 @@ const Tool = () => {
             tabIndex={0}
             aria-labelledby="tab-1"
             className={cx('flex w-full flex-col')}
+            data-testid={`tool-tabpanel-${currentTab}`}
           >
             {currentTab === 'info' ? (
               <div className="-mx-5 flex flex-col gap-5">

@@ -66,6 +66,7 @@ const FreeTimeActivities = () => {
           <ToolCard testId="free-time-go-to-tool" />
         </div>
       }
+      testId="free-time-activities-page"
     >
       {!lg && (
         <div className="mb-6 px-5 sm:px-6">

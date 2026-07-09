@@ -377,6 +377,7 @@ export const AddOrEditToimintoModal = ({ onClose, teemaId: id, toimintoId, ...re
                     description: t('free-time-activities.confirm-delete-activity', {
                       name: getLocalizedText(methods.getValues('nimi')),
                     }),
+                    testId: 'delete-toiminto-dialog',
                   });
                 }}
                 testId="free-time-delete"
@@ -438,6 +439,7 @@ export const AddOrEditToimintoModal = ({ onClose, teemaId: id, toimintoId, ...re
           </div>
         </div>
       }
+      testId={toimintoId ? 'edit-toiminto-modal' : 'add-toiminto-modal'}
     />
   );
 };

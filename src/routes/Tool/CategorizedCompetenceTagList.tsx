@@ -11,13 +11,25 @@ import { PROFILE_TYPES, useTool } from './hook/useTool';
 
 const freeFormTextExpandedLimit = 100;
 
-const FreeFormText = ({ description, onChange }: { description: string; onChange: () => void }) => {
+const FreeFormText = ({
+  description,
+  onChange,
+  testId,
+}: {
+  description: string;
+  onChange: () => void;
+  testId?: string;
+}) => {
   const { t } = useTranslation();
   const [isExpanded, setIsExpanded] = React.useState(false);
+  const getTestId = (postfix: string) => (testId ? `${testId}-${postfix}` : undefined);
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="font-arial text-primary-gray">
+    <div className="flex flex-col gap-3" data-testid={testId}>
+      <div
+        className="font-arial text-primary-gray"
+        data-testid={getTestId(isExpanded ? 'expanded-description' : 'description')}
+      >
         {isExpanded || description.length <= freeFormTextExpandedLimit
           ? description
           : `${description.slice(0, freeFormTextExpandedLimit)}…`}
@@ -26,11 +38,18 @@ const FreeFormText = ({ description, onChange }: { description: string; onChange
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="cursor-pointer text-left text-body-sm text-accent"
+          data-testid={getTestId(isExpanded ? 'show-less-button' : 'show-more-button')}
         >
           {t(isExpanded ? 'show-less' : 'show-more')}
         </button>
       )}
-      <Button variant="plain" className="ml-2" onClick={onChange} label={t('tool.competency-profile.delete-text')} />
+      <Button
+        variant="plain"
+        className="ml-2"
+        onClick={onChange}
+        label={t('tool.competency-profile.delete-text')}
+        testId={getTestId('remove-text-button')}
+      />
     </div>
   );
 };
@@ -39,13 +58,15 @@ const CompetenceCategory = ({
   osaamiset,
   onChange,
   lahdeTyyppi,
+  testId,
 }: {
   osaamiset: OsaaminenValue[];
   onChange: (ids: string[]) => () => void;
   lahdeTyyppi?: OsaaminenLahdeTyyppi;
+  testId?: string;
 }) => {
   return (
-    <ul className="flex flex-wrap gap-3">
+    <ul className="flex flex-wrap gap-3" data-testid={testId}>
       <AddedTags osaamiset={osaamiset} onClick={onChange} lahdetyyppi={lahdeTyyppi} />
     </ul>
   );
@@ -89,18 +110,19 @@ const CategorizedCompetenceTagList = () => {
 
   return (
     <div className="flex flex-col">
-      <div id={competencesFromProfileId} className="text-heading-4">
+      <div id={competencesFromProfileId} className="text-heading-4" data-testid="competences-from-profile-title">
         {t('tool.info-overview.data-from-profile')}
       </div>
       {hasProfileCompetences ? (
         <div className="flex flex-col gap-4">
           <div className="font-arial text-body-sm text-secondary-gray">{t('tool.remove-competence-help')}</div>
-          <ul className="" aria-labelledby={competencesFromProfileId}>
+          <ul className="" aria-labelledby={competencesFromProfileId} data-testid="competences-from-profile-list">
             {Object.entries(profileCompetencesByType).map(([type, compentences]) => (
               <li className="mb-4" key={type}>
                 <CompetenceCategory
                   osaamiset={compentences}
                   onChange={type === 'KIINNOSTUS' ? removeKiinnostus : removeOsaaminen}
+                  testId={`${type.toLowerCase()}-competences-list`}
                 />
               </li>
             ))}
@@ -116,17 +138,23 @@ const CategorizedCompetenceTagList = () => {
               }}
               className="ml-2"
               label={t('tool.competency-profile.delete-all')}
+              testId="competences-from-profile-remove-all-button"
             />
           )}
         </div>
       ) : (
         <div className="mt-4">
-          <EmptyState text={t('tool.info-overview.no-competences-from-profile')} />
+          <EmptyState
+            text={t('tool.info-overview.no-competences-from-profile')}
+            testId="competences-from-profile-empty-state"
+          />
         </div>
       )}
       {hasOtherProfileData ? (
         <>
-          <div className="mt-6 text-heading-4">{t('tool.info-overview.other-data-from-profile')}</div>
+          <div className="mt-6 text-heading-4" data-testid="other-data-from-profile-title">
+            {t('tool.info-overview.other-data-from-profile')}
+          </div>
           <div className="mb-4 font-arial text-body-sm text-secondary-gray">
             {t('tool.info-overview.other-data-from-profile-description')}
           </div>
@@ -138,6 +166,7 @@ const CategorizedCompetenceTagList = () => {
                   key={teksti.key}
                   description={teksti.data.teksti[language]}
                   onChange={() => setKuvaukset(mappedKuvaukset.filter((k) => k.key !== teksti.key).map((k) => k.data))}
+                  testId={`${teksti.key}`}
                 />
               ))}
 
@@ -145,6 +174,7 @@ const CategorizedCompetenceTagList = () => {
               <FreeFormText
                 description={osaamisetVapaateksti[language]}
                 onChange={() => setOsaamisetVapaateksti(undefined)}
+                testId="osaamiset-vapaateksti"
               />
             )}
 
@@ -152,6 +182,7 @@ const CategorizedCompetenceTagList = () => {
               <FreeFormText
                 description={kiinnostuksetVapaateksti[language]}
                 onChange={() => setKiinnostuksetVapaateksti(undefined)}
+                testId="kiinnostukset-vapaateksti"
               />
             )}
           </div>

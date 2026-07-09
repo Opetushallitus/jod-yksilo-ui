@@ -28,6 +28,7 @@ const ProfileFront = () => {
           <ToolCard testId="profile-front-go-to-tool" />
         </div>
       }
+      testId="profile-front-page"
     >
       {!lg && (
         <div className="mb-6 px-5 sm:px-6">

@@ -52,6 +52,7 @@ const Preferences = () => {
           <ToolCard testId="preferences-go-to-tool" />
         </div>
       }
+      testId="preferences-page"
     >
       {!lg && (
         <div className="mb-6 px-5 sm:px-6">
@@ -69,7 +70,7 @@ const Preferences = () => {
 
         {hasImportExportContent && (
           <>
-            <section>
+            <section data-testid="preferences-import-export-section">
               <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2">{t('preferences.import-export.title')}</h2>
 
               <div className="flex flex-col gap-7">
@@ -87,8 +88,10 @@ const Preferences = () => {
             <Divider className="my-7" />
           </>
         )}
-        <section className="mb-8">
-          <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2">{t('preferences.download.title')}</h2>
+        <section className="mb-8" data-testid="download-section">
+          <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2" data-testid="download-title">
+            {t('preferences.download.title')}
+          </h2>
           <p className="mb-5 font-arial text-body-md">{t('preferences.download.description')}</p>
           <Button
             variant="accent"
@@ -97,8 +100,10 @@ const Preferences = () => {
             testId="pref-download-data"
           />
         </section>
-        <section>
-          <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2">{t('preferences.delete-profile.title')}</h2>
+        <section data-testid="delete-profile-section">
+          <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2" data-testid="delete-profile-title">
+            {t('preferences.delete-profile.title')}
+          </h2>
           <p className="mb-5 font-arial text-body-md">{t('preferences.delete-profile.description')}</p>
           <Button
             variant="white-delete"

@@ -15,7 +15,11 @@ const FiltersModal = ({ onClose, ...rest }: ModalComponentProps) => {
     <Modal
       {...rest}
       open={rest.open && !lg}
-      topSlot={<span className="text-heading-2-mobile sm:text-heading-2">{t('search.filters', { count: 0 })}</span>}
+      topSlot={
+        <span className="text-heading-2-mobile sm:text-heading-2" data-testid="search-filters-modal-title">
+          {t('search.filters', { count: 0 })}
+        </span>
+      }
       className="h-fit!"
       content={
         <div className="p-5 pb-6 md:ml-3 md:px-8">
@@ -24,10 +28,17 @@ const FiltersModal = ({ onClose, ...rest }: ModalComponentProps) => {
       }
       footer={
         <div className="ml-auto flex gap-4">
-          <Button size={sm ? 'lg' : 'sm'} onClick={onClose} label={t('close')} variant="accent" />
+          <Button
+            size={sm ? 'lg' : 'sm'}
+            onClick={onClose}
+            label={t('close')}
+            variant="accent"
+            testId="search-filters-modal-close-button"
+          />
         </div>
       }
       name={t('search.filters', { count: 0 })}
+      testId="search-filters-modal"
     />
   );
 };
@@ -80,6 +91,7 @@ const FiltersContent = () => {
               toggleFilter(filterKey as keyof typeof filters);
               setPageNr(1);
             }}
+            testId={`search-filter-${filterKey.toLowerCase()}`}
           />
         </li>
       ))}
@@ -97,7 +109,9 @@ export const SearchFilters = () => {
   if (lg) {
     return (
       <div className="flex flex-col gap-6 rounded-md bg-white p-6 select-none">
-        <h2 className="text-body-sm-mobile sm:text-body-sm">{t('search.filters', { count: 0 })}</h2>
+        <h2 className="text-body-sm-mobile sm:text-body-sm" data-testid="search-filters-title">
+          {t('search.filters', { count: 0 })}
+        </h2>
         <FiltersContent />
       </div>
     );
@@ -113,6 +127,7 @@ export const SearchFilters = () => {
       className="text-primary-gray!"
       iconSide="left"
       size="sm"
+      testId="search-filters-button"
     />
   );
 };

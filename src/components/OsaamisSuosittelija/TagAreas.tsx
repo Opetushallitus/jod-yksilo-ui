@@ -74,7 +74,11 @@ export const TagAreas = ({
   return (
     <>
       <div className={cx(['sticky top-0 bg-bg-gray text-primary-gray', tagHeadingClassName])}>
-        <Title id={suggestedTagsId} className="text-heading-4-mobile sm:text-heading-4">
+        <Title
+          id={suggestedTagsId}
+          className="text-heading-4-mobile sm:text-heading-4"
+          data-testid={`suggested-${mode}-tags-header`}
+        >
           {mode === 'osaamiset' ? t('proposed-competences') : t('proposed-interests')}
         </Title>
         {ehdotetutOsaamiset.length > 0 && (
@@ -141,6 +145,7 @@ export const TagAreas = ({
                     }
                   }}
                   variant="selectable"
+                  testId="suggested-tag"
                 />
               </li>
             ))}
@@ -161,7 +166,11 @@ export const TagAreas = ({
       {!hideSelected && (
         <>
           <div className={cx(['sticky top-0 bg-bg-gray text-primary-gray', tagHeadingClassName])}>
-            <Title id={addedTagsId} className="text-heading-4-mobile sm:text-heading-4">
+            <Title
+              id={addedTagsId}
+              className="text-heading-4-mobile sm:text-heading-4"
+              data-testid={`selected-${mode}-tags-header`}
+            >
               {mode === 'osaamiset' ? t('competences-of-your-choice') : t('interests-of-your-choice')}
             </Title>
             {value.length > 0 && (
@@ -200,6 +209,7 @@ export const TagAreas = ({
                       ? t(`osaamissuosittelija.competence.none-selected`)
                       : t(`osaamissuosittelija.interest.none-selected`)
                   }
+                  testId="selected-competences-empty-state"
                 />
               </div>
             )}

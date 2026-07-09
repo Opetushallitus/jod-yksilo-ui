@@ -41,6 +41,7 @@ const SomethingElse = () => {
           <ToolCard testId="something-else-go-to-tool" />
         </div>
       }
+      testId="something-else-page"
     >
       {!lg && (
         <div className="mb-6 px-5 sm:px-6">
@@ -59,7 +60,10 @@ const SomethingElse = () => {
         )}
 
         {muuOsaaminen.length > 0 && (
-          <h2 className="mb-5 border-b border-border-gray text-heading-3-mobile sm:text-heading-3">
+          <h2
+            className="mb-5 border-b border-border-gray text-heading-3-mobile sm:text-heading-3"
+            data-testid="something-else-tags-header"
+          >
             {t('profile.something-else.my-other-comptetences')}
           </h2>
         )}
@@ -72,6 +76,7 @@ const SomethingElse = () => {
                 screenReaderTooltip={t('description-for', { description: getLocalizedText(val.kuvaus) })}
                 variant="presentation"
                 sourceType="jotain-muuta"
+                testId="something-else-tag"
               />
             </li>
           ))}
@@ -82,7 +87,7 @@ const SomethingElse = () => {
             ariaHaspopup="dialog"
             label={muuOsaaminen.length > 0 ? t('profile.competences.edit') : t('profile.competences.add')}
             onClick={guardedAction(showModal, EditMuuOsaaminenModal, { data: muuOsaaminen })}
-            data-testid="something-else-edit"
+            testId={muuOsaaminen.length > 0 ? 'something-else-edit-button' : 'something-else-add-button'}
           />
         </div>
         {lg ? null : <ToolCard testId="something-else-go-to-tool" className="mt-6" />}

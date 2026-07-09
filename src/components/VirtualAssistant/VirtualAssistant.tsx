@@ -24,7 +24,10 @@ export const VirtualAssistant = ({ type, className }: { type: VirtualAssistantVa
   const config = getVirtualAssistantConfig(type, t);
 
   const headerText = config.labels.title;
-  const topSlot = React.useMemo(() => <ModalHeader text={headerText} />, [headerText]);
+  const topSlot = React.useMemo(
+    () => <ModalHeader text={headerText} testId={`${type}-virtual-assistant-modal-header`} />,
+    [headerText],
+  );
 
   const handleSave = React.useCallback(() => {
     const newOsaamisetOrKiinnostukset = selected.map((k) => ({
@@ -84,6 +87,7 @@ export const VirtualAssistant = ({ type, className }: { type: VirtualAssistantVa
               }}
               label={t('common:cancel')}
               size={layout.sm ? 'lg' : 'sm'}
+              testId={`${type}-virtual-assistant-modal-cancel-button`}
             />
             <Button
               onClick={handleSave}
@@ -91,9 +95,11 @@ export const VirtualAssistant = ({ type, className }: { type: VirtualAssistantVa
               variant="accent"
               disabled={isSelectedEmpty}
               size={layout.sm ? 'lg' : 'sm'}
+              testId={`${type}-virtual-assistant-modal-save-button`}
             />
           </div>
         }
+        testId={`${type}-virtual-assistant-modal`}
       />
     </div>
   );

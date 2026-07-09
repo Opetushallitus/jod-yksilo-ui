@@ -25,6 +25,7 @@ export const MahdollisuusTyyppiFilter = ({
         name={jobFilterText}
         onChange={handleFilterChange}
         value="TYOMAHDOLLISUUS"
+        testId="favorites-job-filter"
       />
       <Checkbox
         ariaLabel={educationFilterText}
@@ -33,6 +34,7 @@ export const MahdollisuusTyyppiFilter = ({
         name={educationFilterText}
         onChange={handleFilterChange}
         value="KOULUTUSMAHDOLLISUUS"
+        testId="favorites-education-filter"
       />
     </div>
   );

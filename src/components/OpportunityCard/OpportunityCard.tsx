@@ -210,6 +210,7 @@ export const OpportunityCardWrapper = ({
           state?.callbackUrl ? `/${language}/${state?.callbackUrl}` : `${pathname}${search}${hash}`,
           closeAllModals,
         ),
+        testId: 'login-dialog',
       });
     }
   };
@@ -261,6 +262,7 @@ export const OpportunityCardWrapper = ({
           ariaLabel={name}
           triggerId={triggerId}
           ariaControls={contentId}
+          data-testid="opportunity-card-accordion"
         >
           <section id={contentId} className="mt-3">
             {content}
@@ -329,6 +331,7 @@ const OpportunityCardHeader = ({
         >
           <TitleTag
             className={`text-card-heading-mobile hyphens-auto sm:text-card-heading ${textColorClassName} pb-2 hover:underline`}
+            data-testid="opportunity-card-title"
           >
             {name}
           </TitleTag>

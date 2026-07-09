@@ -30,7 +30,7 @@ const Unauthenticated = () => {
   } = useTranslation();
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5" data-testid="profile-import-export-unauthenticated">
       <p className="font-arial text-body-sm leading-5 text-secondary-gray">
         {t('tool.competency-profile.login-description')}
       </p>
@@ -78,7 +78,7 @@ const AuthenticatedEmptyState = ({ onImportSuccess }: { onImportSuccess?: () => 
   const { t } = useTranslation();
 
   return (
-    <div className="mb-3 flex flex-col gap-5">
+    <div className="mb-3 flex flex-col gap-5" data-testid="profile-import-export-authenticated-empty-state">
       <p className="font-arial text-body-md leading-5 text-secondary-gray">
         {t('tool.competency-profile.import-help')}
       </p>
@@ -93,7 +93,10 @@ const AuthenticatedEmptyState = ({ onImportSuccess }: { onImportSuccess?: () => 
 
 const AuthenticatedWithDataState = ({ onImportSuccess }: { onImportSuccess?: () => void }) => {
   return (
-    <div className="flex flex-col gap-6 whitespace-pre-line">
+    <div
+      className="flex flex-col gap-6 whitespace-pre-line"
+      data-testid="profile-import-export-authenticated-with-data"
+    >
       <CategorizedCompetenceTagList />
       <div className="mb-4 flex flex-row gap-3">
         <CompetenceImport onImportSuccess={onImportSuccess} />

@@ -39,7 +39,7 @@ const ToolOpportunityCardActionMenu = ({
         };
 
   return (
-    <PopupList>
+    <PopupList testId="opportunity-card-action-menu">
       <ul id={menuId} className="flex w-full flex-col gap-y-2">
         <li>
           <Link to={compareTo} type="button" data-testid="opportunity-action-compare">

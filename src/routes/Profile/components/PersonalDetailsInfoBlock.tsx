@@ -11,22 +11,32 @@ interface InfoBlockProps {
   stack?: boolean;
   /** Optional id for accessibility - links label to input field via htmlFor attribute */
   htmlFor?: string;
+  testId?: string;
 }
 /**
  * A component shared between PersonalDetails and WelcomePathModal for displaying a single personal user detail.
  */
-export const PersonalDetailsInfoBlock = ({ label, info, interactiveComponent, stack, htmlFor }: InfoBlockProps) => {
+export const PersonalDetailsInfoBlock = ({
+  label,
+  info,
+  interactiveComponent,
+  stack,
+  htmlFor,
+  testId,
+}: InfoBlockProps) => {
   const rowOrCol = stack ? 'flex-col' : 'flex-row';
 
   return (
-    <div className={tc(['space-between flex gap-3', rowOrCol])}>
+    <div className={tc(['space-between flex gap-3', rowOrCol])} data-testid={testId}>
       <div className="flex flex-1 flex-col gap-1">
         {htmlFor ? (
-          <label htmlFor={htmlFor} className="font-arial text-form-label">
+          <label htmlFor={htmlFor} className="font-arial text-form-label" data-testid={`${testId}-label`}>
             {label}
           </label>
         ) : (
-          <span className="font-arial text-form-label">{label}</span>
+          <span className="font-arial text-form-label" data-testid={`${testId}-label`}>
+            {label}
+          </span>
         )}
         {info && <span className="font-arial text-body-md-mobile text-secondary-gray sm:text-body-md">{info}</span>}
       </div>

@@ -97,8 +97,8 @@ const PersonalDetails = () => {
 
   return (
     <>
-      <section className="mb-8">
-        <h2 className="mb-3 text-heading-3-mobile sm:text-heading-3">
+      <section className="mb-8" data-testid="data-disclosure-unanonymized-section">
+        <h2 className="mb-3 text-heading-3-mobile sm:text-heading-3" data-testid="data-disclosure-unanonymized-title">
           {t('preferences.data-disclosure-unanonymized.title')}
         </h2>
         <p className="mb-5 font-arial text-body-md">{t('preferences.data-disclosure-unanonymized.description')}</p>
@@ -122,6 +122,7 @@ const PersonalDetails = () => {
                 setLupaLuovuttaaTiedotUlkopuoliselle(newValue);
                 void persist({ ...getPayload(), lupaLuovuttaaTiedotUlkopuoliselle: newValue });
               })}
+              testId="pref-share-third-parties-toggle"
             />
           </div>
         </div>
@@ -145,13 +146,16 @@ const PersonalDetails = () => {
                 setLupaKayttaaTekoalynKoulutukseen(newValue);
                 void persist({ ...getPayload(), lupaKayttaaTekoalynKoulutukseen: newValue });
               })}
+              testId="pref-ai-training-toggle"
             />
           </div>
         </div>
       </section>
 
-      <section className="mb-8">
-        <h2 className="text-heading-2-mobile sm:text-heading-2">{t('preferences.personal-details.title')}</h2>
+      <section className="mb-8" data-testid="personal-details-section">
+        <h2 className="text-heading-2-mobile sm:text-heading-2" data-testid="personal-details-title">
+          {t('preferences.personal-details.title')}
+        </h2>
         <div className="mb-5 font-arial text-body-md-mobile sm:text-body-md">
           {t('preferences.personal-details.description')}
         </div>
@@ -159,25 +163,37 @@ const PersonalDetails = () => {
         <Divider className="mb-4" />
         {data?.syntymavuosi && (
           <>
-            <PersonalDetailsInfoBlock label={t('personal-details.birthyear')} info={`${data.syntymavuosi}`} />
+            <PersonalDetailsInfoBlock
+              label={t('personal-details.birthyear')}
+              info={`${data.syntymavuosi}`}
+              testId="birthyear"
+            />
             <Divider className="my-4" />
           </>
         )}
         {data?.kotikunta && (
           <>
-            <PersonalDetailsInfoBlock label={t('personal-details.home-city')} info={kotikuntaLabel} />
+            <PersonalDetailsInfoBlock
+              label={t('personal-details.home-city')}
+              info={kotikuntaLabel}
+              testId="home-city"
+            />
             <Divider className="my-4" />
           </>
         )}
         {data?.sukupuoli && (
           <>
-            <PersonalDetailsInfoBlock label={t('personal-details.gender')} info={genderTranslation} />
+            <PersonalDetailsInfoBlock label={t('personal-details.gender')} info={genderTranslation} testId="gender" />
             <Divider className="my-4" />
           </>
         )}
         {mpassid && (
           <>
-            <PersonalDetailsInfoBlock label={t('personal-details.name')} info={`${firstName} ${lastName}`} />
+            <PersonalDetailsInfoBlock
+              label={t('personal-details.name')}
+              info={`${firstName} ${lastName}`}
+              testId="name"
+            />
             <Divider className="my-4" />
           </>
         )}
@@ -202,6 +218,7 @@ const PersonalDetails = () => {
               }}
             />
           }
+          testId="email"
         />
       </section>
     </>

@@ -213,6 +213,7 @@ const Favorites = () => {
           <GoalsCard testId="favorites-go-to-goals" />
         </div>
       }
+      testId="favorites-page"
     >
       {!lg && (
         <div className="mb-6 px-5 sm:px-6">
@@ -234,7 +235,9 @@ const Favorites = () => {
         </div>
 
         {getFavoriteCount() > 0 ? (
-          <p className="mt-2">{getFavoriteCountText}</p>
+          <p className="mt-2" data-testid="favorites-count-text">
+            {getFavoriteCountText}
+          </p>
         ) : (
           <div className="mt-5 mb-6">
             <EmptyState text={descriptions[selectedFilter]} testId="favorites-empty-state" />
@@ -270,6 +273,7 @@ const Favorites = () => {
                 />
               </div>
             }
+            testId="favorites-filters-modal"
           />
         )}
       </div>
@@ -331,6 +335,7 @@ const Favorites = () => {
             linkComponent={getLinkTo(to)}
             icon={<JodArrowRight />}
             iconSide="right"
+            testId="favorites-link-to-opportunities-button"
           />
         </div>
       </div>

@@ -165,9 +165,11 @@ const EditKoulutuskokonaisuusModal = ({
                   description: t('education-history.confirm-delete-education-history', {
                     name: getLocalizedText(methods.getValues('nimi')),
                   }),
+                  testId: 'delete-koulutuskokonaisuus-dialog',
                 });
               }}
               size={sm ? 'lg' : 'sm'}
+              testId="delete-button"
             />
           </div>
           <div className="flex flex-row gap-3">
@@ -181,6 +183,7 @@ const EditKoulutuskokonaisuusModal = ({
                 onClose();
               }}
               size={sm ? 'lg' : 'sm'}
+              testId="cancel-button"
             />
             <Button
               form={formId}
@@ -189,6 +192,7 @@ const EditKoulutuskokonaisuusModal = ({
               icon={sm ? undefined : <JodCheckmark />}
               disabled={!isValid}
               size={sm ? 'lg' : 'sm'}
+              testId="save-button"
             />
           </div>
         </div>

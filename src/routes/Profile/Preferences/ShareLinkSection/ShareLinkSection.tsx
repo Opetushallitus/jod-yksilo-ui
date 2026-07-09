@@ -69,9 +69,9 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
       <p className="mb-5 font-arial text-body-md whitespace-pre-wrap">{t('preferences.share.description')}</p>
       <div className="my-8">
         {jakolinkitState.length === 0 ? (
-          <EmptyState text={t('preferences.share.no-links')} />
+          <EmptyState text={t('preferences.share.no-links')} testId="share-link-section-empty-state" />
         ) : (
-          <ul className="flex flex-col gap-7">
+          <ul className="flex flex-col gap-7" data-testid="share-link-section-list">
             {jakolinkitState.map((linkki) => {
               const url = new URL(`${location.origin}/yksilo/${i18n.language}/cv`);
               url.searchParams.set('token', linkki.ulkoinenId!);
@@ -79,9 +79,13 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
               const expired = date ? date < new Date() : false;
               const dateStr = date ? formatDate(date, 'medium') : null;
               const expirationText = expired ? (
-                <div className="text-button-sm text-alert-2">{t('preferences.share.link-has-expired')}</div>
+                <div className="text-button-sm text-alert-2" data-testid="share-link-section-expiration-text">
+                  {t('preferences.share.link-has-expired')}
+                </div>
               ) : (
-                <div className="text-button-sm">{t('preferences.share.valid-until', { date: dateStr })}</div>
+                <div className="text-button-sm" data-testid="share-link-section-expiration-text">
+                  {t('preferences.share.valid-until', { date: dateStr })}
+                </div>
               );
 
               const copyButton = (
@@ -100,10 +104,12 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                       toast.error(t('preferences.share.copy-failure'));
                     }
                   }}
+                  testId="share-link-section-copy-button"
                 />
               );
 
               const deleteDialogProps = {
+                testId: 'share-link-section-delete-dialog',
                 title: t('preferences.share.delete-confirm-title'),
                 description: t('preferences.share.delete-confirm-description'),
                 confirmText: t('common:delete'),
@@ -123,6 +129,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                   className={`w-fit ${sm && !expired ? 'ml-auto' : ''}`}
                   label={t('preferences.share.delete-link')}
                   onClick={guardedAction(showDialog, deleteDialogProps)}
+                  testId="share-link-section-delete-button"
                 />
               );
 
@@ -138,11 +145,21 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                         {expired ? deleteButton : copyButton}
                       </div>
                     }
+                    testId={`share-link-section-accordion-${linkki.nimi || url.href}`}
                   >
-                    <div className="-mt-2 font-arial text-body-sm text-secondary-gray">{url.href}</div>
+                    <div
+                      className="-mt-2 font-arial text-body-sm text-secondary-gray"
+                      data-testid="share-link-section-url"
+                    >
+                      {url.href}
+                    </div>
 
                     <div className="mt-4 flex flex-col gap-4">
-                      {linkki.muistiinpano && <div className="font-arial">{linkki.muistiinpano}</div>}
+                      {linkki.muistiinpano && (
+                        <div className="font-arial" data-testid="share-link-section-note">
+                          {linkki.muistiinpano}
+                        </div>
+                      )}
                       {expirationText}
 
                       <div className={`flex gap-4 ${sm ? 'flex-row' : 'flex-wrap'}`}>
@@ -156,6 +173,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                           onClick={guardedAction(showModal, NewShareLinkModal, {
                             id: linkki.id,
                           })}
+                          testId="share-link-section-edit-button"
                         />
                         <Button
                           size="sm"
@@ -166,6 +184,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
                           linkComponent={getLinkTo(url.href, { useAnchor: true, target: '_blank' })}
                           icon={<JodOpenInNew ariaLabel={t('common:external-link')} />}
                           disabled={expired}
+                          testId="share-link-section-preview-button"
                         />
                         {deleteButton}
                       </div>
@@ -182,6 +201,7 @@ const ShareLinkSection = ({ className }: ShareLinkSectionProps) => {
         ariaHaspopup="dialog"
         variant="accent"
         onClick={guardedAction(showModal, NewShareLinkModal)}
+        testId="share-link-section-create-button"
       />
     </section>
   );

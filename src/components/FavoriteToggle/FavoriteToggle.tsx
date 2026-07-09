@@ -36,6 +36,7 @@ export const FavoriteToggle = ({
           title: t('remove-favorite'),
           description: t('remove-favorite-opportunity-confirmation', { name }),
           onConfirm: onToggleFavorite,
+          testId: 'remove-favorite-dialog',
         })
       }
       testId="remove-favorite-button"

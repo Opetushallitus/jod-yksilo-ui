@@ -24,6 +24,7 @@ const CreateCustomPlanStep = () => {
           requiredText={t('common:required')}
           errorMessage={errors?.nimi?.[i18n.language]?.message}
           {...register(`nimi.${i18n.language}`)}
+          testId="custom-plan-name"
         />
       </div>
       <div className="mt-6">
@@ -31,6 +32,7 @@ const CreateCustomPlanStep = () => {
           label={t('profile.my-goals.custom-plan-description')}
           errorMessage={errors?.kuvaus?.[i18n.language]?.message}
           {...register(`kuvaus.${i18n.language}`)}
+          testId="custom-plan-description"
         />
       </div>
     </div>

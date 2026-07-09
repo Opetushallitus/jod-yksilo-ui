@@ -81,7 +81,7 @@ const AddedTags = ({ osaamiset, lahdetyyppi, onClick, useAnimations = false }: A
             }
           }}
           variant="added"
-          testId={`added-tag-${osaaminen.id}`}
+          testId={`selected-tag`}
         />
       </li>
     );

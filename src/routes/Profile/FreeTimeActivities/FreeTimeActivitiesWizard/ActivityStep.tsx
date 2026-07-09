@@ -108,6 +108,7 @@ const ActivityStep = ({ type, toiminto }: ActivityStepProps) => {
           label={t('profile.free-form-input.label')}
           {...register(`toiminnot.${toiminto}.kuvaus.${language}` as const)}
           maxLength={LIMITS.TEXTAREA}
+          testId="free-time-activities-free-form-input"
         />
       )}
     </div>

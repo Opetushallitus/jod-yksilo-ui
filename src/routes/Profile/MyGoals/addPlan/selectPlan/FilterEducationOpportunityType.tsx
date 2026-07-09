@@ -22,7 +22,7 @@ export const FilterEducationOpportunityType = () => {
   };
 
   return (
-    <fieldset className="flex flex-col gap-5">
+    <fieldset className="flex flex-col gap-5" data-testid="filter-education-opportunity-type">
       <legend className="sr-only mb-5 text-heading-4-mobile sm:text-heading-4">{t('show')}</legend>
       <Checkbox
         ariaLabel={t('opportunity-type.education.TUTKINTO')}

@@ -36,7 +36,7 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
     : t('search.results-found-short', { count: filteredMetadata.length });
 
   return (
-    <section aria-busy={isLoading}>
+    <section aria-busy={isLoading} data-testid={isLoading ? 'search-results-loading' : 'search-results'}>
       <output aria-live="polite" className="sr-only">
         {statusText}
       </output>
@@ -49,8 +49,14 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
       <div className="flex items-center justify-between gap-3 pb-5 font-arial">
         {!isLoading && (
           <>
-            {filteredResults.length === 0 && <EmptyState text={t('search.no-results')} />}
-            {filteredResults.length > 0 && <span className="flex h-8 items-center">{resultsCountText}</span>}
+            {filteredResults.length === 0 && (
+              <EmptyState text={t('search.no-results')} data-testid="search-results-empty-state" />
+            )}
+            {filteredResults.length > 0 && (
+              <span className="flex h-8 items-center" data-testid="search-results-count">
+                {resultsCountText}
+              </span>
+            )}
           </>
         )}
         {!lg && <SearchFilters />}

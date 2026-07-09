@@ -70,7 +70,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
 
   return (
     <div className="mb-5">
-      <div className="mb-5 flex flex-col gap-6 px-5 sm:px-6 lg:pr-0 lg:pl-6">
+      <div className="mb-5 flex flex-col gap-6 px-5 sm:px-6 lg:pr-0 lg:pl-6" data-testid="my-goals-section">
         {tavoitteet.map((tavoite, i) => {
           const { mahdollisuusId, mahdollisuusTyyppi } = tavoite;
           const details = getMahdollisuusDetails(mahdollisuusId);
@@ -88,15 +88,21 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                 title={getLocalizedText(tavoite.tavoite)}
                 collapsedContent={
                   <div className="mt-2 flex flex-col">
-                    <p className="font-arial text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
+                    <p className="font-arial text-primary-gray" data-testid="goal-description">
+                      {getLocalizedText(tavoite.kuvaus)}
+                    </p>
                     <p className="font-semibold text-secondary-gray sm:text-body-sm">
                       {t('profile.my-goals.n-plans', { count: tavoite.suunnitelmat?.length ?? 0 })}
+                      data-testid="goal-plans-count"
                     </p>
                   </div>
                 }
+                testId={`goal-accordion-${getLocalizedText(tavoite.tavoite)}`}
               >
                 <section id={contentId}>
-                  <p className="mt-3 font-arial text-primary-gray">{getLocalizedText(tavoite.kuvaus)}</p>
+                  <p className="mt-3 font-arial text-primary-gray" data-testid="goal-description">
+                    {getLocalizedText(tavoite.kuvaus)}
+                  </p>
                   <div className="p-4">
                     {details && mahdollisuusTyyppi && (
                       <>
@@ -137,6 +143,7 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                           })}
                           disabled={isLoading}
                           label={sm ? t('profile.my-goals.modify-goal') : t('edit')}
+                          testId="modify-goal-button"
                         />
                         <Button
                           label={t('profile.my-goals.delete-goal')}
@@ -151,10 +158,11 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                                 await deleteTavoite(tavoite.id!);
                                 await revalidator.revalidate();
                               },
+                              testId: 'delete-goal-dialog',
                             });
                           })}
                           disabled={!tavoite.id || isLoading}
-                          testId="goals-delete"
+                          testId="delete-goal-button"
                         />
                       </div>
                     </div>

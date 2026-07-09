@@ -254,11 +254,11 @@ export const DataToShareStep = () => {
   const mapToIds = (data: { id?: string }) => ({ id: data.id! });
 
   return isLoading ? (
-    <div className="flex h-[128px] w-full items-center justify-center">
+    <div className="flex h-[128px] w-full items-center justify-center" data-testid="data-to-share-step-spinner">
       <Spinner size={48} color="accent" />
     </div>
   ) : (
-    <div className="max-w-modal-content px-5 md:px-9">
+    <div className="max-w-modal-content px-5 md:px-9" data-testid="data-to-share-step-content">
       <p className="mb-6 font-arial text-body-md-mobile sm:text-body-md">
         {t('preferences.share.modal.data-to-share.description')}
       </p>
@@ -280,6 +280,7 @@ export const DataToShareStep = () => {
             }
             void trigger(basicInfoFields);
           }}
+          testId="basic-info"
         >
           <ul className="mt-4 flex flex-col gap-5">
             <li>
@@ -290,6 +291,7 @@ export const DataToShareStep = () => {
                 value="nimiJaettu"
                 checked={getValues('nimiJaettu') || false}
                 onChange={onChangeSingleBasicInfo('nimiJaettu')}
+                testId="basic-info-name-checkbox"
               />
             </li>
             <li>
@@ -300,6 +302,7 @@ export const DataToShareStep = () => {
                 value="syntymavuosiJaettu"
                 checked={getValues('syntymavuosiJaettu') || false}
                 onChange={onChangeSingleBasicInfo('syntymavuosiJaettu')}
+                testId="basic-info-birthyear-checkbox"
               />
             </li>
             <li>
@@ -310,6 +313,7 @@ export const DataToShareStep = () => {
                 value="emailJaettu"
                 checked={getValues('emailJaettu') || false}
                 onChange={onChangeSingleBasicInfo('emailJaettu')}
+                testId="basic-info-email-checkbox"
               />
             </li>
             <li>
@@ -320,6 +324,7 @@ export const DataToShareStep = () => {
                 value="kotikuntaJaettu"
                 checked={getValues('kotikuntaJaettu') || false}
                 onChange={onChangeSingleBasicInfo('kotikuntaJaettu')}
+                testId="basic-info-home-city-checkbox"
               />
             </li>
           </ul>
@@ -332,8 +337,9 @@ export const DataToShareStep = () => {
           indeterminate={areSomeChecked(jaetutTyopaikatFields, tyopaikat.map(mapToIds))}
           onChange={onChangeTopLevel('jaetutTyopaikat')}
           disabled={tyopaikat.length === 0}
+          testId="work-history"
         >
-          <ul className="mt-4 flex flex-col gap-5">
+          <ul className="mt-4 flex flex-col gap-5" data-testid="work-history-list">
             {tyopaikat.map((tp) => (
               <li key={tp.id}>
                 <Checkbox
@@ -343,6 +349,7 @@ export const DataToShareStep = () => {
                   value={tp.id!}
                   checked={isChecked(jaetutTyopaikatFields, tp.id!)}
                   onChange={() => onChangeSingleSelection('tyopaikat', tp.id!)}
+                  testId={`work-history-checkbox-${tp.nimi[i18n.language]}`}
                 />
               </li>
             ))}
@@ -356,8 +363,9 @@ export const DataToShareStep = () => {
           indeterminate={areSomeChecked(jaetutKoulutuksetFields, koulut.map(mapToIds))}
           onChange={onChangeTopLevel('jaetutKoulutukset')}
           disabled={koulut.length === 0}
+          testId="education-history"
         >
-          <ul className="mt-4 flex flex-col gap-5">
+          <ul className="mt-4 flex flex-col gap-5" data-testid="education-history-list">
             {koulut.map((koulutus) => (
               <li key={koulutus.id}>
                 <Checkbox
@@ -367,6 +375,7 @@ export const DataToShareStep = () => {
                   value={koulutus.id!}
                   checked={isChecked(jaetutKoulutuksetFields, koulutus.id!)}
                   onChange={() => onChangeSingleSelection('koulutukset', koulutus.id!)}
+                  testId={`education-history-checkbox-${koulutus.nimi[i18n.language]}`}
                 />
               </li>
             ))}
@@ -380,8 +389,9 @@ export const DataToShareStep = () => {
           indeterminate={areSomeChecked(jaetutTeematFields, teemat.map(mapToIds))}
           onChange={onChangeTopLevel('jaetutTeemat')}
           disabled={teemat.length === 0}
+          testId="activities-history"
         >
-          <ul className="mt-4 flex flex-col gap-5">
+          <ul className="mt-4 flex flex-col gap-5" data-testid="activities-history-list">
             {teemat.map((teema) => (
               <li key={teema.id}>
                 <Checkbox
@@ -391,6 +401,7 @@ export const DataToShareStep = () => {
                   value={teema.id!}
                   checked={isChecked(jaetutTeematFields, teema.id!)}
                   onChange={() => onChangeSingleSelection('teemat', teema.id!)}
+                  testId={`activities-history-checkbox-${teema.nimi[i18n.language]}`}
                 />
               </li>
             ))}
@@ -405,6 +416,7 @@ export const DataToShareStep = () => {
           checked={muuOsaaminenJaettu || false}
           onChange={(e) => setValue('muuOsaaminenJaettu', e.target.checked)}
           disabled={!hasMuuOsaaminen}
+          testId="something-else"
         />
 
         <Checkbox
@@ -415,6 +427,7 @@ export const DataToShareStep = () => {
           checked={kiinnostuksetJaettu || false}
           onChange={(e) => setValue('kiinnostuksetJaettu', e.target.checked)}
           disabled={!hasKiinnostukset}
+          testId="interests"
         />
 
         <CheckboxAccordion
@@ -430,8 +443,9 @@ export const DataToShareStep = () => {
             availableSuosikkiTypes.map((suosikki) => ({ id: suosikki })),
           )}
           onChange={onChangeTopLevel('jaetutSuosikit')}
+          testId="favorites"
         >
-          <ul className="mt-4 flex flex-col gap-5">
+          <ul className="mt-4 flex flex-col gap-5" data-testid="favorites-list">
             {availableSuosikkiTypes.map((suosikkiTyyppi) => {
               const label =
                 suosikkiTyyppi === 'TYOMAHDOLLISUUS'
@@ -446,6 +460,7 @@ export const DataToShareStep = () => {
                     value={label}
                     checked={isChecked(jaetutSuosikitFields, suosikkiTyyppi)}
                     onChange={() => onChangeSingleSelection('suosikit', suosikkiTyyppi)}
+                    testId={`favorites-checkbox-${label}`}
                   />
                 </li>
               );
@@ -461,8 +476,9 @@ export const DataToShareStep = () => {
           indeterminate={areSomeChecked(jaetutTavoitteetFields, tavoitteet.map(mapToIds))}
           onChange={onChangeTopLevel('jaetutTavoitteet')}
           disabled={tavoitteet.length === 0}
+          testId="goals"
         >
-          <ul>
+          <ul data-testid="goals-list">
             {tavoitteet.map((tavoite) => (
               <li key={tavoite.id}>
                 <Checkbox
@@ -472,6 +488,7 @@ export const DataToShareStep = () => {
                   value={tavoite.id!}
                   checked={isChecked(jaetutTavoitteetFields, tavoite.id!)}
                   onChange={() => onChangeSingleSelection('tavoitteet', tavoite.id!)}
+                  testId={`goals-checkbox-${getLocalizedText(tavoite.tavoite)}`}
                 />
               </li>
             ))}

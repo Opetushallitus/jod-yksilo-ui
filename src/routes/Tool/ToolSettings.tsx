@@ -103,6 +103,7 @@ const ToolSettings = ({ onUpdate, ...rest }: ToolSettingsProps) => {
               onClick={resetSettings}
               label={t('tool.settings.reset')}
               disabled={noFiltersSelected(filters)}
+              testId="reset-settings-button"
             />
           </div>
           <div className="ml-auto flex gap-4">
@@ -119,7 +120,7 @@ const ToolSettings = ({ onUpdate, ...rest }: ToolSettingsProps) => {
                 setOsaamisKiinnostusPainotus(initialOsaamisKiinnostusPainotus);
               }}
               label={t('common:cancel')}
-              testId="reset-settings-button"
+              testId="cancel-settings-button"
             />
             <Button
               variant="accent"
@@ -131,6 +132,7 @@ const ToolSettings = ({ onUpdate, ...rest }: ToolSettingsProps) => {
                 onUpdate();
               }}
               label={t('update-short')}
+              testId="update-settings-button"
             />
           </div>
         </div>

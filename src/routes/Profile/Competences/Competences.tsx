@@ -75,6 +75,7 @@ const Competences = () => {
           <ToolCard testId="competences-go-to-tool" />
         </div>
       }
+      testId="competences-page"
     >
       <div className="px-5 sm:px-6 lg:pr-0 lg:pl-6">
         {!lg && (
@@ -114,6 +115,7 @@ const Competences = () => {
                   />
                 </div>
               }
+              testId="competences-filters-modal"
             />
           )}
           {groupBy === GROUP_BY_SOURCE && (

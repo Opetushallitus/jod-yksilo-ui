@@ -41,6 +41,7 @@ const Interests = () => {
           }}
           className="mb-6 ml-2"
           label={t('tool.competency-profile.delete-all')}
+          testId="interests-remove-all-button"
         />
       )}
       {isFeatureEnabled('VIRTUAALIOHJAAJA') && <VirtualAssistant type="interests" className="mt-6" />}

@@ -39,7 +39,7 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
   };
   return (
     <div className="mb-5 flex scroll-m-11 flex-col gap-2" ref={scrollRef}>
-      <form id={formId} className="flex items-center" onSubmit={onSubmit} noValidate>
+      <form id={formId} className="flex items-center" onSubmit={onSubmit} noValidate data-testid="searchbar-form">
         <div className="border-border-form flex w-full items-center rounded-md border bg-white p-2 text-primary-gray">
           <input
             type="text"
@@ -54,6 +54,7 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
             value={query}
             aria-invalid={!!submitError}
             aria-describedby={submitError ? errorId : undefined}
+            data-testid="searchbar-input"
           />
           <button
             type="button"
@@ -63,12 +64,14 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
               setQuery('');
               setSubmitError(null);
             }}
+            data-testid="searchbar-clear-button"
           >
             <JodClose className="text-inactive-gray" />
           </button>
           <button
             type="submit"
             className="hover:bg-accent-dark ml-3 flex h-7 shrink cursor-pointer items-center gap-2 rounded-sm border-y bg-accent px-3 text-heading-4 text-[0.875rem] text-white outline-offset-2 outline-accent focus:outline-2 focus:outline-accent"
+            data-testid="searchbar-submit-button"
           >
             <JodSearch className="text-white" />
             {t('search.search')}
@@ -76,7 +79,12 @@ export const SearchBar = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivEle
         </div>
       </form>
       {submitError && (
-        <div id={errorId} className="mt-2 block font-arial text-form-error text-alert-2" role="alert">
+        <div
+          id={errorId}
+          className="mt-2 block font-arial text-form-error text-alert-2"
+          role="alert"
+          data-testid="searchbar-error"
+        >
           {submitError}
         </div>
       )}

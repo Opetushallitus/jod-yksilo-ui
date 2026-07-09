@@ -277,6 +277,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
         cancelText: t('common:cancel'),
         content: renderFilterContent,
         variant: 'normal',
+        testId: 'competence-import-dialog',
       });
     } else {
       showDialog({
@@ -285,6 +286,7 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
         confirmText: t('close'),
         hideSecondaryButton: true,
         variant: 'normal',
+        testId: 'competence-import-no-data-dialog',
       });
     }
   }, [hasCompentencesToImport, onCompetenceImportConfirm, renderFilterContent, showDialog, t]);

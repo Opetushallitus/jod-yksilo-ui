@@ -12,6 +12,7 @@ interface TitleCheckboxProps {
   disabled?: boolean;
   showColorIndicator?: boolean;
   onChange: () => void;
+  testId?: string;
 }
 
 const getFilterColorClassName = (type: keyof FiltersType) =>
@@ -24,7 +25,7 @@ const getFilterColorClassName = (type: keyof FiltersType) =>
 /**
  * This component is used as the top level filter title. It toggles all filters of a specific type.
  */
-const TitleCheckbox = ({ type, checked, disabled, showColorIndicator, onChange }: TitleCheckboxProps) => {
+const TitleCheckbox = ({ type, checked, disabled, showColorIndicator, onChange, testId }: TitleCheckboxProps) => {
   const { t, i18n } = useTranslation();
 
   const labels: Record<keyof FiltersType, string> = {
@@ -56,6 +57,7 @@ const TitleCheckbox = ({ type, checked, disabled, showColorIndicator, onChange }
       value={type}
       className="min-h-7"
       disabled={disabled}
+      data-testid={testId}
     />
   );
 };
@@ -122,7 +124,7 @@ export const CompetenceFilters = ({
   );
 
   return (
-    <ul className="flex flex-col gap-y-3 overflow-y-auto py-4">
+    <ul className="flex flex-col gap-y-3 overflow-y-auto py-4" data-testid="competences-filters-list">
       {filterKeys
         .filter((key) => !ignoredFilterKeys.includes(key))
         .map((key) => (
@@ -136,11 +138,13 @@ export const CompetenceFilters = ({
                       checked={isFilterTypeChecked(key)}
                       onChange={toggleFiltersByType(key)}
                       showColorIndicator={showColorIndicator}
+                      testId={`competences-filter-${key.toLowerCase()}`}
                     />
                   }
                   ariaLabel={ariaLabels[key]}
                   isOpen={accordionState[key]}
                   setIsOpen={(open) => setAccordionState((prev) => ({ ...prev, [key]: open }))}
+                  testId={`competences-filter-${key.toLowerCase()}-accordion`}
                 >
                   <ul className="mt-4 flex flex-col gap-y-4">
                     {selectedFilters[key]?.map((item, idx) => (
@@ -152,6 +156,7 @@ export const CompetenceFilters = ({
                           checked={item.checked}
                           onChange={toggleSingleFilter(key, idx)}
                           value={JSON.stringify(item.value)}
+                          testId={`competences-filter-${getLocalizedText(item.label)}`}
                         />
                       </li>
                     ))}
@@ -166,6 +171,7 @@ export const CompetenceFilters = ({
                   onChange={toggleFiltersByType(key)}
                   disabled={selectedFilters[key]?.length === 0}
                   showColorIndicator={showColorIndicator}
+                  testId={`competences-filter-${key.toLowerCase()}`}
                 />
               </li>
             )}

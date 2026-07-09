@@ -113,6 +113,7 @@ const TmtImportExport = () => {
       confirmText: t('preferences.tmt-import-export.continue-to-tmt'),
       cancelText: t('common:cancel'),
       variant: 'normal',
+      testId: 'start-tmt-import-modal',
       onConfirm: async () => {
         sessionStorage.setItem(STORAGE_KEY, 'import');
         globalThis.location.href = `/yksilo/oauth2/authorization/tmt-haku?callback=${callbackUrl}&lang=${language}`;
@@ -130,6 +131,7 @@ const TmtImportExport = () => {
       confirmText: t('preferences.tmt-import-export.continue-to-tmt'),
       cancelText: t('common:cancel'),
       variant: 'normal',
+      testId: 'start-tmt-export-modal',
       onConfirm: async () => {
         sessionStorage.setItem(STORAGE_KEY, 'export');
         globalThis.location.href = `/yksilo/oauth2/authorization/tmt-vienti?callback=${callbackUrl}&lang=${language}`;
@@ -167,6 +169,7 @@ const TmtImportExport = () => {
         hideSecondaryButton: true, // Only the main confirm button is needed for closing the dialog
         confirmText: t('close'),
         variant: 'normal',
+        testId: 'do-tmt-export-modal',
         onConfirm: () => {
           dialogOpenRef.current = false;
           closeAllModals();
@@ -240,6 +243,7 @@ const TmtImportExport = () => {
         description: t('preferences.tmt-import-export.import.modal.step-2-description'),
         confirmText: t('close'),
         variant: 'normal',
+        testId: 'do-tmt-import-modal',
         onConfirm: () => {
           importDialogOpenRef.current = false;
           closeAllModals();
@@ -280,7 +284,9 @@ const TmtImportExport = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="text-heading-3-mobile sm:text-heading-3">{t('preferences.tmt-import-export.title')}</h3>
+      <h3 className="text-heading-3-mobile sm:text-heading-3" data-testid="tmt-import-export-title">
+        {t('preferences.tmt-import-export.title')}
+      </h3>
       <div className="font-arial">
         <Trans
           i18nKey="preferences.tmt-import-export.description"
@@ -310,6 +316,7 @@ const TmtImportExport = () => {
           icon={importPending ? <Spinner size={24} color="white" /> : undefined}
           iconSide={importPending ? 'right' : undefined}
           disabled={exportPending}
+          testId="tmt-import-export-import-button"
         />
         <Button
           label={
@@ -323,6 +330,7 @@ const TmtImportExport = () => {
           icon={exportPending ? <Spinner size={24} color="accent" /> : undefined}
           iconSide={exportPending ? 'right' : undefined}
           disabled={importPending}
+          testId="tmt-import-export-export-button"
         />
       </div>
     </div>

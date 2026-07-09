@@ -58,6 +58,7 @@ export const ConfirmDialogWrapper = ({
   onCancel,
   footer,
   content,
+  testId,
 }: ConfirmDialogWrapperProps) => {
   const { closeActiveModal, closeAllModals } = useModal();
   const { t } = useTranslation();
@@ -80,6 +81,7 @@ export const ConfirmDialogWrapper = ({
             hideDialog();
             closeActiveModal();
           }}
+          testId={`cancel-button`}
         />
       )}
       <Button
@@ -116,6 +118,7 @@ export const ConfirmDialogWrapper = ({
         }}
         variant={variant === 'destructive' ? 'red-delete' : 'accent'}
         serviceVariant="yksilo"
+        testId={`confirm-button`}
       />
     </>
   );
@@ -128,6 +131,7 @@ export const ConfirmDialogWrapper = ({
       footer={footer ?? DefaultFooter}
       animationMode={animationMode}
       shouldRenderBackdrop={shouldRenderBackdrop}
+      testId={testId}
     >
       {ShowDialogWrapper}
     </ConfirmDialog>

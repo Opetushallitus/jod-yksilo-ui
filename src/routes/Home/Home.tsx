@@ -53,8 +53,8 @@ const CardContainer = ({ className = '', children, ref }: ContainerProps & { ref
 };
 
 const AuthNavLink = (shouldLogin: boolean, path?: string) => {
-  const Cmp = ({ to, className, children }: LinkComponent) => (
-    <NavLinkBasedOnAuth to={to ?? path} className={className} shouldLogin={shouldLogin}>
+  const Cmp = ({ to, className, children, testId }: LinkComponent) => (
+    <NavLinkBasedOnAuth to={to ?? path} className={className} shouldLogin={shouldLogin} testId={testId}>
       {children}
     </NavLinkBasedOnAuth>
   );
@@ -119,18 +119,24 @@ const Home = () => {
           titleClassName="text-hero-mobile sm:text-hero focus:outline-0"
           content={t('home.hero-content')}
           backgroundColor="var(--ds-color-primary-1-dark-2)"
+          testId="home-hero-card-1"
         />
       </CardContainer>
       <CardContainer>
         <HeroCard
           buttonLabel={t('home.explore-opportunities')}
           content={t('home.card-1-content')}
-          linkComponent={Link}
+          linkComponent={({ to, className, children, testId }: LinkComponent) => (
+            <Link to={to} className={className} data-testid={testId}>
+              {children}
+            </Link>
+          )}
           size="sm"
           title={t('home.card-1-title')}
           to={toolLink}
           textColor="var(--ds-color-primary-gray)"
           backgroundColor="var(--ds-color-primary-1-light-2)"
+          testId="home-hero-card-2"
         />
         <HeroCard
           buttonLabel={isLoggedIn ? t('profile.banner.link-text.logged-in') : t('home.create-own-profile')}
@@ -141,6 +147,7 @@ const Home = () => {
           to={t('slugs.profile.index')}
           textColor="var(--ds-color-primary-gray)"
           backgroundColor="var(--ds-color-primary-1-light-1)"
+          testId="home-hero-card-3"
         />
       </CardContainer>
 

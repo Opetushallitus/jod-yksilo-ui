@@ -172,6 +172,7 @@ export const EditVapaaAjanTeemaModal = ({ onClose, teemaId: id, ...rest }: EditV
                   variant: 'destructive',
                   confirmText: t('common:delete'),
                   cancelText: t('common:cancel'),
+                  testId: 'delete-teema-dialog',
                 });
               }}
               testId="free-time-delete-activity"
@@ -205,6 +206,7 @@ export const EditVapaaAjanTeemaModal = ({ onClose, teemaId: id, ...rest }: EditV
           </div>
         </div>
       }
+      testId="edit-vapaa-ajan-teema-modal"
     />
   );
 };

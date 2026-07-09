@@ -85,6 +85,7 @@ export const CompetenceExport = () => {
         onConfirm: exportToProfile,
         content: renderFilterContent,
         variant: 'normal',
+        testId: 'competence-export-dialog',
       });
     } else {
       showDialog({
@@ -93,6 +94,7 @@ export const CompetenceExport = () => {
         confirmText: t('close'),
         hideSecondaryButton: true,
         variant: 'normal',
+        testId: 'competence-export-no-data-dialog',
       });
     }
   }, [hasCompetencesToExport, exportToProfile, renderFilterContent, showDialog, t]);
@@ -150,6 +152,7 @@ const StatefullCompentencesExportFilters = ({
           onChange={() => setOsaamisetChecked((prev) => !prev)}
           value="true"
           disabled={!osaamiset.some((o) => o.tyyppi === 'KARTOITETTU')}
+          testId="competence-export-osaamiset-checkbox"
         />
       </li>
       <li>
@@ -161,6 +164,7 @@ const StatefullCompentencesExportFilters = ({
           onChange={() => setKiinnostuksetChecked((prev) => !prev)}
           value="true"
           disabled={!kiinnostukset.some((k) => k.tyyppi === 'KARTOITETTU')}
+          testId="competence-export-kiinnostukset-checkbox"
         />
       </li>
     </ul>

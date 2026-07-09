@@ -60,12 +60,14 @@ export const NavMenu = ({ open, onClose }: { open: boolean; onClose: () => void 
           url: `/ohjaaja/${language}`,
           description: t('common:navigation.external.ohjaaja.description'),
           accentColor: '#00818A',
+          testId: 'ohjaaja-link',
         },
         {
           label: t('common:navigation.external.tietopalvelu.label'),
           url: `/tietopalvelu/${language}`,
           description: t('common:navigation.external.tietopalvelu.description'),
           accentColor: '#AD4298',
+          testId: 'tietopalvelu-link',
         },
       ],
     },
@@ -75,6 +77,7 @@ export const NavMenu = ({ open, onClose }: { open: boolean; onClose: () => void 
         {
           label: t('common:navigation.extra.palveluhakemisto.label'),
           url: t('common:navigation.extra.palveluhakemisto.url'),
+          testId: 'palveluhakemisto-link',
         },
       ],
     },
