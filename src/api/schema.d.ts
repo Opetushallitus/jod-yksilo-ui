@@ -530,6 +530,42 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/integraatiot/koski/koulutukset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Fetch educations from Koski and persist as a verified import task. */
+    post: operations['integraatioKoskiCreateKoskiTehtava'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/integraatiot/koski/koulutukset/{tehtavaId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get status and content of a Koski import task. */
+    get: operations['integraatioKoskiGetKoskiTehtava'];
+    put?: never;
+    /** Persist selected Koski educations to the profile. */
+    post: operations['integraatioKoskiSaveKoskiTehtava'];
+    /** Delete a Koski import task. */
+    delete: operations['integraatioKoskiDeleteKoskiTehtava'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/ehdotus/osaamiset': {
     parameters: {
       query?: never;
@@ -800,23 +836,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/integraatiot/koski/koulutukset': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get user's education's histories from Koski's opintopolku. */
-    get: operations['integraatioKoskiGetEducationsDataFromKoski'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/cv/{ulkoinenJakolinkkiId}': {
     parameters: {
       query?: never;
@@ -1066,6 +1085,17 @@ export interface components {
       tyopaikat?: string[];
       koulutuskokonaisuudet?: string[];
       teemat?: string[];
+    };
+    KoskiTehtavaDto: {
+      /** Format: uuid */
+      id?: string;
+      /** @enum {string} */
+      tila?: 'VALMIS' | 'POISTETTU' | 'EPAONNISTUNUT';
+      tulos?: components['schemas']['Tulos'];
+    };
+    KoskiTehtavaSaveDto: {
+      koulutuskokonaisuudet?: components['schemas']['Valinta'][];
+      skipOsaamistenTunnistus?: boolean;
     };
     Ehdotus: {
       /** Format: uri */
@@ -2895,6 +2925,92 @@ export interface operations {
       };
     };
   };
+  integraatioKoskiCreateKoskiTehtava: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['KoskiTehtavaDto'];
+        };
+      };
+    };
+  };
+  integraatioKoskiGetKoskiTehtava: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        tehtavaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['KoskiTehtavaDto'];
+        };
+      };
+    };
+  };
+  integraatioKoskiSaveKoskiTehtava: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        tehtavaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['KoskiTehtavaSaveDto'];
+      };
+    };
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  integraatioKoskiDeleteKoskiTehtava: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        tehtavaId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   osaamisetEhdotusCreateEhdotus: {
     parameters: {
       query?: never;
@@ -3307,26 +3423,6 @@ export interface operations {
         /** @description Koulutus ids */
         ids: string[];
       };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['KoulutusDto'][];
-        };
-      };
-    };
-  };
-  integraatioKoskiGetEducationsDataFromKoski: {
-    parameters: {
-      query?: never;
       header?: never;
       path?: never;
       cookie?: never;

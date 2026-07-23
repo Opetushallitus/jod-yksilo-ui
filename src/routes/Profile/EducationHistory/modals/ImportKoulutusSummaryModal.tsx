@@ -11,17 +11,40 @@ import { DataImportTable } from '@/components/DataImportTable/DataImportTable';
 import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
-import {
-  getEducationHistoryTableRows,
-  type Koulutus,
-  type Koulutuskokonaisuus,
-} from '@/routes/Profile/EducationHistory/utils';
+import { getEducationHistoryTableRows, type Koulutuskokonaisuus } from '@/routes/Profile/EducationHistory/utils';
 
 interface ImportKoulutusSummaryModalProps extends ModalComponentProps {
   onSuccessful: () => void;
   openImportStartModal: () => void;
   logout: () => void;
 }
+
+const transformKoulutusKokonaisuusDto = (
+  dto: components['schemas']['KoulutusKokonaisuusDto'],
+): Koulutuskokonaisuus => ({
+  id: dto.id,
+  nimi: dto.nimi,
+  tuontiLahde: dto.tuontiLahde,
+  koulutukset: (dto.koulutukset ?? []).map((k) => ({
+    id: k.id,
+    nimi: k.kuvaus || k.nimi,
+    alkuPvm: k.alkuPvm,
+    loppuPvm: k.loppuPvm,
+    osaamiset: k.osaamiset ?? [],
+    osaamisetOdottaaTunnistusta: k.osaamisetOdottaaTunnistusta,
+    osaamisetTunnistusEpaonnistui: k.osaamisetTunnistusEpaonnistui,
+    osasuoritukset: k.osasuoritukset,
+  })),
+});
+
+const buildSelections = (rows: ExperienceTableRowData[]): components['schemas']['Valinta'][] =>
+  rows
+    .filter((row) => (row.subrows ?? []).some((s) => s.checked ?? true))
+    .map((row) => ({
+      id: row.key,
+      lapset: (row.subrows ?? []).filter((s) => s.checked ?? true).map((s) => s.key),
+    }))
+    .filter((valinta) => valinta.lapset.length > 0);
 
 const ImportKoulutusSummaryModal = ({
   onSuccessful,
@@ -30,42 +53,55 @@ const ImportKoulutusSummaryModal = ({
   ...rest
 }: ImportKoulutusSummaryModalProps) => {
   const { t } = useTranslation();
-  const { showDialog, closeActiveModal } = useModal();
+  const { showDialog, closeActiveModal, closeAllModals } = useModal();
   const { addTemporaryNote } = useNoteStack();
   const { sm } = useMediaQueries();
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
   const [isSaving, setIsSaving] = React.useState<boolean>(false);
-  const [koskiData, setKoskiData] = React.useState<components['schemas']['KoulutusDto'][] | undefined>(undefined);
-  const [error, setError] = React.useState<Error | undefined>(undefined);
   const [tableRows, setTableRows] = React.useState<ExperienceTableRowData[]>([]);
+  const [hasData, setHasData] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<Error | undefined>(undefined);
   const cancelButtonRef = React.useRef<HTMLButtonElement>(null);
   const hasFetchedRef = React.useRef<boolean>(false);
+  const tehtavaIdRef = React.useRef<string | undefined>(undefined);
+  const savedRef = React.useRef<boolean>(false);
 
   const modalId = React.useId();
   useEscHandler(() => cancelButtonRef.current?.click(), modalId);
 
-  const handleGetKoulutusDataFailure = (error: Error | undefined) => {
-    setKoskiData(undefined);
+  const handleFailure = (err: Error | undefined) => {
     setTableRows([]);
-    setError(error);
+    setHasData(false);
+    setError(err);
   };
 
   const fetchAndSetEducationHistories = React.useCallback(async () => {
     setIsFetching(true);
-    setKoskiData(undefined);
     setError(undefined);
+    setTableRows([]);
+    setHasData(false);
     try {
-      const { data, error } = await client.GET('/api/integraatiot/koski/koulutukset');
+      const { data, error } = await client.POST('/api/integraatiot/koski/koulutukset');
 
       if (error) {
-        handleGetKoulutusDataFailure(error);
+        handleFailure(error);
         return;
       }
 
-      setKoskiData(Array.isArray(data) ? data.map((k) => ({ id: `koski-${crypto.randomUUID()}`, ...k })) : []);
-      setTableRows(convertKoskiDataToExperienceTableRows(data));
+      if (data?.id) {
+        tehtavaIdRef.current = data.id;
+      }
+
+      if (data?.tila !== 'VALMIS') {
+        handleFailure(new Error());
+        return;
+      }
+
+      const koulutuskokonaisuudet = (data?.tulos?.koulutuskokonaisuudet ?? []).map(transformKoulutusKokonaisuusDto);
+      setTableRows(getEducationHistoryTableRows(koulutuskokonaisuudet));
+      setHasData(true);
     } catch (err) {
-      handleGetKoulutusDataFailure(err as Error);
+      handleFailure(err as Error);
     } finally {
       setIsFetching(false);
     }
@@ -78,138 +114,46 @@ const ImportKoulutusSummaryModal = ({
     }
   }, [rest.open, fetchAndSetEducationHistories]);
 
-  const convertKoskiDataToExperienceTableRows = (koskiData: components['schemas']['KoulutusDto'][] | undefined) => {
-    // Group koulutukset by their nimi to form koulutuskokonaisuudet
-    const groupedKoulutukset = new Map<string, Koulutus[]>();
-
-    koskiData?.forEach((k) => {
-      const key = JSON.stringify(k.nimi);
-      const koulutus = {
-        id: k.id,
-        nimi: k.kuvaus as Record<string, string>,
-        alkuPvm: k.alkuPvm,
-        loppuPvm: k.loppuPvm,
-        osaamiset: [],
-        checked: true,
-      };
-      if (groupedKoulutukset.has(key)) {
-        groupedKoulutukset.get(key)?.push(koulutus);
-      } else {
-        groupedKoulutukset.set(key, [koulutus]);
+  // Clean up an unsaved tehtava on unmount (cancel, error, or navigation).
+  React.useEffect(() => {
+    return () => {
+      const id = tehtavaIdRef.current;
+      if (id && !savedRef.current) {
+        void client.DELETE('/api/integraatiot/koski/koulutukset/{tehtavaId}', {
+          params: { path: { tehtavaId: id } },
+        });
       }
-    });
-
-    const koulutuskokonaisuudet: Koulutuskokonaisuus[] = Array.from(groupedKoulutukset)
-      .map((entry) => ({ key: entry[0], koulutukset: entry[1] }))
-      .map((o, i) => ({
-        nimi: JSON.parse(o.key),
-        tuontiLahde: 'KOSKI_TUONTI',
-        id: `${i}`,
-        koulutukset: o.koulutukset.map((koulutus) => ({
-          id: koulutus.id,
-          nimi: koulutus.nimi,
-          alkuPvm: koulutus.alkuPvm,
-          loppuPvm: koulutus.loppuPvm,
-          osaamiset: koulutus.osaamiset,
-          checked: true,
-        })),
-      }));
-    return getEducationHistoryTableRows(koulutuskokonaisuudet);
-  };
-
-  const createKoulutus = (data: components['schemas']['KoulutusDto']): Koulutus => ({
-    nimi: data.kuvaus as Record<string, string>,
-    alkuPvm: data.alkuPvm,
-    loppuPvm: data.loppuPvm,
-    osaamiset: [],
-    osasuoritukset: data.osasuoritukset,
-  });
-
-  const isChecked = (
-    key: string,
-    data: {
-      nimi: components['schemas']['LokalisoituTeksti'];
-      kuvaus?: components['schemas']['LokalisoituTeksti'];
-    },
-  ) => {
-    const matchSchool = tableRows?.find((row) => JSON.stringify(row.nimi) === key);
-    if (!matchSchool) {
-      return false;
-    }
-    const matchEducation = matchSchool.subrows?.find((row) => JSON.stringify(row.nimi) === JSON.stringify(data.kuvaus));
-    if (!matchEducation) {
-      return false;
-    }
-    return matchEducation.checked;
-  };
-
-  const createKoulutusKokonaisuudet = (skipOsaamistenTunnistus = false) => {
-    const koulutusKokonaisuudet = new Map<string, Koulutus[]>();
-
-    koskiData?.forEach((data) => {
-      const key = JSON.stringify(data.nimi);
-      if (!isChecked(key, data)) {
-        return;
-      }
-
-      if (skipOsaamistenTunnistus) {
-        data.osaamisetOdottaaTunnistusta = undefined;
-        data.osaamisetTunnistusEpaonnistui = undefined;
-      }
-
-      const koulutus = createKoulutus(data);
-
-      if (!koulutusKokonaisuudet.has(key)) {
-        koulutusKokonaisuudet.set(key, []);
-      }
-
-      koulutusKokonaisuudet.get(key)?.push(koulutus);
-    });
-
-    return koulutusKokonaisuudet;
-  };
+    };
+  }, []);
 
   const saveSelectedKoulutus = async (skipOsaamistenTunnistus = false) => {
     if (isSaving) {
       return;
     }
+    const tehtavaId = tehtavaIdRef.current;
+    if (!tehtavaId) {
+      return;
+    }
+    // Suppress the unmount cleanup DELETE for this tehtava now that we're
+    // committing to save it; even if the save fails, the backend can clean
+    // up an orphaned task via its own TTL.
+    savedRef.current = true;
     setIsSaving(true);
     try {
-      const koulutusKokonaisuudet = createKoulutusKokonaisuudet(skipOsaamistenTunnistus);
-      const body: {
-        nimi: Record<string, string>;
-        tuontiLahde: components['schemas']['KoulutusKokonaisuusDto']['tuontiLahde'];
-        koulutukset: Koulutus[];
-      }[] = [];
-      for (const [jsonNimi, koulutukset] of koulutusKokonaisuudet) {
-        body.push({
-          nimi: JSON.parse(jsonNimi) as Record<string, string>,
-          tuontiLahde: 'KOSKI_TUONTI',
-          koulutukset,
-        });
+      const { error: saveError } = await client.POST('/api/integraatiot/koski/koulutukset/{tehtavaId}', {
+        params: { path: { tehtavaId } },
+        body: {
+          koulutuskokonaisuudet: buildSelections(tableRows),
+          skipOsaamistenTunnistus,
+        },
+      });
+      if (saveError) {
+        throw new Error('save failed');
       }
-
-      let apiCall;
-
-      if (skipOsaamistenTunnistus) {
-        apiCall = Promise.all(
-          body.map((koulutus) =>
-            client.POST('/api/profiili/koulutuskokonaisuudet', {
-              body: koulutus,
-            }),
-          ),
-        );
-      } else {
-        apiCall = client.POST('/api/profiili/koulutuskokonaisuudet/tuonti', {
-          body,
-        });
-      }
-
-      await apiCall;
-      closeActiveModal();
+      closeAllModals();
       onSuccessful();
     } catch (_) {
-      closeActiveModal();
+      closeAllModals();
       addTemporaryNote(() => ({
         title: t('education-history-import.summary-modal.error-title'),
         description: t('education-history-import.result-modal.failure'),
@@ -341,10 +285,9 @@ const ImportKoulutusSummaryModal = ({
             <Button
               label={t('save')}
               variant="accent"
-              disabled={!koskiData}
+              disabled={!hasData || isSaving}
               size={sm ? 'lg' : 'sm'}
               onClick={() => {
-                closeActiveModal();
                 showDialog({
                   title: (
                     <span className="inline-flex gap-2">
