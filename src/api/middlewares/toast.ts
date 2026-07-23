@@ -26,6 +26,8 @@ const ignoredOperations: Partial<Record<keyof paths, Method[]>> = {
   '/api/profiili/tavoitteet/{id}': ['PUT', 'DELETE'],
   '/api/integraatiot/tmt/vienti': ['POST'],
   '/api/integraatiot/tmt/haku': ['POST'],
+  '/api/integraatiot/koski/koulutukset': ['POST'],
+  '/api/integraatiot/koski/koulutukset/{tehtavaId}': ['DELETE'],
 };
 
 const showToast = (method: Method, response: Response) => {
