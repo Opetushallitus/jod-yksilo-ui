@@ -56,6 +56,7 @@ export const useVirtualAssistantConversation = (type: VirtualAssistantVariant, r
       const isFollowUp = conversationId !== undefined;
       let data: { vastaus: string; ehdotukset?: string[] } | undefined;
       let error: unknown;
+      let status: number | undefined;
       const signal = controller.signal;
 
       try {
@@ -67,6 +68,7 @@ export const useVirtualAssistantConversation = (type: VirtualAssistantVariant, r
           });
           data = response.data;
           error = response.error;
+          status = response.response.status;
         } else {
           const response = await client.POST('/api/keskustelut', {
             body: {
@@ -79,6 +81,7 @@ export const useVirtualAssistantConversation = (type: VirtualAssistantVariant, r
           });
           data = response.data;
           error = response.error;
+          status = response.response.status;
           setId(response.data?.id);
         }
 
@@ -96,14 +99,16 @@ export const useVirtualAssistantConversation = (type: VirtualAssistantVariant, r
           return;
         }
 
+        const answer = error
+          ? t('tool.my-own-data.virtual-assistant.error')
+          : virtualAssistantStripTags([...stripTagNames], data?.vastaus);
+
         setHistory((prevState) => ({
           ...prevState,
           [key]: {
             ...prevState[key],
-            answer: error
-              ? t('tool.my-own-data.virtual-assistant.error')
-              : virtualAssistantStripTags([...stripTagNames], data?.vastaus),
-            ehdotukset: error ? undefined : data?.ehdotukset?.map((k) => osaamisetMap[k]),
+            answer: status === 404 ? t('tool.my-own-data.virtual-assistant.session-expired') : answer,
+            ehdotukset: error || status === 404 ? undefined : data?.ehdotukset?.map((k) => osaamisetMap[k]),
           },
         }));
       } catch (error) {
