@@ -67,6 +67,7 @@
     "title": "Competence profile"
   },
   "date-or-continues-placeholder": "dd.mm.yyyy",
+  "date-placeholder": "dd.mm.yyyy",
   "datepicker": {
     "actions": {
       "close": "Close calendar",
@@ -96,7 +97,6 @@
       "view": "Switch to day view"
     }
   },
-  "date-placeholder": "dd.mm.yyyy",
   "description": "Description",
   "description-for": "Description: {{description}}",
   "do-filter": "Filter",
@@ -114,8 +114,8 @@
     "delete-education-history": "Delete education",
     "edit-degree-or-education": "Edit degree or education",
     "edit-education": "Edit education",
-    "educational-institution-or-education-provider": "Educational institution or education organiser",
     "education-provider-or-education": "Education organiser / education",
+    "educational-institution-or-education-provider": "Educational institution or education organiser",
     "identify-competences": "Identify competences",
     "import-education-history": "Import my education history",
     "name-of-degree-or-education": "Name of degree or education",
@@ -148,8 +148,8 @@
         "title": "Cancel import"
       },
       "data-load-failed": "Failed to load data. Please try again later.",
-      "data-loading": "Loading information...",
       "data-load-no-data": "The education data could not be found or you do not have permission to view the data.",
+      "data-loading": "Loading information...",
       "description": "In this view, you can select which educations you want to import. After the import, you can edit and complete the information in the My Educations view.",
       "error-title": "Failed to import data",
       "table-header-checkbox": "Import selected",
@@ -268,9 +268,9 @@
   },
   "i-allow": "I allow",
   "i-disallow": "I do not allow",
+  "in-this-section": "In this section",
   "interests": "Map out your interests",
   "interests-of-your-choice": "Selected interests",
-  "in-this-section": "In this section",
   "introduction": {
     "step-1": {
       "item-1": "See all information related to your competences and interests in one place",
@@ -412,30 +412,30 @@
   "move-to-service": "Go to service",
   "my-competence-path": "My Competency Path",
   "my-competence-profile": "Competence profile",
-  "my-competences-alphabetically": "My competences alphabetically A — Z",
   "my-competences": {
     "by-KOULUTUS": "My competences accumulated from education",
     "by-MUU_OSAAMINEN": "Other competences",
-    "by-TOIMINTO": "My competence accumulated from recreational activities",
     "by-TOIMENKUVA": "My competence accumulated from jobs",
+    "by-TOIMINTO": "My competence accumulated from recreational activities",
     "missing-KOULUTUS": "No competences. Go to add education.",
     "missing-MUU_OSAAMINEN": "No competences. Go to add other competences.",
-    "missing-TOIMINTO": "No competences. Go to add recreational activities.",
-    "missing-TOIMENKUVA": "No competences. Go to add jobs."
+    "missing-TOIMENKUVA": "No competences. Go to add jobs.",
+    "missing-TOIMINTO": "No competences. Go to add recreational activities."
   },
+  "my-competences-alphabetically": "My competences alphabetically A — Z",
   "my-competences-by-sources": "My competences by theme",
+  "n-education-opportunities": "{{count}} of {{total}} education opportunities",
+  "n-job-opportunities": "{{count}} of {{total}} career opportunities",
+  "n-months-short": "{{count}} months",
+  "n-years_one": "{{count}} year",
+  "n-years_other": "{{count}} years",
   "navigation": {
     "main-section": {
       "title": "Personal Competency Path",
       "tool-title": "Find opportunities"
     }
   },
-  "n-education-opportunities": "{{count}} of {{total}} education opportunities",
   "next": "Next",
-  "n-job-opportunities": "{{count}} of {{total}} career opportunities",
-  "n-months-short": "{{count}} months",
-  "n-years_one": "{{count}} year",
-  "n-years_other": "{{count}} years",
   "on-this-page": "On this page",
   "opportunity-tooltip": {
     "education": {
@@ -574,6 +574,11 @@
     "import-export": {
       "title": "Import and export your data"
     },
+    "koski-import": {
+      "button-label": "Import my education history",
+      "description": "You can import your education history data stored in the national study, education and qualification registers as part of My Competency Path.",
+      "title": "Import my education history"
+    },
     "personal-details": {
       "description": "You can edit your email address.",
       "title": "Personal details"
@@ -659,11 +664,6 @@
         "success": "Your data was successfully imported from Job Market Finland"
       },
       "title": "Import and export data between Competence Path and Job Market Finland"
-    },
-    "koski-import": {
-      "title": "Import my education history",
-      "description": "You can import your education history data stored in the national study, education and qualification registers as part of My Competency Path.",
-      "button-label": "Import my education history"
     }
   },
   "previous": "Previous",
@@ -700,8 +700,8 @@
       "move-to-type": {
         "KOULUTUS": "Go to educations",
         "MUU_OSAAMINEN": "Go to my other competences",
-        "TOIMINTO": "Go to my recreational activities",
-        "TOIMENKUVA": "Go to my jobs"
+        "TOIMENKUVA": "Go to my jobs",
+        "TOIMINTO": "Go to my recreational activities"
       },
       "order-by": "Sort",
       "show-filters": "Show filters",
@@ -716,8 +716,8 @@
       }
     },
     "data-import-export": {
-      "title": "Import and export data",
-      "description": "On this page, you can manage your profile's data import and export settings. You can share your profile via a link and import data from other services. You decide what data you share and with whom."
+      "description": "On this page, you can manage your profile's data import and export settings. You can share your profile via a link and import data from other services. You decide what data you share and with whom.",
+      "title": "Import and export data"
     },
     "education-history": {
       "description": "Below you can find your education history. You can add entries to your education history yourself and identify the competencies related to them. You can also import your study records from the national study, education and qualification registers as part of your education history (Studyinfo).",
@@ -775,13 +775,13 @@
       "description": "Below, you will find all of your interests that you have added to your competence profile. The interests are grouped by type.",
       "edit-interests": "Edit interests",
       "empty": "You have not added any interests yet.",
+      "free-form-description-of-my-interests": "Free text description of my interests",
+      "free-form-interests-description-guidance": "You can write and describe your interests in your own words. The text you enter is saved automatically. If you use the service in Finnish, please write in Finnish. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
       "freeform": {
         "description": "You can write and describe your interests in your own words. The text you enter is saved automatically. If you use the service in English, please write in English. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
         "header": "Free-form description of my interests",
         "placeholder": "Describe in your own words what else interests you"
       },
-      "free-form-description-of-my-interests": "Free text description of my interests",
-      "free-form-interests-description-guidance": "You can write and describe your interests in your own words. The text you enter is saved automatically. If you use the service in Finnish, please write in Finnish. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
       "occupations-that-interest-me": "Occupations that interest me",
       "skills-that-interest-me": "Competencies that interest me",
       "title": "Interests"
@@ -869,13 +869,13 @@
       "goal-name": "Name of the goal",
       "modify-goal": "Edit goal",
       "my-plan-towards-goal": "Education options",
+      "n-plans_one": "1 education option",
+      "n-plans_other": "{{count}} education options",
+      "n-plans_zero": "You have not added any education options yet",
       "no-chosen-competences": "No selected competences",
       "no-favorites-selected": "Add a profession or job opportunity to your favorites to create goals",
       "no-filtered-results": "No education opportunities. Adjust the filters to see options.",
       "no-goals-created": "You have not created any goals yet.",
-      "n-plans_one": "1 education option",
-      "n-plans_other": "{{count}} education options",
-      "n-plans_zero": "You have not added any education options yet",
       "own-competences": "My competences",
       "plan": "Option",
       "remove-competence-description": "Remove competence by clicking the x character",
@@ -1050,15 +1050,15 @@
     },
     "profile": {
       "competences": "competences",
-      "education-history": "education",
       "data-import-export": "import-and-export-data",
+      "education-history": "education",
       "favorites": "favourites",
       "free-time-activities": "recreational-activities",
       "front": "front-page",
+      "goals": "goals",
       "index": "competence-profile",
       "interests": "interests",
       "login": "log-in",
-      "goals": "goals",
       "preferences": "settings",
       "something-else": "other-competences",
       "work-history": "workplaces"
@@ -1182,7 +1182,8 @@
           "title": "AI‑assisted mapping"
         },
         "respond-to-chat": "Respond to the bot...",
-        "send": "Submit"
+        "send": "Submit",
+        "session-expired": "The conversation session has expired. Start a new conversation if needed."
       }
     },
     "opportunities-loaded": "Opportunities loaded. {{count}} results.",
@@ -1323,8 +1324,8 @@
       "KOULUTUS": "Education",
       "MUU_OSAAMINEN": "My other competences",
       "OSAAMINEN": "My competences",
-      "TOIMINTO": "Recreational activities",
-      "TOIMENKUVA": "Workplaces"
+      "TOIMENKUVA": "Workplaces",
+      "TOIMINTO": "Recreational activities"
     },
     "tuonti-lahde": {
       "CV_TUONTI": "CV",
