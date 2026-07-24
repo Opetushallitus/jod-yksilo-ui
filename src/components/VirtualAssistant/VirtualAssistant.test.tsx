@@ -100,15 +100,17 @@ describe('VirtualAssistant', () => {
             ehdotukset: ['https://example.esco/skill/1'],
           },
           error: undefined,
+          response: { status: 200 },
         };
       }
       if (path.startsWith('/api/keskustelut/')) {
         return {
           data: { vastaus: 'Follow-up reply', ehdotukset: [] },
           error: undefined,
+          response: { status: 200 },
         };
       }
-      return { data: undefined, error: { message: 'not found' } };
+      return { data: undefined, error: { message: 'not found' }, response: { status: 500 } };
     });
   });
 
@@ -228,9 +230,10 @@ describe('VirtualAssistant', () => {
             ehdotukset: [],
           },
           error: undefined,
+          response: { status: 200 },
         };
       }
-      return { data: undefined, error: {} };
+      return { data: undefined, error: {}, response: { status: 500 } };
     });
 
     await openModal('competences');
@@ -244,7 +247,7 @@ describe('VirtualAssistant', () => {
   });
 
   it('shows error translation when API returns error', async () => {
-    mocks.postMock.mockResolvedValueOnce({ data: undefined, error: { status: 500 } });
+    mocks.postMock.mockResolvedValueOnce({ data: undefined, error: { status: 500 }, response: { status: 500 } });
 
     await openModal('interests');
     fireEvent.change(screen.getByTestId('va-input-input'), { target: { value: 'Virhe' } });
@@ -345,7 +348,7 @@ describe('VirtualAssistant', () => {
   });
 
   it('does not restore an aborted reply to history after cancel', async () => {
-    const response = createDeferred<{ data?: unknown; error?: unknown }>();
+    const response = createDeferred<{ data?: unknown; error?: unknown; response?: unknown }>();
     let signal: AbortSignal | undefined;
     mocks.postMock.mockImplementationOnce((_path: string, options?: { signal?: AbortSignal }) => {
       signal = options?.signal;
@@ -375,6 +378,7 @@ describe('VirtualAssistant', () => {
           ehdotukset: ['https://example.esco/skill/late'],
         },
         error: undefined,
+        response: { status: 200 },
       });
     });
 
