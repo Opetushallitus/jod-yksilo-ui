@@ -64,7 +64,7 @@ jobs:
         run: npm run build
 
       - name: Run Playwright e2e tests
-        uses: docker://mcr.microsoft.com/playwright:v1.60.0-noble
+        uses: docker://mcr.microsoft.com/playwright:v1.61.0-noble
         with:
           args: bash -lc "export HOME=/root && npx playwright test"
 

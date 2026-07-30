@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+import { Link, To } from 'react-router';
 
 import { cx, HeroCard, type LinkComponent, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
@@ -53,7 +53,7 @@ const CardContainer = ({ className = '', children, ref }: ContainerProps & { ref
 };
 
 const AuthNavLink = (shouldLogin: boolean, path?: string) => {
-  const Cmp = ({ to, className, children, testId }: LinkComponent) => (
+  const Cmp = ({ to, className, children, testId }: LinkComponent & { to: To; testId?: string }) => (
     <NavLinkBasedOnAuth to={to ?? path} className={className} shouldLogin={shouldLogin} testId={testId}>
       {children}
     </NavLinkBasedOnAuth>
@@ -126,7 +126,7 @@ const Home = () => {
         <HeroCard
           buttonLabel={t('home.explore-opportunities')}
           content={t('home.card-1-content')}
-          linkComponent={({ to, className, children, testId }: LinkComponent) => (
+          linkComponent={({ to, className, children, testId }: LinkComponent & { to: To; testId?: string }) => (
             <Link to={to} className={className} data-testid={testId}>
               {children}
             </Link>

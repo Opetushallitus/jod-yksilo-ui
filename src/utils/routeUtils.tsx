@@ -115,8 +115,8 @@ export interface LinkToOpts {
 export const getLinkTo = (
   to: React.ComponentProps<typeof Link>['to'],
   opts: LinkToOpts = { useAnchor: false, target: '_self', rel: 'noreferrer noopener' },
-): LinkComponent => {
-  const LinkToComponent = ({ children, className = opts.className, testId }: LinkComponent) =>
+) => {
+  const LinkToComponent = ({ children, className, testId }: LinkComponent & { testId?: string }) =>
     opts.useAnchor ? (
       <a
         className={className}

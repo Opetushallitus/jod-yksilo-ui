@@ -15,7 +15,7 @@ const loader = (async ({ request }) => {
   }
 
   return {};
-}) satisfies LoaderFunction;
+}) satisfies LoaderFunction<{}>;
 
 export type LoaderData = Awaited<ReturnType<typeof loader>>;
 export default loader;

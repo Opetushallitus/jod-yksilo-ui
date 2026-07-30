@@ -102,19 +102,19 @@ const getLocalizedLogos = (language: string) => {
   switch (language) {
     case 'sv':
       return {
-        osaamispolkuLogo: <LogoRgbSv size="26" />,
+        osaamispolkuLogo: <LogoRgbSv size={26} />,
         opintopolkuLogo: <LogoOpintopolkuSv width="100%" className="h-7" />,
         tyomarkkinatoriLogo: <LogoTyomarkkinatoriSv width="100%" className="h-7" />,
       };
     case 'en':
       return {
-        osaamispolkuLogo: <LogoRgbEn size="26" />,
+        osaamispolkuLogo: <LogoRgbEn size={26} />,
         opintopolkuLogo: <LogoOpintopolkuEn width="100%" className="h-7" />,
         tyomarkkinatoriLogo: <LogoTyomarkkinatoriEn width="100%" className="h-7" />,
       };
     default:
       return {
-        osaamispolkuLogo: <LogoRgbFi size="26" />,
+        osaamispolkuLogo: <LogoRgbFi size={26} />,
         opintopolkuLogo: <LogoOpintopolkuFi width="100%" className="h-7" />,
         tyomarkkinatoriLogo: <LogoTyomarkkinatoriFi width="100%" className="h-7" />,
       };
