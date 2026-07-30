@@ -25,7 +25,7 @@ describe('search loader', () => {
     const request = new Request('https://example.test/fi/haku');
 
     await loader({
-      context: undefined,
+      context: {},
       params: {},
       request,
       url: new URL(request.url),
@@ -39,7 +39,7 @@ describe('search loader', () => {
     const request = new Request('https://example.test/fi/haku?q=ab');
 
     await loader({
-      context: undefined,
+      context: {},
       params: {},
       request,
       url: new URL(request.url),
@@ -53,7 +53,7 @@ describe('search loader', () => {
     const request = new Request('https://example.test/fi/haku?q=%20abc%20');
 
     await loader({
-      context: undefined,
+      context: {},
       params: {},
       request,
       url: new URL(request.url),

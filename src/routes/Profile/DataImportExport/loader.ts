@@ -1,6 +1,7 @@
 import { LoaderFunction } from 'react-router';
 
 import { client } from '@/api/client';
+import { components } from '@/api/schema';
 import { sortByProperty } from '@/utils';
 import { isFeatureEnabled } from '@/utils/features';
 
@@ -12,7 +13,7 @@ const loader = (async ({ request }) => {
   return {
     jakolinkit: [...jakolinkit].sort(sortByProperty('voimassaAsti')),
   };
-}) satisfies LoaderFunction;
+}) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
 
 export type DataImportExportLoaderData = Awaited<ReturnType<typeof loader>>;
 export default loader;
