@@ -9,8 +9,7 @@ export const animateElementToTarget = (element: HTMLElement, target: HTMLElement
   const targetRect = target.getBoundingClientRect();
 
   // Create a clone of the element to animate
-  const clone = element.cloneNode() as HTMLElement;
-  clone.innerText = element.innerText;
+  const clone = element.cloneNode(true) as HTMLElement;
   clone.ariaHidden = 'true';
   document.body.appendChild(clone);
 
