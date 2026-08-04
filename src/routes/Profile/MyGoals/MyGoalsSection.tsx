@@ -91,9 +91,8 @@ const MyGoalsSection = ({ tavoitteet }: MyGoalsSectionProps) => {
                     <p className="font-arial text-primary-gray" data-testid="goal-description">
                       {getLocalizedText(tavoite.kuvaus)}
                     </p>
-                    <p className="font-semibold text-secondary-gray sm:text-body-sm">
+                    <p className="font-semibold text-secondary-gray sm:text-body-sm" data-testid="goal-plans-count">
                       {t('profile.my-goals.n-plans', { count: tavoite.suunnitelmat?.length ?? 0 })}
-                      data-testid="goal-plans-count"
                     </p>
                   </div>
                 }
