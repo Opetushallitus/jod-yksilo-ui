@@ -215,7 +215,7 @@ const JobOpportunity = () => {
     {
       navTitle: t('job-opportunity.professional-group'),
       titleAppendix: getTranslation(ammattiryhma?.nimi),
-      content: <div className="font-arial">{getTranslation(ammattiryhma?.kuvaus)}</div>,
+      content: <></>,
       showDivider: false,
     },
     {
