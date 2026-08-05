@@ -155,6 +155,7 @@ const OpportunityDetails = ({
                       state?.callbackUrl ? `/${language}/${state?.callbackUrl}` : `${pathname}${search}${hash}`,
                       closeAllModals,
                     ),
+                    testId: 'login-dialog',
                   })
             }
             className="bg-bg-gray-2"
