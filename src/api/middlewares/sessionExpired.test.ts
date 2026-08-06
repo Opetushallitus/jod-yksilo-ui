@@ -87,6 +87,7 @@ describe('sessionExpiredMiddleware', () => {
       response: {
         status: 403,
         url: 'https://example.test/yksilo/api/profiili/yksilo?refresh=true',
+        clone: () => ({ json: async () => ({ errorCode: 'AUTHENTICATION_FAILURE' }) }),
       },
     } as never);
 
@@ -102,6 +103,7 @@ describe('sessionExpiredMiddleware', () => {
       response: {
         status: 403,
         url: 'https://example.test/yksilo/api/profiili/tavoitteet',
+        json: async () => ({ errorCode: 'AUTHENTICATION_FAILURE' }),
       },
     } as never);
 
@@ -110,5 +112,21 @@ describe('sessionExpiredMiddleware', () => {
     expect(resetToolStore).toHaveBeenCalledOnce();
     expect(resetSuosikitStore).toHaveBeenCalledOnce();
     expect(state.expireSession).toHaveBeenCalledWith('server-403');
+  });
+
+  it('does not expire session on 403 without AUTHENTICATION_FAILURE', async () => {
+    storeHasActiveYksiloSessionMock.mockReturnValue(true);
+
+    await sessionExpiredMiddleware.onResponse?.({
+      response: {
+        status: 403,
+        url: 'https://example.test/yksilo/api/profiili/tavoitteet',
+        json: async () => ({ errorCode: 'FORBIDDEN' }),
+      },
+    } as never);
+
+    expect(state.expireSession).not.toHaveBeenCalled();
+    expect(state.resetYksiloContextRequest).not.toHaveBeenCalled();
+    expect(unregisterCsrfMiddleware).not.toHaveBeenCalled();
   });
 });
