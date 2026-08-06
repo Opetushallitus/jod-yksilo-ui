@@ -40,12 +40,16 @@ export const sessionExpiredMiddleware: Middleware = {
     }
 
     if (response.status === 403 && !isIgnored403(response.url)) {
-      useSessionManagerStore.getState().resetYksiloContextRequest();
-      unregisterCsrfMiddleware();
-      useToolStore.getState().reset();
-      useSuosikitStore.getState().reset();
-      await expireSession('server-403');
+      const body = await response.json();
+      if (body.errorCode === 'AUTHENTICATION_FAILURE') {
+        useSessionManagerStore.getState().resetYksiloContextRequest();
+        unregisterCsrfMiddleware();
+        useToolStore.getState().reset();
+        useSuosikitStore.getState().reset();
+        await expireSession('server-403');
+      }
     }
+
     return response;
   },
 };
