@@ -27,7 +27,7 @@ import { paginate } from '@/utils';
 import { mapKoulutusCodesToLabels } from '@/utils/codes/codes';
 
 const SUOSIKIT_PATH = '/api/profiili/suosikit';
-const DEFAULT_PAINOTUS = 50;
+export const DEFAULT_PAINOTUS = 50;
 
 let abortController = new AbortController();
 

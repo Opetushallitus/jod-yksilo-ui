@@ -6,7 +6,8 @@ import { Button, Modal, useMediaQueries } from '@jod/design-system';
 
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { FilterOpportunityType } from '@/routes/Tool/components/filters/FilterOpportunityType';
-import { useToolStore } from '@/stores/useToolStore';
+import { DEFAULT_PAINOTUS, useToolStore } from '@/stores/useToolStore';
+import { DEFAULT_SORTING } from '@/stores/useToolStore/ToolStoreModel';
 import { getFilterCount, noFiltersSelected } from '@/utils/FilterUtils';
 
 import { FilterSijainti } from './components/filters/FilterSijainti';
@@ -102,7 +103,11 @@ const ToolSettings = ({ onUpdate, ...rest }: ToolSettingsProps) => {
               size={sm ? 'lg' : 'sm'}
               onClick={resetSettings}
               label={t('tool.settings.reset')}
-              disabled={noFiltersSelected(filters)}
+              disabled={
+                noFiltersSelected(filters) &&
+                sorting === DEFAULT_SORTING &&
+                osaamisKiinnostusPainotus === DEFAULT_PAINOTUS
+              }
               testId="reset-settings-button"
             />
           </div>
