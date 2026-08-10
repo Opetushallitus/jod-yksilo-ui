@@ -1081,6 +1081,11 @@ export interface components {
       readonly vastaus: string;
       ehdotukset?: string[];
     };
+    TmtExportDto: {
+      /** @enum {string} */
+      tulos?: 'OK' | 'VIETY_OSITTAIN';
+      syy?: 'LIIKAA_OSAAMISIA'[];
+    };
     TmtImportDto: {
       tyopaikat?: string[];
       koulutuskokonaisuudet?: string[];
@@ -2896,12 +2901,14 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description No Content */
-      204: {
+      /** @description OK */
+      200: {
         headers: {
           [name: string]: unknown;
         };
-        content?: never;
+        content: {
+          'application/json': components['schemas']['TmtExportDto'];
+        };
       };
     };
   };

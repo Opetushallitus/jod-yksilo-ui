@@ -646,6 +646,7 @@
           "title": "Tietojen vienti Työmarkkinatoriin",
           "tmt-url": "https://tyomarkkinatori.fi"
         },
+        "skill-limit-exceeded": "Työmarkkinatorin rajoituksien vuoksi kaikkia tietoja ei voitu viedä. Tarkista tietosi Työmarkkinatorin profiilistasi.",
         "success": "Tietojesi vienti Työmarkkinatoriin onnistui"
       },
       "import": {

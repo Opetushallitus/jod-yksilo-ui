@@ -647,6 +647,7 @@
           "title": "Exportera uppgifter till Jobbmarknaden",
           "tmt-url": "https://tyomarkkinatori.fi/sv/personkunder"
         },
+        "skill-limit-exceeded": "Profilen exporterades, men på grund av Jobbmarknadens begränsningar kunde inte alla uppgifter exporteras. Kontrollera dina uppgifter i din Jobbmarknadsprofil.",
         "success": "Dina uppgifter har exporterats till Jobbmarknaden."
       },
       "import": {
