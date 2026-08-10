@@ -89,13 +89,15 @@ const TmtImportExport = () => {
   );
 
   const showErrorNote = React.useCallback(
-    (title: string, description: string, onClick: () => void) => {
+    (title: string, description: string, onClick?: () => void) => {
       addTemporaryNote(() => ({
         title,
         description,
         variant: 'warning',
         isCollapsed: false,
-        readMoreComponent: <Button label={t('try-again')} variant="white" size="sm" onClick={onClick} />,
+        readMoreComponent: onClick ? (
+          <Button label={t('try-again')} variant="white" size="sm" onClick={onClick} />
+        ) : undefined,
       }));
     },
     [addTemporaryNote, t],
@@ -152,7 +154,7 @@ const TmtImportExport = () => {
     const showExportResult = () => {
       const { error, errorTitle, errorDescription } = exportResultRef.current;
       if (error) {
-        showErrorNote(errorTitle, errorDescription, startExport);
+        showErrorNote(errorTitle, errorDescription, error?.errorCode !== 'EXPORT_PARTIALLY' ? startExport : undefined);
       } else {
         toast.success(t('preferences.tmt-import-export.export.success'));
       }
@@ -186,16 +188,25 @@ const TmtImportExport = () => {
       setExportPending(true);
       const res = await client.POST('/api/integraatiot/tmt/vienti');
       setExportPending(false);
-      const error = res.error as ErrorResponseType;
-      const errorTitle = error ? t('preferences.tmt-import-export.export.error-note-title') : '';
-      const errorDescription = error ? getErrorTranslation(error.errorCode) : '';
 
-      exportResultRef.current = {
-        error,
-        errorTitle,
-        errorDescription,
-        ready: true,
-      };
+      if (res?.data?.tulos === 'VIETY_OSITTAIN') {
+        exportResultRef.current = {
+          error: { errorCode: 'EXPORT_PARTIALLY' },
+          errorTitle: t('preferences.tmt-import-export.export.success'),
+          errorDescription: t('preferences.tmt-import-export.export.skill-limit-exceeded'),
+          ready: true,
+        };
+      } else {
+        const error = res.error as ErrorResponseType;
+        const errorTitle = error ? t('preferences.tmt-import-export.export.error-note-title') : '';
+        const errorDescription = error ? getErrorTranslation(error.errorCode) : '';
+        exportResultRef.current = {
+          error,
+          errorTitle,
+          errorDescription,
+          ready: true,
+        };
+      }
 
       // If dialog is already closed, show result now
       if (!dialogOpenRef.current && showResultAfterDialog.current) {

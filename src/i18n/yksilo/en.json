@@ -648,6 +648,7 @@
           "title": "Export data to Job Market Finland",
           "tmt-url": "https://tyomarkkinatori.fi/en/personal-customers"
         },
+        "skill-limit-exceeded": "Your profile was exported, but due to Job Market Finland restrictions, not all data could be exported. Please check your data in your Job Market Finland profile.",
         "success": "Your data was successfully exported to Job Market Finland."
       },
       "import": {
