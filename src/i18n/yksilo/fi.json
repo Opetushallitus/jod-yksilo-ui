@@ -832,7 +832,7 @@
       "choose-favorite-description": "Valitse suosikeistasi ammatti tai työmahdollisuus, jonka haluat asettaa tavoitteeksi",
       "choose-favorite-header": "Valitse tavoite suosikeista",
       "competence-compare": "Osaamisvertailu",
-      "competence-description": "Vasemmalla on listattu tavoitteesi vaatimat osaamiset. Oikealla näet, mitä osaat jo. Tiedot perustuvat profiilitietoihisi.",
+      "competence-description": "Vasemmalla on listattu tavoitteesi vaatimat osaamiset. Oikealla näet, mitä osaat jo ja mitä voit oppia valitsemillasi koulutusvaihtoehdoilla. Omat osaamiset perustuvat profilitietoihisi.",
       "competence-requirement-for-goal": "Tavoitteen vaatima osaaminen",
       "competences": "Osaamista",
       "custom-plan-competences-description": "Valitse tavoitteeseen vaadittavista osaamisista ne, jotka aiot saavuttaa oman koulutusvaihtoehtosi avulla.",
@@ -883,6 +883,7 @@
       "required-competences": "Tavoitteeseen vaaditut osaamiset",
       "selected-competences": "Omaan vaihtoehtoon valitut osaamiset",
       "set-to-goal": "Aseta tavoitteeksi",
+      "show-goal": "Näytä tavoite",
       "title": "Tavoitteet",
       "update-modal-title": "Muokkaa tavoitetta"
     },

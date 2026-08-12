@@ -833,7 +833,7 @@
       "choose-favorite-description": "Välj yrke eller arbetsmöjlighet från dina favoriter som du vill ställa in som mål",
       "choose-favorite-header": "Välj mål från favoriter",
       "competence-compare": "Kompetensjämförelse",
-      "competence-description": "Till vänster listas de kompetenser som krävs för ditt mål. Till höger kan du se vad du redan kan. Informationen baseras på dina profiluppgifter.",
+      "competence-description": "Till vänster listas de kompetenser som krävs för ditt mål. Till höger kan du se vad du redan kan och vad du kan lära dig från de utbildningsalternativ du har valt. Dina egna kompetenser baseras på dina profiluppgifter.",
       "competence-requirement-for-goal": "Kompetenskrav för mål",
       "competences": "Kompetenser",
       "custom-plan-competences-description": "Välj de kompetenser som krävs för målet och som du planerar att uppnå med ditt eget utbildningsalternativ.",
@@ -884,6 +884,7 @@
       "required-competences": "Kompetenser som krävs för målet",
       "selected-competences": "Valda kompetenser i egen alternativ",
       "set-to-goal": "Sätt som mål",
+      "show-goal": "Visa mål",
       "title": "Mål",
       "update-modal-title": "Redigera målet"
     },

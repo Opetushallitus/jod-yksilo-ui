@@ -834,7 +834,7 @@
       "choose-favorite-description": "Choose a profession or employment opportunity from your favorites that you want to set as a goal",
       "choose-favorite-header": "Select goal from favourites",
       "competence-compare": "Compare competences",
-      "competence-description": "On the left, the competences required for your goal are listed. On the right, you can see what you already know. The information is based on your profile data.",
+      "competence-description": "On the left, the competences required for your goal are listed. On the right, you can see what you already know and what you can learn from the education options you have selected. Your own competences are based on your profile data.",
       "competence-requirement-for-goal": "Competence required for goal",
       "competences": "Competences",
       "custom-plan-competences-description": "Create your own option by first giving it a name and a short description. Then select the competences you want to achieve with the option.",
@@ -885,6 +885,7 @@
       "required-competences": "Competences required for the goal",
       "selected-competences": "Competences selected for my option",
       "set-to-goal": "Set as goal",
+      "show-goal": "Show goal",
       "title": "Goals",
       "update-modal-title": "Edit goal"
     },
