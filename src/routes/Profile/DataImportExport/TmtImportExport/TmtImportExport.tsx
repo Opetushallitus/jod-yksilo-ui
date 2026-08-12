@@ -7,6 +7,8 @@ import { Button, Spinner, useNoteStack } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 
 import { client } from '@/api/client';
+import { AnchorLink } from '@/components';
+import { ImportInfoBox } from '@/components/ImportInfoBox/ImportInfoBox';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 
@@ -346,6 +348,25 @@ const TmtImportExport = () => {
           testId="tmt-import-export-export-button"
         />
       </div>
+      <ImportInfoBox>
+        <Trans
+          i18nKey="preferences.tmt-import-export.result-info"
+          components={{
+            WorkHistoryLink: (
+              <AnchorLink
+                href={`/yksilo/${language}/${t('slugs.profile.index')}/${t('slugs.profile.competences')}/${t('slugs.profile.work-history')}`}
+                className="inline-flex underline"
+              />
+            ),
+            EducationHistoryLink: (
+              <AnchorLink
+                href={`/yksilo/${language}/${t('slugs.profile.index')}/${t('slugs.profile.competences')}/${t('slugs.profile.education-history')}`}
+                className="inline-flex underline"
+              />
+            ),
+          }}
+        />
+      </ImportInfoBox>
     </div>
   );
 };

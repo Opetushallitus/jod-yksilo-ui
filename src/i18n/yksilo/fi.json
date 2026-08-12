@@ -511,8 +511,9 @@
       },
       "file-too-large": "Tiedosto on liian suuri (max 2 Mt).",
       "import-data": "Tuo tiedot",
-      "import-from-cv": "Tuo tietosi CV:stä",
+      "import-from-cv": "Tuo tiedot CV:stä",
       "invalid-file-type": "Vain PDF-tiedostot ovat tuettuja.",
+      "result-info": "Tuonnin valmistuttua löydät tietosi <WorkHistoryLink>Työpaikat</WorkHistoryLink>-, <FreeTimeActivitiesLink>Vapaa-ajan toiminnot</FreeTimeActivitiesLink>- ja <EducationHistoryLink>Koulutukset</EducationHistoryLink>-sivulta",
       "save": {
         "failed": {
           "description": "CV:n tallentaminen epäonnistui",
@@ -543,7 +544,7 @@
           "title": "Työpaikat"
         }
       },
-      "title": "Tietojen tuonti CV:stä"
+      "title": "Tuo tietosi CV:stä"
     },
     "data-disclosure-unanonymized": {
       "description": "Opetushallitus käyttää ensisijaisesti anonymisoituja tietoja. Tämä tarkoittaa, että henkilötietosi muunnetaan sellaiseen muotoon, ettei sinua voi enää tunnistaa niistä. Näin tietoja voidaan käyttää esimerkiksi tutkimukseen tai palvelun kehittämiseen ilman, että sinut voidaan tunnistaa. Jos kuitenkin haluat, voit antaa luvan käyttää tietojasi myös tunnistettavassa muodossa. Tämä tarkoittaa, että tietosi säilyvät sellaisina, että ne voidaan yhdistää sinuun. Voit antaa luvan jokaiseen kohtaan erikseen ja perua luvan milloin tahansa.",
@@ -573,9 +574,10 @@
       "title": "Tuo ja vie tietojasi"
     },
     "koski-import": {
-      "button-label": "Tuo koulutushistoriani",
+      "button-label": "Tuo koulutushistoria",
       "description": "Voit tuoda valtakunnallisiin opinto-, koulutus- ja tutkintorekistereihin tallennettuja koulutushistoriatietojasi osaksi Oma Osaamispolkua.",
-      "title": "Tuo koulutushistoriani"
+      "result-info": "Tuonnin valmistuttua löydät tietosi <EducationHistoryLink>Koulutukset</EducationHistoryLink>-sivulta",
+      "title": "Tuo koulutushistoriasi"
     },
     "personal-details": {
       "description": "Voit muokata sähköpostiosoitettasi.",
@@ -637,7 +639,7 @@
       "export": {
         "authorization-cancelled": "Tietojen vienti keskeytettiin",
         "authorization-failed": "Tietojen vienti epäonnistui",
-        "button-label": "Vie tietojasi",
+        "button-label": "Vie tietoja työnhakuprofiiliin",
         "error-note-title": "Tietojen vienti epäonnistui",
         "in-progress": "Tietojasi viedään",
         "modal": {
@@ -652,7 +654,7 @@
       "import": {
         "authorization-cancelled": "Tietojen tuonti keskeytettiin",
         "authorization-failed": "Tietojen tuonti epäonnistui",
-        "button-label": "Tuo tietojasi",
+        "button-label": "Tuo tietoja työnhakuprofiilista",
         "error-note-title": "Tietojen tuonti epäonnistui",
         "in-progress": "Tietojasi tuodaan",
         "modal": {
@@ -662,6 +664,7 @@
         },
         "success": "Tietojesi tuonti Työmarkkinatorista onnistui"
       },
+      "result-info": "Tuonnin valmistuttua löydät tietosi <WorkHistoryLink>Työpaikat</WorkHistoryLink>- ja <EducationHistoryLink>Koulutukset</EducationHistoryLink>-sivulta",
       "title": "Siirrä tietojasi Työmarkkinatorin ja Osaamispolun välillä"
     }
   },

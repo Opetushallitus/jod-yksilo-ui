@@ -4,6 +4,7 @@ import { AiInfoButton, Button } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 
 import { AnchorLink } from '@/components';
+import { ImportInfoBox } from '@/components/ImportInfoBox/ImportInfoBox';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 
@@ -39,7 +40,10 @@ const TooltipContent = () => {
 };
 
 const CvImport = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
 
   const { showModal } = useModal();
   const guardedAction = useSessionGuardedAction();
@@ -62,6 +66,32 @@ const CvImport = () => {
         onClick={guardedAction(showModal, CvImportWizard)}
         testId="cv-import-button"
       />
+
+      <ImportInfoBox>
+        <Trans
+          i18nKey="preferences.cv-import.result-info"
+          components={{
+            WorkHistoryLink: (
+              <AnchorLink
+                href={`/yksilo/${language}/${t('slugs.profile.index')}/${t('slugs.profile.competences')}/${t('slugs.profile.work-history')}`}
+                className="inline-flex underline"
+              />
+            ),
+            FreeTimeActivitiesLink: (
+              <AnchorLink
+                href={`/yksilo/${language}/${t('slugs.profile.index')}/${t('slugs.profile.competences')}/${t('slugs.profile.free-time-activities')}`}
+                className="inline-flex underline"
+              />
+            ),
+            EducationHistoryLink: (
+              <AnchorLink
+                href={`/yksilo/${language}/${t('slugs.profile.index')}/${t('slugs.profile.competences')}/${t('slugs.profile.education-history')}`}
+                className="inline-flex underline"
+              />
+            ),
+          }}
+        />
+      </ImportInfoBox>
     </div>
   );
 };
