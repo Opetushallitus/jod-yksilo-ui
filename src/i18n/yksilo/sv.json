@@ -512,8 +512,9 @@
       },
       "file-too-large": "Filen är för stor (max 2 MB).",
       "import-data": "Importera data",
-      "import-from-cv": "Importera dina uppgifter från CV",
+      "import-from-cv": "Importera från CV",
       "invalid-file-type": "Endast PDF-filer stöds.",
+      "result-info": "När importen är klar hittar du dina uppgifter på <WorkHistoryLink>Arbetsplatser</WorkHistoryLink>-, <FreeTimeActivitiesLink>Fritidsaktiviteter</FreeTimeActivitiesLink>- och <EducationHistoryLink>Utbildningar</EducationHistoryLink>-sidorna",
       "save": {
         "failed": {
           "description": "CV-sparning misslyckades",
@@ -544,7 +545,7 @@
           "title": "Arbete"
         }
       },
-      "title": "Importera uppgifter från CV"
+      "title": "Importera dina uppgifter från CV"
     },
     "data-disclosure-unanonymized": {
       "description": "Utbildningsstyrelsen använder i första hand anonymiserade uppgifter. Detta innebär att dina personuppgifter omvandlas till ett sådant format att du inte längre kan identifieras. På så sätt kan uppgifterna användas till exempel för forskning eller utveckling av tjänsten utan att du kan identifieras. Om du dock så önskar, kan du ge ditt samtycke till att dina uppgifter används även i ett identifierbart format. Detta innebär att dina uppgifter fortsättningsvis kan kopplas till dig. Du kan ge tillstånd för varje punkt separat och återkalla tillståndet när som helst.",
@@ -574,9 +575,10 @@
       "title": "Importera och exportera dina uppgifter"
     },
     "koski-import": {
-      "button-label": "Importera min utbildningshistorik",
+      "button-label": "Importera utbildningshistorik",
       "description": "Du kan importera utbildningshistorikdata som sparats i de nationella studie-, utbildnings- och examensregistren som en del av Min kompetensstig.",
-      "title": "Importera min utbildningshistorik"
+      "result-info": "När importen är klar hittar du dina uppgifter på <EducationHistoryLink>Utbildningar</EducationHistoryLink>-sidan",
+      "title": "Importera utbildningshistorik"
     },
     "personal-details": {
       "description": "Du kan redigera e-postadress.",
@@ -638,7 +640,7 @@
       "export": {
         "authorization-cancelled": "Exporten av dina uppgifter avbröts",
         "authorization-failed": "Exporten av dina uppgifter har misslyckats",
-        "button-label": "Exportera dina uppgifter",
+        "button-label": "Exportera uppgifter till jobbsökarprofil",
         "error-note-title": "Exporten av dina uppgifter misslyckades",
         "in-progress": "Dina uppgifter exporteras",
         "modal": {
@@ -653,7 +655,7 @@
       "import": {
         "authorization-cancelled": "Importen av dina uppgifter avbröts",
         "authorization-failed": "Importen av dina uppgifter har misslyckats",
-        "button-label": "Importera dina uppgifter",
+        "button-label": "Importera uppgifter från jobbsökarprofil",
         "error-note-title": "Importen av dina uppgifter misslyckades",
         "in-progress": "Dina uppgifter importeras",
         "modal": {
@@ -663,6 +665,7 @@
         },
         "success": "Dina uppgifter har importerats från Jobbmarknaden."
       },
+      "result-info": "När importen är klar hittar du dina uppgifter på <WorkHistoryLink>Arbetsplatser</WorkHistoryLink>- och <EducationHistoryLink>Utbildningar</EducationHistoryLink>-sidan",
       "title": "Importera och exportera uppgifter mellan Kompetensvägen och Jobbmarknaden"
     }
   },
@@ -833,7 +836,7 @@
       "choose-favorite-description": "Välj yrke eller arbetsmöjlighet från dina favoriter som du vill ställa in som mål",
       "choose-favorite-header": "Välj mål från favoriter",
       "competence-compare": "Kompetensjämförelse",
-      "competence-description": "Till vänster listas de kompetenser som krävs för ditt mål. Till höger kan du se vad du redan kan. Informationen baseras på dina profiluppgifter.",
+      "competence-description": "Till vänster listas de kompetenser som krävs för ditt mål. Till höger kan du se vad du redan kan och vad du kan lära dig från de utbildningsalternativ du har valt. Dina egna kompetenser baseras på dina profiluppgifter.",
       "competence-requirement-for-goal": "Kompetenskrav för mål",
       "competences": "Kompetenser",
       "custom-plan-competences-description": "Välj de kompetenser som krävs för målet och som du planerar att uppnå med ditt eget utbildningsalternativ.",
@@ -884,6 +887,7 @@
       "required-competences": "Kompetenser som krävs för målet",
       "selected-competences": "Valda kompetenser i egen alternativ",
       "set-to-goal": "Sätt som mål",
+      "show-goal": "Visa mål",
       "title": "Mål",
       "update-modal-title": "Redigera målet"
     },

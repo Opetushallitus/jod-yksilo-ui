@@ -513,8 +513,9 @@
       },
       "file-too-large": "The file is too large (max 2 MB).",
       "import-data": "Import data",
-      "import-from-cv": "Import your data from CV",
+      "import-from-cv": "Import from CV",
       "invalid-file-type": "Only PDF files are supported.",
+      "result-info": "After the import is complete, you can find your information on the <WorkHistoryLink>Workplaces</WorkHistoryLink>, <FreeTimeActivitiesLink>Recreational activities</FreeTimeActivitiesLink>, and <EducationHistoryLink>Education</EducationHistoryLink> pages.",
       "save": {
         "failed": {
           "description": "CV saving failed",
@@ -545,7 +546,7 @@
           "title": "Work"
         }
       },
-      "title": "Import data from CV"
+      "title": "Import your data from CV"
     },
     "data-disclosure-unanonymized": {
       "description": "Finnish National Agency for Education primarily uses anonymised data. This means that your personal data will be converted into a format that will no longer allow you to be identified. In this way, the data can be used, for example, for research or service development without identifying you. However, if you wish, you can also give permission to use your data in an identifiable form. This means that your data will remain in such a form that it can be linked to you. You can grant permission for each item separately and revoke permission at any time.",
@@ -575,9 +576,10 @@
       "title": "Import and export your data"
     },
     "koski-import": {
-      "button-label": "Import my education history",
+      "button-label": "Import education history",
       "description": "You can import your education history data stored in the national study, education and qualification registers as part of My Competency Path.",
-      "title": "Import my education history"
+      "result-info": "After the import is complete, you can find your information on the <EducationHistoryLink>Education</EducationHistoryLink> page.",
+      "title": "Import education history"
     },
     "personal-details": {
       "description": "You can edit your email address.",
@@ -639,7 +641,7 @@
       "export": {
         "authorization-cancelled": "Data export was cancelled",
         "authorization-failed": "Data export has failed",
-        "button-label": "Export your data",
+        "button-label": "Export data to jobseeker profile",
         "error-note-title": "Error during data export",
         "in-progress": "Exporting",
         "modal": {
@@ -654,7 +656,7 @@
       "import": {
         "authorization-cancelled": "Data import was cancelled",
         "authorization-failed": "Data import has failed",
-        "button-label": "Import your data",
+        "button-label": "Import data from jobseeker profile",
         "error-note-title": "Error during data import",
         "in-progress": "Importing",
         "modal": {
@@ -664,6 +666,7 @@
         },
         "success": "Your data was successfully imported from Job Market Finland"
       },
+      "result-info": "After the import is complete, you can find your information on the <WorkHistoryLink>Workplaces</WorkHistoryLink> and <EducationHistoryLink>Education</EducationHistoryLink> pages.",
       "title": "Import and export data between Competence Path and Job Market Finland"
     }
   },
@@ -834,7 +837,7 @@
       "choose-favorite-description": "Choose a profession or employment opportunity from your favorites that you want to set as a goal",
       "choose-favorite-header": "Select goal from favourites",
       "competence-compare": "Compare competences",
-      "competence-description": "On the left, the competences required for your goal are listed. On the right, you can see what you already know. The information is based on your profile data.",
+      "competence-description": "On the left, the competences required for your goal are listed. On the right, you can see what you already know and what you can learn from the education options you have selected. Your own competences are based on your profile data.",
       "competence-requirement-for-goal": "Competence required for goal",
       "competences": "Competences",
       "custom-plan-competences-description": "Create your own option by first giving it a name and a short description. Then select the competences you want to achieve with the option.",
@@ -885,6 +888,7 @@
       "required-competences": "Competences required for the goal",
       "selected-competences": "Competences selected for my option",
       "set-to-goal": "Set as goal",
+      "show-goal": "Show goal",
       "title": "Goals",
       "update-modal-title": "Edit goal"
     },
