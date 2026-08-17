@@ -25,6 +25,7 @@ export interface ExperienceTableRowData {
     nimi: Record<string, string>;
     kuvaus: Record<string, string>;
     sourceType: 'tyopaikka' | 'koulutus' | 'vapaa-ajan-teema';
+    checked?: boolean;
   }[];
   osaamisetOdottaaTunnistusta?: boolean;
   osaamisetTunnistusEpaonnistui?: boolean;
@@ -151,10 +152,12 @@ export const FreeFormTextRow = ({
   row,
   visibleState,
   className,
+  colSpan = 5,
 }: {
   row: ExperienceTableRowData;
   visibleState: boolean;
   className?: string;
+  colSpan?: number;
 }) => {
   const freeFormText = getLocalizedText(row.kuvaus);
   if (!freeFormText || !visibleState) {
@@ -164,7 +167,7 @@ export const FreeFormTextRow = ({
   return (
     <tr data-testid="experience-row-free-form-text-row">
       <td
-        colSpan={5}
+        colSpan={colSpan}
         className={`${className} w-full px-3 py-2 sm:px-5 sm:py-3`.trim()}
         data-testid="experience-row-free-form-text-cell"
       >

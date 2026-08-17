@@ -530,6 +530,10 @@
           "no-data": "Inga fritidsaktiviteter identifierades",
           "title": "Fritidsaktiviteter"
         },
+        "competences-failed": {
+          "description": "Kompetensernas namn kunde inte hämtas, så en del kompetenser kan saknas i sammanfattningen.",
+          "title": "Hämtning av kompetenser misslyckades"
+        },
         "description": "Välj vilka uppgifter du vill importera från ditt CV. Efter importen kan du redigera och komplettera informationen i avsnitten Utbildning, Arbete och Fritidsaktiviteter.",
         "education": {
           "loading": "Hämtar utbildningshistorik",

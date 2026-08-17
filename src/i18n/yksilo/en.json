@@ -531,6 +531,10 @@
           "no-data": "No leisure activities identified",
           "title": "Leisure activities"
         },
+        "competences-failed": {
+          "description": "Competence names could not be loaded, so some competences may be missing from the summary.",
+          "title": "Loading competences failed"
+        },
         "description": "Select which information you want to import from your CV. After importing, you can edit and complete the information in the Education, Work, and Leisure Activities sections.",
         "education": {
           "loading": "Loading education history",

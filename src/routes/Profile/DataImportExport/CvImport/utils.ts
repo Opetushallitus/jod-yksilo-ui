@@ -4,11 +4,24 @@ import { getEducationHistoryTableRows, type Koulutuskokonaisuus } from '@/routes
 import { getWorkHistoryTableRows, type Tyopaikka } from '@/routes/Profile/WorkHistory/utils';
 
 export const buildSaveDto = (data: CvImportConvertedData): components['schemas']['CvTehtavaSaveDto'] => {
-  const toValinta = (rows: ExperienceTableRowData[]): components['schemas']['Valinta'][] => {
+  const toValinta = (
+    rows: ExperienceTableRowData[],
+    includeOsaamiset = false,
+  ): components['schemas']['CvValinta'][] => {
     return rows
-      .filter((row) => (row.subrows ?? []).some((s) => s.checked ?? true))
+      .filter((row) => (row.subrows ?? []).some((s) => s.checked ?? false))
       .map((row) => {
-        const lapset = (row.subrows ?? []).filter((s) => s.checked ?? true).map((s) => s.key);
+        const selectedSubrows = (row.subrows ?? []).filter((s) => s.checked ?? false);
+        const lapset: components['schemas']['CvLapsi'][] = selectedSubrows.map((subrow) => ({
+          id: subrow.key,
+          ...(includeOsaamiset && {
+            osaamiset: Array.from(
+              new Set(
+                subrow.osaamiset.filter((osaaminen) => osaaminen.checked ?? false).map((osaaminen) => osaaminen.id),
+              ),
+            ),
+          }),
+        }));
         return {
           id: row.key,
           lapset,
@@ -18,8 +31,8 @@ export const buildSaveDto = (data: CvImportConvertedData): components['schemas']
   };
 
   return {
-    koulutuskokonaisuudet: toValinta(data.education),
-    tyopaikat: toValinta(data.work),
+    koulutuskokonaisuudet: toValinta(data.education, true),
+    tyopaikat: toValinta(data.work, true),
     teemat: toValinta(data.activities),
   };
 };
@@ -29,6 +42,28 @@ export interface CvImportConvertedData {
   work: ExperienceTableRowData[];
   activities: ExperienceTableRowData[];
 }
+
+export const updateOsaamiset = (
+  rows: ExperienceTableRowData[],
+  osaamisetMap: Record<string, { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> }>,
+): ExperienceTableRowData[] =>
+  rows.map((row) => ({
+    ...row,
+    osaamiset: row.osaamiset.map((osaaminen) => ({ ...osaaminen, ...osaamisetMap[osaaminen.id] })),
+    subrows: row.subrows ? updateOsaamiset(row.subrows, osaamisetMap) : undefined,
+  }));
+
+/**
+ * Collects all unique osaaminen URIs referenced anywhere in the Tulos payload.
+ */
+export const collectOsaamisetUris = (tulos: components['schemas']['Tulos']): string[] => {
+  const education = (tulos.koulutuskokonaisuudet ?? [])
+    .flatMap((kk) => kk.koulutukset ?? [])
+    .flatMap((k) => k.osaamiset ?? []);
+  const work = (tulos.tyopaikat ?? []).flatMap((tp) => tp.toimenkuvat ?? []).flatMap((t) => t.osaamiset ?? []);
+  const activities = (tulos.teemat ?? []).flatMap((t) => t.toiminnot ?? []).flatMap((p) => p.osaamiset ?? []);
+  return Array.from(new Set([...education, ...work, ...activities]));
+};
 
 /**
  * Transforms KoulutusKokonaisuusDto to internal Koulutuskokonaisuus format
@@ -41,7 +76,7 @@ const transformKoulutusKokonaisuusDto = (
   tuontiLahde: dto.tuontiLahde,
   koulutukset: (dto.koulutukset || []).map((k) => ({
     id: k.id,
-    nimi: k.kuvaus || k.nimi || { fi: '', sv: '', en: '' },
+    nimi: k.nimi,
     kuvaus: k.kuvaus,
     alkuPvm: k.alkuPvm,
     loppuPvm: k.loppuPvm,
@@ -92,8 +127,20 @@ export const convertTulosToTableRows = (
   // For activities, we need to convert TeemaDto to a compatible format
   const activities = tulos.teemat ? convertActivitiesToTableRows(tulos.teemat, osaamisetMap) : [];
 
-  return { education, work, activities };
+  return {
+    education: markRowsUnselected(education),
+    work: markRowsUnselected(work),
+    activities: markRowsUnselected(activities),
+  };
 };
+
+const markRowsUnselected = (rows: ExperienceTableRowData[]): ExperienceTableRowData[] =>
+  rows.map((row) => ({
+    ...row,
+    checked: false,
+    osaamiset: row.osaamiset.map((osaaminen) => ({ ...osaaminen, checked: false })),
+    subrows: row.subrows ? markRowsUnselected(row.subrows) : undefined,
+  }));
 
 /**
  * Converts TeemaDto array to ExperienceTableRowData with toiminnot as subrows
@@ -122,9 +169,7 @@ const convertActivitiesToTableRows = (
         alkuPvm: p.alkuPvm ? new Date(p.alkuPvm) : undefined,
         loppuPvm: p.loppuPvm ? new Date(p.loppuPvm) : undefined,
         osaamiset: (p.osaamiset || []).map((id) => ({
-          ...(osaamisetMap
-            ? osaamisetMap[id]
-            : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
+          ...(osaamisetMap?.[id] ?? { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
           sourceType: 'vapaa-ajan-teema' as const,
         })),
         checked: true,
@@ -132,9 +177,7 @@ const convertActivitiesToTableRows = (
       osaamiset: toiminnot
         .flatMap((p) => p.osaamiset || [])
         .map((id) => ({
-          ...(osaamisetMap
-            ? osaamisetMap[id]
-            : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
+          ...(osaamisetMap?.[id] ?? { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
           sourceType: 'vapaa-ajan-teema' as const,
         })),
       checked: true,
