@@ -7,7 +7,7 @@ import { JodOpenInNew } from '@jod/design-system/icons';
 import { AnchorLink } from '../AnchorLink/AnchorLink';
 
 interface AiInfoProps {
-  type?: 'tool' | 'education-opportunity' | 'job-opportunity' | 'education-import';
+  type?: 'tool' | 'education-opportunity' | 'job-opportunity' | 'education-import' | 'cv-import';
   size?: number;
 }
 
@@ -23,6 +23,8 @@ export const AiInfo = ({ type = 'tool', size }: AiInfoProps) => {
 
     if (type === 'education-import') {
       content = <Trans i18nKey="education-history-import.result-modal.tooltip" />;
+    } else if (type === 'cv-import') {
+      content = <p>{t('ai-info-tooltip.description-cv-import')}</p>;
     } else if (type === 'tool') {
       content = (
         <>
