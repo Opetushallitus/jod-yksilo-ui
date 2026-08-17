@@ -60,9 +60,7 @@ export const getEducationHistoryTableRows = (
         .sort(sortByProperty('alkuPvm'))
         .map((koulutus) => mapKoulutusToRow(koulutus, osaamisetMap)),
       osaamiset: [...new Set(koulutukset.map((koulutus) => koulutus.osaamiset).flat())].map((id) => ({
-        ...(osaamisetMap
-          ? osaamisetMap[id]
-          : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
+        ...(osaamisetMap?.[id] ?? { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
         sourceType: 'koulutus',
       })),
       checked: true,
@@ -93,9 +91,7 @@ const mapKoulutusToRow = (
     alkuPvm: koulutus.alkuPvm ? new Date(koulutus.alkuPvm) : undefined,
     loppuPvm: koulutus.loppuPvm ? new Date(koulutus.loppuPvm) : undefined,
     osaamiset: koulutus.osaamiset.map((id) => ({
-      ...(osaamisetMap
-        ? osaamisetMap[id]
-        : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
+      ...(osaamisetMap?.[id] ?? { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
       sourceType: 'koulutus',
     })),
     checked: true,
