@@ -51,9 +51,7 @@ export const getWorkHistoryTableRows = (
         .sort(sortByProperty('alkuPvm'))
         .map((toimenkuva) => mapToimenkuvaToRow(toimenkuva, osaamisetMap)),
       osaamiset: [...new Set(toimenkuvat.map((toimenkuva) => toimenkuva.osaamiset).flat())].map((id) => ({
-        ...(osaamisetMap
-          ? osaamisetMap[id]
-          : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
+        ...(osaamisetMap?.[id] ?? { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
         sourceType: 'tyopaikka',
       })),
     };
@@ -81,7 +79,7 @@ const mapToimenkuvaToRow = (
   loppuPvm: toimenkuva.loppuPvm ? new Date(toimenkuva.loppuPvm) : undefined,
   checked: true,
   osaamiset: toimenkuva.osaamiset.map((id) => ({
-    ...(osaamisetMap ? osaamisetMap[id] : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
+    ...(osaamisetMap?.[id] ?? { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),
     sourceType: 'tyopaikka',
   })),
 });
