@@ -6,7 +6,7 @@ export default defineConfig({
     typeCheck: true,
   },
   plugins: ['eslint', 'typescript', 'react', 'jsx-a11y', 'import', 'vitest'],
-  ignorePatterns: ['scripts', 'extractor.ts'],
+  ignorePatterns: ['extractor.ts'],
   jsPlugins: ['eslint-plugin-sonarjs'],
   rules: {
     'eslint/no-unused-vars': [

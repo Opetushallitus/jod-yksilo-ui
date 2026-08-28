@@ -7,6 +7,11 @@ on:
     branches:
       - main
 
+# Serialize runs so concurrently merged PRs cannot race on the same Tolgee state.
+concurrency:
+  group: tolgee-sync
+  cancel-in-progress: false
+
 jobs:
   sync-translations:
     name: Push translations and tag keys
@@ -16,6 +21,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0 # manage-tags reads history to find the commit that removed each key
 
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
@@ -34,4 +41,5 @@ jobs:
         env:
           TOLGEE_API_KEY: ${{ secrets.TOLGEE_API_KEY }}
           GITHUB_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
         run: npm run translations:tag
