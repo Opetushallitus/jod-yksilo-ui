@@ -1,3 +1,4 @@
+// oxlint-disable vitest/no-conditional-expect
 import { describe, expect, it } from 'vitest';
 
 import { getTolgeeConfigPathFromScriptsDir, validateTranslationConfig } from './tolgee-config.js';
