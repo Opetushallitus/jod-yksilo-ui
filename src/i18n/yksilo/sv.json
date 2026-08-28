@@ -26,7 +26,6 @@
   "competences-identifying": "Du kan redigera utbildningen efter att kompetenserna har laddats.",
   "competences-of-your-choice": "Valda kompetenser",
   "content": "Innehåll",
-  "create-path": "Skapa stig",
   "cv": {
     "basic-info": {
       "birthyear": "Födelseår",
@@ -51,7 +50,7 @@
       "title": "Favoriter"
     },
     "goals": {
-      "options": "Utbildningsalternativ",
+      "options": "Planalternativ",
       "title": "Mina mål"
     },
     "ingress": "Ägaren av kompetensvägsprofilen har delat denna länk så att du kan se deras information. Länken är giltig till och med {{date}}.",
@@ -67,7 +66,6 @@
     "title": "Kompetensprofil"
   },
   "date-or-continues-placeholder": "dd.mm.åååå",
-  "date-placeholder": "dd.mm.åååå",
   "datepicker": {
     "actions": {
       "close": "Stäng kalendern",
@@ -97,6 +95,7 @@
       "view": "Växla till dagsvy"
     }
   },
+  "date-placeholder": "dd.mm.åååå",
   "description": "Beskrivning",
   "description-for": "Beskrivning: {{description}}",
   "do-filter": "Filtrera",
@@ -114,10 +113,10 @@
     "delete-education-history": "Ta bort utbildning",
     "edit-degree-or-education": "Redigera examen eller utbildning",
     "edit-education": "Redigera utbildning",
-    "education-provider-or-education": "Utbildningsanordnare/utbildning",
     "educational-institution-or-education-provider": "Läroanstalt eller utbildningsanordnare",
+    "education-provider-or-education": "Utbildningsanordnare/utbildning",
     "identify-competences": "Identifiera kompetenser",
-    "import-education-history": "Importera min utbildningshistorik",
+    "import-education-history": "Importera din utbildningshistorik",
     "name-of-degree-or-education": "Namn på examen eller utbildning",
     "summary": "Sammanfattning"
   },
@@ -128,14 +127,11 @@
       "give-permission-failed": "Det gick inte att ge tillstånd. Försök på nytt senare.",
       "identify": "Identifiera",
       "no-identify": "Identifieras inte",
-      "success": "Utbildningshistoriken lades till.",
       "success-osaamiset-info": "Din utbildningshistorik har lagts till framgångsrikt.<br><br><strong>Vill du att vi automatiskt identifierar kompetensförslag från dina utbildningar med hjälp av artificiell intelligens?</strong><br><br>Förslagen kan innehålla fel, så vi rekommenderar att du kontrollerar dem. Du kan redigera kompetenser senare genom att lägga till eller ta bort dem i utbildningsinformationen.",
-      "success-osaamiset-link-about-ai": "Information om användningen av artificiell intelligens",
       "title": "Ska dina kompetenser identifieras?<AiIcon></AiIcon>",
       "tooltip": "Vi använder artificiell intelligens för att identifiera kompetenser. AI jämför ord och fraser med kända färdigheter och väljer de som bäst matchar informationen som hämtats från KOSKI-tjänsten.<br><br>Observera! AI kan göra misstag. Funktionen utvecklas fortfarande och identifierar inte alltid kompetenser från utbildningar korrekt."
     },
     "start-modal": {
-      "description": "Du kan importera din utbildningshistorik till din kompetensprofil när du har gett tillstånd i Studieinfo. Klicka på \"Öppna Studieinfo\" för att ge tillstånd att importera uppgifter. När du har gett ditt tillstånd återgår du automatiskt till tjänsten. När du har återgått till tjänsten kan du välja vilka utbildningar du vill importera.\n",
       "description-1": "I delen Mina studieprestationer i Min Studieinfo hittar du de studier och examina du har slutfört och som har sparats i de nationella studie-, utbildnings- och examensregistren. Du kan överföra dessa uppgifter till din kompetensprofil och kartlägga den kompetens som de ger.<br><CustomLink>Läs mer om dina studieprestationer i Studieinfo<Icon></Icon>.</CustomLink>",
       "description-2": "Du kan importera dina studieprestationer till avsnittet Utbildningshistorik i din kompetensprofil genom att ge tillstånd till detta i Studieinfo.<br>Välj <strong>Gå till Studieinfo</strong> och ge tillstånd att hämta uppgifterna. Därefter återvänder du automatiskt till tjänsten. När du har återvänt kan du välja vilka utbildningar du vill importera.",
       "import-button": "Gå till Studieinfo",
@@ -148,11 +144,10 @@
         "title": "Avbryt import"
       },
       "data-load-failed": "Laddning av uppgifter misslyckades. Försök på nytt senare.",
-      "data-load-no-data": "Utbildningsinformation hittades inte eller så har du inte rätt att granska informationen.",
       "data-loading": "Hämtar information...",
+      "data-load-no-data": "Utbildningsinformation hittades inte eller så har du inte rätt att granska informationen.",
       "description": "I den här vyn kan du välja vilka utbildningar du vill importera. Efter importen kan du redigera och komplettera informationen i vyn Mina utbildningar.",
       "error-title": "Misslyckades med att importera data",
-      "table-header-checkbox": "Importera valda",
       "title": "Din utbildningshistorik",
       "wrong-person": "Logga ut och logga sedan in på nytt och försök igen."
     }
@@ -181,7 +176,7 @@
       "banner-alt-text": "Studieinfo",
       "button-label": "Gå till Studieinfo",
       "description": "Du kan söka efter utbildningar i Studieinfo med namnet på denna möjlighet. Bekanta dig med alternativen och hitta utbildningar som passar dig.",
-      "title": "Öppna utbildningar hittar du behändigt i Studieinfo"
+      "title": "Du kan enkelt ansöka till utbildningarna på Studieinfo"
     }
   },
   "ended": "Slutade",
@@ -206,10 +201,8 @@
     "add-new-activity-button": "Lägg aktivitet",
     "add-new-free-time-activity": "Lägg till nytt fritidstema",
     "confirm-delete-activity": "Är du säker på att du vill ta bort fritidsverksamhet \"{{name}}\"?",
-    "confirm-delete-free-time-activity": "Är du säker på att du vill ta bort fritidsverksamheten \"{{name}}\"? Om fritidsverksamheten efter raderingen inte är kopplad till några behörigheter, raderas även fritidsfunktionen.",
     "confirm-delete-theme": "Är du säker på att du vill ta bort temat \"{{name}}\"?",
     "delete-activity": "Ta bort behörighet",
-    "delete-free-time-activity": "Ta bort fritidsverksamhet",
     "delete-theme": "Ta bort tema",
     "edit-activity": "Redigera fritidsverksamhet",
     "edit-free-time-theme": "Redigera fritidstema",
@@ -243,16 +236,10 @@
       "content": "Tjänsterna som du kan hitta i väglednings- och rådgivningstjänsterna hjälper dig att fundera på dina arbets- och utbildningsalternativ. Begränsa listan över tjänster enligt teman som intresserar dig och till exempel din bostadsort för att hitta de tjänster som passar dig bäst.",
       "link-text": "Gå till Väglednings- och rådgivningstjänster",
       "title": "Behöver du personlig vägledning?"
-    },
-    "welcome": {
-      "content": "Kompetensstigen-tjänsten har lanserats. Tjänsten utvecklas kontinuerligt baserat på användarfeedback. Funktioner kan förändras och nya funktioner kommer att läggas till regelbundet – tack för att du är med på resan!",
-      "title": "Välkommen till Kompetensstigen!"
     }
   },
   "how-to-use": {
     "create-profile-description": "I kompetensprofilen kan du spara din arbets- och utbildningshistorik och kartlägga ditt kunnande utifrån dem. Du kan spara favoriter, mål och planer. Du kan importera dina uppgifter från Jobbmarknaden och Studieinfo samt hantera användningen och delningen av dina uppgifter.",
-    "create-profile-disclaimer": "Obs! Innehåll som producerats med AI kan innehålla fel.",
-    "create-profile-more-info": "Läs mer: <CustomLink>Information om användningen av AI<Icon></Icon></CustomLink>",
     "create-profile-title": "Logga in och skapa en kompetensprofil",
     "education-history": "Utbildningshistorik",
     "find-opportunities-description": "Med hjälp av AI skapar vi individuella förslag på möjligheter som passar dig. Vi visar möjligheter utifrån hur väl de motsvarar uppgifterna du har angett.",
@@ -267,9 +254,9 @@
   },
   "i-allow": "Jag tillåter",
   "i-disallow": "Jag tillåter inte",
-  "in-this-section": "I den här delen",
   "interests": "Kartlägg dina intressen",
   "interests-of-your-choice": "Valda intressen",
+  "in-this-section": "I den här delen",
   "introduction": {
     "step-1": {
       "item-1": "Se all information om ditt kunnande och dina intressen på en och samma plats",
@@ -411,6 +398,7 @@
   "move-to-service": "Öppna tjänsten",
   "my-competence-path": "Min kompetensstig",
   "my-competence-profile": "Kompetensprofil",
+  "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning A — Ö",
   "my-competences": {
     "by-KOULUTUS": "Mina kunskaper från utbildningen",
     "by-MUU_OSAAMINEN": "Annan kompetens",
@@ -421,20 +409,19 @@
     "missing-TOIMENKUVA": "Inga kunskaper. Lägg till arbetsplatser.\n",
     "missing-TOIMINTO": "Inga kunskaper. Lägg till fritidsverksamhet.\n"
   },
-  "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning A — Ö",
   "my-competences-by-sources": "Mina kunskaper efter tema",
-  "n-education-opportunities": "{{count}} utbildningsmöjligheter",
-  "n-job-opportunities": "{{count}} karriärmöjligheter",
-  "n-months-short": "{{count}} mån",
-  "n-years_one": "{{count}} år",
-  "n-years_other": "{{count}} år",
   "navigation": {
     "main-section": {
       "title": "Personlig kompetensstig",
       "tool-title": "Hitta möjligheter"
     }
   },
+  "n-education-opportunities": "{{count}} utbildningsmöjligheter",
   "next": "Nästa",
+  "n-job-opportunities": "{{count}} karriärmöjligheter",
+  "n-months-short": "{{count}} mån",
+  "n-years_one": "{{count}} år",
+  "n-years_other": "{{count}} år",
   "on-this-page": "På denna sida",
   "opportunity-tooltip": {
     "education": {
@@ -483,14 +470,12 @@
   },
   "personal-details": {
     "birthyear": "Födelseår",
-    "choose-mother-tongue": "Välj modersmål",
     "email": "E-postadress",
     "gender": "Kön",
     "gender-female": "Kvinna",
     "gender-male": "Man",
     "gender-other": "Annat",
     "home-city": "Hemkommun",
-    "mother-tongue": "Modersmål",
     "name": "Namn"
   },
   "preferences": {
@@ -565,7 +550,7 @@
       "description": "Du kan permanent radera hela din kompetensprofil och alla uppgifter som finns lagrade i den. Du kan inte ångra raderingen. Obs! Du kan radera en vägledarprofil i avsnittet för vägledare.",
       "title": "Ta bort din kompetensprofil"
     },
-    "description": "På den här sidan kan du hantera inställningarna för din kompetensprofil och bestämma hur dina uppgifter ska användas. Du kan hantera tillstånd för användning av uppgifterna, ladda ner dina profiluppgifter eller radera din profil helt och hållet. Du bestämmer vilka uppgifter som du delar och med vem.",
+    "description": "På den här sidan kan du hantera inställningarna för din kompetensprofil och bestämma hur dina uppgifter ska användas. Du kan dela din profil med en länk, hantera tillstånd för användning av uppgifterna, ladda ner dina profiluppgifter eller radera din profil helt och hållet. Du bestämmer vilka uppgifter som du delar och med vem.",
     "download": {
       "action": "Ladda ner uppgifterna i min kompetensprofil (JSON)",
       "description": "Du kan ladda ner all information som sparats i din kompetensprofil till din egen enhet. Uppgifternas laddas i ett maskinläsbart JSON-format. JSON är ett enkelt och lätt öppet filformat för informationsförmedling och lagring.",
@@ -631,7 +616,7 @@
     },
     "tmt-import-export": {
       "continue-to-tmt": "Fortsätt till Jobbmarknaden",
-      "description": "Du kan importera och exportera dina uppgifter mellan Kompetensvägen och Jobbmarknaden. Uppgifterna uppdateras inte automatiskt, utan du bestämmer själv vilken information du vill överföra mellan tjänsterna.<br/><br/>Importerade uppgifter finns i din kompetensprofil. Exporterade uppgifter finns i din jobbsökarprofil på Jobbmarknaden. Kontrollera och redigera uppgifterna vid behov.<br/><br/><CustomLink>Gå till Jobbmarknaden för att se dina uppgifter<Icon></Icon></CustomLink>",
+      "description": "Du kan importera och exportera dina uppgifter mellan Kompetensvägen och Jobbmarknaden. Uppgifterna uppdateras inte automatiskt, utan du bestämmer själv vilken information du vill överföra mellan tjänsterna.<br/><br/>Importerade uppgifter finns i din kompetensprofil. Exporterade uppgifter finns i din jobbsökarprofil på Jobbmarknaden. Kontrollera och redigera uppgifterna vid behov.<br/><br/><CustomLink>Gå till Jobbmarknaden för att se dina uppgifter<Icon></Icon></CustomLink>.",
       "errors": {
         "forbidden": "Ett fel uppstod vid hanteringen av auktoriseringen.",
         "not-found": "Användaren hittades inte i Jobbmarknaden.",
@@ -695,10 +680,8 @@
         "header": "Fritt formulerad beskrivning av min kompetens",
         "placeholder": "Beskriv med egna ord vad annat du kan"
       },
-      "group": "Ordna",
       "group-by-alphabet": "Alfabetisk ordning A – Ö",
       "group-by-source": "Enligt tema",
-      "group-by-theme": "Enligt tema",
       "info": "Du kan själv välja vilken information från din kompetensprofil du vill använda när du söker möjligheter genom att importera den till sidan Hitta möjligheter.",
       "move-to-type": {
         "KOULUTUS": "Öppna mina utbildningar",
@@ -778,8 +761,6 @@
       "description": "Nedan hittar du alla dina intressen som du har lagt till i din kompetensprofil. Intressen grupperas enligt typ.",
       "edit-interests": "Redigera intressen",
       "empty": "Du har ännu inte lagt till några intressen.",
-      "free-form-description-of-my-interests": "Fritt formulerad beskrivning av mina intressen",
-      "free-form-interests-description-guidance": "Du kan skriva och beskriva dina intressen med egna ord. Texten som du skriver sparas automatiskt. Om du använder tjänsten på finska, skriv på finska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.\n",
       "freeform": {
         "description": "Du kan skriva och beskriva dina intressen med egna ord. Texten du skriver sparas automatiskt. Om du använder tjänsten på svenska, skriv på svenska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.",
         "header": "Fritt formulerad beskrivning av mina intressen",
@@ -801,7 +782,7 @@
       "list-2-item-3": "Använd din kompetensprofil för att hitta utbildnings- och karriärmöjligheter som passar just dig.",
       "login-heading": "Logga in på Kompetensstigen",
       "mpassid-button": "Logga in",
-      "mpassid-description": "Med MPASSid loggar du in med skolans inloggningsuppgifter. Tjänsten är avsedd för grund- och gymnasieskolor samt institutioner för liberal vuxenutbildning och aktörer inom småbarnspedagogik.",
+      "mpassid-description": "Logga in med din läroanstalts användaruppgifter. Stäng webbläsaren efter användningen eller logga ut från enheten, eftersom MPASSid inte erbjuder någon separat utloggning.",
       "mpassid-title": "MPASSid-inloggning",
       "page-title": "Logga in i tjänsten\n",
       "paragraph-2": "Hur hjälper kompetensprofilen dig?",
@@ -809,39 +790,39 @@
       "paragraph-4": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på lagen om den nationella informationsresursen för kompetenser. Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.\n",
       "profile-includes": "Vad innehåller kompetensprofilen?",
       "suomifi-button": "Identifiera dig",
-      "suomifi-description": "Identifiera dig med nätbankskoder eller mobiltjänst för att komma åt och redigera din personliga kompetensprofil och förbättra relevansen av innehåll som tjänsten rekommenderar.",
+      "suomifi-description": "Identifiera dig med dina bankuppgifter eller mobilcertifikat. När du är inloggad kan du redigera din personliga kompetensprofil och få innehållsrekommendationer som passar dig bättre.",
       "suomifi-title": "Suomi.fi-identifiering",
       "title": "Skapa din egen kompetensprofil!"
     },
     "my-goals": {
       "add-competence-description": "Lägg till kompetens från +-ikonen",
-      "add-custom-plan": "Skapa eget alternativ",
-      "add-custom-plan-description": "Om du inte hittar ett lämpligt utbildningsalternativ från förslagen kan du lägga till ditt eget alternativ. Ange först ett namn och en kort beskrivning, och välj sedan de kompetenser du vill uppnå med alternativet.",
-      "add-custom-plan-header": "Skapa eget alternativ",
+      "add-custom-plan": "Skapa egen",
+      "add-custom-plan-description": "Skapa en egen utbildningsplan genom att först ge den ett namn och en kort beskrivning. Välj sedan de kompetenser du vill uppnå med planen.",
+      "add-custom-plan-header": "Skapa egen plan",
       "add-favorites-dialog-action": "Lägg till favoriter",
-      "add-favorites-dialog-description": "Du kan inte skapa ett mål än eftersom du inte har några lämpliga favoriter sparade. Lägg först till yrken eller arbetsmöjligheter som intresserar dig i dina favoriter – sedan kan du sätta mål från dem.",
+      "add-favorites-dialog-description": "Du kan inte skapa ett mål än eftersom du inte har några favoriter sparade. Lägg först till yrken eller jobbmöjligheter som intresserar dig i dina favoriter – sedan kan du sätta mål från dem.",
       "add-favorites-dialog-title": "Lägg till favoriter först",
-      "add-favorites-to-goals": "Skapa nytt mål",
+      "add-favorites-to-goals": "Lägg till nytt mål",
       "add-goal-failed": "Misslyckades med att skapa mål – försök igen",
       "add-goal-success": "Mål skapat",
       "add-modal-description": "Ge målet ett namn och en beskrivning. Namnet visas i listorna och i beskrivningen kan du beskriva mer utförligt vad du vill uppnå och eventuella begränsningar.",
       "add-modal-title": "Skapa nytt mål",
-      "add-new-plan-description": "Väg olika utbildningsmöjligheter och välj ett eller flera alternativ som tar dig mot ditt mål.",
-      "add-new-plan-for-goal": "Lägg till utbildningsalternativ",
-      "add-new-plan-header": "Lägg till nytt utbildningsalternativ",
+      "add-new-plan-description": "Väg olika utbildningsmöjligheter och välj ett eller flera alternativ som alternativa planer mot ditt mål",
+      "add-new-plan-for-goal": "Lägg till plan",
+      "add-new-plan-header": "Skapa ny plan",
       "add-plan-failed": "Misslyckades med att lägga till planen – försök igen",
       "add-plan-success": "Planen har lagts till",
       "adjust-list": "Justera listan",
-      "choose-as-plan": "Välj",
+      "choose-as-plan": "Välj som plan",
       "choose-favorite-description": "Välj yrke eller arbetsmöjlighet från dina favoriter som du vill ställa in som mål",
       "choose-favorite-header": "Välj mål från favoriter",
       "competence-compare": "Kompetensjämförelse",
       "competence-description": "Till vänster listas de kompetenser som krävs för ditt mål. Till höger kan du se vad du redan kan och vad du kan lära dig från de utbildningsalternativ du har valt. Dina egna kompetenser baseras på dina profiluppgifter.",
       "competence-requirement-for-goal": "Kompetenskrav för mål",
       "competences": "Kompetenser",
-      "custom-plan-competences-description": "Välj de kompetenser som krävs för målet och som du planerar att uppnå med ditt eget utbildningsalternativ.",
-      "custom-plan-description": "Eget utbildningsalternativs beskrivning",
-      "custom-plan-name": "Eget utbildningsalternativs namn",
+      "custom-plan-competences-description": "Välj de kompetenser som krävs för målet och som du planerar att uppnå med din egen utbildningsplan.",
+      "custom-plan-description": "Egen plans beskrivning",
+      "custom-plan-name": "Egen plans namn",
       "delete-goal": "Ta bort mål",
       "delete-goal-description": "Vill du verkligen ta bort detta mål?",
       "delete-goal-failed": "Misslyckades med att ta bort mål – försök igen",
@@ -858,7 +839,7 @@
       "edit-plan-success": "Planen har uppdaterats",
       "favorites-card": {
         "description": "Utforska utbildnings- och karriärmöjligheter. Lägg till de mest intressanta som favoriter och gör dem till dina egna mål.",
-        "title": "Upptäck möjligheter"
+        "title": "Hitta dina favoriter"
       },
       "filters": {
         "favorites": {
@@ -867,25 +848,21 @@
         },
         "other-options-title": "Övriga alternativ"
       },
-      "goal": "Mål",
       "goal-description": "Målbeskrivning",
       "goal-name": "Målnamn",
       "modify-goal": "Redigera mål",
-      "my-plan-towards-goal": "Utbildningsalternativ",
-      "n-plans_one": "1 utbildningsalternativ",
-      "n-plans_other": "{{count}} utbildningsalternativ",
-      "n-plans_zero": "Du har inte lagt till några utbildningsalternativ ännu",
+      "my-plan-towards-goal": "Planalternativ",
       "no-chosen-competences": "Inga valda kompetenser",
-      "no-favorites-selected": "Lägg till ett yrke eller en arbetsmöjlighet som favorit för att skapa mål",
+      "no-favorites-selected": "Lägg först till favoriter som du kan skapa mål från.",
       "no-filtered-results": "Inga utbildningsmöjligheter. Justera filtren för att se alternativ.",
-      "no-goals-created": "Du har inte skapat några mål ännu.",
+      "no-goals-created": "Du har inte lagt till några mål än.",
+      "n-plans_zero": "Du har inte lagt till några planer ännu",
       "own-competences": "Egna kompetenser",
-      "plan": "Mål",
       "remove-competence-description": "Ta bort kompetens från x-ikonen",
       "remove-from-goals": "Ta bort från mål",
-      "remove-from-plans": "Avmarkera val",
+      "remove-from-plans": "Ta bort plan",
       "required-competences": "Kompetenser som krävs för målet",
-      "selected-competences": "Valda kompetenser i egen alternativ",
+      "selected-competences": "Valda kompetenser i egen plan",
       "set-to-goal": "Sätt som mål",
       "show-goal": "Visa mål",
       "title": "Mål",
@@ -909,20 +886,17 @@
       "list-3-item-1": "vilka uppgifter du sparar",
       "list-3-item-2": "vad dina uppgifter används för",
       "list-3-item-3": "vem som kan se din profil",
-      "list-3-item-4": "hur andra kan utnyttja din profil.",
+      "list-3-item-4": "hur andra kan utnyttja din profil",
       "list-3-title": "Profilen är din! Du bestämmer:",
       "paragraph-1": "När du fyller i dessa uppgifter noggrant får du förslag på jobb och utbildningar som passar just dig.",
-      "paragraph-2": "När du fyller i dessa uppgifter noggrant får du förslag på jobb och utbildningar som passar just dig.\n\nDu kan också:",
       "paragraph-3": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på lagen om den nationella informationsresursen för kompetenser (<CustomLink>https://www.finlex.fi/sv/lagstiftning/2025/1449</CustomLink>). <CustomLink2>Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.</CustomLink2>",
       "paragraph-3-link": "https://www.finlex.fi/sv/lagstiftning/2025/1449",
-      "title": "Inställningar",
-      "you-are-signed-in": "Kompetensprofilen är en plats där du kan spara och hantera dina uppgifter. I kompetensprofilen kan du:\n"
+      "paragraph-4": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på lagen om den nationella informationsresursen för kompetenser. <CustomLink>Läs mer om grunderna för behandlingen av uppgifter i dataskyddsbeskrivningen.</CustomLink>",
+      "title": "Inställningar"
     },
     "something-else": {
       "description": "Nedan hittar du dina övriga kunskaper. Du kan lägga till och ta bort kompetenser med redigera kompetenser-knappen.\t",
       "empty": "Du har ännu inte lagt till några andra kunskaper.",
-      "free-form-description-of-my-interests": "Fritt formulerad beskrivning av min kompetens",
-      "free-form-interests-description-guidance": "Du kan skriva och beskriva ditt kunnande med egna ord. Om du använder tjänsten på finska, skriv på finska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.",
       "my-other-comptetences": "Mina kunskaper",
       "title": "Annan kompetens"
     },
@@ -957,7 +931,6 @@
     "dislike": "Jag gillar inte",
     "icon": "Innehåll genererat av artificiell intelligens",
     "kohtaanto": {
-      "body": "På den här sidan föreslår vi lämpliga möjligheter utifrån de uppgifter som du har angett. Berätta hur vi lyckades.",
       "header": "Utvärdera de möjligheter som föreslås för dig"
     },
     "like": "Jag gillar",
@@ -1007,7 +980,6 @@
   "remove-favorite": "Ta bort från favoriter",
   "remove-favorite-opportunity-confirmation": "Är du säker på att du vill ta bort möjligheten \"{{name}}\" från dina favoriter?",
   "save": "Spara",
-  "save-and-close": "Spara och stäng",
   "search": {
     "clear": "Rensa sökning",
     "description": "Du kan söka efter möjligheter med hjälp av fritextsökning. Du kan påverka synligheten av resultaten genom att filtrera listan.",
@@ -1028,19 +1000,6 @@
   "service-catalog": {
     "description": "Du hittar en vägledningstjänst som passar dina behov här.",
     "header": "Behöver du råd och vägledning för att hitta din egen riktning?"
-  },
-  "session": {
-    "expired": {
-      "continue": "Fortsätt utan att logga in",
-      "description": "Hur vill du fortsätta?",
-      "login": "Logga in på nytt",
-      "title": "Din session har gått ut"
-    },
-    "warning": {
-      "continue": "Fortsätt användningen",
-      "description": "Fortsätt använda tjänsten som inloggad.",
-      "title": "Din session går snart ut"
-    }
   },
   "show": "Visa",
   "show-less": "Visa mindre",
@@ -1064,7 +1023,7 @@
       "interests": "intressen",
       "login": "logga-in",
       "preferences": "installningar",
-      "something-else": "annan-kompetens",
+      "something-else": "annan-kunskaper",
       "work-history": "arbetsplatser"
     },
     "search": "sok",
@@ -1141,8 +1100,7 @@
           "selected-tab": "Kunskaper",
           "start": "Låt oss börja – berätta först vad du kan just nu?",
           "title": "Kartläggning av kunskaper",
-          "x-added": "{{count}} kunskaper tillagda",
-          "x-competences-added": "{{count}} kunskaper tillagda"
+          "x-added": "{{count}} kunskaper tillagda"
         }
       },
       "export": {
@@ -1154,26 +1112,17 @@
         "no-data-title": "Ingen kartlagd data"
       },
       "interests": {
-        "conversational-virtual-assistant": "Identifiera intressen med artificiell intelligens",
         "virtual-assistant": {
-          "conversation": "Konversation",
           "description": "Hej! Jag är en bot och hjälper dig att hitta dina intressen. Prata med mig så får du förslag som du kan välja de som passar dig bäst. Ange inte personuppgifter till boten.",
-          "error": "Fel vid generering av svar. Försök igen med samma eller ny input.",
-          "intrests": "Intressen",
-          "loading": "Hämtar svar... Vänligen vänta ett ögonblick.",
           "open": "Identifiera intressen med artificiell intelligens",
           "open-tooltip": {
             "description-1": "Du kan kartlägga dina intressen också genom att samtala med artificiell intelligens. AI hjälper dig att fundera på vad du kan och vad du är intresserad av, och den kan föreslå alternativ som passar dig."
           },
-          "respond-to-chat": "Svara till boten...",
           "selected": "Valda intressen",
-          "selected-interests": "Valda intressen",
           "selected-tab": "Intressen",
-          "send": "Skicka",
           "start": "Låt oss börja – berätta först vad som intresserar dig just nu?",
           "title": "Kartläggning av intressen",
-          "x-added": "{{count}} intressen tillagda",
-          "x-interests-added": "{{count}} intressen tillagda"
+          "x-added": "{{count}} intressen tillagda"
         }
       },
       "title": "Dina uppgifter",
@@ -1187,8 +1136,7 @@
         },
         "respond-to-chat": "Svara till boten...",
         "send": "Skicka",
-        "session-expired": "Konversationssessionen har gått ut. Starta en ny konversation vid behov.",
-        "start": "Låt oss börja – berätta först vad som intresserar dig just nu?"
+        "session-expired": "Konversationssessionen har gått ut. Starta en ny konversation vid behov."
       }
     },
     "opportunities-loaded": "Möjligheter laddade. Totalt {{count}} möjligheter hittades.",
@@ -1219,18 +1167,13 @@
       },
       "modal-title": "Justera möjligheter",
       "reset": "Ta bort valen",
-      "toggle-close": "Stäng reglage",
       "toggle-open": "Visa reglage",
       "toggle-open_one": "Visa reglage ({{count}})",
       "toggle-open_other": "Visa reglage ({{count}})",
-      "toggle-open_zero": "Visa reglage",
-      "toggle-title-closed": "Visa reglage",
-      "toggle-title-open": "Uppdatera och stäng",
-      "toggle-update-close": "Uppdatera och stäng"
+      "toggle-open_zero": "Visa reglage"
     },
     "title": "Hitta möjligheter",
     "tools": {
-      "career-skills-self-assessment-tool": "Verktyg för självutvärdering av karriärkompetens",
       "compass-additional-resource": "<CustomLink>Kompetensbehovs­kompassen<Icon></Icon></CustomLink> erbjuder information om arbetslivets kompetensbehov.",
       "compass-url": "https://www.osaamistarvekompassi.fi",
       "counseling-additional-resource": "<CustomLink>Väglednings- och rådgivningstjänster<Icon></Icon></CustomLink> samlar tjänster där du kan få stöd i att reflektera över karriär- och utbildningsalternativ, vilket hjälper dig att bedöma och utveckla dina färdigheter i karriärplanering.",
@@ -1240,11 +1183,8 @@
       "free-time-activities": "Fritidsaktiviteter",
       "guidance-practitioner-additional-resource": "Du kan också självständigt ta del av <CustomLink>materialet i Kompetensstigens Vägledar-delen.<Icon></Icon></CustomLink>",
       "guidance-practitioner-url": "https://osaamispolku.fi/ohjaaja",
-      "help-text": "Som inloggad användare kan du kartlägga kompetenser och intressen mer detaljerat i kompetensprofilen.\n",
-      "help-text-2": "Om du behöver hjälp med att fundera på din situation kan följande webbplatser hjälpa dig.\n",
       "reveal-your-skills-additional-resource": "<CustomLink>Upptäck ditt kunnande<Icon></Icon></CustomLink> inspirerar och uppmuntrar människor och gemenskaper att uppmärksamma sin kompetens samt väcker diskussion om betydelsen av att synliggöra kompetens.",
       "reveal-your-skills-url": "https://www.jotpa.fi/sv/om-oss/projekt/upptack-ditt-kunnande",
-      "service-directory": "Väglednings- och rådgivningstjänster",
       "something-else": "Annan kompetens",
       "title": "Stöd för reflektion",
       "urataidot-additional-resource": "<CustomLink>Självutvärdering av karriärkompetenser<Icon></Icon></CustomLink> är ett digitalt verktyg som hjälper dig att bedöma och utveckla dina färdigheter i karriärplanering.",
@@ -1253,7 +1193,6 @@
     "tour": {
       "buttons": {
         "close": "Stäng",
-        "done": "Hitta möjligheter",
         "next": "Nästa",
         "previous": "Föregående"
       },

@@ -26,7 +26,6 @@
   "competences-identifying": "You can edit the education once the competencies have been loaded.",
   "competences-of-your-choice": "Selected competences",
   "content": "Content",
-  "create-path": "Create path",
   "cv": {
     "basic-info": {
       "birthyear": "Year of birth",
@@ -51,7 +50,7 @@
       "title": "Favourites"
     },
     "goals": {
-      "options": "Education options",
+      "options": "Goal plans",
       "title": "Goals"
     },
     "ingress": "The owner of the competence path profile has shared this link so you can view their information. The link is valid until {{date}}.",
@@ -67,7 +66,6 @@
     "title": "Competence profile"
   },
   "date-or-continues-placeholder": "dd.mm.yyyy",
-  "date-placeholder": "dd.mm.yyyy",
   "datepicker": {
     "actions": {
       "close": "Close calendar",
@@ -97,6 +95,7 @@
       "view": "Switch to day view"
     }
   },
+  "date-placeholder": "dd.mm.yyyy",
   "description": "Description",
   "description-for": "Description: {{description}}",
   "do-filter": "Filter",
@@ -114,10 +113,10 @@
     "delete-education-history": "Delete education",
     "edit-degree-or-education": "Edit degree or education",
     "edit-education": "Edit education",
-    "education-provider-or-education": "Education organiser / education",
     "educational-institution-or-education-provider": "Educational institution or education organiser",
+    "education-provider-or-education": "Education organiser / education",
     "identify-competences": "Identify competences",
-    "import-education-history": "Import my education history",
+    "import-education-history": "Import your education history",
     "name-of-degree-or-education": "Name of degree or education",
     "summary": "Summary"
   },
@@ -128,14 +127,11 @@
       "give-permission-failed": "Failed to grant permission. Please try again later.",
       "identify": "Identify",
       "no-identify": "Do not identify",
-      "success": "Education history added successfully.",
       "success-osaamiset-info": "Education history added successfully.<br><br><strong>Do you want us to automatically identify competence suggestions from your education using artificial intelligence?</strong><br><br>The suggestions may contain errors, so we recommend checking them. You can edit competences later by adding or removing them in the education details.",
-      "success-osaamiset-link-about-ai": "About the use of artificial intelligence",
       "title": "Identify your competences?<AiIcon></AiIcon>",
       "tooltip": "We use artificial intelligence to identify competences. The AI compares words and phrases to known skills and selects those that best match the information retrieved from the KOSKI service.<br><br>Note! The AI may make mistakes. The feature is still being developed, and it does not always correctly identify competences from education."
     },
     "start-modal": {
-      "description": "You can import your education history to your competence profile once you have granted permission in Studyinfo. Click \"Go to Studyinfo\" to grant permission to import data. After granting permission, you will automatically return to the service. Once you return, you can choose which educations you want to import.",
       "description-1": "In the My completed studies section of My Studyinfo, you can find the studies and qualifications you have completed, which have been stored in the national study, education and qualification registers. You can transfer this information to your competence profile and review the skills accumulated from them.<br><CustomLink>Read more about your study records in Studyinfo<Icon></Icon>.</CustomLink>",
       "description-2": "You can import your study records into the Education History section of your competence profile by granting permission in Studyinfo.<br>Select <strong>Go to Studyinfo</strong> and allow the data transfer. After this, you will automatically return to the service. Once you return, you can choose which studies you want to import.",
       "import-button": "Go to Studyinfo",
@@ -148,11 +144,10 @@
         "title": "Cancel import"
       },
       "data-load-failed": "Failed to load data. Please try again later.",
-      "data-load-no-data": "The education data could not be found or you do not have permission to view the data.",
       "data-loading": "Loading information...",
+      "data-load-no-data": "The education data could not be found or you do not have permission to view the data.",
       "description": "In this view, you can select which educations you want to import. After the import, you can edit and complete the information in the My Educations view.",
       "error-title": "Failed to import data",
-      "table-header-checkbox": "Import selected",
       "title": "Your education history",
       "wrong-person": "Please log out and log in again and try again."
     }
@@ -182,7 +177,7 @@
       "banner-alt-text": "Studyinfo",
       "button-label": "Go to Studyinfo",
       "description": "You can search for education in Studyinfo by the name of this opportunity. Explore the options and find the right education for you.",
-      "title": "You can easily find open education in Studyinfo"
+      "title": "You can conveniently apply to study programmes on StudyInfo."
     }
   },
   "ended": "Finished",
@@ -207,10 +202,8 @@
     "add-new-activity-button": "Add activity",
     "add-new-free-time-activity": "Add new recreational theme",
     "confirm-delete-activity": "Are you sure you want to delete the activity \"{{name}}\"?",
-    "confirm-delete-free-time-activity": "Are you sure you want to delete the recreational activity \"{{name}}\"? If there are no more qualifications associated with the recreational activity after deletion, the recreational activity will also be deleted.",
     "confirm-delete-theme": "Are you sure you want to delete the theme \"{{name}}\"?",
     "delete-activity": "Delete qualification",
-    "delete-free-time-activity": "Delete recreational activity",
     "delete-theme": "Delete theme",
     "edit-activity": "Edit recreational activity",
     "edit-free-time-theme": "Edit recreational theme",
@@ -244,16 +237,10 @@
       "content": "The services found under guidance and counselling services help you consider your work and education options. Narrow the list of services based on themes that interest you and, for example, where you live to find the most suitable services for you.",
       "link-text": "Go to Guidance and counseling services",
       "title": "Do you need personal guidance?"
-    },
-    "welcome": {
-      "content": "Competency Path service has been launched. The service is continuously developed based on user feedback. Features may change and new functionalities will be added regularly – thank you for being part of the journey!",
-      "title": "Welcome to Competency Path!"
     }
   },
   "how-to-use": {
     "create-profile-description": "In the competence profile, you can save your work and education history and map your competences based on them. You can save favourites, goals and plans. You can import your data from Job Market Finland and Studyinfo and manage the use and sharing of your data.",
-    "create-profile-disclaimer": "Please note: AI-generated content may contain errors.",
-    "create-profile-more-info": "Read more: <CustomLink>Information on the use of AI<Icon></Icon></CustomLink>",
     "create-profile-title": "Log in and create a competence profile",
     "education-history": "Education history",
     "find-opportunities-description": "We use AI to create personalised suggestions for opportunities that suit you. We show opportunities based on how well they match the information you have provided.",
@@ -268,9 +255,9 @@
   },
   "i-allow": "I allow",
   "i-disallow": "I do not allow",
-  "in-this-section": "In this section",
   "interests": "Map out your interests",
   "interests-of-your-choice": "Selected interests",
+  "in-this-section": "In this section",
   "introduction": {
     "step-1": {
       "item-1": "See all information related to your competences and interests in one place",
@@ -412,6 +399,7 @@
   "move-to-service": "Go to service",
   "my-competence-path": "My Competency Path",
   "my-competence-profile": "Competence profile",
+  "my-competences-alphabetically": "My competences alphabetically A — Z",
   "my-competences": {
     "by-KOULUTUS": "My competences accumulated from education",
     "by-MUU_OSAAMINEN": "Other competences",
@@ -422,20 +410,19 @@
     "missing-TOIMENKUVA": "No competences. Go to add jobs.",
     "missing-TOIMINTO": "No competences. Go to add recreational activities."
   },
-  "my-competences-alphabetically": "My competences alphabetically A — Z",
   "my-competences-by-sources": "My competences by theme",
-  "n-education-opportunities": "{{count}} of {{total}} education opportunities",
-  "n-job-opportunities": "{{count}} of {{total}} career opportunities",
-  "n-months-short": "{{count}} months",
-  "n-years_one": "{{count}} year",
-  "n-years_other": "{{count}} years",
   "navigation": {
     "main-section": {
       "title": "Personal Competency Path",
       "tool-title": "Find opportunities"
     }
   },
+  "n-education-opportunities": "{{count}} of {{total}} education opportunities",
   "next": "Next",
+  "n-job-opportunities": "{{count}} of {{total}} career opportunities",
+  "n-months-short": "{{count}} months",
+  "n-years_one": "{{count}} year",
+  "n-years_other": "{{count}} years",
   "on-this-page": "On this page",
   "opportunity-tooltip": {
     "education": {
@@ -484,14 +471,12 @@
   },
   "personal-details": {
     "birthyear": "Year of birth",
-    "choose-mother-tongue": "Choose mother tongue",
     "email": "Email address",
     "gender": "Gender",
     "gender-female": "Female",
     "gender-male": "Male",
     "gender-other": "Other",
     "home-city": "Home city",
-    "mother-tongue": "Mother tongue",
     "name": "Name"
   },
   "preferences": {
@@ -566,7 +551,7 @@
       "description": "You can permanently delete your entire competence profile and all information stored in it. The deletion cannot be reversed. Note! You can delete the guidance practitioner profile in the Guidance practitioner section.",
       "title": "Delete your competence profile"
     },
-    "description": "On this page you can manage your competence profile settings and decide how your data will be used. You can manage permissions for data use, download your profile data or delete your profile completely. You decide what information you share and with whom.",
+    "description": "On this page you can manage your competence profile settings and decide how your data will be used. You can use the link to share your profile, manage permissions for data use, download your profile data or delete your profile completely. You decide what information you share and with whom.",
     "download": {
       "action": "Download my competence profile data (JSON)",
       "description": "You can download all the data stored in your competence profile to your device. The data is generated in a machine-readable JSON format. JSON is a simple and lightweight open standard file format for data transfer and storage.",
@@ -632,7 +617,7 @@
     },
     "tmt-import-export": {
       "continue-to-tmt": "Continue to Job Market Finland",
-      "description": "You can import and export your data between Competence Path and Job Market Finland. The data does not update automatically; you decide what information you want to transfer between the services.<br/><br/>Imported data can be found in your competence profile. Exported data can be found in your Job Market Finland jobseeker profile. Check and edit the data as needed.<br/><br/><CustomLink>Go to Job Market Finland to view your data<Icon></Icon></CustomLink>",
+      "description": "You can import and export your data between Competence Path and Job Market Finland. The data does not update automatically; you decide what information you want to transfer between the services.<br/><br/>Imported data can be found in your competence profile. Exported data can be found in your Job Market Finland jobseeker profile. Check and edit the data as needed.<br/><br/><CustomLink>Go to Job Market Finland to view your data<Icon></Icon></CustomLink>.",
       "errors": {
         "forbidden": "An error occurred while processing the authorization.",
         "not-found": "User not found in Job Market Finland.",
@@ -696,10 +681,8 @@
         "header": "Text description of my competences",
         "placeholder": "Describe in your own words what else you can do"
       },
-      "group": "Sort",
       "group-by-alphabet": "Alphabetical order A – Z",
       "group-by-source": "By theme",
-      "group-by-theme": "By theme",
       "info": "You can choose which of your Competence profile data you use to search for opportunities by accessing them on the Find opportunities page.",
       "move-to-type": {
         "KOULUTUS": "Go to educations",
@@ -779,8 +762,6 @@
       "description": "Below, you will find all of your interests that you have added to your competence profile. The interests are grouped by type.",
       "edit-interests": "Edit interests",
       "empty": "You have not added any interests yet.",
-      "free-form-description-of-my-interests": "Free text description of my interests",
-      "free-form-interests-description-guidance": "You can write and describe your interests in your own words. The text you enter is saved automatically. If you use the service in Finnish, please write in Finnish. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
       "freeform": {
         "description": "You can write and describe your interests in your own words. The text you enter is saved automatically. If you use the service in English, please write in English. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
         "header": "Free-form description of my interests",
@@ -802,7 +783,7 @@
       "list-2-item-3": "Use your competence profile to find the right education and career opportunities for you.",
       "login-heading": "Log in to Competency Path",
       "mpassid-button": "Log in",
-      "mpassid-description": "With MPASSid, you log in using your school credentials. The service is intended for primary, secondary and liberal adult education institutions and early childhood education providers.",
+      "mpassid-description": "Log in with your educational institution credentials. After use, close the browser or log out of the device, as MPASSid does not provide a separate logout option.",
       "mpassid-title": "MPASSid login",
       "page-title": "Log in to the service",
       "paragraph-2": "How can the competence profile help you?",
@@ -810,39 +791,39 @@
       "paragraph-4": "The processing of competence profile data is based on the Act on the national competence database for continuous learning. Read more about the grounds for data processing in the privacy policy.",
       "profile-includes": "What competence profile includes?",
       "suomifi-button": "Identify yourself",
-      "suomifi-description": "Identify yourself using online banking credentials or a mobile certificate to access and edit your personal Competence Profile and improve the relevance of content recommended by the service.",
+      "suomifi-description": "Identify yourself with your bank credentials or mobile certificate. Once logged in, you can edit your personal Competency Profile and get content recommendations that are more suitable for you.",
       "suomifi-title": "Suomi.fi identification",
       "title": "Create your own competence profile!"
     },
     "my-goals": {
       "add-competence-description": "Add competence by clicking +",
-      "add-custom-plan": "Create your own option",
-      "add-custom-plan-description": "If you cannot find a suitable education option from the suggestions, you can add your own option. First, provide a name and a short description, and then select the competences you want to achieve with the option.",
-      "add-custom-plan-header": "Create your own option",
+      "add-custom-plan": "Create your own",
+      "add-custom-plan-description": "Create your own education plan by first giving it a name and a short description. Then, select the competences you want to achieve with the plan.",
+      "add-custom-plan-header": "Create your own plan",
       "add-favorites-dialog-action": "Add favorites",
-      "add-favorites-dialog-description": "You cannot create a goal yet because you do not have suitable favorites saved. First, add professions or job opportunities that interest you to your favorites – then you can set goals from them.",
+      "add-favorites-dialog-description": "You cannot create a goal yet because you do not have any favorites saved. First, add professions or job opportunities that interest you to your favorites – then you can set goals from them.",
       "add-favorites-dialog-title": "Add favorites first",
-      "add-favorites-to-goals": "Create new goal",
+      "add-favorites-to-goals": "Add new goal",
       "add-goal-failed": "Failed to create goal – please try again",
       "add-goal-success": "Goal created",
       "add-modal-description": "Enter a name and description for the goal. The name is shown in the lists, and you can use the description to more broadly describe what you want to achieve and any restrictions.",
       "add-modal-title": "Create a new goal",
-      "add-new-plan-description": "Consider the different education opportunities and select one or more education options towards your goal.",
-      "add-new-plan-for-goal": "Add education option",
-      "add-new-plan-header": "Add new education option",
+      "add-new-plan-description": "Consider the different education opportunities and select one or more alternative plans towards your goal",
+      "add-new-plan-for-goal": "Add plan",
+      "add-new-plan-header": "Create a new plan",
       "add-plan-failed": "Failed to add plan – please try again",
       "add-plan-success": "Plan added",
       "adjust-list": "Adjust list",
-      "choose-as-plan": "Select",
+      "choose-as-plan": "Select as plan",
       "choose-favorite-description": "Choose a profession or employment opportunity from your favorites that you want to set as a goal",
       "choose-favorite-header": "Select goal from favourites",
       "competence-compare": "Compare competences",
       "competence-description": "On the left, the competences required for your goal are listed. On the right, you can see what you already know and what you can learn from the education options you have selected. Your own competences are based on your profile data.",
       "competence-requirement-for-goal": "Competence required for goal",
       "competences": "Competences",
-      "custom-plan-competences-description": "Create your own option by first giving it a name and a short description. Then select the competences you want to achieve with the option.",
-      "custom-plan-description": "Description of own option",
-      "custom-plan-name": "Name of own option",
+      "custom-plan-competences-description": "Create your own education plan by first giving it a name and a short description. Then select the competences you want to achieve with the plan.",
+      "custom-plan-description": "Description of own plan",
+      "custom-plan-name": "Name of own plan",
       "delete-goal": "Delete goal",
       "delete-goal-description": "Are you sure you want to delete this goal?",
       "delete-goal-failed": "Failed to delete goal – please try again",
@@ -859,7 +840,7 @@
       "edit-plan-success": "Plan updated",
       "favorites-card": {
         "description": "Explore education and career opportunities. Add the most interesting ones to your favorites and make them your own goals.",
-        "title": "Discover opportunities"
+        "title": "Find your favorites"
       },
       "filters": {
         "favorites": {
@@ -868,25 +849,21 @@
         },
         "other-options-title": "Other options"
       },
-      "goal": "Goal",
       "goal-description": "Description of the goal",
       "goal-name": "Name of the goal",
       "modify-goal": "Edit goal",
-      "my-plan-towards-goal": "Education options",
-      "n-plans_one": "1 education option",
-      "n-plans_other": "{{count}} education options",
-      "n-plans_zero": "You have not added any education options yet",
+      "my-plan-towards-goal": "Plan options",
       "no-chosen-competences": "No selected competences",
-      "no-favorites-selected": "Add a profession or job opportunity to your favorites to create goals",
+      "no-favorites-selected": "Add favorites first, from which you can create goals.",
       "no-filtered-results": "No education opportunities. Adjust the filters to see options.",
-      "no-goals-created": "You have not created any goals yet.",
+      "no-goals-created": "You have not added any goals yet.",
+      "n-plans_zero": "You haven’t added any plans yet",
       "own-competences": "My competences",
-      "plan": "Option",
       "remove-competence-description": "Remove competence by clicking the x character",
       "remove-from-goals": "Remove from goals",
-      "remove-from-plans": "Remove selection",
+      "remove-from-plans": "Delete plan",
       "required-competences": "Competences required for the goal",
-      "selected-competences": "Competences selected for my option",
+      "selected-competences": "Competences selected for my plan",
       "set-to-goal": "Set as goal",
       "show-goal": "Show goal",
       "title": "Goals",
@@ -913,17 +890,14 @@
       "list-3-item-4": "how can others use your profile.",
       "list-3-title": "Your profile is yours! You decide:",
       "paragraph-1": "By filling in this information carefully, you will receive suggestions for jobs and educations that may be right for you.",
-      "paragraph-2": "By filling in this information carefully, you will receive suggestions for jobs and educations that are right for you.\n\nYou can also:",
       "paragraph-3": "The processing of competence profile data is based on the act on the national competence data repository (<CustomLink>https://www.finlex.fi/en/legislation/2025/1449</CustomLink>). <CustomLink2>Read more about the grounds for data processing in the privacy policy<CustomLink2>.",
       "paragraph-3-link": "https://www.finlex.fi/en/legislation/2025/1449",
-      "title": "Settings",
-      "you-are-signed-in": "The competence Profile is where you can save and manage your own information. In the competence profile, you can:"
+      "paragraph-4": "The processing of competence profile data is based on the Act on the national digital service package for continuous learning. <CustomLink>Read more about the grounds for data processing in the privacy policy.</CustomLink>",
+      "title": "Settings"
     },
     "something-else": {
       "description": "Find your other competences below. You can add and remove competences by clicking the Edit competences button.",
       "empty": "You have not added any other competences yet.",
-      "free-form-description-of-my-interests": "Free text description of my competence",
-      "free-form-interests-description-guidance": "You can write and describe your competence in your own words. If you use the service in Finnish, please write in Finnish. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
       "my-other-comptetences": "My competence",
       "title": "Other competences"
     },
@@ -958,7 +932,6 @@
     "dislike": "I don't like it",
     "icon": "AI-generated content",
     "kohtaanto": {
-      "body": "Based on the information you have entered, this page suggests options that are suitable for you. Tell us how we succeeded.",
       "header": "Evaluate the opportunities suggested to you"
     },
     "like": "I like it",
@@ -1008,7 +981,6 @@
   "remove-favorite": "Remove from favourites",
   "remove-favorite-opportunity-confirmation": "Are you sure you want to remove opportunity \"{{name}}\" from favourites?",
   "save": "Save",
-  "save-and-close": "Save and close",
   "search": {
     "clear": "Clear search",
     "description": "You can search for opportunities using free text search. You can influence the visibility of results by filtering the list.",
@@ -1029,19 +1001,6 @@
   "service-catalog": {
     "description": "You can find a suitable guidance service for your needs here.",
     "header": "Do you need advice and guidance to find your own direction?"
-  },
-  "session": {
-    "expired": {
-      "continue": "Continue without logging in",
-      "description": "How would you like to proceed?",
-      "login": "Log in again",
-      "title": "Your session has ended"
-    },
-    "warning": {
-      "continue": "Continue to use",
-      "description": "Continue to use the service while logged in.",
-      "title": "Your session is about to end"
-    }
   },
   "show": "Show",
   "show-less": "Show less",
@@ -1142,8 +1101,7 @@
           "selected-tab": "Competences",
           "start": "Let's get started – first, tell me what competences you have right now?",
           "title": "Mapping out competences",
-          "x-added": "{{count}} competences added",
-          "x-competences-added": "{{count}} competences added"
+          "x-added": "{{count}} competences added"
         }
       },
       "export": {
@@ -1155,26 +1113,17 @@
         "no-data-title": "No mapped data"
       },
       "interests": {
-        "conversational-virtual-assistant": "Identify interests with AI",
         "virtual-assistant": {
-          "conversation": "Conversation",
           "description": "Hi! I am a bot and I help you find your interests. Talk to me and you will get suggestions that you can choose the ones that suit you best. Do not enter personal information to the bot.",
-          "error": "An error occurred while generating the response. Please try again with the same or a new input.",
-          "intrests": "Interests",
-          "loading": "Loading answer... Please wait for a moment.",
           "open": "Identify interests with AI",
           "open-tooltip": {
             "description-1": "You can explore your interests by talking with artificial intelligence. AI helps you think about what you can do and what you are interested in, and it can suggest options that suit you."
           },
-          "respond-to-chat": "Respond to the bot...",
           "selected": "Selected interests",
-          "selected-interests": "Selected interests",
           "selected-tab": "Interests",
-          "send": "Submit",
           "start": "Let's get started – first, tell me what interests you right now?",
           "title": "Mapping out interests",
-          "x-added": "{{count}} interests added",
-          "x-interests-added": "{{count}} interests added"
+          "x-added": "{{count}} interests added"
         }
       },
       "title": "Your information",
@@ -1219,18 +1168,13 @@
       },
       "modal-title": "Adjust opportunities",
       "reset": "Clear selections",
-      "toggle-close": "Close controls",
       "toggle-open": "Display controls",
       "toggle-open_one": "Display controls ({{count}})",
       "toggle-open_other": "Display controls ({{count}})",
-      "toggle-open_zero": "Display controls",
-      "toggle-title-closed": "Display controls",
-      "toggle-title-open": "Update and close",
-      "toggle-update-close": "Update and close"
+      "toggle-open_zero": "Display controls"
     },
     "title": "Find opportunities",
     "tools": {
-      "career-skills-self-assessment-tool": "Tool for a self-assessment of career skills",
       "compass-additional-resource": "<CustomLink>The Skills Needs Compass<Icon></Icon></CustomLink> provides information on the competence needs of working life.",
       "compass-url": "https://www.osaamistarvekompassi.fi",
       "counseling-additional-resource": "<CustomLink>Guidance and counselling services<Icon></Icon></CustomLink> bring together services where you can receive support in reflecting on career and education options, helping you evaluate and develop your career planning skills.",
@@ -1240,11 +1184,8 @@
       "free-time-activities": "Recreational activities",
       "guidance-practitioner-additional-resource": "You can also independently explore the <CustomLink>materials in the Osaamispolku Guidance practitioner section.<Icon></Icon></CustomLink>",
       "guidance-practitioner-url": "https://osaamispolku.fi/ohjaaja",
-      "help-text": "As a logged-in user, you can map out competences and interests in more detail in the competence profile.",
-      "help-text-2": "If you need help considering your situation, the following websites can help you.",
       "reveal-your-skills-additional-resource": "<CustomLink>Reveal Your Skills<Icon></Icon></CustomLink> inspires and encourages individuals and communities to recognize their skills and sparks discussion about the importance of recognizing competence.",
       "reveal-your-skills-url": "https://www.jotpa.fi/en/about-us/projects/reveal-your-skills",
-      "service-directory": "Guidance and advisory services",
       "something-else": "Other competences",
       "title": "Support for reflection",
       "urataidot-additional-resource": "<CustomLink>Career skills self-assessment<Icon></Icon></CustomLink> is a digital tool that helps you evaluate and develop your career planning skills.",
@@ -1253,7 +1194,6 @@
     "tour": {
       "buttons": {
         "close": "Close",
-        "done": "Find opportunities",
         "next": "Next",
         "previous": "Previous"
       },
