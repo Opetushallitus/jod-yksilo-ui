@@ -136,7 +136,12 @@ export const useVirtualAssistantConversation = (type: VirtualAssistantVariant, r
     setHistory((prevState) => ({ ...prevState, [key]: { message: value } }));
     void sendMessage(key, value);
     setValue('');
-  }, [sendMessage, value]);
+
+    // Track only conversation starts, not every message
+    if (id === undefined) {
+      globalThis._paq?.push(['trackEvent', 'yksilo.Virtuaaliohjaaja', 'Klikkaus', 'Keskustelu aloitettu']);
+    }
+  }, [id, sendMessage, value]);
 
   const handleInputKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
