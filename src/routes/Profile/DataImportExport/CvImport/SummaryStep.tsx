@@ -13,6 +13,7 @@ interface SectionProps {
   titleText: string;
   noDataText: string;
   toggleAllSelectionText: string;
+  selectableCompetences?: boolean;
   rows?: ExperienceTableRowData[];
 }
 
@@ -22,12 +23,20 @@ const Section = ({
   titleText: titleKey,
   noDataText,
   toggleAllSelectionText,
+  selectableCompetences,
   rows,
 }: SectionProps) => {
   return (
     <div className={className}>
       <h2 className="mb-6 text-heading-2-mobile sm:text-heading-2">{titleKey}</h2>
-      {hasData && rows && <DataImportTable rows={rows} toggleAllSelectionText={toggleAllSelectionText} />}
+      {hasData && rows && (
+        <DataImportTable
+          rows={rows}
+          toggleAllSelectionText={toggleAllSelectionText}
+          showCompetences
+          selectableCompetences={selectableCompetences}
+        />
+      )}
       {!hasData && <EmptyState text={noDataText} />}
     </div>
   );
@@ -42,7 +51,7 @@ const SummaryStep = ({ isLoading, convertedData }: SummaryStepProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="box-content flex max-w-modal-content flex-col gap-7 px-5 font-arial md:px-9">
+    <div className="box-content flex max-w-modal-content flex-col gap-7 px-5 font-arial md:max-w-none md:px-9">
       <p>
         <Trans i18nKey="preferences.cv-import.summary.description" />
       </p>
@@ -66,6 +75,7 @@ const SummaryStep = ({ isLoading, convertedData }: SummaryStepProps) => {
             titleText={t('preferences.cv-import.summary.education.title')}
             noDataText={t('preferences.cv-import.summary.education.no-data')}
             toggleAllSelectionText={t('education-history.education-provider-or-education')}
+            selectableCompetences
             rows={convertedData?.education}
           />
           <Section
@@ -73,6 +83,7 @@ const SummaryStep = ({ isLoading, convertedData }: SummaryStepProps) => {
             titleText={t('preferences.cv-import.summary.work.title')}
             noDataText={t('preferences.cv-import.summary.work.no-data')}
             toggleAllSelectionText={t('work-history.workplace-or-job-description')}
+            selectableCompetences
             rows={convertedData?.work}
           />
           <Section

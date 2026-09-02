@@ -1056,15 +1056,20 @@ export interface components {
       tyopaikat?: components['schemas']['TyopaikkaDto'][];
       teemat?: components['schemas']['TeemaDto'][];
     };
-    CvTehtavaSaveDto: {
-      koulutuskokonaisuudet?: components['schemas']['Valinta'][];
-      tyopaikat?: components['schemas']['Valinta'][];
-      teemat?: components['schemas']['Valinta'][];
-    };
-    Valinta: {
+    CvLapsi: {
       /** Format: uuid */
       id: string;
-      lapset: string[];
+      osaamiset?: string[];
+    };
+    CvTehtavaSaveDto: {
+      koulutuskokonaisuudet?: components['schemas']['CvValinta'][];
+      tyopaikat?: components['schemas']['CvValinta'][];
+      teemat?: components['schemas']['CvValinta'][];
+    };
+    CvValinta: {
+      /** Format: uuid */
+      id: string;
+      lapset: components['schemas']['CvLapsi'][];
     };
     UusiKeskustelu: {
       viesti: components['schemas']['LokalisoituTeksti'];
@@ -1101,6 +1106,11 @@ export interface components {
     KoskiTehtavaSaveDto: {
       koulutuskokonaisuudet?: components['schemas']['Valinta'][];
       skipOsaamistenTunnistus?: boolean;
+    };
+    Valinta: {
+      /** Format: uuid */
+      id: string;
+      lapset: string[];
     };
     Ehdotus: {
       /** Format: uri */

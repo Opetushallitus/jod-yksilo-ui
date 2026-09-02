@@ -515,6 +515,10 @@
           "no-data": "Vapaa-ajan toimintoja ei tunnistettu",
           "title": "Vapaa-ajan toiminnot"
         },
+        "competences-failed": {
+          "description": "Osaamisten nimiä ei saatu ladattua, joten osa osaamisista voi puuttua yhteenvedosta.",
+          "title": "Osaamisten lataaminen epäonnistui"
+        },
         "description": "Valitse, mitkä tiedot haluat CV:stäsi tuoda. Tuonnin jälkeen voit muokata ja täydentää tietoja Koulutukset, Työpaikat ja Vapaa-ajan toiminnot -osioissa.",
         "education": {
           "loading": "Kerätään koulutushistoriatietoja",

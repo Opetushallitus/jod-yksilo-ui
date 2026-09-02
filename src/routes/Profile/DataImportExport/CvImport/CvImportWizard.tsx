@@ -4,13 +4,16 @@ import { useTranslation } from 'react-i18next';
 import { Button, Modal, useMediaQueries, useNoteStack, WizardProgress } from '@jod/design-system';
 import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 
+import { osaamiset } from '@/api/osaamiset';
 import { ModalHeader } from '@/components/ModalHeader';
 import { ModalComponentProps } from '@/hooks/useModal';
 
 import AttachmentStep from './AttachmentStep';
 import SummaryStep from './SummaryStep';
 import { useCvUploadAndPoll } from './useCvUploadAndPoll';
-import { buildSaveDto, convertTulosToTableRows } from './utils';
+import { buildSaveDto, collectOsaamisetUris, convertTulosToTableRows, type CvImportConvertedData } from './utils';
+
+type OsaaminenValue = { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> };
 
 interface FooterButtonProps {
   ref?: React.RefObject<HTMLButtonElement | null>;
@@ -57,9 +60,61 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
   const { state, start, cancel, retry, save } = useCvUploadAndPoll();
   const cancelButtonRef = React.useRef<HTMLButtonElement>(null);
   const { addTemporaryNote } = useNoteStack();
+  const [isLoadingOsaamiset, setIsLoadingOsaamiset] = React.useState(false);
 
-  const isLoading = state.step === 'uploading' || state.step === 'polling';
-  const convertedData = React.useMemo(() => (state.tulos ? convertTulosToTableRows(state.tulos) : null), [state.tulos]);
+  const isLoading = state.step === 'uploading' || state.step === 'polling' || isLoadingOsaamiset;
+  const [convertedData, setConvertedData] = React.useState<CvImportConvertedData | null>(null);
+
+  React.useEffect(() => {
+    const tulos = state.tulos;
+    if (!tulos) {
+      setIsLoadingOsaamiset(false);
+      setConvertedData(null);
+      return;
+    }
+
+    const uris = collectOsaamisetUris(tulos);
+    if (uris.length === 0) {
+      setIsLoadingOsaamiset(false);
+      setConvertedData(convertTulosToTableRows(tulos));
+      return;
+    }
+
+    const controller = new AbortController();
+    setIsLoadingOsaamiset(true);
+    void (async () => {
+      let osaamisetMap: Record<string, OsaaminenValue> | undefined;
+      try {
+        const combined = await osaamiset.combine(
+          uris,
+          (uri) => uri,
+          (_, o) => ({ id: o.uri, nimi: o.nimi, kuvaus: o.kuvaus }),
+          controller.signal,
+        );
+        osaamisetMap = Object.fromEntries(combined.map((o) => [o.id, o]));
+      } catch (error) {
+        if (controller.signal.aborted) {
+          return;
+        }
+        console.error('Failed to load osaamiset for CV import', error);
+        addTemporaryNote(() => ({
+          title: t('preferences.cv-import.summary.competences-failed.title'),
+          description: t('preferences.cv-import.summary.competences-failed.description'),
+          variant: 'warning',
+          isCollapsed: false,
+        }));
+      }
+      if (controller.signal.aborted) {
+        return;
+      }
+      setConvertedData(convertTulosToTableRows(tulos, osaamisetMap));
+      setIsLoadingOsaamiset(false);
+    })();
+
+    return () => {
+      controller.abort();
+    };
+  }, [state.tulos, addTemporaryNote, t]);
 
   const headerText = React.useMemo(() => {
     if (isAttachmentStep) {
