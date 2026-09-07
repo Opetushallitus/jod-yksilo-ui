@@ -510,7 +510,7 @@
           "title": "Sparning lyckades"
         }
       },
-      "summary": {
+      "info-selection": {
         "activities": {
           "loading": "Hämtar fritidsaktiviteter",
           "no-data": "Inga fritidsaktiviteter identifierades",

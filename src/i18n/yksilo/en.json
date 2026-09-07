@@ -491,6 +491,9 @@
         "invalid-file-type": "Invalid file type",
         "title": "File upload"
       },
+      "competence-selection": {
+        "title": "Select competences"
+      },
       "description": "You can update your information by uploading a pre-prepared CV as part of your Competence Profile.",
       "failed": {
         "description": "CV analysis failed. Please try again or check the file.",
@@ -511,7 +514,7 @@
           "title": "Save successful"
         }
       },
-      "summary": {
+      "info-selection": {
         "activities": {
           "loading": "Loading leisure activities",
           "no-data": "No leisure activities identified",
