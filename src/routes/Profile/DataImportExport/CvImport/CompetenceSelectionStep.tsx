@@ -24,9 +24,21 @@ const Section = ({ titleText, headerText, rows }: SectionProps) => {
           {rows.map((row) => (
             <div key={row.key} className="py-4">
               <h3 className="font-poppins text-heading-4-mobile sm:text-heading-4">{getLocalizedText(row.nimi)}</h3>
-              {row.subrows?.map((subrow) => (
-                <div key={subrow.key}>{getLocalizedText(subrow.nimi)}</div>
-              ))}
+              <div className="flex flex-col gap-7">
+                {row.subrows?.map((subrow) => (
+                  <div key={subrow.key} className="pl-7">
+                    <div className="flex flex-row justify-between">
+                      <h4 className="text-heading-5-mobile sm:text-heading-5">{getLocalizedText(subrow.nimi)}</h4>
+                      <p>TODO: Valittu xx/yy</p>
+                    </div>
+                    <div className="mt-3 border-l-4 border-border-gray bg-white">
+                      <div className="pl-3">
+                        <p>TODO: Valitse osaamiset</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

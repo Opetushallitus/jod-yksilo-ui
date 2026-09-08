@@ -213,7 +213,7 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
               disabled={isLoading}
             />
           )}
-          {step < steps && (
+          {step < steps && state.step !== 'failed' && (
             <FooterButton
               onClick={handleNext}
               label={t('next')}
