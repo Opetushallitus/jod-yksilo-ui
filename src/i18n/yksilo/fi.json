@@ -490,6 +490,8 @@
         "title": "Tiedoston lataaminen"
       },
       "competence-selection": {
+        "add-competence": "Lisää osaaminen '+' merkistä",
+        "competences": "Osaamiset",
         "description": "Valitse seuraavaksi koulutus- ja työpaikkoihin sopivat osaamiset tekoälyn ehdottamista vaihtoehdoista.  Voit lisätä ja muokata osaamisia myös myöhemmin.",
         "title": "Valitse osaamiset",
         "activities": {
@@ -499,6 +501,8 @@
           "education-provider-or-education": "Koulutuksen järjestäjä / koulutus",
           "title": "Koulutukset"
         },
+        "select-competences": "Valitse osaamiset",
+        "selected-competences": "Valittu {{selected}}/{{total}}",
         "work": {
           "title": "Työpaikat"
         }

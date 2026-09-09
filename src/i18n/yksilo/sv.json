@@ -490,6 +490,24 @@
         "invalid-file-type": "Ogiltig filtyp",
         "title": "Filuppladdning"
       },
+      "competence-selection": {
+        "activities": {
+          "title": "Fritidsaktiviteter"
+        },
+        "add-competence": "Lägg till en kompetens genom att klicka på '+'-tecknet",
+        "competences": "Kompetenser",
+        "description": "Välj sedan de kompetenser som passar för utbildning och arbetsplatser från de alternativ som föreslås av artificiell intelligens. Du kan också lägga till och redigera kompetenser senare.",
+        "education": {
+          "education-provider-or-education": "Utbildningsanordnare / utbildning",
+          "title": "Utbildningar"
+        },
+        "select-competences": "Välj kompetenser",
+        "selected-competences": "Valda {{selected}}/{{total}}",
+        "title": "Välj kompetenser",
+        "work": {
+          "title": "Arbetsplatser"
+        }
+      },
       "description": "Du kan uppdatera dina uppgifter genom att ladda upp ett förberett CV som en del av din kompetensprofil.",
       "failed": {
         "description": "CV-analys misslyckades. Försök igen eller kontrollera filen.",
