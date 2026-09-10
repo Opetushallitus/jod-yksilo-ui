@@ -26,14 +26,13 @@ import { getDurationText } from './utils';
 const EducationOpportunity = () => {
   const { jakaumat, koulutusmahdollisuus, osaamiset, profiiliKiinnostuksetUris } = useLoaderData<LoaderData>();
   const isLoggedIn = useIsLoggedIn();
-  const { kuvaus, kesto, koulutukset } = koulutusmahdollisuus;
+  const { kuvaus, kesto, koulutukset, aktiivinen } = koulutusmahdollisuus;
   const { sm, lg } = useMediaQueries();
   const {
     t,
     i18n: { language },
   } = useTranslation();
   const { isPrd } = useEnvironment();
-
   const kartoitetutKiinnostuksetUris = useToolStore(
     useShallow((state) =>
       state.kiinnostukset.filter((k) => k.tyyppi === 'KARTOITETTU').map((osaaminen) => osaaminen.id),
@@ -159,6 +158,7 @@ const EducationOpportunity = () => {
   return (
     <OpportunityDetails
       data={koulutusmahdollisuus}
+      isActiveOpportunity={aktiivinen}
       isLoggedIn={isLoggedIn}
       mahdollisuusTyyppi="KOULUTUSMAHDOLLISUUS"
       sections={sections}

@@ -295,7 +295,7 @@ const JobOpportunity = () => {
               <div className="col-start-1 max-w-full lg:col-span-2">
                 <div className="flex w-full flex-col">
                   <p className="font-bold">{t('job-opportunity.employment-data.supply-and-demand')}</p>
-                  <h3 className="mt-3 max-w-full text-heading-1-mobile break-words text-accent sm:text-heading-1">
+                  <h3 className="mt-3 max-w-full text-heading-1-mobile wrap-break-word text-accent sm:text-heading-1">
                     {kohtaanto}
                   </h3>
                   <span className="max-w-full text-secondary-gray">
@@ -321,7 +321,7 @@ const JobOpportunity = () => {
                 {/* Employed amount */}
                 <div className="flex w-full flex-col">
                   <p className="font-bold">{t('job-opportunity.employment-data.employed-title')}</p>
-                  <h3 className="mt-3 text-heading-1-mobile break-words text-accent sm:text-heading-1">
+                  <h3 className="mt-3 text-heading-1-mobile wrap-break-word text-accent sm:text-heading-1">
                     {tyomahdollisuus?.ammattiryhma?.tyollisyysData?.tyollisetKokoMaa ?? NOT_AVAILABLE_LABEL}
                   </h3>
                 </div>
@@ -346,7 +346,7 @@ const JobOpportunity = () => {
                       .map((ka) => (
                         <div key={`${ka.title}-${ka.osuus}`} className="flex w-full items-center py-2">
                           <span className="font-semibold min-w-[80px] text-heading-3 text-accent">{ka.osuus}%</span>
-                          <span className="ml-3 flex-1 break-words">{ka.title}</span>
+                          <span className="ml-3 flex-1 wrap-break-word">{ka.title}</span>
                         </div>
                       ))}
                   </div>
@@ -363,7 +363,7 @@ const JobOpportunity = () => {
                       .map((ka) => (
                         <div key={`${ka.title}-${ka.osuus}`} className="flex w-full items-center py-2">
                           <span className="font-semibold min-w-[80px] text-heading-3 text-accent">{ka.osuus}%</span>
-                          <span className="ml-3 flex-1 break-words">{ka.title}</span>
+                          <span className="ml-3 flex-1 wrap-break-word">{ka.title}</span>
                         </div>
                       ))}
                   </div>
@@ -433,6 +433,7 @@ const JobOpportunity = () => {
   return (
     <OpportunityDetails
       data={tyomahdollisuus}
+      isActiveOpportunity={tyomahdollisuus.aktiivinen}
       isLoggedIn={isLoggedIn}
       mahdollisuusTyyppi="TYOMAHDOLLISUUS"
       sections={sections}
