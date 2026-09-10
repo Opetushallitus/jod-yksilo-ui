@@ -27,6 +27,7 @@ import { copyToClipboard, getLocalizedText } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 
 import { CounselingCard } from '../CounselingCard/CounselingCard';
+import { InActiveTag } from '../OpportunityCard/components/InActiveTag';
 import { OpportunityType } from '../OpportunityType/OpportunityType';
 import { RateContent } from '../RateContent/RateContent';
 import { TitleIcon } from '../TitleIcon/TitleIcon';
@@ -45,6 +46,7 @@ export interface OpportunityDetailsSection {
 
 export interface OpportunityDetailsProps {
   data: components['schemas']['KoulutusmahdollisuusFullDto'] | components['schemas']['TyomahdollisuusFullDto'];
+  isActiveOpportunity?: boolean;
   isLoggedIn: boolean;
   mahdollisuusTyyppi: MahdollisuusTyyppi;
   sections: OpportunityDetailsSection[];
@@ -55,6 +57,7 @@ export interface OpportunityDetailsProps {
  */
 const OpportunityDetails = ({
   data,
+  isActiveOpportunity,
   isLoggedIn,
   mahdollisuusTyyppi,
   sections,
@@ -137,50 +140,53 @@ const OpportunityDetails = ({
           showAiInfoInTitle={showAiInfoInTitle}
         />
         {/* Action bar */}
-        <div className="my-6 flex flex-col items-start gap-3 sm:flex-row md:mt-7 md:mb-8 md:justify-end print:hidden">
-          <FavoriteToggle
-            isFavorite={isLoggedIn && !!data?.id && isSuosikki}
-            opensDialog={!isLoggedIn}
-            favoriteName={data?.otsikko}
-            onToggleFavorite={() =>
-              isLoggedIn || isSessionExpired
-                ? toggleFavoriteGuarded()
-                : showDialog({
-                    title: t('common:login'),
-                    description: t('login-for-favorites'),
-                    closeParentModal: true,
-                    footer: createLoginDialogFooter(
-                      t,
-                      `/${language}/${t('slugs.profile.login')}`,
-                      state?.callbackUrl ? `/${language}/${state?.callbackUrl}` : `${pathname}${search}${hash}`,
-                      closeAllModals,
-                    ),
-                    testId: 'login-dialog',
-                  })
-            }
-            className="bg-bg-gray-2"
-          />
-
-          {isDev && (
-            <ActionButton
-              label={t('common:share')}
-              icon={<JodShare className="text-accent" />}
-              onClick={() => void copyToClipboard(globalThis.location.href)}
+        <div className="my-6 flex flex-wrap items-start gap-3 md:mt-7 md:mb-8 print:hidden">
+          {isActiveOpportunity === false && <InActiveTag name={title} />}
+          <div className="ml-auto flex flex-col items-end gap-3 sm:flex-row sm:justify-end">
+            <FavoriteToggle
+              isFavorite={isLoggedIn && !!data?.id && isSuosikki}
+              opensDialog={!isLoggedIn}
+              favoriteName={data?.otsikko}
+              onToggleFavorite={() =>
+                isLoggedIn || isSessionExpired
+                  ? toggleFavoriteGuarded()
+                  : showDialog({
+                      title: t('common:login'),
+                      description: t('login-for-favorites'),
+                      closeParentModal: true,
+                      footer: createLoginDialogFooter(
+                        t,
+                        `/${language}/${t('slugs.profile.login')}`,
+                        state?.callbackUrl ? `/${language}/${state?.callbackUrl}` : `${pathname}${search}${hash}`,
+                        closeAllModals,
+                      ),
+                      testId: 'login-dialog',
+                    })
+              }
               className="bg-bg-gray-2"
-              testId="opportunity-details-share-button"
             />
-          )}
 
-          {!!globalThis.print && (
-            <ActionButton
-              label={t('common:print')}
-              aria-haspopup="dialog"
-              icon={<JodPrint className="text-accent" />}
-              onClick={doPrint}
-              className="bg-bg-gray-2"
-              testId="opportunity-details-print-button"
-            />
-          )}
+            {isDev && (
+              <ActionButton
+                label={t('common:share')}
+                icon={<JodShare className="text-accent" />}
+                onClick={() => void copyToClipboard(globalThis.location.href)}
+                className="bg-bg-gray-2"
+                testId="opportunity-details-share-button"
+              />
+            )}
+
+            {!!globalThis.print && (
+              <ActionButton
+                label={t('common:print')}
+                aria-haspopup="dialog"
+                icon={<JodPrint className="text-accent" />}
+                onClick={doPrint}
+                className="bg-bg-gray-2"
+                testId="opportunity-details-print-button"
+              />
+            )}
+          </div>
         </div>
 
         {!lg && (
