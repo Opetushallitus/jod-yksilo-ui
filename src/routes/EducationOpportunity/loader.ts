@@ -64,7 +64,13 @@ const loader = (async ({ request, params, context }) => {
     profiiliKiinnostuksetUris = (profiiliOsaamisetRes.data?.kiinnostukset ?? []).filter(Boolean);
   }
 
-  return { codesetValues, jakaumat, koulutusmahdollisuus, osaamiset, profiiliKiinnostuksetUris };
+  return {
+    codesetValues,
+    jakaumat,
+    koulutusmahdollisuus,
+    osaamiset,
+    profiiliKiinnostuksetUris,
+  };
 }) satisfies LoaderFunction<YksiloLoaderContext>;
 
 export type LoaderData = Awaited<ReturnType<typeof loader>>;
