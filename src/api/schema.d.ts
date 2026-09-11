@@ -1502,6 +1502,7 @@ export interface components {
       jakaumat?: {
         [key: string]: components['schemas']['JakaumaDto'];
       };
+      aktiivinen?: boolean;
     };
     SivuDtoKoulutusmahdollisuusFullDto: {
       sisalto: components['schemas']['KoulutusmahdollisuusFullDto'][];
