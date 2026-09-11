@@ -7,6 +7,7 @@ import { Button, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 
 import tmtLogo from '@/../assets/tyomarkkinatori.svg';
+import { components } from '@/api/schema';
 import { AiInfo } from '@/components/AiInfo/AiInfo';
 import { CompareCompetencesTable } from '@/components/CompareTable/CompareCompetencesTable';
 import { CounselingCard } from '@/components/CounselingCard/CounselingCard';
@@ -40,6 +41,66 @@ export interface MaakuntaTyollisyys {
 
 const koulutusalaPrefix = 'kansallinenkoulutusluokitus2016koulutusalataso1_';
 const koulutusastePrefix = 'kansallinenkoulutusluokitus2016koulutusastetaso1_';
+
+const useTemporaryFixForKoulutusAsteet = true;
+/**
+ *
+ * @param koulutusasteTyollisyydet Array of education level employment data
+ * @param educationCodesetValues Array of education codeset values
+ * @returns Array of education levels with their corresponding employment share
+ */
+const getKoulutusAsteet = async (
+  koulutusasteTyollisyydet: components['schemas']['KoulutusasteDto'][],
+  educationCodesetValues: { code: string; value: string }[],
+) => {
+  if (useTemporaryFixForKoulutusAsteet) {
+    return getKoulutusAsteetTemporaryFix(koulutusasteTyollisyydet, educationCodesetValues);
+  }
+
+  return educationCodesetValues.map((ka) => {
+    const koodi = ka.code.replace(koulutusastePrefix, '');
+    const osuus = koulutusasteTyollisyydet.find((kat) => kat.koulutusasteKoodi === koodi)?.osuus ?? 0;
+    return { title: ka.value, osuus };
+  });
+};
+
+/**
+ * Temporary fix for Koulutusasteet
+ * Currently ammattitieto contains some unknown education codes which are not present in the official codeset.
+ * This function groups such entries under a temporary "unknown" code which is represented by '9'.
+ */
+const getKoulutusAsteetTemporaryFix = async (
+  koulutusasteTyollisyydet: components['schemas']['KoulutusasteDto'][],
+  educationCodesetValues: { code: string; value: string }[],
+) => {
+  const unknownKoulutusasteCode = '9';
+  const unknownKoulutusasteTitle = await getEducationCodesetValues([
+    `${koulutusastePrefix}${unknownKoulutusasteCode}`,
+  ]).then((values) => values[0]?.value ?? '');
+
+  const grouped = new Map<string, KoulutusasteTyollisyys>();
+
+  for (const ka of educationCodesetValues) {
+    const koodi = ka.code.replace(koulutusastePrefix, '');
+    const osuus = koulutusasteTyollisyydet.find((kat) => kat.koulutusasteKoodi === koodi)?.osuus ?? 0;
+
+    if (osuus === 0) continue;
+
+    const isUnknown = ka.value === ka.code;
+    const key = isUnknown ? unknownKoulutusasteCode : koodi;
+    const title = isUnknown ? unknownKoulutusasteTitle : ka.value;
+
+    const existing = grouped.get(key);
+
+    grouped.set(key, {
+      title,
+      osuus: existing ? Number((((existing.osuus ?? 0) * 10 + osuus * 10) / 10).toFixed(1)) : osuus,
+    });
+  }
+
+  return [...grouped.values()];
+};
+
 const JobOpportunity = () => {
   const {
     t,
@@ -118,18 +179,10 @@ const JobOpportunity = () => {
           (ka) => koulutusastePrefix + ka.koulutusasteKoodi,
         ),
       );
-      const newKoulutusasteet: KoulutusasteTyollisyys[] = res.map((ka) => {
-        let title = ka.value;
-        const koodi = ka.code.replace(koulutusastePrefix, '');
-        const osuus =
-          tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet?.find(
-            (kat) => kat.koulutusasteKoodi === koodi,
-          )?.osuus ?? 0;
-        if (title === koulutusastePrefix + '-2') {
-          title = t('job-opportunity.employment-data.unknown-ala');
-        }
-        return { title, osuus };
-      });
+      const newKoulutusasteet: KoulutusasteTyollisyys[] = await getKoulutusAsteet(
+        tyomahdollisuus.ammattiryhma?.tyollisyysData?.koulutusasteTyollisyydet ?? [],
+        res,
+      );
       setKoulutusasteet(newKoulutusasteet);
     };
     setKoulutusasteet([]);
