@@ -39,7 +39,7 @@ describe('OpportunityFilters', () => {
   it('passes the correct value to handleFilterChange on checkbox change', () => {
     render(<MahdollisuusTyyppiFilter {...defaultProps} />);
     const jobCheckbox = screen.getByLabelText('Job Opportunities');
-    fireEvent.change(jobCheckbox, { target: { value: 'TYOMAHDOLLISUUS' } });
+    fireEvent.click(jobCheckbox);
 
     expect(mockHandleFilterChange).toHaveBeenCalledWith(
       expect.objectContaining({
