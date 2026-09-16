@@ -7,7 +7,6 @@ import { Datepicker, InputField, Textarea } from '@jod/design-system';
 import { FormError, TouchedFormError } from '@/components';
 import { LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
-import { isFeatureEnabled } from '@/utils/features';
 
 import type { FreeTimeActivitiesForm } from './utils';
 
@@ -103,14 +102,12 @@ const ActivityStep = ({ type, toiminto }: ActivityStepProps) => {
           <FormError name={`toiminnot.${toiminto}.loppuPvm`} errors={errors} />
         </div>
       </div>
-      {isFeatureEnabled('KOHTAANTO_KUVAUKSET') && (
-        <Textarea
-          label={t('profile.free-form-input.label')}
-          {...register(`toiminnot.${toiminto}.kuvaus.${language}` as const)}
-          maxLength={LIMITS.TEXTAREA}
-          testId="free-time-activities-free-form-input"
-        />
-      )}
+      <Textarea
+        label={t('profile.free-form-input.label')}
+        {...register(`toiminnot.${toiminto}.kuvaus.${language}` as const)}
+        maxLength={LIMITS.TEXTAREA}
+        testId="free-time-activities-free-form-input"
+      />
     </div>
   );
 };

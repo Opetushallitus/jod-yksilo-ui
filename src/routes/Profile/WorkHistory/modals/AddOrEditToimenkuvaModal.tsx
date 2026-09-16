@@ -25,7 +25,6 @@ import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { getLocalizedText } from '@/utils';
-import { isFeatureEnabled } from '@/utils/features';
 
 interface AddOrEditToimenkuvaModalProps extends ModalComponentProps {
   tyopaikkaId: string;
@@ -119,13 +118,11 @@ const MainStep = () => {
           <FormError name="loppuPvm" errors={errors} />
         </div>
       </div>
-      {isFeatureEnabled('KOHTAANTO_KUVAUKSET') && (
-        <Textarea
-          label={t('profile.free-form-input.label')}
-          {...register(`kuvaus.${language}` as const)}
-          maxLength={LIMITS.TEXTAREA}
-        />
-      )}
+      <Textarea
+        label={t('profile.free-form-input.label')}
+        {...register(`kuvaus.${language}` as const)}
+        maxLength={LIMITS.TEXTAREA}
+      />
     </div>
   );
 };

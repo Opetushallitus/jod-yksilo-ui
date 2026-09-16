@@ -325,7 +325,6 @@ export const educationHistory = [
 ];
 
 export const featureFlags = {
-  KOHTAANTO_KUVAUKSET: true,
   VIRTUAALIOHJAAJA: true,
   VIRTUAALIOHJAAJA_OSAAMISET: true,
   TMT_INTEGRATION: true,

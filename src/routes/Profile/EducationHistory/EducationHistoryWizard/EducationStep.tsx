@@ -7,7 +7,6 @@ import { Datepicker, InputField, Textarea } from '@jod/design-system';
 import { FormError, TouchedFormError } from '@/components';
 import { LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
-import { isFeatureEnabled } from '@/utils/features';
 
 import type { EducationHistoryForm } from './utils';
 
@@ -105,13 +104,11 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
           <FormError name={`koulutukset.${koulutus}.loppuPvm`} errors={errors} />
         </div>
       </div>
-      {isFeatureEnabled('KOHTAANTO_KUVAUKSET') && (
-        <Textarea
-          label={t('profile.free-form-input.label')}
-          {...register(`koulutukset.${koulutus}.kuvaus.${language}` as const)}
-          maxLength={LIMITS.TEXTAREA}
-        />
-      )}
+      <Textarea
+        label={t('profile.free-form-input.label')}
+        {...register(`koulutukset.${koulutus}.kuvaus.${language}` as const)}
+        maxLength={LIMITS.TEXTAREA}
+      />
     </div>
   );
 };
