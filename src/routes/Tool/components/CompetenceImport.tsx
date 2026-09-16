@@ -19,7 +19,6 @@ import type { OsaaminenLahdeTyyppi } from '@/routes/types';
 import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { hasLocalizedText, removeDuplicatesByKey } from '@/utils';
-import { isFeatureEnabled } from '@/utils/features';
 
 import type { ToolLoaderData } from '../loader';
 import { mergeUniqueValuesExcludingType } from '../utils';
@@ -157,14 +156,12 @@ export const CompetenceImport = ({ onImportSuccess }: { onImportSuccess?: () => 
           })),
       );
 
-      if (isFeatureEnabled('KOHTAANTO_KUVAUKSET')) {
-        setKuvaukset([
-          ...importKuvauksetFromProfile(mappedSelectedCompetences, 'TOIMENKUVA', toimenkuvat),
-          ...importKuvauksetFromProfile(mappedSelectedCompetences, 'KOULUTUS', koulutukset),
-          ...importKuvauksetFromProfile(mappedSelectedCompetences, 'TOIMINTO', toiminnot),
-          ...importKuvauksetFromProfile(mappedSelectedCompetences, 'MUU_OSAAMINEN', muutOsaamiset),
-        ]);
-      }
+      setKuvaukset([
+        ...importKuvauksetFromProfile(mappedSelectedCompetences, 'TOIMENKUVA', toimenkuvat),
+        ...importKuvauksetFromProfile(mappedSelectedCompetences, 'KOULUTUS', koulutukset),
+        ...importKuvauksetFromProfile(mappedSelectedCompetences, 'TOIMINTO', toiminnot),
+        ...importKuvauksetFromProfile(mappedSelectedCompetences, 'MUU_OSAAMINEN', muutOsaamiset),
+      ]);
 
       const importedInterests = kiinnostukset
         .filter((kiinnostus) =>
