@@ -315,7 +315,8 @@
     "maksullisuus": {
       "lukuvuosimaksu": "Läsårsavgift",
       "maksullinen": "Avgiftsbelagd",
-      "maksuton": "Avgiftsfri"
+      "maksuton": "Avgiftsfri",
+      "tooltip": "Priser för medborgare utanför EU och EES:"
     },
     "palkanPeruste": {
       "OTHER": "Annat",

@@ -641,13 +641,9 @@ describe('EducationJakaumaList component', () => {
     expect(paidLabel.textContent).toBe('jakauma-values.maksullisuus.maksullinen');
 
     const freePercentage = getByTestId(`${name}-distribution-maksuton-percentage`);
-    expect(freePercentage.textContent).toBe('70%');
+    expect(freePercentage.textContent).toBe('80%');
     const freeLabel = getByTestId(`${name}-distribution-maksuton-label`);
     expect(freeLabel.textContent).toBe('jakauma-values.maksullisuus.maksuton');
-    const feePercentage = getByTestId(`${name}-distribution-lukuvuosimaksu-percentage`);
-    expect(feePercentage.textContent).toBe('10%');
-    const feeLabel = getByTestId(`${name}-distribution-lukuvuosimaksu-label`);
-    expect(feeLabel.textContent).toBe('jakauma-values.maksullisuus.lukuvuosimaksu');
 
     const totalLabel = getByTestId(`${name}-distribution-total-label`);
     expect(totalLabel.textContent).toBe('education-opportunity.of-educations');

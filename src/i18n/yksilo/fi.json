@@ -314,7 +314,8 @@
     "maksullisuus": {
       "lukuvuosimaksu": "Lukuvuosimaksu",
       "maksullinen": "Maksullinen",
-      "maksuton": "Maksuton"
+      "maksuton": "Maksuton",
+      "tooltip": "Hinnat EU- ja ETA-alueen ulkopuolisille kansalaisille:"
     },
     "palkanPeruste": {
       "OTHER": "Muu",
