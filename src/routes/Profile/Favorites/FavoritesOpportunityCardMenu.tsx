@@ -4,12 +4,13 @@ import { Link } from 'react-router';
 import { PopupList, PopupListItem } from '@jod/design-system';
 
 import { MahdollisuusTyyppi } from '@/routes/types';
-import { copyToClipboard } from '@/utils';
+import { share } from '@/utils';
 
 interface FavoritesOpportunityCardActionMenuProps {
   menuId: string;
   mahdollisuusTyyppi: MahdollisuusTyyppi;
   mahdollisuusId: string;
+  title: string;
 }
 
 /**
@@ -19,6 +20,7 @@ const FavoritesOpportunityCardActionMenu = ({
   mahdollisuusTyyppi,
   mahdollisuusId,
   menuId,
+  title,
 }: FavoritesOpportunityCardActionMenuProps) => {
   const {
     t,
@@ -46,7 +48,7 @@ const FavoritesOpportunityCardActionMenu = ({
         </li>
         <li>
           <button
-            onClick={() => void copyToClipboard(`${window.location.origin}/yksilo${compareTo.pathname}`)}
+            onClick={() => void share(t('front-page'), title, `${window.location.origin}/yksilo${compareTo.pathname}`)}
             className="w-full cursor-pointer"
             data-testid="opportunity-action-share"
           >
