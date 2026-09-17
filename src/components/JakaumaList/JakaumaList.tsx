@@ -1,6 +1,9 @@
+import { TFunction } from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router';
+
+import { JodInfo } from '@jod/design-system/icons';
 
 import { NOT_AVAILABLE_LABEL } from '@/constants';
 import type { LoaderData as EducationLoaderData } from '@/routes/EducationOpportunity/loader';
@@ -21,6 +24,8 @@ import {
   type JobCodesetValues,
 } from '@/utils/jakaumaUtils';
 
+import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
+
 interface EducationJakaumaListProps {
   jakaumat: KoulutusmahdollisuusJakaumat;
   name: JakaumaKey;
@@ -36,6 +41,57 @@ interface JobJakaumaListProps {
 }
 
 type JakaumaListProps = EducationJakaumaListProps | JobJakaumaListProps;
+
+const getJakauma = (jakaumat: KoulutusmahdollisuusJakaumat | TyomahdollisuusJakaumat, name: JakaumaKey) => {
+  if (name === 'maksullisuus') {
+    //OPHJOD-3554
+    const jakauma = jakaumat[name as keyof typeof jakaumat];
+    const maksullinen = jakauma?.arvot?.find((arvo) => arvo.arvo === 'maksullinen')?.osuus ?? 0;
+    const maksuton = jakauma?.arvot?.find((arvo) => arvo.arvo === 'maksuton')?.osuus ?? 0;
+    const lukuvuosimaksu = jakauma?.arvot?.find((arvo) => arvo.arvo === 'lukuvuosimaksu')?.osuus ?? 0;
+    return {
+      ...jakauma,
+      arvot: [
+        {
+          arvo: 'maksullinen',
+          osuus: maksullinen,
+        },
+        {
+          arvo: 'maksuton',
+          osuus: maksuton + lukuvuosimaksu,
+        },
+      ],
+    };
+  }
+  return jakaumat[name as keyof typeof jakaumat];
+};
+
+const getTooltip = (
+  jakaumat: KoulutusmahdollisuusJakaumat | TyomahdollisuusJakaumat,
+  name: JakaumaKey,
+  t: TFunction,
+) => {
+  if (name === 'maksullisuus') {
+    //OPHJOD-3554
+    const jakauma = jakaumat[name as keyof typeof jakaumat];
+    const maksullinen = jakauma?.arvot?.find((arvo) => arvo.arvo === 'maksullinen')?.osuus ?? 0;
+    const maksuton = jakauma?.arvot?.find((arvo) => arvo.arvo === 'maksuton')?.osuus ?? 0;
+    const lukuvuosimaksu = jakauma?.arvot?.find((arvo) => arvo.arvo === 'lukuvuosimaksu')?.osuus ?? 0;
+
+    return (
+      <div className="font-normal font-arial text-card-label leading-5 text-white">
+        <p>{t('jakauma-values.maksullisuus.tooltip')}</p>
+        <div className="grid grid-cols-[auto_1fr] gap-x-2">
+          <span>{Math.round(maksuton)}%</span>
+          <span className="lowercase">{t('jakauma-values.maksullisuus.maksuton')}</span>
+          <span>{Math.round(lukuvuosimaksu + maksullinen)}%</span>
+          <span className="lowercase">{t('jakauma-values.maksullisuus.maksullinen')}</span>
+        </div>
+      </div>
+    );
+  }
+  return undefined;
+};
 
 const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) => {
   const {
@@ -123,12 +179,15 @@ const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) 
     return arvo;
   };
 
-  const jakauma = jakaumat[name as keyof typeof jakaumat];
+  const jakauma = getJakauma(jakaumat, name);
   const isEmpty = !jakauma?.arvot || jakauma?.arvot.length === 0;
+  const tooltip = getTooltip(jakaumat, name, t);
 
   return (
     <div className="col-span-2 border-l-2 border-border-gray pl-4 md:col-span-1 print:col-span-1">
-      <h4 className="pb-2 text-heading-4">{jakaumaHeadingTranslations[name]}</h4>
+      <h4 className="pb-2 text-heading-4">
+        {jakaumaHeadingTranslations[name]} <JakaumaTooltip tooltip={tooltip} />
+      </h4>
       {isEmpty ? (
         <div className="flex flex-col gap-3">
           <p className="text-heading-2 text-accent" data-testid={`${name}-distribution-empty-label`}>
@@ -142,10 +201,10 @@ const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) 
           </span>
         </div>
       ) : (
-        <ul>
-          {jakauma.arvot.map((arvo) => (
-            <li key={arvo.arvo} className="flex flex-col gap-3">
-              <div className="flex items-start gap-3 text-heading-2 text-accent">
+        <div>
+          <ul className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-heading-2-mobile text-accent sm:text-heading-2">
+            {jakauma.arvot.map((arvo) => (
+              <li key={arvo.arvo} className="contents">
                 <span data-testid={`${name}-distribution-${arvo.arvo}-percentage`}>{Math.round(arvo.osuus)}%</span>
                 <span
                   data-testid={`${name}-distribution-${arvo.arvo}-label`}
@@ -154,18 +213,27 @@ const JakaumaList = ({ name, jakaumat, codesetValues, type }: JakaumaListProps) 
                 >
                   {getDisplayValue(arvo.arvo)}
                 </span>
-              </div>
-            </li>
-          ))}
-          <li
+              </li>
+            ))}
+          </ul>
+          <p
             className="mt-4 font-arial text-body-sm text-secondary-gray"
             data-testid={`${name}-distribution-total-label`}
           >
             {type === 'job' ? t('job-opportunity.of-job-ads') : t('education-opportunity.of-educations')}
-          </li>
-        </ul>
+          </p>
+        </div>
       )}
     </div>
+  );
+};
+
+const JakaumaTooltip = ({ tooltip }: { tooltip?: React.JSX.Element }) => {
+  if (!tooltip) return null;
+  return (
+    <TooltipWrapper tooltipPlacement="top" tooltipContent={tooltip} triggerClassName="inline-block">
+      <JodInfo size={18} className="text-primary-5-light-1" />
+    </TooltipWrapper>
   );
 };
 

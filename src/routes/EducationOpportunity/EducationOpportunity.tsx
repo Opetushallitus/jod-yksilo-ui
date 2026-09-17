@@ -23,6 +23,16 @@ import { getLinkTo } from '@/utils/routeUtils';
 import { OpintopolkuKoulutusList } from './OpintopolkuKoulutusList';
 import { getDurationText } from './utils';
 
+const JAKAUMAT_ORDER_RANK = new Map(
+  ['kunta', 'koulutusala', 'aika', 'opetustapa', 'maksullisuus', 'maakunta'].map((key, i) => [key, i]),
+);
+
+const sortJakaumatByOrderRank = (a: JakaumaKey, b: JakaumaKey) => {
+  const ra = JAKAUMAT_ORDER_RANK.get(a) ?? Infinity;
+  const rb = JAKAUMAT_ORDER_RANK.get(b) ?? Infinity;
+  return ra - rb;
+};
+
 const EducationOpportunity = () => {
   const { jakaumat, koulutusmahdollisuus, osaamiset, profiiliKiinnostuksetUris } = useLoaderData<LoaderData>();
   const isLoggedIn = useIsLoggedIn();
@@ -115,6 +125,7 @@ const EducationOpportunity = () => {
             <div className="grid w-full grow grid-cols-2 gap-6">
               {(Object.keys(jakaumat) as JakaumaKey[])
                 .filter((key) => !['osaaminen', 'ammatti', isPrd ? 'kunta' : undefined].includes(key))
+                .sort(sortJakaumatByOrderRank)
                 .map((key) => (
                   <EducationJakaumaList key={key} name={key} />
                 ))}

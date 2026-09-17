@@ -316,7 +316,8 @@
     "maksullisuus": {
       "lukuvuosimaksu": "Tuition fee",
       "maksullinen": "Paid",
-      "maksuton": "Free of charge"
+      "maksuton": "Free of charge",
+      "tooltip": "Prices for citizens outside the EU and EEA:"
     },
     "palkanPeruste": {
       "OTHER": "Others",
