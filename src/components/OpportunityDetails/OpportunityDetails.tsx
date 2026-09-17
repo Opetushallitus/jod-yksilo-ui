@@ -23,7 +23,7 @@ import { getMahdollisuusAlityyppi } from '@/routes/Tool/utils';
 import type { MahdollisuusAlityyppi, MahdollisuusTyyppi } from '@/routes/types';
 import { useIsSessionExpired } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
-import { copyToClipboard, getLocalizedText } from '@/utils';
+import { getLocalizedText, share } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 
 import { CounselingCard } from '../CounselingCard/CounselingCard';
@@ -166,15 +166,13 @@ const OpportunityDetails = ({
               className="bg-bg-gray-2"
             />
 
-            {isDev && (
-              <ActionButton
-                label={t('common:share')}
-                icon={<JodShare className="text-accent" />}
-                onClick={() => void copyToClipboard(globalThis.location.href)}
-                className="bg-bg-gray-2"
-                testId="opportunity-details-share-button"
-              />
-            )}
+            <ActionButton
+              label={t('common:share')}
+              icon={<JodShare className="text-accent" />}
+              onClick={() => void share(t('front-page'), title, globalThis.location.href)}
+              className="bg-bg-gray-2"
+              testId="opportunity-details-share-button"
+            />
 
             {!!globalThis.print && (
               <ActionButton

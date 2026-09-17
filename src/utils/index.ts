@@ -188,6 +188,23 @@ export const copyToClipboard = async (text: string) => {
   }
 };
 
+export const share = async (title: string, text: string, url: string) => {
+  const data = {
+    title,
+    text,
+    url,
+  };
+  if (navigator.share && navigator.canShare(data)) {
+    try {
+      await navigator.share(data);
+    } catch (_) {
+      //User canceled or sharing failed
+    }
+  } else {
+    await copyToClipboard(url);
+  }
+};
+
 export const parseBoolean = (value: unknown) => {
   if (typeof value === 'boolean' && value === true) {
     return true;

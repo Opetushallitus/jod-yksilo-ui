@@ -303,6 +303,7 @@ const Favorites = () => {
                   mahdollisuusId={id}
                   mahdollisuusTyyppi={mahdollisuusTyyppi}
                   menuId={id}
+                  title={getLocalizedText(mahdollisuus.otsikko)}
                 />
               }
               menuId={id}
