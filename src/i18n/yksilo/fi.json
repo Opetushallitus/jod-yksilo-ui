@@ -998,8 +998,8 @@
     "title": "Hae mahdollisuuksia"
   },
   "service-catalog": {
-    "description": "Löydät omiin tarpeisiisi sopivan ohjauspalvelun täältä.",
-    "header": "Kaipaatko neuvontaa ja ohjausta oman suunnan löytämiseen?"
+    "description": "Ohjaus- ja neuvontapalveluista löydät tukea ura- ja koulutusvaihtoehtoihin liittyvään pohdintaan.",
+    "header": "Tarvitsetko henkilökohtaista ohjausta?"
   },
   "show": "Näytä",
   "show-less": "Näytä vähemmän",
