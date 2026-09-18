@@ -73,7 +73,7 @@ const AttachmentStep = ({
   };
 
   return (
-    <div className="box-content flex max-w-modal-content flex-col px-5 font-arial md:px-9">
+    <div className="box-content flex max-w-modal-content flex-col px-5 font-arial md:max-w-none md:px-9">
       <p className="mb-6">
         <Trans i18nKey="preferences.cv-import.attachment.description" />
       </p>

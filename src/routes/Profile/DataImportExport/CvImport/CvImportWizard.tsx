@@ -4,13 +4,17 @@ import { useTranslation } from 'react-i18next';
 import { Button, Modal, useMediaQueries, useNoteStack, WizardProgress } from '@jod/design-system';
 import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/icons';
 
+import { osaamiset } from '@/api/osaamiset';
 import { ModalHeader } from '@/components/ModalHeader';
 import { ModalComponentProps } from '@/hooks/useModal';
 
 import AttachmentStep from './AttachmentStep';
-import SummaryStep from './SummaryStep';
+import { CompetenceSelectionStep } from './CompetenceSelectionStep';
+import InfoSelectionStep from './InfoSelectionStep';
 import { useCvUploadAndPoll } from './useCvUploadAndPoll';
-import { buildSaveDto, convertTulosToTableRows } from './utils';
+import { buildSaveDto, collectOsaamisetUris, convertTulosToTableRows, type CvImportConvertedData } from './utils';
+
+type OsaaminenValue = { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> };
 
 interface FooterButtonProps {
   ref?: React.RefObject<HTMLButtonElement | null>;
@@ -43,10 +47,11 @@ const FooterButton = ({ ref, onClick, label, variant = 'white', icon, testId, di
 const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
   const { t } = useTranslation();
   const [step, setStep] = React.useState(1);
-  const steps = 2;
+  const steps = 3;
 
   const isAttachmentStep = React.useMemo(() => step === 1, [step]);
-  const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
+  const isInfoSelectionStep = React.useMemo(() => step === 2, [step]);
+  const isCompetenceSelectionStep = React.useMemo(() => step === steps, [step, steps]);
 
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
   const [fileError, setFileError] = React.useState<string | null>(null);
@@ -57,19 +62,74 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
   const { state, start, cancel, retry, save } = useCvUploadAndPoll();
   const cancelButtonRef = React.useRef<HTMLButtonElement>(null);
   const { addTemporaryNote } = useNoteStack();
+  const [isLoadingOsaamiset, setIsLoadingOsaamiset] = React.useState(false);
 
-  const isLoading = state.step === 'uploading' || state.step === 'polling';
-  const convertedData = React.useMemo(() => (state.tulos ? convertTulosToTableRows(state.tulos) : null), [state.tulos]);
+  const isLoading = state.step === 'uploading' || state.step === 'polling' || isLoadingOsaamiset;
+  const [convertedData, setConvertedData] = React.useState<CvImportConvertedData | null>(null);
+
+  React.useEffect(() => {
+    const tulos = state.tulos;
+    if (!tulos) {
+      setIsLoadingOsaamiset(false);
+      setConvertedData(null);
+      return;
+    }
+
+    const uris = collectOsaamisetUris(tulos);
+    if (uris.length === 0) {
+      setIsLoadingOsaamiset(false);
+      setConvertedData(convertTulosToTableRows(tulos));
+      return;
+    }
+
+    const controller = new AbortController();
+    setIsLoadingOsaamiset(true);
+    void (async () => {
+      let osaamisetMap: Record<string, OsaaminenValue> | undefined;
+      try {
+        const combined = await osaamiset.combine(
+          uris,
+          (uri) => uri,
+          (_, o) => ({ id: o.uri, nimi: o.nimi, kuvaus: o.kuvaus }),
+          controller.signal,
+        );
+        osaamisetMap = Object.fromEntries(combined.map((o) => [o.id, o]));
+      } catch (error) {
+        if (controller.signal.aborted) {
+          return;
+        }
+        console.error('Failed to load osaamiset for CV import', error);
+        addTemporaryNote(() => ({
+          title: t('preferences.cv-import.info-selection.competences-failed.title'),
+          description: t('preferences.cv-import.info-selection.competences-failed.description'),
+          variant: 'warning',
+          isCollapsed: false,
+        }));
+      }
+      if (controller.signal.aborted) {
+        return;
+      }
+      setConvertedData(convertTulosToTableRows(tulos, osaamisetMap));
+      setIsLoadingOsaamiset(false);
+    })();
+
+    return () => {
+      controller.abort();
+    };
+  }, [state.tulos, addTemporaryNote, t]);
 
   const headerText = React.useMemo(() => {
     if (isAttachmentStep) {
       return t('preferences.cv-import.attachment.title');
     }
-    if (isSummaryStep) {
-      return t('preferences.cv-import.summary.title');
+    if (isInfoSelectionStep) {
+      return t('preferences.cv-import.info-selection.title');
+    }
+    if (isCompetenceSelectionStep) {
+      return t('preferences.cv-import.competence-selection.title');
     }
     return '';
-  }, [t, isAttachmentStep, isSummaryStep]);
+  }, [t, isAttachmentStep, isInfoSelectionStep, isCompetenceSelectionStep]);
 
   const handleClose = React.useCallback(() => {
     if (state.step === 'failed') {
@@ -144,16 +204,6 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
             testId="cv-import-cancel"
           />
 
-          {step < steps && (
-            <FooterButton
-              onClick={handleNext}
-              label={t('next')}
-              variant={isFileAttached ? 'accent' : 'white'}
-              icon={<JodArrowRight />}
-              disabled={!isFileAttached}
-              testId="cv-import-next"
-            />
-          )}
           {step > 1 && (
             <FooterButton
               onClick={handlePrevious}
@@ -163,7 +213,17 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
               disabled={isLoading}
             />
           )}
-          {state.step === 'failed' && isSummaryStep && (
+          {step < steps && state.step !== 'failed' && (
+            <FooterButton
+              onClick={handleNext}
+              label={t('next')}
+              variant={isFileAttached ? 'accent' : 'white'}
+              icon={<JodArrowRight />}
+              disabled={!isFileAttached}
+              testId="cv-import-next"
+            />
+          )}
+          {state.step === 'failed' && isInfoSelectionStep && (
             <FooterButton
               label={t('try-again')}
               variant="accent"
@@ -198,7 +258,7 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
       convertedData,
       handleSave,
       isLoading,
-      isSummaryStep,
+      isInfoSelectionStep,
     ],
   );
 
@@ -214,11 +274,24 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
           fileInputRef={fileInputRef}
         />
       );
-    } else if (isSummaryStep) {
-      return <SummaryStep isLoading={isLoading} convertedData={convertedData} />;
+    }
+    if (isInfoSelectionStep) {
+      return <InfoSelectionStep isLoading={isLoading} convertedData={convertedData} />;
+    } else if (isCompetenceSelectionStep) {
+      return <CompetenceSelectionStep convertedData={convertedData} />;
     }
     return <></>;
-  }, [isAttachmentStep, isSummaryStep, selectedFile, fileError, fileInputRef, convertedData, isLoading, state.error]);
+  }, [
+    isAttachmentStep,
+    isInfoSelectionStep,
+    isCompetenceSelectionStep,
+    selectedFile,
+    fileError,
+    fileInputRef,
+    convertedData,
+    isLoading,
+    state.error,
+  ]);
 
   const progress = React.useMemo(
     () => (
