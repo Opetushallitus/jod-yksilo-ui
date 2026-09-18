@@ -2,48 +2,20 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 
-import { Button, EmptyState, MainLayout, tidyClasses, useMediaQueries } from '@jod/design-system';
-import { JodArrowRight, JodOpenInNew } from '@jod/design-system/icons';
+import { Button, EmptyState, MainLayout, useMediaQueries } from '@jod/design-system';
+import { JodArrowRight } from '@jod/design-system/icons';
 
 import { Breadcrumb } from '@/components';
+import { CounselingCard } from '@/components/CounselingCard/CounselingCard';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { useSuosikitStore } from '@/stores/useSuosikitStore';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
-import { getLinkTo } from '@/utils/routeUtils';
 
 import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import GoalModal from './addGoal/GoalModal';
 import MyGoalsSection from './MyGoalsSection';
-
-const GuidanceCard = ({ testId, className = '' }: { testId: string; className?: string }) => {
-  const { t } = useTranslation();
-
-  return (
-    <div
-      className={tidyClasses(`flex flex-col gap-3 rounded-lg bg-primary-1-dark-2 p-6 text-white ${className}`)}
-      data-testid={testId}
-    >
-      <h2 className="text-heading-2">{t('home.need-personal-guidance')}</h2>
-      <div className="flex flex-col gap-6">
-        <p className="text-body-lg">{t('home.need-personal-guidance-content')}</p>
-        <Button
-          label={t('move-to-service')}
-          iconSide="right"
-          icon={<JodOpenInNew ariaLabel={t('common:external-link')} />}
-          variant="white"
-          linkComponent={getLinkTo(t('common:navigation.extra.palveluhakemisto.url'), {
-            useAnchor: true,
-            target: '_blank',
-          })}
-          className="w-fit"
-          testId="goals-service-directory-button"
-        />
-      </div>
-    </div>
-  );
-};
 
 const MyGoals = () => {
   const { t, i18n } = useTranslation();
@@ -94,7 +66,7 @@ const MyGoals = () => {
             title={t('profile.my-goals.favorites-card.title')}
             description={t('profile.my-goals.favorites-card.description')}
           />
-          <GuidanceCard testId="goals-service-directory" />
+          <CounselingCard />
         </div>
       }
       testId="my-goals-page"
@@ -140,7 +112,7 @@ const MyGoals = () => {
             title={t('profile.my-goals.favorites-card.title')}
             description={t('profile.my-goals.favorites-card.description')}
           />
-          <GuidanceCard testId="goals-service-directory" />
+          <CounselingCard />
         </div>
       )}
     </MainLayout>
