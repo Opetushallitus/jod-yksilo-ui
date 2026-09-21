@@ -6,5 +6,6 @@
   "JAKOLINKKI": true,
   "MAHDOLLISUUDET_HAKU": true,
   "CV_IMPORT": true,
-  "MPASSID": true
+  "MPASSID": true,
+  "TOIMIALA_TOL2025": false
 }

@@ -24,7 +24,7 @@ import {
   type ToolState,
 } from '@/stores/useToolStore/ToolStoreModel';
 import { paginate } from '@/utils';
-import { mapKoulutusCodesToLabels } from '@/utils/codes/codes';
+import { getToimialaLuokitus, mapKoulutusCodesToLabels } from '@/utils/codes/codes';
 
 const SUOSIKIT_PATH = '/api/profiili/suosikit';
 export const DEFAULT_PAINOTUS = 50;
@@ -86,6 +86,17 @@ export const useToolStore = create<ToolState>()(
           shouldFetchData: true,
           osaamisKiinnostusPainotus: DEFAULT_PAINOTUS,
         });
+      },
+
+      invalidateToimialaFilters: () => {
+        const luokitus = getToimialaLuokitus();
+        if (get().toimialaLuokitus === luokitus) {
+          return;
+        }
+        // The active TOL version changed under a session that already had toimiala filters
+        // selected. The same section letter denotes a different industry in TOL 2008 and
+        // TOL 2025, so drop the selections instead of letting them silently change meaning.
+        set({ toimialaLuokitus: luokitus, filters: { ...get().filters, toimialat: [] } });
       },
       setOsaamiset: (state) => {
         set({ osaamiset: state, shouldFetchData: true, settingsHaveChanged: true });

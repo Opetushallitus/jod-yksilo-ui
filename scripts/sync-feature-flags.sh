@@ -22,6 +22,9 @@ VALID_FEATURES=(
   "MAHDOLLISUUDET_HAKU"
   "CV_IMPORT"
   "MPASSID"
+  # UI-only flag, not in Feature.java. Flip to true when the backend starts serving TOL 2025
+  # toimiala codes; the UI ships both codesets and picks one at runtime.
+  "TOIMIALA_TOL2025"
 )
 
 # Colors for output

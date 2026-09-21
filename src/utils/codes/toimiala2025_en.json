@@ -1,20 +1,8 @@
 [
   {
-    "code": "SSSSS",
-    "level": 0.0,
-    "parentCode": null,
-    "classificationItemNames": [
-      {
-        "langName": "englanti",
-        "lang": "en",
-        "name": "Industries total"
-      }
-    ]
-  },
-  {
     "code": "A",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -62,7 +50,7 @@
   {
     "code": "B",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -134,7 +122,7 @@
   {
     "code": "C",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -211,7 +199,7 @@
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Manufacture of leather and related products"
+        "name": "Manufacture of leather and related products of other materials"
       }
     ]
   },
@@ -427,19 +415,19 @@
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Repair and installation of machinery and equipment"
+        "name": "Repair, maintenance and installation of machinery and equipment"
       }
     ]
   },
   {
     "code": "D",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Electricity,  gas, steam and air conditioning supply"
+        "name": "Electricity, gas, steam and air conditioning supply"
       }
     ]
   },
@@ -458,7 +446,7 @@
   {
     "code": "E",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -499,7 +487,7 @@
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Waste collection, treatment and disposal activities; materials recovery"
+        "name": "Waste collection, recovery and disposal activities"
       }
     ]
   },
@@ -511,14 +499,14 @@
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Remediation activities and other waste management services"
+        "name": "Remediation activities and other waste management service activities"
       }
     ]
   },
   {
     "code": "F",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -535,7 +523,7 @@
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Construction of buildings"
+        "name": "Construction of residential and non-residential buildings"
       }
     ]
   },
@@ -566,24 +554,12 @@
   {
     "code": "G",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Wholesale and retail trade; repair of motor vehicles and motorcycles"
-      }
-    ]
-  },
-  {
-    "code": "45",
-    "level": 2.0,
-    "parentCode": "G",
-    "classificationItemNames": [
-      {
-        "langName": "englanti",
-        "lang": "en",
-        "name": "Wholesale and retail trade and repair of motor vehicles and motorcycles"
+        "name": "Wholesale and retail trade"
       }
     ]
   },
@@ -595,7 +571,7 @@
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Wholesale trade, except of motor vehicles and motorcycles"
+        "name": "Wholesale trade"
       }
     ]
   },
@@ -607,14 +583,14 @@
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Retail trade, except of motor vehicles and motorcycles"
+        "name": "Retail trade"
       }
     ]
   },
   {
     "code": "H",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -667,7 +643,7 @@
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Warehousing and support activities for transportation"
+        "name": "Warehousing, storage and support activities for transportation"
       }
     ]
   },
@@ -686,7 +662,7 @@
   {
     "code": "I",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -722,12 +698,12 @@
   {
     "code": "J",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Information and communication"
+        "name": "Publishing, broadcasting, and content production and distribution activities"
       }
     ]
   },
@@ -763,26 +739,38 @@
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Programming and broadcasting activities"
+        "name": "Programming, broadcasting, news agency and other content distribution activities"
+      }
+    ]
+  },
+  {
+    "code": "K",
+    "level": 1.0,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "englanti",
+        "lang": "en",
+        "name": "Telecommunication, computer programming, consulting, computing infrastructure and other information service activities"
       }
     ]
   },
   {
     "code": "61",
     "level": 2.0,
-    "parentCode": "J",
+    "parentCode": "K",
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Telecommunications"
+        "name": "Telecommunication"
       }
     ]
   },
   {
     "code": "62",
     "level": 2.0,
-    "parentCode": "J",
+    "parentCode": "K",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -794,19 +782,19 @@
   {
     "code": "63",
     "level": 2.0,
-    "parentCode": "J",
+    "parentCode": "K",
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Information service activities"
+        "name": "Computing infrastructure, data processing, hosting and other information service activities"
       }
     ]
   },
   {
-    "code": "K",
+    "code": "L",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -818,7 +806,7 @@
   {
     "code": "64",
     "level": 2.0,
-    "parentCode": "K",
+    "parentCode": "L",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -830,7 +818,7 @@
   {
     "code": "65",
     "level": 2.0,
-    "parentCode": "K",
+    "parentCode": "L",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -842,7 +830,7 @@
   {
     "code": "66",
     "level": 2.0,
-    "parentCode": "K",
+    "parentCode": "L",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -852,9 +840,9 @@
     ]
   },
   {
-    "code": "L",
+    "code": "M",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -866,7 +854,7 @@
   {
     "code": "68",
     "level": 2.0,
-    "parentCode": "L",
+    "parentCode": "M",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -876,9 +864,9 @@
     ]
   },
   {
-    "code": "M",
+    "code": "N",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -890,7 +878,7 @@
   {
     "code": "69",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -902,19 +890,19 @@
   {
     "code": "70",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Activities of head offices; management consultancy activities"
+        "name": "Activities of head offices and management consultancy"
       }
     ]
   },
   {
     "code": "71",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -926,7 +914,7 @@
   {
     "code": "72",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -938,19 +926,19 @@
   {
     "code": "73",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Advertising and market research"
+        "name": "Activities of advertising, market research and public relations"
       }
     ]
   },
   {
     "code": "74",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -962,7 +950,7 @@
   {
     "code": "75",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -972,9 +960,9 @@
     ]
   },
   {
-    "code": "N",
+    "code": "O",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -986,7 +974,7 @@
   {
     "code": "77",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -998,7 +986,7 @@
   {
     "code": "78",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1010,7 +998,7 @@
   {
     "code": "79",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1022,19 +1010,19 @@
   {
     "code": "80",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Security and investigation activities"
+        "name": "Investigation and security activities"
       }
     ]
   },
   {
     "code": "81",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1046,7 +1034,7 @@
   {
     "code": "82",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1056,9 +1044,9 @@
     ]
   },
   {
-    "code": "O",
+    "code": "P",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1070,7 +1058,7 @@
   {
     "code": "84",
     "level": 2.0,
-    "parentCode": "O",
+    "parentCode": "P",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1080,9 +1068,9 @@
     ]
   },
   {
-    "code": "P",
+    "code": "Q",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1094,7 +1082,7 @@
   {
     "code": "85",
     "level": 2.0,
-    "parentCode": "P",
+    "parentCode": "Q",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1104,9 +1092,9 @@
     ]
   },
   {
-    "code": "Q",
+    "code": "R",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1118,7 +1106,7 @@
   {
     "code": "86",
     "level": 2.0,
-    "parentCode": "Q",
+    "parentCode": "R",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1130,7 +1118,7 @@
   {
     "code": "87",
     "level": 2.0,
-    "parentCode": "Q",
+    "parentCode": "R",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1142,7 +1130,7 @@
   {
     "code": "88",
     "level": 2.0,
-    "parentCode": "Q",
+    "parentCode": "R",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1152,33 +1140,33 @@
     ]
   },
   {
-    "code": "R",
+    "code": "S",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Arts, entertainment and recreation"
+        "name": "Arts, sports and recreation"
       }
     ]
   },
   {
     "code": "90",
     "level": 2.0,
-    "parentCode": "R",
+    "parentCode": "S",
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Creative, arts and entertainment activities"
+        "name": "Arts creation and performing arts activities"
       }
     ]
   },
   {
     "code": "91",
     "level": 2.0,
-    "parentCode": "R",
+    "parentCode": "S",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1190,7 +1178,7 @@
   {
     "code": "92",
     "level": 2.0,
-    "parentCode": "R",
+    "parentCode": "S",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1202,7 +1190,7 @@
   {
     "code": "93",
     "level": 2.0,
-    "parentCode": "R",
+    "parentCode": "S",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1212,9 +1200,9 @@
     ]
   },
   {
-    "code": "S",
+    "code": "T",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1226,7 +1214,7 @@
   {
     "code": "94",
     "level": 2.0,
-    "parentCode": "S",
+    "parentCode": "T",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1238,43 +1226,43 @@
   {
     "code": "95",
     "level": 2.0,
-    "parentCode": "S",
+    "parentCode": "T",
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Repair of computers and personal and household goods"
+        "name": "Repair and maintenance of computers, personal and household goods, and motor vehicles and motorcycles"
       }
     ]
   },
   {
     "code": "96",
     "level": 2.0,
-    "parentCode": "S",
+    "parentCode": "T",
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Other personal service activities"
+        "name": "Personal service activities"
       }
     ]
   },
   {
-    "code": "T",
+    "code": "U",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Activities of households as employers; undifferentiated goods- and services-producing activities of households for own use"
+        "name": "Activities of households as employers and undifferentiated goods – and service-producing activities of households for own use"
       }
     ]
   },
   {
     "code": "97",
     "level": 2.0,
-    "parentCode": "T",
+    "parentCode": "U",
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1286,19 +1274,19 @@
   {
     "code": "98",
     "level": 2.0,
-    "parentCode": "T",
+    "parentCode": "U",
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
-        "name": "Undifferentiated goods- and services-producing activities of private households for own use"
+        "name": "Undifferentiated goods- and service-producing activities of private households for own use"
       }
     ]
   },
   {
-    "code": "U",
+    "code": "V",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "englanti",
@@ -1310,36 +1298,12 @@
   {
     "code": "99",
     "level": 2.0,
-    "parentCode": "U",
+    "parentCode": "V",
     "classificationItemNames": [
       {
         "langName": "englanti",
         "lang": "en",
         "name": "Activities of extraterritorial organisations and bodies"
-      }
-    ]
-  },
-  {
-    "code": "X",
-    "level": 1.0,
-    "parentCode": "SSSSS",
-    "classificationItemNames": [
-      {
-        "langName": "englanti",
-        "lang": "en",
-        "name": "Industry unknown"
-      }
-    ]
-  },
-  {
-    "code": "00",
-    "level": 2.0,
-    "parentCode": "X",
-    "classificationItemNames": [
-      {
-        "langName": "englanti",
-        "lang": "en",
-        "name": "Industry unknown"
       }
     ]
   }

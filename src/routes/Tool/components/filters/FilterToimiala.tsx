@@ -6,40 +6,23 @@ import { Checkbox } from '@jod/design-system';
 
 import { LangCode } from '@/i18n/config.ts';
 import { useToolStore } from '@/stores/useToolStore';
-import { getCodesetValue } from '@/utils/codes/codes.ts';
+import { getCodesetItems } from '@/utils/codes/codes.ts';
 
-const toimialakoodit: [string, string][] = [
-  ['A', 'Maatalous, metsätalous ja kalatalous'],
-  ['B', 'Kaivostoiminta ja louhinta'],
-  ['C', 'Teollisuus'],
-  ['D', 'Sähkö, kaasu, lämpö, höyry ja ilmastointi'],
-  ['E', 'Vesi, viemäri ja jätteen käsittely'],
-  ['F', 'Rakentaminen'],
-  ['G', 'Kauppa; ajoneuvojen korjaus'],
-  ['H', 'Kuljetus ja varastointi'],
-  ['I', 'Majoitus- ja ravitsemistoiminta'],
-  ['J', 'Tietopalvelut'],
-  ['K', 'Rahoitus- ja vakuutustoiminta'],
-  ['L', 'Kiinteistötoiminta'],
-  ['M', 'Ammattimainen, tieteellinen ja tekninen toiminta'],
-  ['N', 'Hallinto- ja tukipalvelutoiminta'],
-  ['O', 'Julkinen hallinto, puolustus ja sosiaalivakuutus'],
-  ['P', 'Koulutus'],
-  ['Q', 'Terveys- ja sosiaalipalvelut'],
-  ['R', 'Taiteet, viihde ja virkistys'],
-  ['S', 'Muu palvelutoiminta'],
-  [
-    'T',
-    'Kotitalouksien toiminta työnantajina; kotitalouksien eriyttämätön toiminta tavaroiden ja palvelujen tuottamiseksi omaan käyttöön',
-  ],
-  ['U', 'Kansainvälisten organisaatioiden ja toimielinten toiminta'],
-  ['X', 'Toimiala tuntematon'],
-];
+/**
+ * The top level sections of the active toimiala classification, as [code, localized name].
+ * Read from the codeset so that the list follows whichever version is active: TOL 2008 has
+ * 'X' (Toimiala tuntematon) and TOL 2025 does not, and TOL 2025 has an extra section.
+ */
+const getToimialaSections = async (lang: LangCode): Promise<[string, string][]> => {
+  const items = await getCodesetItems('toimiala', lang).catch(() => []);
 
-const translateToimiala = async ([code, defaultName]: [string, string], lang: LangCode): Promise<[string, string]> => {
-  const name = await getCodesetValue('toimiala', code, lang).catch(() => defaultName);
-  return name === code ? [code, defaultName] : [code, name];
+  return items
+    .filter((item) => item.level === 1)
+    .map((item): [string, string] => [item.code, item.classificationItemNames.find((n) => n.lang === lang)?.name ?? ''])
+    .filter(([, name]) => name !== '')
+    .sort((a, b) => a[1].localeCompare(b[1], lang));
 };
+
 export const FilterToimiala = () => {
   const {
     t,
@@ -63,28 +46,23 @@ export const FilterToimiala = () => {
   };
 
   React.useEffect(() => {
-    void Promise.all(toimialakoodit.map((toimiala) => translateToimiala(toimiala, language as LangCode))).then(
-      (translatedToimialat) => {
-        translatedToimialat.sort((a, b) => a[1].localeCompare(b[1]));
-        setToimialat(translatedToimialat);
-      },
-    );
+    void getToimialaSections(language as LangCode).then(setToimialat);
   }, [language]);
 
   return (
     <fieldset className="flex flex-col gap-5">
       <legend className="sr-only mb-5 text-heading-4-mobile sm:text-heading-4">{t('show')}</legend>
-      {toimialat.map((toimiala) => (
+      {toimialat.map(([code, name]) => (
         <Checkbox
-          key={toimiala[1]}
-          ariaLabel={toimiala[1]}
+          key={code}
+          ariaLabel={name}
           className="font-poppins!"
-          checked={filter.includes(toimiala[0])}
-          label={toimiala[1]}
-          name={toimiala[1]}
+          checked={filter.includes(code)}
+          label={name}
+          name={code}
           onChange={onFilterChange}
-          value={toimiala[0]}
-          testId="upper-level-ammattiryhma-filter"
+          value={code}
+          testId="toimiala-filter"
         />
       ))}
     </fieldset>

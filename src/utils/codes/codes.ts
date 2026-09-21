@@ -1,5 +1,6 @@
 import i18n, { supportedLanguageCodes, type LangCode } from '@/i18n/config';
 import { TypedMahdollisuus } from '@/routes/types';
+import { isFeatureEnabled } from '@/utils/features';
 import type { Codeset } from '@/utils/jakaumaUtils';
 
 /**
@@ -8,45 +9,26 @@ import type { Codeset } from '@/utils/jakaumaUtils';
  */
 import koulutusalaData from './koulutusala_fi.json';
 /**
- Toimiala contains data from here https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/toimiala_1_20080101/classificationItems?content=data&meta=max&lang=fi.
- It is shortened to contain only necessary levels by following command: jq '[.[] | select(.level <= 2)]' toimiala_fi.json > toimiala_fi_small.json
+ Toimiala is bundled in two versions, TOL 2008 (toimiala_*.json, classification toimiala_1_20080101)
+ and TOL 2025 (toimiala2025_*.json, classification toimiala_1_20250101). They are generated with:
+
+ for L in fi sv en; do
+   curl -s "https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/<CLASSIFICATION>/classificationItems?content=data&meta=max&lang=$L" \
+   | jq '[.[] | select(.level <= 2) | {code, level, parentCode, classificationItemNames}]' > <PREFIX>_$L.json
+ done
  */
+import toimiala2025Data from './toimiala2025_fi.json';
 import toimialaData from './toimiala_fi.json';
 
-export interface Classification {
-  localId: string;
-  internationalRecommendation: boolean;
-  nationalRecommendation: boolean;
-  classificationName: {
-    langName: string;
-    lang: string;
-    name: string;
-  }[];
-  classificationDescription: {
-    langName: string;
-    lang: string;
-    description: string;
-  }[];
-}
-
 export interface ClassificationItem {
-  classification: Classification;
-  localId: string;
   level: number;
   code: string;
-  order: number;
-  modifiedDate?: string;
-  parentItemLocalId: string | null;
   parentCode: string | null;
   classificationItemNames: {
     langName: string;
     lang: string;
     name: string;
   }[];
-  explanatoryNotes: unknown[];
-  classificationIndexEntry: {
-    text: string[];
-  };
 }
 
 // Tilastokeskus sources for the JSON files
@@ -54,10 +36,77 @@ export interface ClassificationItem {
 // https://stat.fi/fi/luokitukset/kieli/kieli_1_20101115
 // https://stat.fi/fi/luokitukset/kunta/kunta_1_20250101
 // https://stat.fi/fi/luokitukset/valtio/valtio_2_20120101
-// https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/toimiala_1_20080101/classificationItems
+// https://stat.fi/fi/luokitukset/toimiala/toimiala_1_20080101
+// https://stat.fi/fi/luokitukset/toimiala/toimiala_1_20250101
 
-// Lazy cache: Map<Codeset, Map<LangCode, Promise<Map<code, value>>>>
-const codesetCache = new Map<Codeset, Map<LangCode, Promise<Map<string, string>>>>();
+/**
+ * TOL 2008 and TOL 2025 are not interchangeable: TOL 2025 splits section J in two, which shifts
+ * every following section letter by one (2008 K = Rahoitus -> 2025 L, 2008 Q = Terveys- ja
+ * sosiaalipalvelut -> 2025 R), and 35 two-digit division codes end up under a different section.
+ * Every TOL 2025 two-digit code also exists in TOL 2008, so the active classification cannot be
+ * detected from the data and must be selected explicitly. The backend switches its codes
+ * independently of this UI, so the choice is a runtime feature flag rather than a build-time one.
+ */
+const resolveCodesetFile = (codeset: Codeset): string =>
+  codeset === 'toimiala' && isFeatureEnabled('TOIMIALA_TOL2025') ? 'toimiala2025' : codeset;
+
+/**
+ * Identifier of the active toimiala classification. Stored alongside persisted toimiala codes so
+ * that selections made under the other version can be discarded instead of silently changing
+ * meaning, since the same section letter denotes a different industry in TOL 2008 and TOL 2025.
+ */
+export const getToimialaLuokitus = (): string => resolveCodesetFile('toimiala');
+
+// Lazy caches, keyed by the resolved file name so the two toimiala versions never share an entry.
+const codesetItemsCache = new Map<string, Map<LangCode, Promise<ClassificationItem[]>>>();
+const codesetCache = new Map<string, Map<LangCode, Promise<Map<string, string>>>>();
+
+const getFromCache = <T>(
+  cache: Map<string, Map<LangCode, Promise<T>>>,
+  file: string,
+  lang: LangCode,
+  load: () => Promise<T>,
+): Promise<T> => {
+  let langMap = cache.get(file);
+  if (!langMap) {
+    langMap = new Map<LangCode, Promise<T>>();
+    cache.set(file, langMap);
+  }
+
+  let cachedPromise = langMap.get(lang);
+  if (!cachedPromise) {
+    cachedPromise = load();
+    langMap.set(lang, cachedPromise);
+  }
+
+  return cachedPromise;
+};
+
+/**
+ * Lazily loads and caches the raw classification items of a codeset for a given language.
+ * Use this when the hierarchy is needed (level, parentCode); for plain code -> name lookups
+ * use getCodeset or getCodesetValue.
+ * @param codeset Codeset name
+ * @param lang Language code
+ * @returns Promise resolving to the classification items, or an empty array if the file is missing
+ */
+export const getCodesetItems = (codeset: Codeset, lang: LangCode): Promise<ClassificationItem[]> => {
+  const file = resolveCodesetFile(codeset);
+
+  return getFromCache(codesetItemsCache, file, lang, () =>
+    import(`./${file}_${lang}.json`).then((imported) => {
+      if (!Array.isArray(imported?.default)) {
+        const { hostname } = globalThis.location;
+        if (import.meta.env.DEV || ['localhost', 'jodkehitys'].some((str) => hostname.includes(str))) {
+          console.error(`Could not find codeset ${file} for language ${lang}!`);
+        }
+        return [];
+      }
+
+      return imported.default as ClassificationItem[];
+    }),
+  );
+};
 
 /**
  * Lazily loads and caches a codeset for a given language.
@@ -66,40 +115,18 @@ const codesetCache = new Map<Codeset, Map<LangCode, Promise<Map<string, string>>
  * @param lang Language code
  * @returns Promise resolving to Map<code, value>
  */
-export const getCodeset = (codeset: Codeset, lang: LangCode): Promise<Map<string, string>> => {
-  let langMap = codesetCache.get(codeset);
-  if (!langMap) {
-    langMap = new Map<LangCode, Promise<Map<string, string>>>();
-    codesetCache.set(codeset, langMap);
-  }
+export const getCodeset = (codeset: Codeset, lang: LangCode): Promise<Map<string, string>> =>
+  getFromCache(codesetCache, resolveCodesetFile(codeset), lang, async () => {
+    const codeMap = new Map<string, string>();
 
-  let cachedPromise = langMap.get(lang);
-  if (!cachedPromise) {
-    cachedPromise = import(`./${codeset}_${lang}.json`).then((imported) => {
-      const codeMap = new Map<string, string>();
-
-      if (!Array.isArray(imported?.default)) {
-        const { hostname } = globalThis.location;
-        if (import.meta.env.DEV || ['localhost', 'jodkehitys'].some((str) => hostname.includes(str))) {
-          console.error(`Could not find codeset ${codeset} for language ${lang}!`);
-        }
-        return codeMap;
+    for (const entry of await getCodesetItems(codeset, lang)) {
+      const nameItem = entry.classificationItemNames.find((item) => item.lang === lang);
+      if (nameItem?.name) {
+        codeMap.set(entry.code, nameItem.name);
       }
-
-      const data = (imported.default ?? []) as ClassificationItem[];
-      for (const entry of data) {
-        const nameItem = entry.classificationItemNames.find((item) => item.lang === lang);
-        if (nameItem?.name) {
-          codeMap.set(entry.code, nameItem.name);
-        }
-      }
-      return codeMap;
-    });
-    langMap.set(lang, cachedPromise);
-  }
-
-  return cachedPromise;
-};
+    }
+    return codeMap;
+  });
 
 /**
  * Fetches a value from a codeset JSON file.
@@ -115,14 +142,28 @@ export const getCodesetValue = async (codeset: Codeset, code: string, lang: Lang
   return codeMap.get(code) ?? code;
 };
 
-export const getToimiala = (code: string): Partial<ClassificationItem> | undefined => {
-  const entry = toimialaData.find((obj) => {
-    if (!obj || typeof obj !== 'object') return false;
+const toByCode = (data: unknown[]) => {
+  const byCode = new Map<string, Partial<ClassificationItem>>();
+  for (const obj of data) {
+    if (!obj || typeof obj !== 'object') continue;
     const o = obj as Record<string, unknown>;
-    return typeof o.code === 'string' && o.code === code;
-  }) as Partial<ClassificationItem> | undefined;
-  return entry;
+    if (typeof o.code === 'string') {
+      byCode.set(o.code, o as Partial<ClassificationItem>);
+    }
+  }
+  return byCode;
 };
+
+// Language-independent lookups (only code/level/parentCode are read), so the fi files suffice.
+// Both toimiala versions are bundled: getToimiala is called per suggestion while filtering and
+// has to stay synchronous, and the trimmed files are small enough to carry both.
+const toimialaByCode = new Map<string, Map<string, Partial<ClassificationItem>>>([
+  ['toimiala', toByCode(toimialaData)],
+  ['toimiala2025', toByCode(toimiala2025Data)],
+]);
+
+export const getToimiala = (code: string): Partial<ClassificationItem> | undefined =>
+  toimialaByCode.get(resolveCodesetFile('toimiala'))?.get(code);
 
 export const getKoulutusala = (code: string): Partial<ClassificationItem> | undefined => {
   const entry = koulutusalaData.find((obj) => {
