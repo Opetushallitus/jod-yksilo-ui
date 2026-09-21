@@ -1,20 +1,8 @@
 [
   {
-    "code": "SSSSS",
-    "level": 0.0,
-    "parentCode": null,
-    "classificationItemNames": [
-      {
-        "langName": "ruotsi",
-        "lang": "sv",
-        "name": "Näringsgrenindelning total"
-      }
-    ]
-  },
-  {
     "code": "A",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -31,7 +19,7 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Jordbruk och jakt samt service i anslutning härtill"
+        "name": "Jordbruk och jakt samt stödverksamhet i anslutning härtill"
       }
     ]
   },
@@ -62,7 +50,7 @@
   {
     "code": "B",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -127,14 +115,14 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Service till utvinning"
+        "name": "Stödverksamhet avseende utvinning"
       }
     ]
   },
   {
     "code": "C",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -211,7 +199,7 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Tillverkning av läder, läder- och skinnvaror m.m."
+        "name": "Tillverkning av läder- och skinnvaror och liknande varor av andra material"
       }
     ]
   },
@@ -223,7 +211,7 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Tillverkning av trä och varor av trä, kork, rotting o.d. utom möbler"
+        "name": "Tillverkning av trä och varor av trä och kork, utom möbler: tillverkning av varor av halm, rotting o.d."
       }
     ]
   },
@@ -427,14 +415,14 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Reparation och installation av maskiner och apparater"
+        "name": "Reparation, underhåll och installation av maskiner och utrustning"
       }
     ]
   },
   {
     "code": "D",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -451,14 +439,14 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Försörjning av el, gas, värme och kyla"
+        "name": "El-, gas- och ångförsörjning samt luftkonditionering"
       }
     ]
   },
   {
     "code": "E",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -499,7 +487,7 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Avfallshantering; återvinning"
+        "name": "Insamling av avfall, återvinning och bortskaffande"
       }
     ]
   },
@@ -518,7 +506,7 @@
   {
     "code": "F",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -535,7 +523,7 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Byggande av hus"
+        "name": "Byggande av bostadshus och andra byggnader"
       }
     ]
   },
@@ -566,24 +554,12 @@
   {
     "code": "G",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Handel; reparation av motorfordon och motorcyklar"
-      }
-    ]
-  },
-  {
-    "code": "45",
-    "level": 2.0,
-    "parentCode": "G",
-    "classificationItemNames": [
-      {
-        "langName": "ruotsi",
-        "lang": "sv",
-        "name": "Handel samt reparation av motorfordon och motorcyklar"
+        "name": "Handel"
       }
     ]
   },
@@ -595,7 +571,7 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Parti- och provisionshandel utom med motorfordon"
+        "name": "Parti- och provisionshandel"
       }
     ]
   },
@@ -607,14 +583,14 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Detaljhandel utom med motorfordon och motorcyklar"
+        "name": "Detaljhandel"
       }
     ]
   },
   {
     "code": "H",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -667,7 +643,7 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Magasinering och stödtjänster till transport"
+        "name": "Magasinering, varulagring och stödverksamhet avseende transport"
       }
     ]
   },
@@ -686,7 +662,7 @@
   {
     "code": "I",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -715,19 +691,19 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Restaurang-, catering och barverksamhet"
+        "name": "Restaurang-, catering- och barverksamhet"
       }
     ]
   },
   {
     "code": "J",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Informations- och kommunikationsverksamhet"
+        "name": "Förlagsverksamhet, radio- och tv-sändning samt produktion och distribution av medieinnehåll"
       }
     ]
   },
@@ -751,7 +727,7 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Film-, video- och tv-programverksamhet, ljudinspelningar och fonogramutgivning"
+        "name": "Film-, video- och tv-programverksamhet, ljudinspelning och musikutgivning"
       }
     ]
   },
@@ -763,14 +739,26 @@
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Planering och sändning av program"
+        "name": "Planering, radio- och tv-sändning, nyhetsbyråer och annan distribution av medieinnehåll"
+      }
+    ]
+  },
+  {
+    "code": "K",
+    "level": 1.0,
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "ruotsi",
+        "lang": "sv",
+        "name": "Telekommunikation, dataprogrammering, datakonsultverksamhet, datainfrastruktur och annan informationsverksamhet"
       }
     ]
   },
   {
     "code": "61",
     "level": 2.0,
-    "parentCode": "J",
+    "parentCode": "K",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -782,79 +770,79 @@
   {
     "code": "62",
     "level": 2.0,
-    "parentCode": "J",
+    "parentCode": "K",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "IT-tjänster"
+        "name": "Dataprogrammering, datakonsultverksamhet o.d."
       }
     ]
   },
   {
     "code": "63",
     "level": 2.0,
-    "parentCode": "J",
-    "classificationItemNames": [
-      {
-        "langName": "ruotsi",
-        "lang": "sv",
-        "name": "Informationstjänster"
-      }
-    ]
-  },
-  {
-    "code": "K",
-    "level": 1.0,
-    "parentCode": "SSSSS",
-    "classificationItemNames": [
-      {
-        "langName": "ruotsi",
-        "lang": "sv",
-        "name": "Finans- och försäkringsverksamhet"
-      }
-    ]
-  },
-  {
-    "code": "64",
-    "level": 2.0,
     "parentCode": "K",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Finansförmedling utom försäkring och pensionsfondsverksamhet"
-      }
-    ]
-  },
-  {
-    "code": "65",
-    "level": 2.0,
-    "parentCode": "K",
-    "classificationItemNames": [
-      {
-        "langName": "ruotsi",
-        "lang": "sv",
-        "name": "Försäkring, återförsäkring och pensionsfondsverksamhet utom obligatorisk socialförsäkring"
-      }
-    ]
-  },
-  {
-    "code": "66",
-    "level": 2.0,
-    "parentCode": "K",
-    "classificationItemNames": [
-      {
-        "langName": "ruotsi",
-        "lang": "sv",
-        "name": "Stödtjänster till finansiella tjänster och försäkring"
+        "name": "Datainfrastruktur, databehandling, hosting och annan informationsverksamhet"
       }
     ]
   },
   {
     "code": "L",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
+    "classificationItemNames": [
+      {
+        "langName": "ruotsi",
+        "lang": "sv",
+        "name": "Finansiell verksamhet och försäkringsverksamhet"
+      }
+    ]
+  },
+  {
+    "code": "64",
+    "level": 2.0,
+    "parentCode": "L",
+    "classificationItemNames": [
+      {
+        "langName": "ruotsi",
+        "lang": "sv",
+        "name": "Finansiell verksamhet utom försäkrings- och pensionsfondsverksamhet"
+      }
+    ]
+  },
+  {
+    "code": "65",
+    "level": 2.0,
+    "parentCode": "L",
+    "classificationItemNames": [
+      {
+        "langName": "ruotsi",
+        "lang": "sv",
+        "name": "Försäkrings-, återförsäkrings- och pensionsfondsverksamhet utom obligatorisk socialförsäkring"
+      }
+    ]
+  },
+  {
+    "code": "66",
+    "level": 2.0,
+    "parentCode": "L",
+    "classificationItemNames": [
+      {
+        "langName": "ruotsi",
+        "lang": "sv",
+        "name": "Stödverksamhet avseende finansiella tjänster och försäkringsverksamhet"
+      }
+    ]
+  },
+  {
+    "code": "M",
+    "level": 1.0,
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -866,7 +854,7 @@
   {
     "code": "68",
     "level": 2.0,
-    "parentCode": "L",
+    "parentCode": "M",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -876,9 +864,9 @@
     ]
   },
   {
-    "code": "M",
+    "code": "N",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -890,7 +878,7 @@
   {
     "code": "69",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -902,19 +890,19 @@
   {
     "code": "70",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Verksamheter som utövas av huvudkontor; konsulttjänster till företag"
+        "name": "Verksamheter som utövas av huvudkontor samt konsultverksamhet avseende företag"
       }
     ]
   },
   {
     "code": "71",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -926,7 +914,7 @@
   {
     "code": "72",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -938,19 +926,19 @@
   {
     "code": "73",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Reklam och marknadsundersökning"
+        "name": "Reklamverksamhet, marknadsundersökningar och PR"
       }
     ]
   },
   {
     "code": "74",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -962,7 +950,7 @@
   {
     "code": "75",
     "level": 2.0,
-    "parentCode": "M",
+    "parentCode": "N",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -972,21 +960,21 @@
     ]
   },
   {
-    "code": "N",
+    "code": "O",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Uthyrning, fastighetsservice, resetjänster och andra stödtjänster"
+        "name": "Uthyrning, fastighetsservice, resetjänster och annan stödverksamhet"
       }
     ]
   },
   {
     "code": "77",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -998,31 +986,31 @@
   {
     "code": "78",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Arbetsförmedling, bemanning och andra personalrelaterade tjänster"
+        "name": "Arbetsförmedling, bemanning och annan personalrelaterad verksamhet"
       }
     ]
   },
   {
     "code": "79",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Resebyrå- och researrangörsverksamhet och andra resetjänster och relaterade tjänster"
+        "name": "Resebyrå- och researrangörsverksamhet samt annan boknings- och reserelaterad verksamhet"
       }
     ]
   },
   {
     "code": "80",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1034,31 +1022,31 @@
   {
     "code": "81",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Fastighetsservice samt skötsel och underhåll av grönytor"
+        "name": "Fastighetsrelaterad stödverksamhet samt skötsel och underhåll av grönytor"
       }
     ]
   },
   {
     "code": "82",
     "level": 2.0,
-    "parentCode": "N",
+    "parentCode": "O",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Kontorstjänster och andra företagstjänster"
+        "name": "Kontorstjänster och annan stödverksamhet till företag"
       }
     ]
   },
   {
-    "code": "O",
+    "code": "P",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1070,7 +1058,7 @@
   {
     "code": "84",
     "level": 2.0,
-    "parentCode": "O",
+    "parentCode": "P",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1080,9 +1068,9 @@
     ]
   },
   {
-    "code": "P",
+    "code": "Q",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1094,7 +1082,7 @@
   {
     "code": "85",
     "level": 2.0,
-    "parentCode": "P",
+    "parentCode": "Q",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1104,21 +1092,21 @@
     ]
   },
   {
-    "code": "Q",
+    "code": "R",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Vård och omsorg; sociala tjänster"
+        "name": "Vård och omsorg; social verksamhet"
       }
     ]
   },
   {
     "code": "86",
     "level": 2.0,
-    "parentCode": "Q",
+    "parentCode": "R",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1130,7 +1118,7 @@
   {
     "code": "87",
     "level": 2.0,
-    "parentCode": "Q",
+    "parentCode": "R",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1142,7 +1130,7 @@
   {
     "code": "88",
     "level": 2.0,
-    "parentCode": "Q",
+    "parentCode": "R",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1152,33 +1140,33 @@
     ]
   },
   {
-    "code": "R",
+    "code": "S",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Kultur, nöje och fritid"
+        "name": "Kultur, idrott och fritid"
       }
     ]
   },
   {
     "code": "90",
     "level": 2.0,
-    "parentCode": "R",
+    "parentCode": "S",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Konstnärlig och kulturell verksamhet samt nöjesverksamhet"
+        "name": "Konstnärligt skapande och scenkonst"
       }
     ]
   },
   {
     "code": "91",
     "level": 2.0,
-    "parentCode": "R",
+    "parentCode": "S",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1190,7 +1178,7 @@
   {
     "code": "92",
     "level": 2.0,
-    "parentCode": "R",
+    "parentCode": "S",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1202,7 +1190,7 @@
   {
     "code": "93",
     "level": 2.0,
-    "parentCode": "R",
+    "parentCode": "S",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1212,9 +1200,9 @@
     ]
   },
   {
-    "code": "S",
+    "code": "T",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1226,7 +1214,7 @@
   {
     "code": "94",
     "level": 2.0,
-    "parentCode": "S",
+    "parentCode": "T",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1238,43 +1226,43 @@
   {
     "code": "95",
     "level": 2.0,
-    "parentCode": "S",
+    "parentCode": "T",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Reparation av datorer, hushållsartiklar och personliga artiklar"
+        "name": "Reparation och underhåll av datorer, hushållsartiklar och varor för personligt bruk samt motorfordon och motorcyklar"
       }
     ]
   },
   {
     "code": "96",
     "level": 2.0,
-    "parentCode": "S",
+    "parentCode": "T",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Andra konsumenttjänster"
+        "name": "Konsumenttjänster"
       }
     ]
   },
   {
-    "code": "T",
+    "code": "U",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
-        "name": "Förvärvsarbete i hushåll; hushållens produktion av diverse varor och tjänster för eget bruk"
+        "name": "Förvärvsarbete i hushåll och hushållens produktion av diverse varor och tjänster för eget bruk"
       }
     ]
   },
   {
     "code": "97",
     "level": 2.0,
-    "parentCode": "T",
+    "parentCode": "U",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1286,7 +1274,7 @@
   {
     "code": "98",
     "level": 2.0,
-    "parentCode": "T",
+    "parentCode": "U",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1296,9 +1284,9 @@
     ]
   },
   {
-    "code": "U",
+    "code": "V",
     "level": 1.0,
-    "parentCode": "SSSSS",
+    "parentCode": null,
     "classificationItemNames": [
       {
         "langName": "ruotsi",
@@ -1310,36 +1298,12 @@
   {
     "code": "99",
     "level": 2.0,
-    "parentCode": "U",
+    "parentCode": "V",
     "classificationItemNames": [
       {
         "langName": "ruotsi",
         "lang": "sv",
         "name": "Verksamhet vid internationella organisationer, utländska ambassader o.d."
-      }
-    ]
-  },
-  {
-    "code": "X",
-    "level": 1.0,
-    "parentCode": "SSSSS",
-    "classificationItemNames": [
-      {
-        "langName": "ruotsi",
-        "lang": "sv",
-        "name": "Näringsgrenen okänd"
-      }
-    ]
-  },
-  {
-    "code": "00",
-    "level": 2.0,
-    "parentCode": "X",
-    "classificationItemNames": [
-      {
-        "langName": "ruotsi",
-        "lang": "sv",
-        "name": "Näringsgrenen okänd"
       }
     ]
   }

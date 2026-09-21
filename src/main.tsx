@@ -7,10 +7,15 @@ import './i18n/config';
 
 import './index.css';
 import { getRoutes } from './routes';
+import { useToolStore } from './stores/useToolStore';
 import { loadFeatures } from './utils/features';
 import { loadNotifications } from './utils/notifications';
 
 await Promise.all([loadFeatures(), loadNotifications()]);
+
+// Must run after the feature flags are loaded, since the store rehydrates from sessionStorage
+// while this module's imports are still being evaluated, i.e. before the flags are available.
+useToolStore.getState().invalidateToimialaFilters();
 
 export const router = createBrowserRouter(getRoutes(), {
   basename: '/yksilo',

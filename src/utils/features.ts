@@ -6,7 +6,10 @@ type Feature =
   | 'TMT_INTEGRATION'
   | 'MAHDOLLISUUDET_HAKU'
   | 'CV_IMPORT'
-  | 'MPASSID';
+  | 'MPASSID'
+  // Switches the toimiala codeset from TOL 2008 to TOL 2025. Enable when the backend starts
+  // serving TOL 2025 codes; see src/utils/codes/codes.ts for why the two cannot coexist.
+  | 'TOIMIALA_TOL2025';
 
 //Default to false
 const features: Record<Feature, boolean> = {} as Record<Feature, boolean>;

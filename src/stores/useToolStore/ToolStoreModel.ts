@@ -71,6 +71,8 @@ export interface ToolState {
   sorting: OpportunitySortingValue;
   previousEhdotusUpdateLang: string;
   filters: ToolFilters;
+  /** Toimiala classification the persisted `filters.toimialat` codes were selected under. */
+  toimialaLuokitus?: string;
   setDurationFilter: (minDuration: number, maxDuration: number) => void;
   settingsHaveChanged?: boolean;
   setSettingsHaveChanged: (state?: boolean) => void;
@@ -79,6 +81,8 @@ export interface ToolState {
   setArrayFilter: (name: ArrayFilters, value: ToolFilters[ArrayFilters][number]) => void;
   reset: () => void;
   resetSettings: () => void;
+  /** Discards persisted toimiala filters when they were selected under a different TOL version. */
+  invalidateToimialaFilters: () => void;
   addAmmattiryhmaToFilter: (ammattiryhma: string) => void;
   removeAmmattiryhmaFromFilter: (ammattiryhma: string) => void;
   fillAmmattiryhmaNimet: (uris: string[]) => Promise<void>;
