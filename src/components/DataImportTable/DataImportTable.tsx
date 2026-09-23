@@ -11,10 +11,13 @@ import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
 export interface DataImportTableProps {
   rows: ExperienceTableRowData[];
   toggleAllSelectionText: string;
+  onSelectionChange?: () => void;
+  selectCompetencesWithRow?: boolean;
   /** Renders the competences column, the expandable competence rows and the AI disclaimer. */
   showCompetences?: boolean;
   /** Allows toggling individual competences. Requires {@link showCompetences}. */
   selectableCompetences?: boolean;
+  showDescription?: boolean;
 }
 
 const uniqueCompetences = (osaamiset: ExperienceTableRowData['osaamiset']) => [
@@ -34,13 +37,15 @@ const competenceCounts = (osaamiset: ExperienceTableRowData['osaamiset']) => {
   return { total: all.size, selected: selected.size };
 };
 
-const setSelection = (row: ExperienceTableRowData, checked: boolean) => {
+const setSelection = (row: ExperienceTableRowData, checked: boolean, selectCompetencesWithRow: boolean) => {
   row.checked = checked;
-  row.osaamiset.forEach((osaaminen) => {
-    osaaminen.checked = checked;
-  });
+  if (selectCompetencesWithRow) {
+    row.osaamiset.forEach((osaaminen) => {
+      osaaminen.checked = checked;
+    });
+  }
   row.subrows?.forEach((subrow) => {
-    setSelection(subrow, checked);
+    setSelection(subrow, checked, selectCompetencesWithRow);
   });
 };
 
@@ -51,8 +56,11 @@ const syncParentSelection = (row: ExperienceTableRowData) => {
 export const DataImportTable = ({
   rows,
   toggleAllSelectionText,
+  onSelectionChange,
+  selectCompetencesWithRow = true,
   showCompetences = false,
   selectableCompetences = false,
+  showDescription = true,
 }: DataImportTableProps) => {
   const {
     t,
@@ -184,7 +192,10 @@ export const DataImportTable = ({
 
   // A hack to force re-rendering the component when checkbox states change
   const [, setForceRerender] = React.useState<boolean>(false);
-  const rerender = () => setForceRerender((prev) => !prev);
+  const rerender = () => {
+    setForceRerender((prev) => !prev);
+    onSelectionChange?.();
+  };
 
   return (
     <table className="w-full border-collapse font-arial">
@@ -202,7 +213,7 @@ export const DataImportTable = ({
                 indeterminate={!allChecked && someChecked}
                 onChange={() => {
                   const checked = (someChecked && !allChecked) || allUnchecked;
-                  rows.forEach((row) => setSelection(row, checked));
+                  rows.forEach((row) => setSelection(row, checked, selectCompetencesWithRow));
                   rerender();
                 }}
                 ariaLabel={t('choose')}
@@ -244,7 +255,7 @@ export const DataImportTable = ({
                       checked={areAllSubrowsChecked(row)}
                       indeterminate={areSomeSubrowsChecked(row) && !areAllSubrowsChecked(row)}
                       onChange={(e) => {
-                        setSelection(row, e.target.checked);
+                        setSelection(row, e.target.checked, selectCompetencesWithRow);
                         rerender();
                       }}
                       ariaLabel={`${t('choose')} ${row.nimi[language]}`}
@@ -279,9 +290,9 @@ export const DataImportTable = ({
                 </>
               )}
             </tr>
-            {(row.subrows ?? []).map((subrow, i) => (
+            {(row.subrows ?? []).map((subrow) => (
               <React.Fragment key={subrow.key}>
-                <tr className={i % 2 === 0 ? '' : 'bg-bg-gray-2'}>
+                <tr>
                   <td className="py-3 pl-6 text-heading-5-mobile sm:pl-9 sm:text-heading-5" colSpan={sm ? 3 : 1}>
                     <div className={`flex ${sm ? 'flex-row' : 'flex-col'}`}>
                       <div className="flex items-center gap-3 sm:gap-5">
@@ -291,7 +302,7 @@ export const DataImportTable = ({
                           checked={isFullySelected(subrow)}
                           indeterminate={(subrow.checked ?? false) && !isFullySelected(subrow)}
                           onChange={(e) => {
-                            setSelection(subrow, e.target.checked);
+                            setSelection(subrow, e.target.checked, selectCompetencesWithRow);
                             syncParentSelection(row);
                             rerender();
                           }}
@@ -329,7 +340,7 @@ export const DataImportTable = ({
                   )}
                 </tr>
                 {showCompetences && renderCompetencesRow(row, subrow)}
-                {subrow.kuvaus && (
+                {subrow.kuvaus && showDescription && (
                   <FreeFormTextRow
                     row={subrow}
                     visibleState={true}
