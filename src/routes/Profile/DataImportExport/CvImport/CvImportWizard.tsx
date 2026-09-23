@@ -9,7 +9,8 @@ import { ModalHeader } from '@/components/ModalHeader';
 import { ModalComponentProps } from '@/hooks/useModal';
 
 import AttachmentStep from './AttachmentStep';
-import SummaryStep from './SummaryStep';
+import { CompetenceSelectionStep } from './CompetenceSelectionStep';
+import InfoSelectionStep from './InfoSelectionStep';
 import { useCvUploadAndPoll } from './useCvUploadAndPoll';
 import { buildSaveDto, collectOsaamisetUris, convertTulosToTableRows, type CvImportConvertedData } from './utils';
 
@@ -46,10 +47,11 @@ const FooterButton = ({ ref, onClick, label, variant = 'white', icon, testId, di
 const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
   const { t } = useTranslation();
   const [step, setStep] = React.useState(1);
-  const steps = 2;
+  const steps = 3;
 
   const isAttachmentStep = React.useMemo(() => step === 1, [step]);
-  const isSummaryStep = React.useMemo(() => step === steps, [step, steps]);
+  const isInfoSelectionStep = React.useMemo(() => step === 2, [step]);
+  const isCompetenceSelectionStep = React.useMemo(() => step === steps, [step, steps]);
 
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
   const [fileError, setFileError] = React.useState<string | null>(null);
@@ -61,9 +63,19 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
   const cancelButtonRef = React.useRef<HTMLButtonElement>(null);
   const { addTemporaryNote } = useNoteStack();
   const [isLoadingOsaamiset, setIsLoadingOsaamiset] = React.useState(false);
+  const [isSaving, setIsSaving] = React.useState(false);
+  // Guards against double submits before the disabled state has re-rendered
+  const isSavingRef = React.useRef(false);
 
-  const isLoading = state.step === 'uploading' || state.step === 'polling' || isLoadingOsaamiset;
+  const isLoading = state.step === 'uploading' || state.step === 'polling' || isLoadingOsaamiset || isSaving;
   const [convertedData, setConvertedData] = React.useState<CvImportConvertedData | null>(null);
+  const hasSelectedRows = React.useMemo(
+    () =>
+      [convertedData?.education, convertedData?.work, convertedData?.activities].some((rows) =>
+        rows?.some((row) => row.subrows?.some((subrow) => subrow.checked ?? false)),
+      ),
+    [convertedData],
+  );
 
   React.useEffect(() => {
     const tulos = state.tulos;
@@ -98,8 +110,8 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
         }
         console.error('Failed to load osaamiset for CV import', error);
         addTemporaryNote(() => ({
-          title: t('preferences.cv-import.summary.competences-failed.title'),
-          description: t('preferences.cv-import.summary.competences-failed.description'),
+          title: t('preferences.cv-import.info-selection.competences-failed.title'),
+          description: t('preferences.cv-import.info-selection.competences-failed.description'),
           variant: 'warning',
           isCollapsed: false,
         }));
@@ -120,11 +132,14 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
     if (isAttachmentStep) {
       return t('preferences.cv-import.attachment.title');
     }
-    if (isSummaryStep) {
-      return t('preferences.cv-import.summary.title');
+    if (isInfoSelectionStep) {
+      return t('preferences.cv-import.info-selection.title');
+    }
+    if (isCompetenceSelectionStep) {
+      return t('preferences.cv-import.competence-selection.title');
     }
     return '';
-  }, [t, isAttachmentStep, isSummaryStep]);
+  }, [t, isAttachmentStep, isInfoSelectionStep, isCompetenceSelectionStep]);
 
   const handleClose = React.useCallback(() => {
     if (state.step === 'failed') {
@@ -145,6 +160,15 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
     }
   }, [selectedFile, start]);
 
+  const handleAttachmentChange = React.useCallback(
+    (file: File | null) => {
+      setSelectedFile(file);
+      // Reset the previous upload result so a failed import doesn't block importing another CV
+      cancel();
+    },
+    [cancel],
+  );
+
   const handleRetry = React.useCallback(() => {
     retry();
     handleSend();
@@ -155,30 +179,42 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
   }, [step]);
 
   const handleNext = React.useCallback(() => {
-    handleSend();
-    setStep(step + 1);
-  }, [handleSend, step]);
-
-  const handleSave = React.useCallback(async () => {
-    if (!convertedData) {
+    if (isInfoSelectionStep && !hasSelectedRows) {
       return;
     }
-    const ok = await save(buildSaveDto(convertedData));
-    if (ok) {
-      handleClose();
-      addTemporaryNote(() => ({
-        title: t('preferences.cv-import.save.success.title'),
-        description: t('preferences.cv-import.save.success.description'),
-        variant: 'success',
-        isCollapsed: false,
-      }));
-    } else {
-      addTemporaryNote(() => ({
-        title: t('preferences.cv-import.save.failed.title'),
-        description: t('preferences.cv-import.save.failed.description'),
-        variant: 'warning',
-        isCollapsed: false,
-      }));
+    if (isAttachmentStep) {
+      handleSend();
+    }
+    setStep(step + 1);
+  }, [handleSend, hasSelectedRows, isAttachmentStep, isInfoSelectionStep, step]);
+
+  const handleSave = React.useCallback(async () => {
+    if (!convertedData || isSavingRef.current) {
+      return;
+    }
+    isSavingRef.current = true;
+    setIsSaving(true);
+    try {
+      const ok = await save(buildSaveDto(convertedData));
+      if (ok) {
+        handleClose();
+        addTemporaryNote(() => ({
+          title: t('preferences.cv-import.save.success.title'),
+          description: t('preferences.cv-import.save.success.description'),
+          variant: 'success',
+          isCollapsed: false,
+        }));
+      } else {
+        addTemporaryNote(() => ({
+          title: t('preferences.cv-import.save.failed.title'),
+          description: t('preferences.cv-import.save.failed.description'),
+          variant: 'warning',
+          isCollapsed: false,
+        }));
+      }
+    } finally {
+      isSavingRef.current = false;
+      setIsSaving(false);
     }
   }, [convertedData, save, handleClose, addTemporaryNote, t]);
 
@@ -197,18 +233,9 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
             onClick={handleClose}
             label={t('common:cancel')}
             testId="cv-import-cancel"
+            disabled={isSaving}
           />
 
-          {step < steps && (
-            <FooterButton
-              onClick={handleNext}
-              label={t('next')}
-              variant={isFileAttached ? 'accent' : 'white'}
-              icon={<JodArrowRight />}
-              disabled={!isFileAttached}
-              testId="cv-import-next"
-            />
-          )}
           {step > 1 && (
             <FooterButton
               onClick={handlePrevious}
@@ -218,7 +245,17 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
               disabled={isLoading}
             />
           )}
-          {state.step === 'failed' && isSummaryStep && (
+          {step < steps && (isAttachmentStep || state.step !== 'failed') && (
+            <FooterButton
+              onClick={handleNext}
+              label={t('next')}
+              variant={isFileAttached ? 'accent' : 'white'}
+              icon={<JodArrowRight />}
+              disabled={!isFileAttached || isLoading || (isInfoSelectionStep && !hasSelectedRows)}
+              testId="cv-import-next"
+            />
+          )}
+          {state.step === 'failed' && isInfoSelectionStep && (
             <FooterButton
               label={t('try-again')}
               variant="accent"
@@ -232,7 +269,7 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
               label={t('preferences.cv-import.import-data')}
               icon={<JodCheckmark />}
               variant="accent"
-              disabled={!convertedData}
+              disabled={!convertedData || isLoading}
               testId="cv-import-save"
               onClick={handleSave}
             />
@@ -252,8 +289,11 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
       handleRetry,
       convertedData,
       handleSave,
+      hasSelectedRows,
       isLoading,
-      isSummaryStep,
+      isSaving,
+      isAttachmentStep,
+      isInfoSelectionStep,
     ],
   );
 
@@ -263,17 +303,37 @@ const CvImportWizard = ({ onClose, ...rest }: ModalComponentProps) => {
         <AttachmentStep
           error={state.error}
           selectedFile={selectedFile}
-          onAttachmentChange={setSelectedFile}
+          onAttachmentChange={handleAttachmentChange}
           fileError={fileError}
           onFileErrorChange={setFileError}
           fileInputRef={fileInputRef}
         />
       );
-    } else if (isSummaryStep) {
-      return <SummaryStep isLoading={isLoading} convertedData={convertedData} />;
+    }
+    if (isInfoSelectionStep) {
+      return (
+        <InfoSelectionStep
+          isLoading={isLoading}
+          convertedData={convertedData}
+          onSelectionChange={() => setConvertedData((data) => (data ? { ...data } : data))}
+        />
+      );
+    } else if (isCompetenceSelectionStep) {
+      return <CompetenceSelectionStep convertedData={convertedData} />;
     }
     return <></>;
-  }, [isAttachmentStep, isSummaryStep, selectedFile, fileError, fileInputRef, convertedData, isLoading, state.error]);
+  }, [
+    isAttachmentStep,
+    isInfoSelectionStep,
+    isCompetenceSelectionStep,
+    selectedFile,
+    handleAttachmentChange,
+    fileError,
+    fileInputRef,
+    convertedData,
+    isLoading,
+    state.error,
+  ]);
 
   const progress = React.useMemo(
     () => (

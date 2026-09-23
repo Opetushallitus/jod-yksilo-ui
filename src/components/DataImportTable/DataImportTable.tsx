@@ -1,46 +1,30 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Checkbox, Tag, useMediaQueries } from '@jod/design-system';
-import { JodCaretDown, JodCaretUp } from '@jod/design-system/icons';
+import { Checkbox, useMediaQueries } from '@jod/design-system';
 
-import { AiInfo, type ExperienceTableRowData } from '@/components';
+import { type ExperienceTableRowData } from '@/components';
 import { FreeFormTextRow } from '@/components/ExperienceTable/ExperienceTableRow';
-import { formatDate, getLocalizedText, sortByProperty } from '@/utils';
+import { formatDate, getLocalizedText } from '@/utils';
 
 export interface DataImportTableProps {
   rows: ExperienceTableRowData[];
   toggleAllSelectionText: string;
-  /** Renders the competences column, the expandable competence rows and the AI disclaimer. */
-  showCompetences?: boolean;
-  /** Allows toggling individual competences. Requires {@link showCompetences}. */
-  selectableCompetences?: boolean;
+  onSelectionChange?: () => void;
+  selectCompetencesWithRow?: boolean;
+  showDescription?: boolean;
+  alternatingBg?: boolean;
 }
 
-const uniqueCompetences = (osaamiset: ExperienceTableRowData['osaamiset']) => [
-  ...new Map(osaamiset.map((osaaminen) => [osaaminen.id, osaaminen])).values(),
-];
-
-// The same competence can appear under several subrows, so it counts as selected if any of its instances is.
-const competenceCounts = (osaamiset: ExperienceTableRowData['osaamiset']) => {
-  const all = new Set<string>();
-  const selected = new Set<string>();
-  osaamiset.forEach((osaaminen) => {
-    all.add(osaaminen.id);
-    if (osaaminen.checked ?? false) {
-      selected.add(osaaminen.id);
-    }
-  });
-  return { total: all.size, selected: selected.size };
-};
-
-const setSelection = (row: ExperienceTableRowData, checked: boolean) => {
+const setSelection = (row: ExperienceTableRowData, checked: boolean, selectCompetencesWithRow: boolean) => {
   row.checked = checked;
-  row.osaamiset.forEach((osaaminen) => {
-    osaaminen.checked = checked;
-  });
+  if (selectCompetencesWithRow) {
+    row.osaamiset.forEach((osaaminen) => {
+      osaaminen.checked = checked;
+    });
+  }
   row.subrows?.forEach((subrow) => {
-    setSelection(subrow, checked);
+    setSelection(subrow, checked, selectCompetencesWithRow);
   });
 };
 
@@ -51,140 +35,35 @@ const syncParentSelection = (row: ExperienceTableRowData) => {
 export const DataImportTable = ({
   rows,
   toggleAllSelectionText,
-  showCompetences = false,
-  selectableCompetences = false,
+  onSelectionChange,
+  selectCompetencesWithRow = true,
+  showDescription = true,
+  alternatingBg = true,
 }: DataImportTableProps) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
   const { sm } = useMediaQueries();
-  const columnCount = sm ? (showCompetences ? 6 : 5) : 1;
-  const [expandedOsaamiset, setExpandedOsaamiset] = React.useState<Set<string>>(
-    () =>
-      new Set(
-        rows
-          .flatMap((row) => row.subrows ?? [])
-          .filter((subrow) => subrow.osaamiset.length > 0)
-          .map((subrow) => subrow.key),
-      ),
-  );
+  const columnCount = sm ? 5 : 1;
 
-  const toggleExpanded = (key: string) => {
-    setExpandedOsaamiset((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) {
-        next.delete(key);
-      } else {
-        next.add(key);
-      }
-      return next;
-    });
-  };
+  const isChecked = (subrow: ExperienceTableRowData) => subrow.checked ?? false;
 
-  const renderCompetencesCount = (osaamiset: ExperienceTableRowData['osaamiset']) => {
-    const { total, selected } = competenceCounts(osaamiset);
-    return selectableCompetences ? `${selected}/${total}` : `${total}`;
-  };
+  // Rows without subrows fall back to their own checked state
+  const isRowAnyChecked = (row: ExperienceTableRowData) =>
+    row.subrows?.length ? row.subrows.some(isChecked) : isChecked(row);
+  const isRowFullyChecked = (row: ExperienceTableRowData) =>
+    row.subrows?.length ? row.subrows.every(isChecked) : isChecked(row);
 
-  const renderCompetencesToggle = (subrow: ExperienceTableRowData) => {
-    const competences = uniqueCompetences(subrow.osaamiset);
-    if (competences.length === 0) {
-      return <span className="text-secondary-gray">0</span>;
-    }
-    const expanded = expandedOsaamiset.has(subrow.key);
-    return (
-      <button
-        type="button"
-        aria-expanded={expanded}
-        aria-label={`${t('competences')} ${getLocalizedText(subrow.nimi)}`}
-        onClick={() => toggleExpanded(subrow.key)}
-        className="flex cursor-pointer items-center gap-x-2 text-secondary-gray"
-        data-testid={`data-import-row-competences-toggle-${subrow.key}`}
-      >
-        <span>{renderCompetencesCount(subrow.osaamiset)}</span>
-        {expanded ? <JodCaretUp aria-hidden="true" /> : <JodCaretDown aria-hidden="true" />}
-      </button>
-    );
-  };
-
-  const renderCompetencesRow = (row: ExperienceTableRowData, subrow: ExperienceTableRowData) => {
-    const { key: rowKey } = subrow;
-    const competences = uniqueCompetences(subrow.osaamiset).sort(sortByProperty(`nimi.${language}`));
-    if (!expandedOsaamiset.has(rowKey) || competences.length === 0) {
-      return null;
-    }
-    return (
-      <tr data-testid={`data-import-row-competences-${rowKey}`}>
-        <td colSpan={columnCount} className="pt-2 pr-4 pb-4 pl-6 sm:pr-5 sm:pl-9">
-          <div className="grid grid-cols-[minmax(0,1fr)_2rem] items-start gap-x-3 rounded-md bg-bg-gray-2 p-3 sm:gap-x-4 sm:p-4">
-            <div className="col-start-2 row-start-1 justify-self-end" data-testid="data-import-competence-ai-info">
-              <AiInfo type="cv-import" size={20} />
-            </div>
-            <ul
-              className="col-start-1 row-start-1 flex flex-wrap gap-3"
-              aria-label={`${t('competences')} ${getLocalizedText(subrow.nimi)}`}
-            >
-              {competences.map((competence) => {
-                const isSelected = competence.checked ?? false;
-
-                return (
-                  <li key={competence.id} className="max-w-full">
-                    {selectableCompetences ? (
-                      <Tag
-                        label={getLocalizedText(competence.nimi)}
-                        tooltip={getLocalizedText(competence.kuvaus)}
-                        screenReaderTooltip={t('description-for', {
-                          description: getLocalizedText(competence.kuvaus),
-                        })}
-                        variant={isSelected ? 'added' : 'selectable'}
-                        sourceType={competence.sourceType ?? 'jotain-muuta'}
-                        onClick={() => {
-                          competence.checked = !isSelected;
-                          if (competence.checked) {
-                            subrow.checked = true;
-                            syncParentSelection(row);
-                          }
-                          rerender();
-                        }}
-                        testId="data-import-competence-tag"
-                      />
-                    ) : (
-                      <Tag
-                        label={getLocalizedText(competence.nimi)}
-                        tooltip={getLocalizedText(competence.kuvaus)}
-                        screenReaderTooltip={t('description-for', {
-                          description: getLocalizedText(competence.kuvaus),
-                        })}
-                        variant="presentation"
-                        sourceType={competence.sourceType ?? 'jotain-muuta'}
-                        testId="data-import-competence-tag"
-                      />
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </td>
-      </tr>
-    );
-  };
-
-  const isFullySelected = (subrow: ExperienceTableRowData) =>
-    (subrow.checked ?? false) && (!selectableCompetences || subrow.osaamiset.every((o) => o.checked ?? false));
-
-  const areSomeSubrowsChecked = (row: ExperienceTableRowData) =>
-    (row.subrows ?? []).some((subrow) => subrow.checked ?? false);
-  const areAllSubrowsChecked = (row: ExperienceTableRowData) => (row.subrows ?? []).every(isFullySelected);
-
-  const someChecked = rows.some((row) => areSomeSubrowsChecked(row));
-  const allChecked = rows.every((row) => areAllSubrowsChecked(row));
-  const allUnchecked = !someChecked && !allChecked;
+  const someChecked = rows.some((row) => isRowAnyChecked(row));
+  const allChecked = rows.every((row) => isRowFullyChecked(row));
 
   // A hack to force re-rendering the component when checkbox states change
-  const [, setForceRerender] = React.useState<boolean>(false);
-  const rerender = () => setForceRerender((prev) => !prev);
+  const [, forceRerender] = React.useReducer((x: number) => x + 1, 0);
+  const rerender = () => {
+    forceRerender();
+    onSelectionChange?.();
+  };
 
   return (
     <table className="w-full border-collapse font-arial">
@@ -201,8 +80,7 @@ export const DataImportTable = ({
                 checked={allChecked}
                 indeterminate={!allChecked && someChecked}
                 onChange={() => {
-                  const checked = (someChecked && !allChecked) || allUnchecked;
-                  rows.forEach((row) => setSelection(row, checked));
+                  rows.forEach((row) => setSelection(row, !allChecked, selectCompetencesWithRow));
                   rerender();
                 }}
                 ariaLabel={t('choose')}
@@ -219,11 +97,6 @@ export const DataImportTable = ({
               <th className="border-b-2 border-border-gray pb-4 text-left text-heading-5-mobile sm:pr-2 sm:text-heading-5">
                 {t('ended')}
               </th>
-              {showCompetences && (
-                <th className="border-b-2 border-border-gray pb-4 text-left text-heading-5-mobile sm:pr-2 sm:text-heading-5">
-                  {t('competences')}
-                </th>
-              )}
             </>
           )}
         </tr>
@@ -241,10 +114,10 @@ export const DataImportTable = ({
                     <Checkbox
                       name={`checkbox-${row.key}`}
                       value={row.key}
-                      checked={areAllSubrowsChecked(row)}
-                      indeterminate={areSomeSubrowsChecked(row) && !areAllSubrowsChecked(row)}
+                      checked={isRowFullyChecked(row)}
+                      indeterminate={isRowAnyChecked(row) && !isRowFullyChecked(row)}
                       onChange={(e) => {
-                        setSelection(row, e.target.checked);
+                        setSelection(row, e.target.checked, selectCompetencesWithRow);
                         rerender();
                       }}
                       ariaLabel={`${t('choose')} ${row.nimi[language]}`}
@@ -269,29 +142,21 @@ export const DataImportTable = ({
                   <td className="bg-white py-3 text-heading-5-mobile text-secondary-gray sm:pr-2 sm:text-heading-5">
                     {row.loppuPvm ? formatDate(row.loppuPvm) : ''}
                   </td>
-                  {showCompetences && (
-                    <td className="bg-white py-3 text-heading-5-mobile text-secondary-gray sm:pr-2 sm:text-heading-5">
-                      <span data-testid={`data-import-row-competences-count-${row.key}`}>
-                        {renderCompetencesCount((row.subrows ?? []).flatMap((subrow) => subrow.osaamiset))}
-                      </span>
-                    </td>
-                  )}
                 </>
               )}
             </tr>
             {(row.subrows ?? []).map((subrow, i) => (
               <React.Fragment key={subrow.key}>
-                <tr className={i % 2 === 0 ? '' : 'bg-bg-gray-2'}>
+                <tr className={alternatingBg && i % 2 === 1 ? 'bg-bg-gray-2' : ''}>
                   <td className="py-3 pl-6 text-heading-5-mobile sm:pl-9 sm:text-heading-5" colSpan={sm ? 3 : 1}>
                     <div className={`flex ${sm ? 'flex-row' : 'flex-col'}`}>
                       <div className="flex items-center gap-3 sm:gap-5">
                         <Checkbox
                           name={`checkbox-${subrow.key}`}
                           value={subrow.key}
-                          checked={isFullySelected(subrow)}
-                          indeterminate={(subrow.checked ?? false) && !isFullySelected(subrow)}
+                          checked={isChecked(subrow)}
                           onChange={(e) => {
-                            setSelection(subrow, e.target.checked);
+                            setSelection(subrow, e.target.checked, selectCompetencesWithRow);
                             syncParentSelection(row);
                             rerender();
                           }}
@@ -307,9 +172,6 @@ export const DataImportTable = ({
                           <span>{subrow.loppuPvm ? formatDate(subrow.loppuPvm) : ''}</span>
                         </div>
                       )}
-                      {!sm && showCompetences && subrow.osaamiset.length > 0 && (
-                        <div className="ml-6 pt-1 sm:ml-7">{renderCompetencesToggle(subrow)}</div>
-                      )}
                     </div>
                   </td>
                   {sm && (
@@ -320,22 +182,11 @@ export const DataImportTable = ({
                       <td className="py-3 text-heading-5-mobile sm:pr-2 sm:text-heading-5">
                         {subrow.loppuPvm ? formatDate(subrow.loppuPvm) : ''}
                       </td>
-                      {showCompetences && (
-                        <td className="py-3 text-heading-5-mobile sm:pr-2 sm:text-heading-5">
-                          {renderCompetencesToggle(subrow)}
-                        </td>
-                      )}
                     </>
                   )}
                 </tr>
-                {showCompetences && renderCompetencesRow(row, subrow)}
-                {subrow.kuvaus && (
-                  <FreeFormTextRow
-                    row={subrow}
-                    visibleState={true}
-                    className={showCompetences ? 'pl-6 sm:pl-9' : undefined}
-                    colSpan={columnCount}
-                  />
+                {subrow.kuvaus && showDescription && (
+                  <FreeFormTextRow row={subrow} visibleState={true} colSpan={columnCount} />
                 )}
               </React.Fragment>
             ))}
