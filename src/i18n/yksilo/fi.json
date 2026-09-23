@@ -490,6 +490,27 @@
         "invalid-file-type": "Väärä tiedostotyyppi",
         "title": "Tiedoston lataaminen"
       },
+      "competence-selection": {
+        "add-competence": "Lisää osaaminen '+' merkistä",
+        "competences": "Osaamiset",
+        "description": "Valitse seuraavaksi koulutus- ja työpaikkoihin sopivat osaamiset tekoälyn ehdottamista vaihtoehdoista. Voit lisätä ja muokata osaamisia myös myöhemmin.",
+        "title": "Valitse osaamiset",
+        "activities": {
+          "description": "Vapaa-ajan toiminnoista kertyneitä osaamisia ei tunnisteta automaattisesti. Voit lisätä osaamiset itse Vapaa-ajan toiminnot -sivulla.",
+          "non-detecting": "Automaattinen osaamisten tunnistus ei ole käytettävissä tässä osiossa.",
+          "title": "Vapaa-ajan toiminnot"
+        },
+        "education": {
+          "failing-detection": "Automaattinen osaamisten tunnistus ei onnistunut. Voit lisätä ja muokata osaamisia myöhemmin Koulutukset-osioissa.",
+          "title": "Koulutukset"
+        },
+        "select-competences": "Valitse osaamiset",
+        "selected-competences": "Valittu {{selected}}/{{total}}",
+        "work": {
+          "failing-detection": "Automaattinen osaamisten tunnistus ei onnistunut. Voit lisätä ja muokata osaamisia myöhemmin Työpaikat-osioissa.",
+          "title": "Työpaikat"
+        }
+      },
       "description": "Voit päivittää tietoja lataamalla ennakkoon laaditun CV:n osaksi Osaamisprofiiliasi.",
       "failed": {
         "description": "CV:n analysointi epäonnistui. Yritä uudelleen tai tarkista tiedosto.",
@@ -510,7 +531,7 @@
           "title": "Tallennus onnistui"
         }
       },
-      "summary": {
+      "info-selection": {
         "activities": {
           "loading": "Kerätään vapaa-ajan toimintoja",
           "no-data": "Vapaa-ajan toimintoja ei tunnistettu",
@@ -527,7 +548,7 @@
           "title": "Koulutukset"
         },
         "importing": "Tuodaan tietoja",
-        "title": "Tuotavien tietojen valinta",
+        "title": "Valitse tuotavat tiedot",
         "work": {
           "loading": "Kerätään työhistoriatietoja",
           "no-data": "Työhistoriatietoja ei tunnistettu",

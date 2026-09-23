@@ -43,16 +43,6 @@ export interface CvImportConvertedData {
   activities: ExperienceTableRowData[];
 }
 
-export const updateOsaamiset = (
-  rows: ExperienceTableRowData[],
-  osaamisetMap: Record<string, { id: string; nimi: Record<string, string>; kuvaus: Record<string, string> }>,
-): ExperienceTableRowData[] =>
-  rows.map((row) => ({
-    ...row,
-    osaamiset: row.osaamiset.map((osaaminen) => ({ ...osaaminen, ...osaamisetMap[osaaminen.id] })),
-    subrows: row.subrows ? updateOsaamiset(row.subrows, osaamisetMap) : undefined,
-  }));
-
 /**
  * Collects all unique osaaminen URIs referenced anywhere in the Tulos payload.
  */

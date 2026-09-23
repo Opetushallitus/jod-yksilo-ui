@@ -491,6 +491,27 @@
         "invalid-file-type": "Ogiltig filtyp",
         "title": "Filuppladdning"
       },
+      "competence-selection": {
+        "activities": {
+          "description": "Kompetenser som erhållits från fritidsaktiviteter identifieras inte automatiskt. Du kan lägga till kompetenser själv på sidan Fritidsaktiviteter.",
+          "non-detecting": "Automatisk identifiering av kompetenser är inte tillgänglig i denna sektion.",
+          "title": "Fritidsaktiviteter"
+        },
+        "add-competence": "Lägg till en kompetens genom att klicka på '+'-tecknet",
+        "competences": "Kompetenser",
+        "description": "Välj sedan de kompetenser som passar för utbildning och arbetsplatser från de alternativ som föreslås av artificiell intelligens. Du kan också lägga till och redigera kompetenser senare.",
+        "education": {
+          "failing-detection": "Automatisk identifiering av kompetenser misslyckades. Du kan lägga till och redigera kompetenser senare på sidan Utbildningar.",
+          "title": "Utbildningar"
+        },
+        "select-competences": "Välj kompetenser",
+        "selected-competences": "Valda {{selected}}/{{total}}",
+        "title": "Välj kompetenser",
+        "work": {
+          "failing-detection": "Automatisk identifiering av kompetenser misslyckades. Du kan lägga till och redigera kompetenser senare på sidan Arbetsplatser.",
+          "title": "Arbetsplatser"
+        }
+      },
       "description": "Du kan uppdatera dina uppgifter genom att ladda upp ett förberett CV som en del av din kompetensprofil.",
       "failed": {
         "description": "CV-analys misslyckades. Försök igen eller kontrollera filen.",
@@ -511,7 +532,7 @@
           "title": "Sparning lyckades"
         }
       },
-      "summary": {
+      "info-selection": {
         "activities": {
           "loading": "Hämtar fritidsaktiviteter",
           "no-data": "Inga fritidsaktiviteter identifierades",
