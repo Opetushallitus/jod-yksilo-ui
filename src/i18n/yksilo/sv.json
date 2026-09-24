@@ -260,10 +260,10 @@
   "introduction": {
     "step-1": {
       "item-1": "Se all information om ditt kunnande och dina intressen på en och samma plats",
-      "item-2": "Spara din arbets- och utbildningshistorik och identifiera kunnande som erhållits från dem",
-      "item-3": "Importera dina uppgifter från andra tjänster (Min Studieinfo)",
+      "item-2": "Spara din arbets- och utbildningshistorik samt dina fritidsaktiviteter och identifiera de kunskaper du fått genom dem",
+      "item-3": "Importera dina uppgifter från ditt CV och andra tjänster (Min Studieinfo, Jobbmarknaden) och exportera dina uppgifter (Jobbmarknaden, CV)",
       "item-4": "Använd din kompetensprofil för att hitta utbildnings- och karriärmöjligheter som passar just dig",
-      "item-5": "Spara de mest intressanta utbildnings- och karriärmöjligheterna som favoriter",
+      "item-5": "Spara de mest intressanta utbildnings- och karriärmöjligheterna som favoriter och skapa karriärmål och planer utifrån dem",
       "text-1": "När du är inloggad får du tillgång till en personlig kompetensprofil som hjälper dig att kartlägga och hantera ditt kunnande effektivt.\n",
       "title": "Välkommen att skapa din kompetensprofil!"
     },
@@ -401,16 +401,16 @@
   "my-competence-profile": "Kompetensprofil",
   "my-competences-alphabetically": "Mina kunskaper i alfabetisk ordning A — Ö",
   "my-competences": {
-    "by-KOULUTUS": "Mina kunskaper från utbildningen",
+    "by-KOULUTUS": "Kunskaper som förvärvats genom utbildning",
     "by-MUU_OSAAMINEN": "Annan kompetens",
-    "by-TOIMENKUVA": "Mina kunskaper från arbetsplatser",
-    "by-TOIMINTO": "Mina kunskaper från fritidsverksamhet",
+    "by-TOIMENKUVA": "Kompetens från arbetsplatser",
+    "by-TOIMINTO": "Kunskaper från fritidsaktiviteter",
     "missing-KOULUTUS": "Inga kunskaper. Lägg till utbildningar.\n",
     "missing-MUU_OSAAMINEN": "Inga kunskaper. Lägg till andra kompetenser.\n",
     "missing-TOIMENKUVA": "Inga kunskaper. Lägg till arbetsplatser.\n",
     "missing-TOIMINTO": "Inga kunskaper. Lägg till fritidsverksamhet.\n"
   },
-  "my-competences-by-sources": "Mina kunskaper efter tema",
+  "my-competences-by-sources": "Dina kompetenser enligt tema",
   "navigation": {
     "main-section": {
       "title": "Personlig kompetensstig",
@@ -486,7 +486,7 @@
         "attach-file": "Bifoga fil",
         "attach-pdf": "Bifoga PDF-fil",
         "delay-info": "Insamling av uppgifter från ditt CV kan ta några minuter.",
-        "description": "Du kan ladda upp ett färdigt CV till din kompetensprofil. Efter uppladdning kan du visa, redigera och ta bort information i avsnitten Arbete, Utbildning och Fritidsaktiviteter.<br/><br/>Dataduplicering är möjlig om du tidigare har angett samma information i din kompetensprofil.",
+        "description": "Du kan ladda upp ett färdigt CV till din kompetensprofil. Efter uppladdning kan du visa, redigera och ta bort information på sidorna arbete, utbildning och fritidsaktiviteter.<br/><br/>Dataduplicering är möjlig om du tidigare har angett samma information i din kompetensprofil.",
         "file-too-large": "Fil för stor",
         "invalid-file-type": "Ogiltig filtyp",
         "title": "Filuppladdning"
@@ -500,7 +500,7 @@
       "import-data": "Importera data",
       "import-from-cv": "Importera från CV",
       "invalid-file-type": "Endast PDF-filer stöds.",
-      "result-info": "När importen är klar hittar du dina uppgifter på <WorkHistoryLink>Arbetsplatser</WorkHistoryLink>-, <FreeTimeActivitiesLink>Fritidsaktiviteter</FreeTimeActivitiesLink>- och <EducationHistoryLink>Utbildningar</EducationHistoryLink>-sidorna",
+      "result-info": "När importen är klar hittar du dina uppgifter på <WorkHistoryLink>arbetsplatser</WorkHistoryLink>-, <FreeTimeActivitiesLink>fritidsaktiviteter</FreeTimeActivitiesLink>- och <EducationHistoryLink>utbildningar</EducationHistoryLink> -sidorna",
       "save": {
         "failed": {
           "description": "CV-sparning misslyckades",
@@ -517,7 +517,7 @@
           "no-data": "Inga fritidsaktiviteter identifierades",
           "title": "Fritidsaktiviteter"
         },
-        "description": "Välj vilka uppgifter du vill importera från ditt CV. Efter importen kan du redigera och komplettera informationen i avsnitten Utbildning, Arbete och Fritidsaktiviteter.",
+        "description": "Välj vilka uppgifter du vill importera från ditt CV. Efter importen kan du redigera och komplettera informationen på sidorna utbildning, arbete och fritidsaktiviteter.",
         "education": {
           "loading": "Hämtar utbildningshistorik",
           "no-data": "Ingen utbildningsdata identifierades",
@@ -543,17 +543,17 @@
         "description": "Tillståndet möjliggör användning av dina uppgifter för utveckling av AI-funktioner i tjänsten. Uppgifterna kan till exempel användas för att förbättra funktioner, identifiera fel och optimera användarupplevelsen i allmänhet.",
         "title": "Tillstånd att använda mina personuppgifter för utveckling av AI-funktioner i tjänsten"
       },
-      "title": "Användning av mina uppgifter i identifierbart format"
+      "title": "Användning av dina uppgifter i identifierbart format"
     },
     "delete-profile": {
-      "action": "Ta bort min kompetensprofil",
+      "action": "Ta bort kompetensprofil",
       "confirm": "Är du säker på att du vill radera din kompetensprofil?",
       "description": "Du kan permanent radera hela din kompetensprofil och alla uppgifter som finns lagrade i den. Du kan inte ångra raderingen. Obs! Du kan radera en vägledarprofil i avsnittet för vägledare.",
       "title": "Ta bort din kompetensprofil"
     },
     "description": "På den här sidan kan du hantera inställningarna för din kompetensprofil och bestämma hur dina uppgifter ska användas. Du kan dela din profil med en länk, hantera tillstånd för användning av uppgifterna, ladda ner dina profiluppgifter eller radera din profil helt och hållet. Du bestämmer vilka uppgifter som du delar och med vem.",
     "download": {
-      "action": "Ladda ner uppgifterna i min kompetensprofil (JSON)",
+      "action": "Ladda ner uppgifterna i kompetensprofil (JSON)",
       "description": "Du kan ladda ner all information som sparats i din kompetensprofil till din egen enhet. Uppgifternas laddas i ett maskinläsbart JSON-format. JSON är ett enkelt och lätt öppet filformat för informationsförmedling och lagring.",
       "title": "Ladda din kompetensprofil"
     },
@@ -563,12 +563,12 @@
     "koski-import": {
       "button-label": "Importera utbildningshistorik",
       "description": "Du kan importera utbildningshistorikdata som sparats i de nationella studie-, utbildnings- och examensregistren som en del av Min kompetensstig.",
-      "result-info": "När importen är klar hittar du dina uppgifter på <EducationHistoryLink>Utbildningar</EducationHistoryLink>-sidan",
+      "result-info": "När importen är klar hittar du dina uppgifter på <EducationHistoryLink>utbildningar</EducationHistoryLink>-sidan",
       "title": "Importera utbildningshistorik"
     },
     "personal-details": {
       "description": "Du kan redigera e-postadress.",
-      "title": "Personuppgifter"
+      "title": "Mina uppgifter"
     },
     "share": {
       "copy-failure": "Kopiering av länken misslyckades",
@@ -651,7 +651,7 @@
         },
         "success": "Dina uppgifter har importerats från Jobbmarknaden."
       },
-      "result-info": "När importen är klar hittar du dina uppgifter på <WorkHistoryLink>Arbetsplatser</WorkHistoryLink>- och <EducationHistoryLink>Utbildningar</EducationHistoryLink>-sidan",
+      "result-info": "När importen är klar hittar du dina uppgifter på <WorkHistoryLink>arbetsplatser</WorkHistoryLink>- och <EducationHistoryLink>utbildningar</EducationHistoryLink>-sidan",
       "title": "Importera och exportera uppgifter mellan Kompetensvägen och Jobbmarknaden"
     }
   },
@@ -685,10 +685,10 @@
       "group-by-source": "Enligt tema",
       "info": "Du kan själv välja vilken information från din kompetensprofil du vill använda när du söker möjligheter genom att importera den till sidan Hitta möjligheter.",
       "move-to-type": {
-        "KOULUTUS": "Öppna mina utbildningar",
-        "MUU_OSAAMINEN": "Öppna mina andra kompetenser",
-        "TOIMENKUVA": "Öppna mina arbetsplatser\n",
-        "TOIMINTO": "Öppna min fritidsverksamhet"
+        "KOULUTUS": "Öppna utbildningar",
+        "MUU_OSAAMINEN": "Öppna andra kompetenser",
+        "TOIMENKUVA": "Öppna arbetsplatser\n",
+        "TOIMINTO": "Öppna fritidsverksamhet"
       },
       "order-by": "Sortera",
       "show-filters": "Visa filter",
@@ -764,20 +764,20 @@
       "empty": "Du har ännu inte lagt till några intressen.",
       "freeform": {
         "description": "Du kan skriva och beskriva dina intressen med egna ord. Texten du skriver sparas automatiskt. Om du använder tjänsten på svenska, skriv på svenska. Ange inte personliga uppgifter i beskrivningen, såsom personbeteckning, användarnamn eller hälsouppgifter.",
-        "header": "Fritt formulerad beskrivning av mina intressen",
+        "header": "Fritt formulerad beskrivning av dina intressen",
         "placeholder": "Beskriv med egna ord vad annat som intresserar dig"
       },
       "occupations-that-interest-me": "Yrken som intresserar mig",
-      "skills-that-interest-me": "Kunskaper som intresserar mig",
+      "skills-that-interest-me": "Kunskaper som intresserar dig",
       "title": "Intressen"
     },
     "login-page": {
       "description": "Genom att logga in får du tillgång till en personlig kompetensprofil som hjälper dig att hantera och utnyttja din kunskap effektivt.\n",
-      "list-1-item-1": "Dina kunskaper: Spara din arbets- och utbildningshistorik samt dina prestationer.",
-      "list-1-item-2": "Dina intressen: Identifiera sådant som intresserar dig.",
-      "list-1-item-3": "Favoritinnehåll: Spara och hantera utbildnings- och karriärmöjligheter som intresserar just dig.",
-      "list-1-item-4": "Dina mål: Sätt upp mål och planera vägar för att nå dem.",
-      "list-1-item-5": "Kompetensprofilens inställningar: Bestäm hur och var dina uppgifter används och vem du delar dem till.",
+      "list-1-item-1": "Dina kompetenser: spara din arbets- och utbildningshistorik samt dina meriter, importera dina utbildningsuppgifter från Min Studieinfo och dina arbetshistorikuppgifter från jobbsökarprofilen på Jobbmarknaden eller importera dina uppgifter från ditt CV.",
+      "list-1-item-2": "Dina intressen: identifiera sådant som intresserar dig.",
+      "list-1-item-3": "Favoritinnehåll: spara och hantera utbildnings- och karriärmöjligheter som intresserar just dig.",
+      "list-1-item-4": "Dina mål: sätt upp mål och planera vägar för att nå dem.",
+      "list-1-item-5": "Kompetensprofilens inställningar: bestäm hur och var dina uppgifter används och vem du delar dem till.",
       "list-2-item-1": "Du ser all information om din kunskap och dina intressen på en och samma plats.",
       "list-2-item-2": "Identifiera dina styrkor genom din arbets- och utbildningshistorik samt dina fritidsintressen.",
       "list-2-item-3": "Använd din kompetensprofil för att hitta utbildnings- och karriärmöjligheter som passar just dig.",
@@ -999,8 +999,8 @@
     "title": "Sök möjligheter"
   },
   "service-catalog": {
-    "description": "Du hittar en vägledningstjänst som passar dina behov här.",
-    "header": "Behöver du råd och vägledning för att hitta din egen riktning?"
+    "description": "Från väglednings- och rådgivningstjänster kan du hitta stöd för att överväga karriär- och utbildningsalternativ.",
+    "header": "Behöver du personlig vägledning?"
   },
   "show": "Visa",
   "show-less": "Visa mindre",
@@ -1050,7 +1050,7 @@
     "competency-profile": {
       "delete-all": "Ta bort alla",
       "delete-text": "Ta bort text",
-      "export-help": "Du kan också spara den information du har kartlagt på denna sida till din kompetensprofil. Framöver hittar du dem i kompetensprofilen under Annan kompetens och Mina intressen.",
+      "export-help": "Du kan också spara den information du har kartlagt på denna sida till din kompetensprofil. Framöver hittar du dem i kompetensprofilen under annan kompetens och mina intressen.",
       "import-help": "Du kan välja vilka uppgifter du importerar från din kompetensprofil till denna sida. Du kan ta bort eller komplettera informationen genom att kartlägga dina kompetenser eller intressen.",
       "login-description": "Du kan importera data från din kompetensprofil och spara data till din kompetensprofil. Om du inte har en kompetensprofil än kan du skapa en genom att logga in i tjänsten.",
       "login-to-service": "Logga in i tjänsten",
@@ -1199,24 +1199,24 @@
       },
       "desktop": {
         "step-1": {
-          "description": "Börja med att kartlägga dina intressen och kompetenser genom att välja de mest lämpliga alternativen som föreslås baserat på din input.<br/>Du kan också importera information från din kompetensprofil om du har skapat en sådan. Att använda kompetensprofilen kräver inloggning.",
-          "title": "Välj först med vilka uppgifter du söker möjligheter"
+          "description": "Du kan börja med att berätta vad du är intresserad av och vad du kan. Välj de intressen och kompetenser som passar dig bäst bland förslagen.<br/>Om du är inloggad och har skapat en kompetensprofil kan du importera informationen direkt från din kompetensprofil.",
+          "title": "Kartlägg dina intressen och kunskaper"
         },
         "step-2": {
-          "description": "Tryck på Uppdatera-knappen när du har valt alla uppgifter du vill ha. Kom ihåg att uppdatera listan varje gång du ändrar dina uppgifter.",
-          "title": "Uppdatera möjligheter med dina uppgifter"
+          "description": "När du har valt de intressen eller kompetenser som passar dig, tryck på knappen <b>Uppdatera möjligheter</b>.<br/>Tjänsten skapar automatiskt förslag utifrån de uppgifter du har angett. Uppdatera möjligheterna varje gång du ändrar dina uppgifter.  ",
+          "title": "Uppdatera möjligheter"
         },
         "step-3": {
-          "description": "I möjligheterna ser du yrken, arbetsmöjligheter, examina och andra utbildningar ordnade enligt lämplighet beräknad baserat på dina uppgifter. Utforska dem närmare genom att klicka på möjlighetens namn. Du kan spara favoriter genom att logga in.",
-          "title": "Utforska och bekanta dig med dina möjligheter"
+          "description": "I möjligheterna ser du yrken, andra arbetsmöjligheter, examina och andra utbildningsmöjligheter ordnade enligt hur väl de passar de uppgifter du har angett. Du får mer information genom att klicka på möjlighetens namn.<br/> Om du är inloggad kan du spara möjligheter som favoriter.  ",
+          "title": "Bekanta dig med möjligheterna"
         },
         "step-4": {
-          "description": "Du kan filtrera och sortera listan över möjligheter med kontrollerna. På så sätt får du bättre fram alternativ som passar dina behov. Du kan också justera hur mycket dina valda intressen väger och hur mycket kompetenser väger i beräkningen av lämplighet.",
-          "title": "Använd kontroller för att beakta dina behov"
+          "description": "Du kan filtrera och sortera listan över möjligheter med hjälp av reglagen. Du kan till exempel välja om förslagen ska lägga större vikt vid dina intressen eller din kompetens. Du kan också välja att endast visa utbildnings- eller jobbmöjligheter.",
+          "title": "Använd kontrollerna"
         },
         "step-5": {
-          "description": "Redigera dina uppgifter och prova olika kombinationer av intressen och kompetenser. Om detta känns svårt kan hjälp finnas i länkarna under Stöd för reflektion.<br/>Genom att logga in kan du spara dina uppgifter till din kompetensprofil från Importera från kompetensprofilen.",
-          "title": "Testa och utforska olika kombinationer"
+          "description": "Prova olika kombinationer av intressen och kompetenser genom att redigera de uppgifter du har angett.  \nOm du loggar in i tjänsten kan du importera uppgifter från din kompetensprofil och spara dem där.  \n<br/> Mer stöd hittar du i länkarna under <b>Stöd för reflektion</b>. ",
+          "title": "Testa olika kombinationer"
         }
       },
       "mobile": {
@@ -1281,7 +1281,7 @@
       "TMT_TUONTI_TOOLTIP": "Importerad från Jobbmarknaden-tjänsten"
     }
   },
-  "update": "Uppdatera",
+  "update": "Uppdatera möjligheter",
   "update-short": "Uppdatera",
   "updating-list": "Uppdateras",
   "welcome": "Hej {{name}} - välkommen till din kompetensprofil!",

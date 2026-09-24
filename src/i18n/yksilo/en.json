@@ -261,10 +261,10 @@
   "introduction": {
     "step-1": {
       "item-1": "See all information related to your competences and interests in one place",
-      "item-2": "Record your work and education history and identify the knowledge gained from it",
-      "item-3": "Import your information from other services (My Studyinfo)",
+      "item-2": "Record your work and education history as well as your leisure activities, and identify the competences gained from them",
+      "item-3": "Import your information from your CV and other services (My Studyinfo, Job Market Finland) and export your information (Job Market Finland, CV)",
       "item-4": "Use your competence profile to find the right education & export opportunities for you",
-      "item-5": "Save your most interesting education and career opportunities as favourites",
+      "item-5": "Save the most interesting education and career opportunities as favorites and use them to create career goals and plans",
       "text-1": "Once you are logged in, you will have access to a personal competence profile that helps you to map out and manage your competence efficiently.",
       "title": "Welcome to create your competence profile!"
     },
@@ -402,16 +402,16 @@
   "my-competence-profile": "Competence profile",
   "my-competences-alphabetically": "My competences alphabetically A — Z",
   "my-competences": {
-    "by-KOULUTUS": "My competences accumulated from education",
+    "by-KOULUTUS": "Knowledge and skills gained through education",
     "by-MUU_OSAAMINEN": "Other competences",
-    "by-TOIMENKUVA": "My competence accumulated from jobs",
-    "by-TOIMINTO": "My competence accumulated from recreational activities",
+    "by-TOIMENKUVA": "Skills Acquired in the Workplace",
+    "by-TOIMINTO": "Skills acquired through recreational activities",
     "missing-KOULUTUS": "No competences. Go to add education.",
     "missing-MUU_OSAAMINEN": "No competences. Go to add other competences.",
     "missing-TOIMENKUVA": "No competences. Go to add jobs.",
     "missing-TOIMINTO": "No competences. Go to add recreational activities."
   },
-  "my-competences-by-sources": "My competences by theme",
+  "my-competences-by-sources": "Your competences by theme",
   "navigation": {
     "main-section": {
       "title": "Personal Competency Path",
@@ -487,7 +487,7 @@
         "attach-file": "Attach file",
         "attach-pdf": "Attach PDF file",
         "delay-info": "Collecting data from your CV may take minutes.",
-        "description": "You can upload a ready-made CV to your Competence Profile. After uploading, you can view, edit, and delete information in the Work, Education, and Leisure Activities sections.<br/><br/>Data duplication is possible if you have previously entered the same information into your Competence Profile.",
+        "description": "You can upload a ready-made CV to your Competence Profile. After uploading, you can view, edit, and delete information in the Work, Education, and Leisure Activities pages.<br/><br/>Data duplication is possible if you have previously entered the same information into your Competence Profile.",
         "file-too-large": "File too large",
         "invalid-file-type": "Invalid file type",
         "title": "File upload"
@@ -518,7 +518,7 @@
           "no-data": "No leisure activities identified",
           "title": "Leisure activities"
         },
-        "description": "Select which information you want to import from your CV. After importing, you can edit and complete the information in the Education, Work, and Leisure Activities sections.",
+        "description": "Select which information you want to import from your CV. After importing, you can edit and complete the information in the Education, Work, and Leisure Activities pages.",
         "education": {
           "loading": "Loading education history",
           "no-data": "No education data identified",
@@ -544,17 +544,17 @@
         "description": "The permission allows the use of your data for the development of AI functions in the service. The data can be used, for example, to improve functionalities, identify errors and optimise the user experience in general.",
         "title": "Permission to use my personal data for the development of the AI functionalities implemented in the service"
       },
-      "title": "Use of my data in an identifiable format"
+      "title": "Use of your data in an identifiable format"
     },
     "delete-profile": {
-      "action": "Delete my competence profile",
+      "action": "Delete competence profile",
       "confirm": "Are you sure you want to delete your competence profile?",
       "description": "You can permanently delete your entire competence profile and all information stored in it. The deletion cannot be reversed. Note! You can delete the guidance practitioner profile in the Guidance practitioner section.",
       "title": "Delete your competence profile"
     },
     "description": "On this page you can manage your competence profile settings and decide how your data will be used. You can use the link to share your profile, manage permissions for data use, download your profile data or delete your profile completely. You decide what information you share and with whom.",
     "download": {
-      "action": "Download my competence profile data (JSON)",
+      "action": "Download competence profile data (JSON)",
       "description": "You can download all the data stored in your competence profile to your device. The data is generated in a machine-readable JSON format. JSON is a simple and lightweight open standard file format for data transfer and storage.",
       "title": "Download your competence profile"
     },
@@ -569,7 +569,7 @@
     },
     "personal-details": {
       "description": "You can edit your email address.",
-      "title": "Personal details"
+      "title": "Personal Info"
     },
     "share": {
       "copy-failure": "Failed to copy the link",
@@ -687,9 +687,9 @@
       "info": "You can choose which of your Competence profile data you use to search for opportunities by accessing them on the Find opportunities page.",
       "move-to-type": {
         "KOULUTUS": "Go to educations",
-        "MUU_OSAAMINEN": "Go to my other competences",
-        "TOIMENKUVA": "Go to my jobs",
-        "TOIMINTO": "Go to my recreational activities"
+        "MUU_OSAAMINEN": "Go to other competencies",
+        "TOIMENKUVA": "Go to jobs",
+        "TOIMINTO": "Go to recreational activities"
       },
       "order-by": "Sort",
       "show-filters": "Show filters",
@@ -765,20 +765,20 @@
       "empty": "You have not added any interests yet.",
       "freeform": {
         "description": "You can write and describe your interests in your own words. The text you enter is saved automatically. If you use the service in English, please write in English. Do not enter any personal information in the description, such as your personal identity number, usernames or health information.",
-        "header": "Free-form description of my interests",
+        "header": "Free-form description of your interests",
         "placeholder": "Describe in your own words what else interests you"
       },
       "occupations-that-interest-me": "Occupations that interest me",
-      "skills-that-interest-me": "Competencies that interest me",
+      "skills-that-interest-me": "Competencies that interest you",
       "title": "Interests"
     },
     "login-page": {
       "description": "By logging in, you will have access to a personal competence profile that will help you manage and use your competence efficiently.",
-      "list-1-item-1": "Your competences: Record your work and education history and achievements.",
-      "list-1-item-2": "Your interests: Identify what interests you.",
-      "list-1-item-3": "Your favourite content: Save and manage education and career opportunities that interest you.",
-      "list-1-item-4": "Your goals: Set goals and plan paths to achieve them.",
-      "list-1-item-5": "Competence profile settings: Decide how and where your data will be used and with whom you will share it.",
+      "list-1-item-1": "Your skills: save your employment and education history and achievements, import your education details from My Studyinfo and your employment history from your Job Market Finland jobseeker profile, or import your details from your CV.",
+      "list-1-item-2": "Your interests: identify what interests you.",
+      "list-1-item-3": "Your favourite content: save and manage education and career opportunities that interest you.",
+      "list-1-item-4": "Your goals: set goals and plan paths to achieve them.",
+      "list-1-item-5": "Competence profile settings: decide how and where your data will be used and with whom you will share it.",
       "list-2-item-1": "You can see all of the information related to your competences and interests in one place.",
       "list-2-item-2": "Identify your strengths through your work and education history and leisure hobbies.",
       "list-2-item-3": "Use your competence profile to find the right education and career opportunities for you.",
@@ -1000,8 +1000,8 @@
     "title": "Search opportunities"
   },
   "service-catalog": {
-    "description": "You can find a suitable guidance service for your needs here.",
-    "header": "Do you need advice and guidance to find your own direction?"
+    "description": "From guidance and advisory services, you can find support for considering career and education options.",
+    "header": "Do you need personal guidance?"
   },
   "show": "Show",
   "show-less": "Show less",
@@ -1200,24 +1200,24 @@
       },
       "desktop": {
         "step-1": {
-          "description": "Start by mapping your interests and competences by selecting the most suitable options from the suggestions based on your input.<br/>You can also import data from your competence profile if you have created one. Using the competence profile requires logging in.",
-          "title": "First choose what data to use for finding opportunities"
+          "description": "You can start by describing what you are interested in and what you can do. Select the interests and competences that suit you best from the suggestions.<br/>If you are logged in and have created a competence profile, you can import the data directly from your competence profile.",
+          "title": "Map your interests and skills"
         },
         "step-2": {
-          "description": "Press the Update button when you have selected all the data you want. Remember to update the list whenever you change your data.",
-          "title": "Update opportunities with your data"
+          "description": "Once you have selected the interests or skills that suit you, click the <b>Update opportunities</b> button.<br/>The service automatically generates suggestions based on the information you have provided. Update the opportunities whenever you change your information.  ",
+          "title": "Update opportunities"
         },
         "step-3": {
-          "description": "In opportunities, you'll see professions, job opportunities, degrees, and other education organized by suitability calculated based on your data. Explore them in more detail by clicking on the opportunity name. You can save favorites by logging in.",
-          "title": "Explore and familiarize yourself with your opportunities"
+          "description": "In opportunities, you'll see professions, other job opportunities, degrees, and other education opportunities organized by how well they match the information you provided. Learn more by clicking on the opportunity name.<br/> If you're logged in, you can save opportunities as favorites.  ",
+          "title": "Explore the opportunities"
         },
         "step-4": {
-          "description": "You can filter and sort the list of opportunities using the controls. This way you can better highlight options that suit your needs. You can also adjust how much weight is given to your selected interests and how much to competences in the suitability calculation.",
-          "title": "Use controls to account for your needs"
+          "description": "You can filter and sort the list of opportunities using the controls. For example, you can choose whether the suggestions place more emphasis on your interests or your skills. You can also show only education or job opportunities.",
+          "title": "Use the controls"
         },
         "step-5": {
-          "description": "Edit your data and try different combinations of interests and competences. If this feels difficult, help may be found in the links under Support for Reflection.<br/>By logging in, you can save your data to your competence profile via Import from Competence Profile.",
-          "title": "Try and explore different combinations"
+          "description": "Try different combinations of interests and competences by editing the information you provided.  \nIf you log in to the service, you can import information from your competence profile and save information there.  \n<br/> You can find more support in the links under <b>Support for Reflection</b>. ",
+          "title": "Try different combinations"
         }
       },
       "mobile": {
@@ -1282,7 +1282,7 @@
       "TMT_TUONTI_TOOLTIP": "Imported from Job Market Finland service"
     }
   },
-  "update": "Update",
+  "update": "Update opportunities",
   "update-short": "Update",
   "updating-list": "Updating",
   "welcome": "Hello {{name}} – Welcome to your competence profile!",
