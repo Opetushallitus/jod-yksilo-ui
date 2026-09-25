@@ -1,6 +1,6 @@
 import { components } from '@/api/schema';
 import { maxKestoValue } from '@/routes/Tool/components/filters/FilterKesto';
-import { getKoulutusala, getToimiala } from '@/utils/codes/codes';
+import { getToimiala } from '@/utils/codes/codes';
 
 export function filterByRegion(regions: string[], meta: components['schemas']['EhdotusMetadata']): boolean {
   if (regions.length === 0) {
@@ -94,15 +94,13 @@ export function filterByToimialat(toimialaFilters: string[], meta: components['s
 }
 
 /*
- * There are two formats for koulutusala codes in mahdollisuudet metadata:
- * kansallinenkoulutusluokitus2016koulutusalataso1_00#1
- * kansallinenkoulutusluokitus2016koulutusalataso2_051#1
+ * Koulutusala codes in mahdollisuudet metadata are always on level 1, e.g.
+ * kansallinenkoulutusluokitus2016koulutusalataso1_00#1 (the version part is optional)
  */
-const KOULUTUSALA_KOODI_REGEX = /^kansallinenkoulutusluokitus2016koulutusalataso\d+_(\d+)#\d+$/;
+const KOULUTUSALA_KOODI_REGEX = /^kansallinenkoulutusluokitus2016koulutusalataso1_(\d+)(?:#\d+)?$/;
 
 const parseKoulutusalaCode = (code: string): string | null => {
-  const match = KOULUTUSALA_KOODI_REGEX.exec(code);
-  return match ? match[1] : null;
+  return KOULUTUSALA_KOODI_REGEX.exec(code)?.[1] ?? null;
 };
 
 export function filterByKoulutusalat(
@@ -117,18 +115,8 @@ export function filterByKoulutusalat(
   }
 
   const filterSet = new Set(koulutusalaFilters);
-
-  const uniqueKoulutusalaCodes = new Set(
-    meta.koulutusalat.map(parseKoulutusalaCode).filter((code): code is string => code !== null),
-  );
-  for (const code of uniqueKoulutusalaCodes) {
-    if (filterSet.has(code)) {
-      return true;
-    }
-    const koulutusala = getKoulutusala(code);
-    if (koulutusala?.parentCode && filterSet.has(koulutusala.parentCode)) {
-      return true;
-    }
-  }
-  return false;
+  return meta.koulutusalat.some((koulutusala) => {
+    const code = parseKoulutusalaCode(koulutusala);
+    return code !== null && filterSet.has(code);
+  });
 }

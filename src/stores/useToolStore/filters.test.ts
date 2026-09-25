@@ -24,10 +24,8 @@ const createMeta = (
 // Mock the getToimiala function
 vi.mock('../../utils/codes/codes.ts', () => ({
   getToimiala: vi.fn(),
-  getKoulutusala: vi.fn(),
 }));
 const mockGetToimiala = vi.mocked((await import('../../utils/codes/codes.ts')).getToimiala);
-const mockGetKoulutusala = vi.mocked((await import('../../utils/codes/codes.ts')).getKoulutusala);
 
 describe('filterByToimialat', () => {
   const createFullMeta = (
@@ -165,17 +163,15 @@ describe('filterByKoulutusalat', () => {
     });
     expect(result).toBe(false);
   });
-  it('should return true when parent code of meta.koulutusalat matches one of the koulutusalat', () => {
-    mockGetKoulutusala.mockReturnValue({ parentCode: '01' });
-    const result = filterByKoulutusalat(['01'], {
+  it('should return true when meta.koulutusalat code without version matches one of the koulutusalat', () => {
+    const result = filterByKoulutusalat(['03'], {
       ...createMeta('KOULUTUSMAHDOLLISUUS'),
-      koulutusalat: ['kansallinenkoulutusluokitus2016koulutusalataso2_051#1'],
+      koulutusalat: ['kansallinenkoulutusluokitus2016koulutusalataso1_03'],
     });
     expect(result).toBe(true);
   });
-  it('should return false when parent code of meta.koulutusalat does not match any of the koulutusalat', () => {
-    mockGetKoulutusala.mockReturnValue({ parentCode: '03' });
-    const result = filterByKoulutusalat(['01', '02'], {
+  it('should return false when meta.koulutusalat contains only non level 1 codes', () => {
+    const result = filterByKoulutusalat(['05'], {
       ...createMeta('KOULUTUSMAHDOLLISUUS'),
       koulutusalat: ['kansallinenkoulutusluokitus2016koulutusalataso2_051#1'],
     });

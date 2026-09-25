@@ -25,6 +25,13 @@ const loader = (async ({ request, params, context }) => {
   const jakaumat = koulutusmahdollisuus?.jakaumat as unknown as KoulutusmahdollisuusJakaumat;
 
   if (jakaumat) {
+    // Koulutusala is always shown on level 1, so the mixed level koulutusala jakauma is replaced
+    if (jakaumat.koulutusalaTaso1) {
+      jakaumat.koulutusala = jakaumat.koulutusalaTaso1;
+    } else {
+      delete jakaumat.koulutusala;
+    }
+    delete jakaumat.koulutusalaTaso1;
     Object.values(jakaumat).forEach((jakauma: Jakauma) => {
       if (jakauma.arvot) {
         jakauma.arvot.sort(sortByProperty('osuus', true));
