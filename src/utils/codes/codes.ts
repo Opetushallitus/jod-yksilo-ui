@@ -3,20 +3,6 @@ import { TypedMahdollisuus } from '@/routes/types';
 import { isFeatureEnabled } from '@/utils/features';
 import type { Codeset } from '@/utils/jakaumaUtils';
 
-/**
- Koulutusala contains data from here https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/koulutusala_1_20160101/classificationItems?content=data&meta=max&lang=fi&format=json.
- It is shortened to contain only necessary levels by following command: jq '[.[] | select(.level <= 2)]' koulutusala_fi.json > koulutusala_fi_small.json
- */
-import koulutusalaData from './koulutusala_fi.json';
-/**
- Toimiala is bundled in two versions, TOL 2008 (toimiala_*.json, classification toimiala_1_20080101)
- and TOL 2025 (toimiala2025_*.json, classification toimiala_1_20250101). They are generated with:
-
- for L in fi sv en; do
-   curl -s "https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/<CLASSIFICATION>/classificationItems?content=data&meta=max&lang=$L" \
-   | jq '[.[] | select(.level <= 2) | {code, level, parentCode, classificationItemNames}]' > <PREFIX>_$L.json
- done
- */
 import toimiala2025Data from './toimiala2025_fi.json';
 import toimialaData from './toimiala_fi.json';
 
@@ -31,6 +17,23 @@ export interface ClassificationItem {
   }[];
 }
 
+/**
+ Toimiala is bundled in two versions, TOL 2008 (toimiala_*.json, classification toimiala_1_20080101)
+ and TOL 2025 (toimiala2025_*.json, classification toimiala_1_20250101). They are generated with:
+
+ for L in fi sv en; do
+   curl -s "https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/<CLASSIFICATION>/classificationItems?content=data&meta=max&lang=$L" \
+   | jq '[.[] | select(.level <= 2) | {code, level, parentCode, classificationItemNames}]' > <PREFIX>_$L.json
+ done
+
+ Koulutusala (koulutusala_*.json, classification koulutusala_1_20160101) contains only level 1,
+ since koulutusala filters and mahdollisuudet metadata use level 1 codes. It is generated with:
+
+ for L in fi sv en; do
+   curl -s "https://api.stat.fi/classificationservice/open/api/classifications/v2/classifications/koulutusala_1_20160101/classificationItems?content=data&meta=max&lang=$L" \
+   | jq '[.[] | select(.level <= 1) | {code, level, parentCode, classificationItemNames}]' > koulutusala_$L.json
+ done
+ */
 // Tilastokeskus sources for the JSON files
 // https://stat.fi/fi/luokitukset/maakunta/maakunta_1_20250101
 // https://stat.fi/fi/luokitukset/kieli/kieli_1_20101115
@@ -38,6 +41,7 @@ export interface ClassificationItem {
 // https://stat.fi/fi/luokitukset/valtio/valtio_2_20120101
 // https://stat.fi/fi/luokitukset/toimiala/toimiala_1_20080101
 // https://stat.fi/fi/luokitukset/toimiala/toimiala_1_20250101
+// https://stat.fi/fi/luokitukset/koulutusala/koulutusala_1_20160101
 
 /**
  * TOL 2008 and TOL 2025 are not interchangeable: TOL 2025 splits section J in two, which shifts
@@ -164,15 +168,6 @@ const toimialaByCode = new Map<string, Map<string, Partial<ClassificationItem>>>
 
 export const getToimiala = (code: string): Partial<ClassificationItem> | undefined =>
   toimialaByCode.get(resolveCodesetFile('toimiala'))?.get(code);
-
-export const getKoulutusala = (code: string): Partial<ClassificationItem> | undefined => {
-  const entry = koulutusalaData.find((obj) => {
-    if (!obj || typeof obj !== 'object') return false;
-    const o = obj as Record<string, unknown>;
-    return typeof o.code === 'string' && o.code === code;
-  }) as Partial<ClassificationItem> | undefined;
-  return entry;
-};
 
 /**
  * Minimal interface for opintopolku koodisto service response

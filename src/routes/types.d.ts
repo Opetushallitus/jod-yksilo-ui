@@ -56,6 +56,7 @@ export interface TyomahdollisuusJakaumat {
 export interface KoulutusmahdollisuusJakaumat {
   aika?: Jakauma;
   koulutusala?: Jakauma;
+  koulutusalaTaso1?: Jakauma;
   kunta?: Jakauma;
   maakunta?: Jakauma;
   maksullisuus?: Jakauma;
@@ -66,7 +67,10 @@ interface CodeSetValue {
   code: string;
   value: string;
 }
-export type JakaumaKey = keyof KoulutusmahdollisuusJakaumat | keyof TyomahdollisuusJakaumat;
+// koulutusalaTaso1 is never displayed as its own jakauma, the loader moves it to koulutusala
+export type JakaumaKey =
+  | Exclude<keyof KoulutusmahdollisuusJakaumat, 'koulutusalaTaso1'>
+  | keyof TyomahdollisuusJakaumat;
 
 export interface JakaumaDisplayValueTranslations {
   maksullisuus: Record<'lukuvuosimaksu' | 'maksullinen' | 'maksuton', string>;
