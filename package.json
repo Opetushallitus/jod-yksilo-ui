@@ -23,7 +23,7 @@
   "dependencies": {
     "@hookform/error-message": "2.0.1",
     "@hookform/resolvers": "5.9.1",
-    "@jod/design-system": "https://github.com/Opetushallitus/jod-design-system/releases/download/rel-20260923-1/jod-design-system-0.0.0.tgz",
+    "@jod/design-system": "https://github.com/Opetushallitus/jod-design-system/releases/download/rel-20260929-1/jod-design-system-0.0.0.tgz",
     "driver.js": "1.8.0",
     "i18next": "26.4.2",
     "i18next-http-backend": "4.0.2",
@@ -66,6 +66,7 @@
     "tailwindcss": "4.3.3",
     "typescript": "npm:typescript@5.9.3",
     "vite": "8.2.2",
+    "vite-imagetools": "12.0.1",
     "vitest": "5.0.0"
   },
   "devEngines": {

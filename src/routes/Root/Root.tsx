@@ -11,6 +11,7 @@ import {
   MatomoTracker,
   MenuButton,
   NavigationBar,
+  pictureToImageSet,
   ServiceVariantProvider,
   SkipLink,
   useCookieConsent,
@@ -19,6 +20,7 @@ import {
   UserButton,
 } from '@jod/design-system';
 
+import feedbackBg from '@/../assets/feedback.jpg?preset=bg';
 import { FeedbackModal } from '@/components';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
@@ -229,7 +231,11 @@ const Root = () => {
   const { data: yksiloData, isLoading } = useYksiloData();
 
   return (
-    <div className="flex min-h-screen flex-col bg-bg-gray text-primary-gray" data-testid="app-root">
+    <div
+      className="flex min-h-screen flex-col bg-bg-gray text-primary-gray"
+      style={{ '--feedback-bg': pictureToImageSet(feedbackBg) } as React.CSSProperties}
+      data-testid="app-root"
+    >
       <link rel="manifest" href={`/manifest-${language}.json`} crossOrigin="use-credentials" />
       <header role="banner" className="sticky top-0 z-30 print:hidden" data-testid="app-header">
         <SkipLink hash="#jod-main" label={t('common:skiplinks.main')} />
@@ -316,7 +322,7 @@ const Root = () => {
         feedbackContent={t('common:footer.feedback-content')}
         feedbackButtonLabel={t('common:footer.feedback-button-label')}
         feedbackOnClick={() => setFeedbackVisible(true)}
-        feedbackBgImageClassName="bg-[url(@/../assets/feedback.jpg)] bg-cover bg-[50%_50%]"
+        feedbackBgImageClassName="bg-(image:--feedback-bg) bg-cover bg-[50%_50%]"
         copyright={t('common:footer.copyright')}
         externalLinkIconAriaLabel={t('common:external-link')}
         socialMedia={socialMedia}
