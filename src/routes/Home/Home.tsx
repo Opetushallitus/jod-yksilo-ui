@@ -2,13 +2,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, To } from 'react-router';
 
-import { cx, HeroCard, type LinkComponent, useMediaQueries } from '@jod/design-system';
+import { cx, HeroCard, type LinkComponent, Picture, pictureToImageSet, useMediaQueries } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 
-import heroSrc1 from '@/../assets/yksilo-hero-1.jpg';
-import heroSrc2 from '@/../assets/yksilo-hero-2.jpg';
-import heroSrc3 from '@/../assets/yksilo-hero-3.jpg';
-import heroSrc4 from '@/../assets/yksilo-hero-4.jpg';
+import palveluhakemistoBg from '@/../assets/palveluhakemisto.jpg?preset=bg';
+import heroSrc1 from '@/../assets/yksilo-hero-1.jpg?preset=hero';
+import heroSrc2 from '@/../assets/yksilo-hero-2.jpg?preset=hero';
+import heroSrc3 from '@/../assets/yksilo-hero-3.jpg?preset=hero';
+import heroSrc4 from '@/../assets/yksilo-hero-4.jpg?preset=hero';
 import { HowToUse } from '@/components/HowToUse/HowToUse';
 import { NavLinkBasedOnAuth } from '@/components/NavMenu/NavLinkBasedOnAuth';
 import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
@@ -19,8 +20,8 @@ interface ContainerProps {
   children?: React.ReactNode;
 }
 
-const FullWidthContainer = ({ className = '', children }: ContainerProps) => (
-  <div className={cx(['flex', 'justify-start', 'py-8', className])}>
+const FullWidthContainer = ({ className = '', style, children }: ContainerProps & { style?: React.CSSProperties }) => (
+  <div className={cx(['flex', 'justify-start', 'py-8', className])} style={style}>
     <div className="mx-auto w-[1092px] px-5 sm:px-6 xl:px-0">{children}</div>
   </div>
 );
@@ -103,13 +104,16 @@ const Home = () => {
     <main role="main" className="mx-auto w-full max-w-(--breakpoint-xl) bg-white" id="jod-main" data-testid="home-page">
       <title>{t('my-competence-path')}</title>
 
-      <img
-        src={heroSrc}
+      <Picture
+        picture={heroSrc}
         alt=""
         role="none"
+        loading="eager"
+        fetchPriority="high"
+        sizes="1440px"
         className="pointer-events-none w-(--breakpoint-xl) touch-none object-cover object-[72%_50%] select-none sm:h-[617px] sm:object-[71%_50%] md:object-[67%_50%] lg:object-[60%_50%] xl:object-[50%_50%]"
         style={sm ? undefined : { height: heroHeight }}
-        data-testid="home-hero"
+        testId="home-hero"
       />
 
       <CardContainer ref={firstCardRef} className="relative">
@@ -181,7 +185,10 @@ const Home = () => {
         </div>
       </div>
 
-      <FullWidthContainer className="bg-[url(@/../assets/palveluhakemisto.jpg)] bg-cover bg-[50%_50%]">
+      <FullWidthContainer
+        className="bg-(image:--palveluhakemisto-bg) bg-cover bg-[50%_50%]"
+        style={{ '--palveluhakemisto-bg': pictureToImageSet(palveluhakemistoBg) } as React.CSSProperties}
+      >
         <div className="max-w-2xl">
           <HeroCard
             size="sm"
