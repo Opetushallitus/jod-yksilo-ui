@@ -352,7 +352,7 @@ const Tool = () => {
   const DEFAULT_TAB: TabName = 'info';
 
   const { t } = useTranslation();
-  const { lg } = useMediaQueries();
+  const { lg, reduceMotion } = useMediaQueries();
   const savedTab: TabName = React.useMemo(() => {
     try {
       const stored = globalThis.sessionStorage.getItem(STORAGE_KEY) as TabName;
@@ -423,57 +423,60 @@ const Tool = () => {
       globalThis.sessionStorage.setItem(STORAGE_KEY, tab);
 
       if (scrollRef.current && onboardingTourActive) {
-        scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+        scrollRef.current.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth' });
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: reduceMotion ? 'instant' : 'smooth' });
       }
     },
-    [onboardingTourActive],
+    [onboardingTourActive, reduceMotion],
   );
 
-  const tabs = React.useMemo(() => {
-    const tabs = [
+  const tabs = React.useMemo(
+    () => [
       {
+        key: 'info' as const,
         text: t('tool.my-own-data.title'),
         active: currentTab === 'info',
         onclick: () => setTab('info'),
       },
       {
-        text: `${t('tool.your-opportunities.title')}`,
+        key: 'opportunities' as const,
+        text: t('tool.your-opportunities.title'),
         active: currentTab === 'opportunities',
         onclick: () => setTab('opportunities'),
       },
-    ];
-
-    return tabs;
-  }, [currentTab, setTab, t]);
+    ],
+    [currentTab, setTab, t],
+  );
 
   const onKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+      let targetIndex: number;
       switch (event.key) {
-        case 'Home':
         case 'ArrowLeft':
-          if (index > 0) {
-            setTab('info');
-            (event.currentTarget.previousElementSibling as HTMLElement)?.focus();
-          }
-          event.stopPropagation();
-          event.preventDefault();
+          targetIndex = Math.max(index - 1, 0);
+          break;
+        case 'ArrowRight':
+          targetIndex = Math.min(index + 1, tabs.length - 1);
+          break;
+        case 'Home':
+          targetIndex = 0;
           break;
         case 'End':
-        case 'ArrowRight':
-          if (index < tabs.length - 1) {
-            setTab('opportunities');
-            (event.currentTarget.nextElementSibling as HTMLElement)?.focus();
-          }
-          event.stopPropagation();
-          event.preventDefault();
+          targetIndex = tabs.length - 1;
           break;
         default:
-          break;
+          return;
+      }
+      event.stopPropagation();
+      event.preventDefault();
+      const target = tabs[targetIndex];
+      if (target && targetIndex !== index) {
+        target.onclick();
+        document.getElementById(`tool-tab-${target.key}`)?.focus();
       }
     },
-    [setTab, tabs.length],
+    [tabs],
   );
 
   const { permanentNotesHeight } = useNoteStack();
@@ -533,14 +536,14 @@ const Tool = () => {
               {tabs.map((tab, index) => (
                 <button
                   type="button"
-                  data-testid={`toggle-tab-${tab.text}`}
-                  key={tab.text}
+                  data-testid={`toggle-tab-${tab.key}`}
+                  key={tab.key}
                   onClick={tab.onclick}
                   role="tab"
-                  aria-controls={`tabpanel-${currentTab}`}
-                  tabIndex={currentTab === 'info' ? undefined : -1}
+                  aria-controls={`tool-tabpanel-${tab.key}`}
+                  tabIndex={tab.active ? 0 : -1}
                   onKeyDown={(event) => onKeyDown(event, index)}
-                  id={`tab-${tab.text}`}
+                  id={`tool-tab-${tab.key}`}
                   aria-selected={tab.active}
                   className={cx('flex grow cursor-pointer items-center justify-center rounded-t-md bg-white py-4', {
                     'text-accent': tab.active,
@@ -553,10 +556,10 @@ const Tool = () => {
             </div>
           </div>
           <div
-            id={`tabpanel-${currentTab}`}
+            id={`tool-tabpanel-${currentTab}`}
             role="tabpanel"
             tabIndex={0}
-            aria-labelledby="tab-1"
+            aria-labelledby={`tool-tab-${currentTab}`}
             className={cx('flex w-full flex-col')}
             data-testid={`tool-tabpanel-${currentTab}`}
           >
