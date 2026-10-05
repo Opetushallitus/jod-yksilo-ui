@@ -81,7 +81,9 @@ async function downloadFile(url, outputPath) {
     return result;
   }
 
-  await writeToFile(outputPath, result.data);
+  const translations = JSON.parse(result.data);
+  const filtered = Object.fromEntries(Object.entries(translations).filter(([key]) => !/^notifications-\d+-/.test(key)));
+  await writeToFile(outputPath, JSON.stringify(filtered, null, 2));
   return { skipped: false };
 }
 
