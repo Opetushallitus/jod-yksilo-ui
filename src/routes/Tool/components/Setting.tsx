@@ -51,7 +51,7 @@ export const Setting = ({
         triggerId={triggerId}
         ariaControls={contentId}
         title={
-          <div ref={ref} className="cursor-pointer p-1 text-left text-body-sm" aria-controls={id}>
+          <div ref={ref} className="cursor-pointer p-1 text-left text-body-sm">
             {titleText}
           </div>
         }
