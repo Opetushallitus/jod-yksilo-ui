@@ -102,12 +102,19 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value }, field }) => (
-                    <ToggleAllow
-                      {...field}
-                      onChange={(val: boolean) => onChange(val)}
-                      checked={value}
-                      testId="birthyear-toggle-button"
-                    />
+                    <>
+                      <span id="personal-details.birthyear-sr" hidden>
+                        {data.syntymavuosi}
+                      </span>
+                      <ToggleAllow
+                        {...field}
+                        onChange={(val: boolean) => onChange(val)}
+                        checked={value}
+                        testId="birthyear-toggle-button"
+                        label={t('personal-details.birthyear')}
+                        ariaDescribedBy="personal-details.birthyear-sr"
+                      />
+                    </>
                   )}
                   name="allowSyntymavuosi"
                 />
@@ -126,12 +133,19 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value }, field }) => (
-                    <ToggleAllow
-                      {...field}
-                      onChange={(val: boolean) => onChange(val)}
-                      checked={value}
-                      testId="home-city-toggle-button"
-                    />
+                    <>
+                      <span id="personal-details.home-city-sr" hidden>
+                        {data.kotikuntaNimi}
+                      </span>
+                      <ToggleAllow
+                        {...field}
+                        onChange={(val: boolean) => onChange(val)}
+                        checked={value}
+                        testId="home-city-toggle-button"
+                        label={t('personal-details.home-city')}
+                        ariaDescribedBy="personal-details.home-city-sr"
+                      />
+                    </>
                   )}
                   name="allowKotikunta"
                 />
@@ -150,12 +164,19 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value }, field }) => (
-                    <ToggleAllow
-                      {...field}
-                      onChange={(val: boolean) => onChange(val)}
-                      checked={value}
-                      testId="gender-toggle-button"
-                    />
+                    <>
+                      <span id="personal-details.gender-sr" hidden>
+                        {data.sukupuoliNimi}
+                      </span>
+                      <ToggleAllow
+                        {...field}
+                        onChange={(val: boolean) => onChange(val)}
+                        checked={value}
+                        testId="gender-toggle-button"
+                        label={t('personal-details.gender')}
+                        ariaDescribedBy="personal-details.gender-sr"
+                      />
+                    </>
                   )}
                   name="allowSukupuoli"
                 />

@@ -11,16 +11,25 @@ interface ToggleAllowProps {
   disabled?: boolean;
   /** Test id for testing purposes */
   testId?: string;
+  label: string;
+  ariaDescribedBy?: string;
 }
 
-export const ToggleAllow = ({ checked, onChange, disabled = false, testId }: ToggleAllowProps) => {
+export const ToggleAllow = ({
+  checked,
+  onChange,
+  disabled = false,
+  testId,
+  label,
+  ariaDescribedBy,
+}: ToggleAllowProps) => {
   const { t } = useTranslation();
-  const label = checked ? t('i-allow') : t('i-disallow');
+  const stateText = checked ? t('i-allow') : t('i-disallow');
 
   return (
     <>
       <span className="font-arial text-body-md-mobile text-secondary-gray sm:text-body-md" aria-hidden>
-        {label}
+        {stateText}
       </span>
       <Toggle
         type="button"
@@ -29,6 +38,7 @@ export const ToggleAllow = ({ checked, onChange, disabled = false, testId }: Tog
         onChange={onChange}
         disabled={disabled}
         ariaLabel={label}
+        ariaDescribedBy={ariaDescribedBy}
         testId={testId}
       />
     </>
