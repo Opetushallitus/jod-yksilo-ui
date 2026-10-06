@@ -182,12 +182,13 @@ const PersonalDetails = () => {
             <p className="text-form-label">
               {t('preferences.data-disclosure-unanonymized.permission-education-and-planning.title')}
             </p>
-            <p className="text-help-mobile sm:text-help">
+            <p id="profile-personal-details-description" className="text-help-mobile sm:text-help">
               {t('preferences.data-disclosure-unanonymized.permission-education-and-planning.description')}
             </p>
           </div>
           <div className="flex items-center gap-3">
             <ToggleAllow
+              ariaDescribedBy="profile-personal-details-description"
               checked={lupaLuovuttaaTiedotUlkopuoliselle}
               onChange={guardedAction(() => {
                 const newValue = !lupaLuovuttaaTiedotUlkopuoliselle;
@@ -195,6 +196,7 @@ const PersonalDetails = () => {
                 void persist({ ...getPayload(), lupaLuovuttaaTiedotUlkopuoliselle: newValue });
               })}
               testId="pref-share-third-parties-toggle"
+              label={t('preferences.data-disclosure-unanonymized.permission-education-and-planning.title')}
             />
           </div>
         </div>
@@ -206,12 +208,13 @@ const PersonalDetails = () => {
             <p className="text-form-label">
               {t('preferences.data-disclosure-unanonymized.permission-use-AI-education.title')}
             </p>
-            <p className="text-help-mobile sm:text-help">
+            <p id="profile-ai-use-description" className="text-help-mobile sm:text-help">
               {t('preferences.data-disclosure-unanonymized.permission-use-AI-education.description')}
             </p>
           </div>
           <div className="flex items-center gap-3">
             <ToggleAllow
+              ariaDescribedBy="profile-ai-use-description"
               checked={lupaKayttaaTekoalynKoulutukseen}
               onChange={guardedAction(() => {
                 const newValue = !lupaKayttaaTekoalynKoulutukseen;
@@ -219,6 +222,7 @@ const PersonalDetails = () => {
                 void persist({ ...getPayload(), lupaKayttaaTekoalynKoulutukseen: newValue });
               })}
               testId="pref-ai-training-toggle"
+              label={t('preferences.data-disclosure-unanonymized.permission-use-AI-education.title')}
             />
           </div>
         </div>
