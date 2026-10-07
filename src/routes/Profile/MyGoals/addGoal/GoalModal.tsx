@@ -196,7 +196,7 @@ export const GoalModal = ({ mode, tavoite, ...rest }: GoalModalProps) => {
   const goalsId = React.useId();
   const insertTavoite = isUpdateMode ? updateTavoite : addTavoite;
 
-  useEscHandler(insertTavoite, goalsId);
+  useEscHandler(closeActiveModal, goalsId);
 
   const paginationTranslations = usePaginationTranslations();
 
