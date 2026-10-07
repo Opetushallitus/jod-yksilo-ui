@@ -36,6 +36,10 @@ const AdditionalSupport = () => {
         <p className="text-body-md text-primary-gray sm:text-body-md">{t('tool.tools.description')}</p>
         <AdditionalSupportLink url={`/urataidot/${lng}`} text={t('tool.tools.urataidot-additional-resource')} />
         <AdditionalSupportLink
+          url={`/tietopalvelu/${lng}/tietoa-oman-uran-suunnittelun-tueksi`}
+          text={t('tool.tools.career-planning-statistics-additional-resource')}
+        />
+        <AdditionalSupportLink
           url={t('tool.tools.counseling-url')}
           text={t('tool.tools.counseling-additional-resource')}
         />
