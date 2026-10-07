@@ -149,6 +149,8 @@ const PersonalDetails = () => {
           interactiveComponent={
             <InputField
               id={emailFieldId}
+              type="email"
+              autoComplete="email"
               hideLabel
               requiredText={t('common:required')}
               value={email}

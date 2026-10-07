@@ -262,6 +262,8 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
               <InputField
                 label={t('common:feedback.email-label')}
                 {...register('email')}
+                type="email"
+                autoComplete="email"
                 maxLength={EMAIL_MAX_LENGTH}
                 requiredText={t('common:required')}
                 errorMessage={errors.email ? formErrorMessage.email().message : undefined}
