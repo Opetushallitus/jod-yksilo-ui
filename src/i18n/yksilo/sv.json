@@ -1179,6 +1179,7 @@
       "compass-url": "https://www.osaamistarvekompassi.fi",
       "counseling-additional-resource": "<CustomLink>Väglednings- och rådgivningstjänster<Icon></Icon></CustomLink> samlar tjänster där du kan få stöd i att reflektera över karriär- och utbildningsalternativ, vilket hjälper dig att bedöma och utveckla dina färdigheter i karriärplanering.",
       "counseling-url": "https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster",
+      "career-planning-statistics-additional-resource": "<CustomLink>Information som stöd för karriärplaneringen i informationstjänsten<Icon></Icon></CustomLink>",
       "description": "Bekanta dig med följande webbplatser om du behöver hjälp med att reflektera över din situation:",
       "education-history": "Utbildningar",
       "free-time-activities": "Fritidsaktiviteter",
