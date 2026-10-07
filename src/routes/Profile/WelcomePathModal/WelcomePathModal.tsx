@@ -206,6 +206,8 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
               requiredText={t('common:required')}
               errorMessage={errors.email?.message}
               id={emailFieldId}
+              type="email"
+              autoComplete="email"
               hideLabel={true}
               placeholder="matti.meikalainen@suomi.fi"
               onBlur={(event) => {
