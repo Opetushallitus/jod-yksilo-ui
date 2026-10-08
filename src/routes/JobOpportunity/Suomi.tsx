@@ -55,11 +55,14 @@ const Suomi: React.FC<Props> = ({ data }: Props) => {
     return data.find((mkt) => mkt.code === id)?.osuus ?? 0;
   };
 
+  const sortedData = React.useMemo(() => [...data].sort((a, b) => b.osuus - a.osuus), [data]);
+
   const getInnerStyle = (id: string): React.CSSProperties => ({
     fill: hoverTooltip.id === id ? highlightOrange : colorById[id],
   });
   const [maakunnatList, setMaakunnatList] = React.useState<[string, string][]>([]);
   const {
+    t,
     i18n: { language },
   } = useTranslation();
   React.useEffect(() => {
@@ -70,13 +73,6 @@ const Suomi: React.FC<Props> = ({ data }: Props) => {
       },
     );
   }, [language]);
-  const title = (maakuntaCode: string) => {
-    if (!maakunnatList || maakunnatList?.length == 0) {
-      return <></>;
-    }
-    const maakuntaTitle = maakunnatList.find((mk) => mk[0] === maakuntaCode)?.[1];
-    return <span>{`${maakuntaTitle} ${getOsuusById(maakuntaCode)}`}%</span>;
-  };
 
   const [hoverTooltip, setHoverTooltip] = React.useState({
     id: '',
@@ -114,6 +110,9 @@ const Suomi: React.FC<Props> = ({ data }: Props) => {
   }, []);
   return (
     <>
+      <p aria-hidden className="font-bold mb-3">
+        {t('job-opportunity.employment-data.employed-by-region')}
+      </p>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         id="Layer_1"
@@ -121,6 +120,8 @@ const Suomi: React.FC<Props> = ({ data }: Props) => {
         viewBox="0 0 1851 3230"
         style={{ maxWidth: '300px' }}
         onPointerLeave={hideTooltip}
+        aria-hidden="true"
+        focusable="false"
       >
         <g id="legend" transform="scale(6) translate(0, 115)">
           {/* >50%: Darkest blue */}
@@ -610,9 +611,7 @@ const Suomi: React.FC<Props> = ({ data }: Props) => {
           onMouseMove={(e) => showTooltip(e, '16')}
           onPointerLeave={hideTooltip}
           d="M889.03436,2081.24569l-61.32898-75.05103-16.44501-49.44299-14.75403-5.81104-4.98199-20.95105-10.789-5.61096-9.42499-37.625-58.06799-38.27905-9.66998,14.73303-1.203,23.49194-9.48602,1.65002-11.82397-11.28101-7.98798,5.69397-1.05402,45.73901-47.80597,2.16296-5.849,8.54602-6.59497.14697-5.96899-7.18896-13.05298-.07495c-.33002.49097-.40302.03894-.73199.53101l14.27301,39.26196,6.22198-8.42896,32.69299,24.41394,23.09198-11.26001,6.04797,8.99597,10.62201-8.23804,36.77502,29.56702-8.37201,8.97803-17.26398.396-10.75403-8.76697-13.73999,8.88794,9.06799,16.03198,8.41602-2.396,20.41998,37.05908-7.79602,26.01294,27.172,35.13208,24.57703,7.38599,25.29199,31.95996-12.98901,5.36108,29.43103,13.91211,5.875-3.83203,26.271-9.69312,22.90002,4.98999,2.54102-69.4519,24-25.57007,12.24786-2.08789h0Z"
-        >
-          {title('16')}
-        </path>
+        />
         <g
           id="pohjanmaa"
           onMouseEnter={(e) => showTooltip(e, '15')}
@@ -699,13 +698,19 @@ const Suomi: React.FC<Props> = ({ data }: Props) => {
           onMouseMove={(e) => showTooltip(e, '14')}
           onPointerLeave={hideTooltip}
           points="559.15845 2436.18459 587.80737 2436.42458 619.25732 2419.25661 633.59448 2393.96462 661.30139 2404.78469 665.17444 2394.98464 686.05347 2397.96462 711.80139 2376.76565 723.31836 2384.0945 726.26147 2408.3257 737.43506 2412.96718 757.8844 2389.70461 784.17847 2393.51565 790.26147 2382.3445 812.39233 2382.00661 818.07934 2343.38454 810.5404 2333.08669 816.05444 2325.2347 793.66333 2264.21468 802.70337 2257.1346 789.5415 2239.47469 784.83349 2201.29671 794.91943 2187.09456 795.19946 2186.89071 765.76855 2172.9786 778.75757 2167.61751 753.46557 2135.65755 728.88843 2128.27157 701.71876 2093.13212 701.66846 2092.47469 687.49243 2075.11458 669.95434 2066.67464 646.00732 2066.34456 636.92944 2092.97469 624.92847 2103.51571 607.62646 2098.53475 574.84143 2104.30477 543.72046 2119.46468 543.36035 2143.84456 551.35742 2144.11458 557.71948 2172.04671 541.40942 2171.84456 507.20044 2231.1346 509.71533 2248.11458 480.29138 2279.04671 443.64038 2266.85457 420.17847 2242.37459 413.53943 2250.12459 410.01147 2286.53475 417.46948 2294.06478 393.19433 2320.39364 373.77246 2377.83669 381.40539 2396.6946 392.38232 2400.31472 392.95141 2428.56472 399.58142 2431.41555 406.78039 2441.91555 391.67236 2451.55471 394.46838 2465.97463 386.26147 2472.46462 383.02441 2501.14358 369.2063 2502.76711 369.2063 2502.76955 383.01636 2501.1465 396.3833 2513.38259 429.72241 2519.2986 468.1604 2486.60769 479.93335 2486.55178 500.58435 2454.85573 516.13135 2454.32473 529.45532 2427.13869 547.76733 2436.23269 559.15845 2436.18459"
-        >
-          {title('14')}
-        </polygon>
+        />
       </svg>
+      {/* Safari drops list semantics when list-style is none, so the role is needed */}
+      {/* oxlint-disable-next-line jsx_a11y/no-redundant-roles */}
+      <ul className="sr-only" role="list" aria-label={t('job-opportunity.employment-data.employed-by-region')}>
+        {sortedData.map(({ code, osuus }) => (
+          <li key={code}>{`${maakunnatList.find(([c]) => c === code)?.[1] ?? code} ${osuus} %`}</li>
+        ))}
+      </ul>
       {!!hoverTooltip?.visible && (
         <div
           id="custom-tooltip"
+          aria-hidden="true"
           className="rounded-full p-4"
           style={{
             position: 'fixed',
