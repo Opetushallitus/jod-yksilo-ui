@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import { Datepicker, InputField, Textarea } from '@jod/design-system';
 
-import { FormError, TouchedFormError } from '@/components';
 import { LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
+import { getFormErrorMessage } from '@/utils';
 
 import { WorkHistoryForm } from './utils';
 
@@ -45,8 +45,8 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
             placeholder={t('profile.work-history.modals.workplace-placeholder')}
             requiredText={t('common:required')}
             testId="work-history-workplace-input"
+            errorMessage={getFormErrorMessage(errors, `nimi.${language}`)}
           />
-          <FormError name={`nimi.${language}`} errors={errors} />
         </div>
       )}
       <div className="mb-6" data-testid="work-history-job-description-field">
@@ -57,8 +57,8 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
           placeholder={t('profile.work-history.modals.job-description-placeholder')}
           help={t('profile.work-history.modals.job-description-help')}
           testId="work-history-job-description-input"
+          errorMessage={getFormErrorMessage(errors, `toimenkuvat.${toimenkuva}.nimi.${language}`)}
         />
-        <FormError name={`toimenkuvat.${toimenkuva}.nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-4">
         <div className="w-full sm:max-w-input-short" data-testid="work-history-started-field">
@@ -76,14 +76,10 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
                 requiredText={t('common:required')}
                 translations={datePickerTranslations}
                 testId="work-history-start-date"
+                errorMessage={getFormErrorMessage(errors, `toimenkuvat.${toimenkuva}.alkuPvm`, formState.touchedFields)}
               />
             )}
             name={`toimenkuvat.${toimenkuva}.alkuPvm`}
-          />
-          <TouchedFormError
-            touchedFields={formState.touchedFields}
-            fieldName={`toimenkuvat.${toimenkuva}.alkuPvm`}
-            errors={errors}
           />
         </div>
         <div className="w-full sm:max-w-input-short" data-testid="work-history-ended-field">
@@ -96,11 +92,11 @@ const WorkplaceStep = ({ type, toimenkuva }: WorkplaceStepProps) => {
                 placeholder={t('date-or-continues-placeholder')}
                 translations={datePickerTranslations}
                 testId="work-history-end-date"
+                errorMessage={getFormErrorMessage(errors, `toimenkuvat.${toimenkuva}.loppuPvm`)}
               />
             )}
             name={`toimenkuvat.${toimenkuva}.loppuPvm`}
           />
-          <FormError name={`toimenkuvat.${toimenkuva}.loppuPvm`} errors={errors} />
         </div>
       </div>
       <Textarea

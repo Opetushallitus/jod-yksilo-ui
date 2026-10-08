@@ -10,11 +10,10 @@ import { JodCheckmark } from '@jod/design-system/icons';
 
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
-import { FormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
-import { getLocalizedText } from '@/utils';
+import { getFormErrorMessage, getLocalizedText } from '@/utils';
 
 interface EditTyonantajaModalProps extends ModalComponentProps {
   tyopaikkaId: string;
@@ -133,8 +132,8 @@ const EditTyonantajaModal = ({ tyopaikkaId: id, ...rest }: EditTyonantajaModalPr
               placeholder={t('profile.work-history.modals.workplace-placeholder')}
               requiredText={t('common:required')}
               testId="work-history-employer-input"
+              errorMessage={getFormErrorMessage(errors, `nimi.${language}`)}
             />
-            <FormError name={`nimi.${language}`} errors={errors} />
           </Form>
         </FormProvider>
       }

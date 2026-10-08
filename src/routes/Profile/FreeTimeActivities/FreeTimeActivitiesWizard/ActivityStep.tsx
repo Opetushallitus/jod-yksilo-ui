@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import { Datepicker, InputField, Textarea } from '@jod/design-system';
 
-import { FormError, TouchedFormError } from '@/components';
 import { LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
+import { getFormErrorMessage } from '@/utils';
 
 import type { FreeTimeActivitiesForm } from './utils';
 
@@ -49,8 +49,8 @@ const ActivityStep = ({ type, toiminto }: ActivityStepProps) => {
             placeholder={t('profile.free-time-activities.modals.name-of-free-time-theme-placeholder')}
             requiredText={t('common:required')}
             testId="free-time-activities-theme-input"
+            errorMessage={getFormErrorMessage(errors, `nimi.${language}`)}
           />
-          <FormError name={`nimi.${language}`} errors={errors} />
         </div>
       )}
       <div className="mb-6" data-testid="free-time-activity-name-field">
@@ -60,8 +60,8 @@ const ActivityStep = ({ type, toiminto }: ActivityStepProps) => {
           placeholder={t('profile.free-time-activities.modals.name-of-free-time-activity-placeholder')}
           requiredText={t('common:required')}
           testId="free-time-activities-activity-input"
+          errorMessage={getFormErrorMessage(errors, `toiminnot.${toiminto}.nimi.${language}`)}
         />
-        <FormError name={`toiminnot.${toiminto}.nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-4">
         <div className="w-full sm:max-w-input-short">
@@ -79,11 +79,11 @@ const ActivityStep = ({ type, toiminto }: ActivityStepProps) => {
                 requiredText={t('common:required')}
                 translations={datePickerTranslations}
                 testId="free-time-activities-start-date"
+                errorMessage={getFormErrorMessage(errors, `toiminnot.${toiminto}.alkuPvm`, touchedFields)}
               />
             )}
             name={`toiminnot.${toiminto}.alkuPvm`}
           />
-          <TouchedFormError touchedFields={touchedFields} fieldName={`toiminnot.${toiminto}.alkuPvm`} errors={errors} />
         </div>
         <div className="w-full sm:max-w-input-short">
           <Controller
@@ -95,11 +95,11 @@ const ActivityStep = ({ type, toiminto }: ActivityStepProps) => {
                 placeholder={t('date-or-continues-placeholder')}
                 translations={datePickerTranslations}
                 testId="free-time-activities-end-date"
+                errorMessage={getFormErrorMessage(errors, `toiminnot.${toiminto}.loppuPvm`)}
               />
             )}
             name={`toiminnot.${toiminto}.loppuPvm`}
           />
-          <FormError name={`toiminnot.${toiminto}.loppuPvm`} errors={errors} />
         </div>
       </div>
       <Textarea
