@@ -213,11 +213,17 @@ export const OnboardingTour = ({ setOnboardingTourActive, setCurrentTab }: Onboa
         aria-label={t('tool.tour.view-guided-tour-label')}
       >
         <div className="relative h-6 w-6">
-          <JodWavingHand size={24} className="absolute inset-0 h-full w-full animate-[showA_3s_infinite]" />
-          <JodWavingHandModified
-            size={24}
-            className="absolute inset-0 h-full w-full origin-[35%_75%] animate-[showB_3s_infinite,waveRotate_3s_infinite_ease-in-out]"
-          />
+          {reduceMotion ? (
+            <JodWavingHand size={24} className="absolute inset-0 h-full w-full" />
+          ) : (
+            <>
+              <JodWavingHand size={24} className="absolute inset-0 h-full w-full animate-[showA_3s_infinite]" />
+              <JodWavingHandModified
+                size={24}
+                className="absolute inset-0 h-full w-full origin-[35%_75%] animate-[showB_3s_infinite,waveRotate_3s_infinite_ease-in-out]"
+              />
+            </>
+          )}
         </div>
         <div>{t('tool.tour.view-guided-tour')}</div>
       </button>
