@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Datepicker, InputField, Textarea, useMediaQueries } from '@jod/design-system';
 
-import { FormError, TouchedFormError } from '@/components';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
+import { getFormErrorMessage } from '@/utils';
 
 import type { ShareLinkForm } from './types';
 
@@ -46,8 +46,8 @@ export const BasicInfoStep = () => {
             placeholder={t('preferences.share.modal.name-placeholder')}
             testId="share-link-name-input"
             className={sm ? 'max-w-[385px]' : 'w-full'}
+            errorMessage={getFormErrorMessage(errors, 'nimi')}
           />
-          <FormError name="nimi" errors={errors} />
         </div>
 
         <div className={sm ? 'w-fit' : 'w-full'}>
@@ -66,11 +66,11 @@ export const BasicInfoStep = () => {
                 minDate={minDate}
                 maxDate={maxDate}
                 testId="share-link-expires-on"
+                errorMessage={getFormErrorMessage(errors, 'voimassaAsti', touchedFields)}
               />
             )}
             name="voimassaAsti"
           />
-          <TouchedFormError touchedFields={touchedFields} fieldName="voimassaAsti" errors={errors} />
         </div>
 
         <div>

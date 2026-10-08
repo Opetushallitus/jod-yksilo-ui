@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import { Datepicker, InputField, Textarea } from '@jod/design-system';
 
-import { FormError, TouchedFormError } from '@/components';
 import { LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
+import { getFormErrorMessage } from '@/utils';
 
 import type { EducationHistoryForm } from './utils';
 
@@ -51,8 +51,8 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
             {...register(`nimi.${language}` as const)}
             placeholder={t('profile.education-history.modals.workplace-placeholder')}
             requiredText={t('common:required')}
+            errorMessage={getFormErrorMessage(errors, `nimi.${language}`)}
           />
-          <FormError name={`nimi.${language}`} errors={errors} />
         </div>
       )}
       <div className="mb-6" data-testid="education-degree-name-field">
@@ -61,8 +61,8 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
           {...register(`koulutukset.${koulutus}.nimi.${language}` as const)}
           placeholder={t('profile.education-history.modals.job-description-placeholder')}
           requiredText={t('common:required')}
+          errorMessage={getFormErrorMessage(errors, `koulutukset.${koulutus}.nimi.${language}`)}
         />
-        <FormError name={`koulutukset.${koulutus}.nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-4">
         <div className="w-full sm:max-w-input-short">
@@ -78,14 +78,10 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
                 }}
                 placeholder={t('date-placeholder')}
                 translations={datePickerTranslations}
+                errorMessage={getFormErrorMessage(errors, `koulutukset.${koulutus}.alkuPvm`, touchedFields)}
               />
             )}
             name={`koulutukset.${koulutus}.alkuPvm`}
-          />
-          <TouchedFormError
-            touchedFields={touchedFields}
-            fieldName={`koulutukset.${koulutus}.alkuPvm`}
-            errors={errors}
           />
         </div>
         <div className="w-full sm:max-w-input-short">
@@ -97,11 +93,11 @@ const EducationStep = ({ type, koulutus }: EducationStepProps) => {
                 {...field}
                 placeholder={t('date-or-continues-placeholder')}
                 translations={datePickerTranslations}
+                errorMessage={getFormErrorMessage(errors, `koulutukset.${koulutus}.loppuPvm`)}
               />
             )}
             name={`koulutukset.${koulutus}.loppuPvm`}
           />
-          <FormError name={`koulutukset.${koulutus}.loppuPvm`} errors={errors} />
         </div>
       </div>
       <Textarea

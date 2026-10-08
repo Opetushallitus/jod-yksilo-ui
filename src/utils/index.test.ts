@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   formatDate,
+  getFormErrorMessage,
   getLocalizedText,
   hyphenize,
   normalizeMultilineText,
@@ -354,5 +355,31 @@ describe('normalizeMultilineText', () => {
 
   it('should handle undefined input', () => {
     expect(normalizeMultilineText()).toBe('');
+  });
+});
+
+describe('getFormErrorMessage', () => {
+  const errors = {
+    nimi: { fi: { type: 'required', message: 'Pakollinen' } },
+    loppuPvm: { type: 'custom', message: '' },
+  };
+
+  it('returns the message of a nested field', () => {
+    expect(getFormErrorMessage(errors, 'nimi.fi')).toBe('Pakollinen');
+  });
+
+  it('returns undefined when the field has no error', () => {
+    expect(getFormErrorMessage(errors, 'nimi.sv')).toBeUndefined();
+    expect(getFormErrorMessage(errors, 'kuvaus')).toBeUndefined();
+  });
+
+  it('returns undefined when the error has an empty message', () => {
+    expect(getFormErrorMessage(errors, 'loppuPvm')).toBeUndefined();
+  });
+
+  it('returns the message only for touched fields when touchedFields is given', () => {
+    expect(getFormErrorMessage(errors, 'nimi.fi', {})).toBeUndefined();
+    expect(getFormErrorMessage(errors, 'nimi.fi', { nimi: { fi: false } })).toBeUndefined();
+    expect(getFormErrorMessage(errors, 'nimi.fi', { nimi: { fi: true } })).toBe('Pakollinen');
   });
 });

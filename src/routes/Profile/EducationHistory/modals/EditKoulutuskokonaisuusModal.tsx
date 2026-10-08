@@ -9,12 +9,11 @@ import { JodCheckmark } from '@jod/design-system/icons';
 
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
-import { FormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
-import { getLocalizedText } from '@/utils';
+import { getFormErrorMessage, getLocalizedText } from '@/utils';
 
 interface EditKoulutuskokonaisuusModalProps extends ModalComponentProps {
   koulutuskokonaisuusId: string;
@@ -144,8 +143,8 @@ const EditKoulutuskokonaisuusModal = ({
               requiredText={t('common:required')}
               testId="education-history-provider-input"
               className="max-w-modal-content"
+              errorMessage={getFormErrorMessage(errors, `nimi.${language}`)}
             />
-            <FormError name={`nimi.${language}`} errors={errors} />
           </Form>
         </FormProvider>
       }

@@ -1,3 +1,4 @@
+import { type FieldError, type FieldErrors, type FieldValues, get } from 'react-hook-form';
 import toast from 'react-hot-toast/headless';
 
 import type { components } from '@/api/schema';
@@ -87,6 +88,27 @@ export const isDefined = <T>(item: T | undefined): item is T => item !== undefin
  */
 export const getNestedProperty = <T>(obj: T, path: string) => {
   return path.split('.').reduce((acc, part) => (acc as never)?.[part], obj);
+};
+
+/**
+ * Gets the error message of a React Hook Form field, to be passed to the errorMessage prop of form fields.
+ * @param errors Errors property from React Hook Form formState
+ * @param name Field path, supports dot notation for nested fields
+ * @param touchedFields TouchedFields property from React Hook Form formState. When given, the error is returned
+ * only if the field has been touched. Useful especially for the Datepicker fields where the error normally appears
+ * before any user interaction.
+ * @returns The error message, or undefined if the field has no error
+ */
+export const getFormErrorMessage = (
+  errors: FieldErrors,
+  name: string,
+  touchedFields?: FieldValues,
+): string | undefined => {
+  if (touchedFields && !get(touchedFields, name)) {
+    return undefined;
+  }
+  const error: FieldError | undefined = get(errors, name);
+  return error?.message || undefined;
 };
 
 /**

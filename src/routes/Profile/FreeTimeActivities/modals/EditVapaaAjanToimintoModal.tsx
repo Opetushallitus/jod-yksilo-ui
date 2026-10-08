@@ -10,12 +10,11 @@ import { JodCheckmark } from '@jod/design-system/icons';
 
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
-import { FormError } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
-import { getLocalizedText } from '@/utils';
+import { getFormErrorMessage, getLocalizedText } from '@/utils';
 
 interface EditVapaaAjanTeemaProps extends ModalComponentProps {
   teemaId: string;
@@ -147,8 +146,8 @@ export const EditVapaaAjanTeemaModal = ({ onClose, teemaId: id, ...rest }: EditV
               placeholder={t('profile.free-time-activities.modals.name-of-free-time-theme-placeholder')}
               requiredText={t('common:required')}
               testId="free-time-activities-theme-input"
+              errorMessage={getFormErrorMessage(errors, `nimi.${language}`)}
             />
-            <FormError name={`nimi.${language}`} errors={errors} />
           </Form>
         </FormProvider>
       }

@@ -18,13 +18,13 @@ import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/ic
 
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
-import { FormError, OsaamisSuosittelija, TouchedFormError } from '@/components';
+import { OsaamisSuosittelija } from '@/components';
 import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { useDatePickerTranslations } from '@/hooks/useDatePickerTranslations';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
-import { getLocalizedText } from '@/utils';
+import { getFormErrorMessage, getLocalizedText } from '@/utils';
 
 interface AddOrEditToimenkuvaModalProps extends ModalComponentProps {
   tyopaikkaId: string;
@@ -80,8 +80,8 @@ const MainStep = () => {
           placeholder={t('profile.work-history.modals.job-description-placeholder')}
           help={t('profile.work-history.modals.job-description-help')}
           testId="work-history-job-description-input"
+          errorMessage={getFormErrorMessage(errors, `nimi.${language}`)}
         />
-        <FormError name={`nimi.${language}`} errors={errors} />
       </div>
       <div className="mb-6 flex grow gap-4">
         <div className="flex flex-1 flex-col sm:block sm:max-w-input-short">
@@ -96,10 +96,10 @@ const MainStep = () => {
                 requiredText={t('common:required')}
                 translations={datePickerTranslations}
                 testId="work-history-start-date"
+                errorMessage={getFormErrorMessage(errors, 'alkuPvm', touchedFields)}
               />
             )}
           />
-          <TouchedFormError touchedFields={touchedFields} fieldName="alkuPvm" errors={errors} />
         </div>
         <div className="flex flex-1 flex-col sm:block sm:max-w-input-short">
           <Controller
@@ -111,11 +111,11 @@ const MainStep = () => {
                 placeholder={t('date-or-continues-placeholder')}
                 translations={datePickerTranslations}
                 testId="work-history-end-date"
+                errorMessage={getFormErrorMessage(errors, 'loppuPvm')}
               />
             )}
             name="loppuPvm"
           />
-          <FormError name="loppuPvm" errors={errors} />
         </div>
       </div>
       <Textarea
