@@ -381,7 +381,6 @@ const JobOpportunity = () => {
 
                 {/* Region */}
                 <div className="flex w-full flex-col">
-                  <p className="font-bold mb-3">{t('job-opportunity.employment-data.employed-by-region')}</p>
                   <Suomi data={maakunnat} />
                 </div>
               </div>
@@ -391,35 +390,39 @@ const JobOpportunity = () => {
                 {/* Education field */}
                 <div className="flex w-full flex-col">
                   <p className="font-bold mb-3">{t('job-opportunity.employment-data.employed-by-koulutusala')}</p>
-                  <div className="w-full space-y-2">
+                  {/* Safari drops list semantics when list-style is none, so the role is needed */}
+                  {/* oxlint-disable-next-line jsx_a11y/no-redundant-roles */}
+                  <ul className="w-full space-y-2" role="list">
                     {koulutusalat
                       .slice()
                       .sort((a, b) => b.osuus - a.osuus)
                       .filter((ka) => ka.osuus > 0)
                       .map((ka) => (
-                        <div key={`${ka.title}-${ka.osuus}`} className="flex w-full items-center py-2">
-                          <span className="font-semibold min-w-[80px] text-heading-3 text-accent">{ka.osuus}%</span>
+                        <li key={`${ka.title}-${ka.osuus}`} className="flex w-full items-center py-2">
+                          <span className="font-semibold min-w-[80px] text-heading-3 text-accent">{`${ka.osuus}%`}</span>
                           <span className="ml-3 flex-1 wrap-break-word">{ka.title}</span>
-                        </div>
+                        </li>
                       ))}
-                  </div>
+                  </ul>
                 </div>
 
                 {/* Education level */}
                 <div className="flex w-full flex-col">
                   <p className="font-bold mb-3">{t('job-opportunity.employment-data.employed-by-koulutusaste')}</p>
-                  <div className="w-full space-y-2">
+                  {/* Safari drops list semantics when list-style is none, so the role is needed */}
+                  {/* oxlint-disable-next-line jsx_a11y/no-redundant-roles */}
+                  <ul className="w-full space-y-2" role="list">
                     {koulutusasteet
                       .slice()
                       .sort((a, b) => b.osuus - a.osuus)
                       .filter((ka) => ka.osuus > 0)
                       .map((ka) => (
-                        <div key={`${ka.title}-${ka.osuus}`} className="flex w-full items-center py-2">
-                          <span className="font-semibold min-w-[80px] text-heading-3 text-accent">{ka.osuus}%</span>
+                        <li key={`${ka.title}-${ka.osuus}`} className="flex w-full items-center py-2">
+                          <span className="font-semibold min-w-[80px] text-heading-3 text-accent">{`${ka.osuus}%`}</span>
                           <span className="ml-3 flex-1 wrap-break-word">{ka.title}</span>
-                        </div>
+                        </li>
                       ))}
-                  </div>
+                  </ul>
                 </div>
               </div>
             </div>
