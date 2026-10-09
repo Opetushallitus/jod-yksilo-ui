@@ -381,6 +381,7 @@ const WelcomePathModal = ({ yksiloData }: { yksiloData: YksiloData }) => {
         <ModalHeader
           text={headerText}
           className="mb-5 text-heading-1-mobile sm:text-heading-1"
+          step={step}
           testId={`welcome-path-modal-header-step-${step}`}
         />
       }

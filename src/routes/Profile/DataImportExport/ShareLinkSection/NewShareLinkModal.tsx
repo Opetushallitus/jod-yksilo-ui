@@ -179,7 +179,7 @@ export const NewShareLinkModal = ({ onClose, id, ...rest }: NewShareLinkModalPro
       fullWidthContent
       className="h-[90vh]! sm:h-full!"
       testId="share-link-wizard"
-      topSlot={<ModalHeader text={modalTitle} testId="share-link-modal-title" />}
+      topSlot={<ModalHeader text={modalTitle} step={step} testId="share-link-modal-title" />}
       content={
         <FormProvider {...methods}>
           <Form id={formId} onSubmit={onSubmit} className="pb-2">

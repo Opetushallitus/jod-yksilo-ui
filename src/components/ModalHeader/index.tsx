@@ -9,7 +9,7 @@ export interface ModalHeaderProps {
   className?: string;
   /** Test id for querying in tests */
   testId?: string;
-  /** Current step number for multi-step modals */
+  /** Current step number for multi-step modals. Header is focused when the step or the text changes. */
   step?: number;
 }
 
@@ -19,7 +19,7 @@ export const ModalHeader = ({ text, className = '', testId, step }: ModalHeaderP
   React.useEffect(() => {
     ref.current?.setAttribute('tabIndex', '-1');
     setTimeout(() => ref.current?.focus(), 1);
-  }, [step]);
+  }, [step, text]);
 
   return (
     <h2

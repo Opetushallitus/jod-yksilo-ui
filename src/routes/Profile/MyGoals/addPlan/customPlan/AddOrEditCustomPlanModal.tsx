@@ -12,6 +12,7 @@ import { JodArrowLeft, JodArrowRight, JodCheckmark } from '@jod/design-system/ic
 import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
 import type { components } from '@/api/schema';
+import { ModalHeader } from '@/components/ModalHeader';
 import { formErrorMessage, LIMITS } from '@/constants';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { useTavoitteetStore } from '@/stores/useTavoitteetStore';
@@ -203,7 +204,13 @@ const AddOrEditCustomPlanModal = ({ tavoite, suunnitelmaId, ...rest }: AddOrEdit
       {...rest}
       fullWidthContent
       className="h-[90vh]! sm:h-full!"
-      topSlot={<h1 className="text-heading-2-mobile sm:text-hero">{t('profile.my-goals.add-custom-plan-header')}</h1>}
+      topSlot={
+        <ModalHeader
+          text={t('profile.my-goals.add-custom-plan-header')}
+          step={wizardStep}
+          testId="custom-plan-modal-header"
+        />
+      }
       progress={
         <div className="relative z-30">
           <WizardProgress
