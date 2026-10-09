@@ -724,7 +724,7 @@
           "title": "Identifiering av kompetenser förbättrar träffsäkerheten i sökresultaten"
         },
         "view-guided-tour": "Tips för identifiering av kompetenser",
-        "view-guided-tour-label": "Starta den guidade visningen av kompetensidentifiering"
+        "view-guided-tour-label": "Tips för identifiering av kompetenser. Starta den guidade visningen"
       }
     },
     "data-import-export": {
@@ -1272,7 +1272,7 @@
         }
       },
       "view-guided-tour": "Titta på verktygets tips!",
-      "view-guided-tour-label": "Starta verktygets guidade genomgång"
+      "view-guided-tour-label": "Titta på verktygets tips! Starta den guidade genomgången"
     },
     "update-tooltip-info": "Genom att trycka på knappen Uppdatera dina möjligheter behandlas dina uppgifter automatiskt. Vi visar dig möjligheter baserat på hur väl de matchar den information du lämnar.",
     "updating": "Laddar möjligheter…",
