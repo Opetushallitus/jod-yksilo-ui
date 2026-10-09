@@ -19,6 +19,7 @@ import { JodArrowLeft, JodArrowRight, JodCheckmark, JodFlagFilled } from '@jod/d
 import { client } from '@/api/client.ts';
 import type { components } from '@/api/schema';
 import { OpportunityCard } from '@/components';
+import { ModalHeader } from '@/components/ModalHeader';
 import { useEscHandler } from '@/hooks/useEscHandler';
 import { ModalComponentProps, useModal } from '@/hooks/useModal';
 import { usePaginationTranslations } from '@/hooks/usePaginationTranslations';
@@ -213,7 +214,7 @@ export const GoalModal = ({ mode, tavoite, ...rest }: GoalModalProps) => {
       name={headerText}
       {...rest}
       fullWidthContent
-      topSlot={<h1 className="text-heading-2-mobile sm:text-hero">{headerText}</h1>}
+      topSlot={<ModalHeader text={headerText} step={step} testId="add-goal-modal-header" />}
       className="h-[90vh]! sm:h-full!"
       content={
         <form className="pb-1">
