@@ -725,7 +725,7 @@
           "title": "Identifying competences improves the relevance of search results"
         },
         "view-guided-tour": "Tips for identifying competences",
-        "view-guided-tour-label": "Start the guided tour for competence identification"
+        "view-guided-tour-label": "Tips for identifying competences. Start the guided tour"
       }
     },
     "data-import-export": {
@@ -1273,7 +1273,7 @@
         }
       },
       "view-guided-tour": "View tips for use!",
-      "view-guided-tour-label": "Start the tool's guided tour"
+      "view-guided-tour-label": "View tips for use! Start the tool's guided tour"
     },
     "update-tooltip-info": "By pressing the Update your opportunities button, your data will be processed automatically. We will show you opportunities based on how well they match the information you provide.",
     "updating": "Updating opportunities…",

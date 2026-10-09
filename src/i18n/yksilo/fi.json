@@ -723,7 +723,7 @@
           "title": "Osaamisten tunnistaminen parantaa hakutulosten osuvuutta"
         },
         "view-guided-tour": "Vinkit osaamisten tunnistamiseen",
-        "view-guided-tour-label": "Käynnistä osaamisten tunnistamisen opastettu esittely"
+        "view-guided-tour-label": "Vinkit osaamisten tunnistamiseen. Käynnistä opastettu esittely"
       }
     },
     "data-import-export": {
@@ -1271,7 +1271,7 @@
         }
       },
       "view-guided-tour": "Katso vinkit käyttöön!",
-      "view-guided-tour-label": "Käynnistä työkalun opastettu esittely"
+      "view-guided-tour-label": "Katso vinkit käyttöön! Käynnistä työkalun opastettu esittely"
     },
     "update-tooltip-info": "Painamalla Päivitä mahdollisuutesi -painiketta tietojasi käsitellään automaattisesti. Näytämme sinulle mahdollisuudet sen mukaan, miten hyvin ne sopivat antamiisi tietoihin.",
     "updating": "Ladataan mahdollisuuksia…",

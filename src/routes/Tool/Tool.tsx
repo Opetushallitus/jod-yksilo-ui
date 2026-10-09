@@ -491,10 +491,12 @@ const Tool = () => {
         <IconHeading icon={<JodCompass className="text-white" />} title={t('tool.title')} testId="tool-title" />
         <div className="ml-1 print:hidden">{<AiInfo type="tool" />}</div>
       </div>
-      <p className="mb-6 max-w-[700px] text-body-lg-mobile sm:text-body-lg" ref={scrollRef}>
-        {t('tool.description')}
-        <OnboardingTour setOnboardingTourActive={setOnboardingTourActive} setCurrentTab={setCurrentTab} />
-      </p>
+      <div className="mb-6" ref={scrollRef}>
+        <p className="max-w-[700px] text-body-lg-mobile sm:text-body-lg">{t('tool.description')}</p>
+        <div className="mt-7">
+          <OnboardingTour setOnboardingTourActive={setOnboardingTourActive} setCurrentTab={setCurrentTab} />
+        </div>
+      </div>
       <title>{t('tool.title')}</title>
       {lg ? (
         // Desktop

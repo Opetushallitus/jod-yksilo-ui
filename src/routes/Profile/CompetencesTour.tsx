@@ -3,7 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { useTranslation } from 'react-i18next';
 
 import { useMediaQueries } from '@jod/design-system';
-import { JodRemove, JodWavingHand, JodWavingHandModified } from '@jod/design-system/icons';
+import { JodRemove } from '@jod/design-system/icons';
+
+import { GuidedTourButton } from '@/components';
 
 const tour = driver();
 
@@ -39,26 +41,10 @@ export const CompetencesTour = () => {
   };
 
   return (
-    <button
-      className="flex cursor-pointer items-center gap-3 rounded-sm bg-bg-gray-2 px-3 py-2 text-accent"
+    <GuidedTourButton
+      text={t('profile.competences.tour.view-guided-tour')}
+      ariaLabel={t('profile.competences.tour.view-guided-tour-label')}
       onClick={startTour}
-      aria-haspopup="true"
-      aria-label={t('profile.competences.tour.view-guided-tour-label')}
-    >
-      <div className="relative h-6 w-6">
-        {reduceMotion ? (
-          <JodWavingHand size={24} className="absolute inset-0 h-full w-full" />
-        ) : (
-          <>
-            <JodWavingHand size={24} className="absolute inset-0 h-full w-full animate-[showA_3s_infinite]" />
-            <JodWavingHandModified
-              size={24}
-              className="absolute inset-0 h-full w-full origin-[35%_75%] animate-[showB_3s_infinite,waveRotate_3s_infinite_ease-in-out]"
-            />
-          </>
-        )}
-      </div>
-      <div>{t('profile.competences.tour.view-guided-tour')}</div>
-    </button>
+    />
   );
 };
