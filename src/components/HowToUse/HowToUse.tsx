@@ -1,3 +1,4 @@
+import { TFunction } from 'i18next';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -25,7 +26,15 @@ import {
 const BlueArrows = () => {
   const { sm } = useMediaQueries();
   return sm ? (
-    <svg width="396" height="71" viewBox="0 0 396 71" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-5">
+    <svg
+      width="396"
+      height="71"
+      viewBox="0 0 396 71"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="mx-5"
+      aria-hidden
+    >
       <g clipPath="url(#clip0_24362_51224)">
         <path d="M210.785 99.3945C210.785 52.8945 174.285 68.3945 192.851 26.3945" stroke="#85C4EC" strokeWidth="15" />
         <path d="M205.111 33.1498L180.113 26.0732L198.741 7.9613L205.111 33.1498Z" stroke="#85C4EC" strokeWidth="8" />
@@ -41,7 +50,15 @@ const BlueArrows = () => {
       </defs>
     </svg>
   ) : (
-    <svg width="274" height="72" viewBox="0 0 274 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-5">
+    <svg
+      width="274"
+      height="72"
+      viewBox="0 0 274 72"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="mx-5"
+      aria-hidden
+    >
       <path d="M150.285 99.5664C150.285 53.0664 113.785 68.5664 132.351 26.5664" stroke="#85C4EC" strokeWidth="15" />
       <path d="M144.607 33.3217L119.609 26.2451L138.237 8.13317L144.607 33.3217Z" stroke="#85C4EC" strokeWidth="8" />
       <path d="M7.5 83.1719C7.5 32.6719 77 57.6719 90.2605 25.6719" stroke="#ADD8F2" strokeWidth="15" />
@@ -55,7 +72,7 @@ const BlueArrows = () => {
 const GrayArrows = () => {
   const { sm } = useMediaQueries();
   return sm ? (
-    <svg width="214" height="70" viewBox="0 0 214 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="214" height="70" viewBox="0 0 214 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
       <g clipPath="url(#clip0_24368_26783)">
         <path d="M5.49913 91C1.49921 27 87.1589 75.5 87.1592 22" stroke="#CCCCCC" strokeWidth="15" />
         <path
@@ -79,7 +96,7 @@ const GrayArrows = () => {
       </defs>
     </svg>
   ) : (
-    <svg width="203" height="70" viewBox="0 0 203 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="203" height="70" viewBox="0 0 203 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
       <path d="M7.66069 91.3281C3.66078 27.3281 75.6605 75.8281 75.6608 22.3281" stroke="#CCCCCC" strokeWidth="15" />
       <path
         d="M88.1001 32.9587L63.2373 25.4204L82.1974 7.65655L88.1001 32.9587Z"
@@ -98,25 +115,38 @@ const GrayArrows = () => {
   );
 };
 
-const getLocalizedLogos = (language: string) => {
+const getLocalizedLogos = (language: string, t: TFunction) => {
+  const opintopolkuProps = {
+    width: '100%',
+    className: 'h-7',
+    role: 'img',
+    'aria-label': `${t('how-to-use.education-history')}, ${t('education-opportunity.opintopolku.banner-alt-text')}`,
+  };
+  const tyomarkkinatoriProps = {
+    width: '100%',
+    className: 'h-7',
+    role: 'img',
+    'aria-label': `${t('how-to-use.job-seeker-profile')}, ${t('job-opportunity.tyomarkkinatori.banner-alt-text')}`,
+  };
+
   switch (language) {
     case 'sv':
       return {
         osaamispolkuLogo: <LogoRgbSv size={26} />,
-        opintopolkuLogo: <LogoOpintopolkuSv width="100%" className="h-7" />,
-        tyomarkkinatoriLogo: <LogoTyomarkkinatoriSv width="100%" className="h-7" />,
+        opintopolkuLogo: <LogoOpintopolkuSv {...opintopolkuProps} />,
+        tyomarkkinatoriLogo: <LogoTyomarkkinatoriSv {...tyomarkkinatoriProps} />,
       };
     case 'en':
       return {
         osaamispolkuLogo: <LogoRgbEn size={26} />,
-        opintopolkuLogo: <LogoOpintopolkuEn width="100%" className="h-7" />,
-        tyomarkkinatoriLogo: <LogoTyomarkkinatoriEn width="100%" className="h-7" />,
+        opintopolkuLogo: <LogoOpintopolkuEn {...opintopolkuProps} />,
+        tyomarkkinatoriLogo: <LogoTyomarkkinatoriEn {...tyomarkkinatoriProps} />,
       };
     default:
       return {
         osaamispolkuLogo: <LogoRgbFi size={26} />,
-        opintopolkuLogo: <LogoOpintopolkuFi width="100%" className="h-7" />,
-        tyomarkkinatoriLogo: <LogoTyomarkkinatoriFi width="100%" className="h-7" />,
+        opintopolkuLogo: <LogoOpintopolkuFi {...opintopolkuProps} />,
+        tyomarkkinatoriLogo: <LogoTyomarkkinatoriFi {...tyomarkkinatoriProps} />,
       };
   }
 };
@@ -130,18 +160,25 @@ export function HowToUse() {
   const findOpportunitiesWithoutLoginId = React.useId();
   const createProfileId = React.useId();
   const findWithWordsId = React.useId();
-  const { osaamispolkuLogo, opintopolkuLogo, tyomarkkinatoriLogo } = getLocalizedLogos(language);
+  const { osaamispolkuLogo, opintopolkuLogo, tyomarkkinatoriLogo } = getLocalizedLogos(language, t);
 
   return (
     <figure className="flex flex-col items-center justify-center">
       <div className="rounded-2xl max-w-lg border-4 border-primary-1-light-3 bg-white px-4 py-2 pb-4">
         <div className="flex flex-1 flex-col">
           <div className="mb-3 flex items-end gap-3">
-            {osaamispolkuLogo}
+            <div>
+              <span className="sr-only">{t('common:osaamispolku')}</span>
+              <span aria-hidden>{osaamispolkuLogo}</span>
+            </div>
             <div className="font-semibold mb-1 text-body-xs text-primary-gray sm:mb-0 sm:text-body-sm">
-              / {t('common:navigation.external.yksilo.label')}
+              <span aria-hidden className="mr-2">
+                /
+              </span>
+              {t('common:navigation.external.yksilo.label')}
             </div>
           </div>
+
           <div className="font-semibold flex items-center justify-center rounded-md bg-primary-1-dark p-5 text-body-sm text-white">
             <span className="mr-3">{t('how-to-use.find-opportunities-title')}</span>
             <Tooltip>
@@ -217,11 +254,11 @@ export function HowToUse() {
         <GrayArrows />
         <div className="font-semibold flex flex-row gap-3 text-center text-body-xs text-[0.625rem] text-primary-gray sm:text-[0.75rem]">
           <div className="flex w-[120px] flex-1 flex-col items-center justify-center gap-3 rounded-md bg-primary-5-light-2 p-5 sm:w-[150px]">
-            {t('how-to-use.job-seeker-profile')}
+            <span aria-hidden>{t('how-to-use.job-seeker-profile')}</span>
             <div className="flex items-center">{tyomarkkinatoriLogo}</div>
           </div>
           <div className="flex w-[120px] flex-1 flex-col items-center justify-center gap-3 rounded-md bg-primary-5-light-2 p-5 sm:w-[150px]">
-            {t('how-to-use.education-history')}
+            <span aria-hidden>{t('how-to-use.education-history')}</span>
             <div className="flex items-center">{opintopolkuLogo}</div>
           </div>
         </div>
