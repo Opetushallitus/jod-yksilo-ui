@@ -1174,8 +1174,15 @@
         "duration-value": {
           "3-years": "3v",
           "6plus-years": "6v+",
+          "aria-value-text": {
+            "3-years": "3 vuotta",
+            "6plus-years": "6 vuotta tai pidempi",
+            "day": "0 päivää",
+            "month": "1 kuukausi",
+            "year": "1 vuosi"
+          },
           "day": "0pvä",
-          "max-aria-label": "Maksimikesto, 6v ja pidempään kestävät koulutukset",
+          "max-aria-label": "Maksimikesto",
           "min-aria-label": "Minimikesto",
           "month": "1kk",
           "year": "1v"
@@ -1188,7 +1195,9 @@
         "location": "Sijainti",
         "occupation-type": "Ylätason ammattiryhmä",
         "sorting": "Järjestys",
-        "weight": "Painotus"
+        "weight": "Painotus",
+        "weight-aria-label": "Osaamisten ja kiinnostusten painotus",
+        "weight-aria-value-text": "Osaamiset {{competences}} %, kiinnostukset {{interests}} %"
       },
       "modal-title": "Säädä mahdollisuuksia",
       "reset": "Poista valinnat",

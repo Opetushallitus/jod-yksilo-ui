@@ -10,11 +10,31 @@ import { MAX_KESTO_VALUE, MIN_KESTO_VALUE } from '../store/PlanOptionStoreModel'
 export const FilterKesto = () => {
   const { t } = useTranslation();
   const values = [
-    { label: t('tool.settings.general.duration-value.day'), value: 0 },
-    { label: t('tool.settings.general.duration-value.month'), value: 1 },
-    { label: t('tool.settings.general.duration-value.year'), value: 2 },
-    { label: t('tool.settings.general.duration-value.3-years'), value: 3 },
-    { label: t('tool.settings.general.duration-value.6plus-years'), value: 4 },
+    {
+      label: t('tool.settings.general.duration-value.day'),
+      ariaValueText: t('tool.settings.general.duration-value.aria-value-text.day'),
+      value: 0,
+    },
+    {
+      label: t('tool.settings.general.duration-value.month'),
+      ariaValueText: t('tool.settings.general.duration-value.aria-value-text.month'),
+      value: 1,
+    },
+    {
+      label: t('tool.settings.general.duration-value.year'),
+      ariaValueText: t('tool.settings.general.duration-value.aria-value-text.year'),
+      value: 2,
+    },
+    {
+      label: t('tool.settings.general.duration-value.3-years'),
+      ariaValueText: t('tool.settings.general.duration-value.aria-value-text.3-years'),
+      value: 3,
+    },
+    {
+      label: t('tool.settings.general.duration-value.6plus-years'),
+      ariaValueText: t('tool.settings.general.duration-value.aria-value-text.6plus-years'),
+      value: 4,
+    },
   ];
   const { filters, setDurationFilters } = addPlanStore(
     useShallow((state) => ({
