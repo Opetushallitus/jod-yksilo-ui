@@ -66,25 +66,24 @@ export const ExperienceTable = ({
 
   // Show ongoing rows without an end date first, then sort by latest end date and latest start date.
   const sortRowsByLatestDate = React.useCallback((a: ExperienceTableRowData, b: ExperienceTableRowData) => {
-    if (!a.loppuPvm && b.loppuPvm) {
+    if (a.loppuPvm && b.loppuPvm) {
+      const delta = b.loppuPvm.getTime() - a.loppuPvm.getTime();
+      if (delta !== 0) {
+        return delta;
+      }
+    } else if (a.loppuPvm) {
+      return 1;
+    } else if (b.loppuPvm) {
       return -1;
     }
 
-    if (a.loppuPvm && !b.loppuPvm) {
-      return 1;
+    if (a.alkuPvm && b.alkuPvm) {
+      return b.alkuPvm.getTime() - a.alkuPvm.getTime();
     }
-
-    const aEndDate = a.loppuPvm?.getTime() ?? 0;
-    const bEndDate = b.loppuPvm?.getTime() ?? 0;
-
-    if (aEndDate !== bEndDate) {
-      return bEndDate - aEndDate;
+    if (a.alkuPvm) {
+      return -1;
     }
-
-    const aStartDate = a.alkuPvm?.getTime() ?? 0;
-    const bStartDate = b.alkuPvm?.getTime() ?? 0;
-
-    return bStartDate - aStartDate;
+    return b.alkuPvm ? 1 : 0;
   }, []);
 
   // To track Checkbox checked status with indeterminate state.

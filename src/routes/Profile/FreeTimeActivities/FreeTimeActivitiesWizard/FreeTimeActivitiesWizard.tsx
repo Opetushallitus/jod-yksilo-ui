@@ -61,7 +61,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
               kuvaus: z
                 .object({})
                 .catchall(z.string().trim().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
-              alkuPvm: z.iso.date(formErrorMessage.date()).nonempty(formErrorMessage.required()),
+              alkuPvm: z.iso.date(formErrorMessage.date()).optional().or(z.literal('')),
               loppuPvm: z.iso.date(formErrorMessage.date()).optional().or(z.literal('')),
               osaamiset: z.array(
                 z.object({
@@ -76,7 +76,9 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
         .refine((data) => data.toiminnot.length > 0) // At least one toiminto
         .refine(
           (data) =>
-            data.toiminnot.every((toiminto) => (toiminto.loppuPvm ? toiminto.alkuPvm <= toiminto.loppuPvm : true)),
+            data.toiminnot.every(
+              (toiminto) => !toiminto.alkuPvm || !toiminto.loppuPvm || toiminto.alkuPvm <= toiminto.loppuPvm,
+            ),
           formErrorMessage.dateRange(['toiminnot', `${selectedToiminto}`, 'loppuPvm']),
         ), // alkuPvm <= loppuPvm
     ),
@@ -116,7 +118,7 @@ const FreeTimeActivitiesWizard = ({ onClose, ...rest }: ModalComponentProps) => 
           toiminnot: data.toiminnot.map((toiminto) => ({
             nimi: toiminto.nimi,
             kuvaus: toiminto.kuvaus,
-            alkuPvm: toiminto.alkuPvm,
+            alkuPvm: toiminto.alkuPvm || undefined,
             loppuPvm: toiminto.loppuPvm,
             osaamiset: toiminto.osaamiset.map((osaaminen) => osaaminen.id),
           })),

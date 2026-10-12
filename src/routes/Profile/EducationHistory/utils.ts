@@ -34,27 +34,24 @@ export const getEducationHistoryTableRows = (
 ): ExperienceTableRowData[] =>
   data.reduce((rows: ExperienceTableRowData[], row) => {
     const { koulutukset } = row;
-    const alkuPvm = Math.min(
-      ...koulutukset.map((t) => {
-        if (t.alkuPvm === undefined) {
-          return Number.MAX_SAFE_INTEGER;
-        }
-        return new Date(t.alkuPvm).getTime();
-      }),
+    const startTimestamps = koulutukset.flatMap((koulutus) =>
+      koulutus.alkuPvm ? [new Date(koulutus.alkuPvm).getTime()] : [],
     );
-    const loppuPvm = koulutukset.some((koulutus) => !koulutus.loppuPvm)
-      ? 0
-      : Math.max(
-          ...koulutukset
-            .filter((koulutus) => koulutus.loppuPvm)
-            .map((koulutus) => new Date(koulutus.loppuPvm as unknown as string).getTime()),
-        );
+    const hasMissingStartDate = koulutukset.some((koulutus) => !koulutus.alkuPvm);
+    const alkuPvm =
+      !hasMissingStartDate && startTimestamps.length > 0 ? new Date(Math.min(...startTimestamps)) : undefined;
+    const endTimestamps = koulutukset.flatMap((koulutus) =>
+      koulutus.loppuPvm ? [new Date(koulutus.loppuPvm).getTime()] : [],
+    );
+    const hasOngoingEducation = koulutukset.some((koulutus) => !koulutus.loppuPvm);
+    const loppuPvm =
+      !hasOngoingEducation && endTimestamps.length > 0 ? new Date(Math.max(...endTimestamps)) : undefined;
 
     const rowData: ExperienceTableRowData = {
       key: row.id ?? crypto.randomUUID(),
       nimi: row.nimi,
-      alkuPvm: alkuPvm === Number.MAX_SAFE_INTEGER ? undefined : new Date(alkuPvm),
-      loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
+      alkuPvm,
+      loppuPvm,
       tuontiLahde: row.tuontiLahde,
       subrows: [...koulutukset]
         .sort(sortByProperty('alkuPvm'))

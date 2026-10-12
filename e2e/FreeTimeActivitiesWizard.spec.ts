@@ -80,6 +80,26 @@ test('add new freetime activity', async ({ page, isMobile }) => {
   expect(payload).toEqual(freetimeActivityItem);
 });
 
+test('add new freetime activity without a start date', async ({ page }) => {
+  await mockProfileWizard(page, 'vapaa-ajan-teemat', []);
+  await page.getByRole('button', { name: 'Lisää uusi vapaa-ajan teema' }).click();
+  await page.getByLabel('Vapaa-ajan teeman nimi').fill('Testaaminen');
+  await page.getByLabel('Vapaa-ajan toiminnon nimi').fill('Uima-altaan testaus');
+  await page.getByLabel('Loppui').fill('30.07.2001');
+  await page.keyboard.press('Tab');
+  await page.locator('button[aria-label*="Seuraava"]').click();
+  await page.locator('button[aria-label*="Seuraava"]').click();
+  await expect(page.getByTestId('free-time-summary-table')).toContainText('7/2001');
+
+  const requestPromise = page.waitForRequest(
+    (request) => request.url().includes('/api/profiili/vapaa-ajan-teemat') && request.method() === 'POST',
+  );
+  await page.getByRole('button', { name: 'Tallenna' }).click();
+  const request = await requestPromise;
+  expect(request.postDataJSON().toiminnot[0]).not.toHaveProperty('alkuPvm');
+  expect(request.postDataJSON().toiminnot[0].loppuPvm).toBe('2001-07-30');
+});
+
 test('delete freetime activity item', async ({ page }) => {
   // Edit the first item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
