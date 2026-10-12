@@ -1197,7 +1197,9 @@
         "sorting": "Järjestys",
         "weight": "Painotus",
         "weight-aria-label": "Osaamisten ja kiinnostusten painotus",
-        "weight-aria-value-text": "Osaamiset {{competences}} %, kiinnostukset {{interests}} %"
+        "weight-aria-value-text": "Osaamiset {{competences}} %, kiinnostukset {{interests}} %",
+        "weight-competences": "Painota osaamisiasi",
+        "weight-interests": "Painota kiinnostuksiasi"
       },
       "modal-title": "Säädä mahdollisuuksia",
       "reset": "Poista valinnat",

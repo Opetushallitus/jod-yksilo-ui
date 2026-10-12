@@ -56,8 +56,8 @@ const OpportunityWeight = () => {
   return (
     <div data-testid="tool-opportunity-slider" className="pt-4 not-sm:mb-5">
       <Slider
-        label={t('map-competences')}
-        rightLabel={t('interests')}
+        label={t('tool.settings.general.weight-competences')}
+        rightLabel={t('tool.settings.general.weight-interests')}
         ariaLabel={t('tool.settings.general.weight-aria-label')}
         getAriaValueText={(val) =>
           t('tool.settings.general.weight-aria-value-text', { competences: 100 - val, interests: val })

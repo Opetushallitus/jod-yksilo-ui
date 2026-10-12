@@ -1199,7 +1199,9 @@
         "sorting": "Order",
         "weight": "Weighting",
         "weight-aria-label": "Weighting between competences and interests",
-        "weight-aria-value-text": "Competences {{competences}} %, interests {{interests}} %"
+        "weight-aria-value-text": "Competences {{competences}} %, interests {{interests}} %",
+        "weight-competences": "Weight your skills",
+        "weight-interests": "Weight your interests"
       },
       "modal-title": "Adjust opportunities",
       "reset": "Clear selections",
