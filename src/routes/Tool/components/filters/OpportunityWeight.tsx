@@ -58,6 +58,10 @@ const OpportunityWeight = () => {
       <Slider
         label={t('map-competences')}
         rightLabel={t('interests')}
+        ariaLabel={t('tool.settings.general.weight-aria-label')}
+        getAriaValueText={(val) =>
+          t('tool.settings.general.weight-aria-value-text', { competences: 100 - val, interests: val })
+        }
         onValueChange={(val) => setOsaamisKiinnostusPainotus(val)}
         value={painotus.value}
         disabled={painotus.disabled}

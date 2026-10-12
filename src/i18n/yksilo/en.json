@@ -1176,8 +1176,15 @@
         "duration-value": {
           "3-years": "3y",
           "6plus-years": "6y+",
+          "aria-value-text": {
+            "3-years": "3 years",
+            "6plus-years": "6 years or longer",
+            "day": "0 days",
+            "month": "1 month",
+            "year": "1 year"
+          },
           "day": "0day",
-          "max-aria-label": "Maximum duration, education lasting 6 years or longer",
+          "max-aria-label": "Maximum duration",
           "min-aria-label": "Minimum duration",
           "month": "1mo",
           "year": "1y"
@@ -1190,7 +1197,9 @@
         "location": "Location",
         "occupation-type": "Upper-level occupational group",
         "sorting": "Order",
-        "weight": "Weighting"
+        "weight": "Weighting",
+        "weight-aria-label": "Weighting between competences and interests",
+        "weight-aria-value-text": "Competences {{competences}} %, interests {{interests}} %"
       },
       "modal-title": "Adjust opportunities",
       "reset": "Clear selections",

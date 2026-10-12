@@ -1175,8 +1175,15 @@
         "duration-value": {
           "3-years": "3år",
           "6plus-years": "6år+",
+          "aria-value-text": {
+            "3-years": "3 år",
+            "6plus-years": "6 år eller längre",
+            "day": "0 dagar",
+            "month": "1 månad",
+            "year": "1 år"
+          },
           "day": "0d",
-          "max-aria-label": "Maximilängd, 6 år och längre utbildningar",
+          "max-aria-label": "Maximilängd",
           "min-aria-label": "Minimilängd",
           "month": "1mån",
           "year": "1år"
@@ -1189,7 +1196,9 @@
         "location": "Plats",
         "occupation-type": "Yrkesgrupp på högre nivå",
         "sorting": "Ordning",
-        "weight": "Prioritering"
+        "weight": "Prioritering",
+        "weight-aria-label": "Prioritering mellan kompetenser och intressen",
+        "weight-aria-value-text": "Kompetenser {{competences}} %, intressen {{interests}} %"
       },
       "modal-title": "Justera möjligheter",
       "reset": "Ta bort valen",
