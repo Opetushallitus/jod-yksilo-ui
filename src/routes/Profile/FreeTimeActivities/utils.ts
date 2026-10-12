@@ -6,7 +6,7 @@ export interface Toiminto {
   id?: string;
   nimi: Record<string, string>;
   kuvaus?: Record<string, string>;
-  alkuPvm: string;
+  alkuPvm?: string;
   loppuPvm?: string;
   osaamiset: string[];
 }
@@ -31,20 +31,23 @@ export const getFreeTimeActivitiesTableRows = (
 ): ExperienceTableRowData[] =>
   data.reduce((rows: ExperienceTableRowData[], row) => {
     const { toiminnot } = row;
-    const alkuPvm = Math.min(...toiminnot.map((t) => new Date(t.alkuPvm).getTime()));
-    const loppuPvm = toiminnot.some((toiminto) => !toiminto.loppuPvm)
-      ? 0
-      : Math.max(
-          ...toiminnot
-            .filter((toiminto) => toiminto.loppuPvm)
-            .map((toiminto) => new Date(toiminto.loppuPvm as unknown as string).getTime()),
-        );
+    const startTimestamps = toiminnot.flatMap((toiminto) =>
+      toiminto.alkuPvm ? [new Date(toiminto.alkuPvm).getTime()] : [],
+    );
+    const hasMissingStartDate = toiminnot.some((toiminto) => !toiminto.alkuPvm);
+    const alkuPvm =
+      !hasMissingStartDate && startTimestamps.length > 0 ? new Date(Math.min(...startTimestamps)) : undefined;
+    const endTimestamps = toiminnot.flatMap((toiminto) =>
+      toiminto.loppuPvm ? [new Date(toiminto.loppuPvm).getTime()] : [],
+    );
+    const hasOngoingActivity = toiminnot.some((toiminto) => !toiminto.loppuPvm);
+    const loppuPvm = !hasOngoingActivity && endTimestamps.length > 0 ? new Date(Math.max(...endTimestamps)) : undefined;
 
     const rowData: ExperienceTableRowData = {
       key: row.id ?? crypto.randomUUID(),
       nimi: row.nimi,
-      alkuPvm: new Date(alkuPvm),
-      loppuPvm: loppuPvm === 0 ? undefined : new Date(loppuPvm),
+      alkuPvm,
+      loppuPvm,
       tuontiLahde: row.tuontiLahde,
       subrows: [...toiminnot]
         .sort(sortByProperty('alkuPvm'))
@@ -75,7 +78,7 @@ const mapToimintoToRow = (
   key: toiminto.id ?? crypto.randomUUID(),
   nimi: toiminto.nimi,
   kuvaus: toiminto.kuvaus,
-  alkuPvm: new Date(toiminto.alkuPvm),
+  alkuPvm: toiminto.alkuPvm ? new Date(toiminto.alkuPvm) : undefined,
   loppuPvm: toiminto.loppuPvm ? new Date(toiminto.loppuPvm) : undefined,
   osaamiset: toiminto.osaamiset.map((id) => ({
     ...(osaamisetMap ? osaamisetMap[id] : { id, nimi: { fi: '', sv: '', en: '' }, kuvaus: { fi: '', sv: '', en: '' } }),

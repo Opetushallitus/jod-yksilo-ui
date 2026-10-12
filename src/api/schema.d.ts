@@ -909,7 +909,7 @@ export interface components {
       nimi: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       /** Format: date */
-      alkuPvm: string;
+      alkuPvm?: string;
       /** Format: date */
       loppuPvm?: string;
       osaamiset?: string[];
@@ -1089,7 +1089,7 @@ export interface components {
     TmtExportDto: {
       /** @enum {string} */
       tulos?: 'OK' | 'VIETY_OSITTAIN';
-      syy?: 'LIIKAA_OSAAMISIA'[];
+      syy?: ('LIIKAA_OSAAMISIA' | 'KIELLETTYJA_MERKKEJA')[];
     };
     TmtImportDto: {
       tyopaikat?: string[];
@@ -1509,10 +1509,10 @@ export interface components {
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       kesto?: components['schemas']['KestoJakaumaDto'];
       koulutukset?: components['schemas']['KoulutusViiteDto'][];
+      aktiivinen?: boolean;
       jakaumat?: {
         [key: string]: components['schemas']['JakaumaDto'];
       };
-      aktiivinen?: boolean;
     };
     SivuDtoKoulutusmahdollisuusFullDto: {
       sisalto: components['schemas']['KoulutusmahdollisuusFullDto'][];

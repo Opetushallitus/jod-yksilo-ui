@@ -76,7 +76,6 @@ const ActivityStep = ({ type, toiminto }: ActivityStepProps) => {
                   void trigger(`toiminnot.${toiminto}.loppuPvm`);
                 }}
                 placeholder={t('date-placeholder')}
-                requiredText={t('common:required')}
                 translations={datePickerTranslations}
                 testId="free-time-activities-start-date"
                 errorMessage={getFormErrorMessage(errors, `toiminnot.${toiminto}.alkuPvm`, touchedFields)}

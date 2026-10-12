@@ -35,7 +35,7 @@ interface ToimintoForm {
   id: string;
   nimi: components['schemas']['LokalisoituTeksti'];
   kuvaus: components['schemas']['LokalisoituTeksti'];
-  alkuPvm: string;
+  alkuPvm?: string;
   loppuPvm?: string;
   osaamiset: {
     id: string;
@@ -91,7 +91,6 @@ const MainStep = () => {
                 label={t('started')}
                 {...field}
                 placeholder={t('date-placeholder')}
-                requiredText={t('common:required')}
                 translations={datePickerTranslations}
                 testId="free-time-activities-start-date"
                 errorMessage={getFormErrorMessage(errors, 'alkuPvm', touchedFields)}
@@ -200,7 +199,7 @@ export const AddOrEditToimintoModal = ({ onClose, teemaId: id, toimintoId, ...re
                 .max(LIMITS.TEXT_INPUT, formErrorMessage.max(LIMITS.TEXT_INPUT)),
             ),
           kuvaus: z.object({}).catchall(z.string().trim().max(LIMITS.TEXTAREA, formErrorMessage.max(LIMITS.TEXTAREA))),
-          alkuPvm: z.iso.date(formErrorMessage.date()).nonempty(formErrorMessage.required()),
+          alkuPvm: z.iso.date(formErrorMessage.date()).optional().or(z.literal('')),
           loppuPvm: z.iso.date().optional().or(z.literal('')),
           osaamiset: z.array(
             z.object({
@@ -210,7 +209,10 @@ export const AddOrEditToimintoModal = ({ onClose, teemaId: id, toimintoId, ...re
             }),
           ),
         })
-        .refine((data) => !data.loppuPvm || data.alkuPvm <= data.loppuPvm, formErrorMessage.dateRange(['loppuPvm'])),
+        .refine(
+          (data) => !data.alkuPvm || !data.loppuPvm || data.alkuPvm <= data.loppuPvm,
+          formErrorMessage.dateRange(['loppuPvm']),
+        ),
     ),
     defaultValues: async () => {
       if (toimintoId) {
@@ -271,7 +273,7 @@ export const AddOrEditToimintoModal = ({ onClose, teemaId: id, toimintoId, ...re
             id: data.id,
             nimi: data.nimi,
             kuvaus: data.kuvaus,
-            alkuPvm: data.alkuPvm,
+            alkuPvm: data.alkuPvm || undefined,
             loppuPvm: data.loppuPvm,
             osaamiset: data.osaamiset.map((o) => o.id),
           },
@@ -282,7 +284,7 @@ export const AddOrEditToimintoModal = ({ onClose, teemaId: id, toimintoId, ...re
           body: {
             nimi: data.nimi,
             kuvaus: data.kuvaus,
-            alkuPvm: data.alkuPvm,
+            alkuPvm: data.alkuPvm || undefined,
             loppuPvm: data.loppuPvm,
             osaamiset: data.osaamiset.map((o) => o.id),
           },
