@@ -1198,7 +1198,9 @@
         "sorting": "Ordning",
         "weight": "Prioritering",
         "weight-aria-label": "Prioritering mellan kompetenser och intressen",
-        "weight-aria-value-text": "Kompetenser {{competences}} %, intressen {{interests}} %"
+        "weight-aria-value-text": "Kompetenser {{competences}} %, intressen {{interests}} %",
+        "weight-competences": "Prioritera dina kompetenser",
+        "weight-interests": "Prioritera dina intressen"
       },
       "modal-title": "Justera möjligheter",
       "reset": "Ta bort valen",
