@@ -326,6 +326,7 @@ const Root = () => {
         copyright={t('common:footer.copyright')}
         externalLinkIconAriaLabel={t('common:external-link')}
         socialMedia={socialMedia}
+        socialMediaLabel={t('common:footer.social-media-label')}
         testId="footer"
         cookieSettingsLabel={t('common:footer.cookie-settings-label')}
         onCookieSettingsClick={() => openCookieConsent()}
