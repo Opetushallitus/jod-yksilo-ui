@@ -58,11 +58,19 @@ const InfoSelectionStep = ({ isLoading, convertedData, onSelectionChange }: Info
       <p>
         <Trans i18nKey="preferences.cv-import.info-selection.description" />
       </p>
+      <output aria-live="polite" className="sr-only">
+        {isLoading ? (
+          <>{t('preferences.cv-import.info-selection.importing')}</>
+        ) : (
+          <>{t('preferences.cv-import.info-selection.importing-done')}</>
+        )}
+      </output>
+
       {isLoading && (
         <div>
           <div className="mb-5 flex flex-row gap-5">
             <h2 className="text-heading-2-mobile sm:text-heading-2">
-              {t('preferences.cv-import.info-selection.importing')}{' '}
+              {t('preferences.cv-import.info-selection.importing')}
             </h2>
             <Spinner size={24} color="accent" />
           </div>
