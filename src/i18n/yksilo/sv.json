@@ -144,6 +144,7 @@
         "title": "Avbryt import"
       },
       "data-load-failed": "Laddning av uppgifter misslyckades. Försök på nytt senare.",
+      "data-loaded": "Uppgifterna har laddats.",
       "data-loading": "Hämtar information...",
       "data-load-no-data": "Utbildningsinformation hittades inte eller så har du inte rätt att granska informationen.",
       "description": "I den här vyn kan du välja vilka utbildningar du vill importera. Efter importen kan du redigera och komplettera informationen i vyn Mina utbildningar.",
@@ -549,6 +550,7 @@
           "title": "Utbildning"
         },
         "importing": "Importerar data",
+        "importing-done": "Importeringen lyckades.",
         "title": "Välj information att importera",
         "work": {
           "loading": "Hämtar arbetslivserfarenhet",

@@ -144,6 +144,7 @@
         "title": "Peruuta tuonti"
       },
       "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
+      "data-loaded": "Tiedot ladattu.",
       "data-loading": "Ladataan tietoja...",
       "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
       "description": "Tässä näkymässä voit valita, mitkä koulutukset haluat tuoda. Tuonnin jälkeen voit muokata ja täydentää tietoja Koulutukseni-näkymässä.",
@@ -548,6 +549,7 @@
           "title": "Koulutukset"
         },
         "importing": "Tuodaan tietoja",
+        "importing-done": "Tiedot on tuotu.",
         "title": "Valitse tuotavat tiedot",
         "work": {
           "loading": "Kerätään työhistoriatietoja",
