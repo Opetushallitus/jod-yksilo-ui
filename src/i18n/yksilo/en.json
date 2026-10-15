@@ -144,6 +144,7 @@
         "title": "Cancel import"
       },
       "data-load-failed": "Failed to load data. Please try again later.",
+      "data-loaded": "Data loaded successfully.",
       "data-loading": "Loading information...",
       "data-load-no-data": "The education data could not be found or you do not have permission to view the data.",
       "description": "In this view, you can select which educations you want to import. After the import, you can edit and complete the information in the My Educations view.",
@@ -550,6 +551,7 @@
           "title": "Education"
         },
         "importing": "Importing data",
+        "importing-done": "Importing completed successfully",
         "title": "Select information to import",
         "work": {
           "loading": "Loading work experience",

@@ -365,7 +365,7 @@ export const ExperienceTableRow = ({
 
   const renderOsaamisetNestedCell = (sm: boolean) => {
     if (osaamisetOdottaaTunnistusta) {
-      return <Spinner size={24} color="accent" />;
+      return <Spinner size={24} color="accent" label={t('competences-identifying')} />;
     }
     if (osaamisetTunnistusEpaonnistui && row.osaamiset.length === 0) {
       return renderCompetencesDetectFailure();
@@ -419,7 +419,7 @@ export const ExperienceTableRow = ({
           className={`text-body-md text-nowrap ${sm ? 'text-center' : ''}`}
           data-testid="experience-row-competences-cell"
         >
-          <Spinner size={24} color="accent" testId="competences-spinner" />
+          <Spinner size={24} color="accent" testId="competences-spinner" label={t('competences-identifying')} />
         </td>
       );
     }
