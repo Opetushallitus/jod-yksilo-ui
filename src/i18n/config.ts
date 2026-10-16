@@ -15,6 +15,8 @@ export type LangCode = 'fi' | 'sv' | 'en';
 export const supportedLanguageCodes: LangCode[] = ['fi', 'sv', 'en'];
 export const defaultLang = 'fi';
 
+const TRANSLATION_REQUEST_TIMEOUT_MS = 3000;
+
 export const langLabels = {
   en: 'In English',
   fi: 'Suomeksi',
@@ -38,7 +40,12 @@ await i18n
     fallbackLng: defaultLang,
     preload: supportedLanguageCodes,
     backend: {
-      loadPath: '/yksilo/i18n/{{ns}}/{{lng}}.json',
+      loadPath: '/i18n/{{ns}}/{{lng}}.json',
+      // Cap how long a slow translation origin can delay startup; bundled translations are used after the timeout.
+      requestOptions: () =>
+        typeof AbortSignal.timeout === 'function'
+          ? { signal: AbortSignal.timeout(TRANSLATION_REQUEST_TIMEOUT_MS) }
+          : {},
     },
     interpolation: { escapeValue: false },
     returnEmptyString: false,
