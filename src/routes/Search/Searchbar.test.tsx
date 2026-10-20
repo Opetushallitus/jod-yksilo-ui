@@ -45,7 +45,7 @@ describe('SearchBar', () => {
   it('does not require min length in the input', () => {
     render(<SearchBar scrollRef={{ current: null }} />);
 
-    const input = screen.getByRole('textbox', { name: '' });
+    const input = screen.getByRole('textbox', { name: 'search.search-placeholder' });
     expect(input).not.toHaveAttribute('required');
     expect(input).not.toHaveAttribute('minlength');
   });
