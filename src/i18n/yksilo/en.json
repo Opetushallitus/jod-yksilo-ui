@@ -1126,6 +1126,11 @@
     "toast-description": "Your feedback helps us improve the service.",
     "toast-error": "Failed to send feedback – please try again"
   },
+  "related-opportunities": {
+    "description": "These opportunities have similar content and competences to this opportunity.",
+    "empty": "No similar opportunities were found.",
+    "title": "Similar opportunities"
+  },
   "remove-favorite": "Remove from favourites",
   "remove-favorite-opportunity-confirmation": "Are you sure you want to remove opportunity \"{{name}}\" from favourites?",
   "save": "Save",

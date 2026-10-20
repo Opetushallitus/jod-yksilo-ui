@@ -14,6 +14,7 @@ import { CounselingCard } from '@/components/CounselingCard/CounselingCard';
 import { JobJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { RateContent } from '@/components/RateContent/RateContent';
+import { RelatedOpportunities } from '@/components/RelatedOpportunities/RelatedOpportunities';
 import { NOT_AVAILABLE_LABEL } from '@/constants';
 import Suomi from '@/routes/JobOpportunity/Suomi.tsx';
 import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
@@ -107,7 +108,8 @@ const JobOpportunity = () => {
     i18n: { language },
   } = useTranslation();
   const { lg } = useMediaQueries();
-  const { tyomahdollisuus, osaamiset, ammattiryhma, profiiliOsaamisetUris } = useLoaderData<LoaderData>();
+  const { tyomahdollisuus, osaamiset, ammattiryhma, profiiliOsaamisetUris, kohtaantoOpportunities } =
+    useLoaderData<LoaderData>();
   const isLoggedIn = useIsLoggedIn();
   const kartoitetutOsaamisetUris = useToolStore(
     useShallow((state) => state.osaamiset.map((osaaminen) => osaaminen.id)),
@@ -485,6 +487,15 @@ const JobOpportunity = () => {
         </div>
       ),
     },
+    ...(kohtaantoOpportunities
+      ? [
+          {
+            navTitle: t('related-opportunities.title'),
+            showDivider: false,
+            content: <RelatedOpportunities samankaltaiset={kohtaantoOpportunities} tyyppi="TYOMAHDOLLISUUS" />,
+          },
+        ]
+      : []),
   ];
   return (
     <OpportunityDetails

@@ -1125,6 +1125,11 @@
     "toast-description": "Din feedback hjälper oss att förbättra tjänsten.",
     "toast-error": "Det gick inte att skicka respons – försök igen"
   },
+  "related-opportunities": {
+    "description": "De här möjligheterna har liknande innehåll och kompetenser som den här möjligheten.",
+    "empty": "Inga liknande möjligheter hittades.",
+    "title": "Liknande möjligheter"
+  },
   "remove-favorite": "Ta bort från favoriter",
   "remove-favorite-opportunity-confirmation": "Är du säker på att du vill ta bort möjligheten \"{{name}}\" från dina favoriter?",
   "save": "Spara",

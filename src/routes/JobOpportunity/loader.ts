@@ -3,13 +3,15 @@ import { LoaderFunction } from 'react-router';
 import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
+import { getKohtaantoSamankaltaiset } from '@/api/samankaltaiset';
 import { components } from '@/api/schema';
 import i18n, { LangCode } from '@/i18n/config';
 import type { Jakauma, TyomahdollisuusJakaumat } from '@/routes/types';
 import { YksiloLoaderContext, yksiloLoaderContextHasSession } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
-import { sortByProperty } from '@/utils';
+import { getLocalizedText, sortByProperty } from '@/utils';
 import { getCodesetValue } from '@/utils/codes/codes';
+import { isFeatureEnabled } from '@/utils/features';
 
 import type { Codeset, JobCodesetValues } from '../../utils/jakaumaUtils';
 
@@ -45,6 +47,19 @@ const loader = (async ({ request, params, context }) => {
     toimiala: jakaumat.toimiala ? await Promise.all(jakaumat.toimiala.arvot.map(mapArvoToCodeValue('toimiala'))) : [],
   };
 
+  // Not awaited: the suggestions are slow, so the page is shown while they are still loading
+  const kohtaantoOpportunities = isFeatureEnabled('SAMANKALTAISET_MAHDOLLISUUDET')
+    ? getKohtaantoSamankaltaiset(
+        params.id,
+        {
+          tyyppi: 'TYOMAHDOLLISUUS',
+          description: getLocalizedText(tyomahdollisuus?.kuvaus),
+          osaamiset: (tyomahdollisuus?.jakaumat?.osaaminen?.arvot ?? []).map((arvo) => arvo.arvo),
+        },
+        request.signal,
+      )
+    : undefined;
+
   const [competences, occupations, occupationGroup] = await Promise.all([
     osaamiset.combine(
       tyomahdollisuus?.jakaumat?.osaaminen?.arvot,
@@ -77,6 +92,7 @@ const loader = (async ({ request, params, context }) => {
     jakaumat,
     codesetValues,
     profiiliOsaamisetUris,
+    kohtaantoOpportunities,
   };
 }) satisfies LoaderFunction<YksiloLoaderContext>;
 
