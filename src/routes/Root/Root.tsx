@@ -22,8 +22,8 @@ import {
 
 import feedbackBg from '@/../assets/feedback.jpg?preset=bg';
 import { FeedbackModal } from '@/components';
+import { HeaderSearch } from '@/components/HeaderSearch/HeaderSearch';
 import { NavMenu } from '@/components/NavMenu/NavMenu';
-import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { Toaster } from '@/components/Toaster/Toaster';
 import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes';
 import { useYksiloData } from '@/hooks/useYksiloData';
@@ -275,7 +275,7 @@ const Root = () => {
           serviceBarContent={
             isFeatureEnabled('MAHDOLLISUUDET_HAKU')
               ? !isOnSearchPage && (
-                  <SearchBar searchInputVisible={searchInputVisible} setSearchInputVisible={setSearchInputVisible} />
+                  <HeaderSearch searchInputVisible={searchInputVisible} setSearchInputVisible={setSearchInputVisible} />
                 )
               : undefined
           }
