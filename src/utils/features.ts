@@ -7,6 +7,7 @@ type Feature =
   | 'MAHDOLLISUUDET_HAKU'
   | 'CV_IMPORT'
   | 'MPASSID'
+  | 'SAMANKALTAISET_MAHDOLLISUUDET'
   // Switches the toimiala codeset from TOL 2008 to TOL 2025. Enable when the backend starts
   // serving TOL 2025 codes; see src/utils/codes/codes.ts for why the two cannot coexist.
   | 'TOIMIALA_TOL2025';
