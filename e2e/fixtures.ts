@@ -332,5 +332,6 @@ export const featureFlags = {
   JAKOLINKKI: true,
   MAHDOLLISUUDET_HAKU: true,
   CV_IMPORT: true,
+  SAMANKALTAISET_MAHDOLLISUUDET: true,
   TOIMIALA_TOL2025: false,
 };

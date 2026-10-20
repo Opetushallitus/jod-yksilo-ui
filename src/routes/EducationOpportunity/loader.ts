@@ -2,13 +2,15 @@ import { LoaderFunction } from 'react-router';
 
 import { client } from '@/api/client';
 import { osaamiset as osaamisetService } from '@/api/osaamiset';
+import { getKohtaantoSamankaltaiset, getSamankaltaiset } from '@/api/samankaltaiset';
 import type { components } from '@/api/schema';
 import i18n, { LangCode } from '@/i18n/config';
 import type { Jakauma, KoulutusmahdollisuusJakaumat } from '@/routes/types';
 import { YksiloLoaderContext, yksiloLoaderContextHasSession } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
-import { sortByProperty } from '@/utils';
+import { getLocalizedText, sortByProperty } from '@/utils';
 import { getCodeset, getEducationCodesetValues } from '@/utils/codes/codes';
+import { isFeatureEnabled } from '@/utils/features';
 
 import { Codeset, type EducationCodeSetValues } from '../../utils/jakaumaUtils';
 
@@ -55,12 +57,27 @@ const loader = (async ({ request, params, context }) => {
     kunta: await mapJakaumaToCodeValue('kunta', i18n.language as LangCode, jakaumat.kunta),
     maakunta: await mapJakaumaToCodeValue('maakunta', i18n.language as LangCode, jakaumat.maakunta),
   };
-  const osaamiset = await osaamisetService.combine(
-    koulutusmahdollisuus?.jakaumat?.osaaminen?.arvot,
-    (value) => value.arvo,
-    (_, osaaminen) => osaaminen,
-    request.signal,
-  );
+  const showRelatedOpportunities = isFeatureEnabled('SAMANKALTAISET_MAHDOLLISUUDET');
+
+  const [osaamiset, relatedOpportunities, kohtaantoOpportunities] = await Promise.all([
+    osaamisetService.combine(
+      koulutusmahdollisuus?.jakaumat?.osaaminen?.arvot,
+      (value) => value.arvo,
+      (_, osaaminen) => osaaminen,
+      request.signal,
+    ),
+    showRelatedOpportunities ? getSamankaltaiset('KOULUTUSMAHDOLLISUUS', params.id, request.signal) : undefined,
+    showRelatedOpportunities
+      ? getKohtaantoSamankaltaiset(
+          params.id,
+          {
+            description: getLocalizedText(koulutusmahdollisuus?.kuvaus),
+            osaamiset: (koulutusmahdollisuus?.jakaumat?.osaaminen?.arvot ?? []).map((arvo) => arvo.arvo),
+          },
+          request.signal,
+        )
+      : undefined,
+  ]);
 
   let profiiliKiinnostuksetUris: string[] = [];
   if (yksiloLoaderContextHasSession(context)) {
@@ -77,6 +94,8 @@ const loader = (async ({ request, params, context }) => {
     koulutusmahdollisuus,
     osaamiset,
     profiiliKiinnostuksetUris,
+    relatedOpportunities,
+    kohtaantoOpportunities,
   };
 }) satisfies LoaderFunction<YksiloLoaderContext>;
 

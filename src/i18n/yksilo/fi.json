@@ -1004,6 +1004,23 @@
     "toast-description": "Palautteesi auttaa meitä parantamaan palvelua.",
     "toast-error": "Palautteen lähettäminen epäonnistui — yritä uudelleen"
   },
+  "related-opportunities": {
+    "description": {
+      "education-to-education": "Olemme tunnistaneet koulutusmahdollisuuksia, joissa on samoja osaamisia kuin tässä koulutusmahdollisuudessa.",
+      "education-to-job": "Olemme tunnistaneet työmahdollisuuksia, joissa on samoja osaamisia kuin tässä koulutusmahdollisuudessa.",
+      "job-to-education": "Olemme tunnistaneet koulutusmahdollisuuksia, joissa on samoja osaamisia kuin tässä työmahdollisuudessa.",
+      "job-to-job": "Olemme tunnistaneet työmahdollisuuksia, joissa on samoja osaamisia kuin tässä työmahdollisuudessa."
+    },
+    "empty": "Samankaltaisia mahdollisuuksia ei löytynyt.",
+    "kohtaanto-description": {
+      "education-to-education": "Olemme tunnistaneet koulutusmahdollisuuksia, jotka vastaavat kuvaukseltaan ja osaamisiltaan tätä koulutusmahdollisuutta.",
+      "education-to-job": "Olemme tunnistaneet työmahdollisuuksia, jotka vastaavat kuvaukseltaan ja osaamisiltaan tätä koulutusmahdollisuutta.",
+      "job-to-education": "Olemme tunnistaneet koulutusmahdollisuuksia, jotka vastaavat kuvaukseltaan ja osaamisiltaan tätä työmahdollisuutta.",
+      "job-to-job": "Olemme tunnistaneet työmahdollisuuksia, jotka vastaavat kuvaukseltaan ja osaamisiltaan tätä työmahdollisuutta."
+    },
+    "kohtaanto-title": "Samankaltaiset mahdollisuudet (kohtaanto)",
+    "title": "Samankaltaiset mahdollisuudet (Jaccard)"
+  },
   "remove-favorite": "Poista suosikeista",
   "remove-favorite-opportunity-confirmation": "Haluatko varmasti poistaa mahdollisuuden \"{{name}}\" suosikeista?",
   "save": "Tallenna",
