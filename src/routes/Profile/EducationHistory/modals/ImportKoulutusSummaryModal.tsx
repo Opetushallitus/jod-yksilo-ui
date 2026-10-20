@@ -236,6 +236,11 @@ const ImportKoulutusSummaryModal = ({
               <p className="mb-5 font-arial text-body-md-mobile sm:mb-8 sm:text-body-md">
                 {t('education-history-import.summary-modal.description')}
               </p>
+              <output aria-live="polite" className="sr-only">
+                {isFetching
+                  ? t('education-history-import.summary-modal.data-loading')
+                  : t('education-history-import.summary-modal.data-loaded')}
+              </output>
               {isFetching && (
                 <div className="flex w-fit items-center rounded bg-bg-gray-2 p-4">
                   <span>
