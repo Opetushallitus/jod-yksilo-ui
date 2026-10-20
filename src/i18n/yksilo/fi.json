@@ -1125,6 +1125,11 @@
     "toast-description": "Palautteesi auttaa meitä parantamaan palvelua.",
     "toast-error": "Palautteen lähettäminen epäonnistui — yritä uudelleen"
   },
+  "related-opportunities": {
+    "description": "Näissä mahdollisuuksissa on samanlaista sisältöä ja osaamista kuin tässä mahdollisuudessa.",
+    "empty": "Samankaltaisia mahdollisuuksia ei löytynyt.",
+    "title": "Samankaltaiset mahdollisuudet"
+  },
   "remove-favorite": "Poista suosikeista",
   "remove-favorite-opportunity-confirmation": "Haluatko varmasti poistaa mahdollisuuden \"{{name}}\" suosikeista?",
   "save": "Tallenna",
