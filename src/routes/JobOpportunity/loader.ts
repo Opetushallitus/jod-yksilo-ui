@@ -3,13 +3,15 @@ import { LoaderFunction } from 'react-router';
 import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { osaamiset } from '@/api/osaamiset';
+import { getKohtaantoSamankaltaiset, getSamankaltaiset } from '@/api/samankaltaiset';
 import { components } from '@/api/schema';
 import i18n, { LangCode } from '@/i18n/config';
 import type { Jakauma, TyomahdollisuusJakaumat } from '@/routes/types';
 import { YksiloLoaderContext, yksiloLoaderContextHasSession } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
-import { sortByProperty } from '@/utils';
+import { getLocalizedText, sortByProperty } from '@/utils';
 import { getCodesetValue } from '@/utils/codes/codes';
+import { isFeatureEnabled } from '@/utils/features';
 
 import type { Codeset, JobCodesetValues } from '../../utils/jakaumaUtils';
 
@@ -45,7 +47,9 @@ const loader = (async ({ request, params, context }) => {
     toimiala: jakaumat.toimiala ? await Promise.all(jakaumat.toimiala.arvot.map(mapArvoToCodeValue('toimiala'))) : [],
   };
 
-  const [competences, occupations, occupationGroup] = await Promise.all([
+  const showRelatedOpportunities = isFeatureEnabled('SAMANKALTAISET_MAHDOLLISUUDET');
+
+  const [competences, occupations, occupationGroup, relatedOpportunities, kohtaantoOpportunities] = await Promise.all([
     osaamiset.combine(
       tyomahdollisuus?.jakaumat?.osaaminen?.arvot,
       (value) => value.arvo,
@@ -59,6 +63,17 @@ const loader = (async ({ request, params, context }) => {
       request.signal,
     ),
     ammatit.get(tyomahdollisuus?.ammattiryhma?.uri ?? '', request.signal),
+    showRelatedOpportunities ? getSamankaltaiset('TYOMAHDOLLISUUS', params.id, request.signal) : undefined,
+    showRelatedOpportunities
+      ? getKohtaantoSamankaltaiset(
+          params.id,
+          {
+            description: getLocalizedText(tyomahdollisuus?.kuvaus),
+            osaamiset: (tyomahdollisuus?.jakaumat?.osaaminen?.arvot ?? []).map((arvo) => arvo.arvo),
+          },
+          request.signal,
+        )
+      : undefined,
   ]);
 
   let profiiliOsaamisetUris: string[] = [];
@@ -77,6 +92,8 @@ const loader = (async ({ request, params, context }) => {
     jakaumat,
     codesetValues,
     profiiliOsaamisetUris,
+    relatedOpportunities,
+    kohtaantoOpportunities,
   };
 }) satisfies LoaderFunction<YksiloLoaderContext>;
 

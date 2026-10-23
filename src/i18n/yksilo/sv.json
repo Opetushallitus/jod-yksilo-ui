@@ -1003,6 +1003,23 @@
     "toast-description": "Din feedback hjälper oss att förbättra tjänsten.",
     "toast-error": "Det gick inte att skicka respons – försök igen"
   },
+  "related-opportunities": {
+    "description": {
+      "education-to-education": "Vi har identifierat utbildningsmöjligheter som har samma kompetenser som den här utbildningsmöjligheten.",
+      "education-to-job": "Vi har identifierat karriärmöjligheter som har samma kompetenser som den här utbildningsmöjligheten.",
+      "job-to-education": "Vi har identifierat utbildningsmöjligheter som har samma kompetenser som den här karriärmöjligheten.",
+      "job-to-job": "Vi har identifierat karriärmöjligheter som har samma kompetenser som den här karriärmöjligheten."
+    },
+    "empty": "Inga liknande möjligheter hittades.",
+    "kohtaanto-description": {
+      "education-to-education": "Vi har identifierat utbildningsmöjligheter som motsvarar beskrivning och kompetenser hos den här utbildningsmöjligheten.",
+      "education-to-job": "Vi har identifierat karriärmöjligheter som motsvarar beskrivning och kompetenser hos den här utbildningsmöjligheten.",
+      "job-to-education": "Vi har identifierat utbildningsmöjligheter som motsvarar beskrivning och kompetenser hos den här karriärmöjligheten.",
+      "job-to-job": "Vi har identifierat karriärmöjligheter som motsvarar beskrivning och kompetenser hos den här karriärmöjligheten."
+    },
+    "kohtaanto-title": "Liknande möjligheter (matchning)",
+    "title": "Liknande möjligheter (Jaccard)"
+  },
   "remove-favorite": "Ta bort från favoriter",
   "remove-favorite-opportunity-confirmation": "Är du säker på att du vill ta bort möjligheten \"{{name}}\" från dina favoriter?",
   "save": "Spara",

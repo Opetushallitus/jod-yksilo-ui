@@ -655,6 +655,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/tyomahdollisuudet/{id}/samankaltaiset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get similar mahdollisuudet
+     * @description Returns at most five mahdollisuudet of the requested type that share osaamiset with the given työmahdollisuus. The type defaults to the type of the given työmahdollisuus.
+     */
+    get: operations['tyomahdollisuusFindSamankaltaiset'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/profiili/yksilo': {
     parameters: {
       query?: never;
@@ -796,6 +816,26 @@ export interface paths {
     };
     /** Get full information content of a koulutusmahdollisuus */
     get: operations['koulutusmahdollisuusFindById'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/koulutusmahdollisuudet/{id}/samankaltaiset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get similar mahdollisuudet
+     * @description Returns at most five mahdollisuudet of the requested type that share osaamiset with the given koulutusmahdollisuus. The type defaults to the type of the given koulutusmahdollisuus.
+     */
+    get: operations['koulutusmahdollisuusFindSamankaltaiset'];
     put?: never;
     post?: never;
     delete?: never;
@@ -1264,6 +1304,11 @@ export interface components {
       jakaumat?: {
         [key: string]: components['schemas']['JakaumaDto'];
       };
+    };
+    SamankaltainenMahdollisuusDto: {
+      /** Format: uuid */
+      id: string;
+      otsikko: components['schemas']['LokalisoituTeksti'];
     };
     CsrfTokenDto: {
       token: string;
@@ -3151,6 +3196,30 @@ export interface operations {
       };
     };
   };
+  tyomahdollisuusFindSamankaltaiset: {
+    parameters: {
+      query?: {
+        tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      };
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SamankaltainenMahdollisuusDto'][];
+        };
+      };
+    };
+  };
   yksiloGet: {
     parameters: {
       query?: never;
@@ -3407,6 +3476,30 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['KoulutusmahdollisuusFullDto'];
+        };
+      };
+    };
+  };
+  koulutusmahdollisuusFindSamankaltaiset: {
+    parameters: {
+      query?: {
+        tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      };
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SamankaltainenMahdollisuusDto'][];
         };
       };
     };

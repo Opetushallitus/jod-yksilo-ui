@@ -1004,6 +1004,23 @@
     "toast-description": "Your feedback helps us improve the service.",
     "toast-error": "Failed to send feedback – please try again"
   },
+  "related-opportunities": {
+    "description": {
+      "education-to-education": "We have identified education opportunities that involve the same competences as this education opportunity.",
+      "education-to-job": "We have identified career opportunities that involve the same competences as this education opportunity.",
+      "job-to-education": "We have identified education opportunities that involve the same competences as this career opportunity.",
+      "job-to-job": "We have identified career opportunities that involve the same competences as this career opportunity."
+    },
+    "empty": "No similar opportunities were found.",
+    "kohtaanto-description": {
+      "education-to-education": "We have identified education opportunities that match the description and competences of this education opportunity.",
+      "education-to-job": "We have identified career opportunities that match the description and competences of this education opportunity.",
+      "job-to-education": "We have identified education opportunities that match the description and competences of this career opportunity.",
+      "job-to-job": "We have identified career opportunities that match the description and competences of this career opportunity."
+    },
+    "kohtaanto-title": "Similar opportunities (matching)",
+    "title": "Similar opportunities (Jaccard)"
+  },
   "remove-favorite": "Remove from favourites",
   "remove-favorite-opportunity-confirmation": "Are you sure you want to remove opportunity \"{{name}}\" from favourites?",
   "save": "Save",

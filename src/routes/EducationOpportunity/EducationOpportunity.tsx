@@ -12,6 +12,7 @@ import { CounselingCard } from '@/components/CounselingCard/CounselingCard';
 import { EducationJakaumaList } from '@/components/JakaumaList/JakaumaList';
 import OpportunityDetails, { type OpportunityDetailsSection } from '@/components/OpportunityDetails/OpportunityDetails';
 import { RateContent } from '@/components/RateContent/RateContent';
+import { RelatedOpportunities } from '@/components/RelatedOpportunities/RelatedOpportunities';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import type { LoaderData } from '@/routes/EducationOpportunity/loader';
 import type { JakaumaKey } from '@/routes/types';
@@ -34,7 +35,14 @@ const sortJakaumatByOrderRank = (a: JakaumaKey, b: JakaumaKey) => {
 };
 
 const EducationOpportunity = () => {
-  const { jakaumat, koulutusmahdollisuus, osaamiset, profiiliKiinnostuksetUris } = useLoaderData<LoaderData>();
+  const {
+    jakaumat,
+    koulutusmahdollisuus,
+    osaamiset,
+    profiiliKiinnostuksetUris,
+    relatedOpportunities,
+    kohtaantoOpportunities,
+  } = useLoaderData<LoaderData>();
   const isLoggedIn = useIsLoggedIn();
   const { kuvaus, kesto, koulutukset, aktiivinen } = koulutusmahdollisuus;
   const { sm, lg } = useMediaQueries();
@@ -164,6 +172,32 @@ const EducationOpportunity = () => {
         </div>
       ),
     },
+    ...(relatedOpportunities
+      ? [
+          {
+            navTitle: t('related-opportunities.title'),
+            showDivider: false,
+            content: (
+              <RelatedOpportunities mahdollisuusTyyppi="KOULUTUSMAHDOLLISUUS" opportunities={relatedOpportunities} />
+            ),
+          },
+        ]
+      : []),
+    ...(kohtaantoOpportunities
+      ? [
+          {
+            navTitle: t('related-opportunities.kohtaanto-title'),
+            showDivider: false,
+            content: (
+              <RelatedOpportunities
+                mahdollisuusTyyppi="KOULUTUSMAHDOLLISUUS"
+                opportunities={kohtaantoOpportunities}
+                variant="kohtaanto"
+              />
+            ),
+          },
+        ]
+      : []),
   ];
 
   return (
