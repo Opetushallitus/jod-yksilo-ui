@@ -61,11 +61,7 @@ export const useKoskiImport = () => {
             components={{
               Icon: <JodOpenInNew ariaLabel={t('common:external-link')} />,
               CustomLink: (
-                <Link
-                  to={opintopolkuUrl}
-                  className="inline-flex items-center text-accent hover:underline"
-                  target="_blank"
-                />
+                <Link to={opintopolkuUrl} className="inline-flex items-center text-accent underline" target="_blank" />
               ),
             }}
           />

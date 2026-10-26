@@ -308,7 +308,7 @@ const TmtImportExport = () => {
             CustomLink: (
               <Link
                 to={t('preferences.tmt-import-export.export.modal.tmt-url')}
-                className="inline-flex items-center text-accent hover:underline"
+                className="inline-flex items-center text-accent underline"
                 target="_blank"
                 rel="noopener noreferrer"
               />
