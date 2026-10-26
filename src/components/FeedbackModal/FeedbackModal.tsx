@@ -289,7 +289,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
                   href={t('common:feedback.linkHrefs.oph')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex text-accent hover:underline"
+                  className="inline-flex text-accent underline"
                 >
                   {t('common:feedback.links.oph')}
                   <JodOpenInNew ariaLabel={t('common:external-link')} />
@@ -300,7 +300,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
                   href={t('common:feedback.linkHrefs.keha')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex text-accent hover:underline"
+                  className="inline-flex text-accent underline"
                 >
                   {t('common:feedback.links.keha')}
                   <JodOpenInNew ariaLabel={t('common:external-link')} />
@@ -311,7 +311,7 @@ export const FeedbackModal = ({ isOpen, onClose, section, area, language }: Feed
                   href={t('common:feedback.linkHrefs.okm')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex text-accent hover:underline"
+                  className="inline-flex text-accent underline"
                 >
                   {t('common:feedback.links.okm')}
                   <JodOpenInNew ariaLabel={t('common:external-link')} />

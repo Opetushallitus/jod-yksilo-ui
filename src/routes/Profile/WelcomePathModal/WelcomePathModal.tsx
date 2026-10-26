@@ -237,7 +237,7 @@ const StepInformation = ({ data }: { data: YksiloData }) => {
                 href={`/${language}/${t('common:slugs.privacy-and-cookies')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex text-accent hover:underline"
+                className="inline-flex text-accent underline"
                 data-testid="privacy-and-cookies-link"
               />
             ),
@@ -273,7 +273,7 @@ const StepAi = () => {
                   href={`/${language}/${t('common:slugs.ai-usage')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex text-accent hover:underline"
+                  className="inline-flex text-accent underline"
                   data-testid="ai-usage-link"
                 />
               ),

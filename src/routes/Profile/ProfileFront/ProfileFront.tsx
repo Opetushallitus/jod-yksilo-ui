@@ -80,7 +80,7 @@ const ProfileFront = () => {
                 CustomLink: (
                   <ExternalLink
                     href={t('profile.preferences.paragraph-3-link')}
-                    className="text-accent hover:underline"
+                    className="text-accent underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   />
@@ -88,7 +88,7 @@ const ProfileFront = () => {
                 CustomLink2: (
                   <ExternalLink
                     href={`/${language}/${t('common:slugs.privacy-and-cookies')}`}
-                    className="text-accent hover:underline"
+                    className="text-accent underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   />
