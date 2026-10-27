@@ -109,12 +109,12 @@
       "privacy-and-cookies": "Tietosuojaseloste ja evästeet"
     },
     "more-info-title": "Haluatko tietää lisää Osaamispolusta?",
-    "social-media-label": "Osaamispolku sosiaalisessa mediassa",
     "social-media": {
       "facebook": "Osaamispolku Facebook",
       "instagram": "Osaamispolku Instagram",
       "linkedin": "Osaamispolku LinkedIn"
-    }
+    },
+    "social-media-label": "Osaamispolku sosiaalisessa mediassa"
   },
   "language-selection": "Käyttökieli",
   "login": "Kirjaudu",

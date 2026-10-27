@@ -2,6 +2,18 @@ import { JSX } from 'react';
 import { Link, type LinkProps } from 'react-router';
 
 import { cx } from '@jod/design-system';
+import {
+  JodCheckmarkAlt,
+  JodCog,
+  JodFavorite,
+  JodFavs,
+  JodFlag,
+  JodInterests,
+  JodOther,
+  JodShare,
+  JodSkills,
+  JodWork,
+} from '@jod/design-system/icons';
 
 import type { components } from '@/api/schema';
 import i18n from '@/i18n/config';
@@ -89,4 +101,30 @@ export const getTextClassByCompetenceSourceType = (type: ProfileSectionType) =>
     'text-primary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'TAVOITTEENI', 'TUO_JA_VIE_TIETOJA', 'ASETUKSENI'].includes(
       type,
     ),
+  });
+
+export const getIconByProfileSectionType = (type: ProfileSectionType): React.ReactNode => {
+  const iconMap: Record<ProfileSectionType, React.ReactNode> = {
+    TOIMENKUVA: <JodWork />,
+    KOULUTUS: <JodSkills />,
+    TOIMINTO: <JodInterests />,
+    MUU_OSAAMINEN: <JodOther />,
+    KIINNOSTUS: <JodFavs />,
+    SUOSIKKI: <JodFavorite />,
+    OSAAMISENI: <JodCheckmarkAlt />,
+    TAVOITTEENI: <JodFlag />,
+    TUO_JA_VIE_TIETOJA: <JodShare />,
+    ASETUKSENI: <JodCog />,
+  };
+  return iconMap[type];
+};
+
+export const getBgClassByProfileSectionType = (type: ProfileSectionType) =>
+  cx({
+    'bg-primary-4-dark': type === 'TOIMENKUVA',
+    'bg-primary-2-dark': type === 'KOULUTUS',
+    'bg-primary-1-dark': type === 'TOIMINTO',
+    'bg-secondary-gray': type === 'MUU_OSAAMINEN',
+    'bg-primary-3': type === 'KIINNOSTUS',
+    'bg-primary-1-dark-2': ['SUOSIKKI', 'OSAAMISENI', 'TAVOITTEENI', 'TUO_JA_VIE_TIETOJA', 'ASETUKSENI'].includes(type),
   });

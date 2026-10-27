@@ -109,12 +109,12 @@
       "privacy-and-cookies": "Dataskyddsbeskrivning och cookies"
     },
     "more-info-title": "Vill du veta mer om Kompetensstigen?",
-    "social-media-label": "Kompetensstigen i sociala medier",
     "social-media": {
       "facebook": "Kompetensstigen Facebook",
       "instagram": "Kompetensstigen Instagram",
       "linkedin": "Kompetensstigen LinkedIn"
-    }
+    },
+    "social-media-label": "Kompetensstigen i sociala medier"
   },
   "language-selection": "Språk",
   "login": "Logga in",
@@ -159,7 +159,7 @@
     "close": "Stäng"
   },
   "open-submenu": "Öppna undermenyn",
-  "osaamispolku": "Min kompetensstig",
+  "osaamispolku": "Kompetensstigen",
   "print": "Skriv ut",
   "required": "obligatorisk",
   "return-home": "Återgå till förstasidan",
