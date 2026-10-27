@@ -63,7 +63,7 @@
     },
     "move-to-service": "Go to service",
     "osaamispolku-description": "Life changes – and we are here to support you. Whether you are changing fields, learning something new, or improving your everyday life, we provide you with easily understandable information and inspiration to support your own path.",
-    "title": "Competence profile"
+    "title": "Competence profile/CV"
   },
   "date-or-continues-placeholder": "dd.mm.yyyy",
   "datepicker": {
@@ -116,7 +116,7 @@
     "educational-institution-or-education-provider": "Educational institution or education organiser",
     "education-provider-or-education": "Education organiser / education",
     "identify-competences": "Identify competences",
-    "import-education-history": "Import your education history",
+    "import-education-history": "Import education history from Studyinfo",
     "name-of-degree-or-education": "Name of degree or education",
     "summary": "Summary"
   },
@@ -136,7 +136,7 @@
       "description-2": "You can import your study records into the Education History section of your competence profile by granting permission in Studyinfo.<br>Select <strong>Go to Studyinfo</strong> and allow the data transfer. After this, you will automatically return to the service. Once you return, you can choose which studies you want to import.",
       "import-button": "Go to Studyinfo",
       "import-redirect-fail": "Failed to go to Studyinfo. Please try again.",
-      "title": "Import your education history"
+      "title": "Import education history from Studyinfo"
     },
     "summary-modal": {
       "cancel-modal": {
@@ -218,7 +218,7 @@
   "home": {
     "card-1-content": "Find education and work opportunities that suit you. Use the service without logging in quickly, you can log in later and save your information.",
     "card-1-title": "Quickly find suitable education and career opportunities",
-    "card-2-content": "Log in to the service and identify your strengths and interests. Save your work and education history for future reference.",
+    "card-2-content": "Log in and identify your strengths and interests. Import information from your CV and save your work and education history for later use.",
     "card-2-title": "Log in and map out your skills more extensively",
     "create-own-profile": "Create your own competence profile",
     "explore-opportunities": "Find opportunities",
@@ -396,7 +396,7 @@
   "link-copy-failed": "Failed to copy link",
   "login-for-favorites": "Log in to Competency Path to save favourites and access them later.",
   "login-to-service": "Log in",
-  "map-competences": "Map skills",
+  "map-competences": "Emphasize competencies",
   "more-actions": "More Options",
   "move-to-service": "Go to service",
   "my-competence-path": "My Competency Path",
@@ -522,18 +522,6 @@
       "file-too-large": "The file is too large (max 2 MB).",
       "import-data": "Import data",
       "import-from-cv": "Import from CV",
-      "invalid-file-type": "Only PDF files are supported.",
-      "result-info": "After the import is complete, you can find your information on the <WorkHistoryLink>Workplaces</WorkHistoryLink>, <FreeTimeActivitiesLink>Recreational activities</FreeTimeActivitiesLink>, and <EducationHistoryLink>Education</EducationHistoryLink> pages.",
-      "save": {
-        "failed": {
-          "description": "CV saving failed",
-          "title": "Save failed"
-        },
-        "success": {
-          "description": "CV saved successfully",
-          "title": "Save successful"
-        }
-      },
       "info-selection": {
         "activities": {
           "loading": "Loading leisure activities",
@@ -556,6 +544,38 @@
         "work": {
           "loading": "Loading work experience",
           "no-data": "No work experience identified",
+          "title": "Work"
+        }
+      },
+      "invalid-file-type": "Only PDF files are supported.",
+      "result-info": "After the import is complete, you can find your information on the <WorkHistoryLink>Workplaces</WorkHistoryLink>, <FreeTimeActivitiesLink>Recreational activities</FreeTimeActivitiesLink>, and <EducationHistoryLink>Education</EducationHistoryLink> pages.",
+      "save": {
+        "failed": {
+          "description": "CV saving failed",
+          "title": "Save failed"
+        },
+        "success": {
+          "description": "CV saved successfully",
+          "title": "Save successful"
+        }
+      },
+      "summary": {
+        "activities": {
+          "loading": "Loading leisure activities",
+          "no-data": "No leisure activities identified",
+          "title": "Leisure activities"
+        },
+        "description": "Select which information you want to import from your CV. After importing, you can edit and complete the information in the Education, Work, and Leisure Activities pages.",
+        "education": {
+          "loading": "Loading education history",
+          "no-data": "No education data identified",
+          "title": "Education"
+        },
+        "importing": "Importing data",
+        "title": "Select information to import",
+        "work": {
+          "loading": "Loading work history",
+          "no-data": "No work data identified",
           "title": "Work"
         }
       },
@@ -589,10 +609,10 @@
       "title": "Import and export your data"
     },
     "koski-import": {
-      "button-label": "Import education history",
+      "button-label": "Import education history from Studyinfo",
       "description": "You can import your education history data stored in the national study, education and qualification registers as part of My Competency Path.",
       "result-info": "After the import is complete, you can find your information on the <EducationHistoryLink>Education</EducationHistoryLink> page.",
-      "title": "Import education history"
+      "title": "Import your education history from Studyinfo"
     },
     "personal-details": {
       "description": "You can edit your email address.",
@@ -602,11 +622,11 @@
       "copy-failure": "Failed to copy the link",
       "copy-link": "Copy link",
       "copy-success": "Link copied to clipboard",
-      "create-new-link": "Create new share link",
+      "create-new-link": "Create new shareable CV link",
       "delete-confirm-description": "Are you sure you want to delete the share link?",
-      "delete-confirm-title": "Delete share link",
+      "delete-confirm-title": "Delete shareable CV link",
       "delete-link": "Delete link",
-      "description": "With a share link, you can share your information with people you choose. You decide what information you want to share with the link. The recipient does not need to log in to the Osaamispolku service.\n\nPlease note that anyone who receives the link can open it as long as the share link you created is valid. Only share the link with trusted parties or individuals whom you want to be able to view your shared information. You can delete the link you created at any time. After deletion, your information can no longer be viewed via the link.",
+      "description": "You can create a shareable CV link to your competency profile. You can share your information with people of your choice. You decide what information you want to share through the link. The recipient does not need to log in to the Competency Path service.\n\nPlease note that anyone who receives the link can open it as long as the CV link you created remains valid. Only share the link with trusted organizations or people whom you want to be able to view the information you have shared. You can delete the link you created at any time. Once deleted, your information can no longer be viewed through the link.",
       "edit-link": "Edit",
       "link-has-expired": "The link has expired.",
       "modal": {
@@ -635,12 +655,12 @@
         "expires-on": "Valid until",
         "name": "Link name",
         "name-placeholder": "E.g. Matti Meikäläinen's profile link",
-        "title-add": "Create share link",
-        "title-edit": "Edit share link"
+        "title-add": "Create shareable CV link",
+        "title-edit": "Edit shareable CV link"
       },
-      "no-links": "No share links",
+      "no-links": "No shareable CV links",
       "preview": "Preview",
-      "title": "Share your competence profile",
+      "title": "Share your competence profile as a CV",
       "valid-until": "Valid until: {{date}}"
     },
     "tmt-import-export": {
@@ -735,7 +755,7 @@
       "title": "Import and export data"
     },
     "education-history": {
-      "description": "Below you can find your education history. You can add entries to your education history yourself and identify the competencies related to them. You can also import your study records from the national study, education and qualification registers as part of your education history (Studyinfo).",
+      "description": "You can add your education and training and identify related skills. You can also import your study records from the national study, education and qualification registers  (Studyinfo). Import your education and training on the Import and export data page. You can add other training, such as training provided by your employer, yourself.",
       "description-generic": "Below you can find your education history. You can add entries to your education history yourself and identify the competencies related to them.",
       "empty": "You have not yet added educations.",
       "modals": {
@@ -801,11 +821,11 @@
     },
     "login-page": {
       "description": "By logging in, you will have access to a personal competence profile that will help you manage and use your competence efficiently.",
-      "list-1-item-1": "Your skills: save your employment and education history and achievements, import your education details from My Studyinfo and your employment history from your Job Market Finland jobseeker profile, or import your details from your CV.",
-      "list-1-item-2": "Your interests: identify what interests you.",
-      "list-1-item-3": "Your favourite content: save and manage education and career opportunities that interest you.",
-      "list-1-item-4": "Your goals: set goals and plan paths to achieve them.",
-      "list-1-item-5": "Competence profile settings: decide how and where your data will be used and with whom you will share it.",
+      "list-1-item-1": "Skills: import or save your skills in one place from your CV, Studyinfo or Job Market Finland.",
+      "list-1-item-2": "Interests: identify what motivates and interests you.",
+      "list-1-item-3": "Favorites: save the educational and job opportunities that interest you.",
+      "list-1-item-4": "Goals: set career goals and build your own path forward",
+      "list-1-item-5": "Import and export data and settings: import your data from your CV, Studyinfo or Job Market Finland. Decide how your data is used and shared.",
       "list-2-item-1": "You can see all of the information related to your competences and interests in one place.",
       "list-2-item-2": "Identify your strengths through your work and education history and leisure hobbies.",
       "list-2-item-3": "Use your competence profile to find the right education and career opportunities for you.",
@@ -928,6 +948,80 @@
       "empty": "You have not added any other competences yet.",
       "my-other-comptetences": "My competence",
       "title": "Other competences"
+    },
+    "summary": {
+      "added-competences": "Added competences",
+      "competences": {
+        "education-history": {
+          "empty": "You have not yet identified competences from education",
+          "filled_one": "You have identified {{count}} competence from education",
+          "filled_other": "You have identified {{count}} competences from education",
+          "label": "Education"
+        },
+        "free-time-activities": {
+          "empty": "You have not yet identified competences from recreational activities",
+          "filled_one": "You have identified {{count}} competence from recreational activities",
+          "filled_other": "You have identified {{count}} competences from recreational activities",
+          "label": "Recreational activities"
+        },
+        "interests": {
+          "empty": "You have not yet added competences that interest you",
+          "filled_one": "You have added {{count}} competence that interests you",
+          "filled_other": "You have added {{count}} competences that interest you",
+          "label": "Interests"
+        },
+        "something-else": {
+          "empty": "You have not yet added other competences",
+          "filled_one": "You have added {{count}} other competence",
+          "filled_other": "You have added {{count}} other competences",
+          "label": "Other competences"
+        },
+        "work-history": {
+          "empty": "You have not yet identified competences from workplaces",
+          "filled_one": "You have identified {{count}} competence from workplaces",
+          "filled_other": "You have identified {{count}} competences from workplaces",
+          "label": "Workplaces"
+        }
+      },
+      "sections": {
+        "education-history": {
+          "empty": "You have not yet added education",
+          "filled_one": "You have added {{count}} education to your profile",
+          "filled_other": "You have added {{count}} educations to your profile",
+          "label": "Education"
+        },
+        "favorites": {
+          "empty": "You have not yet saved favourites",
+          "filled_one": "You have saved {{count}} favourite",
+          "filled_other": "You have saved {{count}} favourites",
+          "label": "Favourites"
+        },
+        "free-time-activities": {
+          "empty": "You have not yet added recreational activities",
+          "filled_one": "You have added {{count}} recreational activity to your profile",
+          "filled_other": "You have added {{count}} recreational activities to your profile",
+          "label": "Recrea­tional activ­ities"
+        },
+        "goals": {
+          "empty": "You have not yet added goals",
+          "filled_one": "You have added {{count}} goal to your profile",
+          "filled_other": "You have added {{count}} goals to your profile",
+          "label": "Goals"
+        },
+        "interests": {
+          "empty": "You have not yet added interests",
+          "filled_one": "You have added {{count}} interest to your profile",
+          "filled_other": "You have added {{count}} interests to your profile",
+          "label": "Interests"
+        },
+        "work-history": {
+          "empty": "You have not yet added workplaces",
+          "filled_one": "You have added {{count}} workplace to your profile",
+          "filled_other": "You have added {{count}} workplaces to your profile",
+          "label": "Workplaces"
+        }
+      },
+      "title": "Summary of your competence profile"
     },
     "work-history": {
       "description": "You can find your work history below. You can add your own work history and map out your related competences.",
@@ -1154,7 +1248,7 @@
           "x-added": "{{count}} interests added"
         }
       },
-      "title": "Your information",
+      "title": "Enter your details first",
       "virtual-assistant": {
         "conversation": "Conversation",
         "error": "An error occurred while generating the response. Please try again with the same or a new input.",
@@ -1186,7 +1280,7 @@
             "year": "1 year"
           },
           "day": "0day",
-          "max-aria-label": "Maximum duration",
+          "max-aria-label": "Maximum duration, education lasting 6 years or longer",
           "min-aria-label": "Minimum duration",
           "month": "1mo",
           "year": "1y"
@@ -1214,11 +1308,11 @@
     },
     "title": "Find opportunities",
     "tools": {
+      "career-planning-statistics-additional-resource": "<CustomLink>Information to support your career planning in Information Services<Icon></Icon></CustomLink>",
       "compass-additional-resource": "<CustomLink>The Skills Needs Compass<Icon></Icon></CustomLink> provides information on the competence needs of working life.",
       "compass-url": "https://www.osaamistarvekompassi.fi",
       "counseling-additional-resource": "<CustomLink>Guidance and counselling services<Icon></Icon></CustomLink> bring together services where you can receive support in reflecting on career and education options, helping you evaluate and develop your career planning skills.",
       "counseling-url": "https://www.suomi.fi/topic/guidance-and-counselling-services",
-      "career-planning-statistics-additional-resource": "<CustomLink>Information to support your career planning in Information Services<Icon></Icon></CustomLink>",
       "description": "Familiarize yourself with the following websites if you need help reflecting on your situation:",
       "education-history": "Education",
       "free-time-activities": "Recreational activities",
@@ -1296,7 +1390,7 @@
         "by-relevance": "Most suitable",
         "title": "Sort opportunities"
       },
-      "title": "Your opportunities"
+      "title": "Then find your opportunities"
     }
   },
   "tooltip": {

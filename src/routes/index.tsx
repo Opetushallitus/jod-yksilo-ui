@@ -25,6 +25,7 @@ import { DataImportExport, dataImportExportLoader } from './Profile/DataImportEx
 import { EducationHistory } from './Profile/EducationHistory';
 import { FreeTimeActivities } from './Profile/FreeTimeActivities';
 import { profilePreferencesLoader } from './Profile/Preferences';
+import profileFrontLoader from './Profile/ProfileFront/loader';
 import ProfileFront from './Profile/ProfileFront/ProfileFront';
 import { ErrorBoundary, NoMatch, Root, loader as rootLoader } from './Root';
 import { Search, searchLoader } from './Search';
@@ -47,6 +48,7 @@ const profileRoutes = supportedLanguageCodes.map(
         {
           id: `{slugs.profile.front}|${lng}`,
           path: i18n.t('slugs.profile.front', { lng }),
+          loader: withYksiloContext(profileFrontLoader),
           element: <ProfileFront />,
         },
         {

@@ -19,9 +19,11 @@ import { ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { FreeFormTextInputBlock } from '../components/FreeFormTextInputBlock';
 import { ToolCard } from '../components/ToolCard';
 import { type CompetenceSourceType, GROUP_BY_ALPHABET, GROUP_BY_SOURCE } from './constants';
+import type { CompetencesLoaderData } from './loader';
 
 const Competences = () => {
-  const { osaamiset, toimenkuvat, koulutukset, toiminnot, muutOsaamiset, muutOsaamisetVapaateksti } = useLoaderData();
+  const { osaamiset, toimenkuvat, koulutukset, toiminnot, muutOsaamiset, muutOsaamisetVapaateksti } =
+    useLoaderData<CompetencesLoaderData>();
   const {
     t,
     i18n: { language },
@@ -40,7 +42,13 @@ const Competences = () => {
       TOIMINTO: [],
       MUU_OSAAMINEN: [],
     },
-    { toimenkuvat, koulutukset, toiminnot, muutOsaamiset, muutOsaamisetVapaateksti },
+    {
+      toimenkuvat,
+      koulutukset,
+      toiminnot,
+      muutOsaamiset,
+      muutOsaamisetVapaateksti,
+    },
   );
 
   // Determines if osaamiset from a specific source should be visible. Id is the id of the source (eg. koulutus or toimenkuva).
@@ -58,6 +66,8 @@ const Competences = () => {
     () => [...osaamiset].sort(sortByProperty(`osaaminen.nimi.${locale}`)),
     [osaamiset, locale],
   );
+
+  const osaamisetTotal = React.useMemo(() => new Set(osaamiset.map((o) => o.osaaminen.uri)).size, [osaamiset]);
 
   return (
     <MainLayout
@@ -87,6 +97,15 @@ const Competences = () => {
         <ProfileSectionTitle type="OSAAMISENI" title={title} />
         <p className="mb-5 text-body-lg-mobile sm:text-body-lg">{t('profile.competences.description')}</p>
         <InfoBox text={t('profile.competences.info')} />
+        <div
+          className="sm:max-w-md mb-8 flex items-center gap-5 rounded-md bg-white px-6 py-5 text-accent"
+          data-testid="competences-added-competences"
+        >
+          <span className="text-heading-2">{t('profile.summary.added-competences')}</span>
+          <span className="font-semibold text-[1.75rem]" data-testid="competences-added-competences-total">
+            {osaamisetTotal}
+          </span>
+        </div>
         <div>
           {!lg && (
             <Modal

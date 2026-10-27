@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Accordion, Button, EmptyState, Tag } from '@jod/design-system';
+import { Accordion, Button, cx, EmptyState, Tag } from '@jod/design-system';
 import { JodArrowRight } from '@jod/design-system/icons';
 
 import { OSAAMINEN_COLOR_MAP } from '@/constants';
@@ -11,7 +11,7 @@ import { useIsSessionExpired, useYksiloProfileLinkData } from '@/stores/useSessi
 import { removeDuplicatesByKey } from '@/utils';
 import { getLinkTo } from '@/utils/routeUtils';
 
-import { generateProfileLink, getTextClassByCompetenceSourceType } from '../utils';
+import { generateProfileLink, getBgClassByProfileSectionType, getIconByProfileSectionType } from '../utils';
 import { type CompetenceSourceType, FILTERS_ORDER, type GroupByProps, type MobileFilterButton } from './constants';
 
 interface SourceSectionProps extends Omit<GroupByProps, 'filterKeys'> {
@@ -114,6 +114,14 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
     );
   };
 
+  const visibleOsaamiset = React.useMemo(
+    () =>
+      nonDuplicateOsaamiset.filter(
+        (val) => val.lahde.tyyppi === sourceType && isOsaaminenVisible(sourceType, val.lahde.id),
+      ),
+    [nonDuplicateOsaamiset, sourceType, isOsaaminenVisible],
+  );
+
   const { ref, handleKeyDown } = useArrowKeyControls(nonDuplicateOsaamiset);
 
   return (
@@ -121,18 +129,31 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
       <Accordion
         underline
         title={
-          <div className={`truncate text-heading-3 ${getTextClassByCompetenceSourceType(sourceType)}`}>
-            {accordionLabels[sourceType]}
+          <div
+            className="mb-1 flex min-w-0 items-center gap-3 text-heading-3 text-primary-gray"
+            data-testid={`competences-accordion-title-${sourceType.toLowerCase()}`}
+          >
+            <span
+              className={cx(
+                'flex size-6 shrink-0 items-center justify-center rounded-full text-white [&>svg]:size-4',
+                getBgClassByProfileSectionType(sourceType),
+              )}
+              aria-hidden
+            >
+              {getIconByProfileSectionType(sourceType)}
+            </span>
+            <span className="truncate">
+              {accordionLabels[sourceType]} (
+              <span data-testid={`competences-visible-osaamiset-total`}>{visibleOsaamiset.length}</span>)
+            </span>
           </div>
         }
-        ariaLabel={accordionLabels[sourceType]}
+        ariaLabel={`${accordionLabels[sourceType]} (${visibleOsaamiset.length})`}
         testId={`competences-accordion-${sourceType.toLowerCase()}`}
       >
         {Array.isArray(filters[sourceType]) && filters[sourceType].some((filter) => filter.checked) ? (
           <div className="mt-5 flex flex-col gap-7">
-            {nonDuplicateOsaamiset.some(
-              (val) => val.lahde.tyyppi === sourceType && isOsaaminenVisible(sourceType, val.lahde.id),
-            ) && (
+            {visibleOsaamiset.length > 0 && (
               <ul className="flex flex-wrap gap-4" ref={ref} onKeyDown={handleKeyDown}>
                 {nonDuplicateOsaamiset.map((val) => {
                   const label = val.osaaminen.nimi[locale] ?? val.osaaminen.uri;
@@ -142,7 +163,9 @@ const SourceSection = ({ sourceType, osaamiset, filters, locale, isOsaaminenVisi
                       <Tag
                         label={label}
                         tooltip={tooltip}
-                        screenReaderTooltip={t('description-for', { description: tooltip })}
+                        screenReaderTooltip={t('description-for', {
+                          description: tooltip,
+                        })}
                         variant="presentation"
                         sourceType={OSAAMINEN_COLOR_MAP[val.lahde.tyyppi]}
                         testId={`competences-tag`}

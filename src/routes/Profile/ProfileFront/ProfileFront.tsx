@@ -1,4 +1,5 @@
 import { Trans, useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router';
 
 import { IconHeading, MainLayout, useMediaQueries } from '@jod/design-system';
 import { JodUser } from '@jod/design-system/icons';
@@ -8,6 +9,8 @@ import { useSessionManagerStore } from '@/stores/useSessionManagerStore';
 
 import { ProfileNavigationList } from '../components';
 import { ToolCard } from '../components/ToolCard';
+import type { ProfileSummary as ProfileSummaryData } from './loader';
+import { ProfileSummary } from './ProfileSummary';
 
 const ListItem = ({ label }: { label: string }) => <li className="ml-6 list-disc">{label}</li>;
 
@@ -18,6 +21,7 @@ const ProfileFront = () => {
   } = useTranslation();
   const { lg } = useMediaQueries();
   const firstName = useSessionManagerStore((s) => s.user?.etunimi);
+  const summary = useLoaderData<ProfileSummaryData>();
 
   return (
     <MainLayout
@@ -47,6 +51,7 @@ const ProfileFront = () => {
           <p className="mb-3 font-poppins text-body-lg-mobile sm:text-body-lg">
             {t('profile.preferences.ingress-text')}
           </p>
+          <ProfileSummary summary={summary} />
           <div>
             <p>{t('profile.preferences.list-1-title')}</p>
             <ul>

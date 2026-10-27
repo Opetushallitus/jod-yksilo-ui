@@ -63,7 +63,7 @@
     },
     "move-to-service": "Gå till tjänsten",
     "osaamispolku-description": "Livet förändras – och vi finns här för att stötta dig. Oavsett om du byter bransch, lär dig något nytt eller förbättrar din vardag, ger vi dig lättförståelig information och inspiration för att stötta din egen väg.",
-    "title": "Kompetensprofil"
+    "title": "Kompetensprofil/CV"
   },
   "date-or-continues-placeholder": "dd.mm.åååå",
   "datepicker": {
@@ -116,7 +116,7 @@
     "educational-institution-or-education-provider": "Läroanstalt eller utbildningsanordnare",
     "education-provider-or-education": "Utbildningsanordnare/utbildning",
     "identify-competences": "Identifiera kompetenser",
-    "import-education-history": "Importera din utbildningshistorik",
+    "import-education-history": "Importera utbildningshistorik från Studieinfo",
     "name-of-degree-or-education": "Namn på examen eller utbildning",
     "summary": "Sammanfattning"
   },
@@ -136,7 +136,7 @@
       "description-2": "Du kan importera dina studieprestationer till avsnittet Utbildningshistorik i din kompetensprofil genom att ge tillstånd till detta i Studieinfo.<br>Välj <strong>Gå till Studieinfo</strong> och ge tillstånd att hämta uppgifterna. Därefter återvänder du automatiskt till tjänsten. När du har återvänt kan du välja vilka utbildningar du vill importera.",
       "import-button": "Gå till Studieinfo",
       "import-redirect-fail": "Det gick inte att öppna Studieinfo. Vänligen försök igen.",
-      "title": "Importera din utbildningshistorik"
+      "title": "Importera utbildningshistorik från Studieinfo"
     },
     "summary-modal": {
       "cancel-modal": {
@@ -217,7 +217,7 @@
   "home": {
     "card-1-content": "Hitta utbildnings- och karriärmöjligheter som passar just dig. Använd tjänsten snabbt utan att logga in, du kan senare logga in och spara dina uppgifter.\n",
     "card-1-title": "Hitta snabbt lämpliga utbildnings- och karriärmöjligheter",
-    "card-2-content": "Logga in i tjänsten och identifiera dina styrkor och intressen. Spara din arbets- och utbildningshistorik för senare bruk.\n",
+    "card-2-content": "Logga in och identifiera dina styrkor och intresseområden. Importera uppgifter från ditt CV och spara din arbets- och utbildningshistorik för framtida bruk.",
     "card-2-title": "Logga in och kartlägg din kompetens i närmare detalj",
     "create-own-profile": "Skapa din egen kompetensprofil",
     "explore-opportunities": "Hitta möjligheter",
@@ -395,7 +395,7 @@
   "link-copy-failed": "Länken kunde inte kopieras",
   "login-for-favorites": "Logga in på Kompetensstigen för att spara favoriter och granska dem senare.",
   "login-to-service": "Logga in",
-  "map-competences": "Kartlägg kompetenser",
+  "map-competences": "Betona kompetenser",
   "more-actions": "Lägg till alternativ",
   "move-to-service": "Öppna tjänsten",
   "my-competence-path": "Min kompetensstig",
@@ -521,18 +521,6 @@
       "file-too-large": "Filen är för stor (max 2 MB).",
       "import-data": "Importera data",
       "import-from-cv": "Importera från CV",
-      "invalid-file-type": "Endast PDF-filer stöds.",
-      "result-info": "När importen är klar hittar du dina uppgifter på <WorkHistoryLink>arbetsplatser</WorkHistoryLink>-, <FreeTimeActivitiesLink>fritidsaktiviteter</FreeTimeActivitiesLink>- och <EducationHistoryLink>utbildningar</EducationHistoryLink> -sidorna",
-      "save": {
-        "failed": {
-          "description": "CV-sparning misslyckades",
-          "title": "Sparning misslyckades"
-        },
-        "success": {
-          "description": "CV sparades framgångsrikt",
-          "title": "Sparning lyckades"
-        }
-      },
       "info-selection": {
         "activities": {
           "loading": "Hämtar fritidsaktiviteter",
@@ -551,6 +539,38 @@
         },
         "importing": "Importerar data",
         "importing-done": "Importeringen lyckades.",
+        "title": "Välj information att importera",
+        "work": {
+          "loading": "Hämtar arbetslivserfarenhet",
+          "no-data": "Ingen arbetslivserfarenhet identifierades",
+          "title": "Arbete"
+        }
+      },
+      "invalid-file-type": "Endast PDF-filer stöds.",
+      "result-info": "När importen är klar hittar du dina uppgifter på <WorkHistoryLink>arbetsplatser</WorkHistoryLink>-, <FreeTimeActivitiesLink>fritidsaktiviteter</FreeTimeActivitiesLink>- och <EducationHistoryLink>utbildningar</EducationHistoryLink> -sidorna",
+      "save": {
+        "failed": {
+          "description": "CV-sparning misslyckades",
+          "title": "Sparning misslyckades"
+        },
+        "success": {
+          "description": "CV sparades framgångsrikt",
+          "title": "Sparning lyckades"
+        }
+      },
+      "summary": {
+        "activities": {
+          "loading": "Hämtar fritidsaktiviteter",
+          "no-data": "Inga fritidsaktiviteter identifierades",
+          "title": "Fritidsaktiviteter"
+        },
+        "description": "Välj vilka uppgifter du vill importera från ditt CV. Efter importen kan du redigera och komplettera informationen på sidorna utbildning, arbete och fritidsaktiviteter.",
+        "education": {
+          "loading": "Hämtar utbildningshistorik",
+          "no-data": "Ingen utbildningsdata identifierades",
+          "title": "Utbildning"
+        },
+        "importing": "Importerar data",
         "title": "Välj information att importera",
         "work": {
           "loading": "Hämtar arbetslivserfarenhet",
@@ -588,10 +608,10 @@
       "title": "Importera och exportera dina uppgifter"
     },
     "koski-import": {
-      "button-label": "Importera utbildningshistorik",
+      "button-label": "Importera utbildningshistorik från Studieinfo",
       "description": "Du kan importera utbildningshistorikdata som sparats i de nationella studie-, utbildnings- och examensregistren som en del av Min kompetensstig.",
       "result-info": "När importen är klar hittar du dina uppgifter på <EducationHistoryLink>utbildningar</EducationHistoryLink>-sidan",
-      "title": "Importera utbildningshistorik"
+      "title": "Importera din utbildningshistorik från Studieinfo"
     },
     "personal-details": {
       "description": "Du kan redigera e-postadress.",
@@ -601,11 +621,11 @@
       "copy-failure": "Kopiering av länken misslyckades",
       "copy-link": "Kopiera länk",
       "copy-success": "Länken har kopierats till urklipp",
-      "create-new-link": "Skapa ny delningslänk",
+      "create-new-link": "Skapa en ny delbar CV-länk",
       "delete-confirm-description": "Är du säker på att du vill ta bort delningslänken?",
-      "delete-confirm-title": "Ta bort delningslänk",
+      "delete-confirm-title": "Ta bort länken för delbart CV",
       "delete-link": "Ta bort länk",
-      "description": "Med en delningslänk kan du dela din information med valda personer. Du bestämmer själv vilken information du vill dela med länken. Mottagaren behöver inte logga in på Osaamispolku-tjänsten.\n\nObservera att vem som helst som fått länken kan öppna den så länge din skapade delningslänk är giltig. Dela länken endast med betrodda parter eller personer som du vill ska kunna se din delade information. Du kan när som helst ta bort länken du skapat. Efter borttagning kan din information inte längre ses via länken.",
+      "description": "Du kan skapa en delbar CV-länk till din kompetensprofil. Du kan dela dina uppgifter med de personer du önskar. Du bestämmer själv vilka uppgifter du vill dela via länken. Den som får länken behöver inte logga in på tjänsten Osaamispolku.\n\nObservera att vem som helst som får länken kan öppna den så länge den CV-länk du skapat är giltig. Dela länken endast med sådana pålitliga parter eller personer som du vill ska kunna se den information du delar. Du kan när som helst ta bort länken du har skapat. Efter att du har tagit bort den går det inte längre att se din information via länken.",
       "edit-link": "Redigera",
       "link-has-expired": "Länken har gått ut.",
       "modal": {
@@ -634,12 +654,12 @@
         "expires-on": "Giltig till",
         "name": "Länkens namn",
         "name-placeholder": "T.ex. länk till Matti Meikäläinens profil",
-        "title-add": "Skapa delningslänk",
-        "title-edit": "Redigera delningslänk"
+        "title-add": "Skapa en delad CV-länk",
+        "title-edit": "Redigera den delade CV-länken"
       },
-      "no-links": "Inga delningslänkar",
+      "no-links": "Inga delningsbara CV-länkar",
       "preview": "Förhandsgranska",
-      "title": "Dela din kompetensprofil",
+      "title": "Dela din kompetensprofil som CV",
       "valid-until": "Giltig till: {{date}}"
     },
     "tmt-import-export": {
@@ -734,7 +754,7 @@
       "title": "Importera och exportera data"
     },
     "education-history": {
-      "description": "Nedan hittar du din utbildningshistorik. Du kan själv lägga till uppgifter i din utbildningshistorik och kartlägga den kompetens som är kopplad till dem. Du kan också importera dina egna studieprestationer från de nationella studie-, utbildnings- och examensregistren som en del av din utbildningshistorik (Studieinfo).",
+      "description": "Du kan själv lägga till dina utbildningar och kartlägga kompetenser som anknyter till dem. Du kan också importera dina studieprestationer från de nationella studie-, utbildnings- och examensregistren (Studieinfo). Importera dina utbildningar på sidan Importera och exportera uppgifter. Andra utbildningar, till exempel utbildningar som ordnas av arbetsgivaren, kan du lägga till själv.",
       "description-generic": "Nedan hittar du din utbildningshistorik. Du kan själv lägga till uppgifter i din utbildningshistorik och kartlägga den kompetens som är kopplad till dem.",
       "empty": "Du har ännu inte lagt till några utbildningar.",
       "modals": {
@@ -800,11 +820,11 @@
     },
     "login-page": {
       "description": "Genom att logga in får du tillgång till en personlig kompetensprofil som hjälper dig att hantera och utnyttja din kunskap effektivt.\n",
-      "list-1-item-1": "Dina kompetenser: spara din arbets- och utbildningshistorik samt dina meriter, importera dina utbildningsuppgifter från Min Studieinfo och dina arbetshistorikuppgifter från jobbsökarprofilen på Jobbmarknaden eller importera dina uppgifter från ditt CV.",
-      "list-1-item-2": "Dina intressen: identifiera sådant som intresserar dig.",
+      "list-1-item-1": "Kompetenser: importera eller spara dina kompetenser på ett ställe från ditt CV, Studieinfo eller Jobbmarknaden.",
+      "list-1-item-2": "Intressen: identifiera vad som motiverar och intresserar dig.",
       "list-1-item-3": "Favoritinnehåll: spara och hantera utbildnings- och karriärmöjligheter som intresserar just dig.",
-      "list-1-item-4": "Dina mål: sätt upp mål och planera vägar för att nå dem.",
-      "list-1-item-5": "Kompetensprofilens inställningar: bestäm hur och var dina uppgifter används och vem du delar dem till.",
+      "list-1-item-4": "Mål: sätt upp karriärmål och skapa din egen väg framåt",
+      "list-1-item-5": "Importera och exportera uppgifter samt inställningar: importera dina uppgifter från ditt CV, Studieinfo eller Jobbmarknaden. Bestäm själv hur dina uppgifter används och delas.",
       "list-2-item-1": "Du ser all information om din kunskap och dina intressen på en och samma plats.",
       "list-2-item-2": "Identifiera dina styrkor genom din arbets- och utbildningshistorik samt dina fritidsintressen.",
       "list-2-item-3": "Använd din kompetensprofil för att hitta utbildnings- och karriärmöjligheter som passar just dig.",
@@ -927,6 +947,80 @@
       "empty": "Du har ännu inte lagt till några andra kunskaper.",
       "my-other-comptetences": "Mina kunskaper",
       "title": "Annan kompetens"
+    },
+    "summary": {
+      "added-competences": "Tillagda kompetenser",
+      "competences": {
+        "education-history": {
+          "empty": "Du har ännu inte identifierat kompetenser från utbildningar",
+          "filled_one": "Du har identifierat {{count}} kompetens från utbildningar",
+          "filled_other": "Du har identifierat {{count}} kompetenser från utbildningar",
+          "label": "Utbildningar"
+        },
+        "free-time-activities": {
+          "empty": "Du har ännu inte identifierat kompetenser från fritidsaktiviteter",
+          "filled_one": "Du har identifierat {{count}} kompetens från fritidsaktiviteter",
+          "filled_other": "Du har identifierat {{count}} kompetenser från fritidsaktiviteter",
+          "label": "Fritidsaktiviteter"
+        },
+        "interests": {
+          "empty": "Du har ännu inte lagt till intressanta kompetenser",
+          "filled_one": "Du har lagt till {{count}} intressant kompetens",
+          "filled_other": "Du har lagt till {{count}} intressanta kompetenser",
+          "label": "Intressen"
+        },
+        "something-else": {
+          "empty": "Du har ännu inte lagt till annan kompetens",
+          "filled_one": "Du har lagt till {{count}} annan kompetens",
+          "filled_other": "Du har lagt till {{count}} andra kompetenser",
+          "label": "Annan kompetens"
+        },
+        "work-history": {
+          "empty": "Du har ännu inte identifierat kompetenser från arbetsplatser",
+          "filled_one": "Du har identifierat {{count}} kompetens från arbetsplatser",
+          "filled_other": "Du har identifierat {{count}} kompetenser från arbetsplatser",
+          "label": "Arbetsplatser"
+        }
+      },
+      "sections": {
+        "education-history": {
+          "empty": "Du har ännu inte lagt till utbildningar",
+          "filled_one": "Du har lagt till {{count}} utbildning i din profil",
+          "filled_other": "Du har lagt till {{count}} utbildningar i din profil",
+          "label": "Utbildningar"
+        },
+        "favorites": {
+          "empty": "Du har ännu inte sparat favoriter",
+          "filled_one": "Du har sparat {{count}} favorit",
+          "filled_other": "Du har sparat {{count}} favoriter",
+          "label": "Favoriter"
+        },
+        "free-time-activities": {
+          "empty": "Du har ännu inte lagt till fritidsaktiviteter",
+          "filled_one": "Du har lagt till {{count}} fritidsaktivitet i din profil",
+          "filled_other": "Du har lagt till {{count}} fritidsaktiviteter i din profil",
+          "label": "Fritidsaktiviteter"
+        },
+        "goals": {
+          "empty": "Du har ännu inte lagt till mål",
+          "filled_one": "Du har lagt till {{count}} mål i din profil",
+          "filled_other": "Du har lagt till {{count}} mål i din profil",
+          "label": "Mål"
+        },
+        "interests": {
+          "empty": "Du har ännu inte lagt till intressen",
+          "filled_one": "Du har lagt till {{count}} intresse i din profil",
+          "filled_other": "Du har lagt till {{count}} intressen i din profil",
+          "label": "Intressen"
+        },
+        "work-history": {
+          "empty": "Du har ännu inte lagt till arbetsplatser",
+          "filled_one": "Du har lagt till {{count}} arbetsplats i din profil",
+          "filled_other": "Du har lagt till {{count}} arbetsplatser i din profil",
+          "label": "Arbetsplatser"
+        }
+      },
+      "title": "Sammanfattning av din kompetensprofil"
     },
     "work-history": {
       "description": "Nedan hittar du din arbetshistorik. Du kan själv lägga till din arbetshistorik och kartlägga dina relaterade kunskaper.\n",
@@ -1153,7 +1247,7 @@
           "x-added": "{{count}} intressen tillagda"
         }
       },
-      "title": "Dina uppgifter",
+      "title": "Fyll först i dina uppgifter",
       "virtual-assistant": {
         "conversation": "Konversation",
         "error": "Fel vid generering av svar. Försök igen med samma eller ny input.",
@@ -1185,7 +1279,7 @@
             "year": "1 år"
           },
           "day": "0d",
-          "max-aria-label": "Maximilängd",
+          "max-aria-label": "Maximilängd, 6 år och längre utbildningar",
           "min-aria-label": "Minimilängd",
           "month": "1mån",
           "year": "1år"
@@ -1213,11 +1307,11 @@
     },
     "title": "Hitta möjligheter",
     "tools": {
+      "career-planning-statistics-additional-resource": "<CustomLink>Information som stöd för karriärplaneringen i informationstjänsten<Icon></Icon></CustomLink>",
       "compass-additional-resource": "<CustomLink>Kompetensbehovs­kompassen<Icon></Icon></CustomLink> erbjuder information om arbetslivets kompetensbehov.",
       "compass-url": "https://www.osaamistarvekompassi.fi",
       "counseling-additional-resource": "<CustomLink>Väglednings- och rådgivningstjänster<Icon></Icon></CustomLink> samlar tjänster där du kan få stöd i att reflektera över karriär- och utbildningsalternativ, vilket hjälper dig att bedöma och utveckla dina färdigheter i karriärplanering.",
       "counseling-url": "https://www.suomi.fi/amne/vaglednings-och-radgivningstjanster",
-      "career-planning-statistics-additional-resource": "<CustomLink>Information som stöd för karriärplaneringen i informationstjänsten<Icon></Icon></CustomLink>",
       "description": "Bekanta dig med följande webbplatser om du behöver hjälp med att reflektera över din situation:",
       "education-history": "Utbildningar",
       "free-time-activities": "Fritidsaktiviteter",
@@ -1295,7 +1389,7 @@
         "by-relevance": "Mest lämpliga",
         "title": "Organisera möjligheterna"
       },
-      "title": "Dina möjligheter"
+      "title": "Hitta sedan dina möjligheter"
     }
   },
   "tooltip": {
