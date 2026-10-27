@@ -7,7 +7,7 @@ set -e -o pipefail
 # Usage (Git Bash on Windows): MSYS_NO_PATHCONV=1 ./scripts/sync-feature-flags.sh FEATURE_NAME <true|false> [FEATURE_NAME <true|false> ...]
 
 # Configuration
-SSM_PREFIX="/jod/config/jod.feature.flags"
+SSM_PREFIX="/jod/yksilo/jod.feature.flags"
 S3_PATH="yksilo/config/features.json"
 
 # Valid features from Feature.java enum
