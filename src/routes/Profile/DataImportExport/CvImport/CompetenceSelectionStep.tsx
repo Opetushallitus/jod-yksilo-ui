@@ -24,9 +24,7 @@ interface SectionProps {
   headerText: string;
   rows?: ExperienceTableRowData[];
   onCompetenceChange: () => void;
-  description?: React.ReactNode;
-  nonDetecting?: boolean;
-  failingDetection?: string;
+  failingDetection: string;
 }
 
 interface SubrowAccordionProps {
@@ -94,24 +92,15 @@ const CompetenceTags = ({ competences, onCompetenceChange }: CompetenceTagsProps
 interface SubrowCompetencesProps {
   subrow: ExperienceTableRowData;
   onCompetenceChange: () => void;
-  nonDetecting?: boolean;
-  failingDetection?: string;
+  failingDetection: string;
 }
 
-const SubrowCompetences = ({ subrow, onCompetenceChange, nonDetecting, failingDetection }: SubrowCompetencesProps) => {
+const SubrowCompetences = ({ subrow, onCompetenceChange, failingDetection }: SubrowCompetencesProps) => {
   const { t } = useTranslation();
   const title = getLocalizedText(subrow.nimi);
   const competences = uniqueCompetences(subrow.osaamiset);
 
-  if (nonDetecting) {
-    return (
-      <SubrowAccordion title={title}>
-        <ImportInfoBox>{t('preferences.cv-import.competence-selection.activities.non-detecting')}</ImportInfoBox>
-      </SubrowAccordion>
-    );
-  }
-
-  if (failingDetection && competences.length === 0) {
+  if (competences.length === 0) {
     return (
       <SubrowAccordion title={title}>
         <ImportInfoBox>{failingDetection}</ImportInfoBox>
@@ -131,15 +120,7 @@ const SubrowCompetences = ({ subrow, onCompetenceChange, nonDetecting, failingDe
   );
 };
 
-const Section = ({
-  titleText,
-  headerText,
-  rows,
-  onCompetenceChange,
-  description,
-  nonDetecting,
-  failingDetection,
-}: SectionProps) => {
+const Section = ({ titleText, headerText, rows, onCompetenceChange, failingDetection }: SectionProps) => {
   const { t } = useTranslation();
 
   if (!rows?.length) {
@@ -149,7 +130,6 @@ const Section = ({
   return (
     <div>
       <h2 className="mb-6 text-heading-2-mobile sm:text-heading-2">{titleText}</h2>
-      {description && <div className="mb-6">{description}</div>}
       <div className="px-4">
         <div className="mb-6 flex w-full flex-row justify-between border-b-2 border-primary-5-light-2 text-primary-gray">
           <p className="text-heading-5-mobile sm:text-heading-5">{headerText}</p>
@@ -164,7 +144,6 @@ const Section = ({
                   <SubrowCompetences
                     subrow={subrow}
                     onCompetenceChange={onCompetenceChange}
-                    nonDetecting={nonDetecting}
                     failingDetection={failingDetection}
                   />
                 </div>
@@ -211,8 +190,7 @@ export const CompetenceSelectionStep = ({ convertedData }: CompetenceSelectionSt
           headerText={t('free-time-activities.theme-or-activity')}
           rows={getSelectedRows(convertedData?.activities)}
           onCompetenceChange={rerender}
-          description={<Trans i18nKey="preferences.cv-import.competence-selection.activities.description" />}
-          nonDetecting
+          failingDetection={t('preferences.cv-import.competence-selection.activities.failing-detection')}
         />
       </div>
     </div>
