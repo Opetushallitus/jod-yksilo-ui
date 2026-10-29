@@ -495,13 +495,12 @@
       },
       "competence-selection": {
         "activities": {
-          "description": "Competences gained from recreational activities are not automatically detected. You can add competences yourself on the Recreational activities page.",
-          "non-detecting": "Automatic detection of competences is not available in this section.",
+          "failing-detection": "No competences were automatically detected for this activity. You can add competences later in the Recreational activities section.",
           "title": "Recreational activities"
         },
         "add-competence": "Add a competence by clicking the '+' sign",
         "competences": "Competences",
-        "description": "Then select the competences suited to education and workplaces from the options suggested by artificial intelligence. You can also add and edit competences later.",
+        "description": "Then select the competences suited to education, workplaces and recreational activities from the options suggested by artificial intelligence. You can also add and edit competences later.",
         "education": {
           "failing-detection": "Automatic detection of competences failed. You can add and edit competences later in the Education section.",
           "title": "Education"

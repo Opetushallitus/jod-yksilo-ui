@@ -4,23 +4,18 @@ import { getEducationHistoryTableRows, type Koulutuskokonaisuus } from '@/routes
 import { getWorkHistoryTableRows, type Tyopaikka } from '@/routes/Profile/WorkHistory/utils';
 
 export const buildSaveDto = (data: CvImportConvertedData): components['schemas']['CvTehtavaSaveDto'] => {
-  const toValinta = (
-    rows: ExperienceTableRowData[],
-    includeOsaamiset = false,
-  ): components['schemas']['CvValinta'][] => {
+  const toValinta = (rows: ExperienceTableRowData[]): components['schemas']['CvValinta'][] => {
     return rows
       .filter((row) => (row.subrows ?? []).some((s) => s.checked ?? false))
       .map((row) => {
         const selectedSubrows = (row.subrows ?? []).filter((s) => s.checked ?? false);
         const lapset: components['schemas']['CvLapsi'][] = selectedSubrows.map((subrow) => ({
           id: subrow.key,
-          ...(includeOsaamiset && {
-            osaamiset: Array.from(
-              new Set(
-                subrow.osaamiset.filter((osaaminen) => osaaminen.checked ?? false).map((osaaminen) => osaaminen.id),
-              ),
+          osaamiset: Array.from(
+            new Set(
+              subrow.osaamiset.filter((osaaminen) => osaaminen.checked ?? false).map((osaaminen) => osaaminen.id),
             ),
-          }),
+          ),
         }));
         return {
           id: row.key,
@@ -31,8 +26,8 @@ export const buildSaveDto = (data: CvImportConvertedData): components['schemas']
   };
 
   return {
-    koulutuskokonaisuudet: toValinta(data.education, true),
-    tyopaikat: toValinta(data.work, true),
+    koulutuskokonaisuudet: toValinta(data.education),
+    tyopaikat: toValinta(data.work),
     teemat: toValinta(data.activities),
   };
 };
