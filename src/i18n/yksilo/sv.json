@@ -803,6 +803,25 @@
       },
       "title": "Fritidsaktiviteter"
     },
+    "front": {
+      "title": "Hej {{name}} - välkommen till din kompetensprofil",
+      "ingress": "I kompetensprofilen kan du samla dina kompetenser, erfarenheter och mål. Ju mer heltäckande du fyller i din profil, desto bättre lämpade arbets- och utbildningsmöjligheter kan tjänsten föreslå dig.",
+      "opportunities": {
+        "title": "Hitta intressanta arbets- och studiemöjligheter",
+        "list": "<ul><li>När du har fyllt i uppgifterna i din profil kan du söka rekommendationer om arbets- och utbildningsmöjligheter som motsvarar din kompetens på sidan <strong>Hitta möjligheter</strong></li><li>Med <strong>reglagen</strong> kan du välja om resultaten ska betona dina intressen eller din nuvarande kompetens</li><li>Spara intressanta arbets- och utbildningsmöjligheter i <strong>Favoriter</strong></li><li>Planera din egen lär- och karriärstig på sidan <strong>Mål</strong></li></ul>",
+        "button": "Hitta möjligheter"
+      },
+      "control": {
+        "title": "Bestäm själv hur din profil används",
+        "list-title": "Profilen är din. Du bestämmer:",
+        "list": "<ul><li>vilka uppgifter du sparar i din profil</li><li>för vilka ändamål dina uppgifter används</li><li>hur uppgifterna i din profil kan utnyttjas</li></ul>",
+        "preferences-button": "Inställningar",
+        "share-description": "Om du vill kan du dela profilen med personer du väljer.",
+        "share-button": "Profilens delningslänk"
+      },
+      "legal": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på <LawLink>lagen om den nationella informationsresursen för kompetenser</LawLink>. Läs mer om grunderna för behandlingen av uppgifter i <PrivacyLink>dataskyddsbeskrivningen</PrivacyLink>.",
+      "legal-link": "https://www.finlex.fi/sv/lagstiftning/2025/1449"
+    },
     "index": "Kompetensprofil",
     "interests": {
       "add-interests": "Lägg till intressen",
