@@ -802,6 +802,25 @@
       },
       "title": "Vapaa-ajan toiminnot"
     },
+    "front": {
+      "title": "Hei {{name}} - tervetuloa osaamisprofiiliisi",
+      "ingress": "Osaamisprofiilissa voit koota yhteen osaamisesi, kokemuksesi ja tavoitteesi. Mitä kattavammin täytät profiiliasi, sitä sopivampia työ- ja koulutusmahdollisuuksia palvelu voi ehdottaa sinulle.",
+      "opportunities": {
+        "title": "Löydä kiinnostavia työ- ja opiskelumahdollisuuksia",
+        "list": "<ul><li>Kun olet täyttänyt profiilisi tiedot, voit etsiä osaamistasi vastaavia suosituksia työ- ja koulutusmahdollisuuksista <strong>Löydä mahdollisuuksia</strong>-sivulla</li><li><strong>Säätimistä</strong> voit valita, painotetaanko tuloksissa enemmän kiinnostuksia vai nykyistä osaamistasi</li><li>Tallenna kiinnostavia työ- ja koulutusmahdollisuuksia <strong>Suosikkeihin</strong></li><li>Suunnittele omaa oppimis- ja urapolkuasi <strong>Tavoitteet</strong>-sivulla</li></ul>",
+        "button": "Löydä mahdollisuuksia"
+      },
+      "control": {
+        "title": "Päätä itse profiilisi käytöstä",
+        "list-title": "Profiili on sinun. Sinä päätät:",
+        "list": "<ul><li>mitä tietoja tallennat profiiliisi</li><li>mihin tarkoituksiin tietojasi käytetään</li><li>miten profiilisi tietoja voidaan hyödyntää</li></ul>",
+        "preferences-button": "Asetukset",
+        "share-description": "Halutessasi voit jakaa profiilin valitsemillesi henkilöille.",
+        "share-button": "Profiilin jakolinkki"
+      },
+      "legal": "Osaamisprofiilin tietojen käsittely perustuu <LawLink>lakiin valtakunnallisesta osaamistietovarannosta</LawLink>. Lue lisää tietojen käsittelyn perusteista <PrivacyLink>tietosuojaselosteesta</PrivacyLink>.",
+      "legal-link": "https://www.finlex.fi/fi/lainsaadanto/2025/1449"
+    },
     "index": "Osaamisprofiili",
     "interests": {
       "add-interests": "Lisää kiinnostuksia",
