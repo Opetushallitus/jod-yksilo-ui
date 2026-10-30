@@ -804,6 +804,25 @@
       },
       "title": "Recreational activities"
     },
+    "front": {
+      "title": "Hello {{name}} – Welcome to your competence profile",
+      "ingress": "In the competence profile, you can bring together your competences, experiences and goals. The more comprehensively you fill in your profile, the better suited the work and education opportunities the service can suggest to you.",
+      "opportunities": {
+        "title": "Find interesting work and study opportunities",
+        "list": "<ul><li>Once you have filled in your profile, you can search for recommended work and education opportunities matching your competences on the <strong>Find opportunities</strong> page</li><li>With the <strong>controls</strong>, you can choose whether the results emphasise your interests or your current competences</li><li>Save interesting work and education opportunities to <strong>Favourites</strong></li><li>Plan your own learning and career path on the <strong>Goals</strong> page</li></ul>",
+        "button": "Find opportunities"
+      },
+      "control": {
+        "title": "Decide for yourself how your profile is used",
+        "list-title": "Your profile is yours. You decide:",
+        "list": "<ul><li>what information you save in your profile</li><li>for which purposes your information is used</li><li>how the information in your profile can be utilised</li></ul>",
+        "preferences-button": "Settings",
+        "share-description": "If you wish, you can share your profile with people of your choice.",
+        "share-button": "Profile share link"
+      },
+      "legal": "The processing of competence profile data is based on the <LawLink>Act on the national competence data repository</LawLink>. Read more about the grounds for data processing in the <PrivacyLink>privacy policy</PrivacyLink>.",
+      "legal-link": "https://www.finlex.fi/en/legislation/2025/1449"
+    },
     "index": "Competence profile",
     "interests": {
       "add-interests": "Add interests",
