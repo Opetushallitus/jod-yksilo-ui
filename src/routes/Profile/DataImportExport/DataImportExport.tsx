@@ -45,7 +45,7 @@ const DataImportExport = () => {
         {hasImportExportContent && (
           <>
             <section>
-              <h2 className="mb-3 text-heading-2-mobile sm:text-heading-2">{t('preferences.import-export.title')}</h2>
+              <h2 className="mb-5 text-heading-2-mobile sm:text-heading-2">{t('preferences.import-export.title')}</h2>
 
               <div className="flex flex-col gap-7">
                 {isFeatureEnabled('TMT_INTEGRATION') && hasTmtToiminto && <TmtImportExport />}
