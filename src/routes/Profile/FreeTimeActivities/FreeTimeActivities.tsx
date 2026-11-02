@@ -10,7 +10,7 @@ import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { EditVapaaAjanTeemaModal } from '@/routes/Profile/FreeTimeActivities/modals/EditVapaaAjanToimintoModal';
 
 import { CompetencesTour } from '../CompetencesTour';
-import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { ImportDataLinkButton, ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import { FreeTimeActivitiesWizard } from './FreeTimeActivitiesWizard';
 import { AddOrEditToimintoModal } from './modals/AddOrEditToimintoModal';
@@ -95,6 +95,7 @@ const FreeTimeActivities = () => {
           addNewNestedLabel={t('free-time-activities.add-new-activity')}
           rows={rows}
           onAddClick={guardedAction(showModal, FreeTimeActivitiesWizard)}
+          secondaryAction={<ImportDataLinkButton testId="free-time-activities-import" />}
           onRowClick={(row) => guardedAction(onRowClick, row)()}
           onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
           onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}

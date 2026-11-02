@@ -10,8 +10,16 @@ const loader = (async ({ request }) => {
     ? client.GET('/api/profiili/jakolinkki', { signal: request.signal }).catch(() => ({ data: [] }))
     : Promise.resolve({ data: [] }));
 
+  const { data: koulutuskokonaisuudet = [] } = await (isFeatureEnabled('KOSKI')
+    ? client.GET('/api/profiili/koulutuskokonaisuudet', { signal: request.signal }).catch(() => ({ data: [] }))
+    : Promise.resolve({ data: [] }));
+
   return {
     jakolinkit: [...jakolinkit].sort(sortByProperty('voimassaAsti')),
+    pendingTunnistusKoulutusIds: koulutuskokonaisuudet
+      .flatMap((kk) => kk.koulutukset ?? [])
+      .filter((k) => k.osaamisetOdottaaTunnistusta && k.id)
+      .map((k) => k.id!),
   };
 }) satisfies LoaderFunction<components['schemas']['YksiloCsrfDto'] | null>;
 

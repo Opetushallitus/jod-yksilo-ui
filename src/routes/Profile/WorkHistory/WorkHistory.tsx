@@ -11,7 +11,7 @@ import EditTyonantajaModal from '@/routes/Profile/WorkHistory/modals/EditTyonant
 import { WorkHistoryWizard } from '@/routes/Profile/WorkHistory/WorkHistoryWizard';
 
 import { CompetencesTour } from '../CompetencesTour';
-import { ProfileNavigationList, ProfileSectionTitle } from '../components';
+import { ImportDataLinkButton, ProfileNavigationList, ProfileSectionTitle } from '../components';
 import { ToolCard } from '../components/ToolCard';
 import AddOrEditToimenkuvaModal from './modals/AddOrEditToimenkuvaModal';
 import { Tyopaikka, getWorkHistoryTableRows } from './utils';
@@ -97,6 +97,7 @@ const WorkHistory = () => {
           addNewNestedLabel={t('work-history.add-new-job-description')}
           rows={rows}
           onAddClick={guardedAction(showModal, WorkHistoryWizard)}
+          secondaryAction={<ImportDataLinkButton source="TMT" testId="work-history-import" />}
           onRowClick={(row) => guardedAction(onRowClick, row)()}
           onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
           onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}
