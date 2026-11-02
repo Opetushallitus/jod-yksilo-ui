@@ -11,6 +11,8 @@ interface ExperienceTableProps {
   addNewNestedLabel?: string;
   rows: ExperienceTableRowData[];
   onAddClick?: () => void;
+  /** Additional action element rendered next to the add button */
+  secondaryAction?: React.ReactNode;
   onRowClick?: (row: ExperienceTableRowData) => void;
   onNestedRowClick?: (row: ExperienceTableRowData) => void;
   onAddNestedRowClick?: (row: ExperienceTableRowData) => void;
@@ -41,6 +43,7 @@ export const ExperienceTable = ({
   addNewNestedLabel,
   rows,
   onAddClick,
+  secondaryAction,
   onRowClick,
   onNestedRowClick,
   onAddNestedRowClick,
@@ -363,7 +366,9 @@ export const ExperienceTable = ({
         </table>
       )}
       {onAddClick && addNewLabel && (
-        <div className="mb-[84px] px-5 sm:px-6">
+        <div
+          className={cx('mb-[84px] flex gap-4 px-5 sm:px-6', rows.length === 0 ? 'flex-wrap' : 'flex-col items-end')}
+        >
           <Button
             ariaHaspopup="dialog"
             variant="accent"
@@ -371,6 +376,7 @@ export const ExperienceTable = ({
             onClick={onAddClick}
             testId="experience-table-add"
           />
+          {secondaryAction}
         </div>
       )}
     </div>

@@ -610,6 +610,7 @@
     },
     "koski-import": {
       "button-label": "Import education history from Studyinfo",
+      "competences-identifying": "You can import more education once the competences of previously imported education have been identified.",
       "description": "You can import your education history data stored in the national study, education and qualification registers as part of My Competency Path.",
       "result-info": "After the import is complete, you can find your information on the <EducationHistoryLink>Education</EducationHistoryLink> page.",
       "title": "Import your education history from Studyinfo"
@@ -752,6 +753,13 @@
     },
     "data-import-export": {
       "description": "On this page, you can manage your profile's data import and export settings. You can share your profile via a link and import data from other services. You decide what data you share and with whom.",
+      "import-link": {
+        "cv": "Import data from CV",
+        "cv-or-koski": "Import data from CV or Studyinfo",
+        "cv-or-tmt": "Import data from CV or Job Market Finland",
+        "koski": "Import data from Studyinfo",
+        "tmt": "Import data from Job Market Finland"
+      },
       "title": "Import and export data"
     },
     "education-history": {

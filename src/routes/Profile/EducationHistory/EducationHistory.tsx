@@ -2,11 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData, useRevalidator } from 'react-router';
 
-import { Button, EmptyState, MainLayout, useMediaQueries } from '@jod/design-system';
+import { EmptyState, MainLayout, useMediaQueries } from '@jod/design-system';
 import { JodError } from '@jod/design-system/icons';
 
 import { Breadcrumb, ExperienceTable, type ExperienceTableRowData } from '@/components';
-import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import { useModal } from '@/hooks/useModal';
 import { useSessionGuardedAction } from '@/hooks/useSessionGuardedAction';
 import { EducationHistoryWizard } from '@/routes/Profile/EducationHistory/EducationHistoryWizard';
@@ -14,7 +13,7 @@ import EditKoulutuskokonaisuusModal from '@/routes/Profile/EducationHistory/moda
 import { useHasToiminto } from '@/stores/useSessionManagerStore';
 
 import { CompetencesTour } from '../CompetencesTour';
-import { ProfileSectionTitle } from '../components';
+import { ImportDataLinkButton, ProfileSectionTitle } from '../components';
 import { ProfileNavigationList } from '../components/index';
 import { ToolCard } from '../components/ToolCard';
 import loader from './loader';
@@ -38,7 +37,7 @@ const EducationHistory = () => {
   const [baselineKoulutusIds, setBaselineKoulutusIds] = React.useState<string[] | null>(null);
   const [koulutuksetThatNeedUserVerification, setKoulutuksetThatNeedUserVerification] = React.useState<string[]>([]);
   const guardedAction = useSessionGuardedAction();
-  const { openImportStartModal, refreshData } = useKoskiImport();
+  const { refreshData } = useKoskiImport();
 
   React.useEffect(() => {
     const importedData = Array.from(
@@ -193,43 +192,17 @@ const EducationHistory = () => {
         <ExperienceTable
           ariaLabel={title}
           mainColumnHeader={t('education-history.education-provider-or-education')}
+          addNewLabel={t('education-history.add-new-education')}
           addNewNestedLabel={t('education-history.add-studies-to-this-education')}
           rows={rows}
+          onAddClick={guardedAction(showModal, EducationHistoryWizard)}
+          secondaryAction={<ImportDataLinkButton source="KOSKI" testId="education-history-import" />}
           koulutuksetThatNeedUserVerification={koulutuksetThatNeedUserVerification}
           verifyKoulutusOsaamiset={verifyKoulutusOsaamiset}
           onRowClick={(row) => guardedAction(onRowClick, row)()}
           onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
           onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}
         />
-      </div>
-      <div className="flex space-x-4 px-5 sm:px-6">
-        <div className="mb-[84px]">
-          <Button
-            variant="accent"
-            ariaHaspopup="dialog"
-            label={t('education-history.add-new-education')}
-            onClick={guardedAction(showModal, EducationHistoryWizard)}
-            testId="education-history-add"
-          />
-        </div>
-        {hasKoskiToiminto && (
-          <div>
-            <TooltipWrapper
-              tooltipPlacement="top"
-              tooltipContent={t('competences-identifying')}
-              tooltipOpen={isOsaamisetTunnistusOngoing ? undefined : false}
-            >
-              <Button
-                ariaHaspopup="dialog"
-                variant="white"
-                label={t('education-history.import-education-history')}
-                onClick={guardedAction(openImportStartModal)}
-                disabled={isOsaamisetTunnistusOngoing}
-                testId="education-history-import"
-              />
-            </TooltipWrapper>
-          </div>
-        )}
       </div>
       {lg ? null : (
         <div className="px-5">

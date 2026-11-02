@@ -609,6 +609,7 @@
     },
     "koski-import": {
       "button-label": "Importera utbildningshistorik från Studieinfo",
+      "competences-identifying": "Du kan importera fler utbildningar när kompetenserna för tidigare importerade utbildningar har identifierats.",
       "description": "Du kan importera utbildningshistorikdata som sparats i de nationella studie-, utbildnings- och examensregistren som en del av Min kompetensstig.",
       "result-info": "När importen är klar hittar du dina uppgifter på <EducationHistoryLink>utbildningar</EducationHistoryLink>-sidan",
       "title": "Importera din utbildningshistorik från Studieinfo"
@@ -751,6 +752,13 @@
     },
     "data-import-export": {
       "description": "På den här sidan kan du hantera profilinställningarna för import och export av data. Du kan dela din profil via en länk och importera data från andra tjänster. Du bestämmer vilka uppgifter du delar och med vem.",
+      "import-link": {
+        "cv": "Importera uppgifter från CV",
+        "cv-or-koski": "Importera uppgifter från CV eller Studieinfo",
+        "cv-or-tmt": "Importera uppgifter från CV eller Jobbmarknaden",
+        "koski": "Importera uppgifter från Studieinfo",
+        "tmt": "Importera uppgifter från Jobbmarknaden"
+      },
       "title": "Importera och exportera data"
     },
     "education-history": {
