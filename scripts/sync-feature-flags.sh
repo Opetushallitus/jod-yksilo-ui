@@ -25,6 +25,7 @@ VALID_FEATURES=(
   # UI-only flag, not in Feature.java. Flip to true when the backend starts serving TOL 2025
   # toimiala codes; the UI ships both codesets and picks one at runtime.
   "TOIMIALA_TOL2025"
+  "SAMANKALTAISET_MAHDOLLISUUDET"
 )
 
 # Colors for output
