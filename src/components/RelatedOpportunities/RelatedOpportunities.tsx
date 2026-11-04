@@ -77,8 +77,7 @@ const OpportunityCarousel = ({
       items={opportunities.map((mahdollisuus) => ({
         id: mahdollisuus.id,
         component: (
-          // The wrapper makes the card fill the whole slide, so the cards are of equal height
-          <div className="grid w-full">
+          <div className="grid w-full min-w-0 grid-cols-1 wrap-break-word">
             <OpportunityCard
               as="div"
               to={`/${i18n.language}/${getTypeSlug(mahdollisuus.mahdollisuusTyyppi)}/${mahdollisuus.id}`}
