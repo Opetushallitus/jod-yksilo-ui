@@ -2,7 +2,6 @@ import type { LoaderFunction } from 'react-router';
 
 import { client } from '@/api/client';
 import type { components } from '@/api/schema';
-import { ESCO_OCCUPATION_PREFIX } from '@/constants';
 import type { YksiloLoaderContext } from '@/stores/useSessionManagerStore';
 
 type OsaamisenLahdeTyyppi = components['schemas']['OsaamisenLahdeDto']['tyyppi'];
@@ -21,7 +20,6 @@ export interface ProfileSummary {
     tyopaikat: number;
     koulutukset: number;
     vapaaAjanToiminnot: number;
-    kiinnostukset: number;
     muutOsaamiset: number;
   };
 }
@@ -40,8 +38,6 @@ export default (async ({ request }) => {
     ]);
 
   const kiinnostukset = kiinnostuksetRes.data?.kiinnostukset ?? [];
-  // Interesting occupations are not competences, so only the interesting skills are counted as added competences
-  const kiinnostavatOsaamiset = kiinnostukset.filter((uri) => !uri.startsWith(ESCO_OCCUPATION_PREFIX));
   const osaamiset = osaamisetRes.data ?? [];
 
   // The same competence may be identified from several sources of the same type (eg. two workplaces), count it once
@@ -58,11 +54,10 @@ export default (async ({ request }) => {
       tavoitteet: tavoitteetRes.data?.length ?? 0,
     },
     osaamiset: {
-      total: new Set([...osaamiset.map((o) => o.osaaminen.uri), ...kiinnostavatOsaamiset]).size,
+      total: new Set(osaamiset.map((o) => o.osaaminen.uri)).size,
       tyopaikat: countUniqueOsaamiset('TOIMENKUVA'),
       koulutukset: countUniqueOsaamiset('KOULUTUS'),
       vapaaAjanToiminnot: countUniqueOsaamiset('TOIMINTO'),
-      kiinnostukset: kiinnostavatOsaamiset.length,
       muutOsaamiset: countUniqueOsaamiset('MUU_OSAAMINEN'),
     },
   } satisfies ProfileSummary;
