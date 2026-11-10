@@ -1,8 +1,19 @@
-export const OpportunityCardSkeleton = ({ small = false }: { small?: boolean }) => {
+import { cx } from '@jod/design-system';
+
+interface OpportunityCardSkeletonProps {
+  small?: boolean;
+  /** Same as in OpportunityCard, so that the skeleton has the border of the card it stands for */
+  borderClassName?: string;
+}
+
+export const OpportunityCardSkeleton = ({ small = false, borderClassName }: OpportunityCardSkeletonProps) => {
   return (
     <li
       aria-hidden="true"
-      className="animate-pulse flex list-none flex-col gap-y-4 rounded bg-white p-5 shadow-border sm:p-6"
+      className={cx(
+        'animate-pulse flex list-none flex-col gap-y-4 rounded bg-white p-5 sm:p-6',
+        borderClassName ?? 'shadow-border',
+      )}
     >
       {/* Actions section with favorite button */}
       <div className="mb-3 flex flex-row items-center justify-between">

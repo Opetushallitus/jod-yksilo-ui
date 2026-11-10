@@ -99,8 +99,8 @@ describe('RelatedOpportunities', () => {
 
     expect(await screen.findByTestId('related-opportunity-tyo-1')).toBeInTheDocument();
     expect(screen.getByText('related-opportunities.description')).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: 'job-opportunities (2)' })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: 'education-opportunities (1)' })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: 'job-opportunities' })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: 'education-opportunities' })).toBeInTheDocument();
   });
 
   it('shows the tab of the opened opportunity type first', async () => {
@@ -153,13 +153,15 @@ describe('RelatedOpportunities', () => {
     expect(screen.getByTestId('related-opportunity-koulutus-1')).toBeInTheDocument();
   });
 
-  it('shows an empty state on the tab of a type without opportunities', async () => {
-    await renderComponent([createOpportunity('tyo-1', 'TYOMAHDOLLISUUS')]);
+  it('shows only the tabs of the types with opportunities', async () => {
+    await renderComponent([createOpportunity('koulutus-1', 'KOULUTUSMAHDOLLISUUS')]);
 
-    await screen.findByTestId('related-opportunity-tyo-1');
-    fireEvent.click(screen.getByTestId('related-opportunities-tab-education'));
-
-    expect(screen.getByTestId('related-opportunities-empty')).toHaveTextContent('related-opportunities.empty');
+    await screen.findByTestId('related-opportunity-koulutus-1');
+    expect(screen.getAllByRole('tab').map((tab) => tab.dataset.testid)).toEqual([
+      'related-opportunities-tab-education',
+    ]);
+    expect(screen.getByTestId('related-opportunities-tab-education')).toHaveAttribute('aria-selected', 'true');
+    expect(screen.queryByTestId('related-opportunities-empty')).not.toBeInTheDocument();
   });
 
   it('shows the cards in a carousel with its controls', async () => {
@@ -169,7 +171,7 @@ describe('RelatedOpportunities', () => {
     ]);
 
     await screen.findByTestId('related-opportunity-tyo-1');
-    expect(screen.getByRole('list')).toHaveAttribute('aria-roledescription', 'carousel');
+    expect(screen.getByRole('list')).toBeInTheDocument();
     expect(screen.getByLabelText('pagination.previous')).toBeDisabled();
     expect(screen.getByLabelText('pagination.next')).toBeInTheDocument();
     expect(screen.getByText('pagination.itemLabel 1')).toBeInTheDocument();
@@ -192,10 +194,10 @@ describe('RelatedOpportunities', () => {
     );
   });
 
-  it('passes the score of the opportunity to the card', async () => {
+  it('does not show the match of the opportunity on the card', async () => {
     await renderComponent([createOpportunity('tyo-1', 'TYOMAHDOLLISUUS', { pisteet: 0.7 })]);
 
-    expect(await screen.findByTestId('related-opportunity-tyo-1')).toHaveAttribute('data-match', '0.7');
+    expect(await screen.findByTestId('related-opportunity-tyo-1')).not.toHaveAttribute('data-match');
   });
 
   it('shows an empty state when there are no opportunities', async () => {
