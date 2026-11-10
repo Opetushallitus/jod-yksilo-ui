@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
-import { cx, Tooltip, TooltipContent, TooltipTrigger } from '@jod/design-system';
+import { cx } from '@jod/design-system';
 
 import { TooltipWrapper } from '@/components/Tooltip/TooltipWrapper';
 import {
@@ -30,52 +30,57 @@ interface CompetenceItem {
   tooltip: string;
 }
 
+const CountTooltip = ({ tooltip, children }: { tooltip: string; children: React.ReactNode }) => (
+  <TooltipWrapper
+    tooltipContent={tooltip}
+    tooltipPlacement="top"
+    className="max-w-3xs sm:text-body-sm"
+    triggerClassName="cursor-pointer"
+  >
+    <button type="button">{children}</button>
+  </TooltipWrapper>
+);
+
 const SectionCard = ({ item }: { item: SectionItem }) => {
-  const descriptionId = React.useId();
   const isFilled = item.count > 0;
 
   return (
-    <li className="min-h-[76px]">
-      <Link
-        to={item.to}
-        aria-describedby={descriptionId}
+    <li
+      className={cx(
+        'group relative flex min-h-[76px] items-center gap-3 rounded-md p-4 sm:flex-col sm:justify-center sm:gap-2 sm:px-3 sm:py-5',
+        'has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-accent',
+        isFilled ? item.filledClassName : 'bg-white',
+      )}
+    >
+      <span
         className={cx(
-          'group flex h-full items-center gap-3 rounded-md p-4 sm:flex-col sm:justify-center sm:gap-2 sm:px-3 sm:py-5',
-          isFilled ? item.filledClassName : 'bg-white',
+          'flex aspect-square size-[28px] shrink-0 items-center justify-center rounded-full text-white sm:size-6 [&>svg]:size-5',
+          getBgClassByProfileSectionType(item.type),
         )}
-        data-testid={`profile-summary-section-${item.testId}`}
+        aria-hidden
       >
-        <span
-          className={cx(
-            'flex aspect-square size-[28px] shrink-0 items-center justify-center rounded-full text-white sm:size-6 [&>svg]:size-5',
-            getBgClassByProfileSectionType(item.type),
-          )}
-          aria-hidden
+        {getIconByProfileSectionType(item.type)}
+      </span>
+      <span className="max-w-full min-w-0 font-arial text-body-md wrap-break-word hyphens-auto sm:text-center">
+        <Link
+          to={item.to}
+          className="font-bold group-hover:underline after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+          data-testid={`profile-summary-section-${item.testId}`}
         >
-          {getIconByProfileSectionType(item.type)}
+          {item.label}
+        </Link>
+        <span className="relative z-10">
+          &nbsp;
+          <CountTooltip tooltip={item.tooltip}>
+            {isFilled ? (
+              <span>
+                (<span data-testid={`profile-summary-section-count-${item.testId}`}>{item.count}</span>)
+              </span>
+            ) : (
+              <span data-testid={`profile-summary-section-count-${item.testId}`}>-</span>
+            )}
+          </CountTooltip>
         </span>
-        <Tooltip placement="top">
-          <TooltipTrigger asChild noAriaDescribedby>
-            <span className="max-w-full min-w-0 font-arial text-body-md wrap-break-word hyphens-auto sm:text-center">
-              <span className="font-bold group-hover:underline">{item.label}</span>
-              {isFilled ? (
-                <span>
-                  &nbsp;(<span data-testid={`profile-summary-section-count-${item.testId}`}>{item.count}</span>)
-                </span>
-              ) : (
-                <span data-testid={`profile-summary-section-count-${item.testId}`} className="hidden sm:inline">
-                  &nbsp;-
-                </span>
-              )}
-            </span>
-          </TooltipTrigger>
-          <TooltipContent className="max-w-3xs z-50 rounded-md bg-primary-gray p-4 font-arial text-body-sm text-white">
-            {item.tooltip}
-          </TooltipContent>
-        </Tooltip>
-      </Link>
-      <span id={descriptionId} className="sr-only">
-        {item.tooltip}
       </span>
     </li>
   );
@@ -83,14 +88,14 @@ const SectionCard = ({ item }: { item: SectionItem }) => {
 
 const CompetenceCount = ({ item }: { item: CompetenceItem }) => (
   <li className="flex">
-    <TooltipWrapper tooltipContent={item.tooltip} tooltipPlacement="top" className="sm:text-body-sm">
-      <span className="font-arial text-body-md" data-testid={`profile-summary-competences-${item.testId}`}>
-        {item.label}&nbsp;&nbsp;
+    <span className="font-arial text-body-md" data-testid={`profile-summary-competences-${item.testId}`}>
+      {item.label}&nbsp;&nbsp;
+      <CountTooltip tooltip={item.tooltip}>
         <span data-testid={`profile-summary-competences-count-${item.testId}`}>
           {item.count > 0 ? item.count : '-'}
         </span>
-      </span>
-    </TooltipWrapper>
+      </CountTooltip>
+    </span>
   </li>
 );
 
@@ -209,15 +214,6 @@ export const ProfileSummary = ({ summary }: { summary: ProfileSummaryData }) => 
           : t('profile.summary.competences.free-time-activities.empty'),
     },
     {
-      testId: 'interests',
-      label: t('profile.summary.competences.interests.label'),
-      count: o.kiinnostukset,
-      tooltip:
-        o.kiinnostukset > 0
-          ? t('profile.summary.competences.interests.filled', { count: o.kiinnostukset })
-          : t('profile.summary.competences.interests.empty'),
-    },
-    {
       testId: 'something-else',
       label: t('profile.summary.competences.something-else.label'),
       count: o.muutOsaamiset,
@@ -247,7 +243,7 @@ export const ProfileSummary = ({ summary }: { summary: ProfileSummaryData }) => 
             {o.total}
           </span>
         </Link>
-        <ul className="grid grid-cols-1 gap-x-8 gap-y-3 font-arial sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-3 sm:pl-5">
+        <ul className="grid grid-cols-1 gap-x-8 gap-y-3 font-arial sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-2 sm:pl-5">
           {competences.map((item) => (
             <CompetenceCount key={item.testId} item={item} />
           ))}
