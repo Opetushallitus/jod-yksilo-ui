@@ -102,6 +102,7 @@ interface ActionsSectionProps {
   matchValue?: number;
   matchLabel?: string;
   isActiveOpportunity?: boolean;
+  className?: string;
 }
 
 const ActionsSection = ({
@@ -116,6 +117,7 @@ const ActionsSection = ({
   matchValue,
   matchLabel,
   isActiveOpportunity,
+  className,
 }: ActionsSectionProps) => {
   const hasMatchInfo = typeof matchValue === 'number' && matchLabel;
   const nothingToShow = hideFavorite && !menuId && !menuContent && !actionButtonContent && !hasMatchInfo;
@@ -123,7 +125,7 @@ const ActionsSection = ({
   return nothingToShow ? (
     <></>
   ) : (
-    <div className="flex flex-row items-center justify-between sm:mb-3">
+    <div className={cx('flex flex-row items-center justify-between sm:mb-3', className)}>
       {isActiveOpportunity === false && <InActiveTag name={name} />}
       {hasMatchInfo ? (
         <div
@@ -222,52 +224,64 @@ export const OpportunityCardWrapper = ({
     </>
   );
 
+  const actionsSection = (className?: string) => (
+    <ActionsSection
+      hideFavorite={!!hideFavorite}
+      menuId={menuId}
+      menuContent={menuContent}
+      isFavorite={isFavorite}
+      onToggleFavorite={onToggleFavorite}
+      name={name}
+      isLoggedIn={isLoggedIn}
+      actionButtonContent={actionButtonContent}
+      matchValue={matchValue}
+      matchLabel={matchLabel}
+      isActiveOpportunity={isActiveOpportunity}
+      className={className}
+    />
+  );
+
   const triggerId = `${name}-trigger`;
   const contentId = `${name}-content`;
 
   return (
     <Component
-      className={cx('flex flex-col gap-y-4 rounded bg-white p-5 sm:p-6', borderClassName ?? 'shadow-border')}
+      className={cx(
+        'flex flex-col gap-y-4 rounded bg-white p-5 sm:p-6',
+        // The focus ring of the title link is around the whole card
+        'outline-offset-2 has-[[data-testid=opportunity-card-title-link]:focus-visible]:outline-2 has-[[data-testid=opportunity-card-title-link]:focus-visible]:outline-accent has-[[data-testid=opportunity-card-title-link]:focus-visible]:outline-solid',
+        borderClassName ?? 'shadow-border',
+      )}
       data-testid="opportunity-card"
     >
-      <ActionsSection
-        hideFavorite={!!hideFavorite}
-        menuId={menuId}
-        menuContent={menuContent}
-        isFavorite={isFavorite}
-        onToggleFavorite={onToggleFavorite}
-        name={name}
-        isLoggedIn={isLoggedIn}
-        actionButtonContent={actionButtonContent}
-        matchValue={matchValue}
-        matchLabel={matchLabel}
-        isActiveOpportunity={isActiveOpportunity}
-      />
       {collapsible ? (
-        <Accordion
-          initialState={!initiallyCollapsed}
-          title={
-            <div className="flex flex-col">
-              <OpportunityCardHeader
-                to={to}
-                name={name}
-                mahdollisuusTyyppi={mahdollisuusTyyppi}
-                mahdollisuusAlityyppi={mahdollisuusAlityyppi}
-                headingLevel={headingLevel}
-                from={from}
-                rateId={rateId}
-              />
-            </div>
-          }
-          ariaLabel={name}
-          triggerId={triggerId}
-          ariaControls={contentId}
-          data-testid="opportunity-card-accordion"
-        >
-          <section id={contentId} className="mt-3">
-            {content}
-          </section>
-        </Accordion>
+        <>
+          {actionsSection()}
+          <Accordion
+            initialState={!initiallyCollapsed}
+            title={
+              <div className="flex flex-col">
+                <OpportunityCardHeader
+                  to={to}
+                  name={name}
+                  mahdollisuusTyyppi={mahdollisuusTyyppi}
+                  mahdollisuusAlityyppi={mahdollisuusAlityyppi}
+                  headingLevel={headingLevel}
+                  from={from}
+                  rateId={rateId}
+                />
+              </div>
+            }
+            ariaLabel={name}
+            triggerId={triggerId}
+            ariaControls={contentId}
+            data-testid="opportunity-card-accordion"
+          >
+            <section id={contentId} className="mt-3">
+              {content}
+            </section>
+          </Accordion>
+        </>
       ) : (
         <>
           <OpportunityCardHeader
@@ -279,6 +293,8 @@ export const OpportunityCardWrapper = ({
             from={from}
             rateId={rateId}
           />
+          {/* The title comes first for assistive technologies, but the actions are shown above it */}
+          {actionsSection('order-first')}
           <>{content}</>
         </>
       )}
@@ -327,7 +343,7 @@ const OpportunityCardHeader = ({
               ]);
             }
           }}
-          className="order-2"
+          className="order-2 focus-visible:outline-none"
         >
           <TitleTag
             className={`text-card-heading-mobile hyphens-auto sm:text-card-heading ${textColorClassName} pb-2 hover:underline`}
