@@ -305,7 +305,7 @@ const Root = () => {
         </ServiceVariantProvider>
       </LogoutFormContext.Provider>
 
-      <Chatbot />
+      <Chatbot ariaLabel={t('common:chatbot.name')} />
 
       <Footer
         language={language}

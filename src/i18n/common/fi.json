@@ -1,6 +1,9 @@
 {
   "breadcrumb": "Murupolku",
   "cancel": "Peruuta",
+  "chatbot": {
+    "name": "Neuvontabotti"
+  },
   "close-menu": "Sulje valikko",
   "competency-path-portal": "Osaamispolun etusivu",
   "cookie-consent": {

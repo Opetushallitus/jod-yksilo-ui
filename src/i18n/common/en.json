@@ -1,6 +1,9 @@
 {
   "breadcrumb": "Trail of breadcrumbs",
   "cancel": "Cancel",
+  "chatbot": {
+    "name": "Advisory Bot"
+  },
   "close-menu": "Close the menu",
   "competency-path-portal": "Front page of Competency Path",
   "cookie-consent": {

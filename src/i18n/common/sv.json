@@ -1,6 +1,9 @@
 {
   "breadcrumb": "Synlig sökväg",
   "cancel": "Avbryt",
+  "chatbot": {
+    "name": "Rådgivningsbot"
+  },
   "close-menu": "Stäng menyn",
   "competency-path-portal": "Kompetensstigens ingångssida",
   "cookie-consent": {
