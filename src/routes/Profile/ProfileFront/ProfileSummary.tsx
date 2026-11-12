@@ -243,7 +243,7 @@ export const ProfileSummary = ({ summary }: { summary: ProfileSummaryData }) => 
             {o.total}
           </span>
         </Link>
-        <ul className="grid grid-cols-1 gap-x-8 gap-y-3 font-arial sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-2 sm:pl-5">
+        <ul className="grid grid-cols-1 gap-x-8 gap-y-1 font-arial sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-[auto_auto] sm:content-center sm:pl-5">
           {competences.map((item) => (
             <CompetenceCount key={item.testId} item={item} />
           ))}
