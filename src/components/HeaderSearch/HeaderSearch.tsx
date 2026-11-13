@@ -33,6 +33,7 @@ export const HeaderSearch = ({ searchInputVisible, setSearchInputVisible }: Head
         ariaLabel={t('search.label')}
         searchLabel={t('search.search')}
         testId="searchbar"
+        serviceVariant="yksilo"
       />
     )
   );
