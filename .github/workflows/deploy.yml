@@ -56,14 +56,14 @@ jobs:
             -f sha="$COMMIT_SHA"
 
       - name: Download dist artifact
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: dist
           github-token: ${{ github.token }}
           run-id: ${{ inputs.run-id || github.run_id }}
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7 # v6
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
         with:
           role-to-assume: arn:aws:iam::${{ secrets.JOD_AWS_ACCOUNT_ID }}:role/${{ secrets.JOD_AWS_GITHUB_ROLE_NAME}}
           aws-region: eu-west-1
