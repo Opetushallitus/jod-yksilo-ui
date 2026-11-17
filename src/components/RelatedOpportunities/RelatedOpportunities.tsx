@@ -92,7 +92,7 @@ const OpportunityCarousel = ({
       items={opportunities.map((mahdollisuus) => ({
         id: mahdollisuus.id,
         component: (
-          <div className="grid w-full min-w-0 grid-cols-1 wrap-break-word">
+          <div className="grid w-full min-w-0 grid-cols-1 wrap-anywhere">
             <OpportunityCard
               as="div"
               to={`/${i18n.language}/${getTypeSlug(mahdollisuus.mahdollisuusTyyppi)}/${mahdollisuus.id}`}

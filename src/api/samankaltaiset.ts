@@ -1,6 +1,7 @@
 import type { components } from '@/api/schema';
 import i18n, { type LangCode } from '@/i18n/config';
 import type { MahdollisuusTyyppi, TypedMahdollisuus } from '@/routes/types';
+import { mapKoulutusCodesToLabels } from '@/utils/codes/codes';
 
 import { ammatit } from './ammatit';
 import { client } from './client';
@@ -42,6 +43,11 @@ const emptySamankaltaiset = (): Samankaltaiset => ({
   opportunities: [],
   ammattiryhmaNimet: {},
 });
+
+const withKoulutusalaLabels = (koulutusmahdollisuudet: TypedMahdollisuus[]) =>
+  mapKoulutusCodesToLabels(koulutusmahdollisuudet).catch(() =>
+    koulutusmahdollisuudet.map((m) => ({ ...m, yleisinKoulutusala: undefined })),
+  );
 
 const fetchKohtaantoSamankaltaiset = async (
   lahdeId: string,
@@ -92,7 +98,7 @@ const fetchKohtaantoSamankaltaiset = async (
 
   const [tyomahdollisuudet, koulutusmahdollisuudet] = await Promise.all([
     getTypedTyoMahdollisuusDetails(idsByType('TYOMAHDOLLISUUS')),
-    getTypedKoulutusMahdollisuusDetails(idsByType('KOULUTUSMAHDOLLISUUS')),
+    getTypedKoulutusMahdollisuusDetails(idsByType('KOULUTUSMAHDOLLISUUS')).then(withKoulutusalaLabels),
   ]);
 
   const detailsById = new Map([...tyomahdollisuudet, ...koulutusmahdollisuudet].map((m) => [m.id, m]));
