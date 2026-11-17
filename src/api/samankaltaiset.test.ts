@@ -11,6 +11,10 @@ const mocks = vi.hoisted(() => ({
   getTypedTyoMahdollisuusDetails: vi.fn(),
   getTypedKoulutusMahdollisuusDetails: vi.fn(),
   ammatitFind: vi.fn(),
+  mapKoulutusCodesToLabels: vi.fn(),
+}));
+vi.mock('@/utils/codes/codes', () => ({
+  mapKoulutusCodesToLabels: mocks.mapKoulutusCodesToLabels,
 }));
 vi.mock('./ammatit', () => ({
   ammatit: { find: mocks.ammatitFind },
@@ -52,6 +56,26 @@ describe('getKohtaantoSamankaltaiset', () => {
       Promise.resolve(ids.map((id) => ({ id, otsikko, mahdollisuusTyyppi: 'KOULUTUSMAHDOLLISUUS' }))),
     );
     (ammatit.find as Mock).mockResolvedValue([]);
+    mocks.mapKoulutusCodesToLabels.mockImplementation((items: object[]) =>
+      Promise.resolve(items.map((m) => ({ ...m, yleisinKoulutusala: 'Tekniikan alat' }))),
+    );
+  });
+
+  it('shows the labels of the yleisinKoulutusala codes of the koulutusmahdollisuudet', async () => {
+    POST.mockResolvedValue({ data: [ehdotus('k-1', 'KOULUTUSMAHDOLLISUUS')] });
+
+    const { opportunities } = await getKohtaantoSamankaltaiset('id-1', source);
+
+    expect(opportunities.map((o) => o.yleisinKoulutusala)).toEqual(['Tekniikan alat']);
+  });
+
+  it('keeps the opportunities without the koulutusala when the labels cannot be fetched', async () => {
+    mocks.mapKoulutusCodesToLabels.mockRejectedValue(new Error('failed'));
+    POST.mockResolvedValue({ data: [ehdotus('k-1', 'KOULUTUSMAHDOLLISUUS')] });
+
+    const { opportunities } = await getKohtaantoSamankaltaiset('id-1', source);
+
+    expect(opportunities.map((o) => [o.id, o.yleisinKoulutusala])).toEqual([['k-1', undefined]]);
   });
 
   it('sends the osaamiset and the description of the opportunity to the suggestions', async () => {
