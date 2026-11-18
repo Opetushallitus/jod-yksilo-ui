@@ -492,7 +492,13 @@ const JobOpportunity = () => {
           {
             navTitle: t('related-opportunities.title'),
             showDivider: false,
-            content: <RelatedOpportunities samankaltaiset={kohtaantoOpportunities} tyyppi="TYOMAHDOLLISUUS" />,
+            content: (
+              <RelatedOpportunities
+                key={tyomahdollisuus.id}
+                samankaltaiset={kohtaantoOpportunities}
+                tyyppi="TYOMAHDOLLISUUS"
+              />
+            ),
           },
         ]
       : []),

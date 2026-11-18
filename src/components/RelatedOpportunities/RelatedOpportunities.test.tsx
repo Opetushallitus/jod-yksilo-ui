@@ -163,6 +163,30 @@ describe('RelatedOpportunities', () => {
     expect(pageIndicator(1)).toHaveAttribute('aria-pressed', 'false');
   });
 
+  it('shows the cards of a new opportunity keyed by its id when the selected tab has none of its type', async () => {
+    const samankaltaiset = (opportunities: SamankaltainenMahdollisuus[]) =>
+      Promise.resolve<Samankaltaiset>({ opportunities, ammattiryhmaNimet: {} });
+    const first = samankaltaiset([
+      createOpportunity('tyo-1', 'TYOMAHDOLLISUUS'),
+      createOpportunity('koulutus-1', 'KOULUTUSMAHDOLLISUUS'),
+    ]);
+    let rerender: ReturnType<typeof render>['rerender'] = () => undefined;
+    await act(async () => {
+      ({ rerender } = render(<RelatedOpportunities key="tyo-a" samankaltaiset={first} tyyppi="TYOMAHDOLLISUUS" />));
+    });
+    await screen.findByTestId('related-opportunity-tyo-1');
+
+    // The user opens another opportunity of the same type, so the component is rendered again with new suggestions
+    const second = samankaltaiset([createOpportunity('koulutus-2', 'KOULUTUSMAHDOLLISUUS')]);
+    await act(async () => {
+      rerender(<RelatedOpportunities key="tyo-b" samankaltaiset={second} tyyppi="TYOMAHDOLLISUUS" />);
+    });
+
+    await screen.findByTestId('related-opportunity-koulutus-2');
+    expect(screen.getByTestId('related-opportunities-tab-education')).toHaveAttribute('aria-selected', 'true');
+    expect(visibleCardIds()).toEqual(['related-opportunity-koulutus-2']);
+  });
+
   it('moves between the tabs with the arrow keys', async () => {
     await renderComponent([
       createOpportunity('tyo-1', 'TYOMAHDOLLISUUS'),

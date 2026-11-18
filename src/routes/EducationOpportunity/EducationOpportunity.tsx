@@ -171,7 +171,13 @@ const EducationOpportunity = () => {
           {
             navTitle: t('related-opportunities.title'),
             showDivider: false,
-            content: <RelatedOpportunities samankaltaiset={kohtaantoOpportunities} tyyppi="KOULUTUSMAHDOLLISUUS" />,
+            content: (
+              <RelatedOpportunities
+                key={koulutusmahdollisuus.id}
+                samankaltaiset={kohtaantoOpportunities}
+                tyyppi="KOULUTUSMAHDOLLISUUS"
+              />
+            ),
           },
         ]
       : []),
