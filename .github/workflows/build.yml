@@ -63,25 +63,6 @@ jobs:
       - name: Run build
         run: npm run build
 
-      - name: Run Playwright e2e tests
-        uses: docker://mcr.microsoft.com/playwright:v1.65.0-noble
-        with:
-          args: >-
-            bash -lc "export HOME=/root &&
-            npm install --global n &&
-            n 24.22.1 &&
-            hash -r &&
-            node --version &&
-            npx playwright test"
-
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
-
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@e805d875275f728fac1885b413934be6d7c63f65 # v8.4.1
         env:
@@ -93,10 +74,48 @@ jobs:
           name: dist
           path: dist/
 
+  e2e:
+    name: E2E tests
+    needs: build
+    runs-on: ubuntu-latest
+    container:
+      # Keep the version the same as @playwright/test in package.json, and update the digest with it.
+      image: mcr.microsoft.com/playwright:v1.65.0-noble@sha256:9beb546099e11f52d62e505537914870e01a67e0e6b00ae41da4775324e73dbe
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: lts/krypton
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts && npm exec allow-scripts run
+
+      - name: Download dist artifact
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: dist
+          path: dist/
+
+      - name: Run Playwright e2e tests
+        run: npm run test:e2e
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
   deploy-development:
     name: Deploy to development
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
-    needs: build
+    needs:
+      - build
+      - e2e
     uses: ./.github/workflows/deploy.yml
     permissions:
       id-token: write # Needed to interact with GitHub's OIDC Token endpoint
@@ -109,7 +128,9 @@ jobs:
   deploy-test:
     name: Deploy to test
     if: github.ref == 'refs/heads/main'
-    needs: build
+    needs:
+      - build
+      - e2e
     uses: ./.github/workflows/deploy.yml
     permissions:
       id-token: write # Needed to interact with GitHub's OIDC Token endpoint
@@ -122,7 +143,9 @@ jobs:
   deploy-production:
     name: Deploy to production
     if: github.ref == 'refs/heads/main'
-    needs: build
+    needs:
+      - build
+      - e2e
     uses: ./.github/workflows/deploy.yml
     permissions:
       id-token: write # Needed to interact with GitHub's OIDC Token endpoint

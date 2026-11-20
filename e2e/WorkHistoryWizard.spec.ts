@@ -1,29 +1,14 @@
-import { expect, test } from '@playwright/test';
+import { workHistory, workHistoryItem } from './data';
+import { confirmDeletion, expect, test } from './fixtures';
 
-import { competences, suggestedCompetences, workHistory, workHistoryItem } from './fixtures';
-import {
-  mockAuthenticatedUser,
-  mockFeatureFlags,
-  mockProfileWizard,
-  mockRedundantEndpoints,
-  mockSelectedCompetences,
-  mockSuggestedCompetences,
-} from './mocks';
-
-test.beforeEach(async ({ page }) => {
-  await mockRedundantEndpoints(page);
-  await mockFeatureFlags(page);
-  await mockAuthenticatedUser(page);
-  await mockSelectedCompetences(page, competences);
-  await mockSuggestedCompetences(page, suggestedCompetences, competences);
-  await mockProfileWizard(page, 'tyopaikat', workHistory);
-
-  await page.goto('/yksilo/fi/osaamisprofiili/osaamiset/tyopaikat');
-  await page.getByText('Hyväksy kaikki').click();
+test.beforeEach(async ({ backend }) => {
+  backend.signIn();
+  backend.tyopaikat = structuredClone(workHistory);
 });
 
-test('add new workhistory', async ({ page, isMobile }) => {
-  await mockProfileWizard(page, 'tyopaikat', []);
+test('add new workhistory', async ({ page, isMobile, open, backend }) => {
+  backend.tyopaikat = [];
+  await open('osaamisprofiili/osaamiset/tyopaikat');
   // Open wizard
   await page.getByRole('button', { name: 'Lisää uusi työpaikka' }).click();
 
@@ -75,11 +60,12 @@ test('add new workhistory', async ({ page, isMobile }) => {
   expect(payload).toEqual(workHistoryItem);
 });
 
-test('delete workhistory item', async ({ page }) => {
+test('delete workhistory item', async ({ page, open }) => {
+  await open('osaamisprofiili/osaamiset/tyopaikat');
   // Edit the first work history item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
   await page.getByRole('button', { name: 'Poista työpaikka' }).click();
-  const confirmButton = page.locator('button.ds\\:bg-alert-1', { hasText: 'Poista työpaikka' }).last();
+  const confirmButton = confirmDeletion(page);
   await expect(confirmButton).toBeVisible();
 
   const [request] = await Promise.all([
@@ -93,7 +79,8 @@ test('delete workhistory item', async ({ page }) => {
   expect(request.url()).toContain(expectedId);
 });
 
-test('edit workhistory item', async ({ page }) => {
+test('edit workhistory item', async ({ page, open }) => {
+  await open('osaamisprofiili/osaamiset/tyopaikat');
   // Edit the first work history item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
 
@@ -107,4 +94,68 @@ test('edit workhistory item', async ({ page }) => {
   const request = await requestPromise;
   const payload = JSON.parse(request.postData() || '{}');
   expect(payload.nimi.fi).toBe('Testiperson Oyj');
+});
+
+test('add a job title to an existing work place', async ({ page, open, backend }) => {
+  await open('osaamisprofiili/osaamiset/tyopaikat');
+
+  await page.getByRole('button', { name: 'Lisää uusi toimenkuva' }).click();
+  // The title of the dialog changes on each step.
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toHaveAccessibleName('Lisää uusi toimenkuva');
+  await dialog.getByRole('textbox', { name: 'Toimenkuva (pakollinen)' }).fill('Tiiminvetäjä');
+  await dialog.getByRole('textbox', { name: 'Alkoi (pakollinen)' }).fill('01.02.2005');
+  await dialog.getByRole('textbox', { name: 'Alkoi (pakollinen)' }).blur();
+  await dialog.getByRole('button', { name: 'Seuraava' }).click();
+  await dialog.getByRole('textbox', { name: 'Tunnista osaamisia' }).fill('kissa');
+  await dialog.getByRole('button', { name: 'eläinten anatomia' }).click();
+  await dialog.getByRole('button', { name: 'Tallenna' }).click();
+
+  await expect(dialog).toBeHidden();
+  await expect(
+    page.getByRole('table', { name: 'Työpaikat' }).getByRole('cell', { name: 'Tiiminvetäjä' }),
+  ).toBeVisible();
+  expect(backend.tyopaikat[0].toimenkuvat).toEqual([
+    expect.objectContaining({ nimi: { fi: 'Testaaja' } }),
+    expect.objectContaining({
+      nimi: { fi: 'Tiiminvetäjä' },
+      alkuPvm: '2005-02-01',
+      osaamiset: ['http://data.europa.eu/esco/skill/e286eddc-75e5-4ae3-966b-ec89c1c046ba'],
+    }),
+  ]);
+});
+
+test('edit a job title', async ({ page, open, backend }) => {
+  await open('osaamisprofiili/osaamiset/tyopaikat');
+
+  // The first edit button is for the work place, the second for its job title.
+  await page.getByRole('button', { name: 'Muokkaa' }).nth(1).click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toHaveAccessibleName('Muokkaa toimenkuvaa');
+  await dialog.getByRole('textbox', { name: 'Toimenkuva (pakollinen)' }).fill('Testipäällikkö');
+  await dialog.getByRole('textbox', { name: 'Loppui' }).fill('31.12.2010');
+  await dialog.getByRole('textbox', { name: 'Loppui' }).blur();
+  await dialog.getByRole('button', { name: 'Seuraava' }).click();
+  await dialog.getByRole('button', { name: 'Tallenna' }).click();
+
+  await expect(dialog).toBeHidden();
+  await expect(
+    page.getByRole('table', { name: 'Työpaikat' }).getByRole('cell', { name: 'Testipäällikkö' }),
+  ).toBeVisible();
+  expect(backend.tyopaikat[0].toimenkuvat?.[0]).toMatchObject({
+    nimi: { fi: 'Testipäällikkö' },
+    loppuPvm: '2010-12-31',
+  });
+});
+
+test('deleting the only job title removes the work place', async ({ page, open, backend }) => {
+  await open('osaamisprofiili/osaamiset/tyopaikat');
+
+  await page.getByRole('button', { name: 'Muokkaa' }).nth(1).click();
+  const dialog = page.getByRole('dialog', { name: 'Muokkaa toimenkuvaa' });
+  await dialog.getByRole('button', { name: 'Poista' }).click();
+  await confirmDeletion(page).click();
+
+  await expect(page.getByRole('table', { name: 'Työpaikat' })).toBeHidden();
+  expect(backend.tyopaikat).toEqual([]);
 });
