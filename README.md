@@ -68,6 +68,29 @@ npm run generate:schema
 
 Note that the backend needs to have all features enabled or the generated types may be incomplete.
 
+## End-to-end tests
+
+The Playwright tests in `e2e/` run against the UI only. The backend is replaced by an in-memory fake (`e2e/backend.ts`)
+that keeps the profile in memory and answers the public API from a small catalog of competences and opportunities
+(`e2e/catalog.ts`), so no backend or test environment is needed and the tests run in the build workflow on every pull
+request.
+
+```shell
+npm run test:e2e:install   # once, and after updating @playwright/test
+npm run test:e2e           # headless, on Chrome (desktop and mobile)
+npm run test:e2e:all       # on all browsers
+npm run test:e2e -- --project=firefox   # on the chosen browsers
+npm run test:e2e -- --ui   # watch and debug the tests in the Playwright UI
+```
+
+- The tests use port 8280, so that they never reuse a development server on port 8080 that proxies to a real backend.
+- Locally the tests start `vite dev` (or reuse one running on port 8280); in CI they run against `vite preview` of the
+  build.
+- By default the tests run on Chrome only (desktop and mobile), in CI on the bundled Chromium, to keep the runs fast.
+- A request the fake does not handle fails the test, so a new API call needs a handler in `e2e/backend.ts`.
+- The opportunity suggestions and the competence recognition are faked with predictable rules, so the tests check the
+  UI's part (what is sent, and how the results are ranked, filtered and shown), not the quality of the suggestions.
+
 ## Accessibility testing
 
 ### Axe

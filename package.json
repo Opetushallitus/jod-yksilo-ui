@@ -11,7 +11,9 @@
     "format": "oxfmt",
     "preview": "vite preview",
     "test:unit": "vitest --run",
+    "test:e2e:install": "playwright install --with-deps chromium firefox webkit",
     "test:e2e": "playwright test",
+    "test:e2e:all": "E2E_ALL_BROWSERS=1 playwright test",
     "generate:schema": "node ./scripts/generate-schema.js && oxfmt src/api/schema.d.ts --write",
     "prepare": "husky",
     "translations:check": "node ./scripts/translations/analyze-translations.js",
@@ -23,7 +25,7 @@
   "dependencies": {
     "@hookform/error-message": "2.0.1",
     "@hookform/resolvers": "5.9.2",
-    "@jod/design-system": "https://github.com/Opetushallitus/jod-design-system/releases/download/rel-20261116-1/jod-design-system-0.0.0.tgz",
+    "@jod/design-system": "https://github.com/Opetushallitus/jod-design-system/releases/download/rel-20261120-2/jod-design-system-0.0.0.tgz",
     "driver.js": "1.11.0",
     "i18next": "26.7.2",
     "i18next-http-backend": "4.0.10",
