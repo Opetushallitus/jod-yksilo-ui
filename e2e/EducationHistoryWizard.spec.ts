@@ -1,34 +1,14 @@
-import { expect, test } from '@playwright/test';
+import { educationHistory, educationHistoryItem } from './data';
+import { confirmDeletion, expect, test } from './fixtures';
 
-import {
-  educationCompetences,
-  educationHistory,
-  educationHistoryItem,
-  suggestedEducationCompetences,
-} from './fixtures';
-import {
-  mockAuthenticatedUser,
-  mockFeatureFlags,
-  mockProfileWizard,
-  mockRedundantEndpoints,
-  mockSelectedCompetences,
-  mockSuggestedCompetences,
-} from './mocks';
-
-test.beforeEach(async ({ page }) => {
-  await mockRedundantEndpoints(page);
-  await mockFeatureFlags(page);
-  await mockAuthenticatedUser(page);
-  await mockSuggestedCompetences(page, suggestedEducationCompetences, educationCompetences);
-  await mockSelectedCompetences(page, educationCompetences);
-  await mockProfileWizard(page, 'koulutuskokonaisuudet', educationHistory);
-
-  await page.goto('/yksilo/fi/osaamisprofiili/osaamiset/koulutukset');
-  await page.getByText('Hyväksy kaikki').click();
+test.beforeEach(async ({ backend }) => {
+  backend.signIn();
+  backend.koulutuskokonaisuudet = structuredClone(educationHistory);
 });
 
-test('add new education', async ({ page, isMobile }) => {
-  await mockProfileWizard(page, 'koulutuskokonaisuudet', []);
+test('add new education', async ({ page, isMobile, open, backend }) => {
+  backend.koulutuskokonaisuudet = [];
+  await open('osaamisprofiili/osaamiset/koulutukset');
   // Open wizard
   await page.getByRole('button', { name: 'Lisää uusi koulutus' }).click();
 
@@ -78,11 +58,12 @@ test('add new education', async ({ page, isMobile }) => {
   expect(payload).toEqual(educationHistoryItem);
 });
 
-test('delete educationHistory item', async ({ page }) => {
+test('delete educationHistory item', async ({ page, open }) => {
+  await open('osaamisprofiili/osaamiset/koulutukset');
   // Edit the first item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
   await page.getByRole('button', { name: 'Poista koulutus' }).click();
-  const confirmButton = page.locator('button.ds\\:bg-alert-1', { hasText: 'Poista koulutus' }).last();
+  const confirmButton = confirmDeletion(page);
   await expect(confirmButton).toBeVisible();
 
   const [request] = await Promise.all([
@@ -97,7 +78,8 @@ test('delete educationHistory item', async ({ page }) => {
   expect(request.url()).toContain(expectedId);
 });
 
-test('edit educationHistory item', async ({ page }) => {
+test('edit educationHistory item', async ({ page, open }) => {
+  await open('osaamisprofiili/osaamiset/koulutukset');
   // Edit the first item
   await page.getByRole('button', { name: 'Muokkaa' }).first().click();
   await page.getByLabel('Oppilaitos tai koulutuksen järjestäjä').fill('Opisto');
@@ -109,4 +91,72 @@ test('edit educationHistory item', async ({ page }) => {
   const request = await requestPromise;
   const payload = JSON.parse(request.postData() || '{}');
   expect(payload.nimi.fi).toBe('Opisto');
+});
+
+test('add a degree to an existing education', async ({ page, open, backend }) => {
+  await open('osaamisprofiili/osaamiset/koulutukset');
+
+  await page.getByRole('button', { name: 'Lisää opintoja tähän koulutukseen' }).click();
+  // The title of the dialog changes on each step.
+  const dialog = page.getByRole('dialog');
+  await dialog.getByRole('textbox', { name: /^Tutkinnon tai koulutuksen nimi/ }).fill('Jatko-opinnot');
+  await dialog.getByRole('textbox', { name: /^Tutkinnon tai koulutuksen nimi/ }).blur();
+  await dialog.getByRole('button', { name: 'Seuraava' }).click();
+  await dialog.getByRole('textbox', { name: 'Tunnista osaamisia' }).fill('opetus');
+  await dialog.getByRole('button', { name: 'arviointiprosessit' }).click();
+  await dialog.getByRole('button', { name: 'Tallenna' }).click();
+
+  await expect(dialog).toBeHidden();
+  await expect(
+    page.getByRole('table', { name: 'Koulutukset' }).getByRole('cell', { name: 'Jatko-opinnot' }),
+  ).toBeVisible();
+  expect(backend.koulutuskokonaisuudet[0].koulutukset).toEqual([
+    expect.objectContaining({ nimi: { fi: 'Oppilas' } }),
+    expect.objectContaining({
+      nimi: { fi: 'Jatko-opinnot' },
+      osaamiset: ['http://data.europa.eu/esco/skill/31b67516-af16-4b97-8430-a8a8e0f84190'],
+    }),
+  ]);
+});
+
+test('edit a degree', async ({ page, open, backend }) => {
+  await open('osaamisprofiili/osaamiset/koulutukset');
+
+  // The first edit button is for the education, the second for its degree.
+  await page.getByRole('button', { name: 'Muokkaa' }).nth(1).click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toHaveAccessibleName('Muokkaa tutkintoa tai koulutusta');
+  const name = dialog.getByRole('textbox', { name: /^Tutkinnon tai koulutuksen nimi/ });
+  await name.fill('Opiskelija');
+  await name.blur();
+  await dialog.getByRole('button', { name: 'Seuraava' }).click();
+  await dialog.getByRole('button', { name: 'Tallenna' }).click();
+
+  await expect(dialog).toBeHidden();
+  await expect(
+    page.getByRole('table', { name: 'Koulutukset' }).getByRole('cell', { name: 'Opiskelija' }),
+  ).toBeVisible();
+  expect(backend.koulutuskokonaisuudet[0].koulutukset?.[0]).toMatchObject({ nimi: { fi: 'Opiskelija' } });
+});
+
+test('deleting a degree keeps the other degrees of the education', async ({ page, open, backend }) => {
+  backend.koulutuskokonaisuudet[0].koulutukset?.push({
+    id: 'dc6d5886-6326-4b80-84d1-a135491136fd',
+    nimi: { fi: 'Jatko-opinnot' },
+    alkuPvm: '2005-01-01',
+    osaamiset: ['http://data.europa.eu/esco/skill/31b67516-af16-4b97-8430-a8a8e0f84190'],
+  });
+  await open('osaamisprofiili/osaamiset/koulutukset');
+  const table = page.getByRole('table', { name: 'Koulutukset' });
+  await expect(table.getByRole('cell', { name: 'Jatko-opinnot' })).toBeVisible();
+
+  await table.getByRole('row').filter({ hasText: 'Jatko-opinnot' }).getByRole('button', { name: 'Muokkaa' }).click();
+  const dialog = page.getByRole('dialog', { name: 'Muokkaa tutkintoa tai koulutusta' });
+  await dialog.getByRole('button', { name: 'Poista' }).click();
+  await confirmDeletion(page).click();
+
+  await expect(table.getByRole('cell', { name: 'Jatko-opinnot' })).toBeHidden();
+  await expect(table.getByRole('cell', { name: 'Oppilas' })).toBeVisible();
+  expect(backend.koulutuskokonaisuudet).toHaveLength(1);
+  expect(backend.koulutuskokonaisuudet[0].koulutukset).toEqual([expect.objectContaining({ nimi: { fi: 'Oppilas' } })]);
 });
