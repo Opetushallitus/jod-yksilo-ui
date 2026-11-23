@@ -143,8 +143,8 @@
         "description": "Är du säker på att du vill avbryta importeringen av dina studieprestationer från Studieinfo?",
         "title": "Avbryt import"
       },
-      "data-load-failed": "Laddning av uppgifter misslyckades. Försök på nytt senare.",
       "data-loaded": "Uppgifterna har laddats.",
+      "data-load-failed": "Laddning av uppgifter misslyckades. Försök på nytt senare.",
       "data-loading": "Hämtar information...",
       "data-load-no-data": "Utbildningsinformation hittades inte eller så har du inte rätt att granska informationen.",
       "description": "I den här vyn kan du välja vilka utbildningar du vill importera. Efter importen kan du redigera och komplettera informationen i vyn Mina utbildningar.",
@@ -411,7 +411,7 @@
     "missing-TOIMENKUVA": "Inga kunskaper. Lägg till arbetsplatser.\n",
     "missing-TOIMINTO": "Inga kunskaper. Lägg till fritidsverksamhet.\n"
   },
-  "my-competences-by-sources": "Dina kompetenser enligt tema",
+  "my-competences-by-sources": "Din kompetens enligt källa",
   "navigation": {
     "main-section": {
       "title": "Personlig kompetensstig",
@@ -494,7 +494,9 @@
       },
       "competence-selection": {
         "activities": {
+          "description": "Kompetenser som erhållits från fritidsaktiviteter identifieras inte automatiskt. Du kan lägga till kompetenser själv på sidan Fritidsaktiviteter.",
           "failing-detection": "Inga kompetenser identifierades automatiskt för denna aktivitet. Du kan lägga till kompetenser senare på sidan Fritidsaktiviteter.",
+          "non-detecting": "Automatisk identifiering av kompetenser är inte tillgänglig i denna sektion.",
           "title": "Fritidsaktiviteter"
         },
         "add-competence": "Lägg till en kompetens genom att klicka på '+'-tecknet",
@@ -729,7 +731,7 @@
         "placeholder": "Beskriv med egna ord vad annat du kan"
       },
       "group-by-alphabet": "Alfabetisk ordning A – Ö",
-      "group-by-source": "Enligt tema",
+      "group-by-source": "Enligt källa",
       "info": "Du kan själv välja vilken information från din kompetensprofil du vill använda när du söker möjligheter genom att importera den till sidan Hitta möjligheter.",
       "move-to-type": {
         "KOULUTUS": "Öppna utbildningar",
@@ -811,23 +813,23 @@
       "title": "Fritidsaktiviteter"
     },
     "front": {
-      "title": "Hej {{name}} - välkommen till din kompetensprofil",
-      "ingress": "I kompetensprofilen kan du samla dina kompetenser, erfarenheter och mål. Ju mer heltäckande du fyller i din profil, desto bättre lämpade arbets- och utbildningsmöjligheter kan tjänsten föreslå dig.",
-      "opportunities": {
-        "title": "Hitta intressanta arbets- och studiemöjligheter",
-        "list": "<ul><li>När du har fyllt i uppgifterna i din profil kan du söka rekommendationer om arbets- och utbildningsmöjligheter som motsvarar din kompetens på sidan <strong>Hitta möjligheter</strong></li><li>Med <strong>reglagen</strong> kan du välja om resultaten ska betona dina intressen eller din nuvarande kompetens</li><li>Spara intressanta arbets- och utbildningsmöjligheter i <strong>Favoriter</strong></li><li>Planera din egen lär- och karriärstig på sidan <strong>Mål</strong></li></ul>",
-        "button": "Hitta möjligheter"
-      },
       "control": {
-        "title": "Bestäm själv hur din profil används",
-        "list-title": "Profilen är din. Du bestämmer:",
         "list": "<ul><li>vilka uppgifter du sparar i din profil</li><li>för vilka ändamål dina uppgifter används</li><li>hur uppgifterna i din profil kan utnyttjas</li></ul>",
+        "list-title": "Profilen är din. Du bestämmer:",
         "preferences-button": "Inställningar",
+        "share-button": "Profilens delningslänk",
         "share-description": "Om du vill kan du dela profilen med personer du väljer.",
-        "share-button": "Profilens delningslänk"
+        "title": "Bestäm själv hur din profil används"
       },
+      "ingress": "I kompetensprofilen kan du samla dina kompetenser, erfarenheter och mål. Ju mer heltäckande du fyller i din profil, desto bättre lämpade arbets- och utbildningsmöjligheter kan tjänsten föreslå dig.",
       "legal": "Behandlingen av uppgifterna i kompetensprofilen grundar sig på <LawLink>lagen om den nationella informationsresursen för kompetenser</LawLink>. Läs mer om grunderna för behandlingen av uppgifter i <PrivacyLink>dataskyddsbeskrivningen</PrivacyLink>.",
-      "legal-link": "https://www.finlex.fi/sv/lagstiftning/2025/1449"
+      "legal-link": "https://www.finlex.fi/sv/lagstiftning/2025/1449",
+      "opportunities": {
+        "button": "Hitta möjligheter",
+        "list": "<ul><li>När du har fyllt i uppgifterna i din profil kan du söka rekommendationer om arbets- och utbildningsmöjligheter som motsvarar din kompetens på sidan <strong>Hitta möjligheter</strong></li><li>Med <strong>reglagen</strong> kan du välja om resultaten ska betona dina intressen eller din nuvarande kompetens</li><li>Spara intressanta arbets- och utbildningsmöjligheter i <strong>Favoriter</strong></li><li>Planera din egen lär- och karriärstig på sidan <strong>Mål</strong></li></ul>",
+        "title": "Hitta intressanta arbets- och studiemöjligheter"
+      },
+      "title": "Hej {{name}} - välkommen till din kompetensprofil"
     },
     "index": "Kompetensprofil",
     "interests": {
@@ -979,70 +981,70 @@
       "competences": {
         "education-history": {
           "empty": "Du har ännu inte identifierat kompetenser från utbildningar",
-          "filled_one": "Du har identifierat {{count}} kompetens från utbildningar",
-          "filled_other": "Du har identifierat {{count}} kompetenser från utbildningar",
+          "filled_one": "Du har identifierat {{count, number}} kompetens från utbildningar",
+          "filled_other": "Du har identifierat {{count, number}} kompetenser från utbildningar",
           "label": "Utbildningar"
         },
         "free-time-activities": {
           "empty": "Du har ännu inte identifierat kompetenser från fritidsaktiviteter",
-          "filled_one": "Du har identifierat {{count}} kompetens från fritidsaktiviteter",
-          "filled_other": "Du har identifierat {{count}} kompetenser från fritidsaktiviteter",
+          "filled_one": "Du har identifierat {{count, number}} kompetens från fritidsaktiviteter",
+          "filled_other": "Du har identifierat {{count, number}} kompetenser från fritidsaktiviteter",
           "label": "Fritidsaktiviteter"
         },
         "interests": {
           "empty": "Du har ännu inte lagt till intressanta kompetenser",
-          "filled_one": "Du har lagt till {{count}} intressant kompetens",
-          "filled_other": "Du har lagt till {{count}} intressanta kompetenser",
+          "filled_one": "Du har lagt till {{count, number}} intressant kompetens",
+          "filled_other": "Du har lagt till {{count, number}} intressanta kompetenser",
           "label": "Intressen"
         },
         "something-else": {
           "empty": "Du har ännu inte lagt till annan kompetens",
-          "filled_one": "Du har lagt till {{count}} annan kompetens",
-          "filled_other": "Du har lagt till {{count}} andra kompetenser",
+          "filled_one": "Du har lagt till {{count, number}} annan kompetens",
+          "filled_other": "Du har lagt till {{count, number}} andra kompetenser",
           "label": "Annan kompetens"
         },
         "work-history": {
           "empty": "Du har ännu inte identifierat kompetenser från arbetsplatser",
-          "filled_one": "Du har identifierat {{count}} kompetens från arbetsplatser",
-          "filled_other": "Du har identifierat {{count}} kompetenser från arbetsplatser",
+          "filled_one": "Du har identifierat {{count, number}} kompetens från arbetsplatser",
+          "filled_other": "Du har identifierat {{count, number}} kompetenser från arbetsplatser",
           "label": "Arbetsplatser"
         }
       },
       "sections": {
         "education-history": {
           "empty": "Du har ännu inte lagt till utbildningar",
-          "filled_one": "Du har lagt till {{count}} utbildning i din profil",
-          "filled_other": "Du har lagt till {{count}} utbildningar i din profil",
+          "filled_one": "Du har lagt till {{count, number}} utbildning i din profil",
+          "filled_other": "Du har lagt till {{count, number}} utbildningar i din profil",
           "label": "Utbildningar"
         },
         "favorites": {
           "empty": "Du har ännu inte sparat favoriter",
-          "filled_one": "Du har sparat {{count}} favorit",
-          "filled_other": "Du har sparat {{count}} favoriter",
+          "filled_one": "Du har sparat {{count, number}} favorit",
+          "filled_other": "Du har sparat {{count, number}} favoriter",
           "label": "Favoriter"
         },
         "free-time-activities": {
           "empty": "Du har ännu inte lagt till fritidsaktiviteter",
-          "filled_one": "Du har lagt till {{count}} fritidsaktivitet i din profil",
-          "filled_other": "Du har lagt till {{count}} fritidsaktiviteter i din profil",
+          "filled_one": "Du har lagt till {{count, number}} fritidsaktivitet i din profil",
+          "filled_other": "Du har lagt till {{count, number}} fritidsaktiviteter i din profil",
           "label": "Fritidsaktiviteter"
         },
         "goals": {
           "empty": "Du har ännu inte lagt till mål",
-          "filled_one": "Du har lagt till {{count}} mål i din profil",
-          "filled_other": "Du har lagt till {{count}} mål i din profil",
+          "filled_one": "Du har lagt till {{count, number}} mål i din profil",
+          "filled_other": "Du har lagt till {{count, number}} mål i din profil",
           "label": "Mål"
         },
         "interests": {
           "empty": "Du har ännu inte lagt till intressen",
-          "filled_one": "Du har lagt till {{count}} intresse i din profil",
-          "filled_other": "Du har lagt till {{count}} intressen i din profil",
+          "filled_one": "Du har lagt till {{count, number}} intresse i din profil",
+          "filled_other": "Du har lagt till {{count, number}} intressen i din profil",
           "label": "Intressen"
         },
         "work-history": {
           "empty": "Du har ännu inte lagt till arbetsplatser",
-          "filled_one": "Du har lagt till {{count}} arbetsplats i din profil",
-          "filled_other": "Du har lagt till {{count}} arbetsplatser i din profil",
+          "filled_one": "Du har lagt till {{count, number}} arbetsplats i din profil",
+          "filled_other": "Du har lagt till {{count, number}} arbetsplatser i din profil",
           "label": "Arbetsplatser"
         }
       },
@@ -1352,7 +1354,7 @@
       "reveal-your-skills-url": "https://www.jotpa.fi/sv/om-oss/projekt/upptack-ditt-kunnande",
       "something-else": "Annan kompetens",
       "title": "Stöd för reflektion",
-      "urataidot-additional-resource": "<CustomLink>Självutvärdering av karriärkompetenser<Icon></Icon></CustomLink> är ett digitalt verktyg som hjälper dig att bedöma och utveckla dina färdigheter i karriärplanering.",
+      "urataidot-additional-resource": "<CustomLink>Karriärkompetenser-verktyget<Icon></Icon></CustomLink> hjälper dig att identifiera och utveckla dina färdigheter i karriärplanering.",
       "work-history": "Arbetsplatser"
     },
     "tour": {

@@ -143,8 +143,8 @@
         "description": "Are you sure you want to cancel the import of your completed studies from Studyinfo?",
         "title": "Cancel import"
       },
-      "data-load-failed": "Failed to load data. Please try again later.",
       "data-loaded": "Data loaded successfully.",
+      "data-load-failed": "Failed to load data. Please try again later.",
       "data-loading": "Loading information...",
       "data-load-no-data": "The education data could not be found or you do not have permission to view the data.",
       "description": "In this view, you can select which educations you want to import. After the import, you can edit and complete the information in the My Educations view.",
@@ -412,7 +412,7 @@
     "missing-TOIMENKUVA": "No competences. Go to add jobs.",
     "missing-TOIMINTO": "No competences. Go to add recreational activities."
   },
-  "my-competences-by-sources": "Your competences by theme",
+  "my-competences-by-sources": "Your competences by source",
   "navigation": {
     "main-section": {
       "title": "Personal Competency Path",
@@ -495,7 +495,9 @@
       },
       "competence-selection": {
         "activities": {
+          "description": "Competences gained from recreational activities are not automatically detected. You can add competences yourself on the Recreational activities page.",
           "failing-detection": "No competences were automatically detected for this activity. You can add competences later in the Recreational activities section.",
+          "non-detecting": "Automatic detection of competences is not available in this section.",
           "title": "Recreational activities"
         },
         "add-competence": "Add a competence by clicking the '+' sign",
@@ -730,7 +732,7 @@
         "placeholder": "Describe in your own words what else you can do"
       },
       "group-by-alphabet": "Alphabetical order A – Z",
-      "group-by-source": "By theme",
+      "group-by-source": "By source",
       "info": "You can choose which of your Competence profile data you use to search for opportunities by accessing them on the Find opportunities page.",
       "move-to-type": {
         "KOULUTUS": "Go to educations",
@@ -812,23 +814,23 @@
       "title": "Recreational activities"
     },
     "front": {
-      "title": "Hello {{name}} – Welcome to your competence profile",
-      "ingress": "In the competence profile, you can bring together your competences, experiences and goals. The more comprehensively you fill in your profile, the better suited the work and education opportunities the service can suggest to you.",
-      "opportunities": {
-        "title": "Find interesting work and study opportunities",
-        "list": "<ul><li>Once you have filled in your profile, you can search for recommended work and education opportunities matching your competences on the <strong>Find opportunities</strong> page</li><li>With the <strong>controls</strong>, you can choose whether the results emphasise your interests or your current competences</li><li>Save interesting work and education opportunities to <strong>Favourites</strong></li><li>Plan your own learning and career path on the <strong>Goals</strong> page</li></ul>",
-        "button": "Find opportunities"
-      },
       "control": {
-        "title": "Decide for yourself how your profile is used",
-        "list-title": "Your profile is yours. You decide:",
         "list": "<ul><li>what information you save in your profile</li><li>for which purposes your information is used</li><li>how the information in your profile can be utilised</li></ul>",
+        "list-title": "Your profile is yours. You decide:",
         "preferences-button": "Settings",
+        "share-button": "Profile share link",
         "share-description": "If you wish, you can share your profile with people of your choice.",
-        "share-button": "Profile share link"
+        "title": "Decide for yourself how your profile is used"
       },
+      "ingress": "In the competence profile, you can bring together your competences, experiences and goals. The more comprehensively you fill in your profile, the better suited the work and education opportunities the service can suggest to you.",
       "legal": "The processing of competence profile data is based on the <LawLink>Act on the national competence data repository</LawLink>. Read more about the grounds for data processing in the <PrivacyLink>privacy policy</PrivacyLink>.",
-      "legal-link": "https://www.finlex.fi/en/legislation/2025/1449"
+      "legal-link": "https://www.finlex.fi/en/legislation/2025/1449",
+      "opportunities": {
+        "button": "Find opportunities",
+        "list": "<ul><li>Once you have filled in your profile, you can search for recommended work and education opportunities matching your competences on the <strong>Find opportunities</strong> page</li><li>With the <strong>controls</strong>, you can choose whether the results emphasise your interests or your current competences</li><li>Save interesting work and education opportunities to <strong>Favourites</strong></li><li>Plan your own learning and career path on the <strong>Goals</strong> page</li></ul>",
+        "title": "Find interesting work and study opportunities"
+      },
+      "title": "Hello {{name}} – Welcome to your competence profile"
     },
     "index": "Competence profile",
     "interests": {
@@ -980,70 +982,70 @@
       "competences": {
         "education-history": {
           "empty": "You have not yet identified competences from education",
-          "filled_one": "You have identified {{count}} competence from education",
-          "filled_other": "You have identified {{count}} competences from education",
+          "filled_one": "You have identified {{count, number}} competence from education",
+          "filled_other": "You have identified {{count, number}} competences from education",
           "label": "Education"
         },
         "free-time-activities": {
           "empty": "You have not yet identified competences from recreational activities",
-          "filled_one": "You have identified {{count}} competence from recreational activities",
-          "filled_other": "You have identified {{count}} competences from recreational activities",
+          "filled_one": "You have identified {{count, number}} competence from recreational activities",
+          "filled_other": "You have identified {{count, number}} competences from recreational activities",
           "label": "Recreational activities"
         },
         "interests": {
           "empty": "You have not yet added competences that interest you",
-          "filled_one": "You have added {{count}} competence that interests you",
-          "filled_other": "You have added {{count}} competences that interest you",
+          "filled_one": "You have added {{count, number}} competence that interests you",
+          "filled_other": "You have added {{count, number}} competences that interest you",
           "label": "Interests"
         },
         "something-else": {
           "empty": "You have not yet added other competences",
-          "filled_one": "You have added {{count}} other competence",
-          "filled_other": "You have added {{count}} other competences",
+          "filled_one": "You have added {{count, number}} other competence",
+          "filled_other": "You have added {{count, number}} other competences",
           "label": "Other competences"
         },
         "work-history": {
           "empty": "You have not yet identified competences from workplaces",
-          "filled_one": "You have identified {{count}} competence from workplaces",
-          "filled_other": "You have identified {{count}} competences from workplaces",
+          "filled_one": "You have identified {{count, number}} competence from workplaces",
+          "filled_other": "You have identified {{count, number}} competences from workplaces",
           "label": "Workplaces"
         }
       },
       "sections": {
         "education-history": {
           "empty": "You have not yet added education",
-          "filled_one": "You have added {{count}} education to your profile",
-          "filled_other": "You have added {{count}} educations to your profile",
+          "filled_one": "You have added {{count, number}} education to your profile",
+          "filled_other": "You have added {{count, number}} educations to your profile",
           "label": "Education"
         },
         "favorites": {
           "empty": "You have not yet saved favourites",
-          "filled_one": "You have saved {{count}} favourite",
-          "filled_other": "You have saved {{count}} favourites",
+          "filled_one": "You have saved {{count, number}} favourite",
+          "filled_other": "You have saved {{count, number}} favourites",
           "label": "Favourites"
         },
         "free-time-activities": {
           "empty": "You have not yet added recreational activities",
-          "filled_one": "You have added {{count}} recreational activity to your profile",
-          "filled_other": "You have added {{count}} recreational activities to your profile",
+          "filled_one": "You have added {{count, number}} recreational activity to your profile",
+          "filled_other": "You have added {{count, number}} recreational activities to your profile",
           "label": "Recrea­tional activ­ities"
         },
         "goals": {
           "empty": "You have not yet added goals",
-          "filled_one": "You have added {{count}} goal to your profile",
-          "filled_other": "You have added {{count}} goals to your profile",
+          "filled_one": "You have added {{count, number}} goal to your profile",
+          "filled_other": "You have added {{count, number}} goals to your profile",
           "label": "Goals"
         },
         "interests": {
           "empty": "You have not yet added interests",
-          "filled_one": "You have added {{count}} interest to your profile",
-          "filled_other": "You have added {{count}} interests to your profile",
+          "filled_one": "You have added {{count, number}} interest to your profile",
+          "filled_other": "You have added {{count, number}} interests to your profile",
           "label": "Interests"
         },
         "work-history": {
           "empty": "You have not yet added workplaces",
-          "filled_one": "You have added {{count}} workplace to your profile",
-          "filled_other": "You have added {{count}} workplaces to your profile",
+          "filled_one": "You have added {{count, number}} workplace to your profile",
+          "filled_other": "You have added {{count, number}} workplaces to your profile",
           "label": "Workplaces"
         }
       },
@@ -1353,7 +1355,7 @@
       "reveal-your-skills-url": "https://www.jotpa.fi/en/about-us/projects/reveal-your-skills",
       "something-else": "Other competences",
       "title": "Support for reflection",
-      "urataidot-additional-resource": "<CustomLink>Career skills self-assessment<Icon></Icon></CustomLink> is a digital tool that helps you evaluate and develop your career planning skills.",
+      "urataidot-additional-resource": "<CustomLink>Career skills tool<Icon></Icon></CustomLink> helps you identify and develop your career planning skills.",
       "work-history": "Workplaces"
     },
     "tour": {
