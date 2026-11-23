@@ -143,8 +143,8 @@
         "description": "Haluatko varmasti keskeyttää opintosuoritustesi tuonnin Opintopolusta?",
         "title": "Peruuta tuonti"
       },
-      "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
       "data-loaded": "Tiedot ladattu.",
+      "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
       "data-loading": "Ladataan tietoja...",
       "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
       "description": "Tässä näkymässä voit valita, mitkä koulutukset haluat tuoda. Tuonnin jälkeen voit muokata ja täydentää tietoja Koulutukseni-näkymässä.",
@@ -410,7 +410,7 @@
     "missing-TOIMENKUVA": "Ei osaamisia. Siirry lisäämään työpaikkoja.",
     "missing-TOIMINTO": "Ei osaamisia. Siirry lisäämään vapaa-ajan toimintoja."
   },
-  "my-competences-by-sources": "Osaamisesi teeman mukaan",
+  "my-competences-by-sources": "Osaamisesi lähteen mukaan",
   "navigation": {
     "main-section": {
       "title": "Henkilökohtainen osaamispolku",
@@ -492,14 +492,15 @@
         "title": "Tiedoston lataaminen"
       },
       "competence-selection": {
+        "activities": {
+          "description": "Vapaa-ajan toiminnoista kertyneitä osaamisia ei tunnisteta automaattisesti. Voit lisätä osaamiset itse Vapaa-ajan toiminnot -sivulla.",
+          "failing-detection": "Tästä toiminnosta ei tunnistettu osaamisia automaattisesti. Voit lisätä osaamisia myöhemmin Vapaa-ajan toiminnot -osiossa.",
+          "non-detecting": "Automaattinen osaamisten tunnistus ei ole käytettävissä tässä osiossa.",
+          "title": "Vapaa-ajan toiminnot"
+        },
         "add-competence": "Lisää osaaminen '+' merkistä",
         "competences": "Osaamiset",
         "description": "Valitse seuraavaksi koulutuksiin, työpaikkoihin ja vapaa-ajan toimintoihin sopivat osaamiset tekoälyn ehdottamista vaihtoehdoista. Voit lisätä ja muokata osaamisia myös myöhemmin.",
-        "title": "Valitse osaamiset",
-        "activities": {
-          "failing-detection": "Tästä toiminnosta ei tunnistettu osaamisia automaattisesti. Voit lisätä osaamisia myöhemmin Vapaa-ajan toiminnot -osiossa.",
-          "title": "Vapaa-ajan toiminnot"
-        },
         "education": {
           "failing-detection": "Automaattinen osaamisten tunnistus ei onnistunut. Voit lisätä ja muokata osaamisia myöhemmin Koulutukset-osioissa.",
           "title": "Koulutukset"
@@ -729,7 +730,7 @@
         "placeholder": "Kerro omin sanoin, mitä muuta osaat"
       },
       "group-by-alphabet": "Aakkosittain A – Ö",
-      "group-by-source": "Teeman mukaan",
+      "group-by-source": "Lähteen mukaan",
       "info": "Voit valita itse mitä osaamisprofiilin tiedoistasi hyödynnät mahdollisuuksien etsintään tuomalla ne käyttöösi Löydä mahdollisuuksia -sivulla.",
       "move-to-type": {
         "KOULUTUS": "Siirry koulutuksiin",
@@ -811,23 +812,23 @@
       "title": "Vapaa-ajan toiminnot"
     },
     "front": {
-      "title": "Hei {{name}} - tervetuloa osaamisprofiiliisi",
-      "ingress": "Osaamisprofiilissa voit koota yhteen osaamisesi, kokemuksesi ja tavoitteesi. Mitä kattavammin täytät profiiliasi, sitä sopivampia työ- ja koulutusmahdollisuuksia palvelu voi ehdottaa sinulle.",
-      "opportunities": {
-        "title": "Löydä kiinnostavia työ- ja opiskelumahdollisuuksia",
-        "list": "<ul><li>Kun olet täyttänyt profiilisi tiedot, voit etsiä osaamistasi vastaavia suosituksia työ- ja koulutusmahdollisuuksista <strong>Löydä mahdollisuuksia</strong>-sivulla</li><li><strong>Säätimistä</strong> voit valita, painotetaanko tuloksissa enemmän kiinnostuksia vai nykyistä osaamistasi</li><li>Tallenna kiinnostavia työ- ja koulutusmahdollisuuksia <strong>Suosikkeihin</strong></li><li>Suunnittele omaa oppimis- ja urapolkuasi <strong>Tavoitteet</strong>-sivulla</li></ul>",
-        "button": "Löydä mahdollisuuksia"
-      },
       "control": {
-        "title": "Päätä itse profiilisi käytöstä",
-        "list-title": "Profiili on sinun. Sinä päätät:",
         "list": "<ul><li>mitä tietoja tallennat profiiliisi</li><li>mihin tarkoituksiin tietojasi käytetään</li><li>miten profiilisi tietoja voidaan hyödyntää</li></ul>",
+        "list-title": "Profiili on sinun. Sinä päätät:",
         "preferences-button": "Asetukset",
+        "share-button": "Profiilin jakolinkki",
         "share-description": "Halutessasi voit jakaa profiilin valitsemillesi henkilöille.",
-        "share-button": "Profiilin jakolinkki"
+        "title": "Päätä itse profiilisi käytöstä"
       },
+      "ingress": "Osaamisprofiilissa voit koota yhteen osaamisesi, kokemuksesi ja tavoitteesi. Mitä kattavammin täytät profiiliasi, sitä sopivampia työ- ja koulutusmahdollisuuksia palvelu voi ehdottaa sinulle.",
       "legal": "Osaamisprofiilin tietojen käsittely perustuu <LawLink>lakiin valtakunnallisesta osaamistietovarannosta</LawLink>. Lue lisää tietojen käsittelyn perusteista <PrivacyLink>tietosuojaselosteesta</PrivacyLink>.",
-      "legal-link": "https://www.finlex.fi/fi/lainsaadanto/2025/1449"
+      "legal-link": "https://www.finlex.fi/fi/lainsaadanto/2025/1449",
+      "opportunities": {
+        "button": "Löydä mahdollisuuksia",
+        "list": "<ul><li>Kun olet täyttänyt profiilisi tiedot, voit etsiä osaamistasi vastaavia suosituksia työ- ja koulutusmahdollisuuksista <strong>Löydä mahdollisuuksia</strong>-sivulla</li><li><strong>Säätimistä</strong> voit valita, painotetaanko tuloksissa enemmän kiinnostuksia vai nykyistä osaamistasi</li><li>Tallenna kiinnostavia työ- ja koulutusmahdollisuuksia <strong>Suosikkeihin</strong></li><li>Suunnittele omaa oppimis- ja urapolkuasi <strong>Tavoitteet</strong>-sivulla</li></ul>",
+        "title": "Löydä kiinnostavia työ- ja opiskelumahdollisuuksia"
+      },
+      "title": "Hei {{name}} - tervetuloa osaamisprofiiliisi"
     },
     "index": "Osaamisprofiili",
     "interests": {
@@ -979,70 +980,70 @@
       "competences": {
         "education-history": {
           "empty": "Et ole vielä tunnistanut osaamisia koulutuksista",
-          "filled_one": "Olet tunnistanut {{count}} osaamisen koulutuksista",
-          "filled_other": "Olet tunnistanut {{count}} osaamista koulutuksista",
+          "filled_one": "Olet tunnistanut {{count, number}} osaamisen koulutuksista",
+          "filled_other": "Olet tunnistanut {{count, number}} osaamista koulutuksista",
           "label": "Koulutukset"
         },
         "free-time-activities": {
           "empty": "Et ole vielä tunnistanut osaamisia vapaa-ajan toiminnoista",
-          "filled_one": "Olet tunnistanut {{count}} osaamisen vapaa-ajan toiminnoista",
-          "filled_other": "Olet tunnistanut {{count}} osaamista vapaa-ajan toiminnoista",
+          "filled_one": "Olet tunnistanut {{count, number}} osaamisen vapaa-ajan toiminnoista",
+          "filled_other": "Olet tunnistanut {{count, number}} osaamista vapaa-ajan toiminnoista",
           "label": "Vapaa-ajan toiminnot"
         },
         "interests": {
           "empty": "Et ole vielä lisännyt kiinnostavia osaamisia",
-          "filled_one": "Olet lisännyt {{count}} kiinnostavan osaamisen",
-          "filled_other": "Olet lisännyt {{count}} kiinnostavaa osaamista",
+          "filled_one": "Olet lisännyt {{count, number}} kiinnostavan osaamisen",
+          "filled_other": "Olet lisännyt {{count, number}} kiinnostavaa osaamista",
           "label": "Kiinnostukset"
         },
         "something-else": {
           "empty": "Et ole vielä lisännyt muita osaamisia",
-          "filled_one": "Olet lisännyt {{count}} muun osaamisen",
-          "filled_other": "Olet lisännyt {{count}} muuta osaamista",
+          "filled_one": "Olet lisännyt {{count, number}} muun osaamisen",
+          "filled_other": "Olet lisännyt {{count, number}} muuta osaamista",
           "label": "Muut osaamiset"
         },
         "work-history": {
           "empty": "Et ole vielä tunnistanut osaamisia työpaikoista",
-          "filled_one": "Olet tunnistanut {{count}} osaamisen työpaikoista",
-          "filled_other": "Olet tunnistanut {{count}} osaamista työpaikoista",
+          "filled_one": "Olet tunnistanut {{count, number}} osaamisen työpaikoista",
+          "filled_other": "Olet tunnistanut {{count, number}} osaamista työpaikoista",
           "label": "Työpaikat"
         }
       },
       "sections": {
         "education-history": {
           "empty": "Et ole vielä lisännyt koulutuksia",
-          "filled_one": "Olet lisännyt profiiliisi {{count}} koulutuksen",
-          "filled_other": "Olet lisännyt profiiliisi {{count}} koulutusta",
+          "filled_one": "Olet lisännyt profiiliisi {{count, number}} koulutuksen",
+          "filled_other": "Olet lisännyt profiiliisi {{count, number}} koulutusta",
           "label": "Koulutukset"
         },
         "favorites": {
           "empty": "Et ole vielä tallentanut suosikkeja",
-          "filled_one": "Olet tallentanut {{count}} suosikin",
-          "filled_other": "Olet tallentanut {{count}} suosikkia",
+          "filled_one": "Olet tallentanut {{count, number}} suosikin",
+          "filled_other": "Olet tallentanut {{count, number}} suosikkia",
           "label": "Suosikit"
         },
         "free-time-activities": {
           "empty": "Et ole vielä lisännyt vapaa-ajan toimintoja",
-          "filled_one": "Olet lisännyt profiiliisi {{count}} vapaa-ajan toiminnon",
-          "filled_other": "Olet lisännyt profiiliisi {{count}} vapaa-ajan toimintoa",
+          "filled_one": "Olet lisännyt profiiliisi {{count, number}} vapaa-ajan toiminnon",
+          "filled_other": "Olet lisännyt profiiliisi {{count, number}} vapaa-ajan toimintoa",
           "label": "Vapaa-ajan toiminnot"
         },
         "goals": {
           "empty": "Et ole vielä lisännyt tavoitteita",
-          "filled_one": "Olet lisännyt profiiliisi {{count}} tavoitteen",
-          "filled_other": "Olet lisännyt profiiliisi {{count}} tavoitetta",
+          "filled_one": "Olet lisännyt profiiliisi {{count, number}} tavoitteen",
+          "filled_other": "Olet lisännyt profiiliisi {{count, number}} tavoitetta",
           "label": "Tavoitteet"
         },
         "interests": {
           "empty": "Et ole vielä lisännyt kiinnostuksia",
-          "filled_one": "Olet lisännyt profiiliisi {{count}} kiinnostuksen",
-          "filled_other": "Olet lisännyt profiiliisi {{count}} kiinnostusta",
+          "filled_one": "Olet lisännyt profiiliisi {{count, number}} kiinnostuksen",
+          "filled_other": "Olet lisännyt profiiliisi {{count, number}} kiinnostusta",
           "label": "Kiinnostukset"
         },
         "work-history": {
           "empty": "Et ole vielä lisännyt työpaikkoja",
-          "filled_one": "Olet lisännyt profiiliisi {{count}} työpaikan",
-          "filled_other": "Olet lisännyt profiiliisi {{count}} työpaikkaa",
+          "filled_one": "Olet lisännyt profiiliisi {{count, number}} työpaikan",
+          "filled_other": "Olet lisännyt profiiliisi {{count, number}} työpaikkaa",
           "label": "Työpaikat"
         }
       },
@@ -1352,7 +1353,7 @@
       "reveal-your-skills-url": "https://www.jotpa.fi/fi/tietoa-meista/hankkeet-ja-projektit/osaaminen-nakyviin",
       "something-else": "Muut osaaminen",
       "title": "Tukea pohdintaan",
-      "urataidot-additional-resource": "<CustomLink>Urataitojen itsearviointi<Icon></Icon></CustomLink> on digitaalinen työkalu, joka auttaa sinua arvioimaan ja kehittämään urasuunnittelutaitojasi.",
+      "urataidot-additional-resource": "<CustomLink>Urataidot-työkalu<Icon></Icon></CustomLink> auttaa sinua tunnistamaan ja kehittämään urasuunnittelutaitojasi.",
       "work-history": "Työpaikat"
     },
     "tour": {
