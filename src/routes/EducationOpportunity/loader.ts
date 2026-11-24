@@ -8,7 +8,7 @@ import i18n, { LangCode } from '@/i18n/config';
 import type { Jakauma, KoulutusmahdollisuusJakaumat } from '@/routes/types';
 import { YksiloLoaderContext, yksiloLoaderContextHasSession } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
-import { getLocalizedText, sortByProperty } from '@/utils';
+import { sortByProperty } from '@/utils';
 import { getCodeset, getEducationCodesetValues } from '@/utils/codes/codes';
 import { isFeatureEnabled } from '@/utils/features';
 
@@ -59,15 +59,7 @@ const loader = (async ({ request, params, context }) => {
   };
   // Not awaited: the suggestions are slow, so the page is shown while they are still loading
   const kohtaantoOpportunities = isFeatureEnabled('SAMANKALTAISET_MAHDOLLISUUDET')
-    ? getKohtaantoSamankaltaiset(
-        params.id,
-        {
-          tyyppi: 'KOULUTUSMAHDOLLISUUS',
-          description: getLocalizedText(koulutusmahdollisuus?.kuvaus),
-          osaamiset: (koulutusmahdollisuus?.jakaumat?.osaaminen?.arvot ?? []).map((arvo) => arvo.arvo),
-        },
-        request.signal,
-      )
+    ? getKohtaantoSamankaltaiset({ id: params.id, tyyppi: 'KOULUTUSMAHDOLLISUUS' }, request.signal)
     : undefined;
 
   const [osaamiset] = await Promise.all([
