@@ -176,12 +176,12 @@ const OpportunityTabs = ({ samankaltaiset, tyyppi }: RelatedOpportunitiesProps) 
               onClick={() => setSelectedType(type)}
               onKeyDown={(event) => onKeyDown(event, index)}
               className={cx(
-                'font-bold flex min-h-9 max-w-1/2 min-w-0 flex-1 cursor-pointer items-center justify-center rounded-t-md px-3 pt-3 pb-[9px] text-center text-[1rem] leading-[110%] tracking-[0.16px] wrap-break-word',
+                'font-bold flex min-h-9 max-w-1/2 min-w-0 flex-1 cursor-pointer items-center justify-center rounded-t-md px-3 pt-3 pb-[9px] text-center text-[1rem] leading-[110%] tracking-[0.16px]',
                 selected ? 'bg-white text-accent' : 'bg-bg-gray-2 text-primary-gray hover:underline',
               )}
               data-testid={testId}
             >
-              {label}
+              <span className="min-w-0 wrap-anywhere hyphens-auto">{label}</span>
             </button>
           );
         })}
