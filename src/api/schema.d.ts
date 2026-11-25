@@ -635,6 +635,27 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/tyomahdollisuudet/{id}/samankaltaiset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get opportunities similar to the työmahdollisuus
+     * @description Returns at most six työmahdollisuudet and six koulutusmahdollisuudet scoring at least 0.5,
+     *     työmahdollisuudet first, each type ordered by the score. The response is cacheable.
+     */
+    get: operations['samankaltaisetMahdollisuudetFindSimilarToTyomahdollisuus'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/tyomahdollisuudet/{id}': {
     parameters: {
       query?: never;
@@ -799,6 +820,28 @@ export interface paths {
       cookie?: never;
     };
     get: operations['koulutusmahdollisuusFindAll'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/koulutusmahdollisuudet/{id}/samankaltaiset': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get opportunities similar to the koulutusmahdollisuus
+     * @description Returns at most six koulutusmahdollisuudet and six työmahdollisuudet scoring at least
+     *     0.5, koulutusmahdollisuudet first, each type ordered by the score. The response is
+     *     cacheable.
+     */
+    get: operations['samankaltaisetMahdollisuudetFindSimilarToKoulutusmahdollisuus'];
     put?: never;
     post?: never;
     delete?: never;
@@ -1218,6 +1261,14 @@ export interface components {
       /** Format: int32 */
       mediaaniPalkka?: number;
       kohtaanto?: string;
+    };
+    SamankaltainenMahdollisuusDto: {
+      /** Format: uuid */
+      id: string;
+      /** @enum {string} */
+      tyyppi: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
+      /** Format: double */
+      pisteet: number;
     };
     SivuDtoTyomahdollisuusDto: {
       sisalto: components['schemas']['TyomahdollisuusDto'][];
@@ -3174,6 +3225,28 @@ export interface operations {
       };
     };
   };
+  samankaltaisetMahdollisuudetFindSimilarToTyomahdollisuus: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SamankaltainenMahdollisuusDto'][];
+        };
+      };
+    };
+  };
   tyomahdollisuusFindById: {
     parameters: {
       query?: never;
@@ -3454,6 +3527,28 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['SivuDtoKoulutusmahdollisuusDto'];
+        };
+      };
+    };
+  };
+  samankaltaisetMahdollisuudetFindSimilarToKoulutusmahdollisuus: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SamankaltainenMahdollisuusDto'][];
         };
       };
     };
