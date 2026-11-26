@@ -6,6 +6,7 @@ import { Link, useRevalidator, useSearchParams } from 'react-router';
 import { useNoteStack } from '@jod/design-system';
 import { JodOpenInNew } from '@jod/design-system/icons';
 
+import { client } from '@/api/client';
 import { useEnvironment } from '@/hooks/useEnvironment';
 import { useModal } from '@/hooks/useModal';
 import { LogoutFormContext } from '@/routes/Root';
@@ -47,9 +48,7 @@ export const useKoskiImport = () => {
     return new URL(encodeURI(`${base}${path}`)).href;
   }, [language, isPrd]);
 
-  const openImportStartModal = React.useCallback(() => {
-    globalThis._paq?.push(['trackEvent', 'yksilo.Rajapinnat', 'Koski tuonti']);
-
+  const showStartDialog = React.useCallback(() => {
     showDialog({
       variant: 'normal',
       title: t('education-history-import.start-modal.title'),
@@ -75,7 +74,7 @@ export const useKoskiImport = () => {
         const currentUrl = encodeURIComponent(globalThis.location.href);
 
         try {
-          globalThis.location.href = `/yksilo/oauth2/authorize/koski?callback=${currentUrl}&lang=${language}`;
+          globalThis.location.href = `/yksilo/oauth2/authorization/koski?callback=${currentUrl}&lang=${language}`;
         } catch (_error) {
           globalThis._paq?.push([
             'trackEvent',
@@ -88,18 +87,52 @@ export const useKoskiImport = () => {
     });
   }, [language, opintopolkuUrl, showDialog, t]);
 
+  const openSummaryModal = React.useCallback(
+    (tehtavaId?: string) => {
+      showModal(ImportKoulutusSummaryModal, {
+        tehtavaId,
+        onSuccessful: () => {
+          void refreshData();
+        },
+        openImportStartModal: showStartDialog,
+        logout,
+      });
+    },
+    [logout, refreshData, showModal, showStartDialog],
+  );
+
+  // Ignores repeated clicks while the unfinished imports are being checked, so only one modal opens.
+  const isCheckingUnfinishedRef = React.useRef(false);
+
+  // An unfinished import is continued rather than started again through Opintopolku.
+  const openImportStartModal = React.useCallback(() => {
+    if (isCheckingUnfinishedRef.current) {
+      return;
+    }
+    isCheckingUnfinishedRef.current = true;
+    globalThis._paq?.push(['trackEvent', 'yksilo.Rajapinnat', 'Koski tuonti']);
+    void client
+      .GET('/api/integraatiot/koski/koulutukset')
+      .catch(() => ({ data: undefined }))
+      .then(({ data }) => {
+        const unfinished = data?.[0];
+        if (unfinished?.id) {
+          openSummaryModal(unfinished.id);
+        } else {
+          showStartDialog();
+        }
+      })
+      .finally(() => {
+        isCheckingUnfinishedRef.current = false;
+      });
+  }, [openSummaryModal, showStartDialog]);
+
   React.useEffect(() => {
     const result = searchParams.get('koski');
     if (result) {
       setSearchParams({});
       if (result === 'authorized') {
-        showModal(ImportKoulutusSummaryModal, {
-          onSuccessful: () => {
-            void refreshData();
-          },
-          openImportStartModal,
-          logout,
-        });
+        openSummaryModal();
       } else if (result === 'error') {
         addTemporaryNote(() => ({
           title: t('education-history-import.summary-modal.error-title'),
@@ -109,7 +142,7 @@ export const useKoskiImport = () => {
         }));
       }
     }
-  }, [addTemporaryNote, logout, openImportStartModal, refreshData, searchParams, setSearchParams, showModal, t]);
+  }, [addTemporaryNote, openSummaryModal, searchParams, setSearchParams, t]);
 
   return { openImportStartModal, refreshData };
 };

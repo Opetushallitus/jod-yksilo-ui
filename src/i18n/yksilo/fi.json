@@ -22,8 +22,6 @@
   "compare": "Vertaile",
   "competence": "Osaaminen",
   "competences": "Osaamiset",
-  "competences-identify-failed": "Tekoälyn osaamistunnistus epäonnistui.",
-  "competences-identifying": "Voit muokata koulutusta, kun osaamiset ovat latautuneet.",
   "competences-of-your-choice": "Valitut osaamiset",
   "content": "Sisältö",
   "cv": {
@@ -106,7 +104,6 @@
     "add-studies-to-education": "Lisää opintoja koulutukseen",
     "add-studies-to-this-education": "Lisää opintoja tähän koulutukseen",
     "add-studies-to-this-education-button": "Lisää opinto",
-    "check-identified-osaamiset": "Tarkista automaattisesti tunnistetut osaamiset",
     "confirm-delete-degree": "Haluatko varmasti poistaa tutkinnon \"{{name}}\"? Jos koulutukseen ei liity poiston jälkeen enää yhtään tutkintoa, myös koulutus poistetaan.",
     "confirm-delete-education-history": "Haluatko varmasti poistaa koulutuksen \"{{name}}\"?",
     "delete-degree": "Poista tutkinto",
@@ -121,14 +118,18 @@
     "summary": "Yhteenveto"
   },
   "education-history-import": {
-    "check-detected-competences-tooltip": "<strong>Tarkista automaattiseti tunnistetut osaamiset</strong><br><br>Tähän koulutukseen osaamiset on tunnistettu automaatisesti tekoälyn avustuksella. Suosittelemme tarkistamaan ne.",
+    "competence-selection": {
+      "description": "Valitse seuraavaksi koulutuksiisi sopivat osaamiset tekoälyn ehdottamista vaihtoehdoista. Voit lisätä ja muokata osaamisia myös myöhemmin.",
+      "no-competences": "Tästä koulutuksesta ei tunnistettu osaamisia automaattisesti. Voit lisätä osaamisia myöhemmin Koulutukset-osiossa.",
+      "title": "Valitse osaamiset"
+    },
+    "competences-failed": {
+      "description": "Osaamisten nimiä ei saatu ladattua, joten osa osaamisista voi puuttua yhteenvedosta.",
+      "title": "Osaamisten lataaminen epäonnistui"
+    },
     "result-modal": {
       "failure": "Koulutushistorian lisääminen epäonnistui.",
       "give-permission-failed": "Luvan antaminen epäonnistui. Yritä myöhemmin uudelleen.",
-      "identify": "Tunnistetaan",
-      "no-identify": "Ei tunnisteta",
-      "success-osaamiset-info": "Koulutushistoriasi on lisätty onnistuneesti.<br><br><strong>Haluatko, että tunnistamme koulutuksistasi osaamisehdotuksia automaattisesti tekoälyn avulla?</strong><br><br>Ehdotukset voivat sisältää virheitä, joten suosittelemme tarkistamaan ne. Voit muokata osaamisia myöhemmin lisäämällä tai poistamalla niitä koulutuksen tiedoissa.",
-      "title": "Tunnistetaanko osaamisiasi?<AiIcon></AiIcon>",
       "tooltip": "Hyödynnämme tekoälyä osaamisten tunnistamisessa. Tekoäly vertaa sanoja ja lauseita tunnettuihin taitoihin ja valitsee ehdotettavaksi ne, jotka sopivat parhaiten KOSKI-palvelusta tuotuihin tietoihin.<br><br>Huom! Tekoäly voi tehdä virheitä. Toimintoa kehitetään edelleen, eikä se vielä aina tunnista koulutuksista osaamisia oikein."
     },
     "start-modal": {
@@ -138,17 +139,26 @@
       "import-redirect-fail": "Siirtyminen Opintopolkuun epäonnistui. Yritä uudelleen.",
       "title": "Tuo koulutushistoria Opintopolusta"
     },
+    "still-processing": {
+      "description": "Osaamisten tunnistaminen kestää tavallista kauemmin. Voit jatkaa tuontia myöhemmin.",
+      "title": "Opintosuorituksiasi käsitellään vielä"
+    },
     "summary-modal": {
       "cancel-modal": {
         "description": "Haluatko varmasti keskeyttää opintosuoritustesi tuonnin Opintopolusta?",
         "title": "Peruuta tuonti"
       },
-      "data-loaded": "Tiedot ladattu.",
       "data-load-failed": "Tietojen lataaminen epäonnistui. Yritä myöhemmin uudelleen.",
-      "data-loading": "Ladataan tietoja...",
       "data-load-no-data": "Koulutustietoja ei löydy tai sinulla ei ole oikeuksia tietojen katseluun.",
+      "data-loaded": "Tiedot ladattu.",
+      "data-loading": "Ladataan tietoja",
       "description": "Tässä näkymässä voit valita, mitkä koulutukset haluat tuoda. Tuonnin jälkeen voit muokata ja täydentää tietoja Koulutukseni-näkymässä.",
+      "education-title": "Koulutukset",
       "error-title": "Tietojen tuonti epäonnistui",
+      "identifying": "Tunnistetaan osaamisia",
+      "importing": "Tuodaan tietoja",
+      "permission-missing": "Tietojesi tuontiin ei ole riittäviä oikeuksia. Yritä uudelleen ja anna lupa opintotietojesi tuontiin.",
+      "select-title": "Valitse tuotavat tiedot",
       "title": "Koulutushistoriasi",
       "wrong-person": "Kirjaudu ulos ja takaisin sisään ja yritä uudelleen."
     }
@@ -609,7 +619,6 @@
     },
     "koski-import": {
       "button-label": "Tuo koulutushistoria Opintopolusta",
-      "competences-identifying": "Voit tuoda lisää koulutuksia, kun aiemmin tuotujen koulutusten osaamiset on tunnistettu.",
       "description": "Voit tuoda valtakunnallisiin opinto-, koulutus- ja tutkintorekistereihin tallennettuja koulutushistoriatietojasi osaksi Oma Osaamispolkua.",
       "result-info": "Tuonnin valmistuttua löydät tietosi <EducationHistoryLink>koulutukset</EducationHistoryLink>-sivulta",
       "title": "Tuo koulutushistoriasi Opintopolusta"

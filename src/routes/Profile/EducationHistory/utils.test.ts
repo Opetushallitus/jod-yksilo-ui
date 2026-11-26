@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { getEducationHistoryTableRows, type Koulutus } from './utils';
+import type { ExperienceTableRowData } from '@/components';
+
+import { buildSelections, getEducationHistoryTableRows, type Koulutus } from './utils';
 
 const createEducation = (dates: Partial<Koulutus>): Koulutus => ({
   id: 'education',
@@ -87,5 +89,45 @@ describe('getEducationHistoryTableRows', () => {
     expect(row.loppuPvm).toBeUndefined();
     expect(row.subrows![0].alkuPvm).toBeUndefined();
     expect(row.subrows![0].loppuPvm).toBeUndefined();
+  });
+});
+
+describe('buildSelections', () => {
+  const createRow = (key: string, rest: Partial<ExperienceTableRowData> = {}): ExperienceTableRowData => ({
+    key,
+    nimi: { fi: key },
+    osaamiset: [],
+    ...rest,
+  });
+
+  const createSkill = (id: string, checked?: boolean): ExperienceTableRowData['osaamiset'][number] => ({
+    id,
+    nimi: { fi: id },
+    kuvaus: { fi: id },
+    sourceType: 'koulutus',
+    checked,
+  });
+
+  const rows = [
+    createRow('group', {
+      subrows: [
+        createRow('selected', {
+          checked: true,
+          osaamiset: [createSkill('a', true), createSkill('b', false), createSkill('c'), createSkill('a', true)],
+        }),
+        createRow('unselected', { checked: false, osaamiset: [createSkill('d', true)] }),
+        createRow('unset', { osaamiset: [createSkill('e', true)] }),
+      ],
+    }),
+    createRow('empty-group', { subrows: [createRow('unselected-only', { checked: false })] }),
+    createRow('no-subrows'),
+  ];
+
+  it('includes only the selected educations and their selected, unique skills', () => {
+    expect(buildSelections(rows, true)).toEqual([{ id: 'group', lapset: [{ id: 'selected', osaamiset: ['a'] }] }]);
+  });
+
+  it('omits the skills when they were not extracted', () => {
+    expect(buildSelections(rows, false)).toEqual([{ id: 'group', lapset: [{ id: 'selected' }] }]);
   });
 });

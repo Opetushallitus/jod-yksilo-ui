@@ -22,8 +22,6 @@
   "compare": "Compare",
   "competence": "Skills",
   "competences": "Skills",
-  "competences-identify-failed": "AI competency identification failed.",
-  "competences-identifying": "You can edit the education once the competencies have been loaded.",
   "competences-of-your-choice": "Selected competences",
   "content": "Content",
   "cv": {
@@ -106,7 +104,6 @@
     "add-studies-to-education": "Add studies to education",
     "add-studies-to-this-education": "Add studies to this education",
     "add-studies-to-this-education-button": "Add studies",
-    "check-identified-osaamiset": "Check automatically identified competences",
     "confirm-delete-degree": "Are you sure you want to delete the degree \"{{name}}\"? If there are no more degrees associated with the education after deletion, the education will also be deleted.",
     "confirm-delete-education-history": "Are you sure you want to delete the education \"{{name}}\"?",
     "delete-degree": "Delete degree",
@@ -121,14 +118,18 @@
     "summary": "Summary"
   },
   "education-history-import": {
-    "check-detected-competences-tooltip": "<strong>Check automatically identified competences</strong><br><br>The competences in this education have been automatically identified using artificial intelligence. We recommend that you review them.",
+    "competence-selection": {
+      "description": "Next, select the competences that suit your education from the options suggested by artificial intelligence. You can also add and edit competences later.",
+      "no-competences": "No competences were automatically detected for this education. You can add competences later in the Education section.",
+      "title": "Select competences"
+    },
+    "competences-failed": {
+      "description": "Competence names could not be retrieved, so some competences may be missing from the summary.",
+      "title": "Failed to retrieve competences"
+    },
     "result-modal": {
       "failure": "Failed to add education history.",
       "give-permission-failed": "Failed to grant permission. Please try again later.",
-      "identify": "Identify",
-      "no-identify": "Do not identify",
-      "success-osaamiset-info": "Education history added successfully.<br><br><strong>Do you want us to automatically identify competence suggestions from your education using artificial intelligence?</strong><br><br>The suggestions may contain errors, so we recommend checking them. You can edit competences later by adding or removing them in the education details.",
-      "title": "Identify your competences?<AiIcon></AiIcon>",
       "tooltip": "We use artificial intelligence to identify competences. The AI compares words and phrases to known skills and selects those that best match the information retrieved from the KOSKI service.<br><br>Note! The AI may make mistakes. The feature is still being developed, and it does not always correctly identify competences from education."
     },
     "start-modal": {
@@ -138,17 +139,26 @@
       "import-redirect-fail": "Failed to go to Studyinfo. Please try again.",
       "title": "Import education history from Studyinfo"
     },
+    "still-processing": {
+      "description": "Identifying competences is taking longer than usual. You can continue the import later.",
+      "title": "Your completed studies are still being processed"
+    },
     "summary-modal": {
       "cancel-modal": {
         "description": "Are you sure you want to cancel the import of your completed studies from Studyinfo?",
         "title": "Cancel import"
       },
-      "data-loaded": "Data loaded successfully.",
       "data-load-failed": "Failed to load data. Please try again later.",
-      "data-loading": "Loading information...",
       "data-load-no-data": "The education data could not be found or you do not have permission to view the data.",
+      "data-loaded": "Data loaded successfully.",
+      "data-loading": "Loading information",
       "description": "In this view, you can select which educations you want to import. After the import, you can edit and complete the information in the My Educations view.",
+      "education-title": "Education",
       "error-title": "Failed to import data",
+      "identifying": "Identifying competences",
+      "importing": "Importing data",
+      "permission-missing": "There are not enough permissions to import your data. Please try again and give permission to import your study records.",
+      "select-title": "Select information to import",
       "title": "Your education history",
       "wrong-person": "Please log out and log in again and try again."
     }
@@ -611,7 +621,6 @@
     },
     "koski-import": {
       "button-label": "Import education history from Studyinfo",
-      "competences-identifying": "You can import more education once the competences of previously imported education have been identified.",
       "description": "You can import your education history data stored in the national study, education and qualification registers as part of My Competency Path.",
       "result-info": "After the import is complete, you can find your information on the <EducationHistoryLink>Education</EducationHistoryLink> page.",
       "title": "Import your education history from Studyinfo"

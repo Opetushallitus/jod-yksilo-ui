@@ -22,8 +22,6 @@
   "compare": "Jämför",
   "competence": "Kompetens",
   "competences": "Kompetenser",
-  "competences-identify-failed": "Kompetensidentifiering med artificiell intelligens misslyckades.",
-  "competences-identifying": "Du kan redigera utbildningen efter att kompetenserna har laddats.",
   "competences-of-your-choice": "Valda kompetenser",
   "content": "Innehåll",
   "cv": {
@@ -106,7 +104,6 @@
     "add-studies-to-education": "Lägg till studier i utbildningen",
     "add-studies-to-this-education": "Lägg till studier i den här utbildningen",
     "add-studies-to-this-education-button": "Lägg studier",
-    "check-identified-osaamiset": "Kontrollera automatiskt identifierade kompetenser",
     "confirm-delete-degree": "Är du säker på att du vill ta bort examen \"{{name}}\"? Om utbildningen efter raderingen inte längre innehåller några examina, raderas även utbildningen.",
     "confirm-delete-education-history": "Är du säker på att du vill ta bort utbildningen \"{{name}}\"?",
     "delete-degree": "Ta bort examen",
@@ -121,14 +118,18 @@
     "summary": "Sammanfattning"
   },
   "education-history-import": {
-    "check-detected-competences-tooltip": "<strong>Kontrollera automatiskt identifierade kompetenser</strong><br><br>Kompetenserna i denna utbildning har identifierats automatiskt med hjälp av artificiell intelligens. Vi rekommenderar att du kontrollerar dem.",
+    "competence-selection": {
+      "description": "Välj sedan de kompetenser som passar dina utbildningar från de alternativ som föreslås av artificiell intelligens. Du kan också lägga till och redigera kompetenser senare.",
+      "no-competences": "Inga kompetenser identifierades automatiskt för denna utbildning. Du kan lägga till kompetenser senare på sidan Utbildningar.",
+      "title": "Välj kompetenser"
+    },
+    "competences-failed": {
+      "description": "Kompetensernas namn kunde inte hämtas, så en del kompetenser kan saknas i sammanfattningen.",
+      "title": "Hämtning av kompetenser misslyckades"
+    },
     "result-modal": {
       "failure": "Det gick inte att lägga till utbildningshistorik.",
       "give-permission-failed": "Det gick inte att ge tillstånd. Försök på nytt senare.",
-      "identify": "Identifiera",
-      "no-identify": "Identifieras inte",
-      "success-osaamiset-info": "Din utbildningshistorik har lagts till framgångsrikt.<br><br><strong>Vill du att vi automatiskt identifierar kompetensförslag från dina utbildningar med hjälp av artificiell intelligens?</strong><br><br>Förslagen kan innehålla fel, så vi rekommenderar att du kontrollerar dem. Du kan redigera kompetenser senare genom att lägga till eller ta bort dem i utbildningsinformationen.",
-      "title": "Ska dina kompetenser identifieras?<AiIcon></AiIcon>",
       "tooltip": "Vi använder artificiell intelligens för att identifiera kompetenser. AI jämför ord och fraser med kända färdigheter och väljer de som bäst matchar informationen som hämtats från KOSKI-tjänsten.<br><br>Observera! AI kan göra misstag. Funktionen utvecklas fortfarande och identifierar inte alltid kompetenser från utbildningar korrekt."
     },
     "start-modal": {
@@ -138,17 +139,26 @@
       "import-redirect-fail": "Det gick inte att öppna Studieinfo. Vänligen försök igen.",
       "title": "Importera utbildningshistorik från Studieinfo"
     },
+    "still-processing": {
+      "description": "Identifieringen av kompetenser tar längre tid än vanligt. Du kan fortsätta importen senare.",
+      "title": "Dina studieprestationer behandlas fortfarande"
+    },
     "summary-modal": {
       "cancel-modal": {
         "description": "Är du säker på att du vill avbryta importeringen av dina studieprestationer från Studieinfo?",
         "title": "Avbryt import"
       },
-      "data-loaded": "Uppgifterna har laddats.",
       "data-load-failed": "Laddning av uppgifter misslyckades. Försök på nytt senare.",
-      "data-loading": "Hämtar information...",
       "data-load-no-data": "Utbildningsinformation hittades inte eller så har du inte rätt att granska informationen.",
+      "data-loaded": "Uppgifterna har laddats.",
+      "data-loading": "Hämtar information",
       "description": "I den här vyn kan du välja vilka utbildningar du vill importera. Efter importen kan du redigera och komplettera informationen i vyn Mina utbildningar.",
+      "education-title": "Utbildning",
       "error-title": "Misslyckades med att importera data",
+      "identifying": "Kompetenser identifieras",
+      "importing": "Importerar data",
+      "permission-missing": "Behörigheterna räcker inte för att importera dina uppgifter. Försök på nytt och ge tillstånd att importera dina studieuppgifter.",
+      "select-title": "Välj information att importera",
       "title": "Din utbildningshistorik",
       "wrong-person": "Logga ut och logga sedan in på nytt och försök igen."
     }
@@ -610,7 +620,6 @@
     },
     "koski-import": {
       "button-label": "Importera utbildningshistorik från Studieinfo",
-      "competences-identifying": "Du kan importera fler utbildningar när kompetenserna för tidigare importerade utbildningar har identifierats.",
       "description": "Du kan importera utbildningshistorikdata som sparats i de nationella studie-, utbildnings- och examensregistren som en del av Min kompetensstig.",
       "result-info": "När importen är klar hittar du dina uppgifter på <EducationHistoryLink>utbildningar</EducationHistoryLink>-sidan",
       "title": "Importera din utbildningshistorik från Studieinfo"

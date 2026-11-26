@@ -9,9 +9,6 @@ export interface Koulutus {
   alkuPvm?: string;
   loppuPvm?: string;
   osaamiset: string[];
-  osaamisetOdottaaTunnistusta?: boolean;
-  osaamisetTunnistusEpaonnistui?: boolean;
-  osasuoritukset?: string[];
 }
 
 export interface Koulutuskokonaisuus {
@@ -61,8 +58,6 @@ export const getEducationHistoryTableRows = (
         sourceType: 'koulutus',
       })),
       checked: true,
-      osaamisetOdottaaTunnistusta: row.koulutukset.some((koulutus) => koulutus.osaamisetOdottaaTunnistusta),
-      osaamisetTunnistusEpaonnistui: row.koulutukset.some((koulutus) => koulutus.osaamisetTunnistusEpaonnistui),
     };
 
     rows.push(rowData);
@@ -81,7 +76,7 @@ const mapKoulutusToRow = (
     }
   >,
 ): ExperienceTableRowData => {
-  const data: ExperienceTableRowData = {
+  return {
     key: koulutus.id ?? crypto.randomUUID(),
     nimi: koulutus.nimi,
     kuvaus: koulutus.kuvaus,
@@ -93,14 +88,22 @@ const mapKoulutusToRow = (
     })),
     checked: true,
   };
-
-  if (typeof koulutus.osaamisetOdottaaTunnistusta === 'boolean') {
-    data.osaamisetOdottaaTunnistusta = koulutus.osaamisetOdottaaTunnistusta;
-  }
-
-  if (typeof koulutus.osaamisetTunnistusEpaonnistui === 'boolean') {
-    data.osaamisetTunnistusEpaonnistui = koulutus.osaamisetTunnistusEpaonnistui;
-  }
-
-  return data;
 };
+
+/** The selected educations for saving a Koski import, with the selected skills when they were extracted. */
+export const buildSelections = (
+  rows: ExperienceTableRowData[],
+  withSkills: boolean,
+): components['schemas']['Valinta'][] =>
+  rows
+    .map((row) => ({
+      id: row.key,
+      lapset: (row.subrows ?? [])
+        .filter((s) => s.checked ?? false)
+        .map((s) =>
+          withSkills
+            ? { id: s.key, osaamiset: [...new Set(s.osaamiset.filter((o) => o.checked ?? false).map((o) => o.id))] }
+            : { id: s.key },
+        ),
+    }))
+    .filter((valinta) => valinta.lapset.length > 0);
