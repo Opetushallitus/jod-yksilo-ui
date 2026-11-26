@@ -1,9 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData, useRevalidator } from 'react-router';
+import { useLoaderData } from 'react-router';
 
 import { EmptyState, MainLayout, useMediaQueries } from '@jod/design-system';
-import { JodError } from '@jod/design-system/icons';
 
 import { Breadcrumb, ExperienceTable, type ExperienceTableRowData } from '@/components';
 import { useModal } from '@/hooks/useModal';
@@ -19,7 +18,6 @@ import { ToolCard } from '../components/ToolCard';
 import loader from './loader';
 import AddOrEditKoulutusModal from './modals/AddOrEditKoulutusModal';
 import { useKoskiImport } from './useKoskiImport';
-import { usePollOsaamisetTunnistus } from './usePollOsaamisetTunnistus';
 import { getEducationHistoryTableRows } from './utils';
 
 const EducationHistory = () => {
@@ -28,89 +26,13 @@ const EducationHistory = () => {
   const { lg } = useMediaQueries();
   const title = t('profile.education-history.title');
   const hasKoskiToiminto = useHasToiminto('KOSKI');
-  const [rows, setRows] = React.useState<ExperienceTableRowData[]>(
-    getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap),
+  const rows = React.useMemo(
+    () => getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap),
+    [koulutuskokonaisuudet, osaamisetMap],
   );
-  const revalidator = useRevalidator(); // For reloading data after modal close
-  const [isOsaamisetTunnistusOngoing, setIsOsaamisetTunnistusOngoing] = React.useState(true);
   const { showModal } = useModal();
-  const [baselineKoulutusIds, setBaselineKoulutusIds] = React.useState<string[] | null>(null);
-  const [koulutuksetThatNeedUserVerification, setKoulutuksetThatNeedUserVerification] = React.useState<string[]>([]);
   const guardedAction = useSessionGuardedAction();
   const { refreshData } = useKoskiImport();
-
-  React.useEffect(() => {
-    const importedData = Array.from(
-      rows
-        .flatMap((row) =>
-          row.subrows?.filter((sr) => sr.osaamisetOdottaaTunnistusta === false).flatMap((k) => [row.key, k.key]),
-        )
-        .filter(Boolean) as string[],
-    );
-
-    if (baselineKoulutusIds === null) {
-      setBaselineKoulutusIds(importedData);
-    } else {
-      const newKoulutuksetThatNeedUserVerification = importedData.filter((id) => !baselineKoulutusIds.includes(id));
-
-      setKoulutuksetThatNeedUserVerification(newKoulutuksetThatNeedUserVerification);
-    }
-  }, [rows, baselineKoulutusIds]);
-
-  // Init
-  React.useEffect(() => {
-    const importedData = Array.from(
-      koulutuskokonaisuudet
-        .flatMap((kk) =>
-          kk.koulutukset.filter((k) => k.osaamisetOdottaaTunnistusta === false).flatMap((k) => [kk.id, k.id]),
-        )
-        .filter(Boolean) as string[],
-    );
-
-    setBaselineKoulutusIds(importedData);
-    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
-  }, []);
-
-  React.useEffect(() => {
-    setRows(getEducationHistoryTableRows(koulutuskokonaisuudet, osaamisetMap));
-  }, [koulutuskokonaisuudet, osaamisetMap]);
-
-  React.useEffect(() => {
-    const isIdentifyingCompetence = rows.some(
-      (row) => row.osaamisetOdottaaTunnistusta || row.subrows?.some((subRow) => subRow.osaamisetOdottaaTunnistusta),
-    );
-    setIsOsaamisetTunnistusOngoing(isIdentifyingCompetence);
-  }, [rows]);
-
-  const verifyKoulutusOsaamiset = React.useCallback(
-    (id: string) => {
-      const toVerifyKoulutusIds: string[] = [id];
-      const koulutuskokonaisuus = koulutuskokonaisuudet.find((kk) => kk.id === id);
-
-      // When verifying a koulutuskokonaisuus, all nested koulutus osaamiset are also considered as verified
-      if (koulutuskokonaisuus) {
-        const nestedKoulutusIds = koulutuskokonaisuus.koulutukset.map((k) => k.id) as string[];
-        toVerifyKoulutusIds.push(...nestedKoulutusIds);
-      } else {
-        // Set parent as verified if all koulutukset have been verified
-        const parentKoulutusKokonaisuus = koulutuskokonaisuudet.find((kk) => kk.koulutukset.some((k) => k.id === id));
-        const unverifiedNestedKoulutukset =
-          parentKoulutusKokonaisuus?.koulutukset
-            .filter((k) => koulutuksetThatNeedUserVerification.includes(k.id!))
-            .filter((k) => k.id !== id).length === 0;
-
-        if (parentKoulutusKokonaisuus && unverifiedNestedKoulutukset) {
-          toVerifyKoulutusIds.push(parentKoulutusKokonaisuus.id!);
-        }
-      }
-
-      setKoulutuksetThatNeedUserVerification((prev) =>
-        prev.filter((koulutusId) => !toVerifyKoulutusIds.includes(koulutusId)),
-      );
-      setBaselineKoulutusIds((prev) => [...(prev ?? []), ...toVerifyKoulutusIds]);
-    },
-    [koulutuksetThatNeedUserVerification, koulutuskokonaisuudet],
-  );
 
   const onRowClick = (row: ExperienceTableRowData) => {
     showModal(EditKoulutuskokonaisuusModal, {
@@ -143,8 +65,6 @@ const EducationHistory = () => {
     });
   };
 
-  usePollOsaamisetTunnistus(isOsaamisetTunnistusOngoing, rows, setRows, revalidator);
-
   return (
     <MainLayout
       breadcrumbComponent={<Breadcrumb />}
@@ -169,15 +89,6 @@ const EducationHistory = () => {
             : t('profile.education-history.description-generic')}
         </p>
 
-        {koulutuksetThatNeedUserVerification.length > 0 && (
-          <div className="mb-5 flex w-fit items-center rounded-md bg-bg-gray-2 px-5 py-3">
-            <JodError className="mr-3 text-primary-3" />
-            <span className="font-arial text-body-sm text-primary-gray">
-              {t('education-history.check-identified-osaamiset')}
-            </span>
-          </div>
-        )}
-
         {rows.length === 0 ? (
           <div className="mt-6 mb-11" data-testid="education-history-empty-state">
             <EmptyState text={t('profile.education-history.empty')} />
@@ -197,8 +108,6 @@ const EducationHistory = () => {
           rows={rows}
           onAddClick={guardedAction(showModal, EducationHistoryWizard)}
           secondaryAction={<ImportDataLinkButton source="KOSKI" testId="education-history-import" />}
-          koulutuksetThatNeedUserVerification={koulutuksetThatNeedUserVerification}
-          verifyKoulutusOsaamiset={verifyKoulutusOsaamiset}
           onRowClick={(row) => guardedAction(onRowClick, row)()}
           onNestedRowClick={(row) => guardedAction(onNestedRowClick, row)()}
           onAddNestedRowClick={(row) => guardedAction(onAddNestedRowClick, row)()}

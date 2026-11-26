@@ -537,7 +537,8 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    get?: never;
+    /** List the user's unfinished Koski import tasks, newest first. */
+    get: operations['integraatioKoskiGetKeskeneraisetKoskiTehtavat'];
     put?: never;
     /** Fetch educations from Koski and persist as a verified import task. */
     post: operations['integraatioKoskiCreateKoskiTehtava'];
@@ -647,26 +648,6 @@ export interface paths {
      * @description Returns one työmahdollisuus full content by id
      */
     get: operations['tyomahdollisuusFindById'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/tyomahdollisuudet/{id}/samankaltaiset': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get similar mahdollisuudet
-     * @description Returns at most five mahdollisuudet of the requested type that share osaamiset with the given työmahdollisuus. The type defaults to the type of the given työmahdollisuus.
-     */
-    get: operations['tyomahdollisuusFindSamankaltaiset'];
     put?: never;
     post?: never;
     delete?: never;
@@ -824,26 +805,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/koulutusmahdollisuudet/{id}/samankaltaiset': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get similar mahdollisuudet
-     * @description Returns at most five mahdollisuudet of the requested type that share osaamiset with the given koulutusmahdollisuus. The type defaults to the type of the given koulutusmahdollisuus.
-     */
-    get: operations['koulutusmahdollisuusFindSamankaltaiset'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/koulutusmahdollisuudet/full': {
     parameters: {
       query?: never;
@@ -852,22 +813,6 @@ export interface paths {
       cookie?: never;
     };
     get: operations['koulutusmahdollisuusFindAllFull'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/integraatiot/koski/osaamiset/tunnistus': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['integraatioKoskiOsaamisenTunnistusStatusQuery'];
     put?: never;
     post?: never;
     delete?: never;
@@ -1021,9 +966,6 @@ export interface components {
       /** Format: date */
       loppuPvm?: string;
       osaamiset?: string[];
-      osaamisetOdottaaTunnistusta?: boolean;
-      osaamisetTunnistusEpaonnistui?: boolean;
-      osasuoritukset?: string[];
     };
     TeemaDto: {
       /** Format: uuid */
@@ -1140,17 +1082,21 @@ export interface components {
       /** Format: uuid */
       id?: string;
       /** @enum {string} */
-      tila?: 'VALMIS' | 'POISTETTU' | 'EPAONNISTUNUT';
+      tila?: 'ODOTTAA' | 'VALMIS' | 'POISTETTU' | 'EPAONNISTUNUT';
       tulos?: components['schemas']['Tulos'];
+    };
+    KoskiLapsi: {
+      /** Format: uuid */
+      id: string;
+      osaamiset?: string[];
     };
     KoskiTehtavaSaveDto: {
       koulutuskokonaisuudet?: components['schemas']['Valinta'][];
-      skipOsaamistenTunnistus?: boolean;
     };
     Valinta: {
       /** Format: uuid */
       id: string;
-      lapset: string[];
+      lapset: components['schemas']['KoskiLapsi'][];
     };
     Ehdotus: {
       /** Format: uri */
@@ -1305,11 +1251,6 @@ export interface components {
         [key: string]: components['schemas']['JakaumaDto'];
       };
     };
-    SamankaltainenMahdollisuusDto: {
-      /** Format: uuid */
-      id: string;
-      otsikko: components['schemas']['LokalisoituTeksti'];
-    };
     CsrfTokenDto: {
       token: string;
       headerName: string;
@@ -1337,9 +1278,6 @@ export interface components {
       nimi?: components['schemas']['LokalisoituTeksti'];
       kuvaus?: components['schemas']['LokalisoituTeksti'];
       osaamiset?: string[];
-      /** @enum {string} */
-      osaamisenTunnistusStatus?: 'WAIT' | 'DONE' | 'FAIL';
-      osasuoritukset?: string[];
     };
     KoulutusKokonaisuusExportDto: {
       /** Format: uuid */
@@ -2988,6 +2926,26 @@ export interface operations {
       };
     };
   };
+  integraatioKoskiGetKeskeneraisetKoskiTehtavat: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['KoskiTehtavaDto'][];
+        };
+      };
+    };
+  };
   integraatioKoskiCreateKoskiTehtava: {
     parameters: {
       query?: never;
@@ -3192,30 +3150,6 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['TyomahdollisuusFullDto'];
-        };
-      };
-    };
-  };
-  tyomahdollisuusFindSamankaltaiset: {
-    parameters: {
-      query?: {
-        tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
-      };
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['SamankaltainenMahdollisuusDto'][];
         };
       };
     };
@@ -3480,30 +3414,6 @@ export interface operations {
       };
     };
   };
-  koulutusmahdollisuusFindSamankaltaiset: {
-    parameters: {
-      query?: {
-        tyyppi?: 'TYOMAHDOLLISUUS' | 'KOULUTUSMAHDOLLISUUS';
-      };
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['SamankaltainenMahdollisuusDto'][];
-        };
-      };
-    };
-  };
   koulutusmahdollisuusFindAllFull: {
     parameters: {
       query?: {
@@ -3524,29 +3434,6 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['SivuDtoKoulutusmahdollisuusFullDto'];
-        };
-      };
-    };
-  };
-  integraatioKoskiOsaamisenTunnistusStatusQuery: {
-    parameters: {
-      query: {
-        /** @description Koulutus ids */
-        ids: string[];
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['KoulutusDto'][];
         };
       };
     };

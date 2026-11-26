@@ -29,10 +29,6 @@ interface ExperienceTableProps {
   onSubCheckboxChange?: (rowKey: string, subRowKey: string, checked: boolean) => void;
   ariaLabel: string;
   isPrinting?: boolean;
-  /** Imported koulutukset whose osaamiset needs to be checked by the user */
-  koulutuksetThatNeedUserVerification?: string[];
-  /** Function to mark the osaamiset of a specific koulutus as verified */
-  verifyKoulutusOsaamiset?: (koulutusId: string) => void;
   /** Is it used inside of Modal component? */
   insideModal?: boolean;
 }
@@ -58,8 +54,6 @@ export const ExperienceTable = ({
   checkboxColumnHeader,
   onCheckboxChange,
   onSubCheckboxChange,
-  koulutuksetThatNeedUserVerification,
-  verifyKoulutusOsaamiset,
   ariaLabel,
   isPrinting = false,
   insideModal = false,
@@ -270,13 +264,6 @@ export const ExperienceTable = ({
                   onRowClick={onRowClick}
                   className="border-spacing-x-2 bg-white"
                   hideOsaamiset={hideOsaamiset}
-                  osaamisetOdottaaTunnistusta={
-                    row.subrows?.some((subrow) => subrow.osaamisetOdottaaTunnistusta) ?? row.osaamisetOdottaaTunnistusta
-                  }
-                  osaamisetTunnistusEpaonnistui={
-                    row.subrows?.some((subrow) => subrow.osaamisetTunnistusEpaonnistui) ??
-                    row.osaamisetTunnistusEpaonnistui
-                  }
                   rowActionElement={rowActionElement}
                   useConfirm={useConfirm}
                   confirmTitle={confirmTitle}
@@ -287,8 +274,6 @@ export const ExperienceTable = ({
                   checked={rowsCheckboxState.get(row.key)?.checked ?? false}
                   indeterminate={rowsCheckboxState.get(row.key)?.indeterminate ?? false}
                   onCheckboxChange={(checked) => handleParentCheckboxChange(row, checked)}
-                  koulutuksetThatNeedUserVerification={koulutuksetThatNeedUserVerification}
-                  verifyKoulutusOsaamiset={verifyKoulutusOsaamiset}
                 />
                 {row.subrows?.map((subrow, i) => (
                   <ExperienceTableRow
@@ -300,8 +285,6 @@ export const ExperienceTable = ({
                     className={i % 2 !== 0 ? 'bg-bg-gray-2' : 'bg-bg-gray'}
                     nested
                     hideOsaamiset={hideOsaamiset}
-                    osaamisetOdottaaTunnistusta={subrow.osaamisetOdottaaTunnistusta}
-                    osaamisetTunnistusEpaonnistui={subrow.osaamisetTunnistusEpaonnistui}
                     rowActionElement={rowActionElement}
                     useConfirm={useConfirm}
                     confirmTitle={confirmTitle}
@@ -311,8 +294,6 @@ export const ExperienceTable = ({
                     checked={rowsCheckboxState.get(row.key)?.subRows.get(subrow.key) ?? false}
                     onCheckboxChange={(checked) => handleSubCheckboxChange(row, subrow, checked)}
                     isPrinting={isPrinting}
-                    koulutuksetThatNeedUserVerification={koulutuksetThatNeedUserVerification}
-                    verifyKoulutusOsaamiset={verifyKoulutusOsaamiset}
                   />
                 ))}
                 {onAddNestedRowClick && addNewNestedLabel && (
@@ -352,8 +333,6 @@ export const ExperienceTable = ({
                 row={row}
                 onRowClick={onRowClick}
                 hideOsaamiset={hideOsaamiset}
-                osaamisetOdottaaTunnistusta={row.osaamisetOdottaaTunnistusta}
-                osaamisetTunnistusEpaonnistui={row.osaamisetTunnistusEpaonnistui}
                 rowActionElement={rowActionElement}
                 useConfirm={useConfirm}
                 confirmTitle={confirmTitle}

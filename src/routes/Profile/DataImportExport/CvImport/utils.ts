@@ -66,9 +66,6 @@ const transformKoulutusKokonaisuusDto = (
     alkuPvm: k.alkuPvm,
     loppuPvm: k.loppuPvm,
     osaamiset: k.osaamiset || [],
-    osaamisetOdottaaTunnistusta: k.osaamisetOdottaaTunnistusta,
-    osaamisetTunnistusEpaonnistui: k.osaamisetTunnistusEpaonnistui,
-    osasuoritukset: k.osasuoritukset,
   })),
 });
 
