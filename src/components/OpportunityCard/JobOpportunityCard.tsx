@@ -5,6 +5,7 @@ import { JodInfo } from '@jod/design-system/icons';
 import type { components } from '@/api/schema';
 import { NOT_AVAILABLE_LABEL } from '@/constants';
 import { getLocalizedText } from '@/utils';
+import { getEmploymentOutlookLabel } from '@/utils/employmentOutlook';
 
 import { TooltipWrapper } from '../Tooltip/TooltipWrapper';
 import { OpportunityDetail } from './components/OpportunityDetail';
@@ -18,20 +19,7 @@ type JobOpportunityCardProps = {
 
 export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, ...rest }: JobOpportunityCardProps) => {
   const { t } = useTranslation();
-  let kohtaanto;
-  switch (ammattiryhma?.kohtaanto) {
-    case 'Ylitarjonta':
-      kohtaanto = t('job-opportunity.supply-and-demand.Ylitarjonta');
-      break;
-    case 'Tasapaino':
-      kohtaanto = t('job-opportunity.supply-and-demand.Tasapaino');
-      break;
-    case 'Alitarjonta':
-      kohtaanto = t('job-opportunity.supply-and-demand.Alitarjonta');
-      break;
-    default:
-      kohtaanto = NOT_AVAILABLE_LABEL; // or some default value
-  }
+  const kohtaanto = getEmploymentOutlookLabel(ammattiryhma?.kohtaanto, t);
 
   return (
     <OpportunityCardWrapper {...rest}>

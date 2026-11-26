@@ -21,6 +21,7 @@ import { useIsLoggedIn } from '@/stores/useSessionManagerStore';
 import { useToolStore } from '@/stores/useToolStore';
 import { getLocalizedText, getTranslation, hashString, normalizeMultilineText } from '@/utils';
 import { getEducationCodesetValues } from '@/utils/codes/codes.ts';
+import { getEmploymentOutlookLabel } from '@/utils/employmentOutlook';
 import { getLinkTo } from '@/utils/routeUtils';
 
 import type { LoaderData } from './loader';
@@ -208,20 +209,7 @@ const JobOpportunity = () => {
     return url.href;
   }, [ammattiryhma, t]);
 
-  let kohtaanto;
-  switch (tyomahdollisuus?.ammattiryhma?.kohtaanto) {
-    case 'Ylitarjonta':
-      kohtaanto = t('job-opportunity.supply-and-demand.Ylitarjonta');
-      break;
-    case 'Tasapaino':
-      kohtaanto = t('job-opportunity.supply-and-demand.Tasapaino');
-      break;
-    case 'Alitarjonta':
-      kohtaanto = t('job-opportunity.supply-and-demand.Alitarjonta');
-      break;
-    default:
-      kohtaanto = NOT_AVAILABLE_LABEL; // or some default value
-  }
+  const kohtaanto = getEmploymentOutlookLabel(tyomahdollisuus?.ammattiryhma?.kohtaanto, t);
 
   const sections: OpportunityDetailsSection[] = [
     {

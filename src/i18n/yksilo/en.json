@@ -380,6 +380,7 @@
     "supply-and-demand": {
       "Alitarjonta": "Labor shortage",
       "Tasapaino": "Balance",
+      "Työvoimapula": "Labor shortage",
       "Ylitarjonta": "Oversupply"
     },
     "supply-and-demand-title": "Employment outlook",
