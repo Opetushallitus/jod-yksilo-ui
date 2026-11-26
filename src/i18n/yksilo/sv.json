@@ -379,6 +379,7 @@
     "supply-and-demand": {
       "Alitarjonta": "Arbetskraftsbrist",
       "Tasapaino": "Balans",
+      "Työvoimapula": "Arbetskraftsbrist",
       "Ylitarjonta": "Överutbud"
     },
     "supply-and-demand-title": "Sysselsättningsutsikter",

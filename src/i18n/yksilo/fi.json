@@ -378,6 +378,7 @@
     "supply-and-demand": {
       "Alitarjonta": "Työvoimapula",
       "Tasapaino": "Tasapaino",
+      "Työvoimapula": "Työvoimapula",
       "Ylitarjonta": "Ylitarjonta"
     },
     "supply-and-demand-title": "Työllisyysnäkymä",
