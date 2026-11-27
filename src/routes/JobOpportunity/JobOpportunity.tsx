@@ -257,7 +257,7 @@ const JobOpportunity = () => {
     },
     {
       navTitle: t('job-opportunity.professional-group'),
-      titleAppendix: getTranslation(ammattiryhma?.nimi),
+      titleAppendix: getLocalizedText(ammattiryhma?.nimi) || NOT_AVAILABLE_LABEL,
       content: <></>,
       showDivider: false,
     },

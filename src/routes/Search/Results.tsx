@@ -15,18 +15,27 @@ import { SearchFilters } from './SearchFilters';
 
 export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement | null> }) => {
   const { lg, reduceMotion } = useMediaQueries();
-  const { isLoading, filteredResults, filteredMetadata, pageNr, pageSize, koulutusalaNimet, fetchPage } =
-    useSearchStore(
-      useShallow((state) => ({
-        isLoading: state.isLoading,
-        filteredResults: state.filteredResults,
-        filteredMetadata: state.filteredMetadata,
-        pageNr: state.resultsPageNr,
-        pageSize: state.resultsPageSize,
-        koulutusalaNimet: state.koulutusalaNimet,
-        fetchPage: state.fetchPage,
-      })),
-    );
+  const {
+    isLoading,
+    filteredResults,
+    filteredMetadata,
+    pageNr,
+    pageSize,
+    koulutusalaNimet,
+    ammattiryhmaNimet,
+    fetchPage,
+  } = useSearchStore(
+    useShallow((state) => ({
+      isLoading: state.isLoading,
+      filteredResults: state.filteredResults,
+      filteredMetadata: state.filteredMetadata,
+      pageNr: state.resultsPageNr,
+      pageSize: state.resultsPageSize,
+      koulutusalaNimet: state.koulutusalaNimet,
+      ammattiryhmaNimet: state.ammattiryhmaNimet,
+      fetchPage: state.fetchPage,
+    })),
+  );
   const { t, i18n } = useTranslation();
   const paginationTranslations = usePaginationTranslations();
   const statusText = isLoading ? t('tool.updating') : t('tool.opportunities-loaded', { count: filteredResults.length });
@@ -83,6 +92,7 @@ export const SearchResults = ({ scrollRef }: { scrollRef: React.RefObject<HTMLDi
                   description={getLocalizedText(mahdollisuus.tiivistelma)}
                   headingLevel="h3"
                   ammattiryhma={mahdollisuus.ammattiryhma}
+                  ammattiryhmaNimet={ammattiryhmaNimet}
                   kesto={mahdollisuus.kesto}
                   yleisinKoulutusala={koulutusalaNimet.find((n) => n.code === mahdollisuus?.yleisinKoulutusala)?.value}
                   mahdollisuusTyyppi={mahdollisuusTyyppi}

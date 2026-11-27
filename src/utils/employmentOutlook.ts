@@ -6,8 +6,8 @@ export const getEmploymentOutlookLabel = (kohtaanto: string | undefined, t: TFun
   switch (kohtaanto) {
     case 'Työvoimapula':
       return t('job-opportunity.supply-and-demand.Työvoimapula');
-    case 'Alitarjonta':
-      return t('job-opportunity.supply-and-demand.Alitarjonta');
+    case 'Kohtaanto-ongelma':
+      return t('job-opportunity.supply-and-demand.Kohtaanto-ongelma');
     case 'Tasapaino':
       return t('job-opportunity.supply-and-demand.Tasapaino');
     case 'Ylitarjonta':

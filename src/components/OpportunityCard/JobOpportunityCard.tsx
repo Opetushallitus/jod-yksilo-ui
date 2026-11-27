@@ -29,7 +29,7 @@ export const JobOpportunityCard = ({ ammattiryhmaNimet, ammattiryhma, ...rest }:
             title={t('tool.job-opportunity-is-part-of-group')}
             value={
               ammattiryhmaNimet !== undefined && ammattiryhma?.uri
-                ? getLocalizedText(ammattiryhmaNimet[ammattiryhma.uri])
+                ? getLocalizedText(ammattiryhmaNimet[ammattiryhma.uri]) || NOT_AVAILABLE_LABEL
                 : NOT_AVAILABLE_LABEL
             }
             icon={
