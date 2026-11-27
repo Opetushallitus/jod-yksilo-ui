@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
+import { ammatit } from '@/api/ammatit';
 import { client } from '@/api/client';
 import { getTypedKoulutusMahdollisuusDetails, getTypedTyoMahdollisuusDetails } from '@/api/mahdollisuusService';
 import type { components } from '@/api/schema';
@@ -79,6 +80,7 @@ interface SearchStoreState {
   settingsHaveChanged?: boolean;
   hasSearchedOnce?: boolean;
   koulutusalaNimet: Awaited<ReturnType<typeof getEducationCodesetValues>>;
+  ammattiryhmaNimet: Record<string, components['schemas']['LokalisoituTeksti']>;
   filters: {
     ammatti: boolean;
     muuTyomahdollisuus: boolean;
@@ -120,6 +122,7 @@ export const useSearchStore = create<SearchStoreState>()(
       settingsHaveChanged: false,
       sorting: DEFAULT_SORTING,
       koulutusalaNimet: [],
+      ammattiryhmaNimet: {},
       setPageNr: (resultsPageNr: number) => set({ resultsPageNr }),
       setQuery: (query: string) => set({ query }),
       fetchPage: async (pageNr = 1) => {
@@ -147,12 +150,17 @@ export const useSearchStore = create<SearchStoreState>()(
           getTypedKoulutusMahdollisuusDetails(koulutusmahdollisuusIds),
         ]);
 
-        const koulutusalaNimet =
+        const ammattiryhmaUris = [
+          ...new Set(tyomahdollisuudet.flatMap((m) => (m.ammattiryhma?.uri ? [m.ammattiryhma.uri] : []))),
+        ];
+        const [koulutusalaNimet, ammattiryhmat] = await Promise.all([
           koulutusmahdollisuusIds.length > 0
-            ? await getEducationCodesetValues(
+            ? getEducationCodesetValues(
                 koulutusmahdollisuudet.filter((k) => !!k.yleisinKoulutusala).map((k) => k.yleisinKoulutusala as string),
               ).then((res) => res.map((r) => ({ code: `${r.code}#1`, value: r.value })))
-            : [];
+            : [],
+          ammatit.find(ammattiryhmaUris),
+        ]);
 
         // Re-order results to match the original backend ranking (ids order)
         const allResults = tyomahdollisuudet.concat(koulutusmahdollisuudet);
@@ -163,6 +171,7 @@ export const useSearchStore = create<SearchStoreState>()(
           isLoading: false,
           resultsPageNr: pageNr,
           koulutusalaNimet,
+          ammattiryhmaNimet: Object.fromEntries(ammattiryhmat.map((ar) => [ar.uri, ar.nimi])),
           filteredResults: orderedResults,
         });
       },
